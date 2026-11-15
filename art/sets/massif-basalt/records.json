@@ -808,5 +808,473 @@
         "height": 128
       }
     ]
+  },
+  "b4-spine12-a": {
+    "id": "b4-spine12-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "edff7c2d-db4b-4f79-9aac-d6c727c2ad89",
+    "submittedAt": "2026-11-15T18:27:25.058Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a jagged summit with pale grey ash dust near the top of the image, the crest coming down toward the viewer through a notch to a lower blocky knob, steep flanks of columnar basalt on both sides widening into sloping scree at the bottom, a ragged foot of a few dark boulders at the bottom edge; one continuous narrow mass filling the full width and height of the image. Dark slate basalt, near black outline. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-basalt/b-ridge21-a#3 sha256 fed288b11a3beba96d4cb9d020cfbd922ff12708125127a37352ae9dcfb18bbd",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 80,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 34201,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a jagged summit with pale grey ash dust near the top of the image, the crest coming down toward the viewer through a notch to a lower blocky knob, steep flanks of columnar basalt on both sides widening into sloping scree at the bottom, a ragged foot of a few dark boulders at the bottom edge; one continuous narrow mass filling the full width and height of the image. Dark slate basalt, near black outline. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, two separate peaks, gap, tower, straight vertical foot, box, trees, river, path."
+    },
+    "at": "2026-11-15T18:28:16.790Z",
+    "candidates": [
+      {
+        "file": "b4-spine12-a-0.png",
+        "sha256": "c747a6d5b7d850c570e35201f04f18733623814a3ae7601bd3c409cb0b186c73",
+        "width": 80,
+        "height": 208
+      }
+    ]
+  },
+  "b4-spine12-b": {
+    "id": "b4-spine12-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "e1964713-fe1c-4490-99d3-55f2cf3dfad9",
+    "submittedAt": "2026-11-15T18:28:16.927Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a low broken crest at the top of the image rising toward the viewer to a sharp ash-dusted summit in the middle, then a steep front of rough rock falling to sloping scree and a ragged foot of a few dark boulders at the bottom edge; one continuous narrow mass filling the full width and height of the image. Dark slate basalt, pale grey ash dust, near black outline. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-basalt/b-massif22-c#0 sha256 171073afdd31fd86c436ba85b02fc3002b04c7e7411dcc01c1f67d2822e7f4ed",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 80,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 34202,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a low broken crest at the top of the image rising toward the viewer to a sharp ash-dusted summit in the middle, then a steep front of rough rock falling to sloping scree and a ragged foot of a few dark boulders at the bottom edge; one continuous narrow mass filling the full width and height of the image. Dark slate basalt, pale grey ash dust, near black outline. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, two separate peaks, gap, tower, hexagonal columns at the foot, box, trees, river, path."
+    },
+    "at": "2026-11-15T18:29:34.048Z",
+    "candidates": [
+      {
+        "file": "b4-spine12-b-0.png",
+        "sha256": "e32c95f6050b6b6c480d361a40eb6291bb9128abdb9e57403d380ea66c9767d2",
+        "width": 80,
+        "height": 208
+      }
+    ]
+  },
+  "b4-peak11-a": {
+    "id": "b4-peak11-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "80e7f638-f9b5-4163-94c2-2978df2b4fa6",
+    "submittedAt": "2026-11-15T18:29:34.234Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one single steep dark volcanic basalt mountain peak that fills the whole width of the image: a jagged summit with pale grey ash dust a little below the top edge, steep rough flanks widening down into sloping scree and a ragged foot of a few dark boulders along the bottom edge. Dark slate basalt, near black outline. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-basalt/b-massif22-a#0 sha256 040c755bdca251fcb6a6a75e559151a5f97472b9917b899bbb56a92a423423a2",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 80,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 34301,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one single steep dark volcanic basalt mountain peak that fills the whole width of the image: a jagged summit with pale grey ash dust a little below the top edge, steep rough flanks widening down into sloping scree and a ragged foot of a few dark boulders along the bottom edge. Dark slate basalt, near black outline. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, two peaks, row of cones, hexagonal columns, straight vertical foot, box, trees, river, path."
+    },
+    "at": "2026-11-15T18:30:56.401Z",
+    "candidates": [
+      {
+        "file": "b4-peak11-a-0.png",
+        "sha256": "77fe9a93b0b16c86e0bd0b19d902653f938b3dca9dc4454adb509b930d0973d1",
+        "width": 80,
+        "height": 128
+      },
+      {
+        "file": "b4-peak11-a-1.png",
+        "sha256": "767211c9553b90272a3406215f488285bea69bbc1d38f7fe58c5464564d06ada",
+        "width": 80,
+        "height": 128
+      },
+      {
+        "file": "b4-peak11-a-2.png",
+        "sha256": "b6151057b1294a47cc0e266905f541ee7ffd4e5c21923248f6f6e197572fb0fd",
+        "width": 80,
+        "height": 128
+      },
+      {
+        "file": "b4-peak11-a-3.png",
+        "sha256": "c782b584e8cd4edc9184d226e6bd09968397699845f0bd10d46a745b69ce513b",
+        "width": 80,
+        "height": 128
+      }
+    ]
+  },
+  "b4-round21-a": {
+    "id": "b4-round21-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "2609e94d-9d84-4cd5-b145-498fae9545c5",
+    "submittedAt": "2026-11-15T18:30:56.535Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a low rounded dark volcanic basalt hill ridge, worn smooth by age: two or three broad rounded humps of dark rock with a little pale grey ash dust on top, joined into one mass that fills the full width of the image from the left edge to the right edge, sloping scree and a ragged foot of a few dark boulders along the bottom; about two thirds of the image tall with empty space above. Dark slate basalt, near black outline."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-basalt/b-knoll11-a#0 sha256 3d07656af997782746aff9917b6123814a6c9eac8e4d2603b5ddfc8b2c606ed2",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 160,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 34401,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a low rounded dark volcanic basalt hill ridge, worn smooth by age: two or three broad rounded humps of dark rock with a little pale grey ash dust on top, joined into one mass that fills the full width of the image from the left edge to the right edge, sloping scree and a ragged foot of a few dark boulders along the bottom; about two thirds of the image tall with empty space above. Dark slate basalt, near black outline. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, hexagonal columns, sharp peaks, straight vertical foot, box, trees, river, path."
+    },
+    "at": "2026-11-15T18:33:05.781Z",
+    "candidates": [
+      {
+        "file": "b4-round21-a-0.png",
+        "sha256": "b2f4016059e8166e4f879cc403adc8ee8bcfa0aa7d19eccba7575ad7d4aefb70",
+        "width": 160,
+        "height": 104
+      },
+      {
+        "file": "b4-round21-a-1.png",
+        "sha256": "e4115ea27dcf37eef85a0e3d651e28063d34196580952217b305dbe8a22f2bcd",
+        "width": 160,
+        "height": 104
+      },
+      {
+        "file": "b4-round21-a-2.png",
+        "sha256": "e68dbb9d1d5cb7c649f068e7c7a2555381a06fe2c79ec5f88ffb0697cd82c294",
+        "width": 160,
+        "height": 104
+      },
+      {
+        "file": "b4-round21-a-3.png",
+        "sha256": "c120f659aed6e5eff64d29a897a7d2c608dd2fabd7f21a3ce4b80f93b7fd0c58",
+        "width": 160,
+        "height": 104
+      }
+    ]
+  },
+  "b4-massif22-a": {
+    "id": "b4-massif22-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "695ddd90-fbce-4449-b0ed-b959bdf4894d",
+    "submittedAt": "2026-11-15T18:33:05.898Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one huge dark volcanic basalt mountain massif seen from the south, as tall as it is wide: it fills almost the whole image, its summit a little below the top edge, its flanks reaching the left and right edges. One broad jagged summit with pale grey ash dust left of centre and a lower rough shoulder at the right; below the cliffs the mountain spreads out into wide sloping aprons of dark scree and rubble that taper to the ground in a curved ragged foot of a few boulders. Dark slate basalt, near black outline. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-basalt/b-ridge31-a#0 sha256 bc68d076e1f7e39e4f561fea35491533bc582b3a5c81c9a1e27a4ad29277a6df",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 160,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 34501,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one huge dark volcanic basalt mountain massif seen from the south, as tall as it is wide: it fills almost the whole image, its summit a little below the top edge, its flanks reaching the left and right edges. One broad jagged summit with pale grey ash dust left of centre and a lower rough shoulder at the right; below the cliffs the mountain spreads out into wide sloping aprons of dark scree and rubble that taper to the ground in a curved ragged foot of a few boulders. Dark slate basalt, near black outline. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, hexagonal columns at the foot, straight vertical foot, box, flat base, trees, river, path."
+    },
+    "at": "2026-11-15T18:34:12.815Z",
+    "candidates": [
+      {
+        "file": "b4-massif22-a-0.png",
+        "sha256": "d12e98be7b10cbd16d08236c546caad567676692494005e56cb4b4833c1715e9",
+        "width": 160,
+        "height": 208
+      }
+    ]
+  },
+  "b4-spine12-c": {
+    "id": "b4-spine12-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "23f90453-1c16-4c01-826e-e6e2b0c38e45",
+    "submittedAt": "2026-11-15T18:34:42.882Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, standing in the middle of the image with a little empty space on its left and right so nothing touches the side edges: a low broken crest at the top rising toward the viewer to a sharp summit with pale grey ash dust, then a steep front of rough rock falling to wide sloping scree and a ragged foot of a few dark boulders at the bottom edge. Dark slate basalt, pale grey ash dust, near black outline. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-basalt/b-ridge21-b#2 sha256 fda2b0c19fa7e5bad84350c2b2b2246b726407cb6b1635ae9705840f7849ffe5",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 80,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 34203,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, standing in the middle of the image with a little empty space on its left and right so nothing touches the side edges: a low broken crest at the top rising toward the viewer to a sharp summit with pale grey ash dust, then a steep front of rough rock falling to wide sloping scree and a ragged foot of a few dark boulders at the bottom edge. Dark slate basalt, pale grey ash dust, near black outline. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, cropped, touching the side edges, rectangle, two separate peaks, gap, tower, hexagonal columns, box, trees, river, path."
+    },
+    "at": "2026-11-15T18:35:58.497Z",
+    "candidates": [
+      {
+        "file": "b4-spine12-c-0.png",
+        "sha256": "cce3ffc31e745e7196c4fdfbdbd07e45dcc6d4b6bc827ede64d4b6f08e4e984f",
+        "width": 80,
+        "height": 208
+      }
+    ]
+  },
+  "b4-spine12-d": {
+    "id": "b4-spine12-d",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "674b1700-ea71-4d8f-8bcc-7e77292d9d11",
+    "submittedAt": "2026-11-15T18:35:58.623Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, standing in the middle of the image with a little empty space on its left and right so nothing touches the side edges: a jagged ash-dusted summit near the top of the image, the crest falling toward the viewer through a notch to a lower jagged knob, rough flanks tapering outward into sloping scree and a ragged foot of a few dark boulders at the bottom edge. Dark slate basalt, near black outline. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-basalt/b-ridge21-c#2 sha256 aecef5831b6abd7d1f0b09f495da8c0b2291cbc16aaeab439720f2eba05f33e9",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 80,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 34204,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, standing in the middle of the image with a little empty space on its left and right so nothing touches the side edges: a jagged ash-dusted summit near the top of the image, the crest falling toward the viewer through a notch to a lower jagged knob, rough flanks tapering outward into sloping scree and a ragged foot of a few dark boulders at the bottom edge. Dark slate basalt, near black outline. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, cropped, touching the side edges, rectangle, tower, hexagonal columns, box, trees, river, path."
+    },
+    "at": "2026-11-15T18:36:55.336Z",
+    "candidates": [
+      {
+        "file": "b4-spine12-d-0.png",
+        "sha256": "0bf4d726d8ad4ef1a09d640021e54df248d05ef8d9541b871ab295575310705f",
+        "width": 80,
+        "height": 208
+      }
+    ]
+  },
+  "b4-spine12-e": {
+    "id": "b4-spine12-e",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "761e6e85-f2f0-4512-8c1d-1ccbd2c15ffa",
+    "submittedAt": "2026-11-15T18:49:43.972Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a broken crest of jagged rock with pale grey ash dust, highest near the top of the image and stepping down toward the viewer in two notches, rough flanks tapering outward into sloping scree and a ragged foot of a few dark boulders at the bottom edge. Dark slate basalt, near black outline. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-basalt/b-ridge31-b#0 sha256 fc660046de5cbf1207488796e2aafef6b9628f55f84c1633a29cf0ae37faf115",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 80,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 34205,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a broken crest of jagged rock with pale grey ash dust, highest near the top of the image and stepping down toward the viewer in two notches, rough flanks tapering outward into sloping scree and a ragged foot of a few dark boulders at the bottom edge. Dark slate basalt, near black outline. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, cropped, rectangle, tower, hexagonal columns, box, trees, river, path."
+    },
+    "at": "2026-11-15T18:50:46.110Z",
+    "candidates": [
+      {
+        "file": "b4-spine12-e-0.png",
+        "sha256": "346832192da9d49b2004fff785f43c7ec80930722e3c1fefbd2804daa88c8718",
+        "width": 80,
+        "height": 208
+      }
+    ]
   }
 }

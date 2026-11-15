@@ -171,8 +171,8 @@ Rules for reuse:
   Proposal: generate south-west-facing takes for the neutral creatures (the
   only defenders in the MVP) with the sun still at the bottom left; until
   then every creature faces right.
-- Multi-cell towns (the Lost World town, the Warlord's Hold) and their entry
-  cell.
+- Multi-cell towns: done at 3x2 (beads xaj.14, xaj.19); the entry cell is
+  the middle of the front row, under the gate.
 - The Chieftain-on-raptor hero sprite and the mine and pickup art are new
   sets (bead `border_marches-xaj.9`): done, see
   [MVP_NEW_ART.md](MVP_NEW_ART.md).
@@ -184,4 +184,5 @@ Rules for reuse:
 | 2026-11-15 | Inherit the Pulp Wars Bold chibi direction (80 px cells, art at display size, black-outlined saturated units over calm textured ground, sun bottom left, never mirror, nothing under pieces, strict hierarchy) | User request: reuse Pulp Wars sprites and lessons; Pulp Wars user approvals 2026-09-29 and 2026-10-05 |
 | 2026-11-15 | Adventure map target: Heroes II-like continuous landscape (section 4) and the MVP terrain mapping (section 5) | User request: "no copypaste patterns", unique-looking mountain ranges |
 | 2026-11-15 | Mountain rock follows the ground: grey granite on grass and jungle, sandstone mesas on steppe and badlands, dark basalt with ash on wasteland; ranges are built from 2x2/3x2 massifs, 2x1/3x1 ridges and 1x1 crags, rounded humps and foothills; 3x2 towns at 240 x 184; 4-6 doodads per terrain (not wired yet) | Bead `border_marches-xaj.14`, [MASSIF_ART.md](MASSIF_ART.md) |
+| 2026-11-15 | Massif set iteration 4: sandstone massifs beyond tower buttes (fluted hills, striped domes, hoodoo clusters, table mesas), 1x1 peaks and 1x2 north-south spines per palette, rounded granite boulders instead of stair-like blocks, a scree-skirted basalt massif, the Warlord's Hold at the Lost World town's scale with its gate centred on the entry cell; ranges change rock only at low seams | Bead `border_marches-xaj.19`, [MASSIF_ART.md](MASSIF_ART.md#iteration-4-bead-xaj19) |
 | 2026-11-15 | Essence is violet (`#a855f7`, shadow `#6b21a8`, light `#e9d5ff`) on its pickup, mine and item; the ore pickup is dark charcoal iron with silver veins, not the imported copper ore | Bead `border_marches-xaj.9`: teal clashes with shallow water, copper with the Lost World accent ([MVP_NEW_ART.md](MVP_NEW_ART.md)) |

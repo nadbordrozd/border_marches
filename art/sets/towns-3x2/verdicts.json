@@ -43,5 +43,15 @@
     "verdict": "REJECTED",
     "notes": "right style and no plate, but only about 140 x 95 px: too small for the 3x2 footprint; v2b asks for the full width",
     "at": "2026-11-15T16:50:27.228Z"
+  },
+  "goblin-hold-v4a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Warlord's Hold re-take: fills the 3x2 canvas (232 x 170) at the chunky scale of the Lost World town, horned scrap gate in the exact middle of the front wall over the entry cell, tin-and-log ring, watchtower, hide tent, yellow-roofed shacks; yard transparent",
+    "at": "2026-11-15T18:28:17.181Z"
+  },
+  "goblin-hold-v4b#0": {
+    "verdict": "REJECTED",
+    "notes": "finer and busier than the Lost World town (thin junk detail), gate left of centre, cream patch walls; v4a kept",
+    "at": "2026-11-15T18:28:17.223Z"
   }
 }

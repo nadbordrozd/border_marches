@@ -168,5 +168,115 @@
     "verdict": "REJECTED",
     "notes": "same silhouette as #0; #0 kept",
     "at": "2026-11-15T17:05:39.092Z"
+  },
+  "s4-massif22-table#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low broad table mesa with a V-shaped canyon cleft and scree aprons; only 99 px tall, so shipped as a 2x1 ridge (ridge-2x1-d), not a 2x2; not a tower",
+    "at": "2026-11-15T18:27:01.138Z"
+  },
+  "s4-massif32-domes#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x2 massif of rounded striped badlands domes: a round silhouette unlike any butte; lower than the buttes (paint stays in the footprint)",
+    "at": "2026-11-15T18:27:01.179Z"
+  },
+  "s4-massif32-cuesta#0": {
+    "verdict": "REJECTED",
+    "notes": "the arch reads as an eye and the slab as a creature's head; the right end lifts 77 px off the ground",
+    "at": "2026-11-15T18:27:01.221Z"
+  },
+  "s4-spine12-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "1x2 sandstone spine: a fin stepping down toward the viewer in three ledges with strata, tapering sides",
+    "at": "2026-11-15T18:30:33.143Z"
+  },
+  "s4-spine12-b#0": {
+    "verdict": "REJECTED",
+    "notes": "three stacked round blobs read as a snowman or a pebble pile; sides cut by the edges (90 rows)",
+    "at": "2026-11-15T18:30:33.184Z"
+  },
+  "s4-peak11-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "1x1 sandstone peak: striped hoodoo cone with a cap rock, not a square butte",
+    "at": "2026-11-15T18:34:37.091Z"
+  },
+  "s4-peak11-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "1x1 sandstone peak: squat striped cone with a dark cap rock",
+    "at": "2026-11-15T18:34:37.133Z"
+  },
+  "s4-peak11-a#2": {
+    "verdict": "REJECTED",
+    "notes": "slender waisted hoodoo reads as a vase or chess pawn",
+    "at": "2026-11-15T18:34:37.176Z"
+  },
+  "s4-peak11-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "1x1 sandstone peak: leaning striped hoodoo with a cap rock",
+    "at": "2026-11-15T18:34:37.218Z"
+  },
+  "s4-foot21-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x1 sandstone foothill: heap of rounded striped boulders",
+    "at": "2026-11-15T18:34:37.260Z"
+  },
+  "s4-foot21-a#1": {
+    "verdict": "REJECTED",
+    "notes": "close to #3 (stepped slab with rubble); #3 kept",
+    "at": "2026-11-15T18:34:37.302Z"
+  },
+  "s4-foot21-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "2x1 sandstone foothill: flat-topped slab among rounded boulders",
+    "at": "2026-11-15T18:34:37.344Z"
+  },
+  "s4-foot21-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "2x1 sandstone foothill: stepped layered ledge breaking into rubble at the right",
+    "at": "2026-11-15T18:34:37.387Z"
+  },
+  "s4-massif22-fluted#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x2 sandstone massif: fluted badlands hill with striped ribs and a lower shoulder; a draped silhouette unlike the buttes",
+    "at": "2026-11-15T18:36:14.564Z"
+  },
+  "s4-massif32-table#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x2 sandstone massif: broad table mesa with two V gullies and scree fans; low, wide, not a tower",
+    "at": "2026-11-15T18:36:14.606Z"
+  },
+  "s4-massif22-domes#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x2 sandstone massif: three striped domes with a boulder foot and margins on both sides; low (stays inside the footprint)",
+    "at": "2026-11-15T18:36:41.809Z"
+  },
+  "s4-spine12-c#0": {
+    "verdict": "REJECTED",
+    "notes": "S-curved thin fin reads as a worm or a garden wall; criss-cross stripes",
+    "at": "2026-11-15T18:38:49.580Z"
+  },
+  "s4-massif32-fluted#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x2 sandstone massif: long fluted badlands ridge with two rounded crests and striped ribs; right side cut by the image edge, so the packer puts it only with rock to its east",
+    "at": "2026-11-15T18:40:48.778Z"
+  },
+  "s4-massif22-hoodoos#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x2 sandstone massif: crowded cluster of capped hoodoo cones joined at the base; margins on both sides",
+    "at": "2026-11-15T18:40:48.830Z"
+  },
+  "s4-massif32-mixed#0": {
+    "verdict": "ACCEPTED",
+    "notes": "came back 117 px tall, too short for a 3x2: shipped as a 3x1 ridge (ridge-3x1-c), a striped mesa crumbling into knobs to the right; right side cut, so placed only with rock to its east",
+    "at": "2026-11-15T18:41:51.701Z"
+  },
+  "s4-massif22-mesa#0": {
+    "verdict": "REJECTED",
+    "notes": "a rectangular block cut by both side edges (140 rows straight each side) with a flat cake top",
+    "at": "2026-11-15T18:41:51.753Z"
+  },
+  "s4-spine12-d#0": {
+    "verdict": "REJECTED",
+    "notes": "segmented rounded fin reads as a row of loaves or a lying figure; left side cut by the edge (67 rows)",
+    "at": "2026-11-15T18:50:51.813Z"
   }
 }

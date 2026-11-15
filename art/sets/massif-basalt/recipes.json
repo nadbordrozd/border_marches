@@ -197,6 +197,126 @@
       "notes": "Third basalt ridge silhouette.",
       "subject": "Subject: a dark volcanic basalt ridge across the image: one continuous rock mass with two blocky summits joined by a broad saddle, ash dust on the right summit, columnar basalt cliffs down the front and a ragged foot of a few dark boulders; the summits stay a little below the top edge. Lit faces slate basalt #6c6a78, shaded faces #34323e, ash dust #b9b2a6, outline near black #1e1c24. One solid mass.",
       "negative": "snow, white, lava, fire, glow, red, orange, trees, river, path, building"
+    },
+    {
+      "id": "b4-spine12-a",
+      "concept": "SPINE 1x2 TALL (basalt)",
+      "width": 80,
+      "height": 208,
+      "seed": 34201,
+      "styleImage": {
+        "take": "b-ridge21-a#3",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a one-cell-wide north-south basalt ridge.",
+      "subject": "Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a jagged summit with pale grey ash dust near the top of the image, the crest coming down toward the viewer through a notch to a lower blocky knob, steep flanks of columnar basalt on both sides widening into sloping scree at the bottom, a ragged foot of a few dark boulders at the bottom edge; one continuous narrow mass filling the full width and height of the image. Dark slate basalt, near black outline. One solid mass.",
+      "negative": "two separate peaks, gap, tower, straight vertical foot, box, trees, river, path, building"
+    },
+    {
+      "id": "b4-spine12-b",
+      "concept": "SPINE 1x2 TALL (basalt, high front)",
+      "width": 80,
+      "height": 208,
+      "seed": 34202,
+      "styleImage": {
+        "take": "b-massif22-c#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: second basalt spine.",
+      "subject": "Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a low broken crest at the top of the image rising toward the viewer to a sharp ash-dusted summit in the middle, then a steep front of rough rock falling to sloping scree and a ragged foot of a few dark boulders at the bottom edge; one continuous narrow mass filling the full width and height of the image. Dark slate basalt, pale grey ash dust, near black outline. One solid mass.",
+      "negative": "two separate peaks, gap, tower, hexagonal columns at the foot, box, trees, river, path, building"
+    },
+    {
+      "id": "b4-peak11-a",
+      "concept": "PEAK 1x1 TALL (basalt)",
+      "width": 80,
+      "height": 128,
+      "seed": 34301,
+      "styleImage": {
+        "take": "b-massif22-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a single-cell basalt summit rising up to 48 px.",
+      "subject": "Subject: one single steep dark volcanic basalt mountain peak that fills the whole width of the image: a jagged summit with pale grey ash dust a little below the top edge, steep rough flanks widening down into sloping scree and a ragged foot of a few dark boulders along the bottom edge. Dark slate basalt, near black outline. One solid mass.",
+      "negative": "two peaks, row of cones, hexagonal columns, straight vertical foot, box, trees, river, path, building"
+    },
+    {
+      "id": "b4-round21-a",
+      "concept": "ROUNDED 2x1 LOW (basalt)",
+      "width": 160,
+      "height": 104,
+      "seed": 34401,
+      "styleImage": {
+        "take": "b-knoll11-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: basalt had no rounded 2x1 hump.",
+      "subject": "Subject: a low rounded dark volcanic basalt hill ridge, worn smooth by age: two or three broad rounded humps of dark rock with a little pale grey ash dust on top, joined into one mass that fills the full width of the image from the left edge to the right edge, sloping scree and a ragged foot of a few dark boulders along the bottom; about two thirds of the image tall with empty space above. Dark slate basalt, near black outline.",
+      "negative": "hexagonal columns, sharp peaks, straight vertical foot, box, trees, river, path, building"
+    },
+    {
+      "id": "b4-massif22-a",
+      "concept": "MASSIF 2x2 TALL (basalt, scree skirt)",
+      "width": 160,
+      "height": 208,
+      "seed": 34501,
+      "styleImage": {
+        "take": "b-ridge31-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a basalt massif whose foot is a sloping scree skirt, not a box of columns.",
+      "subject": "Subject: one huge dark volcanic basalt mountain massif seen from the south, as tall as it is wide: it fills almost the whole image, its summit a little below the top edge, its flanks reaching the left and right edges. One broad jagged summit with pale grey ash dust left of centre and a lower rough shoulder at the right; below the cliffs the mountain spreads out into wide sloping aprons of dark scree and rubble that taper to the ground in a curved ragged foot of a few boulders. Dark slate basalt, near black outline. One solid mass.",
+      "negative": "hexagonal columns at the foot, straight vertical foot, box, flat base, trees, river, path, building"
+    },
+    {
+      "id": "b4-spine12-c",
+      "concept": "SPINE 1x2 TALL (basalt, margins)",
+      "width": 80,
+      "height": 208,
+      "seed": 34203,
+      "styleImage": {
+        "take": "b-ridge21-b#2",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: re-roll of b4-spine12-b (cut by the right edge) with margins. Style from a 2x1 ridge (the spines styled from ridges kept their margins).",
+      "subject": "Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, standing in the middle of the image with a little empty space on its left and right so nothing touches the side edges: a low broken crest at the top rising toward the viewer to a sharp summit with pale grey ash dust, then a steep front of rough rock falling to wide sloping scree and a ragged foot of a few dark boulders at the bottom edge. Dark slate basalt, pale grey ash dust, near black outline. One solid mass.",
+      "negative": "cropped, touching the side edges, rectangle, two separate peaks, gap, tower, hexagonal columns, box, trees, river, path, building"
+    },
+    {
+      "id": "b4-spine12-d",
+      "concept": "SPINE 1x2 TALL (basalt, margins, two summits)",
+      "width": 80,
+      "height": 208,
+      "seed": 34204,
+      "styleImage": {
+        "take": "b-ridge21-c#2",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: second basalt spine with margins. Style from a 2x1 ridge (the spines styled from ridges kept their margins).",
+      "subject": "Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, standing in the middle of the image with a little empty space on its left and right so nothing touches the side edges: a jagged ash-dusted summit near the top of the image, the crest falling toward the viewer through a notch to a lower jagged knob, rough flanks tapering outward into sloping scree and a ragged foot of a few dark boulders at the bottom edge. Dark slate basalt, near black outline. One solid mass.",
+      "negative": "cropped, touching the side edges, rectangle, tower, hexagonal columns, box, trees, river, path, building"
+    },
+    {
+      "id": "b4-spine12-e",
+      "concept": "SPINE 1x2 TALL (basalt, 3x1 ridge style)",
+      "width": 80,
+      "height": 208,
+      "seed": 34205,
+      "styleImage": {
+        "take": "b-ridge31-b#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a second basalt spine.",
+      "subject": "Subject: a narrow dark volcanic basalt ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a broken crest of jagged rock with pale grey ash dust, highest near the top of the image and stepping down toward the viewer in two notches, rough flanks tapering outward into sloping scree and a ragged foot of a few dark boulders at the bottom edge. Dark slate basalt, near black outline. One solid mass.",
+      "negative": "cropped, rectangle, tower, hexagonal columns, box, trees, river, path, building"
     }
   ],
   "outputs": [
@@ -59610,6 +59730,195 @@
           "op": "pad",
           "width": 160,
           "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/basalt/peak-1x1-a.png",
+      "from": "b4-peak11-a#0",
+      "width": 80,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 12,
+          "width": 80,
+          "height": 107
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 115,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/basalt/peak-1x1-b.png",
+      "from": "b4-peak11-a#2",
+      "width": 80,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 12,
+          "width": 80,
+          "height": 99
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 107,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/basalt/peak-1x1-c.png",
+      "from": "b4-peak11-a#3",
+      "width": 80,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 17,
+          "width": 80,
+          "height": 96
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/basalt/rounded-2x1-a.png",
+      "from": "b4-round21-a#1",
+      "width": 160,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 22,
+          "width": 160,
+          "height": 75
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 83,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/basalt/peak-1x1-d.png",
+      "from": "b4-spine12-c#0",
+      "width": 80,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 43,
+          "width": 80,
+          "height": 112
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 120,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/basalt/spine-1x2-a.png",
+      "from": "b4-spine12-d#0",
+      "width": 80,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 25,
+          "width": 80,
+          "height": 163
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 171,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/basalt/massif-2x2-c.png",
+      "from": "b4-massif22-a#0",
+      "width": 160,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 28,
+          "width": 160,
+          "height": 177
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 185,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 208,
           "anchor": "bottom"
         }
       ]

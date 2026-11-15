@@ -118,6 +118,58 @@
       },
       "subject": "Subject: a big goblin warlord's scrap fortress that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of crooked walls of riveted light grey tin sheets and sharpened logs around a yard, a big gate of bolted scrap plates with two huge horns in the front wall, inside: a tall lopsided junk watchtower, four tin shacks with bright hazard yellow roofs and a big tawny hide tent with brown spots and two smoking chimneys. The yard is empty and transparent: nothing is drawn under the fortress, no ground, no grass, no slab. Buildings only.",
       "negative": "flag, banner, people, character, goblin, rust, copper, red, castle, stone blocks, bricks, ground plate, grass, small"
+    },
+    {
+      "id": "goblin-hold-v4a",
+      "concept": "WARLORD'S HOLD 3x2 (big, gate centred; outline of the Lost World town)",
+      "endpoint": "generate-image-v2",
+      "fragments": [
+        "style",
+        "camera-three-quarter",
+        "light-south-west"
+      ],
+      "width": 232,
+      "height": 176,
+      "seed": 64101,
+      "styleImage": {
+        "take": "lost-world-a-clean2#0",
+        "usage": "copy the size, outline thickness, pixel size and the layout of a round walled town with its gate in the middle of the front wall; not the colours and not the materials"
+      },
+      "styleOptions": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "references": [
+        {
+          "file": "public/assets/towns/goblin-city-3.png",
+          "usage": "goblin materials and palette: riveted light grey tin sheets, sharpened logs, hazard yellow roofs, tawny hide tent"
+        }
+      ],
+      "notes": "bead xaj.19: goblin-hold-v2b reads small next to the Lost World town and its gate is right of centre; same size as the Lost World town so v2 keeps its footprint, scale and centred gate.",
+      "subject": "Subject: a big goblin warlord's scrap fortress that fills the whole image from the left edge to the right edge and from the top to the bottom, seen from above at a three-quarter angle: a wide oval ring of tall crooked walls of riveted light grey tin sheets #b8bcc0 with #7d8288 shadows and sharpened logs; the front wall runs across the bottom of the image facing the viewer, and in the exact middle of the front wall a big gate of bolted scrap plates crowned by two huge cream horns; inside the walls a tall lopsided junk watchtower at the back left, four tin shacks with bright hazard yellow #f2c230 roofs and a big tawny hide tent with brown spots. The yard is empty and transparent: nothing is drawn under the fortress. Buildings only.",
+      "negative": "flag, banner, people, character, goblin, rust, copper, red, castle, stone blocks, bricks, ground plate, grass, small, huts, thatch, skull, palisade of logs only"
+    },
+    {
+      "id": "goblin-hold-v4b",
+      "concept": "WARLORD'S HOLD 3x2 (big, gate centred; goblin-city style)",
+      "endpoint": "generate-image-v2",
+      "fragments": [
+        "style",
+        "camera-three-quarter",
+        "light-south-west"
+      ],
+      "width": 232,
+      "height": 176,
+      "seed": 64102,
+      "styleImage": {
+        "file": "public/assets/towns/goblin-city-3.png",
+        "usage": "copy the palette, outline, shading and pixel size only"
+      },
+      "notes": "bead xaj.19: re-take of goblin-hold-v2b asking for the whole canvas and a centred gate.",
+      "subject": "Subject: a big chunky goblin warlord's scrap fortress that fills the entire image, its walls touching the left, right and bottom edges, seen from above at a three-quarter angle: a wide ring of tall crooked walls of riveted light grey tin sheets and sharpened logs; the front wall runs straight across the bottom of the image facing the viewer, with a big gate of bolted scrap plates crowned by two huge horns in the exact middle of the front wall; inside, big and close together: a tall lopsided junk watchtower, four big tin shacks with bright hazard yellow roofs and a big tawny hide tent with brown spots and two smoking chimneys. The yard is empty and transparent: nothing is drawn under the fortress, no ground, no grass. Buildings only.",
+      "negative": "flag, banner, people, character, goblin, rust, copper, red, castle, stone blocks, bricks, ground plate, grass, small, distant, tiny"
     }
   ],
   "outputs": [
@@ -150,21 +202,21 @@
     },
     {
       "path": "public/assets/towns/goblin-hold-3x2.png",
-      "from": "goblin-hold-v2b#0",
+      "from": "goblin-hold-v4a#0",
       "width": 240,
       "height": 184,
       "steps": [
         {
           "op": "crop",
-          "x": 20,
-          "y": 15,
-          "width": 195,
-          "height": 147
+          "x": 0,
+          "y": 2,
+          "width": 232,
+          "height": 170
         },
         {
           "op": "pad",
           "width": 240,
-          "height": 151,
+          "height": 174,
           "anchor": "top"
         },
         {

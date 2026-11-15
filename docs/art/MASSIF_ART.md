@@ -8,11 +8,13 @@ like a coherent whole and not like the same rock sprite pasted 20 times".
 Before this bead every range was a field of near-identical snow-capped cones.
 
 The art is wired into the renderer by bead `xaj.15` (see
-[Wiring](#wiring-bead-xaj15) at the end); the captures
-[`screens/map-seed1-M-z075.png`](screens/map-seed1-M-z075.png),
-[`screens/map-ranges-z1.png`](screens/map-ranges-z1.png) and
-[`screens/map-massif-seed3-z1.png`](screens/map-massif-seed3-z1.png) show
-the result.
+[Wiring](#wiring-bead-xaj15)); bead `xaj.19` filled the set's gaps and
+reworked the packing ([Iteration 4](#iteration-4-bead-xaj19)). The captures
+[`screens/map-seed3-M-z075.png`](screens/map-seed3-M-z075.png),
+[`screens/map-massif-seed3-z1.png`](screens/map-massif-seed3-z1.png) (a
+sandstone canyon) and
+[`screens/map-spine-seed2-z1.png`](screens/map-spine-seed2-z1.png) (a
+north-south sandstone spine) show the result after xaj.19.
 
 ## What was made
 
@@ -88,9 +90,10 @@ jungle, sandstone to steppe and badlands, basalt to wasteland.
 - **Towns** (`Town3x2Asset`): 240 x 184 canvases, footprint 3 x 2 cells plus
   24 rows above, centred, lowest opaque row 4 px above the bottom
   (`contactY` = box.y + box.h). Lost World town: box 4,13 232 x 167 (rises
-  11 px above the footprint); Warlord's Hold: box 22,33 195 x 147 (inside
-  the footprint). Yards inside the walls are transparent. No flag anchor:
-  there is no flag. The town's entry cell is still a design question.
+  11 px above the footprint); Warlord's Hold: box 4,10 232 x 170 (rises 14
+  px; re-taken in bead xaj.19, it was 195 x 147 and read small). Yards
+  inside the walls are transparent. No flag anchor: there is no flag. Entry
+  cell: see [Iteration 4](#iteration-4-bead-xaj19).
 - **Doodads** (`DoodadAsset`): cropped to the opaque box plus 1 px, 24 to 41
   px; `anchor` is the bottom centre `(floor(w / 2), h - 1)`.
 
@@ -252,3 +255,122 @@ own cells, packed over the whole map so nothing changes on reveal:
   cells deep on its spine side and widens one-cell-wide columns where the
   zone has room (one-cell-wide columns: 7.3% of mountain cells before, 2.9%
   after, seeds 1-20 size M).
+
+## Iteration 4 (bead xaj.19)
+
+The xaj.15 review found the set's gaps: the four sandstone massifs were all
+tower buttes and repeated visibly in badlands canyons, sandstone ranges were
+busy with a boulder on every joint and side, north-south runs were stacks of
+equal blocks, granite side boulders read as stairs, basalt massifs stood on
+boxy column feet, the Warlord's Hold read small, and nothing rose as a single
+summit or ran one cell wide north-south.
+
+### New art
+
+Same pipeline and geometry as above (v2 with an accepted piece as the style
+image; seated by recorded crop + pad steps). New kinds in the manifest:
+`peak` (1x1, canvas 80 x 128, up 48) and `spine` (1x2, canvas 80 x 208, up
+48). Rows are at the end of `MASSIF_ROWS` in `src/assets/manifest.ts`.
+
+| Palette | New game files | From |
+| --- | --- | --- |
+| granite | `peak-1x1-a/b/c` (snowy single summits, rise 9-13 px), `spine-1x2-a`, `foothill-1x1-c/d` (rounded boulder heaps) | `g4-peak11-a#0/2/3`, `g4-spine12-a#0`, `g4-boulder11-a#1/3` |
+| sandstone | `massif-2x2-c` (fluted badlands hill), `massif-2x2-d` (striped domes), `massif-2x2-e` (hoodoo cluster), `massif-3x2-c` (domes), `massif-3x2-d` (table mesa with gullies), `massif-3x2-e` (long fluted ridge), `ridge-2x1-d` (low table with a canyon cleft), `ridge-3x1-c` (mesa crumbling into knobs), `peak-1x1-a/b/c` (capped hoodoos), `foothill-2x1-a/b/c`, `spine-1x2-a` (stepped fin) | `s4-*` |
+| basalt | `massif-2x2-c` (ash-capped summit on wide scree aprons, no column box), `rounded-2x1-a`, `peak-1x1-a/b/c/d`, `spine-1x2-a` | `b4-*` |
+| towns | `goblin-hold-3x2.png` re-taken: 232 x 170, the Lost World town's chunky scale, horned gate in the middle of the front wall | `towns-3x2/goblin-hold-v4a#0` |
+
+Two takes came back too short for the footprint they were asked for and ship
+one size down (recorded in their verdicts): the low table `s4-massif22-table`
+as a 2x1 ridge, `s4-massif32-mixed` as a 3x1 ridge, `b4-spine12-c` as a 1x1
+peak.
+
+Sheets: [`sheets/massif-granite.png`](sheets/massif-granite.png),
+[`sheets/massif-sandstone.png`](sheets/massif-sandstone.png),
+[`sheets/massif-basalt.png`](sheets/massif-basalt.png) (all pieces on their
+grounds, 1:1 and x2; rebuilt by `sh art/review/massif-sheets.sh`, which now
+lists peaks and spines) and every xaj.19 take with its verdict on light and
+dark: [`sheets/iter4-takes-massif-granite.png`](sheets/iter4-takes-massif-granite.png),
+[`sheets/iter4-takes-massif-sandstone.png`](sheets/iter4-takes-massif-sandstone.png),
+[`sheets/iter4-takes-massif-basalt.png`](sheets/iter4-takes-massif-basalt.png),
+[`sheets/iter4-takes-towns-3x2.png`](sheets/iter4-takes-towns-3x2.png).
+
+Calls: 36 PixelLab requests (sandstone 16, granite 10, basalt 8, towns 2;
+`usd: null` on this account). Takes: granite 6 accepted / 10 rejected,
+sandstone 15 / 7, basalt 7 / 7, towns 1 / 1. Eight granite spine attempts
+kept one; the other palettes kept one spine each.
+
+Verdicts in short (one line per take in each `verdicts.json`):
+
+- **Rejected**: a tilted cuesta whose arch read as an eye (a creature's
+  head); spines cut off by both side edges (straight sides 80-152 rows: v2
+  fills an 80 px wide canvas edge to edge unless the style image is a 2x1 or
+  3x1 ridge); a basalt column tower with an ash streak like a waterfall; a
+  stack of three round blobs (a snowman); an S-curved fin like a worm; a
+  rectangular mesa block with a cake top; a vase-like hoodoo; egg-shaped
+  boulders and a heap lit from the right; a boxy basalt stump; basalt humps
+  that were cream (snow), blue-grey or pale ash; a finer, busier Hold with
+  its gate off centre.
+- **Lesson** (adds to the v2 finding above): for a narrow piece, style from
+  a wide low piece (a 2x1 or 3x1 ridge) and do not ask for "the full width";
+  styled from a 2x2 massif, v2 filled the canvas and clipped the sides every
+  time, whatever the prompt said about margins.
+
+### Wiring and packer changes (`src/render/map/massif.ts`)
+
+- **Seams**: palette patches under `MIN_PATCH` (6) cells join their
+  surroundings (was 4), and every cell touching another palette's rock takes
+  low pieces only (no massif, tall ridge, peak or spine there), so a range
+  changes rock at a saddle of humps and rubble.
+- **Spines**: one-cell-wide north-south runs are cut into 1x2 spines from
+  the foot up (rock behind only, they rise up to 48 px), with a single
+  between two spines (always, while a palette has one spine sprite).
+- **Peaks**: a single with rock behind it is often a peak, on the rim now
+  and then.
+- **Narrow bands**: a massif with open ground on both sides scores
+  `BAND_PENALTY` lower, massifs sharing a column are never stacked edge to
+  edge in a narrow band (`STACK_SKIP` in the bulk), and the score likes rock
+  behind more (so the tallest pieces sit inside the range, where every
+  variant is allowed).
+- **Families**: pieces of one silhouette family are kept apart
+  (`FAMILY`, `FAMILY_REACH` 3, the sandstone towers 5, tables 4) through a
+  ladder of tiers, the towers keeping their spacing longest; the old
+  sandstone "ring of lower rock" rule and its high massif threshold are gone
+  (towers weigh 0.35, fluted hills 0.6, the 3x2 table 0.7).
+- **Cut edges**: `EDGE_NEEDS` lists pieces whose art has a straight cut side
+  (the 3x2 domes' flat foot and sides, the low table's and two ridges' right
+  side); they go only where rock meets that side.
+- **Busyness**: back-fills and side boulders are thinned per palette
+  (`FILL_RATE` granite 0.9, sandstone 0.3, basalt 0.45; `SIDE_RATE` 0.8,
+  0.25, 0.45). The two stair-like granite foothill blocks are never fills
+  or side boulders and weigh 0.25 as singles; the new rounded boulders take
+  their place. The scree-skirted basalt massif weighs 1.6.
+- **Town entry cell**: the generator's entrance is the middle cell of the
+  footprint's front row (`townBlocked` leaves it free); both 3x2 sprites
+  have their gate centred on it (the Hold's horned gate and the Lost World
+  skull within a few pixels of x = 120 of 240, checked at zoom 1.5), at the
+  bottom of the canvas, so the road
+  that ends on the entrance ends at the gate and a hero on the entrance
+  stands in the gateway.
+
+Measured on seeds 1-3 size M (pieces and fills of `packRanges`):
+
+| | before | after |
+| --- | --- | --- |
+| sandstone fills (seeds 1 / 2 / 3) | 206 / 172 / 244 | 56 / 51 / 59 |
+| distinct sandstone sprites | 28 / 27 / 27 | 33 / 31 / 30 |
+| tower massifs; pairs within 5 cells | 22; 9 pairs | 19; 1 pair |
+| `packRanges` per M map | 2.5 ms | 3.2 ms |
+
+### Still artificial
+
+- North-south bands two to four cells wide still read as a column of
+  blocks (now different blocks with ridges between); only one-cell-wide
+  runs get spines, and each palette has one or two spine sprites.
+- The distinctive sandstone pieces (fluted hills, domes, tables) are each
+  one or two sprites: at zoom 0.75 one of them shows two or three times in
+  a screen, more than five cells apart.
+- Sandstone 2x1 ridges are themselves little stepped buttes; a ragged
+  sandstone edge is still a row of small buttes and boulder heaps.
+- The 3x2 domes have a straight foot line, kept to the inside of a range.
+- Basalt keeps three of its four massifs on boxy column feet (the new one
+  is weighted up, not a replacement).

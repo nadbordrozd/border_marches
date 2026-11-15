@@ -194,6 +194,246 @@
       "notes": "Third sandstone ridge silhouette.",
       "subject": "Subject: a desert sandstone ridge across the image: one continuous rock mass with three stepped flat-topped mesas, the middle one highest, a ledge band with red-brown strata and a ragged foot of a few boulders; the tops stay a little below the top edge. Lit faces pale ochre #e0b47a, shaded faces warm brown #8e5638, thin red-brown stripes #a8643e, outline dark brown #4a2a20. No snow, no grey. One solid mass.",
       "negative": "snow, grey rock, pointed peaks, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-massif22-table",
+      "concept": "MASSIF 2x2 (low table mesa with a canyon cleft)",
+      "width": 160,
+      "height": 208,
+      "seed": 54101,
+      "styleImage": {
+        "take": "s-ridge31-b#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a sandstone massif that is not a tower butte; style image of another size so v2 does not copy its outline.",
+      "subject": "Subject: one broad low desert sandstone table mesa seen from the south, much wider than tall: it fills the whole width of the image from the left edge to the right edge and the lower two thirds of its height, with empty space above. A wide flat top tilted gently down to the left, a deep dark V-shaped canyon cleft cut into its front face right of centre, sloping scree aprons and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, thin red-brown strata, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, pointed peaks, tower, pillar, chimney, stairs, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-massif32-domes",
+      "concept": "MASSIF 3x2 (painted-hill domes)",
+      "width": 240,
+      "height": 208,
+      "seed": 54102,
+      "styleImage": {
+        "take": "s-low21-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: eroded badlands domes, a round silhouette unlike the buttes.",
+      "subject": "Subject: one wide mass of eroded desert badlands hills seen from the south: five or six big rounded dome-shaped hills of soft sandstone crowded together into one continuous mass, the biggest dome left of centre and the others lower, their sides striped with wavy horizontal bands of ochre, cream and red-brown, deep shaded gullies between the domes, a ragged foot of a few boulders. It fills the whole width of the image from the left edge to the right edge and the lower three quarters of its height. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, pointed peaks, flat top, tower, pillar, chimney, stairs, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-massif32-cuesta",
+      "concept": "MASSIF 3x2 (tilted cuesta with an arch)",
+      "width": 240,
+      "height": 208,
+      "seed": 54103,
+      "styleImage": {
+        "take": "s-ridge21-c#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: an asymmetric tilted slab, low at one end, high at the other.",
+      "subject": "Subject: one wide desert sandstone cuesta seen from the south: a huge tilted slab of layered rock that rises in a long straight slope from a low tapering end at the left edge of the image to a high sheer cliff at the right end, its strata tilted with the slope; a small natural rock arch window pierces the slab near the left, a scree apron and a ragged foot of a few boulders along the bottom. It fills the whole width of the image from the left edge to the right edge. Lit faces pale ochre, shaded faces warm brown, thin red-brown strata, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, pointed peaks, tower, pillar, chimney, stairs, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-spine12-a",
+      "concept": "SPINE 1x2 TALL (sandstone fin)",
+      "width": 80,
+      "height": 208,
+      "seed": 54201,
+      "styleImage": {
+        "take": "s-ridge21-c#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a one-cell-wide north-south sandstone ridge.",
+      "subject": "Subject: a narrow desert sandstone ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a long narrow fin of layered rock whose flat-topped crest steps down toward the viewer in three ledges, from a high flat top near the top of the image to a low rounded nose at the bottom, red-brown strata along both flanks, scree and a ragged foot of a few boulders at the bottom edge; one continuous narrow mass filling the full width and height of the image. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, pointed peaks, separate towers, pillar, chimney, stairs, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-spine12-b",
+      "concept": "SPINE 1x2 TALL (sandstone eroded ridge)",
+      "width": 80,
+      "height": 208,
+      "seed": 54202,
+      "styleImage": {
+        "take": "s-low21-a#1",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: second sandstone spine, rounded.",
+      "subject": "Subject: a narrow desert sandstone ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a chain of three rounded eroded humps with wavy ochre and red-brown stripes, the highest hump at the back near the top of the image and the lowest in front at the bottom, joined into one continuous narrow mass that fills the full width and height of the image, a ragged foot of a few boulders at the bottom edge. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, pointed peaks, flat tower, pillar, chimney, stairs, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-peak11-a",
+      "concept": "PEAK 1x1 TALL (sandstone hoodoo)",
+      "width": 80,
+      "height": 128,
+      "seed": 54301,
+      "styleImage": {
+        "take": "s-massif22-b#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a single-cell sandstone summit that is not a square butte.",
+      "subject": "Subject: one single tall eroded desert sandstone hoodoo hill that fills the width of the image: a broad cone of layered rock with wavy red-brown strata, narrowing to a rounded knob with a small dark cap rock a little below the top edge, scree slopes widening down to a ragged foot of a few boulders along the bottom edge. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, flat square top, tower, pillar, chimney, stairs, two peaks, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-foot21-a",
+      "concept": "FOOTHILL 2x1 LOW (sandstone)",
+      "width": 160,
+      "height": 104,
+      "seed": 54401,
+      "styleImage": {
+        "take": "s-low11-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: sandstone had no 2x1 foothill.",
+      "subject": "Subject: low desert sandstone foothills at the edge of a range: a low jumble of rounded striped sandstone boulders and two short eroded ledges piled into one cluster that spreads across the full width of the image, tallest left of centre, lower and broken into loose boulders at both ends; about half of the image tall with empty space above. Lit faces pale ochre, shaded faces warm brown, thin red-brown strata, outline dark brown. No snow, no grey.",
+      "negative": "snow, grey rock, pointed peaks, tower, pillar, chimney, stairs, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-massif32-table",
+      "concept": "MASSIF 3x2 (broad table mesa with gullies)",
+      "width": 240,
+      "height": 208,
+      "seed": 54104,
+      "styleImage": {
+        "take": "s-ridge21-b#3",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a broad table mesa that fills the 3x2 footprint, not a tower.",
+      "subject": "Subject: one huge broad desert sandstone table mesa seen from the south, much wider than tall: it fills the whole image from the left edge to the right edge and from a little below the top edge down to the bottom edge. A wide flat top, its front a wall of layered cliffs with red-brown strata cut by two deep dark V-shaped canyon gullies, fan-shaped scree aprons below each gully and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, pointed peaks, tower, pillar, chimney, stairs, arch, hole, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-massif22-fluted",
+      "concept": "MASSIF 2x2 (fluted badlands hill)",
+      "width": 160,
+      "height": 208,
+      "seed": 54105,
+      "styleImage": {
+        "take": "s-ridge31-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: an eroded badlands hill with fluted gullies, a pointed-round silhouette unlike the buttes.",
+      "subject": "Subject: one big eroded desert badlands hill seen from the south, as tall as it is wide: it fills almost the whole image, its rounded crest a little below the top edge, its flanks reaching the left and right edges. Its slopes are carved into many narrow parallel gullies and sharp ribs running straight down like folds of cloth, wavy horizontal bands of ochre, cream and red-brown across them, a lower rounded shoulder at the right, a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, flat top, tower, pillar, chimney, stairs, arch, hole, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-massif22-domes",
+      "concept": "MASSIF 2x2 (domes)",
+      "width": 160,
+      "height": 208,
+      "seed": 54106,
+      "styleImage": {
+        "take": "s-low21-a#3",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a 2x2 companion to the domes massif.",
+      "subject": "Subject: one mass of eroded desert badlands hills seen from the south, as tall as it is wide: three big rounded dome-shaped hills of soft sandstone crowded together into one continuous mass that fills almost the whole image, the tallest dome at the right reaching a little below the top edge, a lower dome at the left and a small one in front, their sides striped with wavy horizontal bands of ochre, cream and red-brown, deep shaded gullies between them, a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, pointed peaks, flat top, tower, pillar, chimney, stairs, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-spine12-c",
+      "concept": "SPINE 1x2 TALL (sandstone, margins)",
+      "width": 80,
+      "height": 208,
+      "seed": 54203,
+      "styleImage": {
+        "take": "s-ridge21-b#3",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: second sandstone spine, not a tower. Style from a 2x1 ridge (the spines styled from ridges kept their margins).",
+      "subject": "Subject: a narrow desert sandstone ridge running straight away from the viewer, seen from the south from slightly above, standing in the middle of the image with a little empty space on its left and right so nothing touches the side edges: a long narrow eroded ridge with a rounded crest highest near the top of the image, falling toward the viewer in a gentle wavy line to a low rounded nose, flanks carved with gullies and wavy red-brown strata, tapering outward into scree and a ragged foot of a few boulders at the bottom edge. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "cropped, touching the side edges, rectangle, flat square top, tower, pillar, stacked blobs, chimney, stairs, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-massif32-fluted",
+      "concept": "MASSIF 3x2 (long fluted badlands ridge)",
+      "width": 240,
+      "height": 208,
+      "seed": 54107,
+      "styleImage": {
+        "take": "s4-massif22-fluted#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a third non-tower 3x2 (the table mesa repeated in the first wired screens).",
+      "subject": "Subject: one long eroded desert badlands ridge seen from the south, much wider than tall: it fills the whole width of the image from the left edge to the right edge and the lower three quarters of its height. Three rounded crests of different heights along a wavy skyline, the highest left of centre, the slopes carved into many narrow parallel gullies and sharp ribs running down like folds of cloth, wavy horizontal bands of ochre, cream and red-brown, the foot spreading into small fans of scree and a ragged line of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, flat top, table, tower, pillar, chimney, stairs, arch, hole, straight base, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-massif32-mixed",
+      "concept": "MASSIF 3x2 (mesa breaking into hoodoos)",
+      "width": 240,
+      "height": 208,
+      "seed": 54108,
+      "styleImage": {
+        "take": "s-ridge31-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a fourth non-tower 3x2, asymmetric.",
+      "subject": "Subject: one wide desert sandstone massif seen from the south: at the left a high flat-topped mesa with layered red-brown cliffs, and to the right its rim crumbles down into a crowded cluster of rounded striped domes and short hoodoo knobs that get lower toward the right edge; one continuous mass filling the whole width of the image from the left edge to the right edge, its top a little below the top edge at the left, scree slopes and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, pointed peaks, tower, pillar, chimney, stairs, arch, hole, straight base, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-massif22-hoodoos",
+      "concept": "MASSIF 2x2 (hoodoo cluster)",
+      "width": 160,
+      "height": 208,
+      "seed": 54109,
+      "styleImage": {
+        "take": "s4-peak11-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: more non-tower 2x2 variety (fluted and domes repeated in the wired screens).",
+      "subject": "Subject: one big crowded cluster of eroded desert sandstone hoodoos seen from the south, as tall as it is wide: it fills almost the whole image from the left edge to the right edge, a dozen knobbly cone-shaped hoodoos of different heights with small dark cap rocks, packed together and joined at their bases into one mass, the tallest a little below the top edge right of centre, wavy red-brown strata, scree and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, flat square tops, tower, pillar, chimney, stairs, arch, hole, straight base, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-massif22-mesa",
+      "concept": "MASSIF 2x2 (half-height mesa with a gully)",
+      "width": 160,
+      "height": 208,
+      "seed": 54110,
+      "styleImage": {
+        "take": "s4-massif32-table#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a low 2x2 mesa, a rounder cousin of the 3x2 table.",
+      "subject": "Subject: one wide desert sandstone mesa seen from the south: a rounded-cornered flat top tilted a little to the right, its front a layered cliff with red-brown strata split by one deep winding gully, broken ledges stepping down at the left, and wide scree aprons spreading to a ragged foot of a few boulders. It fills the whole width of the image from the left edge to the right edge and the lower four fifths of its height. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, pointed peaks, tower, pillar, chimney, stairs, arch, hole, straight base, trees, cactus, river, path, building"
+    },
+    {
+      "id": "s4-spine12-d",
+      "concept": "SPINE 1x2 TALL (sandstone, 3x1 ridge style)",
+      "width": 80,
+      "height": 208,
+      "seed": 54204,
+      "styleImage": {
+        "take": "s-ridge31-b#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "styleOptions": "@fullStyle",
+      "notes": "bead xaj.19: a second sandstone spine.",
+      "subject": "Subject: a narrow desert sandstone ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a narrow layered mesa whose flat crest is highest at the back near the top of the image and falls toward the viewer in a long stepped slope of ledges to a low rounded nose, red-brown strata along the flanks, scree and a ragged foot of a few boulders at the bottom edge. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "snow, grey rock, cropped, rectangle, pillar, chimney, stairs, S-curve, wall, trees, cactus, river, path, building"
     }
   ],
   "outputs": [
@@ -706,6 +946,411 @@
           "op": "pad",
           "width": 80,
           "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/ridge-2x1-d.png",
+      "from": "s4-massif22-table#0",
+      "width": 160,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 65,
+          "width": 160,
+          "height": 99
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 107,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/massif-3x2-c.png",
+      "from": "s4-massif32-domes#0",
+      "width": 240,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 36,
+          "width": 240,
+          "height": 142
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 150,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/spine-1x2-a.png",
+      "from": "s4-spine12-a#0",
+      "width": 80,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 4,
+          "width": 80,
+          "height": 202
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 208,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/peak-1x1-a.png",
+      "from": "s4-peak11-a#0",
+      "width": 80,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 20,
+          "width": 80,
+          "height": 86
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 94,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/peak-1x1-b.png",
+      "from": "s4-peak11-a#1",
+      "width": 80,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 30,
+          "width": 80,
+          "height": 72
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 80,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/peak-1x1-c.png",
+      "from": "s4-peak11-a#3",
+      "width": 80,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 26,
+          "width": 80,
+          "height": 76
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 84,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/foothill-2x1-a.png",
+      "from": "s4-foot21-a#0",
+      "width": 160,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 17,
+          "width": 160,
+          "height": 69
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 77,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/foothill-2x1-b.png",
+      "from": "s4-foot21-a#2",
+      "width": 160,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 17,
+          "width": 160,
+          "height": 70
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 78,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/foothill-2x1-c.png",
+      "from": "s4-foot21-a#3",
+      "width": 160,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 17,
+          "width": 160,
+          "height": 66
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 74,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/massif-2x2-c.png",
+      "from": "s4-massif22-fluted#0",
+      "width": 160,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 10,
+          "width": 160,
+          "height": 198
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 206,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/massif-3x2-d.png",
+      "from": "s4-massif32-table#0",
+      "width": 240,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 23,
+          "width": 240,
+          "height": 165
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 173,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/massif-2x2-d.png",
+      "from": "s4-massif22-domes#0",
+      "width": 160,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 30,
+          "width": 160,
+          "height": 147
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 155,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/massif-3x2-e.png",
+      "from": "s4-massif32-fluted#0",
+      "width": 240,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 11,
+          "width": 240,
+          "height": 197
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 205,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/massif-2x2-e.png",
+      "from": "s4-massif22-hoodoos#0",
+      "width": 160,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 8,
+          "width": 160,
+          "height": 189
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 197,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/ridge-3x1-c.png",
+      "from": "s4-massif32-mixed#0",
+      "width": 240,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 42,
+          "width": 240,
+          "height": 117
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 125,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 128,
           "anchor": "bottom"
         }
       ]

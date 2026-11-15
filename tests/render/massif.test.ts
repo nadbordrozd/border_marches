@@ -119,6 +119,88 @@ describe("packRanges", () => {
         expect(cover.palette.get(y * map.width + x)).toBe(p.asset.palette);
   });
 
+  it("changes palette only through low pieces at the seam (xaj.19)", () => {
+    const map = mapOf([
+      "..................",
+      ".MMMMMMMMMMMMMMMM.",
+      ".MMMMMMMMMMMMMMMM.",
+      ".MMMMMMMMMMMMMMMM.",
+      "..................",
+    ]);
+    map.cells.forEach((c, i) => {
+      if (i % map.width >= 9) c.terrain = "wasteland";
+    });
+    const cover = packRanges(map);
+    const tall = new Set(["massif", "ridge", "peak", "spine"]);
+    for (const p of cover.pieces) {
+      const seam = cellsOf(p).some(([x, y]) =>
+        [-1, 0, 1].some((dy) =>
+          [-1, 0, 1].some((dx) => {
+            const other = cover.palette.get((y + dy) * map.width + x + dx);
+            return other !== undefined && other !== p.asset.palette;
+          }),
+        ),
+      );
+      if (seam) expect(tall.has(p.asset.kind)).toBe(false);
+    }
+  });
+
+  it("runs a one-cell-wide north-south column as spines and singles (xaj.19)", () => {
+    const map = mapOf([
+      "........",
+      ".MMMMM..",
+      "..M.....",
+      "..M.....",
+      "..M.....",
+      "..M.....",
+      "..M.....",
+      "........",
+    ]);
+    const cover = packRanges(map);
+    const column = cover.pieces.filter((p) => p.x === 2 && p.y >= 2);
+    const spines = column.filter((p) => p.asset.kind === "spine");
+    expect(spines.length).toBeGreaterThan(0);
+    for (const s of spines) {
+      expect([s.asset.cols, s.asset.rows]).toEqual([1, 2]);
+      // A spine rises 48 px: only with rock behind it.
+      expect(
+        map.cells[(s.y - 1) * map.width + s.x]?.obstacle === "mountain",
+      ).toBe(true);
+    }
+    // Never one spine sprite right on top of another.
+    for (const a of spines)
+      for (const b of spines)
+        if (a !== b && a.asset.key === b.asset.key)
+          expect(Math.abs(a.y - b.y)).toBeGreaterThan(2);
+  });
+
+  it("keeps the sandstone tower buttes apart on generated maps (xaj.19)", () => {
+    const towers = new Set([
+      "massif-sandstone-massif-2x2-a",
+      "massif-sandstone-massif-2x2-b",
+      "massif-sandstone-massif-3x2-a",
+      "massif-sandstone-massif-3x2-b",
+    ]);
+    for (const seed of [1, 2, 3]) {
+      const list = packRanges(generateMap(seed, { size: "M" })).pieces.filter(
+        (p) => towers.has(p.asset.key),
+      );
+      for (const a of list)
+        for (const b of list) {
+          if (a === b) continue;
+          const gap = Math.max(
+            b.x - (a.x + a.asset.cols - 1),
+            a.x - (b.x + b.asset.cols - 1),
+            b.y - (a.y + a.asset.rows - 1),
+            a.y - (b.y + b.asset.rows - 1),
+          );
+          // Touching towers never; within the family's reach only where a
+          // slot has nothing else left (rare).
+          expect(gap).toBeGreaterThan(1);
+        }
+    }
+  });
+
   it("raises at most OPEN_RISE_MAX px over an open cell behind", () => {
     for (const seed of [1, 2, 3, 4]) {
       const map = generateMap(seed, { size: "M" });
@@ -203,7 +285,7 @@ describe("cutRun", () => {
 
 describe("massifEntries", () => {
   it("draws the paint over open ground in the foreground at the piece's top row", () => {
-    const map = mapOf(["....", ".MM.", ".MM.", "...."]);
+    const map = mapOf(["........", ".MMMMMM.", ".MMMMMM.", "........"]);
     const entries = massifEntries(map, new Set());
     const bands = entries.filter((e) => e.pass === "FOREGROUND");
     expect(bands.length).toBeGreaterThan(0);

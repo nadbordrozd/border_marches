@@ -193,5 +193,85 @@
     "verdict": "ACCEPTED",
     "notes": "1x1 foothill: heap of rounded boulders",
     "at": "2026-11-15T16:58:36.613Z"
+  },
+  "g4-peak11-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "1x1 tall peak: clean snow-capped cone, rises about 38 px when seated",
+    "at": "2026-11-15T18:27:01.264Z"
+  },
+  "g4-peak11-a#1": {
+    "verdict": "REJECTED",
+    "notes": "white streak down the front reads as a glitch or a waterfall",
+    "at": "2026-11-15T18:27:01.306Z"
+  },
+  "g4-peak11-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "1x1 tall peak: sharper summit with gullies",
+    "at": "2026-11-15T18:27:01.348Z"
+  },
+  "g4-peak11-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "1x1 tall peak: craggy cliff face with a small snow cap",
+    "at": "2026-11-15T18:27:01.391Z"
+  },
+  "g4-spine12-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "1x2 spine: summit at the back, knobs stepping down toward the viewer; narrow (71 of 80 px), sits on the canvas bottom (seated by a crop)",
+    "at": "2026-11-15T18:27:01.434Z"
+  },
+  "g4-spine12-b#0": {
+    "verdict": "REJECTED",
+    "notes": "cut off by the left and right edges: straight vertical sides 135-152 rows tall, a rectangle of rock",
+    "at": "2026-11-15T18:30:33.057Z"
+  },
+  "g4-spine12-c#0": {
+    "verdict": "REJECTED",
+    "notes": "cut off by both side edges (straight sides 97-119 rows); in a one-cell column open ground shows beside them",
+    "at": "2026-11-15T18:30:33.100Z"
+  },
+  "g4-spine12-d#0": {
+    "verdict": "REJECTED",
+    "notes": "ignored the margins: cut off by both side edges (124-143 rows straight)",
+    "at": "2026-11-15T18:32:16.334Z"
+  },
+  "g4-boulder11-a#0": {
+    "verdict": "REJECTED",
+    "notes": "three pale egg-shaped boulders, like the egg pairs rejected in xaj.14",
+    "at": "2026-11-15T18:32:16.376Z"
+  },
+  "g4-boulder11-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded granite boulder jumble with pebbles: side boulder and joint fill replacing the stair-like blocks",
+    "at": "2026-11-15T18:32:16.418Z"
+  },
+  "g4-boulder11-a#2": {
+    "verdict": "REJECTED",
+    "notes": "lit from the right (luma -4.4)",
+    "at": "2026-11-15T18:32:16.461Z"
+  },
+  "g4-boulder11-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded boulders stacked on a low slab with pebbles: side boulder and joint fill",
+    "at": "2026-11-15T18:32:16.503Z"
+  },
+  "g4-spine12-e#0": {
+    "verdict": "REJECTED",
+    "notes": "cut off by both side edges (80-100 rows straight); the bald dome over a smaller peak reads as a head",
+    "at": "2026-11-15T18:36:04.527Z"
+  },
+  "g4-spine12-f#0": {
+    "verdict": "REJECTED",
+    "notes": "cut off by both side edges (86-92 rows straight)",
+    "at": "2026-11-15T18:36:04.568Z"
+  },
+  "g4-spine12-g#0": {
+    "verdict": "REJECTED",
+    "notes": "cut off by both side edges (102-104 rows straight) and by the top edge",
+    "at": "2026-11-15T18:50:51.762Z"
+  },
+  "g4-spine12-h#0": {
+    "verdict": "REJECTED",
+    "notes": "good stepped crest, but the left side is cut by the edge (82 rows straight), and a spine always has open ground to its west",
+    "at": "2026-11-15T18:51:45.798Z"
   }
 }

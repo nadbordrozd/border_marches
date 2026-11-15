@@ -224,6 +224,156 @@
       "styleImage": "@styleImported",
       "subject": "Subject: a small low cluster of blocky grey granite boulders and one short rock outcrop, filling the width of the image, about half of the image tall with empty space above. Lit faces warm light grey, shaded faces mid slate grey. No snow.",
       "negative": "snow, pointed peak, mountain, trees, river, path, dark navy"
+    },
+    {
+      "id": "g4-peak11-a",
+      "concept": "PEAK 1x1 TALL (up 48)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 128,
+      "seed": 44101,
+      "styleImage": {
+        "take": "g-massif22-d#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "notes": "bead xaj.19: a single-cell peak that rises 48 px, for one-cell columns and the tips of spurs.",
+      "subject": "Subject: one single steep grey granite mountain peak that fills the whole width of the image: a tall craggy summit with a small cream snow cap a little below the top edge, steep rocky flanks with ledges and gullies widening down to a ragged foot of a few boulders along the bottom edge. Lit faces warm light grey, shaded faces mid slate grey, outline dark slate. One solid mass.",
+      "negative": "two peaks, row of cones, trees, river, path, building"
+    },
+    {
+      "id": "g4-spine12-a",
+      "concept": "SPINE 1x2 TALL (north-south ridge, up 48)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 208,
+      "seed": 44201,
+      "styleImage": {
+        "take": "g-ridge21-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "notes": "bead xaj.19: a one-cell-wide, two-row north-south ridge piece.",
+      "subject": "Subject: a narrow grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a rocky summit with a small cream snow cap near the top of the image, the crest coming down toward the viewer through a rocky saddle to a lower blunt knob, and steep flanks with ledges on both sides; one continuous narrow mass of rock filling the full width and height of the image, a ragged foot of a few boulders at the bottom edge. Lit faces warm light grey, shaded faces mid slate grey, outline dark slate. One solid mass.",
+      "negative": "two separate peaks, gap, trees, river, path, building"
+    },
+    {
+      "id": "g4-spine12-b",
+      "concept": "SPINE 1x2 TALL (north-south ridge, bare rounded)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 208,
+      "seed": 44202,
+      "styleImage": {
+        "take": "g-massif22-c#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "notes": "bead xaj.19: second granite spine, its own silhouette (another style image).",
+      "subject": "Subject: a narrow grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a broad rounded bare-rock summit without snow near the top of the image, the crest falling toward the viewer in two rounded steps to a low rounded shoulder, flanks with ledges on both sides; one continuous narrow mass of rock filling the full width and height of the image, a ragged foot of a few boulders at the bottom edge. Lit faces warm light grey, shaded faces mid slate grey, outline dark slate. One solid mass.",
+      "negative": "snow, two separate peaks, gap, pillar, tower, trees, river, path, building"
+    },
+    {
+      "id": "g4-spine12-c",
+      "concept": "SPINE 1x2 TALL (north-south ridge, low front summit high)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 208,
+      "seed": 44203,
+      "styleImage": {
+        "take": "g-ridge31-b#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "notes": "bead xaj.19: third granite spine.",
+      "subject": "Subject: a narrow grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a low rocky saddle at the top of the image rising toward the viewer to a craggy summit with a small cream snow cap in the lower middle, then a steep front face down to a ragged foot of a few boulders at the bottom edge; flanks with ledges and gullies on both sides; one continuous narrow mass of rock filling the full width and height of the image. Lit faces warm light grey, shaded faces mid slate grey, outline dark slate. One solid mass.",
+      "negative": "two separate peaks, gap, pillar, tower, trees, river, path, building"
+    },
+    {
+      "id": "g4-boulder11-a",
+      "concept": "BOULDERS 1x1 LOW (side and joint fill)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 104,
+      "seed": 44301,
+      "styleImage": {
+        "take": "g-round21-a#2",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "notes": "bead xaj.19: replaces the stair-like granite foothill-1x1 blocks as side boulders and joint fills.",
+      "subject": "Subject: a low loose heap of three or four big rounded grey granite boulders of different sizes leaning on each other, with a few small stones and a little scree, filling the width of the image, about half of the image tall with empty space above. Lit faces warm light grey, shaded faces mid slate grey, outline dark slate. No snow.",
+      "negative": "steps, stairs, blocks, cubes, wall, snow, trees, building"
+    },
+    {
+      "id": "g4-spine12-d",
+      "concept": "SPINE 1x2 TALL (north-south ridge, margins)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 208,
+      "seed": 44204,
+      "styleImage": {
+        "take": "g-massif22-b#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "notes": "bead xaj.19: re-roll of g4-spine12-b/c, whose sides were cut by the image edges; asks for margins.",
+      "subject": "Subject: a narrow grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, standing in the middle of the image with a little empty space on its left and right so nothing touches the side edges: a craggy summit with a small cream snow cap near the top of the image, the crest coming down toward the viewer over a rocky saddle and a lower rounded knob, flanks tapering outward to a ragged foot of a few boulders at the bottom edge. Lit faces warm light grey, shaded faces mid slate grey, outline dark slate. One solid mass.",
+      "negative": "cropped, touching the side edges, rectangle, two separate peaks, gap, pillar, tower, trees, river, path, building"
+    },
+    {
+      "id": "g4-spine12-e",
+      "concept": "SPINE 1x2 TALL (north-south ridge, ridge style)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 208,
+      "seed": 44205,
+      "styleImage": {
+        "take": "g-ridge21-a#2",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "notes": "bead xaj.19: second granite spine; styled from a 2x1 ridge like g4-spine12-a, whose sides kept their margins.",
+      "subject": "Subject: a narrow grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, standing in the middle of the image with a little empty space on its left and right: a broad rounded bare-rock summit without snow near the top of the image, the crest coming down toward the viewer over a notch to a lower craggy knob with a small cream snow cap, flanks with ledges tapering outward to a ragged foot of a few boulders at the bottom edge. Lit faces warm light grey, shaded faces mid slate grey, outline dark slate. One solid mass.",
+      "negative": "cropped, touching the side edges, rectangle, gap, pillar, tower, trees, river, path, building"
+    },
+    {
+      "id": "g4-spine12-f",
+      "concept": "SPINE 1x2 TALL (north-south ridge, ridge style)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 208,
+      "seed": 44206,
+      "styleImage": {
+        "take": "g-ridge31-c#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "notes": "bead xaj.19: third granite spine, styled from a 3x1 ridge.",
+      "subject": "Subject: a narrow grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, standing in the middle of the image with a little empty space on its left and right: a low rocky crest at the back near the top of the image rising toward the viewer to a blunt craggy summit in the middle, then a steep front of ledges and buttresses down to a ragged foot of a few boulders at the bottom edge, flanks tapering outward. Lit faces warm light grey, shaded faces mid slate grey, outline dark slate. No snow. One solid mass.",
+      "negative": "snow, cropped, touching the side edges, rectangle, gap, pillar, tower, trees, river, path, building"
+    },
+    {
+      "id": "g4-spine12-g",
+      "concept": "SPINE 1x2 TALL (north-south ridge, ridge style)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 208,
+      "seed": 44207,
+      "styleImage": {
+        "take": "g-ridge21-a#3",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "notes": "bead xaj.19: a second granite spine; the only one kept so far (g4-spine12-a) was styled from a 2x1 ridge and asked for no full width.",
+      "subject": "Subject: a narrow grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a blunt rocky summit near the top of the image, the crest coming down toward the viewer through a notch to a lower summit with a small cream snow cap, then a steep front of ledges, flanks tapering outward to a ragged foot of a few boulders at the bottom edge. Lit faces warm light grey, shaded faces mid slate grey, outline dark slate. One solid mass.",
+      "negative": "cropped, rectangle, gap, pillar, tower, trees, river, path, building"
+    },
+    {
+      "id": "g4-spine12-h",
+      "concept": "SPINE 1x2 TALL (north-south ridge, 3x1 ridge style)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 208,
+      "seed": 44208,
+      "styleImage": {
+        "take": "g-ridge31-b#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "notes": "bead xaj.19: third try at a second granite spine.",
+      "subject": "Subject: a narrow grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, so it is twice as tall as wide in the image: a long jagged crest of three small rocky knobs stepping down from the top of the image toward the viewer, the front knob the lowest, steep flanks with ledges tapering outward to a ragged foot of a few boulders at the bottom edge. Lit faces warm light grey, shaded faces mid slate grey, outline dark slate. No snow. One solid mass.",
+      "negative": "snow, cropped, rectangle, gap, pillar, tower, trees, river, path, building"
     }
   ],
   "outputs": [
@@ -5454,6 +5604,168 @@
           "op": "pad",
           "width": 80,
           "height": 88,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/peak-1x1-a.png",
+      "from": "g4-peak11-a#0",
+      "width": 80,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 23,
+          "width": 80,
+          "height": 83
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 91,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/peak-1x1-b.png",
+      "from": "g4-peak11-a#2",
+      "width": 80,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 24,
+          "width": 80,
+          "height": 81
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 89,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/peak-1x1-c.png",
+      "from": "g4-peak11-a#3",
+      "width": 80,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 25,
+          "width": 80,
+          "height": 85
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 93,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/spine-1x2-a.png",
+      "from": "g4-spine12-a#0",
+      "width": 80,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 3,
+          "width": 80,
+          "height": 205
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 208,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/foothill-1x1-c.png",
+      "from": "g4-boulder11-a#1",
+      "width": 80,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 26,
+          "width": 80,
+          "height": 66
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 74,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/foothill-1x1-d.png",
+      "from": "g4-boulder11-a#3",
+      "width": 80,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 23,
+          "width": 80,
+          "height": 66
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 74,
           "anchor": "top"
         },
         {
