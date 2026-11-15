@@ -62,9 +62,9 @@ and heavier gates run as a deliberate batch gate across several changes, in
 the background, and the orchestrator says when it last ran.
 
 Commands for this repo (source of truth: `tools/orchestration/config.sh`):
-format `(none configured)`, lint `(none configured)`, typecheck
-`(none configured)`, unit tier `(none configured)`, build `(none configured)`,
-focused tests `(none configured) <files>`, assets
+format `npm run format:check`, lint `npm run lint`, typecheck
+`npm run typecheck`, unit tier `npx vitest run`, build `npm run build`,
+focused tests `npx vitest run <files>`, assets
 `node tools/art/studio-art.mjs validate`.
 
 Each bead names one profile, in its design or notes:

@@ -14,7 +14,7 @@ it names before changing anything.
   anything, never rewrite history. Leave the worktree clean (everything
   committed) when you finish: the integrator refuses a dirty worktree.
 - Tools not on PATH on this machine: `export PATH="/Users/nadbor/.local/pulp-wars-tools/beads:$PATH"`.
-- Fresh worktree without dependencies: `(no install step)`. Never
+- Fresh worktree without dependencies: `npm ci`. Never
   symlink another checkout's dependency folder.
 - Beads is read-only for you: `bd show <id>`, `bd list`, `bd ready`. Never
   create, update, close or sync beads; report follow-up work instead.
@@ -24,13 +24,13 @@ it names before changing anything.
 
 Source of truth: `tools/orchestration/config.sh`.
 
-- Format: `(none configured)`
-- Lint: `(none configured)`
-- Typecheck: `(none configured)`
-- Focused tests of what you changed: `(none configured) <test files>`
-- Build: `(none configured)`
+- Format: `npm run format:check`
+- Lint: `npm run lint`
+- Typecheck: `npm run typecheck`
+- Focused tests of what you changed: `npx vitest run <test files>`
+- Build: `npm run build`
 - Art hygiene when you touched assets: `node tools/art/studio-art.mjs validate`
-- The whole unit tier (`(none configured)`) only when your prompt asks.
+- The whole unit tier (`npx vitest run`) only when your prompt asks.
 
 No simulations unless your prompt explicitly authorises them: no whole-game
 or AI-vs-AI runs, long play-throughs, release validators or browser smokes
