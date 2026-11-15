@@ -17,12 +17,15 @@ and added plateaus, snowless granite and second 2x3 pieces
 ([Iteration 6](#iteration-6-bead-xaj21)); bead `xaj.22` added wide
 tablelands that join into one mass, recoloured landmark siblings kept a
 screen apart, snowless granite ridges, deeper badlands and a rubble rock
-base ([Iteration 7](#iteration-7-bead-xaj22)). The captures
+base ([Iteration 7](#iteration-7-bead-xaj22)); bead `xaj.23` fixed the
+tableland join smudges, added wide granite massifs, three-row tablelands
+and banded sandstone edge ridges ([Iteration 8](#iteration-8-bead-xaj23)).
+The captures
 [`screens/map-seed3-M-z075.png`](screens/map-seed3-M-z075.png),
 [`screens/map-tableland-seed2-z1.png`](screens/map-tableland-seed2-z1.png)
 (a badlands block of joined tablelands) and
 [`screens/map-granite-seed3-z1.png`](screens/map-granite-seed3-z1.png) (a
-granite range with snowy and snowless ridges) show the result after xaj.22.
+granite range round a wide granite massif) show the result after xaj.23.
 
 ## What was made
 
@@ -783,3 +786,118 @@ pieces on seeds 1-3.
 - Granite ranges are busy: a field of small ridges and boulders; the
   snowless ridges help colour, not mass.
 - No low 3x2 back edge.
+
+## Iteration 8 (bead xaj.23)
+
+The orchestrator's review of xaj.22: rows of tablelands read as terraces;
+dark reddish smudges along the top of the long seed-2 tableland; granite
+ranges a busy field of small ridges and boulders; the two small quiet mesas
+repeating a cell or two apart; stepped butte 2x1s on sandstone edges; loud
+recoloured siblings; no low 3x2 back edge; a rubble base like paving at
+zoom 2. The user: "Keep iterating. BTW it is acceptable if the smallest
+mountain is 2x2 tiles instead of 1x1 - if that helps."
+
+### Join smudges (found and fixed)
+
+The smudges were in the art, not the join: `s7-table52-b` (asked for
+"patches of darker red-brown caprock") has dark red-brown patches along its
+back rim, clipped flat by the image top, and a more orange top (`#fab96b`
+against the family's `#f1bb71`). On seed 2 the long tableland at
+16..23,27 was `plateau-4x2-d` (52-a) + `plateau-4x2-g` (52-b). Fixes:
+
+- `RETIRED_TAKES` in `massif.ts`: the packer never picks a piece of
+  `s7-table52-b` (its six files stay in the manifest so variant letters
+  stay gapless); every lookup goes through `usablePieces` (memoized).
+- `TAKE_TONE` / `toneOf`: `s7-table52-d` has a lighter, two-tone top
+  (`#fecb7b`); a chain joins only takes of one tone (a chain with no piece of
+  its tone for a slot goes on in another tone rather than end on a cut side).
+- Review check `tests/assets/tableland-tone.test.ts`: in the top band of
+  every usable tableland piece (20 rows under the rim) the share of
+  caprock-patch colours (luma 100-150, red over green by 60+) stays under 5%
+  (the retired take's pieces measure 10-24%, the rest under 3%), and takes
+  that may join (same family and tone) have top colours within 10 per
+  channel.
+
+### Granite massing: wide granite massifs
+
+`art/review/compose-style.mjs` now also splices column strips of DIFFERENT
+granite 3x2 massifs at points where their crests stand at the same height
+(within 7 px) into wide outlines (`art/refs/massif-granite/granite-5x2-a`,
+`-5x2-b`, `-4x2-a`, `-4x2-b`), and can FLATTEN an outline to three granite
+tones keeping its dark lines (`*-flat`). Lesson: v2 copies the style image's
+inner detail too, so a plain splice comes back as its sources glued at a
+vertical seam (`g8-wide42-a`); the flattened outlines came back as one
+repainted mass (`g8-wide52-b`, `g8-wide42-b`). Outlines spliced from a
+peaked cone and a crag stay two mountains whatever the style (both `c`
+takes rejected).
+
+| Game file | From | |
+| --- | --- | --- |
+| `granite/massif-5x2-a` | `g8-wide52-a#0` | long snowless ridge, two summits on one notched crest, pines |
+| `granite/massif-5x2-b` | `g8-wide52-b#0` | same outline (flattened): pointed and rounded summits, mossy ledges |
+| `granite/massif-4x2-a` | `g8-wide42-b#0` | a long cliff wall rising to a craggy summit, lower shoulder |
+
+Packer: granite wide massifs are offered like the tablelands (`WIDTH_SCORE`
+4/5 first), thinned by distinct outlines within `LANDMARK_SPRITE_REACH`
+(`SAME_OUTLINE` makes 5x2-a and 5x2-b one sprite for the spacing), family
+`granite-wide` (reach 4). New per-column rise: `MassifPieceAsset.colRise`
+(manifest row element 12) and `Slot.openBehind` is now a bit mask of open
+columns, so `OPEN_RISE_MAX` is checked column by column (`riseAt`); a wide
+massif whose summit rises 35 px over one column may stand on a back rim
+where that column has rock behind. Granite clutter: `FILL_RATE` 0.45 -> 0.2,
+`SIDE_RATE` 0.5 -> 0.2, `PEAK_FILL_RATE` 0.15 -> 0.08, and a new
+`LOW_RIM_RATE` (granite 0.15, others 0.45) for 2x1 boulder-pile humps on
+open rims.
+
+### Three-row tablelands (north-south)
+
+`tableland-4x3-b` and `-5x3-b` are the banded outlines deepened by one cell
+(their row 62 repeated 80 times: straight end sides, a level top). Takes:
+`s8-table43-a` (4x3, dry wash, two knobs) and `s8-table53-a` (5x3, dry wash,
+alcove), whole (`plateau-4x3-a`, `plateau-5x3-a`) and cut at cell edges into
+three-row chain pieces (`plateau-2x3-a..f`, `plateau-3x3-c..g`,
+`plateau-4x3-b/c`, `TABLE_CUT` family banded). Offers of 5x3 and 4x3 come
+first inside deep badlands (`PLATEAU_BONUS` 0.8 for three rows). Rejected:
+`s8-table43-b` (its front edge 50 px higher than the outline's: a tall block,
+whose cuts would step at every join). The 2x3 cut pieces wait for 2x3
+plateau slots (none are offered yet).
+
+### Sandstone edges, quiet mesas, siblings, rubble
+
+- Banded edge ridges `ridge-2x1-e/f/g` (`s8-ridge21-band` #0, #2, #3, styled
+  from the small banded mesa squashed to 0.6 and cut to 128 rows,
+  `ridge-2x1-banded`), weight 1.5; the stepped butte ridges `ridge-2x1-a/b/c`
+  0.2-0.25; `LOW_PAIR_RATE` sandstone 0.75 -> 0.55 (more short striped
+  cliffs, fewer flat ledges on edges). #1 rejected (split into two buttes).
+- Quiet mesas: family `sandstone-mesa-banded` keeps 5 cells apart (was 3).
+  A third small mesa (`s8-table22-c`) came back a near copy of
+  `plateau-2x2-q` and was rejected.
+- Loud siblings: rosy hoodoos `massif-2x2-k` 0.6 -> 0.2, rust hoodoo field
+  `massif-3x2-i` 0.6 -> 0.25, rust tower `massif-2x2-m` 0.35 -> 0.12.
+- Rubble (`rubbleAt`): only 45% of stones are outlined (two loose stones
+  merge into a slab), a slow wave turns a third of the base into gravel of
+  tints only, and the tints, lit rim, shade and cracks are softer.
+- Low 3x2 back edge: not attempted (budget went to granite and the
+  three-row tablelands).
+
+### Calls and verdicts
+
+11 PixelLab requests (granite 6, sandstone 5), US$1.24 recorded
+(`art/costs.jsonl`). Accepted 7 takes (granite 3, sandstone 4 incl. three
+ridge candidates of one call), rejected 6 (`g8-wide42-a`, `g8-wide52-c`,
+`g8-wide42-c`, `s8-table43-b`, `s8-table22-c`, `s8-ridge21-band#1`); reasons
+in each `verdicts.json`. `packRanges` 10-11 ms per M map in node (was
+18-21 ms in the same harness before the memoized lookups).
+
+### Still artificial
+
+- A three-row tableland in front of another table is still a terrace: true
+  north-south joins need pieces cut on their north side (a 3-row take's
+  lower rows with its surface as an `up` band tall enough to hide the cliff
+  behind); not built.
+- The three-row tablelands have straight vertical end sides (the deepened
+  outline); visible at zoom 1.
+- Granite back rims keep boulder-pile humps where fewer than two ridges fit
+  the rise rule; only three wide granite sprites (two outlines), so most
+  granite is still 2x2/3x2 massifs.
+- Basalt untouched.

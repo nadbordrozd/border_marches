@@ -388,5 +388,35 @@
     "verdict": "REJECTED",
     "notes": "byte-identical duplicate of #0",
     "at": "2026-11-15T22:39:58.308Z"
+  },
+  "g8-wide52-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "one long snowless granite range: two summits on one continuous notched crest, cliffs and pines; a faint vertical shading seam at x 275 from the composed style image, not visible at 1:1 on the map",
+    "at": "2026-11-15T23:23:08.177Z"
+  },
+  "g8-wide42-a#0": {
+    "verdict": "REJECTED",
+    "notes": "came back as its style image: the massif-3x2-d crag and the massif-3x2-e cone glued at a vertical seam; next to a real 3x2-e it would read as that sprite pasted",
+    "at": "2026-11-15T23:23:08.219Z"
+  },
+  "g8-wide52-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "long snowless granite range from the flattened 5x2-a outline: a pointed summit and a rounded one on one continuous crest, mossy ledges; no seams from the style image (flattening worked); same silhouette as g8-wide52-a, so the packer spaces the two as one sprite",
+    "at": "2026-11-15T23:26:48.651Z"
+  },
+  "g8-wide42-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a long wall of bare cliffs rising to a craggy summit right of centre and a lower shoulder: one mass, no seams, distinct from every 3x2",
+    "at": "2026-11-15T23:26:48.694Z"
+  },
+  "g8-wide52-c#0": {
+    "verdict": "REJECTED",
+    "notes": "three mountains pushed together: twin peaks, a slot and the massif-3x2-e cone at the right, with a dark vertical gap between; not one ridge",
+    "at": "2026-11-15T23:29:45.569Z"
+  },
+  "g8-wide42-c#0": {
+    "verdict": "REJECTED",
+    "notes": "flattening did not help this outline: the 3x2-d crag and the 3x2-e cone glued at a hard vertical seam again",
+    "at": "2026-11-15T23:29:45.611Z"
   }
 }

@@ -795,13 +795,32 @@ export const RUBBLE = {
   /** Stone spacing in 2 px blocks. */
   size: 4,
   /** Brightness of the stones, by a hash of the stone. */
-  tints: [0.84, 0.92, 1, 1.08],
-  lit: 1.12,
-  shade: 0.86,
-  crack: 0.7,
+  tints: [0.9, 0.95, 1, 1.05],
+  lit: 1.08,
+  shade: 0.9,
+  crack: 0.78,
   /** Crack width: F2 - F1 below this (blocks) is a crack. */
   crackWidth: 0.7,
+  /**
+   * Share of stones drawn with a crack and lit rim round them (bead
+   * xaj.23). With every stone outlined the rock base read as paving at zoom
+   * 2; the others merge with their neighbours into bigger, irregular slabs
+   * and gravel.
+   */
+  outlined: 0.45,
 } as const;
+
+/**
+ * A slow wave over world blocks (bead xaj.23): where it is low, the stones
+ * lose their cracks and rims and the base is loose gravel of tints only, so
+ * the rubble comes in patches, not one even pavement.
+ */
+function rubbleWave(bx: number, by: number): number {
+  return (
+    Math.sin(TURN * (bx * 1.7 + by * 0.9) + 1.3) +
+    0.6 * Math.sin(TURN * (by * 2.3 - bx * 1.2) + 0.4)
+  );
+}
 
 export function rubbleAt(wx: number, wy: number): number {
   const bx = wx >> 1;
@@ -814,6 +833,7 @@ export function rubbleAt(wx: number, wy: number): number {
   let cx = 0;
   let cy = 0;
   let id = 0;
+  let id2 = 0;
   for (let dy = -1; dy <= 1; dy += 1)
     for (let dx = -1; dx <= 1; dx += 1) {
       const h = hash4(gx + dx, gy + dy, 0x7b, 0x2a);
@@ -823,14 +843,25 @@ export function rubbleAt(wx: number, wy: number): number {
       const d = Math.hypot(bx + 0.5 - px, (by + 0.5 - py) * 1.25);
       if (d < d1) {
         d2 = d1;
+        id2 = id;
         d1 = d;
         cx = px;
         cy = py;
         id = h >>> 16;
-      } else if (d < d2) d2 = d;
+      } else if (d < d2) {
+        d2 = d;
+        id2 = h >>> 16;
+      }
     }
-  if (d2 - d1 < RUBBLE.crackWidth) return RUBBLE.crack;
+  const loose = (k: number): boolean =>
+    ((k * 0x9e37) & 0xffff) / 0x10000 >= RUBBLE.outlined;
   const tint = RUBBLE.tints[id % RUBBLE.tints.length] ?? 1;
+  // Two loose stones side by side merge; in the low part of the wave every
+  // stone is loose (gravel).
+  const gravel = rubbleWave(bx, by) < -0.55;
+  if (gravel || (loose(id) && loose(id2))) return tint;
+  if (d2 - d1 < RUBBLE.crackWidth) return RUBBLE.crack;
+  if (loose(id)) return tint;
   // Lower-left of the stone's centre faces the sun.
   const side = bx + 0.5 - cx - (by + 0.5 - cy);
   const rim = d2 - d1 < RUBBLE.crackWidth + 1.2;

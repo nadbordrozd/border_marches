@@ -568,5 +568,45 @@
     "verdict": "ACCEPTED",
     "notes": "small banded mesa with a caprock rim and an alcove; a little boxy (plateau-2x2-r)",
     "at": "2026-11-15T23:02:51.985Z"
+  },
+  "s8-table43-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "deep banded tableland three rows deep: one level top with a winding dry wash and two knobs over a single striped front cliff; straight vertical end sides from the deepened outline, the 6 px rim jog of the composed outline at x 160",
+    "at": "2026-11-15T23:23:08.264Z"
+  },
+  "s8-table53-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "deep banded tableland five cells wide: a level top with a winding dry wash and cracks over one striped front cliff with an alcove; front edge at the 4x3 take's height, so their cuts join",
+    "at": "2026-11-15T23:26:48.737Z"
+  },
+  "s8-table43-b#0": {
+    "verdict": "REJECTED",
+    "notes": "its front edge stands about 50 px higher than the deepened outline's: a tall striped block, not a deep table; its cut pieces would step at every join with the other three-row takes",
+    "at": "2026-11-15T23:26:48.779Z"
+  },
+  "s8-table22-c#0": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of plateau-2x2-q (same centre gully and scree fan): would read as that mesa pasted",
+    "at": "2026-11-15T23:29:45.654Z"
+  },
+  "s8-ridge21-band#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low banded block ridge with a rubble fan: striped cliffs, not a stepped butte",
+    "at": "2026-11-15T23:29:45.697Z"
+  },
+  "s8-ridge21-band#1": {
+    "verdict": "REJECTED",
+    "notes": "split by a deep cleft into two blocks: reads as two little buttes",
+    "at": "2026-11-15T23:29:45.738Z"
+  },
+  "s8-ridge21-band#2": {
+    "verdict": "ACCEPTED",
+    "notes": "low banded rim over a scree heap: the quietest edge piece",
+    "at": "2026-11-15T23:29:45.782Z"
+  },
+  "s8-ridge21-band#3": {
+    "verdict": "ACCEPTED",
+    "notes": "banded block with a slot and a boulder skirt: one mass",
+    "at": "2026-11-15T23:29:45.825Z"
   }
 }

@@ -189,3 +189,14 @@
 {"at":"2026-11-15T23:00:27.191Z","set":"massif-sandstone","id":"s7-table52-d","endpoint":"generate-image-v2","usd":null}
 {"at":"2026-11-15T23:01:37.730Z","set":"massif-sandstone","id":"s7-table22-a","endpoint":"generate-image-v2","usd":null}
 {"at":"2026-11-15T23:02:34.550Z","set":"massif-sandstone","id":"s7-table22-b","endpoint":"generate-image-v2","usd":0.08054256116019355}
+{"at":"2026-11-15T23:18:13.412Z","set":"massif-granite","id":"g8-wide52-a","endpoint":"generate-image-v2","usd":0.1158178006807963}
+{"at":"2026-11-15T23:19:53.579Z","set":"massif-granite","id":"g8-wide42-a","endpoint":"generate-image-v2","usd":0.11559277807341682}
+{"at":"2026-11-15T23:21:32.136Z","set":"massif-sandstone","id":"s8-table43-a","endpoint":"generate-image-v2","usd":0.11550069567892288}
+{"at":"2026-11-15T23:24:29.657Z","set":"massif-granite","id":"g8-wide52-b","endpoint":"generate-image-v2","usd":0.11572706246376038}
+{"at":"2026-11-15T23:24:38.941Z","set":"massif-sandstone","id":"s8-table53-a","endpoint":"generate-image-v2","usd":0.11577144379085966}
+{"at":"2026-11-15T23:26:03.482Z","set":"massif-sandstone","id":"s8-table43-b","endpoint":"generate-image-v2","usd":0.11578386333253649}
+{"at":"2026-11-15T23:26:13.239Z","set":"massif-granite","id":"g8-wide42-b","endpoint":"generate-image-v2","usd":0.11553566389613681}
+{"at":"2026-11-15T23:27:05.158Z","set":"massif-sandstone","id":"s8-table22-c","endpoint":"generate-image-v2","usd":0.08082232427597046}
+{"at":"2026-11-15T23:27:36.103Z","set":"massif-granite","id":"g8-wide52-c","endpoint":"generate-image-v2","usd":0.11562554017702739}
+{"at":"2026-11-15T23:29:14.814Z","set":"massif-sandstone","id":"s8-ridge21-band","endpoint":"generate-image-v2","usd":0.11557016754150391}
+{"at":"2026-11-15T23:29:20.273Z","set":"massif-granite","id":"g8-wide42-c","endpoint":"generate-image-v2","usd":0.11549061044057211}

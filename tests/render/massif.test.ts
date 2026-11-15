@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   LANDMARK_SPRITE_REACH,
   OPEN_RISE_MAX,
+  riseAt,
   TABLE_CUT,
   cutRun,
   isLandmark,
@@ -228,7 +229,7 @@ describe("packRanges", () => {
           if (y < 0) continue;
           const behind = map.cells[y * map.width + p.x + c];
           if (behind?.obstacle !== "mountain")
-            expect(p.asset.paintUp).toBeLessThanOrEqual(OPEN_RISE_MAX);
+            expect(riseAt(p.asset, c)).toBeLessThanOrEqual(OPEN_RISE_MAX);
         }
     }
   });

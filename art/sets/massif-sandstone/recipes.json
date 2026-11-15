@@ -1147,6 +1147,81 @@
       "subject": "Subject: one small flat-topped desert sandstone mesa block: it fills the whole image from the left edge to the right edge, a level table of pale ochre rock under a thin darker red-brown caprock rim with loose boulders on the top, its front a wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown broken by a shallow alcove, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
       "negative": "tall peak, tower, pillar, tree stump, flutes, organ pipes, spires, snow, grey rock, stairs, trees, cactus, river, path, building",
       "notes": "bead xaj.22: second quiet banded 2x2"
+    },
+    {
+      "id": "s8-table43-a",
+      "concept": "PLATEAU 4x3 (sandstone tableland three rows deep, banded family, outline from a composed style image)",
+      "width": 320,
+      "height": 288,
+      "seed": 78101,
+      "styleImage": {
+        "file": "art/refs/massif-sandstone/tableland-4x3-b.png",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "styleOptions": "@fullStyle",
+      "subject": "Subject: one big flat-topped desert sandstone tableland seen from the south from above, deep and wide: it fills the whole image from the left edge to the right edge, a broad level table of pale ochre rock covering the upper two thirds of the image, with a few cracks, a shallow winding dry wash and two small worn knobs on the top, its front a continuous wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, two shallow gullies with scree fans below them, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tower, pillar, tree stump, flutes, organ pipes, terraces, steps, dark red patches, ground plate, grass",
+      "notes": "bead xaj.23: three-row tableland sample, so deep badlands are not stacked terraces"
+    },
+    {
+      "id": "s8-table53-a",
+      "concept": "PLATEAU 5x3 (sandstone tableland three rows deep, banded family, outline from a composed style image)",
+      "width": 400,
+      "height": 288,
+      "seed": 78102,
+      "styleImage": {
+        "file": "art/refs/massif-sandstone/tableland-5x3-b.png",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "styleOptions": "@fullStyle",
+      "subject": "Subject: one big long flat-topped desert sandstone tableland seen from the south from above, deep and very wide: it fills the whole image from the left edge to the right edge, a broad level table of pale ochre rock covering the upper two thirds of the image, with cracks, a few loose boulders and one long shallow dry wash winding across the top, its front a continuous wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, one deep narrow alcove and a few shallow gullies with scree fans, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tower, pillar, tree stump, flutes, organ pipes, terraces, steps, dark red patches, ground plate, grass",
+      "notes": "bead xaj.23: three-row tableland, 5x3"
+    },
+    {
+      "id": "s8-table43-b",
+      "concept": "PLATEAU 4x3 (sandstone tableland three rows deep, banded family, outline from a composed style image)",
+      "width": 320,
+      "height": 288,
+      "seed": 78103,
+      "styleImage": {
+        "file": "art/refs/massif-sandstone/tableland-4x3-b.png",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "styleOptions": "@fullStyle",
+      "subject": "Subject: one big flat-topped desert sandstone tableland seen from the south from above, deep and wide: it fills the whole image from the left edge to the right edge, a broad level table of pale ochre rock covering the upper two thirds of the image, a thin darker rim along its front edge, a few cracks and scattered small boulders on the top, its front a continuous wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, a narrow slot canyon and a low step ledge along the foot, scree fans and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tower, pillar, tree stump, flutes, organ pipes, terraces, steps, dark red patches, ground plate, grass",
+      "notes": "bead xaj.23: three-row tableland, second 4x3"
+    },
+    {
+      "id": "s8-table22-c",
+      "concept": "PLATEAU 2x2 (small banded mesa for the inside of a range, outline from a composed style image)",
+      "width": 160,
+      "height": 208,
+      "seed": 78104,
+      "styleImage": {
+        "file": "art/refs/massif-sandstone/tableland-2x2-b.png",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "styleOptions": "@fullStyle",
+      "subject": "Subject: one small quiet flat-topped desert sandstone mesa block: it fills the whole image from the left edge to the right edge, a level table of pale ochre rock with a shallow dry wash and a few cracks on the top, its front a wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, a broad shallow bay with a scree fan, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tower, pillar, tree stump, flutes, organ pipes, terraces, steps, dark red patches, ground plate, grass",
+      "notes": "bead xaj.23: a third quiet small mesa for interior 2x2 slots"
+    },
+    {
+      "id": "s8-ridge21-band",
+      "concept": "RIDGE 2x1 (sandstone banded edge ridge, outline from a composed style image)",
+      "width": 160,
+      "height": 128,
+      "seed": 78105,
+      "styleImage": {
+        "file": "art/refs/massif-sandstone/ridge-2x1-banded.png",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "styleOptions": "@fullStyle",
+      "subject": "Subject: one short low banded desert sandstone ridge, twice as wide as it is tall: it fills the image from the left edge to the right edge, a low level rim of pale ochre rock, its front a short wall of sheer cliffs with level horizontal stripes of ochre, cream and red-brown broken by one gully, a skirt of scree and rubble and a ragged foot of small boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tower, pillar, tree stump, flutes, organ pipes, stairs, stepped blocks, separate buttes, ground plate, grass",
+      "notes": "bead xaj.23: banded edge ridges to replace the stepped butte 2x1s on range edges"
     }
   ],
   "outputs": [
@@ -3375,6 +3450,278 @@
           "width": 160,
           "height": 208,
           "anchor": "top"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-4x3-a.png",
+      "from": "s8-table43-a#0",
+      "width": 320,
+      "height": 288,
+      "steps": []
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-2x3-a.png",
+      "from": "s8-table43-a#0",
+      "width": 160,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 160,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-2x3-b.png",
+      "from": "s8-table43-a#0",
+      "width": 160,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 160,
+          "y": 0,
+          "width": 160,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-2x3-c.png",
+      "from": "s8-table43-a#0",
+      "width": 160,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 80,
+          "y": 0,
+          "width": 160,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-3x3-c.png",
+      "from": "s8-table43-a#0",
+      "width": 240,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 240,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-3x3-d.png",
+      "from": "s8-table43-a#0",
+      "width": 240,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 80,
+          "y": 0,
+          "width": 240,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-5x3-a.png",
+      "from": "s8-table53-a#0",
+      "width": 400,
+      "height": 288,
+      "steps": []
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-2x3-d.png",
+      "from": "s8-table53-a#0",
+      "width": 160,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 160,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-2x3-e.png",
+      "from": "s8-table53-a#0",
+      "width": 160,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 240,
+          "y": 0,
+          "width": 160,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-2x3-f.png",
+      "from": "s8-table53-a#0",
+      "width": 160,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 80,
+          "y": 0,
+          "width": 160,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-3x3-e.png",
+      "from": "s8-table53-a#0",
+      "width": 240,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 240,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-3x3-f.png",
+      "from": "s8-table53-a#0",
+      "width": 240,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 160,
+          "y": 0,
+          "width": 240,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-3x3-g.png",
+      "from": "s8-table53-a#0",
+      "width": 240,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 80,
+          "y": 0,
+          "width": 240,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-4x3-b.png",
+      "from": "s8-table53-a#0",
+      "width": 320,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-4x3-c.png",
+      "from": "s8-table53-a#0",
+      "width": 320,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 80,
+          "y": 0,
+          "width": 320,
+          "height": 288
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/ridge-2x1-e.png",
+      "from": "s8-ridge21-band#0",
+      "width": 160,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 160,
+          "height": 123
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/ridge-2x1-f.png",
+      "from": "s8-ridge21-band#2",
+      "width": 160,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 160,
+          "height": 123
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/ridge-2x1-g.png",
+      "from": "s8-ridge21-band#3",
+      "width": 160,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 160,
+          "height": 123
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 128,
+          "anchor": "bottom"
         }
       ]
     }

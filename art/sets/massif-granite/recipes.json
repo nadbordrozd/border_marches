@@ -14,6 +14,12 @@
     "styleImported": {
       "file": "public/assets/terrain/mountains/tall-ridge-a.png",
       "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+    },
+    "fullStyle": {
+      "color_palette": true,
+      "outline": true,
+      "detail": true,
+      "shading": true
     }
   },
   "defaults": {
@@ -642,6 +648,102 @@
       },
       "subject": "Remove the snow: repaint every white and cream snow cap and snow patch as bare light grey granite rock with cracks, colour #b4b4ac with #7f8189 shadows, and a few small green grassy ledges. Keep every shape, the peaks, the boulders, the dark slate outline and the art style exactly the same.",
       "notes": "bead xaj.22: snowless sibling of granite ridge-2x1-a"
+    },
+    {
+      "id": "g8-wide52-a",
+      "concept": "MASSIF 5x2 WIDE (granite, outline from a composed style image)",
+      "endpoint": "generate-image-v2",
+      "width": 400,
+      "height": 208,
+      "seed": 48101,
+      "styleImage": {
+        "file": "art/refs/massif-granite/granite-5x2-a.png",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "styleOptions": "@fullStyle",
+      "subject": "Subject: one long grey granite mountain range seen from the south, five times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous jagged ridgeline of bare rock running the whole width, a high craggy summit left of centre and a second blunt summit at the right joined by a long notched crest and a saddle, steep cracked cliffs, buttresses and gullies down the front, small clumps of dark green pines, sloping scree and a ragged foot of rounded boulders along the bottom. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. No snow anywhere, bare grey rock only. One solid mass.",
+      "negative": "snow, white cap, ice, separate peaks, row of cones, spikes, stairs, river, path, building, dark navy, ground plate",
+      "notes": "bead xaj.23: granite massing sample, one long ridge instead of a field of 2x2 cones"
+    },
+    {
+      "id": "g8-wide42-a",
+      "concept": "MASSIF 4x2 WIDE (granite, outline from a composed style image)",
+      "endpoint": "generate-image-v2",
+      "width": 320,
+      "height": 208,
+      "seed": 48102,
+      "styleImage": {
+        "file": "art/refs/massif-granite/granite-4x2-a.png",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "styleOptions": "@fullStyle",
+      "subject": "Subject: one wide grey granite mountain massif seen from the south, four times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous ridgeline of bare rock across the whole width, a craggy summit at the left and a broad rounded summit right of centre joined by a high saddle, big sheer slabs and cliffs with cracks and ledges down the front, small clumps of dark green pines on the ledges, sloping scree and a ragged foot of rounded boulders along the bottom. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. No snow anywhere, bare grey rock only. One solid mass.",
+      "negative": "snow, white cap, ice, separate peaks, row of cones, spikes, stairs, river, path, building, dark navy, ground plate",
+      "notes": "bead xaj.23: granite massing sample"
+    },
+    {
+      "id": "g8-wide52-b",
+      "concept": "MASSIF 5x2 WIDE (granite, outline from a composed style image)",
+      "endpoint": "generate-image-v2",
+      "width": 400,
+      "height": 208,
+      "seed": 48103,
+      "styleImage": {
+        "file": "art/refs/massif-granite/granite-5x2-a-flat.png",
+        "usage": "copy the outline, the light and shade planes, palette and pixel size"
+      },
+      "styleOptions": "@fullStyle",
+      "subject": "Subject: one long grey granite mountain range seen from the south, five times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous ridgeline of bare weathered rock running the whole width, a tall pointed summit left of centre and a second rounded summit at the right joined by a long broken crest, big cracked slabs, ribs and gullies down the front, a few grassy ledges, sloping scree and a ragged foot of rounded boulders along the bottom. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. No snow anywhere, bare grey rock only. One solid mass.",
+      "negative": "snow, white cap, ice, separate peaks, row of cones, spikes, stairs, river, path, building, dark navy, ground plate",
+      "notes": "bead xaj.23: granite massing, outline from a composed style image flattened to three tones"
+    },
+    {
+      "id": "g8-wide42-b",
+      "concept": "MASSIF 4x2 WIDE (granite, outline from a composed style image)",
+      "endpoint": "generate-image-v2",
+      "width": 320,
+      "height": 208,
+      "seed": 48104,
+      "styleImage": {
+        "file": "art/refs/massif-granite/granite-4x2-b-flat.png",
+        "usage": "copy the outline, the light and shade planes, palette and pixel size"
+      },
+      "styleOptions": "@fullStyle",
+      "subject": "Subject: one wide grey granite mountain massif seen from the south, four times as wide as it is deep: it fills the whole image from the left edge to the right edge, a long high wall of bare cliffs whose crest rises from the left to a craggy summit right of centre and drops to a lower shoulder at the right, vertical cracks, ribs and grassy ledges down the front, sloping scree and a ragged foot of rounded boulders along the bottom. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. No snow anywhere, bare grey rock only. One solid mass.",
+      "negative": "snow, white cap, ice, separate peaks, row of cones, spikes, stairs, river, path, building, dark navy, ground plate",
+      "notes": "bead xaj.23: granite massing, outline from a composed style image flattened to three tones"
+    },
+    {
+      "id": "g8-wide52-c",
+      "concept": "MASSIF 5x2 WIDE (granite, outline from a composed style image)",
+      "endpoint": "generate-image-v2",
+      "width": 400,
+      "height": 208,
+      "seed": 48105,
+      "styleImage": {
+        "file": "art/refs/massif-granite/granite-5x2-b-flat.png",
+        "usage": "copy the outline, the light and shade planes, palette and pixel size"
+      },
+      "styleOptions": "@fullStyle",
+      "subject": "Subject: one long grey granite mountain range seen from the south, five times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous ridgeline of bare rock, two sharp craggy summits at the left, a long level crest of cliffs in the middle and a broad rounded summit at the right, small clumps of dark green pines on the ledges, cracked slabs and gullies down the front, sloping scree and a ragged foot of rounded boulders along the bottom. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. No snow anywhere, bare grey rock only. One solid mass.",
+      "negative": "snow, white cap, ice, separate peaks, row of cones, spikes, stairs, river, path, building, dark navy, ground plate",
+      "notes": "bead xaj.23: granite massing, outline from a composed style image flattened to three tones"
+    },
+    {
+      "id": "g8-wide42-c",
+      "concept": "MASSIF 4x2 WIDE (granite, outline from a composed style image)",
+      "endpoint": "generate-image-v2",
+      "width": 320,
+      "height": 208,
+      "seed": 48106,
+      "styleImage": {
+        "file": "art/refs/massif-granite/granite-4x2-a-flat.png",
+        "usage": "copy the outline, the light and shade planes, palette and pixel size"
+      },
+      "styleOptions": "@fullStyle",
+      "subject": "Subject: one wide grey granite mountain massif seen from the south, four times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous ridgeline of bare rock, a craggy summit at the left and a higher smooth rounded summit right of centre joined by a high saddle, big bare slabs and ribs down the front, a few grassy ledges, sloping scree and a ragged foot of rounded boulders along the bottom. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. No snow anywhere, bare grey rock only. One solid mass.",
+      "negative": "snow, white cap, ice, separate peaks, row of cones, spikes, stairs, river, path, building, dark navy, ground plate",
+      "notes": "bead xaj.23: granite massing, outline from a composed style image flattened to three tones"
     }
   ],
   "outputs": [
@@ -7791,6 +7893,69 @@
           "width": 160,
           "height": 128,
           "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-5x2-a.png",
+      "from": "g8-wide52-a#0",
+      "width": 400,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 400,
+          "height": 204
+        },
+        {
+          "op": "pad",
+          "width": 400,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-5x2-b.png",
+      "from": "g8-wide52-b#0",
+      "width": 400,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 400,
+          "height": 203
+        },
+        {
+          "op": "pad",
+          "width": 400,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-4x2-a.png",
+      "from": "g8-wide42-b#0",
+      "width": 320,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 2,
+          "width": 320,
+          "height": 206
+        },
+        {
+          "op": "pad",
+          "width": 320,
+          "height": 208,
+          "anchor": "top"
         }
       ]
     }
