@@ -1,0 +1,9 @@
+{
+  "//": "src/core and src/data compile without DOM or Node types: game logic stays pure.",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": []
+  },
+  "include": ["src/core", "src/data"]
+}

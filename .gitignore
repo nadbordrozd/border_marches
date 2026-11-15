@@ -12,3 +12,9 @@
 .lock/
 *.[0-9]*.tmp
 # studio:end
+
+# Node toolchain
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/

@@ -10,24 +10,26 @@ MAIN_BRANCH="main"
 REMOTE="origin"
 
 # Dependencies for a fresh worktree: INSTALL_CMD runs when INSTALL_MARKER is missing.
-INSTALL_CMD=""
-INSTALL_MARKER=""
+INSTALL_CMD="npm ci"
+INSTALL_MARKER="node_modules/.package-lock.json"
 
-CHECK_FORMAT=""
-CHECK_LINT=""
-CHECK_TYPECHECK=""
+CHECK_FORMAT="npm run format:check"
+CHECK_LINT="npm run lint"
+CHECK_TYPECHECK="npm run typecheck"
 # The routine unit tier: fast, never whole-game simulations.
-CHECK_UNIT=""
-CHECK_BUILD=""
+CHECK_UNIT="npx vitest run"
+CHECK_BUILD="npm run build"
 # Focused tests: the test files named for a bead are appended to this command.
-FOCUSED_TEST_CMD=""
+FOCUSED_TEST_CMD="npx vitest run"
 # Asset hygiene: hash-checked masters and derived files (zero dependencies).
 CHECK_ART="node tools/art/studio-art.mjs validate"
 
 # What integrate.sh runs before publishing, in order (names of the checks above
 # plus "focused"). Add "unit" for risky work; the whole unit tier otherwise
 # runs as a deliberate batch gate.
-INTEGRATE_STEPS="format lint typecheck focused art build"
+# The whole unit tier takes well under a second today, so it runs on every
+# integration; drop "unit" here if it grows past about a minute.
+INTEGRATE_STEPS="format lint typecheck focused unit art build"
 
 # Where Claude Code's Agent tool puts worktrees (isolation: "worktree").
 WORKTREE_ROOT=".claude/worktrees"
