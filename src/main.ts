@@ -1,6 +1,7 @@
 import "./style.css";
 import { parseRoute } from "./router.ts";
 import type { Route } from "./router.ts";
+import { startMapDebug } from "./render/map/debug-page.ts";
 
 const TITLE = "Border Marches";
 
@@ -40,6 +41,13 @@ function start(): void {
   const canvas = getCanvas();
   const route = parseRoute(window.location.search);
   document.title = TITLE;
+  if (route.view === "map") {
+    startMapDebug(canvas, route).catch((error: unknown) => {
+      console.error(error);
+      drawPlaceholder(canvas, route);
+    });
+    return;
+  }
   const redraw = (): void => drawPlaceholder(canvas, route);
   window.addEventListener("resize", redraw);
   redraw();
