@@ -278,5 +278,85 @@
     "verdict": "REJECTED",
     "notes": "segmented rounded fin reads as a row of loaves or a lying figure; left side cut by the edge (67 rows)",
     "at": "2026-11-15T18:50:51.813Z"
+  },
+  "s5-massif22-lowrim#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low back-rim fluted hill: crest 13 px above the footprint once seated, fills the width, lit from the left; shares its foot outline with the fluted style image (hidden by the row in front)",
+    "at": "2026-11-15T21:22:00.835Z"
+  },
+  "s5-massif22-fluted-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "fluted twin-crest hill, a second sprite for the fluted family; right crest cut straight by the image edge (EDGE_NEEDS east)",
+    "at": "2026-11-15T21:22:00.885Z"
+  },
+  "s5-massif32-fluted-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x2 fluted dome with two lower knobs at the right: a second 3x2 of the fluted family, whole silhouette",
+    "at": "2026-11-15T21:22:00.935Z"
+  },
+  "s5-massif32-hoodoos#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x2 hoodoo field: many capped cones on one mound, a 3x2 companion to the 2x2 hoodoo cluster; right end cut fairly straight (EDGE_NEEDS east)",
+    "at": "2026-11-15T21:22:00.984Z"
+  },
+  "s5-tall23-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x3 north-south ridge seen end-on: mesa summit at the back, stepped blocks, a fluted knob in front; fills the 160 x 288 canvas, flat top intact; counted with the tower family",
+    "at": "2026-11-15T21:22:01.037Z"
+  },
+  "s5-low31-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low 3x1 hump ridge: three striped rounded humps in one mass, rises nowhere above the footprint, lit from the left; covers three-cell runs where a tall 3x1 ridge may not stand (back rim, palette seams)",
+    "at": "2026-11-15T21:23:16.870Z"
+  },
+  "s5-tall23-b#0": {
+    "verdict": "REJECTED",
+    "notes": "three receding striped domes read well as a north-south ridge, but the far dome is cut flat by the top edge (57 px straight top row)",
+    "at": "2026-11-15T21:26:49.568Z"
+  },
+  "s5-massif22-domes-b#0": {
+    "verdict": "REJECTED",
+    "notes": "striped domes, but cut straight by both side edges and standing on a straight foot line",
+    "at": "2026-11-15T21:28:48.714Z"
+  },
+  "s5-massif32-table-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "came back a low table mesa (99 px tall, its style image's outline stretched): ships one size down as a 3x1 ridge (table family), cropped and padded to 240 x 128",
+    "at": "2026-11-15T21:28:48.765Z"
+  },
+  "s5-massif22-lowrim-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "came back a small low mesa with three capped hoodoos, 77 px tall: ships one size down as a low 2x1 hump (rounded-2x1-d), seated 8 px above the bottom",
+    "at": "2026-11-15T21:32:32.652Z"
+  },
+  "s5-massif22-lowrim-c#0": {
+    "verdict": "REJECTED",
+    "notes": "came back 134 x 62 with the outline of its style image s-low21-a (already shipped as rounded-2x1-a): a duplicate, too small for 2x2",
+    "at": "2026-11-15T21:33:21.120Z"
+  },
+  "s5-tall23-c#0": {
+    "verdict": "REJECTED",
+    "notes": "the summit is a rounded knob on a narrow neck with a rim under it (reads as a bulb, not a ridge seen end-on); leaves the canvas top 30 rows empty and the upper half narrow",
+    "at": "2026-11-15T21:34:31.095Z"
+  },
+  "s5-massif22-lowrim-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low 2x2 table mesa slice (stays inside its footprint): its style image's table outline cut by both side edges, so it stands only between rock (EDGE_NEEDS west and east) and in the table family",
+    "at": "2026-11-15T21:36:05.915Z"
+  },
+  "s5-massif22-lowrim-e#0": {
+    "verdict": "ACCEPTED",
+    "notes": "lower hoodoo cluster (rises 20 px, fits the back rim), whole silhouette; its red and orange hoodoos are a little warmer than the set, kept as badlands colour variety; hoodoo family",
+    "at": "2026-11-15T21:37:08.336Z"
+  },
+  "s5-low31-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low 3x1 crumbling mesa ridge: a worn table at the left breaking into two striped knobs and rubble at the right, inside its footprint, lit from the left",
+    "at": "2026-11-15T21:40:09.562Z"
+  },
+  "s5-massif32-lowrim-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low 3x2 fluted hill for the back rim (rises 13 px once seated), whole silhouette; a widened twin of its style image massif-2x2-f, so in the fluted family and kept 5 cells from it",
+    "at": "2026-11-15T21:41:52.387Z"
   }
 }

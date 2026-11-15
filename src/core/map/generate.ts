@@ -13,8 +13,9 @@
  * 4. terrain  main terrain per zone with secondary patches (gen/terrain.ts)
  * 5. borders  mountain ranges and forest belts along zone borders, a frame
  *             along the map edge, spurs, and passes (gen/borders.ts)
- * 6. clusters forests and mountain groups inside zones, clean-up, pockets
- *             (gen/clusters.ts)
+ * 6. clusters forests and mountain groups inside zones, clean-up, pockets,
+ *             and the 2x2 rule: every mountain cell lies in an all-mountain
+ *             2x2 block (gen/clusters.ts)
  * 7. objects  mines, roads, pickups, guards (gen/objects.ts)
  *
  * Every tunable number lives in {@link DEFAULT_GEN_CONFIG} (gen/config.ts).
@@ -29,6 +30,7 @@ import {
   fixLoneCells,
   growClusters,
   resolvePockets,
+  squareMountains,
 } from "./gen/clusters.ts";
 import { placeObjects, placeTowns } from "./gen/objects.ts";
 import { O, TERRAIN_OF, newState } from "./gen/state.ts";
@@ -111,6 +113,14 @@ export function generateMapWithInfo(
   fixLoneCells(st);
   resolvePockets(st);
   tidyWater(st);
+  // The smallest mountain is 2x2: grow or trim the rest, re-open any pocket
+  // the growth closed, and end with a trim that cannot close one.
+  for (let round = 0; round < 3; round++) {
+    const squared = squareMountains(st, true);
+    if (squared + fixDiagonals(st) === 0) break;
+    resolvePockets(st);
+  }
+  squareMountains(st, false);
   mergeSmallRegions(st);
   markDeep(st);
   const report = placeObjects(st);

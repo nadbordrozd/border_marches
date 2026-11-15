@@ -120,7 +120,7 @@ export interface GenConfig {
     attachChance: number;
     /** Free cells kept between unattached clusters. */
     gap: number;
-    /** Intentional lone obstacles (single peaks or trees) per map, at most. */
+    /** Intentional lone trees per map, at most (no lone peaks: the smallest mountain is 2x2). */
     lonePeaks: number;
     /** Keep clusters at least this far from town entrances. */
     townClearance: number;

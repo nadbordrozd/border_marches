@@ -223,5 +223,35 @@
     "verdict": "REJECTED",
     "notes": "blue-grey column pillar with a zigzag ash path like stairs; cut by both side edges (95-99 rows)",
     "at": "2026-11-15T18:51:01.334Z"
+  },
+  "b5-massif32-scree#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x2 basalt summit on wide scree aprons, curved ragged foot, no column box; shares the silhouette family of massif-2x2-c (its style image), so kept apart from it (FAMILY basalt-scree)",
+    "at": "2026-11-15T21:26:49.414Z"
+  },
+  "b5-massif22-scree-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x2 basalt twin spires over a scree skirt: a new silhouette with no boxy column foot, ash caps, lit from the left",
+    "at": "2026-11-15T21:26:49.466Z"
+  },
+  "b5-low31-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low 3x1 basalt hump ridge: three rough humps with ash tops and a boulder foot, rises 2 px above the footprint; for three-cell runs where a tall ridge may not stand",
+    "at": "2026-11-15T21:26:49.518Z"
+  },
+  "b5-massif32-scree-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x2 basalt ridge of four ash-capped spires over wide scree aprons, no column box; its middle repeats its style image massif-2x2-d, so the two are one family (basalt-spires)",
+    "at": "2026-11-15T21:31:44.381Z"
+  },
+  "b5-tall23-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x3 basalt ridge seen end-on: one tall summit with a pale ash cap (whiter and more mottled than the rest, acceptable), column cliffs over scree aprons and a boulder foot; fills the 160 x 288 canvas without clipping",
+    "at": "2026-11-15T21:32:32.600Z"
+  },
+  "b5-low31-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low 3x1 broken basalt ridge with an ash-dusted knob and a rubble tail, darker than b5-low31-a and closer to the set's basalt; lit from the left",
+    "at": "2026-11-15T21:40:09.616Z"
   }
 }

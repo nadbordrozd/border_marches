@@ -6,7 +6,8 @@
  * randomly stretched and turned ellipse, plus a noise field), so their
  * outlines are round and lumpy rather than grid-boxy; mountains stretch
  * east-west so they pack into ridges. A share of clusters are small groups
- * of one to three cells (lone peaks and trees within a budget).
+ * of one to three cells (lone trees within a budget; a small mountain is a
+ * 2x2 hill, the smallest mountain there is).
  * Clean-up then fills diagonal-only joins, removes lone cells (beyond a small
  * budget of intentional lone peaks), folds single cells of one obstacle type
  * into the surrounding type, and fills or opens enclosed pockets so that all
@@ -77,14 +78,16 @@ export function growClusters(st: GenState): void {
         if (seed === undefined) continue;
       }
       const small = rng.chance(cc.smallShare);
-      const size = small
+      const drawn = small
         ? 1 + Math.floor(rng.next() * 3)
         : Math.round(
             cc.size[0] + (cc.size[1] - cc.size[0]) * Math.pow(rng.next(), 1.4),
           );
+      // The smallest mountain is a 2x2 hill (squareMountains squares it).
+      const size = type === O.mountain ? Math.max(4, drawn) : drawn;
       const blob = grow(st, rng, seed, size, type, z.id, attach, free, lumps);
       if (blob.length === 1 && !attach) {
-        if (lonePeaks >= cc.lonePeaks) continue;
+        if (type === O.mountain || lonePeaks >= cc.lonePeaks) continue;
         lonePeaks++;
       } else if (blob.length < 2) {
         continue;
@@ -221,7 +224,7 @@ export function fixDiagonals(st: GenState): number {
 
 /**
  * Lone obstacle cells (no obstacle among their 8 neighbours) are removed,
- * except spine cells and up to `lonePeaks` lone peaks or trees. A cell whose obstacle
+ * except spine cells and up to `lonePeaks` lone trees. A cell whose obstacle
  * neighbours are all of the other type takes that type.
  */
 export function fixLoneCells(st: GenState): void {
@@ -243,7 +246,8 @@ export function fixLoneCells(st: GenState): void {
       continue;
     }
     if (at(st.spine, i)) continue;
-    if (peaks < cfg.clusters.lonePeaks) {
+    // Lone trees only: the smallest mountain is a 2x2 block.
+    if (t === O.forest && peaks < cfg.clusters.lonePeaks) {
       peaks++;
       continue;
     }
@@ -362,4 +366,152 @@ function openPocket(st: GenState, cells: number[], reach: Uint8Array): void {
     };
     st.passes.push(pass);
   }
+}
+
+// ---------------------------------------------------------------------------
+// The smallest mountain is 2x2 (user decision, bead xaj.20)
+
+/** Whether cell (x, y) lies in an all-mountain 2x2 window. */
+export function inMountainBlock(st: GenState, i: number): boolean {
+  const { g } = st;
+  const x = g.x(i);
+  const y = g.y(i);
+  const m = (cx: number, cy: number): boolean =>
+    g.inside(cx, cy) && at(st.obstacle, g.idx(cx, cy)) === O.mountain;
+  for (const [ox, oy] of BLOCK_CORNERS) {
+    const x0 = x + ox;
+    const y0 = y + oy;
+    if (m(x0, y0) && m(x0 + 1, y0) && m(x0, y0 + 1) && m(x0 + 1, y0 + 1)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/** North-west corners, relative to a cell, of the four 2x2 windows holding it. */
+const BLOCK_CORNERS: ReadonlyArray<readonly [number, number]> = [
+  [-1, -1],
+  [0, -1],
+  [-1, 0],
+  [0, 0],
+];
+
+/**
+ * Every mountain cell ends up in at least one all-mountain 2x2 window, so
+ * the renderer can build every range from 2x2-and-larger pieces.
+ *
+ * A violating cell grows into the cheapest 2x2 window round it: forest cells
+ * turn to rock for free (both block movement, so the seal and reachability
+ * are unchanged), open cells (never a pass corridor or a town's yard) cost
+ * more and are taken only when `growOpen`
+ * (they may close a pocket; the caller resolves pockets afterwards). A cell
+ * that cannot grow is removed: it becomes forest when it seals a zone
+ * border, touches forest, or would open as an unreachable pocket, else open
+ * ground. Removing a violator never breaks another cell's block, and growth
+ * only adds whole blocks, so one pass leaves no violator. Returns the number
+ * of cells changed.
+ */
+export function squareMountains(st: GenState, growOpen: boolean): number {
+  const { g, cfg } = st;
+  const towns = [st.townAt.start, st.townAt.enemy].filter((t) => t >= 0);
+  const reach = growOpen ? undefined : reachable(st, st.townAt.start);
+  const rng = stageRng(st, growOpen ? "square-grow" : "square-trim");
+  let changed = 0;
+  // Pass corridors and town yards stay open; a pass mouth's clearance may
+  // take rock to square a range's end (pockets are resolved afterwards).
+  const corridor = new Uint8Array(g.n);
+  for (const p of st.passes) for (const c of p.cells) corridor[c] = 1;
+  const growable = (j: number): boolean =>
+    growOpen &&
+    isOpen(st, j) &&
+    at(corridor, j) === 0 &&
+    at(st.occupied, j) === 0 &&
+    at(st.objBlocked, j) === 0 &&
+    towns.every(
+      (t) =>
+        g.cheb(t, j) > cfg.clusters.townClearance + 2 ||
+        (at(st.keepOpen, j) === 0 && g.cheb(t, j) > cfg.clusters.townClearance),
+    );
+  for (let i = 0; i < g.n; i++) {
+    if (at(st.obstacle, i) !== O.mountain || inMountainBlock(st, i)) continue;
+    const x = g.x(i);
+    const y = g.y(i);
+    let best: number[] | undefined;
+    let bestCost = Infinity;
+    for (const [ox, oy] of BLOCK_CORNERS) {
+      const x0 = x + ox;
+      const y0 = y + oy;
+      if (!g.inside(x0, y0) || !g.inside(x0 + 1, y0 + 1)) continue;
+      const cells = [
+        g.idx(x0, y0),
+        g.idx(x0 + 1, y0),
+        g.idx(x0, y0 + 1),
+        g.idx(x0 + 1, y0 + 1),
+      ];
+      let cost = rng.float(0, 0.5);
+      for (const j of cells) {
+        const ob = at(st.obstacle, j);
+        if (ob === O.mountain) continue;
+        if (ob === O.forest) cost += 1;
+        else if (growable(j)) cost += 3;
+        else cost = Infinity;
+      }
+      if (cost < bestCost) {
+        bestCost = cost;
+        best = cells;
+      }
+    }
+    if (best) {
+      for (const j of best) {
+        if (at(st.obstacle, j) !== O.mountain) {
+          st.obstacle[j] = O.mountain;
+          changed++;
+        }
+      }
+      continue;
+    }
+    const opens =
+      !seals(st, i) &&
+      !g.around(i, N8).some((j) => at(st.obstacle, j) === O.forest) &&
+      (reach === undefined || g.around(i, N4).some((j) => at(reach, j) === 1));
+    st.obstacle[i] = opens ? O.none : O.forest;
+    changed++;
+  }
+  if (reach) changed += tidyStrayTrees(st, reach);
+  return changed;
+}
+
+/** A spine cell with open ground of another zone beside it holds the seal. */
+function seals(st: GenState, i: number): boolean {
+  if (!at(st.spine, i)) return false;
+  const zone = at(st.zone, i);
+  return st.g
+    .around(i, N8)
+    .some((j) => at(st.zone, j) !== zone && isOpen(st, j));
+}
+
+/**
+ * A forest cell left with no forest round it (its neighbours turned to rock)
+ * joins the rock when that completes a 2x2 block, or opens when it is not a
+ * seal and borders reachable ground; otherwise it stays a lone tree.
+ */
+function tidyStrayTrees(st: GenState, reach: Uint8Array): number {
+  const { g } = st;
+  let changed = 0;
+  for (let i = 0; i < g.n; i++) {
+    if (at(st.obstacle, i) !== O.forest) continue;
+    const near = g.around(i, N8);
+    if (near.some((j) => at(st.obstacle, j) === O.forest)) continue;
+    if (!near.some((j) => at(st.obstacle, j) === O.mountain)) continue;
+    st.obstacle[i] = O.mountain;
+    if (inMountainBlock(st, i)) {
+      changed++;
+      continue;
+    }
+    const opens =
+      !seals(st, i) && g.around(i, N4).some((j) => at(reach, j) === 1);
+    st.obstacle[i] = opens ? O.none : O.forest;
+    if (opens) changed++;
+  }
+  return changed;
 }

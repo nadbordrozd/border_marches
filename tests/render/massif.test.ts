@@ -61,6 +61,7 @@ describe("packRanges", () => {
       ["M.M.M", ".M.M.", "MMMMM"],
       ["MM...", ".MM..", "..MM.", "...MM"],
       ["M", "M", "M", "M"],
+      ["MM", "MM", "MM", "MM", "MM"],
     ]) {
       const map = mapOf(rows);
       expectExactCover(map, packRanges(map));
@@ -145,33 +146,47 @@ describe("packRanges", () => {
     }
   });
 
-  it("runs a one-cell-wide north-south column as spines and singles (xaj.19)", () => {
-    const map = mapOf([
-      "........",
-      ".MMMMM..",
-      "..M.....",
-      "..M.....",
-      "..M.....",
-      "..M.....",
-      "..M.....",
-      "........",
-    ]);
-    const cover = packRanges(map);
-    const column = cover.pieces.filter((p) => p.x === 2 && p.y >= 2);
-    const spines = column.filter((p) => p.asset.kind === "spine");
-    expect(spines.length).toBeGreaterThan(0);
-    for (const s of spines) {
-      expect([s.asset.cols, s.asset.rows]).toEqual([1, 2]);
-      // A spine rises 48 px: only with rock behind it.
-      expect(
-        map.cells[(s.y - 1) * map.width + s.x]?.obstacle === "mountain",
-      ).toBe(true);
+  it("runs a two-cell-wide north-south band as summits and saddles (xaj.20)", () => {
+    for (const ground of ["grass", "badlands", "wasteland"] as const) {
+      const map = mapOf(
+        [
+          "........",
+          ".MMMMMM.",
+          ".MMMMMM.",
+          "..MM....",
+          "..MM....",
+          "..MM....",
+          "..MM....",
+          "..MM....",
+          "..MM....",
+          "..MM....",
+          "........",
+        ],
+        ground,
+      );
+      const cover = packRanges(map);
+      expectExactCover(map, cover);
+      const band = cover.pieces.filter((p) => p.y >= 3);
+      // Two-cell-wide pieces only, at least one of them a massif summit.
+      for (const p of band) expect(p.asset.cols).toBe(2);
+      expect(band.some((p) => p.asset.rows >= 2)).toBe(true);
+      // Never two massifs edge to edge: a saddle row between summits.
+      for (const a of band)
+        for (const b of band)
+          if (a !== b && a.asset.rows >= 2 && b.asset.rows >= 2)
+            expect(a.y + a.asset.rows === b.y).toBe(false);
     }
-    // Never one spine sprite right on top of another.
-    for (const a of spines)
-      for (const b of spines)
-        if (a !== b && a.asset.key === b.asset.key)
-          expect(Math.abs(a.y - b.y)).toBeGreaterThan(2);
+  });
+
+  it("covers generated ranges without single-cell pieces (xaj.20)", () => {
+    // Every Mountain cell lies in a 2x2 block of them, so the cover is
+    // built from pieces of two cells and more; singles are a fallback for
+    // mountains under objects only.
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const map = generateMap(seed, { size: "M" });
+      const singles = packRanges(map).pieces.filter((p) => p.asset.cols === 1);
+      expect(singles.map((p) => `${p.asset.key}@${p.x},${p.y}`)).toEqual([]);
+    }
   });
 
   it("keeps the sandstone tower buttes apart on generated maps (xaj.19)", () => {

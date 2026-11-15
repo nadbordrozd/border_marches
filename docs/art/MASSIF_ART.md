@@ -9,12 +9,14 @@ Before this bead every range was a field of near-identical snow-capped cones.
 
 The art is wired into the renderer by bead `xaj.15` (see
 [Wiring](#wiring-bead-xaj15)); bead `xaj.19` filled the set's gaps and
-reworked the packing ([Iteration 4](#iteration-4-bead-xaj19)). The captures
+reworked the packing ([Iteration 4](#iteration-4-bead-xaj19)); bead `xaj.20`
+made the smallest mountain 2x2 and rebuilt ranges from 2x2-and-larger pieces
+([Iteration 5](#iteration-5-bead-xaj20)). The captures
 [`screens/map-seed3-M-z075.png`](screens/map-seed3-M-z075.png),
 [`screens/map-massif-seed3-z1.png`](screens/map-massif-seed3-z1.png) (a
 sandstone canyon) and
-[`screens/map-spine-seed2-z1.png`](screens/map-spine-seed2-z1.png) (a
-north-south sandstone spine) show the result after xaj.19.
+[`screens/map-band-seed2-z1.png`](screens/map-band-seed2-z1.png) (north-south
+sandstone bands) show the result after xaj.20.
 
 ## What was made
 
@@ -374,3 +376,125 @@ Measured on seeds 1-3 size M (pieces and fills of `packRanges`):
 - The 3x2 domes have a straight foot line, kept to the inside of a range.
 - Basalt keeps three of its four massifs on boxy column feet (the new one
   is weighted up, not a replacement).
+
+## Iteration 5 (bead xaj.20)
+
+The user, after xaj.19: "Keep iterating. BTW it is acceptable if the
+smallest mountain is 2x2 tiles instead of 1x1 - if that helps." The
+orchestrator adopted it: every Mountain cell now lies in an all-Mountain
+2x2 block, and the packer builds ranges from 2x2-and-larger pieces only.
+
+### Generator (`src/core/map/gen/clusters.ts`, `generate.ts`)
+
+`squareMountains` runs after the clean-up passes. A Mountain cell outside
+every all-Mountain 2x2 window grows into the cheapest window round it:
+forest cells turn to rock for free (both block movement, so seals and
+reachability do not change), open ground costs more and is taken only
+outside pass corridors and town yards; pockets the growth closes are
+re-resolved (three rounds, with the corner-only-join fix), and a final trim
+turns what still cannot grow into forest (when it seals a zone border, or
+would open as an unreachable pocket) or open ground. Small mountain
+clusters start at four cells, and the lone-obstacle budget is for trees
+only. Tests: `generate.test.ts` "builds every mountain from 2x2 blocks"
+(50 seeds M, 3 S, 2 L) and "no lone peaks".
+
+Seeds 1-50, size M: mountain cells 20,200 -> 23,225 (+15%); cells outside
+a 2x2 block 3,216 -> 0; one-cell-wide cells (no rock west or east) 580 -> 0;
+corner-only obstacle joins 5 -> 3; generation 53 ms per map either way.
+Seed 3 before and after: `.orchestration/screens/xaj20/before-seed3-ascii.txt`
+and `after-seed3-ascii.txt` (git-ignored); ranges are a little fatter, the
+one-cell spurs and staircases have become two-cell ridges or are gone.
+
+### Packer (`src/render/map/massif.ts`)
+
+- **Massifs** 3x2, 2x2 and the new tall **2x3** (a two-cell-wide
+  north-south ridge seen end-on). A massif never leaves a single free cell
+  of its palette beside it in a row (no orphans), so every leftover row
+  run is two or more cells and cuts into 2x1 and 3x1 pieces. Massif offers
+  that no sprite can fill (rise rule at an open rim) are skipped.
+- **North-south bands** (two or three cells wide, open both sides) like a
+  massif as their summit (`BAND_BONUS`: 2x3 most), and massifs on exactly
+  the same columns are not stacked edge to edge, so a band runs summit,
+  low saddle, summit; massifs offset by a column may touch (a diagonal or
+  staggered band steps sideways like a ridge line). The row between two
+  summits of a band is always a low saddle. 2x3 pieces keep `TALL_SPACING`
+  (8) cells apart within a range, divided by the number of 2x3 sprites.
+- **Rows**: 3x1 and 2x1 ridges, or low 3x1 and 2x1 humps (new kind
+  `rounded` 3x1) where a tall ridge may not stand (palette seams, an open
+  rim with fewer than two fitting ridge sprites). Sandstone takes a low hump
+  for 40% more of its 2x1 runs (`LOW_PAIR_RATE`): its 2x1 ridges are
+  little stepped buttes. A 1x1 single is a fallback for a Mountain under an
+  object only; `widenPaletteRuns` gives a lone palette cell in a row its
+  neighbour's palette, and `MIN_PATCH` is 10 (small rock patches at a
+  palette border were all seam and became heaps of humps).
+- **Removed**: the spine pass (1x2 spines), peaks as structural singles,
+  `SPINE_GAP`, `PEAK_WEIGHT`, `BAND_PENALTY`. Peaks are decoration now:
+  `PEAK_FILL_RATE` (granite 0.15, sandstone 0.12, basalt 0.2) of the deep
+  joints (rock behind too) get a 1x1 peak standing between the pieces
+  instead of a low back-fill. Granite back-fills 0.9 -> 0.45 and side boulders 0.8 -> 0.5 (granite ranges were a field of boulder pairs).
+- **Families and weights**: the fluted sandstone family has five sprites and
+  a reach of 5 (a z1 screen showed five), weight 0.45 each; new families
+  `basalt-scree` (2x2-c, 3x2-c) and `basalt-spires` (2x2-d, 3x2-d); the
+  scree-skirted basalt massifs weigh 1.4 and the four boxy ones 0.35.
+
+Measured on seeds 1-3 size M (`packRanges`, main -> this bead): pieces
+215 / 172 / 202 -> 147 / 118 / 147; 1-column pieces (singles, peaks,
+spines) 69 / 58 / 70 -> 0; massifs 43 / 33 / 45 -> 67 / 59 / 74; time per
+M map 4.8 / 3.7 / 4.0 ms -> 5.5 / 3.1 / 4.0 ms.
+
+### New art
+
+Same pipeline (v2 with an accepted piece as the style image, seated by
+recorded crop + pad steps). `MassifPieceAsset.rows` may be 3 (canvas 160 x
+288, up 48); variant letters run to `l`.
+
+| Palette | New game files | From |
+| --- | --- | --- |
+| sandstone | `massif-2x2-f` (low fluted hill, rises 13 px: back rim), `-g` (fluted twin crest), `-h` (low table slice, rock both sides), `-i` (lower hoodoo cluster, rises 20 px), `massif-3x2-f` (fluted dome with knobs), `-g` (hoodoo field), `massif-2x3-a` (end-on ridge: mesa summit over stepped blocks), `ridge-3x1-d` (low table with a cleft), `rounded-3x1-a/b` (striped humps; crumbling mesa), `rounded-2x1-d` (low mesa with hoodoos) | `s5-*` |
+| granite | `massif-2x2-d` (broad snowy summit), `massif-3x2-d` (two snowy summits and a saddle), `massif-2x3-a` (craggy end-on ridge), `rounded-3x1-a/b` (hump ridge; weathered slabs) | `g5-*` |
+| basalt | `massif-2x2-d` (twin spires on scree), `massif-3x2-c` (summit on scree aprons), `-d` (four spires on scree), `massif-2x3-a` (tall end-on summit), `rounded-3x1-a/b` (pale humps; broken ridge) | `b5-*` |
+
+Calls: 30 PixelLab requests (sandstone 16, granite 8, basalt 6; `usd: null` on
+this account). Takes: sandstone 12 accepted / 4 rejected, granite 5 / 4,
+basalt 6 / 0 (one candidate per call at these sizes).
+
+Verdicts in short (one line per take in each `verdicts.json`):
+
+- **Rejected**: 2x3 takes clipped by the top or right edge, or reading as
+  stacked round blobs or a bulb on a neck (`s5-tall23-b/c`,
+  `g5-tall23-a/b`); striped domes cut by both sides on a straight foot
+  (`s5-massif22-domes-b`); a 2x2 that came back as its small style image
+  (`s5-massif22-lowrim-c`); cylinder stumps (`g5-massif22-b`).
+- **Shipped one size down**: `s5-massif32-table-b` (a 3x1 ridge),
+  `s5-massif22-lowrim-b` (a 2x1 hump).
+- **Lessons**: v2 copies the style image's foot outline even at another
+  canvas size (the three fluted takes share one foot), and a small style
+  image in a bigger canvas comes back at its own size (`lowrim-c`, `-b`):
+  for a low 2x2 or 3x2, style from a big piece and ask for "the lower three
+  quarters with empty space above". For 2x3 end-on ridges, a 3x2 massif
+  style image (granite `g-massif32-c`) gave the only clean granite take;
+  ridge style images gave clipped or blobby ones.
+
+Sheets: `sheets/massif-*.png` rebuilt by `sh art/review/massif-sheets.sh`
+(massifs row now includes the 2x3 pieces, the low row the 3x1 humps).
+
+### Still artificial
+
+- Sandstone canyons are now varied (fluted hills, domes, hoodoo fields,
+  tables, towers) but busy: every piece is a distinct landmark with its own
+  silhouette, so a big badlands range reads as a collection of monuments
+  rather than one eroded plateau. The low-rim pieces help only on the rim.
+- A palette changes inside a range at a seam of low humps; where a small
+  granite patch survives `MIN_PATCH` it still reads as a grey island.
+- Granite interiors are mostly the same snowy-cone massifs plus the
+  cliff-block 2x2; a dense granite range at zoom 1 still shows each 2x2
+  sprite two or three times.
+- Two-cell-wide north-south bands are summit, saddle, summit now, but where
+  no 2x3 fits (spacing, rim rise) they fall back to stacked 2x2 blocks with
+  a low hump between: better than a column of equal blocks, still regular.
+- Back-rim 2x1 humps of sandstone (`rounded-2x1-*`) are small next to the
+  2x2 mesas in front of them; seen from above a range's back edge can look
+  like a row of pebbles.
+- The granite and basalt 2x3 pieces are single sprites (kept 8 cells
+  apart); the sandstone one is a mesa-and-blocks stack that reads as a
+  tower from some angles.

@@ -119,6 +119,17 @@ describe("massif pieces (xaj.14)", () => {
           .length,
       ).toBeGreaterThanOrEqual(3);
       expect(massifPieces(palette, "mine").length).toBeGreaterThanOrEqual(1);
+      // Bead xaj.20 (every Mountain cell in a 2x2 block): a tall 2x3 for
+      // north-south bands, four or more 2x2 and 3x2 massifs, and a low 3x1
+      // hump for three-cell runs where a tall ridge may not stand.
+      expect(massifPieces(palette, "massif", 2, 3).length).toBeGreaterThan(0);
+      expect(
+        massifPieces(palette, "massif", 2, 2).length,
+      ).toBeGreaterThanOrEqual(4);
+      expect(
+        massifPieces(palette, "massif", 3, 2).length,
+      ).toBeGreaterThanOrEqual(4);
+      expect(massifPieces(palette, "rounded", 3, 1).length).toBeGreaterThan(0);
     }
   });
 

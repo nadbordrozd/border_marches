@@ -68,7 +68,7 @@ The Pulp Wars TL;DR, condensed:
 | Town | 80 x 80 to 96 x 88 per cell of its footprint | Bottom-centred; multi-cell towns are a design follow-up |
 | Mine, dwelling | 64-72 px wide | Seated 3 px above the cell bottom |
 | Pickup (resource, chest) | 40 x 40 to 48 x 48 | Centred; smaller and calmer than any creature |
-| Mountain piece | 1 or 2 cells wide; low up to 13 px, tall up to 48 px above its footprint | Bricked rows, ragged foot |
+| Mountain piece | 2 or 3 cells wide (1x1 only as decoration); 1 to 3 rows; low up to 13 px, tall up to 48 px above its footprint | Bricked rows, ragged foot; the smallest mountain is 2x2 |
 | Forest piece | cols x 80 by rows x 80 + 24 | Paints only over its footprint and a 24 px band above |
 | Resource icon (UI) | 32 x 32, generated at that size | HUD |
 
@@ -93,8 +93,8 @@ Goals (each is a review check on a captured map at zoom 0.75 and 1):
    of three cells, so no edge repeats along a long border. Rank, lowest
    first: Grass, Steppe, Jungle, Badlands, Wasteland (darker runs into
    lighter).
-3. **Every mountain range looks unique.** Ranges are composed from one- and
-   two-cell pieces, bricked row by row, low on the top row and tall under
+3. **Every mountain range looks unique.** Ranges are composed from pieces two and
+   three cells wide (the smallest mountain is 2x2), bricked row by row, low on the top row and tall under
    other mountains, with a ragged foot showing the cell's own ground. Beyond
    Pulp Wars: a larger piece set, and **no two neighbouring pieces share a
    variant** (horizontal or vertical). The generator gives ranges organic
@@ -185,4 +185,5 @@ Rules for reuse:
 | 2026-11-15 | Adventure map target: Heroes II-like continuous landscape (section 4) and the MVP terrain mapping (section 5) | User request: "no copypaste patterns", unique-looking mountain ranges |
 | 2026-11-15 | Mountain rock follows the ground: grey granite on grass and jungle, sandstone mesas on steppe and badlands, dark basalt with ash on wasteland; ranges are built from 2x2/3x2 massifs, 2x1/3x1 ridges and 1x1 crags, rounded humps and foothills; 3x2 towns at 240 x 184; 4-6 doodads per terrain (not wired yet) | Bead `border_marches-xaj.14`, [MASSIF_ART.md](MASSIF_ART.md) |
 | 2026-11-15 | Massif set iteration 4: sandstone massifs beyond tower buttes (fluted hills, striped domes, hoodoo clusters, table mesas), 1x1 peaks and 1x2 north-south spines per palette, rounded granite boulders instead of stair-like blocks, a scree-skirted basalt massif, the Warlord's Hold at the Lost World town's scale with its gate centred on the entry cell; ranges change rock only at low seams | Bead `border_marches-xaj.19`, [MASSIF_ART.md](MASSIF_ART.md#iteration-4-bead-xaj19) |
+| 2026-11-15 | The smallest mountain is 2x2 tiles: the generator puts every Mountain cell in an all-Mountain 2x2 block, and ranges are built from 2x2, 3x2 and tall 2x3 massifs, 2x1/3x1 ridges and low humps; 1x1 peaks and rubble are decoration only; north-south bands run summit, saddle, summit | User (2026-11-15): "it is acceptable if the smallest mountain is 2x2 tiles"; bead `border_marches-xaj.20`, [MASSIF_ART.md](MASSIF_ART.md#iteration-5-bead-xaj20) |
 | 2026-11-15 | Essence is violet (`#a855f7`, shadow `#6b21a8`, light `#e9d5ff`) on its pickup, mine and item; the ore pickup is dark charcoal iron with silver veins, not the imported copper ore | Bead `border_marches-xaj.9`: teal clashes with shallow water, copper with the Lost World accent ([MVP_NEW_ART.md](MVP_NEW_ART.md)) |

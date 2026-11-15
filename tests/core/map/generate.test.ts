@@ -278,6 +278,7 @@ describe("generateMap", { timeout: 60_000 }, () => {
         cellAt(map, x, y)?.obstacle ?? "none";
       let lone = 0;
       let loneType = 0;
+      let lonePeaks = 0;
       let diagonal = 0;
       for (let y = 0; y < map.height; y++) {
         for (let x = 0; x < map.width; x++) {
@@ -292,6 +293,7 @@ describe("generateMap", { timeout: 60_000 }, () => {
             }
             if (any === 0) lone++;
             if (same === 0) loneType++;
+            if (same === 0 && t === "mountain") lonePeaks++;
           }
           const a = ob(x, y) !== "none";
           const b = ob(x + 1, y) !== "none";
@@ -302,6 +304,8 @@ describe("generateMap", { timeout: 60_000 }, () => {
           }
         }
       }
+      // The lone-obstacle budget is for trees only: no lone peaks.
+      expect(lonePeaks, `seed ${seed}: lone peaks`).toBe(0);
       expect(lone, `seed ${seed}: lone obstacles`).toBeLessThanOrEqual(
         DEFAULT_GEN_CONFIG.clusters.lonePeaks + 1,
       );
@@ -310,6 +314,42 @@ describe("generateMap", { timeout: 60_000 }, () => {
       );
       expect(diagonal, `seed ${seed}: corner-only joins`).toBeLessThanOrEqual(
         3,
+      );
+    }
+  });
+
+  it("builds every mountain from 2x2 blocks (50 seeds, plus S and L)", () => {
+    // User decision (bead xaj.20): the smallest mountain is 2x2 tiles, so
+    // every mountain cell lies in at least one all-mountain 2x2 window.
+    const maps = [
+      ...SEEDS.map((seed) => gen(seed).map),
+      ...[1, 2, 3].map((seed) => generateMap(seed, { size: "S" })),
+      ...[1, 2].map((seed) => generateMap(seed, { size: "L" })),
+    ];
+    for (const map of maps) {
+      const m = (x: number, y: number): boolean =>
+        cellAt(map, x, y)?.obstacle === "mountain";
+      const bad: string[] = [];
+      for (let y = 0; y < map.height; y++) {
+        for (let x = 0; x < map.width; x++) {
+          if (!m(x, y)) continue;
+          const ok = [
+            [-1, -1],
+            [0, -1],
+            [-1, 0],
+            [0, 0],
+          ].some(
+            ([ox = 0, oy = 0]) =>
+              m(x + ox, y + oy) &&
+              m(x + ox + 1, y + oy) &&
+              m(x + ox, y + oy + 1) &&
+              m(x + ox + 1, y + oy + 1),
+          );
+          if (!ok) bad.push(`(${x},${y})`);
+        }
+      }
+      expect(bad, `seed ${map.seed} ${map.width}: cells outside a 2x2`).toEqual(
+        [],
       );
     }
   });

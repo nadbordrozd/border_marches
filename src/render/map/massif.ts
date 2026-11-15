@@ -1,44 +1,52 @@
 /**
- * Mountain ranges as packed massifs (beads border_marches-xaj.15 and xaj.19),
- * drawn with the studio massif pieces of beads xaj.14 and xaj.19
- * (docs/art/MASSIF_ART.md).
+ * Mountain ranges as packed massifs (beads border_marches-xaj.15, xaj.19
+ * and xaj.20), drawn with the studio massif pieces of beads xaj.14, xaj.19
+ * and xaj.20 (docs/art/MASSIF_ART.md).
  *
  * The goal, in the user's words: "all the mountain ranges look unique.
  * they're not but there is enough variety and they are cleverly connected so
  * that no matter the shape of the mountain range it looks like a coherent
  * whole and not like the same rock sprite pasted 20 times."
  *
+ * Since bead xaj.20 the generator guarantees that every Mountain cell lies
+ * in an all-Mountain 2x2 block (the user: "it is acceptable if the smallest
+ * mountain is 2x2 tiles"), so every row run of rock is at least two cells
+ * long and the cover needs no single-cell pieces.
+ *
  * A RANGE is an 8-connected group of Mountain cells. Each cell gets a rock
  * PALETTE (granite, sandstone, basalt) from the grounds of the range cells
  * round it (MASSIF_PALETTE_TERRAINS): a small range takes its majority
  * ground, a long border range changes palette where its ground changes;
- * patches under MIN_PATCH cells join their surroundings. No piece spans two
- * palettes, and every cell next to another palette (a SEAM) takes low
- * pieces only, so the rock changes at a saddle, not between two cliffs.
+ * patches under MIN_PATCH cells join their surroundings, and a lone cell of
+ * a palette in a row takes its neighbour's (widenPaletteRuns). No piece
+ * spans two palettes, and every cell next to another palette (a SEAM) takes
+ * low pieces only, so the rock changes at a saddle, not between two cliffs.
  *
  * The range is then covered exactly, cell by cell, with pieces:
  *
- * 1. MASSIFS (3x2 and 2x2) where the range is two rows deep, picked greedily
- *    by a score that likes big pieces, rock on their vertical sides (a
- *    massif's sides are cliffs of rock that want rock against them), rock
- *    behind them and a coordinate hash, so solid blocks are tiled
- *    irregularly, never on a lattice. A massif filling the whole width of a
- *    band (open ground both sides) scores lower, and massifs sharing a
- *    column are not stacked edge to edge in a narrow band (bead xaj.19:
- *    north-south bands read as a vertical rhythm of equal blocks).
- * 2. SPINES: a one-cell-wide north-south run is cut into 1x2 spines (rock
- *    behind only, they rise 48 px), usually with a single between two.
- * 3. Every remaining run of cells in a row is cut (dynamic programming)
- *    into RIDGES (3x1, 2x1) and singles, liking long pieces and disliking
- *    a seam right under a seam of the row behind (so rows lie like bricks).
- *    A 2x1 on the range's back rim, or in front of rock, is sometimes a low
- *    ROUNDED or FOOTHILL hump; a single is a low 1x1 (rounded, foothill or,
- *    sparingly, a crag) or a PEAK, mostly where rock stands behind it.
- * 4. VARIANTS: a weighted hashed pick that avoids the sprites near by and
+ * 1. MASSIFS (3x2, 2x2 and the tall 2x3 seen end-on) where the range is two
+ *    or three rows deep, picked greedily by a score that likes big pieces,
+ *    rock on their vertical sides (a massif's sides are cliffs of rock that
+ *    want rock against them), rock behind them and a coordinate hash, so
+ *    solid blocks are tiled irregularly, never on a lattice. A massif never
+ *    leaves a single free cell beside it in a row. In a north-south band
+ *    two or three cells wide a massif is one of the band's summits (2x3
+ *    liked most); massifs on exactly the same columns are not stacked edge
+ *    to edge in a band, so summits alternate with low saddles, while
+ *    massifs offset by a column may touch and step sideways like a ridge.
+ * 2. Every remaining run of cells in a row is cut (dynamic programming)
+ *    into RIDGES (3x1, 2x1) or low 3x1 and 2x1 humps, liking long pieces
+ *    and disliking a seam right under a seam of the row behind (so rows lie
+ *    like bricks). A 2x1 on the range's back rim, between two summits of a
+ *    band, or in front of rock, is sometimes a low ROUNDED or FOOTHILL hump
+ *    (sandstone more often: its 2x1 ridges are little stepped buttes); a
+ *    three-cell run where a tall ridge may not stand is a low 3x1 hump. A
+ *    1x1 single is a fallback only (a Mountain cell under an object).
+ * 3. VARIANTS: a weighted hashed pick that avoids the sprites near by and
  *    keeps pieces of one silhouette FAMILY (the sandstone tower buttes, the
  *    fluted hills, the domes, the tables) apart; pieces whose art has a
  *    straight cut side (EDGE_NEEDS) go only where rock meets that side.
- * 5. BACK-FILLS: where four range cells meet at a corner that is a joint
+ * 4. BACK-FILLS: where four range cells meet at a corner that is a joint
  *    between pieces (or two cells of a one-cell-wide column meet), a low
  *    1x1 piece stands on the joint half a cell off the grid, drawn behind
  *    the row in front: it fills the ground that would show in the notches
@@ -75,7 +83,7 @@ export const OPEN_RISE_MAX = 32;
 /** Cells round a cell whose grounds vote on its palette (Chebyshev). */
 export const PALETTE_RADIUS = 4;
 /** A palette patch of fewer cells joins the palette round it. */
-export const MIN_PATCH = 6;
+export const MIN_PATCH = 12;
 
 export const PALETTES: readonly MassifPalette[] = [
   "granite",
@@ -128,7 +136,7 @@ interface Slot {
   readonly x: number;
   readonly y: number;
   readonly cols: 1 | 2 | 3;
-  readonly rows: 1 | 2;
+  readonly rows: 1 | 2 | 3;
   /** Kinds it may take, with weights. */
   readonly kinds: readonly (readonly [MassifPieceKind, number])[];
   /** Paint over an open cell behind is limited (OPEN_RISE_MAX). */
@@ -152,16 +160,26 @@ const ASSET_WEIGHT: Readonly<Record<string, number>> = {
   "massif-sandstone-massif-3x2-a": 0.35,
   "massif-sandstone-massif-3x2-b": 0.35,
   // The fluted badlands hills catch the eye: a little rarer than the rest.
-  "massif-sandstone-massif-2x2-c": 0.6,
-  "massif-sandstone-massif-3x2-e": 0.6,
+  "massif-sandstone-massif-2x2-c": 0.45,
+  "massif-sandstone-massif-3x2-e": 0.45,
   "massif-sandstone-massif-3x2-d": 0.7,
+  "massif-sandstone-massif-2x2-g": 0.45,
+  "massif-sandstone-massif-3x2-f": 0.45,
+  "massif-sandstone-massif-3x2-g": 0.6,
   // The blocky granite foothills read as stairs (bead xaj.19 review): the
   // rounded boulders of xaj.19 take most of their place as singles too.
   "massif-granite-foothill-1x1-a": 0.25,
   "massif-granite-foothill-1x1-b": 0.25,
-  // The one basalt massif whose foot is a scree skirt, not a box of
-  // columns (xaj.19): favoured over the boxier three.
-  "massif-basalt-massif-2x2-c": 1.6,
+  // The basalt massifs whose foot is a scree skirt, not a box of columns
+  // (xaj.19, xaj.20): favoured; the four boxy ones are accents now.
+  "massif-basalt-massif-2x2-c": 1.4,
+  "massif-basalt-massif-2x2-d": 1.4,
+  "massif-basalt-massif-3x2-c": 1.4,
+  "massif-basalt-massif-3x2-d": 1.4,
+  "massif-basalt-massif-2x2-a": 0.35,
+  "massif-basalt-massif-2x2-b": 0.35,
+  "massif-basalt-massif-3x2-a": 0.35,
+  "massif-basalt-massif-3x2-b": 0.35,
 };
 
 /**
@@ -184,6 +202,20 @@ const FAMILY: Readonly<Record<string, string>> = {
   "massif-sandstone-ridge-2x1-d": "sandstone-table",
   "massif-sandstone-massif-2x2-e": "sandstone-hoodoos",
   "massif-sandstone-massif-3x2-e": "sandstone-fluted",
+  // Bead xaj.20: two more fluted hills, a low fluted back-rim hill, a
+  // hoodoo field and the 2x3 end-on ridge (a mesa summit, so a tower).
+  "massif-sandstone-massif-2x2-f": "sandstone-fluted",
+  "massif-sandstone-massif-2x2-g": "sandstone-fluted",
+  "massif-sandstone-massif-3x2-f": "sandstone-fluted",
+  "massif-sandstone-massif-3x2-g": "sandstone-hoodoos",
+  "massif-sandstone-massif-2x3-a": "sandstone-tower",
+  "massif-sandstone-ridge-3x1-d": "sandstone-table",
+  "massif-sandstone-massif-2x2-h": "sandstone-table",
+  // The 3x2 scree massif was styled from the 2x2 one: the same mountain.
+  "massif-basalt-massif-2x2-c": "basalt-scree",
+  "massif-basalt-massif-3x2-c": "basalt-scree",
+  "massif-basalt-massif-2x2-d": "basalt-spires",
+  "massif-basalt-massif-3x2-d": "basalt-spires",
 };
 /**
  * Pieces with a straight cut edge (the art was clipped by the image edge, or
@@ -198,6 +230,10 @@ const EDGE_NEEDS: Readonly<
   "massif-sandstone-ridge-2x1-d": ["east"],
   "massif-sandstone-massif-3x2-e": ["east"],
   "massif-sandstone-ridge-3x1-c": ["east"],
+  "massif-sandstone-massif-2x2-g": ["east"],
+  "massif-sandstone-massif-3x2-g": ["east"],
+  "massif-granite-massif-2x2-d": ["east"],
+  "massif-sandstone-massif-2x2-h": ["west", "east"],
 };
 
 /** Cells round a piece in which its family must not repeat. */
@@ -206,6 +242,9 @@ const FAMILY_REACH = 3;
 const FAMILY_REACH_OF: Readonly<Record<string, number>> = {
   "sandstone-tower": 5,
   "sandstone-table": 4,
+  // Five fluted sprites since bead xaj.20: at zoom 1 a screen showed five.
+  "sandstone-fluted": 5,
+  "sandstone-hoodoos": 4,
 };
 
 /** The pieces a slot may take, by its kinds and the rise rule. */
@@ -232,21 +271,28 @@ function candidates(
   return fit.length > 0 ? fit : out;
 }
 
+/**
+ * Whether a slot of this kind can be filled: at least `least` sprites fit
+ * (a rim where only one sprite fits would repeat it along the whole rim).
+ */
 const has = (
   palette: MassifPalette,
   kind: MassifPieceKind,
   cols: number,
   rows: number,
   openBehind: boolean,
+  least = 1,
 ): boolean =>
-  massifPieces(palette, kind, cols, rows).some(
+  massifPieces(palette, kind, cols, rows).filter(
     (p) => !openBehind || p.paintUp <= OPEN_RISE_MAX,
-  );
+  ).length >= least;
 
 /**
  * Low kinds of a 1x1 single on each palette (granite crags never: they are
  * darker than the rest of the set; sandstone crags are little buttes, so
- * sparingly). A single with rock behind it may also be a PEAK (singlePeak).
+ * sparingly). Since bead xaj.20 a single is a fallback only (a Mountain cell
+ * under an object, or a palette run the smoothing could not widen): the
+ * generator guarantees every Mountain cell lies in a 2x2 block of them.
  */
 const SINGLE_KINDS: Readonly<
   Record<MassifPalette, readonly (readonly [MassifPieceKind, number])[]>
@@ -262,15 +308,28 @@ const SINGLE_KINDS: Readonly<
   basalt: [["crag", 1]],
 };
 
+/** Cells between two tall 2x3 pieces of a range, for a palette with one. */
+const TALL_SPACING = 8;
 /** Chance a massif stacked right on another of its columns is dropped. */
-const STACK_SKIP = 0.6;
-/** Score taken off a massif with open ground on both of its sides. */
-const BAND_PENALTY = 0.55;
-/** Chance of a single between two spines of a one-cell-wide column. */
-const SPINE_GAP = 0.65;
-
-/** Weight of a peak among a single's kinds when rock stands behind it. */
-const PEAK_WEIGHT = 1.5;
+const STACK_SKIP = 0.35;
+/**
+ * Extra share of 2x1 runs that take a low hump instead of a tall ridge, by
+ * palette: the sandstone 2x1 ridges are little stepped buttes, and a row of
+ * them reads as separate blocks (bead xaj.19 review).
+ */
+const LOW_PAIR_RATE: Readonly<Record<MassifPalette, number>> = {
+  granite: 0,
+  sandstone: 0.4,
+  basalt: 0,
+};
+/**
+ * Score added to a massif filling the width of a two- or three-cell-wide
+ * north-south band (open ground on both sides), by its rows. Since bead
+ * xaj.20 every band is at least two cells wide, and it reads best as
+ * summits (a 2x2 or 3x2 massif, or the tall 2x3 seen end-on) with low
+ * saddles between them; left to ridges it was a stack of little blocks.
+ */
+const BAND_BONUS: Readonly<Record<2 | 3, number>> = { 2: 0.3, 3: 0.7 };
 
 /**
  * Least score a massif offer needs, by palette, for 2 and 3 columns. The
@@ -282,7 +341,7 @@ const MASSIF_THRESHOLD: Readonly<
   Record<MassifPalette, readonly [number, number]>
 > = {
   granite: [0.85, 0.85],
-  sandstone: [1.15, 1.2],
+  sandstone: [0.95, 1.0],
   basalt: [0.85, 0.85],
 };
 
@@ -312,23 +371,37 @@ const FILL_EXCLUDED: ReadonlySet<string> = new Set([
  * rubble, so fewer fills there.
  */
 const FILL_RATE: Readonly<Record<MassifPalette, number>> = {
-  granite: 0.9,
+  granite: 0.45,
   sandstone: 0.3,
   basalt: 0.45,
 };
+/**
+ * Share of deep joints (rock behind them too) where a 1x1 peak stands as a
+ * summit between the pieces instead of a low back-fill (bead xaj.20).
+ */
+const PEAK_FILL_RATE: Readonly<Record<MassifPalette, number>> = {
+  granite: 0.15,
+  sandstone: 0.12,
+  basalt: 0.2,
+};
 const SIDE_RATE: Readonly<Record<MassifPalette, number>> = {
-  granite: 0.8,
+  granite: 0.5,
   sandstone: 0.25,
   basalt: 0.45,
 };
 
-/** Low 2x1 humps: rounded on the back rim, foothill at the front. */
-function lowPairKinds(
+/**
+ * Low humps of 2 or 3 columns: rounded on the back rim, foothill at the
+ * front (an empty list when the palette has neither).
+ */
+function lowKinds(
   palette: MassifPalette,
+  cols: 2 | 3,
   front: boolean,
 ): readonly (readonly [MassifPieceKind, number])[] {
-  const rounded = massifPieces(palette, "rounded", 2, 1).length > 0;
-  const foothill = massifPieces(palette, "foothill", 2, 1).length > 0;
+  const rounded = massifPieces(palette, "rounded", cols, 1).length > 0;
+  const foothill = massifPieces(palette, "foothill", cols, 1).length > 0;
+  if (!rounded && !foothill) return [];
   if (rounded && foothill)
     return front
       ? [
@@ -379,7 +452,7 @@ export function components(
 /**
  * The palette of every cell of one range: the palette most of the range's
  * cells within PALETTE_RADIUS stand on (ties go to the cell's own ground),
- * then any palette patch of fewer than 4 cells joins the palette round it.
+ * then any palette patch of fewer than MIN_PATCH cells joins the palette round it.
  */
 export function rangePalettes(
   cells: readonly number[],
@@ -440,6 +513,35 @@ export function rangePalettes(
   return out;
 }
 
+/**
+ * Every row run of one palette inside a range is at least two cells long
+ * (bead xaj.20): a cell whose west and east range neighbours both have
+ * another palette takes its west (else east) neighbour's. Rock runs are at
+ * least two cells long (every Mountain cell lies in a 2x2 block), so after
+ * this every run can be cut into ridges of two and three cells.
+ */
+export function widenPaletteRuns(
+  cells: readonly number[],
+  width: number,
+  palette: Map<number, MassifPalette>,
+): void {
+  for (let pass = 0; pass < 4; pass += 1) {
+    let changed = false;
+    for (const i of cells) {
+      const x = i % width;
+      const own = palette.get(i);
+      const west = x > 0 ? palette.get(i - 1) : undefined;
+      const east = x + 1 < width ? palette.get(i + 1) : undefined;
+      if (west === own || east === own) continue;
+      const pick = west ?? east;
+      if (pick === undefined) continue;
+      palette.set(i, pick);
+      changed = true;
+    }
+    if (!changed) break;
+  }
+}
+
 /** 8-connected patches of one palette inside a range. */
 function splitBy(
   cells: readonly number[],
@@ -475,9 +577,11 @@ function splitBy(
 /**
  * The cut of a run of `length` free cells starting at (x0, y) into pieces of
  * 3, 2 and 1 columns: +5.6 for a 3x1 ridge (only with rock behind every
- * cell), +3.6 for a 2x1 that can be a tall ridge (+3 when only a low hump
- * fits), +1 for a single, -0.8 for a seam right under a seam of the row
- * behind, and a small coordinate hash.
+ * cell), +4.6 for a low 3x1 hump where a ridge is not allowed and
+ * `lowTriple` says one fits (bead xaj.20), +3.6 for a 2x1 that can be a tall ridge (+3 when only a low hump
+ * fits), -3 for a single (a fallback: with every Mountain cell in a 2x2
+ * block, runs of one palette are at least two cells long), -0.8 for a seam
+ * right under a seam of the row behind, and a small coordinate hash.
  */
 export function cutRun(
   x0: number,
@@ -485,6 +589,7 @@ export function cutRun(
   length: number,
   canRidge: (x: number, cols: 2 | 3) => boolean,
   seamAbove: (x: number) => boolean,
+  lowTriple: (x: number) => boolean = () => false,
 ): (1 | 2 | 3)[] {
   const best: { score: number; cut: (1 | 2 | 3)[] }[] = [{ score: 0, cut: [] }];
   for (let i = 1; i <= length; i += 1) {
@@ -495,10 +600,11 @@ export function cutRun(
       const x = x0 + i - cols;
       let score = from.score;
       if (cols === 3) {
-        if (!canRidge(x, 3)) continue;
-        score += 5.6;
+        if (canRidge(x, 3)) score += 5.6;
+        else if (lowTriple(x)) score += 4.6;
+        else continue;
       } else if (cols === 2) score += canRidge(x, 2) ? 3.6 : 3;
-      else score += 1;
+      else score -= 3;
       if (x > x0 && seamAbove(x)) score -= 0.8;
       score += unit(x, y, cols) * 0.5;
       if (top === undefined || score > top.score)
@@ -545,6 +651,7 @@ export function packRanges(
     const pal = rangePalettes(range, width, (i) =>
       paletteOf(map.cells[i]?.terrain ?? "grass"),
     );
+    widenPaletteRuns(range, width, pal);
     for (const [i, p] of pal) palette.set(i, p);
     // Featured cells: a low single each.
     for (const i of range)
@@ -581,130 +688,120 @@ export function packRanges(
       return false;
     };
 
-    // 1. Massifs, best first.
+    // 1. Massifs, best first: 3x2 and 2x2 blocks and, where the art
+    // exists, tall 2x3 pieces (a two-cell-wide north-south ridge seen
+    // end-on). A massif never leaves a single free cell of its palette
+    // beside it in a row: the rows left over are cut into ridges of two
+    // and three cells, never singles.
     const offers: {
       x: number;
       y: number;
       cols: 2 | 3;
+      rows: 2 | 3;
       score: number;
       sides: number;
     }[] = [];
+    const fitsAt = (
+      x: number,
+      y: number,
+      cols: number,
+      rows: number,
+      p: MassifPalette,
+    ): boolean => {
+      for (let r = 0; r < rows; r += 1) {
+        for (let c = 0; c < cols; c += 1)
+          if (!free(x + c, y + r, p) || seam(x + c, y + r)) return false;
+        // No orphan: a free cell beside the massif has a free neighbour
+        // on its far side, so its row run stays two cells or more.
+        if (free(x - 1, y + r, p) && !free(x - 2, y + r, p)) return false;
+        if (free(x + cols, y + r, p) && !free(x + cols + 1, y + r, p))
+          return false;
+      }
+      return true;
+    };
     for (const i of range) {
       const x = i % width;
       const y = Math.floor(i / width);
       const p = pal.get(i) ?? "granite";
-      for (const cols of [3, 2] as const) {
-        if (massifPieces(p, "massif", cols, 2).length === 0) continue;
-        let fits = true;
-        for (let r = 0; r < 2 && fits; r += 1)
-          for (let c = 0; c < cols && fits; c += 1)
-            if (!free(x + c, y + r, p) || seam(x + c, y + r)) fits = false;
-        if (!fits) continue;
+      for (const [cols, rows] of [
+        [3, 2],
+        [2, 2],
+        [2, 3],
+      ] as const) {
+        if (!has(p, "massif", cols, rows, openBehind(x, y, cols))) continue;
+        if (!fitsAt(x, y, cols, rows, p)) continue;
         let sides = 0;
-        for (let r = 0; r < 2; r += 1) {
+        for (let r = 0; r < rows; r += 1) {
           if (rock(x - 1, y + r)) sides += 1;
           if (rock(x + cols, y + r)) sides += 1;
         }
         let behind = 0;
         for (let c = 0; c < cols; c += 1) if (rock(x + c, y - 1)) behind += 1;
         // A massif filling the whole width of a band of the range (open
-        // ground on both sides) is a block in a north-south column; such
-        // bands read better as ridges, humps and spines.
-        const band = sides === 0 ? BAND_PENALTY : 0;
+        // ground on both sides) is one of the band's summits.
+        const band = sides === 0 ? BAND_BONUS[rows] : 0;
         const score =
           (cols === 3 ? 1 : 0.6) +
-          0.5 * (sides / 4) +
+          0.5 * (sides / (2 * rows)) +
           0.45 * (behind / cols) +
-          0.9 * unit(x, y, 0x30 + cols) -
+          0.9 * unit(x, y, 0x30 + cols + rows * 4) +
           band;
-        offers.push({ x, y, cols, score, sides });
+        offers.push({ x, y, cols, rows, score, sides });
       }
     }
     offers.sort((a, b) => b.score - a.score || a.y - b.y || a.x - b.x);
+    const talls: { x: number; y: number }[] = [];
     for (const o of offers) {
       const p = pal.get(o.y * width + o.x) ?? "granite";
       if (o.score < (MASSIF_THRESHOLD[p][o.cols - 2] ?? 0)) continue;
-      let fits = true;
-      for (let r = 0; r < 2 && fits; r += 1)
-        for (let c = 0; c < o.cols && fits; c += 1)
-          if (!free(o.x + c, o.y + r, p)) fits = false;
-      if (!fits) continue;
-      // A massif right on top of another sharing a column (a range two
+      if (!fitsAt(o.x, o.y, o.cols, o.rows, p)) continue;
+      // A massif right on top of another on the same columns (a range two
       // or three cells wide running north-south) stacks into a vertical
       // rhythm of equal blocks: usually leave the row between to ridges,
-      // humps and saddles instead.
+      // humps and saddles instead. Massifs offset by a column (a band
+      // running diagonally, or staggered in a wide range) may touch: their
+      // summits step sideways like a real ridge line.
       let stacked = false;
       for (let c = 0; c < o.cols; c += 1)
-        for (const y of [o.y - 1, o.y + 2]) {
+        for (const y of [o.y - 1, o.y + o.rows]) {
           const s = slotAt.get(y * width + o.x + c);
-          if (s !== undefined && s.rows === 2 && s.cols > 1) stacked = true;
+          if (
+            s !== undefined &&
+            s.rows >= 2 &&
+            s.x === o.x &&
+            s.cols === o.cols
+          )
+            stacked = true;
         }
       // In a narrow band (rock on at most one side) never; in the bulk of
       // a wide range usually not.
       if (stacked && (o.sides < 2 || unit(o.x, o.y, 0x35) < STACK_SKIP))
         continue;
+      // The tall 2x3 pieces are few (one or two per palette) and easy to
+      // recognise: keep them TALL_SPACING cells apart (divided by the
+      // number of sprites) within the range.
+      if (o.rows === 3) {
+        const gap = Math.ceil(
+          TALL_SPACING / massifPieces(p, "massif", 2, 3).length,
+        );
+        const near = talls.some(
+          (t) => Math.max(Math.abs(t.x - o.x), Math.abs(t.y - o.y)) < gap + 3,
+        );
+        if (near) continue;
+        talls.push({ x: o.x, y: o.y });
+      }
       take({
         palette: p,
         x: o.x,
         y: o.y,
         cols: o.cols,
-        rows: 2,
+        rows: o.rows,
         kinds: [["massif", 1]],
         openBehind: openBehind(o.x, o.y, o.cols),
       });
     }
 
-    // A single is sometimes a peak: often with rock behind it (inside the
-    // range, or at the front end of a spur), now and then on the rim; at
-    // a seam always low.
-    const singleKinds = (
-      p: MassifPalette,
-      x: number,
-      y: number,
-    ): readonly (readonly [MassifPieceKind, number])[] => {
-      if (seam(x, y) || !has(p, "peak", 1, 1, !rock(x, y - 1)))
-        return SINGLE_KINDS[p];
-      const weight = rock(x, y - 1) ? PEAK_WEIGHT : PEAK_WEIGHT / 3;
-      return [...SINGLE_KINDS[p], ["peak", weight]];
-    };
-
-    // 2. Spines: a one-cell-wide north-south run (no free rock of its
-    // palette west or east of it) is cut into 1x2 spines from the bottom
-    // up, so its foot is a spine and an odd cell is left at its back end
-    // (a single, often a peak). A spine raises up to 48 px, so the back
-    // end of a column with open ground behind keeps a low single there.
-    const narrow = (x: number, y: number, p: MassifPalette): boolean =>
-      free(x, y, p) && !seam(x, y) && !free(x - 1, y, p) && !free(x + 1, y, p);
-    for (const i of [...range].reverse()) {
-      const x = i % width;
-      const yb = Math.floor(i / width);
-      const p = pal.get(i) ?? "granite";
-      if (!narrow(x, yb, p) || !narrow(x, yb - 1, p)) continue;
-      // Only from the foot of a run: the cell below is not narrow rock.
-      if (narrow(x, yb + 1, p)) continue;
-      let y = yb;
-      while (narrow(x, y, p) && narrow(x, y - 1, p)) {
-        const open = openBehind(x, y - 1, 1);
-        if (!has(p, "spine", 1, 2, open)) break;
-        take({
-          palette: p,
-          x,
-          y: y - 1,
-          cols: 1,
-          rows: 2,
-          kinds: [["spine", 1]],
-          openBehind: open,
-        });
-        // Usually a single (often a peak) between two spines, so a long
-        // column reads as summits and saddles, not one sprite repeated.
-        // Always when the palette has one spine only: two of one sprite
-        // in a row would read as pasted.
-        const one = massifPieces(p, "spine", 1, 2).length < 2;
-        y -= one || unit(x, y, 0x36) < SPINE_GAP ? 3 : 2;
-      }
-    }
-
-    // 3. Runs of each row: ridges, humps and singles.
+    // 2. Runs of each row: ridges and humps (singles only as a fallback).
     const rows = new Map<number, number[]>();
     for (const i of range) {
       const y = Math.floor(i / width);
@@ -734,37 +831,58 @@ export function packRanges(
         };
         const canRidge = (x: number, cols: 2 | 3): boolean => {
           for (let c = 0; c < cols; c += 1) if (seam(x + c, y)) return false;
-          return has(p, "ridge", cols, 1, openBehind(x, y, cols));
-        };
-        let x = x0;
-        for (const cols of cutRun(x0, y, length, canRidge, seamAbove)) {
+          // On an open rim only the few low ridges fit; with fewer than two
+          // of them the rim takes low humps instead of one ridge repeated.
           const open = openBehind(x, y, cols);
+          return has(p, "ridge", cols, 1, open, open ? 2 : 1);
+        };
+        const lowTriple = (): boolean => lowKinds(p, 3, false).length > 0;
+        let x = x0;
+        for (const cols of cutRun(
+          x0,
+          y,
+          length,
+          canRidge,
+          seamAbove,
+          lowTriple,
+        )) {
+          const open = openBehind(x, y, cols);
+          let frontOpen = true;
+          for (let c = 0; c < cols; c += 1)
+            if (rock(x + c, y + 1)) frontOpen = false;
           let kinds: readonly (readonly [MassifPieceKind, number])[];
-          if (cols === 1) kinds = singleKinds(p, x, y);
-          else if (cols === 3) kinds = [["ridge", 1]];
+          if (cols === 1) kinds = SINGLE_KINDS[p];
+          else if (cols === 3)
+            kinds = canRidge(x, 3) ? [["ridge", 1]] : lowKinds(p, 3, frontOpen);
           else {
             let allOpen = true;
-            let frontOpen = true;
-            for (let c = 0; c < cols; c += 1) {
+            for (let c = 0; c < cols; c += 1)
               if (rock(x + c, y - 1)) allOpen = false;
-              if (rock(x + c, y + 1)) frontOpen = false;
-            }
             // Right in front of a tall piece of the same two columns (a
             // range two cells wide running north-south), often a low
             // saddle, so the column reads as peaks and saddles, not a
-            // stack of towers.
+            // stack of towers; always in a band between two massifs.
             const behind = slotAt.get((y - 1) * width + x);
             const stacked =
               behind !== undefined &&
               behind.x === x &&
               behind.cols === 2 &&
               behind.kinds.some(([k]) => k === "massif" || k === "ridge");
+            const ahead = slotAt.get((y + 1) * width + x);
+            const saddle =
+              stacked &&
+              ahead !== undefined &&
+              ahead.x === x &&
+              ahead.cols === 2 &&
+              ahead.rows >= 2;
             const low =
               !canRidge(x, 2) ||
+              saddle ||
               (allOpen && unit(x, y, 0x41) < 0.45) ||
               (stacked && unit(x, y, 0x43) < 0.6) ||
-              (!allOpen && frontOpen && unit(x, y, 0x42) < 0.3);
-            kinds = low ? lowPairKinds(p, frontOpen) : [["ridge", 1]];
+              (!allOpen && frontOpen && unit(x, y, 0x42) < 0.3) ||
+              unit(x, y, 0x44) < LOW_PAIR_RATE[p];
+            kinds = low ? lowKinds(p, 2, frontOpen) : [["ridge", 1]];
           }
           take({ palette: p, x, y, cols, rows: 1, kinds, openBehind: open });
           x += cols;
@@ -774,7 +892,7 @@ export function packRanges(
     }
   }
 
-  // 4. Variants: a hashed pick, never the piece of a near neighbour.
+  // 3. Variants: a hashed pick, never the piece of a near neighbour.
   slots.sort((a, b) => a.y - b.y || a.x - b.x);
   const pieceAt = new Map<number, RangePiece>();
   const pieces: RangePiece[] = [];
@@ -876,7 +994,7 @@ export function packRanges(
         pieceAt.set((slot.y + r) * width + slot.x + c, piece);
   }
 
-  // 5. Back-fills on the joints.
+  // 4. Back-fills on the joints.
   const fills: RangeFill[] = [];
   const plain = (x: number, y: number): boolean => rock(x, y) && y >= 0;
   const fillAsset = (
@@ -915,6 +1033,35 @@ export function packRanges(
           pieceAt.get(below),
           pieceAt.get(below + 1),
         ]);
+        // Deep inside a range (rock behind the joint too) a joint is now
+        // and then a single summit rising between the pieces: the 1x1 peaks
+        // are decoration since bead xaj.20, never structure.
+        const peaks = massifPieces(p, "peak", 1, 1);
+        const deep =
+          plain(x, y - 1) &&
+          plain(x + 1, y - 1) &&
+          same(i - width) &&
+          same(i - width + 1);
+        if (
+          quad.size > 1 &&
+          deep &&
+          peaks.length > 0 &&
+          unit(x, y, 0x57) < PEAK_FILL_RATE[p]
+        ) {
+          const peak = peaks[hash4(x, y, 5, 0x6b) % peaks.length];
+          if (peak !== undefined)
+            fills.push({
+              asset: peak,
+              dx:
+                (x + 1) * CELL -
+                CELL / 2 +
+                Math.round(unit(x, y, 0x58) * 16 - 8),
+              dy: (y + 1) * CELL + 18 - peak.h + peak.footGap,
+              row: y + 1,
+              col: x,
+            });
+          continue;
+        }
         const asset = fillAsset(p, x, y, 1);
         if (
           quad.size > 1 &&
@@ -947,7 +1094,7 @@ export function packRanges(
       });
     }
 
-  // 6. Boulders at the foot of a tall piece's open side: a low piece
+  // 5. Boulders at the foot of a tall piece's open side: a low piece
   // straddling the side, SIDE_REACH px into the open cell, drawn in front.
   for (const piece of pieces) {
     const a = piece.asset;

@@ -1660,5 +1660,437 @@
         "height": 208
       }
     ]
+  },
+  "g5-massif22-a": {
+    "id": "g5-massif22-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "cfd603bc-1286-4ef5-811b-ea3b77d6553e",
+    "submittedAt": "2026-11-15T21:23:05.956Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one huge grey granite mountain seen from the south, as tall as it is wide: it fills almost the whole image, one broad summit with a cream snow cap left of centre a little below the top edge, a long sloping shoulder down to the right, cliffs, ledges and deep gullies down the front, spreading into sloping scree and a ragged foot of a few rounded boulders along the bottom. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-granite/g-massif32-a#0 sha256 7a164eedbbd4fce2554fa9348f21a27ad4b0ae4f427ffc59c2f5965ccd5bc150",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 160,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 45101,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one huge grey granite mountain seen from the south, as tall as it is wide: it fills almost the whole image, one broad summit with a cream snow cap left of centre a little below the top edge, a long sloping shoulder down to the right, cliffs, ledges and deep gullies down the front, spreading into sloping scree and a ragged foot of a few rounded boulders along the bottom. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, separate peaks, spikes, stairs, trees, river, path, dark navy."
+    },
+    "at": "2026-11-15T21:24:02.375Z",
+    "candidates": [
+      {
+        "file": "g5-massif22-a-0.png",
+        "sha256": "4a29c759bcb9df55d6a4cddaa5d92ffe13949d496bd2309dd84075ae34fdcb60",
+        "width": 160,
+        "height": 208
+      }
+    ]
+  },
+  "g5-massif32-a": {
+    "id": "g5-massif32-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "10323733-b589-402d-9dd9-a20a2c17d57c",
+    "submittedAt": "2026-11-15T21:24:02.555Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one huge wide grey granite mountain massif seen from the south: it fills the whole image from the left edge to the right edge, a snowy summit at the left a little below the top edge, a deep rocky saddle in the middle, a lower blunt summit with a little cream snow at the right, cliffs, ledges and gullies down the front, sloping scree and a ragged foot of a few rounded boulders along the bottom. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-granite/g-massif22-d#0 sha256 e9054fea801f3aeda82dd1a2eb45e2c3acce2cb68c2fa8eb7dba1fa2099c3eaf",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 240,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 45102,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one huge wide grey granite mountain massif seen from the south: it fills the whole image from the left edge to the right edge, a snowy summit at the left a little below the top edge, a deep rocky saddle in the middle, a lower blunt summit with a little cream snow at the right, cliffs, ledges and gullies down the front, sloping scree and a ragged foot of a few rounded boulders along the bottom. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, separate peaks, spikes, stairs, trees, river, path, dark navy."
+    },
+    "at": "2026-11-15T21:25:04.352Z",
+    "candidates": [
+      {
+        "file": "g5-massif32-a-0.png",
+        "sha256": "0808944befd4c02a6f68471acbea2e7eb019c63538a51e07fd6cf0661b09ffd4",
+        "width": 240,
+        "height": 208
+      }
+    ]
+  },
+  "g5-tall23-a": {
+    "id": "g5-tall23-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "75e7fc93-7e02-49e3-8479-ca1395678b3f",
+    "submittedAt": "2026-11-15T21:25:04.443Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a long grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, so it is taller than wide in the image: a snowy summit near the top of the image, the crest coming toward the viewer through a rocky saddle to a lower blunt knob, cliffs and ledges on both flanks, widening into sloping scree and a ragged foot of a few rounded boulders at the bottom edge; it fills the full width of the image. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-granite/g-ridge31-b#0 sha256 29706f8de790a9d1171b1fb8b202073c766d47f79b79135d18762699d2c69f83",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 160,
+        "height": 288
+      },
+      "no_background": true,
+      "seed": 45103,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a long grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, so it is taller than wide in the image: a snowy summit near the top of the image, the crest coming toward the viewer through a rocky saddle to a lower blunt knob, cliffs and ledges on both flanks, widening into sloping scree and a ragged foot of a few rounded boulders at the bottom edge; it fills the full width of the image. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, two separate mountains, gap, separate peaks, spikes, stairs, trees, river, path, dark navy."
+    },
+    "at": "2026-11-15T21:26:06.277Z",
+    "candidates": [
+      {
+        "file": "g5-tall23-a-0.png",
+        "sha256": "77a507ed2dc63366e8d21c5f479bf68b3bd6d914479ca3056a7c99c7d8fa1730",
+        "width": 160,
+        "height": 288
+      }
+    ]
+  },
+  "g5-low31-a": {
+    "id": "g5-low31-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "76a621ee-2822-4a21-a7c3-da1ee6519e54",
+    "submittedAt": "2026-11-15T21:26:19.317Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a long low grey granite ridge seen from the south, worn smooth: three or four broad rounded humps of rock of different heights joined into one low mass that fills the full width of the image from the left edge to the right edge, about two thirds of the image tall with empty space above, cracks and ledges, sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-granite/g-round21-a#0 sha256 30f0d871291a9937b7f051496002691e2d841fec46b3c601ebf1d030aa18b22a",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 240,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 45201,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a long low grey granite ridge seen from the south, worn smooth: three or four broad rounded humps of rock of different heights joined into one low mass that fills the full width of the image from the left edge to the right edge, about two thirds of the image tall with empty space above, cracks and ledges, sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, snow, tall peak, separate peaks, spikes, stairs, trees, river, path, dark navy."
+    },
+    "at": "2026-11-15T21:27:36.975Z",
+    "candidates": [
+      {
+        "file": "g5-low31-a-0.png",
+        "sha256": "0498122b4ce51422ce050ffbfa790b5a42fe2646bbebed52485d2c722548efcb",
+        "width": 240,
+        "height": 104
+      }
+    ]
+  },
+  "g5-tall23-b": {
+    "id": "g5-tall23-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "d284b2bd-c354-4a3b-aed8-ade02ff5c0e2",
+    "submittedAt": "2026-11-15T21:27:37.091Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a long grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, so it is taller than wide in the image: a broad rounded summit with a little cream snow near the top of the image, the crest coming toward the viewer over two lower rounded knobs with saddles between, smooth rock slabs and ledges on both flanks, widening into sloping scree and a ragged foot of a few rounded boulders at the bottom edge; it fills the full width of the image. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-granite/g-ridge31-c#0 sha256 049b36691c6b44cc74994681d8ae11b0d3dfabe6059c4b3b4d379a77e0b6b019",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 160,
+        "height": 288
+      },
+      "no_background": true,
+      "seed": 45301,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a long grey granite mountain ridge running straight away from the viewer, seen from the south from slightly above, so it is taller than wide in the image: a broad rounded summit with a little cream snow near the top of the image, the crest coming toward the viewer over two lower rounded knobs with saddles between, smooth rock slabs and ledges on both flanks, widening into sloping scree and a ragged foot of a few rounded boulders at the bottom edge; it fills the full width of the image. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, two separate mountains, gap, separate peaks, spikes, stairs, trees, river, path, dark navy."
+    },
+    "at": "2026-11-15T21:28:28.521Z",
+    "candidates": [
+      {
+        "file": "g5-tall23-b-0.png",
+        "sha256": "21da3f04b365ff4ddbb3001b2fca07aa848121e112b34658d6c8da783cf709df",
+        "width": 160,
+        "height": 288
+      }
+    ]
+  },
+  "g5-massif22-b": {
+    "id": "g5-massif22-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "0d09fb0f-0402-4b84-9097-d3504419ec5c",
+    "submittedAt": "2026-11-15T21:28:28.607Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad low grey granite hill seen from the south, wider than tall: it fills the whole width of the image from the left edge to the right edge but only the lower three quarters of its height, two rounded bare domes of smooth rock, the left one taller, about a quarter of the way down the image with empty space above, slabs, cracks and ledges, sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-granite/g-massif32-c#0 sha256 cb754186b0c0b961d89b3f8846f7f5682c774f7982dd53831a31fb0ad13559b3",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 160,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 45302,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one broad low grey granite hill seen from the south, wider than tall: it fills the whole width of the image from the left edge to the right edge but only the lower three quarters of its height, two rounded bare domes of smooth rock, the left one taller, about a quarter of the way down the image with empty space above, slabs, cracks and ledges, sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, snow, tall peak, separate peaks, spikes, stairs, trees, river, path, dark navy."
+    },
+    "at": "2026-11-15T21:29:46.302Z",
+    "candidates": [
+      {
+        "file": "g5-massif22-b-0.png",
+        "sha256": "2e407ef265703f2390efd6155a97510893002508c2dbeab341209dd67d893c8f",
+        "width": 160,
+        "height": 208
+      }
+    ]
+  },
+  "g5-tall23-c": {
+    "id": "g5-tall23-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "fb8c08d3-3252-481e-9ae5-f4ee586eb495",
+    "submittedAt": "2026-11-15T21:33:27.387Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a long grey granite mountain ridge running straight away from the viewer, taller than wide in the image, with a little empty space above it: a craggy summit with a small cream snow cap a little below the top edge, the crest coming toward the viewer as one rough rocky spine stepping down through two notches, cliffs and ledges on both flanks spreading into sloping scree and a ragged foot of a few rounded boulders at the bottom edge; it fills the full width of the image. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-granite/g-massif32-c#0 sha256 cb754186b0c0b961d89b3f8846f7f5682c774f7982dd53831a31fb0ad13559b3",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 160,
+        "height": 288
+      },
+      "no_background": true,
+      "seed": 45501,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a long grey granite mountain ridge running straight away from the viewer, taller than wide in the image, with a little empty space above it: a craggy summit with a small cream snow cap a little below the top edge, the crest coming toward the viewer as one rough rocky spine stepping down through two notches, cliffs and ledges on both flanks spreading into sloping scree and a ragged foot of a few rounded boulders at the bottom edge; it fills the full width of the image. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, cropped top, round blobs, stacked balls, two separate mountains, gap, separate peaks, spikes, stairs, trees, river, path, dark navy."
+    },
+    "at": "2026-11-15T21:34:24.390Z",
+    "candidates": [
+      {
+        "file": "g5-tall23-c-0.png",
+        "sha256": "6b84e4a8a1bc51331f323a5b18f7898288043638dadd456cfb0800bea1a122c0",
+        "width": 160,
+        "height": 288
+      }
+    ]
+  },
+  "g5-low31-b": {
+    "id": "g5-low31-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "dcbb13d6-7e67-4a33-b331-041442416a92",
+    "submittedAt": "2026-11-15T21:38:21.373Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a long low grey granite ridge seen from the south: a low craggy crest of weathered rock with one blunt knob left of centre and a lower broken shoulder to the right, slabs and cracks, one low mass that fills the full width of the image from the left edge to the right edge, about two thirds of the image tall with empty space above, sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-granite/g4-boulder11-a#1 sha256 29f6f6011731d56007912cc9057c96413621ca72a6a633db7b2b9f97f8eaf457",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 240,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 45601,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a long low grey granite ridge seen from the south: a low craggy crest of weathered rock with one blunt knob left of centre and a lower broken shoulder to the right, slabs and cracks, one low mass that fills the full width of the image from the left edge to the right edge, about two thirds of the image tall with empty space above, sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, snow, tall peak, separate peaks, spikes, stairs, trees, river, path, dark navy."
+    },
+    "at": "2026-11-15T21:39:33.367Z",
+    "candidates": [
+      {
+        "file": "g5-low31-b-0.png",
+        "sha256": "533c829214b34442e494f4b3549b30ad83bd9bd26c8069a8d25b9cc9964ee923",
+        "width": 240,
+        "height": 104
+      }
+    ]
   }
 }
