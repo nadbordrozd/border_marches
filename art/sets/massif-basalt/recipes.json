@@ -407,6 +407,36 @@
       "negative": "hexagonal columns, tall peak, hexagonal columns at the foot, straight vertical foot, box, flat base, trees, river, path, building",
       "notes": "bead xaj.20: ROUNDED 3x1 LOW (basalt, broken lava ridge)",
       "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "b6-tall23-b",
+      "concept": "TALL 2x3 (second basalt end-on ridge, styled from a 3x2 scree massif)",
+      "width": 160,
+      "height": 288,
+      "seed": 36101,
+      "styleImage": {
+        "take": "b5-massif32-scree#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: a long dark volcanic basalt mountain ridge running straight away from the viewer, taller than wide in the image, with a little empty space above it: a broad broken ash-dusted summit a little below the top edge, the crest coming toward the viewer as one rough spine with a notch to a lower ash-dusted shoulder, rough cliffs on both flanks, below them wide sloping aprons of dark scree and rubble tapering to a curved ragged foot of a few boulders at the bottom edge; it fills the full width of the image. Dark slate basalt, pale grey ash dust, near black outline. One solid mass.",
+      "negative": "cropped top, round blobs, stacked balls, two separate mountains, gap, hexagonal columns at the foot, straight vertical foot, box, flat base, trees, river, path, building",
+      "notes": "bead xaj.21: second 2x3 basalt",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "b6-tall23-c",
+      "concept": "TALL 2x3 (second basalt end-on ridge, re-take without an ash streak)",
+      "width": 160,
+      "height": 288,
+      "seed": 36102,
+      "styleImage": {
+        "take": "b5-massif32-scree-b#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: a long dark volcanic basalt mountain ridge running straight away from the viewer, taller than wide in the image, with a little empty space above it: a jagged summit with a little pale ash only on its very top a little below the top edge, the crest coming toward the viewer as one rough spine with a notch to a lower ash-dusted shoulder, rough cliffs on both flanks, below them wide sloping aprons of dark scree and rubble tapering to a curved ragged foot of a few boulders at the bottom edge; it fills the full width of the image. Dark slate basalt, pale grey ash dust, near black outline. One solid mass.",
+      "negative": "ash streak, waterfall, white stripe, two separate mountains, hexagonal columns at the foot, straight vertical foot, box, flat base, trees, river, path, building",
+      "notes": "bead xaj.21: second 2x3 basalt",
+      "styleOptions": "@fullStyle"
     }
   ],
   "outputs": [
@@ -60090,6 +60120,33 @@
       "from": "b5-low31-b#0",
       "width": 240,
       "height": 104
+    },
+    {
+      "path": "public/assets/terrain/massifs/basalt/massif-2x3-b.png",
+      "from": "b6-tall23-c#0",
+      "width": 160,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 7,
+          "width": 160,
+          "height": 279
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 287,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 288,
+          "anchor": "bottom"
+        }
+      ]
     }
   ]
 }

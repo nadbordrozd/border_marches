@@ -318,6 +318,71 @@ describe("generateMap", { timeout: 60_000 }, () => {
     }
   });
 
+  it("breaks straight range and ground edges (xaj.21, 50 seeds)", () => {
+    // Straight runs of one boundary along a cell line: between Mountain
+    // and anything else, and between two grounds on open land. Before bead
+    // xaj.21 seeds 1-20 had 420 range runs of 4+ cells (24 of 8+) and 220
+    // ground runs of 4+; the wobble pass keeps them rare and short.
+    let edges = 0;
+    let long = 0;
+    let veryLong = 0;
+    let ground = 0;
+    let groundLong = 0;
+    for (const seed of SEEDS) {
+      const { map } = gen(seed);
+      const c = (x: number, y: number) => map.cells[y * map.width + x]!;
+      const runs = (
+        label: (x0: number, y0: number, x1: number, y1: number) => string,
+      ): number[] => {
+        const out: number[] = [];
+        for (const vertical of [true, false]) {
+          const lines = vertical ? map.width : map.height;
+          const along = vertical ? map.height : map.width;
+          for (let l = 1; l < lines; l++) {
+            let prev = "";
+            let len = 0;
+            for (let k = 0; k <= along; k++) {
+              const e =
+                k === along
+                  ? ""
+                  : vertical
+                    ? label(l - 1, k, l, k)
+                    : label(k, l - 1, k, l);
+              if (e !== "" && e === prev) len++;
+              else {
+                if (prev !== "") out.push(len);
+                len = e === "" ? 0 : 1;
+              }
+              prev = e;
+            }
+          }
+        }
+        return out;
+      };
+      const rock = runs((x0, y0, x1, y1) => {
+        const a = c(x0, y0).obstacle === "mountain";
+        const b = c(x1, y1).obstacle === "mountain";
+        return a === b ? "" : a ? "A" : "B";
+      });
+      edges += rock.length;
+      long += rock.filter((n) => n > 3).length;
+      veryLong += rock.filter((n) => n > 8).length;
+      const soil = runs((x0, y0, x1, y1) => {
+        const a = c(x0, y0);
+        const b = c(x1, y1);
+        if (a.terrain === "water" || b.terrain === "water") return "";
+        if (a.obstacle === "mountain" || b.obstacle === "mountain") return "";
+        return a.terrain === b.terrain ? "" : `${a.terrain}>${b.terrain}`;
+      });
+      ground += soil.length;
+      groundLong += soil.filter((n) => n > 3).length;
+    }
+    expect(long / edges).toBeLessThan(0.045);
+    // A run beside a town yard or pass mouth may stay (one in 50 maps).
+    expect(veryLong).toBeLessThanOrEqual(2);
+    expect(groundLong / ground).toBeLessThan(0.025);
+  });
+
   it("builds every mountain from 2x2 blocks (50 seeds, plus S and L)", () => {
     // User decision (bead xaj.20): the smallest mountain is 2x2 tiles, so
     // every mountain cell lies in at least one all-mountain 2x2 window.

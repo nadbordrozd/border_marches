@@ -37,6 +37,7 @@ import type { GroundTerrain } from "../../assets/manifest";
 import type { GameMap } from "../../core/map/types";
 import { hash4 } from "./hash";
 import { PALETTES, components, paletteOf, rangePalettes } from "./massif";
+import type { RangeCover } from "./massif";
 import {
   ROAD_COLOURS,
   ROAD_PIXEL,
@@ -62,6 +63,13 @@ export interface GroundSources {
     readonly shallow: readonly PixelImage[];
     readonly deep: readonly PixelImage[];
   };
+  /**
+   * Opaque blocks of every massif piece by manifest key (`blockMask`), so
+   * the scree and rock base follow the pieces' silhouettes (bead xaj.21).
+   * Without them the scree follows the Mountain cells (the bilinear cell
+   * field), as before.
+   */
+  readonly pieceMasks?: ReadonlyMap<string, BlockMask>;
 }
 
 /**
@@ -408,6 +416,255 @@ export const ROCK_BASE = {
   ],
 } as const;
 
+/** Side (px) of the blocks of a piece mask and of the silhouette field. */
+export const ROCK_BLOCK = 4;
+/** Box-blur radius (blocks) of the silhouette field, applied twice. */
+export const ROCK_BLUR = 3;
+/** Radius (blocks) of the closing that joins neighbouring pieces. */
+export const ROCK_CLOSE = 6;
+
+/** Which ROCK_BLOCK x ROCK_BLOCK blocks of a sprite hold paint. */
+export interface BlockMask {
+  /** Size in blocks. */
+  readonly w: number;
+  readonly h: number;
+  /** 1 where at least half the block's pixels are opaque. */
+  readonly bits: Uint8Array;
+}
+
+export function blockMask(image: PixelImage): BlockMask {
+  const w = Math.ceil(image.width / ROCK_BLOCK);
+  const h = Math.ceil(image.height / ROCK_BLOCK);
+  const bits = new Uint8Array(w * h);
+  for (let by = 0; by < h; by += 1)
+    for (let bx = 0; bx < w; bx += 1) {
+      let opaque = 0;
+      for (let y = by * ROCK_BLOCK; y < (by + 1) * ROCK_BLOCK; y += 1)
+        for (let x = bx * ROCK_BLOCK; x < (bx + 1) * ROCK_BLOCK; x += 1)
+          if (
+            x < image.width &&
+            y < image.height &&
+            (image.data[(y * image.width + x) * 4 + 3] ?? 0) > 127
+          )
+            opaque += 1;
+      if (opaque * 2 >= ROCK_BLOCK * ROCK_BLOCK) bits[by * w + bx] = 1;
+    }
+  return { w, h, bits };
+}
+
+/**
+ * The SILHOUETTE FIELD of the ranges (bead xaj.21): which ground blocks the
+ * massif pieces stand on, blurred. A piece counts with the paint inside its
+ * own footprint (what rises above it stands over the row behind, which is
+ * rock, or open ground the scree must not halo); a back-fill or side
+ * boulder with its lower half. The scree's dust, rock floor and rock base
+ * are cut from this field instead of from the Mountain cells, so a range's
+ * rim follows the outline of its pieces, not the cell edge: the ground
+ * shows where a low hump leaves its cell open, and a notch between two
+ * pieces still fills with rock.
+ */
+export interface RockField {
+  /** Size in blocks. */
+  readonly w: number;
+  readonly h: number;
+  /** 0..255. */
+  readonly f: Uint8Array;
+}
+
+export function buildRockField(
+  width: number,
+  height: number,
+  cover: RangeCover,
+  masks: ReadonlyMap<string, BlockMask>,
+): RockField {
+  const per = CELL / ROCK_BLOCK;
+  const w = width * per;
+  const h = height * per;
+  const solid = new Float32Array(w * h);
+  const stamp = (
+    key: string,
+    dx: number,
+    dy: number,
+    fromRow: number,
+    toY: number,
+  ): void => {
+    const mask = masks.get(key);
+    if (mask === undefined) return;
+    const bx0 = Math.round(dx / ROCK_BLOCK);
+    const by0 = Math.round(dy / ROCK_BLOCK);
+    for (let y = fromRow; y < mask.h; y += 1) {
+      const gy = by0 + y;
+      if (gy < 0 || gy >= h || gy * ROCK_BLOCK >= toY) continue;
+      for (let x = 0; x < mask.w; x += 1) {
+        const gx = bx0 + x;
+        if (gx < 0 || gx >= w || mask.bits[y * mask.w + x] !== 1) continue;
+        solid[gy * w + gx] = 1;
+      }
+    }
+  };
+  for (const { asset, x, y } of cover.pieces)
+    stamp(
+      asset.key,
+      x * CELL,
+      y * CELL - asset.up,
+      Math.ceil(asset.up / ROCK_BLOCK),
+      (y + asset.rows) * CELL,
+    );
+  for (const fill of cover.fills)
+    stamp(
+      fill.asset.key,
+      fill.dx,
+      fill.dy,
+      Math.floor(fill.asset.h / ROCK_BLOCK / 2),
+      Infinity,
+    );
+  // Two separable box blurs: roughly a gaussian of ROCK_BLUR blocks.
+  const blur = (src: Float32Array): Float32Array => {
+    const r = ROCK_BLUR;
+    const span = 2 * r + 1;
+    const tmp = new Float32Array(w * h);
+    const last = w - 1;
+    for (let y = 0; y < h; y += 1) {
+      const row = y * w;
+      let sum = 0;
+      for (let x = -r; x <= r; x += 1)
+        sum += src[row + (x < 0 ? 0 : x > last ? last : x)] as number;
+      for (let x = 0; x < w; x += 1) {
+        tmp[row + x] = sum / span;
+        const enter = x + r + 1;
+        const leave = x - r;
+        sum +=
+          (src[row + (enter > last ? last : enter)] as number) -
+          (src[row + (leave < 0 ? 0 : leave)] as number);
+      }
+    }
+    // Columns in row-major order: one running sum per column.
+    const out = new Float32Array(w * h);
+    const sums = new Float32Array(w);
+    const bottom = h - 1;
+    for (let y = -r; y <= r; y += 1) {
+      const row = (y < 0 ? 0 : y > bottom ? bottom : y) * w;
+      for (let x = 0; x < w; x += 1)
+        sums[x] = (sums[x] as number) + (tmp[row + x] as number);
+    }
+    for (let y = 0; y < h; y += 1) {
+      const row = y * w;
+      const enter = y + r + 1;
+      const leave = y - r;
+      const rowIn = (enter > bottom ? bottom : enter) * w;
+      const rowOut = (leave < 0 ? 0 : leave) * w;
+      for (let x = 0; x < w; x += 1) {
+        const sum = sums[x] as number;
+        out[row + x] = sum / span;
+        sums[x] =
+          sum + (tmp[rowIn + x] as number) - (tmp[rowOut + x] as number);
+      }
+    }
+    return out;
+  };
+  // A morphological closing (dilate, then erode) fills the notches and
+  // joints between neighbouring pieces narrower than 2 x ROCK_CLOSE blocks,
+  // so they read as crevices of one mass, without growing the outer rim.
+  // Binary, separable, with sliding counts: O(n) per pass. Cells outside
+  // the map count as rock for the erosion (a range at the map edge keeps
+  // its rim) and as open for the dilation.
+  const morph = (src: Float32Array, grow: boolean): Float32Array => {
+    const r = ROCK_CLOSE;
+    const span = 2 * r + 1;
+    const edge = grow ? 0 : 1;
+    const hit = (count: number): number =>
+      grow ? (count > 0 ? 1 : 0) : count === span ? 1 : 0;
+    const tmp = new Float32Array(w * h);
+    for (let y = 0; y < h; y += 1) {
+      const row = y * w;
+      let count = 0;
+      for (let x = -r; x <= r; x += 1)
+        count += x < 0 || x >= w ? edge : (src[row + x] as number);
+      for (let x = 0; x < w; x += 1) {
+        tmp[row + x] = hit(count);
+        const enter = x + r + 1;
+        const leave = x - r;
+        count +=
+          (enter >= w ? edge : (src[row + enter] as number)) -
+          (leave < 0 ? edge : (src[row + leave] as number));
+      }
+    }
+    const out = new Float32Array(w * h);
+    const counts = new Float32Array(w);
+    for (let y = -r; y <= r; y += 1)
+      for (let x = 0; x < w; x += 1)
+        counts[x] =
+          (counts[x] as number) +
+          (y < 0 || y >= h ? edge : (tmp[y * w + x] as number));
+    for (let y = 0; y < h; y += 1) {
+      const row = y * w;
+      const enter = y + r + 1;
+      const leave = y - r;
+      for (let x = 0; x < w; x += 1) {
+        const count = counts[x] as number;
+        out[row + x] = hit(count);
+        counts[x] =
+          count +
+          (enter >= h ? edge : (tmp[enter * w + x] as number)) -
+          (leave < 0 ? edge : (tmp[leave * w + x] as number));
+      }
+    }
+    return out;
+  };
+  const smooth = blur(blur(morph(morph(solid, true), false)));
+  const f = new Uint8Array(w * h);
+  for (let i = 0; i < w * h; i += 1)
+    f[i] = Math.round(Math.min(1, smooth[i] ?? 0) * 255);
+  return { w, h, f };
+}
+
+/** The silhouette field at world pixel (wx, wy), 0..1, bilinear. */
+export function rockFieldAt(field: RockField, wx: number, wy: number): number {
+  const fx = wx / ROCK_BLOCK - 0.5;
+  const fy = wy / ROCK_BLOCK - 0.5;
+  const x0 = Math.floor(fx);
+  const y0 = Math.floor(fy);
+  const tx = fx - x0;
+  const ty = fy - y0;
+  const at = (x: number, y: number): number =>
+    field.f[
+      Math.min(field.h - 1, Math.max(0, y)) * field.w +
+        Math.min(field.w - 1, Math.max(0, x))
+    ] ?? 0;
+  const top = at(x0, y0) + (at(x0 + 1, y0) - at(x0, y0)) * tx;
+  const bottom = at(x0, y0 + 1) + (at(x0 + 1, y0 + 1) - at(x0, y0 + 1)) * tx;
+  return (top + (bottom - top) * ty) / 255;
+}
+
+const rockFields = new WeakMap<
+  GroundLayout,
+  { masks: GroundSources["pieceMasks"]; field: RockField | null }
+>();
+
+/**
+ * The layout's silhouette field, built once per layout and set of masks
+ * (null without a cover or masks).
+ */
+function rockFieldOf(
+  layout: GroundLayout,
+  sources: GroundSources,
+): RockField | null {
+  const cached = rockFields.get(layout);
+  if (cached !== undefined && cached.masks === sources.pieceMasks)
+    return cached.field;
+  const field =
+    layout.cover !== undefined && sources.pieceMasks !== undefined
+      ? buildRockField(
+          layout.width,
+          layout.height,
+          layout.cover,
+          sources.pieceMasks,
+        )
+      : null;
+  rockFields.set(layout, { masks: sources.pieceMasks, field });
+  return field;
+}
+
 /** The scree tones over one ground. */
 export interface ScreePalette {
   readonly dust: readonly [number, number, number];
@@ -564,6 +821,8 @@ export interface GroundLayout {
   readonly nearMountain: Uint8Array;
   /** On a Mountain cell, 1 + its range's palette index (PALETTES); else 0. */
   readonly rockPalette: Uint8Array;
+  /** The ranges' cover (massif.ts), for the silhouette field; optional. */
+  readonly cover?: RangeCover;
 }
 
 /**
@@ -573,6 +832,7 @@ export interface GroundLayout {
 export function buildGroundLayout(
   map: GameMap,
   roadEnds: readonly (readonly [number, number])[] = [],
+  cover?: RangeCover,
 ): GroundLayout {
   const { width, height } = map;
   const n = width * height;
@@ -684,6 +944,7 @@ export function buildGroundLayout(
     mountain,
     nearMountain,
     rockPalette,
+    ...(cover === undefined ? {} : { cover }),
   };
 }
 
@@ -704,6 +965,7 @@ export function paintGround(
 ): void {
   const textures = GROUND_RANK.map((terrain) => sources.textures[terrain]);
   const screes = screePalettes(sources);
+  const silhouette = rockFieldOf(layout, sources);
   const cx0 = Math.max(0, Math.floor(x0 / CELL));
   const cy0 = Math.max(0, Math.floor(y0 / CELL));
   const cx1 = Math.min(layout.width - 1, Math.floor((x0 + w - 1) / CELL));
@@ -830,22 +1092,22 @@ export function paintGround(
             const tex = textures[rank];
             if (tex !== undefined) sample(o, tex, wx, wy);
             if (scree) {
-              const field = cellField(
-                layout.mountain,
-                layout.width,
-                layout.height,
-                wx + 0.5,
-                wy + 0.5,
-              );
-              const tier = screeAt(field.f, wx, wy);
+              const f =
+                silhouette === null
+                  ? cellField(
+                      layout.mountain,
+                      layout.width,
+                      layout.height,
+                      wx + 0.5,
+                      wy + 0.5,
+                    ).f
+                  : rockFieldAt(silhouette, wx + 0.5, wy + 0.5);
+              const tier = screeAt(f, wx, wy);
               const palette = screes[rank];
               if (tier !== 0 && palette !== undefined) {
                 if (tier === 2) blend(o, palette.rock, SCREE.rockAlpha);
                 else blend(o, palette.dust, SCREE.alpha);
-                if (
-                  tier === 2 &&
-                  field.f > ROCK_BASE.threshold + rockWave(wx, wy)
-                ) {
+                if (tier === 2 && f > ROCK_BASE.threshold + rockWave(wx, wy)) {
                   const base = rockTone(layout, wx + 0.5, wy + 0.5);
                   if (base !== undefined) blend(o, base, ROCK_BASE.alpha);
                 }

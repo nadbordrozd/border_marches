@@ -15,7 +15,8 @@
  *             along the map edge, spurs, and passes (gen/borders.ts)
  * 6. clusters forests and mountain groups inside zones, clean-up, pockets,
  *             and the 2x2 rule: every mountain cell lies in an all-mountain
- *             2x2 block (gen/clusters.ts)
+ *             2x2 block (gen/clusters.ts); then no range or ground edge
+ *             runs straight for more than three cells (gen/wobble.ts)
  * 7. objects  mines, roads, pickups, guards (gen/objects.ts)
  *
  * Every tunable number lives in {@link DEFAULT_GEN_CONFIG} (gen/config.ts).
@@ -36,6 +37,7 @@ import { placeObjects, placeTowns } from "./gen/objects.ts";
 import { O, TERRAIN_OF, newState } from "./gen/state.ts";
 import type { Connection, PassInfo, ZoneInfo } from "./gen/state.ts";
 import { mergeSmallRegions, paintTerrain } from "./gen/terrain.ts";
+import { wobbleEdges } from "./gen/wobble.ts";
 import { markDeep, placeWater, tidyWater } from "./gen/water.ts";
 import { layoutZones } from "./gen/zones.ts";
 
@@ -120,6 +122,9 @@ export function generateMapWithInfo(
     if (squared + fixDiagonals(st) === 0) break;
     resolvePockets(st);
   }
+  // Ragged outlines: break every straight range or ground edge (xaj.21).
+  wobbleEdges(st);
+  resolvePockets(st);
   squareMountains(st, false);
   mergeSmallRegions(st);
   markDeep(st);

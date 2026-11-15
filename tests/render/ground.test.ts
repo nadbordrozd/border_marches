@@ -10,13 +10,20 @@ import {
   GROUND_RANK,
   paintGround,
   ROCK_BASE,
+  blockMask,
+  buildRockField,
+  rockFieldAt,
   spillReach,
   SPILL,
 } from "../../src/render/map/ground.ts";
 import type { GroundSources, PixelImage } from "../../src/render/map/ground.ts";
 import { paintFog } from "../../src/render/map/fog.ts";
 import { createMap } from "../../src/core/map/types.ts";
-import type { GroundTerrain } from "../../src/assets/manifest.ts";
+import type {
+  GroundTerrain,
+  MassifPieceAsset,
+} from "../../src/assets/manifest.ts";
+import type { RangeCover } from "../../src/render/map/massif.ts";
 
 /** A flat 80 x 80 raster of one colour. */
 const flat = (r: number, g: number, b: number): PixelImage => {
@@ -177,5 +184,55 @@ describe("rock base", () => {
     // The middle cell's centre: mostly the granite base tone.
     const o = (40 * 80 + 40) * 4;
     expect(Math.abs((out[o] ?? 0) - ROCK_BASE.tones[0][0])).toBeLessThan(40);
+  });
+});
+
+describe("silhouette field (xaj.21)", () => {
+  // One 2x1 hump that covers only the left half of its footprint.
+  const asset = {
+    key: "test-hump",
+    w: 160,
+    h: 104,
+    up: 24,
+    rows: 1,
+    cols: 2,
+  } as unknown as MassifPieceAsset;
+  const half = new Uint8ClampedArray(160 * 104 * 4);
+  for (let y = 30; y < 96; y += 1)
+    for (let x = 0; x < 80; x += 1) half[(y * 160 + x) * 4 + 3] = 255;
+  const masks = new Map([
+    ["test-hump", blockMask({ width: 160, height: 104, data: half })],
+  ]);
+  const cover = {
+    pieces: [{ asset, x: 1, y: 1 }],
+    fills: [],
+    palette: new Map(),
+    pieceAt: new Map(),
+  } as unknown as RangeCover;
+
+  it("is high under a piece's paint and low where its cell stays open", () => {
+    const field = buildRockField(4, 3, cover, masks);
+    // Inside the painted half of the footprint (cell 1, 1).
+    expect(rockFieldAt(field, 120, 130)).toBeGreaterThan(0.8);
+    // The unpainted half (cell 2, 1) is a Mountain cell but shows ground.
+    expect(rockFieldAt(field, 230, 130)).toBeLessThan(0.1);
+    // Paint above the footprint (the up band) does not count.
+    expect(rockFieldAt(field, 120, 60)).toBeLessThan(0.3);
+  });
+
+  it("cuts the scree from the silhouette when the masks are given", () => {
+    const map = createMap(4, 3, 1);
+    map.cells[5]!.obstacle = "mountain";
+    map.cells[6]!.obstacle = "mountain";
+    const layout = buildGroundLayout(map, [], cover);
+    const sources: GroundSources = { ...SOURCES, pieceMasks: masks };
+    const out = new Uint8ClampedArray(80 * 80 * 4);
+    // The open half of the hump's footprint: plain grass, no scree.
+    paintGround(layout, sources, 160, 80, 80, 80, out);
+    expect(pixel(out, 80, 70, 50)).toEqual(COLOURS.grass);
+    // Without masks the cell field puts scree there, as before.
+    const old = new Uint8ClampedArray(80 * 80 * 4);
+    paintGround(layout, SOURCES, 160, 80, 80, 80, old);
+    expect(pixel(old, 80, 70, 50)).not.toEqual(COLOURS.grass);
   });
 });

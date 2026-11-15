@@ -494,6 +494,111 @@
       "subject": "Subject: a long low grey granite ridge seen from the south: a low craggy crest of weathered rock with one blunt knob left of centre and a lower broken shoulder to the right, slabs and cracks, one low mass that fills the full width of the image from the left edge to the right edge, about two thirds of the image tall with empty space above, sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass.",
       "negative": "snow, tall peak, separate peaks, spikes, stairs, trees, river, path, building, dark navy",
       "notes": "bead xaj.20: ROUNDED 3x1 LOW (granite, craggy low ridge)"
+    },
+    {
+      "id": "g6-massif22-dome",
+      "concept": "MASSIF 2x2 (granite, snowless: rounded bare domes and slabs)",
+      "endpoint": "generate-image-v2",
+      "width": 160,
+      "height": 208,
+      "seed": 46101,
+      "styleImage": {
+        "take": "g-massif32-c#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: one big grey granite mountain seen from the south, as tall as it is wide: it fills almost the whole image, a great rounded bare dome of smooth rock left of centre a little below the top edge with a lower rounded dome beside it at the right, long curved slabs and sheer smooth faces with a few cracks, spreading into sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass.",
+      "negative": "snow, white cap, sharp peak, separate peaks, spikes, stairs, trees, river, path, building, dark navy",
+      "notes": "bead xaj.21: snowless granite 2x2 sample"
+    },
+    {
+      "id": "g6-massif32-forest",
+      "concept": "MASSIF 3x2 (granite, snowless: cliffs with forested shoulders)",
+      "endpoint": "generate-image-v2",
+      "width": 240,
+      "height": 208,
+      "seed": 46102,
+      "styleImage": {
+        "take": "g5-massif22-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: one huge wide grey granite mountain massif seen from the south: it fills the whole image from the left edge to the right edge, a blunt bare rocky summit right of centre a little below the top edge, a lower broad shoulder at the left, steep grey cliffs and ledges down the front, small clumps of dark green pine trees on the ledges and shoulders, spreading into sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass.",
+      "negative": "snow, white cap, separate peaks, spikes, stairs, river, path, building, dark navy, forest covering the whole mountain",
+      "notes": "bead xaj.21: snowless granite 3x2 sample"
+    },
+    {
+      "id": "g6-tall23-b",
+      "concept": "TALL 2x3 (second granite end-on ridge, styled from a 3x2 massif)",
+      "endpoint": "generate-image-v2",
+      "width": 160,
+      "height": 288,
+      "seed": 46103,
+      "styleImage": {
+        "take": "g5-massif32-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: a long grey granite mountain ridge running straight away from the viewer, taller than wide in the image, with a little empty space above it: a broad bare rocky summit without snow a little below the top edge, the crest coming toward the viewer as one rough continuous spine through a shallow notch to a lower blunt shoulder, cliffs, slabs and ledges on both flanks spreading into sloping scree and a ragged foot of a few rounded boulders at the bottom edge; it fills the full width of the image. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass.",
+      "negative": "snow, cropped top, round blobs, stacked balls, two separate mountains, gap, separate peaks, spikes, stairs, trees, river, path, building, dark navy",
+      "notes": "bead xaj.21: second 2x3 granite"
+    },
+    {
+      "id": "g6-massif22-shoulder",
+      "concept": "MASSIF 2x2 (granite, snowless: forested shoulder)",
+      "endpoint": "generate-image-v2",
+      "width": 160,
+      "height": 208,
+      "seed": 46201,
+      "styleImage": {
+        "take": "g6-massif32-forest#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: one big grey granite mountain seen from the south, as tall as it is wide: it fills almost the whole image, a blunt bare rocky top right of centre a little below the top edge, a broad rounded shoulder sloping down to the left with small clumps of dark green pine trees on its ledges, steep cliffs and ledges down the front, spreading into sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass.",
+      "negative": "snow, white cap, separate peaks, spikes, stairs, river, path, building, dark navy, forest covering the whole mountain",
+      "notes": "bead xaj.21: snowless granite 2x2"
+    },
+    {
+      "id": "g6-massif22-slab",
+      "concept": "MASSIF 2x2 (granite, snowless: tilted slab crag)",
+      "endpoint": "generate-image-v2",
+      "width": 160,
+      "height": 208,
+      "seed": 46202,
+      "styleImage": {
+        "take": "g5-massif32-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: one big grey granite crag seen from the south, as tall as it is wide: it fills almost the whole image, a great tilted slab of bare rock rising from the right to a jagged blunt top at the left a little below the top edge, cracked smooth faces and a few ledges with tufts of green grass, spreading into sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass.",
+      "negative": "snow, white cap, separate peaks, spikes, stairs, trees, river, path, building, dark navy",
+      "notes": "bead xaj.21: snowless granite 2x2"
+    },
+    {
+      "id": "g6-massif32-dome",
+      "concept": "MASSIF 3x2 (granite, snowless: row of rounded domes)",
+      "endpoint": "generate-image-v2",
+      "width": 240,
+      "height": 208,
+      "seed": 46203,
+      "styleImage": {
+        "take": "g6-massif22-dome#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: one huge wide grey granite mountain massif seen from the south: it fills the whole image from the left edge to the right edge, three great rounded bare domes of smooth rock of different heights, the tallest left of centre a little below the top edge, deep clefts between them, long curved slabs and sheer smooth faces with a few cracks, spreading into sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass.",
+      "negative": "snow, white cap, sharp peak, spikes, stairs, trees, river, path, building, dark navy",
+      "notes": "bead xaj.21: snowless granite 3x2"
+    },
+    {
+      "id": "g6-massif32-cliff",
+      "concept": "MASSIF 3x2 (granite, snowless: broken cliff wall with grassy ledges)",
+      "endpoint": "generate-image-v2",
+      "width": 240,
+      "height": 208,
+      "seed": 46204,
+      "styleImage": {
+        "take": "g-massif22-c#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: one huge wide grey granite mountain seen from the south: it fills the whole image from the left edge to the right edge, a long broken summit ridge of bare rock with a higher blunt knob at the right a little below the top edge, a lower notched crest to the left, a wall of cracked cliffs with grassy green ledges and a few small bushes, spreading into sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass.",
+      "negative": "snow, white cap, separate peaks, spikes, stairs, river, path, building, dark navy",
+      "notes": "bead xaj.21: snowless granite 3x2"
     }
   ],
   "outputs": [
@@ -5985,6 +6090,195 @@
           "op": "pad",
           "width": 240,
           "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-2x2-e.png",
+      "from": "g6-massif22-dome#0",
+      "width": 160,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 6,
+          "width": 160,
+          "height": 193
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 201,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-3x2-e.png",
+      "from": "g6-massif32-forest#0",
+      "width": 240,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 21,
+          "width": 240,
+          "height": 176
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-2x3-b.png",
+      "from": "g6-tall23-b#0",
+      "width": 160,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 33,
+          "width": 160,
+          "height": 198
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 206,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 288,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-2x2-f.png",
+      "from": "g6-massif22-shoulder#0",
+      "width": 160,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 21,
+          "width": 160,
+          "height": 176
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 184,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-2x2-g.png",
+      "from": "g6-massif22-slab#0",
+      "width": 160,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 8,
+          "width": 160,
+          "height": 183
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 191,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-3x2-f.png",
+      "from": "g6-massif32-dome#0",
+      "width": 240,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 6,
+          "width": 240,
+          "height": 193
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 201,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-3x2-g.png",
+      "from": "g6-massif32-cliff#0",
+      "width": 240,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 15,
+          "width": 240,
+          "height": 174
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 182,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 208,
           "anchor": "bottom"
         }
       ]

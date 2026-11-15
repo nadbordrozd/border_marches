@@ -9,7 +9,7 @@ D=public/assets/terrain/doodads
 list() { ls "$@" | tr '\n' ',' | sed 's/,$//'; }
 sheet() { # palette ground1 ground2
   node art/review/strip-sheet.mjs "docs/art/sheets/massif-$1.png" \
-    "$2=$(list $M/$1/massif-*.png $M/$1/spine-*.png)" \
+    "$2=$(list $M/$1/massif-*.png $M/$1/plateau-*.png $M/$1/spine-*.png 2>/dev/null)" \
     "$3=$(list $M/$1/ridge-*.png)" \
     "$2=$(list $M/$1/crag-*.png $M/$1/peak-*.png $M/$1/rounded-*.png $M/$1/foothill-*.png $M/$1/mine-*.png 2>/dev/null)"
 }

@@ -19,6 +19,13 @@ export interface GenConfig {
     warp: number;
     /** Feature size of the warp noise, as a fraction of the zone radius. */
     warpScale: number;
+    /**
+     * Amplitude (cells) of a fine warp that wobbles zone borders every few
+     * cells, so no border runs straight for long (bead xaj.21).
+     */
+    fineWarp: number;
+    /** Feature size (cells) of the fine warp. */
+    fineWarpScale: number;
     /** Lloyd relaxation rounds for the middle-zone seeds. */
     relax: number;
     /** Chance of one extra connection (a loop) beyond the spanning tree. */
@@ -88,6 +95,15 @@ export interface GenConfig {
     spurRate: number;
     /** Spur length in cells. */
     spurLength: readonly [number, number];
+  };
+
+  wobble: {
+    /** Longest straight run (cells) of a range edge or ground edge. */
+    maxRun: number;
+    /** Passes over the map (a feature can make a new run). */
+    rounds: number;
+    /** Share of range-edge breaks tried as a notch before a bump. */
+    notchShare: number;
   };
 
   passes: {
@@ -177,6 +193,8 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
   zones: {
     warp: 0.42,
     warpScale: 0.9,
+    fineWarp: 1.5,
+    fineWarpScale: 3,
     relax: 2,
     loopChance: { S: 0, M: 0.35, L: 0.6 },
     minConnectBorder: 5,
@@ -221,6 +239,12 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     edgeSwell: 0.7,
     spurRate: 0.035,
     spurLength: [2, 4],
+  },
+
+  wobble: {
+    maxRun: 3,
+    rounds: 4,
+    notchShare: 0.45,
   },
 
   passes: {

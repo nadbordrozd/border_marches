@@ -19,6 +19,7 @@ import {
   assetUrl,
 } from "../../assets/manifest";
 import type { GroundTerrain, ImageAsset } from "../../assets/manifest";
+import { blockMask } from "./ground";
 import type { GroundSources, PixelImage } from "./ground";
 
 export interface MapAssets {
@@ -119,11 +120,19 @@ export async function loadMapAssets(base = "/"): Promise<MapAssets> {
     WATER_TILES.filter((tile) => tile.depth === depth).map((tile) =>
       readPixels(get(tile), tile.w, tile.h),
     );
+  // The massif pieces' silhouettes for the scree (bead xaj.21).
+  const pieceMasks = new Map(
+    MASSIF_PIECES.map((asset) => [
+      asset.key,
+      blockMask(readPixels(get(asset), asset.w, asset.h)),
+    ]),
+  );
   return {
     images,
     ground: {
       textures,
       water: { shallow: water("shallow"), deep: water("deep") },
+      pieceMasks,
     },
   };
 }

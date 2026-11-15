@@ -77,7 +77,9 @@ describe("massif pieces (xaj.14)", () => {
       expect(piece.w).toBe(piece.cols * CELL_PX);
       expect(piece.h).toBe(piece.rows * CELL_PX + piece.up);
       expect(piece.up).toBe(
-        ["massif", "ridge", "peak", "spine"].includes(piece.kind) ? 48 : 24,
+        ["massif", "ridge", "peak", "spine", "plateau"].includes(piece.kind)
+          ? 48
+          : 24,
       );
       const measured = opaqueBox(piece.path);
       expect({ key: piece.key, ...measured }).toEqual({

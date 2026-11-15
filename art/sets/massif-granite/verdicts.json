@@ -313,5 +313,40 @@
     "verdict": "ACCEPTED",
     "notes": "low 3x1 granite ridge of weathered slabs and boulders, a second low 3x1 beside the hump ridge; light only just from the left (+1.6 luma), readable",
     "at": "2026-11-15T21:39:49.927Z"
+  },
+  "g6-massif22-dome#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snowless 2x2: two rounded bare granite domes over sheer slab cliffs, boulder foot; right side cut by the image edge (rock must meet its east side)",
+    "at": "2026-11-15T22:01:16.202Z"
+  },
+  "g6-massif32-forest#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snowless 3x2: broad blunt summit with pine clumps on its ledges and shoulders, lit left; new silhouette in the granite set",
+    "at": "2026-11-15T22:01:16.247Z"
+  },
+  "g6-tall23-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "second granite 2x3 (styled from the 3x2 g5-massif32-a): snowless stepped cliff ridge seen end-on, two tiers and a scree foot; fills the width",
+    "at": "2026-11-15T22:01:16.291Z"
+  },
+  "g6-massif22-shoulder#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snowless 2x2: blunt bare top with pine clumps on the ledges of its left shoulder; right side cut by the image edge (rock must meet its east side)",
+    "at": "2026-11-15T22:05:53.559Z"
+  },
+  "g6-massif22-slab#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snowless 2x2: a tilted slab crag with grassy ledges and a boulder foot, narrower than its footprint; a new silhouette",
+    "at": "2026-11-15T22:05:53.602Z"
+  },
+  "g6-massif32-dome#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snowless 3x2: three rounded bare domes over slab cliffs; the wide sibling of g6-massif22-dome (same family, kept apart)",
+    "at": "2026-11-15T22:05:53.646Z"
+  },
+  "g6-massif32-cliff#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snowless 3x2: broken cliff wall with grassy green ledges, blunt knob at the right, boulder foot; a new granite silhouette",
+    "at": "2026-11-15T22:08:55.935Z"
   }
 }

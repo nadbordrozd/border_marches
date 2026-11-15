@@ -29,9 +29,11 @@ import type { GroundLayout } from "./ground";
 import { hashUnit } from "./hash";
 import { doodadArt } from "./doodad-art";
 import { doodadSpecs } from "./doodads";
+import { packRanges } from "./massif";
 import {
   compareEntries,
   doodadEntries,
+  featuredCells,
   objectEntries,
   terrainEntries,
   unitEntry,
@@ -303,7 +305,12 @@ export function createMapView(
       terrainForeground = [];
       return;
     }
-    layout = buildGroundLayout(map, roadEnds());
+    // The scree follows the pieces' silhouettes (bead xaj.21).
+    layout = buildGroundLayout(
+      map,
+      roadEnds(),
+      packRanges(map, featuredCells(map, objects)),
+    );
     const entries = [
       ...terrainEntries(map, objects),
       ...doodadEntries(map, objects, layout),

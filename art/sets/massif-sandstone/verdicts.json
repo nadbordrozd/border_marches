@@ -358,5 +358,70 @@
     "verdict": "ACCEPTED",
     "notes": "low 3x2 fluted hill for the back rim (rises 13 px once seated), whole silhouette; a widened twin of its style image massif-2x2-f, so in the fluted family and kept 5 cells from it",
     "at": "2026-11-15T21:41:52.387Z"
+  },
+  "s6-plateau33-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x3 plateau interior: broad flat striped table with a central gully notch and scree fans, low (top inside the footprint); right side cut by the image edge, so rock must meet its east side",
+    "at": "2026-11-15T22:00:43.942Z"
+  },
+  "s6-plateau32-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x2 plateau interior: level table with a winding gully and two worn knobs on top, fluted cliffs, low rise; reads as one eroded plateau surface",
+    "at": "2026-11-15T22:00:43.985Z"
+  },
+  "s6-low31-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x1 back edge: one long low striped bench with shallow notches, rises below the footprint top; replaces the pebble-like 2x1 humps on the back rim",
+    "at": "2026-11-15T22:00:44.029Z"
+  },
+  "s6-tall23-b#0": {
+    "verdict": "REJECTED",
+    "notes": "the S-curved crest over a fluted lower lobe reads as stacked blobs and a worm, the lesson of s4 cuesta and s5 tall-b again",
+    "at": "2026-11-15T22:00:44.071Z"
+  },
+  "s6-plateau33-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x3 plateau interior: broad level table with a winding gully and two worn knobs, fluted striped cliffs, fills the width and the 3x3 height; fluted bark-like front, kept for interiors where neighbours hide most of it",
+    "at": "2026-11-15T22:05:53.433Z"
+  },
+  "s6-plateau32-b#0": {
+    "verdict": "REJECTED",
+    "notes": "copied the outline of its style image s6-plateau33-a (gully notch and two scree fans): a near duplicate of plateau-3x2-b",
+    "at": "2026-11-15T22:05:53.474Z"
+  },
+  "s6-low32-a#0": {
+    "verdict": "REJECTED",
+    "notes": "not low: a full-height fluted plateau with the outline of its style image s6-plateau32-a (v2 copies the outline at the style image's size)",
+    "at": "2026-11-15T22:05:53.516Z"
+  },
+  "s6-low31-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x1 back edge: long low striped bench with a shallow bay and a worn knob at the right; pairs with s6-low31-a on long back rims",
+    "at": "2026-11-15T22:08:55.847Z"
+  },
+  "s6-tall23-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "second sandstone 2x3 (styled from the 3x2 table mesa): stepped striped tableland seen end-on, flat summit, two tiers; its left scree fan is cut by the image edge (rock must meet its west side); reads as a tower family piece",
+    "at": "2026-11-15T22:08:55.890Z"
+  },
+  "s6-plateau33-c#0": {
+    "verdict": "REJECTED",
+    "notes": "the step between the two levels came back as carved stairs (man-made) and the lobed front reads as a paw or a loaf, not a plateau",
+    "at": "2026-11-15T22:14:25.014Z"
+  },
+  "s6-plateau22-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x2 plateau interior: flat striped table with a gully notch and scree fans, a quiet block for the inside of a badlands range; both sides cut straight by the image edges (rock must meet them)",
+    "at": "2026-11-15T22:14:25.068Z"
+  },
+  "s6-low32-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "came back at its style image's size (a 3x1 bench in a 3x2 canvas): shipped one size down as a 3x1 back-edge bench, long low striped rock with three worn humps",
+    "at": "2026-11-15T22:15:09.528Z"
+  },
+  "s6-plateau33-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "second 3x3 plateau: a striped mesa split by a narrow canyon into two flat-topped slabs with worn knobs and scree fans; the slabs run a little diagonally, so it reads as a broken tableland, fills the 3x3 height",
+    "at": "2026-11-15T22:16:46.056Z"
   }
 }

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   OPEN_RISE_MAX,
   cutRun,
+  isLandmark,
   packRanges,
   paletteOf,
 } from "../../src/render/map/massif.ts";
@@ -269,6 +270,56 @@ describe("packRanges", () => {
       );
       expect(map.cells[footY * map.width + footX]?.obstacle).toBe("mountain");
     }
+  });
+
+  it("fills a big badlands range with plateaus, landmarks on its rim (xaj.21)", () => {
+    const map = mapOf(
+      [
+        "..............",
+        ".MMMMMMMMMMMM.",
+        ".MMMMMMMMMMMM.",
+        ".MMMMMMMMMMMM.",
+        ".MMMMMMMMMMMM.",
+        ".MMMMMMMMMMMM.",
+        ".MMMMMMMMMMMM.",
+        "..............",
+      ],
+      "badlands",
+    );
+    const cover = packRanges(map);
+    expectExactCover(map, cover);
+    const rock = (x: number, y: number): boolean =>
+      map.cells[y * map.width + x]?.obstacle === "mountain";
+    const plateaus = cover.pieces.filter((p) => p.asset.kind === "plateau");
+    expect(plateaus.length).toBeGreaterThan(0);
+    for (const p of cover.pieces) {
+      let behind = true;
+      for (let c = 0; c < p.asset.cols; c += 1)
+        if (!rock(p.x + c, p.y - 1)) behind = false;
+      let sides = 0;
+      for (let r = 0; r < p.asset.rows; r += 1)
+        sides +=
+          (rock(p.x - 1, p.y + r) ? 1 : 0) +
+          (rock(p.x + p.asset.cols, p.y + r) ? 1 : 0);
+      // Inside the range (rock behind, rock on most sides): no landmark.
+      if (behind && sides >= p.asset.rows && p.asset.rows >= 2)
+        expect(isLandmark(p.asset.key), p.asset.key).toBe(false);
+    }
+  });
+
+  it("merges a small palette island into the range round it (xaj.21)", () => {
+    const map = mapOf([
+      "......................",
+      ".MMMMMMMMMMMMMMMMMMMM.",
+      ".MMMMMMMMMMMMMMMMMMMM.",
+      "......................",
+    ]);
+    map.cells.forEach((c, i) => {
+      if (i % map.width >= 7) c.terrain = "badlands";
+    });
+    // Six columns of grass (12 cells) against fourteen of badlands.
+    const cover = packRanges(map);
+    for (const p of cover.pieces) expect(p.asset.palette).toBe("sandstone");
   });
 });
 

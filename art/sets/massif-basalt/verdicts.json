@@ -253,5 +253,15 @@
     "verdict": "ACCEPTED",
     "notes": "low 3x1 broken basalt ridge with an ash-dusted knob and a rubble tail, darker than b5-low31-a and closer to the set's basalt; lit from the left",
     "at": "2026-11-15T21:40:09.616Z"
+  },
+  "b6-tall23-b#0": {
+    "verdict": "REJECTED",
+    "notes": "pale ash streak from the summit down the middle to a second ash patch reads as a waterfall (the xaj.19 lesson); re-taken as b6-tall23-c",
+    "at": "2026-11-15T22:12:25.514Z"
+  },
+  "b6-tall23-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "second basalt 2x3 (styled from the 3x2 scree massif b5-massif32-scree-b): tall jagged end-on ridge, ash only on the summit and a shoulder, rough cliffs over wide scree aprons; fills the width",
+    "at": "2026-11-15T22:12:25.570Z"
   }
 }

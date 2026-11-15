@@ -674,6 +674,201 @@
       "negative": "tall peak, cropped top, snow, grey rock, tower, pillar, chimney, stairs, trees, cactus, river, path, building",
       "notes": "bead xaj.20: MASSIF 3x2 LOW (back rim, long fluted hill)",
       "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-plateau33-a",
+      "concept": "PLATEAU 3x3 (sandstone interior: flat-topped plateau with gullies)",
+      "width": 240,
+      "height": 288,
+      "seed": 66101,
+      "styleImage": {
+        "take": "s4-massif32-table#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: the broad flat top of a big eroded desert sandstone plateau seen from the south from above: it fills the whole image from the left edge to the right edge and from near the top edge to the bottom, a wide level table of pale ochre rock cut by two or three winding dry gullies with small ledges, a few low knobs and cracks on the flat top, the front edge breaking down into short fluted cliffs with wavy bands of ochre, cream and red-brown, scree and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tower, pillar, chimney, spires, separate hills, snow, grey rock, stairs, trees, cactus, river, water, path, building",
+      "notes": "bead xaj.21: PLATEAU 3x3 sample",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-plateau32-a",
+      "concept": "PLATEAU 3x2 (sandstone interior: low flat plateau with gullies)",
+      "width": 240,
+      "height": 208,
+      "seed": 66102,
+      "styleImage": {
+        "take": "s5-massif32-fluted-b#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: the flat top of a wide eroded desert sandstone plateau seen from the south from above, much wider than tall: it fills the whole width of the image from the left edge to the right edge and the lower four fifths of its height, a level table of pale ochre rock crossed by a winding dry gully and a few cracks, two low worn knobs on the top, its front edge breaking into short fluted cliffs with wavy bands of ochre, cream and red-brown, scree and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tower, pillar, chimney, spires, separate hills, snow, grey rock, stairs, trees, cactus, river, water, path, building",
+      "notes": "bead xaj.21: PLATEAU 3x2 sample",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-low31-a",
+      "concept": "ROUNDED 3x1 LOW (sandstone back edge: long low worn bench)",
+      "width": 240,
+      "height": 104,
+      "seed": 66103,
+      "styleImage": {
+        "take": "s5-low31-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: the long low worn back edge of a desert sandstone plateau seen from the south: one low flat-topped bench of rock with a gently uneven top and two shallow notches, filling the full width of the image from the left edge to the right edge, about half of the image tall with empty space above, wavy bands of ochre, cream and red-brown along its low front, a little scree and a ragged foot of a few small boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tower, pillar, separate rocks, pebbles, snow, grey rock, stairs, trees, cactus, river, path, building",
+      "notes": "bead xaj.21: back-edge 3x1 sample",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-tall23-b",
+      "concept": "TALL 2x3 (second sandstone end-on ridge, styled from a 3x2 massif)",
+      "width": 160,
+      "height": 288,
+      "seed": 66104,
+      "styleImage": {
+        "take": "s5-massif32-fluted-b#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: a long eroded desert badlands ridge running straight away from the viewer, taller than wide in the image, with a little empty space above its top: its far end a broad rounded summit with fluted slopes a little below the top edge, the crest coming toward the viewer as one continuous ridge of fluted ribs and gullies stepping down to a low rounded shoulder, wavy ochre, cream and red-brown bands, widening into sloping scree and a ragged foot of a few boulders at the bottom edge; it fills the full width of the image. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "cropped top, flat cut top, tower, two separate hills, gap, round blobs, snow, grey rock, pillar, chimney, stairs, trees, cactus, river, path, building",
+      "notes": "bead xaj.21: second 2x3 sandstone",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-plateau33-b",
+      "concept": "PLATEAU 3x3 (sandstone interior: worn plateau with a winding gully)",
+      "width": 240,
+      "height": 288,
+      "seed": 66201,
+      "styleImage": {
+        "take": "s5-massif32-lowrim-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: the broad flat top of a big worn desert sandstone plateau seen from the south from above: it fills the whole width of the image from the left edge to the right edge and most of its height, a wide level table of pale ochre rock with gently rounded worn rims, one long winding dry gully cutting across the top from the back to the front, a few cracks and two low worn knobs, its front edge dropping in short fluted slopes with wavy bands of ochre, cream and red-brown, scree and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tower, pillar, chimney, spires, separate hills, tree stump, snow, grey rock, stairs, trees, cactus, river, water, path, building",
+      "notes": "bead xaj.21: PLATEAU 3x3",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-plateau32-b",
+      "concept": "PLATEAU 3x2 (sandstone interior: plateau top with a side gully)",
+      "width": 240,
+      "height": 208,
+      "seed": 66202,
+      "styleImage": {
+        "take": "s6-plateau33-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: the flat top of a wide eroded desert sandstone plateau seen from the south from above, much wider than tall: it fills the whole width of the image from the left edge to the right edge and the lower four fifths of its height, a level table of pale ochre rock with a deep dry gully cut into its front at the right, cracks and a low worn knob on the top at the left, its front breaking into short striped cliffs with wavy bands of ochre, cream and red-brown and fans of scree, a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tower, pillar, chimney, spires, separate hills, tree stump, snow, grey rock, stairs, trees, cactus, river, water, path, building",
+      "notes": "bead xaj.21: PLATEAU 3x2",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-low32-a",
+      "concept": "ROUNDED 3x2 LOW (sandstone back edge: low wide bench two cells deep)",
+      "width": 240,
+      "height": 208,
+      "seed": 66203,
+      "styleImage": {
+        "take": "s6-plateau32-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: the low worn back edge of a wide desert sandstone plateau seen from the south from above, much wider than tall: one low flat-topped bench of rock that fills the whole width of the image from the left edge to the right edge but only the lower two thirds of its height, empty space above, its broad flat top crossed by a shallow dry gully and cracks, a low front edge of short striped slopes with wavy bands of ochre, cream and red-brown, a little scree and a ragged foot of a few small boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tall cliffs, tower, pillar, separate rocks, pebbles, tree stump, snow, grey rock, stairs, trees, cactus, river, path, building",
+      "notes": "bead xaj.21: back-edge 3x2",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-low31-b",
+      "concept": "ROUNDED 3x1 LOW (sandstone back edge: low eroded rim with two shallow bays)",
+      "width": 240,
+      "height": 104,
+      "seed": 66204,
+      "styleImage": {
+        "take": "s4-foot21-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: the long low eroded back rim of a desert sandstone plateau seen from the south: one low flat-topped strip of rock with two shallow rounded bays cut into it and a low worn knob at the right, filling the full width of the image from the left edge to the right edge, about half of the image tall with empty space above, wavy bands of ochre, cream and red-brown on its low front, a little scree and a ragged foot of a few small boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tower, pillar, separate rocks, pebbles, snow, grey rock, stairs, trees, cactus, river, path, building",
+      "notes": "bead xaj.21: back-edge 3x1",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-tall23-c",
+      "concept": "TALL 2x3 (second sandstone end-on ridge, styled from the 3x2 table mesa)",
+      "width": 160,
+      "height": 288,
+      "seed": 66205,
+      "styleImage": {
+        "take": "s4-massif32-table#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: a long eroded desert sandstone mesa ridge running straight away from the viewer, taller than wide in the image, with a little empty space above its top: a flat-topped table summit a little below the top edge, the ridge coming toward the viewer as a stepped tableland of striped cliffs with a gully on its left flank, stepping down to a lower flat shoulder at the front, wavy ochre, cream and red-brown bands, widening into sloping scree and a ragged foot of a few boulders at the bottom edge; it fills the full width of the image. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "cropped top, tower, chimney, round blobs, worm, s-curve, two separate hills, snow, grey rock, stairs, trees, cactus, river, path, building",
+      "notes": "bead xaj.21: second 2x3 sandstone (re-take)",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-plateau33-c",
+      "concept": "PLATEAU 3x3 (sandstone interior: stepped tableland, styled from the 2x3 ridge)",
+      "width": 240,
+      "height": 288,
+      "seed": 66301,
+      "styleImage": {
+        "take": "s5-tall23-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: the top of a big eroded desert sandstone tableland seen from the south from above: it fills the whole image from the left edge to the right edge and from near the top edge to the bottom, two broad flat levels of pale ochre rock, the back level a little higher, a low striped step between them, a dry gully winding across the front level, cracks on the flats, the front edge breaking into short striped cliffs with wavy bands of ochre, cream and red-brown, scree and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tower, pillar, chimney, spires, separate hills, tree stump, snow, grey rock, stairs, trees, cactus, river, water, path, building",
+      "notes": "bead xaj.21: PLATEAU 3x3",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-plateau22-a",
+      "concept": "PLATEAU 2x2 (sandstone interior: small flat plateau block)",
+      "width": 160,
+      "height": 208,
+      "seed": 66302,
+      "styleImage": {
+        "take": "s6-plateau33-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: the flat top of an eroded desert sandstone plateau seen from the south from above: it fills the whole width of the image from the left edge to the right edge and the lower four fifths of its height, a level table of pale ochre rock with a dry gully cutting into its front at the left and a few cracks, a low worn knob at the back right, short striped cliffs with wavy bands of ochre, cream and red-brown, scree and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tower, pillar, chimney, spires, separate hills, tree stump, snow, grey rock, stairs, trees, cactus, river, water, path, building",
+      "notes": "bead xaj.21: PLATEAU 2x2",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-low32-b",
+      "concept": "ROUNDED 3x2 LOW (sandstone back edge, styled from the low bench)",
+      "width": 240,
+      "height": 208,
+      "seed": 66303,
+      "styleImage": {
+        "take": "s6-low31-a#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: the low worn back edge of a wide desert sandstone plateau seen from the south from above: one low flat bench of rock that fills the whole width of the image from the left edge to the right edge, standing in the lower half of the image with empty space above it, its flat top a little uneven with a shallow dry gully and a few cracks, a low front of short striped slopes with wavy bands of ochre, cream and red-brown, a little scree and a ragged foot of a few small boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "tall peak, tall cliffs, tower, pillar, separate rocks, pebbles, tree stump, snow, grey rock, stairs, trees, cactus, river, path, building",
+      "notes": "bead xaj.21: back-edge 3x2",
+      "styleOptions": "@fullStyle"
+    },
+    {
+      "id": "s6-plateau33-d",
+      "concept": "PLATEAU 3x3 (sandstone interior: wide tableland with a canyon, styled from the 2x3 stepped mesa)",
+      "width": 240,
+      "height": 288,
+      "seed": 66401,
+      "styleImage": {
+        "take": "s6-tall23-c#0",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: the top of a big eroded desert sandstone tableland seen from the south from above: it fills the whole image from the left edge to the right edge and from near the top edge to the bottom, one wide level table of pale ochre rock split by a narrow winding canyon that runs from the back edge to the front, a few cracks and low worn knobs on the flat, short striped cliffs with wavy bands of ochre, cream and red-brown along its front and sides, scree fans and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass.",
+      "negative": "stairs, steps, tower, pillar, chimney, spires, separate hills, tree stump, paw, snow, grey rock, trees, cactus, river, water, path, building",
+      "notes": "bead xaj.21: PLATEAU 3x3",
+      "styleOptions": "@fullStyle"
     }
   ],
   "outputs": [
@@ -1852,6 +2047,249 @@
           "op": "pad",
           "width": 240,
           "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-3x2-b.png",
+      "from": "s6-plateau33-a#0",
+      "width": 240,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 60,
+          "width": 240,
+          "height": 168
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 176,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-3x2-a.png",
+      "from": "s6-plateau32-a#0",
+      "width": 240,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 30,
+          "width": 240,
+          "height": 178
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 186,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/rounded-3x1-c.png",
+      "from": "s6-low31-a#0",
+      "width": 240,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 34,
+          "width": 226,
+          "height": 54
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-3x3-a.png",
+      "from": "s6-plateau33-b#0",
+      "width": 240,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 39,
+          "width": 240,
+          "height": 208
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 216,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 288,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/rounded-3x1-d.png",
+      "from": "s6-low31-b#0",
+      "width": 240,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 29,
+          "width": 222,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 68,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/massif-2x3-b.png",
+      "from": "s6-tall23-c#0",
+      "width": 160,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 23,
+          "width": 160,
+          "height": 265
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 273,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 288,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-2x2-a.png",
+      "from": "s6-plateau22-a#0",
+      "width": 160,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 23,
+          "width": 160,
+          "height": 165
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 173,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/rounded-3x1-e.png",
+      "from": "s6-low32-b#0",
+      "width": 240,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 86,
+          "width": 226,
+          "height": 54
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/sandstone/plateau-3x3-b.png",
+      "from": "s6-plateau33-d#0",
+      "width": 240,
+      "height": 288,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 22,
+          "width": 240,
+          "height": 266
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 274,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 288,
           "anchor": "bottom"
         }
       ]

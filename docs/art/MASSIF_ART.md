@@ -11,12 +11,15 @@ The art is wired into the renderer by bead `xaj.15` (see
 [Wiring](#wiring-bead-xaj15)); bead `xaj.19` filled the set's gaps and
 reworked the packing ([Iteration 4](#iteration-4-bead-xaj19)); bead `xaj.20`
 made the smallest mountain 2x2 and rebuilt ranges from 2x2-and-larger pieces
-([Iteration 5](#iteration-5-bead-xaj20)). The captures
+([Iteration 5](#iteration-5-bead-xaj20)); bead `xaj.21` wobbled zone
+borders and range edges, made the rock base follow the pieces' silhouettes
+and added plateaus, snowless granite and second 2x3 pieces
+([Iteration 6](#iteration-6-bead-xaj21)). The captures
 [`screens/map-seed3-M-z075.png`](screens/map-seed3-M-z075.png),
 [`screens/map-massif-seed3-z1.png`](screens/map-massif-seed3-z1.png) (a
 sandstone canyon) and
-[`screens/map-band-seed2-z1.png`](screens/map-band-seed2-z1.png) (north-south
-sandstone bands) show the result after xaj.20.
+[`screens/map-border-seed3-z1.png`](screens/map-border-seed3-z1.png) (a
+granite range along a zone border) show the result after xaj.21.
 
 ## What was made
 
@@ -498,3 +501,122 @@ Sheets: `sheets/massif-*.png` rebuilt by `sh art/review/massif-sheets.sh`
 - The granite and basalt 2x3 pieces are single sprites (kept 8 cells
   apart); the sandstone one is a mesa-and-blocks stack that reads as a
   tower from some angles.
+
+## Iteration 6 (bead xaj.21)
+
+The orchestrator's review of xaj.20: ranges along a zone border had
+ruler-straight outer edges for eight cells and more, with the ground edge
+beside them just as straight; the rock base filled whole cells; granite
+interiors were mostly snowy cones; deep badlands read as a collection of
+monuments; one 2x3 sprite per palette; sandstone back-rim 2x1 humps looked
+like pebbles behind the mesas; small granite patches read as grey islands.
+
+### Generator (`src/core/map/gen/zones.ts`, `wobble.ts`, `generate.ts`)
+
+- **Fine zone warp**: a second domain warp of the zone Voronoi
+  (`zones.fineWarp` 1.6 cells, `fineWarpScale` 3 cells) bends every border
+  every few cells.
+- **Wobble pass** (`wobbleEdges`, after the 2x2 squaring): every straight run
+  of a boundary longer than `wobble.maxRun` (3) cells is broken every three
+  or four cells by a two-cell feature. A range edge gets a BUMP (the two cells
+  in front become Mountain, forming a 2x2 block with the run; only on quiet
+  open ground that touches no other obstacle, pass corridor, kept-open cell,
+  object or town yard) or a NOTCH (two rock cells become open; never spine
+  cells, and every rock cell round them must stay in a 2x2 block). Against a
+  forest belt both trade rock for trees. A ground edge on open land gets a
+  two-cell tongue of the ground behind it. Pockets are resolved and the final
+  square trim runs after it, so seals, passes, the 2x2 rule and reachability
+  hold (the generator tests pass unchanged, plus a new straight-edge test).
+
+Seeds 1-20, size M (boundary runs along a cell line):
+
+| | before | after |
+| --- | --- | --- |
+| range-edge runs of 4+ / 6+ / 8+ cells | 420 / 76 / 24 (longest 14) | 158 / 12 / 1 (longest 8) |
+| ground-edge runs of 4+ / 6+ / 8+ cells | 220 / 50 / 5 (longest 9) | 62 / 10 / 0 (longest 7) |
+| mountain cells | 9,123 | 9,688 |
+| generation per M map | 58 ms | 57-60 ms |
+
+### Rock base along the silhouettes (`src/render/map/ground.ts`)
+
+The scree (dust, rock floor) and the palette's rock base are cut from a
+SILHOUETTE FIELD instead of the Mountain cells: the opaque 4 px blocks of
+every placed piece inside its own footprint (and of the fills' lower
+halves), closed by 6 blocks (24 px: notches and joints between pieces fill
+with rock, the outer rim does not grow) and blurred twice (3 blocks).
+`loadMapAssets` reads each massif piece's block mask (`pieceMasks`);
+`buildGroundLayout(map, roadEnds, cover)` takes the cover, and the map view
+passes `packRanges(map, featuredCells(...))`. Without masks or a cover the
+old cell field is used (node tests, other callers). Where a low hump leaves
+its cell open the cell's own ground shows; a range's rim follows its
+pieces, not the cell edge. Field build: 25-38 ms per M map, 50-120 ms per L
+map, once per terrain rebuild, on the first chunk painted.
+
+### New art
+
+Same pipeline (v2 with an accepted piece as the style image, seated by
+recorded crop + pad steps). New kind `plateau` (2x2, 3x2 and 3x3; a 3x3
+canvas is 240 x 288, up 48).
+
+| Palette | New game files | From |
+| --- | --- | --- |
+| sandstone | `plateau-3x3-a` (level table, winding gully), `plateau-3x3-b` (mesa split by a canyon), `plateau-3x2-a` (table with a gully), `plateau-3x2-b` (striped table with scree fans; shipped one size down from a 3x3 request), `plateau-2x2-a` (quiet striped block), `rounded-3x1-c/d/e` (long low back-edge benches; `e` came back at its style image's size in a 3x2 canvas and ships as a 3x1), `massif-2x3-b` (stepped tableland end-on) | `s6-*` |
+| granite (snowless) | `massif-2x2-e` (bare domes), `-f` (forested shoulder), `-g` (tilted slab crag), `massif-3x2-e` (blunt summit with pine clumps), `-f` (three domes), `-g` (cliff wall with grassy ledges), `massif-2x3-b` (stepped cliff ridge end-on) | `g6-*` |
+| basalt | `massif-2x3-b` (jagged end-on ridge on scree, ash on the summit only) | `b6-tall23-c` |
+
+Calls: 22 PixelLab requests (sandstone 13, granite 7, basalt 2; `usd: null`
+on this account). Takes: sandstone 9 accepted / 4 rejected, granite 7 / 0,
+basalt 1 / 1. Rejected: `s6-tall23-b` (S-curved crest over a lobe: blobs and
+a worm), `s6-plateau32-b` (copied its style image's outline: a duplicate of
+plateau-3x2-b), `s6-low32-a` (copied its style image's full-height outline:
+not low), `s6-plateau33-c` (carved stairs, a paw-like front), `b6-tall23-b`
+(an ash streak down the middle read as a waterfall).
+
+Lessons: the xaj.20 findings held exactly. A 3x3 (240 x 288) request styled
+from a 208 px tall image came back 168 px tall (shipped as a 3x2); styled
+from a 288 px tall image it filled the canvas. A low 3x2 styled from a 3x1
+came back as a 3x1. 2x3 pieces styled from 3x2 massifs were clean in every
+palette (granite, sandstone and basalt each at the first or second call).
+
+### Packer (`src/render/map/massif.ts`)
+
+- **Plateaus inside**: a massif-sized offer (now 3x3 too) is INTERIOR when
+  rock of its palette lies behind every column and beside at least half its
+  rows. Interior offers may take a plateau (weight 3 against massifs 1,
+  `PLATEAU_BONUS` 0.45 for two rows, 0.8 for three, so big badlands fill
+  with plateaus first), and their candidates drop the LANDMARK families
+  (towers, hoodoos, domes, fluted hills; the low fluted 2x2-f and long low
+  3x2-h stay); an interior offer that only landmarks could fill is skipped.
+  3x3 plateaus keep `TALL_SPACING` apart like the 2x3 pieces.
+- **Back edge**: on the open back rim a sandstone 2x1 costs
+  `BACK_PAIR_COST` (1.5) in the row cut, so rims are cut into long low
+  benches where the run allows; the three benches (`BACK_EDGE_ONLY`) are
+  used only there, never in front of rock.
+- **Islands**: a palette patch under `ISLAND_PATCH` (30) cells that is also
+  under a third of its range joins the palette round it (besides the
+  `MIN_PATCH` 12 rule).
+- **Granite variety**: the snowy cones (2x2-a/c, 3x2-a/b) weigh 0.6; the
+  snowless domes and forested shoulders are families (`granite-domes`,
+  `granite-forest`) kept apart.
+- Cut sides of the new takes in `EDGE_NEEDS` (plateau-3x2-b and granite
+  2x2-e/f east, plateau-2x2-a both, sandstone 2x3-b west).
+
+Seeds 1-3 size M: pieces 159 / 145 / 160 (xaj.20: 147 / 118 / 147), of
+them plateaus 5 / 1 / 9 and 2x3 pieces 4 / 1 / 0; `packRanges` 9-15 ms per
+M map in node (cold).
+
+### Still artificial
+
+- Every sprite is a whole object with cliffs on all sides: two plateaus side
+  by side read as two mesas, not one tableland, and the fluted plateaus
+  (3x3-a, 3x2-a) look a little like tree stumps.
+- Big badlands ranges are mostly two or three cells deep, so interiors are
+  rare: on seed 2 only one plateau is used and the edges are still a row of
+  distinct landmarks.
+- Granite 2x1 ridges are all snowy; a granite frame at zoom 1 still shows
+  snowy ridge pairs repeating. A snowless 2x1 set is the next gap.
+- Range sides are pieces' vertical cliffs on a staggered cell outline: no
+  longer one straight line, but a sawtooth of two-cell steps where the
+  wobble bumped and notched.
+- Between pieces of a closed range the rock base is a flat dark tone; where
+  the closing fills a big notch it is a visible blob.

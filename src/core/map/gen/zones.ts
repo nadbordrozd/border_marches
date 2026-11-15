@@ -97,10 +97,26 @@ export function layoutZones(st: GenState): void {
   const scale = cfg.zones.warpScale * radius;
   const saltX = stageSalt(st, "zone-warp-x");
   const saltY = stageSalt(st, "zone-warp-y");
+  // A second, fine warp (bead xaj.21): the broad warp bends borders over
+  // whole zones but leaves them ruler-straight for eight cells and more,
+  // and a range or a ground edge along such a border read as a grid line.
+  // This one wobbles a border by a cell or two every few cells.
+  const fine = cfg.zones.fineWarp;
+  const fineScale = cfg.zones.fineWarpScale;
+  const fineX = stageSalt(st, "zone-fine-x");
+  const fineY = stageSalt(st, "zone-fine-y");
   for (let y = 0; y < g.h; y++) {
     for (let x = 0; x < g.w; x++) {
-      const px = x + 0.5 + (fbm(x, y, scale, saltX, 3) - 0.5) * 3.2 * amp;
-      const py = y + 0.5 + (fbm(x, y, scale, saltY, 3) - 0.5) * 3.2 * amp;
+      const px =
+        x +
+        0.5 +
+        (fbm(x, y, scale, saltX, 3) - 0.5) * 3.2 * amp +
+        (fbm(x, y, fineScale, fineX, 2) - 0.5) * 3.2 * fine;
+      const py =
+        y +
+        0.5 +
+        (fbm(x, y, scale, saltY, 3) - 0.5) * 3.2 * amp +
+        (fbm(x, y, fineScale, fineY, 2) - 0.5) * 3.2 * fine;
       st.zone[g.idx(x, y)] = nearestSeed(all, px, py);
     }
   }
