@@ -1,0 +1,455 @@
+{
+  "wood-a": {
+    "id": "wood-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-0b7967ee-e071-487a-9ba0-1a21bdc76b16",
+    "submittedAt": "2026-11-15T16:16:18.792Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-resource.txt",
+          "text": "Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small neat stack of five chunky cut logs lying on their sides in a little pyramid, three on the bottom and two on top, the cut ends facing the viewer: pale cream-tan cut ends with one darker ring, dull mid-brown bark, colour #8a5a2c with #5a3a1c shadows, not orange and not red; the log stack is wide and is the only thing in the image."
+        }
+      ],
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 42101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it. Subject: a small neat stack of five chunky cut logs lying on their sides in a little pyramid, three on the bottom and two on top, the cut ends facing the viewer: pale cream-tan cut ends with one darker ring, dull mid-brown bark, colour #8a5a2c with #5a3a1c shadows, not orange and not red; the log stack is wide and is the only thing in the image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, soil patch, grass square, scenery, background, unit, character, building, axe, person, tree, leaves, fire, campfire, orange wood, red, rope."
+    },
+    "at": "2026-11-15T16:16:18.795Z",
+    "candidates": [
+      {
+        "file": "wood-a-0.png",
+        "sha256": "191c7c9735f20b7c4ed4dc465a1bd8ceb7e6ebbd2f1650189eb84c2a73dd6adc",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "ore-a": {
+    "id": "ore-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-e0563538-e201-44d6-9bac-48cac18f91a3",
+    "submittedAt": "2026-11-15T16:16:47.482Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-resource.txt",
+          "text": "Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small chunky heap of four jagged angular chunks of raw iron ore with sharp flat faceted faces: cool slate blue-grey rock, colour #6f7f99 with #46536b shadows and pale #b9c6d8 lit faces, with a few small bright silver-white metal glints; the ore heap is wide and is the only thing in the image."
+        }
+      ],
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 42201,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it. Subject: a small chunky heap of four jagged angular chunks of raw iron ore with sharp flat faceted faces: cool slate blue-grey rock, colour #6f7f99 with #46536b shadows and pale #b9c6d8 lit faces, with a few small bright silver-white metal glints; the ore heap is wide and is the only thing in the image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, soil patch, grass square, scenery, background, unit, character, building, copper, orange, rust, brown, gold, crystals, glowing aura, gems, mine cart, pickaxe, person, round balls, spheres."
+    },
+    "at": "2026-11-15T16:16:47.484Z",
+    "candidates": [
+      {
+        "file": "ore-a-0.png",
+        "sha256": "3a16397af8bb484c193d8e9e0b9f47b67583fc935e2c8ef30fc86b4060580297",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "gold-a": {
+    "id": "gold-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-346f2fab-019f-4614-aa18-5c31544b69f7",
+    "submittedAt": "2026-11-15T16:17:12.136Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-resource.txt",
+          "text": "Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small heap of shiny gold coins with one small round sack of pale tawny cloth tied at the neck standing behind it, a few more coins spilling out of the sack; warm bright gold coins, colour #f2c230 with #b07a10 shadows and pale yellow glints; the coins and the sack are the only things in the image."
+        }
+      ],
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 42301,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it. Subject: a small heap of shiny gold coins with one small round sack of pale tawny cloth tied at the neck standing behind it, a few more coins spilling out of the sack; warm bright gold coins, colour #f2c230 with #b07a10 shadows and pale yellow glints; the coins and the sack are the only things in the image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, soil patch, grass square, scenery, background, unit, character, building, chest, crown, gems, person, orange, red, rocks, nuggets."
+    },
+    "at": "2026-11-15T16:17:12.138Z",
+    "candidates": [
+      {
+        "file": "gold-a-0.png",
+        "sha256": "e43bb8fb1729dd6e2c5586b86579148cc45337c3e7cb6b49ebfdc75a9e32a1bc",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "essence-a": {
+    "id": "essence-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-b4856aa2-dc38-4f6d-906c-4de574b0a4a3",
+    "submittedAt": "2026-11-15T16:17:36.250Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-resource.txt",
+          "text": "Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small cluster of four tall chunky pointed crystals growing out of one small dark basalt rock, the crystals glowing bright violet, colour #a855f7 with #6b21a8 shadows and pale lilac #e9d5ff lit faces, with two tiny pale lilac sparkles beside them; the crystal cluster is the only thing in the image."
+        }
+      ],
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 42401,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it. Subject: a small cluster of four tall chunky pointed crystals growing out of one small dark basalt rock, the crystals glowing bright violet, colour #a855f7 with #6b21a8 shadows and pale lilac #e9d5ff lit faces, with two tiny pale lilac sparkles beside them; the crystal cluster is the only thing in the image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, soil patch, grass square, scenery, background, unit, character, building, teal, cyan, blue, green, orange, red, pink, magenta, gold, person, soft glow halo."
+    },
+    "at": "2026-11-15T16:17:36.250Z",
+    "candidates": [
+      {
+        "file": "essence-a-0.png",
+        "sha256": "09ebddff429fb9fe9eef4b19405759180b6ccc9aea627090965638a1e96d28f7",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "gold-b": {
+    "id": "gold-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-24668b01-0009-4e9f-8dca-cde01cd02d12",
+    "submittedAt": "2026-11-15T16:21:21.666Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-resource.txt",
+          "text": "Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small heap of shiny gold coins with one small round sack of pale cream cloth tied at the neck standing behind it, a few more coins spilling out of the sack; the coins are bright lemon yellow gold like a buttercup, colour #ffd23f with #d99a12 shadows, not orange and not copper, with white glints; the coins and the sack are the only things in the image."
+        }
+      ],
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 42302,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it. Subject: a small heap of shiny gold coins with one small round sack of pale cream cloth tied at the neck standing behind it, a few more coins spilling out of the sack; the coins are bright lemon yellow gold like a buttercup, colour #ffd23f with #d99a12 shadows, not orange and not copper, with white glints; the coins and the sack are the only things in the image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, soil patch, grass square, scenery, background, unit, character, building, chest, crown, gems, person, orange, copper, bronze, red, brown, rocks."
+    },
+    "at": "2026-11-15T16:21:21.668Z",
+    "candidates": [
+      {
+        "file": "gold-b-0.png",
+        "sha256": "e892890596258ffaa93705939a2de77e4eee68556a7547a977513edd6e7fe900",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "ore-b": {
+    "id": "ore-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-1d2bff5d-bc45-49f6-ae03-6626757987ea",
+    "submittedAt": "2026-11-15T16:21:50.296Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-resource.txt",
+          "text": "Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a low wide heap of five chunky blocky lumps of raw iron ore, dark charcoal grey, colour #4b5262 with #2e3340 shadows, each lump crossed by thick bright silver-white metal veins, colour #dfe6ef; the ore heap is wide and low and is the only thing in the image."
+        }
+      ],
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 42202,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it. Subject: a low wide heap of five chunky blocky lumps of raw iron ore, dark charcoal grey, colour #4b5262 with #2e3340 shadows, each lump crossed by thick bright silver-white metal veins, colour #dfe6ef; the ore heap is wide and low and is the only thing in the image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, soil patch, grass square, scenery, background, unit, character, building, copper, orange, rust, brown, gold, crystals, spikes, mountain, glowing aura, gems, mine cart, pickaxe, person, face, eyes."
+    },
+    "at": "2026-11-15T16:21:50.297Z",
+    "candidates": [
+      {
+        "file": "ore-b-0.png",
+        "sha256": "d56004c6cdaca8bbd330725ab88a5b1a7187823b4b7be8f410812e6db0e68be4",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "gold-a-yellow": {
+    "id": "gold-a-yellow",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "7afb22d0-f69e-43e2-9a77-90834355b733",
+    "submittedAt": "2026-11-15T16:24:38.240Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Change only the coins: recolour every orange coin to bright lemon yellow gold, colour #ffd23f with #d99a12 shadows and white glints, not orange. Keep the brown sack, the outline and the art style exactly the same."
+        }
+      ],
+      "image": "take pickups/gold-a#0 sha256 e43bb8fb1729dd6e2c5586b86579148cc45337c3e7cb6b49ebfdc75a9e32a1bc",
+      "width": 40,
+      "height": 40,
+      "seed": 42303,
+      "no_background": true,
+      "description": "Change only the coins: recolour every orange coin to bright lemon yellow gold, colour #ffd23f with #d99a12 shadows and white glints, not orange. Keep the brown sack, the outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T16:25:15.380Z",
+    "candidates": [
+      {
+        "file": "gold-a-yellow-0.png",
+        "sha256": "41d4c829c139b44eca77275da13c02579c0eacf98b31cf6c0250c534e698891b",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "gold-a-yellow-1.png",
+        "sha256": "41d4c829c139b44eca77275da13c02579c0eacf98b31cf6c0250c534e698891b",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "ore-c": {
+    "id": "ore-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-dd7c722f-6ee3-4644-bde1-0d41f4cbf602",
+    "submittedAt": "2026-11-15T16:25:43.490Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-resource.txt",
+          "text": "Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a low heap of three chunky rounded lumps of raw iron ore lying together, dark charcoal grey, colour #4b5262 with #2e3340 shadows, each crossed by thick bright silver-white metal veins, colour #dfe6ef; the lumps are the lowest thing in the image, with nothing under them; the ore heap is the only thing in the image."
+        }
+      ],
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 42203,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it. Subject: a low heap of three chunky rounded lumps of raw iron ore lying together, dark charcoal grey, colour #4b5262 with #2e3340 shadows, each crossed by thick bright silver-white metal veins, colour #dfe6ef; the lumps are the lowest thing in the image, with nothing under them; the ore heap is the only thing in the image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, soil patch, grass square, scenery, background, unit, character, building, plate, ring, flame, orange, copper, rust, brown, gold, crystals, spikes, mountain, gems, mine cart, pickaxe, person, face, eyes."
+    },
+    "at": "2026-11-15T16:25:43.491Z",
+    "candidates": [
+      {
+        "file": "ore-c-0.png",
+        "sha256": "b7276bb78e87372ffb2c7c19a75a3e191522b31b6e80ae71cdf8b7152e9ec98e",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "ore-d": {
+    "id": "ore-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-c6b58980-5beb-49fe-8ef9-6a0a3ceb5715",
+    "submittedAt": "2026-11-15T16:31:06.123Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-resource.txt",
+          "text": "Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big low heap of four chunky rounded lumps of raw iron ore lying together, dark charcoal grey, colour #4b5262 with #2e3340 shadows, each crossed by thick bright silver-white metal veins, colour #dfe6ef; the lumps are the lowest thing in the image, with nothing under them; the ore heap is wide, fills most of the image width and is the only thing in the image."
+        }
+      ],
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 42204,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm resource marker recognisable by its shape alone, smaller and less saturated than a unit, thick single-colour black outline, simple shapes. It sits directly on the empty transparent background with nothing drawn under it. Subject: a big low heap of four chunky rounded lumps of raw iron ore lying together, dark charcoal grey, colour #4b5262 with #2e3340 shadows, each crossed by thick bright silver-white metal veins, colour #dfe6ef; the lumps are the lowest thing in the image, with nothing under them; the ore heap is wide, fills most of the image width and is the only thing in the image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, soil patch, grass square, scenery, background, unit, character, building, plate, ring, flame, orange, copper, rust, brown, gold, crystals, spikes, mountain, gems, mine cart, pickaxe, person, face, eyes."
+    },
+    "at": "2026-11-15T16:31:06.127Z",
+    "candidates": [
+      {
+        "file": "ore-d-0.png",
+        "sha256": "10296bb1bce9374819ec256634ab722cf574050d7cdbf55ceffaa04c1af7a2a4",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  }
+}

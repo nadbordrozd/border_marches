@@ -1,0 +1,151 @@
+{
+  "set": "pickups",
+  "bead": "border_marches-xaj.9",
+  "class": "resources",
+  "exploration": false,
+  "_doc": "Adventure-map resource pickups, 40x40 like the imported Pulp Wars ore and treasure (pickup class 40-48 px, centred, calmer than units). Layers as Pulp Wars' resource class: style, camera, light, class-resource, subject; no faction layer (resources are neutral). Essence is violet (hue about 270): not the Lost World red-orange, not a ground colour and not the turquoise shallow water. Ore is cool slate blue-grey iron, so it does not clash with the faction accent like the imported copper ore. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "piece": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east"
+    }
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [
+      "style",
+      "camera-three-quarter",
+      "light-south-west",
+      "class-resource"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "wood-a",
+      "concept": "WOOD PILE",
+      "width": 40,
+      "height": 40,
+      "seed": 42101,
+      "subject": "Subject: a small neat stack of five chunky cut logs lying on their sides in a little pyramid, three on the bottom and two on top, the cut ends facing the viewer: pale cream-tan cut ends with one darker ring, dull mid-brown bark, colour #8a5a2c with #5a3a1c shadows, not orange and not red; the log stack is wide and is the only thing in the image.",
+      "negative": "axe, person, tree, leaves, fire, campfire, orange wood, red, rope",
+      "options": "@piece"
+    },
+    {
+      "id": "ore-a",
+      "concept": "ORE PILE",
+      "width": 40,
+      "height": 40,
+      "seed": 42201,
+      "subject": "Subject: a small chunky heap of four jagged angular chunks of raw iron ore with sharp flat faceted faces: cool slate blue-grey rock, colour #6f7f99 with #46536b shadows and pale #b9c6d8 lit faces, with a few small bright silver-white metal glints; the ore heap is wide and is the only thing in the image.",
+      "negative": "copper, orange, rust, brown, gold, crystals, glowing aura, gems, mine cart, pickaxe, person, round balls, spheres",
+      "options": "@piece"
+    },
+    {
+      "id": "gold-a",
+      "concept": "GOLD PILE",
+      "width": 40,
+      "height": 40,
+      "seed": 42301,
+      "subject": "Subject: a small heap of shiny gold coins with one small round sack of pale tawny cloth tied at the neck standing behind it, a few more coins spilling out of the sack; warm bright gold coins, colour #f2c230 with #b07a10 shadows and pale yellow glints; the coins and the sack are the only things in the image.",
+      "negative": "chest, crown, gems, person, orange, red, rocks, nuggets",
+      "options": "@piece"
+    },
+    {
+      "id": "essence-a",
+      "concept": "ESSENCE CRYSTALS",
+      "width": 40,
+      "height": 40,
+      "seed": 42401,
+      "subject": "Subject: a small cluster of four tall chunky pointed crystals growing out of one small dark basalt rock, the crystals glowing bright violet, colour #a855f7 with #6b21a8 shadows and pale lilac #e9d5ff lit faces, with two tiny pale lilac sparkles beside them; the crystal cluster is the only thing in the image.",
+      "negative": "teal, cyan, blue, green, orange, red, pink, magenta, gold, person, soft glow halo",
+      "options": "@piece"
+    },
+    {
+      "id": "gold-b",
+      "concept": "GOLD PILE",
+      "width": 40,
+      "height": 40,
+      "seed": 42302,
+      "options": "@piece",
+      "subject": "Subject: a small heap of shiny gold coins with one small round sack of pale cream cloth tied at the neck standing behind it, a few more coins spilling out of the sack; the coins are bright lemon yellow gold like a buttercup, colour #ffd23f with #d99a12 shadows, not orange and not copper, with white glints; the coins and the sack are the only things in the image.",
+      "negative": "chest, crown, gems, person, orange, copper, bronze, red, brown, rocks",
+      "notes": "gold-a's coins read as copper-orange at 1:1: a lemon-gold named in words and hex, a cream sack instead of tawny."
+    },
+    {
+      "id": "ore-b",
+      "concept": "ORE PILE",
+      "width": 40,
+      "height": 40,
+      "seed": 42202,
+      "options": "@piece",
+      "subject": "Subject: a low wide heap of five chunky blocky lumps of raw iron ore, dark charcoal grey, colour #4b5262 with #2e3340 shadows, each lump crossed by thick bright silver-white metal veins, colour #dfe6ef; the ore heap is wide and low and is the only thing in the image.",
+      "negative": "copper, orange, rust, brown, gold, crystals, spikes, mountain, glowing aura, gems, mine cart, pickaxe, person, face, eyes",
+      "notes": "ore-a reads as a small spiky grey rock (close to a mountain); try a darker blocky heap with bright metal veins."
+    },
+    {
+      "id": "gold-a-yellow",
+      "concept": "GOLD PILE",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 40,
+      "height": 40,
+      "seed": 42303,
+      "edit": {
+        "take": "gold-a#0"
+      },
+      "subject": "Change only the coins: recolour every orange coin to bright lemon yellow gold, colour #ffd23f with #d99a12 shadows and white glints, not orange. Keep the brown sack, the outline and the art style exactly the same.",
+      "notes": "Recolour edit of gold-a#0 (best shape; coins read as copper). gold-b drew a maroon sack."
+    },
+    {
+      "id": "ore-c",
+      "concept": "ORE PILE",
+      "width": 40,
+      "height": 40,
+      "seed": 42203,
+      "options": "@piece",
+      "subject": "Subject: a low heap of three chunky rounded lumps of raw iron ore lying together, dark charcoal grey, colour #4b5262 with #2e3340 shadows, each crossed by thick bright silver-white metal veins, colour #dfe6ef; the lumps are the lowest thing in the image, with nothing under them; the ore heap is the only thing in the image.",
+      "negative": "plate, disc, base, ring, flame, orange, copper, rust, brown, gold, crystals, spikes, mountain, gems, mine cart, pickaxe, person, face, eyes",
+      "notes": "The look of the accepted UI item item-ore-b (dark lumps with silver veins); ore-b drew a disc and orange spikes."
+    },
+    {
+      "id": "ore-d",
+      "concept": "ORE PILE",
+      "width": 40,
+      "height": 40,
+      "seed": 42204,
+      "options": "@piece",
+      "subject": "Subject: a big low heap of four chunky rounded lumps of raw iron ore lying together, dark charcoal grey, colour #4b5262 with #2e3340 shadows, each crossed by thick bright silver-white metal veins, colour #dfe6ef; the lumps are the lowest thing in the image, with nothing under them; the ore heap is wide, fills most of the image width and is the only thing in the image.",
+      "negative": "plate, disc, base, ring, flame, orange, copper, rust, brown, gold, crystals, spikes, mountain, gems, mine cart, pickaxe, person, face, eyes",
+      "notes": "ore-c reads well but is the smallest pickup (25x19 px); ask for a bigger, wider heap."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/objects/wood-pile.png",
+      "from": "wood-a#0",
+      "width": 40,
+      "height": 40
+    },
+    {
+      "path": "public/assets/objects/ore-pile.png",
+      "from": "ore-d#0",
+      "width": 40,
+      "height": 40
+    },
+    {
+      "path": "public/assets/objects/gold-pile.png",
+      "from": "gold-a-yellow#0",
+      "width": 40,
+      "height": 40
+    },
+    {
+      "path": "public/assets/objects/essence-crystals.png",
+      "from": "essence-a#0",
+      "width": 40,
+      "height": 40
+    }
+  ]
+}

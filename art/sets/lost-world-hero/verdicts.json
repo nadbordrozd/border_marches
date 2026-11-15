@@ -1,0 +1,32 @@
+{
+  "chieftain-a#0": {
+    "verdict": "REJECTED",
+    "notes": "dark cast shadow under the raptor's feet (a ground mark), red loincloth; raptor small under a rider that dominates",
+    "at": "2026-11-15T16:23:55.350Z"
+  },
+  "chieftain-b#0": {
+    "verdict": "REJECTED",
+    "notes": "best pose and read, but the raptor came back slate grey-blue, not the Lost World deep blue; fixed by the recolour edit chieftain-b-blue",
+    "at": "2026-11-15T16:23:55.392Z"
+  },
+  "chieftain-c#0": {
+    "verdict": "REJECTED",
+    "notes": "raptor's head and neck painted orange (the accent as a whole part); rider hides the mount",
+    "at": "2026-11-15T16:23:55.435Z"
+  },
+  "chieftain-b-blue#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Chieftain on raptor: deep blue raptor with cream belly and orange crest and stripes matches the imported raptor; spotted tawny cape, orange feather crown and cream bone club; reads as a rider on a dinosaur at 1:1 on light, dark, jungle and grass; feet lowest, nothing under it; faces south-east",
+    "at": "2026-11-15T16:23:55.478Z"
+  },
+  "chieftain-b-blue#1": {
+    "verdict": "REJECTED",
+    "notes": "same edit, raptor a shade darker and flatter than #0; #0 kept",
+    "at": "2026-11-15T16:23:55.524Z"
+  },
+  "chieftain-portrait-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Chieftain portrait: orange feather crown, bone-white headband, black beard, spotted tawny cape, tooth necklace and bone club; matches the imported caveman and shaman portraits; reads at 48 px on light and dark",
+    "at": "2026-11-15T16:23:55.566Z"
+  }
+}

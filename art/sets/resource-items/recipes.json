@@ -1,0 +1,139 @@
+{
+  "set": "resource-items",
+  "bead": "border_marches-xaj.9",
+  "class": "ui-items",
+  "exploration": false,
+  "_doc": "Resource item sprites for the interface bar, generated at 32x32 (their own takes, not downscales of the pickups). Layers as Pulp Wars' item class: style, camera-icon, class-item-32 (Pulp Wars class-icon with '48 pixels' changed to '32 pixels'), subject. Never the word 'icon' in a prompt (Pixen draws a badge). Colours match the map pickups: gold #f2c230, wood bark #8a5a2c, ore slate #6f7f99, essence violet #a855f7. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "item": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east"
+    }
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [
+      "style",
+      "camera-icon",
+      "class-item-32"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "item-gold-a",
+      "concept": "GOLD",
+      "width": 32,
+      "height": 32,
+      "seed": 44101,
+      "subject": "Subject: a small stack of three thick shiny gold coins with one more coin leaning against it, warm bright gold, colour #f2c230 with #b07a10 shadows and one pale yellow glint.",
+      "negative": "sack, chest, person, orange, red",
+      "options": "@item"
+    },
+    {
+      "id": "item-wood-a",
+      "concept": "WOOD",
+      "width": 32,
+      "height": 32,
+      "seed": 44201,
+      "subject": "Subject: three chunky cut logs stacked in a little pyramid, two on the bottom and one on top, the cut ends facing the viewer: pale cream-tan cut ends with one darker ring, dull mid-brown bark, colour #8a5a2c with #5a3a1c shadows, not orange.",
+      "negative": "axe, tree, leaves, fire, orange, red",
+      "options": "@item"
+    },
+    {
+      "id": "item-ore-a",
+      "concept": "ORE",
+      "width": 32,
+      "height": 32,
+      "seed": 44301,
+      "subject": "Subject: one big jagged angular chunk of raw iron ore with flat faceted faces, cool slate blue-grey, colour #6f7f99 with #46536b shadows and pale #b9c6d8 lit faces, and two bright silver-white metal glints.",
+      "negative": "copper, orange, rust, brown, gold, crystals, gems, pickaxe",
+      "options": "@item"
+    },
+    {
+      "id": "item-essence-a",
+      "concept": "ESSENCE",
+      "width": 32,
+      "height": 32,
+      "seed": 44401,
+      "subject": "Subject: a cluster of three tall chunky pointed crystals glowing bright violet, colour #a855f7 with #6b21a8 shadows and pale lilac #e9d5ff lit faces.",
+      "negative": "teal, cyan, blue, green, orange, red, pink, rock base, soft glow halo",
+      "options": "@item"
+    },
+    {
+      "id": "item-gold-b",
+      "concept": "GOLD",
+      "width": 32,
+      "height": 32,
+      "seed": 44102,
+      "options": "@item",
+      "subject": "Subject: a small stack of three thick shiny gold coins with one more coin leaning against it, bright lemon yellow gold like a buttercup, colour #ffd23f with #d99a12 shadows, not orange and not copper, and one white glint.",
+      "negative": "sack, chest, person, orange, copper, bronze, red, brown",
+      "notes": "item-gold-a came back copper-orange: lemon gold named in words and hex."
+    },
+    {
+      "id": "item-ore-b",
+      "concept": "ORE",
+      "width": 32,
+      "height": 32,
+      "seed": 44302,
+      "options": "@item",
+      "subject": "Subject: two chunky blocky lumps of raw iron ore lying side by side, dark charcoal grey, colour #4b5262 with #2e3340 shadows, each crossed by thick bright silver-white metal veins, colour #dfe6ef.",
+      "negative": "face, eyes, creature, copper, orange, rust, brown, gold, crystals, gems, pickaxe",
+      "notes": "item-ore-a's two glints read as eyes (a rock creature): two lumps, veins instead of glints, face words excluded."
+    },
+    {
+      "id": "item-essence-b",
+      "concept": "ESSENCE",
+      "width": 32,
+      "height": 32,
+      "seed": 44402,
+      "options": "@item",
+      "subject": "Subject: three tall chunky pointed crystals standing straight up side by side, glowing bright violet, colour #a855f7 with #6b21a8 shadows and pale lilac #e9d5ff lit faces; the bottoms of the crystals are the lowest thing in the image, with nothing under them.",
+      "negative": "base, rock, socket, setting, ring, teal, cyan, blue, green, orange, red, pink, soft glow halo",
+      "notes": "item-essence-a stood in a red and teal socket: no base, crystals end at the bottom."
+    },
+    {
+      "id": "item-gold-b-yellow",
+      "concept": "GOLD",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 32,
+      "height": 32,
+      "seed": 44103,
+      "edit": {
+        "take": "item-gold-b#0"
+      },
+      "subject": "Change only the colour of the coins: recolour the orange coins to bright lemon yellow gold, colour #ffd23f with #d99a12 shadows and white glints, not orange. Keep the shapes, the outline and the art style exactly the same.",
+      "notes": "Recolour edit of item-gold-b#0 (good shape, still orange-gold)."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/ui/resources/gold.png",
+      "from": "item-gold-b-yellow#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/ui/resources/wood.png",
+      "from": "item-wood-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/ui/resources/ore.png",
+      "from": "item-ore-b#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/ui/resources/essence.png",
+      "from": "item-essence-b#0",
+      "width": 32,
+      "height": 32
+    }
+  ]
+}

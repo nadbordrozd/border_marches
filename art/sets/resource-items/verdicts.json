@@ -1,0 +1,47 @@
+{
+  "item-gold-a#0": {
+    "verdict": "REJECTED",
+    "notes": "coins drawn copper-orange, not gold",
+    "at": "2026-11-15T16:27:36.228Z"
+  },
+  "item-gold-b#0": {
+    "verdict": "REJECTED",
+    "notes": "shape good but still orange-gold; fixed by the recolour edit item-gold-b-yellow",
+    "at": "2026-11-15T16:27:36.270Z"
+  },
+  "item-gold-b-yellow#0": {
+    "verdict": "ACCEPTED",
+    "notes": "gold item: coin stack with a leaning coin in bright lemon gold; reads at 32 px on light and dark",
+    "at": "2026-11-15T16:27:36.311Z"
+  },
+  "item-gold-b-yellow#1": {
+    "verdict": "REJECTED",
+    "notes": "same edit as #0, a few pixels of muddier shading; #0 kept",
+    "at": "2026-11-15T16:27:36.354Z"
+  },
+  "item-wood-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "wood item: three logs in a pyramid with cream cut ends; clear at 32 px on light and dark",
+    "at": "2026-11-15T16:27:36.396Z"
+  },
+  "item-ore-a#0": {
+    "verdict": "REJECTED",
+    "notes": "the two glints read as eyes: a grey rock creature, not ore",
+    "at": "2026-11-15T16:27:36.439Z"
+  },
+  "item-ore-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "ore item: two dark charcoal ore lumps with bright silver veins; reads as raw ore at 32 px, matches the map pickup ore-c",
+    "at": "2026-11-15T16:27:36.481Z"
+  },
+  "item-essence-a#0": {
+    "verdict": "REJECTED",
+    "notes": "crystals stand in a red and teal socket (red and teal excluded)",
+    "at": "2026-11-15T16:27:36.525Z"
+  },
+  "item-essence-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "essence item: three violet crystals, the same violet as the map pickup and spring; clear at 32 px on light and dark",
+    "at": "2026-11-15T16:27:36.567Z"
+  }
+}

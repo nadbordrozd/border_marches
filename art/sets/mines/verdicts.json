@@ -1,0 +1,27 @@
+{
+  "essence-spring-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good spring but it sits on a brown soil slab (ground plate); fixed by the ground-removal edit",
+    "at": "2026-11-15T16:27:36.609Z"
+  },
+  "essence-spring-a-clean#0": {
+    "verdict": "REJECTED",
+    "notes": "slab removed, but white snow-like lumps remain at the left of the rim",
+    "at": "2026-11-15T16:27:36.649Z"
+  },
+  "essence-spring-a-clean#1": {
+    "verdict": "REJECTED",
+    "notes": "slab removed, but white snow-like lumps remain at the left of the rim",
+    "at": "2026-11-15T16:27:36.690Z"
+  },
+  "essence-spring-a-nosnow#0": {
+    "verdict": "REJECTED",
+    "notes": "clean, but the left of the rim is a little thinner than #1; #1 kept",
+    "at": "2026-11-15T16:27:36.732Z"
+  },
+  "essence-spring-a-nosnow#1": {
+    "verdict": "ACCEPTED",
+    "notes": "essence spring: grey stone rim round a glowing violet pool with violet crystals behind; no ground under it; same bold black-outlined building look as the imported sawmill and gold claim; reads on jungle and grass",
+    "at": "2026-11-15T16:27:36.775Z"
+  }
+}

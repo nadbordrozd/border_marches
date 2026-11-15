@@ -1,0 +1,97 @@
+{
+  "set": "mines",
+  "bead": "border_marches-xaj.9",
+  "class": "buildings",
+  "exploration": false,
+  "_doc": "Mines the imported Pulp Wars art does not cover. Sawmill (objects/sawmill), ore pit (the mined mountain terrain/mountains/mine-a) and gold mine (objects/gold-claim) are reused; only the essence spring is new. 72x72 like the imported sawmill and lumber camps; the same bold black-outlined building class as those (they were not drawn in the calm style). Layers: style, camera, light, class-building, subject; no faction layer (mines are neutral). A ground-removal edit follows if Pixen draws a plate. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "piece": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east"
+    },
+    "springSubject": "Subject: an essence spring, a small magical spring map piece: a round low rim of big pale grey weathered stones around a small pool of glowing violet essence water, colour #a855f7 with #6b21a8 shadows and pale lilac #e9d5ff ripples, three tall chunky pointed violet crystals growing out of the rim at the back, a few tiny pale lilac sparkles rising from the pool, a little dull moss on the stones; the spring is the only thing in the image.",
+    "springNegative": "teal, cyan, blue water, green water, orange, red, pink, statue, house, roof, person, character"
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [
+      "style",
+      "camera-three-quarter",
+      "light-south-west",
+      "class-building"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "essence-spring-a",
+      "concept": "ESSENCE SPRING",
+      "width": 72,
+      "height": 72,
+      "seed": 43101,
+      "subject": "@springSubject",
+      "negative": "@springNegative",
+      "options": "@piece"
+    },
+    {
+      "id": "essence-spring-a-clean",
+      "concept": "ESSENCE SPRING",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 72,
+      "height": 72,
+      "seed": 43102,
+      "edit": {
+        "take": "essence-spring-a#0"
+      },
+      "subject": "Remove all ground: erase the brown soil slab under the stone rim, so the spring stands directly on a transparent background with nothing at all under it. Keep the grey stones, the violet pool, the violet crystals, the outline and the art style exactly the same.",
+      "notes": "Ground-removal edit (Pulp Wars edit-remove-ground, adapted): essence-spring-a#0 sits on a brown soil slab."
+    },
+    {
+      "id": "essence-spring-a-nosnow",
+      "concept": "ESSENCE SPRING",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 72,
+      "height": 72,
+      "seed": 43103,
+      "edit": {
+        "take": "essence-spring-a-clean#0"
+      },
+      "subject": "Erase the white snow lumps at the left side of the stone rim, leaving that area transparent. Keep the grey stones, the violet pool, the violet crystals, the outline and the art style exactly the same.",
+      "notes": "essence-spring-a-clean#0 has white snow-like lumps at its left; one part per edit."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/objects/essence-spring.png",
+      "from": "essence-spring-a-nosnow#1",
+      "width": 72,
+      "height": 72,
+      "_doc": "Seated like the imported sawmill: the spring's opaque box (41x47 at 14,10) cut, bottom-centred, lowest opaque row 3 px above the canvas bottom. Whole pixels only.",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 10,
+          "width": 41,
+          "height": 47
+        },
+        {
+          "op": "pad",
+          "width": 72,
+          "height": 69,
+          "anchor": "bottom"
+        },
+        {
+          "op": "pad",
+          "width": 72,
+          "height": 72,
+          "anchor": "top"
+        }
+      ]
+    }
+  ]
+}

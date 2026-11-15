@@ -1,5 +1,6 @@
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
@@ -9,14 +10,70 @@ import {
   FOREST_SETS,
   GROUND_TERRAINS,
   GROUND_TEXTURES,
+  HERO_ASSETS,
   MOUNTAIN_PIECES,
+  RESOURCE_ITEMS,
+  RESOURCE_MINES,
+  RESOURCE_PICKUPS,
   TOWN_ASSETS,
+  TREASURE_PICKUP,
   UNIT_ASSETS,
 } from "../../src/assets/manifest";
 
 const ROOT = join(import.meta.dirname, "..", "..");
 const PUBLIC = join(ROOT, "public");
 const PNG_SIGNATURE = "89504e470d0a1a0a";
+
+function readJson<T>(file: string): T {
+  return JSON.parse(readFileSync(file, "utf8")) as T;
+}
+
+/** Imported Pulp Wars files: public path -> sha256 from the provenance table. */
+function provenance(): Map<string, string> {
+  const doc = readFileSync(
+    join(ROOT, "docs/art/IMPORTED_FROM_PULP_WARS.md"),
+    "utf8",
+  );
+  const recorded = new Map<string, string>();
+  for (const match of doc.matchAll(
+    /\| `[^`]+` \| `public\/([^`]+)` \| \d+x\d+ \| `([0-9a-f]{64})` \|/g,
+  ))
+    recorded.set(match[1]!, match[2]!);
+  return recorded;
+}
+
+interface StudioOutput {
+  readonly set: string;
+  readonly from: string;
+  readonly width?: number;
+  readonly height?: number;
+}
+
+/**
+ * Studio-generated game files: every `outputs[]` entry under public/ of a
+ * set in art/sets/, keyed by its path relative to public/.
+ */
+const STUDIO: ReadonlyMap<string, StudioOutput> = new Map(
+  readdirSync(join(ROOT, "art/sets"))
+    .filter((set) => existsSync(join(ROOT, "art/sets", set, "recipes.json")))
+    .flatMap((set) =>
+      (
+        readJson<{
+          outputs?: {
+            path: string;
+            from: string;
+            width?: number;
+            height?: number;
+          }[];
+        }>(join(ROOT, "art/sets", set, "recipes.json")).outputs ?? []
+      )
+        .filter((output) => output.path.startsWith("public/"))
+        .map((output): [string, StudioOutput] => [
+          output.path.slice("public/".length),
+          { ...output, set },
+        ]),
+    ),
+);
 
 /** Width and height from a PNG's IHDR chunk. */
 function pngSize(file: string): { w: number; h: number } {
@@ -61,18 +118,11 @@ describe("asset manifest", () => {
     expect(files.filter((file) => !listed.has(file))).toEqual([]);
   });
 
-  it("matches the sha256 recorded in the provenance table", () => {
-    const doc = readFileSync(
-      join(ROOT, "docs/art/IMPORTED_FROM_PULP_WARS.md"),
-      "utf8",
-    );
-    const recorded = new Map<string, string>();
-    for (const match of doc.matchAll(
-      /\| `[^`]+` \| `public\/([^`]+)` \| \d+x\d+ \| `([0-9a-f]{64})` \|/g,
-    ))
-      recorded.set(match[1]!, match[2]!);
-    expect(recorded.size).toBe(ALL_ASSETS.length);
+  it("matches the sha256 recorded in the provenance table (imported art)", () => {
+    const recorded = provenance();
+    expect(recorded.size).toBe(ALL_ASSETS.length - STUDIO.size);
     for (const asset of ALL_ASSETS) {
+      if (STUDIO.has(asset.path)) continue;
       const sha = createHash("sha256")
         .update(readFileSync(join(PUBLIC, asset.path)))
         .digest("hex");
@@ -83,8 +133,71 @@ describe("asset manifest", () => {
     }
   });
 
+  it("checks studio art against its studio records", () => {
+    const listed = new Set(ALL_ASSETS.map((asset) => asset.path));
+    const imported = provenance();
+    expect(STUDIO.size).toBeGreaterThan(0);
+    for (const [path, output] of STUDIO) {
+      // Listed in the manifest, never in the Pulp Wars provenance table.
+      expect({ path, listed: listed.has(path) }).toEqual({
+        path,
+        listed: true,
+      });
+      expect({ path, imported: imported.has(path) }).toEqual({
+        path,
+        imported: false,
+      });
+      // Derived from an accepted take whose master is the recorded candidate.
+      const set = join(ROOT, "art/sets", output.set);
+      const verdicts = readJson<Record<string, { verdict: string }>>(
+        join(set, "verdicts.json"),
+      );
+      expect({ path, verdict: verdicts[output.from]?.verdict }).toEqual({
+        path,
+        verdict: "ACCEPTED",
+      });
+      const [, id, n] = /^(.+)#(\d+)$/.exec(output.from)!;
+      const records = readJson<
+        Record<string, { status: string; candidates: { sha256: string }[] }>
+      >(join(set, "records.json"));
+      const candidate = records[id!]?.candidates[Number(n)];
+      const master = readFileSync(
+        join(ROOT, "art/masters", output.set, `${id}-${n}.png`),
+      );
+      expect({
+        path,
+        sha: createHash("sha256").update(master).digest("hex"),
+      }).toEqual({ path, sha: candidate?.sha256 });
+      if (output.width !== undefined)
+        expect({ path, ...pngSize(join(PUBLIC, path)) }).toEqual({
+          path,
+          w: output.width,
+          h: output.height,
+        });
+    }
+    // Pixel-exact re-derivation of every output from its master.
+    expect(() =>
+      execFileSync(process.execPath, ["tools/art/studio-art.mjs", "validate"], {
+        cwd: ROOT,
+        stdio: "pipe",
+      }),
+    ).not.toThrow();
+  });
+
+  it("names a pickup, a mine and a 32 px item for every resource", () => {
+    for (const resource of ["wood", "ore", "gold", "essence"] as const) {
+      expect(assetByKey(RESOURCE_PICKUPS[resource]).category).toBe("object");
+      expect(assetByKey(RESOURCE_MINES[resource]).category).toMatch(
+        /^(object|mountain)$/,
+      );
+      const item = RESOURCE_ITEMS[resource];
+      expect([item.w, item.h, item.resource]).toEqual([32, 32, resource]);
+    }
+    expect(assetByKey(TREASURE_PICKUP).category).toBe("object");
+  });
+
   it("links units and portraits, and keeps anchors on the canvas", () => {
-    for (const unit of UNIT_ASSETS) {
+    for (const unit of [...UNIT_ASSETS, ...HERO_ASSETS]) {
       expect(assetByKey(unit.portrait).category).toBe("portrait");
       expect(unit.anchor.x).toBeGreaterThan(0);
       expect(unit.anchor.x).toBeLessThan(unit.w);

@@ -1,0 +1,52 @@
+{
+  "wood-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "wood pile: five cut logs in a pyramid, cream-tan cut ends, brown bark; reads as wood at 1:1 on light, dark, jungle and grass; smaller and calmer than a unit; nothing under it",
+    "at": "2026-11-15T16:27:35.851Z"
+  },
+  "ore-a#0": {
+    "verdict": "REJECTED",
+    "notes": "spiky blue-grey rocks read as a small grey mountain or plain rock, not ore; does not match the UI ore item",
+    "at": "2026-11-15T16:27:35.896Z"
+  },
+  "ore-b#0": {
+    "verdict": "REJECTED",
+    "notes": "drawn on a pale disc with orange spikes on top (plate and stray accent)",
+    "at": "2026-11-15T16:27:35.937Z"
+  },
+  "ore-c#0": {
+    "verdict": "REJECTED",
+    "notes": "good look but the smallest pickup (25x19 px), a dark dot at 1:1; replaced by the bigger ore-d",
+    "at": "2026-11-15T16:31:14.136Z"
+  },
+  "gold-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good sack-and-coins shape but the coins read copper-orange at 1:1 (close to the faction accent); fixed by the recolour edit gold-a-yellow",
+    "at": "2026-11-15T16:27:36.021Z"
+  },
+  "gold-b#0": {
+    "verdict": "REJECTED",
+    "notes": "coins yellow but tiny, and the sack came back maroon red",
+    "at": "2026-11-15T16:27:36.063Z"
+  },
+  "gold-a-yellow#0": {
+    "verdict": "ACCEPTED",
+    "notes": "gold pile: brown sack spilling bright lemon-gold coins; reads as gold, not copper, on light, dark, jungle and grass; nothing under it",
+    "at": "2026-11-15T16:27:36.105Z"
+  },
+  "gold-a-yellow#1": {
+    "verdict": "REJECTED",
+    "notes": "same edit, coins a little flatter than #0; #0 kept",
+    "at": "2026-11-15T16:27:36.146Z"
+  },
+  "essence-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "essence crystals: violet crystal cluster on a small basalt rock; violet is not the faction orange, not a ground colour and not the turquoise shallow water; reads at 1:1 on every ground",
+    "at": "2026-11-15T16:27:36.188Z"
+  },
+  "ore-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "ore pile: four dark charcoal lumps crossed by bright silver veins, about the size of the wood pile; matches the UI ore item; distinct from copper ore, mountains and the faction orange; reads at 1:1 on light, dark, jungle and grass; nothing under it",
+    "at": "2026-11-15T16:31:14.091Z"
+  }
+}

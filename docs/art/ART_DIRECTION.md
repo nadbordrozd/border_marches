@@ -31,8 +31,11 @@ the adventure map of Heroes of Might and Magic II: clearly jungle or steppe
 or ash, but always background. Charming, pulpy and silly; a board game come
 to life, never gritty.
 
-(The same text goes into the prompt fragment `art/fragments/style.txt`; that
-file is outside this bead's scope and is a follow-up.)
+In prompts this paragraph is split into the Pulp Wars layers that produced
+the imported sprites (bead `border_marches-xaj.9`): `art/fragments/style.txt`
+holds the Pulp Wars style layer verbatim, and the camera, light and class
+fragments carry the view, the sun and the outline rules; see
+[MVP_NEW_ART.md](MVP_NEW_ART.md#prompt-layers).
 
 ## 2. Shared rules for every asset
 
@@ -171,7 +174,8 @@ Rules for reuse:
 - Multi-cell towns (the Lost World town, the Warlord's Hold) and their entry
   cell.
 - The Chieftain-on-raptor hero sprite and the mine and pickup art are new
-  sets (bead `border_marches-xaj.9`).
+  sets (bead `border_marches-xaj.9`): done, see
+  [MVP_NEW_ART.md](MVP_NEW_ART.md).
 
 ## 8. Decisions
 
@@ -179,3 +183,4 @@ Rules for reuse:
 | ---- | -------- | -------- |
 | 2026-11-15 | Inherit the Pulp Wars Bold chibi direction (80 px cells, art at display size, black-outlined saturated units over calm textured ground, sun bottom left, never mirror, nothing under pieces, strict hierarchy) | User request: reuse Pulp Wars sprites and lessons; Pulp Wars user approvals 2026-09-29 and 2026-10-05 |
 | 2026-11-15 | Adventure map target: Heroes II-like continuous landscape (section 4) and the MVP terrain mapping (section 5) | User request: "no copypaste patterns", unique-looking mountain ranges |
+| 2026-11-15 | Essence is violet (`#a855f7`, shadow `#6b21a8`, light `#e9d5ff`) on its pickup, mine and item; the ore pickup is dark charcoal iron with silver veins, not the imported copper ore | Bead `border_marches-xaj.9`: teal clashes with shallow water, copper with the Lost World accent ([MVP_NEW_ART.md](MVP_NEW_ART.md)) |

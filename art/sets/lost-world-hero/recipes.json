@@ -1,0 +1,109 @@
+{
+  "set": "lost-world-hero",
+  "bead": "border_marches-xaj.9",
+  "class": "units",
+  "exploration": false,
+  "_doc": "The Lost World hero: the Chieftain riding a raptor (large unit, 72x88) and its 48x48 portrait. Layers follow Pulp Wars (LESSONS section 5.2): style, camera, light, class, subject, with the Pulp Wars verbatim positive fragments. The faction layer is left out (as Pulp Wars did for its creature class): with it the description exceeds the 2000-character cap, and the subject carries the Pulp Wars /PRIMAL Dinosaur colours itself (deep blue hide, dark navy back, cream belly and bone, tawny spotted fur, one bright orange accent on feathers, stripes and war paint), so the hero matches the imported caveman, raptor and shaman. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "piece": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east"
+    },
+    "portrait": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east"
+    },
+    "heroSubject": "Subject: Chieftain, a chunky cute caveman chief riding a lean deep blue raptor, rider and mount filling the whole width of the image: the chief has a huge round head, golden tan skin, a wild black mane and beard, a goofy grin, a tall crown of bright orange feathers on a bone-white headband, orange war paint on the cheeks, a tawny fur cape with big dark brown spots, and a huge cream bone club raised high. The raptor runs on two strong legs: a dark navy back, a cream belly and claws, a big friendly long-snouted head, an orange feather crest, bold orange tiger stripes and a long stiff tail.",
+    "heroNegative": "horse, wolf, armour, helmet, spear, red, blanket, wings"
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [
+      "style",
+      "camera-three-quarter",
+      "light-south-west",
+      "class-unit"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "chieftain-a",
+      "concept": "CHIEFTAIN",
+      "width": 72,
+      "height": 88,
+      "seed": 41101,
+      "subject": "@heroSubject",
+      "negative": "@heroNegative",
+      "options": "@piece"
+    },
+    {
+      "id": "chieftain-b",
+      "concept": "CHIEFTAIN",
+      "width": 72,
+      "height": 88,
+      "seed": 41102,
+      "subject": "@heroSubject",
+      "negative": "@heroNegative",
+      "options": "@piece"
+    },
+    {
+      "id": "chieftain-c",
+      "concept": "CHIEFTAIN",
+      "width": 72,
+      "height": 88,
+      "seed": 41103,
+      "subject": "Subject: Chieftain, a chunky cute caveman chief riding a lean raptor with deep blue #2f5595 hide, rider and mount filling the whole width of the image: the chief has a huge round head, golden tan skin, a wild black mane and beard, a tall crown of bright orange feathers on a bone-white headband, orange war paint, a tawny fur cape with big dark brown spots, and a huge cream bone club raised high. The raptor runs on two strong legs: a dark navy back, a cream belly and cream claws, a big friendly long-snouted head, an orange feather crest, bold orange tiger stripes and a long stiff tail.",
+      "negative": "@heroNegative",
+      "notes": "chieftain-b's raptor came back slate grey-blue with orange legs: the hide as hex, claws named cream.",
+      "options": "@piece"
+    },
+    {
+      "id": "chieftain-b-blue",
+      "concept": "CHIEFTAIN",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 72,
+      "height": 88,
+      "seed": 41104,
+      "edit": {
+        "take": "chieftain-b#0"
+      },
+      "subject": "Change only the raptor's skin: recolour its dull slate grey-blue hide to a deep saturated blue, colour #2f5595 with #164271 shadows, like the other blue dinosaurs. Keep the rider, the orange feathers and stripes, the cream belly, the outline and the art style exactly the same.",
+      "notes": "Recolour edit of chieftain-b#0 (slate raptor to the Lost World deep blue)."
+    },
+    {
+      "id": "chieftain-portrait-a",
+      "concept": "CHIEFTAIN PORTRAIT",
+      "width": 48,
+      "height": 48,
+      "seed": 41201,
+      "fragments": [
+        "style",
+        "camera-portrait",
+        "class-portrait"
+      ],
+      "options": "@portrait",
+      "subject": "Subject: Chieftain portrait, head and shoulders of a chunky cute caveman chief: light golden tan skin, a wild black mane and a bushy black beard, a big goofy grin, a tall crown of bright orange feathers on a bone-white headband, bright orange war paint stripes on the cheeks, a tawny fur cape with big bold dark brown spots over the shoulders, a necklace of big cream teeth, and a cream bone club resting on one shoulder.",
+      "negative": "raptor, dinosaur, animal, helmet, skull hood, red"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/units/dinosaur-chieftain.png",
+      "from": "chieftain-b-blue#0",
+      "width": 72,
+      "height": 88
+    },
+    {
+      "path": "public/assets/portraits/dinosaur-chieftain.png",
+      "from": "chieftain-portrait-a#0",
+      "width": 48,
+      "height": 48
+    }
+  ]
+}

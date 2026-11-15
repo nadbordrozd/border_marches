@@ -1,11 +1,17 @@
 /**
  * Typed registry of every image the game ships (bead border_marches-xaj.4).
  *
- * Everything here so far is imported byte for byte from the sister project
- * Pulp Wars (the user: "FEEL FREE TO REUSE SPRITES from the other game");
+ * Most of it is imported byte for byte from the sister project Pulp Wars
+ * (the user: "FEEL FREE TO REUSE SPRITES from the other game");
  * docs/art/IMPORTED_FROM_PULP_WARS.md lists each file's source and sha256.
- * The metadata is ported from Pulp Wars' own manifests and measurements so
- * its renderer modules port without guesswork:
+ * The rest is new art from this repository's studio pipeline (bead
+ * border_marches-xaj.9): the Chieftain hero and its portrait, four resource
+ * pickups, the essence spring and the 32 px resource items; each is an
+ * `outputs[]` entry of a set under art/sets/, derived from an accepted
+ * master (docs/art/MVP_NEW_ART.md), and tests/assets checks it against its
+ * studio records instead of the provenance table.
+ * The imported metadata is ported from Pulp Wars' own manifests and
+ * measurements so its renderer modules port without guesswork:
  *
  * - units and towns: the anchor (the master pixel placed on the owning
  *   cell's centre, from `chibiAnchorV7`), the measured feet of each unit
@@ -30,7 +36,7 @@
  * and the fog of war, its puffs and lift (fog-of-war-v7.ts, fog-puff-v7.ts,
  * fog-lift-v7.ts).
  */
-import type { Terrain } from "../core/map/types";
+import type { ResourceId, Terrain } from "../core/map/types";
 
 /** Master pixels per map cell. */
 export const CELL_PX = 80;
@@ -52,7 +58,8 @@ export type AssetCategory =
   | "mountain-extra"
   | "forest-piece"
   | "forest-seam"
-  | "object";
+  | "object"
+  | "resource-item";
 
 /** One PNG under public/. */
 export interface ImageAsset {
@@ -365,9 +372,26 @@ export const UNIT_ASSETS: readonly UnitAsset[] = [
   ),
 ];
 
-export const PORTRAIT_ASSETS: readonly PortraitAsset[] = UNIT_ASSETS.map(
-  (asset) => portrait(asset.key, 48, 48),
-);
+/**
+ * Adventure-map heroes (studio art, bead border_marches-xaj.9), drawn like
+ * units: the Lost World Chieftain riding a raptor, facing south-east.
+ */
+export const HERO_ASSETS: readonly UnitAsset[] = [
+  unit(
+    "dinosaur-chieftain",
+    "dinosaur",
+    "large",
+    72,
+    88,
+    { x: 36, y: 48 },
+    { contactY: 86, footLeft: 36, footRight: 47, baseLeft: 18, baseRight: 62 },
+  ),
+];
+
+export const PORTRAIT_ASSETS: readonly PortraitAsset[] = [
+  ...UNIT_ASSETS,
+  ...HERO_ASSETS,
+].map((asset) => portrait(asset.key, 48, 48));
 
 // ------------------------------------------------------------------ towns
 
@@ -912,13 +936,71 @@ export const OBJECT_ASSETS: readonly ObjectAsset[] = [
   object("treasure", "pickup", 40, 40, { x: 20, y: 20 }),
   object("pearls", "pickup", 40, 40, { x: 20, y: 20 }),
   object("grave", "pickup", 40, 40, { x: 20, y: 20 }),
+  // Studio art (bead border_marches-xaj.9).
+  object("wood-pile", "pickup", 40, 40, { x: 20, y: 20 }),
+  object("ore-pile", "pickup", 40, 40, { x: 20, y: 20 }),
+  object("gold-pile", "pickup", 40, 40, { x: 20, y: 20 }),
+  object("essence-crystals", "pickup", 40, 40, { x: 20, y: 20 }),
+  object("essence-spring", "building", 72, 72, { x: 36, y: 32 }),
 ];
+
+/**
+ * The adventure-map pickup of each resource (docs/art/MVP_NEW_ART.md). The
+ * imported copper `ore` is kept for other uses; its orange is too close to
+ * the Lost World accent for the ore pile.
+ */
+export const RESOURCE_PICKUPS: Readonly<Record<ResourceId, string>> = {
+  wood: "wood-pile",
+  ore: "ore-pile",
+  gold: "gold-pile",
+  essence: "essence-crystals",
+};
+
+/**
+ * The mine of each resource: imported art where it already reads well
+ * (sawmill, the mined mountain, the gold claim), the studio essence spring
+ * for essence. `mountain-mine-a` is a mountain piece (the board draws it in
+ * place of a mountain cell); the others are objects.
+ */
+export const RESOURCE_MINES: Readonly<Record<ResourceId, string>> = {
+  wood: "sawmill",
+  ore: "mountain-mine-a",
+  gold: "gold-claim",
+  essence: "essence-spring",
+};
+
+/** A treasure chest pickup: the imported `treasure` reads as a chest. */
+export const TREASURE_PICKUP = "treasure";
+
+// ------------------------------------------------------- resource items
+
+/** 32x32 resource sprites for the interface bar (own takes at 32 px). */
+export interface ResourceItemAsset extends ImageAsset {
+  readonly category: "resource-item";
+  readonly resource: ResourceId;
+}
+
+export const RESOURCE_ITEMS: Readonly<Record<ResourceId, ResourceItemAsset>> =
+  Object.fromEntries(
+    (["gold", "wood", "ore", "essence"] as const).map((resource) => [
+      resource,
+      {
+        key: `resource-item-${resource}`,
+        path: `assets/ui/resources/${resource}.png`,
+        w: 32,
+        h: 32,
+        category: "resource-item",
+        resource,
+      },
+    ]),
+  ) as Record<ResourceId, ResourceItemAsset>;
 
 // -------------------------------------------------------------- registry
 
 /** Every image in the manifest, once. */
 export const ALL_ASSETS: readonly ImageAsset[] = [
   ...UNIT_ASSETS,
+  ...HERO_ASSETS,
   ...PORTRAIT_ASSETS,
   ...TOWN_ASSETS,
   ...Object.values(GROUND_TEXTURES),
@@ -928,6 +1010,7 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...MOUNTAIN_EXTRAS,
   ...Object.values(FOREST_SETS).flatMap((set) => [...set.pieces, ...set.seams]),
   ...OBJECT_ASSETS,
+  ...Object.values(RESOURCE_ITEMS),
 ];
 
 const BY_KEY: ReadonlyMap<string, ImageAsset> = new Map(

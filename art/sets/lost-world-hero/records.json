@@ -1,0 +1,243 @@
+{
+  "chieftain-a": {
+    "id": "chieftain-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-46c30fd0-b24e-4d91-b30b-e6ab76752eb0",
+    "submittedAt": "2026-11-15T16:13:14.952Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Chieftain, a chunky cute caveman chief riding a lean deep blue raptor, rider and mount filling the whole width of the image: the chief has a huge round head, golden tan skin, a wild black mane and beard, a goofy grin, a tall crown of bright orange feathers on a bone-white headband, orange war paint on the cheeks, a tawny fur cape with big dark brown spots, and a huge cream bone club raised high. The raptor runs on two strong legs: a dark navy back, a cream belly and claws, a big friendly long-snouted head, an orange feather crest, bold orange tiger stripes and a long stiff tail."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 41101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Chieftain, a chunky cute caveman chief riding a lean deep blue raptor, rider and mount filling the whole width of the image: the chief has a huge round head, golden tan skin, a wild black mane and beard, a goofy grin, a tall crown of bright orange feathers on a bone-white headband, orange war paint on the cheeks, a tawny fur cape with big dark brown spots, and a huge cream bone club raised high. The raptor runs on two strong legs: a dark navy back, a cream belly and claws, a big friendly long-snouted head, an orange feather crest, bold orange tiger stripes and a long stiff tail. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, horse, wolf, armour, helmet, spear, red, blanket, wings."
+    },
+    "at": "2026-11-15T16:13:14.955Z",
+    "candidates": [
+      {
+        "file": "chieftain-a-0.png",
+        "sha256": "aa878c4a9b4a2227488eb339d065aff4526d17ed8ad5c83b95563915283050a7",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "chieftain-b": {
+    "id": "chieftain-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-05ca024b-20cf-4d01-a353-d0952688a265",
+    "submittedAt": "2026-11-15T16:14:18.142Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Chieftain, a chunky cute caveman chief riding a lean deep blue raptor, rider and mount filling the whole width of the image: the chief has a huge round head, golden tan skin, a wild black mane and beard, a goofy grin, a tall crown of bright orange feathers on a bone-white headband, orange war paint on the cheeks, a tawny fur cape with big dark brown spots, and a huge cream bone club raised high. The raptor runs on two strong legs: a dark navy back, a cream belly and claws, a big friendly long-snouted head, an orange feather crest, bold orange tiger stripes and a long stiff tail."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 41102,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Chieftain, a chunky cute caveman chief riding a lean deep blue raptor, rider and mount filling the whole width of the image: the chief has a huge round head, golden tan skin, a wild black mane and beard, a goofy grin, a tall crown of bright orange feathers on a bone-white headband, orange war paint on the cheeks, a tawny fur cape with big dark brown spots, and a huge cream bone club raised high. The raptor runs on two strong legs: a dark navy back, a cream belly and claws, a big friendly long-snouted head, an orange feather crest, bold orange tiger stripes and a long stiff tail. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, horse, wolf, armour, helmet, spear, red, blanket, wings."
+    },
+    "at": "2026-11-15T16:14:18.144Z",
+    "candidates": [
+      {
+        "file": "chieftain-b-0.png",
+        "sha256": "4dd42e54a5d3a4b33d68cf815926c12952b2a7930981b15a52cc904206e33a31",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "chieftain-portrait-a": {
+    "id": "chieftain-portrait-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-28692c22-1eba-4a8b-837f-dc01e5090380",
+    "submittedAt": "2026-11-15T16:14:44.963Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Chieftain portrait, head and shoulders of a chunky cute caveman chief: light golden tan skin, a wild black mane and a bushy black beard, a big goofy grin, a tall crown of bright orange feathers on a bone-white headband, bright orange war paint stripes on the cheeks, a tawny fur cape with big bold dark brown spots over the shoulders, a necklace of big cream teeth, and a cream bone club resting on one shoulder."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 41201,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Chieftain portrait, head and shoulders of a chunky cute caveman chief: light golden tan skin, a wild black mane and a bushy black beard, a big goofy grin, a tall crown of bright orange feathers on a bone-white headband, bright orange war paint stripes on the cheeks, a tawny fur cape with big bold dark brown spots over the shoulders, a necklace of big cream teeth, and a cream bone club resting on one shoulder. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, raptor, dinosaur, animal, helmet, skull hood, red."
+    },
+    "at": "2026-11-15T16:14:44.966Z",
+    "candidates": [
+      {
+        "file": "chieftain-portrait-a-0.png",
+        "sha256": "e567628aa5f21a71fb34f16a2b7f8d4538a5b68ddc5aeb27cf4345cbf269d966",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "chieftain-c": {
+    "id": "chieftain-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-d2b9602c-15fc-4fe9-93b7-045061aa26bb",
+    "submittedAt": "2026-11-15T16:16:43.843Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Chieftain, a chunky cute caveman chief riding a lean raptor with deep blue #2f5595 hide, rider and mount filling the whole width of the image: the chief has a huge round head, golden tan skin, a wild black mane and beard, a tall crown of bright orange feathers on a bone-white headband, orange war paint, a tawny fur cape with big dark brown spots, and a huge cream bone club raised high. The raptor runs on two strong legs: a dark navy back, a cream belly and cream claws, a big friendly long-snouted head, an orange feather crest, bold orange tiger stripes and a long stiff tail."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 41103,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Chieftain, a chunky cute caveman chief riding a lean raptor with deep blue #2f5595 hide, rider and mount filling the whole width of the image: the chief has a huge round head, golden tan skin, a wild black mane and beard, a tall crown of bright orange feathers on a bone-white headband, orange war paint, a tawny fur cape with big dark brown spots, and a huge cream bone club raised high. The raptor runs on two strong legs: a dark navy back, a cream belly and cream claws, a big friendly long-snouted head, an orange feather crest, bold orange tiger stripes and a long stiff tail. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, horse, wolf, armour, helmet, spear, red, blanket, wings."
+    },
+    "at": "2026-11-15T16:16:43.847Z",
+    "candidates": [
+      {
+        "file": "chieftain-c-0.png",
+        "sha256": "2fa1200d022a409ded96a33a7569ba51da014a6ed331eeb6dc38be5d2b1bb4eb",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "chieftain-b-blue": {
+    "id": "chieftain-b-blue",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "776870f1-2eaa-490d-a96a-88656949d669",
+    "submittedAt": "2026-11-15T16:20:12.795Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Change only the raptor's skin: recolour its dull slate grey-blue hide to a deep saturated blue, colour #2f5595 with #164271 shadows, like the other blue dinosaurs. Keep the rider, the orange feathers and stripes, the cream belly, the outline and the art style exactly the same."
+        }
+      ],
+      "image": "take lost-world-hero/chieftain-b#0 sha256 4dd42e54a5d3a4b33d68cf815926c12952b2a7930981b15a52cc904206e33a31",
+      "width": 72,
+      "height": 88,
+      "seed": 41104,
+      "no_background": true,
+      "description": "Change only the raptor's skin: recolour its dull slate grey-blue hide to a deep saturated blue, colour #2f5595 with #164271 shadows, like the other blue dinosaurs. Keep the rider, the orange feathers and stripes, the cream belly, the outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T16:20:38.519Z",
+    "candidates": [
+      {
+        "file": "chieftain-b-blue-0.png",
+        "sha256": "94d562d5e783de02c215241acb8fbb434673f90981b5d592f7f0a41973165d03",
+        "width": 72,
+        "height": 88
+      },
+      {
+        "file": "chieftain-b-blue-1.png",
+        "sha256": "94d562d5e783de02c215241acb8fbb434673f90981b5d592f7f0a41973165d03",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  }
+}
