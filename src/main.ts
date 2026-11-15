@@ -48,6 +48,10 @@ function start(): void {
     });
     return;
   }
+  if (route.view === "battle") {
+    void import("./ui/battle/debug.ts").then((m) => m.startBattleDebug(route));
+    return;
+  }
   const redraw = (): void => drawPlaceholder(canvas, route);
   window.addEventListener("resize", redraw);
   redraw();

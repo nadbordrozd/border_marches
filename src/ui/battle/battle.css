@@ -1,0 +1,413 @@
+/* Battle screen (src/ui/battle/screen.ts). Dark wood and parchment, gold accents. */
+
+.bm-battle {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  background: #15110c;
+  color: #f0e6c8;
+  font:
+    13px/1.35 Verdana,
+    Geneva,
+    sans-serif;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.bm-battle button {
+  font: inherit;
+}
+
+.bm-top {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 30px;
+  padding: 0 10px;
+  background: #241c13;
+  border-bottom: 2px solid #5c4626;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.bm-round {
+  font:
+    bold 15px Georgia,
+    serif;
+  color: #ffd65c;
+}
+
+.bm-order {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.bm-chip {
+  padding: 1px 6px;
+  border-radius: 3px;
+  border: 1px solid #0d0b08;
+  font-size: 11px;
+  color: #fff;
+}
+
+.bm-chip.bm-attacker {
+  background: #24477e;
+}
+
+.bm-chip.bm-defender {
+  background: #7e2424;
+}
+
+.bm-chip.bm-now {
+  outline: 2px solid #ffd65c;
+  font-weight: bold;
+}
+
+.bm-chip.bm-later {
+  opacity: 0.55;
+}
+
+.bm-next {
+  margin-left: 6px;
+  color: #a89a80;
+  font-size: 11px;
+}
+
+.bm-stage-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bm-canvas {
+  display: block;
+  image-rendering: pixelated;
+}
+
+.bm-tip {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+  padding: 4px 9px 5px;
+  background: rgba(20, 14, 8, 0.92);
+  border: 2px solid #ffd65c;
+  border-radius: 5px;
+  white-space: nowrap;
+  text-align: center;
+  box-shadow: 0 2px 0 #000;
+}
+
+.bm-tip.bm-below {
+  transform: translate(-50%, 0);
+}
+
+.bm-tip-big {
+  font:
+    bold 20px Verdana,
+    Geneva,
+    sans-serif;
+  color: #ff6a4d;
+}
+
+.bm-tip-kills {
+  font-weight: bold;
+  color: #fff;
+}
+
+.bm-tip-ret {
+  color: #ffb070;
+  font-weight: bold;
+}
+
+.bm-tip-none {
+  color: #9be07a;
+  font-weight: bold;
+}
+
+.bm-bottom {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 230px 1fr auto;
+  gap: 10px;
+  height: 116px;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  background: #241c13;
+  border-top: 2px solid #5c4626;
+}
+
+.bm-active {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 6px;
+  border: 1px solid #5c4626;
+  border-radius: 4px;
+  background: #1a2a44;
+}
+
+.bm-active.bm-enemy {
+  background: #3d1a1a;
+}
+
+.bm-portrait {
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+  border: 1px solid #0d0b08;
+  background: #2e2619;
+}
+
+.bm-active:empty {
+  visibility: hidden;
+}
+
+.bm-active-name {
+  font:
+    bold 15px Georgia,
+    serif;
+  color: #ffd65c;
+}
+
+.bm-active-stats {
+  font-size: 11px;
+  color: #d8ccb0;
+  white-space: pre;
+}
+
+.bm-preview {
+  padding: 4px 12px;
+  border: 1px solid #5c4626;
+  border-radius: 4px;
+  background: #2e2619;
+  overflow: hidden;
+}
+
+.bm-pv-head {
+  font:
+    bold 15px Georgia,
+    serif;
+  color: #f0e6c8;
+}
+
+.bm-pv-deal {
+  font-size: 19px;
+  color: #ff7a5c;
+}
+
+.bm-pv-ret {
+  font-size: 17px;
+  color: #ffb070;
+}
+
+.bm-pv-ret.bm-safe {
+  color: #9be07a;
+}
+
+.bm-pv-label {
+  color: #d8ccb0;
+  font-size: 14px;
+}
+
+.bm-pv-why {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #c8bc9c;
+}
+
+.bm-dim {
+  color: #a89a80;
+  font-size: 12px;
+}
+
+.bm-log {
+  font-size: 12px;
+  color: #d8ccb0;
+}
+
+.bm-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  align-content: center;
+}
+
+.bm-btn {
+  min-width: 96px;
+  padding: 7px 10px;
+  color: #f0e6c8;
+  background: #4a3a22;
+  border: 2px solid #8a6c3a;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.bm-btn:hover:not(:disabled) {
+  background: #5e4a2b;
+  border-color: #ffd65c;
+}
+
+.bm-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.bm-btn.bm-on {
+  background: #6b5320;
+  border-color: #ffd65c;
+  color: #ffd65c;
+}
+
+.bm-info {
+  position: absolute;
+  top: 44px;
+  right: 16px;
+  width: 340px;
+  padding: 10px 12px;
+  background: rgba(30, 23, 15, 0.96);
+  border: 2px solid #8a6c3a;
+  border-radius: 6px;
+  box-shadow: 0 3px 0 #000;
+}
+
+.bm-info.bm-attacker {
+  border-color: #6f93cf;
+}
+
+.bm-info.bm-defender {
+  border-color: #cf6f6f;
+}
+
+.bm-info[hidden],
+.bm-tip[hidden] {
+  display: none;
+}
+
+.bm-info-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.bm-info-title {
+  font:
+    bold 17px Georgia,
+    serif;
+  color: #ffd65c;
+}
+
+.bm-info-stats {
+  border-collapse: collapse;
+  margin-bottom: 6px;
+}
+
+.bm-info-stats td {
+  padding: 1px 8px 1px 0;
+  vertical-align: top;
+}
+
+.bm-num {
+  font-weight: bold;
+  color: #fff;
+  text-align: right;
+}
+
+.bm-info-ability {
+  margin: 4px 0;
+  color: #e8dcc0;
+}
+
+.bm-info-status {
+  color: #9be07a;
+  font-size: 12px;
+}
+
+.bm-info-close {
+  margin-top: 6px;
+  text-align: right;
+}
+
+.bm-result {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 8, 5, 0.55);
+}
+
+.bm-result-box {
+  min-width: 460px;
+  padding: 16px 22px;
+  background: #241c13;
+  border: 3px solid #8a6c3a;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 0 #000;
+}
+
+.bm-result-title {
+  font:
+    bold 32px Georgia,
+    serif;
+}
+
+.bm-won .bm-result-title {
+  color: #ffd65c;
+}
+
+.bm-lost .bm-result-title {
+  color: #ff6a4d;
+}
+
+.bm-result-cols {
+  display: flex;
+  gap: 24px;
+  margin: 12px 0;
+  text-align: left;
+}
+
+.bm-result-col {
+  flex: 1;
+}
+
+.bm-result-side {
+  font:
+    bold 14px Georgia,
+    serif;
+  color: #f0e6c8;
+  border-bottom: 1px solid #5c4626;
+  margin-bottom: 4px;
+}
+
+.bm-result-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1px 0;
+}
+
+.bm-result-row > span:first-of-type {
+  flex: 1;
+}
+
+.bm-result-xp {
+  margin: 6px 0 10px;
+  font-size: 15px;
+  color: #ffd65c;
+}
+
+.bm-ok {
+  min-width: 120px;
+}

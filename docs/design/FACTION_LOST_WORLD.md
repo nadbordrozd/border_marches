@@ -85,8 +85,9 @@ Brutes in earlier rounds.
 | 5. Raptors (waited) step in; Pack Hunter x 1.40 (Cavemen A and B beside the target) | A = 8 + 2 = 10, D 3, M = 1 + 0.05 x 7 = 1.35; 7 x 5 x 1.35 x 1.40 = 66.15 | **66 damage**: r = 48, 2 kills, top 8. **Orcs 13, top 8**. No retaliation (already used) |
 
 **Without the combo** (Raptors open round 3 into a fresh, unvenomed stack of
-19): A 10, D 6, M 1.20, 7 x 5 x 1.20 = 42 damage, 1 kill; the retaliation is
-floor(19 x 6 x 1.10) = 125 and kills **5 of the 7 Raptors**. With the combo
+19): A 10, D 6, M 1.20, 7 x 5 x 1.20 = 42 damage, 1 kill; the retaliation,
+computed on the 18 surviving Orcs, is floor(18 x 6 x 1.10) = 118 and kills
+**5 of the 7 Raptors**. With the combo
 the same Raptors deal 66 and lose none. The Cavemen paid for it: cheap
 creatures soaking the one retaliation is the intended trade.
 
