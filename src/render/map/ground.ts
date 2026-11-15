@@ -36,8 +36,14 @@ import { CELL_PX } from "../../assets/manifest";
 import type { GroundTerrain } from "../../assets/manifest";
 import type { GameMap } from "../../core/map/types";
 import { hash4 } from "./hash";
-import { ROAD_COLOURS, ROAD_PIXEL, roadLinks, roadPixelAt } from "./road";
-import type { RoadLink } from "./road";
+import {
+  ROAD_COLOURS,
+  ROAD_PIXEL,
+  ROAD_REACH,
+  roadPixelAt,
+  roadSegments,
+} from "./road";
+import type { RoadSegment } from "./road";
 
 const CELL = CELL_PX;
 const TURN = (2 * Math.PI) / (CELL * 3);
@@ -359,21 +365,98 @@ export function cellField(
   };
 }
 
-/** The scree under a mountain range: a rock-dust wash and pebbles. */
+/**
+ * The scree under a mountain range: a rock-dust wash and pebbles. Its tones
+ * come from the ground it lies on (`screePalette`): the dust a pale, greyed
+ * tone of the ground, the rock floor a darker one, so a range on red
+ * badlands stands on red-brown rubble and one on jungle on a mossy one.
+ */
 export const SCREE = {
   /** The wash reaches where the mountain field exceeds this (+ waves). */
   threshold: 0.3,
   /** The rock floor where the field exceeds this (+ waves). */
   inner: 0.66,
   waves: [0.05, 0.03],
-  dust: [150, 138, 120],
+  /** The neutral rock the ground tone is greyed toward. */
+  grey: [140, 132, 122],
+  /** Share of that grey in the dust and in the rock floor. */
+  dustGrey: 0.4,
+  rockGrey: 0.45,
+  /** Brightness of the dust and of the rock floor against the ground. */
+  dustLight: 1.05,
+  rockLight: 0.8,
   alpha: 0.42,
-  rock: [124, 116, 108],
-  rockAlpha: 0.66,
-  pebble: [92, 84, 78],
-  pebbleLit: [196, 186, 168],
+  rockAlpha: 0.6,
   pebbleShare: 0.035,
 } as const;
+
+/** The scree tones over one ground. */
+export interface ScreePalette {
+  readonly dust: readonly [number, number, number];
+  readonly rock: readonly [number, number, number];
+  readonly pebble: readonly [number, number, number];
+  readonly pebbleLit: readonly [number, number, number];
+}
+
+/** The scree tones over a ground of mean colour `ground` (RGB). */
+export function screePalette(ground: readonly number[]): ScreePalette {
+  const tone = (grey: number, light: number): [number, number, number] => [
+    Math.round(
+      Math.min(
+        255,
+        ((ground[0] ?? 0) * (1 - grey) + SCREE.grey[0] * grey) * light,
+      ),
+    ),
+    Math.round(
+      Math.min(
+        255,
+        ((ground[1] ?? 0) * (1 - grey) + SCREE.grey[1] * grey) * light,
+      ),
+    ),
+    Math.round(
+      Math.min(
+        255,
+        ((ground[2] ?? 0) * (1 - grey) + SCREE.grey[2] * grey) * light,
+      ),
+    ),
+  ];
+  const rock = tone(SCREE.rockGrey, SCREE.rockLight);
+  return {
+    dust: tone(SCREE.dustGrey, SCREE.dustLight),
+    rock,
+    pebble: [
+      Math.round(rock[0] * 0.66),
+      Math.round(rock[1] * 0.66),
+      Math.round(rock[2] * 0.66),
+    ],
+    pebbleLit: tone(0.6, 1.3),
+  };
+}
+
+const screeCache = new WeakMap<GroundSources, readonly ScreePalette[]>();
+
+/** The scree palette of every ground rank, from its texture's mean colour. */
+export function screePalettes(sources: GroundSources): readonly ScreePalette[] {
+  const cached = screeCache.get(sources);
+  if (cached !== undefined) return cached;
+  const palettes = GROUND_RANK.map((terrain) => {
+    const data = sources.textures[terrain].data;
+    let r = 0;
+    let g = 0;
+    let b = 0;
+    let count = 0;
+    for (let i = 0; i < data.length; i += 4 * 7) {
+      r += data[i] ?? 0;
+      g += data[i + 1] ?? 0;
+      b += data[i + 2] ?? 0;
+      count += 1;
+    }
+    const k = 1 / Math.max(1, count);
+    return screePalette([r * k, g * k, b * k]);
+  });
+  screeCache.set(sources, palettes);
+  return palettes;
+}
 
 /**
  * The scree tier of world pixel (wx, wy) under a mountain field f: 0 none,
@@ -404,8 +487,8 @@ export interface GroundLayout {
   readonly depth: Uint8Array;
   /** EDGE bits (N1 E2 S4 W8) of a forest cell facing no forest; 255 = no forest. */
   readonly forest: Uint8Array;
-  /** Road links that may reach each cell. */
-  readonly roads: readonly (readonly RoadLink[])[];
+  /** Road segments that may reach each cell. */
+  readonly roads: readonly (readonly RoadSegment[])[];
   /** Distinct land ranks in each cell's 3 x 3 neighbourhood, ascending. */
   readonly ranks: readonly (readonly number[])[];
   /** Per rank r: 1 on a land cell of rank r or higher (the spill fields). */
@@ -497,17 +580,22 @@ export function buildGroundLayout(
           const j = at(x + dx, y + dy);
           if (j >= 0 && mountain[j] === 1) nearMountain[y * width + x] = 1;
         }
-  const links = roadLinks(map, roadEnds);
-  const roads: RoadLink[][] = Array.from({ length: n }, () => []);
-  for (const link of links) {
-    const touched = new Set<number>();
-    for (const [cx, cy] of [link.from, link.to])
-      for (let dy = -1; dy <= 1; dy += 1)
-        for (let dx = -1; dx <= 1; dx += 1) {
-          const j = at(cx + dx, cy + dy);
-          if (j >= 0) touched.add(j);
-        }
-    for (const j of touched) roads[j]?.push(link);
+  const roads: RoadSegment[][] = Array.from({ length: n }, () => []);
+  for (const seg of roadSegments(map, roadEnds)) {
+    const reach = ROAD_REACH + 1;
+    const xa = Math.min(seg.ax, seg.ax + seg.cx) - reach;
+    const xb = Math.max(seg.ax, seg.ax + seg.cx) + reach;
+    const ya = Math.min(seg.ay, seg.ay + seg.cy) - reach;
+    const yb = Math.max(seg.ay, seg.ay + seg.cy) + reach;
+    for (let cy = Math.floor(ya / CELL); cy <= Math.floor(yb / CELL); cy += 1)
+      for (
+        let cx = Math.floor(xa / CELL);
+        cx <= Math.floor(xb / CELL);
+        cx += 1
+      ) {
+        const j = at(cx, cy);
+        if (j >= 0) roads[j]?.push(seg);
+      }
   }
   return {
     width,
@@ -543,6 +631,7 @@ export function paintGround(
   out: Uint8ClampedArray,
 ): void {
   const textures = GROUND_RANK.map((terrain) => sources.textures[terrain]);
+  const screes = screePalettes(sources);
   const cx0 = Math.max(0, Math.floor(x0 / CELL));
   const cy0 = Math.max(0, Math.floor(y0 / CELL));
   const cx1 = Math.min(layout.width - 1, Math.floor((x0 + w - 1) / CELL));
@@ -677,16 +766,17 @@ export function paintGround(
                 wy + 0.5,
               );
               const tier = screeAt(field.f, wx, wy);
-              if (tier !== 0) {
-                if (tier === 2) blend(o, SCREE.rock, SCREE.rockAlpha);
-                else blend(o, SCREE.dust, SCREE.alpha);
+              const palette = screes[rank];
+              if (tier !== 0 && palette !== undefined) {
+                if (tier === 2) blend(o, palette.rock, SCREE.rockAlpha);
+                else blend(o, palette.dust, SCREE.alpha);
                 const roll = hash4(wx, wy, 0x5c, 1) / 0x100000000;
-                if (roll < SCREE.pebbleShare) put(o, SCREE.pebble);
+                if (roll < SCREE.pebbleShare) put(o, palette.pebble);
                 else if (
                   hash4(wx + 1, wy - 1, 0x5c, 1) / 0x100000000 <
                   SCREE.pebbleShare
                 )
-                  put(o, SCREE.pebbleLit);
+                  put(o, palette.pebbleLit);
               }
             }
             if (coastBits !== 0) {

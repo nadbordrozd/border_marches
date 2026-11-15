@@ -233,12 +233,53 @@ export interface ForestCell {
   readonly bodies: readonly ForestPlacement[];
   /** Upward bands drawn in the foreground at this cell's turn. */
   readonly bands: readonly ForestBand[];
+  /**
+   * A thin cell (the tip or corner of a wood, a one-cell strand, or a hashed
+   * share of a wood's edge cells): no packed piece, a few loose clumps
+   * instead (forest-fringe.ts), so a wood's outline frays instead of
+   * following the cell grid.
+   */
+  readonly sparse: boolean;
+  /** The row whose turn draws this cell's packed piece (null when sparse). */
+  readonly anchorRow: number | null;
+  /** Edges (EDGE_* bits) facing land without a packed piece. */
+  readonly fringe: number;
+  /**
+   * Edges (EDGE_* bits) over which tree crowns may hang: the neighbour is
+   * open or thin wood, not water, road, rock, an object or off the map.
+   */
+  readonly spill: number;
+}
+
+/** The share of a wood's straight-edged cells (three forest neighbours) thinned. */
+export const EDGE_THINNING = 0.3;
+
+/**
+ * Whether Forest cell (x, y) is thin (drawn as loose clumps): it has at most
+ * two forest neighbours (orthogonal), or three and a hash below
+ * EDGE_THINNING. `forest` says whether a cell is Forest.
+ */
+export function isSparseForest(
+  forest: (x: number, y: number) => boolean,
+  x: number,
+  y: number,
+): boolean {
+  const around =
+    (forest(x, y - 1) ? 1 : 0) +
+    (forest(x + 1, y) ? 1 : 0) +
+    (forest(x, y + 1) ? 1 : 0) +
+    (forest(x - 1, y) ? 1 : 0);
+  if (around <= 2) return true;
+  return (
+    around === 3 && hash4(x, y, 0x5a, 0x19) / 0x1_0000_0000 < EDGE_THINNING
+  );
 }
 
 /**
  * The forest role of every Forest cell of the map, by row-major index.
  * `featured` cells (under an object) are clearings with a single piece and
- * no seam clump. `seamCount(set)` is the number of seam clumps of a set.
+ * no seam clump. `seamCount(set)` is the number of seam clumps of a set; a
+ * set with clumps thins its woods (`isSparseForest`).
  */
 export function forestCells(
   map: GameMap,
@@ -253,8 +294,37 @@ export function forestCells(
     inside(x, y) && map.cells[y * width + x]?.obstacle === "forest";
   const terrainAt = (x: number, y: number): Terrain =>
     map.cells[y * width + x]?.terrain ?? "grass";
+  const sparse = new Uint8Array(width * height);
+  for (let y = 0; y < height; y += 1)
+    for (let x = 0; x < width; x += 1) {
+      const index = y * width + x;
+      const set = terrainAt(x, y);
+      if (
+        forest(x, y) &&
+        set !== "water" &&
+        !featured.has(index) &&
+        seamCount(set) > 0 &&
+        isSparseForest(forest, x, y)
+      )
+        sparse[index] = 1;
+    }
   const packable = (x: number, y: number): boolean =>
-    forest(x, y) && !featured.has(y * width + x);
+    forest(x, y) && !featured.has(y * width + x) && sparse[y * width + x] !== 1;
+  /** Land beside a wood that tree crowns may hang over. */
+  const overhang = (x: number, y: number): boolean => {
+    if (!inside(x, y)) return false;
+    const index = y * width + x;
+    const cell = map.cells[index];
+    if (cell === undefined || cell.terrain === "water" || cell.road)
+      return false;
+    if (featured.has(index)) return false;
+    return (
+      cell.obstacle === "none" ||
+      (cell.obstacle === "forest" && sparse[index] === 1)
+    );
+  };
+  const unpacked = (x: number, y: number): boolean =>
+    inside(x, y) && (!forest(x, y) || sparse[y * width + x] === 1);
   const joinable = (ax: number, ay: number, bx: number, by: number): boolean =>
     terrainAt(ax, ay) === terrainAt(bx, by);
   const placements: ForestPlacement[] = [];
@@ -301,6 +371,19 @@ export function forestCells(
       if (!forest(x, y + 1)) edges |= EDGE_S;
       if (!forest(x - 1, y)) edges |= EDGE_W;
       const own = pieceOf.get(index);
+      let fringe = 0;
+      let spill = 0;
+      for (const [bit, dx, dy] of [
+        [EDGE_N, 0, -1],
+        [EDGE_E, 1, 0],
+        [EDGE_S, 0, 1],
+        [EDGE_W, -1, 0],
+      ] as const) {
+        if (unpacked(x + dx, y + dy)) fringe |= bit;
+        if (overhang(x + dx, y + dy)) spill |= bit;
+      }
+      const ownCells = own === undefined ? [] : forestPlacementCells(own);
+      const anchor = ownCells[ownCells.length - 1];
       const east = forest(x + 1, y) ? pieceOf.get(index + 1) : undefined;
       const north = forest(x, y - 1) ? pieceOf.get(index - width) : undefined;
       const clumps = seamCount(set);
@@ -331,6 +414,10 @@ export function forestCells(
             : null,
         bodies: bodies.get(index) ?? [],
         bands: bands.get(index) ?? [],
+        sparse: sparse[index] === 1,
+        anchorRow: anchor === undefined ? null : anchor[1],
+        fringe,
+        spill,
       });
     }
   return result;

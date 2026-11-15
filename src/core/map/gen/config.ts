@@ -76,6 +76,8 @@ export interface GenConfig {
     mountainShare: Record<Terrain, number>;
     /** Map-edge frame depth at most (0 disables the frame). */
     edgeDepth: number;
+    /** How much a slow noise swells or starves the frame (0 = even). */
+    edgeSwell: number;
     /** Spurs (short ridges reaching into a zone) per border cell. */
     spurRate: number;
     /** Spur length in cells. */
@@ -100,13 +102,19 @@ export interface GenConfig {
     size: readonly [number, number];
     /** Mountain share of clusters by the zone's main terrain. */
     mountainShare: Record<Terrain, number>;
-    /** Horizontal growth bias for mountain clusters (ridges pack well). */
+    /** East-west stretch of mountain cluster blobs (ridges pack well). */
     ridgeBias: number;
+    /** Feature size of the noise that makes cluster outlines lumpy. */
+    lumpScale: number;
+    /** Weight of that noise against the blob's ellipse. */
+    lumpAmount: number;
+    /** Share of clusters that are small groups of one to three cells. */
+    smallShare: number;
     /** Chance a cluster starts next to an existing range or cluster. */
     attachChance: number;
     /** Free cells kept between unattached clusters. */
     gap: number;
-    /** Intentional lone mountain peaks per map, at most. */
+    /** Intentional lone obstacles (single peaks or trees) per map, at most. */
     lonePeaks: number;
     /** Keep clusters at least this far from town entrances. */
     townClearance: number;
@@ -203,6 +211,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       water: 0.5,
     },
     edgeDepth: 2.8,
+    edgeSwell: 0.7,
     spurRate: 0.035,
     spurLength: [2, 4],
   },
@@ -226,9 +235,12 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       water: 0.5,
     },
     ridgeBias: 2.2,
+    lumpScale: 2.5,
+    lumpAmount: 0.3,
+    smallShare: 0.3,
     attachChance: 0.22,
     gap: 2,
-    lonePeaks: 2,
+    lonePeaks: 5,
     townClearance: 3,
     pocketFill: 14,
   },

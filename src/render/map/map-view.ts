@@ -18,7 +18,7 @@
  * (0.75, 1, 1.5, 2); the world origin is snapped to whole device pixels and
  * whole device scales draw nearest-neighbour, fractional ones smoothed.
  */
-import { CELL_PX, UNIT_ASSETS } from "../../assets/manifest";
+import { CELL_PX, HERO_ASSETS, UNIT_ASSETS } from "../../assets/manifest";
 import type { UnitAsset } from "../../assets/manifest";
 import type { GameMap, MapObject } from "../../core/map/types";
 import type { MapAssets, Surface } from "./assets";
@@ -27,8 +27,11 @@ import { paintFog } from "./fog";
 import { buildGroundLayout, paintGround } from "./ground";
 import type { GroundLayout } from "./ground";
 import { hashUnit } from "./hash";
+import { doodadArt } from "./doodad-art";
+import { doodadSpecs } from "./doodads";
 import {
   compareEntries,
+  doodadEntries,
   objectEntries,
   terrainEntries,
   unitEntry,
@@ -38,6 +41,8 @@ import type { SceneEntry } from "./scene";
 const CELL = CELL_PX;
 export const ZOOM_STEPS = [0.75, 1, 1.5, 2] as const;
 export const DEFAULT_ZOOM = 0.75;
+/** The hero sprite drawn when a MapHero names none. */
+export const DEFAULT_HERO = "dinosaur-chieftain";
 /** Cells per side of a cached chunk. */
 export const CHUNK_CELLS = 8;
 const CHUNK_PX = CHUNK_CELLS * CELL;
@@ -51,7 +56,7 @@ export interface MapHero {
   readonly id: string;
   readonly x: number;
   readonly y: number;
-  /** Unit sprite key; the Lost World caveman until the hero sprite lands. */
+  /** Unit or hero sprite key; the Lost World Chieftain by default. */
   readonly unit?: string;
 }
 
@@ -163,30 +168,6 @@ function pathMarker(
   return surface;
 }
 
-/** A small pile of three logs, the wood pickup (no raster exists yet). */
-function logsSurface(): Surface {
-  const surface = createSurface(40, 40);
-  const ctx = context2d(surface);
-  const log = (x: number, y: number, w: number): void => {
-    ctx.fillStyle = "#1a120c";
-    ctx.fillRect(x - 1, y - 1, w + 2, 9);
-    ctx.fillStyle = "#8a5a2e";
-    ctx.fillRect(x, y, w, 7);
-    ctx.fillStyle = "#a8743c";
-    ctx.fillRect(x, y + 5, w, 2);
-    ctx.fillStyle = "#6a4322";
-    ctx.fillRect(x, y, w, 2);
-    ctx.fillStyle = "#e0c08a";
-    ctx.fillRect(x + w - 6, y + 1, 5, 5);
-    ctx.fillStyle = "#b8925a";
-    ctx.fillRect(x + w - 5, y + 2, 3, 3);
-  };
-  log(6, 24, 26);
-  log(10, 17, 24);
-  log(14, 10, 18);
-  return surface;
-}
-
 function starTile(): Surface {
   const size = 256;
   const surface = createSurface(size, size);
@@ -213,7 +194,18 @@ export function createMapView(
   const screen = canvas.getContext("2d");
   if (screen === null) throw new Error("map renderer: no 2D context");
   const images = new Map<string, CanvasImageSource>(assets.images);
-  images.set("code:logs", logsSurface());
+  // The code-drawn doodads (doodad-art.ts).
+  for (const list of Object.values(doodadSpecs()))
+    for (const spec of list) {
+      if (spec.art === undefined || images.has(spec.key)) continue;
+      const art = doodadArt(spec.art.kind, spec.art.ground, spec.art.variant);
+      const surface = createSurface(art.w, art.h);
+      const ctx = context2d(surface);
+      const data = ctx.createImageData(art.w, art.h);
+      data.data.set(art.data);
+      ctx.putImageData(data, 0, 0);
+      images.set(spec.key, surface);
+    }
   const markers = new Map<string, Surface>();
   const marker = (
     kind: "arrow" | "cross",
@@ -312,7 +304,10 @@ export function createMapView(
       return;
     }
     layout = buildGroundLayout(map, roadEnds());
-    const entries = terrainEntries(map, objects).sort(compareEntries);
+    const entries = [
+      ...terrainEntries(map, objects),
+      ...doodadEntries(map, objects, layout),
+    ].sort(compareEntries);
     bodies = entries.filter((e) => e.pass === "TALL_BODY");
     terrainForeground = entries.filter((e) => e.pass === "FOREGROUND");
   };
@@ -323,10 +318,11 @@ export function createMapView(
       ...objectEntries(objects),
     ];
     for (const hero of heroes) {
+      const key = hero.unit ?? DEFAULT_HERO;
       const unit =
-        (UNIT_ASSETS.find(
-          (u) => u.key === (hero.unit ?? "dinosaur-caveman"),
-        ) as UnitAsset | undefined) ?? (UNIT_ASSETS[0] as UnitAsset);
+        HERO_ASSETS.find((u) => u.key === key) ??
+        UNIT_ASSETS.find((u) => u.key === key) ??
+        (HERO_ASSETS[0] as UnitAsset);
       entries.push(unitEntry(unit, hero.x, hero.y, { objectId: hero.id }));
     }
     foreground = entries.sort(compareEntries);
@@ -360,7 +356,17 @@ export function createMapView(
     for (const s of e.sprites) {
       const image = images.get(s.key);
       if (image === undefined) continue;
-      ctx.drawImage(image, s.sx, s.sy, s.sw, s.sh, s.dx, s.dy, s.sw, s.sh);
+      ctx.drawImage(
+        image,
+        s.sx,
+        s.sy,
+        s.sw,
+        s.sh,
+        s.dx,
+        s.dy,
+        s.dw ?? s.sw,
+        s.dh ?? s.sh,
+      );
     }
   };
 
@@ -377,6 +383,8 @@ export function createMapView(
     const image = ctx.createImageData(w, h);
     paintGround(layout, assets.ground, x0, y0, w, h, image.data);
     ctx.putImageData(image, 0, 0);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
     ctx.translate(-x0, -y0);
     for (const e of bodies)
       if (e.x1 > x0 && e.x0 < x0 + w && e.y1 > y0 && e.y0 < y0 + h)

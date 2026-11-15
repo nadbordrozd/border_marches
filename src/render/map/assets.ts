@@ -7,6 +7,7 @@ import {
   FOREST_SETS,
   GROUND_TERRAINS,
   GROUND_TEXTURES,
+  HERO_ASSETS,
   MOUNTAIN_PIECES,
   OBJECT_ASSETS,
   TOWN_ASSETS,
@@ -81,6 +82,7 @@ export function mapAssetList(): ImageAsset[] {
     ]),
     ...TOWN_ASSETS,
     ...UNIT_ASSETS,
+    ...HERO_ASSETS,
     ...OBJECT_ASSETS,
   ];
 }

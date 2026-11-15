@@ -35,6 +35,14 @@ export function buildBorders(st: GenState): void {
     stageSalt(st, "edge"),
     3,
   );
+  // A slower field that swells and starves the frame: deep bulges in some
+  // stretches, bare map edge in others, so the frame is no even band.
+  const edgeSwell = noiseField(
+    g,
+    bc.thicknessScale * 3.2,
+    stageSalt(st, "edge-swell"),
+    2,
+  );
 
   // Which zone of each pair holds the spine.
   const spineSide = new Map<number, number>();
@@ -96,7 +104,9 @@ export function buildBorders(st: GenState): void {
       const x = g.x(i);
       const y = g.y(i);
       const e = Math.min(x + 1, y + 1, g.w - x, g.h - y);
-      const limit = bc.edgeDepth * (stretch(at(edgeN, i)) * 1.7 - 0.45);
+      const swell = bc.edgeSwell * (stretch(at(edgeSwell, i)) * 2 - 1);
+      const limit =
+        bc.edgeDepth * (stretch(at(edgeN, i)) * 1.9 - 0.6) * (1 + swell);
       if (e <= limit) {
         const z = st.zones[a];
         const s = z ? bc.mountainShare[z.main] : 0.5;

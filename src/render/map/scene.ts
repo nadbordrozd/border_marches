@@ -24,7 +24,11 @@ import {
   FOREST_UP_PX,
   MOUNTAIN_LOW_UP_PX,
   MOUNTAIN_TALL_UP_PX,
+  OBJECT_ASSETS,
+  RESOURCE_MINES,
+  RESOURCE_PICKUPS,
   TOWN_ASSETS,
+  TREASURE_PICKUP,
   UNIT_ASSETS,
   mountainPieces,
 } from "../../assets/manifest";
@@ -36,6 +40,9 @@ import type {
 } from "../../assets/manifest";
 import type { GameMap, MapObject } from "../../core/map/types";
 import { objectBounds, objectCells } from "../../core/map/types";
+import { placeDoodads } from "./doodads";
+import { forestClumps } from "./forest-fringe";
+import type { GroundLayout } from "./ground";
 import {
   FOREST_SHAPE_IDS,
   forestCells,
@@ -70,9 +77,12 @@ export interface SpriteOp {
   readonly sy: number;
   readonly sw: number;
   readonly sh: number;
-  /** Destination top-left in world (master) pixels; drawn 1:1. */
+  /** Destination top-left in world (master) pixels; drawn 1:1 ... */
   readonly dx: number;
   readonly dy: number;
+  /** ... unless a destination size is given (a scaled clump). */
+  readonly dw?: number;
+  readonly dh?: number;
 }
 
 /** A flat shadow ellipse, world pixels. */
@@ -138,8 +148,8 @@ function entry(
   for (const s of sprites) {
     x0 = Math.min(x0, s.dx);
     y0 = Math.min(y0, s.dy);
-    x1 = Math.max(x1, s.dx + s.sw);
-    y1 = Math.max(y1, s.dy + s.sh);
+    x1 = Math.max(x1, s.dx + (s.dw ?? s.sw));
+    y1 = Math.max(y1, s.dy + (s.dh ?? s.sh));
   }
   for (const s of shadows) {
     x0 = Math.min(x0, s.cx - s.rx * 1.3);
@@ -273,12 +283,13 @@ export function terrainEntries(
     }
   }
   const seams = (set: GroundTerrain) => FOREST_SETS[set].seams;
-  for (const [index, cell] of forestCells(
+  const woods = forestCells(
     map,
     FOREST_COUNTS,
     (set) => seams(set).length,
     featured,
-  )) {
+  );
+  for (const [index, cell] of woods) {
     const x = index % width;
     const y = Math.floor(index / width);
     const sprites: SpriteOp[] = [];
@@ -340,7 +351,53 @@ export function terrainEntries(
       );
     }
   }
+  for (const clump of forestClumps(map, woods, seams, featured)) {
+    const seam = seams(clump.set)[clump.seam];
+    if (seam === undefined) continue;
+    out.push(
+      entry("TALL_BODY", clump.row, clump.col, LAYER.TERRAIN, [
+        {
+          key: seam.key,
+          sx: 0,
+          sy: 0,
+          sw: seam.w,
+          sh: seam.h,
+          dx: clump.x,
+          dy: clump.y,
+          dw: clump.w,
+          dh: clump.h,
+        },
+      ]),
+    );
+  }
   return out;
+}
+
+/**
+ * The decoration layer (doodads.ts): small non-blocking features on open
+ * ground, drawn in the body pass after the pieces of their row.
+ */
+export function doodadEntries(
+  map: GameMap,
+  objects: readonly MapObject[],
+  layout: GroundLayout,
+): SceneEntry[] {
+  const featured = featuredCells(map, objects);
+  return placeDoodads(map, layout, featured).map((d) =>
+    entry("TALL_BODY", d.row + 0.25, d.col, LAYER.TERRAIN, [
+      {
+        key: d.spec.key,
+        sx: 0,
+        sy: 0,
+        sw: d.spec.w,
+        sh: d.spec.h,
+        dx: d.x,
+        dy: d.y,
+        dw: d.w,
+        dh: d.h,
+      },
+    ]),
+  );
 }
 
 /**
@@ -478,16 +535,26 @@ export function creatureAsset(creature: unknown): UnitAsset {
   );
 }
 
-const PICKUP_ART: Readonly<Record<string, string>> = {
-  gold: "treasure",
-  ore: "ore",
-  essence: "pearls",
-  wood: "code:logs",
-};
+/**
+ * The 40 x 40 pickup image of a resource (RESOURCE_PICKUPS), or of a
+ * treasure chest (TREASURE_PICKUP).
+ */
+export function pickupKey(resource: unknown, chest = false): string {
+  if (chest) return TREASURE_PICKUP;
+  return (
+    (RESOURCE_PICKUPS as Readonly<Record<string, string>>)[
+      typeof resource === "string" ? resource : ""
+    ] ?? TREASURE_PICKUP
+  );
+}
 
-/** The 40 x 40 pickup image of a resource. */
-export function pickupKey(resource: unknown): string {
-  return PICKUP_ART[typeof resource === "string" ? resource : ""] ?? "treasure";
+/** The mine image of a resource (RESOURCE_MINES). */
+export function mineKey(resource: unknown): string {
+  return (
+    (RESOURCE_MINES as Readonly<Record<string, string>>)[
+      typeof resource === "string" ? resource : ""
+    ] ?? "mountain-mine-a"
+  );
 }
 
 /** A unit sprite standing on cell (x, y): its anchor on the cell centre. */
@@ -519,6 +586,11 @@ export function unitEntry(
     { cells: [[x, y]], ...extra },
   );
 }
+
+/** How far a mine building leans from its cell toward the entrance, px. */
+export const MINE_LEAN_PX = 10;
+/** How far above its cell's bottom edge a mine building's image ends, px. */
+export const MINE_SEAT_PX = 2;
 
 /** How far above the footprint's bottom edge a town's ground line sits. */
 export const TOWN_SEAT_PX = 8;
@@ -563,47 +635,79 @@ export function objectEntries(objects: readonly MapObject[]): SceneEntry[] {
         ),
       );
     } else if (obj.kind === "mine") {
-      // The mined mountain, bottom-centred over the footprint.
-      const w = CELL;
-      const h = CELL + MOUNTAIN_LOW_UP_PX;
-      const left = Math.round(centreX - w / 2);
-      const top = bottom - h;
-      out.push(
-        entry(
-          "FOREGROUND",
-          row,
-          col,
-          LAYER.SETTLEMENT,
-          [
-            {
-              key: "mountain-mine-a",
-              sx: 0,
-              sy: 0,
-              sw: w,
-              sh: h,
-              dx: left,
-              dy: top,
-            },
-          ],
-          [
-            {
-              cx: left + 44,
-              cy: bottom - 10,
-              rx: 38,
-              ry: 10,
-              alpha: SHADOW_ALPHA / 2,
-            },
-            {
-              cx: left + 40,
-              cy: bottom - 8,
-              rx: 36,
-              ry: 9,
-              alpha: SHADOW_ALPHA,
-            },
-          ],
-          { cells, objectId: obj.id },
-        ),
-      );
+      const key = mineKey(obj.data["resource"]);
+      const building = OBJECT_ASSETS.find((asset) => asset.key === key);
+      if (building === undefined) {
+        // The mined mountain, bottom-centred over the footprint.
+        const w = CELL;
+        const h = CELL + MOUNTAIN_LOW_UP_PX;
+        const left = Math.round(centreX - w / 2);
+        const top = bottom - h;
+        out.push(
+          entry(
+            "FOREGROUND",
+            row,
+            col,
+            LAYER.SETTLEMENT,
+            [{ key, sx: 0, sy: 0, sw: w, sh: h, dx: left, dy: top }],
+            [
+              {
+                cx: left + 44,
+                cy: bottom - 10,
+                rx: 38,
+                ry: 10,
+                alpha: SHADOW_ALPHA / 2,
+              },
+              {
+                cx: left + 40,
+                cy: bottom - 8,
+                rx: 36,
+                ry: 9,
+                alpha: SHADOW_ALPHA,
+              },
+            ],
+            { cells, objectId: obj.id },
+          ),
+        );
+      } else {
+        // A mine building on its blocked cell, leaning toward the entrance
+        // (where the hero stands), its base a few pixels above the bottom.
+        const [bx, by] = obj.blocked[0] ?? [obj.x, obj.y];
+        const towardEntrance = Math.sign(obj.x - bx) * MINE_LEAN_PX;
+        const left = Math.round(
+          bx * CELL + CELL / 2 + towardEntrance - building.w / 2,
+        );
+        const top = (by + 1) * CELL - MINE_SEAT_PX - building.h;
+        out.push(
+          entry(
+            "FOREGROUND",
+            row,
+            col,
+            LAYER.SETTLEMENT,
+            [
+              {
+                key,
+                sx: 0,
+                sy: 0,
+                sw: building.w,
+                sh: building.h,
+                dx: left,
+                dy: top,
+              },
+            ],
+            [
+              {
+                cx: left + building.w / 2 + 2,
+                cy: top + building.h - 9,
+                rx: building.w * 0.44,
+                ry: 8,
+                alpha: SHADOW_ALPHA,
+              },
+            ],
+            { cells, objectId: obj.id },
+          ),
+        );
+      }
     } else if (obj.kind === "pickup") {
       const left = obj.x * CELL + 20;
       const top = obj.y * CELL + 20;
@@ -615,7 +719,7 @@ export function objectEntries(objects: readonly MapObject[]): SceneEntry[] {
           LAYER.RESOURCE,
           [
             {
-              key: pickupKey(obj.data["resource"]),
+              key: pickupKey(obj.data["resource"], obj.data["chest"] === true),
               sx: 0,
               sy: 0,
               sw: 40,

@@ -4,8 +4,7 @@
  * see LESSONS_MAP_AND_FACTION_SPRITES.md section 3.10.
  *
  * A dirt track about 9 px wide whose half-width varies with noise read at
- * each pixel's world position; each link between two road cells bends
- * sideways by at most 4 px (a pure function of its two cells); a one-pixel
+ * each pixel's world position; a one-pixel
  * dark edge in two tones with gaps, crumbs just outside, a warm dirt fill
  * with darker and lighter patches, a shaded and a lit rim, dashed ruts and
  * pebbles. Pulp Wars cut the pixels per cell and cached two sprites; here
@@ -13,6 +12,16 @@
  * is drawn before every tree and rock, so roads pass under them.
  *
  * Dock gangways are Polytopia-specific and were left out.
+ *
+ * Border Marches (bead border_marches-xaj.13): the track is no longer drawn
+ * cell link by cell link (ruler lines with braces at the corners) but along
+ * SMOOTH PATHS: the road cells form a graph, which is cut into chains
+ * between junctions and ends (`roadChains`); each chain's cell centres are
+ * averaged (a staircase becomes a diagonal), moved by a slow meander noise
+ * and rounded by Chaikin corner cutting (`smoothPath`), and the painter
+ * measures each pixel's distance to the resulting short straight segments
+ * (`roadSegments`). Every chain meeting at a junction ends on the junction
+ * cell's own point, so roads merge there.
  */
 import type { GameMap } from "../../core/map/types";
 import { CELL_PX } from "../../assets/manifest";
@@ -29,7 +38,6 @@ export const DIRT_ROAD = {
   crumb: [0x7d, 0x54, 0x33],
   halfWidth: 4.5,
   roughness: 1.9,
-  wobble: 4,
 } as const;
 
 export const ROAD_PIXEL = {
@@ -58,17 +66,18 @@ export const ROAD_COLOURS: readonly (readonly [number, number, number])[] = [
 
 const RUT_OFFSET = 1.9;
 const RUT_DASH = 9;
-const RUT_HUB = 9;
+const RUT_HUB = 14;
 const EDGE = 1.15;
 const CRUMB_REACH = 3.2;
 export const ROAD_REACH =
   DIRT_ROAD.halfWidth + DIRT_ROAD.roughness + EDGE + CRUMB_REACH;
 
-/** One link between two road cells, in world pixels. */
-export interface RoadLink {
-  readonly from: readonly [number, number];
-  readonly to: readonly [number, number];
-  /** Start point (the from-cell's centre), world px. */
+/** A road as a smooth polyline through world pixels. */
+export type RoadPath = readonly (readonly [number, number])[];
+
+/** One straight piece of a smoothed road path, in world pixels. */
+export interface RoadSegment {
+  /** Start point, world px. */
   readonly ax: number;
   readonly ay: number;
   /** Vector from start to end, world px, and its length. */
@@ -78,118 +87,229 @@ export interface RoadLink {
   /** Unit normal. */
   readonly nx: number;
   readonly ny: number;
-  readonly bend: readonly [number, number];
-  /** Per-link hash input (ruts). */
+  /** Distance along the whole path at the start, and the path's length. */
+  readonly s0: number;
+  readonly total: number;
+  /** Per-path hash input (ruts). */
   readonly salt: number;
 }
 
-/** Sideways offset of a link at t in [0, 1], world px. */
-export function roadBend(link: Pick<RoadLink, "bend">, t: number): number {
-  const s = Math.sin(Math.PI * t);
-  return s * s * (link.bend[0] + link.bend[1] * Math.cos(Math.PI * t));
-}
+/** How far the meander moves a road point, px at most. */
+export const ROAD_MEANDER = 20;
+/** Lattice spacing of the meander noise, px (about three cells). */
+const MEANDER_SPACING = CELL_PX * 3.2;
 
-export function makeRoadLink(
-  a: readonly [number, number],
-  b: readonly [number, number],
-): RoadLink {
-  const [from, to] =
-    a[1] < b[1] || (a[1] === b[1] && a[0] <= b[0]) ? [a, b] : [b, a];
-  const signed = (salt: number): number =>
-    (hash4(from[0], from[1], to[0] * 4099 + salt, to[1] * 8191 - salt) /
-      0x100000000) *
-      2 -
-    1;
-  const cx = (to[0] - from[0]) * CELL_PX;
-  const cy = (to[1] - from[1]) * CELL_PX;
-  const length = Math.hypot(cx, cy);
-  return {
-    from,
-    to,
-    ax: from[0] * CELL_PX + CELL_PX / 2,
-    ay: from[1] * CELL_PX + CELL_PX / 2,
-    cx,
-    cy,
-    length,
-    nx: -cy / length,
-    ny: cx / length,
-    bend: [
-      signed(1) * DIRT_ROAD.wobble * 0.65,
-      signed(2) * DIRT_ROAD.wobble * 0.9,
-    ],
-    salt: from[0] * 131 + to[0] + (from[1] * 137 + to[1]) * 7919,
-  };
+/** A road point moved by the meander: a slow noise of its position. */
+export function meander(px: number, py: number): [number, number] {
+  return [
+    px + ROAD_MEANDER * drift(px, py, MEANDER_SPACING, 61),
+    py + ROAD_MEANDER * drift(px, py, MEANDER_SPACING, 67),
+  ];
 }
 
 /**
- * The road links of a map: every pair of orthogonally neighbouring road
- * nodes, a diagonal pair with no road node at either shared corner cell
- * (so diagonal roads join), and Pulp Wars' corner "joins" (the two road
- * neighbours of a road cell's turn are linked too, which rounds the turn).
- * `nodes` are the road cells plus object entrances a road reaches.
+ * The road graph's paths: chains of road cells between junctions and ends
+ * (a node with other than two road neighbours), as lists of cells. A road
+ * cell joins its orthogonal road neighbours, and a diagonal one when neither
+ * shared corner cell is a road node (so a turn never closes a triangle).
+ * `extraNodes` (object entrances) join road cells only.
  */
-export function roadLinks(
+export function roadChains(
   map: GameMap,
   extraNodes: readonly (readonly [number, number])[] = [],
-): RoadLink[] {
+): { cells: [number, number][]; entrance: boolean[] }[] {
   const { width, height } = map;
   const node = new Uint8Array(width * height);
   map.cells.forEach((cell, index) => {
     if (cell.road) node[index] = 1;
   });
   for (const [x, y] of extraNodes)
-    if (x >= 0 && y >= 0 && x < width && y < height) node[y * width + x] = 2;
-  const isNode = (x: number, y: number): boolean =>
-    x >= 0 && y >= 0 && x < width && y < height && node[y * width + x] !== 0;
-  const isRoad = (x: number, y: number): boolean =>
-    x >= 0 && y >= 0 && x < width && y < height && node[y * width + x] === 1;
-  const links: RoadLink[] = [];
-  const seen = new Set<string>();
-  const add = (a: [number, number], b: [number, number]): void => {
-    const k =
-      a[1] < b[1] || (a[1] === b[1] && a[0] <= b[0])
-        ? `${a},${b}`
-        : `${b},${a}`;
-    if (seen.has(k)) return;
-    seen.add(k);
-    links.push(makeRoadLink(a, b));
+    if (
+      x >= 0 &&
+      y >= 0 &&
+      x < width &&
+      y < height &&
+      node[y * width + x] === 0
+    )
+      node[y * width + x] = 2;
+  const kindAt = (x: number, y: number): number =>
+    x >= 0 && y >= 0 && x < width && y < height
+      ? (node[y * width + x] ?? 0)
+      : 0;
+  const adjacency = new Map<number, number[]>();
+  const link = (a: number, b: number): void => {
+    adjacency.set(a, [...(adjacency.get(a) ?? []), b]);
+    adjacency.set(b, [...(adjacency.get(b) ?? []), a]);
   };
   for (let y = 0; y < height; y += 1)
     for (let x = 0; x < width; x += 1) {
-      if (!isNode(x, y)) continue;
-      // An entrance only joins roads, never another entrance.
-      const entrance = !isRoad(x, y);
+      const own = kindAt(x, y);
+      if (own === 0) continue;
       for (const [dx, dy] of [
         [1, 0],
         [0, 1],
+        [1, 1],
+        [-1, 1],
       ] as const) {
-        if (!isNode(x + dx, y + dy)) continue;
-        if (entrance && !isRoad(x + dx, y + dy)) continue;
-        add([x, y], [x + dx, y + dy]);
+        const other = kindAt(x + dx, y + dy);
+        if (other === 0 || (own === 2 && other === 2)) continue;
+        if (dx !== 0 && dy !== 0) {
+          // Diagonal: only between road cells, and only round no corner.
+          if (own !== 1 || other !== 1) continue;
+          if (kindAt(x + dx, y) !== 0 || kindAt(x, y + dy) !== 0) continue;
+        }
+        link(y * width + x, (y + dy) * width + x + dx);
       }
-      if (entrance) continue;
-      for (const dx of [-1, 1]) {
-        const dy = 1;
-        if (!isRoad(x + dx, y + dy)) continue;
-        if (isNode(x + dx, y) || isNode(x, y + dy)) continue;
-        add([x, y], [x + dx, y + dy]);
-      }
-      // Corner joins: round the turn at (x, y). Only at a plain turn
-      // (exactly two road neighbours, at right angles): at a junction the
-      // joins would close little triangles of ground.
-      const sides = [
-        [1, 0],
-        [-1, 0],
-        [0, 1],
-        [0, -1],
-      ].filter(([dx = 0, dy = 0]) => isNode(x + dx, y + dy));
-      if (sides.length === 2)
-        for (const dx of [-1, 1])
-          for (const dy of [-1, 1])
-            if (isRoad(x + dx, y) && isRoad(x, y + dy))
-              add([x + dx, y], [x, y + dy]);
     }
-  return links;
+  // An entrance with several road neighbours keeps only the nearest one
+  // (orthogonal first): the road ends at the door, it does not loop round.
+  for (const [index, list] of adjacency) {
+    if (node[index] !== 2 || list.length <= 1) continue;
+    const keep = list[0] as number;
+    for (const other of list.slice(1)) {
+      const back = adjacency.get(other) ?? [];
+      adjacency.set(
+        other,
+        back.filter((k) => k !== index),
+      );
+    }
+    adjacency.set(index, [keep]);
+  }
+  const degree = (index: number): number => adjacency.get(index)?.length ?? 0;
+  const seen = new Set<string>();
+  const edgeKey = (a: number, b: number): string =>
+    a < b ? `${a}:${b}` : `${b}:${a}`;
+  const chains: { cells: [number, number][]; entrance: boolean[] }[] = [];
+  const walk = (start: number, next: number): void => {
+    const indices = [start];
+    let prev = start;
+    let at = next;
+    seen.add(edgeKey(start, next));
+    for (;;) {
+      indices.push(at);
+      if (at === start || degree(at) !== 2) break;
+      const onward = (adjacency.get(at) ?? []).find((k) => k !== prev);
+      if (onward === undefined || seen.has(edgeKey(at, onward))) break;
+      seen.add(edgeKey(at, onward));
+      prev = at;
+      at = onward;
+    }
+    chains.push({
+      cells: indices.map((k) => [k % width, Math.floor(k / width)]),
+      entrance: indices.map((k) => node[k] === 2),
+    });
+  };
+  const order = [...adjacency.keys()].sort((a, b) => a - b);
+  for (const index of order) {
+    if (degree(index) === 2) continue;
+    for (const next of adjacency.get(index) ?? [])
+      if (!seen.has(edgeKey(index, next))) walk(index, next);
+  }
+  // Closed loops with no junction.
+  for (const index of order)
+    for (const next of adjacency.get(index) ?? [])
+      if (!seen.has(edgeKey(index, next))) walk(index, next);
+  return chains;
+}
+
+/**
+ * Smooths a polyline whose ends stay put: two rounds of a [1/4, 1/2, 1/4]
+ * average (a staircase of cells becomes a diagonal) and three of Chaikin's
+ * corner cutting (corners become curves).
+ */
+export function smoothPath(
+  points: RoadPath,
+  fixed: readonly boolean[] = [],
+): [number, number][] {
+  let pts = points.map((p): [number, number] => [p[0], p[1]]);
+  for (let round = 0; round < 2 && pts.length >= 3; round += 1)
+    pts = pts.map((p, k): [number, number] => {
+      if (k === 0 || k === pts.length - 1) return p;
+      const a = pts[k - 1] as [number, number];
+      const b = pts[k + 1] as [number, number];
+      return [(a[0] + 2 * p[0] + b[0]) / 4, (a[1] + 2 * p[1] + b[1]) / 4];
+    });
+  // The meander, after the averaging (which would flatten it): a slow noise
+  // of the position, so the two paths meeting at a junction agree on it.
+  pts = pts.map((p, k) => (fixed[k] === true ? p : meander(p[0], p[1])));
+  if (pts.length < 3) return pts;
+  for (let round = 0; round < 3; round += 1) {
+    const out: [number, number][] = [pts[0] as [number, number]];
+    for (let k = 0; k + 1 < pts.length; k += 1) {
+      const a = pts[k] as [number, number];
+      const b = pts[k + 1] as [number, number];
+      const q: [number, number] = [
+        0.75 * a[0] + 0.25 * b[0],
+        0.75 * a[1] + 0.25 * b[1],
+      ];
+      const r: [number, number] = [
+        0.25 * a[0] + 0.75 * b[0],
+        0.25 * a[1] + 0.75 * b[1],
+      ];
+      if (k > 0) out.push(q);
+      if (k + 2 < pts.length) out.push(r);
+    }
+    out.push(pts[pts.length - 1] as [number, number]);
+    pts = out;
+  }
+  return pts;
+}
+
+/** The smoothed road paths of a map, world pixels. */
+export function roadPaths(
+  map: GameMap,
+  extraNodes: readonly (readonly [number, number])[] = [],
+): [number, number][][] {
+  return roadChains(map, extraNodes).map((chain) =>
+    smoothPath(
+      chain.cells.map(([x, y]) => [
+        x * CELL_PX + CELL_PX / 2,
+        y * CELL_PX + CELL_PX / 2,
+      ]),
+      chain.entrance,
+    ),
+  );
+}
+
+/** The straight segments of the smoothed road paths of a map. */
+export function roadSegments(
+  map: GameMap,
+  extraNodes: readonly (readonly [number, number])[] = [],
+): RoadSegment[] {
+  const out: RoadSegment[] = [];
+  roadPaths(map, extraNodes).forEach((path, index) => {
+    let total = 0;
+    for (let k = 0; k + 1 < path.length; k += 1) {
+      const a = path[k] as [number, number];
+      const b = path[k + 1] as [number, number];
+      total += Math.hypot(b[0] - a[0], b[1] - a[1]);
+    }
+    const first = path[0] ?? [0, 0];
+    const salt = hash4(Math.round(first[0]), Math.round(first[1]), index, 0x2d);
+    let s0 = 0;
+    for (let k = 0; k + 1 < path.length; k += 1) {
+      const a = path[k] as [number, number];
+      const b = path[k + 1] as [number, number];
+      const cx = b[0] - a[0];
+      const cy = b[1] - a[1];
+      const length = Math.hypot(cx, cy);
+      if (length < 1e-6) continue;
+      out.push({
+        ax: a[0],
+        ay: a[1],
+        cx,
+        cy,
+        length,
+        nx: -cy / length,
+        ny: cx / length,
+        s0,
+        total,
+        salt,
+      });
+      s0 += length;
+    }
+  });
+  return out;
 }
 
 function speck(gx: number, gy: number, salt: number): number {
@@ -224,60 +344,53 @@ export function drift(
 }
 
 /**
- * The road pixel kind at world pixel (gx, gy) given the links that may reach
- * it (ROAD_PIXEL.*).
+ * The road pixel kind at world pixel (gx, gy) given the segments that may
+ * reach it (ROAD_PIXEL.*).
  */
 export function roadPixelAt(
-  links: readonly RoadLink[],
+  segments: readonly RoadSegment[],
   gx: number,
   gy: number,
 ): number {
   const P = ROAD_PIXEL;
   const px = gx + 0.5;
   const py = gy + 0.5;
-  const bendReach = DIRT_ROAD.wobble + ROAD_REACH;
   let nearest = Number.POSITIVE_INFINITY;
   let southWest = 0;
   let rut = false;
-  for (const link of links) {
-    const rx = px - link.ax;
-    const ry = py - link.ay;
-    const t = (rx * link.cx + ry * link.cy) / (link.length * link.length);
-    const lateral = rx * link.nx + ry * link.ny;
-    if (
-      lateral > bendReach ||
-      lateral < -bendReach ||
-      t * link.length < -ROAD_REACH ||
-      (t - 1) * link.length > ROAD_REACH
-    )
+  for (const seg of segments) {
+    const rx = px - seg.ax;
+    const ry = py - seg.ay;
+    const lateral = rx * seg.nx + ry * seg.ny;
+    if (lateral > ROAD_REACH || lateral < -ROAD_REACH) continue;
+    const t = (rx * seg.cx + ry * seg.cy) / (seg.length * seg.length);
+    if (t * seg.length < -ROAD_REACH || (t - 1) * seg.length > ROAD_REACH)
       continue;
     let best: number;
-    let side = 0;
     let sw: number;
-    const along = Math.max(0, Math.min(1, t)) * link.length;
     if (t <= 0 || t >= 1) {
-      const ex = t <= 0 ? rx : rx - link.cx;
-      const ey = t <= 0 ? ry : ry - link.cy;
+      const ex = t <= 0 ? rx : rx - seg.cx;
+      const ey = t <= 0 ? ry : ry - seg.cy;
       best = Math.sqrt(ex * ex + ey * ey);
-      sw = ey - ex;
+      sw = (ey - ex) * 0.7;
     } else {
-      side = lateral - roadBend(link, t);
-      best = Math.abs(side);
-      sw = side * (link.ny - link.nx);
+      best = Math.abs(lateral);
+      sw = lateral * (seg.ny - seg.nx);
     }
     if (best < nearest) {
       nearest = best;
       southWest = sw;
     }
-    if (Math.abs(best - RUT_OFFSET) < 0.5) {
+    if (t >= 0 && t < 1 && Math.abs(best - RUT_OFFSET) < 0.5) {
+      const along = seg.s0 + t * seg.length;
       const dash = Math.floor(along / RUT_DASH);
       const within = along / RUT_DASH - dash;
       if (
         along > RUT_HUB &&
-        along < link.length - RUT_HUB &&
+        along < seg.total - RUT_HUB &&
         within > 0.1 &&
         within < 0.9 &&
-        hash4(link.salt, 0, dash, side < 0 ? 3 : 7) / 0x100000000 < 0.5
+        hash4(seg.salt, 0, dash, lateral < 0 ? 3 : 7) / 0x100000000 < 0.5
       )
         rut = true;
     }

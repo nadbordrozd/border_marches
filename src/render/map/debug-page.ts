@@ -266,7 +266,9 @@ export async function startMapDebug(
   view.setZoom(Number.isFinite(zoom) ? zoom : DEFAULT_ZOOM);
   const hero = map.objects.find((o) => o.kind === "hero-start");
   if (hero !== undefined)
-    view.setHeroes([{ id: "hero-0", x: hero.x, y: hero.y }]);
+    view.setHeroes([
+      { id: "hero-0", x: hero.x, y: hero.y, unit: "dinosaur-chieftain" },
+    ]);
   if (params.get("fog") === "1") view.setExplored(debugExplored(map));
   const target = map.objects.find((o) => o.kind === "monster");
   if (params.get("path") !== "0" && hero !== undefined && target !== undefined)

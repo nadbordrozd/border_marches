@@ -5,7 +5,9 @@
  * section 3.13.
  *
  * Every unexplored cell shows one continuous texture of mist with round
- * puffs, repeating every seven cells with no cell grid; each puff has a pale
+ * puffs, repeating every thirteen cells (Pulp Wars: seven) with no cell
+ * grid, under a second, non-periodic layer of light and shade (`fogTone`)
+ * so the repeat does not show as a lattice; each puff has a pale
  * rim at its bottom left, a shaded rim and a short cast shadow at its top
  * right (the sun is at the bottom left). Every explored cell beside the fog
  * draws round lobes reaching about 6 px (up to about 12) out of the fog with
@@ -18,6 +20,7 @@
  */
 import { CELL_PX } from "../../assets/manifest";
 import { hashUnit, modulo } from "./hash";
+import { drift } from "./road";
 import {
   cellField,
   edgeDistance,
@@ -34,7 +37,7 @@ import {
 type Rgb = readonly [number, number, number];
 
 const CELL = CELL_PX;
-export const FOG_PHASES = 7;
+export const FOG_PHASES = 13;
 export const FOG_TEXTURE_SIZE = CELL * FOG_PHASES;
 
 export const FOG_STYLE = {
@@ -47,7 +50,7 @@ export const FOG_STYLE = {
   rim: [208, 200, 240] as Rgb,
   shadow: [54, 50, 100] as Rgb,
   featherAlpha: 0.42,
-  puffs: 46,
+  puffs: 159,
   lobeRadius: [7, 18],
   reach: 6,
   scallop: 5.5,
@@ -157,9 +160,9 @@ export function fogTexturePixels(): Uint8ClampedArray {
       const fx = x / size;
       const fy = y / size;
       const mottle =
-        0.6 * tileNoise(fx * 6, fy * 6, 6, 6, 21) +
-        0.28 * tileNoise(fx * 13, fy * 13, 13, 13, 22) +
-        0.12 * tileNoise(fx * 31, fy * 31, 31, 31, 23);
+        0.6 * tileNoise(fx * 11, fy * 11, 11, 11, 21) +
+        0.28 * tileNoise(fx * 24, fy * 24, 24, 24, 22) +
+        0.12 * tileNoise(fx * 58, fy * 58, 58, 58, 23);
       const here = heightAt(x, y);
       let colour: Rgb;
       if (here > 0) {
@@ -184,9 +187,25 @@ export function fogTexturePixels(): Uint8ClampedArray {
   return pixels;
 }
 
+const TONE_STEP = 16;
+
+/**
+ * The slow light and shade laid over the periodic cloud at world pixel
+ * (wx, wy): a brightness factor of about 0.88 to 1.12 from two octaves of
+ * value noise (periods of about 5 and 2 cells), not tied to the texture.
+ */
+export function fogTone(wx: number, wy: number): number {
+  return (
+    1 +
+    0.09 * drift(wx, wy, CELL * 4.6, 91) +
+    0.04 * drift(wx, wy, CELL * 1.9, 92)
+  );
+}
+
 /** How far the cloud reaches out of the fog at world pixel (wx, wy). */
 export function fogEdgeReach(wx: number, wy: number): number {
-  const turn = (2 * Math.PI) / FOG_TEXTURE_SIZE;
+  // The edge keeps the Pulp Wars wave lengths (a seven-cell period).
+  const turn = (2 * Math.PI) / (CELL * 7);
   return (
     FOG_STYLE.reach +
     FOG_STYLE.scallop *
@@ -256,6 +275,31 @@ export function paintFog(
   const cy0 = Math.max(0, Math.floor(y0 / CELL));
   const cx1 = Math.min(width - 1, Math.floor((x0 + w - 1) / CELL));
   const cy1 = Math.min(height - 1, Math.floor((y0 + h - 1) / CELL));
+  // A second, non-periodic layer over the periodic cloud: a slow light and
+  // shade of the world position, sampled every TONE_STEP px and blended, so
+  // two copies of the texture never look the same.
+  const gw = Math.ceil(w / TONE_STEP) + 2;
+  const gh = Math.ceil(h / TONE_STEP) + 2;
+  const gx0 = Math.floor(x0 / TONE_STEP);
+  const gy0 = Math.floor(y0 / TONE_STEP);
+  const grid = new Float32Array(gw * gh);
+  for (let j = 0; j < gh; j += 1)
+    for (let i = 0; i < gw; i += 1)
+      grid[j * gw + i] = fogTone((gx0 + i) * TONE_STEP, (gy0 + j) * TONE_STEP);
+  const toneAt = (wx: number, wy: number): number => {
+    const fx = wx / TONE_STEP - gx0;
+    const fy = wy / TONE_STEP - gy0;
+    const i = Math.floor(fx);
+    const j = Math.floor(fy);
+    const tx = fx - i;
+    const ty = fy - j;
+    const k = j * gw + i;
+    const a = grid[k] ?? 1;
+    const b = grid[k + 1] ?? 1;
+    const c = grid[k + gw] ?? 1;
+    const d = grid[k + gw + 1] ?? 1;
+    return (a + (b - a) * tx) * (1 - ty) + (c + (d - c) * tx) * ty;
+  };
   for (let cy = cy0; cy <= cy1; cy += 1)
     for (let cx = cx0; cx <= cx1; cx += 1) {
       const fog = !explored(cx, cy);
@@ -275,9 +319,10 @@ export function paintFog(
           const o = ((wy - y0) * w + (wx - x0)) * 4;
           const s = (modulo(wy, size) * size + modulo(wx, size)) * 4;
           if (fog) {
-            out[o] = tex[s] ?? 0;
-            out[o + 1] = tex[s + 1] ?? 0;
-            out[o + 2] = tex[s + 2] ?? 0;
+            const tone = toneAt(wx, wy);
+            out[o] = (tex[s] ?? 0) * tone;
+            out[o + 1] = (tex[s + 1] ?? 0) * tone;
+            out[o + 2] = (tex[s + 2] ?? 0) * tone;
             out[o + 3] = 255;
             continue;
           }
@@ -297,9 +342,10 @@ export function paintFog(
           if (distance > FOG_EDGE_REACH) continue;
           if (distance < reach) {
             const rim = reach - distance < spec.rimWidth;
-            out[o] = rim ? spec.rim[0] : (tex[s] ?? 0);
-            out[o + 1] = rim ? spec.rim[1] : (tex[s + 1] ?? 0);
-            out[o + 2] = rim ? spec.rim[2] : (tex[s + 2] ?? 0);
+            const tone = rim ? 1 : toneAt(wx, wy);
+            out[o] = rim ? spec.rim[0] : (tex[s] ?? 0) * tone;
+            out[o + 1] = rim ? spec.rim[1] : (tex[s + 1] ?? 0) * tone;
+            out[o + 2] = rim ? spec.rim[2] : (tex[s + 2] ?? 0) * tone;
             out[o + 3] = 255;
           } else {
             const fade = 1 - (distance - Math.max(reach, 0)) / spec.feather;

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   forestCells,
   forestPlacementCells,
+  isSparseForest,
   packForestBlock,
 } from "../../src/render/map/forest-packing.ts";
 import { FOREST_COUNTS } from "../../src/render/map/scene.ts";
@@ -59,21 +60,35 @@ describe("packForestBlock", () => {
 });
 
 describe("forestCells", () => {
-  it("packs the fixture's woods with each cell in exactly one piece", () => {
+  it("packs every thick cell of the fixture's woods in exactly one piece", () => {
     const map = buildSmallMap();
     const cells = forestCells(map, FOREST_COUNTS, () => 3);
     const pieces = [...cells.values()].flatMap((c) => c.bodies);
     const covered = pieces
       .flatMap(forestPlacementCells)
       .map(([x, y]) => `${x},${y}`);
-    const forest = map.cells
-      .map((c, i) =>
-        c.obstacle === "forest"
-          ? `${i % map.width},${Math.floor(i / map.width)}`
-          : "",
-      )
-      .filter(Boolean);
-    expect(covered.sort()).toEqual(forest.sort());
+    const thick = [...cells.entries()]
+      .filter(([, c]) => !c.sparse)
+      .map(([i]) => `${i % map.width},${Math.floor(i / map.width)}`);
+    expect(covered.sort()).toEqual(thick.sort());
+    // Thin cells: the tips and strands of the woods.
+    for (const [i, c] of cells) {
+      if (!c.sparse) continue;
+      const x = i % map.width;
+      const y = Math.floor(i / map.width);
+      const forest = (fx: number, fy: number) =>
+        map.cells[fy * map.width + fx]?.obstacle === "forest" &&
+        fx >= 0 &&
+        fx < map.width;
+      const around = [
+        forest(x, y - 1),
+        forest(x + 1, y),
+        forest(x, y + 1),
+        forest(x - 1, y),
+      ].filter(Boolean).length;
+      expect(around).toBeLessThanOrEqual(3);
+      expect(c.anchorRow).toBeNull();
+    }
     expect(forestCells(map, FOREST_COUNTS, () => 3)).toEqual(cells);
   });
 
@@ -93,6 +108,24 @@ describe("forestCells", () => {
     }
     expect(cells.get(0)?.set).toBe("grass");
     expect(cells.get(1)?.set).toBe("jungle");
+  });
+
+  it("thins tips and strands but keeps a solid interior packed", () => {
+    const map = createMap(6, 6, 1, "grass");
+    for (const cell of map.cells) cell.obstacle = "forest";
+    map.cells[0]!.obstacle = "none";
+    const cells = forestCells(map, FOREST_COUNTS, () => 4);
+    // Interior cells (four forest neighbours) are never thin.
+    for (let y = 1; y < 5; y += 1)
+      for (let x = 1; x < 5; x += 1)
+        expect(cells.get(y * 6 + x)?.sparse).toBe(false);
+    // Corners have two forest neighbours: thin.
+    expect(cells.get(5)?.sparse).toBe(true);
+    expect(cells.get(35)?.sparse).toBe(true);
+    // Without clumps to draw them with, nothing is thinned.
+    const plain = forestCells(map, FOREST_COUNTS, () => 0);
+    expect([...plain.values()].some((c) => c.sparse)).toBe(false);
+    expect(isSparseForest(() => true, 3, 3)).toBe(false);
   });
 
   it("puts seam clumps only between different pieces", () => {

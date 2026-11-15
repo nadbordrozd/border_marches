@@ -1,15 +1,19 @@
 /**
  * Obstacles inside zones and the clean-up passes over all obstacles.
  *
- * Clusters grow from a seed cell by weighted frontier sampling: compact but
- * ragged, and mountains favour east-west growth so they pack into ridges.
+ * Clusters are noise-thresholded blobs: from a seed cell they take the
+ * connected cells of highest "blob score" (closeness to the seed in a
+ * randomly stretched and turned ellipse, plus a noise field), so their
+ * outlines are round and lumpy rather than grid-boxy; mountains stretch
+ * east-west so they pack into ridges. A share of clusters are small groups
+ * of one to three cells (lone peaks and trees within a budget).
  * Clean-up then fills diagonal-only joins, removes lone cells (beyond a small
  * budget of intentional lone peaks), folds single cells of one obstacle type
  * into the surrounding type, and fills or opens enclosed pockets so that all
  * open ground is reachable from the player's town.
  */
-import { at, MinHeap, N4, N8 } from "./grid.ts";
-import { O, T, isOpen, isWalkable, stageRng } from "./state.ts";
+import { at, MinHeap, N4, N8, noiseField } from "./grid.ts";
+import { O, T, isOpen, isWalkable, stageRng, stageSalt } from "./state.ts";
 import type { GenState, PassInfo } from "./state.ts";
 import { reachable } from "./paths.ts";
 
@@ -18,6 +22,7 @@ export function growClusters(st: GenState): void {
   const cc = cfg.clusters;
   const rng = stageRng(st, "clusters");
   const towns = [st.townAt.start, st.townAt.enemy].filter((t) => t >= 0);
+  const lumps = noiseField(g, cc.lumpScale, stageSalt(st, "cluster-lumps"), 2);
   let lonePeaks = 0;
   const free = (i: number, zone: number): boolean =>
     isOpen(st, i) &&
@@ -71,12 +76,15 @@ export function growClusters(st: GenState): void {
         }
         if (seed === undefined) continue;
       }
-      const size = Math.round(
-        cc.size[0] + (cc.size[1] - cc.size[0]) * Math.pow(rng.next(), 1.4),
-      );
-      const blob = grow(st, rng, seed, size, type, z.id, attach, free);
+      const small = rng.chance(cc.smallShare);
+      const size = small
+        ? 1 + Math.floor(rng.next() * 3)
+        : Math.round(
+            cc.size[0] + (cc.size[1] - cc.size[0]) * Math.pow(rng.next(), 1.4),
+          );
+      const blob = grow(st, rng, seed, size, type, z.id, attach, free, lumps);
       if (blob.length === 1 && !attach) {
-        if (type !== O.mountain || lonePeaks >= cc.lonePeaks) continue;
+        if (lonePeaks >= cc.lonePeaks) continue;
         lonePeaks++;
       } else if (blob.length < 2) {
         continue;
@@ -116,10 +124,34 @@ function grow(
   zone: number,
   attached: boolean,
   free: (i: number, zone: number) => boolean,
+  lumps: Float64Array,
 ): number[] {
   const { g, cfg } = st;
   const blob = new Set<number>([seed]);
-  const bias = type === O.mountain ? cfg.clusters.ridgeBias : 1;
+  // The blob's ellipse: mountains stretched east-west (ridges), woods a
+  // random lean; its noise: the stage's lump field plus a little jitter.
+  const stretch =
+    type === O.mountain
+      ? cfg.clusters.ridgeBias * rng.float(0.7, 1.1)
+      : rng.float(0.75, 1.6);
+  const angle =
+    type === O.mountain ? rng.float(-0.35, 0.35) : rng.float(0, Math.PI);
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+  const radius = Math.sqrt(size / Math.PI) + 0.5;
+  const sx = g.x(seed);
+  const sy = g.y(seed);
+  const score = (j: number): number => {
+    const dx = g.x(j) - sx;
+    const dy = g.y(j) - sy;
+    const u = (dx * cos + dy * sin) / Math.sqrt(stretch);
+    const v = (dy * cos - dx * sin) * Math.sqrt(stretch);
+    return (
+      1 -
+      Math.hypot(u, v) / radius +
+      cfg.clusters.lumpAmount * (at(lumps, j) - 0.5) * 2
+    );
+  };
   // Unattached clusters keep one free cell from other obstacles.
   const allowed = (i: number): boolean => {
     if (blob.has(i) || !free(i, zone)) return false;
@@ -128,25 +160,26 @@ function grow(
       .around(i, N8)
       .every((j) => blob.has(j) || at(st.obstacle, j) === O.none);
   };
+  const scores = new Map<number, number>();
   while (blob.size < size) {
-    const cand: number[] = [];
-    const weights: number[] = [];
+    let best = -1;
+    let bestScore = -Infinity;
     for (const i of blob) {
       for (const j of g.around(i, N4)) {
-        if (!allowed(j) || cand.includes(j)) continue;
-        let w = 0;
-        for (const [dx, dy] of N4) {
-          const x = g.x(j) + dx;
-          const y = g.y(j) + dy;
-          if (!g.inside(x, y) || !blob.has(g.idx(x, y))) continue;
-          w += dy === 0 ? bias : 1;
+        if (!allowed(j)) continue;
+        let value = scores.get(j);
+        if (value === undefined) {
+          value = score(j) + rng.float(-0.06, 0.06);
+          scores.set(j, value);
         }
-        cand.push(j);
-        weights.push(w * w * rng.float(0.4, 1.6));
+        if (value > bestScore || (value === bestScore && j < best)) {
+          bestScore = value;
+          best = j;
+        }
       }
     }
-    if (cand.length === 0) break;
-    blob.add(rng.weighted(cand, weights));
+    if (best < 0) break;
+    blob.add(best);
   }
   return [...blob];
 }
@@ -188,7 +221,7 @@ export function fixDiagonals(st: GenState): number {
 
 /**
  * Lone obstacle cells (no obstacle among their 8 neighbours) are removed,
- * except spine cells and up to `lonePeaks` mountains. A cell whose obstacle
+ * except spine cells and up to `lonePeaks` lone peaks or trees. A cell whose obstacle
  * neighbours are all of the other type takes that type.
  */
 export function fixLoneCells(st: GenState): void {
@@ -210,7 +243,7 @@ export function fixLoneCells(st: GenState): void {
       continue;
     }
     if (at(st.spine, i)) continue;
-    if (t === O.mountain && peaks < cfg.clusters.lonePeaks) {
+    if (peaks < cfg.clusters.lonePeaks) {
       peaks++;
       continue;
     }
