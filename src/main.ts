@@ -1,7 +1,5 @@
 import "./style.css";
 import { parseRoute } from "./router.ts";
-import type { Route } from "./router.ts";
-import { startMapDebug } from "./render/map/debug-page.ts";
 
 const TITLE = "Border Marches";
 
@@ -13,48 +11,33 @@ function getCanvas(): HTMLCanvasElement {
   return canvas;
 }
 
-/** Placeholder screen until the map, battle and game screens exist. */
-function drawPlaceholder(canvas: HTMLCanvasElement, route: Route): void {
-  const ctx = canvas.getContext("2d");
-  if (ctx === null) return;
-  const dpr = window.devicePixelRatio || 1;
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-  canvas.width = Math.round(w * dpr);
-  canvas.height = Math.round(h * dpr);
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  ctx.fillStyle = "#1b1712";
-  ctx.fillRect(0, 0, w, h);
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillStyle = "#e8c77a";
-  ctx.font = "bold 48px Georgia, serif";
-  ctx.fillText(TITLE, w / 2, h / 2 - 16);
-  ctx.fillStyle = "#a89a80";
-  ctx.font = "16px Georgia, serif";
-  const seed = route.seed === null ? "" : `, seed ${route.seed}`;
-  ctx.fillText(`view: ${route.view}${seed}`, w / 2, h / 2 + 32);
+function showError(error: unknown): void {
+  console.error(error);
+  const box = document.createElement("pre");
+  box.style.cssText =
+    "position:fixed;inset:0;margin:0;padding:24px;color:#f0e6c8;background:#1b1712;font:13px monospace;white-space:pre-wrap";
+  box.textContent = `${TITLE} could not start:\n\n${String(error)}`;
+  document.body.append(box);
 }
 
 function start(): void {
-  const canvas = getCanvas();
   const route = parseRoute(window.location.search);
   document.title = TITLE;
   if (route.view === "map") {
-    startMapDebug(canvas, route).catch((error: unknown) => {
-      console.error(error);
-      drawPlaceholder(canvas, route);
-    });
+    void import("./render/map/debug-page.ts")
+      .then((m) => m.startMapDebug(getCanvas(), route))
+      .catch(showError);
     return;
   }
   if (route.view === "battle") {
-    void import("./ui/battle/debug.ts").then((m) => m.startBattleDebug(route));
+    void import("./ui/battle/debug.ts")
+      .then((m) => m.startBattleDebug(route))
+      .catch(showError);
     return;
   }
-  const redraw = (): void => drawPlaceholder(canvas, route);
-  window.addEventListener("resize", redraw);
-  redraw();
+  void import("./ui/app.ts")
+    .then((m) => m.startGameApp(route.params))
+    .catch(showError);
 }
 
 start();
