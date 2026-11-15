@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "border_marches",
+  "project_id": "0547fd2a-2df9-426f-941d-b403af5035ff"
+}
