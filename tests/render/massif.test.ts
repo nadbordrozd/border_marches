@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
+  LANDMARK_SPRITE_REACH,
   OPEN_RISE_MAX,
+  TABLE_CUT,
   cutRun,
   isLandmark,
   packRanges,
@@ -305,6 +307,65 @@ describe("packRanges", () => {
       if (behind && sides >= p.asset.rows && p.asset.rows >= 2)
         expect(isLandmark(p.asset.key), p.asset.key).toBe(false);
     }
+  });
+
+  it("keeps each landmark sprite a screen apart on generated maps (xaj.22)", () => {
+    // A zoom-0.75 screen is 24 x 15 cells; the red hoodoo mound showed
+    // three times on one before bead xaj.22.
+    let close = 0;
+    let landmarks = 0;
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const list = packRanges(generateMap(seed, { size: "M" })).pieces.filter(
+        (p) => isLandmark(p.asset.key),
+      );
+      landmarks += list.length;
+      for (const a of list)
+        for (const b of list) {
+          if (a === b || a.asset.key !== b.asset.key) continue;
+          const gap = Math.max(
+            b.x - (a.x + a.asset.cols - 1),
+            a.x - (b.x + b.asset.cols - 1),
+            b.y - (a.y + a.asset.rows - 1),
+            a.y - (b.y + b.asset.rows - 1),
+          );
+          if (gap <= LANDMARK_SPRITE_REACH) close += 1;
+        }
+    }
+    expect(landmarks).toBeGreaterThan(30);
+    // Only where a slot has nothing else left (each pair counts twice).
+    expect(close).toBeLessThanOrEqual(4);
+  });
+
+  it("joins cut tableland pieces into one tableland (xaj.22)", () => {
+    let joins = 0;
+    for (const seed of [1, 2, 3, 4, 5]) {
+      const cover = packRanges(generateMap(seed, { size: "M" }));
+      const at = (x: number, y: number): RangePiece | undefined =>
+        cover.pieces.find(
+          (p) =>
+            p.y === y && p.x <= x && x < p.x + p.asset.cols && p.asset.rows,
+        );
+      for (const p of cover.pieces) {
+        const cut = TABLE_CUT[p.asset.key];
+        if (cut === undefined) continue;
+        // A cut side always meets a cut side of the same outline family,
+        // on the same rows: never a cliff, never open ground.
+        if (cut.east) {
+          const q = at(p.x + p.asset.cols, p.y);
+          expect(q, `${p.asset.key} at ${p.x},${p.y}`).toBeDefined();
+          expect(q?.x).toBe(p.x + p.asset.cols);
+          expect(q?.asset.rows).toBe(p.asset.rows);
+          expect(TABLE_CUT[q?.asset.key ?? ""]?.west).toBe(true);
+          expect(TABLE_CUT[q?.asset.key ?? ""]?.family).toBe(cut.family);
+          joins += 1;
+        }
+        if (cut.west) {
+          const q = at(p.x - 1, p.y);
+          expect(TABLE_CUT[q?.asset.key ?? ""]?.east).toBe(true);
+        }
+      }
+    }
+    expect(joins).toBeGreaterThan(10);
   });
 
   it("merges a small palette island into the range round it (xaj.21)", () => {

@@ -2470,5 +2470,151 @@
         "height": 208
       }
     ]
+  },
+  "g7-ridge21-bare": {
+    "id": "g7-ridge21-bare",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "688be556-bdf7-44d2-86fd-d9d039bf96e1",
+    "submittedAt": "2026-11-15T22:36:51.089Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a short rocky grey granite ridge seen from the south from above, twice as wide as it is tall: it fills the image from the left edge to the right edge, a bare craggy crest of weathered rock a little right of centre, a lower rounded shoulder at the left, cracked slabs and a few small grassy ledges, sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-granite/g-ridge31-c#0 sha256 049b36691c6b44cc74994681d8ae11b0d3dfabe6059c4b3b4d379a77e0b6b019",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 160,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 47101,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a short rocky grey granite ridge seen from the south from above, twice as wide as it is tall: it fills the image from the left edge to the right edge, a bare craggy crest of weathered rock a little right of centre, a lower rounded shoulder at the left, cracked slabs and a few small grassy ledges, sloping scree and a ragged foot of a few rounded boulders along the bottom. No snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy, outline dark slate. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, snow, white cap, ice, separate peaks, spikes, stairs, trees, river, path, dark navy."
+    },
+    "at": "2026-11-15T22:37:58.361Z",
+    "candidates": [
+      {
+        "file": "g7-ridge21-bare-0.png",
+        "sha256": "6d56ea0eee2d3bbec9c701835cba81e611eb0f53df80ac017a29c3d3a48e3761",
+        "width": 160,
+        "height": 128
+      },
+      {
+        "file": "g7-ridge21-bare-1.png",
+        "sha256": "222dc94a652df26bbae14259c74ef8a925e264920a176e6de75dbc6750ea83cf",
+        "width": 160,
+        "height": 128
+      },
+      {
+        "file": "g7-ridge21-bare-2.png",
+        "sha256": "b1de53610f8cb43cf24dd1da8aa7580722067aa099d70a485ec241648aa81534",
+        "width": 160,
+        "height": 128
+      },
+      {
+        "file": "g7-ridge21-bare-3.png",
+        "sha256": "e62550aac3bd810ed0246b78cafcc3409740ae29d9af51cda225f77ec7632afd",
+        "width": 160,
+        "height": 128
+      }
+    ]
+  },
+  "g7-ridge31-a-bare": {
+    "id": "g7-ridge31-a-bare",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "2292303c-41e7-4814-92e8-ac459c0692f7",
+    "submittedAt": "2026-11-15T22:37:58.483Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Remove the snow: repaint every white and cream snow cap and snow patch as bare light grey granite rock with cracks, colour #b4b4ac with #7f8189 shadows, and a few small green grassy ledges. Keep every shape, the peaks, the boulders, the dark slate outline and the art style exactly the same."
+        }
+      ],
+      "image": "take massif-granite/g-ridge31-b#0 sha256 29706f8de790a9d1171b1fb8b202073c766d47f79b79135d18762699d2c69f83",
+      "width": 240,
+      "height": 128,
+      "seed": 47102,
+      "no_background": true,
+      "description": "Remove the snow: repaint every white and cream snow cap and snow patch as bare light grey granite rock with cracks, colour #b4b4ac with #7f8189 shadows, and a few small green grassy ledges. Keep every shape, the peaks, the boulders, the dark slate outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T22:38:24.360Z",
+    "candidates": [
+      {
+        "file": "g7-ridge31-a-bare-0.png",
+        "sha256": "405830b6c392d4ca8b5a2458ff9a4d31adaf2cf75be10ad33caebb93156950b3",
+        "width": 240,
+        "height": 128
+      },
+      {
+        "file": "g7-ridge31-a-bare-1.png",
+        "sha256": "405830b6c392d4ca8b5a2458ff9a4d31adaf2cf75be10ad33caebb93156950b3",
+        "width": 240,
+        "height": 128
+      }
+    ]
+  },
+  "g7-ridge21-a-bare": {
+    "id": "g7-ridge21-a-bare",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "113fe762-3192-4cbc-8a53-07dff1eb6e78",
+    "submittedAt": "2026-11-15T22:38:24.506Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Remove the snow: repaint every white and cream snow cap and snow patch as bare light grey granite rock with cracks, colour #b4b4ac with #7f8189 shadows, and a few small green grassy ledges. Keep every shape, the peaks, the boulders, the dark slate outline and the art style exactly the same."
+        }
+      ],
+      "image": "take massif-granite/g-ridge21-a#0 sha256 533d79325c7cf204017db43e159c56c51cc1a4c8bd23461723fc5ebe659ed9c6",
+      "width": 160,
+      "height": 128,
+      "seed": 47103,
+      "no_background": true,
+      "description": "Remove the snow: repaint every white and cream snow cap and snow patch as bare light grey granite rock with cracks, colour #b4b4ac with #7f8189 shadows, and a few small green grassy ledges. Keep every shape, the peaks, the boulders, the dark slate outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T22:38:55.339Z",
+    "candidates": [
+      {
+        "file": "g7-ridge21-a-bare-0.png",
+        "sha256": "67ee0ed2c4bd8dfd0d8f9c514db65e7065fec309e1b1bf63c64f47f76a8ba42b",
+        "width": 160,
+        "height": 128
+      },
+      {
+        "file": "g7-ridge21-a-bare-1.png",
+        "sha256": "67ee0ed2c4bd8dfd0d8f9c514db65e7065fec309e1b1bf63c64f47f76a8ba42b",
+        "width": 160,
+        "height": 128
+      }
+    ]
   }
 }

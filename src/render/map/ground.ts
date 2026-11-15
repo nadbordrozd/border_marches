@@ -784,6 +784,61 @@ function rockTone(
   return [Math.round(r / total), Math.round(g / total), Math.round(b / total)];
 }
 
+/**
+ * The rock base is rubble, not a flat tone (bead xaj.22): jittered stones
+ * about RUBBLE.size 2 px blocks across, each a little lighter or darker,
+ * lit on its lower-left side (the sun is at the bottom left) and shaded on
+ * its upper-right, with dark cracks between stones. Returns the factor the
+ * base tone is multiplied by at world pixel (wx, wy).
+ */
+export const RUBBLE = {
+  /** Stone spacing in 2 px blocks. */
+  size: 4,
+  /** Brightness of the stones, by a hash of the stone. */
+  tints: [0.84, 0.92, 1, 1.08],
+  lit: 1.12,
+  shade: 0.86,
+  crack: 0.7,
+  /** Crack width: F2 - F1 below this (blocks) is a crack. */
+  crackWidth: 0.7,
+} as const;
+
+export function rubbleAt(wx: number, wy: number): number {
+  const bx = wx >> 1;
+  const by = wy >> 1;
+  const n = RUBBLE.size;
+  const gx = Math.floor(bx / n);
+  const gy = Math.floor(by / n);
+  let d1 = Infinity;
+  let d2 = Infinity;
+  let cx = 0;
+  let cy = 0;
+  let id = 0;
+  for (let dy = -1; dy <= 1; dy += 1)
+    for (let dx = -1; dx <= 1; dx += 1) {
+      const h = hash4(gx + dx, gy + dy, 0x7b, 0x2a);
+      const px = (gx + dx) * n + ((h & 0xff) / 256) * n;
+      const py = (gy + dy) * n + (((h >>> 8) & 0xff) / 256) * n;
+      // Stones a little wider than tall: seen from above at a slant.
+      const d = Math.hypot(bx + 0.5 - px, (by + 0.5 - py) * 1.25);
+      if (d < d1) {
+        d2 = d1;
+        d1 = d;
+        cx = px;
+        cy = py;
+        id = h >>> 16;
+      } else if (d < d2) d2 = d;
+    }
+  if (d2 - d1 < RUBBLE.crackWidth) return RUBBLE.crack;
+  const tint = RUBBLE.tints[id % RUBBLE.tints.length] ?? 1;
+  // Lower-left of the stone's centre faces the sun.
+  const side = bx + 0.5 - cx - (by + 0.5 - cy);
+  const rim = d2 - d1 < RUBBLE.crackWidth + 1.2;
+  if (rim && side < -0.5) return tint * RUBBLE.lit;
+  if (rim && side > 0.5) return tint * RUBBLE.shade;
+  return tint;
+}
+
 function rockWave(wx: number, wy: number): number {
   const bx = (wx >> 1) * 2 + 1;
   const by = (wy >> 1) * 2 + 1;
@@ -1109,7 +1164,18 @@ export function paintGround(
                 else blend(o, palette.dust, SCREE.alpha);
                 if (tier === 2 && f > ROCK_BASE.threshold + rockWave(wx, wy)) {
                   const base = rockTone(layout, wx + 0.5, wy + 0.5);
-                  if (base !== undefined) blend(o, base, ROCK_BASE.alpha);
+                  if (base !== undefined) {
+                    const k = rubbleAt(wx, wy);
+                    blend(
+                      o,
+                      [
+                        Math.min(255, base[0] * k),
+                        Math.min(255, base[1] * k),
+                        Math.min(255, base[2] * k),
+                      ],
+                      ROCK_BASE.alpha,
+                    );
+                  }
                 }
                 const roll = hash4(wx, wy, 0x5c, 1) / 0x100000000;
                 if (roll < SCREE.pebbleShare) put(o, palette.pebble);

@@ -318,6 +318,37 @@ describe("generateMap", { timeout: 60_000 }, () => {
     }
   });
 
+  it("gives badlands and steppe ranges an interior (xaj.22)", () => {
+    // Deep clusters: a share of the mountain clusters on badlands and
+    // steppe are big round blocks, so their ranges have cells with rock all
+    // round (where plateaus and tablelands fit). Seeds 1-10 before bead
+    // xaj.22: 288 of 2,684 such cells (10.7%); after: 491 of 3,082 (16%).
+    let cells = 0;
+    let inner = 0;
+    for (const seed of SEEDS.slice(0, 10)) {
+      const { map } = gen(seed);
+      const rock = (x: number, y: number): boolean =>
+        x >= 0 &&
+        y >= 0 &&
+        x < map.width &&
+        y < map.height &&
+        map.cells[y * map.width + x]!.obstacle === "mountain";
+      for (let y = 0; y < map.height; y++)
+        for (let x = 0; x < map.width; x++) {
+          const c = map.cells[y * map.width + x]!;
+          if (!rock(x, y)) continue;
+          if (c.terrain !== "badlands" && c.terrain !== "steppe") continue;
+          cells++;
+          let all = true;
+          for (let dy = -1; dy <= 1; dy++)
+            for (let dx = -1; dx <= 1; dx++)
+              if (!rock(x + dx, y + dy)) all = false;
+          if (all) inner++;
+        }
+    }
+    expect(inner / cells).toBeGreaterThan(0.14);
+  });
+
   it("breaks straight range and ground edges (xaj.21, 50 seeds)", () => {
     // Straight runs of one boundary along a cell line: between Mountain
     // and anything else, and between two grounds on open land. Before bead
@@ -378,8 +409,10 @@ describe("generateMap", { timeout: 60_000 }, () => {
       groundLong += soil.filter((n) => n > 3).length;
     }
     expect(long / edges).toBeLessThan(0.045);
-    // A run beside a town yard or pass mouth may stay (one in 50 maps).
-    expect(veryLong).toBeLessThanOrEqual(2);
+    // A run beside a town yard or pass mouth, or along the map-edge frame,
+    // may stay (bead xaj.22: three in 50 maps, all three along the frame,
+    // at y = 2, y = 46 and x = 5).
+    expect(veryLong).toBeLessThanOrEqual(3);
     expect(groundLong / ground).toBeLessThan(0.025);
   });
 

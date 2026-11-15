@@ -142,7 +142,7 @@ describe("massif pieces (xaj.14)", () => {
       groups.set(key, [...(groups.get(key) ?? []), p.variant]);
     }
     for (const [key, variants] of groups)
-      expect({ key, variants: [...variants].sort() }).toEqual({
+      expect({ key, variants: [...variants].sort((a, b) => a - b) }).toEqual({
         key,
         variants: variants.map((_, i) => i),
       });

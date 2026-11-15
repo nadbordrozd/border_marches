@@ -423,5 +423,150 @@
     "verdict": "ACCEPTED",
     "notes": "second 3x3 plateau: a striped mesa split by a narrow canyon into two flat-topped slabs with worn knobs and scree fans; the slabs run a little diagonally, so it reads as a broken tableland, fills the 3x3 height",
     "at": "2026-11-15T22:16:46.056Z"
+  },
+  "s7-hoodoos-i-pale#0": {
+    "verdict": "ACCEPTED",
+    "notes": "pale cream sibling of the red hoodoo mound massif-2x2-i: same outline, reads as a different cluster; ships as massif-2x2-j",
+    "at": "2026-11-15T22:34:51.339Z"
+  },
+  "s7-hoodoos-i-pale#1": {
+    "verdict": "REJECTED",
+    "notes": "byte-identical duplicate of #0 (the edit returned one image twice)",
+    "at": "2026-11-15T22:34:51.382Z"
+  },
+  "s7-hoodoos-e-rose#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rosy painted-desert sibling of hoodoo cluster massif-2x2-e; saturated but still sandstone; ships as massif-2x2-k",
+    "at": "2026-11-15T22:34:51.426Z"
+  },
+  "s7-hoodoos-e-rose#1": {
+    "verdict": "REJECTED",
+    "notes": "byte-identical duplicate of #0",
+    "at": "2026-11-15T22:34:51.468Z"
+  },
+  "s7-fluted-c-rose#0": {
+    "verdict": "REJECTED",
+    "notes": "magenta and maroon stripes: off the sandstone palette, reads as candy or meat",
+    "at": "2026-11-15T22:34:51.510Z"
+  },
+  "s7-fluted-c-rose#1": {
+    "verdict": "REJECTED",
+    "notes": "byte-identical duplicate of #0",
+    "at": "2026-11-15T22:34:51.552Z"
+  },
+  "s7-hoodoos-g-cream#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rust-red hoodoo field with cream tops (the edit read the colours the other way round from the id); a distinct sibling of massif-3x2-g; ships as massif-3x2-i",
+    "at": "2026-11-15T22:34:51.596Z"
+  },
+  "s7-hoodoos-g-cream#1": {
+    "verdict": "REJECTED",
+    "notes": "byte-identical duplicate of #0",
+    "at": "2026-11-15T22:34:51.637Z"
+  },
+  "s7-table52-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "one continuous 5x2 tableland: v2 copied the composed outline exactly (column profiles equal the style image), banded fluted front; ships whole and cut at cell edges into continuation pieces",
+    "at": "2026-11-15T22:36:22.138Z"
+  },
+  "s7-table42-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "4x2 tableland with a canyon notch in the front; same outline rule; ships whole and cut into continuation pieces",
+    "at": "2026-11-15T22:36:22.180Z"
+  },
+  "s7-ridge21-slope#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low eroded striped ridge with sloping flanks, not a butte; seated as a low 2x1 hump (rounded-2x1-e)",
+    "at": "2026-11-15T22:37:41.321Z"
+  },
+  "s7-ridge21-slope#1": {
+    "verdict": "ACCEPTED",
+    "notes": "two-lobed worn ridge with gullies, not a butte (rounded-2x1-f)",
+    "at": "2026-11-15T22:37:41.366Z"
+  },
+  "s7-ridge21-slope#2": {
+    "verdict": "REJECTED",
+    "notes": "stacked flat layers read as a layer cake",
+    "at": "2026-11-15T22:37:41.408Z"
+  },
+  "s7-ridge21-slope#3": {
+    "verdict": "ACCEPTED",
+    "notes": "crumbling ridge with a gully and scree (rounded-2x1-g)",
+    "at": "2026-11-15T22:37:41.451Z"
+  },
+  "s7-low32-c#0": {
+    "verdict": "REJECTED",
+    "notes": "copied its squashed style image exactly: a low copy of plateau-3x2-a with the same gully and knobs, reads as that sprite pasted",
+    "at": "2026-11-15T22:41:47.262Z"
+  },
+  "s7-table42-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "4x2 tableland, same composed outline; a wash across the top and a ledge stripe across the fluted front (the style image's flutes came through despite the prompt)",
+    "at": "2026-11-15T22:41:47.305Z"
+  },
+  "s7-table52-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "5x2 tableland, same composed outline; caprock patches and knobs on the top, fluted front",
+    "at": "2026-11-15T22:41:47.347Z"
+  },
+  "s7-table42-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "banded 4x2 tableland: straight striped cliffs, gullies with scree fans, no flutes; copied the composed outline and smoothed its seam",
+    "at": "2026-11-15T22:43:23.170Z"
+  },
+  "s7-table52-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "banded 5x2 tableland: straight striped cliffs, a deep alcove, gullies with scree fans, boulders on the top; a little more orange than 42-c",
+    "at": "2026-11-15T22:44:41.684Z"
+  },
+  "s7-fluted-c-pale#0": {
+    "verdict": "ACCEPTED",
+    "notes": "bleached cream sibling of the fluted hill massif-2x2-c (a few grey-blue bands); ships as massif-2x2-l",
+    "at": "2026-11-15T22:50:23.998Z"
+  },
+  "s7-fluted-c-pale#1": {
+    "verdict": "REJECTED",
+    "notes": "byte-identical duplicate of #0",
+    "at": "2026-11-15T22:50:24.040Z"
+  },
+  "s7-tower-a-rust#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rust-red sibling of the tower butte massif-2x2-a, cream bands; saturated but reads as red desert buttes; ships as massif-2x2-m",
+    "at": "2026-11-15T22:50:24.083Z"
+  },
+  "s7-tower-a-rust#1": {
+    "verdict": "REJECTED",
+    "notes": "byte-identical duplicate of #0",
+    "at": "2026-11-15T22:50:24.126Z"
+  },
+  "s7-fluted-e-rust#0": {
+    "verdict": "REJECTED",
+    "notes": "saturated red, salmon and cream stripes read as candy, louder than any landmark in the set",
+    "at": "2026-11-15T22:50:49.501Z"
+  },
+  "s7-fluted-e-rust#1": {
+    "verdict": "REJECTED",
+    "notes": "byte-identical duplicate of #0",
+    "at": "2026-11-15T22:50:49.543Z"
+  },
+  "s7-table42-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "banded 4x2 tableland with a caprock rim, a slot canyon and a step ledge along the foot; same composed outline",
+    "at": "2026-11-15T22:57:15.984Z"
+  },
+  "s7-table52-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "banded 5x2 tableland: a dry wash across the top, slot gullies, buttresses and scree fans; same composed outline",
+    "at": "2026-11-15T23:00:44.955Z"
+  },
+  "s7-table22-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "small banded mesa with a gully and scree fan, quiet enough for the inside of a range (plateau-2x2-q)",
+    "at": "2026-11-15T23:02:51.942Z"
+  },
+  "s7-table22-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "small banded mesa with a caprock rim and an alcove; a little boxy (plateau-2x2-r)",
+    "at": "2026-11-15T23:02:51.985Z"
   }
 }

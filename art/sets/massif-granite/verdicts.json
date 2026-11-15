@@ -348,5 +348,45 @@
     "verdict": "ACCEPTED",
     "notes": "snowless 3x2: broken cliff wall with grassy green ledges, blunt knob at the right, boulder foot; a new granite silhouette",
     "at": "2026-11-15T22:08:55.935Z"
+  },
+  "g7-ridge21-bare#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snowless granite 2x1: bare dome crag with cracked faces and boulders (ridge-2x1-d)",
+    "at": "2026-11-15T22:39:58.013Z"
+  },
+  "g7-ridge21-bare#1": {
+    "verdict": "REJECTED",
+    "notes": "spiky shard pile (the rejected shard look of xaj.14)",
+    "at": "2026-11-15T22:39:58.055Z"
+  },
+  "g7-ridge21-bare#2": {
+    "verdict": "ACCEPTED",
+    "notes": "snowless granite 2x1: tilted slab crag with a grassy ledge (ridge-2x1-e)",
+    "at": "2026-11-15T22:39:58.097Z"
+  },
+  "g7-ridge21-bare#3": {
+    "verdict": "REJECTED",
+    "notes": "stepped blocks read as stairs",
+    "at": "2026-11-15T22:39:58.139Z"
+  },
+  "g7-ridge31-a-bare#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snowless sibling of ridge-3x1-a: same outline, bare cracked rock and grassy ledges; a little busier and greener than the set (ridge-3x1-c)",
+    "at": "2026-11-15T22:39:58.182Z"
+  },
+  "g7-ridge31-a-bare#1": {
+    "verdict": "REJECTED",
+    "notes": "byte-identical duplicate of #0",
+    "at": "2026-11-15T22:39:58.223Z"
+  },
+  "g7-ridge21-a-bare#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snowless sibling of ridge-2x1-a: same outline, bare rock (ridge-2x1-f)",
+    "at": "2026-11-15T22:39:58.266Z"
+  },
+  "g7-ridge21-a-bare#1": {
+    "verdict": "REJECTED",
+    "notes": "byte-identical duplicate of #0",
+    "at": "2026-11-15T22:39:58.308Z"
   }
 }

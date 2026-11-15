@@ -142,6 +142,18 @@ export interface GenConfig {
     townClearance: number;
     /** Enclosed open pockets up to this size are filled, larger are opened. */
     pocketFill: number;
+    /**
+     * Deep mountain clusters (bead xaj.22): a share of the mountain clusters
+     * of a zone, by its main terrain, are big round blocks (at least four
+     * rows deep where the zone has room), so badlands and steppe ranges have
+     * an interior where flat-topped plateaus and tablelands fit.
+     */
+    deep: {
+      share: Record<Terrain, number>;
+      size: readonly [number, number];
+      /** East-west stretch of a deep blob (1 = round). */
+      stretch: number;
+    };
   };
 
   objects: {
@@ -274,6 +286,18 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     lonePeaks: 5,
     townClearance: 3,
     pocketFill: 14,
+    deep: {
+      share: {
+        grass: 0,
+        jungle: 0,
+        steppe: 0.45,
+        badlands: 0.8,
+        wasteland: 0,
+        water: 0,
+      },
+      size: [22, 36],
+      stretch: 1.3,
+    },
   },
 
   objects: {

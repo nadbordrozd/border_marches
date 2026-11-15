@@ -10,9 +10,11 @@ import {
   GROUND_RANK,
   paintGround,
   ROCK_BASE,
+  RUBBLE,
   blockMask,
   buildRockField,
   rockFieldAt,
+  rubbleAt,
   spillReach,
   SPILL,
 } from "../../src/render/map/ground.ts";
@@ -184,6 +186,27 @@ describe("rock base", () => {
     // The middle cell's centre: mostly the granite base tone.
     const o = (40 * 80 + 40) * 4;
     expect(Math.abs((out[o] ?? 0) - ROCK_BASE.tones[0][0])).toBeLessThan(40);
+  });
+});
+
+describe("rubble (xaj.22)", () => {
+  it("varies the rock base in stones, cracks and lit rims, not one flat tone", () => {
+    const seen = new Set<number>();
+    let cracks = 0;
+    for (let y = 0; y < 80; y += 1)
+      for (let x = 0; x < 80; x += 1) {
+        const k = rubbleAt(x, y);
+        seen.add(Math.round(k * 100));
+        if (k === RUBBLE.crack) cracks += 1;
+        expect(k).toBeGreaterThanOrEqual(RUBBLE.crack);
+        expect(k).toBeLessThanOrEqual(Math.max(...RUBBLE.tints) * RUBBLE.lit);
+      }
+    expect(seen.size).toBeGreaterThan(5);
+    // Cracks are lines between stones, not the bulk.
+    expect(cracks / 6400).toBeGreaterThan(0.05);
+    expect(cracks / 6400).toBeLessThan(0.4);
+    // Two px blocks: a pure function of the block.
+    expect(rubbleAt(10, 20)).toBe(rubbleAt(11, 21));
   });
 });
 

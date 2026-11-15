@@ -78,14 +78,34 @@ export function growClusters(st: GenState): void {
         if (seed === undefined) continue;
       }
       const small = rng.chance(cc.smallShare);
-      const drawn = small
-        ? 1 + Math.floor(rng.next() * 3)
-        : Math.round(
-            cc.size[0] + (cc.size[1] - cc.size[0]) * Math.pow(rng.next(), 1.4),
-          );
+      // A deep block: big and round, so the range has an interior.
+      const deep =
+        type === O.mountain &&
+        !small &&
+        cc.deep.share[z.main] > 0 &&
+        rng.chance(cc.deep.share[z.main]);
+      const drawn = deep
+        ? rng.int(cc.deep.size[0], cc.deep.size[1])
+        : small
+          ? 1 + Math.floor(rng.next() * 3)
+          : Math.round(
+              cc.size[0] +
+                (cc.size[1] - cc.size[0]) * Math.pow(rng.next(), 1.4),
+            );
       // The smallest mountain is a 2x2 hill (squareMountains squares it).
       const size = type === O.mountain ? Math.max(4, drawn) : drawn;
-      const blob = grow(st, rng, seed, size, type, z.id, attach, free, lumps);
+      const blob = grow(
+        st,
+        rng,
+        seed,
+        size,
+        type,
+        z.id,
+        attach,
+        free,
+        lumps,
+        deep ? cc.deep.stretch : undefined,
+      );
       if (blob.length === 1 && !attach) {
         if (type === O.mountain || lonePeaks >= cc.lonePeaks) continue;
         lonePeaks++;
@@ -128,6 +148,7 @@ function grow(
   attached: boolean,
   free: (i: number, zone: number) => boolean,
   lumps: Float64Array,
+  stretchOf?: number,
 ): number[] {
   const { g, cfg } = st;
   const blob = new Set<number>([seed]);
@@ -135,7 +156,7 @@ function grow(
   // random lean; its noise: the stage's lump field plus a little jitter.
   const stretch =
     type === O.mountain
-      ? cfg.clusters.ridgeBias * rng.float(0.7, 1.1)
+      ? (stretchOf ?? cfg.clusters.ridgeBias) * rng.float(0.7, 1.1)
       : rng.float(0.75, 1.6);
   const angle =
     type === O.mountain ? rng.float(-0.35, 0.35) : rng.float(0, Math.PI);

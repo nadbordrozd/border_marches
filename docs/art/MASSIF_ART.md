@@ -14,12 +14,15 @@ made the smallest mountain 2x2 and rebuilt ranges from 2x2-and-larger pieces
 ([Iteration 5](#iteration-5-bead-xaj20)); bead `xaj.21` wobbled zone
 borders and range edges, made the rock base follow the pieces' silhouettes
 and added plateaus, snowless granite and second 2x3 pieces
-([Iteration 6](#iteration-6-bead-xaj21)). The captures
+([Iteration 6](#iteration-6-bead-xaj21)); bead `xaj.22` added wide
+tablelands that join into one mass, recoloured landmark siblings kept a
+screen apart, snowless granite ridges, deeper badlands and a rubble rock
+base ([Iteration 7](#iteration-7-bead-xaj22)). The captures
 [`screens/map-seed3-M-z075.png`](screens/map-seed3-M-z075.png),
-[`screens/map-massif-seed3-z1.png`](screens/map-massif-seed3-z1.png) (a
-sandstone canyon) and
-[`screens/map-border-seed3-z1.png`](screens/map-border-seed3-z1.png) (a
-granite range along a zone border) show the result after xaj.21.
+[`screens/map-tableland-seed2-z1.png`](screens/map-tableland-seed2-z1.png)
+(a badlands block of joined tablelands) and
+[`screens/map-granite-seed3-z1.png`](screens/map-granite-seed3-z1.png) (a
+granite range with snowy and snowless ridges) show the result after xaj.22.
 
 ## What was made
 
@@ -620,3 +623,163 @@ M map in node (cold).
   wobble bumped and notched.
 - Between pieces of a closed range the rock base is a flat dark tone; where
   the closing fills a big notch it is a visible blob.
+
+## Iteration 7 (bead xaj.22)
+
+The orchestrator's review of xaj.21: the red hoodoo mound showed three times
+on one zoom-0.75 screen along a badlands edge; every sprite is a whole object
+with cliffs on all sides, so neighbouring plateaus read as separate mesas;
+every granite 2x1 and 3x1 ridge was snowy; sandstone 2x1s were little
+buttes; big badlands ranges were two or three rows deep; the rock base was a
+flat dark tone; a low 3x2 back edge was still missing. The user: "Keep
+iterating. BTW it is acceptable if the smallest mountain is 2x2 tiles
+instead of 1x1 - if that helps."
+
+### Landmarks a screen apart, recoloured siblings
+
+- `massif-sandstone-massif-2x2-i` (the red hoodoo mound) was in no family:
+  it is a hoodoo now, and the hoodoo family keeps 7 cells apart (towers 7,
+  fluted and domes 6).
+- Spacing is measured over the whole map, not per range, footprint to
+  footprint. A LANDMARK sprite (and every big piece: 4- and 5-column
+  tablelands, 3-row pieces, and tableland pieces counted by their take)
+  keeps `LANDMARK_SPRITE_REACH` (12) cells from another copy of itself: at
+  zoom 0.75 a screen is 24 x 15 cells. Wide tableland offers are also
+  thinned at packing time (no more of one width within the reach than there
+  are sprites of it), so the pick rarely has to fall back.
+- Five recoloured siblings by `edit-image-pixen` ("change only the colours
+  of the rock ... keep every shape"; same outline, other rock): pale cream
+  hoodoo mound `massif-2x2-j`, rosy painted-desert hoodoos `massif-2x2-k`,
+  rust hoodoo field with cream tops `massif-3x2-i`, bleached fluted hill
+  `massif-2x2-l`, rust tower butte `massif-2x2-m`. Each joins its original's
+  family (so they never stand together) and the hoodoos weigh 0.6 each, so
+  the family as a whole is not more frequent than before. Edits return the
+  same image twice (candidate #1 byte-identical; rejected as duplicates).
+
+Seeds 1-5 size M: same-sprite landmark pairs within 12 cells, at most 2
+(fallbacks where a slot had nothing else; the test allows that); on main,
+seed 2 showed the red mound three times on one zoom-0.75 screen.
+
+### Tablelands that join (the main new idea)
+
+`generate-image-v2` copies the style image's outline at the style image's
+size (Iteration 2 and 6 lessons). So the outline is now designed:
+`art/review/compose-style.mjs` pastes column strips of accepted, baked pieces
+into a style image of the wanted width (`art/refs/massif-sandstone/*.png`,
+in git, hashed in the records). Every wide outline is the west end, the
+middle columns repeated, and the east end of ONE piece, so every 80 px
+column edge of every take cuts the rock where its rim and foot stand at the
+same heights (within 6 px). The takes copied their outlines exactly (column
+profiles equal to the style image's).
+
+- **Fluted family** (outline of `plateau-3x2-a`): `s7-table52-a` (5x2,
+  gullies), `s7-table42-a` (4x2, canyon notch), `s7-table42-b` (4x2, wash
+  and ledge stripe), `s7-table52-b` (5x2, caprock patches). The style image
+  also carried its flutes: "no flutes" in the prompt did not stop them.
+- **Banded family** (outline of `massif-3x2-d`, straight striped cliffs):
+  `s7-table42-c` (4x2), `s7-table52-c` (5x2, a deep alcove), `s7-table42-d`
+  (4x2, caprock rim, slot canyon, step ledge), `s7-table52-d` (5x2, dry
+  wash, buttresses). No flutes: the look follows the style image. The
+  banded family weighs 1.5 and the fluted 0.5 (`FAMILY_WEIGHT`): the fluted
+  fronts read as tree stumps and their 2-cell ends as fluted hills.
+- **Quiet small mesas**: `s7-table22-a/b` (`plateau-2x2-q/r`), whole banded
+  2x2 mesas styled from both ends of `massif-3x2-d`, for interior 2x2 slots
+  (the low fluted hill `massif-2x2-f`, the only quiet 2x2 before, stood on
+  every step of a diagonal staircase of them).
+- Each take ships whole (`plateau-4x2-a/b/c`, `plateau-5x2-a/b/c`) and cut
+  at cell edges by recorded `crop` steps into CUT pieces: a west end (cut on
+  its east side), middles (cut both sides) and east ends (cut on its west
+  side), 2, 3 and 4 columns wide (`plateau-2x2-b..p`, `plateau-3x2-c..o`,
+  `plateau-4x2-d..l`; `TABLE_CUT` in `massif.ts` lists each piece's cut
+  sides and family). Variant letters run to `t` now.
+- **Packer**: offers of 5x2 and 4x2 come first where they fit
+  (`WIDTH_SCORE`), on the rim too (whole tablelands have end cliffs). In the
+  variant pick, a plateau slot with a plateau slot of the same rows right
+  east of it starts a chain (`JOIN_RATE` 0.9) with a piece cut on its east
+  side; the slot east of a cut piece always takes a piece cut on its west
+  side of the same family, from another take where one fits (two pieces of
+  one take side by side would rebuild the whole take); a chain carries on
+  while the next slot can take a plateau (`CHAIN_RATE` 1) and ends with an
+  east end. Cut pieces are never used outside a chain. Plateaus may now
+  stand on a range's rim too (weight 0.8 against massifs 1), so a badlands
+  edge is not only landmarks. Families `sandstone-tableland` (reach 6) and
+  `sandstone-tableland-banded` (5).
+- Seeds 1-5 size M: more than ten joins (test); seed 1 has a tableland 12
+  cells long. Plateaus (all sizes) per map 31 / 24 / 28 on seeds 1-3 (xaj.21:
+  5 / 1 / 9).
+
+### Snowless granite ridges, sandstone 2x1s that are not buttes
+
+- Granite: `ridge-2x1-d` (bare dome crag) and `ridge-2x1-e` (tilted slab
+  with a grassy ledge) from one v2 call styled from the snowless 3x1 ridge
+  (4 candidates: a shard pile and stepped blocks rejected); `ridge-2x1-f`
+  and `ridge-3x1-c` are snowless edits of the snowy `ridge-2x1-a` and
+  `ridge-3x1-a` (same outline, bare rock and grassy ledges). The three snowy
+  2x1 ridges (one silhouette) weigh 0.6.
+- Sandstone: `rounded-2x1-e/f/g`, low eroded ridges with sloping striped
+  flanks and gullies (v2 styled from the low back-edge bench, 3 of 4
+  candidates; a layered "cake" rejected), seated as low 2x1 humps and
+  weighted 1.6; a sandstone 2x1 run takes a hump instead of a stepped butte
+  ridge 75% of the time (`LOW_PAIR_RATE`, was 40%).
+
+### Deeper badlands (generator)
+
+`clusters.deep` in `config.ts`: a share of the mountain clusters of a
+badlands (0.8) or steppe (0.45) zone are deep blocks, 22-36 cells, stretched
+only 1.3 east-west, so they are at least four rows deep where the zone has
+room. Seeds 1-10 size M: badlands and steppe mountain cells with rock all
+round 288 of 2,684 (10.7%) -> 491 of 3,082 (16%); mountain cells there +15%.
+The straight-edge test now allows three runs of 9+ cells in 50 maps (all
+three along the map-edge frame, at y = 2, y = 46 and x = 5; was two).
+
+### Rubble rock base
+
+`rubbleAt` in `ground.ts`: the palette's rock base is cut into jittered
+stones about 8 px across (2 px blocks), each a little lighter or darker,
+lit on its lower-left rim and shaded on its upper-right (the sun is at the
+bottom left), with darker cracks between them. Between pieces and in big
+filled notches it now reads as scree and rubble, not a flat dark blob.
+
+### Low 3x2 back edge: retried, rejected
+
+`s7-low32-c` was styled from `plateau-3x2-a` squashed to 0.8 of its height
+(`art/refs/massif-sandstone/low-3x2-a.png`) with "rock only in the lower
+half": v2 copied the squashed outline exactly, so the take is a low copy of
+`plateau-3x2-a` with the same gully and knobs. Rejected: it would read as
+that sprite pasted. A low back edge needs a style image of its own shape.
+
+### Calls and verdicts
+
+22 PixelLab requests (sandstone 19, granite 3; `usd: null` except one v2
+call that reported US$0.08): 9 edits (5 recolours accepted, 2 rejected as
+candy-coloured stripes: `s7-fluted-c-rose` magenta, `s7-fluted-e-rust`
+red-salmon; 2 snowless edits accepted), 13 v2 (8 tablelands and 2 small
+mesas accepted, 1 low 3x2 rejected, 2 ridge calls 5 of 8 candidates
+accepted). Every take has its
+verdict and reason in its set's `verdicts.json`. Sheets:
+`sheets/massif-sandstone.png` and `sheets/massif-granite.png` (rebuilt by
+`sh art/review/massif-sheets.sh`).
+
+Measured: `packRanges` 9-18 ms per M map in node (xaj.21: 9-15 ms), 149-155
+pieces on seeds 1-3.
+
+### Still artificial
+
+- Rows of tablelands: a deep badlands block is now a few long tablelands,
+  but each row has its own front cliff, so north to south it reads as
+  stacked terraces; the fluted "organ pipe" fronts still show where a
+  chain starts fluted.
+- Interior 2x2 slots have few quiet sprites: the two small mesas can repeat
+  one or two cells apart (the pick falls back to a repeat before it puts a
+  landmark inside).
+- Joins between takes show a slight colour step (the banded 5x2 is more
+  orange than the 4x2) and the 6 px rim jog of the composed outline;
+  invisible at zoom 0.75, visible at zoom 2.
+- The edits that worked recolour the whole sprite; the saturated siblings
+  (rosy hoodoos, rust tower) are louder than the set.
+- Sandstone range edges still have stepped butte ridges and boulder heaps
+  where a 2x1 must be a ridge; the low humps that replace them are flat
+  ledges.
+- Granite ranges are busy: a field of small ridges and boulders; the
+  snowless ridges help colour, not mass.
+- No low 3x2 back edge.

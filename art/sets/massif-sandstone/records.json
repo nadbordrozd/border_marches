@@ -3292,5 +3292,931 @@
         "height": 288
       }
     ]
+  },
+  "s7-hoodoos-i-pale": {
+    "id": "s7-hoodoos-i-pale",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "5678746a-fa52-45d7-a2f1-0273717da72f",
+    "submittedAt": "2026-11-15T22:29:15.622Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Change only the colours of the rock: recolour every red, rust and orange hoodoo to pale cream and light ochre sandstone, colour #f2d9a6 with #c99a5e shadows and thin #a4553a red-brown bands, like pale desert sandstone. Keep every shape, the cap rocks, the boulders, the dark brown outline and the art style exactly the same."
+        }
+      ],
+      "image": "take massif-sandstone/s5-massif22-lowrim-e#0 sha256 b4d423d3d854be128f21746f4b4531343e2d546af0036364abe612c630db650b",
+      "width": 160,
+      "height": 208,
+      "seed": 77101,
+      "no_background": true,
+      "description": "Change only the colours of the rock: recolour every red, rust and orange hoodoo to pale cream and light ochre sandstone, colour #f2d9a6 with #c99a5e shadows and thin #a4553a red-brown bands, like pale desert sandstone. Keep every shape, the cap rocks, the boulders, the dark brown outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T22:29:46.620Z",
+    "candidates": [
+      {
+        "file": "s7-hoodoos-i-pale-0.png",
+        "sha256": "9065b732b6c9f3d8eff05e45820684a4810909216a21090c1cd5282a3791c437",
+        "width": 160,
+        "height": 208
+      },
+      {
+        "file": "s7-hoodoos-i-pale-1.png",
+        "sha256": "9065b732b6c9f3d8eff05e45820684a4810909216a21090c1cd5282a3791c437",
+        "width": 160,
+        "height": 208
+      }
+    ]
+  },
+  "s7-hoodoos-e-rose": {
+    "id": "s7-hoodoos-e-rose",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "ea604cd5-2bb0-4c58-b61a-284798859ca5",
+    "submittedAt": "2026-11-15T22:29:46.776Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Change only the colours of the rock: recolour the pale ochre hoodoos to rosy salmon pink and white banded sandstone, colour #e9a68a with #b0604c shadows, cream #f6e3c8 bands and thin maroon #7c3328 stripes, like painted desert hills. Keep every shape, the dark cap rocks, the boulders, the dark brown outline and the art style exactly the same."
+        }
+      ],
+      "image": "take massif-sandstone/s4-massif22-hoodoos#0 sha256 3fa780017988d484c92dceadbe01e54012462cca144ec75887e40f9b0829ef37",
+      "width": 160,
+      "height": 208,
+      "seed": 77102,
+      "no_background": true,
+      "description": "Change only the colours of the rock: recolour the pale ochre hoodoos to rosy salmon pink and white banded sandstone, colour #e9a68a with #b0604c shadows, cream #f6e3c8 bands and thin maroon #7c3328 stripes, like painted desert hills. Keep every shape, the dark cap rocks, the boulders, the dark brown outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T22:30:17.669Z",
+    "candidates": [
+      {
+        "file": "s7-hoodoos-e-rose-0.png",
+        "sha256": "19054330350258baf6956ebb951150638544f8e6e329c181f5b590866770e597",
+        "width": 160,
+        "height": 208
+      },
+      {
+        "file": "s7-hoodoos-e-rose-1.png",
+        "sha256": "19054330350258baf6956ebb951150638544f8e6e329c181f5b590866770e597",
+        "width": 160,
+        "height": 208
+      }
+    ]
+  },
+  "s7-fluted-c-rose": {
+    "id": "s7-fluted-c-rose",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "5ba517da-faac-424e-b4a9-ebc3457c8be4",
+    "submittedAt": "2026-11-15T22:30:17.775Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Change only the colours of the rock: recolour the hill to banded painted badlands, alternating wavy stripes of rosy salmon #e3977c, cream #f4e1c1 and dusty maroon #93473a, shaded faces #a85a46. Keep every shape, every flute and gully, the boulders, the dark brown outline and the art style exactly the same."
+        }
+      ],
+      "image": "take massif-sandstone/s4-massif22-fluted#0 sha256 6f7a6be8637e1ea159a01688b7460b64975e43e33f2441037dcbd8fadb6358eb",
+      "width": 160,
+      "height": 208,
+      "seed": 77103,
+      "no_background": true,
+      "description": "Change only the colours of the rock: recolour the hill to banded painted badlands, alternating wavy stripes of rosy salmon #e3977c, cream #f4e1c1 and dusty maroon #93473a, shaded faces #a85a46. Keep every shape, every flute and gully, the boulders, the dark brown outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T22:30:59.112Z",
+    "candidates": [
+      {
+        "file": "s7-fluted-c-rose-0.png",
+        "sha256": "34d47f8a6269bf6128b34ae497730ccb005dd5dcb284f3b3fff0e3554fa80c36",
+        "width": 160,
+        "height": 208
+      },
+      {
+        "file": "s7-fluted-c-rose-1.png",
+        "sha256": "34d47f8a6269bf6128b34ae497730ccb005dd5dcb284f3b3fff0e3554fa80c36",
+        "width": 160,
+        "height": 208
+      }
+    ]
+  },
+  "s7-hoodoos-g-cream": {
+    "id": "s7-hoodoos-g-cream",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "22122ba3-2c59-4f96-a717-83dd00329f18",
+    "submittedAt": "2026-11-15T22:30:59.226Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Change only the colours of the rock: recolour the hoodoos to banded rust and cream sandstone, deep rust red #b8573c with #7f3226 shadows on the lower half of each hoodoo and pale cream #f3dcae tops, thin dark cap rocks. Keep every shape, the boulders, the dark brown outline and the art style exactly the same."
+        }
+      ],
+      "image": "take massif-sandstone/s5-massif32-hoodoos#0 sha256 48f4120d9d0a919eb0317e2a06f380b8422e8d20e2399af2667ba7a47c3fd2e4",
+      "width": 240,
+      "height": 208,
+      "seed": 77104,
+      "no_background": true,
+      "description": "Change only the colours of the rock: recolour the hoodoos to banded rust and cream sandstone, deep rust red #b8573c with #7f3226 shadows on the lower half of each hoodoo and pale cream #f3dcae tops, thin dark cap rocks. Keep every shape, the boulders, the dark brown outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T22:31:30.206Z",
+    "candidates": [
+      {
+        "file": "s7-hoodoos-g-cream-0.png",
+        "sha256": "a04d4fd91afb34fc8a294b0fcae3b2b931f7a3ca3342db0d48646be016111082",
+        "width": 240,
+        "height": 208
+      },
+      {
+        "file": "s7-hoodoos-g-cream-1.png",
+        "sha256": "a04d4fd91afb34fc8a294b0fcae3b2b931f7a3ca3342db0d48646be016111082",
+        "width": 240,
+        "height": 208
+      }
+    ]
+  },
+  "s7-table52-a": {
+    "id": "s7-table52-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "76ed0583-1401-4f52-81ff-946f8200040c",
+    "submittedAt": "2026-11-15T22:31:30.322Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one long low flat-topped desert sandstone tableland seen from the south from above, five times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock with a few cracks, one shallow winding dry gully and two low worn knobs on the top, its front a continuous band of short straight striped cliffs with wavy bands of ochre, cream and red-brown and a few shallow alcoves, scree fans and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "file art/refs/massif-sandstone/tableland-5x2-a.png sha256 a2046e88fe96d35037f4bf8421fe92a71a24629ef434aeb36fc8b127e179fabb",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "image_size": {
+        "width": 400,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 77201,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one long low flat-topped desert sandstone tableland seen from the south from above, five times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock with a few cracks, one shallow winding dry gully and two low worn knobs on the top, its front a continuous band of short straight striped cliffs with wavy bands of ochre, cream and red-brown and a few shallow alcoves, scree fans and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, separate mesas, gap, tall peak, tower, pillar, tree stump, flutes, organ pipes, spires, snow, grey rock, stairs, trees, cactus, river, water, path."
+    },
+    "at": "2026-11-15T22:32:52.953Z",
+    "candidates": [
+      {
+        "file": "s7-table52-a-0.png",
+        "sha256": "0b889210d33009ee1e5b769df3bab0b181af69fb4a27124c00bf0101cbd6a0ce",
+        "width": 400,
+        "height": 208
+      }
+    ]
+  },
+  "s7-table42-a": {
+    "id": "s7-table42-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "fe4c3001-2d31-4505-81b4-1fa8c07d8298",
+    "submittedAt": "2026-11-15T22:32:53.077Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one wide flat-topped desert sandstone tableland seen from the south from above, twice as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock, a narrow dry canyon cutting a little way into the top from the front edge, cracks and a low worn knob, its front a continuous band of short striped cliffs with wavy bands of ochre, cream and red-brown, scree fans and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "file art/refs/massif-sandstone/tableland-4x2-a.png sha256 08c4bb098d71a470638b31104fcc4fd1581d04378cdc47365f43ea36f1a0527c",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "image_size": {
+        "width": 320,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 77202,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one wide flat-topped desert sandstone tableland seen from the south from above, twice as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock, a narrow dry canyon cutting a little way into the top from the front edge, cracks and a low worn knob, its front a continuous band of short striped cliffs with wavy bands of ochre, cream and red-brown, scree fans and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, separate mesas, gap, tall peak, tower, pillar, tree stump, flutes, organ pipes, spires, snow, grey rock, stairs, trees, cactus, river, water, path."
+    },
+    "at": "2026-11-15T22:34:51.593Z",
+    "candidates": [
+      {
+        "file": "s7-table42-a-0.png",
+        "sha256": "059f1c06c36cbd4bb8e3b6f29d3ac821f7bb63717e3570794691c051223fb5a5",
+        "width": 320,
+        "height": 208
+      }
+    ]
+  },
+  "s7-ridge21-slope": {
+    "id": "s7-ridge21-slope",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "a15b1b84-21ff-4c06-a700-0d7546327794",
+    "submittedAt": "2026-11-15T22:34:51.862Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a short eroded desert sandstone ridge seen from the south from above, twice as wide as it is tall: it fills the image from the left edge to the right edge, a rounded crest of worn striped rock rising a little above the middle, sloping flanks with wavy bands of ochre, cream and red-brown, shallow gullies down the slopes, scree and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "take massif-sandstone/s6-low31-b#0 sha256 178a7e67fb3b66d0fe1e84c51074d2951b27f32fc11edc5cdfbf8c0a582ee5b7",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "image_size": {
+        "width": 160,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 77301,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: a short eroded desert sandstone ridge seen from the south from above, twice as wide as it is tall: it fills the image from the left edge to the right edge, a rounded crest of worn striped rock rising a little above the middle, sloping flanks with wavy bands of ochre, cream and red-brown, shallow gullies down the slopes, scree and a ragged foot of a few boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, butte, mesa, flat top, vertical cliffs, tower, pillar, chimney, stairs, blocks, snow, grey rock, trees, cactus, river, path."
+    },
+    "at": "2026-11-15T22:36:50.789Z",
+    "candidates": [
+      {
+        "file": "s7-ridge21-slope-0.png",
+        "sha256": "80396238cee0b8c48271dbbb2edfe82102d40e7198d009f3a4374677926b46fb",
+        "width": 160,
+        "height": 128
+      },
+      {
+        "file": "s7-ridge21-slope-1.png",
+        "sha256": "a494223aca68a9771f7d3ccc09bc2c8be53601f4f8774cb0184bb6c041321240",
+        "width": 160,
+        "height": 128
+      },
+      {
+        "file": "s7-ridge21-slope-2.png",
+        "sha256": "b0a23a9144a93399fdee29b58928827bdb858c5d8f1da2301125300959ff701c",
+        "width": 160,
+        "height": 128
+      },
+      {
+        "file": "s7-ridge21-slope-3.png",
+        "sha256": "8f60852b90d22e58a5a5f8a8f6885c8da77634e73c84d92740ef728bee73a075",
+        "width": 160,
+        "height": 128
+      }
+    ]
+  },
+  "s7-table42-b": {
+    "id": "s7-table42-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "db725a0e-118b-4184-adbc-ca5eb8dcd5c6",
+    "submittedAt": "2026-11-15T22:37:13.614Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one wide flat-topped desert sandstone tableland, twice as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock with a broad shallow dry wash winding across the top, cracks and three small worn hoodoo knobs, its front a continuous wall of straight banded cliffs in two steps with a narrow ledge between them, wavy bands of ochre, cream and red-brown, scree and a ragged foot of boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "file art/refs/massif-sandstone/tableland-4x2-a.png sha256 08c4bb098d71a470638b31104fcc4fd1581d04378cdc47365f43ea36f1a0527c",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "image_size": {
+        "width": 320,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 77203,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one wide flat-topped desert sandstone tableland, twice as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock with a broad shallow dry wash winding across the top, cracks and three small worn hoodoo knobs, its front a continuous wall of straight banded cliffs in two steps with a narrow ledge between them, wavy bands of ochre, cream and red-brown, scree and a ragged foot of boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, separate mesas, gap, tall peak, tower, pillar, tree stump, flutes, organ pipes, spires, snow, grey rock, stairs, trees, cactus, river, path."
+    },
+    "at": "2026-11-15T22:39:02.130Z",
+    "candidates": [
+      {
+        "file": "s7-table42-b-0.png",
+        "sha256": "eeff9e0efcc642a16f5a9b40eac33941e8c52755801e7bfd1ea3a1bc6dc026d1",
+        "width": 320,
+        "height": 208
+      }
+    ]
+  },
+  "s7-table52-b": {
+    "id": "s7-table52-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "34a22ea7-d9fa-4296-bcc1-cf3f20fac530",
+    "submittedAt": "2026-11-15T22:39:02.294Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one long low flat-topped desert sandstone tableland, five times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock with patches of darker red-brown caprock, cracks and a few loose boulders on the top, its front a continuous band of short banded cliffs broken into blunt buttresses and shallow bays, wavy bands of ochre, cream and red-brown, scree and a ragged foot of boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "file art/refs/massif-sandstone/tableland-5x2-a.png sha256 a2046e88fe96d35037f4bf8421fe92a71a24629ef434aeb36fc8b127e179fabb",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "image_size": {
+        "width": 400,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 77204,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one long low flat-topped desert sandstone tableland, five times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock with patches of darker red-brown caprock, cracks and a few loose boulders on the top, its front a continuous band of short banded cliffs broken into blunt buttresses and shallow bays, wavy bands of ochre, cream and red-brown, scree and a ragged foot of boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, separate mesas, gap, tall peak, tower, pillar, tree stump, flutes, organ pipes, spires, snow, grey rock, stairs, trees, cactus, river, path."
+    },
+    "at": "2026-11-15T22:40:26.286Z",
+    "candidates": [
+      {
+        "file": "s7-table52-b-0.png",
+        "sha256": "3bac4f4dfa7d80ba8b55127240c39cd3441d6597c97357aeb714f1e9e6774465",
+        "width": 400,
+        "height": 208
+      }
+    ]
+  },
+  "s7-low32-c": {
+    "id": "s7-low32-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "3bce0932-83e7-47fb-ab76-50d4b2dff81a",
+    "submittedAt": "2026-11-15T22:40:26.397Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the low worn back edge of a wide desert sandstone tableland, much wider than tall: rock only in the lower half of the image, the upper part empty, one low broad flat-topped bench of pale ochre rock with a shallow dry gully and cracks on its top, a low front of short banded slopes with wavy bands of ochre, cream and red-brown, a little scree and a ragged foot of a few small boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "file art/refs/massif-sandstone/low-3x2-a.png sha256 3e1934818eeea0648fbf1d9d058ad5d8759e62228ae6fa677b06d108f549be36",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "image_size": {
+        "width": 240,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 77205,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: the low worn back edge of a wide desert sandstone tableland, much wider than tall: rock only in the lower half of the image, the upper part empty, one low broad flat-topped bench of pale ochre rock with a shallow dry gully and cracks on its top, a low front of short banded slopes with wavy bands of ochre, cream and red-brown, a little scree and a ragged foot of a few small boulders along the bottom. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, tall cliffs, peak, tower, pillar, flutes, organ pipes, tree stump, separate rocks, pebbles, snow, grey rock, stairs, trees, cactus, river, path."
+    },
+    "at": "2026-11-15T22:41:22.999Z",
+    "candidates": [
+      {
+        "file": "s7-low32-c-0.png",
+        "sha256": "ec52ab3973f44dedbeae00db3cbb6b7e9ba3b67d6cc57ab170273394b543a751",
+        "width": 240,
+        "height": 208
+      }
+    ]
+  },
+  "s7-table42-c": {
+    "id": "s7-table42-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b9ca59d3-a12d-462a-aeac-6665077cd8b1",
+    "submittedAt": "2026-11-15T22:41:32.126Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one wide flat-topped desert sandstone tableland, twice as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock with a few cracks, a shallow dry gully and one worn knob on the top, its front a continuous wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, two shallow gullies cut into the wall with small scree fans below them, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "file art/refs/massif-sandstone/tableland-4x2-b.png sha256 e6b8b0a0d89fba2e605000544c045841e6a1bb0c0291bad9359e9c7ca4af694f",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "image_size": {
+        "width": 320,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 77206,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one wide flat-topped desert sandstone tableland, twice as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock with a few cracks, a shallow dry gully and one worn knob on the top, its front a continuous wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, two shallow gullies cut into the wall with small scree fans below them, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, separate mesas, gap, tall peak, tower, pillar, tree stump, flutes, organ pipes, spires, snow, grey rock, stairs, trees, cactus, river, path."
+    },
+    "at": "2026-11-15T22:42:40.115Z",
+    "candidates": [
+      {
+        "file": "s7-table42-c-0.png",
+        "sha256": "8cf03f77c9947c2c239b33658b3600e2592ab8bff24a051a3e2bd7a1d017c131",
+        "width": 320,
+        "height": 208
+      }
+    ]
+  },
+  "s7-table52-c": {
+    "id": "s7-table52-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c8e73b71-f113-410c-96a2-02140985b0a9",
+    "submittedAt": "2026-11-15T22:42:40.255Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one long low flat-topped desert sandstone tableland, five times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock with cracks, a few loose boulders on the top, its front a continuous wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, broken by one deep narrow alcove and a few shallow gullies with scree fans, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "file art/refs/massif-sandstone/tableland-5x2-b.png sha256 67756a949d6fb52ff595a4e8e3b2e87f90059979c869da422e55ee260430f430",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "image_size": {
+        "width": 400,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 77207,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one long low flat-topped desert sandstone tableland, five times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock with cracks, a few loose boulders on the top, its front a continuous wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, broken by one deep narrow alcove and a few shallow gullies with scree fans, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, separate mesas, gap, tall peak, tower, pillar, tree stump, flutes, organ pipes, spires, snow, grey rock, stairs, trees, cactus, river, path."
+    },
+    "at": "2026-11-15T22:44:07.689Z",
+    "candidates": [
+      {
+        "file": "s7-table52-c-0.png",
+        "sha256": "b8d2f544bb0b312e71bfb4267b8a28e1d9019a33e021ae47fe0b945eff638194",
+        "width": 400,
+        "height": 208
+      }
+    ]
+  },
+  "s7-fluted-c-pale": {
+    "id": "s7-fluted-c-pale",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "2e27a1a1-3bbf-4946-9e65-d053c17ea664",
+    "submittedAt": "2026-11-15T22:48:24.013Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Change only the colours of the rock: recolour the hill to pale bleached badlands, cream #f4e6c8 and very light grey-beige #ddd2bd bands with thin rust #b0603f stripes, shaded faces warm grey-brown #a98f75. Keep every shape, every flute and gully, the boulders, the dark brown outline and the art style exactly the same."
+        }
+      ],
+      "image": "take massif-sandstone/s4-massif22-fluted#0 sha256 6f7a6be8637e1ea159a01688b7460b64975e43e33f2441037dcbd8fadb6358eb",
+      "width": 160,
+      "height": 208,
+      "seed": 77105,
+      "no_background": true,
+      "description": "Change only the colours of the rock: recolour the hill to pale bleached badlands, cream #f4e6c8 and very light grey-beige #ddd2bd bands with thin rust #b0603f stripes, shaded faces warm grey-brown #a98f75. Keep every shape, every flute and gully, the boulders, the dark brown outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T22:48:46.225Z",
+    "candidates": [
+      {
+        "file": "s7-fluted-c-pale-0.png",
+        "sha256": "2c17bc31494e73ceca9e30544b4c6a851de350b43fa6dff5f0c453a62662f876",
+        "width": 160,
+        "height": 208
+      },
+      {
+        "file": "s7-fluted-c-pale-1.png",
+        "sha256": "2c17bc31494e73ceca9e30544b4c6a851de350b43fa6dff5f0c453a62662f876",
+        "width": 160,
+        "height": 208
+      }
+    ]
+  },
+  "s7-tower-a-rust": {
+    "id": "s7-tower-a-rust",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "731b76de-042d-4884-bfaf-1cad41e2fab1",
+    "submittedAt": "2026-11-15T22:48:46.315Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Change only the colours of the rock: recolour the mesa towers to deep rust red sandstone, colour #c0643f with #84392a shadows and a few thin cream #f0d9b0 bands, like red desert buttes. Keep every shape, the flat tops, the boulders, the dark brown outline and the art style exactly the same."
+        }
+      ],
+      "image": "take massif-sandstone/s-massif22-a#0 sha256 7e673c734c45cfba1098df34e1994c8540bd6cb9c4fb4e9612286f89454f6f61",
+      "width": 160,
+      "height": 208,
+      "seed": 77106,
+      "no_background": true,
+      "description": "Change only the colours of the rock: recolour the mesa towers to deep rust red sandstone, colour #c0643f with #84392a shadows and a few thin cream #f0d9b0 bands, like red desert buttes. Keep every shape, the flat tops, the boulders, the dark brown outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T22:49:43.252Z",
+    "candidates": [
+      {
+        "file": "s7-tower-a-rust-0.png",
+        "sha256": "8b4562d458ff9e064d6be3a20b2e6c3938af37dbdf9eff508f3acd8440d89cbb",
+        "width": 160,
+        "height": 208
+      },
+      {
+        "file": "s7-tower-a-rust-1.png",
+        "sha256": "8b4562d458ff9e064d6be3a20b2e6c3938af37dbdf9eff508f3acd8440d89cbb",
+        "width": 160,
+        "height": 208
+      }
+    ]
+  },
+  "s7-fluted-e-rust": {
+    "id": "s7-fluted-e-rust",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "4b1e3745-4d22-4e29-a559-8235eb6afbee",
+    "submittedAt": "2026-11-15T22:49:43.362Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Change only the colours of the rock: recolour the ridge to banded red badlands, wavy stripes of rust red #c0643f, salmon #e0a07c and cream #f0d9b0, shaded faces #84392a. Keep every shape, every flute and gully, the boulders, the dark brown outline and the art style exactly the same."
+        }
+      ],
+      "image": "take massif-sandstone/s4-massif32-fluted#0 sha256 5d25565f76a16978a2c5ee10e30e8981a49d15aa27779ad6e5387ff75006c3f4",
+      "width": 240,
+      "height": 208,
+      "seed": 77107,
+      "no_background": true,
+      "description": "Change only the colours of the rock: recolour the ridge to banded red badlands, wavy stripes of rust red #c0643f, salmon #e0a07c and cream #f0d9b0, shaded faces #84392a. Keep every shape, every flute and gully, the boulders, the dark brown outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T22:50:30.426Z",
+    "candidates": [
+      {
+        "file": "s7-fluted-e-rust-0.png",
+        "sha256": "bb7203f3d2d9c59016f33b1113a393fa0f7d44b9c4c1bcd1394b6fa767d1e619",
+        "width": 240,
+        "height": 208
+      },
+      {
+        "file": "s7-fluted-e-rust-1.png",
+        "sha256": "bb7203f3d2d9c59016f33b1113a393fa0f7d44b9c4c1bcd1394b6fa767d1e619",
+        "width": 240,
+        "height": 208
+      }
+    ]
+  },
+  "s7-table42-d": {
+    "id": "s7-table42-d",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "fd190a93-1c32-4bba-87c4-0a957483d7aa",
+    "submittedAt": "2026-11-15T22:55:07.207Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one wide flat-topped desert sandstone tableland, twice as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock under a thin darker red-brown caprock rim, a few cracks on the top, its front a continuous wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, one narrow slot canyon and a low step ledge along the foot with a few small boulders, scree fans and a ragged foot. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "file art/refs/massif-sandstone/tableland-4x2-b.png sha256 e6b8b0a0d89fba2e605000544c045841e6a1bb0c0291bad9359e9c7ca4af694f",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "image_size": {
+        "width": 320,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 77208,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one wide flat-topped desert sandstone tableland, twice as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock under a thin darker red-brown caprock rim, a few cracks on the top, its front a continuous wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, one narrow slot canyon and a low step ledge along the foot with a few small boulders, scree fans and a ragged foot. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, separate mesas, gap, tall peak, tower, pillar, tree stump, flutes, organ pipes, spires, snow, grey rock, stairs, trees, cactus, river, path."
+    },
+    "at": "2026-11-15T22:56:29.896Z",
+    "candidates": [
+      {
+        "file": "s7-table42-d-0.png",
+        "sha256": "fd91008adfa477a8c5c410de359cc4795d3e4bd0f5dce72859a00f8ab0f7a585",
+        "width": 320,
+        "height": 208
+      }
+    ]
+  },
+  "s7-table52-d": {
+    "id": "s7-table52-d",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b8ec43a3-a3a2-43da-8fc5-7277e76a657e",
+    "submittedAt": "2026-11-15T22:56:29.996Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one long low flat-topped desert sandstone tableland, five times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock crossed by a shallow winding dry wash, cracks and a few loose boulders on the top, its front a continuous wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, two wide shallow bays with scree fans and a few blunt buttresses, a ragged foot of boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "file art/refs/massif-sandstone/tableland-5x2-b.png sha256 67756a949d6fb52ff595a4e8e3b2e87f90059979c869da422e55ee260430f430",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "image_size": {
+        "width": 400,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 77209,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one long low flat-topped desert sandstone tableland, five times as wide as it is deep: it fills the whole image from the left edge to the right edge, one continuous level table of pale ochre rock crossed by a shallow winding dry wash, cracks and a few loose boulders on the top, its front a continuous wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, two wide shallow bays with scree fans and a few blunt buttresses, a ragged foot of boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, separate mesas, gap, tall peak, tower, pillar, tree stump, flutes, organ pipes, spires, snow, grey rock, stairs, trees, cactus, river, path."
+    },
+    "at": "2026-11-15T23:00:27.189Z",
+    "candidates": [
+      {
+        "file": "s7-table52-d-0.png",
+        "sha256": "6477edd881f82e14f15ad03a55a71637ff4de0ddb2be47ac4af009095cb2cedd",
+        "width": 400,
+        "height": 208
+      }
+    ]
+  },
+  "s7-table22-a": {
+    "id": "s7-table22-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1a20d534-5237-4821-8765-d65986d08daf",
+    "submittedAt": "2026-11-15T23:00:34.736Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small flat-topped desert sandstone mesa block: it fills the whole image from the left edge to the right edge, a level table of pale ochre rock with a few cracks and a small worn knob on the top, its front a wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, one narrow gully with a scree fan, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "file art/refs/massif-sandstone/tableland-2x2-b.png sha256 17a202ff3cb8896a5a1fa16096b62ddde5beefb08fdd710c5c06a60310f6853c",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "image_size": {
+        "width": 160,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 77210,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one small flat-topped desert sandstone mesa block: it fills the whole image from the left edge to the right edge, a level table of pale ochre rock with a few cracks and a small worn knob on the top, its front a wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown, one narrow gully with a scree fan, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, tall peak, tower, pillar, tree stump, flutes, organ pipes, spires, snow, grey rock, stairs, trees, cactus, river, path."
+    },
+    "at": "2026-11-15T23:01:37.729Z",
+    "candidates": [
+      {
+        "file": "s7-table22-a-0.png",
+        "sha256": "fefacbcb33d98509ee7d5bdd6786ed4fbecf62419daacb4d2cc9aaa88f28129b",
+        "width": 160,
+        "height": 208
+      }
+    ]
+  },
+  "s7-table22-b": {
+    "id": "s7-table22-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5b8509ec-5a14-4dcc-b82e-6310309a451d",
+    "submittedAt": "2026-11-15T23:01:37.821Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small flat-topped desert sandstone mesa block: it fills the whole image from the left edge to the right edge, a level table of pale ochre rock under a thin darker red-brown caprock rim with loose boulders on the top, its front a wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown broken by a shallow alcove, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass."
+        }
+      ],
+      "style_image": {
+        "source": "file art/refs/massif-sandstone/tableland-2x2-b.png sha256 17a202ff3cb8896a5a1fa16096b62ddde5beefb08fdd710c5c06a60310f6853c",
+        "usage": "copy the outline, palette, shading and pixel size"
+      },
+      "image_size": {
+        "width": 160,
+        "height": 208
+      },
+      "no_background": true,
+      "seed": 77211,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one terrain map piece, a single free-standing cut-out rock mass in three-quarter view looking slightly down, calmer and less saturated than units, a thick dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, no face. Nothing is drawn under or around it: no ground, grass, soil, slab or platform, only the transparent background. Subject: one small flat-topped desert sandstone mesa block: it fills the whole image from the left edge to the right edge, a level table of pale ochre rock under a thin darker red-brown caprock rim with loose boulders on the top, its front a wall of straight sheer cliffs with level horizontal stripes of ochre, cream and red-brown broken by a shallow alcove, and a ragged foot of a few boulders. Lit faces pale ochre, shaded faces warm brown, outline dark brown. No snow, no grey. One solid mass. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes, tall peak, tower, pillar, tree stump, flutes, organ pipes, spires, snow, grey rock, stairs, trees, cactus, river, path."
+    },
+    "at": "2026-11-15T23:02:34.548Z",
+    "usageUsd": 0.08054256116019355,
+    "candidates": [
+      {
+        "file": "s7-table22-b-0.png",
+        "sha256": "58b2124c8b74fb736b2581394275aa525a61175dcead6040de38b8261ddefae6",
+        "width": 160,
+        "height": 208
+      }
+    ]
   }
 }
