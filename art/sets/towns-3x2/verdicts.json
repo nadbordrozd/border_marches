@@ -1,0 +1,47 @@
+{
+  "lost-world-a-clean#0": {
+    "verdict": "REJECTED",
+    "notes": "the edit erased the skull gate and the front palisade together with the grass",
+    "at": "2026-11-15T16:46:22.484Z"
+  },
+  "lost-world-a-clean#1": {
+    "verdict": "REJECTED",
+    "notes": "the edit erased the skull gate and the front palisade together with the grass",
+    "at": "2026-11-15T16:46:22.527Z"
+  },
+  "goblin-hold-a#0": {
+    "verdict": "REJECTED",
+    "notes": "front elevation instead of three-quarter view; tin sheets read as a stone castle; brick strip under the walls",
+    "at": "2026-11-15T16:46:22.569Z"
+  },
+  "lost-world-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good town but a grass disc and dirt path fill the yard inside the palisade (ground plate); fixed by lost-world-a-clean2",
+    "at": "2026-11-15T16:48:21.209Z"
+  },
+  "lost-world-a-clean2#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Lost World town: log palisade with a giant skull gate, five thatched huts, a longhouse, two painted bone totems; yard transparent so the map ground shows; no flag; reads at 1:1 on jungle",
+    "at": "2026-11-15T16:48:21.251Z"
+  },
+  "lost-world-a-clean2#1": {
+    "verdict": "REJECTED",
+    "notes": "same edit as #0; the skull gate is a little muddier; #0 kept",
+    "at": "2026-11-15T16:48:21.293Z"
+  },
+  "goblin-hold-v2b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Warlord's Hold: wide oval ring of tin sheets and sharpened logs with a horned scrap gate, junk watchtower, hide tent and yellow-roofed shacks; palette of the imported goblin cities; yard transparent; no flag; fills the 3x2 footprint",
+    "at": "2026-11-15T16:50:27.142Z"
+  },
+  "goblin-hold-b#0": {
+    "verdict": "REJECTED",
+    "notes": "chunky three-quarter fort but the yard is a solid grey floor (ground plate) and the tent is copper-orange",
+    "at": "2026-11-15T16:50:27.185Z"
+  },
+  "goblin-hold-v2a#0": {
+    "verdict": "REJECTED",
+    "notes": "right style and no plate, but only about 140 x 95 px: too small for the 3x2 footprint; v2b asks for the full width",
+    "at": "2026-11-15T16:50:27.228Z"
+  }
+}

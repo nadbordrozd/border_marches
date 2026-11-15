@@ -1,0 +1,627 @@
+{
+  "grass-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "grass: pair of round bushes",
+    "at": "2026-11-15T16:48:21.334Z"
+  },
+  "grass-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "grass: round leafy bush",
+    "at": "2026-11-15T16:48:21.376Z"
+  },
+  "grass-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "grass: white wild flowers",
+    "at": "2026-11-15T16:48:21.418Z"
+  },
+  "grass-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "grass: low patch of white and yellow flowers",
+    "at": "2026-11-15T16:48:21.460Z"
+  },
+  "grass-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "grass: two small stones with a grass tuft",
+    "at": "2026-11-15T16:48:21.501Z"
+  },
+  "grass-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "grass: pair of brown mushrooms",
+    "at": "2026-11-15T16:48:21.543Z"
+  },
+  "grass-a#0": {
+    "verdict": "REJECTED",
+    "notes": "bush; near duplicate of #4, #4 kept",
+    "at": "2026-11-15T16:48:21.585Z"
+  },
+  "grass-a#2": {
+    "verdict": "REJECTED",
+    "notes": "bush, upright egg shape; #4 kept",
+    "at": "2026-11-15T16:48:21.628Z"
+  },
+  "grass-a#3": {
+    "verdict": "REJECTED",
+    "notes": "bush with a stick; busier than #4",
+    "at": "2026-11-15T16:48:21.669Z"
+  },
+  "grass-a#7": {
+    "verdict": "REJECTED",
+    "notes": "flower clump; #5 kept",
+    "at": "2026-11-15T16:48:21.712Z"
+  },
+  "grass-a#8": {
+    "verdict": "REJECTED",
+    "notes": "thin stalks, noisy at 1:1",
+    "at": "2026-11-15T16:48:21.759Z"
+  },
+  "grass-a#9": {
+    "verdict": "REJECTED",
+    "notes": "flower patch, flatter duplicate of #6",
+    "at": "2026-11-15T16:48:21.804Z"
+  },
+  "grass-a#10": {
+    "verdict": "REJECTED",
+    "notes": "single stone; #11 kept",
+    "at": "2026-11-15T16:48:21.848Z"
+  },
+  "grass-a#12": {
+    "verdict": "REJECTED",
+    "notes": "flat stone; #11 kept",
+    "at": "2026-11-15T16:48:21.891Z"
+  },
+  "grass-a#13": {
+    "verdict": "REJECTED",
+    "notes": "pointed stone; #11 kept",
+    "at": "2026-11-15T16:48:21.935Z"
+  },
+  "grass-a#14": {
+    "verdict": "REJECTED",
+    "notes": "stones with grass; #11 kept",
+    "at": "2026-11-15T16:48:21.977Z"
+  },
+  "grass-a#15": {
+    "verdict": "REJECTED",
+    "notes": "fern seen straight from above, wrong camera",
+    "at": "2026-11-15T16:48:22.018Z"
+  },
+  "grass-a#16": {
+    "verdict": "REJECTED",
+    "notes": "fern frond seen from above, wrong camera",
+    "at": "2026-11-15T16:48:22.060Z"
+  },
+  "grass-a#17": {
+    "verdict": "REJECTED",
+    "notes": "pale rosette seen from above, wrong camera",
+    "at": "2026-11-15T16:48:22.103Z"
+  },
+  "grass-a#18": {
+    "verdict": "REJECTED",
+    "notes": "fern fronds seen from above, wrong camera",
+    "at": "2026-11-15T16:48:22.145Z"
+  },
+  "grass-a#19": {
+    "verdict": "REJECTED",
+    "notes": "fern seen from above, wrong camera",
+    "at": "2026-11-15T16:48:22.186Z"
+  },
+  "grass-a#21": {
+    "verdict": "REJECTED",
+    "notes": "red mushrooms, too saturated for the ground layer",
+    "at": "2026-11-15T16:48:22.229Z"
+  },
+  "grass-a#22": {
+    "verdict": "REJECTED",
+    "notes": "orange mushrooms; #20 kept",
+    "at": "2026-11-15T16:48:22.271Z"
+  },
+  "grass-a#23": {
+    "verdict": "REJECTED",
+    "notes": "mushrooms; #20 kept",
+    "at": "2026-11-15T16:48:22.313Z"
+  },
+  "grass-a#24": {
+    "verdict": "REJECTED",
+    "notes": "tiny pale mushrooms, too small to read",
+    "at": "2026-11-15T16:48:22.355Z"
+  },
+  "jungle-a#0": {
+    "verdict": "REJECTED",
+    "notes": "fern; #1 kept",
+    "at": "2026-11-15T16:56:46.793Z"
+  },
+  "jungle-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "jungle: upright fern",
+    "at": "2026-11-15T16:56:46.835Z"
+  },
+  "jungle-a#2": {
+    "verdict": "REJECTED",
+    "notes": "fern; #1 kept",
+    "at": "2026-11-15T16:56:46.876Z"
+  },
+  "jungle-a#3": {
+    "verdict": "REJECTED",
+    "notes": "fern; #1 kept",
+    "at": "2026-11-15T16:56:46.919Z"
+  },
+  "jungle-a#4": {
+    "verdict": "REJECTED",
+    "notes": "fern; #1 kept",
+    "at": "2026-11-15T16:56:46.961Z"
+  },
+  "jungle-a#5": {
+    "verdict": "REJECTED",
+    "notes": "palm; #7 kept",
+    "at": "2026-11-15T16:56:47.002Z"
+  },
+  "jungle-a#6": {
+    "verdict": "REJECTED",
+    "notes": "palm; #7 kept",
+    "at": "2026-11-15T16:56:47.043Z"
+  },
+  "jungle-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "jungle: small young palm",
+    "at": "2026-11-15T16:56:47.086Z"
+  },
+  "jungle-a#8": {
+    "verdict": "REJECTED",
+    "notes": "palm; #7 kept",
+    "at": "2026-11-15T16:56:47.127Z"
+  },
+  "jungle-a#9": {
+    "verdict": "REJECTED",
+    "notes": "palm; #7 kept",
+    "at": "2026-11-15T16:56:47.170Z"
+  },
+  "jungle-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "jungle: moss-covered boulder",
+    "at": "2026-11-15T16:56:47.211Z"
+  },
+  "jungle-a#11": {
+    "verdict": "REJECTED",
+    "notes": "mossy boulder; #10 kept",
+    "at": "2026-11-15T16:56:47.254Z"
+  },
+  "jungle-a#12": {
+    "verdict": "REJECTED",
+    "notes": "mossy boulder; #10 kept",
+    "at": "2026-11-15T16:56:47.295Z"
+  },
+  "jungle-a#13": {
+    "verdict": "REJECTED",
+    "notes": "mossy boulder; #10 kept",
+    "at": "2026-11-15T16:56:47.338Z"
+  },
+  "jungle-a#14": {
+    "verdict": "REJECTED",
+    "notes": "mossy boulder; #10 kept",
+    "at": "2026-11-15T16:56:47.379Z"
+  },
+  "jungle-a#15": {
+    "verdict": "REJECTED",
+    "notes": "leaf clump; #17 kept",
+    "at": "2026-11-15T16:56:47.420Z"
+  },
+  "jungle-a#16": {
+    "verdict": "REJECTED",
+    "notes": "leaf clump; #17 kept",
+    "at": "2026-11-15T16:56:47.461Z"
+  },
+  "jungle-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "jungle: clump of broad tropical leaves",
+    "at": "2026-11-15T16:56:47.506Z"
+  },
+  "jungle-a#18": {
+    "verdict": "REJECTED",
+    "notes": "leaf clump; #17 kept",
+    "at": "2026-11-15T16:56:47.548Z"
+  },
+  "jungle-a#19": {
+    "verdict": "REJECTED",
+    "notes": "leaf clump; #17 kept",
+    "at": "2026-11-15T16:56:47.589Z"
+  },
+  "jungle-a#20": {
+    "verdict": "REJECTED",
+    "notes": "log; #22 kept",
+    "at": "2026-11-15T16:56:47.632Z"
+  },
+  "jungle-a#21": {
+    "verdict": "REJECTED",
+    "notes": "log; #22 kept",
+    "at": "2026-11-15T16:56:47.672Z"
+  },
+  "jungle-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "jungle: mossy fallen log",
+    "at": "2026-11-15T16:56:47.715Z"
+  },
+  "jungle-a#23": {
+    "verdict": "REJECTED",
+    "notes": "log; #22 kept",
+    "at": "2026-11-15T16:56:47.756Z"
+  },
+  "jungle-a#24": {
+    "verdict": "REJECTED",
+    "notes": "stump reads as a tree stump, belongs to wasteland",
+    "at": "2026-11-15T16:56:47.797Z"
+  },
+  "steppe-a#0": {
+    "verdict": "REJECTED",
+    "notes": "tumbleweed; #1 kept",
+    "at": "2026-11-15T16:56:47.841Z"
+  },
+  "steppe-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "steppe: tumbleweed",
+    "at": "2026-11-15T16:56:47.882Z"
+  },
+  "steppe-a#2": {
+    "verdict": "REJECTED",
+    "notes": "tumbleweed; #1 kept",
+    "at": "2026-11-15T16:56:47.925Z"
+  },
+  "steppe-a#3": {
+    "verdict": "REJECTED",
+    "notes": "tumbleweed; #1 kept",
+    "at": "2026-11-15T16:56:47.966Z"
+  },
+  "steppe-a#4": {
+    "verdict": "REJECTED",
+    "notes": "tumbleweed; #1 kept",
+    "at": "2026-11-15T16:56:48.007Z"
+  },
+  "steppe-a#5": {
+    "verdict": "REJECTED",
+    "notes": "cattle skull; #8 kept (front views stare at the viewer)",
+    "at": "2026-11-15T16:56:48.051Z"
+  },
+  "steppe-a#6": {
+    "verdict": "REJECTED",
+    "notes": "cattle skull; #8 kept (front views stare at the viewer)",
+    "at": "2026-11-15T16:56:48.092Z"
+  },
+  "steppe-a#7": {
+    "verdict": "REJECTED",
+    "notes": "cattle skull; #8 kept (front views stare at the viewer)",
+    "at": "2026-11-15T16:56:48.133Z"
+  },
+  "steppe-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "steppe: bleached cattle skull, three-quarter view",
+    "at": "2026-11-15T16:56:48.175Z"
+  },
+  "steppe-a#9": {
+    "verdict": "REJECTED",
+    "notes": "cattle skull; #8 kept (front views stare at the viewer)",
+    "at": "2026-11-15T16:56:48.217Z"
+  },
+  "steppe-a#10": {
+    "verdict": "REJECTED",
+    "notes": "cactus; #11 kept",
+    "at": "2026-11-15T16:56:48.259Z"
+  },
+  "steppe-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "steppe: small round cactus with a lobe",
+    "at": "2026-11-15T16:56:48.301Z"
+  },
+  "steppe-a#12": {
+    "verdict": "REJECTED",
+    "notes": "tall saguaro, too tall and too western for the steppe",
+    "at": "2026-11-15T16:56:48.342Z"
+  },
+  "steppe-a#13": {
+    "verdict": "REJECTED",
+    "notes": "cactus; #11 kept",
+    "at": "2026-11-15T16:56:48.384Z"
+  },
+  "steppe-a#14": {
+    "verdict": "REJECTED",
+    "notes": "cactus; #11 kept",
+    "at": "2026-11-15T16:56:48.427Z"
+  },
+  "steppe-a#15": {
+    "verdict": "REJECTED",
+    "notes": "shrub; #17 kept",
+    "at": "2026-11-15T16:56:48.469Z"
+  },
+  "steppe-a#16": {
+    "verdict": "REJECTED",
+    "notes": "shrub; #17 kept",
+    "at": "2026-11-15T16:56:48.511Z"
+  },
+  "steppe-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "steppe: low dry thorny shrub",
+    "at": "2026-11-15T16:56:48.552Z"
+  },
+  "steppe-a#18": {
+    "verdict": "REJECTED",
+    "notes": "shrub; #17 kept",
+    "at": "2026-11-15T16:56:48.594Z"
+  },
+  "steppe-a#19": {
+    "verdict": "REJECTED",
+    "notes": "shrub; #17 kept",
+    "at": "2026-11-15T16:56:48.636Z"
+  },
+  "steppe-a#20": {
+    "verdict": "REJECTED",
+    "notes": "grass clump; #22 kept",
+    "at": "2026-11-15T16:56:48.677Z"
+  },
+  "steppe-a#21": {
+    "verdict": "REJECTED",
+    "notes": "grass clump; #22 kept",
+    "at": "2026-11-15T16:56:48.721Z"
+  },
+  "steppe-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "steppe: clump of dry straw grass",
+    "at": "2026-11-15T16:56:48.763Z"
+  },
+  "steppe-a#23": {
+    "verdict": "REJECTED",
+    "notes": "grass clump; #22 kept",
+    "at": "2026-11-15T16:56:48.806Z"
+  },
+  "steppe-a#24": {
+    "verdict": "REJECTED",
+    "notes": "wind-blown grass, too busy",
+    "at": "2026-11-15T16:56:48.848Z"
+  },
+  "badlands-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "badlands: cluster of red-brown rocks; opaque white background cleared by recorded edits",
+    "at": "2026-11-15T16:56:48.889Z"
+  },
+  "badlands-a#1": {
+    "verdict": "REJECTED",
+    "notes": "crater; #7 kept",
+    "at": "2026-11-15T16:56:48.930Z"
+  },
+  "badlands-a#2": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:48.971Z"
+  },
+  "badlands-a#3": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:49.012Z"
+  },
+  "badlands-a#4": {
+    "verdict": "REJECTED",
+    "notes": "scatter of pebbles, noisy at 1:1",
+    "at": "2026-11-15T16:56:49.055Z"
+  },
+  "badlands-a#5": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:49.098Z"
+  },
+  "badlands-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "badlands: small striped mesa stub; white background cleared",
+    "at": "2026-11-15T16:56:49.140Z"
+  },
+  "badlands-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "badlands: small impact crater with a raised rim; white background cleared",
+    "at": "2026-11-15T16:56:49.183Z"
+  },
+  "badlands-a#8": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:49.225Z"
+  },
+  "badlands-a#9": {
+    "verdict": "REJECTED",
+    "notes": "scatter of pebbles, noisy at 1:1",
+    "at": "2026-11-15T16:56:49.267Z"
+  },
+  "badlands-a#10": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:49.308Z"
+  },
+  "badlands-a#11": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:49.349Z"
+  },
+  "badlands-a#12": {
+    "verdict": "REJECTED",
+    "notes": "crater; #7 kept",
+    "at": "2026-11-15T16:56:49.391Z"
+  },
+  "badlands-a#13": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:49.433Z"
+  },
+  "badlands-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "badlands: pair of blocky red rocks; white background cleared",
+    "at": "2026-11-15T16:56:49.475Z"
+  },
+  "badlands-a#15": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:49.517Z"
+  },
+  "badlands-a#16": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:49.559Z"
+  },
+  "badlands-a#17": {
+    "verdict": "REJECTED",
+    "notes": "crater; #7 kept",
+    "at": "2026-11-15T16:56:49.602Z"
+  },
+  "badlands-a#18": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:49.643Z"
+  },
+  "badlands-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "badlands: red rock pillar with a boulder; white background cleared",
+    "at": "2026-11-15T16:56:49.686Z"
+  },
+  "badlands-a#20": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:49.728Z"
+  },
+  "badlands-a#21": {
+    "verdict": "REJECTED",
+    "notes": "scatter of pebbles, noisy at 1:1",
+    "at": "2026-11-15T16:56:49.770Z"
+  },
+  "badlands-a#22": {
+    "verdict": "REJECTED",
+    "notes": "rock; the five kept are the most distinct",
+    "at": "2026-11-15T16:56:49.811Z"
+  },
+  "badlands-a#23": {
+    "verdict": "REJECTED",
+    "notes": "crater; #7 kept",
+    "at": "2026-11-15T16:56:49.853Z"
+  },
+  "badlands-a#24": {
+    "verdict": "REJECTED",
+    "notes": "rock arch, too eye-catching for the ground layer",
+    "at": "2026-11-15T16:56:49.894Z"
+  },
+  "wasteland-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "wasteland: charred tree stump",
+    "at": "2026-11-15T16:56:49.935Z"
+  },
+  "wasteland-a#1": {
+    "verdict": "REJECTED",
+    "notes": "stump; #0 kept",
+    "at": "2026-11-15T16:56:49.977Z"
+  },
+  "wasteland-a#2": {
+    "verdict": "REJECTED",
+    "notes": "stump; #0 kept",
+    "at": "2026-11-15T16:56:50.020Z"
+  },
+  "wasteland-a#3": {
+    "verdict": "REJECTED",
+    "notes": "stump; #0 kept",
+    "at": "2026-11-15T16:56:50.062Z"
+  },
+  "wasteland-a#4": {
+    "verdict": "REJECTED",
+    "notes": "stump; #0 kept",
+    "at": "2026-11-15T16:56:50.104Z"
+  },
+  "wasteland-a#5": {
+    "verdict": "REJECTED",
+    "notes": "bones; #7 kept",
+    "at": "2026-11-15T16:56:50.147Z"
+  },
+  "wasteland-a#6": {
+    "verdict": "REJECTED",
+    "notes": "bones; #7 kept",
+    "at": "2026-11-15T16:56:50.190Z"
+  },
+  "wasteland-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "wasteland: bones and a skull",
+    "at": "2026-11-15T16:56:50.235Z"
+  },
+  "wasteland-a#8": {
+    "verdict": "REJECTED",
+    "notes": "bones; #7 kept",
+    "at": "2026-11-15T16:56:50.277Z"
+  },
+  "wasteland-a#9": {
+    "verdict": "REJECTED",
+    "notes": "bones; #7 kept",
+    "at": "2026-11-15T16:56:50.319Z"
+  },
+  "wasteland-a#10": {
+    "verdict": "REJECTED",
+    "notes": "ash puddle; #12 kept",
+    "at": "2026-11-15T16:56:50.361Z"
+  },
+  "wasteland-a#11": {
+    "verdict": "REJECTED",
+    "notes": "ash puddle; #12 kept",
+    "at": "2026-11-15T16:56:50.403Z"
+  },
+  "wasteland-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "wasteland: ash puddle with a few embers",
+    "at": "2026-11-15T16:56:50.446Z"
+  },
+  "wasteland-a#13": {
+    "verdict": "REJECTED",
+    "notes": "ash puddle; #12 kept",
+    "at": "2026-11-15T16:56:50.489Z"
+  },
+  "wasteland-a#14": {
+    "verdict": "REJECTED",
+    "notes": "ash puddle; #12 kept",
+    "at": "2026-11-15T16:56:50.530Z"
+  },
+  "wasteland-a#15": {
+    "verdict": "REJECTED",
+    "notes": "twigs; #17 kept",
+    "at": "2026-11-15T16:56:50.572Z"
+  },
+  "wasteland-a#16": {
+    "verdict": "REJECTED",
+    "notes": "twigs; #17 kept",
+    "at": "2026-11-15T16:56:50.614Z"
+  },
+  "wasteland-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "wasteland: burnt twigs",
+    "at": "2026-11-15T16:56:50.657Z"
+  },
+  "wasteland-a#18": {
+    "verdict": "REJECTED",
+    "notes": "twigs; #17 kept",
+    "at": "2026-11-15T16:56:50.699Z"
+  },
+  "wasteland-a#19": {
+    "verdict": "REJECTED",
+    "notes": "twigs; #17 kept",
+    "at": "2026-11-15T16:56:50.741Z"
+  },
+  "wasteland-a#20": {
+    "verdict": "REJECTED",
+    "notes": "stone; #22 kept",
+    "at": "2026-11-15T16:56:50.782Z"
+  },
+  "wasteland-a#21": {
+    "verdict": "REJECTED",
+    "notes": "stone; #22 kept",
+    "at": "2026-11-15T16:56:50.827Z"
+  },
+  "wasteland-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "wasteland: cracked grey stone",
+    "at": "2026-11-15T16:56:50.870Z"
+  },
+  "wasteland-a#23": {
+    "verdict": "REJECTED",
+    "notes": "stone; #22 kept",
+    "at": "2026-11-15T16:56:50.911Z"
+  },
+  "wasteland-a#24": {
+    "verdict": "REJECTED",
+    "notes": "stone; #22 kept",
+    "at": "2026-11-15T16:56:50.953Z"
+  }
+}

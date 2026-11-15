@@ -1,0 +1,157 @@
+{
+  "b-massif22-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 2x2 massif: two dark columnar summits with pale ash dust, boulder foot; darker than the ash ground so it reads by value; granite outline and shading kept",
+    "at": "2026-11-15T16:54:30.141Z"
+  },
+  "b-ridge21-a#0": {
+    "verdict": "REJECTED",
+    "notes": "same silhouette as b-ridge21-a#3 (one call, one silhouette); #3 kept for its column skirt",
+    "at": "2026-11-15T17:04:12.870Z"
+  },
+  "b-ridge21-a#1": {
+    "verdict": "REJECTED",
+    "notes": "same silhouette as b-ridge21-a#3 (one call, one silhouette); #3 kept",
+    "at": "2026-11-15T17:04:12.912Z"
+  },
+  "b-ridge21-a#2": {
+    "verdict": "REJECTED",
+    "notes": "the ash dust forms a pale crescent band round the foot, reads as a ring or plate",
+    "at": "2026-11-15T16:54:30.266Z"
+  },
+  "b-ridge21-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 2x1 tall ridge: two summits over a skirt of hexagonal basalt columns",
+    "at": "2026-11-15T16:54:30.309Z"
+  },
+  "b-low21-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt foothill 2x1: blocky columns and boulders, tallest left",
+    "at": "2026-11-15T16:54:30.351Z"
+  },
+  "b-low21-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt foothill 2x1: cluster of upright hexagonal columns with boulders",
+    "at": "2026-11-15T16:54:30.393Z"
+  },
+  "b-low21-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt foothill 2x1: low jumble of dark blocks",
+    "at": "2026-11-15T16:54:30.434Z"
+  },
+  "b-low21-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt foothill 2x1: one tall column stub with a rubble skirt",
+    "at": "2026-11-15T16:54:30.477Z"
+  },
+  "b-massif22-b#0": {
+    "verdict": "REJECTED",
+    "notes": "good, but its silhouette is that of b-massif22-a (mask difference 0.7%): in a range the two would read as one piece pasted twice",
+    "at": "2026-11-15T17:04:12.829Z"
+  },
+  "b-massif32-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 3x2 massif: four ash-capped summits on one columnar mass",
+    "at": "2026-11-15T17:00:12.075Z"
+  },
+  "b-massif32-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 3x2 massif: extinct volcano with a broken crater rim and ash-dusted ledges; no lava",
+    "at": "2026-11-15T17:00:12.116Z"
+  },
+  "b-ridge31-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 3x1 tall ridge: ash-capped summit left of centre, blocky knobs and column cliffs",
+    "at": "2026-11-15T17:00:12.158Z"
+  },
+  "b-ridge31-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 3x1 tall ridge: stepped hexagonal basalt columns rising to the right",
+    "at": "2026-11-15T17:00:12.202Z"
+  },
+  "b-knoll11-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 1x1 crag: twin ash-capped knobs; opaque white background cleared by a recorded edits step",
+    "at": "2026-11-15T17:00:12.246Z"
+  },
+  "b-knoll11-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 1x1 crag: pointed ash-tipped crag with columns; white background cleared",
+    "at": "2026-11-15T17:00:12.286Z"
+  },
+  "b-knoll11-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 1x1 crag: flat-topped column stack with a boulder skirt; white background cleared",
+    "at": "2026-11-15T17:00:12.330Z"
+  },
+  "b-knoll11-a#3": {
+    "verdict": "REJECTED",
+    "notes": "hatched grey texture on the columns, noisy at 1:1",
+    "at": "2026-11-15T17:00:12.372Z"
+  },
+  "b-mine-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a stray brown blob sits on the summit",
+    "at": "2026-11-15T17:00:29.622Z"
+  },
+  "b-mine-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt mine: dark crag with a pale timber-framed tunnel and an ore cart with silver ore",
+    "at": "2026-11-15T17:00:29.664Z"
+  },
+  "b-mine-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt mine: twin dark crags with a timber-framed tunnel, cart on a short rail",
+    "at": "2026-11-15T17:00:29.707Z"
+  },
+  "b-mine-a#3": {
+    "verdict": "REJECTED",
+    "notes": "both sides cut straight by the image edges",
+    "at": "2026-11-15T17:00:29.749Z"
+  },
+  "b-massif22-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 2x2 massif: flat-topped columnar shoulder and an ash-tipped summit with a scree fan; its own silhouette (that of g-massif22-d), a little lighter and cooler than -a",
+    "at": "2026-11-15T17:04:12.788Z"
+  },
+  "b-ridge21-b#0": {
+    "verdict": "REJECTED",
+    "notes": "good, but the four candidates of one call share one silhouette; #2 kept",
+    "at": "2026-11-15T17:05:22.999Z"
+  },
+  "b-ridge21-b#1": {
+    "verdict": "REJECTED",
+    "notes": "same silhouette as #2; #2 kept",
+    "at": "2026-11-15T17:05:23.042Z"
+  },
+  "b-ridge21-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 2x1 tall ridge: three ash-tipped summits, a fan of basalt columns down the right summit; its own silhouette (that of g-ridge21-a#2)",
+    "at": "2026-11-15T17:05:23.083Z"
+  },
+  "b-ridge21-b#3": {
+    "verdict": "REJECTED",
+    "notes": "same silhouette as #2; #2 kept",
+    "at": "2026-11-15T17:05:23.124Z"
+  },
+  "b-ridge21-c#0": {
+    "verdict": "REJECTED",
+    "notes": "same silhouette as #2 (one call); its left summit is a plain dark cone; #2 kept",
+    "at": "2026-11-15T17:07:44.068Z"
+  },
+  "b-ridge21-c#1": {
+    "verdict": "REJECTED",
+    "notes": "same silhouette as #2; #2 kept",
+    "at": "2026-11-15T17:07:44.110Z"
+  },
+  "b-ridge21-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt 2x1 tall ridge: blocky column stump at the left, broad saddle, ash-capped summit at the right; its own silhouette (that of g-ridge21-a#3)",
+    "at": "2026-11-15T17:07:44.152Z"
+  },
+  "b-ridge21-c#3": {
+    "verdict": "REJECTED",
+    "notes": "same silhouette as #2; #2 kept",
+    "at": "2026-11-15T17:07:44.193Z"
+  }
+}

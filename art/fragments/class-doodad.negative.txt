@@ -1,0 +1,1 @@
+pedestal, ground plate, soil disc, grass square, platform, background, frame, badge, text, character, building

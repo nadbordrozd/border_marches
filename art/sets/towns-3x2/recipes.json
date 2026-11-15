@@ -1,0 +1,179 @@
+{
+  "set": "towns-3x2",
+  "bead": "border_marches-xaj.14",
+  "class": "settlements",
+  "exploration": false,
+  "_doc": "Multi-cell towns for the 3x2 town footprint (3 cells wide, 2 rows deep): the Lost World town and the goblin Warlord's Hold. Requested at 232x176 (about the footprint, 240x160, plus headroom for roofs and totems), then seated in a 240x184 canvas whose bottom 160 rows are the footprint and whose top 24 rows rise into the row behind. Bold black-outlined building class like the imported Pulp Wars cities; no flags (owner colour is shown by the interface). Layers: style, camera, light, faction (Lost World only), class-building, subject. A ground-removal edit follows when Pixen draws a plate. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "piece": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east"
+    }
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [
+      "style",
+      "camera-three-quarter",
+      "light-south-west",
+      "class-building"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "lost-world-a",
+      "concept": "LOST WORLD TOWN 3x2",
+      "width": 232,
+      "height": 176,
+      "seed": 61101,
+      "options": "@piece",
+      "subject": "Subject: a big prehistoric Lost World tribal town filling the width of the image: a curved palisade of sharpened tawny logs across the front, in its middle a gate made of a giant cream dinosaur skull whose open jaws are the entrance, behind it five round huts with tawny thatch roofs and hide walls with big dark brown spots, one big longhouse at the back, a few dark basalt stones, and three tall cream bone totems with bright red-orange paint as the only accent. Buildings only.",
+      "negative": "flag, banner, people, character, dinosaur, animal, metal, castle, stone wall, red roof"
+    },
+    {
+      "id": "goblin-hold-a",
+      "concept": "WARLORD'S HOLD 3x2",
+      "width": 232,
+      "height": 176,
+      "seed": 62101,
+      "options": "@piece",
+      "subject": "Subject: a goblin warlord's scrap fortress filling the width of the image: crooked walls of riveted light grey tin sheets and spiked logs across the front with a big gate of bolted scrap plates crowned by two huge horns, behind them a lopsided junk watchtower, three tin shacks with bright hazard yellow roofs, a big tawny hide tent with brown spots and two smoking stove chimneys. Colours: light tin grey #b8bcc0 with #7d8288 shadows, hazard yellow #f2c230, tawny hide. Buildings only.",
+      "negative": "flag, banner, people, character, goblin, rust, copper, brown metal, red, castle, stone wall"
+    },
+    {
+      "id": "lost-world-a-clean",
+      "concept": "LOST WORLD TOWN 3x2",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 232,
+      "height": 176,
+      "seed": 61102,
+      "edit": {
+        "take": "lost-world-a#0"
+      },
+      "subject": "Remove all ground: erase the green grass and the brown dirt path inside the log palisade, so the yard between the huts is transparent and nothing at all is drawn under the town. Keep the huts, the longhouse, the log palisade, the skull gate, the totems, the outline and the art style exactly the same.",
+      "notes": "Ground-removal edit: lost-world-a#0 has a grass disc and a path inside the palisade."
+    },
+    {
+      "id": "lost-world-a-clean2",
+      "concept": "LOST WORLD TOWN 3x2",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 232,
+      "height": 176,
+      "seed": 61103,
+      "edit": {
+        "take": "lost-world-a#0"
+      },
+      "subject": "Change only the ground: the green grass and the brown path inside the palisade become fully transparent. Keep everything else exactly as it is: the whole front log palisade, the big cream dinosaur skull gate in the middle of the front palisade, the huts, the longhouse, the totems, the outline and the art style.",
+      "notes": "Second ground-removal edit: lost-world-a-clean erased the skull gate and the front palisade with the grass."
+    },
+    {
+      "id": "goblin-hold-b",
+      "concept": "WARLORD'S HOLD 3x2",
+      "width": 232,
+      "height": 176,
+      "seed": 62102,
+      "options": "@piece",
+      "subject": "Subject: a goblin warlord's scrap fortress seen from above at a three-quarter angle, a ring of crooked low walls of riveted light grey tin sheets and spiked logs around an empty yard, a gate of bolted scrap plates with two huge horns at the front, inside: a lopsided junk watchtower, three tin shacks with bright hazard yellow roofs, a big tawny hide tent with brown spots, two smoking chimneys. Colours: light tin grey #b8bcc0 with #7d8288 shadows, hazard yellow #f2c230, tawny hide. Buildings only.",
+      "negative": "flag, banner, people, goblin, rust, copper, red, castle, stone blocks, bricks, front view"
+    },
+    {
+      "id": "goblin-hold-v2a",
+      "concept": "WARLORD'S HOLD 3x2 (style from goblin-city-3)",
+      "endpoint": "generate-image-v2",
+      "fragments": [
+        "style",
+        "camera-three-quarter",
+        "light-south-west"
+      ],
+      "width": 232,
+      "height": 176,
+      "seed": 62103,
+      "styleImage": {
+        "file": "public/assets/towns/goblin-city-3.png",
+        "usage": "copy the palette, outline, shading and pixel size only"
+      },
+      "subject": "Subject: a goblin warlord's scrap camp fortress seen from above at a three-quarter angle, a ring of crooked low walls of riveted light grey tin sheets and spiked logs around an empty yard, a gate of bolted scrap plates with two huge horns at the front, inside: a lopsided junk watchtower at the back, three tin shacks with bright hazard yellow roofs and a big tawny hide tent with brown spots and two smoking chimneys. Nothing is drawn under the fortress: no ground, no grass, no slab. Buildings only.",
+      "negative": "flag, banner, people, character, goblin, rust, copper, red, castle, stone blocks, bricks, ground plate, grass"
+    },
+    {
+      "id": "goblin-hold-v2b",
+      "concept": "WARLORD'S HOLD 3x2 (style from goblin-city-3)",
+      "endpoint": "generate-image-v2",
+      "fragments": [
+        "style",
+        "camera-three-quarter",
+        "light-south-west"
+      ],
+      "width": 232,
+      "height": 176,
+      "seed": 62104,
+      "styleImage": {
+        "file": "public/assets/towns/goblin-city-3.png",
+        "usage": "copy the palette, outline, shading and pixel size only"
+      },
+      "subject": "Subject: a big goblin warlord's scrap fortress that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of crooked walls of riveted light grey tin sheets and sharpened logs around a yard, a big gate of bolted scrap plates with two huge horns in the front wall, inside: a tall lopsided junk watchtower, four tin shacks with bright hazard yellow roofs and a big tawny hide tent with brown spots and two smoking chimneys. The yard is empty and transparent: nothing is drawn under the fortress, no ground, no grass, no slab. Buildings only.",
+      "negative": "flag, banner, people, character, goblin, rust, copper, red, castle, stone blocks, bricks, ground plate, grass, small"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/towns/dinosaur-town-3x2.png",
+      "from": "lost-world-a-clean2#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 5,
+          "width": 232,
+          "height": 167
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 171,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/goblin-hold-3x2.png",
+      "from": "goblin-hold-v2b#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 20,
+          "y": 15,
+          "width": 195,
+          "height": 147
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 151,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    }
+  ]
+}

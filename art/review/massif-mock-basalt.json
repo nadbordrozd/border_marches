@@ -1,0 +1,133 @@
+{
+ "ground": "wasteland",
+ "ranges": [
+  "..............................",
+  "..####.........#####..........",
+  ".######.......########........",
+  ".#######.......#######...##...",
+  "..#####.........####....####..",
+  "...###...........##.....#####.",
+  "..........#..............###..",
+  "..........##.................",
+  "...........###.......######...",
+  "............###......#######..",
+  ".............##.......####....",
+  ".............................."
+ ],
+ "pieces": [
+  {
+   "file": "public/assets/terrain/massifs/basalt/crag-1x1-a.png",
+   "cols": 1,
+   "rows": 1,
+   "up": 24,
+   "kind": "crag"
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/crag-1x1-b.png",
+   "cols": 1,
+   "rows": 1,
+   "up": 24,
+   "kind": "crag"
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/crag-1x1-c.png",
+   "cols": 1,
+   "rows": 1,
+   "up": 24,
+   "kind": "crag"
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/foothill-2x1-a.png",
+   "cols": 2,
+   "rows": 1,
+   "up": 24,
+   "kind": "foothill"
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/foothill-2x1-b.png",
+   "cols": 2,
+   "rows": 1,
+   "up": 24,
+   "kind": "foothill"
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/foothill-2x1-c.png",
+   "cols": 2,
+   "rows": 1,
+   "up": 24,
+   "kind": "foothill"
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/massif-2x2-a.png",
+   "cols": 2,
+   "rows": 2,
+   "up": 48,
+   "kind": "massif",
+   "tall": true
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/massif-2x2-b.png",
+   "cols": 2,
+   "rows": 2,
+   "up": 48,
+   "kind": "massif",
+   "tall": true
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/massif-3x2-a.png",
+   "cols": 3,
+   "rows": 2,
+   "up": 48,
+   "kind": "massif",
+   "tall": true
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/massif-3x2-b.png",
+   "cols": 3,
+   "rows": 2,
+   "up": 48,
+   "kind": "massif",
+   "tall": true
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/ridge-2x1-a.png",
+   "cols": 2,
+   "rows": 1,
+   "up": 48,
+   "kind": "ridge",
+   "tall": true
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/ridge-2x1-b.png",
+   "cols": 2,
+   "rows": 1,
+   "up": 48,
+   "kind": "ridge",
+   "tall": true
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/ridge-2x1-c.png",
+   "cols": 2,
+   "rows": 1,
+   "up": 48,
+   "kind": "ridge",
+   "tall": true
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/ridge-3x1-a.png",
+   "cols": 3,
+   "rows": 1,
+   "up": 48,
+   "kind": "ridge",
+   "tall": true
+  },
+  {
+   "file": "public/assets/terrain/massifs/basalt/ridge-3x1-b.png",
+   "cols": 3,
+   "rows": 1,
+   "up": 48,
+   "kind": "ridge",
+   "tall": true
+  }
+ ]
+}

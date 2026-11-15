@@ -59,7 +59,10 @@ export type AssetCategory =
   | "forest-piece"
   | "forest-seam"
   | "object"
-  | "resource-item";
+  | "resource-item"
+  | "massif-piece"
+  | "town-3x2"
+  | "doodad";
 
 /** One PNG under public/. */
 export interface ImageAsset {
@@ -741,6 +744,951 @@ export function mountainPieces(
   return MOUNTAIN_PIECES.filter((piece) => piece.kind === kind);
 }
 
+// ------------------------------------------- massif pieces (studio, xaj.14)
+
+/**
+ * Studio massif pieces (bead border_marches-xaj.14, docs/art/MASSIF_ART.md):
+ * multi-cell mountain pieces whose rock fills the footprint, in three rock
+ * palettes chosen by the ground the range stands on. Not wired yet (bead
+ * xaj.15); the imported MOUNTAIN_PIECES stay what the board draws today.
+ *
+ * Geometry (master pixels, one cell = CELL_PX): the canvas is the footprint
+ * (cols x 80 wide, rows x 80 high) plus `up` rows above it, so w = cols x 80
+ * and h = rows x 80 + up. Draw the canvas at (x0 x 80, y0 x 80 - up) for a
+ * footprint whose north-west cell is (x0, y0). The rock never leaves the
+ * canvas sideways. `box` is the opaque bounding box in the canvas;
+ * `paintUp` = up - box.y is how far the paint rises above the footprint's
+ * top edge (negative: it stays inside the footprint) and `footGap` is the
+ * transparent rows under the lowest opaque row (the ragged foot is the
+ * art's own boulder edge, so the cell's ground shows below it). Nothing is
+ * mirrored; every piece is lit from the bottom left.
+ */
+export type MassifPalette = "granite" | "sandstone" | "basalt";
+
+/** Which grounds each rock palette belongs to (bead xaj.14). */
+export const MASSIF_PALETTE_TERRAINS: Readonly<
+  Record<MassifPalette, readonly GroundTerrain[]>
+> = {
+  granite: ["grass", "jungle"],
+  sandstone: ["steppe", "badlands"],
+  basalt: ["wasteland"],
+};
+
+/**
+ * massif: 2x2 and 3x2 mountain masses (up 48); ridge: 2x1 and 3x1 tall
+ * ridges (up 48); crag: 1x1 rocky knoll (up 24); rounded: snowless worn
+ * humps (up 24); foothill: low boulder clusters for range edges (up 24);
+ * mine: a 1x1 rock with a timber-framed tunnel (up 24).
+ */
+export type MassifPieceKind =
+  "massif" | "ridge" | "crag" | "rounded" | "foothill" | "mine";
+
+/** An opaque bounding box, master pixels from the canvas's top-left. */
+export interface PixelBox {
+  readonly x: number;
+  readonly y: number;
+  readonly w: number;
+  readonly h: number;
+}
+
+export interface MassifPieceAsset extends ImageAsset {
+  readonly category: "massif-piece";
+  readonly palette: MassifPalette;
+  readonly kind: MassifPieceKind;
+  /** Footprint in cells. */
+  readonly cols: 1 | 2 | 3;
+  readonly rows: 1 | 2;
+  /** 0-based; the file letter is "abcdefgh"[variant]. */
+  readonly variant: number;
+  /** Canvas rows above the footprint (48 massif and ridge, 24 the rest). */
+  readonly up: 24 | 48;
+  /** Rows the paint rises above the footprint's top edge (up - box.y). */
+  readonly paintUp: number;
+  /** Transparent rows under the lowest opaque row. */
+  readonly footGap: number;
+  readonly box: PixelBox;
+  /** What caps the summits: snow (granite), ash dust (basalt) or bare rock. */
+  readonly cap: "snow" | "ash" | "none";
+  /** The accepted studio take it is derived from (art/sets/<set>). */
+  readonly source: string;
+}
+
+type MassifRow = readonly [
+  MassifPalette,
+  MassifPieceKind,
+  1 | 2 | 3,
+  1 | 2,
+  string,
+  24 | 48,
+  number,
+  number,
+  readonly [number, number, number, number],
+  "snow" | "ash" | "none",
+  string,
+];
+
+/** Measured by art/review/measure-pieces.mjs from the baked files. */
+const MASSIF_ROWS: readonly MassifRow[] = [
+  [
+    "granite",
+    "massif",
+    2,
+    2,
+    "a",
+    48,
+    25,
+    8,
+    [0, 23, 160, 177],
+    "snow",
+    "massif-granite/g-massif22-b#0",
+  ],
+  [
+    "granite",
+    "massif",
+    2,
+    2,
+    "b",
+    48,
+    21,
+    8,
+    [0, 27, 160, 173],
+    "none",
+    "massif-granite/g-massif22-c#0",
+  ],
+  [
+    "granite",
+    "massif",
+    2,
+    2,
+    "c",
+    48,
+    23,
+    8,
+    [0, 25, 160, 175],
+    "snow",
+    "massif-granite/g-massif22-d#0",
+  ],
+  [
+    "granite",
+    "massif",
+    3,
+    2,
+    "a",
+    48,
+    23,
+    8,
+    [0, 25, 240, 175],
+    "snow",
+    "massif-granite/g-massif32-a#0",
+  ],
+  [
+    "granite",
+    "massif",
+    3,
+    2,
+    "b",
+    48,
+    27,
+    8,
+    [0, 21, 240, 179],
+    "snow",
+    "massif-granite/g-massif32-b#0",
+  ],
+  [
+    "granite",
+    "massif",
+    3,
+    2,
+    "c",
+    48,
+    29,
+    8,
+    [0, 19, 240, 181],
+    "none",
+    "massif-granite/g-massif32-c#0",
+  ],
+  [
+    "granite",
+    "ridge",
+    3,
+    1,
+    "a",
+    48,
+    47,
+    3,
+    [2, 1, 235, 124],
+    "snow",
+    "massif-granite/g-ridge31-b#0",
+  ],
+  [
+    "granite",
+    "ridge",
+    3,
+    1,
+    "b",
+    48,
+    47,
+    3,
+    [0, 1, 240, 124],
+    "none",
+    "massif-granite/g-ridge31-c#0",
+  ],
+  [
+    "granite",
+    "ridge",
+    2,
+    1,
+    "a",
+    48,
+    24,
+    6,
+    [3, 24, 154, 98],
+    "snow",
+    "massif-granite/g-ridge21-a#0",
+  ],
+  [
+    "granite",
+    "ridge",
+    2,
+    1,
+    "b",
+    48,
+    36,
+    6,
+    [3, 12, 154, 110],
+    "snow",
+    "massif-granite/g-ridge21-a#2",
+  ],
+  [
+    "granite",
+    "ridge",
+    2,
+    1,
+    "c",
+    48,
+    20,
+    6,
+    [3, 28, 154, 94],
+    "snow",
+    "massif-granite/g-ridge21-a#3",
+  ],
+  [
+    "granite",
+    "crag",
+    1,
+    1,
+    "a",
+    24,
+    4,
+    8,
+    [0, 20, 80, 76],
+    "none",
+    "massif-granite/g-crag11-a#1",
+  ],
+  [
+    "granite",
+    "crag",
+    1,
+    1,
+    "b",
+    24,
+    12,
+    8,
+    [0, 12, 80, 84],
+    "none",
+    "massif-granite/g-crag11-a#2",
+  ],
+  [
+    "granite",
+    "crag",
+    1,
+    1,
+    "c",
+    24,
+    10,
+    8,
+    [0, 14, 80, 82],
+    "none",
+    "massif-granite/g-crag11-a#3",
+  ],
+  [
+    "granite",
+    "rounded",
+    2,
+    1,
+    "a",
+    24,
+    -2,
+    8,
+    [12, 26, 136, 70],
+    "none",
+    "massif-granite/g-round21-a#0",
+  ],
+  [
+    "granite",
+    "rounded",
+    2,
+    1,
+    "b",
+    24,
+    -4,
+    8,
+    [12, 28, 136, 68],
+    "none",
+    "massif-granite/g-round21-a#1",
+  ],
+  [
+    "granite",
+    "rounded",
+    2,
+    1,
+    "c",
+    24,
+    -9,
+    8,
+    [12, 33, 136, 63],
+    "none",
+    "massif-granite/g-round21-a#2",
+  ],
+  [
+    "granite",
+    "rounded",
+    1,
+    1,
+    "a",
+    24,
+    11,
+    8,
+    [0, 13, 80, 83],
+    "none",
+    "massif-granite/g-round11-a#0",
+  ],
+  [
+    "granite",
+    "rounded",
+    1,
+    1,
+    "b",
+    24,
+    5,
+    8,
+    [0, 19, 80, 77],
+    "none",
+    "massif-granite/g-round11-a#3",
+  ],
+  [
+    "granite",
+    "foothill",
+    2,
+    1,
+    "a",
+    24,
+    -5,
+    8,
+    [12, 29, 135, 67],
+    "none",
+    "massif-granite/g-foot21-a#1",
+  ],
+  [
+    "granite",
+    "foothill",
+    2,
+    1,
+    "b",
+    24,
+    0,
+    8,
+    [12, 24, 136, 72],
+    "none",
+    "massif-granite/g-foot21-a#2",
+  ],
+  [
+    "granite",
+    "foothill",
+    2,
+    1,
+    "c",
+    24,
+    -2,
+    8,
+    [13, 26, 134, 70],
+    "none",
+    "massif-granite/g-foot21-a#3",
+  ],
+  [
+    "granite",
+    "foothill",
+    1,
+    1,
+    "a",
+    24,
+    -16,
+    8,
+    [0, 40, 80, 56],
+    "none",
+    "massif-granite/g-foot11-a#1",
+  ],
+  [
+    "granite",
+    "foothill",
+    1,
+    1,
+    "b",
+    24,
+    -5,
+    8,
+    [0, 29, 80, 67],
+    "none",
+    "massif-granite/g-foot11-a#3",
+  ],
+  [
+    "granite",
+    "mine",
+    1,
+    1,
+    "a",
+    24,
+    21,
+    4,
+    [0, 3, 80, 97],
+    "none",
+    "massif-granite/g-mine-a#2",
+  ],
+  [
+    "granite",
+    "mine",
+    1,
+    1,
+    "b",
+    24,
+    8,
+    8,
+    [0, 16, 80, 80],
+    "none",
+    "massif-granite/g-mine-a#0",
+  ],
+  [
+    "sandstone",
+    "massif",
+    2,
+    2,
+    "a",
+    48,
+    26,
+    8,
+    [0, 22, 160, 178],
+    "none",
+    "massif-sandstone/s-massif22-a#0",
+  ],
+  [
+    "sandstone",
+    "massif",
+    2,
+    2,
+    "b",
+    48,
+    27,
+    8,
+    [0, 21, 160, 179],
+    "none",
+    "massif-sandstone/s-massif22-b#0",
+  ],
+  [
+    "sandstone",
+    "massif",
+    3,
+    2,
+    "a",
+    48,
+    26,
+    8,
+    [0, 22, 240, 178],
+    "none",
+    "massif-sandstone/s-massif32-a#0",
+  ],
+  [
+    "sandstone",
+    "massif",
+    3,
+    2,
+    "b",
+    48,
+    26,
+    8,
+    [15, 22, 209, 178],
+    "none",
+    "massif-sandstone/s-massif32-b#0",
+  ],
+  [
+    "sandstone",
+    "ridge",
+    3,
+    1,
+    "a",
+    48,
+    45,
+    8,
+    [0, 3, 240, 117],
+    "none",
+    "massif-sandstone/s-ridge31-a#0",
+  ],
+  [
+    "sandstone",
+    "ridge",
+    3,
+    1,
+    "b",
+    48,
+    45,
+    8,
+    [0, 3, 240, 117],
+    "none",
+    "massif-sandstone/s-ridge31-b#0",
+  ],
+  [
+    "sandstone",
+    "ridge",
+    2,
+    1,
+    "a",
+    48,
+    39,
+    8,
+    [0, 9, 160, 111],
+    "none",
+    "massif-sandstone/s-ridge21-a#0",
+  ],
+  [
+    "sandstone",
+    "ridge",
+    2,
+    1,
+    "b",
+    48,
+    21,
+    8,
+    [4, 27, 151, 93],
+    "none",
+    "massif-sandstone/s-ridge21-b#3",
+  ],
+  [
+    "sandstone",
+    "ridge",
+    2,
+    1,
+    "c",
+    48,
+    31,
+    8,
+    [3, 17, 154, 103],
+    "none",
+    "massif-sandstone/s-ridge21-c#0",
+  ],
+  [
+    "sandstone",
+    "crag",
+    1,
+    1,
+    "a",
+    24,
+    -13,
+    8,
+    [9, 37, 61, 59],
+    "none",
+    "massif-sandstone/s-knoll11-a#0",
+  ],
+  [
+    "sandstone",
+    "crag",
+    1,
+    1,
+    "b",
+    24,
+    -15,
+    8,
+    [5, 39, 70, 57],
+    "none",
+    "massif-sandstone/s-knoll11-a#1",
+  ],
+  [
+    "sandstone",
+    "crag",
+    1,
+    1,
+    "c",
+    24,
+    8,
+    8,
+    [4, 16, 72, 80],
+    "none",
+    "massif-sandstone/s-knoll11-a#3",
+  ],
+  [
+    "sandstone",
+    "rounded",
+    2,
+    1,
+    "a",
+    24,
+    -10,
+    8,
+    [13, 34, 134, 62],
+    "none",
+    "massif-sandstone/s-low21-a#0",
+  ],
+  [
+    "sandstone",
+    "rounded",
+    2,
+    1,
+    "b",
+    24,
+    -10,
+    8,
+    [12, 34, 135, 62],
+    "none",
+    "massif-sandstone/s-low21-a#1",
+  ],
+  [
+    "sandstone",
+    "rounded",
+    2,
+    1,
+    "c",
+    24,
+    -9,
+    8,
+    [12, 33, 135, 63],
+    "none",
+    "massif-sandstone/s-low21-a#3",
+  ],
+  [
+    "sandstone",
+    "foothill",
+    1,
+    1,
+    "a",
+    24,
+    -5,
+    8,
+    [0, 29, 80, 67],
+    "none",
+    "massif-sandstone/s-low11-a#0",
+  ],
+  [
+    "sandstone",
+    "foothill",
+    1,
+    1,
+    "b",
+    24,
+    -10,
+    8,
+    [0, 34, 80, 62],
+    "none",
+    "massif-sandstone/s-low11-a#1",
+  ],
+  [
+    "sandstone",
+    "foothill",
+    1,
+    1,
+    "c",
+    24,
+    -1,
+    8,
+    [0, 25, 80, 71],
+    "none",
+    "massif-sandstone/s-low11-a#2",
+  ],
+  [
+    "sandstone",
+    "mine",
+    1,
+    1,
+    "a",
+    24,
+    19,
+    8,
+    [0, 5, 80, 91],
+    "none",
+    "massif-sandstone/s-mine-a#1",
+  ],
+  [
+    "basalt",
+    "massif",
+    2,
+    2,
+    "a",
+    48,
+    25,
+    8,
+    [0, 23, 160, 177],
+    "ash",
+    "massif-basalt/b-massif22-a#0",
+  ],
+  [
+    "basalt",
+    "massif",
+    2,
+    2,
+    "b",
+    48,
+    23,
+    8,
+    [0, 25, 160, 175],
+    "ash",
+    "massif-basalt/b-massif22-c#0",
+  ],
+  [
+    "basalt",
+    "massif",
+    3,
+    2,
+    "a",
+    48,
+    25,
+    8,
+    [0, 23, 240, 177],
+    "ash",
+    "massif-basalt/b-massif32-a#0",
+  ],
+  [
+    "basalt",
+    "massif",
+    3,
+    2,
+    "b",
+    48,
+    25,
+    8,
+    [0, 23, 240, 177],
+    "ash",
+    "massif-basalt/b-massif32-b#0",
+  ],
+  [
+    "basalt",
+    "ridge",
+    3,
+    1,
+    "a",
+    48,
+    41,
+    8,
+    [0, 7, 240, 113],
+    "ash",
+    "massif-basalt/b-ridge31-a#0",
+  ],
+  [
+    "basalt",
+    "ridge",
+    3,
+    1,
+    "b",
+    48,
+    42,
+    8,
+    [0, 6, 240, 114],
+    "ash",
+    "massif-basalt/b-ridge31-b#0",
+  ],
+  [
+    "basalt",
+    "ridge",
+    2,
+    1,
+    "a",
+    48,
+    41,
+    8,
+    [0, 7, 160, 113],
+    "ash",
+    "massif-basalt/b-ridge21-a#3",
+  ],
+  [
+    "basalt",
+    "ridge",
+    2,
+    1,
+    "b",
+    48,
+    38,
+    8,
+    [3, 10, 154, 110],
+    "ash",
+    "massif-basalt/b-ridge21-b#2",
+  ],
+  [
+    "basalt",
+    "crag",
+    1,
+    1,
+    "a",
+    24,
+    -10,
+    8,
+    [2, 34, 76, 62],
+    "ash",
+    "massif-basalt/b-knoll11-a#0",
+  ],
+  [
+    "basalt",
+    "crag",
+    1,
+    1,
+    "b",
+    24,
+    5,
+    8,
+    [4, 19, 71, 77],
+    "ash",
+    "massif-basalt/b-knoll11-a#1",
+  ],
+  [
+    "basalt",
+    "crag",
+    1,
+    1,
+    "c",
+    24,
+    -5,
+    8,
+    [3, 29, 74, 67],
+    "ash",
+    "massif-basalt/b-knoll11-a#2",
+  ],
+  [
+    "basalt",
+    "foothill",
+    2,
+    1,
+    "a",
+    24,
+    -2,
+    8,
+    [13, 26, 134, 70],
+    "none",
+    "massif-basalt/b-low21-a#0",
+  ],
+  [
+    "basalt",
+    "foothill",
+    2,
+    1,
+    "b",
+    24,
+    -1,
+    8,
+    [13, 25, 134, 71],
+    "none",
+    "massif-basalt/b-low21-a#1",
+  ],
+  [
+    "basalt",
+    "foothill",
+    2,
+    1,
+    "c",
+    24,
+    1,
+    8,
+    [13, 23, 134, 73],
+    "none",
+    "massif-basalt/b-low21-a#3",
+  ],
+  [
+    "basalt",
+    "mine",
+    1,
+    1,
+    "a",
+    24,
+    19,
+    8,
+    [0, 5, 80, 91],
+    "none",
+    "massif-basalt/b-mine-a#1",
+  ],
+  [
+    "basalt",
+    "mine",
+    1,
+    1,
+    "b",
+    24,
+    18,
+    8,
+    [0, 6, 80, 90],
+    "none",
+    "massif-basalt/b-mine-a#2",
+  ],
+  [
+    "basalt",
+    "ridge",
+    2,
+    1,
+    "c",
+    48,
+    22,
+    8,
+    [3, 26, 154, 94],
+    "ash",
+    "massif-basalt/b-ridge21-c#2",
+  ],
+];
+
+export const MASSIF_PIECES: readonly MassifPieceAsset[] = MASSIF_ROWS.map(
+  ([
+    palette,
+    kind,
+    cols,
+    rows,
+    letter,
+    up,
+    paintUp,
+    footGap,
+    box,
+    cap,
+    source,
+  ]) => {
+    const name = `${kind}-${cols}x${rows}-${letter}`;
+    return {
+      key: `massif-${palette}-${name}`,
+      path: `assets/terrain/massifs/${palette}/${name}.png`,
+      w: cols * CELL_PX,
+      h: rows * CELL_PX + up,
+      category: "massif-piece",
+      palette,
+      kind,
+      cols,
+      rows,
+      variant: LETTERS.indexOf(letter),
+      up,
+      paintUp,
+      footGap,
+      box: { x: box[0], y: box[1], w: box[2], h: box[3] },
+      cap,
+      source,
+    };
+  },
+);
+
+/** The massif pieces of a palette, optionally of one kind and footprint. */
+export function massifPieces(
+  palette: MassifPalette,
+  kind?: MassifPieceKind,
+  cols?: number,
+  rows?: number,
+): readonly MassifPieceAsset[] {
+  return MASSIF_PIECES.filter(
+    (piece) =>
+      piece.palette === palette &&
+      (kind === undefined || piece.kind === kind) &&
+      (cols === undefined || piece.cols === cols) &&
+      (rows === undefined || piece.rows === rows),
+  );
+}
+
 // ---------------------------------------------------------------- forests
 
 /** Composed-forest footprints (FOREST_SHAPES_V7). */
@@ -995,6 +1943,141 @@ export const RESOURCE_ITEMS: Readonly<Record<ResourceId, ResourceItemAsset>> =
     ]),
   ) as Record<ResourceId, ResourceItemAsset>;
 
+// ------------------------------------------- 3x2 towns (studio, xaj.14)
+
+/**
+ * Towns for the 3x2 town footprint (bead border_marches-xaj.14): 3 cells
+ * wide, 2 rows deep. The canvas is the footprint plus 24 rows above it
+ * (240 x 184); draw it at (x0 x 80, y0 x 80 - 24) for a footprint whose
+ * north-west cell is (x0, y0). The art is centred and its lowest opaque row
+ * sits 4 px above the canvas bottom (`box`). The yards inside the walls are
+ * transparent, so the cell grounds show through; no flag (the owner shows
+ * in the interface). Not wired yet (bead xaj.15).
+ */
+export interface Town3x2Asset extends ImageAsset {
+  readonly category: "town-3x2";
+  readonly faction: "dinosaur" | "goblin";
+  readonly cols: 3;
+  readonly rows: 2;
+  readonly up: 24;
+  /** Opaque bounding box in the canvas. */
+  readonly box: PixelBox;
+  /** One past the lowest opaque row (= box.y + box.h). */
+  readonly contactY: number;
+  readonly source: string;
+}
+
+function town3x2(
+  key: string,
+  faction: Town3x2Asset["faction"],
+  box: readonly [number, number, number, number],
+  source: string,
+): Town3x2Asset {
+  return {
+    key,
+    path: `assets/towns/${key}.png`,
+    w: 3 * CELL_PX,
+    h: 2 * CELL_PX + 24,
+    category: "town-3x2",
+    faction,
+    cols: 3,
+    rows: 2,
+    up: 24,
+    box: { x: box[0], y: box[1], w: box[2], h: box[3] },
+    contactY: box[1] + box[3],
+    source,
+  };
+}
+
+/** The Lost World town and the goblin Warlord's Hold at 3x2. */
+export const TOWN_3X2_ASSETS: readonly Town3x2Asset[] = [
+  town3x2(
+    "dinosaur-town-3x2",
+    "dinosaur",
+    [4, 13, 232, 167],
+    "towns-3x2/lost-world-a-clean2#0",
+  ),
+  town3x2(
+    "goblin-hold-3x2",
+    "goblin",
+    [22, 33, 195, 147],
+    "towns-3x2/goblin-hold-v2b#0",
+  ),
+];
+
+// --------------------------------------------- doodads (studio, xaj.14)
+
+/**
+ * Small decorations for the map's decoration layer (bead xaj.14): 5-6 per
+ * land terrain, each cropped to its opaque box plus a 1 px margin (24-41
+ * px), calmer than units and pickups. `anchor` is the bottom-centre contact
+ * point (place it on the ground point the decoration stands on). Not wired
+ * yet (bead xaj.15).
+ */
+export interface DoodadAsset extends ImageAsset {
+  readonly category: "doodad";
+  readonly terrain: GroundTerrain;
+  /** What it is: bush, flowers, stones, fern, palm, skull, crater, ... */
+  readonly kind: string;
+  readonly variant: number;
+  readonly anchor: Point;
+}
+
+/** [terrain, kind, letter, w, h] of every doodad. */
+const DOODAD_ROWS: readonly (readonly [
+  GroundTerrain,
+  string,
+  string,
+  number,
+  number,
+])[] = [
+  ["grass", "bush", "a", 34, 34],
+  ["grass", "bush", "b", 34, 31],
+  ["grass", "flowers", "a", 27, 26],
+  ["grass", "flowers", "b", 36, 23],
+  ["grass", "stones", "a", 33, 27],
+  ["grass", "mushrooms", "a", 26, 20],
+  ["jungle", "fern", "a", 37, 38],
+  ["jungle", "palm", "a", 37, 33],
+  ["jungle", "boulder", "a", 34, 31],
+  ["jungle", "leaves", "a", 38, 35],
+  ["jungle", "log", "a", 37, 30],
+  ["steppe", "tumbleweed", "a", 32, 32],
+  ["steppe", "skull", "a", 36, 33],
+  ["steppe", "cactus", "a", 29, 29],
+  ["steppe", "shrub", "a", 37, 31],
+  ["steppe", "grass", "a", 34, 34],
+  ["badlands", "rocks", "a", 34, 28],
+  ["badlands", "rocks", "b", 37, 34],
+  ["badlands", "crater", "a", 37, 24],
+  ["badlands", "mesa", "a", 38, 28],
+  ["badlands", "pillar", "a", 27, 36],
+  ["wasteland", "stump", "a", 31, 33],
+  ["wasteland", "bones", "a", 31, 24],
+  ["wasteland", "ash", "a", 36, 19],
+  ["wasteland", "twigs", "a", 34, 27],
+  ["wasteland", "stone", "a", 30, 28],
+];
+
+export const DOODAD_ASSETS: readonly DoodadAsset[] = DOODAD_ROWS.map(
+  ([terrain, kind, letter, w, h]) => ({
+    key: `doodad-${terrain}-${kind}-${letter}`,
+    path: `assets/terrain/doodads/${terrain}/${kind}-${letter}.png`,
+    w,
+    h,
+    category: "doodad",
+    terrain,
+    kind,
+    variant: LETTERS.indexOf(letter),
+    anchor: { x: Math.floor(w / 2), y: h - 1 },
+  }),
+);
+
+/** The doodads of one terrain. */
+export function doodadsOf(terrain: GroundTerrain): readonly DoodadAsset[] {
+  return DOODAD_ASSETS.filter((doodad) => doodad.terrain === terrain);
+}
+
 // -------------------------------------------------------------- registry
 
 /** Every image in the manifest, once. */
@@ -1011,6 +2094,9 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...Object.values(FOREST_SETS).flatMap((set) => [...set.pieces, ...set.seams]),
   ...OBJECT_ASSETS,
   ...Object.values(RESOURCE_ITEMS),
+  ...MASSIF_PIECES,
+  ...TOWN_3X2_ASSETS,
+  ...DOODAD_ASSETS,
 ];
 
 const BY_KEY: ReadonlyMap<string, ImageAsset> = new Map(

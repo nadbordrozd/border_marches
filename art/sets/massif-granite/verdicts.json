@@ -1,0 +1,197 @@
+{
+  "g-massif22-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Pixen drew a carved stone staircase on a grass-and-soil slab; brown rock, not a massif",
+    "at": "2026-11-15T16:48:20.647Z"
+  },
+  "g-ridge31-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Pixen drew a masonry wall with boulders on a soil strip, not a ridge",
+    "at": "2026-11-15T16:48:20.690Z"
+  },
+  "g-massif22-v2a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "kept as the style image of the sandstone and basalt sets only; not shipped: in a mock range its shade (#374454) is darker and bluer than the rest of the granite set",
+    "at": "2026-11-15T16:54:30.898Z"
+  },
+  "g-massif22-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x2 massif: one tall continuous rock mass with a snowy summit and a lower shoulder, buttresses, boulder foot; fills the footprint edge to edge; lit from the left (+36.9); imported palette",
+    "at": "2026-11-15T16:48:20.779Z"
+  },
+  "g-massif32-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x2 massif: three snowy summits on one mass with a stepped spur at the right, fills the width; lit from the left (+41); imported palette",
+    "at": "2026-11-15T16:48:20.821Z"
+  },
+  "g-round21-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded snowless 2x1: two smooth humps of bare granite with boulders; calm range-edge piece",
+    "at": "2026-11-15T16:48:20.863Z"
+  },
+  "g-round21-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded snowless 2x1: three low humps with a cracked ledge; calm range-edge piece",
+    "at": "2026-11-15T16:48:20.904Z"
+  },
+  "g-round21-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded snowless 2x1: broad flat-topped worn dome; calm range-edge piece",
+    "at": "2026-11-15T16:48:20.947Z"
+  },
+  "g-round21-a#3": {
+    "verdict": "REJECTED",
+    "notes": "two upright egg shapes side by side; weak left light (+3.8)",
+    "at": "2026-11-15T16:48:20.992Z"
+  },
+  "g-foot21-a#0": {
+    "verdict": "REJECTED",
+    "notes": "thin pointed shards read as crystals, busier than the other foothills",
+    "at": "2026-11-15T16:48:21.038Z"
+  },
+  "g-foot21-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "foothill 2x1: low pile of blocky granite boulders, calm",
+    "at": "2026-11-15T16:48:21.082Z"
+  },
+  "g-foot21-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "foothill 2x1: tilted slab outcrop with a boulder heap at the right",
+    "at": "2026-11-15T16:48:21.125Z"
+  },
+  "g-foot21-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "foothill 2x1: craggy outcrop with scree, tallest left of centre",
+    "at": "2026-11-15T16:48:21.167Z"
+  },
+  "g-massif22-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x2 massif, snowless: big rounded dome with a lower shoulder, stepped ledges, boulder foot; lit from the left (+31.7); its right flank is a straight edge on the canvas side (106 rows), so it suits a piece with rock to its east",
+    "at": "2026-11-15T16:50:27.270Z"
+  },
+  "g-massif22-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x2 massif: flat-topped cliff shoulder at the left and a snowy craggy summit at the right with a scree fan; lit from the left (+29.3)",
+    "at": "2026-11-15T16:50:27.312Z"
+  },
+  "g-massif32-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x2 massif: one big snowy central peak with long ribbed shoulders and a rounded knob at the left; lit from the left (+25.2)",
+    "at": "2026-11-15T16:50:27.356Z"
+  },
+  "g-massif32-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x2 massif, snowless: rugged plateau of three blunt flat-topped crags with cliffs; lit from the left (+33.7); blockiest of the set, best inside a range",
+    "at": "2026-11-15T16:50:51.330Z"
+  },
+  "g-ridge31-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x1 tall ridge: one snowy summit at the left falling through a saddle to two rocky knobs; reaches nearly the full width; 124 px tall, so seated 3 px above the canvas bottom",
+    "at": "2026-11-15T16:50:51.373Z"
+  },
+  "g-ridge31-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "3x1 tall ridge, snowless: long stepped rubble crest rising to a blunt summit at the right; full width; seated 3 px above the canvas bottom",
+    "at": "2026-11-15T16:50:51.416Z"
+  },
+  "g-ridge21-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "2x1 tall ridge: two summits (snow on the right) joined by a deep saddle, boulder foot; stray #fefefe background pixels at the bottom right are cleared by a recorded edits step",
+    "at": "2026-11-15T16:51:38.511Z"
+  },
+  "g-ridge21-a#1": {
+    "verdict": "REJECTED",
+    "notes": "good peaks but large opaque white background blobs (2458 px) under both flanks",
+    "at": "2026-11-15T16:51:38.553Z"
+  },
+  "g-ridge21-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "2x1 tall ridge: three snowy summits over a cliff band with a pale rock stripe, boulder foot; stray #fefefe background pixels cleared by a recorded edits step",
+    "at": "2026-11-15T16:51:38.595Z"
+  },
+  "g-ridge21-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "2x1 tall ridge: two summits joined by a broad saddle, snow on the right; stray #fefefe background pixels cleared by a recorded edits step",
+    "at": "2026-11-15T16:51:38.638Z"
+  },
+  "g-round11-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded 1x1 low: worn granite dome with ledges and a few boulders",
+    "at": "2026-11-15T16:51:38.680Z"
+  },
+  "g-round11-a#1": {
+    "verdict": "REJECTED",
+    "notes": "two upright egg-shaped boulders, not a hill",
+    "at": "2026-11-15T16:51:38.721Z"
+  },
+  "g-round11-a#2": {
+    "verdict": "REJECTED",
+    "notes": "two upright egg-shaped boulders, not a hill",
+    "at": "2026-11-15T16:51:38.763Z"
+  },
+  "g-round11-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded 1x1 low: rounded granite hill with stepped ledges and a boulder skirt",
+    "at": "2026-11-15T16:51:38.806Z"
+  },
+  "g-mine-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "granite mine: smooth dome with a pale timber-framed tunnel and an ore cart on rails",
+    "at": "2026-11-15T16:51:38.849Z"
+  },
+  "g-mine-a#1": {
+    "verdict": "REJECTED",
+    "notes": "mine reads well but the overhanging cap looks like a hat; #0 and #2 kept",
+    "at": "2026-11-15T16:51:38.892Z"
+  },
+  "g-mine-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "granite mine: craggy hill with a timber-framed tunnel and an ore cart on rails; clearest of the four",
+    "at": "2026-11-15T16:51:38.934Z"
+  },
+  "g-mine-a#3": {
+    "verdict": "REJECTED",
+    "notes": "timber frame floats in front of the hill; #0 and #2 kept",
+    "at": "2026-11-15T16:51:38.976Z"
+  },
+  "g-crag11-a#0": {
+    "verdict": "REJECTED",
+    "notes": "flat-topped crag reads like a tree stump; also a second rock fragment in the image",
+    "at": "2026-11-15T16:58:36.315Z"
+  },
+  "g-crag11-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "1x1 crag: lumpy blocky granite knoll; the image also holds a fragment of a second rock, removed by keeping only the main piece (recorded edits and crop)",
+    "at": "2026-11-15T16:58:36.360Z"
+  },
+  "g-crag11-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "1x1 crag: pointed craggy knoll with ledges; the strip of another rock at the top is removed (recorded crop)",
+    "at": "2026-11-15T16:58:36.404Z"
+  },
+  "g-crag11-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "1x1 crag: squat blocky crag; the strip of another rock at the top is removed (recorded crop)",
+    "at": "2026-11-15T16:58:36.446Z"
+  },
+  "g-foot11-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a tall slab stands up at the right like a broken tooth",
+    "at": "2026-11-15T16:58:36.488Z"
+  },
+  "g-foot11-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "1x1 foothill: blocky boulders and a stepped outcrop",
+    "at": "2026-11-15T16:58:36.529Z"
+  },
+  "g-foot11-a#2": {
+    "verdict": "REJECTED",
+    "notes": "two tall shards, busier than #1 and #3",
+    "at": "2026-11-15T16:58:36.571Z"
+  },
+  "g-foot11-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "1x1 foothill: heap of rounded boulders",
+    "at": "2026-11-15T16:58:36.613Z"
+  }
+}

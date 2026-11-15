@@ -1,0 +1,340 @@
+{
+  "lost-world-a": {
+    "id": "lost-world-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-de7dfe89-cb94-4169-8343-84b853438c2d",
+    "submittedAt": "2026-11-15T16:43:21.403Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-building.txt",
+          "text": "Class: one single building or improvement map piece with a unique chunky silhouette, thick single-colour black outline, big simple shapes. It stands directly on the empty transparent background with no ground, soil, grass or platform under it; the bottom of the building is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big prehistoric Lost World tribal town filling the width of the image: a curved palisade of sharpened tawny logs across the front, in its middle a gate made of a giant cream dinosaur skull whose open jaws are the entrance, behind it five round huts with tawny thatch roofs and hide walls with big dark brown spots, one big longhouse at the back, a few dark basalt stones, and three tall cream bone totems with bright red-orange paint as the only accent. Buildings only."
+        }
+      ],
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 61101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single building or improvement map piece with a unique chunky silhouette, thick single-colour black outline, big simple shapes. It stands directly on the empty transparent background with no ground, soil, grass or platform under it; the bottom of the building is the lowest thing in the image. Subject: a big prehistoric Lost World tribal town filling the width of the image: a curved palisade of sharpened tawny logs across the front, in its middle a gate made of a giant cream dinosaur skull whose open jaws are the entrance, behind it five round huts with tawny thatch roofs and hide walls with big dark brown spots, one big longhouse at the back, a few dark basalt stones, and three tall cream bone totems with bright red-orange paint as the only accent. Buildings only. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, background, people, second building, flag, banner, character, dinosaur, animal, metal, castle, stone wall, red roof."
+    },
+    "at": "2026-11-15T16:43:21.407Z",
+    "candidates": [
+      {
+        "file": "lost-world-a-0.png",
+        "sha256": "f3771f1be1aa7ad8a98245d769d0cc2cda6b5e81bab69fc3c028c715ec7427fd",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "goblin-hold-a": {
+    "id": "goblin-hold-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-7f179369-47be-4f1e-b387-0969aa3a2273",
+    "submittedAt": "2026-11-15T16:43:44.920Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-building.txt",
+          "text": "Class: one single building or improvement map piece with a unique chunky silhouette, thick single-colour black outline, big simple shapes. It stands directly on the empty transparent background with no ground, soil, grass or platform under it; the bottom of the building is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a goblin warlord's scrap fortress filling the width of the image: crooked walls of riveted light grey tin sheets and spiked logs across the front with a big gate of bolted scrap plates crowned by two huge horns, behind them a lopsided junk watchtower, three tin shacks with bright hazard yellow roofs, a big tawny hide tent with brown spots and two smoking stove chimneys. Colours: light tin grey #b8bcc0 with #7d8288 shadows, hazard yellow #f2c230, tawny hide. Buildings only."
+        }
+      ],
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 62101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single building or improvement map piece with a unique chunky silhouette, thick single-colour black outline, big simple shapes. It stands directly on the empty transparent background with no ground, soil, grass or platform under it; the bottom of the building is the lowest thing in the image. Subject: a goblin warlord's scrap fortress filling the width of the image: crooked walls of riveted light grey tin sheets and spiked logs across the front with a big gate of bolted scrap plates crowned by two huge horns, behind them a lopsided junk watchtower, three tin shacks with bright hazard yellow roofs, a big tawny hide tent with brown spots and two smoking stove chimneys. Colours: light tin grey #b8bcc0 with #7d8288 shadows, hazard yellow #f2c230, tawny hide. Buildings only. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, background, people, second building, flag, banner, character, goblin, rust, copper, brown metal, red, castle, stone wall."
+    },
+    "at": "2026-11-15T16:43:44.922Z",
+    "candidates": [
+      {
+        "file": "goblin-hold-a-0.png",
+        "sha256": "3971e1351e1ad6949341776331ccb988b4dc5838e8de4bbf22385877799d5df7",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "lost-world-a-clean": {
+    "id": "lost-world-a-clean",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "a8ed16d7-67f8-4cf9-bab9-186d81c2ca1d",
+    "submittedAt": "2026-11-15T16:45:11.703Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Remove all ground: erase the green grass and the brown dirt path inside the log palisade, so the yard between the huts is transparent and nothing at all is drawn under the town. Keep the huts, the longhouse, the log palisade, the skull gate, the totems, the outline and the art style exactly the same."
+        }
+      ],
+      "image": "take towns-3x2/lost-world-a#0 sha256 f3771f1be1aa7ad8a98245d769d0cc2cda6b5e81bab69fc3c028c715ec7427fd",
+      "width": 232,
+      "height": 176,
+      "seed": 61102,
+      "no_background": true,
+      "description": "Remove all ground: erase the green grass and the brown dirt path inside the log palisade, so the yard between the huts is transparent and nothing at all is drawn under the town. Keep the huts, the longhouse, the log palisade, the skull gate, the totems, the outline and the art style exactly the same."
+    },
+    "at": "2026-11-15T16:45:42.636Z",
+    "candidates": [
+      {
+        "file": "lost-world-a-clean-0.png",
+        "sha256": "b030c60784022140749003b3e257702399362dda1422d0c4cdb925500878e2fc",
+        "width": 232,
+        "height": 176
+      },
+      {
+        "file": "lost-world-a-clean-1.png",
+        "sha256": "b030c60784022140749003b3e257702399362dda1422d0c4cdb925500878e2fc",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "lost-world-a-clean2": {
+    "id": "lost-world-a-clean2",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "709869fa-2798-4d76-9bfe-45a52429dc94",
+    "submittedAt": "2026-11-15T16:46:22.834Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Change only the ground: the green grass and the brown path inside the palisade become fully transparent. Keep everything else exactly as it is: the whole front log palisade, the big cream dinosaur skull gate in the middle of the front palisade, the huts, the longhouse, the totems, the outline and the art style."
+        }
+      ],
+      "image": "take towns-3x2/lost-world-a#0 sha256 f3771f1be1aa7ad8a98245d769d0cc2cda6b5e81bab69fc3c028c715ec7427fd",
+      "width": 232,
+      "height": 176,
+      "seed": 61103,
+      "no_background": true,
+      "description": "Change only the ground: the green grass and the brown path inside the palisade become fully transparent. Keep everything else exactly as it is: the whole front log palisade, the big cream dinosaur skull gate in the middle of the front palisade, the huts, the longhouse, the totems, the outline and the art style."
+    },
+    "at": "2026-11-15T16:46:54.518Z",
+    "candidates": [
+      {
+        "file": "lost-world-a-clean2-0.png",
+        "sha256": "f018a810991bfc19280265adfb7910aafa7d43f6c06eadd66562c6db86f407a2",
+        "width": 232,
+        "height": 176
+      },
+      {
+        "file": "lost-world-a-clean2-1.png",
+        "sha256": "f018a810991bfc19280265adfb7910aafa7d43f6c06eadd66562c6db86f407a2",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "goblin-hold-b": {
+    "id": "goblin-hold-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-692c26cf-7565-444e-ab4f-7331f76e4925",
+    "submittedAt": "2026-11-15T16:46:44.076Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-building.txt",
+          "text": "Class: one single building or improvement map piece with a unique chunky silhouette, thick single-colour black outline, big simple shapes. It stands directly on the empty transparent background with no ground, soil, grass or platform under it; the bottom of the building is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a goblin warlord's scrap fortress seen from above at a three-quarter angle, a ring of crooked low walls of riveted light grey tin sheets and spiked logs around an empty yard, a gate of bolted scrap plates with two huge horns at the front, inside: a lopsided junk watchtower, three tin shacks with bright hazard yellow roofs, a big tawny hide tent with brown spots, two smoking chimneys. Colours: light tin grey #b8bcc0 with #7d8288 shadows, hazard yellow #f2c230, tawny hide. Buildings only."
+        }
+      ],
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 62102,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single building or improvement map piece with a unique chunky silhouette, thick single-colour black outline, big simple shapes. It stands directly on the empty transparent background with no ground, soil, grass or platform under it; the bottom of the building is the lowest thing in the image. Subject: a goblin warlord's scrap fortress seen from above at a three-quarter angle, a ring of crooked low walls of riveted light grey tin sheets and spiked logs around an empty yard, a gate of bolted scrap plates with two huge horns at the front, inside: a lopsided junk watchtower, three tin shacks with bright hazard yellow roofs, a big tawny hide tent with brown spots, two smoking chimneys. Colours: light tin grey #b8bcc0 with #7d8288 shadows, hazard yellow #f2c230, tawny hide. Buildings only. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, background, people, second building, flag, banner, goblin, rust, copper, red, castle, stone blocks, bricks, front view."
+    },
+    "at": "2026-11-15T16:46:44.079Z",
+    "candidates": [
+      {
+        "file": "goblin-hold-b-0.png",
+        "sha256": "030ef44275e57f405e7d689db710c150e90ce13bfa927b7a976ae5ada9607148",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "goblin-hold-v2a": {
+    "id": "goblin-hold-v2a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f9d41afb-eb49-49f1-82b7-e28e0326aec9",
+    "submittedAt": "2026-11-15T16:46:44.199Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a goblin warlord's scrap camp fortress seen from above at a three-quarter angle, a ring of crooked low walls of riveted light grey tin sheets and spiked logs around an empty yard, a gate of bolted scrap plates with two huge horns at the front, inside: a lopsided junk watchtower at the back, three tin shacks with bright hazard yellow roofs and a big tawny hide tent with brown spots and two smoking chimneys. Nothing is drawn under the fortress: no ground, no grass, no slab. Buildings only."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/towns/goblin-city-3.png sha256 51fa40e9fe9cce62eb0510740dfa87283a555b4bc5f5c0c2c984727a30e11bf0",
+        "usage": "copy the palette, outline, shading and pixel size only"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 62103,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: a goblin warlord's scrap camp fortress seen from above at a three-quarter angle, a ring of crooked low walls of riveted light grey tin sheets and spiked logs around an empty yard, a gate of bolted scrap plates with two huge horns at the front, inside: a lopsided junk watchtower at the back, three tin shacks with bright hazard yellow roofs and a big tawny hide tent with brown spots and two smoking chimneys. Nothing is drawn under the fortress: no ground, no grass, no slab. Buildings only. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, flag, banner, people, character, goblin, rust, copper, red, castle, stone blocks, bricks, ground plate, grass."
+    },
+    "at": "2026-11-15T16:47:45.817Z",
+    "candidates": [
+      {
+        "file": "goblin-hold-v2a-0.png",
+        "sha256": "26d9089e3b806d4e6c4bb88c5a59a594c0b6800f683d00d91cf4291baac31f3f",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "goblin-hold-v2b": {
+    "id": "goblin-hold-v2b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "ce498727-5254-41ca-ad65-9554e00600d9",
+    "submittedAt": "2026-11-15T16:48:39.907Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big goblin warlord's scrap fortress that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of crooked walls of riveted light grey tin sheets and sharpened logs around a yard, a big gate of bolted scrap plates with two huge horns in the front wall, inside: a tall lopsided junk watchtower, four tin shacks with bright hazard yellow roofs and a big tawny hide tent with brown spots and two smoking chimneys. The yard is empty and transparent: nothing is drawn under the fortress, no ground, no grass, no slab. Buildings only."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/towns/goblin-city-3.png sha256 51fa40e9fe9cce62eb0510740dfa87283a555b4bc5f5c0c2c984727a30e11bf0",
+        "usage": "copy the palette, outline, shading and pixel size only"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 62104,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: a big goblin warlord's scrap fortress that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of crooked walls of riveted light grey tin sheets and sharpened logs around a yard, a big gate of bolted scrap plates with two huge horns in the front wall, inside: a tall lopsided junk watchtower, four tin shacks with bright hazard yellow roofs and a big tawny hide tent with brown spots and two smoking chimneys. The yard is empty and transparent: nothing is drawn under the fortress, no ground, no grass, no slab. Buildings only. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, flag, banner, people, character, goblin, rust, copper, red, castle, stone blocks, bricks, ground plate, grass, small."
+    },
+    "at": "2026-11-15T16:49:46.697Z",
+    "candidates": [
+      {
+        "file": "goblin-hold-v2b-0.png",
+        "sha256": "9a65b76d6e1cc30da275bce368e3585047de3403da1eb59ab71c4e75d6d80c64",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  }
+}

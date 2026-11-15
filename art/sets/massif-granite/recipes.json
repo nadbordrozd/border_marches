@@ -1,0 +1,5468 @@
+{
+  "set": "massif-granite",
+  "bead": "border_marches-xaj.14",
+  "class": "terrain",
+  "exploration": false,
+  "_doc": "Grey granite massif pieces (grass and jungle ranges) for the adventure map: multi-cell ridges and massifs whose rock fills the footprint edge to edge, snowless rounded pieces and rocky foothills for range edges, and a mine. Canvas = footprint (cols x 80 by rows x 80) plus a band above it (48 px tall, 24 px low); rock seated with its foot a few px above the canvas bottom. Palette of the imported (code-restyled) Pulp Wars pieces: lit rock #a8a69c, shade #5d5f6b, outline #4e4446, snow #f2efe4. Layers: style, camera, light, class-massif, subject. Recipes are never edited after generation: add a new id (new seed) instead. See docs/art/MASSIF_ART.md.",
+  "shared": {
+    "piece": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east"
+    },
+    "styleImported": {
+      "file": "public/assets/terrain/mountains/tall-ridge-a.png",
+      "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+    }
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-massif"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "g-massif22-a",
+      "concept": "MASSIF 2x2 TALL",
+      "width": 160,
+      "height": 208,
+      "seed": 51101,
+      "options": "@piece",
+      "subject": "Subject: a broad heavy mountain massif, one continuous mass of grey granite that fills the whole width of the image from the left edge to the right edge: two summits of different heights joined by a high rocky shoulder and a saddle, broad slopes stepping down in ledges and buttresses to a ragged foot of boulders along the bottom; the summits stay well below the top edge with empty space above them. Colours: lit rock warm light grey #a8a69c, shaded faces cool slate grey #5d5f6b, outline dark slate #4e4446, a small cap of cream snow #f2efe4 only on the highest summit. Wide, solid and lumpy like a big loaf of rock, not a group of separate pointed cones.",
+      "negative": "separate peaks, spikes, trees, river, path"
+    },
+    {
+      "id": "g-ridge31-a",
+      "concept": "RIDGE 3x1 TALL",
+      "width": 240,
+      "height": 128,
+      "seed": 51201,
+      "options": "@piece",
+      "subject": "Subject: a long low mountain ridge running left to right across the whole width of the image, one continuous wall of grey granite with an uneven crest: a higher rounded summit left of centre, a dip, and two smaller knobs to the right, buttresses and ledges down its front to a ragged foot of boulders along the bottom; the crest stays below the top edge. Colours: lit rock warm light grey #a8a69c, shaded faces cool slate grey #5d5f6b, outline dark slate #4e4446, no snow. Wide and solid, not separate pointed cones.",
+      "negative": "snow, separate peaks, spikes, trees, river, path"
+    },
+    {
+      "id": "g-massif22-v2a",
+      "concept": "MASSIF 2x2 TALL (style from imported)",
+      "endpoint": "generate-image-v2",
+      "width": 160,
+      "height": 208,
+      "seed": 51102,
+      "styleImage": {
+        "file": "public/assets/terrain/mountains/tall-ridge-a.png",
+        "usage": "copy the palette, outline, shading and pixel size only; not the shape"
+      },
+      "subject": "Subject: a broad heavy mountain massif, one continuous mass of grey granite that fills the whole width of the image from the left edge to the right edge: two summits of different heights joined by a high rocky shoulder and a saddle, broad slopes stepping down in ledges and buttresses to a ragged foot of boulders along the bottom; the summits stay well below the top edge with empty space above them. A small cap of cream snow only on the highest summit. Wide, solid and lumpy like a big loaf of rock, not a group of separate pointed cones.",
+      "negative": "separate peaks, spikes, trees, river, path"
+    },
+    {
+      "id": "g-massif22-b",
+      "concept": "MASSIF 2x2 TALL",
+      "endpoint": "generate-image-v2",
+      "width": 160,
+      "height": 208,
+      "seed": 51103,
+      "styleImage": "@styleImported",
+      "subject": "Subject: one huge grey granite mountain massif seen from the south, as tall as it is wide: it fills almost the whole image, its summits a little below the top edge, its foot along the bottom edge and its flanks reaching the left and right edges. Two summits of different heights joined by a high shoulder and a saddle, a small cream snow cap on the higher one only, big buttresses and ledges down the front, a ragged foot of a few boulders. Lit faces warm light grey, shaded faces mid slate grey, not dark navy. One solid mass, not separate cones.",
+      "negative": "separate peaks, spikes, trees, river, path, dark navy"
+    },
+    {
+      "id": "g-massif32-a",
+      "concept": "MASSIF 3x2 TALL",
+      "endpoint": "generate-image-v2",
+      "width": 240,
+      "height": 208,
+      "seed": 51301,
+      "styleImage": "@styleImported",
+      "subject": "Subject: one huge wide grey granite mountain massif seen from the south: it fills almost the whole image, its summits a little below the top edge, its foot along the bottom edge and its flanks reaching the left and right edges. Three summits of different heights along an uneven crest joined by shoulders and saddles, a small cream snow cap on the highest one only, a lower rocky spur stepping down at the right, big buttresses and ledges down the front, a ragged foot of a few boulders. Lit faces warm light grey, shaded faces mid slate grey, not dark navy. One solid mass, not separate cones.",
+      "negative": "separate peaks, spikes, trees, river, path, dark navy"
+    },
+    {
+      "id": "g-round21-a",
+      "concept": "ROUNDED 2x1 LOW (snowless)",
+      "endpoint": "generate-image-v2",
+      "width": 160,
+      "height": 104,
+      "seed": 51401,
+      "styleImage": "@styleImported",
+      "subject": "Subject: a low rounded grey granite hill ridge, worn smooth and snowless: two or three rounded humps of bare rock joined into one mass that fills the full width of the image from the left edge to the right edge, a few ledges and cracks, a ragged foot of a few boulders along the bottom; the humps stay well below the top edge, about two thirds of the image tall. Lit faces warm light grey, shaded faces mid slate grey. No snow at all.",
+      "negative": "snow, pointed peaks, spikes, trees, river, path, dark navy"
+    },
+    {
+      "id": "g-foot21-a",
+      "concept": "FOOTHILLS 2x1 LOW",
+      "endpoint": "generate-image-v2",
+      "width": 160,
+      "height": 104,
+      "seed": 51501,
+      "styleImage": "@styleImported",
+      "subject": "Subject: rocky foothills at the edge of a mountain range: a low jumble of big grey granite boulders and short rock outcrops piled into one cluster that spreads across the full width of the image, tallest in the middle-left, lower and broken into loose boulders at both ends; it is about half of the image tall, with empty space above it. Lit faces warm light grey, shaded faces mid slate grey. No snow.",
+      "negative": "snow, pointed peaks, mountain, trees, river, path, dark navy"
+    },
+    {
+      "id": "g-massif22-c",
+      "concept": "MASSIF 2x2 TALL (snowless dome)",
+      "endpoint": "generate-image-v2",
+      "width": 160,
+      "height": 208,
+      "seed": 51105,
+      "styleImage": "@styleImported",
+      "subject": "Subject: one huge grey granite mountain massif seen from the south, as tall as it is wide: it fills almost the whole image, its top a little below the top edge, its foot along the bottom edge and its flanks reaching the left and right edges. A broad rounded dome-shaped summit with a lower rounded shoulder at the right, bare rock with no snow, big rounded buttresses and ledges down the front, a ragged foot of a few boulders. Lit faces warm light grey, shaded faces mid slate grey, not dark navy. One solid mass, not separate cones.",
+      "negative": "snow, separate peaks, spikes, trees, river, path, dark navy"
+    },
+    {
+      "id": "g-massif22-d",
+      "concept": "MASSIF 2x2 TALL (crags)",
+      "endpoint": "generate-image-v2",
+      "width": 160,
+      "height": 208,
+      "seed": 51106,
+      "styleImage": "@styleImported",
+      "subject": "Subject: one huge grey granite mountain massif seen from the south, as tall as it is wide: it fills almost the whole image, its summit a little below the top edge, its foot along the bottom edge and its flanks reaching the left and right edges. One tall craggy summit at the right with a small cream snow cap, a lower flat-topped shoulder at the left with a cliff face, deep gullies and ledges down the front, a ragged foot of a few boulders. Lit faces warm light grey, shaded faces mid slate grey, not dark navy. One solid mass, not separate cones.",
+      "negative": "separate peaks, spikes, trees, river, path, dark navy"
+    },
+    {
+      "id": "g-massif32-b",
+      "concept": "MASSIF 3x2 TALL (central peak)",
+      "endpoint": "generate-image-v2",
+      "width": 240,
+      "height": 208,
+      "seed": 51302,
+      "styleImage": "@styleImported",
+      "subject": "Subject: one huge wide grey granite mountain massif seen from the south: it fills almost the whole image, its summit a little below the top edge, its foot along the bottom edge and its flanks reaching the left and right edges. One high summit right of centre with a cream snow cap, long rocky shoulders falling away to both sides in steps, a lower rounded knob at the far left, big buttresses and gullies down the front, a ragged foot of a few boulders. Lit faces warm light grey, shaded faces mid slate grey, not dark navy. One solid mass, not separate cones.",
+      "negative": "separate peaks, spikes, trees, river, path, dark navy"
+    },
+    {
+      "id": "g-massif32-c",
+      "concept": "MASSIF 3x2 TALL (snowless crags)",
+      "endpoint": "generate-image-v2",
+      "width": 240,
+      "height": 208,
+      "seed": 51303,
+      "styleImage": "@styleImported",
+      "subject": "Subject: one huge wide grey granite mountain massif seen from the south: it fills almost the whole image, its top a little below the top edge, its foot along the bottom edge and its flanks reaching the left and right edges. A broad rugged plateau of bare rock with no snow, three blunt rounded crags of different heights along its top, a deep notch between the left two, cliffs, ledges and buttresses down the front, a ragged foot of a few boulders. Lit faces warm light grey, shaded faces mid slate grey, not dark navy. One solid mass.",
+      "negative": "snow, separate peaks, spikes, trees, river, path, dark navy"
+    },
+    {
+      "id": "g-ridge31-b",
+      "concept": "RIDGE 3x1 TALL",
+      "endpoint": "generate-image-v2",
+      "width": 240,
+      "height": 128,
+      "seed": 51202,
+      "styleImage": "@styleImported",
+      "subject": "Subject: a long grey granite mountain ridge running left to right across the whole width of the image, its flanks reaching the left and right edges: one continuous rock mass with an uneven crest, a higher summit with a small cream snow cap left of centre, a saddle, and two lower rocky knobs to the right, buttresses down its front to a ragged foot of a few boulders; the crest stays a little below the top edge. Lit faces warm light grey, shaded faces mid slate grey, not dark navy. One solid mass, not separate cones.",
+      "negative": "separate peaks, spikes, trees, river, path, dark navy, wall"
+    },
+    {
+      "id": "g-ridge31-c",
+      "concept": "RIDGE 3x1 TALL (snowless)",
+      "endpoint": "generate-image-v2",
+      "width": 240,
+      "height": 128,
+      "seed": 51203,
+      "styleImage": "@styleImported",
+      "subject": "Subject: a long grey granite mountain ridge running left to right across the whole width of the image, its flanks reaching the left and right edges: one continuous mass of bare rock with no snow, a blunt rounded summit right of centre, a long gently stepped crest falling to the left, ledges and buttresses down its front to a ragged foot of a few boulders; the crest stays a little below the top edge. Lit faces warm light grey, shaded faces mid slate grey, not dark navy. One solid mass, not separate cones.",
+      "negative": "snow, separate peaks, spikes, trees, river, path, dark navy, wall"
+    },
+    {
+      "id": "g-ridge21-a",
+      "concept": "RIDGE 2x1 TALL",
+      "endpoint": "generate-image-v2",
+      "width": 160,
+      "height": 128,
+      "seed": 51204,
+      "styleImage": "@styleImported",
+      "subject": "Subject: a grey granite mountain ridge across the whole width of the image, its flanks reaching the left and right edges: one continuous rock mass with two summits of different heights joined by a saddle, a small cream snow cap on the higher one only, buttresses and ledges down the front to a ragged foot of a few boulders; the summits stay a little below the top edge. Lit faces warm light grey, shaded faces mid slate grey, not dark navy. One solid mass, not separate cones.",
+      "negative": "separate peaks, spikes, trees, river, path, dark navy"
+    },
+    {
+      "id": "g-round11-a",
+      "concept": "ROUNDED 1x1 LOW (snowless)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 104,
+      "seed": 51402,
+      "styleImage": "@styleImported",
+      "subject": "Subject: a small rounded grey granite rock hill, worn smooth and snowless, one lumpy mass of bare rock that fills the width of the image, a few ledges and cracks, a ragged foot of a few small boulders along the bottom; it is about two thirds of the image tall with empty space above. Lit faces warm light grey, shaded faces mid slate grey. No snow.",
+      "negative": "snow, pointed peak, spikes, trees, river, path, dark navy"
+    },
+    {
+      "id": "g-mine-a",
+      "concept": "MINE 1x1 LOW",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 104,
+      "seed": 51601,
+      "styleImage": "@styleImported",
+      "subject": "Subject: an ore mine in a small rounded grey granite rock hill that fills the width of the image: a square mine entrance in the front of the hill framed with thick pale timber beams around a dark tunnel, a small wooden mine cart full of dark ore on a short rail in front of it, a ragged foot of a few boulders; about two thirds of the image tall with empty space above. Lit faces warm light grey, shaded faces mid slate grey. No snow.",
+      "negative": "snow, pointed peak, trees, river, person, character, dark navy"
+    },
+    {
+      "id": "g-crag11-a",
+      "concept": "SINGLE 1x1 TALL (crag)",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 128,
+      "seed": 51701,
+      "styleImage": "@styleImported",
+      "subject": "Subject: one small rugged grey granite crag that fills the width of the image: a lumpy rock knoll with a blunt craggy top, ledges and gullies down its front, a ragged foot of a few boulders; its top a little below the top edge, no snow. Lit faces warm light grey, shaded faces mid slate grey, not dark navy. Not a smooth dome, not an egg, not a pointed cone.",
+      "negative": "snow, smooth dome, egg shape, trees, river, path, dark navy"
+    },
+    {
+      "id": "g-foot11-a",
+      "concept": "FOOTHILL 1x1 LOW",
+      "endpoint": "generate-image-v2",
+      "width": 80,
+      "height": 104,
+      "seed": 51502,
+      "styleImage": "@styleImported",
+      "subject": "Subject: a small low cluster of blocky grey granite boulders and one short rock outcrop, filling the width of the image, about half of the image tall with empty space above. Lit faces warm light grey, shaded faces mid slate grey. No snow.",
+      "negative": "snow, pointed peak, mountain, trees, river, path, dark navy"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-2x2-a.png",
+      "from": "g-massif22-b#0",
+      "width": 160,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 15,
+          "width": 160,
+          "height": 177
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 185,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-2x2-b.png",
+      "from": "g-massif22-c#0",
+      "width": 160,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 16,
+          "width": 160,
+          "height": 173
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 181,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-2x2-c.png",
+      "from": "g-massif22-d#0",
+      "width": 160,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 16,
+          "width": 160,
+          "height": 175
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 183,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-3x2-a.png",
+      "from": "g-massif32-a#0",
+      "width": 240,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 22,
+          "width": 240,
+          "height": 175
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 183,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-3x2-b.png",
+      "from": "g-massif32-b#0",
+      "width": 240,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 14,
+          "width": 240,
+          "height": 179
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 187,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/massif-3x2-c.png",
+      "from": "g-massif32-c#0",
+      "width": 240,
+      "height": 208,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 14,
+          "width": 240,
+          "height": 181
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 189,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 208,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/ridge-3x1-a.png",
+      "from": "g-ridge31-b#0",
+      "width": 240,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 2,
+          "width": 235,
+          "height": 124
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 127,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/ridge-3x1-b.png",
+      "from": "g-ridge31-c#0",
+      "width": 240,
+      "height": 128,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 4,
+          "width": 240,
+          "height": 124
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 127,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/ridge-2x1-a.png",
+      "from": "g-ridge21-a#0",
+      "width": 160,
+      "height": 128,
+      "steps": [
+        {
+          "op": "edits",
+          "pixels": [
+            [
+              156,
+              86,
+              "transparent"
+            ],
+            [
+              156,
+              87,
+              "transparent"
+            ],
+            [
+              156,
+              88,
+              "transparent"
+            ],
+            [
+              156,
+              89,
+              "transparent"
+            ],
+            [
+              156,
+              90,
+              "transparent"
+            ],
+            [
+              156,
+              91,
+              "transparent"
+            ],
+            [
+              156,
+              92,
+              "transparent"
+            ],
+            [
+              156,
+              93,
+              "transparent"
+            ],
+            [
+              156,
+              94,
+              "transparent"
+            ],
+            [
+              156,
+              95,
+              "transparent"
+            ],
+            [
+              156,
+              96,
+              "transparent"
+            ],
+            [
+              156,
+              97,
+              "transparent"
+            ],
+            [
+              156,
+              98,
+              "transparent"
+            ],
+            [
+              156,
+              99,
+              "transparent"
+            ],
+            [
+              156,
+              100,
+              "transparent"
+            ],
+            [
+              156,
+              101,
+              "transparent"
+            ],
+            [
+              156,
+              102,
+              "transparent"
+            ],
+            [
+              156,
+              103,
+              "transparent"
+            ],
+            [
+              156,
+              104,
+              "transparent"
+            ],
+            [
+              156,
+              105,
+              "transparent"
+            ],
+            [
+              156,
+              106,
+              "transparent"
+            ],
+            [
+              156,
+              107,
+              "transparent"
+            ],
+            [
+              156,
+              108,
+              "transparent"
+            ],
+            [
+              156,
+              109,
+              "transparent"
+            ],
+            [
+              156,
+              110,
+              "transparent"
+            ],
+            [
+              156,
+              111,
+              "transparent"
+            ],
+            [
+              156,
+              112,
+              "transparent"
+            ],
+            [
+              156,
+              113,
+              "transparent"
+            ],
+            [
+              156,
+              114,
+              "transparent"
+            ],
+            [
+              156,
+              115,
+              "transparent"
+            ],
+            [
+              156,
+              116,
+              "transparent"
+            ],
+            [
+              156,
+              117,
+              "transparent"
+            ],
+            [
+              156,
+              118,
+              "transparent"
+            ],
+            [
+              156,
+              119,
+              "transparent"
+            ],
+            [
+              156,
+              120,
+              "transparent"
+            ],
+            [
+              156,
+              121,
+              "transparent"
+            ],
+            [
+              156,
+              122,
+              "transparent"
+            ],
+            [
+              156,
+              123,
+              "transparent"
+            ],
+            [
+              156,
+              124,
+              "transparent"
+            ],
+            [
+              155,
+              124,
+              "transparent"
+            ],
+            [
+              154,
+              124,
+              "transparent"
+            ],
+            [
+              154,
+              123,
+              "transparent"
+            ],
+            [
+              154,
+              122,
+              "transparent"
+            ],
+            [
+              154,
+              121,
+              "transparent"
+            ],
+            [
+              154,
+              120,
+              "transparent"
+            ],
+            [
+              154,
+              119,
+              "transparent"
+            ],
+            [
+              154,
+              118,
+              "transparent"
+            ],
+            [
+              154,
+              117,
+              "transparent"
+            ],
+            [
+              154,
+              116,
+              "transparent"
+            ],
+            [
+              154,
+              115,
+              "transparent"
+            ],
+            [
+              154,
+              114,
+              "transparent"
+            ],
+            [
+              154,
+              113,
+              "transparent"
+            ],
+            [
+              154,
+              112,
+              "transparent"
+            ],
+            [
+              154,
+              111,
+              "transparent"
+            ],
+            [
+              154,
+              110,
+              "transparent"
+            ],
+            [
+              154,
+              109,
+              "transparent"
+            ],
+            [
+              154,
+              108,
+              "transparent"
+            ],
+            [
+              154,
+              107,
+              "transparent"
+            ],
+            [
+              154,
+              106,
+              "transparent"
+            ],
+            [
+              154,
+              105,
+              "transparent"
+            ],
+            [
+              154,
+              104,
+              "transparent"
+            ],
+            [
+              154,
+              103,
+              "transparent"
+            ],
+            [
+              154,
+              102,
+              "transparent"
+            ],
+            [
+              154,
+              101,
+              "transparent"
+            ],
+            [
+              154,
+              100,
+              "transparent"
+            ],
+            [
+              154,
+              99,
+              "transparent"
+            ],
+            [
+              154,
+              98,
+              "transparent"
+            ],
+            [
+              154,
+              97,
+              "transparent"
+            ],
+            [
+              154,
+              96,
+              "transparent"
+            ],
+            [
+              154,
+              95,
+              "transparent"
+            ],
+            [
+              154,
+              94,
+              "transparent"
+            ],
+            [
+              153,
+              94,
+              "transparent"
+            ],
+            [
+              152,
+              94,
+              "transparent"
+            ],
+            [
+              152,
+              93,
+              "transparent"
+            ],
+            [
+              151,
+              93,
+              "transparent"
+            ],
+            [
+              150,
+              93,
+              "transparent"
+            ],
+            [
+              150,
+              92,
+              "transparent"
+            ],
+            [
+              149,
+              92,
+              "transparent"
+            ],
+            [
+              148,
+              92,
+              "transparent"
+            ],
+            [
+              148,
+              93,
+              "transparent"
+            ],
+            [
+              148,
+              94,
+              "transparent"
+            ],
+            [
+              148,
+              95,
+              "transparent"
+            ],
+            [
+              148,
+              96,
+              "transparent"
+            ],
+            [
+              148,
+              97,
+              "transparent"
+            ],
+            [
+              148,
+              98,
+              "transparent"
+            ],
+            [
+              148,
+              99,
+              "transparent"
+            ],
+            [
+              148,
+              100,
+              "transparent"
+            ],
+            [
+              147,
+              100,
+              "transparent"
+            ],
+            [
+              146,
+              100,
+              "transparent"
+            ],
+            [
+              146,
+              99,
+              "transparent"
+            ],
+            [
+              146,
+              98,
+              "transparent"
+            ],
+            [
+              146,
+              97,
+              "transparent"
+            ],
+            [
+              146,
+              96,
+              "transparent"
+            ],
+            [
+              146,
+              95,
+              "transparent"
+            ],
+            [
+              146,
+              94,
+              "transparent"
+            ],
+            [
+              146,
+              93,
+              "transparent"
+            ],
+            [
+              145,
+              94,
+              "transparent"
+            ],
+            [
+              145,
+              95,
+              "transparent"
+            ],
+            [
+              144,
+              95,
+              "transparent"
+            ],
+            [
+              144,
+              96,
+              "transparent"
+            ],
+            [
+              144,
+              97,
+              "transparent"
+            ],
+            [
+              144,
+              98,
+              "transparent"
+            ],
+            [
+              144,
+              99,
+              "transparent"
+            ],
+            [
+              144,
+              100,
+              "transparent"
+            ],
+            [
+              143,
+              98,
+              "transparent"
+            ],
+            [
+              143,
+              97,
+              "transparent"
+            ],
+            [
+              143,
+              96,
+              "transparent"
+            ],
+            [
+              143,
+              95,
+              "transparent"
+            ],
+            [
+              143,
+              94,
+              "transparent"
+            ],
+            [
+              142,
+              95,
+              "transparent"
+            ],
+            [
+              145,
+              96,
+              "transparent"
+            ],
+            [
+              145,
+              97,
+              "transparent"
+            ],
+            [
+              145,
+              98,
+              "transparent"
+            ],
+            [
+              145,
+              99,
+              "transparent"
+            ],
+            [
+              146,
+              101,
+              "transparent"
+            ],
+            [
+              146,
+              102,
+              "transparent"
+            ],
+            [
+              147,
+              102,
+              "transparent"
+            ],
+            [
+              147,
+              103,
+              "transparent"
+            ],
+            [
+              147,
+              104,
+              "transparent"
+            ],
+            [
+              147,
+              105,
+              "transparent"
+            ],
+            [
+              147,
+              106,
+              "transparent"
+            ],
+            [
+              148,
+              106,
+              "transparent"
+            ],
+            [
+              148,
+              107,
+              "transparent"
+            ],
+            [
+              149,
+              107,
+              "transparent"
+            ],
+            [
+              149,
+              108,
+              "transparent"
+            ],
+            [
+              149,
+              106,
+              "transparent"
+            ],
+            [
+              149,
+              105,
+              "transparent"
+            ],
+            [
+              149,
+              104,
+              "transparent"
+            ],
+            [
+              149,
+              103,
+              "transparent"
+            ],
+            [
+              149,
+              102,
+              "transparent"
+            ],
+            [
+              149,
+              101,
+              "transparent"
+            ],
+            [
+              150,
+              101,
+              "transparent"
+            ],
+            [
+              150,
+              100,
+              "transparent"
+            ],
+            [
+              150,
+              99,
+              "transparent"
+            ],
+            [
+              150,
+              98,
+              "transparent"
+            ],
+            [
+              150,
+              97,
+              "transparent"
+            ],
+            [
+              150,
+              96,
+              "transparent"
+            ],
+            [
+              150,
+              95,
+              "transparent"
+            ],
+            [
+              151,
+              95,
+              "transparent"
+            ],
+            [
+              151,
+              96,
+              "transparent"
+            ],
+            [
+              152,
+              96,
+              "transparent"
+            ],
+            [
+              152,
+              97,
+              "transparent"
+            ],
+            [
+              152,
+              98,
+              "transparent"
+            ],
+            [
+              152,
+              99,
+              "transparent"
+            ],
+            [
+              152,
+              100,
+              "transparent"
+            ],
+            [
+              152,
+              101,
+              "transparent"
+            ],
+            [
+              152,
+              102,
+              "transparent"
+            ],
+            [
+              152,
+              103,
+              "transparent"
+            ],
+            [
+              152,
+              104,
+              "transparent"
+            ],
+            [
+              152,
+              105,
+              "transparent"
+            ],
+            [
+              152,
+              106,
+              "transparent"
+            ],
+            [
+              152,
+              107,
+              "transparent"
+            ],
+            [
+              151,
+              106,
+              "transparent"
+            ],
+            [
+              151,
+              105,
+              "transparent"
+            ],
+            [
+              151,
+              104,
+              "transparent"
+            ],
+            [
+              151,
+              103,
+              "transparent"
+            ],
+            [
+              151,
+              102,
+              "transparent"
+            ],
+            [
+              151,
+              97,
+              "transparent"
+            ],
+            [
+              151,
+              98,
+              "transparent"
+            ],
+            [
+              151,
+              99,
+              "transparent"
+            ],
+            [
+              151,
+              100,
+              "transparent"
+            ],
+            [
+              151,
+              101,
+              "transparent"
+            ],
+            [
+              150,
+              102,
+              "transparent"
+            ],
+            [
+              150,
+              103,
+              "transparent"
+            ],
+            [
+              150,
+              104,
+              "transparent"
+            ],
+            [
+              150,
+              105,
+              "transparent"
+            ],
+            [
+              150,
+              106,
+              "transparent"
+            ],
+            [
+              148,
+              105,
+              "transparent"
+            ],
+            [
+              146,
+              104,
+              "transparent"
+            ],
+            [
+              148,
+              104,
+              "transparent"
+            ],
+            [
+              148,
+              103,
+              "transparent"
+            ],
+            [
+              148,
+              102,
+              "transparent"
+            ],
+            [
+              145,
+              101,
+              "transparent"
+            ],
+            [
+              145,
+              100,
+              "transparent"
+            ],
+            [
+              149,
+              100,
+              "transparent"
+            ],
+            [
+              147,
+              99,
+              "transparent"
+            ],
+            [
+              149,
+              99,
+              "transparent"
+            ],
+            [
+              147,
+              98,
+              "transparent"
+            ],
+            [
+              149,
+              98,
+              "transparent"
+            ],
+            [
+              147,
+              97,
+              "transparent"
+            ],
+            [
+              149,
+              97,
+              "transparent"
+            ],
+            [
+              147,
+              96,
+              "transparent"
+            ],
+            [
+              149,
+              96,
+              "transparent"
+            ],
+            [
+              147,
+              95,
+              "transparent"
+            ],
+            [
+              149,
+              95,
+              "transparent"
+            ],
+            [
+              147,
+              94,
+              "transparent"
+            ],
+            [
+              149,
+              94,
+              "transparent"
+            ],
+            [
+              147,
+              93,
+              "transparent"
+            ],
+            [
+              147,
+              92,
+              "transparent"
+            ],
+            [
+              150,
+              94,
+              "transparent"
+            ],
+            [
+              149,
+              93,
+              "transparent"
+            ],
+            [
+              152,
+              95,
+              "transparent"
+            ],
+            [
+              151,
+              94,
+              "transparent"
+            ],
+            [
+              153,
+              95,
+              "transparent"
+            ],
+            [
+              153,
+              96,
+              "transparent"
+            ],
+            [
+              153,
+              97,
+              "transparent"
+            ],
+            [
+              153,
+              98,
+              "transparent"
+            ],
+            [
+              153,
+              99,
+              "transparent"
+            ],
+            [
+              153,
+              100,
+              "transparent"
+            ],
+            [
+              153,
+              101,
+              "transparent"
+            ],
+            [
+              153,
+              102,
+              "transparent"
+            ],
+            [
+              153,
+              103,
+              "transparent"
+            ],
+            [
+              153,
+              104,
+              "transparent"
+            ],
+            [
+              153,
+              105,
+              "transparent"
+            ],
+            [
+              153,
+              106,
+              "transparent"
+            ],
+            [
+              153,
+              107,
+              "transparent"
+            ],
+            [
+              153,
+              108,
+              "transparent"
+            ],
+            [
+              153,
+              109,
+              "transparent"
+            ],
+            [
+              153,
+              110,
+              "transparent"
+            ],
+            [
+              153,
+              111,
+              "transparent"
+            ],
+            [
+              153,
+              112,
+              "transparent"
+            ],
+            [
+              153,
+              113,
+              "transparent"
+            ],
+            [
+              153,
+              114,
+              "transparent"
+            ],
+            [
+              152,
+              114,
+              "transparent"
+            ],
+            [
+              152,
+              115,
+              "transparent"
+            ],
+            [
+              152,
+              116,
+              "transparent"
+            ],
+            [
+              152,
+              117,
+              "transparent"
+            ],
+            [
+              152,
+              118,
+              "transparent"
+            ],
+            [
+              152,
+              119,
+              "transparent"
+            ],
+            [
+              151,
+              117,
+              "transparent"
+            ],
+            [
+              151,
+              116,
+              "transparent"
+            ],
+            [
+              153,
+              115,
+              "transparent"
+            ],
+            [
+              153,
+              116,
+              "transparent"
+            ],
+            [
+              153,
+              117,
+              "transparent"
+            ],
+            [
+              153,
+              118,
+              "transparent"
+            ],
+            [
+              153,
+              119,
+              "transparent"
+            ],
+            [
+              153,
+              120,
+              "transparent"
+            ],
+            [
+              153,
+              121,
+              "transparent"
+            ],
+            [
+              153,
+              123,
+              "transparent"
+            ],
+            [
+              152,
+              123,
+              "transparent"
+            ],
+            [
+              152,
+              124,
+              "transparent"
+            ],
+            [
+              151,
+              124,
+              "transparent"
+            ],
+            [
+              151,
+              123,
+              "transparent"
+            ],
+            [
+              150,
+              123,
+              "transparent"
+            ],
+            [
+              153,
+              124,
+              "transparent"
+            ],
+            [
+              155,
+              123,
+              "transparent"
+            ],
+            [
+              155,
+              122,
+              "transparent"
+            ],
+            [
+              155,
+              121,
+              "transparent"
+            ],
+            [
+              155,
+              120,
+              "transparent"
+            ],
+            [
+              155,
+              119,
+              "transparent"
+            ],
+            [
+              155,
+              118,
+              "transparent"
+            ],
+            [
+              155,
+              117,
+              "transparent"
+            ],
+            [
+              155,
+              116,
+              "transparent"
+            ],
+            [
+              155,
+              115,
+              "transparent"
+            ],
+            [
+              155,
+              114,
+              "transparent"
+            ],
+            [
+              155,
+              113,
+              "transparent"
+            ],
+            [
+              155,
+              112,
+              "transparent"
+            ],
+            [
+              155,
+              111,
+              "transparent"
+            ],
+            [
+              155,
+              110,
+              "transparent"
+            ],
+            [
+              155,
+              109,
+              "transparent"
+            ],
+            [
+              155,
+              108,
+              "transparent"
+            ],
+            [
+              155,
+              107,
+              "transparent"
+            ],
+            [
+              155,
+              106,
+              "transparent"
+            ],
+            [
+              155,
+              105,
+              "transparent"
+            ],
+            [
+              155,
+              104,
+              "transparent"
+            ],
+            [
+              155,
+              103,
+              "transparent"
+            ],
+            [
+              155,
+              102,
+              "transparent"
+            ],
+            [
+              155,
+              101,
+              "transparent"
+            ],
+            [
+              155,
+              100,
+              "transparent"
+            ],
+            [
+              155,
+              99,
+              "transparent"
+            ],
+            [
+              155,
+              98,
+              "transparent"
+            ],
+            [
+              155,
+              97,
+              "transparent"
+            ],
+            [
+              155,
+              96,
+              "transparent"
+            ],
+            [
+              155,
+              95,
+              "transparent"
+            ],
+            [
+              155,
+              94,
+              "transparent"
+            ],
+            [
+              155,
+              93,
+              "transparent"
+            ],
+            [
+              155,
+              92,
+              "transparent"
+            ],
+            [
+              155,
+              91,
+              "transparent"
+            ],
+            [
+              155,
+              90,
+              "transparent"
+            ],
+            [
+              155,
+              89,
+              "transparent"
+            ],
+            [
+              149,
+              110,
+              "transparent"
+            ]
+          ]
+        },
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 19,
+          "width": 154,
+          "height": 98
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 104,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/ridge-2x1-b.png",
+      "from": "g-ridge21-a#2",
+      "width": 160,
+      "height": 128,
+      "steps": [
+        {
+          "op": "edits",
+          "pixels": [
+            [
+              155,
+              72,
+              "transparent"
+            ],
+            [
+              156,
+              72,
+              "transparent"
+            ],
+            [
+              156,
+              73,
+              "transparent"
+            ],
+            [
+              156,
+              74,
+              "transparent"
+            ],
+            [
+              153,
+              80,
+              "transparent"
+            ],
+            [
+              3,
+              81,
+              "transparent"
+            ],
+            [
+              3,
+              82,
+              "transparent"
+            ],
+            [
+              3,
+              83,
+              "transparent"
+            ],
+            [
+              3,
+              84,
+              "transparent"
+            ],
+            [
+              156,
+              81,
+              "transparent"
+            ],
+            [
+              156,
+              82,
+              "transparent"
+            ],
+            [
+              156,
+              83,
+              "transparent"
+            ],
+            [
+              156,
+              84,
+              "transparent"
+            ],
+            [
+              156,
+              85,
+              "transparent"
+            ],
+            [
+              156,
+              86,
+              "transparent"
+            ],
+            [
+              156,
+              87,
+              "transparent"
+            ],
+            [
+              156,
+              88,
+              "transparent"
+            ],
+            [
+              156,
+              89,
+              "transparent"
+            ],
+            [
+              156,
+              90,
+              "transparent"
+            ],
+            [
+              156,
+              91,
+              "transparent"
+            ],
+            [
+              156,
+              92,
+              "transparent"
+            ],
+            [
+              156,
+              93,
+              "transparent"
+            ],
+            [
+              156,
+              94,
+              "transparent"
+            ],
+            [
+              156,
+              95,
+              "transparent"
+            ],
+            [
+              156,
+              96,
+              "transparent"
+            ],
+            [
+              156,
+              97,
+              "transparent"
+            ],
+            [
+              156,
+              98,
+              "transparent"
+            ],
+            [
+              156,
+              99,
+              "transparent"
+            ],
+            [
+              156,
+              100,
+              "transparent"
+            ],
+            [
+              156,
+              101,
+              "transparent"
+            ],
+            [
+              156,
+              102,
+              "transparent"
+            ],
+            [
+              156,
+              103,
+              "transparent"
+            ],
+            [
+              156,
+              104,
+              "transparent"
+            ],
+            [
+              156,
+              105,
+              "transparent"
+            ],
+            [
+              156,
+              106,
+              "transparent"
+            ],
+            [
+              156,
+              107,
+              "transparent"
+            ],
+            [
+              156,
+              108,
+              "transparent"
+            ],
+            [
+              156,
+              109,
+              "transparent"
+            ],
+            [
+              156,
+              110,
+              "transparent"
+            ],
+            [
+              156,
+              111,
+              "transparent"
+            ],
+            [
+              156,
+              112,
+              "transparent"
+            ],
+            [
+              156,
+              113,
+              "transparent"
+            ],
+            [
+              156,
+              114,
+              "transparent"
+            ],
+            [
+              156,
+              115,
+              "transparent"
+            ],
+            [
+              156,
+              116,
+              "transparent"
+            ],
+            [
+              156,
+              117,
+              "transparent"
+            ],
+            [
+              156,
+              118,
+              "transparent"
+            ],
+            [
+              156,
+              119,
+              "transparent"
+            ],
+            [
+              156,
+              120,
+              "transparent"
+            ],
+            [
+              156,
+              121,
+              "transparent"
+            ],
+            [
+              156,
+              122,
+              "transparent"
+            ],
+            [
+              156,
+              123,
+              "transparent"
+            ],
+            [
+              156,
+              124,
+              "transparent"
+            ],
+            [
+              155,
+              124,
+              "transparent"
+            ],
+            [
+              154,
+              124,
+              "transparent"
+            ],
+            [
+              155,
+              123,
+              "transparent"
+            ],
+            [
+              155,
+              122,
+              "transparent"
+            ],
+            [
+              155,
+              119,
+              "transparent"
+            ],
+            [
+              155,
+              118,
+              "transparent"
+            ],
+            [
+              155,
+              117,
+              "transparent"
+            ],
+            [
+              155,
+              105,
+              "transparent"
+            ],
+            [
+              155,
+              104,
+              "transparent"
+            ],
+            [
+              155,
+              103,
+              "transparent"
+            ],
+            [
+              155,
+              102,
+              "transparent"
+            ],
+            [
+              155,
+              101,
+              "transparent"
+            ],
+            [
+              154,
+              101,
+              "transparent"
+            ],
+            [
+              154,
+              100,
+              "transparent"
+            ],
+            [
+              154,
+              99,
+              "transparent"
+            ],
+            [
+              154,
+              98,
+              "transparent"
+            ],
+            [
+              154,
+              97,
+              "transparent"
+            ],
+            [
+              154,
+              96,
+              "transparent"
+            ],
+            [
+              154,
+              95,
+              "transparent"
+            ],
+            [
+              154,
+              94,
+              "transparent"
+            ],
+            [
+              154,
+              93,
+              "transparent"
+            ],
+            [
+              154,
+              92,
+              "transparent"
+            ],
+            [
+              154,
+              91,
+              "transparent"
+            ],
+            [
+              154,
+              90,
+              "transparent"
+            ],
+            [
+              154,
+              89,
+              "transparent"
+            ],
+            [
+              154,
+              88,
+              "transparent"
+            ],
+            [
+              153,
+              88,
+              "transparent"
+            ],
+            [
+              153,
+              87,
+              "transparent"
+            ],
+            [
+              152,
+              87,
+              "transparent"
+            ],
+            [
+              151,
+              87,
+              "transparent"
+            ],
+            [
+              151,
+              88,
+              "transparent"
+            ],
+            [
+              151,
+              89,
+              "transparent"
+            ],
+            [
+              151,
+              90,
+              "transparent"
+            ],
+            [
+              151,
+              91,
+              "transparent"
+            ],
+            [
+              151,
+              92,
+              "transparent"
+            ],
+            [
+              151,
+              93,
+              "transparent"
+            ],
+            [
+              151,
+              94,
+              "transparent"
+            ],
+            [
+              151,
+              95,
+              "transparent"
+            ],
+            [
+              151,
+              96,
+              "transparent"
+            ],
+            [
+              151,
+              97,
+              "transparent"
+            ],
+            [
+              150,
+              97,
+              "transparent"
+            ],
+            [
+              152,
+              97,
+              "transparent"
+            ],
+            [
+              150,
+              96,
+              "transparent"
+            ],
+            [
+              149,
+              96,
+              "transparent"
+            ],
+            [
+              149,
+              95,
+              "transparent"
+            ],
+            [
+              149,
+              94,
+              "transparent"
+            ],
+            [
+              149,
+              93,
+              "transparent"
+            ],
+            [
+              149,
+              92,
+              "transparent"
+            ],
+            [
+              149,
+              91,
+              "transparent"
+            ],
+            [
+              149,
+              90,
+              "transparent"
+            ],
+            [
+              149,
+              89,
+              "transparent"
+            ],
+            [
+              149,
+              88,
+              "transparent"
+            ],
+            [
+              148,
+              88,
+              "transparent"
+            ],
+            [
+              148,
+              89,
+              "transparent"
+            ],
+            [
+              147,
+              89,
+              "transparent"
+            ],
+            [
+              147,
+              90,
+              "transparent"
+            ],
+            [
+              147,
+              91,
+              "transparent"
+            ],
+            [
+              147,
+              92,
+              "transparent"
+            ],
+            [
+              147,
+              93,
+              "transparent"
+            ],
+            [
+              147,
+              94,
+              "transparent"
+            ],
+            [
+              147,
+              95,
+              "transparent"
+            ],
+            [
+              146,
+              94,
+              "transparent"
+            ],
+            [
+              146,
+              93,
+              "transparent"
+            ],
+            [
+              146,
+              92,
+              "transparent"
+            ],
+            [
+              145,
+              92,
+              "transparent"
+            ],
+            [
+              145,
+              91,
+              "transparent"
+            ],
+            [
+              145,
+              90,
+              "transparent"
+            ],
+            [
+              146,
+              91,
+              "transparent"
+            ],
+            [
+              146,
+              90,
+              "transparent"
+            ],
+            [
+              146,
+              89,
+              "transparent"
+            ],
+            [
+              146,
+              88,
+              "transparent"
+            ],
+            [
+              148,
+              90,
+              "transparent"
+            ],
+            [
+              148,
+              91,
+              "transparent"
+            ],
+            [
+              148,
+              92,
+              "transparent"
+            ],
+            [
+              148,
+              93,
+              "transparent"
+            ],
+            [
+              148,
+              94,
+              "transparent"
+            ],
+            [
+              148,
+              95,
+              "transparent"
+            ],
+            [
+              152,
+              96,
+              "transparent"
+            ],
+            [
+              150,
+              95,
+              "transparent"
+            ],
+            [
+              152,
+              95,
+              "transparent"
+            ],
+            [
+              150,
+              94,
+              "transparent"
+            ],
+            [
+              152,
+              94,
+              "transparent"
+            ],
+            [
+              150,
+              93,
+              "transparent"
+            ],
+            [
+              152,
+              93,
+              "transparent"
+            ],
+            [
+              150,
+              92,
+              "transparent"
+            ],
+            [
+              152,
+              92,
+              "transparent"
+            ],
+            [
+              150,
+              91,
+              "transparent"
+            ],
+            [
+              152,
+              91,
+              "transparent"
+            ],
+            [
+              150,
+              90,
+              "transparent"
+            ],
+            [
+              152,
+              90,
+              "transparent"
+            ],
+            [
+              150,
+              89,
+              "transparent"
+            ],
+            [
+              152,
+              89,
+              "transparent"
+            ],
+            [
+              150,
+              88,
+              "transparent"
+            ],
+            [
+              150,
+              87,
+              "transparent"
+            ],
+            [
+              152,
+              88,
+              "transparent"
+            ],
+            [
+              153,
+              89,
+              "transparent"
+            ],
+            [
+              153,
+              90,
+              "transparent"
+            ],
+            [
+              153,
+              91,
+              "transparent"
+            ],
+            [
+              153,
+              92,
+              "transparent"
+            ],
+            [
+              153,
+              93,
+              "transparent"
+            ],
+            [
+              153,
+              94,
+              "transparent"
+            ],
+            [
+              153,
+              95,
+              "transparent"
+            ],
+            [
+              153,
+              96,
+              "transparent"
+            ],
+            [
+              153,
+              97,
+              "transparent"
+            ],
+            [
+              153,
+              98,
+              "transparent"
+            ],
+            [
+              155,
+              100,
+              "transparent"
+            ],
+            [
+              155,
+              99,
+              "transparent"
+            ],
+            [
+              155,
+              98,
+              "transparent"
+            ],
+            [
+              155,
+              97,
+              "transparent"
+            ],
+            [
+              155,
+              96,
+              "transparent"
+            ],
+            [
+              155,
+              95,
+              "transparent"
+            ],
+            [
+              155,
+              94,
+              "transparent"
+            ],
+            [
+              155,
+              93,
+              "transparent"
+            ],
+            [
+              155,
+              92,
+              "transparent"
+            ],
+            [
+              155,
+              91,
+              "transparent"
+            ],
+            [
+              155,
+              90,
+              "transparent"
+            ],
+            [
+              155,
+              89,
+              "transparent"
+            ],
+            [
+              155,
+              88,
+              "transparent"
+            ],
+            [
+              155,
+              87,
+              "transparent"
+            ],
+            [
+              155,
+              86,
+              "transparent"
+            ],
+            [
+              155,
+              85,
+              "transparent"
+            ],
+            [
+              143,
+              89,
+              "transparent"
+            ],
+            [
+              143,
+              90,
+              "transparent"
+            ],
+            [
+              142,
+              90,
+              "transparent"
+            ],
+            [
+              141,
+              90,
+              "transparent"
+            ],
+            [
+              141,
+              91,
+              "transparent"
+            ],
+            [
+              141,
+              92,
+              "transparent"
+            ],
+            [
+              140,
+              92,
+              "transparent"
+            ],
+            [
+              139,
+              92,
+              "transparent"
+            ],
+            [
+              139,
+              91,
+              "transparent"
+            ],
+            [
+              139,
+              90,
+              "transparent"
+            ],
+            [
+              140,
+              91,
+              "transparent"
+            ],
+            [
+              140,
+              90,
+              "transparent"
+            ],
+            [
+              3,
+              102,
+              "transparent"
+            ],
+            [
+              3,
+              103,
+              "transparent"
+            ],
+            [
+              3,
+              104,
+              "transparent"
+            ],
+            [
+              3,
+              105,
+              "transparent"
+            ],
+            [
+              3,
+              106,
+              "transparent"
+            ],
+            [
+              3,
+              107,
+              "transparent"
+            ],
+            [
+              3,
+              108,
+              "transparent"
+            ],
+            [
+              3,
+              109,
+              "transparent"
+            ],
+            [
+              3,
+              110,
+              "transparent"
+            ],
+            [
+              3,
+              111,
+              "transparent"
+            ],
+            [
+              3,
+              112,
+              "transparent"
+            ],
+            [
+              3,
+              113,
+              "transparent"
+            ],
+            [
+              3,
+              114,
+              "transparent"
+            ],
+            [
+              3,
+              115,
+              "transparent"
+            ],
+            [
+              3,
+              116,
+              "transparent"
+            ],
+            [
+              3,
+              117,
+              "transparent"
+            ],
+            [
+              3,
+              118,
+              "transparent"
+            ],
+            [
+              3,
+              119,
+              "transparent"
+            ],
+            [
+              3,
+              120,
+              "transparent"
+            ],
+            [
+              3,
+              121,
+              "transparent"
+            ],
+            [
+              3,
+              122,
+              "transparent"
+            ],
+            [
+              3,
+              123,
+              "transparent"
+            ],
+            [
+              3,
+              124,
+              "transparent"
+            ],
+            [
+              4,
+              124,
+              "transparent"
+            ],
+            [
+              5,
+              124,
+              "transparent"
+            ],
+            [
+              5,
+              123,
+              "transparent"
+            ],
+            [
+              5,
+              122,
+              "transparent"
+            ],
+            [
+              5,
+              121,
+              "transparent"
+            ],
+            [
+              5,
+              120,
+              "transparent"
+            ],
+            [
+              5,
+              119,
+              "transparent"
+            ],
+            [
+              5,
+              118,
+              "transparent"
+            ],
+            [
+              5,
+              117,
+              "transparent"
+            ],
+            [
+              5,
+              116,
+              "transparent"
+            ],
+            [
+              5,
+              115,
+              "transparent"
+            ],
+            [
+              5,
+              114,
+              "transparent"
+            ],
+            [
+              5,
+              113,
+              "transparent"
+            ],
+            [
+              5,
+              112,
+              "transparent"
+            ],
+            [
+              5,
+              111,
+              "transparent"
+            ],
+            [
+              5,
+              110,
+              "transparent"
+            ],
+            [
+              5,
+              109,
+              "transparent"
+            ],
+            [
+              5,
+              108,
+              "transparent"
+            ],
+            [
+              5,
+              107,
+              "transparent"
+            ],
+            [
+              6,
+              111,
+              "transparent"
+            ],
+            [
+              6,
+              112,
+              "transparent"
+            ],
+            [
+              7,
+              112,
+              "transparent"
+            ],
+            [
+              7,
+              113,
+              "transparent"
+            ],
+            [
+              7,
+              114,
+              "transparent"
+            ],
+            [
+              7,
+              115,
+              "transparent"
+            ],
+            [
+              7,
+              116,
+              "transparent"
+            ],
+            [
+              7,
+              117,
+              "transparent"
+            ],
+            [
+              7,
+              118,
+              "transparent"
+            ],
+            [
+              7,
+              119,
+              "transparent"
+            ],
+            [
+              7,
+              120,
+              "transparent"
+            ],
+            [
+              7,
+              121,
+              "transparent"
+            ],
+            [
+              7,
+              122,
+              "transparent"
+            ],
+            [
+              7,
+              123,
+              "transparent"
+            ],
+            [
+              7,
+              124,
+              "transparent"
+            ],
+            [
+              8,
+              124,
+              "transparent"
+            ],
+            [
+              9,
+              124,
+              "transparent"
+            ],
+            [
+              9,
+              123,
+              "transparent"
+            ],
+            [
+              9,
+              122,
+              "transparent"
+            ],
+            [
+              9,
+              121,
+              "transparent"
+            ],
+            [
+              9,
+              120,
+              "transparent"
+            ],
+            [
+              9,
+              119,
+              "transparent"
+            ],
+            [
+              9,
+              118,
+              "transparent"
+            ],
+            [
+              9,
+              117,
+              "transparent"
+            ],
+            [
+              9,
+              116,
+              "transparent"
+            ],
+            [
+              9,
+              115,
+              "transparent"
+            ],
+            [
+              9,
+              114,
+              "transparent"
+            ],
+            [
+              9,
+              113,
+              "transparent"
+            ],
+            [
+              9,
+              112,
+              "transparent"
+            ],
+            [
+              10,
+              112,
+              "transparent"
+            ],
+            [
+              11,
+              112,
+              "transparent"
+            ],
+            [
+              11,
+              113,
+              "transparent"
+            ],
+            [
+              11,
+              114,
+              "transparent"
+            ],
+            [
+              11,
+              115,
+              "transparent"
+            ],
+            [
+              11,
+              116,
+              "transparent"
+            ],
+            [
+              11,
+              117,
+              "transparent"
+            ],
+            [
+              11,
+              118,
+              "transparent"
+            ],
+            [
+              11,
+              119,
+              "transparent"
+            ],
+            [
+              12,
+              118,
+              "transparent"
+            ],
+            [
+              12,
+              117,
+              "transparent"
+            ],
+            [
+              13,
+              117,
+              "transparent"
+            ],
+            [
+              13,
+              116,
+              "transparent"
+            ],
+            [
+              13,
+              115,
+              "transparent"
+            ],
+            [
+              13,
+              114,
+              "transparent"
+            ],
+            [
+              13,
+              113,
+              "transparent"
+            ],
+            [
+              14,
+              113,
+              "transparent"
+            ],
+            [
+              14,
+              114,
+              "transparent"
+            ],
+            [
+              14,
+              115,
+              "transparent"
+            ],
+            [
+              12,
+              116,
+              "transparent"
+            ],
+            [
+              12,
+              115,
+              "transparent"
+            ],
+            [
+              12,
+              114,
+              "transparent"
+            ],
+            [
+              12,
+              113,
+              "transparent"
+            ],
+            [
+              10,
+              113,
+              "transparent"
+            ],
+            [
+              10,
+              114,
+              "transparent"
+            ],
+            [
+              10,
+              115,
+              "transparent"
+            ],
+            [
+              10,
+              116,
+              "transparent"
+            ],
+            [
+              10,
+              117,
+              "transparent"
+            ],
+            [
+              10,
+              118,
+              "transparent"
+            ],
+            [
+              10,
+              119,
+              "transparent"
+            ],
+            [
+              10,
+              120,
+              "transparent"
+            ],
+            [
+              10,
+              122,
+              "transparent"
+            ],
+            [
+              11,
+              122,
+              "transparent"
+            ],
+            [
+              11,
+              123,
+              "transparent"
+            ],
+            [
+              11,
+              124,
+              "transparent"
+            ],
+            [
+              12,
+              124,
+              "transparent"
+            ],
+            [
+              13,
+              124,
+              "transparent"
+            ],
+            [
+              13,
+              123,
+              "transparent"
+            ],
+            [
+              14,
+              123,
+              "transparent"
+            ],
+            [
+              15,
+              123,
+              "transparent"
+            ],
+            [
+              15,
+              124,
+              "transparent"
+            ],
+            [
+              16,
+              124,
+              "transparent"
+            ],
+            [
+              17,
+              124,
+              "transparent"
+            ],
+            [
+              17,
+              123,
+              "transparent"
+            ],
+            [
+              18,
+              123,
+              "transparent"
+            ],
+            [
+              19,
+              123,
+              "transparent"
+            ],
+            [
+              19,
+              124,
+              "transparent"
+            ],
+            [
+              20,
+              124,
+              "transparent"
+            ],
+            [
+              21,
+              124,
+              "transparent"
+            ],
+            [
+              21,
+              123,
+              "transparent"
+            ],
+            [
+              22,
+              123,
+              "transparent"
+            ],
+            [
+              23,
+              123,
+              "transparent"
+            ],
+            [
+              24,
+              123,
+              "transparent"
+            ],
+            [
+              25,
+              123,
+              "transparent"
+            ],
+            [
+              26,
+              123,
+              "transparent"
+            ],
+            [
+              27,
+              123,
+              "transparent"
+            ],
+            [
+              27,
+              124,
+              "transparent"
+            ],
+            [
+              28,
+              123,
+              "transparent"
+            ],
+            [
+              22,
+              124,
+              "transparent"
+            ],
+            [
+              20,
+              123,
+              "transparent"
+            ],
+            [
+              18,
+              124,
+              "transparent"
+            ],
+            [
+              16,
+              123,
+              "transparent"
+            ],
+            [
+              14,
+              124,
+              "transparent"
+            ],
+            [
+              12,
+              123,
+              "transparent"
+            ],
+            [
+              10,
+              123,
+              "transparent"
+            ],
+            [
+              10,
+              124,
+              "transparent"
+            ],
+            [
+              8,
+              123,
+              "transparent"
+            ],
+            [
+              8,
+              122,
+              "transparent"
+            ],
+            [
+              8,
+              121,
+              "transparent"
+            ],
+            [
+              8,
+              120,
+              "transparent"
+            ],
+            [
+              8,
+              119,
+              "transparent"
+            ],
+            [
+              8,
+              118,
+              "transparent"
+            ],
+            [
+              8,
+              117,
+              "transparent"
+            ],
+            [
+              8,
+              116,
+              "transparent"
+            ],
+            [
+              8,
+              115,
+              "transparent"
+            ],
+            [
+              8,
+              114,
+              "transparent"
+            ],
+            [
+              8,
+              113,
+              "transparent"
+            ],
+            [
+              6,
+              113,
+              "transparent"
+            ],
+            [
+              6,
+              114,
+              "transparent"
+            ],
+            [
+              6,
+              115,
+              "transparent"
+            ],
+            [
+              6,
+              116,
+              "transparent"
+            ],
+            [
+              6,
+              117,
+              "transparent"
+            ],
+            [
+              6,
+              118,
+              "transparent"
+            ],
+            [
+              6,
+              119,
+              "transparent"
+            ],
+            [
+              6,
+              120,
+              "transparent"
+            ],
+            [
+              6,
+              121,
+              "transparent"
+            ],
+            [
+              6,
+              122,
+              "transparent"
+            ],
+            [
+              6,
+              123,
+              "transparent"
+            ],
+            [
+              6,
+              124,
+              "transparent"
+            ],
+            [
+              4,
+              123,
+              "transparent"
+            ],
+            [
+              4,
+              122,
+              "transparent"
+            ],
+            [
+              4,
+              121,
+              "transparent"
+            ],
+            [
+              4,
+              120,
+              "transparent"
+            ],
+            [
+              4,
+              119,
+              "transparent"
+            ],
+            [
+              4,
+              118,
+              "transparent"
+            ],
+            [
+              4,
+              117,
+              "transparent"
+            ],
+            [
+              4,
+              116,
+              "transparent"
+            ],
+            [
+              4,
+              115,
+              "transparent"
+            ],
+            [
+              4,
+              114,
+              "transparent"
+            ],
+            [
+              4,
+              113,
+              "transparent"
+            ],
+            [
+              4,
+              112,
+              "transparent"
+            ],
+            [
+              4,
+              111,
+              "transparent"
+            ],
+            [
+              4,
+              110,
+              "transparent"
+            ],
+            [
+              4,
+              109,
+              "transparent"
+            ],
+            [
+              4,
+              108,
+              "transparent"
+            ],
+            [
+              4,
+              107,
+              "transparent"
+            ],
+            [
+              4,
+              106,
+              "transparent"
+            ],
+            [
+              4,
+              105,
+              "transparent"
+            ],
+            [
+              4,
+              104,
+              "transparent"
+            ],
+            [
+              4,
+              103,
+              "transparent"
+            ],
+            [
+              130,
+              105,
+              "transparent"
+            ],
+            [
+              19,
+              117,
+              "transparent"
+            ],
+            [
+              19,
+              118,
+              "transparent"
+            ],
+            [
+              18,
+              118,
+              "transparent"
+            ]
+          ]
+        },
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 8,
+          "width": 154,
+          "height": 110
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 116,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/ridge-2x1-c.png",
+      "from": "g-ridge21-a#3",
+      "width": 160,
+      "height": 128,
+      "steps": [
+        {
+          "op": "edits",
+          "pixels": [
+            [
+              3,
+              107,
+              "transparent"
+            ],
+            [
+              3,
+              108,
+              "transparent"
+            ],
+            [
+              3,
+              109,
+              "transparent"
+            ],
+            [
+              3,
+              110,
+              "transparent"
+            ],
+            [
+              3,
+              111,
+              "transparent"
+            ],
+            [
+              3,
+              112,
+              "transparent"
+            ],
+            [
+              3,
+              113,
+              "transparent"
+            ],
+            [
+              3,
+              114,
+              "transparent"
+            ],
+            [
+              3,
+              115,
+              "transparent"
+            ],
+            [
+              3,
+              116,
+              "transparent"
+            ],
+            [
+              3,
+              117,
+              "transparent"
+            ],
+            [
+              3,
+              118,
+              "transparent"
+            ],
+            [
+              3,
+              119,
+              "transparent"
+            ],
+            [
+              3,
+              120,
+              "transparent"
+            ],
+            [
+              3,
+              121,
+              "transparent"
+            ],
+            [
+              3,
+              122,
+              "transparent"
+            ],
+            [
+              3,
+              123,
+              "transparent"
+            ],
+            [
+              3,
+              124,
+              "transparent"
+            ],
+            [
+              4,
+              124,
+              "transparent"
+            ],
+            [
+              5,
+              124,
+              "transparent"
+            ],
+            [
+              5,
+              123,
+              "transparent"
+            ],
+            [
+              5,
+              122,
+              "transparent"
+            ],
+            [
+              5,
+              121,
+              "transparent"
+            ],
+            [
+              5,
+              120,
+              "transparent"
+            ],
+            [
+              5,
+              119,
+              "transparent"
+            ],
+            [
+              5,
+              118,
+              "transparent"
+            ],
+            [
+              5,
+              117,
+              "transparent"
+            ],
+            [
+              5,
+              116,
+              "transparent"
+            ],
+            [
+              5,
+              115,
+              "transparent"
+            ],
+            [
+              5,
+              114,
+              "transparent"
+            ],
+            [
+              5,
+              113,
+              "transparent"
+            ],
+            [
+              5,
+              112,
+              "transparent"
+            ],
+            [
+              5,
+              111,
+              "transparent"
+            ],
+            [
+              5,
+              110,
+              "transparent"
+            ],
+            [
+              6,
+              112,
+              "transparent"
+            ],
+            [
+              6,
+              113,
+              "transparent"
+            ],
+            [
+              6,
+              114,
+              "transparent"
+            ],
+            [
+              6,
+              115,
+              "transparent"
+            ],
+            [
+              6,
+              116,
+              "transparent"
+            ],
+            [
+              7,
+              116,
+              "transparent"
+            ],
+            [
+              7,
+              117,
+              "transparent"
+            ],
+            [
+              7,
+              118,
+              "transparent"
+            ],
+            [
+              7,
+              119,
+              "transparent"
+            ],
+            [
+              7,
+              120,
+              "transparent"
+            ],
+            [
+              7,
+              121,
+              "transparent"
+            ],
+            [
+              7,
+              122,
+              "transparent"
+            ],
+            [
+              7,
+              123,
+              "transparent"
+            ],
+            [
+              7,
+              124,
+              "transparent"
+            ],
+            [
+              8,
+              124,
+              "transparent"
+            ],
+            [
+              9,
+              124,
+              "transparent"
+            ],
+            [
+              9,
+              123,
+              "transparent"
+            ],
+            [
+              9,
+              122,
+              "transparent"
+            ],
+            [
+              9,
+              121,
+              "transparent"
+            ],
+            [
+              9,
+              120,
+              "transparent"
+            ],
+            [
+              9,
+              119,
+              "transparent"
+            ],
+            [
+              9,
+              118,
+              "transparent"
+            ],
+            [
+              9,
+              117,
+              "transparent"
+            ],
+            [
+              9,
+              116,
+              "transparent"
+            ],
+            [
+              9,
+              115,
+              "transparent"
+            ],
+            [
+              10,
+              115,
+              "transparent"
+            ],
+            [
+              11,
+              115,
+              "transparent"
+            ],
+            [
+              11,
+              114,
+              "transparent"
+            ],
+            [
+              12,
+              114,
+              "transparent"
+            ],
+            [
+              13,
+              114,
+              "transparent"
+            ],
+            [
+              13,
+              115,
+              "transparent"
+            ],
+            [
+              13,
+              116,
+              "transparent"
+            ],
+            [
+              13,
+              117,
+              "transparent"
+            ],
+            [
+              13,
+              118,
+              "transparent"
+            ],
+            [
+              12,
+              118,
+              "transparent"
+            ],
+            [
+              11,
+              118,
+              "transparent"
+            ],
+            [
+              11,
+              117,
+              "transparent"
+            ],
+            [
+              11,
+              119,
+              "transparent"
+            ],
+            [
+              11,
+              120,
+              "transparent"
+            ],
+            [
+              11,
+              121,
+              "transparent"
+            ],
+            [
+              11,
+              122,
+              "transparent"
+            ],
+            [
+              11,
+              123,
+              "transparent"
+            ],
+            [
+              11,
+              124,
+              "transparent"
+            ],
+            [
+              12,
+              124,
+              "transparent"
+            ],
+            [
+              13,
+              124,
+              "transparent"
+            ],
+            [
+              13,
+              123,
+              "transparent"
+            ],
+            [
+              13,
+              122,
+              "transparent"
+            ],
+            [
+              14,
+              122,
+              "transparent"
+            ],
+            [
+              14,
+              121,
+              "transparent"
+            ],
+            [
+              15,
+              121,
+              "transparent"
+            ],
+            [
+              16,
+              121,
+              "transparent"
+            ],
+            [
+              16,
+              122,
+              "transparent"
+            ],
+            [
+              16,
+              123,
+              "transparent"
+            ],
+            [
+              16,
+              124,
+              "transparent"
+            ],
+            [
+              15,
+              124,
+              "transparent"
+            ],
+            [
+              17,
+              124,
+              "transparent"
+            ],
+            [
+              18,
+              124,
+              "transparent"
+            ],
+            [
+              18,
+              123,
+              "transparent"
+            ],
+            [
+              18,
+              122,
+              "transparent"
+            ],
+            [
+              18,
+              121,
+              "transparent"
+            ],
+            [
+              18,
+              120,
+              "transparent"
+            ],
+            [
+              18,
+              119,
+              "transparent"
+            ],
+            [
+              19,
+              119,
+              "transparent"
+            ],
+            [
+              20,
+              119,
+              "transparent"
+            ],
+            [
+              20,
+              118,
+              "transparent"
+            ],
+            [
+              20,
+              117,
+              "transparent"
+            ],
+            [
+              20,
+              116,
+              "transparent"
+            ],
+            [
+              20,
+              115,
+              "transparent"
+            ],
+            [
+              20,
+              114,
+              "transparent"
+            ],
+            [
+              20,
+              113,
+              "transparent"
+            ],
+            [
+              20,
+              112,
+              "transparent"
+            ],
+            [
+              21,
+              112,
+              "transparent"
+            ],
+            [
+              19,
+              113,
+              "transparent"
+            ],
+            [
+              21,
+              113,
+              "transparent"
+            ],
+            [
+              22,
+              113,
+              "transparent"
+            ],
+            [
+              23,
+              113,
+              "transparent"
+            ],
+            [
+              19,
+              114,
+              "transparent"
+            ],
+            [
+              18,
+              114,
+              "transparent"
+            ],
+            [
+              18,
+              115,
+              "transparent"
+            ],
+            [
+              18,
+              116,
+              "transparent"
+            ],
+            [
+              17,
+              116,
+              "transparent"
+            ],
+            [
+              17,
+              117,
+              "transparent"
+            ],
+            [
+              16,
+              117,
+              "transparent"
+            ],
+            [
+              15,
+              117,
+              "transparent"
+            ],
+            [
+              15,
+              116,
+              "transparent"
+            ],
+            [
+              15,
+              115,
+              "transparent"
+            ],
+            [
+              15,
+              114,
+              "transparent"
+            ],
+            [
+              15,
+              113,
+              "transparent"
+            ],
+            [
+              16,
+              113,
+              "transparent"
+            ],
+            [
+              17,
+              113,
+              "transparent"
+            ],
+            [
+              16,
+              114,
+              "transparent"
+            ],
+            [
+              16,
+              115,
+              "transparent"
+            ],
+            [
+              16,
+              116,
+              "transparent"
+            ],
+            [
+              17,
+              115,
+              "transparent"
+            ],
+            [
+              17,
+              114,
+              "transparent"
+            ],
+            [
+              19,
+              115,
+              "transparent"
+            ],
+            [
+              19,
+              116,
+              "transparent"
+            ],
+            [
+              19,
+              117,
+              "transparent"
+            ],
+            [
+              21,
+              117,
+              "transparent"
+            ],
+            [
+              22,
+              117,
+              "transparent"
+            ],
+            [
+              22,
+              118,
+              "transparent"
+            ],
+            [
+              22,
+              119,
+              "transparent"
+            ],
+            [
+              22,
+              120,
+              "transparent"
+            ],
+            [
+              22,
+              121,
+              "transparent"
+            ],
+            [
+              22,
+              122,
+              "transparent"
+            ],
+            [
+              22,
+              123,
+              "transparent"
+            ],
+            [
+              22,
+              124,
+              "transparent"
+            ],
+            [
+              21,
+              124,
+              "transparent"
+            ],
+            [
+              20,
+              124,
+              "transparent"
+            ],
+            [
+              20,
+              123,
+              "transparent"
+            ],
+            [
+              20,
+              122,
+              "transparent"
+            ],
+            [
+              20,
+              121,
+              "transparent"
+            ],
+            [
+              23,
+              124,
+              "transparent"
+            ],
+            [
+              24,
+              124,
+              "transparent"
+            ],
+            [
+              24,
+              123,
+              "transparent"
+            ],
+            [
+              24,
+              122,
+              "transparent"
+            ],
+            [
+              24,
+              121,
+              "transparent"
+            ],
+            [
+              24,
+              120,
+              "transparent"
+            ],
+            [
+              24,
+              119,
+              "transparent"
+            ],
+            [
+              24,
+              118,
+              "transparent"
+            ],
+            [
+              25,
+              119,
+              "transparent"
+            ],
+            [
+              25,
+              120,
+              "transparent"
+            ],
+            [
+              25,
+              121,
+              "transparent"
+            ],
+            [
+              26,
+              121,
+              "transparent"
+            ],
+            [
+              26,
+              122,
+              "transparent"
+            ],
+            [
+              26,
+              123,
+              "transparent"
+            ],
+            [
+              26,
+              124,
+              "transparent"
+            ],
+            [
+              27,
+              124,
+              "transparent"
+            ],
+            [
+              28,
+              124,
+              "transparent"
+            ],
+            [
+              28,
+              123,
+              "transparent"
+            ],
+            [
+              29,
+              123,
+              "transparent"
+            ],
+            [
+              30,
+              123,
+              "transparent"
+            ],
+            [
+              30,
+              124,
+              "transparent"
+            ],
+            [
+              31,
+              124,
+              "transparent"
+            ],
+            [
+              32,
+              124,
+              "transparent"
+            ],
+            [
+              29,
+              124,
+              "transparent"
+            ],
+            [
+              27,
+              123,
+              "transparent"
+            ],
+            [
+              27,
+              122,
+              "transparent"
+            ],
+            [
+              27,
+              121,
+              "transparent"
+            ],
+            [
+              27,
+              120,
+              "transparent"
+            ],
+            [
+              28,
+              120,
+              "transparent"
+            ],
+            [
+              29,
+              120,
+              "transparent"
+            ],
+            [
+              30,
+              120,
+              "transparent"
+            ],
+            [
+              28,
+              121,
+              "transparent"
+            ],
+            [
+              25,
+              122,
+              "transparent"
+            ],
+            [
+              25,
+              123,
+              "transparent"
+            ],
+            [
+              25,
+              124,
+              "transparent"
+            ],
+            [
+              21,
+              123,
+              "transparent"
+            ],
+            [
+              23,
+              123,
+              "transparent"
+            ],
+            [
+              21,
+              122,
+              "transparent"
+            ],
+            [
+              23,
+              122,
+              "transparent"
+            ],
+            [
+              21,
+              121,
+              "transparent"
+            ],
+            [
+              23,
+              121,
+              "transparent"
+            ],
+            [
+              21,
+              120,
+              "transparent"
+            ],
+            [
+              23,
+              120,
+              "transparent"
+            ],
+            [
+              23,
+              119,
+              "transparent"
+            ],
+            [
+              23,
+              118,
+              "transparent"
+            ],
+            [
+              23,
+              117,
+              "transparent"
+            ],
+            [
+              23,
+              116,
+              "transparent"
+            ],
+            [
+              23,
+              115,
+              "transparent"
+            ],
+            [
+              21,
+              118,
+              "transparent"
+            ],
+            [
+              20,
+              120,
+              "transparent"
+            ],
+            [
+              21,
+              119,
+              "transparent"
+            ],
+            [
+              17,
+              120,
+              "transparent"
+            ],
+            [
+              19,
+              120,
+              "transparent"
+            ],
+            [
+              19,
+              121,
+              "transparent"
+            ],
+            [
+              19,
+              122,
+              "transparent"
+            ],
+            [
+              19,
+              123,
+              "transparent"
+            ],
+            [
+              19,
+              124,
+              "transparent"
+            ],
+            [
+              15,
+              123,
+              "transparent"
+            ],
+            [
+              17,
+              123,
+              "transparent"
+            ],
+            [
+              17,
+              122,
+              "transparent"
+            ],
+            [
+              17,
+              121,
+              "transparent"
+            ],
+            [
+              15,
+              122,
+              "transparent"
+            ],
+            [
+              14,
+              123,
+              "transparent"
+            ],
+            [
+              14,
+              124,
+              "transparent"
+            ],
+            [
+              12,
+              123,
+              "transparent"
+            ],
+            [
+              12,
+              122,
+              "transparent"
+            ],
+            [
+              12,
+              121,
+              "transparent"
+            ],
+            [
+              12,
+              117,
+              "transparent"
+            ],
+            [
+              14,
+              117,
+              "transparent"
+            ],
+            [
+              12,
+              116,
+              "transparent"
+            ],
+            [
+              14,
+              116,
+              "transparent"
+            ],
+            [
+              14,
+              115,
+              "transparent"
+            ],
+            [
+              14,
+              114,
+              "transparent"
+            ],
+            [
+              11,
+              116,
+              "transparent"
+            ],
+            [
+              12,
+              115,
+              "transparent"
+            ],
+            [
+              10,
+              116,
+              "transparent"
+            ],
+            [
+              10,
+              117,
+              "transparent"
+            ],
+            [
+              10,
+              118,
+              "transparent"
+            ],
+            [
+              10,
+              119,
+              "transparent"
+            ],
+            [
+              10,
+              120,
+              "transparent"
+            ],
+            [
+              10,
+              121,
+              "transparent"
+            ],
+            [
+              10,
+              122,
+              "transparent"
+            ],
+            [
+              10,
+              123,
+              "transparent"
+            ],
+            [
+              10,
+              124,
+              "transparent"
+            ],
+            [
+              8,
+              123,
+              "transparent"
+            ],
+            [
+              8,
+              122,
+              "transparent"
+            ],
+            [
+              8,
+              121,
+              "transparent"
+            ],
+            [
+              8,
+              120,
+              "transparent"
+            ],
+            [
+              8,
+              119,
+              "transparent"
+            ],
+            [
+              8,
+              118,
+              "transparent"
+            ],
+            [
+              8,
+              117,
+              "transparent"
+            ],
+            [
+              8,
+              116,
+              "transparent"
+            ],
+            [
+              6,
+              117,
+              "transparent"
+            ],
+            [
+              6,
+              118,
+              "transparent"
+            ],
+            [
+              6,
+              119,
+              "transparent"
+            ],
+            [
+              6,
+              120,
+              "transparent"
+            ],
+            [
+              6,
+              121,
+              "transparent"
+            ],
+            [
+              6,
+              122,
+              "transparent"
+            ],
+            [
+              6,
+              123,
+              "transparent"
+            ],
+            [
+              6,
+              124,
+              "transparent"
+            ],
+            [
+              4,
+              123,
+              "transparent"
+            ],
+            [
+              4,
+              122,
+              "transparent"
+            ],
+            [
+              4,
+              121,
+              "transparent"
+            ],
+            [
+              4,
+              120,
+              "transparent"
+            ],
+            [
+              4,
+              119,
+              "transparent"
+            ],
+            [
+              4,
+              118,
+              "transparent"
+            ],
+            [
+              4,
+              117,
+              "transparent"
+            ],
+            [
+              4,
+              116,
+              "transparent"
+            ],
+            [
+              4,
+              115,
+              "transparent"
+            ],
+            [
+              4,
+              114,
+              "transparent"
+            ],
+            [
+              4,
+              113,
+              "transparent"
+            ],
+            [
+              4,
+              112,
+              "transparent"
+            ],
+            [
+              4,
+              111,
+              "transparent"
+            ],
+            [
+              4,
+              110,
+              "transparent"
+            ],
+            [
+              4,
+              109,
+              "transparent"
+            ],
+            [
+              4,
+              108,
+              "transparent"
+            ]
+          ]
+        },
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 23,
+          "width": 154,
+          "height": 94
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 100,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 128,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/crag-1x1-a.png",
+      "from": "g-crag11-a#1",
+      "width": 80,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 80,
+          "height": 76
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 84,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/crag-1x1-b.png",
+      "from": "g-crag11-a#2",
+      "width": 80,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 44,
+          "width": 80,
+          "height": 84
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 92,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/crag-1x1-c.png",
+      "from": "g-crag11-a#3",
+      "width": 80,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 46,
+          "width": 80,
+          "height": 82
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 90,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/rounded-2x1-a.png",
+      "from": "g-round21-a#0",
+      "width": 160,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 20,
+          "width": 136,
+          "height": 70
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 78,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/rounded-2x1-b.png",
+      "from": "g-round21-a#1",
+      "width": 160,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 23,
+          "width": 136,
+          "height": 68
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 76,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/rounded-2x1-c.png",
+      "from": "g-round21-a#2",
+      "width": 160,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 25,
+          "width": 136,
+          "height": 63
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 71,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/rounded-1x1-a.png",
+      "from": "g-round11-a#0",
+      "width": 80,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 12,
+          "width": 80,
+          "height": 83
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 91,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/rounded-1x1-b.png",
+      "from": "g-round11-a#3",
+      "width": 80,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 14,
+          "width": 80,
+          "height": 77
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 85,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/foothill-2x1-a.png",
+      "from": "g-foot21-a#1",
+      "width": 160,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 25,
+          "width": 135,
+          "height": 67
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 75,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/foothill-2x1-b.png",
+      "from": "g-foot21-a#2",
+      "width": 160,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 19,
+          "width": 136,
+          "height": 72
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 80,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/foothill-2x1-c.png",
+      "from": "g-foot21-a#3",
+      "width": 160,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 19,
+          "width": 134,
+          "height": 70
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 78,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 160,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/foothill-1x1-a.png",
+      "from": "g-foot11-a#1",
+      "width": 80,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 32,
+          "width": 80,
+          "height": 56
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/foothill-1x1-b.png",
+      "from": "g-foot11-a#3",
+      "width": 80,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 21,
+          "width": 80,
+          "height": 67
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 75,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/mine-1x1-a.png",
+      "from": "g-mine-a#2",
+      "width": 80,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 4,
+          "width": 80,
+          "height": 97
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 101,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/massifs/granite/mine-1x1-b.png",
+      "from": "g-mine-a#0",
+      "width": 80,
+      "height": 104,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 23,
+          "width": 80,
+          "height": 80
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 88,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 80,
+          "height": 104,
+          "anchor": "bottom"
+        }
+      ]
+    }
+  ]
+}
