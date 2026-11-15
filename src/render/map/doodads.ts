@@ -6,10 +6,9 @@
  *
  * Data-driven: DOODADS lists, per ground, what may stand there (an image key
  * with its size, draw scale, weight and whether it lies flat). Today the
- * images are the code-drawn ones of doodad-art.ts and the forest sets' single
- * clumps drawn at half size as lone small trees; the dedicated doodad sprites
- * of the asset bead slot in as more rows (`DOODAD_EXTRA`) without code
- * changes.
+ * images are the dedicated doodad sprites of bead xaj.14 (`DOODAD_EXTRA`),
+ * the code-drawn ones of doodad-art.ts (CODE_DOODAD_SHARE of the weight)
+ * and the forest sets' single clumps drawn at half size as lone small trees.
  *
  * Placement is blue noise: one hashed candidate per DOODAD_GRID-px square of
  * the map, kept with a probability from the ground's density times a slow
@@ -18,7 +17,12 @@
  * with an obstacle or object, or (unless flat) in the middle of a cell where
  * a hero or monster stands. Everything is a pure function of the map.
  */
-import { CELL_PX, FOREST_SETS, GROUND_TERRAINS } from "../../assets/manifest";
+import {
+  CELL_PX,
+  FOREST_SETS,
+  GROUND_TERRAINS,
+  doodadsOf,
+} from "../../assets/manifest";
 import type { GroundTerrain } from "../../assets/manifest";
 import type { GameMap } from "../../core/map/types";
 import { DOODAD_ART_VARIANTS, doodadArt } from "./doodad-art";
@@ -86,14 +90,47 @@ export const DOODAD_DENSITY: Readonly<Record<GroundTerrain, number>> = {
   wasteland: 1.15,
 };
 
+/** Share of each ground's doodads drawn from the code-drawn placeholders. */
+export const CODE_DOODAD_SHARE = 0.4;
+
+/** Dedicated doodad sprites lying flat on the ground (may sit under a unit). */
+const FLAT_SPRITES: ReadonlySet<string> = new Set([
+  "flowers",
+  "leaves",
+  "ash",
+  "crater",
+]);
+
 /**
- * Extra rows per ground: dedicated doodad sprites from the manifest (asset
- * bead border_marches-xaj.15) go here, e.g. `{ key: "doodad-grass-bush-a",
- * w: 32, h: 28, scale: 1, weight: 2, flat: false }`.
+ * Extra rows per ground: the dedicated doodad sprites of bead xaj.14
+ * (`doodadsOf`), sharing 1 - CODE_DOODAD_SHARE of the ground's weight.
  */
 export const DOODAD_EXTRA: Readonly<
   Record<GroundTerrain, readonly DoodadSpec[]>
-> = { grass: [], jungle: [], steppe: [], badlands: [], wasteland: [] };
+> = Object.fromEntries(
+  GROUND_TERRAINS.map((ground) => {
+    const list = doodadsOf(ground);
+    const total = Object.values(KIND_WEIGHTS[ground]).reduce(
+      (sum: number, w) => sum + (w ?? 0),
+      0,
+    );
+    const each =
+      list.length === 0
+        ? 0
+        : (total * (1 - CODE_DOODAD_SHARE)) / CODE_DOODAD_SHARE / list.length;
+    return [
+      ground,
+      list.map((d): DoodadSpec => ({
+        key: d.key,
+        w: d.w,
+        h: d.h,
+        scale: 1,
+        weight: each,
+        flat: FLAT_SPRITES.has(d.kind),
+      })),
+    ];
+  }),
+) as Record<GroundTerrain, DoodadSpec[]>;
 
 /** Scale of a forest clump drawn as a lone small tree. */
 export const DOODAD_TREE_SCALE = 0.48;

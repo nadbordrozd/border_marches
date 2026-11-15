@@ -5,8 +5,11 @@ import {
   objectEntries,
   TOWN_SEAT_PX,
   terrainEntries,
+  town3x2Asset,
   townAsset,
 } from "../../src/render/map/scene.ts";
+import { createMap } from "../../src/core/map/types.ts";
+import type { MapObject } from "../../src/core/map/types.ts";
 import type { SceneEntry } from "../../src/render/map/scene.ts";
 import { ALL_ASSETS } from "../../src/assets/manifest.ts";
 import { buildSmallMap } from "../fixtures/small-map.ts";
@@ -70,16 +73,52 @@ describe("object entries", () => {
   const map = buildSmallMap();
   const entries = objectEntries(map.objects);
 
-  it("draws the town bottom-centred over its footprint", () => {
-    const town = map.objects.find((o) => o.kind === "town")!;
+  it("draws a growing town bottom-centred over its footprint", () => {
+    const full = map.objects.find((o) => o.kind === "town")!;
+    const town = { ...full, data: { ...full.data, level: 1 } };
     const art = townAsset(town);
-    const entry = entries.find((e) => e.objectId === town.id)!;
+    const entry = objectEntries([town]).find((e) => e.objectId === town.id)!;
     const sprite = entry.sprites[0]!;
+    expect(sprite.key).toBe(art.key);
     const centre = sprite.dx + (art.ground.left + art.ground.right) / 2;
     expect(Math.abs(centre - (3 + 3 / 2) * 80)).toBeLessThanOrEqual(1);
     expect(sprite.dy + art.ground.contactY).toBe(5 * 80 - TOWN_SEAT_PX);
     // Sorted at the footprint's bottom row.
     expect(entry.row).toBe(4);
+  });
+
+  it("draws a full 3x2 town with its 3x2 sprite on the footprint", () => {
+    const town = map.objects.find((o) => o.kind === "town")!;
+    const art = town3x2Asset(town)!;
+    expect(art).not.toBeNull();
+    const entry = entries.find((e) => e.objectId === town.id)!;
+    const sprite = entry.sprites[0]!;
+    expect(sprite.key).toBe(art.key);
+    expect([sprite.dx, sprite.dy]).toEqual([3 * 80, 3 * 80 - art.up]);
+    expect(entry.row).toBe(4);
+    expect(town3x2Asset({ ...town, data: { ...town.data, level: 2 } })).toBe(
+      null,
+    );
+  });
+
+  it("draws an ore mine as the mine piece of the rock round it", () => {
+    const m = createMap(4, 3, 1);
+    for (const c of m.cells) c.terrain = "wasteland";
+    m.cells[1]!.obstacle = "mountain";
+    const mine: MapObject = {
+      id: "mine-ore-1",
+      kind: "mine",
+      x: 1,
+      y: 2,
+      footprint: { w: 1, h: 2 },
+      blocked: [[1, 1]],
+      data: { resource: "ore" },
+    };
+    const sprite = objectEntries([mine], m)[0]!.sprites[0]!;
+    expect(sprite.key).toMatch(/^massif-basalt-mine-1x1-/);
+    expect([sprite.dx, sprite.dy + sprite.sh]).toEqual([80, 160]);
+    // Without the map: the imported mined mountain, as before.
+    expect(objectEntries([mine])[0]!.sprites[0]!.key).toBe("mountain-mine-a");
   });
 
   it("maps creatures to unit sprites and draws them on their cell", () => {

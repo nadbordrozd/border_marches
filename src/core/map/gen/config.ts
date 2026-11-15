@@ -63,6 +63,12 @@ export interface GenConfig {
   borders: {
     /** Extra depth (cells) of the range on its spine side, at most. */
     spineExtra: number;
+    /**
+     * Least depth (cells) of a mountain range on its spine side, so a
+     * border range is at least two cells deep where its zone has room
+     * (bead xaj.15: a one-cell line reads as one rock pasted in a column).
+     */
+    spineMin: number;
     /** Depth (cells) of the range on the other side, at most. */
     otherDepth: number;
     /** Feature size of the thickness noise. */
@@ -199,6 +205,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
 
   borders: {
     spineExtra: 1.5,
+    spineMin: 2.5,
     otherDepth: 2.0,
     thicknessScale: 5,
     typeScale: 9,

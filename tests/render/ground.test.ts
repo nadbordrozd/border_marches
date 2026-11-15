@@ -9,6 +9,7 @@ import {
   edgeDistance,
   GROUND_RANK,
   paintGround,
+  ROCK_BASE,
   spillReach,
   SPILL,
 } from "../../src/render/map/ground.ts";
@@ -152,5 +153,29 @@ describe("paintFog", () => {
   it("returns false where nothing is fog", () => {
     const out = new Uint8ClampedArray(80 * 80 * 4);
     expect(paintFog(() => true, 4, 4, 0, 0, 80, 80, out)).toBe(false);
+  });
+});
+
+describe("rock base", () => {
+  it("marks every mountain cell with its range's palette", () => {
+    const map = createMap(5, 5, 1);
+    map.cells.forEach((c) => (c.terrain = "wasteland"));
+    for (const i of [6, 7, 8, 11, 12, 13]) map.cells[i]!.obstacle = "mountain";
+    const layout = buildGroundLayout(map);
+    for (let i = 0; i < 25; i += 1)
+      expect(layout.rockPalette[i]).toBe(
+        map.cells[i]!.obstacle === "mountain" ? 3 : 0,
+      );
+  });
+
+  it("paints the shadowed rock deep inside a range", () => {
+    const map = createMap(5, 5, 1);
+    map.cells.forEach((c) => (c.obstacle = "mountain"));
+    const layout = buildGroundLayout(map);
+    const out = new Uint8ClampedArray(80 * 80 * 4);
+    paintGround(layout, SOURCES, 160, 160, 80, 80, out);
+    // The middle cell's centre: mostly the granite base tone.
+    const o = (40 * 80 + 40) * 4;
+    expect(Math.abs((out[o] ?? 0) - ROCK_BASE.tones[0][0])).toBeLessThan(40);
   });
 });

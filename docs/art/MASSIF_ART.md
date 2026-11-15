@@ -4,14 +4,15 @@ New adventure-map art made with the studio pipeline ([PIPELINE.md](PIPELINE.md))
 in the inherited Bold chibi direction ([ART_DIRECTION.md](ART_DIRECTION.md)).
 The target, in the user's words: "all the mountain ranges look unique ...
 cleverly connected so that no matter the shape of the mountain range it looks
-like a coherent whole and not like the same rock sprite pasted 20 times". The
-captures of the map before this bead are
-[`screens/map-seed1-M-z075.png`](screens/map-seed1-M-z075.png) and
-[`screens/map-ranges-z1.png`](screens/map-ranges-z1.png): every range is a
-field of near-identical snow-capped cones.
+like a coherent whole and not like the same rock sprite pasted 20 times".
+Before this bead every range was a field of near-identical snow-capped cones.
 
-Nothing is wired into the renderer here (bead `xaj.15` does that); the art,
-its manifest entries and review evidence are.
+The art is wired into the renderer by bead `xaj.15` (see
+[Wiring](#wiring-bead-xaj15) at the end); the captures
+[`screens/map-seed1-M-z075.png`](screens/map-seed1-M-z075.png),
+[`screens/map-ranges-z1.png`](screens/map-ranges-z1.png) and
+[`screens/map-massif-seed3-z1.png`](screens/map-massif-seed3-z1.png) show
+the result.
 
 ## What was made
 
@@ -202,11 +203,52 @@ per-call cost (`usd: null` in `art/costs.jsonl`).
 
 ## Follow-ups
 
-- Wire the pieces (bead `xaj.15`): packing that prefers 3x2 and 2x2 massifs
-  inside a range, ridges on its rows, foothills and rounded pieces on the
-  rim, palette by the range's ground, back-fill with 1x1 low pieces, and no
-  two neighbours of one kind with the same variant.
-- A 1x1 tall piece per palette (a single peak rising 48 px) does not exist
-  yet; runs of one cell with rock behind fall back to crags.
-- Doodad strewing in the decoration layer, kept away from cell centres.
-- Town entry cells and shadows for the 3x2 towns.
+- Done in `xaj.15` (below): the packing, palettes, back-fill, doodads and
+  the 3x2 town sprites.
+- A 1x1 tall piece per palette (a single peak rising 48 px) and 1x2
+  vertical ridge pieces do not exist yet; a one-cell-wide north-south run
+  is drawn with low singles and joint fills.
+- Town entry cells for the 3x2 towns.
+
+## Wiring (bead xaj.15)
+
+`src/render/map/massif.ts` (`packRanges`) covers every Mountain cell
+exactly, range by range (8-connected), as a pure function of the range's
+own cells, packed over the whole map so nothing changes on reveal:
+
+- **Palette** per cell: the majority of `MASSIF_PALETTE_TERRAINS` over the
+  range's cells within 4 cells (a small range takes its majority ground, a
+  long border range changes palette with its ground); patches under 4
+  cells join their surroundings. No piece spans two palettes.
+- **Massifs** (3x2, 2x2) first, greedily by a score that likes 3 columns,
+  rock against the vertical sides and a coordinate hash. Sandstone massifs
+  (four tall buttes of much the same silhouette) need a higher score and a
+  ring of lower rock round them, so they are landmarks, not the bulk.
+- **Rows**: the remaining run of each row is cut by dynamic programming
+  into 3x1 and 2x1 ridges and singles (long pieces liked, a seam under a
+  seam of the row behind disliked). A 2x1 on the back rim, in front of a
+  tall piece of the same columns (a saddle in a north-south column) or at
+  the front is sometimes a low rounded or foothill hump. Singles are low
+  1x1 pieces (granite crags are not used: they are darker than the set).
+- **Variants**: a hashed pick that avoids the sprites within 3 columns and
+  a row of the piece.
+- **Paint over an open cell** behind a piece is at most 32 px
+  (`OPEN_RISE_MAX`) and is drawn in the foreground at the piece's top row,
+  so it covers the feet of a hero behind the range, never his cell centre;
+  bodies sort with their bottom row.
+- **Fills**: a low 1x1 piece half a cell off the grid on every joint where
+  four range cells meet (or two cells of a one-cell column), drawn behind
+  the row in front; and low boulders straddling the foot of every open
+  cliff side of a massif or ridge, 22 px into the open cell, drawn in
+  front of the piece.
+- **Rock base** (`ground.ts`): deep inside a range the scree's rock floor
+  turns into the palette's shadowed rock, so a notch between pieces reads
+  as a crevice of the same mountain.
+- Ore mines draw the palette's mine piece on their blocked cell; a 3x2 town
+  at full growth (level 3 or no level) draws its 3x2 sprite, a smaller one
+  the imported camp of its level; the 26 doodads share 60% of each
+  ground's doodad weight with the code-drawn ones.
+- The generator (`gen/borders.ts`) keeps a mountain spine at least 2.5
+  cells deep on its spine side and widens one-cell-wide columns where the
+  zone has room (one-cell-wide columns: 7.3% of mountain cells before, 2.9%
+  after, seeds 1-20 size M).

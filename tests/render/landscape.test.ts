@@ -34,6 +34,7 @@ import {
 } from "../../src/render/map/scene.ts";
 import {
   ALL_ASSETS,
+  DOODAD_ASSETS,
   CELL_PX,
   FOREST_SETS,
   RESOURCE_MINES,
@@ -250,6 +251,15 @@ describe("doodads", () => {
         if (Math.hypot(ax - bx, ay - by) < DOODAD_GAP / 3) close += 1;
       }
     expect(close).toBeLessThan(placed.length * 0.02);
+  });
+
+  it("strews every dedicated doodad sprite on its own ground", () => {
+    for (const doodad of DOODAD_ASSETS) {
+      const spec = doodadSpecs()[doodad.terrain].find(
+        (s) => s.key === doodad.key,
+      );
+      expect(spec?.weight).toBeGreaterThan(0);
+    }
   });
 
   it("names only manifest images or code-drawn ones, all with pixels", () => {

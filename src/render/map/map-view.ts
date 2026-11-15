@@ -315,7 +315,7 @@ export function createMapView(
   const rebuildForeground = (): void => {
     const entries: SceneEntry[] = [
       ...terrainForeground,
-      ...objectEntries(objects),
+      ...objectEntries(objects, map ?? undefined),
     ];
     for (const hero of heroes) {
       const key = hero.unit ?? DEFAULT_HERO;

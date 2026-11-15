@@ -1,130 +1,220 @@
 import { describe, expect, it } from "vitest";
 import {
-  massifCells,
-  packMassif,
-  segmentRun,
+  OPEN_RISE_MAX,
+  cutRun,
+  packRanges,
+  paletteOf,
 } from "../../src/render/map/massif.ts";
-import type { MassifPlacement } from "../../src/render/map/massif.ts";
-import { MASSIF_COUNTS } from "../../src/render/map/scene.ts";
+import type { RangeCover, RangePiece } from "../../src/render/map/massif.ts";
+import { massifEntries } from "../../src/render/map/scene.ts";
 import { createMap } from "../../src/core/map/types.ts";
-import { buildSmallMap } from "../fixtures/small-map.ts";
+import type { GameMap, Terrain } from "../../src/core/map/types.ts";
+import { generateMap } from "../../src/core/map/generate.ts";
 
-const block = (w: number, h: number, x0 = 3, y0 = 2): [number, number][] => {
+/** A map from rows of "M" (mountain) and "." over one ground. */
+function mapOf(rows: readonly string[], ground: Terrain = "grass"): GameMap {
+  const map = createMap(rows[0]!.length, rows.length, 1);
+  rows.forEach((row, y) =>
+    [...row].forEach((ch, x) => {
+      const cell = map.cells[y * map.width + x]!;
+      cell.terrain = ground;
+      if (ch === "M") cell.obstacle = "mountain";
+    }),
+  );
+  return map;
+}
+
+const cellsOf = (p: RangePiece): [number, number][] => {
   const out: [number, number][] = [];
-  for (let y = y0; y < y0 + h; y += 1)
-    for (let x = x0; x < x0 + w; x += 1) out.push([x, y]);
+  for (let r = 0; r < p.asset.rows; r += 1)
+    for (let c = 0; c < p.asset.cols; c += 1) out.push([p.x + c, p.y + r]);
   return out;
 };
 
-const covered = (pieces: MassifPlacement[]): string[] =>
-  pieces
-    .flatMap((p) =>
-      Array.from({ length: p.columns }, (_, c) => `${p.x + c},${p.y}`),
-    )
-    .sort();
+function expectExactCover(map: GameMap, cover: RangeCover): void {
+  const seen = new Map<number, number>();
+  for (const p of cover.pieces)
+    for (const [x, y] of cellsOf(p)) {
+      const i = y * map.width + x;
+      expect(map.cells[i]?.obstacle).toBe("mountain");
+      seen.set(i, (seen.get(i) ?? 0) + 1);
+    }
+  const mountains = map.cells.filter((c) => c.obstacle === "mountain").length;
+  expect(seen.size).toBe(mountains);
+  for (const n of seen.values()) expect(n).toBe(1);
+}
 
-describe("packMassif", () => {
-  it("covers every cell exactly once", () => {
-    const cells = block(5, 4);
-    const pieces = packMassif(cells, MASSIF_COUNTS);
-    expect(covered(pieces)).toEqual(cells.map(([x, y]) => `${x},${y}`).sort());
-  });
+const BLOCK = [
+  "............",
+  "..MMMMMMMM..",
+  ".MMMMMMMMMM.",
+  ".MMMMMMMMMM.",
+  "..MMMMMMMM..",
+  "...MMMMMM...",
+  "............",
+];
 
-  it("is deterministic and independent of input order", () => {
-    const cells = block(6, 3);
-    const a = packMassif(cells, MASSIF_COUNTS);
-    const b = packMassif([...cells].reverse(), MASSIF_COUNTS);
-    expect(b).toEqual(a);
-  });
-
-  it("makes a piece tall only when every cell above it is mountain", () => {
-    const cells: [number, number][] = [
-      [2, 1],
-      [3, 1],
-      [2, 2],
-      [3, 2],
-      [4, 2],
-      [3, 3],
-      [4, 3],
-      [5, 3],
-    ];
-    const set = new Set(cells.map(([x, y]) => `${x},${y}`));
-    for (const p of packMassif(cells, MASSIF_COUNTS)) {
-      const above = Array.from({ length: p.columns }, (_, c) =>
-        set.has(`${p.x + c},${p.y - 1}`),
-      );
-      expect(p.tall).toBe(above.every(Boolean));
+describe("packRanges", () => {
+  it("covers every mountain cell exactly once", () => {
+    for (const rows of [
+      BLOCK,
+      ["M.M.M", ".M.M.", "MMMMM"],
+      ["MM...", ".MM..", "..MM.", "...MM"],
+      ["M", "M", "M", "M"],
+    ]) {
+      const map = mapOf(rows);
+      expectExactCover(map, packRanges(map));
+    }
+    for (const seed of [1, 2, 3]) {
+      const map = generateMap(seed, { size: "M" });
+      expectExactCover(map, packRanges(map));
     }
   });
 
-  it("lays ridges like bricks in a solid block", () => {
-    const pieces = packMassif(block(6, 3), MASSIF_COUNTS);
-    for (const p of pieces.filter((q) => q.columns === 2 && q.y > 2)) {
-      const sameAbove = pieces.some(
-        (q) => q.columns === 2 && q.y === p.y - 1 && q.x === p.x,
-      );
-      expect(sameAbove).toBe(false);
-    }
+  it("is deterministic", () => {
+    const map = generateMap(5, { size: "M" });
+    expect(packRanges(map)).toEqual(packRanges(map));
   });
 
-  it("never repeats the variant of its west neighbour of the same kind", () => {
-    const pieces = packMassif(block(12, 1), MASSIF_COUNTS);
-    for (let i = 1; i < pieces.length; i += 1) {
-      const a = pieces[i - 1]!;
-      const b = pieces[i]!;
-      if (a.columns === b.columns && a.tall === b.tall)
-        expect(b.variant).not.toBe(a.variant);
-    }
-  });
-});
-
-describe("segmentRun", () => {
-  it("gives a diagonal staircase tall singles where rock is behind", () => {
-    // Row 5 of a staircase: rock above columns 12 and 13 only.
-    const cut = segmentRun(12, 5, 3, (x) => x === 12 || x === 13, new Set());
-    const tallCells = cut.filter(([x, columns]) =>
-      Array.from({ length: columns }, (_, c) => x + c).every(
-        (cx) => cx === 12 || cx === 13,
-      ),
-    );
-    expect(tallCells.reduce((sum, [, c]) => sum + c, 0)).toBe(2);
-  });
-
-  it("cuts a run exactly", () => {
-    for (let length = 1; length <= 9; length += 1) {
-      const cut = segmentRun(0, 0, length, () => false, new Set());
-      expect(cut.reduce((sum, [, c]) => sum + c, 0)).toBe(length);
-      let x = 0;
-      for (const [at, c] of cut) {
-        expect(at).toBe(x);
-        x += c;
+  it("tiles a solid range with massifs and ridges, not one piece", () => {
+    const map = mapOf(BLOCK);
+    const cover = packRanges(map);
+    const kinds = new Set(cover.pieces.map((p) => p.asset.kind));
+    expect(kinds.has("massif")).toBe(true);
+    expect(cover.pieces.some((p) => p.asset.cols === 3)).toBe(true);
+    // No two touching pieces are the same sprite.
+    for (const a of cover.pieces)
+      for (const b of cover.pieces) {
+        if (a === b || a.asset.key !== b.asset.key) continue;
+        const touch = cellsOf(a).some(([ax, ay]) =>
+          cellsOf(b).some(
+            ([bx, by]) => Math.abs(ax - bx) + Math.abs(ay - by) === 1,
+          ),
+        );
+        expect(touch).toBe(false);
       }
+  });
+
+  it("takes the palette of the range's ground and never mixes palettes in a piece", () => {
+    const desert = packRanges(mapOf(BLOCK, "badlands"));
+    for (const p of desert.pieces) expect(p.asset.palette).toBe("sandstone");
+    const ash = packRanges(mapOf(BLOCK, "wasteland"));
+    for (const p of ash.pieces) expect(p.asset.palette).toBe("basalt");
+    expect(paletteOf("jungle")).toBe("granite");
+    // A long range half on grass, half on wasteland.
+    const map = mapOf([
+      "..................",
+      ".MMMMMMMMMMMMMMMM.",
+      ".MMMMMMMMMMMMMMMM.",
+      "..................",
+    ]);
+    map.cells.forEach((c, i) => {
+      if (i % map.width >= 9) c.terrain = "wasteland";
+    });
+    const cover = packRanges(map);
+    const palettes = new Set(cover.pieces.map((p) => p.asset.palette));
+    expect(palettes).toEqual(new Set(["granite", "basalt"]));
+    for (const p of cover.pieces)
+      for (const [x, y] of cellsOf(p))
+        expect(cover.palette.get(y * map.width + x)).toBe(p.asset.palette);
+  });
+
+  it("raises at most OPEN_RISE_MAX px over an open cell behind", () => {
+    for (const seed of [1, 2, 3, 4]) {
+      const map = generateMap(seed, { size: "M" });
+      for (const p of packRanges(map).pieces)
+        for (let c = 0; c < p.asset.cols; c += 1) {
+          const y = p.y - 1;
+          if (y < 0) continue;
+          const behind = map.cells[y * map.width + p.x + c];
+          if (behind?.obstacle !== "mountain")
+            expect(p.asset.paintUp).toBeLessThanOrEqual(OPEN_RISE_MAX);
+        }
+    }
+  });
+
+  it("does not change a range when a cell outside it changes", () => {
+    const rows = [
+      "..............",
+      ".MMMM.........",
+      ".MMMMM........",
+      "..MMM.........",
+      "..............",
+      "..........MM..",
+    ];
+    const a = mapOf(rows);
+    const b = mapOf(rows);
+    b.cells[5 * b.width + 12]!.obstacle = "none";
+    b.cells[0 * b.width + 10]!.terrain = "wasteland";
+    const left = (cover: RangeCover) =>
+      cover.pieces.filter((p) => p.x < 7).map((p) => ({ ...p }));
+    expect(left(packRanges(b))).toEqual(left(packRanges(a)));
+  });
+
+  it("keeps a mountain under an object a low single", () => {
+    const map = mapOf(["MMM", "MMM"]);
+    const cover = packRanges(map, new Set([1]));
+    const piece = cover.pieceAt.get(1)!;
+    expect(piece.asset.cols).toBe(1);
+    expect(piece.asset.rows).toBe(1);
+    expect(piece.asset.up).toBe(24);
+  });
+
+  it("back-fills joints inside the range only", () => {
+    const map = mapOf(BLOCK);
+    const cover = packRanges(map);
+    expect(cover.fills.length).toBeGreaterThan(0);
+    for (const fill of cover.fills.filter((f) => f.front !== true)) {
+      // The fill's foot stands inside the range.
+      const footX = Math.floor((fill.dx + fill.asset.w / 2) / 80);
+      const footY = Math.floor(
+        (fill.dy + fill.asset.h - fill.asset.footGap - 1) / 80,
+      );
+      expect(map.cells[footY * map.width + footX]?.obstacle).toBe("mountain");
     }
   });
 });
 
-describe("massifCells", () => {
-  it("gives every mountain cell of the fixture a body or a share of one", () => {
-    const map = buildSmallMap();
-    const cells = massifCells(map, MASSIF_COUNTS);
-    const mountains = map.cells.filter((c) => c.obstacle === "mountain").length;
-    const bodies = [...cells.values()].flatMap((c) => c.bodies);
-    expect(bodies.reduce((sum, p) => sum + p.columns, 0)).toBe(mountains);
-    expect(massifCells(map, MASSIF_COUNTS)).toEqual(cells);
+describe("cutRun", () => {
+  it("cuts a run exactly", () => {
+    for (let length = 1; length <= 11; length += 1) {
+      const cut = cutRun(
+        0,
+        3,
+        length,
+        () => true,
+        () => false,
+      );
+      expect(cut.reduce((sum: number, c) => sum + c, 0)).toBe(length);
+    }
   });
 
-  it("keeps a featured mountain cell a low single", () => {
-    const map = createMap(4, 3, 1);
-    for (const i of [1, 2, 5, 6]) map.cells[i]!.obstacle = "mountain";
-    const featured = new Set([1]);
-    const cells = massifCells(map, MASSIF_COUNTS, featured);
-    const pieces = [...cells.values()].flatMap((c) => c.bodies);
-    const feature = pieces.find((p) => p.x === 1 && p.y === 0);
-    expect(feature).toMatchObject({ columns: 1, tall: false });
-    // The piece south of the feature stays low.
-    const south = pieces.find(
-      (p) => p.y === 1 && p.x <= 1 && p.x + p.columns > 1,
+  it("uses no 3x1 ridge where one is not allowed", () => {
+    const cut = cutRun(
+      0,
+      0,
+      9,
+      (_x, cols) => cols === 2,
+      () => false,
     );
-    expect(south?.tall).toBe(false);
+    expect(cut.includes(3)).toBe(false);
+  });
+});
+
+describe("massifEntries", () => {
+  it("draws the paint over open ground in the foreground at the piece's top row", () => {
+    const map = mapOf(["....", ".MM.", ".MM.", "...."]);
+    const entries = massifEntries(map, new Set());
+    const bands = entries.filter((e) => e.pass === "FOREGROUND");
+    expect(bands.length).toBeGreaterThan(0);
+    for (const band of bands) {
+      expect(band.row).toBe(1);
+      for (const s of band.sprites) expect(s.dy + s.sh).toBe(80);
+    }
+    // Bodies sort with their bottom row.
+    const bodies = entries.filter(
+      (e) => e.pass === "TALL_BODY" && e.layer === 1,
+    );
+    expect(Math.max(...bodies.map((e) => e.row))).toBe(2);
   });
 });

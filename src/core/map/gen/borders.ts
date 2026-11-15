@@ -7,7 +7,9 @@
  * every cell of that zone with a neighbour (8-way) in the other zone. Any
  * step from one zone into the other starts on such a cell, so the spine alone
  * closes the border; noise then thickens the band on both sides (1-3 cells
- * in all, with an occasional 4) so it reads as a range, not a line.
+ * in all, with an occasional 4) so it reads as a range, not a line. A
+ * mountain band is at least `spineMin` deep on the spine side (two cells,
+ * three across a diagonal), so a range is never a one-cell line of rocks.
  */
 import { at, chamferDistance, N4, N8, noiseField } from "./grid.ts";
 import { O, T, isOpen, stageRng, stageSalt } from "./state.ts";
@@ -92,12 +94,13 @@ export function buildBorders(st: GenState): void {
       const holder = spineSide.get(pairKey(a, b)) === a;
       const ta = stretch(at(thickA, i));
       const tb = stretch(at(thickB, i));
+      const kind = stretch(at(typeN, i)) < share(a, b) ? O.mountain : O.forest;
+      // A mountain spine is never a one-cell line where there is room.
+      const least = kind === O.mountain ? bc.spineMin : 0;
       const limit = holder
-        ? 1.5 + bc.spineExtra * ta
+        ? Math.max(least, 1.5 + bc.spineExtra * ta)
         : bc.otherDepth * (tb * 1.6 - 0.3);
-      if (spine || d <= limit) {
-        type = stretch(at(typeN, i)) < share(a, b) ? O.mountain : O.forest;
-      }
+      if (spine || d <= limit) type = kind;
       if (spine) st.spine[i] = 1;
     }
     if (type === 0 && bc.edgeDepth > 0) {
@@ -117,6 +120,40 @@ export function buildBorders(st: GenState): void {
   }
 
   addSpurs(st, foreignDist);
+  widenLines(st);
+}
+
+/**
+ * A mountain cell with no mountain west or east of it (a one-cell-wide
+ * column of the frame, a spur, a diagonal staircase) takes a second cell
+ * beside it where its zone has room, so a range is never a single column
+ * of rocks (bead xaj.15). The side is the open one, a coin when both are.
+ */
+function widenLines(st: GenState): void {
+  const { g } = st;
+  const rng = stageRng(st, "widen");
+  for (let i = 0; i < g.n; i++) {
+    if (at(st.obstacle, i) !== O.mountain) continue;
+    const x = g.x(i);
+    const y = g.y(i);
+    const side = (dx: number): number =>
+      g.inside(x + dx, y) ? g.idx(x + dx, y) : -1;
+    const west = side(-1);
+    const east = side(1);
+    if (west >= 0 && at(st.obstacle, west) === O.mountain) continue;
+    if (east >= 0 && at(st.obstacle, east) === O.mountain) continue;
+    const zone = at(st.zone, i);
+    const options = [west, east].filter(
+      (j) =>
+        j >= 0 &&
+        canGrow(st, j, zone) &&
+        at(st.spine, j) === 0 &&
+        at(st.terrain, j) !== T.water,
+    );
+    const pick =
+      options.length === 2 ? options[rng.chance(0.5) ? 0 : 1] : options[0];
+    if (pick !== undefined) st.obstacle[pick] = O.mountain;
+  }
 }
 
 /** Short ridges or tongues of forest reaching from a band into its zone. */

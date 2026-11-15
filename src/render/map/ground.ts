@@ -36,6 +36,7 @@ import { CELL_PX } from "../../assets/manifest";
 import type { GroundTerrain } from "../../assets/manifest";
 import type { GameMap } from "../../core/map/types";
 import { hash4 } from "./hash";
+import { PALETTES, components, paletteOf, rangePalettes } from "./massif";
 import {
   ROAD_COLOURS,
   ROAD_PIXEL,
@@ -390,6 +391,23 @@ export const SCREE = {
   pebbleShare: 0.035,
 } as const;
 
+/**
+ * The rock base deep inside a range (bead xaj.15): where the mountain field
+ * is high, the scree's rock floor turns into the shadowed rock of the
+ * range's palette (massif.ts), so what shows in the notches between massif
+ * pieces reads as a crevice of the same mountain, not as open ground, and
+ * the pieces read as one mass. Index by palette (PALETTES order).
+ */
+export const ROCK_BASE = {
+  threshold: 0.82,
+  alpha: 0.88,
+  tones: [
+    [96, 94, 102],
+    [158, 98, 64],
+    [52, 50, 60],
+  ],
+} as const;
+
 /** The scree tones over one ground. */
 export interface ScreePalette {
   readonly dust: readonly [number, number, number];
@@ -473,6 +491,51 @@ export function screeAt(f: number, wx: number, wy: number): 0 | 1 | 2 {
   return f > SCREE.threshold + wave ? 1 : 0;
 }
 
+/** The wavering edge of the rock base, in 2 px blocks. */
+function rockTone(
+  layout: GroundLayout,
+  wx: number,
+  wy: number,
+): [number, number, number] | undefined {
+  // Bilinear over the four nearest cell centres, mountain cells only, so
+  // where two palettes meet inside a range the base fades, never a seam.
+  const fx = wx / CELL - 0.5;
+  const fy = wy / CELL - 0.5;
+  const x0 = Math.floor(fx);
+  const y0 = Math.floor(fy);
+  const tx = fx - x0;
+  const ty = fy - y0;
+  let r = 0;
+  let g = 0;
+  let b = 0;
+  let total = 0;
+  for (let dy = 0; dy <= 1; dy += 1)
+    for (let dx = 0; dx <= 1; dx += 1) {
+      const x = x0 + dx;
+      const y = y0 + dy;
+      if (x < 0 || y < 0 || x >= layout.width || y >= layout.height) continue;
+      const tone =
+        ROCK_BASE.tones[(layout.rockPalette[y * layout.width + x] ?? 0) - 1];
+      if (tone === undefined) continue;
+      const w = (dx === 0 ? 1 - tx : tx) * (dy === 0 ? 1 - ty : ty);
+      r += tone[0] * w;
+      g += tone[1] * w;
+      b += tone[2] * w;
+      total += w;
+    }
+  if (total <= 0) return undefined;
+  return [Math.round(r / total), Math.round(g / total), Math.round(b / total)];
+}
+
+function rockWave(wx: number, wy: number): number {
+  const bx = (wx >> 1) * 2 + 1;
+  const by = (wy >> 1) * 2 + 1;
+  return (
+    0.05 * Math.sin(TURN * (11 * bx - 7 * by) + 0.9) +
+    0.03 * Math.sin(TURN * (5 * by + 19 * bx) + 2.3)
+  );
+}
+
 /** Per-cell facts the painter reads, computed once per map. */
 export interface GroundLayout {
   readonly width: number;
@@ -499,6 +562,8 @@ export interface GroundLayout {
   readonly mountain: Uint8Array;
   /** 1 when a Mountain lies on the cell or one of its 8 neighbours. */
   readonly nearMountain: Uint8Array;
+  /** On a Mountain cell, 1 + its range's palette index (PALETTES); else 0. */
+  readonly rockPalette: Uint8Array;
 }
 
 /**
@@ -580,6 +645,12 @@ export function buildGroundLayout(
           const j = at(x + dx, y + dy);
           if (j >= 0 && mountain[j] === 1) nearMountain[y * width + x] = 1;
         }
+  const rockPalette = new Uint8Array(n);
+  for (const range of components(width, height, (i) => mountain[i] === 1))
+    for (const [i, p] of rangePalettes(range, width, (j) =>
+      paletteOf(map.cells[j]?.terrain ?? "grass"),
+    ))
+      rockPalette[i] = 1 + PALETTES.indexOf(p);
   const roads: RoadSegment[][] = Array.from({ length: n }, () => []);
   for (const seg of roadSegments(map, roadEnds)) {
     const reach = ROAD_REACH + 1;
@@ -612,6 +683,7 @@ export function buildGroundLayout(
     land,
     mountain,
     nearMountain,
+    rockPalette,
   };
 }
 
@@ -770,6 +842,13 @@ export function paintGround(
               if (tier !== 0 && palette !== undefined) {
                 if (tier === 2) blend(o, palette.rock, SCREE.rockAlpha);
                 else blend(o, palette.dust, SCREE.alpha);
+                if (
+                  tier === 2 &&
+                  field.f > ROCK_BASE.threshold + rockWave(wx, wy)
+                ) {
+                  const base = rockTone(layout, wx + 0.5, wy + 0.5);
+                  if (base !== undefined) blend(o, base, ROCK_BASE.alpha);
+                }
                 const roll = hash4(wx, wy, 0x5c, 1) / 0x100000000;
                 if (roll < SCREE.pebbleShare) put(o, palette.pebble);
                 else if (
