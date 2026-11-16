@@ -128,6 +128,25 @@ describe("canopy placement", () => {
   });
 });
 
+describe("grass woods (bead xaj.27)", () => {
+  it("are calm: no lime takes, autumn only in drifts", () => {
+    expect(TREE_ASSETS.some((t) => t.species === "summer")).toBe(false);
+    let grass = 0;
+    let autumn = 0;
+    for (const seed of [3, 5]) {
+      const map = generateMap(seed, { size: "M" });
+      for (const t of woodsOf(map).trees) {
+        if (!t.key.startsWith("tree-grass-")) continue;
+        grass += 1;
+        if (t.key.startsWith("tree-grass-autumn-")) autumn += 1;
+      }
+    }
+    expect(grass).toBeGreaterThan(500);
+    expect(autumn / grass).toBeGreaterThan(0.03);
+    expect(autumn / grass).toBeLessThan(0.25);
+  });
+});
+
 describe("canopy on a hand-built map", () => {
   const { map, mine } = testMap();
   const { trees } = woodsOf(map);

@@ -40,7 +40,11 @@ import type {
 } from "../../assets/manifest";
 import type { GameMap, MapObject } from "../../core/map/types";
 import { objectBounds, objectCells } from "../../core/map/types";
-import { TREE_SPECIES_WEIGHTS, treesOf } from "../../assets/trees";
+import {
+  TREE_SPECIES_DRIFT,
+  TREE_SPECIES_WEIGHTS,
+  treesOf,
+} from "../../assets/trees";
 import { buildCanopyField, canopyBands, placeCanopy } from "./canopy";
 import type {
   CanopyBand,
@@ -183,6 +187,9 @@ export const TREE_SPECIES: TreeSpeciesTable = Object.fromEntries(
       .map(([name, weight]): TreeSpecies => ({
         name,
         weight,
+        ...(TREE_SPECIES_DRIFT[terrain]?.[name] !== undefined
+          ? { drift: TREE_SPECIES_DRIFT[terrain][name] }
+          : {}),
         sprites: treesOf(terrain, name).map((t) => ({
           key: t.key,
           w: t.w,

@@ -1699,5 +1699,194 @@
         "height": 48
       }
     ]
+  },
+  "badlands-b": {
+    "id": "badlands-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "16841b5d-bce6-4893-bfcd-c0fb6696a2e3",
+    "submittedAt": "2026-11-16T22:39:04.738Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small dense desert juniper or pinyon pine, a compact bushy crown of many leaf clumps with no gaps, the crown as wide as it is tall, each image a different one of these: a round bushy juniper, a pinyon pine with a lumpy rounded crown, a squat juniper with two big leaf masses, an egg-shaped juniper. Muted olive sage green #5e6e44, shadow #3a4630, light #8a9a62 on the left side, a short twisted red-brown trunk #7a4a2e. About two thirds of the image wide and most of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 82602,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one small dense desert juniper or pinyon pine, a compact bushy crown of many leaf clumps with no gaps, the crown as wide as it is tall, each image a different one of these: a round bushy juniper, a pinyon pine with a lumpy rounded crown, a squat juniper with two big leaf masses, an egg-shaped juniper. Muted olive sage green #5e6e44, shadow #3a4630, light #8a9a62 on the left side, a short twisted red-brown trunk #7a4a2e. About two thirds of the image wide and most of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-16T22:40:47.832Z",
+    "usageUsd": 0.08202870331870185,
+    "candidates": [
+      {
+        "file": "badlands-b-0.png",
+        "sha256": "4eb0939e89c15bd4a798fd3dcb70ff99137f2265487b3d55feefdb34bf23e3ff",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-1.png",
+        "sha256": "b1adcf593f1c1e827280556df26a099388e56fcb9d9e6131261ae61cbb3e33e8",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-2.png",
+        "sha256": "8781b97158e2ccd645f15f4e00a41e4f52e3e9d7393772add6fea971e28c50be",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-3.png",
+        "sha256": "8109bd84f1f8698ebf857c717d8fa7e2427e7d333d0fcf2facd405f794cd5ee1",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-4.png",
+        "sha256": "8de522c45a0832d10339379e7fb30aea8453b39b28aa9a735ed1ed133034dd38",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-5.png",
+        "sha256": "ad81f0178d5c1d62cb95537fb38e94dcf76ebb232f15dca925844d01c8de0706",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-6.png",
+        "sha256": "bcca720ffb7a54350ff4ea6d1e5c6f88f897b6e95489dd7c163e17c4e9cb2c50",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-7.png",
+        "sha256": "ef3000e31e1618f2a1d5018f130ec8e0984cd7ade5966c64e2947adfdd778d06",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-8.png",
+        "sha256": "1b96948a3c612152c3c547ab76cddb94bc353b7efd8d6dcb0fd9816c34c3a2c8",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-9.png",
+        "sha256": "5a9bcebcbadc067cd1b8f5d4d92882bd2ca83e841bec6264d776cef7e52c8835",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-10.png",
+        "sha256": "21e9ca5839b8158f2262a6b22cac8df4c6d389c3284d56547fe766d197779759",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-11.png",
+        "sha256": "66d83dc1745a4a7968288d408361be6175074411023d1064db9629a81428f18d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-12.png",
+        "sha256": "0291122cc327ae72bd6ee084426b40a375c6e9d8a60e7ffb8d85860a36da4bc8",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-13.png",
+        "sha256": "2e9a3531d73e7be22ba2bc9d75e91cd9345c6d9f33e22848ec74f3e43f2ab251",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-14.png",
+        "sha256": "ec3a949d39e6c1fa3d10ea33504cdf3d9fff6807cc342e20e94ecd5f518675f4",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-15.png",
+        "sha256": "ee0b63ecbe8d4353295d38536be8f75e665d26a241624f19f56b3b5ebd0540ff",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-16.png",
+        "sha256": "57e6175416887dde9eab31275675c960b2ffaec0f8aa0ea5f48164debd69e4b6",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-17.png",
+        "sha256": "107b9636ce6b93a768058cada714868d69e998658cb5083f6c211f993013834f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-18.png",
+        "sha256": "d62258fee3faff1fe5d0d674876005bbd2c55125e0a5e63e0c29af7164f3d3b1",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-19.png",
+        "sha256": "c5deba5f8278a788cdf15240422e306dfe2516f1730a040141ab6c687d53c74b",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-20.png",
+        "sha256": "f51837037662c12c7460e483f1bbf941b38d35236fc7a96645d81d8bc00adb8c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-21.png",
+        "sha256": "f5bed9492b2236a049b56426865d2cea6989f5bd929fb9fea9757c208f443fa5",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-22.png",
+        "sha256": "c1a2264bb62ddc793abff387ae71cd5f796f77506a243e86e5e3b2cbf1569dd7",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-23.png",
+        "sha256": "8efa2ccc32b78f43ca725c24e8eebfd5309e0dcb30a54a8f2af28d806e1a3d46",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "badlands-b-24.png",
+        "sha256": "e7c71d1cb30286947099ce0401054eac98b0473e6bd632ab30f0bc1f4ce7e79b",
+        "width": 48,
+        "height": 48
+      }
+    ]
   }
 }

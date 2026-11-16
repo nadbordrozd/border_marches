@@ -41,19 +41,6 @@ const TREE_ROWS: readonly (readonly [
   ["grass", "conifer", 15, 25, 37],
   ["grass", "conifer", 16, 26, 36],
   ["grass", "conifer", 17, 22, 35],
-  ["grass", "summer", 1, 37, 38],
-  ["grass", "summer", 2, 31, 30],
-  ["grass", "summer", 3, 28, 29],
-  ["grass", "summer", 4, 24, 34],
-  ["grass", "summer", 5, 27, 35],
-  ["grass", "summer", 6, 30, 33],
-  ["grass", "summer", 7, 35, 32],
-  ["grass", "summer", 8, 30, 33],
-  ["grass", "summer", 9, 36, 38],
-  ["grass", "summer", 10, 35, 32],
-  ["grass", "summer", 11, 33, 25],
-  ["grass", "summer", 12, 38, 28],
-  ["grass", "summer", 13, 36, 36],
   ["grass", "broadleaf", 1, 34, 34],
   ["grass", "broadleaf", 2, 35, 35],
   ["grass", "broadleaf", 3, 24, 33],
@@ -70,18 +57,13 @@ const TREE_ROWS: readonly (readonly [
   ["grass", "autumn", 1, 40, 35],
   ["grass", "autumn", 2, 28, 40],
   ["grass", "autumn", 3, 43, 39],
-  ["grass", "autumn", 4, 32, 35],
-  ["grass", "autumn", 5, 28, 34],
   ["grass", "autumn", 6, 24, 39],
-  ["grass", "autumn", 7, 33, 36],
   ["grass", "autumn", 8, 41, 38],
   ["grass", "autumn", 9, 28, 39],
   ["grass", "autumn", 10, 41, 38],
   ["grass", "autumn", 11, 40, 35],
-  ["grass", "autumn", 12, 26, 39],
   ["grass", "autumn", 13, 26, 39],
   ["grass", "autumn", 14, 38, 37],
-  ["grass", "autumn", 15, 36, 37],
   ["grass", "autumn", 16, 38, 39],
   ["grass", "autumn", 17, 24, 39],
   ["jungle", "palm", 1, 28, 36],
@@ -135,6 +117,17 @@ const TREE_ROWS: readonly (readonly [
   ["badlands", "mesquite", 6, 42, 32],
   ["badlands", "gnarled", 3, 42, 40],
   ["badlands", "juniper", 7, 36, 37],
+  ["badlands", "pinyon", 1, 33, 32],
+  ["badlands", "pinyon", 2, 32, 33],
+  ["badlands", "pinyon", 3, 34, 35],
+  ["badlands", "pinyon", 4, 28, 27],
+  ["badlands", "pinyon", 5, 37, 37],
+  ["badlands", "pinyon", 6, 33, 30],
+  ["badlands", "pinyon", 7, 31, 34],
+  ["badlands", "pinyon", 8, 35, 32],
+  ["badlands", "pinyon", 9, 28, 29],
+  ["badlands", "pinyon", 10, 37, 29],
+  ["badlands", "pinyon", 11, 26, 26],
   ["wasteland", "pine", 1, 24, 40],
   ["wasteland", "deadoak", 1, 28, 39],
   ["wasteland", "snag", 1, 32, 36],
@@ -179,11 +172,23 @@ export const TREE_ASSETS: readonly TreeAsset[] = TREE_ROWS.map(
 export const TREE_SPECIES_WEIGHTS: Readonly<
   Record<GroundTerrain, Readonly<Record<string, number>>>
 > = {
-  grass: { conifer: 5, broadleaf: 2.4, summer: 0.8, autumn: 2 },
+  grass: { conifer: 5, broadleaf: 3, autumn: 5 },
   jungle: { broadleaf: 3, palm: 2.4, banana: 1 },
-  steppe: { oak: 3, birch: 1.4, bent: 1.4 },
-  badlands: { juniper: 3, mesquite: 2, gnarled: 0.8 },
-  wasteland: { deadoak: 3, leafy: 1.6, pine: 2, snag: 1 },
+  steppe: { oak: 3.4, birch: 0.7, bent: 1 },
+  badlands: { juniper: 2, pinyon: 3.2, mesquite: 0.45, gnarled: 0.8 },
+  wasteland: { deadoak: 3, leafy: 1.6, pine: 2, snag: 0.6 },
+};
+
+/**
+ * Clumped species (bead xaj.27, after the Heroes II reference): they grow
+ * only in drifts, where a slow noise over the map rises past the level
+ * given here (canopy.ts `TreeSpecies.drift`), so the autumn trees of the
+ * grass woods come in patches on a calm green base instead of confetti.
+ */
+export const TREE_SPECIES_DRIFT: Readonly<
+  Partial<Record<GroundTerrain, Readonly<Record<string, number>>>>
+> = {
+  grass: { autumn: 0.57 },
 };
 
 /** The trees of one ground and species. */

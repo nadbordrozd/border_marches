@@ -25,6 +25,11 @@
  *   CANOPY.objectRisePx into a cell holding an object.
  * - SPECIES per ground terrain, with weights and slow noise so that kinds
  *   gather in loose patches; the variant is a hash of the tree.
+ * - Bead xaj.27 (closed, calmer woods): per-ground spacing and under-tint
+ *   (CANOPY_GROUND); clumped species (autumn) only in slow-noise drifts;
+ *   blocked neighbours pull the outline inside the wood so it wobbles there
+ *   instead of being clipped along a cell edge; bays near the edge
+ *   (canopyBite); no clearings deep inside the cells (CANOPY.solid).
  *
  * Drawing (scene.ts, map-view.ts): every tree is a TALL_BODY entry sorted by
  * its base, painted into the cached ground chunks; the parts of a row's
@@ -52,6 +57,19 @@ export interface TreeSpecies {
   readonly name: string;
   readonly weight: number;
   readonly sprites: readonly TreeSprite[];
+  /**
+   * A clumped species (bead xaj.27: the autumn trees of the grass woods)
+   * grows only in drifts: where a slow noise rises past this level (0-1).
+   */
+  readonly drift?: number;
+}
+
+/** Per-ground spacing scale of the trunks and strength of the under-tint. */
+export interface CanopyGround {
+  /** Multiplies the exclusion ellipse: below 1 packs crowns closer. */
+  readonly spacing: number;
+  /** Multiplies the under-canopy tint alphas. */
+  readonly tint: number;
 }
 
 export type TreeSpeciesTable = Readonly<
@@ -62,18 +80,22 @@ export const CANOPY = {
   /** Candidate spacing, px. */
   grid: 8,
   /** Half-axes of the exclusion ellipse between trunks, px. */
-  rx: 13,
-  ry: 9,
+  rx: 12,
+  ry: 8,
   /** Highest a crown rises above the top of the wood's northern cells, px. */
   capPx: 40,
   /** Deepest a crown reaches into a cell with an object, px. */
   objectRisePx: 14,
   /** The spill band beyond the region, in field units (1 = a cell). */
-  spillDepth: 0.2,
+  spillDepth: 0.24,
   /** Share of spill-band candidates that may become trees. */
   spillKeep: 0.3,
   /** Share of the spill trees that survive the spacing test. */
   spillThin: 0.4,
+  /** The forest field's value on cells where no tree may stand. */
+  blocked: -2.5,
+  /** Where the forest field passes this, the canopy is always closed. */
+  solid: 0.8,
   /** The region's offset south of the Forest cells, px. */
   shift: 12,
   /** How far (px) a tree looks for the ground whose species it grows. */
@@ -81,18 +103,44 @@ export const CANOPY = {
   /** Wobble of the outline, field units (sum of three waves). */
   wobble: [0.22, 0.12, 0.06],
   /** Amplitude of the noise lobes of the outline, field units. */
-  lobes: 0.22,
+  lobes: 0.26,
+  /**
+   * Bites (bead xaj.27): where a slow noise rises past `biteLevel`, the
+   * outline is pulled in by up to `bite` field units, so a medium wood
+   * loses its rectangle to bays and lobes.
+   */
+  bite: 0.55,
+  biteLevel: 0.56,
+  biteSpacing: CELL * 1.25,
+  /** Spacing of the drift noise of clumped species, px. */
+  driftSpacing: CELL * 1.9,
   /** Depth (px) inside the outline over which the trees thin out. */
   edgeFade: 36,
   /** Share of trees kept right at the outline. */
   edgeKeep: 0.35,
   /** Tint under the canopy: depth (px) of the light rim, alphas. */
   tintRim: 8,
-  tintAlpha: 0.32,
-  tintRimAlpha: 0.16,
+  tintAlpha: 0.4,
+  tintRimAlpha: 0.18,
   /** Inset of the tint from the region's outline, px. */
-  tintInset: 12,
+  tintInset: 14,
+  /** The tint is the region moved this far north, px. */
+  tintLift: 20,
 } as const;
+
+/**
+ * Per-ground density and tint (bead xaj.27): the green woods close into one
+ * canopy; badlands scrub packs tighter over its bright red earth, which needs
+ * a stronger shade to stop reading as gaps; the dead wasteland trees are
+ * see-through, so they keep their spacing and a lighter shade.
+ */
+export const CANOPY_GROUND: Readonly<Record<GroundTerrain, CanopyGround>> = {
+  grass: { spacing: 0.86, tint: 1.25 },
+  jungle: { spacing: 0.9, tint: 1.2 },
+  steppe: { spacing: 0.92, tint: 1 },
+  badlands: { spacing: 0.86, tint: 1.45 },
+  wasteland: { spacing: 1, tint: 0.85 },
+};
 
 /** Per-cell facts of the canopy, computed once per map. */
 export interface CanopyField {
@@ -177,19 +225,27 @@ export function buildCanopyField(
   return { width, height, forest, open, featured: feat, near, set };
 }
 
-/** The bilinear forest field at a world point (cell centres hold 0 or 1). */
+/**
+ * The bilinear forest field at a world point: cell centres hold 1 on a
+ * Forest cell, 0 on free ground and CANOPY.blocked where no tree may stand
+ * (water, rock, a road, an object, off the map), so beside those the
+ * outline runs inside the wood and wobbles there instead of being clipped
+ * straight along the cell edge.
+ */
 function forestField(field: CanopyField, wx: number, wy: number): number {
-  const { width, height, forest } = field;
+  const { width, height, forest, open } = field;
   const fx = (wx - CELL / 2) / CELL;
   const fy = (wy - CELL / 2) / CELL;
   const i0 = Math.floor(fx);
   const j0 = Math.floor(fy);
   const tx = fx - i0;
   const ty = fy - j0;
-  const at = (i: number, j: number): number =>
-    i < 0 || j < 0 || i >= width || j >= height
-      ? 0
-      : (forest[j * width + i] ?? 0);
+  const at = (i: number, j: number): number => {
+    if (i < 0 || j < 0 || i >= width || j >= height) return CANOPY.blocked;
+    const k = j * width + i;
+    if (forest[k] === 1) return 1;
+    return open[k] === 1 ? 0 : CANOPY.blocked;
+  };
   const a = at(i0, j0);
   const b = at(i0 + 1, j0);
   const c = at(i0, j0 + 1);
@@ -212,6 +268,19 @@ export function canopyWobble(wx: number, wy: number): number {
 }
 
 /**
+ * The bays of the outline at a world point, field units (0 or more): a
+ * one-sided bite at a slower scale, only near the edge of the wood (`f` is
+ * the forest field there), so it shapes the outline and never opens a
+ * clearing inside.
+ */
+export function canopyBite(wx: number, wy: number, f: number): number {
+  const n = noise(wx, wy, CANOPY.biteSpacing, 0x3c);
+  if (n <= CANOPY.biteLevel) return 0;
+  const near = Math.max(0, Math.min(1, (0.9 - f) * 2.5));
+  return (CANOPY.bite * near * (n - CANOPY.biteLevel)) / (1 - CANOPY.biteLevel);
+}
+
+/**
  * How deep a world point lies inside the canopy region, in field units
  * (about px / 80 near an edge): positive inside, negative outside, -1 where
  * no tree may stand (water, rock, a road, an object, off the map).
@@ -229,7 +298,10 @@ export function canopyDepth(
   if (field.featured[i] === 1) return -1;
   // The region sits SHIFT px south of the cells: trunks stand low and the
   // crowns rise into the cell, so the cap rarely flattens the north edge.
-  return forestField(field, wx, wy - CANOPY.shift) + canopyWobble(wx, wy) - 0.5;
+  const f = forestField(field, wx, wy - CANOPY.shift);
+  const raw = f + canopyWobble(wx, wy) - canopyBite(wx, wy, f) - 0.5;
+  // Well inside the cells the wobble may not open a clearing (bead xaj.27).
+  return Math.max(raw, f - CANOPY.solid);
 }
 
 /**
@@ -237,15 +309,21 @@ export function canopyDepth(
  * inside the outline, the full shade deeper in. Hard steps, no gradient.
  */
 export function canopyTint(field: CanopyField, wx: number, wy: number): number {
-  const depth = canopyDepth(field, wx + 0.5, wy + 0.5);
+  // Sampled a little south: the shade sits under the crowns, which rise
+  // north of their trunks, so it never shows south of the last trunks.
+  const depth = canopyDepth(field, wx + 0.5, wy + 0.5 + CANOPY.tintLift);
   if (depth <= 0) return 0;
   const px = depth * CELL;
   if (px < CANOPY.tintInset) return 0;
+  const set =
+    field.set[Math.floor(wy / CELL) * field.width + Math.floor(wx / CELL)];
+  const ground = GROUNDS[set ?? 255];
+  const k = ground === undefined ? 1 : CANOPY_GROUND[ground].tint;
   // A ragged rim: a hashed pixel now and then steps in or out.
   const jitter = (hash4(wx >> 1, wy >> 1, 0x7c, 0x26) % 3) - 1;
   if (px < CANOPY.tintInset + CANOPY.tintRim + jitter * 2)
-    return CANOPY.tintRimAlpha;
-  return CANOPY.tintAlpha;
+    return Math.min(0.9, CANOPY.tintRimAlpha * k);
+  return Math.min(0.9, CANOPY.tintAlpha * k);
 }
 
 /** One placed tree. */
@@ -307,6 +385,8 @@ interface Candidate {
   readonly tree: CanopyTree;
   /** Chance to stay after the spacing test (thinner near the outline). */
   readonly keep: number;
+  /** The exclusion ellipse's scale on the tree's ground. */
+  readonly spacing: number;
 }
 
 /** Picks a species of `list` at a point: weights times patchy noise. */
@@ -318,8 +398,14 @@ function pickSpecies(
 ): TreeSpecies | undefined {
   let total = 0;
   const scores = list.map((species, k) => {
-    const s =
-      species.weight * (0.25 + 1.5 * noise(bx, by, CELL * 1.7, 0x51 + k));
+    let s: number;
+    if (species.drift !== undefined) {
+      // Clumped: nothing outside its drifts, the full weight inside, with a
+      // short ramp so a drift's rim is mixed rather than a hard edge.
+      const n = noise(bx, by, CANOPY.driftSpacing, 0x61 + k);
+      s = species.weight * Math.max(0, Math.min(1, (n - species.drift) / 0.1));
+    } else
+      s = species.weight * (0.25 + 1.5 * noise(bx, by, CELL * 1.7, 0x51 + k));
     total += s;
     return s;
   });
@@ -342,8 +428,10 @@ function candidateTree(
   by: number,
   gi: number,
   gj: number,
-): CanopyTree | null {
-  const depth = canopyDepth(field, bx, by);
+): { tree: CanopyTree; ground: GroundTerrain } | null {
+  // Measured at the drawn trunk base (whole pixels), the point the spill
+  // rule speaks of.
+  const depth = canopyDepth(field, Math.round(bx), Math.round(by) - 1);
   if (depth <= -CANOPY.spillDepth) return null;
   const spill = depth <= 0;
   if (spill && unit(gi, gj, 7) >= CANOPY.spillKeep) return null;
@@ -373,7 +461,7 @@ function candidateTree(
   for (const sprite of sprites) {
     if (sprite === undefined) continue;
     const tree = fit(field, sprite, bx, by, spill);
-    if (tree !== null) return tree;
+    if (tree !== null) return { tree, ground };
   }
   return null;
 }
@@ -458,8 +546,9 @@ export function placeCanopy(
       cy < field.height &&
       field.near[cy * field.width + cx] === 1
     ) {
-      const tree = candidateTree(field, species, bx, by, gi, gj);
-      if (tree !== null) {
+      const picked = candidateTree(field, species, bx, by, gi, gj);
+      if (picked !== null) {
+        const { tree } = picked;
         const inside = canopyDepth(field, bx, by) * CELL;
         const keep = tree.spill
           ? CANOPY.spillThin
@@ -468,7 +557,14 @@ export function placeCanopy(
               CANOPY.edgeKeep +
                 ((1 - CANOPY.edgeKeep) * inside) / CANOPY.edgeFade,
             );
-        found = { bx, by, priority: unit(gi, gj, 5), tree, keep };
+        found = {
+          bx,
+          by,
+          priority: unit(gi, gj, 5),
+          tree,
+          keep,
+          spacing: CANOPY_GROUND[picked.ground].spacing,
+        };
       }
     }
     candidates.set(k, found);
@@ -500,8 +596,9 @@ export function placeCanopy(
               if (di === 0 && dj === 0) continue;
               const other = candidate(gi + di, gj + dj);
               if (other === null || other.priority <= own.priority) continue;
-              const ex = (other.bx - own.bx) / CANOPY.rx;
-              const ey = (other.by - own.by) / CANOPY.ry;
+              const s = (own.spacing + other.spacing) / 2;
+              const ex = (other.bx - own.bx) / (CANOPY.rx * s);
+              const ey = (other.by - own.by) / (CANOPY.ry * s);
               if (ex * ex + ey * ey < 1) {
                 beaten = true;
                 break;

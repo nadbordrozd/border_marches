@@ -19,7 +19,11 @@
  */
 import { CELL_PX, GROUND_TERRAINS, doodadsOf } from "../../assets/manifest";
 import type { GroundTerrain } from "../../assets/manifest";
-import { treesOf } from "../../assets/trees";
+import {
+  TREE_SPECIES_DRIFT,
+  TREE_SPECIES_WEIGHTS,
+  treesOf,
+} from "../../assets/trees";
 import type { GameMap } from "../../core/map/types";
 import { DOODAD_ART_VARIANTS, doodadArt } from "./doodad-art";
 import type { DoodadArtKind } from "./doodad-art";
@@ -103,15 +107,19 @@ const FLAT_SPRITES: ReadonlySet<string> = new Set([
  * reference (low, blended open ground): the mini mesa and the rock pillar
  * read as stamped little mountains and are retired; the oversized cattle
  * skull, the swirl tumbleweed and the tall straw clump read as stamps when
- * repeated, so they are rarer.
+ * repeated, so they are rarer (the straw clump rarer still since bead
+ * xaj.27, with the steppe texture calmed in ground.ts `GROUND_CALM`).
  */
 export const DOODAD_SPRITE_WEIGHT: Readonly<Record<string, number>> = {
   "doodad-badlands-mesa-a": 0,
   "doodad-badlands-pillar-a": 0,
   "doodad-steppe-skull-a": 0.3,
   "doodad-steppe-tumbleweed-a": 0.45,
-  "doodad-steppe-grass-a": 0.6,
+  "doodad-steppe-grass-a": 0.25,
 };
+
+/** A clumped tree species' share of the lone trees, against its weight. */
+const LONE_CLUMPED = 0.25;
 
 /**
  * Extra rows per ground: the dedicated doodad sprites of bead xaj.14
@@ -151,17 +159,31 @@ function buildSpecs(ground: GroundTerrain): DoodadSpec[] {
   for (const [kind, weight] of Object.entries(KIND_WEIGHTS[ground])) {
     if (weight === undefined) continue;
     if (kind === "tree") {
-      // A lone small canopy tree at its native size (bead xaj.26).
-      const trees = treesOf(ground);
-      for (const tree of trees)
-        out.push({
-          key: tree.key,
-          w: tree.w,
-          h: tree.h,
-          scale: 1,
-          weight: weight / trees.length,
-          flat: false,
-        });
+      // A lone small canopy tree at its native size (bead xaj.26), as
+      // common as its species is in the woods; a clumped species (the
+      // autumn trees) only now and then (bead xaj.27).
+      const shares = Object.entries(TREE_SPECIES_WEIGHTS[ground]).map(
+        ([name, w]) =>
+          [
+            name,
+            TREE_SPECIES_DRIFT[ground]?.[name] === undefined
+              ? w
+              : w * LONE_CLUMPED,
+          ] as const,
+      );
+      const sum = shares.reduce((acc, [, w]) => acc + w, 0);
+      for (const [name, share] of shares) {
+        const trees = treesOf(ground, name);
+        for (const tree of trees)
+          out.push({
+            key: tree.key,
+            w: tree.w,
+            h: tree.h,
+            scale: 1,
+            weight: (weight * share) / sum / trees.length,
+            flat: false,
+          });
+      }
       continue;
     }
     for (let v = 0; v < DOODAD_ART_VARIANTS; v += 1) {

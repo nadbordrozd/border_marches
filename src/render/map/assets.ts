@@ -19,7 +19,7 @@ import {
 } from "../../assets/manifest";
 import type { GroundTerrain, ImageAsset } from "../../assets/manifest";
 import { TREE_ASSETS } from "../../assets/trees";
-import { blockMask } from "./ground";
+import { GROUND_CALM, blockMask, calmTexture } from "./ground";
 import type { GroundSources, PixelImage } from "./ground";
 
 export interface MapAssets {
@@ -110,7 +110,10 @@ export async function loadMapAssets(base = "/"): Promise<MapAssets> {
   const textures = Object.fromEntries(
     GROUND_TERRAINS.map((terrain) => {
       const asset = GROUND_TEXTURES[terrain];
-      return [terrain, readPixels(get(asset), asset.w, asset.h)];
+      const pixels = readPixels(get(asset), asset.w, asset.h);
+      // Calmer textures where the source is too busy (bead xaj.27).
+      const calm = GROUND_CALM[terrain];
+      return [terrain, calm === undefined ? pixels : calmTexture(pixels, calm)];
     }),
   ) as Record<GroundTerrain, PixelImage>;
   const water = (depth: "shallow" | "deep"): PixelImage[] =>

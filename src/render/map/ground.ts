@@ -59,6 +59,101 @@ export interface PixelImage {
   readonly data: Uint8ClampedArray;
 }
 
+/**
+ * How a ground texture is calmed when it is loaded (bead xaj.27): the steppe
+ * texture (imported from Pulp Wars) carries dark drift patches and tall
+ * straw tufts sitting in dark puddles of shade, which read as dunes and
+ * stamps once repeated over a wide plain. `flatten` pulls the slow light and
+ * dark patches toward the texture's mean colour; `contrast` and `dark` scale
+ * the fine detail round its local mean (lighter and darker pixels).
+ */
+export interface GroundCalm {
+  readonly radius: number;
+  readonly flatten: number;
+  readonly contrast: number;
+  readonly dark: number;
+}
+
+export const GROUND_CALM: Readonly<Partial<Record<GroundTerrain, GroundCalm>>> =
+  {
+    steppe: { radius: 40, flatten: 0.85, contrast: 0.8, dark: 0.6 },
+  };
+
+/** Box blur of one channel layout (RGBA) with wrap-around, radius r. */
+function wrapBlur(image: PixelImage, r: number): Float32Array {
+  const { width: w, height: h, data } = image;
+  const tmp = new Float32Array(w * h * 3);
+  const out = new Float32Array(w * h * 3);
+  const n = 2 * r + 1;
+  for (let y = 0; y < h; y += 1)
+    for (let c = 0; c < 3; c += 1) {
+      let sum = 0;
+      for (let k = -r; k <= r; k += 1)
+        sum += data[(y * w + (((k % w) + w) % w)) * 4 + c] ?? 0;
+      for (let x = 0; x < w; x += 1) {
+        tmp[(y * w + x) * 3 + c] = sum / n;
+        const add = (x + r + 1) % w;
+        const drop = (((x - r) % w) + w) % w;
+        sum +=
+          (data[(y * w + add) * 4 + c] ?? 0) -
+          (data[(y * w + drop) * 4 + c] ?? 0);
+      }
+    }
+  for (let x = 0; x < w; x += 1)
+    for (let c = 0; c < 3; c += 1) {
+      let sum = 0;
+      for (let k = -r; k <= r; k += 1)
+        sum += tmp[((((k % h) + h) % h) * w + x) * 3 + c] ?? 0;
+      for (let y = 0; y < h; y += 1) {
+        out[(y * w + x) * 3 + c] = sum / n;
+        const add = (y + r + 1) % h;
+        const drop = (((y - r) % h) + h) % h;
+        sum +=
+          (tmp[(add * w + x) * 3 + c] ?? 0) -
+          (tmp[(drop * w + x) * 3 + c] ?? 0);
+      }
+    }
+  return out;
+}
+
+/**
+ * A calmed copy of a tileable ground texture (GROUND_CALM): still tileable,
+ * the same mean colour, quieter patches and softer detail. Pure.
+ */
+export function calmTexture(image: PixelImage, calm: GroundCalm): PixelImage {
+  const { width: w, height: h, data } = image;
+  // Two passes of the box blur: a smooth local mean.
+  const once = wrapBlur(image, calm.radius);
+  const asImage: PixelImage = {
+    width: w,
+    height: h,
+    data: new Uint8ClampedArray(w * h * 4).map((_, o) =>
+      o % 4 === 3 ? 255 : (once[(o >> 2) * 3 + (o % 4)] ?? 0),
+    ),
+  };
+  const local = wrapBlur(asImage, calm.radius);
+  const mean = [0, 0, 0];
+  for (let p = 0; p < w * h; p += 1)
+    for (let c = 0; c < 3; c += 1)
+      mean[c] = (mean[c] ?? 0) + (data[p * 4 + c] ?? 0);
+  for (let c = 0; c < 3; c += 1) mean[c] = (mean[c] ?? 0) / (w * h);
+  const out = new Uint8ClampedArray(data.length);
+  for (let p = 0; p < w * h; p += 1) {
+    const lum = (k: (c: number) => number): number =>
+      0.3 * k(0) + 0.59 * k(1) + 0.11 * k(2);
+    const own = lum((c) => data[p * 4 + c] ?? 0);
+    const around = lum((c) => local[p * 3 + c] ?? 0);
+    const scale = own < around ? calm.dark : calm.contrast;
+    for (let c = 0; c < 3; c += 1) {
+      const l = local[p * 3 + c] ?? 0;
+      const base = l + ((mean[c] ?? 0) - l) * calm.flatten;
+      out[p * 4 + c] = base + ((data[p * 4 + c] ?? 0) - l) * scale;
+    }
+    out[p * 4 + 3] = data[p * 4 + 3] ?? 255;
+  }
+  return { width: w, height: h, data: out };
+}
+
 export interface GroundSources {
   readonly textures: Readonly<Record<GroundTerrain, PixelImage>>;
   readonly water: {

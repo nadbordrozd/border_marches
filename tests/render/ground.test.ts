@@ -3,7 +3,9 @@ import {
   BIT_N,
   BIT_NE,
   BIT_W,
+  GROUND_CALM,
   buildGroundLayout,
+  calmTexture,
   cellField,
   coastAt,
   edgeDistance,
@@ -257,5 +259,65 @@ describe("silhouette field (xaj.21)", () => {
     const old = new Uint8ClampedArray(80 * 80 * 4);
     paintGround(layout, SOURCES, 160, 80, 80, 80, old);
     expect(pixel(old, 80, 70, 50)).not.toEqual(COLOURS.grass);
+  });
+});
+
+describe("calmed ground textures (bead xaj.27)", () => {
+  // A 64 x 64 texture: a slow light/dark patch plus a fine checker.
+  const size = 64;
+  const data = new Uint8ClampedArray(size * size * 4);
+  for (let y = 0; y < size; y += 1)
+    for (let x = 0; x < size; x += 1) {
+      const slow = 40 * Math.sin((2 * Math.PI * x) / size);
+      const fine = (x + y) % 2 === 0 ? 20 : -20;
+      const o = (y * size + x) * 4;
+      data[o] = 150 + slow + fine;
+      data[o + 1] = 130 + slow + fine;
+      data[o + 2] = 80 + slow + fine;
+      data[o + 3] = 255;
+    }
+  const image = { width: size, height: size, data };
+  const calm = calmTexture(image, {
+    radius: 6,
+    flatten: 0.85,
+    contrast: 0.8,
+    dark: 0.6,
+  });
+  const red = (img: PixelImage, x: number, y: number): number =>
+    img.data[(y * size + x) * 4] ?? 0;
+  const mean = (img: PixelImage): number => {
+    let sum = 0;
+    for (let p = 0; p < size * size; p += 1) sum += img.data[p * 4] ?? 0;
+    return sum / (size * size);
+  };
+
+  it("calms the steppe only", () => {
+    expect(Object.keys(GROUND_CALM)).toEqual(["steppe"]);
+  });
+
+  it("keeps the size, alpha and mean colour", () => {
+    expect(calm.width).toBe(size);
+    expect(calm.height).toBe(size);
+    expect(calm.data[3]).toBe(255);
+    expect(Math.abs(mean(calm) - mean(image))).toBeLessThan(3);
+  });
+
+  it("flattens the slow patches and softens the fine detail", () => {
+    // Slow: the light and dark quarter columns move toward each other.
+    const slow = (img: PixelImage): number =>
+      Math.abs(red(img, size / 4, 0) - red(img, (3 * size) / 4, 0));
+    expect(slow(calm)).toBeLessThan(slow(image) * 0.4);
+    // Fine: the checker survives, quieter.
+    const fine = (img: PixelImage): number =>
+      Math.abs(red(img, 0, 0) - red(img, 1, 0));
+    expect(fine(calm)).toBeGreaterThan(10);
+    expect(fine(calm)).toBeLessThan(fine(image));
+  });
+
+  it("stays tileable", () => {
+    const step = (img: PixelImage, y: number): number =>
+      Math.abs(red(img, size - 1, y) - red(img, 0, y));
+    for (const y of [0, 17, 40])
+      expect(step(calm, y)).toBeLessThanOrEqual(step(image, y) + 1);
   });
 });
