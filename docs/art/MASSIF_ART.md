@@ -901,3 +901,133 @@ in each `verdicts.json`. `packRanges` 10-11 ms per M map in node (was
   the rise rule; only three wide granite sprites (two outlines), so most
   granite is still 2x2/3x2 massifs.
 - Basalt untouched.
+
+## Iteration 9a: low relief (bead xaj.25)
+
+The user, with a Heroes of Might and Magic II adventure map as the
+reference: mountains "blend seamlessly with their surroundings ... one
+continuous mass that doesn't at all look like a bunch of separate sprites
+... no gaps ... you cant tell that there is a square grid underneath ...
+not giant in the sense that they wouldnt fully obscure a full height unit
+standing behind". The orchestrator's call: retire the massif sprites as the
+mountain renderer and paint every range as one low-relief heightfield.
+
+Comparison (reference, xaj.23 sprites, this bead):
+[`screens/relief-vs-reference.png`](screens/relief-vs-reference.png). The
+result on whole maps:
+[`screens/map-relief-seed2-M-z1.png`](screens/map-relief-seed2-M-z1.png)
+(steppe, badlands and basalt) and
+[`screens/map-relief-seed3-M-z075.png`](screens/map-relief-seed3-M-z075.png)
+(grass, badlands mesas, basalt).
+
+### Approach (`src/render/map/relief.ts`)
+
+No assets and no PixelLab calls: everything is code-painted per chunk, in
+2 px blocks (like the rubble and scree), as a pure function of the map and
+world pixels, so chunks continue each other exactly and nothing repeats per
+cell. Nothing is mirrored; the light is the project sun at the bottom left.
+
+1. **Outline.** The contour of the region's cell field (1 on a Mountain
+   cell, 0 open, -0.6 on a road, object or water cell, so the foot pulls
+   back from them) blurred by a 40 px Gaussian: 0.5 on a straight edge,
+   lower at a convex corner (rounded) and higher at a concave one (filled).
+   The threshold is 0.6 plus a slow swell (+-0.24, about 170 px), finer
+   noise (60 and 14 px) and three oblique waves over world pixels (periods
+   83 to 374 px, which never go flat along a straight run), clamped to
+   0.36..0.86: on a straight edge the outline lies between 14 px outside the
+   cells and 43 px (over half a cell) inside. Off the region the foot
+   reaches at most 24 px from a region cell, so a filled notch stays a
+   fillet and a passable cell stays readable. Object cells are never relief
+   and the foot never enters a road, object or water cell.
+2. **Height.** An exact Euclidean distance transform to the outline over
+   the chunk plus a 102 px margin (clamped at 96 px, so every chunk gets the
+   same distance) raised to a dome `amp * (1 - exp(-d / reach))` with a slow
+   swell along the range; on it a ridged SUMMIT network (about 215 px, plus
+   a 100 px octave at a fifth of the weight) that carries the big forms:
+   ridgelines and peaks one and a half to three cells apart, reaching to the
+   flanks as spurs. FOLDS (ridged noise stretched 90 to 110 px along, 26 to
+   54 px across, at half the earlier height) run down the gradient of that
+   macro height, north-south where it is flat, 40% quieter deep inside.
+   Badlands are terraced in 22 px steps (two or three levels per range: flat
+   mesa tops, steep risers with strata stripes by height).
+3. **Cap.** A point `dNorth` px south of the outline in its column rises at
+   most `dNorth + 17` px, so nothing is drawn more than 15 + 17 = 32 px
+   above the region's northern cells (tested). Absolute ceiling 60 px.
+4. **Projection.** Each 2 px column is marched from the front (south) to the
+   back: a point of height h shows h px up, the nearer point wins, a step
+   leaves a vertical face. Where a crest at least 14 px high hides more than
+   32 px of ground behind it, its top pixel takes the crease tone (a real
+   occlusion line, never along a low rim).
+5. **Shading.** Lambert with the sun at the bottom left
+   (`[-0.62, 0.5, 0.6]`), 6.5 bands per unit of slope light; north-facing
+   slopes lose only a fifth of the light they would (at full darkness the
+   thin band they make along a north rim read as an outline of the cells);
+   lighter with height; crests lighter and gullies darker (1.8 bands, 70%
+   from the summit network, 30% from the folds), so the big forms lead the
+   shading; world-sampled grain (0.35 band; 0.12 on badlands tops) and a
+   4 x 4 Bayer dither (0.5 band), quantised to five tones of the terrain's
+   ramp, plus a crease tone. Terrain seams inside a range are dithered over
+   about a third of a cell, read at a point warped by 26 px so they meander
+   like the zone borders.
+6. **Foot.** The outer 12 px are an ordered dither (more ground toward the
+   outline), and over 16 px the tones lean to the ground texture's mean
+   colour in three dithered steps: a range rises out of its ground with no
+   cut and no gravel ring.
+
+| Terrain | Look | amp / reach | summit | fold (across, along) | ramp (dark to light) |
+| --- | --- | --- | --- | --- | --- |
+| grass | green rolling ridges | 22 / 44 | 36 | 8 (50, 110) | `#0e2816` .. `#92c250` |
+| jungle | steeper deep teal green | 28 / 32 | 34 | 10 (34, 90) | `#08221e` .. `#76b664` |
+| steppe | tan and brown ridges | 20 / 44 | 40 | 7 (54, 110) | `#382214` .. `#e2c082` |
+| badlands | terraced sandstone mesas | 46 / 30 | 12 | 3 (40, 110), terrace 22 | `#542418` .. `#f4cc96` |
+| wasteland | basalt ridges | 24 / 38 | 36 | 8 (26, 90) | `#121118` .. `#8e888a` |
+
+### Wiring (`map-view.ts`, kept local)
+
+- `mountainMode()`: relief by default; `?mountains=sprites` keeps the
+  xaj.23 massif path for A/B during this iteration (a later cleanup removes
+  it and its unused assets).
+- Relief mode drops the massif sprite entries from the terrain entries,
+  turns the ground's scree ring off (`nearMountain` zeroed in the layout)
+  and paints the relief into each cached chunk over the ground, before the
+  body pass (so trees and doodads in front stand over it).
+- **Lips**: for every region cell open to the north, the 80 x 32 px the
+  relief raises over the open cell is cut from its chunk when the chunk is
+  built and drawn again in the foreground at the range's row, so it covers
+  the feet of a unit standing behind the range (never more than 32 px).
+- Fog is unchanged: the relief is built from the whole map and the fog is
+  drawn over it, so nothing changes shape when it is revealed.
+- Cost: seed 2 size M, 36 chunks in 1.1 s in Chrome (the sprite path with
+  its silhouette scree: 1.25 s); frames stay cached (0.06 ms mean).
+
+### Tests (`tests/render/relief.test.ts`)
+
+Relief by default; deterministic and identical when one rectangle is painted
+in four uneven parts; nothing painted far from mountains; no ground inside a
+range (every pixel deeper than the inward bite plus the foot is painted);
+no pixel more than 32 px (+ one block) above the region's northern cells on
+seeds 1 and 2 size M; the foot stays within 32 px of the region and never
+on a road, object (a hero entrance in the test) or water cell; NO RULER
+LINES: along every straight run of region edge three or more cells long
+(seeds 1-3 size M, 97 runs) the outline's perpendicular offset has a
+standard deviation above 4 px (lowest measured 4.3 px; before the revision
+2.5 px); a lip for every region cell open to the north.
+
+### Still artificial
+
+- Revision after the orchestrator's review: half-cell bite and waves on
+  the outline, larger landforms, folds halved, 22 px mesa terraces, softer
+  north rims. A long straight flank (seed 2, the tan range's east side)
+  still reads as one steep shaded wall at zoom 1, though its outline now
+  wavers by about +-15 px.
+- The relief is smoother than the outlined chibi objects on it: the only
+  dark lines are creases and occlusion edges, no black outline round a
+  range.
+- Two-cell bands seen from the south show their stretched front face as
+  vertical folds, most visibly on basalt.
+- Merged with the canopy forests of xaj.26; both draw in relief mode.
+- A narrow diagonal staircase of rock (one or two cells) is mostly foot and
+  reads as a ridge line in the ground, not a mountain.
+- Mines still draw the palette's mine sprite on their cell (no generated map
+  puts an object on a Mountain cell today; such a cell would be a hole in
+  the relief).
