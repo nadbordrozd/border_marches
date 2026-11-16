@@ -912,13 +912,14 @@ not giant in the sense that they wouldnt fully obscure a full height unit
 standing behind". The orchestrator's call: retire the massif sprites as the
 mountain renderer and paint every range as one low-relief heightfield.
 
-Comparison (reference, xaj.23 sprites, this bead):
-[`screens/relief-vs-reference.png`](screens/relief-vs-reference.png). The
-result on whole maps:
-[`screens/map-relief-seed2-M-z1.png`](screens/map-relief-seed2-M-z1.png)
-(steppe, badlands and basalt) and
-[`screens/map-relief-seed3-M-z075.png`](screens/map-relief-seed3-M-z075.png)
-(grass, badlands mesas, basalt).
+The three committed relief screens
+([`screens/relief-vs-reference.png`](screens/relief-vs-reference.png),
+[`screens/map-relief-seed2-M-z1.png`](screens/map-relief-seed2-M-z1.png),
+[`screens/map-relief-seed3-M-z075.png`](screens/map-relief-seed3-M-z075.png))
+now show iteration 10 (below); the comparison sheet's middle column is this
+iteration. The outline, cap, projection, foot and wiring described here
+still hold; iteration 10 replaces the height (step 2) and the shading
+(step 5).
 
 ### Approach (`src/render/map/relief.ts`)
 
@@ -1031,3 +1032,138 @@ standard deviation above 4 px (lowest measured 4.3 px; before the revision
 - Mines still draw the palette's mine sprite on their cell (no generated map
   puts an object on a Mountain cell today; such a cell would be a hole in
   the relief).
+
+## Iteration 10: rising peaks, raised mesas (bead xaj.28)
+
+The user, again with the Heroes II map: "keep iterating on the adventure
+map look ... The mountains are one continuous mass that doesn't at all look
+like a bunch of separate sprites ... the mountains are not giant". The
+orchestrator's verdict on iteration 9a: continuity and edges good, but the
+ranges read as a plan-view hillshade (crumpled paper, a relief map) rather
+than mountains, and the badlands mesas read as canyons sunk below the red
+ground. In the reference a range is a row of pyramidal peaks, each with a
+sunlit face, a shadowed face, sharp crests and drapery gullies on the lower
+flanks, visibly rising while staying low.
+
+Comparison (reference, iteration 9a, iteration 10; steppe, grass and
+badlands at zoom 2):
+[`screens/relief-vs-reference.png`](screens/relief-vs-reference.png). Whole
+maps: [`screens/map-relief-seed2-M-z1.png`](screens/map-relief-seed2-M-z1.png)
+(steppe peaks, basalt, badlands) and
+[`screens/map-relief-seed3-M-z075.png`](screens/map-relief-seed3-M-z075.png)
+(badlands mesas, grass, basalt).
+
+### Height: peaks (`relief.ts`, `RELIEF.peaks`, `buildSites`, `peakAt`)
+
+- **Summit sites** on a staggered lattice over world pixels (104 px along a
+  row, rows 0.86 of that apart, jittered by 0.95 of a pitch so no diagonal
+  rows line up). Each site reads its terrain's look at its centre and keeps
+  a peak with that look's `keep` probability. Its height is
+  `peak * (0.45 + 0.75 u)`; 22% are major summits (x1.3 height and
+  footprint), so a range has a few clear summits and lesser spurs. Its
+  footprint radius is `radius * 104 * (0.7 + 0.55 size + 0.15 u)` px.
+- **Faces.** Each peak is a faceted pyramid: four faces falling south-east
+  (shadow), south-west (lit), north-west and north-east, or five with a
+  small south face; the set is turned by up to +-29 deg and each face by
+  +-11 deg. The south faces are steeper by `1 + south * uy`, so they rise in
+  the projection. The pyramid falls as `(1 - t) ^ 1.25` (concave skirt),
+  `t` the largest face distance over the radius, blended toward a round cone
+  by `round`.
+- **Spurs.** A second, smaller octave between the peaks, from its own
+  lattice at half the pitch (52 px): 0.42 of the height, 75% of the sites
+  kept, turned up to +-46 deg, no major summits. So a range has big
+  summits, lesser peaks and spurs, not one row of similar triangles.
+- **Field.** The highest pyramid or spur at each point (crests where faces
+  meet, V gullies where neighbours meet), at least the look's `base`, times
+  the envelope `1 - exp(-d / reach)` of the distance to the outline (the
+  mass rises out of its foot). Drapery gullies (ridged noise along the
+  downhill direction, `fold` px deep, `across` x `along` px) on the lower
+  flanks only (fading out above 45-90% of the local peak height), and
+  2.5 px lumps (noise, 32 x 28 px) so no face is a flat plane.
+- **Cap.** As before (`dNorth + 17`), but measured from the region's cells
+  rather than the outline where a fillet puts the outline more than 15 px
+  north of them (`room`), and peaks are compressed softly (tanh) above 60%
+  of the cap, so a peak near the north rim rounds off instead of being
+  sliced flat.
+
+### Height: badlands buttes on talus (`RELIEF.mesa`)
+
+The first take (large plateaus with one or two levels) read as flat,
+walkable paper cutouts; the orchestrator asked for many small buttes, 1 to
+2.5 cells across, stepping up in 2 or 3 levels, no flat top wider than
+about 1.5 cells, eroded slopes between them, and textured tops.
+
+- **Buttes** on their own staggered lattice (84 px, rows 0.86 of that,
+  jitter 0.9), each kept with 0.85 of the badlands share: two levels, or
+  three (40%), of the 16 px terrace step; a footprint radius of 0.5 to 0.95
+  pitches (42 to 80 px); flat over the inner 30% of it and falling linearly
+  outside; six faces at hashed angles blended 0.35 toward a cone, read at a
+  point warped by 9 px (ragged outlines). The field (the highest butte) is
+  cut into terraces, each riser taking the top 20% of a step.
+- **Talus** between them: a slope at most 13 px high (times the envelope,
+  reach 22 px, and a noise swell) grooved by rills and gullies (ridged
+  noise, 7 px deep, 11 px across, 46 px along the downhill direction), the
+  9a striated look but raised. The height is the higher of talus and butte;
+  the mass rises over 4 px at the outline (a cliff foot).
+
+### Shading
+
+- Sun moved a little west (`[-0.74, 0.42, 0.56]`, still bottom left), gain
+  5.5 bands per unit of light toward the sun but 0.65 of that away from it
+  (shadow faces about a band softer than the first take), base tone 2.6: a
+  peak's south-west face is lit, its south-east face in shade, so the two
+  faces part at the crest without black diamond bands.
+- North-facing slopes lose 20% of the light at the north rim (no outline of
+  the cells there) and 80% from 56 px inside (the shaded backs of peaks).
+- Cast shadows: each point marches 64 px toward the sun; a point below the
+  ray (slope 1 px per px) of anything there is 0.4 band darker (0.8 on
+  badlands: a butte shades the talus east of it).
+- Curvature (Laplacian over 2 blocks) darkens gullies and lightens crests,
+  0.45 band per 10 px, everywhere (on badlands it lights the rims and
+  darkens the riser feet and rills).
+- Stipple: white-noise dither (0.4 band) per screen pixel instead of the
+  ordered dither, plus the world grain (0.3 band, 0.6 of it on badlands).
+- Per-terrain key (whole-relief tone offset): grass +0.2, jungle +0.2,
+  basalt +0.15.
+- **Badlands.** Butte tops +0.6 band plus 0.6 band per 30 px of height
+  (upper levels lighter), a tone drift (0.45 band, noise 38 x 30 px), thin
+  cracks (-1.3 band where a two-octave noise is near zero) and rubble
+  (4 px specks on 5% of the top, half dark, half light; 2.5% on the
+  talus). The top pixel of a riser and the north rim of a top +1 band
+  (rims catch the light); riser pixels carry strata by height (+0.8 / -0.6
+  / 0 in 4 px bands) and flutes (noise 5 px across), and darken toward the
+  foot of each step (-1.8 band at the foot, squared falloff): lit at the
+  rim, dark at the foot. The badlands foot is a 4 px dither; a peak's stays
+  12 px. A dithered gap in the foot hides at most 6 px behind it, so a
+  steep flank close to its foot shows no hole.
+
+| Terrain | reach | peak px | radius | round | south | keep | base | gully (depth, across, along) | key |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| grass | 30 | 48 | 1.05 | 0.12 | 0.6 | 0.8 | 6 | 6 (22, 60) | 0.2 |
+| jungle | 26 | 50 | 1.0 | 0.3 | 0.6 | 0.85 | 8 | 6 (18, 60) | 0.2 |
+| steppe | 30 | 52 | 1.05 | 0.12 | 0.6 | 0.82 | 6 | 6 (18, 60) | 0 |
+| badlands | 22 | buttes, 16 px steps | | | | | | 7 (11, 46) | 0 |
+| wasteland | 28 | 54 | 1.0 | 0 | 0.6 | 0.85 | 6 | 6 (16, 56) | 0.15 |
+
+Ramps as in 9a except: grass spread so its faces separate (deep
+`[20, 54, 26]`, shadow `[34, 80, 32]`, mid
+`[64, 126, 46]`, lit `[106, 172, 60]`, highlight `[160, 208, 90]`), and
+steppe pulled toward the reference's mid-brown (mid `[156, 110, 66]`, lit
+`[186, 140, 88]`, highlight `[214, 176, 118]`).
+
+### Cost
+
+Seed 2 size M: 36 chunks in 1.9 s in headless Chrome (9a: 1.1 s); the
+window grows by the shadow march and each block tests about 25 sites per
+lattice (peaks, spurs and, on badlands, buttes). Frames stay cached
+(0.03 ms mean).
+
+### Still artificial
+
+- Peaks are one family per terrain; at zoom 1 a big steppe range is still a
+  field of triangles, softer and more varied than the first take.
+- Butte tops are rounded lozenges more than angular tablelands; the talus
+  rills are uniform in direction within a slope.
+- Grass reads less crisply than steppe and basalt.
+- The relief is still smoother than the outlined chibi objects on it.
+- Shadows stop at the relief's outline (nothing is painted on the ground).
