@@ -1,0 +1,1127 @@
+{
+  "grass-conifer-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: short squat fir, a low filler for the wood's north edge",
+    "at": "2026-11-16T22:04:59.191Z"
+  },
+  "grass-conifer-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: layered spruce or fir, clean outline, lit left, 20-26 px wide",
+    "at": "2026-11-16T22:04:59.233Z"
+  },
+  "grass-conifer-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: layered spruce or fir, clean outline, lit left, 20-26 px wide",
+    "at": "2026-11-16T22:04:59.276Z"
+  },
+  "grass-conifer-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: layered spruce or fir, clean outline, lit left, 20-26 px wide",
+    "at": "2026-11-16T22:04:59.320Z"
+  },
+  "grass-conifer-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: layered spruce or fir, clean outline, lit left, 20-26 px wide",
+    "at": "2026-11-16T22:04:59.364Z"
+  },
+  "grass-conifer-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: layered spruce or fir, clean outline, lit left, 20-26 px wide",
+    "at": "2026-11-16T22:04:59.406Z"
+  },
+  "grass-conifer-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: layered spruce or fir, clean outline, lit left, 20-26 px wide",
+    "at": "2026-11-16T22:04:59.448Z"
+  },
+  "grass-conifer-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: layered spruce or fir, clean outline, lit left, 20-26 px wide",
+    "at": "2026-11-16T22:04:59.491Z"
+  },
+  "grass-conifer-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: layered spruce or fir, clean outline, lit left, 20-26 px wide",
+    "at": "2026-11-16T22:04:59.536Z"
+  },
+  "grass-conifer-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: layered spruce or fir, clean outline, lit left, 20-26 px wide",
+    "at": "2026-11-16T22:04:59.578Z"
+  },
+  "grass-conifer-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: layered spruce or fir, clean outline, lit left, 20-26 px wide",
+    "at": "2026-11-16T22:04:59.621Z"
+  },
+  "grass-conifer-a#23": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: layered spruce or fir, clean outline, lit left, 20-26 px wide",
+    "at": "2026-11-16T22:04:59.665Z"
+  },
+  "grass-conifer-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: full bushy fir, reads in a crowd",
+    "at": "2026-11-16T22:04:59.707Z"
+  },
+  "grass-conifer-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: full bushy fir, reads in a crowd",
+    "at": "2026-11-16T22:04:59.750Z"
+  },
+  "grass-conifer-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: full bushy fir, reads in a crowd",
+    "at": "2026-11-16T22:04:59.792Z"
+  },
+  "grass-conifer-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: full bushy fir, reads in a crowd",
+    "at": "2026-11-16T22:04:59.834Z"
+  },
+  "grass-conifer-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "conifer: full bushy fir, reads in a crowd",
+    "at": "2026-11-16T22:04:59.877Z"
+  },
+  "grass-conifer-a#1": {
+    "verdict": "REJECTED",
+    "notes": "bare cone without branches, reads as a spike",
+    "at": "2026-11-16T22:04:59.921Z"
+  },
+  "grass-conifer-a#8": {
+    "verdict": "REJECTED",
+    "notes": "smooth cypress blob, topiary not forest",
+    "at": "2026-11-16T22:04:59.963Z"
+  },
+  "grass-conifer-a#17": {
+    "verdict": "REJECTED",
+    "notes": "smooth cypress blob, topiary not forest",
+    "at": "2026-11-16T22:05:00.004Z"
+  },
+  "grass-conifer-a#14": {
+    "verdict": "REJECTED",
+    "notes": "smooth egg crown, no branch layers, off-style beside the rest",
+    "at": "2026-11-16T22:05:00.046Z"
+  },
+  "grass-conifer-a#18": {
+    "verdict": "REJECTED",
+    "notes": "smooth egg crown, no branch layers, off-style beside the rest",
+    "at": "2026-11-16T22:05:00.089Z"
+  },
+  "grass-conifer-a#21": {
+    "verdict": "REJECTED",
+    "notes": "thin sparse branches, noisy and spindly in a dense canopy",
+    "at": "2026-11-16T22:05:00.130Z"
+  },
+  "grass-conifer-a#22": {
+    "verdict": "REJECTED",
+    "notes": "thin sparse branches, noisy and spindly in a dense canopy",
+    "at": "2026-11-16T22:05:00.173Z"
+  },
+  "grass-conifer-a#24": {
+    "verdict": "REJECTED",
+    "notes": "thin sparse branches, noisy and spindly in a dense canopy",
+    "at": "2026-11-16T22:05:00.216Z"
+  },
+  "grass-broadleaf-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: plain oval crown, a quiet filler",
+    "at": "2026-11-16T22:05:00.260Z"
+  },
+  "grass-broadleaf-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: big round oak with a lumpy crown",
+    "at": "2026-11-16T22:05:00.303Z"
+  },
+  "grass-broadleaf-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: big round oak with a lumpy crown",
+    "at": "2026-11-16T22:05:00.345Z"
+  },
+  "grass-broadleaf-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: big round oak with a lumpy crown",
+    "at": "2026-11-16T22:05:00.389Z"
+  },
+  "grass-broadleaf-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: chunky two- or three-lobed crown",
+    "at": "2026-11-16T22:05:00.432Z"
+  },
+  "grass-broadleaf-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: chunky two- or three-lobed crown",
+    "at": "2026-11-16T22:05:00.477Z"
+  },
+  "grass-broadleaf-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: chunky two- or three-lobed crown",
+    "at": "2026-11-16T22:05:00.523Z"
+  },
+  "grass-broadleaf-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: chunky two- or three-lobed crown",
+    "at": "2026-11-16T22:05:00.568Z"
+  },
+  "grass-broadleaf-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: chunky two- or three-lobed crown",
+    "at": "2026-11-16T22:05:00.612Z"
+  },
+  "grass-broadleaf-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: round leafy crown on a short trunk",
+    "at": "2026-11-16T22:05:00.655Z"
+  },
+  "grass-broadleaf-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: round leafy crown on a short trunk",
+    "at": "2026-11-16T22:05:00.698Z"
+  },
+  "grass-broadleaf-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: round leafy crown on a short trunk",
+    "at": "2026-11-16T22:05:00.743Z"
+  },
+  "grass-broadleaf-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: round leafy crown on a short trunk",
+    "at": "2026-11-16T22:05:00.786Z"
+  },
+  "grass-broadleaf-a#4": {
+    "verdict": "REJECTED",
+    "notes": "bonsai pose, too wide and stylised",
+    "at": "2026-11-16T22:05:00.829Z"
+  },
+  "grass-broadleaf-a#15": {
+    "verdict": "REJECTED",
+    "notes": "tiered bonsai pads, off-style",
+    "at": "2026-11-16T22:05:00.872Z"
+  },
+  "grass-broadleaf-a#17": {
+    "verdict": "REJECTED",
+    "notes": "split crown with a gap, reads as two trees",
+    "at": "2026-11-16T22:05:00.914Z"
+  },
+  "grass-broadleaf-a#1": {
+    "verdict": "REJECTED",
+    "notes": "narrow lollipop, toy-like and too thin for a crowd",
+    "at": "2026-11-16T22:05:00.957Z"
+  },
+  "grass-broadleaf-a#11": {
+    "verdict": "REJECTED",
+    "notes": "narrow lollipop, toy-like and too thin for a crowd",
+    "at": "2026-11-16T22:05:01.001Z"
+  },
+  "grass-broadleaf-a#16": {
+    "verdict": "REJECTED",
+    "notes": "narrow lollipop, toy-like and too thin for a crowd",
+    "at": "2026-11-16T22:05:01.043Z"
+  },
+  "grass-broadleaf-a#21": {
+    "verdict": "REJECTED",
+    "notes": "narrow lollipop, toy-like and too thin for a crowd",
+    "at": "2026-11-16T22:05:01.086Z"
+  },
+  "grass-broadleaf-a#3": {
+    "verdict": "REJECTED",
+    "notes": "sparse branchy crown, thin limbs read as noise in a dense canopy",
+    "at": "2026-11-16T22:05:01.129Z"
+  },
+  "grass-broadleaf-a#8": {
+    "verdict": "REJECTED",
+    "notes": "sparse branchy crown, thin limbs read as noise in a dense canopy",
+    "at": "2026-11-16T22:05:01.172Z"
+  },
+  "grass-broadleaf-a#13": {
+    "verdict": "REJECTED",
+    "notes": "sparse branchy crown, thin limbs read as noise in a dense canopy",
+    "at": "2026-11-16T22:05:01.214Z"
+  },
+  "grass-broadleaf-a#18": {
+    "verdict": "REJECTED",
+    "notes": "sparse branchy crown, thin limbs read as noise in a dense canopy",
+    "at": "2026-11-16T22:05:01.256Z"
+  },
+  "grass-broadleaf-a#23": {
+    "verdict": "REJECTED",
+    "notes": "sparse branchy crown, thin limbs read as noise in a dense canopy",
+    "at": "2026-11-16T22:05:01.300Z"
+  },
+  "grass-autumn-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: orange or red-orange oak, round full crown",
+    "at": "2026-11-16T22:05:01.343Z"
+  },
+  "grass-autumn-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: orange or red-orange oak, round full crown",
+    "at": "2026-11-16T22:05:01.386Z"
+  },
+  "grass-autumn-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: orange or red-orange oak, round full crown",
+    "at": "2026-11-16T22:05:01.430Z"
+  },
+  "grass-autumn-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: orange or red-orange oak, round full crown",
+    "at": "2026-11-16T22:05:01.474Z"
+  },
+  "grass-autumn-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: orange or red-orange oak, round full crown",
+    "at": "2026-11-16T22:05:01.517Z"
+  },
+  "grass-autumn-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: yellow-green lime, round crown",
+    "at": "2026-11-16T22:05:01.562Z"
+  },
+  "grass-autumn-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: yellow-green lime, round crown",
+    "at": "2026-11-16T22:05:01.607Z"
+  },
+  "grass-autumn-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: yellow-green lime, round crown",
+    "at": "2026-11-16T22:05:01.650Z"
+  },
+  "grass-autumn-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: yellow-green lime, round crown",
+    "at": "2026-11-16T22:05:01.693Z"
+  },
+  "grass-autumn-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: yellow-green lime, round crown",
+    "at": "2026-11-16T22:05:01.736Z"
+  },
+  "grass-autumn-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: orange maple, lobed crown",
+    "at": "2026-11-16T22:05:01.779Z"
+  },
+  "grass-autumn-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: orange maple, lobed crown",
+    "at": "2026-11-16T22:05:01.821Z"
+  },
+  "grass-autumn-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: orange maple, lobed crown",
+    "at": "2026-11-16T22:05:01.864Z"
+  },
+  "grass-autumn-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: golden birch with a white trunk",
+    "at": "2026-11-16T22:05:01.908Z"
+  },
+  "grass-autumn-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: golden birch with a white trunk",
+    "at": "2026-11-16T22:05:01.951Z"
+  },
+  "grass-autumn-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: golden birch with a white trunk",
+    "at": "2026-11-16T22:05:01.994Z"
+  },
+  "grass-autumn-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn: golden birch with a white trunk",
+    "at": "2026-11-16T22:05:02.037Z"
+  },
+  "grass-autumn-a#6": {
+    "verdict": "REJECTED",
+    "notes": "weeping willow fringe, reads as a separate species",
+    "at": "2026-11-16T22:05:02.079Z"
+  },
+  "grass-autumn-a#15": {
+    "verdict": "REJECTED",
+    "notes": "single leaf-shaped crown, reads as a leaf icon",
+    "at": "2026-11-16T22:05:02.124Z"
+  },
+  "grass-autumn-a#23": {
+    "verdict": "REJECTED",
+    "notes": "lopsided blob crown",
+    "at": "2026-11-16T22:05:02.168Z"
+  },
+  "grass-autumn-a#7": {
+    "verdict": "REJECTED",
+    "notes": "bonsai or umbrella pose with sparse limbs",
+    "at": "2026-11-16T22:05:02.211Z"
+  },
+  "grass-autumn-a#8": {
+    "verdict": "REJECTED",
+    "notes": "bonsai or umbrella pose with sparse limbs",
+    "at": "2026-11-16T22:05:02.254Z"
+  },
+  "grass-autumn-a#18": {
+    "verdict": "REJECTED",
+    "notes": "bonsai or umbrella pose with sparse limbs",
+    "at": "2026-11-16T22:05:02.296Z"
+  },
+  "grass-autumn-a#22": {
+    "verdict": "REJECTED",
+    "notes": "bonsai or umbrella pose with sparse limbs",
+    "at": "2026-11-16T22:05:02.358Z"
+  },
+  "grass-autumn-a#24": {
+    "verdict": "REJECTED",
+    "notes": "bonsai or umbrella pose with sparse limbs",
+    "at": "2026-11-16T22:05:02.403Z"
+  },
+  "jungle-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a curved trunk and drooping fronds",
+    "at": "2026-11-16T22:07:18.197Z"
+  },
+  "jungle-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a curved trunk and drooping fronds",
+    "at": "2026-11-16T22:07:18.239Z"
+  },
+  "jungle-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a curved trunk and drooping fronds",
+    "at": "2026-11-16T22:07:18.280Z"
+  },
+  "jungle-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a curved trunk and drooping fronds",
+    "at": "2026-11-16T22:07:18.322Z"
+  },
+  "jungle-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a curved trunk and drooping fronds",
+    "at": "2026-11-16T22:07:18.365Z"
+  },
+  "jungle-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a straight scaly trunk and a full frond crown",
+    "at": "2026-11-16T22:07:18.407Z"
+  },
+  "jungle-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a straight scaly trunk and a full frond crown",
+    "at": "2026-11-16T22:07:18.448Z"
+  },
+  "jungle-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a straight scaly trunk and a full frond crown",
+    "at": "2026-11-16T22:07:18.490Z"
+  },
+  "jungle-a#18": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a straight scaly trunk and a full frond crown",
+    "at": "2026-11-16T22:07:18.533Z"
+  },
+  "jungle-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a straight scaly trunk and a full frond crown",
+    "at": "2026-11-16T22:07:18.576Z"
+  },
+  "jungle-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a straight scaly trunk and a full frond crown",
+    "at": "2026-11-16T22:07:18.618Z"
+  },
+  "jungle-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "palm: palm with a straight scaly trunk and a full frond crown",
+    "at": "2026-11-16T22:07:18.659Z"
+  },
+  "jungle-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: dense dark round jungle crown",
+    "at": "2026-11-16T22:07:18.701Z"
+  },
+  "jungle-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: dense dark round jungle crown",
+    "at": "2026-11-16T22:07:18.744Z"
+  },
+  "jungle-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: dense dark round jungle crown",
+    "at": "2026-11-16T22:07:18.788Z"
+  },
+  "jungle-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: dense dark round jungle crown",
+    "at": "2026-11-16T22:07:18.831Z"
+  },
+  "jungle-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: dense dark round jungle crown",
+    "at": "2026-11-16T22:07:18.873Z"
+  },
+  "jungle-a#23": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: dense dark round jungle crown",
+    "at": "2026-11-16T22:07:18.916Z"
+  },
+  "jungle-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "banana: banana plant with big paddle leaves",
+    "at": "2026-11-16T22:07:18.958Z"
+  },
+  "jungle-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "banana: banana plant with big paddle leaves",
+    "at": "2026-11-16T22:07:19.001Z"
+  },
+  "jungle-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "banana: banana plant with big paddle leaves",
+    "at": "2026-11-16T22:07:19.042Z"
+  },
+  "jungle-a#21": {
+    "verdict": "REJECTED",
+    "notes": "flat umbrella acacia, savanna not jungle",
+    "at": "2026-11-16T22:07:19.086Z"
+  },
+  "jungle-a#22": {
+    "verdict": "REJECTED",
+    "notes": "spiral fantasy crown, off-style",
+    "at": "2026-11-16T22:07:19.128Z"
+  },
+  "jungle-a#13": {
+    "verdict": "REJECTED",
+    "notes": "thin banana leaves, spindly and sparse",
+    "at": "2026-11-16T22:07:19.169Z"
+  },
+  "jungle-a#14": {
+    "verdict": "REJECTED",
+    "notes": "thin banana leaves, spindly and sparse",
+    "at": "2026-11-16T22:07:19.212Z"
+  },
+  "steppe-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "oak: squat olive oak with a full round crown",
+    "at": "2026-11-16T22:08:58.180Z"
+  },
+  "steppe-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "oak: squat olive oak with a full round crown",
+    "at": "2026-11-16T22:08:58.224Z"
+  },
+  "steppe-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "oak: squat olive oak with a full round crown",
+    "at": "2026-11-16T22:08:58.267Z"
+  },
+  "steppe-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "oak: squat olive oak with a full round crown",
+    "at": "2026-11-16T22:08:58.309Z"
+  },
+  "steppe-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "oak: lobed olive crown on a forked trunk",
+    "at": "2026-11-16T22:08:58.352Z"
+  },
+  "steppe-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "oak: lobed olive crown on a forked trunk",
+    "at": "2026-11-16T22:08:58.395Z"
+  },
+  "steppe-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "oak: small round olive tree, a low filler",
+    "at": "2026-11-16T22:08:58.437Z"
+  },
+  "steppe-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "oak: small round olive tree, a low filler",
+    "at": "2026-11-16T22:08:58.478Z"
+  },
+  "steppe-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "birch: birch with a white trunk and an airy yellow-green crown",
+    "at": "2026-11-16T22:08:58.521Z"
+  },
+  "steppe-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "birch: birch with a white trunk and an airy yellow-green crown",
+    "at": "2026-11-16T22:08:58.565Z"
+  },
+  "steppe-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "birch: birch with a white trunk and an airy yellow-green crown",
+    "at": "2026-11-16T22:08:58.608Z"
+  },
+  "steppe-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "bent: wind-bent elm with a lopsided crown",
+    "at": "2026-11-16T22:08:58.650Z"
+  },
+  "steppe-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "bent: wind-bent elm with a lopsided crown",
+    "at": "2026-11-16T22:08:58.691Z"
+  },
+  "steppe-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "bent: wind-bent elm with a lopsided crown",
+    "at": "2026-11-16T22:08:58.733Z"
+  },
+  "steppe-a#3": {
+    "verdict": "REJECTED",
+    "notes": "tiny lollipop, too small and toy-like",
+    "at": "2026-11-16T22:08:58.775Z"
+  },
+  "steppe-a#9": {
+    "verdict": "REJECTED",
+    "notes": "bush without a trunk, a shrub not a tree",
+    "at": "2026-11-16T22:08:58.818Z"
+  },
+  "steppe-a#16": {
+    "verdict": "REJECTED",
+    "notes": "flat wide acacia, too wide for the canopy",
+    "at": "2026-11-16T22:08:58.862Z"
+  },
+  "steppe-a#17": {
+    "verdict": "REJECTED",
+    "notes": "weeping fringe, reads as a separate species",
+    "at": "2026-11-16T22:08:58.904Z"
+  },
+  "steppe-a#18": {
+    "verdict": "REJECTED",
+    "notes": "S-shaped trunk, cartoon pose",
+    "at": "2026-11-16T22:08:58.947Z"
+  },
+  "steppe-a#19": {
+    "verdict": "REJECTED",
+    "notes": "heart-shaped crown, off-style",
+    "at": "2026-11-16T22:08:58.989Z"
+  },
+  "steppe-a#23": {
+    "verdict": "REJECTED",
+    "notes": "lollipop on a long stick",
+    "at": "2026-11-16T22:08:59.031Z"
+  },
+  "steppe-a#7": {
+    "verdict": "REJECTED",
+    "notes": "pear-shaped crown, reads as fruit",
+    "at": "2026-11-16T22:08:59.074Z"
+  },
+  "steppe-a#15": {
+    "verdict": "REJECTED",
+    "notes": "pear-shaped crown, reads as fruit",
+    "at": "2026-11-16T22:08:59.117Z"
+  },
+  "steppe-a#13": {
+    "verdict": "REJECTED",
+    "notes": "sparse bonsai pads, noisy in a crowd",
+    "at": "2026-11-16T22:08:59.160Z"
+  },
+  "steppe-a#14": {
+    "verdict": "REJECTED",
+    "notes": "sparse bonsai pads, noisy in a crowd",
+    "at": "2026-11-16T22:08:59.203Z"
+  },
+  "badlands-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "juniper: twisted juniper, dense dark blue-green crown on a red-brown trunk",
+    "at": "2026-11-16T22:08:59.246Z"
+  },
+  "badlands-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "juniper: twisted juniper, dense dark blue-green crown on a red-brown trunk",
+    "at": "2026-11-16T22:08:59.289Z"
+  },
+  "badlands-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "juniper: twisted juniper, dense dark blue-green crown on a red-brown trunk",
+    "at": "2026-11-16T22:08:59.333Z"
+  },
+  "badlands-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "juniper: twisted juniper, dense dark blue-green crown on a red-brown trunk",
+    "at": "2026-11-16T22:08:59.374Z"
+  },
+  "badlands-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "juniper: twisted juniper, dense dark blue-green crown on a red-brown trunk",
+    "at": "2026-11-16T22:08:59.415Z"
+  },
+  "badlands-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "juniper: twisted juniper, dense dark blue-green crown on a red-brown trunk",
+    "at": "2026-11-16T22:08:59.458Z"
+  },
+  "badlands-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "juniper: twisted juniper, dense dark blue-green crown on a red-brown trunk",
+    "at": "2026-11-16T22:08:59.501Z"
+  },
+  "badlands-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "mesquite: mesquite with a flat feathery olive crown",
+    "at": "2026-11-16T22:08:59.542Z"
+  },
+  "badlands-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "mesquite: mesquite with a flat feathery olive crown",
+    "at": "2026-11-16T22:08:59.586Z"
+  },
+  "badlands-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "mesquite: mesquite with a flat feathery olive crown",
+    "at": "2026-11-16T22:08:59.628Z"
+  },
+  "badlands-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "mesquite: mesquite with a flat feathery olive crown",
+    "at": "2026-11-16T22:08:59.670Z"
+  },
+  "badlands-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "mesquite: mesquite with a flat feathery olive crown",
+    "at": "2026-11-16T22:08:59.713Z"
+  },
+  "badlands-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "mesquite: mesquite with a flat feathery olive crown",
+    "at": "2026-11-16T22:08:59.756Z"
+  },
+  "badlands-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "gnarled: gnarled dry tree with grey-green leaf clumps",
+    "at": "2026-11-16T22:08:59.801Z"
+  },
+  "badlands-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "gnarled: gnarled dry tree with grey-green leaf clumps",
+    "at": "2026-11-16T22:08:59.844Z"
+  },
+  "badlands-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "gnarled: gnarled dry tree with grey-green leaf clumps",
+    "at": "2026-11-16T22:08:59.887Z"
+  },
+  "badlands-a#6": {
+    "verdict": "REJECTED",
+    "notes": "too few leaf clumps, thin limbs read as noise",
+    "at": "2026-11-16T22:08:59.929Z"
+  },
+  "badlands-a#10": {
+    "verdict": "REJECTED",
+    "notes": "too few leaf clumps, thin limbs read as noise",
+    "at": "2026-11-16T22:08:59.972Z"
+  },
+  "badlands-a#18": {
+    "verdict": "REJECTED",
+    "notes": "too few leaf clumps, thin limbs read as noise",
+    "at": "2026-11-16T22:09:00.016Z"
+  },
+  "badlands-a#3": {
+    "verdict": "REJECTED",
+    "notes": "tiered bonsai pads, off-style",
+    "at": "2026-11-16T22:09:00.058Z"
+  },
+  "badlands-a#7": {
+    "verdict": "REJECTED",
+    "notes": "tiered bonsai pads, off-style",
+    "at": "2026-11-16T22:09:00.100Z"
+  },
+  "badlands-a#15": {
+    "verdict": "REJECTED",
+    "notes": "tiered bonsai pads, off-style",
+    "at": "2026-11-16T22:09:00.143Z"
+  },
+  "badlands-a#23": {
+    "verdict": "REJECTED",
+    "notes": "tiered bonsai pads, off-style",
+    "at": "2026-11-16T22:09:00.185Z"
+  },
+  "badlands-a#11": {
+    "verdict": "REJECTED",
+    "notes": "smooth dome crown without texture, flat beside the rest",
+    "at": "2026-11-16T22:09:00.226Z"
+  },
+  "badlands-a#19": {
+    "verdict": "REJECTED",
+    "notes": "smooth dome crown without texture, flat beside the rest",
+    "at": "2026-11-16T22:09:00.270Z"
+  },
+  "wasteland-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "deadoak: charred dead tree with thick stubby limbs, a chunky silhouette",
+    "at": "2026-11-16T22:12:50.933Z"
+  },
+  "wasteland-a#18": {
+    "verdict": "ACCEPTED",
+    "notes": "deadoak: charred dead tree with thick stubby limbs, a chunky silhouette",
+    "at": "2026-11-16T22:12:50.981Z"
+  },
+  "wasteland-a#23": {
+    "verdict": "ACCEPTED",
+    "notes": "deadoak: charred dead tree with thick stubby limbs, a chunky silhouette",
+    "at": "2026-11-16T22:12:51.030Z"
+  },
+  "wasteland-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "snag: leaning or forked dead snag with a few branches",
+    "at": "2026-11-16T22:12:51.076Z"
+  },
+  "wasteland-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "snag: leaning or forked dead snag with a few branches",
+    "at": "2026-11-16T22:12:51.121Z"
+  },
+  "wasteland-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "snag: leaning or forked dead snag with a few branches",
+    "at": "2026-11-16T22:12:51.168Z"
+  },
+  "wasteland-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "snag: leaning or forked dead snag with a few branches",
+    "at": "2026-11-16T22:12:51.213Z"
+  },
+  "wasteland-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "pine: burnt pine with ash-grey or black needle tufts",
+    "at": "2026-11-16T22:12:51.263Z"
+  },
+  "wasteland-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "pine: burnt pine with ash-grey or black needle tufts",
+    "at": "2026-11-16T22:12:51.310Z"
+  },
+  "wasteland-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "pine: burnt pine with ash-grey or black needle tufts",
+    "at": "2026-11-16T22:12:51.358Z"
+  },
+  "wasteland-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "pine: burnt pine with ash-grey or black needle tufts",
+    "at": "2026-11-16T22:12:51.403Z"
+  },
+  "wasteland-a#13": {
+    "verdict": "REJECTED",
+    "notes": "thin spike pine, almost no needles",
+    "at": "2026-11-16T22:12:51.449Z"
+  },
+  "wasteland-a#19": {
+    "verdict": "REJECTED",
+    "notes": "thin bent grey snag, a line at native size",
+    "at": "2026-11-16T22:12:51.493Z"
+  },
+  "wasteland-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a stump or broken trunk without a crown, reads as a stump not a wood",
+    "at": "2026-11-16T22:12:51.536Z"
+  },
+  "wasteland-a#4": {
+    "verdict": "REJECTED",
+    "notes": "a stump or broken trunk without a crown, reads as a stump not a wood",
+    "at": "2026-11-16T22:12:51.601Z"
+  },
+  "wasteland-a#7": {
+    "verdict": "REJECTED",
+    "notes": "a stump or broken trunk without a crown, reads as a stump not a wood",
+    "at": "2026-11-16T22:12:51.662Z"
+  },
+  "wasteland-a#11": {
+    "verdict": "REJECTED",
+    "notes": "a stump or broken trunk without a crown, reads as a stump not a wood",
+    "at": "2026-11-16T22:12:51.735Z"
+  },
+  "wasteland-a#14": {
+    "verdict": "REJECTED",
+    "notes": "a stump or broken trunk without a crown, reads as a stump not a wood",
+    "at": "2026-11-16T22:12:51.834Z"
+  },
+  "wasteland-a#20": {
+    "verdict": "REJECTED",
+    "notes": "a stump or broken trunk without a crown, reads as a stump not a wood",
+    "at": "2026-11-16T22:12:51.952Z"
+  },
+  "wasteland-a#24": {
+    "verdict": "REJECTED",
+    "notes": "a stump or broken trunk without a crown, reads as a stump not a wood",
+    "at": "2026-11-16T22:12:52.014Z"
+  },
+  "wasteland-a#1": {
+    "verdict": "REJECTED",
+    "notes": "bare split pole, too thin for a canopy",
+    "at": "2026-11-16T22:12:52.067Z"
+  },
+  "wasteland-a#10": {
+    "verdict": "REJECTED",
+    "notes": "bare split pole, too thin for a canopy",
+    "at": "2026-11-16T22:12:52.125Z"
+  },
+  "wasteland-a#16": {
+    "verdict": "REJECTED",
+    "notes": "bare split pole, too thin for a canopy",
+    "at": "2026-11-16T22:12:52.178Z"
+  },
+  "wasteland-a#9": {
+    "verdict": "REJECTED",
+    "notes": "curly twisted limbs, noisy and off-style",
+    "at": "2026-11-16T22:12:52.227Z"
+  },
+  "wasteland-a#21": {
+    "verdict": "REJECTED",
+    "notes": "curly twisted limbs, noisy and off-style",
+    "at": "2026-11-16T22:12:52.277Z"
+  },
+  "wasteland-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "deadoak: dead oak with a full round tangle of grey branches",
+    "at": "2026-11-16T22:12:52.322Z"
+  },
+  "wasteland-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "deadoak: dead oak with a full round tangle of grey branches",
+    "at": "2026-11-16T22:12:52.366Z"
+  },
+  "wasteland-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "deadoak: dead oak with a full round tangle of grey branches",
+    "at": "2026-11-16T22:12:52.408Z"
+  },
+  "wasteland-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "deadoak: dead oak with a full round tangle of grey branches",
+    "at": "2026-11-16T22:12:52.452Z"
+  },
+  "wasteland-b#24": {
+    "verdict": "ACCEPTED",
+    "notes": "deadoak: dead oak with a full round tangle of grey branches",
+    "at": "2026-11-16T22:12:52.496Z"
+  },
+  "wasteland-b#10": {
+    "verdict": "ACCEPTED",
+    "notes": "leafy: dead tree with a few dry brown leaves left",
+    "at": "2026-11-16T22:12:52.542Z"
+  },
+  "wasteland-b#11": {
+    "verdict": "ACCEPTED",
+    "notes": "leafy: dead tree with a few dry brown leaves left",
+    "at": "2026-11-16T22:12:52.587Z"
+  },
+  "wasteland-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "leafy: dead tree with a few dry brown leaves left",
+    "at": "2026-11-16T22:12:52.630Z"
+  },
+  "wasteland-b#13": {
+    "verdict": "ACCEPTED",
+    "notes": "leafy: dead tree with a few dry brown leaves left",
+    "at": "2026-11-16T22:12:52.676Z"
+  },
+  "wasteland-b#6": {
+    "verdict": "ACCEPTED",
+    "notes": "pine: charred pine with drooping black needle tufts",
+    "at": "2026-11-16T22:12:52.719Z"
+  },
+  "wasteland-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "pine: charred pine with drooping black needle tufts",
+    "at": "2026-11-16T22:12:52.765Z"
+  },
+  "wasteland-b#1": {
+    "verdict": "REJECTED",
+    "notes": "speckled tangle, noisy at native size",
+    "at": "2026-11-16T22:12:52.809Z"
+  },
+  "wasteland-b#5": {
+    "verdict": "REJECTED",
+    "notes": "thin spike pine, almost no needles",
+    "at": "2026-11-16T22:12:52.853Z"
+  },
+  "wasteland-b#8": {
+    "verdict": "REJECTED",
+    "notes": "thin spike pine, almost no needles",
+    "at": "2026-11-16T22:12:52.897Z"
+  },
+  "wasteland-b#9": {
+    "verdict": "REJECTED",
+    "notes": "thin spike pine, almost no needles",
+    "at": "2026-11-16T22:12:52.970Z"
+  },
+  "wasteland-b#14": {
+    "verdict": "REJECTED",
+    "notes": "thin bare snag, a line at native size",
+    "at": "2026-11-16T22:12:53.026Z"
+  },
+  "wasteland-b#22": {
+    "verdict": "REJECTED",
+    "notes": "thin bare snag, a line at native size",
+    "at": "2026-11-16T22:12:53.078Z"
+  },
+  "wasteland-b#23": {
+    "verdict": "REJECTED",
+    "notes": "thin bare snag, a line at native size",
+    "at": "2026-11-16T22:12:53.150Z"
+  },
+  "wasteland-b#15": {
+    "verdict": "REJECTED",
+    "notes": "weeping fringe of single-pixel lines, noisy in a crowd",
+    "at": "2026-11-16T22:12:53.207Z"
+  },
+  "wasteland-b#16": {
+    "verdict": "REJECTED",
+    "notes": "weeping fringe of single-pixel lines, noisy in a crowd",
+    "at": "2026-11-16T22:12:53.260Z"
+  },
+  "wasteland-b#17": {
+    "verdict": "REJECTED",
+    "notes": "weeping fringe of single-pixel lines, noisy in a crowd",
+    "at": "2026-11-16T22:12:53.307Z"
+  },
+  "wasteland-b#18": {
+    "verdict": "REJECTED",
+    "notes": "weeping fringe of single-pixel lines, noisy in a crowd",
+    "at": "2026-11-16T22:12:53.354Z"
+  },
+  "wasteland-b#19": {
+    "verdict": "REJECTED",
+    "notes": "weeping fringe of single-pixel lines, noisy in a crowd",
+    "at": "2026-11-16T22:12:53.400Z"
+  },
+  "wasteland-b#20": {
+    "verdict": "REJECTED",
+    "notes": "black bush without a trunk, a shrub not a tree",
+    "at": "2026-11-16T22:12:53.446Z"
+  },
+  "wasteland-b#21": {
+    "verdict": "REJECTED",
+    "notes": "black bush without a trunk, a shrub not a tree",
+    "at": "2026-11-16T22:12:53.490Z"
+  },
+  "grass-broadleaf-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: deep green round oak, dense leaf clumps",
+    "at": "2026-11-16T22:14:38.735Z"
+  },
+  "grass-broadleaf-b#5": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: deep green round oak, dense leaf clumps",
+    "at": "2026-11-16T22:14:38.783Z"
+  },
+  "grass-broadleaf-b#15": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: deep green round oak, dense leaf clumps",
+    "at": "2026-11-16T22:14:38.831Z"
+  },
+  "grass-broadleaf-b#24": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: deep green round oak, dense leaf clumps",
+    "at": "2026-11-16T22:14:38.883Z"
+  },
+  "grass-broadleaf-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: lobed deep green crown on a short trunk",
+    "at": "2026-11-16T22:14:38.930Z"
+  },
+  "grass-broadleaf-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: lobed deep green crown on a short trunk",
+    "at": "2026-11-16T22:14:38.985Z"
+  },
+  "grass-broadleaf-b#8": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: lobed deep green crown on a short trunk",
+    "at": "2026-11-16T22:14:39.034Z"
+  },
+  "grass-broadleaf-b#13": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: lobed deep green crown on a short trunk",
+    "at": "2026-11-16T22:14:39.085Z"
+  },
+  "grass-broadleaf-b#23": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: lobed deep green crown on a short trunk",
+    "at": "2026-11-16T22:14:39.134Z"
+  },
+  "grass-broadleaf-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: compact round or leaning crown, a quiet filler",
+    "at": "2026-11-16T22:14:39.183Z"
+  },
+  "grass-broadleaf-b#14": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: compact round or leaning crown, a quiet filler",
+    "at": "2026-11-16T22:14:39.232Z"
+  },
+  "grass-broadleaf-b#16": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: compact round or leaning crown, a quiet filler",
+    "at": "2026-11-16T22:14:39.281Z"
+  },
+  "grass-broadleaf-b#17": {
+    "verdict": "ACCEPTED",
+    "notes": "broadleaf: compact round or leaning crown, a quiet filler",
+    "at": "2026-11-16T22:14:39.331Z"
+  },
+  "grass-broadleaf-b#3": {
+    "verdict": "REJECTED",
+    "notes": "many separate leaf balls, noisy in a crowd",
+    "at": "2026-11-16T22:14:39.384Z"
+  },
+  "grass-broadleaf-b#9": {
+    "verdict": "REJECTED",
+    "notes": "flat umbrella crown, savanna not meadow",
+    "at": "2026-11-16T22:14:39.435Z"
+  },
+  "grass-broadleaf-b#18": {
+    "verdict": "REJECTED",
+    "notes": "wide bonsai pose",
+    "at": "2026-11-16T22:14:39.483Z"
+  },
+  "grass-broadleaf-b#19": {
+    "verdict": "REJECTED",
+    "notes": "smooth dome without texture",
+    "at": "2026-11-16T22:14:39.530Z"
+  },
+  "grass-broadleaf-b#20": {
+    "verdict": "REJECTED",
+    "notes": "stacked tiers, topiary",
+    "at": "2026-11-16T22:14:39.579Z"
+  },
+  "grass-broadleaf-b#1": {
+    "verdict": "REJECTED",
+    "notes": "smooth egg crown, no leaf clumps",
+    "at": "2026-11-16T22:14:39.625Z"
+  },
+  "grass-broadleaf-b#11": {
+    "verdict": "REJECTED",
+    "notes": "smooth egg crown, no leaf clumps",
+    "at": "2026-11-16T22:14:39.672Z"
+  },
+  "grass-broadleaf-b#6": {
+    "verdict": "REJECTED",
+    "notes": "cone crown, reads as a conifer",
+    "at": "2026-11-16T22:14:39.719Z"
+  },
+  "grass-broadleaf-b#21": {
+    "verdict": "REJECTED",
+    "notes": "cone crown, reads as a conifer",
+    "at": "2026-11-16T22:14:39.766Z"
+  },
+  "grass-broadleaf-b#10": {
+    "verdict": "REJECTED",
+    "notes": "tiered bonsai pads, off-style",
+    "at": "2026-11-16T22:14:39.814Z"
+  },
+  "grass-broadleaf-b#12": {
+    "verdict": "REJECTED",
+    "notes": "tiered bonsai pads, off-style",
+    "at": "2026-11-16T22:14:39.860Z"
+  },
+  "grass-broadleaf-b#22": {
+    "verdict": "REJECTED",
+    "notes": "tiered bonsai pads, off-style",
+    "at": "2026-11-16T22:14:39.907Z"
+  }
+}

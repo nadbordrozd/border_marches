@@ -69,7 +69,7 @@ The Pulp Wars TL;DR, condensed:
 | Mine, dwelling | 64-72 px wide | Seated 3 px above the cell bottom |
 | Pickup (resource, chest) | 40 x 40 to 48 x 48 | Centred; smaller and calmer than any creature |
 | Mountain piece | 2 or 3 cells wide, sandstone tablelands 4 or 5 (1x1 only as decoration); 1 to 3 rows; low up to 13 px, tall up to 48 px above its footprint | Bricked rows, ragged foot; the smallest mountain is 2x2 |
-| Forest piece | cols x 80 by rows x 80 + 24 | Paints only over its footprint and a 24 px band above |
+| Tree (forest canopy) | about 14-43 x 25-44, generated at that size | Bottom-centred on its trunk; a crown rises at most 40 px above the wood's northern cells ([classes/trees.md](classes/trees.md)) |
 | Resource icon (UI) | 32 x 32, generated at that size | HUD |
 
 PixelLab Pixen sizes are multiples of 4; descriptions are capped at 2000
@@ -99,10 +99,13 @@ Goals (each is a review check on a captured map at zoom 0.75 and 1):
    Pulp Wars: a larger piece set, and **no two neighbouring pieces share a
    variant** (horizontal or vertical). The generator gives ranges organic
    outlines (ridges, spurs, passes), never rectangles or round blobs.
-4. **Forests look grown, not stamped.** Fixed 2 x 2 block packing with the
-   exact-cover piece set, seam clumps, a ragged shade veil and the softening
-   pass; the clump set follows the ground (see the mapping below). Single
-   trees and small groves break open ground.
+4. **Forests look grown, not stamped.** A wood is one dense canopy of small
+   single trees (bead xaj.26, `src/render/map/canopy.ts`): blue-noise trunks
+   sampled at world coordinates, y-sorted so crowns overlap, an outline
+   wobbled off the grid, a darker tint under the trees, a few decorative
+   trees spilling onto free ground (never roads, objects or entrances), and
+   a species mix per ground (see the mapping below). The same trees stand
+   alone on open ground.
 5. **Coasts and water as code.** A thin, uneven sand line where land meets
    water; shallow against deep as a wandering edge plus a half-depth shelf.
 6. **Roads are dirt tracks drawn in code**, passing under trees and rocks;
@@ -124,17 +127,17 @@ Goals (each is a review check on a captured map at zoom 0.75 and 1):
 Grounds reuse the Pulp Wars textured grounds; their faction associations
 carry over as the neutral meaning of each terrain here.
 
-| Terrain | Look | Pulp Wars source ground | Base colour | Forest clump set on it | Move cost |
+| Terrain | Look | Pulp Wars source ground | Base colour | Forest trees on it | Move cost |
 | --- | --- | --- | --- | --- | ---: |
-| Grass | Neutral grass, faint mottle and tufts | default Grass (Humans) | `#8ab85c` | default trees | 100 |
-| Jungle | Lost World ground: darker bluer green, moss, litter | Dinosaurs | `#63a35b` | jungle | 150 (100 native) |
-| Steppe | Goblin dry grass: straw drifts, tufts, seed heads | Goblins | `#d3c176` | scrub | 100 |
-| Badlands | Martian red regolith with shaded rocks | Martians | `#b56c46` | alien fungus | 125 |
-| Wasteland | Undead ash after a wildfire: twigs, embers | Undead | `#716a64` | dead wood | 150 |
+| Grass | Neutral grass, faint mottle and tufts | default Grass (Humans) | `#8ab85c` | conifers, deep green broadleaf, autumn orange and yellow | 100 |
+| Jungle | Lost World ground: darker bluer green, moss, litter | Dinosaurs | `#63a35b` | broadleaf, palms, banana | 150 (100 native) |
+| Steppe | Goblin dry grass: straw drifts, tufts, seed heads | Goblins | `#d3c176` | olive oaks, birches, wind-bent elms | 100 |
+| Badlands | Martian red regolith with shaded rocks | Martians | `#b56c46` | junipers, mesquite, gnarled scrub | 125 |
+| Wasteland | Undead ash after a wildfire: twigs, embers | Undead | `#716a64` | dead oaks, burnt pines, snags | 150 |
 | Shallow water | Flat light turquoise, a few ripples | Shallow water | about `#8fd3dc` | - | impassable |
 | Deep water | Same, deep blue | Deep water | about `#4277a5` | - | impassable |
 | Mountains | Warm grey rock, cream snow, slate outline, ragged foot over the cell's ground | Massif pieces | rock restyle per the lessons | - | impassable |
-| Forest | Clump pieces over the cell's ground | Faction forests | per ground | - | impassable |
+| Forest | A canopy of small trees over the cell's ground | New `trees` set | per ground | - | impassable |
 | Road | Code-painted dirt track | Dirt road | - | - | 75 |
 
 Move costs are canonical in
@@ -189,4 +192,5 @@ Rules for reuse:
 | 2026-11-15 | No straight edges and silhouette scree: zone borders get a fine warp and a wobble pass breaks every range or ground edge straighter than 3 cells (2x2 rule and seals kept); the scree and rock base follow the placed pieces' silhouettes, not the cells; big badlands fill with flat-topped plateaus (new kind `plateau`, 2x2/3x2/3x3) and keep landmark buttes for their edges; snowless granite (domes, slabs, cliffs, forested shoulders); a second 2x3 per palette; long low sandstone benches on back rims | Bead `border_marches-xaj.21`, [MASSIF_ART.md](MASSIF_ART.md#iteration-6-bead-xaj21) |
 | 2026-11-15 | Tablelands and landmark spacing: wide sandstone tablelands (4x2, 5x2) whose outlines are composed from accepted pieces, cut at cell edges into pieces that join into one tableland; landmark sprites (and big pieces) at least 12 cells from another copy of themselves anywhere on the map; recoloured siblings by edits; snowless granite ridges; deep badlands and steppe clusters; a rubble rock base | Bead `border_marches-xaj.22`, [MASSIF_ART.md](MASSIF_ART.md#iteration-7-bead-xaj22) |
 | 2026-11-15 | Iteration 8: tableland joins only within one top tone and never with the caprock-patch take (retired); wide granite massifs (4x2, 5x2) from spliced and flattened outlines with a per-column rise rule; three-row sandstone tablelands (4x3, 5x3) and their cuts; banded sandstone edge ridges; calmer granite clutter, quieter siblings, softer rubble | Bead `border_marches-xaj.23`, [MASSIF_ART.md](MASSIF_ART.md#iteration-8-bead-xaj23) |
+| 2026-11-16 | Forests are a dense canopy of small single trees (about 0.2-0.55 cell wide, crowns at most 40 px above the wood), blue noise at world coordinates, wobbled outline, under-canopy tint, limited spill, species per ground; the 2 x 2 block packing and seam clumps are retired from the adventure map (battle and town screens still use the imported clumps). Open ground: the mini-mesa and rock-pillar doodads are retired, the cattle skull, tumbleweed and tall straw clump made rarer, lone trees drawn at native size | User (2026-11-16): Heroes II reference, "blend seamlessly", no grid, low enough not to hide a unit; bead `border_marches-xaj.26`, [classes/trees.md](classes/trees.md) |
 | 2026-11-15 | Essence is violet (`#a855f7`, shadow `#6b21a8`, light `#e9d5ff`) on its pickup, mine and item; the ore pickup is dark charcoal iron with silver veins, not the imported copper ore | Bead `border_marches-xaj.9`: teal clashes with shallow water, copper with the Lost World accent ([MVP_NEW_ART.md](MVP_NEW_ART.md)) |

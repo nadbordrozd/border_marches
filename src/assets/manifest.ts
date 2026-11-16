@@ -37,6 +37,7 @@
  * fog-lift-v7.ts).
  */
 import type { ResourceId, Terrain } from "../core/map/types";
+import { TREE_ASSETS } from "./trees";
 
 /** Master pixels per map cell. */
 export const CELL_PX = 80;
@@ -62,7 +63,8 @@ export type AssetCategory =
   | "resource-item"
   | "massif-piece"
   | "town-3x2"
-  | "doodad";
+  | "doodad"
+  | "tree";
 
 /** One PNG under public/. */
 export interface ImageAsset {
@@ -4041,6 +4043,7 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...MASSIF_PIECES,
   ...TOWN_3X2_ASSETS,
   ...DOODAD_ASSETS,
+  ...TREE_ASSETS,
 ];
 
 const BY_KEY: ReadonlyMap<string, ImageAsset> = new Map(

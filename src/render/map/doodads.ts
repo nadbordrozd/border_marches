@@ -8,7 +8,7 @@
  * with its size, draw scale, weight and whether it lies flat). Today the
  * images are the dedicated doodad sprites of bead xaj.14 (`DOODAD_EXTRA`),
  * the code-drawn ones of doodad-art.ts (CODE_DOODAD_SHARE of the weight)
- * and the forest sets' single clumps drawn at half size as lone small trees.
+ * and the small canopy trees (trees.ts) at their native size as lone trees.
  *
  * Placement is blue noise: one hashed candidate per DOODAD_GRID-px square of
  * the map, kept with a probability from the ground's density times a slow
@@ -17,13 +17,9 @@
  * with an obstacle or object, or (unless flat) in the middle of a cell where
  * a hero or monster stands. Everything is a pure function of the map.
  */
-import {
-  CELL_PX,
-  FOREST_SETS,
-  GROUND_TERRAINS,
-  doodadsOf,
-} from "../../assets/manifest";
+import { CELL_PX, GROUND_TERRAINS, doodadsOf } from "../../assets/manifest";
 import type { GroundTerrain } from "../../assets/manifest";
+import { treesOf } from "../../assets/trees";
 import type { GameMap } from "../../core/map/types";
 import { DOODAD_ART_VARIANTS, doodadArt } from "./doodad-art";
 import type { DoodadArtKind } from "./doodad-art";
@@ -102,6 +98,22 @@ const FLAT_SPRITES: ReadonlySet<string> = new Set([
 ]);
 
 /**
+ * How often each dedicated sprite is drawn relative to the others of its
+ * ground (1 when not listed). Bead xaj.26, after the user's Heroes II
+ * reference (low, blended open ground): the mini mesa and the rock pillar
+ * read as stamped little mountains and are retired; the oversized cattle
+ * skull, the swirl tumbleweed and the tall straw clump read as stamps when
+ * repeated, so they are rarer.
+ */
+export const DOODAD_SPRITE_WEIGHT: Readonly<Record<string, number>> = {
+  "doodad-badlands-mesa-a": 0,
+  "doodad-badlands-pillar-a": 0,
+  "doodad-steppe-skull-a": 0.3,
+  "doodad-steppe-tumbleweed-a": 0.45,
+  "doodad-steppe-grass-a": 0.6,
+};
+
+/**
  * Extra rows per ground: the dedicated doodad sprites of bead xaj.14
  * (`doodadsOf`), sharing 1 - CODE_DOODAD_SHARE of the ground's weight.
  */
@@ -120,34 +132,34 @@ export const DOODAD_EXTRA: Readonly<
         : (total * (1 - CODE_DOODAD_SHARE)) / CODE_DOODAD_SHARE / list.length;
     return [
       ground,
-      list.map((d): DoodadSpec => ({
-        key: d.key,
-        w: d.w,
-        h: d.h,
-        scale: 1,
-        weight: each,
-        flat: FLAT_SPRITES.has(d.kind),
-      })),
+      list
+        .map((d): DoodadSpec => ({
+          key: d.key,
+          w: d.w,
+          h: d.h,
+          scale: 1,
+          weight: each * (DOODAD_SPRITE_WEIGHT[d.key] ?? 1),
+          flat: FLAT_SPRITES.has(d.kind),
+        }))
+        .filter((spec) => spec.weight > 0),
     ];
   }),
 ) as Record<GroundTerrain, DoodadSpec[]>;
-
-/** Scale of a forest clump drawn as a lone small tree. */
-export const DOODAD_TREE_SCALE = 0.48;
 
 function buildSpecs(ground: GroundTerrain): DoodadSpec[] {
   const out: DoodadSpec[] = [];
   for (const [kind, weight] of Object.entries(KIND_WEIGHTS[ground])) {
     if (weight === undefined) continue;
     if (kind === "tree") {
-      const seams = FOREST_SETS[ground].seams;
-      for (const seam of seams)
+      // A lone small canopy tree at its native size (bead xaj.26).
+      const trees = treesOf(ground);
+      for (const tree of trees)
         out.push({
-          key: seam.key,
-          w: seam.w,
-          h: seam.h,
-          scale: DOODAD_TREE_SCALE,
-          weight: weight / seams.length,
+          key: tree.key,
+          w: tree.w,
+          h: tree.h,
+          scale: 1,
+          weight: weight / trees.length,
           flat: false,
         });
       continue;

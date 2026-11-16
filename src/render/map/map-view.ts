@@ -8,10 +8,11 @@
  *    simplified: one layer of faint stars moving at a tenth of the pan);
  * 2. the map in CHUNKS of 8 x 8 cells, each cached at master resolution:
  *    the ground layer (ground.ts: grounds, spill, water shelf, coast, forest
- *    shade, roads) and then every TALL_BODY entry (forest pieces, seam
- *    clumps, massif bodies) that overlaps the chunk, in pass order;
+ *    shade, roads) and then every TALL_BODY entry (canopy trees, massif
+ *    bodies, doodads) that overlaps the chunk, in pass order;
  * 3. the FOREGROUND entries in row, column, layer order: the bands above
- *    low rock and tree tops, objects, monsters, heroes, path arrows, chips;
+ *    low rock, the cached crown bands of the canopy (canopy-paint.ts),
+ *    objects, monsters, heroes, path arrows, chips;
  * 4. the fog of war, also cached in chunks, over everything.
  *
  * The camera is a world point at the viewport centre and a zoom step
@@ -23,6 +24,8 @@ import type { UnitAsset } from "../../assets/manifest";
 import type { GameMap, MapObject } from "../../core/map/types";
 import type { MapAssets, Surface } from "./assets";
 import { context2d, createSurface } from "./assets";
+import { TREE_ASSETS } from "../../assets/trees";
+import { installCanopyBands, toneTree } from "./canopy-paint";
 import { paintFog } from "./fog";
 import { buildGroundLayout, paintGround } from "./ground";
 import type { GroundLayout } from "./ground";
@@ -34,6 +37,7 @@ import {
   compareEntries,
   doodadEntries,
   featuredCells,
+  mapCanopy,
   objectEntries,
   terrainEntries,
   unitEntry,
@@ -196,6 +200,12 @@ export function createMapView(
   const screen = canvas.getContext("2d");
   if (screen === null) throw new Error("map renderer: no 2D context");
   const images = new Map<string, CanvasImageSource>(assets.images);
+  // The canopy's trees, toned toward their ground (canopy-paint.ts).
+  for (const tree of TREE_ASSETS) {
+    const image = images.get(tree.key);
+    if (image !== undefined)
+      images.set(tree.key, toneTree(image, tree.w, tree.h, tree.terrain));
+  }
   // The code-drawn doodads (doodad-art.ts).
   for (const list of Object.values(doodadSpecs()))
     for (const spec of list) {
@@ -306,13 +316,18 @@ export function createMapView(
       return;
     }
     // The scree follows the pieces' silhouettes (bead xaj.21).
+    const featured = featuredCells(map, objects);
     layout = buildGroundLayout(
       map,
       roadEnds(),
-      packRanges(map, featuredCells(map, objects)),
+      packRanges(map, featured),
+      featured,
     );
+    // The forest canopy and its cached crown bands (bead xaj.26).
+    const canopy = mapCanopy(map, featured);
+    installCanopyBands(images, canopy.bands);
     const entries = [
-      ...terrainEntries(map, objects),
+      ...terrainEntries(map, objects, canopy),
       ...doodadEntries(map, objects, layout),
     ].sort(compareEntries);
     bodies = entries.filter((e) => e.pass === "TALL_BODY");

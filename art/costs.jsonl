@@ -200,3 +200,12 @@
 {"at":"2026-11-15T23:27:36.103Z","set":"massif-granite","id":"g8-wide52-c","endpoint":"generate-image-v2","usd":0.11562554017702739}
 {"at":"2026-11-15T23:29:14.814Z","set":"massif-sandstone","id":"s8-ridge21-band","endpoint":"generate-image-v2","usd":0.11557016754150391}
 {"at":"2026-11-15T23:29:20.273Z","set":"massif-granite","id":"g8-wide42-c","endpoint":"generate-image-v2","usd":0.11549061044057211}
+{"at":"2026-11-16T21:59:36.175Z","set":"trees","id":"grass-conifer-a","endpoint":"generate-image-v2","usd":0.08328090789582994}
+{"at":"2026-11-16T22:01:24.040Z","set":"trees","id":"grass-broadleaf-a","endpoint":"generate-image-v2","usd":0.08329245373937819}
+{"at":"2026-11-16T22:03:27.004Z","set":"trees","id":"grass-autumn-a","endpoint":"generate-image-v2","usd":0.08213042198287117}
+{"at":"2026-11-16T22:05:01.574Z","set":"trees","id":"jungle-a","endpoint":"generate-image-v2","usd":0.08209923320346409}
+{"at":"2026-11-16T22:06:45.250Z","set":"trees","id":"steppe-a","endpoint":"generate-image-v2","usd":0.08258062609036763}
+{"at":"2026-11-16T22:08:18.298Z","set":"trees","id":"badlands-a","endpoint":"generate-image-v2","usd":0.08321188322703044}
+{"at":"2026-11-16T22:10:05.795Z","set":"trees","id":"wasteland-a","endpoint":"generate-image-v2","usd":0.08298462992244297}
+{"at":"2026-11-16T22:12:11.378Z","set":"trees","id":"wasteland-b","endpoint":"generate-image-v2","usd":0.08365750890307956}
+{"at":"2026-11-16T22:14:04.958Z","set":"trees","id":"grass-broadleaf-b","endpoint":"generate-image-v2","usd":0.0821676152282291}

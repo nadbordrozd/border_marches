@@ -35,6 +35,8 @@
 import { CELL_PX } from "../../assets/manifest";
 import type { GroundTerrain } from "../../assets/manifest";
 import type { GameMap } from "../../core/map/types";
+import { buildCanopyField, canopyTint } from "./canopy";
+import type { CanopyField } from "./canopy";
 import { hash4 } from "./hash";
 import { PALETTES, components, paletteOf, rangePalettes } from "./massif";
 import type { RangeCover } from "./massif";
@@ -313,7 +315,7 @@ export function waterDepthShare(
   return Math.max(step, SHELF.shelfDepth * band);
 }
 
-/** The forest shade: a dark tone of each ground, about an eighth opaque. */
+/** The forest shade: a dark tone of each ground (alpha from canopy.ts). */
 const FOREST_SHADE: Readonly<
   Record<GroundTerrain, readonly [number, number, number]>
 > = {
@@ -323,17 +325,6 @@ const FOREST_SHADE: Readonly<
   badlands: [72, 32, 20],
   wasteland: [34, 30, 28],
 };
-const FOREST_SHADE_ALPHA = 40 / 255;
-
-/** Depth (px) the forest shade is cut back from an open edge. */
-export function forestShadeCut(wx: number, wy: number): number {
-  return (
-    7 +
-    3 * Math.sin(TURN * (6 * wx + 5 * wy) + 0.9) +
-    2 * Math.sin(TURN * (15 * wy - 13 * wx) + 2.2) +
-    ((hash4(wx >> 1, wy >> 1, 9, 0x2f) % 3) - 1)
-  );
-}
 
 /**
  * A smooth field over the map: the bilinear interpolation of one value per
@@ -909,6 +900,8 @@ export interface GroundLayout {
   readonly rockPalette: Uint8Array;
   /** The ranges' cover (massif.ts), for the silhouette field; optional. */
   readonly cover?: RangeCover;
+  /** The forest canopy's facts (canopy.ts), for the tint under the trees. */
+  readonly canopy?: CanopyField;
 }
 
 /**
@@ -919,6 +912,7 @@ export function buildGroundLayout(
   map: GameMap,
   roadEnds: readonly (readonly [number, number])[] = [],
   cover?: RangeCover,
+  featured: ReadonlySet<number> = new Set(),
 ): GroundLayout {
   const { width, height } = map;
   const n = width * height;
@@ -1031,6 +1025,7 @@ export function buildGroundLayout(
     nearMountain,
     rockPalette,
     ...(cover === undefined ? {} : { cover }),
+    canopy: buildCanopyField(map, featured),
   };
 }
 
@@ -1086,7 +1081,7 @@ export function paintGround(
       const ly1 = Math.min(CELL, y0 + h - oy);
       const coastBits = layout.coast[i] ?? 0;
       const depthBits = layout.depth[i] ?? 0;
-      const forestEdges = layout.forest[i] ?? 255;
+      const wooded = layout.canopy?.near[i] === 1;
       const ranks = layout.ranks[i] ?? [];
       const links = layout.roads[i] ?? [];
       const water = kind === WATER;
@@ -1104,8 +1099,6 @@ export function paintGround(
           const wx = ox + lx;
           const wy = oy + ly;
           const o = ((wy - y0) * w + (wx - x0)) * 4;
-          const px = lx + 0.5;
-          const py = ly + 0.5;
           // Which side of the shore this pixel is on: the 0.5 contour of
           // the smooth land field, wavering, so coasts round their corners.
           let land = !water;
@@ -1223,13 +1216,11 @@ export function paintGround(
               else if (k === "wet") put(o, COAST.wet);
               else if (k === "lip") put(o, COAST.lip);
             }
-            if (forestEdges !== 255 && shade !== undefined) {
-              let cut = false;
-              if (forestEdges !== 0) {
-                const d = edgeDistance(forestEdges, px, py);
-                cut = d < forestShadeCut(wx, wy);
-              }
-              if (!cut) blend(o, shade, FOREST_SHADE_ALPHA);
+            // Under the canopy (bead xaj.26): a dark tone that follows the
+            // wood's wobbled outline, not the cells.
+            if (wooded && shade !== undefined && layout.canopy !== undefined) {
+              const alpha = canopyTint(layout.canopy, wx, wy);
+              if (alpha > 0) blend(o, shade, alpha);
             }
           }
           if (links.length > 0) {

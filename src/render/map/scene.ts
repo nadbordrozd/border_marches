@@ -20,8 +20,7 @@
  */
 import {
   CELL_PX,
-  FOREST_SETS,
-  FOREST_UP_PX,
+  GROUND_TERRAINS,
   MOUNTAIN_LOW_UP_PX,
   OBJECT_ASSETS,
   RESOURCE_MINES,
@@ -33,7 +32,6 @@ import {
   massifPieces,
 } from "../../assets/manifest";
 import type {
-  ForestShape,
   GroundTerrain,
   MassifPalette,
   Town3x2Asset,
@@ -42,21 +40,21 @@ import type {
 } from "../../assets/manifest";
 import type { GameMap, MapObject } from "../../core/map/types";
 import { objectBounds, objectCells } from "../../core/map/types";
+import { TREE_SPECIES_WEIGHTS, treesOf } from "../../assets/trees";
+import { buildCanopyField, canopyBands, placeCanopy } from "./canopy";
+import type {
+  CanopyBand,
+  CanopyTree,
+  TreeSpecies,
+  TreeSpeciesTable,
+} from "./canopy";
 import { placeDoodads } from "./doodads";
-import { forestClumps } from "./forest-fringe";
 import type { GroundLayout } from "./ground";
-import {
-  FOREST_SHAPE_IDS,
-  forestCells,
-  forestShapeRects,
-} from "./forest-packing";
-import type { ForestVariantCounts } from "./forest-packing";
 import { CREATURES, isCreatureId } from "../../data/creatures";
 import { hash4 } from "./hash";
 import { packRanges, paletteOf } from "./massif";
 
 const CELL = CELL_PX;
-const LETTERS = "abcdefgh";
 
 export const PASSES = ["TALL_BODY", "FOREGROUND"] as const;
 export type Pass = (typeof PASSES)[number];
@@ -175,21 +173,38 @@ function entry(
   };
 }
 
-// ------------------------------------------------------------- variants
+// ---------------------------------------------------------------- trees
 
-export const FOREST_COUNTS: ForestVariantCounts = Object.fromEntries(
-  FOREST_SHAPE_IDS.map((shape) => [
-    shape,
-    FOREST_SETS.grass.pieces.filter((piece) => piece.shape === shape).length,
+/** The canopy species of every ground, from the tree set (trees.ts). */
+export const TREE_SPECIES: TreeSpeciesTable = Object.fromEntries(
+  GROUND_TERRAINS.map((terrain) => [
+    terrain,
+    Object.entries(TREE_SPECIES_WEIGHTS[terrain])
+      .map(([name, weight]): TreeSpecies => ({
+        name,
+        weight,
+        sprites: treesOf(terrain, name).map((t) => ({
+          key: t.key,
+          w: t.w,
+          h: t.h,
+        })),
+      }))
+      .filter((species) => species.sprites.length > 0),
   ]),
-) as Record<ForestShape, number>;
+) as Record<GroundTerrain, TreeSpecies[]>;
 
-export function forestPieceKey(
-  set: GroundTerrain,
-  shape: ForestShape,
-  variant: number,
-): string {
-  return `forest-${set}-piece-${shape.toLowerCase()}-${LETTERS[variant] ?? "a"}`;
+/** A map's woods: every tree and the crown bands (canopy.ts). */
+export interface MapCanopy {
+  readonly trees: readonly CanopyTree[];
+  readonly bands: readonly CanopyBand[];
+}
+
+export function mapCanopy(
+  map: GameMap,
+  featured: ReadonlySet<number>,
+): MapCanopy {
+  const trees = placeCanopy(buildCanopyField(map, featured), TREE_SPECIES);
+  return { trees, bands: canopyBands(trees) };
 }
 
 // --------------------------------------------------------------- terrain
@@ -214,99 +229,49 @@ export function featuredCells(
 export function terrainEntries(
   map: GameMap,
   objects: readonly MapObject[],
+  canopy0?: MapCanopy,
 ): SceneEntry[] {
   const featured = featuredCells(map, objects);
   const out: SceneEntry[] = [];
-  const { width } = map;
   out.push(...massifEntries(map, featured));
-  const seams = (set: GroundTerrain) => FOREST_SETS[set].seams;
-  const woods = forestCells(
-    map,
-    FOREST_COUNTS,
-    (set) => seams(set).length,
-    featured,
-  );
-  for (const [index, cell] of woods) {
-    const x = index % width;
-    const y = Math.floor(index / width);
-    const sprites: SpriteOp[] = [];
-    const east =
-      cell.eastSeam === null ? undefined : seams(cell.set)[cell.eastSeam];
-    if (east !== undefined)
-      // Astride the east edge, its top at the cell's top: never above it.
-      sprites.push({
-        key: east.key,
-        sx: 0,
-        sy: 0,
-        sw: east.w,
-        sh: east.h,
-        dx: x * CELL + CELL - Math.round(east.w / 2),
-        dy: y * CELL + Math.max(0, CELL - east.h),
-      });
-    const north =
-      cell.northSeam === null ? undefined : seams(cell.set)[cell.northSeam];
-    if (north !== undefined)
-      // Rising 24 px into the forest cell above, over that piece's trunks.
-      sprites.push({
-        key: north.key,
-        sx: 0,
-        sy: 0,
-        sw: north.w,
-        sh: north.h,
-        dx: x * CELL + Math.round((CELL - north.w) / 2),
-        dy: y * CELL - FOREST_UP_PX,
-      });
-    for (const piece of cell.bodies) {
-      const key = forestPieceKey(cell.set, piece.shape, piece.variant);
-      for (const rect of forestShapeRects(piece.shape))
-        sprites.push({
-          key,
-          sx: rect.x * CELL,
-          sy: FOREST_UP_PX + rect.y * CELL,
-          sw: rect.w * CELL,
-          sh: rect.h * CELL,
-          dx: (piece.x + rect.x) * CELL,
-          dy: (piece.y + rect.y) * CELL,
-        });
-    }
-    if (sprites.length > 0)
-      out.push(entry("TALL_BODY", y, x, LAYER.TERRAIN, sprites));
-    for (const band of cell.bands) {
-      const piece = band.piece;
-      out.push(
-        entry("FOREGROUND", y, x, LAYER.TERRAIN, [
-          {
-            key: forestPieceKey(cell.set, piece.shape, piece.variant),
-            sx: band.column * CELL,
-            sy: band.row * CELL,
-            sw: band.columns * CELL,
-            sh: FOREST_UP_PX,
-            dx: (piece.x + band.column) * CELL,
-            dy: (piece.y + band.row) * CELL - FOREST_UP_PX,
-          },
-        ]),
-      );
-    }
-  }
-  for (const clump of forestClumps(map, woods, seams, featured)) {
-    const seam = seams(clump.set)[clump.seam];
-    if (seam === undefined) continue;
+  const canopy = canopy0 ?? mapCanopy(map, featured);
+  for (const tree of canopy.trees)
+    // Sorted by the trunk base, so crowns overlap from north to south.
     out.push(
-      entry("TALL_BODY", clump.row, clump.col, LAYER.TERRAIN, [
+      entry(
+        "TALL_BODY",
+        (tree.baseY - 1) / CELL,
+        tree.baseX / CELL,
+        LAYER.TERRAIN,
+        [
+          {
+            key: tree.key,
+            sx: 0,
+            sy: 0,
+            sw: tree.w,
+            sh: tree.h,
+            dx: tree.x,
+            dy: tree.y,
+          },
+        ],
+      ),
+    );
+  // The crowns rising above a row's top edge, again, after the row behind
+  // (its units and objects) and before the row itself.
+  for (const band of canopy.bands)
+    out.push(
+      entry("FOREGROUND", band.row - 0.5, band.x / CELL, LAYER.TERRAIN, [
         {
-          key: seam.key,
+          key: band.key,
           sx: 0,
           sy: 0,
-          sw: seam.w,
-          sh: seam.h,
-          dx: clump.x,
-          dy: clump.y,
-          dw: clump.w,
-          dh: clump.h,
+          sw: band.w,
+          sh: band.h,
+          dx: band.x,
+          dy: band.y,
         },
       ]),
     );
-  }
   return out;
 }
 

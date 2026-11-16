@@ -4,7 +4,6 @@
  * textured grounds and the water tiles).
  */
 import {
-  FOREST_SETS,
   GROUND_TERRAINS,
   GROUND_TEXTURES,
   HERO_ASSETS,
@@ -19,6 +18,7 @@ import {
   assetUrl,
 } from "../../assets/manifest";
 import type { GroundTerrain, ImageAsset } from "../../assets/manifest";
+import { TREE_ASSETS } from "../../assets/trees";
 import { blockMask } from "./ground";
 import type { GroundSources, PixelImage } from "./ground";
 
@@ -83,10 +83,7 @@ export function mapAssetList(): ImageAsset[] {
     ...MASSIF_PIECES,
     ...TOWN_3X2_ASSETS,
     ...DOODAD_ASSETS,
-    ...Object.values(FOREST_SETS).flatMap((set) => [
-      ...set.pieces,
-      ...set.seams,
-    ]),
+    ...TREE_ASSETS,
     ...TOWN_ASSETS,
     ...UNIT_ASSETS,
     ...HERO_ASSETS,

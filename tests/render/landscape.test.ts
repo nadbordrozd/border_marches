@@ -10,11 +10,10 @@ import {
   roadSegments,
   smoothPath,
 } from "../../src/render/map/road.ts";
-import { forestCells } from "../../src/render/map/forest-packing.ts";
-import { forestClumps } from "../../src/render/map/forest-fringe.ts";
 import {
   DOODAD_CENTRE,
   DOODAD_GAP,
+  DOODAD_SPRITE_WEIGHT,
   doodadSpecs,
   placeDoodads,
 } from "../../src/render/map/doodads.ts";
@@ -25,7 +24,6 @@ import {
 } from "../../src/render/map/ground.ts";
 import { FOG_TEXTURE_SIZE, fogTone } from "../../src/render/map/fog.ts";
 import {
-  FOREST_COUNTS,
   doodadEntries,
   featuredCells,
   mineKey,
@@ -36,12 +34,10 @@ import {
   ALL_ASSETS,
   DOODAD_ASSETS,
   CELL_PX,
-  FOREST_SETS,
   RESOURCE_MINES,
   RESOURCE_PICKUPS,
   TREASURE_PICKUP,
 } from "../../src/assets/manifest.ts";
-import type { GroundTerrain } from "../../src/assets/manifest.ts";
 import { createMap } from "../../src/core/map/types.ts";
 import type { GameMap } from "../../src/core/map/types.ts";
 import { generateMap } from "../../src/core/map/generate.ts";
@@ -155,59 +151,6 @@ describe("smooth roads", () => {
   });
 });
 
-describe("frayed woods", () => {
-  const map = generateMap(2, { size: "M" });
-  const featured = featuredCells(map, map.objects);
-  const seams = (set: GroundTerrain) => FOREST_SETS[set].seams;
-  const cells = forestCells(
-    map,
-    FOREST_COUNTS,
-    (set) => seams(set).length,
-    featured,
-  );
-  const clumps = forestClumps(map, cells, seams, featured);
-
-  it("is deterministic and has all three kinds of clump", () => {
-    expect(forestClumps(map, cells, seams, featured)).toEqual(clumps);
-    const kinds = new Set(clumps.map((c) => c.kind));
-    expect([...kinds].sort()).toEqual(["edge", "outlier", "thin"]);
-  });
-
-  it("never hangs crowns over water, roads or objects", () => {
-    const blockedCell = (x: number, y: number): boolean => {
-      const cell = map.cells[y * map.width + x];
-      return (
-        cell === undefined ||
-        cell.terrain === "water" ||
-        cell.road ||
-        featured.has(y * map.width + x)
-      );
-    };
-    for (const c of clumps) {
-      // The trunk base (bottom centre) never stands on such a cell.
-      const bx = Math.floor((c.x + c.w / 2) / CELL);
-      const by = Math.floor((c.y + c.h - 1) / CELL);
-      if (bx < 0 || by < 0 || bx >= map.width || by >= map.height) continue;
-      expect(blockedCell(bx, by), `${c.kind} at ${bx},${by}`).toBe(false);
-    }
-  });
-
-  it("keeps outliers off the cell centre where a hero stands", () => {
-    for (const c of clumps.filter((k) => k.kind === "outlier")) {
-      const bx = c.x + c.w / 2;
-      const by = c.y + c.h;
-      const cx = Math.floor(bx / CELL) * CELL + CELL / 2;
-      const cy = Math.floor((by - 1) / CELL) * CELL + CELL / 2;
-      expect(Math.abs(bx - cx) >= 15 || Math.abs(by - cy) >= 30).toBe(true);
-      const cell =
-        map.cells[
-          Math.floor((by - 1) / CELL) * map.width + Math.floor(bx / CELL)
-        ];
-      expect(cell?.obstacle).toBe("none");
-    }
-  });
-});
-
 describe("doodads", () => {
   const map = generateMap(3, { size: "M" });
   const layout = buildGroundLayout(map);
@@ -253,12 +196,13 @@ describe("doodads", () => {
     expect(close).toBeLessThan(placed.length * 0.02);
   });
 
-  it("strews every dedicated doodad sprite on its own ground", () => {
+  it("strews every dedicated doodad sprite on its own ground, unless retired", () => {
     for (const doodad of DOODAD_ASSETS) {
       const spec = doodadSpecs()[doodad.terrain].find(
         (s) => s.key === doodad.key,
       );
-      expect(spec?.weight).toBeGreaterThan(0);
+      if (DOODAD_SPRITE_WEIGHT[doodad.key] === 0) expect(spec).toBeUndefined();
+      else expect(spec?.weight).toBeGreaterThan(0);
     }
   });
 

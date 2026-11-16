@@ -52,7 +52,8 @@ describe("terrain entries", () => {
 
   it("only names images of the manifest", () => {
     for (const e of entries)
-      for (const s of e.sprites) expect(keys.has(s.key)).toBe(true);
+      for (const s of e.sprites)
+        expect(keys.has(s.key) || s.key.startsWith("canopy-band:")).toBe(true);
   });
 
   it("is deterministic", () => {
@@ -65,7 +66,9 @@ describe("terrain entries", () => {
     const bands = entries.filter((e) => e.pass === "FOREGROUND");
     expect(bands.length).toBeGreaterThan(0);
     for (const band of bands)
-      for (const s of band.sprites) expect(s.dy + s.sh).toBe(band.row * 80);
+      // Crown bands sort half a row early (before the row they belong to).
+      for (const s of band.sprites)
+        expect(s.dy + s.sh).toBe(Math.ceil(band.row) * 80);
   });
 });
 
