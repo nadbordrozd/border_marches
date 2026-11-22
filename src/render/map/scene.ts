@@ -54,6 +54,9 @@ import type {
 } from "./canopy";
 import { placeDoodads } from "./doodads";
 import type { GroundLayout } from "./ground";
+import { peaksOf } from "../../assets/peaks";
+import { buildPeakField, placePeaks } from "./peaks";
+import type { PeakField, PeakSprite, PeakTable, PlacedPeak } from "./peaks";
 import { CREATURES, isCreatureId } from "../../data/creatures";
 import { hash4 } from "./hash";
 import { packRanges, paletteOf } from "./massif";
@@ -212,6 +215,58 @@ export function mapCanopy(
 ): MapCanopy {
   const trees = placeCanopy(buildCanopyField(map, featured), TREE_SPECIES);
   return { trees, bands: canopyBands(trees) };
+}
+
+// ---------------------------------------------------------------- peaks
+
+/** The peak sprites of every ground's mountains (assets/peaks.ts). */
+export const PEAK_SPRITES: PeakTable = Object.fromEntries(
+  GROUND_TERRAINS.map((terrain) => [
+    terrain,
+    peaksOf(terrain).map((p) => ({
+      key: p.key,
+      w: p.w,
+      h: p.h,
+      tier: p.tier,
+    })),
+  ]),
+) as Record<GroundTerrain, PeakSprite[]>;
+
+/** A map's mountain ranges: the field and every placed peak (peaks.ts). */
+export interface MapPeaks {
+  readonly field: PeakField;
+  readonly peaks: readonly PlacedPeak[];
+}
+
+export function mapPeaks(
+  map: GameMap,
+  featured: ReadonlySet<number>,
+): MapPeaks {
+  const field = buildPeakField(map, featured);
+  return { field, peaks: placePeaks(field, PEAK_SPRITES) };
+}
+
+/** Peak bodies, sorted by their base like the trees they stand among. */
+export function peakEntries(peaks: readonly PlacedPeak[]): SceneEntry[] {
+  return peaks.map((peak) =>
+    entry(
+      "TALL_BODY",
+      (peak.baseY - 1) / CELL,
+      peak.baseX / CELL,
+      LAYER.TERRAIN,
+      [
+        {
+          key: peak.key,
+          sx: 0,
+          sy: 0,
+          sw: peak.w,
+          sh: peak.h,
+          dx: peak.x,
+          dy: peak.y,
+        },
+      ],
+    ),
+  );
 }
 
 // --------------------------------------------------------------- terrain

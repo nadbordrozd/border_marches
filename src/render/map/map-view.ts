@@ -8,8 +8,8 @@
  *    simplified: one layer of faint stars moving at a tenth of the pan);
  * 2. the map in CHUNKS of 8 x 8 cells, each cached at master resolution:
  *    the ground layer (ground.ts: grounds, spill, water shelf, coast, forest
- *    shade, roads) and then every TALL_BODY entry (canopy trees, massif
- *    bodies, doodads) that overlaps the chunk, in pass order;
+ *    shade, roads) and then every TALL_BODY entry (canopy trees, peaks,
+ *    doodads) that overlaps the chunk, in pass order;
  * 3. the FOREGROUND entries in row, column, layer order: the bands above
  *    low rock, the cached crown bands of the canopy (canopy-paint.ts),
  *    objects, monsters, heroes, path arrows, chips;
@@ -24,7 +24,9 @@ import type { UnitAsset } from "../../assets/manifest";
 import type { GameMap, MapObject } from "../../core/map/types";
 import type { MapAssets, Surface } from "./assets";
 import { context2d, createSurface } from "./assets";
+import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
+import { canopyBands } from "./canopy";
 import { installCanopyBands, toneTree } from "./canopy-paint";
 import { paintFog } from "./fog";
 import { buildGroundLayout, paintGround } from "./ground";
@@ -33,6 +35,9 @@ import { hashUnit } from "./hash";
 import { doodadArt } from "./doodad-art";
 import { doodadSpecs } from "./doodads";
 import { packRanges } from "./massif";
+import { tonePeak } from "./peak-paint";
+import { paintPeakUnder } from "./peaks";
+import type { PeakField } from "./peaks";
 import { RELIEF, buildRelief, paintRelief } from "./relief";
 import type { Relief } from "./relief";
 import {
@@ -40,7 +45,9 @@ import {
   doodadEntries,
   featuredCells,
   mapCanopy,
+  mapPeaks,
   objectEntries,
+  peakEntries,
   terrainEntries,
   unitEntry,
 } from "./scene";
@@ -196,15 +203,14 @@ const isWhole = (value: number): boolean =>
   Math.abs(value - Math.round(value)) < 1e-6;
 
 /**
- * How mountains are drawn (bead xaj.25): the continuous low relief
- * (relief.ts), or the old massif sprites behind `?mountains=sprites` for
- * A/B during this iteration.
+ * How mountains are drawn: the crowd of front-view peaks (peaks.ts, bead
+ * xaj.30) by default; the code-drawn relief (`?mountains=relief`) and the old
+ * massif sprites (`?mountains=sprites`) stay until cleanup bead xaj.29.
  */
-export function mountainMode(): "relief" | "sprites" {
+export function mountainMode(): "peaks" | "relief" | "sprites" {
   const search = typeof location === "undefined" ? "" : location.search;
-  return new URLSearchParams(search).get("mountains") === "sprites"
-    ? "sprites"
-    : "relief";
+  const mode = new URLSearchParams(search).get("mountains");
+  return mode === "sprites" || mode === "relief" ? mode : "peaks";
 }
 
 /** Mean colour of each ground texture (the relief's foot leans to it). */
@@ -268,9 +274,17 @@ export function createMapView(
   };
   const stars = starTile();
   let starPattern: CanvasPattern | null = null;
-  const reliefMode = mountainMode() === "relief";
+  const mode = mountainMode();
+  const reliefMode = mode === "relief";
   const grounds = reliefMode ? groundMeans(assets) : {};
   let relief: Relief | null = null;
+  // The peaks, calmer than units, their outlines softened (peak-paint.ts).
+  for (const peak of PEAK_ASSETS) {
+    const image = images.get(peak.key);
+    if (image !== undefined)
+      images.set(peak.key, tonePeak(image, peak.w, peak.h, peak.terrain));
+  }
+  let peakField: PeakField | null = null;
   /** The relief's lips (relief-lip:x,y), cut from their chunk when built. */
   const lipImages = new Map<string, Surface>();
 
@@ -350,6 +364,7 @@ export function createMapView(
     chunks.clear();
     lipImages.clear();
     relief = null;
+    peakField = null;
     if (map === null) {
       layout = null;
       bodies = [];
@@ -358,11 +373,32 @@ export function createMapView(
     }
     const featured = featuredCells(map, objects);
     // The forest canopy and its cached crown bands (bead xaj.26).
-    const canopy = mapCanopy(map, featured);
-    installCanopyBands(images, canopy.bands);
+    let canopy = mapCanopy(map, featured);
     let terrain: SceneEntry[];
     const lips: SceneEntry[] = [];
-    if (reliefMode) {
+    if (mode === "peaks") {
+      // The crowd of peaks (bead xaj.30): no scree ring and no massif
+      // sprites. Peaks share the crown bands with the trees, in one base
+      // order, so what rises over an open cell covers only a unit's feet.
+      const range = mapPeaks(map, featured);
+      peakField = range.field;
+      canopy = {
+        trees: canopy.trees,
+        bands: canopyBands(
+          [...canopy.trees, ...range.peaks].sort(
+            (a, b) => a.baseY - b.baseY || a.baseX - b.baseX,
+          ),
+        ),
+      };
+      const base = buildGroundLayout(map, roadEnds(), undefined, featured);
+      layout = { ...base, nearMountain: new Uint8Array(base.mountain.length) };
+      terrain = [
+        ...terrainEntries(map, objects, canopy).filter(
+          (e) => !e.sprites.some((s) => s.key.startsWith("massif-")),
+        ),
+        ...peakEntries(range.peaks),
+      ];
+    } else if (reliefMode) {
       // Low relief (bead xaj.25): no scree ring and no massif sprites; the
       // paint a range raises over the open cell north of it is drawn again
       // in the foreground at the range's row, over the feet of a unit
@@ -407,6 +443,7 @@ export function createMapView(
       );
       terrain = terrainEntries(map, objects, canopy);
     }
+    installCanopyBands(images, canopy.bands);
     const entries = [
       ...terrain,
       ...lips,
@@ -524,6 +561,7 @@ export function createMapView(
     const image = ctx.createImageData(w, h);
     paintGround(layout, assets.ground, x0, y0, w, h, image.data);
     if (relief !== null) paintChunkRelief(relief, x0, y0, w, h, image.data);
+    if (peakField !== null) paintPeakUnder(peakField, x0, y0, w, h, image.data);
     ctx.putImageData(image, 0, 0);
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";

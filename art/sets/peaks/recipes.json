@@ -1,0 +1,2819 @@
+{
+  "set": "peaks",
+  "bead": "border_marches-xaj.30",
+  "class": "mountains",
+  "exploration": false,
+  "_doc": "Front-view mountain sprites for the crowd-built ranges of the adventure map (bead xaj.30, docs/art/classes/mountains.md). generate-image-v2 at native display size, never downscaled or mirrored. Layers: style, light, class-peak, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-peak"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "grass-s1",
+      "concept": "GRASS MOUNTAINS",
+      "width": 80,
+      "height": 64,
+      "seed": 83001,
+      "subject": "Subject: one rounded green mountain, each image a different one of these: a round grassy mountain with a bare grey rock crest, a broad shouldered green mountain with two rocky knobs, a green dome with a stony cap and a rocky scar on its face, a steep grassy peak with a grey rock tip. Grass slopes deep green #3f7d45, shadow #2a5a38, lit #69a659 on the left; rock warm grey #8d8a7c, shadow #5c5a54. Nearly the full image wide and about three quarters of the image tall."
+    },
+    {
+      "id": "jungle-s1",
+      "concept": "JUNGLE KARST",
+      "width": 80,
+      "height": 64,
+      "seed": 83002,
+      "subject": "Subject: one steep karst rock tower of a tropical jungle, each image a different one of these: a sheer rounded limestone tower with a bushy green top, a tall thumb of pale rock draped with hanging vines, a pair of joined limestone pillars with moss on their heads, a leaning rock stack covered in creepers. Pale limestone #a8a48c, shadow #6e6e5c; vines and moss #3f8a4e, shadow #24603f. Taller than wide: about half of the image wide and nearly the full image tall."
+    },
+    {
+      "id": "steppe-s1",
+      "concept": "STEPPE PEAKS",
+      "width": 80,
+      "height": 64,
+      "seed": 83003,
+      "subject": "Subject: one jagged dry rock mountain, each image a different one of these: a sharp tan peak with a broken ridge, a craggy brown mountain with two points, a wide angular mountain of big rock facets, a steep pointed crag with a chipped shoulder. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces. Nearly the full image wide and about three quarters of the image tall."
+    },
+    {
+      "id": "badlands-s1",
+      "concept": "BADLANDS BUTTES",
+      "width": 80,
+      "height": 64,
+      "seed": 83004,
+      "subject": "Subject: one red desert rock formation, each image a different one of these: a flat-topped butte with level stripes of rock strata, a wide stepped mesa with two ledges, a cluster of three tall hoodoo rock columns, a narrow flat-topped rock stack with a sloping skirt of scree. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a. Flat tops, level bands. Nearly the full image wide and about three quarters of the image tall."
+    },
+    {
+      "id": "wasteland-s1",
+      "concept": "WASTELAND SPIRES",
+      "width": 80,
+      "height": 64,
+      "seed": 83005,
+      "subject": "Subject: one dark volcanic basalt mountain, each image a different one of these: a jagged black spire with broken shards, a cluster of three sharp basalt fangs, a craggy dark peak with a crooked tip, a wide mountain of angular dark columns. Rock charcoal #4e4a50, shadow #2e2b32, lit #77717a on the left faces, a few thin ember cracks #a05a30. Nearly the full image wide and about three quarters of the image tall."
+    },
+    {
+      "id": "grass-low-a",
+      "concept": "GRASS FOOTHILLS",
+      "width": 56,
+      "height": 44,
+      "seed": 83101,
+      "subject": "Subject: one low rounded green foothill, each image a different one of these: a low grassy mound with a few grey rocks, a wide low hill with a rocky top, a small green hump with a stone outcrop. Grass #3f7d45, shadow #2a5a38, lit #69a659 on the left; rock #8d8a7c, shadow #5c5a54. Fills the image width and about two thirds of its height."
+    },
+    {
+      "id": "grass-big-a",
+      "concept": "GRASS SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83102,
+      "subject": "Subject: one big broad green mountain, each image a different one of these: two rounded summits with rocky crests, a wide grassy mountain with a high stony crown, a long shouldered mountain with rock ridges down its face. Grass #3f7d45, shadow #2a5a38, lit #69a659 on the left; rock #8d8a7c, shadow #5c5a54. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "jungle-low-a",
+      "concept": "JUNGLE FOOTHILLS",
+      "width": 56,
+      "height": 44,
+      "seed": 83103,
+      "subject": "Subject: one low mossy limestone rock, each image a different one of these: a stubby rock with a green cap, a low pair of rounded pale rocks draped with moss, a squat boulder stack with vines. Limestone #a8a48c, shadow #6e6e5c; vines and moss #3f8a4e, shadow #24603f. Fills the image width and about two thirds of its height."
+    },
+    {
+      "id": "jungle-big-a",
+      "concept": "JUNGLE SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83104,
+      "subject": "Subject: one big cluster of steep karst towers, each image a different one of these: three joined sheer limestone towers with bushy green tops, a wide rock mass with two rounded heads hung with vines, a tall fluted tower with a smaller one at its side. Limestone #a8a48c, shadow #6e6e5c; vines and moss #3f8a4e, shadow #24603f. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "steppe-low-a",
+      "concept": "STEPPE FOOTHILLS",
+      "width": 56,
+      "height": 44,
+      "seed": 83105,
+      "subject": "Subject: one low jagged dry rock hill, each image a different one of these: a low angular tan crag, a wide broken rock heap, a small pointed rock with a chipped side. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces. Fills the image width and about two thirds of its height."
+    },
+    {
+      "id": "steppe-big-a",
+      "concept": "STEPPE SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83106,
+      "subject": "Subject: one big jagged dry rock mountain, each image a different one of these: a tall sharp peak with broken shoulders, a wide mountain with three craggy points, a massive angular mountain of big rock facets. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "badlands-low-a",
+      "concept": "BADLANDS FOOTHILLS",
+      "width": 56,
+      "height": 44,
+      "seed": 83107,
+      "subject": "Subject: one low red desert rock, each image a different one of these: a small flat-topped rock with level stripes, a low stepped ledge, a pair of stubby hoodoos. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a. Fills the image width and about two thirds of its height."
+    },
+    {
+      "id": "badlands-big-a",
+      "concept": "BADLANDS SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83108,
+      "subject": "Subject: one big red desert rock formation with level strata, each image a different one of these: a wide flat-topped mesa with two steps, a tall butte with a scree skirt, a broad table rock with a smaller stack joined at its side. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "wasteland-low-a",
+      "concept": "WASTELAND FOOTHILLS",
+      "width": 56,
+      "height": 44,
+      "seed": 83109,
+      "subject": "Subject: one low dark basalt rock, each image a different one of these: a low cluster of sharp shards, a wide broken dark crag, a small crooked fang of rock. Rock charcoal #4e4a50, shadow #2e2b32, lit #77717a on the left faces, a few thin ember cracks #a05a30. Fills the image width and about two thirds of its height."
+    },
+    {
+      "id": "wasteland-big-a",
+      "concept": "WASTELAND SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83110,
+      "subject": "Subject: one big dark volcanic basalt mountain, each image a different one of these: a tall jagged spire with broken shoulders, a wide mass of sharp fangs, a craggy mountain of angular dark columns. Rock charcoal #4e4a50, shadow #2e2b32, lit #77717a on the left faces, a few thin ember cracks #a05a30. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "grass-mid-b",
+      "concept": "GRASS PEAKS",
+      "width": 80,
+      "height": 64,
+      "seed": 83201,
+      "subject": "Subject: one green mountain, each image a different one of these: a broad peak with a small grey rock tip, a wide mountain with two grassy humps, a steep green cone with a stony shoulder, a mountain with a long rocky ridge along its crest. Grass #3f7d45, shadow #2a5a38, lit #69a659 on the left; rock #8d8a7c, shadow #5c5a54. Nearly the full image wide and about three quarters of the image tall."
+    },
+    {
+      "id": "grass-big-b",
+      "concept": "GRASS SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83202,
+      "subject": "Subject: one big broad green mountain, each image a different one of these: a long green ridge with three soft summits, a high rounded mountain with a grey rocky shoulder, a steep mountain with a bare rock face on its right side. Grass #3f7d45, shadow #2a5a38, lit #69a659 on the left; rock #8d8a7c, shadow #5c5a54. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "grass-big-c",
+      "concept": "GRASS SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83203,
+      "subject": "Subject: one big broad green mountain, each image a different one of these: a wide mountain with a jagged rocky crown, a double-humped mountain with a grassy saddle, a tall green cone with rock outcrops near the top. Grass #3f7d45, shadow #2a5a38, lit #69a659 on the left; rock #8d8a7c, shadow #5c5a54. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "jungle-mid-b",
+      "concept": "JUNGLE PEAKS",
+      "width": 80,
+      "height": 64,
+      "seed": 83204,
+      "subject": "Subject: one steep karst rock, each image a different one of these: a fat rounded limestone tower with a mossy head, two joined towers of unequal height, a fluted cliff block with a bushy green top, a wide rock dome hung with short vines. Limestone #a8a48c, shadow #6e6e5c; vines and moss #3f8a4e, shadow #24603f. Nearly the full image wide and about three quarters of the image tall."
+    },
+    {
+      "id": "jungle-big-b",
+      "concept": "JUNGLE SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83205,
+      "subject": "Subject: one big mass of steep karst towers, each image a different one of these: a wide cliff block with a bushy green top, two tall rounded towers joined at the base, a broad fluted tower with moss on its ledges. Limestone #a8a48c, shadow #6e6e5c; vines and moss #3f8a4e, shadow #24603f. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "jungle-big-c",
+      "concept": "JUNGLE SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83206,
+      "subject": "Subject: one big mass of steep karst towers, each image a different one of these: four towers of different heights joined in one mass, a huge rounded limestone dome with a green cap, a stepped cliff with hanging vines. Limestone #a8a48c, shadow #6e6e5c; vines and moss #3f8a4e, shadow #24603f. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "steppe-mid-b",
+      "concept": "STEPPE PEAKS",
+      "width": 80,
+      "height": 64,
+      "seed": 83207,
+      "subject": "Subject: one jagged dry rock mountain, each image a different one of these: a wide crag with a notched top, a sharp peak with a long left slope, a blocky mountain with a broken crest, a double peak with a deep cleft. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces. Nearly the full image wide and about three quarters of the image tall."
+    },
+    {
+      "id": "steppe-big-b",
+      "concept": "STEPPE SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83208,
+      "subject": "Subject: one big jagged dry rock mountain, each image a different one of these: a long ridge with four sharp points, a massive peak with a broken summit, a wide mountain with deep vertical gullies. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "steppe-big-c",
+      "concept": "STEPPE SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83209,
+      "subject": "Subject: one big jagged dry rock mountain, each image a different one of these: a tall twin-peaked mountain, a broad crag with stepped rock shelves, a steep pyramid peak with a chipped shoulder. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "badlands-mid-b",
+      "concept": "BADLANDS PEAKS",
+      "width": 80,
+      "height": 64,
+      "seed": 83210,
+      "subject": "Subject: one red desert rock formation, each image a different one of these: a tall narrow butte with a flat cap, a wide table rock with a notch, a stepped mesa with sloping talus, a group of two square rock stacks. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a. Nearly the full image wide and about three quarters of the image tall."
+    },
+    {
+      "id": "badlands-big-b",
+      "concept": "BADLANDS SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83211,
+      "subject": "Subject: one big red desert formation with level strata, each image a different one of these: a long flat-topped mesa, a high butte on a wide stepped base, two joined table rocks of different heights. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "badlands-big-c",
+      "concept": "BADLANDS SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83212,
+      "subject": "Subject: one big red desert formation with level strata, each image a different one of these: a broad mesa with a canyon notch, a group of three square rock towers on one base, a wide terraced plateau with a sloping scree skirt. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "wasteland-mid-b",
+      "concept": "WASTELAND PEAKS",
+      "width": 80,
+      "height": 64,
+      "seed": 83213,
+      "subject": "Subject: one dark volcanic basalt mountain, each image a different one of these: a broad jagged crag, a sharp peak with a split top, a wide mountain of broken slabs, a low volcano cone with a jagged rim. Rock charcoal #4e4a50, shadow #2e2b32, lit #77717a on the left faces, a few thin ember cracks #a05a30. Nearly the full image wide and about three quarters of the image tall."
+    },
+    {
+      "id": "wasteland-big-b",
+      "concept": "WASTELAND SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83214,
+      "subject": "Subject: one big dark volcanic basalt mountain, each image a different one of these: a long jagged ridge, a massive peak with a broken crown, a wide mountain with deep dark gullies. Rock charcoal #4e4a50, shadow #2e2b32, lit #77717a on the left faces, a few thin ember cracks #a05a30. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "wasteland-big-c",
+      "concept": "WASTELAND SUMMITS",
+      "width": 120,
+      "height": 88,
+      "seed": 83215,
+      "subject": "Subject: one big dark volcanic basalt mountain, each image a different one of these: a twin-peaked jagged mountain, a broad broken volcano with a jagged rim, a tall crag with sharp shoulders. Rock charcoal #4e4a50, shadow #2e2b32, lit #77717a on the left faces, a few thin ember cracks #a05a30. Fills nearly the full image, with a little room above the top."
+    },
+    {
+      "id": "wasteland-mid-c",
+      "concept": "WASTELAND PEAKS",
+      "width": 80,
+      "height": 64,
+      "seed": 83301,
+      "subject": "Subject: one dark volcanic basalt mountain, each image a different one of these: a broad jagged crag, a sharp peak with a split top, a wide mountain of broken slabs, a twin-fanged peak. Rock charcoal #4e4a50, shadow #2e2b32, lit #77717a on the left faces, a few thin ember cracks #a05a30. About three quarters of the image wide and two thirds of its height, with empty space on every side."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/peaks/grass/foothill-1.png",
+      "from": "grass-low-a#2",
+      "width": 48,
+      "height": 21,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 15,
+          "width": 48,
+          "height": 21
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/foothill-2.png",
+      "from": "grass-low-a#3",
+      "width": 48,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 8,
+          "width": 48,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/foothill-3.png",
+      "from": "grass-low-a#5",
+      "width": 47,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 8,
+          "width": 47,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/foothill-4.png",
+      "from": "grass-low-a#7",
+      "width": 48,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 11,
+          "width": 48,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/foothill-5.png",
+      "from": "grass-low-a#8",
+      "width": 48,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 15,
+          "width": 48,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/foothill-6.png",
+      "from": "grass-low-a#12",
+      "width": 48,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 11,
+          "width": 48,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/foothill-7.png",
+      "from": "grass-low-a#15",
+      "width": 48,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 10,
+          "width": 48,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/foothill-8.png",
+      "from": "grass-low-a#18",
+      "width": 48,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 9,
+          "width": 48,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/foothill-9.png",
+      "from": "grass-low-a#19",
+      "width": 48,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 12,
+          "width": 48,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/foothill-10.png",
+      "from": "grass-low-a#24",
+      "width": 48,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 12,
+          "width": 48,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-1.png",
+      "from": "grass-s1#0",
+      "width": 70,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 10,
+          "width": 70,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-2.png",
+      "from": "grass-s1#1",
+      "width": 69,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 10,
+          "width": 69,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-3.png",
+      "from": "grass-s1#2",
+      "width": 68,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 6,
+          "width": 68,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-4.png",
+      "from": "grass-s1#4",
+      "width": 70,
+      "height": 48,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 9,
+          "width": 70,
+          "height": 48
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-5.png",
+      "from": "grass-s1#5",
+      "width": 69,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 8,
+          "width": 69,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-6.png",
+      "from": "grass-s1#7",
+      "width": 70,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 7,
+          "width": 70,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-7.png",
+      "from": "grass-s1#8",
+      "width": 68,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 6,
+          "width": 68,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-8.png",
+      "from": "grass-mid-b#0",
+      "width": 80,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 7,
+          "width": 80,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-9.png",
+      "from": "grass-mid-b#1",
+      "width": 80,
+      "height": 42,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 12,
+          "width": 80,
+          "height": 42
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-10.png",
+      "from": "grass-mid-b#2",
+      "width": 80,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 4,
+          "width": 80,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-11.png",
+      "from": "grass-mid-b#7",
+      "width": 80,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 6,
+          "width": 80,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/peak-12.png",
+      "from": "grass-mid-b#8",
+      "width": 80,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 7,
+          "width": 80,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/summit-1.png",
+      "from": "grass-big-a#0",
+      "width": 105,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 21,
+          "width": 105,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/summit-2.png",
+      "from": "grass-big-a#1",
+      "width": 106,
+      "height": 67,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 10,
+          "width": 106,
+          "height": 67
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/summit-3.png",
+      "from": "grass-big-a#2",
+      "width": 106,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 18,
+          "width": 106,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/summit-4.png",
+      "from": "grass-big-a#3",
+      "width": 104,
+      "height": 71,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 8,
+          "width": 104,
+          "height": 71
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/summit-5.png",
+      "from": "grass-big-b#0",
+      "width": 108,
+      "height": 43,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 28,
+          "width": 108,
+          "height": 43
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/summit-6.png",
+      "from": "grass-big-b#1",
+      "width": 108,
+      "height": 66,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 12,
+          "width": 108,
+          "height": 66
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/summit-7.png",
+      "from": "grass-big-b#2",
+      "width": 107,
+      "height": 70,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 9,
+          "width": 107,
+          "height": 70
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/summit-8.png",
+      "from": "grass-big-b#3",
+      "width": 108,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 15,
+          "width": 108,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/summit-9.png",
+      "from": "grass-big-c#0",
+      "width": 107,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 12,
+          "width": 107,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/summit-10.png",
+      "from": "grass-big-c#1",
+      "width": 108,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 22,
+          "width": 108,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/grass/summit-11.png",
+      "from": "grass-big-c#2",
+      "width": 98,
+      "height": 70,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 9,
+          "width": 98,
+          "height": 70
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/foothill-1.png",
+      "from": "jungle-low-a#0",
+      "width": 32,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 7,
+          "width": 32,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/foothill-2.png",
+      "from": "jungle-low-a#2",
+      "width": 35,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 12,
+          "width": 35,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/foothill-3.png",
+      "from": "jungle-low-a#6",
+      "width": 34,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 7,
+          "width": 34,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/foothill-4.png",
+      "from": "jungle-low-a#9",
+      "width": 36,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 13,
+          "width": 36,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/foothill-5.png",
+      "from": "jungle-low-a#10",
+      "width": 34,
+      "height": 29,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 7,
+          "width": 34,
+          "height": 29
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/foothill-6.png",
+      "from": "jungle-low-a#12",
+      "width": 35,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 9,
+          "width": 35,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/foothill-7.png",
+      "from": "jungle-low-a#14",
+      "width": 37,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 13,
+          "width": 37,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/foothill-8.png",
+      "from": "jungle-low-a#17",
+      "width": 31,
+      "height": 31,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 6,
+          "width": 31,
+          "height": 31
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/foothill-9.png",
+      "from": "jungle-low-a#19",
+      "width": 38,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 9,
+          "width": 38,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/foothill-10.png",
+      "from": "jungle-low-a#21",
+      "width": 40,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 12,
+          "width": 40,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/peak-1.png",
+      "from": "jungle-s1#0",
+      "width": 35,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 22,
+          "y": 7,
+          "width": 35,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/peak-2.png",
+      "from": "jungle-s1#2",
+      "width": 38,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 21,
+          "y": 7,
+          "width": 38,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/peak-3.png",
+      "from": "jungle-s1#4",
+      "width": 48,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 16,
+          "y": 6,
+          "width": 48,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/peak-4.png",
+      "from": "jungle-s1#6",
+      "width": 48,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 16,
+          "y": 6,
+          "width": 48,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/peak-5.png",
+      "from": "jungle-s1#7",
+      "width": 40,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 20,
+          "y": 6,
+          "width": 40,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/peak-6.png",
+      "from": "jungle-s1#8",
+      "width": 48,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 16,
+          "y": 6,
+          "width": 48,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/peak-7.png",
+      "from": "jungle-mid-b#0",
+      "width": 42,
+      "height": 48,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 19,
+          "y": 8,
+          "width": 42,
+          "height": 48
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/peak-8.png",
+      "from": "jungle-mid-b#2",
+      "width": 58,
+      "height": 48,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 8,
+          "width": 58,
+          "height": 48
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/peak-9.png",
+      "from": "jungle-mid-b#4",
+      "width": 50,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 15,
+          "y": 7,
+          "width": 50,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/peak-10.png",
+      "from": "jungle-mid-b#5",
+      "width": 42,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 19,
+          "y": 7,
+          "width": 42,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/peak-11.png",
+      "from": "jungle-mid-b#6",
+      "width": 64,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 7,
+          "width": 64,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/summit-1.png",
+      "from": "jungle-big-a#0",
+      "width": 98,
+      "height": 73,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 8,
+          "width": 98,
+          "height": 73
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/summit-2.png",
+      "from": "jungle-big-a#1",
+      "width": 102,
+      "height": 71,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 9,
+          "width": 102,
+          "height": 71
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/summit-3.png",
+      "from": "jungle-big-a#2",
+      "width": 75,
+      "height": 75,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 22,
+          "y": 6,
+          "width": 75,
+          "height": 75
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/summit-4.png",
+      "from": "jungle-big-a#3",
+      "width": 104,
+      "height": 72,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 8,
+          "width": 104,
+          "height": 72
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/summit-5.png",
+      "from": "jungle-big-b#0",
+      "width": 98,
+      "height": 71,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 9,
+          "width": 98,
+          "height": 71
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/summit-6.png",
+      "from": "jungle-big-b#2",
+      "width": 76,
+      "height": 76,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 22,
+          "y": 8,
+          "width": 76,
+          "height": 76
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/summit-7.png",
+      "from": "jungle-big-b#3",
+      "width": 81,
+      "height": 84,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 20,
+          "y": 2,
+          "width": 81,
+          "height": 84
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/summit-8.png",
+      "from": "jungle-big-c#0",
+      "width": 92,
+      "height": 72,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 8,
+          "width": 92,
+          "height": 72
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/summit-9.png",
+      "from": "jungle-big-c#2",
+      "width": 102,
+      "height": 74,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 7,
+          "width": 102,
+          "height": 74
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/jungle/summit-10.png",
+      "from": "jungle-big-c#3",
+      "width": 94,
+      "height": 74,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 7,
+          "width": 94,
+          "height": 74
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-1.png",
+      "from": "steppe-low-a#0",
+      "width": 53,
+      "height": 34,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 9,
+          "width": 53,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-2.png",
+      "from": "steppe-low-a#1",
+      "width": 53,
+      "height": 36,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 7,
+          "width": 53,
+          "height": 36
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-3.png",
+      "from": "steppe-low-a#2",
+      "width": 54,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 9,
+          "width": 54,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-4.png",
+      "from": "steppe-low-a#3",
+      "width": 52,
+      "height": 36,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 7,
+          "width": 52,
+          "height": 36
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-5.png",
+      "from": "steppe-low-a#5",
+      "width": 53,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 8,
+          "width": 53,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-6.png",
+      "from": "steppe-low-a#6",
+      "width": 54,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 10,
+          "width": 54,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-7.png",
+      "from": "steppe-low-a#9",
+      "width": 53,
+      "height": 36,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 7,
+          "width": 53,
+          "height": 36
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-8.png",
+      "from": "steppe-low-a#13",
+      "width": 54,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 8,
+          "width": 54,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-9.png",
+      "from": "steppe-low-a#15",
+      "width": 53,
+      "height": 36,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 7,
+          "width": 53,
+          "height": 36
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-10.png",
+      "from": "steppe-low-a#16",
+      "width": 54,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 9,
+          "width": 54,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-11.png",
+      "from": "steppe-low-a#19",
+      "width": 50,
+      "height": 37,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 6,
+          "width": 50,
+          "height": 37
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-12.png",
+      "from": "steppe-low-a#21",
+      "width": 54,
+      "height": 32,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 11,
+          "width": 54,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/foothill-13.png",
+      "from": "steppe-low-a#23",
+      "width": 40,
+      "height": 37,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 6,
+          "width": 40,
+          "height": 37
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-1.png",
+      "from": "steppe-s1#0",
+      "width": 70,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 70,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-2.png",
+      "from": "steppe-s1#1",
+      "width": 70,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 70,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-3.png",
+      "from": "steppe-s1#2",
+      "width": 70,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 7,
+          "width": 70,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-4.png",
+      "from": "steppe-s1#3",
+      "width": 68,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 5,
+          "width": 68,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-5.png",
+      "from": "steppe-s1#4",
+      "width": 70,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 70,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-6.png",
+      "from": "steppe-s1#5",
+      "width": 68,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 6,
+          "width": 68,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-7.png",
+      "from": "steppe-s1#6",
+      "width": 68,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 5,
+          "width": 68,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-8.png",
+      "from": "steppe-s1#7",
+      "width": 62,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 7,
+          "width": 62,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-9.png",
+      "from": "steppe-s1#8",
+      "width": 66,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 5,
+          "width": 66,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-10.png",
+      "from": "steppe-mid-b#1",
+      "width": 70,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 7,
+          "width": 70,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-11.png",
+      "from": "steppe-mid-b#3",
+      "width": 70,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 7,
+          "width": 70,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-12.png",
+      "from": "steppe-mid-b#4",
+      "width": 70,
+      "height": 47,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 10,
+          "width": 70,
+          "height": 47
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-13.png",
+      "from": "steppe-mid-b#5",
+      "width": 54,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 6,
+          "width": 54,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-14.png",
+      "from": "steppe-mid-b#6",
+      "width": 70,
+      "height": 44,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 11,
+          "width": 70,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/peak-15.png",
+      "from": "steppe-mid-b#7",
+      "width": 70,
+      "height": 48,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 8,
+          "width": 70,
+          "height": 48
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-1.png",
+      "from": "steppe-big-a#0",
+      "width": 98,
+      "height": 72,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 8,
+          "width": 98,
+          "height": 72
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-2.png",
+      "from": "steppe-big-a#1",
+      "width": 103,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 12,
+          "width": 103,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-3.png",
+      "from": "steppe-big-a#2",
+      "width": 102,
+      "height": 72,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 8,
+          "width": 102,
+          "height": 72
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-4.png",
+      "from": "steppe-big-a#3",
+      "width": 103,
+      "height": 71,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 8,
+          "width": 103,
+          "height": 71
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-5.png",
+      "from": "steppe-big-b#0",
+      "width": 104,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 17,
+          "width": 104,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-6.png",
+      "from": "steppe-big-b#1",
+      "width": 103,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 13,
+          "width": 103,
+          "height": 64
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-7.png",
+      "from": "steppe-big-b#2",
+      "width": 106,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 14,
+          "width": 106,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-8.png",
+      "from": "steppe-big-b#3",
+      "width": 94,
+      "height": 72,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 8,
+          "width": 94,
+          "height": 72
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-9.png",
+      "from": "steppe-big-c#0",
+      "width": 106,
+      "height": 71,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 10,
+          "width": 106,
+          "height": 71
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-10.png",
+      "from": "steppe-big-c#1",
+      "width": 106,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 17,
+          "width": 106,
+          "height": 64
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-11.png",
+      "from": "steppe-big-c#2",
+      "width": 106,
+      "height": 74,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 7,
+          "width": 106,
+          "height": 74
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/steppe/summit-12.png",
+      "from": "steppe-big-c#3",
+      "width": 106,
+      "height": 72,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 10,
+          "width": 106,
+          "height": 72
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/foothill-1.png",
+      "from": "badlands-low-a#0",
+      "width": 46,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 11,
+          "width": 46,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/foothill-2.png",
+      "from": "badlands-low-a#3",
+      "width": 30,
+      "height": 34,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 5,
+          "width": 30,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/foothill-3.png",
+      "from": "badlands-low-a#6",
+      "width": 40,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 9,
+          "width": 40,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/foothill-4.png",
+      "from": "badlands-low-a#7",
+      "width": 38,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 5,
+          "width": 38,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/foothill-5.png",
+      "from": "badlands-low-a#8",
+      "width": 40,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 5,
+          "width": 40,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/foothill-6.png",
+      "from": "badlands-low-a#11",
+      "width": 48,
+      "height": 34,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 48,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/foothill-7.png",
+      "from": "badlands-low-a#12",
+      "width": 24,
+      "height": 31,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 16,
+          "y": 6,
+          "width": 24,
+          "height": 31
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/foothill-8.png",
+      "from": "badlands-low-a#15",
+      "width": 46,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 46,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/foothill-9.png",
+      "from": "badlands-low-a#21",
+      "width": 46,
+      "height": 31,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 46,
+          "height": 31
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/foothill-10.png",
+      "from": "badlands-low-a#24",
+      "width": 34,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 4,
+          "width": 34,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-1.png",
+      "from": "badlands-s1#0",
+      "width": 66,
+      "height": 40,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 15,
+          "width": 66,
+          "height": 40
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-2.png",
+      "from": "badlands-s1#1",
+      "width": 66,
+      "height": 41,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 15,
+          "width": 66,
+          "height": 41
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-3.png",
+      "from": "badlands-s1#2",
+      "width": 52,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 7,
+          "width": 52,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-4.png",
+      "from": "badlands-s1#3",
+      "width": 56,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 10,
+          "width": 56,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-5.png",
+      "from": "badlands-s1#4",
+      "width": 68,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 6,
+          "width": 68,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-6.png",
+      "from": "badlands-s1#6",
+      "width": 65,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 8,
+          "width": 65,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-7.png",
+      "from": "badlands-s1#7",
+      "width": 68,
+      "height": 41,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 12,
+          "width": 68,
+          "height": 41
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-8.png",
+      "from": "badlands-s1#8",
+      "width": 58,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 7,
+          "width": 58,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-9.png",
+      "from": "badlands-mid-b#0",
+      "width": 46,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 17,
+          "y": 7,
+          "width": 46,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-10.png",
+      "from": "badlands-mid-b#1",
+      "width": 66,
+      "height": 41,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 12,
+          "width": 66,
+          "height": 41
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-11.png",
+      "from": "badlands-mid-b#2",
+      "width": 68,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 9,
+          "width": 68,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-12.png",
+      "from": "badlands-mid-b#5",
+      "width": 52,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 7,
+          "width": 52,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-13.png",
+      "from": "badlands-mid-b#6",
+      "width": 64,
+      "height": 43,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 10,
+          "width": 64,
+          "height": 43
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-14.png",
+      "from": "badlands-mid-b#7",
+      "width": 51,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 15,
+          "y": 7,
+          "width": 51,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/peak-15.png",
+      "from": "badlands-mid-b#8",
+      "width": 54,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 7,
+          "width": 54,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/summit-1.png",
+      "from": "badlands-big-a#0",
+      "width": 103,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 16,
+          "width": 103,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/summit-2.png",
+      "from": "badlands-big-a#1",
+      "width": 97,
+      "height": 70,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 8,
+          "width": 97,
+          "height": 70
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/summit-3.png",
+      "from": "badlands-big-a#2",
+      "width": 102,
+      "height": 54,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 17,
+          "width": 102,
+          "height": 54
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/summit-4.png",
+      "from": "badlands-big-a#3",
+      "width": 87,
+      "height": 69,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 17,
+          "y": 9,
+          "width": 87,
+          "height": 69
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/summit-5.png",
+      "from": "badlands-big-b#0",
+      "width": 103,
+      "height": 45,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 30,
+          "width": 103,
+          "height": 45
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/summit-6.png",
+      "from": "badlands-big-b#1",
+      "width": 102,
+      "height": 68,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 10,
+          "width": 102,
+          "height": 68
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/summit-7.png",
+      "from": "badlands-big-b#2",
+      "width": 101,
+      "height": 57,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 17,
+          "width": 101,
+          "height": 57
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/summit-8.png",
+      "from": "badlands-big-b#3",
+      "width": 89,
+      "height": 68,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 16,
+          "y": 10,
+          "width": 89,
+          "height": 68
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/summit-9.png",
+      "from": "badlands-big-c#0",
+      "width": 101,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 22,
+          "width": 101,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/summit-10.png",
+      "from": "badlands-big-c#2",
+      "width": 104,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 17,
+          "width": 104,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/badlands/summit-11.png",
+      "from": "badlands-big-c#3",
+      "width": 104,
+      "height": 68,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 10,
+          "width": 104,
+          "height": 68
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/foothill-1.png",
+      "from": "wasteland-low-a#0",
+      "width": 43,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 7,
+          "width": 43,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/foothill-2.png",
+      "from": "wasteland-low-a#1",
+      "width": 44,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 13,
+          "width": 44,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/foothill-3.png",
+      "from": "wasteland-low-a#5",
+      "width": 45,
+      "height": 31,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 6,
+          "width": 45,
+          "height": 31
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/foothill-4.png",
+      "from": "wasteland-low-a#12",
+      "width": 44,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 12,
+          "width": 44,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/foothill-5.png",
+      "from": "wasteland-low-a#14",
+      "width": 44,
+      "height": 29,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 8,
+          "width": 44,
+          "height": 29
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/foothill-6.png",
+      "from": "wasteland-low-a#15",
+      "width": 45,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 6,
+          "width": 45,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/foothill-7.png",
+      "from": "wasteland-low-a#19",
+      "width": 44,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 9,
+          "width": 44,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/foothill-8.png",
+      "from": "wasteland-low-a#21",
+      "width": 45,
+      "height": 29,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 7,
+          "width": 45,
+          "height": 29
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/foothill-9.png",
+      "from": "wasteland-low-a#23",
+      "width": 46,
+      "height": 29,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 8,
+          "width": 46,
+          "height": 29
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/foothill-10.png",
+      "from": "wasteland-low-a#24",
+      "width": 46,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 7,
+          "width": 46,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/peak-1.png",
+      "from": "wasteland-s1#0",
+      "width": 64,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 5,
+          "width": 64,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/peak-2.png",
+      "from": "wasteland-s1#1",
+      "width": 62,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 5,
+          "width": 62,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/peak-3.png",
+      "from": "wasteland-s1#4",
+      "width": 68,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 5,
+          "width": 68,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/peak-4.png",
+      "from": "wasteland-s1#5",
+      "width": 68,
+      "height": 45,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 13,
+          "width": 68,
+          "height": 45
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/peak-5.png",
+      "from": "wasteland-s1#8",
+      "width": 66,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 5,
+          "width": 66,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/peak-6.png",
+      "from": "wasteland-mid-c#0",
+      "width": 68,
+      "height": 47,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 8,
+          "width": 68,
+          "height": 47
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/peak-7.png",
+      "from": "wasteland-mid-c#1",
+      "width": 68,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 7,
+          "width": 68,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/peak-8.png",
+      "from": "wasteland-mid-c#3",
+      "width": 65,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 6,
+          "width": 65,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/peak-9.png",
+      "from": "wasteland-mid-c#4",
+      "width": 68,
+      "height": 47,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 9,
+          "width": 68,
+          "height": 47
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/peak-10.png",
+      "from": "wasteland-mid-c#7",
+      "width": 65,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 6,
+          "width": 65,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/peak-11.png",
+      "from": "wasteland-mid-c#8",
+      "width": 68,
+      "height": 40,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 14,
+          "width": 68,
+          "height": 40
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/summit-1.png",
+      "from": "wasteland-big-a#0",
+      "width": 84,
+      "height": 71,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 18,
+          "y": 8,
+          "width": 84,
+          "height": 71
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/summit-2.png",
+      "from": "wasteland-big-a#1",
+      "width": 90,
+      "height": 69,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 15,
+          "y": 9,
+          "width": 90,
+          "height": 69
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/summit-3.png",
+      "from": "wasteland-big-a#3",
+      "width": 89,
+      "height": 69,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 16,
+          "y": 9,
+          "width": 89,
+          "height": 69
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/summit-4.png",
+      "from": "wasteland-big-b#0",
+      "width": 106,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 24,
+          "width": 106,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/summit-5.png",
+      "from": "wasteland-big-b#1",
+      "width": 104,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 14,
+          "width": 104,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/summit-6.png",
+      "from": "wasteland-big-b#3",
+      "width": 94,
+      "height": 71,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 8,
+          "width": 94,
+          "height": 71
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/summit-7.png",
+      "from": "wasteland-big-c#0",
+      "width": 96,
+      "height": 66,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 12,
+          "width": 96,
+          "height": 66
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/summit-8.png",
+      "from": "wasteland-big-c#2",
+      "width": 82,
+      "height": 71,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 19,
+          "y": 8,
+          "width": 82,
+          "height": 71
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/peaks/wasteland/summit-9.png",
+      "from": "wasteland-big-c#3",
+      "width": 96,
+      "height": 70,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 10,
+          "width": 96,
+          "height": 70
+        }
+      ]
+    }
+  ]
+}

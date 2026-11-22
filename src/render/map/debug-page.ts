@@ -14,6 +14,7 @@
  *
  * Without seed or map, the page shows tests/fixtures/small-map.ts.
  */
+import { CELL_PX } from "../../assets/manifest";
 import type { GameMap, MapCell, MapObject } from "../../core/map/types";
 import { cellAt, isPassable, objectBlockedSet } from "../../core/map/types";
 import type { Route } from "../../router";
@@ -27,6 +28,8 @@ declare global {
   interface Window {
     __mapView?: MapView;
     __mapReady?: boolean;
+    /** The whole map's size in world px (tools/map-poster.mjs). */
+    __mapPixels?: { width: number; height: number };
     __mapBench?: { frames: number; meanMs: number; maxMs: number };
   }
 }
@@ -332,5 +335,9 @@ export async function startMapDebug(
     document.title = `bench ${JSON.stringify(window.__mapBench)} ${JSON.stringify(view.stats())}`;
   }
   window.__mapView = view;
+  window.__mapPixels = {
+    width: map.width * CELL_PX,
+    height: map.height * CELL_PX,
+  };
   window.__mapReady = true;
 }

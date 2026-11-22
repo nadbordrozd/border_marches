@@ -63,8 +63,8 @@ const RANGE = [
 ];
 
 describe("low relief (bead xaj.25)", () => {
-  it("draws mountains as relief by default; sprites only on request", () => {
-    expect(mountainMode()).toBe("relief");
+  it("is no longer the default: mountains are peaks (bead xaj.30)", () => {
+    expect(mountainMode()).toBe("peaks");
   });
 
   it("is deterministic and continuous across chunks", () => {

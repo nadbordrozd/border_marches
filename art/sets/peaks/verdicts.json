@@ -1,0 +1,1422 @@
+{
+  "grass-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "flat slab cap and diagonal scar read as a stuck-on object",
+    "at": "2026-11-22T20:43:13.297Z"
+  },
+  "grass-s1#6": {
+    "verdict": "REJECTED",
+    "notes": "one big diagonal slab dominates, reads as a boulder on a hill",
+    "at": "2026-11-22T20:43:13.339Z"
+  },
+  "grass-low-a#0": {
+    "verdict": "REJECTED",
+    "notes": "lime-pale body too close to the grass ground",
+    "at": "2026-11-22T20:43:13.381Z"
+  },
+  "grass-low-a#1": {
+    "verdict": "REJECTED",
+    "notes": "lime-pale body too close to the grass ground",
+    "at": "2026-11-22T20:43:13.422Z"
+  },
+  "grass-low-a#6": {
+    "verdict": "REJECTED",
+    "notes": "lime-pale body too close to the grass ground",
+    "at": "2026-11-22T20:43:13.463Z"
+  },
+  "grass-low-a#9": {
+    "verdict": "REJECTED",
+    "notes": "lime-pale body too close to the grass ground",
+    "at": "2026-11-22T20:43:13.504Z"
+  },
+  "grass-low-a#10": {
+    "verdict": "REJECTED",
+    "notes": "lime-pale body too close to the grass ground",
+    "at": "2026-11-22T20:43:13.545Z"
+  },
+  "grass-low-a#16": {
+    "verdict": "REJECTED",
+    "notes": "lime-pale body too close to the grass ground",
+    "at": "2026-11-22T20:43:13.588Z"
+  },
+  "grass-low-a#20": {
+    "verdict": "REJECTED",
+    "notes": "lime-pale body too close to the grass ground",
+    "at": "2026-11-22T20:43:13.631Z"
+  },
+  "grass-low-a#23": {
+    "verdict": "REJECTED",
+    "notes": "lime-pale body too close to the grass ground",
+    "at": "2026-11-22T20:43:13.672Z"
+  },
+  "grass-low-a#4": {
+    "verdict": "REJECTED",
+    "notes": "terraced like a stacked cake",
+    "at": "2026-11-22T20:43:13.714Z"
+  },
+  "grass-low-a#13": {
+    "verdict": "REJECTED",
+    "notes": "terraced like a stacked cake",
+    "at": "2026-11-22T20:43:13.757Z"
+  },
+  "grass-low-a#17": {
+    "verdict": "REJECTED",
+    "notes": "terraced like a stacked cake",
+    "at": "2026-11-22T20:43:13.799Z"
+  },
+  "grass-low-a#21": {
+    "verdict": "REJECTED",
+    "notes": "terraced like a stacked cake",
+    "at": "2026-11-22T20:43:13.841Z"
+  },
+  "grass-low-a#11": {
+    "verdict": "REJECTED",
+    "notes": "flat grey lid reads as a table",
+    "at": "2026-11-22T20:43:13.884Z"
+  },
+  "grass-low-a#14": {
+    "verdict": "REJECTED",
+    "notes": "round dark body reads as a bush",
+    "at": "2026-11-22T20:43:13.925Z"
+  },
+  "grass-low-a#22": {
+    "verdict": "REJECTED",
+    "notes": "round dark body reads as a bush",
+    "at": "2026-11-22T20:43:13.966Z"
+  },
+  "jungle-s1#1": {
+    "verdict": "REJECTED",
+    "notes": "thin pole, no mass in a crowd",
+    "at": "2026-11-22T20:43:14.009Z"
+  },
+  "jungle-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "stacked cairn, not a karst tower",
+    "at": "2026-11-22T20:43:14.052Z"
+  },
+  "jungle-s1#5": {
+    "verdict": "REJECTED",
+    "notes": "twisted trunk reads as a tree",
+    "at": "2026-11-22T20:43:14.093Z"
+  },
+  "jungle-low-a#1": {
+    "verdict": "REJECTED",
+    "notes": "vine tangle too busy at native size",
+    "at": "2026-11-22T20:43:14.135Z"
+  },
+  "jungle-low-a#7": {
+    "verdict": "REJECTED",
+    "notes": "vine tangle too busy at native size",
+    "at": "2026-11-22T20:43:14.176Z"
+  },
+  "jungle-low-a#15": {
+    "verdict": "REJECTED",
+    "notes": "vine tangle too busy at native size",
+    "at": "2026-11-22T20:43:14.217Z"
+  },
+  "jungle-low-a#23": {
+    "verdict": "REJECTED",
+    "notes": "vine tangle too busy at native size",
+    "at": "2026-11-22T20:43:14.258Z"
+  },
+  "jungle-low-a#3": {
+    "verdict": "REJECTED",
+    "notes": "plain pale boulder without moss, off-family",
+    "at": "2026-11-22T20:43:14.299Z"
+  },
+  "jungle-low-a#5": {
+    "verdict": "REJECTED",
+    "notes": "plain pale boulder without moss, off-family",
+    "at": "2026-11-22T20:43:14.340Z"
+  },
+  "jungle-low-a#8": {
+    "verdict": "REJECTED",
+    "notes": "plain pale boulder without moss, off-family",
+    "at": "2026-11-22T20:43:14.382Z"
+  },
+  "jungle-low-a#13": {
+    "verdict": "REJECTED",
+    "notes": "plain pale boulder without moss, off-family",
+    "at": "2026-11-22T20:43:14.422Z"
+  },
+  "jungle-low-a#18": {
+    "verdict": "REJECTED",
+    "notes": "plain pale boulder without moss, off-family",
+    "at": "2026-11-22T20:43:14.463Z"
+  },
+  "jungle-low-a#20": {
+    "verdict": "REJECTED",
+    "notes": "plain pale boulder without moss, off-family",
+    "at": "2026-11-22T20:43:14.504Z"
+  },
+  "jungle-low-a#22": {
+    "verdict": "REJECTED",
+    "notes": "plain pale boulder without moss, off-family",
+    "at": "2026-11-22T20:43:14.546Z"
+  },
+  "jungle-low-a#24": {
+    "verdict": "REJECTED",
+    "notes": "plain pale boulder without moss, off-family",
+    "at": "2026-11-22T20:43:14.587Z"
+  },
+  "jungle-low-a#4": {
+    "verdict": "REJECTED",
+    "notes": "tiny cairn, too little mass",
+    "at": "2026-11-22T20:43:14.630Z"
+  },
+  "jungle-low-a#11": {
+    "verdict": "REJECTED",
+    "notes": "bumpy pale pile without moss",
+    "at": "2026-11-22T20:43:14.671Z"
+  },
+  "jungle-low-a#16": {
+    "verdict": "REJECTED",
+    "notes": "stepped block without moss",
+    "at": "2026-11-22T20:43:14.714Z"
+  },
+  "steppe-low-a#4": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate silhouette of an accepted take",
+    "at": "2026-11-22T20:43:14.756Z"
+  },
+  "steppe-low-a#8": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate silhouette of an accepted take",
+    "at": "2026-11-22T20:43:14.799Z"
+  },
+  "steppe-low-a#10": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate silhouette of an accepted take",
+    "at": "2026-11-22T20:43:14.840Z"
+  },
+  "steppe-low-a#11": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate silhouette of an accepted take",
+    "at": "2026-11-22T20:43:14.882Z"
+  },
+  "steppe-low-a#14": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate silhouette of an accepted take",
+    "at": "2026-11-22T20:43:14.924Z"
+  },
+  "steppe-low-a#18": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate silhouette of an accepted take",
+    "at": "2026-11-22T20:43:14.965Z"
+  },
+  "steppe-low-a#20": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate silhouette of an accepted take",
+    "at": "2026-11-22T20:43:15.007Z"
+  },
+  "steppe-low-a#22": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate silhouette of an accepted take",
+    "at": "2026-11-22T20:43:15.049Z"
+  },
+  "steppe-low-a#24": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate silhouette of an accepted take",
+    "at": "2026-11-22T20:43:15.091Z"
+  },
+  "steppe-low-a#7": {
+    "verdict": "REJECTED",
+    "notes": "pile of separate boxes, no single mass",
+    "at": "2026-11-22T20:43:15.133Z"
+  },
+  "steppe-low-a#12": {
+    "verdict": "REJECTED",
+    "notes": "pile of separate boxes, no single mass",
+    "at": "2026-11-22T20:43:15.174Z"
+  },
+  "steppe-low-a#17": {
+    "verdict": "REJECTED",
+    "notes": "pile of separate boxes, no single mass",
+    "at": "2026-11-22T20:43:15.215Z"
+  },
+  "badlands-s1#5": {
+    "verdict": "REJECTED",
+    "notes": "bulbous twin hoodoos, awkward silhouette",
+    "at": "2026-11-22T20:43:15.256Z"
+  },
+  "badlands-low-a#1": {
+    "verdict": "REJECTED",
+    "notes": "reads as a staircase",
+    "at": "2026-11-22T20:43:15.298Z"
+  },
+  "badlands-low-a#2": {
+    "verdict": "REJECTED",
+    "notes": "bulbous knobbed columns, awkward silhouette",
+    "at": "2026-11-22T20:43:15.342Z"
+  },
+  "badlands-low-a#17": {
+    "verdict": "REJECTED",
+    "notes": "bulbous knobbed columns, awkward silhouette",
+    "at": "2026-11-22T20:43:15.385Z"
+  },
+  "badlands-low-a#4": {
+    "verdict": "REJECTED",
+    "notes": "thin arch with a hole, no mass in a crowd",
+    "at": "2026-11-22T20:43:15.428Z"
+  },
+  "badlands-low-a#5": {
+    "verdict": "REJECTED",
+    "notes": "smooth loaf, no strata structure",
+    "at": "2026-11-22T20:43:15.471Z"
+  },
+  "badlands-low-a#9": {
+    "verdict": "REJECTED",
+    "notes": "two flat separate slabs",
+    "at": "2026-11-22T20:43:15.513Z"
+  },
+  "badlands-low-a#10": {
+    "verdict": "REJECTED",
+    "notes": "anvil shape, top-heavy",
+    "at": "2026-11-22T20:43:15.555Z"
+  },
+  "badlands-low-a#13": {
+    "verdict": "REJECTED",
+    "notes": "split in two with a gap",
+    "at": "2026-11-22T20:43:15.597Z"
+  },
+  "badlands-low-a#14": {
+    "verdict": "REJECTED",
+    "notes": "melted blob outline",
+    "at": "2026-11-22T20:43:15.640Z"
+  },
+  "badlands-low-a#16": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas on top and right",
+    "at": "2026-11-22T20:43:15.683Z"
+  },
+  "badlands-low-a#18": {
+    "verdict": "REJECTED",
+    "notes": "stacked balls read as a snowman",
+    "at": "2026-11-22T20:43:15.725Z"
+  },
+  "badlands-low-a#19": {
+    "verdict": "REJECTED",
+    "notes": "straight ramp, reads as a built object",
+    "at": "2026-11-22T20:43:15.767Z"
+  },
+  "badlands-low-a#20": {
+    "verdict": "REJECTED",
+    "notes": "square box, reads as a built object",
+    "at": "2026-11-22T20:43:15.809Z"
+  },
+  "badlands-low-a#22": {
+    "verdict": "REJECTED",
+    "notes": "scattered separate stones",
+    "at": "2026-11-22T20:43:15.850Z"
+  },
+  "badlands-low-a#23": {
+    "verdict": "REJECTED",
+    "notes": "reads as a tree stump",
+    "at": "2026-11-22T20:43:15.892Z"
+  },
+  "wasteland-s1#2": {
+    "verdict": "REJECTED",
+    "notes": "stepped face reads as a staircase",
+    "at": "2026-11-22T20:43:15.933Z"
+  },
+  "wasteland-s1#6": {
+    "verdict": "REJECTED",
+    "notes": "stepped face reads as a staircase",
+    "at": "2026-11-22T20:43:15.975Z"
+  },
+  "wasteland-low-a#18": {
+    "verdict": "REJECTED",
+    "notes": "two curved horns, reads as a creature part",
+    "at": "2026-11-22T20:43:16.017Z"
+  },
+  "wasteland-low-a#2": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.059Z"
+  },
+  "wasteland-low-a#3": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.100Z"
+  },
+  "wasteland-low-a#4": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.142Z"
+  },
+  "wasteland-low-a#6": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.185Z"
+  },
+  "wasteland-low-a#7": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.227Z"
+  },
+  "wasteland-low-a#8": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.270Z"
+  },
+  "wasteland-low-a#9": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.313Z"
+  },
+  "wasteland-low-a#10": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.355Z"
+  },
+  "wasteland-low-a#11": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.398Z"
+  },
+  "wasteland-low-a#13": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.441Z"
+  },
+  "wasteland-low-a#16": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.484Z"
+  },
+  "wasteland-low-a#17": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.525Z"
+  },
+  "wasteland-low-a#20": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.566Z"
+  },
+  "wasteland-low-a#22": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of the notched two-horn silhouette",
+    "at": "2026-11-22T20:43:16.607Z"
+  },
+  "grass-low-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "low green foothill, dark enough to stand off the grass, lit left",
+    "at": "2026-11-22T20:43:16.650Z"
+  },
+  "grass-low-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "low green foothill, dark enough to stand off the grass, lit left",
+    "at": "2026-11-22T20:43:16.694Z"
+  },
+  "grass-low-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "low green foothill, dark enough to stand off the grass, lit left",
+    "at": "2026-11-22T20:43:16.737Z"
+  },
+  "grass-low-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "low green foothill, dark enough to stand off the grass, lit left",
+    "at": "2026-11-22T20:43:16.779Z"
+  },
+  "grass-low-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "low green foothill, dark enough to stand off the grass, lit left",
+    "at": "2026-11-22T20:43:16.822Z"
+  },
+  "grass-low-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "low green foothill, dark enough to stand off the grass, lit left",
+    "at": "2026-11-22T20:43:16.864Z"
+  },
+  "grass-low-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "low green foothill, dark enough to stand off the grass, lit left",
+    "at": "2026-11-22T20:43:16.907Z"
+  },
+  "grass-low-a#18": {
+    "verdict": "ACCEPTED",
+    "notes": "low green foothill, dark enough to stand off the grass, lit left",
+    "at": "2026-11-22T20:43:16.950Z"
+  },
+  "grass-low-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "low green foothill, dark enough to stand off the grass, lit left",
+    "at": "2026-11-22T20:43:16.994Z"
+  },
+  "grass-low-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "low green foothill, dark enough to stand off the grass, lit left",
+    "at": "2026-11-22T20:43:17.037Z"
+  },
+  "grass-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T20:43:17.080Z"
+  },
+  "grass-s1#1": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T20:43:17.123Z"
+  },
+  "grass-s1#2": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T20:43:17.166Z"
+  },
+  "grass-s1#4": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T20:43:17.209Z"
+  },
+  "grass-s1#5": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T20:43:17.253Z"
+  },
+  "grass-s1#7": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T20:43:17.296Z"
+  },
+  "grass-s1#8": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T20:43:17.340Z"
+  },
+  "grass-big-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large green mountain with rocky crest, front view, clean outline",
+    "at": "2026-11-22T20:43:17.382Z"
+  },
+  "grass-big-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "large green mountain with rocky crest, front view, clean outline",
+    "at": "2026-11-22T20:43:17.424Z"
+  },
+  "grass-big-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large green mountain with rocky crest, front view, clean outline",
+    "at": "2026-11-22T20:43:17.468Z"
+  },
+  "grass-big-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large green mountain with rocky crest, front view, clean outline",
+    "at": "2026-11-22T20:43:17.510Z"
+  },
+  "jungle-low-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low limestone rock with a moss cap, reads as jungle karst",
+    "at": "2026-11-22T20:43:17.554Z"
+  },
+  "jungle-low-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "low limestone rock with a moss cap, reads as jungle karst",
+    "at": "2026-11-22T20:43:17.596Z"
+  },
+  "jungle-low-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "low limestone rock with a moss cap, reads as jungle karst",
+    "at": "2026-11-22T20:43:17.638Z"
+  },
+  "jungle-low-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "low limestone rock with a moss cap, reads as jungle karst",
+    "at": "2026-11-22T20:43:17.680Z"
+  },
+  "jungle-low-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "low limestone rock with a moss cap, reads as jungle karst",
+    "at": "2026-11-22T20:43:17.722Z"
+  },
+  "jungle-low-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "low limestone rock with a moss cap, reads as jungle karst",
+    "at": "2026-11-22T20:43:17.764Z"
+  },
+  "jungle-low-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "low limestone rock with a moss cap, reads as jungle karst",
+    "at": "2026-11-22T20:43:17.807Z"
+  },
+  "jungle-low-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "low limestone rock with a moss cap, reads as jungle karst",
+    "at": "2026-11-22T20:43:17.849Z"
+  },
+  "jungle-low-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "low limestone rock with a moss cap, reads as jungle karst",
+    "at": "2026-11-22T20:43:17.891Z"
+  },
+  "jungle-low-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "low limestone rock with a moss cap, reads as jungle karst",
+    "at": "2026-11-22T20:43:17.933Z"
+  },
+  "jungle-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "steep karst tower with green top, distinct shape family",
+    "at": "2026-11-22T20:43:17.976Z"
+  },
+  "jungle-s1#2": {
+    "verdict": "ACCEPTED",
+    "notes": "steep karst tower with green top, distinct shape family",
+    "at": "2026-11-22T20:43:18.017Z"
+  },
+  "jungle-s1#4": {
+    "verdict": "ACCEPTED",
+    "notes": "steep karst tower with green top, distinct shape family",
+    "at": "2026-11-22T20:43:18.060Z"
+  },
+  "jungle-s1#6": {
+    "verdict": "ACCEPTED",
+    "notes": "steep karst tower with green top, distinct shape family",
+    "at": "2026-11-22T20:43:18.102Z"
+  },
+  "jungle-s1#7": {
+    "verdict": "ACCEPTED",
+    "notes": "steep karst tower with green top, distinct shape family",
+    "at": "2026-11-22T20:43:18.145Z"
+  },
+  "jungle-s1#8": {
+    "verdict": "ACCEPTED",
+    "notes": "steep karst tower with green top, distinct shape family",
+    "at": "2026-11-22T20:43:18.188Z"
+  },
+  "jungle-big-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large karst tower group hung with vines",
+    "at": "2026-11-22T20:43:18.230Z"
+  },
+  "jungle-big-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "large karst tower group hung with vines",
+    "at": "2026-11-22T20:43:18.273Z"
+  },
+  "jungle-big-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large karst tower group hung with vines",
+    "at": "2026-11-22T20:43:18.315Z"
+  },
+  "jungle-big-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large karst tower group hung with vines",
+    "at": "2026-11-22T20:43:18.360Z"
+  },
+  "steppe-low-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.402Z"
+  },
+  "steppe-low-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.445Z"
+  },
+  "steppe-low-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.486Z"
+  },
+  "steppe-low-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.529Z"
+  },
+  "steppe-low-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.573Z"
+  },
+  "steppe-low-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.616Z"
+  },
+  "steppe-low-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.659Z"
+  },
+  "steppe-low-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.702Z"
+  },
+  "steppe-low-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.744Z"
+  },
+  "steppe-low-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.787Z"
+  },
+  "steppe-low-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.829Z"
+  },
+  "steppe-low-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.871Z"
+  },
+  "steppe-low-a#23": {
+    "verdict": "ACCEPTED",
+    "notes": "low angular tan crag, clean facets, lit left",
+    "at": "2026-11-22T20:43:18.913Z"
+  },
+  "steppe-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T20:43:18.956Z"
+  },
+  "steppe-s1#1": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T20:43:19.000Z"
+  },
+  "steppe-s1#2": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T20:43:19.042Z"
+  },
+  "steppe-s1#3": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T20:43:19.087Z"
+  },
+  "steppe-s1#4": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T20:43:19.131Z"
+  },
+  "steppe-s1#5": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T20:43:19.174Z"
+  },
+  "steppe-s1#6": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T20:43:19.217Z"
+  },
+  "steppe-s1#7": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T20:43:19.262Z"
+  },
+  "steppe-s1#8": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T20:43:19.305Z"
+  },
+  "steppe-big-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T20:43:19.349Z"
+  },
+  "steppe-big-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T20:43:19.393Z"
+  },
+  "steppe-big-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T20:43:19.435Z"
+  },
+  "steppe-big-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T20:43:19.478Z"
+  },
+  "badlands-low-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low red strata rock, level bands, solid body",
+    "at": "2026-11-22T20:43:19.519Z"
+  },
+  "badlands-low-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "low red strata rock, level bands, solid body",
+    "at": "2026-11-22T20:43:19.562Z"
+  },
+  "badlands-low-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "low red strata rock, level bands, solid body",
+    "at": "2026-11-22T20:43:19.604Z"
+  },
+  "badlands-low-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "low red strata rock, level bands, solid body",
+    "at": "2026-11-22T20:43:19.645Z"
+  },
+  "badlands-low-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "low red strata rock, level bands, solid body",
+    "at": "2026-11-22T20:43:19.687Z"
+  },
+  "badlands-low-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "low red strata rock, level bands, solid body",
+    "at": "2026-11-22T20:43:19.729Z"
+  },
+  "badlands-low-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "low red strata rock, level bands, solid body",
+    "at": "2026-11-22T20:43:19.770Z"
+  },
+  "badlands-low-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "low red strata rock, level bands, solid body",
+    "at": "2026-11-22T20:43:19.812Z"
+  },
+  "badlands-low-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "low red strata rock, level bands, solid body",
+    "at": "2026-11-22T20:43:19.854Z"
+  },
+  "badlands-low-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "low red strata rock, level bands, solid body",
+    "at": "2026-11-22T20:43:19.897Z"
+  },
+  "badlands-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T20:43:19.941Z"
+  },
+  "badlands-s1#1": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T20:43:19.983Z"
+  },
+  "badlands-s1#2": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T20:43:20.026Z"
+  },
+  "badlands-s1#3": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T20:43:20.069Z"
+  },
+  "badlands-s1#4": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T20:43:20.112Z"
+  },
+  "badlands-s1#6": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T20:43:20.154Z"
+  },
+  "badlands-s1#7": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T20:43:20.198Z"
+  },
+  "badlands-s1#8": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T20:43:20.242Z"
+  },
+  "badlands-big-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large red mesa or butte with level strata",
+    "at": "2026-11-22T20:43:20.286Z"
+  },
+  "badlands-big-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "large red mesa or butte with level strata",
+    "at": "2026-11-22T20:43:20.328Z"
+  },
+  "badlands-big-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large red mesa or butte with level strata",
+    "at": "2026-11-22T20:43:20.370Z"
+  },
+  "badlands-big-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large red mesa or butte with level strata",
+    "at": "2026-11-22T20:43:20.413Z"
+  },
+  "wasteland-low-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low dark basalt shards, solid body, faint ember cracks",
+    "at": "2026-11-22T20:43:20.457Z"
+  },
+  "wasteland-low-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "low dark basalt shards, solid body, faint ember cracks",
+    "at": "2026-11-22T20:43:20.501Z"
+  },
+  "wasteland-low-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "low dark basalt shards, solid body, faint ember cracks",
+    "at": "2026-11-22T20:43:20.543Z"
+  },
+  "wasteland-low-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "low dark basalt shards, solid body, faint ember cracks",
+    "at": "2026-11-22T20:43:20.585Z"
+  },
+  "wasteland-low-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "low dark basalt shards, solid body, faint ember cracks",
+    "at": "2026-11-22T20:43:20.628Z"
+  },
+  "wasteland-low-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "low dark basalt shards, solid body, faint ember cracks",
+    "at": "2026-11-22T20:43:20.672Z"
+  },
+  "wasteland-low-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "low dark basalt shards, solid body, faint ember cracks",
+    "at": "2026-11-22T20:43:20.714Z"
+  },
+  "wasteland-low-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "low dark basalt shards, solid body, faint ember cracks",
+    "at": "2026-11-22T20:43:20.756Z"
+  },
+  "wasteland-low-a#23": {
+    "verdict": "ACCEPTED",
+    "notes": "low dark basalt shards, solid body, faint ember cracks",
+    "at": "2026-11-22T20:43:20.800Z"
+  },
+  "wasteland-low-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "low dark basalt shards, solid body, faint ember cracks",
+    "at": "2026-11-22T20:43:20.843Z"
+  },
+  "wasteland-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "dark jagged basalt peak, lit left, calm enough for a crowd",
+    "at": "2026-11-22T22:27:04.510Z"
+  },
+  "wasteland-s1#1": {
+    "verdict": "ACCEPTED",
+    "notes": "dark jagged basalt peak, lit left, calm enough for a crowd",
+    "at": "2026-11-22T22:27:04.563Z"
+  },
+  "wasteland-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "vertical column stripes turn to noise in a crowd",
+    "at": "2026-11-22T22:27:00.982Z"
+  },
+  "wasteland-s1#4": {
+    "verdict": "ACCEPTED",
+    "notes": "dark jagged basalt peak, lit left, calm enough for a crowd",
+    "at": "2026-11-22T22:27:04.615Z"
+  },
+  "wasteland-s1#5": {
+    "verdict": "ACCEPTED",
+    "notes": "dark jagged basalt peak, lit left, calm enough for a crowd",
+    "at": "2026-11-22T22:27:04.672Z"
+  },
+  "wasteland-s1#7": {
+    "verdict": "REJECTED",
+    "notes": "vertical column stripes turn to noise in a crowd",
+    "at": "2026-11-22T22:27:01.032Z"
+  },
+  "wasteland-s1#8": {
+    "verdict": "ACCEPTED",
+    "notes": "dark jagged basalt peak, lit left, calm enough for a crowd",
+    "at": "2026-11-22T22:27:04.724Z"
+  },
+  "wasteland-big-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large dark basalt mountain with ember cracks",
+    "at": "2026-11-22T20:43:21.184Z"
+  },
+  "wasteland-big-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "large dark basalt mountain with ember cracks",
+    "at": "2026-11-22T20:43:21.227Z"
+  },
+  "wasteland-big-a#2": {
+    "verdict": "REJECTED",
+    "notes": "vertical column stripes turn to noise in a crowd",
+    "at": "2026-11-22T22:27:01.688Z"
+  },
+  "wasteland-big-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large dark basalt mountain with ember cracks",
+    "at": "2026-11-22T20:43:21.312Z"
+  },
+  "grass-mid-b#3": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas edge",
+    "at": "2026-11-22T22:27:00.120Z"
+  },
+  "grass-mid-b#4": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas edge",
+    "at": "2026-11-22T22:27:00.171Z"
+  },
+  "grass-mid-b#5": {
+    "verdict": "REJECTED",
+    "notes": "flat top with a white patch, seen from above",
+    "at": "2026-11-22T22:27:00.223Z"
+  },
+  "grass-mid-b#6": {
+    "verdict": "REJECTED",
+    "notes": "terraced like a stacked cake",
+    "at": "2026-11-22T22:27:00.274Z"
+  },
+  "grass-big-c#3": {
+    "verdict": "REJECTED",
+    "notes": "terraced like a stacked cake",
+    "at": "2026-11-22T22:27:00.324Z"
+  },
+  "jungle-mid-b#1": {
+    "verdict": "REJECTED",
+    "notes": "spotted capsule shapes, not rock",
+    "at": "2026-11-22T22:27:00.374Z"
+  },
+  "jungle-mid-b#3": {
+    "verdict": "REJECTED",
+    "notes": "smooth dome without karst structure",
+    "at": "2026-11-22T22:27:00.425Z"
+  },
+  "jungle-mid-b#7": {
+    "verdict": "REJECTED",
+    "notes": "flat black slab beside the rock",
+    "at": "2026-11-22T22:27:00.475Z"
+  },
+  "jungle-mid-b#8": {
+    "verdict": "REJECTED",
+    "notes": "twisted trunk reads as a tree",
+    "at": "2026-11-22T22:27:00.524Z"
+  },
+  "jungle-big-b#1": {
+    "verdict": "REJECTED",
+    "notes": "spotted capsule shapes, not rock",
+    "at": "2026-11-22T22:27:00.576Z"
+  },
+  "jungle-big-c#1": {
+    "verdict": "REJECTED",
+    "notes": "smooth dome without karst structure",
+    "at": "2026-11-22T22:27:00.626Z"
+  },
+  "steppe-mid-b#0": {
+    "verdict": "REJECTED",
+    "notes": "crater top seen from above, breaks the front view",
+    "at": "2026-11-22T22:27:00.676Z"
+  },
+  "steppe-mid-b#2": {
+    "verdict": "REJECTED",
+    "notes": "crater top seen from above, breaks the front view",
+    "at": "2026-11-22T22:27:00.728Z"
+  },
+  "steppe-mid-b#8": {
+    "verdict": "REJECTED",
+    "notes": "reads as a tree stump",
+    "at": "2026-11-22T22:27:00.779Z"
+  },
+  "badlands-mid-b#3": {
+    "verdict": "REJECTED",
+    "notes": "square boxes read as built objects",
+    "at": "2026-11-22T22:27:00.829Z"
+  },
+  "badlands-mid-b#4": {
+    "verdict": "REJECTED",
+    "notes": "thin arch with a hole, no mass in a crowd",
+    "at": "2026-11-22T22:27:00.883Z"
+  },
+  "badlands-big-c#1": {
+    "verdict": "REJECTED",
+    "notes": "square towers read as a built object",
+    "at": "2026-11-22T22:27:00.933Z"
+  },
+  "wasteland-mid-b#0": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas edge",
+    "at": "2026-11-22T22:27:01.082Z"
+  },
+  "wasteland-mid-b#1": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas edge",
+    "at": "2026-11-22T22:27:01.132Z"
+  },
+  "wasteland-mid-b#2": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas edge",
+    "at": "2026-11-22T22:27:01.183Z"
+  },
+  "wasteland-mid-b#3": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas edge",
+    "at": "2026-11-22T22:27:01.234Z"
+  },
+  "wasteland-mid-b#4": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas edge",
+    "at": "2026-11-22T22:27:01.285Z"
+  },
+  "wasteland-mid-b#5": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas edge",
+    "at": "2026-11-22T22:27:01.337Z"
+  },
+  "wasteland-mid-b#6": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas edge",
+    "at": "2026-11-22T22:27:01.387Z"
+  },
+  "wasteland-mid-b#7": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas edge",
+    "at": "2026-11-22T22:27:01.436Z"
+  },
+  "wasteland-mid-b#8": {
+    "verdict": "REJECTED",
+    "notes": "clipped by the canvas edge",
+    "at": "2026-11-22T22:27:01.487Z"
+  },
+  "wasteland-mid-c#2": {
+    "verdict": "REJECTED",
+    "notes": "stacked slabs, no peak",
+    "at": "2026-11-22T22:27:01.537Z"
+  },
+  "wasteland-mid-c#5": {
+    "verdict": "REJECTED",
+    "notes": "vertical column stripes turn to noise in a crowd",
+    "at": "2026-11-22T22:27:01.589Z"
+  },
+  "wasteland-mid-c#6": {
+    "verdict": "REJECTED",
+    "notes": "terraced like a stacked cake",
+    "at": "2026-11-22T22:27:01.638Z"
+  },
+  "wasteland-big-b#2": {
+    "verdict": "REJECTED",
+    "notes": "open crater seen from above, breaks the front view",
+    "at": "2026-11-22T22:27:01.738Z"
+  },
+  "wasteland-big-c#1": {
+    "verdict": "REJECTED",
+    "notes": "open crater seen from above, breaks the front view",
+    "at": "2026-11-22T22:27:01.791Z"
+  },
+  "grass-mid-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T22:27:01.847Z"
+  },
+  "grass-mid-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T22:27:01.899Z"
+  },
+  "grass-mid-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T22:27:01.953Z"
+  },
+  "grass-mid-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T22:27:02.004Z"
+  },
+  "grass-mid-b#8": {
+    "verdict": "ACCEPTED",
+    "notes": "rounded green mountain with rock crest, front view, clean outline",
+    "at": "2026-11-22T22:27:02.056Z"
+  },
+  "grass-big-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large green mountain with rocky crest, front view, clean outline",
+    "at": "2026-11-22T22:27:02.109Z"
+  },
+  "grass-big-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "large green mountain with rocky crest, front view, clean outline",
+    "at": "2026-11-22T22:27:02.162Z"
+  },
+  "grass-big-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large green mountain with rocky crest, front view, clean outline",
+    "at": "2026-11-22T22:27:02.213Z"
+  },
+  "grass-big-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large green mountain with rocky crest, front view, clean outline",
+    "at": "2026-11-22T22:27:02.265Z"
+  },
+  "grass-big-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large green mountain with rocky crest, front view, clean outline",
+    "at": "2026-11-22T22:27:02.316Z"
+  },
+  "grass-big-c#1": {
+    "verdict": "ACCEPTED",
+    "notes": "large green mountain with rocky crest, front view, clean outline",
+    "at": "2026-11-22T22:27:02.368Z"
+  },
+  "grass-big-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large green mountain with rocky crest, front view, clean outline",
+    "at": "2026-11-22T22:27:02.419Z"
+  },
+  "jungle-mid-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "steep karst tower with green top, distinct shape family",
+    "at": "2026-11-22T22:27:02.472Z"
+  },
+  "jungle-mid-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "steep karst tower with green top, distinct shape family",
+    "at": "2026-11-22T22:27:02.529Z"
+  },
+  "jungle-mid-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "steep karst tower with green top, distinct shape family",
+    "at": "2026-11-22T22:27:02.582Z"
+  },
+  "jungle-mid-b#5": {
+    "verdict": "ACCEPTED",
+    "notes": "steep karst tower with green top, distinct shape family",
+    "at": "2026-11-22T22:27:02.634Z"
+  },
+  "jungle-mid-b#6": {
+    "verdict": "ACCEPTED",
+    "notes": "steep karst tower with green top, distinct shape family",
+    "at": "2026-11-22T22:27:02.686Z"
+  },
+  "jungle-big-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large karst tower group hung with vines",
+    "at": "2026-11-22T22:27:02.742Z"
+  },
+  "jungle-big-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large karst tower group hung with vines",
+    "at": "2026-11-22T22:27:02.793Z"
+  },
+  "jungle-big-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large karst tower group hung with vines",
+    "at": "2026-11-22T22:27:02.846Z"
+  },
+  "jungle-big-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large karst tower group hung with vines",
+    "at": "2026-11-22T22:27:02.897Z"
+  },
+  "jungle-big-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large karst tower group hung with vines",
+    "at": "2026-11-22T22:27:02.948Z"
+  },
+  "jungle-big-c#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large karst tower group hung with vines",
+    "at": "2026-11-22T22:27:03.001Z"
+  },
+  "steppe-mid-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T22:27:03.054Z"
+  },
+  "steppe-mid-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T22:27:03.106Z"
+  },
+  "steppe-mid-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T22:27:03.158Z"
+  },
+  "steppe-mid-b#5": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T22:27:03.209Z"
+  },
+  "steppe-mid-b#6": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T22:27:03.261Z"
+  },
+  "steppe-mid-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged tan peak, big clean facets, lit left",
+    "at": "2026-11-22T22:27:03.313Z"
+  },
+  "steppe-big-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T22:27:03.368Z"
+  },
+  "steppe-big-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T22:27:03.420Z"
+  },
+  "steppe-big-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T22:27:03.471Z"
+  },
+  "steppe-big-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T22:27:03.524Z"
+  },
+  "steppe-big-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T22:27:03.575Z"
+  },
+  "steppe-big-c#1": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T22:27:03.626Z"
+  },
+  "steppe-big-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T22:27:03.677Z"
+  },
+  "steppe-big-c#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large jagged tan mountain, clean facets, lit left",
+    "at": "2026-11-22T22:27:03.729Z"
+  },
+  "badlands-mid-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T22:27:03.783Z"
+  },
+  "badlands-mid-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T22:27:03.835Z"
+  },
+  "badlands-mid-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T22:27:03.887Z"
+  },
+  "badlands-mid-b#5": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T22:27:03.940Z"
+  },
+  "badlands-mid-b#6": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T22:27:03.992Z"
+  },
+  "badlands-mid-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T22:27:04.043Z"
+  },
+  "badlands-mid-b#8": {
+    "verdict": "ACCEPTED",
+    "notes": "flat-topped red butte or hoodoo group with level strata",
+    "at": "2026-11-22T22:27:04.094Z"
+  },
+  "badlands-big-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large red mesa or butte with level strata",
+    "at": "2026-11-22T22:27:04.146Z"
+  },
+  "badlands-big-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "large red mesa or butte with level strata",
+    "at": "2026-11-22T22:27:04.198Z"
+  },
+  "badlands-big-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large red mesa or butte with level strata",
+    "at": "2026-11-22T22:27:04.250Z"
+  },
+  "badlands-big-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large red mesa or butte with level strata",
+    "at": "2026-11-22T22:27:04.301Z"
+  },
+  "badlands-big-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large red mesa or butte with level strata",
+    "at": "2026-11-22T22:27:04.352Z"
+  },
+  "badlands-big-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large red mesa or butte with level strata",
+    "at": "2026-11-22T22:27:04.403Z"
+  },
+  "badlands-big-c#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large red mesa or butte with level strata",
+    "at": "2026-11-22T22:27:04.456Z"
+  },
+  "wasteland-mid-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "dark jagged basalt peak, lit left, calm enough for a crowd",
+    "at": "2026-11-22T22:27:04.776Z"
+  },
+  "wasteland-mid-c#1": {
+    "verdict": "ACCEPTED",
+    "notes": "dark jagged basalt peak, lit left, calm enough for a crowd",
+    "at": "2026-11-22T22:27:04.826Z"
+  },
+  "wasteland-mid-c#3": {
+    "verdict": "ACCEPTED",
+    "notes": "dark jagged basalt peak, lit left, calm enough for a crowd",
+    "at": "2026-11-22T22:27:04.877Z"
+  },
+  "wasteland-mid-c#4": {
+    "verdict": "ACCEPTED",
+    "notes": "dark jagged basalt peak, lit left, calm enough for a crowd",
+    "at": "2026-11-22T22:27:04.927Z"
+  },
+  "wasteland-mid-c#7": {
+    "verdict": "ACCEPTED",
+    "notes": "dark jagged basalt peak, lit left, calm enough for a crowd",
+    "at": "2026-11-22T22:27:04.980Z"
+  },
+  "wasteland-mid-c#8": {
+    "verdict": "ACCEPTED",
+    "notes": "dark jagged basalt peak, lit left, calm enough for a crowd",
+    "at": "2026-11-22T22:27:05.030Z"
+  },
+  "wasteland-big-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large dark basalt mountain with ember cracks",
+    "at": "2026-11-22T22:27:05.083Z"
+  },
+  "wasteland-big-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "large dark basalt mountain with ember cracks",
+    "at": "2026-11-22T22:27:05.133Z"
+  },
+  "wasteland-big-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large dark basalt mountain with ember cracks",
+    "at": "2026-11-22T22:27:05.186Z"
+  },
+  "wasteland-big-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "large dark basalt mountain with ember cracks",
+    "at": "2026-11-22T22:27:05.237Z"
+  },
+  "wasteland-big-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large dark basalt mountain with ember cracks",
+    "at": "2026-11-22T22:27:05.288Z"
+  },
+  "wasteland-big-c#3": {
+    "verdict": "ACCEPTED",
+    "notes": "large dark basalt mountain with ember cracks",
+    "at": "2026-11-22T22:27:05.341Z"
+  }
+}

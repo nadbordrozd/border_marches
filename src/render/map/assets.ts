@@ -18,6 +18,7 @@ import {
   assetUrl,
 } from "../../assets/manifest";
 import type { GroundTerrain, ImageAsset } from "../../assets/manifest";
+import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
 import { GROUND_CALM, blockMask, calmTexture } from "./ground";
 import type { GroundSources, PixelImage } from "./ground";
@@ -84,6 +85,7 @@ export function mapAssetList(): ImageAsset[] {
     ...TOWN_3X2_ASSETS,
     ...DOODAD_ASSETS,
     ...TREE_ASSETS,
+    ...PEAK_ASSETS,
     ...TOWN_ASSETS,
     ...UNIT_ASSETS,
     ...HERO_ASSETS,
