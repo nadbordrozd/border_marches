@@ -56,6 +56,75 @@ export interface BattleCreatureStats {
   readonly aiValuePerHp?: number;
   /** Defaults to `{ remains: "corpse", cannotBear: [] }`. */
   readonly tags?: StackTags;
+  /**
+   * Creature caster pages (RULES_V2 2.6). Content may instead register them
+   * by creature id with `registerCreatureCaster` (magic.ts).
+   */
+  readonly caster?: CreatureCaster;
+}
+
+/** A creature caster's pages and Power (RULES_V2 2.6). */
+export interface CreatureCaster {
+  /** At most two spell (act) ids. */
+  readonly pages: readonly string[];
+  readonly castPower: number;
+  readonly castDivisor: number;
+  readonly castCap: number;
+}
+
+/** What a hero brings to battle for casting (RULES_V2 2.3 to 2.5). */
+export interface MagicSetup {
+  /** Hero Power plus flat modifiers (not the school bonus). */
+  readonly power: number;
+  /** Mana the hero has now. */
+  readonly mana: number;
+  /** School skill ranks, 0 to 3; missing schools are 0. */
+  readonly schoolRanks?: { readonly [S in School]?: number };
+  /** Battle pages the hero knows (spell ids). */
+  readonly pages: readonly string[];
+  /** The scroll case: spell ids, one entry per scroll. */
+  readonly scrolls?: readonly string[];
+  /** Fuels per battle (default 1, at most 3). */
+  readonly fuelMax?: number;
+  /** Mana cost percentage (skills, artifacts); default 100. */
+  readonly costPercent?: number;
+  /**
+   * Effective Power of a page of each school (hero model: Power, rank bonus
+   * and school or page modifiers). Absent: power + rank bonus.
+   */
+  readonly pagePower?: { readonly [S in School]?: number };
+  /** Effective Power of a scroll; absent: max(2, power). */
+  readonly scrollPower?: number;
+  /** Rounds Echo adds to a clock (default 1; a switch may make it 2). */
+  readonly echoRounds?: number;
+  /** Vows: schools this hero can never cast (pages and scrolls). */
+  readonly neverCast?: readonly School[];
+  /** Vows: rounds in which the hero cannot cast. */
+  readonly noCastRounds?: "1-2" | "after-3" | "even";
+}
+
+/** A side's magic during a battle (pages spent, mana, Fuel). */
+export interface SideMagic {
+  readonly power: number;
+  readonly mana: number;
+  readonly schoolRanks: { readonly [S in School]: number };
+  readonly pages: readonly string[];
+  /** Pages spent this battle. */
+  readonly spent: readonly string[];
+  /** Scrolls still in the case. */
+  readonly scrolls: readonly string[];
+  /** Scrolls cast this battle (destroyed). */
+  readonly scrollsUsed: readonly string[];
+  readonly fuelUsed: number;
+  readonly fuelMax: number;
+  readonly costPercent: number;
+  readonly pagePower: { readonly [S in School]?: number };
+  readonly scrollPower: number | null;
+  readonly echoRounds: number;
+  readonly neverCast: readonly School[];
+  readonly noCastRounds: "1-2" | "after-3" | "even" | null;
+  /** Mana spent this battle (stays spent, 1.12). */
+  readonly manaSpent: number;
 }
 
 export interface HeroBattleStats {
@@ -112,6 +181,8 @@ export interface BattleArmySetup {
    * in this order through the effect registry.
    */
   readonly startRules?: readonly EffectRef[];
+  /** The hero's book, mana and scrolls (needs a hero). */
+  readonly magic?: MagicSetup;
 }
 
 export interface BattleSetup {
@@ -266,6 +337,11 @@ export interface BattleSideState {
   readonly commandUsed: boolean;
   /** Item acts used this battle (act ids). */
   readonly itemActsUsed: readonly string[];
+  /**
+   * The hero's magic. Absent: a hero with no book data (tests, legacy
+   * setups) casts any cast act freely at Power 0.
+   */
+  readonly magic?: SideMagic;
 }
 
 export type EndReason = "eliminated" | "roundLimit" | "retreat";
@@ -299,7 +375,24 @@ export interface BattleState {
 export type ActTarget =
   | { readonly stack: StackId }
   | { readonly hex: Hex }
-  | { readonly stack: StackId; readonly condition: number };
+  | { readonly stack: StackId; readonly condition: number }
+  /** A named option of the act ("+2" or "-2" for Wind). */
+  | { readonly choice: string };
+
+/** How a hero cast was made (shown on the heroAct event). */
+export interface CastInfo {
+  readonly power: number;
+  readonly mana: number;
+  readonly scroll: boolean;
+  readonly fuelled: boolean;
+  readonly echoed: boolean;
+}
+
+/** One condition on one stack, by identity. */
+export interface ConditionRef {
+  readonly stack: StackId;
+  readonly condition: number;
+}
 
 export type BattleAction =
   | { readonly type: "move"; readonly stackId: StackId; readonly to: Hex }
@@ -342,6 +435,20 @@ export type BattleAction =
       readonly stackId: StackId;
       readonly act: string;
       readonly targets: readonly ActTarget[];
+      /** Cast from the scroll case instead of a page (RULES_V2 2.5). */
+      readonly scroll?: boolean;
+      /** Echo: a condition whose clock grows by 1 (RULES_V2 2.4). */
+      readonly echo?: ConditionRef;
+      /** Fuel: a condition burnt to double the spell's size (2.4). */
+      readonly fuel?: ConditionRef;
+    }
+  | {
+      /** A creature caster casts one of its pages as its action (2.6). */
+      readonly type: "creatureCast";
+      readonly stackId: StackId;
+      readonly spell: string;
+      readonly targets: readonly ActTarget[];
+      readonly hearten?: boolean;
     }
   | { readonly type: "retreat"; readonly stackId: StackId };
 
@@ -597,6 +704,15 @@ export type BattleEventBody =
       readonly type: "heroAct";
       readonly side: BattleSide;
       readonly act: string;
+      /** For casts: the effective Power, mana paid and choices. */
+      readonly cast?: CastInfo;
+    }
+  | {
+      /** A creature caster's page (2.6). */
+      readonly type: "creatureCast";
+      readonly stackId: StackId;
+      readonly spell: string;
+      readonly power: number;
     }
   | { readonly type: "retreat"; readonly side: BattleSide }
   | { readonly type: "contentError"; readonly message: string }

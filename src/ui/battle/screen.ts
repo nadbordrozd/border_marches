@@ -81,7 +81,40 @@ import {
   strikeHeadline,
   summarizePreview,
 } from "./preview.ts";
+import {
+  castAction,
+  castPreview,
+  creatureBook,
+  echoOptions,
+  fuelOptions,
+  heroBook,
+  heroSideNow,
+  nextStep,
+  spellAreaHexes,
+  stepPrompt,
+} from "./magic.ts";
+import type { BookEntry, CastPreview, ConditionOption } from "./magic.ts";
+import { renderBook, renderCastPanel } from "./spellbook.ts";
+import { registerSpells, lineThrough } from "../../core/magic/index.ts";
+import { act, conditionKind, hasAct } from "../../core/battle/index.ts";
+
+function actName(id: string): string {
+  return hasAct(id) ? act(id).name : id;
+}
+import type { ActTarget, ConditionRef, Hex } from "../../core/battle/index.ts";
 import "./battle.css";
+
+/** A cast being aimed (RULES_V2 2.4): the page, targets, Echo and Fuel. */
+interface Casting {
+  readonly entry: BookEntry;
+  targets: ActTarget[];
+  /** A condition step: the stack whose conditions are offered. */
+  pickFor: StackId | null;
+  echo: ConditionRef | null;
+  fuel: ConditionRef | null;
+  /** Rehearsal of the hovered last target, if any. */
+  hover: { target: ActTarget; preview: CastPreview } | null;
+}
 
 export interface BattleScreenOptions {
   /** Sides the player controls (default: the attacker, i.e. the hero). */
@@ -161,6 +194,10 @@ class BattleScreen {
   private readonly autoBtn = el("button", "bm-btn", "Auto");
   private readonly speedBtn = el("button", "bm-btn", "");
   private readonly undoBtn = el("button", "bm-btn", "Undo");
+  private readonly spellBtn = el("button", "bm-btn bm-spells", "Spells");
+  private readonly book = el("div", "bm-book");
+  private readonly castBox = el("div", "bm-cast");
+  private casting: Casting | null = null;
   /** Applied actions this battle, for take-back (RULES_V2 1.13). */
   private history: HistoryEntry[] = [];
   private readonly info = el("div", "bm-info");
@@ -190,6 +227,7 @@ class BattleScreen {
     private readonly setup: GameBattleSetup,
     private readonly options: BattleScreenOptions,
   ) {
+    registerSpells();
     this.playerSides = new Set(options.playerSides ?? ["attacker"]);
     this.maxRounds = options.maxRounds ?? DEFAULT_MAX_ROUNDS;
     this.auto = options.autoResolve === true;
@@ -229,12 +267,19 @@ class BattleScreen {
       this.waitBtn,
       this.defendBtn,
       this.undoBtn,
+      this.spellBtn,
       this.autoBtn,
       this.speedBtn,
     );
     this.bottom.append(this.activeCard, this.panel, this.buttons);
     this.info.hidden = true;
+    this.book.hidden = true;
+    this.castBox.hidden = true;
+    this.stageWrap.append(this.book, this.castBox);
     root.append(this.top, this.stageWrap, this.bottom, this.info);
+    this.spellBtn.title =
+      "Spellbook (B): the hero casts one page or scroll a round, before this stack acts";
+    this.on(this.spellBtn, "click", () => this.toggleBook());
     this.container.append(root);
 
     this.waitBtn.title = "Wait: act again after every other stack (W)";
@@ -479,6 +524,10 @@ class BattleScreen {
     this.pointer = this.toStage(e);
     this.updateHover();
     if (!this.pendingAction || this.animating) return;
+    if (this.casting) {
+      this.castClick();
+      return;
+    }
     const it = this.intent;
     if (it.kind === "move" || it.kind === "attack") this.commit(it.action);
   }
@@ -497,7 +546,12 @@ class BattleScreen {
   }
 
   private onKey(e: KeyboardEvent): void {
-    if (e.key === "Escape") this.closeInfo();
+    if (e.key === "Escape") {
+      if (this.casting) this.cancelCast();
+      else if (!this.book.hidden) this.closeBook();
+      else this.closeInfo();
+    } else if (e.key === "b" || e.key === "B") this.toggleBook();
+    else if (e.key === "Enter" && this.casting) this.castNow();
     else if (e.key === " ") {
       e.preventDefault();
       this.animator.skip();
@@ -536,7 +590,7 @@ class BattleScreen {
   private updateHover(): void {
     const at = this.pointer ? pointAtField(this.state, this.pointer) : null;
     this.intent =
-      at === null || this.animating
+      at === null || this.animating || this.casting !== null
         ? { kind: "none" }
         : hoverIntent(
             this.state,
@@ -554,6 +608,7 @@ class BattleScreen {
           : it.kind === "out-of-reach"
             ? "not-allowed"
             : "default";
+    if (this.casting) this.castHover(at?.hex ?? null);
     this.updateOverlay();
     this.renderPanel();
     this.placeTip();
@@ -597,6 +652,7 @@ class BattleScreen {
       case "none":
         break;
     }
+    if (this.casting) this.castMarks(marks);
     this.scene.overlay =
       active === null && marks.size === 0
         ? EMPTY_OVERLAY
@@ -700,6 +756,17 @@ class BattleScreen {
     this.waitBtn.disabled = !playerTurn || !this.legal.canWait;
     this.defendBtn.disabled = !playerTurn;
     this.undoBtn.disabled = !playerTurn || this.takeBackPoint() === null;
+    const side = heroSideNow(this.state, this.playerSides);
+    const magic = side ? this.state.sides[side].magic : undefined;
+    const hasBook =
+      (side !== null && heroBook(this.state, side).length > 0) ||
+      creatureBook(this.state).length > 0;
+    this.spellBtn.disabled = !playerTurn || !hasBook;
+    this.spellBtn.textContent = magic ? `Spells · ${magic.mana}` : "Spells";
+    this.spellBtn.classList.toggle(
+      "bm-on",
+      !this.book.hidden || this.casting !== null,
+    );
     this.autoBtn.disabled = this.state.winner !== null;
     this.autoBtn.textContent = this.auto ? "Auto: on" : "Auto";
     this.autoBtn.classList.toggle("bm-on", this.auto);
@@ -924,6 +991,11 @@ class BattleScreen {
       line = `${does(e.sourceId, v)} ${name(e.targetId)}: ${e.damage} damage, ${killed}`;
     } else if (e.type === "wait") line = does(e.stackId, "wait");
     else if (e.type === "defend") line = does(e.stackId, "defend");
+    else if (e.type === "heroAct" && e.cast) {
+      const name = this.setup[e.side]?.hero?.name ?? "The hero";
+      line = `${name} casts ${actName(e.act)} (Power ${e.cast.power}${e.cast.scroll ? ", scroll" : `, ${e.cast.mana} mana`}${e.cast.fuelled ? ", Fuelled" : ""}${e.cast.echoed ? ", Echo" : ""})`;
+    } else if (e.type === "creatureCast")
+      line = `${does(e.stackId, "cast")} ${actName(e.spell)} (Power ${e.power})`;
     else if (e.type === "heal")
       line = `${does(e.stackId, "regenerate")} ${e.amount} HP`;
     if (line !== null) {
@@ -931,6 +1003,266 @@ class BattleScreen {
       if (this.log.length > 20) this.log.shift();
       if (this.intent.kind !== "attack") this.renderPanel();
     }
+  }
+
+  // --------------------------------------------------------------- magic
+
+  private toggleBook(): void {
+    if (!this.book.hidden) {
+      this.closeBook();
+      return;
+    }
+    if (!this.pendingAction || this.animating || !this.isPlayerTurn()) return;
+    this.cancelCast();
+    const side = heroSideNow(this.state, this.playerSides);
+    const pages = side ? heroBook(this.state, side) : [];
+    const magic = side ? this.state.sides[side].magic : undefined;
+    const active = activeStack(this.state);
+    const own = creatureBook(this.state);
+    renderBook(
+      this.book,
+      {
+        title: `${(side && this.setup[side]?.hero?.name) || "Hero"}'s spellbook`,
+        status: magic
+          ? `Mana ${magic.mana} · Fuel ${magic.fuelMax - magic.fuelUsed} left · ${
+              this.state.sides[side as BattleSide].castRound ===
+              this.state.round
+                ? "already cast this round"
+                : "one cast this round"
+            }`
+          : "No book.",
+        pages: pages.filter((p) => p.source === "page"),
+        scrolls: pages.filter((p) => p.source === "scroll"),
+        creature:
+          active && own.length > 0
+            ? { name: creatureName(active.creature, active.count), pages: own }
+            : null,
+      },
+      (entry) => this.startCast(entry),
+      () => this.closeBook(),
+    );
+    this.book.hidden = false;
+    this.refreshButtons();
+  }
+
+  private closeBook(): void {
+    this.book.hidden = true;
+    this.refreshButtons();
+  }
+
+  private startCast(entry: BookEntry): void {
+    this.closeBook();
+    this.casting = {
+      entry,
+      targets: [],
+      pickFor: null,
+      echo: null,
+      fuel: null,
+      hover: null,
+    };
+    this.castBox.hidden = false;
+    this.refreshCast();
+  }
+
+  private cancelCast(): void {
+    this.casting = null;
+    this.castBox.hidden = true;
+    this.updateHover();
+    this.refreshButtons();
+  }
+
+  private castNow(): void {
+    const c = this.casting;
+    if (!c || !this.pendingAction || this.animating) return;
+    if (nextStep(c.entry.id, c.targets) !== null) return;
+    const action = castAction(this.state, c.entry, c.targets, {
+      echo: c.echo,
+      fuel: c.fuel,
+    });
+    if (!castPreview(this.state, action).legal) return;
+    this.casting = null;
+    this.castBox.hidden = true;
+    this.commit(action);
+  }
+
+  /** The target a click or hover on `h` would add, or null. */
+  private targetAt(h: Hex | null): ActTarget | null {
+    const c = this.casting;
+    if (!c || h === null) return null;
+    const step = nextStep(c.entry.id, c.targets);
+    const stack = this.state.stacks.find(
+      (s) => isAlive(s) && s.hex.col === h.col && s.hex.row === h.row,
+    );
+    if (step === "stack") return stack ? { stack: stack.id } : null;
+    if (step === "hex") return { hex: h };
+    return null;
+  }
+
+  private castClick(): void {
+    const c = this.casting;
+    if (!c) return;
+    const at = this.pointer ? pointAtField(this.state, this.pointer).hex : null;
+    const step = nextStep(c.entry.id, c.targets);
+    if (step === "condition") {
+      const stack =
+        at === null
+          ? undefined
+          : this.state.stacks.find(
+              (s) => isAlive(s) && s.hex.col === at.col && s.hex.row === at.row,
+            );
+      c.pickFor = stack ? stack.id : null;
+      this.refreshCast();
+      return;
+    }
+    const t = this.targetAt(at);
+    if (!t) return;
+    c.targets.push(t);
+    // A line of three: the second hex sets the direction, the third follows.
+    const rule = nextStep(c.entry.id, c.targets);
+    if (
+      rule === "hex" &&
+      c.targets.length === 2 &&
+      c.entry.id === "bramble-row"
+    ) {
+      const [a, b] = c.targets.map((x) => ("hex" in x ? x.hex : null));
+      if (a && b) {
+        const line = lineThrough(a, b);
+        if (line[2]) c.targets.push({ hex: line[2] });
+      }
+    }
+    c.hover = null;
+    this.refreshCast();
+  }
+
+  private castHover(h: Hex | null): void {
+    const c = this.casting;
+    if (!c) return;
+    const steps = nextStep(c.entry.id, c.targets);
+    const t = this.targetAt(h);
+    const last =
+      steps !== null &&
+      nextStep(c.entry.id, [...c.targets, t ?? { hex: { col: 0, row: 0 } }]) ===
+        null;
+    if (t && last) {
+      const same =
+        c.hover !== null &&
+        JSON.stringify(c.hover.target) === JSON.stringify(t);
+      if (!same) {
+        const action = castAction(this.state, c.entry, [...c.targets, t]);
+        c.hover = { target: t, preview: castPreview(this.state, action) };
+        this.refreshCast();
+      }
+    } else if (c.hover !== null) {
+      c.hover = null;
+      this.refreshCast();
+    }
+  }
+
+  private castMarks(marks: Map<number, HexMark>): void {
+    const c = this.casting;
+    if (!c) return;
+    marks.clear();
+    for (const t of c.targets) {
+      if ("hex" in t) marks.set(hexIndex(t.hex), "target");
+      else if ("stack" in t)
+        marks.set(hexIndex(getStack(this.state, t.stack).hex), "target");
+    }
+    const at = this.pointer ? pointAtField(this.state, this.pointer).hex : null;
+    const step = nextStep(c.entry.id, c.targets);
+    if (at !== null && step === "hex") {
+      for (const h of spellAreaHexes(c.entry.id, at))
+        marks.set(hexIndex(h), "move-target");
+    } else if (at !== null && step !== null) {
+      marks.set(hexIndex(at), "inspect");
+    }
+    if (c.pickFor !== null)
+      marks.set(hexIndex(getStack(this.state, c.pickFor).hex), "inspect");
+  }
+
+  private refreshCast(): void {
+    const c = this.casting;
+    if (!c) return;
+    const id = c.entry.id;
+    const step = nextStep(id, c.targets);
+    const complete = step === null;
+    let conditions: ConditionOption[] | null = null;
+    if (step === "condition" && c.pickFor !== null) {
+      const s = getStack(this.state, c.pickFor);
+      conditions = s.conditions.map((x) => ({
+        ref: { stack: s.id, condition: x.uid },
+        label: `${conditionKind(x.kind).name}${x.size ? ` ${x.size}` : ""}${x.clock === null ? "" : ` (${x.clock})`}`,
+        effect: conditionKind(x.kind).text(x),
+      }));
+    }
+    const echo =
+      complete && c.entry.source !== "creature"
+        ? echoOptions(this.state, id, c.targets)
+        : [];
+    const fuel =
+      complete && c.entry.source !== "creature"
+        ? fuelOptions(this.state, id, c.targets)
+        : [];
+    const side = activeStack(this.state)?.side ?? "attacker";
+    const magic = this.state.sides[side].magic;
+    const preview = complete
+      ? castPreview(
+          this.state,
+          castAction(this.state, c.entry, c.targets, {
+            echo: c.echo,
+            fuel: c.fuel,
+          }),
+        )
+      : (c.hover?.preview ?? null);
+    renderCastPanel(
+      this.castBox,
+      {
+        entry: c.entry,
+        prompt:
+          step === "condition" && c.pickFor !== null
+            ? "Choose the condition."
+            : stepPrompt(id, c.targets),
+        conditions,
+        choices: step === "choice" ? ["+2", "-2"] : null,
+        preview,
+        hovered: !complete && c.hover !== null,
+        echo,
+        fuel,
+        echoOn: c.echo,
+        fuelOn: c.fuel,
+        fuelLeft: magic ? magic.fuelUsed < magic.fuelMax : true,
+        complete,
+      },
+      {
+        onCondition: (ref) => {
+          c.targets.push(ref);
+          c.pickFor = null;
+          this.refreshCast();
+        },
+        onChoice: (choice) => {
+          c.targets.push({ choice });
+          this.refreshCast();
+        },
+        onEcho: (ref) => {
+          c.echo = ref;
+          this.refreshCast();
+        },
+        onFuel: (ref) => {
+          c.fuel = ref;
+          this.refreshCast();
+        },
+        onCast: () => this.castNow(),
+        onBack: () => {
+          c.targets.pop();
+          c.pickFor = null;
+          c.echo = null;
+          c.fuel = null;
+          this.refreshCast();
+        },
+        onCancel: () => this.cancelCast(),
+      },
+    );
+    this.updateOverlay();
+    this.refreshButtons();
   }
 
   // ---------------------------------------------------------------- info

@@ -6,6 +6,7 @@
  * is shared by reference between states and must never be mutated.
  */
 import type { GameMap, ResourceId } from "../map/types.ts";
+import type { MagicGameState } from "../magic/hero.ts";
 import type {
   BuildingId,
   CreatureId,
@@ -244,6 +245,11 @@ export interface GameState {
   pendingBattle: PendingBattle | null;
   /** Number of battles resolved so far (feeds battle seeds). */
   battles: number;
+  /**
+   * Magic on the adventure layer (src/core/magic/hero.ts): interim hero
+   * books and mana, adventure-spell day effects. Absent in older saves.
+   */
+  magic?: MagicGameState;
 }
 
 export type MoveStopReason =
@@ -293,6 +299,8 @@ export type GameEvent =
   | { type: "hero-retreated"; heroId: string }
   | { type: "hero-hired"; heroId: string; player: number; townId: string }
   | { type: "hero-dismissed"; heroId: string }
+  /** A hero learnt guild spells in its town (RULES_V2 2.9). */
+  | { type: "spells-learnt"; heroId: string; townId: string; spells: string[] }
   | {
       type: "artifacts-won";
       heroId: string;

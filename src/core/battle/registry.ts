@@ -33,6 +33,7 @@ import type {
   BattleState,
   Condition,
   ConditionSpec,
+  CreatureCaster,
   FlatModifier,
   GroundClass,
   GroundFeature,
@@ -332,7 +333,43 @@ export interface ActDef {
     actorId: StackId,
     targets: readonly ActTarget[],
   ): string | null;
-  resolve(fx: Effects, actorId: StackId, targets: readonly ActTarget[]): void;
+  /**
+   * Casts (RULES_V2 2.4): the listed mana cost (default by tier: 4, 7, 10,
+   * 14, 20).
+   */
+  readonly mana?: number;
+  /** Casts: the spell marks a size, so Fuel can double it (2.4). */
+  readonly sized?: boolean;
+  /**
+   * Casts: the stacks the spell touches (chosen and caught in its area),
+   * for Echo and Fuel (2.4). Default: the stacks named by the targets.
+   */
+  touches?(
+    state: BattleState,
+    actorId: StackId,
+    targets: readonly ActTarget[],
+  ): StackId[];
+  /**
+   * `cast` is given for spells (hero pages, scrolls and creature casters):
+   * the effective Power and whether Fuel doubled the size.
+   */
+  resolve(
+    fx: Effects,
+    actorId: StackId,
+    targets: readonly ActTarget[],
+    cast?: CastContext,
+  ): void;
+}
+
+/** How a spell is being cast (RULES_V2 2.4 to 2.6). */
+export interface CastContext {
+  /** Effective Power, 0 to 30. */
+  readonly power: number;
+  /** Fuel was burnt: the spell's marked size is doubled. */
+  readonly fuelled: boolean;
+  readonly by: "page" | "scroll" | "creature";
+  /** The side the spell is cast for (read at the cast). */
+  readonly side: BattleSide;
 }
 
 /** A named effect for scheduled events and battle-start rules. */
@@ -410,4 +447,39 @@ export function effect(id: string): EffectFn {
 }
 export function conditionKindIds(): string[] {
   return [...conditionKinds.keys()];
+}
+export function actIds(): string[] {
+  return [...acts.keys()];
+}
+
+// ---------------------------------------------------------------------------
+// Creature casters (RULES_V2 2.6)
+
+const casters = new Map<string, CreatureCaster>();
+
+/**
+ * The faction hook for creature casters: the creature `creatureId` may cast
+ * these pages (at most two). A creature's own `caster` field wins.
+ */
+export function registerCreatureCaster(
+  creatureId: string,
+  caster: CreatureCaster,
+): void {
+  if (caster.pages.length < 1 || caster.pages.length > 2)
+    throw new Error(`creature caster ${creatureId}: one or two pages`);
+  if (caster.castDivisor < 1)
+    throw new Error(`creature caster ${creatureId}: castDivisor >= 1`);
+  put(casters, "creature caster", creatureId, caster);
+}
+
+/** The pages of a creature, or null when it is not a caster. */
+export function casterOf(creature: BattleCreatureStats): CreatureCaster | null {
+  return creature.caster ?? casters.get(creature.id) ?? null;
+}
+
+export function hasGroundKind(id: string): boolean {
+  return groundKinds.has(id);
+}
+export function hasAbility(id: string): boolean {
+  return id in ABILITY_HOOKS || abilities.has(id);
 }

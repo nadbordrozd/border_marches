@@ -52,6 +52,35 @@ export interface BattleResult {
    * winner's hero gains this as XP).
    */
   readonly killedHp: { readonly [S in BattleSide]: number };
+  /**
+   * Per side with a hero book: mana spent and scrolls used (both stay
+   * spent after the battle, RULES_V2 1.12). Absent when no side has magic.
+   */
+  readonly magic?: { readonly [S in BattleSide]?: MagicOutcome };
+}
+
+export interface MagicOutcome {
+  readonly manaSpent: number;
+  readonly manaLeft: number;
+  readonly scrollsUsed: readonly string[];
+}
+
+function magicOutcome(
+  state: BattleState,
+): { [S in BattleSide]?: MagicOutcome } | null {
+  const out: { [S in BattleSide]?: MagicOutcome } = {};
+  let any = false;
+  for (const side of ["attacker", "defender"] as const) {
+    const m = state.sides[side].magic;
+    if (!m) continue;
+    any = true;
+    out[side] = {
+      manaSpent: m.manaSpent,
+      manaLeft: m.mana,
+      scrollsUsed: m.scrollsUsed,
+    };
+  }
+  return any ? out : null;
 }
 
 /** The result of a finished (or abandoned) battle state. */
@@ -66,7 +95,9 @@ export function battleResult(
     const killer = s.owner === "attacker" ? "defender" : "attacker";
     killedHp[killer] += (s.initialCount - s.count) * s.creature.hp;
   }
+  const magic = magicOutcome(state);
   return {
+    ...(magic ? { magic } : {}),
     winner: state.winner,
     reason,
     rounds: state.round,

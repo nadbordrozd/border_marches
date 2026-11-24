@@ -22,6 +22,7 @@ import type {
   BattleSetup as GameBattleSetup,
   BattleSide as GameBattleSide,
 } from "../game/battle.ts";
+import type { HeroBattleProfile } from "../game/battle-profile.ts";
 import { runAutoBattle } from "./auto.ts";
 import type { AutoBattleOptions, BattleResult } from "./auto.ts";
 import {
@@ -34,6 +35,8 @@ import type {
   BattleCreatureStats,
   BattleSetup,
   BattleSide,
+  MagicSetup,
+  School,
 } from "./types.ts";
 
 /** Engine stats for a creature record of src/data. */
@@ -49,6 +52,34 @@ export function battleStatsFromCreature(def: CreatureDef): BattleCreatureStats {
     speed: def.speed,
     shots: def.shots,
     abilities: def.ability === null ? [] : [def.ability],
+  };
+}
+
+/**
+ * The hero's book for the engine (RULES_V2 2.3 to 2.5) from its battle
+ * profile: pages, scrolls, mana, per-school page Power, scroll Power, the
+ * mana cost percentage, the Fuel and Echo switches and the casting vows.
+ */
+export function magicFromProfile(p: HeroBattleProfile): MagicSetup {
+  const neverCast: School[] = [];
+  let noCastRounds: MagicSetup["noCastRounds"];
+  for (const r of p.restrictions) {
+    if (r.kind === "never-cast") neverCast.push(r.school);
+    if (r.kind === "no-cast-rounds") noCastRounds = r.rounds;
+  }
+  return {
+    power: p.power,
+    mana: p.mana,
+    schoolRanks: p.schoolRanks,
+    pages: p.pages,
+    scrolls: p.scrolls,
+    pagePower: p.pagePower,
+    scrollPower: p.scrollPower,
+    costPercent: Math.max(1, 100 + p.manaCostPercent),
+    fuelMax: p.switches.includes("fuel-uses-plus-1") ? 2 : 1,
+    echoRounds: p.switches.includes("echo-adds-2") ? 2 : 1,
+    neverCast,
+    ...(noCastRounds !== undefined ? { noCastRounds } : {}),
   };
 }
 
@@ -71,6 +102,9 @@ function armyFromGame(
           ...(profile !== undefined ? { itemActs: profile.itemActs } : {}),
         }
       : null,
+    ...(side.hero && profile !== undefined
+      ? { magic: magicFromProfile(profile) }
+      : {}),
     defenseBonus: side.defenseBonus,
     ...(profile !== undefined
       ? {
@@ -127,15 +161,23 @@ export function gameResultFromEngine(
     });
   const attacker = survivors("a", setup.attacker.stacks.length);
   const defender = survivors("d", setup.defender.stacks.length);
+  const withMagic = (r: GameBattleResult): GameBattleResult =>
+    result.magic ? { ...r, magic: result.magic } : r;
   if (result.winner === null || result.reason === "roundLimit") {
-    return { winner: "defender", attacker: attacker.map(() => 0), defender };
+    return withMagic({
+      winner: "defender",
+      attacker: attacker.map(() => 0),
+      defender,
+    });
   }
   if (result.reason === "retreat") {
-    return result.winner === "defender"
-      ? { winner: "defender", attacker: attacker.map(() => 0), defender }
-      : { winner: "attacker", attacker, defender: defender.map(() => 0) };
+    return withMagic(
+      result.winner === "defender"
+        ? { winner: "defender", attacker: attacker.map(() => 0), defender }
+        : { winner: "attacker", attacker, defender: defender.map(() => 0) },
+    );
   }
-  return { winner: result.winner, attacker, defender };
+  return withMagic({ winner: result.winner, attacker, defender });
 }
 
 /** Auto-combat for the adventure layer: the AI plays both sides. */

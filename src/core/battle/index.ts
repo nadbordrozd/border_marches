@@ -142,3 +142,38 @@ export {
   engineSetupFromGame,
   gameResultFromEngine,
 } from "./resolver.ts";
+export {
+  MAX_FUEL,
+  MAX_POWER,
+  RANK_MAX_TIER,
+  RANK_POWER_BONUS,
+  SCHOOLS,
+  SCROLL_MIN_POWER,
+  TIER_MANA,
+  alliedSchools,
+  clampPower,
+  creatureCastError,
+  creatureCastPower,
+  creaturePagesLeft,
+  echoError,
+  emptyRanks,
+  fuelError,
+  heroCastError,
+  heroCastPower,
+  listedMana,
+  manaCost,
+  opposedSchools,
+  schoolRelation,
+  sideMagicFromSetup,
+  touchedStacks,
+} from "./magic.ts";
+export type { SchoolRelation } from "./magic.ts";
+export {
+  actIds,
+  casterOf,
+  hasAbility,
+  hasGroundKind,
+  registerCreatureCaster,
+} from "./registry.ts";
+export type { CastContext } from "./registry.ts";
+export type { MagicOutcome } from "./auto.ts";

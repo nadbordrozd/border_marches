@@ -236,7 +236,7 @@
 
 .bm-buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 6px;
   align-content: center;
 }
@@ -442,4 +442,228 @@
 .bm-chip.bm-event {
   font-style: italic;
   opacity: 0.9;
+}
+
+/* Spellbook and cast panel (src/ui/battle/spellbook.ts, RULES_V2 2.4). */
+
+.bm-book {
+  position: absolute;
+  inset: 12px 12px auto 12px;
+  max-height: calc(100% - 24px);
+  overflow: auto;
+  z-index: 5;
+  padding: 10px 12px;
+  background: rgba(30, 23, 15, 0.97);
+  border: 2px solid #8a6c3a;
+  border-radius: 6px;
+  box-shadow: 0 4px 0 #000;
+}
+
+.bm-book[hidden],
+.bm-cast[hidden] {
+  display: none;
+}
+
+.bm-book-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.bm-book-title {
+  font:
+    bold 18px Georgia,
+    serif;
+  color: #ffd65c;
+}
+
+.bm-book-close {
+  margin-left: auto;
+  min-width: 0;
+  padding: 3px 8px;
+}
+
+.bm-book-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 10px;
+}
+
+.bm-book-school {
+  font:
+    bold 14px Georgia,
+    serif;
+  margin-bottom: 4px;
+  color: #f0e6c8;
+}
+
+.bm-spell {
+  display: block;
+  width: 100%;
+  margin-bottom: 6px;
+  padding: 5px 7px;
+  text-align: left;
+  color: #f0e6c8;
+  background: #2e2619;
+  border: 1px solid #5c4626;
+  border-left: 4px solid var(--school, #8a6c3a);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.bm-spell:hover:not(:disabled) {
+  background: #3d3220;
+  border-color: #ffd65c;
+  border-left-color: var(--school, #ffd65c);
+}
+
+.bm-spell:disabled {
+  cursor: default;
+  opacity: 0.45;
+  filter: grayscale(0.7);
+}
+
+.bm-spell.bm-st-spent .bm-spell-name {
+  text-decoration: line-through;
+}
+
+.bm-spell-head,
+.bm-cast-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bm-spell-name,
+.bm-cast-name {
+  font-weight: bold;
+  color: #fff;
+}
+
+.bm-cast-name {
+  font:
+    bold 16px Georgia,
+    serif;
+}
+
+.bm-spell-cost {
+  margin-left: auto;
+  font-size: 11px;
+  color: #9cc8ff;
+}
+
+.bm-spell-meta,
+.bm-spell-why {
+  font-size: 11px;
+  color: #a89a80;
+}
+
+.bm-spell-why {
+  color: #e0a070;
+}
+
+.bm-spell-text {
+  font-size: 12px;
+  color: #e8dcc0;
+}
+
+.bm-cast {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 12px;
+  width: 440px;
+  max-width: calc(100% - 24px);
+  z-index: 4;
+  padding: 8px 10px;
+  background: rgba(30, 23, 15, 0.96);
+  border: 2px solid var(--school, #8a6c3a);
+  border-radius: 6px;
+  box-shadow: 0 3px 0 #000;
+}
+
+.bm-cast-prompt {
+  margin: 4px 0;
+  color: #ffd65c;
+}
+
+.bm-cast-preview {
+  margin: 4px 0;
+  padding: 4px 6px;
+  background: #241c13;
+  border-radius: 3px;
+}
+
+.bm-cast-preview.bm-hovered {
+  opacity: 0.85;
+  border: 1px dashed #8a6c3a;
+}
+
+.bm-cast-sum {
+  font-weight: bold;
+  color: #ffb070;
+}
+
+.bm-cast-refused {
+  color: #ff7a5c;
+}
+
+.bm-cast-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 4px 0;
+}
+
+.bm-toggle {
+  padding: 2px 7px;
+  font-size: 12px;
+  color: #f0e6c8;
+  background: #3a2e1c;
+  border: 1px solid #8a6c3a;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.bm-toggle.bm-on {
+  color: #1b1712;
+  background: #ffd65c;
+}
+
+.bm-cast-effect {
+  width: 100%;
+  font-size: 11px;
+  color: #9be07a;
+}
+
+.bm-cast-buttons {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.bm-cast-buttons .bm-btn {
+  min-width: 0;
+}
+
+.bm-btn.bm-primary:not(:disabled) {
+  border-color: #ffd65c;
+  color: #ffd65c;
+}
+
+.bm-battle .gm-icon {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.bm-battle .gm-icon > img {
+  image-rendering: pixelated;
+}
+
+.bm-battle .gm-icon-framed {
+  padding: var(--icon-px, 1px);
+  border: calc(2 * var(--icon-px, 1px)) solid var(--icon-frame);
 }

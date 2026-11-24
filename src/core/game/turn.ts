@@ -14,6 +14,7 @@ import {
   settleOutcome,
 } from "./players.ts";
 import { isGrowthDay, weeklyGrowth } from "./progression.ts";
+import { magicDayEnd, magicDayStart } from "../magic/adventure.ts";
 import { addResources, emptyResources } from "./resources.ts";
 import {
   builtDefs,
@@ -103,6 +104,7 @@ export function growTown(town: TownState): void {
  * town build flags.
  */
 export function startDay(state: GameState, events: GameEvent[]): void {
+  magicDayEnd(state);
   state.day++;
   events.push({ type: "new-day", day: state.day });
   for (const player of state.players) {
@@ -128,7 +130,10 @@ export function startDay(state: GameState, events: GameEvent[]): void {
     const income = dailyIncome(state, player.id);
     player.resources = addResources(player.resources, income);
     events.push({ type: "income", player: player.id, amounts: income });
-    for (const hero of heroesOf(state, player.id)) startHeroDay(hero);
+    for (const hero of heroesOf(state, player.id)) {
+      startHeroDay(hero);
+      magicDayStart(state, events, hero);
+    }
     for (const town of townsOf(state, player.id)) town.builtToday = false;
   }
   // Neutral towns never build; keep their flag clear too.

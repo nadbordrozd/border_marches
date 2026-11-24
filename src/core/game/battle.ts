@@ -32,6 +32,8 @@ import { heroArtifacts, spoilsEvent, takeSpoils } from "./artifacts.ts";
 import { heroBattleProfile, type HeroBattleProfile } from "./battle-profile.ts";
 import { effectsOf, heroStats } from "./effects.ts";
 import { gainXp } from "./hero.ts";
+import { applyBattleMagic } from "../magic/adventure.ts";
+import type { MagicOutcome } from "../battle/auto.ts";
 import { checkEliminations, sendToPool, sendToTavern } from "./players.ts";
 import { splitNeutralStack } from "./progression.ts";
 import {
@@ -135,6 +137,8 @@ export interface BattleResult {
    * the other side, which must have survivors, wins.
    */
   retreat?: "attacker" | "defender";
+  /** Mana spent and scrolls used per side with a hero (RULES_V2 1.12). */
+  magic?: { attacker?: MagicOutcome; defender?: MagicOutcome };
 }
 
 /**
@@ -426,6 +430,9 @@ export function applyBattleResult(
   applySurvivors(hero.army, attackerSlots, result.attacker);
   // One-battle consumables end with the battle, however it ends (6.1).
   hero.nextBattle = [];
+  // Mana spent and scrolls cast stay spent (RULES_V2 1.12).
+  applyBattleMagic(hero, result.magic?.attacker);
+  if (foe !== undefined) applyBattleMagic(foe, result.magic?.defender);
   if (foe !== undefined) foe.nextBattle = [];
   if (battle.kind === "town") {
     const town = next.towns[battle.objectId];

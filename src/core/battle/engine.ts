@@ -39,7 +39,17 @@ import {
   sameHex,
 } from "./hex.ts";
 import type { Hex } from "./hex.ts";
+import {
+  creatureCastError,
+  creatureCastPower,
+  echoError,
+  fuelError,
+  heroCastError,
+  heroCastPower,
+  manaCost,
+} from "./magic.ts";
 import type {
+  CastInfo,
   JsonValue,
   ActTarget,
   AttackAction,
@@ -250,7 +260,7 @@ function targetsError(
       if (!s || !isAlive(s)) return `no living stack ${t.stack}`;
       if ("condition" in t && !s.conditions.some((c) => c.uid === t.condition))
         return `${t.stack} bears no condition ${t.condition}`;
-    } else if (!inBounds(t.hex)) {
+    } else if ("hex" in t && !inBounds(t.hex)) {
       return "target hex out of bounds";
     }
   }
@@ -341,6 +351,50 @@ export function actionError(
       const err = heroActError(state, s.side, action.act);
       if (err) return err;
       const def = actDef(action.act);
+      if (def.kind !== "cast") {
+        if (action.scroll || action.echo || action.fuel)
+          return "only a cast takes a scroll, Echo or Fuel";
+      } else {
+        const castErr = heroCastError(
+          state,
+          s.side,
+          action.act,
+          action.scroll === true,
+        );
+        if (castErr) return castErr;
+      }
+      const shape =
+        targetsError(state, action.targets, def.targets) ??
+        def.check?.(state, s.id, action.targets) ??
+        null;
+      if (shape) return shape;
+      if (action.echo) {
+        const e = echoError(state, def, s.id, action.targets, action.echo);
+        if (e) return e;
+      }
+      if (action.fuel) {
+        const e = fuelError(
+          state,
+          s.side,
+          def,
+          s.id,
+          action.targets,
+          action.fuel,
+        );
+        if (e) return e;
+        if (
+          action.echo &&
+          action.echo.stack === action.fuel.stack &&
+          action.echo.condition === action.fuel.condition
+        )
+          return "one condition cannot be both Echoed and burnt";
+      }
+      return null;
+    }
+    case "creatureCast": {
+      const e = creatureCastError(s, action.spell);
+      if (e) return e;
+      const def = actDef(action.spell);
       return (
         targetsError(state, action.targets, def.targets) ??
         def.check?.(state, s.id, action.targets) ??
@@ -619,6 +673,7 @@ function actionTargets(action: BattleAction): StackId[] {
       return [action.targetId];
     case "ability":
     case "heroAct":
+    case "creatureCast":
       return action.targets.flatMap((t) => ("stack" in t ? [t.stack] : []));
     default:
       return [];
@@ -689,6 +744,38 @@ export function applyAction(
       const side = d.get(id).side;
       const def = actDef(action.act);
       const sideState = d.sides[side];
+      const scroll = action.scroll === true;
+      const magic = sideState.magic;
+      let cast: CastInfo | undefined;
+      let nextMagic = magic;
+      if (def.kind === "cast") {
+        const power = magic ? heroCastPower(magic, def, scroll) : 0;
+        const mana = magic && !scroll ? manaCost(def, magic) : 0;
+        cast = {
+          power,
+          mana,
+          scroll,
+          fuelled: action.fuel !== undefined,
+          echoed: action.echo !== undefined,
+        };
+        if (magic) {
+          // The page is spent even if every target refuses (2.4).
+          const i = magic.scrolls.indexOf(action.act);
+          nextMagic = {
+            ...magic,
+            mana: magic.mana - mana,
+            manaSpent: magic.manaSpent + mana,
+            spent: scroll ? magic.spent : [...magic.spent, action.act],
+            scrolls: scroll
+              ? [...magic.scrolls.slice(0, i), ...magic.scrolls.slice(i + 1)]
+              : magic.scrolls,
+            scrollsUsed: scroll
+              ? [...magic.scrollsUsed, action.act]
+              : magic.scrollsUsed,
+            fuelUsed: magic.fuelUsed + (action.fuel ? 1 : 0),
+          };
+        }
+      }
       d.sides = {
         ...d.sides,
         [side]: {
@@ -698,13 +785,40 @@ export function applyAction(
           ...(def.kind === "item"
             ? { itemActsUsed: [...sideState.itemActsUsed, action.act] }
             : {}),
+          ...(nextMagic ? { magic: nextMagic } : {}),
         },
       };
       const idx = d.emit(
-        { type: "heroAct", side, act: action.act },
+        { type: "heroAct", side, act: action.act, ...(cast ? { cast } : {}) },
         action.act,
       );
-      d.within(idx, action.act, () => def.resolve(fx, id, action.targets));
+      d.within(idx, action.act, () => {
+        // Echo, then Fuel, then the spell (2.4).
+        if (action.echo) {
+          const { stack, condition } = action.echo;
+          const rounds = magic?.echoRounds ?? 1;
+          d.within(null, "echo", () =>
+            fx.windCondition(stack, condition, rounds),
+          );
+        }
+        if (action.fuel) {
+          const { stack, condition } = action.fuel;
+          d.within(null, "fuel", () => fx.endCondition(stack, condition));
+        }
+        def.resolve(
+          fx,
+          id,
+          action.targets,
+          cast
+            ? {
+                power: cast.power,
+                fuelled: cast.fuelled,
+                by: scroll ? "scroll" : "page",
+                side,
+              }
+            : undefined,
+        );
+      });
       fx.resolveReactions();
       if (checkWinner(d)) return { state: d.toState(), events: d.events };
       // The stack has not acted yet: its turn goes on unless it cannot.
@@ -742,6 +856,26 @@ export function applyAction(
       );
       d.within(idx, `ability:${action.ability}`, () =>
         actDef(actId).resolve(fx, id, action.targets),
+      );
+      break;
+    }
+    case "creatureCast": {
+      const s = d.get(id);
+      const power = creatureCastPower(s);
+      d.update(id, {
+        abilitiesUsed: [...s.abilitiesUsed, `page:${action.spell}`],
+      });
+      const idx = d.emit(
+        { type: "creatureCast", stackId: id, spell: action.spell, power },
+        action.spell,
+      );
+      d.within(idx, action.spell, () =>
+        actDef(action.spell).resolve(fx, id, action.targets, {
+          power,
+          fuelled: false,
+          by: "creature",
+          side: s.side,
+        }),
       );
       break;
     }

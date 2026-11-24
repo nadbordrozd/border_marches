@@ -5,6 +5,7 @@ import { CHEST } from "../../data/economy.ts";
 import { TOWN_SIGHT } from "../../data/hero.ts";
 import { sightRadius } from "./effects.ts";
 import { gainXp } from "./hero.ts";
+import { learnInTown, noteHeroPath } from "../magic/adventure.ts";
 import { pickupInfo } from "./newGame.ts";
 import { canEnter, cutsCorner, moveContext, stepCost } from "./pathfinding.ts";
 import { checkEliminations } from "./players.ts";
@@ -77,6 +78,7 @@ export function visitAtHero(
       const town = state.towns[obj.id];
       if (town === undefined) return null;
       if (town.owner === hero.owner) {
+        learnInTown(state, hero, town.id, events);
         events.push({ type: "visit-town", heroId: hero.id, townId: town.id });
         return null;
       }
@@ -84,6 +86,7 @@ export function visitAtHero(
         return { kind: "town", objectId: town.id, heroId: hero.id };
       }
       captureTown(state, town, hero.owner, events);
+      learnInTown(state, hero, town.id, events);
       events.push({ type: "visit-town", heroId: hero.id, townId: town.id });
       return null;
     }
@@ -229,7 +232,15 @@ export function moveHeroAlong(
     if (!canEnter(ctx, x, y) || cutsCorner(ctx, hero.x, hero.y, x, y)) {
       return fail("bad-path", `step ${i} to (${x},${y}) is blocked`);
     }
-    const cost = stepCost(map, ctx.nativeTerrain, hero.x, hero.y, x, y);
+    const cost = stepCost(
+      map,
+      ctx.nativeTerrain,
+      hero.x,
+      hero.y,
+      x,
+      y,
+      ctx.forestCost,
+    );
     if (cost > hero.mp) {
       stop = "no-mp";
       break;
@@ -258,6 +269,7 @@ export function moveHeroAlong(
     }
   }
 
+  noteHeroPath(next, hero, [original.x, original.y], cells);
   const events: GameEvent[] = [
     { type: "moved", heroId, cells, mpSpent: spent, stop },
   ];

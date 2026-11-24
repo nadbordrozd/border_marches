@@ -372,7 +372,8 @@
 }
 
 .gm-side-buttons {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 6px;
 }
 
@@ -1315,4 +1316,61 @@
     inset var(--icon-px, 1px) calc(-1 * var(--icon-px, 1px)) 0 var(--icon-light),
     inset calc(-1 * var(--icon-px, 1px)) var(--icon-px, 1px) 0
       var(--icon-shadow);
+}
+
+/* Adventure spellbook (src/ui/spellbook.ts, RULES_V2 2.8). */
+
+.gm-book-dialog {
+  width: min(640px, 92vw);
+}
+
+.gm-book {
+  max-height: 64vh;
+  overflow: auto;
+}
+
+.gm-book-status {
+  margin-bottom: 6px;
+  color: #d8ccb0;
+}
+
+.gm-book-school {
+  margin: 10px 0 4px;
+  font-size: 15px;
+}
+
+.gm-book-spell {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding: 6px 8px;
+  border-left: 4px solid var(--school, #8a6c3a);
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 3px;
+}
+
+.gm-book-spell.gm-book-off {
+  opacity: 0.55;
+}
+
+.gm-book-text {
+  flex: 1 1 auto;
+}
+
+.gm-book-why {
+  color: #e0a070;
+  font-size: 12px;
+}
+
+.gm-book-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  max-width: 220px;
+}
+
+.gm-book-amount {
+  width: 70px;
 }

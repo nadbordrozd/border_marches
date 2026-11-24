@@ -83,7 +83,15 @@ export interface MoveContext {
   stops: Set<number>;
   /** Explored flags of the hero's player, or null to ignore fog. */
   explored: boolean[] | null;
+  /**
+   * Move cost of a forest cell while the hero walks the Green Road
+   * (RULES_V2 2.8), or null: forests are impassable.
+   */
+  forestCost: number | null;
 }
+
+/** Green Road: forest cells cost this much today (RULES_V2 2.8). */
+export const GREEN_ROAD_MOVE_COST = 200;
 
 export interface PathOptions {
   /** Plan through unexplored cells too (tests, AI). Default false. */
@@ -102,6 +110,13 @@ export function moveContext(
   const guards = new Map<number, string[]>();
   const stops = new Set<number>();
   const collected = new Set(state.collected);
+  // Adventure magic (src/core/magic/adventure.ts): Parley and Green Road.
+  const magic = state.magic?.heroes[hero.id];
+  const parley = new Set(
+    magic?.parleyDay === state.day ? (magic.parley ?? []) : [],
+  );
+  const forestCost =
+    magic?.greenRoadDay === state.day ? GREEN_ROAD_MOVE_COST : null;
   for (const obj of map.objects) {
     for (const [x, y] of obj.blocked) objectBlocked.add(y * map.width + x);
     const entrance = obj.y * map.width + obj.x;
@@ -110,6 +125,7 @@ export function moveContext(
         const monster = state.monsters[obj.id];
         if (monster === undefined) break;
         monsterAt.set(monster.y * map.width + monster.x, monster.id);
+        if (parley.has(monster.id)) break;
         for (const [dx, dy] of DIRECTIONS_8) {
           const gx = monster.x + dx;
           const gy = monster.y + dy;
@@ -153,6 +169,7 @@ export function moveContext(
     guards,
     stops,
     explored: options.ignoreFog === true ? null : (player?.explored ?? null),
+    forestCost,
   };
 }
 
@@ -165,7 +182,14 @@ export function isImpassableCell(
   if (!inBounds(ctx.map, x, y)) return true;
   const i = y * ctx.map.width + x;
   const cell = ctx.map.cells[i];
-  return cell === undefined || !isPassable(cell) || ctx.objectBlocked.has(i);
+  if (cell === undefined || ctx.objectBlocked.has(i)) return true;
+  if (
+    ctx.forestCost !== null &&
+    cell.obstacle === "forest" &&
+    cell.terrain !== "water"
+  )
+    return false;
+  return !isPassable(cell);
 }
 
 /** Whether the hero may stand on (x, y): passable, free and explored. */
@@ -210,6 +234,7 @@ export function stepCost(
   fy: number,
   tx: number,
   ty: number,
+  forestCost: number | null = null,
 ): number {
   const from = map.cells[fy * map.width + fx];
   const to = map.cells[ty * map.width + tx];
@@ -221,7 +246,8 @@ export function stepCost(
       ? { native: nativeTerrain, reduce: 0, perTerrain: {} }
       : nativeTerrain;
   let base: number;
-  if (from.road && to.road) base = ROAD_MOVE_COST;
+  if (forestCost !== null && to.obstacle === "forest") base = forestCost;
+  else if (from.road && to.road) base = ROAD_MOVE_COST;
   else if (to.terrain === profile.native) base = NATIVE_MOVE_COST;
   else {
     const c = TERRAIN_MOVE_COST[to.terrain];
@@ -415,7 +441,7 @@ export function findPathInContext(
       } else {
         if (stop || !canEnter(ctx, nx, ny)) continue;
         if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
-        cost = stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny);
+        cost = stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny, ctx.forestCost);
       }
       const ng = gc + cost;
       const old = g.get(ni);
@@ -444,6 +470,7 @@ export function findPathInContext(
           Math.floor(prev / w),
           c % w,
           Math.floor(c / w),
+          ctx.forestCost,
         );
     total += cost;
     steps.push({ x: c % w, y: Math.floor(c / w), cost, total, day: 0, attack });
@@ -491,7 +518,8 @@ export function reachableCells(
       const ni = ny * w + nx;
       if (closed.has(ni) || !canEnter(ctx, nx, ny)) continue;
       if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
-      const ng = gc + stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny);
+      const ng =
+        gc + stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny, ctx.forestCost);
       if (ng > limit) continue;
       const old = out.get(ni);
       if (old !== undefined && old <= ng) continue;

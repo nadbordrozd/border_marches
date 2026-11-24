@@ -11,6 +11,9 @@
  *   info=d1        open the info panel of stack d1
  *   grammar=1      decorate the start with conditions, a link, ground and a
  *                  scheduled event (battle grammar UI check, RULES_V2 1)
+ *   magic=1        the hero brings a spellbook (pages of every school,
+ *                  scrolls, 60 mana) and Shamans cast Mend and Thunderclap
+ *   book=1         open the spellbook once the field is on screen
  *   auto=1         auto-resolve: AI on both sides, straight to the result
  *   speed=1|2|4    animation speed
  *   terrain=jungle battle ground
@@ -30,7 +33,25 @@ import {
   registerGroundKind,
 } from "../../core/battle/index.ts";
 import { Draft, Resolver } from "../../core/battle/resolve.ts";
-import type { BattleState, Hex } from "../../core/battle/index.ts";
+import type {
+  BattleSetup as EngineBattleSetup,
+  BattleState,
+  Hex,
+  MagicSetup,
+} from "../../core/battle/index.ts";
+import { casterOf, registerCreatureCaster } from "../../core/battle/index.ts";
+import { registerSpells } from "../../core/magic/index.ts";
+
+const CREATURE_STUB = {
+  id: "",
+  tier: 1,
+  hp: 1,
+  attack: 0,
+  defense: 0,
+  damage: 1,
+  speed: 1,
+  abilities: [],
+};
 import type {
   BattleSetup as GameBattleSetup,
   BattleStack as GameBattleStack,
@@ -139,6 +160,34 @@ function pointAt(
   return { clientX: rect.left + sx * k, clientY: rect.top + sy * k };
 }
 
+/** The debug hero's book (magic=1): a few pages of each school. */
+const DEBUG_BOOK: MagicSetup = {
+  power: 3,
+  mana: 60,
+  schoolRanks: { bloom: 2, accord: 1, clock: 1, hush: 2, storm: 3 },
+  pages: [
+    "regrow",
+    "nettle",
+    "orchard-day",
+    "scapegoat",
+    "sign-here",
+    "soft-words",
+    "late-bell",
+    "wind",
+    "encore",
+    "lullaby",
+    "pass-on",
+    "deadline",
+    "jolt",
+    "broadside",
+    "cold-snap",
+    "the-sky-falls",
+  ],
+  scrolls: ["set-off", "set-off", "change-places"],
+};
+
+const CAVE_SHAMAN = { ...CREATURE_STUB, id: "shaman" };
+
 /** Demo-only content kinds for the grammar view (real content comes later). */
 function registerDemoContent(): void {
   if (hasConditionKind("demo-guard")) return;
@@ -216,10 +265,29 @@ export function startBattleDebug(route: Route): void {
     ? (terrainParam as Terrain)
     : undefined;
   const setup = sampleBattle(seed, terrain);
-  let state: BattleState | undefined;
+  const magic = p.get("magic") === "1";
+  if (magic) {
+    registerSpells();
+    if (!casterOf({ ...CAVE_SHAMAN }))
+      registerCreatureCaster("shaman", {
+        pages: ["mend", "thunderclap"],
+        castPower: 1,
+        castDivisor: 2,
+        castCap: 8,
+      });
+  }
+  const engineSetup = (): EngineBattleSetup => {
+    const base = engineSetupFromGame(setup);
+    return magic
+      ? { ...base, attacker: { ...base.attacker, magic: DEBUG_BOOK } }
+      : base;
+  };
+  let state: BattleState | undefined = magic
+    ? createBattle(engineSetup()).state
+    : undefined;
   const steps = Number(p.get("steps") ?? "0");
   if (p.has("steps")) {
-    let s = createBattle(engineSetupFromGame(setup)).state;
+    let s = createBattle(engineSetup()).state;
     for (let i = 0; i < steps && s.winner === null; i++) {
       s = applyAction(s, chooseAiAction(s)).state;
     }
@@ -230,7 +298,7 @@ export function startBattleDebug(route: Route): void {
     state = s;
   }
   if (p.get("grammar") === "1") {
-    state = decorate(state ?? createBattle(engineSetupFromGame(setup)).state);
+    state = decorate(state ?? createBattle(engineSetup()).state);
   }
   const speed = Number(p.get("speed") ?? "1");
   const hover = p.get("hover");
@@ -245,7 +313,7 @@ export function startBattleDebug(route: Route): void {
         setTimeout(() => {
           const canvas = container.querySelector("canvas");
           if (!canvas) return;
-          const cur = state ?? createBattle(engineSetupFromGame(setup)).state;
+          const cur = state ?? createBattle(engineSetup()).state;
           if (hover) {
             const h = hoverHex(cur, hover);
             if (h) {
@@ -257,6 +325,8 @@ export function startBattleDebug(route: Route): void {
               );
             }
           }
+          if (p.get("book") === "1")
+            window.dispatchEvent(new KeyboardEvent("keydown", { key: "b" }));
           if (info) {
             const h = hoverHex(cur, info);
             if (h) {

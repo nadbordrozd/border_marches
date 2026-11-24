@@ -54,6 +54,8 @@ import type { MapFlag, MapView } from "../render/map/map-view.ts";
 import { pickupCue } from "../audio/cues.ts";
 import { playSound } from "../audio/sound.ts";
 import { openBattleScreen } from "./battle/screen.ts";
+import { openAdventureBook } from "./spellbook.ts";
+import { castAdventureSpell, registerSpells } from "../core/magic/index.ts";
 import { soundControl } from "./sound-control.ts";
 import { armyRow } from "./army.ts";
 import {
@@ -172,12 +174,15 @@ class GameScreen {
   private pointer = { x: 0, y: 0 };
   private viewportTimer = 0;
   private finished = false;
+  /** An adventure spell waiting for a map cell (Ask the Dead). */
+  private aiming: { spell: string; scroll: boolean } | null = null;
 
   constructor(
     initial: GameState,
     assets: Awaited<ReturnType<typeof loadGameMapAssets>>,
     private readonly exit: (result: GameExit) => void,
   ) {
+    registerSpells();
     this.state = initial;
     this.human = humanPlayer(initial);
     this.selectedId = heroesOf(initial, this.human)[0]?.id ?? null;
@@ -296,6 +301,7 @@ class GameScreen {
       "div.gm-side-buttons",
       button("Next hero (H)", () => this.nextHero()),
       button("Kingdom (K)", () => void this.kingdom()),
+      button("Spells (M)", () => void this.spellbook()),
       button("Menu", () => void this.quitToMenu()),
     );
     const endTurnButton = button(
@@ -589,6 +595,10 @@ class GameScreen {
       case "K":
         void this.kingdom();
         break;
+      case "m":
+      case "M":
+        void this.spellbook();
+        break;
       case "i":
       case "I":
         void this.heroScreen();
@@ -683,6 +693,26 @@ class GameScreen {
 
   private onMapClick(x: number, y: number): void {
     if (this.inputBlocked()) return;
+    if (this.aiming !== null) {
+      const aim = this.aiming;
+      this.aiming = null;
+      const hero = this.hero();
+      if (hero !== undefined) {
+        const events = this.run(
+          castAdventureSpell(
+            this.state,
+            hero.id,
+            aim.spell,
+            { x, y },
+            {
+              scroll: aim.scroll,
+            },
+          ),
+        );
+        if (events !== null) toast("The dead answer.");
+      }
+      return;
+    }
     const hero = this.hero();
     const clicked = this.state.heroes.find(
       (h) => h.alive && h.owner === this.human && h.x === x && h.y === y,
@@ -1385,6 +1415,31 @@ class GameScreen {
       buttons: [{ label: "Close", value: undefined, primary: true }],
       cancel: undefined,
     });
+  }
+
+  /** The adventure spellbook (RULES_V2 2.8) of the selected hero. */
+  private async spellbook(): Promise<void> {
+    if (this.inputBlocked()) return;
+    const hero = this.hero();
+    if (hero === undefined) return;
+    this.screenOpen = true;
+    const choice = await openAdventureBook(this.state, hero);
+    this.screenOpen = false;
+    if (choice === null) return;
+    if (choice.kind === "aim") {
+      this.aiming = { spell: choice.spell, scroll: choice.scroll };
+      toast("Click an explored cell within 15 cells of the hero.");
+      return;
+    }
+    const events = this.run(
+      castAdventureSpell(this.state, hero.id, choice.spell, choice.target, {
+        scroll: choice.scroll,
+      }),
+    );
+    if (events !== null) {
+      this.syncHeroes();
+      toast("Cast.");
+    }
   }
 
   private async quitToMenu(): Promise<void> {

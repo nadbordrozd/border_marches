@@ -7,6 +7,7 @@ import { createRng, deriveSeed } from "../rng.ts";
 import { creatureFightValue } from "./damage.ts";
 import { runStartRule, startBattle } from "./engine.ts";
 import { groundKind } from "./registry.ts";
+import { sideMagicFromSetup } from "./magic.ts";
 import type { Resolver } from "./resolve.ts";
 import { BATTLE_HEIGHT, BATTLE_WIDTH, hexIndex, inBounds } from "./hex.ts";
 import type { Hex } from "./hex.ts";
@@ -233,6 +234,9 @@ export function createBattle(setup: BattleSetup): BattleStep {
     castRound: 0,
     commandUsed: false,
     itemActsUsed: [],
+    ...(army.hero !== null && army.magic
+      ? { magic: sideMagicFromSetup(army.magic) }
+      : {}),
   });
   const state: BattleState = {
     seed: setup.seed,
