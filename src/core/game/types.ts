@@ -147,6 +147,52 @@ export interface HeroState {
   army: ArmySlots;
   /** On the map. False: in the pool or waiting at a tavern after retreat. */
   alive: boolean;
+  /**
+   * Map-site buffs until the hero's next battle ends (bead bzc.13):
+   * "rally-camp", "wishing-well", "oasis", "fallen-adventurer" and
+   * "school-temple:<school>". Each at most once (they do not stack).
+   */
+  buffs: string[];
+  /** Stables: +300 movement at each day start up to this day (0: none). */
+  stablesUntil: number;
+}
+
+/**
+ * What the map remembers about one object (bead bzc.13), created on first
+ * use; every field is optional. Keyed by map object id in GameState.sites.
+ */
+export interface SiteState {
+  /** Heroes that used a once-per-hero site. */
+  heroes?: string[];
+  /**
+   * Players that used a once-per-player site (obelisks, pylons, keymaster
+   * tents), completed a quest gate or lodge errand, or bought this week's
+   * rumour.
+   */
+  players?: number[];
+  /** Flag of a map dwelling. */
+  owner?: number | null;
+  /** A dwelling's stock and the week it was last refilled. */
+  stock?: number;
+  stockWeek?: number;
+  /** Week a weekly producer was last collected. */
+  week?: number;
+  /** Hero id -> day (per-day sites) or week (per-week sites) of last use. */
+  last?: Record<string, number>;
+  /**
+   * A bank's or sealed box's guard as it stands (survivors of a lost
+   * fight); [] once beaten. Absent: the generated guard (data.guard).
+   */
+  guard?: Array<{ creature: CreatureId; count: number }>;
+  /** Spent: a cleared bank, a paid seer hut, a used event. */
+  done?: boolean;
+  /** Players whose heroes have visited it at all (quest "visit a site"). */
+  seen?: number[];
+  /** Roadside Inn: week -> players that bought that week's rumour. */
+  rumours?: Record<string, number[]>;
+  /** Tollhouse: indices of this week's stock already sold, and the week. */
+  sold?: number[];
+  soldWeek?: number;
 }
 
 export interface DwellingState {
@@ -202,7 +248,8 @@ export interface MonsterState {
  *   attacker into the town (garrison battle or capture, RULES_V2 5.5).
  */
 export interface PendingBattle {
-  kind: "monster" | "town" | "hero";
+  /** "site": a bank's, vault's or sealed box's own guard (objectId). */
+  kind: "monster" | "town" | "hero" | "site";
   objectId: string;
   /** The attacking hero. */
   heroId: string;
@@ -251,6 +298,8 @@ export interface GameState {
   pendingBattle: PendingBattle | null;
   /** Number of battles resolved so far (feeds battle seeds). */
   battles: number;
+  /** Map object memory (visits, flags, stock, bank guards), by object id. */
+  sites: Record<string, SiteState>;
   /**
    * Magic on the adventure layer (src/core/magic/hero.ts): interim hero
    * books and mana, adventure-spell day effects. Absent in older saves.
@@ -281,6 +330,23 @@ export type GameEvent =
   /** The hero stands on a chest: call takeChest with "gold" or "xp". */
   | { type: "chest-offer"; heroId: string; pickupId: string }
   | { type: "battle"; battle: PendingBattle }
+  /**
+   * A map object visit (bead bzc.13): what happened, as one line. `options`
+   * is set when the visit offers a choice: call useSite with one option id
+   * (the UI shows a dialog; the AI picks).
+   */
+  | {
+      type: "site";
+      heroId: string;
+      objectId: string;
+      text: string;
+      options?: SiteOption[];
+    }
+  /** A hero moved by a waystone. */
+  | { type: "teleported"; heroId: string; x: number; y: number }
+  /** A dig: what was found (null: nothing). */
+  | { type: "dug"; heroId: string; found: string | null }
+  | { type: "hero-freed"; heroId: string; player: number }
   | { type: "xp"; heroId: string; amount: number }
   | { type: "level-up"; heroId: string; level: number }
   /** A level's pattern stat or a stat offer (RULES_V2 3.3). */
@@ -372,4 +438,15 @@ export type CommandError =
   | "one-marvel"
   | "not-consumable"
   | "already-used"
-  | "no-assembly";
+  | "no-assembly"
+  | "site-used"
+  | "locked"
+  | "no-dig";
+
+/** A choice a site offers (useSite). */
+export interface SiteOption {
+  id: string;
+  label: string;
+  /** Unavailable now (shown greyed, with the reason). */
+  disabled?: string;
+}

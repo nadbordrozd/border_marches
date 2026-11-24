@@ -21,7 +21,9 @@ export function displayObjects(state: GameState): MapObject[] {
   const out: MapObject[] = [];
   for (const o of state.map.objects) {
     if (o.kind === "hero-start") continue;
-    if (o.kind === "pickup" && collected.has(o.id)) continue;
+    // Collected pickups and spent one-time objects are gone; buried
+    // things are never drawn (bead bzc.13).
+    if (collected.has(o.id) || o.kind === "buried") continue;
     if (o.kind === "monster") {
       const m = state.monsters[o.id];
       if (m === undefined) continue;

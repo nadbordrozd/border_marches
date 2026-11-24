@@ -1,5 +1,5 @@
 /**
- * Upgrading saved states to the current shape (save v3).
+ * Upgrading saved states to the current shape (save v4).
  *
  * - v1 (the one-player MVP) -> v2: one Chieftain, the player's towns and
  *   the Warlord's Hold become a one-player multi-player game whose goal is
@@ -11,6 +11,9 @@
  *   known artifact go to the backpack (others are dropped). Level and XP
  *   are kept; a hero whose XP passes more levels on the new curve gains
  *   them with its next XP.
+ * - v3 -> v4 (map objects, bead bzc.13): the state gains `sites` (map
+ *   object memory, empty) and every hero `buffs` (none) and `stablesUntil`
+ *   (0). The saved map's objects are kept as they are.
  *
  * Pure: the input is not modified.
  */
@@ -84,15 +87,36 @@ export function upgradeV2Hero(h: V2Hero): HeroState {
     backpack: (artifacts ?? []).filter((id) => findArtifact(id) !== undefined),
     nextBattle: [],
     mpDebt: 0,
+    buffs: [],
+    stablesUntil: 0,
   };
   hero.mana = maxMana(hero);
   hero.maxMp = movementPoints(hero);
   return hero;
 }
 
-/** The v3 state for a v2 state. */
+/** A v3 state as saved (no map object memory, no site buffs). */
+export type V3State = Omit<GameState, "heroes" | "sites"> & {
+  heroes: Array<Omit<HeroState, "buffs" | "stablesUntil">>;
+  sites?: GameState["sites"];
+};
+
+/** The v4 state for a v3 state. */
+export function upgradeV3State(v3: V3State): GameState {
+  return {
+    ...v3,
+    sites: v3.sites ?? {},
+    heroes: v3.heroes.map((h) => ({
+      ...h,
+      buffs: (h as Partial<HeroState>).buffs ?? [],
+      stablesUntil: (h as Partial<HeroState>).stablesUntil ?? 0,
+    })),
+  };
+}
+
+/** The current state for a v2 state. */
 export function upgradeV2State(v2: V2State): GameState {
-  return { ...v2, heroes: v2.heroes.map(upgradeV2Hero) };
+  return upgradeV3State({ ...v2, heroes: v2.heroes.map(upgradeV2Hero) });
 }
 
 /** The v2 state for a v1 one-player state. Throws on several players. */

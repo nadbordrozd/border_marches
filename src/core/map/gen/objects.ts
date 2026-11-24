@@ -24,7 +24,12 @@ import {
   FREE_VALUE,
   NEUTRAL_TOWN_VALUE,
   PASS_VALUE,
+  minDaysForValue,
 } from "../../../data/mapObjects.ts";
+import { GATE_COLOURS, WAYSTONE_COLOURS } from "../../../data/objectTypes.ts";
+import type { ObjectTypeId } from "../../../data/objectTypes.ts";
+import { assignQuests } from "./quests.ts";
+import { rollContents, strangeThing } from "./contents.ts";
 import type { MapObjectRow } from "../../../data/mapObjects.ts";
 import { deriveSeed } from "../../rng.ts";
 import type { Rng } from "../../rng.ts";
@@ -47,6 +52,7 @@ import {
   roadPath,
 } from "./paths.ts";
 import {
+  TERRAIN_OF,
   corridorMask,
   homeCell,
   isWalkable,
@@ -272,6 +278,8 @@ interface Pocket {
 interface GuardRequest {
   cell: number;
   value: number;
+  /** A creature that must guard (a Haunted Mine's Sextons). */
+  force?: string;
   /** Cell whose distance sets the ring. */
   ringAt: number;
   guards: string[];
@@ -337,25 +345,46 @@ export function placeObjects(st: GenState): PlacementReport {
   for (const p of pockets) st.occupied[p.cell] = 1;
 
   // 3. Requests.
-  const roll = (r: Rng, row: MapObjectRow): Record<string, unknown> => {
-    const data: Record<string, unknown> = { ...row.data };
+  const roll = (
+    r: Rng,
+    row: MapObjectRow,
+    tier: number,
+  ): Record<string, unknown> => {
+    const data: Record<string, unknown> = { ...row.data, type: row.type };
     for (const [k, [lo, hi, step]] of Object.entries(row.rolls ?? {})) {
       data[k] = r.int(Math.round(lo / step), Math.round(hi / step)) * step;
     }
-    return data;
+    // Seeded contents (bead bzc.13): variant, spell, prize, guard, value.
+    return { ...data, ...rollContents(row.type, r, tier) };
+  };
+  const tierOf = (z: number): number => {
+    const zone = st.zones[z];
+    if (zone === undefined) return 1;
+    return zone.role === "hold" ? 3 : Math.min(3, zone.tier);
   };
   const valueOf = (
     row: MapObjectRow,
     data: Record<string, unknown>,
   ): number => {
+    const set = data["value"];
+    if (typeof set === "number") return set;
     const unit = row.unitValue;
     const amount = unit ? Number(data[unit.field] ?? 0) : 0;
     return row.value + (unit ? amount * unit.value : 0);
   };
   const kindOf = (z: number): MapZoneKind => st.zones[z]?.role ?? "middle";
-  const guardedIn = (row: MapObjectRow, value: number, z: number): boolean =>
-    row.guard === "always" ||
-    (row.guard === "auto" && value >= FREE_VALUE[kindOf(z)]);
+  const guardedIn = (
+    row: MapObjectRow,
+    value: number,
+    z: number,
+    data: Record<string, unknown> = {},
+  ): boolean =>
+    data["guard"] === undefined &&
+    (row.guard === "always" ||
+      (row.guard === "auto" && value >= FREE_VALUE[kindOf(z)]));
+  /** Ring placement by value (CONTENT_MAP_OBJECTS section 2). */
+  const farFor = (row: MapObjectRow, value: number): number =>
+    Math.max(row.minDays ?? 0, minDaysForValue(value)) * day;
   const requests: Request[] = [];
 
   // The start kit: rolled once, the same for every player.
@@ -366,10 +395,18 @@ export function placeObjects(st: GenState): PlacementReport {
       .map((c) => (c.a === z ? c.b : c.a))
       .filter((m) => st.zones[m]?.role !== "hold");
   for (const item of oc.startKit) {
-    const row = oc.table.find((r) => r.id === item.row);
+    // "One strange thing near home" (concept section 3): rolled once.
+    const strange = item.row === "strange-thing" ? strangeThing(krng) : null;
+    const row =
+      strange !== null
+        ? oc.table.find((r) => r.type === strange.type)
+        : oc.table.find((r) => r.id === item.row);
     if (!row) throw new Error(`mapgen: unknown start kit row ${item.row}`);
     for (let c = 0; c < item.count; c++) {
-      const data = roll(krng, row);
+      const data =
+        strange !== null
+          ? { ...row.data, type: row.type, ...strange.data }
+          : roll(krng, row, 0);
       const value = valueOf(row, data);
       starts.forEach((t, k) => {
         requests.push({
@@ -385,7 +422,7 @@ export function placeObjects(st: GenState): PlacementReport {
           except: k,
           required: true,
           pocket: -1,
-          guarded: guardedIn(row, value, t.zone),
+          guarded: guardedIn(row, value, t.zone, data),
           label: `start kit ${item.row} for start ${t.player ?? k}`,
         });
       });
@@ -423,15 +460,16 @@ export function placeObjects(st: GenState): PlacementReport {
       );
       if (!row) continue;
       count.set(row.id, (count.get(row.id) ?? 0) + 1);
-      const data = roll(prng, row);
+      const data = roll(prng, row, tierOf(p.zone));
+      const value = valueOf(row, data);
       requests.push({
         row,
         data,
-        value: valueOf(row, data),
+        value,
         zones: [p.zone],
         minCost: 0,
         maxCost: Infinity,
-        minFar: (row.minDays ?? 0) * day,
+        minFar: farFor(row, value),
         required: false,
         pocket: k,
         guarded: false,
@@ -451,6 +489,7 @@ export function placeObjects(st: GenState): PlacementReport {
     kind: MapZoneKind,
     open: number,
     already: number,
+    tier: number,
   ): Array<{ row: MapObjectRow; data: Record<string, unknown> }> => {
     const out: Array<{ row: MapObjectRow; data: Record<string, unknown> }> = [];
     const n = Math.max(
@@ -462,11 +501,11 @@ export function placeObjects(st: GenState): PlacementReport {
       const row = drawRow(frng, kind, count, () => true);
       if (!row) break;
       count.set(row.id, (count.get(row.id) ?? 0) + 1);
-      out.push({ row, data: roll(frng, row) });
+      out.push({ row, data: roll(frng, row, tier) });
     }
     return out;
   };
-  const startFill = fillFor("start", smallestStart, kitPerStart);
+  const startFill = fillFor("start", smallestStart, kitPerStart, 0);
   for (const t of starts) {
     for (const f of startFill) {
       const value = valueOf(f.row, f.data);
@@ -481,7 +520,7 @@ export function placeObjects(st: GenState): PlacementReport {
         minFar: 0,
         required: false,
         pocket: -1,
-        guarded: guardedIn(f.row, value, t.zone),
+        guarded: guardedIn(f.row, value, t.zone, f.data),
         label: `start fill ${f.row.id}`,
       });
     }
@@ -490,7 +529,7 @@ export function placeObjects(st: GenState): PlacementReport {
     if (z.role === "start") continue;
     let open = 0;
     for (const i of zoneCells[z.id] ?? []) if ((pocketOf[i] ?? 0) < 0) open++;
-    for (const f of fillFor(z.role, open, 0)) {
+    for (const f of fillFor(z.role, open, 0, tierOf(z.id))) {
       const value = valueOf(f.row, f.data);
       requests.push({
         row: f.row,
@@ -499,12 +538,94 @@ export function placeObjects(st: GenState): PlacementReport {
         zones: [z.id],
         minCost: 0,
         maxCost: Infinity,
-        minFar: (f.row.minDays ?? 0) * day,
+        minFar: farFor(f.row, value),
         required: false,
         pocket: -1,
-        guarded: guardedIn(f.row, value, z.id),
+        guarded: guardedIn(f.row, value, z.id, f.data),
         label: `fill ${f.row.id} in zone ${z.id}`,
       });
+    }
+  }
+
+  // Objects placed by rule (CONTENT_MAP_OBJECTS 3.6, 3.9, 3.4): obelisks,
+  // the buried Keystone and caches, waystone pairs, pylons, the vault.
+  const rrng = stageRng(st, "rules");
+  const big = st.size === "L" ? 2 : st.size === "M" ? 1 : 0;
+  const wild = st.zones.filter((z) => z.role === "middle" || z.role === "town");
+  const ruleZones =
+    wild.length > 0 ? wild : st.zones.filter((z) => z.role !== "hold");
+  const holdZone = st.zones.find((z) => z.role === "hold");
+  const deep = [...ruleZones].sort((a, b) => b.tier - a.tier);
+  const ruleRow = (type: ObjectTypeId): MapObjectRow | undefined =>
+    oc.ruleRows.find((r) => r.type === type);
+  const ruleRequest = (
+    type: ObjectTypeId,
+    zones: readonly number[],
+    extra: Record<string, unknown> = {},
+    tier = 1,
+    first = false,
+  ): void => {
+    const row = ruleRow(type);
+    if (row === undefined || zones.length === 0) return;
+    const data = { ...roll(rrng, row, tier), ...extra };
+    const value = valueOf(row, data);
+    // A big rare site goes first, before the fill crowds its zone.
+    requests[first ? "unshift" : "push"]({
+      row,
+      data,
+      value,
+      zones,
+      minCost: 0,
+      maxCost: Infinity,
+      minFar: row.kind === "buried" ? 0 : farFor(row, value),
+      required: false,
+      pocket: -1,
+      guarded: guardedIn(row, value, zones[0] ?? 0, data),
+      label: `rule ${type}`,
+    });
+  };
+  if (ruleZones.length > 0) {
+    const order = rrng.shuffle(ruleZones.map((z) => z.id));
+    const nth = (k: number): number[] => [order[k % order.length] ?? 0];
+    const obelisks = [4, 6, 8][big] ?? 4;
+    for (let k = 0; k < obelisks; k++) ruleRequest("obelisk", nth(k));
+    const keystoneZone = holdZone?.id ?? deep[0]?.id ?? 0;
+    ruleRequest(
+      "buried-keystone",
+      [keystoneZone, ...(deep[0] ? [deep[0].id] : [])],
+      {},
+      3,
+    );
+    const caches = [3, 4, 6][big] ?? 3;
+    for (let k = 0; k < caches; k++)
+      ruleRequest("buried-cache", nth(k + 1), {}, tierOf(nth(k + 1)[0] ?? 0));
+    const pylons = [3, 4, 5][big] ?? 3;
+    for (let k = 0; k < pylons; k++) ruleRequest("pylon", nth(k + 3));
+    const pairs = [1, 2, 3][big] ?? 1;
+    for (let k = 0; k < pairs && order.length >= 2; k++) {
+      const colour = WAYSTONE_COLOURS[k % WAYSTONE_COLOURS.length] ?? "amber";
+      const a = order[(2 * k) % order.length] ?? 0;
+      const b =
+        order[
+          (2 * k + Math.max(1, Math.floor(order.length / 2))) % order.length
+        ] ?? 0;
+      ruleRequest("two-way-waystone", [a], { pair: `${colour}-${k}`, colour });
+      ruleRequest(
+        "two-way-waystone",
+        [a === b ? (order[(2 * k + 1) % order.length] ?? b) : b],
+        { pair: `${colour}-${k}`, colour },
+      );
+    }
+    if (big >= 1) {
+      ruleRequest(
+        "keepers-vault",
+        holdZone !== undefined
+          ? [holdZone.id, deep[0]?.id ?? holdZone.id]
+          : [deep[0]?.id ?? 0],
+        {},
+        3,
+        true,
+      );
     }
   }
 
@@ -536,6 +657,7 @@ export function placeObjects(st: GenState): PlacementReport {
     markCrowd([g.idx(o.x, o.y)]);
   }
   const guardReqs: GuardRequest[] = [];
+  const gateSites: number[] = [];
 
   const free = (i: number): boolean =>
     base[i] === 1 && st.occupied[i] === 0 && st.objBlocked[i] === 0;
@@ -660,11 +782,13 @@ export function placeObjects(st: GenState): PlacementReport {
         }
       } else if (req.guarded) {
         st.occupied[c.gc] = 1;
+        const force = req.data["guardCreature"];
         guardReqs.push({
           cell: c.gc,
           value: req.value,
           ringAt: c.e,
           guards: [id],
+          ...(typeof force === "string" ? { force } : {}),
         });
       }
       return true;
@@ -702,6 +826,18 @@ export function placeObjects(st: GenState): PlacementReport {
   for (const r of requests.filter(multi)) place(r, false);
   buildRoads(st);
   for (const r of requests.filter((q) => !multi(q))) place(r, true);
+  // A waystone whose twin found no site would lead nowhere: drop it.
+  const pairCount = new Map<string, number>();
+  for (const o of st.objects) {
+    if (o.data["type"] !== "two-way-waystone") continue;
+    const p = String(o.data["pair"]);
+    pairCount.set(p, (pairCount.get(p) ?? 0) + 1);
+  }
+  st.objects = st.objects.filter(
+    (o) =>
+      o.data["type"] !== "two-way-waystone" ||
+      pairCount.get(String(o.data["pair"])) === 2,
+  );
 
   // 5. Guards.
   const grng = stageRng(st, "guards");
@@ -729,7 +865,12 @@ export function placeObjects(st: GenState): PlacementReport {
     const sameTier = za.tier === zb.tier;
     const wild = (r: string): boolean => r === "middle" || r === "town";
     if (sameTier && wild(za.role) && wild(zb.role)) {
-      if (grng.chance(cfg.guards.openPassChance)) continue;
+      if (grng.chance(cfg.guards.openPassChance)) {
+        // A loop left open may hold a border or quest gate (3.7): the
+        // other way round stays open, so nothing is cut off.
+        gateSites.push(p.cell);
+        continue;
+      }
     }
     const tier =
       beyond.role === "hold"
@@ -744,6 +885,46 @@ export function placeObjects(st: GenState): PlacementReport {
       pass: true,
     });
   }
+  // Gates on open loops: border gates (keys in tents) and quest gates.
+  const gateCount = [1, 1, 2][big] ?? 1;
+  const keyRow = ruleRow("keymasters-tent");
+  gateSites.forEach((cell, k) => {
+    if (k > gateCount) return;
+    if ((st.occupied[cell] ?? 0) || nearTown(cell, oc.guardTownClearance))
+      return;
+    const quest = k === gateCount;
+    const colour = GATE_COLOURS[k % GATE_COLOURS.length] ?? "red";
+    if (!quest && keyRow !== undefined) {
+      // The tent first: no tent, no gate.
+      const tent: Request = {
+        row: keyRow,
+        data: { type: "keymasters-tent", colour },
+        value: 0,
+        zones: ruleZones.map((z) => z.id),
+        minCost: 0,
+        maxCost: Infinity,
+        minFar: 0,
+        required: false,
+        pocket: -1,
+        guarded: false,
+        label: `keymaster's tent ${colour}`,
+      };
+      if (!tryPlace(tent, true)) return;
+    }
+    st.occupied[cell] = 1;
+    commit(st, {
+      id: nextId(quest ? "quest-gate" : "border-gate"),
+      kind: "gate",
+      x: g.x(cell),
+      y: g.y(cell),
+      footprint: { w: 1, h: 1 },
+      blocked: [],
+      data: quest
+        ? { type: "quest-gate", value: 0 }
+        : { type: "border-gate", colour, value: 0 },
+    });
+  });
+
   // Rings from the costs after roads (closer than before, never farther).
   const after = movementCost(
     st,
@@ -759,6 +940,10 @@ export function placeObjects(st: GenState): PlacementReport {
       ring,
       cfg.guards.jitter,
       cfg.guards.minFightValue,
+      {
+        terrain: TERRAIN_OF[st.terrain[r.cell] ?? 0] ?? "grass",
+        ...(r.force !== undefined ? { force: r.force } : {}),
+      },
     );
     st.objects.push({
       id: nextId("monster"),
@@ -790,6 +975,8 @@ export function placeObjects(st: GenState): PlacementReport {
     }));
     o.data["fv"] = Math.round(target);
   }
+  // Quests name placed objects and guards (CONTENT_MAP_OBJECTS section 5).
+  assignQuests(st, stageRng(st, "quests"));
   return report;
 }
 

@@ -85,6 +85,7 @@ function initials(name: string): string {
 
 function gradeClass(def: ArtifactDef): string {
   if (def.kind === "consumable") return "hs-consumable";
+  if (def.kind === "relic") return "hs-marvel";
   if (def.pieceOf !== undefined) return "hs-piece";
   return `hs-${def.grade}`;
 }

@@ -1,3 +1,4 @@
+import { STRAY_ABILITY_TEXT } from "../../src/data/strays.ts";
 import { describe, expect, it } from "vitest";
 import { ABILITIES } from "../../src/data/abilities.ts";
 import {
@@ -117,7 +118,9 @@ describe("creatures", () => {
 
   it("references only defined abilities", () => {
     for (const c of Object.values(CREATURES)) {
-      if (c.ability !== null) expect(ABILITIES[c.ability].id).toBe(c.ability);
+      if (c.ability === null) continue;
+      if (c.ability in STRAY_ABILITY_TEXT) continue;
+      expect(ABILITIES[c.ability as keyof typeof ABILITIES].id).toBe(c.ability);
     }
     expect(() => getCreature("dragon")).toThrow();
   });

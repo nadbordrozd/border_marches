@@ -6,6 +6,8 @@ import { calendar } from "../core/game/progression.ts";
 import { pickupInfo } from "../core/game/newGame.ts";
 import type { GameState } from "../core/game/types.ts";
 import type { MapObject, Terrain } from "../core/map/types.ts";
+import { describeObject, objectName } from "../core/game/sites.ts";
+import { objectTypeOf } from "../core/game/site-state.ts";
 import { getCreature } from "../data/creatures.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { getHeroClass } from "../data/hero.ts";
@@ -93,6 +95,7 @@ export function describeCell(
   player: number,
   x: number,
   y: number,
+  heroId?: string,
 ): string | null {
   const { map } = state;
   if (x < 0 || y < 0 || x >= map.width || y >= map.height) return null;
@@ -115,19 +118,43 @@ export function describeCell(
     (m) => m.x === x && m.y === y,
   );
   if (monster !== undefined) {
-    return capitalize(stackPhrase(monster.creature, monster.count));
+    const def = getCreature(monster.creature);
+    const lines = [
+      capitalize(stackPhrase(monster.creature, monster.count)),
+      `Strength about ${monster.count * def.fightValue}.`,
+    ];
+    const mobj = map.objects.find((o) => o.id === monster.id);
+    const guards = mobj?.data["guards"];
+    if (Array.isArray(guards) && guards.length > 0) {
+      const names = guards
+        .map((id) => map.objects.find((o) => o.id === id))
+        .filter((o): o is MapObject => o !== undefined)
+        .map((o) => objectName(state, o));
+      lines.push(`Guards: ${names.join(", ")}.`);
+    } else if (mobj?.data["pass"] === true) {
+      lines.push("Guards a pass.");
+    }
+    return lines.join("\n");
   }
   const obj = objectAt(
     map.objects.filter(
       (o) =>
         o.kind !== "monster" &&
         o.kind !== "hero-start" &&
+        o.kind !== "buried" &&
         !state.collected.includes(o.id),
     ),
     x,
     y,
   );
   if (obj !== undefined) {
+    // Catalogue lines (bead bzc.13): what it does, visited, reset, guard.
+    const lines =
+      objectTypeOf(obj) === null
+        ? []
+        : describeObject(state, player, obj, heroId);
+    const withLines = (head: string): string =>
+      [head, ...lines.slice(1)].join("\n");
     switch (obj.kind) {
       case "town": {
         const town = state.towns[obj.id];
@@ -150,14 +177,24 @@ export function describeCell(
             : mine.owner === null
               ? "unclaimed"
               : `${playerColour(mine.owner).name}'s`;
-        return `${def.name} (${owner})`;
+        return withLines(`${def.name} (${owner})`);
       }
       case "pickup": {
         const info = pickupInfo(obj);
-        if (info.type === "chest") return CHEST.name;
-        return `${RESOURCE_NAMES[info.resource]}: ${info.amount}`;
+        if (info.type === "chest") {
+          const gold = Number(obj.data["gold"] ?? CHEST.gold);
+          const xp = Number(obj.data["xp"] ?? CHEST.xp);
+          const art = obj.data["artifact"];
+          return withLines(
+            typeof art === "string"
+              ? `${CHEST.name}: a Trinket`
+              : `${CHEST.name}: ${gold} gold or ${xp} experience`,
+          );
+        }
+        return withLines(`${RESOURCE_NAMES[info.resource]}: ${info.amount}`);
       }
       default:
+        if (lines.length > 0) return lines.join("\n");
         break;
     }
   }

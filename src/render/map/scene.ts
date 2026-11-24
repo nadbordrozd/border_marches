@@ -39,6 +39,7 @@ import type {
   UnitAsset,
 } from "../../assets/manifest";
 import { townArt } from "../../assets/town-art";
+import { artFor, placeArt } from "../../assets/object-art";
 import type { GameMap, MapObject } from "../../core/map/types";
 import { objectBounds, objectCells } from "../../core/map/types";
 import {
@@ -63,6 +64,37 @@ import { hash4 } from "./hash";
 import { packRanges, paletteOf } from "./massif";
 
 const CELL = CELL_PX;
+
+/** Object kinds drawn from the catalogue art (bead bzc.13 / bzc.16). */
+const SITE_KINDS: ReadonlySet<string> = new Set([
+  "dwelling",
+  "site",
+  "bank",
+  "artifact",
+  "gate",
+  "teleport",
+]);
+
+/** The art variant of a placed object (bank size, colour, stat, school). */
+export function artVariantOf(obj: MapObject): string | undefined {
+  const d = obj.data;
+  switch (d["type"]) {
+    case "stat-shrine":
+      return String(d["stat"] ?? "");
+    case "school-temple":
+      return String(d["school"] ?? "");
+    case "school-shrine":
+      return `tier-${String(d["tier"] ?? 1)}`;
+    case "faction-outpost":
+      return String(d["faction"] ?? "");
+    case "keymasters-tent":
+    case "border-gate":
+    case "two-way-waystone":
+      return String(d["colour"] ?? "");
+    default:
+      return typeof d["size"] === "string" ? d["size"] : undefined;
+  }
+}
 
 export const PASSES = ["TALL_BODY", "FOREGROUND"] as const;
 export type Pass = (typeof PASSES)[number];
@@ -747,6 +779,45 @@ export function objectEntries(
             },
           ],
           townShadows(town, left, top),
+          { cells, objectId: obj.id },
+        ),
+      );
+    } else if (
+      SITE_KINDS.has(obj.kind) ||
+      obj.data["type"] === "haunted-mine"
+    ) {
+      // Catalogue objects (bead bzc.13) drawn with their type's art
+      // (bead bzc.16); buried things are never drawn.
+      const art = artFor(String(obj.data["type"] ?? ""), artVariantOf(obj));
+      if (art === null) continue;
+      const p = placeArt(art, box.x, box.y, box.w, box.h);
+      const pickup = art.seat === "pickup";
+      out.push(
+        entry(
+          "FOREGROUND",
+          row,
+          col,
+          pickup ? LAYER.RESOURCE : LAYER.SETTLEMENT,
+          [
+            {
+              key: art.asset.key,
+              sx: 0,
+              sy: 0,
+              sw: art.asset.w,
+              sh: art.asset.h,
+              dx: p.x,
+              dy: p.y,
+            },
+          ],
+          [
+            {
+              cx: p.x + art.foot.x + 2,
+              cy: p.y + art.foot.y - 3,
+              rx: Math.min(art.asset.w * 0.42, box.w * CELL * 0.5),
+              ry: pickup ? 5 : 9,
+              alpha: SHADOW_ALPHA,
+            },
+          ],
           { cells, objectId: obj.id },
         ),
       );

@@ -38,6 +38,8 @@ import { applyBattleMagic } from "../magic/adventure.ts";
 import type { MagicOutcome } from "../battle/auto.ts";
 import { checkEliminations, sendToPool, sendToTavern } from "./players.ts";
 import { splitNeutralStack } from "./progression.ts";
+import { siteFor } from "./site-state.ts";
+import { siteBattleWon, siteGuard } from "./sites.ts";
 import {
   cloneState,
   must,
@@ -244,6 +246,21 @@ function buildSetup(state: GameState): SetupWithSlots | null {
       faction: null,
       drills: [],
       specials: [],
+    };
+  } else if (battle.kind === "site") {
+    // A bank's, vault's or sealed box's own guard (bead bzc.13).
+    const obj = findObject(state.map, battle.objectId);
+    if (obj === undefined) return null;
+    const guard = siteGuard(state, obj);
+    if (guard.length === 0) return null;
+    defenderSlots = guard.map((_, i) => i);
+    defender = {
+      owner: null,
+      hero: null,
+      stacks: guard.map((s) => ({ creature: s.creature, count: s.count })),
+      defenseBonus: 0,
+      towerHarm: null,
+      canRetreat: false,
     };
   } else if (battle.kind === "town") {
     const town = state.towns[battle.objectId];
@@ -472,12 +489,16 @@ export function applyBattleResult(
   const events: GameEvent[] = [];
 
   applySurvivors(hero.army, attackerSlots, result.attacker);
-  // One-battle consumables end with the battle, however it ends (6.1).
+  // One-battle consumables and site buffs end with the battle (6.1).
   hero.nextBattle = [];
+  hero.buffs = [];
   // Mana spent and scrolls cast stay spent (RULES_V2 1.12).
   applyBattleMagic(hero, result.magic?.attacker);
   if (foe !== undefined) applyBattleMagic(foe, result.magic?.defender);
-  if (foe !== undefined) foe.nextBattle = [];
+  if (foe !== undefined) {
+    foe.nextBattle = [];
+    foe.buffs = [];
+  }
   if (battle.kind === "town") {
     const town = next.towns[battle.objectId];
     if (town !== undefined) {
@@ -491,6 +512,15 @@ export function applyBattleResult(
     if (battle.kind === "monster") {
       const monster = next.monsters[battle.objectId];
       if (monster !== undefined) monster.count = defenderLeft;
+    }
+    if (battle.kind === "site") {
+      // Guards killed stay dead.
+      siteFor(next, battle.objectId).guard = setup.defender.stacks
+        .map((s, i) => ({
+          creature: s.creature,
+          count: result.defender[i] ?? 0,
+        }))
+        .filter((s) => s.count > 0);
     }
     if (foe !== undefined) {
       if (retreat === undefined) {
@@ -526,6 +556,9 @@ export function applyBattleResult(
       Object.entries(next.monsters).filter(([id]) => id !== battle.objectId),
     );
     events.push({ type: "monster-defeated", monsterId: battle.objectId });
+  } else if (battle.kind === "site") {
+    const obj = findObject(next.map, battle.objectId);
+    if (obj !== undefined) siteBattleWon(next, hero, obj, events);
   } else if (battle.kind === "town") {
     const town = next.towns[battle.objectId];
     if (town !== undefined) {

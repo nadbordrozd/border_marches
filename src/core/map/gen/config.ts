@@ -6,7 +6,7 @@
  * Object types, their values and guard strength live in the shared table in
  * src/data/mapObjects.ts.
  */
-import { MAP_OBJECT_ROWS } from "../../../data/mapObjects.ts";
+import { MAP_OBJECT_ROWS, RULE_ROWS } from "../../../data/mapObjects.ts";
 import type { MapObjectRow, MapZoneKind } from "../../../data/mapObjects.ts";
 import type { Terrain } from "../types.ts";
 
@@ -224,6 +224,8 @@ export interface GenConfig {
      * src/data/mapObjects.ts). A new object type is a new row.
      */
     table: readonly MapObjectRow[];
+    /** Rows of the rule-placed types (RULE_ROWS of src/data/mapObjects.ts). */
+    ruleRows: readonly MapObjectRow[];
     /** Minimum Chebyshev gap between objects (strict, then relaxed). */
     spacing: number;
     /** What every player finds near home (identical for every player). */
@@ -398,6 +400,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     town: { w: 3, h: 2 },
     townClearance: 2,
     table: MAP_OBJECT_ROWS,
+    ruleRows: RULE_ROWS,
     spacing: 2,
     startKit: [
       { row: "mine-wood", count: 1, minDays: 0.2, maxDays: 0.85 },
@@ -417,8 +420,16 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       { row: "pickup-essence", count: 1, minDays: 0, maxDays: 0.9 },
       { row: "pickup-gold", count: 2, minDays: 0, maxDays: 0.9 },
       { row: "chest", count: 1, minDays: 0, maxDays: 0.9 },
+      // "One strange thing near home" (concept section 3, bead bzc.13).
+      {
+        row: "strange-thing",
+        count: 1,
+        minDays: 0.4,
+        maxDays: 2,
+        nextZone: true,
+      },
     ],
-    density: { start: 4, middle: 6.5, town: 5.5, hold: 6.5 },
+    density: { start: 9, middle: 10, town: 9, hold: 10 },
     pocketPrizes: [2, 3],
     pocketMin: 8,
     guardTownClearance: 4,

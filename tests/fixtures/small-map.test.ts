@@ -39,10 +39,11 @@ describe("small-map fixture", () => {
     expect(count((i) => map.cells[i]!.road)).toBeGreaterThanOrEqual(15);
   });
 
-  it("has one object of each kind", () => {
+  it("has one object of each MVP kind (all of them valid kinds)", () => {
     expect(map.objects.map((o) => o.kind).sort()).toEqual(
-      [...MAP_OBJECT_KINDS].sort(),
+      ["hero-start", "mine", "monster", "pickup", "town"].sort(),
     );
+    for (const o of map.objects) expect(MAP_OBJECT_KINDS).toContain(o.kind);
   });
 
   it("the road connects the town gate to the mine entrance", () => {

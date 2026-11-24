@@ -18,6 +18,7 @@ import {
   assetUrl,
 } from "../../assets/manifest";
 import type { GroundTerrain, ImageAsset } from "../../assets/manifest";
+import { MAP_OBJECT_ASSETS } from "../../assets/map-objects";
 import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
 import { GROUND_CALM, blockMask, calmTexture } from "./ground";
@@ -90,6 +91,7 @@ export function mapAssetList(): ImageAsset[] {
     ...UNIT_ASSETS,
     ...HERO_ASSETS,
     ...OBJECT_ASSETS,
+    ...MAP_OBJECT_ASSETS,
   ];
 }
 

@@ -244,6 +244,7 @@ export function newGame(
     monsters: {},
     pendingBattle: null,
     battles: 0,
+    sites: {},
   };
 
   const heroes: HeroState[] = [];

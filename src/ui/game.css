@@ -226,7 +226,8 @@
   border: 1px solid var(--gm-gold-dim);
   border-radius: 3px;
   color: #f4e6c0;
-  white-space: nowrap;
+  white-space: pre-line;
+  max-width: 340px;
   font-size: 12px;
   z-index: 2;
 }

@@ -392,9 +392,19 @@ export function transferStack(
 
 /** Whether the player owns a town with a Marketplace. */
 export function hasMarketplace(state: GameState, player: number): boolean {
-  return Object.values(state.towns).some(
+  const town = Object.values(state.towns).some(
     (t) =>
       t.owner === player && builtDefs(t).some((d) => d.marketplace === true),
+  );
+  if (town) return true;
+  // A hero standing at a Trading Post trades at the same rates (bzc.13).
+  return state.heroes.some(
+    (h) =>
+      h.alive &&
+      h.owner === player &&
+      state.map.objects.some(
+        (o) => o.data["type"] === "trading-post" && o.x === h.x && o.y === h.y,
+      ),
   );
 }
 

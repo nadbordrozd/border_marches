@@ -20,6 +20,36 @@ export {
 } from "./newGame.ts";
 export { mapStarts, prepareStarts, type StartSite } from "./starts.ts";
 export {
+  describeObject,
+  digHere,
+  dwellingOffer,
+  dwellingStock,
+  grantPrize,
+  guardsOf,
+  objectGuardFv,
+  objectName,
+  objectValueFor,
+  obeliskCount,
+  obelisksVisited,
+  prizeText,
+  prizeValue,
+  puzzleCells,
+  questMissing,
+  questText,
+  siteGuard,
+  siteOptions,
+  useSite,
+  visitSite,
+} from "./sites.ts";
+export {
+  gateOpen,
+  keysOf,
+  objectTypeDef,
+  objectTypeOf,
+  siteOf,
+  weekOf,
+} from "./site-state.ts";
+export {
   moveHeroAlong,
   visitObject,
   takeChest,

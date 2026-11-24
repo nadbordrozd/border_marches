@@ -4,6 +4,7 @@
  */
 import { FACTION_CREATURES } from "./factionCreatures.ts";
 import { NEUTRAL_CREATURES } from "./neutrals.ts";
+import { STRAY_CREATURES } from "./strays.ts";
 import type { CreatureDef, CreatureId, LostWorldCreatureId } from "./types.ts";
 
 export const LOST_WORLD_CREATURES: Readonly<
@@ -134,6 +135,7 @@ export const CREATURES: Readonly<Record<CreatureId, CreatureDef>> = {
   ...LOST_WORLD_CREATURES,
   ...NEUTRAL_CREATURES,
   ...(FACTION_CREATURES as Record<string, CreatureDef>),
+  ...STRAY_CREATURES,
 } as Readonly<Record<CreatureId, CreatureDef>>;
 
 /** A creature's battle ability ids (its `abilities`, or its MVP ability). */

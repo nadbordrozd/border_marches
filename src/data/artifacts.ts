@@ -114,7 +114,28 @@ export interface ConsumableDef {
   use: ConsumableUse;
 }
 
-export type ArtifactDef = WornArtifactDef | ConsumableDef;
+/**
+ * A relic: carried in the backpack, no slot and no effect, never sold or
+ * destroyed (the Keystone of CONTENT_MAP_OBJECTS section 4).
+ */
+export interface RelicDef {
+  id: string;
+  name: string;
+  kind: "relic";
+  value: number;
+  text: string;
+}
+
+export type ArtifactDef = WornArtifactDef | ConsumableDef | RelicDef;
+
+/** The Keystone: dug up on the map, built into a Keystone Hall. */
+export const KEYSTONE: RelicDef = {
+  id: "keystone",
+  name: "The Keystone",
+  kind: "relic",
+  value: 30000,
+  text: "Carried, not worn. Bring it to one of your towns to build the Keystone Hall.",
+};
 
 function trinket(
   id: string,
@@ -386,6 +407,8 @@ const ROWS: ArtifactDef[] = [
   },
 ];
 
+ROWS.push(KEYSTONE);
+
 export const ARTIFACTS: Readonly<Record<string, ArtifactDef>> =
   Object.fromEntries(ROWS.map((a) => [a.id, a]));
 
@@ -414,6 +437,7 @@ export function isCursed(id: string): boolean {
 /** Grade label for the UI: "Marvel piece" for pieces. */
 export function gradeLabel(def: ArtifactDef): string {
   if (def.kind === "consumable") return "Consumable";
+  if (def.kind === "relic") return "Relic";
   if (def.pieceOf !== undefined) return "Marvel piece";
   return def.grade[0]?.toUpperCase() + def.grade.slice(1);
 }

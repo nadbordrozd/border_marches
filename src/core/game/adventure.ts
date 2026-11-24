@@ -9,6 +9,7 @@ import { learnInTown, noteHeroPath } from "../magic/adventure.ts";
 import { pickupInfo } from "./newGame.ts";
 import { canEnter, cutsCorner, moveContext, stepCost } from "./pathfinding.ts";
 import { checkEliminations } from "./players.ts";
+import { visitSite } from "./sites.ts";
 import {
   armySize,
   checkTurn,
@@ -70,7 +71,9 @@ export function visitAtHero(
       o.x === hero.x &&
       o.y === hero.y &&
       o.kind !== "hero-start" &&
-      o.kind !== "monster",
+      o.kind !== "monster" &&
+      o.kind !== "buried" &&
+      o.kind !== "gate",
   );
   if (obj === undefined) return null;
   switch (obj.kind) {
@@ -106,6 +109,16 @@ export function visitAtHero(
       if (state.collected.includes(obj.id)) return null;
       const info = pickupInfo(obj);
       if (info.type === "chest") {
+        const rich = obj.data["artifact"];
+        if (typeof rich === "string") {
+          // The rich chest of rings 2-3 holds a Trinket instead.
+          return visitSite(
+            state,
+            hero,
+            { ...obj, data: { ...obj.data, type: "loose-artifact" } },
+            events,
+          );
+        }
         events.push({ type: "chest-offer", heroId: hero.id, pickupId: obj.id });
         return null;
       }
@@ -120,6 +133,12 @@ export function visitAtHero(
       });
       return null;
     }
+    case "dwelling":
+    case "site":
+    case "bank":
+    case "artifact":
+    case "teleport":
+      return visitSite(state, hero, obj, events);
     default:
       return null;
   }
@@ -346,17 +365,20 @@ export function takeChest(
   const next = cloneState(state);
   const hero = must(findHero(next, heroId), "hero");
   const events: GameEvent[] = [];
+  const gold =
+    typeof obj.data["gold"] === "number" ? obj.data["gold"] : CHEST.gold;
+  const xp = typeof obj.data["xp"] === "number" ? obj.data["xp"] : CHEST.xp;
   if (choice === "gold") {
     const player = next.players.find((p) => p.id === hero.owner);
-    if (player !== undefined) player.resources.gold += CHEST.gold;
+    if (player !== undefined) player.resources.gold += gold;
     events.push({
       type: "pickup",
       pickupId,
       resource: "gold",
-      amount: CHEST.gold,
+      amount: gold,
     });
   } else {
-    gainXp(hero, CHEST.xp, events);
+    gainXp(hero, xp, events);
   }
   next.collected.push(pickupId);
   return success(next, events);

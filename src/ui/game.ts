@@ -12,6 +12,11 @@ import { CELL_PX } from "../assets/manifest.ts";
 import {
   aiStep,
   applyBattleResult,
+  describeObject,
+  digHere,
+  objectName,
+  siteOptions,
+  useSite,
   battlePlayers,
   battleSetup,
   calendar,
@@ -46,6 +51,7 @@ import type {
   SlotRef,
 } from "../core/game/index.ts";
 import { createBattleResolver } from "../core/battle/resolver.ts";
+import type { MapObjectKind } from "../core/map/types.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { getHeroClass } from "../data/hero.ts";
 import { MAX_HEROES, playerColour } from "../data/players.ts";
@@ -112,19 +118,36 @@ export interface GameHook {
   selectHero(heroId: string): void;
   /** The selected hero's id. */
   selectedHero(): string | null;
-  /** Uncollected pickups and live monsters the hero can path to, by cost. */
+  /**
+   * Uncollected pickups, live monsters and catalogue objects (sites,
+   * dwellings, banks, artifacts, teleports) the hero can path to, by cost.
+   */
   targets(): HookTarget[];
+  /** Hovers map cell (x, y): shows and returns the tooltip text. */
+  hover(x: number, y: number): string | null;
 }
 
 export interface HookTarget {
   id: string;
-  kind: "pickup" | "monster";
+  kind: MapObjectKind;
+  /** Catalogue type (data.type), when it has one. */
+  type?: string;
   x: number;
   y: number;
   cost: number;
   /** Reachable with today's movement points. */
   today: boolean;
 }
+
+const HOOK_KINDS: ReadonlySet<MapObjectKind> = new Set<MapObjectKind>([
+  "pickup",
+  "monster",
+  "site",
+  "dwelling",
+  "bank",
+  "artifact",
+  "teleport",
+]);
 
 declare global {
   interface Window {
@@ -220,6 +243,13 @@ class GameScreen {
       selectHero: (id) => this.selectHero(id),
       selectedHero: () => this.hero()?.id ?? null,
       targets: () => this.targets(),
+      hover: (x, y) => {
+        this.pointer = { x: 200, y: 200 };
+        this.onHover({ x, y });
+        return this.tooltip.style.display === "none"
+          ? null
+          : this.tooltip.textContent;
+      },
     };
     // Resume a battle, level-up or AI turn left pending.
     void this.afterCommand([]).then(() => {
@@ -237,12 +267,13 @@ class GameScreen {
     if (hero === undefined) return [];
     const out: HookTarget[] = [];
     for (const o of displayObjects(this.state)) {
-      if (o.kind !== "pickup" && o.kind !== "monster") continue;
+      if (!HOOK_KINDS.has(o.kind)) continue;
       const path = findPath(this.state, hero.id, o.x, o.y);
       if (path === null) continue;
       out.push({
         id: o.id,
         kind: o.kind,
+        ...(typeof o.data["type"] === "string" ? { type: o.data["type"] } : {}),
         x: o.x,
         y: o.y,
         cost: path.total,
@@ -302,6 +333,7 @@ class GameScreen {
       button("Next hero (H)", () => this.nextHero()),
       button("Kingdom (K)", () => void this.kingdom()),
       button("Spells (M)", () => void this.spellbook()),
+      button("Dig (G)", () => void this.dig()),
       button("Menu", () => void this.quitToMenu()),
     );
     const endTurnButton = button(
@@ -561,7 +593,13 @@ class GameScreen {
       this.tooltip.style.display = "none";
       return;
     }
-    const text = describeCell(this.state, this.human, cell.x, cell.y);
+    const text = describeCell(
+      this.state,
+      this.human,
+      cell.x,
+      cell.y,
+      this.hero()?.id,
+    );
     if (text === null) {
       this.tooltip.style.display = "none";
       return;
@@ -602,6 +640,10 @@ class GameScreen {
       case "m":
       case "M":
         void this.spellbook();
+        break;
+      case "g":
+      case "G":
+        void this.dig();
         break;
       case "i":
       case "I":
@@ -946,6 +988,29 @@ class GameScreen {
           if (e.artifacts.length > 0)
             toast(`${e.artifacts.length} artifacts taken`, "gain");
           break;
+        case "site": {
+          const h = this.state.heroes.find((x) => x.id === e.heroId);
+          if (h?.owner === this.human && e.options === undefined) {
+            toast(e.text, "gain");
+          }
+          break;
+        }
+        case "teleported": {
+          const h = this.state.heroes.find((x) => x.id === e.heroId);
+          if (h?.owner === this.human) toast("The waystone carries you.");
+          break;
+        }
+        case "dug":
+          toast(
+            e.found === null
+              ? "You dig, and find nothing."
+              : `Dug up: ${e.found}!`,
+            e.found === null ? undefined : "gain",
+          );
+          break;
+        case "hero-freed":
+          if (e.player === this.human) toast("A prisoner joins you!", "gain");
+          break;
         case "player-eliminated":
           if (e.player !== this.human)
             toast(`${playerColour(e.player).name} is out of the game!`, "week");
@@ -964,6 +1029,9 @@ class GameScreen {
       this.announce(events);
       for (const e of events) {
         if (e.type === "chest-offer") await this.chest(e.heroId, e.pickupId);
+        if (e.type === "site" && e.options !== undefined) {
+          await this.siteChoice(e.heroId, e.objectId, e.text);
+        }
         if (e.type === "visit-town") openTown = e.townId;
       }
       await this.levelUps();
@@ -979,6 +1047,66 @@ class GameScreen {
     } finally {
       this.busy = false;
     }
+  }
+
+  /**
+   * A map object's choice (bead bzc.13): its options as buttons, plus
+   * "Leave"; picking one runs useSite and asks again while options remain
+   * (a dwelling, a tollhouse).
+   */
+  private async siteChoice(
+    heroId: string,
+    objectId: string,
+    text: string,
+  ): Promise<void> {
+    for (let round = 0; round < 12; round++) {
+      const hero = this.state.heroes.find((h) => h.id === heroId);
+      const obj = this.state.map.objects.find((o) => o.id === objectId);
+      if (hero === undefined || obj === undefined) return;
+      if (hero.owner !== this.human) return;
+      const options = siteOptions(this.state, hero, obj);
+      if (options.length === 0) return;
+      const choice = await modal<string>({
+        title: objectName(this.state, obj),
+        body: el(
+          "div.gm-site",
+          el("p", round === 0 ? text : "Anything else?"),
+          el(
+            "p.gm-dim",
+            describeObject(this.state, this.human, obj, heroId)
+              .slice(1)
+              .join(" "),
+          ),
+        ),
+        buttons: [
+          ...options.map((o) => ({
+            label:
+              o.disabled !== undefined ? `${o.label} (${o.disabled})` : o.label,
+            value: o.id,
+            disabled: o.disabled !== undefined,
+          })),
+          { label: "Leave", value: "", primary: true },
+        ],
+        cancel: "",
+      });
+      if (choice === "") return;
+      const events = this.run(useSite(this.state, heroId, objectId, choice));
+      if (events === null) return;
+      playSound("pickup");
+      this.announce(events);
+      this.refresh();
+    }
+  }
+
+  /** Digs on the selected hero's cell (CONTENT_MAP_OBJECTS section 4). */
+  private async dig(): Promise<void> {
+    if (this.inputBlocked()) return;
+    const hero = this.hero();
+    if (hero === undefined) return;
+    const events = this.run(digHere(this.state, hero.id));
+    if (events === null) return;
+    this.refresh();
+    await this.afterCommand(events);
   }
 
   private async chest(heroId: string, pickupId: string): Promise<void> {
@@ -1046,6 +1174,11 @@ class GameScreen {
         title: "Neutral monsters",
         phrase: `${m === undefined ? "Monsters" : capitalize(stackPhrase(m.creature, m.count))} attack!`,
       };
+    }
+    if (pending.kind === "site") {
+      const obj = this.state.map.objects.find((o) => o.id === pending.objectId);
+      const name = obj === undefined ? "Site" : objectName(this.state, obj);
+      return { title: name, phrase: `The keepers of the ${name} attack!` };
     }
     if (pending.kind === "town") {
       const town = this.state.towns[pending.objectId];

@@ -15,10 +15,15 @@ import {
   HOLD_DEFENSE_BONUS,
   HOLD_GARRISON,
   HOLD_NAME,
-  NEUTRAL_CREATURE_IDS,
-  NEUTRAL_CREATURES,
 } from "../../../data/neutrals.ts";
+import {
+  GUARD_CREATURE_IDS,
+  STRAY_CREATURES,
+  STRAY_HOMES,
+} from "../../../data/strays.ts";
+import type { CreatureDef } from "../../../data/types.ts";
 import type { Rng } from "../../rng.ts";
+import type { Terrain } from "../types.ts";
 
 export { HOLD_DEFENSE_BONUS, HOLD_GARRISON, HOLD_NAME };
 
@@ -43,40 +48,77 @@ export interface GuardStack {
   fv: number;
 }
 
+/** Where a guard stands: picks strays of its terrain and ring. */
+export interface GuardPlace {
+  terrain?: Terrain;
+  ring?: number;
+  /** A creature that must guard (a Haunted Mine's Sextons). */
+  force?: string;
+}
+
+/** The guard roster (strays and caretakers, CONTENT_CREATURES), by FV. */
+const ROSTER: readonly CreatureDef[] = GUARD_CREATURE_IDS.map(
+  (id) => STRAY_CREATURES[id],
+).sort((a, b) => a.fightValue - b.fightValue);
+
 /**
- * One neutral stack worth about `target` fight value: a creature whose
- * count for that value falls between 5 and 50 (the weakest when none does).
+ * One neutral stack worth about `target` fight value (CONTENT_CREATURES
+ * section 3): a stray of the cell's terrain and ring whose count for that
+ * value falls between 5 and 50; else any stray whose count fits; else the
+ * weakest or the strongest.
  */
-export function stackFor(rng: Rng, target: number): GuardStack {
-  const roster = NEUTRAL_CREATURE_IDS.map((id) => NEUTRAL_CREATURES[id]);
-  const fits = roster.filter((c) => {
+export function stackFor(
+  rng: Rng,
+  target: number,
+  place: GuardPlace = {},
+): GuardStack {
+  const roster = ROSTER;
+  const forced = roster.find((c) => c.id === place.force);
+  const fitsCount = (c: CreatureDef): boolean => {
     const n = Math.round(target / c.fightValue);
     return n >= 5 && n <= 50;
-  });
+  };
+  const home = (c: CreatureDef): boolean => {
+    const h = STRAY_HOMES[c.id as keyof typeof STRAY_HOMES];
+    if (h === undefined) return false;
+    const okTerrain =
+      place.terrain === undefined || h.terrain.includes(place.terrain);
+    const ring = place.ring;
+    const okRing =
+      ring === undefined || (ring >= h.rings[0] && ring <= h.rings[1]);
+    return okTerrain && okRing;
+  };
+  const local = roster.filter((c) => home(c) && fitsCount(c));
+  const fits = roster.filter(fitsCount);
   const pool =
-    fits.length > 0
-      ? fits
-      : target < 5 * (roster[0]?.fightValue ?? 50)
-        ? roster.slice(0, 1)
-        : roster.slice(-1);
+    forced !== undefined
+      ? [forced]
+      : local.length > 0
+        ? local
+        : fits.length > 0
+          ? fits
+          : target < 5 * (roster[0]?.fightValue ?? 50)
+            ? roster.slice(0, 1)
+            : roster.slice(-1);
   const creature = rng.pick(pool);
   const count = Math.max(1, Math.round(target / creature.fightValue));
   return { creature: creature.id, count, fv: count * creature.fightValue };
 }
 
-/** A guard for a prize of `value` at `ring`. */
+/** A guard for a prize of `value` at `ring` (strays of `place`). */
 export function sizeGuard(
   rng: Rng,
   value: number,
   ring: number,
   jitter: number,
   minFv: number,
+  place: GuardPlace = {},
 ): GuardStack {
   const target = Math.max(
     minFv,
     guardTarget(value, ring) * (1 + rng.float(-jitter, jitter)),
   );
-  return stackFor(rng, target);
+  return stackFor(rng, target, { ring, ...place });
 }
 
 /** A town garrison worth about `target` fight value, in two or three stacks. */

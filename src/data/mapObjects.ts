@@ -19,6 +19,12 @@
  * weeks of its income at those unit values, a pickup its amount.
  */
 import type { MapObjectKind, ResourceId } from "../core/map/types.ts";
+import {
+  OBJECT_TYPES,
+  OBJECT_TYPE_IDS,
+  type ObjectTypeDef,
+  type ObjectTypeId,
+} from "./objectTypes.ts";
 
 /** Kinds of zone the generator lays out. */
 export type MapZoneKind = "start" | "middle" | "town" | "hold";
@@ -35,12 +41,15 @@ export const RESOURCE_UNIT_VALUE: Readonly<Record<ResourceId, number>> = {
   gold: 1,
   wood: 100,
   ore: 150,
-  essence: 300,
+  // CONTENT_MAP_OBJECTS section 2 (was 300 in the MVP table).
+  essence: 500,
 };
 
 export interface MapObjectRow {
   /** Row id; also the prefix of the placed objects' ids. */
   id: string;
+  /** Catalogue type (src/data/objectTypes.ts), copied to data.type. */
+  type: ObjectTypeId;
   /** Map object kind it places. */
   kind: MapObjectKind;
   /** Prize value (gold equivalent), before any rolled amount. */
@@ -79,6 +88,7 @@ const pile = (
   weights: MapObjectRow["weights"],
 ): MapObjectRow => ({
   id: `pickup-${resource}`,
+  type: "resource-pile",
   kind: "pickup",
   value: 0,
   unitValue: { field: "amount", value: RESOURCE_UNIT_VALUE[resource] },
@@ -91,6 +101,13 @@ const pile = (
   rolls: { amount },
 });
 
+const MINE_TYPE: Readonly<Record<ResourceId, ObjectTypeId>> = {
+  wood: "sawmill",
+  ore: "ore-pit",
+  essence: "essence-spring",
+  gold: "gold-mine",
+};
+
 const mine = (
   resource: ResourceId,
   value: number,
@@ -98,6 +115,7 @@ const mine = (
   extra: Partial<MapObjectRow> = {},
 ): MapObjectRow => ({
   id: `mine-${resource}`,
+  type: MINE_TYPE[resource],
   kind: "mine",
   value,
   footprint: { w: 2, h: 1 },
@@ -110,6 +128,96 @@ const mine = (
   ...extra,
 });
 
+/** Types with hand-made rows above (piles, chests and mines). */
+const TABLE_ROWS_DONE: ReadonlySet<ObjectTypeId> = new Set<ObjectTypeId>([
+  "resource-pile",
+  "treasure-chest",
+  "sawmill",
+  "ore-pit",
+  "essence-spring",
+  "gold-mine",
+]);
+
+/** At most this many of a type per zone (variety over repetition). */
+const PER_ZONE: Partial<Record<ObjectTypeId, number>> = {
+  prison: 1,
+  library: 1,
+  "trading-post": 1,
+  tollhouse: 1,
+  "curse-lifters-shrine": 1,
+  "roadside-inn": 1,
+  "altar-of-sacrifice": 1,
+  sanctuary: 1,
+  arena: 1,
+  "haunted-mine": 1,
+  "landfall-wreck": 1,
+  "overgrown-greenhouse": 1,
+  "sealed-registry": 1,
+  "stopped-belfry": 1,
+  "quiet-yard": 1,
+  "thunderstruck-pylon-yard": 1,
+  "caretaker-lodge": 1,
+};
+
+/** Types whose guard is inside (banks) or that are never guarded. */
+const NEVER_GUARDED: ReadonlySet<ObjectTypeId> = new Set<ObjectTypeId>([
+  "seer-hut",
+  "overgrown-greenhouse",
+  "sealed-registry",
+  "stopped-belfry",
+  "quiet-yard",
+  "thunderstruck-pylon-yard",
+  "landfall-wreck",
+  "keepers-vault",
+  "buried-cache",
+  "buried-keystone",
+]);
+
+/**
+ * A generator row for a catalogue type (CONTENT_MAP_OBJECTS section 3):
+ * its weight in every zone kind (start zones only take what ring 0 holds,
+ * values up to 2000), footprint and entrance (bottom centre, left of two),
+ * guard rule and per-zone cap. Contents (and their value) are rolled by
+ * src/core/map/gen/contents.ts.
+ */
+export function catalogueRow(d: ObjectTypeDef): MapObjectRow {
+  const entrance: readonly [number, number] = [
+    Math.floor((d.w - 1) / 2),
+    d.h - 1,
+  ];
+  const startOk = d.value <= 2000;
+  return {
+    id: d.id,
+    type: d.id,
+    kind: d.kind,
+    value: d.value,
+    footprint: { w: d.w, h: d.h },
+    entrance,
+    visit: "any",
+    weights: {
+      ...(startOk ? { start: d.weight } : {}),
+      middle: d.weight,
+      town: d.weight,
+      hold: d.weight,
+    },
+    guard: NEVER_GUARDED.has(d.id) ? "never" : "auto",
+    ...(PER_ZONE[d.id] !== undefined ? { perZone: PER_ZONE[d.id] } : {}),
+    data: {},
+  };
+}
+
+/**
+ * The minimum days from every start for an object of this value (the ring
+ * table of CONTENT_MAP_OBJECTS section 2, read leniently: the bound is on
+ * the roads-anywhere distance, so it holds at least).
+ */
+export function minDaysForValue(value: number): number {
+  if (value >= 13000) return 2.5;
+  if (value >= 5000) return 1.2;
+  if (value > 2000) return 0.5;
+  return 0;
+}
+
 /** Every object type the generator places, by row id. */
 export const MAP_OBJECT_ROWS: readonly MapObjectRow[] = [
   pile("wood", [5, 10, 1], { start: 3, middle: 3, town: 3, hold: 1 }),
@@ -118,15 +226,19 @@ export const MAP_OBJECT_ROWS: readonly MapObjectRow[] = [
   pile("essence", [2, 4, 1], { start: 1, middle: 1.5, town: 1.5, hold: 2 }),
   {
     id: "chest",
+    type: "treasure-chest",
     kind: "pickup",
-    value: 1500,
+    value: 1000,
     footprint: { w: 1, h: 1 },
     entrance: [0, 0],
     visit: "any",
-    weights: { start: 1, middle: 1.6, town: 1.6, hold: 2.5 },
+    weights: { start: 2, middle: 3, town: 3, hold: 3 },
     guard: "auto",
     data: { resource: "gold", amount: 1000, chest: true, xp: 750 },
   },
+  ...OBJECT_TYPE_IDS.map((t) => OBJECT_TYPES[t])
+    .filter((d) => d.weight > 0 && !TABLE_ROWS_DONE.has(d.id))
+    .map(catalogueRow),
   mine("wood", 1400, { middle: 1.2, town: 1.2, hold: 0.3 }),
   mine("ore", 1800, { middle: 1.1, town: 1.1, hold: 0.6 }),
   mine(
@@ -148,6 +260,23 @@ export const MAP_OBJECT_ROWS: readonly MapObjectRow[] = [
     },
   ),
 ];
+
+/**
+ * Rows of the types placed by a rule rather than by weight (obelisks, the
+ * buried Keystone and caches, waystones, pylons, keymaster's tents, the
+ * vault): the generator's rule pass reads them.
+ */
+export const RULE_ROWS: readonly MapObjectRow[] = (
+  [
+    "obelisk",
+    "buried-keystone",
+    "buried-cache",
+    "pylon",
+    "two-way-waystone",
+    "keymasters-tent",
+    "keepers-vault",
+  ] as const
+).map((t) => catalogueRow(OBJECT_TYPES[t]));
 
 export const MAP_OBJECT_ROW_BY_ID: Readonly<Record<string, MapObjectRow>> =
   Object.fromEntries(MAP_OBJECT_ROWS.map((r) => [r.id, r]));

@@ -5,6 +5,7 @@
  */
 import { getCreature } from "../../data/creatures.ts";
 import { MINES } from "../../data/economy.ts";
+import { STABLES_MP } from "../../data/objectTypes.ts";
 import { TOWNLESS_DAYS_LIMIT } from "../../data/players.ts";
 import type { Resources } from "../../data/types.ts";
 import {
@@ -69,8 +70,11 @@ export function dailyIncome(
     if (town.owner === player) out = addResources(out, townIncome(town, day));
   }
   for (const mine of Object.values(state.mines)) {
-    if (mine.owner === player)
-      out[mine.resource] += MINES[mine.resource].income;
+    if (mine.owner !== player) continue;
+    // A Haunted Mine doubles its kind's yield (data.yield, bead bzc.13).
+    const obj = state.map.objects.find((o) => o.id === mine.id);
+    const y = typeof obj?.data["yield"] === "number" ? obj.data["yield"] : 1;
+    out[mine.resource] += MINES[mine.resource].income * y;
   }
   return out;
 }
@@ -139,6 +143,11 @@ export function startDay(state: GameState, events: GameEvent[]): void {
     for (const hero of heroesOf(state, player.id)) {
       startHeroDay(hero);
       magicDayStart(state, events, hero);
+      // Stables: +300 movement each day to the end of the week.
+      if (hero.stablesUntil >= state.day) {
+        hero.maxMp += STABLES_MP;
+        hero.mp += STABLES_MP;
+      } else hero.stablesUntil = 0;
     }
     for (const town of townsOf(state, player.id)) town.builtToday = false;
   }

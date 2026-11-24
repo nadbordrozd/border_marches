@@ -108,7 +108,7 @@ describe("save", () => {
     expect(hasSave(storage)).toBe(false);
   });
 
-  it("round-trips a multi-player v3 game", () => {
+  it("round-trips a multi-player v4 game", () => {
     const storage = fakeStorage();
     const s = newGame(generateMap(7, { size: "S" }), {
       players: [
@@ -117,7 +117,7 @@ describe("save", () => {
       ],
     });
     saveGame(storage, s);
-    expect(JSON.parse(storage.data.get(SAVE_KEY)!).version).toBe(3);
+    expect(JSON.parse(storage.data.get(SAVE_KEY)!).version).toBe(4);
     const r = readSave(storage);
     expect(r.kind).toBe("ok");
     if (r.kind === "ok") {
@@ -154,7 +154,7 @@ describe("save", () => {
       expect(r.state.players).toHaveLength(1);
       expect(r.state.scenario?.kind).toBe("capture-towns");
     }
-    storage.data.set(SAVE_KEY, JSON.stringify({ version: 4, state: v2 }));
+    storage.data.set(SAVE_KEY, JSON.stringify({ version: 99, state: v2 }));
     const bad = readSave(storage);
     expect(bad.kind).toBe("rejected");
     if (bad.kind === "rejected") expect(bad.message).toMatch(/version/);
@@ -203,6 +203,55 @@ describe("save", () => {
       expect(h.worn).toHaveLength(11);
       expect(h.skills).toEqual(v3.heroes[0]!.skills);
       expect("artifacts" in h).toBe(false);
+    }
+  });
+
+  it("round-trips map object memory and site buffs (save v4)", () => {
+    const storage = fakeStorage();
+    const s = game();
+    const h = s.heroes[0]!;
+    const withMemory: GameState = {
+      ...s,
+      sites: {
+        "stat-shrine-1": { heroes: [h.id], seen: [0] },
+        "windmill-1": { week: 1 },
+        "stray-hut-1": { owner: 0, stock: 3, stockWeek: 1 },
+        "bank-1": { guard: [{ creature: "winder", count: 2 }] },
+        "oasis-1": { last: { [h.id]: 1 } },
+      },
+      heroes: s.heroes.map((x, i) =>
+        i === 0 ? { ...x, buffs: ["rally-camp"], stablesUntil: 7 } : x,
+      ),
+    };
+    expect(saveGame(storage, withMemory)).toBe(true);
+    const r = readSave(storage);
+    expect(r.kind).toBe("ok");
+    if (r.kind === "ok") {
+      expect(r.state.sites).toEqual(withMemory.sites);
+      expect(r.state.heroes[0]!.buffs).toEqual(["rally-camp"]);
+      expect(r.state.heroes[0]!.stablesUntil).toBe(7);
+    }
+  });
+
+  it("upgrades a v3 save to v4 with empty map object memory", () => {
+    const storage = fakeStorage();
+    const v4 = game();
+    const v3 = JSON.parse(JSON.stringify(v4)) as Record<string, unknown> & {
+      heroes: Array<Record<string, unknown>>;
+    };
+    delete v3["sites"];
+    for (const h of v3.heroes) {
+      delete h["buffs"];
+      delete h["stablesUntil"];
+    }
+    storage.data.set(SAVE_KEY, JSON.stringify({ version: 3, state: v3 }));
+    const r = readSave(storage);
+    expect(r.kind).toBe("ok");
+    if (r.kind === "ok") {
+      expect(r.upgraded).toBe(true);
+      expect(r.state.sites).toEqual({});
+      expect(r.state.heroes.every((h) => h.buffs.length === 0)).toBe(true);
+      expect(JSON.stringify(r.state)).toBe(JSON.stringify(v4));
     }
   });
 

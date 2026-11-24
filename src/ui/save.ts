@@ -4,22 +4,25 @@
  * is plain JSON. Every storage access is wrapped: private windows, blocked
  * storage or a full quota just mean "no save".
  *
- * Versions: 3 is the multi-player state with heroes v2 (RULES_V2 sections
- * 3 to 5: stats, skills, feats, artifacts). A version 2 save (multi-player,
- * MVP heroes) is upgraded to v3; a version 1 save (the one-player MVP) is
- * upgraded into a one-player v3 game; an unreadable or unknown save is
- * reported with a message and not loaded.
+ * Versions: 4 adds the map objects' memory (bead bzc.13: visits, flags,
+ * stock, bank guards, site buffs); 3 is the multi-player state with heroes
+ * v2 (RULES_V2 sections 3 to 5). A version 3 save is upgraded to v4 (empty
+ * memory), a version 2 save (multi-player, MVP heroes) through v3, and a
+ * version 1 save (the one-player MVP) into a one-player game; an
+ * unreadable or unknown save is reported with a message and not loaded.
  */
 import {
   upgradeV1State,
   upgradeV2State,
+  upgradeV3State,
   type V2State,
+  type V3State,
 } from "../core/game/migrate.ts";
 import type { GameState } from "../core/game/types.ts";
 
 export const SAVE_KEY = "border-marches.save";
 /** Bump when the GameState shape changes incompatibly. */
-export const SAVE_VERSION = 3;
+export const SAVE_VERSION = 4;
 
 /** The part of the Storage interface the save uses (tests pass a fake). */
 export interface SaveStorage {
@@ -99,6 +102,15 @@ function looksLikeV3(s: GameState): boolean {
   );
 }
 
+function looksLikeV4(s: GameState): boolean {
+  return (
+    looksLikeV3(s) &&
+    typeof s.sites === "object" &&
+    s.sites !== null &&
+    s.heroes.every((h) => Array.isArray(h.buffs))
+  );
+}
+
 export type LoadResult =
   | { kind: "none" }
   | { kind: "ok"; state: GameState; upgraded: boolean }
@@ -152,7 +164,19 @@ export function readSave(storage: SaveStorage | null): LoadResult {
       };
     }
   }
-  if (file.version !== SAVE_VERSION || !looksLikeV3(file.state)) {
+  if (file.version === 3 && looksLikeV3(file.state)) {
+    try {
+      const state = upgradeV3State(file.state as unknown as V3State);
+      if (state.status !== "playing") return { kind: "none" };
+      return { kind: "ok", state, upgraded: true };
+    } catch (error) {
+      return {
+        kind: "rejected",
+        message: `The old saved game cannot be upgraded: ${String(error)}`,
+      };
+    }
+  }
+  if (file.version !== SAVE_VERSION || !looksLikeV4(file.state)) {
     return {
       kind: "rejected",
       message: `The saved game is from another version (${String(file.version)}).`,

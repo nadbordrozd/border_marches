@@ -119,7 +119,7 @@ export function refreshTaverns(state: GameState): void {
 }
 
 /** Starting army of a hero class as army slots. */
-function startingArmy(heroClass: string): HeroState["army"] {
+export function startingArmy(heroClass: string): HeroState["army"] {
   const army = emptyArmy();
   for (const s of getHeroClass(heroClass).startingArmy) {
     addToArmy(army, s.creature, s.count);
@@ -199,6 +199,8 @@ export function newHeroState(
     mpDebt: 0,
     army: startingArmy(cls.id),
     alive: true,
+    buffs: [],
+    stablesUntil: 0,
   };
   hero.maxMp = movementPoints(hero);
   hero.mp = hero.maxMp;

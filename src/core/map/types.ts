@@ -36,8 +36,31 @@ export interface MapCell {
   deep?: boolean;
 }
 
+/**
+ * The movement and visit family of an object. Catalogue types
+ * (src/data/objectTypes.ts, `data.type`) map onto these:
+ * - "mine": flagged producers; "pickup": resource piles and chests;
+ * - "dwelling": map dwellings (flag, then recruit);
+ * - "site": every other visitable building, service and one-off;
+ * - "bank": a fight against its own guard, then its prize;
+ * - "artifact": a loose artifact;
+ * - "buried": hidden, found by digging (never drawn, never a stop);
+ * - "gate": a one-cell passage block, open to some players;
+ * - "teleport": moves the hero.
+ */
 export type MapObjectKind =
-  "town" | "mine" | "pickup" | "monster" | "hero-start";
+  | "town"
+  | "mine"
+  | "pickup"
+  | "monster"
+  | "hero-start"
+  | "dwelling"
+  | "site"
+  | "bank"
+  | "artifact"
+  | "buried"
+  | "gate"
+  | "teleport";
 
 export const MAP_OBJECT_KINDS: readonly MapObjectKind[] = [
   "town",
@@ -45,6 +68,13 @@ export const MAP_OBJECT_KINDS: readonly MapObjectKind[] = [
   "pickup",
   "monster",
   "hero-start",
+  "dwelling",
+  "site",
+  "bank",
+  "artifact",
+  "buried",
+  "gate",
+  "teleport",
 ];
 
 /** The four resources. */

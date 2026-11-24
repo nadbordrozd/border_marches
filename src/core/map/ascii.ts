@@ -13,6 +13,7 @@ export const ASCII_LEGEND = [
   "h hero start  X monster",
   "mines: W sawmill  O ore pit  E essence spring  G gold mine",
   "pickups: l wood (logs)  r ore (rocks)  c essence (crystals)  $ gold  * chest",
+  "D dwelling  % site  B bank  A artifact  _ buried  | gate  t waystone",
 ].join("\n");
 
 const TERRAIN_CHAR: Record<string, string> = {
@@ -53,6 +54,20 @@ function objectChar(o: MapObject): string {
       return o.data["chest"] === true
         ? "*"
         : (PICKUP_CHAR[String(o.data["resource"])] ?? "?");
+    case "dwelling":
+      return "D";
+    case "site":
+      return "%";
+    case "bank":
+      return "B";
+    case "artifact":
+      return "A";
+    case "buried":
+      return "_";
+    case "gate":
+      return "|";
+    case "teleport":
+      return "t";
   }
 }
 

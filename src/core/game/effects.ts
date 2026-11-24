@@ -56,6 +56,7 @@ import {
   MOVE_SPEED_MIN,
 } from "../../data/hero.ts";
 import { findHeroDef } from "../../data/players.ts";
+import { siteBuffEffect } from "../../data/objectTypes.ts";
 import { findSkill } from "../../data/skills.ts";
 import type { CreatureId, Resources } from "../../data/types.ts";
 import type { Terrain } from "../map/types.ts";
@@ -63,7 +64,7 @@ import { emptyResources } from "./resources.ts";
 import type { HeroState } from "./types.ts";
 
 export type EffectSourceKind =
-  "skill" | "feat" | "specialty" | "artifact" | "consumable";
+  "skill" | "feat" | "specialty" | "artifact" | "consumable" | "site";
 
 export interface EffectSource {
   kind: EffectSourceKind;
@@ -193,6 +194,22 @@ export function heroEffects(hero: HeroState): SourcedEffect[] {
     if (def?.kind === "consumable" && def.use.kind === "next-battle") {
       push({ kind: "consumable", id, label: def.name }, def.use.effects);
     }
+  }
+  // Map-site buffs until the next battle ends (bead bzc.13).
+  for (const id of hero.buffs ?? []) {
+    const b = siteBuffEffect(id);
+    const effects: HeroEffect[] = [];
+    if (b.morale !== undefined)
+      effects.push({ kind: "morale", amount: b.morale });
+    if (b.luck !== undefined) effects.push({ kind: "luck", amount: b.luck });
+    if (b.school !== undefined && b.power !== undefined) {
+      effects.push({
+        kind: "school-power",
+        school: b.school as School,
+        amount: b.power,
+      });
+    }
+    push({ kind: "site", id, label: b.label }, effects);
   }
   return out;
 }

@@ -32,6 +32,7 @@ import {
   inBounds,
   isPassable,
 } from "../map/types.ts";
+import { gateOpen, inSanctuary } from "./site-state.ts";
 import { findHero } from "./state.ts";
 import type { GameState, HeroState } from "./types.ts";
 
@@ -146,7 +147,19 @@ export function moveContext(
       case "town":
         if (state.towns[obj.id]?.owner !== hero.owner) stops.add(entrance);
         break;
+      case "dwelling":
+      case "site":
+      case "bank":
+      case "artifact":
+      case "teleport":
+        if (!collected.has(obj.id)) stops.add(entrance);
+        break;
+      case "gate":
+        // A closed gate is a wall for this player (bead bzc.13).
+        if (!gateOpen(state, obj, hero.owner)) objectBlocked.add(entrance);
+        break;
       case "hero-start":
+      case "buried":
         break;
     }
   }
@@ -156,6 +169,7 @@ export function moveContext(
     if (!other.alive || other.id === hero.id) continue;
     const i = other.y * map.width + other.x;
     if (other.owner === hero.owner) friendAt.add(i);
+    else if (inSanctuary(state, other.x, other.y)) objectBlocked.add(i);
     else enemyHeroAt.set(i, other.id);
   }
   const player = state.players.find((p) => p.id === hero.owner);

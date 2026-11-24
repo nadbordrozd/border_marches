@@ -27,6 +27,7 @@ import type {
 } from "../game/battle.ts";
 import type { HeroBattleProfile } from "../game/battle-profile.ts";
 import { runAutoBattle } from "./auto.ts";
+import "./stray-abilities.ts";
 import type { AutoBattleOptions, BattleResult } from "./auto.ts";
 import {
   heroAbilityIds,

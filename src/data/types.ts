@@ -49,6 +49,59 @@ export type NeutralCreatureId =
   | "ogre"
   | "orc-warboss";
 
+/** Strays and caretakers (src/data/strays.ts, CONTENT_CREATURES). */
+export type StrayCreatureId =
+  | "bellhop"
+  | "whipping-boy"
+  | "gremlin"
+  | "lamplighter"
+  | "newsie"
+  | "notary"
+  | "crooner"
+  | "bog-leech"
+  | "loan-shark"
+  | "winder"
+  | "groundskeeper"
+  | "rigger"
+  | "gumshoe"
+  | "deep-sea-diver"
+  | "sexton"
+  | "lagoon-lurker"
+  | "fire-eater"
+  | "rime-walrus"
+  | "tin-titan"
+  | "prize-pumpkin"
+  | "beanstalk-giant";
+
+/** Stray abilities, registered with the battle grammar (bead bzc.13). */
+export type StrayAbilityId =
+  | "carry"
+  | "takes-the-blame"
+  | "sabotage"
+  | "light-up"
+  | "extra"
+  | "stamp"
+  | "croon"
+  | "latch"
+  | "advance"
+  | "wind-up"
+  | "tend"
+  | "tow"
+  | "dead-to-rights"
+  | "pressure-suit"
+  | "night-shift"
+  | "drag-under"
+  | "breath"
+  | "cold-front"
+  | "stand-behind-me"
+  | "late-bloomer"
+  | "giant-stomp"
+  | "gone-to-seed"
+  | "fade";
+
+/** What a dead stack leaves (RULES_V2 1.2). */
+export type StrayDeathTag = "corpse" | "bones" | "wreck" | "sweets" | "nothing";
+
 export type HumanCreatureId =
   "squire" | "longbowman" | "man-at-arms" | "friar" | "knight" | "dragonslayer";
 
@@ -68,7 +121,8 @@ export type CreatureId =
   | NeutralCreatureId
   | HumanCreatureId
   | UndeadCreatureId
-  | GoblinCreatureId;
+  | GoblinCreatureId
+  | StrayCreatureId;
 
 /**
  * One creature type. Every stat is per creature; damage is a single fixed

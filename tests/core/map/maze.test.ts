@@ -371,6 +371,7 @@ describe(
       // A made-up row: the generator needs nothing but the row to place it.
       const shrine: MapObjectRow = {
         id: "test-shrine",
+        type: "resource-pile",
         kind: "pickup",
         value: 2500,
         footprint: { w: 2, h: 2 },
