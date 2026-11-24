@@ -11,14 +11,18 @@ import {
   CREATURE_ART,
   HERO_CLASS_ART,
   hasHeroArt,
+  hasNamedHeroPortrait,
   hasUnitArt,
   heroArt,
   heroPortrait,
+  namedHeroPortrait,
   PLACEHOLDER_HERO,
   PLACEHOLDER_UNIT,
   unitArt,
   unitPortrait,
 } from "../../src/assets/unit-art";
+import { NAMED_HEROES } from "../../src/data/classes";
+import { CHIEFTAIN_ROSTER } from "../../src/data/players";
 
 const PUBLIC = join(import.meta.dirname, "..", "..", "public");
 
@@ -113,6 +117,47 @@ describe("unit art lookups", () => {
       expect(heroPortrait(id).key).toBe(`portrait-${hero.key}`);
     }
     expect(heroArt("chieftain").key).toBe("dinosaur-chieftain");
+  });
+
+  it("gives each of the 24 named heroes a portrait of their own", () => {
+    expect(NAMED_HEROES).toHaveLength(24);
+    const keys = new Set<string>();
+    for (const def of NAMED_HEROES) {
+      expect({ id: def.id, own: hasNamedHeroPortrait(def.id) }).toEqual({
+        id: def.id,
+        own: true,
+      });
+      const portrait = namedHeroPortrait(def.id);
+      expect(portrait).toBe(assetByKey(portrait.key));
+      expect([portrait.w, portrait.h, portrait.unit]).toEqual([
+        48,
+        48,
+        heroArt(def.heroClass).key,
+      ]);
+      expect(portrait.key).not.toBe(heroPortrait(def.heroClass).key);
+      expect(existsSync(join(PUBLIC, portrait.path)), portrait.path).toBe(true);
+      keys.add(portrait.key);
+    }
+    expect(keys.size).toBe(24);
+  });
+
+  it("falls back to the class portrait for heroes without their own", () => {
+    const chieftain = CHIEFTAIN_ROSTER[0];
+    expect(chieftain).toBeDefined();
+    if (chieftain === undefined) return;
+    expect(hasNamedHeroPortrait(chieftain.id)).toBe(false);
+    expect(namedHeroPortrait(chieftain.id).key).toBe(
+      heroPortrait("chieftain").key,
+    );
+    expect(namedHeroPortrait("no-such-hero", "revenant").key).toBe(
+      heroPortrait("revenant").key,
+    );
+    expect(namedHeroPortrait("no-such-hero").key).toBe(
+      heroPortrait(PLACEHOLDER_HERO).key,
+    );
+    expect(namedHeroPortrait("toString").key).toBe(
+      heroPortrait(PLACEHOLDER_HERO).key,
+    );
   });
 
   it("points every table entry at a real asset", () => {

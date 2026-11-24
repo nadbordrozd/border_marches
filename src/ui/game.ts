@@ -84,7 +84,7 @@ import {
   stackPhrase,
 } from "./format.ts";
 import { loadGameMapAssets } from "./hero-sprite.ts";
-import { heroArt, heroPortrait } from "../assets/unit-art.ts";
+import { heroArt, namedHeroPortrait } from "../assets/unit-art.ts";
 import {
   levelUpDialog,
   meetingItems,
@@ -410,7 +410,10 @@ class GameScreen {
     for (const h of own) {
       const item = el(
         "button.gm-hero-item",
-        img(heroPortrait(h.heroClass).key, "gm-hero-item-portrait"),
+        img(
+          namedHeroPortrait(h.defId, h.heroClass).key,
+          "gm-hero-item-portrait",
+        ),
         el("span.gm-hero-item-name", h.name),
       );
       item.type = "button";
@@ -441,7 +444,7 @@ class GameScreen {
     if (hero === undefined) return;
     const cls = getHeroClass(hero.heroClass);
     const portrait = img(
-      heroPortrait(hero.heroClass).key,
+      namedHeroPortrait(hero.defId, hero.heroClass).key,
       "gm-hero-portrait",
       2,
     );
@@ -1144,7 +1147,7 @@ class GameScreen {
       const offer = levelUpOffer(this.state, hero.id);
       if (offer === null) return;
       playSound("level-up");
-      const portrait = getHeroClass(hero.heroClass).portrait;
+      const portrait = namedHeroPortrait(hero.defId, hero.heroClass).key;
       const choice = await levelUpDialog(this.state, hero, offer, portrait);
       if (this.run(chooseLevelUp(this.state, hero.id, choice)) === null) return;
     }

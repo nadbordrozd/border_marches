@@ -37,7 +37,7 @@ import type { ResourceId } from "../core/map/types.ts";
 import { playSound } from "../audio/sound.ts";
 import { buildingDef, townTree } from "../data/factions.ts";
 import { getHeroClass } from "../data/hero.ts";
-import { heroPortrait } from "../assets/unit-art.ts";
+import { namedHeroPortrait } from "../assets/unit-art.ts";
 import { findHeroDef, HIRE_COST, MAX_HEROES } from "../data/players.ts";
 import { getCreature } from "../data/creatures.ts";
 import {
@@ -299,7 +299,10 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         box.append(
           el(
             "div.gm-tavern-hero",
-            img(heroPortrait(def.heroClass).key, "gm-tavern-portrait"),
+            img(
+              namedHeroPortrait(entry.defId, def.heroClass).key,
+              "gm-tavern-portrait",
+            ),
             el(
               "div.gm-tavern-text",
               el("div.gm-tavern-name", def.name),

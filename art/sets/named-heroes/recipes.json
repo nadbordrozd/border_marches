@@ -1,0 +1,411 @@
+{
+  "set": "named-heroes",
+  "bead": "border_marches-bzc.29",
+  "class": "units",
+  "exploration": false,
+  "_doc": "48x48 portraits of the 24 named heroes (FACTION_HUMANS, FACTION_UNDEAD and FACTION_GOBLINS section 8; NAMED_HEROES in src/data/classes.ts). Same endpoint, layers and options as the class portraits of class-heroes (bzc.14): each hero keeps the class costume and colours of its class portrait and differs as a person (face, hair, age, one accessory from the name or specialty). No faction layer (the 2000-character cap); colours in each subject. Faces south-east, never mirrored. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "portrait": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east"
+    }
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [
+      "style",
+      "camera-portrait",
+      "class-portrait"
+    ],
+    "noBackground": true,
+    "width": 48,
+    "height": 48
+  },
+  "recipes": [
+    {
+      "id": "cuthbert-a",
+      "concept": "SIR CUTHBERT THE UNHORSED",
+      "seed": 53101,
+      "options": "@portrait",
+      "subject": "Subject: Sir Cuthbert the Unhorsed portrait, head and shoulders of a chunky cute old knight who keeps falling off his horse: a round ruddy face, a huge bushy white walrus moustache, a white plaster cross on his bruised nose, a dented open-faced light steel helmet with a bent crimson plume, a crimson surcoat with a gold-yellow cross over light steel pauldrons.",
+      "negative": "horse, visor, purple, beard to the chest"
+    },
+    {
+      "id": "wat-a",
+      "concept": "WAT GREENHOOD",
+      "seed": 53102,
+      "options": "@portrait",
+      "subject": "Subject: Wat Greenhood portrait, head and shoulders of a chunky cute young yeoman archer knight: a freckled cheeky grinning face, messy ginger hair, a forest green hood pulled up over a light steel skullcap with a small crimson feather, a crimson surcoat with a gold-yellow cross, the curved wooden longbow and a quiver of white-fletched arrows over one shoulder.",
+      "negative": "horse, visor, purple, crossbow"
+    },
+    {
+      "id": "ysolde-a",
+      "concept": "DAME YSOLDE BRIGHTLANCE",
+      "seed": 53103,
+      "options": "@portrait",
+      "subject": "Subject: Dame Ysolde Brightlance portrait, head and shoulders of a chunky cute determined lady knight: a brave confident smile, a long thick golden braid over one shoulder, a polished shining open-faced light steel helmet with a tall crimson plume, a crimson surcoat with a gold-yellow cross over light steel mail, the tip of a lance with a small crimson pennant rising behind her shoulder.",
+      "negative": "horse, visor, purple, pink"
+    },
+    {
+      "id": "aldous-a",
+      "concept": "CAPTAIN ALDOUS FERROW",
+      "seed": 53104,
+      "options": "@portrait",
+      "subject": "Subject: Captain Aldous Ferrow portrait, head and shoulders of a chunky cute veteran captain of knights: warm dark brown skin, a stern kind face, a short grey-black beard, a black eyepatch over one eye, an open-faced light steel helmet with a short crimson plume, a crimson surcoat with a gold-yellow cross, a small crimson banner with a gold-yellow cross on a pole beside his head.",
+      "negative": "horse, visor, purple, pirate hat"
+    },
+    {
+      "id": "wilhelmina-a",
+      "concept": "ABBESS WILHELMINA",
+      "seed": 53105,
+      "options": "@portrait",
+      "subject": "Subject: Abbess Wilhelmina portrait, head and shoulders of a chunky cute elderly kindly abbess enchantress: a round wrinkled rosy smiling face, small round gold spectacles, a cream wimple framing her face under a tall pointed crimson hat with a gold-yellow band, a crimson and cream robe, a glowing gold-yellow healing heart held up in one hand.",
+      "negative": "unicorn, horse, armour, purple, pink, blonde hair"
+    },
+    {
+      "id": "tobias-a",
+      "concept": "MASTER TOBIAS QUILL",
+      "seed": 53106,
+      "options": "@portrait",
+      "subject": "Subject: Master Tobias Quill portrait, head and shoulders of a chunky cute young scholar enchanter: a thin smiling face, curly ink-black hair, big round spectacles, an ink smudge on his cheek, a tall pointed crimson hat with a gold-yellow band, a crimson and cream robe, a big white quill pen with gold-yellow sparkles held beside his face.",
+      "negative": "unicorn, horse, armour, purple, pink, beard"
+    },
+    {
+      "id": "rosamund-a",
+      "concept": "LADY ROSAMUND OF THE MERE",
+      "seed": 53107,
+      "options": "@portrait",
+      "subject": "Subject: Lady Rosamund of the Mere portrait, head and shoulders of a chunky cute serene lake lady enchantress: a calm gentle face, very long straight black hair with a white water lily in it, a tall pointed crimson hat with a flowing cream veil, a crimson and cream gown, a small floating pale blue water droplet glowing beside her hand.",
+      "negative": "unicorn, horse, armour, purple, pink, blonde hair"
+    },
+    {
+      "id": "maud-a",
+      "concept": "REEVE MAUD PENNYWISE",
+      "seed": 53108,
+      "options": "@portrait",
+      "subject": "Subject: Reeve Maud Pennywise portrait, head and shoulders of a chunky cute plump middle-aged village reeve enchantress: a round shrewd smiling face with rosy cheeks, curly copper-red hair, a tall pointed crimson hat with a gold-yellow band, a crimson and cream gown, a shiny gold coin held up between two fingers and a small bulging coin purse.",
+      "negative": "unicorn, horse, armour, purple, pink, blonde hair"
+    },
+    {
+      "id": "mortimer-a",
+      "concept": "SIR MORTIMER STILLSTANDING",
+      "seed": 53201,
+      "options": "@portrait",
+      "subject": "Subject: Sir Mortimer Stillstanding portrait, head and shoulders of a chunky cute stiff upright undead knight: a long pale ivory skull face with glowing bright violet eye sockets, a long stringy grey cobweb beard hanging from the jaw, a tall dented dark iron helmet with a tarnished bronze rim and a tall straight near-black plume, dark iron pauldrons, a ragged near-black cape with thin bright violet trim.",
+      "negative": "horse, red cloth, green skin, blood"
+    },
+    {
+      "id": "agatha-a",
+      "concept": "THE DOWAGER COUNTESS AGATHA",
+      "seed": 53202,
+      "options": "@portrait",
+      "subject": "Subject: The Dowager Countess Agatha portrait, head and shoulders of a chunky cute haughty undead countess: a pale ivory skull face with glowing bright violet eye sockets and small vampire fangs, a tall powdered silver-white beehive wig with a small tarnished bronze tiara, a high stiff near-black vampire collar lined with bright violet, dark iron pauldrons, a pearl necklace.",
+      "negative": "horse, red cloth, green skin, blood, helmet"
+    },
+    {
+      "id": "bartholomew-a",
+      "concept": "COLONEL BARTHOLOMEW DUST",
+      "seed": 53203,
+      "options": "@portrait",
+      "subject": "Subject: Colonel Bartholomew Dust portrait, head and shoulders of a chunky cute pompous undead colonel: a pale ivory skull face with glowing bright violet eye sockets, a huge bushy grey handlebar moustache, a gold monocle in one eye socket, a dented dark iron helmet with a tarnished bronze rim and a ragged near-black plume, dark iron pauldrons with two tarnished bronze medals on the chest, puffs of grey dust.",
+      "negative": "horse, red cloth, green skin, blood"
+    },
+    {
+      "id": "jeb-a",
+      "concept": "OLD JEB THE GRAVEDIGGER",
+      "seed": 53204,
+      "options": "@portrait",
+      "subject": "Subject: Old Jeb the Gravedigger portrait, head and shoulders of a chunky cute old undead gravedigger: a pale ivory skull face with glowing bright violet eye sockets and a gap-toothed grin, a few wisps of white hair, a dented dark iron helmet with a tarnished bronze rim pushed back, a ragged near-black cape with thin bright violet trim, a rusty shovel over one shoulder, a small glowing violet crystal hanging at his neck.",
+      "negative": "horse, red cloth, green skin, blood, straw hat"
+    },
+    {
+      "id": "graves-a",
+      "concept": "MR GRAVES, FUNERAL DIRECTOR",
+      "seed": 53301,
+      "options": "@portrait",
+      "subject": "Subject: Mr Graves, Funeral Director portrait, head and shoulders of a chunky cute solemn funeral director: a long gaunt pale yellowish-white face, a tiny polite smile, slicked black hair, small round dark spectacles, a very tall near-black top hat with a bright violet band and a long black crape ribbon, a near-black frock coat with a cream collar and a black tie, hands clasped politely.",
+      "negative": "skull face, donkey, red cloth, green skin, bell"
+    },
+    {
+      "id": "ophelia-a",
+      "concept": "MADAME OPHELIA VEIL",
+      "seed": 53302,
+      "options": "@portrait",
+      "subject": "Subject: Madame Ophelia Veil portrait, head and shoulders of a chunky cute mysterious lady mortician: a pale yellowish-white face, half-closed violet eyes, dark violet lips, long straight black hair, a small near-black top hat with a bright violet band and a black lace veil over one eye, a near-black frock coat with a black lace collar, a pale violet glowing candle held beside her face.",
+      "negative": "skull face, donkey, red cloth, green skin, bell"
+    },
+    {
+      "id": "ignatius-a",
+      "concept": "DOCTOR IGNATIUS CRANE",
+      "seed": 53303,
+      "options": "@portrait",
+      "subject": "Subject: Doctor Ignatius Crane portrait, head and shoulders of a chunky cute thin elderly doctor mortician: a pale yellowish-white face with a very long pointed beak-like nose, white mutton-chop sideburns, silver pince-nez glasses, one bony finger raised to his lips saying hush, a short near-black top hat with a bright violet band, a near-black frock coat with a cream collar and a silver stethoscope.",
+      "negative": "skull face, donkey, red cloth, green skin, bird, plague mask"
+    },
+    {
+      "id": "hester-a",
+      "concept": "WIDOW HESTER BLACKWOOD",
+      "seed": 53304,
+      "options": "@portrait",
+      "subject": "Subject: Widow Hester Blackwood portrait, head and shoulders of a chunky cute stern old widow mortician: a pale yellowish-white wrinkled face, sunken violet eyes, a tight grey hair bun, a near-black top hat with a bright violet band and a long black mourning veil streaming back, a near-black frock coat with a cream collar and a violet cameo brooch, a small wailing pale violet ghost wisp beside her shoulder.",
+      "negative": "skull face, donkey, red cloth, green skin, bell"
+    },
+    {
+      "id": "grukk-a",
+      "concept": "GRUKK MANYTEETH",
+      "seed": 53401,
+      "options": "@portrait",
+      "subject": "Subject: Grukk Manyteeth portrait, head and shoulders of a chunky cute scrappy goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, tiny beady eyes, an enormous wide grin crammed with far too many crooked cream teeth, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, a necklace of big cream teeth.",
+      "negative": "boar, red cloth, skull, olive skin"
+    },
+    {
+      "id": "olga-a",
+      "concept": "BIG OLGA ANVILFIST",
+      "seed": 53402,
+      "options": "@portrait",
+      "subject": "Subject: Big Olga Anvilfist portrait, head and shoulders of a chunky cute huge burly goblin warlady: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a confident tusky grin, two thick ginger braids, a dented tin helmet painted hazard yellow #fdd20f with two short horns, broad shoulders under a pale sand-buff fur cape, one enormous fist in a dark iron gauntlet raised beside her face.",
+      "negative": "boar, red cloth, skull, olive skin, weapon"
+    },
+    {
+      "id": "skarn-a",
+      "concept": "SKARN THE LOUD",
+      "seed": 53403,
+      "options": "@portrait",
+      "subject": "Subject: Skarn the Loud portrait, head and shoulders of a chunky cute bellowing goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a scar across one cheek, eyes squeezed shut, mouth wide open in a huge shout, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, a battered tin megaphone horn held to his mouth.",
+      "negative": "boar, red cloth, skull, olive skin, text, sound lines"
+    },
+    {
+      "id": "nix-a",
+      "concept": "NIX FINGERS",
+      "seed": 53404,
+      "options": "@portrait",
+      "subject": "Subject: Nix Fingers portrait, head and shoulders of a chunky cute sly skinny goblin thief warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, narrow sneaky eyes, a sly smirk, a dented tin helmet painted hazard yellow #fdd20f tilted to one side, a pale sand-buff fur collar, a long-fingered hand covered in stolen gold rings flipping a shiny gold coin.",
+      "negative": "boar, red cloth, skull, olive skin"
+    },
+    {
+      "id": "squall-a",
+      "concept": "OLD MOTHER SQUALL",
+      "seed": 53501,
+      "options": "@portrait",
+      "subject": "Subject: Old Mother Squall portrait, head and shoulders of a chunky cute ancient goblin storm crone: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a long hooked nose with a wart, one big snaggle tooth, huge wild white hair blown sideways by the wind, a dented tin pot hat with a small lightning rod, a hazard yellow #fdd20f shawl, a tiny dark grey storm cloud with a yellow lightning bolt over her raised hand.",
+      "negative": "goat, broom, purple glow, red cloth"
+    },
+    {
+      "id": "zizzik-a",
+      "concept": "ZIZZIK SPARKWHISKER",
+      "seed": 53502,
+      "options": "@portrait",
+      "subject": "Subject: Zizzik Sparkwhisker portrait, head and shoulders of a chunky cute young twitchy goblin spark witch: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, wide excited eyes, long frazzled white whiskers crackling with little yellow sparks, round brass goggles pushed up on a dented tin pot hat with a sparking lightning rod, a hazard yellow #fdd20f shawl.",
+      "negative": "goat, broom, purple glow, red cloth, cat"
+    },
+    {
+      "id": "snagga-a",
+      "concept": "SNAGGA THREE-KETTLES",
+      "seed": 53503,
+      "options": "@portrait",
+      "subject": "Subject: Snagga Three-Kettles portrait, head and shoulders of a chunky cute plump goblin storm witch: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a big gap-toothed grin, frizzy grey hair, a tall hat made of three stacked dented tin kettles with a small lightning rod on top and white steam puffing from the spouts, a hazard yellow #fdd20f shawl.",
+      "negative": "goat, broom, purple glow, red cloth"
+    },
+    {
+      "id": "pim-a",
+      "concept": "PIM POWDERKEG",
+      "seed": 53504,
+      "options": "@portrait",
+      "subject": "Subject: Pim Powderkeg portrait, head and shoulders of a chunky cute small round goblin bomb witch: bright lime green skin #86c232 with a lighter #acdc55 face smudged with black soot, huge pointed ears, singed frizzy eyebrows, a delighted grin, a dented scorched tin pot hat with a small lightning rod, a hazard yellow #fdd20f shawl, a round black bomb with a lit sparking fuse held up beside her face.",
+      "negative": "goat, broom, purple glow, red cloth, explosion"
+    },
+    {
+      "id": "ysolde-a-bust",
+      "concept": "DAME YSOLDE BRIGHTLANCE",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "seed": 53113,
+      "edit": {
+        "take": "ysolde-a#0"
+      },
+      "subject": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the open-faced light steel helmet with the tall crimson plume, her brave smiling face and golden hair, the crimson surcoat with the gold-yellow cross at the bottom edge. Keep the colours, the thick black outline and the art style exactly the same.",
+      "notes": "ysolde-a#0 came back as a small whole figure (LESSONS 4.1 portrait fix, as knight-errant-portrait-a-bust)."
+    },
+    {
+      "id": "jeb-a-bust",
+      "concept": "OLD JEB THE GRAVEDIGGER",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "seed": 53214,
+      "edit": {
+        "take": "jeb-a#0"
+      },
+      "subject": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the pale ivory skull with glowing violet eye sockets and gap-toothed grin, the wisps of white hair, the dented dark iron helmet, the top of the shovel over his shoulder, the near-black cape with violet trim at the bottom edge. Keep the colours, the thick black outline and the art style exactly the same.",
+      "notes": "jeb-a#0 came back as a small whole figure with a tiny face."
+    },
+    {
+      "id": "ophelia-a-bust",
+      "concept": "MADAME OPHELIA VEIL",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "seed": 53315,
+      "edit": {
+        "take": "ophelia-a#0"
+      },
+      "subject": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: her pale face with half-closed violet eyes, long straight black hair, the small near-black top hat with the bright violet band and the black lace veil, the glowing violet candle beside her face. Keep the colours, the thick black outline and the art style exactly the same.",
+      "notes": "ophelia-a#0 came back as a small whole figure with a tiny face."
+    },
+    {
+      "id": "grukk-b",
+      "concept": "GRUKK MANYTEETH",
+      "seed": 53411,
+      "options": "@portrait",
+      "subject": "Subject: Grukk Manyteeth portrait, head and shoulders of a chunky cute scrappy goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, tiny beady eyes, an enormous wide open grin showing two rows of dozens of small crooked cream teeth, a shiny dented tin helmet painted bright hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, a necklace of big cream teeth.",
+      "negative": "boar, red cloth, skull, olive skin, brown helmet, leather helmet",
+      "notes": "grukk-a#0: the helmet came back brown leather rather than hazard yellow and the many teeth did not read."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/portraits/named-cuthbert.png",
+      "from": "cuthbert-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-wat.png",
+      "from": "wat-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-ysolde.png",
+      "from": "ysolde-a-bust#1",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-aldous.png",
+      "from": "aldous-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-wilhelmina.png",
+      "from": "wilhelmina-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-tobias.png",
+      "from": "tobias-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-rosamund.png",
+      "from": "rosamund-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-maud.png",
+      "from": "maud-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-mortimer.png",
+      "from": "mortimer-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-agatha.png",
+      "from": "agatha-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-bartholomew.png",
+      "from": "bartholomew-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-jeb.png",
+      "from": "jeb-a-bust#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-graves.png",
+      "from": "graves-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-ophelia.png",
+      "from": "ophelia-a-bust#1",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-ignatius.png",
+      "from": "ignatius-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-hester.png",
+      "from": "hester-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-grukk.png",
+      "from": "grukk-b#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-olga.png",
+      "from": "olga-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-skarn.png",
+      "from": "skarn-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-nix.png",
+      "from": "nix-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-squall.png",
+      "from": "squall-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-zizzik.png",
+      "from": "zizzik-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-snagga.png",
+      "from": "snagga-a#0",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/portraits/named-pim.png",
+      "from": "pim-a#0",
+      "width": 48,
+      "height": 48
+    }
+  ]
+}

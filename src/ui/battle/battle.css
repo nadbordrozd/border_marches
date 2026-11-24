@@ -145,6 +145,34 @@
   border-top: 2px solid #5c4626;
 }
 
+/* The heroes leading the sides, attacker above defender (bead bzc.29). */
+.bm-bottom.bm-with-heroes {
+  grid-template-columns: 50px 230px 1fr auto;
+}
+
+.bm-heroes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bm-bottom:not(.bm-with-heroes) .bm-heroes {
+  display: none;
+}
+
+.bm-hero-portrait {
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+  border: 1px solid #4a7fd0;
+  background: #1a2a44;
+}
+
+.bm-hero-portrait.bm-defender {
+  border-color: #c04848;
+  background: #3d1a1a;
+}
+
 .bm-active {
   display: flex;
   gap: 8px;

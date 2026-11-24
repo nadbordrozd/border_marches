@@ -89,6 +89,17 @@
       "options": "@piece",
       "subject": "Subject: Dragonslayer, one very large chunky cute champion knight, the biggest and heaviest of the kingdom, filling the whole width of the image: a huge round head in a closed light steel great helm with a gold-yellow crown band and a big crimson plume, massive rounded light steel plate armour with gold-yellow rims, a crimson surcoat with a gold-yellow cross, an enormous light steel greatsword held upright, and a big stuffed green dragon head with cream horns and a lolling tongue strapped on his back as a trophy, peeking over his shoulder; dark slate-grey boots; simple shapes and very few details.",
       "negative": "horse, shield, skull, brown leather, blood"
+    },
+    {
+      "id": "orc-warboss-giant-a",
+      "concept": "ORC WARBOSS (GIANT)",
+      "width": 88,
+      "height": 104,
+      "seed": 51601,
+      "options": "@piece",
+      "subject": "Subject: Orc Warboss, one very large chunky cute orc war chief, the biggest of the horde, filling the whole width of the image: a huge round head with bright lime green skin #86c232 and a lighter #acdc55 face, a big open shouting grin with two cream tusks, a dented light grey steel viking helmet with two big curved cream horns, a huge shaggy pale sand-buff fur mantle over broad bare lime green shoulders, a big iron belt buckle, a hazard yellow #fdd20f loincloth, chunky dark brown boots, one big fist clenched and the other holding up a big brass war horn; simple shapes and very few details.",
+      "negative": "boar, wolf, red cloth, skull, gun, axe, olive skin",
+      "notes": "Bead border_marches-bzc.29: a giant (tier 6) take after the imported 56x80 Pulp Wars warboss (goblin-orc-warboss), keeping its design: horned steel helmet, fur mantle, war horn, yellow loincloth."
     }
   ],
   "outputs": [
@@ -101,6 +112,8 @@
     { "path": "public/assets/units/undead-late-king.png", "from": "late-king-b#0", "width": 88, "height": 104 },
     { "path": "public/assets/portraits/undead-late-king.png", "from": "late-king-b#0", "steps": [{ "op": "crop", "x": 22, "y": 4, "width": 48, "height": 48 }], "width": 48, "height": 48 },
     { "path": "public/assets/units/goblin-boomshaman.png", "from": "boomshaman-b#0", "width": 56, "height": 80 },
-    { "path": "public/assets/portraits/goblin-boomshaman.png", "from": "boomshaman-b#0", "steps": [{ "op": "crop", "x": 4, "y": 2, "width": 48, "height": 48 }], "width": 48, "height": 48 }
+    { "path": "public/assets/portraits/goblin-boomshaman.png", "from": "boomshaman-b#0", "steps": [{ "op": "crop", "x": 4, "y": 2, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/goblin-orc-warboss-giant.png", "from": "orc-warboss-giant-a#0", "width": 88, "height": 104 },
+    { "path": "public/assets/portraits/goblin-orc-warboss-giant.png", "from": "orc-warboss-giant-a#0", "steps": [{ "op": "crop", "x": 16, "y": 10, "width": 48, "height": 48 }], "width": 48, "height": 48 }
   ]
 }

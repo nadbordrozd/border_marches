@@ -79,6 +79,9 @@ export interface BattleHero {
   defense: number;
   /** Display name. */
   name?: string;
+  /** Named hero definition id and class, for the portrait (display only). */
+  defId?: string;
+  heroClass?: string;
   /**
    * Everything else the hero brings (RULES_V2 2 to 4, 6): Strike and stack
    * modifiers, battle-start rules, item acts, Morale, Luck, Power, mana,
@@ -192,6 +195,8 @@ function battleHero(hero: HeroState): BattleHero {
     attack: stats.attack,
     defense: stats.defense,
     name: hero.name,
+    defId: hero.defId,
+    heroClass: hero.heroClass,
     profile: heroBattleProfile(hero),
   };
 }

@@ -369,5 +369,58 @@
         "height": 104
       }
     ]
+  },
+  "orc-warboss-giant-a": {
+    "id": "orc-warboss-giant-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-80ed5d4b-bc84-4a00-8c00-d21e3eba9379",
+    "submittedAt": "2026-11-24T23:54:38.441Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Orc Warboss, one very large chunky cute orc war chief, the biggest of the horde, filling the whole width of the image: a huge round head with bright lime green skin #86c232 and a lighter #acdc55 face, a big open shouting grin with two cream tusks, a dented light grey steel viking helmet with two big curved cream horns, a huge shaggy pale sand-buff fur mantle over broad bare lime green shoulders, a big iron belt buckle, a hazard yellow #fdd20f loincloth, chunky dark brown boots, one big fist clenched and the other holding up a big brass war horn; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 88,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 51601,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Orc Warboss, one very large chunky cute orc war chief, the biggest of the horde, filling the whole width of the image: a huge round head with bright lime green skin #86c232 and a lighter #acdc55 face, a big open shouting grin with two cream tusks, a dented light grey steel viking helmet with two big curved cream horns, a huge shaggy pale sand-buff fur mantle over broad bare lime green shoulders, a big iron belt buckle, a hazard yellow #fdd20f loincloth, chunky dark brown boots, one big fist clenched and the other holding up a big brass war horn; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, boar, wolf, red cloth, skull, gun, axe, olive skin."
+    },
+    "at": "2026-11-24T23:54:38.445Z",
+    "usageUsd": 0.010788514216740926,
+    "candidates": [
+      {
+        "file": "orc-warboss-giant-a-0.png",
+        "sha256": "1c0b2c8f66551d89aeb09d7aa54d15192b5222e6238be8e1b83bdac5b0d7b44d",
+        "width": 88,
+        "height": 104
+      }
+    ]
   }
 }

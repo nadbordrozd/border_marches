@@ -45,7 +45,11 @@ import type {
 } from "../../core/game/battle.ts";
 import { battleCue } from "../../audio/cues.ts";
 import { playSound } from "../../audio/sound.ts";
-import { battleGround, loadBattleArt } from "../../render/battle/assets.ts";
+import {
+  battleGround,
+  heroPortraitUrl,
+  loadBattleArt,
+} from "../../render/battle/assets.ts";
 import type { BattleArt } from "../../render/battle/assets.ts";
 import {
   STAGE_H,
@@ -186,6 +190,7 @@ class BattleScreen {
   private readonly canvas = el("canvas", "bm-canvas");
   private readonly tip = el("div", "bm-tip");
   private readonly bottom = el("div", "bm-bottom");
+  private readonly heroes = el("div", "bm-heroes");
   private readonly activeCard = el("div", "bm-active");
   private readonly panel = el("div", "bm-preview");
   private readonly buttons = el("div", "bm-buttons");
@@ -271,7 +276,8 @@ class BattleScreen {
       this.autoBtn,
       this.speedBtn,
     );
-    this.bottom.append(this.activeCard, this.panel, this.buttons);
+    this.bottom.append(this.heroes, this.activeCard, this.panel, this.buttons);
+    this.renderHeroes();
     this.info.hidden = true;
     this.book.hidden = true;
     this.castBox.hidden = true;
@@ -771,6 +777,25 @@ class BattleScreen {
     this.autoBtn.textContent = this.auto ? "Auto: on" : "Auto";
     this.autoBtn.classList.toggle("bm-on", this.auto);
     this.speedBtn.textContent = speedLabel(this.animator.speed);
+  }
+
+  /** The portraits of the heroes leading the two sides (attacker first). */
+  private renderHeroes(): void {
+    for (const side of ["attacker", "defender"] as const) {
+      const hero = this.setup[side].hero;
+      if (hero === null) continue;
+      const img = el("img", `bm-hero-portrait bm-${side}`);
+      img.src = heroPortraitUrl(hero);
+      img.alt = hero.name ?? "Hero";
+      img.title = `${hero.name ?? "Hero"} (${
+        this.playerSides.has(side) ? "your hero" : "enemy hero"
+      }): Attack ${hero.attack}, Defense ${hero.defense}`;
+      this.heroes.append(img);
+    }
+    this.bottom.classList.toggle(
+      "bm-with-heroes",
+      this.heroes.childElementCount > 0,
+    );
   }
 
   private renderTop(): void {

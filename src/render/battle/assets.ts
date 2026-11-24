@@ -2,7 +2,7 @@
  * Image loading for the battle screen and the choice of art per obstacle.
  */
 
-import { unitArt } from "../../assets/unit-art.ts";
+import { namedHeroPortrait, unitArt } from "../../assets/unit-art.ts";
 import {
   FOREST_SETS,
   GROUND_TEXTURES,
@@ -26,6 +26,20 @@ const cache = new Map<string, Promise<HTMLImageElement>>();
 
 function baseUrl(): string {
   return import.meta.env.BASE_URL;
+}
+
+/**
+ * URL of the 48x48 portrait of the hero leading a side: the named hero's own
+ * portrait, else its class's (bead bzc.29).
+ */
+export function heroPortraitUrl(hero: {
+  readonly defId?: string;
+  readonly heroClass?: string;
+}): string {
+  return assetUrl(
+    namedHeroPortrait(hero.defId ?? "", hero.heroClass),
+    baseUrl(),
+  );
 }
 
 export function loadImage(

@@ -376,7 +376,7 @@ export const GOBLIN_CREATURES: readonly CreatureDef[] = [
     growth: 1,
     cost: { gold: 2800, wood: 5, ore: 3 },
     fightValue: 1896,
-    sprite: "goblin-orc-warboss",
+    sprite: "goblin-orc-warboss-giant",
   },
 ];
 

@@ -1,0 +1,1340 @@
+{
+  "cuthbert-a": {
+    "id": "cuthbert-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-01db7561-e86f-47d4-af34-9bae2a75ff26",
+    "submittedAt": "2026-11-24T23:41:06.896Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Sir Cuthbert the Unhorsed portrait, head and shoulders of a chunky cute old knight who keeps falling off his horse: a round ruddy face, a huge bushy white walrus moustache, a white plaster cross on his bruised nose, a dented open-faced light steel helmet with a bent crimson plume, a crimson surcoat with a gold-yellow cross over light steel pauldrons."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Sir Cuthbert the Unhorsed portrait, head and shoulders of a chunky cute old knight who keeps falling off his horse: a round ruddy face, a huge bushy white walrus moustache, a white plaster cross on his bruised nose, a dented open-faced light steel helmet with a bent crimson plume, a crimson surcoat with a gold-yellow cross over light steel pauldrons. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, horse, visor, purple, beard to the chest."
+    },
+    "at": "2026-11-24T23:41:06.898Z",
+    "usageUsd": 0.007763217051823934,
+    "candidates": [
+      {
+        "file": "cuthbert-a-0.png",
+        "sha256": "55c17759e817c089501f978a9ecb321f259367b5c7c297507f268803479a828c",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "agatha-a": {
+    "id": "agatha-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-a222c73c-eb30-4213-bcae-bf86aaf229c3",
+    "submittedAt": "2026-11-24T23:41:25.704Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: The Dowager Countess Agatha portrait, head and shoulders of a chunky cute haughty undead countess: a pale ivory skull face with glowing bright violet eye sockets and small vampire fangs, a tall powdered silver-white beehive wig with a small tarnished bronze tiara, a high stiff near-black vampire collar lined with bright violet, dark iron pauldrons, a pearl necklace."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53202,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: The Dowager Countess Agatha portrait, head and shoulders of a chunky cute haughty undead countess: a pale ivory skull face with glowing bright violet eye sockets and small vampire fangs, a tall powdered silver-white beehive wig with a small tarnished bronze tiara, a high stiff near-black vampire collar lined with bright violet, dark iron pauldrons, a pearl necklace. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, horse, red cloth, green skin, blood, helmet."
+    },
+    "at": "2026-11-24T23:41:25.704Z",
+    "usageUsd": 0.006658407131830852,
+    "candidates": [
+      {
+        "file": "agatha-a-0.png",
+        "sha256": "5bd5280af9ce4f8f95170595f29031bd0a0e9b4d95ed6e5fb16d4bb017a78255",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "olga-a": {
+    "id": "olga-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-fababdca-ff7e-4be2-aa11-93632c03ab6e",
+    "submittedAt": "2026-11-24T23:42:06.429Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Big Olga Anvilfist portrait, head and shoulders of a chunky cute huge burly goblin warlady: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a confident tusky grin, two thick ginger braids, a dented tin helmet painted hazard yellow #fdd20f with two short horns, broad shoulders under a pale sand-buff fur cape, one enormous fist in a dark iron gauntlet raised beside her face."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53402,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Big Olga Anvilfist portrait, head and shoulders of a chunky cute huge burly goblin warlady: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a confident tusky grin, two thick ginger braids, a dented tin helmet painted hazard yellow #fdd20f with two short horns, broad shoulders under a pale sand-buff fur cape, one enormous fist in a dark iron gauntlet raised beside her face. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, boar, red cloth, skull, olive skin, weapon."
+    },
+    "at": "2026-11-24T23:42:06.429Z",
+    "usageUsd": 0.007721962981753879,
+    "candidates": [
+      {
+        "file": "olga-a-0.png",
+        "sha256": "04b3790261f82d4a7f78da45278a4a71f43843355f69e5f329c089696010f928",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "wat-a": {
+    "id": "wat-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-bd034f95-849c-4d7f-b280-1634f309258d",
+    "submittedAt": "2026-11-24T23:42:44.043Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Wat Greenhood portrait, head and shoulders of a chunky cute young yeoman archer knight: a freckled cheeky grinning face, messy ginger hair, a forest green hood pulled up over a light steel skullcap with a small crimson feather, a crimson surcoat with a gold-yellow cross, the curved wooden longbow and a quiver of white-fletched arrows over one shoulder."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53102,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Wat Greenhood portrait, head and shoulders of a chunky cute young yeoman archer knight: a freckled cheeky grinning face, messy ginger hair, a forest green hood pulled up over a light steel skullcap with a small crimson feather, a crimson surcoat with a gold-yellow cross, the curved wooden longbow and a quiver of white-fletched arrows over one shoulder. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, horse, visor, purple, crossbow."
+    },
+    "at": "2026-11-24T23:42:44.044Z",
+    "usageUsd": 0.006745763142903646,
+    "candidates": [
+      {
+        "file": "wat-a-0.png",
+        "sha256": "15a6a8c19147ef785edd15dd2ca0c96e6601f5e16eacd9192bea45c211a47ed6",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "ysolde-a": {
+    "id": "ysolde-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-c4dc9795-6b46-4e22-93a1-b892a6e65c13",
+    "submittedAt": "2026-11-24T23:43:04.423Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Dame Ysolde Brightlance portrait, head and shoulders of a chunky cute determined lady knight: a brave confident smile, a long thick golden braid over one shoulder, a polished shining open-faced light steel helmet with a tall crimson plume, a crimson surcoat with a gold-yellow cross over light steel mail, the tip of a lance with a small crimson pennant rising behind her shoulder."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53103,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Dame Ysolde Brightlance portrait, head and shoulders of a chunky cute determined lady knight: a brave confident smile, a long thick golden braid over one shoulder, a polished shining open-faced light steel helmet with a tall crimson plume, a crimson surcoat with a gold-yellow cross over light steel mail, the tip of a lance with a small crimson pennant rising behind her shoulder. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, horse, visor, purple, pink."
+    },
+    "at": "2026-11-24T23:43:04.424Z",
+    "usageUsd": 0.007051634364657932,
+    "candidates": [
+      {
+        "file": "ysolde-a-0.png",
+        "sha256": "aeffaf5eb06be6cd2051fc24fc26a30dd128c12a118956e73af31f62276e73cf",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "aldous-a": {
+    "id": "aldous-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-b82a04a6-1f4c-4b34-8675-946e25ef463c",
+    "submittedAt": "2026-11-24T23:43:24.352Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Captain Aldous Ferrow portrait, head and shoulders of a chunky cute veteran captain of knights: warm dark brown skin, a stern kind face, a short grey-black beard, a black eyepatch over one eye, an open-faced light steel helmet with a short crimson plume, a crimson surcoat with a gold-yellow cross, a small crimson banner with a gold-yellow cross on a pole beside his head."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53104,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Captain Aldous Ferrow portrait, head and shoulders of a chunky cute veteran captain of knights: warm dark brown skin, a stern kind face, a short grey-black beard, a black eyepatch over one eye, an open-faced light steel helmet with a short crimson plume, a crimson surcoat with a gold-yellow cross, a small crimson banner with a gold-yellow cross on a pole beside his head. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, horse, visor, purple, pirate hat."
+    },
+    "at": "2026-11-24T23:43:24.353Z",
+    "usageUsd": 0.006929835134082371,
+    "candidates": [
+      {
+        "file": "aldous-a-0.png",
+        "sha256": "da10b47092c5df6ab76b2d91dfee916e8ccf0b410e7db99f93f574dbf042f814",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "wilhelmina-a": {
+    "id": "wilhelmina-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-39e6fc40-cbc6-44b4-82e0-e82ae7b67658",
+    "submittedAt": "2026-11-24T23:43:52.934Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Abbess Wilhelmina portrait, head and shoulders of a chunky cute elderly kindly abbess enchantress: a round wrinkled rosy smiling face, small round gold spectacles, a cream wimple framing her face under a tall pointed crimson hat with a gold-yellow band, a crimson and cream robe, a glowing gold-yellow healing heart held up in one hand."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53105,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Abbess Wilhelmina portrait, head and shoulders of a chunky cute elderly kindly abbess enchantress: a round wrinkled rosy smiling face, small round gold spectacles, a cream wimple framing her face under a tall pointed crimson hat with a gold-yellow band, a crimson and cream robe, a glowing gold-yellow healing heart held up in one hand. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, unicorn, horse, armour, purple, pink, blonde hair."
+    },
+    "at": "2026-11-24T23:43:52.934Z",
+    "usageUsd": 0.008023891422483657,
+    "candidates": [
+      {
+        "file": "wilhelmina-a-0.png",
+        "sha256": "a42d58257b2a4949d62bfff88cab62caf4ce731352b804c64a41a9078515b7e7",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "tobias-a": {
+    "id": "tobias-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-dc23d24a-90ab-43fb-8a73-5046be4239e3",
+    "submittedAt": "2026-11-24T23:44:21.569Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Master Tobias Quill portrait, head and shoulders of a chunky cute young scholar enchanter: a thin smiling face, curly ink-black hair, big round spectacles, an ink smudge on his cheek, a tall pointed crimson hat with a gold-yellow band, a crimson and cream robe, a big white quill pen with gold-yellow sparkles held beside his face."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53106,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Master Tobias Quill portrait, head and shoulders of a chunky cute young scholar enchanter: a thin smiling face, curly ink-black hair, big round spectacles, an ink smudge on his cheek, a tall pointed crimson hat with a gold-yellow band, a crimson and cream robe, a big white quill pen with gold-yellow sparkles held beside his face. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, unicorn, horse, armour, purple, pink, beard."
+    },
+    "at": "2026-11-24T23:44:21.569Z",
+    "usageUsd": 0.008017597887251112,
+    "candidates": [
+      {
+        "file": "tobias-a-0.png",
+        "sha256": "310dce18c0bbcb54e22cdd4501c8e57b2f2234b8df6e9c28ced973346f9e9bc1",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "rosamund-a": {
+    "id": "rosamund-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-a5949a78-3b95-4d19-b211-11ba17d0c303",
+    "submittedAt": "2026-11-24T23:44:45.016Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Lady Rosamund of the Mere portrait, head and shoulders of a chunky cute serene lake lady enchantress: a calm gentle face, very long straight black hair with a white water lily in it, a tall pointed crimson hat with a flowing cream veil, a crimson and cream gown, a small floating pale blue water droplet glowing beside her hand."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53107,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Lady Rosamund of the Mere portrait, head and shoulders of a chunky cute serene lake lady enchantress: a calm gentle face, very long straight black hair with a white water lily in it, a tall pointed crimson hat with a flowing cream veil, a crimson and cream gown, a small floating pale blue water droplet glowing beside her hand. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, unicorn, horse, armour, purple, pink, blonde hair."
+    },
+    "at": "2026-11-24T23:44:45.017Z",
+    "usageUsd": 0.007399200677871705,
+    "candidates": [
+      {
+        "file": "rosamund-a-0.png",
+        "sha256": "b5921fbd79313e588c1eab920f6c47e02b69b676eb163eb81ffdf068ec9d81d9",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "maud-a": {
+    "id": "maud-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-3c1cb7fb-6d85-4728-81df-5a3f4d74e890",
+    "submittedAt": "2026-11-24T23:45:12.973Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Reeve Maud Pennywise portrait, head and shoulders of a chunky cute plump middle-aged village reeve enchantress: a round shrewd smiling face with rosy cheeks, curly copper-red hair, a tall pointed crimson hat with a gold-yellow band, a crimson and cream gown, a shiny gold coin held up between two fingers and a small bulging coin purse."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53108,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Reeve Maud Pennywise portrait, head and shoulders of a chunky cute plump middle-aged village reeve enchantress: a round shrewd smiling face with rosy cheeks, curly copper-red hair, a tall pointed crimson hat with a gold-yellow band, a crimson and cream gown, a shiny gold coin held up between two fingers and a small bulging coin purse. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, unicorn, horse, armour, purple, pink, blonde hair."
+    },
+    "at": "2026-11-24T23:45:12.973Z",
+    "usageUsd": 0.007352599249945747,
+    "candidates": [
+      {
+        "file": "maud-a-0.png",
+        "sha256": "27c096c49bae5876f2f56960482006a8c215f844aef53bc36ab93d08a029f2b5",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "mortimer-a": {
+    "id": "mortimer-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-fb5edf2d-a27b-4efd-a24f-94d493e93c1e",
+    "submittedAt": "2026-11-24T23:45:51.902Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Sir Mortimer Stillstanding portrait, head and shoulders of a chunky cute stiff upright undead knight: a long pale ivory skull face with glowing bright violet eye sockets, a long stringy grey cobweb beard hanging from the jaw, a tall dented dark iron helmet with a tarnished bronze rim and a tall straight near-black plume, dark iron pauldrons, a ragged near-black cape with thin bright violet trim."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53201,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Sir Mortimer Stillstanding portrait, head and shoulders of a chunky cute stiff upright undead knight: a long pale ivory skull face with glowing bright violet eye sockets, a long stringy grey cobweb beard hanging from the jaw, a tall dented dark iron helmet with a tarnished bronze rim and a tall straight near-black plume, dark iron pauldrons, a ragged near-black cape with thin bright violet trim. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, horse, red cloth, green skin, blood."
+    },
+    "at": "2026-11-24T23:45:51.903Z",
+    "usageUsd": 0.0067271174854702425,
+    "candidates": [
+      {
+        "file": "mortimer-a-0.png",
+        "sha256": "0f0d384667f02f14d075dbe8b9f380da296a888caf1a0ee1ed0c4a3e32edbca7",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "bartholomew-a": {
+    "id": "bartholomew-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-a0d27f18-5bde-4f14-a04d-e3662244bf9e",
+    "submittedAt": "2026-11-24T23:46:29.140Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Colonel Bartholomew Dust portrait, head and shoulders of a chunky cute pompous undead colonel: a pale ivory skull face with glowing bright violet eye sockets, a huge bushy grey handlebar moustache, a gold monocle in one eye socket, a dented dark iron helmet with a tarnished bronze rim and a ragged near-black plume, dark iron pauldrons with two tarnished bronze medals on the chest, puffs of grey dust."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53203,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Colonel Bartholomew Dust portrait, head and shoulders of a chunky cute pompous undead colonel: a pale ivory skull face with glowing bright violet eye sockets, a huge bushy grey handlebar moustache, a gold monocle in one eye socket, a dented dark iron helmet with a tarnished bronze rim and a ragged near-black plume, dark iron pauldrons with two tarnished bronze medals on the chest, puffs of grey dust. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, horse, red cloth, green skin, blood."
+    },
+    "at": "2026-11-24T23:46:29.141Z",
+    "usageUsd": 0.00892386637793647,
+    "candidates": [
+      {
+        "file": "bartholomew-a-0.png",
+        "sha256": "ece96ae841c0b8873633f3dafc990f0c11aa600ef5d308f2c8f1253d88a361c4",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "jeb-a": {
+    "id": "jeb-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-11528fc1-d392-4989-9765-1fec0494c10c",
+    "submittedAt": "2026-11-24T23:46:46.491Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Old Jeb the Gravedigger portrait, head and shoulders of a chunky cute old undead gravedigger: a pale ivory skull face with glowing bright violet eye sockets and a gap-toothed grin, a few wisps of white hair, a dented dark iron helmet with a tarnished bronze rim pushed back, a ragged near-black cape with thin bright violet trim, a rusty shovel over one shoulder, a small glowing violet crystal hanging at his neck."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53204,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Old Jeb the Gravedigger portrait, head and shoulders of a chunky cute old undead gravedigger: a pale ivory skull face with glowing bright violet eye sockets and a gap-toothed grin, a few wisps of white hair, a dented dark iron helmet with a tarnished bronze rim pushed back, a ragged near-black cape with thin bright violet trim, a rusty shovel over one shoulder, a small glowing violet crystal hanging at his neck. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, horse, red cloth, green skin, blood, straw hat."
+    },
+    "at": "2026-11-24T23:46:46.492Z",
+    "usageUsd": 0.006695733732647366,
+    "candidates": [
+      {
+        "file": "jeb-a-0.png",
+        "sha256": "9983863a09203c6ddf0141484288e69c5756f82e55451c55e4d2498106364d50",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "graves-a": {
+    "id": "graves-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-6353086c-17ee-4a2f-b0e4-2a90ef2ab059",
+    "submittedAt": "2026-11-24T23:47:02.964Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Mr Graves, Funeral Director portrait, head and shoulders of a chunky cute solemn funeral director: a long gaunt pale yellowish-white face, a tiny polite smile, slicked black hair, small round dark spectacles, a very tall near-black top hat with a bright violet band and a long black crape ribbon, a near-black frock coat with a cream collar and a black tie, hands clasped politely."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53301,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Mr Graves, Funeral Director portrait, head and shoulders of a chunky cute solemn funeral director: a long gaunt pale yellowish-white face, a tiny polite smile, slicked black hair, small round dark spectacles, a very tall near-black top hat with a bright violet band and a long black crape ribbon, a near-black frock coat with a cream collar and a black tie, hands clasped politely. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, skull face, donkey, red cloth, green skin, bell."
+    },
+    "at": "2026-11-24T23:47:02.965Z",
+    "usageUsd": 0.006670275131861369,
+    "candidates": [
+      {
+        "file": "graves-a-0.png",
+        "sha256": "44655353c68df0b6e9cb280cbfffb1d298edd38c9068cbf5cce517ee28660f1d",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "ophelia-a": {
+    "id": "ophelia-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-04d25079-03d7-45cb-bee9-717f7a66e88d",
+    "submittedAt": "2026-11-24T23:47:17.913Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Madame Ophelia Veil portrait, head and shoulders of a chunky cute mysterious lady mortician: a pale yellowish-white face, half-closed violet eyes, dark violet lips, long straight black hair, a small near-black top hat with a bright violet band and a black lace veil over one eye, a near-black frock coat with a black lace collar, a pale violet glowing candle held beside her face."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53302,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Madame Ophelia Veil portrait, head and shoulders of a chunky cute mysterious lady mortician: a pale yellowish-white face, half-closed violet eyes, dark violet lips, long straight black hair, a small near-black top hat with a bright violet band and a black lace veil over one eye, a near-black frock coat with a black lace collar, a pale violet glowing candle held beside her face. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, skull face, donkey, red cloth, green skin, bell."
+    },
+    "at": "2026-11-24T23:47:17.914Z",
+    "usageUsd": 0.006545773983001709,
+    "candidates": [
+      {
+        "file": "ophelia-a-0.png",
+        "sha256": "15923b84ad99b01192a015959c05ac2b333b518c3735ca55c34ecd79141758b7",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "ignatius-a": {
+    "id": "ignatius-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-1411af90-4956-4657-b2ba-830add7e06b2",
+    "submittedAt": "2026-11-24T23:47:38.785Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Doctor Ignatius Crane portrait, head and shoulders of a chunky cute thin elderly doctor mortician: a pale yellowish-white face with a very long pointed beak-like nose, white mutton-chop sideburns, silver pince-nez glasses, one bony finger raised to his lips saying hush, a short near-black top hat with a bright violet band, a near-black frock coat with a cream collar and a silver stethoscope."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53303,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Doctor Ignatius Crane portrait, head and shoulders of a chunky cute thin elderly doctor mortician: a pale yellowish-white face with a very long pointed beak-like nose, white mutton-chop sideburns, silver pince-nez glasses, one bony finger raised to his lips saying hush, a short near-black top hat with a bright violet band, a near-black frock coat with a cream collar and a silver stethoscope. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, skull face, donkey, red cloth, green skin, bird, plague mask."
+    },
+    "at": "2026-11-24T23:47:38.787Z",
+    "usageUsd": 0.007136005772484673,
+    "candidates": [
+      {
+        "file": "ignatius-a-0.png",
+        "sha256": "984554a01ab1d4ab12cd4598d257e4a9f50fc2d453dd2fb44ea7b34cbe18f6a5",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "hester-a": {
+    "id": "hester-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-b1d60cce-dbd2-49cd-b9b5-ef6c67004395",
+    "submittedAt": "2026-11-24T23:47:57.470Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Widow Hester Blackwood portrait, head and shoulders of a chunky cute stern old widow mortician: a pale yellowish-white wrinkled face, sunken violet eyes, a tight grey hair bun, a near-black top hat with a bright violet band and a long black mourning veil streaming back, a near-black frock coat with a cream collar and a violet cameo brooch, a small wailing pale violet ghost wisp beside her shoulder."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53304,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Widow Hester Blackwood portrait, head and shoulders of a chunky cute stern old widow mortician: a pale yellowish-white wrinkled face, sunken violet eyes, a tight grey hair bun, a near-black top hat with a bright violet band and a long black mourning veil streaming back, a near-black frock coat with a cream collar and a violet cameo brooch, a small wailing pale violet ghost wisp beside her shoulder. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, skull face, donkey, red cloth, green skin, bell."
+    },
+    "at": "2026-11-24T23:47:57.471Z",
+    "usageUsd": 0.006790563080045912,
+    "candidates": [
+      {
+        "file": "hester-a-0.png",
+        "sha256": "7084e2f6ea4fd28cc0ade2468cc2ec08ed9be69f575f8c22e0b7a07cbc7f211c",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "grukk-a": {
+    "id": "grukk-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-cb694a2f-8771-429b-87b2-628e0a732c22",
+    "submittedAt": "2026-11-24T23:48:16.001Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Grukk Manyteeth portrait, head and shoulders of a chunky cute scrappy goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, tiny beady eyes, an enormous wide grin crammed with far too many crooked cream teeth, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, a necklace of big cream teeth."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53401,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Grukk Manyteeth portrait, head and shoulders of a chunky cute scrappy goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, tiny beady eyes, an enormous wide grin crammed with far too many crooked cream teeth, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, a necklace of big cream teeth. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, boar, red cloth, skull, olive skin."
+    },
+    "at": "2026-11-24T23:48:16.002Z",
+    "usageUsd": 0.00688862050904168,
+    "candidates": [
+      {
+        "file": "grukk-a-0.png",
+        "sha256": "00bc3eddb26877ccfdcd87516e903502d4517c604f7652520e0fc705f68841b9",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "skarn-a": {
+    "id": "skarn-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-8d09c220-b7f5-4931-b3e7-5fef7e3d21bb",
+    "submittedAt": "2026-11-24T23:48:39.919Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Skarn the Loud portrait, head and shoulders of a chunky cute bellowing goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a scar across one cheek, eyes squeezed shut, mouth wide open in a huge shout, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, a battered tin megaphone horn held to his mouth."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53403,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Skarn the Loud portrait, head and shoulders of a chunky cute bellowing goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a scar across one cheek, eyes squeezed shut, mouth wide open in a huge shout, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, a battered tin megaphone horn held to his mouth. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, boar, red cloth, skull, olive skin, sound lines."
+    },
+    "at": "2026-11-24T23:48:39.920Z",
+    "usageUsd": 0.007422487682766385,
+    "candidates": [
+      {
+        "file": "skarn-a-0.png",
+        "sha256": "dfc25fc5a0edb65e045ad5592a3602f88208b08eff84e86d08330641f702da0c",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "nix-a": {
+    "id": "nix-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-8d2b573a-c90f-4551-a2a1-ea88eeca935c",
+    "submittedAt": "2026-11-24T23:49:03.592Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Nix Fingers portrait, head and shoulders of a chunky cute sly skinny goblin thief warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, narrow sneaky eyes, a sly smirk, a dented tin helmet painted hazard yellow #fdd20f tilted to one side, a pale sand-buff fur collar, a long-fingered hand covered in stolen gold rings flipping a shiny gold coin."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53404,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Nix Fingers portrait, head and shoulders of a chunky cute sly skinny goblin thief warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, narrow sneaky eyes, a sly smirk, a dented tin helmet painted hazard yellow #fdd20f tilted to one side, a pale sand-buff fur collar, a long-fingered hand covered in stolen gold rings flipping a shiny gold coin. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, boar, red cloth, skull, olive skin."
+    },
+    "at": "2026-11-24T23:49:03.593Z",
+    "usageUsd": 0.007375979079140557,
+    "candidates": [
+      {
+        "file": "nix-a-0.png",
+        "sha256": "ab362be5469750e653f708752e84ee1943306f4790944e432c3619769c0b61c8",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "squall-a": {
+    "id": "squall-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-79854ed0-e449-4bd2-9405-ec4e7eca31ac",
+    "submittedAt": "2026-11-24T23:49:19.868Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Old Mother Squall portrait, head and shoulders of a chunky cute ancient goblin storm crone: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a long hooked nose with a wart, one big snaggle tooth, huge wild white hair blown sideways by the wind, a dented tin pot hat with a small lightning rod, a hazard yellow #fdd20f shawl, a tiny dark grey storm cloud with a yellow lightning bolt over her raised hand."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53501,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Old Mother Squall portrait, head and shoulders of a chunky cute ancient goblin storm crone: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a long hooked nose with a wart, one big snaggle tooth, huge wild white hair blown sideways by the wind, a dented tin pot hat with a small lightning rod, a hazard yellow #fdd20f shawl, a tiny dark grey storm cloud with a yellow lightning bolt over her raised hand. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, goat, broom, purple glow, red cloth."
+    },
+    "at": "2026-11-24T23:49:19.869Z",
+    "usageUsd": 0.00665973867310418,
+    "candidates": [
+      {
+        "file": "squall-a-0.png",
+        "sha256": "47fabb8cc0e04e29e4e55b3bdd86cb049d88148e06c4031539655bd5388a1df9",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "zizzik-a": {
+    "id": "zizzik-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-86f654f0-fc9a-4332-b672-7b204e1d02ae",
+    "submittedAt": "2026-11-24T23:49:35.247Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Zizzik Sparkwhisker portrait, head and shoulders of a chunky cute young twitchy goblin spark witch: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, wide excited eyes, long frazzled white whiskers crackling with little yellow sparks, round brass goggles pushed up on a dented tin pot hat with a sparking lightning rod, a hazard yellow #fdd20f shawl."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53502,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Zizzik Sparkwhisker portrait, head and shoulders of a chunky cute young twitchy goblin spark witch: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, wide excited eyes, long frazzled white whiskers crackling with little yellow sparks, round brass goggles pushed up on a dented tin pot hat with a sparking lightning rod, a hazard yellow #fdd20f shawl. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, goat, broom, purple glow, red cloth, cat."
+    },
+    "at": "2026-11-24T23:49:35.248Z",
+    "usageUsd": 0.006579306205113729,
+    "candidates": [
+      {
+        "file": "zizzik-a-0.png",
+        "sha256": "8e50a985aa6893088198568e84c0f8e7a9429cdab324491c540ec67511ff44f4",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "snagga-a": {
+    "id": "snagga-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-56e66efb-f616-485c-a25d-d46b5f474e22",
+    "submittedAt": "2026-11-24T23:49:50.091Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Snagga Three-Kettles portrait, head and shoulders of a chunky cute plump goblin storm witch: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a big gap-toothed grin, frizzy grey hair, a tall hat made of three stacked dented tin kettles with a small lightning rod on top and white steam puffing from the spouts, a hazard yellow #fdd20f shawl."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53503,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Snagga Three-Kettles portrait, head and shoulders of a chunky cute plump goblin storm witch: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a big gap-toothed grin, frizzy grey hair, a tall hat made of three stacked dented tin kettles with a small lightning rod on top and white steam puffing from the spouts, a hazard yellow #fdd20f shawl. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, goat, broom, purple glow, red cloth."
+    },
+    "at": "2026-11-24T23:49:50.092Z",
+    "usageUsd": 0.006525072415669759,
+    "candidates": [
+      {
+        "file": "snagga-a-0.png",
+        "sha256": "fdcc8867e6710240eecb9d15096f501a656513818642d9c16290f602cec5c609",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "pim-a": {
+    "id": "pim-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-e053d2c2-dadb-452e-9802-552e4ecd3c64",
+    "submittedAt": "2026-11-24T23:50:13.028Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Pim Powderkeg portrait, head and shoulders of a chunky cute small round goblin bomb witch: bright lime green skin #86c232 with a lighter #acdc55 face smudged with black soot, huge pointed ears, singed frizzy eyebrows, a delighted grin, a dented scorched tin pot hat with a small lightning rod, a hazard yellow #fdd20f shawl, a round black bomb with a lit sparking fuse held up beside her face."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53504,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Pim Powderkeg portrait, head and shoulders of a chunky cute small round goblin bomb witch: bright lime green skin #86c232 with a lighter #acdc55 face smudged with black soot, huge pointed ears, singed frizzy eyebrows, a delighted grin, a dented scorched tin pot hat with a small lightning rod, a hazard yellow #fdd20f shawl, a round black bomb with a lit sparking fuse held up beside her face. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, goat, broom, purple glow, red cloth, explosion."
+    },
+    "at": "2026-11-24T23:50:13.030Z",
+    "usageUsd": 0.007290547132492066,
+    "candidates": [
+      {
+        "file": "pim-a-0.png",
+        "sha256": "6562973f798cb8c451960edbddd05a9a10ad3bb888a3bb2beb1b1155d35c920a",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "ysolde-a-bust": {
+    "id": "ysolde-a-bust",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "c21cc1cd-3244-4aa5-8059-8fdef0b6b391",
+    "submittedAt": "2026-11-24T23:52:05.126Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the open-faced light steel helmet with the tall crimson plume, her brave smiling face and golden hair, the crimson surcoat with the gold-yellow cross at the bottom edge. Keep the colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take named-heroes/ysolde-a#0 sha256 aeffaf5eb06be6cd2051fc24fc26a30dd128c12a118956e73af31f62276e73cf",
+      "width": 48,
+      "height": 48,
+      "seed": 53113,
+      "no_background": true,
+      "description": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the open-faced light steel helmet with the tall crimson plume, her brave smiling face and golden hair, the crimson surcoat with the gold-yellow cross at the bottom edge. Keep the colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-24T23:52:20.621Z",
+    "candidates": [
+      {
+        "file": "ysolde-a-bust-0.png",
+        "sha256": "e6851c3c54b5818150f5e55c4d54e67a9288940854462df6398f2afcd1bdf7b0",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "ysolde-a-bust-1.png",
+        "sha256": "e6851c3c54b5818150f5e55c4d54e67a9288940854462df6398f2afcd1bdf7b0",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "jeb-a-bust": {
+    "id": "jeb-a-bust",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "9c0ba578-987b-4987-a673-0c83e17c7e4b",
+    "submittedAt": "2026-11-24T23:52:20.782Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the pale ivory skull with glowing violet eye sockets and gap-toothed grin, the wisps of white hair, the dented dark iron helmet, the top of the shovel over his shoulder, the near-black cape with violet trim at the bottom edge. Keep the colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take named-heroes/jeb-a#0 sha256 9983863a09203c6ddf0141484288e69c5756f82e55451c55e4d2498106364d50",
+      "width": 48,
+      "height": 48,
+      "seed": 53214,
+      "no_background": true,
+      "description": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the pale ivory skull with glowing violet eye sockets and gap-toothed grin, the wisps of white hair, the dented dark iron helmet, the top of the shovel over his shoulder, the near-black cape with violet trim at the bottom edge. Keep the colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-24T23:52:51.581Z",
+    "usageUsd": 0.007744756910536024,
+    "candidates": [
+      {
+        "file": "jeb-a-bust-0.png",
+        "sha256": "2105a59bae3622ae4f9bbd9adc73a0c7bd6bfc5f7a9a9712e78f9040f08fd9c1",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "jeb-a-bust-1.png",
+        "sha256": "2105a59bae3622ae4f9bbd9adc73a0c7bd6bfc5f7a9a9712e78f9040f08fd9c1",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "ophelia-a-bust": {
+    "id": "ophelia-a-bust",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "bf10c51b-ad1b-49bf-89d9-58508f4d5cf3",
+    "submittedAt": "2026-11-24T23:52:51.701Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: her pale face with half-closed violet eyes, long straight black hair, the small near-black top hat with the bright violet band and the black lace veil, the glowing violet candle beside her face. Keep the colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take named-heroes/ophelia-a#0 sha256 15923b84ad99b01192a015959c05ac2b333b518c3735ca55c34ecd79141758b7",
+      "width": 48,
+      "height": 48,
+      "seed": 53315,
+      "no_background": true,
+      "description": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: her pale face with half-closed violet eyes, long straight black hair, the small near-black top hat with the bright violet band and the black lace veil, the glowing violet candle beside her face. Keep the colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-24T23:53:12.238Z",
+    "usageUsd": 0.006796718968285455,
+    "candidates": [
+      {
+        "file": "ophelia-a-bust-0.png",
+        "sha256": "c25ff01973fbfa4a78e6824fb4dbe3c0436f99ed71636933b3bf5e4dbc07721d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "ophelia-a-bust-1.png",
+        "sha256": "c25ff01973fbfa4a78e6824fb4dbe3c0436f99ed71636933b3bf5e4dbc07721d",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "grukk-b": {
+    "id": "grukk-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-7dd167a3-542f-4386-81f1-ffda9fa6b24e",
+    "submittedAt": "2026-11-24T23:53:33.934Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Grukk Manyteeth portrait, head and shoulders of a chunky cute scrappy goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, tiny beady eyes, an enormous wide open grin showing two rows of dozens of small crooked cream teeth, a shiny dented tin helmet painted bright hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, a necklace of big cream teeth."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 53411,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Grukk Manyteeth portrait, head and shoulders of a chunky cute scrappy goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, tiny beady eyes, an enormous wide open grin showing two rows of dozens of small crooked cream teeth, a shiny dented tin helmet painted bright hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, a necklace of big cream teeth. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, boar, red cloth, skull, olive skin, brown helmet, leather helmet."
+    },
+    "at": "2026-11-24T23:53:33.935Z",
+    "usageUsd": 0.007162486897574531,
+    "candidates": [
+      {
+        "file": "grukk-b-0.png",
+        "sha256": "61916a7d95657e9b68c0003efacd6ea0b4cdf59e9b952194b7ed4d8cc4fc0900",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  }
+}

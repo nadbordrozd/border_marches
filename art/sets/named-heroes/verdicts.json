@@ -1,0 +1,157 @@
+{
+  "cuthbert-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Sir Cuthbert: an old knight with a big white beard and moustache and rosy face under the class helmet and crimson plume, crimson surcoat with gold cross and steel pauldrons; distinct from the class portrait by age and beard; bust a little smaller than the class one but reads at 48 px on light and dark",
+    "at": "2026-11-24T23:42:23.498Z"
+  },
+  "agatha-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Dowager Countess Agatha: silver beehive wig with a bronze tiara, violet eyes and fangs, high near-black vampire collar, iron pauldrons, pearls; a pale vampire face rather than the class skull (fits her Vampire specialty), collar lining more magenta than violet; clearly a distinct Restless noblewoman at 48 px",
+    "at": "2026-11-24T23:42:23.545Z"
+  },
+  "olga-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Big Olga Anvilfist: horned hazard yellow tin helmet, ginger braids, tusks, fur cape and a big iron gauntlet fist; skin is a darker olive-lime than the class lime (accepted, still a Horde goblin by helmet and ears); distinct from the Warlord at 48 px",
+    "at": "2026-11-24T23:42:23.593Z"
+  },
+  "wat-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Wat Greenhood: freckled young archer in a forest green hood over the steel helmet, crimson surcoat with gold cross, longbow and quiver over the shoulder; Realm costume kept, distinct by hood, youth and bow; reads at 48 px on light and dark",
+    "at": "2026-11-24T23:51:19.897Z"
+  },
+  "aldous-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Captain Aldous Ferrow: dark-skinned veteran with a grey-black beard and black eyepatch under the plumed class helmet, crimson surcoat with gold cross, a small pennant at his shoulder; distinct face and age; reads at 48 px",
+    "at": "2026-11-24T23:51:19.975Z"
+  },
+  "wilhelmina-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Abbess Wilhelmina: elderly abbess with round gold spectacles and a cream wimple under the crimson pointed hat, crimson robe, a gold healing sparkle in hand; class costume kept; distinct by age and wimple; reads at 48 px",
+    "at": "2026-11-24T23:51:20.053Z"
+  },
+  "tobias-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Master Tobias Quill: young scholar with curly black hair and big round spectacles under the crimson pointed hat, crimson and cream robe, a big white quill; distinct by face and quill; reads at 48 px",
+    "at": "2026-11-24T23:51:20.126Z"
+  },
+  "rosamund-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Lady Rosamund of the Mere: long black hair, white lilies and a cream veil on the crimson pointed hat, crimson and cream gown, a pale blue water droplet; shows to the waist like the class portrait; distinct; reads at 48 px",
+    "at": "2026-11-24T23:51:20.203Z"
+  },
+  "maud-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Reeve Maud Pennywise: plump copper-haired reeve in the crimson pointed hat and gown holding up a gold coin, coin purse at her side; shows to the waist like the class portrait; distinct by hair and coins; reads at 48 px",
+    "at": "2026-11-24T23:51:20.279Z"
+  },
+  "mortimer-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Sir Mortimer Stillstanding: skull with a long grey cobweb beard under a tall iron helm with a bronze band and a straight near-black plume, heavy iron pauldrons; Restless palette; distinct by beard and stiff tall helm; reads at 48 px",
+    "at": "2026-11-24T23:51:20.363Z"
+  },
+  "bartholomew-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Colonel Bartholomew Dust: skull with a huge grey handlebar moustache under a bronze-rimmed iron helm with a plume, iron pauldrons, medals and dust puffs; a small red-green sash is off palette (accepted, small); distinct; reads at 48 px",
+    "at": "2026-11-24T23:51:20.441Z"
+  },
+  "graves-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Mr Graves: thin solemn director with slicked hair and round spectacles under a tall top hat with a violet band and crape ribbon, black coat, hands clasped; bust a little small; distinct from the class bell-ringer; reads at 48 px",
+    "at": "2026-11-24T23:51:20.517Z"
+  },
+  "ignatius-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Doctor Ignatius Crane: old doctor with a long beak nose, white mutton chops and pince-nez under a top hat with a violet band, black coat; clear and distinct; reads at 48 px on light and dark",
+    "at": "2026-11-24T23:51:20.593Z"
+  },
+  "hester-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Widow Hester Blackwood: stern grey-haired widow with a violet cameo under a violet-banded top hat with a black veil, a little ghost wisp at her shoulder; Restless palette; distinct; reads at 48 px",
+    "at": "2026-11-24T23:51:20.671Z"
+  },
+  "skarn-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Skarn the Loud: lime goblin shouting through a tin megaphone under the spiked hazard yellow helmet, fur cape; a little smaller than the class bust but the shout reads; distinct; reads at 48 px",
+    "at": "2026-11-24T23:51:20.760Z"
+  },
+  "nix-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Nix Fingers: sly-eyed lime goblin under a tilted hazard yellow tin helmet with a fur collar, one hand raised (the rings and coin did not come through); distinct by sly face and round helmet; reads at 48 px",
+    "at": "2026-11-24T23:51:20.844Z"
+  },
+  "squall-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Old Mother Squall: crone with wild white hair blown sideways under the tin pot hat with lightning rod, hazard yellow shawl; the windswept hair makes her silhouette distinct; reads at 48 px",
+    "at": "2026-11-24T23:51:20.926Z"
+  },
+  "zizzik-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Zizzik Sparkwhisker: wide-eyed goblin with brass goggles on a pot hat, spark-crackling whiskers, orange-yellow shawl; the rod spark is violet rather than yellow (small, accepted); distinct; reads at 48 px",
+    "at": "2026-11-24T23:51:21.005Z"
+  },
+  "snagga-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Snagga Three-Kettles: grinning goblin under a tall stacked tin kettle hat with a rod and steam puffs, hazard yellow shawl; face small but the kettle stack is a unique silhouette; reads at 48 px",
+    "at": "2026-11-24T23:51:21.084Z"
+  },
+  "pim-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Pim Powderkeg: round grinning goblin under a scorched pot hat holding a lit bomb, brown shawl (less yellow than the class); the bomb makes him distinct; reads at 48 px",
+    "at": "2026-11-24T23:51:21.162Z"
+  },
+  "ysolde-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a small whole figure to the knees with a tiny face at 48 px, not a bust (fixed by the zoom edit ysolde-a-bust)",
+    "at": "2026-11-24T23:54:01.193Z"
+  },
+  "ysolde-a-bust#1": {
+    "verdict": "ACCEPTED",
+    "notes": "Dame Ysolde Brightlance: head-and-shoulders bust after the zoom edit: golden-haired lady knight with a bright smile under the plumed open-faced helmet, crimson surcoat with gold cross, crimson pennant at her shoulder; matches the class bust scale; reads at 48 px on light and dark",
+    "at": "2026-11-24T23:54:01.255Z"
+  },
+  "ysolde-a-bust#0": {
+    "verdict": "REJECTED",
+    "notes": "good too, but the crimson cape crowds the face; #1 fills the square better",
+    "at": "2026-11-24T23:54:01.317Z"
+  },
+  "jeb-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a small whole figure with a tiny face at 48 px, not a bust (fixed by the zoom edit jeb-a-bust)",
+    "at": "2026-11-24T23:54:01.377Z"
+  },
+  "jeb-a-bust#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Old Jeb the Gravedigger: bust after the zoom edit: skull with violet eyes and wisps of white hair under a dented iron helmet, shovel over the shoulder, near-black cape with violet trim; distinct from the class Revenant by the shovel and hair; reads at 48 px",
+    "at": "2026-11-24T23:54:01.435Z"
+  },
+  "jeb-a-bust#1": {
+    "verdict": "REJECTED",
+    "notes": "near-identical to #0 with less of the shovel; #0 kept",
+    "at": "2026-11-24T23:54:01.492Z"
+  },
+  "ophelia-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a small whole figure with a tiny dark face at 48 px, not a bust (fixed by the zoom edit ophelia-a-bust)",
+    "at": "2026-11-24T23:54:01.554Z"
+  },
+  "ophelia-a-bust#1": {
+    "verdict": "ACCEPTED",
+    "notes": "Madame Ophelia Veil: bust after the zoom edit: pale lady with long black hair and violet lips, black lace veil under a small top hat with a violet band, violet candle beside her face; the lace veil carries her name; reads at 48 px on light and dark",
+    "at": "2026-11-24T23:54:01.614Z"
+  },
+  "ophelia-a-bust#0": {
+    "verdict": "REJECTED",
+    "notes": "good too, but the veil does not read; #1 kept",
+    "at": "2026-11-24T23:54:01.675Z"
+  },
+  "grukk-a#0": {
+    "verdict": "REJECTED",
+    "notes": "the helmet came back brown leather rather than hazard yellow and the many teeth do not read (re-rolled as grukk-b)",
+    "at": "2026-11-24T23:54:01.760Z"
+  },
+  "grukk-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Grukk Manyteeth: lime goblin with a huge grin of many crooked teeth under the spiked hazard yellow tin helmet, fur cape and a necklace of teeth; the mouth makes him distinct from the Warlord; reads at 48 px on light and dark",
+    "at": "2026-11-24T23:54:01.821Z"
+  }
+}

@@ -17,7 +17,13 @@
  * Wars portrait for imports, a generated bust for heroes, and a 1:1
  * head-and-shoulders crop of the sprite's master for the new creatures.
  */
-import type { Point, UnitAsset, UnitArtFaction, UnitFeet } from "./manifest";
+import type {
+  Point,
+  PortraitAsset,
+  UnitAsset,
+  UnitArtFaction,
+  UnitFeet,
+} from "./manifest";
 
 type Row = readonly [
   key: string,
@@ -72,6 +78,8 @@ const UNIT_ROWS: readonly Row[] = [
   ["undead-late-king", "undead", 88, 104, [102, 26, 39, 8, 67]],
   // The Goblin Horde: new (the other five were imported by xaj.4).
   ["goblin-boomshaman", "goblin", 56, 80, [72, 14, 32, 7, 47]],
+  // The Orc Warboss redrawn at the tier 6 canvas (bead bzc.29).
+  ["goblin-orc-warboss-giant", "goblin", 88, 104, [90, 24, 37, 7, 61]],
   // Strays and caretakers: imports from other Pulp Wars rosters.
   ["cult-imp", "neutral", 56, 80, [76, 22, 40, 10, 46]],
   ["cult-tentacle", "neutral", 56, 80, [76, 11, 44, 2, 53]],
@@ -112,3 +120,54 @@ const HERO_ROWS: readonly Row[] = [
 
 export const V02_UNIT_ASSETS: readonly UnitAsset[] = UNIT_ROWS.map(toAsset);
 export const V02_HERO_ASSETS: readonly UnitAsset[] = HERO_ROWS.map(toAsset);
+
+/**
+ * The 24 named heroes' own 48x48 portraits (set named-heroes, bead
+ * border_marches-bzc.29): [named hero id, its class's map sprite key]. Each
+ * keeps its class costume and is drawn as its own person; look them up with
+ * `namedHeroPortrait` in unit-art.ts.
+ */
+const NAMED_HERO_ROWS: readonly (readonly [heroId: string, unit: string])[] = [
+  // The Realm.
+  ["cuthbert", "hero-knight-errant"],
+  ["wat", "hero-knight-errant"],
+  ["ysolde", "hero-knight-errant"],
+  ["aldous", "hero-knight-errant"],
+  ["wilhelmina", "hero-enchanter"],
+  ["tobias", "hero-enchanter"],
+  ["rosamund", "hero-enchanter"],
+  ["maud", "hero-enchanter"],
+  // The Restless.
+  ["mortimer", "hero-revenant"],
+  ["agatha", "hero-revenant"],
+  ["bartholomew", "hero-revenant"],
+  ["jeb", "hero-revenant"],
+  ["graves", "hero-mortician"],
+  ["ophelia", "hero-mortician"],
+  ["ignatius", "hero-mortician"],
+  ["hester", "hero-mortician"],
+  // The Goblin Horde.
+  ["grukk", "hero-warlord"],
+  ["olga", "hero-warlord"],
+  ["skarn", "hero-warlord"],
+  ["nix", "hero-warlord"],
+  ["squall", "hero-weatherwitch"],
+  ["zizzik", "hero-weatherwitch"],
+  ["snagga", "hero-weatherwitch"],
+  ["pim", "hero-weatherwitch"],
+];
+
+/** Portrait key of a named hero's own portrait. */
+export function namedPortraitKey(heroId: string): string {
+  return `portrait-named-${heroId}`;
+}
+
+export const NAMED_HERO_PORTRAITS: readonly PortraitAsset[] =
+  NAMED_HERO_ROWS.map(([heroId, unit]) => ({
+    key: namedPortraitKey(heroId),
+    path: `assets/portraits/named-${heroId}.png`,
+    w: 48,
+    h: 48,
+    category: "portrait",
+    unit,
+  }));

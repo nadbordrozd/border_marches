@@ -7,10 +7,13 @@
  * instead of throwing, so new content can ship before its art.
  *
  * Which sprite each id uses, new or reused, is recorded in
- * docs/art/V02_UNIT_ART.md.
+ * docs/art/V02_UNIT_ART.md. The 24 named heroes have their own portraits
+ * (bead border_marches-bzc.29): {@link namedHeroPortrait}.
  */
+import { findHeroDef } from "../data/players.ts";
 import { assetByKey, HERO_ASSETS, UNIT_ASSETS } from "./manifest";
 import type { PortraitAsset, UnitAsset } from "./manifest";
+import { NAMED_HERO_PORTRAITS } from "./v02-units";
 
 /** Creature id -> UNIT_ASSETS key. */
 export const CREATURE_ART: Readonly<Record<string, string>> = {
@@ -41,7 +44,7 @@ export const CREATURE_ART: Readonly<Record<string, string>> = {
   "wolf-rider": "goblin-wolf-rider",
   boomshaman: "goblin-boomshaman",
   ogre: "goblin-ogre",
-  "orc-warboss": "goblin-orc-warboss",
+  "orc-warboss": "goblin-orc-warboss-giant",
   // Strays and caretakers (CONTENT_CREATURES.md section 1).
   bellhop: "stray-bellhop",
   "whipping-boy": "stray-whipping-boy",
@@ -143,4 +146,31 @@ export function unitPortrait(creatureId: string): PortraitAsset {
 /** The 48x48 portrait of a hero class (the placeholder's when unknown). */
 export function heroPortrait(classId: string): PortraitAsset {
   return assetByKey(heroArt(classId).portrait) as PortraitAsset;
+}
+
+const NAMED = new Map(
+  NAMED_HERO_PORTRAITS.map((asset) => [
+    asset.key.slice("portrait-named-".length),
+    asset,
+  ]),
+);
+
+/** True when the named hero (by definition id) has its own portrait. */
+export function hasNamedHeroPortrait(heroId: string): boolean {
+  return NAMED.has(artId(heroId));
+}
+
+/**
+ * The 48x48 portrait of a named hero by its definition id (`cuthbert`, a
+ * hero's `defId`). A hero without its own portrait shows its class
+ * portrait: `heroClass` when given, else the class of its definition, else
+ * the placeholder hero's.
+ */
+export function namedHeroPortrait(
+  heroId: string,
+  heroClass?: string,
+): PortraitAsset {
+  const own = NAMED.get(artId(heroId));
+  if (own !== undefined) return own;
+  return heroPortrait(heroClass ?? findHeroDef(heroId)?.heroClass ?? "");
 }

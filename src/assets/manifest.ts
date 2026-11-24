@@ -42,7 +42,11 @@ import { MAP_OBJECT_ASSETS } from "./map-objects";
 import { PEAK_ASSETS } from "./peaks";
 import { TREE_ASSETS } from "./trees";
 import { BUILDING_ART_ASSETS, TOWN_BACKDROP_ASSETS } from "./town-buildings";
-import { V02_HERO_ASSETS, V02_UNIT_ASSETS } from "./v02-units";
+import {
+  NAMED_HERO_PORTRAITS,
+  V02_HERO_ASSETS,
+  V02_UNIT_ASSETS,
+} from "./v02-units";
 
 /** Master pixels per map cell. */
 export const CELL_PX = 80;
@@ -408,9 +412,12 @@ export const HERO_ASSETS: readonly UnitAsset[] = [
 ];
 
 export const PORTRAIT_ASSETS: readonly PortraitAsset[] = [
-  ...UNIT_ASSETS,
-  ...HERO_ASSETS,
-].map((asset) => portrait(asset.key, 48, 48));
+  ...[...UNIT_ASSETS, ...HERO_ASSETS].map((asset) =>
+    portrait(asset.key, 48, 48),
+  ),
+  // The 24 named heroes' own portraits (bead bzc.29).
+  ...NAMED_HERO_PORTRAITS,
+];
 
 // ------------------------------------------------------------------ towns
 

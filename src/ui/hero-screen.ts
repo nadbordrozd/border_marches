@@ -45,6 +45,7 @@ import {
   wornDef,
   type ArtifactDef,
 } from "../data/artifacts.ts";
+import { namedHeroPortrait } from "../assets/unit-art.ts";
 import { COMMANDS, getHeroClass } from "../data/classes.ts";
 import {
   PRIMARY_STATS,
@@ -260,7 +261,7 @@ export async function openHeroScreen(
       "div.hs-col.hs-left",
       el(
         "div.hs-id",
-        img(cls.portrait, "hs-portrait", 2),
+        img(namedHeroPortrait(h.defId, h.heroClass).key, "hs-portrait", 2),
         el(
           "div",
           el("div.hs-name", h.name),

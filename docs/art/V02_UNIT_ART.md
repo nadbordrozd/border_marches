@@ -31,7 +31,8 @@ placeholder (`stray-shade` for creatures, `dinosaur-chieftain` for heroes).
 | `gravecaller` | `undead-necromancer` | Pulp Wars `necromancer` |
 | `vampire` | `undead-vampire` | Pulp Wars (imported by xaj.4) |
 | `late-king` | `undead-late-king` | new (`late-king-b`, giant) |
-| `goblin`, `bomb-chucker`, `wolf-rider`, `ogre`, `orc-warboss` | `goblin-*` | Pulp Wars (imported by xaj.4) |
+| `goblin`, `bomb-chucker`, `wolf-rider`, `ogre` | `goblin-*` | Pulp Wars (imported by xaj.4) |
+| `orc-warboss` | `goblin-orc-warboss-giant` | new (`orc-warboss-giant-a`, giant, bead bzc.29) after the imported 56x80 `goblin-orc-warboss`, which stays registered |
 | `boomshaman` | `goblin-boomshaman` | new (`boomshaman-b`) |
 | `gremlin` | `cult-imp` | Pulp Wars Cult imp |
 | `bog-leech` | `cult-tentacle` | Pulp Wars Cult tentacle |
@@ -57,8 +58,31 @@ reads as a creature stack (72x88, like the Chieftain):
 | `warlord` | `hero-warlord` | war boar |
 | `weatherwitch` | `hero-weatherwitch` | shaggy goat |
 
-Each class has a generated 48x48 bust (`portrait-hero-<class>`). The 24
-named heroes share their class portrait for now.
+Each class has a generated 48x48 bust (`portrait-hero-<class>`).
+
+## Named heroes (bead `border_marches-bzc.29`)
+
+Each of the 24 named heroes (`NAMED_HEROES` in `src/data/classes.ts`) has
+its own 48x48 portrait, `portrait-named-<hero id>` at
+`assets/portraits/named-<hero id>.png`, from the set `named-heroes`: the
+class portraits' endpoint, layers and options, the class costume and
+colours kept, and the person made distinct by face, hair, age and one
+accessory from the name or specialty (Wat's green hood and longbow,
+Aldous's eyepatch and banner, Jeb's shovel, Ignatius's beak nose and hush,
+Snagga's three kettles, Pim's bomb). Three came back as small whole
+figures and got the LESSONS 4.1 zoom edit (Ysolde, Jeb, Ophelia); Grukk was
+re-rolled for a hazard yellow helmet and more teeth.
+
+`namedHeroPortrait(heroId, heroClass?)` in `src/assets/unit-art.ts` returns
+the hero's own portrait, else the class portrait (from `heroClass` or the
+hero definition), else the placeholder's. It is used by the tavern, the
+hero list and hero panel, the hero screen, the level-up dialog and the
+battle screen, which now shows the portrait of each side's hero at the left
+of its bottom bar (`BattleHero` carries `defId` and `heroClass` for this).
+
+Accepted with small notes in `verdicts.json`: Agatha has a pale vampire
+face rather than the class skull (her Vampire specialty), Olga's skin is a
+darker lime, Pim's shawl is brown.
 
 ## Portraits
 
@@ -81,6 +105,11 @@ named heroes share their class portrait for now.
 
 ## Review evidence
 
+Bead bzc.29: `.orchestration/screens/bzc29/` in its worktree: `realm.png`,
+`restless.png`, `horde.png` (each named hero beside its class portrait,
+native and x3, light and dark), `takes-all.png` (every take of the set) and
+`battle-heroes.png` (the battle bottom bar with a hero portrait).
+
 Contact sheets and line-ups (git-ignored) in the bead's worktree under
 `.orchestration/screens/bzc14/`: `takes-*.png` (every take, native and x2,
 light and dark), `outputs-*.png` (game files), `imported-*.png`, and
@@ -90,7 +119,6 @@ by `art/review/measure-units.mjs` (the Pulp Wars rule).
 
 ## Follow-ups
 
-- The Orc Warboss (tier 6) is a standard 56x80 Pulp Wars sprite, smaller
-  than the other tier 6 units (88x104); a giant redraw would match them.
-- Named-hero portraits (24) when the budget allows.
+- Done in bzc.29: the Orc Warboss giant redraw (88x104) and the 24
+  named-hero portraits.
 - Defender-facing (south-west) takes, per ART_DIRECTION section 7.
