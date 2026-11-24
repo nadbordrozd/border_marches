@@ -1,15 +1,17 @@
 /**
- * Town commands: building, recruiting, moving stacks between the hero and
- * the garrison, and the marketplace (FACTION_LOST_WORLD.md section 6,
- * ECONOMY.md section 7).
+ * Town commands: building, recruiting, moving stacks between armies (hero,
+ * garrison, a neighbouring own hero) and the marketplace
+ * (FACTION_LOST_WORLD.md section 6, ECONOMY.md section 7, RULES_V2 5.3).
+ *
+ * Buildings come from the town's faction tree (src/data/factions.ts).
  */
-import { BUILDING_IDS, BUILDINGS, isBuildingId } from "../../data/buildings.ts";
 import { getCreature, isCreatureId } from "../../data/creatures.ts";
 import {
   MARKET_BUY_PRICE,
   MARKET_SELL_PRICE,
   RESOURCE_IDS,
 } from "../../data/economy.ts";
+import { buildingDef, townTree } from "../../data/factions.ts";
 import { ARMY_SLOTS } from "../../data/hero.ts";
 import type { BuildingId, CreatureId, ResourceId } from "../../data/types.ts";
 import { weeklyGrowth } from "./progression.ts";
@@ -17,7 +19,9 @@ import { canAfford, scaleResources, subtractResources } from "./resources.ts";
 import {
   addToArmy,
   armySize,
+  builtDefs,
   checkPlaying,
+  checkTurn,
   cloneState,
   must,
   fail,
@@ -53,8 +57,8 @@ export function buildStatus(
 ): BuildStatus {
   const town = state.towns[townId];
   if (town === undefined || town.owner === null) return "not-owner";
-  if (town.faction !== "lost-world") return "wrong-faction";
-  const def = BUILDINGS[building];
+  const def = buildingDef(town.faction, building);
+  if (def === undefined) return "wrong-faction";
   if (town.buildings.includes(building)) return "built";
   if (def.startBuilt) return "start-only";
   if (town.builtToday) return "built-today";
@@ -80,19 +84,22 @@ const BUILD_ERRORS = {
 
 /**
  * Builds in a town: one building per town per day, requirements met, cost
- * paid by the owner. A new dwelling is stocked with one week's growth.
+ * paid by the owner on its turn. A new dwelling is stocked with one week's
+ * growth.
  */
 export function build(
   state: GameState,
   townId: string,
   building: BuildingId,
 ): CommandResult {
-  const blocked = checkPlaying(state);
+  const playing = checkPlaying(state);
+  if (playing !== null) return playing;
+  const town0 = state.towns[townId];
+  if (town0 === undefined) return fail("unknown-town", `no town ${townId}`);
+  const blocked = checkTurn(state, town0.owner);
   if (blocked !== null) return blocked;
-  if (state.towns[townId] === undefined) {
-    return fail("unknown-town", `no town ${townId}`);
-  }
-  if (!isBuildingId(building)) {
+  const def = buildingDef(town0.faction, building);
+  if (typeof building !== "string" || def === undefined) {
     return fail("unknown-building", `no building ${String(building)}`);
   }
   const status = buildStatus(state, townId, building);
@@ -105,15 +112,15 @@ export function build(
     next.players.find((p) => p.id === town.owner),
     "player",
   );
-  const def = BUILDINGS[building];
   player.resources = subtractResources(player.resources, def.cost);
+  const order = townTree(town.faction)?.order ?? [];
   town.buildings = [...town.buildings, building];
-  town.buildings.sort((a, b) => buildingOrder(a) - buildingOrder(b));
+  town.buildings.sort((a, b) => order.indexOf(a) - order.indexOf(b));
   town.builtToday = true;
   if (def.dwelling !== undefined) {
     const g = weeklyGrowth(
       getCreature(def.dwelling).growth,
-      town.buildings.includes("stockade"),
+      builtDefs(town).some((d) => d.growthBonus === true),
       0,
     );
     town.dwellings[def.dwelling] = {
@@ -122,10 +129,6 @@ export function build(
     };
   }
   return success(next);
-}
-
-function buildingOrder(id: BuildingId): number {
-  return BUILDING_IDS.indexOf(id);
 }
 
 /** The owner's living hero standing in the town, if any. */
@@ -149,11 +152,13 @@ export function recruit(
   count: number,
   to?: "hero" | "garrison",
 ): CommandResult {
-  const blocked = checkPlaying(state);
-  if (blocked !== null) return blocked;
+  const playing = checkPlaying(state);
+  if (playing !== null) return playing;
   const town = state.towns[townId];
   if (town === undefined) return fail("unknown-town", `no town ${townId}`);
   if (town.owner === null) return fail("not-owner", "the town is neutral");
+  const blocked = checkTurn(state, town.owner);
+  if (blocked !== null) return blocked;
   if (!isCreatureId(creature)) {
     return fail("unknown-creature", `no creature ${String(creature)}`);
   }
@@ -196,7 +201,11 @@ export function recruit(
 }
 
 export interface SlotRef {
-  army: "hero" | "garrison";
+  /**
+   * "hero" is args.heroId's army, "garrison" args.townId's garrison and
+   * "other" args.otherHeroId's army (a meeting, RULES_V2 5.3).
+   */
+  army: "hero" | "garrison" | "other";
   /** 0..6 */
   slot: number;
 }
@@ -206,36 +215,51 @@ export interface TransferArgs {
   heroId?: string;
   /** Needed when either side is "garrison". */
   townId?: string;
+  /** Needed when either side is "other": an own hero next to heroId. */
+  otherHeroId?: string;
   from: SlotRef;
   to: SlotRef;
   /** Creatures to move; default the whole stack. */
   count?: number;
 }
 
+/** Whether two heroes stand on adjacent cells (8 directions). */
+export function adjacent(a: HeroState, b: HeroState): boolean {
+  const d = Math.max(Math.abs(a.x - b.x), Math.abs(a.y - b.y));
+  return d === 1;
+}
+
 /**
- * Moves creatures between slots of the hero's army and a town garrison
- * (both sides need the hero standing in the town). Covers:
- * - move or split into an empty slot (count <= stack size);
- * - merge into a stack of the same creature;
- * - swap two whole stacks of different creatures.
- * The hero must keep at least one creature.
+ * Moves creatures between two armies of one player, on its turn:
+ * - the hero and the garrison of the town it stands in;
+ * - two heroes on adjacent cells (a meeting, RULES_V2 5.3; also hero and
+ *   "other" alone);
+ * - within one army.
+ * Covers: move or split into an empty slot (count <= stack size); merge
+ * into a stack of the same creature; swap two whole stacks of different
+ * creatures. Every hero must keep at least one creature.
  */
 export function transferStack(
   state: GameState,
   args: TransferArgs,
 ): CommandResult {
-  const blocked = checkPlaying(state);
-  if (blocked !== null) return blocked;
   const { from, to } = args;
-  const usesHero = from.army === "hero" || to.army === "hero";
-  const usesGarrison = from.army === "garrison" || to.army === "garrison";
+  const uses = (army: SlotRef["army"]): boolean =>
+    from.army === army || to.army === army;
   const hero =
     args.heroId === undefined ? undefined : findHero(state, args.heroId);
-  if (usesHero && (hero === undefined || !hero.alive)) {
+  if (uses("hero") && (hero === undefined || !hero.alive)) {
     return fail("unknown-hero", `no hero ${String(args.heroId)}`);
   }
+  const other =
+    args.otherHeroId === undefined
+      ? undefined
+      : findHero(state, args.otherHeroId);
+  if (uses("other") && (other === undefined || !other.alive)) {
+    return fail("unknown-hero", `no hero ${String(args.otherHeroId)}`);
+  }
   const town = args.townId === undefined ? undefined : state.towns[args.townId];
-  if (usesGarrison) {
+  if (uses("garrison")) {
     if (town === undefined) {
       return fail("unknown-town", `no town ${String(args.townId)}`);
     }
@@ -246,12 +270,25 @@ export function transferStack(
       return fail("not-owner", "not your town");
     }
   }
+  const owner = hero?.owner ?? other?.owner ?? town?.owner ?? null;
+  const blocked = checkTurn(state, owner);
+  if (blocked !== null) return blocked;
   if (
-    usesHero &&
-    usesGarrison &&
+    uses("hero") &&
+    uses("garrison") &&
     !heroInTown(state, must(hero, "hero"), must(town, "town").id)
   ) {
     return fail("not-in-town", "the hero is not in the town");
+  }
+  if (uses("other")) {
+    if (uses("garrison")) return fail("bad-slot", "a meeting has no garrison");
+    const o = must(other, "other hero");
+    if (hero !== undefined && hero.owner !== o.owner) {
+      return fail("not-owner", "not your hero");
+    }
+    if (uses("hero") && !adjacent(must(hero, "hero"), o)) {
+      return fail("not-adjacent", "the heroes must stand side by side");
+    }
   }
   for (const ref of [from, to]) {
     if (!Number.isInteger(ref.slot) || ref.slot < 0 || ref.slot >= ARMY_SLOTS) {
@@ -264,9 +301,14 @@ export function transferStack(
 
   const next = cloneState(state);
   const h = hero === undefined ? undefined : findHero(next, hero.id);
+  const o = other === undefined ? undefined : findHero(next, other.id);
   const t = town === undefined ? undefined : next.towns[town.id];
   const armyOf = (ref: SlotRef): ArmySlots =>
-    ref.army === "hero" ? must(h, "hero").army : must(t, "town").garrison;
+    ref.army === "hero"
+      ? must(h, "hero").army
+      : ref.army === "other"
+        ? must(o, "other hero").army
+        : must(t, "town").garrison;
   const src = armyOf(from);
   const dst = armyOf(to);
   const source = src[from.slot] ?? null;
@@ -292,8 +334,13 @@ export function transferStack(
     src[from.slot] = target;
     dst[to.slot] = source;
   }
-  if (h !== undefined && armySize(h.army) === 0) {
-    return fail("hero-needs-army", "the hero must keep at least one creature");
+  for (const x of [h, o]) {
+    if (x !== undefined && armySize(x.army) === 0) {
+      return fail(
+        "hero-needs-army",
+        "the hero must keep at least one creature",
+      );
+    }
   }
   return success(next);
 }
@@ -302,8 +349,7 @@ export function transferStack(
 export function hasMarketplace(state: GameState, player: number): boolean {
   return Object.values(state.towns).some(
     (t) =>
-      t.owner === player &&
-      t.buildings.some((b) => BUILDINGS[b].marketplace === true),
+      t.owner === player && builtDefs(t).some((d) => d.marketplace === true),
   );
 }
 
@@ -338,7 +384,7 @@ export function marketTrade(
   giveAmount: number,
   get: ResourceId,
 ): CommandResult {
-  const blocked = checkPlaying(state);
+  const blocked = checkTurn(state, player);
   if (blocked !== null) return blocked;
   if (!hasMarketplace(state, player)) {
     return fail("no-marketplace", "no Marketplace");

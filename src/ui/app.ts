@@ -1,16 +1,20 @@
 /**
- * The game route: main menu (New Game with map size and seed, Continue when
- * a save exists), then the adventure screen until the game ends or the
- * player quits back to the menu.
+ * The game route: main menu with the new-game setup (map seed and size,
+ * two to four players, the human's faction) and Continue when a save
+ * exists, then the adventure screen until the game ends or the player
+ * quits back to the menu.
  */
 import { newGame } from "../core/game/index.ts";
-import type { GameState } from "../core/game/index.ts";
+import type { GameState, PlayerSetup } from "../core/game/index.ts";
+import { FACTIONS, playableFactions } from "../data/factions.ts";
+import { MAX_PLAYERS, MIN_PLAYERS, playerColour } from "../data/players.ts";
+import type { FactionId } from "../data/types.ts";
 import { generateMap } from "../core/map/generate.ts";
 import type { MapSize } from "../core/map/generate.ts";
 import { button, el, img, wait } from "./dom.ts";
 import { playGame } from "./game.ts";
 import { loadGameMapAssets } from "./hero-sprite.ts";
-import { browserStorage, loadGame, saveGame } from "./save.ts";
+import { browserStorage, readSave, saveGame } from "./save.ts";
 import { installUiSounds, soundControl } from "./sound-control.ts";
 import "./game.css";
 
@@ -24,9 +28,33 @@ export function randomSeed(): number {
   return Math.floor(Math.random() * 1_000_000);
 }
 
+export interface GameSetup {
+  seed: number;
+  size: MapSize;
+  /** Two to four. */
+  players: number;
+  /** The human's faction (player 0). */
+  faction: FactionId;
+}
+
+/**
+ * The players of a new game: the human first with its faction, then AI
+ * players. Until the faction bead adds more, every AI plays the first
+ * playable faction (the Lost World).
+ */
+export function playerSetups(setup: GameSetup): PlayerSetup[] {
+  const aiFaction = playableFactions()[0]?.id ?? "lost-world";
+  return Array.from({ length: setup.players }, (_, i) => ({
+    kind: i === 0 ? "human" : "ai",
+    faction: i === 0 ? setup.faction : aiFaction,
+  }));
+}
+
 /** Generates a map and the initial state for a new game. */
-export function createGame(seed: number, size: MapSize): GameState {
-  return newGame(generateMap(seed, { size }));
+export function createGame(setup: GameSetup): GameState {
+  return newGame(generateMap(setup.seed, { size: setup.size }), {
+    players: playerSetups(setup),
+  });
 }
 
 /** Shows the main menu until a game is started or continued. */
@@ -64,8 +92,62 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
       }
     };
     renderSizes();
+    let players = Math.min(
+      MAX_PLAYERS,
+      Math.max(MIN_PLAYERS, Number(params.get("players") ?? 2) || 2),
+    );
+    const playersRow = el("div.gm-size-row");
+    const renderPlayers = (): void => {
+      playersRow.replaceChildren();
+      for (let n = MIN_PLAYERS; n <= MAX_PLAYERS; n++) {
+        const b = button(
+          `${n} players`,
+          () => {
+            players = n;
+            renderPlayers();
+          },
+          "gm-btn gm-size",
+        );
+        if (n === players) b.classList.add("gm-selected");
+        b.title = `You and ${n - 1} computer ${n === 2 ? "player" : "players"}`;
+        playersRow.append(b);
+      }
+    };
+    renderPlayers();
+    let faction: FactionId = playableFactions()[0]?.id ?? "lost-world";
+    const factionRow = el("div.gm-faction-row");
+    const renderFactions = (): void => {
+      factionRow.replaceChildren();
+      for (const f of FACTIONS) {
+        const b = button(
+          f.name,
+          () => {
+            if (!f.available) return;
+            faction = f.id;
+            renderFactions();
+          },
+          "gm-btn gm-faction",
+        );
+        b.title = f.blurb;
+        if (!f.available) {
+          b.disabled = true;
+          b.append(el("small.gm-soon", "soon"));
+        }
+        if (f.id === faction) b.classList.add("gm-selected");
+        factionRow.append(b);
+      }
+    };
+    renderFactions();
+    const you = el("span.gm-turn-chip");
+    you.style.background = playerColour(0).hex;
     const status = el("div.gm-menu-status");
-    const saved = loadGame(browserStorage());
+    const read = readSave(browserStorage());
+    const saved = read.kind === "ok" ? read.state : null;
+    if (read.kind === "rejected") {
+      status.textContent = `${read.message} Start a new game.`;
+    } else if (read.kind === "ok" && read.upgraded) {
+      status.textContent = "An older saved game was upgraded.";
+    }
 
     const start = async (make: () => GameState): Promise<void> => {
       status.textContent = "Preparing the marches...";
@@ -89,7 +171,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         const raw = seedInput.value.trim();
         const seed = /^\d+$/.test(raw) ? Number(raw) >>> 0 : randomSeed();
         void start(() => {
-          const state = createGame(seed, size);
+          const state = createGame({ seed, size, players, faction });
           saveGame(browserStorage(), state);
           return state;
         });
@@ -116,13 +198,15 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         el("h1.gm-title", "Border Marches"),
         el(
           "p.gm-subtitle",
-          "Lead the Lost World tribe across the marches and take the Warlord's Hold.",
+          "Lead your tribe across the marches and outlast every rival.",
         ),
         continueButton,
         el(
           "div.gm-new",
           el("h2", "New game"),
           el("div.gm-field", el("label", "Map size"), sizeRow),
+          el("div.gm-field", el("label", "Players"), playersRow),
+          el("div.gm-field", el("label", you, "Your faction"), factionRow),
           el(
             "div.gm-field",
             el("label", "Seed"),
@@ -134,7 +218,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         soundControl(),
         el(
           "div.gm-keys",
-          "Click a cell to plan a path, click again (or Space) to walk. E end turn, H hero, T town, arrows pan, +/- zoom.",
+          "Click a cell to plan a path, click again (or Space) to walk. E end turn, H next hero, K kingdom, T town, arrows pan, +/- zoom.",
         ),
       ),
     );

@@ -50,12 +50,15 @@ describe("battle setup", () => {
     expect(setup.terrain).toBe("grass");
     expect(setup.attacker).toEqual({
       owner: 0,
-      hero: { id: "hero-0", attack: 2, defense: 2 },
+      hero: { id: "hero-0", attack: 2, defense: 2, name: s.heroes[0]!.name },
       stacks: [
         { creature: "caveman", count: 18 },
         { creature: "spitter", count: 6 },
       ],
       defenseBonus: 0,
+      towerHarm: null,
+      // No town: a hero without a town cannot retreat (RULES_V2 1.12).
+      canRetreat: false,
     });
     expect(setup.defender).toEqual({
       owner: null,
@@ -66,6 +69,8 @@ describe("battle setup", () => {
         { creature: "goblin", count: 3 },
       ],
       defenseBonus: 0,
+      towerHarm: null,
+      canRetreat: false,
     });
     expect(setup.battle.objectId).toBe("m");
     expect(battleSetup(s)).toEqual(setup);

@@ -14,6 +14,8 @@ import {
   canAfford,
   hasMarketplace,
   heroInTownOf,
+  hireHero,
+  tavernOffer,
   marketQuote,
   marketTrade,
   maxAffordable,
@@ -31,7 +33,9 @@ import type {
 } from "../core/game/index.ts";
 import type { ResourceId } from "../core/map/types.ts";
 import { playSound } from "../audio/sound.ts";
-import { BUILDING_IDS, BUILDINGS } from "../data/buildings.ts";
+import { buildingDef, townTree } from "../data/factions.ts";
+import { getHeroClass } from "../data/hero.ts";
+import { findHeroDef, HIRE_COST, MAX_HEROES } from "../data/players.ts";
 import { getCreature } from "../data/creatures.ts";
 import {
   MARKET_BUY_PRICE,
@@ -129,7 +133,9 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         picture.append(img(right.key, "gm-town-tree gm-town-tree-r", 2));
       const art =
         TOWN_ASSETS.find(
-          (t) => t.faction === "dinosaur" && t.level === townLevel(town),
+          (t) =>
+            t.faction === (townTree(town.faction)?.art ?? "dinosaur") &&
+            t.level === townLevel(town),
         ) ?? TOWN_ASSETS[0];
       if (art !== undefined) picture.append(img(art.key, "gm-town-city", 3));
       const income = townIncome(town);
@@ -144,7 +150,7 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
 
       const grid = el("div.gm-buildings");
       const player = state.players.find((p) => p.id === town.owner);
-      for (const id of BUILDING_IDS)
+      for (const id of townTree(town.faction)?.order ?? [])
         grid.append(buildingCard(state, town, id, player?.resources));
 
       root.append(el("div.gm-town-body", picture, grid));
@@ -201,7 +207,7 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       armies.append(
         el(
           "div.gm-army-line",
-          el("div.gm-army-label", hero !== undefined ? "Chieftain" : "No hero"),
+          el("div.gm-army-label", hero !== undefined ? hero.name : "No hero"),
           hero !== undefined
             ? armyRow(hero.army, {
                 selected: selected?.army === "hero" ? selected.slot : null,
@@ -227,7 +233,66 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         town.owner === null || !hasMarketplace(state, town.owner);
       if (market.disabled) market.title = "Build a Marketplace first";
       side.append(market);
+      side.append(tavern(state, town));
       root.append(el("div.gm-town-footer", armies, side));
+    };
+
+    /** The tavern: this week's offer and retreated heroes (RULES_V2 5.4). */
+    const tavern = (state: GameState, town: TownState): HTMLElement => {
+      const box = el("div.gm-tavern", el("h3", "Tavern"));
+      if (town.owner === null) return box;
+      const player = state.players.find((p) => p.id === town.owner);
+      const obj = state.map.objects.find((o) => o.id === town.id);
+      const occupied = state.heroes.some(
+        (h) => h.alive && h.x === obj?.x && h.y === obj?.y,
+      );
+      const count = state.heroes.filter(
+        (h) => h.alive && h.owner === town.owner,
+      ).length;
+      const offer = tavernOffer(state, town.owner);
+      if (offer.length === 0) {
+        box.append(el("div.gm-dim", "Nobody this week. New faces next week."));
+      }
+      for (const entry of offer) {
+        const def = findHeroDef(entry.defId);
+        if (def === undefined) continue;
+        const known = state.heroes.find((h) => h.defId === entry.defId);
+        const level = known?.level ?? 1;
+        const reason = occupied
+          ? "A hero stands in the town gate"
+          : count >= MAX_HEROES
+            ? `At most ${MAX_HEROES} heroes`
+            : (player?.resources.gold ?? 0) < HIRE_COST
+              ? "Not enough gold"
+              : null;
+        const hire = button(
+          `Hire (${HIRE_COST} gold)`,
+          () => {
+            if (run(hireHero(host.state(), town.id, entry.defId)))
+              playSound("recruit");
+          },
+          "gm-btn gm-primary",
+        );
+        hire.disabled = reason !== null;
+        if (reason !== null) hire.title = reason;
+        box.append(
+          el(
+            "div.gm-tavern-hero",
+            img("portrait-dinosaur-chieftain", "gm-tavern-portrait"),
+            el(
+              "div.gm-tavern-text",
+              el("div.gm-tavern-name", def.name),
+              el(
+                "div.gm-dim",
+                `${getHeroClass(def.heroClass).name}, level ${level}` +
+                  (entry.retreated ? " (retreated)" : ""),
+              ),
+            ),
+            hire,
+          ),
+        );
+      }
+      return box;
     };
 
     const buildingCard = (
@@ -236,7 +301,8 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       id: BuildingId,
       have: GameState["players"][number]["resources"] | undefined,
     ): HTMLElement => {
-      const def = BUILDINGS[id];
+      const def = buildingDef(town.faction, id);
+      if (def === undefined) return el("div");
       let status = buildStatus(state, town.id, id);
       // Show the lasting reason first: "built today" passes tomorrow.
       if (status === "built-today") {
@@ -269,7 +335,7 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           card.append(
             el(
               "div.gm-building-req",
-              `Requires: ${def.requires.map((r) => BUILDINGS[r].name).join(", ")}`,
+              `Requires: ${def.requires.map((r) => buildingDef(town.faction, r)?.name ?? r).join(", ")}`,
             ),
           );
           if (missing.length === 0)
@@ -405,7 +471,7 @@ async function openMarket(host: TownHost): Promise<void> {
   const body = el("div.gm-market");
   const render = (): void => {
     const state = host.state();
-    const player = state.players[0];
+    const player = state.players.find((p) => p.id === state.currentPlayer);
     if (player === undefined) return;
     const have = player.resources[give];
     amount = Math.max(0, Math.min(amount, have));
@@ -479,7 +545,8 @@ async function openMarket(host: TownHost): Promise<void> {
     const trade = button(
       "Trade",
       () => {
-        if (host.run(marketTrade(host.state(), 0, give, amount, get)))
+        const me = host.state().currentPlayer;
+        if (host.run(marketTrade(host.state(), me, give, amount, get)))
           playSound("gold");
         render();
       },

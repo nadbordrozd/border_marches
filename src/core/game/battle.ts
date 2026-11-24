@@ -16,26 +16,39 @@
  * deterministic function of the setup (the setup carries the battle seed for
  * obstacles). The UI can instead run an interactive battle from the same
  * setup and hand its final outcome to applyBattleResult.
+ *
+ * Battles (RULES_V2 5.2, 5.5): a hero against neutrals, against a town's
+ * garrison, or against another player's hero. The mover is always the
+ * attacker (left). A hero defending its own town fights first with the
+ * fort bonus; if it loses, the attacker moves into the town and fights the
+ * garrison (a second, chained battle) or captures it.
  */
 import { getCreature } from "../../data/creatures.ts";
+import { ARTIFACT_CAPACITY } from "../../data/players.ts";
 import type { CreatureId } from "../../data/types.ts";
 import type { Terrain } from "../map/types.ts";
 import { deriveSeed } from "../rng.ts";
 import { captureTown, guardsAt, visitAtHero } from "./adventure.ts";
 import { gainXp } from "./hero.ts";
+import { checkEliminations, sendToPool, sendToTavern } from "./players.ts";
 import { splitNeutralStack } from "./progression.ts";
 import {
   cloneState,
   must,
   fail,
   findHero,
+  findObject,
   success,
   townDefenseBonus,
+  townsOf,
+  towerHarm,
 } from "./state.ts";
 import type {
+  ArmySlots,
   CommandResult,
   GameEvent,
   GameState,
+  HeroState,
   Owner,
   PendingBattle,
 } from "./types.ts";
@@ -52,6 +65,8 @@ export interface BattleHero {
   id: string;
   attack: number;
   defense: number;
+  /** Display name. */
+  name?: string;
 }
 
 export interface BattleSide {
@@ -64,22 +79,35 @@ export interface BattleSide {
    */
   stacks: BattleStack[];
   /**
-   * Flat Defense bonus for every stack of this side: +2 for the defenders
-   * of a town with a Palisade and of the Warlord's Hold; 0 otherwise.
+   * Flat Defense bonus for every stack of this side: the fort of a
+   * defended town (RULES_V2 5.5: +2, +4 or +6) and the Warlord's Hold; 0
+   * otherwise.
    */
   defenseBonus: number;
+  /**
+   * Tower Harm at each round start against the strongest attacking stack
+   * (fort level 3, RULES_V2 5.5); null without a tower.
+   * TODO(bzc.8): the new battle engine schedules it; the MVP engine
+   * ignores it.
+   */
+  towerHarm?: number | null;
+  /**
+   * Whether this side's hero may retreat (RULES_V2 1.12): a hero whose
+   * player owns a town and who is not defending inside a town.
+   */
+  canRetreat?: boolean;
 }
 
 export interface BattleSetup {
   /** Seed for the battlefield (obstacles); differs per battle. */
   seed: number;
-  /** Ground terrain under the hero (for the battlefield look). */
+  /** Ground terrain of the defender's cell (for the battlefield look). */
   terrain: Terrain;
-  /** The hero's side: always the attacker (left, column 0). */
+  /** The moving hero's side: always the attacker (left, column 0). */
   attacker: BattleSide;
-  /** Neutral stack (split into up to 3 stacks) or town garrison (right). */
+  /** Neutral stack, town garrison or the attacked hero (right). */
   defender: BattleSide;
-  /** What is being fought (map object id), for the UI. */
+  /** What is being fought, for the UI. */
   battle: PendingBattle;
 }
 
@@ -92,12 +120,18 @@ export interface BattleResult {
   attacker: number[];
   /** Survivors per input stack of setup.defender.stacks. */
   defender: number[];
+  /**
+   * The side whose hero retreated (RULES_V2 1.12), if any: it loses (its
+   * army is lost, its survivors only count for the other side's XP) and
+   * the other side, which must have survivors, wins.
+   */
+  retreat?: "attacker" | "defender";
 }
 
 /**
  * The battle engine's entry point: a pure, deterministic function from the
- * setup to the outcome. There is no retreat in the MVP, so the losing side
- * must have no survivors and the winner at least one.
+ * setup to the outcome. Without a retreat the losing side must have no
+ * survivors and the winner at least one.
  */
 export type BattleResolver = (setup: BattleSetup) => BattleResult;
 
@@ -105,8 +139,33 @@ interface SetupWithSlots {
   setup: BattleSetup;
   /** Hero army slot of each attacker stack. */
   attackerSlots: number[];
-  /** Garrison slot of each defender stack (town battles). */
+  /** Garrison or defending hero army slot of each defender stack. */
   defenderSlots: number[];
+}
+
+function stacksOf(army: ArmySlots): { stacks: BattleStack[]; slots: number[] } {
+  const stacks: BattleStack[] = [];
+  const slots: number[] = [];
+  army.forEach((s, i) => {
+    if (s !== null) {
+      slots.push(i);
+      stacks.push({ creature: s.creature, count: s.count });
+    }
+  });
+  return { stacks, slots };
+}
+
+function battleHero(hero: HeroState): BattleHero {
+  return {
+    id: hero.id,
+    attack: hero.attack,
+    defense: hero.defense,
+    name: hero.name,
+  };
+}
+
+function ownsTown(state: GameState, player: number): boolean {
+  return townsOf(state, player).length > 0;
 }
 
 function buildSetup(state: GameState): SetupWithSlots | null {
@@ -114,16 +173,11 @@ function buildSetup(state: GameState): SetupWithSlots | null {
   if (battle === null) return null;
   const hero = findHero(state, battle.heroId);
   if (hero === undefined) return null;
-  const attackerSlots: number[] = [];
-  const attackerStacks: BattleStack[] = [];
-  hero.army.forEach((s, i) => {
-    if (s !== null) {
-      attackerSlots.push(i);
-      attackerStacks.push({ creature: s.creature, count: s.count });
-    }
-  });
-  const defenderSlots: number[] = [];
+  const own = stacksOf(hero.army);
+  let defenderSlots: number[] = [];
   let defender: BattleSide;
+  let cellX = hero.x;
+  let cellY = hero.y;
   if (battle.kind === "monster") {
     const monster = state.monsters[battle.objectId];
     if (monster === undefined) return null;
@@ -135,39 +189,57 @@ function buildSetup(state: GameState): SetupWithSlots | null {
         count,
       })),
       defenseBonus: 0,
+      towerHarm: null,
+      canRetreat: false,
     };
-  } else {
+  } else if (battle.kind === "town") {
     const town = state.towns[battle.objectId];
     if (town === undefined) return null;
-    const stacks: BattleStack[] = [];
-    town.garrison.forEach((s, i) => {
-      if (s !== null) {
-        defenderSlots.push(i);
-        stacks.push({ creature: s.creature, count: s.count });
-      }
-    });
+    const g = stacksOf(town.garrison);
+    defenderSlots = g.slots;
     defender = {
       owner: town.owner,
       hero: null,
-      stacks,
+      stacks: g.stacks,
       defenseBonus: townDefenseBonus(town),
+      towerHarm: towerHarm(town),
+      canRetreat: false,
     };
+  } else {
+    const foe = findHero(state, battle.objectId);
+    if (foe === undefined || !foe.alive) return null;
+    const town =
+      battle.townId === undefined ? undefined : state.towns[battle.townId];
+    const g = stacksOf(foe.army);
+    defenderSlots = g.slots;
+    defender = {
+      owner: foe.owner,
+      hero: battleHero(foe),
+      stacks: g.stacks,
+      defenseBonus: town === undefined ? 0 : townDefenseBonus(town),
+      towerHarm: town === undefined ? null : towerHarm(town),
+      canRetreat: town === undefined && ownsTown(state, foe.owner),
+    };
+    cellX = foe.x;
+    cellY = foe.y;
   }
-  const cell = state.map.cells[hero.y * state.map.width + hero.x];
+  const cell = state.map.cells[cellY * state.map.width + cellX];
   return {
     setup: {
       seed: deriveSeed(state.seed, "battle", state.battles),
       terrain: cell?.terrain ?? "grass",
       attacker: {
         owner: hero.owner,
-        hero: { id: hero.id, attack: hero.attack, defense: hero.defense },
-        stacks: attackerStacks,
+        hero: battleHero(hero),
+        stacks: own.stacks,
         defenseBonus: 0,
+        towerHarm: null,
+        canRetreat: ownsTown(state, hero.owner),
       },
       defender,
       battle: { ...battle },
     },
-    attackerSlots,
+    attackerSlots: own.slots,
     defenderSlots,
   };
 }
@@ -192,15 +264,86 @@ function validSurvivors(
 
 const total = (ns: readonly number[]): number => ns.reduce((a, b) => a + b, 0);
 
+/** XP for killing: total HP of the creatures of `stacks` that died. */
+function killedHp(stacks: readonly BattleStack[], survivors: number[]): number {
+  let xp = 0;
+  stacks.forEach((s, i) => {
+    xp += (s.count - (survivors[i] ?? 0)) * getCreature(s.creature).hp;
+  });
+  return xp;
+}
+
+/** Writes survivors back into army slots, in place. */
+function applySurvivors(
+  army: ArmySlots,
+  slots: readonly number[],
+  survivors: readonly number[],
+): void {
+  slots.forEach((slot, i) => {
+    const s = army[slot];
+    const n = survivors[i] ?? 0;
+    if (s !== null && s !== undefined) {
+      army[slot] = n > 0 ? { creature: s.creature, count: n } : null;
+    }
+  });
+}
+
+/**
+ * The loser's artifacts move to the winner's, in order while there is
+ * room; the rest are destroyed (RULES_V2 4.4). In place.
+ */
+function takeArtifacts(
+  winner: HeroState,
+  loser: HeroState,
+  events: GameEvent[],
+): void {
+  if (loser.artifacts.length === 0) return;
+  const room = Math.max(0, ARTIFACT_CAPACITY - winner.artifacts.length);
+  const moved = loser.artifacts.slice(0, room);
+  winner.artifacts = [...winner.artifacts, ...moved];
+  loser.artifacts = [];
+  events.push({
+    type: "artifacts-won",
+    heroId: winner.id,
+    fromHeroId: loser.id,
+    artifacts: moved,
+  });
+}
+
+/**
+ * A hero leaves the map after losing, in place: to its owner's tavern on
+ * a retreat, else to the pool; a winner hero takes its artifacts.
+ */
+function heroLost(
+  state: GameState,
+  loser: HeroState,
+  winner: HeroState | undefined,
+  retreated: boolean,
+  events: GameEvent[],
+): void {
+  if (retreated) {
+    sendToTavern(state, loser);
+    events.push({ type: "hero-retreated", heroId: loser.id });
+    return;
+  }
+  if (winner !== undefined) takeArtifacts(winner, loser, events);
+  sendToPool(state, loser);
+  events.push({ type: "hero-defeated", heroId: loser.id });
+}
+
 /**
  * Applies a battle outcome to the pending battle:
  * - casualties on both sides;
- * - attacker wins: the hero gains XP = total HP of the enemy creatures
- *   killed (pending level-ups added), the neutral stack is removed or the
- *   town captured (capturing every Hold wins the game); then the next
- *   adjacent neutral stack attacks (chained pendingBattle), or the object
- *   under the hero is visited;
- * - defender wins: the hero dies and the game is lost.
+ * - the winning hero gains XP = total HP of the enemy creatures killed
+ *   (pending level-ups added); a hero beaten by a hero loses its
+ *   artifacts to it; a beaten hero leaves the map (pool, or its tavern
+ *   after a retreat);
+ * - attacker wins: the neutral stack is removed, the town captured, or
+ *   the defending hero removed; a hero beaten in its town lets the
+ *   attacker into the town (garrison battle chained, or capture); then the
+ *   next adjacent neutral stack attacks (chained), or the object under the
+ *   hero is visited;
+ * - eliminations and the end of the game are settled (RULES_V2 5.9).
  */
 export function applyBattleResult(
   state: GameState,
@@ -218,12 +361,26 @@ export function applyBattleResult(
   }
   const attackerLeft = total(result.attacker);
   const defenderLeft = total(result.defender);
-  const attackerWon =
-    result.winner === "attacker" && attackerLeft > 0 && defenderLeft === 0;
-  const defenderWon =
-    result.winner === "defender" && defenderLeft > 0 && attackerLeft === 0;
-  if (!attackerWon && !defenderWon) {
-    return fail("bad-result", "the loser must have no survivors");
+  const retreat = result.retreat;
+  let attackerWon: boolean;
+  if (retreat !== undefined) {
+    const side = retreat === "attacker" ? setup.attacker : setup.defender;
+    if (side.canRetreat !== true) {
+      return fail("cannot-retreat", `the ${retreat} cannot retreat`);
+    }
+    attackerWon = retreat === "defender";
+    const winnerLeft = attackerWon ? attackerLeft : defenderLeft;
+    if (result.winner === retreat || winnerLeft === 0) {
+      return fail("bad-result", "the side that stays must win with survivors");
+    }
+  } else {
+    attackerWon =
+      result.winner === "attacker" && attackerLeft > 0 && defenderLeft === 0;
+    const defenderWon =
+      result.winner === "defender" && defenderLeft > 0 && attackerLeft === 0;
+    if (!attackerWon && !defenderWon) {
+      return fail("bad-result", "the loser must have no survivors");
+    }
   }
 
   const next = cloneState(state);
@@ -231,73 +388,73 @@ export function applyBattleResult(
   next.pendingBattle = null;
   next.battles++;
   const hero = must(findHero(next, battle.heroId), "hero");
+  const foe =
+    battle.kind === "hero" ? findHero(next, battle.objectId) : undefined;
   const events: GameEvent[] = [];
 
-  attackerSlots.forEach((slot, i) => {
-    const s = hero.army[slot];
-    const n = result.attacker[i] ?? 0;
-    if (s !== null && s !== undefined) {
-      hero.army[slot] = n > 0 ? { creature: s.creature, count: n } : null;
+  applySurvivors(hero.army, attackerSlots, result.attacker);
+  if (battle.kind === "town") {
+    const town = next.towns[battle.objectId];
+    if (town !== undefined) {
+      applySurvivors(town.garrison, defenderSlots, result.defender);
     }
-  });
+  } else if (foe !== undefined) {
+    applySurvivors(foe.army, defenderSlots, result.defender);
+  }
 
-  if (defenderWon) {
+  if (!attackerWon) {
     if (battle.kind === "monster") {
       const monster = next.monsters[battle.objectId];
       if (monster !== undefined) monster.count = defenderLeft;
-    } else {
-      const town = next.towns[battle.objectId];
-      if (town !== undefined) {
-        defenderSlots.forEach((slot, i) => {
-          const s = town.garrison[slot];
-          const n = result.defender[i] ?? 0;
-          if (s !== null && s !== undefined) {
-            town.garrison[slot] =
-              n > 0 ? { creature: s.creature, count: n } : null;
-          }
-        });
-      }
     }
-    hero.alive = false;
-    hero.army = hero.army.map(() => null);
-    next.status = "lost";
-    events.push({ type: "hero-defeated", heroId: hero.id });
-    events.push({ type: "game-lost", player: hero.owner });
+    if (foe !== undefined) {
+      gainXp(foe, killedHp(setup.attacker.stacks, result.attacker), events);
+    }
+    heroLost(next, hero, foe, retreat === "attacker", events);
+    checkEliminations(next, events);
     return success(next, events);
   }
 
-  let xp = 0;
-  setup.defender.stacks.forEach((s, i) => {
-    xp += (s.count - (result.defender[i] ?? 0)) * getCreature(s.creature).hp;
-  });
-
+  gainXp(hero, killedHp(setup.defender.stacks, result.defender), events);
   if (battle.kind === "monster") {
     next.monsters = Object.fromEntries(
       Object.entries(next.monsters).filter(([id]) => id !== battle.objectId),
     );
     events.push({ type: "monster-defeated", monsterId: battle.objectId });
-    gainXp(hero, xp, events);
-  } else {
-    gainXp(hero, xp, events);
+  } else if (battle.kind === "town") {
     const town = next.towns[battle.objectId];
     if (town !== undefined) {
       captureTown(next, town, hero.owner, events);
       events.push({ type: "visit-town", heroId: hero.id, townId: town.id });
     }
+  } else if (foe !== undefined) {
+    heroLost(next, foe, hero, retreat === "defender", events);
+    checkEliminations(next, events);
   }
   if (next.status !== "playing") return success(next, events);
 
   let chained: PendingBattle | null = null;
-  const guards = guardsAt(next, hero);
-  if (guards.length > 0) {
-    chained = {
-      kind: "monster",
-      objectId: must(guards[0], "guard"),
-      heroId: hero.id,
-    };
-  } else if (battle.kind === "monster") {
-    chained = visitAtHero(next, hero, events);
+  if (battle.kind === "hero" && battle.townId !== undefined) {
+    // RULES_V2 5.5: on into the town (garrison battle, or capture).
+    const obj = findObject(next.map, battle.townId);
+    if (obj !== undefined) {
+      hero.x = obj.x;
+      hero.y = obj.y;
+      chained = visitAtHero(next, hero, events);
+    }
+  } else {
+    const guards = battle.kind === "hero" ? [] : guardsAt(next, hero);
+    if (guards.length > 0) {
+      chained = {
+        kind: "monster",
+        objectId: must(guards[0], "guard"),
+        heroId: hero.id,
+      };
+    } else if (battle.kind === "monster") {
+      chained = visitAtHero(next, hero, events);
+    }
   }
+  if (next.status !== "playing") return success(next, events);
   if (chained !== null) {
     next.pendingBattle = chained;
     events.push({ type: "battle", battle: chained });
@@ -313,4 +470,22 @@ export function fightPendingBattle(
   const setup = battleSetup(state);
   if (setup === null) return fail("no-battle", "no battle is pending");
   return applyBattleResult(state, resolver(setup));
+}
+
+/**
+ * Which players a battle involves: the attacker's owner and the
+ * defender's (null for neutrals and neutral towns).
+ */
+export function battlePlayers(
+  state: GameState,
+  battle: PendingBattle,
+): { attacker: number | null; defender: number | null } {
+  const attacker = findHero(state, battle.heroId)?.owner ?? null;
+  let defender: number | null = null;
+  if (battle.kind === "hero") {
+    defender = findHero(state, battle.objectId)?.owner ?? null;
+  } else if (battle.kind === "town") {
+    defender = state.towns[battle.objectId]?.owner ?? null;
+  }
+  return { attacker, defender };
 }

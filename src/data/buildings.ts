@@ -1,9 +1,11 @@
 /**
  * Lost World town buildings (FACTION_LOST_WORLD.md section 6).
  */
-import type { BuildingDef, BuildingId, CreatureId } from "./types.ts";
+import type { BuildingDef, CreatureId, LostWorldBuildingId } from "./types.ts";
 
-export const BUILDINGS: Readonly<Record<BuildingId, BuildingDef>> = {
+export const BUILDINGS: Readonly<
+  Record<LostWorldBuildingId, BuildingDef<LostWorldBuildingId>>
+> = {
   "village-hall": {
     id: "village-hall",
     name: "Village Hall",
@@ -37,7 +39,7 @@ export const BUILDINGS: Readonly<Record<BuildingId, BuildingDef>> = {
     cost: { gold: 2000, wood: 15 },
     requires: [],
     startBuilt: false,
-    defenseBonus: 2,
+    fortLevel: 1,
     effect: "Needed for tier 3+ dwellings; town defenders get +2 Defense",
   },
   stockade: {
@@ -124,7 +126,7 @@ export const BUILDINGS: Readonly<Record<BuildingId, BuildingDef>> = {
 };
 
 /** Every building in display order (halls, fort, economy, dwellings by tier). */
-export const BUILDING_IDS: readonly BuildingId[] = [
+export const BUILDING_IDS: readonly LostWorldBuildingId[] = [
   "village-hall",
   "town-hall",
   "city-hall",
@@ -140,11 +142,13 @@ export const BUILDING_IDS: readonly BuildingId[] = [
   "tyrants-lair",
 ];
 
-export function isBuildingId(id: unknown): id is BuildingId {
+export function isBuildingId(id: unknown): id is LostWorldBuildingId {
   return typeof id === "string" && Object.hasOwn(BUILDINGS, id);
 }
 
 /** The dwelling building that recruits a creature, if any. */
-export function dwellingFor(creature: CreatureId): BuildingId | undefined {
+export function dwellingFor(
+  creature: CreatureId,
+): LostWorldBuildingId | undefined {
   return BUILDING_IDS.find((id) => BUILDINGS[id].dwelling === creature);
 }

@@ -1,0 +1,380 @@
+/**
+ * Player controllers and the AI turn driver (RULES_V2 5.1, 5.2, 5.10).
+ *
+ * A {@link PlayerController} decides one {@link GameAction} at a time for
+ * the player whose turn it is; {@link aiStep} applies it and settles what
+ * follows (battles that do not involve the human are fought by the given
+ * resolver, AI level-ups and chests are chosen through the controller).
+ * The interface waits on the human only for a battle the human fights.
+ *
+ * The AI bead (bzc.19) implements PlayerController; {@link SimpleAi} is a
+ * stand-in that only collects pickups and flags mines it can reach today
+ * without a fight, recruits in its towns, and ends its turn.
+ */
+import { getCreature } from "../../data/creatures.ts";
+import type { LevelUpChoice } from "../../data/hero.ts";
+import type { BuildingId, CreatureId } from "../../data/types.ts";
+import { takeChest } from "./adventure.ts";
+import { moveHeroAlong } from "./adventure.ts";
+import {
+  applyBattleResult,
+  battlePlayers,
+  battleSetup,
+  type BattleResolver,
+} from "./battle.ts";
+import { chooseLevelUp } from "./hero.ts";
+import { findPath, reachableCells } from "./pathfinding.ts";
+import { dismissHero, hireHero, humanPlayer } from "./players.ts";
+import { maxAffordable } from "./resources.ts";
+import { fail, findPlayer, heroesOf, townsOf } from "./state.ts";
+import {
+  build,
+  heroInTownOf,
+  recruit,
+  transferStack,
+  type TransferArgs,
+} from "./town.ts";
+import { endTurn } from "./turn.ts";
+import type { CommandResult, GameEvent, GameState } from "./types.ts";
+
+/** Everything a player can do on its turn, as data. */
+export type GameAction =
+  | { type: "move"; heroId: string; path: Array<{ x: number; y: number }> }
+  | { type: "build"; townId: string; building: BuildingId }
+  | {
+      type: "recruit";
+      townId: string;
+      creature: CreatureId;
+      count: number;
+      to?: "hero" | "garrison";
+    }
+  | { type: "hire"; townId: string; heroDefId: string }
+  | { type: "dismiss"; heroId: string }
+  | { type: "transfer"; args: TransferArgs }
+  | { type: "end-turn" };
+
+/** Applies an action for the current player. */
+export function applyAction(
+  state: GameState,
+  action: GameAction,
+): CommandResult {
+  switch (action.type) {
+    case "move":
+      return moveHeroAlong(state, action.heroId, action.path);
+    case "build":
+      return build(state, action.townId, action.building);
+    case "recruit":
+      return recruit(
+        state,
+        action.townId,
+        action.creature,
+        action.count,
+        action.to,
+      );
+    case "hire":
+      return hireHero(state, action.townId, action.heroDefId);
+    case "dismiss":
+      return dismissHero(state, action.heroId);
+    case "transfer":
+      return transferStack(state, action.args);
+    case "end-turn":
+      return endTurn(state);
+    default:
+      return fail("bad-choice", "unknown action");
+  }
+}
+
+/**
+ * Decides for one player. Implementations must be pure functions of the
+ * state and read only what the player may know (RULES_V2 5.10: its own
+ * explored cells, not other players' resources), so a game replays
+ * exactly.
+ */
+export interface PlayerController {
+  /**
+   * The next action for `player`, whose turn it is. Return
+   * `{ type: "end-turn" }` to finish. The driver ends the turn by itself
+   * when an action fails or after its action limit.
+   */
+  decide(state: GameState, player: number): GameAction;
+  /** A level-up choice for one of the player's heroes (default: the lower stat). */
+  levelUp?(state: GameState, heroId: string): LevelUpChoice;
+  /** A treasure chest's reward (default: gold). */
+  chest?(state: GameState, heroId: string, pickupId: string): "gold" | "xp";
+}
+
+export type AiStepOutcome =
+  /** The action was applied; call aiStep again. */
+  | "continue"
+  /** The player ended its turn (the state is the next player's turn). */
+  | "turn-ended"
+  /** A battle the human fights is pending: resolve it, then call again. */
+  | "human-battle"
+  | "game-over";
+
+export interface AiStepResult {
+  state: GameState;
+  events: GameEvent[];
+  /** The action taken, if any. */
+  action: GameAction | null;
+  outcome: AiStepOutcome;
+}
+
+function defaultLevelUp(state: GameState, heroId: string): LevelUpChoice {
+  const hero = state.heroes.find((h) => h.id === heroId);
+  return hero !== undefined && hero.defense < hero.attack
+    ? "defense"
+    : "attack";
+}
+
+/**
+ * Settles what an AI action left open, in order: battles the human is not
+ * part of (fought by `resolver`), AI level-ups, AI chest offers. Stops at a
+ * battle with the human.
+ */
+function settle(
+  state: GameState,
+  events: GameEvent[],
+  controllers: (player: number) => PlayerController | null,
+  resolver: BattleResolver,
+): { state: GameState; humanBattle: boolean } {
+  let s = state;
+  const pendingChests: Array<{ heroId: string; pickupId: string }> = [];
+  const noteChests = (evs: readonly GameEvent[]): void => {
+    for (const e of evs) {
+      if (e.type === "chest-offer") pendingChests.push(e);
+    }
+  };
+  noteChests(events);
+  for (let guard = 0; guard < 64; guard++) {
+    if (s.status !== "playing") break;
+    // AI level-ups (also of an AI defender after the human attacked).
+    for (const hero of s.heroes) {
+      const c = hero.alive ? controllers(hero.owner) : null;
+      while (c !== null && hero.pendingLevelUps > 0) {
+        const choice = c.levelUp?.(s, hero.id) ?? defaultLevelUp(s, hero.id);
+        const r = chooseLevelUp(s, hero.id, choice);
+        if (!r.ok) break;
+        s = r.state;
+        events.push(...r.events);
+        const h = s.heroes.find((x) => x.id === hero.id);
+        if (h === undefined || h.pendingLevelUps <= 0) break;
+      }
+    }
+    const battle = s.pendingBattle;
+    if (battle === null) break;
+    const sides = battlePlayers(s, battle);
+    const human = humanPlayer(s);
+    if (sides.attacker === human || sides.defender === human) {
+      return { state: s, humanBattle: true };
+    }
+    const setup = battleSetup(s);
+    if (setup === null) break;
+    const r = applyBattleResult(s, resolver(setup));
+    if (!r.ok) break;
+    s = r.state;
+    events.push(...r.events);
+    noteChests(r.events);
+  }
+  for (const chest of pendingChests) {
+    const hero = s.heroes.find((h) => h.id === chest.heroId);
+    const c = hero === undefined ? null : controllers(hero.owner);
+    if (c === null || s.pendingBattle !== null) continue;
+    const choice = c.chest?.(s, chest.heroId, chest.pickupId) ?? "gold";
+    const r = takeChest(s, chest.heroId, chest.pickupId, choice);
+    if (r.ok) {
+      s = r.state;
+      events.push(...r.events);
+    }
+  }
+  return { state: s, humanBattle: false };
+}
+
+/**
+ * One step of an AI player's turn: settles anything left open, asks the
+ * controller for an action, applies it, and settles again. A failed
+ * action ends the turn (so a confused controller cannot stall the game).
+ * `controllers` maps a player to its controller (null for the human).
+ */
+export function aiStep(
+  state: GameState,
+  controllers: (player: number) => PlayerController | null,
+  resolver: BattleResolver,
+): AiStepResult {
+  const events: GameEvent[] = [];
+  if (state.status !== "playing") {
+    return { state, events, action: null, outcome: "game-over" };
+  }
+  const before = settle(state, events, controllers, resolver);
+  if (before.humanBattle) {
+    return {
+      state: before.state,
+      events,
+      action: null,
+      outcome: "human-battle",
+    };
+  }
+  let s = before.state;
+  if (s.status !== "playing") {
+    return { state: s, events, action: null, outcome: "game-over" };
+  }
+  const player = s.currentPlayer;
+  const controller = controllers(player);
+  if (controller === null) {
+    return { state: s, events, action: null, outcome: "turn-ended" };
+  }
+  let action = controller.decide(s, player);
+  let result = applyAction(s, action);
+  if (!result.ok && action.type !== "end-turn") {
+    action = { type: "end-turn" };
+    result = applyAction(s, action);
+  }
+  if (!result.ok) {
+    return { state: s, events, action, outcome: "game-over" };
+  }
+  s = result.state;
+  events.push(...result.events);
+  if (action.type === "end-turn") {
+    return {
+      state: s,
+      events,
+      action,
+      outcome: s.status === "playing" ? "turn-ended" : "game-over",
+    };
+  }
+  const after = settle(s, events, controllers, resolver);
+  s = after.state;
+  return {
+    state: s,
+    events,
+    action,
+    outcome: after.humanBattle
+      ? "human-battle"
+      : s.status === "playing"
+        ? "continue"
+        : "game-over",
+  };
+}
+
+/**
+ * Runs the current AI player's whole turn: aiStep until the turn ends, a
+ * battle with the human is pending, or the game ends. After `maxActions`
+ * actions the turn is ended for it.
+ */
+export function runAiTurn(
+  state: GameState,
+  controllers: (player: number) => PlayerController | null,
+  resolver: BattleResolver,
+  maxActions = 200,
+): AiStepResult {
+  const events: GameEvent[] = [];
+  let s = state;
+  let last: AiStepResult = {
+    state,
+    events,
+    action: null,
+    outcome: "continue",
+  };
+  for (let i = 0; i < maxActions; i++) {
+    last = aiStep(s, controllers, resolver);
+    s = last.state;
+    events.push(...last.events);
+    if (last.outcome !== "continue") return { ...last, events };
+  }
+  const ended = endTurn(s);
+  if (ended.ok) {
+    events.push(...ended.events);
+    return {
+      state: ended.state,
+      events,
+      action: { type: "end-turn" },
+      outcome: "turn-ended",
+    };
+  }
+  return { ...last, events };
+}
+
+/** Today's free targets of a hero: uncollected pickups and foreign mines. */
+function freeTargets(
+  state: GameState,
+  heroId: string,
+): Array<{
+  x: number;
+  y: number;
+  cost: number;
+}> {
+  const hero = state.heroes.find((h) => h.id === heroId);
+  if (hero === undefined) return [];
+  const reach = reachableCells(state, heroId);
+  const collected = new Set(state.collected);
+  const guarded = new Set<number>();
+  const w = state.map.width;
+  const explored = findPlayer(state, hero.owner)?.explored ?? [];
+  for (const m of Object.values(state.monsters)) {
+    if (explored[m.y * w + m.x] !== true) continue;
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) guarded.add((m.y + dy) * w + m.x + dx);
+    }
+  }
+  const out: Array<{ x: number; y: number; cost: number }> = [];
+  for (const obj of state.map.objects) {
+    const i = obj.y * w + obj.x;
+    const cost = reach.get(i);
+    if (cost === undefined || cost === 0 || guarded.has(i)) continue;
+    if (obj.kind === "pickup" && !collected.has(obj.id)) {
+      out.push({ x: obj.x, y: obj.y, cost });
+    } else if (
+      obj.kind === "mine" &&
+      state.mines[obj.id]?.owner !== hero.owner
+    ) {
+      out.push({ x: obj.x, y: obj.y, cost });
+    }
+  }
+  return out.sort((a, b) => a.cost - b.cost || a.y - b.y || a.x - b.x);
+}
+
+/**
+ * The stand-in AI: recruits what its towns offer (into the garrison, or
+ * the hero standing there), walks each hero to the nearest pickup or
+ * foreign mine it can reach today without a fight, then ends the turn.
+ * Deterministic and fog-respecting (paths use the player's explored
+ * cells).
+ */
+export class SimpleAi implements PlayerController {
+  decide(state: GameState, player: number): GameAction {
+    const me = findPlayer(state, player);
+    if (me === undefined) return { type: "end-turn" };
+    for (const town of townsOf(state, player)) {
+      for (const [creature, d] of Object.entries(town.dwellings)) {
+        if (d === undefined || d.available <= 0) continue;
+        const id = creature as CreatureId;
+        const n = Math.min(
+          d.available,
+          maxAffordable(me.resources, getCreature(id).cost),
+        );
+        if (n <= 0) continue;
+        const hero = heroInTownOf(state, town);
+        const to = hero !== undefined ? "hero" : "garrison";
+        const army = hero !== undefined ? hero.army : town.garrison;
+        const fits = army.some((s) => s === null || s.creature === id);
+        if (!fits) continue;
+        return { type: "recruit", townId: town.id, creature: id, count: n, to };
+      }
+    }
+    for (const hero of heroesOf(state, player)) {
+      if (hero.mp <= 0) continue;
+      const target = freeTargets(state, hero.id)[0];
+      if (target === undefined) continue;
+      const path = findPath(state, hero.id, target.x, target.y);
+      if (path === null || path.steps.some((s) => s.day > 0 || s.attack)) {
+        continue;
+      }
+      return {
+        type: "move",
+        heroId: hero.id,
+        path: path.steps.map((s) => ({ x: s.x, y: s.y })),
+      };
+    }
+    return { type: "end-turn" };
+  }
+}

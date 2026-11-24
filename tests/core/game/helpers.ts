@@ -46,15 +46,15 @@ export function buildMap(rows: string[], objects: MapObject[]): GameMap {
   return map;
 }
 
-export function heroStart(x: number, y: number): MapObject {
+export function heroStart(x: number, y: number, player = 0): MapObject {
   return {
-    id: "hero-start-0",
+    id: `hero-start-${player}`,
     kind: "hero-start",
     x,
     y,
     footprint: { w: 1, h: 1 },
     blocked: [],
-    data: { player: 0 },
+    data: { player },
   };
 }
 

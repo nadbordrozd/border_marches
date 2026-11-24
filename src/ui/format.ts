@@ -8,6 +8,8 @@ import type { GameState } from "../core/game/types.ts";
 import type { MapObject, Terrain } from "../core/map/types.ts";
 import { getCreature } from "../data/creatures.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
+import { getHeroClass } from "../data/hero.ts";
+import { playerColour } from "../data/players.ts";
 import type { ResourceAmounts } from "../data/types.ts";
 
 /** "Month 1, Week 2, Day 3". */
@@ -100,7 +102,14 @@ export function describeCell(
   }
   const hero = state.heroes.find((h) => h.alive && h.x === x && h.y === y);
   if (hero !== undefined) {
-    return hero.owner === player ? "Your Chieftain" : "An enemy hero";
+    const cls = getHeroClass(hero.heroClass).name;
+    if (hero.owner === player) return `${hero.name}, your ${cls}`;
+    const colour = playerColour(hero.owner).name;
+    const army = hero.army
+      .filter((s) => s !== null)
+      .map((s) => creatureCount(s.creature, s.count))
+      .join(", ");
+    return `${hero.name}, ${colour}'s ${cls} (level ${hero.level}): ${army}`;
   }
   const monster = Object.values(state.monsters).find(
     (m) => m.x === x && m.y === y,
@@ -128,7 +137,7 @@ export function describeCell(
             ? "yours"
             : town.owner === null
               ? "neutral"
-              : "enemy";
+              : playerColour(town.owner).name;
         return `${town.name} (${owner})`;
       }
       case "mine": {
@@ -140,7 +149,7 @@ export function describeCell(
             ? `yours, +${def.income} ${mine.resource}/day`
             : mine.owner === null
               ? "unclaimed"
-              : "enemy";
+              : `${playerColour(mine.owner).name}'s`;
         return `${def.name} (${owner})`;
       }
       case "pickup": {

@@ -11,8 +11,13 @@ export type Resources = Record<ResourceId, number>;
 /** A cost or income that names only the resources it uses. */
 export type ResourceAmounts = Partial<Resources>;
 
-/** Faction ids. Neutral monsters and the Warlord's Hold use "neutral". */
-export type FactionId = "lost-world" | "neutral";
+/**
+ * Faction ids. Neutral monsters and the Warlord's Hold use "neutral".
+ * Humans, Undead and Goblins are listed (src/data/factions.ts) but have no
+ * data until bead bzc.11.
+ */
+export type FactionId =
+  "lost-world" | "humans" | "undead" | "goblins" | "neutral";
 
 export type AbilityId =
   | "mob"
@@ -76,7 +81,14 @@ export interface CreatureDef {
   sprite: string;
 }
 
-export type BuildingId =
+/**
+ * A building id within its faction's town tree (src/data/factions.ts).
+ * Plain strings, so each faction's tree names its own buildings.
+ */
+export type BuildingId = string;
+
+/** The Lost World tree's building ids (the first town data set). */
+export type LostWorldBuildingId =
   | "village-hall"
   | "town-hall"
   | "city-hall"
@@ -92,13 +104,13 @@ export type BuildingId =
   | "tyrants-lair";
 
 /** A town building (FACTION_LOST_WORLD.md section 6). */
-export interface BuildingDef {
-  id: BuildingId;
+export interface BuildingDef<Id extends BuildingId = BuildingId> {
+  id: Id;
   name: string;
   /** Empty for buildings that only exist from the start. */
   cost: ResourceAmounts;
   /** Buildings that must already stand. */
-  requires: BuildingId[];
+  requires: Id[];
   /** Built when the game starts; cannot be built during play. */
   startBuilt: boolean;
   /** The creature this dwelling recruits. */
@@ -112,8 +124,12 @@ export interface BuildingDef {
   income?: ResourceAmounts;
   /** +50% creature growth (Stockade). */
   growthBonus?: boolean;
-  /** Flat Defense bonus for the town's defenders (Palisade). */
-  defenseBonus?: number;
+  /**
+   * Fort level this building gives the town (RULES_V2 5.5): 1 is +2
+   * Defense for every defending stack, 2 is +4, 3 is +6 and a tower. The
+   * town's fort level is the highest among its buildings.
+   */
+  fortLevel?: 1 | 2 | 3;
   /** Enables marketplace trades. */
   marketplace?: boolean;
   /** Short effect text for the town screen. */

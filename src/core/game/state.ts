@@ -1,10 +1,15 @@
 /**
  * State helpers shared by the commands: cloning, lookups, armies and fog.
  */
-import { BUILDINGS } from "../../data/buildings.ts";
+import {
+  buildingDef,
+  FORT_DEFENSE,
+  TOWER_BASE_HARM,
+  TOWER_HARM_PER_DWELLING,
+} from "../../data/factions.ts";
 import { ARMY_SLOTS, HERO_SIGHT, TOWN_SIGHT } from "../../data/hero.ts";
 import { HOLD_DEFENSE_BONUS } from "../../data/neutrals.ts";
-import type { CreatureId } from "../../data/types.ts";
+import type { BuildingDef, BuildingId, CreatureId } from "../../data/types.ts";
 import type { GameMap, MapObject } from "../map/types.ts";
 import type {
   ArmySlots,
@@ -13,6 +18,7 @@ import type {
   GameEvent,
   GameState,
   HeroState,
+  PlayerState,
   Stack,
   TownState,
 } from "./types.ts";
@@ -59,6 +65,43 @@ export function checkPlaying(state: GameState): CommandResult | null {
     return fail("battle-pending", "resolve the pending battle first");
   }
   return null;
+}
+
+/**
+ * checkPlaying plus: `player` is the one whose turn it is (RULES_V2 5.1:
+ * adventure-map actions are legal only for the current player).
+ */
+export function checkTurn(
+  state: GameState,
+  player: number | null,
+): CommandResult | null {
+  const blocked = checkPlaying(state);
+  if (blocked !== null) return blocked;
+  if (player !== state.currentPlayer) {
+    return fail("not-your-turn", `it is player ${state.currentPlayer}'s turn`);
+  }
+  return null;
+}
+
+export function findPlayer(
+  state: GameState,
+  player: number,
+): PlayerState | undefined {
+  return state.players.find((p) => p.id === player);
+}
+
+/** The towns a player owns. */
+export function townsOf(state: GameState, player: number): TownState[] {
+  return Object.values(state.towns).filter((t) => t.owner === player);
+}
+
+/** The living hero standing on (x, y), if any. */
+export function heroAt(
+  state: GameState,
+  x: number,
+  y: number,
+): HeroState | undefined {
+  return state.heroes.find((h) => h.alive && h.x === x && h.y === y);
 }
 
 export function findHero(
@@ -138,20 +181,43 @@ export function addToArmy(
 
 // ---------------------------------------------------------------- towns
 
-export function hasBuilding(
-  town: TownState,
-  id: keyof typeof BUILDINGS,
-): boolean {
+export function hasBuilding(town: TownState, id: BuildingId): boolean {
   return town.buildings.includes(id);
 }
 
-/** Flat Defense bonus of the town's defenders (Palisade, the Hold). */
+/** The definitions of the town's built buildings (its faction's tree). */
+export function builtDefs(town: TownState): BuildingDef[] {
+  const out: BuildingDef[] = [];
+  for (const b of town.buildings) {
+    const def = buildingDef(town.faction, b);
+    if (def !== undefined) out.push(def);
+  }
+  return out;
+}
+
+/** The town's fort level, 0 to 3 (RULES_V2 5.5): its best fort building. */
+export function fortLevel(town: TownState): number {
+  let level = 0;
+  for (const def of builtDefs(town))
+    level = Math.max(level, def.fortLevel ?? 0);
+  return level;
+}
+
+/** Flat Defense bonus of the town's defenders (the fort, or the Hold). */
 export function townDefenseBonus(town: TownState): number {
   if (town.isHold) return HOLD_DEFENSE_BONUS;
-  let bonus = 0;
-  for (const b of town.buildings)
-    bonus = Math.max(bonus, BUILDINGS[b].defenseBonus ?? 0);
-  return bonus;
+  return FORT_DEFENSE[fortLevel(town)] ?? 0;
+}
+
+/**
+ * Tower Harm per round start at fort level 3 (20 + 10 x dwellings built),
+ * else null. TODO(bzc.8): the battle engine schedules this shot on the
+ * strongest attacking stack; the setup carries it as BattleSide.towerHarm.
+ */
+export function towerHarm(town: TownState): number | null {
+  if (town.isHold || fortLevel(town) < 3) return null;
+  const dwellings = builtDefs(town).filter((d) => d.dwelling !== undefined);
+  return TOWER_BASE_HARM + TOWER_HARM_PER_DWELLING * dwellings.length;
 }
 
 // ---------------------------------------------------------------- fog

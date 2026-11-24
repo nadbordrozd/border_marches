@@ -25,6 +25,7 @@ import {
   deleteSave,
   hasSave,
   loadGame,
+  readSave,
   SAVE_KEY,
   saveGame,
 } from "../../src/ui/save.ts";
@@ -71,7 +72,9 @@ describe("format", () => {
   it("describes explored cells and hides unexplored ones", () => {
     const s = game();
     const hero = s.heroes[0]!;
-    expect(describeCell(s, 0, hero.x, hero.y)).toBe("Your Chieftain");
+    expect(describeCell(s, 0, hero.x, hero.y)).toBe(
+      `${hero.name}, your Chieftain`,
+    );
     const town = s.map.objects.find(
       (o) => o.kind === "town" && o.data["owner"] === 0,
     )!;
@@ -103,6 +106,59 @@ describe("save", () => {
     expect(loadGame(storage)).toBeNull();
     deleteSave(storage);
     expect(hasSave(storage)).toBe(false);
+  });
+
+  it("round-trips a multi-player v2 game", () => {
+    const storage = fakeStorage();
+    const s = newGame(generateMap(7, { size: "S" }), {
+      players: [
+        { kind: "human", faction: "lost-world" },
+        { kind: "ai", faction: "lost-world" },
+      ],
+    });
+    saveGame(storage, s);
+    expect(JSON.parse(storage.data.get(SAVE_KEY)!).version).toBe(2);
+    const r = readSave(storage);
+    expect(r.kind).toBe("ok");
+    if (r.kind === "ok") {
+      expect(r.upgraded).toBe(false);
+      expect(JSON.stringify(r.state)).toBe(JSON.stringify(s));
+    }
+  });
+
+  it("upgrades a v1 save and rejects unknown versions with a message", () => {
+    const storage = fakeStorage();
+    const v2 = game();
+    const v1 = JSON.parse(JSON.stringify(v2)) as Record<string, unknown> & {
+      players: Array<Record<string, unknown>>;
+      heroes: Array<Record<string, unknown>>;
+    };
+    delete v1["currentPlayer"];
+    delete v1["pool"];
+    delete v1["scenario"];
+    v1.players = v1.players.map((p) => ({
+      id: p["id"],
+      resources: p["resources"],
+      explored: p["explored"],
+    }));
+    for (const h of v1.heroes) {
+      delete h["defId"];
+      delete h["name"];
+      delete h["artifacts"];
+    }
+    storage.data.set(SAVE_KEY, JSON.stringify({ version: 1, state: v1 }));
+    const r = readSave(storage);
+    expect(r.kind).toBe("ok");
+    if (r.kind === "ok") {
+      expect(r.upgraded).toBe(true);
+      expect(r.state.players).toHaveLength(1);
+      expect(r.state.scenario?.kind).toBe("capture-towns");
+    }
+    storage.data.set(SAVE_KEY, JSON.stringify({ version: 3, state: v2 }));
+    const bad = readSave(storage);
+    expect(bad.kind).toBe("rejected");
+    if (bad.kind === "rejected") expect(bad.message).toMatch(/version/);
+    expect(loadGame(storage)).toBeNull();
   });
 
   it("survives storage that throws", () => {
@@ -178,7 +234,7 @@ describe("minimap", () => {
       (o) => o.kind === "town" && o.data["owner"] === 0,
     )!;
     const t = town.y * s.map.width + town.x;
-    expect([...px.slice(t * 4, t * 4 + 3)]).toEqual([0xfe, 0x75, 0x00]);
+    expect([...px.slice(t * 4, t * 4 + 3)]).toEqual([0xd8, 0x40, 0x2f]);
     // Walking reveals more of the map.
     const hero = s.heroes[0]!;
     const target = s.map.objects.find(

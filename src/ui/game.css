@@ -1078,3 +1078,199 @@
     flex: 0 0 320px;
   }
 }
+
+/* ------------------------------------------------------------ players */
+
+.gm-faction-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  flex: 1;
+}
+
+.gm-faction {
+  padding: 5px 4px;
+  font-size: 12px;
+}
+
+.gm-faction:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.gm-soon {
+  margin-left: 6px;
+  color: var(--gm-dim);
+  font-style: italic;
+}
+
+.gm-turn-chip {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  border: 1px solid #0d0b08;
+  border-radius: 2px;
+  vertical-align: -1px;
+}
+
+.gm-turn {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  background: var(--gm-wood-dark);
+  border: 1px solid var(--gm-edge);
+  color: var(--gm-gold-dim);
+}
+
+.gm-turn.gm-turn-ai {
+  color: var(--gm-dim);
+  font-style: italic;
+}
+
+.gm-ai-banner {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  color: var(--gm-text);
+  background: rgba(21, 17, 12, 0.92);
+  border: 1px solid var(--gm-gold-dim);
+  font:
+    bold 15px Georgia,
+    serif;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.gm-hero-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.gm-hero-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 6px 5px 2px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--gm-text);
+  text-align: left;
+  background: var(--gm-wood-dark);
+  border: 1px solid var(--gm-edge);
+  cursor: pointer;
+}
+
+.gm-hero-item.gm-selected {
+  border-color: var(--gm-gold);
+  color: var(--gm-gold);
+}
+
+.gm-hero-item-portrait {
+  width: 24px;
+  height: 24px;
+  image-rendering: pixelated;
+}
+
+.gm-hero-item-mp {
+  position: absolute;
+  left: 30px;
+  right: 6px;
+  bottom: 2px;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--gm-green) var(--mp, 0%),
+    #2c261c var(--mp, 0%)
+  );
+}
+
+.gm-hero-count {
+  color: var(--gm-dim);
+  font-size: 11px;
+  text-align: right;
+}
+
+.gm-warn {
+  color: var(--gm-red);
+}
+
+.gm-tavern {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 260px;
+  padding: 8px;
+  background: var(--gm-wood-dark);
+  border: 1px solid var(--gm-edge);
+}
+
+.gm-tavern h3 {
+  margin: 0;
+  color: var(--gm-gold-dim);
+  font-size: 14px;
+}
+
+.gm-tavern-hero {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gm-tavern-portrait {
+  width: 36px;
+  height: 36px;
+  image-rendering: pixelated;
+  border: 1px solid var(--gm-edge);
+}
+
+.gm-tavern-text {
+  flex: 1;
+}
+
+.gm-tavern-name {
+  color: var(--gm-text);
+  font-weight: bold;
+}
+
+.gm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.gm-table th,
+.gm-table td {
+  padding: 3px 6px;
+  text-align: left;
+  border-bottom: 1px solid var(--gm-edge);
+}
+
+.gm-table th {
+  color: var(--gm-gold-dim);
+}
+
+.gm-kingdom-body h3 {
+  margin: 10px 0 4px;
+  color: var(--gm-gold-dim);
+  font-size: 14px;
+}
+
+.gm-rivals {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gm-meet {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

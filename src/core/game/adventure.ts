@@ -6,9 +6,10 @@ import { HERO_SIGHT, TOWN_SIGHT } from "../../data/hero.ts";
 import { gainXp } from "./hero.ts";
 import { pickupInfo } from "./newGame.ts";
 import { canEnter, cutsCorner, moveContext, stepCost } from "./pathfinding.ts";
+import { checkEliminations } from "./players.ts";
 import {
   armySize,
-  checkPlaying,
+  checkTurn,
   cloneState,
   must,
   fail,
@@ -16,6 +17,7 @@ import {
   findObject,
   revealDisc,
   success,
+  townAtHero,
 } from "./state.ts";
 import type {
   CommandResult,
@@ -28,8 +30,9 @@ import type {
 } from "./types.ts";
 
 /**
- * Makes `owner` the town's owner in place: empties its garrison, reveals
- * around it and, when it was the last Hold, wins the game.
+ * Makes `owner` the town's owner in place (RULES_V2 5.5): buildings and
+ * dwelling stock stay, the garrison is empty (it was beaten), the new
+ * owner's townless counter resets, and the old owner may be eliminated.
  */
 export function captureTown(
   state: GameState,
@@ -37,24 +40,18 @@ export function captureTown(
   owner: number,
   events: GameEvent[],
 ): void {
+  const from = town.owner;
   town.owner = owner;
   town.garrison = town.garrison.map(() => null);
-  events.push({ type: "town-captured", townId: town.id, owner });
+  town.builtToday = false;
+  events.push({ type: "town-captured", townId: town.id, owner, from });
   const obj = findObject(state.map, town.id);
   const player = state.players.find((p) => p.id === owner);
+  if (player !== undefined) player.townlessDays = 0;
   if (obj !== undefined && player !== undefined) {
     revealDisc(state.map, player.explored, obj.x, obj.y, TOWN_SIGHT);
   }
-  checkWin(state, owner, events);
-}
-
-/** Win when every Warlord's Hold on the map belongs to `player`. */
-function checkWin(state: GameState, player: number, events: GameEvent[]): void {
-  const holds = Object.values(state.towns).filter((t) => t.isHold);
-  if (holds.length > 0 && holds.every((t) => t.owner === player)) {
-    state.status = "won";
-    events.push({ type: "game-won", player });
-  }
+  checkEliminations(state, events);
 }
 
 /**
@@ -124,6 +121,28 @@ export function visitAtHero(
   }
 }
 
+/**
+ * The pending battle for `attackerId` attacking the hero `defenderId`. A
+ * defender standing on its own town's entrance defends the town (fort,
+ * no retreat, garrison next).
+ */
+export function heroBattle(
+  state: GameState,
+  attackerId: string,
+  defenderId: string,
+): PendingBattle {
+  const defender = must(findHero(state, defenderId), "defender");
+  const town = townAtHero(state, defender);
+  return town !== undefined && town.owner === defender.owner
+    ? {
+        kind: "hero",
+        objectId: defenderId,
+        heroId: attackerId,
+        townId: town.id,
+      }
+    : { kind: "hero", objectId: defenderId, heroId: attackerId };
+}
+
 /** Neutral stacks whose zone of control covers the hero's cell. */
 export function guardsAt(state: GameState, hero: HeroState): string[] {
   const ctx = moveContext(state, hero, { ignoreFog: true });
@@ -151,12 +170,12 @@ export function moveHeroAlong(
   heroId: string,
   path: ReadonlyArray<{ x: number; y: number }>,
 ): CommandResult {
-  const blocked = checkPlaying(state);
-  if (blocked !== null) return blocked;
   const original = findHero(state, heroId);
   if (original === undefined || !original.alive) {
     return fail("unknown-hero", `no hero ${heroId}`);
   }
+  const blocked = checkTurn(state, original.owner);
+  if (blocked !== null) return blocked;
   let steps = path;
   if (steps[0]?.x === original.x && steps[0]?.y === original.y) {
     steps = steps.slice(1);
@@ -194,6 +213,15 @@ export function moveHeroAlong(
         return fail("bad-path", `step ${i} runs into a neutral stack`);
       }
       battle = { kind: "monster", objectId: monsterId, heroId };
+      stop = "attack";
+      break;
+    }
+    const enemyId = ctx.enemyHeroAt.get(idx);
+    if (enemyId !== undefined) {
+      if (i !== steps.length - 1 || cutsCorner(ctx, hero.x, hero.y, x, y)) {
+        return fail("bad-path", `step ${i} runs into a hero`);
+      }
+      battle = heroBattle(next, heroId, enemyId);
       stop = "attack";
       break;
     }
@@ -252,12 +280,12 @@ export function visitObject(
   heroId: string,
   objectId: string,
 ): CommandResult {
-  const blocked = checkPlaying(state);
-  if (blocked !== null) return blocked;
   const original = findHero(state, heroId);
   if (original === undefined || !original.alive) {
     return fail("unknown-hero", `no hero ${heroId}`);
   }
+  const blocked = checkTurn(state, original.owner);
+  if (blocked !== null) return blocked;
   const obj = findObject(state.map, objectId);
   if (obj === undefined) return fail("unknown-object", `no object ${objectId}`);
   if (obj.x !== original.x || obj.y !== original.y) {
@@ -281,12 +309,12 @@ export function takeChest(
   pickupId: string,
   choice: "gold" | "xp",
 ): CommandResult {
-  const blocked = checkPlaying(state);
-  if (blocked !== null) return blocked;
   const original = findHero(state, heroId);
   if (original === undefined || !original.alive) {
     return fail("unknown-hero", `no hero ${heroId}`);
   }
+  const blocked = checkTurn(state, original.owner);
+  if (blocked !== null) return blocked;
   const obj = findObject(state.map, pickupId);
   if (
     obj === undefined ||

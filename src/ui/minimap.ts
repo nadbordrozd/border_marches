@@ -7,10 +7,19 @@
  */
 import type { GameState } from "../core/game/types.ts";
 import type { Terrain } from "../core/map/types.ts";
+import { PLAYER_COLOURS as PLAYER_COLOUR_DEFS } from "../data/players.ts";
 
 type Rgb = readonly [number, number, number];
 
-export const PLAYER_COLOURS: readonly Rgb[] = [[0xfe, 0x75, 0x00]];
+function hexRgb(hex: string): Rgb {
+  const n = Number.parseInt(hex.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+
+/** Player flag colours by player index (src/data/players.ts). */
+export const PLAYER_COLOURS: readonly Rgb[] = PLAYER_COLOUR_DEFS.map((c) =>
+  hexRgb(c.hex),
+);
 const NEUTRAL_COLOUR: Rgb = [0xb8, 0xb0, 0xa0];
 const HERO_COLOUR: Rgb = [0xff, 0xf4, 0xd0];
 const FOG: Rgb = [0x0b, 0x0a, 0x08];
@@ -70,7 +79,11 @@ export function minimapPixels(
     }
   }
   for (const hero of state.heroes) {
-    if (hero.alive) put(hero.y * map.width + hero.x, HERO_COLOUR);
+    if (!hero.alive) continue;
+    put(
+      hero.y * map.width + hero.x,
+      hero.owner === player ? HERO_COLOUR : ownerColour(hero.owner),
+    );
   }
   const explored = state.players.find((p) => p.id === player)?.explored;
   if (explored !== undefined) {

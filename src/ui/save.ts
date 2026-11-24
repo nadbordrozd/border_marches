@@ -3,12 +3,17 @@
  * generator may change between versions, so the save does not regenerate)
  * is plain JSON. Every storage access is wrapped: private windows, blocked
  * storage or a full quota just mean "no save".
+ *
+ * Versions: 2 is the multi-player state (RULES_V2 section 5). A version 1
+ * save (the one-player MVP) is upgraded into a one-player v2 game; an
+ * unreadable or unknown save is reported with a message and not loaded.
  */
+import { upgradeV1State } from "../core/game/migrate.ts";
 import type { GameState } from "../core/game/types.ts";
 
 export const SAVE_KEY = "border-marches.save";
 /** Bump when the GameState shape changes incompatibly. */
-export const SAVE_VERSION = 1;
+export const SAVE_VERSION = 2;
 
 /** The part of the Storage interface the save uses (tests pass a fake). */
 export interface SaveStorage {
@@ -61,21 +66,75 @@ function looksLikeState(value: unknown): value is GameState {
   );
 }
 
-/** The saved game, or null when there is none (or it is unreadable). */
-export function loadGame(storage: SaveStorage | null): GameState | null {
-  if (storage === null) return null;
+function looksLikeV2(s: GameState): boolean {
+  return (
+    typeof s.currentPlayer === "number" &&
+    Array.isArray(s.pool) &&
+    s.players.every(
+      (p) =>
+        typeof p.kind === "string" &&
+        typeof p.faction === "string" &&
+        p.tavern !== undefined,
+    ) &&
+    s.heroes.every((h) => typeof h.defId === "string")
+  );
+}
+
+export type LoadResult =
+  | { kind: "none" }
+  | { kind: "ok"; state: GameState; upgraded: boolean }
+  | { kind: "rejected"; message: string };
+
+/**
+ * Reads the save: the state (a v1 save upgraded), nothing, or a reason the
+ * save cannot be used. A finished game counts as no save.
+ */
+export function readSave(storage: SaveStorage | null): LoadResult {
+  if (storage === null) return { kind: "none" };
+  let raw: string | null;
   try {
-    const raw = storage.getItem(SAVE_KEY);
-    if (raw === null) return null;
-    const file = JSON.parse(raw) as Partial<SaveFile>;
-    if (file.version !== SAVE_VERSION || !looksLikeState(file.state)) {
-      return null;
-    }
-    if (file.state.status !== "playing") return null;
-    return file.state;
+    raw = storage.getItem(SAVE_KEY);
   } catch {
-    return null;
+    return { kind: "none" };
   }
+  if (raw === null) return { kind: "none" };
+  let file: Partial<SaveFile>;
+  try {
+    file = JSON.parse(raw) as Partial<SaveFile>;
+  } catch {
+    return { kind: "rejected", message: "The saved game is damaged." };
+  }
+  if (!looksLikeState(file.state)) {
+    return { kind: "rejected", message: "The saved game is damaged." };
+  }
+  if (file.version === 1) {
+    try {
+      const state = upgradeV1State(
+        file.state as unknown as Parameters<typeof upgradeV1State>[0],
+      );
+      if (state.status !== "playing") return { kind: "none" };
+      return { kind: "ok", state, upgraded: true };
+    } catch (error) {
+      return {
+        kind: "rejected",
+        message: `The old saved game cannot be upgraded: ${String(error)}`,
+      };
+    }
+  }
+  if (file.version !== SAVE_VERSION || !looksLikeV2(file.state)) {
+    return {
+      kind: "rejected",
+      message: `The saved game is from another version (${String(file.version)}).`,
+    };
+  }
+  if (file.state.status !== "playing") return { kind: "none" };
+  return { kind: "ok", state: file.state, upgraded: false };
+}
+
+/** The saved game, or null when there is none (or it is unusable). */
+export function loadGame(storage: SaveStorage | null): GameState | null {
+  const r = readSave(storage);
+  return r.kind === "ok" ? r.state : null;
 }
 
 export function hasSave(storage: SaveStorage | null): boolean {

@@ -73,6 +73,16 @@ export interface MapHero {
   readonly y: number;
   /** Unit or hero sprite key; the Lost World Chieftain by default. */
   readonly unit?: string;
+  /** Owner's flag colour (CSS colour); drawn as a pennant over the hero. */
+  readonly colour?: string;
+}
+
+/** An owner flag planted at a cell (town and mine entrances). */
+export interface MapFlag {
+  readonly x: number;
+  readonly y: number;
+  /** CSS colour. */
+  readonly colour: string;
 }
 
 export interface PathStep {
@@ -108,6 +118,8 @@ export interface MapView {
   /** Objects to draw; defaults to the map's own objects on setMap. */
   setObjects(objects: readonly MapObject[]): void;
   setHeroes(heroes: readonly MapHero[]): void;
+  /** Owner flags (player colours) at object entrances. */
+  setFlags(flags: readonly MapFlag[]): void;
   setPathPreview(steps: readonly PathStep[] | null): void;
   /** A selected cell: a monster there shows its count chip. */
   setSelected(cell: Cell | null): void;
@@ -292,6 +304,7 @@ export function createMapView(
   let objects: readonly MapObject[] = [];
   let heroes: readonly MapHero[] = [];
   let path: readonly PathStep[] | null = null;
+  let flags: readonly MapFlag[] = [];
   let selected: Cell | null = null;
   let hovered: Cell | null = null;
   let explored: Uint8Array | null = null;
@@ -676,6 +689,52 @@ export function createMapView(
     }
   };
 
+  /** A pole with a pennant; (px, py) is the foot of the pole. */
+  const drawPennant = (
+    ctx: Context,
+    px: number,
+    py: number,
+    colour: string,
+    pole: number,
+  ): void => {
+    ctx.fillStyle = "#2a1f14";
+    ctx.fillRect(px - 1, py - pole, 2, pole);
+    ctx.fillStyle = colour;
+    ctx.strokeStyle = "rgba(20, 14, 8, 0.85)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(px + 1, py - pole);
+    ctx.lineTo(px + 15, py - pole + 4);
+    ctx.lineTo(px + 1, py - pole + 9);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  };
+
+  const drawFlags = (ctx: Context): void => {
+    for (const f of flags) {
+      if (!isExplored(f.x, f.y)) continue;
+      drawPennant(
+        ctx,
+        // Left of the entrance: a hero's pennant flies on the right.
+        f.x * CELL + 8,
+        f.y * CELL + CELL - 10,
+        f.colour,
+        30,
+      );
+    }
+    for (const h of heroes) {
+      if (h.colour === undefined || !isExplored(h.x, h.y)) continue;
+      drawPennant(
+        ctx,
+        h.x * CELL + CELL / 2 + 12,
+        h.y * CELL + 10,
+        h.colour,
+        20,
+      );
+    }
+  };
+
   const drawChip = (ctx: Context, cell: Cell): void => {
     if (map === null) return;
     const monster = objects.find(
@@ -756,6 +815,7 @@ export function createMapView(
     }
     // Path markers above the units of their row: drawn after the whole
     // foreground so a tree top never hides the route (HoMaM does the same).
+    drawFlags(ctx);
     drawPath(ctx);
     if (chipCell !== null) drawChip(ctx, chipCell);
     if (explored !== null)
@@ -923,6 +983,10 @@ export function createMapView(
     setHeroes(next) {
       heroes = next;
       rebuildForeground();
+      requestRender();
+    },
+    setFlags(next) {
+      flags = next;
       requestRender();
     },
     setPathPreview(steps) {

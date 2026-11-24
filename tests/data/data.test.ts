@@ -19,7 +19,10 @@ import {
   NEUTRAL_CREATURE_IDS,
   NEUTRAL_CREATURES,
 } from "../../src/data/neutrals.ts";
-import type { BuildingId, ResourceAmounts } from "../../src/data/types.ts";
+import type {
+  LostWorldBuildingId as BuildingId,
+  ResourceAmounts,
+} from "../../src/data/types.ts";
 import { fightValue } from "../../src/core/game/progression.ts";
 import {
   addResources,

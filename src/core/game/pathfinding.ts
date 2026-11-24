@@ -66,6 +66,13 @@ export interface MoveContext {
   objectBlocked: Set<number>;
   /** Cell index -> live monster id standing there. */
   monsterAt: Map<number, string>;
+  /**
+   * Cell index -> another player's hero standing there: like a monster, it
+   * can only be the attack step at the end of a path (RULES_V2 5.2).
+   */
+  enemyHeroAt: Map<number, string>;
+  /** Cells of the moving player's other heroes (one hero per cell). */
+  friendAt: Set<number>;
   /** Cell index -> ids of live monsters guarding it, in map object order. */
   guards: Map<number, string[]>;
   /** Entrances whose visit stops the hero. */
@@ -123,12 +130,22 @@ export function moveContext(
         break;
     }
   }
+  const enemyHeroAt = new Map<number, string>();
+  const friendAt = new Set<number>();
+  for (const other of state.heroes) {
+    if (!other.alive || other.id === hero.id) continue;
+    const i = other.y * map.width + other.x;
+    if (other.owner === hero.owner) friendAt.add(i);
+    else enemyHeroAt.set(i, other.id);
+  }
   const player = state.players.find((p) => p.id === hero.owner);
   return {
     map,
     nativeTerrain: getHeroClass(hero.heroClass).nativeTerrain,
     objectBlocked,
     monsterAt,
+    enemyHeroAt,
+    friendAt,
     guards,
     stops,
     explored: options.ignoreFog === true ? null : (player?.explored ?? null),
@@ -151,7 +168,9 @@ export function isImpassableCell(
 export function canEnter(ctx: MoveContext, x: number, y: number): boolean {
   if (isImpassableCell(ctx, x, y)) return false;
   const i = y * ctx.map.width + x;
-  if (ctx.monsterAt.has(i)) return false;
+  if (ctx.monsterAt.has(i) || ctx.enemyHeroAt.has(i) || ctx.friendAt.has(i)) {
+    return false;
+  }
   return ctx.explored === null || ctx.explored[i] === true;
 }
 
@@ -349,7 +368,7 @@ export function findPathInContext(
   const w = map.width;
   const start = sy * w + sx;
   const goal = ty * w + tx;
-  const attackGoal = ctx.monsterAt.has(goal);
+  const attackGoal = ctx.monsterAt.has(goal) || ctx.enemyHeroAt.has(goal);
   if (ctx.explored !== null && ctx.explored[goal] !== true) return null;
   if (!attackGoal && !canEnter(ctx, tx, ty)) return null;
 
@@ -417,4 +436,54 @@ export function findPathInContext(
     prev = c;
   }
   return steps;
+}
+
+/**
+ * Every cell the hero can reach with at most `budget` movement points
+ * (default: today's), with its cheapest cost: Dijkstra under the same
+ * rules as findPath (stop cells end a walk, fog respected unless
+ * ignoreFog). Attack steps are not included. Deterministic.
+ */
+export function reachableCells(
+  state: GameState,
+  heroId: string,
+  budget?: number,
+  options: PathOptions = {},
+): Map<number, number> {
+  const out = new Map<number, number>();
+  const hero = findHero(state, heroId);
+  if (hero === undefined || !hero.alive) return out;
+  const limit = budget ?? hero.mp;
+  const ctx = moveContext(state, hero, options);
+  const { map } = ctx;
+  const w = map.width;
+  const start = hero.y * w + hero.x;
+  out.set(start, 0);
+  const open = new MinHeap();
+  open.push(0, start);
+  const closed = new Set<number>();
+  while (open.size > 0) {
+    const cur = open.pop();
+    if (closed.has(cur)) continue;
+    closed.add(cur);
+    const cx = cur % w;
+    const cy = (cur - cx) / w;
+    if (cur !== start && isStopCell(ctx, cx, cy)) continue;
+    const gc = out.get(cur) ?? 0;
+    for (const [dx, dy] of DIRECTIONS_8) {
+      const nx = cx + dx;
+      const ny = cy + dy;
+      if (!inBounds(map, nx, ny)) continue;
+      const ni = ny * w + nx;
+      if (closed.has(ni) || !canEnter(ctx, nx, ny)) continue;
+      if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
+      const ng = gc + stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny);
+      if (ng > limit) continue;
+      const old = out.get(ni);
+      if (old !== undefined && old <= ng) continue;
+      out.set(ni, ng);
+      open.push(ng, ni);
+    }
+  }
+  return out;
 }
