@@ -11,6 +11,7 @@ import { button, el, img, wait } from "./dom.ts";
 import { playGame } from "./game.ts";
 import { loadGameMapAssets } from "./hero-sprite.ts";
 import { browserStorage, loadGame, saveGame } from "./save.ts";
+import { installUiSounds, soundControl } from "./sound-control.ts";
 import "./game.css";
 
 const SIZES: ReadonlyArray<{ id: MapSize; label: string }> = [
@@ -130,6 +131,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
           newButton,
         ),
         status,
+        soundControl(),
         el(
           "div.gm-keys",
           "Click a cell to plan a path, click again (or Space) to walk. E end turn, H hero, T town, arrows pan, +/- zoom.",
@@ -148,6 +150,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
 export async function startGameApp(params: URLSearchParams): Promise<void> {
   const canvas = document.getElementById("game");
   if (canvas !== null) canvas.style.display = "none";
+  installUiSounds();
   for (;;) {
     const state = await mainMenu(params);
     params.delete("autostart");

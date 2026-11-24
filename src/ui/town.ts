@@ -30,6 +30,7 @@ import type {
   TownState,
 } from "../core/game/index.ts";
 import type { ResourceId } from "../core/map/types.ts";
+import { playSound } from "../audio/sound.ts";
 import { BUILDING_IDS, BUILDINGS } from "../data/buildings.ts";
 import { getCreature } from "../data/creatures.ts";
 import {
@@ -90,9 +91,10 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
     };
     window.addEventListener("keydown", onKey);
 
-    const run = (result: CommandResult): void => {
-      host.run(result);
+    const run = (result: CommandResult): boolean => {
+      const ok = host.run(result);
       render();
+      return ok;
     };
 
     const render = (): void => {
@@ -289,7 +291,9 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       } else {
         const b = button(
           "Build",
-          () => run(build(state, town.id, id)),
+          () => {
+            if (run(build(state, town.id, id))) playSound("build");
+          },
           "gm-btn gm-primary",
         );
         b.disabled = status !== "ok";
@@ -388,7 +392,8 @@ async function openRecruit(
     },
   });
   if (choice === "recruit" && count > 0) {
-    host.run(recruit(host.state(), townId, creature, count));
+    if (host.run(recruit(host.state(), townId, creature, count)))
+      playSound("recruit");
   }
 }
 
@@ -474,7 +479,8 @@ async function openMarket(host: TownHost): Promise<void> {
     const trade = button(
       "Trade",
       () => {
-        host.run(marketTrade(host.state(), 0, give, amount, get));
+        if (host.run(marketTrade(host.state(), 0, give, amount, get)))
+          playSound("gold");
         render();
       },
       "gm-btn gm-primary",

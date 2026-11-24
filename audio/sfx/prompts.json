@@ -1,0 +1,25 @@
+{
+  "sounds": [
+    {"id": "ui.click", "prompt": "a single short crisp wooden button click, clean and dry, no reverb, fantasy game menu", "duration": 0.5, "influence": 0.7, "takes": 1, "output": "public/sfx/ui-click.mp3"},
+    {"id": "ui.hover", "prompt": "a tiny soft high wooden tick, subtle game menu hover blip, very short, clean, no reverb", "duration": 0.5, "influence": 0.7, "takes": 1, "output": "public/sfx/ui-hover.mp3"},
+    {"id": "hero.step", "prompt": "a single footstep on grass: one clear crunch of a leather boot stepping onto dry grass, close-up, loud and clear, no background noise", "duration": 0.5, "influence": 0.7, "takes": 3, "output": "public/sfx/hero-step.mp3"},
+    {"id": "pickup", "prompt": "a bright cheerful cartoon item pickup chime, short magical sparkle, fantasy game collect, clean", "duration": 0.8, "influence": 0.6, "takes": 1, "output": "public/sfx/pickup.mp3"},
+    {"id": "gold", "prompt": "a small handful of gold coins clinking and dropping into a pouch, short, bright and clean", "duration": 1, "influence": 0.6, "takes": 1, "output": "public/sfx/gold.mp3"},
+    {"id": "build", "prompt": "cartoon fantasy construction finished: three quick hammer knocks on wood then a solid satisfying thunk, short, clean", "duration": 1.5, "influence": 0.6, "takes": 1, "output": "public/sfx/build.mp3"},
+    {"id": "recruit", "prompt": "a quick clank of armor and one firm boot stomp, a soldier stands ready, short and punchy, no voice", "duration": 0.8, "influence": 0.6, "takes": 2, "output": "public/sfx/recruit.mp3"},
+    {"id": "level-up", "prompt": "a short triumphant magical level up jingle, rising harp and glockenspiel arpeggio with a sparkle at the end, fantasy game", "duration": 1.8, "influence": 0.6, "takes": 1, "output": "public/sfx/level-up.mp3"},
+    {"id": "new-day", "prompt": "a short gentle morning chime, one soft warm bell with a light bird chirp, new day in a fantasy strategy game", "duration": 1.5, "influence": 0.6, "takes": 1, "output": "public/sfx/new-day.mp3"},
+    {"id": "new-week", "prompt": "a short bright medieval brass fanfare, three trumpet notes, cheerful, fantasy strategy game", "duration": 2, "influence": 0.6, "takes": 1, "output": "public/sfx/new-week.mp3"},
+    {"id": "battle.hit", "prompt": "a punchy sword strike hitting a shield, short meaty impact, cartoon fantasy battle, clean, no reverb", "duration": 0.6, "influence": 0.7, "takes": 1, "output": "public/sfx/hit.mp3"},
+    {"id": "battle.heavy-hit", "prompt": "a heavy hammer blow landing on a monster, a big punchy cartoon impact thump with a crunch, loud and short, clean, no reverb", "duration": 0.6, "influence": 0.7, "takes": 3, "output": "public/sfx/heavy-hit.mp3"},
+    {"id": "battle.shot", "prompt": "a single arrow fired from a bow, quick string twang and a fast whoosh, short, clean", "duration": 0.7, "influence": 0.7, "takes": 1, "output": "public/sfx/shot.mp3"},
+    {"id": "battle.death", "prompt": "a cartoon monster defeated: a short comic groan and a collapse thud with a clatter of armor, fantasy game", "duration": 1, "influence": 0.6, "takes": 1, "output": "public/sfx/death.mp3"},
+    {"id": "victory", "prompt": "a short triumphant orchestral victory sting, bold brass and drums, ends on a bright major chord, fantasy game battle won", "duration": 3, "influence": 0.6, "takes": 1, "output": "public/sfx/victory.mp3"},
+    {"id": "defeat", "prompt": "a short somber defeat sting, slow descending low brass with a soft timpani roll, ends on a minor chord, fantasy game battle lost", "duration": 3, "influence": 0.6, "takes": 1, "output": "public/sfx/defeat.mp3"},
+    {"id": "spell.bloom", "prompt": "a nature magic spell cast: quick rustling leaves, creaking growing vines and a warm green sparkling shimmer, short, fantasy game", "duration": 1.5, "influence": 0.6, "takes": 1, "output": "public/sfx/spell-bloom.mp3"},
+    {"id": "spell.accord", "prompt": "a magic spell cast: bright small silver bells ringing and a paper seal stamped with a crisp thump, parchment rustle, short, fantasy game", "duration": 1.5, "influence": 0.6, "takes": 1, "output": "public/sfx/spell-accord.mp3"},
+    {"id": "spell.clock", "prompt": "a magic spell cast: fast ticking brass clockwork gears whirring and winding up, ending in a single clear chime, short, fantasy game", "duration": 1.5, "influence": 0.6, "takes": 1, "output": "public/sfx/spell-clock.mp3"},
+    {"id": "spell.hush", "prompt": "a quiet ghostly spell cast: a soft breathy whisper and an airy eerie whoosh fading away, short, fantasy game", "duration": 1.5, "influence": 0.6, "takes": 1, "output": "public/sfx/spell-hush.mp3"},
+    {"id": "spell.storm", "prompt": "a lightning spell cast: sharp electric crackle and a short crack of thunder, punchy, fantasy game", "duration": 1.5, "influence": 0.6, "takes": 1, "output": "public/sfx/spell-storm.mp3"}
+  ]
+}

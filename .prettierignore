@@ -6,6 +6,8 @@ package-lock.json
 .orchestration
 # Studio-managed pipeline, its records and docs: owned by /studio, not this toolchain.
 tools/art
+# sfx.mjs writes these records (and the prompts follow its one-line style).
+audio/sfx
 tools/orchestration
 art
 docs/art

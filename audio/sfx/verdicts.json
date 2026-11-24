@@ -1,0 +1,132 @@
+{
+  "ui.click#0": {
+    "verdict": "ACCEPTED",
+    "notes": "single sharp transient, audible 0.09 s, dry: reads as a crisp button click",
+    "at": "2026-11-24T22:04:51.190Z"
+  },
+  "ui.hover#0": {
+    "verdict": "ACCEPTED",
+    "notes": "tiny transient with a short high ring (0.19 s audible); played 12 dB under the mix",
+    "at": "2026-11-24T22:04:51.240Z"
+  },
+  "hero.step#0": {
+    "verdict": "REJECTED",
+    "notes": "near silence: peak -32 dBFS, RMS -48.5, only low noise, no footstep transient",
+    "at": "2026-11-24T22:04:51.291Z"
+  },
+  "hero.step#1": {
+    "verdict": "REJECTED",
+    "notes": "crunch present but quieter and less defined than take 2 (peak -21 dBFS)",
+    "at": "2026-11-24T22:04:51.343Z"
+  },
+  "hero.step#2": {
+    "verdict": "ACCEPTED",
+    "notes": "one clear high crunch over 0.25 s, peak -15.8 dBFS; quiet take lifted by the playback gain",
+    "at": "2026-11-24T22:04:51.396Z"
+  },
+  "pickup#0": {
+    "verdict": "ACCEPTED",
+    "notes": "bright tonal chime with harmonics decaying over 0.8 s, clean onset",
+    "at": "2026-11-24T22:04:51.448Z"
+  },
+  "gold#0": {
+    "verdict": "ACCEPTED",
+    "notes": "many small bright metallic transients over 0.9 s: coin jingle shape",
+    "at": "2026-11-24T22:04:51.502Z"
+  },
+  "build#0": {
+    "verdict": "ACCEPTED",
+    "notes": "two hammer knocks 0.3 s apart and a ringing decay; punchy, reads as construction",
+    "at": "2026-11-24T22:04:51.554Z"
+  },
+  "recruit#0": {
+    "verdict": "REJECTED",
+    "notes": "the boot stomp lands 0.95 s after the click and is cut off at the end: too slow and abrupt",
+    "at": "2026-11-24T22:04:51.605Z"
+  },
+  "recruit#1": {
+    "verdict": "ACCEPTED",
+    "notes": "armor clank burst in the first 0.3 s then a clean decay; short and punchy",
+    "at": "2026-11-24T22:04:51.658Z"
+  },
+  "level-up#0": {
+    "verdict": "ACCEPTED",
+    "notes": "stepped rising tonal notes in the first 0.6 s then a sustained shimmer: jingle shape",
+    "at": "2026-11-24T22:04:51.710Z"
+  },
+  "new-day#0": {
+    "verdict": "ACCEPTED",
+    "notes": "soft tonal bell strikes, gentle level (RMS -18 dBFS), calm decay",
+    "at": "2026-11-24T22:04:51.765Z"
+  },
+  "new-week#0": {
+    "verdict": "ACCEPTED",
+    "notes": "two brass-like harmonic notes then a held tail; short fanfare",
+    "at": "2026-11-24T22:04:51.818Z"
+  },
+  "battle.hit#0": {
+    "verdict": "ACCEPTED",
+    "notes": "sharp broadband impact transient, audible 0.27 s, dry",
+    "at": "2026-11-24T22:04:51.871Z"
+  },
+  "battle.heavy-hit#0": {
+    "verdict": "REJECTED",
+    "notes": "pulsing rumble fills the whole take, no single clean impact, cut at the end",
+    "at": "2026-11-24T22:04:51.922Z"
+  },
+  "battle.heavy-hit#1": {
+    "verdict": "REJECTED",
+    "notes": "quiet (RMS -30 dBFS) with a long noisy rumble tail",
+    "at": "2026-11-24T22:04:51.976Z"
+  },
+  "battle.heavy-hit#2": {
+    "verdict": "ACCEPTED",
+    "notes": "one deep low-frequency boom decaying over 0.44 s: heavy, clean, punchy",
+    "at": "2026-11-24T22:04:52.029Z"
+  },
+  "battle.shot#0": {
+    "verdict": "ACCEPTED",
+    "notes": "high-frequency whoosh swelling to a peak at 0.25 s: arrow flight timed to the projectile",
+    "at": "2026-11-24T22:04:52.082Z"
+  },
+  "battle.death#0": {
+    "verdict": "ACCEPTED",
+    "notes": "loud body at 0-0.35 s (groan and thud) then a short scattered tail",
+    "at": "2026-11-24T22:04:52.137Z"
+  },
+  "victory#0": {
+    "verdict": "ACCEPTED",
+    "notes": "broadband orchestral swell for 1.1 s then a clean decay by 2.4 s",
+    "at": "2026-11-24T22:04:52.197Z"
+  },
+  "defeat#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low rolling timpani-like pulses for 2 s then a decay; somber, low register",
+    "at": "2026-11-24T22:04:52.252Z"
+  },
+  "spell.bloom#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rustling noise pulses with bright high sparkle over 1.1 s",
+    "at": "2026-11-24T22:04:52.305Z"
+  },
+  "spell.accord#0": {
+    "verdict": "ACCEPTED",
+    "notes": "high tonal bell line with stamp-like transients; a little bell blip at 1.25 s",
+    "at": "2026-11-24T22:04:52.361Z"
+  },
+  "spell.clock#0": {
+    "verdict": "ACCEPTED",
+    "notes": "regular ticking transients across 1.3 s: clockwork",
+    "at": "2026-11-24T22:04:52.417Z"
+  },
+  "spell.hush#0": {
+    "verdict": "ACCEPTED",
+    "notes": "soft broadband breathy decay, no hard transient: airy whisper shape",
+    "at": "2026-11-24T22:04:52.472Z"
+  },
+  "spell.storm#0": {
+    "verdict": "ACCEPTED",
+    "notes": "broadband crack with a long thunder-like decay",
+    "at": "2026-11-24T22:04:52.525Z"
+  }
+}

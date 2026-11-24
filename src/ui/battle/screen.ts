@@ -38,6 +38,8 @@ import type {
   BattleResult as GameBattleResult,
   BattleSetup as GameBattleSetup,
 } from "../../core/game/battle.ts";
+import { battleCue } from "../../audio/cues.ts";
+import { playSound } from "../../audio/sound.ts";
 import { battleGround, loadBattleArt } from "../../render/battle/assets.ts";
 import type { BattleArt } from "../../render/battle/assets.ts";
 import {
@@ -191,7 +193,13 @@ class BattleScreen {
         this.scene.round = round;
         this.refreshHud();
       },
-      onLog: (e, before) => this.logEvent(e, before),
+      onLog: (e, before) => {
+        this.logEvent(e, before);
+        if (this.animator.speed !== Infinity) {
+          const cue = battleCue(e, before);
+          if (cue !== null) playSound(cue);
+        }
+      },
     });
     this.animator.speed = options.autoResolve ? Infinity : (options.speed ?? 1);
     this.buildDom();
@@ -889,6 +897,7 @@ class BattleScreen {
         ? "defender"
         : "attacker";
     const won = engine.winner === player;
+    playSound(won ? "victory" : "defeat");
     const dlg = el("div", "bm-result");
     const box = el("div", `bm-result-box ${won ? "bm-won" : "bm-lost"}`);
     box.append(

@@ -386,6 +386,49 @@
   font-size: 15px;
 }
 
+/* ------------------------------------------------------------ sound */
+
+.gm-sound {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 2px 8px;
+  padding-top: 4px;
+  color: var(--gm-dim);
+  font-size: 11px;
+}
+
+.gm-sound-toggle {
+  grid-row: span 2;
+  min-width: 82px;
+  padding: 4px 6px;
+  font-size: 11px;
+}
+
+.gm-sound-row {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gm-sound-row span {
+  width: 42px;
+}
+
+.gm-sound-slider {
+  flex: 1 1 0;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  height: 12px;
+  accent-color: var(--gm-gold-dim);
+}
+
+.gm-sound.gm-muted .gm-sound-row {
+  opacity: 0.5;
+}
+
 /* ------------------------------------------------------------ armies */
 
 .gm-army {

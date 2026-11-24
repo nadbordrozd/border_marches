@@ -32,7 +32,10 @@ import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { HERO_SIGHT, getHeroClass } from "../data/hero.ts";
 import { createMapView, ZOOM_STEPS } from "../render/map/map-view.ts";
 import type { MapView } from "../render/map/map-view.ts";
+import { pickupCue } from "../audio/cues.ts";
+import { playSound } from "../audio/sound.ts";
 import { openBattleScreen } from "./battle/screen.ts";
+import { soundControl } from "./sound-control.ts";
 import { armyRow } from "./army.ts";
 import {
   button,
@@ -243,6 +246,7 @@ class GameScreen {
       this.townPanel,
       buttons,
       endTurn,
+      soundControl(),
     );
   }
 
@@ -646,6 +650,7 @@ class GameScreen {
       this.view.setHeroes([{ id: hero.id, x, y, unit: this.heroUnit }]);
       this.view.centerOn(x, y);
       this.updateViewport();
+      playSound("hero.step", { jitter: 0.08 });
       await wait(STEP_MS);
     }
   }
@@ -660,12 +665,14 @@ class GameScreen {
       for (const e of events) {
         switch (e.type) {
           case "pickup":
+            playSound(pickupCue(e.resource));
             toast(
               `+${e.amount} ${RESOURCE_NAMES[e.resource].toLowerCase()}`,
               "gain",
             );
             break;
           case "mine-flagged": {
+            playSound("pickup");
             const mine = this.state.mines[e.mineId];
             if (mine !== undefined) {
               const def = MINES[mine.resource];
@@ -680,6 +687,7 @@ class GameScreen {
             toast(`+${e.amount} experience`, "gain");
             break;
           case "town-captured":
+            playSound("new-week");
             toast(
               `${this.state.towns[e.townId]?.name ?? "Town"} captured!`,
               "gain",
@@ -728,6 +736,7 @@ class GameScreen {
     });
     const events = this.run(takeChest(this.state, heroId, pickupId, choice));
     if (events === null) return;
+    playSound(choice === "gold" ? "gold" : "pickup");
     for (const e of events) {
       if (e.type === "pickup") toast(`+${e.amount} gold`, "gain");
       if (e.type === "xp") toast(`+${e.amount} experience`, "gain");
@@ -746,6 +755,7 @@ class GameScreen {
       const offers = levelUpOffers(this.state, hero.id);
       if (offers.length === 0) return;
       const level = hero.level - hero.pendingLevelUps + 1;
+      playSound("level-up");
       const choice = await modal({
         title: `Level ${level}!`,
         className: "gm-levelup",
@@ -840,7 +850,10 @@ class GameScreen {
       this.refresh();
       for (const e of applied.events) {
         if (e.type === "xp") toast(`+${e.amount} experience`, "gain");
-        if (e.type === "town-captured") toast("Town captured!", "gain");
+        if (e.type === "town-captured") {
+          playSound("new-week");
+          toast("Town captured!", "gain");
+        }
       }
       if (this.checkEnd()) return;
       await this.levelUps();
@@ -852,6 +865,8 @@ class GameScreen {
           e.type === "mine-flagged",
       );
       for (const e of visits) {
+        if (e.type === "pickup") playSound(pickupCue(e.resource));
+        if (e.type === "mine-flagged") playSound("pickup");
         if (e.type === "pickup")
           toast(
             `+${e.amount} ${RESOURCE_NAMES[e.resource].toLowerCase()}`,
@@ -872,6 +887,7 @@ class GameScreen {
     if (events === null) return;
     saveGame(browserStorage(), this.state);
     const week = events.some((e) => e.type === "new-week");
+    playSound(week ? "new-week" : "new-day");
     if (week)
       toast(
         `Week ${calendar(this.state.day).weekOfGame}: creatures grow`,
@@ -921,6 +937,7 @@ class GameScreen {
     if (this.state.status === "playing") return false;
     if (this.finished) return true;
     const won = this.state.status === "won";
+    playSound(won ? "victory" : "defeat");
     deleteSave(browserStorage());
     this.finished = true;
     const c = calendar(this.state.day);
