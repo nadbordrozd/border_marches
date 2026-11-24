@@ -709,6 +709,19 @@
   filter: drop-shadow(0 6px 4px rgb(0 0 0 / 45%));
 }
 
+/* v0.2 faction towns (bead bzc.15): backdrop and 3x2 town at x2. */
+.gm-town-view-faction {
+  background-color: var(--gm-wood-dark);
+  background-repeat: no-repeat;
+  background-size: 512px 448px;
+  background-position: center bottom;
+}
+
+.gm-town-city-3x2 {
+  bottom: 32px;
+  filter: none;
+}
+
 .gm-town-tree {
   position: absolute;
   image-rendering: pixelated;
@@ -784,6 +797,13 @@
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+.gm-building-art {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
 }
 
 .gm-building-portrait {

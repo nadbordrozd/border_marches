@@ -8,10 +8,12 @@ import {
   GROUND_TEXTURES,
   TOWN_ASSETS,
 } from "../assets/manifest.ts";
+import { buildingArt, townArt, townBackdrop } from "../assets/town-art.ts";
 import {
   build,
   buildStatus,
   canAfford,
+  fortLevel,
   hasMarketplace,
   heroInTownOf,
   hireHero,
@@ -121,23 +123,40 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
 
       // ------------------------------------------------ picture + buildings
       const picture = el("div.gm-town-view");
-      picture.style.backgroundImage = `url("${imageUrl(GROUND_TEXTURES.jungle.key)}")`;
-      const sky = el("div.gm-town-sky");
-      picture.append(sky);
-      const trees = FOREST_SETS.jungle.pieces.filter((p) => p.shape === "2x2");
-      const left = trees[0];
-      const right = trees[1] ?? trees[0];
-      if (left !== undefined)
-        picture.append(img(left.key, "gm-town-tree gm-town-tree-l", 2));
-      if (right !== undefined)
-        picture.append(img(right.key, "gm-town-tree gm-town-tree-r", 2));
-      const art =
-        TOWN_ASSETS.find(
-          (t) =>
-            t.faction === (townTree(town.faction)?.art ?? "dinosaur") &&
-            t.level === townLevel(town),
-        ) ?? TOWN_ASSETS[0];
-      if (art !== undefined) picture.append(img(art.key, "gm-town-city", 3));
+      const backdrop = townBackdrop(town.faction);
+      if (backdrop !== null) {
+        // v0.2 factions (bead bzc.15): the faction's backdrop and its 3x2
+        // town at the fort level built, both at x2.
+        picture.classList.add("gm-town-view-faction");
+        picture.style.backgroundImage = `url("${imageUrl(backdrop.key)}")`;
+        picture.append(
+          img(
+            townArt(town.faction, fortLevel(town)).key,
+            "gm-town-city gm-town-city-3x2",
+            2,
+          ),
+        );
+      } else {
+        picture.style.backgroundImage = `url("${imageUrl(GROUND_TEXTURES.jungle.key)}")`;
+        const sky = el("div.gm-town-sky");
+        picture.append(sky);
+        const trees = FOREST_SETS.jungle.pieces.filter(
+          (p) => p.shape === "2x2",
+        );
+        const left = trees[0];
+        const right = trees[1] ?? trees[0];
+        if (left !== undefined)
+          picture.append(img(left.key, "gm-town-tree gm-town-tree-l", 2));
+        if (right !== undefined)
+          picture.append(img(right.key, "gm-town-tree gm-town-tree-r", 2));
+        const art =
+          TOWN_ASSETS.find(
+            (t) =>
+              t.faction === (townTree(town.faction)?.art ?? "dinosaur") &&
+              t.level === townLevel(town),
+          ) ?? TOWN_ASSETS[0];
+        if (art !== undefined) picture.append(img(art.key, "gm-town-city", 3));
+      }
       const income = townIncome(town);
       picture.append(
         el(
@@ -314,6 +333,8 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       const card = el("div.gm-building");
       card.classList.add(`gm-b-${status}`);
       const head = el("div.gm-building-head");
+      const art = buildingArt(town.faction, id);
+      if (art !== null) head.append(img(art.key, "gm-building-art"));
       if (def.dwelling !== undefined) {
         head.append(
           img(

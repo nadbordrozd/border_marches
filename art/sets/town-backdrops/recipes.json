@@ -1,0 +1,70 @@
+{
+  "set": "town-backdrops",
+  "bead": "border_marches-bzc.15",
+  "class": "towns",
+  "exploration": false,
+  "_doc": "Town-screen backdrops of the three v0.2 factions: one opaque 256x232 landscape per faction, cropped to 256x224 (shown at x2 behind the town picture), the faction's native ground in the lower part where the town sprite and the building sprites stand, a sky and a far horizon in the top third, framing scenery at the left and right edges only. Lit from the bottom left like every piece. Styled from the faction's accepted map town. Class contract: docs/art/classes/towns.md. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": ["style", "light-south-west", "class-town-backdrop"],
+    "noBackground": false,
+    "width": 256,
+    "height": 232
+  },
+  "recipes": [
+    {
+      "id": "realm-backdrop-a",
+      "concept": "REALM BACKDROP (grass)",
+      "seed": 77101,
+      "styleImage": {
+        "file": "art/masters/faction-towns/realm-fort-a-0.png",
+        "usage": "copy the palette, outline thickness, shading and pixel size only"
+      },
+      "subject": "Subject: a sunny storybook kingdom countryside. Sky light blue #8ccbf0 with two chunky white clouds; on the horizon soft blue-green rolling hills #6f9f6a and a tiny far-off windmill; the open ground is calm bright meadow grass #8ab85c with #6f9a48 shadows and a few small flower specks; a pale dirt road #c9a86a comes in from the bottom centre and stops in the middle of the meadow; at the far left and right edges round green oak trees #3f7d45 and a short stretch of wooden fence frame the scene."
+    },
+    {
+      "id": "restless-backdrop-a",
+      "concept": "RESTLESS BACKDROP (wasteland)",
+      "seed": 77201,
+      "styleImage": {
+        "file": "art/masters/faction-towns/restless-fort-a-0.png",
+        "usage": "copy the palette, outline thickness, shading and pixel size only"
+      },
+      "subject": "Subject: a spooky-cute graveyard countryside at dusk from a comedy ghost story. Sky deep shroud violet #4e2f7a fading to dusky mauve #8a6aa8 at the horizon, a big round pale moon #f2ead2 and a few chunky violet clouds; on the horizon dark slate hills #3a3842 with the silhouette of a crooked far-off church spire; the open ground is calm ash grey earth #716a64 with #5a544f shadows, a few twigs and small pebbles; a pale stone path #a49c90 comes in from the bottom centre and stops in the middle; at the far left and right edges bare crooked dead trees #4a3c34 and a few leaning cream tombstones frame the scene. Never gory."
+    },
+    {
+      "id": "horde-backdrop-a",
+      "concept": "HORDE BACKDROP (badlands)",
+      "seed": 77301,
+      "styleImage": {
+        "file": "art/masters/towns-3x2/goblin-hold-v4a-0.png",
+        "usage": "copy the palette, outline thickness, shading and pixel size only"
+      },
+      "subject": "Subject: a hot scrappy goblin badlands. Sky warm hazy yellow-orange #f2c48a with a few chunky dust clouds; on the horizon flat-topped red sandstone mesas #a85a3a and two thin smoke plumes; the open ground is calm red-orange regolith #b56c46 with #93553a shadows, a few small rocks and dry straw tufts #d3c176; a dusty track #c98a5e comes in from the bottom centre and stops in the middle; at the far left and right edges heaps of junk, old tin sheets, cattle skulls and a leaning wooden signpost frame the scene."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/towns/backdrops/humans.png",
+      "from": "realm-backdrop-a#0",
+      "width": 256,
+      "height": 224,
+      "steps": [{ "op": "crop", "x": 0, "y": 4, "width": 256, "height": 224 }]
+    },
+    {
+      "path": "public/assets/towns/backdrops/undead.png",
+      "from": "restless-backdrop-a#0",
+      "width": 256,
+      "height": 224,
+      "steps": [{ "op": "crop", "x": 0, "y": 4, "width": 256, "height": 224 }]
+    },
+    {
+      "path": "public/assets/towns/backdrops/goblins.png",
+      "from": "horde-backdrop-a#0",
+      "width": 256,
+      "height": 224,
+      "steps": [{ "op": "crop", "x": 0, "y": 4, "width": 256, "height": 224 }]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Class: one single town building for a strategy game's town screen, three-quarter view looking slightly down, thick dark outline, big simple shapes, whole and centred on the empty transparent background, filling most of the image; nothing is drawn under it.

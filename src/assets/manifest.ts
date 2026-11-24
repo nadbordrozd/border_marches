@@ -40,6 +40,7 @@ import type { ResourceId, Terrain } from "../core/map/types";
 import { ALL_ICON_ASSETS } from "./icons";
 import { PEAK_ASSETS } from "./peaks";
 import { TREE_ASSETS } from "./trees";
+import { BUILDING_ART_ASSETS, TOWN_BACKDROP_ASSETS } from "./town-buildings";
 import { V02_HERO_ASSETS, V02_UNIT_ASSETS } from "./v02-units";
 
 /** Master pixels per map cell. */
@@ -69,6 +70,8 @@ export type AssetCategory =
   | "doodad"
   | "tree"
   | "peak"
+  | "building"
+  | "town-backdrop"
   | "icon";
 
 /** One PNG under public/. */
@@ -3907,11 +3910,16 @@ export const RESOURCE_ITEMS: Readonly<Record<ResourceId, ResourceItemAsset>> =
  * north-west cell is (x0, y0). The art is centred and its lowest opaque row
  * sits 4 px above the canvas bottom (`box`). The yards inside the walls are
  * transparent, so the cell grounds show through; no flag (the owner shows
- * in the interface). Not wired yet (bead xaj.15).
+ * in the interface). The v0.2 factions (bead bzc.15, set faction-towns)
+ * have two growth stages each, picked by the town's fort level:
+ * `townArt` in src/assets/town-art.ts.
  */
 export interface Town3x2Asset extends ImageAsset {
   readonly category: "town-3x2";
-  readonly faction: "dinosaur" | "goblin";
+  /** Art family: dinosaur (Lost World), goblin (Horde), humans, undead. */
+  readonly faction: "dinosaur" | "goblin" | "humans" | "undead";
+  /** "camp" for fort levels 0-1 (a light wall), "fort" for 2-3. */
+  readonly stage: "camp" | "fort";
   readonly cols: 3;
   readonly rows: 2;
   readonly up: 24;
@@ -3925,6 +3933,7 @@ export interface Town3x2Asset extends ImageAsset {
 function town3x2(
   key: string,
   faction: Town3x2Asset["faction"],
+  stage: Town3x2Asset["stage"],
   box: readonly [number, number, number, number],
   source: string,
 ): Town3x2Asset {
@@ -3935,6 +3944,7 @@ function town3x2(
     h: 2 * CELL_PX + 24,
     category: "town-3x2",
     faction,
+    stage,
     cols: 3,
     rows: 2,
     up: 24,
@@ -3944,19 +3954,59 @@ function town3x2(
   };
 }
 
-/** The Lost World town and the goblin Warlord's Hold at 3x2. */
+/**
+ * The Lost World town, the goblin Warlord's Hold (also the Horde town's fort
+ * stage) and the v0.2 faction towns at 3x2.
+ */
 export const TOWN_3X2_ASSETS: readonly Town3x2Asset[] = [
   town3x2(
     "dinosaur-town-3x2",
     "dinosaur",
+    "fort",
     [4, 13, 232, 167],
     "towns-3x2/lost-world-a-clean2#0",
   ),
   town3x2(
     "goblin-hold-3x2",
     "goblin",
+    "fort",
     [4, 10, 232, 170],
     "towns-3x2/goblin-hold-v4a#0",
+  ),
+  town3x2(
+    "horde-warcamp-3x2",
+    "goblin",
+    "camp",
+    [4, 18, 232, 162],
+    "faction-towns/horde-camp-a#0",
+  ),
+  town3x2(
+    "realm-village-3x2",
+    "humans",
+    "camp",
+    [4, 44, 232, 136],
+    "faction-towns/realm-camp-a#0",
+  ),
+  town3x2(
+    "realm-castle-3x2",
+    "humans",
+    "fort",
+    [4, 6, 232, 174],
+    "faction-towns/realm-fort-a#0",
+  ),
+  town3x2(
+    "restless-graveyard-3x2",
+    "undead",
+    "camp",
+    [4, 5, 232, 175],
+    "faction-towns/restless-camp-a#0",
+  ),
+  town3x2(
+    "restless-churchyard-3x2",
+    "undead",
+    "fort",
+    [4, 5, 232, 175],
+    "faction-towns/restless-fort-a#0",
   ),
 ];
 
@@ -4054,6 +4104,8 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...DOODAD_ASSETS,
   ...TREE_ASSETS,
   ...PEAK_ASSETS,
+  ...BUILDING_ART_ASSETS,
+  ...TOWN_BACKDROP_ASSETS,
   ...ALL_ICON_ASSETS,
 ];
 

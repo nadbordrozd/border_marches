@@ -1,0 +1,1887 @@
+{
+  "set": "town-buildings",
+  "bead": "border_marches-bzc.15",
+  "class": "towns",
+  "exploration": false,
+  "_doc": "Town-screen building art of the three v0.2 factions: one 64x64 sprite per building of each faction's tree (FACTION_HUMANS.md, FACTION_UNDEAD.md, FACTION_GOBLINS.md section 9), a single building in the map's three-quarter view on a transparent background, lit from the bottom left, styled from the faction's accepted map town. One generate-image-v2 call returns several candidates of a mixed subject ('each image a different one of these'); each accepted candidate's verdict names the building it shows, and outputs[] maps it to its file. Magic Guild levels share one sprite. Class contract: docs/art/classes/towns.md. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "realm": {
+      "file": "art/masters/faction-towns/realm-fort-a-0.png",
+      "usage": "copy the palette, outline thickness, shading and pixel size only"
+    },
+    "restless": {
+      "file": "art/masters/faction-towns/restless-fort-a-0.png",
+      "usage": "copy the palette, outline thickness, shading and pixel size only"
+    },
+    "horde": {
+      "file": "art/masters/towns-3x2/goblin-hold-v4a-0.png",
+      "usage": "copy the palette, outline thickness, shading and pixel size only"
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-town-building"
+    ],
+    "noBackground": true,
+    "width": 64,
+    "height": 64
+  },
+  "recipes": [
+    {
+      "id": "realm-dwellings-a",
+      "concept": "REALM DWELLINGS",
+      "seed": 74101,
+      "styleImage": "@realm",
+      "subject": "Subject: each image a different one of these six storybook kingdom buildings: Squires' Hall (small timber-framed hall, a big round wooden shield over the door, a straw practice dummy); Archery Range (open wooden shed with round straw targets with red and white rings); Barracks (long stone barracks, red-brown tiled roof, a rack of spears); Friary (small stone friary with a bell gable and a little garden fence); Stables (timber stable with a hay-loft door and a gold horseshoe sign); Slayers' Lodge (stout stone lodge with a giant green dragon skull over the door). Materials: cream limestone #e6d8b4, white plaster with dark timbers, roofs tabard blue #2f6fd0 or red-brown #a8492f.",
+      "negative": "pennant"
+    },
+    {
+      "id": "realm-civic-a",
+      "concept": "REALM HALLS, FORT, ECONOMY",
+      "seed": 74102,
+      "styleImage": "@realm",
+      "subject": "Subject: each image a different one of these 8 storybook kingdom buildings: Village Hall (small timber-framed hall with a bell on the roof); Town Hall (two-storey stone and timber hall with a clock tower); City Hall (grand cream stone palace hall with columns and a blue dome); Palisade (short curved stretch of wooden plank palisade with a little gate); Keep (square cream stone keep tower with crenellations and a blue roof); Royal Castle (compact castle: a gatehouse and two round towers with blue cones); Marketplace (market stalls with blue and white striped awnings and crates); Resource Silo (round stone silo beside a woodpile and an ore cart). Materials: cream limestone #e6d8b4, white plaster with dark timbers, roofs tabard blue #2f6fd0 or red-brown #a8492f.",
+      "negative": "pennant"
+    },
+    {
+      "id": "realm-civic-b",
+      "concept": "REALM GUILD, TAVERN, DRILLS, SPECIALS",
+      "seed": 74103,
+      "styleImage": "@realm",
+      "subject": "Subject: each image a different one of these 8 storybook kingdom buildings: Magic Guild (slender round cream stone wizard tower with a blue pointed roof and gold stars); Tavern (cosy timber inn with a hanging tankard sign); Butts (three straw archery targets under a small wooden roof); Guardroom (small stone guardhouse with an iron-studded door and crossed halberds); Tiltyard (jousting fence with striped poles and a small stand with a blue canopy); Tithe Barn (big timber barn with wheat sheaves and sacks of gold); Chapel of Oaths (small cream chapel with a giant sword set over its door); Round Table (grand round hall of cream stone with a blue dome and a gold crown on top). Materials: cream limestone #e6d8b4, white plaster with dark timbers, roofs tabard blue #2f6fd0 or red-brown #a8492f.",
+      "negative": "pennant"
+    },
+    {
+      "id": "restless-dwellings-a",
+      "concept": "RESTLESS DWELLINGS",
+      "seed": 75101,
+      "styleImage": "@restless",
+      "subject": "Subject: each image a different one of these 6 graveyard town buildings: Potter's Field (crooked tombstones behind a low black iron fence); Charnel Pit (round stone pit heaped with bones under a little slate roof); Wailing Tower (tall thin crooked slate tower with a violet roof and moaning wind holes); Funeral Parlour (narrow black funeral house with a violet awning and a coffin by the door); Manor (tall gothic manor house with violet roofs and glowing windows); Royal Mausoleum (grand bone white domed mausoleum with columns and a crown on the dome). Materials: dark slate stone #5b5866 with #3a3842 shadows, steep shroud violet #7a4fb5 roofs, bone white #d8d0bc, black iron; spooky-cute, never gory.",
+      "negative": "pennant"
+    },
+    {
+      "id": "restless-civic-a",
+      "concept": "RESTLESS HALLS, FORT, ECONOMY",
+      "seed": 75102,
+      "styleImage": "@restless",
+      "subject": "Subject: each image a different one of these 8 graveyard town buildings: Village Hall (small crooked slate parish hall with a violet roof and a bell); Town Hall (larger slate hall with a clock tower showing midnight); City Hall (grand gothic hall with three violet spires); Iron Railings (short curved stretch of black iron railings with a little gate); Lych Wall (stretch of slate stone wall with a roofed lych-gate); Black Gate (big black iron gate between two slate towers with violet cones); Marketplace (crooked market stalls with violet and black striped awnings and lanterns); Resource Silo (slate storehouse beside a woodpile and an ore cart). Materials: dark slate stone #5b5866 with #3a3842 shadows, steep shroud violet #7a4fb5 roofs, bone white #d8d0bc, black iron; spooky-cute, never gory.",
+      "negative": "pennant"
+    },
+    {
+      "id": "restless-civic-b",
+      "concept": "RESTLESS GUILD, TAVERN, DRILLS, SPECIALS",
+      "seed": 75103,
+      "styleImage": "@restless",
+      "subject": "Subject: each image a different one of these 8 graveyard town buildings: Magic Guild (crooked slate wizard tower with a violet pointed roof and a glowing window); Tavern (creaky timber inn with a coffin-shaped sign); Bone Yard (fenced heap of bones and skulls); Rot Cellar (small stone cellar house with a slanted cellar door and green glowing jars); Drawing Room (elegant parlour house with tall violet-curtained windows); Essence Still (copper still bubbling violet essence over a stone furnace); Family Crypt (small stone crypt with a carved crest and an iron door); Hall of Ancestors (grand bone white hall with tall portrait windows and a violet dome). Materials: dark slate stone #5b5866 with #3a3842 shadows, steep shroud violet #7a4fb5 roofs, bone white #d8d0bc, black iron; spooky-cute, never gory.",
+      "negative": "pennant"
+    },
+    {
+      "id": "horde-dwellings-a",
+      "concept": "HORDE DWELLINGS",
+      "seed": 76101,
+      "styleImage": "@horde",
+      "subject": "Subject: each image a different one of these 6 goblin warcamp buildings: Goblin Holes (heap of scrap and logs with round burrow doors); Powder Shed (tin shed with black powder barrels and a skull sign); Wolf Kennels (log kennel with a big bone and a wolf-head sign); Hex Hut (crooked hide hut on stilts with a lightning rod and a cauldron); Ogre Pit (round log stockade arena with a huge club leaning on it); Boss Tent (huge tawny hide tent with big horns over the entrance). Materials: riveted light grey tin #b8bcc0, hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide; scrappy and lopsided.",
+      "negative": "pennant"
+    },
+    {
+      "id": "horde-civic-a",
+      "concept": "HORDE HALLS, FORT, ECONOMY",
+      "seed": 76102,
+      "styleImage": "@horde",
+      "subject": "Subject: each image a different one of these 8 goblin warcamp buildings: Village Hall (small tin shack with a yellow roof and a war horn); Town Hall (two-storey tin and log hall with yellow roofs); City Hall (big lopsided junk palace with yellow roofs and horns); Stakes (short row of sharpened log stakes); Scrap Wall (short stretch of riveted tin wall with spiked logs); Skull Tower (lopsided junk watchtower topped by a big horned skull); Marketplace (junk stalls with yellow awnings and piles of loot); Resource Silo (tin silo beside a woodpile and an ore wheelbarrow). Materials: riveted light grey tin #b8bcc0, hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide; scrappy and lopsided.",
+      "negative": "pennant"
+    },
+    {
+      "id": "horde-civic-b",
+      "concept": "HORDE GUILD, TAVERN, DRILLS, SPECIALS",
+      "seed": 76103,
+      "styleImage": "@horde",
+      "subject": "Subject: each image a different one of these 8 goblin warcamp buildings: Magic Guild (crooked hide and tin shaman tower with a lightning rod); Tavern (tin grog shack with barrels and a mug sign); Mosh Pit (small ring of logs with a big gong); Pitch Vats (two bubbling black pitch vats over a fire); Racing Track (wooden starting gate with yellow and black chequered posts); Loot Pile (big heap of gold coins, chests and junk); Launch Ramp (tall wooden ramp with a big spring at its foot); Great Flinger (giant catapult of logs and tin with a yellow-painted arm). Materials: riveted light grey tin #b8bcc0, hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide; scrappy and lopsided.",
+      "negative": "pennant"
+    },
+    {
+      "id": "horde-fix-a",
+      "concept": "HORDE STAKES AND RACING TRACK (re-roll)",
+      "seed": 76104,
+      "styleImage": "@horde",
+      "notes": "horde-civic-a drew no Stakes (the halls took extra takes) and horde-civic-b painted the word START on both Racing Tracks.",
+      "subject": "Subject: each image a different one of these 2 goblin warcamp buildings: Stakes (a short curved row of crooked sharpened log stakes leaning outward, lashed with rope, one cream ox skull on the middle stake); Racing Track (a wooden starting gate: two posts painted with yellow and black chequers and a blank plank across the top with no writing, a small wooden go-kart in front). Materials: riveted light grey tin #b8bcc0, hazard yellow #f2c230, sharpened logs #b8733a, tawny spotted hide; scrappy and lopsided.",
+      "negative": "pennant, writing, word, start"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/towns/buildings/goblins/boss-tent.png",
+      "from": "horde-dwellings-a#15",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 1,
+          "width": 64,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/city-hall.png",
+      "from": "horde-civic-a#10",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 1,
+          "width": 56,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 56,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/goblin-holes.png",
+      "from": "horde-dwellings-a#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 6,
+          "width": 61,
+          "height": 41
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 43,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/great-flinger.png",
+      "from": "horde-civic-b#7",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 3,
+          "width": 59,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 59,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/hex-hut.png",
+      "from": "horde-dwellings-a#9",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 0,
+          "width": 49,
+          "height": 54
+        },
+        {
+          "op": "pad",
+          "width": 49,
+          "height": 56,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/launch-ramp.png",
+      "from": "horde-civic-b#14",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 1,
+          "width": 55,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 55,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/loot-pile.png",
+      "from": "horde-civic-b#5",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 8,
+          "width": 62,
+          "height": 54
+        },
+        {
+          "op": "pad",
+          "width": 62,
+          "height": 56,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/magic-guild.png",
+      "from": "horde-civic-b#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 1,
+          "width": 40,
+          "height": 63
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/marketplace.png",
+      "from": "horde-civic-a#14",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 10,
+          "width": 59,
+          "height": 47
+        },
+        {
+          "op": "pad",
+          "width": 59,
+          "height": 49,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/mosh-pit.png",
+      "from": "horde-civic-b#2",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 3,
+          "width": 53,
+          "height": 59
+        },
+        {
+          "op": "pad",
+          "width": 53,
+          "height": 61,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/ogre-pit.png",
+      "from": "horde-dwellings-a#13",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 0,
+          "width": 61,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/pitch-vats.png",
+      "from": "horde-civic-b#3",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 17,
+          "width": 61,
+          "height": 46
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 48,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/powder-shed.png",
+      "from": "horde-dwellings-a#3",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 5,
+          "width": 61,
+          "height": 46
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 48,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/racing-track.png",
+      "from": "horde-fix-a#12",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 0,
+          "width": 56,
+          "height": 61
+        },
+        {
+          "op": "pad",
+          "width": 56,
+          "height": 63,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/resource-silo.png",
+      "from": "horde-civic-a#15",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 58,
+          "height": 56
+        },
+        {
+          "op": "pad",
+          "width": 58,
+          "height": 58,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/scrap-wall.png",
+      "from": "horde-civic-a#12",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 60,
+          "height": 57
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 59,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/skull-tower.png",
+      "from": "horde-civic-a#13",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 1,
+          "width": 37,
+          "height": 61
+        },
+        {
+          "op": "pad",
+          "width": 37,
+          "height": 63,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/stakes.png",
+      "from": "horde-fix-a#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 2,
+          "width": 60,
+          "height": 45
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 47,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/tavern.png",
+      "from": "horde-civic-b#1",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 5,
+          "width": 63,
+          "height": 56
+        },
+        {
+          "op": "pad",
+          "width": 63,
+          "height": 58,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/town-hall.png",
+      "from": "horde-civic-a#4",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 3,
+          "width": 51,
+          "height": 58
+        },
+        {
+          "op": "pad",
+          "width": 51,
+          "height": 60,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/village-hall.png",
+      "from": "horde-civic-a#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 5,
+          "width": 47,
+          "height": 51
+        },
+        {
+          "op": "pad",
+          "width": 47,
+          "height": 53,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/goblins/wolf-kennels.png",
+      "from": "horde-dwellings-a#8",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 0,
+          "width": 63,
+          "height": 50
+        },
+        {
+          "op": "pad",
+          "width": 63,
+          "height": 52,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/archery-range.png",
+      "from": "realm-dwellings-a#4",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 1,
+          "width": 59,
+          "height": 52
+        },
+        {
+          "op": "pad",
+          "width": 59,
+          "height": 54,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/barracks.png",
+      "from": "realm-dwellings-a#7",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 1,
+          "width": 59,
+          "height": 53
+        },
+        {
+          "op": "pad",
+          "width": 59,
+          "height": 55,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/butts.png",
+      "from": "realm-civic-b#2",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 9,
+          "width": 51,
+          "height": 44
+        },
+        {
+          "op": "pad",
+          "width": 51,
+          "height": 46,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/chapel-of-oaths.png",
+      "from": "realm-civic-b#14",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 0,
+          "width": 45,
+          "height": 59
+        },
+        {
+          "op": "pad",
+          "width": 45,
+          "height": 61,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/city-hall.png",
+      "from": "realm-civic-a#5",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 0,
+          "width": 61,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/friary.png",
+      "from": "realm-dwellings-a#9",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 3,
+          "width": 54,
+          "height": 52
+        },
+        {
+          "op": "pad",
+          "width": 54,
+          "height": 54,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/guardroom.png",
+      "from": "realm-civic-b#3",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 7,
+          "width": 40,
+          "height": 48
+        },
+        {
+          "op": "pad",
+          "width": 40,
+          "height": 50,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/keep.png",
+      "from": "realm-civic-a#9",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 0,
+          "width": 50,
+          "height": 58
+        },
+        {
+          "op": "pad",
+          "width": 50,
+          "height": 60,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/magic-guild.png",
+      "from": "realm-civic-b#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 19,
+          "y": 2,
+          "width": 25,
+          "height": 58
+        },
+        {
+          "op": "pad",
+          "width": 25,
+          "height": 60,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/marketplace.png",
+      "from": "realm-civic-a#13",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 7,
+          "width": 60,
+          "height": 47
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 49,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/palisade.png",
+      "from": "realm-civic-a#7",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 55,
+          "height": 48
+        },
+        {
+          "op": "pad",
+          "width": 55,
+          "height": 50,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/resource-silo.png",
+      "from": "realm-civic-a#15",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 2,
+          "width": 57,
+          "height": 55
+        },
+        {
+          "op": "pad",
+          "width": 57,
+          "height": 57,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/round-table.png",
+      "from": "realm-civic-b#7",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 1,
+          "width": 48,
+          "height": 55
+        },
+        {
+          "op": "pad",
+          "width": 48,
+          "height": 57,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/royal-castle.png",
+      "from": "realm-civic-a#10",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 0,
+          "width": 60,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/slayers-lodge.png",
+      "from": "realm-dwellings-a#14",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 3,
+          "width": 57,
+          "height": 54
+        },
+        {
+          "op": "pad",
+          "width": 57,
+          "height": 56,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/squires-hall.png",
+      "from": "realm-dwellings-a#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 53,
+          "height": 49
+        },
+        {
+          "op": "pad",
+          "width": 53,
+          "height": 51,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/stables.png",
+      "from": "realm-dwellings-a#12",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 0,
+          "width": 51,
+          "height": 55
+        },
+        {
+          "op": "pad",
+          "width": 51,
+          "height": 57,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/tavern.png",
+      "from": "realm-civic-b#9",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 1,
+          "width": 60,
+          "height": 54
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 56,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/tiltyard.png",
+      "from": "realm-civic-b#12",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 2,
+          "width": 62,
+          "height": 54
+        },
+        {
+          "op": "pad",
+          "width": 62,
+          "height": 56,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/tithe-barn.png",
+      "from": "realm-civic-b#5",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 1,
+          "width": 59,
+          "height": 55
+        },
+        {
+          "op": "pad",
+          "width": 59,
+          "height": 57,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/town-hall.png",
+      "from": "realm-civic-a#3",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 1,
+          "width": 44,
+          "height": 59
+        },
+        {
+          "op": "pad",
+          "width": 44,
+          "height": 61,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/humans/village-hall.png",
+      "from": "realm-civic-a#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 5,
+          "width": 41,
+          "height": 49
+        },
+        {
+          "op": "pad",
+          "width": 41,
+          "height": 51,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/black-gate.png",
+      "from": "restless-civic-a#10",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 3,
+          "width": 58,
+          "height": 57
+        },
+        {
+          "op": "pad",
+          "width": 58,
+          "height": 59,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/bone-yard.png",
+      "from": "restless-civic-b#4",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 7,
+          "width": 62,
+          "height": 50
+        },
+        {
+          "op": "pad",
+          "width": 62,
+          "height": 52,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/charnel-pit.png",
+      "from": "restless-dwellings-a#5",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 18,
+          "y": 4,
+          "width": 45,
+          "height": 53
+        },
+        {
+          "op": "pad",
+          "width": 45,
+          "height": 55,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/city-hall.png",
+      "from": "restless-civic-a#5",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 1,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 56,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/drawing-room.png",
+      "from": "restless-civic-b#8",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 0,
+          "width": 60,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/essence-still.png",
+      "from": "restless-civic-b#10",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 1,
+          "width": 49,
+          "height": 58
+        },
+        {
+          "op": "pad",
+          "width": 49,
+          "height": 60,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/family-crypt.png",
+      "from": "restless-civic-b#13",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 0,
+          "width": 50,
+          "height": 61
+        },
+        {
+          "op": "pad",
+          "width": 50,
+          "height": 63,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/funeral-parlour.png",
+      "from": "restless-dwellings-a#9",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 21,
+          "y": 5,
+          "width": 38,
+          "height": 53
+        },
+        {
+          "op": "pad",
+          "width": 38,
+          "height": 55,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/hall-of-ancestors.png",
+      "from": "restless-civic-b#14",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 0,
+          "width": 51,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 51,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/iron-railings.png",
+      "from": "restless-civic-a#6",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 18,
+          "width": 58,
+          "height": 41
+        },
+        {
+          "op": "pad",
+          "width": 58,
+          "height": 43,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/lych-wall.png",
+      "from": "restless-civic-a#8",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 8,
+          "width": 61,
+          "height": 48
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 50,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/magic-guild.png",
+      "from": "restless-civic-b#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 17,
+          "y": 0,
+          "width": 30,
+          "height": 63
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/manor.png",
+      "from": "restless-dwellings-a#12",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 0,
+          "width": 50,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 50,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/marketplace.png",
+      "from": "restless-civic-a#12",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 13,
+          "width": 62,
+          "height": 39
+        },
+        {
+          "op": "pad",
+          "width": 62,
+          "height": 41,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/potters-field.png",
+      "from": "restless-dwellings-a#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 12,
+          "width": 59,
+          "height": 45
+        },
+        {
+          "op": "pad",
+          "width": 59,
+          "height": 47,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/resource-silo.png",
+      "from": "restless-civic-a#14",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 60,
+          "height": 52
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 54,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/rot-cellar.png",
+      "from": "restless-civic-b#6",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 5,
+          "width": 55,
+          "height": 50
+        },
+        {
+          "op": "pad",
+          "width": 55,
+          "height": 52,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/royal-mausoleum.png",
+      "from": "restless-dwellings-a#14",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 18,
+          "y": 3,
+          "width": 41,
+          "height": 58
+        },
+        {
+          "op": "pad",
+          "width": 41,
+          "height": 60,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/tavern.png",
+      "from": "restless-civic-b#2",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 3,
+          "width": 58,
+          "height": 58
+        },
+        {
+          "op": "pad",
+          "width": 58,
+          "height": 60,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/town-hall.png",
+      "from": "restless-civic-a#3",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 2,
+          "width": 53,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 53,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/village-hall.png",
+      "from": "restless-civic-a#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 3,
+          "width": 42,
+          "height": 56
+        },
+        {
+          "op": "pad",
+          "width": 42,
+          "height": 58,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/undead/wailing-tower.png",
+      "from": "restless-dwellings-a#6",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 28,
+          "y": 0,
+          "width": 32,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 32,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    }
+  ]
+}

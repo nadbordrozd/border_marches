@@ -1,0 +1,17 @@
+{
+  "realm-backdrop-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Realm backdrop: sunny meadow #8ab85c, blue sky with two clouds, blue-green hills with a tiny windmill, a dirt road from the bottom, oak trees and fences only at the edges; calm middle for the town; cropped to rows 4-227 like the others",
+    "at": "2026-11-24T23:17:09.949Z"
+  },
+  "restless-backdrop-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Restless backdrop: violet dusk with a pale moon, slate hills with a far spire, calm ash ground, a stone path, dead trees, tombstones and railings at the edges; spooky-cute, never gory; the white rows at the top and bottom are cropped away (rows 4-227 kept)",
+    "at": "2026-11-24T23:17:10.004Z"
+  },
+  "horde-backdrop-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Horde backdrop: hazy orange sky, red mesas and smoke plumes, calm red regolith with straw tufts, a dusty track, junk heaps, skulls and a signpost at the edges; the white rows at the top and bottom are cropped away (rows 4-227 kept)",
+    "at": "2026-11-24T23:17:10.066Z"
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "set": "faction-towns",
+  "bead": "border_marches-bzc.15",
+  "class": "towns",
+  "exploration": false,
+  "_doc": "Map town sprites of the three v0.2 factions (the Realm, the Restless, the Goblin Horde) at the 3x2 footprint of art/sets/towns-3x2: requested at 232x176 and seated in a 240x184 canvas whose bottom 160 rows are the footprint. Two growth stages per faction, picked by the town's fort level: 'camp' (fort 0-1, a light wall) and 'fort' (fort 2-3, a stone or scrap wall with a gatehouse). The Horde's fort stage reuses the accepted Warlord's Hold (towns-3x2/goblin-hold-v4a#0). Gate in the middle of the front wall over the entry cell; yard transparent; no flags (the owner shows in the interface). Class contract: docs/art/classes/towns.md. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "lostWorldLayout": {
+      "file": "art/masters/towns-3x2/lost-world-a-clean2-0.png",
+      "usage": "copy the size, outline thickness, pixel size and the layout of a round walled town with its gate in the middle of the front wall; not the colours and not the materials"
+    },
+    "layoutOnly": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "camera-three-quarter",
+      "light-south-west"
+    ],
+    "noBackground": true,
+    "width": 232,
+    "height": 176
+  },
+  "recipes": [
+    {
+      "id": "realm-fort-a",
+      "concept": "REALM CASTLE (fort 2-3)",
+      "seed": 71101,
+      "styleImage": "@lostWorldLayout",
+      "styleOptions": "@layoutOnly",
+      "subject": "Subject: a big cheerful storybook castle town that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of crenellated curtain walls of pale cream limestone #e6d8b4 with #b3a07a shadows; the front wall runs across the bottom of the image facing the viewer, and in the exact middle of the front wall a big gatehouse with two round towers and a dark arched gate; four round towers on the ring with pointed conical roofs of tabard blue #2f6fd0 with #1f4a8f shadows; inside the walls a tall square keep at the back with a blue conical roof, a long timber-framed hall with a warm red-brown roof #a8492f and white plaster walls, and a small chapel. The yard is empty and transparent: nothing is drawn under the town. Buildings only.",
+      "negative": "flag, banner, pennant, people, knight, character, ground plate, grass, small, distant, dark, gloomy, thatch, skull, logs"
+    },
+    {
+      "id": "restless-fort-a",
+      "concept": "RESTLESS CHURCHYARD (fort 2-3)",
+      "seed": 72101,
+      "styleImage": "@lostWorldLayout",
+      "styleOptions": "@layoutOnly",
+      "subject": "Subject: a big spooky-cute graveyard town from a comedy ghost story that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of low walls of dark slate stone #5b5866 with #3a3842 shadows topped with black iron railings; the front wall runs across the bottom of the image facing the viewer, and in the exact middle of the front wall a big black iron gate between two stone pillars with glowing shroud violet #7a4fb5 lanterns; inside the walls a crooked gothic chapel with a tall pointed bell tower and steep shroud violet #7a4fb5 slate roofs with #4e2f7a shadows, a round domed mausoleum of pale bone stone #d8d0bc, a tall thin manor house, rows of leaning cream tombstones and one bare crooked dead tree. The yard is empty and transparent: nothing is drawn under the town. Buildings only.",
+      "negative": "flag, banner, people, skeleton, ghost, character, blood, gore, ground plate, grass, small, distant, thatch, logs, skull gate"
+    },
+    {
+      "id": "horde-camp-a",
+      "concept": "HORDE WARCAMP (fort 0-1)",
+      "seed": 73101,
+      "styleImage": {
+        "file": "art/masters/towns-3x2/goblin-hold-v4a-0.png",
+        "usage": "copy the palette, size, outline thickness, pixel size and the layout of an oval camp with its gate in the middle of the front"
+      },
+      "subject": "Subject: a big goblin warcamp that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of crooked sharpened wooden log stakes #b8733a with #7a4a22 shadows leaning outward, no stone and no metal wall; the front of the ring runs across the bottom of the image facing the viewer, and in its exact middle a gap framed by two tall stakes crowned by a cream horned ox skull; inside the ring a big tawny hide boss tent with brown spots, three tin shacks with light grey tin walls #b8bcc0 and bright hazard yellow #f2c230 roofs, a crooked smoking stove chimney and a heap of scrap loot. The yard is empty and transparent: nothing is drawn under the camp. Buildings only.",
+      "negative": "flag, banner, people, goblin, character, tin wall, metal wall, stone wall, watchtower, ground plate, grass, small, distant, red"
+    },
+    {
+      "id": "realm-camp-a",
+      "concept": "REALM VILLAGE (fort 0-1)",
+      "seed": 71201,
+      "styleImage": {
+        "take": "realm-fort-a#0",
+        "usage": "copy the palette, outline thickness, pixel size, scale of the buildings and the layout of an oval walled town with its gate in the middle of the front wall"
+      },
+      "subject": "Subject: a big cheerful storybook village that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of a wooden palisade of upright pale timber planks #c99a5e with #8a6237 shadows; the front of the ring runs across the bottom of the image facing the viewer, and in its exact middle a wooden gate under a small timber gatehouse with a tabard blue #2f6fd0 roof; inside the palisade four timber-framed cottages with white plaster walls and warm red-brown roofs #a8492f, a small cream stone chapel with a blue #2f6fd0 roof and a little bell tower, and a stone well. The yard is empty and transparent: nothing is drawn under the village. Buildings only.",
+      "negative": "flag, banner, pennant, people, knight, character, ground plate, grass, small, distant, stone curtain wall, castle, crenellations, thatch, skull"
+    },
+    {
+      "id": "restless-camp-a",
+      "concept": "RESTLESS GRAVEYARD (fort 0-1)",
+      "seed": 72201,
+      "styleImage": {
+        "take": "restless-fort-a#0",
+        "usage": "copy the palette, outline thickness, pixel size, scale of the buildings and the layout of an oval walled town with its gate in the middle of the front wall"
+      },
+      "subject": "Subject: a big spooky-cute country graveyard from a comedy ghost story that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of only thin black iron railings with spear tips, no stone wall; the front of the ring runs across the bottom of the image facing the viewer, and in its exact middle a small black iron gate between two short slate stone posts #5b5866 with glowing shroud violet #7a4fb5 lanterns; inside the railings a small crooked chapel with a steep shroud violet #7a4fb5 roof and a little bell gable, two small stone crypts, rows of leaning cream tombstones #d8d0bc, an open grave with a shovel, and one bare crooked dead tree. The yard is empty and transparent: nothing is drawn under the graveyard. Buildings only.",
+      "negative": "flag, banner, people, skeleton, ghost, character, blood, gore, ground plate, grass, small, distant, stone wall, brick wall, dome, manor"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/towns/realm-village-3x2.png",
+      "from": "realm-camp-a#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 36,
+          "width": 232,
+          "height": 136
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 140,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/realm-castle-3x2.png",
+      "from": "realm-fort-a#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 1,
+          "width": 232,
+          "height": 174
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 178,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/restless-graveyard-3x2.png",
+      "from": "restless-camp-a#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 232,
+          "height": 175
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 179,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/restless-churchyard-3x2.png",
+      "from": "restless-fort-a#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 232,
+          "height": 175
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 179,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/horde-warcamp-3x2.png",
+      "from": "horde-camp-a#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 10,
+          "width": 232,
+          "height": 162
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 166,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    }
+  ]
+}

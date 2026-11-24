@@ -1,0 +1,276 @@
+{
+  "realm-fort-a": {
+    "id": "realm-fort-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "0b9e3004-17ed-4163-8fb6-d58abef00ba8",
+    "submittedAt": "2026-11-24T22:50:38.015Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big cheerful storybook castle town that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of crenellated curtain walls of pale cream limestone #e6d8b4 with #b3a07a shadows; the front wall runs across the bottom of the image facing the viewer, and in the exact middle of the front wall a big gatehouse with two round towers and a dark arched gate; four round towers on the ring with pointed conical roofs of tabard blue #2f6fd0 with #1f4a8f shadows; inside the walls a tall square keep at the back with a blue conical roof, a long timber-framed hall with a warm red-brown roof #a8492f and white plaster walls, and a small chapel. The yard is empty and transparent: nothing is drawn under the town. Buildings only."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/towns-3x2/lost-world-a-clean2-0.png sha256 f018a810991bfc19280265adfb7910aafa7d43f6c06eadd66562c6db86f407a2",
+        "usage": "copy the size, outline thickness, pixel size and the layout of a round walled town with its gate in the middle of the front wall; not the colours and not the materials"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 71101,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: a big cheerful storybook castle town that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of crenellated curtain walls of pale cream limestone #e6d8b4 with #b3a07a shadows; the front wall runs across the bottom of the image facing the viewer, and in the exact middle of the front wall a big gatehouse with two round towers and a dark arched gate; four round towers on the ring with pointed conical roofs of tabard blue #2f6fd0 with #1f4a8f shadows; inside the walls a tall square keep at the back with a blue conical roof, a long timber-framed hall with a warm red-brown roof #a8492f and white plaster walls, and a small chapel. The yard is empty and transparent: nothing is drawn under the town. Buildings only. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, flag, banner, pennant, people, knight, character, ground plate, grass, small, distant, dark, gloomy, thatch, skull, logs."
+    },
+    "at": "2026-11-24T22:51:39.503Z",
+    "candidates": [
+      {
+        "file": "realm-fort-a-0.png",
+        "sha256": "5a6cb3ed68c012f87603232b7dacb8141ce60c6687fa0e9c569c834569bcf43e",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "restless-fort-a": {
+    "id": "restless-fort-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5f6c866e-53ad-4ae2-8b57-0a50371d4b9e",
+    "submittedAt": "2026-11-24T22:51:39.618Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big spooky-cute graveyard town from a comedy ghost story that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of low walls of dark slate stone #5b5866 with #3a3842 shadows topped with black iron railings; the front wall runs across the bottom of the image facing the viewer, and in the exact middle of the front wall a big black iron gate between two stone pillars with glowing shroud violet #7a4fb5 lanterns; inside the walls a crooked gothic chapel with a tall pointed bell tower and steep shroud violet #7a4fb5 slate roofs with #4e2f7a shadows, a round domed mausoleum of pale bone stone #d8d0bc, a tall thin manor house, rows of leaning cream tombstones and one bare crooked dead tree. The yard is empty and transparent: nothing is drawn under the town. Buildings only."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/towns-3x2/lost-world-a-clean2-0.png sha256 f018a810991bfc19280265adfb7910aafa7d43f6c06eadd66562c6db86f407a2",
+        "usage": "copy the size, outline thickness, pixel size and the layout of a round walled town with its gate in the middle of the front wall; not the colours and not the materials"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 72101,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: a big spooky-cute graveyard town from a comedy ghost story that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of low walls of dark slate stone #5b5866 with #3a3842 shadows topped with black iron railings; the front wall runs across the bottom of the image facing the viewer, and in the exact middle of the front wall a big black iron gate between two stone pillars with glowing shroud violet #7a4fb5 lanterns; inside the walls a crooked gothic chapel with a tall pointed bell tower and steep shroud violet #7a4fb5 slate roofs with #4e2f7a shadows, a round domed mausoleum of pale bone stone #d8d0bc, a tall thin manor house, rows of leaning cream tombstones and one bare crooked dead tree. The yard is empty and transparent: nothing is drawn under the town. Buildings only. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, flag, banner, people, skeleton, ghost, character, blood, gore, ground plate, grass, small, distant, thatch, logs, skull gate."
+    },
+    "at": "2026-11-24T22:52:35.976Z",
+    "usageUsd": 0.08057073905732896,
+    "candidates": [
+      {
+        "file": "restless-fort-a-0.png",
+        "sha256": "abacb8096572e73911e8ee0977ccb73b88a6cc6938016f85d488077a2b0b4c36",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "horde-camp-a": {
+    "id": "horde-camp-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "e0336159-227c-4bdb-af15-42b4d18e166e",
+    "submittedAt": "2026-11-24T22:52:36.102Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big goblin warcamp that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of crooked sharpened wooden log stakes #b8733a with #7a4a22 shadows leaning outward, no stone and no metal wall; the front of the ring runs across the bottom of the image facing the viewer, and in its exact middle a gap framed by two tall stakes crowned by a cream horned ox skull; inside the ring a big tawny hide boss tent with brown spots, three tin shacks with light grey tin walls #b8bcc0 and bright hazard yellow #f2c230 roofs, a crooked smoking stove chimney and a heap of scrap loot. The yard is empty and transparent: nothing is drawn under the camp. Buildings only."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/towns-3x2/goblin-hold-v4a-0.png sha256 1e77d759383806dbc4605d7d5e30ca611cb3c002d2b3ebd265cd34f02bc7594b",
+        "usage": "copy the palette, size, outline thickness, pixel size and the layout of an oval camp with its gate in the middle of the front"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 73101,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: a big goblin warcamp that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of crooked sharpened wooden log stakes #b8733a with #7a4a22 shadows leaning outward, no stone and no metal wall; the front of the ring runs across the bottom of the image facing the viewer, and in its exact middle a gap framed by two tall stakes crowned by a cream horned ox skull; inside the ring a big tawny hide boss tent with brown spots, three tin shacks with light grey tin walls #b8bcc0 and bright hazard yellow #f2c230 roofs, a crooked smoking stove chimney and a heap of scrap loot. The yard is empty and transparent: nothing is drawn under the camp. Buildings only. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, flag, banner, people, goblin, character, tin wall, metal wall, stone wall, watchtower, ground plate, grass, small, distant, red."
+    },
+    "at": "2026-11-24T22:53:47.664Z",
+    "usageUsd": 0.08044644803471035,
+    "candidates": [
+      {
+        "file": "horde-camp-a-0.png",
+        "sha256": "7ca8ebc9bae38a1f8662c84ce9fb84cf7e861d1a187ab60c045e2fac54b94fdd",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "realm-camp-a": {
+    "id": "realm-camp-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "4e67ad7a-f3ba-422e-bcec-8319928556f8",
+    "submittedAt": "2026-11-24T22:54:51.313Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big cheerful storybook village that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of a wooden palisade of upright pale timber planks #c99a5e with #8a6237 shadows; the front of the ring runs across the bottom of the image facing the viewer, and in its exact middle a wooden gate under a small timber gatehouse with a tabard blue #2f6fd0 roof; inside the palisade four timber-framed cottages with white plaster walls and warm red-brown roofs #a8492f, a small cream stone chapel with a blue #2f6fd0 roof and a little bell tower, and a stone well. The yard is empty and transparent: nothing is drawn under the village. Buildings only."
+        }
+      ],
+      "style_image": {
+        "source": "take faction-towns/realm-fort-a#0 sha256 5a6cb3ed68c012f87603232b7dacb8141ce60c6687fa0e9c569c834569bcf43e",
+        "usage": "copy the palette, outline thickness, pixel size, scale of the buildings and the layout of an oval walled town with its gate in the middle of the front wall"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 71201,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: a big cheerful storybook village that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of a wooden palisade of upright pale timber planks #c99a5e with #8a6237 shadows; the front of the ring runs across the bottom of the image facing the viewer, and in its exact middle a wooden gate under a small timber gatehouse with a tabard blue #2f6fd0 roof; inside the palisade four timber-framed cottages with white plaster walls and warm red-brown roofs #a8492f, a small cream stone chapel with a blue #2f6fd0 roof and a little bell tower, and a stone well. The yard is empty and transparent: nothing is drawn under the village. Buildings only. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, flag, banner, pennant, people, knight, character, ground plate, grass, small, distant, stone curtain wall, castle, crenellations, thatch, skull."
+    },
+    "at": "2026-11-24T22:55:47.767Z",
+    "usageUsd": 0.08067513818211026,
+    "candidates": [
+      {
+        "file": "realm-camp-a-0.png",
+        "sha256": "a7dfec2dd2a9df0eaede3708f633a4562151f540c0956055c582ab162a802990",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "restless-camp-a": {
+    "id": "restless-camp-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "fa5af275-3f0e-4af1-a976-e5866fceb90b",
+    "submittedAt": "2026-11-24T22:55:47.936Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big spooky-cute country graveyard from a comedy ghost story that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of only thin black iron railings with spear tips, no stone wall; the front of the ring runs across the bottom of the image facing the viewer, and in its exact middle a small black iron gate between two short slate stone posts #5b5866 with glowing shroud violet #7a4fb5 lanterns; inside the railings a small crooked chapel with a steep shroud violet #7a4fb5 roof and a little bell gable, two small stone crypts, rows of leaning cream tombstones #d8d0bc, an open grave with a shovel, and one bare crooked dead tree. The yard is empty and transparent: nothing is drawn under the graveyard. Buildings only."
+        }
+      ],
+      "style_image": {
+        "source": "take faction-towns/restless-fort-a#0 sha256 abacb8096572e73911e8ee0977ccb73b88a6cc6938016f85d488077a2b0b4c36",
+        "usage": "copy the palette, outline thickness, pixel size, scale of the buildings and the layout of an oval walled town with its gate in the middle of the front wall"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 72201,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: a big spooky-cute country graveyard from a comedy ghost story that fills the whole image from the left edge to the right edge, seen from above at a three-quarter angle: a wide oval ring of only thin black iron railings with spear tips, no stone wall; the front of the ring runs across the bottom of the image facing the viewer, and in its exact middle a small black iron gate between two short slate stone posts #5b5866 with glowing shroud violet #7a4fb5 lanterns; inside the railings a small crooked chapel with a steep shroud violet #7a4fb5 roof and a little bell gable, two small stone crypts, rows of leaning cream tombstones #d8d0bc, an open grave with a shovel, and one bare crooked dead tree. The yard is empty and transparent: nothing is drawn under the graveyard. Buildings only. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, flag, banner, people, skeleton, ghost, character, blood, gore, ground plate, grass, small, distant, stone wall, brick wall, dome, manor."
+    },
+    "at": "2026-11-24T22:56:49.371Z",
+    "usageUsd": 0.0804725591606564,
+    "candidates": [
+      {
+        "file": "restless-camp-a-0.png",
+        "sha256": "7f1155807865d56789c8fd8fd9e8601646d3f8f10f403752c128f93e73e8d46a",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  }
+}

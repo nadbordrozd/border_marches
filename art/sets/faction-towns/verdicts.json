@@ -1,0 +1,27 @@
+{
+  "realm-fort-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Realm castle: cream crenellated ring with blue conical towers, twin-towered gatehouse centred in the front wall over the entry cell, keep, timber halls, chapel; yard transparent; no flag; reads on light and dark at 1:1",
+    "at": "2026-11-24T22:54:03.844Z"
+  },
+  "restless-fort-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Restless churchyard: slate wall with iron railings, black iron gate between violet-lantern pillars centred in the front wall, violet-roofed chapel, manor, bone mausoleum, tombstones, dead tree; spooky-cute, no gore; yard transparent",
+    "at": "2026-11-24T22:54:03.891Z"
+  },
+  "horde-camp-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Horde warcamp: ring of sharpened stakes with a horned-skull gate centred in the front, hide boss tent, yellow-roofed tin shacks, loot heap; palette and scale of the Warlord's Hold; yard transparent",
+    "at": "2026-11-24T22:54:03.937Z"
+  },
+  "realm-camp-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Realm village: pale plank palisade ring with a blue-roofed timber gatehouse centred over the entry cell, timber-framed cottages, chapel, well; same palette and scale as realm-fort-a; yard transparent",
+    "at": "2026-11-24T22:57:06.168Z"
+  },
+  "restless-camp-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Restless graveyard: iron railings only, small gate between violet-lantern posts centred over the entry cell, chapel, crypt, tombstones, open grave, dead tree; matches restless-fort-a; railings thin but the gate and chapel carry it on dark ground",
+    "at": "2026-11-24T22:57:06.217Z"
+  }
+}

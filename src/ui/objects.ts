@@ -3,6 +3,7 @@
  * minus collected pickups and defeated monsters, with live monster counts
  * and town art levels. Pure (unit-tested).
  */
+import { fortLevel } from "../core/game/state.ts";
 import type { GameState, TownState } from "../core/game/types.ts";
 import type { MapObject } from "../core/map/types.ts";
 
@@ -30,7 +31,10 @@ export function displayObjects(state: GameState): MapObject[] {
     if (o.kind === "town") {
       const t = state.towns[o.id];
       if (t !== undefined && !t.isHold) {
-        out.push({ ...o, data: { ...o.data, level: townLevel(t) } });
+        out.push({
+          ...o,
+          data: { ...o.data, level: townLevel(t), fort: fortLevel(t) },
+        });
         continue;
       }
     }
@@ -44,7 +48,7 @@ export function objectsSignature(objects: readonly MapObject[]): string {
   return objects
     .map(
       (o) =>
-        `${o.id}:${String(o.data["count"] ?? "")}:${String(o.data["level"] ?? "")}`,
+        `${o.id}:${String(o.data["count"] ?? "")}:${String(o.data["level"] ?? "")}:${String(o.data["fort"] ?? "")}`,
     )
     .join("|");
 }

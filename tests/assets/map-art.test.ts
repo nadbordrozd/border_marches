@@ -151,9 +151,16 @@ describe("massif pieces (xaj.14)", () => {
 
 describe("3x2 towns (xaj.14)", () => {
   it("fill a 3x2 footprint canvas with a measured box", () => {
-    expect(TOWN_3X2_ASSETS.map((t) => t.faction).sort()).toEqual([
-      "dinosaur",
-      "goblin",
+    expect(
+      TOWN_3X2_ASSETS.map((t) => `${t.faction}/${t.stage}`).sort(),
+    ).toEqual([
+      "dinosaur/fort",
+      "goblin/camp",
+      "goblin/fort",
+      "humans/camp",
+      "humans/fort",
+      "undead/camp",
+      "undead/fort",
     ]);
     for (const town of TOWN_3X2_ASSETS) {
       expect([town.w, town.h]).toEqual([3 * CELL_PX, 2 * CELL_PX + town.up]);

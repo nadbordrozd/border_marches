@@ -38,6 +38,7 @@ import type {
   TownAsset,
   UnitAsset,
 } from "../../assets/manifest";
+import { townArt } from "../../assets/town-art";
 import type { GameMap, MapObject } from "../../core/map/types";
 import { objectBounds, objectCells } from "../../core/map/types";
 import {
@@ -553,21 +554,37 @@ export function townAsset(obj: MapObject): TownAsset {
   return town;
 }
 
+/** Factions whose towns always use their 3x2 art (bead bzc.15). */
+const STAGED_TOWN_FACTIONS: ReadonlySet<unknown> = new Set([
+  "humans",
+  "undead",
+  "goblins",
+]);
+
 /**
- * The 3x2 town sprite (bead xaj.14) of a town with a 3 x 2 footprint at its
- * full growth (level 3, or no level given), else null: a smaller town
- * (level 1 or 2, as the game sets it from the halls built) keeps the
- * imported camp art of its level, so the map still shows the town grow.
+ * The 3x2 town sprite (bead xaj.14) of a town with a 3 x 2 footprint, else
+ * null. A v0.2 faction town (humans, undead, goblins) always has one, its
+ * camp or fort stage by the `fort` level the view sets (townArt, bead
+ * bzc.15). Other towns use it at full growth (level 3, or no level given):
+ * a smaller one (level 1 or 2, as the game sets it from the halls built)
+ * keeps the imported camp art of its level, so the map still shows the town
+ * grow.
  */
 export function town3x2Asset(obj: MapObject): Town3x2Asset | null {
   const box = objectBounds(obj);
   if (box.w !== 3 || box.h !== 2) return null;
+  const faction = obj.data["faction"];
+  if (STAGED_TOWN_FACTIONS.has(faction)) {
+    const fort = obj.data["fort"];
+    return townArt(String(faction), typeof fort === "number" ? fort : 0);
+  }
   const level = obj.data["level"];
   if (level === 1 || level === 2) return null;
-  const faction = obj.data["faction"];
   const art =
     faction === "lost-world" || faction === "dinosaur" ? "dinosaur" : "goblin";
-  return TOWN_3X2_ASSETS.find((t) => t.faction === art) ?? null;
+  return (
+    TOWN_3X2_ASSETS.find((t) => t.faction === art && t.stage === "fort") ?? null
+  );
 }
 
 /** The unit sprite of a creature id ("raptor" -> dinosaur-raptor). */

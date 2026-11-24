@@ -1,0 +1,167 @@
+{
+  "realm-backdrop-a": {
+    "id": "realm-backdrop-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "ea93c5e4-0d8a-485d-a81c-a81fc8a1b48a",
+    "submittedAt": "2026-11-24T23:13:17.713Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-town-backdrop.txt",
+          "text": "Class: a full-frame opaque landscape backdrop for a strategy game's town screen, seen at the map's three-quarter angle looking down: the sky and the far horizon fill only the top quarter of the image, and the lower three quarters are open flat ground, empty in the middle where a town will be placed later. Chunky flat colours with one shadow tone, calm and quiet like a game map ground, scenery only at the left and right edges."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a sunny storybook kingdom countryside. Sky light blue #8ccbf0 with two chunky white clouds; on the horizon soft blue-green rolling hills #6f9f6a and a tiny far-off windmill; the open ground is calm bright meadow grass #8ab85c with #6f9a48 shadows and a few small flower specks; a pale dirt road #c9a86a comes in from the bottom centre and stops in the middle of the meadow; at the far left and right edges round green oak trees #3f7d45 and a short stretch of wooden fence frame the scene."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/faction-towns/realm-fort-a-0.png sha256 5a6cb3ed68c012f87603232b7dacb8141ce60c6687fa0e9c569c834569bcf43e",
+        "usage": "copy the palette, outline thickness, shading and pixel size only"
+      },
+      "image_size": {
+        "width": 256,
+        "height": 232
+      },
+      "no_background": false,
+      "seed": 77101,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a full-frame opaque landscape backdrop for a strategy game's town screen, seen at the map's three-quarter angle looking down: the sky and the far horizon fill only the top quarter of the image, and the lower three quarters are open flat ground, empty in the middle where a town will be placed later. Chunky flat colours with one shadow tone, calm and quiet like a game map ground, scenery only at the left and right edges. Subject: a sunny storybook kingdom countryside. Sky light blue #8ccbf0 with two chunky white clouds; on the horizon soft blue-green rolling hills #6f9f6a and a tiny far-off windmill; the open ground is calm bright meadow grass #8ab85c with #6f9a48 shadows and a few small flower specks; a pale dirt road #c9a86a comes in from the bottom centre and stops in the middle of the meadow; at the far left and right edges round green oak trees #3f7d45 and a short stretch of wooden fence frame the scene. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, town, castle, house, building in the middle, people, character, creature, flag, border, transparent background."
+    },
+    "at": "2026-11-24T23:14:39.646Z",
+    "usageUsd": 0.08,
+    "candidates": [
+      {
+        "file": "realm-backdrop-a-0.png",
+        "sha256": "75ba3276e4991e45ed2a864be550c54b050ac9d86ad8c9a451335c3dc355a981",
+        "width": 256,
+        "height": 232
+      }
+    ]
+  },
+  "restless-backdrop-a": {
+    "id": "restless-backdrop-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "8b8dd545-5a35-4b97-b8a5-f4aa35ca8f6b",
+    "submittedAt": "2026-11-24T23:14:39.763Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-town-backdrop.txt",
+          "text": "Class: a full-frame opaque landscape backdrop for a strategy game's town screen, seen at the map's three-quarter angle looking down: the sky and the far horizon fill only the top quarter of the image, and the lower three quarters are open flat ground, empty in the middle where a town will be placed later. Chunky flat colours with one shadow tone, calm and quiet like a game map ground, scenery only at the left and right edges."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a spooky-cute graveyard countryside at dusk from a comedy ghost story. Sky deep shroud violet #4e2f7a fading to dusky mauve #8a6aa8 at the horizon, a big round pale moon #f2ead2 and a few chunky violet clouds; on the horizon dark slate hills #3a3842 with the silhouette of a crooked far-off church spire; the open ground is calm ash grey earth #716a64 with #5a544f shadows, a few twigs and small pebbles; a pale stone path #a49c90 comes in from the bottom centre and stops in the middle; at the far left and right edges bare crooked dead trees #4a3c34 and a few leaning cream tombstones frame the scene. Never gory."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/faction-towns/restless-fort-a-0.png sha256 abacb8096572e73911e8ee0977ccb73b88a6cc6938016f85d488077a2b0b4c36",
+        "usage": "copy the palette, outline thickness, shading and pixel size only"
+      },
+      "image_size": {
+        "width": 256,
+        "height": 232
+      },
+      "no_background": false,
+      "seed": 77201,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a full-frame opaque landscape backdrop for a strategy game's town screen, seen at the map's three-quarter angle looking down: the sky and the far horizon fill only the top quarter of the image, and the lower three quarters are open flat ground, empty in the middle where a town will be placed later. Chunky flat colours with one shadow tone, calm and quiet like a game map ground, scenery only at the left and right edges. Subject: a spooky-cute graveyard countryside at dusk from a comedy ghost story. Sky deep shroud violet #4e2f7a fading to dusky mauve #8a6aa8 at the horizon, a big round pale moon #f2ead2 and a few chunky violet clouds; on the horizon dark slate hills #3a3842 with the silhouette of a crooked far-off church spire; the open ground is calm ash grey earth #716a64 with #5a544f shadows, a few twigs and small pebbles; a pale stone path #a49c90 comes in from the bottom centre and stops in the middle; at the far left and right edges bare crooked dead trees #4a3c34 and a few leaning cream tombstones frame the scene. Never gory. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, town, castle, house, building in the middle, people, character, creature, flag, border, transparent background."
+    },
+    "at": "2026-11-24T23:15:36.130Z",
+    "usageUsd": 0.08,
+    "candidates": [
+      {
+        "file": "restless-backdrop-a-0.png",
+        "sha256": "9a240d251c6dc1b8431a24654a9729e58e31d2ad4a652512a9a383bb723ee79f",
+        "width": 256,
+        "height": 232
+      }
+    ]
+  },
+  "horde-backdrop-a": {
+    "id": "horde-backdrop-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c55d8971-c7d0-4cd6-b233-31d6255375f0",
+    "submittedAt": "2026-11-24T23:15:36.255Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-town-backdrop.txt",
+          "text": "Class: a full-frame opaque landscape backdrop for a strategy game's town screen, seen at the map's three-quarter angle looking down: the sky and the far horizon fill only the top quarter of the image, and the lower three quarters are open flat ground, empty in the middle where a town will be placed later. Chunky flat colours with one shadow tone, calm and quiet like a game map ground, scenery only at the left and right edges."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a hot scrappy goblin badlands. Sky warm hazy yellow-orange #f2c48a with a few chunky dust clouds; on the horizon flat-topped red sandstone mesas #a85a3a and two thin smoke plumes; the open ground is calm red-orange regolith #b56c46 with #93553a shadows, a few small rocks and dry straw tufts #d3c176; a dusty track #c98a5e comes in from the bottom centre and stops in the middle; at the far left and right edges heaps of junk, old tin sheets, cattle skulls and a leaning wooden signpost frame the scene."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/towns-3x2/goblin-hold-v4a-0.png sha256 1e77d759383806dbc4605d7d5e30ca611cb3c002d2b3ebd265cd34f02bc7594b",
+        "usage": "copy the palette, outline thickness, shading and pixel size only"
+      },
+      "image_size": {
+        "width": 256,
+        "height": 232
+      },
+      "no_background": false,
+      "seed": 77301,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a full-frame opaque landscape backdrop for a strategy game's town screen, seen at the map's three-quarter angle looking down: the sky and the far horizon fill only the top quarter of the image, and the lower three quarters are open flat ground, empty in the middle where a town will be placed later. Chunky flat colours with one shadow tone, calm and quiet like a game map ground, scenery only at the left and right edges. Subject: a hot scrappy goblin badlands. Sky warm hazy yellow-orange #f2c48a with a few chunky dust clouds; on the horizon flat-topped red sandstone mesas #a85a3a and two thin smoke plumes; the open ground is calm red-orange regolith #b56c46 with #93553a shadows, a few small rocks and dry straw tufts #d3c176; a dusty track #c98a5e comes in from the bottom centre and stops in the middle; at the far left and right edges heaps of junk, old tin sheets, cattle skulls and a leaning wooden signpost frame the scene. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, town, castle, house, building in the middle, people, character, creature, flag, border, transparent background."
+    },
+    "at": "2026-11-24T23:16:37.766Z",
+    "usageUsd": 0.08,
+    "candidates": [
+      {
+        "file": "horde-backdrop-a-0.png",
+        "sha256": "a64244845c35ba5cd5f34c200735f82a87835de373695724b358dc19cf221bed",
+        "width": 256,
+        "height": 232
+      }
+    ]
+  }
+}

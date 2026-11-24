@@ -104,6 +104,21 @@ describe("object entries", () => {
     );
   });
 
+  it("draws a v0.2 faction town at its fort stage at every level (bzc.15)", () => {
+    const town = map.objects.find((o) => o.kind === "town")!;
+    const at = (faction: string, fort: number | undefined, level = 1) =>
+      town3x2Asset({ ...town, data: { ...town.data, faction, level, fort } })
+        ?.key;
+    expect(at("humans", 0)).toBe("realm-village-3x2");
+    expect(at("humans", 2)).toBe("realm-castle-3x2");
+    expect(at("undead", 1, 3)).toBe("restless-graveyard-3x2");
+    expect(at("undead", 3)).toBe("restless-churchyard-3x2");
+    expect(at("goblins", undefined)).toBe("horde-warcamp-3x2");
+    expect(at("goblins", 2)).toBe("goblin-hold-3x2");
+    // The neutral Warlord's Hold keeps its art.
+    expect(at("goblin", undefined, 3)).toBe("goblin-hold-3x2");
+  });
+
   it("draws an ore mine as the mine piece of the rock round it", () => {
     const m = createMap(4, 3, 1);
     for (const c of m.cells) c.terrain = "wasteland";
