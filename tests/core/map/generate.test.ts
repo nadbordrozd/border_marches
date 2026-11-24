@@ -549,16 +549,15 @@ describe("generateMap", { timeout: 60_000 }, () => {
     }
   });
 
-  it("generates a large map in under 300 ms", () => {
-    generateMap(1, { size: "L" });
-    const times: number[] = [];
+  // The speed budget (300 ms for a large map) is checked by `npm run perf`,
+  // not here: wall-clock budgets flake when test runs share a machine.
+  it("generates valid large maps for the perf seeds", () => {
     for (const seed of [11, 12, 13]) {
-      const t0 = performance.now();
-      generateMap(seed, { size: "L" });
-      times.push(performance.now() - t0);
+      const { map, info } = generateMapWithInfo(seed, { size: "L" });
+      expect(map.width, `seed ${seed}`).toBe(DEFAULT_GEN_CONFIG.sizes.L);
+      expect(validateMap(map), `seed ${seed}`).toEqual([]);
+      expect(info.skipped, `seed ${seed}`).toEqual([]);
     }
-    times.sort((p, q) => p - q);
-    expect(times[1]).toBeLessThan(300);
   });
 
   it("prints an ASCII dump", () => {

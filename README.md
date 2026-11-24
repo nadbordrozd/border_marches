@@ -27,7 +27,14 @@ npm run typecheck      # tsc, plus src/core and src/data without DOM types
 npm test               # Vitest unit tier (npx vitest run <files> for some)
 npm run build          # production build into dist/
 npm run check          # all of the above
+npm run perf           # opt-in speed budgets (tests/perf/run.ts), not in check
 ```
+
+The unit tier has no wall-clock assertions, so it stays reliable when several
+runs share a machine. Speed budgets (for example a large map generates in
+300 ms) live in `npm run perf`, which warms up, times several runs and checks
+the median; run it on a quiet machine (`npm run perf -- --runs 15 L` for more
+runs of matching benchmarks).
 
 ## Layout
 

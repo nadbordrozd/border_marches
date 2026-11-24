@@ -27,8 +27,9 @@ CHECK_ART="node tools/art/studio-art.mjs validate"
 # What integrate.sh runs before publishing, in order (names of the checks above
 # plus "focused"). Add "unit" for risky work; the whole unit tier otherwise
 # runs as a deliberate batch gate.
-# The whole unit tier takes well under a second today, so it runs on every
-# integration; drop "unit" here if it grows past about a minute.
+# The whole unit tier takes about 20 s today, so it runs on every
+# integration; drop "unit" here if it grows past about a minute. It has no
+# wall-clock assertions; speed budgets run on demand with `npm run perf`.
 INTEGRATE_STEPS="format lint typecheck focused unit art build"
 
 # Where Claude Code's Agent tool puts worktrees (isolation: "worktree").

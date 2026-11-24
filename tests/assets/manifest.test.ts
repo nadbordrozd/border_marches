@@ -24,8 +24,12 @@ const ROOT = join(import.meta.dirname, "..", "..");
 const PUBLIC = join(ROOT, "public");
 const PNG_SIGNATURE = "89504e470d0a1a0a";
 
+const parsed = new Map<string, unknown>();
+/** Parsed JSON, read once per file (records run to hundreds of kilobytes). */
 function readJson<T>(file: string): T {
-  return JSON.parse(readFileSync(file, "utf8")) as T;
+  if (!parsed.has(file))
+    parsed.set(file, JSON.parse(readFileSync(file, "utf8")));
+  return parsed.get(file) as T;
 }
 
 /** Imported Pulp Wars files: public path -> sha256 from the provenance table. */
@@ -182,7 +186,9 @@ describe("asset manifest", () => {
         stdio: "pipe",
       }),
     ).not.toThrow();
-  });
+    // About 1.5 s alone (mostly the validate child process), several times
+    // that when parallel test runs share the machine.
+  }, 60_000);
 
   it("names a pickup, a mine and a 32 px item for every resource", () => {
     for (const resource of ["wood", "ore", "gold", "essence"] as const) {

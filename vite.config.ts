@@ -18,5 +18,9 @@ export default defineConfig({
     include: ["tests/**/*.test.ts"],
     // `.claude/**` holds agent worktrees (other checkouts of this repo).
     exclude: [...configDefaults.exclude, ".claude/**"],
+    // Several workers often run the unit tier at once on one machine, which
+    // stretches the slower tests (1-3 s alone) past vitest's 5 s default.
+    // Speed budgets live in `npm run perf` (tests/perf/run.ts), not here.
+    testTimeout: 30_000,
   },
 });
