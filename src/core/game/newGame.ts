@@ -26,7 +26,7 @@ import { getCreature, isCreatureId } from "../../data/creatures.ts";
 import { STARTING_RESOURCES, RESOURCE_IDS } from "../../data/economy.ts";
 import { townTree } from "../../data/factions.ts";
 import { HOLD_GARRISON, HOLD_NAME } from "../../data/neutrals.ts";
-import { findHeroDef, HERO_ROSTER, playerColour } from "../../data/players.ts";
+import { findHeroDef, playerColour, rosterFor } from "../../data/players.ts";
 import type { CreatureId, FactionId, ResourceId } from "../../data/types.ts";
 import type { GameMap, MapObject } from "../map/types.ts";
 import { createRng, deriveSeed } from "../rng.ts";
@@ -225,6 +225,7 @@ export function newGame(
       eliminated: false,
       townlessDays: 0,
       tavern: { offer: [], retreated: [] },
+      drills: [],
     };
   });
   const state: GameState = {
@@ -235,7 +236,7 @@ export function newGame(
     currentPlayer: ids[0] ?? 0,
     players,
     heroes: [],
-    pool: HERO_ROSTER.map((h) => h.id),
+    pool: rosterFor(players.map((p) => p.faction)),
     scenario: null,
     towns: {},
     mines: {},

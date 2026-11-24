@@ -1,12 +1,11 @@
 /**
- * Players, the tavern and the temporary named-hero roster (RULES_V2 5.1,
- * 5.4, 5.9).
+ * Players, the tavern and the named-hero roster (RULES_V2 5.1, 5.4, 5.9).
  *
- * The roster is a stand-in built from the existing Chieftain class so that
- * hiring, the pool and retreat can be played now. Bead bzc.11 replaces
- * {@link HERO_ROSTER} with each faction's named heroes (at least four per
- * class); the rules read only `id`, `name` and `heroClass`.
+ * The roster is the 24 named heroes of the v0.2 factions (four per class,
+ * src/data/classes.ts) followed by sixteen Lost World Chieftains,
+ * which only join a game's pool when a player plays the Lost World.
  */
+import { NAMED_HEROES } from "./classes.ts";
 import type { Specialty } from "./classes.ts";
 import type { FactionId } from "./types.ts";
 
@@ -99,8 +98,8 @@ const CHIEFTAIN_SPECIALTIES: readonly Specialty[] = [
   { kind: "creature", creature: "t-rex" },
 ];
 
-/** Temporary roster: sixteen named Chieftains (enough for four players). */
-export const HERO_ROSTER: readonly HeroDef[] = CHIEFTAIN_NAMES.map(
+/** The Lost World's sixteen Chieftains (not playable in v0.2). */
+export const CHIEFTAIN_ROSTER: readonly HeroDef[] = CHIEFTAIN_NAMES.map(
   (name, i) => ({
     id: name.toLowerCase(),
     name,
@@ -111,6 +110,26 @@ export const HERO_ROSTER: readonly HeroDef[] = CHIEFTAIN_NAMES.map(
     ] as Specialty,
   }),
 );
+
+/**
+ * Every named hero: the 24 of the v0.2 factions (four per class,
+ * src/data/classes.ts), then the Lost World's Chieftains.
+ */
+export const HERO_ROSTER: readonly HeroDef[] = [
+  ...NAMED_HEROES,
+  ...CHIEFTAIN_ROSTER,
+];
+
+/**
+ * The pool of a new game: every v0.2 hero, and the Chieftains only when a
+ * player plays the Lost World.
+ */
+export function rosterFor(factions: readonly FactionId[]): string[] {
+  const lostWorld = factions.includes("lost-world");
+  return HERO_ROSTER.filter((h) => h.faction !== "lost-world" || lostWorld).map(
+    (h) => h.id,
+  );
+}
 
 export function findHeroDef(id: string): HeroDef | undefined {
   return HERO_ROSTER.find((h) => h.id === id);

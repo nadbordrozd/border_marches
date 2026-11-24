@@ -74,10 +74,38 @@ export type LandResult =
       readonly detail: string;
     };
 
+/**
+ * An area effect (FACTION_GOBLINS 3): a Strike or Harm whose rule names
+ * more than one hex. `side` is the side the effect was made by, read when
+ * it was made (law 4); `centre` is the hex the rule names.
+ */
+export interface AreaRef {
+  readonly centre: Hex;
+  readonly side: BattleSide;
+}
+
+/** What a push or pull did to a stack (the "after being moved" reaction). */
+export interface MovedInfo {
+  readonly state: BattleState;
+  readonly stackId: StackId;
+  readonly mode: "push" | "pull";
+  readonly from: Hex;
+  readonly to: Hex;
+  /** Hexes actually moved (0 when nothing moved). */
+  readonly hexes: number;
+  /** The living stack in the next hex that stopped the move, or null. */
+  readonly stoppedBy: StackId | null;
+}
+
 /** Options of a Strike a rule describes (1.8). */
 export interface StrikeOptions {
-  /** Default "special". */
-  readonly kind?: "special" | "melee" | "shot";
+  /**
+   * Default "special". "retaliation" is a retaliation Strike a rule makes
+   * (Bodyguard); it never causes a retaliation.
+   */
+  readonly kind?: "special" | "melee" | "shot" | "retaliation";
+  /** The Strike is part of an area effect (Launched reads it). */
+  readonly area?: AreaRef;
   /** `special` Strikes are not retaliated unless this says so. */
   readonly retaliable?: boolean;
   /** An extra percentage multiplier on this Strike (inside the P cap). */
@@ -117,17 +145,30 @@ export interface Effects {
   harm(
     targetId: StackId,
     x: number,
-    options?: { readonly fuelled?: boolean },
+    options?: { readonly fuelled?: boolean; readonly area?: AreaRef },
   ): number;
+  /**
+   * Heal (1.7). `shared` marks a Heal that arrived through a heal-sharing
+   * link (Sworn): it is never shared again.
+   */
   heal(
     targetId: StackId,
     x: number,
-    options?: { readonly revive?: boolean },
+    options?: { readonly revive?: boolean; readonly shared?: boolean },
   ): number;
+  /**
+   * The stack spends its retaliation for this round; false when it has
+   * none left (Bodyguard).
+   */
+  spendRetaliation(id: StackId): boolean;
+  /** The stack uses one shot; false when it has none left. */
+  spendShot(id: StackId): boolean;
 
   // Movement (1.7)
   push(stackId: StackId, awayFrom: Hex, n: number): Hex;
   pull(stackId: StackId, toward: Hex, n: number): Hex;
+  /** Push n hexes in hex direction `dir` (0..5: E, SE, SW, W, NW, NE). */
+  pushDir(stackId: StackId, dir: number, n: number): Hex;
   teleport(stackId: StackId, to: Hex): boolean;
   swap(a: StackId, b: StackId): boolean;
 
@@ -150,6 +191,16 @@ export interface Effects {
   endGround(hex: Hex, options?: { replaceBlocking?: boolean }): boolean;
   /** Consume the remains on a hex; returns what they were. */
   useRemains(hex: Hex): Remains | null;
+
+  /**
+   * A dead stack gets up (RULES_V2 3.8, Not Done Yet): it keeps its id and
+   * returns with `count` creatures at full HP, no conditions, on `hex` or
+   * the nearest free hex, flagged `risen` (it crumbles after the battle).
+   * It joins the queue of the current round. Returns false if it cannot.
+   */
+  getUp(stackId: StackId, count: number, hex: Hex): boolean;
+  /** Sets or clears a stack's visible "gets up" badge (One More Time). */
+  setGetsUp(stackId: StackId, on: boolean): void;
 
   // Summon (1.7)
   summon(
@@ -246,6 +297,27 @@ export interface ConditionKindDef {
   ): Reaction | null;
   onRoundEnd?(fx: Effects, holder: StackId, c: Condition): void;
   onExpire?(fx: Effects, holder: StackId, c: Condition): void;
+  /**
+   * The bearer was the target of a Heal of `x` (a link kind's heal-sharing
+   * hook, RULES_V2 1.4). Not called for Heals that arrived by sharing.
+   */
+  onHealed?(
+    fx: Effects,
+    holder: StackId,
+    c: Condition,
+    x: number,
+    revive: boolean,
+  ): void;
+  /**
+   * Links: the far end died and this condition is ending because of it
+   * (before it is removed). Chapel of Oaths reads it.
+   */
+  onFarEndDied?(fx: Effects, holder: StackId, c: Condition): void;
+  /**
+   * Links: on its turn, in place of its walk, the bearer may swap hexes
+   * with the far end (a Move: swap counting 0 hexes; Sworn).
+   */
+  readonly swapAction?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -309,6 +381,50 @@ export interface AbilityDef {
   onTurnStart?(fx: Effects, owner: StackId): void;
   /** Activated: the act id (kind "ability") this ability performs. */
   readonly act?: string;
+  /** Activated: usable every turn instead of once per battle (Hurl). */
+  readonly everyTurn?: boolean;
+  /** Activated: the stack may walk first (`from` on the action). */
+  readonly moveFirst?: boolean;
+  /** The owner retaliates against every melee attack (Stand Fast). */
+  readonly unlimitedRetaliation?: boolean;
+  /** The owner's walk is a teleport within its Speed (Mist). */
+  readonly teleportWalk?: boolean;
+  /** The owner may walk again after its melee attack (Hit and Run). */
+  readonly walkAfterAttack?: number;
+  /**
+   * The owner's shot may target any hex (`shootHex`); with `shot` the
+   * whole shot is this rule (Bomb).
+   */
+  readonly shootAnyHex?: boolean;
+  /**
+   * Replaces the owner's shot: called with the centre hex and the stack
+   * on it (or null). The shot's use is already spent.
+   */
+  shot?(
+    fx: Effects,
+    ownerId: StackId,
+    centre: Hex,
+    target: StackId | null,
+  ): void;
+  /** The owner ended a walk (its own, not a push) on `hex` (Feast). */
+  onWalkEnd?(fx: Effects, ownerId: StackId, hex: Hex): void;
+  /** A reaction after the owner was pushed or pulled (Cannonball). */
+  onMoved?(info: MovedInfo, owner: BattleStack): Reaction | null;
+  /**
+   * The owner is caught in an area effect: return true to take nothing
+   * from it (the hook does what happens instead: Launched).
+   */
+  onArea?(fx: Effects, ownerId: StackId, area: AreaRef): boolean;
+  /**
+   * Getting up (RULES_V2 3.8; the engine runs it when the owner dies and
+   * leaves remains): "once" returns the stack once per battle (Not Done
+   * Yet); "paid" returns it whenever it would not get up otherwise, by
+   * consuming the nearest other remains (Long Live the King). The "gets
+   * up" badge comes between the two.
+   */
+  readonly getUp?: "once" | "paid";
+  /** When the owner gets up, its remains are not consumed (Spare Parts). */
+  readonly keepsRemainsOnGetUp?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -323,6 +439,12 @@ export interface ActDef {
   readonly tier?: number;
   /** Stacks/hexes to choose (shape is checked by `check`). */
   readonly targets: number;
+  /**
+   * With this, between `targets` and `maxTargets` may be chosen, in steps
+   * of `targetStep` (default 1): "up to C times, two stacks".
+   */
+  readonly maxTargets?: (state: BattleState, actorId: StackId) => number;
+  readonly targetStep?: number;
   /**
    * Requirements about who may be chosen (law 3): tested once, when the act
    * is chosen, never again. Returns a refusal message or null. With no

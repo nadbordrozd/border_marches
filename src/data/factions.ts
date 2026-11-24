@@ -2,13 +2,15 @@
  * Factions and their towns: the registry the new-game setup, the town rules
  * and the hero pool read (RULES_V2 5.1, 5.5).
  *
- * Each playable faction supplies a {@link TownTreeDef} (its buildings in
- * display order, start buildings, dwellings, halls and fort levels), its
- * hero classes and town names. The Lost World is the first data set; the
- * Humans, Undead and Goblins are placeholders (`town: null`) until bead
- * bzc.11 adds their rosters, trees, classes and named heroes.
+ * Each faction supplies a {@link TownTreeDef} (its buildings in display
+ * order, start buildings, dwellings, halls and fort levels), its hero
+ * classes, town names, birthright and magic leanings. The v0.2 factions
+ * are the Realm (humans), the Restless (undead) and the Goblin Horde
+ * (goblins); the Lost World stays in the code and is not playable.
  */
 import { BUILDING_IDS, BUILDINGS } from "./buildings.ts";
+import { CHURCHYARD_TREE, REALM_TREE, WARCAMP_TREE } from "./factionTowns.ts";
+import type { School } from "../core/battle/types.ts";
 import type {
   BuildingDef,
   BuildingId,
@@ -30,16 +32,33 @@ export interface TownTreeDef {
   art: string;
 }
 
+/**
+ * A faction's birthright (RULES_V2 3.8): an ability every native stack
+ * gains at deployment, and/or a battle-start effect run for its army.
+ */
+export interface BirthrightDef {
+  name: string;
+  text: string;
+  ability?: string;
+  startRule?: string;
+}
+
 export interface FactionDef {
   id: FactionId;
   name: string;
   /** One line for the setup screen. */
   blurb: string;
-  /** False for placeholders: listed in setup, not selectable yet. */
+  /** False for factions that cannot be picked in setup. */
   available: boolean;
   /** Hero class ids (src/data/hero.ts); the first is the default. */
   heroClasses: readonly string[];
   town: TownTreeDef | null;
+  /** Flag colour of the faction (the faction document). */
+  colour?: string;
+  birthright?: BirthrightDef;
+  /** Magic school weights 0..4 (RULES_V2 2.9) and the guild cap. */
+  schools?: Readonly<Record<School, number>>;
+  guildCap?: number;
 }
 
 export const LOST_WORLD_TOWN: TownTreeDef = {
@@ -53,44 +72,115 @@ export const LOST_WORLD_TOWN: TownTreeDef = {
   art: "dinosaur",
 };
 
+export const REALM_TOWN: TownTreeDef = {
+  ...REALM_TREE,
+  neutralGarrison: [
+    { creature: "squire", count: 20 },
+    { creature: "longbowman", count: 8 },
+  ],
+  townNames: ["Oathmere", "Kingsbridge", "Lancefold", "Brightwater", "Tilting"],
+  // The MVP camp family, a fallback only: v0.2 towns draw townArt (bzc.15).
+  art: "dinosaur",
+};
+
+export const CHURCHYARD_TOWN: TownTreeDef = {
+  ...CHURCHYARD_TREE,
+  neutralGarrison: [
+    { creature: "skeleton", count: 24 },
+    { creature: "ghoul", count: 8 },
+  ],
+  townNames: [
+    "Lychgate",
+    "Mourning Hill",
+    "Yewdown",
+    "Saint Elsewhere",
+    "Gloam",
+  ],
+  // The MVP camp family, a fallback only: v0.2 towns draw townArt (bzc.15).
+  art: "goblin",
+};
+
+export const WARCAMP_TOWN: TownTreeDef = {
+  ...WARCAMP_TREE,
+  neutralGarrison: [
+    { creature: "goblin", count: 30 },
+    { creature: "bomb-chucker", count: 8 },
+  ],
+  townNames: ["Grabbit", "Snotgully", "Boomtown", "Krak's Heap", "Muckmire"],
+  art: "goblin",
+};
+
 export const FACTIONS: readonly FactionDef[] = [
   {
-    id: "lost-world",
-    name: "Lost World",
-    blurb: "Cavemen, spitters and great beasts of the jungle.",
-    available: true,
-    heroClasses: ["chieftain"],
-    town: LOST_WORLD_TOWN,
-  },
-  {
     id: "humans",
-    name: "Humans",
-    blurb: "Coming soon: knights, crossbows and holy orders.",
-    available: false,
-    heroClasses: [],
-    town: null,
+    name: "The Realm",
+    blurb:
+      "Storybook chivalry: Sworn pairs swap places and share every heal; knights charge, longbows cover.",
+    available: true,
+    heroClasses: ["knight-errant", "enchanter"],
+    town: REALM_TOWN,
+    colour: "#2f6fd0",
+    birthright: {
+      name: "Sworn",
+      text: "Native stacks deploy linked in pairs (slot order): each Heal is shared, and a stack may swap hexes with its partner in place of its walk.",
+      startRule: "birthright:sworn",
+    },
+    schools: { bloom: 3, accord: 4, clock: 2, hush: 0, storm: 1 },
+    guildCap: 4,
   },
   {
     id: "undead",
-    name: "Undead",
-    blurb: "Coming soon: the restless dead and their necromancers.",
-    available: false,
-    heroClasses: [],
-    town: null,
+    name: "The Restless",
+    blurb:
+      "Graveyard comedy: a dead stack gets up once with a third of its count; bones feed ghouls, banshees and kings.",
+    available: true,
+    heroClasses: ["revenant", "mortician"],
+    town: CHURCHYARD_TOWN,
+    colour: "#7a4fb5",
+    birthright: {
+      name: "Not Done Yet",
+      text: "A dead native stack that leaves remains gets up at the next round start with a third of its starting count, once per battle; it crumbles after the battle.",
+      ability: "not-done-yet",
+    },
+    schools: { bloom: 0, accord: 1, clock: 3, hush: 4, storm: 2 },
+    guildCap: 5,
   },
   {
     id: "goblins",
-    name: "Goblins",
-    blurb: "Coming soon: wolf riders, bombs and loud machines.",
+    name: "The Goblin Horde",
+    blurb:
+      "Throw things, mostly each other: natives are Launched by their own blasts and land on someone.",
+    available: true,
+    heroClasses: ["warlord", "weatherwitch"],
+    town: WARCAMP_TOWN,
+    colour: "#5fa52a",
+    birthright: {
+      name: "Launched",
+      text: "Natives caught in their own side's area effects take nothing and are pushed 3 hexes away from the centre.",
+      ability: "launched",
+    },
+    schools: { bloom: 3, accord: 0, clock: 1, hush: 2, storm: 4 },
+    guildCap: 3,
+  },
+  {
+    id: "lost-world",
+    name: "Lost World",
+    blurb:
+      "Cavemen, spitters and great beasts of the jungle (MVP; not in v0.2).",
     available: false,
-    heroClasses: [],
-    town: null,
+    heroClasses: ["chieftain"],
+    town: LOST_WORLD_TOWN,
   },
 ];
 
 /** The faction record, or undefined for "neutral" and unknown ids. */
 export function findFaction(id: string): FactionDef | undefined {
   return FACTIONS.find((f) => f.id === id);
+}
+
+/** The faction's birthright, if any. */
+export function birthrightOf(faction: string): BirthrightDef | undefined {
+  return findFaction(faction)?.birthright;
 }
 
 /** Factions a player may pick now. */

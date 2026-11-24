@@ -53,6 +53,12 @@ export interface PlayerState {
   /** Consecutive day starts without a town (eliminated at 7). */
   townlessDays: number;
   tavern: TavernState;
+  /**
+   * Drill flags (ECONOMY 6.3) as "<creature>:<ability>": every stack of
+   * that creature in the player's armies and garrisons has the ability.
+   * Permanent. Missing in older saves (none).
+   */
+  drills?: string[];
 }
 
 export interface HeroSkill {
@@ -308,6 +314,10 @@ export type GameEvent =
       artifacts: string[];
     }
   | { type: "turn"; player: number }
+  /** Loot Pile: gold for a battle won. */
+  | { type: "loot"; player: number; gold: number }
+  /** A Drill flag gained (ECONOMY 6.3). */
+  | { type: "drill"; player: number; creature: string; ability: string }
   | { type: "tavern-refresh"; day: number }
   | { type: "player-eliminated"; player: number }
   | { type: "game-won"; player: number }

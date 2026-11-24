@@ -31,6 +31,7 @@ import {
 } from "./resolve.ts";
 import {
   BATTLE_HEX_COUNT,
+  hexDistance,
   hexFromIndex,
   hexIndex,
   inBounds,
@@ -120,12 +121,34 @@ function blockedCells(state: BattleState, moverId: StackId | null): Uint8Array {
   return blocked;
 }
 
-function bfs(state: BattleState, stack: BattleStack): Reach {
+/** The stack's walk is a teleport within its Speed (Mist). */
+export function teleportsToWalk(stack: BattleStack): boolean {
+  return stack.creature.abilities.some((a) => ability(a).teleportWalk === true);
+}
+
+function bfs(
+  state: BattleState,
+  stack: BattleStack,
+  limit: number = effectiveSpeed(stack),
+): Reach {
   const dist = new Int16Array(BATTLE_HEX_COUNT).fill(-1);
   const prev = new Int16Array(BATTLE_HEX_COUNT).fill(-1);
   const blocked = blockedCells(state, stack.id);
   const start = hexIndex(stack.hex);
-  const speed = effectiveSpeed(stack);
+  const speed = limit;
+  if (teleportsToWalk(stack)) {
+    // Stacks, features and hazards between do not matter: any free hex
+    // within Speed.
+    for (let i = 0; i < BATTLE_HEX_COUNT; i++) {
+      if (i !== start && blocked[i]) continue;
+      const d = hexDistance(hexFromIndex(i), stack.hex);
+      if (d <= speed) {
+        dist[i] = d;
+        prev[i] = start;
+      }
+    }
+    return { dist, prev };
+  }
   dist[start] = 0;
   const queue = [start];
   for (let qi = 0; qi < queue.length; qi++) {
@@ -166,11 +189,14 @@ export function findPath(
   state: BattleState,
   stackId: StackId,
   to: Hex,
+  limit?: number,
 ): Hex[] | null {
   if (!inBounds(to)) return null;
-  const { dist, prev } = bfs(state, getStack(state, stackId));
+  const stack = getStack(state, stackId);
+  const { dist, prev } = bfs(state, stack, limit ?? effectiveSpeed(stack));
   let cur = hexIndex(to);
   if ((dist[cur] as number) < 0) return null;
+  if (teleportsToWalk(stack)) return cur === hexIndex(stack.hex) ? [] : [to];
   const path: Hex[] = [];
   while ((dist[cur] as number) > 0) {
     path.push(hexFromIndex(cur));
@@ -190,16 +216,61 @@ function enemyAdjacent(
 }
 
 /** Ranged, has shots, may shoot and no enemy stack adjacent. */
-export function canShoot(state: BattleState, stackId: StackId): boolean {
+export function canShoot(
+  state: BattleState,
+  stackId: StackId,
+  at?: Hex,
+): boolean {
   const s = getStack(state, stackId);
-  const g = groundAt(state, s.hex);
+  const hex = at ?? s.hex;
+  const g = groundAt(state, hex);
   return (
     isRangedCreature(s.creature) &&
     s.shotsLeft > 0 &&
     !bears(s, "cannotShoot") &&
     !(g !== null && groundKind(g.kind).cannotShoot === true) &&
-    !enemyAdjacent(state, s)
+    !enemyAdjacent(state, s, hex)
   );
+}
+
+/** The shooter may aim at any hex (an ability with `shootAnyHex`). */
+export function shootsAnyHex(stack: BattleStack): boolean {
+  return stack.creature.abilities.some((a) => ability(a).shootAnyHex === true);
+}
+
+/**
+ * The stacks the active stack may swap with in place of its walk: the far
+ * ends of its links whose kind has `swapAction` (Sworn), still alive.
+ */
+export function swapPartners(state: BattleState, stackId: StackId): StackId[] {
+  const s = getStack(state, stackId);
+  const out: StackId[] = [];
+  for (const c of s.conditions) {
+    if (c.link === null || conditionKind(c.kind).swapAction !== true) continue;
+    const far = state.stacks.find((x) => x.id === c.link);
+    if (far && isAlive(far) && !out.includes(far.id)) out.push(far.id);
+  }
+  return out;
+}
+
+/** A state with one stack moved (to test what it could do from there). */
+function withStackAt(state: BattleState, id: StackId, hex: Hex): BattleState {
+  return {
+    ...state,
+    stacks: state.stacks.map((x) => (x.id === id ? { ...x, hex } : x)),
+  };
+}
+
+/** The state after a swap of two stacks' hexes (for legality checks). */
+function swapped(state: BattleState, a: StackId, b: StackId): BattleState {
+  const ha = getStack(state, a).hex;
+  const hb = getStack(state, b).hex;
+  return {
+    ...state,
+    stacks: state.stacks.map((x) =>
+      x.id === a ? { ...x, hex: hb } : x.id === b ? { ...x, hex: ha } : x,
+    ),
+  };
 }
 
 export function canWait(stack: BattleStack): boolean {
@@ -242,6 +313,31 @@ export function legalActions(state: BattleState): BattleAction[] {
     if ((dist[i] as number) > 0)
       out.push({ type: "move", stackId: s.id, to: hexFromIndex(i) });
   }
+  // A swap with a linked partner stands in for the walk (Sworn).
+  for (const partner of swapPartners(state, s.id)) {
+    const p = getStack(state, partner);
+    out.push({ type: "move", stackId: s.id, to: p.hex, swapWith: partner });
+    const after = swapped(state, s.id, partner);
+    if (canShoot(after, s.id)) {
+      for (const e of enemies)
+        out.push({
+          type: "shoot",
+          stackId: s.id,
+          targetId: e.id,
+          swapWith: partner,
+        });
+    }
+    for (const e of enemies) {
+      if (isAdjacent(p.hex, e.hex))
+        out.push({
+          type: "attack",
+          stackId: s.id,
+          targetId: e.id,
+          from: p.hex,
+          swapWith: partner,
+        });
+    }
+  }
   out.push({ type: "defend", stackId: s.id });
   if (canWait(s)) out.push({ type: "wait", stackId: s.id });
   return out;
@@ -252,8 +348,18 @@ function targetsError(
   state: BattleState,
   targets: readonly ActTarget[],
   want: number,
+  max: number = want,
+  step = 1,
 ): string | null {
-  if (targets.length !== want) return `choose ${want} target(s)`;
+  if (
+    targets.length < want ||
+    targets.length > Math.max(want, max) ||
+    (targets.length - want) % step !== 0
+  ) {
+    return max > want
+      ? `choose ${want} to ${max} target(s)`
+      : `choose ${want} target(s)`;
+  }
   for (const t of targets) {
     if ("stack" in t) {
       const s = state.stacks.find((x) => x.id === t.stack);
@@ -310,6 +416,13 @@ export function actionError(
     case "defend":
       return null;
     case "move": {
+      if (action.swapWith !== undefined) {
+        if (!swapPartners(state, s.id).includes(action.swapWith))
+          return "no link to swap with";
+        return sameHex(getStack(state, action.swapWith).hex, action.to)
+          ? null
+          : "a swap moves to the partner's hex";
+      }
       if (!inBounds(action.to)) return "destination out of bounds";
       if (sameHex(action.to, s.hex)) return "a move must leave the hex";
       const { dist } = bfs(state, s);
@@ -320,6 +433,18 @@ export function actionError(
     case "shoot": {
       const t = state.stacks.find((x) => x.id === action.targetId);
       if (!t || !isAlive(t) || t.side === s.side) return "no such enemy stack";
+      if (action.swapWith !== undefined) {
+        if (!swapPartners(state, s.id).includes(action.swapWith))
+          return "no link to swap with";
+        return canShoot(swapped(state, s.id, action.swapWith), s.id)
+          ? null
+          : "this stack cannot shoot after the swap";
+      }
+      return canShoot(state, s.id) ? null : "this stack cannot shoot now";
+    }
+    case "shootHex": {
+      if (!shootsAnyHex(s)) return "this stack cannot shoot at a hex";
+      if (!inBounds(action.at)) return "target hex out of bounds";
       return canShoot(state, s.id) ? null : "this stack cannot shoot now";
     }
     case "attack": {
@@ -328,6 +453,13 @@ export function actionError(
       if (!inBounds(action.from)) return "attack hex out of bounds";
       if (!isAdjacent(action.from, t.hex))
         return "attack hex is not adjacent to the target";
+      if (action.swapWith !== undefined) {
+        if (!swapPartners(state, s.id).includes(action.swapWith))
+          return "no link to swap with";
+        return sameHex(getStack(state, action.swapWith).hex, action.from)
+          ? null
+          : "a swap attacks from the partner's hex";
+      }
       const { dist } = bfs(state, s);
       return (dist[hexIndex(action.from)] as number) >= 0
         ? null
@@ -336,14 +468,30 @@ export function actionError(
     case "ability": {
       if (!s.creature.abilities.includes(action.ability))
         return `${s.creature.id} has no ability ${action.ability}`;
-      const actId = ability(action.ability).act;
+      const abDef = ability(action.ability);
+      const actId = abDef.act;
       if (!actId) return `${action.ability} is not an activated ability`;
-      if (s.abilitiesUsed.includes(action.ability))
+      if (abDef.everyTurn !== true && s.abilitiesUsed.includes(action.ability))
         return "this ability is used for the battle";
+      let at = state;
+      if (action.from !== undefined && !sameHex(action.from, s.hex)) {
+        if (abDef.moveFirst !== true) return "this ability cannot move first";
+        if (!inBounds(action.from)) return "hex out of bounds";
+        const { dist } = bfs(state, s);
+        if ((dist[hexIndex(action.from)] as number) < 0)
+          return "hex not reachable";
+        at = withStackAt(state, s.id, action.from);
+      }
       const def = actDef(actId);
       return (
-        targetsError(state, action.targets, def.targets) ??
-        def.check?.(state, s.id, action.targets) ??
+        targetsError(
+          at,
+          action.targets,
+          def.targets,
+          def.maxTargets?.(at, s.id),
+          def.targetStep,
+        ) ??
+        def.check?.(at, s.id, action.targets) ??
         null
       );
     }
@@ -364,7 +512,13 @@ export function actionError(
         if (castErr) return castErr;
       }
       const shape =
-        targetsError(state, action.targets, def.targets) ??
+        targetsError(
+          state,
+          action.targets,
+          def.targets,
+          def.maxTargets?.(state, s.id),
+          def.targetStep,
+        ) ??
         def.check?.(state, s.id, action.targets) ??
         null;
       if (shape) return shape;
@@ -396,7 +550,13 @@ export function actionError(
       if (e) return e;
       const def = actDef(action.spell);
       return (
-        targetsError(state, action.targets, def.targets) ??
+        targetsError(
+          state,
+          action.targets,
+          def.targets,
+          def.maxTargets?.(state, s.id),
+          def.targetStep,
+        ) ??
         def.check?.(state, s.id, action.targets) ??
         null
       );
@@ -671,6 +831,8 @@ function actionTargets(action: BattleAction): StackId[] {
     case "attack":
     case "shoot":
       return [action.targetId];
+    case "shootHex":
+      return [];
     case "ability":
     case "heroAct":
     case "creatureCast":
@@ -680,35 +842,92 @@ function actionTargets(action: BattleAction): StackId[] {
   }
 }
 
+/**
+ * The active stack's walk to `to` (its own move): a path walk, or a
+ * teleport for a stack whose walk is one (Mist). Returns hexes moved.
+ */
+function walkTo(d: Draft, fx: Resolver, id: StackId, to: Hex): number {
+  const s = d.get(id);
+  if (sameHex(s.hex, to)) return 0;
+  if (teleportsToWalk(s)) {
+    const n = hexDistance(s.hex, to);
+    fx.teleport(id, to);
+    fx.walkEnded(id);
+    return n;
+  }
+  const path = findPath(d.toState(), id, to);
+  if (!path) throw new Error("hex not reachable");
+  fx.walk(id, path, "walk");
+  return path.length;
+}
+
+/**
+ * A shot: the shooter's ability may replace it (Bomb: an area shot at a
+ * hex); otherwise a shot Strike on the target.
+ */
+function performShot(
+  d: Draft,
+  fx: Resolver,
+  shooterId: StackId,
+  targetId: StackId | null,
+  at: Hex,
+): void {
+  const s = d.get(shooterId);
+  d.update(shooterId, { shotsLeft: s.shotsLeft - 1 });
+  const idx =
+    targetId !== null
+      ? d.emit({ type: "shoot", stackId: shooterId, targetId })
+      : d.emit({ type: "shootHex", stackId: shooterId, at });
+  const override = s.creature.abilities.find(
+    (a) => ability(a).shot !== undefined,
+  );
+  d.within(idx, override ? `ability:${override}` : null, () => {
+    if (override) {
+      ability(override).shot?.(fx, shooterId, at, targetId);
+    } else if (targetId !== null) {
+      fx.strikeKind(shooterId, targetId, "shot", 0);
+    }
+  });
+}
+
 /** Runs an attack or shot on the draft (legality already checked). */
 function performAttack(d: Draft, fx: Resolver, action: AttackAction): number {
+  if (action.swapWith !== undefined) {
+    fx.swap(action.stackId, action.swapWith);
+  }
   if (action.type === "shoot") {
-    const s = d.get(action.stackId);
-    d.update(action.stackId, { shotsLeft: s.shotsLeft - 1 });
-    const idx = d.emit({
-      type: "shoot",
-      stackId: action.stackId,
-      targetId: action.targetId,
-    });
-    d.within(idx, null, () =>
-      fx.strikeKind(action.stackId, action.targetId, "shot", 0),
-    );
+    const t = d.get(action.targetId);
+    performShot(d, fx, action.stackId, action.targetId, t.hex);
     return 0;
   }
-  const path = findPath(d.toState(), action.stackId, action.from);
-  if (!path) throw new Error("attack hex not reachable");
-  fx.walk(action.stackId, path, "walk");
-  if (!fx.isAlive(action.stackId) || !fx.isAlive(action.targetId))
-    return path.length;
+  const moved =
+    action.swapWith !== undefined
+      ? 0
+      : walkTo(d, fx, action.stackId, action.from);
+  if (!fx.isAlive(action.stackId) || !fx.isAlive(action.targetId)) return moved;
   const idx = d.emit({
     type: "attack",
     stackId: action.stackId,
     targetId: action.targetId,
   });
   d.within(idx, null, () =>
-    fx.strikeKind(action.stackId, action.targetId, "melee", path.length),
+    fx.strikeKind(action.stackId, action.targetId, "melee", moved),
   );
-  return path.length;
+  return moved;
+}
+
+/** A walk after the attack (Hit and Run), if still possible. */
+function walkAfter(d: Draft, fx: Resolver, id: StackId, to: Hex): void {
+  if (!fx.isAlive(id)) return;
+  const s = d.get(id);
+  const n = Math.max(
+    0,
+    ...s.creature.abilities.map((a) => ability(a).walkAfterAttack ?? 0),
+  );
+  if (n <= 0 || sameHex(s.hex, to)) return;
+  const path = findPath(d.toState(), id, to, n);
+  if (!path) return;
+  d.within(null, "engine:walk-after", () => fx.walk(id, path, "walk"));
 }
 
 /** Applies the active stack's action. Throws on an illegal action. */
@@ -837,19 +1056,27 @@ export function applyAction(
       d.emit({ type: "defend", stackId: id });
       break;
     case "move": {
-      const path = findPath(state, id, action.to);
-      if (!path) throw new Error("destination not reachable");
-      fx.walk(id, path, "walk");
+      if (action.swapWith !== undefined) fx.swap(id, action.swapWith);
+      else walkTo(d, fx, id, action.to);
       break;
     }
     case "attack":
     case "shoot":
       performAttack(d, fx, action);
       break;
+    case "shootHex": {
+      const t = d.stacks.find((x) => isAlive(x) && sameHex(x.hex, action.at));
+      performShot(d, fx, id, t?.id ?? null, action.at);
+      break;
+    }
     case "ability": {
+      const abDef = ability(action.ability);
+      if (action.from !== undefined) walkTo(d, fx, id, action.from);
+      if (!fx.isAlive(id)) break;
       const s = d.get(id);
-      d.update(id, { abilitiesUsed: [...s.abilitiesUsed, action.ability] });
-      const actId = ability(action.ability).act as string;
+      if (abDef.everyTurn !== true)
+        d.update(id, { abilitiesUsed: [...s.abilitiesUsed, action.ability] });
+      const actId = abDef.act as string;
       const idx = d.emit(
         { type: "ability", stackId: id, ability: action.ability },
         `ability:${action.ability}`,
@@ -881,6 +1108,13 @@ export function applyAction(
     }
   }
   fx.resolveReactions();
+  if (action.type === "attack" && action.after !== undefined) {
+    if (!checkWinner(d)) {
+      d.beginStep({ actorId: id, targetIds: [] });
+      walkAfter(d, fx, id, action.after);
+      fx.resolveReactions();
+    }
+  }
   if (!checkWinner(d)) {
     // Heartened (RULES_V2 6): after the bearer finishes a turn, its side may
     // end Heartened to give it an extra turn. Default: it does.

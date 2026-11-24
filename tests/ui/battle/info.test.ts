@@ -36,7 +36,7 @@ describe("stackInfo", () => {
     ]);
   });
 
-  it("neutral stacks have plain stats and shots for shooters", () => {
+  it("shows plain stats and shots for shooters", () => {
     const s = battle(
       [unit("caveman", 5, at(0, 5))],
       [unit("bomb-chucker", 8, at(14, 5))],
@@ -51,6 +51,7 @@ describe("stackInfo", () => {
       ["Speed", "4", ""],
       ["Shots", "8/8", ""],
     ]);
-    expect(info.ability).toBeNull();
+    // The Bomb Chucker is the Horde's since v0.2 (FACTION_GOBLINS 5).
+    expect(info.ability?.name).toBe("Bomb");
   });
 });

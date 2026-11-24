@@ -14,8 +14,11 @@
  * and the retreating army is lost (0 survivors).
  */
 
-import { getCreature } from "../../data/creatures.ts";
+import { creatureAbilities, getCreature } from "../../data/creatures.ts";
+import { birthrightOf } from "../../data/factions.ts";
+import { ROUND_TABLE_MORALE, SPECIALS } from "../../data/factionTowns.ts";
 import type { CreatureDef } from "../../data/types.ts";
+import { GET_UP_HALF } from "./resolve.ts";
 import type {
   BattleResolver,
   BattleResult as GameBattleResult,
@@ -51,8 +54,28 @@ export function battleStatsFromCreature(def: CreatureDef): BattleCreatureStats {
     damage: def.damage,
     speed: def.speed,
     shots: def.shots,
-    abilities: def.ability === null ? [] : [def.ability],
+    abilities: [...creatureAbilities(def)],
+    ...(def.tags
+      ? {
+          tags: {
+            remains: def.tags.remains,
+            cannotBear: [...def.tags.cannotBear],
+          },
+        }
+      : {}),
+    ...(def.caster
+      ? { caster: { ...def.caster, pages: [...def.caster.pages] } }
+      : {}),
   };
+}
+
+/** Side flags the battle content reads, from the player's specials. */
+function battleFlags(specials: readonly string[]): string[] {
+  const out: string[] = [];
+  if (specials.includes(SPECIALS.chapelOfOaths)) out.push("chapel-of-oaths");
+  if (specials.includes(SPECIALS.familyCrypt)) out.push(GET_UP_HALF);
+  if (specials.includes(SPECIALS.launchRamp)) out.push("launch-ramp");
+  return out;
 }
 
 /**
@@ -89,41 +112,87 @@ function sideAbilities(side: GameBattleSide, which: BattleSide): string[] {
   return p === undefined ? [] : heroAbilityIds(which, p.strikes, p.stacks);
 }
 
+/**
+ * One side's engine army: the hero's profile (modifiers, start rules,
+ * item acts, Morale, Luck, Command), the faction's birthright for its
+ * natives (RULES_V2 3.8), the player's Drills on their creatures and the
+ * town specials as battle flags.
+ */
 function armyFromGame(
   side: GameBattleSide,
   heroAbilities: readonly string[],
 ): BattleArmySetup {
   const profile = side.hero?.profile;
+  const faction = side.faction ?? null;
+  const birthright = faction === null ? undefined : birthrightOf(faction);
+  const specials = side.specials ?? [];
+  const drills = side.drills ?? [];
+  const flinger = specials.includes(SPECIALS.greatFlinger);
+  const roundTable =
+    side.hero !== null && specials.includes(SPECIALS.roundTable)
+      ? ROUND_TABLE_MORALE
+      : 0;
+  const morale = (profile?.morale ?? 0) + roundTable;
+  const startRules = [
+    ...(profile !== undefined ? startRuleRefs(profile.startRules) : []),
+    // The birthright's deployment rule runs after artifacts' (FACTION_HUMANS 3).
+    ...(birthright?.startRule !== undefined
+      ? [{ id: birthright.startRule }]
+      : []),
+  ];
   return {
     hero: side.hero
       ? {
           attack: side.hero.attack,
           defense: side.hero.defense,
-          ...(profile !== undefined ? { itemActs: profile.itemActs } : {}),
+          ...(profile !== undefined
+            ? {
+                itemActs: profile.itemActs,
+                command: profile.command,
+                commandC: profile.commandStrength,
+              }
+            : {}),
         }
       : null,
     ...(side.hero && profile !== undefined
       ? { magic: magicFromProfile(profile) }
       : {}),
     defenseBonus: side.defenseBonus,
-    ...(profile !== undefined
+    ...(profile !== undefined || morale !== 0
       ? {
-          morale: profile.morale,
-          luck: profile.luck,
-          startRules: startRuleRefs(profile.startRules),
+          morale: Math.max(-3, Math.min(3, morale)),
+          luck: profile?.luck ?? 0,
         }
       : {}),
+    ...(startRules.length > 0 ? { startRules } : {}),
+    ...(birthright?.ability !== undefined
+      ? { birthright: birthright.ability }
+      : {}),
+    ...(faction !== null || specials.length > 0
+      ? { flags: battleFlags(specials) }
+      : {}),
     stacks: side.stacks.map((s, slot) => {
-      const base = battleStatsFromCreature(getCreature(s.creature));
+      const cdef = getCreature(s.creature);
+      const base = battleStatsFromCreature(cdef);
       const speed = heroSpeedBonus(profile?.stacks ?? [], s.creature);
+      const native = faction !== null && cdef.faction === faction;
+      const extra = [
+        ...drills
+          .filter((d) => d.startsWith(`${cdef.id}:`))
+          .map((d) => d.slice(cdef.id.length + 1)),
+        ...(flinger && native ? ["cannonball"] : []),
+      ].filter(
+        (a, i, all) => !base.abilities.includes(a) && all.indexOf(a) === i,
+      );
       return {
         creature: {
           ...base,
           speed: base.speed + speed,
-          abilities: [...base.abilities, ...heroAbilities],
+          abilities: [...base.abilities, ...extra, ...heroAbilities],
         },
         count: s.count,
         slot,
+        ...(native ? { native: true } : {}),
       };
     }),
   };
@@ -154,11 +223,38 @@ export function gameResultFromEngine(
   setup: GameBattleSetup,
   result: BattleResult,
 ): GameBattleResult {
-  const survivors = (prefix: "a" | "d", n: number): number[] =>
-    Array.from({ length: n }, (_, i) => {
+  const survivors = (prefix: "a" | "d", n: number): number[] => {
+    const side = prefix === "a" ? setup.attacker : setup.defender;
+    const won =
+      result.winner === (prefix === "a" ? "attacker" : "defender") &&
+      result.reason !== "roundLimit";
+    // RULES_V2 1.12: a stack that got up crumbles, unless its owner holds
+    // the Hall of Ancestors and won.
+    const keepRisen =
+      won && (side.specials ?? []).includes(SPECIALS.hallOfAncestors);
+    const counts: number[] = Array.from({ length: n }, (_, i) => {
       const s = result.stacks.find((x) => x.id === `${prefix}${i}`);
-      return s?.count ?? 0;
+      if (s === undefined) return 0;
+      return s.risen === true && !keepRisen ? 0 : s.count;
     });
+    // A winner left with no creatures keeps the weakest crumbling stack
+    // with 1 creature.
+    if (won && !counts.some((c) => c > 0)) {
+      let best = -1;
+      let bestFv = Infinity;
+      for (let i = 0; i < n; i++) {
+        const s = result.stacks.find((x) => x.id === `${prefix}${i}`);
+        if (s === undefined || s.count <= 0) continue;
+        const fv = s.count * getCreature(s.creatureId).fightValue;
+        if (fv < bestFv) {
+          bestFv = fv;
+          best = i;
+        }
+      }
+      if (best >= 0) counts[best] = 1;
+    }
+    return counts;
+  };
   const attacker = survivors("a", setup.attacker.stacks.length);
   const defender = survivors("d", setup.defender.stacks.length);
   const withMagic = (r: GameBattleResult): GameBattleResult =>

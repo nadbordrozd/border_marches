@@ -2,6 +2,7 @@
  * The Lost World roster (FACTION_LOST_WORLD.md section 2) and the lookup of
  * every creature in the game (faction creatures plus neutrals).
  */
+import { FACTION_CREATURES } from "./factionCreatures.ts";
 import { NEUTRAL_CREATURES } from "./neutrals.ts";
 import type { CreatureDef, CreatureId, LostWorldCreatureId } from "./types.ts";
 
@@ -132,7 +133,13 @@ export const LOST_WORLD_CREATURE_IDS: readonly LostWorldCreatureId[] = [
 export const CREATURES: Readonly<Record<CreatureId, CreatureDef>> = {
   ...LOST_WORLD_CREATURES,
   ...NEUTRAL_CREATURES,
-};
+  ...(FACTION_CREATURES as Record<string, CreatureDef>),
+} as Readonly<Record<CreatureId, CreatureDef>>;
+
+/** A creature's battle ability ids (its `abilities`, or its MVP ability). */
+export function creatureAbilities(def: CreatureDef): readonly string[] {
+  return def.abilities ?? (def.ability === null ? [] : [def.ability]);
+}
 
 export function isCreatureId(id: unknown): id is CreatureId {
   return typeof id === "string" && Object.hasOwn(CREATURES, id);

@@ -12,8 +12,10 @@ import {
   RESOURCE_IDS,
 } from "../../data/economy.ts";
 import { buildingDef, townTree } from "../../data/factions.ts";
+import { KEYSTONE_ITEM } from "../../data/factionTowns.ts";
 import { ARMY_SLOTS } from "../../data/hero.ts";
 import type { BuildingId, CreatureId, ResourceId } from "../../data/types.ts";
+import { learnInTown } from "../magic/adventure.ts";
 import { weeklyGrowth } from "./progression.ts";
 import { canAfford, scaleResources, subtractResources } from "./resources.ts";
 import {
@@ -34,6 +36,7 @@ import {
 import type {
   ArmySlots,
   CommandResult,
+  GameEvent,
   GameState,
   HeroState,
   TownState,
@@ -47,7 +50,19 @@ export type BuildStatus =
   | "wrong-faction"
   | "built-today"
   | "requirements"
+  | "keystone"
   | "resources";
+
+/** The owner's hero in the town carrying the Keystone, if any. */
+function keystoneBearer(
+  state: GameState,
+  town: TownState,
+): HeroState | undefined {
+  const hero = heroInTownOf(state, town);
+  return hero !== undefined && hero.backpack.includes(KEYSTONE_ITEM)
+    ? hero
+    : undefined;
+}
 
 /** Whether a building can be built now, and if not, the first reason. */
 export function buildStatus(
@@ -65,6 +80,9 @@ export function buildStatus(
   if (!def.requires.every((r) => town.buildings.includes(r))) {
     return "requirements";
   }
+  if (def.needsKeystone === true && keystoneBearer(state, town) === undefined) {
+    return "keystone";
+  }
   const player = state.players.find((p) => p.id === town.owner);
   if (player === undefined || !canAfford(player.resources, def.cost)) {
     return "resources";
@@ -79,6 +97,7 @@ const BUILD_ERRORS = {
   "wrong-faction": "cannot-build",
   "built-today": "built-today",
   requirements: "requirements",
+  keystone: "requirements",
   resources: "resources",
 } as const;
 
@@ -128,7 +147,33 @@ export function build(
       remainder: g.remainder,
     };
   }
-  return success(next);
+  const events: GameEvent[] = [];
+  if (def.drill !== undefined) {
+    // ECONOMY 6.3: a permanent flag for the player.
+    const flag = `${def.drill.creature}:${def.drill.ability}`;
+    const drills = player.drills ?? [];
+    if (!drills.includes(flag)) player.drills = [...drills, flag];
+    events.push({
+      type: "drill",
+      player: player.id,
+      creature: def.drill.creature,
+      ability: def.drill.ability,
+    });
+  }
+  if (def.needsKeystone === true) {
+    const bearer = keystoneBearer(next, town);
+    if (bearer !== undefined) {
+      const i = bearer.backpack.indexOf(KEYSTONE_ITEM);
+      bearer.backpack = bearer.backpack.filter((_, k) => k !== i);
+    }
+  }
+  if (def.guildLevel !== undefined) {
+    // RULES_V2 2.9: a hero of the owner in the town learns the new level's
+    // spells at once (the town's draw is seeded, src/core/magic/guild.ts).
+    const hero = heroInTownOf(next, town);
+    if (hero !== undefined) learnInTown(next, hero, town.id, events);
+  }
+  return success(next, events);
 }
 
 /** The owner's living hero standing in the town, if any. */

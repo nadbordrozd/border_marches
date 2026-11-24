@@ -39,14 +39,18 @@ export interface GameSetup {
 
 /**
  * The players of a new game: the human first with its faction, then AI
- * players. Until the faction bead adds more, every AI plays the first
- * playable faction (the Lost World).
+ * players, each on the next playable faction after the human's in turn
+ * (so a three-player game has all three factions).
  */
 export function playerSetups(setup: GameSetup): PlayerSetup[] {
-  const aiFaction = playableFactions()[0]?.id ?? "lost-world";
+  const playable = playableFactions().map((f) => f.id);
+  const start = Math.max(0, playable.indexOf(setup.faction));
   return Array.from({ length: setup.players }, (_, i) => ({
     kind: i === 0 ? "human" : "ai",
-    faction: i === 0 ? setup.faction : aiFaction,
+    faction:
+      i === 0
+        ? setup.faction
+        : (playable[(start + i) % playable.length] ?? setup.faction),
   }));
 }
 
@@ -124,11 +128,15 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
       }
     };
     renderPlayers();
-    let faction: FactionId = playableFactions()[0]?.id ?? "lost-world";
+    const wanted = playableFactions().find(
+      (f) => f.id === params.get("faction"),
+    );
+    let faction: FactionId =
+      wanted?.id ?? playableFactions()[0]?.id ?? "humans";
     const factionRow = el("div.gm-faction-row");
     const renderFactions = (): void => {
       factionRow.replaceChildren();
-      for (const f of FACTIONS) {
+      for (const f of FACTIONS.filter((x) => x.available)) {
         const b = button(
           f.name,
           () => {

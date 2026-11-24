@@ -77,7 +77,8 @@ import {
   objectAt,
   stackPhrase,
 } from "./format.ts";
-import { heroMapUnit, loadGameMapAssets } from "./hero-sprite.ts";
+import { loadGameMapAssets } from "./hero-sprite.ts";
+import { heroArt, heroPortrait } from "../assets/unit-art.ts";
 import {
   levelUpDialog,
   meetingItems,
@@ -160,7 +161,6 @@ class GameScreen {
   private readonly townPanel = el("div.gm-town-panel");
   private readonly view: MapView;
   private readonly minimap: Minimap;
-  private readonly heroUnit = heroMapUnit();
   private readonly ai = new SimpleAi();
   private readonly resolver = createBattleResolver();
   private objectsSig = "";
@@ -378,7 +378,7 @@ class GameScreen {
     for (const h of own) {
       const item = el(
         "button.gm-hero-item",
-        img("portrait-dinosaur-chieftain", "gm-hero-item-portrait"),
+        img(heroPortrait(h.heroClass).key, "gm-hero-item-portrait"),
         el("span.gm-hero-item-name", h.name),
       );
       item.type = "button";
@@ -408,7 +408,11 @@ class GameScreen {
     this.heroPanel.replaceChildren();
     if (hero === undefined) return;
     const cls = getHeroClass(hero.heroClass);
-    const portrait = img("portrait-dinosaur-chieftain", "gm-hero-portrait", 2);
+    const portrait = img(
+      heroPortrait(hero.heroClass).key,
+      "gm-hero-portrait",
+      2,
+    );
     portrait.title = "Centre on the hero";
     portrait.addEventListener("click", () => this.selectHero(hero.id));
     const nextXp = xpForLevel(hero.level + 1);
@@ -532,7 +536,7 @@ class GameScreen {
           id: h.id,
           x: h.id === moving?.id ? moving.x : h.x,
           y: h.id === moving?.id ? moving.y : h.y,
-          unit: this.heroUnit,
+          unit: heroArt(h.heroClass).key,
           colour: playerColour(h.owner).hex,
         })),
     );

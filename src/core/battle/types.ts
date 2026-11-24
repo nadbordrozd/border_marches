@@ -130,6 +130,10 @@ export interface SideMagic {
 export interface HeroBattleStats {
   readonly attack: number;
   readonly defense: number;
+  /** The class's Command act id (RULES_V2 3.7), if any. */
+  readonly command?: string;
+  /** C for the Command (the profile's commandStrength). Default 1. */
+  readonly commandC?: number;
   /**
    * Item acts (RULES_V2 4.6 form 4) of the hero's worn artifacts: act ids
    * of kind "item" this side may use, once per battle each. Absent: none.
@@ -181,6 +185,17 @@ export interface BattleArmySetup {
    * in this order through the effect registry.
    */
   readonly startRules?: readonly EffectRef[];
+  /**
+   * The birthright of this army's faction (RULES_V2 3.8): an ability id
+   * every native stack gains at deployment.
+   */
+  readonly birthright?: string;
+  /**
+   * Battle-setup flags of this side (Drills are applied to creatures by
+   * the game layer; town specials and Keystone powers are read by content
+   * through these, e.g. "chapel-of-oaths").
+   */
+  readonly flags?: readonly string[];
   /** The hero's book, mana and scrolls (needs a hero). */
   readonly magic?: MagicSetup;
 }
@@ -283,6 +298,15 @@ export interface BattleStack {
   readonly extraTurnRound: number;
   /** Once-per-battle abilities this stack has used. */
   readonly abilitiesUsed: readonly string[];
+  /**
+   * The visible "gets up" badge (One More Time): the next time the stack
+   * dies and leaves remains it gets up as by Not Done Yet. Default false.
+   */
+  readonly getsUp?: boolean;
+  /** It has already got up by its faction's birthright once. */
+  readonly rose?: boolean;
+  /** It returned from its remains: it crumbles after the battle (1.12). */
+  readonly risen?: boolean;
 }
 
 export type GroundClass = "blocking" | "hazard" | "surface" | "remains";
@@ -337,6 +361,8 @@ export interface BattleSideState {
   readonly commandUsed: boolean;
   /** Item acts used this battle (act ids). */
   readonly itemActsUsed: readonly string[];
+  /** Battle-setup flags (BattleArmySetup.flags). Default none. */
+  readonly flags?: readonly string[];
   /**
    * The hero's magic. Absent: a hero with no book data (tests, legacy
    * setups) casts any cast act freely at Power 0.
@@ -395,7 +421,16 @@ export interface ConditionRef {
 }
 
 export type BattleAction =
-  | { readonly type: "move"; readonly stackId: StackId; readonly to: Hex }
+  | {
+      readonly type: "move";
+      readonly stackId: StackId;
+      readonly to: Hex;
+      /**
+       * Swap hexes with this linked stack instead of walking (a link kind
+       * with `swapAction`, e.g. Sworn); `to` must be its hex.
+       */
+      readonly swapWith?: StackId;
+    }
   | {
       readonly type: "attack";
       readonly stackId: StackId;
@@ -404,11 +439,30 @@ export type BattleAction =
       readonly from: Hex;
       /** Spend Heartened for an extra turn afterwards (default true). */
       readonly hearten?: boolean;
+      /** Swap with this linked stack in place of the walk (`from` = its hex). */
+      readonly swapWith?: StackId;
+      /**
+       * A walk after the attack and its retaliation, for a stack with an
+       * ability that allows one (Hit and Run); ignored if not reachable then.
+       */
+      readonly after?: Hex;
     }
   | {
       readonly type: "shoot";
       readonly stackId: StackId;
       readonly targetId: StackId;
+      readonly hearten?: boolean;
+      /** Swap with this linked stack first, then shoot. */
+      readonly swapWith?: StackId;
+    }
+  | {
+      /**
+       * A shot at a hex rather than a stack, for a shooter with an ability
+       * that may target any hex (Bomb).
+       */
+      readonly type: "shootHex";
+      readonly stackId: StackId;
+      readonly at: Hex;
       readonly hearten?: boolean;
     }
   | { readonly type: "wait"; readonly stackId: StackId }
@@ -424,6 +478,8 @@ export type BattleAction =
       readonly ability: string;
       readonly targets: readonly ActTarget[];
       readonly hearten?: boolean;
+      /** Walk here first, for an ability that allows it (`moveFirst`). */
+      readonly from?: Hex;
     }
   | {
       /**
@@ -606,6 +662,19 @@ export type BattleEventBody =
       readonly type: "shoot";
       readonly stackId: StackId;
       readonly targetId: StackId;
+    }
+  | {
+      /** A shot at a hex (an area shot such as Bomb). */
+      readonly type: "shootHex";
+      readonly stackId: StackId;
+      readonly at: Hex;
+    }
+  | {
+      /** A dead stack returns from its remains (Not Done Yet). */
+      readonly type: "getUp";
+      readonly stackId: StackId;
+      readonly hex: Hex;
+      readonly count: number;
     }
   | {
       readonly type: "retaliation";

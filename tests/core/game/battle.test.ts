@@ -66,6 +66,10 @@ describe("battle setup", () => {
       towerHarm: null,
       // No town: a hero without a town cannot retreat (RULES_V2 1.12).
       canRetreat: false,
+      // The army's faction makes its creatures native (RULES_V2 3.8).
+      faction: "lost-world",
+      drills: [],
+      specials: [],
     });
     expect(setup.defender).toEqual({
       owner: null,
@@ -78,6 +82,10 @@ describe("battle setup", () => {
       defenseBonus: 0,
       towerHarm: null,
       canRetreat: false,
+      // Neutral guards have no birthright.
+      faction: null,
+      drills: [],
+      specials: [],
     });
     expect(setup.battle.objectId).toBe("m");
     expect(battleSetup(s)).toEqual(setup);
@@ -222,7 +230,7 @@ describe("applyBattleResult", () => {
     expect(state.status).toBe("won");
     expect(events).toContainEqual({ type: "game-won", player: 0 });
     expect(state.heroes[0]!.xp).toBe(
-      4 * 140 + 8 * 90 + 14 * 50 + 30 * 28 + 30 * 12,
+      4 * 160 + 8 * 90 + 14 * 50 + 30 * 28 + 30 * 12,
     );
     expect(errorOf(endDay(state))).toBe("game-over");
   });

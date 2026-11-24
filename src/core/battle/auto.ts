@@ -38,6 +38,8 @@ export interface StackOutcome {
   readonly initialCount: number;
   /** Survivors (0 = the stack died). The top creature heals after battle. */
   readonly count: number;
+  /** It got up from its remains: it crumbles after the battle (1.12). */
+  readonly risen?: boolean;
 }
 
 export interface BattleResult {
@@ -110,6 +112,7 @@ export function battleResult(
         creatureId: s.creature.id,
         initialCount: s.initialCount,
         count: s.count,
+        ...(s.risen === true ? { risen: true } : {}),
       })),
     killedHp,
   };

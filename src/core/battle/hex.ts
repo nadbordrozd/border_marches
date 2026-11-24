@@ -107,6 +107,28 @@ export function stepHex(h: Hex, dir: number): Hex {
   return { col: nx + (nz - (nz & 1)) / 2, row: nz };
 }
 
+/**
+ * The direction (0..5) closest to the line from `from` to `to`: the step
+ * whose cube vector has the largest dot product with to - from (ties: the
+ * first in E, SE, SW, W, NW, NE order). For a hex in a straight line it is
+ * exactly that line. `from` equal to `to` gives 0.
+ */
+export function directionToward(from: Hex, to: Hex): number {
+  const [ax, ay, az] = toCube(from);
+  const [bx, by, bz] = toCube(to);
+  const v = [bx - ax, by - ay, bz - az] as const;
+  let best = 0;
+  let bestDot = -Infinity;
+  CUBE_STEPS.forEach((st, dir) => {
+    const dot = st[0] * v[0] + st[1] * v[1] + st[2] * v[2];
+    if (dot > bestDot) {
+      bestDot = dot;
+      best = dir;
+    }
+  });
+  return best;
+}
+
 export function hexDistance(a: Hex, b: Hex): number {
   const [ax, ay, az] = toCube(a);
   const [bx, by, bz] = toCube(b);

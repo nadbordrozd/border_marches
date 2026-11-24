@@ -36,7 +36,14 @@ function gameSetup(
 
 describe("data adapter", () => {
   it("builds engine stats from CREATURES matching the documented numbers", () => {
-    for (const fixture of ALL_CREATURES) {
+    // Faction creatures (v0.2) have their own data tests; the Lost World
+    // and the neutral Orc Brute and Troll keep the MVP numbers.
+    const mvp = ALL_CREATURES.filter((f) => {
+      const faction = CREATURES[f.id as CreatureId].faction;
+      return faction === "lost-world" || faction === "neutral";
+    });
+    expect(mvp.length).toBeGreaterThan(6);
+    for (const fixture of mvp) {
       const def = CREATURES[fixture.id as CreatureId];
       const stats = battleStatsFromCreature(def);
       expect({

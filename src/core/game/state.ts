@@ -196,6 +196,25 @@ export function builtDefs(town: TownState): BuildingDef[] {
   return out;
 }
 
+/**
+ * The special flags a player holds (town specials and Keystone powers of
+ * the towns it owns), sorted and without repeats.
+ */
+export function playerSpecials(state: GameState, player: number): string[] {
+  const out = new Set<string>();
+  for (const town of townsOf(state, player)) {
+    for (const def of builtDefs(town)) {
+      if (def.special !== undefined) out.add(def.special);
+    }
+  }
+  return [...out].sort();
+}
+
+/** The player's Drill flags ("<creature>:<ability>"). */
+export function playerDrills(state: GameState, player: number): string[] {
+  return [...(findPlayer(state, player)?.drills ?? [])];
+}
+
 /** The town's fort level, 0 to 3 (RULES_V2 5.5): its best fort building. */
 export function fortLevel(town: TownState): number {
   let level = 0;

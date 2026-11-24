@@ -31,9 +31,15 @@ export function displayObjects(state: GameState): MapObject[] {
     if (o.kind === "town") {
       const t = state.towns[o.id];
       if (t !== undefined && !t.isHold) {
+        // The town's own faction (its art follows it, townArt) and fort.
         out.push({
           ...o,
-          data: { ...o.data, level: townLevel(t), fort: fortLevel(t) },
+          data: {
+            ...o.data,
+            faction: t.faction,
+            level: townLevel(t),
+            fort: fortLevel(t),
+          },
         });
         continue;
       }
@@ -48,7 +54,7 @@ export function objectsSignature(objects: readonly MapObject[]): string {
   return objects
     .map(
       (o) =>
-        `${o.id}:${String(o.data["count"] ?? "")}:${String(o.data["level"] ?? "")}:${String(o.data["fort"] ?? "")}`,
+        `${o.id}:${String(o.data["count"] ?? "")}:${String(o.data["level"] ?? "")}:${String(o.data["fort"] ?? "")}:${String(o.data["faction"] ?? "")}`,
     )
     .join("|");
 }

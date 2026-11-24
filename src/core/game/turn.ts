@@ -33,13 +33,19 @@ import type {
   TownState,
 } from "./types.ts";
 
-/** A town's daily income: its best hall plus extra building income. */
-export function townIncome(town: TownState): Resources {
+/**
+ * A town's daily income: its best hall plus extra building income, and
+ * on even days the even-day income (Essence Still). Without `day`, the
+ * every-day part only.
+ */
+export function townIncome(town: TownState, day?: number): Resources {
   let hall = 0;
   let out = emptyResources();
   for (const def of builtDefs(town)) {
     hall = Math.max(hall, def.hallIncome ?? 0);
     if (def.income !== undefined) out = addResources(out, def.income);
+    if (def.evenDayIncome !== undefined && day !== undefined && day % 2 === 0)
+      out = addResources(out, def.evenDayIncome);
   }
   out.gold += hall;
   return out;
@@ -60,7 +66,7 @@ export function dailyIncome(
     out = addResources(out, heroIncome(hero, day));
   }
   for (const town of Object.values(state.towns)) {
-    if (town.owner === player) out = addResources(out, townIncome(town));
+    if (town.owner === player) out = addResources(out, townIncome(town, day));
   }
   for (const mine of Object.values(state.mines)) {
     if (mine.owner === player)

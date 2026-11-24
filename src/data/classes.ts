@@ -18,9 +18,9 @@
  * and Mustering and takes the larger weight; Wayfinder, which no faction
  * table lists, takes CONTENT_HEROES' default (might 2, magic 6).
  *
- * Bead bzc.11 adds the v0.2 starting armies (their creatures do not exist
- * yet: the faction documents list them in each class's comment) and the
- * named heroes; the rules read only the fields below.
+ * The v0.2 starting armies and the 24 named heroes ({@link NAMED_HEROES},
+ * four per class with their specialties) are the faction documents'
+ * (sections 7 and 8; bead bzc.11).
  */
 import type { Terrain } from "../core/map/types.ts";
 import type { PrimaryStat } from "./effects.ts";
@@ -262,9 +262,12 @@ export const KNIGHT_ERRANT: HeroClassDef = {
   ),
   startingSkills: ["banner", "bulwark"],
   command: "single-combat",
-  startingArmy: [],
+  startingArmy: [
+    { creature: "squire", count: 16 },
+    { creature: "longbowman", count: 7 },
+  ],
   sprite: "hero-knight-errant",
-  portrait: "portrait-dinosaur-chieftain",
+  portrait: "portrait-hero-knight-errant",
 };
 
 /** Enchanter (FACTION_HUMANS 7). Army: 12 Squires, 5 Longbowmen, 2 Friars. */
@@ -308,9 +311,13 @@ export const ENCHANTER: HeroClassDef = {
   startingSkills: ["covenant", "deep-wells"],
   startingPage: "scapegoat",
   command: "swear-in",
-  startingArmy: [],
+  startingArmy: [
+    { creature: "squire", count: 12 },
+    { creature: "longbowman", count: 5 },
+    { creature: "friar", count: 2 },
+  ],
   sprite: "hero-enchanter",
-  portrait: "portrait-dinosaur-chieftain",
+  portrait: "portrait-hero-enchanter",
 };
 
 /** Revenant (FACTION_UNDEAD 7). Army: 20 Skeletons, 5 Ghouls. */
@@ -353,9 +360,12 @@ export const REVENANT: HeroClassDef = {
   ),
   startingSkills: ["onslaught", "riposte"],
   command: "one-more-time",
-  startingArmy: [],
+  startingArmy: [
+    { creature: "skeleton", count: 20 },
+    { creature: "ghoul", count: 5 },
+  ],
   sprite: "hero-revenant",
-  portrait: "portrait-dinosaur-chieftain",
+  portrait: "portrait-hero-revenant",
 };
 
 /** Mortician (FACTION_UNDEAD 7). Army: 14 Skeletons, 4 Ghouls, 2 Gravecallers. */
@@ -399,9 +409,13 @@ export const MORTICIAN: HeroClassDef = {
   startingSkills: ["quietus", "deep-wells"],
   startingPage: "last-breath",
   command: "last-rites",
-  startingArmy: [],
+  startingArmy: [
+    { creature: "skeleton", count: 14 },
+    { creature: "ghoul", count: 4 },
+    { creature: "gravecaller", count: 2 },
+  ],
   sprite: "hero-mortician",
-  portrait: "portrait-dinosaur-chieftain",
+  portrait: "portrait-hero-mortician",
 };
 
 /** Warlord (FACTION_GOBLINS 7). Army: 22 Goblins, 6 Bomb Chuckers. */
@@ -444,9 +458,12 @@ export const WARLORD: HeroClassDef = {
   ),
   startingSkills: ["onslaught", "wayfaring"],
   command: "heave-ho",
-  startingArmy: [],
+  startingArmy: [
+    { creature: "goblin", count: 22 },
+    { creature: "bomb-chucker", count: 6 },
+  ],
   sprite: "hero-warlord",
-  portrait: "portrait-dinosaur-chieftain",
+  portrait: "portrait-hero-warlord",
 };
 
 /** Weatherwitch (FACTION_GOBLINS 7). Army: 18 Goblins, 4 Bomb Chuckers, 2 Boomshamans. */
@@ -490,9 +507,13 @@ export const WEATHERWITCH: HeroClassDef = {
   startingSkills: ["stormcalling", "packrat"],
   startingPage: "thunderclap",
   command: "kaboom",
-  startingArmy: [],
+  startingArmy: [
+    { creature: "goblin", count: 18 },
+    { creature: "bomb-chucker", count: 4 },
+    { creature: "boomshaman", count: 2 },
+  ],
   sprite: "hero-weatherwitch",
-  portrait: "portrait-dinosaur-chieftain",
+  portrait: "portrait-hero-weatherwitch",
 };
 
 export const HERO_CLASSES: Readonly<Record<string, HeroClassDef>> = {
@@ -527,3 +548,134 @@ export type Specialty =
   | { kind: "resource"; resource: "gold" | "wood-ore" | "essence" }
   /** The Command counts C one higher. */
   | { kind: "command" };
+
+/** A named hero of the v0.2 factions (FACTION_* section 8). */
+export interface NamedHeroDef {
+  id: string;
+  name: string;
+  heroClass: string;
+  faction: FactionId;
+  specialty: Specialty;
+}
+
+function named(
+  id: string,
+  name: string,
+  heroClass: string,
+  specialty: Specialty,
+): NamedHeroDef {
+  return {
+    id,
+    name,
+    heroClass,
+    faction: getHeroClass(heroClass).faction,
+    specialty,
+  };
+}
+
+/**
+ * The 24 named heroes (FACTION_HUMANS, FACTION_UNDEAD and FACTION_GOBLINS
+ * section 8). Skill names map to skill ids as in the file comment
+ * (Leadership -> banner, Armour -> bulwark, Accord -> covenant, Hush ->
+ * quietus, Storm -> stormcalling).
+ */
+export const NAMED_HEROES: readonly NamedHeroDef[] = [
+  // The Realm
+  named("cuthbert", "Sir Cuthbert the Unhorsed", "knight-errant", {
+    kind: "creature",
+    creature: "knight",
+  }),
+  named("wat", "Wat Greenhood", "knight-errant", {
+    kind: "creature",
+    creature: "longbowman",
+  }),
+  named("ysolde", "Dame Ysolde Brightlance", "knight-errant", {
+    kind: "command",
+  }),
+  named("aldous", "Captain Aldous Ferrow", "knight-errant", {
+    kind: "skill",
+    skill: "banner",
+    replaces: "bulwark",
+  }),
+  named("wilhelmina", "Abbess Wilhelmina", "enchanter", {
+    kind: "spell",
+    spell: "mend",
+  }),
+  named("tobias", "Master Tobias Quill", "enchanter", {
+    kind: "spell",
+    spell: "share",
+  }),
+  named("rosamund", "Lady Rosamund of the Mere", "enchanter", {
+    kind: "skill",
+    skill: "covenant",
+    replaces: "covenant",
+  }),
+  named("maud", "Reeve Maud Pennywise", "enchanter", {
+    kind: "resource",
+    resource: "gold",
+  }),
+  // The Restless
+  named("mortimer", "Sir Mortimer Stillstanding", "revenant", {
+    kind: "creature",
+    creature: "skeleton",
+  }),
+  named("agatha", "The Dowager Countess Agatha", "revenant", {
+    kind: "creature",
+    creature: "vampire",
+  }),
+  named("bartholomew", "Colonel Bartholomew Dust", "revenant", {
+    kind: "command",
+  }),
+  named("jeb", "Old Jeb the Gravedigger", "revenant", {
+    kind: "resource",
+    resource: "essence",
+  }),
+  named("graves", "Mr Graves, Funeral Director", "mortician", {
+    kind: "spell",
+    spell: "pass-on",
+  }),
+  named("ophelia", "Madame Ophelia Veil", "mortician", {
+    kind: "spell",
+    spell: "second-shift",
+  }),
+  named("ignatius", "Doctor Ignatius Crane", "mortician", {
+    kind: "skill",
+    skill: "quietus",
+    replaces: "quietus",
+  }),
+  named("hester", "Widow Hester Blackwood", "mortician", {
+    kind: "creature",
+    creature: "banshee",
+  }),
+  // The Horde
+  named("grukk", "Grukk Manyteeth", "warlord", {
+    kind: "creature",
+    creature: "goblin",
+  }),
+  named("olga", "Big Olga Anvilfist", "warlord", {
+    kind: "creature",
+    creature: "ogre",
+  }),
+  named("skarn", "Skarn the Loud", "warlord", { kind: "command" }),
+  named("nix", "Nix Fingers", "warlord", {
+    kind: "resource",
+    resource: "gold",
+  }),
+  named("squall", "Old Mother Squall", "weatherwitch", {
+    kind: "spell",
+    spell: "thunderclap",
+  }),
+  named("zizzik", "Zizzik Sparkwhisker", "weatherwitch", {
+    kind: "spell",
+    spell: "set-off",
+  }),
+  named("snagga", "Snagga Three-Kettles", "weatherwitch", {
+    kind: "skill",
+    skill: "stormcalling",
+    replaces: "stormcalling",
+  }),
+  named("pim", "Pim Powderkeg", "weatherwitch", {
+    kind: "creature",
+    creature: "bomb-chucker",
+  }),
+];

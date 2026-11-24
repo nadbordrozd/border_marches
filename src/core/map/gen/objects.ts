@@ -26,6 +26,7 @@ import {
   PASS_VALUE,
 } from "../../../data/mapObjects.ts";
 import type { MapObjectRow } from "../../../data/mapObjects.ts";
+import { deriveSeed } from "../../rng.ts";
 import type { Rng } from "../../rng.ts";
 import type { MapObject } from "../types.ts";
 import { chamferDistance, N8, noiseField } from "./grid.ts";
@@ -131,6 +132,17 @@ function siteFor(st: GenState, rng: Rng, zone: number): number {
   return rng.pick(pool).i;
 }
 
+/** The v0.2 factions a neutral town may belong to (seeded per town). */
+export const NEUTRAL_TOWN_FACTIONS = ["humans", "undead", "goblins"] as const;
+
+/** A neutral town's faction: seeded by the map seed and the town's index. */
+export function neutralTownFaction(seed: number, index: number): string {
+  const k = deriveSeed(seed, "neutral-town-faction", index);
+  return NEUTRAL_TOWN_FACTIONS[
+    (k >>> 0) % NEUTRAL_TOWN_FACTIONS.length
+  ] as string;
+}
+
 function townData(st: GenState, site: TownSite): Record<string, unknown> {
   const named = (k: number): string =>
     TOWN_NAMES[(k + (st.seed >>> 0)) % TOWN_NAMES.length] ?? "Ashford";
@@ -146,7 +158,7 @@ function townData(st: GenState, site: TownSite): Record<string, unknown> {
       // A neutral town: today's game treats an open start like one. Its
       // garrison is sized with the guards (see placeObjects).
       return {
-        faction: "lost-world",
+        faction: neutralTownFaction(st.seed, st.towns.length),
         owner: null,
         hold: false,
         name: named(st.towns.length),

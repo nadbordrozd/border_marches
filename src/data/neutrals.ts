@@ -2,6 +2,7 @@
  * Neutral monsters: the roster, guard sizing rings and the Warlord's Hold
  * garrison (GAME_DESIGN.md section 8).
  */
+import { FACTION_CREATURES } from "./factionCreatures.ts";
 import type { CreatureDef, CreatureId, NeutralCreatureId } from "./types.ts";
 
 function neutral(
@@ -10,69 +11,25 @@ function neutral(
   return { ...def, faction: "neutral", growth: 0, cost: {} };
 }
 
+const FACTION = (id: CreatureId): CreatureDef => {
+  const def = FACTION_CREATURES[id];
+  if (def === undefined) throw new Error(`no faction creature ${id}`);
+  return def;
+};
+
+/**
+ * The guard roster (GAME_DESIGN.md section 8.1). Since v0.2 the Goblin,
+ * Skeleton, Bomb Chucker, Wolf Rider, Ogre and Orc Warboss records are the
+ * Horde's and the Restless's creatures (one record per id); the Orc Brute
+ * and the Troll stay neutral.
+ */
 export const NEUTRAL_CREATURES: Readonly<
   Record<NeutralCreatureId, CreatureDef>
 > = {
-  goblin: neutral({
-    id: "goblin",
-    name: "Goblin",
-    plural: "Goblins",
-    tier: 1,
-    hp: 8,
-    attack: 4,
-    defense: 2,
-    damage: 2,
-    speed: 5,
-    shots: 0,
-    ability: null,
-    fightValue: 52,
-    sprite: "goblin-goblin",
-  }),
-  skeleton: neutral({
-    id: "skeleton",
-    name: "Skeleton",
-    plural: "Skeletons",
-    tier: 1,
-    hp: 9,
-    attack: 5,
-    defense: 4,
-    damage: 2,
-    speed: 4,
-    shots: 0,
-    ability: "bony",
-    fightValue: 62,
-    sprite: "undead-skeleton",
-  }),
-  "bomb-chucker": neutral({
-    id: "bomb-chucker",
-    name: "Bomb Chucker",
-    plural: "Bomb Chuckers",
-    tier: 2,
-    hp: 12,
-    attack: 6,
-    defense: 3,
-    damage: 3,
-    speed: 4,
-    shots: 8,
-    ability: null,
-    fightValue: 109,
-    sprite: "goblin-bomb-chucker",
-  }),
-  "wolf-rider": neutral({
-    id: "wolf-rider",
-    name: "Wolf Rider",
-    plural: "Wolf Riders",
-    tier: 2,
-    hp: 18,
-    attack: 7,
-    defense: 5,
-    damage: 4,
-    speed: 8,
-    shots: 0,
-    ability: null,
-    fightValue: 136,
-    sprite: "goblin-wolf-rider",
-  }),
+  goblin: FACTION("goblin"),
+  skeleton: FACTION("skeleton"),
+  "bomb-chucker": FACTION("bomb-chucker"),
+  "wolf-rider": FACTION("wolf-rider"),
   "orc-brute": neutral({
     id: "orc-brute",
     name: "Orc Brute",
@@ -103,36 +60,8 @@ export const NEUTRAL_CREATURES: Readonly<
     fightValue: 447,
     sprite: "goblin-troll",
   }),
-  ogre: neutral({
-    id: "ogre",
-    name: "Ogre",
-    plural: "Ogres",
-    tier: 5,
-    hp: 90,
-    attack: 14,
-    defense: 12,
-    damage: 16,
-    speed: 4,
-    shots: 0,
-    ability: null,
-    fightValue: 873,
-    sprite: "goblin-ogre",
-  }),
-  "orc-warboss": neutral({
-    id: "orc-warboss",
-    name: "Orc Warboss",
-    plural: "Orc Warbosses",
-    tier: 6,
-    hp: 140,
-    attack: 17,
-    defense: 15,
-    damage: 30,
-    speed: 6,
-    shots: 0,
-    ability: "warcry",
-    fightValue: 1685,
-    sprite: "goblin-orc-warboss",
-  }),
+  ogre: FACTION("ogre"),
+  "orc-warboss": FACTION("orc-warboss"),
 };
 
 export const NEUTRAL_CREATURE_IDS: readonly NeutralCreatureId[] = [

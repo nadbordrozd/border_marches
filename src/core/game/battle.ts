@@ -24,7 +24,9 @@
  * garrison (a second, chained battle) or captures it.
  */
 import { getCreature } from "../../data/creatures.ts";
-import type { CreatureId } from "../../data/types.ts";
+import { getHeroClass } from "../../data/hero.ts";
+import { SPECIALS } from "../../data/factionTowns.ts";
+import type { CreatureId, FactionId } from "../../data/types.ts";
 import type { Terrain } from "../map/types.ts";
 import { deriveSeed } from "../rng.ts";
 import { captureTown, guardsAt, visitAtHero } from "./adventure.ts";
@@ -42,6 +44,9 @@ import {
   fail,
   findHero,
   findObject,
+  findPlayer,
+  playerDrills,
+  playerSpecials,
   success,
   townDefenseBonus,
   townsOf,
@@ -107,6 +112,16 @@ export interface BattleSide {
    * player owns a town and who is not defending inside a town.
    */
   canRetreat?: boolean;
+  /**
+   * The army's faction (RULES_V2 3.8): its hero's class faction, or the
+   * town's for a garrison without a hero; null for neutral guards (no
+   * birthright). Creatures of this faction are native.
+   */
+  faction?: FactionId | null;
+  /** The owning player's Drill flags ("<creature>:<ability>"). */
+  drills?: string[];
+  /** The owning player's town specials and Keystone powers. */
+  specials?: string[];
 }
 
 export interface BattleSetup {
@@ -179,6 +194,26 @@ function battleHero(hero: HeroState): BattleHero {
   };
 }
 
+function heroFaction(hero: HeroState): FactionId | null {
+  try {
+    return getHeroClass(hero.heroClass).faction;
+  } catch {
+    return null;
+  }
+}
+
+/** Drill flags and specials of a player (none for neutrals). */
+function playerFlags(
+  state: GameState,
+  owner: Owner,
+): { drills: string[]; specials: string[] } {
+  if (owner === null) return { drills: [], specials: [] };
+  return {
+    drills: playerDrills(state, owner),
+    specials: playerSpecials(state, owner),
+  };
+}
+
 function ownsTown(state: GameState, player: number): boolean {
   return townsOf(state, player).length > 0;
 }
@@ -206,6 +241,9 @@ function buildSetup(state: GameState): SetupWithSlots | null {
       defenseBonus: 0,
       towerHarm: null,
       canRetreat: false,
+      faction: null,
+      drills: [],
+      specials: [],
     };
   } else if (battle.kind === "town") {
     const town = state.towns[battle.objectId];
@@ -219,6 +257,8 @@ function buildSetup(state: GameState): SetupWithSlots | null {
       defenseBonus: townDefenseBonus(town),
       towerHarm: towerHarm(town),
       canRetreat: false,
+      faction: town.isHold ? null : town.faction,
+      ...playerFlags(state, town.owner),
     };
   } else {
     const foe = findHero(state, battle.objectId);
@@ -234,6 +274,8 @@ function buildSetup(state: GameState): SetupWithSlots | null {
       defenseBonus: town === undefined ? 0 : townDefenseBonus(town),
       towerHarm: town === undefined ? null : towerHarm(town),
       canRetreat: town === undefined && ownsTown(state, foe.owner),
+      faction: heroFaction(foe),
+      ...playerFlags(state, foe.owner),
     };
     cellX = foe.x;
     cellY = foe.y;
@@ -250,6 +292,8 @@ function buildSetup(state: GameState): SetupWithSlots | null {
         defenseBonus: 0,
         towerHarm: null,
         canRetreat: ownsTown(state, hero.owner),
+        faction: heroFaction(hero),
+        ...playerFlags(state, hero.owner),
       },
       defender,
       battle: { ...battle },
@@ -467,7 +511,16 @@ export function applyBattleResult(
   if (retreat === undefined) {
     fieldSurgeon(hero, setup.attacker.stacks, attackerSlots, result.attacker);
   }
-  gainXp(hero, killedHp(setup.defender.stacks, result.defender), events);
+  const xp = killedHp(setup.defender.stacks, result.defender);
+  gainXp(hero, xp, events);
+  // Loot Pile (FACTION_GOBLINS 9): gold equal to the battle's XP, once.
+  if (xp > 0 && playerSpecials(next, hero.owner).includes(SPECIALS.lootPile)) {
+    const p = findPlayer(next, hero.owner);
+    if (p !== undefined) {
+      p.resources.gold += xp;
+      events.push({ type: "loot", player: p.id, gold: xp });
+    }
+  }
   if (battle.kind === "monster") {
     next.monsters = Object.fromEntries(
       Object.entries(next.monsters).filter(([id]) => id !== battle.objectId),

@@ -2,6 +2,7 @@
  * Image loading for the battle screen and the choice of art per obstacle.
  */
 
+import { unitArt } from "../../assets/unit-art.ts";
 import {
   FOREST_SETS,
   GROUND_TEXTURES,
@@ -51,10 +52,16 @@ export function battleGround(terrain: Terrain): GroundTerrain {
 
 const UNIT_BY_KEY = new Map(UNIT_ASSETS.map((u) => [u.key, u]));
 
-/** The sprite of a creature id, or null for an unknown creature. */
+/**
+ * The sprite of a creature id: its data sprite, else the art lookup
+ * (summons such as the Shade, and the placeholder for unknown ids).
+ */
 export function unitAssetFor(creatureId: string): UnitAsset | null {
-  if (!isCreatureId(creatureId)) return null;
-  return UNIT_BY_KEY.get(CREATURES[creatureId].sprite) ?? null;
+  if (isCreatureId(creatureId)) {
+    const own = UNIT_BY_KEY.get(CREATURES[creatureId].sprite);
+    if (own) return own;
+  }
+  return unitArt(creatureId);
 }
 
 /** Art for one obstacle hex: a small tree clump or a lone low rock. */

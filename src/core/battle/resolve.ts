@@ -9,11 +9,19 @@
  * is exactly the chain the real action emits.
  */
 
-import { ability, conditionKind, effect, groundKind } from "./registry.ts";
+import {
+  ability,
+  conditionKind,
+  effect,
+  groundKind,
+  registerEffect,
+} from "./registry.ts";
 import type {
+  AreaRef,
   ConditionKindDef,
   Effects,
   LandResult,
+  MovedInfo,
   Reaction,
   StrikeContext,
   StrikeOptions,
@@ -28,10 +36,12 @@ import {
 } from "./damage.ts";
 import {
   BATTLE_HEX_COUNT,
+  directionToward,
   hexDistance,
   hexFromIndex,
   hexIndex,
   inBounds,
+  isAdjacent,
   sameHex,
   stepHex,
 } from "./hex.ts";
@@ -694,6 +704,7 @@ export class Resolver implements Effects {
   ): StrikeResult | null {
     const d = this.d;
     if (!this.isAlive(attackerId) || !this.isAlive(targetId)) return null;
+    if (options.area && this.intercepted(targetId, options.area)) return null;
     const ctx: StrikeContext = {
       state: d.toState(),
       attacker: d.get(attackerId),
@@ -796,6 +807,24 @@ export class Resolver implements Effects {
     return result;
   }
 
+  /**
+   * An area effect reaches a stack: its abilities' `onArea` hooks may take
+   * it instead (Launched). True when the stack takes nothing from it.
+   */
+  private intercepted(targetId: StackId, area: AreaRef): boolean {
+    const d = this.d;
+    const target = d.get(targetId);
+    for (const id of target.creature.abilities) {
+      const def = ability(id);
+      if (!def.onArea) continue;
+      const taken = d.within(null, `ability:${id}`, () =>
+        def.onArea?.(this, targetId, area),
+      );
+      if (taken === true) return true;
+    }
+    return false;
+  }
+
   private queueStrikeReactions(
     ctx: StrikeContext,
     idx: number,
@@ -849,11 +878,22 @@ export class Resolver implements Effects {
     }
   }
 
+  /** Whether a stack retaliates against every melee attack (Stand Fast). */
+  private unlimited(stack: BattleStack): boolean {
+    return stack.creature.abilities.some(
+      (id) => ability(id).unlimitedRetaliation === true,
+    );
+  }
+
   private retaliate(retaliatorId: StackId, targetId: StackId): void {
     const d = this.d;
     if (!this.isAlive(retaliatorId) || !this.isAlive(targetId)) return;
     const r = d.get(retaliatorId);
-    if (r.retaliatedThisRound || bears(r, "cannotRetaliate")) return;
+    if (bears(r, "cannotRetaliate")) return;
+    if (r.retaliatedThisRound && !this.unlimited(r)) return;
+    // A retaliation needs its target adjacent when it resolves (a push in
+    // between, e.g. Follow Through, cancels it).
+    if (!isAdjacent(r.hex, d.get(targetId).hex)) return;
     d.update(retaliatorId, { retaliatedThisRound: true });
     const idx = d.emit({
       type: "retaliation",
@@ -863,6 +903,23 @@ export class Resolver implements Effects {
     d.within(idx, null, () =>
       this.strikeKind(retaliatorId, targetId, "retaliation", 0),
     );
+  }
+
+  spendShot(id: StackId): boolean {
+    if (!this.isAlive(id)) return false;
+    const s = this.d.get(id);
+    if (s.shotsLeft <= 0) return false;
+    this.d.update(id, { shotsLeft: s.shotsLeft - 1 });
+    return true;
+  }
+
+  spendRetaliation(id: StackId): boolean {
+    if (!this.isAlive(id)) return false;
+    const s = this.d.get(id);
+    if (bears(s, "cannotRetaliate")) return false;
+    if (s.retaliatedThisRound && !this.unlimited(s)) return false;
+    this.d.update(id, { retaliatedThisRound: true });
+    return true;
   }
 
   strike(
@@ -884,8 +941,10 @@ export class Resolver implements Effects {
   harm(
     targetId: StackId,
     x: number,
-    options: { readonly fuelled?: boolean } = {},
+    options: { readonly fuelled?: boolean; readonly area?: AreaRef } = {},
   ): number {
+    if (!this.isAlive(targetId)) return 0;
+    if (options.area && this.intercepted(targetId, options.area)) return 0;
     return this.harmInner(targetId, x, options.fuelled ?? false, false);
   }
 
@@ -1021,11 +1080,24 @@ export class Resolver implements Effects {
       for (const s of d.stacks) {
         if (!isAlive(s)) continue;
         for (const c of s.conditions) {
-          if (c.link === id) this.end(s.id, c.uid, "ended");
+          if (c.link !== id) continue;
+          const def = conditionKind(c.kind);
+          if (def.onFarEndDied)
+            d.within(null, `condition:${c.kind}`, () =>
+              def.onFarEndDied?.(this, s.id, c),
+            );
+          this.end(s.id, c.uid, "ended");
         }
       }
     });
     d.dropReactionsOf(id);
+    // Getting up (RULES_V2 3.8): the birthright, the badge, a paid return.
+    if (!dead.summoned && dead.tags.remains !== "nothing") {
+      d.trigger(id, "engine:get-up", idx, () => this.tryGetUp(id), {
+        onDeath: true,
+        order: -1,
+      });
+    }
     // On-death reactions: every living stack's, and the dead stack's own.
     for (const s of d.stacks) {
       if (!isAlive(s) && s.id !== id) continue;
@@ -1040,13 +1112,139 @@ export class Resolver implements Effects {
     }
   }
 
+  // --- Getting up (RULES_V2 3.8) ---------------------------------------
+
+  /** The remains a dead stack left on its hex, if they are still there. */
+  ownRemains(id: StackId): GroundFeature | null {
+    const s = this.d.get(id);
+    const g = groundAt(this.d, s.hex);
+    return g && g.class === "remains" && g.source === id ? g : null;
+  }
+
+  /**
+   * A dead stack decides whether it gets up at the next round start:
+   * first a birthright that returns it once per battle (`getUp: "once"`,
+   * Not Done Yet), then the "gets up" badge, then an ability that pays for
+   * a return with other remains (`getUp: "paid"`, Long Live the King).
+   */
+  private tryGetUp(id: StackId): void {
+    const d = this.d;
+    const s = d.get(id);
+    if (isAlive(s) || !this.ownRemains(id)) return;
+    const getUps = s.creature.abilities.map((a) => ability(a).getUp);
+    if (getUps.includes("once") && s.rose !== true) {
+      d.update(id, { rose: true });
+      this.scheduleGetUp(id);
+      return;
+    }
+    if (s.getsUp === true) {
+      d.update(id, { getsUp: false });
+      this.scheduleGetUp(id);
+      return;
+    }
+    if (getUps.includes("paid")) {
+      const own = s.hex;
+      let best: GroundFeature | null = null;
+      for (const g of d.ground) {
+        if (g.class !== "remains" || sameHex(g.hex, own)) continue;
+        if (
+          best === null ||
+          hexDistance(g.hex, own) < hexDistance(best.hex, own)
+        ) {
+          best = g;
+        }
+      }
+      if (best === null) return;
+      this.useRemains(best.hex);
+      this.scheduleGetUp(id);
+    }
+  }
+
+  /** How many creatures a stack gets up with: a third, or half (flag). */
+  getUpCount(id: StackId): number {
+    const s = this.d.get(id);
+    const half =
+      s.native && (this.d.sides[s.owner].flags ?? []).includes(GET_UP_HALF);
+    return Math.ceil(s.initialCount / (half ? 2 : 3));
+  }
+
+  private scheduleGetUp(id: StackId): void {
+    const s = this.d.get(id);
+    this.schedule({
+      round: this.d.round + 1,
+      phase: "start",
+      effect: { id: GET_UP_EFFECT, args: { stackId: id } },
+      side: s.owner,
+      returnsStack: true,
+    });
+  }
+
+  setGetsUp(stackId: StackId, on: boolean): void {
+    if (!this.d.has(stackId)) return;
+    this.d.update(stackId, { getsUp: on });
+  }
+
+  getUp(stackId: StackId, count: number, hex: Hex): boolean {
+    const d = this.d;
+    if (!d.has(stackId) || count < 1) return false;
+    const s = d.get(stackId);
+    if (isAlive(s)) return false;
+    const living = d.stacks.filter((x) => isAlive(x) && x.owner === s.owner);
+    if (living.length >= MAX_LIVING_STACKS_PER_SIDE) return false;
+    let at: Hex | null = isFree(d, hex) ? hex : null;
+    if (at === null) {
+      let bestDist = Infinity;
+      for (let i = 0; i < BATTLE_HEX_COUNT; i++) {
+        const h = hexFromIndex(i);
+        if (!isFree(d, h)) continue;
+        const dist = hexDistance(h, hex);
+        if (dist < bestDist) {
+          bestDist = dist;
+          at = h;
+        }
+      }
+    }
+    if (at === null) return false;
+    const n = Math.min(count, s.initialCount);
+    d.update(stackId, {
+      count: n,
+      topHp: s.creature.hp,
+      hex: at,
+      conditions: [],
+      wary: 0,
+      defending: false,
+      retaliatedThisRound: false,
+      waitedThisRound: false,
+      risen: true,
+    });
+    if (!d.queue.includes(stackId)) d.queue.push(stackId);
+    d.emit({ type: "getUp", stackId, hex: at, count: n });
+    return true;
+  }
+
   // --- Heal --------------------------------------------------------------
 
   heal(
     targetId: StackId,
     x: number,
-    options: { readonly revive?: boolean } = {},
+    options: { readonly revive?: boolean; readonly shared?: boolean } = {},
   ): number {
+    const amount = this.healInner(targetId, x, options.revive === true);
+    // Heal-sharing links (Sworn): the far end is healed the same X, with
+    // the same "revives" clause, whether or not the bearer needed it.
+    if (!options.shared && x > 0 && this.isAlive(targetId)) {
+      for (const c of this.d.get(targetId).conditions) {
+        const def = conditionKind(c.kind);
+        if (!def.onHealed) continue;
+        this.d.within(null, `condition:${c.kind}`, () =>
+          def.onHealed?.(this, targetId, c, x, options.revive === true),
+        );
+      }
+    }
+    return amount;
+  }
+
+  private healInner(targetId: StackId, x: number, revive: boolean): number {
     const d = this.d;
     if (!this.isAlive(targetId) || x <= 0) return 0;
     const s = d.get(targetId);
@@ -1058,7 +1256,7 @@ export class Resolver implements Effects {
     topHp += toTop;
     rem -= toTop;
     let revived = 0;
-    if (options.revive) {
+    if (revive) {
       while (rem > 0 && count < s.initialCount) {
         count++;
         revived++;
@@ -1112,33 +1310,90 @@ export class Resolver implements Effects {
             );
         }
       }
+      if (mode === "walk") this.walkEnded(stackId);
     });
+  }
+
+  /** "On ending a walk" ability hooks (Feast), at once, before any attack. */
+  walkEnded(stackId: StackId): void {
+    const d = this.d;
+    if (!this.isAlive(stackId)) return;
+    const hex = d.get(stackId).hex;
+    for (const id of d.get(stackId).creature.abilities) {
+      const def = ability(id);
+      if (def.onWalkEnd && this.isAlive(stackId))
+        d.within(null, `ability:${id}`, () =>
+          def.onWalkEnd?.(this, stackId, hex),
+        );
+    }
+  }
+
+  /** Moves a stack up to n hexes in direction `dir` (push or pull). */
+  private shove(
+    stackId: StackId,
+    dir: number,
+    n: number,
+    mode: "push" | "pull",
+    stopAt: Hex | null,
+  ): Hex {
+    const d = this.d;
+    const start = d.get(stackId).hex;
+    const path: Hex[] = [];
+    let cur = start;
+    let stoppedBy: StackId | null = null;
+    for (let i = 0; i < n; i++) {
+      const next = stepHex(cur, dir);
+      if (stopAt && sameHex(next, stopAt)) break;
+      if (!isFree(d, next)) {
+        stoppedBy = inBounds(next) ? (stackAt(d, next)?.id ?? null) : null;
+        break;
+      }
+      path.push(next);
+      cur = next;
+    }
+    this.walk(stackId, path, mode);
+    if (path.length > 0 && this.isAlive(stackId)) {
+      const moved = d.get(stackId);
+      const info: MovedInfo = {
+        state: d.toState(),
+        stackId,
+        mode,
+        from: start,
+        to: moved.hex,
+        hexes: path.length,
+        stoppedBy,
+      };
+      const idx = d.events.length - 1;
+      moved.creature.abilities.forEach((aid, order) => {
+        const r = ability(aid).onMoved?.(info, moved);
+        if (r) d.trigger(stackId, `ability:${aid}:moved`, idx, r, { order });
+      });
+    }
+    return this.isAlive(stackId) ? d.get(stackId).hex : cur;
+  }
+
+  pushDir(stackId: StackId, dir: number, n: number): Hex {
+    if (!this.isAlive(stackId) || n <= 0) return this.d.get(stackId).hex;
+    return this.shove(stackId, ((dir % 6) + 6) % 6, n, "push", null);
   }
 
   private line(stackId: StackId, ref: Hex, n: number, away: boolean): Hex {
     const d = this.d;
     if (!this.isAlive(stackId) || n <= 0) return d.get(stackId).hex;
     const start = d.get(stackId).hex;
-    let best = -1;
-    let bestDist = away ? -1 : Infinity;
-    for (let dir = 0; dir < 6; dir++) {
-      const dist = hexDistance(stepHex(start, dir), ref);
-      if (away ? dist > bestDist : dist < bestDist) {
-        best = dir;
-        bestDist = dist;
-      }
-    }
-    const path: Hex[] = [];
-    let cur = start;
-    for (let i = 0; i < n; i++) {
-      const next = stepHex(cur, best);
-      if (!isFree(d, next)) break;
-      if (!away && sameHex(next, ref)) break;
-      path.push(next);
-      cur = next;
-    }
-    this.walk(stackId, path, away ? "push" : "pull");
-    return this.isAlive(stackId) ? d.get(stackId).hex : cur;
+    if (sameHex(start, ref)) return start;
+    // Directly away from (or toward) the named hex: the direction closest
+    // to the line between the two hexes.
+    const best = away
+      ? directionToward(ref, start)
+      : directionToward(start, ref);
+    return this.shove(
+      stackId,
+      best,
+      n,
+      away ? "push" : "pull",
+      away ? null : ref,
+    );
   }
 
   push(stackId: StackId, awayFrom: Hex, n: number): Hex {
@@ -1737,6 +1992,28 @@ export class Resolver implements Effects {
     }
   }
 }
+
+/** Side flag: native stacks get up with half their count (Family Crypt). */
+export const GET_UP_HALF = "get-up-half";
+/** The scheduled effect that returns a dead stack from its remains. */
+export const GET_UP_EFFECT = "engine:get-up";
+
+registerEffect(GET_UP_EFFECT, (fx, args) => {
+  const stackId =
+    args !== null && typeof args === "object" && !Array.isArray(args)
+      ? (args as { readonly stackId?: unknown }).stackId
+      : undefined;
+  if (typeof stackId !== "string" || !(fx instanceof Resolver)) return;
+  const remains = fx.ownRemains(stackId);
+  // Used or replaced before the event fired: the return is cancelled.
+  if (!remains || fx.isAlive(stackId)) return;
+  const s = fx.stack(stackId);
+  const keep = s.creature.abilities.some(
+    (a) => ability(a).keepsRemainsOnGetUp === true,
+  );
+  if (!keep) fx.useRemains(remains.hex);
+  fx.getUp(stackId, fx.getUpCount(stackId), remains.hex);
+});
 
 /** Index of free hexes, for tests and content. */
 export function freeHexes(state: BattleState): Hex[] {

@@ -88,12 +88,20 @@ function buildStacks(side: BattleSide, army: BattleArmySetup): BattleStack[] {
       throw new RangeError(`${side}: topHp must be 1..${c.hp}`);
     }
     const slot = slots[i] as number;
+    const native = s.native ?? false;
+    // The birthright: every native stack gains its faction's ability.
+    const creature =
+      native &&
+      army.birthright !== undefined &&
+      !c.abilities.includes(army.birthright)
+        ? { ...c, abilities: [...c.abilities, army.birthright] }
+        : c;
     return {
       id: `${prefix}${slot}`,
       owner: side,
       side,
       slot,
-      creature: c,
+      creature,
       count: s.count,
       topHp,
       initialCount: s.count,
@@ -103,7 +111,7 @@ function buildStacks(side: BattleSide, army: BattleArmySetup): BattleStack[] {
       defending: false,
       waitedThisRound: false,
       turnStartedRound: 0,
-      native: s.native ?? false,
+      native,
       summoned: false,
       tags: c.tags ?? { remains: "corpse", cannotBear: [] },
       conditions: [],
@@ -234,6 +242,7 @@ export function createBattle(setup: BattleSetup): BattleStep {
     castRound: 0,
     commandUsed: false,
     itemActsUsed: [],
+    flags: army.flags ?? [],
     ...(army.hero !== null && army.magic
       ? { magic: sideMagicFromSetup(army.magic) }
       : {}),

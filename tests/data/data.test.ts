@@ -77,11 +77,13 @@ describe("creatures", () => {
       [1, 8, 4, 2, 2, 5, 0],
       [1, 9, 5, 4, 2, 4, 0],
       [2, 12, 6, 3, 3, 4, 8],
-      [2, 18, 7, 5, 4, 8, 0],
+      // The Wolf Rider is the Horde's tier 3 and the Orc Warboss gains 20
+      // HP, 1 Attack and 2 Damage (FACTION_GOBLINS 4): one record per id.
+      [3, 18, 7, 5, 4, 8, 0],
       [3, 28, 9, 6, 6, 4, 0],
       [4, 50, 11, 9, 10, 5, 0],
       [5, 90, 14, 12, 16, 4, 0],
-      [6, 140, 17, 15, 30, 6, 0],
+      [6, 160, 18, 15, 32, 6, 0],
     ]);
     expect(isRanged(NEUTRAL_CREATURES["bomb-chucker"])).toBe(true);
     expect(NEUTRAL_CREATURES.goblin.sprite).toBe("goblin-goblin");
@@ -110,7 +112,7 @@ describe("creatures", () => {
       (n, s) => n + s.count * getCreature(s.creature).fightValue,
       0,
     );
-    expect(hold).toBe(30062);
+    expect(hold).toBe(30906);
   });
 
   it("references only defined abilities", () => {

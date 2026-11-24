@@ -3,6 +3,8 @@
  * grammar). Pure: no DOM, no clock, no unseeded randomness.
  */
 
+import "./factions/index.ts";
+
 export * from "./types.ts";
 export * from "./hex.ts";
 export * from "./damage.ts";
@@ -29,6 +31,8 @@ export {
 } from "./registry.ts";
 export type {
   AbilityDef,
+  AreaRef,
+  MovedInfo,
   ActDef,
   ConditionKindDef,
   EffectFn,
@@ -61,10 +65,20 @@ export {
   timelineClass,
 } from "./resolve.ts";
 export {
+  CHAPEL_OF_OATHS,
+  LAUNCH_RAMP,
+  commandC,
+  lineDirection,
+} from "./factions/index.ts";
+export { GET_UP_EFFECT, GET_UP_HALF } from "./resolve.ts";
+export {
   actionError,
   activeStack,
   applyAction,
   canShoot,
+  shootsAnyHex,
+  swapPartners,
+  teleportsToWalk,
   canWait,
   compareTurnOrder,
   computeBreakdown,

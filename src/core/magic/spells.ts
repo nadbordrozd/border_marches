@@ -1021,8 +1021,12 @@ const STORM: SpellDef[] = [
     text: (p) =>
       `Harm ${n(18, 9, p)} to each stack on a hex and the six around it.`,
     resolve(fx, _a, t, c) {
+      // An area effect (FACTION_GOBLINS 3: Launched reads it).
       for (const id of stacksOn(fx.state, discHexes(hexOf(t[0]), 1)))
-        fx.harm(id, n(18, 9, c.power), { fuelled: c.fuelled });
+        fx.harm(id, n(18, 9, c.power), {
+          fuelled: c.fuelled,
+          area: { centre: hexOf(t[0]), side: c.side },
+        });
     },
   },
   {
@@ -1101,8 +1105,12 @@ const STORM: SpellDef[] = [
       `Harm ${n(36, 15, p)} to each stack within 2 of a hex, and Slowed 2, clock 2.`,
     resolve(fx, _a, t, c) {
       for (const id of stacksOn(fx.state, discHexes(hexOf(t[0]), 2))) {
-        fx.harm(id, n(36, 15, c.power), { fuelled: c.fuelled });
-        if (fx.isAlive(id)) addSized(fx, id, "slowed", 2, 2, 4);
+        const h = fx.harm(id, n(36, 15, c.power), {
+          fuelled: c.fuelled,
+          area: { centre: hexOf(t[0]), side: c.side },
+        });
+        // A stack the area effect did not reach (Launched) gains nothing.
+        if (h > 0 && fx.isAlive(id)) addSized(fx, id, "slowed", 2, 2, 4);
       }
     },
   },
@@ -1121,7 +1129,10 @@ const STORM: SpellDef[] = [
       const hexes = discHexes(hexOf(t[0]), 3);
       for (const id of stacksOn(fx.state, hexes)) {
         if (!bears(fx, id, "warded"))
-          fx.harm(id, n(54, 21, c.power), { fuelled: c.fuelled });
+          fx.harm(id, n(54, 21, c.power), {
+            fuelled: c.fuelled,
+            area: { centre: hexOf(t[0]), side: c.side },
+          });
       }
       for (const h of hexes) {
         if (groundAt(fx.state, h)?.class === "remains")
@@ -1166,7 +1177,10 @@ const FACTION_PAGES: SpellDef[] = [
       `Harm ${n(12, 6, p)} to each stack on a hex and the six around it.`,
     resolve(fx, _a, t, c) {
       for (const id of stacksOn(fx.state, discHexes(hexOf(t[0]), 1)))
-        fx.harm(id, n(12, 6, c.power), { fuelled: c.fuelled });
+        fx.harm(id, n(12, 6, c.power), {
+          fuelled: c.fuelled,
+          area: { centre: hexOf(t[0]), side: c.side },
+        });
     },
   },
   {

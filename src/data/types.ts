@@ -12,9 +12,9 @@ export type Resources = Record<ResourceId, number>;
 export type ResourceAmounts = Partial<Resources>;
 
 /**
- * Faction ids. Neutral monsters and the Warlord's Hold use "neutral".
- * Humans, Undead and Goblins are listed (src/data/factions.ts) but have no
- * data until bead bzc.11.
+ * Faction ids. Neutral monsters and the Warlord's Hold use "neutral". The
+ * v0.2 factions are Humans (the Realm), Undead (the Restless) and Goblins
+ * (the Horde); the Lost World stays in the code but is not playable.
  */
 export type FactionId =
   "lost-world" | "humans" | "undead" | "goblins" | "neutral";
@@ -33,6 +33,12 @@ export type AbilityId =
 export type LostWorldCreatureId =
   "caveman" | "spitter" | "raptor" | "shaman" | "triceratops" | "t-rex";
 
+/**
+ * Neutral guards (GAME_DESIGN 8.1). Goblin, Skeleton, Bomb Chucker, Wolf
+ * Rider, Ogre and Orc Warboss are faction creatures since v0.2 (the Horde
+ * and the Restless) that also serve as guards; Orc Brutes and Trolls stay
+ * neutral.
+ */
 export type NeutralCreatureId =
   | "goblin"
   | "skeleton"
@@ -43,7 +49,26 @@ export type NeutralCreatureId =
   | "ogre"
   | "orc-warboss";
 
-export type CreatureId = LostWorldCreatureId | NeutralCreatureId;
+export type HumanCreatureId =
+  "squire" | "longbowman" | "man-at-arms" | "friar" | "knight" | "dragonslayer";
+
+export type UndeadCreatureId =
+  "skeleton" | "ghoul" | "banshee" | "gravecaller" | "vampire" | "late-king";
+
+export type GoblinCreatureId =
+  | "goblin"
+  | "bomb-chucker"
+  | "wolf-rider"
+  | "boomshaman"
+  | "ogre"
+  | "orc-warboss";
+
+export type CreatureId =
+  | LostWorldCreatureId
+  | NeutralCreatureId
+  | HumanCreatureId
+  | UndeadCreatureId
+  | GoblinCreatureId;
 
 /**
  * One creature type. Every stat is per creature; damage is a single fixed
@@ -63,8 +88,29 @@ export interface CreatureDef {
   speed: number;
   /** Shots per battle; 0 for melee creatures. A creature is ranged iff > 0. */
   shots: number;
-  /** At most one ability in the MVP. */
+  /** The MVP's single ability (null when it has none of the MVP's). */
   ability: AbilityId | null;
+  /**
+   * Every ability id in the battle registry (v0.2 creatures may have
+   * several; MVP abilities included). Defaults to `[ability]`.
+   */
+  abilities?: readonly string[];
+  /** What its death leaves and the condition kinds it cannot bear. */
+  tags?: {
+    remains: "corpse" | "bones" | "wreck" | "sweets" | "nothing";
+    cannotBear: readonly string[];
+  };
+  /**
+   * A creature caster (RULES_V2 2.6): its pages (spell ids of the magic
+   * catalogue) and Power = castPower + floor(count / castDivisor), at most
+   * castCap. Cast with the battle action `creatureCast`.
+   */
+  caster?: {
+    pages: readonly string[];
+    castPower: number;
+    castDivisor: number;
+    castCap: number;
+  };
   /** Weekly growth of its dwelling (faction creatures; 0 for neutrals). */
   growth: number;
   /** Recruitment cost per creature (faction creatures; empty for neutrals). */
@@ -132,6 +178,24 @@ export interface BuildingDef<Id extends BuildingId = BuildingId> {
   fortLevel?: 1 | 2 | 3;
   /** Enables marketplace trades. */
   marketplace?: boolean;
+  /** Magic Guild level this building is (1 to 5). */
+  guildLevel?: number;
+  /** The Tavern (hire heroes). */
+  tavern?: boolean;
+  /**
+   * A Drill (ECONOMY 6.3): building it sets a permanent flag for the
+   * player; every stack of `creature` in its armies gains `ability`.
+   */
+  drill?: { creature: CreatureId; ability: string };
+  /**
+   * A town special or Keystone power: a flag its owner holds while it owns
+   * the town (read by the battle setup and the adventure rules).
+   */
+  special?: string;
+  /** Income paid only on even days (Essence Still). */
+  evenDayIncome?: ResourceAmounts;
+  /** Built with the map's Keystone, carried into the town by a hero. */
+  needsKeystone?: boolean;
   /** Short effect text for the town screen. */
   effect: string;
 }
