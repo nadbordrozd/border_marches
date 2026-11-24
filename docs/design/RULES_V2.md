@@ -774,9 +774,18 @@ stats sum to 6, with Power and Lore each at least 1.
 
 ### 3.2 Experience and levels
 
-The XP table of GAME_DESIGN 6.1 is kept (level 2 at 1000, level 13 at
-24320, then x 1.2 rounded down). There is no level cap. XP comes from
-battles (1.12), chests and content sites. XP modifiers from skills are
+The total XP needed for level L is
+
+```text
+XP(L) = 100 x (L - 1) x (L + 2)
+```
+
+so level 2 needs 400, level 3 needs 1000, level 10 needs 10800, level 15
+needs 23800 and level 20 needs 41800; each level costs 200 XP more than
+the one before. This replaces the MVP table of GAME_DESIGN 6.1; the
+reasoning and the pace against feats are in
+[ECONOMY.md section 9](ECONOMY.md#9-experience-curve). There is no level
+cap. XP comes from battles (1.12), chests and content sites. XP modifiers from skills are
 percentages applied to each gain, floored.
 
 ### 3.3 Gaining a level

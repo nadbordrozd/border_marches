@@ -108,15 +108,9 @@ XP gained in a battle = the total HP of enemy creatures killed (count killed x
 creature HP). A treasure chest can also give 750 XP
 ([ECONOMY.md](ECONOMY.md#5-pickups)).
 
-| Level | Total XP needed |     | Level |                                                Total XP needed |
-| ----: | --------------: | --- | ----: | -------------------------------------------------------------: |
-|     1 |               0 |     |     8 |                                                          10000 |
-|     2 |            1000 |     |     9 |                                                          12200 |
-|     3 |            2000 |     |    10 |                                                          14700 |
-|     4 |            3200 |     |    11 |                                                          17500 |
-|     5 |            4600 |     |    12 |                                                          20600 |
-|     6 |            6200 |     |    13 |                                                          24320 |
-|     7 |            8000 |     |   14+ | previous x 1.2, rounded down (14: 29184, 15: 35020, 16: 42024) |
+The total XP needed for each level is the rule of
+[RULES_V2.md section 3.2](RULES_V2.md#32-experience-and-levels):
+XP(L) = 100 x (L - 1) x (L + 2). It replaces the MVP table that stood here.
 
 On each level gained, the player picks one of two offers: **+1 Attack** or
 **+1 Defense**. (Skills add more kinds of offers later.) Several levels at
