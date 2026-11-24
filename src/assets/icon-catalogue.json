@@ -1,0 +1,1407 @@
+{
+  "spell": {
+    "poultice": {
+      "name": "Poultice",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 1
+    },
+    "thornskin": {
+      "name": "Thornskin",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 1
+    },
+    "nettle": {
+      "name": "Nettle",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 1
+    },
+    "feed": {
+      "name": "Feed",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 2
+    },
+    "regrow": {
+      "name": "Regrow",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 2
+    },
+    "sprout": {
+      "name": "Sprout",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 2
+    },
+    "bramble-row": {
+      "name": "Bramble Row",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 3
+    },
+    "ripen": {
+      "name": "Ripen",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 3
+    },
+    "orchard-day": {
+      "name": "Orchard Day",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 4
+    },
+    "second-spring": {
+      "name": "Second Spring",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 5
+    },
+    "scapegoat": {
+      "name": "Scapegoat",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 1
+    },
+    "close-ranks": {
+      "name": "Close Ranks",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 1
+    },
+    "change-places": {
+      "name": "Change Places",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 1
+    },
+    "share": {
+      "name": "Share",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 2
+    },
+    "sign-here": {
+      "name": "Sign Here",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 2
+    },
+    "soft-words": {
+      "name": "Soft Words",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 2
+    },
+    "sanctuary-oath": {
+      "name": "Sanctuary Oath",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 3
+    },
+    "take-heart": {
+      "name": "Take Heart",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 3
+    },
+    "change-of-heart": {
+      "name": "Change of Heart",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 4
+    },
+    "the-long-table": {
+      "name": "The Long Table",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 5
+    },
+    "first-bell": {
+      "name": "First Bell",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 1
+    },
+    "late-bell": {
+      "name": "Late Bell",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 1
+    },
+    "appointment": {
+      "name": "Appointment",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 1
+    },
+    "wind": {
+      "name": "Wind",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 2
+    },
+    "treacle": {
+      "name": "Treacle",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 2
+    },
+    "quick-march": {
+      "name": "Quick March",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 2
+    },
+    "encore": {
+      "name": "Encore",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 3
+    },
+    "forced-march": {
+      "name": "Forced March",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 3
+    },
+    "deadline": {
+      "name": "Deadline",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 4
+    },
+    "double-time": {
+      "name": "Double Time",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 5
+    },
+    "hush-now": {
+      "name": "Hush Now",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 1
+    },
+    "on-credit": {
+      "name": "On Credit",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 1
+    },
+    "bad-omen": {
+      "name": "Bad Omen",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 1
+    },
+    "pass-on": {
+      "name": "Pass On",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 2
+    },
+    "lullaby": {
+      "name": "Lullaby",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 2
+    },
+    "second-shift": {
+      "name": "Second Shift",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 2
+    },
+    "leech-line": {
+      "name": "Leech Line",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 3
+    },
+    "curtain-call": {
+      "name": "Curtain Call",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 3
+    },
+    "pea-soup": {
+      "name": "Pea Soup",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 4
+    },
+    "everybody-up": {
+      "name": "Everybody Up",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 5
+    },
+    "jolt": {
+      "name": "Jolt",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 1
+    },
+    "gust": {
+      "name": "Gust",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 1
+    },
+    "hothead": {
+      "name": "Hothead",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 1
+    },
+    "set-off": {
+      "name": "Set Off",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 2
+    },
+    "broadside": {
+      "name": "Broadside",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 2
+    },
+    "cold-snap": {
+      "name": "Cold Snap",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 2
+    },
+    "downpour": {
+      "name": "Downpour",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 3
+    },
+    "wildfire": {
+      "name": "Wildfire",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 3
+    },
+    "whiteout": {
+      "name": "Whiteout",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 4
+    },
+    "the-sky-falls": {
+      "name": "The Sky Falls",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 5
+    },
+    "green-road": {
+      "name": "Green Road",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 2,
+      "adventure": true
+    },
+    "second-helping": {
+      "name": "Second Helping",
+      "frame": "bloom",
+      "school": "bloom",
+      "tier": 3,
+      "adventure": true
+    },
+    "parley": {
+      "name": "Parley",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 3,
+      "adventure": true
+    },
+    "read-the-seal": {
+      "name": "Read the Seal",
+      "frame": "accord",
+      "school": "accord",
+      "tier": 1,
+      "adventure": true
+    },
+    "borrowed-day": {
+      "name": "Borrowed Day",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 3,
+      "adventure": true
+    },
+    "saved-hour": {
+      "name": "Saved Hour",
+      "frame": "clock",
+      "school": "clock",
+      "tier": 1,
+      "adventure": true
+    },
+    "ask-the-dead": {
+      "name": "Ask the Dead",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 1,
+      "adventure": true
+    },
+    "dowse": {
+      "name": "Dowse",
+      "frame": "hush",
+      "school": "hush",
+      "tier": 2,
+      "adventure": true
+    },
+    "tow-line": {
+      "name": "Tow Line",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 4,
+      "adventure": true
+    },
+    "opening-salvo": {
+      "name": "Opening Salvo",
+      "frame": "storm",
+      "school": "storm",
+      "tier": 2,
+      "adventure": true
+    }
+  },
+  "artifact": {
+    "tin-sabre": {
+      "name": "Tin Sabre",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Weapon"
+    },
+    "parade-sword": {
+      "name": "Parade Sword",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Weapon"
+    },
+    "ringmasters-whip": {
+      "name": "Ringmaster's Whip",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Weapon"
+    },
+    "pot-lid": {
+      "name": "Pot Lid",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Shield"
+    },
+    "tollgate-door": {
+      "name": "Tollgate Door",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Shield"
+    },
+    "manhole-cover": {
+      "name": "Manhole Cover",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Shield"
+    },
+    "reading-glasses": {
+      "name": "Reading Glasses",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Head"
+    },
+    "thinking-cap": {
+      "name": "Thinking Cap",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Head"
+    },
+    "second-best-breastplate": {
+      "name": "Second-Best Breastplate",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Torso"
+    },
+    "star-chart-robe": {
+      "name": "Star-Chart Robe",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Torso"
+    },
+    "sprig-pendant": {
+      "name": "Sprig Pendant",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Neck"
+    },
+    "sealing-wax-locket": {
+      "name": "Sealing-Wax Locket",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Neck"
+    },
+    "fob-chain": {
+      "name": "Fob Chain",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Neck"
+    },
+    "mourning-brooch": {
+      "name": "Mourning Brooch",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Neck"
+    },
+    "lightning-glass-bead": {
+      "name": "Lightning-Glass Bead",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Neck"
+    },
+    "four-leaf-buttonhole": {
+      "name": "Four-Leaf Buttonhole",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Neck"
+    },
+    "regimental-sash": {
+      "name": "Regimental Sash",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Cloak"
+    },
+    "clerks-cape": {
+      "name": "Clerk's Cape",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Cloak"
+    },
+    "oilskin-of-deep-pockets": {
+      "name": "Oilskin of Deep Pockets",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Cloak"
+    },
+    "knuckle-dusters": {
+      "name": "Knuckle-Dusters",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Ring"
+    },
+    "signet-of-the-minor-office": {
+      "name": "Signet of the Minor Office",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Ring"
+    },
+    "moneylenders-ring": {
+      "name": "Moneylender's Ring",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Ring"
+    },
+    "seven-furlong-boots": {
+      "name": "Seven-Furlong Boots",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Feet"
+    },
+    "sensible-shoes": {
+      "name": "Sensible Shoes",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Feet"
+    },
+    "galoshes": {
+      "name": "Galoshes",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Feet"
+    },
+    "lucky-penny": {
+      "name": "Lucky Penny",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Pocket"
+    },
+    "brass-bugle": {
+      "name": "Brass Bugle",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Pocket"
+    },
+    "spyglass": {
+      "name": "Spyglass",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Pocket"
+    },
+    "thermos-of-strong-tea": {
+      "name": "Thermos of Strong Tea",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Pocket"
+    },
+    "scholars-bookmark": {
+      "name": "Scholar's Bookmark",
+      "frame": "trinket",
+      "grade": "trinket",
+      "slot": "Pocket"
+    },
+    "winters-pocket-watch": {
+      "name": "Winter's Pocket Watch",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Pocket"
+    },
+    "sextons-spade": {
+      "name": "Sexton's Spade",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Weapon"
+    },
+    "the-bellhops-cap": {
+      "name": "The Bellhop's Cap",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Head"
+    },
+    "tinderbox": {
+      "name": "Tinderbox",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Pocket"
+    },
+    "watering-can": {
+      "name": "Watering Can",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Pocket"
+    },
+    "gardeners-apron": {
+      "name": "Gardener's Apron",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Torso"
+    },
+    "thornmail-vest": {
+      "name": "Thornmail Vest",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Torso"
+    },
+    "hedge-clipper-shears": {
+      "name": "Hedge-Clipper Shears",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Weapon"
+    },
+    "cider-flask": {
+      "name": "Cider Flask",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Pocket"
+    },
+    "notarys-seal": {
+      "name": "Notary's Seal",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Ring"
+    },
+    "umbrella-of-state": {
+      "name": "Umbrella of State",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Shield"
+    },
+    "lightning-rod": {
+      "name": "Lightning Rod",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Weapon"
+    },
+    "pressed-olive-branch": {
+      "name": "Pressed Olive Branch",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Neck"
+    },
+    "drum-majors-baton": {
+      "name": "Drum Major's Baton",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Weapon"
+    },
+    "metronome-spurs": {
+      "name": "Metronome Spurs",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Feet"
+    },
+    "bailiffs-greatcoat": {
+      "name": "Bailiff's Greatcoat",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Cloak"
+    },
+    "felt-slippers-of-the-night-shift": {
+      "name": "Felt Slippers of the Night Shift",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Feet"
+    },
+    "bloodstone-ring": {
+      "name": "Bloodstone Ring",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Ring"
+    },
+    "leaky-bucket": {
+      "name": "Leaky Bucket",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Head"
+    },
+    "whetstone-pendant": {
+      "name": "Whetstone Pendant",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Neck"
+    },
+    "the-albatross": {
+      "name": "The Albatross",
+      "frame": "cursed",
+      "grade": "cursed",
+      "slot": "Neck"
+    },
+    "coat-of-embers": {
+      "name": "Coat of Embers",
+      "frame": "cursed",
+      "grade": "cursed",
+      "slot": "Cloak"
+    },
+    "iou-pad": {
+      "name": "IOU Pad",
+      "frame": "cursed",
+      "grade": "cursed",
+      "slot": "Pocket"
+    },
+    "sleeping-cap-of-the-night-watch": {
+      "name": "Sleeping Cap of the Night Watch",
+      "frame": "cursed",
+      "grade": "cursed",
+      "slot": "Head"
+    },
+    "ball-and-chain": {
+      "name": "Ball and Chain",
+      "frame": "cursed",
+      "grade": "cursed",
+      "slot": "Feet"
+    },
+    "the-thirteenth-chime": {
+      "name": "The Thirteenth Chime",
+      "frame": "cursed",
+      "grade": "cursed",
+      "slot": "Ring"
+    },
+    "the-gloves-thumb": {
+      "name": "The Glove's Thumb",
+      "frame": "piece",
+      "grade": "piece",
+      "slot": "Ring"
+    },
+    "the-gloves-lining": {
+      "name": "The Glove's Lining",
+      "frame": "piece",
+      "grade": "piece",
+      "slot": "Cloak"
+    },
+    "the-odd-cufflink": {
+      "name": "The Odd Cufflink",
+      "frame": "piece",
+      "grade": "piece",
+      "slot": "Ring"
+    },
+    "the-upper-bulb": {
+      "name": "The Upper Bulb",
+      "frame": "cursed",
+      "grade": "cursed",
+      "slot": "Pocket"
+    },
+    "the-lower-bulb": {
+      "name": "The Lower Bulb",
+      "frame": "piece",
+      "grade": "piece",
+      "slot": "Neck"
+    },
+    "a-pinch-of-sand": {
+      "name": "A Pinch of Sand",
+      "frame": "piece",
+      "grade": "piece",
+      "slot": "Pocket"
+    },
+    "the-quill": {
+      "name": "The Quill",
+      "frame": "piece",
+      "grade": "piece",
+      "slot": "Weapon"
+    },
+    "the-blotter": {
+      "name": "The Blotter",
+      "frame": "piece",
+      "grade": "piece",
+      "slot": "Shield"
+    },
+    "the-unsigned-treaty": {
+      "name": "The Unsigned Treaty",
+      "frame": "piece",
+      "grade": "piece",
+      "slot": "Torso"
+    },
+    "the-torn-corner": {
+      "name": "The Torn Corner",
+      "frame": "piece",
+      "grade": "piece",
+      "slot": "Pocket"
+    },
+    "bookbinders-thread": {
+      "name": "Bookbinder's Thread",
+      "frame": "piece",
+      "grade": "piece",
+      "slot": "Ring"
+    },
+    "the-missing-page": {
+      "name": "The Missing Page",
+      "frame": "piece",
+      "grade": "piece",
+      "slot": "Head"
+    },
+    "bottled-cheer": {
+      "name": "Bottled Cheer",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Potion"
+    },
+    "jar-of-fair-chances": {
+      "name": "Jar of Fair Chances",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Potion"
+    },
+    "blue-tonic": {
+      "name": "Blue Tonic",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Potion"
+    },
+    "road-cordial": {
+      "name": "Road Cordial",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Potion"
+    },
+    "fire-eaters-draught": {
+      "name": "Fire-Eater's Draught",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Potion"
+    },
+    "witch-hazel": {
+      "name": "Witch-Hazel",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Potion"
+    },
+    "late-harvest-cordial": {
+      "name": "Late-Harvest Cordial",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Potion"
+    },
+    "elixir-of-hindsight": {
+      "name": "Elixir of Hindsight",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Potion"
+    },
+    "dog-eared-map": {
+      "name": "Dog-Eared Map",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Paper"
+    },
+    "letter-of-safe-conduct": {
+      "name": "Letter of Safe Conduct",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Paper"
+    },
+    "signal-lantern": {
+      "name": "Signal Lantern",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Tool"
+    },
+    "collapsible-shovel": {
+      "name": "Collapsible Shovel",
+      "frame": "consumable",
+      "grade": "consumable",
+      "slot": "Tool"
+    },
+    "the-second-left-glove": {
+      "name": "The Second Left Glove",
+      "frame": "marvel",
+      "grade": "marvel",
+      "slot": null
+    },
+    "the-hourglass-with-no-bottom": {
+      "name": "The Hourglass with No Bottom",
+      "frame": "marvel",
+      "grade": "marvel",
+      "slot": null
+    },
+    "treaty-ink": {
+      "name": "Treaty Ink",
+      "frame": "marvel",
+      "grade": "marvel",
+      "slot": null
+    },
+    "the-unspent-page": {
+      "name": "The Unspent Page",
+      "frame": "marvel",
+      "grade": "marvel",
+      "slot": null
+    }
+  },
+  "condition": {
+    "venomed": {
+      "name": "Venomed",
+      "frame": "bloom",
+      "school": "bloom",
+      "polarity": "bane"
+    },
+    "lucky": {
+      "name": "Lucky",
+      "frame": "bloom",
+      "school": "bloom",
+      "polarity": "boon"
+    },
+    "mending": {
+      "name": "Mending",
+      "frame": "bloom",
+      "school": "bloom",
+      "polarity": "boon"
+    },
+    "thorned": {
+      "name": "Thorned",
+      "frame": "bloom",
+      "school": "bloom",
+      "polarity": "boon"
+    },
+    "ripening": {
+      "name": "Ripening",
+      "frame": "bloom",
+      "school": "bloom",
+      "polarity": "boon"
+    },
+    "turned": {
+      "name": "Turned",
+      "frame": "accord",
+      "school": "accord",
+      "polarity": "bane"
+    },
+    "heartened": {
+      "name": "Heartened",
+      "frame": "accord",
+      "school": "accord",
+      "polarity": "boon"
+    },
+    "scapegoat": {
+      "name": "Scapegoat",
+      "frame": "accord",
+      "school": "accord",
+      "polarity": "boon"
+    },
+    "shielded": {
+      "name": "Shielded",
+      "frame": "accord",
+      "school": "accord",
+      "polarity": "boon"
+    },
+    "warded": {
+      "name": "Warded",
+      "frame": "accord",
+      "school": "accord",
+      "polarity": "boon"
+    },
+    "mollified": {
+      "name": "Mollified",
+      "frame": "accord",
+      "school": "accord",
+      "polarity": "bane"
+    },
+    "delayed": {
+      "name": "Delayed",
+      "frame": "clock",
+      "school": "clock",
+      "polarity": "bane"
+    },
+    "hastened": {
+      "name": "Hastened",
+      "frame": "clock",
+      "school": "clock",
+      "polarity": "boon"
+    },
+    "quickened": {
+      "name": "Quickened",
+      "frame": "clock",
+      "school": "clock",
+      "polarity": "boon"
+    },
+    "slowed": {
+      "name": "Slowed",
+      "frame": "clock",
+      "school": "clock",
+      "polarity": "bane"
+    },
+    "asleep": {
+      "name": "Asleep",
+      "frame": "hush",
+      "school": "hush",
+      "polarity": "bane"
+    },
+    "shaken": {
+      "name": "Shaken",
+      "frame": "hush",
+      "school": "hush",
+      "polarity": "bane"
+    },
+    "jinxed": {
+      "name": "Jinxed",
+      "frame": "hush",
+      "school": "hush",
+      "polarity": "bane"
+    },
+    "reckoning": {
+      "name": "Reckoning",
+      "frame": "hush",
+      "school": "hush",
+      "polarity": "bane"
+    },
+    "hushed": {
+      "name": "Hushed",
+      "frame": "hush",
+      "school": "hush",
+      "polarity": "bane"
+    },
+    "leeched": {
+      "name": "Leeched",
+      "frame": "hush",
+      "school": "hush",
+      "polarity": "bane"
+    },
+    "burning": {
+      "name": "Burning",
+      "frame": "storm",
+      "school": "storm",
+      "polarity": "bane"
+    },
+    "frozen": {
+      "name": "Frozen",
+      "frame": "storm",
+      "school": "storm",
+      "polarity": "bane"
+    },
+    "drenched": {
+      "name": "Drenched",
+      "frame": "storm",
+      "school": "storm",
+      "polarity": "bane"
+    },
+    "fired-up": {
+      "name": "Fired Up",
+      "frame": "storm",
+      "school": "storm",
+      "polarity": "boon"
+    }
+  },
+  "ground": {
+    "rock": {
+      "name": "rock",
+      "frame": null,
+      "school": null,
+      "class": "blocking"
+    },
+    "corpse": {
+      "name": "corpse",
+      "frame": null,
+      "school": null,
+      "class": "remains"
+    },
+    "bones": {
+      "name": "bones",
+      "frame": null,
+      "school": null,
+      "class": "remains"
+    },
+    "wreck": {
+      "name": "wreck",
+      "frame": null,
+      "school": null,
+      "class": "remains"
+    },
+    "fire": {
+      "name": "fire",
+      "frame": "storm",
+      "school": "storm",
+      "class": "hazard"
+    },
+    "brambles": {
+      "name": "brambles",
+      "frame": "bloom",
+      "school": "bloom",
+      "class": "hazard"
+    },
+    "mist": {
+      "name": "mist",
+      "frame": "hush",
+      "school": "hush",
+      "class": "surface"
+    }
+  },
+  "skill": {
+    "greencraft": {
+      "name": "Greencraft",
+      "frame": "bloom",
+      "school": "bloom",
+      "group": "school"
+    },
+    "covenant": {
+      "name": "Covenant",
+      "frame": "accord",
+      "school": "accord",
+      "group": "school"
+    },
+    "horology": {
+      "name": "Horology",
+      "frame": "clock",
+      "school": "clock",
+      "group": "school"
+    },
+    "quietus": {
+      "name": "Quietus",
+      "frame": "hush",
+      "school": "hush",
+      "group": "school"
+    },
+    "stormcalling": {
+      "name": "Stormcalling",
+      "frame": "storm",
+      "school": "storm",
+      "group": "school"
+    },
+    "onslaught": {
+      "name": "Onslaught",
+      "frame": "skill",
+      "group": "army"
+    },
+    "marksmanship": {
+      "name": "Marksmanship",
+      "frame": "skill",
+      "group": "army"
+    },
+    "bulwark": {
+      "name": "Bulwark",
+      "frame": "skill",
+      "group": "army"
+    },
+    "riposte": {
+      "name": "Riposte",
+      "frame": "skill",
+      "group": "army"
+    },
+    "long-shadow": {
+      "name": "Long Shadow",
+      "frame": "skill",
+      "group": "army"
+    },
+    "vanguard": {
+      "name": "Vanguard",
+      "frame": "skill",
+      "group": "army"
+    },
+    "banner": {
+      "name": "Banner",
+      "frame": "skill",
+      "group": "army"
+    },
+    "lucky-streak": {
+      "name": "Lucky Streak",
+      "frame": "skill",
+      "group": "army"
+    },
+    "drill-sergeant": {
+      "name": "Drill Sergeant",
+      "frame": "skill",
+      "group": "army"
+    },
+    "ambush": {
+      "name": "Ambush",
+      "frame": "skill",
+      "group": "army"
+    },
+    "wayfaring": {
+      "name": "Wayfaring",
+      "frame": "skill",
+      "group": "journey"
+    },
+    "trailcraft": {
+      "name": "Trailcraft",
+      "frame": "skill",
+      "group": "journey"
+    },
+    "lookout": {
+      "name": "Lookout",
+      "frame": "skill",
+      "group": "journey"
+    },
+    "deep-wells": {
+      "name": "Deep Wells",
+      "frame": "skill",
+      "group": "journey"
+    },
+    "quick-study": {
+      "name": "Quick Study",
+      "frame": "skill",
+      "group": "journey"
+    },
+    "stewardship": {
+      "name": "Stewardship",
+      "frame": "skill",
+      "group": "journey"
+    },
+    "silver-tongue": {
+      "name": "Silver Tongue",
+      "frame": "skill",
+      "group": "journey"
+    },
+    "packrat": {
+      "name": "Packrat",
+      "frame": "skill",
+      "group": "journey"
+    },
+    "wayfinder": {
+      "name": "Wayfinder",
+      "frame": "skill",
+      "group": "journey"
+    }
+  },
+  "feat": {
+    "spillover": {
+      "name": "Spillover",
+      "frame": "feat"
+    },
+    "bonfire": {
+      "name": "Bonfire",
+      "frame": "feat"
+    },
+    "long-echo": {
+      "name": "Long Echo",
+      "frame": "feat"
+    },
+    "gleaner": {
+      "name": "Gleaner",
+      "frame": "feat"
+    },
+    "cold-hands": {
+      "name": "Cold Hands",
+      "frame": "feat"
+    },
+    "mob-rule": {
+      "name": "Mob Rule",
+      "frame": "feat"
+    },
+    "double-or-nothing": {
+      "name": "Double or Nothing",
+      "frame": "feat"
+    },
+    "seed-bombs": {
+      "name": "Seed Bombs",
+      "frame": "feat"
+    },
+    "field-surgeon": {
+      "name": "Field Surgeon",
+      "frame": "feat"
+    },
+    "green-thumb": {
+      "name": "Green Thumb",
+      "frame": "feat"
+    },
+    "briar-patch": {
+      "name": "Briar Patch",
+      "frame": "feat"
+    },
+    "burr": {
+      "name": "Burr",
+      "frame": "feat"
+    },
+    "harvest": {
+      "name": "Harvest",
+      "frame": "feat"
+    },
+    "windfall": {
+      "name": "Windfall",
+      "frame": "feat"
+    },
+    "shield-wall": {
+      "name": "Shield Wall",
+      "frame": "feat"
+    },
+    "mirror-ward": {
+      "name": "Mirror Ward",
+      "frame": "feat"
+    },
+    "peace-dividend": {
+      "name": "Peace Dividend",
+      "frame": "feat"
+    },
+    "quickstep": {
+      "name": "Quickstep",
+      "frame": "feat"
+    },
+    "pile-on": {
+      "name": "Pile On",
+      "frame": "feat"
+    },
+    "co-signer": {
+      "name": "Co-signer",
+      "frame": "feat"
+    },
+    "compound-interest": {
+      "name": "Compound Interest",
+      "frame": "feat"
+    },
+    "gag-rule": {
+      "name": "Gag Rule",
+      "frame": "feat"
+    },
+    "bloodletting": {
+      "name": "Bloodletting",
+      "frame": "feat"
+    },
+    "thicker-than-water": {
+      "name": "Thicker than Water",
+      "frame": "feat"
+    },
+    "soaked-powder": {
+      "name": "Soaked Powder",
+      "frame": "feat"
+    },
+    "chain-lightning": {
+      "name": "Chain Lightning",
+      "frame": "feat"
+    },
+    "firewalkers": {
+      "name": "Firewalkers",
+      "frame": "feat"
+    },
+    "blaze-of-glory": {
+      "name": "Blaze of Glory",
+      "frame": "feat"
+    }
+  },
+  "vow": {
+    "vow-of-the-grave": {
+      "name": "Vow of the Grave",
+      "frame": "vow"
+    },
+    "vow-of-the-still-air": {
+      "name": "Vow of the Still Air",
+      "frame": "vow"
+    },
+    "vow-of-the-pyre": {
+      "name": "Vow of the Pyre",
+      "frame": "vow"
+    },
+    "vow-of-the-opening": {
+      "name": "Vow of the Opening",
+      "frame": "vow"
+    },
+    "vow-of-the-patient": {
+      "name": "Vow of the Patient",
+      "frame": "vow"
+    },
+    "vow-of-silence": {
+      "name": "Vow of Silence",
+      "frame": "vow"
+    },
+    "vow-of-the-borrowed-book": {
+      "name": "Vow of the Borrowed Book",
+      "frame": "vow"
+    },
+    "vow-of-the-unlettered": {
+      "name": "Vow of the Unlettered",
+      "frame": "vow"
+    },
+    "vow-of-empty-pockets": {
+      "name": "Vow of Empty Pockets",
+      "frame": "vow"
+    },
+    "vow-of-the-barefoot-pilgrim": {
+      "name": "Vow of the Barefoot Pilgrim",
+      "frame": "vow"
+    },
+    "vow-of-bare-hands": {
+      "name": "Vow of Bare Hands",
+      "frame": "vow"
+    },
+    "vow-of-flesh-and-blood": {
+      "name": "Vow of Flesh and Blood",
+      "frame": "vow"
+    }
+  },
+  "stat": {
+    "attack": {
+      "name": "Attack",
+      "frame": null
+    },
+    "defense": {
+      "name": "Defense",
+      "frame": null
+    },
+    "power": {
+      "name": "Power",
+      "frame": null
+    },
+    "lore": {
+      "name": "Lore",
+      "frame": null
+    }
+  },
+  "school": {
+    "bloom": {
+      "name": "Bloom",
+      "frame": "bloom"
+    },
+    "accord": {
+      "name": "Accord",
+      "frame": "accord"
+    },
+    "clock": {
+      "name": "Clock",
+      "frame": "clock"
+    },
+    "hush": {
+      "name": "Hush",
+      "frame": "hush"
+    },
+    "storm": {
+      "name": "Storm",
+      "frame": "storm"
+    }
+  }
+}

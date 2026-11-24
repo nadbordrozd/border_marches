@@ -1,0 +1,1 @@
+Class: one tiny bold symbol sprite for a status marker: a single object with a very big simple silhouette, a thick single-colour black outline, two or three flat saturated colours, no small details; it must read at a glance at 16 pixels. It floats alone, centred, filling the square, on the empty transparent background: nothing is drawn behind or under it.

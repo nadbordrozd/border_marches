@@ -1,0 +1,702 @@
+{
+  "set": "icons-artifacts",
+  "bead": "border_marches-bzc.17",
+  "class": "icons",
+  "exploration": false,
+  "_doc": "Artifact items: 30 Trinkets, 20 Wonders, 6 cursed Wonders, 12 Marvel pieces, 4 assembled Marvels, 12 consumables. 32x32 symbols on a transparent background, docs/art/classes/icons.md. One generate-image-v2 call at 32x32 returns 64 candidates of a mixed subject (\"each image a different one of these\"); the best take per subject is accepted. Frames (school, grade) are drawn by code, never baked. Never downscaled or mirrored. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-bottom-left",
+      "class-symbol-32"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "trinkets-a",
+      "concept": "tin-sabre parade-sword ringmasters-whip pot-lid tollgate-door manhole-cover reading-glasses thinking-cap",
+      "width": 32,
+      "height": 32,
+      "seed": 17201,
+      "covers": [
+        "tin-sabre",
+        "parade-sword",
+        "ringmasters-whip",
+        "pot-lid",
+        "tollgate-door",
+        "manhole-cover",
+        "reading-glasses",
+        "thinking-cap"
+      ],
+      "subject": "Subject: each image shows exactly one of these 8 things, each thing about equally often: (1) a short curved tin sabre with a plain grey blade and brass hilt; (2) a shiny straight parade sword with a gold cross-guard and red tassel; (3) a coiled red-and-white ringmaster's whip with a gold handle; (4) a round dented metal cooking pot lid used as a shield, with a knob handle; (5) a small square wooden door with iron bands used as a shield; (6) a heavy round dark iron manhole cover with a grid pattern used as a shield; (7) a pair of round gold-rimmed reading glasses; (8) a tall blue wizard-ish thinking cap with a yellow star."
+    },
+    {
+      "id": "trinkets-b",
+      "concept": "second-best-breastplate star-chart-robe sprig-pendant sealing-wax-locket fob-chain mourning-brooch lightning-glass-bead four-leaf-buttonhole regimental-sash clerks-cape oilskin-of-deep-pockets",
+      "width": 32,
+      "height": 32,
+      "seed": 17202,
+      "covers": [
+        "second-best-breastplate",
+        "star-chart-robe",
+        "sprig-pendant",
+        "sealing-wax-locket",
+        "fob-chain",
+        "mourning-brooch",
+        "lightning-glass-bead",
+        "four-leaf-buttonhole",
+        "regimental-sash",
+        "clerks-cape",
+        "oilskin-of-deep-pockets"
+      ],
+      "subject": "Subject: each image shows exactly one of these 11 things, each thing about equally often: (1) a slightly dented steel breastplate; (2) a dark blue robe covered in small gold stars; (3) a pendant necklace with a green leaf sprig; (4) a gold locket necklace with a red wax seal; (5) a gold watch fob chain with a tiny clock; (6) a black oval brooch with a purple gem; (7) a necklace with a big yellow glass bead holding a spark; (8) a green four-leaf clover pinned on a ribbon rosette; (9) a red sash with two gold medals; (10) a short grey clerk's cape with a feather quill pinned on; (11) a yellow oilskin raincoat with big pockets."
+    },
+    {
+      "id": "trinkets-c",
+      "concept": "knuckle-dusters signet-of-the-minor-office moneylenders-ring seven-furlong-boots sensible-shoes galoshes lucky-penny brass-bugle spyglass thermos-of-strong-tea scholars-bookmark",
+      "width": 32,
+      "height": 32,
+      "seed": 17203,
+      "covers": [
+        "knuckle-dusters",
+        "signet-of-the-minor-office",
+        "moneylenders-ring",
+        "seven-furlong-boots",
+        "sensible-shoes",
+        "galoshes",
+        "lucky-penny",
+        "brass-bugle",
+        "spyglass",
+        "thermos-of-strong-tea",
+        "scholars-bookmark"
+      ],
+      "subject": "Subject: each image shows exactly one of these 11 things, each thing about equally often: (1) a pair of brass knuckle dusters; (2) a gold signet ring with a small blue stone; (3) a fat gold ring set with a gold coin; (4) tall brown leather boots with gold buckles; (5) a pair of plain brown lace-up shoes; (6) a pair of bright yellow rubber galoshes; (7) a shiny copper penny coin; (8) a small brass bugle horn; (9) a brass spyglass telescope; (10) a tall green thermos flask with a steaming cup lid; (11) a red ribbon bookmark with a gold tassel."
+    },
+    {
+      "id": "wonders-a",
+      "concept": "winters-pocket-watch sextons-spade the-bellhops-cap tinderbox watering-can gardeners-apron thornmail-vest hedge-clipper-shears cider-flask notarys-seal",
+      "width": 32,
+      "height": 32,
+      "seed": 17204,
+      "covers": [
+        "winters-pocket-watch",
+        "sextons-spade",
+        "the-bellhops-cap",
+        "tinderbox",
+        "watering-can",
+        "gardeners-apron",
+        "thornmail-vest",
+        "hedge-clipper-shears",
+        "cider-flask",
+        "notarys-seal"
+      ],
+      "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a pale blue pocket watch covered in ice; (2) a dark iron grave-digger's spade; (3) a small round red bellhop cap with a gold band; (4) a small tin box with a flint and a spark; (5) a green tin watering can; (6) a green gardener's apron with a trowel in the pocket; (7) a green vest covered in sharp thorns; (8) a pair of big garden hedge shears; (9) a round clay cider flask with a cork and a red apple painted on it; (10) a brass seal stamp with a blue wooden handle."
+    },
+    {
+      "id": "wonders-b",
+      "concept": "umbrella-of-state lightning-rod pressed-olive-branch drum-majors-baton metronome-spurs bailiffs-greatcoat felt-slippers-of-the-night-shift bloodstone-ring leaky-bucket whetstone-pendant",
+      "width": 32,
+      "height": 32,
+      "seed": 17205,
+      "covers": [
+        "umbrella-of-state",
+        "lightning-rod",
+        "pressed-olive-branch",
+        "drum-majors-baton",
+        "metronome-spurs",
+        "bailiffs-greatcoat",
+        "felt-slippers-of-the-night-shift",
+        "bloodstone-ring",
+        "leaky-bucket",
+        "whetstone-pendant"
+      ],
+      "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) an open red and gold royal umbrella; (2) a copper lightning rod with a yellow spark at its tip; (3) a flat pressed olive branch with green leaves and olives; (4) a silver baton with a gold ball tip; (5) a pair of silver riding spurs with star wheels; (6) a long dark grey greatcoat with brass buttons; (7) a pair of soft blue felt slippers; (8) a silver ring with a dark red stone; (9) a wooden bucket with water leaking from holes; (10) a pendant with a grey whetstone and a tiny sword."
+    },
+    {
+      "id": "cursed-marvels-a",
+      "concept": "the-albatross coat-of-embers iou-pad sleeping-cap-of-the-night-watch ball-and-chain the-thirteenth-chime the-second-left-glove the-hourglass-with-no-bottom treaty-ink the-unspent-page",
+      "width": 32,
+      "height": 32,
+      "seed": 17206,
+      "covers": [
+        "the-albatross",
+        "coat-of-embers",
+        "iou-pad",
+        "sleeping-cap-of-the-night-watch",
+        "ball-and-chain",
+        "the-thirteenth-chime",
+        "the-second-left-glove",
+        "the-hourglass-with-no-bottom",
+        "treaty-ink",
+        "the-unspent-page"
+      ],
+      "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a big white albatross bird with a rope tied around its neck; (2) a dark red coat with glowing orange embers; (3) a small notepad with a pencil; (4) a long striped blue nightcap with a white pompom; (5) a black iron ball and chain with a shackle; (6) a cracked tall grandfather clock; (7) a fancy gold-trimmed left glove glowing; (8) a gold hourglass with no bottom, sand pouring out; (9) a glass ink bottle of glowing blue ink with a quill in it; (10) a glowing golden book page with sparkles."
+    },
+    {
+      "id": "pieces-a",
+      "concept": "the-gloves-thumb the-gloves-lining the-odd-cufflink the-upper-bulb the-lower-bulb a-pinch-of-sand the-quill the-blotter the-unsigned-treaty the-torn-corner bookbinders-thread the-missing-page",
+      "width": 32,
+      "height": 32,
+      "seed": 17207,
+      "covers": [
+        "the-gloves-thumb",
+        "the-gloves-lining",
+        "the-odd-cufflink",
+        "the-upper-bulb",
+        "the-lower-bulb",
+        "a-pinch-of-sand",
+        "the-quill",
+        "the-blotter",
+        "the-unsigned-treaty",
+        "the-torn-corner",
+        "bookbinders-thread",
+        "the-missing-page"
+      ],
+      "subject": "Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a single gold armoured glove thumb with a gem; (2) a folded red silk glove lining; (3) a single gold cufflink with a red gem; (4) the top half of an hourglass: a glass bulb of sand with a gold cap; (5) the bottom half of an hourglass: a glass bulb of sand on a gold base; (6) a small heap of glittering golden sand; (7) a long white feather quill pen dipped in blue ink; (8) a curved wooden ink blotter with a brass knob; (9) a long blank parchment scroll with a ribbon; (10) a torn triangular corner of an old book page; (11) a spool of red thread with a needle; (12) a single loose book page floating with a faint glow."
+    },
+    {
+      "id": "consumables-a",
+      "concept": "bottled-cheer jar-of-fair-chances blue-tonic road-cordial fire-eaters-draught witch-hazel late-harvest-cordial elixir-of-hindsight dog-eared-map letter-of-safe-conduct signal-lantern collapsible-shovel",
+      "width": 32,
+      "height": 32,
+      "seed": 17208,
+      "covers": [
+        "bottled-cheer",
+        "jar-of-fair-chances",
+        "blue-tonic",
+        "road-cordial",
+        "fire-eaters-draught",
+        "witch-hazel",
+        "late-harvest-cordial",
+        "elixir-of-hindsight",
+        "dog-eared-map",
+        "letter-of-safe-conduct",
+        "signal-lantern",
+        "collapsible-shovel"
+      ],
+      "subject": "Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a round potion bottle of bubbly pink liquid with a cork; (2) a glass jar holding a green four-leaf clover; (3) a tall bottle of bright blue potion; (4) a flat leather hip flask of orange cordial; (5) a potion bottle of red liquid with a flame above it; (6) a small green potion bottle with a hazel leaf; (7) a golden yellow potion bottle with a wheat sprig; (8) a purple potion bottle with an eye painted on it; (9) a folded paper map with a bent corner; (10) a sealed envelope with a red wax seal; (11) a brass lantern with a bright yellow light; (12) a small folding army shovel."
+    },
+    {
+      "id": "pieces-b",
+      "concept": "the-upper-bulb the-lower-bulb",
+      "width": 32,
+      "height": 32,
+      "seed": 17209,
+      "covers": [
+        "the-upper-bulb",
+        "the-lower-bulb"
+      ],
+      "subject": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) one round glass bulb shaped like a light bulb, full of golden sand, with a gold cap on top, upside down like a teardrop; (2) a round glass bowl half full of golden sand standing on a short gold foot.",
+      "notes": "Re-roll: pieces-a drew a whole hourglass for both bulbs, so the two pieces looked the same."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/icons/artifacts/tin-sabre.png",
+      "from": "trinkets-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/parade-sword.png",
+      "from": "trinkets-a#11",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/ringmasters-whip.png",
+      "from": "trinkets-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/pot-lid.png",
+      "from": "trinkets-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/tollgate-door.png",
+      "from": "trinkets-a#32",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/manhole-cover.png",
+      "from": "trinkets-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/reading-glasses.png",
+      "from": "trinkets-a#21",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/thinking-cap.png",
+      "from": "trinkets-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/second-best-breastplate.png",
+      "from": "trinkets-b#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/star-chart-robe.png",
+      "from": "trinkets-b#18",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/sprig-pendant.png",
+      "from": "trinkets-b#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/sealing-wax-locket.png",
+      "from": "trinkets-b#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/fob-chain.png",
+      "from": "trinkets-b#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/mourning-brooch.png",
+      "from": "trinkets-b#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/lightning-glass-bead.png",
+      "from": "trinkets-b#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/four-leaf-buttonhole.png",
+      "from": "trinkets-b#11",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/regimental-sash.png",
+      "from": "trinkets-b#19",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/clerks-cape.png",
+      "from": "trinkets-b#9",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/oilskin-of-deep-pockets.png",
+      "from": "trinkets-b#39",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/winters-pocket-watch.png",
+      "from": "wonders-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/sextons-spade.png",
+      "from": "wonders-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-bellhops-cap.png",
+      "from": "wonders-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/tinderbox.png",
+      "from": "wonders-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/watering-can.png",
+      "from": "wonders-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/gardeners-apron.png",
+      "from": "wonders-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/thornmail-vest.png",
+      "from": "wonders-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/hedge-clipper-shears.png",
+      "from": "wonders-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/cider-flask.png",
+      "from": "wonders-a#8",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/notarys-seal.png",
+      "from": "wonders-a#9",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/umbrella-of-state.png",
+      "from": "wonders-b#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/lightning-rod.png",
+      "from": "wonders-b#17",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/pressed-olive-branch.png",
+      "from": "wonders-b#10",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/drum-majors-baton.png",
+      "from": "wonders-b#11",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/metronome-spurs.png",
+      "from": "wonders-b#12",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/bailiffs-greatcoat.png",
+      "from": "wonders-b#13",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/felt-slippers-of-the-night-shift.png",
+      "from": "wonders-b#14",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/bloodstone-ring.png",
+      "from": "wonders-b#23",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/leaky-bucket.png",
+      "from": "wonders-b#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/whetstone-pendant.png",
+      "from": "wonders-b#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-albatross.png",
+      "from": "cursed-marvels-a#16",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/coat-of-embers.png",
+      "from": "cursed-marvels-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/iou-pad.png",
+      "from": "cursed-marvels-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/sleeping-cap-of-the-night-watch.png",
+      "from": "cursed-marvels-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/ball-and-chain.png",
+      "from": "cursed-marvels-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-thirteenth-chime.png",
+      "from": "cursed-marvels-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-second-left-glove.png",
+      "from": "cursed-marvels-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-hourglass-with-no-bottom.png",
+      "from": "cursed-marvels-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/treaty-ink.png",
+      "from": "cursed-marvels-a#22",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-unspent-page.png",
+      "from": "cursed-marvels-a#63",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-gloves-thumb.png",
+      "from": "pieces-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-gloves-lining.png",
+      "from": "pieces-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-odd-cufflink.png",
+      "from": "pieces-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/a-pinch-of-sand.png",
+      "from": "pieces-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-quill.png",
+      "from": "pieces-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-blotter.png",
+      "from": "pieces-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-unsigned-treaty.png",
+      "from": "pieces-a#13",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-torn-corner.png",
+      "from": "pieces-a#14",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/bookbinders-thread.png",
+      "from": "pieces-a#22",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-missing-page.png",
+      "from": "pieces-a#23",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-upper-bulb.png",
+      "from": "pieces-b#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/the-lower-bulb.png",
+      "from": "pieces-b#13",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/bottled-cheer.png",
+      "from": "consumables-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/jar-of-fair-chances.png",
+      "from": "consumables-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/blue-tonic.png",
+      "from": "consumables-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/road-cordial.png",
+      "from": "consumables-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/fire-eaters-draught.png",
+      "from": "consumables-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/witch-hazel.png",
+      "from": "consumables-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/late-harvest-cordial.png",
+      "from": "consumables-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/elixir-of-hindsight.png",
+      "from": "consumables-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/dog-eared-map.png",
+      "from": "consumables-a#9",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/letter-of-safe-conduct.png",
+      "from": "consumables-a#21",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/signal-lantern.png",
+      "from": "consumables-a#22",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/collapsible-shovel.png",
+      "from": "consumables-a#23",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/knuckle-dusters.png",
+      "from": "trinkets-c#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/signet-of-the-minor-office.png",
+      "from": "trinkets-c#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/moneylenders-ring.png",
+      "from": "trinkets-c#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/seven-furlong-boots.png",
+      "from": "trinkets-c#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/sensible-shoes.png",
+      "from": "trinkets-c#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/galoshes.png",
+      "from": "trinkets-c#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/lucky-penny.png",
+      "from": "trinkets-c#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/brass-bugle.png",
+      "from": "trinkets-c#11",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/spyglass.png",
+      "from": "trinkets-c#12",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/thermos-of-strong-tea.png",
+      "from": "trinkets-c#13",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/scholars-bookmark.png",
+      "from": "trinkets-c#22",
+      "width": 32,
+      "height": 32
+    }
+  ]
+}

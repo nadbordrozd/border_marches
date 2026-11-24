@@ -1,0 +1,1 @@
+Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it.

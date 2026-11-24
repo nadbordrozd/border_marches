@@ -1,0 +1,2882 @@
+{
+  "trinkets-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "tin-sabre: plain curved grey sabre",
+    "at": "2026-11-24T23:01:24.355Z"
+  },
+  "trinkets-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "parade-sword: straight sword with gold guard and red tassel",
+    "at": "2026-11-24T23:01:24.419Z"
+  },
+  "trinkets-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "ringmasters-whip: coiled red-and-white whip",
+    "at": "2026-11-24T23:01:24.489Z"
+  },
+  "trinkets-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "pot-lid: round grey pot lid with a knob",
+    "at": "2026-11-24T23:01:24.547Z"
+  },
+  "trinkets-a#32": {
+    "verdict": "ACCEPTED",
+    "notes": "tollgate-door: square banded wooden door",
+    "at": "2026-11-24T23:01:24.603Z"
+  },
+  "trinkets-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "manhole-cover: dark round grated cover",
+    "at": "2026-11-24T23:01:24.662Z"
+  },
+  "trinkets-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "reading-glasses: round gold-rimmed glasses",
+    "at": "2026-11-24T23:01:24.724Z"
+  },
+  "trinkets-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "thinking-cap: blue hat with a yellow star, no face",
+    "at": "2026-11-24T23:01:24.784Z"
+  },
+  "trinkets-a#1": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#2": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#4": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#8": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#9": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#10": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#12": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#13": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#14": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#16": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#17": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#18": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#19": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#20": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#22": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#23": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#24": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#25": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#26": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#27": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#28": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#29": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#30": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#31": {
+    "verdict": "REJECTED",
+    "notes": "thinking cap drawn with a face under it",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#33": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#34": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#35": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#36": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#37": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#38": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#39": {
+    "verdict": "REJECTED",
+    "notes": "thinking cap drawn with a face under it",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#40": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#41": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#42": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#43": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#44": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#45": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#46": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#47": {
+    "verdict": "REJECTED",
+    "notes": "thinking cap drawn with a face under it",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#48": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#49": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#50": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#51": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#52": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#53": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#54": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#55": {
+    "verdict": "REJECTED",
+    "notes": "thinking cap drawn with a face under it",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#56": {
+    "verdict": "REJECTED",
+    "notes": "blank: the take is empty",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#57": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#58": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#59": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#60": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#61": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#62": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-a#63": {
+    "verdict": "REJECTED",
+    "notes": "thinking cap drawn with a face under it",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "second-best-breastplate: steel breastplate, clear plates",
+    "at": "2026-11-24T23:01:24.843Z"
+  },
+  "trinkets-b#18": {
+    "verdict": "ACCEPTED",
+    "notes": "star-chart-robe: starry blue robe with gold trim",
+    "at": "2026-11-24T23:01:24.898Z"
+  },
+  "trinkets-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "sprig-pendant: necklace with a green sprig",
+    "at": "2026-11-24T23:01:24.955Z"
+  },
+  "trinkets-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "sealing-wax-locket: gold locket with a red seal",
+    "at": "2026-11-24T23:01:25.012Z"
+  },
+  "trinkets-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "fob-chain: gold chain with a tiny watch",
+    "at": "2026-11-24T23:01:25.066Z"
+  },
+  "trinkets-b#5": {
+    "verdict": "ACCEPTED",
+    "notes": "mourning-brooch: black oval brooch with a purple gem",
+    "at": "2026-11-24T23:01:25.118Z"
+  },
+  "trinkets-b#6": {
+    "verdict": "ACCEPTED",
+    "notes": "lightning-glass-bead: big glowing glass bead pendant",
+    "at": "2026-11-24T23:01:25.173Z"
+  },
+  "trinkets-b#11": {
+    "verdict": "ACCEPTED",
+    "notes": "four-leaf-buttonhole: clover on a red rosette",
+    "at": "2026-11-24T23:01:25.227Z"
+  },
+  "trinkets-b#19": {
+    "verdict": "ACCEPTED",
+    "notes": "regimental-sash: red sash with gold medals",
+    "at": "2026-11-24T23:01:25.281Z"
+  },
+  "trinkets-b#9": {
+    "verdict": "ACCEPTED",
+    "notes": "clerks-cape: grey cape with a quill pinned on",
+    "at": "2026-11-24T23:01:25.338Z"
+  },
+  "trinkets-b#39": {
+    "verdict": "ACCEPTED",
+    "notes": "oilskin-of-deep-pockets: yellow oilskin with pockets",
+    "at": "2026-11-24T23:01:25.394Z"
+  },
+  "trinkets-b#1": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#7": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#8": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#10": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#12": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#13": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#14": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#16": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#17": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#20": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#21": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#22": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#23": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#24": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#25": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#26": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#27": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#28": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#29": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#30": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#31": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#32": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#33": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#34": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#35": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#36": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#37": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#38": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#40": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#41": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#42": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#43": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#44": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#45": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#46": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#47": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#48": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#49": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#50": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#51": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#52": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#53": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#54": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#55": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#56": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#57": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#58": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#59": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#60": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#61": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#62": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-b#63": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "knuckle-dusters: brass knuckle dusters",
+    "at": "2026-11-24T23:01:25.449Z"
+  },
+  "trinkets-c#1": {
+    "verdict": "ACCEPTED",
+    "notes": "signet-of-the-minor-office: gold ring with a blue stone",
+    "at": "2026-11-24T23:01:25.504Z"
+  },
+  "trinkets-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "moneylenders-ring: fat flat-topped gold ring, unlike the signet's stone",
+    "at": "2026-11-24T23:01:25.558Z"
+  },
+  "trinkets-c#3": {
+    "verdict": "ACCEPTED",
+    "notes": "seven-furlong-boots: tall buckled boots",
+    "at": "2026-11-24T23:01:25.611Z"
+  },
+  "trinkets-c#4": {
+    "verdict": "ACCEPTED",
+    "notes": "sensible-shoes: plain brown shoes",
+    "at": "2026-11-24T23:01:25.666Z"
+  },
+  "trinkets-c#6": {
+    "verdict": "ACCEPTED",
+    "notes": "galoshes: yellow galoshes",
+    "at": "2026-11-24T23:01:25.720Z"
+  },
+  "trinkets-c#7": {
+    "verdict": "ACCEPTED",
+    "notes": "lucky-penny: copper penny",
+    "at": "2026-11-24T23:01:25.774Z"
+  },
+  "trinkets-c#11": {
+    "verdict": "ACCEPTED",
+    "notes": "brass-bugle: brass bugle",
+    "at": "2026-11-24T23:01:25.828Z"
+  },
+  "trinkets-c#12": {
+    "verdict": "ACCEPTED",
+    "notes": "spyglass: brass spyglass",
+    "at": "2026-11-24T23:01:25.882Z"
+  },
+  "trinkets-c#13": {
+    "verdict": "ACCEPTED",
+    "notes": "thermos-of-strong-tea: green thermos with a cup lid",
+    "at": "2026-11-24T23:01:25.946Z"
+  },
+  "trinkets-c#22": {
+    "verdict": "ACCEPTED",
+    "notes": "scholars-bookmark: red ribbon bookmark with a gold tassel",
+    "at": "2026-11-24T23:01:26.071Z"
+  },
+  "trinkets-c#5": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#8": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#9": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#10": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#14": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#16": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#17": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#18": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#19": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#20": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#21": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#23": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#24": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#25": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#26": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#27": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#28": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#29": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#30": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#31": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#32": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#33": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#34": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#35": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#36": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#37": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#38": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#39": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#40": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#41": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#42": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#43": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#44": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#45": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#46": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#47": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#48": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#49": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#50": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#51": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#52": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#53": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#54": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#55": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#56": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#57": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#58": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#59": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#60": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#61": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#62": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "trinkets-c#63": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:01:22.671Z"
+  },
+  "wonders-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "winters-pocket-watch: frosted pale blue pocket watch",
+    "at": "2026-11-24T23:03:42.792Z"
+  },
+  "wonders-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "sextons-spade: dark iron spade",
+    "at": "2026-11-24T23:03:42.842Z"
+  },
+  "wonders-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "the-bellhops-cap: red cap with a gold band",
+    "at": "2026-11-24T23:03:42.892Z"
+  },
+  "wonders-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "tinderbox: tin box with flint and spark",
+    "at": "2026-11-24T23:03:42.943Z"
+  },
+  "wonders-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "watering-can: green watering can",
+    "at": "2026-11-24T23:03:42.993Z"
+  },
+  "wonders-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "gardeners-apron: green apron with a trowel",
+    "at": "2026-11-24T23:03:43.042Z"
+  },
+  "wonders-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "thornmail-vest: thorny green vest",
+    "at": "2026-11-24T23:03:43.092Z"
+  },
+  "wonders-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "hedge-clipper-shears: garden shears",
+    "at": "2026-11-24T23:03:43.141Z"
+  },
+  "wonders-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "cider-flask: clay flask with an apple",
+    "at": "2026-11-24T23:03:43.191Z"
+  },
+  "wonders-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "notarys-seal: seal stamp with a blue handle",
+    "at": "2026-11-24T23:03:43.240Z"
+  },
+  "wonders-a#10": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#11": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#12": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#13": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#14": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#16": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#17": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#18": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#19": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#20": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#21": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#22": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#23": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#24": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#25": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#26": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#27": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#28": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#29": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#30": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#31": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#32": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#33": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#34": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#35": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#36": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#37": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#38": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#39": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#40": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#41": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#42": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#43": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#44": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#45": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#46": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#47": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#48": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#49": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#50": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#51": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#52": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#53": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#54": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#55": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#56": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#57": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#58": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#59": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#60": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#61": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#62": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-a#63": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "umbrella-of-state: red and gold royal umbrella",
+    "at": "2026-11-24T23:03:43.290Z"
+  },
+  "wonders-b#17": {
+    "verdict": "ACCEPTED",
+    "notes": "lightning-rod: rod with a bright spark, thickest take",
+    "at": "2026-11-24T23:03:43.341Z"
+  },
+  "wonders-b#10": {
+    "verdict": "ACCEPTED",
+    "notes": "pressed-olive-branch: olive branch with olives",
+    "at": "2026-11-24T23:03:43.391Z"
+  },
+  "wonders-b#11": {
+    "verdict": "ACCEPTED",
+    "notes": "drum-majors-baton: silver baton with a gold ball",
+    "at": "2026-11-24T23:03:43.441Z"
+  },
+  "wonders-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "metronome-spurs: pair of star-wheel spurs",
+    "at": "2026-11-24T23:03:43.490Z"
+  },
+  "wonders-b#13": {
+    "verdict": "ACCEPTED",
+    "notes": "bailiffs-greatcoat: long grey greatcoat with brass buttons",
+    "at": "2026-11-24T23:03:43.541Z"
+  },
+  "wonders-b#14": {
+    "verdict": "ACCEPTED",
+    "notes": "felt-slippers-of-the-night-shift: blue felt slippers",
+    "at": "2026-11-24T23:03:43.592Z"
+  },
+  "wonders-b#23": {
+    "verdict": "ACCEPTED",
+    "notes": "bloodstone-ring: silver ring with a dark red stone",
+    "at": "2026-11-24T23:03:43.641Z"
+  },
+  "wonders-b#6": {
+    "verdict": "ACCEPTED",
+    "notes": "leaky-bucket: bucket leaking water",
+    "at": "2026-11-24T23:03:43.691Z"
+  },
+  "wonders-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "whetstone-pendant: pendant with a little sword",
+    "at": "2026-11-24T23:03:43.743Z"
+  },
+  "wonders-b#0": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#1": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#2": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#4": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#5": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#8": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#9": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#16": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#18": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#19": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#20": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#21": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#22": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#24": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#25": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#26": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#27": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#28": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#29": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#30": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#31": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#32": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#33": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#34": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#35": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#36": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#37": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#38": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#39": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#40": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#41": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#42": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#43": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#44": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#45": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#46": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#47": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#48": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#49": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#50": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#51": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#52": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#53": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#54": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#55": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#56": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#57": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#58": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#59": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#60": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#61": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#62": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "wonders-b#63": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:03:41.727Z"
+  },
+  "cursed-marvels-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "the-albatross: albatross with a rope round its neck",
+    "at": "2026-11-24T23:12:52.024Z"
+  },
+  "cursed-marvels-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "coat-of-embers: dark red coat with embers",
+    "at": "2026-11-24T23:12:52.088Z"
+  },
+  "cursed-marvels-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "iou-pad: notepad with a pencil",
+    "at": "2026-11-24T23:12:52.156Z"
+  },
+  "cursed-marvels-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "sleeping-cap-of-the-night-watch: striped nightcap with a pompom",
+    "at": "2026-11-24T23:12:52.219Z"
+  },
+  "cursed-marvels-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "ball-and-chain: iron ball and chain, grey highlights keep it visible on dark",
+    "at": "2026-11-24T23:12:52.284Z"
+  },
+  "cursed-marvels-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "the-thirteenth-chime: grandfather clock",
+    "at": "2026-11-24T23:12:52.354Z"
+  },
+  "cursed-marvels-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "the-second-left-glove: glove with magic sparkles",
+    "at": "2026-11-24T23:12:52.420Z"
+  },
+  "cursed-marvels-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "the-hourglass-with-no-bottom: gold hourglass pouring sand out of its base",
+    "at": "2026-11-24T23:12:52.480Z"
+  },
+  "cursed-marvels-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "treaty-ink: ink bottle with a quill",
+    "at": "2026-11-24T23:12:52.543Z"
+  },
+  "cursed-marvels-a#63": {
+    "verdict": "ACCEPTED",
+    "notes": "the-unspent-page: glowing golden page, the only take of it",
+    "at": "2026-11-24T23:12:52.600Z"
+  },
+  "cursed-marvels-a#0": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#8": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#9": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#10": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#11": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#12": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#13": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#14": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#17": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#18": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#19": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#20": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#21": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#23": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#24": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#25": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#26": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#27": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#28": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#29": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#30": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#31": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#32": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#33": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#34": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#35": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#36": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#37": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#38": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#39": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#40": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#41": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#42": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#43": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#44": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#45": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#46": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#47": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#48": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#49": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#50": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#51": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#52": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#53": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#54": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#55": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#56": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#57": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#58": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#59": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#60": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#61": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "cursed-marvels-a#62": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "the-gloves-thumb: gold armoured glove with a gem",
+    "at": "2026-11-24T23:12:52.656Z"
+  },
+  "pieces-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "the-gloves-lining: folded red silk lining",
+    "at": "2026-11-24T23:12:52.719Z"
+  },
+  "pieces-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "the-odd-cufflink: gold cufflink with a red gem",
+    "at": "2026-11-24T23:12:52.779Z"
+  },
+  "pieces-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "a-pinch-of-sand: glittering heap of gold sand",
+    "at": "2026-11-24T23:12:52.836Z"
+  },
+  "pieces-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "the-quill: quill dipped in blue ink",
+    "at": "2026-11-24T23:12:52.891Z"
+  },
+  "pieces-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "the-blotter: rocker blotter with a brass knob",
+    "at": "2026-11-24T23:12:52.949Z"
+  },
+  "pieces-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "the-unsigned-treaty: blank scroll",
+    "at": "2026-11-24T23:12:53.005Z"
+  },
+  "pieces-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "the-torn-corner: torn page corner",
+    "at": "2026-11-24T23:12:53.062Z"
+  },
+  "pieces-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "bookbinders-thread: spool of red thread with a needle",
+    "at": "2026-11-24T23:12:53.116Z"
+  },
+  "pieces-a#23": {
+    "verdict": "ACCEPTED",
+    "notes": "the-missing-page: loose glowing page",
+    "at": "2026-11-24T23:12:53.172Z"
+  },
+  "pieces-a#3": {
+    "verdict": "REJECTED",
+    "notes": "a whole hourglass, not one bulb: the Upper and Lower Bulb would look the same; re-rolled in pieces-b",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#4": {
+    "verdict": "REJECTED",
+    "notes": "a whole hourglass, not one bulb: the Upper and Lower Bulb would look the same; re-rolled in pieces-b",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#8": {
+    "verdict": "REJECTED",
+    "notes": "a whole hourglass, not one bulb: the Upper and Lower Bulb would look the same; re-rolled in pieces-b",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#9": {
+    "verdict": "REJECTED",
+    "notes": "a whole hourglass, not one bulb: the Upper and Lower Bulb would look the same; re-rolled in pieces-b",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#10": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#11": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#12": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#16": {
+    "verdict": "REJECTED",
+    "notes": "a whole hourglass, not one bulb: the Upper and Lower Bulb would look the same; re-rolled in pieces-b",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#17": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#18": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#19": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#20": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#21": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#24": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#25": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#26": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#27": {
+    "verdict": "REJECTED",
+    "notes": "a whole hourglass, not one bulb: the Upper and Lower Bulb would look the same; re-rolled in pieces-b",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#28": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#29": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#30": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#31": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#32": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#33": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#34": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#35": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#36": {
+    "verdict": "REJECTED",
+    "notes": "a whole hourglass, not one bulb: the Upper and Lower Bulb would look the same; re-rolled in pieces-b",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#37": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#38": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#39": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#40": {
+    "verdict": "REJECTED",
+    "notes": "a whole hourglass, not one bulb: the Upper and Lower Bulb would look the same; re-rolled in pieces-b",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#41": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#42": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#43": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#44": {
+    "verdict": "REJECTED",
+    "notes": "a whole hourglass, not one bulb: the Upper and Lower Bulb would look the same; re-rolled in pieces-b",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#45": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#46": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#47": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#48": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#49": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#50": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#51": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#52": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#53": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#54": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#55": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#56": {
+    "verdict": "REJECTED",
+    "notes": "a whole hourglass, not one bulb: the Upper and Lower Bulb would look the same; re-rolled in pieces-b",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#57": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#58": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#59": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#60": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#61": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#62": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-a#63": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "the-upper-bulb: a single glass bulb of sand with a gold cap",
+    "at": "2026-11-24T23:12:53.227Z"
+  },
+  "pieces-b#13": {
+    "verdict": "ACCEPTED",
+    "notes": "the-lower-bulb: a bowl of sand on a gold foot, unlike the upper bulb",
+    "at": "2026-11-24T23:12:53.282Z"
+  },
+  "pieces-b#1": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#2": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#3": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#4": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#5": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#6": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#7": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#8": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#9": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#10": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#11": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#12": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#14": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#16": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#17": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#18": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#19": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#20": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#21": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#22": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#23": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#24": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#25": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#26": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#27": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#28": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#29": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#30": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#31": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#32": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#33": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#34": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#35": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#36": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#37": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#38": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#39": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#40": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#41": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#42": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#43": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#44": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#45": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#46": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#47": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#48": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#49": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#50": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#51": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#52": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#53": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#54": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#55": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#56": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#57": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#58": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#59": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#60": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#61": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#62": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "pieces-b#63": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "bottled-cheer: round bottle of pink fizz",
+    "at": "2026-11-24T23:12:53.338Z"
+  },
+  "consumables-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "jar-of-fair-chances: jar with a clover",
+    "at": "2026-11-24T23:12:53.398Z"
+  },
+  "consumables-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "blue-tonic: tall blue bottle",
+    "at": "2026-11-24T23:12:53.453Z"
+  },
+  "consumables-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "road-cordial: orange hip flask",
+    "at": "2026-11-24T23:12:53.507Z"
+  },
+  "consumables-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "fire-eaters-draught: red potion with a flame",
+    "at": "2026-11-24T23:12:53.560Z"
+  },
+  "consumables-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "witch-hazel: green bottle with a leaf",
+    "at": "2026-11-24T23:12:53.614Z"
+  },
+  "consumables-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "late-harvest-cordial: golden bottle with wheat",
+    "at": "2026-11-24T23:12:53.667Z"
+  },
+  "consumables-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "elixir-of-hindsight: purple bottle with an eye",
+    "at": "2026-11-24T23:12:53.721Z"
+  },
+  "consumables-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "dog-eared-map: folded map",
+    "at": "2026-11-24T23:12:53.774Z"
+  },
+  "consumables-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "letter-of-safe-conduct: sealed envelope",
+    "at": "2026-11-24T23:12:53.826Z"
+  },
+  "consumables-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "signal-lantern: glowing brass lantern",
+    "at": "2026-11-24T23:12:53.880Z"
+  },
+  "consumables-a#23": {
+    "verdict": "ACCEPTED",
+    "notes": "collapsible-shovel: small shovel",
+    "at": "2026-11-24T23:12:53.931Z"
+  },
+  "consumables-a#8": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#10": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#11": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#12": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#13": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#14": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#16": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#17": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#18": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#19": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#20": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#24": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#25": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#26": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#27": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#28": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#29": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#30": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#31": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#32": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#33": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#34": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#35": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#36": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#37": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#38": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#39": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#40": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#41": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#42": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#43": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#44": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#45": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#46": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#47": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#48": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#49": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#50": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#51": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#52": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#53": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#54": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#55": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#56": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#57": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#58": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#59": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#60": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#61": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#62": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  },
+  "consumables-a#63": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-24T23:12:51.357Z"
+  }
+}

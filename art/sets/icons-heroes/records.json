@@ -1,0 +1,3386 @@
+{
+  "emblems-a": {
+    "id": "emblems-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5bbdfc55-6bbd-4446-bb78-ef1ebe931389",
+    "submittedAt": "2026-11-24T22:55:56.200Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a bright green flower bud with two leaves; (2) a rolled scroll tied with a blue ribbon and a blue seal; (3) a round brass clock face with two hands and a gear; (4) a plum-purple hooded lantern with a small candle flame; (5) a red-orange zigzag lightning bolt; (6) a steel sword pointing up with a red hilt; (7) a round steel shield with a blue centre; (8) a magic wand with a glowing purple star tip; (9) a thick closed blue book with gold corners."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17401,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a bright green flower bud with two leaves; (2) a rolled scroll tied with a blue ribbon and a blue seal; (3) a round brass clock face with two hands and a gear; (4) a plum-purple hooded lantern with a small candle flame; (5) a red-orange zigzag lightning bolt; (6) a steel sword pointing up with a red hilt; (7) a round steel shield with a blue centre; (8) a magic wand with a glowing purple star tip; (9) a thick closed blue book with gold corners. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T22:57:34.305Z",
+    "usageUsd": 0.08176362511846755,
+    "candidates": [
+      {
+        "file": "emblems-a-0.png",
+        "sha256": "08cd4240327d11fdc92171c6b0fea489106e6556308b1d82aa09557affe7e6c0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-1.png",
+        "sha256": "7f193dbba417189486c329d55df238300a097a4ff7091cb818a94fca610caec5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-2.png",
+        "sha256": "adacdc8ad92b15efe16eda39e8ec4a81555acd45a69e30adb5afb60773f84049",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-3.png",
+        "sha256": "08c4c2afdb71e94b4dc5970476b51d39860178fc41b811923e5d7f6875effbb9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-4.png",
+        "sha256": "c55e2c280e29128e4003b8369b79594c61be20cf441e0857b4c58b663c115f99",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-5.png",
+        "sha256": "58a0547365dfda400d643022931d0bd11f3c816266a7c87a0ddefb66170d7e58",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-6.png",
+        "sha256": "97d5cfa9edfc4810f498f8dcc617362bb031edfd719dedd7d943536b4f2339e1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-7.png",
+        "sha256": "b813bf53f50bb4f8fe8ad6a0dac13d4a88e18727a11b54b029b1dc50fd5ed170",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-8.png",
+        "sha256": "07eaad86a7f96833f24afcf995a14fc6bb45deb4a994f62863366545af76d7e6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-9.png",
+        "sha256": "8b6aa0aafad17f44de8e738c7de9170743557f7f1855c6e6a94eff1358074309",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-10.png",
+        "sha256": "cc108fb08143e5bb592296cc5a771c6c466c42d4516f5b69e7d892487eff8691",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-11.png",
+        "sha256": "71a2dc709ea503a2095d1dca441c4211dbbe17d497f1948a798424d9588449f5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-12.png",
+        "sha256": "3b32462c440e7319d466934c01e542e2a767330c73ad4e3843e1ea446203bbeb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-13.png",
+        "sha256": "bbddb78ef544722f2e8c48cafc0c4490f86f03e3761a356897a7d3f492157e78",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-14.png",
+        "sha256": "eb74ad410e2c1256764762ba8fda06af610ac91d5ce544bcd6e7c8237f66b367",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-15.png",
+        "sha256": "b682cf1d596c627bd07eb944cb3cad49d90af742da9fb4cfbf456cf76e8cf2da",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-16.png",
+        "sha256": "1a67f267299fa8c28f98db1a86df9eb4edf6c0d52bac6e7931b562c18d8e5837",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-17.png",
+        "sha256": "825e54e523406552560f3beb3963c12bb45a52e573b2bf7e025419ffcfdcb940",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-18.png",
+        "sha256": "ab9ebf4512237f0c1a26abe49898f52b9be28fff1c6f528a37030e202b76af64",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-19.png",
+        "sha256": "58531833bc9c2b6da5e9e2285b4717a1cf4892ac58f0c846b1bf095368b55a13",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-20.png",
+        "sha256": "5f03940051c53cf6b32fce44ce0c17112a21abc4a8209211b5ffb33885d48daf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-21.png",
+        "sha256": "3648a74e55fdddb584d814d44e69fcf4dbe96f15888540fa07c9c68ca8b82180",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-22.png",
+        "sha256": "005b38f61779c53fe7a761b9624607deb4fffa7038c6fe190e96f0eb8813d59c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-23.png",
+        "sha256": "9877b9ada2e0c5b52c66ddd53da02434f4890942f11d8ff162f21e0d7e3cd93f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-24.png",
+        "sha256": "c5e3c5327f6e9f816ceb640f1a7f6632af0f155770f85b1a5271f9d05c0467d4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-25.png",
+        "sha256": "328b5daa4c500b75d73040debc1b4374c29737028fffa2c57c9c41f17c35162e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-26.png",
+        "sha256": "4e0138495f9fc49807552ce2566e216433e9fdf8cc0579ddc1e786c2f90c186c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-27.png",
+        "sha256": "bac31edf6c0a711aa2dc95c65e2a56e260a3ec1ca4d720a3da0f1a5492ff6bf4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-28.png",
+        "sha256": "c6135038bab9223c431f4afd4f96e565b11ada94f25726b0736abe561a0ee4ad",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-29.png",
+        "sha256": "859c57df89a7cd4967fb1f99b6f52944e303d103f8d8e86051f93cdb2823a66e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-30.png",
+        "sha256": "c9032844af17ac291ff821d132f68522989428041e12f14f6002cfac17dd3af2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-31.png",
+        "sha256": "dc9e581ffe3269bef74bfe4be2e197a23fcb669912968090a95d9c5739e9dcc4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-32.png",
+        "sha256": "b3edc3730711a31f8450cc90b2f416b2dfce7cae6ca7c3d6115c9ead1d326e53",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-33.png",
+        "sha256": "d0a7062b453225cfa7863d4666cb36ab2e1d14bbb2f6c1aa5933f392478f736d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-34.png",
+        "sha256": "1449f2ae5d2f1c91b3534544d2ac4a86ad59254c1748871d845b8e257e21a829",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-35.png",
+        "sha256": "c43b65213ccc8d2d9dc0579b68fbafb9a040c7b2d1bd96a5b2f139294f28a98c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-36.png",
+        "sha256": "812e50d7be8965231d64646afacf525be505e39639556d4301c56a15cf76670e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-37.png",
+        "sha256": "19812f1554ff684a74b94ec9f1db3fedcf4359d7ca647f7db20fe99a3defde42",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-38.png",
+        "sha256": "3ed401a4e04bfb20524c94a5cd60f47c1c28698576a5b80ae0af2f4bfe681582",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-39.png",
+        "sha256": "4b6bee9182df579569484ee5ee7873de5dacc7529c0e197e4a7def8e29814667",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-40.png",
+        "sha256": "034d052ffdd872e466ba9852be0b02032f0176b9d19530d795e51b6eb99c8922",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-41.png",
+        "sha256": "e079702f6df30904c8b4e96e724de186c2929030122f88c8b7ee8eabdd46ebac",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-42.png",
+        "sha256": "3d738765903dd3e3d80f34b8f96a43ecc1535b9ce447d263e3753d76bc67daae",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-43.png",
+        "sha256": "49adc42090519d4c7e2a37cfb8fbc0252a2db130e39edcf05fe2622ab5622b38",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-44.png",
+        "sha256": "0b70ea2d311fd4cd64bb62afbad90309e5206503dd747bd53412ebfc83cf6cc0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-45.png",
+        "sha256": "c2f26376063f15ab0b2b1cd3e0c98d9d9e119dca628d2dc32dc621eab3381314",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-46.png",
+        "sha256": "32bb8a6212cac3a2328f777ddf27f27fa7be720a1fc6c94d9e96a9039bbc1d4a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-47.png",
+        "sha256": "04d6b013764c20b867761246de98e2f7bc896ce4b38834a799e7f93ae422ad6d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-48.png",
+        "sha256": "51af84e644a28a35b104e2c9f45c1473c7f8fe9a41d298f68a2ab0153a4dc03e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-49.png",
+        "sha256": "d351dcaa59db211f1e808f438fc66e8d99d14a9ce3fe0c4d70c06d384bb8a277",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-50.png",
+        "sha256": "35f3fff4e1ecfe49983ccad5256b395e53fe78c14f0f9a7cf1355bb214911f0f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-51.png",
+        "sha256": "43b77920ac508eedc3df2a9ea5e0945994b3027d98b020bb59182f0d295f1e9e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-52.png",
+        "sha256": "fe1629fa221a8a14da15ec0018de8c9fdd65cef5dc518dfeae591926f56833f1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-53.png",
+        "sha256": "70db3056e32c68f680222dd2c8aac832bf5f95e36d751400dd4a3bef6430f0f4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-54.png",
+        "sha256": "4cb70cfbcad3d41915015b93facd4f30e7f3b792f7867f2e02fdeae886d439e5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-55.png",
+        "sha256": "bbf82819403ceea3e856cfa921cd60fe231ebf8973f4f04c4d4cb4608f59954f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-56.png",
+        "sha256": "632b253fc2c705445fb97fcac2587534004db8c548ac34d4ff61791d68890d43",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-57.png",
+        "sha256": "ee22f40d71071ace82133a95cf08bed9c6df4f82661564d26580a6382bbcb5d5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-58.png",
+        "sha256": "42e64b72fe136c474e27505a7e8b139e2e118210f40012066039cfc802dd471a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-59.png",
+        "sha256": "556ce92d613cbc842077ea8e8288fb8cd8fcde162008ff2cb5754f6867bad06b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-60.png",
+        "sha256": "4bd81e98c4b796640cf80b1187af77a4cffe85aab735434767b9cf5fdcb390d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-61.png",
+        "sha256": "c873da834ae1a987786b374d85e1e5c5b609a685a2a0292dc29c161a01e5727b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-62.png",
+        "sha256": "5a3a390651d53593d08b0ad1932c2eacd505f8d21fb8ca1d33940421c749b7e9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "emblems-a-63.png",
+        "sha256": "dbf320be60e4b5ee90768bb03a974466b8d04ceca76b6a6b52701906262c01d2",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "skills-a": {
+    "id": "skills-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "3142efbe-dc8b-44d1-bbef-db992792d2b7",
+    "submittedAt": "2026-11-24T22:57:34.392Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a green gardening trowel crossed with a big leaf; (2) a parchment treaty scroll with a blue ribbon and wax seal; (3) a brass pocket watch with its lid open; (4) a brass candle snuffer over a purple candle; (5) a dark storm cloud with a yellow lightning bolt; (6) a heavy steel battle axe; (7) a wooden bow with an arrow nocked; (8) a big steel tower shield with rivets; (9) two crossed thin silver rapiers; (10) a brass speaking horn with sound waves; (11) a red chess knight piece; (12) a red war banner on a pole with a gold tip."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17402,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a green gardening trowel crossed with a big leaf; (2) a parchment treaty scroll with a blue ribbon and wax seal; (3) a brass pocket watch with its lid open; (4) a brass candle snuffer over a purple candle; (5) a dark storm cloud with a yellow lightning bolt; (6) a heavy steel battle axe; (7) a wooden bow with an arrow nocked; (8) a big steel tower shield with rivets; (9) two crossed thin silver rapiers; (10) a brass speaking horn with sound waves; (11) a red chess knight piece; (12) a red war banner on a pole with a gold tip. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T22:59:22.307Z",
+    "usageUsd": 0.08195603799819946,
+    "candidates": [
+      {
+        "file": "skills-a-0.png",
+        "sha256": "892c026759131809b08c71b4b1c16fc378c6f229e91aee763f19d56f733cd622",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-1.png",
+        "sha256": "f7507d05d1d536260a08a6ec9d929a01a06ef67e27aac8916270a365ef2562c3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-2.png",
+        "sha256": "18f4d03eaced12d884279dbe73f006257efe14afa4c7860d2ecc35e0a6ba5a9b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-3.png",
+        "sha256": "679b5feee9535af41f3cc12394efeb4891740fbf88c07aff2bcb1344c66340ea",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-4.png",
+        "sha256": "b8cd6e0696c95b6b950e941b63f8f942d69e7d447623fe67095f3dc4e676071f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-5.png",
+        "sha256": "8bd9a40be0b635443258682dc4cb47d66127b4689588a35365febe6175dc1a37",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-6.png",
+        "sha256": "56b7cffe78e5a4a85d644a84485c28245ee56feb2d78540861721ec581aa443c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-7.png",
+        "sha256": "5cfbfc643ddbe53415ceaf15a8068904df548bc36f583b89602a760aa0f6492e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-8.png",
+        "sha256": "704359efad89fccbf25a7fda9546e02ceb3cd55e0b6345f26ef6dc381f2d53d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-9.png",
+        "sha256": "141b80eed8d40dc962f333c2c0ddbcd8011d026173d6e752c86c6496c9aaad27",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-10.png",
+        "sha256": "2a7bddf76677def931066931caf73e5cc0a3e2cb47e41fd550a1fe4f35016e1b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-11.png",
+        "sha256": "4f535ae445dbfe33e80095bd87436d5e8cf33ac83811edce2e1e36a0724f524c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-12.png",
+        "sha256": "556e6ceedd1ef5f616f7888facde669016b06be1e4053fd898b547e1921fed8d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-13.png",
+        "sha256": "faf7f3e9d693aaff8c48caeb4d162655cd929e097409ecba8c2bc5b7343a313c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-14.png",
+        "sha256": "439aef35526fdd57d437ca264dc8e650b9b455be1f418a85649f48fbc14b37d8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-15.png",
+        "sha256": "d8bbf8dee6d92e63b3f0e42b9730d2c74990eb66189092ce608db6ab1b4421b2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-16.png",
+        "sha256": "1370ff8dc53d1b1f70b71c89be1a80d3e7a261d9d175569bd83305bd3dfd1224",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-17.png",
+        "sha256": "2844b330ed0a8ab096dfee6cc8de4644350f8f789c10138a07b2df60468f323a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-18.png",
+        "sha256": "af2b420d4447016ce549b224f54b577e52ccc7818d29b2772e72db3a6ceb03f6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-19.png",
+        "sha256": "4a1cd6cefab6d7f7b013ae907314033a938b2c8ec3ab53365e68b28a9bd8fa42",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-20.png",
+        "sha256": "6ad463fba93eb1427af50449381bc75646363f2667dac8dda1e439349934827b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-21.png",
+        "sha256": "4d909b988c8d97ef0b045b4b4ad9cf2ea6db484748576cbcd50da3ef26826999",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-22.png",
+        "sha256": "82924c5ff5270c6e6fe9580b55eafb1d26d245fcb1cd15e8ae3522ae7dd3bc58",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-23.png",
+        "sha256": "b032d86d6c54307b6b49f8ee6e7298df940998dd637ad627a8ebd0e4458acaa0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-24.png",
+        "sha256": "4f51412cd5a87b978ba7950a13bdba59161d84be3256ab9c33ff2404fd4a5278",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-25.png",
+        "sha256": "3fe594c5685f14c64b0c47caeb139c7de1751346ba73a8d84884263b2332fbd4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-26.png",
+        "sha256": "2d6a7e5cbb2ba7a25e6cddd241350f00cd93f64ae8b9ca59ca303a804685ebac",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-27.png",
+        "sha256": "54f07082764a9a3696ffdbcac2925e1a4f0514896f6f1e06514f0506d4a14e1f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-28.png",
+        "sha256": "a0f7a1d8e141c5bf57833939106ee743303a53decb780cb78fae3c2664081385",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-29.png",
+        "sha256": "965b7ebd6493af6fd98c1c63029c4a6e14a4f2db491952fb66b3c85f204ed3f6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-30.png",
+        "sha256": "5747a25bf0deeb9fe1a41c5509506c57886f0410c267adfc682cc6e17a08cca4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-31.png",
+        "sha256": "9b92aab617e7458f81666e5ad117db4eeb14cb59ba535cfe5cab72966df1679f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-32.png",
+        "sha256": "c62ea5313d93d5fb2096eb041f18fdfa91080d0cca7b51f30487c196ed4ebfe2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-33.png",
+        "sha256": "3ef5141953cff9a00af9a9b0197df9a3aabb401d2f5f4e00abd285a50cbc93c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-34.png",
+        "sha256": "92038d1ac439837bff4d094a703a7b29a334067003011cfd18ee6afb2c7a742d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-35.png",
+        "sha256": "66430afda947044b11e3ffb4ba22797ece68dc9df3831c91a303d7b5a9886333",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-36.png",
+        "sha256": "3309a35310c22d787e2c8633605cfb92fb94a32763b3e6b719db28f18febcd35",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-37.png",
+        "sha256": "77a11bac62fd0f91a6780256d81c3e912ed329e75a2c17c60dbeb034f5729125",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-38.png",
+        "sha256": "2f8006e80d86d65659a2a4129c1ce9b659c6477ed46d3b587707b4ac96ab8a7f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-39.png",
+        "sha256": "d5f65a05df5f23e6fbfd882623f1afddcccd00c63828a8c80036c13ac502b5c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-40.png",
+        "sha256": "ab8f50b97a257c4b7704c2ab90fe115f9fa59791e1e902b927bee5ac7d738162",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-41.png",
+        "sha256": "4f02ed50142d16e6b3c9e29c1981cb43f288d7bb2e9439438e4f747206eee8ea",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-42.png",
+        "sha256": "7f3c4889f6a2a10f1b81dd6aebe4bf11acd260bb77f5f97a97e300bee57ff838",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-43.png",
+        "sha256": "ce3077afb1990d258983d3326b7fa513f4dca45f6297e1b942e3dd6100412024",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-44.png",
+        "sha256": "a8ac7636c7ed64b6dbd3b1aaf1a47cff9b7db6f3324dac44817ed2f3166bd288",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-45.png",
+        "sha256": "da6462da90e0a78dee105680b4665dea35e15c73ed51fcdd57ba0fe38081867c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-46.png",
+        "sha256": "29274ea22bd56cf8446ed7b3fab0f19c57f5cdca3ecab1e6882fea883bf79406",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-47.png",
+        "sha256": "8c483731ec3d23d45d89e7181ebbed12050414c9f11333526b5107552035bc5b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-48.png",
+        "sha256": "7594e2c72b58e007ac1a0a3a3282451d54eb1a90283b7d738fd1e903182a2373",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-49.png",
+        "sha256": "d2c8e760bd3676a4af9eef202c02f9bbf0a68a5827e625086c432e0ef8ca9215",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-50.png",
+        "sha256": "6e8f3becee08eb3442b48fd4de19a1d6927a1fc874ae6a40fe102ba75c99a1a6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-51.png",
+        "sha256": "96db2061d2dde5e52c410ea295b7e0bb1a00761807d4369431dabde6a314aba0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-52.png",
+        "sha256": "d113657258fa4509fa5265f12fcc09df30f22437dc657b84fedf110e6f116ec3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-53.png",
+        "sha256": "d3059c9b5fb35d841481e952c5634f866a0d0f19ba829deb83432499072d9a99",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-54.png",
+        "sha256": "eaf0dcf4d5b10e75e031886053361f07efd88be4527358ae03c0299cc29ca1cd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-55.png",
+        "sha256": "5bf055a246b219ad7f004f4fd4901023b0460800691b31f7a0de2461cb489952",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-56.png",
+        "sha256": "b524e395766a75627c040cd440d7f209798bd73090ca7c2597de2e4d3e7f0fd9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-57.png",
+        "sha256": "6a2214524f486243a349f9c6fcec3dd8462564a20938c8de1e30a9099a5aa7d9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-58.png",
+        "sha256": "3b0f877a115d02514af5642a329974c975b8c54450baf5987c135d51ee5c48e6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-59.png",
+        "sha256": "a3362b8e9ae568b70a5ca9a2db8af75b671aa7a2beed3cf0fe18183da9e1b139",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-60.png",
+        "sha256": "9ceaf1da1e717c22133bf14cc3f5e22574bde5fc77f4925e1ebae44783b181f0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-61.png",
+        "sha256": "78dea60a7cdd394cff129820bb5b2e5e2d7cfa082ca2f2a37e0e79d39d0b9947",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-62.png",
+        "sha256": "35862b637711c4f0503ba73a227daa094c9b68e816cf8c89afe332acb34b7d19",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-a-63.png",
+        "sha256": "d1ece9ac484fa7da17408a76e3d585d6536ff95e93a5be9c3b480f18f99901c8",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "skills-b": {
+    "id": "skills-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "47ed1c37-db21-43d3-a9f0-19720c1a1cdb",
+    "submittedAt": "2026-11-24T22:59:22.403Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a pair of white dice with black dots; (2) a silver whistle on a red cord; (3) a green bush with two eyes peeking out; (4) a brown leather travel backpack with a bedroll; (5) a brass compass with a red needle; (6) a tall wooden watchtower; (7) a stone well with a wooden bucket and blue water; (8) an open book with a lit candle beside it; (9) a fat gold coin purse with coins spilling; (10) a smiling silver theatre mask; (11) a little brown rat carrying a bundle of scrolls; (12) a folded treasure map with a red cross mark."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17403,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a pair of white dice with black dots; (2) a silver whistle on a red cord; (3) a green bush with two eyes peeking out; (4) a brown leather travel backpack with a bedroll; (5) a brass compass with a red needle; (6) a tall wooden watchtower; (7) a stone well with a wooden bucket and blue water; (8) an open book with a lit candle beside it; (9) a fat gold coin purse with coins spilling; (10) a smiling silver theatre mask; (11) a little brown rat carrying a bundle of scrolls; (12) a folded treasure map with a red cross mark. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:01:21.280Z",
+    "usageUsd": 0.08278168103430006,
+    "candidates": [
+      {
+        "file": "skills-b-0.png",
+        "sha256": "68d8b15ee33c26f4e859806bd08d5e15444964b7b7cce348d5b67e7dcfdcd691",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-1.png",
+        "sha256": "a204c52977dae48bafffa415ad60d954bda908c31414ac58dde2c89c4de3755b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-2.png",
+        "sha256": "2acb6b26531fdbbcf988fe0dafcc6f2419e844c87803196f774d83192a719f7a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-3.png",
+        "sha256": "0b63541238239b73ed8bb30b3175411617304e660d9f26b0fff5e11463075691",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-4.png",
+        "sha256": "90d7fc6dfef2ab32e50b56b41dedc4516f886dc22dd24bf7c3b40c6dc5baec9f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-5.png",
+        "sha256": "ba9920b9e8666d12be860d1de796fe77ab14a87a861f9c3de47ac5591c3872eb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-6.png",
+        "sha256": "6f75d409434218c71e5af4047576ba4f1cfd608c11c965aa9f61a127032d4764",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-7.png",
+        "sha256": "1b0b03ab923c9fd102a69c03288464959d064a129bebe9d096e48565d84c6717",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-8.png",
+        "sha256": "6ccb1b4319e89ac31e454f9001ab2afc81faac2b6db73ba06706b20bfb3b94e2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-9.png",
+        "sha256": "dbfc649cc76f42b3799c8ce157e1f6386241963a6e867142319b3115198e783b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-10.png",
+        "sha256": "cfe8bd8fe051d79e30d0f2c7ea7f38b2d6f40e74c7f183a3c61ee335c99630f4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-11.png",
+        "sha256": "ea81626f07fed104cb504a49b2129f32c47aa6a567e76ab40d3c4abccb0815a8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-12.png",
+        "sha256": "608c4776928782de989e6ba4d1d4895f393996f59ea29674bc4e3c509a225d12",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-13.png",
+        "sha256": "8a32cc5dadf7d474567754b1097a3bf2a234f5dd3f60dcd28809904dbae2be29",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-14.png",
+        "sha256": "01e884d5dda03f3a8763f61c86d4fb10cfc279fccb9e6314df81de47b47c6a54",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-15.png",
+        "sha256": "10bae388a3cff1604a20f8156d1cfc875a34186af6712fa1304520485ad15cc1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-16.png",
+        "sha256": "3d12c040e49dcbcd16b61c19ba8adb990f19a5ba25442ed9b4479266c7cb6596",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-17.png",
+        "sha256": "26c9edcdd8b96f66b89d8ab92f987788514a066c07558f82eb139821e1fa48b6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-18.png",
+        "sha256": "2daf0617c1a4a3b95255078f1ec13c15eae6c8511d5ab05127e4962d48957fbb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-19.png",
+        "sha256": "399da5f452af33d465b02c2ce65a3a8a378bfaa88a627faf356e8bbcd68f8ec3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-20.png",
+        "sha256": "efee16a30b40fff45ec1cad03087aab5d9ded46dba39e1be48a925874ceb7f98",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-21.png",
+        "sha256": "d52aeb9dacda1ad34d5059ce25e78da6bb62f1ff8ef56d3732eb4139ee0e8d20",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-22.png",
+        "sha256": "9621c6e3f03e99b2a9cf2b06c97588be2f79c124674d27598945c708bdb3ebd1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-23.png",
+        "sha256": "77585b90ef4f6046bf8f6a9171cf8d45faa14539f849fcb8c5820a4174ff072f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-24.png",
+        "sha256": "fc34916746020bc3ef914d99b121de457e2ebcfe183c4322d5d3f1f07db50c3d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-25.png",
+        "sha256": "95ddd04db48515aabfc23d911bf51b4a2aa42c7cf16bd94275a3ca550982b565",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-26.png",
+        "sha256": "4365252d4667a202b5f8efb2ccfa09279ddd53b27bf8862e85c723397e11d1e8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-27.png",
+        "sha256": "603a1aa2dbbc07c7c06c844a550aadef33bda7031cc04bd568a3bb9e7efc54eb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-28.png",
+        "sha256": "21b2cccbcaca3ef501d3d043c8ececc8c8a976678309fd1721756b57b3330411",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-29.png",
+        "sha256": "db46bc99bb60967fe866be7b7dde870a133c7e52d812e674175f0fae55bf19ef",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-30.png",
+        "sha256": "195b644097502b502b5be354476291229a0bf2a5f8e1dafe4e9bf2aeda89e90d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-31.png",
+        "sha256": "5e818fbae9b9ba8e6309392b255294ea70e9bfb8dff9b9ab65164d9cb400985e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-32.png",
+        "sha256": "7cb08ce0b058bf37bad6302ac54fca4f6a66404c6fdceede52097e087aeec736",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-33.png",
+        "sha256": "e9c17cd3b2717f7c9980aaceaaac04fab4751d914a2b15a41eb48cd16e50ebeb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-34.png",
+        "sha256": "3c3f04d0604f3a6af852155ded208d73473338f72ed0b00717165cb4bfe069b9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-35.png",
+        "sha256": "d6771a085dea7072161c72f3327e5bdc00b72188b3a031dfd5daa92e1003ceb3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-36.png",
+        "sha256": "c040804851b66fcaf99d0e0d3252db40e173aa6571d8c083b8088e4fa2c4b036",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-37.png",
+        "sha256": "7f1265e792feb024ec481f7a7223409b540ae66c0fe005d9fe06813d1c689677",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-38.png",
+        "sha256": "65cdae0832a70ddd718bdf34538893d60119c8de050ed2eb5e36312840317f16",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-39.png",
+        "sha256": "a39a69104196acd228cf6d12a30c840bfd826cf3c49019fb797294c328a8f998",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-40.png",
+        "sha256": "55527d5c725e3021bd8eda37b00f12e184132ed0693414e921dcdad6259ab2f0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-41.png",
+        "sha256": "4f2f2084f9c98f17641153a71d7f2cfeae6f03a35b6b2e62c10d8adde0388725",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-42.png",
+        "sha256": "4f73146cc99d136f673b4731d9d14a2f35e16d21e0367136e07a1d2626ccf399",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-43.png",
+        "sha256": "e5366a904dfd6b40d2dc274edc73cd75afbb7ca75b8df01222eb258e2f5e1f64",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-44.png",
+        "sha256": "efd9eb6d1a7f5e5fda8a0366c590162b5505535b555db31383162f84fd468363",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-45.png",
+        "sha256": "8e4fba5a1db8ff913f32bf747681878e19a88555a93ce91232a926ebf1e53568",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-46.png",
+        "sha256": "71c7c93483e67ae459d2beb336048d69ce8ce27d3e3feb450dfa00216575476e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-47.png",
+        "sha256": "438caf34d84af9941077d28af2ec79d127bbbad2878dc5e42da891909d4c02bb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-48.png",
+        "sha256": "a6f019ee934b3a2d17c0631f7fc0ca74260ca5afd3a93e6df08282a0fcd76499",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-49.png",
+        "sha256": "42f0f9500983a5268e45a88779fe10b9784fa726f15d9019c8126bdd01dacd92",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-50.png",
+        "sha256": "3d34be4447d891b8d084b1f7c927182475e9709ac267f1c3a77fc3b578b5021c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-51.png",
+        "sha256": "283c7b9be9bd07b4c552691439958fd46627506b416f8b4c42d5ac382eed4573",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-52.png",
+        "sha256": "33ecda4d8757db141f1e2669154fd533933bd298a59e66dadcd3c9aa048e6455",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-53.png",
+        "sha256": "d519dea96bde8bfe1cc30f335a6c7726a7cf184ac206eb5e36e26c448d84979c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-54.png",
+        "sha256": "81fc07cfa102930cc8380f449e9682ede2b0dc2a113215652ada8a433937cdc7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-55.png",
+        "sha256": "192aee953f1f85917662cdd3bc4f1fc5f9f72e0ba4079ed940a10da473d6de62",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-56.png",
+        "sha256": "7a8290b6cee4446c6f099c34a11ccaca43eb395a24042c84704d4e360cec4fb7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-57.png",
+        "sha256": "3b07d5a1880fdd0a9cab7c75cedfd372cb444f8f1bc3d3ad00906d5a00de70c7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-58.png",
+        "sha256": "147bc3b8bf80df5e57420955bca1a26289353a72b8d619f3253fbea5d6022e91",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-59.png",
+        "sha256": "4eeb58a5a7c1aca24c5f87a38171fa76ae7a11942338b9738669ee8561553ca0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-60.png",
+        "sha256": "03f97f272ece36719046e857cd8f029c8a5531ff4d96eb37fce50bab1e731809",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-61.png",
+        "sha256": "24dc3c2f687d5e6f2b32d587828162ad17541ad9a26f441f54b8f7b3fa5d8b69",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-62.png",
+        "sha256": "9fbc6e90a408b9f6df91ff78ace2cb6834cec1a55905f0e9dae4f4fdf5054b0a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "skills-b-63.png",
+        "sha256": "d43f1f6535c35bdd6121877dbaa29628b59e2631e56e3aa5acebe642fd8b10e9",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "feats-a": {
+    "id": "feats-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f1250bab-5e27-45f0-b688-52bc3ac2ef58",
+    "submittedAt": "2026-11-24T23:01:39.733Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a tipped-over cup spilling purple liquid; (2) a big bonfire of crossed logs with tall flames; (3) a curved brass hunting horn with sound rings; (4) a curved sickle with a small bundle of wheat; (5) a pale blue glove covered in frost; (6) a wooden pitchfork and a burning torch crossed; (7) a gold coin spinning in the air; (8) a round brown seed pod with a burning fuse; (9) a brown leather doctor's bag; (10) a green hand giving a thumbs up."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17404,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a tipped-over cup spilling purple liquid; (2) a big bonfire of crossed logs with tall flames; (3) a curved brass hunting horn with sound rings; (4) a curved sickle with a small bundle of wheat; (5) a pale blue glove covered in frost; (6) a wooden pitchfork and a burning torch crossed; (7) a gold coin spinning in the air; (8) a round brown seed pod with a burning fuse; (9) a brown leather doctor's bag; (10) a green hand giving a thumbs up. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:03:37.591Z",
+    "usageUsd": 0.08324816269344754,
+    "candidates": [
+      {
+        "file": "feats-a-0.png",
+        "sha256": "4c3aea6d56303956828c100b2fd18c2e8d1f8443fb69c5d9a37e4d664f450875",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-1.png",
+        "sha256": "294fb87c2c6cf5c9bc0f6092b9aa880595933d1a38e9c8c2db78a0de8507fcc7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-2.png",
+        "sha256": "ba8d1ffc0f0f1afc9a52717e32f70b1a4ce8004250a439b764dd5be6a45c596c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-3.png",
+        "sha256": "ea801da1b671bd1f9195285baf55d6869ec1c0b5d46c3f8011e7719d3e54f0e2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-4.png",
+        "sha256": "0b5e6e45ebfd4c495c092699988fb2be0f8290b822ca55031d967aab0cdc898b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-5.png",
+        "sha256": "077d3ca06e5f79432d16051f4e48ab8330635d39759b2bbb306790902ad64401",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-6.png",
+        "sha256": "252ce3b459d9e1608558fa09b34166d435096082d55861c8d69ed7eb0f5df454",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-7.png",
+        "sha256": "469a38038da1d7a00d28c01e6c094b0cdb066b71c504f4039c378185bb804f3d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-8.png",
+        "sha256": "c986b1e9a2d117aae41f8ec1aae72a6576d638783d017abf7593798772f1a500",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-9.png",
+        "sha256": "24ee96d341d4ce4e1f17dd3550c7750efc6a8ea12e74de21cbe4ed0862274316",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-10.png",
+        "sha256": "818286144189e30dc63fea307f34933f2c7639c6ec54f7c9b182a4c3a99830e3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-11.png",
+        "sha256": "62721f58f4177d2737044db36e55c7d7cbc38d3e005de2e462274fb221d91b25",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-12.png",
+        "sha256": "52ab052688ed6ec706b8659aeac7c99412e3562d24fdb0c10bb1fc9e13ae3fca",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-13.png",
+        "sha256": "c3852831d480520a902872acde881b0eb6102b81b9d72ea1329fba6264f77180",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-14.png",
+        "sha256": "712e2f36d9bd9ebc824e65f71af491cc222a938bdbc9aecedde8544574e51380",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-15.png",
+        "sha256": "a3122e22c87220c3fa320df84e66c3e3384fd8e83c47774524cab12b6f29ddcf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-16.png",
+        "sha256": "191177dbe403fa9034cec693ac6fffe6eef698eff016b1b39f5ba1ebace2f7f0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-17.png",
+        "sha256": "040e93dd464e03049cb783c2559887c4267cace3e446e2dcb9e1785b3e3db4a3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-18.png",
+        "sha256": "d3ff510050be4b90dbf0d7bc33dfc829e10106a196052510015530d51d3587ac",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-19.png",
+        "sha256": "2cd530babd0ee21e74bc20e86b18035e9bbb6911e9e73c323977e66e22b01235",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-20.png",
+        "sha256": "d64ba9b1f950d4d3b93101512507d1c1783fd353d435051da3c966a56d689e43",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-21.png",
+        "sha256": "7c385e42350dfc7c731cb2413a157a7928e3c68cc0019b4d5c7bffb39d0b2bf6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-22.png",
+        "sha256": "f03071f9877fd8de2fb4f8a29ac5e2305e64a05849fa1e64eac81e94c7eb214e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-23.png",
+        "sha256": "19c20f6da81e0089ee14577d85aeae7bfe4d363b2cb0b742dc004a54f2dda658",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-24.png",
+        "sha256": "ada9cc730fc22d6889d5b8d55481acda8b3ec60dc3e31ae09de07ffabe5033e3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-25.png",
+        "sha256": "03bff69778c715590901001e9ce71d286ec72296e498e81e597b5c136e1fd4ce",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-26.png",
+        "sha256": "bae2f9a5871ad2cce380ea84a3a740e0345a5eabe0e2acf51a17f7a00aaf53a0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-27.png",
+        "sha256": "b8c45f27b6806d953a4cb50df98595f80750a0c9a6ff7756f2f42dcba656e63b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-28.png",
+        "sha256": "1362b28d7da08406b50f4c0c26a4cb60437cf64ea424a6792acc038df791a2ce",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-29.png",
+        "sha256": "7227cd2bec79b5984e9d7c1bec2a58c2ee20f3e73dacba37dd710469e02aa8ca",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-30.png",
+        "sha256": "1286d8876b1dce781fc8f4bf5c23580e360e6b517917b163d5fbe92070cec399",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-31.png",
+        "sha256": "51a433889871baca827ef72e6614427435786191c60dd5559f47f2d75f72ed61",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-32.png",
+        "sha256": "cd19f8078368a72a15504994fe86860c506a37509f58f467045fac652970c636",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-33.png",
+        "sha256": "72876f22bac47d7ddfee4a0b1a34a9ca23034ff01099f69fd8edb6402a38df95",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-34.png",
+        "sha256": "cc7a3dec5d2963b19390a322d04ac0021ddc18ec7abea30138ec5bea78f83755",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-35.png",
+        "sha256": "e40bf32d98e6a557a5fc12396add35b79e34577b77c92a42274ff044309c898f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-36.png",
+        "sha256": "85699913cb0c849e257b0346be4156f89f461e52de27a88894665015645d69bf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-37.png",
+        "sha256": "d53f07d8d668eb9d1f1c753b820af643da88aebb4c7df5eebfa80db970c47800",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-38.png",
+        "sha256": "f4795b2356d040203006509c5a22e096e3e924fc362348f17a451e3e13924aef",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-39.png",
+        "sha256": "e581cedcf70adc1a4e36f385034b0192a27daa88f5cc61b598ac4931a01893cf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-40.png",
+        "sha256": "c5ff3969e3badbc10c65062a4c45b75e3f270b8c0b0b21f489a3fd3482b092a5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-41.png",
+        "sha256": "2e893b68a24885d7c91834b938cfe381ea67741dc67b1b1f116935293b6b2cac",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-42.png",
+        "sha256": "54c3cdc5decd6a457ad4627d63823cb958943870d7d5744fe22f6d500a8ed6b5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-43.png",
+        "sha256": "841097e4de168ec505d0f2e57b1c1c0eb29bfe9a00517eb43d172f4cc9841492",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-44.png",
+        "sha256": "58f89252beae27376c8e34088764d612da3298061ce2a2cc6af368f52e424280",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-45.png",
+        "sha256": "473570ada43a36ded98e188034cd4e65b8f4628046de5fb2607544bc22f8b439",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-46.png",
+        "sha256": "2de06417a35f6f31036ef14d1a31363554bc54cf4408d9932157e2dcae5a1f6d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-47.png",
+        "sha256": "ad20c773964ba917b886116fa7361fdc9ad93572e63414f0f75ad8a22c753783",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-48.png",
+        "sha256": "76676fd12caa75c3427d9062446cc953ff5bfa7c4211e5a67e457941f8d86cbc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-49.png",
+        "sha256": "2d023cb3f1273b742938677be3d20b2b5fa2e0e1cc0e4a00f9054888bbfb195e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-50.png",
+        "sha256": "ef6a8343e84e2a32f4744a0cc7e65a992f918e72cc6e1453880d10a260d7ad53",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-51.png",
+        "sha256": "cd9cae39ed3acb2cc53b16afccb90909927c3494b1c019c22c98a4a615e84839",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-52.png",
+        "sha256": "eb746d8de32bafeaec6497a0aedadb8e63094c5b70a4317801f2bf6a9e7fd5b2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-53.png",
+        "sha256": "3d9d2acb4ffc8a031f70d05ad58c476ea5926914576584e07834a7c949f0c557",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-54.png",
+        "sha256": "0c9a1a51c633fc584f15bc5de39ad952c21bbe25a766e1112b1591ce5e6c2852",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-55.png",
+        "sha256": "5ad66c8cf6627e74fbc222c14a2a2761254796b58cd638db3963ad0be7298086",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-56.png",
+        "sha256": "ab6ab87fda9ba82cdb0a0c03057c69acbe95a6833d68937be1da60b168b5ff18",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-57.png",
+        "sha256": "397d8cca3d9dbc251518f1dd78a04ca4d5721e4a79dd53bcf7bee6c2637c2f3d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-58.png",
+        "sha256": "41e588c7533c760f63a8dfc1722a9568102db8634d8242e26a9a1e403da45ebd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-59.png",
+        "sha256": "ed305dfaead305413530fbe5942f64746d1c821ebee97f4bb7c2169b45d953fc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-60.png",
+        "sha256": "2087dfde420ada690728b578f466fd7d24eb73257a23e9210d5206a06611e723",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-61.png",
+        "sha256": "57d0c0069056dcc48318022a6e6ad95b7e2b3859068378793138163bafb903fa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-62.png",
+        "sha256": "34d04391d1de67e9c3bba1fe03b2c3ed697b9e4a42ada491b80918b7518392ec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-a-63.png",
+        "sha256": "b11e49335c474a25c8121012dde739b0770e9a2c00e6e9fa735ed45c02e85c63",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "feats-b": {
+    "id": "feats-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c240c39e-e19a-406e-9499-41b8db968d10",
+    "submittedAt": "2026-11-24T23:03:37.686Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a thorny bush with purple berries; (2) a spiky brown burr seed ball; (3) a wicker basket full of apples and pears; (4) a branch with apples falling off it; (5) three round wooden shields in a row; (6) a round hand mirror with a blue shine; (7) a white dove carrying a green leaf; (8) a pair of red dancing shoes; (9) a heavy wooden mallet hammer."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17405,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a thorny bush with purple berries; (2) a spiky brown burr seed ball; (3) a wicker basket full of apples and pears; (4) a branch with apples falling off it; (5) three round wooden shields in a row; (6) a round hand mirror with a blue shine; (7) a white dove carrying a green leaf; (8) a pair of red dancing shoes; (9) a heavy wooden mallet hammer. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:05:26.521Z",
+    "usageUsd": 0.08313607766893175,
+    "candidates": [
+      {
+        "file": "feats-b-0.png",
+        "sha256": "8074daa7ebd91eebe4d5409520df6ff3f9811cc5f793e4f812b3024d7869fbc2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-1.png",
+        "sha256": "8dc8d43a08da401fb6302d8ad08e758931989963a2bcfdce0fb8e784ec088de3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-2.png",
+        "sha256": "37e715d56523c5dc529c2f0d09951f8a55bb0f4e2173bfc2693261f484136e5c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-3.png",
+        "sha256": "1be7e14232472aafbb2ce80ebece2b37430a09324fb122785261519e1f76505b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-4.png",
+        "sha256": "1bb3b101b00e95050b631fb266056120c6ae8234e13be907979e9f52b3f1050f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-5.png",
+        "sha256": "8b9cb4ba3719edc46bc1b44eb1e0e00b6654c617bbe57446b90caa59f4b6cecd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-6.png",
+        "sha256": "ad89d0f3632ede7e7c9086de511f8ee6083c60adc021a1f19d3e1b7d2eefa27a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-7.png",
+        "sha256": "4ef123487d01cd6fc5dd6c41d04c8812ebdce485fee75798c3d181ad392550bf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-8.png",
+        "sha256": "a59d01117a937cb61c0d9a1aa96a2a36e0a0eb30d9128def3b373115cf5de8c9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-9.png",
+        "sha256": "f07944c1686ef58207a43932675b64c68c21776dd78dbcb4d45eed5379ba8119",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-10.png",
+        "sha256": "32dcc620e42a8c55b1501125f37b9219edef1242e81e87071d6d1279458548aa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-11.png",
+        "sha256": "9b66aab6946f15ee9059226ab42f1adb327054a5e618571285849a72fc5243d8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-12.png",
+        "sha256": "09ee6d81fafd6b0b63089f2961fdc72b2dd7fb48081973b0fd277ba4c2e87a91",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-13.png",
+        "sha256": "c3f37425245fc7fb791610c2d199b0480e554ad73bda55d3f4f0abf84b995708",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-14.png",
+        "sha256": "b8de9640b3b69b00a2abb28d89fa3a6dee93c4d58d78aaf246ef71cee6ead0b8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-15.png",
+        "sha256": "d40bf511e29c7075703fb6ab355071490fb9b086e0322f9951518dd727bf37ce",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-16.png",
+        "sha256": "650f90d906afdb71ca68780ed9aa9e165e8344f8dc5c4cac1b05b87a65dff9fd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-17.png",
+        "sha256": "b552fe18219f2ac8252ebf0139fd1c008d6acf178c4ec21f0a903180775e9b75",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-18.png",
+        "sha256": "40426b781f9cae8ec73ee0cff326f57fd2f75214b22da219a77b17b23ff64822",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-19.png",
+        "sha256": "0102162793213c3c83db8cc2655cf943373cdc4f10b81a8243399a88a23dbca4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-20.png",
+        "sha256": "43b505dd7ff79cfb3a84f4c2798caa0163b03fbd3a09df8d4dac45023cfedb79",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-21.png",
+        "sha256": "c8b0f2fe6cc7d758c2d665017b52f1679abe14dcb36c0f9446d79a9c84eb922d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-22.png",
+        "sha256": "17d412bd8a74ad896e6cead9fe1b307270de9e15f5cb8f24a7ff30cd2a94470d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-23.png",
+        "sha256": "fa323932ffc931477ff0610a408f4df491d728f003a6c91b04d1d5b0531a94ba",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-24.png",
+        "sha256": "8f9a94e55738a7955a96a4cc379c336368cfe2332f185514828d9f37eacca14f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-25.png",
+        "sha256": "79d173e162be7a911d6d70e36f9a5a0bad9c8d6e3384f1d51a4466b297a8f8c0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-26.png",
+        "sha256": "02283458abb5052b2c5b9a2fc8f3c799862b55b236e572af02c110461e5b6169",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-27.png",
+        "sha256": "5b17b9c1059fbbd31eedb46bef9bcdcc7bea14fe4c698853d5708d027053c2bf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-28.png",
+        "sha256": "fbf9d0607da38a28da5941138c8629b8d18862dd524d52e80ded166b4e512166",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-29.png",
+        "sha256": "1416dff3ad6bf40c80d5a6312847a0adc325de20804bc239a3e6929cba6a8328",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-30.png",
+        "sha256": "25578bda224a9eb190ebf5dcce837a95c9f048b503eb1ba3290b14332cfc0326",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-31.png",
+        "sha256": "c28e968259a85fb48e0e35f5efae9d950b57d80c375d7685c48cd459595bf94e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-32.png",
+        "sha256": "8b61140de1cdf6cc34370ee0a1b86e47f3501e890b22803a1f3c283a6105831c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-33.png",
+        "sha256": "b9798ada9b6caafc6455fe1f65ded29dc069b4bfe5e721047bb5cf9c8c0f5be8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-34.png",
+        "sha256": "9a1d924de0699d2772bd9699562d7379da70ec27c8b1b79169e42f7b7f14aff8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-35.png",
+        "sha256": "63c9c5e288b876c4223ca91a8d9afdccf2d47fb0e15889de4716e263c705b8d1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-36.png",
+        "sha256": "01c03cf6e4411a35723e1117395b08ea08dd153651d88d9b0e87d961a87e4ff6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-37.png",
+        "sha256": "7fa7ec1b89360232dbcf601951729bea3ea2b9828b1ac6e528d19d4dddf93091",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-38.png",
+        "sha256": "c702c88434852bf4d830879744b98369bb54f10e37e2fdd1be186c500e6f595e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-39.png",
+        "sha256": "a1decd505a7403362826887bb8cada96c62d52ef3a06d9ecf43580043edfcc41",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-40.png",
+        "sha256": "37da3130c1ee9392859720037b0962f43a6b9e7d3c9ad824476321143f90f633",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-41.png",
+        "sha256": "b6b84c495325f3ff995744799702e270b30ca78e71902078b2ae5b06d6818848",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-42.png",
+        "sha256": "d03e888761627711801d098340b285f3be6071e644eaf65ff9e4f8f6166fa0b8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-43.png",
+        "sha256": "b471937bb9cba80bc16809ede7ca4b54dc8b8d156d9cf747517c9f2741b93a40",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-44.png",
+        "sha256": "d64f3717d7ca1ae3ed58e1f5127315dcea98dff8cef9b233ed8fe88a5613f6d1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-45.png",
+        "sha256": "debe7a882996af2157dbb1ea39b98b9e7f9d7b8307f861b1a0000477b739d032",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-46.png",
+        "sha256": "83d990cd92ff1de02b4573dccefddb15a4ef5c1c00fa1020f685256aa0d6d91d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-47.png",
+        "sha256": "e88be6efb5815d31582b7b808047d3ec3409df86e5f5d793219c3e064e25b3b1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-48.png",
+        "sha256": "07c20093215ed1a7a223a66295b5a965eae1ee2ec1e7425b46b11ab55bca609c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-49.png",
+        "sha256": "6b6e000531dd40e963a35a50561c3010e251befdb2e684ba9c605d66c594bf48",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-50.png",
+        "sha256": "b0fa30d7092c5769a59166b165c2baea5b5b2fbecb46a30338224569c9006ca0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-51.png",
+        "sha256": "ce683be9bfc377dfedc0468da374a9ff2a758521580c4f515db509dc2b4ae67b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-52.png",
+        "sha256": "1d7afad5dfb040b6c852bbcd97c02977f48b3139130f83369b29985b715822f6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-53.png",
+        "sha256": "4bb38087e4d533a5b349078aa93f21a48ea059ba7893393746b28bb6168220db",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-54.png",
+        "sha256": "c653edd1b373413e7846346f8435782a3104ca41a8f9a20a54b2582d59b2baec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-55.png",
+        "sha256": "0cb8315da06217a43e2fca9f6e343b197bef4aee9cd458bcbd9389f51984e582",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-56.png",
+        "sha256": "177fdd796828b03924cd9be6067700edb1e91bd714fa2c931948f6c6045b6136",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-57.png",
+        "sha256": "12293890a8609cc536fd8ab2bd4de5c572f63b958d417554f18c99c794d09c4d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-58.png",
+        "sha256": "561c24f0d96927fcff6c6fb204b33a8159def7514a67ac36d6ba6ec8903dc9f7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-59.png",
+        "sha256": "1eeb3332e77dcff990e73f5f471153e77519c823b648e45de0c2c5bebeae9439",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-60.png",
+        "sha256": "0381cf3f88fc846405779238dbcffcd676a1743bdd4a83f4fb6e95718edb3bfc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-61.png",
+        "sha256": "ccddf0138fc156d6d5d90b39099f5e5dfeb846321328bdc77ad321d8c83e7671",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-62.png",
+        "sha256": "7bbe981e1bd1d3d28c25e44ac548cb630bd26743e5fb6fabee457be1295ef0c4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-b-63.png",
+        "sha256": "5f4f1156565004de78beab096f10bbed053944b3544f7083a0bc5687ee478eac",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "feats-c": {
+    "id": "feats-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "be431f34-305b-4a9f-a99b-2050b26d281d",
+    "submittedAt": "2026-11-24T23:05:26.621Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) two quill pens crossed over a sheet of paper; (2) stacks of gold coins growing taller like stairs; (3) a big iron padlock; (4) a red blood drop beside a small silver knife; (5) a red blood drop next to a blue water drop; (6) a wet black gunpowder keg dripping water; (7) a blue lightning bolt zigzagging between three blue balls; (8) a bare foot stepping on orange flames; (9) a flaming sword raised up."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17406,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) two quill pens crossed over a sheet of paper; (2) stacks of gold coins growing taller like stairs; (3) a big iron padlock; (4) a red blood drop beside a small silver knife; (5) a red blood drop next to a blue water drop; (6) a wet black gunpowder keg dripping water; (7) a blue lightning bolt zigzagging between three blue balls; (8) a bare foot stepping on orange flames; (9) a flaming sword raised up. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:07:45.412Z",
+    "usageUsd": 0.08176195255915324,
+    "candidates": [
+      {
+        "file": "feats-c-0.png",
+        "sha256": "0c7f54616b076e01a116aaec0aed901d8240566f71130bb7fc0bb475ce1c4888",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-1.png",
+        "sha256": "bf77530cc55bc74e482d25ff47c3cfa9eea9a27bfc0e417ce80f7e354b9440c6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-2.png",
+        "sha256": "f9df97f95e611640c7411b4cb39900d3e4ce915f204748c3c73b18e10874049b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-3.png",
+        "sha256": "b4675bfc27d85c4370d0f0ac6f51a8355329984696160dc6e8b21205d893cd9d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-4.png",
+        "sha256": "1994ad879f0ab34e55213ac09bd2adf75aea86219a17876f43f35c686e46c738",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-5.png",
+        "sha256": "6e197ec526e64fd5b81397e2c6057efe64ea94a0bf6b63a33b84f856b66de048",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-6.png",
+        "sha256": "bcf143bab650a8bacc0ba3da3e6d264df213adfa239744ab70af41153476872c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-7.png",
+        "sha256": "deab17d3777703b7308c8de388f0ff56eae2bb403b9f67ecbc5602b074cad66a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-8.png",
+        "sha256": "996813a2bd2202fcb020411a1bdc5bbc243f286e4629927caaa33095ce06207a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-9.png",
+        "sha256": "d6d28cd4b11a36cf32da1d32c4f98f0dbd8fdaf612cf0bffb6c08d8cfb6ff3d5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-10.png",
+        "sha256": "c5c2106436e4792df965da1deb10c26dcffc62dea307e3bc6406e8509bda503a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-11.png",
+        "sha256": "5246694b5dbf961d771cd7a77c69f6d75e15f200811fce0ec1f5fa49e64aacde",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-12.png",
+        "sha256": "71d7c44219d1edc4f3e6ab11184fee574bb6a7088382e1a0be24b71901f1ab60",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-13.png",
+        "sha256": "0bd9054e75c6953aacd06ae4ce94924692945bc04bf2f2346dcab8931792169b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-14.png",
+        "sha256": "d56c5be9dac86a863bc2b61ff3a7992fb03ee453966080e66e08dd80f834611e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-15.png",
+        "sha256": "95b7207576f00d7dee779f5c53c9441eb1eeff4603120c71acfa1ebd8cf7d3db",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-16.png",
+        "sha256": "56018b3a0fb2d4628aa358de9452326a6456435fad39eacc840187869d1d3a6b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-17.png",
+        "sha256": "0f301471acbf088269606c6d619f529b14c3efe973e9ed7a54f978268418c747",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-18.png",
+        "sha256": "934b354c6918488e3a9786eec5223fdd4d1d70c405da5353e9e569cc2d990616",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-19.png",
+        "sha256": "4894aad6a137dff09b402ded6fe9ad934443b836c2bf7188dafd22d84226bec2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-20.png",
+        "sha256": "ea0583b09fd97522a4f016ee54d893dba3582ea03806677801d2a59310648b57",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-21.png",
+        "sha256": "0789414a11701be87c5c5a01e0f0654c24bd49cf2de2066275c16882706be89a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-22.png",
+        "sha256": "a0fd120073d2c0a18a6cec0af70ce6c5dfdb1ce1fd74fcca66c7adc9eb6e371c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-23.png",
+        "sha256": "47ce90b9a4d200033987325e72ee35b3ce7203233a9ab7179eea6fdf6a0c5dc6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-24.png",
+        "sha256": "e2aafbd60d78221c7458c43639f9ed0b600858f6e77b4a0f88018e796ca988dd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-25.png",
+        "sha256": "48904e167a7b59558467c4b7d5c3ae785e130fa4d6bc3d0dcd7e308e9d12acf4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-26.png",
+        "sha256": "70295f178944b9023c3da408ae74f981e0fbcacbcdb0dc4d8ef40d3b51a1f047",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-27.png",
+        "sha256": "879fcc2f5a075a7db3830f7452adffee4e0434529ac60fedf0ad71c9298d459e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-28.png",
+        "sha256": "d632ad3ebebe5fdedb446559870d80170bc9fc6343651b9ad9ce49125e54df52",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-29.png",
+        "sha256": "53a8e7193e71755888fb3993f77259e4b51601ad664fe533ccc4b57d3c6335d3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-30.png",
+        "sha256": "369b10743e5f32cf352bbbd36cea4459bf2832be11f0ef0c1337f2f26efba625",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-31.png",
+        "sha256": "90ac6668d0463f66cbf76215a4acd833804310e6b0b80e2fb6be22f384621eca",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-32.png",
+        "sha256": "8e351beaafc7a7d20d738abf4a62c087143a66bd804e75723edb7244a0645996",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-33.png",
+        "sha256": "3b8c663e415c66f31a324a15b86da5805b48d2d72529bc69218d1f9996547d58",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-34.png",
+        "sha256": "abba1b4905465b9b6b77fb9dbda80089fc9c27dcb09df386352a1c5466c6cc28",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-35.png",
+        "sha256": "4cb4538c1e1cc9ded7fd5de29093e27f18b21fb23e39507927531cf01978ee29",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-36.png",
+        "sha256": "710dd65fe1d6751b3c43831debebcb1c2a52cbc918e9539bb02d667ff86f7996",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-37.png",
+        "sha256": "84a372943aeea64b9b79c8b6bc19454166ab5c59329a1f61b10092c360deb284",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-38.png",
+        "sha256": "309e844be22384397552b0375b6ed370cc9f12d7d2d67c216d3bfa0d58c3e4aa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-39.png",
+        "sha256": "51943d2c69ca1d8e28d4d45c7e9c050c09a429c96a48c57af76b26075f3997bc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-40.png",
+        "sha256": "4e75f40b084e4a873e4db7ec770cf8c48fa7e981d96a56f17ebc5889f6914025",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-41.png",
+        "sha256": "20af944c78224809d28d1484918f2bf0b72b98ac0daf26ecef539c1e04714d3c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-42.png",
+        "sha256": "0d0dff5d0f35b336b9035fe1890e303788e5367316e6c449d4aa8e8fd7496653",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-43.png",
+        "sha256": "982c3e034f6ab64e000025391a3d5ccd17733f4b00ccf53f968903e930d09373",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-44.png",
+        "sha256": "89fc5fbb41c060f203b33effa3dadf10570fcf0dd7cdd188e745024d473405ee",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-45.png",
+        "sha256": "f22d6cf425e77fb5571f1dc56126e2b24bd0685ba5d58c7d25afc496e32fdb30",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-46.png",
+        "sha256": "579ac219729901433b8694bd6c6628d365609cd62e9132929fdb972ba7c60001",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-47.png",
+        "sha256": "b520db7f65bf8e89483f21aca766ba5dde0ccad1c1620b9c2b38db076f16b55a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-48.png",
+        "sha256": "c98de328cba1228c0cb0a661011ba83c802f4724faa22278dc5ee1bb91c67ccd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-49.png",
+        "sha256": "0ef0fe60fdf4ae2a42bada208bf93f832eeaa5da4f141caca966a647d22d6539",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-50.png",
+        "sha256": "d6d30decba1679e4ffa17767e65ba0bf051b8d09639fd362c243f818e5a1ed8d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-51.png",
+        "sha256": "52281aaf86d0f5c5255a968b1c99172480b887e81a758f348c6aa9027278555f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-52.png",
+        "sha256": "011a6babdab54bd52e4e3a61bfb62f18bfe47fcf419ab458e24bf02bab88ccda",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-53.png",
+        "sha256": "8c570cf793754dc663bfb4dbf9c0b2d8fc740ef34d8a909afd2521952a4180d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-54.png",
+        "sha256": "6263f268bc0dcfb4258a5cb2551846a21ee9e8773d47baaf19301ebd380f8d8c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-55.png",
+        "sha256": "13dbbf23080e78a76a6791b5ee01bb8f7de0f6463081703cb725e3616514d218",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-56.png",
+        "sha256": "8e12215459c6388ba5b78217eeeb887ac024a19b1dac68d7fda326973b987ccb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-57.png",
+        "sha256": "223cf6d44ccbc24045f92d338fcbbf07926e30d56842503919b92f42c5e4da7e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-58.png",
+        "sha256": "3fd99f88616903dbe29608c8e85bb4616d3cf80db1bc714778c28c835b96017b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-59.png",
+        "sha256": "85a6bc8ffdaad08ad083f54cd5388f47a0d4379eae111a956f21f0b3bd1049ab",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-60.png",
+        "sha256": "f5d68d12d2732b1f624ec81378b244d668129aabe6fd98682c2dc617d1551eda",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-61.png",
+        "sha256": "abadb442684c3cc176f4ccd28747c6c360252f23215674096b5c2dda941030d3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-62.png",
+        "sha256": "618e1be71ee02d560b541fdd4c03218bf67ff6c3533a726b02c09735428eab2c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "feats-c-63.png",
+        "sha256": "eeb013e410a6916bbf99b5e92be166282d04ed2b5044c680548b8abd89e65403",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "vows-a": {
+    "id": "vows-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c2f2804e-c076-4825-aefb-760db6481b95",
+    "submittedAt": "2026-11-24T23:07:45.497Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a grey tombstone with a purple candle in front; (2) an empty glass jar closed with a cork; (3) a burning torch held in a fist; (4) a crowing red rooster; (5) a fishing rod with a red and white bobber; (6) a closed purple book with a padlock strap; (7) a library book with a paper card sticking out; (8) a white feather quill pen snapped in two; (9) an empty brown trouser pocket turned inside out; (10) a pair of bare feet; (11) two bare fists; (12) a red heart next to a broken brass gear."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17407,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a grey tombstone with a purple candle in front; (2) an empty glass jar closed with a cork; (3) a burning torch held in a fist; (4) a crowing red rooster; (5) a fishing rod with a red and white bobber; (6) a closed purple book with a padlock strap; (7) a library book with a paper card sticking out; (8) a white feather quill pen snapped in two; (9) an empty brown trouser pocket turned inside out; (10) a pair of bare feet; (11) two bare fists; (12) a red heart next to a broken brass gear. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:09:43.778Z",
+    "usageUsd": 0.08341684916284349,
+    "candidates": [
+      {
+        "file": "vows-a-0.png",
+        "sha256": "cfc4ef41b158c930faea647368cd511a4b8d3faf29a46b6474e34fcd1520e686",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-1.png",
+        "sha256": "b35e6adf7bbbb8c02ad8fcf27159366a3dcf27f829485c4278d02e64f6fb6521",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-2.png",
+        "sha256": "0911f3acad3590e54466aba359f3639f30a53b1e590bc7db2ee840ed70569b0e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-3.png",
+        "sha256": "f868ad4fd8a3a8cd6b288ffb08ec1c13a1c1577d44caa01e0a6fbbbc792437be",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-4.png",
+        "sha256": "e077a75a0aebf4f4e7d7145c4474668843cfc8959381676c7624d2effdc2a7bf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-5.png",
+        "sha256": "ce349b9da513a62478309ee743c0ec5056225e5d050a0e0e07fa19bc8af6e7b5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-6.png",
+        "sha256": "0f3b09708207f884ec4f4c015e4442309dd9179b3f37e13ad0a572e1e4bfbfff",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-7.png",
+        "sha256": "8134e5ee62c8f1f6382e1ccbcc903693659431077f966d73ed8f749717c60876",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-8.png",
+        "sha256": "1bf492543f71adec245becf01d7385192c35f18c7080fc8c58f0df848e3287f9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-9.png",
+        "sha256": "e643b13cf547bc3a74c13dc228ea7aee738f9ec379648c5a561f1532167b170e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-10.png",
+        "sha256": "ab2284cbd3f817c916e5f585044680594312e8aea7ae815e1177af377f56a80d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-11.png",
+        "sha256": "ac8caedeae13afcc62c0308551023c6783b02fdb19e12435be51f5b792978f71",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-12.png",
+        "sha256": "7566e5a75d9fb234d6352a4c85f53273900f7025323dfda3eb9e5a3fdcfa2363",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-13.png",
+        "sha256": "c61993a63f7e42a49575f98a139e0d6d1e126ca01b07217c2d4da12b9a643b32",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-14.png",
+        "sha256": "53eb1577a705a924a72e3d5e3c4d58cb6cdfef55a7ef22e80cf72143414bc8ae",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-15.png",
+        "sha256": "135a9ea67b3596db8fe59cfd3656800a85da8774de263939f666e8133d64f325",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-16.png",
+        "sha256": "2906c78407124164067d4ceddfde0b95f518594612bcc8714375d090fb9c2d48",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-17.png",
+        "sha256": "9696d2299416d7bae98e1ffb7cd247395c66635d17430b6c98e5f8f9ac403c47",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-18.png",
+        "sha256": "cfad7fbd21dc25eb339b9f70ec8f75db97c60e570d7ceeb6a88c0667913225d3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-19.png",
+        "sha256": "53f26cbbc34bea4363bf7155e877639d0b98783b141667cddcfd524a64725f41",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-20.png",
+        "sha256": "f68aec203f4cd7383e3a9c8a4f69799424bd3d831f4d55d99186e0939f43915c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-21.png",
+        "sha256": "bf4fe17ccdc610002ab773d6461742ad2a65103a412afb8b87bcf27fbe7e746d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-22.png",
+        "sha256": "d83d4c4d5696054d44b2942017ec8473d29e38a584740017c045b64e8e5e6328",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-23.png",
+        "sha256": "4ca4b38af6e139d96e91b605b33dd6f07c395e8aeff6c89475979739bc9f6f18",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-24.png",
+        "sha256": "368ce04b50d0286f36b42882cebaf6590310003805dd2b6a26432ed64218f6a1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-25.png",
+        "sha256": "754e0fedc1166f8e9700ba539a825b25c78e28573412b03323f377abd91092b7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-26.png",
+        "sha256": "0f36f02e329303f68940cc7597af3c7313ac9ad2e7bae566c2031106e82ce901",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-27.png",
+        "sha256": "90adaa66ca2525439db5100fcc302eea54bd15b8946316aa0ed66d3928d47ad1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-28.png",
+        "sha256": "9f69f7c3e06d77c941f27dfd48762b926be0f28c168144efd65eedd668cc8d23",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-29.png",
+        "sha256": "6aae4b8953a0c745efe576cd7f686b19c8c87f770156c5fd9f9afcfca528151c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-30.png",
+        "sha256": "46688b1281ec3c814a41f938782891ea20b71051b6a64bbc1ca26266ab361284",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-31.png",
+        "sha256": "470cd649a468eb74894a8f51145d8279cc20527a2323a0b52f9d34558428b493",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-32.png",
+        "sha256": "5fc61a30913fef9db6b04d3db2b722c1e0526bab9dcb2660594933b7e7daf4f6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-33.png",
+        "sha256": "c426d54205ea7d0cdadc731ad75818cb9e1eddcd81ea216516777569d00965cf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-34.png",
+        "sha256": "5ce1aa0584db5eab5aeeb8e4ad695638cd769b916ffc350a1341eff640bcacf2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-35.png",
+        "sha256": "21a7a0e9916bf17e064c76de2d59bae4e3a67bc3146bd11cfd4c5179face62fd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-36.png",
+        "sha256": "27328034fca06d1bfb725a1966e40791ba64e70b205ab967dbba31dce105b9d5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-37.png",
+        "sha256": "447f3e906be1329e04d5d310f2ce42db00f8d8ef078ddf23a5efa636e3effefa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-38.png",
+        "sha256": "469ca9211e68e9942fab9218d4de7e3db656a7ebab54bc6f6d1871ac723a407b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-39.png",
+        "sha256": "6c738f681d07babce1dc9081f4164530fbf46ae654ab8e9ad7c07cc3ed33eb55",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-40.png",
+        "sha256": "28c8bfe9c7b5e628e2e28897aaaa546b9ed6e2b2b490c35ca631cb3a219f5439",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-41.png",
+        "sha256": "5f54780f434dd63c4240a6142d0b14aaf13b615b586f97f1d7b9e631ccdcb34f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-42.png",
+        "sha256": "91cd2bfe041b077c55907e7124b9e1099da1fb5f247127e962cf78d1b12fe91b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-43.png",
+        "sha256": "0f65f23b74b8dafaa1f7bc1bf093cc4e3d4d64b41dcc75de814104bcfd5ec000",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-44.png",
+        "sha256": "a085eb970c92c098af46cac202f1a0f33a6139513283f1f3710e7064e1247f2e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-45.png",
+        "sha256": "0c7a4cf4cdd1809f571cd5655848dd096eb233e5b0b91bebf727d6c8ad8d0221",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-46.png",
+        "sha256": "94ff04c2504b1d38ff124ba1a08b5a077c64e87643ed31c7fe12b5a8883e4bf1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-47.png",
+        "sha256": "27d28fd933245876476062af42c44b8dfccfd08f3deeb860c863d9289fdbae77",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-48.png",
+        "sha256": "5588e5afdbe458872f70525aaf564b791d9157e06b8fd891061ae73caa50ba8b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-49.png",
+        "sha256": "b6f9f2193b59ceb0087319f323bb327b3c5c8ee53c2a2a33d6eb50635d4a0353",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-50.png",
+        "sha256": "e461c8cd3854af830361a9c24e800501e695308cf24d1271a658dabf1f506c4d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-51.png",
+        "sha256": "eabc808037afbf8040c1e7e74276d4a8642caad8873a3faca21b672727000d62",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-52.png",
+        "sha256": "f5d5a7bba85e4bd66e4ab05cd0746cd25193d6a43fa494b29548f2e4906cc4af",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-53.png",
+        "sha256": "973325afe73926ee6ce064b50253cddd4d86f304f84717bd06994367b7e6a727",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-54.png",
+        "sha256": "cec831c7155538b10a3bc8cdbe253b35469a763c7439a9044050c5789f96d107",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-55.png",
+        "sha256": "e4d73d156a5c5c20dbdaa9be873d09cc9f85b8b292fb550f4e20b5bea70e890d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-56.png",
+        "sha256": "4f55856a6edb21462ece11d2a7409cec609db29c5292b91035a96ae2ac39a3a0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-57.png",
+        "sha256": "469117da32fb13b5699147cc6ae4bdaf524d6c676829154d856906954ca816fa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-58.png",
+        "sha256": "4bd938cfb558c69659759954fc60f013ae7aa223d3bdb1b2cbf7160ec26b01bb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-59.png",
+        "sha256": "445a2c3d6ede324b52f9dd911646b5bb333e936dba83869a4ec4c4f4b227df3e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-60.png",
+        "sha256": "8f0fd1bf5d72f10c7ae0f2da4ac801a2444b6cad88804ac3b10c15a704a91cf7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-61.png",
+        "sha256": "96d94d6c2f563fee805db2b16607a111681d1d930e472b295531a96c4ba09e77",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-62.png",
+        "sha256": "8936005608668b0d808e5f0831636b24422e27720ca0dbb4178a9c69cfde77c3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "vows-a-63.png",
+        "sha256": "a79f7f59925790f05f62f047ac7c835eced0fb20c85e8326982468d8547a83f0",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "fallbacks-a": {
+    "id": "fallbacks-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "739c058f-e482-41cf-9a82-3f5cd330b952",
+    "submittedAt": "2026-11-24T23:10:49.301Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a rolled spell scroll tied with a purple ribbon; (2) a small closed wooden treasure chest with gold bands; (3) a small grey swirl of smoke; (4) a small brown mound of dirt; (5) a plain round steel medal on a grey ribbon; (6) a teal five-pointed star medal; (7) a lit white candle; (8) a grey cut gemstone; (9) a clear crystal ball on a small stand."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17408,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a rolled spell scroll tied with a purple ribbon; (2) a small closed wooden treasure chest with gold bands; (3) a small grey swirl of smoke; (4) a small brown mound of dirt; (5) a plain round steel medal on a grey ribbon; (6) a teal five-pointed star medal; (7) a lit white candle; (8) a grey cut gemstone; (9) a clear crystal ball on a small stand. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:12:37.005Z",
+    "usageUsd": 0.08185709211561415,
+    "candidates": [
+      {
+        "file": "fallbacks-a-0.png",
+        "sha256": "109d146ee4b5bd10c3432c7e60b5a7684de5e5d5013ba7d6fac8afd96708d850",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-1.png",
+        "sha256": "668c34bda0bfc429642f34c717ddda84d7c44f199ef88a557978b6f1945e96a0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-2.png",
+        "sha256": "2f07f2eaaf2ab20da9f712834bc002aeef48896e39fffcecbc50e010ddbb0a18",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-3.png",
+        "sha256": "d618eefdc22e8d7e6874179bd92ba5f4359a43daf136a521c5129f266e87183f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-4.png",
+        "sha256": "bec69454c708326eedf2b7a40650fa9801a640de6acd6ab6a971aea013b26d5f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-5.png",
+        "sha256": "40a27c1a13aebf22e1920e8f496fd63fa2aa1202da4daae88298ebd6d2daf72d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-6.png",
+        "sha256": "aa3fa47fc91ec16c632859885d3f14ff6108d8f2650d2e5adcc9a966bd468a32",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-7.png",
+        "sha256": "4bdfb251542bf443b13a5282d8ffb0e444cf1c2e8962bb1b248b3738a21864a5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-8.png",
+        "sha256": "25aded8e07716b0fe9675f878f33e0c1792dbc4b7791956ecf102dd7a3f9cb28",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-9.png",
+        "sha256": "0411e2842e17f247d77996a126c574251c838d8927088b6945b8b54807e8d347",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-10.png",
+        "sha256": "27369ea68406f82c06fe5d73f71079ae5c97bf8a5c5a054888a0c776f1176698",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-11.png",
+        "sha256": "721f765b10aa6b9c632501ca1bdea1c3941fbde2367adc3508fbc2715d1b8be2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-12.png",
+        "sha256": "93955e5ea2e78a83b593443a6b8ef2f7ab1a25811c3f7c5c1484c0673edb4241",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-13.png",
+        "sha256": "27125762a4f813d0166ddde65970a81fc3beb1c435e587875761ea9ff4a6fe04",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-14.png",
+        "sha256": "e7f587db93a9d3500f3e573cfea7de8cebbce32a77f6cbb74ae5b8e6f1211c38",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-15.png",
+        "sha256": "c737e47b8f13b52da92501dd898d12c84dce3b493b040e891ff4574ff3bf7ef2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-16.png",
+        "sha256": "056ddece0ed869f1f5d4a8a3864d098ed0be1854c47799090933f996711ea85e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-17.png",
+        "sha256": "980b734f5c20c6e431cb8e411b4e2969c7e3b5a864868ab87732e367effe14a8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-18.png",
+        "sha256": "233c9c84371791e6d0fb149f59d35078aa172c538f8de5fc32a84f680a05f87e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-19.png",
+        "sha256": "c825380854c83d41d49234b5770b033d4840fbeb09e591fa5786ef5ef8b32dd6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-20.png",
+        "sha256": "2d0f097d2101811ca5bb6b98ea3745dff04ab3ec46a4872d94aa78adf26ba0b4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-21.png",
+        "sha256": "2174eb170df1fb5710657f2dadfb1dbb4a6cd8839b629294e311911f88fa569a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-22.png",
+        "sha256": "3c481d9d1b5dc3432a3552ae65838904fa346600e8050f3364ceb580fa1bbd51",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-23.png",
+        "sha256": "7c8ba66b2d16e215ca2fddfb2f37b2b6c8e105088d7424a70959e15f973e9bac",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-24.png",
+        "sha256": "fccbb52e76f0722cd871c93e1d0726afdfb0ce2bc2d0fc900691965448d5af10",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-25.png",
+        "sha256": "3cba1f6fac0a040542d8d53c5f593f6f8e8647d7d7b1c0ba9f8f01065c5d0522",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-26.png",
+        "sha256": "583c15e2ed672505f4976b4ce2d7e23cfce58aba4d7440364490ceace3a8a5b6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-27.png",
+        "sha256": "5a59eb2510aeb5656750785acc0ba63031830417df708b3a301b10acd84af344",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-28.png",
+        "sha256": "3c5022a2019c2ca8a8609520df7a1593be86b843c51a9686e07e1b747329eda1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-29.png",
+        "sha256": "af5623eb8d1cdd72ab5ae9393c1f59694390c5962dc1232bfb4cf04e56b77b6a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-30.png",
+        "sha256": "70272035ebee2e9a62371abb959f1743e5159be8e664d27057c2159349c0f2b0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-31.png",
+        "sha256": "dd01ea88c86029d0362e93d3cfff33bd86cb180a7003ad0b500796545c861df0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-32.png",
+        "sha256": "0cece60d567c29ac4fca456bb43001843c8928f25774d9ab68c7d5ac81229814",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-33.png",
+        "sha256": "a291958be60591b2a3db566c4f73502668758f55f542df6be8d1636cbd87967d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-34.png",
+        "sha256": "8bf7f861a0a7ef418321bdd103bc144e28d4501d6961ff6e1892e520cf338558",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-35.png",
+        "sha256": "a7a1c6efcb3a6b891131f30574bf37db03659e819cc3572d890425311a33a27d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-36.png",
+        "sha256": "b2b9050ecae4700822771e451c5447d56a28aa78e5afe763813f8e804038e9a6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-37.png",
+        "sha256": "53aa1a6cc11fbd2c20753cd29dcaf3f10fd855174634ce8a83d20de31eb34e2c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-38.png",
+        "sha256": "2f2a6f9a1d86f87c608d2cd763f980cbb25669133d30168d7abe5bf6cc2326cd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-39.png",
+        "sha256": "84bfd582f4eb434fc08d411e66d0cc4a5ff7bf11e61deb18b24fd24f559900db",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-40.png",
+        "sha256": "0f2b9b219294c599695441b04e069de8af371c67e5f70d2553801089216ac163",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-41.png",
+        "sha256": "ac9b790728c0eabeeee21674b400d414039a047c4e27196b638fac2c426f9e8f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-42.png",
+        "sha256": "798ef3750a0a53556dce03a253d54722807c6c6c92d4cad13eea4c1d316bc5c5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-43.png",
+        "sha256": "6ce715cc908b505cfaf3f113d9cb3c56e558acde4e5857bd614aba8ac83617f7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-44.png",
+        "sha256": "2602191a3b08f09f6754f06d9bcffd510226bdc12e9dd4b1e1b23298700bbc83",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-45.png",
+        "sha256": "d78b68abf2209fe472faedc8a468119b0ec3526893c9dcaacae4ccbc630b6880",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-46.png",
+        "sha256": "218aa19f8d9a195ed4b4f49935f2d232a22e81194d77ff64681d6eb8213efd7b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-47.png",
+        "sha256": "96af0814ffdf782e8fd7992116d219e17c09c1e7d0aed47b55a0ba45394fb40e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-48.png",
+        "sha256": "193833786c1c74c88c79be45ec430d9ee4c8b7db04769148ef96988b3b0232ef",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-49.png",
+        "sha256": "e9f99738515d39143171b25863da16ce6d051301d8197202818840b08e7a2177",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-50.png",
+        "sha256": "fd29911805d201be171b7545c1f29e85364178bda0909c5df93278a229cf3615",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-51.png",
+        "sha256": "bdb889c75cd287b54fce06bed762f31ec5bf8ed6be66b394ff53ec30aff26dc0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-52.png",
+        "sha256": "2f33e1e669f10679f1249336429bf8208ead26bb3524c2a430204a044ec6bffd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-53.png",
+        "sha256": "599728ffca690225433c2b1a9f77cd46da244a8a904d72600979a6f100e96289",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-54.png",
+        "sha256": "1a0a287f1380854b0238fc00b9bfc40b55808b76e4502fe83fa5494c895898b0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-55.png",
+        "sha256": "a66e5652341192402b4cb7f1a67970ad09615395c70551103c741876261d0e15",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-56.png",
+        "sha256": "b8a83b9f84304c5c95bf8136693b5abe8183ad9f83b36ceda6b40d2cd10e324a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-57.png",
+        "sha256": "3ad58c42c0c99262cd847d5de32baa1d9f7bcb888b6722240a1e9f6a71926da2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-58.png",
+        "sha256": "53f458b366a5ade7cdc599e04b3bcc7366f49e6dd6193338a473553c29a7974b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-59.png",
+        "sha256": "60cc8aa40607f3e0c17cde5248b7f73eb33fe25561133ec9355417baa9fd71a5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-60.png",
+        "sha256": "6cd54d9d4b45f1deed29182528069b7786e02a2242ac9343cfcf18dbe1fdb1a4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-61.png",
+        "sha256": "da59091a31eb05ccfbf5ee056a075de9690e18ab640651f519efc6d6b7deb19d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-62.png",
+        "sha256": "8df3852499b74d77d863ebd7da0ec8fe454225ff5c0c98346b7d98dba4571b25",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "fallbacks-a-63.png",
+        "sha256": "70146afab144bb8252d8ea0d59e90e8758341208d891d0dd912f008621b5a595",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  }
+}

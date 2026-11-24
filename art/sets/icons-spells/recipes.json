@@ -1,0 +1,501 @@
+{
+  "set": "icons-spells",
+  "bead": "border_marches-bzc.17",
+  "class": "icons",
+  "exploration": false,
+  "_doc": "Spell symbols: 50 battle and 10 adventure spells, plus the five school emblems. 32x32 symbols on a transparent background, docs/art/classes/icons.md. One generate-image-v2 call at 32x32 returns 64 candidates of a mixed subject (\"each image a different one of these\"); the best take per subject is accepted. Frames (school, grade) are drawn by code, never baked. Never downscaled or mirrored. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-bottom-left",
+      "class-symbol-32"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "bloom-a",
+      "concept": "poultice thornskin nettle feed regrow sprout bramble-row ripen orchard-day second-spring",
+      "width": 32,
+      "height": 32,
+      "seed": 17101,
+      "covers": [
+        "poultice",
+        "thornskin",
+        "nettle",
+        "feed",
+        "regrow",
+        "sprout",
+        "bramble-row",
+        "ripen",
+        "orchard-day",
+        "second-spring"
+      ],
+      "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a rolled white cloth bandage with a green herb leaf tied on it; (2) a green vine coiled into a ring with big sharp thorns; (3) a jagged stinging nettle sprig dripping one purple-green poison drop; (4) a bulging brown sack of seeds with a green leaf sticking out; (5) a cut tree stump with a fresh green shoot growing from it; (6) a seed split open with a little two-leaf sprout popping out; (7) a tangle of brown bramble branches covered in thorns; (8) a big ripe shiny red apple with one green leaf; (9) a small round fruit tree full of red apples; (10) a big pink spring blossom flower with green leaves."
+    },
+    {
+      "id": "accord-a",
+      "concept": "scapegoat close-ranks change-places share sign-here soft-words sanctuary-oath take-heart change-of-heart the-long-table",
+      "width": 32,
+      "height": 32,
+      "seed": 17102,
+      "covers": [
+        "scapegoat",
+        "close-ranks",
+        "change-places",
+        "share",
+        "sign-here",
+        "soft-words",
+        "sanctuary-oath",
+        "take-heart",
+        "change-of-heart",
+        "the-long-table"
+      ],
+      "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a white goat with a blue rope tied around its neck; (2) three blue tower shields standing side by side, overlapping; (3) two curved blue arrows chasing each other in a circle; (4) a round loaf of bread broken into two halves; (5) a parchment contract with a quill pen and a red wax seal; (6) a pink speech bubble with a small red heart inside; (7) a raised open hand in front of a blue kite shield; (8) a big red heart with a short sword behind it; (9) a heart split down the middle, left half red and right half blue; (10) a long wooden banquet table with plates and goblets on it."
+    },
+    {
+      "id": "clock-a",
+      "concept": "first-bell late-bell appointment wind treacle quick-march encore forced-march deadline double-time",
+      "width": 32,
+      "height": 32,
+      "seed": 17103,
+      "covers": [
+        "first-bell",
+        "late-bell",
+        "appointment",
+        "wind",
+        "treacle",
+        "quick-march",
+        "encore",
+        "forced-march",
+        "deadline",
+        "double-time"
+      ],
+      "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a shiny gold hand bell with a wooden handle, ringing; (2) a dull grey iron bell with a cobweb on it; (3) a round brass alarm clock with two bells on top; (4) a big brass wind-up key; (5) a glass jar of golden-brown treacle dripping over the rim; (6) a red marching drum with two crossed drumsticks; (7) a red theatre curtain drawn open with a gold star; (8) a pair of brown marching boots with small white wings; (9) an hourglass with red sand almost run out; (10) a brass metronome with its arm swinging."
+    },
+    {
+      "id": "hush-a",
+      "concept": "hush-now on-credit bad-omen pass-on lullaby second-shift leech-line curtain-call pea-soup everybody-up",
+      "width": 32,
+      "height": 32,
+      "seed": 17104,
+      "covers": [
+        "hush-now",
+        "on-credit",
+        "bad-omen",
+        "pass-on",
+        "lullaby",
+        "second-shift",
+        "leech-line",
+        "curtain-call",
+        "pea-soup",
+        "everybody-up"
+      ],
+      "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a wooden bow with its string snapped and dangling; (2) a stack of gold coins with a purple paper tag tied on; (3) a black crow with glowing purple eyes; (4) a sooty black hot potato giving off purple smoke; (5) a sleepy pale yellow crescent moon wearing a blue nightcap; (6) a small grey hooded ghost holding a lantern; (7) a dark red leech hanging from a purple rope; (8) a skeletal white hand reaching up holding a red rose; (9) a bowl of thick green pea soup with curling steam; (10) an open wooden coffin with purple light rising out."
+    },
+    {
+      "id": "storm-a",
+      "concept": "jolt gust hothead set-off broadside cold-snap downpour wildfire whiteout the-sky-falls",
+      "width": 32,
+      "height": 32,
+      "seed": 17105,
+      "covers": [
+        "jolt",
+        "gust",
+        "hothead",
+        "set-off",
+        "broadside",
+        "cold-snap",
+        "downpour",
+        "wildfire",
+        "whiteout",
+        "the-sky-falls"
+      ],
+      "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a small yellow electric spark ball crackling with tiny bolts; (2) a puffing pale blue wind cloud with swirls blowing to the right; (3) a red-hot iron helmet with flames on top; (4) a round black bomb with a burning fuse; (5) a big orange and yellow explosion burst with black smoke; (6) a big pale blue ice snowflake crystal; (7) a dark blue rain cloud with falling rain drops; (8) a tall orange-red fire flame; (9) a swirling white blizzard with snowflakes; (10) a flaming meteor rock falling with a fire trail."
+    },
+    {
+      "id": "adventure-a",
+      "concept": "green-road second-helping parley read-the-seal borrowed-day saved-hour ask-the-dead dowse tow-line opening-salvo",
+      "width": 32,
+      "height": 32,
+      "seed": 17106,
+      "covers": [
+        "green-road",
+        "second-helping",
+        "parley",
+        "read-the-seal",
+        "borrowed-day",
+        "saved-hour",
+        "ask-the-dead",
+        "dowse",
+        "tow-line",
+        "opening-salvo"
+      ],
+      "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a green leafy archway over a brown dirt path; (2) a wooden ladle over a bowl overflowing with stew; (3) two hands shaking; (4) a magnifying glass over a red wax seal; (5) a golden sun with a small brass key; (6) a pink piggy bank with a small brass hourglass on its back; (7) a grey skull with glowing purple eyes and a brass ear trumpet; (8) a forked wooden dowsing rod with blue sparkles; (9) a coiled rope with an iron grappling hook and a yellow spark; (10) a small black cannon on wooden wheels firing a cannonball."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/icons/spells/poultice.png",
+      "from": "bloom-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/thornskin.png",
+      "from": "bloom-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/nettle.png",
+      "from": "bloom-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/feed.png",
+      "from": "bloom-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/regrow.png",
+      "from": "bloom-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/sprout.png",
+      "from": "bloom-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/bramble-row.png",
+      "from": "bloom-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/ripen.png",
+      "from": "bloom-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/orchard-day.png",
+      "from": "bloom-a#13",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/second-spring.png",
+      "from": "bloom-a#15",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/scapegoat.png",
+      "from": "accord-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/close-ranks.png",
+      "from": "accord-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/change-places.png",
+      "from": "accord-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/share.png",
+      "from": "accord-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/sign-here.png",
+      "from": "accord-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/soft-words.png",
+      "from": "accord-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/sanctuary-oath.png",
+      "from": "accord-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/take-heart.png",
+      "from": "accord-a#15",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/change-of-heart.png",
+      "from": "accord-a#61",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/the-long-table.png",
+      "from": "accord-a#23",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/hush-now.png",
+      "from": "hush-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/on-credit.png",
+      "from": "hush-a#11",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/bad-omen.png",
+      "from": "hush-a#12",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/pass-on.png",
+      "from": "hush-a#13",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/lullaby.png",
+      "from": "hush-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/second-shift.png",
+      "from": "hush-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/leech-line.png",
+      "from": "hush-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/curtain-call.png",
+      "from": "hush-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/pea-soup.png",
+      "from": "hush-a#18",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/everybody-up.png",
+      "from": "hush-a#9",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/jolt.png",
+      "from": "storm-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/gust.png",
+      "from": "storm-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/hothead.png",
+      "from": "storm-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/set-off.png",
+      "from": "storm-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/broadside.png",
+      "from": "storm-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/cold-snap.png",
+      "from": "storm-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/downpour.png",
+      "from": "storm-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/wildfire.png",
+      "from": "storm-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/whiteout.png",
+      "from": "storm-a#18",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/the-sky-falls.png",
+      "from": "storm-a#9",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/green-road.png",
+      "from": "adventure-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/second-helping.png",
+      "from": "adventure-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/parley.png",
+      "from": "adventure-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/read-the-seal.png",
+      "from": "adventure-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/borrowed-day.png",
+      "from": "adventure-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/saved-hour.png",
+      "from": "adventure-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/ask-the-dead.png",
+      "from": "adventure-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/dowse.png",
+      "from": "adventure-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/tow-line.png",
+      "from": "adventure-a#8",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/opening-salvo.png",
+      "from": "adventure-a#9",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/first-bell.png",
+      "from": "clock-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/late-bell.png",
+      "from": "clock-a#27",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/appointment.png",
+      "from": "clock-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/wind.png",
+      "from": "clock-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/treacle.png",
+      "from": "clock-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/quick-march.png",
+      "from": "clock-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/encore.png",
+      "from": "clock-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/forced-march.png",
+      "from": "clock-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/deadline.png",
+      "from": "clock-a#8",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/spells/double-time.png",
+      "from": "clock-a#9",
+      "width": 32,
+      "height": 32
+    }
+  ]
+}

@@ -1,0 +1,675 @@
+{
+  "set": "icons-heroes",
+  "bead": "border_marches-bzc.17",
+  "class": "icons",
+  "exploration": false,
+  "_doc": "Hero symbols: 24 secondary skills, the four primary stats, feats and vows. 32x32 symbols on a transparent background, docs/art/classes/icons.md. One generate-image-v2 call at 32x32 returns 64 candidates of a mixed subject (\"each image a different one of these\"); the best take per subject is accepted. Frames (school, grade) are drawn by code, never baked. Never downscaled or mirrored. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-bottom-left",
+      "class-symbol-32"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "emblems-a",
+      "concept": "school:bloom school:accord school:clock school:hush school:storm stat:attack stat:defense stat:power stat:lore",
+      "width": 32,
+      "height": 32,
+      "seed": 17401,
+      "covers": [
+        "school:bloom",
+        "school:accord",
+        "school:clock",
+        "school:hush",
+        "school:storm",
+        "stat:attack",
+        "stat:defense",
+        "stat:power",
+        "stat:lore"
+      ],
+      "subject": "Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a bright green flower bud with two leaves; (2) a rolled scroll tied with a blue ribbon and a blue seal; (3) a round brass clock face with two hands and a gear; (4) a plum-purple hooded lantern with a small candle flame; (5) a red-orange zigzag lightning bolt; (6) a steel sword pointing up with a red hilt; (7) a round steel shield with a blue centre; (8) a magic wand with a glowing purple star tip; (9) a thick closed blue book with gold corners."
+    },
+    {
+      "id": "skills-a",
+      "concept": "greencraft covenant horology quietus stormcalling onslaught marksmanship bulwark riposte long-shadow vanguard banner",
+      "width": 32,
+      "height": 32,
+      "seed": 17402,
+      "covers": [
+        "greencraft",
+        "covenant",
+        "horology",
+        "quietus",
+        "stormcalling",
+        "onslaught",
+        "marksmanship",
+        "bulwark",
+        "riposte",
+        "long-shadow",
+        "vanguard",
+        "banner"
+      ],
+      "subject": "Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a green gardening trowel crossed with a big leaf; (2) a parchment treaty scroll with a blue ribbon and wax seal; (3) a brass pocket watch with its lid open; (4) a brass candle snuffer over a purple candle; (5) a dark storm cloud with a yellow lightning bolt; (6) a heavy steel battle axe; (7) a wooden bow with an arrow nocked; (8) a big steel tower shield with rivets; (9) two crossed thin silver rapiers; (10) a brass speaking horn with sound waves; (11) a red chess knight piece; (12) a red war banner on a pole with a gold tip."
+    },
+    {
+      "id": "skills-b",
+      "concept": "lucky-streak drill-sergeant ambush wayfaring trailcraft lookout deep-wells quick-study stewardship silver-tongue packrat wayfinder",
+      "width": 32,
+      "height": 32,
+      "seed": 17403,
+      "covers": [
+        "lucky-streak",
+        "drill-sergeant",
+        "ambush",
+        "wayfaring",
+        "trailcraft",
+        "lookout",
+        "deep-wells",
+        "quick-study",
+        "stewardship",
+        "silver-tongue",
+        "packrat",
+        "wayfinder"
+      ],
+      "subject": "Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a pair of white dice with black dots; (2) a silver whistle on a red cord; (3) a green bush with two eyes peeking out; (4) a brown leather travel backpack with a bedroll; (5) a brass compass with a red needle; (6) a tall wooden watchtower; (7) a stone well with a wooden bucket and blue water; (8) an open book with a lit candle beside it; (9) a fat gold coin purse with coins spilling; (10) a smiling silver theatre mask; (11) a little brown rat carrying a bundle of scrolls; (12) a folded treasure map with a red cross mark."
+    },
+    {
+      "id": "feats-a",
+      "concept": "spillover bonfire long-echo gleaner cold-hands mob-rule double-or-nothing seed-bombs field-surgeon green-thumb",
+      "width": 32,
+      "height": 32,
+      "seed": 17404,
+      "covers": [
+        "spillover",
+        "bonfire",
+        "long-echo",
+        "gleaner",
+        "cold-hands",
+        "mob-rule",
+        "double-or-nothing",
+        "seed-bombs",
+        "field-surgeon",
+        "green-thumb"
+      ],
+      "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a tipped-over cup spilling purple liquid; (2) a big bonfire of crossed logs with tall flames; (3) a curved brass hunting horn with sound rings; (4) a curved sickle with a small bundle of wheat; (5) a pale blue glove covered in frost; (6) a wooden pitchfork and a burning torch crossed; (7) a gold coin spinning in the air; (8) a round brown seed pod with a burning fuse; (9) a brown leather doctor's bag; (10) a green hand giving a thumbs up."
+    },
+    {
+      "id": "feats-b",
+      "concept": "briar-patch burr harvest windfall shield-wall mirror-ward peace-dividend quickstep pile-on",
+      "width": 32,
+      "height": 32,
+      "seed": 17405,
+      "covers": [
+        "briar-patch",
+        "burr",
+        "harvest",
+        "windfall",
+        "shield-wall",
+        "mirror-ward",
+        "peace-dividend",
+        "quickstep",
+        "pile-on"
+      ],
+      "subject": "Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a thorny bush with purple berries; (2) a spiky brown burr seed ball; (3) a wicker basket full of apples and pears; (4) a branch with apples falling off it; (5) three round wooden shields in a row; (6) a round hand mirror with a blue shine; (7) a white dove carrying a green leaf; (8) a pair of red dancing shoes; (9) a heavy wooden mallet hammer."
+    },
+    {
+      "id": "feats-c",
+      "concept": "co-signer compound-interest gag-rule bloodletting thicker-than-water soaked-powder chain-lightning firewalkers blaze-of-glory",
+      "width": 32,
+      "height": 32,
+      "seed": 17406,
+      "covers": [
+        "co-signer",
+        "compound-interest",
+        "gag-rule",
+        "bloodletting",
+        "thicker-than-water",
+        "soaked-powder",
+        "chain-lightning",
+        "firewalkers",
+        "blaze-of-glory"
+      ],
+      "subject": "Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) two quill pens crossed over a sheet of paper; (2) stacks of gold coins growing taller like stairs; (3) a big iron padlock; (4) a red blood drop beside a small silver knife; (5) a red blood drop next to a blue water drop; (6) a wet black gunpowder keg dripping water; (7) a blue lightning bolt zigzagging between three blue balls; (8) a bare foot stepping on orange flames; (9) a flaming sword raised up."
+    },
+    {
+      "id": "vows-a",
+      "concept": "vow-of-the-grave vow-of-the-still-air vow-of-the-pyre vow-of-the-opening vow-of-the-patient vow-of-silence vow-of-the-borrowed-book vow-of-the-unlettered vow-of-empty-pockets vow-of-the-barefoot-pilgrim vow-of-bare-hands vow-of-flesh-and-blood",
+      "width": 32,
+      "height": 32,
+      "seed": 17407,
+      "covers": [
+        "vow-of-the-grave",
+        "vow-of-the-still-air",
+        "vow-of-the-pyre",
+        "vow-of-the-opening",
+        "vow-of-the-patient",
+        "vow-of-silence",
+        "vow-of-the-borrowed-book",
+        "vow-of-the-unlettered",
+        "vow-of-empty-pockets",
+        "vow-of-the-barefoot-pilgrim",
+        "vow-of-bare-hands",
+        "vow-of-flesh-and-blood"
+      ],
+      "subject": "Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a grey tombstone with a purple candle in front; (2) an empty glass jar closed with a cork; (3) a burning torch held in a fist; (4) a crowing red rooster; (5) a fishing rod with a red and white bobber; (6) a closed purple book with a padlock strap; (7) a library book with a paper card sticking out; (8) a white feather quill pen snapped in two; (9) an empty brown trouser pocket turned inside out; (10) a pair of bare feet; (11) two bare fists; (12) a red heart next to a broken brass gear."
+    },
+    {
+      "id": "fallbacks-a",
+      "concept": "fallback:spell fallback:artifact fallback:condition fallback:ground fallback:skill fallback:feat fallback:vow fallback:stat fallback:school",
+      "width": 32,
+      "height": 32,
+      "seed": 17408,
+      "covers": [
+        "fallback:spell",
+        "fallback:artifact",
+        "fallback:condition",
+        "fallback:ground",
+        "fallback:skill",
+        "fallback:feat",
+        "fallback:vow",
+        "fallback:stat",
+        "fallback:school"
+      ],
+      "subject": "Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a rolled spell scroll tied with a purple ribbon; (2) a small closed wooden treasure chest with gold bands; (3) a small grey swirl of smoke; (4) a small brown mound of dirt; (5) a plain round steel medal on a grey ribbon; (6) a teal five-pointed star medal; (7) a lit white candle; (8) a grey cut gemstone; (9) a clear crystal ball on a small stand."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/icons/schools/bloom.png",
+      "from": "emblems-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/schools/accord.png",
+      "from": "emblems-a#9",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/schools/clock.png",
+      "from": "emblems-a#39",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/schools/hush.png",
+      "from": "emblems-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/schools/storm.png",
+      "from": "emblems-a#27",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/attack.png",
+      "from": "emblems-a#12",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/defense.png",
+      "from": "emblems-a#52",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/power.png",
+      "from": "emblems-a#22",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/lore.png",
+      "from": "emblems-a#23",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/spillover.png",
+      "from": "feats-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/bonfire.png",
+      "from": "feats-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/long-echo.png",
+      "from": "feats-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/gleaner.png",
+      "from": "feats-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/cold-hands.png",
+      "from": "feats-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/mob-rule.png",
+      "from": "feats-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/double-or-nothing.png",
+      "from": "feats-a#40",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/seed-bombs.png",
+      "from": "feats-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/field-surgeon.png",
+      "from": "feats-a#52",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/green-thumb.png",
+      "from": "feats-a#57",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/briar-patch.png",
+      "from": "feats-b#8",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/burr.png",
+      "from": "feats-b#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/harvest.png",
+      "from": "feats-b#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/windfall.png",
+      "from": "feats-b#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/shield-wall.png",
+      "from": "feats-b#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/mirror-ward.png",
+      "from": "feats-b#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/peace-dividend.png",
+      "from": "feats-b#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/quickstep.png",
+      "from": "feats-b#53",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/pile-on.png",
+      "from": "feats-b#39",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/co-signer.png",
+      "from": "feats-c#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/compound-interest.png",
+      "from": "feats-c#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/gag-rule.png",
+      "from": "feats-c#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/bloodletting.png",
+      "from": "feats-c#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/thicker-than-water.png",
+      "from": "feats-c#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/soaked-powder.png",
+      "from": "feats-c#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/chain-lightning.png",
+      "from": "feats-c#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/firewalkers.png",
+      "from": "feats-c#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/feats/blaze-of-glory.png",
+      "from": "feats-c#15",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-the-grave.png",
+      "from": "vows-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-the-still-air.png",
+      "from": "vows-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-the-pyre.png",
+      "from": "vows-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-the-opening.png",
+      "from": "vows-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-the-patient.png",
+      "from": "vows-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-silence.png",
+      "from": "vows-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-the-borrowed-book.png",
+      "from": "vows-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-the-unlettered.png",
+      "from": "vows-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-empty-pockets.png",
+      "from": "vows-a#36",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-the-barefoot-pilgrim.png",
+      "from": "vows-a#37",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-bare-hands.png",
+      "from": "vows-a#30",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/vows/vow-of-flesh-and-blood.png",
+      "from": "vows-a#15",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/fallback/spell.png",
+      "from": "fallbacks-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/fallback/artifact.png",
+      "from": "fallbacks-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/fallback/condition.png",
+      "from": "fallbacks-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/fallback/ground.png",
+      "from": "fallbacks-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/fallback/skill.png",
+      "from": "fallbacks-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/fallback/feat.png",
+      "from": "fallbacks-a#31",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/fallback/vow.png",
+      "from": "fallbacks-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/fallback/stat.png",
+      "from": "fallbacks-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/fallback/school.png",
+      "from": "fallbacks-a#8",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/greencraft.png",
+      "from": "skills-a#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/covenant.png",
+      "from": "skills-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/horology.png",
+      "from": "skills-a#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/quietus.png",
+      "from": "skills-a#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/stormcalling.png",
+      "from": "skills-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/onslaught.png",
+      "from": "skills-a#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/marksmanship.png",
+      "from": "skills-a#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/bulwark.png",
+      "from": "skills-a#11",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/riposte.png",
+      "from": "skills-a#12",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/long-shadow.png",
+      "from": "skills-a#13",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/vanguard.png",
+      "from": "skills-a#14",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/banner.png",
+      "from": "skills-a#51",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/lucky-streak.png",
+      "from": "skills-b#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/drill-sergeant.png",
+      "from": "skills-b#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/ambush.png",
+      "from": "skills-b#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/wayfaring.png",
+      "from": "skills-b#3",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/trailcraft.png",
+      "from": "skills-b#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/lookout.png",
+      "from": "skills-b#41",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/deep-wells.png",
+      "from": "skills-b#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/quick-study.png",
+      "from": "skills-b#7",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/stewardship.png",
+      "from": "skills-b#16",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/silver-tongue.png",
+      "from": "skills-b#17",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/packrat.png",
+      "from": "skills-b#22",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/skills/wayfinder.png",
+      "from": "skills-b#23",
+      "width": 32,
+      "height": 32
+    }
+  ]
+}

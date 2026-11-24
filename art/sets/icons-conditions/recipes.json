@@ -1,0 +1,518 @@
+{
+  "set": "icons-conditions",
+  "bead": "border_marches-bzc.17",
+  "class": "icons",
+  "exploration": false,
+  "_doc": "Condition and ground symbols for battle overlays: 25 condition kinds and 7 ground kinds. 32x32 symbols on a transparent background, docs/art/classes/icons.md. One generate-image-v2 call at 32x32 returns 64 candidates of a mixed subject (\"each image a different one of these\"); the best take per subject is accepted. Frames (school, grade) are drawn by code, never baked. Never downscaled or mirrored. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-bottom-left",
+      "class-symbol-32"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "conditions-a",
+      "concept": "venomed lucky mending thorned ripening turned heartened scapegoat",
+      "width": 32,
+      "height": 32,
+      "seed": 17301,
+      "covers": [
+        "venomed",
+        "lucky",
+        "mending",
+        "thorned",
+        "ripening",
+        "turned",
+        "heartened",
+        "scapegoat"
+      ],
+      "subject": "Subject: each image shows exactly one of these 8 things, each thing about equally often: (1) a single fat bright green poison droplet; (2) a bright green four-leaf clover; (3) a red heart wrapped in a green leafy bandage; (4) a spiky green thorn ball; (5) a golden ear of ripe wheat; (6) a white surrender flag on a short stick; (7) a bright red heart with small golden wings; (8) the head of a cute white goat with little horns."
+    },
+    {
+      "id": "conditions-b",
+      "concept": "shielded warded mollified delayed hastened quickened slowed asleep shaken",
+      "width": 32,
+      "height": 32,
+      "seed": 17302,
+      "covers": [
+        "shielded",
+        "warded",
+        "mollified",
+        "delayed",
+        "hastened",
+        "quickened",
+        "slowed",
+        "asleep",
+        "shaken"
+      ],
+      "subject": "Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a blue round shield with a silver rim; (2) a glowing pale blue protective bubble dome; (3) a soft white feather; (4) a slow grey snail; (5) a running yellow rabbit; (6) a blue feathered wing; (7) a pale blue tortoise; (8) a small blue cloud with sleepy closed eyes; (9) a pale shivering ghost blob with wide scared eyes."
+    },
+    {
+      "id": "conditions-c",
+      "concept": "jinxed reckoning hushed leeched burning frozen drenched fired-up",
+      "width": 32,
+      "height": 32,
+      "seed": 17303,
+      "covers": [
+        "jinxed",
+        "reckoning",
+        "hushed",
+        "leeched",
+        "burning",
+        "frozen",
+        "drenched",
+        "fired-up"
+      ],
+      "subject": "Subject: each image shows exactly one of these 8 things, each thing about equally often: (1) a black cat with yellow eyes; (2) a purple paper bill with a black skull seal; (3) a quiver of arrows tied shut with a purple ribbon; (4) a fat dark red leech; (5) a single orange flame; (6) a pale blue ice cube; (7) a big blue water droplet with splashes; (8) a red fist wreathed in flames."
+    },
+    {
+      "id": "grounds-a",
+      "concept": "rock corpse bones wreck fire brambles mist",
+      "width": 32,
+      "height": 32,
+      "seed": 17304,
+      "covers": [
+        "rock",
+        "corpse",
+        "bones",
+        "wreck",
+        "fire",
+        "brambles",
+        "mist"
+      ],
+      "subject": "Subject: each image shows exactly one of these 7 things, each thing about equally often: (1) a grey boulder; (2) a dented helmet lying beside a broken spear; (3) a small pile of white bones with a skull; (4) a pile of broken brass gears and wooden planks; (5) a cluster of orange flames; (6) a knot of thorny brown brambles; (7) a soft grey-white mist cloud."
+    },
+    {
+      "id": "conditions-a-16",
+      "concept": "venomed lucky mending thorned ripening turned heartened scapegoat",
+      "width": 16,
+      "height": 16,
+      "seed": 17311,
+      "covers": [
+        "venomed",
+        "lucky",
+        "mending",
+        "thorned",
+        "ripening",
+        "turned",
+        "heartened",
+        "scapegoat"
+      ],
+      "subject": "Subject: each image shows exactly one of these 8 things, each thing about equally often: (1) a fat bright green poison droplet; (2) a bright green four-leaf clover; (3) a red heart with a green leaf; (4) a spiky green thorn ball; (5) a golden ear of wheat; (6) a white flag on a stick; (7) a red heart with golden wings; (8) a white goat head with horns.",
+      "fragments": [
+        "style",
+        "light-bottom-left",
+        "class-symbol-16"
+      ]
+    },
+    {
+      "id": "conditions-b-16",
+      "concept": "shielded warded mollified delayed hastened quickened slowed asleep shaken",
+      "width": 16,
+      "height": 16,
+      "seed": 17312,
+      "covers": [
+        "shielded",
+        "warded",
+        "mollified",
+        "delayed",
+        "hastened",
+        "quickened",
+        "slowed",
+        "asleep",
+        "shaken"
+      ],
+      "subject": "Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a blue round shield; (2) a pale blue bubble dome; (3) a white feather; (4) a grey snail; (5) a yellow running rabbit; (6) a blue wing; (7) a pale blue tortoise; (8) a pale blue sleeping cloud; (9) a pale scared ghost.",
+      "fragments": [
+        "style",
+        "light-bottom-left",
+        "class-symbol-16"
+      ]
+    },
+    {
+      "id": "conditions-c-16",
+      "concept": "jinxed reckoning hushed leeched burning frozen drenched fired-up",
+      "width": 16,
+      "height": 16,
+      "seed": 17313,
+      "covers": [
+        "jinxed",
+        "reckoning",
+        "hushed",
+        "leeched",
+        "burning",
+        "frozen",
+        "drenched",
+        "fired-up"
+      ],
+      "subject": "Subject: each image shows exactly one of these 8 things, each thing about equally often: (1) a black cat head with yellow eyes; (2) a purple paper bill with a black seal; (3) a purple ribbon tied in a bow; (4) a dark red leech; (5) an orange flame; (6) a pale blue ice cube; (7) a blue water droplet; (8) a red fist with flames.",
+      "fragments": [
+        "style",
+        "light-bottom-left",
+        "class-symbol-16"
+      ]
+    },
+    {
+      "id": "conditions-d",
+      "concept": "jinxed leeched",
+      "width": 32,
+      "height": 32,
+      "seed": 17305,
+      "covers": [
+        "jinxed",
+        "leeched"
+      ],
+      "subject": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a charcoal grey cat with big bright yellow eyes and a light grey chest, arching its back; (2) a fat crimson red leech with a pink belly and a round sucker mouth.",
+      "notes": "Re-roll: the conditions-c black cats nearly vanished on a dark panel; a lighter leech for the same reason."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/icons/conditions/venomed.png",
+      "from": "conditions-a#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/lucky.png",
+      "from": "conditions-a#9",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/mending.png",
+      "from": "conditions-a#17",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/thorned.png",
+      "from": "conditions-a#24",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/ripening.png",
+      "from": "conditions-a#32",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/turned.png",
+      "from": "conditions-a#40",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/heartened.png",
+      "from": "conditions-a#48",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/scapegoat.png",
+      "from": "conditions-a#56",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/shielded.png",
+      "from": "conditions-b#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/warded.png",
+      "from": "conditions-b#9",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/mollified.png",
+      "from": "conditions-b#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/delayed.png",
+      "from": "conditions-b#11",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/hastened.png",
+      "from": "conditions-b#4",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/quickened.png",
+      "from": "conditions-b#13",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/slowed.png",
+      "from": "conditions-b#14",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/asleep.png",
+      "from": "conditions-b#46",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/shaken.png",
+      "from": "conditions-b#23",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/reckoning.png",
+      "from": "conditions-c#8",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/hushed.png",
+      "from": "conditions-c#16",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/burning.png",
+      "from": "conditions-c#32",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/frozen.png",
+      "from": "conditions-c#40",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/drenched.png",
+      "from": "conditions-c#48",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/fired-up.png",
+      "from": "conditions-c#56",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions-16/venomed.png",
+      "from": "conditions-a-16#1",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/lucky.png",
+      "from": "conditions-a-16#15",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/mending.png",
+      "from": "conditions-a-16#18",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/thorned.png",
+      "from": "conditions-a-16#24",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/ripening.png",
+      "from": "conditions-a-16#33",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/turned.png",
+      "from": "conditions-a-16#42",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/heartened.png",
+      "from": "conditions-a-16#48",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/scapegoat.png",
+      "from": "conditions-a-16#56",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/shielded.png",
+      "from": "conditions-b-16#8",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/warded.png",
+      "from": "conditions-b-16#5",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/mollified.png",
+      "from": "conditions-b-16#14",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/delayed.png",
+      "from": "conditions-b-16#24",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/hastened.png",
+      "from": "conditions-b-16#28",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/quickened.png",
+      "from": "conditions-b-16#32",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/slowed.png",
+      "from": "conditions-b-16#40",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/asleep.png",
+      "from": "conditions-b-16#45",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/shaken.png",
+      "from": "conditions-b-16#60",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/jinxed.png",
+      "from": "conditions-c-16#24",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/reckoning.png",
+      "from": "conditions-c-16#1",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/hushed.png",
+      "from": "conditions-c-16#2",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/leeched.png",
+      "from": "conditions-c-16#19",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/burning.png",
+      "from": "conditions-c-16#4",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/frozen.png",
+      "from": "conditions-c-16#5",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/drenched.png",
+      "from": "conditions-c-16#6",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/fired-up.png",
+      "from": "conditions-c-16#31",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions/jinxed.png",
+      "from": "conditions-d#9",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/leeched.png",
+      "from": "conditions-d#44",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/ground/rock.png",
+      "from": "grounds-a#1",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/ground/corpse.png",
+      "from": "grounds-a#5",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/ground/bones.png",
+      "from": "grounds-a#13",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/ground/wreck.png",
+      "from": "grounds-a#20",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/ground/fire.png",
+      "from": "grounds-a#33",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/ground/brambles.png",
+      "from": "grounds-a#44",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/ground/mist.png",
+      "from": "grounds-a#54",
+      "width": 32,
+      "height": 32
+    }
+  ]
+}

@@ -1,0 +1,3809 @@
+{
+  "trinkets-a": {
+    "id": "trinkets-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "744a3b4e-3ff4-4ff6-bd7c-ece5adb92da4",
+    "submittedAt": "2026-11-24T22:51:05.562Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 8 things, each thing about equally often: (1) a short curved tin sabre with a plain grey blade and brass hilt; (2) a shiny straight parade sword with a gold cross-guard and red tassel; (3) a coiled red-and-white ringmaster's whip with a gold handle; (4) a round dented metal cooking pot lid used as a shield, with a knob handle; (5) a small square wooden door with iron bands used as a shield; (6) a heavy round dark iron manhole cover with a grid pattern used as a shield; (7) a pair of round gold-rimmed reading glasses; (8) a tall blue wizard-ish thinking cap with a yellow star."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17201,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 8 things, each thing about equally often: (1) a short curved tin sabre with a plain grey blade and brass hilt; (2) a shiny straight parade sword with a gold cross-guard and red tassel; (3) a coiled red-and-white ringmaster's whip with a gold handle; (4) a round dented metal cooking pot lid used as a shield, with a knob handle; (5) a small square wooden door with iron bands used as a shield; (6) a heavy round dark iron manhole cover with a grid pattern used as a shield; (7) a pair of round gold-rimmed reading glasses; (8) a tall blue wizard-ish thinking cap with a yellow star. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T22:52:38.470Z",
+    "usageUsd": 0.0818562532265981,
+    "candidates": [
+      {
+        "file": "trinkets-a-0.png",
+        "sha256": "9d9a29d27863ed3ec12c2cc4a0ef33563e3a769ba98b185aeb215325870eb0dc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-1.png",
+        "sha256": "0c37310b6328d1a0476b0c20e400687cd3819432f9410fc37b59cd9c043ff569",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-2.png",
+        "sha256": "03697284b130744a16c93fc4e31ea5bf0bba9362e6b963eea06d25888cc33b4f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-3.png",
+        "sha256": "01bba8f636937eef3dc6f5c3efc138aec71454b0138d60c557d7eac99e628bc8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-4.png",
+        "sha256": "4e96a40a3b9665d6a4128e8b59345c93000bed14cbeb8e56c1dff36fb6a72f9e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-5.png",
+        "sha256": "5a55f7d4104cc658251bf758c507045216336f5ef8290a4761808b1e5ba5cda4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-6.png",
+        "sha256": "3978ee783225a85d0a3abfabb2947e45212997a2f59d2de140d34d51f0f75c16",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-7.png",
+        "sha256": "7af90f59c0fba472604bf00b1c2314070a9eb34c43d7664393bf16962e98b8f0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-8.png",
+        "sha256": "3d97f9caaca204f81a9aefa82c840066380681c4e0f6f11a585cda3213805d82",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-9.png",
+        "sha256": "adf0083dfb3d3b313f8897bc7d43a1c84bb0764f605a4ef79b00b7c65d88a5e0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-10.png",
+        "sha256": "490f76e677d6d5b15a9cafdb229b05c6e3515e6131d56152f111702bea3fd062",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-11.png",
+        "sha256": "953b52a9dfb2fa5e831f9b54b203e54e52b5677d85047aae867f3360f5b56a61",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-12.png",
+        "sha256": "980d40bc8f3aca51a2b957cd9b5f6edc5329931dc08a7fd60547ed532b11d2fe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-13.png",
+        "sha256": "919009dbb8c568bfcae8d82e8dc2aabe5342937d210cf94a356bbc521b50f433",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-14.png",
+        "sha256": "a68d6da72928b08f798e52fd1a7efbae77922924a77fbd49c69eb8c64634d5b8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-15.png",
+        "sha256": "4580c9e17a5cf847de6faca2ad26b3e867a3ad2005119d926fd5cdc4383ccc98",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-16.png",
+        "sha256": "eac02de7764c890e551e7fa3eee0bd231fc79b7989fc39595698fc9432b67d29",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-17.png",
+        "sha256": "935ce827209d3b6370d58d34183f9d21b8067bfa6a7ec74d5ef72f7bd07df74d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-18.png",
+        "sha256": "fc78d16cb90816da8238cfe2115090a1a843dd109e9e4f1a71fdd8b4d703bfa1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-19.png",
+        "sha256": "04bac69822cb2c3c01b30679df4ebd851c7ec1b884d0fa150d723d5c084f0155",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-20.png",
+        "sha256": "b7f65369093c2a2a5be834c331e15b87d6e3e36c9d18d2186c52689f7ca31573",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-21.png",
+        "sha256": "4f51d3fcbfb10f8133b0c4611d543028584d6e4fc6582e5199fe639031ed3e4e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-22.png",
+        "sha256": "034983180d8da6cbd4d8ff7ef5d56c6e5a2c4a86e9687bfef2c901daff474217",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-23.png",
+        "sha256": "d549941d3148ec9fd18160b390a745dbf7fad46be918cd33dbaa1447278d72f8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-24.png",
+        "sha256": "579121aa4e33aa3057d5240d46520b9bd4601742d82a2a734b1c7cec873f737c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-25.png",
+        "sha256": "e6ec0a7ea6d0ab7a7097613b633d00034ff7c6b48a0242954258ab3bb5ae1426",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-26.png",
+        "sha256": "8690f966edccf24bda1e7dfbdd79a24e0d341d530cde14315461bb3071764020",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-27.png",
+        "sha256": "de04f4432905d25e5b745346f18c397382be0bacffbe62bbfdc6a4845d62edb6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-28.png",
+        "sha256": "aeb7ab5b4a4a2fc26024c5f7a01bec4cf08b313c70611261a401dabddd72ca9b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-29.png",
+        "sha256": "5f85cea32e842a2c6fd21a71807ad5a391a695e54dedd45df3711056d0bf0adf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-30.png",
+        "sha256": "1569ae76108b09a3a9cec257de8de2b05b32784b3319fc30244922a980e9ec3a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-31.png",
+        "sha256": "21a58e32c1c7ed02a46bc11fe07f7cef1a67567b5bdc64ab720a18f17a0c5d7d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-32.png",
+        "sha256": "3a32477dd5907b0f0b94f03baa7f12558562eb77a236d4983f52e0001f145e05",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-33.png",
+        "sha256": "6d5ee63766d1a74305ae4d17cdde25498a4a2858da4c2b84d24256358cc83b35",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-34.png",
+        "sha256": "5ad633a036458c75c14e387f68f5db69d9190e240864d1f3cc647aa313cf087d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-35.png",
+        "sha256": "07c701bca1d013b252c3d3c1dfa9f32da7e37d5b59d12abd341ed7b7ba18c5ed",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-36.png",
+        "sha256": "88de17d8b11940936bccc3feecb0c76d757572ef276e4d8a116ef429575896d2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-37.png",
+        "sha256": "f57556d7e7298bc864557572b68192c600b5ffe5657e6c2185459f5ebc2500b0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-38.png",
+        "sha256": "e3128fef6facba30c87f0dc72d0ac0cef1c8a511a0c0f682147f4097b6608537",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-39.png",
+        "sha256": "1c53c200cb1ca15e7ea357e742b9bb67309de69fb9cb8c97cfb526a02390c08a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-40.png",
+        "sha256": "540c891b37a6926934fb06b3237d5e8fefc6345731ee55c7a095d25f4c7986d9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-41.png",
+        "sha256": "d98cff7f7eeb0ef444996e6d6e1be5ff52b210ebabe118d3da07eb7ca095dce1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-42.png",
+        "sha256": "1a71323b1500e8627f972faef2495771f34f9ded2ed6726a46ae51e4b62b1be7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-43.png",
+        "sha256": "0bf7f6c2c9b0463a0eee8e4fedf67d1fb615efd2a8ee8db87660774b56586848",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-44.png",
+        "sha256": "a011868d75126fda2e67ef5c2cc1d21ceb76e4d8c0b3f86e99d096f3f2c711a3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-45.png",
+        "sha256": "80740d43fb3ed633d1afbaaf21acfa726450fc95bffa41834e30ee3f88ff5956",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-46.png",
+        "sha256": "b092075034fd68dd91ff1f62ded74a1f5698b1786f319e0834c2e12cca4cb23a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-47.png",
+        "sha256": "1f9820ea42e614c0d45a747e35dc91a3eed62e4264701780d37af8361e1f0eff",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-48.png",
+        "sha256": "1b8f17999f97a6bc9e1c8b1f6ef7a5ef5d2dbf624bdd6e1bcaeeb1b654b3d28c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-49.png",
+        "sha256": "57c7cb7711a081335ff2a2883187863b4df95af69a9d6687e8212c3c023d8e40",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-50.png",
+        "sha256": "1de8ba55437e9407b94ca77cbb54d039a881570ec5d9c1100b808dd38bed9552",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-51.png",
+        "sha256": "ae0322e54743c497d8ef14c6b5b854ad66b90f32a448216c10298902ae74793a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-52.png",
+        "sha256": "609f6c2a87976067467bc9e3e0a4221f65cf3bb4239098f8e03f6f3087552615",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-53.png",
+        "sha256": "75576db5506ad0ed30e3897cd964a939f3bb9fd0871a411fa64af951d25e53d6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-54.png",
+        "sha256": "b0df4cd611f79f3939974dd3151f6dacacec2051e4c16b259be67cbf19fc2be3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-55.png",
+        "sha256": "86f5758fa9382756bb6778fdd40b872141f37d59c15bb48ebae9973c41276c46",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-56.png",
+        "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-57.png",
+        "sha256": "00102c0a98b4103294e13cfc7b2de0b0827a001f7c7864d69d1339c66b4b003d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-58.png",
+        "sha256": "48694c6126fc343d1b58045ae6235149367194315bd6b518c0706acf134ab3c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-59.png",
+        "sha256": "dbe280bdec3ccce01dcd647a96eeee1bb4db9cf10b2954d834b7244532f92290",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-60.png",
+        "sha256": "a173f21a9f13c55fdaae087c8c5d20dcd1a4a0f9e2e756dc09e10e15b91adf05",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-61.png",
+        "sha256": "1adb6f109dd45aeab7078c9b516c12bb1177edbd473ee1d80a2c0c9e09732208",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-62.png",
+        "sha256": "756b4281a309e9f8500f63144ae155bc849f60a35c81745b10641c63f18d3133",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-a-63.png",
+        "sha256": "1ac47ef5e3d043138c289ba29bda097f35a3e0058d72b58372203eab9587b3b7",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "trinkets-b": {
+    "id": "trinkets-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "edbc6c19-c304-464b-bf3a-cd1d30c2452c",
+    "submittedAt": "2026-11-24T22:55:56.154Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 11 things, each thing about equally often: (1) a slightly dented steel breastplate; (2) a dark blue robe covered in small gold stars; (3) a pendant necklace with a green leaf sprig; (4) a gold locket necklace with a red wax seal; (5) a gold watch fob chain with a tiny clock; (6) a black oval brooch with a purple gem; (7) a necklace with a big yellow glass bead holding a spark; (8) a green four-leaf clover pinned on a ribbon rosette; (9) a red sash with two gold medals; (10) a short grey clerk's cape with a feather quill pinned on; (11) a yellow oilskin raincoat with big pockets."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17202,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 11 things, each thing about equally often: (1) a slightly dented steel breastplate; (2) a dark blue robe covered in small gold stars; (3) a pendant necklace with a green leaf sprig; (4) a gold locket necklace with a red wax seal; (5) a gold watch fob chain with a tiny clock; (6) a black oval brooch with a purple gem; (7) a necklace with a big yellow glass bead holding a spark; (8) a green four-leaf clover pinned on a ribbon rosette; (9) a red sash with two gold medals; (10) a short grey clerk's cape with a feather quill pinned on; (11) a yellow oilskin raincoat with big pockets. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T22:57:55.304Z",
+    "usageUsd": 0.0830600418249766,
+    "candidates": [
+      {
+        "file": "trinkets-b-0.png",
+        "sha256": "fa5260083731a396d5ec7297f1200acae5191b107af7e0aedf1c41806dfb64c4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-1.png",
+        "sha256": "b6676d2a6ddf710e1e21c9d74fa4394a2777f0f7152f08da1b97aebb1c2dd0ea",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-2.png",
+        "sha256": "b4c58a1a52d1a400c93335ecdd911567653de5e0799c8138ab7f8335cec3cc0a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-3.png",
+        "sha256": "6a3665e8bab82a9740bef8dd351dc95603b2f12882782ecd193d8c673d983482",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-4.png",
+        "sha256": "de00b78a1b48b3fbc955af7c1b3b750dc1af020a0d0ad507593a491ef6f3779a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-5.png",
+        "sha256": "5610c811075ffc0873cbbaf5559c19ef787257462610c342754ab9d64bf72e78",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-6.png",
+        "sha256": "88dc18c0ffa77a666878570ecee1984259e75c509d2102c989718838eaae2904",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-7.png",
+        "sha256": "46ef515351501bef166bf63aa02dd5cdcae251aefae451aa0644ff16b85b6b82",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-8.png",
+        "sha256": "8f22d9e8fd114df26f9bc9a8df7fed958c9fb150bb84b5334b75acef3b9ce43d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-9.png",
+        "sha256": "6e04f3cdec1ed5d69804bd50b8fe99d7e431a83c1b9a338ed45a38032d23f049",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-10.png",
+        "sha256": "d5d364e4dba326d9a047c8b94971559a40c4f65b57f16eb1a34fc2a2a939ca3d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-11.png",
+        "sha256": "05c772dcacfefbfed49393ebec865fbd50f90cc8cf6f48f4fd7892b15047aca9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-12.png",
+        "sha256": "9f8aee35434f50ead8f72b560a777f1f29ab5803ea1f703fed940a830db0eeeb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-13.png",
+        "sha256": "a3d5334d935c9704774462dc63b3819a64eb5d49d64fc5dbb07afb1153070d3d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-14.png",
+        "sha256": "617a5be57a5f3ded901e3ffe78c42f057ae8aa2dae2546750055481cffed8fe8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-15.png",
+        "sha256": "566e614e289fa0840fe446a565064936102e6119ca918dbe39faa3dca8ef6cc3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-16.png",
+        "sha256": "6429644b532d86cc275cc5f49e5213ada7e9f63a991cc9a065e663863f1cab13",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-17.png",
+        "sha256": "fd43e0d514c4ca5837bab873e8dfaa09d666a3fdbcde2ee10cd2eedf578a2346",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-18.png",
+        "sha256": "04e5da307eba39cbc40e6002599d43400fed9884d901a6a5a61e470a5d6f9841",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-19.png",
+        "sha256": "d88f866f48a8f78375d9e96e43db1fbcf20b8ddc5197235547c1a9efa79151a3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-20.png",
+        "sha256": "cc4c3b6cfd4af400c39c8d7f64742fdde3f306fc5ca1cec9c4160fdc08b7d4d8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-21.png",
+        "sha256": "957d3e72b7f39c953494a6dd3afc1492579c7dbd65017db00149f65c000f6c1f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-22.png",
+        "sha256": "2726bb6f8ac7a645106d5ac6080efd5f207ea21d542ee40825ae5c133cdb9ee6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-23.png",
+        "sha256": "5433b9a6f629bc49f623046237499c0346dbeab185a8357c00879481c3a55b7e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-24.png",
+        "sha256": "9bc1ab0d13ed19d34ac837baa6cf580c63490ee69010f96b43d443061eb909de",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-25.png",
+        "sha256": "87c9e311d703f9cf2e05522a751db835833000994b839657283c280f85f3b896",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-26.png",
+        "sha256": "cc5c73e97aa22c4ea97f98e036d77decec8cfa98fbcfa90e46e5120c4ec518dd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-27.png",
+        "sha256": "feadb019219fa994c80c317663b25eca65c8f21c74ee21b7eeaa63dfd5e33521",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-28.png",
+        "sha256": "ed7dd1cd9c0d13f8702b2aa6bc10e739ed84ce9b418594b2d1fa3e45f1bc335b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-29.png",
+        "sha256": "0c7076d6a63b44de43ba63be8658a5578cffb92222ec96d9c98bdfd7f8a0d5a0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-30.png",
+        "sha256": "329f3d349a974745fd9941623e7d3a2c83d6313147f6aa58cd0c2fd6a1a37d9d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-31.png",
+        "sha256": "ac2b2689a60194f6b3b25b6d83b45990004cdaf6d8254c2b87b28c6ad7191511",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-32.png",
+        "sha256": "300fa32994695bd1eaaf2fbaf61d697a37e2933fcf5d5d9c1d79ea571d4cdcac",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-33.png",
+        "sha256": "e482553f285d898ba426b2393608a30b610ad44215862dffef20159b2faba3b8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-34.png",
+        "sha256": "7eb697f260025845c30ed504c73db98a57d7d128c38c072761330d09657a3773",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-35.png",
+        "sha256": "cd6ee0a33cbbc3fc8fd1dff50f80473c8f1473afa9208bbd31821dcc80166442",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-36.png",
+        "sha256": "9e8df3e2d5a686f3874405430213b6181ac304ba2a938ae1cbc7472abf914770",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-37.png",
+        "sha256": "c07bb32b5b05c1be2c24b9949b205d2d02e8d9ab7aec0bf840564dabb368217e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-38.png",
+        "sha256": "5c38d4bd92a12074e7dd1094b31aec4c7544fd4b60cf74bf820349ee0fa63c13",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-39.png",
+        "sha256": "2c9d39d42a022ff2a12f9bbc0dd9902a654accc351da9a2c4010f2a69455df27",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-40.png",
+        "sha256": "e5f5e21f75e00218e6ac5d34d9d979e85b684e6b1c4f1bbce390af300027df44",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-41.png",
+        "sha256": "2ff35a7a207c8b45535dd04422a90eb77214884194d99652903b3bc8a5353fe8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-42.png",
+        "sha256": "7b6f2c0f69083e9b1c7ddef9a8b5586cff367df539812dfeaadc9e0598bc6e28",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-43.png",
+        "sha256": "4526a3e868ed5d9f44962b844c70d9550aa15170312a31073c7d06b3d36cb571",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-44.png",
+        "sha256": "ec2063a945a2b81aae5278ef189d72803f6dea868438008f2916c72077ea4125",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-45.png",
+        "sha256": "1950de04fabf56c7422dfdd73b820f1f21f9a1322e26468465ad9438cb5fd5ca",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-46.png",
+        "sha256": "c7dfb7b21858b79bbcc09498172b2ed4cdd830554a7c172fc079ae57c2b5d4c1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-47.png",
+        "sha256": "54b6287e88b41de1cd22c759230d100376ebede62f8081e26afa315ad5e6066b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-48.png",
+        "sha256": "90aa693a45c9e6b640524cd60558e4dd2ba5e916116d71317f277db89e9a631c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-49.png",
+        "sha256": "c86fcd291e707c8be5dba4402da01795a0091296f1a4161e8576886a33f1714f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-50.png",
+        "sha256": "f8cc33872b77d946125b3b116e7693433dfa097f724138290d8814a591560bfd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-51.png",
+        "sha256": "1a72b6320592df8c5579d34a14653467f74aaf6155c7925de27965d7e36ba643",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-52.png",
+        "sha256": "ceeac02324864a1844e9c71eb1ee6c360595db9a652f37e340802f3e777d9b02",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-53.png",
+        "sha256": "959a15f8963eb662fd0653cffcf0ac6e5a1eae2d5f4780d96c54ace78e174ccc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-54.png",
+        "sha256": "000e9f2aef8563b1701836f95403292b7ab3236001e1f16b8ddc541bf38e644d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-55.png",
+        "sha256": "aa401a39fe83eb50fadbd95a9e042363fa49ead83913a9c17f00f04cd750a9cc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-56.png",
+        "sha256": "7cb0cb4c2aefa641c1d80ba958fdb2ece71ed21fb7b4d87d88318094f8135dd9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-57.png",
+        "sha256": "3146547fb77d15fc583de4dea029889f84b3485f5a2bfc9506ee845dff6d7100",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-58.png",
+        "sha256": "ba6d289f6e4d9415c732cb0fc3a925714dc1353bd86e76a393d1ce06fd3891c4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-59.png",
+        "sha256": "af607fab395f10d6c47447ac07aec3e01cff1be0890b9c5df5b4236e41b5404b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-60.png",
+        "sha256": "17615053d352607ba911eb95ddf570629351983da3fbbb8f9f6f640dcbc9d2d5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-61.png",
+        "sha256": "d0d43c7be7a3ddd4d311901cc2368ccfeed0c2fe1c202ff4857c9bbfa81e69df",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-62.png",
+        "sha256": "e3f063325bdc9d34e666d4048dd5625886f5ad395d48d75f4da0a25018283d52",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-b-63.png",
+        "sha256": "752365a45d357931020cfe9429faa137adb0562de0c90ad5686b9be895ca05f4",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "trinkets-c": {
+    "id": "trinkets-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "a9e3ba56-7d0b-464d-aa7b-15077a0621ea",
+    "submittedAt": "2026-11-24T22:57:55.390Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 11 things, each thing about equally often: (1) a pair of brass knuckle dusters; (2) a gold signet ring with a small blue stone; (3) a fat gold ring set with a gold coin; (4) tall brown leather boots with gold buckles; (5) a pair of plain brown lace-up shoes; (6) a pair of bright yellow rubber galoshes; (7) a shiny copper penny coin; (8) a small brass bugle horn; (9) a brass spyglass telescope; (10) a tall green thermos flask with a steaming cup lid; (11) a red ribbon bookmark with a gold tassel."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17203,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 11 things, each thing about equally often: (1) a pair of brass knuckle dusters; (2) a gold signet ring with a small blue stone; (3) a fat gold ring set with a gold coin; (4) tall brown leather boots with gold buckles; (5) a pair of plain brown lace-up shoes; (6) a pair of bright yellow rubber galoshes; (7) a shiny copper penny coin; (8) a small brass bugle horn; (9) a brass spyglass telescope; (10) a tall green thermos flask with a steaming cup lid; (11) a red ribbon bookmark with a gold tassel. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T22:59:22.599Z",
+    "usageUsd": 0.08169973058170743,
+    "candidates": [
+      {
+        "file": "trinkets-c-0.png",
+        "sha256": "b26a567b728bb550ee7383de8f9d82d46eaff3a17756d244b481117b76a6589a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-1.png",
+        "sha256": "8e85538f65ad4a5cd036e2c586d6469781d7efc41a2a360d96ec41fcd819bfd6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-2.png",
+        "sha256": "6f2c3e022aaf702a883c5410ebcfb816d7884c30b4bd6ceb01412d3af67a3ffc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-3.png",
+        "sha256": "a64e6c1b4846a69e704dfac50744d1669778dfcf2ffb23e082522bb4a8942383",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-4.png",
+        "sha256": "4748b98e617e2788c43b37c82fcb94d1f3c2dbfef8386356b605b396bbcae8c8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-5.png",
+        "sha256": "fcbb10333271b37dc6ddb07a23a8b0227060e3c071841908130e407fb90bce7c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-6.png",
+        "sha256": "a5dc0bbc299f71a7f311e42cfa42beec3529187efe3655af0c9f0796acf10013",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-7.png",
+        "sha256": "39e1594166ba12c9b8dbe37a213a7de29beba7152875b2745eb2dfa2cabb2c73",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-8.png",
+        "sha256": "5ca31fd89035184c003cce45fd76119a69d22aecc5948553c7a6a2496672190b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-9.png",
+        "sha256": "b5f2f2d8e856eb58d71ef5acd023519992760b46da92379097f5fd6af1f280e8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-10.png",
+        "sha256": "578a352f5bc0e0dea01ff8a3ed1593ff092749ee994c70f1f8b7e4c14c0d8dc8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-11.png",
+        "sha256": "d65ad7f0f611c5fcc5dafb8207be1092a552556aab9a289d68007c6bc601c46e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-12.png",
+        "sha256": "c899d42c873fc01dace6164f2447c3086fe02dbb350f3829edab8d754be0c3d3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-13.png",
+        "sha256": "97ca5c12d2d2e1e3613a7474ae2a00b6ad0b88824417ad8e4d1318807d44b047",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-14.png",
+        "sha256": "209c1e279c562f78c222def69da313881c48c3aa9bfd263dbcdc5348839f7a79",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-15.png",
+        "sha256": "cf9029e3195c9af11f87f5764bbba10fd0e4a234fd0e2ce16e03c98656632767",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-16.png",
+        "sha256": "def635b19e82fa468574900ab1378adfa463184216804a01fb700a0ad6afc1d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-17.png",
+        "sha256": "717d2b8497a8f0390de9a6b7c7470021f7129c42bb4ae7e2ec16ddfec00a15a1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-18.png",
+        "sha256": "36956c63e4076ccfbbec056268d59b50e73552cbbd8a5da067b544f543aaa881",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-19.png",
+        "sha256": "5320cadd4398aa94f370b9877d2214e14828cfa9425c6c0c2fd433711e7fcbd6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-20.png",
+        "sha256": "d7632828f57f2190b31a81342ec955acdf9f2193a76869ca80c161201330365a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-21.png",
+        "sha256": "2b376f26d43b15296cfc26e6f40669507f75d25a7a3fff46fca1d399f5b94f5c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-22.png",
+        "sha256": "01b57b717f8614a9551413536c81f0e559e3a2f7b4934edfbeb962e278ca152b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-23.png",
+        "sha256": "76b08ed457fad1d261d39491d907b727376f1e7760f3fd2a630738641b0b02a3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-24.png",
+        "sha256": "3667029165588d088b1b7a5128f20a556dd3ca1f8c8a6963e71fb63ec30f9dc2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-25.png",
+        "sha256": "70f1b0cd0ca922818253a9456cbcddc126a365698806e5ca3f253cc8ea111f33",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-26.png",
+        "sha256": "097bfaacd9f4d4a3107907f2b8ee1864ebd2a867c032fca4e2e3ac0baebf1760",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-27.png",
+        "sha256": "6bc545ac612fef8198bbf59aa21847fba087dac0f5d3d5a69dce3ad2f51c07cf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-28.png",
+        "sha256": "7ab7262a7f89d4c47f41ea36c66843d469689e400570bc9b15c228197cdb8879",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-29.png",
+        "sha256": "14a952682a2b30e0c7b12411c2d6e92017abe4f8a7198e237cee0e79b148af16",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-30.png",
+        "sha256": "c6de77cbfb8f99a61470a64bb707e0487ea3ba2acd25f6e82fea899cea3ed801",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-31.png",
+        "sha256": "bcf71ebe1e7dac8d47e69db12aa52e8761d59d7e00285ec4f1d5be78b3595382",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-32.png",
+        "sha256": "eb481d5f3f12c961f16b7d10dd1b940428477e3605701c2d433edeedf52d942a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-33.png",
+        "sha256": "21453fd927ef9046dcfa6190bd70d3a332fba97775034d34647c3db0253377ce",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-34.png",
+        "sha256": "51de06552b5cd87897d6eb9a4e8f08640294911eff7ab71a78a44e5bf96e439e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-35.png",
+        "sha256": "23e102fc054d3710d7b71d95390a50966baec0a96f1f02d546a6283d69befb2e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-36.png",
+        "sha256": "d30401913862f04dc76ba410e104206fb93f7ea2b2f75689ea56d3068d4b3284",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-37.png",
+        "sha256": "a08574e4986056647969af41fe7d23d8648a364d5f9baa4bba577d68e0cf37f8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-38.png",
+        "sha256": "eed7e37720a03562e16483c283e6180dc9d11d7d58ebcf5f7d6796cf2921b537",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-39.png",
+        "sha256": "4b32574df229d620ade6525c13cbdcfa600dcc7ce5f53d748a5e16b3fe650937",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-40.png",
+        "sha256": "0b1fdc31102b5747ec2b0521b9d1fab59a82268f34deef23ba05607c24cf2756",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-41.png",
+        "sha256": "062d4f8710293efc143494ffec4aeaa039c14ce74e9713f494f501a4ff906339",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-42.png",
+        "sha256": "7ffa85e74cd6f7c067f286564554f734bade18958091b305789737902e271712",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-43.png",
+        "sha256": "6cfd7922ed310bedec3125125803b29f65af21caf1857a38017ca836c7b250f2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-44.png",
+        "sha256": "f12d3de9869a6978d9e8e53a6d04f35b090abc4a902bb86dba9a787d68d66aff",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-45.png",
+        "sha256": "2fc2735755fd197676f85885c77c28a0446f7b5b3bb0a185a1d24dad695aea6e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-46.png",
+        "sha256": "ce18c7b735294ccfc848332301e66ea5640bb13bf5165511571c458d38399d15",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-47.png",
+        "sha256": "8bb41ce00d1153f1bdcceb4bac65ac75eab754d8ec7773d1ca497869bc54cc5a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-48.png",
+        "sha256": "9675c824a1ed96d020bc861c14148fd8901ba3a627cbd61d0e0f40ccc41ce51f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-49.png",
+        "sha256": "deabe30cde01dfe8c5aaaca9d6989ce6e8428465ae5d672d1f00fc7da4249f75",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-50.png",
+        "sha256": "5107079e02eaf8a7c3c24cfec0f2527005c6c43fb0b0d11cc4d4ba044dd87bd0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-51.png",
+        "sha256": "ba905a756df57accd17bc0d895e5c734943d6399bb4d02f6a92c821496d6eca7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-52.png",
+        "sha256": "20e189a13079c607dd80b621fcbada3b4705be2e8ad64cc381f93861ea4188fd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-53.png",
+        "sha256": "f0bb9e45d4b9183883e045a11b2dae88ca6ae0c592a38f7c5352c145fc45c130",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-54.png",
+        "sha256": "dfbe6b562ad8eb2e94e58429215b517c9eb8baa521f2b99977d1b2d9355cb8c0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-55.png",
+        "sha256": "ff6d21fc6bf8b7b21892f39c12e0bf2bd9daac5fecb15adc7bae6d9a24804d0f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-56.png",
+        "sha256": "765ffdb0d206de30c7eb17f0b38639ac4027f35fcc1ee66fbafc933008599531",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-57.png",
+        "sha256": "756e5dc45d3db6f3e008e2749837b5da28ced0f2b9f73224612f6455cd378404",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-58.png",
+        "sha256": "92b9eefca5fbe1aeb944d45a7d08c0e386f459bc8b354bba579308f7ea05c969",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-59.png",
+        "sha256": "6989c3b073eed4cd3b35a0d9db5d46d3b8b94507172b31486e635704c86de0df",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-60.png",
+        "sha256": "77433a24b4fcea244d2bc084e580c6e3a0884bcb81d1c9f0a906d560f4ecd856",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-61.png",
+        "sha256": "251124ce4530e1e492683fac68c90f9dcadcb8fd4701363e313ac1441daabbd6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-62.png",
+        "sha256": "3028eb4dd22cc4bebc3e9285a87cc748d5d657509bd3d0ea33b57276318a397d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "trinkets-c-63.png",
+        "sha256": "3a6121f9c4f185d545bf556a5e4e4a60cd758e0a1564d01305ce2b5346beb5dd",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "wonders-a": {
+    "id": "wonders-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "db5291dd-e99f-4b6b-a16b-a12c159c1a3f",
+    "submittedAt": "2026-11-24T22:59:22.704Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a pale blue pocket watch covered in ice; (2) a dark iron grave-digger's spade; (3) a small round red bellhop cap with a gold band; (4) a small tin box with a flint and a spark; (5) a green tin watering can; (6) a green gardener's apron with a trowel in the pocket; (7) a green vest covered in sharp thorns; (8) a pair of big garden hedge shears; (9) a round clay cider flask with a cork and a red apple painted on it; (10) a brass seal stamp with a blue wooden handle."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17204,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a pale blue pocket watch covered in ice; (2) a dark iron grave-digger's spade; (3) a small round red bellhop cap with a gold band; (4) a small tin box with a flint and a spark; (5) a green tin watering can; (6) a green gardener's apron with a trowel in the pocket; (7) a green vest covered in sharp thorns; (8) a pair of big garden hedge shears; (9) a round clay cider flask with a cork and a red apple painted on it; (10) a brass seal stamp with a blue wooden handle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:01:00.490Z",
+    "usageUsd": 0.08187934260898166,
+    "candidates": [
+      {
+        "file": "wonders-a-0.png",
+        "sha256": "f30beaaf02ee8ee693899b3841376f7295634e7c60f5319c60076e358af91bbc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-1.png",
+        "sha256": "5208dab25af7c5344aa2de42c27f7411b2e3ae373953a551c7a98cdc343d3d45",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-2.png",
+        "sha256": "7ad6e57e76a9cbdf0bcbb526f4ccc114b5eedba0735cf530e016f48bdb3ccf7e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-3.png",
+        "sha256": "807fd0c3339561ca35c7152e3cba2ee95b85105a4886500538870a82165ce21e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-4.png",
+        "sha256": "2ae91f7cb8c541cee7a3fc52e3cec083638a7dc14ef86a0902547090dfa18d3b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-5.png",
+        "sha256": "5fb556503f7f07babccf420cff3be80ac8b15cf5b3f119f04d93b6ec4d51bf6a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-6.png",
+        "sha256": "ebd035f598b7c9e86e76b132fb47c86fd200a82c135c2f020c682a5f8f847868",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-7.png",
+        "sha256": "e018ddb423193c34298fea918dc84cbfb540242bdadce8b1b1ba2c23312f170a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-8.png",
+        "sha256": "6da462a85a7d032c92d080387cb5a37f439e7e3628e00a55fe6c35fdb81ab104",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-9.png",
+        "sha256": "bb2b993b76dae15596bbab410dd5471f01d359b1661d85035312ade8de201b4e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-10.png",
+        "sha256": "13c9dde6f3c368d626fad552a63e6b14d132456d51371c93549545b52f7bbc3b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-11.png",
+        "sha256": "b7a40effb207de1a27274b92d2bdc5fdbd2769169395fa96726ff8bbc9029de0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-12.png",
+        "sha256": "fb4f952d911d18f572763ccce70e559117b42e628579bd2b5a1f27607ffb3a88",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-13.png",
+        "sha256": "c24fe61df6f3d4ba21d93f062b186f82aa9d4285bd5f55c9757f60f18e5c1f89",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-14.png",
+        "sha256": "4398af9cc58fffcf354864747f91f55ddace6f88c9e53abb6470ec9d5f285621",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-15.png",
+        "sha256": "89bb777c192c1e3cc9b844688095bd2c9271660044d55ca4ea47266b7842aafc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-16.png",
+        "sha256": "202409c371b9275c757cbf575db2c4ac7b10126dbe7657418f211afe9c295fe8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-17.png",
+        "sha256": "2763a6e803652e955c59c2940424c2088f3941bf5d37a8a2bf249f2f42b8851d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-18.png",
+        "sha256": "21d12b7879d34a9c386d3fb453381f1c035bb3764ac6c188f20f44ae160e7f25",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-19.png",
+        "sha256": "056a6c8b64cf7bdc01d631f620b7298e075db6a35a37009e13901fd263b64712",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-20.png",
+        "sha256": "12306ace504fa1302cc353cb1989784e0e8b17c373914fdbc30264d9bb27edf8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-21.png",
+        "sha256": "c1ea5b26dc4d437577a8912d8c523bd6fba169ecd41ab9efd9008969d6d75976",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-22.png",
+        "sha256": "dcba7f8bafe51e092ae7132697659c47823829a43d8b83451d63743c8e797963",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-23.png",
+        "sha256": "ea47d542dd916bb231899ed1d87a9b124fa38783fa101d009fff804eb30fdfa9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-24.png",
+        "sha256": "133a5db0a961086bb6dca4f23ec7bdb7eef980e7a088ac07b719d1795c37f7a7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-25.png",
+        "sha256": "1c804b9f7f1755259064e30556aa45b34dbc5d85dcb3d0ade76e92e37b00548b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-26.png",
+        "sha256": "999d263dfa78262b4c131a5ad67a69968924dd9e92404f48afd0b46fe3dba244",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-27.png",
+        "sha256": "2e99917c02bfb8b07165657582fd5e5c98d9201f64cbb4f64154110960141989",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-28.png",
+        "sha256": "941830aa12d883e52065aadde03184b386b1a47af4de739ba0ead37414e0b264",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-29.png",
+        "sha256": "73ad719df6eb0b3afd839164af3d59559d1a1d9f6892f32890ae2d96a7638267",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-30.png",
+        "sha256": "a7422fe3b211ba7e4f324d700121bafd42a60e31472d63e335e8b64faa46868a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-31.png",
+        "sha256": "03a47c4a8522e28e0e6ad5e71be0244fb86fed3dfb23980038eee2a68c8d3ccb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-32.png",
+        "sha256": "b317d1815f9e8bacfee160607ac4234829586c0163216d910a670bb2e4df6a93",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-33.png",
+        "sha256": "6234fb1d77c2bb513d71fa21c332e1090a82d2b97e69e5bc1ae965dec0b6c59b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-34.png",
+        "sha256": "3e5b17eeff30ec2ef91663b2b5aecdb8bd804adae46c04f966c1f35573a2827a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-35.png",
+        "sha256": "da00e2a2227e7e67c0d9c7ab268d646397a7a2edba48c4392cfca0ce77c09580",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-36.png",
+        "sha256": "41b7ba040198af6fbf1235d408ff93ff55db4b5a08230c1bd9c389dba3f6f74f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-37.png",
+        "sha256": "58d4452c6e4e85d26afd48f389ae867a9b4fd33142fa040988bbd8b1ee5fc041",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-38.png",
+        "sha256": "ddef44bb4841a72316bd002a1646576844e117953feb113c55933af4a8c7e921",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-39.png",
+        "sha256": "e1af8d922ffa6a7421e3bc63f8332d29e77bf49d6b75173db4aedae806883bcc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-40.png",
+        "sha256": "5ce09e7a2c47fe9a3c4ea07b63b5c9eeb31925f1557a10faca8fbc4ac727f17a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-41.png",
+        "sha256": "a8d862ac751f97006c6d5ba799fabc1a1f05df710e9b6cb08e833d992aa9960b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-42.png",
+        "sha256": "39b295feb271bd711f8a8146fca388d52ccd1bff8a3313760f05acb9567d9294",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-43.png",
+        "sha256": "1b1a86e476eece989110ba62d6bd3a3504f2493b08c41ed9e08efb2c17257ff9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-44.png",
+        "sha256": "5e4940b1993eeacff5718aa3f95ea9e04024432c20cd3ba8f14bfa9e134dc915",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-45.png",
+        "sha256": "f01ca04de528c38100dc0f6f33848821867ecca8b9a30f8fcb2ea5b8fd181ac9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-46.png",
+        "sha256": "90a53a4c583981d8410d10ba4575c426185a000243fa77c0298bdba1d4e0865c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-47.png",
+        "sha256": "261dff44d8b62419a4f8e94ec31242d7e333a0c26e6de41020a16e7902498157",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-48.png",
+        "sha256": "73a975667fabb0ac171c45397bd1af4538269a269a75d3ae314506d609d55122",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-49.png",
+        "sha256": "ce4b0616735be71e50ee8666c39e468f6c095ace9a6cca45563afbe0dc554e84",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-50.png",
+        "sha256": "34f73b4657e9eb1309bf4d85a6f62c3783d3796503217129ec55fdf4547a3079",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-51.png",
+        "sha256": "b6227b137826864d2dcc79c487363db54b7a1eae65acb8cadf12d1ac208fe90b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-52.png",
+        "sha256": "a385e4f64dd77864e72bdb5c3a7a7c749c0aa4427df41cda8ed7d15fb7424fe7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-53.png",
+        "sha256": "45ffec535e9fa5187bea16b8e6d8433196b63141a63554cc804edcfc41047adc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-54.png",
+        "sha256": "dec8356b9beb6f3691ddefb737093b2cdb573c3b6730129a0a4319e739127b1f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-55.png",
+        "sha256": "e01df62df9cee27a58fe8711b2e088fb610031d6192c38d22d13d80debc946d6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-56.png",
+        "sha256": "4cfeebb3e4196629332aa8f31ed52cccb6a029c6e94ffbdb86d0e2fbdbf5982a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-57.png",
+        "sha256": "d2485bf8c016f1092899d37f0ce085f54e5410a8eb4d15f12246578aafb6118d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-58.png",
+        "sha256": "844db961b8cfca6c0f0e0d4572ed19e7ec2f161f67ab5cf85a5ed30c8928426a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-59.png",
+        "sha256": "406b1a716c96dbac2619cc6a4431e9b4d86452b9c8b013fb5dc2807e9de0bf62",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-60.png",
+        "sha256": "7a11bfbb478762abbfede04ac59cf94a0131b74185d86540aed2470de852403f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-61.png",
+        "sha256": "8eb3045230399edd1991df905834d821141c6d4787ddcb9df0128afaab0ccccd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-62.png",
+        "sha256": "1af5ed0c55c24b8a811e25375f437eee52e594a29670ce3f117b127bc1f8849d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-a-63.png",
+        "sha256": "dde6c7c8e350b471888c485f9b62349f9d02e2434cde1fc1247cc5ccec607582",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "wonders-b": {
+    "id": "wonders-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f72cfb91-9613-4703-a580-32f15be2b1b9",
+    "submittedAt": "2026-11-24T23:01:00.631Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) an open red and gold royal umbrella; (2) a copper lightning rod with a yellow spark at its tip; (3) a flat pressed olive branch with green leaves and olives; (4) a silver baton with a gold ball tip; (5) a pair of silver riding spurs with star wheels; (6) a long dark grey greatcoat with brass buttons; (7) a pair of soft blue felt slippers; (8) a silver ring with a dark red stone; (9) a wooden bucket with water leaking from holes; (10) a pendant with a grey whetstone and a tiny sword."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17205,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) an open red and gold royal umbrella; (2) a copper lightning rod with a yellow spark at its tip; (3) a flat pressed olive branch with green leaves and olives; (4) a silver baton with a gold ball tip; (5) a pair of silver riding spurs with star wheels; (6) a long dark grey greatcoat with brass buttons; (7) a pair of soft blue felt slippers; (8) a silver ring with a dark red stone; (9) a wooden bucket with water leaking from holes; (10) a pendant with a grey whetstone and a tiny sword. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:03:04.105Z",
+    "usageUsd": 0.081958849562539,
+    "candidates": [
+      {
+        "file": "wonders-b-0.png",
+        "sha256": "dac73fbf2d6f96e31986abb2a851802b58e945d5d4443bf10fd88296cb0c4925",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-1.png",
+        "sha256": "36088d3afc584e41c9b64a78ecc55d781f35ba2299da5ea8a684866d451f6ac2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-2.png",
+        "sha256": "a320b9c598d4f4a59ee8828703d270d331616e9baa551af15360bc15cb75c991",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-3.png",
+        "sha256": "cab6f20a27d6dbd5b7bc54f69c3cf003bcd9094d2a28d1323d04d8a9eb81fef5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-4.png",
+        "sha256": "d11fe8c56341e2789a9d58edd46c78394344392342afd8795418f97096688ef9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-5.png",
+        "sha256": "fb162c470bf8278bda50666107feab82820ea17b09b42644b4691bd2c55e6662",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-6.png",
+        "sha256": "605db81c54932626d5093d6b21527457e76eef9659a2de9623160eea68d7f452",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-7.png",
+        "sha256": "e8267262c1d1be691b4475bde88197862daf52a35dae5278aef4c751170b2320",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-8.png",
+        "sha256": "167374bf668709143de4499d06bd8a4927f93d6e588e694a9f7c3ba493fc1e7e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-9.png",
+        "sha256": "0a18265ab1ec11ea9c86b8db8d62f61316f3002a7e0e32708a3d3b64257feba0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-10.png",
+        "sha256": "9b190dcb55ecd1997a0dccda511b29cf6c2c339d29a6ed5918f567166186bf75",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-11.png",
+        "sha256": "8209bc7524d67b36b14b224b6a0e00cfbaf5ed428cc82394e9af27e32a7a2592",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-12.png",
+        "sha256": "4ce68128fd9b62eb689f20b5fd6275f56f467c7099784ad6649b2d6107325d3c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-13.png",
+        "sha256": "4575799a4fe5661c311fd1f3e66f91a9344c3cd893a69cce0edd895cd1ab6b47",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-14.png",
+        "sha256": "c9bbb20bd21cecae93616f243c1c110ce4e4ef167fe2c8f6d58c72afbef823b6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-15.png",
+        "sha256": "42f55da8992552ed822fc97ac690815b33cd4083774de46177bbab0e68eb50a5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-16.png",
+        "sha256": "4dcc9ee82fdcda958e83b5ab6fea88b20f358ae54b653d6db1ebdcefccc52385",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-17.png",
+        "sha256": "db1e18143ba6aaef5b193eb9c4e0284310f9320834ce62c034de8568b6bba525",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-18.png",
+        "sha256": "e4c253b23ba301927c38746e1ad990739f4dbfa0212e10e1bef4b1f9e3914f3c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-19.png",
+        "sha256": "9e33c5f7fbfbd00992bfec3d627d05ce32517ebbc7eb3c80671ce90eb80e4a4f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-20.png",
+        "sha256": "85210ead033682158b1e37623558ef753cd81b50c80855c409ae73cc9d65c2df",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-21.png",
+        "sha256": "5acc35bb60044e866736e416d7fc2218b827d5cec5673557ad81eb63f84e9f2a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-22.png",
+        "sha256": "b74a4bb7517115b2accf19663d2de3a800103a9cfb37f9c570791e09e0497faa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-23.png",
+        "sha256": "b23ddc8534db7772cffb72fc344ae3435d1d0d7bf1579b114ba4746ca757a4ab",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-24.png",
+        "sha256": "41433592ce720b72ecc770e14fe7792c843794f34889b6d2d898955ab13d58d1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-25.png",
+        "sha256": "119e882ac06d5895d6400cf9973d9bc49718cb06bb9fab3dc1b82087d7b90a63",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-26.png",
+        "sha256": "e2df3e67c73cbe49ebe6680a93bcacc50cc43a88ae8f808d630164860b518e25",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-27.png",
+        "sha256": "cfed8936b4378b7b143dfb22840877efa4cb77c403af4f8db084c8a2c89692e8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-28.png",
+        "sha256": "dfed3c6a78e169bb050021cb0fa05952a50af32f1129c7e07641dca14c9f43f6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-29.png",
+        "sha256": "80c2a297aad17a2fcf9ed738b7fc65508ae94c4c3ad8641609b00285d289fb10",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-30.png",
+        "sha256": "5d5f429aeb35dd5723b30e41246b989033dab8d6172d62158266445324bfe632",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-31.png",
+        "sha256": "5cbe37ef30f9006333e3580e330b8257b1b2381cb504a93cf07fb13a7e5dc5ec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-32.png",
+        "sha256": "bcbdcc9b60f3cc0d6b64f88af1d4a65b451fa9be5d9381bc329d94f50265de34",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-33.png",
+        "sha256": "ea75a2a74fb45749d9cc68b3dcdb63932b24a948e4fcc0728ba96d255d317d1a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-34.png",
+        "sha256": "edf308bf874097df10872a050a06863a15844a17f3a93705dc4a1ae94551c4b0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-35.png",
+        "sha256": "410f57f087accb876b7b96be374906014d6d264c3871afcc54597d056232072a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-36.png",
+        "sha256": "097ddcc78667ebe6105309e64b613acaf468dcf82db69ebe50b2f3fd00948b79",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-37.png",
+        "sha256": "3967efcca1d088a6c10fd4e1d3fdb7b3a8c24c8ace79b2ec45dfd251bd022837",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-38.png",
+        "sha256": "24c819a1de1ce1c4df9941df284a529355e770836326bd520da1fe7d88dff17f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-39.png",
+        "sha256": "7eb60e99c125608de33340016b02b58e97a1caa8a04ef238cc4449abf16c1165",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-40.png",
+        "sha256": "55f2c31c2a8b705c16568ff3947fb8c37b78033181202c9edca3653f41df4ecb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-41.png",
+        "sha256": "088c8dbd78ade05e01d193c7a8fa05c4981f3f8a186948ace1c743340a3d5900",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-42.png",
+        "sha256": "99ed0d66e168f467c272232b96f28561a6a6899313c9a59eb5aecd7adda2c637",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-43.png",
+        "sha256": "d66e5056d749a0ed6f9e9a0335d41e2f8a0d9c57c96f36ad2d9d581f0cb05cbc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-44.png",
+        "sha256": "88a3652064340ad74673348ae2befd44815bce26e5b066528a27ea81c03b4e28",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-45.png",
+        "sha256": "7230ebde4ac0abcfea9603eb9dd9662f20e700e061a8784694db94dcb8f07303",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-46.png",
+        "sha256": "70c8c5c982b8d1e453db4609136a524b5ce0a9283a2cf0cc7ebc6d517e85c54e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-47.png",
+        "sha256": "b76b17fb535009bb96b63cea8a32c2445ff221cd489abb9c0a8685ab242b5505",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-48.png",
+        "sha256": "354db3362f82da6edfaab9afb6ed6f5eef11c8f0dd824782250276cd72675107",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-49.png",
+        "sha256": "f0495f22b096b6f6368be6e93c45001988eda9b6902d9731e6fb075eaaf48e93",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-50.png",
+        "sha256": "ddee87aa631448e730df71b3f7d40b920bbca74bc5c3d2c379600efe738f6b06",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-51.png",
+        "sha256": "98727e3d00c3431694cb868e4d78a936b13e461cb3da1c11da58088f1794a173",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-52.png",
+        "sha256": "f851ab8c47badf991d32bb3e504aa3c921e123fc4f9dcd0bbce102b0fa5d633d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-53.png",
+        "sha256": "c89f075fc52ebb40effed695e2e512bb8d4b79524f9a2678a7fcb2d04a2319df",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-54.png",
+        "sha256": "f78fc073f14cff78c8599fd10bf29120ebadde8fcce48545c806c4de512c72b0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-55.png",
+        "sha256": "858ebf79f317088d0985259ea82eb9e17d7779d6bb8af3403020ca58da0bc90c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-56.png",
+        "sha256": "0815b28557a9527ddca54affd321a95dc37f51f1c88cebeb071935f7570270cf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-57.png",
+        "sha256": "2ecd65ccce4531b3f94872e073ea945b8871c5fe62b8ed6ec0b15f27807c4715",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-58.png",
+        "sha256": "0b66df9bcdba74636d2521f13ca7a0e55f8f666902107d536dc5813660243712",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-59.png",
+        "sha256": "903de582455de4e461487ca2c827c49cf74b3e87a75c6ac81e07563c9fa63fe7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-60.png",
+        "sha256": "bb1cc1f74a199c62c82d10a428c1b771a7214ed240c0ca006bffdbe78c833928",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-61.png",
+        "sha256": "ec235e63e05d4883ce0c81091b40f1556f8eea5f34dee2cb6e6137cadf1d497e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-62.png",
+        "sha256": "77297d8dec12b46645c551be8f8b63557aa89b612b2e1c775a81185b1839132d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-b-63.png",
+        "sha256": "feae1c42cba002611a54dfd7f5e0a7010043cd431ca11e36352d212a4699ba38",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "cursed-marvels-a": {
+    "id": "cursed-marvels-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "797716a5-62f8-4a79-bf4a-796f1b426237",
+    "submittedAt": "2026-11-24T23:03:04.187Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a big white albatross bird with a rope tied around its neck; (2) a dark red coat with glowing orange embers; (3) a small notepad with a pencil; (4) a long striped blue nightcap with a white pompom; (5) a black iron ball and chain with a shackle; (6) a cracked tall grandfather clock; (7) a fancy gold-trimmed left glove glowing; (8) a gold hourglass with no bottom, sand pouring out; (9) a glass ink bottle of glowing blue ink with a quill in it; (10) a glowing golden book page with sparkles."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17206,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a big white albatross bird with a rope tied around its neck; (2) a dark red coat with glowing orange embers; (3) a small notepad with a pencil; (4) a long striped blue nightcap with a white pompom; (5) a black iron ball and chain with a shackle; (6) a cracked tall grandfather clock; (7) a fancy gold-trimmed left glove glowing; (8) a gold hourglass with no bottom, sand pouring out; (9) a glass ink bottle of glowing blue ink with a quill in it; (10) a glowing golden book page with sparkles. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:05:02.205Z",
+    "usageUsd": 0.08183661362859938,
+    "candidates": [
+      {
+        "file": "cursed-marvels-a-0.png",
+        "sha256": "8ab689c1d0ec837ca0582068774938b35727d35d7e99c4178520427295238dce",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-1.png",
+        "sha256": "1ff3837e1f95513e9438c90c9c0dd81b36825560b24d69576490cec64791a4c5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-2.png",
+        "sha256": "59485529ad7edfeda44d053430c5ffc4ec24d939c0ce33d15785b42060f4cab2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-3.png",
+        "sha256": "e93c14079dee94cd4e5d5a46af9508491bfa1cfaa2fda7fd532bde70f1764ac3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-4.png",
+        "sha256": "2c3dc7092d6725d543a98161e6c880b830cc7008d7f1d04fda0c07f11226f45f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-5.png",
+        "sha256": "bbbf0296bef7feca383aba3b3c73ddef8ccef44aefc05302fb47599bebdafffc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-6.png",
+        "sha256": "4269a01ccf55c644dabdc9d8530433fca4e28e4fa3e0924d4ec12114ed1ec9a5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-7.png",
+        "sha256": "1242d761c8a257f1e0096adc852eb9ae6558c517d8a425ea15e3d9ba4c7b7285",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-8.png",
+        "sha256": "931383ac8135c407117b848b33e071ea8aac3d1d685eed159240bbf4adb96769",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-9.png",
+        "sha256": "b294a9886445ae6010de814d44450ef14bdf2a4817b57bdfc4f16485372a7227",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-10.png",
+        "sha256": "a5fc9f796c0287ae7ca544d1923f1a8d86cd5751012e186f1c51f354f07f6225",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-11.png",
+        "sha256": "e50a5f79e5cb70904ee1784e805d8801eb2c0736214321d8f97184a549873062",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-12.png",
+        "sha256": "adec0d9fc2c5bbb80950ad2d846e184c0890145c6719301a87e65af46228ed75",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-13.png",
+        "sha256": "29b4e96d4eac669a19776f8b4407f11f3f44d1cbf20eafbfef983657d1844556",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-14.png",
+        "sha256": "20ee05f8c8d7954ae29e011e8cf4cd197ea24e2331eb282eb44ee96138fa993c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-15.png",
+        "sha256": "509f08d1b34946d05da0540c3d3dbbf770655b93633cdd3846170f4502510dab",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-16.png",
+        "sha256": "b0870f6d825fe882fce3ab17fc051537242a2e3bc6ff1f40ac3dbe472ba9d552",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-17.png",
+        "sha256": "a2aa1c752dddfe2fd0c864f9678185213da5c969099eee9b7537efa4b5061cb2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-18.png",
+        "sha256": "249855d7a67cd4f8533cdbc8446c84972309c7424679a89d9cfc747370fbbe1c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-19.png",
+        "sha256": "98d786ba797bf97fdd6c4aff62ed456eb7852a3b94c8ec9b3e09849ca7145298",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-20.png",
+        "sha256": "ec368be406fee61e37fb44a4e39cf07b577e185a4665cbd88715209b4de6d028",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-21.png",
+        "sha256": "672b226638bdb717e2f82f66c511943ced5f0322be019a20eb416a1fac23823f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-22.png",
+        "sha256": "579aa7d92ede638f748936b4aea0ce916c4b8334a7f180804c42581b2ee33bb8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-23.png",
+        "sha256": "98c37fc8d306a1bb7afb56b3d480903dd64593a22c3e23c4949c75a202c628c9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-24.png",
+        "sha256": "4ef8622faa87efb127ae4e1d6ec93510c31897f34d10aaae3d1ac51b2f932101",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-25.png",
+        "sha256": "7c6ce1586d3442f34bf5ac5dcb262fbec3a263b0cd20d7c327ed0a307e964385",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-26.png",
+        "sha256": "ae1005fe1a02c9e2cea572cd428900d98fa703f096c2fbf17c2e5c75c5a53fe3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-27.png",
+        "sha256": "ed3f19d327674c4fe2927018f0e44fb8b544d152ec262156acea353ecadaa058",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-28.png",
+        "sha256": "64257c07ec2ae8eb94a67a820db6affbf061cc908ce9a85b50e1b558ddb8ba14",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-29.png",
+        "sha256": "1635798368025f1ce09d5cc1cea7c333f11e308af8d63040659b6d91349fa78b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-30.png",
+        "sha256": "ce572cb8a74a815b7ed1d4e85f3295ed95c45dc6105f976f21feb17be4d2b1a6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-31.png",
+        "sha256": "928f74e650abbd2bd2eb68c7414448c74177a98d892e383746a10ab24fe05302",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-32.png",
+        "sha256": "6133b318f438d09772eec19dd61446d0628d6816868611bdfa723c53e87f75c4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-33.png",
+        "sha256": "d8ca181fad36d9d3ab0262d530824c3d42dd3379bb11c49e51dc26860408200a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-34.png",
+        "sha256": "49cb6d5201a4fba1ff54fafff5dbbc950512636e580028598f77e04446a432a5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-35.png",
+        "sha256": "2e00ef7c98aae91379835ab7579962344ebc58bdfef5ac30defb0d6e223321e3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-36.png",
+        "sha256": "741bf8cc4bf14439752c6c32a06f66602a046b5fd80a18c892c7b2cbea8a9949",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-37.png",
+        "sha256": "8991621e7ff2b13db48ca5744b65ee14e2ea333a89219cacda487331cec5ef97",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-38.png",
+        "sha256": "ebfc4c61704e71f8ecca5bc328aa7ab536de370d932e4c1e154d16ba1d2bfa81",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-39.png",
+        "sha256": "7bff3a08e5c2f61e7ac3c4ca3102a2bf4cf790b29cf18cf9edf09510680027c1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-40.png",
+        "sha256": "5ef9228fe677eb9e37ca9cc87f67c02e7a5eb0f074064db02890316a7792c242",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-41.png",
+        "sha256": "46649c7eeaefef03803c826dd34ae9cd0d68f41b1a76da3903b29c8ed6138e73",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-42.png",
+        "sha256": "9904883f5a1314bf4351b489f0394bcc60311a95cc592b1a07da9ab835a646e6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-43.png",
+        "sha256": "c1ede3d9cecb4573b1a0eff235ca8bcc55ada7d4f3a41f2a9212b4ebe45827b1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-44.png",
+        "sha256": "9f7aa743a0045fd2b61d71c2b84fc955e6c7561bc07736d4460a8e04defee126",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-45.png",
+        "sha256": "64804621c5a6c6ca90e643d9afff40314e1a2415382b0ab22f531b7c6ca5f03d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-46.png",
+        "sha256": "2cc9ef7ae1b723522ed4412db694c7e53f12c160161b226a1692165c69d653ed",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-47.png",
+        "sha256": "49f6b7838bdcce1fb24014e3a2e3be7f3c3c6f5ff115f6f2cf8581f2df767b0e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-48.png",
+        "sha256": "bb15991c29233c49222c625d6772eb41c7dcfb46a2418f608664775ddcb3e936",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-49.png",
+        "sha256": "299f960cb516e6a15af8a5ae4df494dbb6f96cbf1d3e6fc04a250cbc49abaa42",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-50.png",
+        "sha256": "e3d808c5285f518ab7e541cb8933f33e298e2fb35fe7e668c7673f86fbf5136a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-51.png",
+        "sha256": "3d790f95372eb2cc402fa385945609f395586259a3f176e293167e2f2622acb0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-52.png",
+        "sha256": "7652a048de257300820bdcd2be87170ca8debf5b20b1fec549c8f3a746d72234",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-53.png",
+        "sha256": "1381e3d02d34ef3eeefb2439dea96b8f12b1336e346bba16dbaa1eea947bc16e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-54.png",
+        "sha256": "48bbe8fe0303b26dcbe74e33ba710fccc5e30f753f74c797f6f129f8ae5fbfcf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-55.png",
+        "sha256": "9a033a158b66f901f409152201410de69cecd7a65cce627c5886b952d344ca5e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-56.png",
+        "sha256": "72fb819ff21aeab3e42fe60b9a96d5609af117fd8133493eec1ef4ef75f9a1be",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-57.png",
+        "sha256": "cbe5046ddc6aee51a39f9a9ea20c9ada291401385c08006cf6beed6b75551b3d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-58.png",
+        "sha256": "63db06e9b059b40575a31458cc044abcda4739a4a9ebbee094d6e6088d7c3268",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-59.png",
+        "sha256": "1f34d9b73a2331cba3b1d69c9a8e47da2561633d8fa926040081e2e69ccfa652",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-60.png",
+        "sha256": "cc014e7e1a418ba73fd81c34de0fb7115dfe95f5bed7bb46696a8c4dba6aff39",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-61.png",
+        "sha256": "5e5aec2cd9c6e4bd1b0b637e72f80bf4b7542fcb4a5a487cf4752dad20b6787f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-62.png",
+        "sha256": "f2a38c5b39e6815d94fd4c8e5d7e71408c54a132d5394465f931388a6fd723dd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "cursed-marvels-a-63.png",
+        "sha256": "f3e8b15c6ec984ad4f9681e65bb0a26076c5b7ae5f423e36e61d81d86dcd7150",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "pieces-a": {
+    "id": "pieces-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "6b3680b6-322b-4f4a-8883-4f65494bbb90",
+    "submittedAt": "2026-11-24T23:05:02.290Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a single gold armoured glove thumb with a gem; (2) a folded red silk glove lining; (3) a single gold cufflink with a red gem; (4) the top half of an hourglass: a glass bulb of sand with a gold cap; (5) the bottom half of an hourglass: a glass bulb of sand on a gold base; (6) a small heap of glittering golden sand; (7) a long white feather quill pen dipped in blue ink; (8) a curved wooden ink blotter with a brass knob; (9) a long blank parchment scroll with a ribbon; (10) a torn triangular corner of an old book page; (11) a spool of red thread with a needle; (12) a single loose book page floating with a faint glow."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17207,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a single gold armoured glove thumb with a gem; (2) a folded red silk glove lining; (3) a single gold cufflink with a red gem; (4) the top half of an hourglass: a glass bulb of sand with a gold cap; (5) the bottom half of an hourglass: a glass bulb of sand on a gold base; (6) a small heap of glittering golden sand; (7) a long white feather quill pen dipped in blue ink; (8) a curved wooden ink blotter with a brass knob; (9) a long blank parchment scroll with a ribbon; (10) a torn triangular corner of an old book page; (11) a spool of red thread with a needle; (12) a single loose book page floating with a faint glow. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:07:15.886Z",
+    "usageUsd": 0.08187164513270061,
+    "candidates": [
+      {
+        "file": "pieces-a-0.png",
+        "sha256": "b918f92346d0424250b0fad0146f988fe85075d3fe41ce8dc3e6c57b81498a38",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-1.png",
+        "sha256": "15fc33da5d67bfeb7756a5540d14f2f16ac1a12777f0a4a1c885f6115a6b2891",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-2.png",
+        "sha256": "44118c5c983191860dc4e9c7a1e9910de55eebc6296a930428e6c4b3473286eb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-3.png",
+        "sha256": "9e809256d238ffb42a7e8556f49856fe2a97c54cdd01e727de821f837bd3f716",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-4.png",
+        "sha256": "4eecc1e46794755bbed6f84b436f915ac90b9e052203725264972aab411dfba4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-5.png",
+        "sha256": "1e62160f36f3325a3a88c08905b082e2b76e1a7a6e811d64a5ba9b0e45eb8c64",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-6.png",
+        "sha256": "6bc3362d0cf1608df08ac7c70f480729df628b4b9d8691b3a4e53b7e751a51de",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-7.png",
+        "sha256": "a291302e3c11462667fd4a58c3566fa4c06c80d3dada8a5d924488b2b85eb666",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-8.png",
+        "sha256": "00212ad8280d70a6bdfb4ddd0f310717125b260617e8d57238b98e92ce0df46a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-9.png",
+        "sha256": "ca79e8d4c64427a02bf6985ecdf2c5387ee71cc10f73a3d634f7bed9ea8a37f8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-10.png",
+        "sha256": "65dc78dad7d0b58f77b02c536a7bf09e33297f3c807278ad207f07c6d0da0f90",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-11.png",
+        "sha256": "ca347fe56574435fc71fd8181320a46ce7af9cc8fd2c19ca3f08d0839c0b7c9e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-12.png",
+        "sha256": "2a08a195bed52d46856a3aa6e378a437656fc3e618b0a2cc771d62de22ce7377",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-13.png",
+        "sha256": "748f0892b6b3cf48bb1482e354cd300bb9a10371d3fa051d0ab2dab56ba85c68",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-14.png",
+        "sha256": "966704dd2bf49344e82f77b4bd890b3917ed3a8bad1f87d4451685d2189f4747",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-15.png",
+        "sha256": "3a96fc17e99c1fa81633910e33a312abf24a552f321a65568e56dbe1e1a94267",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-16.png",
+        "sha256": "e9537e3cf15b81df0527be84d8351bdb994ec3c46ee793b236368d3f248551ab",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-17.png",
+        "sha256": "44cccfc06784d6642f717c4195abdc3da2351501ebc1b42ec0c8f65f21ee05c0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-18.png",
+        "sha256": "4e275c089a4c41a3e73a10f0c7e74a8b2d025d06ee9f1e4ce6eaa2d7bd12ab7c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-19.png",
+        "sha256": "f776c62ac07308e21095fb1caffd447c3ada92912e7d7e0e9debf7a8e505a477",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-20.png",
+        "sha256": "9c1225a01408b306c3925a557fc71c511ef88e14e4870734f42617903a2f443e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-21.png",
+        "sha256": "e97a5e8c4b4e64899ae61715fe3096eca9866888a59a40f21b69f480635842a9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-22.png",
+        "sha256": "fa023508588a0c60a99a22b7d1806dfd84800c6951c045c83f6cfe2b6ebd577c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-23.png",
+        "sha256": "f8200b57cb9828205368723b7c9fb152698aa9031b853630a5bf0b2b118c10d1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-24.png",
+        "sha256": "c045c7610fb1dd7a1a814de3c62e0b905eaacd4a469e91480473758a6f264cc4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-25.png",
+        "sha256": "6f442c7a0a0e40d6cad6de57c84eb5f692fb3a81f1e7350dea101d468b49ec8f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-26.png",
+        "sha256": "ca433dc1530b5ad7924025845e639febd5ac1b3049f4964dcd7296fb954c237d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-27.png",
+        "sha256": "61ed1505a3a55ac08fbea5a186f5d98303a2ad71b02eaaa506c6aea33087db40",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-28.png",
+        "sha256": "eff244650a9fca109e9f12e2a8157e79a2b247d3d78b6975faa24bf91bd67838",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-29.png",
+        "sha256": "3fb44508dda48595012c2833b2966846a4b7af64989f41376d99b36ba7731f00",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-30.png",
+        "sha256": "2a9f3fa438560f7ea0911759687411b435456cd4ae7d113b3c89d82203d088c1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-31.png",
+        "sha256": "0d57ccff3f54966a5bc8f8ad92b570508bbfeb2ab81d812b768b553dbeb08bd6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-32.png",
+        "sha256": "c674a8b573eb26e720e0fee5b46b8ac6405475bd5f20fa14456527b8025ab4fe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-33.png",
+        "sha256": "cb44efd9b13bafe5bcf3a939055fcc53282c217dd821a7b00b0487fef13a91c4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-34.png",
+        "sha256": "7f07ce00c090f30564ad8e3a4782f57fb29a0c2beb44f5da7c64b44216190f60",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-35.png",
+        "sha256": "e115b5a60041bc7fc5e31d9f235c5a741dadc129ce2b82c2c66f9b0f46ac28d2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-36.png",
+        "sha256": "e30ff4e98a591fe2b406ea08d652bf776c907b92220b700c3fbeaf388d90877c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-37.png",
+        "sha256": "c4842913a0dbcbc169fef6ad4b21d55d6a792a689a292e7ee2ec770d4e1a6c2b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-38.png",
+        "sha256": "4a56533b582a9f8f7c09345f01ad5dd9014ac1ae3aac146dd20d38f8c8c56265",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-39.png",
+        "sha256": "3a642a0d43194fee22930cc7e03062a4353e0f7b5c504b6e762d7a794eedced9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-40.png",
+        "sha256": "fe3ce64fc21adabff27028f3d8fa2cf8e9fca491895c82861b66606e7f734dba",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-41.png",
+        "sha256": "05851c9b8cc5d1dae49f606b0823e1c0cff569737cac425150521c5243ab2274",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-42.png",
+        "sha256": "10194ab14129381c6031b0f1a70a53a0cfa69a2abfd466c286be95f477f11ea1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-43.png",
+        "sha256": "5f3ca76649099cb1ab2b4fb367837a36e037130237833a386eda5eddc1baf749",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-44.png",
+        "sha256": "0fea9dca7f7dea9cd1ea61c0ebd409e8cd9d3d18bd254f9303e8b279a93842c9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-45.png",
+        "sha256": "359ba5c164b88edda1850f81ff59b9d1cc447614520e91598ec6c1e72e154f74",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-46.png",
+        "sha256": "e559e528086cb6daf719a42abb980150c265202e6458bc2b7fb8a21ca1c0bda6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-47.png",
+        "sha256": "b914fc9fcc05b6450e8d347d3d8ce16ceca24516643f44671d6980632c0826ee",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-48.png",
+        "sha256": "b3f2c73b562ab2cc50f94c74e0032f88dd30afd3a497774bb0398d0495d1737d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-49.png",
+        "sha256": "45d0c67f2a01c9292984f2165775c9b952d8e919c457a0403a784ad52eb8ebc0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-50.png",
+        "sha256": "7811aa73bc0d36a027c22d3322885029f7bb4c9884c107e388aed2768fa2651d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-51.png",
+        "sha256": "1bd84aec57f9e546a5c5510e75136eb405e701741d29f448229d91d6b9833094",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-52.png",
+        "sha256": "19f556cbae3dba5f0a1397e4a03c040f1096875772ad06bfc1c8d5d1ac6d9491",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-53.png",
+        "sha256": "9af048e132b8a96e38966fd5a3cc14b1731462d90bf3d52c353b2db37f303459",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-54.png",
+        "sha256": "7138fe071603931944e2ac0267d5ca425b960069993d334d92b9c15d7774919d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-55.png",
+        "sha256": "7f5990a79c3c2e4daf2d15c8a9c646a6e6e85dc2093d786eb8ab76aafb1800d8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-56.png",
+        "sha256": "0ec8de3128f3c0672b7dcfc63c2c88aefe628e1604844e060e8627914e73df5a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-57.png",
+        "sha256": "d12a49d8912c74faa6966a0f8926f162a1cb96e33aa511772d61751fe0793bc5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-58.png",
+        "sha256": "b49da26a6a1522b26c8201784b52548a801bf8d948a90656ae4b288988aac481",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-59.png",
+        "sha256": "fbc702d2ef5715fb6645c396b8f8960d58101f71780a99802271dc3e556c2302",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-60.png",
+        "sha256": "393106f8f4bafd723a55c1d5b44bc889b22c5814f891e4c3a2ac64bee8ca41ef",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-61.png",
+        "sha256": "b02f5f7c10aea4c365b116814b768562c26b04947b8c0e75a775dfeb5d53c9db",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-62.png",
+        "sha256": "8eaf2aad4776c7668b575e031d00a3c72114feeee92a8db1d242aec56c62c764",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-a-63.png",
+        "sha256": "17e8d181fe64ad47abfa4c71e5770d437281aaa4926c0fbf8fa4d9fdd5b043b0",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "consumables-a": {
+    "id": "consumables-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "65f9efba-d829-4851-9588-729a59e86f82",
+    "submittedAt": "2026-11-24T23:07:16.009Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a round potion bottle of bubbly pink liquid with a cork; (2) a glass jar holding a green four-leaf clover; (3) a tall bottle of bright blue potion; (4) a flat leather hip flask of orange cordial; (5) a potion bottle of red liquid with a flame above it; (6) a small green potion bottle with a hazel leaf; (7) a golden yellow potion bottle with a wheat sprig; (8) a purple potion bottle with an eye painted on it; (9) a folded paper map with a bent corner; (10) a sealed envelope with a red wax seal; (11) a brass lantern with a bright yellow light; (12) a small folding army shovel."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17208,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 12 things, each thing about equally often: (1) a round potion bottle of bubbly pink liquid with a cork; (2) a glass jar holding a green four-leaf clover; (3) a tall bottle of bright blue potion; (4) a flat leather hip flask of orange cordial; (5) a potion bottle of red liquid with a flame above it; (6) a small green potion bottle with a hazel leaf; (7) a golden yellow potion bottle with a wheat sprig; (8) a purple potion bottle with an eye painted on it; (9) a folded paper map with a bent corner; (10) a sealed envelope with a red wax seal; (11) a brass lantern with a bright yellow light; (12) a small folding army shovel. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:08:53.725Z",
+    "usageUsd": 0.08170849826600816,
+    "candidates": [
+      {
+        "file": "consumables-a-0.png",
+        "sha256": "4e9b0034b9182585745745829d025b08c74bf8df85c610e980d9141cb61e17d4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-1.png",
+        "sha256": "635d8259d9fef60f45023a3cad818e0e031ba985de00b976f515d61b9d04c9fb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-2.png",
+        "sha256": "5ca2a9e1eb6f7d3e7a2ededf9b4771d509c0d802d88305fc85d7b3bef1cffd54",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-3.png",
+        "sha256": "825789bde8e507f6759a20e03797af47ffff6ed22a51a75fa439ee21c5648cbf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-4.png",
+        "sha256": "4fbfad9365c9c21d9b304ccfc8996dcf2be086d6e6f8ae80d6127b1ecda9a65f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-5.png",
+        "sha256": "afd54e7f0adbcc83703a5ee77cdc3318505681c1747cc49f72de9dea6884a7df",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-6.png",
+        "sha256": "a0bc741885c84ae87617ebb389a1826a2aeb504b239549e856d28be59dbb3962",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-7.png",
+        "sha256": "53b53c0c2049d9c8ca436ab389bfa9e15d95998a037602f620dad5b15ea07e0c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-8.png",
+        "sha256": "184c43ed820d5224bbc2a275e1218ad8390e03e77065b17870bddf37899d3325",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-9.png",
+        "sha256": "b1c56bccb5d4d9ea5cde0397a20b7a07856341e4e07458cec2e5d17520c4cc2f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-10.png",
+        "sha256": "5ed569602bdca5502cd01037c5edb5a188bb24f00f52b7420b8d25924155cc13",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-11.png",
+        "sha256": "d2f4d02d19de8af44e641b16d660b321a669027b9e967dffa4b75461cc56afc4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-12.png",
+        "sha256": "9eb770c2491e04a9c8fd7feeae35fdcccf7d58d32ffc91eb685bd790ecd1ec2f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-13.png",
+        "sha256": "a5661d6605fae17da5fd7f444a7fe8a8457112f6b221f89ee99bcbb1578dd943",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-14.png",
+        "sha256": "1ede922a072187e26b8bfcff621807d13a99ac1dc6e7fa2697e5bce726d8c62d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-15.png",
+        "sha256": "20c71014e0ae1025c6a640dd94fc0490d498ea1bb935e49c26137cd63a7a15be",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-16.png",
+        "sha256": "348d196c4e3564e4a27c791770b8fd97bccc4172b040f49deaf83affdea8ad0c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-17.png",
+        "sha256": "b651a4f6db42be14054854a2466fc97a2f51bcd8b0af4291e0da41bd6ed35880",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-18.png",
+        "sha256": "0cf0d0c772f8fde6df4f5f7fdac024ce2d1d9b71e18589d3ad2dfae16a872ed6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-19.png",
+        "sha256": "4cfb1a4a59a87a6999eee01a1e8ac879b0eccaa6de4ebfeb4600aea78d7413bb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-20.png",
+        "sha256": "e1d203d951c5458be6a6f94e9564f2f780d152fd403ab3a17287254391c43a81",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-21.png",
+        "sha256": "505dabe0c86fe511c16a8c5cd2631e9287d53d95bb3b1ea85cb37e64b5fcb8fd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-22.png",
+        "sha256": "b2e149f6e0501a3a15829fdd7be2fbeb110b6a99657f71e760a679e3beb85038",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-23.png",
+        "sha256": "1857701155a93f8627c943239f0cea7b9e033f287fed4f255d7fdb3548b13940",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-24.png",
+        "sha256": "0677c8eb54e780afdef20d5dd85d8661a9e233ef1cf3835f29687ebd44185fa0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-25.png",
+        "sha256": "8d7ae3c3fbe33820853d0c3cd0fe050ee7266e8fabe9ad0757941b7387dd651e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-26.png",
+        "sha256": "39e5259c4d77264431cb187c0b985de2a4385df479b7be3e9d54659630dd0462",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-27.png",
+        "sha256": "278bd9434f87bda1fedeecf793b907ce58faa0b5389f7098566a6695e421bbcb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-28.png",
+        "sha256": "654ad7a299429953823b215e4f65e7e9e074ab3a20e1be76882c449faf02d981",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-29.png",
+        "sha256": "b35a267351ce6bf5de36e4fd43d25a1f101d68c27bed71dacf68052a7ef4a030",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-30.png",
+        "sha256": "5d4e4e2ba5df38be7b2f2bbb5ae3b2529f86a353aaa47a2345cd0f23e7c8c5c5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-31.png",
+        "sha256": "fee26f4a0862dc6e841a14f91a90148dc49bf0172017ca55f487ba0445f96e9a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-32.png",
+        "sha256": "73e259ec1e7b8882ca5661f1c8b10190f8e63a09d42ff926844c4fb7fa3bf491",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-33.png",
+        "sha256": "c6865a27891e818f4690eb1e3c83130bc71bb0a61a256474dc5054f41d783c59",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-34.png",
+        "sha256": "3cf2de81cc6ff72c48c0dc154470ec659cffaa8a2b3874d4aaa3e111cd8c8a46",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-35.png",
+        "sha256": "d0fcd5654bc092f90705e58fa9f3ff5dde4c31ad081c048f2776adcc9af05ae7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-36.png",
+        "sha256": "19ac7f82b67a3a3df2cec501ef4f07d3d82d29e5c46ac20b5c26b450572be21b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-37.png",
+        "sha256": "e0932d45c0d1358f82ef5f132089d28ddbdc32a2c1bf6abeb37854c74ca83677",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-38.png",
+        "sha256": "d23e5b3cce84bd7a10b9a92fd501d434211eb07499c5bcbb2d3664576f699cf6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-39.png",
+        "sha256": "0cd21110bf764918e6f0ef53a6236638f9a53748601ae79677a74765e806e032",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-40.png",
+        "sha256": "09e99498dcfc641b1c62b2d9fcc0595f6f46e53c93682eb5282abcf9c79bf7b8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-41.png",
+        "sha256": "186b341d3f473c1f38cb99413d43c090aae9597bd5bb8c4e5a6fa1e86b8d17c9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-42.png",
+        "sha256": "f05be32517f89e8c6d57430bcadd8de0904b9f96276027af6603a7d7ec2a2313",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-43.png",
+        "sha256": "13d81b6bfb23dba374d67cdb4d9581a69029879ceee10cf50fbf551646c77003",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-44.png",
+        "sha256": "b016b6667e492c0fe499c9823f57b9ee0fcd111549e029c7d80ac214a56ec288",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-45.png",
+        "sha256": "028246c38ce8e4306264d5054bb9ce2b594266073ea6bbec9f1f3192d88a52c8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-46.png",
+        "sha256": "22a3e79489f23410b46dc0a81d17b8014044831656c50862186ca784c8433db0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-47.png",
+        "sha256": "d14559ee1660dc9fb3aa61b1b9292f43f1c7cf74e70d14f1b33b0e0fb8dd3f81",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-48.png",
+        "sha256": "da5d87a3066509829d96f1cb50f16746aa298a79bb4585a71898f88ebd95af21",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-49.png",
+        "sha256": "1a2b2a398c5966dc11644a10595bff9b1270259067cfedf14c266a00d9e35d58",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-50.png",
+        "sha256": "c00362cdb87879407334713985fd1756bcfaa30030040b19c55934128ca82cd0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-51.png",
+        "sha256": "3b1d3491a49abc3d2071beea400159347288a7a014b3313b1bb81204b0fd7ccd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-52.png",
+        "sha256": "ab87f13cd52b342879779586105569a4affe85c9ea221142112daac1c5cde689",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-53.png",
+        "sha256": "dc5e6e1aa64eae5e1974e0332586d3f750f65607dace9b77935f3b50318348cc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-54.png",
+        "sha256": "8bf056163fdeaadf54e5e657bcea267b2cb292d7fc9405d96f91ddead486b99f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-55.png",
+        "sha256": "8c9439840c2bc3a643814b757e49e1d95f9c6132c51d60927b026d0cb44ba232",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-56.png",
+        "sha256": "a825b71c7f3fe10fad40f2593ce6ef64b6b270175c5c95f2e92c5a2fa44f0777",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-57.png",
+        "sha256": "0555acc10244973444919d7232955cec91a93d2317010fbc839ddc3b3c84ab2a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-58.png",
+        "sha256": "0e78fab07a29e6f65f097a496a69feab3e273658af6e2b3947c1e62a3dd58105",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-59.png",
+        "sha256": "9a309413a0811dd836c69f73d48a87c7638cbfe2ce544cfcb5bfa0a1b3ce45e6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-60.png",
+        "sha256": "06ed4f621056336e06bc7809a6202dc61099c7b9c82eff6d5a7db75e69145453",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-61.png",
+        "sha256": "33f0709d2c530eb6aa2ce5efc10a0230c77c615f959fd9eadb75b290255970a1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-62.png",
+        "sha256": "7ec8bfdc2fba772ab0af034baef83e03b16e497fd07219ff58cbf46809125b9c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "consumables-a-63.png",
+        "sha256": "f557a91b4f90a3852f50ae517ecde720595101903b8e0595f10afda633814a53",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "pieces-b": {
+    "id": "pieces-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "47acf563-d857-458b-8657-620813fa992d",
+    "submittedAt": "2026-11-24T23:08:46.723Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) one round glass bulb shaped like a light bulb, full of golden sand, with a gold cap on top, upside down like a teardrop; (2) a round glass bowl half full of golden sand standing on a short gold foot."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17209,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) one round glass bulb shaped like a light bulb, full of golden sand, with a gold cap on top, upside down like a teardrop; (2) a round glass bowl half full of golden sand standing on a short gold foot. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-24T23:10:39.981Z",
+    "usageUsd": 0.08358284793959724,
+    "candidates": [
+      {
+        "file": "pieces-b-0.png",
+        "sha256": "37754b5d8ac19c73afadab9387162fdf577bd17b82fc2bb27256fd7b846705d0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-1.png",
+        "sha256": "b906b9b71e3da952de5bb2014e5e1c07012b04cc286dce2a317c096529d940ad",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-2.png",
+        "sha256": "6f17dbed5de89c3a7e6546cc799c7482c34239cbd94045ab48fad0beed977334",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-3.png",
+        "sha256": "d504892b668501d5b4fc9a9e351514c1e8f55621be812d0f4273c3622524cc64",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-4.png",
+        "sha256": "7b59dac69972d493614032c59887e8e68613d39b69188bce2fcba2d13fbe9480",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-5.png",
+        "sha256": "970eab31bd89391c7e2eb6e1b9bfecb553143397a47167669ac9cd0b6b6ac74d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-6.png",
+        "sha256": "eb72ac7387b456f15c908e478b55ac25e5c28bd0dfaa3ad087fa5158ac7e2e65",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-7.png",
+        "sha256": "9d494b9e52c335536dcafb50abd4a8ae7a8b7ca643d30b116a8f6b4553b89635",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-8.png",
+        "sha256": "82402f3a8f09b451b470ad6813cdb7cd3cd927f98ce0f797d0b93a89fd968c14",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-9.png",
+        "sha256": "263ef6b95951e326364b5cdbdeab072bbf1c712ddc7394e6f946f83e90c2df95",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-10.png",
+        "sha256": "c471d6fac0151652ee697b195521602f873f5d9455e7eb1ac920f0524435b66e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-11.png",
+        "sha256": "77867544c0e533519cac052b5579793abae9f12d536c89c975b79feb53b60679",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-12.png",
+        "sha256": "bec3103b05ab8df5ad0d21e827e34e91b7fd1b43d45c352caf16879e547ce2f7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-13.png",
+        "sha256": "61c652787a367fa3ec5a718e0d16b583fba1bdffb656c87771625ee4b1f3bf91",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-14.png",
+        "sha256": "6ea9185c3abd645f7bf19d6dfa8c8c83989d5e0343c6efe989adb1da4533190f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-15.png",
+        "sha256": "5fbca0b6b6ef3998382d7ad7f5edc6bcda24cad6f1631e63b368326449a5f787",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-16.png",
+        "sha256": "7526a77095c6a2cb6ec35579e788f9bbdc7bdb9eac873427fc6bcbc6447ab48f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-17.png",
+        "sha256": "2eb77c3ed8a5783e4de02e2ca2a1d0eece6b4767b4f3b44263dececbe4b9c964",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-18.png",
+        "sha256": "1adb73a4b3782178e2ae7ecc630c0e8a7457abbbb61107dba98b898fd73b2e22",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-19.png",
+        "sha256": "3539d4ca37669edddf1a55bcf832122c32630d15324925bf4f55c0582bc2a60d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-20.png",
+        "sha256": "2b8e41f9ec4511a8e1abc8874beec7536389305d8ad5f891bd93f59bff0f048e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-21.png",
+        "sha256": "923f5b866d2cda330da8c165ecdf69c480fe14a772e08aea9cd4e33a9f1b3c6e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-22.png",
+        "sha256": "b6ebe44475f4d130e87a82a1de56a650f357cef2d65d08ac7a7f9fc2207551e7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-23.png",
+        "sha256": "697bb2694d1142475cddbc40aec351db8f74c9cb7b417a9937e70d10bfabc783",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-24.png",
+        "sha256": "994f3a5d8e5812b54f2508ec2cdc63f92a277139cc63a3dfd3e599ed3ba65356",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-25.png",
+        "sha256": "93ecbb54974942b6cc60a1411743f83de4ddaa9df25da86767b2412b83a5fac0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-26.png",
+        "sha256": "b04fd5e4163964bd4eac7f9f56e13e7e5c220893da4092e3bfa45faf6e3982cd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-27.png",
+        "sha256": "a62c9cf51d45dcd638fc574e6898115e3e66843745469de5ef22116d1dc8c30d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-28.png",
+        "sha256": "2af8833a4b9250e1bc2c849217c09b7990437502bd4d52ce1ea0bda9c7bfcc21",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-29.png",
+        "sha256": "d5c87ecc8f4054ac5ef1caf95bc15af32bc18de7fc25fcdbbab58fec8bdb851c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-30.png",
+        "sha256": "58beb3829c8bc2a86efd8f683457f5c2f1c8693c1f6838005b198bbce715e86e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-31.png",
+        "sha256": "8ce25f1e1a537d8915a143c4897cf8cf581ddfb6728c8caa865ea16f5ceee813",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-32.png",
+        "sha256": "eb26e71ba2a4489a1118ea17e3dfceda61ce9f120a4c0d511e437f8fd3480a96",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-33.png",
+        "sha256": "aaabeee68074099e575f9b122e36c7acae7c1596b9e44af74a1d71886bdf2d64",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-34.png",
+        "sha256": "f9dde8d899fdb4fcba883cdeaec0c033bc2ca728de5ff7366f1a11d8cc77198d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-35.png",
+        "sha256": "f42ecd955c0d02fb0e7b5107f1a19605f29c34f9264efe465aecc81eb56082e3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-36.png",
+        "sha256": "43351aaef080bec0e76675487bc6777f688efbfb676c0e586dd15d50e720cc8a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-37.png",
+        "sha256": "1a7d7980bba7e975955c1d33f5222e9b15dd99e9c3e8997b508a2841f9aeb8fd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-38.png",
+        "sha256": "fd9029076c7178adecf282375d6fa8a43a3acdb800e896972c1eac8e7730ae29",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-39.png",
+        "sha256": "7a1f65f2d5add3142c9d7782bebc21d570bea454a3cb4aaf11c76ba2706ccdf1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-40.png",
+        "sha256": "be8f45ae329114b29967f1b319bd5267e854f42792bf81a66e1e494298d7757c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-41.png",
+        "sha256": "f4d82090075beb1eacc711401de24c5e6c21df817eec350a72922cb18beaa88a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-42.png",
+        "sha256": "7ede6e70af76d0a0b5fd14b2a31848fae308d2c977648b6e4d843fa0ccd0bab9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-43.png",
+        "sha256": "be17158572ede6443c4d5e31d78bc5ae9710ff03711e4337fd6e694ea814ed21",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-44.png",
+        "sha256": "b11397629793fcd466c19a9e5ea5a41a1fc6875bed46c3c153a8e95d5a9750de",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-45.png",
+        "sha256": "afb9db680abb5beca11039ec180f48b74c81212aa2c68382494fe4e787de1fa5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-46.png",
+        "sha256": "1e60ee2e863d54207d14241e5fcd5e47116d1686beabb627d5ffa6b346a2ad9b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-47.png",
+        "sha256": "106c3fa4e084da87008df4df84a1864b560d72c40c1768934a868e46e0a3227f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-48.png",
+        "sha256": "c0caf2dc0f064295dd4a5ff1f2c960a1df52437e9325d06d6b63392208cdd5a7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-49.png",
+        "sha256": "d7c9bb6a915ea5967a59a80f2977f4db3189415ef952ae3dc7fe1073b7851a8f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-50.png",
+        "sha256": "c23dd72eba6aa78af674078cc010973c3cadf0ec94b667391f32a536505b987e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-51.png",
+        "sha256": "6c1f80553322d58abdba1033c50df2dd038b29e01a84002d60fc58b19dbed3c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-52.png",
+        "sha256": "e11f9125e3ad17af03718ee056f2bb8719e315f71938323a05ee54b2631835d4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-53.png",
+        "sha256": "d43a05ce4a398d15b434400aa21d948b840f2e6b905b05a06440c40d6449298c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-54.png",
+        "sha256": "e9cc8c93b0ff0b29bd47f77976689bdeb6ce08766e6ff8071fea0f6d5994f792",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-55.png",
+        "sha256": "793641a757e978ddf9cd303d1cb055647f106f5254f9a3941bb38e8cb5962412",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-56.png",
+        "sha256": "a4df3b64d350d631e6668a523938a99b8bc930b0ef19028598bf6ff060cea85d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-57.png",
+        "sha256": "249487181fbeabda9788c301c3732b90371d79f31eb699382cbda4130cf083da",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-58.png",
+        "sha256": "bec235c2954c637aaead613391103a70d06f53497c41dd4e656d526a1a08d333",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-59.png",
+        "sha256": "12b621a2fb46baad3b79c167c0e72182ec06c0c627c90e0daae1b6697c1f05f3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-60.png",
+        "sha256": "c7c572f0b555af0271251e0f4e623581dc082db75b8907ec35a99f54cc4c1ebb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-61.png",
+        "sha256": "e9daf46a004b42560bbf5db1489b8798f72c838be5cbad3e573b16c0a3af47fe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-62.png",
+        "sha256": "215b26e09d4a43bbe73eabf650827d8fb3fd7e5a1a23d0e71dc83a42cef8214a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "pieces-b-63.png",
+        "sha256": "f68332a5ddf7d7fd5691c3f1e52577fda13284c0fb65bbb1bb58d719d1091faa",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  }
+}

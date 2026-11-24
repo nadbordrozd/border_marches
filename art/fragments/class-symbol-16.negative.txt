@@ -1,0 +1,1 @@
+frame, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, text, letters, numbers

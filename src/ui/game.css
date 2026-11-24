@@ -1274,3 +1274,25 @@
   flex-direction: column;
   gap: 8px;
 }
+
+/* Content icons (src/ui/icons.ts, docs/art/classes/icons.md): the frame is
+   drawn here, never baked into the art. 2 px border, 1 px bevel lit from the
+   bottom left, transparent inside; all in icon pixels (--icon-px). */
+.gm-icon {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.gm-icon > img {
+  image-rendering: pixelated;
+}
+
+.gm-icon-framed {
+  padding: var(--icon-px, 1px);
+  border: calc(2 * var(--icon-px, 1px)) solid var(--icon-frame);
+  box-shadow:
+    inset var(--icon-px, 1px) calc(-1 * var(--icon-px, 1px)) 0 var(--icon-light),
+    inset calc(-1 * var(--icon-px, 1px)) var(--icon-px, 1px) 0
+      var(--icon-shadow);
+}
