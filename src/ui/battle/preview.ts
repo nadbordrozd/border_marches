@@ -6,7 +6,7 @@
 
 import { ABILITIES } from "../../data/abilities.ts";
 import { CREATURES, isCreatureId } from "../../data/creatures.ts";
-import { getStack } from "../../core/battle/index.ts";
+import { conditionKind, getStack } from "../../core/battle/index.ts";
 import type {
   AttackPreview,
   BattleCreatureStats,
@@ -86,7 +86,7 @@ export interface PreviewSummary {
   /** null when there is no retaliation; see `noRetaliation`. */
   readonly retaliation: StrikeSummary | null;
   readonly noRetaliation: string | null;
-  /** Statuses applied, e.g. "Venom on Orc Brutes (−3 Def to end of round 3)". */
+  /** Conditions applied, e.g. "Venomed on Orc Brutes (−3 Def, 2 rounds)". */
   readonly statuses: readonly string[];
 }
 
@@ -136,13 +136,17 @@ export function summarizePreview(
   } else {
     noRetaliation = "No retaliation";
   }
-  const statuses = preview.statusesApplied.map((st) => {
+  const statuses = preview.conditionsApplied.map((st) => {
     const holder = getStack(state, st.stackId);
     const name = creatureName(holder.creature, holder.count);
-    if (st.status === "venom") {
-      return `Venom on ${name} (−${ABILITIES.venom.params.defense ?? 0} Def to end of round ${st.expiresAfterRound})`;
-    }
-    return `${st.status} on ${name}`;
+    const kind = conditionKind(st.kind).name;
+    const clock =
+      st.clock === null
+        ? "until the battle ends"
+        : `${st.clock} round${st.clock === 1 ? "" : "s"}`;
+    return st.kind === "venomed"
+      ? `${kind} on ${name} (−${st.size} Def, ${clock})`
+      : `${kind} on ${name} (${clock})`;
   });
   return {
     verb: action.type === "shoot" ? "Shoot" : "Attack",

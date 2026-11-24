@@ -85,6 +85,28 @@ function toCube(h: Hex): [number, number, number] {
   return [x, -x - z, z];
 }
 
+/** Cube steps in the fixed order E, SE, SW, W, NW, NE. */
+const CUBE_STEPS: ReadonlyArray<readonly [number, number, number]> = [
+  [1, -1, 0],
+  [0, -1, 1],
+  [-1, 0, 1],
+  [-1, 1, 0],
+  [0, 1, -1],
+  [1, 0, -1],
+];
+
+/**
+ * The hex one step from `h` in direction `dir` (0..5: E, SE, SW, W, NW,
+ * NE), possibly out of bounds. Steps in one direction form a straight line.
+ */
+export function stepHex(h: Hex, dir: number): Hex {
+  const [x, , z] = toCube(h);
+  const [dx, , dz] = CUBE_STEPS[dir] as readonly [number, number, number];
+  const nz = z + dz;
+  const nx = x + dx;
+  return { col: nx + (nz - (nz & 1)) / 2, row: nz };
+}
+
 export function hexDistance(a: Hex, b: Hex): number {
   const [ax, ay, az] = toCube(a);
   const [bx, by, bz] = toCube(b);

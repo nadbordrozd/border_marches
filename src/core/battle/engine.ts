@@ -1,29 +1,34 @@
 /**
- * The deterministic battle engine: legal actions, movement, strikes,
- * retaliation, turn order and rounds (GAME_DESIGN.md section 9).
+ * The deterministic battle engine (GAME_DESIGN.md 9, RULES_V2.md 1): legal
+ * actions, movement, the round structure of 1.6, actions of 1.7, the
+ * battle-end rules of 1.12.
  *
  * States are immutable. {@link applyAction} copies what it changes and
- * returns the new state with the events to animate. {@link previewAttack}
- * runs the very same strike code on a scratch copy, so a preview always
+ * returns the new state with the events to animate. The rehearsal
+ * (rehearse.ts) runs the very same code on a copy, so a preview always
  * equals what applying the action does.
  */
 
+import { isAlive } from "./abilities.ts";
 import {
-  collectAttackModifiers,
-  collectDamageMultipliers,
-  collectDefenseModifiers,
-  collectOnHit,
-  isAlive,
-  retaliationPrevented,
-  withStatus,
-  ABILITY_HOOKS,
-} from "./abilities.ts";
-import type { StrikeContext } from "./abilities.ts";
+  act as actDef,
+  ability,
+  conditionKind,
+  effect,
+  groundKind,
+} from "./registry.ts";
 import {
-  applyDamageToStack,
-  computeDamage,
-  defendedDefense,
-} from "./damage.ts";
+  Draft,
+  Resolver,
+  ROUND_LIMIT,
+  bears,
+  blockingHexes,
+  effectiveSpeed,
+  enemySide,
+  groundAt,
+  isRangedCreature,
+  timelineClass,
+} from "./resolve.ts";
 import {
   BATTLE_HEX_COUNT,
   hexFromIndex,
@@ -35,26 +40,20 @@ import {
 } from "./hex.ts";
 import type { Hex } from "./hex.ts";
 import type {
+  JsonValue,
+  ActTarget,
   AttackAction,
   AttackPreview,
   BattleAction,
-  BattleCreatureStats,
-  BattleEvent,
   BattleSide,
   BattleStack,
   BattleState,
   BattleStep,
-  DamageBreakdown,
-  FlatModifier,
   StackId,
-  StatusId,
-  StrikeKind,
-  StrikeResult,
 } from "./types.ts";
 
-export function isRangedCreature(creature: BattleCreatureStats): boolean {
-  return (creature.shots ?? 0) > 0;
-}
+export { enemySide, isRangedCreature } from "./resolve.ts";
+export { computeBreakdown } from "./resolve.ts";
 
 export function getStack(state: BattleState, id: StackId): BattleStack {
   const s = state.stacks.find((x) => x.id === id);
@@ -68,23 +67,29 @@ export function activeStack(state: BattleState): BattleStack | null {
     : getStack(state, state.activeStackId);
 }
 
-export function enemySide(side: BattleSide): BattleSide {
-  return side === "attacker" ? "defender" : "attacker";
-}
-
-/** Turn-order comparator: Speed descending, attacker first, then slot. */
+/**
+ * Turn-order comparator (1.6): timeline class (Hastened, normal, Delayed),
+ * effective Speed descending, attacker's owner first, then field order.
+ */
 export function compareTurnOrder(a: BattleStack, b: BattleStack): number {
-  if (a.creature.speed !== b.creature.speed)
-    return b.creature.speed - a.creature.speed;
-  if (a.side !== b.side) return a.side === "attacker" ? -1 : 1;
+  const ca = timelineClass(a);
+  const cb = timelineClass(b);
+  if (ca !== cb) return ca - cb;
+  const sa = effectiveSpeed(a);
+  const sb = effectiveSpeed(b);
+  if (sa !== sb) return sb - sa;
+  if (a.owner !== b.owner) return a.owner === "attacker" ? -1 : 1;
+  if (a.summoned !== b.summoned) return a.summoned ? 1 : -1;
   return a.slot - b.slot;
 }
 
-/** Waiting stacks: slowest first, then attacker first, then slot. */
+/** Waiting stacks: slowest first, then attacker's owner first, then field order. */
 function compareWaitOrder(a: BattleStack, b: BattleStack): number {
-  if (a.creature.speed !== b.creature.speed)
-    return a.creature.speed - b.creature.speed;
-  if (a.side !== b.side) return a.side === "attacker" ? -1 : 1;
+  const sa = effectiveSpeed(a);
+  const sb = effectiveSpeed(b);
+  if (sa !== sb) return sa - sb;
+  if (a.owner !== b.owner) return a.owner === "attacker" ? -1 : 1;
+  if (a.summoned !== b.summoned) return a.summoned ? 1 : -1;
   return a.slot - b.slot;
 }
 
@@ -98,7 +103,7 @@ interface Reach {
 
 function blockedCells(state: BattleState, moverId: StackId | null): Uint8Array {
   const blocked = new Uint8Array(BATTLE_HEX_COUNT);
-  for (const o of state.obstacles) blocked[hexIndex(o)] = 1;
+  for (const o of blockingHexes(state)) blocked[hexIndex(o)] = 1;
   for (const s of state.stacks) {
     if (isAlive(s) && s.id !== moverId) blocked[hexIndex(s.hex)] = 1;
   }
@@ -110,12 +115,13 @@ function bfs(state: BattleState, stack: BattleStack): Reach {
   const prev = new Int16Array(BATTLE_HEX_COUNT).fill(-1);
   const blocked = blockedCells(state, stack.id);
   const start = hexIndex(stack.hex);
+  const speed = effectiveSpeed(stack);
   dist[start] = 0;
   const queue = [start];
   for (let qi = 0; qi < queue.length; qi++) {
     const cur = queue[qi] as number;
     const d = dist[cur] as number;
-    if (d >= stack.creature.speed) continue;
+    if (d >= speed) continue;
     for (const n of neighbors(hexFromIndex(cur))) {
       const ni = hexIndex(n);
       if (blocked[ni] || dist[ni] !== -1) continue;
@@ -129,7 +135,8 @@ function bfs(state: BattleState, stack: BattleStack): Reach {
 
 /**
  * Hexes the stack can stand on this turn (its own hex at distance 0), as
- * hex index -> hexes moved. Obstacles and every other living stack block.
+ * hex index -> hexes moved. Blocking ground and every other living stack
+ * block.
  */
 export function reachableHexes(
   state: BattleState,
@@ -172,18 +179,31 @@ function enemyAdjacent(
   );
 }
 
-/** Ranged, has shots and no enemy stack adjacent. */
+/** Ranged, has shots, may shoot and no enemy stack adjacent. */
 export function canShoot(state: BattleState, stackId: StackId): boolean {
   const s = getStack(state, stackId);
+  const g = groundAt(state, s.hex);
   return (
-    isRangedCreature(s.creature) && s.shotsLeft > 0 && !enemyAdjacent(state, s)
+    isRangedCreature(s.creature) &&
+    s.shotsLeft > 0 &&
+    !bears(s, "cannotShoot") &&
+    !(g !== null && groundKind(g.kind).cannotShoot === true) &&
+    !enemyAdjacent(state, s)
   );
+}
+
+export function canWait(stack: BattleStack): boolean {
+  return !stack.waitedThisRound && !bears(stack, "cannotWait");
 }
 
 // ---------------------------------------------------------------------------
 // Legal actions
 
-/** Every legal action of the active stack, in a fixed deterministic order. */
+/**
+ * Every legal move, attack, shot, defend and wait of the active stack, in a
+ * fixed deterministic order. Abilities, hero acts and retreat take chosen
+ * targets and are checked by {@link actionError}.
+ */
 export function legalActions(state: BattleState): BattleAction[] {
   const s = activeStack(state);
   if (!s || state.winner !== null) return [];
@@ -213,8 +233,53 @@ export function legalActions(state: BattleState): BattleAction[] {
       out.push({ type: "move", stackId: s.id, to: hexFromIndex(i) });
   }
   out.push({ type: "defend", stackId: s.id });
-  if (!s.waitedThisRound) out.push({ type: "wait", stackId: s.id });
+  if (canWait(s)) out.push({ type: "wait", stackId: s.id });
   return out;
+}
+
+/** Shape checks of chosen targets (law 5: any stack or hex is legal). */
+function targetsError(
+  state: BattleState,
+  targets: readonly ActTarget[],
+  want: number,
+): string | null {
+  if (targets.length !== want) return `choose ${want} target(s)`;
+  for (const t of targets) {
+    if ("stack" in t) {
+      const s = state.stacks.find((x) => x.id === t.stack);
+      if (!s || !isAlive(s)) return `no living stack ${t.stack}`;
+      if ("condition" in t && !s.conditions.some((c) => c.uid === t.condition))
+        return `${t.stack} bears no condition ${t.condition}`;
+    } else if (!inBounds(t.hex)) {
+      return "target hex out of bounds";
+    }
+  }
+  return null;
+}
+
+/** The hero acts a side may still use (1.7, 1.11). */
+export function heroActError(
+  state: BattleState,
+  side: BattleSide,
+  actId: string,
+): string | null {
+  const sideState = state.sides[side];
+  if (!sideState.hero) return "this side has no hero";
+  const def = actDef(actId);
+  switch (def.kind) {
+    case "cast":
+      return sideState.castRound === state.round
+        ? "the hero has already cast this round"
+        : null;
+    case "command":
+      return sideState.commandUsed ? "the Command is used" : null;
+    case "item":
+      return sideState.itemActsUsed.includes(actId)
+        ? "this item act is used"
+        : null;
+    case "ability":
+      return "an ability is not a hero act";
+  }
 }
 
 /** Why the action is illegal, or null when it is legal. */
@@ -228,7 +293,8 @@ export function actionError(
   const s = getStack(state, action.stackId);
   switch (action.type) {
     case "wait":
-      return s.waitedThisRound ? "already waited this round" : null;
+      if (s.waitedThisRound) return "already waited this round";
+      return bears(s, "cannotWait") ? "this stack cannot Wait" : null;
     case "defend":
       return null;
     case "move": {
@@ -255,6 +321,35 @@ export function actionError(
         ? null
         : "attack hex not reachable";
     }
+    case "ability": {
+      if (!s.creature.abilities.includes(action.ability))
+        return `${s.creature.id} has no ability ${action.ability}`;
+      const actId = ability(action.ability).act;
+      if (!actId) return `${action.ability} is not an activated ability`;
+      if (s.abilitiesUsed.includes(action.ability))
+        return "this ability is used for the battle";
+      const def = actDef(actId);
+      return (
+        targetsError(state, action.targets, def.targets) ??
+        def.check?.(state, s.id, action.targets) ??
+        null
+      );
+    }
+    case "heroAct": {
+      const err = heroActError(state, s.side, action.act);
+      if (err) return err;
+      const def = actDef(action.act);
+      return (
+        targetsError(state, action.targets, def.targets) ??
+        def.check?.(state, s.id, action.targets) ??
+        null
+      );
+    }
+    case "retreat": {
+      const side = state.sides[s.side];
+      if (!side.hero) return "this side has no hero";
+      return side.canRetreat ? null : "this hero cannot retreat";
+    }
   }
 }
 
@@ -266,426 +361,297 @@ export function isLegalAction(
 }
 
 // ---------------------------------------------------------------------------
-// Draft: copy-on-write working copy of a state
-
-class Draft {
-  stacks: BattleStack[];
-  round: number;
-  queue: StackId[];
-  waiting: StackId[];
-  activeStackId: StackId | null;
-  winner: BattleSide | null;
-  readonly events: BattleEvent[] = [];
-  private readonly base: BattleState;
-  private readonly index = new Map<StackId, number>();
-
-  constructor(state: BattleState) {
-    this.base = state;
-    this.stacks = state.stacks.slice();
-    this.round = state.round;
-    this.queue = state.queue.slice();
-    this.waiting = state.waiting.slice();
-    this.activeStackId = state.activeStackId;
-    this.winner = state.winner;
-    this.stacks.forEach((s, i) => this.index.set(s.id, i));
-  }
-
-  get(id: StackId): BattleStack {
-    const i = this.index.get(id);
-    if (i === undefined) throw new Error(`no stack ${id}`);
-    return this.stacks[i] as BattleStack;
-  }
-
-  set(stack: BattleStack): void {
-    const i = this.index.get(stack.id);
-    if (i === undefined) throw new Error(`no stack ${stack.id}`);
-    this.stacks[i] = stack;
-  }
-
-  update(id: StackId, patch: Partial<BattleStack>): BattleStack {
-    const next = { ...this.get(id), ...patch };
-    this.set(next);
-    return next;
-  }
-
-  toState(): BattleState {
-    return {
-      seed: this.base.seed,
-      obstacles: this.base.obstacles,
-      sides: this.base.sides,
-      stacks: this.stacks.slice(),
-      round: this.round,
-      queue: this.queue.slice(),
-      waiting: this.waiting.slice(),
-      activeStackId: this.activeStackId,
-      winner: this.winner,
-    };
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Strikes
-
-function sum(mods: readonly FlatModifier[]): number {
-  return mods.reduce((t, m) => t + m.amount, 0);
-}
-
-/** The full damage computation for one strike (no state change). */
-export function computeBreakdown(ctx: StrikeContext): DamageBreakdown {
-  const { state, attacker, defender, kind } = ctx;
-  const heroAttack = state.sides[attacker.side].hero?.attack ?? 0;
-  const attackModifiers = collectAttackModifiers(ctx);
-  const attack = Math.max(
-    0,
-    attacker.creature.attack + heroAttack + sum(attackModifiers),
-  );
-
-  const defSide = state.sides[defender.side];
-  const heroDefense = defSide.hero?.defense ?? 0;
-  const defenseModifiers: FlatModifier[] = [];
-  if (defSide.defenseBonus !== 0) {
-    defenseModifiers.push({
-      source: "fortified",
-      label: "Fortified",
-      amount: defSide.defenseBonus,
-    });
-  }
-  defenseModifiers.push(...collectDefenseModifiers(ctx));
-  const defenseBeforeDefend = Math.max(
-    0,
-    defender.creature.defense + heroDefense + sum(defenseModifiers),
-  );
-  const defense = defender.defending
-    ? defendedDefense(defenseBeforeDefend)
-    : defenseBeforeDefend;
-
-  const abilityMultipliers = collectDamageMultipliers(ctx);
-  const rangedInMelee = isRangedCreature(attacker.creature) && kind !== "shot";
-  const { damage, multiplier } = computeDamage({
-    count: attacker.count,
-    damagePerCreature: attacker.creature.damage,
-    attack,
-    defense,
-    percents: abilityMultipliers.map((m) => m.percent),
-    halved: rangedInMelee,
-  });
-  return {
-    kind,
-    count: attacker.count,
-    damagePerCreature: attacker.creature.damage,
-    baseAttack: attacker.creature.attack,
-    heroAttack,
-    attackModifiers,
-    attack,
-    baseDefense: defender.creature.defense,
-    heroDefense,
-    defenseModifiers,
-    defenseBeforeDefend,
-    defending: defender.defending,
-    defense,
-    multiplier,
-    abilityMultipliers,
-    rangedInMelee,
-    damage,
-  };
-}
-
-interface AppliedStatus {
-  readonly stackId: StackId;
-  readonly status: StatusId;
-  readonly expiresAfterRound: number;
-}
-
-function removeFromTurnLists(d: Draft, id: StackId): void {
-  d.queue = d.queue.filter((x) => x !== id);
-  d.waiting = d.waiting.filter((x) => x !== id);
-}
-
-function strike(
-  d: Draft,
-  attackerId: StackId,
-  defenderId: StackId,
-  kind: StrikeKind,
-  hexesMoved: number,
-  applied: AppliedStatus[],
-): { result: StrikeResult; ctx: StrikeContext } {
-  const ctx: StrikeContext = {
-    state: d.toState(),
-    attacker: d.get(attackerId),
-    defender: d.get(defenderId),
-    kind,
-    hexesMoved,
-  };
-  const breakdown = computeBreakdown(ctx);
-  const target = ctx.defender;
-  const res = applyDamageToStack(
-    { count: target.count, hp: target.creature.hp, topHp: target.topHp },
-    breakdown.damage,
-  );
-  d.update(defenderId, { count: res.count, topHp: res.topHp });
-  const result: StrikeResult = {
-    attackerId,
-    targetId: defenderId,
-    kind,
-    breakdown,
-    damage: breakdown.damage,
-    kills: res.kills,
-    hpLost: res.hpLost,
-    targetCountAfter: res.count,
-    targetTopHpAfter: res.topHp,
-  };
-  d.events.push({
-    type: "damage",
-    sourceId: attackerId,
-    targetId: defenderId,
-    kind,
-    damage: breakdown.damage,
-    kills: res.kills,
-    countAfter: res.count,
-    topHpAfter: res.topHp,
-    breakdown,
-  });
-  if (res.count === 0) {
-    d.events.push({ type: "death", stackId: defenderId });
-    removeFromTurnLists(d, defenderId);
-  } else {
-    for (const a of collectOnHit(ctx)) {
-      const cur = d.get(defenderId);
-      d.set({
-        ...cur,
-        statuses: withStatus(cur.statuses, {
-          id: a.status,
-          expiresAfterRound: a.expiresAfterRound,
-          sourceId: attackerId,
-        }),
-      });
-      applied.push({
-        stackId: defenderId,
-        status: a.status,
-        expiresAfterRound: a.expiresAfterRound,
-      });
-      d.events.push({
-        type: "status",
-        stackId: defenderId,
-        status: a.status,
-        change: "applied",
-        expiresAfterRound: a.expiresAfterRound,
-      });
-    }
-  }
-  return { result, ctx };
-}
-
-interface AttackOutcome {
-  readonly hexesMoved: number;
-  readonly strike: StrikeResult;
-  readonly retaliation: StrikeResult | null;
-  readonly statusesApplied: AppliedStatus[];
-}
-
-function moveStack(d: Draft, stackId: StackId, path: readonly Hex[]): void {
-  if (path.length === 0) return;
-  const s = d.get(stackId);
-  const to = path[path.length - 1] as Hex;
-  d.events.push({ type: "move", stackId, from: s.hex, to, path });
-  d.update(stackId, { hex: to });
-}
-
-/** Runs an attack or shot on the draft (legality already checked). */
-function performAttack(d: Draft, action: AttackAction): AttackOutcome {
-  const applied: AppliedStatus[] = [];
-  if (action.type === "shoot") {
-    const s = d.get(action.stackId);
-    d.update(action.stackId, { shotsLeft: s.shotsLeft - 1 });
-    d.events.push({
-      type: "shoot",
-      stackId: action.stackId,
-      targetId: action.targetId,
-    });
-    const { result } = strike(
-      d,
-      action.stackId,
-      action.targetId,
-      "shot",
-      0,
-      applied,
-    );
-    return {
-      hexesMoved: 0,
-      strike: result,
-      retaliation: null,
-      statusesApplied: applied,
-    };
-  }
-  const path = findPath(d.toState(), action.stackId, action.from);
-  if (!path) throw new Error("attack hex not reachable");
-  moveStack(d, action.stackId, path);
-  d.events.push({
-    type: "attack",
-    stackId: action.stackId,
-    targetId: action.targetId,
-  });
-  const first = strike(
-    d,
-    action.stackId,
-    action.targetId,
-    "melee",
-    path.length,
-    applied,
-  );
-  let retaliation: StrikeResult | null = null;
-  const target = d.get(action.targetId);
-  if (
-    isAlive(target) &&
-    !target.retaliatedThisRound &&
-    !retaliationPrevented(first.ctx)
-  ) {
-    d.update(action.targetId, { retaliatedThisRound: true });
-    d.events.push({
-      type: "retaliation",
-      stackId: action.targetId,
-      targetId: action.stackId,
-    });
-    retaliation = strike(
-      d,
-      action.targetId,
-      action.stackId,
-      "retaliation",
-      0,
-      applied,
-    ).result;
-  }
-  return {
-    hexesMoved: path.length,
-    strike: first.result,
-    retaliation,
-    statusesApplied: applied,
-  };
-}
-
-/**
- * Exactly what an attack or shot will do: damage, kills, the retaliation on
- * the survivors and the modifiers that applied. Throws on an illegal action.
- */
-export function previewAttack(
-  state: BattleState,
-  action: AttackAction,
-): AttackPreview {
-  const err = actionError(state, action);
-  if (err) throw new Error(`illegal action: ${err}`);
-  const out = performAttack(new Draft(state), action);
-  return {
-    action,
-    hexesMoved: out.hexesMoved,
-    damage: out.strike.damage,
-    kills: out.strike.kills,
-    retaliationDamage: out.retaliation?.damage ?? 0,
-    retaliationKills: out.retaliation?.kills ?? 0,
-    strike: out.strike,
-    retaliation: out.retaliation,
-    statusesApplied: out.statusesApplied,
-  };
-}
-
-// ---------------------------------------------------------------------------
 // Turns and rounds
 
-function sideAlive(d: Draft, side: BattleSide): boolean {
-  return d.stacks.some((s) => s.side === side && isAlive(s));
-}
-
+/**
+ * The battle-end test (1.12): a side loses when it owns no living stack
+ * that is not summoned and no scheduled event will return one. Both at
+ * once: the defender wins.
+ */
 function checkWinner(d: Draft): boolean {
   if (d.winner !== null) return true;
-  const a = sideAlive(d, "attacker");
-  const b = sideAlive(d, "defender");
-  if (a && b) return false;
-  d.winner = a ? "attacker" : "defender";
-  d.activeStackId = null;
-  d.queue = [];
-  d.waiting = [];
-  d.events.push({ type: "end", winner: d.winner, reason: "eliminated" });
+  const lost = (side: BattleSide): boolean =>
+    !d.stacks.some((s) => s.owner === side && isAlive(s) && !s.summoned) &&
+    !d.scheduled.some((e) => e.side === side && e.returnsStack === true);
+  const la = lost("attacker");
+  const ld = lost("defender");
+  if (!la && !ld) return false;
+  finish(d, la ? "defender" : "attacker", "eliminated");
   return true;
 }
 
-function endRound(d: Draft): void {
-  for (const s of d.stacks) {
-    const expired = s.statuses.filter((st) => st.expiresAfterRound <= d.round);
-    if (expired.length === 0) continue;
-    d.update(s.id, {
-      statuses: s.statuses.filter((st) => st.expiresAfterRound > d.round),
-    });
-    if (!isAlive(s)) continue;
-    for (const st of expired) {
-      d.events.push({
-        type: "status",
-        stackId: s.id,
-        status: st.id,
-        change: "expired",
-        expiresAfterRound: st.expiresAfterRound,
-      });
-    }
-  }
+function finish(
+  d: Draft,
+  winner: BattleSide,
+  reason: "eliminated" | "roundLimit" | "retreat",
+): void {
+  d.winner = winner;
+  d.endReason = reason;
+  d.activeStackId = null;
+  d.queue = [];
+  d.waiting = [];
+  d.extraTurns = [];
+  d.emit({ type: "end", winner, reason }, "engine:end");
 }
 
-function startRound(d: Draft, round: number): void {
+function resolverFor(d: Draft): Resolver {
+  return new Resolver(d, () => checkWinner(d));
+}
+
+function endRound(d: Draft, fx: Resolver): void {
+  d.emit({ type: "roundEnd", round: d.round });
+  // 1. Scheduled events due at round end.
+  fx.fireScheduled("end");
+  if (checkWinner(d)) return;
+  // 2. Round-end hooks, field order, list order.
+  d.beginStep();
+  for (const s of d.stacks) {
+    if (!isAlive(s)) continue;
+    for (const c of s.conditions) {
+      const def = conditionKind(c.kind);
+      if (def.onRoundEnd && fx.isAlive(s.id))
+        d.within(null, `condition:${c.kind}`, () =>
+          def.onRoundEnd?.(fx, s.id, c),
+        );
+    }
+  }
+  fx.resolveReactions();
+  if (checkWinner(d)) return;
+  // 3. Clocks tick: conditions in field order and list order, then ground.
+  d.beginStep();
+  for (const s of d.stacks.slice()) {
+    if (!fx.isAlive(s.id)) continue;
+    for (const c of d.get(s.id).conditions) {
+      if (!fx.isAlive(s.id)) break;
+      const cur = d.get(s.id).conditions.find((x) => x.uid === c.uid);
+      if (!cur) continue;
+      const next = {
+        ...cur,
+        roundsBorne: cur.roundsBorne + 1,
+        clock: cur.clock === null ? null : cur.clock - 1,
+      };
+      d.update(s.id, {
+        conditions: d
+          .get(s.id)
+          .conditions.map((x) => (x.uid === c.uid ? next : x)),
+      });
+      if (next.clock === 0) fx.expire(s.id, c.uid);
+    }
+  }
+  for (const g of d.ground.slice()) {
+    if (g.clock === null) continue;
+    if (g.clock <= 1) {
+      d.ground = d.ground.filter((x) => x !== g);
+      d.emit({ type: "ground", change: "ended", feature: g });
+    } else {
+      const next = { ...g, clock: g.clock - 1 };
+      d.ground = d.ground.map((x) => (x === g ? next : x));
+    }
+  }
+  fx.resolveReactions();
+  if (checkWinner(d)) return;
+  // 4. Wary counters drop.
+  for (const s of d.stacks) {
+    if (s.wary > 0) d.update(s.id, { wary: s.wary - 1 });
+  }
+  // Round limit: the defender wins.
+  if (d.round >= ROUND_LIMIT) finish(d, "defender", "roundLimit");
+}
+
+function startRound(d: Draft, fx: Resolver, round: number): void {
   d.round = round;
   for (const s of d.stacks) {
     if (s.retaliatedThisRound || s.waitedThisRound) {
       d.update(s.id, { retaliatedThisRound: false, waitedThisRound: false });
     }
   }
+  d.waiting = [];
+  d.extraTurns = [];
+  d.emit({ type: "roundStart", round });
+  fx.fireScheduled("start");
+  if (d.winner !== null) return;
   d.queue = d.stacks
     .filter(isAlive)
     .sort(compareTurnOrder)
     .map((s) => s.id);
-  d.waiting = [];
-  d.events.push({ type: "roundStart", round });
 }
 
-function beginTurn(d: Draft, id: StackId): void {
-  d.activeStackId = id;
-  d.events.push({ type: "turnStart", stackId: id });
-  const s = d.get(id);
-  if (s.turnStartedRound === d.round) return;
-  let next: BattleStack = { ...s, turnStartedRound: d.round, defending: false };
-  for (const ab of next.creature.abilities) {
-    const eff = ABILITY_HOOKS[ab].onTurnStart?.(next);
-    if (eff && eff.topHp !== next.topHp) {
-      d.events.push({
-        type: "heal",
-        stackId: id,
-        source: ab,
-        amount: eff.topHp - next.topHp,
-        topHpAfter: eff.topHp,
-      });
-      next = { ...next, topHp: eff.topHp };
+/**
+ * The next stack to act (1.6): queue then waiting stacks, by timeline
+ * class read live (a stack gaining Delayed moves to the back, Hastened to
+ * the front).
+ */
+function pickNext(d: Draft): StackId | null {
+  return orderOf(d.queue, d.waiting, (id) => d.get(id))[0] ?? null;
+}
+
+function orderOf(
+  queue: readonly StackId[],
+  waiting: readonly StackId[],
+  get: (id: StackId) => BattleStack,
+): StackId[] {
+  const out: StackId[] = [];
+  for (const cls of [0, 1, 2] as const) {
+    for (const id of [...queue, ...waiting]) {
+      if (timelineClass(get(id)) === cls && !out.includes(id)) out.push(id);
     }
   }
-  d.set(next);
+  return out;
+}
+
+/**
+ * The order in which stacks will act for the rest of this round as the
+ * board stands (the timeline bar): the active stack, granted extra turns,
+ * then the queue and waiting stacks by timeline class.
+ */
+export function turnOrder(state: BattleState): StackId[] {
+  const out: StackId[] = [];
+  if (state.activeStackId !== null) out.push(state.activeStackId);
+  for (const id of state.extraTurns) if (!out.includes(id)) out.push(id);
+  for (const id of orderOf(state.queue, state.waiting, (id) =>
+    getStack(state, id),
+  )) {
+    if (!out.includes(id)) out.push(id);
+  }
+  return out;
+}
+
+/**
+ * Turn start (1.6 step 3.1): ground, conditions, abilities. Returns false
+ * when the turn is skipped (dead, Frozen or Asleep).
+ */
+function beginTurn(
+  d: Draft,
+  fx: Resolver,
+  id: StackId,
+  extra: boolean,
+): boolean {
+  d.activeStackId = id;
+  d.emit({ type: "turnStart", stackId: id });
+  const s = d.get(id);
+  if (!extra && s.turnStartedRound !== d.round) {
+    d.update(id, { turnStartedRound: d.round, defending: false });
+    d.beginStep({ actorId: id, targetIds: [] });
+    const g = groundAt(d, s.hex);
+    if (g && g.class === "hazard") {
+      const def = groundKind(g.kind);
+      if (def.onTurnStart)
+        d.within(null, `ground:${g.kind}`, () => def.onTurnStart?.(fx, id, g));
+    }
+    for (const c of s.conditions) {
+      const def = conditionKind(c.kind);
+      if (def.onTurnStart && fx.isAlive(id)) {
+        const cur = d.get(id).conditions.find((x) => x.uid === c.uid);
+        if (cur)
+          d.within(null, `condition:${c.kind}`, () =>
+            def.onTurnStart?.(fx, id, cur),
+          );
+      }
+    }
+    for (const a of s.creature.abilities) {
+      const def = ability(a);
+      if (def.onTurnStart && fx.isAlive(id))
+        d.within(null, `ability:${a}`, () => def.onTurnStart?.(fx, id));
+    }
+    fx.resolveReactions();
+    if (checkWinner(d)) return false;
+  }
+  if (!fx.isAlive(id)) {
+    d.activeStackId = null;
+    return false;
+  }
+  const held = d
+    .get(id)
+    .conditions.find((c) => conditionKind(c.kind).cannotAct);
+  if (held) {
+    d.emit({ type: "turnSkipped", stackId: id, condition: held.kind });
+    d.queue = d.queue.filter((x) => x !== id);
+    d.waiting = d.waiting.filter((x) => x !== id);
+    d.activeStackId = null;
+    return false;
+  }
+  return true;
 }
 
 /** Picks the next stack to act, rolling rounds over as needed. */
-function advance(d: Draft): void {
-  if (checkWinner(d)) return;
+function advance(d: Draft, fx: Resolver): void {
   for (;;) {
-    const next = d.queue[0] ?? d.waiting[0];
-    if (next !== undefined) {
-      beginTurn(d, next);
-      return;
+    if (checkWinner(d)) return;
+    while (d.extraTurns.length > 0) {
+      const id = d.extraTurns.shift() as StackId;
+      if (!fx.isAlive(id)) continue;
+      if (beginTurn(d, fx, id, true)) return;
+      if (d.winner !== null) return;
     }
-    endRound(d);
-    startRound(d, d.round + 1);
+    const next = pickNext(d);
+    if (next !== null) {
+      if (beginTurn(d, fx, next, false)) return;
+      continue;
+    }
+    endRound(d, fx);
+    if (d.winner !== null) return;
+    startRound(d, fx, d.round + 1);
   }
 }
 
 /** Starts a battle from a prepared (not yet started) state. Internal to setup. */
-export function startBattle(state: BattleState, round: number): BattleStep {
+export function startBattle(
+  state: BattleState,
+  round: number,
+  before?: (fx: Resolver, d: Draft) => void,
+): BattleStep {
   const d = new Draft(state);
+  const fx = resolverFor(d);
+  if (before) before(fx, d);
   if (!checkWinner(d)) {
-    startRound(d, round);
-    advance(d);
+    startRound(d, fx, round);
+    advance(d, fx);
   }
   return { state: d.toState(), events: d.events };
+}
+
+function actionTargets(action: BattleAction): StackId[] {
+  switch (action.type) {
+    case "attack":
+    case "shoot":
+      return [action.targetId];
+    case "ability":
+    case "heroAct":
+      return action.targets.flatMap((t) => ("stack" in t ? [t.stack] : []));
+    default:
+      return [];
+  }
+}
+
+/** Runs an attack or shot on the draft (legality already checked). */
+function performAttack(d: Draft, fx: Resolver, action: AttackAction): number {
+  if (action.type === "shoot") {
+    const s = d.get(action.stackId);
+    d.update(action.stackId, { shotsLeft: s.shotsLeft - 1 });
+    const idx = d.emit({
+      type: "shoot",
+      stackId: action.stackId,
+      targetId: action.targetId,
+    });
+    d.within(idx, null, () =>
+      fx.strikeKind(action.stackId, action.targetId, "shot", 0),
+    );
+    return 0;
+  }
+  const path = findPath(d.toState(), action.stackId, action.from);
+  if (!path) throw new Error("attack hex not reachable");
+  fx.walk(action.stackId, path, "walk");
+  if (!fx.isAlive(action.stackId) || !fx.isAlive(action.targetId))
+    return path.length;
+  const idx = d.emit({
+    type: "attack",
+    stackId: action.stackId,
+    targetId: action.targetId,
+  });
+  d.within(idx, null, () =>
+    fx.strikeKind(action.stackId, action.targetId, "melee", path.length),
+  );
+  return path.length;
 }
 
 /** Applies the active stack's action. Throws on an illegal action. */
@@ -696,46 +662,190 @@ export function applyAction(
   const err = actionError(state, action);
   if (err) throw new Error(`illegal action: ${err}`);
   const d = new Draft(state);
+  const fx = resolverFor(d);
   const id = action.stackId;
+  d.beginStep({ actorId: id, targetIds: actionTargets(action) });
   switch (action.type) {
     case "wait": {
       d.update(id, { waitedThisRound: true });
-      d.events.push({ type: "wait", stackId: id });
+      d.emit({ type: "wait", stackId: id });
       d.queue = d.queue.filter((x) => x !== id);
       d.waiting = [...d.waiting, id].sort((a, b) =>
         compareWaitOrder(d.get(a), d.get(b)),
       );
       d.activeStackId = null;
-      advance(d);
+      advance(d, fx);
+      return { state: d.toState(), events: d.events };
+    }
+    case "retreat": {
+      const side = d.get(id).side;
+      d.emit({ type: "retreat", side });
+      finish(d, enemySide(side), "retreat");
+      return { state: d.toState(), events: d.events };
+    }
+    case "heroAct": {
+      const side = d.get(id).side;
+      const def = actDef(action.act);
+      const sideState = d.sides[side];
+      d.sides = {
+        ...d.sides,
+        [side]: {
+          ...sideState,
+          ...(def.kind === "cast" ? { castRound: d.round } : {}),
+          ...(def.kind === "command" ? { commandUsed: true } : {}),
+          ...(def.kind === "item"
+            ? { itemActsUsed: [...sideState.itemActsUsed, action.act] }
+            : {}),
+        },
+      };
+      const idx = d.emit(
+        { type: "heroAct", side, act: action.act },
+        action.act,
+      );
+      d.within(idx, action.act, () => def.resolve(fx, id, action.targets));
+      fx.resolveReactions();
+      if (checkWinner(d)) return { state: d.toState(), events: d.events };
+      // The stack has not acted yet: its turn goes on unless it cannot.
+      const s = d.get(id);
+      if (isAlive(s) && !bears(s, "cannotAct")) {
+        return { state: d.toState(), events: d.events };
+      }
+      d.queue = d.queue.filter((x) => x !== id);
+      d.waiting = d.waiting.filter((x) => x !== id);
+      d.activeStackId = null;
+      advance(d, fx);
       return { state: d.toState(), events: d.events };
     }
     case "defend":
       d.update(id, { defending: true });
-      d.events.push({ type: "defend", stackId: id });
+      d.emit({ type: "defend", stackId: id });
       break;
     case "move": {
       const path = findPath(state, id, action.to);
       if (!path) throw new Error("destination not reachable");
-      moveStack(d, id, path);
+      fx.walk(id, path, "walk");
       break;
     }
     case "attack":
     case "shoot":
-      performAttack(d, action);
+      performAttack(d, fx, action);
       break;
+    case "ability": {
+      const s = d.get(id);
+      d.update(id, { abilitiesUsed: [...s.abilitiesUsed, action.ability] });
+      const actId = ability(action.ability).act as string;
+      const idx = d.emit(
+        { type: "ability", stackId: id, ability: action.ability },
+        `ability:${action.ability}`,
+      );
+      d.within(idx, `ability:${action.ability}`, () =>
+        actDef(actId).resolve(fx, id, action.targets),
+      );
+      break;
+    }
   }
-  removeFromTurnLists(d, id);
+  fx.resolveReactions();
+  if (!checkWinner(d)) {
+    // Heartened (RULES_V2 6): after the bearer finishes a turn, its side may
+    // end Heartened to give it an extra turn. Default: it does.
+    const s = d.get(id);
+    const hearten = "hearten" in action ? action.hearten !== false : true;
+    const h = s.conditions.find((c) => c.kind === "heartened");
+    if (hearten && h && isAlive(s) && s.extraTurnRound !== d.round) {
+      d.within(null, "condition:heartened", () => {
+        fx.endCondition(id, h.uid);
+        fx.extraTurn(id);
+      });
+    }
+  }
+  d.queue = d.queue.filter((x) => x !== id);
+  d.waiting = d.waiting.filter((x) => x !== id);
   d.activeStackId = null;
-  advance(d);
+  advance(d, fx);
   return { state: d.toState(), events: d.events };
 }
 
-/** Ends a battle that hit a round limit (no winner). */
-export function endByRoundLimit(state: BattleState): BattleStep {
+/**
+ * Exactly what an attack or shot will do: damage, kills, the retaliation on
+ * the survivors, the modifiers that applied and the full chain. Throws on
+ * an illegal action.
+ */
+export function previewAttack(
+  state: BattleState,
+  action: AttackAction,
+): AttackPreview {
+  const err = actionError(state, action);
+  if (err) throw new Error(`illegal action: ${err}`);
   const d = new Draft(state);
-  d.activeStackId = null;
-  d.queue = [];
-  d.waiting = [];
-  d.events.push({ type: "end", winner: null, reason: "roundLimit" });
-  return { state: d.toState(), events: d.events };
+  const fx = resolverFor(d);
+  d.beginStep({ actorId: action.stackId, targetIds: [action.targetId] });
+  const hexesMoved = performAttack(d, fx, action);
+  fx.resolveReactions();
+  const chain = d.events;
+  const strikes = chain.filter(
+    (e): e is Extract<typeof e, { type: "damage" }> => e.type === "damage",
+  );
+  const toResult = (e: (typeof strikes)[number]) => ({
+    attackerId: e.sourceId,
+    targetId: e.targetId,
+    kind: e.kind,
+    breakdown: e.breakdown,
+    damage: e.damage,
+    kills: e.kills,
+    hpLost: e.hpLost,
+    targetCountAfter: e.countAfter,
+    targetTopHpAfter: e.topHpAfter,
+    redirectedTo: e.redirectedTo,
+  });
+  const first = strikes.find(
+    (e) =>
+      e.sourceId === action.stackId &&
+      e.targetId === action.targetId &&
+      (e.kind === "melee" || e.kind === "shot"),
+  );
+  if (!first) throw new Error("the attack made no strike");
+  const ret =
+    strikes.find(
+      (e) => e.kind === "retaliation" && e.sourceId === action.targetId,
+    ) ?? null;
+  const conditionsApplied = chain.flatMap((e) =>
+    e.type === "condition" && (e.change === "landed" || e.change === "merged")
+      ? [
+          {
+            stackId: e.stackId,
+            kind: e.condition.kind,
+            clock: e.condition.clock,
+            size: e.condition.size,
+          },
+        ]
+      : [],
+  );
+  const strike = toResult(first);
+  const retaliation = ret ? toResult(ret) : null;
+  return {
+    action,
+    hexesMoved,
+    damage: strike.damage,
+    kills: strike.kills,
+    retaliationDamage: retaliation?.damage ?? 0,
+    retaliationKills: retaliation?.kills ?? 0,
+    strike,
+    retaliation,
+    conditionsApplied,
+    chain,
+  };
+}
+
+/** Resolves battle-start rules of an army (4.6 form 2) by effect id. */
+export function runStartRule(
+  fx: Resolver,
+  side: BattleSide,
+  ref: { readonly id: string; readonly args?: JsonValue },
+): void {
+  fx.d.beginStep();
+  const idx = fx.d.emit({ type: "heroAct", side, act: ref.id }, ref.id);
+  fx.d.within(idx, ref.id, () =>
+    effect(ref.id)(fx, ref.args, { side, source: ref.id }),
+  );
+  fx.resolveReactions();
 }

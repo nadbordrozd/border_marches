@@ -14,10 +14,13 @@ import type {
 } from "../../core/battle/index.ts";
 import { feetPoint } from "./geometry.ts";
 import type { Point } from "./geometry.ts";
+import { conditionPips, groundMarks, linkLines } from "./grammar-view.ts";
+import type { ConditionPip, GroundMark, LinkLine } from "./grammar-view.ts";
 
 export interface UnitView {
   readonly id: StackId;
-  readonly side: BattleSide;
+  /** The side it fights for now (a Turned stack changes colour). */
+  side: BattleSide;
   readonly creatureId: string;
   /** Feet position in stage pixels. */
   x: number;
@@ -27,8 +30,8 @@ export interface UnitView {
   alpha: number;
   /** Red hit flash, 0..1. */
   flash: number;
-  /** Status markers shown under the count chip. */
-  venom: boolean;
+  /** Condition pips beside the count chip, in list order. */
+  pips: ConditionPip[];
   defending: boolean;
   visible: boolean;
 }
@@ -77,8 +80,21 @@ export interface Overlay {
   readonly strike: { readonly from: Hex; readonly target: Hex } | null;
 }
 
+/** An enemy intent badge (RULES_V2 1.13) above a stack. */
+export interface IntentBadge {
+  readonly stackId: StackId;
+  readonly target: StackId | null;
+  readonly text: string;
+}
+
 export interface Scene {
   readonly units: Map<StackId, UnitView>;
+  /** Links drawn as lines from near end to far end. */
+  links: LinkLine[];
+  /** Non-blocking ground features, tinted on their hexes. */
+  ground: GroundMark[];
+  /** Enemy intents; empty while animating. */
+  intents: IntentBadge[];
   overlay: Overlay;
   texts: FloatText[];
   projectiles: Projectile[];
@@ -98,6 +114,9 @@ export const EMPTY_OVERLAY: Overlay = {
 export function createScene(state: BattleState): Scene {
   const scene: Scene = {
     units: new Map(),
+    links: [],
+    ground: [],
+    intents: [],
     overlay: EMPTY_OVERLAY,
     texts: [],
     projectiles: [],
@@ -123,7 +142,7 @@ export function syncScene(scene: Scene, state: BattleState): void {
       count: s.count,
       alpha: 1,
       flash: 0,
-      venom: false,
+      pips: [],
       defending: false,
       visible: true,
     };
@@ -133,10 +152,13 @@ export function syncScene(scene: Scene, state: BattleState): void {
     view.alpha = 1;
     view.flash = 0;
     view.visible = isAlive(s);
-    view.venom = s.statuses.some((st) => st.id === "venom");
+    view.pips = conditionPips(state, s.id);
+    view.side = s.side;
     view.defending = s.defending;
     scene.units.set(s.id, view);
   }
+  scene.links = linkLines(state);
+  scene.ground = groundMarks(state);
   scene.round = state.round;
 }
 

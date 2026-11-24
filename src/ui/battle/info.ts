@@ -1,7 +1,8 @@
 /**
  * The stack info panel's content (right-click on any stack): stats with the
  * standing modifiers that apply to them now (hero, fortification, auras,
- * Venom, Defend), the ability text and the stack's statuses. Pure.
+ * conditions such as Venomed, Defend), the ability text, the stack's
+ * conditions (with school, clock and gate) and its Wary counter. Pure.
  *
  * Situational bonuses that depend on the target (Mob, Pack Hunter, Charge,
  * Bony) are not standing modifiers: the attack preview shows them.
@@ -9,12 +10,20 @@
 
 import { ABILITIES } from "../../data/abilities.ts";
 import {
+  ability as abilityDef,
+  conditionKind,
   defendedDefense,
+  effectiveSpeed,
   isAdjacent,
   isAlive,
   isRangedCreature,
 } from "../../core/battle/index.ts";
-import type { BattleStack, BattleState } from "../../core/battle/index.ts";
+import type {
+  BattleStack,
+  BattleState,
+  StrikeContext,
+} from "../../core/battle/index.ts";
+import { conditionTooltip } from "./grammar.ts";
 import { creatureName } from "./preview.ts";
 
 export interface StatLine {
@@ -29,6 +38,8 @@ export interface StackInfo {
   readonly title: string;
   readonly count: number;
   readonly side: "attacker" | "defender";
+  /** The side that brought it, when it differs (a Turned stack). */
+  readonly owner: "attacker" | "defender";
   readonly stats: readonly StatLine[];
   readonly ability: { readonly name: string; readonly text: string } | null;
   readonly statuses: readonly string[];
@@ -76,11 +87,17 @@ export function stackInfo(state: BattleState, stack: BattleStack): StackInfo {
       ABILITIES.warcry.params.defense ?? 0,
     ]);
   }
-  if (stack.statuses.some((s) => s.id === "venom")) {
-    defParts.push([
-      ABILITIES.venom.name,
-      -(ABILITIES.venom.params.defense ?? 0),
-    ]);
+  // Standing condition modifiers, as a Strike against this stack sees them.
+  const ctx: StrikeContext = {
+    state,
+    attacker: stack,
+    defender: stack,
+    kind: "melee",
+    hexesMoved: 0,
+  };
+  for (const cd of stack.conditions) {
+    const m = conditionKind(cd.kind).defenseModifier?.(ctx, stack, cd);
+    if (m) defParts.push([m.label, m.amount]);
   }
   const sum = (parts: [string, number][]): number =>
     parts.reduce((t, [, n]) => t + n, 0);
@@ -105,7 +122,11 @@ export function stackInfo(state: BattleState, stack: BattleStack): StackInfo {
     { label: "Defense", value: String(defense), note: defNote },
     { label: "Damage", value: String(c.damage), note: "per creature" },
     { label: "Health", value: `${stack.topHp}/${c.hp}`, note: "top creature" },
-    { label: "Speed", value: String(c.speed), note: "" },
+    {
+      label: "Speed",
+      value: String(effectiveSpeed(stack)),
+      note: effectiveSpeed(stack) === c.speed ? "" : `${c.speed} base`,
+    },
   ];
   if (isRangedCreature(c)) {
     stats.push({
@@ -116,13 +137,13 @@ export function stackInfo(state: BattleState, stack: BattleStack): StackInfo {
   }
 
   const statuses: string[] = [];
-  for (const st of stack.statuses) {
-    if (st.id === "venom") {
-      statuses.push(
-        `Venom: −${ABILITIES.venom.params.defense ?? 0} Defense until the end of round ${st.expiresAfterRound}`,
-      );
-    }
-  }
+  for (const cd of stack.conditions) statuses.push(conditionTooltip(state, cd));
+  if (stack.wary > 0)
+    statuses.push(
+      `Wary: refuses Holds for ${stack.wary} round${stack.wary === 1 ? "" : "s"} (counting this one)`,
+    );
+  if (stack.owner !== stack.side)
+    statuses.push(`Fights for the ${stack.side}; owned by the ${stack.owner}`);
   if (stack.defending)
     statuses.push("Defending: +30% Defense until its next turn");
   if (isAlive(stack)) {
@@ -139,12 +160,16 @@ export function stackInfo(state: BattleState, stack: BattleStack): StackInfo {
   const ability =
     abilityId === undefined
       ? null
-      : { name: ABILITIES[abilityId].name, text: ABILITIES[abilityId].text };
+      : {
+          name: abilityDef(abilityId).name,
+          text: abilityDef(abilityId).description,
+        };
 
   return {
     title: creatureName(c, stack.count),
     count: stack.count,
     side: stack.side,
+    owner: stack.owner,
     stats,
     ability,
     statuses,

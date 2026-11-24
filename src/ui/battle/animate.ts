@@ -5,12 +5,14 @@
  * toggle divides all durations; "instant" skips straight to the end state.
  */
 
+import { conditionKind } from "../../core/battle/index.ts";
 import type {
   BattleEvent,
   BattleState,
   StackId,
 } from "../../core/battle/index.ts";
 import { feetPoint } from "../../render/battle/geometry.ts";
+import { pipOf } from "../../render/battle/grammar-view.ts";
 import type { Point } from "../../render/battle/geometry.ts";
 import { syncScene } from "../../render/battle/scene.ts";
 import type { Scene, UnitView } from "../../render/battle/scene.ts";
@@ -76,9 +78,14 @@ export function batchDuration(events: readonly BattleEvent[]): number {
       case "roundStart":
         t += DURATIONS.round;
         break;
-      case "status":
-      case "turnStart":
-      case "end":
+      case "harm":
+        t += DURATIONS.hit;
+        break;
+      case "condition":
+      case "linkTransfer":
+        t += DURATIONS.text;
+        break;
+      default:
         break;
     }
   }
@@ -274,7 +281,7 @@ export class Animator {
       case "damage": {
         const t = this.unit(e.targetId);
         if (!t) return;
-        t.count = e.countAfter;
+        if (e.redirectedTo === null) t.count = e.countAfter;
         this.text(`−${e.damage}`, "#ff5a40", { x: t.x, y: t.y - 58 }, true);
         if (e.kills > 0) {
           this.text(`${e.kills} slain`, "#ffffff", { x: t.x, y: t.y - 40 });
@@ -302,15 +309,67 @@ export class Animator {
         u.visible = false;
         return;
       }
-      case "status": {
+      case "condition": {
         const u = this.unit(e.stackId);
         if (!u) return;
-        if (e.status === "venom") {
-          u.venom = e.change === "applied";
-          if (e.change === "applied") {
-            this.text("Venom", "#8cf05a", { x: u.x, y: u.y - 74 });
+        const c = e.condition;
+        const pip = pipOf(c);
+        const name = conditionKind(c.kind).name;
+        if (
+          e.change === "landed" ||
+          e.change === "moved" ||
+          e.change === "copied"
+        ) {
+          u.pips = [...u.pips.filter((p) => p.uid !== c.uid), pip];
+          if (e.change === "moved" && e.otherId !== undefined) {
+            const from = this.unit(e.otherId);
+            if (from) from.pips = from.pips.filter((p) => p.uid !== c.uid);
           }
+          this.text(name, pip.color, { x: u.x, y: u.y - 74 });
+          await this.tween(DURATIONS.text / 2, () => {});
+        } else if (
+          e.change === "merged" ||
+          e.change === "fed" ||
+          e.change === "wound"
+        ) {
+          u.pips = u.pips.map((p) => (p.uid === c.uid ? pip : p));
+        } else if (e.change === "refused") {
+          this.text(`${name} refused`, "#d8d0c0", { x: u.x, y: u.y - 74 });
+          await this.tween(DURATIONS.text / 2, () => {});
+        } else {
+          u.pips = u.pips.filter((p) => p.uid !== c.uid);
         }
+        return;
+      }
+      case "harm": {
+        const t = this.unit(e.targetId);
+        if (!t || e.harm === 0) return;
+        if (e.redirectedTo === null) t.count = e.countAfter;
+        this.text(`−${e.harm}`, "#ff9a40", { x: t.x, y: t.y - 58 }, true);
+        if (e.kills > 0) {
+          this.text(`${e.kills} slain`, "#ffffff", { x: t.x, y: t.y - 40 });
+        }
+        await this.tween(DURATIONS.hit, (k) => {
+          t.flash = 1 - k;
+        });
+        t.flash = 0;
+        return;
+      }
+      case "linkTransfer": {
+        const u = this.unit(e.farId);
+        if (!u) return;
+        this.text("link", "#f2c14e", { x: u.x, y: u.y - 80 });
+        await this.tween(DURATIONS.text / 2, () => {});
+        return;
+      }
+      case "turnSkipped": {
+        const u = this.unit(e.stackId);
+        if (!u) return;
+        this.text(`${conditionKind(e.condition).name}: skips`, "#cfe6ff", {
+          x: u.x,
+          y: u.y - 64,
+        });
+        await this.tween(DURATIONS.text, () => {});
         return;
       }
       case "heal": {

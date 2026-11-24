@@ -3,20 +3,30 @@
  */
 
 import { chooseAiAction } from "./ai.ts";
-import { applyAction, endByRoundLimit } from "./engine.ts";
+import { applyAction } from "./engine.ts";
+import { ROUND_LIMIT } from "./resolve.ts";
 import { createBattle } from "./setup.ts";
 import type {
   BattleEvent,
   BattleSetup,
   BattleSide,
   BattleState,
+  EndReason,
   StackId,
 } from "./types.ts";
 
-/** Battles stop after this many full rounds (no winner). */
-export const DEFAULT_MAX_ROUNDS = 100;
+/**
+ * The engine ends every battle after round 30 with a defender win
+ * (RULES_V2 1.12); kept under the old name for callers.
+ */
+export const DEFAULT_MAX_ROUNDS = ROUND_LIMIT;
 
 export interface AutoBattleOptions {
+  /**
+   * Stop auto-play once this many rounds have started without a winner (a
+   * harness for tests and tools; the result then has winner null). The
+   * engine's own limit is 30.
+   */
   readonly maxRounds?: number;
 }
 
@@ -31,9 +41,9 @@ export interface StackOutcome {
 }
 
 export interface BattleResult {
-  /** null only when the round limit was hit. */
+  /** null only when auto-play was stopped by `maxRounds`. */
   readonly winner: BattleSide | null;
-  readonly reason: "eliminated" | "roundLimit";
+  readonly reason: EndReason;
   /** Rounds started. */
   readonly rounds: number;
   readonly stacks: readonly StackOutcome[];
@@ -51,21 +61,25 @@ export function battleResult(
 ): BattleResult {
   const killedHp = { attacker: 0, defender: 0 };
   for (const s of state.stacks) {
-    const killer = s.side === "attacker" ? "defender" : "attacker";
+    // Only non-summoned stacks count (1.12), credited by owner.
+    if (s.summoned) continue;
+    const killer = s.owner === "attacker" ? "defender" : "attacker";
     killedHp[killer] += (s.initialCount - s.count) * s.creature.hp;
   }
   return {
     winner: state.winner,
     reason,
     rounds: state.round,
-    stacks: state.stacks.map((s) => ({
-      id: s.id,
-      side: s.side,
-      slot: s.slot,
-      creatureId: s.creature.id,
-      initialCount: s.initialCount,
-      count: s.count,
-    })),
+    stacks: state.stacks
+      .filter((s) => !s.summoned)
+      .map((s) => ({
+        id: s.id,
+        side: s.owner,
+        slot: s.slot,
+        creatureId: s.creature.id,
+        initialCount: s.initialCount,
+        count: s.count,
+      })),
     killedHp,
   };
 }
@@ -84,24 +98,22 @@ export function autoPlay(
   state: BattleState,
   options: AutoBattleOptions = {},
 ): AutoPlayResult {
-  const maxRounds = options.maxRounds ?? DEFAULT_MAX_ROUNDS;
+  const maxRounds = options.maxRounds ?? ROUND_LIMIT;
   const events: BattleEvent[] = [];
   let cur = state;
   while (cur.winner === null) {
     if (cur.round > maxRounds) {
-      const step = endByRoundLimit(cur);
-      events.push(...step.events);
-      return {
-        state: step.state,
-        events,
-        result: battleResult(step.state, "roundLimit"),
-      };
+      return { state: cur, events, result: battleResult(cur, "roundLimit") };
     }
     const step = applyAction(cur, chooseAiAction(cur));
     events.push(...step.events);
     cur = step.state;
   }
-  return { state: cur, events, result: battleResult(cur, "eliminated") };
+  return {
+    state: cur,
+    events,
+    result: battleResult(cur, cur.endReason ?? "eliminated"),
+  };
 }
 
 /** Creates the battle and auto-plays it to the end (auto-combat). */

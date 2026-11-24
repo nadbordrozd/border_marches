@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { previewAttack } from "../../../src/core/battle/index.ts";
+import {
+  makeCondition,
+  previewAttack,
+} from "../../../src/core/battle/index.ts";
 import {
   attackLine,
   breakdownBonuses,
@@ -80,9 +83,7 @@ describe("summarizePreview", () => {
     );
     expect(shot.verb).toBe("Shoot");
     expect(shot.noRetaliation).toBe("Shots are never retaliated");
-    expect(shot.statuses).toEqual([
-      "Venom on Orc Brutes (−3 Def to end of round 2)",
-    ]);
+    expect(shot.statuses).toEqual(["Venomed on Orc Brutes (−3 Def, 2 rounds)"]);
 
     const rex = { ...s, activeStackId: "a1" };
     const terror = summarizePreview(
@@ -130,7 +131,9 @@ describe("summarizePreview", () => {
     );
     const venomed = patch({ ...s, activeStackId: "a0" }, "d0", {
       defending: true,
-      statuses: [{ id: "venom", expiresAfterRound: 2, sourceId: "x" }],
+      conditions: [
+        makeCondition({ kind: "venomed", size: 3, clock: 2 }, 900, "x"),
+      ],
     });
     const p = previewAttack(venomed, {
       type: "attack",
@@ -140,7 +143,7 @@ describe("summarizePreview", () => {
     });
     expect(breakdownBonuses(p.strike.breakdown)).toEqual([
       "Hero +2 Atk",
-      "Venom −3 Def",
+      "Venomed −3 Def",
       "Defending ×1.3 Def",
       "Pack Hunter +20%",
     ]);

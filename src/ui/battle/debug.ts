@@ -9,6 +9,8 @@
  *                  the first enemy the active stack can attack); dir=W|NW|NE|E|SE|SW
  *                  nudges the pointer to that side of the hex (attack side)
  *   info=d1        open the info panel of stack d1
+ *   grammar=1      decorate the start with conditions, a link, ground and a
+ *                  scheduled event (battle grammar UI check, RULES_V2 1)
  *   auto=1         auto-resolve: AI on both sides, straight to the result
  *   speed=1|2|4    animation speed
  *   terrain=jungle battle ground
@@ -21,8 +23,13 @@ import {
   createBattle,
   engineSetupFromGame,
   getStack,
+  hasConditionKind,
   legalActions,
+  registerConditionKind,
+  registerEffect,
+  registerGroundKind,
 } from "../../core/battle/index.ts";
+import { Draft, Resolver } from "../../core/battle/resolve.ts";
 import type { BattleState, Hex } from "../../core/battle/index.ts";
 import type {
   BattleSetup as GameBattleSetup,
@@ -132,6 +139,72 @@ function pointAt(
   return { clientX: rect.left + sx * k, clientY: rect.top + sy * k };
 }
 
+/** Demo-only content kinds for the grammar view (real content comes later). */
+function registerDemoContent(): void {
+  if (hasConditionKind("demo-guard")) return;
+  registerConditionKind({
+    id: "demo-guard",
+    name: "Guarded",
+    school: "accord",
+    polarity: "boon",
+    link: "redirect",
+    defaultClock: 3,
+    text: () => "Damage to this stack is carried to the far end as Harm.",
+  });
+  registerGroundKind({
+    id: "demo-embers",
+    name: "Embers",
+    class: "hazard",
+    school: "storm",
+    defaultClock: 2,
+    text: (f) => `Harm ${f.size} on entry and at turn start.`,
+    onEnter: (fx, id, f) => void fx.harm(id, f.size),
+    onTurnStart: (fx, id, f) => void fx.harm(id, f.size),
+  });
+  registerEffect("demo-shell", () => {});
+}
+
+/** Conditions, a link, ground and an event on a fresh battle (UI check). */
+function decorate(state: BattleState): BattleState {
+  registerDemoContent();
+  const d = new Draft(state);
+  const fx = new Resolver(d, () => false);
+  d.beginStep();
+  d.within(null, "debug", () => {
+    const ids = state.stacks.map((s) => s.id);
+    const has = (id: string): boolean => ids.includes(id);
+    if (has("a0"))
+      fx.addCondition("a0", { kind: "burning", size: 4, clock: 3 });
+    if (has("a1")) fx.delay("a1", 2);
+    if (has("a2")) {
+      fx.addCondition("a2", { kind: "lucky" });
+      fx.addCondition("a2", { kind: "heartened" });
+    }
+    if (has("a4") && has("a0"))
+      fx.link("a4", "a0", { kind: "demo-guard", clock: 3 });
+    if (has("d0")) {
+      fx.addCondition("d0", {
+        kind: "frozen",
+        clock: 2,
+        gate: { measure: "hp", max: 2000 },
+      });
+      fx.addCondition("d0", { kind: "jinxed", size: 25, clock: 3 });
+    }
+    if (has("d1"))
+      fx.addCondition("d1", { kind: "venomed", size: 3, clock: 2 });
+    fx.addGround({ hex: { col: 6, row: 5 }, kind: "demo-embers", size: 5 });
+    fx.addGround({ hex: { col: 7, row: 4 }, kind: "demo-embers", size: 5 });
+    fx.addGround({ hex: { col: 5, row: 8 }, kind: "corpse" });
+    fx.schedule({
+      round: 2,
+      phase: "start",
+      effect: { id: "demo-shell" },
+      side: "attacker",
+    });
+  });
+  return d.toState();
+}
+
 export function startBattleDebug(route: Route): void {
   const container = document.getElementById("ui") ?? document.body;
   const p = route.params;
@@ -155,6 +228,9 @@ export function startBattleDebug(route: Route): void {
       s = applyAction(s, chooseAiAction(s)).state;
     }
     state = s;
+  }
+  if (p.get("grammar") === "1") {
+    state = decorate(state ?? createBattle(engineSetupFromGame(setup)).state);
   }
   const speed = Number(p.get("speed") ?? "1");
   const hover = p.get("hover");

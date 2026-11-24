@@ -64,7 +64,7 @@ describe("battle AI", () => {
     }
   });
 
-  it("stops at the round limit with no winner", () => {
+  it("auto-play stops at its maxRounds harness with no winner", () => {
     // Two stacks that can never reach each other: an obstacle wall.
     const wall = Array.from({ length: 11 }, (_, row) => ({ col: 7, row }));
     const r = runAutoBattle(
@@ -81,9 +81,25 @@ describe("battle AI", () => {
       reason: "roundLimit",
       rounds: 6,
     });
-    expect(r.events.at(-1)).toEqual({
+    expect(r.events.some((e) => e.type === "end")).toBe(false);
+  });
+
+  it("the engine ends an unwinnable battle after round 30: the defender wins", () => {
+    const wall = Array.from({ length: 11 }, (_, row) => ({ col: 7, row }));
+    const r = runAutoBattle({
+      seed: 1,
+      obstacles: wall,
+      attacker: { hero: null, stacks: [{ creature: CAVEMAN, count: 5 }] },
+      defender: { hero: null, stacks: [{ creature: CAVEMAN, count: 5 }] },
+    });
+    expect(r.result).toMatchObject({
+      winner: "defender",
+      reason: "roundLimit",
+      rounds: 30,
+    });
+    expect(r.events.at(-1)).toMatchObject({
       type: "end",
-      winner: null,
+      winner: "defender",
       reason: "roundLimit",
     });
   });

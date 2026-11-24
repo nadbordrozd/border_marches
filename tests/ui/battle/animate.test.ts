@@ -17,12 +17,13 @@ describe("animation timing", () => {
       expect(hopDuration(n) * n).toBeLessThan(400);
       expect(hopDuration(n)).toBeLessThanOrEqual(DURATIONS.hopMax);
     }
+    const meta = { index: 0, cause: null, rule: "engine" } as const;
     const singles: BattleEvent[] = [
-      { type: "attack", stackId: "a0", targetId: "d0" },
-      { type: "shoot", stackId: "a0", targetId: "d0" },
-      { type: "death", stackId: "d0" },
-      { type: "wait", stackId: "a0" },
-      { type: "roundStart", round: 2 },
+      { ...meta, type: "attack", stackId: "a0", targetId: "d0" },
+      { ...meta, type: "shoot", stackId: "a0", targetId: "d0" },
+      { ...meta, type: "death", stackId: "d0" },
+      { ...meta, type: "wait", stackId: "a0" },
+      { ...meta, type: "roundStart", round: 2 },
     ];
     for (const e of singles) expect(batchDuration([e])).toBeLessThan(400);
   });

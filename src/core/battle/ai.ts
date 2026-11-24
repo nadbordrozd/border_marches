@@ -9,11 +9,14 @@
  * - Ranged units with shots otherwise keep out of contact:
  *   move = -10 x adjacent enemies - 1, defend = -10 x adjacent enemies.
  * - Wait is never chosen. Ties go to the earliest action in
- *   {@link legalActions} order, so the AI is fully deterministic.
+ *   {@link legalActions} order, so the AI is fully deterministic: a pure
+ * function of the battle state (the intents of RULES_V2 1.13 rely on it).
+ * - Activated abilities and hero acts are left to the AI bead.
  */
 
 import { isAlive } from "./abilities.ts";
 import { totalHp } from "./damage.ts";
+import { blockingHexes } from "./resolve.ts";
 import {
   activeStack,
   isRangedCreature,
@@ -60,11 +63,11 @@ export interface ScoredAction {
 
 const UNREACHABLE = 99;
 
-/** Hex distance to `target` walking around obstacles only (stacks ignored). */
+/** Hex distance to `target` around blocking ground only (stacks ignored). */
 function distanceField(state: BattleState, target: Hex): Int16Array {
   const dist = new Int16Array(BATTLE_HEX_COUNT).fill(-1);
   const blocked = new Uint8Array(BATTLE_HEX_COUNT);
-  for (const o of state.obstacles) blocked[hexIndex(o)] = 1;
+  for (const o of blockingHexes(state)) blocked[hexIndex(o)] = 1;
   const start = hexIndex(target);
   dist[start] = 0;
   const queue = [start];

@@ -28,7 +28,14 @@ import {
   ORC_WARBOSS,
   dummy,
 } from "./fixtures.ts";
-import { damageEvents, patchStack, play, stack, start } from "./helpers.ts";
+import {
+  conditionsOf,
+  damageEvents,
+  patchStack,
+  play,
+  stack,
+  start,
+} from "./helpers.ts";
 
 const at = (col: number, row: number): Hex => ({ col, row });
 const attack = (stackId: string, targetId: string, from: Hex) =>
@@ -252,7 +259,7 @@ describe("retaliation", () => {
     const r = play(s, attack("a0", "d0", at(6, 5)));
     expect(r.events.map((e) => e.type)).toContain("death");
     expect(r.state.winner).toBe("attacker");
-    expect(r.events.at(-1)).toEqual({
+    expect(r.events.at(-1)).toMatchObject({
       type: "end",
       winner: "attacker",
       reason: "eliminated",
@@ -316,32 +323,35 @@ describe("Venom", () => {
       [{ creature: weak, count: 1, hex: at(12, 5) }],
     );
     s = play(s, shoot("a0", "d0"), defend("d0")).state; // round 1 -> 2
-    expect(stack(s, "d0").statuses).toEqual([
-      { id: "venom", expiresAfterRound: 2, sourceId: "a0" },
+    // Venomed, clock 2 made in round 1, one round end passed: clock 1.
+    expect(conditionsOf(s, "d0")).toEqual([
+      { kind: "venomed", clock: 1, size: 3 },
     ]);
-    // A second hit in round 2 refreshes to round 3 and still gives -3 once.
+    // A second hit in round 2 refreshes the clock and still gives -3 once.
     const p = previewAttack(s, shoot("a0", "d0"));
     expect(p.strike.breakdown.defenseModifiers).toEqual([
-      { source: "venom", label: "Venom", amount: -3 },
+      { source: "venomed", label: "Venomed", amount: -3 },
     ]);
     expect(p.strike.breakdown.defense).toBe(0); // 2 - 3 floors at 0
     s = play(s, shoot("a0", "d0")).state;
-    expect(stack(s, "d0").statuses).toHaveLength(1);
-    expect(stack(s, "d0").statuses[0]!.expiresAfterRound).toBe(3);
+    expect(conditionsOf(s, "d0")).toEqual([
+      { kind: "venomed", clock: 2, size: 3 },
+    ]);
     // Round 3 passes without hits: expires when round 3 ends.
     s = play(s, defend("d0"), defend("a0")).state;
     expect(s.round).toBe(3);
-    expect(stack(s, "d0").statuses).toHaveLength(1);
+    expect(stack(s, "d0").conditions).toHaveLength(1);
     const end3 = play(s, defend("d0"));
     expect(end3.state.round).toBe(4);
-    expect(stack(end3.state, "d0").statuses).toEqual([]);
-    expect(end3.events).toContainEqual({
-      type: "status",
-      stackId: "d0",
-      status: "venom",
-      change: "expired",
-      expiresAfterRound: 3,
-    });
+    expect(stack(end3.state, "d0").conditions).toEqual([]);
+    expect(end3.events).toContainEqual(
+      expect.objectContaining({
+        type: "condition",
+        stackId: "d0",
+        change: "expired",
+        condition: expect.objectContaining({ kind: "venomed", clock: 0 }),
+      }),
+    );
   });
 
   it("applies on melee hits and retaliations too", () => {
@@ -351,8 +361,8 @@ describe("Venom", () => {
     );
     const p = previewAttack(s, attack("a0", "d0", at(6, 5)));
     expect(p.retaliation!.breakdown.rangedInMelee).toBe(true);
-    expect(p.statusesApplied).toEqual([
-      { stackId: "a0", status: "venom", expiresAfterRound: 2 },
+    expect(p.conditionsApplied).toEqual([
+      { stackId: "a0", kind: "venomed", clock: 2, size: 3 },
     ]);
   });
 });
@@ -553,7 +563,7 @@ describe("Defend, Regenerate, fortification", () => {
     const heal = r.events.find((e) => e.type === "heal");
     expect(heal).toMatchObject({
       stackId: "d0",
-      source: "regenerate",
+      source: "ability:regenerate",
       topHpAfter: 50,
     });
     expect(stack(r.state, "d0").topHp).toBe(50);
@@ -596,6 +606,9 @@ describe("event log", () => {
       "retaliation",
       "damage",
     ]);
-    expect(r.events.at(-1)).toEqual({ type: "turnStart", stackId: "d0" });
+    expect(r.events.at(-1)).toMatchObject({
+      type: "turnStart",
+      stackId: "d0",
+    });
   });
 });

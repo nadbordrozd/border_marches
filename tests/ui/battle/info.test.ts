@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getStack } from "../../../src/core/battle/index.ts";
+import { getStack, makeCondition } from "../../../src/core/battle/index.ts";
 import { stackInfo } from "../../../src/ui/battle/info.ts";
 import { at, battle, patch, unit } from "./helpers.ts";
 
@@ -11,7 +11,9 @@ describe("stackInfo", () => {
     );
     s = patch(s, "a0", {
       defending: true,
-      statuses: [{ id: "venom", expiresAfterRound: 2, sourceId: "d0" }],
+      conditions: [
+        makeCondition({ kind: "venomed", size: 3, clock: 2 }, 900, "d0"),
+      ],
     });
     const info = stackInfo(s, getStack(s, "a0"));
     expect(info.title).toBe("Raptors");
@@ -24,11 +26,11 @@ describe("stackInfo", () => {
     expect(info.stats[1]).toEqual({
       label: "Defense",
       value: "5",
-      note: "5 base, +2 hero, −3 Venom = 4, ×1.3 defending",
+      note: "5 base, +2 hero, −3 Venomed = 4, ×1.3 defending",
     });
     expect(info.ability?.name).toBe("Pack Hunter");
     expect(info.statuses).toEqual([
-      "Venom: −3 Defense until the end of round 2",
+      "Venomed (Bloom bane, size 3, 2 rounds left): -3 Defense (never below 0) for 2 rounds.",
       "Defending: +30% Defense until its next turn",
       "Can retaliate this round",
     ]);

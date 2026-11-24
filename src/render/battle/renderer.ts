@@ -30,6 +30,7 @@ export const SIDE_COLORS = {
 } as const;
 
 const NUMBER_FONT = "bold 12px Verdana, Geneva, sans-serif";
+const PIP_FONT = "bold 8px Verdana, Geneva, sans-serif";
 
 function hexPath(ctx: CanvasRenderingContext2D, h: Hex, inset = 0): void {
   const pts = hexCorners(h, inset);
@@ -270,21 +271,119 @@ function drawChip(
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillText(text, x + w / 2, y + h / 2 + 0.5);
-  // Status pips left of the chip: green Venom, blue Defend.
-  let px = x - 7;
-  const pip = (color: string): void => {
+  // Pips left of the chip: blue Defend, then one per condition in the
+  // school's colour with a placeholder glyph (banes ringed dark red).
+  let px = x - 8;
+  const pip = (color: string, glyph: string, ring: string): void => {
     ctx.fillStyle = color;
-    ctx.strokeStyle = "#0d0b08";
+    ctx.strokeStyle = ring;
     ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.arc(px, y + h / 2, 4.5, 0, Math.PI * 2);
+    ctx.arc(px, y + h / 2, 6, 0, Math.PI * 2);
     ctx.fill();
     ctx.stroke();
-    px -= 11;
+    if (glyph !== "") {
+      ctx.fillStyle = "#0d0b08";
+      ctx.font = PIP_FONT;
+      ctx.fillText(glyph, px, y + h / 2 + 0.5);
+    }
+    px -= 13;
   };
-  if (u.venom) pip("#6fdc3c");
-  if (u.defending) pip("#5aa8ff");
+  if (u.defending) pip("#5aa8ff", "", "#0d0b08");
+  for (const p of u.pips) pip(p.color, p.glyph, p.bane ? "#5a0a0a" : "#0d0b08");
   ctx.globalAlpha = 1;
+}
+
+/** Tinted hexes for non-blocking ground (hazards, surfaces, remains). */
+function drawGround(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  for (const g of scene.ground) {
+    hexPath(ctx, g.hex, 3);
+    ctx.globalAlpha = 0.32;
+    ctx.fillStyle = g.color;
+    ctx.fill();
+    ctx.globalAlpha = 0.9;
+    ctx.strokeStyle = g.color;
+    ctx.lineWidth = 2;
+    ctx.setLineDash([4, 3]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    const c = hexToStage(g.hex);
+    ctx.globalAlpha = 0.85;
+    ctx.font = "bold 11px Verdana, Geneva, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#1a1208";
+    ctx.fillText(g.glyph, c.x - 16, c.y - 12);
+    ctx.globalAlpha = 1;
+  }
+}
+
+/** Links as dashed lines in the school's colour, near end to far end. */
+function drawLinks(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  for (const l of scene.links) {
+    const a = scene.units.get(l.near);
+    const b = scene.units.get(l.far);
+    if (!a || !b || !a.visible || !b.visible) continue;
+    const ay = a.y - 24;
+    const by = b.y - 24;
+    ctx.save();
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#0d0b08";
+    ctx.lineWidth = 5;
+    ctx.setLineDash([10, 6]);
+    ctx.beginPath();
+    ctx.moveTo(a.x, ay);
+    ctx.lineTo(b.x, by);
+    ctx.stroke();
+    ctx.strokeStyle = l.color;
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+    ctx.setLineDash([]);
+    // A ring at the near end (the bearer).
+    ctx.beginPath();
+    ctx.arc(a.x, ay, 5, 0, Math.PI * 2);
+    ctx.fillStyle = l.color;
+    ctx.fill();
+    ctx.strokeStyle = "#0d0b08";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.restore();
+  }
+}
+
+/** Enemy intent badges above stacks, with a thin line to the target. */
+function drawIntents(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  ctx.font = "bold 10px Verdana, Geneva, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  for (const it of scene.intents) {
+    const u = scene.units.get(it.stackId);
+    if (!u || !u.visible) continue;
+    const t = it.target ? scene.units.get(it.target) : undefined;
+    if (t && t.visible) {
+      ctx.save();
+      ctx.strokeStyle = "rgba(255, 120, 90, 0.75)";
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([3, 4]);
+      ctx.beginPath();
+      ctx.moveTo(u.x, u.y - 62);
+      ctx.lineTo(t.x, t.y - 40);
+      ctx.stroke();
+      ctx.restore();
+    }
+    const w = Math.ceil(ctx.measureText(it.text).width) + 10;
+    const x = Math.round(u.x - w / 2);
+    const y = Math.round(u.y - 74);
+    ctx.fillStyle = "rgba(40, 12, 10, 0.86)";
+    ctx.strokeStyle = "#ff8a6a";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(x, y, w, 14, 3);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = "#ffe0d6";
+    ctx.fillText(it.text, x + w / 2, y + 7.5);
+  }
 }
 
 function drawEffects(ctx: CanvasRenderingContext2D, scene: Scene): void {
@@ -367,6 +466,7 @@ export function renderBattle(
   const { scene, art } = input;
   ctx.imageSmoothingEnabled = false;
   ctx.drawImage(input.background, 0, 0);
+  drawGround(ctx, scene);
   drawMarks(ctx, scene);
 
   const drawables: Drawable[] = [];
@@ -385,9 +485,11 @@ export function renderBattle(
     if (d.kind === "unit") drawUnit(ctx, art, d.unit);
     else drawObstacle(ctx, art, d.index);
   }
+  drawLinks(ctx, scene);
   for (const u of scene.units.values()) {
     if (u.visible) drawChip(ctx, u, u.id === input.activeId);
   }
+  drawIntents(ctx, scene);
   drawStrikeArrow(ctx, scene);
   drawEffects(ctx, scene);
 }

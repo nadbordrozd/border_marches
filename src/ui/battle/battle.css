@@ -411,3 +411,35 @@
 .bm-ok {
   min-width: 120px;
 }
+
+/* Battle grammar (RULES_V2 1): condition and ground tooltips, the chain. */
+.bm-tip-cond {
+  width: 320px;
+  white-space: normal;
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.35;
+  color: #f0e6c8;
+}
+
+.bm-tip-cond + .bm-tip-cond {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 214, 92, 0.3);
+}
+
+.bm-pv-chain {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #ffd9a0;
+}
+
+.bm-pv-cond {
+  font-size: 12px;
+  color: #d8ccb0;
+}
+
+.bm-chip.bm-event {
+  font-style: italic;
+  opacity: 0.9;
+}

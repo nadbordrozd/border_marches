@@ -39,36 +39,153 @@ export interface DamageInput {
   readonly damagePerCreature: number;
   readonly attack: number;
   readonly defense: number;
-  /** Ability multipliers as whole percentages (140 = x 1.40). */
+  /** Percentage multipliers as whole percentages (140 = x 1.40). */
   readonly percents?: readonly number[];
   /** Ranged creature fighting in melee: x 0.5. */
   readonly halved?: boolean;
 }
 
-/**
- * damage = max(1, floor(count x Dmg x M x (ability multipliers) x (0.5 if
- * ranged in melee))), computed exactly.
- */
-export function computeDamage(input: DamageInput): {
-  damage: number;
-  multiplier: Rational;
+/** The Strike percentage product P is clamped to 1/4 .. 4 (RULES_V2 1.8). */
+export const P_MIN: Rational = { num: 1, den: 4 };
+export const P_MAX: Rational = { num: 4, den: 1 };
+
+/** The product of whole percentages as an exact rational (BigInt). */
+function percentProduct(percents: readonly number[]): {
+  num: bigint;
+  den: bigint;
 } {
-  const m = attackDefenseMultiplier(input.attack, input.defense);
-  let num =
-    BigInt(input.count) * BigInt(input.damagePerCreature) * BigInt(m.num);
-  let den = BigInt(m.den);
-  for (const p of input.percents ?? []) {
+  let num = 1n;
+  let den = 1n;
+  for (const p of percents) {
     if (!Number.isInteger(p) || p < 0) {
-      throw new RangeError(
-        `ability multiplier must be a whole percent, got ${p}`,
-      );
+      throw new RangeError(`multiplier must be a whole percent, got ${p}`);
     }
     num *= BigInt(p);
     den *= 100n;
   }
+  return { num, den };
+}
+
+function reduce(num: bigint, den: bigint): Rational {
+  const g = (a: bigint, b: bigint): bigint => (b === 0n ? a : g(b, a % b));
+  const d = g(num < 0n ? -num : num, den) || 1n;
+  return { num: Number(num / d), den: Number(den / d) };
+}
+
+/**
+ * Clamps an exact product to [lo, hi]; returns the clamped rational and
+ * whether the clamp changed it.
+ */
+function clampProduct(
+  num: bigint,
+  den: bigint,
+  lo: Rational,
+  hi: Rational,
+): { value: Rational; capped: boolean } {
+  if (num * BigInt(hi.den) > BigInt(hi.num) * den) {
+    return { value: hi, capped: true };
+  }
+  if (num * BigInt(lo.den) < BigInt(lo.num) * den) {
+    return { value: lo, capped: true };
+  }
+  return { value: reduce(num, den), capped: false };
+}
+
+/** P for a Strike: product of percentages, clamped to 1/4 .. 4. */
+export function strikePercentProduct(percents: readonly number[]): {
+  value: Rational;
+  capped: boolean;
+} {
+  const { num, den } = percentProduct(percents);
+  return clampProduct(num, den, P_MIN, P_MAX);
+}
+
+/**
+ * damage = max(1, floor(count x Dmg x M x P x (0.5 if ranged in melee))),
+ * computed exactly, with P = the product of the percentage multipliers
+ * clamped to 1/4 .. 4 (RULES_V2 1.8).
+ */
+export function computeDamage(input: DamageInput): {
+  damage: number;
+  multiplier: Rational;
+  percentProduct: Rational;
+  percentCapped: boolean;
+} {
+  const m = attackDefenseMultiplier(input.attack, input.defense);
+  const p = strikePercentProduct(input.percents ?? []);
+  const num =
+    BigInt(input.count) *
+    BigInt(input.damagePerCreature) *
+    BigInt(m.num) *
+    BigInt(p.value.num);
+  let den = BigInt(m.den) * BigInt(p.value.den);
   if (input.halved) den *= 2n;
   const floored = Number(num / den);
-  return { damage: Math.max(1, floored), multiplier: m };
+  return {
+    damage: Math.max(1, floored),
+    multiplier: m,
+    percentProduct: p.value,
+    percentCapped: p.capped,
+  };
+}
+
+/** Q for Harm: "Harm taken" percentages, x 2 if Fuelled, clamped 1/4 .. 4. */
+export function harmMultiplier(
+  percents: readonly number[],
+  fuelled = false,
+): Rational {
+  const { num, den } = percentProduct(fuelled ? [...percents, 200] : percents);
+  return clampProduct(num, den, P_MIN, P_MAX).value;
+}
+
+/**
+ * Harm (RULES_V2 1.8): floor(X x Q). X is a non-negative integer that never
+ * reads a stack's hit points; Harm of 0 is legal and does nothing.
+ */
+export function computeHarm(
+  x: number,
+  percents: readonly number[] = [],
+  fuelled = false,
+): { harm: number; q: Rational } {
+  if (!Number.isInteger(x) || x < 0) {
+    throw new RangeError(`Harm must be a non-negative integer, got ${x}`);
+  }
+  const q = harmMultiplier(percents, fuelled);
+  return { harm: Math.floor((x * q.num) / q.den), q };
+}
+
+/** Exact floor(sqrt(n)) for a non-negative BigInt. */
+function isqrt(n: bigint): bigint {
+  if (n < 2n) return n;
+  let x = BigInt(Math.floor(Math.sqrt(Number(n))));
+  while (x * x > n) x -= 1n;
+  while ((x + 1n) * (x + 1n) <= n) x += 1n;
+  return x;
+}
+
+/**
+ * Creature fight value (GAME_DESIGN 8.2), exactly:
+ * round(10 x sqrt(HP x Dmg) x (1 + 0.05 x (Atk + Def)) x (1.25 if ranged)).
+ * Integer-only: round(sqrt(N)) = floor((floor(sqrt(4N)) + 1) / 2).
+ */
+export function creatureFightValue(c: {
+  readonly hp: number;
+  readonly damage: number;
+  readonly attack: number;
+  readonly defense: number;
+  readonly shots?: number;
+}): number {
+  // value = 10 x sqrt(HP x Dmg) x (20 + A + D) / 20 x (5/4 if ranged)
+  // N = value^2 = 100 x HP x Dmg x (20 + A + D)^2 / 400 x (25/16 if ranged)
+  const k = BigInt(20 + c.attack + c.defense);
+  let num = 100n * BigInt(c.hp) * BigInt(c.damage) * k * k;
+  let den = 400n;
+  if ((c.shots ?? 0) > 0) {
+    num *= 25n;
+    den *= 16n;
+  }
+  const s = isqrt((4n * num) / den);
+  return Number((s + 1n) / 2n);
 }
 
 export interface StackHealth {

@@ -295,27 +295,36 @@ describe("sound set and cues", () => {
     const big = state.stacks.find((s) => s.id === "a1");
     expect(raptor?.creature.tier).toBeLessThan(4);
     expect(big?.creature.tier).toBeGreaterThanOrEqual(4);
+    const meta = { index: 0, cause: null, rule: "engine" } as const;
     const damage = (sourceId: string, dmg: number): BattleEvent => ({
+      ...meta,
       type: "damage",
       sourceId,
       targetId: "d0",
       kind: "melee",
       damage: dmg,
       kills: 0,
+      hpLost: 0,
       countAfter: 20,
       topHpAfter: 1,
       breakdown: {} as never,
+      redirectedTo: null,
     });
     expect(battleCue(damage("a0", 5), state)).toBe("battle.hit");
     expect(battleCue(damage("a1", 5), state)).toBe("battle.heavy-hit");
     expect(battleCue(damage("a0", 100_000), state)).toBe("battle.heavy-hit");
     expect(
-      battleCue({ type: "shoot", stackId: "a0", targetId: "d0" }, state),
+      battleCue(
+        { ...meta, type: "shoot", stackId: "a0", targetId: "d0" },
+        state,
+      ),
     ).toBe("battle.shot");
-    expect(battleCue({ type: "death", stackId: "d0" }, state)).toBe(
+    expect(battleCue({ ...meta, type: "death", stackId: "d0" }, state)).toBe(
       "battle.death",
     );
-    expect(battleCue({ type: "wait", stackId: "a0" }, state)).toBeNull();
+    expect(
+      battleCue({ ...meta, type: "wait", stackId: "a0" }, state),
+    ).toBeNull();
     expect(pickupCue("gold")).toBe("gold");
     expect(pickupCue("wood")).toBe("pickup");
   });

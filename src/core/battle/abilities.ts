@@ -1,81 +1,31 @@
 /**
- * Abilities and statuses as small, composable modifier hooks.
+ * The MVP abilities on the battle grammar (RULES_V2.md 1.3, 1.7, 1.10).
  *
- * At every strike the engine asks every living stack on the field (the
- * "owner") for each of its abilities' hooks, so an ability can act on its own
- * strikes (Mob, Charge), on strikes against itself (Bony) or as an aura on
- * neighbours (War Drums, Warcry). Statuses are asked through their holder.
- * The engine combines the answers by the rules of GAME_DESIGN.md 9.4:
+ * Passive rules use the modifier hook: at every strike the engine asks every
+ * living stack on the field (the "owner") for each of its abilities' hooks,
+ * so an ability can act on its own strikes (Mob, Charge), on strikes against
+ * itself (Bony) or as an aura on neighbours (War Drums, Warcry). The engine
+ * combines the answers by GAME_DESIGN.md 9.4 and RULES_V2 1.8:
  *
  * - flat Attack/Defense modifiers add up (same `stackKey`: only the largest),
- * - damage multipliers (whole percentages) multiply together,
+ * - percentage multipliers multiply together, clamped to 1/4 .. 4,
  * - any `preventsRetaliation` cancels the retaliation.
  *
- * Later spells, artifacts and skills plug in by adding entries here.
+ * Venom is "on strike, add Venomed" (a reaction); Regenerate is a turn-start
+ * Heal. "Friendly" is read from each stack's live side (law 4), so a Turned
+ * Shaman's War Drums help its new side. Content abilities register in
+ * registry.ts with the same shape.
  */
 
 import { ABILITIES as ABILITY_DATA } from "../../data/abilities.ts";
 import { isAdjacent } from "./hex.ts";
+import type { AbilityDef } from "./registry.ts";
 import type {
   AbilityId,
   BattleSide,
   BattleStack,
   BattleState,
-  FlatModifier,
-  MultiplierModifier,
-  StatusId,
-  StatusInstance,
-  StrikeKind,
 } from "./types.ts";
-
-/** One strike as the hooks see it. Positions are as at the strike. */
-export interface StrikeContext {
-  readonly state: BattleState;
-  /** The stack dealing the damage (the retaliator, for a retaliation). */
-  readonly attacker: BattleStack;
-  /** The stack taking the damage. */
-  readonly defender: BattleStack;
-  readonly kind: StrikeKind;
-  /** Hexes the attacker moved this turn before striking (0 for retaliations). */
-  readonly hexesMoved: number;
-}
-
-export interface StatusApplication {
-  readonly status: StatusId;
-  /** Removed at the end of this round. */
-  readonly expiresAfterRound: number;
-}
-
-export interface AbilityDefinition {
-  readonly id: AbilityId;
-  readonly name: string;
-  readonly description: string;
-  /** Flat Attack added to `ctx.attacker`. */
-  attackModifier?(ctx: StrikeContext, owner: BattleStack): FlatModifier | null;
-  /** Flat Defense added to `ctx.defender`. */
-  defenseModifier?(ctx: StrikeContext, owner: BattleStack): FlatModifier | null;
-  /** A damage multiplier for the strike. */
-  damageMultiplier?(
-    ctx: StrikeContext,
-    owner: BattleStack,
-  ): MultiplierModifier | null;
-  /** True cancels the defender's retaliation (checked for the melee strike). */
-  preventsRetaliation?(ctx: StrikeContext, owner: BattleStack): boolean;
-  /** A status put on `ctx.defender` after a hit it survives. */
-  onHit?(ctx: StrikeContext, owner: BattleStack): StatusApplication | null;
-  /** New top-creature HP at the start of the owner's turn, or null. */
-  onTurnStart?(owner: BattleStack): { readonly topHp: number } | null;
-}
-
-export interface StatusDefinition {
-  readonly id: StatusId;
-  readonly name: string;
-  attackModifier?(ctx: StrikeContext, holder: BattleStack): FlatModifier | null;
-  defenseModifier?(
-    ctx: StrikeContext,
-    holder: BattleStack,
-  ): FlatModifier | null;
-}
 
 export function isAlive(stack: BattleStack): boolean {
   return stack.count > 0;
@@ -101,13 +51,14 @@ export function countAdjacentAllies(
 }
 
 /** An ability's integer parameter from src/data/abilities.ts. */
-function param(id: AbilityId, name: string): number {
+export function abilityParam(id: AbilityId, name: string): number {
   const v = ABILITY_DATA[id].params[name];
   if (v === undefined || !Number.isInteger(v)) {
     throw new Error(`ability ${id} has no integer param ${name}`);
   }
   return v;
 }
+const param = abilityParam;
 
 function info(id: AbilityId): {
   id: AbilityId;
@@ -122,10 +73,10 @@ function info(id: AbilityId): {
 }
 
 /**
- * The engine side of every ability. Names, rule text and numbers come from
- * src/data/abilities.ts (ABILITIES); this table supplies the behaviour.
+ * The engine side of every MVP ability. Names, rule text and numbers come
+ * from src/data/abilities.ts (ABILITIES); this table supplies the behaviour.
  */
-export const ABILITY_HOOKS: { readonly [K in AbilityId]: AbilityDefinition } = {
+export const ABILITY_HOOKS: { readonly [K in AbilityId]: AbilityDef } = {
   mob: {
     ...info("mob"),
     attackModifier(ctx, owner) {
@@ -145,11 +96,20 @@ export const ABILITY_HOOKS: { readonly [K in AbilityId]: AbilityDefinition } = {
   },
   venom: {
     ...info("venom"),
-    onHit(ctx, owner) {
+    // On strike (shot, melee or retaliation): add Venomed (Bloom, bane,
+    // size 3, clock 2: "until the end of the next round").
+    onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id) return null;
-      return {
-        status: "venom",
-        expiresAfterRound: ctx.state.round + param("venom", "rounds"),
+      const target = ctx.defender.id;
+      const tier = owner.creature.tier;
+      return (fx) => {
+        fx.addCondition(target, {
+          kind: "venomed",
+          size: param("venom", "defense"),
+          clock: param("venom", "rounds") + 1,
+          tier,
+          source: owner.id,
+        });
       };
     },
   },
@@ -218,10 +178,10 @@ export const ABILITY_HOOKS: { readonly [K in AbilityId]: AbilityDefinition } = {
   },
   regenerate: {
     ...info("regenerate"),
-    onTurnStart(owner) {
-      return owner.topHp < owner.creature.hp
-        ? { topHp: owner.creature.hp }
-        : null;
+    // Turn start: Heal the top creature to full (never revives).
+    onTurnStart(fx, ownerId) {
+      const s = fx.stack(ownerId);
+      if (s.topHp < s.creature.hp) fx.heal(ownerId, s.creature.hp - s.topHp);
     },
   },
   warcry: {
@@ -240,120 +200,3 @@ export const ABILITY_HOOKS: { readonly [K in AbilityId]: AbilityDefinition } = {
     },
   },
 };
-
-export const STATUSES: { readonly [K in StatusId]: StatusDefinition } = {
-  venom: {
-    id: "venom",
-    name: "Venom",
-    defenseModifier(ctx, holder) {
-      if (holder.id !== ctx.defender.id) return null;
-      return {
-        source: "venom",
-        label: "Venom",
-        amount: -param("venom", "defense"),
-      };
-    },
-  },
-};
-
-/** Living stacks paired with each of their ability definitions, field order. */
-function* abilityOwners(
-  state: BattleState,
-): Generator<readonly [AbilityDefinition, BattleStack]> {
-  for (const s of state.stacks) {
-    if (!isAlive(s)) continue;
-    for (const id of s.creature.abilities)
-      yield [ABILITY_HOOKS[id], s] as const;
-  }
-}
-
-/** Keeps every modifier without a stackKey and the largest of each key. */
-function dedupeFlat(mods: readonly FlatModifier[]): FlatModifier[] {
-  const out: FlatModifier[] = [];
-  const bestByKey = new Map<string, number>();
-  for (const m of mods) {
-    if (m.stackKey === undefined) {
-      out.push(m);
-      continue;
-    }
-    const i = bestByKey.get(m.stackKey);
-    if (i === undefined) {
-      bestByKey.set(m.stackKey, out.length);
-      out.push(m);
-    } else if (m.amount > (out[i] as FlatModifier).amount) {
-      out[i] = m;
-    }
-  }
-  return out;
-}
-
-function statusHolders(
-  ctx: StrikeContext,
-): Array<readonly [StatusDefinition, BattleStack]> {
-  const out: Array<readonly [StatusDefinition, BattleStack]> = [];
-  for (const holder of [ctx.attacker, ctx.defender]) {
-    for (const st of holder.statuses) out.push([STATUSES[st.id], holder]);
-  }
-  return out;
-}
-
-export function collectAttackModifiers(ctx: StrikeContext): FlatModifier[] {
-  const mods: FlatModifier[] = [];
-  for (const [def, owner] of abilityOwners(ctx.state)) {
-    const m = def.attackModifier?.(ctx, owner);
-    if (m) mods.push(m);
-  }
-  for (const [def, holder] of statusHolders(ctx)) {
-    const m = def.attackModifier?.(ctx, holder);
-    if (m) mods.push(m);
-  }
-  return dedupeFlat(mods);
-}
-
-export function collectDefenseModifiers(ctx: StrikeContext): FlatModifier[] {
-  const mods: FlatModifier[] = [];
-  for (const [def, owner] of abilityOwners(ctx.state)) {
-    const m = def.defenseModifier?.(ctx, owner);
-    if (m) mods.push(m);
-  }
-  for (const [def, holder] of statusHolders(ctx)) {
-    const m = def.defenseModifier?.(ctx, holder);
-    if (m) mods.push(m);
-  }
-  return dedupeFlat(mods);
-}
-
-export function collectDamageMultipliers(
-  ctx: StrikeContext,
-): MultiplierModifier[] {
-  const mods: MultiplierModifier[] = [];
-  for (const [def, owner] of abilityOwners(ctx.state)) {
-    const m = def.damageMultiplier?.(ctx, owner);
-    if (m) mods.push(m);
-  }
-  return mods;
-}
-
-export function retaliationPrevented(ctx: StrikeContext): boolean {
-  for (const [def, owner] of abilityOwners(ctx.state)) {
-    if (def.preventsRetaliation?.(ctx, owner)) return true;
-  }
-  return false;
-}
-
-export function collectOnHit(ctx: StrikeContext): StatusApplication[] {
-  const out: StatusApplication[] = [];
-  for (const [def, owner] of abilityOwners(ctx.state)) {
-    const a = def.onHit?.(ctx, owner);
-    if (a) out.push(a);
-  }
-  return out;
-}
-
-/** Adds or refreshes a status (statuses never stack with themselves). */
-export function withStatus(
-  statuses: readonly StatusInstance[],
-  next: StatusInstance,
-): StatusInstance[] {
-  return [...statuses.filter((s) => s.id !== next.id), next];
-}

@@ -1,11 +1,14 @@
 /**
- * Battle engine data types. Everything here is plain, immutable,
- * JSON-serialisable data: the engine never mutates a state it was given and
- * keeps no hidden randomness (the seed is only used to place obstacles).
+ * Battle engine data types (RULES_V2.md section 1, the battle grammar).
+ * Everything here is plain, immutable, JSON-serialisable data: the engine
+ * never mutates a state it was given and keeps no hidden randomness (the
+ * seed is only used to place obstacles).
  *
  * The engine takes creature stats as input ({@link BattleCreatureStats}), so
  * it does not depend on src/data; the integration layer maps the game's
- * creature records onto these types.
+ * creature records onto these types. Behaviour that content adds (condition
+ * kinds, ground kinds, abilities, acts, scheduled effects) lives in the
+ * registries of registry.ts and is named here only by id.
  */
 
 import type { AbilityId } from "../../data/types.ts";
@@ -15,19 +18,30 @@ export type BattleSide = "attacker" | "defender";
 
 /**
  * Every ability the engine knows: the game's ability ids
- * (src/data/types.ts). Behaviour is in abilities.ts (ABILITY_HOOKS), names
- * and numbers in src/data/abilities.ts.
+ * (src/data/types.ts) plus any id content registers (registry.ts).
  */
 export type { AbilityId };
+/** An ability id: the MVP's or one registered by content. */
+export type AbilityKey = AbilityId | (string & {});
 
-/** Timed effects that sit on a stack (e.g. Venom's -3 Defense). */
-export type StatusId = "venom";
+/** The five schools of the wheel (RULES_V2 2.1). */
+export type School = "bloom" | "accord" | "clock" | "hush" | "storm";
+export type Polarity = "boon" | "bane";
+
+/** What a stack's death leaves on its hex (RULES_V2 1.2, 1.5). */
+export type DeathTag = "corpse" | "bones" | "wreck" | "sweets" | "nothing";
+
+export interface StackTags {
+  readonly remains: DeathTag;
+  /** At most two condition kinds the creature cannot bear. */
+  readonly cannotBear: readonly string[];
+}
 
 /** A creature type's battle stats. */
 export interface BattleCreatureStats {
   readonly id: string;
   readonly name?: string;
-  /** 1..6; drives the AI's value per HP. */
+  /** 1..6; drives the AI's value per HP and the tier gate. */
   readonly tier: number;
   readonly hp: number;
   readonly attack: number;
@@ -37,9 +51,11 @@ export interface BattleCreatureStats {
   readonly speed: number;
   /** Present and > 0 for ranged creatures. */
   readonly shots?: number;
-  readonly abilities: readonly AbilityId[];
+  readonly abilities: readonly AbilityKey[];
   /** Overrides the tier-based AI value per HP. */
   readonly aiValuePerHp?: number;
+  /** Defaults to `{ remains: "corpse", cannotBear: [] }`. */
+  readonly tags?: StackTags;
 }
 
 export interface HeroBattleStats {
@@ -56,7 +72,23 @@ export interface BattleStackSetup {
   readonly hex?: Hex;
   /** HP of the top creature; defaults to full. */
   readonly topHp?: number;
+  /** True when the side's birthright applies to this stack (3.8). */
+  readonly native?: boolean;
 }
+
+/** A content effect named by id with JSON arguments (registry.ts). */
+export interface EffectRef {
+  readonly id: string;
+  readonly args?: JsonValue;
+}
+
+export type JsonValue =
+  | null
+  | boolean
+  | number
+  | string
+  | readonly JsonValue[]
+  | { readonly [key: string]: JsonValue };
 
 export interface BattleArmySetup {
   /** null for neutrals (hero Attack and Defense count as 0). */
@@ -64,6 +96,17 @@ export interface BattleArmySetup {
   /** Flat Defense bonus for every stack of this side (e.g. +2 fortified). */
   readonly defenseBonus?: number;
   readonly stacks: readonly BattleStackSetup[];
+  /** Army Morale, -3..3 (RULES_V2 6). Default 0. */
+  readonly morale?: number;
+  /** Army Luck, -3..3 (RULES_V2 6). Default 0. */
+  readonly luck?: number;
+  /** The hero may retreat (1.12; the game layer decides). Default false. */
+  readonly canRetreat?: boolean;
+  /**
+   * Battle-start rules (artifacts, form 2 of 4.6), resolved before round 1
+   * in this order through the effect registry.
+   */
+  readonly startRules?: readonly EffectRef[];
 }
 
 export interface BattleSetup {
@@ -73,23 +116,68 @@ export interface BattleSetup {
   readonly defender: BattleArmySetup;
   /** Explicit obstacle hexes instead of seeded ones (tests, scenarios). */
   readonly obstacles?: readonly Hex[];
+  /** Extra starting ground (tests, scenarios). */
+  readonly ground?: readonly GroundSpec[];
   /** Round to start in (default 1). */
   readonly startRound?: number;
 }
 
 export type StackId = string;
 
-export interface StatusInstance {
-  readonly id: StatusId;
-  /** The status is removed when this round ends. */
-  readonly expiresAfterRound: number;
-  /** The stack that applied it. */
-  readonly sourceId: StackId;
+/** A threshold a stack must pass to receive a condition (1.3). */
+export interface Gate {
+  readonly measure: "hp" | "tier";
+  readonly max: number;
+}
+
+/** A condition on one stack (RULES_V2 1.3). */
+export interface Condition {
+  /** Unique within the battle; creation order ("oldest" = lowest). */
+  readonly uid: number;
+  readonly kind: string;
+  readonly school: School;
+  readonly polarity: Polarity;
+  readonly size: number;
+  readonly maxSize: number;
+  /** Rounds left, 1..9, or null for "until the battle ends". */
+  readonly clock: number | null;
+  readonly gate: Gate | null;
+  /** Harm per remaining round when set off (2.7). */
+  readonly charge: number;
+  readonly hold: boolean;
+  /** Far end of a link (1.4), or null. */
+  readonly link: StackId | null;
+  /** Stack id, "hero:<side>", or an artifact or rule id. */
+  readonly source: string;
+  /** Round ends passed while bearing it (a Hold's Wary length, 1.9). */
+  readonly roundsBorne: number;
+}
+
+/** What a rule asks to put on a stack; the kind fills in the rest. */
+export interface ConditionSpec {
+  readonly kind: string;
+  readonly size?: number;
+  readonly maxSize?: number;
+  /** Omitted: the kind's default clock. */
+  readonly clock?: number | null;
+  readonly gate?: Gate | null;
+  readonly link?: StackId | null;
+  /** Tier of what made it, for the default charge (10 x tier). */
+  readonly tier?: number;
+  readonly charge?: number;
+  readonly source?: string;
 }
 
 export interface BattleStack {
-  /** "a<slot>" for the attacker, "d<slot>" for the defender. */
+  /** "a<slot>", "d<slot>", or "s<n>" for summoned stacks. */
   readonly id: StackId;
+  /** The battle side that brought or summoned it. Never changes. */
+  readonly owner: BattleSide;
+  /**
+   * The side it fights for: the owner, or the other side while it bears
+   * Turned. Derived: the engine recomputes it whenever conditions change
+   * (see `sideOf`); never set it by hand.
+   */
   readonly side: BattleSide;
   readonly slot: number;
   readonly creature: BattleCreatureStats;
@@ -100,34 +188,113 @@ export interface BattleStack {
   readonly initialCount: number;
   readonly hex: Hex;
   readonly shotsLeft: number;
+  readonly native: boolean;
+  readonly summoned: boolean;
+  readonly tags: StackTags;
+  /** Ordered list, at most six. */
+  readonly conditions: readonly Condition[];
+  /**
+   * Rounds left of refusing Holds, counting the round in which the Hold
+   * left (1.9). Not a condition.
+   */
+  readonly wary: number;
   readonly retaliatedThisRound: boolean;
   readonly defending: boolean;
   readonly waitedThisRound: boolean;
   /** Round whose turn-start effects have run for this stack. */
   readonly turnStartedRound: number;
-  readonly statuses: readonly StatusInstance[];
+  /** Round in which this stack was granted its extra turn (0: never). */
+  readonly extraTurnRound: number;
+  /** Once-per-battle abilities this stack has used. */
+  readonly abilitiesUsed: readonly string[];
+}
+
+export type GroundClass = "blocking" | "hazard" | "surface" | "remains";
+
+export interface Remains {
+  readonly creature: BattleCreatureStats;
+  readonly owner: BattleSide;
+  readonly initialCount: number;
+}
+
+/** One feature on one hex (RULES_V2 1.5). */
+export interface GroundFeature {
+  readonly hex: Hex;
+  readonly kind: string;
+  readonly class: GroundClass;
+  readonly school: School | null;
+  readonly size: number;
+  readonly clock: number | null;
+  readonly remains: Remains | null;
+  readonly source: string;
+}
+
+export interface GroundSpec {
+  readonly hex: Hex;
+  readonly kind: string;
+  readonly size?: number;
+  readonly clock?: number | null;
+  readonly source?: string;
+}
+
+/** A visible scheduled event on the timeline (1.6). */
+export interface ScheduledEvent {
+  readonly id: number;
+  readonly round: number;
+  readonly phase: "start" | "end";
+  readonly effect: EffectRef;
+  readonly source: string;
+  readonly side: BattleSide;
+  /** True when firing it returns a stack of `side` (1.12 battle end). */
+  readonly returnsStack?: boolean;
 }
 
 export interface BattleSideState {
   readonly hero: HeroBattleStats | null;
   readonly defenseBonus: number;
+  readonly morale: number;
+  readonly luck: number;
+  readonly canRetreat: boolean;
+  /** Round of the hero's last cast (0: none). One cast per round. */
+  readonly castRound: number;
+  /** Command used this battle. */
+  readonly commandUsed: boolean;
+  /** Item acts used this battle (act ids). */
+  readonly itemActsUsed: readonly string[];
 }
+
+export type EndReason = "eliminated" | "roundLimit" | "retreat";
 
 export interface BattleState {
   readonly seed: number;
-  readonly obstacles: readonly Hex[];
+  /** At most one feature per hex, sorted by hex index (row by row). */
+  readonly ground: readonly GroundFeature[];
   readonly sides: { readonly [S in BattleSide]: BattleSideState };
-  /** All stacks, attacker's first, each side in slot order. */
+  /** All stacks: attacker's, defender's, then summoned in creation order. */
   readonly stacks: readonly BattleStack[];
   readonly round: number;
   /** Stacks still to act this round (not waiting), in order. */
   readonly queue: readonly StackId[];
   /** Stacks that waited, in the order they will act (slowest first). */
   readonly waiting: readonly StackId[];
+  /** Stacks granted an extra turn that have not taken it yet. */
+  readonly extraTurns: readonly StackId[];
   /** The stack whose action is expected; null once the battle is over. */
   readonly activeStackId: StackId | null;
   readonly winner: BattleSide | null;
+  readonly endReason: EndReason | null;
+  readonly scheduled: readonly ScheduledEvent[];
+  /** Next condition uid / scheduled id / summoned stack number. */
+  readonly nextUid: number;
+  /** Local laws of the battleground (none in v0.2). */
+  readonly laws: readonly string[];
 }
+
+/** A chosen target of an act or ability (law 5: anything can be one). */
+export type ActTarget =
+  | { readonly stack: StackId }
+  | { readonly hex: Hex }
+  | { readonly stack: StackId; readonly condition: number };
 
 export type BattleAction =
   | { readonly type: "move"; readonly stackId: StackId; readonly to: Hex }
@@ -137,23 +304,50 @@ export type BattleAction =
       readonly targetId: StackId;
       /** Hex to attack from: the stack's own hex or a reachable one. */
       readonly from: Hex;
+      /** Spend Heartened for an extra turn afterwards (default true). */
+      readonly hearten?: boolean;
     }
   | {
       readonly type: "shoot";
       readonly stackId: StackId;
       readonly targetId: StackId;
+      readonly hearten?: boolean;
     }
   | { readonly type: "wait"; readonly stackId: StackId }
-  | { readonly type: "defend"; readonly stackId: StackId };
+  | {
+      readonly type: "defend";
+      readonly stackId: StackId;
+      readonly hearten?: boolean;
+    }
+  | {
+      /** The active stack's activated ability, as its action. */
+      readonly type: "ability";
+      readonly stackId: StackId;
+      readonly ability: string;
+      readonly targets: readonly ActTarget[];
+      readonly hearten?: boolean;
+    }
+  | {
+      /**
+       * The hero of the active stack's side acts before the stack: a cast,
+       * the Command or an item act (registry.ts ActDef.kind). Does not end
+       * the stack's turn.
+       */
+      readonly type: "heroAct";
+      readonly stackId: StackId;
+      readonly act: string;
+      readonly targets: readonly ActTarget[];
+    }
+  | { readonly type: "retreat"; readonly stackId: StackId };
 
 export type AttackAction = Extract<BattleAction, { type: "attack" | "shoot" }>;
 
-/** "melee" is the active stack's melee attack. */
-export type StrikeKind = "melee" | "shot" | "retaliation";
+/** "melee" is the active stack's melee attack; "special" comes from a rule. */
+export type StrikeKind = "melee" | "shot" | "retaliation" | "special";
 
 /** A flat Attack or Defense contribution, shown in the preview. */
 export interface FlatModifier {
-  /** Ability or status id, or "hero" / "fortified". */
+  /** Ability or condition id, or "hero" / "fortified". */
   readonly source: string;
   readonly label: string;
   readonly amount: number;
@@ -189,7 +383,7 @@ export interface DamageBreakdown {
   readonly attack: number;
   readonly baseDefense: number;
   readonly heroDefense: number;
-  /** Side bonus, abilities and statuses (Venom is negative). */
+  /** Side bonus, abilities and conditions (Venomed is negative). */
   readonly defenseModifiers: readonly FlatModifier[];
   /** max(0, ...) before Defend. */
   readonly defenseBeforeDefend: number;
@@ -199,6 +393,10 @@ export interface DamageBreakdown {
   /** M, exact. */
   readonly multiplier: Rational;
   readonly abilityMultipliers: readonly MultiplierModifier[];
+  /** P after the 1/4 .. 4 clamp, exact. */
+  readonly percentProduct: Rational;
+  /** True when the clamp changed P. */
+  readonly percentCapped: boolean;
   /** Ranged creature fighting in melee: x 0.5. */
   readonly rangedInMelee: boolean;
   readonly damage: number;
@@ -215,6 +413,16 @@ export interface StrikeResult {
   readonly hpLost: number;
   readonly targetCountAfter: number;
   readonly targetTopHpAfter: number;
+  /** Far end that took the damage instead (redirect link), or null. */
+  readonly redirectedTo: StackId | null;
+}
+
+/** A condition put on a stack by an attack's chain. */
+export interface AppliedCondition {
+  readonly stackId: StackId;
+  readonly kind: string;
+  readonly clock: number | null;
+  readonly size: number;
 }
 
 /** What an attack or shot will do, exactly as {@link applyAction} does it. */
@@ -228,18 +436,46 @@ export interface AttackPreview {
   readonly strike: StrikeResult;
   /** null when there is no retaliation (shot, Terror, used, target dead). */
   readonly retaliation: StrikeResult | null;
-  /** Statuses the strike and retaliation apply (e.g. Venom). */
-  readonly statusesApplied: readonly {
-    readonly stackId: StackId;
-    readonly status: StatusId;
-    readonly expiresAfterRound: number;
-  }[];
+  /** Conditions the chain put on stacks (e.g. Venomed). */
+  readonly conditionsApplied: readonly AppliedCondition[];
+  /** The full step chain of the action (rehearsal). */
+  readonly chain: readonly BattleEvent[];
 }
 
-/** The battle log the UI animates; emitted in order by createBattle/applyAction. */
-export type BattleEvent =
+export type ConditionChange =
+  | "landed"
+  | "merged"
+  | "displaced"
+  | "refused"
+  | "moved"
+  | "copied"
+  | "fed"
+  | "wound"
+  | "setOff"
+  | "expired"
+  | "ended";
+
+/** Why a condition was refused (1.3 landing order). */
+export type RefusalReason =
+  | "tag"
+  | "gate"
+  | "hold"
+  | "wary"
+  | "full"
+  | "sameStack"
+  | "dead"
+  | "neverProlonged";
+
+/** The body of one engine event (what happened). */
+export type BattleEventBody =
   | { readonly type: "roundStart"; readonly round: number }
+  | { readonly type: "roundEnd"; readonly round: number }
   | { readonly type: "turnStart"; readonly stackId: StackId }
+  | {
+      readonly type: "turnSkipped";
+      readonly stackId: StackId;
+      readonly condition: string;
+    }
   | {
       readonly type: "move";
       readonly stackId: StackId;
@@ -247,6 +483,7 @@ export type BattleEvent =
       readonly to: Hex;
       /** Hexes entered, in order (excludes `from`, ends with `to`). */
       readonly path: readonly Hex[];
+      readonly mode: "walk" | "push" | "pull" | "teleport" | "swap";
     }
   | {
       readonly type: "attack";
@@ -264,38 +501,118 @@ export type BattleEvent =
       readonly targetId: StackId;
     }
   | {
+      /** A Strike (1.8). */
       readonly type: "damage";
       readonly sourceId: StackId;
       readonly targetId: StackId;
       readonly kind: StrikeKind;
       readonly damage: number;
       readonly kills: number;
+      /** HP actually removed (0 when redirected). */
+      readonly hpLost: number;
       readonly countAfter: number;
       readonly topHpAfter: number;
       readonly breakdown: DamageBreakdown;
+      /** Far end that takes it instead (redirect link), or null. */
+      readonly redirectedTo: StackId | null;
+    }
+  | {
+      /** Harm (1.8): harm = floor(x x Q). */
+      readonly type: "harm";
+      readonly targetId: StackId;
+      readonly x: number;
+      readonly q: Rational;
+      readonly harm: number;
+      readonly kills: number;
+      readonly countAfter: number;
+      readonly topHpAfter: number;
+      readonly viaLink: boolean;
+      readonly redirectedTo: StackId | null;
+    }
+  | {
+      /** Damage carried down a redirect link to its far end. */
+      readonly type: "linkTransfer";
+      readonly nearId: StackId;
+      readonly farId: StackId;
+      readonly kind: string;
+      readonly amount: number;
+      /** What returns to the near end (far end died), 0 otherwise. */
+      readonly excess: number;
     }
   | { readonly type: "death"; readonly stackId: StackId }
   | {
-      readonly type: "status";
+      readonly type: "condition";
       readonly stackId: StackId;
-      readonly status: StatusId;
-      readonly change: "applied" | "expired";
-      readonly expiresAfterRound: number;
+      readonly change: ConditionChange;
+      readonly condition: Condition;
+      /** For moved and copied: the other stack. */
+      readonly otherId?: StackId;
+      readonly reason?: RefusalReason;
+      /** Human-readable numbers ("gate 120 HP, target has 400"). */
+      readonly detail?: string;
+    }
+  | {
+      readonly type: "wary";
+      readonly stackId: StackId;
+      readonly rounds: number;
+    }
+  | {
+      readonly type: "ground";
+      readonly change: "added" | "ended" | "used" | "refused";
+      readonly feature: GroundFeature;
     }
   | {
       readonly type: "heal";
       readonly stackId: StackId;
-      readonly source: AbilityId;
+      readonly source: string;
       readonly amount: number;
+      readonly revived: number;
+      readonly countAfter: number;
       readonly topHpAfter: number;
+    }
+  | { readonly type: "summon"; readonly stackId: StackId }
+  | {
+      readonly type: "schedule";
+      readonly change: "added" | "fired" | "cancelled" | "refused";
+      readonly event: ScheduledEvent;
+    }
+  | {
+      readonly type: "extraTurn";
+      readonly stackId: StackId;
+      readonly granted: boolean;
     }
   | { readonly type: "wait"; readonly stackId: StackId }
   | { readonly type: "defend"; readonly stackId: StackId }
   | {
+      readonly type: "ability";
+      readonly stackId: StackId;
+      readonly ability: string;
+    }
+  | {
+      readonly type: "heroAct";
+      readonly side: BattleSide;
+      readonly act: string;
+    }
+  | { readonly type: "retreat"; readonly side: BattleSide }
+  | { readonly type: "contentError"; readonly message: string }
+  | {
       readonly type: "end";
       readonly winner: BattleSide | null;
-      readonly reason: "eliminated" | "roundLimit";
+      readonly reason: EndReason;
     };
+
+/** Every event carries its place in the chain (RULES_V2 1.13). */
+export interface EventMeta {
+  /** Index within the step that emitted it (0, 1, 2, ...). */
+  readonly index: number;
+  /** Index of the event that triggered it; null for the action itself. */
+  readonly cause: number | null;
+  /** The rule that produced it: an ability, condition, act or engine id. */
+  readonly rule: string;
+}
+
+/** The battle log the UI animates; emitted in order by the engine. */
+export type BattleEvent = BattleEventBody & EventMeta;
 
 export interface BattleStep {
   readonly state: BattleState;

@@ -14,9 +14,12 @@ import {
   activeStack,
   applyAction,
   battleResult,
+  blockingHexes,
   chooseAiAction,
   compareTurnOrder,
   createBattle,
+  enemyIntents,
+  enemySide,
   engineSetupFromGame,
   gameResultFromEngine,
   getStack,
@@ -24,9 +27,11 @@ import {
   isAlive,
   legalActions,
   reachableHexes,
+  takeBackIndex,
 } from "../../core/battle/index.ts";
 import type {
   BattleAction,
+  HistoryEntry,
   BattleEvent,
   BattleResult as EngineBattleResult,
   BattleSide,
@@ -59,6 +64,13 @@ import {
 import type { HexMark, Scene } from "../../render/battle/scene.ts";
 import { Animator, nextSpeed, speedLabel } from "./animate.ts";
 import type { Speed } from "./animate.ts";
+import {
+  chainLines,
+  conditionTooltip,
+  groundTooltip,
+  intentMarkers,
+  timelineEntries,
+} from "./grammar.ts";
 import { stackInfo } from "./info.ts";
 import { hoverIntent, indexLegalActions, pointAtField } from "./intent.ts";
 import type { HoverIntent, LegalIndex } from "./intent.ts";
@@ -80,7 +92,7 @@ export interface BattleScreenOptions {
   readonly showResult?: boolean;
   /** Initial animation speed (default 1). */
   readonly speed?: Speed;
-  /** Round limit (default DEFAULT_MAX_ROUNDS = 100). */
+  /** Round limit (default DEFAULT_MAX_ROUNDS: the engine's 30). */
   readonly maxRounds?: number;
   /**
    * Start from this engine state (built from `engineSetupFromGame(setup)`)
@@ -148,6 +160,9 @@ class BattleScreen {
   private readonly defendBtn = el("button", "bm-btn", "Defend");
   private readonly autoBtn = el("button", "bm-btn", "Auto");
   private readonly speedBtn = el("button", "bm-btn", "");
+  private readonly undoBtn = el("button", "bm-btn", "Undo");
+  /** Applied actions this battle, for take-back (RULES_V2 1.13). */
+  private history: HistoryEntry[] = [];
   private readonly info = el("div", "bm-info");
   private readonly playerSides: ReadonlySet<BattleSide>;
   private readonly maxRounds: number;
@@ -165,7 +180,7 @@ class BattleScreen {
   private intent: HoverIntent = { kind: "none" };
   private auto: boolean;
   private animating = false;
-  private pendingAction: ((a: BattleAction) => void) | null = null;
+  private pendingAction: ((a: BattleAction | "undo") => void) | null = null;
   private infoFor: StackId | null = null;
   private log: string[] = [];
   private readonly cleanup: (() => void)[] = [];
@@ -213,6 +228,7 @@ class BattleScreen {
     this.buttons.append(
       this.waitBtn,
       this.defendBtn,
+      this.undoBtn,
       this.autoBtn,
       this.speedBtn,
     );
@@ -224,6 +240,9 @@ class BattleScreen {
     this.waitBtn.title = "Wait: act again after every other stack (W)";
     this.defendBtn.title = "Defend: +30% Defense until the next turn (D)";
     this.autoBtn.title = "Auto-combat: the AI plays your side (A)";
+    this.undoBtn.title =
+      "Take back your last action this round (U); never across a round start";
+    this.on(this.undoBtn, "click", () => this.takeBack());
     this.speedBtn.title = "Animation speed (S); Space skips an animation";
 
     this.on(this.waitBtn, "click", () => this.playerSimple("wait"));
@@ -297,7 +316,7 @@ class BattleScreen {
       battleGround(this.setup.terrain),
       this.state.seed,
       engineStacks.map((s) => s.creature.id),
-      this.state.obstacles,
+      blockingHexes(this.state),
     );
     this.background = paintBackground(this.art);
     this.layout();
@@ -315,15 +334,32 @@ class BattleScreen {
         break;
       }
       const action = await this.nextAction();
+      if (action === "undo") {
+        const i = this.takeBackPoint();
+        const entry = i === null ? undefined : this.history[i];
+        if (i === null || entry === undefined) continue;
+        this.history = this.history.slice(0, i);
+        this.state = entry.before;
+        this.log.push("Taken back.");
+        syncScene(this.scene, this.state);
+        continue;
+      }
       const before = this.state;
       const step = applyAction(before, action);
+      const actor = activeStack(before);
+      this.history.push({
+        before,
+        action,
+        side: actor ? actor.side : "attacker",
+      });
       this.state = step.state;
+      this.scene.intents = [];
       this.legal = indexLegalActions([]);
       this.intent = { kind: "none" };
       this.updateOverlay();
       await this.animate(step.events, before, step.state);
     }
-    const engine = battleResult(this.state, reason);
+    const engine = battleResult(this.state, this.state.endReason ?? reason);
     const result = gameResultFromEngine(this.setup, engine);
     this.refreshHud();
     if (this.options.showResult !== false) await this.showResult(engine);
@@ -348,7 +384,25 @@ class BattleScreen {
     return a !== null && this.playerSides.has(a.side) && !this.auto;
   }
 
-  private async nextAction(): Promise<BattleAction> {
+  /** The side the player fights for (its first controlled side). */
+  private playerSide(): BattleSide {
+    return this.playerSides.has("attacker") ? "attacker" : "defender";
+  }
+
+  /** History index take-back would return to, or null. */
+  private takeBackPoint(): number | null {
+    const me = this.playerSide();
+    const enemyHero = this.state.sides[enemySide(me)].hero !== null;
+    return takeBackIndex(this.history, this.state, me, enemyHero);
+  }
+
+  private takeBack(): void {
+    if (!this.pendingAction || this.animating) return;
+    if (this.takeBackPoint() === null) return;
+    this.pendingAction("undo");
+  }
+
+  private async nextAction(): Promise<BattleAction | "undo"> {
     if (!this.isPlayerTurn()) {
       this.refreshHud();
       if (this.animator.speed !== Infinity) {
@@ -357,7 +411,11 @@ class BattleScreen {
       return chooseAiAction(this.state);
     }
     this.legal = indexLegalActions(legalActions(this.state));
-    const action = new Promise<BattleAction>((resolve) => {
+    this.scene.intents = intentMarkers(
+      this.state,
+      enemyIntents(this.state, this.playerSide()),
+    );
+    const action = new Promise<BattleAction | "undo">((resolve) => {
       this.pendingAction = (a) => {
         this.pendingAction = null;
         resolve(a);
@@ -395,7 +453,7 @@ class BattleScreen {
       scene: this.scene,
       art: this.art,
       background: this.background,
-      obstacles: this.state.obstacles,
+      obstacles: blockingHexes(this.state),
       activeId: this.animating ? null : this.state.activeStackId,
     });
   }
@@ -447,6 +505,7 @@ class BattleScreen {
     else if (e.key === "d" || e.key === "D") this.playerSimple("defend");
     else if (e.key === "a" || e.key === "A") this.toggleAuto();
     else if (e.key === "s" || e.key === "S") this.cycleSpeed();
+    else if (e.key === "u" || e.key === "U") this.takeBack();
   }
 
   private playerSimple(type: "wait" | "defend"): void {
@@ -552,7 +611,7 @@ class BattleScreen {
   private placeTip(): void {
     const it = this.intent;
     if (it.kind !== "attack") {
-      this.tip.hidden = true;
+      this.placeInfoTip();
       return;
     }
     const s = summarizePreview(this.state, it.preview);
@@ -596,6 +655,35 @@ class BattleScreen {
     this.tip.style.top = `${Math.round(p.y)}px`;
   }
 
+  /** Hover tooltip: a stack's conditions, or the ground under the pointer. */
+  private placeInfoTip(): void {
+    const at = this.pointer ? pointAtField(this.state, this.pointer) : null;
+    const h = at?.hex ?? null;
+    this.tip.hidden = true;
+    if (h === null || this.animating) return;
+    const stack = this.state.stacks.find(
+      (s) => isAlive(s) && s.hex.col === h.col && s.hex.row === h.row,
+    );
+    const lines: string[] = [];
+    if (stack) {
+      for (const c of stack.conditions)
+        lines.push(conditionTooltip(this.state, c));
+      if (stack.wary > 0) lines.push(`Wary: refuses Holds (${stack.wary})`);
+    }
+    const g = this.state.ground.find(
+      (x) => x.hex.col === h.col && x.hex.row === h.row,
+    );
+    if (g && g.class !== "blocking") lines.push(groundTooltip(g));
+    if (lines.length === 0) return;
+    this.tip.replaceChildren(...lines.map((l) => el("div", "bm-tip-cond", l)));
+    this.tip.classList.remove("bm-below");
+    this.tip.hidden = false;
+    const c = hexToStage(h);
+    const p = this.toWrap({ x: c.x, y: c.y - 70 });
+    this.tip.style.left = `${Math.round(p.x)}px`;
+    this.tip.style.top = `${Math.round(p.y)}px`;
+  }
+
   // ----------------------------------------------------------------- HUD
 
   private refreshHud(): void {
@@ -611,6 +699,7 @@ class BattleScreen {
       this.pendingAction !== null && this.isPlayerTurn() && !this.animating;
     this.waitBtn.disabled = !playerTurn || !this.legal.canWait;
     this.defendBtn.disabled = !playerTurn;
+    this.undoBtn.disabled = !playerTurn || this.takeBackPoint() === null;
     this.autoBtn.disabled = this.state.winner !== null;
     this.autoBtn.textContent = this.auto ? "Auto: on" : "Auto";
     this.autoBtn.classList.toggle("bm-on", this.auto);
@@ -623,10 +712,7 @@ class BattleScreen {
     this.top.append(
       el("span", "bm-round", `Round ${this.scene.round || s.round}`),
     );
-    const order: StackId[] = [];
-    for (const id of [...s.queue, ...s.waiting]) {
-      if (!order.includes(id)) order.push(id);
-    }
+    const entries = timelineEntries(s);
     const next = s.stacks
       .filter(isAlive)
       .sort(compareTurnOrder)
@@ -643,13 +729,25 @@ class BattleScreen {
       if (s.waiting.includes(id)) c.title = "waiting";
       strip.append(c);
     };
-    order.forEach((id, i) =>
-      chip(id, i === 0 && s.winner === null ? "bm-now" : ""),
-    );
+    entries.forEach((t, i) => {
+      if (t.kind === "stack") {
+        chip(t.id, i === 0 && s.winner === null ? "bm-now" : "");
+        const last = strip.lastElementChild as HTMLElement | null;
+        if (last && t.note !== "") last.title = t.note;
+      } else {
+        const ev = el(
+          "span",
+          `bm-chip bm-${t.side} bm-event`,
+          `\u23f1 ${t.label}`,
+        );
+        ev.title = `Scheduled by ${t.note}`;
+        strip.append(ev);
+      }
+    });
     if (s.winner === null) {
       strip.append(el("span", "bm-next", `Round ${s.round + 1}:`));
       next
-        .slice(0, Math.max(2, 12 - order.length))
+        .slice(0, Math.max(2, 12 - entries.length))
         .forEach((id) => chip(id, "bm-later"));
     }
     this.top.append(strip);
@@ -736,6 +834,9 @@ class BattleScreen {
       p.append(ret);
       const why = [s.strike.attackLine, ...s.strike.bonuses, ...s.statuses];
       p.append(el("div", "bm-pv-why", why.join("  ·  ")));
+      const chain = chainLines(this.state, it.preview.chain);
+      if (chain.length > 0)
+        p.append(el("div", "bm-pv-chain", chain.join(" \u2192 ")));
       return;
     }
     const a = activeStack(this.state);
@@ -761,6 +862,8 @@ class BattleScreen {
           `${creatureName(it.stack.creature, it.stack.count)} ×${it.stack.count}: out of reach this turn`,
         ),
       );
+      for (const c of it.stack.conditions)
+        p.append(el("div", "bm-pv-cond", conditionTooltip(this.state, c)));
     } else if (it.kind === "inspect") {
       p.append(
         el(
@@ -770,6 +873,8 @@ class BattleScreen {
         ),
         el("div", "bm-dim", "Right-click for details"),
       );
+      for (const c of it.stack.conditions)
+        p.append(el("div", "bm-pv-cond", conditionTooltip(this.state, c)));
     } else if (this.isPlayerTurn() && this.pendingAction) {
       p.append(
         el("div", "bm-pv-head", `${name}: your move`),

@@ -8,10 +8,10 @@
  * - {@link createBattleResolver}: auto-combat (AI on both sides) as a
  *   BattleResolver.
  *
- * Round limit: battles stop after 100 full rounds. The game needs a winner
- * and a loser without survivors, so on the limit **the defender wins** and
- * the attacker's (the hero's) stacks are reported as 0 survivors: the hero
- * failed to break the defence and, with no retreat in the MVP, is lost.
+ * Round limit (RULES_V2 1.12): the engine ends a battle after round 30 and
+ * **the defender wins**; the attacker's (the hero's) stacks are reported as
+ * 0 survivors: the hero failed to break the defence. A retreat is a loss
+ * and the retreating army is lost (0 survivors).
  */
 
 import { getCreature } from "../../data/creatures.ts";
@@ -84,8 +84,13 @@ export function gameResultFromEngine(
     });
   const attacker = survivors("a", setup.attacker.stacks.length);
   const defender = survivors("d", setup.defender.stacks.length);
-  if (result.winner === null) {
+  if (result.winner === null || result.reason === "roundLimit") {
     return { winner: "defender", attacker: attacker.map(() => 0), defender };
+  }
+  if (result.reason === "retreat") {
+    return result.winner === "defender"
+      ? { winner: "defender", attacker: attacker.map(() => 0), defender }
+      : { winner: "attacker", attacker, defender: defender.map(() => 0) };
   }
   return { winner: result.winner, attacker, defender };
 }

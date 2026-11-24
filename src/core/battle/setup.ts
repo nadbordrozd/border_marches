@@ -1,9 +1,13 @@
 /**
- * Battle creation: deployment (GAME_DESIGN.md 9.1) and seeded obstacles.
+ * Battle creation: deployment (GAME_DESIGN.md 9.1), seeded obstacles (rock
+ * ground), battle-start rules and army Morale and Luck (RULES_V2.md 4.6, 6).
  */
 
 import { createRng, deriveSeed } from "../rng.ts";
-import { startBattle } from "./engine.ts";
+import { creatureFightValue } from "./damage.ts";
+import { runStartRule, startBattle } from "./engine.ts";
+import { groundKind } from "./registry.ts";
+import type { Resolver } from "./resolve.ts";
 import { BATTLE_HEIGHT, BATTLE_WIDTH, hexIndex, inBounds } from "./hex.ts";
 import type { Hex } from "./hex.ts";
 import type {
@@ -13,6 +17,7 @@ import type {
   BattleStack,
   BattleState,
   BattleStep,
+  GroundFeature,
 } from "./types.ts";
 
 export const MAX_STACKS_PER_SIDE = 7;
@@ -84,6 +89,7 @@ function buildStacks(side: BattleSide, army: BattleArmySetup): BattleStack[] {
     const slot = slots[i] as number;
     return {
       id: `${prefix}${slot}`,
+      owner: side,
       side,
       slot,
       creature: c,
@@ -96,10 +102,74 @@ function buildStacks(side: BattleSide, army: BattleArmySetup): BattleStack[] {
       defending: false,
       waitedThisRound: false,
       turnStartedRound: 0,
-      statuses: [],
+      native: s.native ?? false,
+      summoned: false,
+      tags: c.tags ?? { remains: "corpse", cannotBear: [] },
+      conditions: [],
+      wary: 0,
+      extraTurnRound: 0,
+      abilitiesUsed: [],
     };
   });
   return stacks.sort((a, b) => a.slot - b.slot);
+}
+
+/** Stack fight value: count x creature FV (GAME_DESIGN 8.2), exact. */
+export function stackFightValue(stack: BattleStack): number {
+  return stack.count * creatureFightValue(stack.creature);
+}
+
+/** Army Morale and Luck as conditions (RULES_V2 6). */
+const ARMY_NUMBERS = [
+  { key: "morale", plus: "heartened", minus: "shaken" },
+  { key: "luck", plus: "lucky", minus: "jinxed" },
+] as const;
+
+function clampArmy(n: number | undefined): number {
+  return Math.max(-3, Math.min(3, Math.trunc(n ?? 0)));
+}
+
+/**
+ * Battle-start rules (4.6 form 2), attacker's then defender's, then army
+ * Morale and Luck (6): the n strongest eligible stacks start Heartened,
+ * Shaken, Lucky or Jinxed. A refused stack is skipped and the next
+ * strongest is tried.
+ */
+function battleStart(fx: Resolver, setup: BattleSetup): void {
+  const sides = ["attacker", "defender"] as const;
+  for (const side of sides) {
+    for (const rule of setup[side].startRules ?? [])
+      runStartRule(fx, side, rule);
+  }
+  for (const side of sides) {
+    for (const num of ARMY_NUMBERS) {
+      const n = clampArmy(setup[side][num.key]);
+      if (n === 0) continue;
+      const kind = n > 0 ? num.plus : num.minus;
+      const candidates = fx.d.stacks
+        .map((s, i) => ({ s, i }))
+        .filter(({ s }) => s.owner === side && s.count > 0)
+        .sort(
+          (a, b) => stackFightValue(b.s) - stackFightValue(a.s) || a.i - b.i,
+        );
+      fx.d.beginStep();
+      let placed = 0;
+      fx.d.within(null, num.key, () => {
+        for (const { s } of candidates) {
+          if (placed >= Math.abs(n)) break;
+          const res = fx.addCondition(s.id, {
+            kind,
+            charge: 10,
+            source: num.key,
+            ...(kind === "jinxed" ? { size: 25, clock: 3 } : {}),
+            ...(kind === "shaken" ? { clock: 2 } : {}),
+          });
+          if (res.landed) placed++;
+        }
+      });
+      fx.resolveReactions();
+    }
+  }
 }
 
 /**
@@ -123,25 +193,64 @@ export function createBattle(setup: BattleSetup): BattleStep {
       throw new RangeError(`hex (${h.col}, ${h.row}) used twice`);
     used.add(i);
   }
+  const rock = groundKind("rock");
+  const ground: GroundFeature[] = obstacles.map((hex) => ({
+    hex,
+    kind: rock.id,
+    class: rock.class,
+    school: rock.school,
+    size: 0,
+    clock: null,
+    remains: null,
+    source: "battlefield",
+  }));
+  for (const g of setup.ground ?? []) {
+    const def = groundKind(g.kind);
+    if (!inBounds(g.hex))
+      throw new RangeError(`hex (${g.hex.col}, ${g.hex.row}) out of bounds`);
+    if (ground.some((x) => hexIndex(x.hex) === hexIndex(g.hex)))
+      throw new RangeError(`hex (${g.hex.col}, ${g.hex.row}) has ground twice`);
+    if (def.class === "blocking" && used.has(hexIndex(g.hex)))
+      throw new RangeError(`hex (${g.hex.col}, ${g.hex.row}) used twice`);
+    ground.push({
+      hex: g.hex,
+      kind: def.id,
+      class: def.class,
+      school: def.school,
+      size: g.size ?? 0,
+      clock: g.clock === undefined ? (def.defaultClock ?? null) : g.clock,
+      remains: null,
+      source: g.source ?? "battlefield",
+    });
+  }
+  ground.sort((a, b) => hexIndex(a.hex) - hexIndex(b.hex));
+  const side = (army: BattleSetup["attacker"]) => ({
+    hero: army.hero,
+    defenseBonus: army.defenseBonus ?? 0,
+    morale: clampArmy(army.morale),
+    luck: clampArmy(army.luck),
+    canRetreat: army.hero !== null && (army.canRetreat ?? false),
+    castRound: 0,
+    commandUsed: false,
+    itemActsUsed: [],
+  });
   const state: BattleState = {
     seed: setup.seed,
-    obstacles,
-    sides: {
-      attacker: {
-        hero: setup.attacker.hero,
-        defenseBonus: setup.attacker.defenseBonus ?? 0,
-      },
-      defender: {
-        hero: setup.defender.hero,
-        defenseBonus: setup.defender.defenseBonus ?? 0,
-      },
-    },
+    ground,
+    sides: { attacker: side(setup.attacker), defender: side(setup.defender) },
     stacks,
     round: 0,
     queue: [],
     waiting: [],
+    extraTurns: [],
     activeStackId: null,
     winner: null,
+    endReason: null,
+    scheduled: [],
+    nextUid: 1,
+    laws: [],
   };
-  return startBattle(state, setup.startRound ?? 1);
+  return startBattle(state, setup.startRound ?? 1, (fx) =>
+    battleStart(fx, setup),
+  );
 }

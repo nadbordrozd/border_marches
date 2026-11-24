@@ -17,7 +17,15 @@ import {
   TRICERATOPS,
   T_REX,
 } from "./fixtures.ts";
-import { damageEvents, patchStack, play, stack, start } from "./helpers.ts";
+import {
+  conditionsOf,
+  cond,
+  damageEvents,
+  patchStack,
+  play,
+  stack,
+  start,
+} from "./helpers.ts";
 
 const at = (col: number, row: number): Hex => ({ col, row });
 
@@ -57,9 +65,11 @@ describe("4.1 Venom, Mob and Pack (worked example, exact)", () => {
     expect(shot.damage).toBe(29);
     expect(shot.kills).toBe(1);
     expect(stack(s, "d0")).toMatchObject({ count: 19, topHp: 27 });
-    expect(stack(s, "d0").statuses).toEqual([
-      { id: "venom", expiresAfterRound: 3, sourceId: "a2" },
+    // Venomed (Bloom bane, size 3, clock 2): ends when round 3 ends.
+    expect(conditionsOf(s, "d0")).toEqual([
+      { kind: "venomed", clock: 2, size: 3 },
     ]);
+    expect(stack(s, "d0").conditions[0]!.source).toBe("a2");
     // The rest of round 2: Cavemen defend, the Orcs step to (9,5).
     s = play(
       s,
@@ -87,7 +97,8 @@ describe("4.1 Venom, Mob and Pack (worked example, exact)", () => {
     expect([hit!.damage, hit!.kills]).toEqual([33, 1]);
     s = step.state;
     expect(stack(s, "d0")).toMatchObject({ count: 18, topHp: 22 });
-    expect(stack(s, "d0").statuses[0]!.expiresAfterRound).toBe(4);
+    // Refreshed in round 3: clock 2 again (ends when round 4 ends).
+    expect(stack(s, "d0").conditions[0]!.clock).toBe(2);
 
     // 2. Cavemen A attack with Mob +1; 2r. the Orcs retaliate.
     step = play(s, {
@@ -166,7 +177,7 @@ describe("4.1 Venom, Mob and Pack (worked example, exact)", () => {
   it("without the combo the Raptors lose 5 of 7", () => {
     // Raptors open round 3 into the unvenomed stack of 19 (top 27).
     let s = round2();
-    s = patchStack(s, "d0", { statuses: [] });
+    s = patchStack(s, "d0", { conditions: [] });
     s = patchStack(s, "a0", { hex: at(0, 0) });
     s = patchStack(s, "a1", { hex: at(0, 10) });
     const p = previewAttack(s, {
@@ -240,7 +251,7 @@ describe("4.2 War Drums beside a charging Triceratops", () => {
 
   it("combo plus Venom (D 9)", () => {
     const s = patchStack(setup(at(7, 4), at(2, 5)), "d0", {
-      statuses: [{ id: "venom", expiresAfterRound: 2, sourceId: "x" }],
+      conditions: [cond("venomed", { size: 3, clock: 2 })],
     });
     const p = previewAttack(s, charge);
     expect(p.strike.breakdown.defense).toBe(9);
@@ -267,7 +278,7 @@ describe("4.3 T-Rex finisher", () => {
       },
     });
     s = patchStack(s, "d0", {
-      statuses: [{ id: "venom", expiresAfterRound: 2, sourceId: "x" }],
+      conditions: [cond("venomed", { size: 3, clock: 2 })],
     });
     const p = previewAttack(s, {
       type: "attack",
