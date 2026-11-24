@@ -1,0 +1,1327 @@
+{
+  "windmill-s1#2": {
+    "verdict": "ACCEPTED",
+    "notes": "windmill: most front-on of the four, clean sails, door at the front left, lit from the left",
+    "at": "2026-11-24T22:56:53.675Z"
+  },
+  "windmill-s1#0": {
+    "verdict": "REJECTED",
+    "notes": "good, but the tower leans three-quarter more than #2; one windmill is enough",
+    "at": "2026-11-24T22:56:53.722Z"
+  },
+  "windmill-s1#1": {
+    "verdict": "REJECTED",
+    "notes": "sails cut off at the left and right edges, read as a stick bundle at 1x",
+    "at": "2026-11-24T22:56:53.769Z"
+  },
+  "windmill-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "squat tower hidden behind the sails; the cap fills half the sprite",
+    "at": "2026-11-24T22:56:53.816Z"
+  },
+  "belfry-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "stopped belfry, medium: clean tower, frozen clock reads at 1x, brass cogs at the foot",
+    "at": "2026-11-24T22:56:53.864Z"
+  },
+  "belfry-s1#2": {
+    "verdict": "ACCEPTED",
+    "notes": "stopped belfry, large: tallest and grandest, a heap of brass cogs",
+    "at": "2026-11-24T22:56:53.912Z"
+  },
+  "belfry-s1#3": {
+    "verdict": "ACCEPTED",
+    "notes": "stopped belfry, small: crumbled, broken roof and rubble, reads as the lesser ruin",
+    "at": "2026-11-24T22:56:53.962Z"
+  },
+  "belfry-s1#1": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of #3 with busier cracks and vines; noisy at 1x",
+    "at": "2026-11-24T22:56:54.013Z"
+  },
+  "huts-s1#0": {
+    "verdict": "REJECTED",
+    "notes": "seer hut: good round hut, but #4 says seer more clearly with its star and moon thatch",
+    "at": "2026-11-24T22:57:09.465Z"
+  },
+  "huts-s1#1": {
+    "verdict": "REJECTED",
+    "notes": "seer hut: tall cone roof dwarfs the hut; the orb post stands apart at the left",
+    "at": "2026-11-24T22:57:09.518Z"
+  },
+  "huts-s1#2": {
+    "verdict": "REJECTED",
+    "notes": "hut hung with potion bottles reads as an alchemist, not one of the three subjects",
+    "at": "2026-11-24T22:57:09.565Z"
+  },
+  "huts-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "patchy thatch with pink smudges reads dirty at 1x",
+    "at": "2026-11-24T22:57:09.612Z"
+  },
+  "huts-s1#4": {
+    "verdict": "ACCEPTED",
+    "notes": "seer hut: round timber hut, star and moon thatch and a blue crystal ball by the door, front-on",
+    "at": "2026-11-24T22:57:09.661Z"
+  },
+  "huts-s1#5": {
+    "verdict": "ACCEPTED",
+    "notes": "tutor's hut: cream cottage with red tiles, books and a slate board by the door, clear at 1x",
+    "at": "2026-11-24T22:57:09.710Z"
+  },
+  "huts-s1#6": {
+    "verdict": "REJECTED",
+    "notes": "tutor's hut: chimney smoke is a soft grey smear against the no-blur rule",
+    "at": "2026-11-24T22:57:09.759Z"
+  },
+  "huts-s1#7": {
+    "verdict": "REJECTED",
+    "notes": "tutor's hut: no books or slate, reads as a plain house",
+    "at": "2026-11-24T22:57:09.809Z"
+  },
+  "huts-s1#8": {
+    "verdict": "REJECTED",
+    "notes": "tutor's hut: plain house without the tutor props",
+    "at": "2026-11-24T22:57:09.858Z"
+  },
+  "huts-s1#9": {
+    "verdict": "REJECTED",
+    "notes": "tutor's hut: hanging sign and stacked props make a busy left edge",
+    "at": "2026-11-24T22:57:09.906Z"
+  },
+  "huts-s1#10": {
+    "verdict": "ACCEPTED",
+    "notes": "hermit: mossy stone hovel with a bent stovepipe and two lanterns, front door, reads at 1x",
+    "at": "2026-11-24T22:57:09.956Z"
+  },
+  "huts-s1#11": {
+    "verdict": "REJECTED",
+    "notes": "hermit: moss blob shape, the hovel reads as a bush at 1x",
+    "at": "2026-11-24T22:57:10.003Z"
+  },
+  "huts-s1#12": {
+    "verdict": "REJECTED",
+    "notes": "hermit: smoke smear and roof planks make it busy",
+    "at": "2026-11-24T22:57:10.052Z"
+  },
+  "huts-s1#13": {
+    "verdict": "REJECTED",
+    "notes": "hermit: plain mound with an awning, no hermit props",
+    "at": "2026-11-24T22:57:10.100Z"
+  },
+  "huts-s1#14": {
+    "verdict": "REJECTED",
+    "notes": "hermit: featureless rock with a door, reads as a boulder",
+    "at": "2026-11-24T22:57:10.148Z"
+  },
+  "huts-s1#15": {
+    "verdict": "REJECTED",
+    "notes": "hermit: vine scribble covers the whole hovel, noisy at 1x",
+    "at": "2026-11-24T22:57:10.195Z"
+  },
+  "shrines-a#0": {
+    "verdict": "REJECTED",
+    "notes": "attack: warm grey stone does not match the blue-grey set chosen for the four stat shrines",
+    "at": "2026-11-24T23:02:39.365Z"
+  },
+  "shrines-a#1": {
+    "verdict": "REJECTED",
+    "notes": "attack: ragged roof edge, warm grey off the set",
+    "at": "2026-11-24T23:02:39.413Z"
+  },
+  "shrines-a#2": {
+    "verdict": "REJECTED",
+    "notes": "defense: sandstone body off the grey set",
+    "at": "2026-11-24T23:02:39.462Z"
+  },
+  "shrines-a#3": {
+    "verdict": "REJECTED",
+    "notes": "defense: sandstone body off the grey set",
+    "at": "2026-11-24T23:02:39.510Z"
+  },
+  "shrines-a#4": {
+    "verdict": "REJECTED",
+    "notes": "defense: good, but #5 has the crisper shield and base",
+    "at": "2026-11-24T23:02:39.558Z"
+  },
+  "shrines-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "stat shrine, defense: grey stone shrine with a blue shield, reads at 1x, one set with #10 #11 #13",
+    "at": "2026-11-24T23:02:39.608Z"
+  },
+  "shrines-a#6": {
+    "verdict": "REJECTED",
+    "notes": "power: a violet sword, wrong emblem",
+    "at": "2026-11-24T23:02:39.655Z"
+  },
+  "shrines-a#7": {
+    "verdict": "REJECTED",
+    "notes": "power: sandstone body off the grey set",
+    "at": "2026-11-24T23:02:39.707Z"
+  },
+  "shrines-a#8": {
+    "verdict": "REJECTED",
+    "notes": "attack: dark slate body much darker than the rest of the set",
+    "at": "2026-11-24T23:02:39.769Z"
+  },
+  "shrines-a#9": {
+    "verdict": "REJECTED",
+    "notes": "power: dark slate body much darker than the rest of the set",
+    "at": "2026-11-24T23:02:39.823Z"
+  },
+  "shrines-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "stat shrine, attack: blue-grey stone shrine with a red sword, reads at 1x",
+    "at": "2026-11-24T23:02:39.875Z"
+  },
+  "shrines-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "stat shrine, lore: blue-grey stone shrine with a green open book, reads at 1x",
+    "at": "2026-11-24T23:02:39.926Z"
+  },
+  "shrines-a#12": {
+    "verdict": "REJECTED",
+    "notes": "power: near duplicate of #13 with a softer star",
+    "at": "2026-11-24T23:02:39.977Z"
+  },
+  "shrines-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "stat shrine, power: blue-grey stone shrine with a violet star, reads at 1x",
+    "at": "2026-11-24T23:02:40.028Z"
+  },
+  "shrines-a#14": {
+    "verdict": "REJECTED",
+    "notes": "red body with a green sword: wrong colours, loud red stone",
+    "at": "2026-11-24T23:02:40.076Z"
+  },
+  "shrines-a#15": {
+    "verdict": "REJECTED",
+    "notes": "red body: loud red stone breaks the calm object tier",
+    "at": "2026-11-24T23:02:40.126Z"
+  },
+  "water-wheel-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "water wheel: compact half-timbered mill, big wheel on the right over a stone channel, door front left, cleanest silhouette",
+    "at": "2026-11-24T23:02:40.178Z"
+  },
+  "water-wheel-a#1": {
+    "verdict": "REJECTED",
+    "notes": "water wheel: lean-to porch and dormer make a busier left edge than #0",
+    "at": "2026-11-24T23:02:40.226Z"
+  },
+  "water-wheel-a#2": {
+    "verdict": "REJECTED",
+    "notes": "water wheel: good, near duplicate of #0 with a chimney; one is enough",
+    "at": "2026-11-24T23:02:40.275Z"
+  },
+  "water-wheel-a#3": {
+    "verdict": "REJECTED",
+    "notes": "water wheel: two-storey wings, busy roofline at 1x",
+    "at": "2026-11-24T23:02:40.326Z"
+  },
+  "orchard-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "orchard: four apple trees in a dry-stone wall, gate and ladder at the front left, baskets of apples, reads at 1x",
+    "at": "2026-11-24T23:02:40.379Z"
+  },
+  "orchard-a#1": {
+    "verdict": "REJECTED",
+    "notes": "orchard: wall opens to the front and the trees crowd the gap; the ladder floats",
+    "at": "2026-11-24T23:02:40.429Z"
+  },
+  "orchard-a#2": {
+    "verdict": "REJECTED",
+    "notes": "orchard: good, near duplicate of #0; #0 has the clearer gate",
+    "at": "2026-11-24T23:02:40.480Z"
+  },
+  "orchard-a#3": {
+    "verdict": "REJECTED",
+    "notes": "orchard: broken wall corner and loose rubble read as a ruin",
+    "at": "2026-11-24T23:02:40.531Z"
+  },
+  "stables-a#0": {
+    "verdict": "REJECTED",
+    "notes": "stables: log barn without a horseshoe sign or stall doors; reads as a plain cabin",
+    "at": "2026-11-24T23:02:40.581Z"
+  },
+  "stables-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "stables: timber barn with two stall doors, horseshoe sign, hay, trough and a rail fence at the left",
+    "at": "2026-11-24T23:02:40.632Z"
+  },
+  "stables-a#2": {
+    "verdict": "REJECTED",
+    "notes": "stables: sagging rotten roof reads abandoned",
+    "at": "2026-11-24T23:02:40.681Z"
+  },
+  "stables-a#3": {
+    "verdict": "REJECTED",
+    "notes": "stables: the roof is half the sprite; the doors are hidden in shade",
+    "at": "2026-11-24T23:02:40.730Z"
+  },
+  "greenhouse-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "overgrown greenhouse, small: one little glass house burst by a vine",
+    "at": "2026-11-24T23:02:40.780Z"
+  },
+  "greenhouse-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "overgrown greenhouse, medium: long glass house overgrown with vines and hedges",
+    "at": "2026-11-24T23:02:40.832Z"
+  },
+  "greenhouse-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "overgrown greenhouse, large: domed glass complex with vines and flowers out of the roof",
+    "at": "2026-11-24T23:02:40.883Z"
+  },
+  "greenhouse-a#3": {
+    "verdict": "REJECTED",
+    "notes": "overgrown greenhouse: giant magenta flowers are louder than a unit and break the hierarchy",
+    "at": "2026-11-24T23:02:40.934Z"
+  },
+  "sites-a#0": {
+    "verdict": "REJECTED",
+    "notes": "learning stone: runes too dense, reads as a carved tablet",
+    "at": "2026-11-24T23:03:03.576Z"
+  },
+  "sites-a#1": {
+    "verdict": "REJECTED",
+    "notes": "learning stone: spiral glyphs read as decoration, not runes",
+    "at": "2026-11-24T23:03:03.626Z"
+  },
+  "sites-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "learning stone: grey standing stone with three big gold runes, clean silhouette at 1x",
+    "at": "2026-11-24T23:03:03.675Z"
+  },
+  "sites-a#3": {
+    "verdict": "REJECTED",
+    "notes": "learning stone: eye glyph busy at 1x; #2 is cleaner",
+    "at": "2026-11-24T23:03:03.723Z"
+  },
+  "sites-a#4": {
+    "verdict": "REJECTED",
+    "notes": "tree of knowledge: plain apple tree, nothing marks it as a site among the woods",
+    "at": "2026-11-24T23:03:03.770Z"
+  },
+  "sites-a#5": {
+    "verdict": "REJECTED",
+    "notes": "tree of knowledge: good, but #7 is broader and its golden lantern marks the site better",
+    "at": "2026-11-24T23:03:03.818Z"
+  },
+  "sites-a#6": {
+    "verdict": "REJECTED",
+    "notes": "tree of knowledge: leaning gnarled trunk and sparse crown read as a forest tree",
+    "at": "2026-11-24T23:03:03.869Z"
+  },
+  "sites-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "tree of knowledge: broad crown hung with golden fruit and a golden lantern, stands apart from forest trees",
+    "at": "2026-11-24T23:03:03.917Z"
+  },
+  "sites-a#8": {
+    "verdict": "REJECTED",
+    "notes": "mana well: plain tub, could be a water trough",
+    "at": "2026-11-24T23:03:03.966Z"
+  },
+  "sites-a#9": {
+    "verdict": "REJECTED",
+    "notes": "mana well: mossy bricks read as the wishing well's sibling",
+    "at": "2026-11-24T23:03:04.016Z"
+  },
+  "sites-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "mana well: carved pale stone basin brimming with glowing blue mana, distinct from the wishing well",
+    "at": "2026-11-24T23:03:04.068Z"
+  },
+  "sites-a#11": {
+    "verdict": "REJECTED",
+    "notes": "mana well: glassy white tub without an outline tone, reads as ice",
+    "at": "2026-11-24T23:03:04.117Z"
+  },
+  "sites-a#12": {
+    "verdict": "REJECTED",
+    "notes": "scholar: no books, a quill only; reads as a plain tent",
+    "at": "2026-11-24T23:03:04.167Z"
+  },
+  "sites-a#13": {
+    "verdict": "REJECTED",
+    "notes": "scholar: clutter of books and a red pot in front of the door, busy at 1x",
+    "at": "2026-11-24T23:03:04.218Z"
+  },
+  "sites-a#14": {
+    "verdict": "REJECTED",
+    "notes": "scholar: the dark door fills the front, weak at 1x",
+    "at": "2026-11-24T23:03:04.269Z"
+  },
+  "sites-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "scholar: striped blue and cream tent with a desk of books and an hourglass, reads at 1x",
+    "at": "2026-11-24T23:03:04.319Z"
+  },
+  "registry-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "sealed registry, small: a stone strongroom with sealed notices pasted on its door",
+    "at": "2026-11-24T23:03:04.370Z"
+  },
+  "registry-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "sealed registry, medium: columned office with wax seals, paper bundles and a giant stamp",
+    "at": "2026-11-24T23:03:04.420Z"
+  },
+  "registry-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "sealed registry, large: grand pedimented registry with seals, notices and stacks of paper",
+    "at": "2026-11-24T23:03:04.470Z"
+  },
+  "registry-a#3": {
+    "verdict": "REJECTED",
+    "notes": "sealed registry: two storeys and a staircase, busy at 1x; #2 already covers large",
+    "at": "2026-11-24T23:03:04.519Z"
+  },
+  "outpost-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "faction outpost, humans: grey stone fort with blue banners and slate roofs",
+    "at": "2026-11-24T23:03:04.569Z"
+  },
+  "outpost-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "faction outpost, undead: black basalt fort with violet banners, bone spikes and a skull gate",
+    "at": "2026-11-24T23:03:04.620Z"
+  },
+  "outpost-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "faction outpost, goblins: tin-and-log fort with hazard-yellow roofs and green rags",
+    "at": "2026-11-24T23:03:04.672Z"
+  },
+  "outpost-a#3": {
+    "verdict": "REJECTED",
+    "notes": "faction outpost: red brick and red banners match no faction (humans are blue)",
+    "at": "2026-11-24T23:03:04.723Z"
+  },
+  "sites-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "school shrine, tier 1: humble timber lectern shrine with a little roof and an open spellbook",
+    "at": "2026-11-24T23:06:38.877Z"
+  },
+  "sites-b#1": {
+    "verdict": "REJECTED",
+    "notes": "school shrine tier 1: candle and lantern add flicker clutter; #0 is cleaner",
+    "at": "2026-11-24T23:06:38.924Z"
+  },
+  "sites-b#2": {
+    "verdict": "REJECTED",
+    "notes": "school shrine tier 1: near duplicate of #0 with a stray scroll",
+    "at": "2026-11-24T23:06:38.975Z"
+  },
+  "sites-b#3": {
+    "verdict": "REJECTED",
+    "notes": "school shrine tier 1: vines cover the roof, noisy at 1x",
+    "at": "2026-11-24T23:06:39.026Z"
+  },
+  "sites-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "school shrine, tier 2: grey stone arch over a lectern and an open spellbook, clean",
+    "at": "2026-11-24T23:06:39.085Z"
+  },
+  "sites-b#5": {
+    "verdict": "REJECTED",
+    "notes": "school shrine tier 2: mossy rubble base, busier than #4",
+    "at": "2026-11-24T23:06:39.140Z"
+  },
+  "sites-b#6": {
+    "verdict": "REJECTED",
+    "notes": "school shrine tier 2: moss and a ghostly blob inside the arch",
+    "at": "2026-11-24T23:06:39.196Z"
+  },
+  "sites-b#7": {
+    "verdict": "REJECTED",
+    "notes": "school shrine tier 2: two torches and a dark inner arch, busy at 1x",
+    "at": "2026-11-24T23:06:39.252Z"
+  },
+  "sites-b#8": {
+    "verdict": "REJECTED",
+    "notes": "school shrine tier 3: open half dome reads unfinished",
+    "at": "2026-11-24T23:06:39.311Z"
+  },
+  "sites-b#9": {
+    "verdict": "REJECTED",
+    "notes": "school shrine tier 3: good, but #10's gold dome and banners make the grandest tier clearer",
+    "at": "2026-11-24T23:06:39.371Z"
+  },
+  "sites-b#10": {
+    "verdict": "ACCEPTED",
+    "notes": "school shrine, tier 3: marble pavilion with a gold dome and crimson banners over the spellbook, clearly the grandest",
+    "at": "2026-11-24T23:06:39.432Z"
+  },
+  "sites-b#11": {
+    "verdict": "REJECTED",
+    "notes": "school shrine tier 3: blue awning on one side breaks the symmetry",
+    "at": "2026-11-24T23:06:39.489Z"
+  },
+  "sites-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "rally camp: red army tent with a pennant, a big drum and a rack of spears",
+    "at": "2026-11-24T23:06:39.549Z"
+  },
+  "sites-b#13": {
+    "verdict": "REJECTED",
+    "notes": "rally camp: spear bundle covers the left side of the tent",
+    "at": "2026-11-24T23:06:39.618Z"
+  },
+  "sites-b#14": {
+    "verdict": "REJECTED",
+    "notes": "rally camp: candy-striped tent reads as a circus",
+    "at": "2026-11-24T23:06:39.677Z"
+  },
+  "sites-b#15": {
+    "verdict": "REJECTED",
+    "notes": "rally camp: no drum or weapons, a campfire instead",
+    "at": "2026-11-24T23:06:39.736Z"
+  },
+  "gates-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "obelisk: tall sandy obelisk with red glyph columns on a stepped base, reads at 1x",
+    "at": "2026-11-24T23:06:39.792Z"
+  },
+  "gates-a#1": {
+    "verdict": "REJECTED",
+    "notes": "obelisk: blue glyphs clash with the waystone colours",
+    "at": "2026-11-24T23:06:39.850Z"
+  },
+  "gates-a#2": {
+    "verdict": "REJECTED",
+    "notes": "obelisk: good, but its carved glyphs vanish at 1x; #0 reads better",
+    "at": "2026-11-24T23:06:39.905Z"
+  },
+  "gates-a#3": {
+    "verdict": "REJECTED",
+    "notes": "obelisk: mossy green with a red sash, reads as a totem",
+    "at": "2026-11-24T23:06:39.961Z"
+  },
+  "gates-a#4": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent: superseded by the matching four-colour set from sites-e (different tent form)",
+    "at": "2026-11-24T23:16:29.714Z"
+  },
+  "gates-a#5": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent: bunting and a heart-shaped key bow, fussy",
+    "at": "2026-11-24T23:06:40.074Z"
+  },
+  "gates-a#6": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent: swirled stripes and two pennants, busy",
+    "at": "2026-11-24T23:06:40.134Z"
+  },
+  "gates-a#7": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent: draped sides and a second key, busy at 1x",
+    "at": "2026-11-24T23:06:40.191Z"
+  },
+  "gates-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "border gate: two grey stone posts with a closed timber-and-iron gate and a big golden padlock",
+    "at": "2026-11-24T23:06:40.249Z"
+  },
+  "gates-a#9": {
+    "verdict": "REJECTED",
+    "notes": "border gate: rough boulders read as rubble, not posts",
+    "at": "2026-11-24T23:06:40.304Z"
+  },
+  "gates-a#10": {
+    "verdict": "REJECTED",
+    "notes": "border gate: sandstone posts with spikes; padlock lost in the dark planks",
+    "at": "2026-11-24T23:06:40.366Z"
+  },
+  "gates-a#11": {
+    "verdict": "REJECTED",
+    "notes": "border gate: open broken frame does not read as closed",
+    "at": "2026-11-24T23:06:40.424Z"
+  },
+  "gates-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "quest gate: sandstone arch with a closed portcullis and a blue question-mark sigil, distinct from the grey border gate",
+    "at": "2026-11-24T23:06:40.484Z"
+  },
+  "gates-a#13": {
+    "verdict": "REJECTED",
+    "notes": "quest gate: grey stone like the border gate; the two would be confused",
+    "at": "2026-11-24T23:06:40.543Z"
+  },
+  "gates-a#14": {
+    "verdict": "REJECTED",
+    "notes": "quest gate: magenta sigil and vines, loud and noisy",
+    "at": "2026-11-24T23:06:40.598Z"
+  },
+  "gates-a#15": {
+    "verdict": "REJECTED",
+    "notes": "quest gate: near duplicate of #12 with a green sigil",
+    "at": "2026-11-24T23:06:40.652Z"
+  },
+  "quiet-yard-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "quiet yard, small: a little slate-roofed mausoleum, two graves and a lantern",
+    "at": "2026-11-24T23:06:40.704Z"
+  },
+  "quiet-yard-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "quiet yard, medium: mausoleum, dead tree, gravestones and an iron fence",
+    "at": "2026-11-24T23:06:40.755Z"
+  },
+  "quiet-yard-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "quiet yard, large: chapel-ossuary with a spire and a green lantern, fenced graves and a tomb",
+    "at": "2026-11-24T23:06:40.807Z"
+  },
+  "quiet-yard-a#3": {
+    "verdict": "REJECTED",
+    "notes": "quiet yard: near duplicate of #2; the fence ring hides the graves",
+    "at": "2026-11-24T23:06:40.859Z"
+  },
+  "pylon-yard-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "thunderstruck pylon yard, small: one timber pylon with a storm cloud and a hut; stray rows at the canvas bottom are cropped off",
+    "at": "2026-11-24T23:06:40.910Z"
+  },
+  "pylon-yard-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "thunderstruck pylon yard, medium: two pylons strung with copper cable, lightning and a shed; stray rows at the bottom cropped off",
+    "at": "2026-11-24T23:06:40.961Z"
+  },
+  "pylon-yard-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "thunderstruck pylon yard, large: three pylons, a red-roofed station house, lightning under a storm cloud",
+    "at": "2026-11-24T23:06:41.012Z"
+  },
+  "pylon-yard-a#3": {
+    "verdict": "REJECTED",
+    "notes": "pylon yard: grey steel towers read as modern pylons, off the timber style",
+    "at": "2026-11-24T23:06:41.061Z"
+  },
+  "wreck-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "landfall wreck, small: a small broken sky-boat with crates and teal crystals; stray rows at the bottom cropped off",
+    "at": "2026-11-24T23:06:41.113Z"
+  },
+  "wreck-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "landfall wreck, medium: a two-masted sky-ship broken in two with crates; stray rows at the bottom cropped off",
+    "at": "2026-11-24T23:06:41.164Z"
+  },
+  "wreck-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "landfall wreck, large: a big three-masted sky-ship crashed and broken, barrels, crates and crystals",
+    "at": "2026-11-24T23:06:41.216Z"
+  },
+  "wreck-a#3": {
+    "verdict": "REJECTED",
+    "notes": "landfall wreck: near duplicate of #2 with planks spilled to the right",
+    "at": "2026-11-24T23:06:41.269Z"
+  },
+  "lodge-a#0": {
+    "verdict": "REJECTED",
+    "notes": "caretaker lodge: lanterns good, but the door is unlocked and the roof flat at 1x",
+    "at": "2026-11-24T23:06:41.323Z"
+  },
+  "lodge-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "caretaker lodge: timber hall on a stone footing, moss-green roof, five coloured lanterns, locked door at the front left",
+    "at": "2026-11-24T23:06:41.378Z"
+  },
+  "lodge-a#2": {
+    "verdict": "REJECTED",
+    "notes": "caretaker lodge: log cabin with a side wing, reads as a plain house",
+    "at": "2026-11-24T23:06:41.433Z"
+  },
+  "lodge-a#3": {
+    "verdict": "REJECTED",
+    "notes": "caretaker lodge: the ridge beam overhangs and only two lanterns",
+    "at": "2026-11-24T23:06:41.488Z"
+  },
+  "arena-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "arena: round sandstone arena with red pennants, an arched entrance at the front left and a weapon rack",
+    "at": "2026-11-24T23:06:41.542Z"
+  },
+  "arena-a#1": {
+    "verdict": "REJECTED",
+    "notes": "arena: crumbled wall top reads as a ruin",
+    "at": "2026-11-24T23:06:41.597Z"
+  },
+  "arena-a#2": {
+    "verdict": "REJECTED",
+    "notes": "arena: good, but #0 is cleaner and the inside dummies vanish at 1x",
+    "at": "2026-11-24T23:06:41.651Z"
+  },
+  "arena-a#3": {
+    "verdict": "REJECTED",
+    "notes": "arena: round shields on the wall read as lifebuoys",
+    "at": "2026-11-24T23:06:41.706Z"
+  },
+  "sites-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "prison: stone jail cell with a red roof, a barred window and a padlocked barred door, reads at 1x",
+    "at": "2026-11-24T23:09:08.104Z"
+  },
+  "sites-c#1": {
+    "verdict": "REJECTED",
+    "notes": "prison: chains strung across a plain block, the bars vanish at 1x",
+    "at": "2026-11-24T23:09:08.154Z"
+  },
+  "sites-c#2": {
+    "verdict": "REJECTED",
+    "notes": "prison: crenellated keep reads as a castle tower",
+    "at": "2026-11-24T23:09:08.203Z"
+  },
+  "sites-c#3": {
+    "verdict": "REJECTED",
+    "notes": "prison: barred window too small; reads as a plain stone house",
+    "at": "2026-11-24T23:09:08.253Z"
+  },
+  "sites-c#4": {
+    "verdict": "ACCEPTED",
+    "notes": "curse-lifter's shrine: white stone arch over pale blue light with a broken iron chain across it",
+    "at": "2026-11-24T23:09:08.305Z"
+  },
+  "sites-c#5": {
+    "verdict": "REJECTED",
+    "notes": "curse-lifter: temple porch with steps and chain spill, busy and wide for one cell",
+    "at": "2026-11-24T23:09:08.360Z"
+  },
+  "sites-c#6": {
+    "verdict": "REJECTED",
+    "notes": "curse-lifter: domed kiosk, the chain is a thin scribble at the foot",
+    "at": "2026-11-24T23:09:08.409Z"
+  },
+  "sites-c#7": {
+    "verdict": "REJECTED",
+    "notes": "curse-lifter: open pavilion reads as an empty gazebo",
+    "at": "2026-11-24T23:09:08.457Z"
+  },
+  "sites-c#8": {
+    "verdict": "ACCEPTED",
+    "notes": "one-way waystone (stretch): flat ring of carved rune stone around a teal portal, distinct from the two-way boulder ring",
+    "at": "2026-11-24T23:09:08.508Z"
+  },
+  "sites-c#9": {
+    "verdict": "ACCEPTED",
+    "notes": "two-way waystone: ring of grey boulders around a swirling teal portal",
+    "at": "2026-11-24T23:09:08.559Z"
+  },
+  "sites-c#10": {
+    "verdict": "REJECTED",
+    "notes": "waystone: plain smooth ring, reads as a coin or a shield",
+    "at": "2026-11-24T23:09:08.608Z"
+  },
+  "sites-c#11": {
+    "verdict": "REJECTED",
+    "notes": "waystone: glassy green portal without its swirl, a soft blob at 1x",
+    "at": "2026-11-24T23:09:08.658Z"
+  },
+  "sites-c#12": {
+    "verdict": "ACCEPTED",
+    "notes": "pylon: timber lattice tower with a copper coil crackling with little sparks",
+    "at": "2026-11-24T23:09:08.708Z"
+  },
+  "sites-c#13": {
+    "verdict": "REJECTED",
+    "notes": "pylon: spindly derrick, too thin for the crowd test",
+    "at": "2026-11-24T23:09:08.756Z"
+  },
+  "sites-c#14": {
+    "verdict": "REJECTED",
+    "notes": "pylon: a single pole, too thin at 1x",
+    "at": "2026-11-24T23:09:08.805Z"
+  },
+  "sites-c#15": {
+    "verdict": "REJECTED",
+    "notes": "pylon: squat tower with a giant coil, reads as a water tower",
+    "at": "2026-11-24T23:09:08.854Z"
+  },
+  "oasis-a#0": {
+    "verdict": "REJECTED",
+    "notes": "oasis: good, but narrower than #2 on a 2x2 footprint",
+    "at": "2026-11-24T23:09:08.904Z"
+  },
+  "oasis-a#1": {
+    "verdict": "REJECTED",
+    "notes": "oasis: sand rim and loose rocks spill to the right, ragged edge",
+    "at": "2026-11-24T23:09:08.954Z"
+  },
+  "oasis-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "oasis: wide turquoise pool ringed by pale rocks, three palms and reeds, fills the footprint",
+    "at": "2026-11-24T23:09:09.004Z"
+  },
+  "oasis-a#3": {
+    "verdict": "REJECTED",
+    "notes": "oasis: big boulder bluff at the right hides the pool",
+    "at": "2026-11-24T23:09:09.055Z"
+  },
+  "temple-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "school temple, Bloom: white columned rotunda under a green vine-grown dome with little flowers",
+    "at": "2026-11-24T23:09:09.107Z"
+  },
+  "temple-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "school temple, Accord: white rotunda under a crimson dome with a big wax seal",
+    "at": "2026-11-24T23:09:09.160Z"
+  },
+  "temple-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "school temple, Clock: white rotunda under a brass dome with a clock face on the pediment",
+    "at": "2026-11-24T23:09:09.211Z"
+  },
+  "temple-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "school temple, Hush: white rotunda under a slate violet dome with a hooded lantern",
+    "at": "2026-11-24T23:09:09.262Z"
+  },
+  "trading-post-a#0": {
+    "verdict": "REJECTED",
+    "notes": "trading post: good, but compact; #3 fills the 2x2 footprint better",
+    "at": "2026-11-24T23:09:09.312Z"
+  },
+  "trading-post-a#1": {
+    "verdict": "REJECTED",
+    "notes": "trading post: dormer and stacked crates, busy roofline",
+    "at": "2026-11-24T23:09:09.363Z"
+  },
+  "trading-post-a#2": {
+    "verdict": "REJECTED",
+    "notes": "trading post: plank roof and dark doorway, the awning is lost",
+    "at": "2026-11-24T23:09:09.411Z"
+  },
+  "trading-post-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "trading post: wide timber market house with a striped awning, a balance scale, sacks, crates and coins",
+    "at": "2026-11-24T23:09:09.462Z"
+  },
+  "tollhouse-a#0": {
+    "verdict": "REJECTED",
+    "notes": "tollhouse: the barrier pole stands apart at the left edge, a thin stick",
+    "at": "2026-11-24T23:09:09.512Z"
+  },
+  "tollhouse-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "tollhouse: half-timbered shop with a slate roof, a striped toll barrier, a hanging purse sign and a shop window",
+    "at": "2026-11-24T23:09:09.563Z"
+  },
+  "tollhouse-a#2": {
+    "verdict": "REJECTED",
+    "notes": "tollhouse: chimney and barrier on the left make a busy outline",
+    "at": "2026-11-24T23:09:09.613Z"
+  },
+  "tollhouse-a#3": {
+    "verdict": "REJECTED",
+    "notes": "tollhouse: tall and narrow; the barrier pole sticks out to the right",
+    "at": "2026-11-24T23:09:09.662Z"
+  },
+  "drill-yard-a#0": {
+    "verdict": "REJECTED",
+    "notes": "drill yard: open fence corner reads broken, the gate stands apart",
+    "at": "2026-11-24T23:09:09.714Z"
+  },
+  "drill-yard-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "drill yard: fenced yard with a red-roofed barracks, straw dummies, a target and a weapon rack, gate at the front left",
+    "at": "2026-11-24T23:09:09.765Z"
+  },
+  "drill-yard-a#2": {
+    "verdict": "REJECTED",
+    "notes": "drill yard: near duplicate of #1 with a darker, busier fence",
+    "at": "2026-11-24T23:09:09.813Z"
+  },
+  "drill-yard-a#3": {
+    "verdict": "REJECTED",
+    "notes": "drill yard: dummies crowd the front, the barracks is pushed to the corner",
+    "at": "2026-11-24T23:09:09.862Z"
+  },
+  "sites-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "stray hut: log lodge with a turf roof and a little fenced pen with two sheep beside it",
+    "at": "2026-11-24T23:10:03.737Z"
+  },
+  "sites-d#1": {
+    "verdict": "REJECTED",
+    "notes": "stray hut: near duplicate of #0 with a single pig",
+    "at": "2026-11-24T23:10:03.795Z"
+  },
+  "sites-d#2": {
+    "verdict": "REJECTED",
+    "notes": "stray hut: pink pigs are the loudest colour of the sprite",
+    "at": "2026-11-24T23:10:03.857Z"
+  },
+  "sites-d#3": {
+    "verdict": "REJECTED",
+    "notes": "stray hut: empty pen; reads as a plain cabin",
+    "at": "2026-11-24T23:10:03.916Z"
+  },
+  "sites-d#4": {
+    "verdict": "REJECTED",
+    "notes": "fallen adventurer: two swords and splayed limbs, busy at 1x",
+    "at": "2026-11-24T23:10:03.973Z"
+  },
+  "sites-d#5": {
+    "verdict": "REJECTED",
+    "notes": "fallen adventurer: near duplicate of #4",
+    "at": "2026-11-24T23:10:04.029Z"
+  },
+  "sites-d#6": {
+    "verdict": "REJECTED",
+    "notes": "fallen adventurer: green pack and a loose sword at the foot, busier than #7",
+    "at": "2026-11-24T23:10:04.088Z"
+  },
+  "sites-d#7": {
+    "verdict": "ACCEPTED",
+    "notes": "fallen adventurer: a slumped skeleton against a big travel pack with one sword stuck beside it",
+    "at": "2026-11-24T23:10:04.146Z"
+  },
+  "sites-d#8": {
+    "verdict": "ACCEPTED",
+    "notes": "observatory (stretch): round stone tower with a copper dome, a brass telescope and a door",
+    "at": "2026-11-24T23:10:04.203Z"
+  },
+  "sites-d#9": {
+    "verdict": "REJECTED",
+    "notes": "observatory: no door; near duplicate of #8",
+    "at": "2026-11-24T23:10:04.260Z"
+  },
+  "sites-d#10": {
+    "verdict": "REJECTED",
+    "notes": "observatory: near duplicate of #8",
+    "at": "2026-11-24T23:10:04.321Z"
+  },
+  "sites-d#11": {
+    "verdict": "REJECTED",
+    "notes": "observatory: no door, the telescope points at the viewer",
+    "at": "2026-11-24T23:10:04.382Z"
+  },
+  "sites-d#12": {
+    "verdict": "REJECTED",
+    "notes": "altar: ring of red spikes reads as fire, loud",
+    "at": "2026-11-24T23:10:04.443Z"
+  },
+  "sites-d#13": {
+    "verdict": "ACCEPTED",
+    "notes": "altar of sacrifice (stretch): stepped basalt altar with a red-candled candelabrum and a bone pile",
+    "at": "2026-11-24T23:10:04.503Z"
+  },
+  "sites-d#14": {
+    "verdict": "REJECTED",
+    "notes": "altar: skull pile covers half of the altar",
+    "at": "2026-11-24T23:10:04.564Z"
+  },
+  "sites-d#15": {
+    "verdict": "REJECTED",
+    "notes": "altar: flat slab reads as a tomb",
+    "at": "2026-11-24T23:10:04.619Z"
+  },
+  "temple-b#0": {
+    "verdict": "REJECTED",
+    "notes": "school temple Storm: much smaller than the temple-a rotundas, and a soft cloud on top",
+    "at": "2026-11-24T23:10:04.676Z"
+  },
+  "temple-b#1": {
+    "verdict": "REJECTED",
+    "notes": "school temple Storm: good look but smaller than the temple-a set; retaken as temple-c",
+    "at": "2026-11-24T23:10:04.739Z"
+  },
+  "temple-b#2": {
+    "verdict": "REJECTED",
+    "notes": "school temple Bloom: duplicate of the accepted temple-a#0, smaller",
+    "at": "2026-11-24T23:10:04.800Z"
+  },
+  "temple-b#3": {
+    "verdict": "REJECTED",
+    "notes": "school temple Hush: duplicate of the accepted temple-a#3, smaller",
+    "at": "2026-11-24T23:10:04.858Z"
+  },
+  "pickups-a#0": {
+    "verdict": "REJECTED",
+    "notes": "campfire: no stone ring, flames lean off the logs",
+    "at": "2026-11-24T23:11:29.924Z"
+  },
+  "pickups-a#1": {
+    "verdict": "REJECTED",
+    "notes": "campfire: tall flame and a thin log fan, near duplicate of #0",
+    "at": "2026-11-24T23:11:29.985Z"
+  },
+  "pickups-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "campfire: crossed logs and a bright flame inside a ring of grey stones, reads at 1x",
+    "at": "2026-11-24T23:11:30.045Z"
+  },
+  "pickups-a#3": {
+    "verdict": "REJECTED",
+    "notes": "campfire: near duplicate of #0",
+    "at": "2026-11-24T23:11:30.107Z"
+  },
+  "pickups-a#4": {
+    "verdict": "REJECTED",
+    "notes": "sealed box: plain crate without bands or a seal",
+    "at": "2026-11-24T23:11:30.170Z"
+  },
+  "pickups-a#5": {
+    "verdict": "REJECTED",
+    "notes": "campfire: near duplicate of #0",
+    "at": "2026-11-24T23:11:30.231Z"
+  },
+  "pickups-a#6": {
+    "verdict": "REJECTED",
+    "notes": "campfire: wide stone ring dwarfs a small flame",
+    "at": "2026-11-24T23:11:30.291Z"
+  },
+  "pickups-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "loose artifact: round golden amulet with a big red gem on a scrap of purple cloth",
+    "at": "2026-11-24T23:11:30.352Z"
+  },
+  "pickups-a#8": {
+    "verdict": "REJECTED",
+    "notes": "loose artifact: shield-shaped pendant, near duplicate of #7",
+    "at": "2026-11-24T23:11:30.413Z"
+  },
+  "pickups-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "loose scroll: rolled parchment tied with a red ribbon and a wax seal",
+    "at": "2026-11-24T23:11:30.473Z"
+  },
+  "pickups-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "sealed box: small wooden box bound with iron bands and chains under a big red wax seal",
+    "at": "2026-11-24T23:11:30.532Z"
+  },
+  "pickups-a#11": {
+    "verdict": "REJECTED",
+    "notes": "event shimmer: sparkles too faint on light ground",
+    "at": "2026-11-24T23:11:30.593Z"
+  },
+  "pickups-a#12": {
+    "verdict": "REJECTED",
+    "notes": "campfire: logs without stones, tall flame",
+    "at": "2026-11-24T23:11:30.653Z"
+  },
+  "pickups-a#13": {
+    "verdict": "REJECTED",
+    "notes": "loose artifact: near duplicate of #7",
+    "at": "2026-11-24T23:11:30.714Z"
+  },
+  "pickups-a#14": {
+    "verdict": "REJECTED",
+    "notes": "loose artifact: crown-like brooch spreads wide over the cloth",
+    "at": "2026-11-24T23:11:30.775Z"
+  },
+  "pickups-a#15": {
+    "verdict": "REJECTED",
+    "notes": "loose scroll: violet seal clashes with the essence colour",
+    "at": "2026-11-24T23:11:30.835Z"
+  },
+  "pickups-a#16": {
+    "verdict": "REJECTED",
+    "notes": "sealed box: near duplicate of #10 with a darker frame",
+    "at": "2026-11-24T23:11:30.902Z"
+  },
+  "pickups-a#17": {
+    "verdict": "REJECTED",
+    "notes": "event shimmer: sparkles too faint on light ground",
+    "at": "2026-11-24T23:11:30.963Z"
+  },
+  "pickups-a#18": {
+    "verdict": "REJECTED",
+    "notes": "campfire: near duplicate of #2 with a smaller flame",
+    "at": "2026-11-24T23:11:31.021Z"
+  },
+  "pickups-a#19": {
+    "verdict": "REJECTED",
+    "notes": "loose artifact: near duplicate of #8",
+    "at": "2026-11-24T23:11:31.082Z"
+  },
+  "pickups-a#20": {
+    "verdict": "REJECTED",
+    "notes": "loose artifact: crown shape reads as a tiara",
+    "at": "2026-11-24T23:11:31.142Z"
+  },
+  "pickups-a#21": {
+    "verdict": "REJECTED",
+    "notes": "loose scroll: gold seal lost against the parchment",
+    "at": "2026-11-24T23:11:31.206Z"
+  },
+  "pickups-a#22": {
+    "verdict": "REJECTED",
+    "notes": "sealed box: near duplicate of #10",
+    "at": "2026-11-24T23:11:31.272Z"
+  },
+  "pickups-a#23": {
+    "verdict": "REJECTED",
+    "notes": "event shimmer: sparkles too faint on light ground",
+    "at": "2026-11-24T23:11:31.337Z"
+  },
+  "pickups-a#24": {
+    "verdict": "REJECTED",
+    "notes": "campfire: open log pile without stones",
+    "at": "2026-11-24T23:11:31.401Z"
+  },
+  "pickups-a#25": {
+    "verdict": "REJECTED",
+    "notes": "loose artifact: near duplicate of #7",
+    "at": "2026-11-24T23:11:31.456Z"
+  },
+  "pickups-a#26": {
+    "verdict": "REJECTED",
+    "notes": "loose scroll: flat unrolled sheet, busier than #9",
+    "at": "2026-11-24T23:11:31.510Z"
+  },
+  "pickups-a#27": {
+    "verdict": "REJECTED",
+    "notes": "sealed box: reads as a treasure chest (rounded lid), confusable with the chest",
+    "at": "2026-11-24T23:11:31.565Z"
+  },
+  "pickups-a#28": {
+    "verdict": "REJECTED",
+    "notes": "sealed box: grey iron frame turns the box grey at 1x",
+    "at": "2026-11-24T23:11:31.617Z"
+  },
+  "pickups-a#29": {
+    "verdict": "ACCEPTED",
+    "notes": "event tile shimmer: a loose ring of bright cream and gold sparkles that reads on light and dark ground",
+    "at": "2026-11-24T23:11:31.673Z"
+  },
+  "pickups-a#30": {
+    "verdict": "REJECTED",
+    "notes": "campfire: ragged flame tips at the top",
+    "at": "2026-11-24T23:11:31.727Z"
+  },
+  "pickups-a#31": {
+    "verdict": "REJECTED",
+    "notes": "loose artifact: ring-shaped frame around the amulet, fussy",
+    "at": "2026-11-24T23:11:31.779Z"
+  },
+  "pickups-a#32": {
+    "verdict": "REJECTED",
+    "notes": "loose scroll: blue seal, near duplicate of #26",
+    "at": "2026-11-24T23:11:31.831Z"
+  },
+  "pickups-a#33": {
+    "verdict": "REJECTED",
+    "notes": "sealed box: rounded lid, confusable with the chest",
+    "at": "2026-11-24T23:11:31.885Z"
+  },
+  "pickups-a#34": {
+    "verdict": "REJECTED",
+    "notes": "sealed box: grey cage frame, reads as a trap",
+    "at": "2026-11-24T23:11:31.938Z"
+  },
+  "pickups-a#35": {
+    "verdict": "REJECTED",
+    "notes": "event shimmer: good, but #29's sparkles are rounder and brighter",
+    "at": "2026-11-24T23:11:31.990Z"
+  },
+  "vault-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "keepers' vault: wide stone treasury with a round bronze vault door ringed by five school gems, two squat guardian statues and spilled coins; straight front-on, reads at 1x",
+    "at": "2026-11-24T23:12:42.235Z"
+  },
+  "academy-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "academy (stretch): red brick schoolhouse with a bell tower, a blackboard, a globe and books, door at the front",
+    "at": "2026-11-24T23:12:42.288Z"
+  },
+  "academy-a#1": {
+    "verdict": "REJECTED",
+    "notes": "academy: no blackboard or globe; reads as a plain brick house",
+    "at": "2026-11-24T23:12:42.338Z"
+  },
+  "academy-a#2": {
+    "verdict": "REJECTED",
+    "notes": "academy: scribbled chalk on the board is noise at 1x, the door hides at the back",
+    "at": "2026-11-24T23:12:42.393Z"
+  },
+  "academy-a#3": {
+    "verdict": "REJECTED",
+    "notes": "academy: two globes and a big book, symmetric clutter",
+    "at": "2026-11-24T23:12:42.452Z"
+  },
+  "sites-e#0": {
+    "verdict": "ACCEPTED",
+    "notes": "sign (stretch): a stout post with one big blank plank, reads at 1x",
+    "at": "2026-11-24T23:16:05.738Z"
+  },
+  "sites-e#1": {
+    "verdict": "REJECTED",
+    "notes": "sign: ragged plank edge, near duplicate of #0",
+    "at": "2026-11-24T23:16:05.817Z"
+  },
+  "sites-e#2": {
+    "verdict": "REJECTED",
+    "notes": "sign: the brace makes a thin diagonal at 1x",
+    "at": "2026-11-24T23:16:05.889Z"
+  },
+  "sites-e#3": {
+    "verdict": "REJECTED",
+    "notes": "sign: rope-bound plank, busy at 1x",
+    "at": "2026-11-24T23:16:05.959Z"
+  },
+  "sites-e#4": {
+    "verdict": "ACCEPTED",
+    "notes": "keymaster's tent, green: green and white striped pavilion with a pennant and a big golden key; also the source of the yellow tent (recoloured)",
+    "at": "2026-11-24T23:16:06.030Z"
+  },
+  "sites-e#5": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent green: near duplicate of #4",
+    "at": "2026-11-24T23:16:06.101Z"
+  },
+  "sites-e#6": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent green: swirled stripes and loose guy ropes",
+    "at": "2026-11-24T23:16:06.172Z"
+  },
+  "sites-e#7": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent green: guy ropes and pegs float beside the tent",
+    "at": "2026-11-24T23:16:06.242Z"
+  },
+  "sites-e#8": {
+    "verdict": "ACCEPTED",
+    "notes": "keymaster's tent, red: red and white striped pavilion with a pennant and a big golden key, same form as #4",
+    "at": "2026-11-24T23:16:06.322Z"
+  },
+  "sites-e#9": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent red: side pennants and a ragged skirt, busy",
+    "at": "2026-11-24T23:16:06.401Z"
+  },
+  "sites-e#10": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent red: gold tassels round the skirt, reads as a circus",
+    "at": "2026-11-24T23:16:06.475Z"
+  },
+  "sites-e#11": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent red: banners and ropes, busy at 1x",
+    "at": "2026-11-24T23:16:06.547Z"
+  },
+  "sites-e#12": {
+    "verdict": "ACCEPTED",
+    "notes": "keymaster's tent, blue: blue and white striped pavilion with a pennant and a big golden key, same form as #4",
+    "at": "2026-11-24T23:16:06.678Z"
+  },
+  "sites-e#13": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent blue: shield badges on the skirt, busy",
+    "at": "2026-11-24T23:16:06.739Z"
+  },
+  "sites-e#14": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent blue: good, but #12 matches the green and red takes",
+    "at": "2026-11-24T23:16:06.802Z"
+  },
+  "sites-e#15": {
+    "verdict": "REJECTED",
+    "notes": "keymaster's tent blue: guy ropes and two pennants, busy",
+    "at": "2026-11-24T23:16:06.864Z"
+  },
+  "temple-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "school temple, Storm: white rotunda under an electric blue dome with a copper lightning rod and a gold bolt, the size and form of the temple-a set",
+    "at": "2026-11-24T23:16:28.545Z"
+  },
+  "temple-c#1": {
+    "verdict": "REJECTED",
+    "notes": "school temple Storm: tall stepped plinth, larger than the other four temples",
+    "at": "2026-11-24T23:16:28.595Z"
+  },
+  "temple-c#2": {
+    "verdict": "REJECTED",
+    "notes": "school temple Storm: copper rods sprout from the roof like antennae, busy",
+    "at": "2026-11-24T23:16:28.646Z"
+  },
+  "temple-c#3": {
+    "verdict": "REJECTED",
+    "notes": "school temple Storm: caged dome and tall spire, busy at 1x",
+    "at": "2026-11-24T23:16:28.696Z"
+  },
+  "haunted-mine-a#0": {
+    "verdict": "REJECTED",
+    "notes": "haunted mine: warning sign and cart spread wide, rubble trail to the right",
+    "at": "2026-11-24T23:16:28.749Z"
+  },
+  "haunted-mine-a#1": {
+    "verdict": "REJECTED",
+    "notes": "haunted mine: spilled ore heap at the right is noisy",
+    "at": "2026-11-24T23:16:28.799Z"
+  },
+  "haunted-mine-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "haunted mine (stretch): dark rock mound with a timbered entrance, cobwebs, a green lantern, a skull sign and an ore cart",
+    "at": "2026-11-24T23:16:28.851Z"
+  },
+  "haunted-mine-a#3": {
+    "verdict": "REJECTED",
+    "notes": "haunted mine: bones and rubble scattered across the front",
+    "at": "2026-11-24T23:16:28.903Z"
+  },
+  "library-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "library (stretch): cream stone hall with a blue slate roof, tall arched windows, a domed reading tower and a carved book over the door",
+    "at": "2026-11-24T23:16:28.956Z"
+  },
+  "library-a#1": {
+    "verdict": "REJECTED",
+    "notes": "library: the tower at the left hides the door; flag on top",
+    "at": "2026-11-24T23:16:29.007Z"
+  },
+  "library-a#2": {
+    "verdict": "REJECTED",
+    "notes": "library: small windows; reads as a chapel",
+    "at": "2026-11-24T23:16:29.058Z"
+  },
+  "library-a#3": {
+    "verdict": "REJECTED",
+    "notes": "library: stair and porch make a busy front",
+    "at": "2026-11-24T23:16:29.109Z"
+  },
+  "sanctuary-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "sanctuary (stretch): white cloister with a pale gold roof, an arched gate, a bell and a white tree in a little garden",
+    "at": "2026-11-24T23:16:29.159Z"
+  },
+  "sanctuary-a#1": {
+    "verdict": "REJECTED",
+    "notes": "sanctuary: vines scribble over the whole cloister",
+    "at": "2026-11-24T23:16:29.211Z"
+  },
+  "sanctuary-a#2": {
+    "verdict": "REJECTED",
+    "notes": "sanctuary: lantern dome and bench, near duplicate of #0",
+    "at": "2026-11-24T23:16:29.261Z"
+  },
+  "sanctuary-a#3": {
+    "verdict": "REJECTED",
+    "notes": "sanctuary: bunting across the garden, busy",
+    "at": "2026-11-24T23:16:29.312Z"
+  },
+  "inn-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "roadside inn (stretch): half-timbered inn with lit windows, a tankard sign, barrels and a stable lean-to",
+    "at": "2026-11-24T23:16:29.362Z"
+  },
+  "inn-a#1": {
+    "verdict": "REJECTED",
+    "notes": "roadside inn: open stable lean-to spreads wide at the left",
+    "at": "2026-11-24T23:16:29.415Z"
+  },
+  "inn-a#2": {
+    "verdict": "REJECTED",
+    "notes": "roadside inn: two wings, busy roofline",
+    "at": "2026-11-24T23:16:29.467Z"
+  },
+  "inn-a#3": {
+    "verdict": "REJECTED",
+    "notes": "roadside inn: near duplicate of #0",
+    "at": "2026-11-24T23:16:29.519Z"
+  }
+}

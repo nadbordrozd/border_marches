@@ -38,6 +38,7 @@
  */
 import type { ResourceId, Terrain } from "../core/map/types";
 import { ALL_ICON_ASSETS } from "./icons";
+import { MAP_OBJECT_ASSETS } from "./map-objects";
 import { PEAK_ASSETS } from "./peaks";
 import { TREE_ASSETS } from "./trees";
 import { BUILDING_ART_ASSETS, TOWN_BACKDROP_ASSETS } from "./town-buildings";
@@ -70,6 +71,7 @@ export type AssetCategory =
   | "doodad"
   | "tree"
   | "peak"
+  | "map-object"
   | "building"
   | "town-backdrop"
   | "icon";
@@ -4104,6 +4106,7 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...DOODAD_ASSETS,
   ...TREE_ASSETS,
   ...PEAK_ASSETS,
+  ...MAP_OBJECT_ASSETS,
   ...BUILDING_ART_ASSETS,
   ...TOWN_BACKDROP_ASSETS,
   ...ALL_ICON_ASSETS,
