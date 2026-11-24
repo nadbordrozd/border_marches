@@ -1,70 +1,45 @@
 /**
- * The Chieftain hero class, the XP table, calendar and sight constants
- * (GAME_DESIGN.md sections 5, 6 and 7.3).
+ * Hero constants: the XP curve, calendar, sight and army size (RULES_V2
+ * 3.2, 3.9; GAME_DESIGN.md sections 5 and 7.3). Classes live in
+ * src/data/classes.ts and are re-exported here for older imports.
  */
-import type { Terrain } from "../core/map/types.ts";
-import type { CreatureId, FactionId } from "./types.ts";
-
-export interface HeroClassDef {
-  id: string;
-  name: string;
-  faction: FactionId;
-  /** Terrain this class crosses at the Grass cost (100). */
-  nativeTerrain: Terrain;
-  attack: number;
-  defense: number;
-  /** Movement points per day. */
-  movement: number;
-  startingArmy: ReadonlyArray<{ creature: CreatureId; count: number }>;
-  /** Map sprite key (new art, bead border_marches-xaj.9). */
-  sprite: string;
-}
-
-export const CHIEFTAIN: HeroClassDef = {
-  id: "chieftain",
-  name: "Chieftain",
-  faction: "lost-world",
-  nativeTerrain: "jungle",
-  attack: 2,
-  defense: 2,
-  movement: 1500,
-  startingArmy: [
-    { creature: "caveman", count: 18 },
-    { creature: "spitter", count: 6 },
-  ],
-  sprite: "hero-chieftain",
-};
-
-export const HERO_CLASSES: Readonly<Record<string, HeroClassDef>> = {
-  chieftain: CHIEFTAIN,
-};
-
-/** The hero class with this id; throws on an unknown id. */
-export function getHeroClass(id: string): HeroClassDef {
-  const def = Object.hasOwn(HERO_CLASSES, id) ? HERO_CLASSES[id] : undefined;
-  if (def === undefined) throw new Error(`unknown hero class "${id}"`);
-  return def;
-}
+export {
+  CHIEFTAIN,
+  HERO_CLASSES,
+  getHeroClass,
+  type HeroClassDef,
+} from "./classes.ts";
 
 /** Army and garrison size in stacks. */
 export const ARMY_SLOTS = 7;
 
 /**
- * Total XP needed for levels 1..13 (index 0 = level 1). From level 14 each
- * threshold is the previous x 1.2, rounded down; see core/game/xp.ts.
+ * Total XP needed for level L (RULES_V2 3.2, ECONOMY.md 9):
+ * 100 x (L - 1) x (L + 2). No cap.
  */
-export const XP_TABLE: readonly number[] = [
-  0, 1000, 2000, 3200, 4600, 6200, 8000, 10000, 12200, 14700, 17500, 20600,
-  24320,
-];
+export function xpCurve(level: number): number {
+  return 100 * (level - 1) * (level + 2);
+}
 
-/** Sight radius in cells (GAME_DESIGN.md section 7.3). */
+/** Sight radius in cells (RULES_V2 3.9); skills and items add to it. */
 export const HERO_SIGHT = 6;
 export const TOWN_SIGHT = 5;
+/** The largest hero sight radius after all modifiers (RULES_V2 3.9). */
+export const MAX_SIGHT = 12;
+
+/** Primary stats after all modifiers (RULES_V2 3.1). */
+export const MIN_STAT = 0;
+export const MAX_STAT = 40;
+
+/** Movement (RULES_V2 3.9): base = 1300 + 50 x clamp(slowest Speed, 2, 8). */
+export const MOVE_BASE = 1300;
+export const MOVE_PER_SPEED = 50;
+export const MOVE_SPEED_MIN = 2;
+export const MOVE_SPEED_MAX = 8;
+export const MOVE_MAX = 3000;
+
+/** Mana (RULES_V2 2.3): maximum 10 x Lore; daily 1 + floor(Lore / 3). */
+export const MANA_PER_LORE = 10;
 
 export const DAYS_PER_WEEK = 7;
 export const WEEKS_PER_MONTH = 4;
-
-/** Level-up offers in the MVP. */
-export type LevelUpChoice = "attack" | "defense";
-export const LEVEL_UP_CHOICES: readonly LevelUpChoice[] = ["attack", "defense"];

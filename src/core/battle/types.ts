@@ -61,6 +61,11 @@ export interface BattleCreatureStats {
 export interface HeroBattleStats {
   readonly attack: number;
   readonly defense: number;
+  /**
+   * Item acts (RULES_V2 4.6 form 4) of the hero's worn artifacts: act ids
+   * of kind "item" this side may use, once per battle each. Absent: none.
+   */
+  readonly itemActs?: readonly string[];
 }
 
 export interface BattleStackSetup {

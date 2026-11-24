@@ -12,9 +12,16 @@
  * without a fight, recruits in its towns, and ends its turn.
  */
 import { getCreature } from "../../data/creatures.ts";
-import type { LevelUpChoice } from "../../data/hero.ts";
 import type { BuildingId, CreatureId } from "../../data/types.ts";
 import { takeChest } from "./adventure.ts";
+import {
+  assemble,
+  equip,
+  handOver,
+  unequip,
+  useConsumable,
+  type ItemRef,
+} from "./artifacts.ts";
 import { moveHeroAlong } from "./adventure.ts";
 import {
   applyBattleResult,
@@ -22,7 +29,7 @@ import {
   battleSetup,
   type BattleResolver,
 } from "./battle.ts";
-import { chooseLevelUp } from "./hero.ts";
+import { chooseLevelUp, levelUpOffer, type LevelUpOffer } from "./hero.ts";
 import { findPath, reachableCells } from "./pathfinding.ts";
 import { dismissHero, hireHero, humanPlayer } from "./players.ts";
 import { maxAffordable } from "./resources.ts";
@@ -51,6 +58,13 @@ export type GameAction =
   | { type: "hire"; townId: string; heroDefId: string }
   | { type: "dismiss"; heroId: string }
   | { type: "transfer"; args: TransferArgs }
+  /** Artifacts (RULES_V2 4): wear a backpack item, take one off, use one. */
+  | { type: "equip"; heroId: string; index: number; slot?: number }
+  | { type: "unequip"; heroId: string; slot: number }
+  | { type: "use-item"; heroId: string; index: number }
+  | { type: "assemble"; heroId: string; marvel: string }
+  /** Hand an item to an adjacent own hero (RULES_V2 5.3). */
+  | { type: "hand-over"; heroId: string; toHeroId: string; item: ItemRef }
   | { type: "end-turn" };
 
 /** Applies an action for the current player. */
@@ -77,6 +91,16 @@ export function applyAction(
       return dismissHero(state, action.heroId);
     case "transfer":
       return transferStack(state, action.args);
+    case "equip":
+      return equip(state, action.heroId, action.index, action.slot);
+    case "unequip":
+      return unequip(state, action.heroId, action.slot);
+    case "use-item":
+      return useConsumable(state, action.heroId, action.index);
+    case "assemble":
+      return assemble(state, action.heroId, action.marvel);
+    case "hand-over":
+      return handOver(state, action.heroId, action.toHeroId, action.item);
     case "end-turn":
       return endTurn(state);
     default:
@@ -97,8 +121,12 @@ export interface PlayerController {
    * when an action fails or after its action limit.
    */
   decide(state: GameState, player: number): GameAction;
-  /** A level-up choice for one of the player's heroes (default: the lower stat). */
-  levelUp?(state: GameState, heroId: string): LevelUpChoice;
+  /**
+   * A level-up choice for one of the player's heroes: the index (0..2) of
+   * the chosen entry of `offer` (RULES_V2 3.3: skill offers, the first is
+   * the guaranteed upgrade; or a feat draft, 3.5). Default: the first.
+   */
+  levelUp?(state: GameState, heroId: string, offer: LevelUpOffer): number;
   /** A treasure chest's reward (default: gold). */
   chest?(state: GameState, heroId: string, pickupId: string): "gold" | "xp";
 }
@@ -120,11 +148,9 @@ export interface AiStepResult {
   outcome: AiStepOutcome;
 }
 
-function defaultLevelUp(state: GameState, heroId: string): LevelUpChoice {
-  const hero = state.heroes.find((h) => h.id === heroId);
-  return hero !== undefined && hero.defense < hero.attack
-    ? "defense"
-    : "attack";
+/** The default choice: the guarantee, or the first feat drafted. */
+function defaultLevelUp(): number {
+  return 0;
 }
 
 /**
@@ -152,7 +178,9 @@ function settle(
     for (const hero of s.heroes) {
       const c = hero.alive ? controllers(hero.owner) : null;
       while (c !== null && hero.pendingLevelUps > 0) {
-        const choice = c.levelUp?.(s, hero.id) ?? defaultLevelUp(s, hero.id);
+        const offer = levelUpOffer(s, hero.id);
+        if (offer === null) break;
+        const choice = c.levelUp?.(s, hero.id, offer) ?? defaultLevelUp();
         const r = chooseLevelUp(s, hero.id, choice);
         if (!r.ok) break;
         s = r.state;

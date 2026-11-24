@@ -3,6 +3,7 @@ import {
   build,
   endDay,
   findPath,
+  heroIncome,
   isExplored,
   recruit,
   moveHeroAlong,
@@ -146,6 +147,8 @@ describe("determinism", () => {
     expect(a).toEqual(b);
     expect(a.day).toBe(9);
     expect(a.towns["town-1"]!.dwellings.caveman!.available).toBe(14);
-    expect(a.players[0]!.resources.gold).toBe(7500 - 2500 - 700 + 8 * 1000);
+    // Plus the start hero's income (skills, specialty: RULES_V2 3.7).
+    const daily = 1000 + heroIncome(a.heroes[0]!, 2).gold;
+    expect(a.players[0]!.resources.gold).toBe(7500 - 2500 - 700 + 8 * daily);
   });
 });

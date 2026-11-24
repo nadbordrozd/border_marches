@@ -246,7 +246,9 @@ describe("captures and flags", () => {
 describe("hero against hero", () => {
   it("the attacker wins: XP, the loser's artifacts, the loser to the pool", () => {
     const s = cloneState(twoPlayers());
-    s.heroes[1]!.artifacts = ["amulet", "boots"];
+    s.heroes[1]!.worn[0] = "thinking-cap";
+    s.heroes[1]!.backpack = ["tin-sabre"];
+    s.heroes[1]!.scrolls = ["jolt"];
     const at = attack(s, "hero-0", 10, 1);
     expect(at.pendingBattle).toEqual({
       kind: "hero",
@@ -264,12 +266,15 @@ describe("hero against hero", () => {
     const loser = state.heroes[1]!;
     expect(loser.alive).toBe(false);
     expect(state.pool).toContain(loser.defId);
-    expect(state.heroes[0]!.artifacts).toEqual(["amulet", "boots"]);
+    // RULES_V2 4.4: worn first, then carried, into the backpack.
+    expect(state.heroes[0]!.backpack).toEqual(["thinking-cap", "tin-sabre"]);
+    expect(state.heroes[0]!.scrolls).toEqual(["jolt"]);
+    expect(loser.worn.every((w) => w === null)).toBe(true);
     expect(events).toContainEqual({
       type: "artifacts-won",
       heroId: "hero-0",
       fromHeroId: "hero-1",
-      artifacts: ["amulet", "boots"],
+      artifacts: ["thinking-cap", "tin-sabre"],
     });
     expect(state.heroes[0]!.xp).toBe(18 * HP.caveman + 6 * HP.spitter);
     expect(state.players[1]!.eliminated).toBe(false);
@@ -328,7 +333,7 @@ describe("retreat", () => {
     const s = cloneState(twoPlayers());
     s.heroes[0]!.xp = 1200;
     s.heroes[0]!.level = 2;
-    s.heroes[0]!.artifacts = ["ring"];
+    s.heroes[0]!.backpack = ["pot-lid"];
     const at = attack(s, "hero-0", 10, 1);
     const setup = battleSetup(at)!;
     const { state, events } = ok(
@@ -341,7 +346,7 @@ describe("retreat", () => {
     );
     expect(events).toContainEqual({ type: "hero-retreated", heroId: "hero-0" });
     expect(state.heroes[0]!.alive).toBe(false);
-    expect(state.heroes[1]!.artifacts).toEqual([]);
+    expect(state.heroes[1]!.backpack).toEqual([]);
     // XP only for what was killed before the retreat: one of each stack.
     expect(state.heroes[1]!.xp).toBe(HP.caveman + HP.spitter);
     const offer = tavernOffer(state, 0);
@@ -355,7 +360,7 @@ describe("retreat", () => {
       alive: true,
       level: 2,
       xp: 1200,
-      artifacts: ["ring"],
+      backpack: ["pot-lid"],
       x: 0,
       y: 1,
     });

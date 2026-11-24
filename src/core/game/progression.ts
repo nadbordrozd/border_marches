@@ -2,7 +2,7 @@
  * Calendar, experience levels, creature growth and fight value: the small
  * numeric rules of the adventure layer.
  */
-import { DAYS_PER_WEEK, WEEKS_PER_MONTH, XP_TABLE } from "../../data/hero.ts";
+import { DAYS_PER_WEEK, WEEKS_PER_MONTH, xpCurve } from "../../data/hero.ts";
 import { NEUTRAL_MAX_BATTLE_STACKS } from "../../data/neutrals.ts";
 import type { CreatureDef } from "../../data/types.ts";
 
@@ -38,19 +38,14 @@ export function isGrowthDay(day: number): boolean {
 }
 
 /**
- * Total XP needed to reach `level` (level 1 = 0). Levels 14+ are the
- * previous threshold x 1.2, rounded down (exact integer arithmetic).
+ * Total XP needed to reach `level` (level 1 = 0): 100 x (L - 1) x (L + 2)
+ * (RULES_V2 3.2).
  */
 export function xpForLevel(level: number): number {
   if (!Number.isInteger(level) || level < 1) {
     throw new RangeError(`bad level ${level}`);
   }
-  if (level <= XP_TABLE.length) return XP_TABLE[level - 1] as number;
-  let xp = XP_TABLE[XP_TABLE.length - 1] as number;
-  for (let l = XP_TABLE.length + 1; l <= level; l++) {
-    xp = Math.floor((xp * 6) / 5);
-  }
-  return xp;
+  return xpCurve(level);
 }
 
 /** The level a hero with `xp` total experience has reached. */

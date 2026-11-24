@@ -2,7 +2,8 @@
  * Moving heroes and visiting map objects (GAME_DESIGN.md section 7).
  */
 import { CHEST } from "../../data/economy.ts";
-import { HERO_SIGHT, TOWN_SIGHT } from "../../data/hero.ts";
+import { TOWN_SIGHT } from "../../data/hero.ts";
+import { sightRadius } from "./effects.ts";
 import { gainXp } from "./hero.ts";
 import { pickupInfo } from "./newGame.ts";
 import { canEnter, cutsCorner, moveContext, stepCost } from "./pathfinding.ts";
@@ -239,7 +240,7 @@ export function moveHeroAlong(
     hero.y = y;
     cells.push([x, y]);
     if (player !== undefined) {
-      revealDisc(map, player.explored, x, y, HERO_SIGHT);
+      revealDisc(map, player.explored, x, y, sightRadius(hero));
     }
     const guards = ctx.guards.get(idx);
     if (guards !== undefined) {

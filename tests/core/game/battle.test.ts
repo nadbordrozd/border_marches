@@ -6,7 +6,7 @@ import {
   endDay,
   fightPendingBattle,
   findPath,
-  levelUpOffers,
+  levelUpOffer,
   moveHeroAlong,
   type BattleResolver,
   type GameState,
@@ -48,9 +48,16 @@ describe("battle setup", () => {
     const s = intoBattle(gameOn(field(7, 3), [monster("m", 3, 1)], 0, 1), 3, 1);
     const setup = battleSetup(s)!;
     expect(setup.terrain).toBe("grass");
-    expect(setup.attacker).toEqual({
+    expect(setup.attacker.hero).toMatchObject({
+      id: "hero-0",
+      attack: 2,
+      defense: 2,
+      name: s.heroes[0]!.name,
+      profile: { power: 1, lore: 1, mana: 10, command: "stampede" },
+    });
+    expect({ ...setup.attacker, hero: null }).toEqual({
       owner: 0,
-      hero: { id: "hero-0", attack: 2, defense: 2, name: s.heroes[0]!.name },
+      hero: null,
       stacks: [
         { creature: "caveman", count: 18 },
         { creature: "spitter", count: 6 },
@@ -140,23 +147,25 @@ describe("applyBattleResult", () => {
     const hero = state.heroes[0]!;
     expect(hero.army[0]).toBeNull();
     expect(hero.xp).toBe(80 * 28); // 2240
-    expect(hero.level).toBe(3);
-    expect(hero.pendingLevelUps).toBe(2);
+    // RULES_V2 3.2: level 4 needs 100 x 3 x 6 = 1800.
+    expect(hero.level).toBe(4);
+    expect(hero.pendingLevelUps).toBe(3);
     expect(events.filter((e) => e.type === "level-up")).toEqual([
       { type: "level-up", heroId: "hero-0", level: 2 },
       { type: "level-up", heroId: "hero-0", level: 3 },
+      { type: "level-up", heroId: "hero-0", level: 4 },
     ]);
+    // The Chieftain's pattern gives Attack, Defense, Attack at once.
+    expect(hero).toMatchObject({ attack: 4, defense: 3 });
 
-    expect(levelUpOffers(state, "hero-0")).toEqual(["attack", "defense"]);
-    const a = ok(chooseLevelUp(state, "hero-0", "attack")).state;
-    const b = ok(chooseLevelUp(a, "hero-0", "defense")).state;
-    expect(b.heroes[0]).toMatchObject({
-      attack: 3,
-      defense: 3,
-      pendingLevelUps: 0,
-    });
-    expect(errorOf(chooseLevelUp(b, "hero-0", "attack"))).toBe("no-level-up");
-    expect(levelUpOffers(b, "hero-0")).toEqual([]);
+    let b = state;
+    for (let i = 0; i < 8 && levelUpOffer(b, "hero-0") !== null; i++) {
+      b = ok(chooseLevelUp(b, "hero-0", 0)).state;
+    }
+    expect(b.heroes[0]!.pendingLevelUps).toBe(0);
+    expect(b.heroes[0]!.feats).toHaveLength(1); // the level 3 feat
+    expect(errorOf(chooseLevelUp(b, "hero-0", 0))).toBe("no-level-up");
+    expect(levelUpOffer(b, "hero-0")).toBeNull();
   });
 
   it("loses the game when the hero is defeated", () => {

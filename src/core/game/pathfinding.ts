@@ -24,7 +24,7 @@ import {
   ROAD_MOVE_COST,
   TERRAIN_MOVE_COST,
 } from "../../data/movement.ts";
-import { getHeroClass } from "../../data/hero.ts";
+import { terrainProfile, type TerrainProfile } from "./effects.ts";
 import {
   DIRECTIONS_8,
   type GameMap,
@@ -61,7 +61,11 @@ export interface Path {
 /** Everything a step check needs, precomputed from a state for one hero. */
 export interface MoveContext {
   map: GameMap;
-  nativeTerrain: Terrain | null;
+  /**
+   * How terrain costs the hero: a native terrain, or the hero's full
+   * profile (native terrain and Trailcraft-like reductions, RULES_V2 3.9).
+   */
+  nativeTerrain: Terrain | null | TerrainProfile;
   /** Cells blocked by objects (not the entrances). */
   objectBlocked: Set<number>;
   /** Cell index -> live monster id standing there. */
@@ -141,7 +145,7 @@ export function moveContext(
   const player = state.players.find((p) => p.id === hero.owner);
   return {
     map,
-    nativeTerrain: getHeroClass(hero.heroClass).nativeTerrain,
+    nativeTerrain: terrainProfile(hero),
     objectBlocked,
     monsterAt,
     enemyHeroAt,
@@ -195,11 +199,13 @@ export function diagonalCost(base: number): number {
 
 /**
  * Cost of one step between adjacent cells (the entered cell must be
- * passable). Road: both cells have a road.
+ * passable). Road: both cells have a road. `nativeTerrain` is a native
+ * terrain (100 per straight step) or a hero's terrain profile: terrain
+ * that costs more than 100 costs its reduction less, never below 100.
  */
 export function stepCost(
   map: GameMap,
-  nativeTerrain: Terrain | null,
+  nativeTerrain: Terrain | null | TerrainProfile,
   fx: number,
   fy: number,
   tx: number,
@@ -210,13 +216,21 @@ export function stepCost(
   if (from === undefined || to === undefined) {
     throw new RangeError(`stepCost: (${tx},${ty}) out of bounds`);
   }
+  const profile =
+    nativeTerrain === null || typeof nativeTerrain === "string"
+      ? { native: nativeTerrain, reduce: 0, perTerrain: {} }
+      : nativeTerrain;
   let base: number;
   if (from.road && to.road) base = ROAD_MOVE_COST;
-  else if (to.terrain === nativeTerrain) base = NATIVE_MOVE_COST;
+  else if (to.terrain === profile.native) base = NATIVE_MOVE_COST;
   else {
     const c = TERRAIN_MOVE_COST[to.terrain];
     if (c === null) throw new RangeError(`stepCost: (${tx},${ty}) impassable`);
-    base = c;
+    const reduce = Math.max(
+      profile.reduce,
+      profile.perTerrain[to.terrain] ?? 0,
+    );
+    base = c > NATIVE_MOVE_COST ? Math.max(NATIVE_MOVE_COST, c - reduce) : c;
   }
   return fx !== tx && fy !== ty ? diagonalCost(base) : base;
 }

@@ -108,7 +108,7 @@ describe("save", () => {
     expect(hasSave(storage)).toBe(false);
   });
 
-  it("round-trips a multi-player v2 game", () => {
+  it("round-trips a multi-player v3 game", () => {
     const storage = fakeStorage();
     const s = newGame(generateMap(7, { size: "S" }), {
       players: [
@@ -117,7 +117,7 @@ describe("save", () => {
       ],
     });
     saveGame(storage, s);
-    expect(JSON.parse(storage.data.get(SAVE_KEY)!).version).toBe(2);
+    expect(JSON.parse(storage.data.get(SAVE_KEY)!).version).toBe(3);
     const r = readSave(storage);
     expect(r.kind).toBe("ok");
     if (r.kind === "ok") {
@@ -154,11 +154,56 @@ describe("save", () => {
       expect(r.state.players).toHaveLength(1);
       expect(r.state.scenario?.kind).toBe("capture-towns");
     }
-    storage.data.set(SAVE_KEY, JSON.stringify({ version: 3, state: v2 }));
+    storage.data.set(SAVE_KEY, JSON.stringify({ version: 4, state: v2 }));
     const bad = readSave(storage);
     expect(bad.kind).toBe("rejected");
     if (bad.kind === "rejected") expect(bad.message).toMatch(/version/);
     expect(loadGame(storage)).toBeNull();
+  });
+
+  it("upgrades a v2 save to heroes v2 (save v3)", () => {
+    const storage = fakeStorage();
+    const v3 = game();
+    const v2 = JSON.parse(JSON.stringify(v3)) as Record<string, unknown> & {
+      heroes: Array<Record<string, unknown>>;
+    };
+    const v3Only = new Set([
+      "power",
+      "lore",
+      "mana",
+      "levelUpStep",
+      "redraw",
+      "skills",
+      "feats",
+      "pages",
+      "scrolls",
+      "worn",
+      "backpack",
+      "nextBattle",
+      "mpDebt",
+    ]);
+    v2.heroes = v2.heroes.map((h) => ({
+      ...Object.fromEntries(Object.entries(h).filter(([k]) => !v3Only.has(k))),
+      artifacts: ["tin-sabre", "unknown-amulet"],
+    }));
+    storage.data.set(SAVE_KEY, JSON.stringify({ version: 2, state: v2 }));
+    const r = readSave(storage);
+    expect(r.kind).toBe("ok");
+    if (r.kind === "ok") {
+      expect(r.upgraded).toBe(true);
+      const h = r.state.heroes[0]!;
+      expect(h).toMatchObject({
+        power: 1,
+        lore: 1,
+        mana: 10,
+        levelUpStep: "skill",
+        feats: [],
+        backpack: ["tin-sabre"],
+      });
+      expect(h.worn).toHaveLength(11);
+      expect(h.skills).toEqual(v3.heroes[0]!.skills);
+      expect("artifacts" in h).toBe(false);
+    }
   });
 
   it("survives storage that throws", () => {

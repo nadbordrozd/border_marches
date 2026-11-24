@@ -39,20 +39,21 @@ describe("calendar", () => {
 
 describe("experience", () => {
   it("has the documented thresholds", () => {
-    expect([1, 2, 3, 7, 8, 13].map(xpForLevel)).toEqual([
-      0, 1000, 2000, 8000, 10000, 24320,
+    // RULES_V2 3.2 / ECONOMY 9: 100 x (L - 1) x (L + 2).
+    expect([1, 2, 3, 4, 10, 15, 20].map(xpForLevel)).toEqual([
+      0, 400, 1000, 1800, 10800, 23800, 41800,
     ]);
-    expect([14, 15, 16].map(xpForLevel)).toEqual([29184, 35020, 42024]);
+    expect(xpForLevel(30)).toBe(92800);
   });
 
   it("maps XP to levels at the exact thresholds", () => {
     expect(levelForXp(0)).toBe(1);
-    expect(levelForXp(999)).toBe(1);
-    expect(levelForXp(1000)).toBe(2);
-    expect(levelForXp(4599)).toBe(4);
-    expect(levelForXp(4600)).toBe(5);
-    expect(levelForXp(29184)).toBe(14);
-    expect(levelForXp(35019)).toBe(14);
+    expect(levelForXp(399)).toBe(1);
+    expect(levelForXp(400)).toBe(2);
+    expect(levelForXp(999)).toBe(2);
+    expect(levelForXp(1000)).toBe(3);
+    expect(levelForXp(23799)).toBe(14);
+    expect(levelForXp(23800)).toBe(15);
   });
 });
 

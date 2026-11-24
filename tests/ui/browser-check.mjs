@@ -6,7 +6,7 @@
 //
 // Runs headless system Chrome (muted) through the Chrome DevTools Protocol:
 // new game (seed 4242, size S) -> walk to a pickup -> town: build, recruit ->
-// a hand-built save (hero 5 XP short of level 2) -> battle (opened, then
+// a hand-built save (hero 5 XP short of level 2, RULES_V2 3.2: 400) -> battle (opened, then
 // auto-combat) -> level-up dialog. Saves 1440x900 screenshots of the
 // adventure, town, battle and level-up screens and prints a JSON summary.
 // Exits non-zero when a step fails.
@@ -240,7 +240,7 @@ async function main() {
   await evaluate(`(() => {
     const raw = JSON.parse(localStorage.getItem('border-marches.save'));
     if (raw.state.day !== 2) throw new Error('save is not day 2');
-    raw.state.heroes[0].xp = 995;
+    raw.state.heroes[0].xp = 395;
     localStorage.setItem('border-marches.save', JSON.stringify(raw));
   })()`);
   url.search = "";
@@ -251,7 +251,7 @@ async function main() {
   }
   await waitFor("window.__bmGame", "adventure screen");
   await idle();
-  step("continued the saved game (hero XP 995)");
+  step("continued the saved game (hero XP 395)");
 
   // 5. Battle: walk to a monster over up to 6 days.
   let fought = false;
@@ -312,17 +312,26 @@ async function main() {
   if (!won) throw new Error("the scripted battle was lost");
 
   // 6. Level-up.
-  await waitFor("document.querySelector('.gm-levelup')", "level-up dialog");
-  await sleep(300);
+  // The skill draft (RULES_V2 3.3): take the first card (the guarantee).
+  await waitFor("document.querySelector('.hs-draft-dialog')", "level-up draft");
+  await sleep(600);
   await shot("levelup");
-  const atk = (await game("state()")).heroes[0].attack;
-  await clickText(".gm-levelup button", "+1 Attack");
+  while (
+    await evaluate("Boolean(document.querySelector('.hs-draft-dialog'))")
+  ) {
+    await evaluate(
+      "document.querySelector('.hs-draft-dialog .hs-card').click()",
+    );
+    await sleep(400);
+  }
   await idle();
   const s6 = await game("state()");
-  if (s6.heroes[0].attack !== atk + 1 || s6.heroes[0].level !== 2) {
+  if (s6.heroes[0].pendingLevelUps !== 0 || s6.heroes[0].level < 2) {
     throw new Error("level-up not applied");
   }
-  step(`level-up: level ${s6.heroes[0].level}, attack ${s6.heroes[0].attack}`);
+  step(
+    `level-up: level ${s6.heroes[0].level}, skills ${JSON.stringify(s6.heroes[0].skills)}`,
+  );
   await sleep(2500);
   await shot("after-battle");
 }

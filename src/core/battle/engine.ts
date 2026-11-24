@@ -274,6 +274,8 @@ export function heroActError(
     case "command":
       return sideState.commandUsed ? "the Command is used" : null;
     case "item":
+      if (!(sideState.hero.itemActs ?? []).includes(actId))
+        return "the hero carries no such item";
       return sideState.itemActsUsed.includes(actId)
         ? "this item act is used"
         : null;

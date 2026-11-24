@@ -54,6 +54,13 @@ export interface PlayerState {
   tavern: TavernState;
 }
 
+export interface HeroSkill {
+  /** SkillId (src/data/skills.ts). */
+  id: string;
+  /** 1..3 */
+  rank: number;
+}
+
 export interface HeroState {
   /** Instance id: "hero-<player>" for start heroes, "hero-<def id>" for hires. */
   id: string;
@@ -71,21 +78,66 @@ export interface HeroState {
   y: number;
   /** Movement points left today. */
   mp: number;
-  /** Movement points at the start of each day. */
+  /**
+   * Movement points at the start of each day: computed by
+   * movementPoints(hero) (core/game/effects.ts, RULES_V2 3.9) at the day
+   * start and on hiring, fixed for that day.
+   */
   maxMp: number;
+  /**
+   * Base primary stats (RULES_V2 3.1): class start, level-up stats and stat
+   * offers. Effective values add skills, feats, specialty and worn
+   * artifacts and are clamped 0..40: see heroStats (core/game/effects.ts).
+   * Power is the P of spells; Lore sets mana (maxMana, manaRegen).
+   */
   attack: number;
   defense: number;
+  power: number;
+  lore: number;
+  /**
+   * Mana now (RULES_V2 2.3). May exceed maxMana(hero) after a map site or
+   * potion; it does not regenerate while above. Magic (bead bzc.9) spends
+   * it; the day start regenerates it (manaRegen).
+   */
+  mana: number;
   xp: number;
   /** Level reached by XP (choices for it may still be pending). */
   level: number;
-  /** Level-up choices not yet made; see chooseLevelUp. */
+  /** Levels whose choices are not yet made; see levelUpOffer. */
   pendingLevelUps: number;
-  army: ArmySlots;
   /**
-   * Artifact ids, worn and carried (bead bzc.10 gives them slots). Opaque
-   * here: they move to the winner of a hero battle (RULES_V2 4.4).
+   * The step of the oldest pending level: its skill offer, then (at levels
+   * divisible by 3) its feat draft (RULES_V2 3.3).
    */
-  artifacts: string[];
+  levelUpStep: "skill" | "feat";
+  /** The next offer or draft is redrawn once (Elixir of Hindsight). */
+  redraw: boolean;
+  /** At most six skills, ranks 1..3 (RULES_V2 3.4), in the order gained. */
+  skills: HeroSkill[];
+  /** Feat and vow ids (src/data/feats.ts), in the order drafted. */
+  feats: string[];
+  /**
+   * Known spell ids: the pages of the hero's book (RULES_V2 2.2). Magic
+   * (bead bzc.9) defines the spells; a page is kept if the rank is lost.
+   */
+  pages: string[];
+  /** Scroll case: spell ids, at most scrollCaseSize(hero) (RULES_V2 2.5). */
+  scrolls: string[];
+  /**
+   * The eleven worn slots in WORN_SLOTS order (src/data/artifacts.ts):
+   * artifact id or null. Only worn artifacts have effects.
+   */
+  worn: Array<string | null>;
+  /**
+   * Carried artifacts and consumables, in order. Consumables of one kind
+   * share a slot three at a time (see backpackSlotsUsed).
+   */
+  backpack: string[];
+  /** Consumables used for the next battle (CONTENT_ARTIFACTS 6.1). */
+  nextBattle: string[];
+  /** Movement owed from a Borrowed Day (RULES_V2 2.8), taken next day. */
+  mpDebt: number;
+  army: ArmySlots;
   /** On the map. False: in the pool or waiting at a tavern after retreat. */
   alive: boolean;
 }
@@ -219,6 +271,13 @@ export type GameEvent =
   | { type: "battle"; battle: PendingBattle }
   | { type: "xp"; heroId: string; amount: number }
   | { type: "level-up"; heroId: string; level: number }
+  /** A level's pattern stat or a stat offer (RULES_V2 3.3). */
+  | { type: "stat-gained"; heroId: string; stat: string }
+  | { type: "skill-gained"; heroId: string; skill: string; rank: number }
+  | { type: "feat-gained"; heroId: string; feat: string }
+  | { type: "artifact-assembled"; heroId: string; artifact: string }
+  | { type: "consumable-used"; heroId: string; artifact: string }
+  | { type: "curse-lifted"; heroId: string; artifact: string }
   | { type: "new-day"; day: number }
   | { type: "new-week"; day: number }
   | { type: "income"; player: number; amounts: Resources }
@@ -286,4 +345,13 @@ export type CommandError =
   | "bad-path"
   | "no-level-up"
   | "bad-choice"
-  | "bad-result";
+  | "bad-result"
+  | "bad-item"
+  | "backpack-full"
+  | "scroll-case-full"
+  | "cursed"
+  | "vow"
+  | "one-marvel"
+  | "not-consumable"
+  | "already-used"
+  | "no-assembly";

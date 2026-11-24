@@ -7,6 +7,7 @@
  * {@link HERO_ROSTER} with each faction's named heroes (at least four per
  * class); the rules read only `id`, `name` and `heroClass`.
  */
+import type { Specialty } from "./classes.ts";
 import type { FactionId } from "./types.ts";
 
 export const MIN_PLAYERS = 2;
@@ -21,8 +22,6 @@ export const TAVERN_OFFER_SIZE = 2;
 export const RETREAT_OFFER_REFRESHES = 2;
 /** Days without a town that eliminate a player (RULES_V2 5.9). */
 export const TOWNLESS_DAYS_LIMIT = 7;
-/** Artifacts a hero can hold: 11 worn plus a 12-slot backpack (RULES_V2 4.1). */
-export const ARTIFACT_CAPACITY = 23;
 
 export interface PlayerColourDef {
   id: string;
@@ -53,6 +52,8 @@ export interface HeroDef {
   /** Hero class id (src/data/hero.ts). */
   heroClass: string;
   faction: FactionId;
+  /** One specialty of RULES_V2 3.7 (src/data/classes.ts). */
+  specialty?: Specialty;
 }
 
 const CHIEFTAIN_NAMES = [
@@ -74,13 +75,42 @@ const CHIEFTAIN_NAMES = [
   "Imra",
 ];
 
+/**
+ * Chieftain specialties, cycling the five forms of RULES_V2 3.7 over the
+ * Lost World creatures and skills (an orchestrator call for the stand-in
+ * roster; bead bzc.11 brings the factions' named heroes).
+ */
+const CHIEFTAIN_SPECIALTIES: readonly Specialty[] = [
+  { kind: "creature", creature: "caveman" },
+  { kind: "skill", skill: "wayfaring", replaces: "trailcraft" },
+  { kind: "resource", resource: "gold" },
+  { kind: "command" },
+  { kind: "creature", creature: "raptor" },
+  { kind: "skill", skill: "bulwark", replaces: "onslaught" },
+  { kind: "resource", resource: "wood-ore" },
+  { kind: "creature", creature: "spitter" },
+  { kind: "skill", skill: "banner", replaces: "trailcraft" },
+  { kind: "resource", resource: "essence" },
+  { kind: "creature", creature: "triceratops" },
+  { kind: "skill", skill: "stewardship", replaces: "trailcraft" },
+  { kind: "command" },
+  { kind: "creature", creature: "shaman" },
+  { kind: "skill", skill: "lookout", replaces: "trailcraft" },
+  { kind: "creature", creature: "t-rex" },
+];
+
 /** Temporary roster: sixteen named Chieftains (enough for four players). */
-export const HERO_ROSTER: readonly HeroDef[] = CHIEFTAIN_NAMES.map((name) => ({
-  id: name.toLowerCase(),
-  name,
-  heroClass: "chieftain",
-  faction: "lost-world",
-}));
+export const HERO_ROSTER: readonly HeroDef[] = CHIEFTAIN_NAMES.map(
+  (name, i) => ({
+    id: name.toLowerCase(),
+    name,
+    heroClass: "chieftain",
+    faction: "lost-world",
+    specialty: CHIEFTAIN_SPECIALTIES[
+      i % CHIEFTAIN_SPECIALTIES.length
+    ] as Specialty,
+  }),
+);
 
 export function findHeroDef(id: string): HeroDef | undefined {
   return HERO_ROSTER.find((h) => h.id === id);

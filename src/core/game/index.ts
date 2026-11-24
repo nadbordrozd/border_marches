@@ -59,6 +59,7 @@ export {
   endDay,
   endTurn,
   startDay,
+  startHeroDay,
   dailyIncome,
   townIncome,
   growTown,
@@ -66,6 +67,9 @@ export {
 export {
   checkEliminations,
   dismissHero,
+  newHeroState,
+  startingPages,
+  startingSkills,
   heroByDef,
   hireHero,
   humanPlayer,
@@ -82,8 +86,52 @@ export {
   type GameAction,
   type PlayerController,
 } from "./controller.ts";
-export { upgradeV1State } from "./migrate.ts";
-export { chooseLevelUp, levelUpOffers, gainXp } from "./hero.ts";
+export {
+  upgradeV1State,
+  upgradeV2State,
+  upgradeV2Hero,
+  type V2State,
+} from "./migrate.ts";
+export {
+  chooseLevelUp,
+  eligibleFeats,
+  featOffers,
+  featWeight,
+  gainXp,
+  levelUpOffer,
+  patternStat,
+  pendingLevel,
+  satisfies,
+  skillBarred,
+  skillOffers,
+  skillWeight,
+  slotBarred,
+  type LevelUpOffer,
+  type SkillOffer,
+} from "./hero.ts";
+export * from "./effects.ts";
+export {
+  assemblable,
+  assemble,
+  backpackSlotsUsed,
+  canCarry,
+  destroyArtifact,
+  emptyWorn,
+  equip,
+  giveArtifact,
+  giveScroll,
+  handOver,
+  heroArtifacts,
+  liftCurse,
+  slotsOfKind,
+  slotsUsed,
+  takeSpoils,
+  unequip,
+  useConsumable,
+  wearError,
+  type ItemRef,
+} from "./artifacts.ts";
+export { heroBattleProfile, type HeroBattleProfile } from "./battle-profile.ts";
 export {
   applyBattleResult,
   battlePlayers,

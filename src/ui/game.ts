@@ -21,9 +21,12 @@ import {
   findPath,
   heroesOf,
   humanPlayer,
+  heroStats,
   inSight,
-  levelUpOffers,
+  levelUpOffer,
+  maxMana,
   moveHeroAlong,
+  sightRadius,
   SimpleAi,
   takeChest,
   townIncome,
@@ -44,7 +47,7 @@ import type {
 } from "../core/game/index.ts";
 import { createBattleResolver } from "../core/battle/resolver.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
-import { HERO_SIGHT, getHeroClass } from "../data/hero.ts";
+import { getHeroClass } from "../data/hero.ts";
 import { MAX_HEROES, playerColour } from "../data/players.ts";
 import { createMapView, ZOOM_STEPS } from "../render/map/map-view.ts";
 import type { MapFlag, MapView } from "../render/map/map-view.ts";
@@ -73,6 +76,12 @@ import {
   stackPhrase,
 } from "./format.ts";
 import { heroMapUnit, loadGameMapAssets } from "./hero-sprite.ts";
+import {
+  levelUpDialog,
+  meetingItems,
+  openHeroScreen,
+  type HeroScreenHost,
+} from "./hero-screen.ts";
 import { Minimap } from "./minimap.ts";
 import { browserStorage, deleteSave, saveGame } from "./save.ts";
 import { displayObjects, objectsSignature } from "./objects.ts";
@@ -403,10 +412,20 @@ class GameScreen {
       Math.min(100, ((hero.xp - prevXp) / (nextXp - prevXp)) * 100),
     );
     const mpPct = Math.max(0, Math.min(100, (hero.mp / hero.maxMp) * 100));
+    const st = heroStats(hero);
+    const statLine = el(
+      "div.gm-hero-statline",
+      `A ${st.attack}  D ${st.defense}  P ${st.power}  L ${st.lore}`,
+    );
+    statLine.title = `Attack ${st.attack}, Defense ${st.defense}, Power ${st.power}, Lore ${st.lore}. Mana ${hero.mana} / ${maxMana(hero)}. Open the hero screen (I) for details.`;
+    const sheet = button("Hero (I)", () => void this.heroScreen(hero.id));
+    sheet.classList.add("gm-hero-sheet-button");
+    if (hero.pendingLevelUps > 0) sheet.classList.add("gm-attention");
     const stats = el(
       "div.gm-hero-stats",
       el("div.gm-hero-name", `${hero.name}, ${cls.name} ${hero.level}`),
-      el("div", `Attack ${hero.attack}   Defense ${hero.defense}`),
+      statLine,
+      el("div.gm-dim", `Mana ${hero.mana} / ${maxMana(hero)}`),
       el("div.gm-meter", el("div.gm-meter-fill.gm-xp")),
       el("div.gm-meter-label", `XP ${hero.xp} / ${nextXp}`),
       el("div.gm-meter", el("div.gm-meter-fill.gm-mp")),
@@ -418,6 +437,7 @@ class GameScreen {
     this.heroPanel.append(
       el("div.gm-hero-top", portrait, stats),
       armyRow(hero.army, { small: true }),
+      sheet,
     );
     this.heroPanel.classList.add("gm-selected");
   }
@@ -568,6 +588,10 @@ class GameScreen {
       case "k":
       case "K":
         void this.kingdom();
+        break;
+      case "i":
+      case "I":
+        void this.heroScreen();
         break;
       case "t":
       case "T": {
@@ -788,18 +812,19 @@ class GameScreen {
     const { map } = this.state;
     const explored = [...(this.player()?.explored ?? [])];
     const remaining = this.plan?.path.steps.slice() ?? [];
+    const sight = sightRadius(hero);
     for (const [x, y] of cells) {
       for (
-        let yy = Math.max(0, y - HERO_SIGHT);
-        yy <= Math.min(map.height - 1, y + HERO_SIGHT);
+        let yy = Math.max(0, y - sight);
+        yy <= Math.min(map.height - 1, y + sight);
         yy++
       ) {
         for (
-          let xx = Math.max(0, x - HERO_SIGHT);
-          xx <= Math.min(map.width - 1, x + HERO_SIGHT);
+          let xx = Math.max(0, x - sight);
+          xx <= Math.min(map.width - 1, x + sight);
           xx++
         ) {
-          if (inSight(xx - x, yy - y, HERO_SIGHT))
+          if (inSight(xx - x, yy - y, sight))
             explored[yy * map.width + xx] = true;
         }
       }
@@ -954,36 +979,28 @@ class GameScreen {
         (h) => h.pendingLevelUps > 0,
       );
       if (hero === undefined) return;
-      const offers = levelUpOffers(this.state, hero.id);
-      if (offers.length === 0) return;
-      const level = hero.level - hero.pendingLevelUps + 1;
+      const offer = levelUpOffer(this.state, hero.id);
+      if (offer === null) return;
       playSound("level-up");
-      const choice = await modal({
-        title: `${hero.name}: level ${level}!`,
-        className: "gm-levelup",
-        body: el(
-          "div.gm-levelup-body",
-          img("portrait-dinosaur-chieftain", "gm-levelup-portrait", 2),
-          el(
-            "div",
-            el("p", `${hero.name} has gained a level. Choose a reward:`),
-            el(
-              "p.gm-dim",
-              `Attack ${hero.attack}, Defense ${hero.defense}. Each point adds to every stack in the army.`,
-            ),
-          ),
-        ),
-        buttons: offers.map((o, i) => ({
-          label:
-            o === "attack"
-              ? `+1 Attack (${hero.attack + 1})`
-              : `+1 Defense (${hero.defense + 1})`,
-          value: o,
-          primary: i === 0,
-        })),
-      });
-      this.run(chooseLevelUp(this.state, hero.id, choice));
+      const portrait = getHeroClass(hero.heroClass).portrait;
+      const choice = await levelUpDialog(this.state, hero, offer, portrait);
+      if (this.run(chooseLevelUp(this.state, hero.id, choice)) === null) return;
     }
+  }
+
+  /** The commands the hero screens need. */
+  private readonly heroHost: HeroScreenHost = {
+    state: () => this.state,
+    run: (result) => this.run(result) !== null,
+  };
+
+  /** The hero sheet: stats, skills, feats, worn items, backpack. */
+  private async heroScreen(heroId?: string): Promise<void> {
+    if (this.inputBlocked()) return;
+    const id = heroId ?? this.hero()?.id;
+    if (id === undefined) return;
+    await openHeroScreen(this.heroHost, id);
+    this.refresh();
   }
 
   /** The battle's title and one line, from the human's point of view. */
@@ -1281,11 +1298,12 @@ class GameScreen {
           "div.gm-hint",
           "Click a stack, then a slot: move, merge or swap. Shift-click the target to split in half. Each hero keeps at least one creature.",
         ),
+        meetingItems(this.heroHost, heroId, otherId, render),
       );
     };
     render();
     await modal<undefined>({
-      title: "Heroes meet",
+      title: "Heroes meet: trade creatures, artifacts and scrolls",
       body,
       className: "gm-meet-dialog",
       buttons: [{ label: "Done", value: undefined, primary: true }],

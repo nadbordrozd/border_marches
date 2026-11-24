@@ -188,6 +188,33 @@ describe("map starts", () => {
   });
 });
 
+describe("AI level-ups (RULES_V2 3.3)", () => {
+  it("asks the controller with the offer and takes the index it returns", () => {
+    const s = endTurn(twoPlayers());
+    const state = ok(s).state;
+    const h = state.heroes.find((x) => x.owner === 1)!;
+    h.defId = "nobody";
+    h.skills = [{ id: "onslaught", rank: 1 }];
+    h.xp = 400;
+    h.level = 2;
+    h.pendingLevelUps = 1;
+    const seen: string[] = [];
+    const picky: PlayerController = {
+      decide: () => ({ type: "end-turn" }),
+      levelUp(_state, heroId, offer) {
+        seen.push(`${heroId}:${offer.step}:${offer.level}`);
+        expect(offer.offers).toHaveLength(3);
+        return 1;
+      },
+    };
+    const r = aiStep(state, (p) => (p === 1 ? picky : null), winAll);
+    expect(seen).toEqual([`${h.id}:skill:2`]);
+    const after = r.state.heroes.find((x) => x.id === h.id)!;
+    expect(after.pendingLevelUps).toBe(0);
+    expect(after.skills.length).toBeGreaterThanOrEqual(1);
+  });
+});
+
 describe("v1 states", () => {
   it("upgrade into a one-player v2 game", () => {
     const v2 = newGame(generateMap(5, { size: "S" }));

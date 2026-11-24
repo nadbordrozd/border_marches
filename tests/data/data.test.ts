@@ -13,7 +13,7 @@ import {
   isRanged,
 } from "../../src/data/creatures.ts";
 import { MINES, STARTING_RESOURCES } from "../../src/data/economy.ts";
-import { CHIEFTAIN, XP_TABLE } from "../../src/data/hero.ts";
+import { CHIEFTAIN, xpCurve } from "../../src/data/hero.ts";
 import {
   HOLD_GARRISON,
   NEUTRAL_CREATURE_IDS,
@@ -190,7 +190,9 @@ describe("buildings and economy totals (ECONOMY.md section 6)", () => {
     });
     expect(MINES.wood.income).toBe(3);
     expect(MINES.gold.income).toBe(750);
-    expect(XP_TABLE).toHaveLength(13);
-    expect(XP_TABLE[12]).toBe(24320);
+    // RULES_V2 3.2: 100 x (L - 1) x (L + 2).
+    expect([2, 3, 10, 15, 20].map(xpCurve)).toEqual([
+      400, 1000, 10800, 23800, 41800,
+    ]);
   });
 });

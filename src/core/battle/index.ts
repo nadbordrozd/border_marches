@@ -126,6 +126,17 @@ export type {
   StackOutcome,
 } from "./auto.ts";
 export {
+  HERO_ABILITY_PREFIX,
+  HERO_START_EFFECT,
+  heroAbilityIds,
+  heroSpeedBonus,
+  selectStacks,
+  stackAbilityId,
+  startRuleRefs,
+  strikeAbilityId,
+} from "./hero-effects.ts";
+export type { HeroStackModifier, HeroStrikeModifier } from "./hero-effects.ts";
+export {
   battleStatsFromCreature,
   createBattleResolver,
   engineSetupFromGame,

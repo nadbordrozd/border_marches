@@ -30,7 +30,9 @@ import {
   success,
   townsOf,
 } from "./state.ts";
-import { HERO_SIGHT } from "../../data/hero.ts";
+import { isCursed } from "../../data/artifacts.ts";
+import { emptyWorn, giveArtifact } from "./artifacts.ts";
+import { maxMana, movementPoints, sightRadius } from "./effects.ts";
 import type {
   CommandResult,
   GameEvent,
@@ -125,7 +127,39 @@ function startingArmy(heroClass: string): HeroState["army"] {
   return army;
 }
 
-/** A level-1 hero record for a named hero. */
+/**
+ * Starting skills of a named hero: the class's two at rank 1, with a Skill
+ * specialty's skill at rank 2 in place of the one it replaces (3.7).
+ */
+export function startingSkills(def: HeroDef): HeroState["skills"] {
+  const cls = getHeroClass(def.heroClass);
+  const spec = def.specialty;
+  const skills = cls.startingSkills.map((id) => ({
+    id: id as string,
+    rank: 1,
+  }));
+  if (spec?.kind === "skill") {
+    const i = skills.findIndex((s) => s.id === spec.replaces);
+    const entry = { id: spec.skill as string, rank: 2 };
+    if (i >= 0) skills[i] = entry;
+    else if (!skills.some((s) => s.id === spec.skill)) skills.push(entry);
+    else skills.forEach((s) => s.id === spec.skill && (s.rank = 2));
+  }
+  return skills;
+}
+
+/** Starting pages: the class's page and a Spell specialty's (3.6, 3.7). */
+export function startingPages(def: HeroDef): string[] {
+  const cls = getHeroClass(def.heroClass);
+  const pages: string[] = [];
+  if (cls.startingPage !== undefined) pages.push(cls.startingPage);
+  if (def.specialty?.kind === "spell" && !pages.includes(def.specialty.spell)) {
+    pages.push(def.specialty.spell);
+  }
+  return pages;
+}
+
+/** A level-1 hero record for a named hero (RULES_V2 3.1 to 3.7). */
 export function newHeroState(
   id: string,
   def: HeroDef,
@@ -134,7 +168,8 @@ export function newHeroState(
   y: number,
 ): HeroState {
   const cls = getHeroClass(def.heroClass);
-  return {
+  const pages = startingPages(def);
+  const hero: HeroState = {
     id,
     defId: def.id,
     name: def.name,
@@ -142,17 +177,33 @@ export function newHeroState(
     heroClass: cls.id,
     x,
     y,
-    mp: cls.movement,
-    maxMp: cls.movement,
-    attack: cls.attack,
-    defense: cls.defense,
+    mp: 0,
+    maxMp: 0,
+    attack: cls.stats.attack,
+    defense: cls.stats.defense,
+    power: cls.stats.power,
+    lore: cls.stats.lore,
+    mana: 0,
     xp: 0,
     level: 1,
     pendingLevelUps: 0,
+    levelUpStep: "skill",
+    redraw: false,
+    skills: startingSkills(def),
+    feats: [],
+    pages,
+    scrolls: [],
+    worn: emptyWorn(),
+    backpack: [],
+    nextBattle: [],
+    mpDebt: 0,
     army: startingArmy(cls.id),
-    artifacts: [],
     alive: true,
   };
+  hero.maxMp = movementPoints(hero);
+  hero.mp = hero.maxMp;
+  hero.mana = maxMana(hero);
+  return hero;
 }
 
 /** The hero ids a player may hire now: offer slots, then retreated heroes. */
@@ -237,9 +288,11 @@ export function hireHero(
     hero.y = obj.y;
     hero.alive = true;
     hero.army = startingArmy(cls.id);
+    hero.maxMp = movementPoints(hero);
     hero.mp = hero.maxMp;
+    hero.mana = Math.max(hero.mana, maxMana(hero));
   }
-  revealDisc(next.map, p.explored, obj.x, obj.y, HERO_SIGHT);
+  revealDisc(next.map, p.explored, obj.x, obj.y, sightRadius(hero));
   return success(next, [
     { type: "hero-hired", heroId: hero.id, player: p.id, townId },
   ]);
@@ -254,7 +307,22 @@ export function sendToPool(state: GameState, hero: HeroState): void {
   hero.army = emptyArmy();
   hero.mp = 0;
   hero.pendingLevelUps = 0;
+  hero.levelUpStep = "skill";
+  hero.nextBattle = [];
+  liftCursesOnDefeat(hero);
   returnToPool(state, hero.defId);
+}
+
+/**
+ * A defeated hero's worn cursed items are lifted (RULES_V2 4.3), in place:
+ * into the backpack while there is room; the rest are lost.
+ */
+function liftCursesOnDefeat(hero: HeroState): void {
+  hero.worn.forEach((id, i) => {
+    if (id === null || !isCursed(id)) return;
+    hero.worn[i] = null;
+    giveArtifact(hero, id);
+  });
 }
 
 /**

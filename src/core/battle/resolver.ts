@@ -24,10 +24,16 @@ import type {
 } from "../game/battle.ts";
 import { runAutoBattle } from "./auto.ts";
 import type { AutoBattleOptions, BattleResult } from "./auto.ts";
+import {
+  heroAbilityIds,
+  heroSpeedBonus,
+  startRuleRefs,
+} from "./hero-effects.ts";
 import type {
   BattleArmySetup,
   BattleCreatureStats,
   BattleSetup,
+  BattleSide,
 } from "./types.ts";
 
 /** Engine stats for a creature record of src/data. */
@@ -46,26 +52,63 @@ export function battleStatsFromCreature(def: CreatureDef): BattleCreatureStats {
   };
 }
 
-function armyFromGame(side: GameBattleSide): BattleArmySetup {
+/** Hero ability ids of one game side (core/battle/hero-effects.ts). */
+function sideAbilities(side: GameBattleSide, which: BattleSide): string[] {
+  const p = side.hero?.profile;
+  return p === undefined ? [] : heroAbilityIds(which, p.strikes, p.stacks);
+}
+
+function armyFromGame(
+  side: GameBattleSide,
+  heroAbilities: readonly string[],
+): BattleArmySetup {
+  const profile = side.hero?.profile;
   return {
     hero: side.hero
-      ? { attack: side.hero.attack, defense: side.hero.defense }
+      ? {
+          attack: side.hero.attack,
+          defense: side.hero.defense,
+          ...(profile !== undefined ? { itemActs: profile.itemActs } : {}),
+        }
       : null,
     defenseBonus: side.defenseBonus,
-    stacks: side.stacks.map((s, slot) => ({
-      creature: battleStatsFromCreature(getCreature(s.creature)),
-      count: s.count,
-      slot,
-    })),
+    ...(profile !== undefined
+      ? {
+          morale: profile.morale,
+          luck: profile.luck,
+          startRules: startRuleRefs(profile.startRules),
+        }
+      : {}),
+    stacks: side.stacks.map((s, slot) => {
+      const base = battleStatsFromCreature(getCreature(s.creature));
+      const speed = heroSpeedBonus(profile?.stacks ?? [], s.creature);
+      return {
+        creature: {
+          ...base,
+          speed: base.speed + speed,
+          abilities: [...base.abilities, ...heroAbilities],
+        },
+        count: s.count,
+        slot,
+      };
+    }),
   };
 }
 
-/** The engine setup for a game battle (the hero is always the attacker). */
+/**
+ * The engine setup for a game battle (the hero is always the attacker).
+ * Both heroes' modifier abilities ride on every stack (each applies only
+ * for the side it names), so a stack that changes sides changes heroes.
+ */
 export function engineSetupFromGame(setup: GameBattleSetup): BattleSetup {
+  const abilities = [
+    ...sideAbilities(setup.attacker, "attacker"),
+    ...sideAbilities(setup.defender, "defender"),
+  ];
   return {
     seed: setup.seed,
-    attacker: armyFromGame(setup.attacker),
-    defender: armyFromGame(setup.defender),
+    attacker: armyFromGame(setup.attacker, abilities),
+    defender: armyFromGame(setup.defender, abilities),
   };
 }
 

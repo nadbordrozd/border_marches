@@ -146,7 +146,8 @@ describe("moveHeroAlong", () => {
     );
 
     const xp = ok(takeChest(moved.state, "hero-0", "chest", "xp")).state;
-    expect(xp.heroes[0]).toMatchObject({ xp: 750, level: 1 });
+    // 750 XP passes level 2 (400, RULES_V2 3.2).
+    expect(xp.heroes[0]).toMatchObject({ xp: 750, level: 2 });
     expect(errorOf(takeChest(s, "hero-0", "chest", "xp"))).toBe(
       "not-on-object",
     );

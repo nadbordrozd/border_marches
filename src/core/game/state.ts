@@ -7,7 +7,8 @@ import {
   TOWER_BASE_HARM,
   TOWER_HARM_PER_DWELLING,
 } from "../../data/factions.ts";
-import { ARMY_SLOTS, HERO_SIGHT, TOWN_SIGHT } from "../../data/hero.ts";
+import { ARMY_SLOTS, TOWN_SIGHT } from "../../data/hero.ts";
+import { sightRadius } from "./effects.ts";
 import { HOLD_DEFENSE_BONUS } from "../../data/neutrals.ts";
 import type { BuildingDef, BuildingId, CreatureId } from "../../data/types.ts";
 import type { GameMap, MapObject } from "../map/types.ts";
@@ -257,7 +258,7 @@ export function revealDisc(
 export function revealAll(state: GameState): void {
   for (const player of state.players) {
     for (const hero of heroesOf(state, player.id)) {
-      revealDisc(state.map, player.explored, hero.x, hero.y, HERO_SIGHT);
+      revealDisc(state.map, player.explored, hero.x, hero.y, sightRadius(hero));
     }
     for (const obj of state.map.objects) {
       if (obj.kind !== "town") continue;

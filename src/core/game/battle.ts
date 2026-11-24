@@ -24,11 +24,13 @@
  * garrison (a second, chained battle) or captures it.
  */
 import { getCreature } from "../../data/creatures.ts";
-import { ARTIFACT_CAPACITY } from "../../data/players.ts";
 import type { CreatureId } from "../../data/types.ts";
 import type { Terrain } from "../map/types.ts";
 import { deriveSeed } from "../rng.ts";
 import { captureTown, guardsAt, visitAtHero } from "./adventure.ts";
+import { heroArtifacts, spoilsEvent, takeSpoils } from "./artifacts.ts";
+import { heroBattleProfile, type HeroBattleProfile } from "./battle-profile.ts";
+import { effectsOf, heroStats } from "./effects.ts";
 import { gainXp } from "./hero.ts";
 import { checkEliminations, sendToPool, sendToTavern } from "./players.ts";
 import { splitNeutralStack } from "./progression.ts";
@@ -63,10 +65,17 @@ export interface BattleStack {
 /** The hero leading a side; its Attack and Defense add to every stack. */
 export interface BattleHero {
   id: string;
+  /** Effective Attack and Defense (skills and artifacts included). */
   attack: number;
   defense: number;
   /** Display name. */
   name?: string;
+  /**
+   * Everything else the hero brings (RULES_V2 2 to 4, 6): Strike and stack
+   * modifiers, battle-start rules, item acts, Morale, Luck, Power, mana,
+   * pages, switches, Command. Absent in old hand-built setups.
+   */
+  profile?: HeroBattleProfile;
 }
 
 export interface BattleSide {
@@ -156,11 +165,13 @@ function stacksOf(army: ArmySlots): { stacks: BattleStack[]; slots: number[] } {
 }
 
 function battleHero(hero: HeroState): BattleHero {
+  const stats = heroStats(hero);
   return {
     id: hero.id,
-    attack: hero.attack,
-    defense: hero.defense,
+    attack: stats.attack,
+    defense: stats.defense,
     name: hero.name,
+    profile: heroBattleProfile(hero),
   };
 }
 
@@ -289,24 +300,44 @@ function applySurvivors(
 }
 
 /**
- * The loser's artifacts move to the winner's, in order while there is
- * room; the rest are destroyed (RULES_V2 4.4). In place.
+ * The loser's artifacts and scrolls move to the winner's backpack and
+ * case, in slot order while there is room; the rest are destroyed
+ * (RULES_V2 4.4). In place.
  */
 function takeArtifacts(
   winner: HeroState,
   loser: HeroState,
   events: GameEvent[],
 ): void {
-  if (loser.artifacts.length === 0) return;
-  const room = Math.max(0, ARTIFACT_CAPACITY - winner.artifacts.length);
-  const moved = loser.artifacts.slice(0, room);
-  winner.artifacts = [...winner.artifacts, ...moved];
-  loser.artifacts = [];
-  events.push({
-    type: "artifacts-won",
-    heroId: winner.id,
-    fromHeroId: loser.id,
-    artifacts: moved,
+  if (heroArtifacts(loser).length === 0 && loser.scrolls.length === 0) return;
+  const moved = takeSpoils(winner, loser);
+  events.push(spoilsEvent(winner, loser, moved));
+}
+
+/**
+ * Field Surgeon (CONTENT_HEROES 2), in place: after a won battle each
+ * stack regains tenths of the creatures it lost, rounded down.
+ */
+function fieldSurgeon(
+  hero: HeroState,
+  stacks: readonly BattleStack[],
+  slots: readonly number[],
+  survivors: readonly number[],
+): void {
+  const tenths = effectsOf(hero, "field-surgeon").reduce(
+    (n, e) => n + e.effect.tenths,
+    0,
+  );
+  if (tenths <= 0) return;
+  slots.forEach((slot, i) => {
+    const before = stacks[i]?.count ?? 0;
+    const lost = before - (survivors[i] ?? 0);
+    const back = Math.floor((lost * tenths) / 10);
+    if (back <= 0) return;
+    const s = hero.army[slot];
+    const creature = stacks[i]?.creature;
+    if (creature === undefined) return;
+    hero.army[slot] = { creature, count: (s?.count ?? 0) + back };
   });
 }
 
@@ -393,6 +424,9 @@ export function applyBattleResult(
   const events: GameEvent[] = [];
 
   applySurvivors(hero.army, attackerSlots, result.attacker);
+  // One-battle consumables end with the battle, however it ends (6.1).
+  hero.nextBattle = [];
+  if (foe !== undefined) foe.nextBattle = [];
   if (battle.kind === "town") {
     const town = next.towns[battle.objectId];
     if (town !== undefined) {
@@ -408,6 +442,14 @@ export function applyBattleResult(
       if (monster !== undefined) monster.count = defenderLeft;
     }
     if (foe !== undefined) {
+      if (retreat === undefined) {
+        fieldSurgeon(
+          foe,
+          setup.defender.stacks,
+          defenderSlots,
+          result.defender,
+        );
+      }
       gainXp(foe, killedHp(setup.attacker.stacks, result.attacker), events);
     }
     heroLost(next, hero, foe, retreat === "attacker", events);
@@ -415,6 +457,9 @@ export function applyBattleResult(
     return success(next, events);
   }
 
+  if (retreat === undefined) {
+    fieldSurgeon(hero, setup.attacker.stacks, attackerSlots, result.attacker);
+  }
   gainXp(hero, killedHp(setup.defender.stacks, result.defender), events);
   if (battle.kind === "monster") {
     next.monsters = Object.fromEntries(

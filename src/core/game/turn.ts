@@ -23,10 +23,12 @@ import {
   success,
   townsOf,
 } from "./state.ts";
+import { heroIncome, movementPoints, regeneratedMana } from "./effects.ts";
 import type {
   CommandResult,
   GameEvent,
   GameState,
+  HeroState,
   TownState,
 } from "./types.ts";
 
@@ -42,9 +44,20 @@ export function townIncome(town: TownState): Resources {
   return out;
 }
 
-/** What the player will receive at the start of the next day. */
-export function dailyIncome(state: GameState, player: number): Resources {
+/**
+ * What the player receives at the start of `day` (default: the state's
+ * day): towns, mines and its heroes on the map (skills, artifacts and
+ * Resource specialties, RULES_V2 3.7).
+ */
+export function dailyIncome(
+  state: GameState,
+  player: number,
+  day = state.day,
+): Resources {
   let out = emptyResources();
+  for (const hero of heroesOf(state, player)) {
+    out = addResources(out, heroIncome(hero, day));
+  }
   for (const town of Object.values(state.towns)) {
     if (town.owner === player) out = addResources(out, townIncome(town));
   }
@@ -53,6 +66,18 @@ export function dailyIncome(state: GameState, player: number): Resources {
       out[mine.resource] += MINES[mine.resource].income;
   }
   return out;
+}
+
+/**
+ * A hero's day start, in place (RULES_V2 2.3, 3.9): movement points are
+ * computed for the day (minus any Borrowed Day debt, then cleared) and
+ * mana returns.
+ */
+export function startHeroDay(hero: HeroState): void {
+  hero.maxMp = movementPoints(hero);
+  hero.mpDebt = 0;
+  hero.mp = hero.maxMp;
+  hero.mana = regeneratedMana(hero);
 }
 
 /** Adds one week of growth to every built dwelling of a town, in place. */
@@ -103,7 +128,7 @@ export function startDay(state: GameState, events: GameEvent[]): void {
     const income = dailyIncome(state, player.id);
     player.resources = addResources(player.resources, income);
     events.push({ type: "income", player: player.id, amounts: income });
-    for (const hero of heroesOf(state, player.id)) hero.mp = hero.maxMp;
+    for (const hero of heroesOf(state, player.id)) startHeroDay(hero);
     for (const town of townsOf(state, player.id)) town.builtToday = false;
   }
   // Neutral towns never build; keep their flag clear too.

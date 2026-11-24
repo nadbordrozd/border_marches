@@ -10,6 +10,7 @@
 
 import { ABILITIES } from "../../data/abilities.ts";
 import {
+  HERO_ABILITY_PREFIX,
   ability as abilityDef,
   conditionKind,
   defendedDefense,
@@ -156,7 +157,8 @@ export function stackInfo(state: BattleState, stack: BattleStack): StackInfo {
   if (stack.waitedThisRound) statuses.push("Waited this round");
   if (!isAlive(stack)) statuses.push("Destroyed");
 
-  const abilityId = c.abilities[0];
+  // The creature's own ability: hero modifiers ride along as abilities.
+  const abilityId = c.abilities.find((a) => !a.startsWith(HERO_ABILITY_PREFIX));
   const ability =
     abilityId === undefined
       ? null
