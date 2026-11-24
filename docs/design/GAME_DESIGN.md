@@ -214,6 +214,19 @@ type that gives a count between about 5 and 50. In battle a neutral stack of
 count n is deployed as min(n, 3) stacks of sizes as equal as possible (larger
 first).
 
+**Guards follow the prize (bead bzc.3, v0.2 generator).** Every object type
+has a prize value (gold equivalent) in one shared table,
+`src/data/mapObjects.ts`; a new object type is a new row there. An object
+worth at least its zone's free value gets a guard (start zones are generous:
+a sawmill and a chest near home are free). Target guard FV = value x 0.75 x a
+ring factor (0.8, 1.0, 1.2, 1.4 for rings 0-3) x a 12% jitter, so the fight is
+roughly in proportion to the prize; the creature choice is as above. A guard
+in the only gap of a dead-end room holds every prize inside and is sized from
+their sum. A guard in a pass between zones holds the zone it opens (value by
+that zone's tier; the Hold's zone highest); a loop between two middle zones of
+the same tier is sometimes left open. Neutral towns (and the open starts of
+players not in the game) are garrisoned like a 9000-value prize.
+
 ### 8.4 The Warlord's Hold garrison
 
 The strongest force on the map: five stacks, defenders of a fortified town

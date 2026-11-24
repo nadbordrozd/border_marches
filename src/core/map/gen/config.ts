@@ -3,16 +3,42 @@
  *
  * Distances are in cells unless the name says "cost" (movement points, as in
  * GAME_DESIGN.md section 7.1). Shares are fractions of the relevant area.
+ * Object types, their values and guard strength live in the shared table in
+ * src/data/mapObjects.ts.
  */
-import type { ResourceId, Terrain } from "../types.ts";
+import { MAP_OBJECT_ROWS } from "../../../data/mapObjects.ts";
+import type { MapObjectRow, MapZoneKind } from "../../../data/mapObjects.ts";
+import type { Terrain } from "../types.ts";
 
 export type MapSize = "S" | "M" | "L";
+
+/** Number of player starts a map can have. */
+export type PlayerCount = 2 | 3 | 4;
+
+/** One line of the start kit: what every player finds near home. */
+export interface StartKitItem {
+  /** Row id in src/data/mapObjects.ts. */
+  row: string;
+  count: number;
+  /** Movement-cost window from the player's town, in days. */
+  minDays: number;
+  maxDays: number;
+  /** May also go into a zone next to the start zone. */
+  nextZone?: boolean;
+}
 
 export interface GenConfig {
   /** Side length per map size (maps are square). */
   sizes: Record<MapSize, number>;
-  /** Number of middle zones per size (inclusive range). */
-  middleZones: Record<MapSize, readonly [number, number]>;
+  /** Player starts per size when the caller does not say. */
+  players: Record<MapSize, PlayerCount>;
+  /**
+   * Middle zones per size and player count (inclusive range), the neutral
+   * town zones among them; the Hold's zone in the centre comes on top.
+   */
+  middleZones: Record<MapSize, Record<PlayerCount, readonly [number, number]>>;
+  /** Neutral towns per size (each in its own middle zone). */
+  neutralTowns: Record<MapSize, readonly [number, number]>;
 
   zones: {
     /** Domain warp of the zone Voronoi, as a fraction of the zone radius. */
@@ -28,15 +54,47 @@ export interface GenConfig {
     fineWarpScale: number;
     /** Lloyd relaxation rounds for the middle-zone seeds. */
     relax: number;
-    /** Chance of one extra connection (a loop) beyond the spanning tree. */
-    loopChance: Record<MapSize, number>;
+    /** Extra connections (loops) beyond the spanning tree, per size. */
+    loops: Record<MapSize, readonly [number, number]>;
     /** Borders shorter than this many cell edges never get a connection. */
     minConnectBorder: number;
+    /** Size factor of a start zone's seed (above 1 = a larger zone). */
+    startWeight: number;
+    /** Size factor of the Hold's zone. */
+    holdWeight: number;
+  };
+
+  /**
+   * Rooms: each zone is cut into rooms by walls of forest or rock with
+   * unguarded gaps, so paths wind through valleys, dead ends and pockets
+   * instead of one open field (bead bzc.3).
+   */
+  rooms: {
+    /** Target open cells per room (inclusive range, drawn per zone). */
+    area: readonly [number, number];
+    /** Most rooms in one zone. */
+    maxPerZone: number;
+    /** Feature size (cells) of the noise that bends room walls. */
+    warpScale: number;
+    /** How strongly that noise bends them (0 = plain Voronoi). */
+    warpAmount: number;
+    /** Chance that a wall outside the spanning tree gets a gap anyway. */
+    loopChance: number;
+    /** Gap width in cells (inclusive range). */
+    gapWidth: readonly [number, number];
+    /** Wall depth beyond the one-cell seal, at most (noise decides). */
+    wallExtra: number;
+    /** Feature size of the wall thickness noise. */
+    thicknessScale: number;
   };
 
   terrain: {
-    start: { main: Terrain; secondary: readonly Terrain[] };
-    enemy: { main: readonly Terrain[] };
+    /**
+     * Start zone main terrain by player (index = player); player 0 is the
+     * Lost World start of today's single-player game.
+     */
+    start: { main: readonly Terrain[] };
+    hold: { main: readonly Terrain[] };
     middle: { main: readonly Terrain[] };
     /** Share of a zone covered by its secondary terrain. */
     secondaryShare: readonly [number, number];
@@ -161,21 +219,38 @@ export interface GenConfig {
     town: { w: number; h: number };
     /** Free cells kept around a town footprint. */
     townClearance: number;
-    /** Minimum Chebyshev spacing between objects. */
+    /**
+     * The object table placed from (default: MAP_OBJECT_ROWS of
+     * src/data/mapObjects.ts). A new object type is a new row.
+     */
+    table: readonly MapObjectRow[];
+    /** Minimum Chebyshev gap between objects (strict, then relaxed). */
     spacing: number;
-    /** Mines per middle zone (inclusive range, essence springs excluded). */
-    middleMines: readonly [number, number];
-    /** Essence springs on the whole map (inclusive range). */
-    essenceSprings: readonly [number, number];
-    /** Pickups per 100 open cells outside the start region's quota. */
-    pickupDensity: number;
-    /** Weights of pickup kinds outside the start region. */
-    pickupWeights: Record<ResourceId | "chest", number>;
-    /** Pickup amounts (inclusive ranges); gold in steps of 100. */
-    amounts: Record<ResourceId, readonly [number, number]>;
-    chest: { gold: number; xp: number };
-    /** Start-region (within 1 day) pickup quotas (inclusive ranges). */
-    startPickups: Record<ResourceId | "chest", readonly [number, number]>;
+    /** What every player finds near home (identical for every player). */
+    startKit: readonly StartKitItem[];
+    /**
+     * Random fill on top of the kit: visitable objects per 100 open cells,
+     * by zone kind. Start zones are filled once and copied to every start.
+     */
+    density: Record<MapZoneKind, number>;
+    /** Pockets (dead-end rooms) get a guard at the gap and this many prizes. */
+    pocketPrizes: readonly [number, number];
+    /** Smallest pocket (open cells) worth a guard at its gap. */
+    pocketMin: number;
+    /** Guards stay this far (Chebyshev) from a town entrance. */
+    guardTownClearance: number;
+  };
+
+  guards: {
+    /** Random factor on a guard's fight value (plus or minus). */
+    jitter: number;
+    /** Smallest guard fight value. */
+    minFightValue: number;
+    /**
+     * Chance that a passage between two zones of the same tier (a loop
+     * between middle zones) stays unguarded.
+     */
+    openPassChance: number;
   };
 
   movement: {
@@ -200,7 +275,13 @@ export interface GenConfig {
 
 export const DEFAULT_GEN_CONFIG: GenConfig = {
   sizes: { S: 36, M: 48, L: 72 },
-  middleZones: { S: [2, 2], M: [2, 3], L: [3, 4] },
+  players: { S: 2, M: 3, L: 4 },
+  middleZones: {
+    S: { 2: [2, 2], 3: [1, 2], 4: [1, 1] },
+    M: { 2: [4, 4], 3: [4, 4], 4: [3, 4] },
+    L: { 2: [8, 9], 3: [8, 8], 4: [7, 8] },
+  },
+  neutralTowns: { S: [1, 1], M: [1, 2], L: [2, 3] },
 
   zones: {
     warp: 0.42,
@@ -208,13 +289,26 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     fineWarp: 1.5,
     fineWarpScale: 3,
     relax: 2,
-    loopChance: { S: 0, M: 0.35, L: 0.6 },
+    loops: { S: [1, 1], M: [1, 2], L: [3, 4] },
     minConnectBorder: 5,
+    startWeight: 1.18,
+    holdWeight: 0.95,
+  },
+
+  rooms: {
+    area: [42, 62],
+    maxPerZone: 7,
+    warpScale: 5,
+    warpAmount: 1.4,
+    loopChance: 0.18,
+    gapWidth: [1, 3],
+    wallExtra: 2.6,
+    thicknessScale: 4,
   },
 
   terrain: {
-    start: { main: "jungle", secondary: ["grass"] },
-    enemy: { main: ["steppe", "badlands"] },
+    start: { main: ["jungle", "grass", "steppe", "wasteland"] },
+    hold: { main: ["badlands", "steppe"] },
     middle: { main: ["grass", "steppe", "badlands", "wasteland"] },
     secondaryShare: [0.22, 0.34],
     patchScale: 7,
@@ -267,7 +361,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
   },
 
   clusters: {
-    density: [0.12, 0.17],
+    density: [0.12, 0.16],
     size: [2, 12],
     mountainShare: {
       grass: 0.35,
@@ -285,7 +379,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     gap: 2,
     lonePeaks: 5,
     townClearance: 3,
-    pocketFill: 14,
+    pocketFill: 24,
     deep: {
       share: {
         grass: 0,
@@ -303,25 +397,37 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
   objects: {
     town: { w: 3, h: 2 },
     townClearance: 2,
-    spacing: 3,
-    middleMines: [2, 3],
-    essenceSprings: [2, 3],
-    pickupDensity: 1.6,
-    pickupWeights: { wood: 3, ore: 2, gold: 3, essence: 1, chest: 1 },
-    amounts: {
-      wood: [5, 10],
-      ore: [3, 6],
-      essence: [2, 4],
-      gold: [300, 800],
-    },
-    chest: { gold: 1000, xp: 750 },
-    startPickups: {
-      wood: [3, 4],
-      ore: [1, 2],
-      essence: [1, 1],
-      gold: [2, 3],
-      chest: [1, 1],
-    },
+    table: MAP_OBJECT_ROWS,
+    spacing: 2,
+    startKit: [
+      { row: "mine-wood", count: 1, minDays: 0.2, maxDays: 0.85 },
+      { row: "mine-wood", count: 1, minDays: 0.3, maxDays: 2 },
+      { row: "mine-ore", count: 1, minDays: 0.2, maxDays: 0.85 },
+      { row: "mine-ore", count: 1, minDays: 1, maxDays: 2.5, nextZone: true },
+      {
+        row: "mine-essence",
+        count: 1,
+        minDays: 0.9,
+        maxDays: 1.8,
+        nextZone: true,
+      },
+      { row: "mine-gold", count: 1, minDays: 1, maxDays: 3, nextZone: true },
+      { row: "pickup-wood", count: 3, minDays: 0, maxDays: 0.9 },
+      { row: "pickup-ore", count: 1, minDays: 0, maxDays: 0.9 },
+      { row: "pickup-essence", count: 1, minDays: 0, maxDays: 0.9 },
+      { row: "pickup-gold", count: 2, minDays: 0, maxDays: 0.9 },
+      { row: "chest", count: 1, minDays: 0, maxDays: 0.9 },
+    ],
+    density: { start: 4, middle: 6.5, town: 5.5, hold: 6.5 },
+    pocketPrizes: [2, 3],
+    pocketMin: 8,
+    guardTownClearance: 4,
+  },
+
+  guards: {
+    jitter: 0.12,
+    minFightValue: 300,
+    openPassChance: 0.35,
   },
 
   movement: {

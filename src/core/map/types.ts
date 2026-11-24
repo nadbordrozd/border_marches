@@ -82,12 +82,34 @@ export interface MapObject {
 
 /** Expected `data` keys per kind (documentation and casting aid). */
 export interface MapObjectData {
-  /** `owner` is a player index, or null when neutral. */
-  town: { faction: string; owner: number | null };
-  mine: { resource: ResourceId };
-  pickup: { resource: ResourceId; amount: number };
-  /** `creature` is a creature id from src/data. */
-  monster: { creature: string; count: number };
+  /**
+   * `owner` is a player index, or null when neutral. A neutral town with
+   * `hold: false` is an ordinary town defended by `garrison`; otherwise it
+   * is the Warlord's Hold. `start` marks a player start (owned, or open when
+   * that player is not in the game).
+   */
+  town: {
+    faction: string;
+    owner: number | null;
+    hold?: boolean;
+    start?: number;
+    garrison?: Array<{ creature: string; count: number }>;
+  };
+  /** `value`: the prize value from src/data/mapObjects.ts. */
+  mine: { resource: ResourceId; value?: number };
+  pickup: { resource: ResourceId; amount: number; value?: number };
+  /**
+   * `creature` is a creature id from src/data. Generated guards also carry
+   * `value` (what they guard), `guards` (object ids behind them), `fv` and
+   * `ring`, and `pass: true` when they hold a passage between zones.
+   */
+  monster: {
+    creature: string;
+    count: number;
+    value?: number;
+    guards?: string[];
+    pass?: boolean;
+  };
   /** The player who starts here. */
   "hero-start": { player: number };
 }

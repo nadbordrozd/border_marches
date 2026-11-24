@@ -165,7 +165,20 @@ describe("map starts", () => {
     expect(Object.values(s.towns).filter((t) => t.owner !== null)).toHaveLength(
       n,
     );
-    expect(Object.values(s.towns).some((t) => t.isHold)).toBe(false);
+    // The generator's own starts (bead bzc.3) come first: each player takes
+    // the town marked with its start slot. Only when the map has too few
+    // starts does a derived one take the Warlord's Hold.
+    const gen = generateMap(11, { size });
+    const slots = gen.objects.filter(
+      (o) => o.kind === "town" && typeof o.data["start"] === "number",
+    );
+    for (const t of slots) {
+      const p = t.data["start"] as number;
+      if (p < n) expect(s.towns[t.id]?.owner, t.id).toBe(p);
+    }
+    expect(Object.values(s.towns).some((t) => t.isHold)).toBe(
+      slots.length >= n,
+    );
   });
 
   it("keeps the MVP one-player game and its Hold goal", () => {

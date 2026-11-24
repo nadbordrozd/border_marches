@@ -24,7 +24,7 @@
  * resolves pockets after it.
  */
 import { at, N8 } from "./grid.ts";
-import { O, T, isOpen, stageRng } from "./state.ts";
+import { O, T, corridorMask, isOpen, stageRng, townCells } from "./state.ts";
 import type { GenState } from "./state.ts";
 import { inMountainBlock } from "./clusters.ts";
 
@@ -105,15 +105,14 @@ export function wobbleEdges(st: GenState): number {
   const { g, cfg } = st;
   const maxRun = cfg.wobble.maxRun;
   const rng = stageRng(st, "wobble");
-  const towns = [st.townAt.start, st.townAt.enemy].filter((t) => t >= 0);
-  const corridor = new Uint8Array(g.n);
-  for (const p of st.passes) for (const c of p.cells) corridor[c] = 1;
-  const mountain = (i: number): boolean => at(st.obstacle, i) === O.mountain;
+  const towns = townCells(st);
+  const corridor = corridorMask(st);
+  const mountain = (i: number): boolean => (st.obstacle[i] ?? 0) === O.mountain;
   const quiet = (j: number): boolean =>
-    at(corridor, j) === 0 &&
-    at(st.keepOpen, j) === 0 &&
-    at(st.occupied, j) === 0 &&
-    at(st.objBlocked, j) === 0 &&
+    (corridor[j] ?? 0) === 0 &&
+    (st.keepOpen[j] ?? 0) === 0 &&
+    (st.occupied[j] ?? 0) === 0 &&
+    (st.objBlocked[j] ?? 0) === 0 &&
     towns.every((t) => g.cheb(t, j) > cfg.clusters.townClearance + 1);
   let changed = 0;
 
@@ -122,7 +121,7 @@ export function wobbleEdges(st: GenState): number {
     const runs = straightRuns(st, maxRun, (i, j) =>
       mountain(i) && isOpen(st, j)
         ? "m"
-        : mountain(i) && at(st.obstacle, j) === O.forest
+        : mountain(i) && (st.obstacle[j] ?? 0) === O.forest
           ? "f"
           : null,
     );
@@ -132,10 +131,10 @@ export function wobbleEdges(st: GenState): number {
         const outer = [run.outer[s], run.outer[s + 1]] as [number, number];
         // Against a forest belt both features trade rock for trees: both
         // block, so neither seals nor opens anything.
-        const wood = outer.every((j) => at(st.obstacle, j) === O.forest);
+        const wood = outer.every((j) => (st.obstacle[j] ?? 0) === O.forest);
         const tryBump = (): boolean => {
           if (wood) {
-            if (!outer.every((j) => at(st.occupied, j) === 0)) return false;
+            if (!outer.every((j) => (st.occupied[j] ?? 0) === 0)) return false;
             for (const j of outer) st.obstacle[j] = O.mountain;
             return true;
           }
@@ -157,7 +156,7 @@ export function wobbleEdges(st: GenState): number {
         };
         const tryNotch = (): boolean => {
           if (!wood) {
-            if (!inner.every((i) => at(st.spine, i) === 0)) return false;
+            if (!inner.every((i) => (st.spine[i] ?? 0) === 0)) return false;
             if (!outer.every((j) => isOpen(st, j))) return false;
           }
           for (const i of inner) st.obstacle[i] = wood ? O.forest : O.none;
@@ -178,17 +177,18 @@ export function wobbleEdges(st: GenState): number {
 
     // 2. Ground edges on open land (under rock they do not show).
     const land = (i: number): boolean =>
-      at(st.terrain, i) !== T.water && !mountain(i);
+      (st.terrain[i] ?? 0) !== T.water && !mountain(i);
     const groundRuns = straightRuns(st, maxRun, (i, j) =>
-      land(i) && land(j) && at(st.terrain, i) !== at(st.terrain, j)
-        ? `${at(st.terrain, i)}>${at(st.terrain, j)}`
+      land(i) && land(j) && (st.terrain[i] ?? 0) !== (st.terrain[j] ?? 0)
+        ? `${st.terrain[i] ?? 0}>${st.terrain[j] ?? 0}`
         : null,
     );
     for (const run of groundRuns) {
       const own = at(st.terrain, run.inner[0] as number);
       for (const s of breaks(run.inner.length, maxRun, () => rng.next())) {
         const outer = [run.outer[s], run.outer[s + 1]] as number[];
-        if (!outer.every((j) => land(j) && at(st.terrain, j) !== own)) continue;
+        if (!outer.every((j) => land(j) && (st.terrain[j] ?? 0) !== own))
+          continue;
         for (const j of outer) st.terrain[j] = own;
         changed++;
       }

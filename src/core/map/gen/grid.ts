@@ -59,20 +59,37 @@ export class Grid {
     return x >= 0 && y >= 0 && x < this.w && y < this.h;
   }
 
-  /** In-bounds neighbour indices of i using the given offsets. */
+  private cache = new Map<
+    ReadonlyArray<readonly [number, number]>,
+    ReadonlyArray<readonly number[]>
+  >();
+
+  /**
+   * In-bounds neighbour indices of i using the given offsets. The lists are
+   * built once per offset table and shared: callers must not modify them.
+   */
   around(
     i: number,
     offsets: ReadonlyArray<readonly [number, number]> = N8,
-  ): number[] {
-    const x = this.x(i);
-    const y = this.y(i);
-    const out: number[] = [];
-    for (const [dx, dy] of offsets) {
-      const nx = x + dx;
-      const ny = y + dy;
-      if (this.inside(nx, ny)) out.push(this.idx(nx, ny));
+  ): readonly number[] {
+    let lists = this.cache.get(offsets);
+    if (!lists) {
+      const built: number[][] = [];
+      for (let k = 0; k < this.n; k++) {
+        const x = this.x(k);
+        const y = this.y(k);
+        const out: number[] = [];
+        for (const [dx, dy] of offsets) {
+          const nx = x + dx;
+          const ny = y + dy;
+          if (this.inside(nx, ny)) out.push(this.idx(nx, ny));
+        }
+        built.push(out);
+      }
+      lists = built;
+      this.cache.set(offsets, lists);
     }
-    return out;
+    return lists[i] ?? [];
   }
 
   /** Chebyshev distance between two cells. */

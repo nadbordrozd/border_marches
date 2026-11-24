@@ -4,6 +4,7 @@
 // renderer (?view=map), no fog, no UI, in muted headless Chrome.
 //
 //   npm run map:poster -- --seed 123 --size M --out poster.png [--port 6291]
+//                         [--players 2|3|4]
 //
 // Starts its own Vite dev server on --port and refuses a port already in use,
 // so the picture always comes from this checkout.
@@ -30,12 +31,15 @@ function parseArgs(argv) {
     const name = argv[i]?.replace(/^--/, "");
     const value = argv[i + 1];
     if (value === undefined) throw new Error(`--${name} wants a value`);
-    if (name === "seed" || name === "port") out[name] = Number(value);
+    if (name === "seed" || name === "port" || name === "players")
+      out[name] = Number(value);
     else if (name === "size" || name === "out") out[name] = value;
     else throw new Error(`unknown option --${name}`);
   }
   if (!Number.isInteger(out.seed) || out.seed < 0)
     throw new Error("--seed wants a whole number");
+  if (out.players !== undefined && ![2, 3, 4].includes(out.players))
+    throw new Error("--players wants 2, 3 or 4");
   if (!["S", "M", "L"].includes(out.size))
     throw new Error("--size wants S, M or L");
   if (out.out === undefined) throw new Error("--out wants a file path");
@@ -103,7 +107,7 @@ async function evaluate(page, expression) {
 }
 
 async function main() {
-  const { seed, size, out, port } = parseArgs(process.argv.slice(2));
+  const { seed, size, out, port, players } = parseArgs(process.argv.slice(2));
   if (!(await portFree(port)))
     throw new Error(`port ${port} is in use: free it or pass --port`);
   const server = spawn(
@@ -156,6 +160,7 @@ async function main() {
       fog: "0",
       hud: "0",
       path: "0",
+      ...(players !== undefined ? { players: String(players) } : {}),
     });
     await page.send("Page.navigate", {
       url: `http://127.0.0.1:${port}/?${query}`,

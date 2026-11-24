@@ -19,15 +19,15 @@ export function paintTerrain(st: GenState): void {
   );
   const byZone: number[][] = st.zones.map(() => []);
   for (let i = 0; i < g.n; i++) {
-    if (at(st.terrain, i) === T.water) continue;
-    byZone[at(st.zone, i)]?.push(i);
+    if ((st.terrain[i] ?? 0) === T.water) continue;
+    byZone[st.zone[i] ?? 0]?.push(i);
   }
   for (const z of st.zones) {
     const cells = byZone[z.id] ?? [];
     const share = rng.float(...cfg.terrain.secondaryShare);
     const cut = quantile(patch, cells, 1 - share);
     for (const i of cells) {
-      st.terrain[i] = at(patch, i) > cut ? T[z.secondary] : T[z.main];
+      st.terrain[i] = (patch[i] ?? 0) > cut ? T[z.secondary] : T[z.main];
     }
   }
   smoothTerrain(st, cfg.terrain.smoothRounds);
@@ -41,18 +41,18 @@ export function smoothTerrain(st: GenState, rounds: number): void {
   for (let r = 0; r < rounds; r++) {
     const next = st.terrain.slice();
     for (let i = 0; i < g.n; i++) {
-      const own = at(st.terrain, i);
+      const own = st.terrain[i] ?? 0;
       if (own === T.water) continue;
       tally.fill(0);
       for (const j of g.around(i, N8)) {
-        const t = at(st.terrain, j);
-        tally[t] = at(tally, t) + 1;
+        const t = st.terrain[j] ?? 0;
+        tally[t] = (tally[t] ?? 0) + 1;
       }
       let best = own;
       for (let t = 0; t < T.water; t++) {
-        if (at(tally, t) > at(tally, best)) best = t;
+        if ((tally[t] ?? 0) > (tally[best] ?? 0)) best = t;
       }
-      if (best !== own && at(tally, best) >= 5 && at(tally, own) <= 3) {
+      if (best !== own && (tally[best] ?? 0) >= 5 && (tally[own] ?? 0) <= 3) {
         next[i] = best;
       }
     }
@@ -71,8 +71,8 @@ export function mergeSmallRegions(st: GenState): void {
     const sizes: number[] = [];
     const members: number[][] = [];
     for (let s = 0; s < g.n; s++) {
-      if (at(label, s) !== -1 || at(st.terrain, s) === T.water) continue;
-      const t = at(st.terrain, s);
+      if ((label[s] ?? 0) !== -1 || (st.terrain[s] ?? 0) === T.water) continue;
+      const t = st.terrain[s] ?? 0;
       const id = sizes.length;
       const stack = [s];
       const list: number[] = [];
@@ -81,7 +81,7 @@ export function mergeSmallRegions(st: GenState): void {
         const i = stack.pop() as number;
         list.push(i);
         for (const j of g.around(i, N4)) {
-          if (at(label, j) === -1 && at(st.terrain, j) === t) {
+          if ((label[j] ?? 0) === -1 && (st.terrain[j] ?? 0) === t) {
             label[j] = id;
             stack.push(j);
           }
@@ -96,14 +96,17 @@ export function mergeSmallRegions(st: GenState): void {
       tally.fill(0);
       for (const i of list) {
         for (const j of g.around(i, N4)) {
-          if (at(label, j) === id) continue;
-          const t = at(st.terrain, j);
-          if (t !== T.water && t !== own) tally[t] = at(tally, t) + 1;
+          if ((label[j] ?? 0) === id) continue;
+          const t = st.terrain[j] ?? 0;
+          if (t !== T.water && t !== own) tally[t] = (tally[t] ?? 0) + 1;
         }
       }
       let best = -1;
       for (let t = 0; t < T.water; t++) {
-        if (at(tally, t) > 0 && (best < 0 || at(tally, t) > at(tally, best))) {
+        if (
+          (tally[t] ?? 0) > 0 &&
+          (best < 0 || (tally[t] ?? 0) > (tally[best] ?? 0))
+        ) {
           best = t;
         }
       }

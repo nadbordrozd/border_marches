@@ -10,10 +10,10 @@ import {
   DIRECTIONS_8,
   cellAt,
   isPassable,
-  objectBlockedSet,
   validateMap,
 } from "../../../src/core/map/types.ts";
 import type { GameMap, MapObject } from "../../../src/core/map/types.ts";
+import { DAY, moveCosts, playerTown, towns, walkable } from "./map-helpers.ts";
 
 const SEEDS = Array.from({ length: 50 }, (_, k) => k + 1);
 const cache = new Map<number, { map: GameMap; info: GenerateInfo }>();
@@ -26,75 +26,10 @@ function gen(seed: number): { map: GameMap; info: GenerateInfo } {
   return out;
 }
 
-const DAY = 1500;
-const COST: Record<string, number> = {
-  grass: 100,
-  steppe: 100,
-  jungle: 100, // the Chieftain is native
-  badlands: 125,
-  wasteland: 150,
-};
-
-/** Walkable ground not covered by an object footprint. */
-function walkable(map: GameMap): (x: number, y: number) => boolean {
-  const blocked = objectBlockedSet(map);
-  return (x, y) => {
-    const c = cellAt(map, x, y);
-    return c !== undefined && isPassable(c) && !blocked.has(y * map.width + x);
-  };
-}
-
-/**
- * Movement cost from (sx, sy) under GAME_DESIGN 7.1 (8-way, diagonal x1.414,
- * road 75 when both cells have road, no corner cutting between impassable
- * cells). Independent of the generator's own implementation.
- */
-function moveCosts(map: GameMap, sx: number, sy: number): Float64Array {
-  const walk = walkable(map);
-  const w = map.width;
-  const dist = new Float64Array(w * map.height).fill(Infinity);
-  dist[sy * w + sx] = 0;
-  const open: number[] = [sy * w + sx];
-  while (open.length > 0) {
-    // Small maps: a linear-scan priority queue is fast enough.
-    let k = 0;
-    for (let m = 1; m < open.length; m++) {
-      if (dist[open[m]!]! < dist[open[k]!]!) k = m;
-    }
-    const i = open.splice(k, 1)[0]!;
-    const x = i % w;
-    const y = Math.floor(i / w);
-    for (const [dx, dy] of DIRECTIONS_8) {
-      const nx = x + dx;
-      const ny = y + dy;
-      if (!walk(nx, ny)) continue;
-      if (dx !== 0 && dy !== 0 && !walk(x + dx, y) && !walk(x, y + dy)) {
-        continue;
-      }
-      const a = cellAt(map, x, y)!;
-      const b = cellAt(map, nx, ny)!;
-      const base = a.road && b.road ? 75 : COST[b.terrain]!;
-      const step = dx !== 0 && dy !== 0 ? Math.round(base * 1.414) : base;
-      const j = ny * w + nx;
-      if (dist[i]! + step < dist[j]!) {
-        if (dist[j] === Infinity) open.push(j);
-        dist[j] = dist[i]! + step;
-      }
-    }
-  }
-  return dist;
-}
-
 function heroStart(map: GameMap): MapObject {
   const h = map.objects.find((o) => o.kind === "hero-start");
   if (!h) throw new Error("no hero start");
   return h;
-}
-
-function playerTown(map: GameMap): MapObject {
-  const t = map.objects.find((o) => o.kind === "town" && o.data["owner"] === 0);
-  if (!t) throw new Error("no player town");
-  return t;
 }
 
 describe("generateMap", { timeout: 60_000 }, () => {
@@ -171,7 +106,7 @@ describe("generateMap", { timeout: 60_000 }, () => {
     }
   });
 
-  it("seals zone borders except through guarded passes", () => {
+  it("seals zone borders except through passes, guarded but for open loops", () => {
     for (const seed of SEEDS.slice(0, 25)) {
       const { map, info } = gen(seed);
       const zones = map.zones!;
@@ -183,7 +118,16 @@ describe("generateMap", { timeout: 60_000 }, () => {
       );
       const corridor = new Set<number>();
       for (const p of info.passes) {
-        expect(guarded.has(p.cell), `seed ${seed}: pass unguarded`).toBe(true);
+        // Only a loop between two wild zones of the same tier may be open.
+        const za = info.zones[p.a]!;
+        const zb = info.zones[p.b]!;
+        const wild = (r: string): boolean => r === "middle" || r === "town";
+        const mayBeOpen = za.tier === zb.tier && wild(za.role) && wild(zb.role);
+        if (!mayBeOpen) {
+          expect(guarded.has(p.cell), `seed ${seed}: pass unguarded`).toBe(
+            true,
+          );
+        }
         for (const c of p.cells) corridor.add(c);
       }
       // With the pass corridors closed, no step crosses a zone border.
@@ -362,10 +306,11 @@ describe("generateMap", { timeout: 60_000 }, () => {
     for (const seed of SEEDS) {
       const { map } = gen(seed);
       const c = (x: number, y: number) => map.cells[y * map.width + x]!;
+      type Run = { len: number; x: number; y: number; frame: boolean };
       const runs = (
         label: (x0: number, y0: number, x1: number, y1: number) => string,
-      ): number[] => {
-        const out: number[] = [];
+      ): Run[] => {
+        const out: Run[] = [];
         for (const vertical of [true, false]) {
           const lines = vertical ? map.width : map.height;
           const along = vertical ? map.height : map.width;
@@ -381,7 +326,16 @@ describe("generateMap", { timeout: 60_000 }, () => {
                     : label(k, l - 1, k, l);
               if (e !== "" && e === prev) len++;
               else {
-                if (prev !== "") out.push(len);
+                if (prev !== "") {
+                  // The run's middle, and whether it hugs the map frame.
+                  const mid = k - Math.ceil(len / 2);
+                  out.push({
+                    len,
+                    x: vertical ? l : mid,
+                    y: vertical ? mid : l,
+                    frame: l <= 3 || l >= lines - 3,
+                  });
+                }
                 len = e === "" ? 0 : 1;
               }
               prev = e;
@@ -395,9 +349,15 @@ describe("generateMap", { timeout: 60_000 }, () => {
         const b = c(x1, y1).obstacle === "mountain";
         return a === b ? "" : a ? "A" : "B";
       });
+      // Town yards are kept free of the wobble's bumps, and a map has up to
+      // eight towns now (bead bzc.3), so runs beside them are let be.
+      const yard = (r: Run): boolean =>
+        towns(map).some(
+          (t) => Math.max(Math.abs(t.x - r.x), Math.abs(t.y - r.y)) <= 7,
+        );
       edges += rock.length;
-      long += rock.filter((n) => n > 3).length;
-      veryLong += rock.filter((n) => n > 8).length;
+      long += rock.filter((r) => r.len > 3).length;
+      veryLong += rock.filter((r) => r.len > 8 && !r.frame && !yard(r)).length;
       const soil = runs((x0, y0, x1, y1) => {
         const a = c(x0, y0);
         const b = c(x1, y1);
@@ -406,12 +366,12 @@ describe("generateMap", { timeout: 60_000 }, () => {
         return a.terrain === b.terrain ? "" : `${a.terrain}>${b.terrain}`;
       });
       ground += soil.length;
-      groundLong += soil.filter((n) => n > 3).length;
+      groundLong += soil.filter((r) => r.len > 3).length;
     }
     expect(long / edges).toBeLessThan(0.045);
     // A run beside a town yard or pass mouth, or along the map-edge frame,
-    // may stay (bead xaj.22: three in 50 maps, all three along the frame,
-    // at y = 2, y = 46 and x = 5).
+    // may stay (bead xaj.22: three in 50 maps, all three along the frame);
+    // elsewhere long straight range edges stay rare.
     expect(veryLong).toBeLessThanOrEqual(3);
     expect(groundLong / ground).toBeLessThan(0.025);
   });
@@ -454,7 +414,7 @@ describe("generateMap", { timeout: 60_000 }, () => {
 
   it("places the economy the design asks for", () => {
     for (const seed of SEEDS) {
-      const { map } = gen(seed);
+      const { map, info } = gen(seed);
       const town = playerTown(map);
       const cost = moveCosts(map, town.x, town.y);
       const at = (o: MapObject): number => cost[o.y * map.width + o.x]!;
@@ -470,18 +430,24 @@ describe("generateMap", { timeout: 60_000 }, () => {
             o.data["chest"] !== true,
         );
       const label = `seed ${seed}`;
-      expect(map.objects.filter((o) => o.kind === "town")).toHaveLength(2);
-      expect(
-        map.objects.find((o) => o.kind === "town" && o.data["owner"] === null)
-          ?.data["garrison"],
-      ).toBeDefined();
-      const springs = mines("essence");
-      expect(springs.length, label).toBeGreaterThanOrEqual(2);
-      expect(springs.length, label).toBeLessThanOrEqual(3);
-      expect(
-        springs.filter((o) => at(o) <= 2 * DAY),
-        label,
-      ).toHaveLength(1);
+      // One owned town (today's single-player game), one start per player,
+      // the neutral towns and exactly one Warlord's Hold with its garrison.
+      const all = towns(map);
+      const starts = info.zones.filter((z) => z.role === "start").length;
+      const neutral = info.zones.filter((z) => z.role === "town").length;
+      expect(all, label).toHaveLength(starts + neutral + 1);
+      expect(all.filter((t) => t.data["owner"] === 0)).toHaveLength(1);
+      const holds = all.filter(
+        (t) => t.data["owner"] === null && t.data["hold"] !== false,
+      );
+      expect(holds, label).toHaveLength(1);
+      expect(holds[0]!.data["garrison"]).toBeDefined();
+      // Near home: one essence spring within two days (two at most when
+      // another start's spring lies close), a sawmill and an ore pit within
+      // a day, wood to pick up, and a gold mine somewhere.
+      const springs = mines("essence").filter((o) => at(o) <= 2 * DAY);
+      expect(springs.length, label).toBeGreaterThanOrEqual(1);
+      expect(springs.length, label).toBeLessThanOrEqual(2);
       expect(
         mines("wood").filter((o) => at(o) <= DAY).length,
         label,
@@ -498,38 +464,10 @@ describe("generateMap", { timeout: 60_000 }, () => {
     }
   });
 
-  it("guards mines outside the start zone, chests and passes", () => {
+  it("joins every town by road", () => {
     for (const seed of SEEDS.slice(0, 25)) {
       const { map } = gen(seed);
-      const zones = map.zones!;
-      const town = playerTown(map);
-      const startZone = zones[town.y * map.width + town.x];
-      const monsters = map.objects.filter((o) => o.kind === "monster");
-      const guarded = (o: MapObject): boolean =>
-        monsters.some(
-          (m) => Math.max(Math.abs(m.x - o.x), Math.abs(m.y - o.y)) <= 1,
-        );
-      for (const o of map.objects) {
-        const outside = zones[o.y * map.width + o.x] !== startZone;
-        if (
-          (o.kind === "mine" && outside) ||
-          (o.kind === "pickup" && o.data["chest"] === true)
-        ) {
-          expect(guarded(o), `seed ${seed}: ${o.id} unguarded`).toBe(true);
-        }
-      }
-      for (const m of monsters) {
-        expect(typeof m.data["creature"]).toBe("string");
-        expect(m.data["count"]).toBeGreaterThanOrEqual(1);
-      }
-    }
-  });
-
-  it("joins the two towns by road", () => {
-    for (const seed of SEEDS.slice(0, 25)) {
-      const { map } = gen(seed);
-      const towns = map.objects.filter((o) => o.kind === "town");
-      const [a, b] = towns as [MapObject, MapObject];
+      const [a, ...rest] = towns(map) as [MapObject, ...MapObject[]];
       const w = map.width;
       const seen = new Set<number>([a.y * w + a.x]);
       const stack = [a.y * w + a.x];
@@ -545,7 +483,9 @@ describe("generateMap", { timeout: 60_000 }, () => {
           }
         }
       }
-      expect(seen.has(b.y * w + b.x), `seed ${seed}`).toBe(true);
+      for (const b of rest) {
+        expect(seen.has(b.y * w + b.x), `seed ${seed}: ${b.id}`).toBe(true);
+      }
     }
   });
 

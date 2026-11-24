@@ -3,12 +3,15 @@
  * one hero).
  *
  * A map names its starts with `hero-start` objects (`data.player`) and
- * towns whose `data.owner` is that player. The map generator is being
- * reworked to place two to four starts (bead bzc.3); until then
- * {@link prepareStarts} derives missing ones from the current generator's
- * output: first the Warlord's Hold becomes a player's town, then new town
- * sites are found as far as possible from the existing starts, on open
- * ground reachable from player 0 that a town footprint cannot cut off.
+ * towns whose `data.owner` is that player. The map generator (bead bzc.3)
+ * places two to four starts: one town per start with `data.start` set to
+ * the player slot, owned by that player when the player is active, else an
+ * open start (a neutral town with `hold: false`). {@link prepareStarts}
+ * uses those first: a missing player takes its own open start. Only for
+ * maps without one (fixtures, older maps) does it derive a start: first the
+ * Warlord's Hold becomes a player's town, then new town sites are found as
+ * far as possible from the existing starts, on open ground reachable from
+ * player 0 that a town footprint cannot cut off.
  * Pure and deterministic (no randomness: scan order breaks ties).
  */
 import { townTree } from "../../data/factions.ts";
@@ -52,6 +55,7 @@ export function mapStarts(map: GameMap): StartSite[] {
 /** A neutral fortress without a building tree (the Warlord's Hold). */
 function isHoldObject(obj: MapObject): boolean {
   if (obj.kind !== "town" || playerOf(obj) !== null) return false;
+  if (typeof obj.data["hold"] === "boolean") return obj.data["hold"];
   const faction = obj.data["faction"];
   return typeof faction !== "string" || townTree(faction) === undefined;
 }
@@ -269,7 +273,10 @@ export function prepareStarts(map: GameMap, players: number): GameMap {
     const p = playerOf(o);
     if (p === null || p < players) return [o];
     if (o.kind === "hero-start") return [];
-    if (o.kind === "town") return [{ ...o, data: { ...o.data, owner: null } }];
+    if (o.kind === "town") {
+      // An unused start becomes an open start: a neutral town.
+      return [{ ...o, data: { ...o.data, owner: null, hold: false } }];
+    }
     return [o];
   });
   const home = must0(
@@ -277,6 +284,21 @@ export function prepareStarts(map: GameMap, players: number): GameMap {
   );
   for (let p = 1; p < players; p++) {
     if (starts.has(p)) continue;
+    // The generator's own start for this player, left open: claim it.
+    const own = objects.find(
+      (o) => o.kind === "town" && playerOf(o) === null && o.data["start"] === p,
+    );
+    if (own !== undefined) {
+      const cell = heroCellNear(map, objects, own.x, own.y);
+      if (cell !== null) {
+        const data: Record<string, unknown> = { ...own.data, owner: p };
+        delete data["hold"];
+        delete data["garrison"];
+        objects = objects.map((o) => (o === own ? { ...o, data } : o));
+        objects.push(heroStartObject(p, cell.x, cell.y));
+        continue;
+      }
+    }
     const hold = objects.find(isHoldObject);
     if (hold !== undefined) {
       const cell = heroCellNear(map, objects, hold.x, hold.y);

@@ -13,8 +13,19 @@
  * into the surrounding type, and fills or opens enclosed pockets so that all
  * open ground is reachable from the player's town.
  */
+import { hashInts } from "../../rng.ts";
 import { at, MinHeap, N4, N8, noiseField } from "./grid.ts";
-import { O, T, isOpen, isWalkable, stageRng, stageSalt } from "./state.ts";
+import {
+  O,
+  T,
+  corridorMask,
+  homeCell,
+  isOpen,
+  isWalkable,
+  stageRng,
+  stageSalt,
+  townCells,
+} from "./state.ts";
 import type { GenState, PassInfo } from "./state.ts";
 import { reachable } from "./paths.ts";
 
@@ -22,14 +33,14 @@ export function growClusters(st: GenState): void {
   const { g, cfg } = st;
   const cc = cfg.clusters;
   const rng = stageRng(st, "clusters");
-  const towns = [st.townAt.start, st.townAt.enemy].filter((t) => t >= 0);
+  const towns = townCells(st);
   const lumps = noiseField(g, cc.lumpScale, stageSalt(st, "cluster-lumps"), 2);
   let lonePeaks = 0;
   const free = (i: number, zone: number): boolean =>
     isOpen(st, i) &&
-    at(st.zone, i) === zone &&
-    at(st.keepOpen, i) === 0 &&
-    at(st.occupied, i) === 0 &&
+    (st.zone[i] ?? 0) === zone &&
+    (st.keepOpen[i] ?? 0) === 0 &&
+    (st.occupied[i] ?? 0) === 0 &&
     towns.every((t) => g.cheb(t, i) > cc.townClearance + 1);
 
   for (const z of st.zones) {
@@ -54,14 +65,14 @@ export function growClusters(st: GenState): void {
           .filter(
             (i) =>
               free(i, z.id) &&
-              g.around(i, N4).some((j) => at(st.obstacle, j) !== O.none),
+              g.around(i, N4).some((j) => (st.obstacle[j] ?? 0) !== O.none),
           );
         if (touching.length === 0) continue;
         seed = rng.pick(touching);
         const host = g
           .around(seed, N4)
-          .find((j) => at(st.obstacle, j) !== O.none);
-        if (host !== undefined) type = at(st.obstacle, host);
+          .find((j) => (st.obstacle[j] ?? 0) !== O.none);
+        if (host !== undefined) type = st.obstacle[host] ?? 0;
       } else {
         // Best of a few candidates: the one farthest from other obstacles,
         // so clusters spread evenly instead of clumping.
@@ -129,7 +140,10 @@ function obstacleDistance(st: GenState, i: number, max: number): number {
         const y = g.y(i) + dy;
         if (!g.inside(x, y)) continue;
         const j = g.idx(x, y);
-        if (at(st.obstacle, j) !== O.none || at(st.terrain, j) === T.water) {
+        if (
+          (st.obstacle[j] ?? 0) !== O.none ||
+          (st.terrain[j] ?? 0) === T.water
+        ) {
           return r;
         }
       }
@@ -173,7 +187,7 @@ function grow(
     return (
       1 -
       Math.hypot(u, v) / radius +
-      cfg.clusters.lumpAmount * (at(lumps, j) - 0.5) * 2
+      cfg.clusters.lumpAmount * ((lumps[j] ?? 0) - 0.5) * 2
     );
   };
   // Unattached clusters keep one free cell from other obstacles.
@@ -182,7 +196,7 @@ function grow(
     if (attached) return true;
     return g
       .around(i, N8)
-      .every((j) => blob.has(j) || at(st.obstacle, j) === O.none);
+      .every((j) => blob.has(j) || (st.obstacle[j] ?? 0) === O.none);
   };
   const scores = new Map<number, number>();
   while (blob.size < size) {
@@ -216,14 +230,14 @@ export function fixDiagonals(st: GenState): number {
   const { g } = st;
   let changed = 0;
   const fillable = (i: number): boolean =>
-    isOpen(st, i) && at(st.keepOpen, i) === 0 && at(st.occupied, i) === 0;
+    isOpen(st, i) && (st.keepOpen[i] ?? 0) === 0 && (st.occupied[i] ?? 0) === 0;
   for (let y = 0; y + 1 < g.h; y++) {
     for (let x = 0; x + 1 < g.w; x++) {
       const a = g.idx(x, y);
       const b = g.idx(x + 1, y);
       const c = g.idx(x, y + 1);
       const d = g.idx(x + 1, y + 1);
-      const ob = (i: number): boolean => at(st.obstacle, i) !== O.none;
+      const ob = (i: number): boolean => (st.obstacle[i] ?? 0) !== O.none;
       let pair: [number, number, number, number] | undefined;
       if (ob(a) && ob(d) && !ob(b) && !ob(c)) pair = [a, d, b, c];
       else if (ob(b) && ob(c) && !ob(a) && !ob(d)) pair = [b, c, a, d];
@@ -234,8 +248,8 @@ export function fixDiagonals(st: GenState): number {
       const order = g.y(r) > g.y(s) ? [r, s] : [s, r];
       const target = order.find(fillable);
       if (target === undefined) continue;
-      const tp = at(st.obstacle, p);
-      const tq = at(st.obstacle, q);
+      const tp = st.obstacle[p] ?? 0;
+      const tq = st.obstacle[q] ?? 0;
       st.obstacle[target] = tp === tq ? tp : O.mountain;
       changed++;
     }
@@ -252,12 +266,12 @@ export function fixLoneCells(st: GenState): void {
   const { g, cfg } = st;
   let peaks = 0;
   for (let i = 0; i < g.n; i++) {
-    const t = at(st.obstacle, i);
+    const t = st.obstacle[i] ?? 0;
     if (t === O.none) continue;
     let same = 0;
     let other = 0;
     for (const j of g.around(i, N8)) {
-      const u = at(st.obstacle, j);
+      const u = st.obstacle[j] ?? 0;
       if (u === t) same++;
       else if (u !== O.none) other++;
     }
@@ -266,7 +280,7 @@ export function fixLoneCells(st: GenState): void {
       st.obstacle[i] = t === O.mountain ? O.forest : O.mountain;
       continue;
     }
-    if (at(st.spine, i)) continue;
+    if (st.spine[i] ?? 0) continue;
     // Lone trees only: the smallest mountain is a 2x2 block.
     if (t === O.forest && peaks < cfg.clusters.lonePeaks) {
       peaks++;
@@ -285,10 +299,10 @@ export function fixLoneCells(st: GenState): void {
 export function resolvePockets(st: GenState): void {
   const { g, cfg } = st;
   for (let round = 0; round < 60; round++) {
-    const reach = reachable(st, st.townAt.start);
+    const reach = reachable(st, homeCell(st));
     let pocketStart = -1;
     for (let i = 0; i < g.n; i++) {
-      if (isWalkable(st, i) && !at(reach, i)) {
+      if (isWalkable(st, i) && !(reach[i] ?? 0)) {
         pocketStart = i;
         break;
       }
@@ -298,9 +312,9 @@ export function resolvePockets(st: GenState): void {
     const cells: number[] = [];
     let important = false;
     for (let i = 0; i < g.n; i++) {
-      if (!at(pocket, i)) continue;
+      if (!(pocket[i] ?? 0)) continue;
       cells.push(i);
-      if (at(st.keepOpen, i) || at(st.occupied, i)) important = true;
+      if ((st.keepOpen[i] ?? 0) || (st.occupied[i] ?? 0)) important = true;
     }
     if (cells.length <= cfg.clusters.pocketFill && !important) {
       for (const i of cells) st.obstacle[i] = surroundingType(st, i);
@@ -314,7 +328,7 @@ function surroundingType(st: GenState, i: number): number {
   let m = 0;
   let f = 0;
   for (const j of st.g.around(i, N8)) {
-    const t = at(st.obstacle, j);
+    const t = st.obstacle[j] ?? 0;
     if (t === O.mountain) m++;
     else if (t === O.forest) f++;
   }
@@ -327,6 +341,7 @@ function openPocket(st: GenState, cells: number[], reach: Uint8Array): void {
   const dist = new Float64Array(g.n).fill(Infinity);
   const prev = new Int32Array(g.n).fill(-1);
   const heap = new MinHeap();
+  const salt = stageSalt(st, "pocket-cut");
   for (const i of cells) {
     dist[i] = 0;
     heap.push(0, i);
@@ -334,20 +349,27 @@ function openPocket(st: GenState, cells: number[], reach: Uint8Array): void {
   let goal = -1;
   while (heap.size > 0) {
     const { priority, value: i } = heap.pop();
-    if (priority > at(dist, i)) continue;
-    if (at(reach, i)) {
+    if (priority > (dist[i] ?? 0)) continue;
+    if (reach[i] ?? 0) {
       goal = i;
       break;
     }
     for (const j of g.around(i, N4)) {
-      if (at(st.objBlocked, j)) continue;
+      if (st.objBlocked[j] ?? 0) continue;
       let step = 0.01;
-      if (at(st.terrain, j) === T.water) step = 30;
-      else if (at(st.spine, j)) step = 40;
-      else if (at(st.obstacle, j) !== O.none) step = 1;
-      if (at(st.zone, j) !== zone) step += 3;
+      if ((st.terrain[j] ?? 0) === T.water) step = 30;
+      else if (st.spine[j] ?? 0) step = 40;
+      else if ((st.obstacle[j] ?? 0) !== O.none) {
+        // Through rock or wood: a little noise so the cut wanders, and
+        // dearer along the map edge, where a cut would run dead straight.
+        const x = g.x(j);
+        const y = g.y(j);
+        const edge = Math.min(x, y, g.w - 1 - x, g.h - 1 - y);
+        step = 1 + (hashInts(j, salt) % 1000) / 1600 + (edge < 3 ? 1.5 : 0);
+      }
+      if ((st.zone[j] ?? 0) !== zone) step += 3;
       const d = priority + step;
-      if (d < at(dist, j)) {
+      if (d < (dist[j] ?? 0)) {
         dist[j] = d;
         prev[j] = i;
         heap.push(d, j);
@@ -360,16 +382,16 @@ function openPocket(st: GenState, cells: number[], reach: Uint8Array): void {
     return;
   }
   const path: number[] = [];
-  for (let k = goal; k >= 0; k = at(prev, k)) path.push(k);
+  for (let k = goal; k >= 0; k = prev[k] ?? 0) path.push(k);
   let crossing = -1;
   for (let k = 0; k < path.length; k++) {
     const i = path[k] as number;
-    if (at(st.terrain, i) === T.water) {
-      const z = st.zones[at(st.zone, i)];
+    if ((st.terrain[i] ?? 0) === T.water) {
+      const z = st.zones[st.zone[i] ?? 0];
       st.terrain[i] = z ? T[z.main] : T.grass;
     }
     st.obstacle[i] = O.none;
-    if (at(st.spine, i)) {
+    if (st.spine[i] ?? 0) {
       st.spine[i] = 0;
       crossing = i;
     }
@@ -377,7 +399,7 @@ function openPocket(st: GenState, cells: number[], reach: Uint8Array): void {
   }
   if (crossing >= 0) {
     // The corridor crosses a zone border: guard it like a pass.
-    const zones = [...new Set(path.map((i) => at(st.zone, i)))];
+    const zones = [...new Set(path.map((i) => st.zone[i] ?? 0))];
     const pass: PassInfo = {
       a: zones[0] ?? 0,
       b: zones[1] ?? zones[0] ?? 0,
@@ -434,27 +456,28 @@ const BLOCK_CORNERS: ReadonlyArray<readonly [number, number]> = [
  */
 export function squareMountains(st: GenState, growOpen: boolean): number {
   const { g, cfg } = st;
-  const towns = [st.townAt.start, st.townAt.enemy].filter((t) => t >= 0);
-  const reach = growOpen ? undefined : reachable(st, st.townAt.start);
+  const towns = townCells(st);
+  const reach = growOpen ? undefined : reachable(st, homeCell(st));
   const rng = stageRng(st, growOpen ? "square-grow" : "square-trim");
   let changed = 0;
   // Pass corridors and town yards stay open; a pass mouth's clearance may
   // take rock to square a range's end (pockets are resolved afterwards).
-  const corridor = new Uint8Array(g.n);
-  for (const p of st.passes) for (const c of p.cells) corridor[c] = 1;
+  const corridor = corridorMask(st);
   const growable = (j: number): boolean =>
     growOpen &&
     isOpen(st, j) &&
-    at(corridor, j) === 0 &&
-    at(st.occupied, j) === 0 &&
-    at(st.objBlocked, j) === 0 &&
+    (corridor[j] ?? 0) === 0 &&
+    (st.occupied[j] ?? 0) === 0 &&
+    (st.objBlocked[j] ?? 0) === 0 &&
     towns.every(
       (t) =>
         g.cheb(t, j) > cfg.clusters.townClearance + 2 ||
-        (at(st.keepOpen, j) === 0 && g.cheb(t, j) > cfg.clusters.townClearance),
+        ((st.keepOpen[j] ?? 0) === 0 &&
+          g.cheb(t, j) > cfg.clusters.townClearance),
     );
   for (let i = 0; i < g.n; i++) {
-    if (at(st.obstacle, i) !== O.mountain || inMountainBlock(st, i)) continue;
+    if ((st.obstacle[i] ?? 0) !== O.mountain || inMountainBlock(st, i))
+      continue;
     const x = g.x(i);
     const y = g.y(i);
     let best: number[] | undefined;
@@ -471,7 +494,7 @@ export function squareMountains(st: GenState, growOpen: boolean): number {
       ];
       let cost = rng.float(0, 0.5);
       for (const j of cells) {
-        const ob = at(st.obstacle, j);
+        const ob = st.obstacle[j] ?? 0;
         if (ob === O.mountain) continue;
         if (ob === O.forest) cost += 1;
         else if (growable(j)) cost += 3;
@@ -484,7 +507,7 @@ export function squareMountains(st: GenState, growOpen: boolean): number {
     }
     if (best) {
       for (const j of best) {
-        if (at(st.obstacle, j) !== O.mountain) {
+        if ((st.obstacle[j] ?? 0) !== O.mountain) {
           st.obstacle[j] = O.mountain;
           changed++;
         }
@@ -493,8 +516,9 @@ export function squareMountains(st: GenState, growOpen: boolean): number {
     }
     const opens =
       !seals(st, i) &&
-      !g.around(i, N8).some((j) => at(st.obstacle, j) === O.forest) &&
-      (reach === undefined || g.around(i, N4).some((j) => at(reach, j) === 1));
+      !g.around(i, N8).some((j) => (st.obstacle[j] ?? 0) === O.forest) &&
+      (reach === undefined ||
+        g.around(i, N4).some((j) => (reach[j] ?? 0) === 1));
     st.obstacle[i] = opens ? O.none : O.forest;
     changed++;
   }
@@ -504,11 +528,11 @@ export function squareMountains(st: GenState, growOpen: boolean): number {
 
 /** A spine cell with open ground of another zone beside it holds the seal. */
 function seals(st: GenState, i: number): boolean {
-  if (!at(st.spine, i)) return false;
-  const zone = at(st.zone, i);
+  if (!(st.spine[i] ?? 0)) return false;
+  const zone = st.zone[i] ?? 0;
   return st.g
     .around(i, N8)
-    .some((j) => at(st.zone, j) !== zone && isOpen(st, j));
+    .some((j) => (st.zone[j] ?? 0) !== zone && isOpen(st, j));
 }
 
 /**
@@ -520,17 +544,17 @@ function tidyStrayTrees(st: GenState, reach: Uint8Array): number {
   const { g } = st;
   let changed = 0;
   for (let i = 0; i < g.n; i++) {
-    if (at(st.obstacle, i) !== O.forest) continue;
+    if ((st.obstacle[i] ?? 0) !== O.forest) continue;
     const near = g.around(i, N8);
-    if (near.some((j) => at(st.obstacle, j) === O.forest)) continue;
-    if (!near.some((j) => at(st.obstacle, j) === O.mountain)) continue;
+    if (near.some((j) => (st.obstacle[j] ?? 0) === O.forest)) continue;
+    if (!near.some((j) => (st.obstacle[j] ?? 0) === O.mountain)) continue;
     st.obstacle[i] = O.mountain;
     if (inMountainBlock(st, i)) {
       changed++;
       continue;
     }
     const opens =
-      !seals(st, i) && g.around(i, N4).some((j) => at(reach, j) === 1);
+      !seals(st, i) && g.around(i, N4).some((j) => (reach[j] ?? 0) === 1);
     st.obstacle[i] = opens ? O.none : O.forest;
     if (opens) changed++;
   }

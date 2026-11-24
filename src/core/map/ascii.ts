@@ -9,7 +9,8 @@ import type { GameMap, MapObject } from "./types.ts";
 export const ASCII_LEGEND = [
   "g grass  j jungle  s steppe  b badlands  w wasteland",
   "~ shallow water  = deep water  ^ mountain  T forest  # road",
-  "@ player town  & Warlord's Hold  h hero start  X monster",
+  "@ player town  o open start  n neutral town  & Warlord's Hold",
+  "h hero start  X monster",
   "mines: W sawmill  O ore pit  E essence spring  G gold mine",
   "pickups: l wood (logs)  r ore (rocks)  c essence (crystals)  $ gold  * chest",
 ].join("\n");
@@ -39,7 +40,9 @@ const PICKUP_CHAR: Record<string, string> = {
 function objectChar(o: MapObject): string {
   switch (o.kind) {
     case "town":
-      return o.data["owner"] === null ? "&" : "@";
+      if (o.data["owner"] !== null) return "@";
+      if (o.data["hold"] !== false) return "&";
+      return o.data["start"] !== undefined ? "o" : "n";
     case "hero-start":
       return "h";
     case "monster":

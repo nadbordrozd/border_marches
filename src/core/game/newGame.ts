@@ -7,7 +7,10 @@
  *   `data.faction` has a town tree is a neutral faction town, garrisoned by
  *   `data.garrison` (`[{ creature, count }]`) or the tree's default. Any
  *   other neutral town is the **Warlord's Hold**: no tree, garrisoned by
- *   HOLD_GARRISON. Optional `data.name` (string) names the town.
+ *   HOLD_GARRISON. `data.hold` (map generator v2) says which outright:
+ *   `true` is the Hold whatever its faction, `false` a neutral town (its
+ *   `data.start` marks an open player start). Optional `data.name` (string)
+ *   names the town.
  * - hero-start: the start hero of `data.player`.
  * - monster: `data.creature` must be a creature id from src/data (Lost World
  *   or neutral); `data.count` >= 1.
@@ -279,6 +282,7 @@ export function newGame(
             townName(f, obj),
           );
         } else if (
+          obj.data["hold"] !== true &&
           typeof faction === "string" &&
           townTree(faction) !== undefined
         ) {

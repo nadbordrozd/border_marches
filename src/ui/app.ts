@@ -10,7 +10,7 @@ import { FACTIONS, playableFactions } from "../data/factions.ts";
 import { MAX_PLAYERS, MIN_PLAYERS, playerColour } from "../data/players.ts";
 import type { FactionId } from "../data/types.ts";
 import { generateMap } from "../core/map/generate.ts";
-import type { MapSize } from "../core/map/generate.ts";
+import type { MapSize, PlayerCount } from "../core/map/generate.ts";
 import { button, el, img, wait } from "./dom.ts";
 import { playGame } from "./game.ts";
 import { loadGameMapAssets } from "./hero-sprite.ts";
@@ -50,11 +50,21 @@ export function playerSetups(setup: GameSetup): PlayerSetup[] {
   }));
 }
 
-/** Generates a map and the initial state for a new game. */
+/**
+ * Generates a map with one start per player (every start active, so each
+ * has its town and hero; bead bzc.3) and the initial state for a new game.
+ */
 export function createGame(setup: GameSetup): GameState {
-  return newGame(generateMap(setup.seed, { size: setup.size }), {
-    players: playerSetups(setup),
+  const players = Math.min(
+    MAX_PLAYERS,
+    Math.max(MIN_PLAYERS, setup.players),
+  ) as PlayerCount;
+  const map = generateMap(setup.seed, {
+    size: setup.size,
+    players,
+    activePlayers: players,
   });
+  return newGame(map, { players: playerSetups(setup) });
 }
 
 /** Shows the main menu until a game is started or continued. */

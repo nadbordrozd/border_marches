@@ -3,6 +3,7 @@
  *
  *   seed=N        render generateMap(N) (src/core/map/generate.ts)
  *   size=S|M|L    generator map size (default M)
+ *   players=2..4  generator player starts (default per size)
  *   map=big       the fixture tiled to 48 x 48 (benchmarks)
  *   map=ranges    a test map of mountain ranges of many shapes
  *   fog=0|1       fog of war off / on (explored: round the hero and town)
@@ -253,6 +254,7 @@ export async function startMapDebug(
   const assets = await loadMapAssets(import.meta.env.BASE_URL);
   const which = params.get("map");
   const size = params.get("size");
+  const players = Number(params.get("players"));
   const map =
     which === "big"
       ? tiledFixture(48, 48)
@@ -261,6 +263,9 @@ export async function startMapDebug(
         : route.seed !== null
           ? generateMap(route.seed, {
               size: size === "S" || size === "L" ? size : "M",
+              ...(players === 2 || players === 3 || players === 4
+                ? { players }
+                : {}),
             })
           : buildSmallMap();
   const view = createMapView(canvas, assets);

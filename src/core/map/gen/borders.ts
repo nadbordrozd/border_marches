@@ -11,9 +11,9 @@
  * mountain band is at least `spineMin` deep on the spine side (two cells,
  * three across a diagonal), so a range is never a one-cell line of rocks.
  */
-import { at, chamferDistance, N4, N8, noiseField } from "./grid.ts";
-import { O, T, isOpen, stageRng, stageSalt } from "./state.ts";
-import type { GenState, PassInfo } from "./state.ts";
+import { chamferDistance, N4, N8, noiseField } from "./grid.ts";
+import { O, T, isOpen, stageRng, stageSalt, townCells } from "./state.ts";
+import type { Connection, GenState, PassInfo } from "./state.ts";
 
 /** Stretch fbm output (clustered around 0.5) to roughly [0, 1]. */
 function stretch(v: number): number {
@@ -66,35 +66,35 @@ export function buildBorders(st: GenState): void {
   for (const z of st.zones) {
     const { dist, nearest } = chamferDistance(
       g,
-      (i) => at(st.zone, i) !== z.id,
+      (i) => (st.zone[i] ?? 0) !== z.id,
     );
     for (let i = 0; i < g.n; i++) {
-      if (at(st.zone, i) !== z.id) continue;
-      foreignDist[i] = at(dist, i);
-      const src = at(nearest, i);
-      foreignZone[i] = src >= 0 ? at(st.zone, src) : -1;
+      if ((st.zone[i] ?? 0) !== z.id) continue;
+      foreignDist[i] = dist[i] ?? 0;
+      const src = nearest[i] ?? 0;
+      foreignZone[i] = src >= 0 ? (st.zone[src] ?? 0) : -1;
     }
   }
 
   for (let i = 0; i < g.n; i++) {
-    if (at(st.terrain, i) === T.water) continue;
-    const a = at(st.zone, i);
-    const b = at(foreignZone, i);
-    const d = at(foreignDist, i);
+    if ((st.terrain[i] ?? 0) === T.water) continue;
+    const a = st.zone[i] ?? 0;
+    const b = foreignZone[i] ?? 0;
+    const d = foreignDist[i] ?? 0;
     // Spine: a neighbour in any zone whose border this side holds. Checked
     // per neighbour, since near a corner the nearest foreign zone is not
     // the only one.
     const spine = g.around(i, N8).some((j) => {
-      const z = at(st.zone, j);
+      const z = st.zone[j] ?? 0;
       return z !== a && spineSide.get(pairKey(a, z)) === a;
     });
-    if (!spine && at(st.keepOpen, i)) continue;
+    if (!spine && (st.keepOpen[i] ?? 0)) continue;
     let type = 0;
     if (b >= 0 && d < 4) {
       const holder = spineSide.get(pairKey(a, b)) === a;
-      const ta = stretch(at(thickA, i));
-      const tb = stretch(at(thickB, i));
-      const kind = stretch(at(typeN, i)) < share(a, b) ? O.mountain : O.forest;
+      const ta = stretch(thickA[i] ?? 0);
+      const tb = stretch(thickB[i] ?? 0);
+      const kind = stretch(typeN[i] ?? 0) < share(a, b) ? O.mountain : O.forest;
       // A mountain spine is never a one-cell line where there is room.
       const least = kind === O.mountain ? bc.spineMin : 0;
       const limit = holder
@@ -107,13 +107,13 @@ export function buildBorders(st: GenState): void {
       const x = g.x(i);
       const y = g.y(i);
       const e = Math.min(x + 1, y + 1, g.w - x, g.h - y);
-      const swell = bc.edgeSwell * (stretch(at(edgeSwell, i)) * 2 - 1);
+      const swell = bc.edgeSwell * (stretch(edgeSwell[i] ?? 0) * 2 - 1);
       const limit =
-        bc.edgeDepth * (stretch(at(edgeN, i)) * 1.9 - 0.6) * (1 + swell);
+        bc.edgeDepth * (stretch(edgeN[i] ?? 0) * 1.9 - 0.6) * (1 + swell);
       if (e <= limit) {
         const z = st.zones[a];
         const s = z ? bc.mountainShare[z.main] : 0.5;
-        type = stretch(at(typeN, i)) < s ? O.mountain : O.forest;
+        type = stretch(typeN[i] ?? 0) < s ? O.mountain : O.forest;
       }
     }
     if (type !== 0) st.obstacle[i] = type;
@@ -133,22 +133,22 @@ function widenLines(st: GenState): void {
   const { g } = st;
   const rng = stageRng(st, "widen");
   for (let i = 0; i < g.n; i++) {
-    if (at(st.obstacle, i) !== O.mountain) continue;
+    if ((st.obstacle[i] ?? 0) !== O.mountain) continue;
     const x = g.x(i);
     const y = g.y(i);
     const side = (dx: number): number =>
       g.inside(x + dx, y) ? g.idx(x + dx, y) : -1;
     const west = side(-1);
     const east = side(1);
-    if (west >= 0 && at(st.obstacle, west) === O.mountain) continue;
-    if (east >= 0 && at(st.obstacle, east) === O.mountain) continue;
-    const zone = at(st.zone, i);
+    if (west >= 0 && (st.obstacle[west] ?? 0) === O.mountain) continue;
+    if (east >= 0 && (st.obstacle[east] ?? 0) === O.mountain) continue;
+    const zone = st.zone[i] ?? 0;
     const options = [west, east].filter(
       (j) =>
         j >= 0 &&
         canGrow(st, j, zone) &&
-        at(st.spine, j) === 0 &&
-        at(st.terrain, j) !== T.water,
+        (st.spine[j] ?? 0) === 0 &&
+        (st.terrain[j] ?? 0) !== T.water,
     );
     const pick =
       options.length === 2 ? options[rng.chance(0.5) ? 0 : 1] : options[0];
@@ -162,14 +162,14 @@ function addSpurs(st: GenState, foreignDist: Float64Array): void {
   const rng = stageRng(st, "spurs");
   const starts: number[] = [];
   for (let i = 0; i < g.n; i++) {
-    if (at(st.obstacle, i) === O.none) continue;
-    if (at(foreignDist, i) > 4) continue;
+    if ((st.obstacle[i] ?? 0) === O.none) continue;
+    if ((foreignDist[i] ?? 0) > 4) continue;
     if (g.around(i, N4).some((j) => isOpen(st, j))) starts.push(i);
   }
   for (const s of starts) {
     if (!rng.chance(cfg.borders.spurRate)) continue;
-    const type = at(st.obstacle, s);
-    const zone = at(st.zone, s);
+    const type = st.obstacle[s] ?? 0;
+    const zone = st.zone[s] ?? 0;
     // Head away from the border: the open neighbour farthest from it.
     let dir: readonly [number, number] | undefined;
     let best = -1;
@@ -178,9 +178,9 @@ function addSpurs(st: GenState, foreignDist: Float64Array): void {
       const y = g.y(s) + off[1];
       if (!g.inside(x, y)) continue;
       const j = g.idx(x, y);
-      if (!isOpen(st, j) || at(st.zone, j) !== zone) continue;
-      if (at(foreignDist, j) > best) {
-        best = at(foreignDist, j);
+      if (!isOpen(st, j) || (st.zone[j] ?? 0) !== zone) continue;
+      if ((foreignDist[j] ?? 0) > best) {
+        best = foreignDist[j] ?? 0;
         dir = off;
       }
     }
@@ -216,9 +216,9 @@ function addSpurs(st: GenState, foreignDist: Float64Array): void {
 function canGrow(st: GenState, j: number, zone: number): boolean {
   return (
     isOpen(st, j) &&
-    at(st.zone, j) === zone &&
-    at(st.keepOpen, j) === 0 &&
-    at(st.occupied, j) === 0
+    (st.zone[j] ?? 0) === zone &&
+    (st.keepOpen[j] ?? 0) === 0 &&
+    (st.occupied[j] ?? 0) === 0
   );
 }
 
@@ -230,27 +230,33 @@ function canGrow(st: GenState, j: number, zone: number): boolean {
 export function cutPasses(st: GenState): void {
   const { g, cfg } = st;
   const rng = stageRng(st, "passes");
-  const towns = [st.townAt.start, st.townAt.enemy].filter((t) => t >= 0);
+  const towns = townCells(st);
+  const failed: Connection[] = [];
   for (const c of st.connections) {
     // Distance from the ends of this border: other zones, water, map edge.
     const { dist: endDist } = chamferDistance(g, (i) => {
-      const z = at(st.zone, i);
-      return (z !== c.a && z !== c.b) || at(st.terrain, i) === T.water;
+      const z = st.zone[i] ?? 0;
+      return (z !== c.a && z !== c.b) || (st.terrain[i] ?? 0) === T.water;
     });
     const cand: Array<{ i: number; j: number; score: number }> = [];
     for (let i = 0; i < g.n; i++) {
-      if (at(st.zone, i) !== c.a || at(st.terrain, i) === T.water) continue;
+      if ((st.zone[i] ?? 0) !== c.a || (st.terrain[i] ?? 0) === T.water)
+        continue;
       for (const j of g.around(i, N4)) {
-        if (at(st.zone, j) !== c.b || at(st.terrain, j) === T.water) continue;
+        if ((st.zone[j] ?? 0) !== c.b || (st.terrain[j] ?? 0) === T.water)
+          continue;
         const x = g.x(i);
         const y = g.y(i);
         const edge = Math.min(x, y, g.w - 1 - x, g.h - 1 - y);
-        const ends = Math.min(at(endDist, i), edge + 1);
+        const ends = Math.min(endDist[i] ?? 0, edge + 1);
         if (towns.some((t) => g.dist(t, i) < 7)) continue;
         cand.push({ i, j, score: ends });
       }
     }
-    if (cand.length === 0) continue;
+    if (cand.length === 0) {
+      failed.push(c);
+      continue;
+    }
     const top = Math.max(...cand.map((p) => p.score));
     const passes = c.border >= cfg.passes.secondPassBorder ? 2 : 1;
     const made: PassInfo[] = [];
@@ -280,7 +286,24 @@ export function cutPasses(st: GenState): void {
         }
       }
     }
+    // No luck at random: try the best crossings in turn (bead bzc.3: with
+    // many zones some borders are short or crowded).
+    if (made.length === 0) {
+      const ordered = [...cand].sort((p, q) => q.score - p.score || p.i - q.i);
+      for (const q of ordered.slice(0, 40)) {
+        const pass = carve(st, c.a, c.b, q.i, q.j, cfg.passes.width[0]);
+        if (pass) {
+          made.push(pass);
+          st.passes.push(pass);
+          break;
+        }
+      }
+    }
+    if (made.length === 0) failed.push(c);
   }
+  // A connection with no pass is no connection (the clean-up still joins
+  // any ground it leaves cut off, through a guarded corridor).
+  st.connections = st.connections.filter((c) => !failed.includes(c));
 }
 
 /** BFS (4-way) inside `zone` from `from` to the nearest open cell. */
@@ -307,7 +330,8 @@ function pathToOpen(
       }
       for (const j of g.around(i, N4)) {
         if (prev.has(j)) continue;
-        if (at(st.zone, j) !== zone || at(st.terrain, j) === T.water) continue;
+        if ((st.zone[j] ?? 0) !== zone || (st.terrain[j] ?? 0) === T.water)
+          continue;
         prev.set(j, i);
         next.push(j);
       }
@@ -340,7 +364,7 @@ function carve(
   // A corridor must not open the border of a third zone.
   const foreign = (k: number): boolean =>
     g.around(k, N8).some((m) => {
-      const z = at(st.zone, m);
+      const z = st.zone[m] ?? 0;
       return z !== a && z !== b;
     });
   if (line.some(foreign)) return undefined;
@@ -366,8 +390,8 @@ function carve(
       const y = g.y(k) + dy;
       if (!g.inside(x, y)) continue;
       const m = g.idx(x, y);
-      const z = at(st.zone, m);
-      if (at(st.terrain, m) === T.water || (z !== a && z !== b)) continue;
+      const z = st.zone[m] ?? 0;
+      if ((st.terrain[m] ?? 0) === T.water || (z !== a && z !== b)) continue;
       if (!foreign(m)) cells.add(m);
     }
   }
@@ -385,11 +409,11 @@ function carve(
         const y = g.y(end) + dy;
         if (!g.inside(x, y)) continue;
         const m = g.idx(x, y);
-        if (at(st.obstacle, m) === O.none) st.keepOpen[m] = 1;
+        if ((st.obstacle[m] ?? 0) === O.none) st.keepOpen[m] = 1;
       }
     }
   }
   // The guard stands on the crossing itself.
-  const cell = at(st.zone, i) === a ? i : j;
+  const cell = (st.zone[i] ?? 0) === a ? i : j;
   return { a, b, cell, cells: [...cells].sort((p, q) => p - q), width };
 }

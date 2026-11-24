@@ -5,7 +5,7 @@
  * the end ({@link markDeep}): only water with no land among its 8 neighbours.
  */
 import { at, components, fbm, N4, N8 } from "./grid.ts";
-import { T, stageRng, stageSalt } from "./state.ts";
+import { T, stageRng, stageSalt, townCells } from "./state.ts";
 import type { GenState } from "./state.ts";
 
 export function placeWater(st: GenState): void {
@@ -41,7 +41,7 @@ export function placeWater(st: GenState): void {
   }
 
   const lakes = rng.int(...wc.lakes[st.size]);
-  const towns = [st.townAt.start, st.townAt.enemy].filter((i) => i >= 0);
+  const towns = townCells(st);
   for (let k = 0; k < lakes; k++) {
     const r = rng.float(...wc.lakeRadius);
     // A lake sits inside one zone, away from its border and the towns.
@@ -51,8 +51,8 @@ export function placeWater(st: GenState): void {
       const y = g.y(i);
       if (x < r + 2 || y < r + 2 || x > w - r - 3 || y > g.h - r - 3) continue;
       if (towns.some((t) => g.dist(t, i) < r + wc.townClearance + 3)) continue;
-      if (at(water, i)) continue;
-      const z = at(st.zone, i);
+      if (water[i] ?? 0) continue;
+      const z = st.zone[i] ?? 0;
       let inside = true;
       for (let dy = -Math.ceil(r); dy <= Math.ceil(r) && inside; dy++) {
         for (let dx = -Math.ceil(r); dx <= Math.ceil(r); dx++) {
@@ -97,10 +97,10 @@ export function placeWater(st: GenState): void {
   for (let round = 0; round < 2; round++) {
     const next = water.slice();
     for (let i = 0; i < g.n; i++) {
-      let wet = at(water, i);
+      let wet = water[i] ?? 0;
       let all = 1;
       for (const j of g.around(i, N8)) {
-        wet += at(water, j);
+        wet += water[j] ?? 0;
         all++;
       }
       if (wet * 2 > all) next[i] = 1;
@@ -114,7 +114,7 @@ export function placeWater(st: GenState): void {
     }
   }
 
-  for (let i = 0; i < g.n; i++) if (at(water, i)) st.terrain[i] = T.water;
+  for (let i = 0; i < g.n; i++) if (water[i] ?? 0) st.terrain[i] = T.water;
   tidyWater(st);
 }
 
@@ -124,7 +124,7 @@ export function placeWater(st: GenState): void {
  */
 export function tidyWater(st: GenState): void {
   const { g, cfg } = st;
-  const wet = (i: number): boolean => at(st.terrain, i) === T.water;
+  const wet = (i: number): boolean => (st.terrain[i] ?? 0) === T.water;
   const bodies = components(g, wet, 4);
   bodies.cells.forEach((cells) => {
     if (cells.length >= cfg.water.minBody) return;
@@ -147,10 +147,10 @@ export function tidyWater(st: GenState): void {
 /** The zone's main terrain code for a cell that turns from water to land. */
 export function landTerrainNear(st: GenState, i: number): number {
   for (const j of st.g.around(i, N4)) {
-    const t = at(st.terrain, j);
+    const t = st.terrain[j] ?? 0;
     if (t !== T.water) return t;
   }
-  const z = st.zones[at(st.zone, i)];
+  const z = st.zones[st.zone[i] ?? 0];
   return z ? T[z.main] : T.grass;
 }
 
@@ -159,12 +159,12 @@ export function markDeep(st: GenState): void {
   const { g, cfg } = st;
   st.deep.fill(0);
   for (let i = 0; i < g.n; i++) {
-    if (at(st.terrain, i) !== T.water) continue;
-    if (g.around(i, N8).every((j) => at(st.terrain, j) === T.water)) {
+    if ((st.terrain[i] ?? 0) !== T.water) continue;
+    if (g.around(i, N8).every((j) => (st.terrain[j] ?? 0) === T.water)) {
       st.deep[i] = 1;
     }
   }
-  const deep = components(g, (i) => at(st.deep, i) === 1, 8);
+  const deep = components(g, (i) => (st.deep[i] ?? 0) === 1, 8);
   deep.cells.forEach((cells) => {
     if (cells.length < cfg.water.minDeep) for (const i of cells) st.deep[i] = 0;
   });
