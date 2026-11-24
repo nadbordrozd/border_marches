@@ -1,0 +1,37 @@
+{
+  "squire-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Squire: small freckled boy under a round steel cap with a crimson kite shield with a gold-yellow cross far too big for him; matches the Pulp Wars Fighter and Swordsman crimson heraldry; reads at 1:1 on light and dark; feet lowest, nothing under it, faces south-east",
+    "at": "2026-11-24T22:57:24.615Z"
+  },
+  "late-king-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a wheeled cart pulled by two black beasts (read as bears or pigs), not a litter; king too small for the canvas",
+    "at": "2026-11-24T22:57:24.662Z"
+  },
+  "late-king-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Late King: big crowned ivory skull mid-proclamation with violet eyes, ermine collar, violet-trimmed near-black cape and a scroll, on a litter-cart borne by two little ivory skeletons; Restless bone, near-black and violet palette like the Pulp Wars skeleton and vampire; reads as the biggest Restless unit at 1:1; one wheel left despite the exclusion, accepted as a litter-cart",
+    "at": "2026-11-24T22:57:24.711Z"
+  },
+  "boomshaman-a#0": {
+    "verdict": "REJECTED",
+    "notes": "stands on a soil and grass patch (a ground plate); olive rather than lime skin; the rod reads as a torch",
+    "at": "2026-11-24T22:57:24.759Z"
+  },
+  "boomshaman-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Boomshaman: lime goblin with frizzled white hair, sand-buff hide robe, hazard yellow trim and a forked tin lightning rod with a yellow spark; same lime and hide as the Pulp Wars goblin and bomb chucker; no ground; reads as a caster, not a spear goblin, by the hair and the spark",
+    "at": "2026-11-24T22:57:24.808Z"
+  },
+  "friar-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Friar: jolly tonsured monk in a cream habit with a crimson rope belt and gold cross, birch quarterstaff and gold sparkles of a blessing; plump body differs from every Realm soldier; light dominant material; nothing under it, faces south-east",
+    "at": "2026-11-24T23:01:24.219Z"
+  },
+  "dragonslayer-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Dragonslayer: very large knight in light steel plate with a crimson plume, crimson surcoat with gold-yellow cross and a greatsword, a stuffed green dragon head trophy peeking over the shoulder; fills the giant canvas; same steel and crimson heraldry as the Pulp Wars swordsman and knight but twice the mass; nothing under it",
+    "at": "2026-11-24T23:01:24.280Z"
+  }
+}

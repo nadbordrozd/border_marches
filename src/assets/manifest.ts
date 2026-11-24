@@ -40,6 +40,7 @@ import type { ResourceId, Terrain } from "../core/map/types";
 import { ALL_ICON_ASSETS } from "./icons";
 import { PEAK_ASSETS } from "./peaks";
 import { TREE_ASSETS } from "./trees";
+import { V02_HERO_ASSETS, V02_UNIT_ASSETS } from "./v02-units";
 
 /** Master pixels per map cell. */
 export const CELL_PX = 80;
@@ -93,7 +94,7 @@ export function assetUrl(asset: Pick<ImageAsset, "path">, base = "/"): string {
 
 // ------------------------------------------------------------------ units
 
-export type ArtFaction = "dinosaur" | "goblin" | "undead" | "martian";
+export type ArtFaction = "dinosaur" | "human" | "goblin" | "undead" | "martian";
 export type UnitArtFaction = ArtFaction | "neutral";
 /** Pulp Wars canvas classes: 56x80, 72x88, 88x(72..104). */
 export type UnitSizeClass = "standard" | "large" | "giant";
@@ -379,6 +380,8 @@ export const UNIT_ASSETS: readonly UnitAsset[] = [
     { x: 44, y: 32 },
     { contactY: 67, footLeft: 18, footRight: 25, baseLeft: 6, baseRight: 81 },
   ),
+  // The v0.2 factions, strays and summons (bead bzc.14, src/assets/v02-units.ts).
+  ...V02_UNIT_ASSETS,
 ];
 
 /**
@@ -395,6 +398,8 @@ export const HERO_ASSETS: readonly UnitAsset[] = [
     { x: 36, y: 48 },
     { contactY: 86, footLeft: 36, footRight: 47, baseLeft: 18, baseRight: 62 },
   ),
+  // The six v0.2 hero classes, mounted (bead bzc.14).
+  ...V02_HERO_ASSETS,
 ];
 
 export const PORTRAIT_ASSETS: readonly PortraitAsset[] = [

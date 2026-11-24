@@ -1,0 +1,655 @@
+{
+  "set": "strays",
+  "bead": "border_marches-bzc.14",
+  "class": "units",
+  "exploration": false,
+  "_doc": "The v0.2 strays, caretakers and summons that no Pulp Wars sprite fits (docs/design/CONTENT_CREATURES.md); the reused ones are byte-identical imports listed in docs/art/IMPORTED_FROM_PULP_WARS.md. Neutral creatures belong to no faction, so their colours avoid the three faction signatures (Realm crimson with gold-yellow, Restless near-black with violet, Horde lime with hazard yellow); every colour is in the subject. Figures use the unit class; the pumpkin and the seedling use the Pulp Wars creature class (no weapon, no clothes). Small creatures are generated small and padded bottom-centred into 56x80. Faces south-east, never mirrored. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "piece": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east"
+    },
+    "creature": [
+      "style",
+      "camera-three-quarter",
+      "light-south-west",
+      "class-creature"
+    ]
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [
+      "style",
+      "camera-three-quarter",
+      "light-south-west",
+      "class-unit"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "bellhop-a",
+      "concept": "BELLHOP",
+      "width": 48,
+      "height": 72,
+      "seed": 53101,
+      "subject": "Subject: Bellhop, a chunky cute little wind-up tin bellhop with a huge round head about half of the figure's height and a small body: a round polished pale tin face with painted rosy cheeks and a fixed smile, a small round teal pillbox cap with a chin strap, a teal bellboy jacket with two rows of brass buttons, a big brass wind-up key sticking out of its back, an oversized cream suitcase carried in both hands, small dark grey shoes; simple shapes and very few details; clearly a clockwork toy servant, not a soldier.",
+      "negative": "sword, shield, red, purple",
+      "options": "@piece"
+    },
+    {
+      "id": "whipping-boy-a",
+      "concept": "WHIPPING BOY",
+      "width": 48,
+      "height": 72,
+      "seed": 53201,
+      "subject": "Subject: Whipping Boy, a chunky cute sad scruffy boy with a huge round head about half of the figure's height and a skinny body: messy dark hair, big droopy teary eyes, a sticking plaster on the cheek and a bandage round the head, a patched pale oatmeal-grey sackcloth smock with a rope belt, a big round wooden pot lid held up in front as a shield, bare feet; simple shapes and very few details; clearly a timid scapegoat, not a soldier.",
+      "negative": "dirt, grass patch, sword, armour, helmet, red, purple, blood",
+      "options": "@piece"
+    },
+    {
+      "id": "lamplighter-a",
+      "concept": "LAMPLIGHTER",
+      "width": 56,
+      "height": 80,
+      "seed": 53301,
+      "subject": "Subject: Lamplighter, a chunky cute old lamplighter with a huge round head about half of the figure's height and a tiny sturdy body: a bushy white moustache and rosy nose, a dark navy blue peaked cap and a long navy blue coat with brass buttons, an oversized long pole topped with a small brass lantern holding a bright yellow flame held upright in the right hand, dark grey boots; simple shapes and very few details; clearly a night-time street worker.",
+      "negative": "dirt, grass patch, sword, shield, armour, red, purple",
+      "options": "@piece"
+    },
+    {
+      "id": "newsie-a",
+      "concept": "NEWSIE",
+      "width": 48,
+      "height": 72,
+      "seed": 53401,
+      "subject": "Subject: Newsie, a chunky cute newspaper boy with a huge round head about half of the figure's height and a small body: a big floppy grey flat cap, a cheeky face with the mouth wide open shouting, a cream shirt with rolled sleeves, grey braces and grey knee breeches, a canvas satchel stuffed with newspapers on the hip, one rolled-up newspaper waved high in the right hand, dark grey boots; simple shapes and very few details; clearly shouting the headlines.",
+      "negative": "dirt, grass patch, sword, shield, armour, red, purple, text, letters",
+      "options": "@piece"
+    },
+    {
+      "id": "notary-a",
+      "concept": "NOTARY",
+      "width": 56,
+      "height": 80,
+      "seed": 53501,
+      "subject": "Subject: Notary, a chunky cute stern little clerk with a huge round head about half of the figure's height and a tiny body: a bald head with grey side whiskers, small round spectacles and a prim frown, a quill pen behind the ear, a bottle-green frock coat with a cream ruffled collar, grey trousers, an oversized wooden rubber stamp with a deep blue ink face held up high in both hands, ready to stamp; simple shapes and very few details; clearly a pompous official, not a soldier.",
+      "negative": "dirt, grass patch, sword, shield, armour, red, purple, text, letters",
+      "options": "@piece"
+    },
+    {
+      "id": "crooner-a",
+      "concept": "CROONER",
+      "width": 56,
+      "height": 80,
+      "seed": 53601,
+      "subject": "Subject: Crooner, a chunky cute suave lounge singer with a huge round head about half of the figure's height and a tiny body: slicked-back glossy black hair, half-closed dreamy eyes and a big smile, a white tuxedo jacket with a black bow tie and a pink carnation, black trousers and shoes, an oversized old silver radio microphone held in front of his mouth in the right hand, the left arm spread wide; three small pale blue music notes floating beside him; simple shapes and very few details.",
+      "negative": "dirt, grass patch, sword, shield, armour, guitar, red, purple",
+      "options": "@piece"
+    },
+    {
+      "id": "loan-shark-a",
+      "concept": "LOAN SHARK",
+      "width": 56,
+      "height": 80,
+      "seed": 53701,
+      "subject": "Subject: Loan Shark, a chunky cute blue-grey shark standing upright on two short legs like a man, with a huge round shark head about half of its height: a white belly and jaw, a wide grin full of white teeth, small shifty eyes, a dorsal fin on its back, a cream pinstripe waistcoat, a small round dark grey bowler hat, an oversized ledger book held under one fin and a big gold coin flipped in the other; short grey legs with dark shoes; simple shapes and very few details.",
+      "negative": "dirt, grass patch, water, waves, sword, shield, red, purple",
+      "options": "@piece"
+    },
+    {
+      "id": "groundskeeper-a",
+      "concept": "GROUNDSKEEPER",
+      "width": 56,
+      "height": 80,
+      "seed": 53801,
+      "subject": "Subject: Groundskeeper, a chunky cute walking topiary hedge creature with a huge round leafy head about half of its height and a stubby body: neatly clipped bright leaf-green hedge with small pink flowers, big round friendly eyes peeking out of the leaves, a little straw sun hat, stubby twig arms and root feet, oversized silver garden shears held in both hands; simple shapes and very few details; clearly a gardener spirit, not a tree.",
+      "negative": "dirt, grass patch, trunk, tree, sword, shield, red, purple",
+      "options": "@piece"
+    },
+    {
+      "id": "gumshoe-a",
+      "concept": "GUMSHOE",
+      "width": 56,
+      "height": 80,
+      "seed": 53901,
+      "subject": "Subject: Gumshoe, a chunky cute pulp detective with a huge round head about half of the figure's height and a tiny sturdy body: a squinting suspicious face with a square jaw, a grey fedora pulled low, a pale khaki trench coat with the collar turned up and a belt, an oversized magnifying glass held up in the left hand, a small dark grey snub pistol in the right hand, dark grey shoes; simple shapes and very few details; clearly a private eye.",
+      "negative": "dirt, grass patch, sword, shield, armour, rifle, red, purple",
+      "options": "@piece"
+    },
+    {
+      "id": "deep-sea-diver-a",
+      "concept": "DEEP-SEA DIVER",
+      "width": 56,
+      "height": 80,
+      "seed": 54001,
+      "subject": "Subject: Deep-Sea Diver, a chunky cute deep-sea diver with a huge round brass diving helmet about half of the figure's height and a stout body: three round glass portholes on the helmet, a friendly face behind the front one, a bulky pale grey-blue canvas diving suit, big dark grey gloves, heavy dark grey lead boots, a coiled cream air hose over the shoulder, an oversized harpoon gun held in both hands; simple shapes and very few details; clearly a heavy slow diver.",
+      "negative": "dirt, grass patch, water, bubbles, fish, red, purple",
+      "options": "@piece"
+    },
+    {
+      "id": "sexton-a",
+      "concept": "SEXTON",
+      "width": 56,
+      "height": 80,
+      "seed": 54101,
+      "subject": "Subject: Sexton, a chunky cute gaunt old churchyard sexton with a huge round head about half of the figure's height and a thin body: pale yellowish-white wrinkled skin, a long nose, thin lips and bushy grey eyebrows, a battered grey felt hat, a long dusty slate-blue coat, a lit tin lantern with a soft pale yellow flame in the left hand and an oversized spade over the right shoulder, dark grey boots; simple shapes and very few details; a living old man, not a skeleton.",
+      "negative": "skull, skeleton, zombie, purple, violet, red",
+      "options": "@piece"
+    },
+    {
+      "id": "fire-eater-a",
+      "concept": "FIRE-EATER",
+      "width": 56,
+      "height": 80,
+      "seed": 54201,
+      "subject": "Subject: Fire-Eater, a chunky cute circus fire-eater with a huge round head about half of the figure's height and a stocky body: a bald head with a big curled black moustache, cheeks puffed, a bare chest, baggy orange and white striped circus trousers with a wide orange sash, a flaming torch held up in the right hand, a big bright orange and yellow flame blowing out of his mouth to the right; dark grey slippers; simple shapes and very few details.",
+      "negative": "dirt, grass patch, sword, shield, armour, red cloth, purple",
+      "options": "@piece"
+    },
+    {
+      "id": "prize-pumpkin-a",
+      "concept": "PRIZE PUMPKIN",
+      "width": 72,
+      "height": 88,
+      "seed": 54301,
+      "fragments": "@creature",
+      "subject": "Subject: Prize Pumpkin, a huge chunky cute living pumpkin creature filling the whole width of the image: a big round bright orange pumpkin body with deep ribs and a darker orange shadow, a carved cheerful face with big round eyes and a grin, a curly green stem and two big green leaves on top, short stubby green vine legs, a big blue prize rosette ribbon pinned on its front; simple shapes and very few details.",
+      "negative": "candle, fire, scary, horror, hat",
+      "options": "@piece"
+    },
+    {
+      "id": "beanstalk-giant-a",
+      "concept": "BEANSTALK GIANT",
+      "width": 88,
+      "height": 104,
+      "seed": 54401,
+      "subject": "Subject: Beanstalk Giant, a huge chunky cute storybook giant, the biggest creature of all, filling the whole width of the image: a huge round head about half of his height with a big bulbous nose, bushy ginger eyebrows and a gap-toothed grin, a patched oatmeal-cream tunic with a rope belt, big bare arms, a huge green beanstalk club with leaves and pea pods held over his shoulder, big dark grey boots; simple shapes and very few details; clearly a giant, not a troll or an ogre.",
+      "negative": "dirt, grass patch, green skin, tusks, armour, red, purple",
+      "options": "@piece"
+    },
+    {
+      "id": "seedling-a",
+      "concept": "SEEDLING",
+      "width": 40,
+      "height": 56,
+      "seed": 54501,
+      "fragments": "@creature",
+      "subject": "Subject: Seedling, a tiny chunky cute sprout creature: a round pale green bean-shaped body with a lighter belly, big round black eyes and a small smile, two bright green leaves sprouting from the top of its head, tiny root feet; simple shapes and very few details.",
+      "negative": "dirt, grass patch, pot, soil, flower, red, purple",
+      "options": "@piece"
+    },
+    {
+      "id": "shade-a",
+      "concept": "SHADE",
+      "width": 48,
+      "height": 72,
+      "seed": 54601,
+      "subject": "Subject: Shade, a chunky cute small shadow spirit with a huge round head about half of its height: a smoky dark slate-blue body that tapers into a curly wisp tail instead of legs, two big round pale cyan glowing eyes and a small shy smile, two stubby smoky arms, a thin pale cyan rim along its left side; all in solid opaque colours; it hovers, the tip of its tail is the lowest thing in the image; simple shapes and very few details.",
+      "negative": "dirt, grass patch, skull, bones, robe, weapon, purple, violet, red, see-through",
+      "options": "@piece"
+    },
+    {
+      "id": "sexton-b",
+      "concept": "SEXTON",
+      "width": 56,
+      "height": 80,
+      "seed": 54102,
+      "subject": "Subject: Sexton, a chunky cute gaunt old churchyard sexton with a huge round head about half of the figure's height and a thin body: pale yellowish-white wrinkled skin, a long nose, thin lips and bushy grey eyebrows, a battered grey felt hat, a long dusty slate-blue coat, a lit tin lantern with a soft pale yellow flame in the left hand and an oversized flat square-bladed digging spade held upright in the right hand, dark grey boots standing on nothing; simple shapes and very few details; a living old man, not a skeleton.",
+      "negative": "dirt, grass patch, axe, skull, skeleton, zombie, purple, violet, red",
+      "notes": "sexton-a stood on a soil patch and its spade read as an axe: the spade is square-bladed and upright, dirt and axe excluded.",
+      "options": "@piece"
+    },
+    {
+      "id": "newsie-a-clean",
+      "concept": "NEWSIE",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 48,
+      "height": 72,
+      "seed": 53402,
+      "edit": {
+        "take": "newsie-a#0"
+      },
+      "subject": "Remove all ground: erase the dirt slab and grass tufts under the feet, so the figure stands directly on a transparent background with nothing at all under it. Keep the figure, its colours, the thick black outline and the art style exactly the same.",
+      "notes": "Ground-removal edit of newsie-a#0 (LESSONS 5.2 edit text)."
+    },
+    {
+      "id": "loan-shark-a-clean",
+      "concept": "LOAN SHARK",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 56,
+      "height": 80,
+      "seed": 53702,
+      "edit": {
+        "take": "loan-shark-a#0"
+      },
+      "subject": "Remove all ground: erase the round grass and soil plate under the feet, so the figure stands directly on a transparent background with nothing at all under it. Keep the figure, its colours, the thick black outline and the art style exactly the same.",
+      "notes": "Ground-removal edit of loan-shark-a#0."
+    },
+    {
+      "id": "notary-b",
+      "concept": "NOTARY",
+      "width": 56,
+      "height": 80,
+      "seed": 53502,
+      "options": "@piece",
+      "subject": "Subject: Notary, a chunky cute stern little clerk with a huge round head about half of the figure's height and a tiny body: a bald head with grey side whiskers, small round spectacles and a prim frown, a quill pen behind the ear, a bottle-green frock coat with a cream ruffled collar, grey trousers, a huge wooden rubber stamp shaped like a mushroom, a round knob handle on top and a flat deep blue inked face underneath, raised high in both hands, ready to stamp; simple shapes and very few details; clearly a pompous official.",
+      "negative": "dirt, grass patch, telescope, horn, gun, sword, shield, red, purple, text, letters",
+      "notes": "notary-a's stamp came back as a brass spyglass or horn: the stamp shape described, telescope and horn excluded."
+    },
+    {
+      "id": "shade-b",
+      "concept": "SHADE",
+      "width": 48,
+      "height": 72,
+      "seed": 54602,
+      "fragments": "@creature",
+      "options": "@piece",
+      "subject": "Subject: Shade, a small chunky cute ghostly shadow spirit hovering in the air: a big round head about half of its height and a smoky dark slate-blue body that tapers into one curly wisp tail instead of legs, two big round pale cyan glowing eyes and a small shy smile, two stubby smoky arms raised; solid opaque colours; it floats with nothing under it, and the tip of its tail is the lowest thing in the image.",
+      "negative": "grass block, ground tile, cat, ears, legs, skull, purple",
+      "notes": "shade-a stood on an isometric grass block, grew cat ears and legs and held a prop: the creature class (no tool), hovering, ground and cat words excluded."
+    },
+    {
+      "id": "shade-b-clean",
+      "concept": "SHADE",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 48,
+      "height": 72,
+      "seed": 54603,
+      "edit": {
+        "take": "shade-b#0"
+      },
+      "subject": "Remove all ground: erase the isometric block of soil, grass and snow under the spirit, leaving that area transparent, so the spirit floats on a transparent background with nothing at all under it. Keep the spirit, its colours, the curly tail, the thick black outline and the art style exactly the same.",
+      "notes": "Ground-removal edit of shade-b#0."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/units/stray-bellhop.png",
+      "from": "bellhop-a#0",
+      "steps": [
+        {
+          "op": "pad",
+          "width": 56,
+          "height": 80,
+          "anchor": "bottom"
+        }
+      ],
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-bellhop.png",
+      "from": "bellhop-a#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 2,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-whipping-boy.png",
+      "from": "whipping-boy-a#0",
+      "steps": [
+        {
+          "op": "pad",
+          "width": 56,
+          "height": 80,
+          "anchor": "bottom"
+        }
+      ],
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-whipping-boy.png",
+      "from": "whipping-boy-a#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 5,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-lamplighter.png",
+      "from": "lamplighter-a#0",
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-lamplighter.png",
+      "from": "lamplighter-a#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 9,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-newsie.png",
+      "from": "newsie-a-clean#0",
+      "steps": [
+        {
+          "op": "pad",
+          "width": 56,
+          "height": 80,
+          "anchor": "bottom"
+        }
+      ],
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-newsie.png",
+      "from": "newsie-a-clean#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 6,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-notary.png",
+      "from": "notary-b#0",
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-notary.png",
+      "from": "notary-b#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 2,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-crooner.png",
+      "from": "crooner-a#0",
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-crooner.png",
+      "from": "crooner-a#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-loan-shark.png",
+      "from": "loan-shark-a-clean#0",
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-loan-shark.png",
+      "from": "loan-shark-a-clean#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-groundskeeper.png",
+      "from": "groundskeeper-a#0",
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-groundskeeper.png",
+      "from": "groundskeeper-a#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 10,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-gumshoe.png",
+      "from": "gumshoe-a#0",
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-gumshoe.png",
+      "from": "gumshoe-a#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-deep-sea-diver.png",
+      "from": "deep-sea-diver-a#0",
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-deep-sea-diver.png",
+      "from": "deep-sea-diver-a#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 2,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-sexton.png",
+      "from": "sexton-b#0",
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-sexton.png",
+      "from": "sexton-b#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 2,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-fire-eater.png",
+      "from": "fire-eater-a#0",
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-fire-eater.png",
+      "from": "fire-eater-a#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 12,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-prize-pumpkin.png",
+      "from": "prize-pumpkin-a#0",
+      "width": 72,
+      "height": 88
+    },
+    {
+      "path": "public/assets/portraits/stray-prize-pumpkin.png",
+      "from": "prize-pumpkin-a#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 20,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-beanstalk-giant.png",
+      "from": "beanstalk-giant-a#0",
+      "width": 88,
+      "height": 104
+    },
+    {
+      "path": "public/assets/portraits/stray-beanstalk-giant.png",
+      "from": "beanstalk-giant-a#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 24,
+          "y": 8,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-seedling.png",
+      "from": "seedling-a#0",
+      "steps": [
+        {
+          "op": "pad",
+          "width": 56,
+          "height": 80,
+          "anchor": "bottom"
+        }
+      ],
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-seedling.png",
+      "from": "seedling-a#0",
+      "steps": [
+        {
+          "op": "pad",
+          "width": 56,
+          "height": 80,
+          "anchor": "bottom"
+        },
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 26,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "public/assets/units/stray-shade.png",
+      "from": "shade-b-clean#0",
+      "steps": [
+        {
+          "op": "pad",
+          "width": 56,
+          "height": 80,
+          "anchor": "bottom"
+        }
+      ],
+      "width": 56,
+      "height": 80
+    },
+    {
+      "path": "public/assets/portraits/stray-shade.png",
+      "from": "shade-b-clean#0",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 1,
+          "width": 48,
+          "height": 48
+        }
+      ],
+      "width": 48,
+      "height": 48
+    }
+  ]
+}

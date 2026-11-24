@@ -1,0 +1,651 @@
+{
+  "knight-errant-a": {
+    "id": "knight-errant-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-c52aa997-8879-4234-adb8-d5970d74bb9d",
+    "submittedAt": "2026-11-24T23:00:11.753Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Knight Errant, a chunky cute hero knight with a huge round head riding a big sturdy chestnut horse seen from the front-right, rider and horse filling the whole width of the image: an open-faced light steel helmet with a big crimson plume showing a brave grinning face with a moustache, a crimson surcoat with a gold-yellow cross over light steel mail, a long crimson cape, a light steel sword raised high in the right hand; the horse is warm chestnut with a cream mane and a white blaze and a short crimson saddle cloth with gold-yellow trim; simple shapes; the hooves are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 52101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Knight Errant, a chunky cute hero knight with a huge round head riding a big sturdy chestnut horse seen from the front-right, rider and horse filling the whole width of the image: an open-faced light steel helmet with a big crimson plume showing a brave grinning face with a moustache, a crimson surcoat with a gold-yellow cross over light steel mail, a long crimson cape, a light steel sword raised high in the right hand; the horse is warm chestnut with a cream mane and a white blaze and a short crimson saddle cloth with gold-yellow trim; simple shapes; the hooves are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, lance, caparison, white horse, brown leather."
+    },
+    "at": "2026-11-24T23:00:11.754Z",
+    "usageUsd": 0.010354040940602622,
+    "candidates": [
+      {
+        "file": "knight-errant-a-0.png",
+        "sha256": "0fc8b59ae7544cabf4ccaa3110ae3eb5693005411b70e161cd57770574db896e",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "revenant-a": {
+    "id": "revenant-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-1acf2a98-a4e6-4645-8a8d-d4b8c5e48fd7",
+    "submittedAt": "2026-11-24T23:00:49.839Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Revenant, a chunky cute undead knight with a huge round pale ivory skull head riding a skeleton horse seen from the front-right, rider and mount filling the whole width of the image: glowing violet eye sockets, a dented dark iron helmet with a tarnished bronze rim and a ragged near-black plume, dark iron armour, a ragged near-black cape with thin bright violet trim, a big notched light grey iron sword raised; the horse is all pale ivory bones with a bony skull head with violet eyes and a ragged near-black saddle cloth; simple shapes; the hooves are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 52301,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Revenant, a chunky cute undead knight with a huge round pale ivory skull head riding a skeleton horse seen from the front-right, rider and mount filling the whole width of the image: glowing violet eye sockets, a dented dark iron helmet with a tarnished bronze rim and a ragged near-black plume, dark iron armour, a ragged near-black cape with thin bright violet trim, a big notched light grey iron sword raised; the horse is all pale ivory bones with a bony skull head with violet eyes and a ragged near-black saddle cloth; simple shapes; the hooves are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, red cloth, green skin, blood, gore, flesh horse, brown horse."
+    },
+    "at": "2026-11-24T23:00:49.839Z",
+    "usageUsd": 0.009035727130042182,
+    "candidates": [
+      {
+        "file": "revenant-a-0.png",
+        "sha256": "f68e61a776f4da37924d290b0e3d8b517897c965a3a3508a3a1cb7d3bc7c2dc1",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "warlord-a": {
+    "id": "warlord-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-28720eca-ecb9-4d01-974a-02b1e864b68a",
+    "submittedAt": "2026-11-24T23:01:24.433Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Warlord, a chunky cute goblin warlord with a huge round head riding a huge bristly war boar seen from the front-right, rider and boar filling the whole width of the image: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a big toothy shouting grin, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, an oversized jagged tin cleaver raised high; the boar is slate grey with a pale grey belly, big cream tusks, a stiff dark grey mane and a hazard yellow saddle blanket; simple shapes; the hooves are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 52501,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Warlord, a chunky cute goblin warlord with a huge round head riding a huge bristly war boar seen from the front-right, rider and boar filling the whole width of the image: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a big toothy shouting grin, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, an oversized jagged tin cleaver raised high; the boar is slate grey with a pale grey belly, big cream tusks, a stiff dark grey mane and a hazard yellow saddle blanket; simple shapes; the hooves are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, wolf, horse, red cloth, skull, gun, brown leather."
+    },
+    "at": "2026-11-24T23:01:24.434Z",
+    "usageUsd": 0.008650639586978488,
+    "candidates": [
+      {
+        "file": "warlord-a-0.png",
+        "sha256": "9898d1664754f606601a0a5d46083eb57c58e2bb698d157bba83bf8ef6a7f114",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "enchanter-a": {
+    "id": "enchanter-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-1d16b67a-01dd-4a87-b954-f04da36fdd53",
+    "submittedAt": "2026-11-24T23:02:39.974Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Enchanter, a chunky cute storybook enchantress with a huge round head riding a white unicorn seen from the front-right, rider and unicorn filling the whole width of the image: a kind smiling face, long golden hair, a tall pointed crimson cone hat with a flowing cream veil, a crimson and cream gown, a long pale birch wand with a small gold-yellow star and sparkles held up in the right hand; the unicorn is snow white with a cream mane, a gold-yellow spiral horn and a crimson saddle cloth with gold-yellow trim; simple shapes; the hooves are the lowest thing in the image."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 52201,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Enchanter, a chunky cute storybook enchantress with a huge round head riding a white unicorn seen from the front-right, rider and unicorn filling the whole width of the image: a kind smiling face, long golden hair, a tall pointed crimson cone hat with a flowing cream veil, a crimson and cream gown, a long pale birch wand with a small gold-yellow star and sparkles held up in the right hand; the unicorn is snow white with a cream mane, a gold-yellow spiral horn and a crimson saddle cloth with gold-yellow trim; simple shapes; the hooves are the lowest thing in the image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, armour, sword, wings, rainbow, pink, purple."
+    },
+    "at": "2026-11-24T23:02:39.975Z",
+    "usageUsd": 0.00846337389945984,
+    "candidates": [
+      {
+        "file": "enchanter-a-0.png",
+        "sha256": "7f693acb78aa2de5c8919b864517b674832cb27e5bd23fa4cdc9c63d2bf73a56",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "mortician-a": {
+    "id": "mortician-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-9c22c3d0-899d-40a6-81e2-b64896869fef",
+    "submittedAt": "2026-11-24T23:03:12.835Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Mortician, a chunky cute deadpan undertaker with a huge round head riding a gaunt pale grey donkey seen from the front-right, filling the whole width: pale yellowish-white wrinkled skin, a long nose, thin lips, droopy violet eyes, a very tall near-black top hat with a bright violet band, a near-black frock coat with a cream collar, a small tarnished bronze hand bell held up; the donkey is pale grey with long ears, a dark grey mane, a tall near-black funeral plume on its head and a near-black saddle cloth with violet trim; simple shapes; the hooves are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 52401,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Mortician, a chunky cute deadpan undertaker with a huge round head riding a gaunt pale grey donkey seen from the front-right, filling the whole width: pale yellowish-white wrinkled skin, a long nose, thin lips, droopy violet eyes, a very tall near-black top hat with a bright violet band, a near-black frock coat with a cream collar, a small tarnished bronze hand bell held up; the donkey is pale grey with long ears, a dark grey mane, a tall near-black funeral plume on its head and a near-black saddle cloth with violet trim; simple shapes; the hooves are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, skull face, red cloth, green skin, blood, horse."
+    },
+    "at": "2026-11-24T23:03:12.836Z",
+    "usageUsd": 0.008469831625620525,
+    "candidates": [
+      {
+        "file": "mortician-a-0.png",
+        "sha256": "3d757f5db6b944c4f4112a941bffece7bc11edfcf9e3da4d2927de77ad095cd0",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "weatherwitch-a": {
+    "id": "weatherwitch-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-7830202d-c164-4272-b5f5-199f13146c8a",
+    "submittedAt": "2026-11-24T23:03:46.568Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Weatherwitch, a chunky cute old goblin storm witch with a huge round head riding a big shaggy goat seen from the front-right, rider and goat filling the whole width of the image: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a hooked nose, a cackling grin, wild white hair, a dented tin pot hat with a small lightning rod, a hazard yellow #fdd20f shawl, a tin lantern with a crackling yellow spark held up; the goat is pale sand-buff with a cream beard, big curly grey horns and a hazard yellow saddle blanket; simple shapes; the hooves are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 52601,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Weatherwitch, a chunky cute old goblin storm witch with a huge round head riding a big shaggy goat seen from the front-right, rider and goat filling the whole width of the image: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a hooked nose, a cackling grin, wild white hair, a dented tin pot hat with a small lightning rod, a hazard yellow #fdd20f shawl, a tin lantern with a crackling yellow spark held up; the goat is pale sand-buff with a cream beard, big curly grey horns and a hazard yellow saddle blanket; simple shapes; the hooves are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, broom, flying, purple glow, red cloth, skull, gun."
+    },
+    "at": "2026-11-24T23:03:46.569Z",
+    "usageUsd": 0.008555453062057496,
+    "candidates": [
+      {
+        "file": "weatherwitch-a-0.png",
+        "sha256": "41b9261e36df07278f3a695ac435df9cbeca5221a9081419e71f889dc246f664",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "knight-errant-portrait-a": {
+    "id": "knight-errant-portrait-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-07cf531e-0f49-4d12-895b-5a31ff5f2ad2",
+    "submittedAt": "2026-11-24T23:04:48.024Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Knight Errant portrait, head and shoulders of a chunky cute hero knight: an open-faced light steel helmet with a big crimson plume, a brave grin and a brown moustache, a crimson surcoat with a gold-yellow cross over light steel mail, a crimson cape on the shoulders, the hilt of a steel sword over one shoulder."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 52111,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Knight Errant portrait, head and shoulders of a chunky cute hero knight: an open-faced light steel helmet with a big crimson plume, a brave grin and a brown moustache, a crimson surcoat with a gold-yellow cross over light steel mail, a crimson cape on the shoulders, the hilt of a steel sword over one shoulder. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, horse, visor, purple."
+    },
+    "at": "2026-11-24T23:04:48.025Z",
+    "usageUsd": 0.007053488466474745,
+    "candidates": [
+      {
+        "file": "knight-errant-portrait-a-0.png",
+        "sha256": "52193d28d59a7b837e8c244b8345fa24fc97571b7737aa9d9d01901ed39b78ab",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "revenant-portrait-a": {
+    "id": "revenant-portrait-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-6e5f9128-040f-47d1-8a41-385fa5bd0d09",
+    "submittedAt": "2026-11-24T23:05:09.965Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Revenant portrait, head and shoulders of a chunky cute undead knight: a pale ivory skull face with glowing bright violet eye sockets and a toothy grin, a dented dark iron helmet with a tarnished bronze rim and a ragged near-black plume, dark iron pauldrons, a ragged near-black cape with thin bright violet trim."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 52311,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Revenant portrait, head and shoulders of a chunky cute undead knight: a pale ivory skull face with glowing bright violet eye sockets and a toothy grin, a dented dark iron helmet with a tarnished bronze rim and a ragged near-black plume, dark iron pauldrons, a ragged near-black cape with thin bright violet trim. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, horse, red cloth, green skin, blood."
+    },
+    "at": "2026-11-24T23:05:09.966Z",
+    "usageUsd": 0.006939617262946235,
+    "candidates": [
+      {
+        "file": "revenant-portrait-a-0.png",
+        "sha256": "0365633e705c9293b2309769db23692a7beb5f3dc126609f0428e58ae16399fa",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "warlord-portrait-a": {
+    "id": "warlord-portrait-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-3563331a-0825-4864-9b18-cd1bb841fee8",
+    "submittedAt": "2026-11-24T23:05:29.710Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Warlord portrait, head and shoulders of a chunky cute goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears sticking out sideways, a big toothy shouting grin, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape over the shoulders, a jagged tin cleaver resting on one shoulder."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 52511,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Warlord portrait, head and shoulders of a chunky cute goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears sticking out sideways, a big toothy shouting grin, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape over the shoulders, a jagged tin cleaver resting on one shoulder. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, boar, red cloth, skull, olive skin."
+    },
+    "at": "2026-11-24T23:05:29.711Z",
+    "usageUsd": 0.007037222835752699,
+    "candidates": [
+      {
+        "file": "warlord-portrait-a-0.png",
+        "sha256": "98e4599155f2e0497f25365795b946c20d7bdbb727e99b7353861629596b4a4c",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "knight-errant-portrait-a-bust": {
+    "id": "knight-errant-portrait-a-bust",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "11440604-7891-493a-a6c6-c68067e0450f",
+    "submittedAt": "2026-11-24T23:06:08.092Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the open-faced light steel helmet with the big crimson plume, the brave grin and moustache, the crimson surcoat with the gold-yellow cross at the bottom edge. Keep the colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take class-heroes/knight-errant-portrait-a#0 sha256 52193d28d59a7b837e8c244b8345fa24fc97571b7737aa9d9d01901ed39b78ab",
+      "width": 48,
+      "height": 48,
+      "seed": 52112,
+      "no_background": true,
+      "description": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the open-faced light steel helmet with the big crimson plume, the brave grin and moustache, the crimson surcoat with the gold-yellow cross at the bottom edge. Keep the colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-24T23:06:49.034Z",
+    "candidates": [
+      {
+        "file": "knight-errant-portrait-a-bust-0.png",
+        "sha256": "95a403600a34c5fea00c5c73f0812b2f3458af8ffff7f08b3b5c894df71d1495",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "knight-errant-portrait-a-bust-1.png",
+        "sha256": "95a403600a34c5fea00c5c73f0812b2f3458af8ffff7f08b3b5c894df71d1495",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "enchanter-portrait-a": {
+    "id": "enchanter-portrait-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-37cb7fdb-af30-4e01-a23b-07b77c119265",
+    "submittedAt": "2026-11-24T23:07:32.886Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Enchanter portrait, head and shoulders of a chunky cute storybook enchantress: a kind smile, long golden hair, a tall pointed crimson hat with a gold-yellow band, a crimson and cream gown, a pale birch wand with a small gold-yellow star and sparkles held beside her face."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 52211,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Enchanter portrait, head and shoulders of a chunky cute storybook enchantress: a kind smile, long golden hair, a tall pointed crimson hat with a gold-yellow band, a crimson and cream gown, a pale birch wand with a small gold-yellow star and sparkles held beside her face. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, unicorn, horse, armour, purple, pink."
+    },
+    "at": "2026-11-24T23:07:32.886Z",
+    "usageUsd": 0.009520942846934001,
+    "candidates": [
+      {
+        "file": "enchanter-portrait-a-0.png",
+        "sha256": "13c9e3a2d12d5db668a3f40ef11688be1d88fbaf1cc561bb5156b818022bccd7",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "mortician-portrait-a": {
+    "id": "mortician-portrait-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-dd7679d5-88d4-45b5-b4e0-4860e01feec9",
+    "submittedAt": "2026-11-24T23:08:07.434Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Mortician portrait, head and shoulders of a chunky cute deadpan undertaker: pale yellowish-white wrinkled skin, a long nose, thin lips, droopy violet eyes, a very tall near-black top hat with a bright violet band, a near-black frock coat with a cream collar, a small tarnished bronze hand bell held up beside his face."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 52411,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Mortician portrait, head and shoulders of a chunky cute deadpan undertaker: pale yellowish-white wrinkled skin, a long nose, thin lips, droopy violet eyes, a very tall near-black top hat with a bright violet band, a near-black frock coat with a cream collar, a small tarnished bronze hand bell held up beside his face. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, skull face, donkey, red cloth, green skin."
+    },
+    "at": "2026-11-24T23:08:07.435Z",
+    "usageUsd": 0.008625981807708741,
+    "candidates": [
+      {
+        "file": "mortician-portrait-a-0.png",
+        "sha256": "7cc2528bc1f256f4e0a86ff8d26a3b2c1e9a6da0ec8cdc834e88e7a229e5b455",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "weatherwitch-portrait-a": {
+    "id": "weatherwitch-portrait-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-7a4168e4-f50c-4638-8636-38659d7d2823",
+    "submittedAt": "2026-11-24T23:08:26.660Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Weatherwitch portrait, head and shoulders of a chunky cute old goblin storm witch: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a hooked nose, a cackling grin, wild white hair, a dented tin pot hat with a small lightning rod and a yellow spark, a hazard yellow #fdd20f shawl over the shoulders."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 52611,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Weatherwitch portrait, head and shoulders of a chunky cute old goblin storm witch: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a hooked nose, a cackling grin, wild white hair, a dented tin pot hat with a small lightning rod and a yellow spark, a hazard yellow #fdd20f shawl over the shoulders. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, goat, broom, purple glow, red cloth."
+    },
+    "at": "2026-11-24T23:08:26.661Z",
+    "usageUsd": 0.0069534607198503285,
+    "candidates": [
+      {
+        "file": "weatherwitch-portrait-a-0.png",
+        "sha256": "be57313bbf16da53824d49fa4c68f488472464a2d03a84256db0cd7ea8fdc91e",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  }
+}

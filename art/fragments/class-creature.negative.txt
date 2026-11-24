@@ -1,0 +1,1 @@
+pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, multiple creatures, crowd, armour, weapon, blood, gore, horror, realistic

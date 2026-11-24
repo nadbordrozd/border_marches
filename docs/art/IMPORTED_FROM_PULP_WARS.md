@@ -1,7 +1,8 @@
 # Imported from Pulp Wars
 
 Bead border_marches-xaj.4. The user: "FEEL FREE TO REUSE SPRITES from the
-other game". These 233 PNGs were copied byte for byte (no pixel edits, no
+other game". These 233 PNGs (and 26 more for the v0.2 factions and strays,
+bead border_marches-bzc.14, [listed last](#v02-factions-and-strays-bead-border_marches-bzc14)) were copied byte for byte (no pixel edits, no
 PixelLab calls) from the sister project Pulp Wars,
 `/Users/nadbor/projects/pulp_wars` (working tree of branch `main`, commit
 `42529e562f83f36869ddc62e7ec08ecbddf9bef1`, 2026-11-15), and renamed to
@@ -17,8 +18,8 @@ on light and dark).
 
 | Category | Files |
 | --- | --- |
-| Units | 23 |
-| Portraits | 23 |
+| Units | 36 (13 added by bead bzc.14) |
+| Portraits | 36 (13 added by bead bzc.14) |
 | Towns | 7 |
 | Textured grounds | 5 |
 | Ground swatches | 5 |
@@ -28,7 +29,7 @@ on light and dark).
 | Forest pieces | 100 |
 | Forest seam clumps | 18 |
 | Map objects | 18 |
-| **Total** | **233** |
+| **Total** | **259** |
 
 ## How these files relate to the studio pipeline
 
@@ -399,3 +400,36 @@ Source paths are relative to the Pulp Wars repository root.
 | `public/assets/chibi/resources/chibi-treasure.png` | `public/assets/objects/treasure.png` | 40x40 | `a7f2d5d712fdc5469a3dd7547f61f95c48bf4a8026a055f93270f065ae77b5ed` |
 | `public/assets/chibi/resources/chibi-pearls.png` | `public/assets/objects/pearls.png` | 40x40 | `552b406824bea2c9bd2e573d6957a844e51c21c8f652b3a7c77a960ced29d686` |
 | `public/assets/chibi/resources/chibi-grave.png` | `public/assets/objects/grave.png` | 40x40 | `5f5f3ab9a6d2f6eeeac6fda1211f39e6af778b08c2fd5df2ec125b4ac3122283` |
+
+### v0.2 factions and strays (bead border_marches-bzc.14)
+
+Copied byte for byte from Pulp Wars commit `4b03324415d335bcff1b44a5dcec2c56ac720a52` (2026-11-24), with the same renames (the `chibi-direction-` prefix dropped, the Pulp Wars faction kept as a prefix). Each unit is the sprite the faction docs (`docs/design/FACTION_*.md` section 10) or the stray roster (`docs/art/V02_UNIT_ART.md`) name; its portrait is the Pulp Wars portrait of the same unit (the frog unit portrait is `cult-frog`). Feet are Pulp Wars measurements (unit-shadow-measurements-v7); anchors are the Pulp Wars class default except the Ghoul (32, 48).
+
+| Source | Destination | Size | sha256 |
+| --- | --- | --- | --- |
+| `public/assets/chibi/units/chibi-direction-knight.png` | `public/assets/units/knight.png` | 72x88 | `7f0bd7b7cd1933208ca21820428887cc1720e411b701bd42d11fffa9b184d427` |
+| `public/assets/chibi/units/chibi-direction-marksman.png` | `public/assets/units/marksman.png` | 56x80 | `f566d977ae81169f1383f51603520b92c12ecaaa69fccf89d0135bbef0966bf7` |
+| `public/assets/chibi/units/chibi-direction-swordsman.png` | `public/assets/units/swordsman.png` | 56x80 | `9c9e7457e914ef949e5b7bbeb152e71bb2e7638273745aa46731067ff2cbfd7a` |
+| `public/assets/chibi/units/chibi-direction-undead-ghoul.png` | `public/assets/units/undead-ghoul.png` | 72x88 | `0a901d0eb96244e01ec0eac9a4c67ca05a574fb3625fa45854978ecec0032e1c` |
+| `public/assets/chibi/units/chibi-direction-undead-banshee.png` | `public/assets/units/undead-banshee.png` | 56x80 | `1132af5bba3af9c1e9e582df698f6b9906c9ebb17b478b8be5d9a55fc90c7925` |
+| `public/assets/chibi/units/chibi-direction-undead-necromancer.png` | `public/assets/units/undead-necromancer.png` | 56x80 | `be79b464d652f44c9cfc8bca3eec3ccf65130e4d4def727c75bdd708724212a3` |
+| `public/assets/chibi/units/chibi-direction-cult-imp.png` | `public/assets/units/cult-imp.png` | 56x80 | `e9a1014bfbfd26287c4e46c7bfd7b6ca7cdc4ad17f70865043642530b3e18ae0` |
+| `public/assets/chibi/units/chibi-direction-cult-tentacle.png` | `public/assets/units/cult-tentacle.png` | 56x80 | `a758e82cda310d2eacd9f1c7403be659694d70503267939007528fd6a4972513` |
+| `public/assets/chibi/units/chibi-direction-cult-frog-unit.png` | `public/assets/units/cult-frog-unit.png` | 56x80 | `f0f922653c4b4176104a43578857c8eecdb3b1002ab711997c82f3295da7572e` |
+| `public/assets/chibi/units/chibi-direction-dwarf-clockwork-gunner.png` | `public/assets/units/dwarf-clockwork-gunner.png` | 56x80 | `d7f3db777e5ce063fa8ebe8e79048c16529bf66e4d8670a3479de856372a38e2` |
+| `public/assets/chibi/units/chibi-direction-dwarf-engineer.png` | `public/assets/units/dwarf-engineer.png` | 56x80 | `67bb9260cd497d243e434463bebc6d528349083d32b3d5404f7da1a707954992` |
+| `public/assets/chibi/units/chibi-direction-dwarf-brass-titan.png` | `public/assets/units/dwarf-brass-titan.png` | 88x104 | `bb75bfed5556a0071d8100919d5fb062c63aaa481eef7134f0d6fd2597cd4577` |
+| `public/assets/chibi/units/chibi-direction-ice-folk-walrus.png` | `public/assets/units/ice-folk-walrus.png` | 56x80 | `4a9aa4fa5c5bcd3510071256c4c0c122f001e22961d1c9e2c8e3de0c8cc83a1e` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-knight.png` | `public/assets/portraits/knight.png` | 48x48 | `7dc1d9c85a7d6b7b2a4609d91e2abeebeb3fac27b9a1afae776527b020ad9c44` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-marksman.png` | `public/assets/portraits/marksman.png` | 48x48 | `267cef159fa5570780670e12d1efef47f820e5b7e838898571f24f24966c70c3` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-swordsman.png` | `public/assets/portraits/swordsman.png` | 48x48 | `9acaaf7cd47d410afb129663eba4c5a7917e8bb72bc8443c8cf77cc543cb8f02` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-undead-ghoul.png` | `public/assets/portraits/undead-ghoul.png` | 48x48 | `a5b76182ec446cfa2496a2db297f30681e4bad3a0b09d23a1f9afc9a663d9c70` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-undead-banshee.png` | `public/assets/portraits/undead-banshee.png` | 48x48 | `99caf0d8503c90e64b5f48700bb70f4bf9c8f417c0ad19b553363f38634cab49` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-undead-necromancer.png` | `public/assets/portraits/undead-necromancer.png` | 48x48 | `de74643bfd122be47e39c5cb4d25192a9ace3c3d612ae9877e6744c71342099c` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-cult-imp.png` | `public/assets/portraits/cult-imp.png` | 48x48 | `3305447bde22735785d9eaa0c8bd4998ed6f8fe0d8259709a55cd52ea8cfdfcc` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-cult-tentacle.png` | `public/assets/portraits/cult-tentacle.png` | 48x48 | `1c2feef54e60ec54d6a3829db793ad1ae0e6acbc7c8be67c4464bad7aa799183` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-cult-frog.png` | `public/assets/portraits/cult-frog-unit.png` | 48x48 | `c8fe773577905c093bcd7c2f5c54e9ea8c0c57360eb7ee55f4d72c6bfbac6e6a` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-dwarf-clockwork-gunner.png` | `public/assets/portraits/dwarf-clockwork-gunner.png` | 48x48 | `82504ba2a3baf617399bbecdd025e1b86031dbf848eb64748302cb575d201fd1` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-dwarf-engineer.png` | `public/assets/portraits/dwarf-engineer.png` | 48x48 | `28e02c1df51550fdb7cd6875d49088290aa571221562ee0c7c809a2346588d9d` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-dwarf-brass-titan.png` | `public/assets/portraits/dwarf-brass-titan.png` | 48x48 | `71f096b525864eb00a729dab1a358144b878802998f4b39fe28579fe3852a4ec` |
+| `public/assets/chibi/portraits/chibi-direction-portrait-ice-folk-walrus.png` | `public/assets/portraits/ice-folk-walrus.png` | 48x48 | `e457a68d959d5f7443f656ff144e04db6105ae8da023973c17b695e759452cea` |

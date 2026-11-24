@@ -1,0 +1,373 @@
+{
+  "squire-a": {
+    "id": "squire-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-e3afacde-7a0d-4415-9cb0-00619529dce5",
+    "submittedAt": "2026-11-24T22:53:02.728Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Squire, a chunky cute young squire boy with a huge round head about half of the figure's height and a tiny body: a friendly freckled face with big eyes, messy straw-blond hair under a small round light steel cap, a bright crimson tunic with a gold-yellow cross, cream sleeves, dark slate-grey boots, a short light steel sword in the right hand and a huge crimson kite shield with a gold-yellow cross on the left arm, far too big for him, reaching from his chin to his ankles; simple shapes and very few details; clearly a small eager boy, not a grown soldier."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 51101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Squire, a chunky cute young squire boy with a huge round head about half of the figure's height and a tiny body: a friendly freckled face with big eyes, messy straw-blond hair under a small round light steel cap, a bright crimson tunic with a gold-yellow cross, cream sleeves, dark slate-grey boots, a short light steel sword in the right hand and a huge crimson kite shield with a gold-yellow cross on the left arm, far too big for him, reaching from his chin to his ankles; simple shapes and very few details; clearly a small eager boy, not a grown soldier. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, visor, beard, horse, bow, brown leather."
+    },
+    "at": "2026-11-24T22:53:02.730Z",
+    "usageUsd": 0.0071041131814320885,
+    "candidates": [
+      {
+        "file": "squire-a-0.png",
+        "sha256": "d6a896abb20d0bbc2e8e5b6b84974237e013b5836b23411a5e0c02cb865963af",
+        "width": 48,
+        "height": 72
+      }
+    ]
+  },
+  "late-king-a": {
+    "id": "late-king-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-bdc5fccf-35f4-4ad5-8d9b-595c4bb493a6",
+    "submittedAt": "2026-11-24T22:53:51.998Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Late King, a chunky cute skeleton king seated on a royal litter carried by two small skeleton bearers, filling the whole width of the image: the king has a huge round pale ivory skull with glowing bright violet eye sockets and a wide-open mouth mid-proclamation, a big tarnished bronze crown, a near-black royal cape with a white ermine collar and thin bright violet trim, one bony arm raised grandly and a cream scroll in the other hand; the litter is a near-black wooden seat on two long poles resting on the bearers' shoulders; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 88,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 51201,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Late King, a chunky cute skeleton king seated on a royal litter carried by two small skeleton bearers, filling the whole width of the image: the king has a huge round pale ivory skull with glowing bright violet eye sockets and a wide-open mouth mid-proclamation, a big tarnished bronze crown, a near-black royal cape with a white ermine collar and thin bright violet trim, one bony arm raised grandly and a cream scroll in the other hand; the litter is a near-black wooden seat on two long poles resting on the bearers' shoulders; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, red cloth, green skin, blood, gore, horse, throne room."
+    },
+    "at": "2026-11-24T22:53:51.998Z",
+    "usageUsd": 0.010277276198069254,
+    "candidates": [
+      {
+        "file": "late-king-a-0.png",
+        "sha256": "d90b8ebbf1fbc9a8a52aaaa4553268e5c2eba5ea91723341f971aae1b25605fc",
+        "width": 88,
+        "height": 104
+      }
+    ]
+  },
+  "boomshaman-a": {
+    "id": "boomshaman-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-3e55f377-04b5-4036-94db-f87c6152b454",
+    "submittedAt": "2026-11-24T22:54:35.596Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Boomshaman, a chunky cute goblin storm shaman with a huge round head about half of the figure's height and a small body, head and ears filling the whole width: bright lime green skin #86c232 with a lighter #acdc55 face and darker #5a9424 shading, huge pointed ears, a manic grin, frizzled white hair standing on end, a pale sand-buff patched hide robe, a tall crooked tin lightning rod with a hazard yellow #fdd20f spiral and a crackling pale yellow spark held up high in the right hand, small black bombs on the belt, bare lime green feet; simple shapes; clearly a reckless spellcaster."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 51301,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Boomshaman, a chunky cute goblin storm shaman with a huge round head about half of the figure's height and a small body, head and ears filling the whole width: bright lime green skin #86c232 with a lighter #acdc55 face and darker #5a9424 shading, huge pointed ears, a manic grin, frizzled white hair standing on end, a pale sand-buff patched hide robe, a tall crooked tin lightning rod with a hazard yellow #fdd20f spiral and a crackling pale yellow spark held up high in the right hand, small black bombs on the belt, bare lime green feet; simple shapes; clearly a reckless spellcaster. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, purple glow, red cloth, skull, gun."
+    },
+    "at": "2026-11-24T22:54:35.597Z",
+    "usageUsd": 0.009757484330071344,
+    "candidates": [
+      {
+        "file": "boomshaman-a-0.png",
+        "sha256": "64f49b43cbb9d14e31ef82f1ecb99810f1aaf83b07227da4e998a1422ee1d6be",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "late-king-b": {
+    "id": "late-king-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-3001307d-b2d2-4696-b4dc-de577ca2658c",
+    "submittedAt": "2026-11-24T22:56:32.697Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Late King, a chunky cute skeleton king seated on a royal litter on the shoulders of two small skeleton bearers, one in front and one behind, filling the whole width of the image: the king has a huge round pale ivory skull with glowing bright violet eye sockets and a wide-open mouth mid-proclamation, a big tarnished bronze crown, a near-black royal cape with a white ermine collar and thin bright violet trim, one bony arm raised grandly holding a cream scroll; the litter is a near-black wooden chair on two long poles; the bearers are pale ivory skeletons; simple shapes."
+        }
+      ],
+      "image_size": {
+        "width": 88,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 51202,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Late King, a chunky cute skeleton king seated on a royal litter on the shoulders of two small skeleton bearers, one in front and one behind, filling the whole width of the image: the king has a huge round pale ivory skull with glowing bright violet eye sockets and a wide-open mouth mid-proclamation, a big tarnished bronze crown, a near-black royal cape with a white ermine collar and thin bright violet trim, one bony arm raised grandly holding a cream scroll; the litter is a near-black wooden chair on two long poles; the bearers are pale ivory skeletons; simple shapes. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, wheels, cart, animals, red cloth, green skin, blood, gore, horse."
+    },
+    "at": "2026-11-24T22:56:32.699Z",
+    "usageUsd": 0.013021380265553793,
+    "candidates": [
+      {
+        "file": "late-king-b-0.png",
+        "sha256": "52460bfc47b65c4ef84cc78d48eb6a4192ae58e88611415bdf7824c2401e1734",
+        "width": 88,
+        "height": 104
+      }
+    ]
+  },
+  "boomshaman-b": {
+    "id": "boomshaman-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-0da2d731-8f5d-4dc4-9d00-4c20d170aaa1",
+    "submittedAt": "2026-11-24T22:57:02.489Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Boomshaman, a chunky cute goblin storm shaman with a huge round head about half of the figure's height and a small body, head and ears filling the whole width: bright lime green skin #86c232 like a fresh lime, not olive, lighter #acdc55 face, huge pointed ears, a manic grin, frizzled white hair standing on end, a pale sand-buff patched hide robe, a tall crooked light grey tin lightning rod with a hazard yellow #fdd20f zigzag bolt crackling at its tip held up high in the right hand, small black bombs on the belt, bare lime green feet standing on nothing; simple shapes."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 51302,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Boomshaman, a chunky cute goblin storm shaman with a huge round head about half of the figure's height and a small body, head and ears filling the whole width: bright lime green skin #86c232 like a fresh lime, not olive, lighter #acdc55 face, huge pointed ears, a manic grin, frizzled white hair standing on end, a pale sand-buff patched hide robe, a tall crooked light grey tin lightning rod with a hazard yellow #fdd20f zigzag bolt crackling at its tip held up high in the right hand, small black bombs on the belt, bare lime green feet standing on nothing; simple shapes. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, ground patch, fire, torch, purple glow, red cloth, skull, gun."
+    },
+    "at": "2026-11-24T22:57:02.489Z",
+    "usageUsd": 0.008112179782655504,
+    "candidates": [
+      {
+        "file": "boomshaman-b-0.png",
+        "sha256": "911c19ea10a99f33696fc0092baf27470de0ec468fb854cab183de68e134dbf5",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "friar-a": {
+    "id": "friar-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-c1fff3b9-3fd1-4c99-a541-615a82e4ce45",
+    "submittedAt": "2026-11-24T22:58:36.243Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Friar, a chunky cute jolly round friar with a huge round head about half of the figure's height and a plump sturdy body: a bald tonsured head with a ring of straw-blond hair, rosy cheeks and a big kind smile, a long plain cream-white wool habit down to the feet with a bright crimson rope belt and a small gold-yellow cross pendant, a long pale yellow birch quarterstaff held upright in the right hand, the left hand raised in blessing with a few small gold-yellow sparkles, dark slate-grey sandals; clearly a healer monk, not a soldier; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 51401,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Friar, a chunky cute jolly round friar with a huge round head about half of the figure's height and a plump sturdy body: a bald tonsured head with a ring of straw-blond hair, rosy cheeks and a big kind smile, a long plain cream-white wool habit down to the feet with a bright crimson rope belt and a small gold-yellow cross pendant, a long pale yellow birch quarterstaff held upright in the right hand, the left hand raised in blessing with a few small gold-yellow sparkles, dark slate-grey sandals; clearly a healer monk, not a soldier; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, armour, helmet, shield, sword, brown robe, brown leather."
+    },
+    "at": "2026-11-24T22:58:36.245Z",
+    "usageUsd": 0.007752756569120619,
+    "candidates": [
+      {
+        "file": "friar-a-0.png",
+        "sha256": "2f033c096f197ca00876497fad0a743ad70622644bd032fb6a2a4227b8fb936d",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "dragonslayer-a": {
+    "id": "dragonslayer-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-08e182c6-db34-4765-bc79-ace740037f13",
+    "submittedAt": "2026-11-24T22:59:21.104Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Dragonslayer, one very large chunky cute champion knight, the biggest and heaviest of the kingdom, filling the whole width of the image: a huge round head in a closed light steel great helm with a gold-yellow crown band and a big crimson plume, massive rounded light steel plate armour with gold-yellow rims, a crimson surcoat with a gold-yellow cross, an enormous light steel greatsword held upright, and a big stuffed green dragon head with cream horns and a lolling tongue strapped on his back as a trophy, peeking over his shoulder; dark slate-grey boots; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 88,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 51501,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Dragonslayer, one very large chunky cute champion knight, the biggest and heaviest of the kingdom, filling the whole width of the image: a huge round head in a closed light steel great helm with a gold-yellow crown band and a big crimson plume, massive rounded light steel plate armour with gold-yellow rims, a crimson surcoat with a gold-yellow cross, an enormous light steel greatsword held upright, and a big stuffed green dragon head with cream horns and a lolling tongue strapped on his back as a trophy, peeking over his shoulder; dark slate-grey boots; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, horse, shield, skull, brown leather, blood."
+    },
+    "at": "2026-11-24T22:59:21.104Z",
+    "usageUsd": 0.009804722812440662,
+    "candidates": [
+      {
+        "file": "dragonslayer-a-0.png",
+        "sha256": "0883373511c967876cc0bee4b286e9a302ebeb97fd71be9d3c4ca11bbf62ac0d",
+        "width": 88,
+        "height": 104
+      }
+    ]
+  }
+}

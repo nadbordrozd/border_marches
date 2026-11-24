@@ -1,0 +1,180 @@
+{
+  "set": "class-heroes",
+  "bead": "border_marches-bzc.14",
+  "class": "units",
+  "exploration": false,
+  "_doc": "Adventure-map sprites (large unit, 72x88, like the Lost World Chieftain of lost-world-hero) and 48x48 portraits of the six v0.2 hero classes. The faction docs do not say mounted or on foot; decision (bzc.14): every hero rides, as on a Heroes map, and each class has its own mount so a hero never reads as a creature stack: Knight Errant on a chestnut charger, Enchanter on a white unicorn, Revenant on a skeleton horse, Mortician on a grey donkey with funeral plumes, Warlord on a war boar, Weatherwitch on a shaggy goat. Same layers and colours as faction-units (no faction layer, the 2000-character cap). Faces south-east, never mirrored. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "piece": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east"
+    },
+    "portrait": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east"
+    }
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": ["style", "camera-three-quarter", "light-south-west", "class-unit"],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "knight-errant-a",
+      "concept": "KNIGHT ERRANT",
+      "width": 72,
+      "height": 88,
+      "seed": 52101,
+      "options": "@piece",
+      "subject": "Subject: Knight Errant, a chunky cute hero knight with a huge round head riding a big sturdy chestnut horse seen from the front-right, rider and horse filling the whole width of the image: an open-faced light steel helmet with a big crimson plume showing a brave grinning face with a moustache, a crimson surcoat with a gold-yellow cross over light steel mail, a long crimson cape, a light steel sword raised high in the right hand; the horse is warm chestnut with a cream mane and a white blaze and a short crimson saddle cloth with gold-yellow trim; simple shapes; the hooves are the lowest thing.",
+      "negative": "lance, caparison, white horse, brown leather"
+    },
+    {
+      "id": "enchanter-a",
+      "concept": "ENCHANTER",
+      "width": 72,
+      "height": 88,
+      "seed": 52201,
+      "options": "@piece",
+      "subject": "Subject: Enchanter, a chunky cute storybook enchantress with a huge round head riding a white unicorn seen from the front-right, rider and unicorn filling the whole width of the image: a kind smiling face, long golden hair, a tall pointed crimson cone hat with a flowing cream veil, a crimson and cream gown, a long pale birch wand with a small gold-yellow star and sparkles held up in the right hand; the unicorn is snow white with a cream mane, a gold-yellow spiral horn and a crimson saddle cloth with gold-yellow trim; simple shapes; the hooves are the lowest thing in the image.",
+      "negative": "armour, sword, wings, rainbow, pink, purple"
+    },
+    {
+      "id": "revenant-a",
+      "concept": "REVENANT",
+      "width": 72,
+      "height": 88,
+      "seed": 52301,
+      "options": "@piece",
+      "subject": "Subject: Revenant, a chunky cute undead knight with a huge round pale ivory skull head riding a skeleton horse seen from the front-right, rider and mount filling the whole width of the image: glowing violet eye sockets, a dented dark iron helmet with a tarnished bronze rim and a ragged near-black plume, dark iron armour, a ragged near-black cape with thin bright violet trim, a big notched light grey iron sword raised; the horse is all pale ivory bones with a bony skull head with violet eyes and a ragged near-black saddle cloth; simple shapes; the hooves are the lowest thing.",
+      "negative": "red cloth, green skin, blood, gore, flesh horse, brown horse"
+    },
+    {
+      "id": "mortician-a",
+      "concept": "MORTICIAN",
+      "width": 72,
+      "height": 88,
+      "seed": 52401,
+      "options": "@piece",
+      "subject": "Subject: Mortician, a chunky cute deadpan undertaker with a huge round head riding a gaunt pale grey donkey seen from the front-right, filling the whole width: pale yellowish-white wrinkled skin, a long nose, thin lips, droopy violet eyes, a very tall near-black top hat with a bright violet band, a near-black frock coat with a cream collar, a small tarnished bronze hand bell held up; the donkey is pale grey with long ears, a dark grey mane, a tall near-black funeral plume on its head and a near-black saddle cloth with violet trim; simple shapes; the hooves are the lowest thing.",
+      "negative": "skull face, red cloth, green skin, blood, horse"
+    },
+    {
+      "id": "warlord-a",
+      "concept": "WARLORD",
+      "width": 72,
+      "height": 88,
+      "seed": 52501,
+      "options": "@piece",
+      "subject": "Subject: Warlord, a chunky cute goblin warlord with a huge round head riding a huge bristly war boar seen from the front-right, rider and boar filling the whole width of the image: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a big toothy shouting grin, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, an oversized jagged tin cleaver raised high; the boar is slate grey with a pale grey belly, big cream tusks, a stiff dark grey mane and a hazard yellow saddle blanket; simple shapes; the hooves are the lowest thing.",
+      "negative": "wolf, horse, red cloth, skull, gun, brown leather"
+    },
+    {
+      "id": "weatherwitch-a",
+      "concept": "WEATHERWITCH",
+      "width": 72,
+      "height": 88,
+      "seed": 52601,
+      "options": "@piece",
+      "subject": "Subject: Weatherwitch, a chunky cute old goblin storm witch with a huge round head riding a big shaggy goat seen from the front-right, rider and goat filling the whole width of the image: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a hooked nose, a cackling grin, wild white hair, a dented tin pot hat with a small lightning rod, a hazard yellow #fdd20f shawl, a tin lantern with a crackling yellow spark held up; the goat is pale sand-buff with a cream beard, big curly grey horns and a hazard yellow saddle blanket; simple shapes; the hooves are the lowest thing.",
+      "negative": "broom, flying, purple glow, red cloth, skull, gun"
+    },
+    {
+      "id": "knight-errant-portrait-a",
+      "concept": "KNIGHT ERRANT PORTRAIT",
+      "width": 48,
+      "height": 48,
+      "seed": 52111,
+      "fragments": ["style", "camera-portrait", "class-portrait"],
+      "options": "@portrait",
+      "subject": "Subject: Knight Errant portrait, head and shoulders of a chunky cute hero knight: an open-faced light steel helmet with a big crimson plume, a brave grin and a brown moustache, a crimson surcoat with a gold-yellow cross over light steel mail, a crimson cape on the shoulders, the hilt of a steel sword over one shoulder.",
+      "negative": "horse, visor, purple"
+    },
+    {
+      "id": "enchanter-portrait-a",
+      "concept": "ENCHANTER PORTRAIT",
+      "width": 48,
+      "height": 48,
+      "seed": 52211,
+      "fragments": ["style", "camera-portrait", "class-portrait"],
+      "options": "@portrait",
+      "subject": "Subject: Enchanter portrait, head and shoulders of a chunky cute storybook enchantress: a kind smile, long golden hair, a tall pointed crimson hat with a gold-yellow band, a crimson and cream gown, a pale birch wand with a small gold-yellow star and sparkles held beside her face.",
+      "negative": "unicorn, horse, armour, purple, pink"
+    },
+    {
+      "id": "revenant-portrait-a",
+      "concept": "REVENANT PORTRAIT",
+      "width": 48,
+      "height": 48,
+      "seed": 52311,
+      "fragments": ["style", "camera-portrait", "class-portrait"],
+      "options": "@portrait",
+      "subject": "Subject: Revenant portrait, head and shoulders of a chunky cute undead knight: a pale ivory skull face with glowing bright violet eye sockets and a toothy grin, a dented dark iron helmet with a tarnished bronze rim and a ragged near-black plume, dark iron pauldrons, a ragged near-black cape with thin bright violet trim.",
+      "negative": "horse, red cloth, green skin, blood"
+    },
+    {
+      "id": "mortician-portrait-a",
+      "concept": "MORTICIAN PORTRAIT",
+      "width": 48,
+      "height": 48,
+      "seed": 52411,
+      "fragments": ["style", "camera-portrait", "class-portrait"],
+      "options": "@portrait",
+      "subject": "Subject: Mortician portrait, head and shoulders of a chunky cute deadpan undertaker: pale yellowish-white wrinkled skin, a long nose, thin lips, droopy violet eyes, a very tall near-black top hat with a bright violet band, a near-black frock coat with a cream collar, a small tarnished bronze hand bell held up beside his face.",
+      "negative": "skull face, donkey, red cloth, green skin"
+    },
+    {
+      "id": "warlord-portrait-a",
+      "concept": "WARLORD PORTRAIT",
+      "width": 48,
+      "height": 48,
+      "seed": 52511,
+      "fragments": ["style", "camera-portrait", "class-portrait"],
+      "options": "@portrait",
+      "subject": "Subject: Warlord portrait, head and shoulders of a chunky cute goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears sticking out sideways, a big toothy shouting grin, a dented tin helmet painted hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape over the shoulders, a jagged tin cleaver resting on one shoulder.",
+      "negative": "boar, red cloth, skull, olive skin"
+    },
+    {
+      "id": "weatherwitch-portrait-a",
+      "concept": "WEATHERWITCH PORTRAIT",
+      "width": 48,
+      "height": 48,
+      "seed": 52611,
+      "fragments": ["style", "camera-portrait", "class-portrait"],
+      "options": "@portrait",
+      "subject": "Subject: Weatherwitch portrait, head and shoulders of a chunky cute old goblin storm witch: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, a hooked nose, a cackling grin, wild white hair, a dented tin pot hat with a small lightning rod and a yellow spark, a hazard yellow #fdd20f shawl over the shoulders.",
+      "negative": "goat, broom, purple glow, red cloth"
+    },
+    {
+      "id": "knight-errant-portrait-a-bust",
+      "concept": "KNIGHT ERRANT PORTRAIT",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 48,
+      "height": 48,
+      "seed": 52112,
+      "edit": { "take": "knight-errant-portrait-a#0" },
+      "subject": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the open-faced light steel helmet with the big crimson plume, the brave grin and moustache, the crimson surcoat with the gold-yellow cross at the bottom edge. Keep the colours, the thick black outline and the art style exactly the same.",
+      "notes": "knight-errant-portrait-a#0 came back as a small whole figure (LESSONS 4.1 portrait fix)."
+    }
+  ],
+  "outputs": [
+    { "path": "public/assets/units/hero-knight-errant.png", "from": "knight-errant-a#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/hero-knight-errant.png", "from": "knight-errant-portrait-a-bust#0", "width": 48, "height": 48 },
+    { "path": "public/assets/units/hero-enchanter.png", "from": "enchanter-a#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/hero-enchanter.png", "from": "enchanter-portrait-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/units/hero-revenant.png", "from": "revenant-a#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/hero-revenant.png", "from": "revenant-portrait-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/units/hero-mortician.png", "from": "mortician-a#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/hero-mortician.png", "from": "mortician-portrait-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/units/hero-warlord.png", "from": "warlord-a#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/hero-warlord.png", "from": "warlord-portrait-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/units/hero-weatherwitch.png", "from": "weatherwitch-a#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/hero-weatherwitch.png", "from": "weatherwitch-portrait-a#0", "width": 48, "height": 48 }
+  ]
+}

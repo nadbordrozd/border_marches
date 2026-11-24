@@ -1,0 +1,127 @@
+{
+  "bellhop-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Bellhop: wind-up tin servant with a round tin face, teal cap and jacket with brass buttons, a brass key in its back and a cream suitcase; neutral teal and tin, no faction colour; small (48x72, padded) as a tier 1; nothing under it; faces south-east",
+    "at": "2026-11-24T23:04:56.617Z"
+  },
+  "sexton-a#0": {
+    "verdict": "REJECTED",
+    "notes": "stands on a soil and grass patch (ground plate); the spade blade reads as an axe; face more detailed than the chibi roster",
+    "at": "2026-11-24T23:04:56.686Z"
+  },
+  "prize-pumpkin-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Prize Pumpkin: big round orange pumpkin creature with a carved goofy face, curly stem and leaves, stubby vine limbs and a blue prize rosette; reads as a big friendly vegetable, not a jack-o'-lantern scare; fills the large canvas; nothing under it",
+    "at": "2026-11-24T23:05:27.427Z"
+  },
+  "whipping-boy-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Whipping Boy: scruffy teary boy with a head bandage, oatmeal sackcloth smock and a wooden pot-lid shield; small (48x72, padded) as a tier 1; neutral colours; nothing under it",
+    "at": "2026-11-24T23:10:12.927Z"
+  },
+  "lamplighter-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Lamplighter: old white-moustached man in a navy coat and brimmed cap with a tall pole topped by a flame; navy is no faction colour; reads as a night worker with a light at 1:1 (the lantern reads as a torch flame, which suits Light Up)",
+    "at": "2026-11-24T23:10:13.007Z"
+  },
+  "newsie-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good newsboy, but stands on a dirt slab with grass tufts (ground plate); fixed by the ground-removal edit newsie-a-clean",
+    "at": "2026-11-24T23:10:13.083Z"
+  },
+  "notary-a#0": {
+    "verdict": "REJECTED",
+    "notes": "the rubber stamp came back as a brass spyglass or horn, so the role does not read; re-rolled as notary-b",
+    "at": "2026-11-24T23:10:13.154Z"
+  },
+  "crooner-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Crooner: slick-haired singer in a white tuxedo with a pink carnation at a silver stand microphone, arm spread; clear silhouette; neutral black and white; nothing under it",
+    "at": "2026-11-24T23:10:13.233Z"
+  },
+  "loan-shark-a#0": {
+    "verdict": "REJECTED",
+    "notes": "suited shark with a ledger and gold coin reads well, but stands on a round grass and soil plate; fixed by the ground-removal edit loan-shark-a-clean",
+    "at": "2026-11-24T23:10:13.317Z"
+  },
+  "groundskeeper-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Groundskeeper: round clipped-hedge creature with pink flowers, a straw sun hat, twig legs and silver shears; reads as a gardener spirit; no ground under it (the shears' blade is the lowest grey shape)",
+    "at": "2026-11-24T23:10:13.401Z"
+  },
+  "gumshoe-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Gumshoe: square-jawed private eye in a grey fedora and khaki trench coat with a magnifying glass and a small pistol; clear pulp silhouette; nothing under it",
+    "at": "2026-11-24T23:10:13.479Z"
+  },
+  "deep-sea-diver-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Deep-Sea Diver: big brass helmet with portholes, pale grey-blue canvas suit, heavy boots and a harpoon gun; heavy slow silhouette; nothing under it",
+    "at": "2026-11-24T23:11:48.103Z"
+  },
+  "fire-eater-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Fire-Eater: bald moustached strongman in orange and white circus trousers with a torch and a flame blown to the right; reads as Breath at 1:1; nothing under it",
+    "at": "2026-11-24T23:11:48.182Z"
+  },
+  "beanstalk-giant-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Beanstalk Giant: ginger-bearded storybook giant in a patched oatmeal tunic with a beanstalk club on his shoulder; human giant, not an ogre or troll; giant canvas, nothing under it",
+    "at": "2026-11-24T23:11:48.254Z"
+  },
+  "sexton-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Sexton: gaunt living old man with a white moustache, grey hat and slate-blue coat, a lit lantern and an upright square spade; no ground; neutral colours, not Restless violet",
+    "at": "2026-11-24T23:11:48.336Z"
+  },
+  "newsie-a-clean#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Newsie: after the ground-removal edit, a shouting newsboy in a floppy grey cap with a satchel and a waved paper stands on nothing; design kept",
+    "at": "2026-11-24T23:11:48.406Z"
+  },
+  "newsie-a-clean#1": {
+    "verdict": "REJECTED",
+    "notes": "same edit, near-identical to #0; #0 kept",
+    "at": "2026-11-24T23:11:48.481Z"
+  },
+  "loan-shark-a-clean#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Loan Shark: after the ground-removal edit, a grinning blue-grey shark in a bowler hat and cream pinstripe waistcoat with a ledger and a gold coin, standing on nothing; design kept",
+    "at": "2026-11-24T23:11:48.551Z"
+  },
+  "loan-shark-a-clean#1": {
+    "verdict": "REJECTED",
+    "notes": "same edit, near-identical to #0; #0 kept",
+    "at": "2026-11-24T23:11:48.626Z"
+  },
+  "notary-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Notary: bald bespectacled clerk with grey whiskers and a quill in a bottle-green coat, hugging a huge wooden stamp with a deep blue inked face; the stamp reads far better than notary-a's spyglass; nothing under it",
+    "at": "2026-11-24T23:12:07.631Z"
+  },
+  "seedling-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Seedling: tiny round pale green bean sprout with two leaves, big eyes and root feet; creature class, no tool; small (40x56, padded) as a summon; nothing under it",
+    "at": "2026-11-24T23:12:39.866Z"
+  },
+  "shade-a#0": {
+    "verdict": "REJECTED",
+    "notes": "stands on an isometric grass block (ground plate), reads as a cat with ears and legs holding a prop, not a hovering shadow",
+    "at": "2026-11-24T23:12:39.934Z"
+  },
+  "shade-b#0": {
+    "verdict": "REJECTED",
+    "notes": "the hovering shadow spirit reads well (curly tail, cyan eyes), but it floats over an isometric block of soil, grass and snow; fixed by the ground-removal edit shade-b-clean",
+    "at": "2026-11-24T23:13:25.217Z"
+  },
+  "shade-b-clean#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Shade: after the ground-removal edit, a hovering dark slate-blue shadow spirit with big cyan eyes, a shy smile and a curly wisp tail, floating on nothing; dark but outlined, with the cyan eyes as its light end; neutral (not Restless violet)",
+    "at": "2026-11-24T23:14:03.766Z"
+  },
+  "shade-b-clean#1": {
+    "verdict": "REJECTED",
+    "notes": "same edit, a slightly softer outline than #0; #0 kept",
+    "at": "2026-11-24T23:14:03.841Z"
+  }
+}

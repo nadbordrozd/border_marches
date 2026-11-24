@@ -1,0 +1,106 @@
+{
+  "set": "faction-units",
+  "bead": "border_marches-bzc.14",
+  "class": "units",
+  "exploration": false,
+  "_doc": "The new v0.2 faction creatures that Pulp Wars has no sprite for (docs/design/FACTION_*.md section 10): Squire, Friar and Dragonslayer (the Realm), the Late King (the Restless) and the Boomshaman (the Goblin Horde). Layers follow Pulp Wars (LESSONS section 5.2) and the lost-world-hero set: style, camera, light, class, subject. No faction layer (the 2000-character cap); each subject carries the colours of the Pulp Wars sprites it stands beside: Realm crimson and gold-yellow heraldry with light steel (HERALDIC), Restless ivory bone, near-black cloth and one violet accent (BONE), Horde lime skin, sand-buff hide, tin and hazard yellow (LIME). Faces south-east; never mirrored. A smaller unit is generated at a smaller request and padded bottom-centred into its class canvas. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "piece": {
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east"
+    }
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": ["style", "camera-three-quarter", "light-south-west", "class-unit"],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "squire-a",
+      "concept": "SQUIRE",
+      "width": 48,
+      "height": 72,
+      "seed": 51101,
+      "options": "@piece",
+      "subject": "Subject: Squire, a chunky cute young squire boy with a huge round head about half of the figure's height and a tiny body: a friendly freckled face with big eyes, messy straw-blond hair under a small round light steel cap, a bright crimson tunic with a gold-yellow cross, cream sleeves, dark slate-grey boots, a short light steel sword in the right hand and a huge crimson kite shield with a gold-yellow cross on the left arm, far too big for him, reaching from his chin to his ankles; simple shapes and very few details; clearly a small eager boy, not a grown soldier.",
+      "negative": "visor, beard, horse, bow, brown leather"
+    },
+    {
+      "id": "late-king-a",
+      "concept": "LATE KING",
+      "width": 88,
+      "height": 104,
+      "seed": 51201,
+      "options": "@piece",
+      "subject": "Subject: Late King, a chunky cute skeleton king seated on a royal litter carried by two small skeleton bearers, filling the whole width of the image: the king has a huge round pale ivory skull with glowing bright violet eye sockets and a wide-open mouth mid-proclamation, a big tarnished bronze crown, a near-black royal cape with a white ermine collar and thin bright violet trim, one bony arm raised grandly and a cream scroll in the other hand; the litter is a near-black wooden seat on two long poles resting on the bearers' shoulders; simple shapes and very few details.",
+      "negative": "red cloth, green skin, blood, gore, horse, throne room"
+    },
+    {
+      "id": "boomshaman-a",
+      "concept": "BOOMSHAMAN",
+      "width": 56,
+      "height": 80,
+      "seed": 51301,
+      "options": "@piece",
+      "subject": "Subject: Boomshaman, a chunky cute goblin storm shaman with a huge round head about half of the figure's height and a small body, head and ears filling the whole width: bright lime green skin #86c232 with a lighter #acdc55 face and darker #5a9424 shading, huge pointed ears, a manic grin, frizzled white hair standing on end, a pale sand-buff patched hide robe, a tall crooked tin lightning rod with a hazard yellow #fdd20f spiral and a crackling pale yellow spark held up high in the right hand, small black bombs on the belt, bare lime green feet; simple shapes; clearly a reckless spellcaster.",
+      "negative": "purple glow, red cloth, skull, gun"
+    },
+    {
+      "id": "late-king-b",
+      "concept": "LATE KING",
+      "width": 88,
+      "height": 104,
+      "seed": 51202,
+      "options": "@piece",
+      "subject": "Subject: Late King, a chunky cute skeleton king seated on a royal litter on the shoulders of two small skeleton bearers, one in front and one behind, filling the whole width of the image: the king has a huge round pale ivory skull with glowing bright violet eye sockets and a wide-open mouth mid-proclamation, a big tarnished bronze crown, a near-black royal cape with a white ermine collar and thin bright violet trim, one bony arm raised grandly holding a cream scroll; the litter is a near-black wooden chair on two long poles; the bearers are pale ivory skeletons; simple shapes.",
+      "negative": "wheels, cart, animals, red cloth, green skin, blood, gore, horse",
+      "notes": "late-king-a drew a wheeled cart pulled by two black beasts, not a litter: bearers named as ivory skeletons, wheels and animals excluded."
+    },
+    {
+      "id": "boomshaman-b",
+      "concept": "BOOMSHAMAN",
+      "width": 56,
+      "height": 80,
+      "seed": 51302,
+      "options": "@piece",
+      "subject": "Subject: Boomshaman, a chunky cute goblin storm shaman with a huge round head about half of the figure's height and a small body, head and ears filling the whole width: bright lime green skin #86c232 like a fresh lime, not olive, lighter #acdc55 face, huge pointed ears, a manic grin, frizzled white hair standing on end, a pale sand-buff patched hide robe, a tall crooked light grey tin lightning rod with a hazard yellow #fdd20f zigzag bolt crackling at its tip held up high in the right hand, small black bombs on the belt, bare lime green feet standing on nothing; simple shapes.",
+      "negative": "dirt, ground patch, fire, torch, purple glow, red cloth, skull, gun",
+      "notes": "boomshaman-a stood on a soil patch, skin olive and the rod read as a torch: lime named against olive, the bolt as a zigzag, dirt and torch excluded."
+    },
+    {
+      "id": "friar-a",
+      "concept": "FRIAR",
+      "width": 56,
+      "height": 80,
+      "seed": 51401,
+      "options": "@piece",
+      "subject": "Subject: Friar, a chunky cute jolly round friar with a huge round head about half of the figure's height and a plump sturdy body: a bald tonsured head with a ring of straw-blond hair, rosy cheeks and a big kind smile, a long plain cream-white wool habit down to the feet with a bright crimson rope belt and a small gold-yellow cross pendant, a long pale yellow birch quarterstaff held upright in the right hand, the left hand raised in blessing with a few small gold-yellow sparkles, dark slate-grey sandals; clearly a healer monk, not a soldier; simple shapes and very few details.",
+      "negative": "armour, helmet, shield, sword, brown robe, brown leather"
+    },
+    {
+      "id": "dragonslayer-a",
+      "concept": "DRAGONSLAYER",
+      "width": 88,
+      "height": 104,
+      "seed": 51501,
+      "options": "@piece",
+      "subject": "Subject: Dragonslayer, one very large chunky cute champion knight, the biggest and heaviest of the kingdom, filling the whole width of the image: a huge round head in a closed light steel great helm with a gold-yellow crown band and a big crimson plume, massive rounded light steel plate armour with gold-yellow rims, a crimson surcoat with a gold-yellow cross, an enormous light steel greatsword held upright, and a big stuffed green dragon head with cream horns and a lolling tongue strapped on his back as a trophy, peeking over his shoulder; dark slate-grey boots; simple shapes and very few details.",
+      "negative": "horse, shield, skull, brown leather, blood"
+    }
+  ],
+  "outputs": [
+    { "path": "public/assets/units/human-squire.png", "from": "squire-a#0", "steps": [{ "op": "pad", "width": 56, "height": 80, "anchor": "bottom" }], "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/human-squire.png", "from": "squire-a#0", "steps": [{ "op": "crop", "x": 0, "y": 4, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/human-friar.png", "from": "friar-a#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/human-friar.png", "from": "friar-a#0", "steps": [{ "op": "crop", "x": 4, "y": 6, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/human-dragonslayer.png", "from": "dragonslayer-a#0", "width": 88, "height": 104 },
+    { "path": "public/assets/portraits/human-dragonslayer.png", "from": "dragonslayer-a#0", "steps": [{ "op": "crop", "x": 22, "y": 6, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/undead-late-king.png", "from": "late-king-b#0", "width": 88, "height": 104 },
+    { "path": "public/assets/portraits/undead-late-king.png", "from": "late-king-b#0", "steps": [{ "op": "crop", "x": 22, "y": 4, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/goblin-boomshaman.png", "from": "boomshaman-b#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/goblin-boomshaman.png", "from": "boomshaman-b#0", "steps": [{ "op": "crop", "x": 4, "y": 2, "width": 48, "height": 48 }], "width": 48, "height": 48 }
+  ]
+}

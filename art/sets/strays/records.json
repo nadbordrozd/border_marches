@@ -1,0 +1,1120 @@
+{
+  "bellhop-a": {
+    "id": "bellhop-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-1f46b58f-8ddc-4cd3-9df1-4edc6b37ba94",
+    "submittedAt": "2026-11-24T23:03:12.876Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Bellhop, a chunky cute little wind-up tin bellhop with a huge round head about half of the figure's height and a small body: a round polished pale tin face with painted rosy cheeks and a fixed smile, a small round teal pillbox cap with a chin strap, a teal bellboy jacket with two rows of brass buttons, a big brass wind-up key sticking out of its back, an oversized cream suitcase carried in both hands, small dark grey shoes; simple shapes and very few details; clearly a clockwork toy servant, not a soldier."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 53101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Bellhop, a chunky cute little wind-up tin bellhop with a huge round head about half of the figure's height and a small body: a round polished pale tin face with painted rosy cheeks and a fixed smile, a small round teal pillbox cap with a chin strap, a teal bellboy jacket with two rows of brass buttons, a big brass wind-up key sticking out of its back, an oversized cream suitcase carried in both hands, small dark grey shoes; simple shapes and very few details; clearly a clockwork toy servant, not a soldier. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, sword, shield, red, purple."
+    },
+    "at": "2026-11-24T23:03:12.878Z",
+    "usageUsd": 0.007565575387742785,
+    "candidates": [
+      {
+        "file": "bellhop-a-0.png",
+        "sha256": "a601daef7b0869314ed43f016ed5d28d67c50f68384fed54ef05b6844ce968a0",
+        "width": 48,
+        "height": 72
+      }
+    ]
+  },
+  "sexton-a": {
+    "id": "sexton-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-f304b1f9-99a9-4ae4-be46-337926441907",
+    "submittedAt": "2026-11-24T23:04:13.477Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Sexton, a chunky cute gaunt old churchyard sexton with a huge round head about half of the figure's height and a thin body: pale yellowish-white wrinkled skin, a long nose, thin lips and bushy grey eyebrows, a battered grey felt hat, a long dusty slate-blue coat, a lit tin lantern with a soft pale yellow flame in the left hand and an oversized spade over the right shoulder, dark grey boots; simple shapes and very few details; a living old man, not a skeleton."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 54101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Sexton, a chunky cute gaunt old churchyard sexton with a huge round head about half of the figure's height and a thin body: pale yellowish-white wrinkled skin, a long nose, thin lips and bushy grey eyebrows, a battered grey felt hat, a long dusty slate-blue coat, a lit tin lantern with a soft pale yellow flame in the left hand and an oversized spade over the right shoulder, dark grey boots; simple shapes and very few details; a living old man, not a skeleton. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, skull, skeleton, zombie, purple, violet, red."
+    },
+    "at": "2026-11-24T23:04:13.478Z",
+    "usageUsd": 0.011509758975770739,
+    "candidates": [
+      {
+        "file": "sexton-a-0.png",
+        "sha256": "5eb8a6acc377617db5504b910666f63c2a2e90f0969b2281c40d7aae82ef9cac",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "prize-pumpkin-a": {
+    "id": "prize-pumpkin-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-cd66f5ab-f36e-48b7-a14f-0392172c23f8",
+    "submittedAt": "2026-11-24T23:04:50.773Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-creature.txt",
+          "text": "Class: one chunky cute creature map piece, a single living thing with big simple rounded rubbery shapes, big round eyes and a clear silhouette that reads at a glance, thick single-colour black outline; the whole creature is visible, and its lowest part is the lowest thing in the image. It holds no weapon and no tool."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Prize Pumpkin, a huge chunky cute living pumpkin creature filling the whole width of the image: a big round bright orange pumpkin body with deep ribs and a darker orange shadow, a carved cheerful face with big round eyes and a grin, a curly green stem and two big green leaves on top, short stubby green vine legs, a big blue prize rosette ribbon pinned on its front; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 54301,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute creature map piece, a single living thing with big simple rounded rubbery shapes, big round eyes and a clear silhouette that reads at a glance, thick single-colour black outline; the whole creature is visible, and its lowest part is the lowest thing in the image. It holds no weapon and no tool. Subject: Prize Pumpkin, a huge chunky cute living pumpkin creature filling the whole width of the image: a big round bright orange pumpkin body with deep ribs and a darker orange shadow, a carved cheerful face with big round eyes and a grin, a curly green stem and two big green leaves on top, short stubby green vine legs, a big blue prize rosette ribbon pinned on its front; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, multiple creatures, crowd, armour, weapon, blood, gore, horror, realistic, candle, fire, scary, hat."
+    },
+    "at": "2026-11-24T23:04:50.773Z",
+    "usageUsd": 0.008926301267411974,
+    "candidates": [
+      {
+        "file": "prize-pumpkin-a-0.png",
+        "sha256": "ae4f326a1f0c1aae03df359ac1f48eaccac13d00b11288a3c484eb135b6ae8d1",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "whipping-boy-a": {
+    "id": "whipping-boy-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-ebbbbc04-1918-418d-9dfb-b2ee8a34b6ea",
+    "submittedAt": "2026-11-24T23:05:51.376Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Whipping Boy, a chunky cute sad scruffy boy with a huge round head about half of the figure's height and a skinny body: messy dark hair, big droopy teary eyes, a sticking plaster on the cheek and a bandage round the head, a patched pale oatmeal-grey sackcloth smock with a rope belt, a big round wooden pot lid held up in front as a shield, bare feet; simple shapes and very few details; clearly a timid scapegoat, not a soldier."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 53201,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Whipping Boy, a chunky cute sad scruffy boy with a huge round head about half of the figure's height and a skinny body: messy dark hair, big droopy teary eyes, a sticking plaster on the cheek and a bandage round the head, a patched pale oatmeal-grey sackcloth smock with a rope belt, a big round wooden pot lid held up in front as a shield, bare feet; simple shapes and very few details; clearly a timid scapegoat, not a soldier. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, sword, armour, helmet, red, purple, blood."
+    },
+    "at": "2026-11-24T23:05:51.377Z",
+    "usageUsd": 0.007446112950642904,
+    "candidates": [
+      {
+        "file": "whipping-boy-a-0.png",
+        "sha256": "b66c1f6f9576e231602d0a554f14359138007029d77c8d7075bd1807c5092871",
+        "width": 48,
+        "height": 72
+      }
+    ]
+  },
+  "lamplighter-a": {
+    "id": "lamplighter-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-b2bbd099-2d4c-4220-bad5-99924e156313",
+    "submittedAt": "2026-11-24T23:06:21.222Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Lamplighter, a chunky cute old lamplighter with a huge round head about half of the figure's height and a tiny sturdy body: a bushy white moustache and rosy nose, a dark navy blue peaked cap and a long navy blue coat with brass buttons, an oversized long pole topped with a small brass lantern holding a bright yellow flame held upright in the right hand, dark grey boots; simple shapes and very few details; clearly a night-time street worker."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 53301,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Lamplighter, a chunky cute old lamplighter with a huge round head about half of the figure's height and a tiny sturdy body: a bushy white moustache and rosy nose, a dark navy blue peaked cap and a long navy blue coat with brass buttons, an oversized long pole topped with a small brass lantern holding a bright yellow flame held upright in the right hand, dark grey boots; simple shapes and very few details; clearly a night-time street worker. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, sword, shield, armour, red, purple."
+    },
+    "at": "2026-11-24T23:06:21.224Z",
+    "usageUsd": 0.008119475179248386,
+    "candidates": [
+      {
+        "file": "lamplighter-a-0.png",
+        "sha256": "69caab0a87be7b93559342cb077e5b30b17a012bb9fc00749607bf1fff5e562a",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "newsie-a": {
+    "id": "newsie-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-a04aeaf2-9d25-4a58-a5e1-d502251f2a6f",
+    "submittedAt": "2026-11-24T23:06:44.640Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Newsie, a chunky cute newspaper boy with a huge round head about half of the figure's height and a small body: a big floppy grey flat cap, a cheeky face with the mouth wide open shouting, a cream shirt with rolled sleeves, grey braces and grey knee breeches, a canvas satchel stuffed with newspapers on the hip, one rolled-up newspaper waved high in the right hand, dark grey boots; simple shapes and very few details; clearly shouting the headlines."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 53401,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Newsie, a chunky cute newspaper boy with a huge round head about half of the figure's height and a small body: a big floppy grey flat cap, a cheeky face with the mouth wide open shouting, a cream shirt with rolled sleeves, grey braces and grey knee breeches, a canvas satchel stuffed with newspapers on the hip, one rolled-up newspaper waved high in the right hand, dark grey boots; simple shapes and very few details; clearly shouting the headlines. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, sword, shield, armour, red, purple."
+    },
+    "at": "2026-11-24T23:06:44.640Z",
+    "usageUsd": 0.0074058079719543455,
+    "candidates": [
+      {
+        "file": "newsie-a-0.png",
+        "sha256": "8f9e36f05df9b375416231d601c2079fedf9c1a0b115bee986ecb8e5475a96fa",
+        "width": 48,
+        "height": 72
+      }
+    ]
+  },
+  "notary-a": {
+    "id": "notary-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-f484d14f-1560-4f60-a7e6-152cfb19872c",
+    "submittedAt": "2026-11-24T23:07:16.621Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Notary, a chunky cute stern little clerk with a huge round head about half of the figure's height and a tiny body: a bald head with grey side whiskers, small round spectacles and a prim frown, a quill pen behind the ear, a bottle-green frock coat with a cream ruffled collar, grey trousers, an oversized wooden rubber stamp with a deep blue ink face held up high in both hands, ready to stamp; simple shapes and very few details; clearly a pompous official, not a soldier."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 53501,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Notary, a chunky cute stern little clerk with a huge round head about half of the figure's height and a tiny body: a bald head with grey side whiskers, small round spectacles and a prim frown, a quill pen behind the ear, a bottle-green frock coat with a cream ruffled collar, grey trousers, an oversized wooden rubber stamp with a deep blue ink face held up high in both hands, ready to stamp; simple shapes and very few details; clearly a pompous official, not a soldier. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, sword, shield, armour, red, purple."
+    },
+    "at": "2026-11-24T23:07:16.622Z",
+    "usageUsd": 0.008348824474546645,
+    "candidates": [
+      {
+        "file": "notary-a-0.png",
+        "sha256": "f37143ea21a649b5fd037524c98b2f8a36e920d2872ad59e26a01eae813f5846",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "crooner-a": {
+    "id": "crooner-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-0dcce819-c8ec-48e6-9ee2-ee8c2af92250",
+    "submittedAt": "2026-11-24T23:07:48.047Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Crooner, a chunky cute suave lounge singer with a huge round head about half of the figure's height and a tiny body: slicked-back glossy black hair, half-closed dreamy eyes and a big smile, a white tuxedo jacket with a black bow tie and a pink carnation, black trousers and shoes, an oversized old silver radio microphone held in front of his mouth in the right hand, the left arm spread wide; three small pale blue music notes floating beside him; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 53601,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Crooner, a chunky cute suave lounge singer with a huge round head about half of the figure's height and a tiny body: slicked-back glossy black hair, half-closed dreamy eyes and a big smile, a white tuxedo jacket with a black bow tie and a pink carnation, black trousers and shoes, an oversized old silver radio microphone held in front of his mouth in the right hand, the left arm spread wide; three small pale blue music notes floating beside him; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, sword, shield, armour, guitar, red, purple."
+    },
+    "at": "2026-11-24T23:07:48.049Z",
+    "usageUsd": 0.008334452867507934,
+    "candidates": [
+      {
+        "file": "crooner-a-0.png",
+        "sha256": "73bf0576f696fba44ebb3fe623c4f43ed1990fef812a99ccced45cd3527876c0",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "loan-shark-a": {
+    "id": "loan-shark-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-d2dcd757-bf20-4bde-96e0-a5938b75c3ef",
+    "submittedAt": "2026-11-24T23:08:16.002Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Loan Shark, a chunky cute blue-grey shark standing upright on two short legs like a man, with a huge round shark head about half of its height: a white belly and jaw, a wide grin full of white teeth, small shifty eyes, a dorsal fin on its back, a cream pinstripe waistcoat, a small round dark grey bowler hat, an oversized ledger book held under one fin and a big gold coin flipped in the other; short grey legs with dark shoes; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 53701,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Loan Shark, a chunky cute blue-grey shark standing upright on two short legs like a man, with a huge round shark head about half of its height: a white belly and jaw, a wide grin full of white teeth, small shifty eyes, a dorsal fin on its back, a cream pinstripe waistcoat, a small round dark grey bowler hat, an oversized ledger book held under one fin and a big gold coin flipped in the other; short grey legs with dark shoes; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, water, waves, sword, shield, red, purple."
+    },
+    "at": "2026-11-24T23:08:16.003Z",
+    "usageUsd": 0.007840450869666206,
+    "candidates": [
+      {
+        "file": "loan-shark-a-0.png",
+        "sha256": "6cee084e3c375e57716255ba1b5413838363e50a3ecebf6c868556276923db76",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "groundskeeper-a": {
+    "id": "groundskeeper-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-5d3944d5-e661-4c02-a096-a2f8a6e14041",
+    "submittedAt": "2026-11-24T23:08:43.076Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Groundskeeper, a chunky cute walking topiary hedge creature with a huge round leafy head about half of its height and a stubby body: neatly clipped bright leaf-green hedge with small pink flowers, big round friendly eyes peeking out of the leaves, a little straw sun hat, stubby twig arms and root feet, oversized silver garden shears held in both hands; simple shapes and very few details; clearly a gardener spirit, not a tree."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 53801,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Groundskeeper, a chunky cute walking topiary hedge creature with a huge round leafy head about half of its height and a stubby body: neatly clipped bright leaf-green hedge with small pink flowers, big round friendly eyes peeking out of the leaves, a little straw sun hat, stubby twig arms and root feet, oversized silver garden shears held in both hands; simple shapes and very few details; clearly a gardener spirit, not a tree. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, trunk, tree, sword, shield, red, purple."
+    },
+    "at": "2026-11-24T23:08:43.076Z",
+    "usageUsd": 0.00781916610399882,
+    "candidates": [
+      {
+        "file": "groundskeeper-a-0.png",
+        "sha256": "fa6e26e701c3ab74b4616c785d73043b02bb71d6b7ffdfe7e307c2d7f2c21728",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "gumshoe-a": {
+    "id": "gumshoe-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-374dc04b-9b4a-4eb1-bbc0-85582093e04c",
+    "submittedAt": "2026-11-24T23:09:10.775Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Gumshoe, a chunky cute pulp detective with a huge round head about half of the figure's height and a tiny sturdy body: a squinting suspicious face with a square jaw, a grey fedora pulled low, a pale khaki trench coat with the collar turned up and a belt, an oversized magnifying glass held up in the left hand, a small dark grey snub pistol in the right hand, dark grey shoes; simple shapes and very few details; clearly a private eye."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 53901,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Gumshoe, a chunky cute pulp detective with a huge round head about half of the figure's height and a tiny sturdy body: a squinting suspicious face with a square jaw, a grey fedora pulled low, a pale khaki trench coat with the collar turned up and a belt, an oversized magnifying glass held up in the left hand, a small dark grey snub pistol in the right hand, dark grey shoes; simple shapes and very few details; clearly a private eye. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, sword, shield, armour, rifle, red, purple."
+    },
+    "at": "2026-11-24T23:09:10.776Z",
+    "usageUsd": 0.00788690357738071,
+    "candidates": [
+      {
+        "file": "gumshoe-a-0.png",
+        "sha256": "a003cbe7e1aed1aa0f46fb0488e8c3f01c9ce13ff6f92c3f8ca8ec37517396f6",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "deep-sea-diver-a": {
+    "id": "deep-sea-diver-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-ffc76892-9885-4663-bf52-7328381334d4",
+    "submittedAt": "2026-11-24T23:09:37.521Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Deep-Sea Diver, a chunky cute deep-sea diver with a huge round brass diving helmet about half of the figure's height and a stout body: three round glass portholes on the helmet, a friendly face behind the front one, a bulky pale grey-blue canvas diving suit, big dark grey gloves, heavy dark grey lead boots, a coiled cream air hose over the shoulder, an oversized harpoon gun held in both hands; simple shapes and very few details; clearly a heavy slow diver."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 54001,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Deep-Sea Diver, a chunky cute deep-sea diver with a huge round brass diving helmet about half of the figure's height and a stout body: three round glass portholes on the helmet, a friendly face behind the front one, a bulky pale grey-blue canvas diving suit, big dark grey gloves, heavy dark grey lead boots, a coiled cream air hose over the shoulder, an oversized harpoon gun held in both hands; simple shapes and very few details; clearly a heavy slow diver. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, water, bubbles, fish, red, purple."
+    },
+    "at": "2026-11-24T23:09:37.523Z",
+    "usageUsd": 0.0078038330078125,
+    "candidates": [
+      {
+        "file": "deep-sea-diver-a-0.png",
+        "sha256": "09067f20878e30d06ab15d19da4dfe60ff628132027bea3fd42194ac3a1b2114",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "fire-eater-a": {
+    "id": "fire-eater-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-d4f63f85-fe49-4f5a-81bd-3f081f2cf68e",
+    "submittedAt": "2026-11-24T23:10:01.667Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Fire-Eater, a chunky cute circus fire-eater with a huge round head about half of the figure's height and a stocky body: a bald head with a big curled black moustache, cheeks puffed, a bare chest, baggy orange and white striped circus trousers with a wide orange sash, a flaming torch held up in the right hand, a big bright orange and yellow flame blowing out of his mouth to the right; dark grey slippers; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 54201,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Fire-Eater, a chunky cute circus fire-eater with a huge round head about half of the figure's height and a stocky body: a bald head with a big curled black moustache, cheeks puffed, a bare chest, baggy orange and white striped circus trousers with a wide orange sash, a flaming torch held up in the right hand, a big bright orange and yellow flame blowing out of his mouth to the right; dark grey slippers; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, sword, shield, armour, red cloth, purple."
+    },
+    "at": "2026-11-24T23:10:01.669Z",
+    "usageUsd": 0.007547971513536242,
+    "candidates": [
+      {
+        "file": "fire-eater-a-0.png",
+        "sha256": "212085036fcd4d352f5fa51493868f297c514ac1736f181118c774fbce0391f9",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "newsie-a-clean": {
+    "id": "newsie-a-clean",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "75a4307a-6f0d-4b3c-8890-24432991f195",
+    "submittedAt": "2026-11-24T23:10:17.327Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Remove all ground: erase the dirt slab and grass tufts under the feet, so the figure stands directly on a transparent background with nothing at all under it. Keep the figure, its colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take strays/newsie-a#0 sha256 8f9e36f05df9b375416231d601c2079fedf9c1a0b115bee986ecb8e5475a96fa",
+      "width": 48,
+      "height": 72,
+      "seed": 53402,
+      "no_background": true,
+      "description": "Remove all ground: erase the dirt slab and grass tufts under the feet, so the figure stands directly on a transparent background with nothing at all under it. Keep the figure, its colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-24T23:10:48.261Z",
+    "candidates": [
+      {
+        "file": "newsie-a-clean-0.png",
+        "sha256": "9e7bb84bdf3bba2fdfd670fe9f54d977b09380210d53ee72e9a9fa3ef830363e",
+        "width": 48,
+        "height": 72
+      },
+      {
+        "file": "newsie-a-clean-1.png",
+        "sha256": "9e7bb84bdf3bba2fdfd670fe9f54d977b09380210d53ee72e9a9fa3ef830363e",
+        "width": 48,
+        "height": 72
+      }
+    ]
+  },
+  "beanstalk-giant-a": {
+    "id": "beanstalk-giant-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-0ad560ef-6bbd-4c29-b8d9-568e96bf3888",
+    "submittedAt": "2026-11-24T23:10:47.188Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Beanstalk Giant, a huge chunky cute storybook giant, the biggest creature of all, filling the whole width of the image: a huge round head about half of his height with a big bulbous nose, bushy ginger eyebrows and a gap-toothed grin, a patched oatmeal-cream tunic with a rope belt, big bare arms, a huge green beanstalk club with leaves and pea pods held over his shoulder, big dark grey boots; simple shapes and very few details; clearly a giant, not a troll or an ogre."
+        }
+      ],
+      "image_size": {
+        "width": 88,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 54401,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Beanstalk Giant, a huge chunky cute storybook giant, the biggest creature of all, filling the whole width of the image: a huge round head about half of his height with a big bulbous nose, bushy ginger eyebrows and a gap-toothed grin, a patched oatmeal-cream tunic with a rope belt, big bare arms, a huge green beanstalk club with leaves and pea pods held over his shoulder, big dark grey boots; simple shapes and very few details; clearly a giant, not a troll or an ogre. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, green skin, tusks, armour, red, purple."
+    },
+    "at": "2026-11-24T23:10:47.189Z",
+    "usageUsd": 0.009939616070853339,
+    "candidates": [
+      {
+        "file": "beanstalk-giant-a-0.png",
+        "sha256": "4d3f453b40404505853f9aa11413b12194e0c8702da68a82dfff11e429db2c6e",
+        "width": 88,
+        "height": 104
+      }
+    ]
+  },
+  "loan-shark-a-clean": {
+    "id": "loan-shark-a-clean",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "57fcf9eb-07b6-426c-9232-d10e72ffa20e",
+    "submittedAt": "2026-11-24T23:10:48.412Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Remove all ground: erase the round grass and soil plate under the feet, so the figure stands directly on a transparent background with nothing at all under it. Keep the figure, its colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take strays/loan-shark-a#0 sha256 6cee084e3c375e57716255ba1b5413838363e50a3ecebf6c868556276923db76",
+      "width": 56,
+      "height": 80,
+      "seed": 53702,
+      "no_background": true,
+      "description": "Remove all ground: erase the round grass and soil plate under the feet, so the figure stands directly on a transparent background with nothing at all under it. Keep the figure, its colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-24T23:11:13.993Z",
+    "candidates": [
+      {
+        "file": "loan-shark-a-clean-0.png",
+        "sha256": "08a055ce5fde6d3c735b2c978b521dcd1a2c712cc71edf4ee527cfbcd368772e",
+        "width": 56,
+        "height": 80
+      },
+      {
+        "file": "loan-shark-a-clean-1.png",
+        "sha256": "08a055ce5fde6d3c735b2c978b521dcd1a2c712cc71edf4ee527cfbcd368772e",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "sexton-b": {
+    "id": "sexton-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-95500e31-b8ba-4dc9-8634-3620921806ad",
+    "submittedAt": "2026-11-24T23:11:32.325Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Sexton, a chunky cute gaunt old churchyard sexton with a huge round head about half of the figure's height and a thin body: pale yellowish-white wrinkled skin, a long nose, thin lips and bushy grey eyebrows, a battered grey felt hat, a long dusty slate-blue coat, a lit tin lantern with a soft pale yellow flame in the left hand and an oversized flat square-bladed digging spade held upright in the right hand, dark grey boots standing on nothing; simple shapes and very few details; a living old man, not a skeleton."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 54102,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Sexton, a chunky cute gaunt old churchyard sexton with a huge round head about half of the figure's height and a thin body: pale yellowish-white wrinkled skin, a long nose, thin lips and bushy grey eyebrows, a battered grey felt hat, a long dusty slate-blue coat, a lit tin lantern with a soft pale yellow flame in the left hand and an oversized flat square-bladed digging spade held upright in the right hand, dark grey boots standing on nothing; simple shapes and very few details; a living old man, not a skeleton. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, axe, skull, skeleton, zombie, purple, violet, red."
+    },
+    "at": "2026-11-24T23:11:32.326Z",
+    "usageUsd": 0.009544093185000949,
+    "candidates": [
+      {
+        "file": "sexton-b-0.png",
+        "sha256": "b12fd052f68bcf059a092f980a49c50bd622d06b382b37c78e32340919161dc1",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "seedling-a": {
+    "id": "seedling-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-ecef5c7d-e40f-4aba-b137-1c877fcd2d35",
+    "submittedAt": "2026-11-24T23:11:52.606Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-creature.txt",
+          "text": "Class: one chunky cute creature map piece, a single living thing with big simple rounded rubbery shapes, big round eyes and a clear silhouette that reads at a glance, thick single-colour black outline; the whole creature is visible, and its lowest part is the lowest thing in the image. It holds no weapon and no tool."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Seedling, a tiny chunky cute sprout creature: a round pale green bean-shaped body with a lighter belly, big round black eyes and a small smile, two bright green leaves sprouting from the top of its head, tiny root feet; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 40,
+        "height": 56
+      },
+      "no_background": true,
+      "seed": 54501,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute creature map piece, a single living thing with big simple rounded rubbery shapes, big round eyes and a clear silhouette that reads at a glance, thick single-colour black outline; the whole creature is visible, and its lowest part is the lowest thing in the image. It holds no weapon and no tool. Subject: Seedling, a tiny chunky cute sprout creature: a round pale green bean-shaped body with a lighter belly, big round black eyes and a small smile, two bright green leaves sprouting from the top of its head, tiny root feet; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, multiple creatures, crowd, armour, weapon, blood, gore, horror, realistic, dirt, grass patch, pot, flower, red, purple."
+    },
+    "at": "2026-11-24T23:11:52.608Z",
+    "usageUsd": 0.007045590241750082,
+    "candidates": [
+      {
+        "file": "seedling-a-0.png",
+        "sha256": "e1ef52ab13cfa6f5173aa0adf29768d3e13e44610eea962b2e3e33d5032b1bc3",
+        "width": 40,
+        "height": 56
+      }
+    ]
+  },
+  "notary-b": {
+    "id": "notary-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-68134af0-12b2-42b4-a344-e01edf7dddf0",
+    "submittedAt": "2026-11-24T23:11:56.798Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Notary, a chunky cute stern little clerk with a huge round head about half of the figure's height and a tiny body: a bald head with grey side whiskers, small round spectacles and a prim frown, a quill pen behind the ear, a bottle-green frock coat with a cream ruffled collar, grey trousers, a huge wooden rubber stamp shaped like a mushroom, a round knob handle on top and a flat deep blue inked face underneath, raised high in both hands, ready to stamp; simple shapes and very few details; clearly a pompous official."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 53502,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Notary, a chunky cute stern little clerk with a huge round head about half of the figure's height and a tiny body: a bald head with grey side whiskers, small round spectacles and a prim frown, a quill pen behind the ear, a bottle-green frock coat with a cream ruffled collar, grey trousers, a huge wooden rubber stamp shaped like a mushroom, a round knob handle on top and a flat deep blue inked face underneath, raised high in both hands, ready to stamp; simple shapes and very few details; clearly a pompous official. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, telescope, horn, gun, sword, shield, red, purple."
+    },
+    "at": "2026-11-24T23:11:56.798Z",
+    "usageUsd": 0.009554018682903714,
+    "candidates": [
+      {
+        "file": "notary-b-0.png",
+        "sha256": "437cb310db04073a407fb964fb025e556ce8197551a269d3967a84d5808b8cee",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "shade-a": {
+    "id": "shade-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-d6a6cf69-fff6-4059-ab9e-217c459e8099",
+    "submittedAt": "2026-11-24T23:12:19.691Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Shade, a chunky cute small shadow spirit with a huge round head about half of its height: a smoky dark slate-blue body that tapers into a curly wisp tail instead of legs, two big round pale cyan glowing eyes and a small shy smile, two stubby smoky arms, a thin pale cyan rim along its left side; all in solid opaque colours; it hovers, the tip of its tail is the lowest thing in the image; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 54601,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Shade, a chunky cute small shadow spirit with a huge round head about half of its height: a smoky dark slate-blue body that tapers into a curly wisp tail instead of legs, two big round pale cyan glowing eyes and a small shy smile, two stubby smoky arms, a thin pale cyan rim along its left side; all in solid opaque colours; it hovers, the tip of its tail is the lowest thing in the image; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, dirt, grass patch, skull, bones, robe, weapon, purple, violet, red, see-through."
+    },
+    "at": "2026-11-24T23:12:19.693Z",
+    "usageUsd": 0.007722112708621555,
+    "candidates": [
+      {
+        "file": "shade-a-0.png",
+        "sha256": "c116c63570114a413779e123b707fed707ee69e55d898d50534aff5a77fc9d66",
+        "width": 48,
+        "height": 72
+      }
+    ]
+  },
+  "shade-b": {
+    "id": "shade-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-66d95efb-17e5-44df-a255-980bbe33380b",
+    "submittedAt": "2026-11-24T23:13:12.776Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-creature.txt",
+          "text": "Class: one chunky cute creature map piece, a single living thing with big simple rounded rubbery shapes, big round eyes and a clear silhouette that reads at a glance, thick single-colour black outline; the whole creature is visible, and its lowest part is the lowest thing in the image. It holds no weapon and no tool."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Shade, a small chunky cute ghostly shadow spirit hovering in the air: a big round head about half of its height and a smoky dark slate-blue body that tapers into one curly wisp tail instead of legs, two big round pale cyan glowing eyes and a small shy smile, two stubby smoky arms raised; solid opaque colours; it floats with nothing under it, and the tip of its tail is the lowest thing in the image."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 54602,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute creature map piece, a single living thing with big simple rounded rubbery shapes, big round eyes and a clear silhouette that reads at a glance, thick single-colour black outline; the whole creature is visible, and its lowest part is the lowest thing in the image. It holds no weapon and no tool. Subject: Shade, a small chunky cute ghostly shadow spirit hovering in the air: a big round head about half of its height and a smoky dark slate-blue body that tapers into one curly wisp tail instead of legs, two big round pale cyan glowing eyes and a small shy smile, two stubby smoky arms raised; solid opaque colours; it floats with nothing under it, and the tip of its tail is the lowest thing in the image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, multiple creatures, crowd, armour, weapon, blood, gore, horror, realistic, grass block, ground tile, cat, ears, legs, skull, purple."
+    },
+    "at": "2026-11-24T23:13:12.778Z",
+    "usageUsd": 0.007074032624562581,
+    "candidates": [
+      {
+        "file": "shade-b-0.png",
+        "sha256": "93ed862c57c9ece32f5552bbbdaaaf21f8cfaeeec6557fffbaa741a57c52fefd",
+        "width": 48,
+        "height": 72
+      }
+    ]
+  },
+  "shade-b-clean": {
+    "id": "shade-b-clean",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "68d5f171-0207-4f7d-b940-cd18f75dc93b",
+    "submittedAt": "2026-11-24T23:13:25.555Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Remove all ground: erase the isometric block of soil, grass and snow under the spirit, leaving that area transparent, so the spirit floats on a transparent background with nothing at all under it. Keep the spirit, its colours, the curly tail, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take strays/shade-b#0 sha256 93ed862c57c9ece32f5552bbbdaaaf21f8cfaeeec6557fffbaa741a57c52fefd",
+      "width": 48,
+      "height": 72,
+      "seed": 54603,
+      "no_background": true,
+      "description": "Remove all ground: erase the isometric block of soil, grass and snow under the spirit, leaving that area transparent, so the spirit floats on a transparent background with nothing at all under it. Keep the spirit, its colours, the curly tail, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-24T23:13:56.265Z",
+    "candidates": [
+      {
+        "file": "shade-b-clean-0.png",
+        "sha256": "977ed0692a93b6597d78f244adf50df1657bade7abc25ce85e19ce6bb173bd3a",
+        "width": 48,
+        "height": 72
+      },
+      {
+        "file": "shade-b-clean-1.png",
+        "sha256": "977ed0692a93b6597d78f244adf50df1657bade7abc25ce85e19ce6bb173bd3a",
+        "width": 48,
+        "height": 72
+      }
+    ]
+  }
+}

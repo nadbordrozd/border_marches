@@ -1,0 +1,72 @@
+{
+  "knight-errant-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Knight Errant: open-faced helmet with crimson plume, moustache, crimson cape and surcoat with gold cross, sword raised, on a chestnut horse with a cream mane; reads as a mounted hero, distinct from the Knight unit (white horse, caparison, lance); hooves lowest",
+    "at": "2026-11-24T23:01:24.344Z"
+  },
+  "revenant-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Revenant: ivory skull knight with violet eyes in a bronze-rimmed iron helm with a near-black plume and violet-trimmed cape, sword raised, on an ivory skeleton horse; Restless palette; reads as a mounted undead hero at 1:1 on light and dark; hooves lowest",
+    "at": "2026-11-24T23:01:24.407Z"
+  },
+  "warlord-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Warlord: lime goblin with a hazard yellow spiked tin helmet, sand-buff fur cape and a raised cleaver on a slate-grey war boar with cream tusks; Horde palette; the boar's mass and tusks separate it from the Wolf Rider; hooves lowest",
+    "at": "2026-11-24T23:04:03.774Z"
+  },
+  "enchanter-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Enchanter: golden-haired enchantress in a crimson pointed hat and crimson and cream gown with a star wand on a white unicorn with a gold horn and crimson saddle cloth; Realm crimson and gold; reads as a magic hero, not the Knight Errant; hooves lowest",
+    "at": "2026-11-24T23:04:03.822Z"
+  },
+  "mortician-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Mortician: deadpan undertaker in a tall top hat with a violet band, black frock coat and a bronze hand bell on a grey donkey with a black plume; living face (tan rather than pale, accepted); Restless near-black and violet; distinct from the Revenant by hat and donkey; hooves lowest",
+    "at": "2026-11-24T23:04:03.870Z"
+  },
+  "weatherwitch-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Weatherwitch: old lime goblin with white hair under a tin pot hat with a lightning rod, hazard yellow shawl and a sparking lantern on a sand-buff goat with curly horns; Horde palette; distinct from the Warlord by mount and hat; hooves lowest",
+    "at": "2026-11-24T23:04:03.919Z"
+  },
+  "revenant-portrait-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Revenant portrait: ivory skull with violet eyes under a bronze-rimmed iron helm with a near-black plume, iron pauldrons and a violet-trimmed cape; matches the map sprite; reads at 48 px on light and dark",
+    "at": "2026-11-24T23:06:07.776Z"
+  },
+  "warlord-portrait-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Warlord portrait: lime goblin face with huge ears and a toothy grin under a spiked hazard yellow tin helmet, sand-buff fur collar; matches the map sprite and the Pulp Wars warboss portrait scale; reads at 48 px",
+    "at": "2026-11-24T23:06:07.822Z"
+  },
+  "knight-errant-portrait-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a small whole figure with legs, not a head-and-shoulders bust; face too small at 48 px (fixed by the bust edit)",
+    "at": "2026-11-24T23:06:07.869Z"
+  },
+  "knight-errant-portrait-a-bust#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Knight Errant portrait: head-and-shoulders bust after the zoom edit: open-faced steel helmet with crimson plume, moustache, crimson surcoat with gold cross and steel pauldrons; matches the map sprite and the Pulp Wars knight portrait; reads at 48 px",
+    "at": "2026-11-24T23:08:40.728Z"
+  },
+  "knight-errant-portrait-a-bust#1": {
+    "verdict": "REJECTED",
+    "notes": "near-identical to #0 (one shading row differs); #0 kept",
+    "at": "2026-11-24T23:08:40.775Z"
+  },
+  "enchanter-portrait-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Enchanter portrait: golden-haired enchantress in a crimson pointed hat and gown with a star wand; head fills most of the square though the gown shows to the waist; matches the map sprite; reads at 48 px",
+    "at": "2026-11-24T23:08:40.824Z"
+  },
+  "mortician-portrait-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Mortician portrait: deadpan undertaker with droopy eyes under a tall top hat with a violet band, black coat and a bronze hand bell; matches the map sprite; living face; reads at 48 px",
+    "at": "2026-11-24T23:08:40.874Z"
+  },
+  "weatherwitch-portrait-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Weatherwitch portrait: lime goblin crone with white hair under a tin pot hat with a sparking lightning rod and a shawl (orange-yellow rather than hazard yellow, and violet irises; accepted, both small); matches the map sprite; reads at 48 px",
+    "at": "2026-11-24T23:08:40.923Z"
+  }
+}
