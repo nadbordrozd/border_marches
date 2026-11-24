@@ -4,6 +4,12 @@ Status: canonical for the MVP (bead `border_marches-xaj.1`, 2026-11-15).
 Numbers are starting values from the orchestrator's design brief; every
 deliberate change is listed under [Changes from brief](#12-changes-from-brief).
 
+**v0.2 note:** [RULES_V2.md](RULES_V2.md) extends these rules with the
+battle grammar, magic, heroes, artifacts and multi-player, and supersedes
+parts of sections 3, 4, 6, 7.2, 7.3, 9.2, 9.3, 9.4, 9.6, 9.7, 10 and 11.
+Its [section 0.1](RULES_V2.md#01-what-this-supersedes) lists each replaced
+rule; everything not listed there still holds.
+
 Related documents:
 
 | Topic                                                   | Document                                           |
