@@ -35,6 +35,8 @@ import {
 } from "../../../src/core/game/index.ts";
 import { CHIEFTAIN, HERO_CLASSES } from "../../../src/data/classes.ts";
 import { PRIMARY_STATS } from "../../../src/data/effects.ts";
+import { getSkill } from "../../../src/data/skills.ts";
+import { spellInfo } from "../../../src/core/magic/catalog.ts";
 import { FEATS } from "../../../src/data/feats.ts";
 import { HERO_ROSTER } from "../../../src/data/players.ts";
 import { buildMap, errorOf, field, gameOn, ok } from "./helpers.ts";
@@ -72,7 +74,17 @@ describe("classes (RULES_V2 3.1, 3.6)", () => {
         expect(w).toBeGreaterThanOrEqual(0);
         expect(w).toBeLessThanOrEqual(10);
       }
-      if (cls.leaning === "magic") expect(cls.startingPage).toBeDefined();
+      if (cls.leaning === "magic") {
+        // One school skill and a tier 1 page of that school (3.6).
+        const schools = cls.startingSkills.flatMap((id) => {
+          const school = getSkill(id).school;
+          return school === undefined ? [] : [school];
+        });
+        expect(schools, cls.id).toHaveLength(1);
+        const page = spellInfo(cls.startingPage!);
+        expect(page.tier, cls.id).toBe(1);
+        expect(page.school, cls.id).toBe(schools[0]);
+      }
     }
   });
 

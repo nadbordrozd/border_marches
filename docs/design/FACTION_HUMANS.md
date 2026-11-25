@@ -80,14 +80,14 @@ Notes:
 
 | Tier | Unit         |  HP | Atk | Def | Dmg | Speed | Shots | Growth/week | Cost                          |   FV | Abilities           |
 | ---: | ------------ | --: | --: | --: | --: | ----: | ----: | ----------: | ----------------------------- | ---: | ------------------- |
-|    1 | Squire       |  10 |   4 |   5 |   2 |     4 |     - |          14 | 45 gold                       |   65 | Attend              |
+|    1 | Squire       |  10 |   4 |   5 |   2 |     4 |     - |          14 | 46 gold                       |   65 | Attend              |
 |    2 | Longbowman   |  12 |   6 |   3 |   3 |     4 |    12 |           9 | 115 gold                      |  109 | Covering Volley     |
 |    3 | Man-at-Arms  |  26 |   8 |   9 |   5 |     5 |     - |           7 | 240 gold                      |  211 | Shield Wall         |
 |    4 | Friar        |  30 |   7 |   8 |   6 |     5 |     - |           4 | 400 gold + 1 essence          |  235 | Caster: Mend, Share |
 |    5 | Knight       |  85 |  15 |  14 |  15 |     8 |     - |           2 | 1050 gold + 2 ore             |  875 | Charge              |
 |    6 | Dragonslayer | 180 |  20 |  20 |  32 |     6 |     - |           1 | 4000 gold + 3 ore + 2 essence | 2277 | Stand Fast, Paragon |
 
-One week of all six dwellings: 10,545 gold, 7 ore, 6 essence; fight value 8335 (prices tuned by the balance bead, [BALANCE.md](BALANCE.md) section 5). The slowest creature has Speed 4, so a full army moves 1500 a day.
+One week of all six dwellings: 11,059 gold, 7 ore, 6 essence; fight value 8335 (prices tuned by the balance beads, [BALANCE.md](BALANCE.md) sections 5, 8 and 9). The slowest creature has Speed 4, so a full army moves 1500 a day.
 
 ## 5. Abilities
 
@@ -188,14 +188,14 @@ Skill names are the kinds of [CONTENT_TAXONOMY.md](CONTENT_TAXONOMY.md)
 section 3.2; the content bead fixes the final names. Weights are 0 to 10
 (RULES_V2 3.3).
 
-| Property        | Knight Errant (might)                | Enchanter (magic)                                                                    |
-| --------------- | ------------------------------------ | ------------------------------------------------------------------------------------ |
-| Starting stats  | Attack 2, Defense 2, Power 1, Lore 1 | Attack 1, Defense 1, Power 2, Lore 2                                                 |
-| Stat pattern    | D, A, D, P, A, D, L, A, D, L         | P, L, P, D, L, P, A, L, P, D                                                         |
-| Starting skills | Leadership 1, Armour 1               | Accord 1, Wellspring 1; page: Scapegoat (the Accord tier 1 redirect link, concept 2) |
-| Starting army   | 16 Squires, 7 Longbowmen (FV 1803)   | 12 Squires, 5 Longbowmen, 2 Friars (FV 1795)                                         |
-| Native terrain  | Grass                                | Grass                                                                                |
-| Command         | Single Combat                        | Swear In                                                                             |
+| Property        | Knight Errant (might)                | Enchanter (magic)                                                                |
+| --------------- | ------------------------------------ | -------------------------------------------------------------------------------- |
+| Starting stats  | Attack 2, Defense 2, Power 1, Lore 1 | Attack 1, Defense 1, Power 2, Lore 2                                             |
+| Stat pattern    | D, A, D, P, A, D, L, A, D, L         | P, L, P, D, L, P, A, L, P, D                                                     |
+| Starting skills | Leadership 1, Armour 1               | Bloom 1, Wellspring 1; page: Mend (the faction heal, shared by Sworn; BALANCE 9) |
+| Starting army   | 16 Squires, 7 Longbowmen (FV 1803)   | 12 Squires, 5 Longbowmen, 2 Friars (FV 1795)                                     |
+| Native terrain  | Grass                                | Grass                                                                            |
+| Command         | Single Combat                        | Swear In                                                                         |
 
 **Single Combat** (Knight Errant). Choose a friendly stack and an enemy
 stack. The enemy gains **Challenged** naming the friendly stack, with clock
@@ -214,8 +214,8 @@ changing places is legal, and the enemy may change them back on its turn.
 
 | Skill      | Knight Errant | Enchanter |     | Skill       | Knight Errant | Enchanter |
 | ---------- | ------------: | --------: | --- | ----------- | ------------: | --------: |
-| Bloom      |             2 |         7 |     | Fortune     |             4 |         4 |
-| Accord     |             3 |        10 |     | Captaincy   |             6 |         4 |
+| Bloom      |             2 |        10 |     | Fortune     |             4 |         4 |
+| Accord     |             3 |         7 |     | Captaincy   |             6 |         4 |
 | Clock      |             1 |         5 |     | Omens       |             2 |         5 |
 | Hush       |             0 |         1 |     | Logistics   |             6 |         4 |
 | Storm      |             1 |         2 |     | Pathfinding |             4 |         3 |
@@ -231,16 +231,16 @@ changing places is legal, and the enemy may change them back on its turn.
 
 Specialty forms and numbers are those of RULES_V2 3.7.
 
-| Hero                      | Class         | Specialty                                      |
-| ------------------------- | ------------- | ---------------------------------------------- |
-| Sir Cuthbert the Unhorsed | Knight Errant | Creature: Knights                              |
-| Wat Greenhood             | Knight Errant | Creature: Longbowmen                           |
-| Dame Ysolde Brightlance   | Knight Errant | Command: Single Combat counts C one higher     |
-| Captain Aldous Ferrow     | Knight Errant | Skill: Leadership at rank 2 (replaces Armour)  |
-| Abbess Wilhelmina         | Enchanter     | Spell: Mend                                    |
-| Master Tobias Quill       | Enchanter     | Spell: Share                                   |
-| Lady Rosamund of the Mere | Enchanter     | Skill: Accord at rank 2 (in place of Accord 1) |
-| Reeve Maud Pennywise      | Enchanter     | Resource: 250 gold each day                    |
+| Hero                      | Class         | Specialty                                     |
+| ------------------------- | ------------- | --------------------------------------------- |
+| Sir Cuthbert the Unhorsed | Knight Errant | Creature: Knights                             |
+| Wat Greenhood             | Knight Errant | Creature: Longbowmen                          |
+| Dame Ysolde Brightlance   | Knight Errant | Command: Single Combat counts C one higher    |
+| Captain Aldous Ferrow     | Knight Errant | Skill: Leadership at rank 2 (replaces Armour) |
+| Abbess Wilhelmina         | Enchanter     | Spell: Mend                                   |
+| Master Tobias Quill       | Enchanter     | Spell: Share                                  |
+| Lady Rosamund of the Mere | Enchanter     | Skill: Bloom at rank 2 (in place of Bloom 1)  |
+| Reeve Maud Pennywise      | Enchanter     | Resource: 250 gold each day                   |
 
 ## 9. Town: the Castle
 

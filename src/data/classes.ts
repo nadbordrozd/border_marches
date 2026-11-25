@@ -281,8 +281,8 @@ export const ENCHANTER: HeroClassDef = {
   pattern: [P, L, P, D, L, P, A, L, P, D],
   weights: weightsFromKinds(
     {
-      bloom: 7,
-      accord: 10,
+      bloom: 10,
+      accord: 7,
       clock: 5,
       hush: 1,
       storm: 2,
@@ -308,8 +308,8 @@ export const ENCHANTER: HeroClassDef = {
     },
     6,
   ),
-  startingSkills: ["covenant", "deep-wells"],
-  startingPage: "scapegoat",
+  startingSkills: ["greencraft", "deep-wells"],
+  startingPage: "mend",
   command: "swear-in",
   startingArmy: [
     { creature: "squire", count: 12 },
@@ -607,8 +607,8 @@ export const NAMED_HEROES: readonly NamedHeroDef[] = [
   }),
   named("rosamund", "Lady Rosamund of the Mere", "enchanter", {
     kind: "skill",
-    skill: "covenant",
-    replaces: "covenant",
+    skill: "greencraft",
+    replaces: "greencraft",
   }),
   named("maud", "Reeve Maud Pennywise", "enchanter", {
     kind: "resource",

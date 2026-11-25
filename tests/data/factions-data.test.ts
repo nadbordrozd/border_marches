@@ -29,10 +29,10 @@ describe("v0.2 faction data", () => {
   it("has six creatures per faction with the documented weekly totals", () => {
     // [gold, wood, ore, essence, fight value] for one week of all six.
     const week = {
-      // Prices tuned by the balance bead (bzc.24, BALANCE.md section 5).
-      humans: [11045, 0, 7, 6, 8335],
-      undead: [10350, 0, 2, 9, 7700],
-      goblins: [9300, 11, 3, 4, 7716],
+      // Prices tuned by the balance beads (BALANCE.md sections 5, 8 and 9).
+      humans: [11059, 0, 7, 6, 8335],
+      undead: [10625, 0, 2, 9, 7700],
+      goblins: [9280, 11, 3, 4, 7716],
     };
     for (const [faction, roster] of Object.entries(ROSTERS)) {
       expect(roster.map((c) => c.tier)).toEqual([1, 2, 3, 4, 5, 6]);

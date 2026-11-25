@@ -27,9 +27,9 @@ Each faction leans on one resource, so a start region binds differently:
 
 | Faction  | Leans on        | All buildings (gold / wood / ore / essence) | One week of creatures                |
 | -------- | --------------- | ------------------------------------------- | ------------------------------------ |
-| Realm    | Gold and wood   | 52,500 / 155 / 104 / 22                     | 11,045 gold, 7 ore, 6 essence        |
-| Restless | Ore and essence | 56,000 / 117 / 132 / 34                     | 10,350 gold, 2 ore, 9 essence        |
-| Horde    | Wood            | 45,800 / 179 / 72 / 13                      | 9300 gold, 11 wood, 3 ore, 4 essence |
+| Realm    | Gold and wood   | 52,500 / 155 / 104 / 22                     | 11,059 gold, 7 ore, 6 essence        |
+| Restless | Ore and essence | 56,000 / 117 / 132 / 34                     | 10,625 gold, 2 ore, 9 essence        |
+| Horde    | Wood            | 45,800 / 179 / 72 / 13                      | 9280 gold, 11 wood, 3 ore, 4 essence |
 
 ## 2. Starting resources
 
@@ -179,17 +179,17 @@ Fight value (FV) is GAME_DESIGN 8.2. Gold per FV is the gold price alone.
 
 | Tier | Realm                                | Restless                          | Horde                               | Lost World (reference)        |
 | ---: | ------------------------------------ | --------------------------------- | ----------------------------------- | ----------------------------- |
-|    1 | Squire 45 (0.69)                     | Skeleton 45 (0.73)                | Goblin 38 (0.73)                    | Caveman 50 (0.83)             |
+|    1 | Squire 46 (0.71)                     | Skeleton 42 (0.68)                | Goblin 37 (0.71)                    | Caveman 50 (0.83)             |
 |    2 | Longbowman 115 (1.06)                | Ghoul 115 (1.07)                  | Bomb Chucker 110 (1.01)             | Spitter 110 (0.90)            |
 |    3 | Man-at-Arms 240 (1.14)               | Banshee 260 (1.30)                | Wolf Rider 190 (1.40)               | Raptor 220 (1.27)             |
-|    4 | Friar 400 + 1 e (1.70)               | Gravecaller 420 + 1 e (1.74)      | Boomshaman 380 + 1 e (1.78)         | Shaman 450 + 1 e (1.16)       |
+|    4 | Friar 400 + 1 e (1.70)               | Gravecaller 500 + 1 e (2.07)      | Boomshaman 380 + 1 e (1.78)         | Shaman 450 + 1 e (1.16)       |
 |    5 | Knight 1050 + 2 o (1.20)             | Vampire 1200 + 1 e (1.63)         | Ogre 950 + 3 w (1.09)               | Triceratops 1100 + 2 o (1.30) |
 |    6 | Dragonslayer 4000 + 3 o + 2 e (1.76) | Late King 3000 + 2 o + 3 e (1.38) | Orc Warboss 2500 + 5 w + 3 o (1.32) | T-Rex 3000 + 4 o + 2 e (1.20) |
 
 | Per week, all six dwellings |  Realm | Restless |  Horde | Lost World |
 | --------------------------- | -----: | -------: | -----: | ---------: |
 | Fight value                 |   8335 |     7700 |   7716 |       8899 |
-| Gold                        | 11,045 |   10,350 |   9300 |     10,230 |
+| Gold                        | 11,059 |   10,625 |   9280 |     10,230 |
 | Gold-equivalent of the rest |   5350 |     5900 |   5900 |       5600 |
 | Tier 6 chain, gold          | 18,000 |   18,000 | 16,000 |     18,000 |
 
@@ -200,15 +200,19 @@ Fight value (FV) is GAME_DESIGN 8.2. Gold per FV is the gold price alone.
   to 2500.
 - **Round 2 (bzc.36)** moved four more: Goblin 40 to 38, Vampire 1100 to
   1200, Late King 3600 to 3000, Dragonslayer 3500 to 4000 (BALANCE.md
-  section 8). The week 1 ledgers (8.2) and tier 6 dates (8.3) below are
+  section 8). **Round 3 (bzc.38)** moved four: Squire 45 to 46, Skeleton
+  45 to 42, Goblin 38 to 37, Gravecaller 420 to 500 (BALANCE.md section
+  9). The week 1 ledgers (8.2) and tier 6 dates (8.3) below are
   recomputed with these prices by `node tests/sim/run.mjs
 ./tests/sim/ledger.ts`.
 - The rule: tiers 1 to 3 cost 0.7 to 1.4 gold per FV, rising with tier;
   tier 5 and 6 cost 1.2 to 1.5 plus resources; **a caster costs about 1.7
-  and an essence**, because its pages are not in its FV.
+  to 2.1 and an essence**, because its pages are not in its FV (the
+  Gravecaller is the dearest since round 3: its summons and Pass on carried
+  the Restless's middle game).
 - Weekly gold differs by up to 19% (the Realm pays most, for the
   strongest late game) and total weekly cost in gold at marketplace buying
-  prices by up to 8% (16,395; 16,250; 15,200).
+  prices by up to 9% (16,409; 16,525; 15,180).
 - Weekly FV differs on purpose. The Restless get a third of each dead
   stack back inside the fight; the Horde's area Strikes and unretaliated
   Cannonballs are not in the formula; the Realm's edge (extra turns,
@@ -224,45 +228,45 @@ and buys every creature it can.
 
 | Day | Pickups and mines        | Build         | Recruit       | Gold | Wood | Ore | Essence |
 | --: | ------------------------ | ------------- | ------------- | ---: | ---: | --: | ------: |
-|   1 | wood 7, gold 500         | Town Hall     | 14 Squires    | 4870 |   22 |   8 |       4 |
-|   2 | gold 600, flag Sawmill   | Archery Range | 9 Longbowmen  | 4635 |   17 |   6 |       4 |
-|   3 | essence 3, wood 6        | Palisade      | -             | 3635 |   11 |   6 |       7 |
-|   4 | ore 4, chest (1000 gold) | Barracks      | 7 Men-at-Arms | 2755 |    9 |   5 |       7 |
-|   5 | flag Essence Spring      | Friary        | 4 Friars      |  155 |    2 |   7 |       1 |
-|   6 | wood 8                   | Marketplace   | -             |  655 |    8 |   9 |       2 |
-|   7 | gold 400                 | -             | -             | 2055 |   11 |  11 |       3 |
+|   1 | wood 7, gold 500         | Town Hall     | 14 Squires    | 4856 |   22 |   8 |       4 |
+|   2 | gold 600, flag Sawmill   | Archery Range | 9 Longbowmen  | 4621 |   17 |   6 |       4 |
+|   3 | essence 3, wood 6        | Palisade      | -             | 3621 |   11 |   6 |       7 |
+|   4 | ore 4, chest (1000 gold) | Barracks      | 7 Men-at-Arms | 2741 |    9 |   5 |       7 |
+|   5 | flag Essence Spring      | Friary        | 4 Friars      |  141 |    2 |   7 |       1 |
+|   6 | wood 8                   | Marketplace   | -             |  641 |    8 |   9 |       2 |
+|   7 | gold 400                 | -             | -             | 2041 |   11 |  11 |       3 |
 
 **Restless**
 
 | Day | Pickups and mines        | Build           | Recruit        | Gold | Wood | Ore | Essence |
 | --: | ------------------------ | --------------- | -------------- | ---: | ---: | --: | ------: |
-|   1 | wood 7, gold 500         | Town Hall       | 15 Skeletons   | 4825 |   22 |   8 |       4 |
-|   2 | gold 600, flag Sawmill   | Charnel Pit     | 9 Ghouls       | 4590 |   20 |   3 |       4 |
-|   3 | essence 3, wood 6        | Iron Railings   | -              | 3590 |   14 |   3 |       7 |
-|   4 | ore 4, chest (1000 gold) | Wailing Tower   | 6 Banshees     | 2830 |   12 |   2 |       7 |
-|   5 | flag Essence Spring      | Marketplace     | -              | 3330 |   10 |   4 |       7 |
-|   6 | wood 8                   | Funeral Parlour | 4 Gravecallers |  650 |   21 |   1 |       1 |
-|   7 | gold 400                 | -               | -              | 2050 |   24 |   3 |       2 |
+|   1 | wood 7, gold 500         | Town Hall       | 15 Skeletons   | 4870 |   22 |   8 |       4 |
+|   2 | gold 600, flag Sawmill   | Charnel Pit     | 9 Ghouls       | 4635 |   20 |   3 |       4 |
+|   3 | essence 3, wood 6        | Iron Railings   | -              | 3635 |   14 |   3 |       7 |
+|   4 | ore 4, chest (1000 gold) | Wailing Tower   | 6 Banshees     | 2875 |   12 |   2 |       7 |
+|   5 | flag Essence Spring      | Marketplace     | -              | 3375 |   10 |   4 |       7 |
+|   6 | wood 8                   | Funeral Parlour | 4 Gravecallers |  375 |   21 |   1 |       1 |
+|   7 | gold 400                 | -               | -              | 1775 |   24 |   3 |       2 |
 
 **Horde**
 
 | Day | Pickups and mines        | Build        | Recruit          | Gold | Wood | Ore | Essence |
 | --: | ------------------------ | ------------ | ---------------- | ---: | ---: | --: | ------: |
-|   1 | wood 7, gold 500         | Town Hall    | 20 Goblins       | 4740 |   22 |   8 |       4 |
-|   2 | gold 600, flag Sawmill   | Powder Shed  | 10 Bomb Chuckers | 4540 |   14 |   8 |       4 |
-|   3 | essence 3, wood 6        | Stakes       | -                | 3540 |    8 |   8 |       7 |
-|   4 | ore 4, chest (1000 gold) | Wolf Kennels | 8 Wolf Riders    | 3020 |    3 |  12 |       7 |
-|   5 | flag Essence Spring      | Marketplace  | -                | 3520 |    1 |  14 |       7 |
-|   6 | wood 8                   | Hex Hut      | 4 Boomshamans    | 1200 |    2 |  16 |       2 |
-|   7 | gold 400                 | -            | -                | 2600 |    5 |  18 |       3 |
+|   1 | wood 7, gold 500         | Town Hall    | 20 Goblins       | 4760 |   22 |   8 |       4 |
+|   2 | gold 600, flag Sawmill   | Powder Shed  | 10 Bomb Chuckers | 4560 |   14 |   8 |       4 |
+|   3 | essence 3, wood 6        | Stakes       | -                | 3560 |    8 |   8 |       7 |
+|   4 | ore 4, chest (1000 gold) | Wolf Kennels | 8 Wolf Riders    | 3040 |    3 |  12 |       7 |
+|   5 | flag Essence Spring      | Marketplace  | -                | 3540 |    1 |  14 |       7 |
+|   6 | wood 8                   | Hex Hut      | 4 Boomshamans    | 1220 |    2 |  16 |       2 |
+|   7 | gold 400                 | -            | -                | 2620 |    5 |  18 |       3 |
 
 | Week 1                           |                    Realm |                                     Restless |                                 Horde |
 | -------------------------------- | -----------------------: | -------------------------------------------: | ------------------------------------: |
 | Gold in (start, income, pickups) |                   16,000 |                                       16,000 |                                16,000 |
 | Spent on buildings               |                     9000 |                                         9000 |                                  8500 |
-| Spent on creatures               |                     4945 |                                         4950 |                                  4900 |
+| Spent on creatures               |                     4959 |                                         5225 |                                  4880 |
 | Army bought, fight value         |                     4308 |                                         4061 |                                  4074 |
-| Binding resource                 | Gold (155 left on day 5) | Ore (the Funeral Parlour waits a day for it) | Wood (the Hex Hut waits a day for it) |
+| Binding resource                 | Gold (141 left on day 5) | Ore (the Funeral Parlour waits a day for it) | Wood (the Hex Hut waits a day for it) |
 
 Findings:
 
@@ -285,7 +289,7 @@ Findings:
 
 ### 8.3 When can the player field a tier 6 creature?
 
-A greedy ledger (`tests/sim/ledger.ts`, recomputed for round 2's
+A greedy ledger (`tests/sim/ledger.ts`, recomputed for round 3's
 prices): build the Town Hall, then the tier 6 chain in tree order, one
 building a day as soon as it is affordable, no trading; from week 2 the
 pickups of the section header arrive on the week's days 1 to 5.
@@ -293,7 +297,7 @@ pickups of the section header arrive on the week's days 1 to 5.
 | Scenario                                | Realm: Lodge, first Dragonslayer | Restless: Mausoleum, first Late King | Horde: Boss Tent, first Warboss |
 | --------------------------------------- | -------------------------------- | ------------------------------------ | ------------------------------- |
 | Rush: recruit in week 1 only, then save | day 12, **day 14**               | day 14, **day 15**                   | day 12, **day 13**              |
-| Recruit everything affordable every day | day 20, **day 22**               | day 20, **day 21**                   | day 15, **day 18**              |
+| Recruit everything affordable every day | day 20, **day 22**               | day 20, **day 22**                   | day 15, **day 18**              |
 | Rush with no essence spring             | day 12, day 14                   | day 19, day 26                       | day 12, day 13                  |
 
 With the prices the hand ledger used (before bzc.24) the same script gives day 13, 15 and 13 for the

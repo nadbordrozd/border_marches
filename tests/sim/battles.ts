@@ -48,6 +48,8 @@
  *                       AI's skill and feat picks), guild and shrine
  *                       pages, scrolls and artifacts (stage, default), or
  *                       round 1's pattern stats and seeded book (bare).
+ *   --lean might|magic  every hero of the run leans this way (default:
+ *                       might and magic alternate by seed).
  *   --tweak id.field=n,...   override creature numbers (or
  *                       class:<id>.<stat>) for this run only.
  *
@@ -213,6 +215,9 @@ const factionPolicy: Partial<Record<Faction, Policy>> = {};
 /** Hero gear of the run (--gear stage|bare; default stage). */
 let gear: HeroGear = "stage";
 
+/** Every hero's leaning (--lean); undefined alternates by seed. */
+let leanOverride: "might" | "magic" | undefined;
+
 /** The stage kit for a hero level (bare gear: none, round 1's heroes). */
 function kitFor(level: number): HeroKit | null {
   if (gear === "bare") return null;
@@ -326,8 +331,9 @@ function factionMatchups(
       out.push({
         name: `${a} v ${d}`,
         setup: (seed) => {
-          const la = seed % 2 === 0 ? "might" : "magic";
-          const ld = (seed >> 1) % 2 === 0 ? "might" : "magic";
+          const la = leanOverride ?? (seed % 2 === 0 ? "might" : "magic");
+          const ld =
+            leanOverride ?? ((seed >> 1) % 2 === 0 ? "might" : "magic");
           return gameSetup(
             seed,
             factionSide(a, budget, level, seed, la, mode, 1),
@@ -350,7 +356,7 @@ function neutralMatchups(
     setup: (seed: number) => {
       const army = buildArmy(f, budget, seed);
       const fv = armyFightValue(army) * ratio;
-      const lean = seed % 2 === 0 ? "might" : "magic";
+      const lean = leanOverride ?? (seed % 2 === 0 ? "might" : "magic");
       return gameSetup(
         seed,
         heroSide(f, buildHero(f, level, seed, lean, kitFor(level)), army, 1),
@@ -789,6 +795,10 @@ export function main(args: readonly string[]): number {
   if (gearOpt !== "stage" && gearOpt !== "bare")
     throw new Error(`unknown gear ${gearOpt}`);
   gear = gearOpt;
+  const leanOpt = opt.get("lean");
+  if (leanOpt !== undefined && leanOpt !== "might" && leanOpt !== "magic")
+    throw new Error(`unknown lean ${leanOpt}`);
+  leanOverride = leanOpt;
   const pf = opt.get("pf");
   if (pf !== undefined) {
     const [f, spec] = pf.split(/=(.*)/s) as [Faction, string | undefined];

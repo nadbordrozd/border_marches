@@ -61,6 +61,9 @@ describe("guild draws", () => {
       const tools = g[1]!.filter((id) => spellInfo(id).tool);
       expect(tools).toHaveLength(1);
       expect(spellInfo(tools[0]!).school).not.toBe("hush");
+      // The Horde's heaviest school is Bloom since balance round 3.
+      const h = guildSpells(seed, goblins.weights, goblins.cap);
+      expect(h[0]!.some((id) => spellInfo(id).school === "bloom")).toBe(true);
     }
   });
 

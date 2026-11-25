@@ -36,7 +36,7 @@ export const FACTION_SCHOOL_WEIGHTS: Readonly<
     cap: 5,
   },
   goblins: {
-    weights: { bloom: 3, accord: 0, clock: 1, hush: 2, storm: 4 },
+    weights: { bloom: 4, accord: 0, clock: 1, hush: 2, storm: 3 },
     cap: 3,
   },
 };

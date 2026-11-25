@@ -33,12 +33,16 @@ a faction; strays and caretakers take over guard duty (concept section 7).
 
 | School | Bloom | Accord | Clock | Hush | Storm |
 | ------ | ----: | -----: | ----: | ---: | ----: |
-| Weight |     3 |      0 |     1 |    2 |     4 |
+| Weight |     4 |      0 |     1 |    2 |     3 |
 
 - **Magic Guild cap: level 3.** The Horde learns tier 4 and 5 pages only in
   captured towns and at shrines, and leans on scrolls. The heaviest school
-  is Storm; the level 2 condition tool is Set off, Feed, Pass on or Wind
-  (never Share).
+  is Bloom; the level 2 condition tool is Set off, Feed, Pass on or Wind
+  (never Share). Storm comes first with the Weatherwitch herself
+  (Stormcalling and Thunderclap) and the Boomshamans; the guild leaned
+  Storm 4, Bloom 3 until balance round 3 ([BALANCE.md](BALANCE.md)
+  section 9), when a Weatherwitch with three or four Storm damage pages
+  at level 5 won four battles in five against the other magic heroes.
 - **What the wheel gives the Horde.** Storm owns area Harm, and Launched
   turns every area page into one a goblin army can cast into its own melee.
   Storm is opposed to Accord and Clock: a Sworn link, a Challenged or a
@@ -69,15 +73,15 @@ RULES_V2 1.10, "area effects apply to their targets".
 
 | Tier | Unit         |  HP | Atk | Def | Dmg | Speed | Shots | Growth/week | Cost                       |   FV | Abilities                    |
 | ---: | ------------ | --: | --: | --: | --: | ----: | ----: | ----------: | -------------------------- | ---: | ---------------------------- |
-|    1 | Goblin       |   8 |   4 |   2 |   2 |     5 |     - |          20 | 38 gold                    |   52 | Cannonball                   |
+|    1 | Goblin       |   8 |   4 |   2 |   2 |     5 |     - |          20 | 37 gold                    |   52 | Cannonball                   |
 |    2 | Bomb Chucker |  12 |   6 |   3 |   3 |     4 |     8 |          10 | 110 gold                   |  109 | Bomb                         |
 |    3 | Wolf Rider   |  18 |   7 |   5 |   4 |     8 |     - |           8 | 190 gold                   |  136 | Worry                        |
 |    4 | Boomshaman   |  28 |   7 |   6 |   6 |     5 |     - |           4 | 380 gold + 1 essence       |  214 | Caster: Thunderclap, Set off |
 |    5 | Ogre         |  90 |  14 |  12 |  16 |     4 |     - |           2 | 950 gold + 3 wood          |  873 | Hurl                         |
 |    6 | Orc Warboss  | 160 |  18 |  15 |  32 |     6 |     - |           1 | 2500 gold + 5 wood + 3 ore | 1896 | Stomp                        |
 
-One week of all six dwellings: 9340 gold (prices tuned by the balance bead,
-[BALANCE.md](BALANCE.md) section 5), 11 wood, 3 ore, 4 essence; fight
+One week of all six dwellings: 9280 gold (prices tuned by the balance beads,
+[BALANCE.md](BALANCE.md) sections 5, 8 and 9), 11 wood, 3 ore, 4 essence; fight
 value 7716 on paper, before area damage, which the fight value formula does
 not see. The slowest creature has Speed 4, so a full army moves 1500 a day.
 

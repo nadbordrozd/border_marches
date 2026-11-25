@@ -1,8 +1,9 @@
 # Battle balance (v0.2)
 
-Status: beads `border_marches-bzc.24` (round 1, sections 1-7) and
-`border_marches-bzc.36` (round 2, section 8), 2026-11-25. Section 7 lists
-what round 1 left, section 8.6 what is left now. Simulations are a design
+Status: beads `border_marches-bzc.24` (round 1, sections 1-7),
+`border_marches-bzc.36` (round 2, section 8) and `border_marches-bzc.38`
+(round 3, section 9), 2026-11-25. Section 7 lists what round 1 left, 8.6
+what round 2 left, 9.5 what is left now. Simulations are a design
 tool, not unit tests: nothing here runs in `npx vitest run`. Every table is
 reproduced by the runner commands next to it.
 
@@ -64,8 +65,9 @@ node tests/sim/run.mjs ./tests/sim/ledger.ts                # ECONOMY 8.2 and 8.
 Options: `--stage early,mid,late`, `--hero full,nobook,none`, `--limit N`
 (a round limit for every battle), `--a v2:<weight>=<n>,...` (AI weight
 overrides), `--pf <faction>=<policy>` (one faction's own policy),
-`--gear stage|bare` (round 2's heroes or round 1's), `--acts` (hero acts
-per battle by faction) and
+`--gear stage|bare` (round 2's heroes or round 1's), `--lean might|magic`
+(every hero leans one way; by default might and magic alternate by seed),
+`--acts` (hero acts per battle by faction) and
 `--tweak <creature>.<field>=<n>,class:<class>.<stat>=<n>,school:<faction>.<school>=<n>`
 (try a number before writing it into `src/data`). A full report takes about
 six minutes on one core; run one process per stage and hero mode
@@ -478,3 +480,149 @@ Tiers 2-4 are as in section 6; costs count resources as in section 1.
 - Noise: a faction cell is 80 battles, about plus or minus 6 points.
   Several of these cells sit within one standard error of the band; the
   trends across hero modes are the signal.
+
+## 9. Round 3 (bzc.38)
+
+Round 2 left the remaining gaps in content rather than in the AI: the
+Realm's book early and mid, the Weatherwitch early, the Restless early
+without heroes and in the middle game. Round 3 changes content only: one
+class's start and skill weights, one faction's guild weights and four
+prices. The battle AI (`ai.ts`) is unchanged.
+
+### 9.1 Where the gap was: the magic heroes
+
+The new `--lean might|magic` option gives every hero one leaning. Round
+2's commit, 20 seeds, full heroes (Realm / Restless / Horde):
+
+| Stage | Mixed (the report) | Might heroes only | Magic heroes only |
+| ----- | ------------------ | ----------------- | ----------------- |
+| early | 36 / 45 / 69       | 56 / 44 / 50      | 23 / 46 / 81      |
+| mid   | 35 / 63 / 53       | 55 / 51 / 44      | 18 / 58 / 75      |
+| late  | 59 / 46 / 45       | 60 / 46 / 44      | 56 / 39 / 55      |
+
+The might heroes were balanced; the gap was the Enchanter against the
+Weatherwitch and the Mortician. Casts turned off for one faction in
+magic-only battles (`--pf <faction>=v2:castFraction=99,lastCastFraction=99`)
+measured what each book was worth: early, the Realm +9 points, the
+Restless +11, the Horde +36; mid, +13, +24 and +54. Two causes:
+
+- **Page count, not page size.** A page is spent when cast (RULES_V2 2.4),
+  so a hero's book is worth roughly its number of useful pages. At level 5
+  a Weatherwitch held Thunderclap plus two or three of Jolt, Gust and
+  Hothead (the guild guaranteed a Storm page and weighted Storm 4 in 10)
+  and cast four or five damage pages a battle; the Enchanter held
+  Scapegoat plus at most two Accord set-up pages (one guild draw was often
+  Scapegoat again, or the adventure page Read the Seal) and cast about
+  two. Cutting the numbers moved nothing: Thunderclap 10 + 5 P, 9 + 4 P or
+  unfuelable, Kaboom 20 x C, and all of Thunderclap 10 + 5 P, Kaboom
+  25 x C, Gust 6 + 3 P and Hothead 5 + 2 P together each left the Horde's
+  full-hero early rate within 1 point (69-70%).
+- **Accord's tier 1-2 pages do not turn a fight in the AI's hands.**
+  Close Ranks at Shielded 3, or with a heal of 12 + 6 P on every stack it
+  touches, Soft Words at Mollified 45 and Sign Here at a gate of 80 + 25 P
+  each moved the Realm by at most 1 point (the AI casts Close Ranks before
+  anyone is hurt). Starting the Enchanter with a damage page (Jolt, as a
+  measuring stick) moved it 8 points early and none mid; starting it with
+  Mend and Bloom moved it 3-5.
+
+Also measured: a Sworn link is Fuel for every Storm and Hush page aimed at
+a Realm stack (FACTION_GOBLINS 2 says so), so the Weatherwitch's first
+Thunderclap against the Realm is always doubled. Making Sworn no Fuel
+moved the Realm none early and 4 points mid; the rule stands.
+
+### 9.2 The changes
+
+| What                                      | Was                                     | Now                                   | Why                                                                                                                                                                          |
+| ----------------------------------------- | --------------------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Enchanter start (`src/data/classes.ts`)   | Accord 1, Wellspring 1; page Scapegoat  | Bloom 1, Wellspring 1; page Mend      | A page that heals, which Sworn shares (the Realm's identity); Mend is the Realm's faction page, so the guild's Accord draws are never wasted on it. RULES_V2 3.6 still holds |
+| Enchanter skill weights                   | Bloom 7, Accord 10                      | Bloom 10, Accord 7                    | The Enchanter grows in its starting school first and takes Accord next, as the Weatherwitch and the Mortician do                                                             |
+| Lady Rosamund of the Mere                 | Accord at rank 2 (in place of Accord 1) | Bloom at rank 2 (in place of Bloom 1) | Her specialty follows the class's school                                                                                                                                     |
+| Horde guild weights (`guild.ts`, faction) | Bloom 3, Storm 4 (Storm heaviest)       | Bloom 4, Storm 3 (Bloom heaviest)     | Fewer guild Storm pages for the Weatherwitch; she keeps Stormcalling and Thunderclap, the Boomshamans keep Thunderclap, so Launched and its combos are untouched             |
+| Skeleton                                  | 45 gold                                 | 42 gold                               | The Restless without heroes early (39%); Skeletons are half the value of an early army and a sixth of a mid one                                                              |
+| Gravecaller                               | 420 gold + 1 essence                    | 500 gold + 1 essence                  | Offsets the cheaper Skeleton in the middle game (the Restless went to 61-68% mid with it alone)                                                                              |
+| Goblin                                    | 38 gold                                 | 37 gold                               | The Horde without heroes early (38-39% once the Skeleton was cheaper)                                                                                                        |
+| Squire                                    | 45 gold                                 | 46 gold                               | The Realm without heroes early (60-67%)                                                                                                                                      |
+
+No spell, ability or condition number changed, so every worked combo in
+the faction documents and CONTENT_SPELLS keeps its numbers. The faction
+documents (sections 2, 4, 7 and 8), ECONOMY 8 (prices, ledgers and tier 6
+dates, recomputed by `node tests/sim/run.mjs ./tests/sim/ledger.ts`) and
+the data tests follow. A new test checks RULES_V2 3.6 for every magic
+class (one school skill, a tier 1 page of that school), and the guild test
+checks that the Horde's level 1 now holds a Bloom page.
+
+Tried and dropped:
+
+- **Leadership's third rank at +2 Morale** (or +2 Morale and +1 Luck)
+  instead of +3. At 40 seeds the Realm without spells late was 58-61%
+  either way and 56-61% without heroes at all: its late edge is the army
+  (Dragonslayers and Knights), not the Morale rank. Banner is unchanged.
+- **The Realm's guild leaning Bloom 4, Accord 3** as well: no better than
+  the Enchanter change alone, and Accord stays the Realm's heaviest school.
+- Making the Horde's guild Storm 4 with Hush 3 and Clock 2 (Storm still
+  heaviest): the Horde stayed at 63% early.
+- A dearer Late King (3300) or Vampire (1350) for the Restless's middle
+  game: within noise at 20 seeds, and the Vampire one took the Restless to
+  38% late without heroes.
+
+### 9.3 Before and after
+
+40 seeds per pairing (a faction cell is 160 battles, about plus or minus
+4 points), `--mode report --seeds 40 --matrix --acts`, one process per
+cell. "Before" is main at the time of the merge (09d2b13: round 2 plus
+bzc.22, bzc.37 and bzc.39); "after" is this bead merged with it. Faction
+win rates over cross-faction battles, Realm / Restless / Horde; out of the
+40-60% band in bold.
+
+| Stage | Heroes | Before H / U / G     | After H / U / G      | Att win before / after | At limit before / after |
+| ----- | ------ | -------------------- | -------------------- | ---------------------: | ----------------------: |
+| early | full   | 43 / 45 / **63**     | 43 / 55 / 52         |                53 / 52 |                 25 / 25 |
+| early | nobook | 56 / 41 / 53         | 50 / 50 / 50         |                53 / 53 |                 31 / 29 |
+| early | none   | **67** / **39** / 44 | 57 / 49 / 44         |                54 / 55 |                 33 / 33 |
+| mid   | full   | **38** / **61** / 51 | **38** / **61** / 51 |                50 / 54 |                 20 / 23 |
+| mid   | nobook | 52 / 56 / 43         | 47 / 59 / 44         |                54 / 53 |                 21 / 19 |
+| mid   | none   | 49 / 56 / 44         | 46 / 60 / 44         |                52 / 51 |                 29 / 26 |
+| late  | full   | 56 / 48 / 46         | 57 / 44 / 49         |                54 / 53 |                 14 / 13 |
+| late  | nobook | 56 / 48 / 46         | 58 / 45 / 48         |                57 / 55 |                 17 / 16 |
+| late  | none   | 59 / 45 / 46         | 59 / **37** / 54     |                55 / 54 |                 32 / 34 |
+
+**24 of the 27 cells are inside 40-60% (before: 22) and all 27 inside
+35-65% (before: 26).** The widest gap per stage: early 7 points (before
+17), mid 12 (12), late 13 (9). Round 2's own table (20 seeds, section
+8.4) had 21 cells in the band. No run had an illegal action or a policy
+exception.
+
+The same package without the Goblin and Squire prices (merged, 40 seeds)
+read early none 60 / 51 / **39**, mid full 43 / 61 / 46 and late none
+**61** / 40 / 49. The two tier 1 prices fixed the early cells and moved
+the middle game with full heroes back by up to 5 points: a price
+re-rolls every seeded army of its faction, so that is about the noise of
+a cell.
+
+### 9.4 How the runs were made
+
+Variants were tried on scratch copies of the source with one process per
+cell (a 20-seed cell takes 0.5-2 minutes, a full 40-seed matrix about ten
+minutes with nine processes), creature numbers with `--tweak`, everything
+else as edits; 20 seeds to sort ideas, 40 seeds to choose, about 35
+variants in all. Two lessons for the next round: a price change re-rolls
+every seeded army of its faction, so a one-gold change can move a no-hero
+cell by 5 points either way; and single magic changes are best read with
+`--lean magic`, where they show twice as large.
+
+### 9.5 Remaining imbalances
+
+- **The middle game with full heroes: Realm 38%, Restless 61%.** Mixed
+  might-and-magic battles are where it shows (each leaning alone is
+  closer). The Enchanter's later book is still Accord set-up magic; the
+  candidates are content (a Realm faction page in Accord that the AI can
+  value, or Accord tier 2-3 numbers) or a Restless middle-game unit
+  (Banshee or Vampire numbers).
+- **The Restless without heroes, late: 37%** (44-45% with heroes): the
+  dearer Gravecaller costs them most late, where 21 of them are bought.
+  A Late King or Vampire nudge is the next step; at 20 seeds both were
+  inside the noise.
+- **The Realm without heroes or spells, late: 58-59%**, inside the band
+  but its strongest cell.
+- The attacker wins 51-55% in every cell; about a quarter of battles end
+  at the limit (13-34%).

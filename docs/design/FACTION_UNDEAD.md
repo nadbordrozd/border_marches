@@ -68,15 +68,15 @@ Attachment: on a native's death (RULES_V2 3.8). The rule it bends: RULES_V2
 
 | Tier | Unit        |  HP | Atk | Def | Dmg | Speed | Shots | Growth/week | Cost                          |   FV | Remains   | Abilities                             |
 | ---: | ----------- | --: | --: | --: | --: | ----: | ----: | ----------: | ----------------------------- | ---: | --------- | ------------------------------------- |
-|    1 | Skeleton    |   9 |   5 |   4 |   2 |     4 |     - |          15 | 45 gold                       |   62 | `bones`   | Bony                                  |
+|    1 | Skeleton    |   9 |   5 |   4 |   2 |     4 |     - |          15 | 42 gold                       |   62 | `bones`   | Bony                                  |
 |    2 | Ghoul       |  16 |   6 |   5 |   3 |     6 |     - |           9 | 115 gold                      |  107 | `corpse`  | Feast                                 |
 |    3 | Banshee     |  20 |   7 |   5 |   5 |     5 |     6 |           6 | 260 gold                      |  200 | `nothing` | Wail, Keen                            |
-|    4 | Gravecaller |  32 |   8 |   7 |   6 |     4 |     - |           4 | 420 gold + 1 essence          |  242 | `corpse`  | Caster: Second Shift, Pass on         |
+|    4 | Gravecaller |  32 |   8 |   7 |   6 |     4 |     - |           4 | 500 gold + 1 essence          |  242 | `corpse`  | Caster: Second Shift, Pass on         |
 |    5 | Vampire     |  70 |  14 |  13 |  14 |     8 |     - |           2 | 1200 gold + 1 essence         |  736 | `corpse`  | Drain, Mist                           |
 |    6 | Late King   | 170 |  19 |  18 |  34 |     6 |     - |           1 | 3000 gold + 2 ore + 3 essence | 2167 | `bones`   | Long Live the King, Royal Displeasure |
 
-One week of all six dwellings: 10,750 gold (prices tuned by the balance
-bead, [BALANCE.md](BALANCE.md) section 5), 2 ore, 9 essence; fight value
+One week of all six dwellings: 10,625 gold (prices tuned by the balance
+beads, [BALANCE.md](BALANCE.md) sections 5, 8 and 9), 2 ore, 9 essence; fight value
 7700, the lowest of the three on purpose (Not Done Yet returns a third of
 each lost stack inside the fight). The slowest creature has Speed 4, so a
 full army moves 1500 a day.
