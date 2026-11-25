@@ -58,7 +58,6 @@ function sampleCondition(id: string): Condition {
     maxSize: 9,
     clock: 2,
     gate: null,
-    charge: 0,
     hold: def.hold === true,
     link: null,
     source: "test",

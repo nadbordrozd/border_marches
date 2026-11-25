@@ -65,15 +65,13 @@ describe("The Realm, 6.1: a favour for the knight", () => {
       { type: "move", stackId: "d0", to: at(8, 5) },
     ).state;
     expect(kinds(s, "a0")).toEqual(["sworn", "heartened"]);
-    // Friars cast Share along the Sworn link: the copy keeps the gate.
+    // Friars Share the Knights' Heartened with their Sworn partner: the
+    // copy keeps the gate.
     s = play(s, {
       type: "creatureCast",
       stackId: "a3",
       spell: "share",
-      targets: [
-        { stack: "a0", condition: uidOf(s, "a0", "sworn") },
-        { stack: "a0", condition: uidOf(s, "a0", "heartened") },
-      ],
+      targets: [{ stack: "a0", condition: uidOf(s, "a0", "heartened") }],
     }).state;
     expect(kinds(s, "a1")).toEqual(["sworn", "heartened"]);
     expect(

@@ -209,8 +209,6 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
     name: "Reckoning",
     school: "hush",
     polarity: "bane",
-    debt: true,
-    chargeFromSize: true,
     defaultClock: 3,
     text: (c) =>
       `A debt: takes ${c.size} Harm when the clock runs out (${clockText(c.clock)}).`,
@@ -260,7 +258,6 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
     school: "hush",
     polarity: "bane",
     link: "other",
-    chargeFromSize: true,
     defaultClock: 3,
     text: (c) =>
       `Takes ${c.size} Harm at its turn start and the far end heals that much, reviving, ${clockText(c.clock)}.`,

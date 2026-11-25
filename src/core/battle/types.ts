@@ -258,8 +258,6 @@ export interface Condition {
   /** Rounds left, 1..9, or null for "until the battle ends". */
   readonly clock: number | null;
   readonly gate: Gate | null;
-  /** Harm per remaining round when set off (2.7). */
-  readonly charge: number;
   readonly hold: boolean;
   /** Far end of a link (1.4), or null. */
   readonly link: StackId | null;
@@ -278,9 +276,8 @@ export interface ConditionSpec {
   readonly clock?: number | null;
   readonly gate?: Gate | null;
   readonly link?: StackId | null;
-  /** Tier of what made it, for the default charge (10 x tier). */
+  /** Tier of what made it (a record of the maker; no rule reads it). */
   readonly tier?: number;
-  readonly charge?: number;
   readonly source?: string;
 }
 

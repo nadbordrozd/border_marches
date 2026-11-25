@@ -168,7 +168,6 @@ function battleStart(fx: Resolver, setup: BattleSetup): void {
           if (placed >= Math.abs(n)) break;
           const res = fx.addCondition(s.id, {
             kind,
-            charge: 10,
             source: num.key,
             ...(kind === "jinxed" ? { size: 25, clock: 3 } : {}),
             ...(kind === "shaken" ? { clock: 2 } : {}),

@@ -72,7 +72,10 @@ describe("targeting", () => {
   it("walks the steps of each target rule", () => {
     expect(nextStep("jolt", [])).toBe("stack");
     expect(nextStep("jolt", [S("d0")])).toBeNull();
-    expect(nextStep("gust", [S("d0")])).toBe("hex");
+    expect(nextStep("gust", [S("d0")])).toBeNull();
+    expect(nextStep("share", [])).toBe("condition");
+    expect(nextStep("share", [{ stack: "a0", condition: 1 }])).toBeNull();
+    expect(nextStep("leech-line", [S("d0")])).toBe("stack");
     expect(nextStep("wind", [{ stack: "d0", condition: 1 }])).toBe("choice");
     expect(nextStep("orchard-day", [])).toBeNull();
     expect(stepPrompt("leech-line", [])).toBe("Choose the enemy stack.");

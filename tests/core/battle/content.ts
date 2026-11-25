@@ -68,8 +68,6 @@ if (!hasConditionKind("scapegoat")) {
     name: "Reckoning",
     school: "hush",
     polarity: "bane",
-    debt: true,
-    chargeFromSize: true,
     defaultClock: 3,
     text: (c) => `Strikes x 150%; owes ${c.size} Harm when the clock runs out.`,
     strikeMultiplier(ctx, holder) {

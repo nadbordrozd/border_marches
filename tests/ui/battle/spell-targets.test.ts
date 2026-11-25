@@ -118,12 +118,23 @@ describe("valid targets of the next step", () => {
     expect(third.map((c) => c.hex)).toEqual([{ col: 6, row: 4 }]);
   });
 
-  it("pushes from a hex beside the chosen stack", () => {
-    const s = field();
-    const hexes = castChoices(s, page("gust"), [S("d0")]).map((c) => c.hex);
-    expect(hexes.length).toBeGreaterThan(0);
-    for (const h of hexes)
-      expect(Math.abs((h?.col ?? 0) - 8)).toBeLessThanOrEqual(1);
+  it("pushes with one pick: Gust needs no second hex", () => {
+    expect(castChoices(field(), page("gust"), [S("d0")])).toEqual([]);
+  });
+
+  it("shares in one step: only conditions on a linked stack, never the link", () => {
+    let s = withConditions(field(), "a0", [
+      { kind: "scapegoat", link: "a1", clock: 3 },
+      { kind: "shielded", size: 2, clock: 3 },
+    ]);
+    s = withConditions(s, "d0", [{ kind: "venomed", size: 1, clock: 2 }]);
+    const choices = castChoices(s, page("share"), []);
+    expect(
+      choices.map((c) => ("condition" in c.target ? c.target.condition : 0)),
+    ).toEqual([
+      s.stacks[0]?.conditions.find((c) => c.kind === "shielded")?.uid,
+    ]);
+    expect(castHasTarget(field(), page("share"))).toBe(false);
   });
 
   it("is empty once every target is chosen", () => {

@@ -1460,7 +1460,6 @@ function afterHeroAct(
                 size: c.size,
                 clock: c.clock,
                 gate: c.gate,
-                charge: c.charge,
                 ...(c.link !== null ? { link: c.link } : {}),
               });
           });

@@ -74,8 +74,8 @@ export function registerHumans(): void {
     for (let i = 0; i + 1 < natives.length; i += 2) {
       const a = natives[i] as BattleStack;
       const b = natives[i + 1] as BattleStack;
-      fx.link(a.id, b.id, { kind: "sworn", source: "sworn", charge: 10 });
-      fx.link(b.id, a.id, { kind: "sworn", source: "sworn", charge: 10 });
+      fx.link(a.id, b.id, { kind: "sworn", source: "sworn" });
+      fx.link(b.id, a.id, { kind: "sworn", source: "sworn" });
     }
   });
 
@@ -319,8 +319,8 @@ export function registerHumans(): void {
       for (let i = 0; i + 1 < t.length; i += 2) {
         const a = targetStack(t[i]) as StackId;
         const b = targetStack(t[i + 1]) as StackId;
-        fx.link(a, b, { kind: "sworn", source: "swear-in", charge: 10 });
-        fx.link(b, a, { kind: "sworn", source: "swear-in", charge: 10 });
+        fx.link(a, b, { kind: "sworn", source: "swear-in" });
+        fx.link(b, a, { kind: "sworn", source: "swear-in" });
       }
     },
   });

@@ -127,7 +127,6 @@ describe("hero modifiers in battle", () => {
                   maxSize: 0,
                   clock: 1,
                   gate: null,
-                  charge: 10,
                   hold: false,
                   link: null,
                   source: "test",

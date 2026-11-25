@@ -415,18 +415,19 @@ describe("1.3 Conditions", () => {
       stackId: "a0",
       otherId: "d0",
     });
-    // Set off: Harm = charge x rounds left (at most 3; clockless counts 3).
-    const burnt = withFx(s, (fx) => fx.setOffCondition("d0", 902));
+    // Set off: Harm = the rule's Harm per round x rounds left (at most 3;
+    // clockless counts 3), whatever the kind (a debt is no exception).
+    const burnt = withFx(s, (fx) => fx.setOffCondition("d0", 902, 4));
     expect(firstOf(burnt.events, "harm")).toMatchObject({ x: 12 });
-    const lucky = withFx(s, (fx) => fx.setOffCondition("d0", 903));
+    const lucky = withFx(s, (fx) => fx.setOffCondition("d0", 903, 10));
     expect(firstOf(lucky.events, "harm")).toMatchObject({ x: 30 });
     const debt = withFx(
       patchStack(s, "d0", {
-        conditions: [cond("reckoning", { size: 50, clock: 3 }, 904)],
+        conditions: [cond("reckoning", { size: 50, clock: 2 }, 904)],
       }),
-      (fx) => fx.setOffCondition("d0", 904),
+      (fx) => fx.setOffCondition("d0", 904, 10),
     );
-    expect(firstOf(debt.events, "harm")).toMatchObject({ x: 50 });
+    expect(firstOf(debt.events, "harm")).toMatchObject({ x: 20 });
   });
 });
 
@@ -1090,7 +1091,6 @@ describe("6. Morale and Luck at battle start", () => {
     expect(conditionsOf(state, "d0")).toEqual([
       { kind: "jinxed", clock: 3, size: 25 },
     ]);
-    expect(stack(state, "d0").conditions[0]!.charge).toBe(10);
   });
 
   it("creature fight value is exact (GAME_DESIGN 8.2 reference values)", () => {

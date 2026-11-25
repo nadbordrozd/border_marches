@@ -769,7 +769,6 @@ export function makeCondition(
     maxSize: spec.maxSize ?? 3 * size,
     clock,
     gate: spec.gate ?? null,
-    charge: def.chargeFromSize ? size : (spec.charge ?? 10 * (spec.tier ?? 1)),
     hold: def.hold === true,
     link: spec.link ?? null,
     source: spec.source ?? source,
@@ -1757,7 +1756,6 @@ export class Resolver implements Effects {
         gate: c.gate,
         source: c.source,
         link: c.link,
-        charge: def.chargeFromSize ? size : Math.max(old.charge, c.charge),
       };
       d.update(targetId, {
         conditions: target.conditions.map((x) =>
@@ -2079,8 +2077,7 @@ export class Resolver implements Effects {
     const grow = amount ?? Math.ceil(c.size / 2);
     const size = Math.min(c.maxSize, c.size + grow);
     if (size === c.size) return false;
-    const def = conditionKind(c.kind);
-    const next = { ...c, size, charge: def.chargeFromSize ? size : c.charge };
+    const next = { ...c, size };
     this.replace(stackId, next);
     this.d.emit({ type: "condition", stackId, change: "fed", condition: next });
     return true;
@@ -2125,12 +2122,11 @@ export class Resolver implements Effects {
     }
   }
 
-  setOffCondition(stackId: StackId, uid: number): number {
+  setOffCondition(stackId: StackId, uid: number, perRound: number): number {
     const c = this.find(stackId, uid);
     if (!c || !this.isAlive(stackId)) return 0;
-    const def = conditionKind(c.kind);
-    const rounds = def.debt ? 1 : c.clock === null ? 3 : Math.min(3, c.clock);
-    const x = c.charge * rounds;
+    const rounds = c.clock === null ? 3 : Math.min(3, c.clock);
+    const x = perRound * rounds;
     this.end(stackId, uid, "setOff");
     const idx = this.d.events.length - 1;
     return this.d.within(idx, null, () => this.harm(stackId, x));

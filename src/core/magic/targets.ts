@@ -41,8 +41,6 @@ export type TargetRule =
   | "twoFriendly"
   /** One enemy stack, then one friendly stack. */
   | "enemyFriendly"
-  /** One stack, then a hex adjacent to it. */
-  | "stackHex"
   /** One free hex. */
   | "freeHex"
   /** Three hexes in a straight line, none blocking. */
@@ -53,7 +51,7 @@ export type TargetRule =
   | "area3"
   /** One condition. */
   | "condition"
-  /** A link, then one other condition on either of its ends (Share). */
+  /** A condition (not a Hold or link) on a linked stack (Share). */
   | "share"
   /** A bane, then a stack adjacent to its bearer (Pass On). */
   | "passOn"
@@ -74,14 +72,13 @@ export const TARGET_COUNT: Readonly<Record<TargetRule, number>> = {
   enemy: 1,
   twoFriendly: 2,
   enemyFriendly: 2,
-  stackHex: 2,
   freeHex: 1,
   line3: 3,
   area1: 1,
   area2: 1,
   area3: 1,
   condition: 1,
-  share: 2,
+  share: 1,
   passOn: 2,
   wind: 2,
   remains: 1,
@@ -108,8 +105,6 @@ export function targetSteps(
     case "twoFriendly":
     case "enemyFriendly":
       return ["stack", "stack"];
-    case "stackHex":
-      return ["stack", "hex"];
     case "freeHex":
     case "area1":
     case "area2":
@@ -119,9 +114,8 @@ export function targetSteps(
     case "line3":
       return ["hex", "hex", "hex"];
     case "condition":
-      return ["condition"];
     case "share":
-      return ["condition", "condition"];
+      return ["condition"];
     case "passOn":
       return ["condition", "stack"];
     case "wind":
@@ -268,6 +262,27 @@ export function ownRemains(state: BattleState, side: BattleSide): Hex[] {
     .map((g) => g.hex);
 }
 
+/**
+ * Living stacks linked to a stack (1.4): the far ends of its links, and the
+ * stacks whose links name it, in timeline order.
+ */
+export function linkedStacks(state: BattleState, id: StackId): StackId[] {
+  const out: StackId[] = [];
+  for (const c of getStack(state, id).conditions)
+    if (c.link !== null && c.link !== id && !out.includes(c.link))
+      out.push(c.link);
+  for (const s of state.stacks)
+    if (s.id !== id && !out.includes(s.id))
+      if (s.conditions.some((c) => c.link === id)) out.push(s.id);
+  return inTimelineOrder(
+    state,
+    out.filter((x) => {
+      const s = state.stacks.find((y) => y.id === x);
+      return s !== undefined && isAlive(s);
+    }),
+  );
+}
+
 /** The straight line direction from a to b when b is adjacent, or -1. */
 export function directionTo(a: Hex, b: Hex): number {
   for (let d = 0; d < 6; d++) if (sameHex(stepHex(a, d), b)) return d;
@@ -320,15 +335,6 @@ export function targetRuleError(
       if (!b || b.side !== side) return "the second stack must be friendly";
       return null;
     }
-    case "stackHex": {
-      if (!isStackTarget(t0) || !isHexTarget(t1))
-        return "choose a stack and a hex beside it";
-      const s = liveStack(state, stackOf(t0));
-      if (!s) return "choose a stack";
-      return isAdjacent(s.hex, hexOf(t1))
-        ? null
-        : "the hex must be adjacent to the stack";
-    }
     case "freeHex":
       if (!isHexTarget(t0)) return "choose a hex";
       return isFreeHex(state, hexOf(t0)) ? null : "choose a free hex";
@@ -350,20 +356,15 @@ export function targetRuleError(
     case "condition":
       return isConditionTarget(t0) ? null : "choose a condition";
     case "share": {
-      if (!isConditionTarget(t0) || !isConditionTarget(t1))
-        return "choose a link and another condition";
-      const l = conditionOf(t0);
-      const o = conditionOf(t1);
-      const link = findCondition(state, l.stack, l.uid);
-      if (!link || link.link === null) return "the first must be a link";
-      if (!liveStack(state, link.link)) return "the link's far end is dead";
-      if (o.stack !== l.stack && o.stack !== link.link)
-        return "the other condition must be on one end of the link";
-      const other = findCondition(state, o.stack, o.uid);
-      if (!other || other.uid === link.uid) return "choose another condition";
-      if (other.hold) return "a Hold cannot be shared";
-      if (other.link !== null) return "a link cannot be shared";
-      return null;
+      if (!isConditionTarget(t0)) return "choose a condition";
+      const ref = conditionOf(t0);
+      const c = findCondition(state, ref.stack, ref.uid);
+      if (!c || !liveStack(state, ref.stack)) return "choose a condition";
+      if (c.hold) return "a Hold cannot be shared";
+      if (c.link !== null) return "a link cannot be shared";
+      return linkedStacks(state, ref.stack).length > 0
+        ? null
+        : "the stack must be linked to another";
     }
     case "passOn": {
       if (!isConditionTarget(t0) || !isStackTarget(t1))
@@ -477,13 +478,6 @@ export function ruleCandidates(
         for (const f of friends) out.push([{ stack: e.id }, { stack: f.id }]);
       return out;
     }
-    case "stackHex": {
-      const out: ActTarget[][] = [];
-      for (const s of alive)
-        for (const h of neighbors(s.hex))
-          if (inBounds(h)) out.push([{ stack: s.id }, { hex: h }]);
-      return out;
-    }
     case "freeHex":
       return nearStackHexes(state, alive)
         .filter((h) => isFreeHex(state, h))
@@ -517,24 +511,12 @@ export function ruleCandidates(
       return nearStackHexes(state, enemies).map((h) => [{ hex: h }]);
     case "condition":
       return conditionTargets(state).map((t) => [t]);
-    case "share": {
-      const out: ActTarget[][] = [];
-      for (const s of alive) {
-        for (const l of s.conditions) {
-          if (l.link === null) continue;
-          const far = alive.find((x) => x.id === l.link);
-          if (!far) continue;
-          for (const end of [s, far])
-            for (const o of end.conditions)
-              if (o.uid !== l.uid && !o.hold && o.link === null)
-                out.push([
-                  { stack: s.id, condition: l.uid },
-                  { stack: end.id, condition: o.uid },
-                ]);
-        }
-      }
-      return out;
-    }
+    case "share":
+      return conditionTargets(
+        state,
+        (c, s) =>
+          !c.hold && c.link === null && linkedStacks(state, s.id).length > 0,
+      ).map((t) => [t]);
     case "passOn": {
       const out: ActTarget[][] = [];
       for (const s of alive)
@@ -573,7 +555,6 @@ export function ruleTouches(
     case "stack":
     case "friendly":
     case "enemy":
-    case "stackHex":
       return [stackOf(t0)];
     case "twoFriendly":
     case "enemyFriendly":
@@ -586,9 +567,8 @@ export function ruleTouches(
     case "wind":
       return [conditionOf(t0).stack];
     case "share": {
-      const l = conditionOf(t0);
-      const link = findCondition(state, l.stack, l.uid);
-      return link?.link ? [l.stack, link.link] : [l.stack];
+      const from = conditionOf(t0).stack;
+      return [from, ...linkedStacks(state, from)];
     }
     case "passOn":
       return [conditionOf(t0).stack, stackOf(t1)];

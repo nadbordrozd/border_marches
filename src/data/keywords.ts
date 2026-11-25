@@ -281,12 +281,6 @@ export const KEYWORDS: readonly KeywordDef[] = [
     text: "One spell per school that works on a condition already in play: Feed grows it, Share copies it, Wind changes its clock, Pass on moves it, Set off explodes it.",
   },
   {
-    id: "charge",
-    term: "Charge",
-    forms: ["charge"],
-    text: "What Set off deals per round left: a condition's Harm per turn, a debt's whole amount once, or else 10 per tier of what made it.",
-  },
-  {
     id: "touch",
     term: "Touch",
     forms: ["touch(?:es|ed)?"],

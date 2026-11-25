@@ -184,8 +184,11 @@ export interface Effects {
   feedCondition(stackId: StackId, uid: number, amount?: number): boolean;
   /** Change the clock by `delta` (to at most 9; Holds only shorten). */
   windCondition(stackId: StackId, uid: number, delta: number): boolean;
-  /** End it; its bearer takes Harm = charge x rounds left (2.7). */
-  setOffCondition(stackId: StackId, uid: number): number;
+  /**
+   * End it; its bearer takes Harm = perRound x rounds left, counted to at
+   * most 3 (a clockless condition counts 3) (2.7).
+   */
+  setOffCondition(stackId: StackId, uid: number, perRound: number): number;
 
   // Ground (1.5)
   addGround(spec: GroundSpec, options?: { replaceBlocking?: boolean }): boolean;
@@ -260,10 +263,6 @@ export interface ConditionKindDef {
   readonly cannotShoot?: boolean;
   /** Turned: the bearer fights for the side opposite its owner. */
   readonly turnsSide?: boolean;
-  /** Charge = size (Harm per round kinds and debts), else 10 x tier. */
-  readonly chargeFromSize?: boolean;
-  /** A debt: set off counts one round (2.7). */
-  readonly debt?: boolean;
   /** Clock when the rule does not give one (default 3). */
   readonly defaultClock?: number | null;
   readonly defaultSize?: number;

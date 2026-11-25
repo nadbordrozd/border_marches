@@ -389,7 +389,6 @@ function conditionCard(id: string): TipBody {
     maxSize: size,
     clock: def.defaultClock === undefined ? 3 : def.defaultClock,
     gate: null,
-    charge: 0,
     hold: def.hold === true,
     link: null,
     source: "gallery",

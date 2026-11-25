@@ -253,7 +253,6 @@ describe("the action bar", () => {
           maxSize: 0,
           clock: null,
           gate: null,
-          charge: 10,
           hold: false,
           link: null,
           source: "test",

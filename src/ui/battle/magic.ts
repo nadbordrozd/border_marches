@@ -354,10 +354,6 @@ export function stepPrompt(
       return i === 0
         ? "Choose the enemy stack."
         : "Choose your stack that receives.";
-    case "stackHex":
-      return i === 0
-        ? "Choose a stack."
-        : "Choose the hex beside it to push from.";
     case "freeHex":
       return "Choose a free hex.";
     case "line3":
@@ -371,9 +367,7 @@ export function stepPrompt(
     case "condition":
       return "Choose a stack, then one of its conditions.";
     case "share":
-      return i === 0
-        ? "Choose a link (a stack, then the link)."
-        : "Choose the condition to copy.";
+      return "Choose a linked stack, then the condition to copy.";
     case "passOn":
       return i === 0
         ? "Choose a bane (a stack, then the bane)."

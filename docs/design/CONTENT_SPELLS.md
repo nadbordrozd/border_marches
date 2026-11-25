@@ -103,28 +103,33 @@ among a kind's makers and users. Faction creatures will add to these lists.
 | **Turned**    | std | 3: Sign Here (spell), Change of Heart (spell), Notary (creature)                                                                                                                                                  | 0                                                                                                                                                 | 1       |
 | **Heartened** | std | 7: Take Heart (spell), Double Time (spell), Banner (skill), Regimental Sash (Trinket), Brass Bugle (Trinket), Whetstone Pendant (Wonder), Bottled Cheer (consumable)                                              | 2: Mob Rule (feat), Vow of Flesh and Blood (vow)                                                                                                  | 5       |
 | **Scapegoat** | new | 4: Scapegoat (spell), Notary's Seal (Wonder), The Unsigned Treaty (Marvel piece), Whipping Boy (creature)                                                                                                         | 4: Vow of the Still Air (vow), Treaty Ink (Marvel), The Quill (Marvel piece), The Blotter (Marvel piece)                                          | 4       |
-| **Shielded**  | new | 4: Close Ranks (spell), Drill Sergeant (skill), Ambush (skill), Tin Titan (creature)                                                                                                                              | 3: Sanctuary Oath (spell), Shield Wall (feat), Gumshoe (creature)                                                                                 | 4       |
+| **Shielded**  | new | 4: Close Ranks (spell), Drill Sergeant (skill), Ambush (skill), Tin Titan (creature)                                                                                                                              | 2: Shield Wall (feat), Gumshoe (creature)                                                                                                         | 4       |
 | **Warded**    | new | 3: Sanctuary Oath (spell), Umbrella of State (Wonder), Deep-Sea Diver (creature)                                                                                                                                  | 3: The Sky Falls (spell), Mirror Ward (feat), Lightning Rod (Wonder)                                                                              | 5       |
-| **Mollified** | new | 3: Soft Words (spell), Pressed Olive Branch (Wonder), Crooner (creature)                                                                                                                                          | 3: Sign Here (spell), Change of Heart (spell), Peace Dividend (feat)                                                                              | 4       |
+| **Mollified** | new | 3: Soft Words (spell), Pressed Olive Branch (Wonder), Crooner (creature)                                                                                                                                          | 1: Peace Dividend (feat)                                                                                                                          | 4       |
 | **Delayed**   | std | 5: Late Bell (spell), Encore (spell), Ambush (skill), Ball and Chain (cursed Wonder), Winder (creature)                                                                                                           | 2: First Bell (spell), Pile On (feat)                                                                                                             | 4       |
 | **Hastened**  | std | 3: First Bell (spell), Forced March (spell), Ambush (skill)                                                                                                                                                       | 1: Late Bell (spell)                                                                                                                              | 2       |
-| **Quickened** | new | 3: Quick March (spell), Drum Major's Baton (Wonder), Newsie (creature)                                                                                                                                            | 3: Encore (spell), Quickstep (feat), Metronome Spurs (Wonder)                                                                                     | 4       |
-| **Slowed**    | new | 5: Bramble Row (spell), Treacle (spell), Whiteout (spell), Hedge-Clipper Shears (Wonder), Metronome Spurs (Wonder)                                                                                                | 3: Late Bell (spell), Pile On (feat), Rigger (creature)                                                                                           | 5       |
+| **Quickened** | new | 3: Quick March (spell), Drum Major's Baton (Wonder), Newsie (creature)                                                                                                                                            | 2: Quickstep (feat), Metronome Spurs (Wonder)                                                                                                     | 4       |
+| **Slowed**    | new | 5: Bramble Row (spell), Treacle (spell), Whiteout (spell), Hedge-Clipper Shears (Wonder), Metronome Spurs (Wonder)                                                                                                | 2: Pile On (feat), Rigger (creature)                                                                                                              | 5       |
 | **Asleep**    | std | 2: Lullaby (spell), Sleeping Cap of the Night Watch (cursed Wonder)                                                                                                                                               | 0                                                                                                                                                 | 2       |
 | **Shaken**    | std | 1: The Thirteenth Chime (cursed Wonder)                                                                                                                                                                           | 2: Take Heart (spell), Pile On (feat)                                                                                                             | 3       |
 | **Jinxed**    | std | 3: Bad Omen (spell), Double or Nothing (feat), The Albatross (cursed Wonder)                                                                                                                                      | 0                                                                                                                                                 | 3       |
 | **Reckoning** | new | 4: Deadline (spell), On Credit (spell), IOU Pad (cursed Wonder), Loan Shark (creature)                                                                                                                            | 5: Co-signer (feat), Compound Interest (feat), Bailiff's Greatcoat (Wonder), The Hourglass with No Bottom (Marvel), The Upper Bulb (Marvel piece) | 6       |
-| **Hushed**    | new | 3: Hush Now (spell), Felt Slippers of the Night Shift (Wonder), Gremlin (creature)                                                                                                                                | 3: Lullaby (spell), Gag Rule (feat), Gumshoe (creature)                                                                                           | 4       |
+| **Hushed**    | new | 3: Hush Now (spell), Felt Slippers of the Night Shift (Wonder), Gremlin (creature)                                                                                                                                | 2: Gag Rule (feat), Gumshoe (creature)                                                                                                            | 4       |
 | **Leeched**   | new | 3: Leech Line (spell), Bloodstone Ring (Wonder), Bog Leech (creature)                                                                                                                                             | 5: Bloodletting (feat), Thicker than Water (feat), Vow of the Still Air (vow), Treaty Ink (Marvel), The Quill (Marvel piece)                      | 5       |
 | **Burning**   | std | 3: Hothead (spell), Blaze of Glory (feat), Coat of Embers (cursed Wonder)                                                                                                                                         | 2: Firewalkers (feat), Lamplighter (creature)                                                                                                     | 4       |
 | **Frozen**    | std | 3: Cold Snap (spell), Winter's Pocket Watch (Wonder), Rime Walrus (creature)                                                                                                                                      | 1: Cold Hands (feat)                                                                                                                              | 4       |
-| **Drenched**  | new | 3: Downpour (spell), Leaky Bucket (Wonder), Lagoon Lurker (creature)                                                                                                                                              | 3: Cold Snap (spell), Soaked Powder (feat), Chain Lightning (feat)                                                                                | 4       |
+| **Drenched**  | new | 3: Downpour (spell), Leaky Bucket (Wonder), Lagoon Lurker (creature)                                                                                                                                              | 2: Soaked Powder (feat), Chain Lightning (feat)                                                                                                   | 4       |
 | **Fired Up**  | new | 8: Hothead (spell), Drill Sergeant (skill), Mob Rule (feat), Thicker than Water (feat), Coat of Embers (cursed Wonder), The Odd Cufflink (Marvel piece), Fire-Eater's Draught (consumable), Loan Shark (creature) | 3: Firewalkers (feat), Blaze of Glory (feat), Whetstone Pendant (Wonder)                                                                          | 7       |
 
-All 14 new kinds have at least three makers and three users from at
-least two sources. The standard kinds are exempt: for several of them
-(Jinxed, Asleep, Turned) the kind's own rule is the payoff, and the
-factions will add named users.
+All 14 new kinds have at least three makers from at least two sources.
+Bead `border_marches-bzc.71` took the spell riders that read a second
+condition out of eight spells (section 7), so six new kinds now have
+fewer than three users: Mollified 1, Shielded, Quickened, Slowed, Hushed
+and Drenched 2 each. Each still does its own job (weaker Strikes, Defense,
+Speed, no shooting, more Harm taken), and the kinds stay; new users should
+come from creatures, feats or artifacts, not from spell riders. The
+standard kinds are exempt: for several of them (Jinxed, Asleep, Turned)
+the kind's own rule is the payoff, and the factions will add named users.
 
 Ground, counted the same way (remains are made by any death; the
 users listed for corpse, bones and wreck are the rules that use remains):
@@ -161,35 +166,35 @@ Healing, summoning, effects that grow. Allied: Storm, Accord. Opposed: Clock, Hu
 
 Links, Turned, guarding, swaps. Allied: Bloom, Clock. Opposed: Hush, Storm.
 
-| Spell               | Tier | Mana | Target                                         | Effect                                                                                                                                 | Fuel doubles     | Condition and ground kinds   |
-| ------------------- | ---- | ---- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------------------------- |
-| **Scapegoat**       | 1    | 4    | Two friendly stacks                            | The first gains a Scapegoat link to the second, clock 3.                                                                               | None             | makes Scapegoat              |
-| **Close Ranks**     | 1    | 4    | One stack                                      | It and every stack adjacent to it that is friendly to the caster gain Shielded 2, clock 3.                                             | Shielded's size  | makes Shielded               |
-| **Change Places**   | 1    | 5    | Two friendly stacks                            | Swap their hexes.                                                                                                                      | None             | -                            |
-| **Share**           | 2    | 7    | One link and one other condition on either end | Condition tool: the other end receives a copy (landing rules apply); not Holds, not links.                                             | None (tool)      | -                            |
-| **Sign Here**       | 2    | 8    | One enemy stack                                | Add Turned, clock 1, gate 60 + 20 P HP; the gate is doubled if the target bears Mollified.                                             | The gate         | makes Turned; uses Mollified |
-| **Soft Words**      | 2    | 6    | One stack                                      | Add Mollified 30, clock 3.                                                                                                             | Mollified's size | makes Mollified              |
-| **Sanctuary Oath**  | 3    | 10   | One stack                                      | Add Warded 40, clock 3; if the target bears Shielded, every stack adjacent to it that is friendly to the caster gains the same Warded. | Warded's size    | makes Warded; uses Shielded  |
-| **Take Heart**      | 3    | 11   | One friendly stack                             | End Shaken on the target, then add Heartened, clock 3.                                                                                 | None             | makes Heartened; uses Shaken |
-| **Change of Heart** | 4    | 14   | One enemy stack                                | Add Turned, clock 2, gate 120 + 40 P HP; the gate is doubled if the target bears Mollified.                                            | The gate         | makes Turned; uses Mollified |
-| **The Long Table**  | 5    | 20   | One stack                                      | Every condition on it that is neither a Hold nor a link is copied to each stack adjacent to it (landing rules apply).                  | None             | -                            |
+| Spell               | Tier | Mana | Target                          | Effect                                                                                                                    | Fuel doubles     | Condition and ground kinds   |
+| ------------------- | ---- | ---- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------------------------- |
+| **Scapegoat**       | 1    | 4    | Two friendly stacks             | The first gains a Scapegoat link to the second, clock 3.                                                                  | None             | makes Scapegoat              |
+| **Close Ranks**     | 1    | 4    | One stack                       | It and every stack adjacent to it that is friendly to the caster gain Shielded 2, clock 3.                                | Shielded's size  | makes Shielded               |
+| **Change Places**   | 1    | 5    | Two friendly stacks             | Swap their hexes.                                                                                                         | None             | -                            |
+| **Share**           | 2    | 7    | One condition on a linked stack | Condition tool: every stack linked to its bearer receives a copy (landing rules apply); not Holds, not links.             | None (tool)      | -                            |
+| **Sign Here**       | 2    | 8    | One enemy stack                 | Add Turned, clock 1, gate 75 + 25 P HP.                                                                                   | The gate         | makes Turned                 |
+| **Soft Words**      | 2    | 6    | One stack                       | Add Mollified 30, clock 3.                                                                                                | Mollified's size | makes Mollified              |
+| **Sanctuary Oath**  | 3    | 10   | One stack                       | It and every stack adjacent to it that is friendly to the caster gain Warded 30, clock 3.                                 | Warded's size    | makes Warded                 |
+| **Take Heart**      | 3    | 11   | One friendly stack              | End Shaken on the target, then add Heartened, clock 3.                                                                    | None             | makes Heartened; uses Shaken |
+| **Change of Heart** | 4    | 14   | One enemy stack                 | Add Turned, clock 2, gate 150 + 50 P HP.                                                                                  | The gate         | makes Turned                 |
+| **The Long Table**  | 5    | 18   | One friendly stack              | Every boon on it that is neither a Hold nor a link is copied to each friendly stack adjacent to it (landing rules apply). | None             | -                            |
 
 ### 3.3 Clock
 
 Turn order, extra and delayed turns, clocks and scheduled events. Allied: Accord, Hush. Opposed: Storm, Bloom.
 
-| Spell            | Tier | Mana | Target                           | Effect                                                                                                                                       | Fuel doubles     | Condition and ground kinds           |
-| ---------------- | ---- | ---- | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------------------------------------ |
-| **First Bell**   | 1    | 4    | One stack                        | End Delayed on the target, then add Hastened, clock 2.                                                                                       | None             | makes Hastened; uses Delayed         |
-| **Late Bell**    | 1    | 4    | One stack                        | End Hastened on the target, then add Delayed, clock 2, or clock 3 if the target bears Slowed.                                                | None             | makes Delayed; uses Hastened, Slowed |
-| **Appointment**  | 1    | 5    | One stack                        | Schedule, at the next round start: Harm 24 + 12 P to that stack.                                                                             | The Harm         | -                                    |
-| **Wind**         | 2    | 7    | One condition with a clock       | Condition tool: add 2 to its clock (to at most 9) or subtract 2; at 0 it expires now and its expiry rule fires; Holds can only be shortened. | None (tool)      | -                                    |
-| **Treacle**      | 2    | 7    | A hex and the six around it      | Each stack there gains Slowed 1, clock 3.                                                                                                    | Slowed's size    | makes Slowed                         |
-| **Quick March**  | 2    | 8    | Every stack of the caster's side | Add Quickened 1, clock 2.                                                                                                                    | Quickened's size | makes Quickened                      |
-| **Encore**       | 3    | 10   | The friendly stack about to act  | It takes an extra turn after this one, and then gains Delayed, clock 2, unless it bears Quickened.                                           | None             | makes Delayed; uses Quickened        |
-| **Forced March** | 3    | 10   | Every stack of the caster's side | Add Hastened, clock 2.                                                                                                                       | None             | makes Hastened                       |
-| **Deadline**     | 4    | 14   | One stack                        | Add Reckoning, size 75 + 30 P, clock 2.                                                                                                      | Reckoning's size | makes Reckoning                      |
-| **Double Time**  | 5    | 20   | Every stack of the caster's side | Add Heartened, clock 1 (an extra turn this round or never).                                                                                  | None             | makes Heartened                      |
+| Spell            | Tier | Mana | Target                           | Effect                                                                                                                                       | Fuel doubles     | Condition and ground kinds   |
+| ---------------- | ---- | ---- | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------------------------- |
+| **First Bell**   | 1    | 4    | One stack                        | End Delayed on the target, then add Hastened, clock 2.                                                                                       | None             | makes Hastened; uses Delayed |
+| **Late Bell**    | 1    | 4    | One stack                        | End Hastened on the target, then add Delayed, clock 2.                                                                                       | None             | makes Delayed; uses Hastened |
+| **Appointment**  | 1    | 5    | One stack                        | Schedule, at the next round start: Harm 24 + 12 P to that stack.                                                                             | The Harm         | -                            |
+| **Wind**         | 2    | 7    | One condition with a clock       | Condition tool: add 2 to its clock (to at most 9) or subtract 2; at 0 it expires now and its expiry rule fires; Holds can only be shortened. | None (tool)      | -                            |
+| **Treacle**      | 2    | 7    | A hex and the six around it      | Each stack there gains Slowed 1, clock 3.                                                                                                    | Slowed's size    | makes Slowed                 |
+| **Quick March**  | 2    | 8    | Every stack of the caster's side | Add Quickened 1, clock 2.                                                                                                                    | Quickened's size | makes Quickened              |
+| **Encore**       | 3    | 9    | The friendly stack about to act  | It takes an extra turn after this one, and then gains Delayed, clock 2.                                                                      | None             | makes Delayed                |
+| **Forced March** | 3    | 10   | Every stack of the caster's side | Add Hastened, clock 2.                                                                                                                       | None             | makes Hastened               |
+| **Deadline**     | 4    | 14   | One stack                        | Add Reckoning, size 75 + 30 P, clock 2.                                                                                                      | Reckoning's size | makes Reckoning              |
+| **Double Time**  | 5    | 20   | Every stack of the caster's side | Add Heartened, clock 1 (an extra turn this round or never).                                                                                  | None             | makes Heartened              |
 
 ### 3.4 Hush
 
@@ -201,10 +206,10 @@ Remains, drain, debts, switching off. Allied: Clock, Storm. Opposed: Bloom, Acco
 | **On Credit**    | 1    | 4    | One stack                                                     | Heal 25 + 12 P, reviving, and add Reckoning of size 25 + 12 P, clock 3.                                | The heal (not the debt)  | makes Reckoning            |
 | **Bad Omen**     | 1    | 4    | One stack                                                     | Add Jinxed, size 25, clock 3.                                                                          | Jinxed's size            | makes Jinxed               |
 | **Pass On**      | 2    | 7    | One bane and a stack adjacent to its bearer                   | Condition tool: the bane moves to that stack (landing rules apply; a refused bane stays where it was). | None (tool)              | -                          |
-| **Lullaby**      | 2    | 8    | One stack                                                     | Add Asleep, clock 2, gate 60 + 20 P HP; the gate is doubled if the target bears Hushed.                | The gate                 | makes Asleep; uses Hushed  |
+| **Lullaby**      | 2    | 8    | One stack                                                     | Add Asleep, clock 2, gate 75 + 25 P HP.                                                                | The gate                 | makes Asleep               |
 | **Second Shift** | 2    | 7    | Remains of a stack the caster's side owned                    | Raise Shades worth 30 + 15 P HP on that hex (HP 8 each).                                               | The summon budget        | uses remains               |
 | **Leech Line**   | 3    | 10   | One enemy stack and one friendly stack                        | The first gains a Leeched link to the second, size 15 + 7 P, clock 3.                                  | Leeched's size           | makes Leeched              |
-| **Curtain Call** | 3    | 11   | Remains of a stack the caster's side owned                    | Raise the creature recorded in the remains, worth 45 + 20 P HP, at most its initial count.             | The summon budget        | uses remains               |
+| **Curtain Call** | 3    | 11   | Remains of a stack the caster's side owned                    | Raise the creature recorded in the remains, worth 40 + 20 P HP.                                        | The summon budget        | uses remains               |
 | **Pea Soup**     | 4    | 13   | A hex and every hex within 2 of it                            | Add mist, clock 3.                                                                                     | None                     | makes mist                 |
 | **Everybody Up** | 5    | 20   | Every remains on the field of a stack the caster's side owned | Each is raised as Shades worth 40 + 15 P HP, in field row order, until the ten-stack limit.            | The summon budget (each) | uses remains               |
 
@@ -215,11 +220,11 @@ Area Harm, fire, cold, pushing. Allied: Hush, Bloom. Opposed: Accord, Clock.
 | Spell             | Tier | Mana | Target                                     | Effect                                                                                                                       | Fuel doubles    | Condition and ground kinds       |
 | ----------------- | ---- | ---- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- | --------------- | -------------------------------- |
 | **Jolt**          | 1    | 4    | One stack                                  | Harm 20 + 10 P.                                                                                                              | The Harm        | -                                |
-| **Gust**          | 1    | 4    | One stack and a hex adjacent to it         | Harm 8 + 4 P, then push it 3 hexes away from that hex (hazards on the way apply).                                            | The Harm        | uses fire, brambles              |
+| **Gust**          | 1    | 4    | One stack                                  | Harm 10 + 5 P, then push it 3 hexes straight toward the caster's enemy's edge of the field (hazards on the way apply).       | The Harm        | uses fire, brambles              |
 | **Hothead**       | 1    | 4    | One stack                                  | Add Burning, size 6 + 3 P, and Fired Up 2, both clock 3.                                                                     | Burning's size  | makes Burning, Fired Up          |
-| **Set Off**       | 2    | 7    | One condition                              | Condition tool: it ends and its bearer takes Harm = charge x rounds left (clockless counts as 3; at most 3 rounds).          | None (tool)     | -                                |
+| **Set Off**       | 2    | 7    | One condition                              | Condition tool: it ends and its bearer takes Harm 8 + 4 P for each round it had left (clockless counts as 3; at most 3).     | None (tool)     | -                                |
 | **Broadside**     | 2    | 8    | A hex and the six around it                | Harm 18 + 9 P to each stack there, friend and foe.                                                                           | The Harm        | -                                |
-| **Cold Snap**     | 2    | 8    | One stack                                  | Add Frozen, clock 2, gate 60 + 20 P HP; the gate is doubled if the target bears Drenched.                                    | The gate        | makes Frozen; uses Drenched      |
+| **Cold Snap**     | 2    | 8    | One stack                                  | Add Frozen, clock 2, gate 75 + 25 P HP.                                                                                      | The gate        | makes Frozen                     |
 | **Downpour**      | 3    | 9    | A hex and every hex within 2 of it         | Each stack there gains Drenched 40, clock 3, and fire there ends.                                                            | Drenched's size | makes Drenched; uses fire        |
 | **Wildfire**      | 3    | 10   | A hex and the six around it, none blocking | Add fire, size 9 + 4 P, clock 3.                                                                                             | The fire's size | makes fire                       |
 | **Whiteout**      | 4    | 14   | A hex and every hex within 2 of it         | Harm 36 + 15 P to each stack there, friend and foe, and add Slowed 2, clock 2.                                               | The Harm        | makes Slowed                     |
@@ -228,13 +233,13 @@ Area Harm, fire, cold, pushing. Allied: Hush, Bloom. Opposed: Accord, Clock.
 ### 3.6 Notes on the list
 
 - The five condition tools (Feed, Share, Wind, Pass On, Set Off) are the
-  tier 2 tools of RULES_V2 2.7, unchanged.
+  tier 2 tools of RULES_V2 2.7; Share and Set Off are the simpler forms of
+  section 7.
 - **Scapegoat** and **Broadside** are the concept's spells, at tiers 1 and 2.
 - Raising spells need "remains of a stack the caster's side owned". The
   Sexton's Spade (CONTENT_ARTIFACTS) lifts that requirement.
-- Three softeners make a Hold easier to land, each doubling a gate:
-  Mollified for Turned, Hushed for Asleep, Drenched for Frozen. With Fuel
-  the gate is four times its base.
+- A Hold's gate depends only on Power, doubled by Fuel. The softeners
+  (Mollified, Hushed, Drenched) no longer double a gate (section 7).
 - Double Time and Take Heart reuse Heartened rather than adding an
   extra-turn rule; the cap of one extra turn per stack per round holds.
 - Regrow, Jolt, Broadside, Change Places and Appointment touch no
@@ -299,7 +304,7 @@ consumes.
 6. **The arsonist.** Coat of Embers starts my whole army Fired Up 4 and
    Burning 8 → Firewalkers makes Fired Up stacks ignore Burning → seven
    Storm conditions sit on my own army as Fuel for any Accord or Clock
-   page (Change of Heart at a doubled gate) → when Fired Up expires,
+   page (Change of Heart with its gate doubled by Fuel) → when Fired Up expires,
    Blaze of Glory sets every adjacent enemy Burning at 8. Price: a cursed
    item that cannot be taken off, and a feat.
 7. **The undertaker's engine.** Vow of the Grave (Hush pages cast on
@@ -309,15 +314,15 @@ consumes.
    that falls leaves mist that blinds the enemy's shooters. Price: Bloom
    forever, creatures lost for good, one cast a round.
 8. **Wet, then cold.** A Lagoon Lurker's Strike leaves the enemy's best
-   stack Drenched → Cold Snap's gate is doubled against a Drenched stack,
-   and doubled again by Fuel → the stack is Frozen → Cold Hands makes the
-   thawing Strike x 300%, and Lucky takes it to the x 4 cap. Price: a
-   tier 2 page, the battle's Fuel and a round of setup.
+   stack Drenched (+40% Harm taken) → Cold Snap, its gate doubled by
+   Fuel, Freezes it → Cold Hands makes the thawing Strike x 300%, and
+   Lucky takes it to the x 4 cap; every Harm it takes meanwhile is x 140%.
+   Price: a tier 2 page, the battle's Fuel and a round of setup.
 9. **The long table.** A Prize Pumpkin starts with clockless Ripening →
    Harvest grows it by 20 a round toward its maximum of 90 → The Long
-   Table copies the Ripening, clockless, onto every stack beside the
-   Pumpkin → five stacks strike at up to x 190% for the rest of the
-   battle. Price: a tier 5 page, rank 3 in Covenant, a feat and a slow
+   Table copies the Ripening, a boon and clockless, onto every friendly
+   stack beside the Pumpkin → five stacks strike at up to x 190% for the
+   rest of the battle. Price: a tier 5 page, rank 3 in Covenant, a feat and a slow
    tier 5 stray that must be kept alive.
 10. **The debtor who never pays.** The Upper Bulb, a cursed third of the
     Hourglass, stops the clocks on my banes → On Credit becomes a free
@@ -348,24 +353,24 @@ consumes.
 | 14 new condition kinds, 3 new ground kinds, no more                         | Each new kind needs six rules to justify it; fewer kinds meet more often                                                 |
 | Raising needs remains of a stack your side owned                            | Makes the Sexton's Spade and enemy dead a find, as in the concept                                                        |
 | Extra turns from spells are Heartened with a clock                          | No second extra-turn rule; Echo, Wind and Share work on them                                                             |
-| A softener doubles a gate, written into the Hold spell                      | Gives three banes a second job and keeps Holds gated                                                                     |
+| A Hold's gate is Power and Fuel only; no softener doubles it (bzc.71)       | One rule per spell; the three softeners keep their own effects (section 7)                                               |
 | Warded and Mollified cap at 75, Drenched at 100                             | Keeps Harm and Strike multipliers inside the caps of RULES_V2 1.11                                                       |
 | The Sky Falls skips Warded stacks                                           | The concept's Controlled Burn without a seam spell                                                                       |
 | Ice, sweets and blocking ground made by spells are left out                 | They need landfall laws or pathing work that v0.2 does not have                                                          |
 | The Understudy's Mask is left out                                           | Copying any ability cannot be written in one sentence of the grammar yet                                                 |
 | First Bell ends Delayed and Late Bell ends Hastened before adding their own | RULES_V2 does not say which timeline class wins when a stack bears both; proposed for the engine: Delayed and Shaken win |
 
-## 7. In-game wording, keywords and simplification candidates
+## 7. In-game wording and the simplification pass
 
 Bead `border_marches-bzc.46` (2026-11-25) rewrote the texts the game shows
-for every spell (`text` in `src/core/magic/spells.ts`) in plain language,
-with no change to any rule or number. The tables above stay the rules of
-record; the in-game texts say the same thing in this shape:
+for every spell (`text` in `src/core/magic/spells.ts`) in plain language.
+The tables above stay the rules of record; the in-game texts say the same
+thing in this shape:
 
 - **What it targets, what it does, the numbers**, in one or two
   sentences: "Deal 30 Harm to a stack", "A stack gains Thorned 9 for 3
   rounds", "An enemy stack becomes Turned for 1 round: it fights for you.
-  Gate 80 HP, or 160 if it is Mollified."
+  Gate 125 HP."
 - **Clocks are written as rounds** ("for 3 rounds", not "clock 3"); area
   spells that hit both sides say "friend or foe".
 - **Then the Fuel and Echo lines**, built from the school wheel: "Fuel:
@@ -394,17 +399,77 @@ spells count (scrolls excluded), and "gate" is said in words where it
 helps ("however big it is"). The same test bans the old shorthand in
 these texts.
 
-**Simplification candidates.** These spells do not fit one or two plain
-sentences without leaning on a second rule; they are left as they are
-(this bead changes no mechanics) and listed here for a balance bead:
+### 7.1 The simplified spells (bzc.71)
 
-| Spell                                              | Why it is hard to read                                                                                                                          | A simpler shape to consider                                              |
-| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| **Set Off**                                        | Its Harm is the condition's "charge" (Harm per turn, or a debt's whole amount once, or 10 per tier of its maker) times rounds left, capped at 3 | A flat Harm per round left, or the condition's size times rounds left    |
-| **Share**                                          | Two picks (a link, then another condition on either end) and the copy lands on the opposite end                                                 | "Copy one condition of a linked stack to the stack it is linked to"      |
-| **The Long Table**                                 | Copies every condition to every neighbour, friend or foe: easy to say, hard to foresee                                                          | Copy only boons to friendly neighbours, or one chosen condition          |
-| **Gust**                                           | The push direction comes from a second picked hex beside the target                                                                             | Push straight away from the caster's side of the field                   |
-| **Sign Here, Change of Heart, Lullaby, Cold Snap** | Each carries a second rule: the gate doubles if the target bears a softener (Mollified, Hushed, Drenched)                                       | Drop the riders, or state the softener rule once as a keyword            |
-| **Sanctuary Oath**                                 | A second effect that depends on Shielded (it spreads to friendly neighbours)                                                                    | Always the target only, or always the target and its friendly neighbours |
-| **Encore, Late Bell**                              | Small riders: "unless it is Quickened", "or 3 if it is Slowed"                                                                                  | Drop the riders                                                          |
-| **Curtain Call**                                   | Budget in HP, capped at the dead stack's starting count, only on your side's remains                                                            | A count of creatures instead of an HP budget                             |
+bzc.46 listed the spells that did not fit one or two plain sentences
+without leaning on a second rule. Bead `border_marches-bzc.71`
+(2026-11-25) gave each one clear rule a player can predict from its text:
+riders were dropped, none added, and the power a rider carried went back
+into a plain number (Power scaling, mana or size). The tables of section 3
+show the new rules; this is what changed and why.
+
+| Spell               | Was                                                                                                                                                                                                     | Now                                                                                    | Why, and where the power went                                                                                                                                                                                                                                                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Set Off**         | Ends a condition; Harm = its "charge" x rounds left (at most 3, clockless 3). Charge was the Harm per round of Burning or Leeched, a debt's whole size counted once, or else 10 x the tier of its maker | Ends a condition; Harm 8 + 4 P for each round it had left (at most 3, clockless 3)     | The charge was hidden and had three cases. Now the number is on the card and scales with Power like every other Storm page (48 at P 2 for a full 3 rounds; old typical 30-90). The `charge` field and the kinds' `chargeFromSize` and `debt` flags are gone from the engine. A debt set off now simply ends, like a debt moved or burnt |
+| **Share**           | Two picks: a link, then another condition on either end; the opposite end gets a copy                                                                                                                   | One pick: a condition on a linked stack; every stack it is linked to gets a copy       | One choice instead of two, and the copy goes where the link line points. A Sworn pair, a Scapegoat or a Leech Line work as before. The AI's and the player's candidate lists shrank from link x condition pairs to conditions                                                                                                           |
+| **The Long Table**  | Every non-Hold, non-link condition on any stack copied to every neighbour, friend or foe; mana 20                                                                                                       | Every boon on a friendly stack copied to each friendly neighbour; mana 18              | "Friend or foe" made the result hard to foresee and usually hurt the caster too. It keeps its identity (Ripening and Heartened shared down the table, combo 9) and loses the trick of spreading an enemy's banes; 2 mana cheaper for that                                                                                               |
+| **Gust**            | Harm 8 + 4 P, then a push of 3 away from a second picked hex beside the target                                                                                                                          | Harm 10 + 5 P, then a push of 3 straight toward the caster's enemy's edge of the field | The second pick (which way the wind blows) is gone: an enemy is blown back toward its own edge, a friend forward. The lost choice of direction went into the Harm (+25%). The `stackHex` target rule had no other user and is gone                                                                                                      |
+| **Sign Here**       | Turned 1 round, gate 60 + 20 P; doubled if Mollified                                                                                                                                                    | Turned 1 round, gate 75 + 25 P                                                         | The softener rider is gone from all four Holds; the gate is +25% instead, so the Hold lands on bigger stacks without setup. Fuel still doubles it                                                                                                                                                                                       |
+| **Change of Heart** | Turned 2 rounds, gate 120 + 40 P; doubled if Mollified                                                                                                                                                  | Turned 2 rounds, gate 150 + 50 P                                                       | As Sign Here                                                                                                                                                                                                                                                                                                                            |
+| **Lullaby**         | Asleep 2 rounds, gate 60 + 20 P; doubled if Hushed                                                                                                                                                      | Asleep 2 rounds, gate 75 + 25 P                                                        | As Sign Here                                                                                                                                                                                                                                                                                                                            |
+| **Cold Snap**       | Frozen 2 rounds, gate 60 + 20 P; doubled if Drenched                                                                                                                                                    | Frozen 2 rounds, gate 75 + 25 P                                                        | As Sign Here                                                                                                                                                                                                                                                                                                                            |
+| **Sanctuary Oath**  | Warded 40 on one stack; spread to friendly neighbours if the target was Shielded                                                                                                                        | Warded 30 on a stack and every friendly stack next to it                               | Always the shape of Close Ranks, which players already know. The spread is now free, so the size went from 40 to 30                                                                                                                                                                                                                     |
+| **Encore**          | Extra turn, then Delayed 2 unless Quickened; mana 10                                                                                                                                                    | Extra turn, then Delayed 2; mana 9                                                     | The Quickened escape is gone; 1 mana back                                                                                                                                                                                                                                                                                               |
+| **Late Bell**       | Ends Hastened, then Delayed 2, or 3 if Slowed                                                                                                                                                           | Ends Hastened, then Delayed 2                                                          | The rider rarely fired (a Slowed stack the AI chose to delay); no number changed. Ending Hastened stays, the decision of section 6                                                                                                                                                                                                      |
+| **Curtain Call**    | Raise the remains' creature, 45 + 20 P HP worth, at most its starting count                                                                                                                             | Raise the remains' creature, 40 + 20 P HP worth                                        | The cap needed the dead stack's starting count, which the player rarely knows. The budget alone decides, as for Sprout, Second Shift and Everybody Up; 5 HP less for the cap's loss                                                                                                                                                     |
+
+Side effects, recorded here:
+
+- **Users of six kinds.** Mollified, Shielded, Quickened, Slowed, Hushed
+  and Drenched lost their spell users (section 2.3). Each keeps its own
+  effect; new users, if wanted, come from creatures, feats or artifacts.
+- **Keywords.** "Charge" left the glossary (`src/data/keywords.ts`); Debt
+  already said "ended any other way, it deals nothing", which is now true
+  of Set Off too.
+- **RULES_V2 2.7** gives the new Share and Set off rows. The faction
+  combos keep their numbers: the Realm's 6.1 Friars still Share the
+  Knights' Heartened with their Sworn partner (now one pick).
+- **The battle AI** scores conditions by kind and rehearses every cast, so
+  it needed no change; with Share's shorter candidate list the full mode
+  rehearses less (the fast mode's "far fewer" test now asks for half, not
+  a quarter).
+
+### 7.2 Balance check
+
+`npm run sim:battles -- --mode balance` (budget 12,000, hero level 6, both
+sides battle AI v2), before (main at 4ee7eed) and after, 40 seeds per
+pairing with mixed and with magic-only heroes. Attacker's win rate per
+pairing, and each faction's rate over its cross-faction battles.
+
+| Pairing (attacker v defender) | Mixed heroes before | Mixed heroes after | Magic heroes before | Magic heroes after |
+| ----------------------------- | ------------------: | -----------------: | ------------------: | -----------------: |
+| humans v humans               |                  55 |                 53 |                  48 |                 50 |
+| humans v undead               |                  58 |                 55 |                  65 |                 65 |
+| humans v goblins              |                  53 |                 53 |                  50 |                 45 |
+| undead v humans               |                  53 |                 50 |                  58 |                 60 |
+| undead v undead               |                  63 |                 63 |                  63 |                 63 |
+| undead v goblins              |              **73** |             **73** |                  55 |                 55 |
+| goblins v humans              |                  58 |                 53 |              **78** |             **75** |
+| goblins v undead              |                  35 |                 43 |                  45 |                 55 |
+| goblins v goblins             |                  55 |                 50 |                  60 |                 58 |
+| **Realm (humans)**            |                  50 |                 51 |                  45 |                 44 |
+| **Restless (undead)**         |                  58 |                 56 |                  51 |                 49 |
+| **Horde (goblins)**           |                  42 |                 43 |                  54 |                 58 |
+
+A pairing cell is 40 battles (about plus or minus 8 points), a faction
+row 160 (about plus or minus 4). Every faction moved by 4 points or less,
+inside the noise, and no cell left the 35-65% band: the two cells outside
+it (bold) were outside before, by the same amount, and come from the
+armies, not these spells (undead attacking goblins with mixed heroes,
+goblins attacking humans with magic heroes). Mixed heroes: 7 of 9 cells
+inside 40-60% after (6 before), 8 of 9 inside 35-65% (8). Magic heroes: 6
+of 9 inside 40-60% (6), 8 of 9 inside 35-65% (8). No run had an illegal
+action. The default 20-seed run read Realm / Restless / Horde 55 / 55 / 40
+before and 59 / 53 / 39 after. The Horde's magic-only rate rose 4 points
+(Set Off now scales with the Boomshamans' Power); it is the number to
+watch if a later run confirms it.

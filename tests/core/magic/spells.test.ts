@@ -27,6 +27,7 @@ import {
   spellDef,
 } from "../../../src/core/magic/index.ts";
 import {
+  BOOK,
   BOW,
   C,
   H,
@@ -344,49 +345,50 @@ describe("Accord", () => {
     expect(stack(s1, "a1").hex).toEqual({ col: 1, row: 5 });
   });
 
-  it("Share copies a condition across a link", () => {
+  it("Share copies a condition of a linked stack to every stack it is linked to", () => {
     let s0 = withConditions(field(), "a0", [
       { kind: "scapegoat", link: "a1", clock: 3 },
       { kind: "shielded", size: 3, clock: 2 },
     ]);
+    s0 = withConditions(s0, "a1", [{ kind: "fired-up", size: 2, clock: 3 }]);
     s0 = withConditions(s0, "d0", [{ kind: "venomed", size: 1, clock: 2 }]);
-    const s1 = cast(s0, "share", [
-      C(s0, "a0", "scapegoat"),
-      C(s0, "a0", "shielded"),
-    ]).state;
-    expect(stack(s1, "a1").conditions[0]).toMatchObject({
+    // From the link's bearer to its far end.
+    const s1 = cast(s0, "share", [C(s0, "a0", "shielded")]).state;
+    expect(stack(s1, "a1").conditions[1]).toMatchObject({
       kind: "shielded",
       size: 3,
       clock: 2,
     });
+    // From the far end back to the bearer: a link joins both stacks.
+    const s2 = cast(s0, "share", [C(s0, "a1", "fired-up")]).state;
+    expect(kinds(s2, "a0")).toEqual(["scapegoat", "shielded", "fired-up"]);
+    // One pick only, never the link itself, never an unlinked stack.
+    expect(spellDef("share").target).toBe("share");
     expect(
-      actionError(
-        s0,
-        castAction(s0, "share", [
-          C(s0, "a0", "scapegoat"),
-          C(s0, "d0", "venomed"),
-        ]),
-      ),
-    ).toMatch(/one end of the link/);
+      actionError(s0, castAction(s0, "share", [C(s0, "a0", "scapegoat")])),
+    ).toMatch(/link cannot be shared/);
+    expect(
+      actionError(s0, castAction(s0, "share", [C(s0, "d0", "venomed")])),
+    ).toMatch(/linked to another/);
   });
 
-  it("Sign Here turns an enemy under its gate, doubled by Mollified", () => {
-    const small = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 10 }] });
+  it("Sign Here turns an enemy under its gate of 75 + 25 P; Mollified does not change it", () => {
+    const small = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 12 }] });
     const s1 = cast(small, "sign-here", [S("d0")]).state;
     expect(stack(s1, "d0")).toMatchObject({ side: "attacker" });
     expect(stack(s1, "d0").conditions[0]).toMatchObject({
       kind: "turned",
       clock: 1,
-      gate: { measure: "hp", max: 100 },
+      gate: { measure: "hp", max: 125 },
     });
-    const big = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 20 }] });
+    const big = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 13 }] });
     expect(kinds(cast(big, "sign-here", [S("d0")]).state, "d0")).toEqual([]);
     const soft = withConditions(big, "d0", [
       { kind: "mollified", size: 30, clock: 3 },
     ]);
-    expect(kinds(cast(soft, "sign-here", [S("d0")]).state, "d0")).toContain(
-      "turned",
-    );
+    expect(kinds(cast(soft, "sign-here", [S("d0")]).state, "d0")).toEqual([
+      "mollified",
+    ]);
   });
 
   it("Soft Words: Mollified 30 lowers the bearer's Strikes", () => {
@@ -422,17 +424,20 @@ describe("Accord", () => {
     });
   });
 
-  it("Sanctuary Oath: Warded 40; spreads to friendly neighbours of a Shielded stack", () => {
-    const s0 = withConditions(field(), "a0", [
-      { kind: "shielded", size: 2, clock: 3 },
-    ]);
+  it("Sanctuary Oath: Warded 30 on a stack and its friendly neighbours", () => {
+    const s0 = field({
+      mine: [{ hex: { col: 1, row: 5 } }, { hex: { col: 1, row: 6 } }],
+      theirs: [{ hex: { col: 2, row: 5 } }, { hex: { col: 8, row: 8 } }],
+    });
     const s1 = cast(s0, "sanctuary-oath", [S("a0")]).state;
+    expect(stack(s1, "a0").conditions).toMatchObject([
+      { kind: "warded", size: 30, clock: 3 },
+    ]);
     expect(kinds(s1, "a1")).toEqual(["warded"]);
-    const s2 = cast(field(), "sanctuary-oath", [S("a0")]).state;
-    expect(kinds(s2, "a1")).toEqual([]);
-    // Warded 40: Harm taken x 60%.
-    const s3 = cast(nextRound(s2), "jolt", [S("a0")]).state;
-    expect(hpLost(s2, s3, "a0")).toBe(24);
+    expect(kinds(s1, "d0")).toEqual([]); // an enemy neighbour gains nothing
+    // Warded 30: Harm taken x 70%.
+    const s2 = cast(nextRound(s1), "jolt", [S("a0")]).state;
+    expect(hpLost(s1, s2, "a0")).toBe(28);
   });
 
   it("Take Heart ends Shaken and adds Heartened 3", () => {
@@ -443,17 +448,17 @@ describe("Accord", () => {
     ]);
   });
 
-  it("Change of Heart: Turned clock 2 under gate 120 + 40 P", () => {
-    const s0 = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 20 }] });
+  it("Change of Heart: Turned clock 2 under gate 150 + 50 P", () => {
+    const s0 = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 25 }] });
     const s1 = cast(s0, "change-of-heart", [S("d0")]).state;
     expect(stack(s1, "d0").conditions[0]).toMatchObject({
       kind: "turned",
       clock: 2,
-      gate: { max: 200 },
+      gate: { max: 250 },
     });
   });
 
-  it("The Long Table copies every non-Hold, non-link condition to neighbours", () => {
+  it("The Long Table copies a friendly stack's boons to its friendly neighbours", () => {
     let s0 = field({
       mine: [{ hex: { col: 1, row: 5 } }, { hex: { col: 1, row: 6 } }],
       theirs: [{ hex: { col: 2, row: 5 } }, { hex: { col: 8, row: 8 } }],
@@ -464,9 +469,15 @@ describe("Accord", () => {
       { kind: "scapegoat", link: "a1", clock: 3 },
     ]);
     const s1 = cast(s0, "the-long-table", [S("a0")]).state;
-    expect(kinds(s1, "a1")).toEqual(["shielded", "burning"]);
-    expect(kinds(s1, "d0")).toEqual(["shielded", "burning"]);
-    expect(kinds(s1, "d1")).toEqual([]);
+    expect(kinds(s1, "a1")).toEqual(["shielded"]); // no bane, no link
+    expect(kinds(s1, "d0")).toEqual([]); // never an enemy
+    expect(spellDef("the-long-table")).toMatchObject({
+      target: "friendly",
+      mana: 18,
+    });
+    expect(
+      actionError(s0, castAction(s0, "the-long-table", [S("d0")])),
+    ).toMatch(/friendly/);
   });
 });
 
@@ -479,7 +490,7 @@ describe("Clock", () => {
     ]);
   });
 
-  it("Late Bell ends Hastened and adds Delayed 2, or 3 when Slowed", () => {
+  it("Late Bell ends Hastened and adds Delayed 2, Slowed or not", () => {
     const s0 = withConditions(field(), "d0", [{ kind: "hastened", clock: 2 }]);
     expect(
       stack(cast(s0, "late-bell", [S("d0")]).state, "d0").conditions,
@@ -489,7 +500,7 @@ describe("Clock", () => {
     ]);
     expect(
       stack(cast(s1, "late-bell", [S("d0")]).state, "d0").conditions[1],
-    ).toMatchObject({ kind: "delayed", clock: 3 });
+    ).toMatchObject({ kind: "delayed", clock: 2 });
   });
 
   it("Appointment schedules Harm 24 + 12 P for the next round start", () => {
@@ -541,10 +552,15 @@ describe("Clock", () => {
     expect(kinds(s1, "a0")).toEqual(["delayed"]);
     const s2 = applyAction(s1, { type: "defend", stackId: "a0" }).state;
     expect(s2.activeStackId).toBe("a0");
+    // Quickened makes no difference: Delayed always follows.
     const q = withConditions(s0, "a0", [
       { kind: "quickened", size: 1, clock: 2 },
     ]);
-    expect(kinds(cast(q, "encore", []).state, "a0")).toEqual(["quickened"]);
+    expect(kinds(cast(q, "encore", []).state, "a0")).toEqual([
+      "quickened",
+      "delayed",
+    ]);
+    expect(spellDef("encore").mana).toBe(9);
   });
 
   it("Forced March hastens every friendly stack", () => {
@@ -559,7 +575,6 @@ describe("Clock", () => {
       kind: "reckoning",
       size: 135,
       clock: 2,
-      charge: 135,
     });
     const s2 = nextRound(nextRound(s1));
     expect(hpLost(s1, s2, "d0")).toBe(135);
@@ -649,13 +664,17 @@ describe("Hush", () => {
     ).toBe("choose a bane");
   });
 
-  it("Lullaby: Asleep under gate 60 + 20 P, doubled by Hushed", () => {
-    const big = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 20 }] });
+  it("Lullaby: Asleep under gate 75 + 25 P; Hushed does not change it", () => {
+    const small = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 12 }] });
+    expect(kinds(cast(small, "lullaby", [S("d0")]).state, "d0")).toEqual([
+      "asleep",
+    ]);
+    const big = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 13 }] });
     expect(kinds(cast(big, "lullaby", [S("d0")]).state, "d0")).toEqual([]);
     const hushed = withConditions(big, "d0", [{ kind: "hushed", clock: 2 }]);
-    expect(kinds(cast(hushed, "lullaby", [S("d0")]).state, "d0")).toContain(
-      "asleep",
-    );
+    expect(kinds(cast(hushed, "lullaby", [S("d0")]).state, "d0")).toEqual([
+      "hushed",
+    ]);
   });
 
   it("Second Shift raises Shades on remains of the caster's side only", () => {
@@ -694,12 +713,21 @@ describe("Hush", () => {
     expect(hpLost(s, s1, "a1")).toBe(29);
   });
 
-  it("Curtain Call raises the recorded creature, at most its initial count", () => {
+  it("Curtain Call raises the recorded creature, 40 + 20 P HP worth", () => {
     const s0 = addRemains(field(), { col: 4, row: 4 }, "attacker");
     const s1 = cast(s0, "curtain-call", [H(4, 4)]).state;
     const back = s1.stacks.find((s) => s.summoned);
-    expect(back).toMatchObject({ count: 8 }); // 85 HP / 10
+    expect(back).toMatchObject({ count: 8 }); // 80 HP / 10
     expect(back?.creature.id).toBe("pike");
+    // No cap at the dead stack's starting count: the budget alone decides.
+    const few = {
+      ...s0,
+      ground: s0.ground.map((g) =>
+        g.remains ? { ...g, remains: { ...g.remains, initialCount: 3 } } : g,
+      ),
+    };
+    const s2 = cast(few, "curtain-call", [H(4, 4)]).state;
+    expect(s2.stacks.find((s) => s.summoned)).toMatchObject({ count: 8 });
   });
 
   it("Pea Soup lays mist within 2: no shooting from it", () => {
@@ -735,11 +763,30 @@ describe("Storm", () => {
     expect(hpLost(s0, cast(s0, "jolt", [S("d0")]).state, "d0")).toBe(40);
   });
 
-  it("Gust harms and pushes 3 hexes away from the chosen hex", () => {
+  it("Gust harms 10 + 5 P and pushes 3 hexes toward the enemy's edge", () => {
     const s0 = field();
-    const s1 = cast(s0, "gust", [S("d0"), H(7, 5)]).state;
-    expect(hpLost(s0, s1, "d0")).toBe(16);
+    expect(spellDef("gust").target).toBe("stack");
+    const s1 = cast(s0, "gust", [S("d0")]).state;
+    expect(hpLost(s0, s1, "d0")).toBe(20);
     expect(stack(s1, "d0").hex).toEqual({ col: 11, row: 5 });
+    // A friendly stack goes the same way: forward, toward the enemy.
+    const s2 = cast(s0, "gust", [S("a1")]).state;
+    expect(stack(s2, "a1").hex).toEqual({ col: 4, row: 6 });
+  });
+
+  it("Gust cast by the defender pushes toward the attacker's edge", () => {
+    const s0 = battle({
+      mine: [{ hex: { col: 5, row: 5 } }],
+      theirs: [{ hex: { col: 8, row: 5 } }],
+      enemyMagic: BOOK,
+    });
+    // Hand the turn to the defender's stack: it casts with its side's hero.
+    const def = { ...s0, activeStackId: "d0" };
+    const s1 = applyAction(def, {
+      ...castAction(def, "gust", [S("a0")]),
+      stackId: "d0",
+    }).state;
+    expect(stack(s1, "a0").hex).toEqual({ col: 2, row: 5 });
   });
 
   it("Gust pushes through fire, which harms on the way", () => {
@@ -759,8 +806,8 @@ describe("Storm", () => {
         },
       ],
     };
-    const s1 = cast(s0, "gust", [S("d0"), H(7, 5)]).state;
-    expect(hpLost(s0, s1, "d0")).toBe(23);
+    const s1 = cast(s0, "gust", [S("d0")]).state;
+    expect(hpLost(s0, s1, "d0")).toBe(27);
   });
 
   it("Hothead: Burning 6 + 3 P and Fired Up 2", () => {
@@ -771,13 +818,25 @@ describe("Storm", () => {
     ]);
   });
 
-  it("Set Off: Harm = charge x rounds left (at most 3)", () => {
+  it("Set Off: Harm 8 + 4 P for each round left (at most 3), whatever the kind", () => {
     const s0 = withConditions(field(), "d0", [
       { kind: "burning", size: 12, clock: 3 },
     ]);
     const s1 = cast(s0, "set-off", [C(s0, "d0", "burning")]).state;
-    expect(hpLost(s0, s1, "d0")).toBe(36);
+    expect(hpLost(s0, s1, "d0")).toBe(48);
     expect(kinds(s1, "d0")).toEqual([]);
+    // A clockless boon counts 3 rounds; a debt is ended like any other.
+    const lucky = withConditions(field(), "d0", [
+      { kind: "lucky", clock: null },
+    ]);
+    const s2 = cast(lucky, "set-off", [C(lucky, "d0", "lucky")]).state;
+    expect(hpLost(lucky, s2, "d0")).toBe(48);
+    const debt = withConditions(field(), "d0", [
+      { kind: "reckoning", size: 90, clock: 1 },
+    ]);
+    const s3 = cast(debt, "set-off", [C(debt, "d0", "reckoning")]).state;
+    expect(hpLost(debt, s3, "d0")).toBe(16);
+    expect(spellDef("set-off").text(2)).toContain("16 Harm");
   });
 
   it("Broadside harms every stack on a hex and the six around it", () => {
@@ -787,19 +846,19 @@ describe("Storm", () => {
     expect(hpLost(s0, s1, "d1")).toBe(36);
   });
 
-  it("Cold Snap: Frozen under gate 60 + 20 P, doubled by Drenched", () => {
-    const s0 = field();
+  it("Cold Snap: Frozen under gate 75 + 25 P; Drenched does not change it", () => {
+    const s0 = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 12 }] });
     expect(kinds(cast(s0, "cold-snap", [S("d0")]).state, "d0")).toEqual([
       "frozen",
     ]);
-    const big = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 20 }] });
+    const big = field({ theirs: [{ hex: { col: 8, row: 5 }, count: 13 }] });
     expect(kinds(cast(big, "cold-snap", [S("d0")]).state, "d0")).toEqual([]);
     const wet = withConditions(big, "d0", [
       { kind: "drenched", size: 40, clock: 3 },
     ]);
-    expect(kinds(cast(wet, "cold-snap", [S("d0")]).state, "d0")).toContain(
-      "frozen",
-    );
+    expect(kinds(cast(wet, "cold-snap", [S("d0")]).state, "d0")).toEqual([
+      "drenched",
+    ]);
   });
 
   it("Downpour drenches stacks within 2 and puts out fire", () => {

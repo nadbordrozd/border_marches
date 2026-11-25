@@ -78,8 +78,6 @@ export function targetKind(rule: TargetRule): TargetKind {
       return { icon: "friendly", label: "Two of your stacks" };
     case "enemyFriendly":
       return { icon: "enemy", label: "An enemy stack, then one of yours" };
-    case "stackHex":
-      return { icon: "stack", label: "Any stack, then a hex beside it" };
     case "freeHex":
       return { icon: "hex", label: "An empty hex" };
     case "line3":
@@ -94,10 +92,7 @@ export function targetKind(rule: TargetRule): TargetKind {
     case "condition":
       return { icon: "condition", label: "A condition on any stack" };
     case "share":
-      return {
-        icon: "condition",
-        label: "A link, then a condition at either end",
-      };
+      return { icon: "condition", label: "A condition on a linked stack" };
     case "passOn":
       return {
         icon: "condition",
@@ -135,8 +130,6 @@ export function noTargetReason(rule: TargetRule): string {
       return "Needs two of your stacks";
     case "enemyFriendly":
       return "Needs an enemy stack and one of yours";
-    case "stackHex":
-      return "No stack with a hex beside it to use";
     case "freeHex":
       return "No empty hex";
     case "line3":
@@ -148,7 +141,7 @@ export function noTargetReason(rule: TargetRule): string {
     case "condition":
       return "No condition on the field it can take";
     case "share":
-      return "No link with a condition to share";
+      return "No condition on a linked stack to share";
     case "passOn":
       return "No bane with a stack beside its bearer";
     case "wind":
@@ -191,7 +184,7 @@ function allHexes(): Hex[] {
 /**
  * Every target the step after `prefix` could take under the rule, before
  * the engine's check: stacks, conditions, options, and hexes (only the
- * ones beside the stack for a push, the line's next hex for a line).
+ * line's next hex for a line).
  */
 function stepCandidates(
   state: BattleState,
@@ -211,14 +204,6 @@ function stepCandidates(
       return [{ choice: "+2" }, { choice: "-2" }];
     case "hex": {
       const [t0, t1] = prefix;
-      if (rule === "stackHex" && t0 !== undefined && "stack" in t0) {
-        const s = state.stacks.find((x) => x.id === t0.stack);
-        return s
-          ? neighbors(s.hex)
-              .filter(inBounds)
-              .map((hex) => ({ hex }))
-          : [];
-      }
       if (rule === "line3" && t0 !== undefined && "hex" in t0) {
         if (prefix.length === 1)
           return neighbors(t0.hex)

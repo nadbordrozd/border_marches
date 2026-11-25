@@ -129,7 +129,6 @@ A condition is a named effect on one stack.
 | `maxSize`  | 3 x the size at creation unless the kind sets another maximum                                                                                                              |
 | `clock`    | Rounds left, 1 to 9, or `null` for "until the battle ends"                                                                                                                 |
 | `gate`     | `null`, or a threshold a stack must pass to receive the condition: `{ measure: "hp" or "tier", max }`. `hp` is the stack's current total HP; `tier` is the creature's tier |
-| `charge`   | Harm per remaining round if the condition is set off (2.7)                                                                                                                 |
 | `hold`     | True for Holds (1.9); fixed by the kind                                                                                                                                    |
 | `link`     | `null`, or the stack id of the far end (1.4)                                                                                                                               |
 | `source`   | The stack id, hero or artifact that made it (for display and for "your" in rule text)                                                                                      |
@@ -718,19 +717,20 @@ Each school has one **tool**, a tier 2 battle spell with no size (so it
 cannot be Fuelled). They are in every game's spell pool. They work on
 conditions of every school.
 
-| Tool    | School | Exact rule                                                                                                                                          |
-| ------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Feed    | Bloom  | Choose a condition with size above 0. Its size increases by half, rounded up, to at most its `maxSize`. Not Holds                                   |
-| Share   | Accord | Choose a link and one other condition on either of its ends. The other end receives a copy (landing rules apply). Not Holds, not links              |
-| Wind    | Clock  | Choose a condition with a clock. Add 2 to it (to at most 9) or subtract 2. At 0 it expires now, firing its expiry rule. Holds can only be shortened |
-| Pass on | Hush   | Choose a bane and a stack adjacent to its bearer. The bane moves to that stack (landing rules apply; if refused it stays where it was)              |
-| Set off | Storm  | Choose a condition. It ends, and its bearer takes Harm = charge x rounds left, where clockless counts as 3 and rounds left are counted to at most 3 |
+| Tool    | School | Exact rule                                                                                                                                                      |
+| ------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Feed    | Bloom  | Choose a condition with size above 0. Its size increases by half, rounded up, to at most its `maxSize`. Not Holds                                               |
+| Share   | Accord | Choose a condition on a stack linked to another (either end of a link). Every stack it is linked to receives a copy (landing rules apply). Not Holds, not links |
+| Wind    | Clock  | Choose a condition with a clock. Add 2 to it (to at most 9) or subtract 2. At 0 it expires now, firing its expiry rule. Holds can only be shortened             |
+| Pass on | Hush   | Choose a bane and a stack adjacent to its bearer. The bane moves to that stack (landing rules apply; if refused it stays where it was)                          |
+| Set off | Storm  | Choose a condition. It ends, and its bearer takes Harm 8 + 4 P for each round it had left, counted to at most 3 (clockless counts as 3)                         |
 
-**Charge.** A condition whose kind deals Harm each round has charge = its
-size. A debt (a kind whose size is an amount owed) has charge = its whole
-size and counts one round. Every other condition has charge = 10 x the
-tier of what made it (spell tier; creature tier; artifacts count as tier 1
-for Trinkets, 3 for Wonders, 5 for Marvels).
+Set off's Harm per round is the spell's own number, the same for every
+kind: a debt set off ends like any other condition and never falls due
+(bead `border_marches-bzc.71` replaced the per-condition "charge", which
+was a condition's Harm per round, a debt's whole size or 10 x the tier of
+its maker; CONTENT_SPELLS 7). A rule other than the spell that sets a
+condition off states its own Harm per round.
 
 Creature abilities and artifacts may perform the same operations (a
 Bellhop moves a condition); the rules above apply to the operation whoever
@@ -1324,7 +1324,7 @@ skipped and the next strongest is tried.
 | Lucky     | Bloom, boon      | none           | The bearer's next melee attack or shot (not a retaliation) is x 150%; then Lucky ends                                                         |
 | Jinxed    | Hush, bane       | 3, or as made  | The bearer cannot retaliate, and Strikes against it are x (100 + size)%; size 25 when it comes from Luck                                      |
 
-None of the four is a Hold. All have charge 10 (2.7) and no gate. Creature
+None of the four is a Hold. None has a gate. Creature
 tags normally make undead and constructs unable to bear Heartened and
 Shaken (two kinds, the limit of 1.2), which keeps Heroes' "undead have no
 morale" without a special rule.

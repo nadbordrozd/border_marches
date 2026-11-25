@@ -209,6 +209,9 @@ describe("battle AI fast mode: work", () => {
       s = applyAction(s, a).state;
     }
     expect(fast).toBeGreaterThan(0);
-    expect(fast * 4).toBeLessThan(full);
+    // At least half the work saved. (It was a quarter until Share became
+    // a single pick in bzc.71: the Friars' Share no longer offers every
+    // link x condition pair, so the full mode itself rehearses far less.)
+    expect(fast * 2).toBeLessThan(full);
   });
 });

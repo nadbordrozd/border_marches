@@ -43,6 +43,7 @@ import {
   findCondition,
   hexOf,
   isBlockingHex,
+  linkedStacks,
   isFreeHex,
   ownRemains,
   ruleCandidates,
@@ -115,16 +116,9 @@ function hpGate(max: number): Gate {
   return { measure: "hp", max };
 }
 
-/** A Hold's gate: base, doubled by its softener, doubled by Fuel. */
-function holdGate(
-  fx: Effects,
-  target: StackId,
-  base: number,
-  softener: string,
-  c: CastContext,
-): Gate {
-  const soft = bears(fx, target, softener) ? 2 : 1;
-  return hpGate(dbl(base * soft, c));
+/** A Hold's gate: base, doubled by Fuel. */
+function holdGate(base: number, c: CastContext): Gate {
+  return hpGate(dbl(base, c));
 }
 
 function capped(kind: string, size: number): number {
@@ -414,14 +408,11 @@ const ACCORD: SpellDef[] = [
     fuel: null,
     tool: true,
     text: () =>
-      "Condition tool. Pick a link and another condition on one of its two stacks: the stack at the other end gets a copy. Not Holds or links.",
+      "Condition tool. Pick a condition on a linked stack: every stack it is linked to gets a copy. Not Holds or links.",
     resolve(fx, _a, t) {
-      const l = conditionOf(t[0]);
-      const o = conditionOf(t[1]);
-      const link = findCondition(fx.state, l.stack, l.uid);
-      if (!link || link.link === null) return;
-      const to = o.stack === l.stack ? link.link : l.stack;
-      fx.copyCondition(o.stack, o.uid, to);
+      const ref = conditionOf(t[0]);
+      for (const to of linkedStacks(fx.state, ref.stack))
+        fx.copyCondition(ref.stack, ref.uid, to);
     },
   },
   {
@@ -432,16 +423,15 @@ const ACCORD: SpellDef[] = [
     mana: 8,
     target: "enemy",
     fuel: "The gate",
-    scale: { base: 60, per: 20 },
+    scale: { base: 75, per: 25 },
     text: (p) =>
-      `An enemy stack becomes Turned for 1 round: it fights for you. Gate ${n(60, 20, p)} HP, or ${2 * n(60, 20, p)} if it is Mollified.`,
+      `An enemy stack becomes Turned for 1 round: it fights for you. Gate ${n(75, 25, p)} HP.`,
     resolve(fx, _a, t, c) {
-      const id = stackOf(t[0]);
-      fx.addCondition(id, {
+      fx.addCondition(stackOf(t[0]), {
         kind: "turned",
         clock: 1,
         tier: 2,
-        gate: holdGate(fx, id, n(60, 20, c.power), "mollified", c),
+        gate: holdGate(n(75, 25, c.power), c),
       });
     },
   },
@@ -468,22 +458,15 @@ const ACCORD: SpellDef[] = [
     target: "stack",
     fuel: "Warded's size",
     text: () =>
-      "A stack gains Warded 40 for 3 rounds: -40% Harm taken. If it is Shielded, every friendly stack next to it gains the same.",
+      "A stack and every friendly stack next to it gain Warded 30 for 3 rounds: -30% Harm taken.",
     touches(state, a, t) {
       const id = stackOf(t[0]);
-      const s = getStack(state, id);
-      return s.conditions.some((x) => x.kind === "shielded")
-        ? [id, ...friendlyAdjacent(state, id, casterSide(state, a))]
-        : [id];
+      return [id, ...friendlyAdjacent(state, id, casterSide(state, a))];
     },
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
-      const size = dbl(40, c);
-      const spread = bears(fx, id, "shielded");
-      addSized(fx, id, "warded", size, 3, 3);
-      if (spread)
-        for (const x of friendlyAdjacent(fx.state, id, c.side))
-          addSized(fx, x, "warded", size, 3, 3);
+      const ids = [id, ...friendlyAdjacent(fx.state, id, c.side)];
+      for (const x of ids) addSized(fx, x, "warded", dbl(30, c), 3, 3);
     },
   },
   {
@@ -510,16 +493,15 @@ const ACCORD: SpellDef[] = [
     mana: 14,
     target: "enemy",
     fuel: "The gate",
-    scale: { base: 120, per: 40 },
+    scale: { base: 150, per: 50 },
     text: (p) =>
-      `An enemy stack becomes Turned for 2 rounds: it fights for you. Gate ${n(120, 40, p)} HP, or ${2 * n(120, 40, p)} if it is Mollified.`,
+      `An enemy stack becomes Turned for 2 rounds: it fights for you. Gate ${n(150, 50, p)} HP.`,
     resolve(fx, _a, t, c) {
-      const id = stackOf(t[0]);
-      fx.addCondition(id, {
+      fx.addCondition(stackOf(t[0]), {
         kind: "turned",
         clock: 2,
         tier: 4,
-        gate: holdGate(fx, id, n(120, 40, c.power), "mollified", c),
+        gate: holdGate(n(150, 50, c.power), c),
       });
     },
   },
@@ -528,23 +510,25 @@ const ACCORD: SpellDef[] = [
     name: "The Long Table",
     school: "accord",
     tier: 5,
-    mana: 20,
-    target: "stack",
+    mana: 18,
+    target: "friendly",
     fuel: null,
     text: () =>
-      "Every condition on a stack, except Holds and links, is copied to every stack next to it, friend or foe.",
-    touches(state, _a, t) {
+      "Pick a friendly stack: every friendly stack next to it gets a copy of each of its boons.",
+    touches(state, a, t) {
       const id = stackOf(t[0]);
-      return [id, ...adjacentStacks(state, id)];
+      return [id, ...friendlyAdjacent(state, id, casterSide(state, a))];
     },
-    resolve(fx, _a, t) {
+    resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
-      const conds = fx
+      const boons = fx
         .stack(id)
-        .conditions.filter((c) => !c.hold && c.link === null)
-        .map((c) => c.uid);
-      for (const to of adjacentStacks(fx.state, id)) {
-        for (const uid of conds) {
+        .conditions.filter(
+          (x) => x.polarity === "boon" && !x.hold && x.link === null,
+        )
+        .map((x) => x.uid);
+      for (const to of friendlyAdjacent(fx.state, id, c.side)) {
+        for (const uid of boons) {
           if (fx.isAlive(id)) fx.copyCondition(id, uid, to);
         }
       }
@@ -579,13 +563,11 @@ const CLOCK: SpellDef[] = [
     mana: 4,
     target: "stack",
     fuel: null,
-    text: () =>
-      "A stack loses Hastened and becomes Delayed for 2 rounds, or 3 if it is Slowed.",
+    text: () => "A stack loses Hastened and becomes Delayed for 2 rounds.",
     resolve(fx, _a, t) {
       const id = stackOf(t[0]);
       endKind(fx, id, "hastened");
-      const clock = bears(fx, id, "slowed") ? 3 : 2;
-      fx.addCondition(id, { kind: "delayed", clock, tier: 1 });
+      fx.addCondition(id, { kind: "delayed", clock: 2, tier: 1 });
     },
   },
   {
@@ -665,15 +647,14 @@ const CLOCK: SpellDef[] = [
     name: "Encore",
     school: "clock",
     tier: 3,
-    mana: 10,
+    mana: 9,
     target: "active",
     fuel: null,
     text: () =>
-      "The friendly stack about to act takes an extra turn after this one, then becomes Delayed for 2 rounds unless it is Quickened.",
+      "The friendly stack about to act takes an extra turn after this one, then becomes Delayed for 2 rounds.",
     resolve(fx, a) {
       fx.extraTurn(a);
-      if (!bears(fx, a, "quickened"))
-        fx.addCondition(a, { kind: "delayed", clock: 2, tier: 3 });
+      fx.addCondition(a, { kind: "delayed", clock: 2, tier: 3 });
     },
   },
   {
@@ -825,16 +806,14 @@ const HUSH: SpellDef[] = [
     mana: 8,
     target: "stack",
     fuel: "The gate",
-    scale: { base: 60, per: 20 },
-    text: (p) =>
-      `A stack falls Asleep for 2 rounds. Gate ${n(60, 20, p)} HP, or ${2 * n(60, 20, p)} if it is Hushed.`,
+    scale: { base: 75, per: 25 },
+    text: (p) => `A stack falls Asleep for 2 rounds. Gate ${n(75, 25, p)} HP.`,
     resolve(fx, _a, t, c) {
-      const id = stackOf(t[0]);
-      fx.addCondition(id, {
+      fx.addCondition(stackOf(t[0]), {
         kind: "asleep",
         clock: 2,
         tier: 2,
-        gate: holdGate(fx, id, n(60, 20, c.power), "hushed", c),
+        gate: holdGate(n(75, 25, c.power), c),
       });
     },
   },
@@ -888,23 +867,17 @@ const HUSH: SpellDef[] = [
     mana: 11,
     target: "remains",
     fuel: "The summon budget",
-    scale: { base: 45, per: 20 },
+    scale: { base: 40, per: 20 },
     text: (p) =>
-      `Raise the creature in remains of your side: ${n(45, 20, p)} HP worth, never more than it started with.`,
+      `Raise the creature that left remains of your side: ${n(40, 20, p)} HP worth of it.`,
     check(state, _a, t) {
       return isFreeHex(state, hexOf(t[0])) ? null : "a stack stands on it";
     },
     resolve(fx, _a, t, c) {
-      const budget = dbl(n(45, 20, c.power), c);
+      const budget = dbl(n(40, 20, c.power), c);
       raise(fx, hexOf(t[0]), c.side, (r) =>
         r
-          ? {
-              creature: r.creature,
-              count: Math.min(
-                r.initialCount,
-                Math.max(1, Math.floor(budget / r.creature.hp)),
-              ),
-            }
+          ? { creature: r.creature, count: summonBudget(r.creature, budget) }
           : null,
       );
     },
@@ -952,6 +925,15 @@ const HUSH: SpellDef[] = [
 // ---------------------------------------------------------------------------
 // Storm: area Harm, fire, cold, pushing
 
+/**
+ * The hex beside `h` on `side`'s own edge of the field (west for the
+ * attacker, east for the defender): Gust pushes away from it, so straight
+ * toward the other side's edge.
+ */
+function behind(h: Hex, side: CastContext["side"]): Hex {
+  return stepHex(h, side === "attacker" ? 3 : 0);
+}
+
 const STORM: SpellDef[] = [
   {
     id: "jolt",
@@ -973,15 +955,15 @@ const STORM: SpellDef[] = [
     school: "storm",
     tier: 1,
     mana: 4,
-    target: "stackHex",
+    target: "stack",
     fuel: "The Harm",
-    scale: { base: 8, per: 4 },
+    scale: { base: 10, per: 5 },
     text: (p) =>
-      `Deal ${n(8, 4, p)} Harm to a stack, then push it 3 hexes away from a hex next to it that you pick.`,
+      `Deal ${n(10, 5, p)} Harm to a stack, then push it 3 hexes straight toward the enemy's edge of the field.`,
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
-      fx.harm(id, n(8, 4, c.power), { fuelled: c.fuelled });
-      if (fx.isAlive(id)) fx.push(id, hexOf(t[1]), 3);
+      fx.harm(id, n(10, 5, c.power), { fuelled: c.fuelled });
+      if (fx.isAlive(id)) fx.push(id, behind(fx.stack(id).hex, c.side), 3);
     },
   },
   {
@@ -1010,11 +992,12 @@ const STORM: SpellDef[] = [
     target: "condition",
     fuel: null,
     tool: true,
-    text: () =>
-      "Condition tool. End a condition: its bearer takes its charge as Harm for each round it had left (at most 3; clockless counts as 3).",
-    resolve(fx, _a, t) {
+    scale: { base: 8, per: 4 },
+    text: (p) =>
+      `Condition tool. End a condition: its bearer takes ${n(8, 4, p)} Harm for each round it had left, at most 3.`,
+    resolve(fx, _a, t, c) {
       const ref = conditionOf(t[0]);
-      fx.setOffCondition(ref.stack, ref.uid);
+      fx.setOffCondition(ref.stack, ref.uid, n(8, 4, c.power));
     },
   },
   {
@@ -1045,16 +1028,14 @@ const STORM: SpellDef[] = [
     mana: 8,
     target: "stack",
     fuel: "The gate",
-    scale: { base: 60, per: 20 },
-    text: (p) =>
-      `A stack is Frozen for 2 rounds. Gate ${n(60, 20, p)} HP, or ${2 * n(60, 20, p)} if it is Drenched.`,
+    scale: { base: 75, per: 25 },
+    text: (p) => `A stack is Frozen for 2 rounds. Gate ${n(75, 25, p)} HP.`,
     resolve(fx, _a, t, c) {
-      const id = stackOf(t[0]);
-      fx.addCondition(id, {
+      fx.addCondition(stackOf(t[0]), {
         kind: "frozen",
         clock: 2,
         tier: 2,
-        gate: holdGate(fx, id, n(60, 20, c.power), "drenched", c),
+        gate: holdGate(n(75, 25, c.power), c),
       });
     },
   },

@@ -36,7 +36,6 @@ export const STANDARD_CONDITION_KINDS: readonly ConditionKindDef[] = [
     name: "Burning",
     school: "storm",
     polarity: "bane",
-    chargeFromSize: true,
     text: (c) =>
       `Takes ${c.size} Harm at its turn start ${clockText(c.clock)}.`,
     onTurnStart(fx, holder, c) {
