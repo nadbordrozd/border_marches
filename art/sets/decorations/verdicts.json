@@ -1,0 +1,2662 @@
+{
+  "grass-small-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "mushroom ring: round, calm cream caps, reads as a fairy ring at 1x",
+    "at": "2026-11-25T18:01:11.608Z"
+  },
+  "grass-small-s1#1": {
+    "verdict": "ACCEPTED",
+    "notes": "snail: clear spiral shell, warm brown, tiny and calm",
+    "at": "2026-11-25T18:01:11.783Z"
+  },
+  "grass-small-s1#2": {
+    "verdict": "ACCEPTED",
+    "notes": "butterflies: orange and white trio, clearly butterflies at 1x on light and dark",
+    "at": "2026-11-25T18:01:11.987Z"
+  },
+  "grass-small-s1#3": {
+    "verdict": "ACCEPTED",
+    "notes": "molehill: low earth mound with a dark hole, calm",
+    "at": "2026-11-25T18:01:12.148Z"
+  },
+  "grass-small-s1#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:12.310Z"
+  },
+  "grass-small-s1#5": {
+    "verdict": "REJECTED",
+    "notes": "songbird: near duplicate of #13, #13 has cleaner legs",
+    "at": "2026-11-25T18:01:12.461Z"
+  },
+  "grass-small-s1#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:12.578Z"
+  },
+  "grass-small-s1#7": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:12.722Z"
+  },
+  "grass-small-s1#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:12.876Z"
+  },
+  "grass-small-s1#9": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:13.021Z"
+  },
+  "grass-small-s1#10": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:13.196Z"
+  },
+  "grass-small-s1#11": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:13.360Z"
+  },
+  "grass-small-s1#12": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:13.493Z"
+  },
+  "grass-small-s1#13": {
+    "verdict": "ACCEPTED",
+    "notes": "songbird: clean blue bird with an orange breast and clear legs",
+    "at": "2026-11-25T18:01:13.634Z"
+  },
+  "grass-small-s1#14": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:13.764Z"
+  },
+  "grass-small-s1#15": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:13.903Z"
+  },
+  "grass-small-s1#16": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:14.050Z"
+  },
+  "grass-small-s1#17": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:14.188Z"
+  },
+  "grass-small-s1#18": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:14.325Z"
+  },
+  "grass-small-s1#19": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:14.460Z"
+  },
+  "grass-small-s1#20": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:14.622Z"
+  },
+  "grass-small-s1#21": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:14.797Z"
+  },
+  "grass-small-s1#22": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:14.924Z"
+  },
+  "grass-small-s1#23": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:15.063Z"
+  },
+  "grass-small-s1#24": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:15.188Z"
+  },
+  "grass-small-s1#25": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:15.317Z"
+  },
+  "grass-small-s1#26": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:15.444Z"
+  },
+  "grass-small-s1#27": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:15.574Z"
+  },
+  "grass-small-s1#28": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:15.692Z"
+  },
+  "grass-small-s1#29": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:15.810Z"
+  },
+  "grass-small-s1#30": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:15.929Z"
+  },
+  "grass-small-s1#31": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:16.046Z"
+  },
+  "grass-small-s1#32": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:16.167Z"
+  },
+  "grass-small-s1#33": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:16.288Z"
+  },
+  "grass-small-s1#34": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:16.410Z"
+  },
+  "grass-small-s1#35": {
+    "verdict": "REJECTED",
+    "notes": "snail: shell crowded by a stalk sticking out at the right; #1 kept",
+    "at": "2026-11-25T18:01:16.542Z"
+  },
+  "grass-small-s1#36": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:16.669Z"
+  },
+  "grass-small-s1#37": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:16.808Z"
+  },
+  "grass-small-s1#38": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:16.952Z"
+  },
+  "grass-small-s1#39": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:17.087Z"
+  },
+  "grass-small-s1#40": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:17.209Z"
+  },
+  "grass-small-s1#41": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:17.340Z"
+  },
+  "grass-small-s1#42": {
+    "verdict": "REJECTED",
+    "notes": "butterflies: one of the two is cut to a half wing; #2 kept",
+    "at": "2026-11-25T18:01:17.469Z"
+  },
+  "grass-small-s1#43": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:17.602Z"
+  },
+  "grass-small-s1#44": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:17.733Z"
+  },
+  "grass-small-s1#45": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:17.859Z"
+  },
+  "grass-small-s1#46": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:17.995Z"
+  },
+  "grass-small-s1#47": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:18.138Z"
+  },
+  "grass-small-s1#48": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:18.285Z"
+  },
+  "grass-small-s1#49": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:18.465Z"
+  },
+  "grass-small-s1#50": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:18.656Z"
+  },
+  "grass-small-s1#51": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:18.799Z"
+  },
+  "grass-small-s1#52": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:18.929Z"
+  },
+  "grass-small-s1#53": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:19.063Z"
+  },
+  "grass-small-s1#54": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:19.192Z"
+  },
+  "grass-small-s1#55": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:19.330Z"
+  },
+  "grass-small-s1#56": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:19.481Z"
+  },
+  "grass-small-s1#57": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:19.626Z"
+  },
+  "grass-small-s1#58": {
+    "verdict": "REJECTED",
+    "notes": "butterflies: paler, less readable on light ground; #2 kept",
+    "at": "2026-11-25T18:01:19.768Z"
+  },
+  "grass-small-s1#59": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:19.918Z"
+  },
+  "grass-small-s1#60": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:20.058Z"
+  },
+  "grass-small-s1#61": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:20.190Z"
+  },
+  "grass-small-s1#62": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:20.327Z"
+  },
+  "grass-small-s1#63": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:01:20.467Z"
+  },
+  "props-1x1-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "big boulder: rounded granite with moss, lit from the left, calm",
+    "at": "2026-11-25T18:01:20.720Z"
+  },
+  "props-1x1-s1#1": {
+    "verdict": "REJECTED",
+    "notes": "boulder: moss spots read as camouflage noise",
+    "at": "2026-11-25T18:01:20.844Z"
+  },
+  "props-1x1-s1#2": {
+    "verdict": "REJECTED",
+    "notes": "boulder: dithered speckled top (no dithering)",
+    "at": "2026-11-25T18:01:20.968Z"
+  },
+  "props-1x1-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "boulder: plain blob, no moss or detail; #0 kept",
+    "at": "2026-11-25T18:01:21.106Z"
+  },
+  "props-1x1-s1#4": {
+    "verdict": "ACCEPTED",
+    "notes": "stump cluster: three cut stumps with pale tops and roots, clear",
+    "at": "2026-11-25T18:01:21.255Z"
+  },
+  "props-1x1-s1#5": {
+    "verdict": "REJECTED",
+    "notes": "stumps: near duplicate of #4",
+    "at": "2026-11-25T18:01:21.387Z"
+  },
+  "props-1x1-s1#6": {
+    "verdict": "REJECTED",
+    "notes": "stumps: five stumps, busier; #4 kept",
+    "at": "2026-11-25T18:01:21.514Z"
+  },
+  "props-1x1-s1#7": {
+    "verdict": "REJECTED",
+    "notes": "stumps: a straight row reads as a fence",
+    "at": "2026-11-25T18:01:21.643Z"
+  },
+  "props-1x1-s1#8": {
+    "verdict": "REJECTED",
+    "notes": "broken cart: thin spindly frame, noisy at 1x",
+    "at": "2026-11-25T18:01:21.771Z"
+  },
+  "props-1x1-s1#9": {
+    "verdict": "ACCEPTED",
+    "notes": "broken cart: tipped-over box cart with loose planks, clearly wrecked",
+    "at": "2026-11-25T18:01:21.898Z"
+  },
+  "props-1x1-s1#10": {
+    "verdict": "REJECTED",
+    "notes": "broken cart: thin wheels and rails turn to noise at 1x; #9 kept",
+    "at": "2026-11-25T18:01:22.018Z"
+  },
+  "props-1x1-s1#11": {
+    "verdict": "REJECTED",
+    "notes": "cart: intact cart, not a wreck (could read as usable)",
+    "at": "2026-11-25T18:01:22.135Z"
+  },
+  "props-1x1-s1#12": {
+    "verdict": "REJECTED",
+    "notes": "standing stones: V shape leaning apart, odd",
+    "at": "2026-11-25T18:01:22.254Z"
+  },
+  "props-1x1-s1#13": {
+    "verdict": "ACCEPTED",
+    "notes": "standing stones: two rough menhirs leaning together, lit left",
+    "at": "2026-11-25T18:01:22.521Z"
+  },
+  "props-1x1-s1#14": {
+    "verdict": "REJECTED",
+    "notes": "standing stones: crossed X shape looks like a symbol",
+    "at": "2026-11-25T18:01:22.632Z"
+  },
+  "props-1x1-s1#15": {
+    "verdict": "REJECTED",
+    "notes": "standing stones: near duplicate of #12",
+    "at": "2026-11-25T18:01:22.756Z"
+  },
+  "log-2x1-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "fallen log: mossy trunk, cut end at the left lit, fills two cells",
+    "at": "2026-11-25T18:01:22.978Z"
+  },
+  "log-2x1-s1#1": {
+    "verdict": "REJECTED",
+    "notes": "cut end on the right lit as if from the right (light rule)",
+    "at": "2026-11-25T18:01:23.110Z"
+  },
+  "log-2x1-s1#2": {
+    "verdict": "ACCEPTED",
+    "notes": "fallen log: weathered grey trunk with split end, a second look for dry ground",
+    "at": "2026-11-25T18:01:23.233Z"
+  },
+  "log-2x1-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #0 with louder moss",
+    "at": "2026-11-25T18:01:23.351Z"
+  },
+  "grass-small-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "hedgehog: round spiky brown hedgehog, clear at 1x, calm",
+    "at": "2026-11-25T18:04:30.302Z"
+  },
+  "grass-small-b#1": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:30.446Z"
+  },
+  "grass-small-b#2": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:30.683Z"
+  },
+  "grass-small-b#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:30.978Z"
+  },
+  "grass-small-b#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:31.140Z"
+  },
+  "grass-small-b#5": {
+    "verdict": "REJECTED",
+    "notes": "clover: ladybird hidden under a leaf; #17 kept",
+    "at": "2026-11-25T18:04:31.340Z"
+  },
+  "grass-small-b#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:31.475Z"
+  },
+  "grass-small-b#7": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:31.594Z"
+  },
+  "grass-small-b#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:31.720Z"
+  },
+  "grass-small-b#9": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:31.861Z"
+  },
+  "grass-small-b#10": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:31.985Z"
+  },
+  "grass-small-b#11": {
+    "verdict": "REJECTED",
+    "notes": "clover: a round green blob reads as a bush (doodad duplicate)",
+    "at": "2026-11-25T18:04:32.111Z"
+  },
+  "grass-small-b#12": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:32.234Z"
+  },
+  "grass-small-b#13": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:32.355Z"
+  },
+  "grass-small-b#14": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:32.469Z"
+  },
+  "grass-small-b#15": {
+    "verdict": "REJECTED",
+    "notes": "hedgehog: a leaf stuck on its back blurs the silhouette; #0 kept",
+    "at": "2026-11-25T18:04:32.580Z"
+  },
+  "grass-small-b#16": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:32.680Z"
+  },
+  "grass-small-b#17": {
+    "verdict": "ACCEPTED",
+    "notes": "clover: three-leaf clover sprigs with a tiny red ladybird",
+    "at": "2026-11-25T18:04:32.786Z"
+  },
+  "grass-small-b#18": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:32.888Z"
+  },
+  "grass-small-b#19": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:32.993Z"
+  },
+  "grass-small-b#20": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:33.089Z"
+  },
+  "grass-small-b#21": {
+    "verdict": "REJECTED",
+    "notes": "hedgehog: a red apple on its back reads as a pickup",
+    "at": "2026-11-25T18:04:33.192Z"
+  },
+  "grass-small-b#22": {
+    "verdict": "ACCEPTED",
+    "notes": "autumn leaves: a low pile of orange and yellow leaves, reads as a heap",
+    "at": "2026-11-25T18:04:33.295Z"
+  },
+  "grass-small-b#23": {
+    "verdict": "REJECTED",
+    "notes": "clover: green blob reads as a bush",
+    "at": "2026-11-25T18:04:33.407Z"
+  },
+  "grass-small-b#24": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:33.533Z"
+  },
+  "grass-small-b#25": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:33.642Z"
+  },
+  "grass-small-b#26": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:33.750Z"
+  },
+  "grass-small-b#27": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:33.865Z"
+  },
+  "grass-small-b#28": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:33.976Z"
+  },
+  "grass-small-b#29": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:34.077Z"
+  },
+  "grass-small-b#30": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:34.180Z"
+  },
+  "grass-small-b#31": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:34.285Z"
+  },
+  "grass-small-b#32": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:34.390Z"
+  },
+  "grass-small-b#33": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:34.496Z"
+  },
+  "grass-small-b#34": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:34.606Z"
+  },
+  "grass-small-b#35": {
+    "verdict": "REJECTED",
+    "notes": "clover: green blob reads as a bush",
+    "at": "2026-11-25T18:04:34.713Z"
+  },
+  "grass-small-b#36": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:34.818Z"
+  },
+  "grass-small-b#37": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:34.925Z"
+  },
+  "grass-small-b#38": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:35.028Z"
+  },
+  "grass-small-b#39": {
+    "verdict": "REJECTED",
+    "notes": "hedgehog: a red apple on its back reads as a pickup",
+    "at": "2026-11-25T18:04:35.131Z"
+  },
+  "grass-small-b#40": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:35.232Z"
+  },
+  "grass-small-b#41": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:35.340Z"
+  },
+  "grass-small-b#42": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:35.444Z"
+  },
+  "grass-small-b#43": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:35.563Z"
+  },
+  "grass-small-b#44": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:35.668Z"
+  },
+  "grass-small-b#45": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:35.775Z"
+  },
+  "grass-small-b#46": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:35.867Z"
+  },
+  "grass-small-b#47": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:35.961Z"
+  },
+  "grass-small-b#48": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:36.062Z"
+  },
+  "grass-small-b#49": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:36.164Z"
+  },
+  "grass-small-b#50": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:36.258Z"
+  },
+  "grass-small-b#51": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:36.348Z"
+  },
+  "grass-small-b#52": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:36.436Z"
+  },
+  "grass-small-b#53": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:36.523Z"
+  },
+  "grass-small-b#54": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:36.606Z"
+  },
+  "grass-small-b#55": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:36.687Z"
+  },
+  "grass-small-b#56": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:36.770Z"
+  },
+  "grass-small-b#57": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:36.866Z"
+  },
+  "grass-small-b#58": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:36.947Z"
+  },
+  "grass-small-b#59": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:37.026Z"
+  },
+  "grass-small-b#60": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:37.112Z"
+  },
+  "grass-small-b#61": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call (scattered single leaves read as noise next to the pile)",
+    "at": "2026-11-25T18:04:37.199Z"
+  },
+  "grass-small-b#62": {
+    "verdict": "REJECTED",
+    "notes": "clover: green blob reads as a bush",
+    "at": "2026-11-25T18:04:37.296Z"
+  },
+  "grass-small-b#63": {
+    "verdict": "REJECTED",
+    "notes": "hedgehog: ladybirds on its back, busy",
+    "at": "2026-11-25T18:04:37.385Z"
+  },
+  "jungle-small-a#0": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:24.113Z"
+  },
+  "jungle-small-a#1": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:24.211Z"
+  },
+  "jungle-small-a#2": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:24.333Z"
+  },
+  "jungle-small-a#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:24.443Z"
+  },
+  "jungle-small-a#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:24.542Z"
+  },
+  "jungle-small-a#5": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:24.649Z"
+  },
+  "jungle-small-a#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:24.763Z"
+  },
+  "jungle-small-a#7": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:24.872Z"
+  },
+  "jungle-small-a#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:24.979Z"
+  },
+  "jungle-small-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "dragonfly: one turquoise dragonfly with pale wings, clean at 1x (the call gave one, not two)",
+    "at": "2026-11-25T18:06:25.105Z"
+  },
+  "jungle-small-a#10": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:25.230Z"
+  },
+  "jungle-small-a#11": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:25.350Z"
+  },
+  "jungle-small-a#12": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:25.459Z"
+  },
+  "jungle-small-a#13": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:25.573Z"
+  },
+  "jungle-small-a#14": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:25.691Z"
+  },
+  "jungle-small-a#15": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:25.800Z"
+  },
+  "jungle-small-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "tree frog: round green frog with orange toes, clear silhouette",
+    "at": "2026-11-25T18:06:25.909Z"
+  },
+  "jungle-small-a#17": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:26.012Z"
+  },
+  "jungle-small-a#18": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:26.121Z"
+  },
+  "jungle-small-a#19": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:26.281Z"
+  },
+  "jungle-small-a#20": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:26.532Z"
+  },
+  "jungle-small-a#21": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:26.717Z"
+  },
+  "jungle-small-a#22": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:26.953Z"
+  },
+  "jungle-small-a#23": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:27.168Z"
+  },
+  "jungle-small-a#24": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:27.411Z"
+  },
+  "jungle-small-a#25": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:27.671Z"
+  },
+  "jungle-small-a#26": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:27.904Z"
+  },
+  "jungle-small-a#27": {
+    "verdict": "REJECTED",
+    "notes": "tree frog: flat green blob, no feet or eye",
+    "at": "2026-11-25T18:06:28.345Z"
+  },
+  "jungle-small-a#28": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:28.757Z"
+  },
+  "jungle-small-a#29": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:28.923Z"
+  },
+  "jungle-small-a#30": {
+    "verdict": "REJECTED",
+    "notes": "tree frog: flat blob without toes",
+    "at": "2026-11-25T18:06:29.152Z"
+  },
+  "jungle-small-a#31": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:29.333Z"
+  },
+  "jungle-small-a#32": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:29.547Z"
+  },
+  "jungle-small-a#33": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:29.675Z"
+  },
+  "jungle-small-a#34": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:29.892Z"
+  },
+  "jungle-small-a#35": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:30.146Z"
+  },
+  "jungle-small-a#36": {
+    "verdict": "ACCEPTED",
+    "notes": "swamp reeds: tall reeds with two cattail heads, calm greens",
+    "at": "2026-11-25T18:06:30.288Z"
+  },
+  "jungle-small-a#37": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:30.475Z"
+  },
+  "jungle-small-a#38": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:30.662Z"
+  },
+  "jungle-small-a#39": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:30.790Z"
+  },
+  "jungle-small-a#40": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:30.959Z"
+  },
+  "jungle-small-a#41": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:31.153Z"
+  },
+  "jungle-small-a#42": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:31.345Z"
+  },
+  "jungle-small-a#43": {
+    "verdict": "REJECTED",
+    "notes": "swamp reeds: dense clump reads as a bush",
+    "at": "2026-11-25T18:06:31.589Z"
+  },
+  "jungle-small-a#44": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:31.805Z"
+  },
+  "jungle-small-a#45": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:31.944Z"
+  },
+  "jungle-small-a#46": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:32.129Z"
+  },
+  "jungle-small-a#47": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:32.386Z"
+  },
+  "jungle-small-a#48": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:32.512Z"
+  },
+  "jungle-small-a#49": {
+    "verdict": "REJECTED",
+    "notes": "jungle flower: tilted, petals blur at 1x",
+    "at": "2026-11-25T18:06:32.712Z"
+  },
+  "jungle-small-a#50": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:32.846Z"
+  },
+  "jungle-small-a#51": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:32.987Z"
+  },
+  "jungle-small-a#52": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:33.235Z"
+  },
+  "jungle-small-a#53": {
+    "verdict": "ACCEPTED",
+    "notes": "jungle flower: flat red five-petal flower, compact and readable",
+    "at": "2026-11-25T18:06:33.426Z"
+  },
+  "jungle-small-a#54": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:33.661Z"
+  },
+  "jungle-small-a#55": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:33.830Z"
+  },
+  "jungle-small-a#56": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:33.993Z"
+  },
+  "jungle-small-a#57": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:34.188Z"
+  },
+  "jungle-small-a#58": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:34.306Z"
+  },
+  "jungle-small-a#59": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:34.453Z"
+  },
+  "jungle-small-a#60": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:34.664Z"
+  },
+  "jungle-small-a#61": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:34.782Z"
+  },
+  "jungle-small-a#62": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:34.922Z"
+  },
+  "jungle-small-a#63": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:06:35.040Z"
+  },
+  "steppe-small-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "thistles: three purple thistle heads on grey-green stems, clear at 1x",
+    "at": "2026-11-25T18:08:22.152Z"
+  },
+  "steppe-small-a#1": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:22.286Z"
+  },
+  "steppe-small-a#2": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:22.421Z"
+  },
+  "steppe-small-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "crow: black crow standing, readable silhouette on the light steppe",
+    "at": "2026-11-25T18:08:22.637Z"
+  },
+  "steppe-small-a#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:22.801Z"
+  },
+  "steppe-small-a#5": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:22.967Z"
+  },
+  "steppe-small-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "cart wheel: an old spoked wooden wheel, clean outline with nothing under it",
+    "at": "2026-11-25T18:08:23.132Z"
+  },
+  "steppe-small-a#7": {
+    "verdict": "REJECTED",
+    "notes": "cart wheel: an earth patch under it (ground plate)",
+    "at": "2026-11-25T18:08:23.303Z"
+  },
+  "steppe-small-a#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:23.457Z"
+  },
+  "steppe-small-a#9": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:23.620Z"
+  },
+  "steppe-small-a#10": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:23.784Z"
+  },
+  "steppe-small-a#11": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:23.936Z"
+  },
+  "steppe-small-a#12": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:24.114Z"
+  },
+  "steppe-small-a#13": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:24.270Z"
+  },
+  "steppe-small-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "cairn: a neat stack of flat grey stones",
+    "at": "2026-11-25T18:08:24.416Z"
+  },
+  "steppe-small-a#15": {
+    "verdict": "REJECTED",
+    "notes": "cairn: a single flat stone, reads as a pebble",
+    "at": "2026-11-25T18:08:24.583Z"
+  },
+  "steppe-small-a#16": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:24.741Z"
+  },
+  "steppe-small-a#17": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:24.877Z"
+  },
+  "steppe-small-a#18": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:25.021Z"
+  },
+  "steppe-small-a#19": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:25.155Z"
+  },
+  "steppe-small-a#20": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:25.321Z"
+  },
+  "steppe-small-a#21": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:25.450Z"
+  },
+  "steppe-small-a#22": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:25.617Z"
+  },
+  "steppe-small-a#23": {
+    "verdict": "REJECTED",
+    "notes": "cairn: loose stones, duplicate of the stone doodads",
+    "at": "2026-11-25T18:08:25.747Z"
+  },
+  "steppe-small-a#24": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:25.903Z"
+  },
+  "steppe-small-a#25": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:26.072Z"
+  },
+  "steppe-small-a#26": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:26.237Z"
+  },
+  "steppe-small-a#27": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:26.393Z"
+  },
+  "steppe-small-a#28": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:26.654Z"
+  },
+  "steppe-small-a#29": {
+    "verdict": "REJECTED",
+    "notes": "cairn: loose stones, doodad duplicate",
+    "at": "2026-11-25T18:08:26.831Z"
+  },
+  "steppe-small-a#30": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:27.021Z"
+  },
+  "steppe-small-a#31": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:27.193Z"
+  },
+  "steppe-small-a#32": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:27.345Z"
+  },
+  "steppe-small-a#33": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:27.503Z"
+  },
+  "steppe-small-a#34": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:27.697Z"
+  },
+  "steppe-small-a#35": {
+    "verdict": "REJECTED",
+    "notes": "crow: flapping wings, blobby at 1x",
+    "at": "2026-11-25T18:08:27.836Z"
+  },
+  "steppe-small-a#36": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:28.134Z"
+  },
+  "steppe-small-a#37": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:28.398Z"
+  },
+  "steppe-small-a#38": {
+    "verdict": "REJECTED",
+    "notes": "cart wheel: earth patch under it",
+    "at": "2026-11-25T18:08:28.603Z"
+  },
+  "steppe-small-a#39": {
+    "verdict": "REJECTED",
+    "notes": "crow: a dirt smear under it (ground plate)",
+    "at": "2026-11-25T18:08:28.806Z"
+  },
+  "steppe-small-a#40": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:28.985Z"
+  },
+  "steppe-small-a#41": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:29.136Z"
+  },
+  "steppe-small-a#42": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:29.291Z"
+  },
+  "steppe-small-a#43": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:29.409Z"
+  },
+  "steppe-small-a#44": {
+    "verdict": "REJECTED",
+    "notes": "cart wheel: earth patch under it",
+    "at": "2026-11-25T18:08:29.585Z"
+  },
+  "steppe-small-a#45": {
+    "verdict": "REJECTED",
+    "notes": "cart wheel: earth patch, wheel unreadable",
+    "at": "2026-11-25T18:08:29.717Z"
+  },
+  "steppe-small-a#46": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:29.855Z"
+  },
+  "steppe-small-a#47": {
+    "verdict": "REJECTED",
+    "notes": "crow: dirt smear under it",
+    "at": "2026-11-25T18:08:30.000Z"
+  },
+  "steppe-small-a#48": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:30.154Z"
+  },
+  "steppe-small-a#49": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:30.315Z"
+  },
+  "steppe-small-a#50": {
+    "verdict": "REJECTED",
+    "notes": "crow: flapping wings, blobby",
+    "at": "2026-11-25T18:08:30.445Z"
+  },
+  "steppe-small-a#51": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:30.658Z"
+  },
+  "steppe-small-a#52": {
+    "verdict": "REJECTED",
+    "notes": "cart wheel: earth patch under it",
+    "at": "2026-11-25T18:08:30.819Z"
+  },
+  "steppe-small-a#53": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:30.991Z"
+  },
+  "steppe-small-a#54": {
+    "verdict": "REJECTED",
+    "notes": "cairn: loose stones, doodad duplicate",
+    "at": "2026-11-25T18:08:31.228Z"
+  },
+  "steppe-small-a#55": {
+    "verdict": "REJECTED",
+    "notes": "cart wheel: earth patch under it",
+    "at": "2026-11-25T18:08:31.357Z"
+  },
+  "steppe-small-a#56": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:31.505Z"
+  },
+  "steppe-small-a#57": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:31.685Z"
+  },
+  "steppe-small-a#58": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:31.834Z"
+  },
+  "steppe-small-a#59": {
+    "verdict": "REJECTED",
+    "notes": "crow: dirt smear under it",
+    "at": "2026-11-25T18:08:32.016Z"
+  },
+  "steppe-small-a#60": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:08:32.309Z"
+  },
+  "steppe-small-a#61": {
+    "verdict": "REJECTED",
+    "notes": "cart wheel: earth line under it",
+    "at": "2026-11-25T18:08:32.553Z"
+  },
+  "steppe-small-a#62": {
+    "verdict": "REJECTED",
+    "notes": "cairn: loose stones, doodad duplicate",
+    "at": "2026-11-25T18:08:32.737Z"
+  },
+  "steppe-small-a#63": {
+    "verdict": "REJECTED",
+    "notes": "cart wheel: earth patch under it",
+    "at": "2026-11-25T18:08:32.969Z"
+  },
+  "badlands-small-a#0": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:21.274Z"
+  },
+  "badlands-small-a#1": {
+    "verdict": "REJECTED",
+    "notes": "lizard: curled into a C seen from above (plan view)",
+    "at": "2026-11-25T18:10:21.609Z"
+  },
+  "badlands-small-a#2": {
+    "verdict": "REJECTED",
+    "notes": "lizard: curled seen from above",
+    "at": "2026-11-25T18:10:21.988Z"
+  },
+  "badlands-small-a#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:22.341Z"
+  },
+  "badlands-small-a#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:22.580Z"
+  },
+  "badlands-small-a#5": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:22.728Z"
+  },
+  "badlands-small-a#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:22.951Z"
+  },
+  "badlands-small-a#7": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:23.290Z"
+  },
+  "badlands-small-a#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:23.451Z"
+  },
+  "badlands-small-a#9": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:23.608Z"
+  },
+  "badlands-small-a#10": {
+    "verdict": "REJECTED",
+    "notes": "lizard: curled seen from above",
+    "at": "2026-11-25T18:10:23.785Z"
+  },
+  "badlands-small-a#11": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:23.972Z"
+  },
+  "badlands-small-a#12": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:24.267Z"
+  },
+  "badlands-small-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "lizard: low orange lizard seen from the side, clear head and tail",
+    "at": "2026-11-25T18:10:24.577Z"
+  },
+  "badlands-small-a#14": {
+    "verdict": "REJECTED",
+    "notes": "lizard: curled seen from above",
+    "at": "2026-11-25T18:10:24.768Z"
+  },
+  "badlands-small-a#15": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:24.963Z"
+  },
+  "badlands-small-a#16": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:25.187Z"
+  },
+  "badlands-small-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "agave: low spiky blue-green agave, calm",
+    "at": "2026-11-25T18:10:25.391Z"
+  },
+  "badlands-small-a#18": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:25.571Z"
+  },
+  "badlands-small-a#19": {
+    "verdict": "REJECTED",
+    "notes": "agave: big and dense, reads as a bush (doodad duplicate)",
+    "at": "2026-11-25T18:10:25.770Z"
+  },
+  "badlands-small-a#20": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:26.351Z"
+  },
+  "badlands-small-a#21": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:26.516Z"
+  },
+  "badlands-small-a#22": {
+    "verdict": "REJECTED",
+    "notes": "agave: big and dense, reads as a bush",
+    "at": "2026-11-25T18:10:26.669Z"
+  },
+  "badlands-small-a#23": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:26.875Z"
+  },
+  "badlands-small-a#24": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:27.057Z"
+  },
+  "badlands-small-a#25": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:27.211Z"
+  },
+  "badlands-small-a#26": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:27.382Z"
+  },
+  "badlands-small-a#27": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:27.511Z"
+  },
+  "badlands-small-a#28": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:27.636Z"
+  },
+  "badlands-small-a#29": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:27.821Z"
+  },
+  "badlands-small-a#30": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:28.144Z"
+  },
+  "badlands-small-a#31": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:28.375Z"
+  },
+  "badlands-small-a#32": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:28.667Z"
+  },
+  "badlands-small-a#33": {
+    "verdict": "ACCEPTED",
+    "notes": "pot shards: a broken red clay pot with pieces beside it, clearly broken",
+    "at": "2026-11-25T18:10:28.965Z"
+  },
+  "badlands-small-a#34": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:29.167Z"
+  },
+  "badlands-small-a#35": {
+    "verdict": "REJECTED",
+    "notes": "pot: a standing pot, not broken: could read as a pickup",
+    "at": "2026-11-25T18:10:29.350Z"
+  },
+  "badlands-small-a#36": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:29.534Z"
+  },
+  "badlands-small-a#37": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:29.686Z"
+  },
+  "badlands-small-a#38": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:29.832Z"
+  },
+  "badlands-small-a#39": {
+    "verdict": "REJECTED",
+    "notes": "pot: a whole jar lying down, could read as a pickup",
+    "at": "2026-11-25T18:10:29.968Z"
+  },
+  "badlands-small-a#40": {
+    "verdict": "REJECTED",
+    "notes": "pot: a whole jar lying down",
+    "at": "2026-11-25T18:10:30.092Z"
+  },
+  "badlands-small-a#41": {
+    "verdict": "REJECTED",
+    "notes": "pot: a round half shell, unreadable",
+    "at": "2026-11-25T18:10:30.224Z"
+  },
+  "badlands-small-a#42": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:30.357Z"
+  },
+  "badlands-small-a#43": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:30.494Z"
+  },
+  "badlands-small-a#44": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:30.631Z"
+  },
+  "badlands-small-a#45": {
+    "verdict": "REJECTED",
+    "notes": "pot: a round half shell, unreadable",
+    "at": "2026-11-25T18:10:30.747Z"
+  },
+  "badlands-small-a#46": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:30.866Z"
+  },
+  "badlands-small-a#47": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:31.109Z"
+  },
+  "badlands-small-a#48": {
+    "verdict": "ACCEPTED",
+    "notes": "scorpion: small sand-coloured scorpion, tail curled, readable",
+    "at": "2026-11-25T18:10:31.264Z"
+  },
+  "badlands-small-a#49": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:31.439Z"
+  },
+  "badlands-small-a#50": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:31.758Z"
+  },
+  "badlands-small-a#51": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:32.316Z"
+  },
+  "badlands-small-a#52": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:32.711Z"
+  },
+  "badlands-small-a#53": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:33.220Z"
+  },
+  "badlands-small-a#54": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:33.516Z"
+  },
+  "badlands-small-a#55": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:34.033Z"
+  },
+  "badlands-small-a#56": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:34.300Z"
+  },
+  "badlands-small-a#57": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:34.509Z"
+  },
+  "badlands-small-a#58": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:34.672Z"
+  },
+  "badlands-small-a#59": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:34.910Z"
+  },
+  "badlands-small-a#60": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:35.101Z"
+  },
+  "badlands-small-a#61": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:35.352Z"
+  },
+  "badlands-small-a#62": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:35.600Z"
+  },
+  "badlands-small-a#63": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:10:35.831Z"
+  },
+  "wasteland-small-a#0": {
+    "verdict": "REJECTED",
+    "notes": "grave marker: a rounded tombstone with engraved lines that read as text",
+    "at": "2026-11-25T18:14:10.269Z"
+  },
+  "wasteland-small-a#1": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:10.444Z"
+  },
+  "wasteland-small-a#2": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:10.565Z"
+  },
+  "wasteland-small-a#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:10.769Z"
+  },
+  "wasteland-small-a#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:10.950Z"
+  },
+  "wasteland-small-a#5": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:11.097Z"
+  },
+  "wasteland-small-a#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:11.223Z"
+  },
+  "wasteland-small-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "grave marker: a crooked broken wooden plank with scratches, calm grey-brown",
+    "at": "2026-11-25T18:14:11.364Z"
+  },
+  "wasteland-small-a#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:11.496Z"
+  },
+  "wasteland-small-a#9": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:11.646Z"
+  },
+  "wasteland-small-a#10": {
+    "verdict": "REJECTED",
+    "notes": "grave marker: rounded tombstone with text-like lines",
+    "at": "2026-11-25T18:14:11.763Z"
+  },
+  "wasteland-small-a#11": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:11.930Z"
+  },
+  "wasteland-small-a#12": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:12.101Z"
+  },
+  "wasteland-small-a#13": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:12.227Z"
+  },
+  "wasteland-small-a#14": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:12.375Z"
+  },
+  "wasteland-small-a#15": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:12.496Z"
+  },
+  "wasteland-small-a#16": {
+    "verdict": "REJECTED",
+    "notes": "raven: a black bird duplicates the steppe crow (crow kept, shared with the wasteland)",
+    "at": "2026-11-25T18:14:12.657Z"
+  },
+  "wasteland-small-a#17": {
+    "verdict": "REJECTED",
+    "notes": "raven: duplicates the steppe crow",
+    "at": "2026-11-25T18:14:12.795Z"
+  },
+  "wasteland-small-a#18": {
+    "verdict": "REJECTED",
+    "notes": "raven: a black blob like a badger",
+    "at": "2026-11-25T18:14:12.956Z"
+  },
+  "wasteland-small-a#19": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:13.192Z"
+  },
+  "wasteland-small-a#20": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:13.330Z"
+  },
+  "wasteland-small-a#21": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:13.471Z"
+  },
+  "wasteland-small-a#22": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:13.613Z"
+  },
+  "wasteland-small-a#23": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:13.739Z"
+  },
+  "wasteland-small-a#24": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:13.895Z"
+  },
+  "wasteland-small-a#25": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:14.045Z"
+  },
+  "wasteland-small-a#26": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:14.179Z"
+  },
+  "wasteland-small-a#27": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:14.320Z"
+  },
+  "wasteland-small-a#28": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:14.495Z"
+  },
+  "wasteland-small-a#29": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:14.653Z"
+  },
+  "wasteland-small-a#30": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:14.787Z"
+  },
+  "wasteland-small-a#31": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:14.918Z"
+  },
+  "wasteland-small-a#32": {
+    "verdict": "REJECTED",
+    "notes": "helmet: rusty helmet reads as a loot pickup (artifact) on the map",
+    "at": "2026-11-25T18:14:15.057Z"
+  },
+  "wasteland-small-a#33": {
+    "verdict": "REJECTED",
+    "notes": "helmet: reads as a loot pickup (artifact)",
+    "at": "2026-11-25T18:14:15.200Z"
+  },
+  "wasteland-small-a#34": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:15.326Z"
+  },
+  "wasteland-small-a#35": {
+    "verdict": "REJECTED",
+    "notes": "helmet: reads as a loot pickup (artifact)",
+    "at": "2026-11-25T18:14:15.452Z"
+  },
+  "wasteland-small-a#36": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:15.575Z"
+  },
+  "wasteland-small-a#37": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:15.700Z"
+  },
+  "wasteland-small-a#38": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:15.823Z"
+  },
+  "wasteland-small-a#39": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:15.945Z"
+  },
+  "wasteland-small-a#40": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:16.067Z"
+  },
+  "wasteland-small-a#41": {
+    "verdict": "REJECTED",
+    "notes": "helmet: reads as a loot pickup",
+    "at": "2026-11-25T18:14:16.194Z"
+  },
+  "wasteland-small-a#42": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:16.320Z"
+  },
+  "wasteland-small-a#43": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:16.446Z"
+  },
+  "wasteland-small-a#44": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:16.572Z"
+  },
+  "wasteland-small-a#45": {
+    "verdict": "REJECTED",
+    "notes": "helmet: reads as a loot pickup",
+    "at": "2026-11-25T18:14:16.701Z"
+  },
+  "wasteland-small-a#46": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:16.833Z"
+  },
+  "wasteland-small-a#47": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:16.963Z"
+  },
+  "wasteland-small-a#48": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:17.114Z"
+  },
+  "wasteland-small-a#49": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:17.256Z"
+  },
+  "wasteland-small-a#50": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:17.451Z"
+  },
+  "wasteland-small-a#51": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:17.579Z"
+  },
+  "wasteland-small-a#52": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:17.711Z"
+  },
+  "wasteland-small-a#53": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:17.851Z"
+  },
+  "wasteland-small-a#54": {
+    "verdict": "ACCEPTED",
+    "notes": "dead weeds: an upright clump of black thorny dead weeds, burnt look for ash ground",
+    "at": "2026-11-25T18:14:17.977Z"
+  },
+  "wasteland-small-a#55": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:18.113Z"
+  },
+  "wasteland-small-a#56": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:18.245Z"
+  },
+  "wasteland-small-a#57": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:18.364Z"
+  },
+  "wasteland-small-a#58": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:18.485Z"
+  },
+  "wasteland-small-a#59": {
+    "verdict": "REJECTED",
+    "notes": "dead weeds: a lone black sapling, duplicates the dead trees",
+    "at": "2026-11-25T18:14:18.599Z"
+  },
+  "wasteland-small-a#60": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:18.728Z"
+  },
+  "wasteland-small-a#61": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:18.861Z"
+  },
+  "wasteland-small-a#62": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted or rejected from this call (ravens duplicate the crow; helmets read as loot)",
+    "at": "2026-11-25T18:14:19.013Z"
+  },
+  "wasteland-small-a#63": {
+    "verdict": "REJECTED",
+    "notes": "dead weeds: a lone black sapling",
+    "at": "2026-11-25T18:14:19.135Z"
+  },
+  "props-1x1-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "giant mushroom: red spotted cap on a pale stem, lit left, clear landmark",
+    "at": "2026-11-25T18:14:35.397Z"
+  },
+  "props-1x1-b#1": {
+    "verdict": "REJECTED",
+    "notes": "giant mushroom: near duplicate of #0 with a wider cap",
+    "at": "2026-11-25T18:14:35.545Z"
+  },
+  "props-1x1-b#2": {
+    "verdict": "REJECTED",
+    "notes": "giant mushroom: near duplicate of #0",
+    "at": "2026-11-25T18:14:35.691Z"
+  },
+  "props-1x1-b#3": {
+    "verdict": "REJECTED",
+    "notes": "giant mushroom: near duplicate of #0",
+    "at": "2026-11-25T18:14:35.834Z"
+  },
+  "props-1x1-b#4": {
+    "verdict": "REJECTED",
+    "notes": "thornbush: thinner twigs, noisy at 1x; #7 kept",
+    "at": "2026-11-25T18:14:35.988Z"
+  },
+  "props-1x1-b#5": {
+    "verdict": "REJECTED",
+    "notes": "thornbush: looping vines read as a wreath or a basket",
+    "at": "2026-11-25T18:14:36.128Z"
+  },
+  "props-1x1-b#6": {
+    "verdict": "REJECTED",
+    "notes": "thornbush: sparse, reads as dead twigs (doodad duplicate)",
+    "at": "2026-11-25T18:14:36.275Z"
+  },
+  "props-1x1-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "thornbush: dense tangle of dark thorny brambles, blocks the eye like a hedge",
+    "at": "2026-11-25T18:14:36.420Z"
+  },
+  "props-1x1-b#8": {
+    "verdict": "REJECTED",
+    "notes": "dead tree: stubby, reads as a stump",
+    "at": "2026-11-25T18:14:36.556Z"
+  },
+  "props-1x1-b#9": {
+    "verdict": "ACCEPTED",
+    "notes": "dead tree: gnarled grey trunk with crooked bare branches, lit left",
+    "at": "2026-11-25T18:14:36.696Z"
+  },
+  "props-1x1-b#10": {
+    "verdict": "REJECTED",
+    "notes": "dead tree: thin branches noisy at 1x; #9 kept",
+    "at": "2026-11-25T18:14:36.829Z"
+  },
+  "props-1x1-b#11": {
+    "verdict": "REJECTED",
+    "notes": "dead tree: near duplicate of #9",
+    "at": "2026-11-25T18:14:36.985Z"
+  },
+  "props-1x1-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "termite mound: lumpy orange-brown earth spire with holes",
+    "at": "2026-11-25T18:14:37.119Z"
+  },
+  "props-1x1-b#13": {
+    "verdict": "REJECTED",
+    "notes": "termite mound: near duplicate of #12, smoother cone",
+    "at": "2026-11-25T18:14:37.257Z"
+  },
+  "props-1x1-b#14": {
+    "verdict": "REJECTED",
+    "notes": "termite mound: near duplicate of #12",
+    "at": "2026-11-25T18:14:37.390Z"
+  },
+  "props-1x1-b#15": {
+    "verdict": "REJECTED",
+    "notes": "termite mound: a plain cone, holes read as cheese",
+    "at": "2026-11-25T18:14:37.526Z"
+  },
+  "props-1x1-c#0": {
+    "verdict": "REJECTED",
+    "notes": "pillars: two clean intact columns, not a ruin",
+    "at": "2026-11-25T18:17:29.015Z"
+  },
+  "props-1x1-c#1": {
+    "verdict": "REJECTED",
+    "notes": "pillars: thin broken shafts, weak at 1x; #2 kept",
+    "at": "2026-11-25T18:17:29.374Z"
+  },
+  "props-1x1-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "ruined pillars: two broken marble columns with a capital and rubble, lit left",
+    "at": "2026-11-25T18:17:29.592Z"
+  },
+  "props-1x1-c#3": {
+    "verdict": "REJECTED",
+    "notes": "pillars: near duplicate of #2",
+    "at": "2026-11-25T18:17:29.829Z"
+  },
+  "props-1x1-c#4": {
+    "verdict": "REJECTED",
+    "notes": "crater: seen from straight above (plan view)",
+    "at": "2026-11-25T18:17:30.093Z"
+  },
+  "props-1x1-c#5": {
+    "verdict": "REJECTED",
+    "notes": "crater: a stone ring reads as a well (wishing-well confusion)",
+    "at": "2026-11-25T18:17:30.316Z"
+  },
+  "props-1x1-c#6": {
+    "verdict": "REJECTED",
+    "notes": "crater: plan view with an ash patch under it (ground plate)",
+    "at": "2026-11-25T18:17:30.557Z"
+  },
+  "props-1x1-c#7": {
+    "verdict": "REJECTED",
+    "notes": "crater: a stone ring reads as a well",
+    "at": "2026-11-25T18:17:30.704Z"
+  },
+  "props-1x1-c#8": {
+    "verdict": "ACCEPTED",
+    "notes": "stone head: a big mossy ancient stone head, upright, clear landmark",
+    "at": "2026-11-25T18:17:30.876Z"
+  },
+  "props-1x1-c#9": {
+    "verdict": "REJECTED",
+    "notes": "stone head: a round boulder with a face, weaker silhouette; #8 kept",
+    "at": "2026-11-25T18:17:31.187Z"
+  },
+  "props-1x1-c#10": {
+    "verdict": "REJECTED",
+    "notes": "stone head: near duplicate of #8, smaller",
+    "at": "2026-11-25T18:17:31.423Z"
+  },
+  "props-1x1-c#11": {
+    "verdict": "REJECTED",
+    "notes": "stone head: cracked and dark, noisy at 1x",
+    "at": "2026-11-25T18:17:31.682Z"
+  },
+  "props-1x1-c#12": {
+    "verdict": "REJECTED",
+    "notes": "beast skull: a cattle skull duplicates the steppe skull doodad",
+    "at": "2026-11-25T18:17:31.938Z"
+  },
+  "props-1x1-c#13": {
+    "verdict": "REJECTED",
+    "notes": "beast skull: cattle skull with one long horn, doodad duplicate",
+    "at": "2026-11-25T18:17:32.156Z"
+  },
+  "props-1x1-c#14": {
+    "verdict": "ACCEPTED",
+    "notes": "beast skull: a giant ram-horned skull with curled horns, distinct from the cattle-skull doodad",
+    "at": "2026-11-25T18:17:32.429Z"
+  },
+  "props-1x1-c#15": {
+    "verdict": "REJECTED",
+    "notes": "beast skull: near duplicate of #14",
+    "at": "2026-11-25T18:17:32.754Z"
+  },
+  "statue-2x1-a#0": {
+    "verdict": "REJECTED",
+    "notes": "toppled statue: a head among rubble, only part of the width, reads as rocks",
+    "at": "2026-11-25T18:17:33.355Z"
+  },
+  "statue-2x1-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "toppled statue: a crowned stone king lying in two pieces with moss, fills two cells",
+    "at": "2026-11-25T18:17:33.547Z"
+  },
+  "statue-2x1-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "toppled statue: crowned head and a torso with a sword, a second look",
+    "at": "2026-11-25T18:17:33.720Z"
+  },
+  "statue-2x1-a#3": {
+    "verdict": "REJECTED",
+    "notes": "toppled statue: near duplicate of #1 with louder moss",
+    "at": "2026-11-25T18:17:33.857Z"
+  },
+  "skeleton-2x1-a#0": {
+    "verdict": "REJECTED",
+    "notes": "ram horns duplicate the beast-skull prop",
+    "at": "2026-11-25T18:21:51.295Z"
+  },
+  "skeleton-2x1-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "beast skeleton: a bull-horned giant skeleton with a long spine and ribcage, fills two cells, clear",
+    "at": "2026-11-25T18:21:51.463Z"
+  },
+  "skeleton-2x1-a#2": {
+    "verdict": "REJECTED",
+    "notes": "a unicorn horn reads as a magic creature, busier",
+    "at": "2026-11-25T18:21:51.622Z"
+  },
+  "skeleton-2x1-a#3": {
+    "verdict": "REJECTED",
+    "notes": "a fanged dragon skull reads as a monster, crowded ribs",
+    "at": "2026-11-25T18:21:51.760Z"
+  },
+  "wall-2x1-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "ruined wall: stepped grey blocks round an empty arch with hanging vines",
+    "at": "2026-11-25T18:21:51.988Z"
+  },
+  "wall-2x1-a#1": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #0, the vines read as slime",
+    "at": "2026-11-25T18:21:52.124Z"
+  },
+  "wall-2x1-a#2": {
+    "verdict": "REJECTED",
+    "notes": "rubble heap with a bright bush, arch lost",
+    "at": "2026-11-25T18:21:52.236Z"
+  },
+  "wall-2x1-a#3": {
+    "verdict": "REJECTED",
+    "notes": "the arch reads as a doorway or gate (could look enterable)",
+    "at": "2026-11-25T18:21:52.342Z"
+  },
+  "catapult-2x1-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "broken catapult: timber frame with a long arm, a loose wheel and stones, readable",
+    "at": "2026-11-25T18:21:52.596Z"
+  },
+  "catapult-2x1-a#1": {
+    "verdict": "REJECTED",
+    "notes": "tangled frame, noisy at 1x",
+    "at": "2026-11-25T18:21:52.788Z"
+  },
+  "catapult-2x1-a#2": {
+    "verdict": "REJECTED",
+    "notes": "frame reads as a gallows",
+    "at": "2026-11-25T18:21:52.936Z"
+  },
+  "catapult-2x1-a#3": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #0, arm less clear",
+    "at": "2026-11-25T18:21:53.050Z"
+  },
+  "props-1x1-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt spikes: jagged black rock spikes with grey lit edges, lit left",
+    "at": "2026-11-25T18:26:30.337Z"
+  },
+  "props-1x1-d#1": {
+    "verdict": "REJECTED",
+    "notes": "basalt: near duplicate of #0",
+    "at": "2026-11-25T18:26:30.559Z"
+  },
+  "props-1x1-d#2": {
+    "verdict": "REJECTED",
+    "notes": "basalt: thin spiky crown reads as crystals",
+    "at": "2026-11-25T18:26:30.814Z"
+  },
+  "props-1x1-d#3": {
+    "verdict": "REJECTED",
+    "notes": "basalt: one big shard, reads as a peak",
+    "at": "2026-11-25T18:26:31.092Z"
+  },
+  "props-1x1-d#4": {
+    "verdict": "REJECTED",
+    "notes": "saguaro: near duplicate of #6",
+    "at": "2026-11-25T18:26:31.267Z"
+  },
+  "props-1x1-d#5": {
+    "verdict": "REJECTED",
+    "notes": "saguaro: near duplicate of #6",
+    "at": "2026-11-25T18:26:31.439Z"
+  },
+  "props-1x1-d#6": {
+    "verdict": "ACCEPTED",
+    "notes": "saguaro: a tall cactus with two arms, distinct from the small round cactus doodad",
+    "at": "2026-11-25T18:26:31.609Z"
+  },
+  "props-1x1-d#7": {
+    "verdict": "REJECTED",
+    "notes": "saguaro: near duplicate of #6",
+    "at": "2026-11-25T18:26:31.779Z"
+  },
+  "props-1x1-d#8": {
+    "verdict": "REJECTED",
+    "notes": "haystack: a golden heap could read as a gold or resource pile",
+    "at": "2026-11-25T18:26:31.942Z"
+  },
+  "props-1x1-d#9": {
+    "verdict": "REJECTED",
+    "notes": "haystack: golden heap could read as a resource pile",
+    "at": "2026-11-25T18:26:32.115Z"
+  },
+  "props-1x1-d#10": {
+    "verdict": "REJECTED",
+    "notes": "haystack: golden, could read as a resource pile",
+    "at": "2026-11-25T18:26:32.264Z"
+  },
+  "props-1x1-d#11": {
+    "verdict": "REJECTED",
+    "notes": "haystack: golden, could read as a resource pile",
+    "at": "2026-11-25T18:26:32.446Z"
+  },
+  "props-1x1-d#12": {
+    "verdict": "REJECTED",
+    "notes": "hollow stump: no hollow visible, duplicates the stumps",
+    "at": "2026-11-25T18:26:32.628Z"
+  },
+  "props-1x1-d#13": {
+    "verdict": "ACCEPTED",
+    "notes": "hollow stump: a huge grey-brown stump with roots and a dark hollow",
+    "at": "2026-11-25T18:26:32.843Z"
+  },
+  "props-1x1-d#14": {
+    "verdict": "REJECTED",
+    "notes": "hollow stump: near duplicate of #12",
+    "at": "2026-11-25T18:26:33.137Z"
+  },
+  "props-1x1-d#15": {
+    "verdict": "REJECTED",
+    "notes": "hollow stump: the hole reads as a door or burrow entrance",
+    "at": "2026-11-25T18:26:33.367Z"
+  },
+  "wasteland-small-b#0": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:33.687Z"
+  },
+  "wasteland-small-b#1": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:33.879Z"
+  },
+  "wasteland-small-b#2": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:34.097Z"
+  },
+  "wasteland-small-b#3": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:34.272Z"
+  },
+  "wasteland-small-b#4": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:34.425Z"
+  },
+  "wasteland-small-b#5": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:34.595Z"
+  },
+  "wasteland-small-b#6": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:34.775Z"
+  },
+  "wasteland-small-b#7": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:34.964Z"
+  },
+  "wasteland-small-b#8": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:35.109Z"
+  },
+  "wasteland-small-b#9": {
+    "verdict": "ACCEPTED",
+    "notes": "broken spear: a wooden shaft with a torn grey rag, no blade",
+    "at": "2026-11-25T18:26:35.270Z"
+  },
+  "wasteland-small-b#10": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:35.420Z"
+  },
+  "wasteland-small-b#11": {
+    "verdict": "REJECTED",
+    "notes": "spear: a bare stick, reads as a twig",
+    "at": "2026-11-25T18:26:35.596Z"
+  },
+  "wasteland-small-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "toadstools: a cluster of pale grey-violet toadstools, calm on ash",
+    "at": "2026-11-25T18:26:35.781Z"
+  },
+  "wasteland-small-b#13": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:35.976Z"
+  },
+  "wasteland-small-b#14": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:36.129Z"
+  },
+  "wasteland-small-b#15": {
+    "verdict": "REJECTED",
+    "notes": "spear: a bare stick",
+    "at": "2026-11-25T18:26:36.318Z"
+  },
+  "wasteland-small-b#16": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:36.491Z"
+  },
+  "wasteland-small-b#17": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:36.660Z"
+  },
+  "wasteland-small-b#18": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:36.813Z"
+  },
+  "wasteland-small-b#19": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:36.965Z"
+  },
+  "wasteland-small-b#20": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:37.124Z"
+  },
+  "wasteland-small-b#21": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:37.266Z"
+  },
+  "wasteland-small-b#22": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:37.407Z"
+  },
+  "wasteland-small-b#23": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:37.540Z"
+  },
+  "wasteland-small-b#24": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:37.667Z"
+  },
+  "wasteland-small-b#25": {
+    "verdict": "REJECTED",
+    "notes": "spear: a bare stick",
+    "at": "2026-11-25T18:26:37.848Z"
+  },
+  "wasteland-small-b#26": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:37.994Z"
+  },
+  "wasteland-small-b#27": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:38.170Z"
+  },
+  "wasteland-small-b#28": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:38.291Z"
+  },
+  "wasteland-small-b#29": {
+    "verdict": "REJECTED",
+    "notes": "spear: a bare stick",
+    "at": "2026-11-25T18:26:38.450Z"
+  },
+  "wasteland-small-b#30": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:38.648Z"
+  },
+  "wasteland-small-b#31": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:38.785Z"
+  },
+  "wasteland-small-b#32": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:38.940Z"
+  },
+  "wasteland-small-b#33": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:39.079Z"
+  },
+  "wasteland-small-b#34": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:39.292Z"
+  },
+  "wasteland-small-b#35": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:39.486Z"
+  },
+  "wasteland-small-b#36": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:39.765Z"
+  },
+  "wasteland-small-b#37": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:40.118Z"
+  },
+  "wasteland-small-b#38": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:40.399Z"
+  },
+  "wasteland-small-b#39": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:40.594Z"
+  },
+  "wasteland-small-b#40": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:40.773Z"
+  },
+  "wasteland-small-b#41": {
+    "verdict": "REJECTED",
+    "notes": "spear: a bare stick",
+    "at": "2026-11-25T18:26:41.022Z"
+  },
+  "wasteland-small-b#42": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:41.346Z"
+  },
+  "wasteland-small-b#43": {
+    "verdict": "REJECTED",
+    "notes": "spear: a bare stick",
+    "at": "2026-11-25T18:26:41.661Z"
+  },
+  "wasteland-small-b#44": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:41.810Z"
+  },
+  "wasteland-small-b#45": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:42.004Z"
+  },
+  "wasteland-small-b#46": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:42.209Z"
+  },
+  "wasteland-small-b#47": {
+    "verdict": "REJECTED",
+    "notes": "spear: a bare stick",
+    "at": "2026-11-25T18:26:42.397Z"
+  },
+  "wasteland-small-b#48": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:42.618Z"
+  },
+  "wasteland-small-b#49": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:42.777Z"
+  },
+  "wasteland-small-b#50": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:42.980Z"
+  },
+  "wasteland-small-b#51": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:43.137Z"
+  },
+  "wasteland-small-b#52": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:43.385Z"
+  },
+  "wasteland-small-b#53": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:43.528Z"
+  },
+  "wasteland-small-b#54": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:43.668Z"
+  },
+  "wasteland-small-b#55": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:43.808Z"
+  },
+  "wasteland-small-b#56": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:43.968Z"
+  },
+  "wasteland-small-b#57": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:44.138Z"
+  },
+  "wasteland-small-b#58": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:44.303Z"
+  },
+  "wasteland-small-b#59": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:44.467Z"
+  },
+  "wasteland-small-b#60": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:44.660Z"
+  },
+  "wasteland-small-b#61": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:44.816Z"
+  },
+  "wasteland-small-b#62": {
+    "verdict": "REJECTED",
+    "notes": "spear: a bare stick",
+    "at": "2026-11-25T18:26:45.015Z"
+  },
+  "wasteland-small-b#63": {
+    "verdict": "REJECTED",
+    "notes": "not picked: repeat of a subject already accepted from this call",
+    "at": "2026-11-25T18:26:45.234Z"
+  }
+}

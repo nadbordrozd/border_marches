@@ -1,0 +1,885 @@
+{
+  "set": "decorations",
+  "bead": "border_marches-bzc.48",
+  "class": "decorations",
+  "exploration": false,
+  "_doc": "Purely decorative map pieces (docs/art/classes/decorations.md): passable small decorations generated at 32x32 (critters) or 48x48 (patches) with the doodad class layer, and impassable props on 64x64 (one cell) or 128x64 (two cells side by side) with the prop class layer. generate-image-v2, no style image (like the doodads, trees and peaks of the same layer); one call returns many candidates of a mixed subject, the best distinct ones are accepted and cropped to their opaque box plus 1 px. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-doodad"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "grass-small-s1",
+      "concept": "GRASS SMALL (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 48101,
+      "subject": "Subject: one tiny meadow detail, each image a different one of these: two small fluttering butterflies with pale orange #e8a04a and white wings, a small snail with a round brown spiral shell #9a6a3c, a little blue songbird #4f7fb8 with an orange breast pecking at the grass, a small brown molehill of loose earth #7a5a3a, a little ring of tiny white mushrooms. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "tree, bush, flower pot, person, bright red, neon, gold, coins, gem, chest"
+    },
+    {
+      "id": "props-1x1-s1",
+      "concept": "PROPS 1x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 64,
+      "height": 64,
+      "seed": 48201,
+      "subject": "Subject: one big blocking prop that fills one map cell, each image a different one of these: a huge rounded grey granite boulder #8d8a7c with #5c5a54 shadows and a little moss, a cluster of three thick cut tree stumps of brown wood #7a5230 with pale cut tops #c9a46a, a broken wooden farm cart tipped on its side with one wheel off, two tall rough grey standing stones leaning together. About three quarters of the image wide and about three quarters of the image tall.",
+      "negative": "runes, glow, flag, banner, fence, road, horse"
+    },
+    {
+      "id": "log-2x1-s1",
+      "concept": "FALLEN LOG 2x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 128,
+      "height": 64,
+      "seed": 48301,
+      "subject": "Subject: one huge fallen tree trunk lying on its side across the image from left to right, thick rough brown bark #7a5230 with #4e331e shadows, a pale cut end #c9a46a with rings facing the viewer at the left, a few broken branch stubs and patches of green moss #5f8f3e on top. Nearly the full image wide and about half of the image tall.",
+      "negative": "leaves, crown, standing tree, axe, fire, sawmill"
+    },
+    {
+      "id": "grass-small-b",
+      "concept": "GRASS SMALL 2 (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 48102,
+      "subject": "Subject: one tiny meadow detail, each image a different one of these: a little brown hedgehog #8a6a4a with a spiky back curled up, a small loose pile of fallen autumn leaves in orange #d9803a, yellow #d9b23a and brown #8a5a2c, a small patch of three-leaf clover #5f9a3e with one tiny red ladybird. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "tree, bush, flower pot, person, neon, gold, coins, gem, chest"
+    },
+    {
+      "id": "jungle-small-a",
+      "concept": "JUNGLE SMALL (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 48111,
+      "subject": "Subject: one tiny jungle floor detail, each image a different one of these: two small dragonflies with long turquoise bodies #3fa0a8 and clear pale wings, a small bright green tree frog #5fb04a with orange toes sitting, a clump of tall thin swamp reeds #6f8f3e with two brown cattail heads #6e4a2a, one big flat red jungle flower #c8423a with five round spotted petals lying on the ground. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "tree, palm, flower pot, person, neon, gold, coins, gem, chest, water"
+    },
+    {
+      "id": "steppe-small-a",
+      "concept": "STEPPE SMALL (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 48121,
+      "subject": "Subject: one tiny dry steppe detail, each image a different one of these: a few tall prickly thistles with purple flower heads #8a5aa8 on grey-green stems #8a9a5a, a black crow #2c2a30 standing on the ground, a small cairn of four flat stacked grey stones #9a9488, an old wooden cart wheel #8a6a3c lying flat and half sunk in the earth. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "tree, cactus, skull, person, neon, gold, coins, gem, chest, lush green"
+    },
+    {
+      "id": "badlands-small-a",
+      "concept": "BADLANDS SMALL (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 48131,
+      "subject": "Subject: one tiny red desert detail, each image a different one of these: a small orange lizard #d9803a with a long curled tail basking, a low spiky agave plant with thick blue-green leaves #6f9a8a, a few broken pieces of a red clay pot #b5603a lying on the ground, a tiny sand-coloured scorpion #c9a46a with its tail curled up. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "tree, cactus, skull, person, neon, gold, coins, gem, chest, green grass"
+    },
+    {
+      "id": "wasteland-small-a",
+      "concept": "WASTELAND SMALL (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 48141,
+      "subject": "Subject: one tiny detail of a grey ash wasteland, each image a different one of these: a black raven #2c2a30 standing on the ground, an old rusty dented iron helmet #8a5a3a lying on its side, a small crooked wooden grave marker plank #7a6a5a stuck in the ground, a clump of dry black thorny dead weeds #3a3430. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "tree, cross, skull, person, neon, gold, coins, gem, chest, glow, fire, green"
+    },
+    {
+      "id": "wasteland-small-b",
+      "concept": "WASTELAND SMALL 2 (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 48142,
+      "subject": "Subject: one tiny detail of a grey ash wasteland, each image a different one of these: a small cluster of three sickly pale grey-violet toadstools #a89ab5 with thin stems, the broken wooden shaft of an old spear #7a6a5a stuck slanted in the ground with a torn grey rag tied to it. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "tree, skull, person, neon, gold, coins, gem, chest, glow, fire, green, spear head, metal blade, flag"
+    },
+    {
+      "id": "props-1x1-b",
+      "concept": "PROPS 1x1 b (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 64,
+      "height": 64,
+      "seed": 48202,
+      "subject": "Subject: one big blocking prop that fills one map cell, each image a different one of these: a giant mushroom with a thick pale stem #e4dccb and a big round red cap #c0503a with white spots, a big tangled thornbush of dark brambles #4e3a2a with long thorns, a gnarled leafless dead tree, twisted dark grey trunk #5c5650, a tall lumpy termite mound of orange-brown earth #b5703a with a few holes. About three quarters of the image wide and about three quarters of the image tall.",
+      "negative": "glow, flag, banner, fence, road, house, door"
+    },
+    {
+      "id": "props-1x1-c",
+      "concept": "PROPS 1x1 c (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 64,
+      "height": 64,
+      "seed": 48203,
+      "subject": "Subject: one big blocking prop that fills one map cell, each image a different one of these: two broken pale marble columns #d8d2c4 of different heights, a deep blackened crater, a raised ring of cracked charred earth #4a4440, a huge ancient stone head #8d8a7c half sunk in the ground and covered in green moss #5f8f3e, a giant horned beast skull #e4dccb half buried. About three quarters of the image wide and about three quarters of the image tall.",
+      "negative": "glow, runes, flag, banner, fence, road, house, door, fire, smoke, lava"
+    },
+    {
+      "id": "props-1x1-d",
+      "concept": "PROPS 1x1 d (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 64,
+      "height": 64,
+      "seed": 48204,
+      "subject": "Subject: one big blocking prop that fills one map cell, each image a different one of these: a cluster of jagged black basalt rock spikes #3e3a3c with grey #6e6a6a lit edges, a tall green saguaro cactus #6f9a4a with two raised arms, a big round golden haystack #d9b26a with #a8803a shadows, a huge hollow old tree stump of grey-brown wood #6e5a46 with thick roots and a dark hollow. About three quarters of the image wide and about three quarters of the image tall.",
+      "negative": "glow, flag, fence, road, house, door, pitchfork, farmer, leaves"
+    },
+    {
+      "id": "statue-2x1-a",
+      "concept": "TOPPLED STATUE 2x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 128,
+      "height": 64,
+      "seed": 48302,
+      "subject": "Subject: one huge toppled stone statue of an old king lying on its side across the image from left to right, pale grey weathered stone #a8a39a with #6e6a64 shadows, its crowned head at the left resting on the ground, its body broken in two pieces with chunks of rubble, a little green moss #5f8f3e. Nearly the full image wide and about half of the image tall.",
+      "negative": "pedestal, plinth, standing statue, gold, glow, blood"
+    },
+    {
+      "id": "skeleton-2x1-a",
+      "concept": "BEAST SKELETON 2x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 128,
+      "height": 64,
+      "seed": 48303,
+      "subject": "Subject: the huge bleached skeleton of a giant beast lying across the image from left to right: a big horned skull at the left, a long curved spine and a tall arching ribcage of cream bones #e4dccb with #b5a88a shadows, a few loose bones beside it. Nearly the full image wide and about half of the image tall.",
+      "negative": "flesh, blood, glow, person, dinosaur alive, sand dune"
+    },
+    {
+      "id": "wall-2x1-a",
+      "concept": "RUINED WALL 2x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 128,
+      "height": 64,
+      "seed": 48304,
+      "subject": "Subject: one short stretch of an ancient ruined stone wall running across the image from left to right, big mossy grey blocks #8d8a7c with #5c5a54 shadows, broken and stepped down at both ends, an empty crumbling arch in the middle, creeping green vines #4f8a3e hanging over it. Nearly the full image wide and about two thirds of the image tall.",
+      "negative": "door, gate, roof, house, tower, flag, glow"
+    },
+    {
+      "id": "catapult-2x1-a",
+      "concept": "BROKEN CATAPULT 2x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 128,
+      "height": 64,
+      "seed": 48305,
+      "subject": "Subject: one wrecked old wooden siege catapult abandoned on a battlefield, across the image from left to right: a heavy timber frame #7a5a3a with #4e3a2a shadows, its long throwing arm snapped and leaning, one big wheel broken off and lying flat, rusty iron bands #8a5a3a, a few scattered round stones. Nearly the full image wide and about two thirds of the image tall.",
+      "negative": "soldier, person, fire, smoke, flag, banner, glow"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/decorations/butterflies.png",
+      "from": "grass-small-s1#2",
+      "width": 29,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 3,
+          "width": 29,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/snail.png",
+      "from": "grass-small-s1#1",
+      "width": 25,
+      "height": 18,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 8,
+          "width": 25,
+          "height": 18
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/songbird.png",
+      "from": "grass-small-s1#13",
+      "width": 25,
+      "height": 21,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 25,
+          "height": 21
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/molehill.png",
+      "from": "grass-small-s1#3",
+      "width": 28,
+      "height": 17,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 10,
+          "width": 28,
+          "height": 17
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/mushroom-ring.png",
+      "from": "grass-small-s1#0",
+      "width": 28,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 6,
+          "width": 28,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/hedgehog.png",
+      "from": "grass-small-b#0",
+      "width": 27,
+      "height": 21,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 5,
+          "width": 27,
+          "height": 21
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/autumn-leaves.png",
+      "from": "grass-small-b#22",
+      "width": 29,
+      "height": 20,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 6,
+          "width": 29,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/clover.png",
+      "from": "grass-small-b#17",
+      "width": 25,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 25,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/dragonfly.png",
+      "from": "jungle-small-a#9",
+      "width": 22,
+      "height": 19,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 22,
+          "height": 19
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/tree-frog.png",
+      "from": "jungle-small-a#16",
+      "width": 24,
+      "height": 19,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 9,
+          "width": 24,
+          "height": 19
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/swamp-reeds.png",
+      "from": "jungle-small-a#36",
+      "width": 23,
+      "height": 29,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 1,
+          "width": 23,
+          "height": 29
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/jungle-flower.png",
+      "from": "jungle-small-a#53",
+      "width": 26,
+      "height": 20,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 6,
+          "width": 26,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/thistles.png",
+      "from": "steppe-small-a#0",
+      "width": 26,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 1,
+          "width": 26,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/crow.png",
+      "from": "steppe-small-a#3",
+      "width": 28,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 6,
+          "width": 28,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/cart-wheel.png",
+      "from": "steppe-small-a#6",
+      "width": 26,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 4,
+          "width": 26,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/cairn.png",
+      "from": "steppe-small-a#14",
+      "width": 24,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 3,
+          "width": 24,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/lizard.png",
+      "from": "badlands-small-a#13",
+      "width": 26,
+      "height": 21,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 7,
+          "width": 26,
+          "height": 21
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/agave.png",
+      "from": "badlands-small-a#17",
+      "width": 24,
+      "height": 20,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 8,
+          "width": 24,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/pot-shards.png",
+      "from": "badlands-small-a#33",
+      "width": 28,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 28,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/scorpion.png",
+      "from": "badlands-small-a#48",
+      "width": 22,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 22,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/grave-marker.png",
+      "from": "wasteland-small-a#7",
+      "width": 20,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 4,
+          "width": 20,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/dead-weeds.png",
+      "from": "wasteland-small-a#54",
+      "width": 28,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 7,
+          "width": 28,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/toadstools.png",
+      "from": "wasteland-small-b#12",
+      "width": 24,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 24,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/broken-spear.png",
+      "from": "wasteland-small-b#9",
+      "width": 24,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 2,
+          "width": 24,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/big-boulder.png",
+      "from": "props-1x1-s1#0",
+      "width": 58,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 6,
+          "width": 58,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/stump-cluster.png",
+      "from": "props-1x1-s1#4",
+      "width": 56,
+      "height": 44,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 10,
+          "width": 56,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/broken-cart.png",
+      "from": "props-1x1-s1#9",
+      "width": 54,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 54,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/standing-stones.png",
+      "from": "props-1x1-s1#13",
+      "width": 50,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 1,
+          "width": 50,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/giant-mushroom.png",
+      "from": "props-1x1-b#0",
+      "width": 56,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 1,
+          "width": 56,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/thornbush.png",
+      "from": "props-1x1-b#7",
+      "width": 61,
+      "height": 54,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 6,
+          "width": 61,
+          "height": 54
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/dead-tree.png",
+      "from": "props-1x1-b#9",
+      "width": 54,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 1,
+          "width": 54,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/termite-mound.png",
+      "from": "props-1x1-b#12",
+      "width": 54,
+      "height": 62,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 0,
+          "width": 54,
+          "height": 62
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/ruined-pillars.png",
+      "from": "props-1x1-c#2",
+      "width": 53,
+      "height": 62,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 1,
+          "width": 53,
+          "height": 62
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/stone-head.png",
+      "from": "props-1x1-c#8",
+      "width": 62,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 1,
+          "width": 62,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/beast-skull.png",
+      "from": "props-1x1-c#14",
+      "width": 64,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 6,
+          "width": 64,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/basalt-spikes.png",
+      "from": "props-1x1-d#0",
+      "width": 51,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 1,
+          "width": 51,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/saguaro.png",
+      "from": "props-1x1-d#6",
+      "width": 42,
+      "height": 62,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 0,
+          "width": 42,
+          "height": 62
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/hollow-stump.png",
+      "from": "props-1x1-d#13",
+      "width": 62,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 1,
+          "width": 62,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fallen-log-1.png",
+      "from": "log-2x1-s1#0",
+      "width": 123,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 0,
+          "width": 123,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fallen-log-2.png",
+      "from": "log-2x1-s1#2",
+      "width": 112,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 1,
+          "width": 112,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/toppled-statue-1.png",
+      "from": "statue-2x1-a#1",
+      "width": 110,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 13,
+          "width": 110,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/toppled-statue-2.png",
+      "from": "statue-2x1-a#2",
+      "width": 107,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 3,
+          "width": 107,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/beast-skeleton.png",
+      "from": "skeleton-2x1-a#1",
+      "width": 113,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 3,
+          "width": 113,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/ruined-wall.png",
+      "from": "wall-2x1-a#0",
+      "width": 128,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 4,
+          "width": 128,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/broken-catapult.png",
+      "from": "catapult-2x1-a#0",
+      "width": 90,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 18,
+          "y": 0,
+          "width": 90,
+          "height": 63
+        }
+      ]
+    }
+  ]
+}

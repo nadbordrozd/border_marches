@@ -7,6 +7,7 @@
  *   size=S|M|L    generator map size (default M)
  *   players=2..4  generator player starts (default per size)
  *   map=ranges    a test map of mountain ranges of many shapes
+ *   map=decorations  every decoration and prop on each ground (bead bzc.48)
  *   fog=0|1       fog of war off / on (explored: round the hero and town)
  *   zoom=Z        0.75 (default), 1, 1.5 or 2
  *   cx=X&cy=Y     centre on a cell
@@ -29,6 +30,7 @@ import { findPathInContext } from "../../core/game/pathfinding";
 import { buildNamedMap } from "../../core/map/named";
 import { playableFactions } from "../../data/factions";
 import { loadMapAssets } from "./assets";
+import { decorationShowcase } from "./decoration-showcase";
 import { DEFAULT_ZOOM, createMapView } from "./map-view";
 import type { MapView, PathStep } from "./map-view";
 
@@ -274,23 +276,28 @@ export async function startMapDebug(
   const players = Number(params.get("players"));
   const named = params.get("named");
   const seed = route.seed ?? DEFAULT_DEBUG_SEED;
+  const showcase = which === "decorations" ? decorationShowcase() : null;
   const map =
     named !== null
       ? buildNamedMap(named)
-      : which === "ranges"
-        ? rangesMap()
-        : generateMap(seed, {
-            size: size === "S" || size === "L" ? size : "M",
-            ...(players === 2 || players === 3 || players === 4
-              ? { players }
-              : {}),
-          });
+      : showcase !== null
+        ? showcase.map
+        : which === "ranges"
+          ? rangesMap()
+          : generateMap(seed, {
+              size: size === "S" || size === "L" ? size : "M",
+              ...(players === 2 || players === 3 || players === 4
+                ? { players }
+                : {}),
+            });
   const source =
     named !== null
       ? `named ${named}`
-      : which === "ranges"
-        ? "ranges test map"
-        : `seed ${seed}${route.seed === null ? " (default)" : ""}`;
+      : showcase !== null
+        ? "decorations showcase"
+        : which === "ranges"
+          ? "ranges test map"
+          : `seed ${seed}${route.seed === null ? " (default)" : ""}`;
   // A generated map's start towns are drawn in the faction a new game
   // would seat there (the playable factions in seat order, as in setup); a
   // named map already carries its recommended factions.
@@ -305,6 +312,7 @@ export async function startMapDebug(
   }
   const view = createMapView(canvas, assets);
   view.setMap(map);
+  if (showcase !== null) view.setDecorations(showcase.decorations);
   const zoom = Number(params.get("zoom") ?? DEFAULT_ZOOM);
   view.setZoom(Number.isFinite(zoom) ? zoom : DEFAULT_ZOOM);
   const hero = map.objects.find((o) => o.kind === "hero-start");

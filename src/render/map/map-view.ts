@@ -9,7 +9,8 @@
  * 2. the map in CHUNKS of 8 x 8 cells, each cached at master resolution:
  *    the ground layer (ground.ts: grounds, spill, water shelf, coast, forest
  *    shade, roads) and then every TALL_BODY entry (canopy trees, peaks,
- *    doodads) that overlaps the chunk, in pass order;
+ *    doodads, placed decorations and props) that overlaps the chunk, in
+ *    pass order;
  * 3. the FOREGROUND entries in row, column, layer order: the bands above
  *    low rock, the cached crown bands of the canopy (canopy-paint.ts),
  *    objects, monsters, heroes, path arrows, chips;
@@ -43,7 +44,13 @@ import { doodadSpecs } from "./doodads";
 import { tonePeak } from "./peak-paint";
 import { paintPeakUnder } from "./peaks";
 import type { PeakField } from "./peaks";
-import { compareEntries, objectEntries, unitEntry } from "./scene";
+import type { PlacedDecoration } from "./decorations";
+import {
+  compareEntries,
+  decorationEntries,
+  objectEntries,
+  unitEntry,
+} from "./scene";
 import type { SceneEntry } from "./scene";
 import { MapInput, WheelZoom, glideAt, glideMs } from "./input";
 import type { Glide } from "./input";
@@ -115,6 +122,13 @@ export interface MapView {
   setExplored(mask: ArrayLike<number | boolean> | null): void;
   /** Objects to draw; defaults to the map's own objects on setMap. */
   setObjects(objects: readonly MapObject[]): void;
+  /**
+   * Purely decorative pieces to draw (decorations.ts, bead bzc.48):
+   * passable decorations and impassable props. Drawing only: the placer
+   * keeps props off paths and makes their cells block movement. setMap
+   * clears them.
+   */
+  setDecorations(decorations: readonly PlacedDecoration[]): void;
   setHeroes(heroes: readonly MapHero[]): void;
   /** Owner flags (player colours) at object entrances. */
   setFlags(flags: readonly MapFlag[]): void;
@@ -329,6 +343,8 @@ export function createMapView(
 
   let layout: GroundLayout | null = null;
   let bodies: readonly SceneEntry[] = [];
+  /** Placed decorations and props (setDecorations, bead bzc.48). */
+  let decorationBodies: readonly SceneEntry[] = [];
   let foreground: SceneEntry[] = [];
   let terrainForeground: readonly SceneEntry[] = [];
   /** The terrain plan, updated in place on setObjects. */
@@ -509,6 +525,24 @@ export function createMapView(
     }
   };
 
+  /**
+   * The bodies over a world box in draw order: the terrain plan's and the
+   * placed decorations' (bead bzc.48), merged by foot.
+   */
+  const bodiesOver = (
+    x0: number,
+    y0: number,
+    x1: number,
+    y1: number,
+  ): readonly SceneEntry[] => {
+    const over = (e: SceneEntry): boolean =>
+      e.x1 > x0 && e.x0 < x1 && e.y1 > y0 && e.y0 < y1;
+    const terrain = bodies.filter(over);
+    const decor = decorationBodies.filter(over);
+    if (decor.length === 0) return terrain;
+    return [...terrain, ...decor].sort(compareEntries);
+  };
+
   const buildChunk = (cx: number, cy: number): Chunk => {
     if (map === null || layout === null) return { surface: null };
     const t0 = performance.now();
@@ -526,9 +560,7 @@ export function createMapView(
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     ctx.translate(-x0, -y0);
-    for (const e of bodies)
-      if (e.x1 > x0 && e.x0 < x0 + w && e.y1 > y0 && e.y0 < y0 + h)
-        drawSprites(ctx, e);
+    for (const e of bodiesOver(x0, y0, x0 + w, y0 + h)) drawSprites(ctx, e);
     stat.chunksBuilt += 1;
     stat.chunkBuildMs += performance.now() - t0;
     return { surface };
@@ -565,8 +597,7 @@ export function createMapView(
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     ctx.translate(-ox, -oy);
-    for (const e of bodies)
-      if (e.x1 > x0 && e.x0 < x1 && e.y1 > y0 && e.y0 < y1) drawSprites(ctx, e);
+    for (const e of bodiesOver(x0, y0, x1, y1)) drawSprites(ctx, e);
     ctx.restore();
     stat.chunksPatched += 1;
     stat.chunkBuildMs += performance.now() - t0;
@@ -1051,6 +1082,7 @@ export function createMapView(
     setMap(next) {
       map = next;
       objects = next.objects;
+      decorationBodies = [];
       explored = null;
       fogChunks.clear();
       fadingFog = null;
@@ -1126,6 +1158,20 @@ export function createMapView(
       objects = next;
       rebuildTerrain(true);
       rebuildForeground();
+      requestRender();
+    },
+    setDecorations(next) {
+      const was = decorationBodies;
+      decorationBodies = decorationEntries(next);
+      // Paint the boxes of the decorations gone and new again.
+      markChunks(
+        [...was, ...decorationBodies].map((e) => ({
+          x0: e.x0,
+          y0: e.y0,
+          x1: e.x1,
+          y1: e.y1,
+        })),
+      );
       requestRender();
     },
     setHeroes(next) {

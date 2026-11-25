@@ -34,6 +34,7 @@ import { STRAY_CREATURE_IDS, STRAY_HOMES } from "../data/strays.ts";
 import type { CreatureDef, FactionId } from "../data/types.ts";
 import { SPELL_ICON_ALIASES, iconFor, type IconKind } from "../assets/icons.ts";
 import { RESOURCE_ITEMS, RESOURCE_PICKUPS } from "../assets/manifest.ts";
+import { DECORATIONS } from "../assets/decorations.ts";
 import { artFor, artVariants } from "../assets/object-art.ts";
 import {
   buildingArt,
@@ -71,6 +72,7 @@ export type GalleryKind =
   | "skill"
   | "feat"
   | "object"
+  | "decoration"
   | "town"
   | "building"
   | "condition"
@@ -455,7 +457,31 @@ function objectSections(): GallerySection[] {
       out.push({ title: start?.[1] ?? "Map objects", entries: [] });
     out[out.length - 1]?.entries.push(objectEntry(id));
   }
-  return out.filter((s) => s.entries.length > 0);
+  return [...out.filter((s) => s.entries.length > 0), ...decorationSections()];
+}
+
+/**
+ * The decoration catalogue (bead bzc.48): purely decorative pieces, the
+ * passable details and the impassable props, after the object types.
+ */
+function decorationSections(): GallerySection[] {
+  const entries = (passable: boolean): GalleryEntry[] =>
+    DECORATIONS.filter((d) => d.passable === passable).map((d) => ({
+      kind: "decoration",
+      id: d.id,
+      name: d.name,
+      art: d.looks.map((look, i) =>
+        asset(
+          look.key,
+          d.looks.length === 1 ? "Map sprite" : `Map sprite ${i + 1}`,
+        ),
+      ),
+      artNote: null,
+    }));
+  return [
+    ...section("Decorations (passable)", entries(true)),
+    ...section("Props (impassable)", entries(false)),
+  ];
 }
 
 // ------------------------------------------------------------ towns

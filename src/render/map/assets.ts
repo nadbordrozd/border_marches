@@ -17,6 +17,7 @@ import {
   assetUrl,
 } from "../../assets/manifest";
 import type { GroundTerrain, ImageAsset } from "../../assets/manifest";
+import { DECORATION_ASSETS } from "../../assets/decorations";
 import { MAP_OBJECT_ASSETS } from "../../assets/map-objects";
 import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
@@ -83,6 +84,7 @@ export function mapAssetList(): ImageAsset[] {
     ...MOUNTAIN_PIECES,
     ...TOWN_3X2_ASSETS,
     ...DOODAD_ASSETS,
+    ...DECORATION_ASSETS,
     ...TREE_ASSETS,
     ...PEAK_ASSETS,
     ...TOWN_ASSETS,

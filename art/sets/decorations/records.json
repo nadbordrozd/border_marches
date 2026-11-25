@@ -1,0 +1,3818 @@
+{
+  "grass-small-s1": {
+    "id": "grass-small-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "ef661f7c-211d-4fc7-84a4-45eba713064c",
+    "submittedAt": "2026-11-25T17:53:53.771Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-doodad.txt",
+          "text": "Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tiny meadow detail, each image a different one of these: two small fluttering butterflies with pale orange #e8a04a and white wings, a small snail with a round brown spiral shell #9a6a3c, a little blue songbird #4f7fb8 with an orange breast pecking at the grass, a small brown molehill of loose earth #7a5a3a, a little ring of tiny white mushrooms. Small and low, about half of the image wide, much smaller than a person."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 48101,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one tiny meadow detail, each image a different one of these: two small fluttering butterflies with pale orange #e8a04a and white wings, a small snail with a round brown spiral shell #9a6a3c, a little blue songbird #4f7fb8 with an orange breast pecking at the grass, a small brown molehill of loose earth #7a5a3a, a little ring of tiny white mushrooms. Small and low, about half of the image wide, much smaller than a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, soil disc, grass square, platform, background, badge, character, building, tree, bush, flower pot, person, bright red, neon, gold, coins, gem, chest."
+    },
+    "at": "2026-11-25T17:55:50.968Z",
+    "usageUsd": 0.08175034965409173,
+    "candidates": [
+      {
+        "file": "grass-small-s1-0.png",
+        "sha256": "ee2469e1605bcf5945f9b233c33f076550e569c5eb73cfe93aa9145bb581fa16",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-1.png",
+        "sha256": "e525834a22004522249c1dfa38e34df1dad413d6659b1d6ef343b3a31b6a0a8b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-2.png",
+        "sha256": "605ad67f00c711d4b32786f5cb1d02990a374c483999ceeaa4b56bcf63831236",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-3.png",
+        "sha256": "08428d031b06dec3abeed671b6b13e243413f537697404de973e1b564e68757a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-4.png",
+        "sha256": "a3d8a20027f84acdde1ae163b6ba825f67f27146e9f418b2b87acf4abd904b8d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-5.png",
+        "sha256": "8bfc0145fc66399432837c344e3793797496c044166345220b7ddb29629f0f16",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-6.png",
+        "sha256": "3e0ab3b8ac3371e54e2d788f67efbc20764e852db95544c06bb75cc4e509f38f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-7.png",
+        "sha256": "9691cb03fed69fc935cc3790d8c29effa5fdd244ab1d5fc66bbd457be793ace9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-8.png",
+        "sha256": "ec47b934ef507de680da27e118d4e0456e992240a3e4c35cb7ae68616d01a756",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-9.png",
+        "sha256": "d730cba837d6e2a3e71355d09a1221b6c8fb8e3620b9b1e416e623c8e0b65df2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-10.png",
+        "sha256": "ce001e5e891329f2a555a6daf8ffdfcdb925e25d3714e36f2c4cc999cb2d307e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-11.png",
+        "sha256": "aefef9fd0eaa1a55b3ff0f8c77b25f6072854194c21ff3a92d3418de3d400b62",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-12.png",
+        "sha256": "a7c26cadc4238a5e12782e2fb094304aab41a2e56874a781b49cabd32749445e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-13.png",
+        "sha256": "8d2121596ca743c797c756b4755a7f8fcf376929c6850bcd298b33da466fb5d6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-14.png",
+        "sha256": "17069aa4d956e76a050a9f9de385b0a3d3b24a7bf015daeb8ab710fc74932a42",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-15.png",
+        "sha256": "26c72508a4d4dc127dc8bc15fe3ea5aa0a9ea33ab61b8c016a79be202a540a0f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-16.png",
+        "sha256": "2603f2714260e1b82eba1b8311afba48ce8c7c46d4d20eebba1f0e438f81d313",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-17.png",
+        "sha256": "33bb7e94d89e562efff28f7d325185f8b8815bb95d8d3b6dad249411a50c61a7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-18.png",
+        "sha256": "925fe6c3cdecdf5c030e6af42f38b9aeda3d3b18d5680e7f651dd79dc32d6460",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-19.png",
+        "sha256": "2de3b3912f8356ae0b7f797deaae4b8aff4ce87944d8e97fcb6909d388fbfc83",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-20.png",
+        "sha256": "8783fe4618f30253c5f06149a6cacc170cc81215beedc48ba74f0d66c1c1550c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-21.png",
+        "sha256": "51520277138d2414d6b13cb6c3d52263a3f2e2856697f4429d1f920c379fc6a4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-22.png",
+        "sha256": "b004fc3a5242b02adad0b7cf603e8fcd61c2bc6d53e3e48f0a3a4b28e5bbc003",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-23.png",
+        "sha256": "ddbe3a74eb12327c35ff8b65f7a21b29b0fdc148708f1ac44605f617727ded2a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-24.png",
+        "sha256": "91a29b20d4e2f25cb4753a098ce179c0e11c56bc4379ba30e9e09deec4c6e2ba",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-25.png",
+        "sha256": "d50bc7f070f26022ad12d1593ee8558bac39473c51f88ab5725e287eb887c874",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-26.png",
+        "sha256": "4854a4a62bcf7dab449b274b480f86e8cc56483ef7ea9a56d8950177e2b1a133",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-27.png",
+        "sha256": "4d1b88ae884254618e4bd5d27da14dc7ae6c68818c8da8db0eb22be2fd4811ce",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-28.png",
+        "sha256": "c2b6e35b156292680c9a631cfb7949ea431f0ec4dc2d21a65edab5d0141d658b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-29.png",
+        "sha256": "394dfcea1986ea3d84c9fa070e5b933c3bee45f309169ab6ecb3038b34dfd9ac",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-30.png",
+        "sha256": "f764397183d0549369caf0c2da64aab2823a93fce22e3f5f4a0960ba4c4b2350",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-31.png",
+        "sha256": "81e3d76a5a6591a9778e50f3bb3a2e264bba72c809892c67314adc062a2cf977",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-32.png",
+        "sha256": "2edc0eb288d3e4ea37e057f017baddbbc03852c16d2b62d3262d05b569de9010",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-33.png",
+        "sha256": "fdeb6c1a227e3c4767d14936f069e84b9952b04a8f6f0a38ea65d6de3b706234",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-34.png",
+        "sha256": "cca1f105648e52a38c35383ac90b788194af882d5e43186272f4dd1e287459a0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-35.png",
+        "sha256": "1435208e0c9ddbd48430371c6cd876e4c8d08a06ef03e4bd3db5119df320dab4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-36.png",
+        "sha256": "fbac39bc9332a4cac93cc9caecbc7fd200d7f9350544c1f1d3d6c11f43b6a70d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-37.png",
+        "sha256": "7d724ea2fb86cf8645de9e1405231ff38bb49f315793676f2db68353ca29cbbc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-38.png",
+        "sha256": "dce63a40d597b7432a21a5432c8cbf10b89199696393cdc6c396b22a53206fac",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-39.png",
+        "sha256": "465f62c05d05dcd73ed52efa81bb551c95f28b9a71fb3357f09ea486851b40ae",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-40.png",
+        "sha256": "d18044ef0a2d3deb91e0984ab9428f9bd0a349d239b2029c9c352e25d5ebf7a9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-41.png",
+        "sha256": "1d227456ba459be43ded3a5e711caf51fa733cf65d136e4d8c9b8fcba547577d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-42.png",
+        "sha256": "29f83f526ecd493faf36c5506b850d9febf49c0c309b41606bfed333e2510eeb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-43.png",
+        "sha256": "3418f387619bb127d77295fab00ca590bf1e8b4bd42053800ce9f7dc8d6cd80f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-44.png",
+        "sha256": "487dbc6b12c1bc0833ead3948c094260a17bbe299e0e75f82da95bca92f588b6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-45.png",
+        "sha256": "cce2f4dabb143630c0ed0cc9b5eee4ef394f67bc8f47606c4355204b02256e40",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-46.png",
+        "sha256": "cd3c08bed830159a2dd708863f27cd60657f3bcfa0f9b218c81aedf9744ed4db",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-47.png",
+        "sha256": "4940c29b1f5ee895fcd2b1e3c10881b72ceaf4cfce45c570a2ed9c555cb43bb2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-48.png",
+        "sha256": "56e4b1492a5de5c13a41ad0ce2e7a8d414c38ec5f811b6460808e53fbe0ae720",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-49.png",
+        "sha256": "49995a9397a5a3f603d10153e9c417d9d0cdea78021689f3f7b85e6063e5d19e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-50.png",
+        "sha256": "7ae493974394d8b7428e407e9d4d3650890870f4219596b0c94b74fa72f958f0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-51.png",
+        "sha256": "3fc675a441e55be033a79bd162c82170b62b2aed32851eda74d66dc4b9adefca",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-52.png",
+        "sha256": "8f6c90602a304c7713154051150179f3b7eeed5875c9ac83c2d82e9605faaf54",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-53.png",
+        "sha256": "cf1050af0a84a46c2966efb6256d1b6184042786d8327be0182757f0537cea67",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-54.png",
+        "sha256": "7942d5d6354d3d3fb166fc673e5d05abe1f08093fcb97b2cf54f6a0004a2f60a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-55.png",
+        "sha256": "470d096d66d2255807bac2e70a5ed504a37711c8cbd84e0d8cdf49de002f8f33",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-56.png",
+        "sha256": "05b9cf87bfc19d9813d8ae39accfb7ac60e44a44feb7857329a2d72e56d35e73",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-57.png",
+        "sha256": "37e3a4a8dc26f7440afc2605a6cb342239ccf12e2a0f64050a8b7f79d1987312",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-58.png",
+        "sha256": "d8109c5048d4e2e30ba0aa5f31bb909655bbbd40622b32d64b892472dac7b738",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-59.png",
+        "sha256": "78075933c0445fdf66d9bdfa0d41170b587c87eb61d1e5ddc1ec23da885a11b2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-60.png",
+        "sha256": "bca2285d8027c36b6eb0b767e1a0923aee0c0f5d49d8415b02e246699d9aa1d4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-61.png",
+        "sha256": "08a32988a9e0eb86a69abf4447659b9a96b60d9c6705482c8961015e3d927c42",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-62.png",
+        "sha256": "35098034e7e3f21304c02c327daa74150e0e9226f5e5c2a6e18ce09e81e31977",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-s1-63.png",
+        "sha256": "cff904ce2d6a3279f4a5125a6fce778bf61696b1af0de6957b628381550d00f3",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "props-1x1-s1": {
+    "id": "props-1x1-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "17cb7fa9-7fea-4703-ad3f-72c690fe43b4",
+    "submittedAt": "2026-11-25T17:55:51.053Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big blocking prop that fills one map cell, each image a different one of these: a huge rounded grey granite boulder #8d8a7c with #5c5a54 shadows and a little moss, a cluster of three thick cut tree stumps of brown wood #7a5230 with pale cut tops #c9a46a, a broken wooden farm cart tipped on its side with one wheel off, two tall rough grey standing stones leaning together. About three quarters of the image wide and about three quarters of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 48201,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one big blocking prop that fills one map cell, each image a different one of these: a huge rounded grey granite boulder #8d8a7c with #5c5a54 shadows and a little moss, a cluster of three thick cut tree stumps of brown wood #7a5230 with pale cut tops #c9a46a, a broken wooden farm cart tipped on its side with one wheel off, two tall rough grey standing stones leaning together. About three quarters of the image wide and about three quarters of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, runes, flag, banner, fence, road, horse."
+    },
+    "at": "2026-11-25T17:58:05.705Z",
+    "usageUsd": 0.083573979139328,
+    "candidates": [
+      {
+        "file": "props-1x1-s1-0.png",
+        "sha256": "a0fcca69c0aba97559ee41e2e11ebeee64bb957512ca714d2162d487dafaac75",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-1.png",
+        "sha256": "cd53dd333144f1cab9f2ceadb794364ec8afb737c2b2672254c1ee80f7278701",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-2.png",
+        "sha256": "a532e428b39c9f6986602b8b0eb852c343e846bed5828bc622a1aa632e46c959",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-3.png",
+        "sha256": "43151568e3bd37089a1ed138f0efd53b8e0b18696660cd60e2774baa72fd635d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-4.png",
+        "sha256": "4ab0f0d2998a961dcd42f1f6572dc2af0a2c2a27969bfd8b7295be7951f63b7c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-5.png",
+        "sha256": "9eccc37d741a50c5efc6cd38bb1426ad1ef8d57739baa97a1c418dfd6128dfcf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-6.png",
+        "sha256": "66c82e3740ac5cf38d200dcc94192c20100485e2f45d4fc2edade85b28e24937",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-7.png",
+        "sha256": "55aa97a9e1153c7fb5d0f4ed977e2bf6914f2d57a78657c580d037390efedd89",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-8.png",
+        "sha256": "c6d07c50115034c5b4ecbf5443313f4dff075368bcd32489c40a6e524d18d039",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-9.png",
+        "sha256": "d0ce62be56f137a4aca6f7b4b8eb39140a895e95c21cd8e55d2df882f630c522",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-10.png",
+        "sha256": "554fa185d16493102494675818a03af1b9f595fe1da127eef7f83cc8c32deae0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-11.png",
+        "sha256": "5bb26371e1a532c0ecfb3918351a4fe69e79315df244399438cf26b41aff0600",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-12.png",
+        "sha256": "ab5bc6009b4465fb374c0cbc0ab7e5e95d478f3a742f0ba19473931853d28607",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-13.png",
+        "sha256": "eff2e600ad8412bc46937e5d4f1028e2f5da2fecdb38bd67badb74005a73a392",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-14.png",
+        "sha256": "5c8eefccfe9ed07c4124fb9e3b3f026d536ae30ff7d30fd5240a12ee12f27656",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-s1-15.png",
+        "sha256": "9410723a7b20daf601c22dfdd41dea643bd68908b096f00ba4771cb0d4982836",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "log-2x1-s1": {
+    "id": "log-2x1-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "6bd226a1-a5b1-4708-b0ab-4059ba55d512",
+    "submittedAt": "2026-11-25T17:58:05.819Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one huge fallen tree trunk lying on its side across the image from left to right, thick rough brown bark #7a5230 with #4e331e shadows, a pale cut end #c9a46a with rings facing the viewer at the left, a few broken branch stubs and patches of green moss #5f8f3e on top. Nearly the full image wide and about half of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 128,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 48301,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one huge fallen tree trunk lying on its side across the image from left to right, thick rough brown bark #7a5230 with #4e331e shadows, a pale cut end #c9a46a with rings facing the viewer at the left, a few broken branch stubs and patches of green moss #5f8f3e on top. Nearly the full image wide and about half of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, leaves, crown, standing tree, axe, fire, sawmill."
+    },
+    "at": "2026-11-25T18:00:00.920Z",
+    "usageUsd": 0.08087939977645874,
+    "candidates": [
+      {
+        "file": "log-2x1-s1-0.png",
+        "sha256": "d1b4d225a456246c320b33544e1a2d65ae44623817b7fc7043227628964b1ef9",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "log-2x1-s1-1.png",
+        "sha256": "c75b4fdcdf4f4de63641623cac326e0c9bab9b8a25608502511069442afeb877",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "log-2x1-s1-2.png",
+        "sha256": "e26f64e180778266647797debef38ef1df6eeed060a8f2ceded3854cef884604",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "log-2x1-s1-3.png",
+        "sha256": "48c3bd7640b47b3e9129a71bbdeb915a5cd777c8dd2c16df3884cd23bebe739d",
+        "width": 128,
+        "height": 64
+      }
+    ]
+  },
+  "grass-small-b": {
+    "id": "grass-small-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b81a8c9d-e9e9-4deb-844f-3d2be4b13581",
+    "submittedAt": "2026-11-25T18:02:07.398Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-doodad.txt",
+          "text": "Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tiny meadow detail, each image a different one of these: a little brown hedgehog #8a6a4a with a spiky back curled up, a small loose pile of fallen autumn leaves in orange #d9803a, yellow #d9b23a and brown #8a5a2c, a small patch of three-leaf clover #5f9a3e with one tiny red ladybird. Small and low, about half of the image wide, much smaller than a person."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 48102,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one tiny meadow detail, each image a different one of these: a little brown hedgehog #8a6a4a with a spiky back curled up, a small loose pile of fallen autumn leaves in orange #d9803a, yellow #d9b23a and brown #8a5a2c, a small patch of three-leaf clover #5f9a3e with one tiny red ladybird. Small and low, about half of the image wide, much smaller than a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, soil disc, grass square, platform, background, badge, character, building, tree, bush, flower pot, person, neon, gold, coins, gem, chest."
+    },
+    "at": "2026-11-25T18:03:50.953Z",
+    "usageUsd": 0.0816455962393019,
+    "candidates": [
+      {
+        "file": "grass-small-b-0.png",
+        "sha256": "d74178ba93a00e3923537544c6af30c1cd32de3a0ae85b4f4beee2128c085d70",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-1.png",
+        "sha256": "1e5820d516dae15d8e6fa8e385d48d4516b81f58b373f63eb4be4cef0003dab8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-2.png",
+        "sha256": "e1aacbd815b4fb9f61ee38d7692dfd281a10d9ba096a7a7610340d930383b178",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-3.png",
+        "sha256": "b281dd047151fc90830e4010b1ce6f9d31e6e168bfd992dbbdcc16dc5fcca5f4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-4.png",
+        "sha256": "0f44122b379c40d2692935032d4066592dc4e6b37f18377bfe73fc39660211e4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-5.png",
+        "sha256": "1e2f52bfddd12ebff12d6e00c75df348239cd2683d161f04d6d621c6e1a8c8eb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-6.png",
+        "sha256": "2c486110ab01fbc4c05aa85152bc6ffa6c83f90ea61f2dedc7b7ba7ccf44ee22",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-7.png",
+        "sha256": "16fb2fe8469f2f8508b32d50a933f1c95edc691e3cf5328c894adecba7ff827e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-8.png",
+        "sha256": "7b7c358e47fa1537867787a6f3ed32b2ddd8bb004dc688dee4b72ae5e5719c35",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-9.png",
+        "sha256": "64255fef203abb2dbbe1c811ab3488e5e616bd27bf9d32632d436d8093192f9c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-10.png",
+        "sha256": "925bea8bd7ca9bb6aa0d00b6bb09bbf4b297e35305767f2ed8241d43932e5b6d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-11.png",
+        "sha256": "7486d3124004bbb9a16e33651bd6d5ac8eee60cef315f9420ad7591593d47764",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-12.png",
+        "sha256": "c26552f42dbea6b4fea01537530b43d8aae168c67135236c49869b45f8a4b4af",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-13.png",
+        "sha256": "b5aba4ec841674d8e40e4e0987adfbc9a806a7332db81fe5170aa219157c2f44",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-14.png",
+        "sha256": "c7fc6c0335e2e0584f8310d87d7c2354bcf60316a9c704384672a93417f7f03a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-15.png",
+        "sha256": "64fb0ac40031f8256b0c544e92efa07f2eb9df7614e116b9cd4805384cbad39c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-16.png",
+        "sha256": "c830037dff488cdb63848a36440ea9d3d6f373696be1975c7c9a33c8c2fd7913",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-17.png",
+        "sha256": "131383e906270c1be033de159acc71e60dadce57596d855b0bb5f7a2dee0f2fc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-18.png",
+        "sha256": "e1e3256e14c6e8b1f0d28234c0520d7d842dce41576b27559fe7c2fb519f285a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-19.png",
+        "sha256": "36580fcc61fe091d6fecb1c7afb34cd25c51cece4db56eb17498212320110388",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-20.png",
+        "sha256": "e471aefc25059e6ef834f62201bfb524617e4a0ee2c0f759aa51cca44c95ed98",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-21.png",
+        "sha256": "4ccef72cb5d111356233435b6f70f5f39464fc70bb784fbaface15018f3fc1d4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-22.png",
+        "sha256": "970679beb28e718565820fa2fe443db55ede9adeb2d9e1db906c8c961c2cf40b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-23.png",
+        "sha256": "adec4c5ab3870ca03eb9cb8658d47f4e3d3b9055a7a3d5a18c90464e20996b66",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-24.png",
+        "sha256": "22d6392794a539ef45fbf360f2c7f45c258f83739afb4adc76bca0d354506387",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-25.png",
+        "sha256": "2257b02793572340a503f1a553e4c9a4b1b880fd55a40507bf4c0e55cc1cb03d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-26.png",
+        "sha256": "97d4398c88b8555c718eeec1a9666c3994ebb45927e5100516729518e5b93d56",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-27.png",
+        "sha256": "1f2d5c711c7791012bc9c050412c27d7fa59e2f3c12d47e5ff5761ced05d04d8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-28.png",
+        "sha256": "b23a8b24a90ec93f942d4bd0ca2e811b6c3eb8ba40f4f1b0db3d81556a4a32b5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-29.png",
+        "sha256": "e2d621e670068d7c6165561d0331d7469593de58901edb4794e37e6ecb76abd8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-30.png",
+        "sha256": "aeee996374ea8c489a7e45a9db57f6aee1e86ae226cc914e00d34a6ebcb6d631",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-31.png",
+        "sha256": "fedcb87c5772c0a146445015b3fb4d4969e529aefdbc7f8bb05104fc3b065edb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-32.png",
+        "sha256": "0432a1140d22e7f9253589eb751fb6aa002f11cc9d4b61b49183bff86654ad46",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-33.png",
+        "sha256": "0007225d89f29b86133302f3004f04c9f0deb7eeda8d11d75c9213dd739e121e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-34.png",
+        "sha256": "aaaa269b8809488875ce836bafc670845914ba7be59c531010eae6178e9c2b42",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-35.png",
+        "sha256": "27f797a281f11ac9d89c9a79cb05c7e39029be42ec262989b36f172d96388d80",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-36.png",
+        "sha256": "1cdd4dfc86d7e5594d2647bcbe9765f296b277e4d856a1d2841fd93a40bcf313",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-37.png",
+        "sha256": "718d33c6cad22297b2f616659a77cad40e24f23e2190083c1951615668049cbd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-38.png",
+        "sha256": "e42352e123bb667fc610d1ab2cfaf0d35a4475c131dd60f03590e08bf8a38809",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-39.png",
+        "sha256": "a13174dc43a0d904ee2a2f77b9131526414cf6f613642574b5519fac0a063a45",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-40.png",
+        "sha256": "6c689782c561d484a92670b0b6f1d8157f85920ae06856c08b2ffaa8039603b0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-41.png",
+        "sha256": "b952a80326d0ff122a21731a87bcaaa4a3265d7ab67924dd66965eb588c5b3a9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-42.png",
+        "sha256": "554023b38f7c3e7aa388191018c75e5548c48fe8aee5e74ea7b2ce5b5213f13e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-43.png",
+        "sha256": "cfc1811c373519240640898a7dd4f6c5d3d5463e0b8642ac7c919c7029f77585",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-44.png",
+        "sha256": "d6168e7781dada74ce5e78e92da1be5c3cbd1386b06fe90b4424de0112b34e3b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-45.png",
+        "sha256": "edf783d258f34bad2026b1d949ea86ff15a82d842b2b332232e90be4fa2e7f3f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-46.png",
+        "sha256": "30371bc4adcccf402e22774fe6fb30cf34abd1951eb789da3204f7bdc9ee9104",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-47.png",
+        "sha256": "9f23ed5650ccd5fae57d4240a1e238d8442ca0c1f538ba5a7e2da318a1ca6388",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-48.png",
+        "sha256": "29e2d30386b8cacf352d6fda21095a6e5e92453c3c32faeeda03eb08b0b22185",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-49.png",
+        "sha256": "23035fbfbf56ba4c8027181cd67013533a542d925b0764beb9605e76d4d60c1e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-50.png",
+        "sha256": "124a40a7587ce74dc486988bc2fe5fa1e96ce28843ac126b1beee532c6e032d8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-51.png",
+        "sha256": "379942aad4fb006f97cca6613de8f2d937895d08cb2bd325e6e58132cd645205",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-52.png",
+        "sha256": "a03d9f138e22217fd07020abbbd23293dfcdaf9527e948729e0d0e47a691bb69",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-53.png",
+        "sha256": "396ef924e5524b4e8bf4155bc3363e840557a91c90caf96657af0783132e2296",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-54.png",
+        "sha256": "383c06e951764a30940064abd1a895e78156131635dba671a36c1c000671e056",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-55.png",
+        "sha256": "b2a3b02493de8ca97ac56114443bf275fb54fd5c117ed90ce1b9d26ae3e89176",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-56.png",
+        "sha256": "78ced20c69af3c32cdfcfa8e7d412e35d87a0d594e94002b8dfb8d07f0f3dd88",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-57.png",
+        "sha256": "82a2ce555fb3f84ac6f9a31d73a2421e4e59674a29c67d130e569f490e42af1f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-58.png",
+        "sha256": "ffb7eafcf7ed3be541ca28416781848c0a7bdab44b360955588392ae6004a632",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-59.png",
+        "sha256": "862a8e405ec2c3848a556eb1b669f3df8106c76f0b28b0d890dbfffc1c9c978d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-60.png",
+        "sha256": "9a6df30f179deb5a0d865d9e21e2fbd59c505fadc3b51f58c1643effda27a78c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-61.png",
+        "sha256": "70dc4feab7db2cdd8adeae6a44ff396178df44ec38076b233d88b4ea586a187e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-62.png",
+        "sha256": "49a44847498bdc8a9a7cf150f3f3c2b3759632ed377dfa2a219a3737f3555c7e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "grass-small-b-63.png",
+        "sha256": "4a0918f58ab22e6d52e6476590e80404edd87015cc85a881172e1ddb802bcfe7",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "jungle-small-a": {
+    "id": "jungle-small-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "e38fdc38-0658-4cdc-8d52-d98823125ea5",
+    "submittedAt": "2026-11-25T18:03:51.053Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-doodad.txt",
+          "text": "Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tiny jungle floor detail, each image a different one of these: two small dragonflies with long turquoise bodies #3fa0a8 and clear pale wings, a small bright green tree frog #5fb04a with orange toes sitting, a clump of tall thin swamp reeds #6f8f3e with two brown cattail heads #6e4a2a, one big flat red jungle flower #c8423a with five round spotted petals lying on the ground. Small and low, about half of the image wide, much smaller than a person."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 48111,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one tiny jungle floor detail, each image a different one of these: two small dragonflies with long turquoise bodies #3fa0a8 and clear pale wings, a small bright green tree frog #5fb04a with orange toes sitting, a clump of tall thin swamp reeds #6f8f3e with two brown cattail heads #6e4a2a, one big flat red jungle flower #c8423a with five round spotted petals lying on the ground. Small and low, about half of the image wide, much smaller than a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, soil disc, grass square, platform, background, badge, character, building, tree, palm, flower pot, person, neon, gold, coins, gem, chest, water."
+    },
+    "at": "2026-11-25T18:06:04.518Z",
+    "usageUsd": 0.08310948114924961,
+    "candidates": [
+      {
+        "file": "jungle-small-a-0.png",
+        "sha256": "50f56e560822817062763efc9dd360303531cf735afe0a606675bddec820aefe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-1.png",
+        "sha256": "6e5295da10b9c464a4974ccccb768e0b57783c0bcbe5b0ee30a3fd49da37fd2a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-2.png",
+        "sha256": "8d68573a422d72cce877fd4e2fd6b82b4fc6f29e81166b9b9768ef3bef459787",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-3.png",
+        "sha256": "b569691d3eec8e181fa6eb823a72b57a36b3396374548a2bdbd7dce024fbdc75",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-4.png",
+        "sha256": "6180009d10456d1d24f29427345691d4a3502abfa4902f8954dab56ce695db43",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-5.png",
+        "sha256": "fdebbdee6a814afe66741efedaf0a8235c1a34c7bfe2cd9dd8d378158a1e4812",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-6.png",
+        "sha256": "d89ccc8be51eb8844e2f5aaa741370adb54e12ecbfc7d842d1cc6ee31eba223b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-7.png",
+        "sha256": "50ad9f973cd927c9d4a9027c59ef950dc4e7cfc7984d73b2041e751cc768f21b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-8.png",
+        "sha256": "dc86019449ab56c777ee8cfde6cb9e05ea139386b9d2bb689dcb8b73d2aeac84",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-9.png",
+        "sha256": "04cec166eceb22a6e7db548788659f764c1b23c81521fa531ecbfe88959cf7da",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-10.png",
+        "sha256": "dc1c991537624c0fee8dc8de10ccb1890e98ef7c33728e4ce83f8a3c37c66f1c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-11.png",
+        "sha256": "4b27b76c5a4297e8ec26c42bf0390f98d198ac5f33167e5d052d983f6fce450d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-12.png",
+        "sha256": "29439dfe2b78507a05c1060716b333f7fdeb998d7450de4f5a3aec49f6852145",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-13.png",
+        "sha256": "a39ccecf8ca5923732f56d328f3b2c7da684d6667b4e46bcd0a045b6ef91e220",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-14.png",
+        "sha256": "5eafb41bf1bebfaba8a54bcf27fc1674906a0b09ab13c66b5097905d1a397e2f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-15.png",
+        "sha256": "6d5829ad9b587a766cb24b4fe897f704b56b94823900e75dc1a6360365cf8765",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-16.png",
+        "sha256": "de9a6def421fbbf207b704359e7e2f6f458dfd4ac478c5ef37821eec909f355d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-17.png",
+        "sha256": "58d389ae89367045b709a3905c8e8c9c2e5bf1ccc93b2f647e6b21809af11769",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-18.png",
+        "sha256": "4d2f1e4515bbb4e61c6d1792da2fcf8109194293e2a22d077ff9b32039e7cdf3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-19.png",
+        "sha256": "39a0e533b401dedf39e94b0de75d7c2995d841531c4eed7494bb92a56c3eedda",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-20.png",
+        "sha256": "17bb6b666b7f56db2eb7f3e331cc0f80d031ee43414b98e20eaa5a6905ff0531",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-21.png",
+        "sha256": "cf9bb682601cfe2539bd7d3454e7495c52821bd07199ca3d7d264139d2687e3a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-22.png",
+        "sha256": "ff60256563d6cfbee1093255cd3adc8c55a0d8a4a9129f5285a71db142ee19e6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-23.png",
+        "sha256": "9bd7e4cc2017d8dcf109fd5c6c975d0ae4406ae0ce2faea11e7d69e7854e7eaf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-24.png",
+        "sha256": "10416350a0bed42ef20251be9d9f16e86e407c1ecdb626de5af1d4bc8f7f8742",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-25.png",
+        "sha256": "9eeb59a942d51144d640139fa94311a917489ba67aecb93c0c001020882ab95a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-26.png",
+        "sha256": "10a6e83db77392a7973a421bf9bd792b35881e1f0827ec2ce5cde71ca79eba0c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-27.png",
+        "sha256": "36b63b9c13f87ed636fe85d214e440fe3fc86795f28a69039b88d11644d7aeaa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-28.png",
+        "sha256": "5e667739c616c54e6d9d93dbf2e48a58ee6754964ef872ef9b246b9353a0410e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-29.png",
+        "sha256": "dbb13c4a933336fe713671cf8263646c5f18a372015fbdd51a628d5d1ed42de7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-30.png",
+        "sha256": "c2fd7df0d76ab08e74a7bc812a623bac83eba5db6f11ba5c64a689465a0c13b6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-31.png",
+        "sha256": "4e996e78b6611ff81c4a3cb3333aa2513bcbedd36500727ccbcceb34bb684ce3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-32.png",
+        "sha256": "09fa59200b7c2cbdc317dc522a31af6ec43e29ff1275939ea66c74bbd01ab05e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-33.png",
+        "sha256": "b156bd7b3d7dacb43d1ea917e0410136c282c6200df1962fa2296e05fd8185aa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-34.png",
+        "sha256": "05cea5ec9335cb29461355709bbd3781dc1e43409d56c4a0bc87f5a459e681f9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-35.png",
+        "sha256": "15acc22cd540baef68d5247b1789ea069bd7081e7be5d8c2f0c9a8d6dacc8912",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-36.png",
+        "sha256": "fd8639a25b3a0613cb5425f41555df7583d138552fc785c61dc6b09340df7ab0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-37.png",
+        "sha256": "60efd4e4de2d4ef93d0cb192072dc017743a98df6e476a10d995fd5f29fedba0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-38.png",
+        "sha256": "b5ad8fce70c862558612c4a91999433ba49c23f6cb6e712c70fb8d916ee9f4f0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-39.png",
+        "sha256": "9664b81a5b79d9a2d163131b7a358025962451adeb2c4b6303eb56329c111fe5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-40.png",
+        "sha256": "03b7efd83d78149ae9ee92158b400351de614d9b70dc45b3d48f13303b5c0680",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-41.png",
+        "sha256": "30d7eca0132b1081a1f54a7b2177227032031059ef9ad75523313529fdfbf801",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-42.png",
+        "sha256": "f7754697b9d7e82b3d0c705f2783346f4c434444190c15da9755160e9faf3d71",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-43.png",
+        "sha256": "0ea3cf7a683e251cf1bb84bfb1d7102a0eb28781656c21c78168068a73803aae",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-44.png",
+        "sha256": "76802cdd866cbcbbf6aadc90eab518cb088b7b876b7a4105c916c576c72bb244",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-45.png",
+        "sha256": "18c1fb37a21997f9a193528ad63f340f0ec42133de35d7e2f69c6ef71d8802a4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-46.png",
+        "sha256": "2255bd42f18c9bdacb04467aed9e2bc881256a3f84723725808b003a10dad29f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-47.png",
+        "sha256": "a6f3ca177b5b3c0f201f00f5640db4fcfe2c03a645f671174afebca1a7e1f902",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-48.png",
+        "sha256": "ed2c76513b7409e863df749e13d517445670b76c166a52092bb533768e218ea8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-49.png",
+        "sha256": "6512faf68bd2ee1524f297c8d2166a4887b1b970ed680354303b2c630e76a20e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-50.png",
+        "sha256": "ad1c004fbb988d9ed7f9e8337b22a7eb976e843ec748fa7b314fe0bc9ad079ab",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-51.png",
+        "sha256": "84e001dbeef2153363ec2a4e018f07d76d8e0d00c34fd8ccc805ee7b09f0d1f0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-52.png",
+        "sha256": "38922ddcc986457d561169b6f7943e61dc18685b88c43cbea525b698282cad39",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-53.png",
+        "sha256": "22f45831dd4db3ca25ea888944289af23bf1c546e9318598cddb7a2cf67653c0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-54.png",
+        "sha256": "88ec49b5f0f6f82c5a820c00115a5f567824f28c03eeb9e4ccc2f53b85d5ee6a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-55.png",
+        "sha256": "f76e44169071949362a7729a1da601b3aef4ddf7bbccec57498e3f1483570e14",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-56.png",
+        "sha256": "6fbbc6d6fd525efa4e4eebce7c1ec90a2cd0311382ba4c0cf47b59356dcf966a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-57.png",
+        "sha256": "a25ba2f6661479bf4dce09eae20fe4ba8859deebcfb7603534d2b5290ea599fa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-58.png",
+        "sha256": "c719b96c3a009ee5b38b6879c9237774c9a917648a3506845c3f2c7db33c405e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-59.png",
+        "sha256": "175afff0a3f5e46cfef22d5288deda214ada6b89d4539aa33988c529e937335d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-60.png",
+        "sha256": "5d9b1d51a5ca4156653561f73dc5d8f740c228fc839334ecf11a59d7f7fb0c44",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-61.png",
+        "sha256": "a7049e86b29ac1b3189c2d1aff70fa3b48a1e07bf993244dc758f2a1198c1af1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-62.png",
+        "sha256": "8160ff2f6cbdc0205d52ee8ca8a662eeb7a3a7df7f447ac6958f4445c4ce2728",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "jungle-small-a-63.png",
+        "sha256": "b9fc03dcae5f6b2763fd6bd78e47109b25628daefa7a79a90d13bb20a73bb767",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "steppe-small-a": {
+    "id": "steppe-small-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5c9869be-da00-48d3-a7bf-2f3a33f5cea6",
+    "submittedAt": "2026-11-25T18:06:04.654Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-doodad.txt",
+          "text": "Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tiny dry steppe detail, each image a different one of these: a few tall prickly thistles with purple flower heads #8a5aa8 on grey-green stems #8a9a5a, a black crow #2c2a30 standing on the ground, a small cairn of four flat stacked grey stones #9a9488, an old wooden cart wheel #8a6a3c lying flat and half sunk in the earth. Small and low, about half of the image wide, much smaller than a person."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 48121,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one tiny dry steppe detail, each image a different one of these: a few tall prickly thistles with purple flower heads #8a5aa8 on grey-green stems #8a9a5a, a black crow #2c2a30 standing on the ground, a small cairn of four flat stacked grey stones #9a9488, an old wooden cart wheel #8a6a3c lying flat and half sunk in the earth. Small and low, about half of the image wide, much smaller than a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, soil disc, grass square, platform, background, badge, character, building, tree, cactus, skull, person, neon, gold, coins, gem, chest, lush green."
+    },
+    "at": "2026-11-25T18:08:03.434Z",
+    "usageUsd": 0.08308172668351067,
+    "candidates": [
+      {
+        "file": "steppe-small-a-0.png",
+        "sha256": "307f3531af3b4e26c7b656182fb0ca0e1210222a7593d9fba2f68a072fe0abe7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-1.png",
+        "sha256": "6b972ca77831ea403144c6e223d7e2477e86ab6785b81437c9e6afe3941a857f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-2.png",
+        "sha256": "684df9d636399fef9be4e7386f78f51bcc21cb9b2146e387dd0d86e708f95e2d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-3.png",
+        "sha256": "ecfb240e8588775e459bb45482e2f3bcee20bc8a1f5d20b7ff6853eb27849258",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-4.png",
+        "sha256": "6d7b075c5e76d10438e13e10593f8f421238325f15f7d5e34e78d7e65bcbc631",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-5.png",
+        "sha256": "b245a93060f8ca18c92e61bf27e503890a611cabcc2c8ec5627ee2be1bf5d621",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-6.png",
+        "sha256": "03cbff8074d985091c8b0dde53791b5f3835f04d3b1cd5daec236332e6d7e437",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-7.png",
+        "sha256": "eabda95c513f576c309c96388bbfcb092ab843ff3df8fa04b8d562af39eb3f14",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-8.png",
+        "sha256": "366d7ced733450b68fb72518d463c7761c6f5515672d548841286178a805c9f8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-9.png",
+        "sha256": "8ccea31ae4a813368419a25a17db5d5d27645fbac6f0d6032d83264bbcea749b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-10.png",
+        "sha256": "4200367581259798492641b0c5eb7b7487028df6f254ee817e2b6975b6ac5d91",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-11.png",
+        "sha256": "1913620547c96d0e961edff03160a1ff80a39244d4271977a790e6c2c6e5ade4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-12.png",
+        "sha256": "dd2ae16e48eb52e08216fad9bc430971bb561a19dbebaef2058da5f8a14f6bc6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-13.png",
+        "sha256": "d4eeb2123eab78fcc1a65b19cabf9ece0cd85271a98976465e5db9a26ae10cbc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-14.png",
+        "sha256": "0aaf5800b03b3bdb83e2a7b68c2986b7ac49370462d8c1ee31d5936f1f2147b7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-15.png",
+        "sha256": "cb5ae00eea57ded9296d3bdd8af80936f048c8c918bedc03e18c914e20c557eb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-16.png",
+        "sha256": "2bc62e1f680cc70c98f8430017796cbbd6597fe8ae20c8faf5a8271f29cc7b01",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-17.png",
+        "sha256": "80b0d5d23b77902796442a6303ceace398a79b6ae355be37dda6f249fd64e6bc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-18.png",
+        "sha256": "c893de67be946df93e276c751ce3cd60f7033e46f1e57e65501e4a63a0f86321",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-19.png",
+        "sha256": "1338c539d4c5f03f48996410b3dffbfa428fd01e92b72e611eb314d52b6f438d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-20.png",
+        "sha256": "74662100191793dfc92907e14129fd20506c8cf83086ecb5941fa28c1fe92ef4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-21.png",
+        "sha256": "2afb39607d93ccf1ed5d5c90b9d29581fffdc52ff770c78e9965a63da75ba668",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-22.png",
+        "sha256": "83fa4db63767e5b16fd9fecffe917f79af132b3187398f0003a9e0afff2cc10a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-23.png",
+        "sha256": "a234bc78766a17fdf55ef763dbf52be163fb99f8b69b5828c812dc5cfa30d86c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-24.png",
+        "sha256": "ee10701c5e1ad97debe0fe3e85e16aafcba53021cc16ea8be16d39197d0f12ec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-25.png",
+        "sha256": "b86d5f2b9c0a7749494322dc37f3f692cceb059ee18ac3deb0de2768ec2b34f7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-26.png",
+        "sha256": "54519f2fdfb602f4d834b4a1255bbabb64f487b8b1a76483af1e8c92fc504679",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-27.png",
+        "sha256": "6f50a9e190fb03c8b1c4b32aa8c738d1cc68151709527207e4b9e3d38f17a6c8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-28.png",
+        "sha256": "ad62c7fae857e4e34bd226fef0e65f1c8a12b17b4bc7fd0730fd3e19b05148ec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-29.png",
+        "sha256": "1a209305f1226d8a46897caf22c98880534f2004c153cba1db6d817bad821fc1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-30.png",
+        "sha256": "fe7db6361089a63551ef4d1679653c1d6408c25817fe2132d190d4e61f439152",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-31.png",
+        "sha256": "a754b7cbddfd164cf4aff47f3c593865256898f6ae86095feb29388033bddba1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-32.png",
+        "sha256": "ec8a5d9e478504ce8f1d402fec8eb20f12bdb9299af828b4e0d174ce298b0aca",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-33.png",
+        "sha256": "e52d7452f5f65fa044594d9f34ca955991e85cfcc81c9c02549a9f31318c01f4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-34.png",
+        "sha256": "1cd888f57523adf3d96a97ebb6ac293d88b95b4928ecffde7a1cc64dee55772e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-35.png",
+        "sha256": "77a69f1c289dd87f4b998a677170dcdad99562fdad42bffefb4e98f584200001",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-36.png",
+        "sha256": "0a5650e079fbdebb037cf433a2b664c0e2a2ad904e3e8e604bbd9d2e35ec3c1f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-37.png",
+        "sha256": "0e0f4da67a8dff1fe33c9e93d97c55f4e03b9772a5d36d59fe60ddf58fe89431",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-38.png",
+        "sha256": "c52ed3ae1edcacee270a6aa753f863c838ae1b289fc560be6e694899ec458e36",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-39.png",
+        "sha256": "e7f21e53c46d25081ab94abd4f04678b26b1d32c7fadcf3476ecc8c3f5d1c231",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-40.png",
+        "sha256": "23ad24ac48080af45e071059cd92891e1fcec3cd2c61104e349e1f986ad68d94",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-41.png",
+        "sha256": "474bebb496de10c7d0a84cbde3811994df96ae41b050ccef045b906f89e674f9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-42.png",
+        "sha256": "a519ef7f0437162d7395ab1fa2d34372976d809eb6c373e86be219fb12b4d055",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-43.png",
+        "sha256": "c6e9e679d24345778b72ab5603880c98eed9bdb080f7d6fe774f79d13e795418",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-44.png",
+        "sha256": "ee5b6c73fd0a61b8d7302c8a15ddf4b4d11efe10f74b9ccaf1ea525b1ae99f10",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-45.png",
+        "sha256": "bd1a3c9c583f4d37bb2be11b13265f9f35638f3baec07df48505dede0bfaf8d5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-46.png",
+        "sha256": "a8aba175bb32cebdec05903a111ce8bf0cbb2f650d3aaaede8214a26655ac7b3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-47.png",
+        "sha256": "548544a1b0ff2969311472618a809fbec1f288e068d48452a172eb4fbccf51a3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-48.png",
+        "sha256": "da3004586f83495473d43ee81f099b8a45f94998290d413e225f56342988946f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-49.png",
+        "sha256": "a706812744b9b6e3fa44933b9ad917e4b47fcb62dc3687e969524194c92cbb80",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-50.png",
+        "sha256": "381cd933761c546834c9ef692554b0e54b7444f1e803ea824db6842d9b61bd45",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-51.png",
+        "sha256": "0a913372c9b75008ee2e6e48df29d43d846144faa14c775a0172428050434112",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-52.png",
+        "sha256": "647ba4aef766dd0749f4e59badb525d75312b0167833936488ed30e3eb59bd26",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-53.png",
+        "sha256": "bf9bc1ac3a96d77453d317052feb693ff01c09daf1828bcef754c8c9b7e220df",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-54.png",
+        "sha256": "4d17c47a12c6fa2722ce8bb2362227b9ea0153117af461ff0981ee024177b882",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-55.png",
+        "sha256": "4f6c7390395473d44fc253bcd2e2e3a0aa20744d33c6f1ad436f7d7ba2091757",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-56.png",
+        "sha256": "68a4ce36520d02b949be0715edf4448b933c4341977156ae1403a54c4aa33aff",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-57.png",
+        "sha256": "082d0f9e6d921a8ddfe61570d99c7436a7ae28ed3be1836be8c69e5efe9ceb6e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-58.png",
+        "sha256": "3b44a6ee0af9f9b5d926332a5a0b00d67b078a49f1ea684a33d25b995f8ea6cf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-59.png",
+        "sha256": "fe63a990feac96ec77be8efd6be13d782e9652ba57bb94e163ca8d99abbd3e15",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-60.png",
+        "sha256": "a396b9a0f5d03ede96f64eacc8418dcf1bcfadc2d20aef10f472d1a320f02486",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-61.png",
+        "sha256": "8573d3beca31b93a40c79c6d0d4d3af3d53d09491bf0dc6f5d8983ed2f991a4b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-62.png",
+        "sha256": "47977b8a8083962c902b626e847e9a4439c5eb83fdf09d063fdfa8afc0638e13",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "steppe-small-a-63.png",
+        "sha256": "9532a5ae4b5a6d80317fe150d48454530800d48ccbfcea5c55e28ceb689808e4",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "badlands-small-a": {
+    "id": "badlands-small-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1ab38124-294b-4448-82be-b80832e89517",
+    "submittedAt": "2026-11-25T18:08:03.551Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-doodad.txt",
+          "text": "Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tiny red desert detail, each image a different one of these: a small orange lizard #d9803a with a long curled tail basking, a low spiky agave plant with thick blue-green leaves #6f9a8a, a few broken pieces of a red clay pot #b5603a lying on the ground, a tiny sand-coloured scorpion #c9a46a with its tail curled up. Small and low, about half of the image wide, much smaller than a person."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 48131,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one tiny red desert detail, each image a different one of these: a small orange lizard #d9803a with a long curled tail basking, a low spiky agave plant with thick blue-green leaves #6f9a8a, a few broken pieces of a red clay pot #b5603a lying on the ground, a tiny sand-coloured scorpion #c9a46a with its tail curled up. Small and low, about half of the image wide, much smaller than a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, soil disc, grass square, platform, background, badge, character, building, tree, cactus, skull, person, neon, gold, coins, gem, chest, green grass."
+    },
+    "at": "2026-11-25T18:10:08.139Z",
+    "usageUsd": 0.0816932655705346,
+    "candidates": [
+      {
+        "file": "badlands-small-a-0.png",
+        "sha256": "8269b3c10a0b121347afca57fe2367f0c562d7bc2328fee261fcbbc9afae7363",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-1.png",
+        "sha256": "71e02ac8b3eefd62a35e9408cb6d4e32eb0ed6f251e5069dad6e822b2a35890e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-2.png",
+        "sha256": "3e73f337ebd75ebd584395032c4781b0b7ecf1ffbd48cf1b350bda8bcd7b83b1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-3.png",
+        "sha256": "53438ceddd9b3763e02f33137cc26645e7f14a486060b6127350f9333d185abe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-4.png",
+        "sha256": "e10b0329d3d14651d98a50ede5d244d8ae94e8760aca64edc13ee5d8b92b2892",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-5.png",
+        "sha256": "1bea4b862bcb064511c500a9c7b2116bd9e049e5715cbe81f52e110b8e58d55e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-6.png",
+        "sha256": "a2daf28cd5535b6f48ef836168e18da648f8e005ea71597d596f0f34f4d1c5cc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-7.png",
+        "sha256": "5b98127156620a42345f48382f8f74ea46b13faab591c5f8d1bd8ffa02c02eaa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-8.png",
+        "sha256": "bf505bbffc9f9f8e0ff3f45b67cee6939052f658c69b2856df528b5cfc821565",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-9.png",
+        "sha256": "8043610b1b89b5a6c6d0c88b37b00fd912fecb5c3ca7e59fd1a11c07db6e43e7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-10.png",
+        "sha256": "a519e60ddb6b9de47e988ae595af2d9784d4ca8fe932193e5375dcc82146201e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-11.png",
+        "sha256": "132c9dc183f9afec646272b63cbf4881720943a75a9af113b021531ed445de30",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-12.png",
+        "sha256": "57eeb75ae55db37198acb84213cac8c447646620c0cd35858fc41bdb5d5a185d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-13.png",
+        "sha256": "a8f96f29cdef2ad907942b8f18a54431eb547dc11d0e0a72b405cd2bfa835168",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-14.png",
+        "sha256": "71d49bbe9bbe7282cd6903dccc4b8de62a6a88980107a96d1accaa44479669c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-15.png",
+        "sha256": "9e01971b538473259d76924a9803589244cede94a65eba1204f943cbe1a4a459",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-16.png",
+        "sha256": "89fa2b590b35534db0716713cb5189be504b041906bce2ca611fdb644cf6401c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-17.png",
+        "sha256": "12678b06c9148a9076b43d46b3d63e80a5679a857988bd8b37635a83ecbb8e5f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-18.png",
+        "sha256": "da6484f99b046e8f831bbd5097220c7648814a94b5754096e013de004589e7b6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-19.png",
+        "sha256": "275373c339efdb28149fce7cc752a8f31a60ea2fa6643ea4d456aef64c5fdadc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-20.png",
+        "sha256": "380d7fd85afcd057cf8708ab050d76df9b8f852e4478b3af3101853a665fc6bd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-21.png",
+        "sha256": "0bda34437dbda66cc422d857e1e8e8086bfda4509b0a8ac727b887710622bfae",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-22.png",
+        "sha256": "3741be13b9278847297c1f44117486f4626e12dda4682b466a4c220a70384d0e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-23.png",
+        "sha256": "744e29d0df364fa18436b0023b83ce79efae6e8132c52b168104c95e4c88dabc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-24.png",
+        "sha256": "a4319264193e175d98b7da6b327d5c0a59701457d2e646012a4feac1f5f1c62a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-25.png",
+        "sha256": "5eb206efb6f0eba2806f73b92fa7c8d258b6fffdd6cdf84214e25e48307f9bd0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-26.png",
+        "sha256": "e8dd8d77cbe04bb9a5d369986140ab7c4b91bc80a5030b0c600ec953a9d8c1df",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-27.png",
+        "sha256": "74042a6bea68d5f0db51c0974879ec5da3134ff880f24adb4f1888c8eb0756c0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-28.png",
+        "sha256": "2ced1c5357d7e982f58449fa1d2c5c4c7d6fc4fcd58fa1fbf90f6d98ebc9ac48",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-29.png",
+        "sha256": "e177799cec6b4eca664a767dbad427a14701cf3bd5d281677f5a00c017017044",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-30.png",
+        "sha256": "82e4f9fad7f87d64b360eb400fb712f4b2b041ee5c09067979bf1be056cf5c93",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-31.png",
+        "sha256": "345440571c3e8dc4d37d63bf1b907e38ebe07f221502c148dbad75405e5ef867",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-32.png",
+        "sha256": "947f5a39d9088920dfd877d4c7ee42dc99c5c9a988a0106b2293195511424894",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-33.png",
+        "sha256": "d1cebe3323ad6af5ba6cddbe380f0f56b3b66131baf5c7a67243a8131a3fdcd3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-34.png",
+        "sha256": "07f379e8aff4bc50cb4dbd1c8a1a19df87402979565fab4ed2141d6b239b3294",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-35.png",
+        "sha256": "ba49955d59e0333e00d4e63678a4c3795eac464be618a2a222f768441af8ea2e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-36.png",
+        "sha256": "4aead70cd2bb60bec021a4043cfa34bab2b152c1efb6ee2784c0494705239640",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-37.png",
+        "sha256": "e4cdc00fda61031bfb75fcdc9145506f522eb9046ace42e8c070b1c457653b3b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-38.png",
+        "sha256": "f0742fc017074f5d25bc65f9c7b5253564a43c9e4576b1f4d2681ed00b946de0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-39.png",
+        "sha256": "b3bf9cc68cf42a9ccbd23a5a581b066562f853f59cae6f70428f26f9b0ce9829",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-40.png",
+        "sha256": "d0e61e34496e1aae4a25be5f4a363eae60a379c3e8ee74a5848f9f1b913f73cc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-41.png",
+        "sha256": "1f9c784401ef18613dfed48c93ec37def20775e99ff91f338ecb7347f5a90583",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-42.png",
+        "sha256": "c9f7b8ae1f6a9956f9c722b16a3f272d6d64e687e51bdda29c73c39b0b1a44f2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-43.png",
+        "sha256": "82ea170dca53a3af258c7399cd897969a92762884f0abdc19564ad0aea055915",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-44.png",
+        "sha256": "f883352e54e25eeeef911399b223c1f697a0036c02c86560cde9e3cfbc187a8b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-45.png",
+        "sha256": "86b25bd7c4a86f8679e8746e141806d98bc603dceaac7a0679c281a67d90f021",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-46.png",
+        "sha256": "867b825e0ced9c45fd24f8e4079a00faeacd99051b0fc202d1ed86ca46004f44",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-47.png",
+        "sha256": "edbd2aff6694b689f0cd7dd9797a8927513421ffee6db2233c2eb8870309d5a6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-48.png",
+        "sha256": "ca851fc67f5a4b7e0ee29012469c848032d3dfadc7c1065aa24f98d1222c4f31",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-49.png",
+        "sha256": "182f7cf16f582c2883a995e28a26c4929ab47f8a14be4f0d3fab6151b894e560",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-50.png",
+        "sha256": "ed26f1ec5ba45e4dfb9d302b67f22d460b852d77e6f6be945564e44dc5ef2a46",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-51.png",
+        "sha256": "833605495c07c155292a8ad177099920e6dd88661a6f9623f2b7396973337ec9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-52.png",
+        "sha256": "b6f32331554340494c190dd6f99bab82b5bc805c222b2dd19bc29d7d980c5aaf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-53.png",
+        "sha256": "5457ff10f8336027aaca84cd7b6b81cb4cba5750c6f175d2f4b9b31963fb5529",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-54.png",
+        "sha256": "1f05689ced6f432c0b791f06e3e20fb2087bc1f7217ef6987be802c857d4648c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-55.png",
+        "sha256": "e2fb7b1d16afd92b8d2e62aea61dbb93e81d3c71a025687b1e9176a68a2e5bf9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-56.png",
+        "sha256": "f67eb98e76e2e75a0bdd17a13636572efe41df5e8a239564797d41ec48c4761c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-57.png",
+        "sha256": "4b4fe892b9b52c9745865241ae6525712d32df6c49349fc44810227e8e384b66",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-58.png",
+        "sha256": "72a74d52b1b376664b2401255b6f29649027c61ac51d06b636349fe68e594505",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-59.png",
+        "sha256": "dc7a49a5e4350f6fc1f102f46f2fe7e1f882a636e0f194b72dbee75e309891ae",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-60.png",
+        "sha256": "37c4e7ce9b529b3f65fb03f5e5de61d925784e18f18c8cfae66a45631755aeb3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-61.png",
+        "sha256": "7a2253165f87a4840cf876b920e457848f1dc2d3861bb2a4f00edc286a5f8505",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-62.png",
+        "sha256": "b47286baafd3107a5c24fdce9d271008359fd0e80b9cfcda5bf82eaedd6f947d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "badlands-small-a-63.png",
+        "sha256": "afe7ce883265f24ef9f6174fc58775f8fb7a177e3ef77db32d3372c75cbb668e",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "wasteland-small-a": {
+    "id": "wasteland-small-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b453d0c8-974a-435d-92ea-2772bce30fd9",
+    "submittedAt": "2026-11-25T18:10:08.694Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-doodad.txt",
+          "text": "Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tiny detail of a grey ash wasteland, each image a different one of these: a black raven #2c2a30 standing on the ground, an old rusty dented iron helmet #8a5a3a lying on its side, a small crooked wooden grave marker plank #7a6a5a stuck in the ground, a clump of dry black thorny dead weeds #3a3430. Small and low, about half of the image wide, much smaller than a person."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 48141,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one tiny detail of a grey ash wasteland, each image a different one of these: a black raven #2c2a30 standing on the ground, an old rusty dented iron helmet #8a5a3a lying on its side, a small crooked wooden grave marker plank #7a6a5a stuck in the ground, a clump of dry black thorny dead weeds #3a3430. Small and low, about half of the image wide, much smaller than a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, soil disc, grass square, platform, background, badge, character, building, tree, cross, skull, person, neon, gold, coins, gem, chest, glow, fire, green."
+    },
+    "at": "2026-11-25T18:12:22.304Z",
+    "usageUsd": 0.08315864963001675,
+    "candidates": [
+      {
+        "file": "wasteland-small-a-0.png",
+        "sha256": "302872fc69e77e384a2df847df03020f918fd79e0cc8d898950053b3b0cc298a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-1.png",
+        "sha256": "f12ae5388ea649d2e0db40a1bbdcfa8bf0e3a43df4225e361de1f422814184c8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-2.png",
+        "sha256": "5ebe4ba6b368b494ee47c5983b1fe833fcc9fe34fd22286149479186430674eb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-3.png",
+        "sha256": "cf31b737fe7bb9d0fd6d80c5b2c5222ed1eab3986fceef872958fb544052d5e9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-4.png",
+        "sha256": "07c2046553a3c54ce8fa00523bee23ace6bec2c598e53bfd731498f3bbbccb8e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-5.png",
+        "sha256": "36d8c817656b59f7fcf8a9264382ff41d4632e5866519c311aaff241aeedfa1a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-6.png",
+        "sha256": "4e426f17337bb459c20303df1a88767862fb09d45b082cb3a287a3ec3a169b95",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-7.png",
+        "sha256": "333c3e11aab4d64b91d843c7576ad36470e3a2d43a25ef7c2ff91c4a58463cd9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-8.png",
+        "sha256": "3f7a3fe748540af61a7cc4ae2fa7fd19d160f1c2e968d455392936e78867fa0f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-9.png",
+        "sha256": "5838de9ef9d16701df2ee099d05d909d5e73b1de964893b9c914ef619d33e19c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-10.png",
+        "sha256": "f48e3293e7c2c8526996eee8c885273688fd6be23bda16421e0bfef6cfb17830",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-11.png",
+        "sha256": "6bdf3f3a2523c1b1f26725f3a0abff704258a0a31ee75e0af636160d684044b1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-12.png",
+        "sha256": "47ff1e2d8ab0f189a07b64ff724457c47f2f9f71101397649be563404deeeced",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-13.png",
+        "sha256": "5651228a458328b784708f58bfb7bb4b7640d892e932c31c85bb215ea598ba08",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-14.png",
+        "sha256": "c998a1cf1c9500eb1737fac2ed42603e349c1d9a0a84d07c0c2c86b1f26e2aa9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-15.png",
+        "sha256": "1e1687ef07df9e7ba5a1035c977af73648036bb097a6db02a8f7a95a6c7ef3d3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-16.png",
+        "sha256": "39115cb221fac6f7197e96055d5c7be361e55eb47e557cccc2ec4a05b4be2da4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-17.png",
+        "sha256": "bb6762c365baa43154ccc6d708e640b3a4b4b3b21c99295445badef6a9dffd38",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-18.png",
+        "sha256": "5988f7a9626fa1a13b8cc1979d642f39ed1b10b9e6fc45c295fc473074c4be7d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-19.png",
+        "sha256": "4c4483aeefa0f8de4546b62306ac30be7098603be7e6651dad07736e32363fde",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-20.png",
+        "sha256": "f020828d5da27d57a380d68e7345aaf4173e88bd4cb30c1b989e6f6b727f955b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-21.png",
+        "sha256": "6d577187fb1724245aa7f61f1d31e25e97c8501a2025c265b382844938545dfb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-22.png",
+        "sha256": "ea86eca5e2fa02f4b6d3ac49decd86a50b9ae4505ce4415357ce375762d58b0d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-23.png",
+        "sha256": "d85ebd2568766035966d3a63a2d30196ff6c3ec02f7e671ac7ca2b3917e80b17",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-24.png",
+        "sha256": "0c36c736079a9c57e833350a3529ceb7bb44bf31d9d816eedc374f9b5b1617d9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-25.png",
+        "sha256": "5ebfdb0e154ab53a99cecefdd55425c5d724232c9ebde20e7c19d11c6a5bddbb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-26.png",
+        "sha256": "725826380663a2ad01f372fd420ef565e4b4f4c3c68249e2fc003c68807b1b4e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-27.png",
+        "sha256": "7ae1d67d732ab2f3dc153330409216005de6372cbb5a2c9b22b43b0e8ca7415b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-28.png",
+        "sha256": "08dbf4c2fe703cddd993b2e72e0d1b36adf6f5cb65d326d85cbaeeb6030bfcbe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-29.png",
+        "sha256": "fd7aca1dde67600fe60ea323b2ab51a3ea3d58f97b82651398ded3c0d67ddec6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-30.png",
+        "sha256": "86a7b46f2e1985705c88e5ee8b68c4aa28b6d33fa19512b6c762ce7fe91bf5b0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-31.png",
+        "sha256": "9d8f7c1fc23dd28dc34f0a827693ce7d11170b117f7051f592f6534c0cd9690f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-32.png",
+        "sha256": "58da34a0e2f1a557f067b2d862402dc82302fe7044e2e4042aab5657a26847f2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-33.png",
+        "sha256": "e3f2f8f94b98ba6ee8e0187334355a7ada26ae8f8787c177312c525a7674f33c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-34.png",
+        "sha256": "77304d0e7fb8e28417ffcb6b40ab52c39b99b1e4e448fe1277dba944d46dc500",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-35.png",
+        "sha256": "d6104508a142161841d858260fa182f037d5fafa0488cea6009681f1af50ed1b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-36.png",
+        "sha256": "f542e1fae4d5a1f23e16484a6fbcd85bb98f8577cd73c145a4c683faa313dec3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-37.png",
+        "sha256": "6313363a51d66af29beb2ed71550ee07994425000da7b0fd5a2ff215b37c5639",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-38.png",
+        "sha256": "d729f06fd1d89418a3ba1620cedfd8afc7e2dafd1f92a3083081454e53851ac1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-39.png",
+        "sha256": "b4f38a3b5d3d521ad19eab3d7409e0178496829b22fc7b780c50232c869fbe6d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-40.png",
+        "sha256": "f5caca873d53a651430afc9e9ff835bf78e2135b1b3c44e535d8d5bd8072d046",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-41.png",
+        "sha256": "d6d2699252215c7c5533d6dd40afdf7fd0c4dbaf4ede8f90b5d7a2e46762b556",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-42.png",
+        "sha256": "ecc6f95c680232f1d1203f3800bdb42d228b83bcf114e4d218b94b4653c5c264",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-43.png",
+        "sha256": "99bcfb163d2d476749a5322d4ae185ea45807d4f2106b7e07522056ca19e2147",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-44.png",
+        "sha256": "04a2ef29cef608c1af42034d5398344a65e1b3ae5fae25d15fa730f294f91c8d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-45.png",
+        "sha256": "433c6c01a10f99e61a7adf339627804effeac3d85f51e377757ef2d019c3bff2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-46.png",
+        "sha256": "da1c844b81cae1afa0b5afbd548d352bfce32570bac6a701ecf0132843ce5416",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-47.png",
+        "sha256": "3b0497107dcee3b83ab0614919663593ff596ae58d2d5d440425d9307c387563",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-48.png",
+        "sha256": "aefab3dd77870bbf443cbb25f74aae922aba2733e971e3026a011fe664c8f65d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-49.png",
+        "sha256": "4d9a13cf668871e707172403f920a2e074a62206c88b10fb02db6d3bbc75c662",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-50.png",
+        "sha256": "73947a9c0abdd4ab16add5482b59841af467af249a102d29daa5c243d0c1019c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-51.png",
+        "sha256": "288f203082fff799aaf462749a92912eb8b4fd06c912f8b984eba9ae34694f86",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-52.png",
+        "sha256": "16dcd36061326e687bc18fc812829f21bc958c815771bab37593854257606d1e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-53.png",
+        "sha256": "d5e39fafed0b5c1fc7a3a8df8045173929b794d3711f9ccc231342a35a7b5f47",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-54.png",
+        "sha256": "61158a088dc7eba43cfc65d008c90b37024e7a01a3fd2d179ba32522428cbdc7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-55.png",
+        "sha256": "83153eab444f70ac60945a13c44c12e33aa262dbd8bb3d56f936c6aec898b96f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-56.png",
+        "sha256": "c84590459f6bb56ecfa10594b6feadb9f00998698aea9d63f0aaac7f4d202083",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-57.png",
+        "sha256": "2a6c1b585f95c37e82a1f9d5f566bed05e4ba6ca9f6f067b80ffb674883b7e80",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-58.png",
+        "sha256": "0206b6b08c012140ed699dbf042a0ece60758f52ef2f1d56603672299eb512b4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-59.png",
+        "sha256": "cb928f8919d253703470af7592f33183117890ba66071d38c600d8cc57d1dc3c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-60.png",
+        "sha256": "3971316bd363d8c31b03349dc24e6486aa0b33d7623ee675458d2dd54b36ec87",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-61.png",
+        "sha256": "1cf65c43db4f25f341fe87be2ebe9d24fccbd5e8dbafe5a7f07fa344a045d77f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-62.png",
+        "sha256": "0528a4bba18dff40de8e4e0480efc634c54e78ef5baa0e9186edf718a26b7c05",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-a-63.png",
+        "sha256": "c2f58f320a4feb2394242300a4f0319735390b67f2fccf2301c81eb38b87d0c9",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "props-1x1-b": {
+    "id": "props-1x1-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "2a9ad651-674f-4ea3-b451-1734ea0037c5",
+    "submittedAt": "2026-11-25T18:12:23.422Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big blocking prop that fills one map cell, each image a different one of these: a giant mushroom with a thick pale stem #e4dccb and a big round red cap #c0503a with white spots, a big tangled thornbush of dark brambles #4e3a2a with long thorns, a gnarled leafless dead tree, twisted dark grey trunk #5c5650, a tall lumpy termite mound of orange-brown earth #b5703a with a few holes. About three quarters of the image wide and about three quarters of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 48202,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one big blocking prop that fills one map cell, each image a different one of these: a giant mushroom with a thick pale stem #e4dccb and a big round red cap #c0503a with white spots, a big tangled thornbush of dark brambles #4e3a2a with long thorns, a gnarled leafless dead tree, twisted dark grey trunk #5c5650, a tall lumpy termite mound of orange-brown earth #b5703a with a few holes. About three quarters of the image wide and about three quarters of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, flag, banner, fence, road, door."
+    },
+    "at": "2026-11-25T18:14:14.634Z",
+    "usageUsd": 0.08194499633047315,
+    "candidates": [
+      {
+        "file": "props-1x1-b-0.png",
+        "sha256": "09eabc6b4f232c5de595856a8bfb955cafd88ffe89f5918003146bce6e2d37b1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-1.png",
+        "sha256": "42aa6be225a328bee9a8c1f410cf5f19aab792a2e848210b2994bebaef1c35aa",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-2.png",
+        "sha256": "b772b857cbc7499fa546339857bafc7aabf52dae746068f8aea7d6c8b0ea3f22",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-3.png",
+        "sha256": "9aecc7801797dad02dd14a0cf2de5ef7203f262236fb650b242f61ec420dae6a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-4.png",
+        "sha256": "71e4e645b12cc9fe3a0e98367914007733fd7ea22730513e565956ee19785b81",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-5.png",
+        "sha256": "e016f3c03c1751e9854e0d59d343c25698002dbec0f8aa44e9ebe9e13a15dee8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-6.png",
+        "sha256": "de8663b2b8778cc59ae4313fafac8598afcf0c65439d3f0da2eae20a52bac393",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-7.png",
+        "sha256": "ec5cc7370e9f5a886fb76bc06cc313d7c64feea20c46f40377c62aedee1583b0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-8.png",
+        "sha256": "633239f41ab89ad67ab15fa29edc0d2b34d5143203a10fc5ed3ae108b27dd8d3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-9.png",
+        "sha256": "e3fd30f3bbb2d7a14e5e3b7aa6b2b94ed6bff4ff4e143b84795b2e1b0aa34292",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-10.png",
+        "sha256": "0a00fe5042a3d1cc1b1e0d65b5ef9030f598611ee4ded1843c740ead7686c341",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-11.png",
+        "sha256": "5bcd54b1c2ceb0a1cd352cb95d525ea805beba381e852bb38abd9fda52cb6d06",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-12.png",
+        "sha256": "76446b1f06480ecb77b4090f94185df38e27f8f5c47e89799455695d396e73a7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-13.png",
+        "sha256": "ccd29939ff4c2f6026487f0ef5a3e9036c6e2437c2c0586cf9b87ebc6033f5a2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-14.png",
+        "sha256": "a5d3c64bd17abd81804dc20088345d1495dc6f30111318853b09759206707f00",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-b-15.png",
+        "sha256": "2c778457dc0884f87f6f2ad50ab727770920eab3b47a46a97f8538d06bc3920d",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "props-1x1-c": {
+    "id": "props-1x1-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "fc09648b-eeab-42df-9984-9d45339c70c2",
+    "submittedAt": "2026-11-25T18:14:14.768Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big blocking prop that fills one map cell, each image a different one of these: two broken pale marble columns #d8d2c4 of different heights, a deep blackened crater, a raised ring of cracked charred earth #4a4440, a huge ancient stone head #8d8a7c half sunk in the ground and covered in green moss #5f8f3e, a giant horned beast skull #e4dccb half buried. About three quarters of the image wide and about three quarters of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 48203,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one big blocking prop that fills one map cell, each image a different one of these: two broken pale marble columns #d8d2c4 of different heights, a deep blackened crater, a raised ring of cracked charred earth #4a4440, a huge ancient stone head #8d8a7c half sunk in the ground and covered in green moss #5f8f3e, a giant horned beast skull #e4dccb half buried. About three quarters of the image wide and about three quarters of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, runes, flag, banner, fence, road, door, fire, smoke, lava."
+    },
+    "at": "2026-11-25T18:15:36.889Z",
+    "usageUsd": 0.08162689717610677,
+    "candidates": [
+      {
+        "file": "props-1x1-c-0.png",
+        "sha256": "9454e428ccf549a0c98c50866128e20ead79eda766c76878cf5a9b1a379766a8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-1.png",
+        "sha256": "3739c5357eac22b922f250c59ba0ea3d1a11bcf308808623ca310c494101b444",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-2.png",
+        "sha256": "19cdc72ac237cb9a60ac1388fa8be56bc6a5cfb767583e3666512e9f52d94047",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-3.png",
+        "sha256": "b19b9e3cfd6891a0ae85acda2ec180476bc553dbc1d3bdd6907fdda854d61ab1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-4.png",
+        "sha256": "3187e967fcdf8c825307afbdbd684637a76cb4405c80f521c52bf37175f34fac",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-5.png",
+        "sha256": "fc117888bd4a7a0619c5d161f7752447fe42054a6fd5d6c57e32e80fb3026370",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-6.png",
+        "sha256": "0c9f331ab91f8cd3355d8acbec010db526990e02b9fbc864f3179c75f1b6fd0b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-7.png",
+        "sha256": "67f0c109f1b451dc6d4dfc5e74be932265d9701ae987bdb4ec66edcd33579a16",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-8.png",
+        "sha256": "b97045bfa2c45ab46885e04cbf005d2f69e0fbf288bbb36c9deb7b45f6ea9591",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-9.png",
+        "sha256": "e720032002f0eec946fb972bb3865b7e041683a62859f72a7d0903804d7c4992",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-10.png",
+        "sha256": "e79fd59de488a9be66001314f22be38e8c9472df13d739a4fcd8433209bc1190",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-11.png",
+        "sha256": "7f61fa6934aaaed61e96176ba6a5812098d06aa6e2c7bbadd90e804990c7fc53",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-12.png",
+        "sha256": "94d344536c0466d3deb009f44138d8ebb0fd6c73fb4578bafb656a52882e5663",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-13.png",
+        "sha256": "25649fd76df860f168b2ab877f96c28bf5fc7da62367de92efd3cb6fa1d276ea",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-14.png",
+        "sha256": "768e5d25b8a50654af4378447dd506f3a3515fb7837b380c50bb4557aca7bdd4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-c-15.png",
+        "sha256": "bb2dd2b4dc5290fdeee475d06d331f9d7943a671eae5e10c6fb40d139159ddfa",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "statue-2x1-a": {
+    "id": "statue-2x1-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "13a4b4ab-7286-4994-be68-0f8aa2b2bb8f",
+    "submittedAt": "2026-11-25T18:15:36.997Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one huge toppled stone statue of an old king lying on its side across the image from left to right, pale grey weathered stone #a8a39a with #6e6a64 shadows, its crowned head at the left resting on the ground, its body broken in two pieces with chunks of rubble, a little green moss #5f8f3e. Nearly the full image wide and about half of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 128,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 48302,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one huge toppled stone statue of an old king lying on its side across the image from left to right, pale grey weathered stone #a8a39a with #6e6a64 shadows, its crowned head at the left resting on the ground, its body broken in two pieces with chunks of rubble, a little green moss #5f8f3e. Nearly the full image wide and about half of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, plinth, standing statue, gold, blood."
+    },
+    "at": "2026-11-25T18:17:09.111Z",
+    "usageUsd": 0.08107187008857727,
+    "candidates": [
+      {
+        "file": "statue-2x1-a-0.png",
+        "sha256": "cc12d67c70c9d1f9877837869d972f8b04aecd4b875b521b21987059d95b3feb",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "statue-2x1-a-1.png",
+        "sha256": "a56ac674539d5c2a8ef75cfddbb1cff10ddf234df54033264043c239762c8767",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "statue-2x1-a-2.png",
+        "sha256": "510c7929fe070287693e89384e60cfaa206ce50acdf1d42f88374147cd29881a",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "statue-2x1-a-3.png",
+        "sha256": "032f3376e57b7cff55916d52c48c3cef5fffa440dfd7371c3c4c95112de607a3",
+        "width": 128,
+        "height": 64
+      }
+    ]
+  },
+  "skeleton-2x1-a": {
+    "id": "skeleton-2x1-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "0edec6b6-5853-4caf-8e9b-3f39551fd4de",
+    "submittedAt": "2026-11-25T18:17:09.199Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the huge bleached skeleton of a giant beast lying across the image from left to right: a big horned skull at the left, a long curved spine and a tall arching ribcage of cream bones #e4dccb with #b5a88a shadows, a few loose bones beside it. Nearly the full image wide and about half of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 128,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 48303,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: the huge bleached skeleton of a giant beast lying across the image from left to right: a big horned skull at the left, a long curved spine and a tall arching ribcage of cream bones #e4dccb with #b5a88a shadows, a few loose bones beside it. Nearly the full image wide and about half of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, flesh, blood, person, dinosaur alive, sand dune."
+    },
+    "at": "2026-11-25T18:18:57.478Z",
+    "usageUsd": 0.08094912028312683,
+    "candidates": [
+      {
+        "file": "skeleton-2x1-a-0.png",
+        "sha256": "c0c7098aecac1b780b92fb719d6d7109d9e0f5e7316434007cb15f2e85b748d3",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "skeleton-2x1-a-1.png",
+        "sha256": "c1967c69c9a77bf3690bae651400e9c35fa020f39d35049565b11282942ececd",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "skeleton-2x1-a-2.png",
+        "sha256": "26d00e3b0138d03c811f78ec8a0ecbbf034c6ba30813560612768c2c7a75654c",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "skeleton-2x1-a-3.png",
+        "sha256": "c474d85a06ecdb2c94389d28e500c4979e0bae3e1e8f94f0a56fa669c1aac392",
+        "width": 128,
+        "height": 64
+      }
+    ]
+  },
+  "wall-2x1-a": {
+    "id": "wall-2x1-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b78f37e9-cce0-4f32-ae46-66528db3d8c4",
+    "submittedAt": "2026-11-25T18:18:57.604Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one short stretch of an ancient ruined stone wall running across the image from left to right, big mossy grey blocks #8d8a7c with #5c5a54 shadows, broken and stepped down at both ends, an empty crumbling arch in the middle, creeping green vines #4f8a3e hanging over it. Nearly the full image wide and about two thirds of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 128,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 48304,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one short stretch of an ancient ruined stone wall running across the image from left to right, big mossy grey blocks #8d8a7c with #5c5a54 shadows, broken and stepped down at both ends, an empty crumbling arch in the middle, creeping green vines #4f8a3e hanging over it. Nearly the full image wide and about two thirds of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, door, gate, roof, tower, flag."
+    },
+    "at": "2026-11-25T18:20:14.354Z",
+    "usageUsd": 0.08096945201026069,
+    "candidates": [
+      {
+        "file": "wall-2x1-a-0.png",
+        "sha256": "af89dcf18466947b085f28a95df049907f77230fe053fc45ba4dc48c9bc5100d",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "wall-2x1-a-1.png",
+        "sha256": "767626a2674fe520bb0c528a9146e19a78411a35e37650ec236c72f027d5d72d",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "wall-2x1-a-2.png",
+        "sha256": "b9c1504f89f218beba8621954982346d780a3c82e2a867bdc868a01556729beb",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "wall-2x1-a-3.png",
+        "sha256": "c7b1c82bb37e7930e9a8699f9ad33cb13a74199c9ba553d26cc38b11499116ec",
+        "width": 128,
+        "height": 64
+      }
+    ]
+  },
+  "catapult-2x1-a": {
+    "id": "catapult-2x1-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "3af7109f-0643-451b-addc-f7f058bf0b71",
+    "submittedAt": "2026-11-25T18:20:14.449Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one wrecked old wooden siege catapult abandoned on a battlefield, across the image from left to right: a heavy timber frame #7a5a3a with #4e3a2a shadows, its long throwing arm snapped and leaning, one big wheel broken off and lying flat, rusty iron bands #8a5a3a, a few scattered round stones. Nearly the full image wide and about two thirds of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 128,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 48305,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one wrecked old wooden siege catapult abandoned on a battlefield, across the image from left to right: a heavy timber frame #7a5a3a with #4e3a2a shadows, its long throwing arm snapped and leaning, one big wheel broken off and lying flat, rusty iron bands #8a5a3a, a few scattered round stones. Nearly the full image wide and about two thirds of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, soldier, person, fire, smoke, flag, banner."
+    },
+    "at": "2026-11-25T18:21:37.225Z",
+    "usageUsd": 0.08148933214611477,
+    "candidates": [
+      {
+        "file": "catapult-2x1-a-0.png",
+        "sha256": "b5ac6bbb5188a2bc4bfcb7b9bbe5854972d07c6593f487964f4b066631500ef0",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "catapult-2x1-a-1.png",
+        "sha256": "fc6329b95ebb5eb29e523338856ed0d205bec894796c57b105ebfe4181768abd",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "catapult-2x1-a-2.png",
+        "sha256": "1d3467e27b68b47e483e1d534579a8720498f499598bed2bb0638e9522ed1708",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "catapult-2x1-a-3.png",
+        "sha256": "5c3b204cab76086258a30184636e207b3bd43b0aebc4134eb0d3bf946a6bb0f3",
+        "width": 128,
+        "height": 64
+      }
+    ]
+  },
+  "wasteland-small-b": {
+    "id": "wasteland-small-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1cc36971-d2b3-4943-af8f-3fdc6a285e5b",
+    "submittedAt": "2026-11-25T18:21:42.130Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-doodad.txt",
+          "text": "Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tiny detail of a grey ash wasteland, each image a different one of these: a small cluster of three sickly pale grey-violet toadstools #a89ab5 with thin stems, the broken wooden shaft of an old spear #7a6a5a stuck slanted in the ground with a torn grey rag tied to it. Small and low, about half of the image wide, much smaller than a person."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 48142,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one tiny detail of a grey ash wasteland, each image a different one of these: a small cluster of three sickly pale grey-violet toadstools #a89ab5 with thin stems, the broken wooden shaft of an old spear #7a6a5a stuck slanted in the ground with a torn grey rag tied to it. Small and low, about half of the image wide, much smaller than a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, soil disc, grass square, platform, background, badge, character, building, tree, skull, person, neon, gold, coins, gem, chest, glow, fire, green, spear head, metal blade, flag."
+    },
+    "at": "2026-11-25T18:24:01.511Z",
+    "usageUsd": 0.0827981866200765,
+    "candidates": [
+      {
+        "file": "wasteland-small-b-0.png",
+        "sha256": "e844e4145756b96e77dce6866d557c46812bccdab12e25795c4c2c82be94e06e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-1.png",
+        "sha256": "e3e772a2d4c38ba321e99cbefc3a8c623c76f4023b431ef1e2e38c8cf9700318",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-2.png",
+        "sha256": "2a87aa679b6f5e5b2d3643b14c64ad145c268a7f9af87b0072b6104e23232030",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-3.png",
+        "sha256": "a0429cf06d4b4ba0cecc51fcc3c562cde3f96450e0fbe9997c26d5c56798d1a3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-4.png",
+        "sha256": "1f18e982300ba1a8631a68bcb0cb5c7e8ef88ceb84f1733856e56f627d0921be",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-5.png",
+        "sha256": "8cf6dbe2c397afd863a740cfbe3c85abeba97c723f223c1faed38e83ffc49257",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-6.png",
+        "sha256": "d4020261d8791fa56baa894299b812bbc793e916098c07663172b10c42917995",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-7.png",
+        "sha256": "d1837f5ab3176eec3db8b8c8911986062886554b6960df5a465a7b2111722e6f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-8.png",
+        "sha256": "3b800ac58804c33f1ed6c19426c029ee36fb6a9120739af0697752c3f4ad73a6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-9.png",
+        "sha256": "095bcfde41af027a0ef9249660a250415029b9fc60be118017e8731d0699bc1f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-10.png",
+        "sha256": "9058aba3dce66473225139d99bf3a44c17d326fc15d670b15af7c30d26f3b56b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-11.png",
+        "sha256": "454423a936d31e91e1b32f0e4cd44f279f69d78170377459b1c0474ecf739c3f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-12.png",
+        "sha256": "5291eb07817fcbb21292c1cde47fb26ed98e8213deee8a057704c99ce9ee1f8f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-13.png",
+        "sha256": "36f54ec698b72c826639f0e8ef5daf7f23203e48b6e9bb5c7e701bbb1858886d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-14.png",
+        "sha256": "9e989d01bd8e7544e599ac603f722e98d832acffaf568cee4179637a30f72a72",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-15.png",
+        "sha256": "7b96f6b529b9a689d476896e10e88a3af61fe5852a986f47fca3c25a2a90629a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-16.png",
+        "sha256": "8559fac694d3fa433bb0de260b84b9c1920d19b17396668b4f3b4148e6634294",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-17.png",
+        "sha256": "f9c24adc9c1ed015e0ec719b96bb34611d1aa32762a72eee1ca47ca1ae1eca49",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-18.png",
+        "sha256": "2805d966fe779cc1b8f58f8a010aa33c956062ee3a899f673db5d49f505b302d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-19.png",
+        "sha256": "ca287bbeb7d533243c800871aad3f5cb0ed0b367b65f5d8f8657dc51bb711553",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-20.png",
+        "sha256": "4fdb041e36f4d513e78821f0d3e9b994aa3874d914af6c5e6543ccdfe870067d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-21.png",
+        "sha256": "d133b9b2f7c1fee510b59df9c8b0646c92a3e09935fb470d045068a07e92a383",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-22.png",
+        "sha256": "f61fcd88ade027f72d3cba2dfdea1f999fcfb2daf842e67e4c423818dbfe05f4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-23.png",
+        "sha256": "1396e55605bf3d641eac16411cd5cf01d53c26fa8aa1f28891e5aec1a640c26f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-24.png",
+        "sha256": "daf790d64bef5dae3a7ee3c27df10acde3153f99a139a9f8edbb6303cd05d4aa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-25.png",
+        "sha256": "edeb2108d3b7d6bdaf9e72d4dbfd6654b56d5c7cd127d8361c3011d03d8e2c93",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-26.png",
+        "sha256": "bf6963c637414acd1e59d0ace0e282512c0eaec8de65806e897fa26393dee005",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-27.png",
+        "sha256": "835b712f55a7ccd25ca6b9c9bd4be1dbe639ed690959b30c256eed14cc086d8e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-28.png",
+        "sha256": "3e9737deb80d2ca3edd7991a1acfba1ef24fc2f6267267f95fae6a3ab342c8c3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-29.png",
+        "sha256": "4fc1fada49dbaca6aec26d8b88144c6593d4509929ef7d8eba0caae3b7ee9152",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-30.png",
+        "sha256": "db498470525c7e83104e6c4f98d50016b8fb10448d6f1c02a11fa8396b938878",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-31.png",
+        "sha256": "1342c96095bb9d546d10812602aa3ad94a2da65afa88b2addee865acb0df0dac",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-32.png",
+        "sha256": "e5d8f4e554fde8effbdd31680150d2198b7103e6d0987ec6fbc575c8b5971103",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-33.png",
+        "sha256": "28f9e19786542f54aec250ed1d273cc5b8bc6dadbfee54dfc93590a92208ea1c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-34.png",
+        "sha256": "603a1c6dfc18eaaa73d2d164e1cb9b40f8365525cb513ec44b76c74b978f8b7e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-35.png",
+        "sha256": "4eed18027a8191cf4d57e25738a25f1972ebf136eb6923fbd2abefec3c2dade3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-36.png",
+        "sha256": "48b9c5dcd461f3ab2da1ff421e5476788e2c861bc9d9d764097ab72f268bdb50",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-37.png",
+        "sha256": "ee6924ab65725129db04838aa0268294bcf399ff36a4713913fb4b586b7e1ebe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-38.png",
+        "sha256": "8786bb9610203387b10dbb4bbe0118757d0351b2fb0fd6709c5a11e7a770d40a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-39.png",
+        "sha256": "74699e1ae7cbd65658f02f85a24ff7909c67139baab46df55f86b621999509ce",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-40.png",
+        "sha256": "0a0c634c46f76bc6dbed848b2cc1724eae368bb0b01fd390dde185782df4662b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-41.png",
+        "sha256": "fc8290a75ec2ec5257483cf9bec21e77d7ab2f33d6486232b500f3a6f4a987fd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-42.png",
+        "sha256": "f5eb7d46f323566b3b52414958ac301c854a14ff0b639e206eb6d4351e755310",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-43.png",
+        "sha256": "0e3a015cf95423499b4fc4dcb5819daacc5802e4e5a56e06f258dab0b54f6c93",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-44.png",
+        "sha256": "7630afc468a67765fbb2e874b9a21b99bbbc8b5b59681f8ade81f0294888a116",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-45.png",
+        "sha256": "038fc2f9dcb1d5328e463ce5b6dc89ce1dbf239adb5b7c45fd16dffcefcccd27",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-46.png",
+        "sha256": "d55802a059ab555f6b3b8678d5e16ae7c819035c81519db0e7688c0ca7561988",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-47.png",
+        "sha256": "bde06451d2ab85998e730d8c29ed949f0d535f3bf46d3355b16301aab11a6816",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-48.png",
+        "sha256": "e3f635cf8fc5592f26e1d72c768cf3c2522f120252fbf2c19c51aff2cce050ec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-49.png",
+        "sha256": "94b2fb157f6d109744655634e5d8c848e768ece7f4b90359b370076e31191049",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-50.png",
+        "sha256": "2a7abfb90007e323750f0eff2a6cd2d6a9f1e641559f28226c25d21a17345755",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-51.png",
+        "sha256": "3374001589fc21fec9614e1050815320449141c93ce730301c50f1688ede0b99",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-52.png",
+        "sha256": "be47b27d2ec94f8c903f500f39c75df4a9c72a6d311905d3b743cc88e6f3f10a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-53.png",
+        "sha256": "996a64cd1ea836a059a642ec348e95cd2ad8b19194a249c22aad264b0d980b0c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-54.png",
+        "sha256": "81bb0fe4986453c79a8cf4dafb8ed8c6216c08a7cc18a226fef968ef7f2159af",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-55.png",
+        "sha256": "4a2a37a6c34fd63f9a5f64f363d77745aef1ac7437f79013f3fba30146f6cb0f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-56.png",
+        "sha256": "10484e25a40fa2478906b5ee5d8cd0f24dc708e50cd1ad077273a62928f0ba3c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-57.png",
+        "sha256": "c90bfad7cf88fb4cd6e6a85a441387dc81155451b0261afefcbef8bd3bc1635b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-58.png",
+        "sha256": "7b970bda9e7a634d846b2839374a4db076a5697d55c7f585f620300c4b2709b4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-59.png",
+        "sha256": "8ea70774727cf11541417aacbd57e90d3a5f482036e159ec85a45e13faa64604",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-60.png",
+        "sha256": "82f872f4ce662af4f7d3425a41c9a434ebb4912e04ccf9109c65c861adc381b4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-61.png",
+        "sha256": "72666a2bc5c076f29142491a071e2fd4bec18df382fd6c64747194c038a97de5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-62.png",
+        "sha256": "d879229cdf1ba4218f9de5d865c90496cb335d99f208adece0b53c9689a0f3a1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wasteland-small-b-63.png",
+        "sha256": "0045847b81a96e3ba68e343b30f7c8090a59ffccb32ddd732663eccb47e85bfd",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "props-1x1-d": {
+    "id": "props-1x1-d",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1978c699-109e-44c3-a96c-737d1dede9df",
+    "submittedAt": "2026-11-25T18:24:01.627Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big blocking prop that fills one map cell, each image a different one of these: a cluster of jagged black basalt rock spikes #3e3a3c with grey #6e6a6a lit edges, a tall green saguaro cactus #6f9a4a with two raised arms, a big round golden haystack #d9b26a with #a8803a shadows, a huge hollow old tree stump of grey-brown wood #6e5a46 with thick roots and a dark hollow. About three quarters of the image wide and about three quarters of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 48204,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one big blocking prop that fills one map cell, each image a different one of these: a cluster of jagged black basalt rock spikes #3e3a3c with grey #6e6a6a lit edges, a tall green saguaro cactus #6f9a4a with two raised arms, a big round golden haystack #d9b26a with #a8803a shadows, a huge hollow old tree stump of grey-brown wood #6e5a46 with thick roots and a dark hollow. About three quarters of the image wide and about three quarters of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, flag, fence, road, door, pitchfork, farmer, leaves."
+    },
+    "at": "2026-11-25T18:26:05.374Z",
+    "usageUsd": 0.08307152602407668,
+    "candidates": [
+      {
+        "file": "props-1x1-d-0.png",
+        "sha256": "525e30685ff37f326d57d844897081805a4ad8c8435b1fb72d5b95e47e2445fa",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-1.png",
+        "sha256": "a713753af15ce29a0a2ca670d636df0b5e84679eca7a5b4f72e92bc41b021e5b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-2.png",
+        "sha256": "bf37a6fe736e27d1530df32f6c0e80aaeea088a5f47595d22bfa88db3a8988d1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-3.png",
+        "sha256": "fd9723ec93eaf3f648331ffc57dbd34fad3dd2385eac9b970a0ea4a4f1b93db1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-4.png",
+        "sha256": "04232e9bda5f3c8b5f206142f261255cde445b670b51383015b31bc0d965623e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-5.png",
+        "sha256": "1aa50935194922c13a41cd0405485933fc3626cf3118c7ece2d0cb22e696c887",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-6.png",
+        "sha256": "25d8c510147799f8359db026251cfb903592764a707eec0cda4eefc76ffdf0ad",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-7.png",
+        "sha256": "b44720bfa475cd13ad09da32718cc3d091163946b2502c7b79aad7a582228703",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-8.png",
+        "sha256": "5564d6a3e67e3ce1bc9dfee82fe9e81f94a6eef01f4e3a6ed94f23c9f3c7de14",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-9.png",
+        "sha256": "fedc8ca392cd4ed13872b622fb2ab92ef0ea8b760c2f2f970bcade6f467945ce",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-10.png",
+        "sha256": "dd300b0ff681c79fed7a26be1dc578def93c66c214f3cee80fb046c0e918c3da",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-11.png",
+        "sha256": "8daa908df4fde8c26c6d82b25e12e6bb3a2a852cfe07cbbf06aff8e6f6a33478",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-12.png",
+        "sha256": "354f2d62bb84c01fda543cc1a011c01b5aaf216e5095d06f0a9d2e32214ec690",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-13.png",
+        "sha256": "5652632b2ed31da1a9848d22a76c4d2449f03433777298d409aa54986e4a307a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-14.png",
+        "sha256": "51cd72e58a68f75d41083c8033d8f3510b21cd4db530df792346caba8fcbf56c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-d-15.png",
+        "sha256": "58259ffde7554276ff778569b52b00754bb234b4009c04e1e619dbddd353ba34",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  }
+}

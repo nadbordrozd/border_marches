@@ -37,6 +37,7 @@
  * fog-lift-v7.ts).
  */
 import type { ResourceId, Terrain } from "../core/map/types";
+import { DECORATION_ASSETS } from "./decorations";
 import { ALL_ICON_ASSETS } from "./icons";
 import { MAP_OBJECT_ASSETS } from "./map-objects";
 import { PEAK_ASSETS } from "./peaks";
@@ -72,6 +73,7 @@ export type AssetCategory =
   | "resource-item"
   | "town-3x2"
   | "doodad"
+  | "decoration"
   | "tree"
   | "peak"
   | "map-object"
@@ -1228,6 +1230,7 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...Object.values(RESOURCE_ITEMS),
   ...TOWN_3X2_ASSETS,
   ...DOODAD_ASSETS,
+  ...DECORATION_ASSETS,
   ...TREE_ASSETS,
   ...PEAK_ASSETS,
   ...MAP_OBJECT_ASSETS,

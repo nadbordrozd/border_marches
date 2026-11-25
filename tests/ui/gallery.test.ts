@@ -21,6 +21,7 @@ import { playableFactions } from "../../src/data/factions.ts";
 import { FEAT_LIST } from "../../src/data/feats.ts";
 import { OBJECT_TYPE_IDS } from "../../src/data/objectTypes.ts";
 import { SKILLS } from "../../src/data/skills.ts";
+import { DECORATIONS } from "../../src/assets/decorations.ts";
 import { assetByKey } from "../../src/assets/manifest.ts";
 import { ICON_KINDS } from "../../src/assets/icons.ts";
 import {
@@ -77,8 +78,16 @@ describe("gallery tabs match the registries", () => {
     expect(count("skills")).toBe(Object.keys(SKILLS).length + FEAT_LIST.length);
   });
 
-  it("map objects: every catalogued object type", () => {
-    expect(count("objects")).toBe(OBJECT_TYPE_IDS.length);
+  it("map objects: every catalogued object type, then the decorations", () => {
+    expect(count("objects")).toBe(OBJECT_TYPE_IDS.length + DECORATIONS.length);
+    const titles = galleryTab("objects").sections.map((s) => s.title);
+    expect(titles.slice(-2)).toEqual([
+      "Decorations (passable)",
+      "Props (impassable)",
+    ]);
+    const props = galleryTab("objects").sections.at(-1)?.entries ?? [];
+    expect(props.every((e) => e.kind === "decoration")).toBe(true);
+    expect(props.length).toBe(DECORATIONS.filter((d) => !d.passable).length);
   });
 
   it("towns: each playable faction's town and every building of its tree", () => {

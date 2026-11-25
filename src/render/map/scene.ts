@@ -49,6 +49,8 @@ import type {
   TreeSpecies,
   TreeSpeciesTable,
 } from "./canopy";
+import { decorationCells, placeDecoration } from "./decorations";
+import type { PlacedDecoration } from "./decorations";
 import { placeDoodads } from "./doodads";
 import type { DoodadPlacement } from "./doodads";
 import type { GroundLayout } from "./ground";
@@ -335,6 +337,41 @@ export function doodadEntry(d: DoodadPlacement): SceneEntry {
       dh: d.h,
     },
   ]);
+}
+
+/**
+ * A placed decoration or prop (decorations.ts, bead bzc.48), drawn in the
+ * body pass sorted by its foot like a tree, so trees, peaks and doodads in
+ * front of it cover it and heroes and objects stand over it.
+ */
+export function decorationEntry(p: PlacedDecoration): SceneEntry {
+  const d = placeDecoration(p);
+  return entry(
+    "TALL_BODY",
+    (d.footY - 1) / CELL,
+    d.footX / CELL,
+    LAYER.TERRAIN,
+    [
+      {
+        key: d.asset.key,
+        sx: 0,
+        sy: 0,
+        sw: d.asset.w,
+        sh: d.asset.h,
+        dx: d.x,
+        dy: d.y,
+      },
+    ],
+    [],
+    { cells: decorationCells(p) },
+  );
+}
+
+/** The entries of placed decorations, in draw order. */
+export function decorationEntries(
+  placed: readonly PlacedDecoration[],
+): SceneEntry[] {
+  return placed.map(decorationEntry).sort(compareEntries);
 }
 
 // --------------------------------------------------------------- terrain

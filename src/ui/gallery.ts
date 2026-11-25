@@ -33,6 +33,7 @@ import {
 } from "../data/objectTypes.ts";
 import { findSkill } from "../data/skills.ts";
 import type { ResourceId } from "../core/map/types.ts";
+import { decorationById } from "../assets/decorations.ts";
 import { assetByKey } from "../assets/manifest.ts";
 import { conditionTooltip, groundTooltip } from "./battle/grammar.ts";
 import { button, el, img, kbd } from "./dom.ts";
@@ -303,6 +304,35 @@ function objectCard(id: string): TipBody {
   );
 }
 
+const TERRAIN_NAMES: Readonly<Record<string, string>> = {
+  grass: "Grass",
+  jungle: "Jungle",
+  steppe: "Steppe",
+  badlands: "Badlands",
+  wasteland: "Wasteland",
+};
+
+function decorationCard(id: string): TipBody {
+  const d = decorationById(id);
+  if (d === undefined) return id;
+  return tipCard(
+    d.name,
+    [
+      d.text,
+      el(
+        "div.gm-tip-line.gm-tip-dim",
+        [
+          d.passable
+            ? "Heroes walk over it"
+            : `Blocks the way · ${d.cols} cell${d.cols === 1 ? "" : "s"}`,
+          `on ${d.terrains.map((t) => TERRAIN_NAMES[t] ?? t).join(", ")}`,
+        ].join(" · "),
+      ),
+    ],
+    { subtitle: d.passable ? "Decoration" : "Prop" },
+  );
+}
+
 function townCard(faction: string): TipBody {
   const f = findFaction(faction);
   if (f === undefined || f.town === null) return faction;
@@ -439,6 +469,8 @@ export function entryCard(entry: GalleryEntry): TipBody {
       return featCard(entry.id);
     case "object":
       return objectCard(entry.id);
+    case "decoration":
+      return decorationCard(entry.id);
     case "town":
       return townCard(entry.id);
     case "building":
