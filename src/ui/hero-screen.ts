@@ -1,7 +1,8 @@
 /**
  * Hero screens (RULES_V2 3 and 4): the hero sheet (stats with their
  * sources, skills, feats and vows, the paper doll of eleven worn slots,
- * the backpack and the scroll case; click or drag to equip), the level-up
+ * the backpack and the scroll case; click or drag to equip; the army
+ * travelling with the hero, rearranged by clicks), the level-up
  * draft dialog and the item part of the meeting screen. Icons are
  * content icons (src/ui/icons.ts), with initials on a grade colour as the
  * fallback for content without an icon.
@@ -30,6 +31,7 @@ import {
   sightRadius,
   specialtyText,
   statBreakdown,
+  transferStack,
   unequip,
   unspentPageChoices,
   unspentPageOf,
@@ -41,6 +43,8 @@ import {
   type LevelUpOffer,
   type SkillOffer,
 } from "../core/game/index.ts";
+import type { ArmySlots } from "../core/game/types.ts";
+import { getCreature, isCreatureId } from "../data/creatures.ts";
 import {
   CONSUMABLES_PER_SLOT,
   SLOT_NAMES,
@@ -65,7 +69,8 @@ import { iconFor, type IconKind } from "../assets/icons.ts";
 import { isSpell, spellInfo } from "../core/magic/catalog.ts";
 import { button, el, img, modal } from "./dom.ts";
 import { iconElement } from "./icons.ts";
-import { spellTip } from "./info-tips.ts";
+import { armyValue } from "./hints.ts";
+import { creatureTip, spellTip } from "./info-tips.ts";
 import { setTip } from "./tooltip.ts";
 import "./hero.css";
 
@@ -216,13 +221,16 @@ type Selection =
 /**
  * The hero sheet. Click an item to select it (its details and actions
  * show), double-click to wear, take off or use it, or drag it between the
- * backpack and the paper doll.
+ * backpack and the paper doll. The army row below shows every slot; on the
+ * owner's turn its stacks rearrange like the town screen's.
  */
 export async function openHeroScreen(
   host: HeroScreenHost,
   heroId: string,
 ): Promise<void> {
   let selected: Selection = null;
+  /** The army slot picked to move, merge, swap or split. */
+  let armySel: number | null = null;
   const body = el("div.hs-sheet");
   const hero = (): HeroState | undefined =>
     host.state().heroes.find((h) => h.id === heroId);
@@ -498,7 +506,46 @@ export async function openHeroScreen(
       );
     }
 
-    body.replaceChildren(el("div.hs-columns", left, middle, right), details(h));
+    // Own stacks rearrange on the owner's turn, as in the town screen.
+    const editable = h.owner === host.state().currentPlayer;
+    body.replaceChildren(
+      el("div.hs-columns", left, middle, right),
+      heroArmySection(
+        h.army,
+        editable ? { selected: armySel, onSlot: onArmySlot } : {},
+      ),
+      details(h),
+    );
+  };
+
+  /**
+   * Click a stack, then a slot: move, merge or swap (transferStack within
+   * one army); shift-click the target to split the stack in half.
+   */
+  const onArmySlot = (slot: number, e: MouseEvent): void => {
+    const h = hero();
+    if (h === undefined) return;
+    const from = armySel;
+    armySel = null;
+    if (from === null || from === slot) {
+      if (from === null && h.army[slot] != null) armySel = slot;
+      render();
+      return;
+    }
+    const stack = h.army[from];
+    const count =
+      stack != null && e.shiftKey ? Math.floor(stack.count / 2) : undefined;
+    if (stack != null && count !== 0) {
+      host.run(
+        transferStack(host.state(), {
+          heroId,
+          from: { army: "hero", slot: from },
+          to: { army: "hero", slot },
+          ...(count !== undefined ? { count } : {}),
+        }),
+      );
+    }
+    render();
   };
 
   /** The selected item's text and the actions it allows. */
@@ -597,6 +644,98 @@ function bookPages(h: HeroState): HTMLElement {
     box.append(icon);
   }
   return box;
+}
+
+/** One army slot as the hero sheet shows it (empty: no creature, count 0). */
+export interface ArmySlotView {
+  slot: number;
+  creature: string | null;
+  /** The creature's name, plural unless the count is 1; "" when empty. */
+  name: string;
+  count: number;
+}
+
+/** Every slot of an army, empty ones included, in slot order. */
+export function armySlotViews(army: ArmySlots): ArmySlotView[] {
+  return army.map((stack, slot) => {
+    if (stack === null || !isCreatureId(stack.creature)) {
+      return { slot, creature: null, name: "", count: 0 };
+    }
+    const def = getCreature(stack.creature);
+    return {
+      slot,
+      creature: stack.creature,
+      name: stack.count === 1 ? def.name : def.plural,
+      count: stack.count,
+    };
+  });
+}
+
+export interface HeroArmyOptions {
+  /** The slot picked to move (highlighted). */
+  selected?: number | null;
+  /** Makes the slots clickable (rearranging); read-only without it. */
+  onSlot?: (slot: number, e: MouseEvent) => void;
+}
+
+/**
+ * The hero sheet's Army section (bead tez): one cell per army slot, empty
+ * ones included, each filled one with the creature portrait, its count and
+ * name, and the creature card on hover; the army's fight value in the head.
+ */
+export function heroArmySection(
+  army: ArmySlots,
+  options: HeroArmyOptions = {},
+): HTMLElement {
+  const views = armySlotViews(army);
+  const filled = views.filter((v) => v.creature !== null).length;
+  const value = el("span.hs-army-value", `Fight value ${armyValue(army)}`);
+  setTip(
+    value,
+    "Fight value: each creature's fight value times its count, summed. The hero's Attack and Defense add to it in battle.",
+  );
+  const head = el(
+    "div.hs-army-head",
+    el("h3", `Army (${filled} / ${views.length})`),
+    value,
+  );
+  const onSlot = options.onSlot;
+  if (onSlot !== undefined) {
+    head.append(
+      el(
+        "span.hs-dim.hs-army-hint",
+        "Click a stack, then a slot: move, merge or swap. Shift-click to split.",
+      ),
+    );
+  }
+  const row = el("div.hs-army");
+  for (const v of views) {
+    const box = el("div.gm-slot");
+    const cell = el("div.hs-army-slot", box);
+    cell.setAttribute("data-slot", String(v.slot));
+    if (v.creature === null) {
+      box.classList.add("gm-empty");
+      cell.classList.add("hs-army-empty");
+      cell.append(el("span.hs-army-name", "Empty"));
+    } else {
+      const creature = v.creature;
+      const def = getCreature(creature);
+      box.append(
+        img(`portrait-${def.sprite}`, "gm-slot-portrait"),
+        el("span.gm-slot-count", String(v.count)),
+      );
+      cell.append(el("span.hs-army-name", v.name));
+      cell.setAttribute("aria-label", `${v.count} ${v.name}`);
+      setTip(cell, () => creatureTip(creature, v.count));
+    }
+    if (options.selected === v.slot) cell.classList.add("hs-selected");
+    if (onSlot !== undefined) {
+      cell.classList.add("hs-army-clickable");
+      cell.addEventListener("click", (e) => onSlot(v.slot, e));
+    }
+    row.append(cell);
+  }
+  return el("section.hs-army-section", head, row);
 }
 
 /**
