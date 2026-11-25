@@ -7,7 +7,11 @@
 import { describe, expect, it } from "vitest";
 import { wornDef } from "../../../src/data/artifacts.ts";
 import { getCreature, isCreatureId } from "../../../src/data/creatures.ts";
-import type { ObjectTypeId } from "../../../src/data/objectTypes.ts";
+import { isPickup } from "../../../src/core/game/site-state.ts";
+import {
+  isObjectTypeId,
+  type ObjectTypeId,
+} from "../../../src/data/objectTypes.ts";
 import { mapDensity } from "../../../src/core/map/density.ts";
 import {
   DAY_MP,
@@ -138,9 +142,9 @@ const SNAPSHOT: Record<
   }
 > = {
   "keepers-toll": {
-    base: "16dbae42",
-    built: "2cc300b2",
-    objects: 190,
+    base: "6c151624",
+    built: "51b51a2f",
+    objects: 356,
     towns: [
       ["town-1", 7, 7, null],
       ["town-2", 35, 40, null],
@@ -150,9 +154,9 @@ const SNAPSHOT: Record<
     ],
   },
   "hourglass-marches": {
-    base: "ac426544",
-    built: "c698b0a9",
-    objects: 375,
+    base: "96e6c49b",
+    built: "06208ca2",
+    objects: 721,
     towns: [
       ["town-1", 30, 60, null],
       ["town-2", 11, 20, null],
@@ -179,21 +183,25 @@ const PUZZLES: Record<
   "keepers-toll": {
     gate: ["border-gate-red"],
     tent: "keymasters-tent-red",
-    behindGate: ["keepers-vault-1", "pylon-3"],
+    behindGate: [
+      "keepers-vault-1",
+      "curse-lifters-shrine-1",
+      "school-shrine-6",
+      "loose-artifact-3",
+      "pickup-essence-3",
+      "obelisk-6",
+      "monster-26",
+      "monster-28",
+    ],
     piece: "loose-artifact-sand",
-    pieceGuard: "monster-sand",
+    pieceGuard: "monster-52",
   },
   "hourglass-marches": {
     gate: ["border-gate-2", "border-gate-blue-east"],
     tent: "keymasters-tent-blue",
-    behindGate: [
-      "school-shrine-3",
-      "observatory-3",
-      "pylon-3",
-      "keepers-vault-north",
-    ],
+    behindGate: ["trading-post-5", "keepers-vault-north"],
     piece: "loose-artifact-sand",
-    pieceGuard: "monster-70",
+    pieceGuard: "monster-124",
   },
 };
 
@@ -267,7 +275,7 @@ describe("named maps", { timeout: 60_000 }, () => {
     expect(() => buildNamedMap(taken)).toThrow(/taken by town-1/);
   });
 
-  it("is dense: several of every object family and 10 visitable per 100 cells", () => {
+  it("is dense: several of every object family and 20 visitable per 100 cells", () => {
     for (const m of NAMED_MAPS) {
       const map = mapOf(m.id);
       for (const [family, types] of Object.entries(FAMILIES)) {
@@ -276,7 +284,8 @@ describe("named maps", { timeout: 60_000 }, () => {
         ).length;
         expect(n, `${m.id} ${family}`).toBeGreaterThanOrEqual(3);
       }
-      expect(mapDensity(map).visitable, m.id).toBeGreaterThanOrEqual(10);
+      // Bead bzc.50: about twice the 11.2 and 10.3 of the first versions.
+      expect(mapDensity(map).visitable, m.id).toBeGreaterThanOrEqual(20);
     }
   });
 
@@ -370,6 +379,41 @@ describe("named maps", { timeout: 60_000 }, () => {
         Math.max(...pairs) / Math.min(...pairs),
         who("pairs"),
       ).toBeLessThan(1.2);
+    }
+  });
+
+  it("uses a broad mix: 55 or more of the 62 catalogue types", () => {
+    for (const m of NAMED_MAPS) {
+      const types = new Set(
+        mapOf(m.id)
+          .objects.map((o) => o.data["type"])
+          .filter((t) => isObjectTypeId(t)),
+      );
+      expect(types.size, m.id).toBeGreaterThanOrEqual(55);
+    }
+  });
+
+  it("never seals a way with a pickup taken from beside it", () => {
+    for (const m of NAMED_MAPS) {
+      const map = mapOf(m.id);
+      const w = map.width;
+      // One-time pickups (the game's rule) as walls.
+      const walls = new Set(
+        map.objects.filter((o) => isPickup(o)).map((o) => o.y * w + o.x),
+      );
+      for (const t of startTownsOf(map)) {
+        const d = travelCosts(map, t.x, t.y, { gatesOpen: true, avoid: walls });
+        for (const o of map.objects) {
+          const cells = walls.has(o.y * w + o.x)
+            ? DIRECTIONS_8.map(([dx, dy]) => [o.x + dx, o.y + dy] as const)
+            : [[o.x, o.y] as const];
+          const reached = cells.some(
+            ([x, y]) =>
+              inBounds(map, x, y) && Number.isFinite(d[y * w + x] ?? Infinity),
+          );
+          expect(reached, `${m.id} ${o.id} from ${t.id}`).toBe(true);
+        }
+      }
     }
   });
 

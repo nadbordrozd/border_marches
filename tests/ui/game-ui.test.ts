@@ -362,13 +362,15 @@ describe("minimap", () => {
     )!;
     const t = town.y * s.map.width + town.x;
     expect([...px.slice(t * 4, t * 4 + 3)]).toEqual([0xd8, 0x40, 0x2f]);
-    // Walking reveals more of the map.
+    // Walking reveals more of the map (to a pickup reached without a
+    // fight: dense maps guard many of them).
     const hero = s.heroes[0]!;
-    const target = s.map.objects.find(
-      (o) =>
-        o.kind === "pickup" &&
-        findPath(s, hero.id, o.x, o.y, { ignoreFog: true }) !== null,
-    )!;
+    const target = s.map.objects.find((o) => {
+      if (o.kind !== "pickup") return false;
+      const p = findPath(s, hero.id, o.x, o.y, { ignoreFog: true });
+      const m = p === null ? null : moveHeroAlong(s, hero.id, p.steps);
+      return m !== null && m.ok && endDay(m.state).ok;
+    })!;
     const path = findPath(s, hero.id, target.x, target.y, {
       ignoreFog: true,
     })!;

@@ -239,6 +239,8 @@ export interface GenConfig {
     pocketPrizes: readonly [number, number];
     /** Smallest pocket (open cells) worth a guard at its gap. */
     pocketMin: number;
+    /** Most guarded pockets in one zone. */
+    pocketsPerZone: number;
     /** Guards stay this far (Chebyshev) from a town entrance. */
     guardTownClearance: number;
     /**
@@ -451,9 +453,13 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
         nextZone: true,
       },
     ],
-    density: { start: 9, middle: 10, town: 9, hold: 10 },
-    pocketPrizes: [2, 3],
+    // Bead bzc.50 ("the map was too empty"): about twice the fill of v0.2's
+    // first maps (start 9, middle 10, town 9, hold 10; pockets 2-3 prizes,
+    // two pockets a zone).
+    density: { start: 26, middle: 20, town: 22, hold: 24 },
+    pocketPrizes: [3, 5],
     pocketMin: 8,
+    pocketsPerZone: 2,
     guardTownClearance: 4,
     oneWayWaystones: { S: 1, M: 2, L: 3 },
     oneWayMinDays: 1,

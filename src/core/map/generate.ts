@@ -85,6 +85,8 @@ export interface GenerateInfo {
   gaps: GapInfo[];
   /** Placement requests that found no site (expected to be empty). */
   skipped: string[];
+  /** Optional requests (fill, pocket prizes, rules) that found no site. */
+  unplaced: number;
 }
 
 /** Merge overrides into the default configuration (one level deep). */
@@ -201,6 +203,7 @@ export function generateMapWithInfo(
       passes: st.passes,
       gaps: st.gaps,
       skipped: report.skipped,
+      unplaced: report.unplaced,
     },
   };
 }

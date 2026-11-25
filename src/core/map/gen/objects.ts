@@ -13,7 +13,9 @@
  *    filled once and the same list goes into every start zone).
  * 4. Placement: footprints that block cells first (only where they cannot
  *    cut anything off), then roads between all towns and spurs to mines,
- *    then single-cell objects.
+ *    then single-cell objects. A fill footprint with no room left gets a
+ *    single-cell stand-in; one-time pickups are placed as if they block
+ *    their cell (taken from beside them), off the roads (bead bzc.50).
  * 5. Guards: every object worth at least its zone's free value gets a guard
  *    beside its entrance unless a pocket guard already holds it; passes get
  *    a guard from the value of the zone they open; neutral towns get a
@@ -28,6 +30,7 @@ import {
 } from "../../../data/mapObjects.ts";
 import { GATE_COLOURS, WAYSTONE_COLOURS } from "../../../data/objectTypes.ts";
 import type { ObjectTypeId } from "../../../data/objectTypes.ts";
+import { isPickup } from "../../game/site-state.ts";
 import { assignQuests } from "./quests.ts";
 import { rollContents, strangeThing } from "./contents.ts";
 import type { MapObjectRow } from "../../../data/mapObjects.ts";
@@ -264,6 +267,20 @@ interface Request {
   /** Guard it with its own stack (not for pocket contents). */
   guarded: boolean;
   label: string;
+  /**
+   * The random fill's single-cell stand-in for a footprint that finds no
+   * room (narrow valleys hold few 2x2 sites), so the zone still gets its
+   * share of things to do.
+   */
+  fallback?: Fill;
+  /** A big rare site (the vault): one more try at half the distance. */
+  relax?: boolean;
+}
+
+/** A drawn fill row with its rolled payload. */
+interface Fill {
+  row: MapObjectRow;
+  data: Record<string, unknown>;
 }
 
 interface Pocket {
@@ -289,13 +306,37 @@ interface GuardRequest {
 export interface PlacementReport {
   /** Requests that found no site (should stay empty). */
   skipped: string[];
+  /** Optional requests (fill, pocket prizes, rules) that found no site. */
+  unplaced: number;
+}
+
+/**
+ * A one-time pickup taken from a cell beside it: the game's own rule
+ * ({@link isPickup}, bead bzc.49), so the two never drift apart. The
+ * generator treats its cell as blocked, so it never seals a passage, keeps
+ * it off the roads, and puts its guard where the guard's zone of control
+ * covers every cell it can be taken from (bead bzc.50).
+ */
+export function collectedBeside(row: MapObjectRow): boolean {
+  // Single cells only (every catalogue pickup is one; a made-up bigger
+  // "pickup" row is placed like any footprint).
+  if (row.footprint.w * row.footprint.h !== 1) return false;
+  return isPickup({
+    id: row.id,
+    kind: row.kind,
+    x: 0,
+    y: 0,
+    footprint: { ...row.footprint },
+    blocked: [],
+    data: { ...row.data, type: row.type },
+  });
 }
 
 export function placeObjects(st: GenState): PlacementReport {
   const { g, cfg } = st;
   const oc = cfg.objects;
   const day = cfg.movement.day;
-  const report: PlacementReport = { skipped: [] };
+  const report: PlacementReport = { skipped: [], unplaced: 0 };
   const rng = stageRng(st, "objects");
 
   // 1. Costs from every start town.
@@ -382,9 +423,23 @@ export function placeObjects(st: GenState): PlacementReport {
     data["guard"] === undefined &&
     (row.guard === "always" ||
       (row.guard === "auto" && value >= FREE_VALUE[kindOf(z)]));
-  /** Ring placement by value (CONTENT_MAP_OBJECTS section 2). */
-  const farFor = (row: MapObjectRow, value: number): number =>
-    Math.max(row.minDays ?? 0, minDaysForValue(value)) * day;
+  /**
+   * Ring placement by value (CONTENT_MAP_OBJECTS section 2); a mine of a
+   * resource (a Haunted Mine too) keeps at least as far out as that
+   * resource's plain mine (ECONOMY 4: one Essence Spring near home).
+   */
+  const farFor = (
+    row: MapObjectRow,
+    value: number,
+    data: Record<string, unknown>,
+  ): number => {
+    const res = row.kind === "mine" ? data["resource"] : undefined;
+    const plain =
+      typeof res === "string"
+        ? (oc.table.find((r) => r.id === `mine-${res}`)?.minDays ?? 0)
+        : 0;
+    return Math.max(row.minDays ?? 0, plain, minDaysForValue(value)) * day;
+  };
   const requests: Request[] = [];
 
   // The start kit: rolled once, the same for every player.
@@ -485,7 +540,7 @@ export function placeObjects(st: GenState): PlacementReport {
         zones: [p.zone],
         minCost: 0,
         maxCost: Infinity,
-        minFar: farFor(row, value),
+        minFar: farFor(row, value, data),
         required: false,
         pocket: k,
         guarded: false,
@@ -501,23 +556,49 @@ export function placeObjects(st: GenState): PlacementReport {
     ...startZones.map((z) => zoneCells[z]?.length ?? 0),
   );
   const kitPerStart = oc.startKit.reduce((s, item) => s + item.count, 0);
+  // Stand-ins come from their own stream, so the fill itself draws as
+  // before.
+  const brng = stageRng(st, "fill-fallback");
   const fillFor = (
     kind: MapZoneKind,
     open: number,
     already: number,
     tier: number,
-  ): Array<{ row: MapObjectRow; data: Record<string, unknown> }> => {
-    const out: Array<{ row: MapObjectRow; data: Record<string, unknown> }> = [];
+  ): Array<Fill & { fallback?: Fill }> => {
+    const out: Array<Fill & { fallback?: Fill }> = [];
     const n = Math.max(
       0,
       Math.round((open * oc.density[kind]) / 100) - already,
     );
     const count = new Map<string, number>();
+    const spare = new Map<string, number>();
     for (let c = 0; c < n; c++) {
       const row = drawRow(frng, kind, count, () => true);
       if (!row) break;
       count.set(row.id, (count.get(row.id) ?? 0) + 1);
-      out.push({ row, data: roll(frng, row, tier) });
+      const item: Fill & { fallback?: Fill } = {
+        row,
+        data: roll(frng, row, tier),
+      };
+      if (row.footprint.w * row.footprint.h > 1) {
+        const single = oc.table.filter(
+          (r) =>
+            (r.weights[kind] ?? 0) > 0 &&
+            r.footprint.w * r.footprint.h === 1 &&
+            oc.perMap[r.id] === undefined &&
+            (r.perZone === undefined ||
+              (count.get(r.id) ?? 0) + (spare.get(r.id) ?? 0) < r.perZone),
+        );
+        if (single.length > 0) {
+          const alt = brng.weighted(
+            single,
+            single.map((r) => r.weights[kind] ?? 0),
+          );
+          spare.set(alt.id, (spare.get(alt.id) ?? 0) + 1);
+          item.fallback = { row: alt, data: roll(brng, alt, tier) };
+        }
+      }
+      out.push(item);
     }
     return out;
   };
@@ -538,6 +619,7 @@ export function placeObjects(st: GenState): PlacementReport {
         pocket: -1,
         guarded: guardedIn(f.row, value, t.zone, f.data),
         label: `start fill ${f.row.id}`,
+        ...(f.fallback !== undefined ? { fallback: f.fallback } : {}),
       });
     }
   }
@@ -554,11 +636,12 @@ export function placeObjects(st: GenState): PlacementReport {
         zones: [z.id],
         minCost: 0,
         maxCost: Infinity,
-        minFar: farFor(f.row, value),
+        minFar: farFor(f.row, value, f.data),
         required: false,
         pocket: -1,
         guarded: guardedIn(f.row, value, z.id, f.data),
         label: `fill ${f.row.id} in zone ${z.id}`,
+        ...(f.fallback !== undefined ? { fallback: f.fallback } : {}),
       });
     }
   }
@@ -585,7 +668,7 @@ export function placeObjects(st: GenState): PlacementReport {
         zones: [z.id],
         minCost: 0,
         maxCost: Infinity,
-        minFar: farFor(row, value),
+        minFar: farFor(row, value, data),
         required: false,
         pocket: -1,
         guarded: guardedIn(row, value, z.id, data),
@@ -633,11 +716,12 @@ export function placeObjects(st: GenState): PlacementReport {
       zones,
       minCost: 0,
       maxCost: Infinity,
-      minFar: row.kind === "buried" ? 0 : farFor(row, value),
+      minFar: row.kind === "buried" ? 0 : farFor(row, value, data),
       required: false,
       pocket: -1,
       guarded: guardedIn(row, value, zones[0] ?? 0, data),
       label: `rule ${type}`,
+      ...(first ? { relax: true } : {}),
     });
   };
   if (ruleZones.length > 0) {
@@ -715,18 +799,52 @@ export function placeObjects(st: GenState): PlacementReport {
   const guardReqs: GuardRequest[] = [];
   const gateSites: number[] = [];
 
+  /** Cells of pickups taken from beside them, blocked while placing. */
+  const besideCells: number[] = [];
+  /** Every pickup next to `e` keeps an open cell beside it but `e`. */
+  const leavesSide = (e: number): boolean =>
+    g
+      .around(e, N8)
+      .every(
+        (p) =>
+          st.objBlocked[p] !== 1 ||
+          !besideCells.includes(p) ||
+          g.around(p, N8).some((q) => q !== e && isWalkable(st, q)),
+      );
   const free = (i: number): boolean =>
     base[i] === 1 && st.occupied[i] === 0 && st.objBlocked[i] === 0;
 
-  /** A free neighbour of `e` for a guard, nearest the starts. */
-  const guardCell = (e: number, foot: readonly number[]): number => {
+  /**
+   * A free neighbour of `e` for a guard, nearest the starts. With `cover`
+   * (a pickup taken from beside it), the guard's zone of control must hold
+   * every open cell next to `e`, so nobody takes it without the fight.
+   * `offRoad` keeps the guard off the roads (1) and its zone of control too
+   * (2), so a side prize's guard never stands across the road (bead
+   * bzc.50: denser maps put many prizes beside the roads).
+   */
+  const guardCell = (
+    e: number,
+    foot: readonly number[],
+    cover = false,
+    offRoad = 0,
+  ): number => {
     let best = -1;
     for (const j of g.around(e, N8)) {
       if (foot.includes(j) || !free(j) || (pocketOf[j] ?? 0) >= 0) continue;
       if (nearTown(j, oc.guardTownClearance)) continue;
+      if (offRoad >= 1 && st.road[j] === 1) continue;
+      if (offRoad >= 2 && g.around(j, N8).some((k) => st.road[k] === 1))
+        continue;
       const x = g.x(e);
       const y = g.y(e);
       if (!canStep(st, j, x - g.x(j), y - g.y(j), (k) => isWalkable(st, k)))
+        continue;
+      if (
+        cover &&
+        g
+          .around(e, N8)
+          .some((k) => k !== j && isWalkable(st, k) && g.cheb(k, j) > 1)
+      )
         continue;
       if (best < 0 || (near[j] ?? 0) < (near[best] ?? 0)) best = j;
     }
@@ -746,13 +864,14 @@ export function placeObjects(st: GenState): PlacementReport {
     return out;
   };
 
-  const tryPlace = (req: Request, roads: boolean): boolean => {
+  const tryPlace = (req: Request, roads: boolean, order = rng): boolean => {
     const cells =
       req.pocket >= 0
         ? (pockets[req.pocket]?.cells ?? [])
         : req.zones.flatMap((z) => zoneCells[z] ?? []);
     const costs = req.from !== undefined ? startCost[req.from] : undefined;
     const multi = req.row.footprint.w * req.row.footprint.h > 1;
+    const beside = collectedBeside(req.row);
     const corner = (e: number): number => {
       const x = g.x(e) - req.row.entrance[0];
       const y = g.y(e) - req.row.entrance[1];
@@ -765,7 +884,7 @@ export function placeObjects(st: GenState): PlacementReport {
       for (const e of cells) {
         if (req.pocket < 0 && (pocketOf[e] ?? -1) >= 0) continue;
         if (!free(e)) continue;
-        if (roads && strict > 0 && st.road[e] === 1) continue;
+        if (roads && (strict > 0 || beside) && st.road[e] === 1) continue;
         if (strict > 0 && (crowd[e] ?? 0) >= strict) continue;
         if (costs) {
           const c = costs[e] ?? Infinity;
@@ -777,12 +896,17 @@ export function placeObjects(st: GenState): PlacementReport {
           );
           if (!far) continue;
         }
-        // Nooks first for footprints; pickups a little off the open floor.
+        // Nooks first for footprints; pickups taken from beside them well
+        // into side pockets and against walls; the rest a little off the
+        // open floor.
         let nook = 0;
         for (const j of g.around(corner(e), N8)) if (!isWalkable(st, j)) nook++;
         const s =
-          (multi ? Math.min(nook, 4) : Math.min(nook, 3) * 0.5) +
-          rng.float(0, 3);
+          (multi
+            ? Math.min(nook, 4)
+            : beside
+              ? Math.min(nook, 5) * 0.8
+              : Math.min(nook, 3) * 0.5) + order.float(0, 3);
         cand.push({ e, s });
       }
       cand.sort((p, q) => q.s - p.s || p.e - q.e);
@@ -805,12 +929,24 @@ export function placeObjects(st: GenState): PlacementReport {
         }
         if (!ok) continue;
         if (!visitable(st, req.row, e, foot, free)) continue;
-        if (multi && !keepsConnected(st, e, foot)) continue;
+        // The guard (cheap) before the connectivity check (a flood).
         let gc = -1;
         if (req.guarded) {
-          gc = guardCell(e, foot);
+          gc = guardCell(e, foot, beside, roads ? 2 : 0);
           if (gc < 0) continue;
         }
+        if ((multi || beside) && !keepsConnected(st, e, foot, beside)) continue;
+        // Nor may it wall in a pickup next door.
+        if (beside && !leavesSide(e)) continue;
+        // A pocket's pickup is taken only from inside the pocket.
+        if (
+          beside &&
+          req.pocket >= 0 &&
+          g
+            .around(e, N8)
+            .some((k) => isWalkable(st, k) && pocketOf[k] !== req.pocket)
+        )
+          continue;
         pick = { e, foot, gc };
         break;
       }
@@ -830,6 +966,11 @@ export function placeObjects(st: GenState): PlacementReport {
       };
       commit(st, obj);
       markCrowd(c.foot);
+      // Later placements treat it as the wall it will be in play.
+      if (beside) {
+        st.objBlocked[c.e] = 1;
+        besideCells.push(c.e);
+      }
       if (req.pocket >= 0) {
         const p = pockets[req.pocket];
         if (p) {
@@ -859,8 +1000,34 @@ export function placeObjects(st: GenState): PlacementReport {
    * the zones next door too, a third more time, and only half the distance
    * from the other starts (small maps have little room between them).
    */
+  const stand: Request[] = [];
   const place = (r: Request, roads: boolean): void => {
-    if (tryPlace(r, roads) || !r.required) return;
+    if (tryPlace(r, roads)) return;
+    // Its own stream, so the rest of the map draws as it would without.
+    const again = { ...r, minFar: r.minFar * 0.5 };
+    if (r.relax && tryPlace(again, roads, stageRng(st, "relax"))) return;
+    if (r.fallback !== undefined) {
+      // The fill's single-cell stand-in, placed with the other single
+      // cells after the roads.
+      const { row, data } = r.fallback;
+      const value = valueOf(row, data);
+      const own = r.zones[0] ?? 0;
+      stand.push({
+        ...r,
+        row,
+        data,
+        value,
+        minFar: r.from !== undefined ? 0 : farFor(row, value, data),
+        guarded: guardedIn(row, value, own, data),
+        label: `${r.label} (stand-in ${row.id})`,
+      });
+      delete stand[stand.length - 1]?.fallback;
+      return;
+    }
+    if (!r.required) {
+      report.unplaced++;
+      return;
+    }
     const own = r.zones[0] ?? 0;
     const wider: Request = {
       ...r,
@@ -880,8 +1047,13 @@ export function placeObjects(st: GenState): PlacementReport {
     if (!tryPlace(anywhere, roads)) report.skipped.push(r.label);
   };
   for (const r of requests.filter(multi)) place(r, false);
-  buildRoads(st);
-  for (const r of requests.filter((q) => !multi(q))) place(r, true);
+  buildRoads(
+    st,
+    guardReqs.map((q) => q.cell),
+  );
+  for (const r of [...requests.filter((q) => !multi(q)), ...stand]) {
+    place(r, true);
+  }
   // A waystone whose twin found no site would lead nowhere: drop it.
   const pairCount = new Map<string, number>();
   for (const o of st.objects) {
@@ -894,6 +1066,10 @@ export function placeObjects(st: GenState): PlacementReport {
       o.data["type"] !== "two-way-waystone" ||
       pairCount.get(String(o.data["pair"])) === 2,
   );
+
+  // A pickup is gone once taken: guards close passes and rings are
+  // measured without it.
+  for (const i of besideCells) st.objBlocked[i] = 0;
 
   // 5. Guards.
   const grng = stageRng(st, "guards");
@@ -943,12 +1119,41 @@ export function placeObjects(st: GenState): PlacementReport {
   }
   // Gates on open loops: border gates (keys in tents) and quest gates.
   const gateCount = [1, 1, 2][big] ?? 1;
+  if (gateSites.length <= gateCount) {
+    // Few open loops between zones (small maps): one-cell gaps in the room
+    // walls of wild zones that close the way there but cut nothing off (a
+    // longer way goes round) take the rest, so every map size has its
+    // gates.
+    const home = homeCell(st);
+    const open = reachable(st, home);
+    let total = 0;
+    for (let i = 0; i < g.n; i++) total += open[i] ?? 0;
+    for (const gap of st.gaps) {
+      if (gateSites.length > gateCount) break;
+      const role = st.zones[gap.zone]?.role;
+      if (role !== "middle" && role !== "town") continue;
+      const c = gap.cell;
+      if (gap.width !== 1 || !isWalkable(st, c) || (st.occupied[c] ?? 0))
+        continue;
+      if ((pocketOf[c] ?? -1) >= 0 || nearTown(c, oc.guardTownClearance))
+        continue;
+      if (gateSites.some((s) => g.cheb(s, c) < 6)) continue;
+      // A real choke: no way round it close by.
+      if (keepsConnected(st, c, [c], true)) continue;
+      const shut = reachable(st, home, (k) => k !== c && isWalkable(st, k));
+      let n = 0;
+      for (let i = 0; i < g.n; i++) n += shut[i] ?? 0;
+      if (n === total - 1) gateSites.push(c);
+    }
+  }
   const keyRow = ruleRow("keymasters-tent");
+  // A map with one site has a border gate or a quest gate, seeded.
+  const loneQuest = gateSites.length === 1 && stageRng(st, "gates").chance(0.5);
   gateSites.forEach((cell, k) => {
     if (k > gateCount) return;
     if ((st.occupied[cell] ?? 0) || nearTown(cell, oc.guardTownClearance))
       return;
-    const quest = k === gateCount;
+    const quest = k === gateCount || loneQuest;
     const colour = GATE_COLOURS[k % GATE_COLOURS.length] ?? "red";
     if (!quest && keyRow !== undefined) {
       // The tent first: no tent, no gate.
@@ -1037,8 +1242,8 @@ export function placeObjects(st: GenState): PlacementReport {
     free: (i) =>
       free(i) &&
       (pocketOf[i] ?? -1) < 0 &&
-      (crowd[i] ?? 0) < 2 &&
       ringCost(i) >= oc.oneWayMinDays * day,
+    roomy: (i) => (crowd[i] ?? 0) < 2,
     zoneCells,
     row: ruleRow("one-way-waystone"),
     nextId,
@@ -1057,14 +1262,17 @@ export function placeObjects(st: GenState): PlacementReport {
  * pocket); the exit's zone is no deeper (tier) than the entrance's, so a
  * waystone never skips a guard into richer land; both ends keep
  * `oneWayMinDays` from every start (no shortcut out of or into a home);
- * neither end touches a guard's zone of control or another object; the
- * entrance is off the roads. A zone holds at most one entrance.
+ * neither end touches a guard's zone of control, nor another object where
+ * the zone has room (bead bzc.50: dense maps); the entrance is off the
+ * roads and out of one-cell ways. A zone holds at most one entrance.
  */
 function placeOneWayWaystones(
   st: GenState,
   ctx: {
-    /** An open cell an end may use (spacing, pockets, starts checked). */
+    /** An open cell an end may use (pockets and starts checked). */
     free: (i: number) => boolean;
+    /** Not next to another object (preferred where the zone has room). */
+    roomy: (i: number) => boolean;
     zoneCells: readonly number[][];
     row: MapObjectRow | undefined;
     nextId: (prefix: string) => string;
@@ -1086,6 +1294,11 @@ function placeOneWayWaystones(
     }
   }
   const ok = (i: number): boolean => zoc[i] === 0 && ctx.free(i);
+  /** Cells next to no other object if there are any, else all of them. */
+  const roomiest = (cells: number[]): number[] => {
+    const roomy = cells.filter(ctx.roomy);
+    return roomy.length > 0 ? roomy : cells;
+  };
   const wild = st.zones.filter((z) => z.role === "middle" || z.role === "town");
   const order = rng.shuffle(wild.map((z) => z.id));
   let placed = 0;
@@ -1093,8 +1306,12 @@ function placeOneWayWaystones(
     if (placed >= count) break;
     const za = st.zones[a];
     if (za === undefined) continue;
-    const entrances = (ctx.zoneCells[a] ?? []).filter(
-      (i) => ok(i) && st.road[i] === 0,
+    // Stepping on the entrance sends a hero away, so it never stands in
+    // a one-cell way (another way goes round it close by).
+    const entrances = roomiest(
+      (ctx.zoneCells[a] ?? []).filter(
+        (i) => ok(i) && st.road[i] === 0 && keepsConnected(st, i, [i], true),
+      ),
     );
     if (entrances.length === 0) continue;
     const exitZones = rng.shuffle(
@@ -1102,7 +1319,7 @@ function placeOneWayWaystones(
     );
     let exit = -1;
     for (const b of exitZones) {
-      const cells = (ctx.zoneCells[b] ?? []).filter(ok);
+      const cells = roomiest((ctx.zoneCells[b] ?? []).filter(ok));
       if (cells.length > 0) {
         exit = rng.pick(cells);
         break;
@@ -1216,14 +1433,17 @@ function visitable(
 }
 
 /**
- * Whether blocking the footprint's non-entrance cells keeps every walkable
- * cell round it connected (within a small window, which is enough for the
- * whole map: any path through the footprint can go round it there).
+ * Whether blocking the footprint's non-entrance cells (all of them, the
+ * entrance too, with `blockEntrance`: a pickup taken from beside it) keeps
+ * every walkable cell round it connected (within a small window, which is
+ * enough for the whole map: any path through the footprint can go round it
+ * there).
  */
 function keepsConnected(
   st: GenState,
   e: number,
   foot: readonly number[],
+  blockEntrance = false,
 ): boolean {
   const { g } = st;
   let x0 = Infinity;
@@ -1240,7 +1460,7 @@ function keepsConnected(
   y0 = Math.max(0, y0 - 2);
   x1 = Math.min(g.w - 1, x1 + 2);
   y1 = Math.min(g.h - 1, y1 + 2);
-  const blocked = new Set(foot.filter((f) => f !== e));
+  const blocked = new Set(foot.filter((f) => blockEntrance || f !== e));
   const walk = (k: number): boolean => !blocked.has(k) && isWalkable(st, k);
   const inside = (k: number): boolean =>
     g.x(k) >= x0 && g.x(k) <= x1 && g.y(k) >= y0 && g.y(k) <= y1;
@@ -1292,7 +1512,7 @@ function findPockets(
   for (const gap of st.gaps) {
     const z = st.zones[gap.zone];
     if (!z || z.role === "start") continue;
-    if ((perZone.get(z.id) ?? 0) >= 2) continue;
+    if ((perZone.get(z.id) ?? 0) >= cfg.objects.pocketsPerZone) continue;
     const c = gap.cell;
     if (!isWalkable(st, c) || (st.occupied[c] ?? 0) || (pocketOf[c] ?? 0) >= 0)
       continue;
@@ -1326,15 +1546,23 @@ function findPockets(
 // ---------------------------------------------------------------------------
 // Roads
 
+/** Extra road cost of a cell in a guard's zone of control. */
+const GUARD_ROAD_PENALTY = 400;
+
 /**
  * Roads join every town: from the first player's town outwards, each town
  * (nearest first) runs a road to the network so far, sharing it where it
- * can. Then short spurs to the mines.
+ * can, and round the zones of control of the `guards` placed so far where
+ * it can (bead bzc.50). Then short spurs to the mines.
  */
-function buildRoads(st: GenState): void {
+function buildRoads(st: GenState, guards: readonly number[] = []): void {
   const { g } = st;
   const wobble = noiseField(g, 4, stageSalt(st, "road-wobble"), 2);
   const costs = roadCosts(st, wobble);
+  const zoc = new Set<number>();
+  for (const c of guards) for (const j of [c, ...g.around(c, N8)]) zoc.add(j);
+  for (const j of zoc)
+    costs.enter[j] = (costs.enter[j] ?? 0) + GUARD_ROAD_PENALTY;
   const mark = (path: number[] | undefined): void => {
     if (path) for (const i of path) st.road[i] = 1;
   };

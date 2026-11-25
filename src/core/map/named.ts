@@ -39,22 +39,15 @@ export function findNamedMap(id: string): NamedMapDef | undefined {
 }
 
 /**
- * The generated map of a definition before its edits. The named maps were
- * authored before the generator placed one-way waystones and Drill Yards
- * (bead bzc.32), so they are generated without them: their bases, edits
- * and fingerprints stay as reviewed.
+ * The generated map of a definition before its edits: the generator's
+ * defaults, one-way waystones and Drill Yards included (the named maps
+ * were re-authored on the denser generator of bead bzc.50).
  */
 export function generateNamedBase(def: NamedMapDef): GameMap {
   return generateMap(def.seed, {
     size: def.size,
     players: def.players,
     activePlayers: def.players,
-    config: {
-      objects: {
-        oneWayWaystones: { S: 0, M: 0, L: 0 },
-        perMap: { "drill-yard": { S: [0, 0], M: [0, 0], L: [0, 0] } },
-      },
-    },
   });
 }
 

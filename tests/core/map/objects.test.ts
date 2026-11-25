@@ -62,13 +62,14 @@ describe("catalogue placement", () => {
     }
   });
 
-  it("is dense: at least 9 visitable objects per 100 open cells", () => {
-    for (const [seed, size] of [
-      [1, "S"],
-      [2, "M"],
-      [3, "L"],
+  it("is dense: 18 or more visitable objects per 100 open cells", () => {
+    // Three starts crowd a small map with town yards: 15 there.
+    for (const [seed, size, least] of [
+      [1, "S", 15],
+      [2, "M", 18],
+      [3, "L", 18],
     ] as const) {
-      expect(mapDensity(map(seed, size)).visitable).toBeGreaterThan(9);
+      expect(mapDensity(map(seed, size)).visitable).toBeGreaterThan(least);
     }
   });
 
