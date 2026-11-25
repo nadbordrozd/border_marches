@@ -72,7 +72,12 @@ import { createRng } from "../../core/rng.ts";
 import { CREATURES } from "../../data/creatures.ts";
 import type { NeutralCreatureId } from "../../data/types.ts";
 import type { Route } from "../../router.ts";
-import { HEX_SIZE, STAGE_W, hexToStage } from "../../render/battle/geometry.ts";
+import {
+  HEX_SIZE,
+  STAGE_W,
+  hexToStage,
+  stageToView,
+} from "../../render/battle/geometry.ts";
 import { factionBattleSetup } from "./debug-armies.ts";
 import { runBattleScreen } from "./screen.ts";
 import { installTooltips } from "../tooltip.ts";
@@ -170,8 +175,17 @@ function pointAt(
   const sx = c.x + (d ? d[0] * HEX_SIZE * 0.6 : 0);
   const sy = c.y + (d ? d[1] * HEX_SIZE * 0.6 : 0);
   const rect = canvas.getBoundingClientRect();
-  const k = rect.width / STAGE_W;
-  return { clientX: rect.left + sx * k, clientY: rect.top + sy * k };
+  // The screen's stage view (layout() in screen.ts): zoom and stage origin.
+  const view = canvas.dataset;
+  const v = stageToView(
+    { x: sx, y: sy },
+    {
+      zoom: Number(view.zoom ?? rect.width / STAGE_W),
+      x: Number(view.x ?? 0),
+      y: Number(view.y ?? 0),
+    },
+  );
+  return { clientX: rect.left + v.x, clientY: rect.top + v.y };
 }
 
 /** The debug hero's book (magic=1): a few pages of each school. */

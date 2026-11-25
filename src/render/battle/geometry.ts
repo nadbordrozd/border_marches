@@ -14,6 +14,8 @@ import {
   inBounds,
 } from "../../core/battle/index.ts";
 import type { Hex } from "../../core/battle/index.ts";
+import { HERO_ASSETS, UNIT_ASSETS } from "../../assets/manifest.ts";
+import { UNIT_OPAQUE_TOP } from "../../assets/unit-tops.ts";
 
 /** Hex centre-to-corner radius in master pixels. */
 export const HEX_SIZE = 32;
@@ -104,13 +106,86 @@ function cubeRound(x: number, y: number, z: number): [number, number, number] {
 }
 
 /**
- * The largest zoom (CSS pixels per stage pixel) that fits the stage in the
- * box. When at least 1 fits, zoom x devicePixelRatio is a whole number so
- * every master pixel is a crisp block of device pixels; a box too small for
- * zoom 1 gets the fractional fit.
+ * How far the tallest sprite's paint rises above the top of the hex it
+ * stands on (feet FEET_BELOW_CENTER below the centre, hex top HEX_SIZE
+ * above), from each sprite's measured contact row and first opaque row. A
+ * sprite missing from UNIT_OPAQUE_TOP counts from its canvas top.
+ */
+export const MAX_SPRITE_RISE = Math.max(
+  0,
+  ...[...UNIT_ASSETS, ...HERO_ASSETS].map(
+    (a) =>
+      a.feet.contactY -
+      (UNIT_OPAQUE_TOP[a.key] ?? 0) -
+      FEET_BELOW_CENTER -
+      HEX_SIZE,
+  ),
+);
+
+/**
+ * What must stay in view when the window is tight (bead UI2-02): the whole
+ * field, a little side margin, and head room for the tallest sprite standing
+ * in row 0, so no head is ever cut. The rest of the stage margin may fall
+ * outside the view.
+ */
+export const VIEW_TOP_MIN = MAX_SPRITE_RISE;
+export const VIEW_SIDE_MIN = 8;
+/** The extent fitZoom fits: the field plus the margins above. */
+export const VIEW_CORE_W = FIELD_W + 2 * VIEW_SIDE_MIN;
+export const VIEW_CORE_H = FIELD_H + VIEW_TOP_MIN;
+
+/** Zoom steps above 1: quarter CSS pixels (1.25, 1.5, ...). */
+const ZOOM_STEP = 0.25;
+
+/**
+ * The largest zoom (CSS pixels per stage pixel) that fits the field and its
+ * head room (VIEW_CORE_W x VIEW_CORE_H) in the box. At 1 and above it is a
+ * quarter step (1, 1.25, 1.5, ...) or a whole number of device pixels per
+ * stage pixel, whichever is larger, and the canvas draws without smoothing,
+ * so sprites stay crisp blocks; a box too small for zoom 1 gets the
+ * fractional fit.
  */
 export function fitZoom(boxW: number, boxH: number, dpr = 1): number {
-  const fit = Math.min(boxW / STAGE_W, boxH / STAGE_H);
-  if (fit >= 1) return Math.max(1, Math.floor(fit * dpr) / dpr);
-  return Math.max(0.25, fit);
+  const fit = Math.min(boxW / VIEW_CORE_W, boxH / VIEW_CORE_H);
+  if (fit < 1) return Math.max(0.25, fit);
+  const quarter = Math.floor(fit / ZOOM_STEP) * ZOOM_STEP;
+  const whole = Math.floor(fit * dpr) / dpr;
+  return Math.max(1, quarter, whole);
+}
+
+/**
+ * Where the stage sits in a view box: the zoom and the CSS pixel position of
+ * stage (0, 0). The field is centred across; down, the full stage is centred
+ * when its margins fit, otherwise the head room above row 0 gets what there
+ * is (at least VIEW_TOP_MIN) and the bottom margin goes first. Offsets are
+ * whole device pixels so the zoomed pixel grid stays even.
+ */
+export interface StageView {
+  readonly zoom: number;
+  readonly x: number;
+  readonly y: number;
+}
+
+export function stageView(boxW: number, boxH: number, dpr = 1): StageView {
+  const zoom = fitZoom(boxW, boxH, dpr);
+  const snap = (v: number): number => Math.round(v * dpr) / dpr;
+  const x = (boxW - STAGE_W * zoom) / 2;
+  const head = Math.max(STAGE_TOP, VIEW_TOP_MIN) * zoom;
+  const extra = boxH - FIELD_H * zoom;
+  const margins = head + STAGE_BOTTOM * zoom;
+  const fieldTop =
+    extra >= margins ? head + (extra - margins) / 2 : Math.min(head, extra);
+  // Down, round toward the bottom so the head room is never short.
+  const y = Math.ceil((fieldTop - FIELD_Y * zoom) * dpr - 1e-9) / dpr;
+  return { zoom, x: snap(x), y };
+}
+
+/** A view point (CSS pixels in the view box) on the stage. */
+export function viewToStage(p: Point, v: StageView): Point {
+  return { x: (p.x - v.x) / v.zoom, y: (p.y - v.y) / v.zoom };
+}
+
+/** A stage point in view CSS pixels. */
+export function stageToView(p: Point, v: StageView): Point {
+  return { x: v.x + p.x * v.zoom, y: v.y + p.y * v.zoom };
 }

@@ -57,12 +57,12 @@ import {
 } from "../../render/battle/assets.ts";
 import type { BattleArt } from "../../render/battle/assets.ts";
 import {
-  STAGE_H,
-  STAGE_W,
-  fitZoom,
   hexToStage,
+  stageToView,
+  stageView,
+  viewToStage,
 } from "../../render/battle/geometry.ts";
-import type { Point } from "../../render/battle/geometry.ts";
+import type { Point, StageView } from "../../render/battle/geometry.ts";
 import { paintBackground, renderBattle } from "../../render/battle/renderer.ts";
 import {
   EMPTY_OVERLAY,
@@ -308,7 +308,13 @@ class BattleScreen {
   private animator: Animator;
   private art: BattleArt | null = null;
   private background: HTMLCanvasElement | null = null;
-  private zoom = 1;
+  /** Where the stage sits on the canvas, which fills the stage wrapper. */
+  private view: StageView = { zoom: 1, x: 0, y: 0 };
+  /** The ground pattern for the canvas beyond the stage. */
+  private ground: {
+    ctx: CanvasRenderingContext2D;
+    fill: CanvasPattern;
+  } | null = null;
   private frame = 0;
   private legal: LegalIndex = indexLegalActions([]);
   private pointer: Point | null = null;
@@ -450,18 +456,24 @@ class BattleScreen {
     this.cleanup.push(() => target.removeEventListener(type, handler));
   }
 
+  /**
+   * The canvas fills the stage wrapper; the stage is zoomed in quarter steps
+   * to fit the field (bead UI2-02) and the ground runs on to the edges.
+   */
   private layout(): void {
     const w = this.stageWrap.clientWidth;
     const h = this.stageWrap.clientHeight;
     if (w === 0 || h === 0) return;
     const dpr = window.devicePixelRatio || 1;
-    this.zoom = fitZoom(w, h, dpr);
-    const cssW = STAGE_W * this.zoom;
-    const cssH = STAGE_H * this.zoom;
-    this.canvas.style.width = `${cssW}px`;
-    this.canvas.style.height = `${cssH}px`;
-    this.canvas.width = Math.round(cssW * dpr);
-    this.canvas.height = Math.round(cssH * dpr);
+    this.view = stageView(w, h, dpr);
+    this.canvas.style.width = `${w}px`;
+    this.canvas.style.height = `${h}px`;
+    this.canvas.width = Math.round(w * dpr);
+    this.canvas.height = Math.round(h * dpr);
+    // For the debug routes' pointer helper (debug.ts).
+    this.canvas.dataset.zoom = String(this.view.zoom);
+    this.canvas.dataset.x = String(this.view.x);
+    this.canvas.dataset.y = String(this.view.y);
     this.placeTip();
   }
 
@@ -469,16 +481,16 @@ class BattleScreen {
   private toWrap(p: Point): Point {
     const rect = this.canvas.getBoundingClientRect();
     const wrap = this.stageWrap.getBoundingClientRect();
-    return {
-      x: rect.left - wrap.left + p.x * this.zoom,
-      y: rect.top - wrap.top + p.y * this.zoom,
-    };
+    const v = stageToView(p, this.view);
+    return { x: rect.left - wrap.left + v.x, y: rect.top - wrap.top + v.y };
   }
 
   private toStage(e: MouseEvent): Point {
     const rect = this.canvas.getBoundingClientRect();
-    const k = rect.width / STAGE_W;
-    return { x: (e.clientX - rect.left) / k, y: (e.clientY - rect.top) / k };
+    return viewToStage(
+      { x: e.clientX - rect.left, y: e.clientY - rect.top },
+      this.view,
+    );
   }
 
   // ----------------------------------------------------------- main loop
@@ -656,10 +668,26 @@ class BattleScreen {
     const ctx = this.canvas.getContext("2d");
     if (!ctx || !this.art || !this.background) return;
     const dpr = window.devicePixelRatio || 1;
-    const k = this.zoom * dpr;
+    const { zoom, x, y } = this.view;
+    const k = zoom * dpr;
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    ctx.setTransform(k, 0, 0, k, 0, 0);
+    ctx.imageSmoothingEnabled = false;
+    ctx.setTransform(k, 0, 0, k, x * dpr, y * dpr);
+    // The ground beyond the stage, in step with the stage's own pattern.
+    if (this.ground?.ctx !== ctx) {
+      const fill = ctx.createPattern(this.art.ground, "repeat");
+      this.ground = fill ? { ctx, fill } : null;
+    }
+    if (this.ground) {
+      ctx.fillStyle = this.ground.fill;
+      ctx.fillRect(
+        -x / zoom,
+        -y / zoom,
+        this.canvas.width / k,
+        this.canvas.height / k,
+      );
+    }
     renderBattle(ctx, {
       scene: this.scene,
       art: this.art,

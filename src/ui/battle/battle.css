@@ -126,7 +126,11 @@
   overflow: hidden;
 }
 
+/* The canvas fills the wrapper (UI2-02); absolute so it never sizes it. */
 .bm-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
   display: block;
   image-rendering: pixelated;
 }
