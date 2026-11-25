@@ -16,7 +16,11 @@ import {
 } from "../../../src/core/ai/index.ts";
 import { homeGuard } from "../../../src/core/ai/adventure-ai.ts";
 import { pathIn, reachFor } from "../../../src/core/ai/reach.ts";
-import { fastPredictedMs, predictedMs } from "../../../src/core/ai/strength.ts";
+import {
+  armyFv,
+  fastPredictedMs,
+  predictedMs,
+} from "../../../src/core/ai/strength.ts";
 import {
   aiStep,
   battleSetup,
@@ -218,20 +222,20 @@ describe("fight budget (strength.ts)", () => {
 });
 
 describe("capital defence", () => {
-  it("keeps the tier-1 militia home from day one", () => {
+  it("keeps a guard home from day one", () => {
+    // Iteration 4: by value (half a week's growth in the capital's first
+    // fortnight, about the militia's tier-1 stack), no longer by tier.
     const s = withGold(duel(30), 0);
-    expect(homeGuard(s, "squire")).toBe(true);
-    // The main hero stands in its town on day 1 and takes what it may.
     const here: GameState = {
       ...s,
       heroes: s.heroes.map((h) => (h.owner === 0 ? { ...h, x: 0, y: 2 } : h)),
     };
     const garrison = here.towns["t0"]!.garrison;
     expect(garrison.some((g) => g !== null)).toBe(true);
+    const guard = homeGuard(here, here.towns["t0"]!, true);
+    expect(guard).toBeGreaterThan(0);
     const { state } = turnActions(here, fast());
-    const left = state.towns["t0"]!.garrison.filter((g) => g !== null);
-    expect(left.length).toBeGreaterThan(0);
-    expect(left.every((g) => homeGuard(s, g!.creature))).toBe(true);
+    expect(armyFv(state.towns["t0"]!.garrison)).toBeGreaterThanOrEqual(guard);
   });
 
   it("keeps the garrison home while a rival seen nearby is in the fog", () => {

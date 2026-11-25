@@ -27,6 +27,7 @@ import {
   type GameAction,
   type GameEvent,
   type GameState,
+  type PendingBattle,
   type PlayerController,
 } from "../game/index.ts";
 import {
@@ -100,6 +101,24 @@ export interface MatchOptions {
   onAction?: (before: GameState, step: AiStepResult) => void;
 }
 
+/**
+ * One battle against another player's hero or town (iteration 4 adds what
+ * it was, the armies' fight values and who won, to tell decisive battles
+ * from pointless ones).
+ */
+export interface PlayerFight {
+  day: number;
+  attacker: number;
+  defender: number;
+  kind: "hero" | "town";
+  /** The attacking hero's army fight value before the battle. */
+  attackerFv: number;
+  /** The defending hero's army and the town's garrison before it. */
+  defenderFv: number;
+  /** The attacking hero survived (won or the defender fled). */
+  won: boolean;
+}
+
 export interface MatchResult {
   /** Metrics per day (index day - 1), one entry per player. */
   days: PlayerMetrics[][];
@@ -122,7 +141,7 @@ export interface MatchResult {
    */
   firstPlayerFight: number | null;
   firstTownLoss: number | null;
-  playerFights: Array<{ day: number; attacker: number; defender: number }>;
+  playerFights: PlayerFight[];
   /**
    * Towns taken from another player (iteration 3): day, town, taker and
    * loser. A town taken again within two weeks of changing hands is a
@@ -138,6 +157,17 @@ export interface MatchResult {
   battleErrors: Array<{ day: number; player: number; message: string }>;
   /** Battles where both sides fell at once (RULES_V2 1.12 last stand). */
   lastStands: number;
+  /**
+   * Turns cut off at the 200-action cap (iteration 4: a controller that
+   * loops, such as troops moved back and forth; there should be none).
+   */
+  cappedTurns: number;
+  /**
+   * Visits to a site that gave the hero nothing ("already blessed",
+   * "Already visited", "nothing more"...; iteration 4: walks stopped at
+   * such sites on the way).
+   */
+  pointlessVisits: number;
 }
 
 const VALUE: Readonly<Record<string, number>> = {
@@ -257,6 +287,9 @@ function now(): number {
   return g.performance?.now() ?? 0;
 }
 
+/** Turns cut off at the action cap in this process (see cappedTurns). */
+let cappedTurns = 0;
+
 /** runAiTurn, step by step, reporting every action and its events. */
 function tracedTurn(
   state: GameState,
@@ -274,6 +307,7 @@ function tracedTurn(
     events.push(...step.events);
     if (step.outcome !== "continue") return { ...step, events };
   }
+  cappedTurns++;
   const ended = endTurn(s);
   if (!ended.ok) {
     return { state: s, events, action: null, outcome: "game-over" };
@@ -307,6 +341,8 @@ export function playMatch(options: MatchOptions): MatchResult {
   const failures: MatchResult["failures"] = [];
   const battleErrors: MatchResult["battleErrors"] = [];
   let lastStands = 0;
+  let pointlessVisits = 0;
+  const cappedBefore = cappedTurns;
   const wrapped = new Map<number, PlayerController>();
   const controllers = (p: number): PlayerController => {
     let c = wrapped.get(p);
@@ -326,6 +362,53 @@ export function playMatch(options: MatchOptions): MatchResult {
     }
     return c;
   };
+  const playerFights: MatchResult["playerFights"] = [];
+  let firstPlayerFight: number | null = null;
+  /** A battle against another player's hero or town, with its armies. */
+  const notePlayerFight = (
+    before: GameState,
+    step: AiStepResult,
+    b: PendingBattle,
+  ): void => {
+    let defender: number | null = null;
+    let defenderFv = 0;
+    if (b.kind === "hero") {
+      const foe = before.heroes.find((h) => h.id === b.objectId);
+      defender = foe?.owner ?? null;
+      defenderFv = foe === undefined ? 0 : armyFv(foe.army);
+      const town = b.townId === undefined ? undefined : before.towns[b.townId];
+      if (town !== undefined) defenderFv += armyFv(town.garrison);
+    } else if (b.kind === "town") {
+      const town = before.towns[b.objectId];
+      defender = town?.owner ?? null;
+      defenderFv = town === undefined ? 0 : armyFv(town.garrison);
+      const inside = before.heroes.find(
+        (h) =>
+          h.alive &&
+          h.owner === defender &&
+          h.id !== b.heroId &&
+          before.map.objects.some(
+            (o) => o.id === b.objectId && o.x === h.x && o.y === h.y,
+          ),
+      );
+      if (inside !== undefined) defenderFv += armyFv(inside.army);
+    }
+    const player = before.currentPlayer;
+    if (defender === null || defender === player) return;
+    if (b.kind !== "hero" && b.kind !== "town") return;
+    const attacker = before.heroes.find((h) => h.id === b.heroId);
+    const after = step.state.heroes.find((h) => h.id === b.heroId);
+    firstPlayerFight ??= before.day;
+    playerFights.push({
+      day: before.day,
+      attacker: player,
+      defender,
+      kind: b.kind,
+      attackerFv: attacker === undefined ? 0 : armyFv(attacker.army),
+      defenderFv,
+      won: after !== undefined && after.alive,
+    });
+  };
   const onAction = (before: GameState, step: AiStepResult): void => {
     if (
       decided !== null &&
@@ -340,7 +423,11 @@ export function playMatch(options: MatchOptions): MatchResult {
     }
     decided = null;
     for (const e of step.events) {
+      if (e.type === "battle") notePlayerFight(before, step, e.battle);
       if (e.type === "last-stand") lastStands++;
+      if (e.type === "site" && /already|nothing/i.test(e.text)) {
+        pointlessVisits++;
+      }
       if (e.type === "battle-error") {
         battleErrors.push({
           day: before.day,
@@ -355,9 +442,7 @@ export function playMatch(options: MatchOptions): MatchResult {
   const turnMs: number[][] = state.players.map(() => []);
   const days: PlayerMetrics[][] = [];
   let idle = state.players.map(() => 0);
-  let firstPlayerFight: number | null = null;
   let firstTownLoss: number | null = null;
-  const playerFights: MatchResult["playerFights"] = [];
   const townsTaken: MatchResult["townsTaken"] = [];
   const eliminatedOn: Array<number | null> = state.players.map(() => null);
   while (state.status === "playing" && state.day <= options.days) {
@@ -374,20 +459,6 @@ export function playMatch(options: MatchOptions): MatchResult {
     for (const e of turn.events) {
       if (e.type === "monster-defeated") {
         cleared[player] = (cleared[player] ?? 0) + 1;
-      }
-      if (e.type === "battle") {
-        const b = e.battle;
-        let defender: number | null = null;
-        if (b.kind === "hero") {
-          defender =
-            state.heroes.find((h) => h.id === b.objectId)?.owner ?? null;
-        } else if (b.kind === "town") {
-          defender = state.towns[b.objectId]?.owner ?? null;
-        }
-        if (defender !== null && defender !== player) {
-          firstPlayerFight ??= day;
-          playerFights.push({ day, attacker: player, defender });
-        }
       }
       if (
         e.type === "town-captured" &&
@@ -442,5 +513,7 @@ export function playMatch(options: MatchOptions): MatchResult {
     eliminatedOn,
     battleErrors,
     lastStands,
+    cappedTurns: cappedTurns - cappedBefore,
+    pointlessVisits,
   };
 }

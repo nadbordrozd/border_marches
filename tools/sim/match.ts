@@ -305,7 +305,7 @@ for (const seed of seeds) {
     d56 === undefined || guards === 0 ? 0 : (guards - d56.guardsLeft) / guards;
   const last = result.days[result.days.length - 1] ?? [];
   console.log(
-    `SUMMARY seed ${seed} first-player-fight d${result.firstPlayerFight ?? "-"} first-town-loss d${result.firstTownLoss ?? "-"} player-fights ${result.playerFights.length} guards-cleared-d56 ${pct(cleared56)} eliminated ${result.eliminatedOn.map((d) => d ?? "-").join("/")} army-end ${last.map((m) => m.armyFv).join("/")} turn-ms mean ${mean.toFixed(0)} max ${max.toFixed(0)} p95 ${percentile(all, 0.95).toFixed(0)} last-stands ${result.lastStands} void ${result.battleErrors.length} sims ${current?.simulations ?? 0} inferred ${current?.inferred ?? 0} deferred ${current?.deferrals ?? 0}`,
+    `SUMMARY seed ${seed} first-player-fight d${result.firstPlayerFight ?? "-"} first-town-loss d${result.firstTownLoss ?? "-"} player-fights ${result.playerFights.length} guards-cleared-d56 ${pct(cleared56)} eliminated ${result.eliminatedOn.map((d) => d ?? "-").join("/")} army-end ${last.map((m) => m.armyFv).join("/")} turn-ms mean ${mean.toFixed(0)} max ${max.toFixed(0)} p95 ${percentile(all, 0.95).toFixed(0)} last-stands ${result.lastStands} capped ${result.cappedTurns} pointless-visits ${result.pointlessVisits} void ${result.battleErrors.length} sims ${current?.simulations ?? 0} inferred ${current?.inferred ?? 0} deferred ${current?.deferrals ?? 0}`,
   );
   for (const b of result.battleErrors.slice(0, 5)) {
     console.log(`  void battle d${b.day} p${b.player}: ${b.message}`);
@@ -335,6 +335,8 @@ for (const seed of seeds) {
     turnP95: percentile(all, 0.95),
     battleErrors: result.battleErrors,
     lastStands: result.lastStands,
+    cappedTurns: result.cappedTurns,
+    pointlessVisits: result.pointlessVisits,
     days: result.days,
   });
 }

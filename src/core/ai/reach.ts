@@ -143,17 +143,34 @@ export function waystoneExits(state: GameState): Map<number, number> {
   return out;
 }
 
-/** Every cell the hero can reach within `budget` movement points. */
+/**
+ * Extra planning cost of walking through an entrance that stops the walk
+ * and gives the hero nothing (iteration 4): about a cell and a half, so a
+ * route beside such a site wins whenever one exists at a similar cost.
+ */
+export const POINTLESS_STOP_COST = 150;
+
+/**
+ * Every cell the hero can reach within `budget` movement points.
+ * `pointless` (iteration 4, bead bzc.41) lists entrances whose visit
+ * stops the walk and gives this hero nothing (a well it is already
+ * blessed by, a spent site): routes go beside them when they can, at
+ * POINTLESS_STOP_COST extra each in the planning order; the costs kept
+ * are the real movement costs of the routes chosen.
+ */
 export function reachFor(
   state: GameState,
   hero: HeroState,
   budget: number,
+  pointless: ReadonlySet<number> = new Set(),
 ): Reach {
   const ctx = moveContext(state, hero);
   const { map } = state;
   const w = map.width;
   const start = hero.y * w + hero.x;
   const cost = new Map<number, number>([[start, 0]]);
+  // Planning order: the real cost plus the pointless stops passed.
+  const prio = new Map<number, number>([[start, 0]]);
   const parent = new Map<number, number>();
   const through = passThrough(state, hero);
   const exits = waystoneExits(state);
@@ -180,16 +197,18 @@ export function reachFor(
         const ex = exit % w;
         const ey = (exit - ex) / w;
         const g = cost.get(cur) ?? 0;
-        const old = cost.get(exit);
+        const gp = prio.get(cur) ?? g;
+        const old = prio.get(exit);
         if (
           !closed.has(exit) &&
-          (old === undefined || g < old) &&
+          (old === undefined || gp < old) &&
           canEnter(ctx, ex, ey)
         ) {
           cost.set(exit, g);
+          prio.set(exit, gp);
           parent.set(exit, cur);
           jumps.add(exit);
-          open.push(g, exit);
+          open.push(gp, exit);
         }
         continue;
       }
@@ -198,6 +217,7 @@ export function reachFor(
       }
     }
     const gc = cost.get(cur) ?? 0;
+    const gp = prio.get(cur) ?? gc;
     for (const [dx, dy] of DIRECTIONS_8) {
       const nx = cx + dx;
       const ny = cy + dy;
@@ -205,15 +225,25 @@ export function reachFor(
       const ni = ny * w + nx;
       if (closed.has(ni) || !canEnter(ctx, nx, ny)) continue;
       if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
-      const ng =
-        gc + stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny, ctx.forestCost);
+      const step = stepCost(
+        map,
+        ctx.nativeTerrain,
+        cx,
+        cy,
+        nx,
+        ny,
+        ctx.forestCost,
+      );
+      const ng = gc + step;
       if (ng > budget) continue;
-      const old = cost.get(ni);
-      if (old !== undefined && old <= ng) continue;
+      const np = gp + step + (pointless.has(ni) ? POINTLESS_STOP_COST : 0);
+      const old = prio.get(ni);
+      if (old !== undefined && old <= np) continue;
       cost.set(ni, ng);
+      prio.set(ni, np);
       parent.set(ni, cur);
       jumps.delete(ni);
-      open.push(ng, ni);
+      open.push(np, ni);
     }
   }
   return { cost, parent, ctx, start, jumps };

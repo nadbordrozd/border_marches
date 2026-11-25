@@ -292,28 +292,57 @@ export function after(res: Resources, cost: Partial<Resources>): Resources {
   return subtractResources(res, cost);
 }
 
-/** How many heroes the player wants now. */
-export function wantedHeroes(state: GameState, player: number): number {
+/**
+ * How many heroes the player wants now. `work` (iteration 4) says whether
+ * the map still has work for more than two (ground to explore, stacks to
+ * clear): late in a game a third and fourth hero hired then only idled.
+ */
+export function wantedHeroes(
+  state: GameState,
+  player: number,
+  work = true,
+  plan: HeroPlan = DEFAULT_HERO_PLAN,
+): number {
   const day = state.day;
   const gold = state.players.find((p) => p.id === player)?.resources.gold ?? 0;
+  if (!work) return 2;
   // A rich player (iteration 2: 50-70k gold sat unspent in long games)
   // sends a fourth hero for mines, pickups and ferrying.
-  if (day >= 21 && gold >= HIRE_COST + 15000) return 4;
-  if (day >= 10 && gold >= HIRE_COST + 6000) return 3;
+  const [d4, g4] = plan.fourth ?? [Infinity, 0];
+  const [d3, g3] = plan.third ?? [Infinity, 0];
+  if (day >= d4 && gold >= HIRE_COST + g4) return 4;
+  if (day >= d3 && gold >= HIRE_COST + g3) return 3;
   return 2;
 }
+
+/**
+ * When a third and fourth hero are hired: [day, gold above the hire
+ * cost], or null for never (difficulty.ts; iteration 4).
+ */
+export interface HeroPlan {
+  third: readonly [number, number] | null;
+  fourth: readonly [number, number] | null;
+}
+
+/** Normal's hero plan (iterations 1-3). */
+export const DEFAULT_HERO_PLAN: HeroPlan = {
+  third: [10, 6000],
+  fourth: [21, 15000],
+};
 
 /** A hire that the player should make now, or null. */
 export function chooseHire(
   state: GameState,
   player: number,
   towns: readonly TownState[],
+  work = true,
+  plan: HeroPlan = DEFAULT_HERO_PLAN,
 ): GameAction | null {
   const p = state.players.find((x) => x.id === player);
   if (p === undefined) return null;
   const heroes = heroesOf(state, player);
   if (heroes.length >= MAX_HEROES) return null;
-  const want = wantedHeroes(state, player);
+  const want = wantedHeroes(state, player, work, plan);
   if (heroes.length >= want) return null;
   // The first hire may leave little; later ones keep a cushion.
   const cushion = heroes.length === 0 ? 0 : heroes.length === 1 ? 500 : 4000;

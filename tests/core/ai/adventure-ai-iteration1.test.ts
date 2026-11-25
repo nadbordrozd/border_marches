@@ -242,8 +242,20 @@ describe("AdventureAi iteration 1", () => {
       ),
     ).toBe(true);
     const f = state.heroes.find((h) => h.id === "hero-ferry")!;
-    expect(armyFv(f.army)).toBeGreaterThan(armyFv(army(["knight", 3])));
     expect(f.x).toBeGreaterThan(5);
+    // The knights left town with it (iteration 4: the main hero may come
+    // to meet it and take them the same day; the archers stay home as the
+    // capital's guard by value).
+    const knights = state.heroes.reduce(
+      (n, h) =>
+        n +
+        h.army.reduce(
+          (k, x) => k + (x?.creature === "knight" ? x.count : 0),
+          0,
+        ),
+      0,
+    );
+    expect(knights).toBe(14);
   });
 
   it("goes for a key and then through its gate", () => {

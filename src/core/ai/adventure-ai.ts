@@ -36,7 +36,9 @@
  * Iterations 1-3 (docs/design/AI.md) added fight families, who is
  * winning, capital defence (home guard, towns on watch, held towns),
  * consolidation (town guards), waystones and the difficulty levels
- * (difficulty.ts).
+ * (difficulty.ts). Iteration 4 added the war plan (one rival at a time),
+ * the home guard by value, routes beside pointless stops, round trips
+ * from guarded towns, errands and per-player fog memory.
  *
  * Determinism: no randomness; ties break by map order. The goal and
  * futility memories live in the controller instance (a reloaded game
@@ -174,6 +176,24 @@ const CLEAR_VALUE = 350;
 const WATCH_DAYS = 6;
 /** Bonus factor for a hero's previous target (goal memory). */
 const GOAL_BONUS = 1.25;
+/**
+ * A rival town is left alone when its owner has a hero seen near it with
+ * more than this share of our hero's power (iteration 4; it was worth 35%
+ * above 0.8 and still taken and lost again within days).
+ */
+const CHASE_SHARE = 0.8;
+/**
+ * A rival is finished off (its towns worth more, a smaller edge) when we
+ * outweigh it this much and know at most this many of its towns
+ * (iteration 3: 2 and two towns; iteration 4 widens it so wars end).
+ */
+const FINISH_STANDING = 1.6;
+const FINISH_TOWNS = 3;
+/**
+ * The fight-value edge wanted against a rival hero that threatens one of
+ * our towns (iteration 4; was 1.3 like any hero fight).
+ */
+const DEFEND_EDGE = 1.15;
 /** Extra days added to every target (prefers fewer, bigger trips). */
 const DAY_OFFSET = 0.35;
 
@@ -187,6 +207,16 @@ export const WANDER_DAYS: Readonly<Record<string, number>> = {
   undead: 2,
   goblins: 3,
 };
+
+/** A rival hero as a player last saw it (fog memory). */
+interface SeenHero {
+  owner: number;
+  power: number;
+  day: number;
+  x: number;
+  y: number;
+  maxMp: number;
+}
 
 /** A target a hero may walk to. */
 interface Target {
@@ -264,6 +294,8 @@ interface Turn {
   lossCost: number;
   /** Each hero's reach, computed on first use. */
   reach: Map<string, Reach>;
+  /** Seer quest leads (questLeads), computed on first use. */
+  leads?: Map<string, number>;
   /** What the heroes ask of the build order (magic guild early). */
   plan: BuildPlan;
   /**
@@ -282,21 +314,44 @@ interface Turn {
    */
   finishing: Set<number>;
   /**
+   * The rival this player makes war on (iteration 4's war plan), or null
+   * with fewer than two rivals: the others are only defended against.
+   */
+  focus: number | null;
+  /**
    * The main hero wants its reserves: a rival target it cannot take alone
    * lies within reach and the secondaries' troops would tip it.
    */
   gather: boolean;
 }
 
+/** Fight value of one week's growth of the town's dwellings. */
+export function weeklyGrowthFv(town: TownState): number {
+  let fv = 0;
+  for (const c of Object.keys(town.dwellings)) {
+    const def = getCreature(c);
+    fv += def.growth * def.fightValue;
+  }
+  return fv;
+}
+
 /**
- * The cheapest creatures stay in town as its guard: an empty town falls
- * to any passing hero. From day one since iteration 3 (bead bzc.23): the
- * starting militia's tier-1 stack is the capital's guard (a main hero that
- * took the whole militia left its capital empty, taken on day 3 in M
- * seed 11).
+ * The guard a town keeps by value (iteration 4, bead bzc.41): a share of
+ * one week's growth of its dwellings; half of it in the capital's first
+ * two weeks (about the starting militia's tier-1 stack, the capital's
+ * week-one guard since iteration 3), then 30% there and 15% in other
+ * towns. Iterations 1-3 kept every tier-1 creature home, by tier: the
+ * undead, whose numbers are tier-1 skeletons, grew slowly, and late in a
+ * game a garrison held weeks of tier-1 growth while the main hero lacked
+ * it.
  */
-export function homeGuard(_state: GameState, creature: string): boolean {
-  return getCreature(creature).tier === 1;
+export function homeGuard(
+  state: GameState,
+  town: TownState,
+  capital: boolean,
+): number {
+  const share = capital ? (state.day <= 14 ? 0.5 : 0.3) : 0.15;
+  return weeklyGrowthFv(town) * share;
 }
 
 /**
@@ -414,24 +469,31 @@ export class AdventureAi implements PlayerController {
   private readonly ownedTowns = new Map<number, Set<string>>();
   private dangerCache: { key: string; danger: Map<number, number> } | null =
     null;
-  /** Enemy hero id -> owner, power and place when last seen (fog memory). */
-  private readonly seen = new Map<
-    string,
-    {
-      owner: number;
-      power: number;
-      day: number;
-      x: number;
-      y: number;
-      maxMp: number;
-    }
-  >();
+  /**
+   * Player -> enemy hero id -> owner, power and place when that player
+   * last saw it (fog memory; iteration 4: per player, so one computer
+   * player never knows what another saw).
+   */
+  private readonly seen = new Map<number, Map<string, SeenHero>>();
   /** Player -> its own total power by day (who is winning, over time). */
   private readonly powerLog = new Map<number, Map<number, number>>();
   /** "<player>:<enemy>" -> days this player attacked that enemy. */
   private readonly attacks = new Map<string, number[]>();
   /** "<player>:<enemy hero>" -> day Read the Seal was last cast on it. */
   private readonly sealRead = new Map<string, number>();
+  /** "<player>:<town>" -> the day the player took (or began with) it. */
+  private readonly since = new Map<string, number>();
+  /** "<player>:<town>" -> when the player lost it, after how many days. */
+  private readonly lostOn = new Map<string, { day: number; held: number }>();
+  /** Hero id -> the town cell it must be back on before the day ends. */
+  private readonly anchors = new Map<
+    string,
+    { day: number; x: number; y: number }
+  >();
+  /** Town -> the last day a hero left troops there (no taking back). */
+  private readonly droppedAt = new Map<string, number>();
+  /** Player -> the rival it makes war on (iteration 4, see warPlan). */
+  private readonly focusOf = new Map<number, number>();
   /** Hero id -> cells it was seen on, by day (last few days). */
   private readonly trail = new Map<string, Array<[number, number, number]>>();
 
@@ -622,6 +684,7 @@ export class AdventureAi implements PlayerController {
       this.ownedTowns.set(player, owned);
     }
     for (const t of towns) owned.add(t.id);
+    this.noteTenure(state, player, towns);
     const explored = state.players.find((p) => p.id === player)?.explored ?? [];
     let seen = 0;
     for (const e of explored) if (e) seen++;
@@ -672,12 +735,10 @@ export class AdventureAi implements PlayerController {
       .map((h) => `${h.id}@${h.x},${h.y}:${Math.round(heroPower(h))}`)
       .join(";")}`;
     const cached = this.dangerCache;
-    const danger =
-      cached !== null && cached.key === dangerKey
-        ? cached.danger
-        : new Map<number, number>();
+    const fresh = cached === null || cached.key !== dangerKey;
+    const danger = fresh ? new Map<number, number>() : cached.danger;
     this.dangerCache = { key: dangerKey, danger };
-    for (const foe of cached?.key === dangerKey ? [] : enemies) {
+    for (const foe of fresh ? enemies : []) {
       const p = heroPower(foe);
       const r = reachFor(state, foe, Math.max(foe.maxMp, foe.mp));
       for (const i of r.cost.keys()) {
@@ -716,7 +777,7 @@ export class AdventureAi implements PlayerController {
     const lossCost =
       LOSS_COST / Math.min(3, 1 + reserves / Math.max(1, mainFv));
     const strategy = this.strategy(state, player, all, towns, enemies);
-    const watch = this.watchList(state, towns, enemies);
+    const watch = this.watchList(state, player, towns, enemies);
     this.noteTrail(state, all);
     const turn: Turn = {
       state,
@@ -747,6 +808,16 @@ export class AdventureAi implements PlayerController {
     return turn;
   }
 
+  /** What `player` remembers of rival heroes (see `seen`). */
+  private seenBy(player: number): Map<string, SeenHero> {
+    let m = this.seen.get(player);
+    if (m === undefined) {
+      m = new Map();
+      this.seen.set(player, m);
+    }
+    return m;
+  }
+
   /**
    * Who is winning (iteration 2, bead bzc.22). Our power (heroes and
    * garrisons) against each rival's: its heroes as last seen (a hero seen
@@ -761,9 +832,9 @@ export class AdventureAi implements PlayerController {
     heroes: readonly HeroState[],
     towns: readonly TownState[],
     enemies: readonly HeroState[],
-  ): Pick<Turn, "standing" | "stalled" | "rivals" | "finishing"> {
+  ): Pick<Turn, "standing" | "stalled" | "rivals" | "finishing" | "focus"> {
     for (const foe of enemies) {
-      this.seen.set(foe.id, {
+      this.seenBy(player).set(foe.id, {
         owner: foe.owner,
         power: heroPower(foe),
         day: state.day,
@@ -786,7 +857,7 @@ export class AdventureAi implements PlayerController {
     for (const p of state.players) {
       if (p.id !== player && !p.eliminated) foes.set(p.id, 0);
     }
-    for (const [id, seen] of this.seen) {
+    for (const [id, seen] of this.seenBy(player)) {
       if (!foes.has(seen.owner) || state.day - seen.day > 21) continue;
       const h = state.heroes.find((x) => x.id === id);
       if (h === undefined || !h.alive || h.owner !== seen.owner) continue;
@@ -816,11 +887,108 @@ export class AdventureAi implements PlayerController {
     }
     const finishing = new Set<number>();
     for (const [p, n] of known) {
-      if (n <= 2 && (standing.get(p) ?? 0) >= 2 && !stalled.has(p)) {
+      if (
+        n <= FINISH_TOWNS &&
+        (standing.get(p) ?? 0) >= FINISH_STANDING &&
+        !stalled.has(p)
+      ) {
         finishing.add(p);
       }
     }
-    return { standing, stalled, rivals: foes.size, finishing };
+    const focus = this.warPlan(state, player, towns, standing, foes);
+    return { standing, stalled, rivals: foes.size, finishing, focus };
+  }
+
+  /**
+   * The war plan (iteration 4, bead bzc.41): with two or more rivals left,
+   * the player makes war on one of them (the focus) and holds a defensive
+   * posture against the rest (three-player maps had 24-46 player battles
+   * a match, towns flipping and every army worn down). Each rival scores
+   * by weakness (our power over its known power), nearness (its nearest
+   * known town or hero to our towns) and threat (it took a town of ours,
+   * or its heroes roam near them); the focus is sticky and changes only
+   * when another rival scores 1.5 times as much or the focus is out.
+   * Null with fewer than two rivals (no plan needed).
+   */
+  private warPlan(
+    state: GameState,
+    player: number,
+    towns: readonly TownState[],
+    standing: ReadonlyMap<number, number>,
+    foes: ReadonlyMap<number, number>,
+  ): number | null {
+    if (foes.size < 2) {
+      this.focusOf.delete(player);
+      return null;
+    }
+    const w = state.map.width;
+    const explored = state.players.find((p) => p.id === player)?.explored;
+    const homes = towns.flatMap((t) => {
+      const o = townObject(state, t.id);
+      return o === undefined ? [] : [o];
+    });
+    const owned = this.ownedTowns.get(player) ?? new Set<string>();
+    const score = new Map<number, number>();
+    for (const [rival] of foes) {
+      let dist = Infinity;
+      let threat = 0;
+      let seenAny = false;
+      const near = (x: number, y: number): number =>
+        Math.min(Infinity, ...homes.map((o) => chebyshev(o.x, o.y, x, y)));
+      for (const t of Object.values(state.towns)) {
+        if (t.owner !== rival) continue;
+        const o = townObject(state, t.id);
+        if (o === undefined || explored?.[o.y * w + o.x] !== true) continue;
+        seenAny = true;
+        dist = Math.min(dist, near(o.x, o.y));
+        // It holds a town that was ours: it is at war with us.
+        if (owned.has(t.id)) threat += 2;
+      }
+      for (const [id, seen] of this.seenBy(player)) {
+        if (seen.owner !== rival || state.day - seen.day > 14) continue;
+        const h = state.heroes.find((x) => x.id === id);
+        if (h === undefined || !h.alive || h.owner !== rival) continue;
+        seenAny = true;
+        const d = near(seen.x, seen.y);
+        dist = Math.min(dist, d);
+        if (state.day - seen.day <= 5 && d <= (seen.maxMp / 100) * 3 + 2) {
+          threat = Math.max(threat, 1);
+        }
+      }
+      if (!seenAny) continue;
+      const weak = Math.min(4, standing.get(rival) ?? 1);
+      const nearness = 30 / (30 + (Number.isFinite(dist) ? dist : 60));
+      score.set(rival, Math.sqrt(weak) * nearness * (1 + threat * 0.5));
+    }
+    const current = this.focusOf.get(player);
+    let best: number | null = null;
+    let bestScore = 0;
+    for (const [rival, s] of score) {
+      if (s > bestScore) {
+        bestScore = s;
+        best = rival;
+      }
+    }
+    const held = current === undefined ? undefined : score.get(current);
+    if (current !== undefined && held !== undefined && bestScore < held * 1.5) {
+      best = current;
+    }
+    if (best === null) {
+      this.focusOf.delete(player);
+      return null;
+    }
+    this.focusOf.set(player, best);
+    return best;
+  }
+
+  /**
+   * Whether the war plan holds back against `rival` (iteration 4): with a
+   * focus chosen, every other rival is only defended against.
+   */
+  private holding(turn: Turn, rival: number): boolean {
+    return (
+      turn.focus !== null && rival !== turn.focus && !turn.finishing.has(rival)
+    );
   }
 
   /**
@@ -834,6 +1002,7 @@ export class AdventureAi implements PlayerController {
    */
   private watchList(
     state: GameState,
+    player: number,
     towns: readonly TownState[],
     enemies: readonly HeroState[],
   ): Map<string, number> {
@@ -846,7 +1015,7 @@ export class AdventureAi implements PlayerController {
       const defence =
         armyFv(town.garrison) * 1.1 +
         (defenders === undefined ? 0 : heroPower(defenders));
-      for (const [id, seen] of this.seen) {
+      for (const [id, seen] of this.seenBy(player)) {
         if (visible.has(id)) continue;
         const since = state.day - seen.day;
         if (since < 1 || since > WATCH_DAYS) continue;
@@ -864,6 +1033,15 @@ export class AdventureAi implements PlayerController {
     return watch;
   }
 
+  /** A town's defence: its garrison with the fort, and a hero in it. */
+  private townDefence(state: GameState, town: TownState): number {
+    const inside = heroInTownOf(state, town);
+    return (
+      armyFv(town.garrison) * 1.1 +
+      (inside === undefined ? 0 : heroPower(inside))
+    );
+  }
+
   /** Records where the player's heroes stand now (see wasAt). */
   private noteTrail(state: GameState, heroes: readonly HeroState[]): void {
     for (const h of heroes) {
@@ -879,6 +1057,43 @@ export class AdventureAi implements PlayerController {
       t.push([state.day, h.x, h.y]);
       while (t.length > 0 && (t[0]?.[0] ?? 0) < state.day - 5) t.shift();
     }
+  }
+
+  /**
+   * Records since when the player holds each of its towns and, for a town
+   * it lost, when and after how long (iteration 4: see worthRetaking).
+   */
+  private noteTenure(
+    state: GameState,
+    player: number,
+    towns: readonly TownState[],
+  ): void {
+    const now = new Set(towns.map((t) => t.id));
+    for (const t of towns) {
+      const key = `${player}:${t.id}`;
+      if (!this.since.has(key)) this.since.set(key, state.day);
+    }
+    for (const [key, day] of this.since) {
+      const [p, town] = key.split(":");
+      if (Number(p) !== player || town === undefined || now.has(town)) continue;
+      this.since.delete(key);
+      this.lostOn.set(key, { day: state.day, held: state.day - day });
+    }
+  }
+
+  /**
+   * Whether a town we lost is worth retaking at any edge (iteration 4,
+   * bead bzc.41): the capital always; another town only when we held it
+   * for a week and lost it in the last week. A town two players each held
+   * for a day or two was "ours" for both and flipped back and forth.
+   */
+  private worthRetaking(turn: Turn, townId: string): boolean {
+    if (!turn.owned.has(townId)) return false;
+    if (turn.owned.values().next().value === townId) return true;
+    const lost = this.lostOn.get(`${turn.player}:${townId}`);
+    return (
+      lost !== undefined && lost.held >= 7 && turn.state.day - lost.day <= 7
+    );
   }
 
   /** Whether the hero stood on (x, y) in the last `days` days (not today). */
@@ -1089,7 +1304,16 @@ export class AdventureAi implements PlayerController {
 
   private townActions(turn: Turn): GameAction | null {
     const { state, player } = turn;
-    const hire = chooseHire(state, player, turn.towns);
+    // Iteration 4: no hire into a town a stronger rival hero can reach
+    // (fresh hires there were killed with the town, again and again).
+    const hireTowns =
+      turn.heroes.length === 0
+        ? turn.towns
+        : turn.towns.filter((t) => !turn.threatened.has(t.id));
+    const hire = chooseHire(state, player, hireTowns, this.mapWork(turn), {
+      third: this.params.thirdHero,
+      fourth: this.params.fourthHero,
+    });
     if (hire !== null) return hire;
     const dow = dayOfWeek(state.day);
     for (const town of turn.towns) {
@@ -1116,10 +1340,28 @@ export class AdventureAi implements PlayerController {
         (watched !== undefined && !watchHolds);
       // A town rivals roam near keeps a guard (iteration 3): the main
       // hero leaves it behind and secondaries do not ferry it away.
-      const guard = keep ? 0 : this.guardWant(turn, town);
+      // A town only the main hero's presence holds (iteration 4) wants
+      // a garrison that holds it alone.
+      const holdOff = isMain ? turn.held.get(town.id) : undefined;
+      const guard = keep
+        ? 0
+        : Math.max(
+            this.guardOf(turn, town),
+            holdOff === undefined ? 0 : holdOff / 1.05,
+          );
+      // A town only the main hero's presence holds (iteration 4): when
+      // part of its army makes the garrison hold alone, it leaves that
+      // part and goes on (main heroes sat in such towns for weeks).
+      if (isMain && holdOff !== undefined) {
+        const need = holdOff / 1.05 - armyFv(town.garrison);
+        if (need > 0 && armyFv(hero.army) * 0.4 >= need) {
+          const d = this.topUpGuard(town, hero, need);
+          if (d !== null) return this.dropped(turn, town, d);
+        }
+      }
       // The main hero takes the garrison along.
       if (isMain && !keep) {
-        const t = this.garrisonToHero(state, town, hero, guard);
+        const t = this.garrisonToHero(town, hero, guard);
         if (t !== null) {
           this.lastPickup.set(`${player}:${town.id}`, state.day);
           return t;
@@ -1132,7 +1374,11 @@ export class AdventureAi implements PlayerController {
         const r = chooseRecruit(state, town, {}, false, () => true);
         if (r !== null) return r;
       }
-      const choice = chooseBuild(state, town, turn.plan);
+      // Easy builds every other day (iteration 4: slower growth).
+      const choice =
+        state.day % this.params.buildEvery === 0
+          ? chooseBuild(state, town, turn.plan)
+          : { build: null, saving: null };
       if (choice.build !== null) {
         return { type: "build", townId: town.id, building: choice.build };
       }
@@ -1162,26 +1408,33 @@ export class AdventureAi implements PlayerController {
         watched !== undefined ||
         ((hero !== undefined || dow >= 6) && (!hall || broke));
       const reserve = all ? {} : reserveFor(choice.saving);
+      // The cheapest recruits fill the garrison up to its guard (by value,
+      // iteration 4); the rest go to the main hero.
+      const lowest = Math.min(
+        ...Object.keys(town.dwellings).map((c) => getCreature(c).tier),
+      );
+      const short = armyFv(town.garrison) < guard;
       const recruit = chooseRecruit(
         state,
         town,
         reserve,
         isMain && !keep,
-        (c) => homeGuard(state, c),
+        (c) => short && getCreature(c).tier === lowest,
       );
       if (recruit !== null) return recruit;
       if (isMain && !keep) {
-        const t = this.garrisonToHero(state, town, hero, guard);
+        const t = this.garrisonToHero(town, hero, guard);
         if (t !== null) {
           this.lastPickup.set(`${player}:${town.id}`, state.day);
           return t;
         }
-        // Consolidation (iteration 3): a town short of its guard gets one
-        // of the main hero's smaller stacks (towns taken and left empty
-        // changed hands back and forth, 4-6 times in one match).
-        if (armyFv(town.garrison) < guard * 0.6) {
-          const d = this.leaveGuard(town, hero, guard);
-          if (d !== null) return d;
+        // Consolidation (iteration 3): a town short of its guard gets
+        // some of the main hero's cheaper troops (towns taken and left
+        // empty changed hands back and forth, 4-6 times in one match).
+        const have = armyFv(town.garrison);
+        if (have < guard * 0.6) {
+          const d = this.topUpGuard(town, hero, guard - have, true);
+          if (d !== null) return this.dropped(turn, town, d);
         }
       }
       // A secondary hero picks the garrison up to bring it to the main
@@ -1194,11 +1447,37 @@ export class AdventureAi implements PlayerController {
         armyFv(town.garrison) - guard >=
           Math.max(300, armyFv(turn.main.army) * 0.1)
       ) {
-        const t = this.garrisonToHero(state, town, hero, guard);
+        const t = this.garrisonToHero(town, hero, guard);
         if (t !== null) return t;
       }
     }
     return null;
+  }
+
+  /**
+   * Whether the map still has work for a third or fourth hero (iteration
+   * 4): ground left to explore, or neutral stacks left in sight.
+   */
+  private mapWork(turn: Turn): boolean {
+    if (turn.exploredShare < 0.8) return true;
+    const w = turn.state.map.width;
+    let stacks = 0;
+    for (const m of Object.values(turn.state.monsters)) {
+      if (turn.explored[m.y * w + m.x] === true) stacks++;
+    }
+    return stacks >= 6;
+  }
+
+  /**
+   * The guard a town keeps: its home guard by value (iteration 4) or what
+   * rivals roaming near it ask for (guardWant), whichever is more.
+   */
+  private guardOf(turn: Turn, town: TownState): number {
+    const capital = turn.owned.values().next().value === town.id;
+    return Math.max(
+      homeGuard(turn.state, town, capital) * this.params.guardScale,
+      this.guardWant(turn, town),
+    );
   }
 
   /**
@@ -1212,7 +1491,7 @@ export class AdventureAi implements PlayerController {
     const obj = townObject(state, town.id);
     if (main === undefined || obj === undefined) return 0;
     let p = 0;
-    for (const [id, seen] of this.seen) {
+    for (const [id, seen] of this.seenBy(turn.player)) {
       if (seen.owner === turn.player || state.day - seen.day > 7) continue;
       const foe = state.heroes.find((h) => h.id === id);
       if (foe === undefined || !foe.alive || foe.owner !== seen.owner) continue;
@@ -1246,12 +1525,13 @@ export class AdventureAi implements PlayerController {
    */
   private chaser(
     state: GameState,
+    player: number,
     rival: number,
     x: number,
     y: number,
     power: number,
   ): boolean {
-    for (const [id, seen] of this.seen) {
+    for (const [id, seen] of this.seenBy(player)) {
       if (seen.owner !== rival || state.day - seen.day > 5) continue;
       if (seen.power <= power) continue;
       if (chebyshev(seen.x, seen.y, x, y) > (seen.maxMp / 100) * 2 + 2) {
@@ -1263,32 +1543,48 @@ export class AdventureAi implements PlayerController {
     return false;
   }
 
+  /** Notes troops left in `town` today (see garrisonToHero). */
+  private dropped(turn: Turn, town: TownState, action: GameAction): GameAction {
+    this.droppedAt.set(town.id, turn.state.day);
+    return action;
+  }
+
   /**
-   * One of the hero's smaller stacks into the garrison, toward its guard:
-   * the biggest stack within a third of the army that does not overfill
-   * the guard by half; the hero keeps at least two stacks.
+   * Troops from the hero into the garrison toward `need` fight value
+   * (iteration 4; was one whole smaller stack): the cheapest creatures
+   * first, a whole stack or the part of one that covers the need; the
+   * hero keeps at least one creature. With `small`, as for a town's
+   * guard on the road, only a need within a third of the army.
    */
-  private leaveGuard(
+  private topUpGuard(
     town: TownState,
     hero: HeroState,
-    guard: number,
+    need: number,
+    small = false,
   ): GameAction | null {
     const own = armyFv(hero.army);
-    const stacks = hero.army.filter((s) => s !== null).length;
-    if (stacks < 3) return null;
-    const have = armyFv(town.garrison);
+    if (small && need > own / 3) return null;
+    const creatures = hero.army.reduce((n, s) => n + (s?.count ?? 0), 0);
     let pick = -1;
-    let pickFv = 0;
+    let pickKey = Infinity;
     hero.army.forEach((s, i) => {
-      if (s === null) return;
-      const fv = stackFv(s.creature, s.count);
-      if (fv > own / 3 || have + fv > guard * 1.5 || fv <= pickFv) return;
-      if (slotFor(town.garrison, s.creature) < 0) return;
-      pick = i;
-      pickFv = fv;
+      if (s === null || slotFor(town.garrison, s.creature) < 0) return;
+      const def = getCreature(s.creature);
+      const key = def.tier * 10000 + def.fightValue;
+      if (key < pickKey) {
+        pickKey = key;
+        pick = i;
+      }
     });
     const s = hero.army[pick];
     if (pick < 0 || s === null || s === undefined) return null;
+    const unit = getCreature(s.creature).fightValue;
+    const count = Math.min(
+      s.count,
+      Math.ceil(need / Math.max(1, unit)),
+      creatures - 1,
+    );
+    if (count <= 0) return null;
     return {
       type: "transfer",
       args: {
@@ -1296,44 +1592,57 @@ export class AdventureAi implements PlayerController {
         townId: town.id,
         from: { army: "hero", slot: pick },
         to: { army: "garrison", slot: slotFor(town.garrison, s.creature) },
+        count,
       },
     };
   }
 
   /**
    * One transfer from the garrison into the hero's army, if any fits,
-   * leaving at least `keep` fight value (the town's guard) behind.
+   * leaving at least `keep` fight value (the town's guard) behind
+   * (iteration 4: by value; the highest tiers go first, and the part of a
+   * stack above the guard when the whole stack would breach it).
    */
   private garrisonToHero(
-    state: GameState,
     town: TownState,
     hero: HeroState,
     keep = 0,
   ): GameAction | null {
+    // Never take back what a hero left here today (no back and forth).
+    if (this.droppedAt.get(town.id) === this.day) return null;
     const g = town.garrison;
     const total = armyFv(g);
-    let bestSlot = -1;
-    let bestFv = 0;
-    g.forEach((s, i) => {
-      if (s === null || homeGuard(state, s.creature)) return;
-      const fv = stackFv(s.creature, s.count);
-      if (total - fv < keep) return;
-      if (fv > bestFv && slotFor(hero.army, s.creature) >= 0) {
-        bestFv = fv;
-        bestSlot = i;
-      }
-    });
-    if (bestSlot >= 0) {
-      const s = g[bestSlot];
-      if (s === null || s === undefined) return null;
+    if (total <= keep) return null;
+    const order = g
+      .map((s, i) => ({ s, i }))
+      .filter((x) => x.s !== null)
+      .sort((a, b) => {
+        const da = getCreature(a.s?.creature ?? "");
+        const db = getCreature(b.s?.creature ?? "");
+        return db.tier - da.tier || db.fightValue - da.fightValue;
+      });
+    const heroFv = armyFv(hero.army);
+    for (const { s, i } of order) {
+      if (s === null) continue;
       const to = slotFor(hero.army, s.creature);
+      if (to < 0) continue;
+      const unit = getCreature(s.creature).fightValue;
+      let count = s.count;
+      if (total - unit * s.count < keep) {
+        count = Math.floor((total - keep) / Math.max(1, unit));
+        // Only a part worth the transfer.
+        if (count <= 0 || count * unit < Math.max(150, heroFv * 0.03)) {
+          continue;
+        }
+      }
       return {
         type: "transfer",
         args: {
           heroId: hero.id,
           townId: town.id,
-          from: { army: "garrison", slot: bestSlot },
+          from: { army: "garrison", slot: i },
           to: { army: "hero", slot: to },
+          ...(count < s.count ? { count } : {}),
         },
       };
     }
@@ -1351,7 +1660,7 @@ export class AdventureAi implements PlayerController {
     let strong = -1;
     let strongFv = 0;
     g.forEach((s, i) => {
-      if (s === null || homeGuard(state, s.creature)) return;
+      if (s === null) return;
       const fv = stackFv(s.creature, s.count);
       if (total - fv + weakFv < keep) return;
       if (fv > strongFv) {
@@ -1525,6 +1834,7 @@ export class AdventureAi implements PlayerController {
       return power < theirs * edge && power + reserve >= theirs * edge;
     };
     for (const foe of turn.enemies) {
+      if (this.holding(turn, foe.owner)) continue;
       if (within(foe.x, foe.y) && tips(heroPower(foe), foe.owner)) return true;
     }
     for (const t of Object.values(state.towns)) {
@@ -1539,6 +1849,7 @@ export class AdventureAi implements PlayerController {
         if (power < g * 1.4 && power + reserve >= g * 1.4) return true;
         continue;
       }
+      if (this.holding(turn, t.owner)) continue;
       if (tips(g, t.owner)) return true;
     }
     return false;
@@ -1548,18 +1859,37 @@ export class AdventureAi implements PlayerController {
     const claimed = new Set<string>();
     for (const hero of turn.heroes) {
       if (hero.mp <= 0) continue;
+      // Back to the town it guards before the day ends (iteration 4).
+      const back = this.homeward(turn, hero);
+      if (back !== undefined) {
+        if (back !== null) return back;
+        continue;
+      }
       // On a Dowse mark: wait for tomorrow's full movement to dig.
       if (this.onMark(turn, hero)) continue;
-      // A weak hero in a threatened town stays to defend it.
+      // A weak hero in a threatened town stays to defend it, and a hero
+      // whose presence alone holds its town stays, unless it goes out to
+      // beat a rival hero (iteration 3: a hero took a town, walked on,
+      // and the rival next to it walked in the same day). Iteration 4:
+      // both still run errands they come back from today (no rival moves
+      // during our turn): such heroes idled for weeks.
       const town = turn.towns.find((t) => heroInTownOf(turn.state, t) === hero);
-      if (town !== undefined && turn.threatened.has(town.id)) continue;
+      const threatened = town !== undefined && turn.threatened.has(town.id);
+      const held = town !== undefined && turn.held.has(town.id);
       let targets = this.targets(turn, hero, claimed);
-      // A hero whose presence alone holds its town stays, unless it goes
-      // out to beat a rival hero (iteration 3: a hero took a town, walked
-      // on, and the rival next to it walked in the same day).
-      if (town !== undefined && turn.held.has(town.id)) {
-        targets = targets.filter((t) => t.key.startsWith("hero:"));
+      const roundTrip = (t: Target): boolean =>
+        t.cost * 2.2 <= hero.mp &&
+        !t.key.startsWith("home:") &&
+        !t.key.startsWith("meet:") &&
+        (t.battle === undefined || t.battle.kind !== "town");
+      if (threatened) {
+        targets = targets.filter((t) => roundTrip(t));
+      } else if (held) {
+        targets = targets.filter(
+          (t) => t.key.startsWith("hero:") || roundTrip(t),
+        );
       }
+      const anchored = threatened || held;
       const tow = this.towLine(turn, hero, targets[0]);
       if (tow !== null) return tow;
       const road = this.greenRoad(turn, hero, claimed, targets[0]);
@@ -1590,7 +1920,13 @@ export class AdventureAi implements PlayerController {
           end === undefined
             ? hero.y * turn.state.map.width + hero.x
             : end.y * turn.state.map.width + end.x;
-        if (!t.key.startsWith("hero:") && !this.safe(turn, hero, endCell)) {
+        const trip = anchored && !t.key.startsWith("hero:");
+        if (trip && (first.day > 0 || today.length < steps.length)) continue;
+        if (
+          !t.key.startsWith("hero:") &&
+          !trip &&
+          !this.safe(turn, hero, endCell)
+        ) {
           // Iteration 3: walk as far as is safe toward it instead of
           // idling (a secondary sat in town for days while a rival hero
           // could reach every target's end of day).
@@ -1607,6 +1943,12 @@ export class AdventureAi implements PlayerController {
           break;
         }
         this.goals.set(hero.id, t.key);
+        if (trip && town !== undefined) {
+          const o = townObject(turn.state, town.id);
+          if (o !== undefined) {
+            this.anchors.set(hero.id, { day: turn.state.day, x: o.x, y: o.y });
+          }
+        }
         const rival = this.rivalOf(turn.state, t);
         if (rival !== null && today.length === steps.length) {
           this.noteAttack(turn.player, rival, turn.state.day);
@@ -1648,8 +1990,113 @@ export class AdventureAi implements PlayerController {
         if (flee !== null) return flee;
       }
       if (!resting && partial !== null) return partial;
+      // Iteration 4: nothing to do, not holding a town: a safe errand.
+      if (!resting && (town === undefined || !turn.held.has(town.id))) {
+        const job = this.errand(turn, hero, town);
+        if (job !== null) return job;
+      }
     }
     return null;
+  }
+
+  /**
+   * The walk back to the town a hero left on a round trip today (iteration
+   * 4): undefined when it has none (or stands in it), null when it cannot
+   * get back today (it then stays where it is).
+   */
+  private homeward(turn: Turn, hero: HeroState): GameAction | null | undefined {
+    const a = this.anchors.get(hero.id);
+    if (a === undefined) return undefined;
+    if (a.day !== turn.state.day || (hero.x === a.x && hero.y === a.y)) {
+      this.anchors.delete(hero.id);
+      return undefined;
+    }
+    const w = turn.state.map.width;
+    const steps = pathIn(this.reachOf(turn, hero), hero, a.y * w + a.x);
+    const today = (steps ?? []).filter((x) => x.day === 0);
+    if (steps === null || today.length === 0 || today.length < steps.length) {
+      this.anchors.delete(hero.id);
+      return null;
+    }
+    return {
+      type: "move",
+      heroId: hero.id,
+      path: today.map((x) => ({ x: x.x, y: x.y })),
+    };
+  }
+
+  /**
+   * A safe errand for a hero with nothing better to do (iteration 4, bead
+   * bzc.41: idle hero-days were 10-20%, heroes parked in towns while a
+   * rival hovered). The main hero collects the troops its towns let go;
+   * a secondary brings what it carries to the main hero or fetches troops
+   * a town lets go. Only a walk whose end today is safe; not back to a
+   * town the hero left in the last two days.
+   */
+  private errand(
+    turn: Turn,
+    hero: HeroState,
+    inTown: TownState | undefined,
+  ): GameAction | null {
+    const { state } = turn;
+    const w = state.map.width;
+    const reach = this.reachOf(turn, hero);
+    let best: { cell: number; score: number } | null = null;
+    const consider = (cell: number, value: number): void => {
+      const cost = reach.cost.get(cell);
+      if (cost === undefined || cost === 0 || value <= 0) return;
+      if (reach.ctx.guards.has(cell)) return;
+      const score = value / (cost / Math.max(1, hero.maxMp) + DAY_OFFSET);
+      if (best === null || score > best.score) best = { cell, score };
+    };
+    const main = turn.main;
+    for (const town of turn.towns) {
+      if (town === inTown || heroInTownOf(state, town) !== undefined) continue;
+      const o = townObject(state, town.id);
+      if (o === undefined || this.wasAt(hero, o.x, o.y, state.day, 2)) continue;
+      const keeps =
+        turn.threatened.has(town.id) ||
+        turn.alert.has(town.id) ||
+        turn.watch.has(town.id);
+      if (keeps) continue;
+      const free = this.troopsAt(state, town) - this.guardOf(turn, town);
+      // A secondary fetches only for a main hero away from that town.
+      if (
+        hero !== main &&
+        (main === undefined || chebyshev(main.x, main.y, o.x, o.y) <= 6)
+      ) {
+        continue;
+      }
+      consider(o.y * w + o.x, free);
+    }
+    if (hero !== main && main !== undefined) {
+      const carried = this.handOffs(hero.army, main.army).reduce(
+        (n, h) => n + h.fv,
+        0,
+      );
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          if (dx === 0 && dy === 0) continue;
+          const x = main.x + dx;
+          const y = main.y + dy;
+          if (!inBounds(state.map, x, y)) continue;
+          if (cutsCorner(reach.ctx, x, y, main.x, main.y)) continue;
+          consider(y * w + x, carried);
+        }
+      }
+    }
+    const pick = best as { cell: number; score: number } | null;
+    if (pick === null) return null;
+    const steps = pathIn(reach, hero, pick.cell);
+    const today = (steps ?? []).filter((x) => x.day === 0 && !x.attack);
+    const end = today[today.length - 1];
+    if (end === undefined) return null;
+    if (!this.safe(turn, hero, end.y * w + end.x)) return null;
+    return {
+      type: "move",
+      heroId: hero.id,
+      path: today.map((x) => ({ x: x.x, y: x.y })),
+    };
   }
 
   /**
@@ -1726,7 +2173,19 @@ export class AdventureAi implements PlayerController {
         power += armyFv(town.garrison) + heroPower(hero) * 0.2;
       }
     }
-    return threat < power * 0.9;
+    if (threat < power * 0.9) return true;
+    // Escorted (iteration 4): next to an own hero clearly stronger than
+    // the threat, whoever strikes here is struck back at once (scouts
+    // boxed in by rival heroes idled for weeks rather than join the main
+    // hero).
+    const x = cell % w;
+    const y = (cell - x) / w;
+    return turn.heroes.some(
+      (h) =>
+        h !== hero &&
+        chebyshev(h.x, h.y, x, y) <= 1 &&
+        heroPower(h) >= threat * 1.2,
+    );
   }
 
   /** A move to the nearest safe cell reachable today (own towns first). */
@@ -1843,10 +2302,49 @@ export class AdventureAi implements PlayerController {
   private reachOf(turn: Turn, hero: HeroState): Reach {
     let r = turn.reach.get(hero.id);
     if (r === undefined) {
-      r = reachFor(turn.state, hero, hero.mp + this.horizon * hero.maxMp);
+      r = reachFor(
+        turn.state,
+        hero,
+        hero.mp + this.horizon * hero.maxMp,
+        this.pointlessStops(turn, hero),
+      );
       turn.reach.set(hero.id, r);
     }
     return r;
+  }
+
+  /**
+   * Entrances whose visit would stop this hero's walk for nothing
+   * (iteration 4, bead bzc.41: a main hero stopped at a Wishing Well it
+   * was already blessed by on three days running): dwellings, sites and
+   * banks worth nothing to it now. Routes go beside them (reach.ts).
+   */
+  private pointlessStops(turn: Turn, hero: HeroState): Set<number> {
+    const { state } = turn;
+    const w = state.map.width;
+    const out = new Set<number>();
+    for (const obj of state.map.objects) {
+      if (
+        obj.kind !== "dwelling" &&
+        obj.kind !== "site" &&
+        obj.kind !== "bank"
+      ) {
+        continue;
+      }
+      if (state.collected.includes(obj.id)) continue;
+      // A tent's value needs the reach being built: never pointless.
+      if (objectTypeOf(obj) === "keymasters-tent") continue;
+      if (this.objectValue(turn, hero, obj, 1) > 0) continue;
+      if ((this.questLeadsOf(turn).get(obj.id) ?? 0) > 0) continue;
+      out.add(obj.y * w + obj.x);
+    }
+    return out;
+  }
+
+  /** questLeads, once per decide call. */
+  private questLeadsOf(turn: Turn): Map<string, number> {
+    if (turn.leads === undefined) turn.leads = this.questLeads(turn);
+    return turn.leads;
   }
 
   /** The hero's targets, best first (fights estimated, losers dropped). */
@@ -1944,7 +2442,7 @@ export class AdventureAi implements PlayerController {
       return best;
     };
     const explore = this.exploreWeight(turn);
-    const leads = this.questLeads(turn);
+    const leads = this.questLeadsOf(turn);
     const bonusOf = new Map<string, number>();
     // --- Objects.
     for (const obj of state.map.objects) {
@@ -1981,7 +2479,7 @@ export class AdventureAi implements PlayerController {
         // Without a town the player is out in a week: any town will do,
         // at almost any cost. A town it lost is worth retaking.
         const townless = turn.towns.length === 0;
-        const lost = turn.owned.has(obj.id) ? 6000 : 0;
+        const lost = enemy && this.worthRetaking(turn, obj.id) ? 6000 : 0;
         // The difficulty's first day of attacks on players (iteration
         // 3): no week-one raids on Normal; a town that was ours, or any
         // town for a townless player, is always fair game.
@@ -1996,6 +2494,16 @@ export class AdventureAi implements PlayerController {
         // A rival's town in a stalled war is worth less (iteration 2):
         // armies fed into a stalemate are the third player's gain.
         const rival = town.owner;
+        // The war plan (iteration 4): towns of a rival we only hold
+        // against are left alone (they flipped back and forth).
+        if (
+          rival !== null &&
+          lost === 0 &&
+          !townless &&
+          this.holding(turn, rival)
+        ) {
+          continue;
+        }
         // A town its owner's hero would take straight back is barely worth
         // taking (iteration 3: towns changed hands every few days, 28
         // times in one match): a hero of the owner seen in the last days
@@ -2004,10 +2512,19 @@ export class AdventureAi implements PlayerController {
           rival !== null &&
           lost === 0 &&
           !turn.finishing.has(rival) &&
-          this.chaser(state, rival, obj.x, obj.y, heroPower(hero) * 0.8);
+          this.chaser(
+            state,
+            turn.player,
+            rival,
+            obj.x,
+            obj.y,
+            heroPower(hero) * CHASE_SHARE,
+          );
+        // Iteration 4: such a town is left alone (it was worth 35%, and
+        // still taken and lost again within days: 4-6 flips a match).
+        if (chased && !townless) continue;
         const cool =
-          (rival !== null && turn.stalled.has(rival) && lost === 0 ? 0.6 : 1) *
-          (chased ? 0.35 : 1);
+          rival !== null && turn.stalled.has(rival) && lost === 0 ? 0.6 : 1;
         const edge =
           rival === null || townless || lost > 0
             ? 1.2
@@ -2132,19 +2649,71 @@ export class AdventureAi implements PlayerController {
       const near = nextTo(foe.x, foe.y);
       if (near === undefined) continue;
       const battle = heroBattle(state, hero.id, foe.id);
-      // Counter-attack: an enemy hero near one of our towns is worth
-      // beating before it strikes.
+      // Counter-attack: an enemy hero that can strike one of our towns
+      // soon is worth beating first. Iteration 4: within the reach that
+      // makes a town threatened (was 2.6 days: on most maps any rival hero
+      // near any of our towns, a third of all player battles), and at a
+      // smaller edge, since that fight comes to us anyway (a main hero and
+      // a rival of about its strength stood off for weeks).
+      // A rival hero standing in its own town is not coming for ours: an
+      // attack on it is an attack on that town (its edge, its rules).
+      // Only a hero that could hurt the town counts (a quarter of its
+      // defence): a scout near a garrisoned town is no threat.
+      const foePower = heroPower(foe);
+      // Nor is one at its own door (within 3 cells of one of its towns):
+      // a passive player's hero next to its capital was "defended
+      // against" on day 7 on Easy, three weeks before its first attack day.
+      const atHome = Object.values(state.towns).some((t) => {
+        if (t.owner !== foe.owner) return false;
+        const o = townObject(state, t.id);
+        return o !== undefined && chebyshev(o.x, o.y, foe.x, foe.y) <= 3;
+      });
       let near2town = 0;
-      for (const t of turn.towns) {
+      const ours = battle.townId === undefined && !atHome ? turn.towns : [];
+      for (const t of ours) {
         const o = townObject(state, t.id);
         if (o === undefined) continue;
-        if (chebyshev(o.x, o.y, foe.x, foe.y) <= (foe.maxMp / 100) * 2.6 + 2)
-          near2town = 5000;
+        if (chebyshev(o.x, o.y, foe.x, foe.y) > (foe.maxMp / 100) * 1.6 + 1) {
+          continue;
+        }
+        if (foePower >= this.townDefence(state, t) * 0.25) near2town = 5000;
+      }
+      // No hunting scouts and fresh hires (iteration 4: a third of all
+      // player battles): a rival hero with a tenth of our army is fought
+      // only when it is within today's walk or threatens a town.
+      if (
+        near2town === 0 &&
+        battle.townId === undefined &&
+        armyFv(foe.army) < armyFv(hero.army) * 0.1 &&
+        near.cost > hero.mp
+      ) {
+        continue;
       }
       // A stalled war (iteration 2): away from our towns, its heroes
       // need a bigger edge and are worth less.
       const defending = near2town > 0;
       if (!defending && state.day < this.params.aggressionDay) continue;
+      // The war plan (iteration 4): no hunting a held-off rival's heroes
+      // away from our towns.
+      if (!defending && this.holding(turn, foe.owner)) continue;
+      // A rival hero in its own town is an attack on that town: not when
+      // the owner has a hero near enough to take it straight back.
+      if (
+        battle.townId !== undefined &&
+        !(turn.towns.length === 0) &&
+        !turn.finishing.has(foe.owner) &&
+        !this.worthRetaking(turn, battle.townId) &&
+        this.chaser(
+          state,
+          turn.player,
+          foe.owner,
+          foe.x,
+          foe.y,
+          heroPower(hero) * CHASE_SHARE,
+        )
+      ) {
+        continue;
+      }
       const cool = !defending && turn.stalled.has(foe.owner) ? 0.6 : 1;
       add({
         key: `hero:${foe.id}`,
@@ -2158,7 +2727,9 @@ export class AdventureAi implements PlayerController {
         battle,
         // Only with a clear advantage (iteration 1): no coin flips.
         maxLoss: isMain ? 0.4 : 0.15,
-        minRatio: defending ? 1.3 : this.edgeAgainst(turn, foe.owner, 1.3),
+        minRatio: defending
+          ? DEFEND_EDGE + this.params.edgeBonus
+          : this.edgeAgainst(turn, foe.owner, 1.3),
       });
     }
     // --- Own towns: troops to pick up, a town to defend.
@@ -2239,7 +2810,7 @@ export class AdventureAi implements PlayerController {
           turn.threatened.has(town.id) ||
           turn.alert.has(town.id) ||
           turn.watch.has(town.id);
-        const free = keeps ? 0 : troops - this.guardWant(turn, town);
+        const free = keeps ? 0 : troops - this.guardOf(turn, town);
         if (
           far &&
           free >= Math.max(300, armyFv(m.army) * 0.1) &&
@@ -2485,13 +3056,31 @@ export class AdventureAi implements PlayerController {
       if (near) frontier.push({ i, cost });
     }
     const scored: Array<{ i: number; cost: number; value: number }> = [];
+    // Hard knows where its rivals' towns are (iteration 4): ground toward
+    // one it has not seen yet weighs up to 2.5 times (a Hard player found
+    // a passive human's capital weeks after Normal did on the named maps).
+    const scent: Array<{ x: number; y: number }> = [];
+    if (this.params.scentTowns && turn.state.day >= this.params.aggressionDay) {
+      for (const t of Object.values(turn.state.towns)) {
+        if (t.owner === null || t.owner === turn.player) continue;
+        const o = townObject(turn.state, t.id);
+        if (o !== undefined && turn.explored[o.y * w + o.x] !== true) {
+          scent.push({ x: o.x, y: o.y });
+        }
+      }
+    }
     for (const f of frontier) {
       const x = f.i % w;
       const y = (f.i - x) / w;
       const n = this.newCells(turn, x, y, r);
       if (n < MIN_NEW_CELLS) continue;
       const share = hero === turn.main ? 1 : 1.3;
-      scored.push({ ...f, value: n * EXPLORE_CELL * explore * share });
+      let pull = 1;
+      for (const t of scent) {
+        const near = Math.max(0, 1 - chebyshev(t.x, t.y, x, y) / 40);
+        pull = Math.max(pull, 1 + 1.5 * near);
+      }
+      scored.push({ ...f, value: n * EXPLORE_CELL * explore * share * pull });
     }
     scored.sort(
       (a, b) =>
