@@ -5,6 +5,7 @@
 //
 //   npm run map:poster -- --seed 123 --size M --out poster.png [--port 6291]
 //                         [--players 2|3|4]
+//   npm run map:poster -- --named keepers-toll --out poster.png [--port 6291]
 //
 // Starts its own Vite dev server on --port and refuses a port already in use,
 // so the picture always comes from this checkout.
@@ -33,11 +34,12 @@ function parseArgs(argv) {
     if (value === undefined) throw new Error(`--${name} wants a value`);
     if (name === "seed" || name === "port" || name === "players")
       out[name] = Number(value);
-    else if (name === "size" || name === "out") out[name] = value;
+    else if (name === "size" || name === "out" || name === "named")
+      out[name] = value;
     else throw new Error(`unknown option --${name}`);
   }
-  if (!Number.isInteger(out.seed) || out.seed < 0)
-    throw new Error("--seed wants a whole number");
+  if (out.named === undefined && (!Number.isInteger(out.seed) || out.seed < 0))
+    throw new Error("--seed wants a whole number (or pass --named)");
   if (out.players !== undefined && ![2, 3, 4].includes(out.players))
     throw new Error("--players wants 2, 3 or 4");
   if (!["S", "M", "L"].includes(out.size))
@@ -107,7 +109,9 @@ async function evaluate(page, expression) {
 }
 
 async function main() {
-  const { seed, size, out, port, players } = parseArgs(process.argv.slice(2));
+  const { seed, size, out, port, players, named } = parseArgs(
+    process.argv.slice(2),
+  );
   if (!(await portFree(port)))
     throw new Error(`port ${port} is in use: free it or pass --port`);
   const server = spawn(
@@ -154,7 +158,7 @@ async function main() {
     await page.send("Runtime.enable");
     const query = new URLSearchParams({
       view: "map",
-      seed: String(seed),
+      ...(named !== undefined ? { named } : { seed: String(seed) }),
       size,
       zoom: "1",
       fog: "0",

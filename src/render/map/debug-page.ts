@@ -2,6 +2,7 @@
  * The map renderer's debug page: ?view=map
  *
  *   seed=N        render generateMap(N) (src/core/map/generate.ts)
+ *   named=ID      render a named map (src/core/map/named.ts)
  *   size=S|M|L    generator map size (default M)
  *   players=2..4  generator player starts (default per size)
  *   map=big       the fixture tiled to 48 x 48 (benchmarks)
@@ -21,6 +22,8 @@ import { cellAt, isPassable, objectBlockedSet } from "../../core/map/types";
 import type { Route } from "../../router";
 import { buildSmallMap } from "../../../tests/fixtures/small-map";
 import { generateMap } from "../../core/map/generate";
+import { buildNamedMap } from "../../core/map/named";
+import { playableFactions } from "../../data/factions";
 import { loadMapAssets } from "./assets";
 import { DEFAULT_ZOOM, createMapView } from "./map-view";
 import type { MapView, PathStep } from "./map-view";
@@ -255,28 +258,51 @@ export async function startMapDebug(
   const which = params.get("map");
   const size = params.get("size");
   const players = Number(params.get("players"));
+  const named = params.get("named");
   const map =
-    which === "big"
-      ? tiledFixture(48, 48)
-      : which === "ranges"
-        ? rangesMap()
-        : route.seed !== null
-          ? generateMap(route.seed, {
-              size: size === "S" || size === "L" ? size : "M",
-              ...(players === 2 || players === 3 || players === 4
-                ? { players }
-                : {}),
-            })
-          : buildSmallMap();
+    named !== null
+      ? buildNamedMap(named)
+      : which === "big"
+        ? tiledFixture(48, 48)
+        : which === "ranges"
+          ? rangesMap()
+          : route.seed !== null
+            ? generateMap(route.seed, {
+                size: size === "S" || size === "L" ? size : "M",
+                ...(players === 2 || players === 3 || players === 4
+                  ? { players }
+                  : {}),
+              })
+            : buildSmallMap();
+  // A generated map's start towns are drawn in the faction a new game
+  // would seat there (the playable factions in seat order, as in setup); a
+  // named map already carries its recommended factions.
+  if (named === null) {
+    const playable = playableFactions().map((f) => f.id);
+    for (const o of map.objects) {
+      const seat = o.data["start"];
+      if (o.kind !== "town" || typeof seat !== "number") continue;
+      const faction = playable[seat % Math.max(1, playable.length)];
+      if (faction !== undefined) o.data = { ...o.data, faction };
+    }
+  }
   const view = createMapView(canvas, assets);
   view.setMap(map);
   const zoom = Number(params.get("zoom") ?? DEFAULT_ZOOM);
   view.setZoom(Number.isFinite(zoom) ? zoom : DEFAULT_ZOOM);
   const hero = map.objects.find((o) => o.kind === "hero-start");
-  if (hero !== undefined)
-    view.setHeroes([
-      { id: "hero-0", x: hero.x, y: hero.y, unit: "dinosaur-chieftain" },
-    ]);
+  // A named map shows every start's hero; a generated map player 0's.
+  const starts = map.objects.filter(
+    (o) => o.kind === "hero-start" && (named !== null || o === hero),
+  );
+  view.setHeroes(
+    starts.map((o, i) => ({
+      id: `hero-${i}`,
+      x: o.x,
+      y: o.y,
+      unit: "dinosaur-chieftain",
+    })),
+  );
   if (params.get("fog") === "1") view.setExplored(debugExplored(map));
   const target = map.objects.find((o) => o.kind === "monster");
   if (params.get("path") !== "0" && hero !== undefined && target !== undefined)

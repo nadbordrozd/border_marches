@@ -1375,3 +1375,60 @@
 .gm-book-amount {
   width: 70px;
 }
+
+/* ------------------------------------------------------------ map picker */
+
+.gm-menu {
+  overflow-y: auto;
+  align-items: safe center;
+}
+
+.gm-map-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.gm-map {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 8px;
+  text-align: left;
+}
+
+.gm-map small {
+  color: var(--gm-dim);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.gm-map.gm-selected small {
+  color: var(--gm-gold-dim);
+}
+
+.gm-field[hidden],
+.gm-map-intro[hidden] {
+  display: none;
+}
+
+.gm-map-intro {
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.45;
+  padding: 8px 10px;
+  background: var(--gm-wood-dark);
+  border: 1px solid var(--gm-edge);
+  border-radius: 3px;
+}
+
+.gm-map-intro p {
+  margin: 0;
+}
+
+.gm-map-intro .gm-map-setup {
+  margin-top: 6px;
+  color: var(--gm-gold-dim);
+}

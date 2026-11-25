@@ -1,8 +1,8 @@
 /**
- * The game route: main menu with the new-game setup (map seed and size,
- * two to four players, the human's faction) and Continue when a save
- * exists, then the adventure screen until the game ends or the player
- * quits back to the menu.
+ * The game route: main menu with the new-game setup (a random map by seed
+ * and size with two to four players, or a named map; the human's faction)
+ * and Continue when a save exists, then the adventure screen until the
+ * game ends or the player quits back to the menu.
  */
 import { newGame } from "../core/game/index.ts";
 import type { GameState, PlayerSetup } from "../core/game/index.ts";
@@ -11,6 +11,12 @@ import { MAX_PLAYERS, MIN_PLAYERS, playerColour } from "../data/players.ts";
 import type { FactionId } from "../data/types.ts";
 import { generateMap } from "../core/map/generate.ts";
 import type { MapSize, PlayerCount } from "../core/map/generate.ts";
+import {
+  NAMED_MAPS,
+  buildNamedMap,
+  findNamedMap,
+  type NamedMapDef,
+} from "../core/map/named.ts";
 import { button, el, img, wait } from "./dom.ts";
 import { playGame } from "./game.ts";
 import { loadGameMapAssets } from "./hero-sprite.ts";
@@ -35,6 +41,30 @@ export interface GameSetup {
   players: number;
   /** The human's faction (player 0). */
   faction: FactionId;
+  /**
+   * A named map's id (src/data/named-maps.ts): the map, its size and its
+   * player count come from it, and seed, size and players are ignored.
+   */
+  map?: string;
+}
+
+/**
+ * The players of a named map: the human takes seat 0 with its faction and
+ * the computer the map's recommended factions for the other seats; when
+ * the human picks a faction recommended for another seat, the two swap.
+ */
+export function namedPlayerSetups(
+  def: NamedMapDef,
+  faction: FactionId,
+): PlayerSetup[] {
+  const factions = [...def.factions];
+  const k = factions.indexOf(faction);
+  if (k > 0) factions[k] = factions[0] ?? faction;
+  factions[0] = faction;
+  return factions.map((f, i) => ({
+    kind: i === 0 ? "human" : "ai",
+    faction: f,
+  }));
 }
 
 /**
@@ -43,6 +73,8 @@ export interface GameSetup {
  * (so a three-player game has all three factions).
  */
 export function playerSetups(setup: GameSetup): PlayerSetup[] {
+  const named = setup.map === undefined ? undefined : findNamedMap(setup.map);
+  if (named !== undefined) return namedPlayerSetups(named, setup.faction);
   const playable = playableFactions().map((f) => f.id);
   const start = Math.max(0, playable.indexOf(setup.faction));
   return Array.from({ length: setup.players }, (_, i) => ({
@@ -57,8 +89,16 @@ export function playerSetups(setup: GameSetup): PlayerSetup[] {
 /**
  * Generates a map with one start per player (every start active, so each
  * has its town and hero; bead bzc.3) and the initial state for a new game.
+ * A named map is built from its seed and edits instead (bead bzc.18).
  */
 export function createGame(setup: GameSetup): GameState {
+  if (setup.map !== undefined) {
+    const def = findNamedMap(setup.map);
+    if (def === undefined) throw new Error(`no map called ${setup.map}`);
+    return newGame(buildNamedMap(def), {
+      players: namedPlayerSetups(def, setup.faction),
+    });
+  }
   const players = Math.min(
     MAX_PLAYERS,
     Math.max(MIN_PLAYERS, setup.players),
@@ -156,6 +196,60 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
       }
     };
     renderFactions();
+
+    // Map: a random map from the fields below, or a named map.
+    let mapId: string | null =
+      findNamedMap(params.get("map") ?? "")?.id ?? null;
+    const mapRow = el("div.gm-map-row");
+    const mapIntro = el("div.gm-map-intro");
+    const sizeField = el("div.gm-field", el("label", "Map size"), sizeRow);
+    const playersField = el("div.gm-field", el("label", "Players"), playersRow);
+    const seedRow = el("div.gm-seed-row", seedInput);
+    const seedField = el("div.gm-field", el("label", "Seed"), seedRow);
+    const renderMaps = (): void => {
+      mapRow.replaceChildren();
+      const choices: Array<{ id: string | null; label: string; hint: string }> =
+        [
+          {
+            id: null,
+            label: "Random map",
+            hint: "Any size, 2 to 4 players",
+          },
+          ...NAMED_MAPS.map((m) => ({
+            id: m.id,
+            label: m.name,
+            hint: `${m.players} players, ${SIZES.find((s) => s.id === m.size)?.label ?? m.size}`,
+          })),
+        ];
+      for (const c of choices) {
+        const b = button(
+          "",
+          () => {
+            mapId = c.id;
+            renderMaps();
+          },
+          "gm-btn gm-map",
+        );
+        b.append(el("span.gm-map-name", c.label), el("small", c.hint));
+        b.title = c.hint;
+        if (c.id === mapId) b.classList.add("gm-selected");
+        mapRow.append(b);
+      }
+      const def = mapId === null ? undefined : findNamedMap(mapId);
+      for (const f of [sizeField, playersField, seedField]) {
+        f.hidden = def !== undefined;
+      }
+      mapIntro.hidden = def === undefined;
+      mapIntro.replaceChildren();
+      if (def !== undefined) {
+        mapIntro.append(
+          el("p", def.intro),
+          el("p.gm-map-setup", `Recommended: ${def.setup}`),
+        );
+      }
+    };
+    renderMaps();
+
     const you = el("span.gm-turn-chip");
     you.style.background = playerColour(0).hex;
     const status = el("div.gm-menu-status");
@@ -189,7 +283,13 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         const raw = seedInput.value.trim();
         const seed = /^\d+$/.test(raw) ? Number(raw) >>> 0 : randomSeed();
         void start(() => {
-          const state = createGame({ seed, size, players, faction });
+          const state = createGame({
+            seed,
+            size,
+            players,
+            faction,
+            ...(mapId !== null ? { map: mapId } : {}),
+          });
           saveGame(browserStorage(), state);
           return state;
         });
@@ -208,6 +308,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
     const reroll = button("Random", () => {
       seedInput.value = String(randomSeed());
     });
+    seedRow.append(reroll);
 
     root.append(
       el(
@@ -222,14 +323,12 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         el(
           "div.gm-new",
           el("h2", "New game"),
-          el("div.gm-field", el("label", "Map size"), sizeRow),
-          el("div.gm-field", el("label", "Players"), playersRow),
+          el("div.gm-field", el("label", "Map"), mapRow),
+          mapIntro,
+          sizeField,
+          playersField,
           el("div.gm-field", el("label", you, "Your faction"), factionRow),
-          el(
-            "div.gm-field",
-            el("label", "Seed"),
-            el("div.gm-seed-row", seedInput, reroll),
-          ),
+          seedField,
           newButton,
         ),
         status,
