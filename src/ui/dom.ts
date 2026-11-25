@@ -1,9 +1,8 @@
 /**
  * Small DOM helpers shared by the game screens: element builder, modal
- * dialogs, toasts and image URLs of manifest assets.
+ * dialogs (the shell in dialog.ts), toasts and image URLs of manifest
+ * assets.
  */
-import { fxEvent } from "../audio/fx.ts";
-import { reducedMotion } from "./motion.ts";
 import { assetByKey, assetUrl, RESOURCE_ITEMS } from "../assets/manifest.ts";
 import type { ResourceId } from "../core/map/types.ts";
 import { RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
@@ -112,129 +111,18 @@ export function costView(
 
 // ---------------------------------------------------------------- modals
 
-export interface ModalButton<T> {
-  label: string;
-  value: T;
-  primary?: boolean;
-  disabled?: boolean;
-}
-
-export interface ModalOptions<T> {
-  title: string;
-  body?: Node | string;
-  buttons: ModalButton<T>[];
-  /** Value for Escape; omit to make Escape do nothing. */
-  cancel?: T;
-  className?: string;
-  /** Called once the dialog is in the page, with its buttons in order. */
-  onOpen?: (buttons: HTMLButtonElement[]) => void;
-}
-
-let modalDepth = 0;
-const modalListeners = new Set<() => void>();
-
-/** Whether a modal is open (keyboard shortcuts pause meanwhile). */
-export function modalOpen(): boolean {
-  return modalDepth > 0;
-}
-
-/**
- * Calls `listener` whenever a modal opens or closes (the map turns its
- * input off meanwhile); returns the unsubscribe function.
- */
-export function onModalChange(listener: () => void): () => void {
-  modalListeners.add(listener);
-  return () => modalListeners.delete(listener);
-}
-
-function modalChanged(): void {
-  for (const listener of modalListeners) listener();
-}
-
-/** Shows a modal dialog over everything; resolves with the clicked value. */
-export function modal<T>(options: ModalOptions<T>): Promise<T> {
-  return new Promise((resolve) => {
-    modalDepth++;
-    modalChanged();
-    const backdrop = el("div.gm-backdrop");
-    const box = el("div.gm-modal");
-    box.setAttribute("role", "dialog");
-    box.setAttribute("aria-modal", "true");
-    box.setAttribute("aria-label", options.title);
-    if (options.className) box.classList.add(options.className);
-    box.append(el("h2.gm-modal-title", options.title));
-    if (options.body !== undefined) {
-      const body = el("div.gm-modal-body");
-      body.append(options.body);
-      box.append(body);
-    }
-    const row = el("div.gm-modal-buttons");
-    const close = (value: T): void => {
-      window.removeEventListener("keydown", onKey, true);
-      modalDepth--;
-      modalChanged();
-      resolve(value);
-      // Closing: a short fade (bead bzc.26); nothing waits for it.
-      if (reducedMotion() || typeof backdrop.animate !== "function") {
-        backdrop.remove();
-        return;
-      }
-      fxEvent("ui.dialog.close");
-      backdrop.classList.add("gm-closing");
-      setTimeout(() => backdrop.remove(), 110);
-    };
-    let primary: HTMLButtonElement | null = null;
-    const nodes: HTMLButtonElement[] = [];
-    const hasCancel = "cancel" in options;
-    for (const b of options.buttons) {
-      const node = button(b.label, () => close(b.value));
-      if (b.primary === true) {
-        node.classList.add("gm-primary");
-        primary = node;
-        node.append(kbd("Enter"));
-        node.setAttribute("aria-keyshortcuts", "Enter");
-      } else if (hasCancel && Object.is(b.value, options.cancel)) {
-        node.append(kbd("Esc"));
-        node.setAttribute("aria-keyshortcuts", "Escape");
-      }
-      node.disabled = b.disabled === true;
-      nodes.push(node);
-      row.append(node);
-    }
-    box.append(row);
-    backdrop.append(box);
-    (document.getElementById("ui") ?? document.body).append(backdrop);
-    const onKey = (e: KeyboardEvent): void => {
-      // Only the topmost modal reacts.
-      if (backdrop.nextElementSibling?.matches(".gm-backdrop:not(.gm-closing)"))
-        return;
-      if (e.key === "Escape" && "cancel" in options) {
-        e.preventDefault();
-        e.stopPropagation();
-        close(options.cancel as T);
-      } else if (e.key === "Enter" && primary !== null && !primary.disabled) {
-        if (document.activeElement instanceof HTMLInputElement) return;
-        e.preventDefault();
-        e.stopPropagation();
-        primary.click();
-      }
-    };
-    window.addEventListener("keydown", onKey, true);
-    fxEvent("ui.dialog.open");
-    primary?.focus();
-    options.onOpen?.(nodes);
-  });
-}
-
-/** A one-button message. */
-export function alertModal(title: string, body: Node | string): Promise<void> {
-  return modal<undefined>({
-    title,
-    body,
-    buttons: [{ label: "OK", value: undefined, primary: true }],
-    cancel: undefined,
-  });
-}
+// Every dialog is built by the one shell in dialog.ts (UI2-15).
+export {
+  alertModal,
+  dialog as modal,
+  modalOpen,
+  onModalChange,
+} from "./dialog.ts";
+export type {
+  DialogButton as ModalButton,
+  DialogChoice,
+  DialogOptions as ModalOptions,
+} from "./dialog.ts";
 
 // ---------------------------------------------------------------- toasts
 

@@ -570,6 +570,22 @@ function siteCard(
 }
 
 /**
+ * The map picture of an object (a site, mine, town or pickup), as its hover
+ * card shows it; the site dialogs draw it enlarged (UI2-15). Null without
+ * art.
+ */
+export function objectPictureKey(obj: MapObject): string | null {
+  if (obj.kind === "town") return (town3x2Asset(obj) ?? townAsset(obj)).key;
+  if (obj.kind === "mine")
+    return artFor(mineType(obj), artVariantOf(obj))?.asset.key ?? null;
+  if (obj.kind === "pickup")
+    return pickupKey(obj.data["resource"], obj.data["chest"] === true);
+  return (
+    artFor(String(obj.data["type"] ?? ""), artVariantOf(obj))?.asset.key ?? null
+  );
+}
+
+/**
  * The hover card of map cell (x, y) for `player` with the selected hero
  * `heroId`: a hero, a neutral stack, a town, mine, pickup or site, else a
  * small card naming the ground (describeCell). Null off the map.
@@ -646,7 +662,7 @@ export function mapCard(
 /** "800 gold" in a text becomes "800 [gold icon]". */
 const RESOURCE_TEXT = new RegExp(`(\\d+) (${RESOURCE_IDS.join("|")})\\b`, "gi");
 
-function textWithIcons(text: string): Array<string | Node> {
+export function textWithIcons(text: string): Array<string | Node> {
   const out: Array<string | Node> = [];
   let last = 0;
   for (const m of text.matchAll(RESOURCE_TEXT)) {

@@ -280,7 +280,7 @@ async function main() {
         } else {
           fought = true;
           step(
-            `battle offered: ${await evaluate("document.querySelector('.gm-phrase').textContent")}`,
+            `battle offered: ${await evaluate("document.querySelector('.gm-battle-confirm .gm-modal-title').textContent")}`,
           );
           break;
         }

@@ -945,37 +945,6 @@
   color: var(--gm-dim);
 }
 
-.gm-phrase {
-  font:
-    bold 16px Georgia,
-    serif;
-  text-align: center;
-}
-
-.gm-versus {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  margin-bottom: 8px;
-}
-
-.gm-versus h3 {
-  margin: 0 0 4px;
-  font-size: 12px;
-  color: var(--gm-gold-dim);
-}
-
-.gm-enemy-list {
-  margin: 0;
-  padding-left: 18px;
-}
-
-.gm-chest {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
 .gm-chest-img,
 .gm-levelup-portrait {
   image-rendering: pixelated;
@@ -2423,19 +2392,6 @@
   padding: 8px;
 }
 
-.gm-warn-list {
-  margin: 0 0 8px;
-  padding-left: 18px;
-}
-
-.gm-warn-list li {
-  margin: 2px 0;
-}
-
-.gm-warn-can-build {
-  color: var(--gm-gold-dim);
-}
-
 .gm-log {
   max-height: 52vh;
   min-width: 380px;
@@ -3584,36 +3540,4 @@
 
 .gm-modal {
   max-width: min(640px, calc(100vw - 32px));
-}
-
-.gm-enemy-list {
-  padding: 0;
-  list-style: none;
-}
-
-.gm-enemy-list li {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 1px 0;
-}
-
-.gm-versus-portrait {
-  width: 28px;
-  height: 28px;
-  image-rendering: pixelated;
-  box-shadow: 0 0 0 1px var(--gm-trim-dark);
-}
-
-.gm-versus > div {
-  min-width: 170px;
-  padding: 6px 10px;
-  background: rgb(10 8 5 / 45%);
-  box-shadow: var(--gm-inset-shadow);
-}
-
-.gm-estimate {
-  margin: 4px 0 8px;
-  text-align: center;
-  font-weight: bold;
 }

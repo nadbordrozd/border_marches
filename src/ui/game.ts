@@ -13,11 +13,8 @@ import {
   aiStep,
   applyBattleResult,
   voidPendingBattle,
-  describeObject,
   digHere,
-  objectName,
   objectTypeOf,
-  siteOptions,
   useSite,
   battlePlayers,
   battleSetup,
@@ -40,7 +37,6 @@ import {
 } from "../core/game/index.ts";
 import type {
   BattleResult,
-  BattleSetup,
   CommandError,
   CommandResult,
   GameEvent,
@@ -85,29 +81,27 @@ import {
   wait,
 } from "./dom.ts";
 import { findFaction } from "../data/factions.ts";
-import { getCreature } from "../data/creatures.ts";
-import { creatureTip } from "./info-tips.ts";
 import {
-  battleOdds,
   buildableTowns,
   endTurnWarnings,
   incomeBreakdown,
   minesOf,
   nextActionHint,
-  ODDS_TEXT,
   pathSummary,
   SPENT_MP,
 } from "./hints.ts";
 import type { ResourceId } from "../core/map/types.ts";
 import { hideTip, setTip, showTipAt, tipCard } from "./tooltip.ts";
-import {
-  capitalize,
-  creatureCount,
-  dateLabel,
-  objectAt,
-  stackPhrase,
-} from "./format.ts";
+import { dateLabel, objectAt, stackPhrase } from "./format.ts";
 import { loadGameMapAssets } from "./hero-sprite.ts";
+import {
+  endTurnDialog,
+  endTurnRows,
+  preBattleDialog,
+  preBattleModel,
+  siteDialog,
+  siteDialogModel,
+} from "./dialog-kinds.ts";
 import { heroArt, namedHeroPortrait } from "../assets/unit-art.ts";
 import {
   levelUpDialog,
@@ -1679,31 +1673,9 @@ class GameScreen {
       const obj = this.state.map.objects.find((o) => o.id === objectId);
       if (hero === undefined || obj === undefined) return;
       if (hero.owner !== this.human) return;
-      const options = siteOptions(this.state, hero, obj);
-      if (options.length === 0) return;
-      const choice = await modal<string>({
-        title: objectName(this.state, obj),
-        body: el(
-          "div.gm-site",
-          el("p", round === 0 ? text : "Anything else?"),
-          el(
-            "p.gm-dim",
-            describeObject(this.state, this.human, obj, heroId)
-              .slice(1)
-              .join(" "),
-          ),
-        ),
-        buttons: [
-          ...options.map((o) => ({
-            label:
-              o.disabled !== undefined ? `${o.label} (${o.disabled})` : o.label,
-            value: o.id,
-            disabled: o.disabled !== undefined,
-          })),
-          { label: "Leave", value: "", primary: true },
-        ],
-        cancel: "",
-      });
+      const model = siteDialogModel(this.state, hero, obj, text, round === 0);
+      if (model.choices.length === 0) return;
+      const choice = await siteDialog(model);
       if (choice === "") return;
       const events = this.run(useSite(this.state, heroId, objectId, choice));
       if (events === null) return;
@@ -1750,17 +1722,12 @@ class GameScreen {
     playSound("site.treasure");
     const choice = await modal<"gold" | "xp">({
       title: CHEST.name,
-      body: el(
-        "div.gm-chest",
-        img("treasure", "gm-chest-img", 2),
-        el(
-          "p",
-          "You find a chest of the old warlords. Take the gold, or study the maps and trophies inside?",
-        ),
-      ),
+      picture: img("treasure", "gm-chest-img", 2),
+      sentence:
+        "You find a chest of the old warlords. Take the gold, or study the maps and trophies inside?",
       buttons: [
         { label: `${CHEST.gold} gold`, value: "gold", primary: true },
-        { label: `${CHEST.xp} experience`, value: "xp" },
+        { label: `${CHEST.xp} experience`, value: "xp", key: "X" },
       ],
     });
     const events = this.run(takeChest(this.state, heroId, pickupId, choice));
@@ -1889,43 +1856,6 @@ class GameScreen {
     this.refresh();
   }
 
-  /** The battle's title and one line, from the human's point of view. */
-  private battleText(setup: BattleSetup): { title: string; phrase: string } {
-    const pending = setup.battle;
-    if (pending.kind === "monster") {
-      const m = this.state.monsters[pending.objectId];
-      return {
-        title: "Neutral monsters",
-        phrase: `${m === undefined ? "Monsters" : capitalize(stackPhrase(m.creature, m.count))} attack!`,
-      };
-    }
-    if (pending.kind === "site") {
-      const obj = this.state.map.objects.find((o) => o.id === pending.objectId);
-      const name = obj === undefined ? "Site" : objectName(this.state, obj);
-      return { title: name, phrase: `The keepers of the ${name} attack!` };
-    }
-    if (pending.kind === "town") {
-      const town = this.state.towns[pending.objectId];
-      return {
-        title: town?.name ?? "Town",
-        phrase: `The garrison of ${town?.name ?? "the town"} stands ready.`,
-      };
-    }
-    const att = this.state.heroes.find((h) => h.id === pending.heroId);
-    const def = this.state.heroes.find((h) => h.id === pending.objectId);
-    const where =
-      pending.townId !== undefined
-        ? ` at ${this.state.towns[pending.townId]?.name ?? "the town"}`
-        : "";
-    return {
-      title: "Hero battle",
-      phrase:
-        att?.owner === this.human
-          ? `${att.name} attacks ${def?.name ?? "the enemy"} of ${playerColour(def?.owner ?? 0).name}${where}!`
-          : `${att?.name ?? "An enemy"} of ${playerColour(att?.owner ?? 0).name} attacks ${def?.name ?? "your hero"}${where}!`,
-    };
-  }
-
   /** Settles a pending battle that cannot be applied as void (an error). */
   private voidBattle(error: CommandError, message: string): void {
     const r = voidPendingBattle(this.state, error, message);
@@ -1947,77 +1877,9 @@ class GameScreen {
         this.voidBattle("no-battle", "the pending battle has no setup");
         continue;
       }
-      const sides = battlePlayers(this.state, setup.battle);
-      const humanSide: "attacker" | "defender" =
-        sides.defender === this.human && sides.attacker !== this.human
-          ? "defender"
-          : "attacker";
-      const own = setup[humanSide];
-      const enemy = setup[humanSide === "attacker" ? "defender" : "attacker"];
-      const { title, phrase } = this.battleText(setup);
-      const armyList = (
-        stacks: ReadonlyArray<{ creature: string; count: number }>,
-      ): HTMLElement => {
-        const list = el("ul.gm-enemy-list");
-        for (const s of stacks) {
-          const def = getCreature(s.creature);
-          const li = el(
-            "li",
-            img(`portrait-${def.sprite}`, "gm-versus-portrait"),
-            creatureCount(s.creature, s.count),
-          );
-          setTip(li, () => creatureTip(s.creature, s.count));
-          list.append(li);
-        }
-        return list;
-      };
-      const list = armyList(enemy.stacks);
-      const ownList = armyList(own.stacks);
-      const ownHero = this.state.heroes.find((h) => h.id === own.hero?.id);
-      const estimate =
-        ownHero === undefined
-          ? null
-          : battleOdds(
-              { ...ownHero, army: own.stacks.map((x) => ({ ...x })) },
-              enemy.stacks,
-            ).odds;
-      const buttons: Array<{
-        label: string;
-        value: "fight" | "auto" | "retreat";
-        primary?: boolean;
-      }> = [
-        { label: "Fight", value: "fight", primary: true },
-        { label: "Quick combat", value: "auto" },
-      ];
-      if (own.canRetreat === true && own.hero !== null) {
-        buttons.push({ label: "Retreat", value: "retreat" });
-      }
-      const choice = await modal<"fight" | "auto" | "retreat">({
-        title,
-        className: "gm-battle-confirm",
-        body: el(
-          "div",
-          el("p.gm-phrase", phrase),
-          el(
-            "div.gm-versus",
-            el("div", el("h3", "Your army"), ownList),
-            el("div", el("h3", "Enemy"), list),
-          ),
-          estimate === null
-            ? null
-            : el(
-                `p.gm-estimate.gm-odds-${estimate}`,
-                `Estimate: ${ODDS_TEXT[estimate]}`,
-              ),
-          el(
-            "p.gm-dim",
-            own.canRetreat === true
-              ? "A retreating hero loses its army and waits in your tavern."
-              : "If your army falls, the hero leaves the map.",
-          ),
-        ),
-        buttons,
-      });
+      const model = preBattleModel(this.state, setup, this.human);
+      const humanSide = model.side;
+      const choice = await preBattleDialog(model);
       let result: BattleResult;
       if (choice === "retreat") {
         result = {
@@ -2069,30 +1931,14 @@ class GameScreen {
       this.plannedPaths(),
     );
     if (warnings.length > 0) {
-      const list = el("ul.gm-warn-list");
-      for (const w of warnings) list.append(el(`li.gm-warn-${w.kind}`, w.text));
-      const choice = await modal<"end" | "stay">({
-        title: "End the turn?",
-        className: "gm-endturn-dialog",
-        body: el(
-          "div",
-          list,
-          el(
-            "p.gm-dim",
-            "Unspent movement and unbuilt buildings do not carry over.",
-          ),
-        ),
-        buttons: [
-          { label: "End turn", value: "end", primary: true },
-          { label: "Keep playing", value: "stay" },
-        ],
-        cancel: "stay",
-      });
-      if (choice !== "end") {
+      const choice = await endTurnDialog(endTurnRows(this.state, warnings));
+      if (choice.kind === "hero") this.selectHero(choice.id);
+      if (choice.kind === "town") await this.openTown(choice.id);
+      if (choice.kind === "stay") {
         const first = warnings.find((w) => w.kind !== "can-build");
         if (first !== undefined) this.selectHero(first.id);
-        return;
       }
+      if (choice.kind !== "end") return;
     }
     const events = this.run(endTurn(this.state));
     if (events === null) return;
