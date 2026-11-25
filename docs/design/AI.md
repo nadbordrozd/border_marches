@@ -9,7 +9,8 @@ runner.
 The design below is v1; [Iteration 1](#iteration-1-bead-bzc21) at the end
 of this file lists what changed since (fight estimates, the turn budget,
 town defence, troop trips, puzzle sites) and supersedes v1 where they
-differ.
+differ, and [Iteration 2](#iteration-2-bead-bzc22) after it (fight
+families, who is winning, openings, spells, quests) supersedes both.
 
 ## Design
 
@@ -347,3 +348,194 @@ six), Dowse cast 14 times with 3 digs, Borrowed Day 4 times.
 Raw metrics: `.orchestration/sim/base3-*.json` and `it7-*.json`
 (git-ignored); reproduce with `node tools/sim/run-ts.mjs
 tools/sim/match.ts --size M --players 3 --seeds 11,12,13 --days 84`.
+
+## Iteration 2 (bead bzc.22)
+
+Worked on iteration 1's remaining weaknesses 2-5 (the battle AI's own
+cost waits for bead bzc.37's fast mode), measured with AI-against-AI
+matches and a passive human (`--idle 0`), and watched two games in muted
+headless Chrome with the human only ending its turns.
+
+### What changed
+
+- **Fight families** (`strength.ts`). Every full (worst-of-two) simulated
+  result is also kept per family: the guard's creature types and fort
+  bonus, the attacker's lead faction and ranged share (`familyKey`), not
+  the counts. A later fight of that family is predicted from it
+  (`inferFromFamily`): a loss seen at this strength ratio or above is a
+  loss; a win seen at this ratio or below is a win, its losses scaled by
+  the square of the ratio (`scaleLoss`); a win seen within 10% above the
+  ratio still counts, its losses padded by a quarter; a loss between the
+  two blocks the guess (then it is simulated). Recruits, lost stacks and
+  levels no longer reset what the AI knows about a guard type: in the
+  final runs 827 estimates came from families against 3074 simulations.
+  The budget's cost model is an option (`OracleOptions.costOf`,
+  `AdventureAiOptions.simCost`): a faster resolver (bzc.37) passes its
+  own and the same turn budget buys more simulations, no other change.
+- **Reach fix** (`reach.ts`). A stack's own cell ends a walk. A hero
+  starting inside a zone could plan a path "through" the stack, a fight
+  its estimate never saw.
+- **Who is winning** (`strategy`). Each turn: our power (heroes and
+  garrisons) against each rival's (its heroes as last seen within three
+  weeks, its explored garrisons), our power a week ago, and the days we
+  attacked each rival. A rival attacked twice in ten days while our power
+  did not grow 10% in a week, and that we do not outweigh 1.6 to 1, is a
+  stalled war: its heroes and towns need a fight-value edge of 1.7 and
+  are worth 40% less (defending our towns keeps the normal rules). With
+  two or more rivals left, a rival stronger than us needs 1.5; a rival we
+  outweigh two to one is pressed at 1.2.
+- **Coordination.** The main hero gathers its reserves when a rival hero
+  or garrisoned town within three days is too strong for it alone but
+  not with what the secondaries carry: their meeting is worth 2.5 times
+  the troops plus 3000 and any amount counts. A main hero outmatched by a
+  rival hero within about two days falls back on a town with troops
+  (+8000). No bouncing: a hero guarding a town on alert does not leave it
+  for another on alert, nor for a threatened one while its own is
+  threatened, and a town it stood in during the last three days does not
+  call it back on alert (a main hero had walked between two alert towns
+  for days, seen in M seed 11).
+- **Openings** (`economy.ts OPENINGS`): week one builds the cheap ranged
+  or fast dwelling first (its creatures arrive at once), then income or
+  the fort: humans archery range, town hall, fort, barracks; undead
+  charnel pit, town hall, fort, wailing tower; goblins powder shed, fort,
+  wolf kennels, town hall. The main hero's targets more than its
+  faction's wander range from its first town (`WANDER_DAYS`: 2 days'
+  walk, goblins 3) count a third in days 1-14.
+- **Economy.** A rich player buys at the market what any blocked building
+  lacks (keeping 12000 gold): long games had 50-70k gold sitting unspent
+  with no essence. A fourth hero from day 21 with 17500 gold.
+- **Magic.** A player with a magic-leaning hero (or one with a school
+  skill) ranks guild levels 1 and 2 as key buildings (27 and 44, was 42
+  and 66). Level-ups weigh a school skill double when its rank unlocks an
+  adventure page the hero knows but cannot cast (a page needs a rank in
+  its school: tier 2 needs rank 1, tier 3 rank 2).
+- **Spells and sites.** Parley on an adjacent small stack in front of
+  something worth having when the fight is refused; Read the Seal on a
+  rival hero in range every three days when at least half the mana is
+  left (the AI's estimates do not need the reading; no v0.2 object is
+  `sealed`); Second Helping on our own dwelling before hiring; Tow Line
+  from a pylon to the marked pylon nearest the best target when it saves
+  more than a day; Drills bought at a drill yard for the army's creatures
+  when 4000 gold stays after the price (the last three from bead bzc.32).
+- **Seer quests.** An artifact quest adds 60% of the reward to that
+  artifact on the map (unless a hero carries it), a creatures quest 50%
+  to the stray hut that sells them (unless a hero has enough); the
+  "defeat" and "visit" leads of iteration 1 stay. Level quests are met
+  by playing on.
+- **Runner**: `--no-families` and `--no-openings` (ablations); the
+  `SUMMARY` line adds simulations, family predictions and deferrals.
+
+### Before and after
+
+Before: the iteration-1 AI on today's main (bzc.32 map leftovers, bzc.34
+content leftovers and bzc.26 merged); after: this iteration on the same
+main. Both ran at the same time on the same machine (16 matches on 10
+cores, so absolute turn times are about 1.5 times a quiet machine's),
+seeds 11-13, 84 days; "a → b" is before → after.
+
+Every player an AI:
+
+| Map           | Seed | 1st PvP fight (day) | 1st town lost (day) | 1st elimination (day) | PvP fights | Guards cleared by d56 | Leader's army d84 | Turn ms p95 | Turn ms max | Deciding ms max |
+| ------------- | ---- | ------------------- | ------------------- | --------------------- | ---------- | --------------------- | ----------------- | ----------- | ----------- | --------------- |
+| S, 2 players  | 11   | 14 → 13             | 14 → 14             | 73 → 41               | 32 → 19    | 97% → 72%             | 81k → 168k        | 1207 → 1228 | 1937 → 1840 | 891 → 1832      |
+| S, 2 players  | 12   | 8 → 11              | 16 → 18             | 16 → 39               | 3 → 6      | 100% → 96%            | 220k → 195k       | 491 → 817   | 1005 → 1823 | 651 → 855       |
+| S, 2 players  | 13   | 6 → 8               | 9 → 12              | 33 → 22               | 16 → 7     | 78% → 100%            | 153k → 196k       | 1168 → 1271 | 4036 → 2641 | 1312 → 1325     |
+| M, 3 players  | 11   | 7 → 7               | 19 → 3              | 29 → 8                | 29 → 17    | 70% → 77%             | 148k → 213k       | 877 → 783   | 1661 → 1244 | 1655 → 1141     |
+| M, 3 players  | 12   | 5 → 13              | 17 → 13             | 23 → 19               | 11 → 17    | 71% → 88%             | 209k → 220k       | 889 → 1435  | 3274 → 3832 | 1174 → 1671     |
+| M, 3 players  | 13   | 7 → 14              | 7 → 17              | 33 → 48               | 31 → 33    | 74% → 65%             | 141k → 117k       | 528 → 718   | 1051 → 1371 | 483 → 735       |
+| Keepers' Toll | 11   | 20 → 17             | 23 → 17             | - → 23                | 14 → 2     | 77% → 100%            | 128k → 248k       | 1166 → 1425 | 2096 → 1895 | 1725 → 1177     |
+| Keepers' Toll | 12   | 18 → 22             | 21 → 25             | 66 → -                | 26 → 20    | 77% → 89%             | 138k → 166k       | 1152 → 1400 | 1502 → 3826 | 1462 → 2201     |
+| Keepers' Toll | 13   | 15 → 18             | 15 → 18             | - → 34                | 14 → 4     | 79% → 94%             | 166k → 259k       | 524 → 601   | 1101 → 1040 | 1086 → 752      |
+| Hourglass (L) | 11   | 14 → 20             | 14 → 31             | 31 → 65               | 15 → 17    | 53% → 81%             | 211k → 194k       | 1091 → 1139 | 4083 → 3828 | 1216 → 1223     |
+| Hourglass (L) | 12   | 16 → 12             | 16 → 12             | 44 → 36               | 19 → 22    | 50% → 67%             | 199k → 329k       | 828 → 731   | 2255 → 1938 | 1299 → 760      |
+| Hourglass (L) | 13   | 14 → 14             | 31 → 21             | 43 → 23               | 14 → 25    | 76% → 92%             | 167k → 138k       | 547 → 574   | 1674 → 1600 | 747 → 588       |
+
+Player 0 passive (`--idle 0`, a human who only ends turns); "AI out" is
+the first AI player eliminated (by another AI), "AI army d42" the
+strongest AI's:
+
+| Map           | Seed | Human out (day) | AI out (day) | AI army d42 | Guards cleared by d56 | Leader's army d84 | Turn ms p95 |
+| ------------- | ---- | --------------- | ------------ | ----------- | --------------------- | ----------------- | ----------- |
+| S, 2 players  | 11   | 10 → 17         | - → -        | 72k → 63k   | 100% → 100%           | 192k → 197k       | 739 → 621   |
+| S, 2 players  | 12   | 11 → 11         | - → -        | 73k → 65k   | 96% → 96%             | 220k → 205k       | 386 → 423   |
+| S, 2 players  | 13   | 8 → 9           | - → -        | 76k → 65k   | 100% → 100%           | 203k → 206k       | 459 → 510   |
+| M, 3 players  | 11   | 36 → 11         | 35 → 9       | 61k → 102k  | 77% → 98%             | 211k → 287k       | 901 → 1026  |
+| M, 3 players  | 12   | 51 → 32         | 25 → 25      | 61k → 58k   | 88% → 100%            | 200k → 242k       | 906 → 611   |
+| M, 3 players  | 13   | 7 → 16          | - → -        | 41k → 39k   | 65% → 67%             | 171k → 195k       | 711 → 850   |
+| Keepers' Toll | 11   | 37 → 36         | - → -        | 63k → 46k   | 83% → 81%             | 199k → 193k       | 814 → 668   |
+| Keepers' Toll | 12   | - → 24          | - → -        | 53k → 67k   | 89% → 87%             | 184k → 248k       | 1138 → 655  |
+| Keepers' Toll | 13   | 31 → 23         | - → -        | 64k → 75k   | 87% → 98%             | 214k → 241k       | 1036 → 1228 |
+| Hourglass (L) | 11   | 21 → 28         | - → -        | 77k → 76k   | 82% → 69%             | 137k → 242k       | 921 → 1111  |
+| Hourglass (L) | 12   | 11 → 36         | - → -        | 76k → 74k   | 65% → 83%             | 150k → 175k       | 869 → 1096  |
+| Hourglass (L) | 13   | 21 → 34         | - → 56       | 78k → 67k   | 70% → 83%             | 154k → 318k       | 522 → 558   |
+
+Means over the twelve matches of each table:
+
+| Metric                                  | All AI: before | All AI: after | Passive human: before | Passive human: after |
+| --------------------------------------- | -------------- | ------------- | --------------------- | -------------------- |
+| Guards cleared by day 56                | 75%            | 85%           | 83%                   | 89%                  |
+| Leader's army at day 84                 | 163k           | 204k          | 186k                  | 229k                 |
+| Player-against-player battles per match | 18.7           | 15.8          | 8.8                   | 6.8                  |
+| First town lost (day)                   | 16.8           | 16.8          | 20.9                  | 19.4                 |
+| First AI eliminated (day; 85 if none)   | 46.8           | 36.9          | 75.8                  | 71.3                 |
+| AI eliminations by day 21               | 1              | 2             | 0                     | 1                    |
+| Human eliminated (day; 85 if none)      | -              | -             | 27.4                  | 23.1                 |
+| Turn ms p95                             | 872            | 1010          | 784                   | 780                  |
+| Turn ms max                             | 2140           | 2240          | 1714                  | 1538                 |
+| Deciding ms max                         | 1142           | 1188          | 859                   | 837                  |
+
+Reading: the AI clears more of the map (on the Hourglass by day 56:
+53/50/76% → 81/67/92% with every player an AI, back in iteration 0's
+72-91% band in two seeds of three), builds bigger armies (+25%), fights
+fewer player battles, and beats a passive human sooner. Early losses are
+not fixed: the openings give stronger week-one armies and matches are
+decided sooner (first elimination on day 47 → 37 on average; M seed 11
+lost its undead capital on day 3 to a goblin hero that walked into the
+empty town, out on day 8). The turn budget is unchanged (it counts
+predicted milliseconds); whole turns are about as long as before, a
+little longer in AI-only games, because the armies and their real
+battles are bigger. An ablation on the Keepers' Toll and M maps (56
+days, passive human, `--no-families` and `--no-openings`) showed no clear
+effect of either feature alone at three seeds: the spread between seeds
+is larger than the effect.
+
+### Watched in the browser
+
+Muted headless Chrome on port 6295 (`?mute=1&autostart=1`), the human
+only ending its turns; one screenshot and a state dump per day
+(`.orchestration/sim/it2/watch.mjs`, git-ignored). S seed 11: the AI hired
+a second hero on day 1, ferried the first hero's army to it, cleared
+nine stacks by day 15 and took the human's empty capital on day 15
+(walking past the human hero next to it); its secondary hero sat in town
+with one creature on days 10-13. Keepers' Toll seed 12: the AI took a
+neutral town on day 12, kept growing garrisons in both its towns (24-42
+creatures) and came within seven cells of the human's town on day 23,
+then turned away (the human's town and hero stayed in its fog, so a
+human sees nothing of this).
+
+### Remaining weaknesses (iteration 3), worst first
+
+1. **Empty capitals in week one.** A town with no garrison falls to the
+   first rival hero that finds it (M seed 11: day 3, out on day 8); the
+   openings make week-one heroes stronger and such raids likelier. The
+   home guard starts only in week two, and a rival coming out of
+   unexplored ground is not seen until it arrives.
+2. **Adjacent-only map spells cannot be used by walking.** Parley and
+   Opening Salvo need the stack adjacent to the hero, but stepping into a
+   stack's zone starts the fight at once, so a hero is adjacent only when
+   it started there. The AI casts them only then (rare). A rules
+   follow-up: a range of two, or casting them as part of the attack.
+3. **Big battles still cost 1-4 s** (the battle AI's own cost, bzc.37);
+   whole AI turns reach 2-4 s in AI-only games on busy cores.
+4. **Weak secondary heroes idle or wander with one creature**; neutral
+   towns with 70-110 creature garrisons are left for weeks; one-way
+   waystones are not used in route planning.
+5. **War judgement is coarse.** The who-is-winning check counts heroes
+   as last seen and explored garrisons only; three-player maps still have
+   15-33 player battles per match, and a player that wins a war does not
+   consolidate (captured towns hold only what they recruit).
+
+Raw metrics: `.orchestration/sim/it2/b2-*.json` (before) and `f1-*.json`
+(after), table `final-table.txt` (git-ignored); reproduce with `node
+tools/sim/run-ts.mjs tools/sim/match.ts --size M --players 3 --seeds
+11,12,13 --days 84 [--idle 0]`.

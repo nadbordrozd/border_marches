@@ -18,6 +18,9 @@
  *   --trace <p>[:a-b]    print player p's actions on days a..b
  *   --explain <p>:<day>  print player p's targets and view on that day
  *   --idle <p>           player p only ends its turns (a passive human)
+ *   --no-families        no fight predictions from earlier fights of a
+ *                        family (iteration 2 ablation)
+ *   --no-openings        no faction openings in week one (ablation)
  *   --out <file.json>    save every day's metrics (default
  *                        .orchestration/sim/match-<ai>-<size><players>.json)
  *
@@ -148,7 +151,10 @@ function makeController(): (player: number) => PlayerController {
   }
   // The AI's own simulated fights use its default resolver (a round
   // limit for estimates); the match's battles use the game's.
-  const ai = new AdventureAi();
+  const ai = new AdventureAi({
+    families: !args.includes("--no-families"),
+    openings: !args.includes("--no-openings"),
+  });
   current = ai;
   // --idle <p>: that player only ends its turns (a passive human).
   const passive: PlayerController = { decide: () => ({ type: "end-turn" }) };
@@ -273,7 +279,7 @@ for (const seed of seeds) {
     d56 === undefined || guards === 0 ? 0 : (guards - d56.guardsLeft) / guards;
   const last = result.days[result.days.length - 1] ?? [];
   console.log(
-    `SUMMARY seed ${seed} first-player-fight d${result.firstPlayerFight ?? "-"} first-town-loss d${result.firstTownLoss ?? "-"} player-fights ${result.playerFights.length} guards-cleared-d56 ${pct(cleared56)} eliminated ${result.eliminatedOn.map((d) => d ?? "-").join("/")} army-end ${last.map((m) => m.armyFv).join("/")} turn-ms mean ${mean.toFixed(0)} max ${max.toFixed(0)} p95 ${percentile(all, 0.95).toFixed(0)} last-stands ${result.lastStands} void ${result.battleErrors.length}`,
+    `SUMMARY seed ${seed} first-player-fight d${result.firstPlayerFight ?? "-"} first-town-loss d${result.firstTownLoss ?? "-"} player-fights ${result.playerFights.length} guards-cleared-d56 ${pct(cleared56)} eliminated ${result.eliminatedOn.map((d) => d ?? "-").join("/")} army-end ${last.map((m) => m.armyFv).join("/")} turn-ms mean ${mean.toFixed(0)} max ${max.toFixed(0)} p95 ${percentile(all, 0.95).toFixed(0)} last-stands ${result.lastStands} void ${result.battleErrors.length} sims ${current?.simulations ?? 0} inferred ${current?.inferred ?? 0} deferred ${current?.deferrals ?? 0}`,
   );
   for (const b of result.battleErrors.slice(0, 5)) {
     console.log(`  void battle d${b.day} p${b.player}: ${b.message}`);

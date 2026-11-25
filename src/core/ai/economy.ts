@@ -50,10 +50,53 @@ const DWELLING_RANK: Readonly<Record<number, number>> = {
   6: 70,
 };
 const GUILD_RANK = [42, 66, 86, 100, 110];
+/**
+ * Guild ranks for a player whose heroes lean to magic (iteration 2, bead
+ * bzc.22): the first two levels (Green Road, Opening Salvo, Dowse, Parley
+ * and the tier-2 battle pages) become key buildings saved for in week 2.
+ */
+const MAGIC_GUILD_RANK = [27, 44, 72, 96, 110];
+
+/** What the player's heroes and calendar ask of the build order. */
+export interface BuildPlan {
+  /** A hero leans to magic: guild levels 1-2 move up. */
+  magic?: boolean;
+  /** Play the faction's first-week opening (default true). */
+  opening?: boolean;
+}
+
+/**
+ * First-week openings per faction (iteration 2): the cheap ranged or
+ * fast dwelling on day one (its first week's creatures arrive at once),
+ * then income or the fort its next dwelling needs. Built in this order
+ * while affordable during week one, before the general build order.
+ */
+export const OPENINGS: Readonly<Record<string, readonly BuildingId[]>> = {
+  humans: ["archery-range", "town-hall", "fort-1", "barracks"],
+  undead: ["charnel-pit", "town-hall", "fort-1", "wailing-tower"],
+  goblins: ["powder-shed", "fort-1", "wolf-kennels", "town-hall"],
+};
+
+/** The opening building to build today in `town`, if any. */
+export function openingBuild(
+  state: GameState,
+  town: TownState,
+): BuildingId | null {
+  if (state.day > 7 || town.owner === null || town.builtToday) return null;
+  const plan = OPENINGS[town.faction];
+  if (plan === undefined) return null;
+  for (const id of plan) {
+    if (town.buildings.includes(id)) continue;
+    // In order: a step not affordable yet hands the day to the general
+    // build order.
+    return buildStatus(state, town.id, id) === "ok" ? id : null;
+  }
+  return null;
+}
 const FORT_RANK: Readonly<Record<number, number>> = { 1: 25, 2: 80, 3: 95 };
 
 /** Build-order rank of a building (lower is earlier). */
-export function buildingRank(def: BuildingDef): number {
+export function buildingRank(def: BuildingDef, plan: BuildPlan = {}): number {
   if (def.hallIncome !== undefined) return def.hallIncome <= 1000 ? 10 : 33;
   if (def.dwelling !== undefined) {
     return DWELLING_RANK[getCreature(def.dwelling).tier] ?? 90;
@@ -61,7 +104,8 @@ export function buildingRank(def: BuildingDef): number {
   if (def.fortLevel !== undefined) return FORT_RANK[def.fortLevel] ?? 95;
   if (def.marketplace === true) return 40;
   if (def.guildLevel !== undefined) {
-    return GUILD_RANK[def.guildLevel - 1] ?? 110;
+    const ranks = plan.magic === true ? MAGIC_GUILD_RANK : GUILD_RANK;
+    return ranks[def.guildLevel - 1] ?? 110;
   }
   if (def.income !== undefined) return (def.income.gold ?? 0) > 0 ? 52 : 55;
   if (def.evenDayIncome !== undefined) return 58;
@@ -71,7 +115,10 @@ export function buildingRank(def: BuildingDef): number {
 }
 
 /** The town's buildings still to build, in build order. */
-export function buildQueue(town: TownState): BuildingDef[] {
+export function buildQueue(
+  town: TownState,
+  plan: BuildPlan = {},
+): BuildingDef[] {
   const tree = townTree(town.faction);
   if (tree === undefined || town.isHold) return [];
   const defs = Object.values(tree.buildings) as BuildingDef[];
@@ -84,7 +131,7 @@ export function buildQueue(town: TownState): BuildingDef[] {
     )
     .sort(
       (a, b) =>
-        buildingRank(a) - buildingRank(b) ||
+        buildingRank(a, plan) - buildingRank(b, plan) ||
         tree.order.indexOf(a.id) - tree.order.indexOf(b.id),
     );
 }
@@ -94,10 +141,19 @@ export interface BuildChoice {
   build: BuildingId | null;
   /** A key building the player is saving for (not affordable yet). */
   saving: BuildingDef | null;
+  /**
+   * The first building of any rank that only lacks resources (iteration
+   * 2): a rich player buys them at the market instead of sitting on gold.
+   */
+  blocked?: BuildingDef;
 }
 
 /** What to build in a town today. */
-export function chooseBuild(state: GameState, town: TownState): BuildChoice {
+export function chooseBuild(
+  state: GameState,
+  town: TownState,
+  plan: BuildPlan = {},
+): BuildChoice {
   if (town.owner === null || town.builtToday) {
     return { build: null, saving: null };
   }
@@ -116,15 +172,19 @@ export function chooseBuild(state: GameState, town: TownState): BuildChoice {
     out.push(def);
     return out;
   };
-  for (const top of buildQueue(town)) {
-    const key = buildingRank(top) <= KEY_RANK;
+  const opening = plan.opening === false ? null : openingBuild(state, town);
+  if (opening !== null) return { build: opening, saving: null };
+  let blocked: BuildingDef | undefined;
+  for (const top of buildQueue(town, plan)) {
+    const key = buildingRank(top, plan) <= KEY_RANK;
     for (const def of withRequirements(top)) {
       const status = buildStatus(state, town.id, def.id);
       if (status === "ok") return { build: def.id, saving: null };
       if (status === "resources" && key) return { build: null, saving: def };
+      if (status === "resources") blocked ??= def;
     }
   }
-  return { build: null, saving: null };
+  return { build: null, saving: null, ...(blocked ? { blocked } : {}) };
 }
 
 /**
@@ -135,6 +195,8 @@ export function tradeFor(
   state: GameState,
   player: number,
   def: BuildingDef,
+  /** Gold kept back after the purchase and the building. */
+  cushion = 1000,
 ): GameAction | null {
   if (!hasMarketplace(state, player)) return null;
   const p = state.players.find((x) => x.id === player);
@@ -152,7 +214,9 @@ export function tradeFor(
   }
   const first = buys[0];
   // Keep a cushion of gold for creatures.
-  if (first === undefined || p.resources.gold < goldNeeded + 1000) return null;
+  if (first === undefined || p.resources.gold < goldNeeded + cushion) {
+    return null;
+  }
   return {
     type: "trade",
     give: "gold",
@@ -232,6 +296,9 @@ export function after(res: Resources, cost: Partial<Resources>): Resources {
 export function wantedHeroes(state: GameState, player: number): number {
   const day = state.day;
   const gold = state.players.find((p) => p.id === player)?.resources.gold ?? 0;
+  // A rich player (iteration 2: 50-70k gold sat unspent in long games)
+  // sends a fourth hero for mines, pickups and ferrying.
+  if (day >= 21 && gold >= HIRE_COST + 15000) return 4;
   if (day >= 10 && gold >= HIRE_COST + 6000) return 3;
   return 2;
 }

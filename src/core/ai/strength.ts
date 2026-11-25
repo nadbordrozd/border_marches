@@ -108,6 +108,120 @@ export function predictedMs(setup: BattleSetup): number {
   return 5 * n * n;
 }
 
+/**
+ * The fight's family (iteration 2, bead bzc.22): what stays the same while
+ * the armies grow or shrink. The defender's creature types and fort
+ * bonus, and the attacker's main faction (of its lead stack) and ranged
+ * share in quarters. Fights of one family differ mainly by the strength
+ * ratio, so a result seen at one ratio predicts others (see
+ * {@link FightOracle}). Defenders with a hero are never grouped (spells,
+ * artifacts and skills differ).
+ */
+export function familyKey(setup: BattleSetup): string | null {
+  if (setup.defender.hero !== null) return null;
+  const att = setup.attacker.stacks;
+  if (att.length === 0) return null;
+  let lead = "";
+  let leadFv = -1;
+  let own = 0;
+  let ranged = 0;
+  for (const s of att) {
+    const def = getCreature(s.creature);
+    const fv = s.count * def.fightValue;
+    own += fv;
+    if (def.shots > 0) ranged += fv;
+    if (fv > leadFv) {
+      leadFv = fv;
+      lead = def.faction;
+    }
+  }
+  const types = [...new Set(setup.defender.stacks.map((s) => s.creature))]
+    .sort()
+    .join(",");
+  const rangedQ = own <= 0 ? 0 : Math.round((ranged / own) * 4);
+  return [
+    setup.battle.kind,
+    types,
+    setup.defender.defenseBonus,
+    lead,
+    rangedQ,
+  ].join("|");
+}
+
+/** One worst-of-two simulated outcome of a family, at its ratio. */
+interface Observation {
+  ratio: number;
+  win: boolean;
+  lossShare: number;
+}
+
+/**
+ * Losses of a won fight shrink with the square of the strength advantage
+ * (the fast estimate's model); a result seen at `seenRatio` scales to
+ * `ratio` by this factor.
+ */
+export function scaleLoss(
+  lossShare: number,
+  seenRatio: number,
+  ratio: number,
+): number {
+  if (ratio <= 0) return 1;
+  return Math.min(1, lossShare * (seenRatio / ratio) ** 2);
+}
+
+/**
+ * Predicts a fight from its family's observations, or null when they do
+ * not bracket `ratio`: a loss seen at this ratio or above means a loss; a
+ * win seen at this ratio or below (the closest one) means a win, its
+ * losses scaled by the ratio. A win seen slightly above this ratio (within
+ * NEAR_MISS) also counts, its scaled losses padded by a quarter. A loss
+ * between the win and this ratio (a stubborn outlier) blocks the guess.
+ */
+export function inferFromFamily(
+  obs: readonly Observation[],
+  ratio: number,
+): { win: boolean; lossShare: number; seenRatio: number } | null {
+  for (const o of obs) {
+    if (!o.win && o.ratio >= ratio * 0.97) {
+      return { win: false, lossShare: 1, seenRatio: o.ratio };
+    }
+  }
+  let best: Observation | undefined;
+  for (const o of obs) {
+    if (!o.win || o.ratio > ratio) continue;
+    if (best === undefined || o.ratio > best.ratio) best = o;
+  }
+  if (best !== undefined) {
+    const b = best;
+    const blocked = obs.some(
+      (o) => !o.win && o.ratio >= b.ratio && o.ratio <= ratio,
+    );
+    if (!blocked) {
+      return {
+        win: true,
+        lossShare: scaleLoss(b.lossShare, b.ratio, ratio),
+        seenRatio: b.ratio,
+      };
+    }
+  }
+  // A win a little above this ratio: the losses grow, padded.
+  let above: Observation | undefined;
+  for (const o of obs) {
+    if (!o.win || o.ratio <= ratio || o.ratio > ratio / NEAR_MISS) continue;
+    if (above === undefined || o.ratio < above.ratio) above = o;
+  }
+  if (above !== undefined) {
+    const share = scaleLoss(above.lossShare, above.ratio, ratio) * 1.25;
+    if (share <= 0.5) {
+      return { win: true, lossShare: share, seenRatio: above.ratio };
+    }
+  }
+  return null;
+}
+
+/** A family win seen this much above a ratio still predicts it. */
+export const NEAR_MISS = 0.9;
+
 function setupKey(setup: BattleSetup): string {
   const side = (s: BattleSide): unknown[] => [
     s.stacks.map((x) => `${x.creature}:${x.count}`).join(","),
@@ -122,13 +236,42 @@ function setupKey(setup: BattleSetup): string {
   ]);
 }
 
+/** Options of a {@link FightOracle}. */
+export interface OracleOptions {
+  /**
+   * Predicted milliseconds of simulating `setup` with the oracle's
+   * resolver (the budget's unit; default {@link predictedMs}). A faster
+   * resolver (bead bzc.37's battle-AI mode) passes its own model and the
+   * same turn budget then buys more simulations, with no other change.
+   */
+  costOf?: (setup: BattleSetup) => number;
+  /** Predict fights from their family's earlier results (default true). */
+  families?: boolean;
+}
+
 /**
  * Estimates fights for one AI. Results are cached by the two armies (not
  * the battle seed), so a fight is simulated at most once while neither
  * side changes; {@link FightOracle.clear} empties the cache.
+ *
+ * Iteration 2 (bead bzc.22): every full (worst-of-two) simulated result is
+ * also kept per fight family ({@link familyKey}: the guard's creature
+ * types and the attacker's lead creature, not the counts), and a later
+ * fight of the same family is predicted from it, losses scaled by the
+ * strength ratio ({@link inferFromFamily}), without a simulation. Army
+ * changes (a recruit, a lost stack, a level) no longer reset what the AI
+ * knows about a guard type.
  */
 export class FightOracle {
   private readonly cache = new Map<string, FightEstimate>();
+  /** Family -> its simulated outcomes (newest last). */
+  private readonly families = new Map<string, Observation[]>();
+  /** Estimates answered from a family instead of a simulation. */
+  inferred = 0;
+  /** Fights put off for want of budget (profiling). */
+  deferrals = 0;
+  private readonly costOf: (setup: BattleSetup) => number;
+  private readonly useFamilies: boolean;
   /** Creatures that held out in a simulation against a far bigger army. */
   private readonly stubborn = new Set<string>();
   /** Won first simulations still waiting for their second. */
@@ -157,10 +300,34 @@ export class FightOracle {
    */
   maxSimMs = 0;
 
-  constructor(private readonly resolver: BattleResolver | null) {}
+  constructor(
+    private readonly resolver: BattleResolver | null,
+    options: OracleOptions = {},
+  ) {
+    this.costOf = options.costOf ?? predictedMs;
+    this.useFamilies = options.families ?? true;
+  }
 
   clear(): void {
     this.cache.clear();
+    this.families.clear();
+  }
+
+  /** Predicted milliseconds of simulating `setup` (the budget's unit). */
+  cost(setup: BattleSetup): number {
+    return this.costOf(setup);
+  }
+
+  private remember(family: string | null, est: FightEstimate): void {
+    if (family === null || !est.simulated) return;
+    let obs = this.families.get(family);
+    if (obs === undefined) {
+      if (this.families.size > 2000) this.families.clear();
+      obs = [];
+      this.families.set(family, obs);
+    }
+    obs.push({ ratio: est.ratio, win: est.win, lossShare: est.lossShare });
+    if (obs.length > 12) obs.shift();
   }
 
   /** The battle `battle` would be now (null when it cannot start). */
@@ -186,7 +353,9 @@ export class FightOracle {
     const theirs = sidePower(setup.defender);
     const ratio = theirs <= 0 ? 99 : ours / theirs;
     let est: FightEstimate;
-    if (own <= 0 || ratio < HOPELESS_RATIO) {
+    const hopeless = own <= 0 || ratio < HOPELESS_RATIO;
+    const family = hopeless ? null : this.fromFamily(setup, own, ratio);
+    if (hopeless) {
       est = {
         win: false,
         lossFv: own,
@@ -195,11 +364,13 @@ export class FightOracle {
         xp: 0,
         simulated: false,
       };
+    } else if (family !== null) {
+      est = family;
     } else if (
       ratio >= EASY_RATIO ||
       this.resolver === null ||
       this.budget <= 0 ||
-      predictedMs(setup) > this.msBudget
+      this.costOf(setup) > this.msBudget
     ) {
       // Without a resolver (or simulations left) the fast estimate
       // decides; a fast answer for want of budget is not cached. Below
@@ -219,7 +390,7 @@ export class FightOracle {
       );
       const deferred =
         unsure === 2 &&
-        predictedMs(setup) <= this.maxSimMs &&
+        this.costOf(setup) <= this.maxSimMs &&
         (ratio < CLOSE_RATIO || suspect);
       const fast: FightEstimate = {
         win: ratio >= 1.2 && !deferred,
@@ -229,23 +400,27 @@ export class FightOracle {
         xp: ratio >= 1.2 ? enemyHp(setup.defender) : 0,
         simulated: false,
       };
+      if (deferred) this.deferrals++;
       if (ratio < EASY_RATIO && this.resolver !== null) return fast;
       est = fast;
     } else {
       est = this.half.get(key) ?? this.simulate(setup, own, ratio, "a");
+      if (!est.win) this.remember(familyKey(setup), est);
       // A won fight is fought again with another seed and the worse
       // outcome counts: outcomes can be all or nothing (a stack the
       // attacker cannot finish holds out to the round limit), and one
       // lucky roll must not risk the army. Without the budget for the
       // second, the first is kept and the fight waits (not won yet).
       if (est.win) {
-        if (this.budget > 0 && predictedMs(setup) <= this.msBudget) {
+        if (this.budget > 0 && this.costOf(setup) <= this.msBudget) {
           this.half.delete(key);
           const again = this.simulate(setup, own, ratio, "b");
           if (!again.win || again.lossFv > est.lossFv) est = again;
+          this.remember(familyKey(setup), est);
         } else {
           if (this.half.size > 500) this.half.clear();
           this.half.set(key, est);
+          this.deferrals++;
           return { ...est, win: false, lossFv: own, lossShare: 1 };
         }
       }
@@ -253,6 +428,31 @@ export class FightOracle {
     if (this.cache.size > 4000) this.cache.clear();
     this.cache.set(key, est);
     return est;
+  }
+
+  /** A prediction from the fight's family, or null (see inferFromFamily). */
+  private fromFamily(
+    setup: BattleSetup,
+    own: number,
+    ratio: number,
+  ): FightEstimate | null {
+    if (!this.useFamilies || this.resolver === null) return null;
+    if (ratio >= EASY_RATIO) return null;
+    const family = familyKey(setup);
+    if (family === null) return null;
+    const obs = this.families.get(family);
+    if (obs === undefined || obs.length === 0) return null;
+    const guess = inferFromFamily(obs, ratio);
+    if (guess === null) return null;
+    this.inferred++;
+    return {
+      win: guess.win,
+      lossFv: guess.win ? Math.round(own * guess.lossShare) : own,
+      lossShare: guess.lossShare,
+      ratio,
+      xp: guess.win ? enemyHp(setup.defender) : 0,
+      simulated: false,
+    };
   }
 
   /**
@@ -273,7 +473,7 @@ export class FightOracle {
     const t0 = nowMs();
     const r = resolver({ ...setup, seed: deriveSeed(setup.seed, "ai", salt) });
     this.simMs += nowMs() - t0;
-    const cost = predictedMs(setup);
+    const cost = this.costOf(setup);
     this.simCost += cost;
     this.msBudget -= cost;
     const win = r.winner === "attacker" && r.retreat !== "attacker";

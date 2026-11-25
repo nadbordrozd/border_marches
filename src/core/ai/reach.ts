@@ -134,6 +134,10 @@ export function reachFor(
     const cy = (cur - cx) / w;
     if (cur !== start) {
       if (ctx.guards.has(cur)) continue;
+      // A stack's own cell is a fight, never a way through (iteration 2:
+      // a hero starting inside a zone walked "through" the stack, a fight
+      // its estimate never saw).
+      if (ctx.monsterAt.has(cur)) continue;
       if (ctx.stops.has(cur) && !through.has(cur)) continue;
     }
     const gc = cost.get(cur) ?? 0;

@@ -136,8 +136,8 @@ describe("AdventureAi decisions", () => {
     expect(ai.simulations).toBeGreaterThan(0);
   });
 
-  it("builds income first", () => {
-    const s = game();
+  it("builds income first after the first week's opening", () => {
+    const s = { ...game(), day: 8 };
     const { actions } = turnActions(s, fast());
     const firstBuild = actions.find((a) => a.type === "build");
     expect(firstBuild).toMatchObject({ type: "build", building: "town-hall" });
@@ -149,7 +149,7 @@ describe("AdventureAi decisions", () => {
   });
 
   it("saves for a key building it cannot afford yet", () => {
-    const s = withGold(game(), 1000);
+    const s = { ...withGold(game(), 1000), day: 8 };
     const choice = chooseBuild(s, s.towns["t0"]!);
     expect(choice.build).toBeNull();
     expect(choice.saving?.id).toBe("town-hall");
