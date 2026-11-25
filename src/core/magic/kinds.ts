@@ -26,6 +26,7 @@ import {
   otherSide,
   stackValue,
 } from "../battle/rules.ts";
+import { STRAY_ABILITY_TEXT } from "../../data/strays.ts";
 
 function clockText(clock: number | null): string {
   return clock === null
@@ -113,7 +114,7 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
     polarity: "boon",
     defaultClock: 3,
     text: (c) =>
-      `Its Strikes are x ${100 + c.size}%; grows by 10 at its turn start (max ${c.maxSize}), ${clockText(c.clock)}.`,
+      `Its Strikes deal ${c.size}% more damage, rising by 10% at each of its turn starts (up to ${c.maxSize}%), ${clockText(c.clock)}.`,
     strikeMultiplier(ctx, holder, c) {
       if (holder.id !== ctx.attacker.id) return null;
       return { source: "ripening", label: "Ripening", percent: 100 + c.size };
@@ -152,7 +153,8 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
     school: "accord",
     polarity: "boon",
     defaultClock: 3,
-    text: (c) => `Harm it takes is x ${100 - c.size}% ${clockText(c.clock)}.`,
+    text: (c) =>
+      `It takes ${Math.min(75, c.size)}% less Harm ${clockText(c.clock)}.`,
     harmTakenPercent: (_h, c) => 100 - Math.min(75, c.size),
   },
   {
@@ -161,7 +163,8 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
     school: "accord",
     polarity: "bane",
     defaultClock: 3,
-    text: (c) => `Its Strikes are x ${100 - c.size}% ${clockText(c.clock)}.`,
+    text: (c) =>
+      `Its Strikes deal ${Math.min(75, c.size)}% less damage ${clockText(c.clock)}.`,
     strikeMultiplier(ctx, holder, c) {
       if (holder.id !== ctx.attacker.id) return null;
       return {
@@ -286,7 +289,8 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
     school: "storm",
     polarity: "bane",
     defaultClock: 3,
-    text: (c) => `Harm it takes is x ${100 + c.size}% ${clockText(c.clock)}.`,
+    text: (c) =>
+      `It takes ${Math.min(100, c.size)}% more Harm ${clockText(c.clock)}.`,
     harmTakenPercent: (_h, c) => 100 + Math.min(100, c.size),
   },
   {
@@ -376,7 +380,7 @@ export const MAGIC_GROUND_KINDS: readonly GroundKindDef[] = [
     defaultClock: 3,
     cannotShoot: true,
     text: () =>
-      "Mist: a stack standing here cannot shoot; shots against it are x 50%.",
+      "Mist: a stack standing here cannot shoot; shots against it deal half damage.",
     strikeMultiplier(ctx, _f, standing) {
       if (standing.id !== ctx.defender.id || ctx.kind !== "shot") return null;
       return { source: "mist", label: "Mist", percent: 50 };
@@ -425,11 +429,12 @@ export function registerMagicKinds(): void {
     if (!hasGroundKind(g.id)) registerGroundKind(g);
   }
   if (hasAbility("gone-to-seed")) return;
+  // One text for the battle registry and the gallery (src/ui/info-tips.ts
+  // reads STRAY_ABILITY_TEXT when magic has not registered yet).
   registerAbility({
     id: "gone-to-seed",
-    name: "Gone to Seed",
-    description:
-      "When it dies its hex receives brambles of size 4 for 3 rounds.",
+    name: STRAY_ABILITY_TEXT["gone-to-seed"].name,
+    description: STRAY_ABILITY_TEXT["gone-to-seed"].text,
     onDeath(deadId, owner) {
       if (deadId !== owner.id) return null;
       const hex = owner.hex;
@@ -440,8 +445,8 @@ export function registerMagicKinds(): void {
   });
   registerAbility({
     id: "fade",
-    name: "Fade",
-    description: "When it dies its hex receives mist for 2 rounds.",
+    name: STRAY_ABILITY_TEXT.fade.name,
+    description: STRAY_ABILITY_TEXT.fade.text,
     onDeath(deadId, owner) {
       if (deadId !== owner.id) return null;
       const hex = owner.hex;

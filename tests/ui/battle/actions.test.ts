@@ -77,7 +77,7 @@ describe("the action bar", () => {
       label: "Hurl",
       state: "ready",
       badge: "every turn",
-      usage: "Every turn, in place of an attack, may walk first",
+      usage: "Every turn, instead of attacking. It may walk first.",
       mode: { kind: "ability", id: "hurl" },
     });
     expect(hurl.rule).toMatch(/at most 40 HP per Ogre in total/);

@@ -25,9 +25,11 @@ import type {
   StackSelector,
   StrikeFilter,
 } from "../../data/effects.ts";
+import { getCreature, isCreatureId } from "../../data/creatures.ts";
 import { isAlive } from "./abilities.ts";
 import { creatureFightValue } from "./damage.ts";
 import {
+  conditionKind,
   hasConditionKind,
   registerAbility,
   registerAct,
@@ -55,7 +57,7 @@ export interface HeroStrikeModifier {
   label: string;
   strike: StrikeFilter;
   direction: "dealt" | "taken";
-  /** +10 is x 110%, -20 is x 80%. */
+  /** +10 is 10% more damage, -20 is 20% less. */
   percent: number;
   /** Only against a stack bearing one of these condition kinds. */
   targetBears?: readonly string[];
@@ -79,6 +81,53 @@ function strikeMatches(filter: StrikeFilter, kind: StrikeKind): boolean {
   return kind === "melee" || kind === "retaliation";
 }
 
+/** "A, B or C". */
+function orList(items: readonly string[]): string {
+  if (items.length <= 1) return items.join("");
+  return `${items.slice(0, -1).join(", ")} or ${items[items.length - 1]}`;
+}
+
+/**
+ * A Strike percentage in plain words, as the hero texts say it: "Strikes
+ * by this side's stacks deal 25% more damage to Delayed or Slowed stacks
+ * (hero)."
+ */
+export function strikeModifierText(m: HeroStrikeModifier): string {
+  const amount = `${Math.abs(m.percent)}% ${m.percent < 0 ? "less" : "more"} damage`;
+  const strikes =
+    m.strike === "shot"
+      ? "shots"
+      : m.strike === "melee"
+        ? "melee Strikes"
+        : "Strikes";
+  const names = (m.targetBears ?? []).map((k) =>
+    hasConditionKind(k) ? conditionKind(k).name : k,
+  );
+  const upper = strikes.charAt(0).toUpperCase() + strikes.slice(1);
+  if (m.direction === "dealt") {
+    const to = names.length > 0 ? ` to ${orList(names)} stacks` : "";
+    return `${upper} by this side's stacks deal ${amount}${to} (hero).`;
+  }
+  const on = names.length > 0 ? `${orList(names)} stacks` : "stacks";
+  return `${upper} against this side's ${on} deal ${amount} (hero).`;
+}
+
+/** Flat stats in plain words: "+2 Attack and +1 Defense for Squires (hero)." */
+export function stackModifierText(m: HeroStackModifier): string {
+  const parts: string[] = [];
+  if (m.attack !== 0)
+    parts.push(`${m.attack > 0 ? "+" : ""}${m.attack} Attack`);
+  if (m.defense !== 0)
+    parts.push(`${m.defense > 0 ? "+" : ""}${m.defense} Defense`);
+  const who =
+    m.creature === undefined
+      ? "this side's stacks"
+      : isCreatureId(m.creature)
+        ? getCreature(m.creature).name
+        : m.creature;
+  return `${parts.join(" and ")} for ${who} (hero).`;
+}
+
 function key(text: string): string {
   return text.replace(/[^a-z0-9.-]+/gi, "_");
 }
@@ -96,7 +145,7 @@ export function strikeAbilityId(
   registerAbility({
     id,
     name: m.label,
-    description: `${m.direction === "dealt" ? "Strikes by" : "Strikes against"} this side's stacks are x ${percent}% (hero).`,
+    description: strikeModifierText(m),
     damageMultiplier(ctx, owner) {
       if (sideOf(owner) !== side || !strikeMatches(m.strike, ctx.kind)) {
         return null;
@@ -130,7 +179,7 @@ export function stackAbilityId(
   registerAbility({
     id,
     name: m.label,
-    description: `+${m.attack} Attack and +${m.defense} Defense${m.creature ? ` for ${m.creature}` : ""} (hero).`,
+    description: stackModifierText(m),
     attackModifier(ctx, owner) {
       if (owner.id !== ctx.attacker.id || !applies(owner) || m.attack === 0) {
         return null;
@@ -275,7 +324,7 @@ export function startRuleRefs(
 registerAct({
   id: "a-pinch-of-sand",
   name: "A Pinch of Sand",
-  text: "Change one condition's clock by 2 either way, exactly as the Wind tool.",
+  text: "Pick a condition. It lasts 2 rounds longer if it is a boon on your stack or a bane on an enemy, or 2 rounds shorter otherwise.",
   kind: "item",
   targets: 1,
   targetKinds: ["condition"],
@@ -325,7 +374,7 @@ function actorSide(state: BattleState, actorId: string): BattleSide | null {
 registerAct({
   id: "the-bellhops-cap",
   name: "The Bellhop's Cap",
-  text: "Choose one of your stacks; move one condition from a stack adjacent to it to another stack adjacent to it.",
+  text: "Pick one of your stacks. Move a condition from a stack next to it onto another stack next to it, if that stack can take it.",
   kind: "item",
   targets: 3,
   targetKinds: ["stack", "condition", "stack"],
@@ -374,7 +423,7 @@ registerAct({
 registerAct({
   id: "tinderbox",
   name: "Tinderbox",
-  text: "Your spent Fuel is restored, so you may Fuel a second time this battle.",
+  text: "Get your Fuel back, so you can Fuel a second time this battle.",
   kind: "item",
   targets: 0,
   check(state, actorId) {
@@ -398,7 +447,7 @@ registerAct({
 registerAct({
   id: "cider-flask",
   name: "Cider Flask",
-  text: "End Ripening on one of your stacks; it heals 3 x that size in HP, reviving.",
+  text: "End Ripening on one of your stacks. It heals 3 HP for each point of Ripening, reviving.",
   kind: "item",
   targets: 1,
   targetKinds: ["condition"],

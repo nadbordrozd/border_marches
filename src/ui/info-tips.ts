@@ -24,6 +24,7 @@ import {
 import { buildingDef, townTree } from "../data/factions.ts";
 import { FACTIONS } from "../data/factions.ts";
 import { spellName, findMapSpell } from "../data/map-spells.ts";
+import { STRAY_ABILITY_TEXT } from "../data/strays.ts";
 import type { BuildingId, FactionId } from "../data/types.ts";
 import type { TownState } from "../core/game/index.ts";
 import { SCHOOL_COLOURS } from "./battle/magic.ts";
@@ -42,17 +43,26 @@ export const SCHOOL_LABEL: Readonly<Record<string, string>> = {
 /** The school colours: the battle spellbook's one table (Accord blue, Clock yellow). */
 export const SCHOOL_COLOUR: Readonly<Record<string, string>> = SCHOOL_COLOURS;
 
-/** An ability's name and rule text, from the battle registry or the data. */
+/**
+ * An ability's name and rule text, from the battle registry or the data
+ * (the gallery shows the summons' abilities before magic registers them).
+ */
 export function abilityText(id: string): { name: string; text: string } {
   try {
     const def = battleAbility(id);
     return { name: def.name, text: def.description };
   } catch {
-    const def = (
-      ABILITIES as Readonly<
-        Record<string, (typeof ABILITIES)[keyof typeof ABILITIES]>
-      >
-    )[id];
+    const def =
+      (
+        ABILITIES as Readonly<
+          Record<string, (typeof ABILITIES)[keyof typeof ABILITIES]>
+        >
+      )[id] ??
+      (
+        STRAY_ABILITY_TEXT as Readonly<
+          Record<string, { name: string; text: string }>
+        >
+      )[id];
     return def === undefined
       ? { name: id, text: "" }
       : { name: def.name, text: def.text };

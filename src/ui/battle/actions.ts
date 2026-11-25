@@ -162,11 +162,7 @@ function abilityActions(
     if (def.act === undefined || !hasAct(def.act)) continue;
     const every = def.everyTurn === true;
     const used = !every && s.abilitiesUsed.includes(a);
-    const usage = [
-      every ? "Every turn" : "Once per battle",
-      "in place of an attack",
-      ...(def.moveFirst ? ["may walk first"] : []),
-    ].join(", ");
+    const usage = `${every ? "Every turn" : "Once per battle"}, instead of attacking.${def.moveFirst ? " It may walk first." : ""}`;
     let reason: string | null = null;
     let st: ActionState = "ready";
     if (used) {

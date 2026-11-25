@@ -53,7 +53,7 @@ export const STANDARD_CONDITION_KINDS: readonly ConditionKindDef[] = [
     endsWhenStruck: true,
     defaultClock: 2,
     text: (c) =>
-      `Hold: cannot act or retaliate ${clockText(c.clock)}. The first Strike against it is x 200% and ends Frozen.`,
+      `Hold: cannot act or retaliate ${clockText(c.clock)}. The first Strike against it deals double damage and ends Frozen.`,
     strikeMultiplier(ctx, holder) {
       if (holder.id !== ctx.defender.id) return null;
       // Cold Hands: the striker's side makes it x 300%.
@@ -133,7 +133,7 @@ export const STANDARD_CONDITION_KINDS: readonly ConditionKindDef[] = [
     polarity: "boon",
     defaultClock: null,
     text: () =>
-      "Its next melee attack or shot (not a retaliation) is x 150%; then Lucky ends.",
+      "Its next melee attack or shot (not a retaliation) deals 50% more damage; then Lucky ends.",
     strikeMultiplier(ctx, holder) {
       if (holder.id !== ctx.attacker.id) return null;
       if (ctx.kind !== "melee" && ctx.kind !== "shot") return null;
@@ -158,7 +158,7 @@ export const STANDARD_CONDITION_KINDS: readonly ConditionKindDef[] = [
     defaultClock: 3,
     defaultSize: 25,
     text: (c) =>
-      `Cannot retaliate; Strikes against it are x ${100 + c.size}% ${clockText(c.clock)}.`,
+      `Cannot retaliate; Strikes against it deal ${c.size}% more damage ${clockText(c.clock)}.`,
     strikeMultiplier(ctx, holder, c) {
       if (holder.id !== ctx.defender.id) return null;
       return { source: "jinxed", label: "Jinxed", percent: 100 + c.size };

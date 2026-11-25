@@ -31,6 +31,7 @@ import {
   tabEntries,
   type GalleryTabId,
 } from "../../src/ui/gallery-data.ts";
+import { abilityText } from "../../src/ui/info-tips.ts";
 
 const count = (id: GalleryTabId): number => tabEntries(galleryTab(id)).length;
 
@@ -48,6 +49,22 @@ describe("gallery tabs match the registries", () => {
     expect(ids).toContain("bellhop");
     expect(ids).toContain("shade");
     expect(ids).not.toContain("caveman");
+  });
+
+  it("summon cards name their abilities, registered by magic or not", () => {
+    // Bead bzc.76: the Seedling and Shade cards showed "gone-to-seed" and
+    // "fade" when the creatures tab opened before magic registered.
+    for (const c of Object.values(SUMMONED_CREATURES))
+      for (const a of c.abilities) {
+        const t = abilityText(a);
+        expect(t.name, a).not.toBe(a);
+        expect(t.text, a).toMatch(/^When it dies, \w+/);
+      }
+    registerSpells();
+    expect(abilityText("gone-to-seed")).toEqual({
+      name: "Gone to Seed",
+      text: "When it dies, brambles of size 4 cover its hex for 3 rounds.",
+    });
   });
 
   it("heroes: the v0.2 classes and named heroes", () => {

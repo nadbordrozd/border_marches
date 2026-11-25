@@ -63,7 +63,7 @@ describe("battle grammar view", () => {
       }),
     ]);
     expect(conditionTooltip(s, getStack(s, "d0").conditions[0]!)).toBe(
-      "Frozen (Storm bane, Hold, 2 rounds left, gate 300 HP): Hold: cannot act or retaliate for 2 rounds. The first Strike against it is x 200% and ends Frozen.",
+      "Frozen (Storm bane, Hold, 2 rounds left, gate 300 HP): Hold: cannot act or retaliate for 2 rounds. The first Strike against it deals double damage and ends Frozen.",
     );
   });
 

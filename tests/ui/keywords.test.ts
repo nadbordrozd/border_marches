@@ -7,6 +7,7 @@
 import { describe, expect, it } from "vitest";
 import {
   ability,
+  act,
   conditionKind,
   conditionKindIds,
   groundKind,
@@ -18,6 +19,11 @@ import type {
   Condition,
   GroundFeature,
 } from "../../src/core/battle/index.ts";
+import {
+  ITEM_ACT_IDS,
+  stackModifierText,
+  strikeModifierText,
+} from "../../src/core/battle/hero-effects.ts";
 import { specialtyText } from "../../src/core/game/index.ts";
 import {
   ADVENTURE_SPELLS,
@@ -281,6 +287,60 @@ describe("rules texts and the glossary", () => {
       expect(t.text, t.from).not.toMatch(shorthand);
       expect(t.text.length, t.from).toBeLessThanOrEqual(220);
     }
+  });
+
+  it("condition, ground, hero-effect and item-act texts use no shorthand", () => {
+    // Bead bzc.76: "deal 50% more damage", "takes 25% less Harm", "deals
+    // double damage" instead of "x 150%"; item acts as their artifacts say
+    // them; hero Strike and stat bonuses name creatures, not ids.
+    const shorthand =
+      /\bx \d+%|\bclock \d|\bclock min\b|\bbears\b|\bbearing\b|\bin place of\b|\b\d+ x\b|\bexactly as the\b|\badjacent\b|\bmax \d/;
+    const checked = texts.filter((t) =>
+      ["condition", "ground"].includes(t.from.split(" ")[0] ?? ""),
+    );
+    for (const id of ITEM_ACT_IDS)
+      checked.push({ from: `item act ${id}`, text: act(id).text });
+    for (const strike of ["all", "melee", "shot"] as const)
+      for (const direction of ["dealt", "taken"] as const)
+        for (const percent of [25, -20])
+          checked.push({
+            from: `hero strike ${strike} ${direction} ${percent}`,
+            text: strikeModifierText({
+              label: "Test",
+              strike,
+              direction,
+              percent,
+              targetBears: ["delayed", "slowed", "shaken"],
+            }),
+          });
+    checked.push({
+      from: "hero stack squire",
+      text: stackModifierText({
+        label: "Test",
+        creature: "squire",
+        attack: 2,
+        defense: 0,
+        speed: 0,
+      }),
+    });
+    expect(checked.length).toBeGreaterThan(40);
+    for (const t of checked) {
+      expect(t.text, t.from).not.toMatch(shorthand);
+      expect(t.text, t.from).not.toMatch(/\bsquire\b|\bdelayed\b/);
+      // Condition tooltips carry their "(Accord boon, size 3, ...)" header.
+      expect(t.text.length, t.from).toBeLessThanOrEqual(220);
+    }
+    expect(
+      strikeModifierText({
+        label: "Pile On",
+        strike: "all",
+        direction: "dealt",
+        percent: 25,
+        targetBears: ["delayed", "slowed", "shaken"],
+      }),
+    ).toBe(
+      "Strikes by this side's stacks deal 25% more damage to Delayed, Slowed or Shaken stacks (hero).",
+    );
   });
 });
 
