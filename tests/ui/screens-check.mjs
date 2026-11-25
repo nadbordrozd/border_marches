@@ -1043,6 +1043,30 @@ async function battleScreens() {
     }
     await sleep(2500);
     if (want(name)) await shot(name);
+    // UI2-05: with a full hero (items=1&magic=1) every action label shows
+    // whole and the bar row does not overflow.
+    if (name === "battle-book" && want(name)) {
+      const cut = await evaluate(`(() => {
+        const out = [];
+        for (const l of document.querySelectorAll('.bm-act-label'))
+          if (l.scrollWidth > l.clientWidth + 1 || l.scrollHeight > l.clientHeight + 1 || l.getClientRects().length === 0)
+            out.push(l.textContent);
+        for (const sel of ['.bm-actionbar', '.bm-actbar-main']) {
+          const row = document.querySelector(sel);
+          if (row && row.scrollWidth > row.clientWidth + 1) out.push(sel + ' overflows');
+        }
+        // The hero's group is the crowded one: its last button must end
+        // before the Keys, Auto and Speed cluster starts.
+        const acts = [...document.querySelectorAll('.bm-act')];
+        const sys = document.querySelector('.bm-sys');
+        const last = acts[acts.length - 1];
+        if (last && sys && last.getBoundingClientRect().right > sys.getBoundingClientRect().left)
+          out.push('the bar runs under the cluster');
+        return out;
+      })()`);
+      if (cut.length > 0) fail(name, `action labels cut: ${cut.join(", ")}`);
+      else note("action bar: every label whole");
+    }
     if (spell) await battleSpell();
   }
 }

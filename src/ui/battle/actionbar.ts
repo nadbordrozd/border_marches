@@ -1,7 +1,9 @@
 /**
  * The action bar and the act panel (DOM only; the rules are in actions.ts
- * and targeting.ts): one button per action with its icon, hotkey and use
- * badge, a tooltip with the exact rule text and why it is disabled, and
+ * and targeting.ts): one button per action with its icon above a short
+ * label that is never cut (UI2-05), its hotkey and use badge as corner
+ * chips, a hover card with the full name, the exact rule text, when it may
+ * be used and why it is disabled, and
  * the targeting panel of an act (prompt, condition choices, the exact
  * rehearsed chain, Use, Back and Cancel). Hit and Run's "then step to"
  * choice uses the same panel.
@@ -9,7 +11,7 @@
 
 import { iconElement } from "../icons.ts";
 import { rulesText } from "../keywords.ts";
-import { actionTooltip } from "./actions.ts";
+import { actionTooltip, shortLabel } from "./actions.ts";
 import type { ActionIcon, BarAction } from "./actions.ts";
 import type { CastPreview, ConditionOption } from "./magic.ts";
 
@@ -70,7 +72,12 @@ export function renderActionBar(
       if (a.on !== undefined) b.classList.toggle("bm-on", a.on);
       if (active.has(a.key)) b.classList.add("bm-aiming");
       if (a.hotkey) b.append(el("span", "bm-act-key", a.hotkey));
-      b.append(actionIcon(a.icon), el("span", "bm-act-label", a.label));
+      // The short label, whole on one or two lines (UI2-05); the hover
+      // card has the full name.
+      b.append(
+        actionIcon(a.icon),
+        el("span", "bm-act-label", a.short ?? shortLabel(a.label)),
+      );
       if (a.badge) b.append(el("span", "bm-act-badge", a.badge));
       b.addEventListener("click", () => h.onPress(a));
       // Disabled buttons get no pointer events in some browsers: listen on

@@ -60,7 +60,10 @@ export interface AbilityLine {
    * else a rule gave it.
    */
   readonly source: "ability" | "drill" | "birthright" | "other";
-  /** Activated abilities: "Activated · every turn · may walk first". */
+  /**
+   * Activated abilities, when they may be used: "Every turn, instead of
+   * attacking. It may walk first."
+   */
   readonly activated: string | null;
 }
 
@@ -116,12 +119,14 @@ function activatedNote(id: string, stack: BattleStack): string | null {
   if (def.act === undefined) return null;
   const every = def.everyTurn === true;
   const used = !every && stack.abilitiesUsed.includes(id);
+  // Plain words, as the action bar's hover card says it (UI2-05).
   return [
-    "Activated",
-    every ? "every turn" : "once per battle",
-    ...(def.moveFirst ? ["may walk first"] : []),
-    ...(every ? [] : [used ? "used" : "ready"]),
-  ].join(" · ");
+    every
+      ? "Every turn, instead of attacking."
+      : "Once per battle, instead of attacking.",
+    ...(def.moveFirst ? ["It may walk first."] : []),
+    ...(every ? [] : [used ? "Used this battle." : "Not used yet."]),
+  ].join(" ");
 }
 
 /** Every ability of the stack with where it came from and its full text. */

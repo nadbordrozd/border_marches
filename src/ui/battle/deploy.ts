@@ -26,6 +26,7 @@ import type {
 } from "../../core/battle/index.ts";
 import type { HexMark, Overlay } from "../../render/battle/scene.ts";
 import { creatureName } from "./preview.ts";
+import type { StatusLine } from "./status.ts";
 
 function el<K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -191,15 +192,15 @@ export class DeployPhase {
     return this.inZone(this.hover) ? "pointer" : "not-allowed";
   }
 
-  /** The bottom panel: what to do, and the phase's buttons. */
-  panel(): HTMLElement {
-    const box = el("div", "bm-deploy");
-    const cols = deployColumns(this.setup[this.side]);
-    const where =
-      cols === 1
-        ? "within your deployment column"
-        : `within your first ${cols} columns`;
-    box.append(el("div", "bm-pv-head", "Deployment (Vanguard)"));
+  /** The status line (UI2-05): what a click does now, or the refusal. */
+  status(): StatusLine {
+    const line = this.guide();
+    return this.message === ""
+      ? line
+      : { text: `${this.message} ${line.text}`, tone: "warn" };
+  }
+
+  private guide(): StatusLine {
     const state = this.state();
     const picked =
       this.selected === null
@@ -209,18 +210,22 @@ export class DeployPhase {
               s.side === this.side &&
               sameHex(s.hex, this.hexes()[this.selected as number] as Hex),
           ) ?? null);
-    box.append(
-      el(
-        "div",
-        "bm-pv-label",
-        picked === null
-          ? `Rearrange your stacks ${where}: click a stack, then a highlighted hex, or drag it. A stack dropped on another swaps places.`
-          : `${creatureName(picked.creature, picked.count)} ×${picked.count}: click a highlighted hex (Esc to put it back).`,
-      ),
-    );
-    if (this.message !== "") {
-      box.append(el("div", "bm-pv-why bm-deploy-why", this.message));
-    }
+    if (picked !== null)
+      return {
+        text: `${creatureName(picked.creature, picked.count)} ×${picked.count}: click a highlighted hex to place them (Esc puts them back)`,
+        tone: "go",
+      };
+    const cols = deployColumns(this.setup[this.side]);
+    const where =
+      cols === 1 ? "your deployment column" : `your first ${cols} columns`;
+    return {
+      text: `Deployment: click or drag a stack to a hex in ${where} (onto another to swap), then Start battle`,
+      tone: "idle",
+    };
+  }
+
+  /** The phase's buttons, shown in the action bar's place. */
+  buttons(): HTMLElement {
     const row = el("div", "bm-deploy-buttons");
     const button = (
       label: string,
@@ -234,6 +239,7 @@ export class DeployPhase {
       b.addEventListener("click", fn);
       row.append(b);
     };
+    row.append(el("span", "bm-deploy-title", "Deployment (Vanguard)"));
     button("Reset", "Back to the starting positions", () => this.reset());
     button(
       "Suggest",
@@ -246,7 +252,6 @@ export class DeployPhase {
       () => this.start(),
       "bm-btn bm-primary",
     );
-    box.append(row);
-    return box;
+    return row;
   }
 }

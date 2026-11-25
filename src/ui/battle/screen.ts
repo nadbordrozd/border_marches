@@ -80,12 +80,7 @@ import { Animator, nextSpeed, speedLabel } from "./animate.ts";
 import { onMotionChange, reducedMotion } from "../motion.ts";
 import { flipChildren } from "../anim.ts";
 import type { Speed } from "./animate.ts";
-import {
-  attackChainLines,
-  badgeAt,
-  conditionTooltip,
-  intentMarkers,
-} from "./grammar.ts";
+import { badgeAt, intentMarkers } from "./grammar.ts";
 import { conditionCard } from "./condition-card.ts";
 import { roundLimitInfo, stackInfo } from "./info.ts";
 import { QUEUE_MAX, queueCount, queueSlots, turnQueue } from "./queue.ts";
@@ -93,13 +88,7 @@ import type { QueueEntry } from "./queue.ts";
 import { setTip, tipCard } from "../tooltip.ts";
 import { hoverIntent, indexLegalActions, pointAtField } from "./intent.ts";
 import type { HoverIntent, LegalIndex } from "./intent.ts";
-import {
-  conjugate,
-  creatureName,
-  stackChange,
-  strikeHeadline,
-  summarizePreview,
-} from "./preview.ts";
+import { conjugate, creatureName, summarizePreview } from "./preview.ts";
 import {
   castAction,
   castPreview,
@@ -114,7 +103,11 @@ import {
 } from "./magic.ts";
 import type { BookEntry, CastPreview, ConditionOption } from "./magic.ts";
 import { renderBook, renderCastPanel } from "./spellbook.ts";
-import { registerSpells, spellDef } from "../../core/magic/index.ts";
+import {
+  isBattleSpell,
+  registerSpells,
+  spellDef,
+} from "../../core/magic/index.ts";
 import {
   ANYWHERE,
   castChoices,
@@ -142,6 +135,9 @@ import { actionBar, actionForKey } from "./actions.ts";
 import { DeployPhase } from "./deploy.ts";
 import type { ActionIcon, BarAction, BarContext } from "./actions.ts";
 import { renderActPanel, renderActionBar, showActionTip } from "./actionbar.ts";
+import { BATTLE_KEYS, statusLine } from "./status.ts";
+import type { ActHover, ActStatus, StatusLine, StatusMode } from "./status.ts";
+import { noTargetReason as spellNoTarget } from "./spell-targets.ts";
 import { iconElement } from "../icons.ts";
 import { rulesText } from "../keywords.ts";
 import {
@@ -305,14 +301,20 @@ class BattleScreen {
   private readonly stageWrap = el("div", "bm-stage-wrap");
   private readonly canvas = el("canvas", "bm-canvas");
   private readonly tip = el("div", "bm-tip");
-  private readonly bottom = el("div", "bm-bottom");
-  private readonly heroes = el("div", "bm-heroes");
-  private readonly activeCard = el("div", "bm-active");
-  private readonly panel = el("div", "bm-preview");
-  private readonly buttons = el("div", "bm-buttons");
-  private readonly autoBtn = el("button", "bm-btn", "Auto");
-  private readonly speedBtn = el("button", "bm-btn", "");
-  private readonly actionBarEl = el("div", "bm-actionbar");
+  /** The status line (UI2-05): what a click does now, and the last event. */
+  private readonly status = el("div", "bm-status");
+  private readonly statusText = el("span", "bm-status-text");
+  private readonly statusLog = el("span", "bm-status-log");
+  private statusLook = "";
+  /** Auto, Speed and the Keys help: a small cluster at the bar's right. */
+  private readonly sys = el("div", "bm-sys");
+  private readonly autoBtn = el("button", "bm-sys-btn", "Auto");
+  private readonly speedBtn = el("button", "bm-sys-btn", "");
+  private readonly helpBtn = el("button", "bm-sys-btn bm-sys-help", "?");
+  private readonly help = el("div", "bm-help");
+  /** The bar row: hero portraits at its ends, the actions, the cluster. */
+  private readonly barRow = el("div", "bm-actionbar");
+  private readonly actionBarEl = el("div", "bm-actbar-main");
   private readonly actTip = el("div", "bm-act-tip");
   private readonly book = el("div", "bm-book");
   private readonly castBox = el("div", "bm-cast");
@@ -443,19 +445,22 @@ class BattleScreen {
   private buildDom(): void {
     const { root } = this;
     this.stageWrap.append(this.canvas, this.tip);
-    this.buttons.append(this.autoBtn, this.speedBtn);
-    this.bottom.append(this.heroes, this.activeCard, this.panel, this.buttons);
+    this.sys.append(this.helpBtn, this.autoBtn, this.speedBtn);
+    this.barRow.append(this.actionBarEl, this.sys);
     this.renderHeroes();
+    this.status.append(this.statusText, this.statusLog);
+    this.status.setAttribute("role", "status");
     this.info.hidden = true;
     this.book.hidden = true;
     this.castBox.hidden = true;
     this.actTip.hidden = true;
-    this.stageWrap.append(this.book, this.castBox);
+    this.help.hidden = true;
+    this.stageWrap.append(this.book, this.castBox, this.help);
     root.append(
       this.top,
       this.stageWrap,
-      this.actionBarEl,
-      this.bottom,
+      this.barRow,
+      this.status,
       this.info,
       this.actTip,
     );
@@ -463,9 +468,13 @@ class BattleScreen {
 
     this.autoBtn.title = "Auto-combat: the AI plays your side (A)";
     this.speedBtn.title = "Animation speed (S); Space skips an animation";
+    this.helpBtn.title = "Keys and how to play a battle (?)";
+    this.helpBtn.setAttribute("aria-label", "Keys and controls (?)");
 
     this.on(this.autoBtn, "click", () => this.toggleAuto());
     this.on(this.speedBtn, "click", () => this.cycleSpeed());
+    this.on(this.helpBtn, "click", () => this.toggleHelp());
+    this.on(this.help, "click", () => this.toggleHelp(false));
     this.on<PointerEvent>(this.canvas, "pointermove", (e) =>
       this.onPointerMove(e),
     );
@@ -852,6 +861,14 @@ class BattleScreen {
 
   private onKey(e: KeyboardEvent): void {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === "?") {
+      this.toggleHelp();
+      return;
+    }
+    if (!this.help.hidden && e.key === "Escape") {
+      this.toggleHelp(false);
+      return;
+    }
     if (this.deploying !== null) {
       // Deployment: Enter starts the battle, Escape puts a stack back.
       if (e.key === "Enter") this.deploying.start();
@@ -1069,10 +1086,15 @@ class BattleScreen {
     const modeTip = this.modeTip();
     if (modeTip !== null) {
       this.tip.replaceChildren(...modeTip.lines);
-      this.tip.classList.remove("bm-below");
       this.tip.hidden = false;
+      // Above the head; below the feet when the top bar would clip it (a
+      // stack in row 0, bzc.53).
       const c = hexToStage(modeTip.hex);
-      const p = this.toWrap({ x: c.x, y: c.y - 62 });
+      const above = this.toWrap({ x: c.x, y: c.y - 62 });
+      const below = this.toWrap({ x: c.x, y: c.y + 40 });
+      const flip = above.y - this.tip.offsetHeight < 2;
+      this.tip.classList.toggle("bm-below", flip);
+      const p = flip ? below : above;
       this.tip.style.left = `${Math.round(p.x)}px`;
       this.tip.style.top = `${Math.round(p.y)}px`;
       return;
@@ -1120,6 +1142,16 @@ class BattleScreen {
     } else {
       this.tip.append(el("div", "bm-tip-none", "no retaliation"));
     }
+    // The why, small (UI2-05: the bottom panel that carried it is now the
+    // status line, which names the conditions the attack leaves).
+    if (struck !== null)
+      this.tip.append(
+        el(
+          "div",
+          "bm-tip-why",
+          [struck.attackLine, ...struck.bonuses].join(" · "),
+        ),
+      );
     this.tip.hidden = false;
     // Above the target's head; below its feet when that would leave the field.
     const c = hexToStage(target.hex);
@@ -1320,7 +1352,6 @@ class BattleScreen {
 
   private refreshHud(): void {
     this.renderTop();
-    this.renderActive();
     this.renderPanel();
     this.refreshButtons();
     if (this.infoFor !== null) this.openInfo(this.infoFor);
@@ -1372,9 +1403,14 @@ class BattleScreen {
   }
 
   private refreshBar(): void {
-    // No turn during deployment: the bar keeps its room but shows nothing.
-    this.actionBarEl.style.visibility = this.deploying ? "hidden" : "";
-    if (this.deploying) return;
+    // No turn during deployment: the bar holds the phase's buttons.
+    if (this.deploying) {
+      if (this.barLook !== "deploy") {
+        this.barLook = "deploy";
+        this.actionBarEl.replaceChildren(this.deploying.buttons());
+      }
+      return;
+    }
     this.syncHearten();
     const ctx = this.barContext();
     const key = JSON.stringify(ctx);
@@ -1726,6 +1762,7 @@ class BattleScreen {
     );
     this.updateOverlay();
     this.refreshButtons();
+    this.renderPanel();
   }
 
   // ------------------------------------------------------- Hit and Run
@@ -1829,9 +1866,13 @@ class BattleScreen {
       },
     );
     this.updateOverlay();
+    this.renderPanel();
   }
 
-  /** The portraits of the heroes leading the two sides (attacker first). */
+  /**
+   * The portraits of the heroes leading the two sides at the ends of the
+   * action bar row, the attacker's at the left (as the armies stand).
+   */
   private renderHeroes(): void {
     for (const side of ["attacker", "defender"] as const) {
       const hero = this.setup[side].hero;
@@ -1842,12 +1883,32 @@ class BattleScreen {
       img.title = `${hero.name ?? "Hero"} (${
         this.playerSides.has(side) ? "your hero" : "enemy hero"
       }): Attack ${hero.attack}, Defense ${hero.defense}`;
-      this.heroes.append(img);
+      if (side === "attacker") this.barRow.prepend(img);
+      else this.barRow.append(img);
     }
-    this.bottom.classList.toggle(
-      "bm-with-heroes",
-      this.heroes.childElementCount > 0,
+  }
+
+  /** The Keys help (?): the controls and the battle's click rules. */
+  private toggleHelp(open = this.help.hidden): void {
+    if (!open) {
+      this.help.hidden = true;
+      return;
+    }
+    const box = this.help;
+    box.replaceChildren(el("div", "bm-help-title", "Battle keys"));
+    const table = el("table", "bm-help-table");
+    for (const [k, what] of BATTLE_KEYS) {
+      const tr = el("tr");
+      const key = el("td", "bm-help-key");
+      key.append(el("kbd", "", k));
+      tr.append(key, el("td", "", what));
+      table.append(tr);
+    }
+    box.append(
+      table,
+      el("div", "bm-dim bm-help-close", "Click or Esc to close"),
     );
+    box.hidden = false;
   }
 
   /**
@@ -2053,236 +2114,132 @@ class BattleScreen {
     return { ...this.scene.overlay, marks };
   }
 
-  private renderActive(): void {
+  /** What the screen is doing, for the status line (status.ts). */
+  private statusMode(): StatusMode {
     const a = activeStack(this.state);
-    this.activeCard.replaceChildren();
-    if (!a) return;
-    this.activeCard.classList.toggle("bm-enemy", !this.playerSides.has(a.side));
-    const src = this.art?.portraits.get(a.creature.id);
-    if (src) {
-      const img = el("img", "bm-portrait");
-      img.src = src;
-      img.alt = "";
-      this.activeCard.append(img);
-    }
-    const text = el("div", "bm-active-text");
-    text.append(
-      el(
-        "div",
-        "bm-active-name",
-        `${creatureName(a.creature, a.count)} ×${a.count}`,
-      ),
-      el(
-        "div",
-        "bm-active-stats",
-        `Atk ${a.creature.attack}  Def ${a.creature.defense}  Dmg ${a.creature.damage}  Spd ${a.creature.speed}`,
-      ),
-      el(
-        "div",
-        "bm-active-stats",
-        `HP ${a.topHp}/${a.creature.hp}` +
-          (a.creature.shots
-            ? `  Shots ${a.shotsLeft}/${a.creature.shots}`
-            : ""),
-      ),
-    );
-    this.activeCard.append(text);
+    if (this.state.winner !== null || a === null) return { kind: "over" };
+    if (!this.playerSides.has(a.side)) return { kind: "enemy" };
+    if (this.auto) return { kind: "auto" };
+    if (this.animating || !this.pendingAction) return { kind: "busy" };
+    if (this.casting) return { kind: "act", act: this.castStatus() };
+    if (this.aiming) return { kind: "act", act: this.aimStatus() };
+    if (this.afterStep)
+      return {
+        kind: "after",
+        hexes: this.afterStep.hover?.path.length ?? null,
+      };
+    return {
+      kind: "turn",
+      intent: this.intent,
+      swaps: this.legal.swaps.size > 0,
+      stepAfter: walkAfterRange(a),
+    };
   }
 
+  /** A stack target by name ("the Goblins"). */
+  private targetName(id: StackId): string {
+    const s = getStack(this.state, id);
+    return `the ${creatureName(s.creature, Math.max(1, s.count))}`;
+  }
+
+  /** The cast being aimed, for the status line. */
+  private castStatus(): ActStatus {
+    const c = this.casting as Casting;
+    const step = nextStep(c.entry.id, c.targets);
+    const at = this.pointer ? pointAtField(this.state, this.pointer).hex : null;
+    const stackOn = (h: Hex): BattleStack | undefined =>
+      this.state.stacks.find((s) => isAlive(s) && sameHex(s.hex, h));
+    const what = (h: Hex): string => {
+      const s = stackOn(h);
+      return s ? this.targetName(s.id) : "this hex";
+    };
+    const live = effectiveChoices(c.choices);
+    let hover: ActHover = { kind: "none" };
+    const none = this.noEffectAt(at);
+    if (at !== null && none !== null)
+      hover = { kind: "no-effect", what: what(at), reason: none };
+    else if (at !== null && step !== null && this.castValidAt(at)) {
+      const t = c.hover?.target;
+      hover = {
+        kind: "target",
+        what: t && "stack" in t ? this.targetName(t.stack) : what(at),
+        preview: c.hover?.preview ?? null,
+        ...(step === "condition" ? { thenCondition: true } : {}),
+      };
+    } else if (at !== null && step !== null) hover = { kind: "invalid" };
+    const panel =
+      step === "choice" || (step === "condition" && c.pickFor !== null);
+    return {
+      name: c.entry.name,
+      verb: c.entry.source === "item" ? "Use" : "Cast",
+      prompt:
+        step === null
+          ? null
+          : step === "condition" && c.pickFor !== null
+            ? `Choose a condition of ${this.targetName(c.pickFor)}`
+            : step === "choice"
+              ? "Choose +2 or −2"
+              : stepPrompt(c.entry.id, c.targets),
+      pickIn: panel ? "panel" : "field",
+      valid:
+        step === "stack" || step === "hex"
+          ? live.length
+          : step === "condition"
+            ? choiceStacks(this.state, live).length
+            : null,
+      noTarget:
+        c.entry.source === "item" || !isBattleSpell(c.entry.id)
+          ? null
+          : spellNoTarget(spellDef(c.entry.id).target),
+      hover,
+    };
+  }
+
+  /** The act being aimed from the bar, for the status line. */
+  private aimStatus(): ActStatus {
+    const a = this.aiming as Aiming;
+    const mode = a.mode;
+    const s = this.state;
+    const kind = stepKind(mode, mode.targets.length);
+    const full = isFull(s, mode);
+    const at = this.pointer ? pointAtField(s, this.pointer).hex : null;
+    let hover: ActHover = { kind: "none" };
+    const hv = a.hover;
+    if (hv) {
+      const t = hv.choice.target;
+      hover = {
+        kind: "target",
+        what: "stack" in t ? this.targetName(t.stack) : "this hex",
+        preview: hv.preview,
+        ...(kind === "condition" ? { thenCondition: true } : {}),
+      };
+    } else if (at !== null && !full) hover = { kind: "invalid" };
+    return {
+      name: modeName(mode),
+      verb: "Use",
+      prompt: full ? null : modePrompt(s, mode),
+      pickIn: kind === "condition" && mode.pickFor !== null ? "panel" : "field",
+      valid: full ? null : a.choices.length,
+      noTarget: a.bar.reason,
+      hover,
+    };
+  }
+
+  /** The status line (UI2-05): what a click does now, and the last event. */
   private renderPanel(): void {
-    const p = this.panel;
-    p.replaceChildren();
-    if (this.deploying !== null) {
-      p.append(this.deploying.panel());
-      return;
-    }
-    const it = this.intent;
-    if (it.kind === "attack") {
-      const s = summarizePreview(this.state, it.preview);
-      const head = el("div", "bm-pv-head");
-      head.append(
-        el(
-          "span",
-          "",
-          `${s.attacker} ${conjugate(s.verb.toLowerCase(), s.attackerCount)} ${s.target}`,
-        ),
-      );
-      if (it.action.swapWith !== undefined) {
-        const partner = getStack(this.state, it.action.swapWith);
-        head.append(
-          el(
-            "span",
-            "bm-swap-note",
-            `  ⇄ after swapping places with the ${creatureName(partner.creature, partner.count)}`,
-          ),
-        );
-      } else if (s.hexesMoved > 0) {
-        head.append(
-          el(
-            "span",
-            "bm-dim",
-            `  after moving ${s.hexesMoved} hex${s.hexesMoved === 1 ? "" : "es"}`,
-          ),
-        );
-      }
-      const active = activeStack(this.state);
-      // No step after an attack that never strikes (the attacker dies first).
-      if (
-        active &&
-        it.action.type === "attack" &&
-        it.preview.strike !== null &&
-        walkAfterRange(active) > 0
-      ) {
-        head.append(
-          el(
-            "span",
-            "bm-swap-note",
-            `  ↺ click, then choose where to step (up to ${walkAfterRange(active)} hexes)`,
-          ),
-        );
-      }
-      p.append(head);
-      const chain = attackChainLines(this.state, it.preview);
-      const struck = s.strike;
-      if (struck === null) {
-        // A legal attack that never strikes (the attacker dies on the way).
-        p.append(
-          el(
-            "div",
-            "bm-pv-ret",
-            s.noStrike ?? `The ${s.verb.toLowerCase()} never lands`,
-          ),
-        );
-        if (s.statuses.length > 0)
-          p.append(el("div", "bm-pv-why", s.statuses.join("  ·  ")));
-        if (chain.length > 0)
-          p.append(el("div", "bm-pv-chain", chain.join(" → ")));
-        return;
-      }
-      const deal = el("div", "bm-pv-deal");
-      deal.append(
-        el("span", "bm-pv-label", "Deal "),
-        el("b", "", strikeHeadline(struck)),
-        el("span", "bm-dim", `   ${stackChange(struck)}`),
-      );
-      p.append(deal);
-      const ret = el("div", "bm-pv-ret");
-      if (s.retaliation) {
-        ret.append(
-          el("span", "bm-pv-label", "Retaliation "),
-          el("b", "", strikeHeadline(s.retaliation)),
-          el("span", "bm-dim", `   ${stackChange(s.retaliation)}`),
-        );
-      } else {
-        ret.classList.add("bm-safe");
-        ret.append(el("b", "", s.noRetaliation ?? "No retaliation"));
-      }
-      p.append(ret);
-      const why = [struck.attackLine, ...struck.bonuses, ...s.statuses];
-      p.append(el("div", "bm-pv-why", why.join("  ·  ")));
-      if (chain.length > 0)
-        p.append(el("div", "bm-pv-chain", chain.join(" \u2192 ")));
-      return;
-    }
-    const a = activeStack(this.state);
-    if (this.state.winner !== null || a === null) {
-      p.append(el("div", "bm-pv-head", "The battle is over."));
-      return;
-    }
-    const name = creatureName(a.creature, a.count);
-    if (this.aiming) {
-      const m = this.aiming.mode;
-      p.append(
-        el("div", "bm-pv-head", `${modeName(m)}: aiming`),
-        el("div", "bm-dim", modePrompt(this.state, m)),
-        el(
-          "div",
-          "bm-dim",
-          "Teal hexes are valid targets; point at one for its exact effect. Backspace goes back, Esc cancels.",
-        ),
-      );
-      return;
-    }
-    if (this.afterStep) {
-      p.append(
-        el("div", "bm-pv-head", "Hit and Run: attack, then step to"),
-        el(
-          "div",
-          "bm-dim",
-          "Click a green hex to step there after the attack and its retaliation, or Enter to stay. Esc cancels the attack.",
-        ),
-      );
-      return;
-    }
-    if (it.kind === "swap") {
-      const pn = creatureName(it.partner.creature, it.partner.count);
-      p.append(
-        el("div", "bm-pv-head", `⇄ Swap places: ${name} and ${pn}`),
-        el(
-          "div",
-          "bm-pv-deal bm-swap-line",
-          "In place of the walk (Sworn): the two stacks trade hexes. Ends the turn.",
-        ),
-      );
-      for (const c of it.partner.conditions)
-        p.append(el("div", "bm-pv-cond", conditionTooltip(this.state, c)));
-      return;
-    }
-    if (it.kind === "move") {
-      p.append(
-        el("div", "bm-pv-head", `Move ${name}`),
-        el(
-          "div",
-          "bm-pv-deal",
-          `${it.path.length} hex${it.path.length === 1 ? "" : "es"} of ${a.creature.speed}`,
-        ),
-      );
-    } else if (it.kind === "out-of-reach") {
-      p.append(
-        el(
-          "div",
-          "bm-pv-head",
-          `${creatureName(it.stack.creature, it.stack.count)} ×${it.stack.count}: out of reach this turn`,
-        ),
-      );
-      for (const c of it.stack.conditions)
-        p.append(el("div", "bm-pv-cond", conditionTooltip(this.state, c)));
-    } else if (it.kind === "inspect") {
-      p.append(
-        el(
-          "div",
-          "bm-pv-head",
-          `${creatureName(it.stack.creature, it.stack.count)} ×${it.stack.count}`,
-        ),
-        el("div", "bm-dim", "Right-click for details"),
-      );
-      for (const c of it.stack.conditions)
-        p.append(el("div", "bm-pv-cond", conditionTooltip(this.state, c)));
-    } else if (this.isPlayerTurn() && this.pendingAction) {
-      p.append(
-        el("div", "bm-pv-head", `${name}: your move`),
-        el(
-          "div",
-          "bm-dim",
-          this.legal.swaps.size > 0
-            ? "Point at an enemy for the exact damage. Click a shaded hex to move, or a ⇄ partner to swap places. Right-click any stack for details."
-            : "Point at an enemy for the exact damage, kills and retaliation. Click a shaded hex to move. Right-click any stack for details; keys 1–9 use the bar.",
-        ),
-      );
-    } else {
-      p.append(
-        el(
-          "div",
-          "bm-pv-head",
-          !this.playerSides.has(a.side)
-            ? `Enemy turn: ${name}`
-            : this.auto
-              ? `Auto-combat: ${name}`
-              : `${name}: your move`,
-        ),
-      );
-    }
-    for (const line of this.log.slice(-2)) p.append(el("div", "bm-log", line));
+    let line: StatusLine;
+    if (this.deploying !== null) line = this.deploying.status();
+    else line = statusLine(this.state, this.statusMode());
+    const log =
+      this.deploying !== null ? "" : (this.log[this.log.length - 1] ?? "");
+    const look = JSON.stringify([line, log]);
+    if (look === this.statusLook) return;
+    this.statusLook = look;
+    this.status.className = `bm-status bm-tone-${line.tone}`;
+    this.statusText.textContent = line.text;
+    this.statusText.title = line.text;
+    this.statusLog.textContent = log;
+    this.statusLog.title = this.log.slice(-6).join("\n");
   }
 
   private logEvent(e: BattleEvent, before: BattleState): void {
@@ -2319,7 +2276,7 @@ class BattleScreen {
     if (line !== null) {
       this.log.push(line);
       if (this.log.length > 20) this.log.shift();
-      if (this.intent.kind !== "attack") this.renderPanel();
+      this.renderPanel();
     }
   }
 
@@ -2760,6 +2717,7 @@ class BattleScreen {
     );
     this.updateOverlay();
     this.refreshButtons();
+    this.renderPanel();
   }
 
   // ---------------------------------------------------------------- info
@@ -2821,10 +2779,10 @@ class BattleScreen {
       head.append(el("b", "", a.name));
       const tag = TAG[a.source];
       if (tag) head.append(el("span", `bm-tag bm-tag-${a.source}`, tag));
-      if (a.activated)
-        head.append(el("span", "bm-tag bm-tag-act", a.activated));
+      ab.append(head);
+      // When it may be used, in plain words, under the name.
+      if (a.activated) ab.append(el("div", "bm-info-ab-use", a.activated));
       ab.append(
-        head,
         rulesText(a.text, {
           tag: "div",
           className: "bm-info-ab-text",

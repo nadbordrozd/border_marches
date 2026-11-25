@@ -134,7 +134,7 @@ describe("the info panel's abilities", () => {
     const ogres = stackInfo(s, getStack(s, "a4"));
     expect(ogres.abilities[0]).toMatchObject({
       name: "Hurl",
-      activated: "Activated · every turn · may walk first",
+      activated: "Every turn, instead of attacking. It may walk first.",
     });
   });
 
@@ -151,7 +151,8 @@ describe("the info panel's abilities", () => {
     const v = stackInfo(s, getStack(s, "a4"));
     expect(v.abilities.find((a) => a.id === "mesmerise")).toMatchObject({
       source: "drill",
-      activated: "Activated · once per battle · may walk first · ready",
+      activated:
+        "Once per battle, instead of attacking. It may walk first. Not used yet.",
     });
     const r = realm();
     const squires = stackInfo(r, getStack(r, "a0"));

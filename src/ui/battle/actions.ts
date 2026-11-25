@@ -62,13 +62,22 @@ export interface BarAction {
   /** Unique: "ability:hurl", "page:mend", "shoot-hex:bomb", "command:swear-in", "item:<act>", "spells", "hearten", "wait", "defend", "undo". */
   readonly key: string;
   readonly group: ActionGroup;
+  /** The full name (the hover card's title). */
   readonly label: string;
+  /**
+   * The button's label (UI2-05): shown whole, on at most two lines;
+   * `actionBar` fills it from `label` (see `shortLabel`).
+   */
+  readonly short?: string;
   /** Key shown on the button and accepted by the screen ("1", "C", "W"). */
   readonly hotkey: string;
   readonly icon: ActionIcon;
   /** The exact rule text. */
   readonly rule: string;
-  /** How often it may be used and how ("Every turn, in place of an attack"). */
+  /**
+   * How often it may be used and when, in plain words ("Once per battle,
+   * from Wilhelmina's Pinch of Sand. Use it before this stack acts.").
+   */
   readonly usage: string;
   readonly state: ActionState;
   /** Why it cannot be used now, or null. */
@@ -225,7 +234,7 @@ function shootHexAction(
     hotkey: "",
     icon: { glyph: abilityGlyph(id) },
     rule: def.description,
-    usage: `A shot (${s.shotsLeft} of ${s.creature.shots ?? 0} left) at any hex, empty or not; point at an enemy to bomb it directly`,
+    usage: `Uses one of its shots (${s.shotsLeft} of ${s.creature.shots ?? 0} left). Aim at any hex, empty or not; to bomb an enemy, just click it.`,
     state: reason === null ? "ready" : s.shotsLeft <= 0 ? "used" : "blocked",
     reason,
     badge: `${s.shotsLeft}`,
@@ -250,7 +259,7 @@ function pageActions(state: BattleState, ctx: BarContext): BarAction[] {
       hotkey: "",
       icon: { icon: "spell" as const, id: e.id },
       rule: e.text,
-      usage: `The stack's own page: once per battle, as its action, at Power ${e.power}`,
+      usage: `Once per battle, the stack casts this page itself, instead of attacking. Power ${e.power}.`,
       state:
         e.status === "spent"
           ? ("used" as const)
@@ -276,6 +285,7 @@ function heartenAction(
     key: "hearten",
     group: "stack",
     label: ctx.heartenSpend ? "Spend Heartened" : "Keep Heartened",
+    short: "Heartened",
     hotkey: "H",
     icon: { icon: "condition", id: "heartened" },
     rule: text,
@@ -297,7 +307,7 @@ function heroActions(
   const sideState = state.sides[side];
   const hero = sideState.hero;
   const out: BarAction[] = [];
-  const heroName = ctx.heroName ?? "The hero";
+  const heroName = ctx.heroName ?? "the hero";
   // The spellbook.
   const pages = heroBook(state, side).filter((p) => p.source !== "item");
   const own = creatureBook(state);
@@ -361,7 +371,7 @@ function heroActions(
       hotkey: "C",
       icon: { icon: "skill", id: "banner" },
       rule: def.text,
-      usage: `${heroName}'s Command: once per battle, before this stack acts. C = ${c}${times}.`,
+      usage: `Once per battle, ${heroName}'s Command. Use it before this stack acts. Here C = ${c}${times}.`,
       state: st,
       reason,
       badge: sideState.commandUsed ? "used" : `C${c}`,
@@ -396,7 +406,7 @@ function heroActions(
       hotkey: "",
       icon: { icon: "artifact", id },
       rule: def.text,
-      usage: `Item act of ${heroName}'s artifact: once per battle, before this stack acts`,
+      usage: `Once per battle, from ${heroName}'s ${shortLabel(def.name)}. Use it before this stack acts.`,
       state: st,
       reason,
       badge: used ? "used" : null,
@@ -479,9 +489,38 @@ export function actionBar(state: BattleState, ctx: BarContext): BarAction[] {
   }
   out.push(...turnActions(s, ctx));
   let digit = 1;
-  return out.map((a) =>
-    a.hotkey === "" && digit <= 9 ? { ...a, hotkey: String(digit++) } : a,
-  );
+  return out.map((a) => ({
+    ...a,
+    short: a.short ?? shortLabel(a.label),
+    ...(a.hotkey === "" && digit <= 9 ? { hotkey: String(digit++) } : {}),
+  }));
+}
+
+/** The longest line of a button label, in characters (UI2-05). */
+export const LABEL_LINE = 11;
+
+/**
+ * A button's label from an action's full name (UI2-05): the name without
+ * a leading article ("A Pinch of Sand" -> "Pinch of Sand", "The Bellhop's
+ * Cap" -> "Bellhop's Cap"). The button wraps it at word breaks on at most
+ * two lines of LABEL_LINE characters, so it is never cut; the full name is
+ * in the hover card.
+ */
+export function shortLabel(name: string): string {
+  const bare = name.replace(/^(A|An|The) (?=\S)/, "");
+  return labelLines(bare).length <= 2 ? bare : name;
+}
+
+/** The label's lines when wrapped at word breaks to LABEL_LINE characters. */
+export function labelLines(label: string): string[] {
+  const lines: string[] = [];
+  for (const word of label.split(" ")) {
+    const last = lines[lines.length - 1];
+    if (last !== undefined && last.length + 1 + word.length <= LABEL_LINE)
+      lines[lines.length - 1] = `${last} ${word}`;
+    else lines.push(word);
+  }
+  return lines;
 }
 
 /** The bar action a key press means (case-insensitive), or null. */
