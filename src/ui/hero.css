@@ -185,12 +185,60 @@
   border-color: var(--gm-gold-dim);
 }
 
-/* Only an empty slot names itself, in the middle of the slot. */
-.hs-slot-name {
-  font-size: 10px;
-  text-align: center;
-  color: var(--gm-dim);
+/* An empty slot shows a faint outline of what goes there (bead bzc.69);
+   its name is in the hover card. */
+.hs-slot-empty::before {
+  content: "";
+  width: 38px;
+  height: 38px;
+  background: rgb(240 222 180 / 20%);
+  mask: var(--hs-outline) center / contain no-repeat;
   pointer-events: none;
+}
+
+.hs-slot-empty:hover::before {
+  background: rgb(240 222 180 / 38%);
+}
+
+.hs-drop.hs-slot-empty::before {
+  background: rgb(140 220 110 / 55%);
+}
+
+/* The outlines (24 px viewBox, drawn as a mask). */
+.hs-slot[data-outline="head"] {
+  --hs-outline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M4 19v-8a8 8 0 0 1 16 0v8h-5v-6H9v6z'/%3E%3Cpath d='M12 3v4'/%3E%3C/svg%3E");
+}
+
+.hs-slot[data-outline="neck"] {
+  --hs-outline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M5 3l7 9 7-9'/%3E%3Ccircle cx='12' cy='16' r='3.5'/%3E%3C/svg%3E");
+}
+
+.hs-slot[data-outline="torso"] {
+  --hs-outline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M8 3 3 6l2 6 2-1v10h10V11l2 1 2-6-5-3c-1 2-2.4 3-4 3S9 5 8 3z'/%3E%3C/svg%3E");
+}
+
+.hs-slot[data-outline="cloak"] {
+  --hs-outline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M9 3h6l1 3 4 15H4L8 6z'/%3E%3Cpath d='M8 6h8M12 6v15'/%3E%3C/svg%3E");
+}
+
+.hs-slot[data-outline="weapon"] {
+  --hs-outline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M12 2l2 3v10h-4V5z'/%3E%3Cpath d='M7 15h10M12 15v5M10.5 21h3'/%3E%3C/svg%3E");
+}
+
+.hs-slot[data-outline="shield"] {
+  --hs-outline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z'/%3E%3Cpath d='M12 7v10M8 11h8'/%3E%3C/svg%3E");
+}
+
+.hs-slot[data-outline="ring"] {
+  --hs-outline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round' stroke-linecap='round'%3E%3Ccircle cx='12' cy='14.5' r='6'/%3E%3Cpath d='M9.5 8.5 12 4l2.5 4.5'/%3E%3C/svg%3E");
+}
+
+.hs-slot[data-outline="feet"] {
+  --hs-outline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M7 3h6v9l5.5 2.5c1 .5 1.5 1.3 1.5 2.3V20H5v-4l2-1.5z'/%3E%3Cpath d='M7 7h6M5 17.5h15'/%3E%3C/svg%3E");
+}
+
+.hs-slot[data-outline="pocket"] {
+  --hs-outline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M4 9h16v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z'/%3E%3Cpath d='M8 9V6a4 3 0 0 1 8 0v3M4 9l8 5 8-5M12 14v2'/%3E%3C/svg%3E");
 }
 
 .hs-selected {
@@ -291,82 +339,83 @@
   font: bold 11px sans-serif;
 }
 
-.hs-skills {
+/* Skills, feats and vows as icon tiles (bead bzc.69, Heroes III style):
+   the icon, the name under it and a rank or kind word; the rules are in
+   the hover card. */
+.hs-tiles {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 5px;
 }
 
-.hs-skill {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px 8px;
-  background: var(--gm-wood-dark);
-  border: 1px solid var(--gm-edge);
+.hs-tiles > .gm-dim {
+  grid-column: 1 / -1;
   font-size: 13px;
-  cursor: help;
 }
 
-.hs-skill.hs-empty {
-  color: var(--gm-dim);
-  font-style: italic;
+.hs-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  min-height: 68px;
+  padding: 5px 4px 4px;
+  background: var(--gm-wood-dark);
+  border: 1px solid var(--gm-edge);
+  border-top: 2px solid var(--gm-edge);
+  cursor: help;
+  transition: border-color 0.12s;
+}
+
+.hs-tile:hover,
+.hs-tile:focus-visible {
+  border-color: var(--gm-gold-dim);
+  outline: none;
+}
+
+.hs-tile-icon {
+  flex: none;
+  margin-bottom: 3px;
+}
+
+/* A long name wraps to a second line rather than losing its end. */
+.hs-tile-name {
+  display: -webkit-box;
+  max-width: 100%;
+  overflow: hidden;
+  font:
+    bold 12px/14px Georgia,
+    serif;
+  color: var(--gm-text);
+  text-align: center;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.hs-tile-sub {
+  font-size: 11px;
+  line-height: 13px;
+  color: var(--gm-gold-dim);
+}
+
+/* An empty skill slot: a dashed socket, nothing written in it. */
+.hs-tile-empty {
+  background: rgb(0 0 0 / 22%);
+  border: 1px dashed rgb(255 255 255 / 14%);
   cursor: default;
 }
 
-.hs-pips {
-  display: flex;
-  gap: 3px;
+.hs-feat .hs-tile-sub {
+  color: var(--gm-dim);
 }
 
-.hs-pip {
-  width: 8px;
-  height: 8px;
-  border: 1px solid var(--gm-gold-dim);
-  transform: rotate(45deg);
+.hs-tile.hs-vow {
+  border-top-color: #b06ee0;
 }
 
-.hs-pip.hs-on {
-  background: var(--gm-gold);
-}
-
-/* Feats as tiles beside each other, the text on hover (bead bzc.45). */
-.hs-feats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px;
-  font-size: 13px;
-}
-
-.hs-feats > .gm-dim {
-  grid-column: 1 / -1;
-}
-
-.hs-feat {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
-  padding: 5px 8px;
-  background: var(--gm-wood-dark);
-  border: 1px solid var(--gm-edge);
-  border-left: 3px solid var(--gm-gold-dim);
-  cursor: help;
-}
-
-.hs-feat:hover,
-.hs-skill:hover {
-  border-color: var(--gm-gold-dim);
-}
-
-.hs-feat-name {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.hs-vow {
-  border-left-color: #b06ee0;
+.hs-vow .hs-tile-sub {
+  color: #d9a8ff;
 }
 
 .hs-restriction {
@@ -374,13 +423,13 @@
   font-size: 12px;
 }
 
-/* Content icons before skill and feat names (src/ui/icons.ts). */
-.hs-skill > .hs-name-icon {
-  margin-right: 6px;
-}
-
-.hs-skill-name {
-  flex: 1;
+/* The click hint at the foot of a hero-sheet hover card (bead bzc.69). */
+.hs-tip-hint {
+  margin-top: 5px;
+  padding-top: 4px;
+  border-top: 1px solid rgb(201 154 60 / 25%);
+  font-size: 11px;
+  font-style: italic;
 }
 
 .hs-card-icon {
@@ -700,11 +749,6 @@
   font-weight: bold;
   color: var(--gm-gold);
   cursor: help;
-}
-
-.hs-army-hint {
-  margin-left: auto;
-  font-size: 12px;
 }
 
 .hs-army {

@@ -1,9 +1,8 @@
 // The hero sheet's Army section (beads border_marches-tez, bzc.45): one
 // cell per army slot, empty ones included, each stack as its full battle
 // sprite on the ground line with its count and no caption, and the army's
-// fight value. No DOM library in the unit tier, so a tiny
-// stand-in document covers what the section's builders touch.
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+// fight value. No DOM library in the unit tier: tests/ui/fake-dom.ts.
+import { describe, expect, it } from "vitest";
 import type { ArmySlots } from "../../src/core/game/types.ts";
 import { CREATURES } from "../../src/data/creatures.ts";
 import type { CreatureId } from "../../src/data/types.ts";
@@ -14,89 +13,9 @@ import {
   heroArmySection,
 } from "../../src/ui/hero-screen.ts";
 import { armyValue } from "../../src/ui/hints.ts";
+import { useFakeDocument, type FakeElement } from "./fake-dom.ts";
 
-class FakeElement {
-  readonly tagName: string;
-  readonly children: FakeElement[] = [];
-  readonly style: Record<string, string> = {};
-  readonly attributes = new Map<string, string>();
-  readonly listeners = new Map<string, Array<(e: unknown) => void>>();
-  private text = "";
-  private classes: string[] = [];
-  [prop: string]: unknown;
-
-  constructor(tag: string) {
-    this.tagName = tag.toUpperCase();
-  }
-
-  get className(): string {
-    return this.classes.join(" ");
-  }
-  set className(v: string) {
-    this.classes = v.split(/\s+/).filter((c) => c !== "");
-  }
-  get classList() {
-    return {
-      add: (...c: string[]) => {
-        for (const x of c) if (!this.classes.includes(x)) this.classes.push(x);
-      },
-      remove: (...c: string[]) => {
-        this.classes = this.classes.filter((x) => !c.includes(x));
-      },
-      contains: (c: string) => this.classes.includes(c),
-    };
-  }
-  get textContent(): string {
-    return this.text + this.children.map((c) => c.textContent).join("");
-  }
-  set textContent(v: string) {
-    this.text = v;
-    this.children.length = 0;
-  }
-  append(...nodes: Array<FakeElement | string>): void {
-    for (const n of nodes) {
-      if (typeof n === "string") {
-        const t = new FakeElement("#text");
-        t.textContent = n;
-        this.children.push(t);
-      } else this.children.push(n);
-    }
-  }
-  setAttribute(k: string, v: string): void {
-    this.attributes.set(k, v);
-  }
-  getAttribute(k: string): string | null {
-    return this.attributes.get(k) ?? null;
-  }
-  hasAttribute(k: string): boolean {
-    return this.attributes.has(k);
-  }
-  removeAttribute(k: string): void {
-    this.attributes.delete(k);
-  }
-  addEventListener(type: string, fn: (e: unknown) => void): void {
-    this.listeners.set(type, [...(this.listeners.get(type) ?? []), fn]);
-  }
-  /** Every descendant with the class, in document order. */
-  all(cls: string): FakeElement[] {
-    return this.children.flatMap((c) => [
-      ...(c.classList.contains(cls) ? [c] : []),
-      ...c.all(cls),
-    ]);
-  }
-  one(cls: string): FakeElement | undefined {
-    return this.all(cls)[0];
-  }
-}
-
-beforeAll(() => {
-  vi.stubGlobal("document", {
-    createElement: (tag: string) => new FakeElement(tag),
-  });
-});
-afterAll(() => {
-  vi.unstubAllGlobals();
-});
+useFakeDocument();
 
 const ids = Object.keys(CREATURES) as CreatureId[];
 const [a, b, c] = [ids[0], ids[3], ids[6]] as [

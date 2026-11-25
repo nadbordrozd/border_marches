@@ -53,6 +53,7 @@ import {
   gradeLabel,
   wornDef,
   type ArtifactDef,
+  type SlotKind,
 } from "../data/artifacts.ts";
 import { namedHeroPortrait, unitArt } from "../assets/unit-art.ts";
 import { COMMANDS, getHeroClass } from "../data/classes.ts";
@@ -71,7 +72,7 @@ import { button, el, img, modal } from "./dom.ts";
 import { iconElement } from "./icons.ts";
 import { armyValue } from "./hints.ts";
 import { creatureTip, spellTip } from "./info-tips.ts";
-import { setTip } from "./tooltip.ts";
+import { setTip, tipCard, titleCard, type TipBody } from "./tooltip.ts";
 import "./hero.css";
 
 /** What the hero screens need from the game screen. */
@@ -163,12 +164,143 @@ function scrollIcon(spell: string): HTMLElement {
   return node;
 }
 
-/** A small icon before a skill, feat or stat name (none if it has none). */
-function nameIcon(kind: IconKind, id: string): HTMLElement[] {
+/**
+ * An item's hover card with a last line saying what clicks do with it on
+ * the hero sheet (bead bzc.69: the sheet's instruction line moved here).
+ */
+function itemCard(id: string, hint: string): TipBody {
+  return withHint(titleCard(itemTooltip(id)), hint);
+}
+
+/** What a double-click or drag does with a worn or carried item. */
+export function itemHint(place: "worn" | "backpack", id: string): string {
+  const def = findArtifact(id);
+  if (place === "worn") {
+    return def?.kind === "worn" && def.cursed === true
+      ? "Cursed: it cannot be taken off. Click for details."
+      : "Double-click, or drag it to the backpack, to take it off. Click for details.";
+  }
+  return def?.kind === "consumable"
+    ? "Double-click to use it. Click for details."
+    : "Double-click, or drag it onto the doll, to wear it. Click for details.";
+}
+
+/** Rank words of a skill, as Heroes labels them ("Expert Archery"). */
+export const RANK_WORDS = ["Basic", "Advanced", "Expert"] as const;
+
+const FAMILY_WORDS: Readonly<Record<string, string>> = {
+  school: "school skill",
+  army: "army skill",
+  journey: "journey skill",
+};
+
+/** The 32 px content icon of a tile or card, or null when it has none. */
+function tileIcon(kind: IconKind, id: string): HTMLElement | null {
   const icon = ownIcon(kind, id);
-  if (icon === null) return [];
-  icon.classList.add("hs-name-icon");
-  return [icon];
+  icon?.classList.add("hs-tile-icon");
+  return icon;
+}
+
+/** A skill's hover card: every rank's rule, the held one bright. */
+export function skillTipCard(id: string, rank: number): TipBody {
+  const def = findSkill(id);
+  if (def === undefined) return id;
+  const word = RANK_WORDS[rank - 1] ?? "";
+  return tipCard(
+    def.name,
+    def.ranks.map((r, k) => {
+      const line = el("div.gm-tip-line", el("b", `${RANK_WORDS[k]}: `), r.text);
+      if (k + 1 !== rank) line.classList.add("gm-tip-dim");
+      return line;
+    }),
+    {
+      icon: ownIcon("skill", id),
+      subtitle: `${word} ${FAMILY_WORDS[def.family] ?? "skill"}`.trim(),
+    },
+  );
+}
+
+/** A feat's or vow's hover card: its rule and, for a vow, the restriction. */
+export function featTipCard(id: string): TipBody {
+  const def = findFeat(id);
+  if (def === undefined) return id;
+  const vowed = def.restriction !== undefined;
+  return tipCard(
+    def.name,
+    [
+      def.text,
+      def.restrictionText === undefined
+        ? null
+        : el(
+            "div.gm-tip-line.gm-tip-bad",
+            el("b", "Restriction: "),
+            def.restrictionText,
+          ),
+    ],
+    {
+      icon: ownIcon(vowed ? "vow" : "feat", id),
+      subtitle: vowed ? "Vow: binds the hero for good" : "Feat",
+    },
+  );
+}
+
+/**
+ * The skill slots as icon tiles (bead bzc.69, Heroes III style): the icon,
+ * the name under it and the rank word; every rank's rule in the hover card.
+ */
+export function skillTiles(h: HeroState): HTMLElement {
+  const box = el("div.hs-tiles.hs-skills");
+  for (let i = 0; i < MAX_SKILLS; i++) {
+    const s = h.skills[i];
+    if (s === undefined) {
+      const empty = el("div.hs-tile.hs-tile-empty");
+      empty.setAttribute("aria-label", "Empty skill slot");
+      setTip(
+        empty,
+        "Empty skill slot: a level-up may offer a new skill to fill it.",
+      );
+      box.append(empty);
+      continue;
+    }
+    const def = findSkill(s.id);
+    const tile = el(
+      "div.hs-tile.hs-skill",
+      tileIcon("skill", s.id),
+      el("span.hs-tile-name", def?.name ?? s.id),
+      el("span.hs-tile-sub", RANK_WORDS[s.rank - 1] ?? ""),
+    );
+    tile.tabIndex = 0;
+    if (def !== undefined) tile.classList.add(`hs-family-${def.family}`);
+    setTip(tile, () => skillTipCard(s.id, s.rank));
+    box.append(tile);
+  }
+  return box;
+}
+
+/**
+ * The feats and vows as icon tiles like the skills (bead bzc.69): the icon
+ * and the name; the rule, with its keywords explained, in the hover card.
+ */
+export function featTiles(h: HeroState): HTMLElement {
+  const box = el("div.hs-tiles.hs-feats");
+  if (h.feats.length === 0) {
+    box.append(el("div.gm-dim", "No feats yet: one every third level."));
+  }
+  for (const id of h.feats) {
+    const def = findFeat(id);
+    const vowed = def?.restriction !== undefined;
+    const tile = el(
+      "div.hs-tile.hs-feat",
+      tileIcon(vowed ? "vow" : "feat", id),
+      el("span.hs-tile-name", def?.name ?? id),
+      el("span.hs-tile-sub", vowed ? "Vow" : "Feat"),
+    );
+    tile.tabIndex = 0;
+    if (vowed) tile.classList.add("hs-vow");
+    setTip(tile, () => featTipCard(id));
+    box.append(tile);
+  }
+  return box;
 }
 
 function statTooltip(hero: HeroState, stat: PrimaryStat): string {
@@ -216,6 +348,48 @@ const DOLL: ReadonlyArray<[number, number]> = [
   [1, 4], // pocket
   [3, 4], // pocket
 ];
+
+/**
+ * One paper-doll slot (bead bzc.69): an empty slot shows a faint outline
+ * of what goes there (helmet, amulet, ring, boots; drawn in hero.css from
+ * `data-outline`) and no caption; a filled one shows the item. The slot's
+ * name and what clicks do are in the hover card.
+ */
+export function dollSlot(kind: SlotKind, id: string | null): HTMLElement {
+  const cell = el("div.hs-slot");
+  cell.dataset["outline"] = kind;
+  if (id === null) {
+    cell.classList.add("hs-slot-empty");
+    cell.setAttribute("aria-label", `${SLOT_NAMES[kind]} (empty)`);
+    setTip(cell, () =>
+      tipCard(
+        SLOT_NAMES[kind],
+        [
+          `Empty. Drag ${SLOT_ITEMS[kind]} here from the backpack, or double-click it there.`,
+        ],
+        { subtitle: "Worn slot" },
+      ),
+    );
+    return cell;
+  }
+  const icon = itemIcon(id);
+  setTip(icon, () => itemCard(id, itemHint("worn", id)));
+  cell.append(icon);
+  return cell;
+}
+
+/** What a slot holds, for the empty slot's hover card. */
+const SLOT_ITEMS: Readonly<Record<SlotKind, string>> = {
+  head: "a helmet or crown",
+  neck: "an amulet",
+  torso: "armour",
+  cloak: "a cloak",
+  weapon: "a weapon",
+  shield: "a shield",
+  ring: "a ring",
+  feet: "boots",
+  pocket: "a pocket item",
+};
 
 type Selection =
   | { place: "worn"; index: number }
@@ -352,20 +526,16 @@ export async function openHeroScreen(
     const doll = el("div.hs-doll");
     WORN_SLOTS.forEach((kind, i) => {
       const id = h.worn[i] ?? null;
-      const cell = el("div.hs-slot");
+      const cell = dollSlot(kind, id);
       const [col, row] = DOLL[i] as [number, number];
       cell.style.gridColumn = String(col);
       cell.style.gridRow = String(row);
-      // The slot's name shows on an empty slot; a worn item names itself
-      // on hover.
-      if (id === null) cell.append(el("span.hs-slot-name", SLOT_NAMES[kind]));
       if (selected?.place === "worn" && selected.index === i) {
         cell.classList.add("hs-selected");
       }
-      if (id !== null) {
-        const icon = itemIcon(id);
+      const icon = cell.firstElementChild;
+      if (id !== null && icon instanceof HTMLElement) {
         drag(icon, { place: "worn", index: i });
-        cell.append(icon);
         cell.addEventListener("dblclick", () =>
           act(unequip(host.state(), heroId, i)),
         );
@@ -393,59 +563,6 @@ export async function openHeroScreen(
     const middle = el("div.hs-col.hs-middle", el("h3", "Worn"), doll);
 
     // ---- right: skills, feats, backpack, scrolls
-    const skills = el("div.hs-skills");
-    for (let i = 0; i < MAX_SKILLS; i++) {
-      const s = h.skills[i];
-      if (s === undefined) {
-        skills.append(el("div.hs-skill.hs-empty", "Empty skill slot"));
-        continue;
-      }
-      const def = findSkill(s.id);
-      const pips = el("span.hs-pips");
-      for (let r = 1; r <= 3; r++) {
-        pips.append(el(r <= s.rank ? "span.hs-pip.hs-on" : "span.hs-pip"));
-      }
-      const node = el(
-        "div.hs-skill",
-        ...nameIcon("skill", s.id),
-        el("span.hs-skill-name", def?.name ?? s.id),
-        pips,
-      );
-      node.title = def
-        ? def.ranks
-            .map(
-              (r, k) =>
-                `${k + 1 === s.rank ? "> " : "  "}Rank ${k + 1}: ${r.text}`,
-            )
-            .join("\n")
-        : s.id;
-      skills.append(node);
-    }
-    const feats = el("div.hs-feats");
-    if (h.feats.length === 0) {
-      feats.append(el("div.gm-dim", "No feats yet: one every third level."));
-    }
-    // Feats as tiles like the skills; the text is on hover (bead bzc.45).
-    for (const id of h.feats) {
-      const def = findFeat(id);
-      const vowed = def?.restriction !== undefined;
-      const node = el(
-        "div.hs-feat",
-        ...nameIcon(vowed ? "vow" : "feat", id),
-        el("span.hs-feat-name", def?.name ?? id),
-      );
-      node.title = [
-        `${vowed ? "Vow" : "Feat"}: ${def?.name ?? id}`,
-        def?.text ?? "",
-        def?.restrictionText === undefined
-          ? ""
-          : `Restriction: ${def.restrictionText}`,
-      ]
-        .filter((line) => line !== "")
-        .join("\n");
-      if (vowed) node.classList.add("hs-vow");
-      feats.append(node);
-    }
     const ranks = SCHOOLS.filter((sc) => schoolRank(h, sc) > 0)
       .map((sc) => `${SCHOOL_NAMES[sc]} ${schoolRank(h, sc)}`)
       .join(", ");
@@ -457,6 +574,7 @@ export async function openHeroScreen(
       const cell = el("div.hs-cell");
       if (entry !== undefined) {
         const icon = itemIcon(entry.id, entry.count);
+        setTip(icon, () => itemCard(entry.id, itemHint("backpack", entry.id)));
         drag(icon, { place: "backpack", index: entry.index });
         cell.append(icon);
         if (selected?.place === "backpack" && selected.index === entry.index) {
@@ -494,10 +612,10 @@ export async function openHeroScreen(
     const right = el(
       "div.hs-col.hs-right",
       el("h3", `Skills ${h.skills.length} / ${MAX_SKILLS}`),
-      skills,
+      skillTiles(h),
       ranks === "" ? el("div") : el("div.hs-dim", `School ranks: ${ranks}`),
       el("h3", "Feats and vows"),
-      feats,
+      featTiles(h),
     );
     // Four columns over the army band keep the sheet within a 1280x800
     // window (beads bzc.25, bzc.45): the scroll case under the doll; the
@@ -520,7 +638,8 @@ export async function openHeroScreen(
         ),
       );
     }
-    far.append(details(h));
+    const info = details(h);
+    if (info !== null) far.append(info);
 
     // Own stacks rearrange on the owner's turn, as in the town screen.
     const editable = h.owner === host.state().currentPlayer;
@@ -563,8 +682,11 @@ export async function openHeroScreen(
     render();
   };
 
-  /** The selected item's text and the actions it allows. */
-  const details = (h: HeroState): HTMLElement => {
+  /**
+   * The selected item's text and the actions it allows; null when there is
+   * nothing to show (what clicks do is in the items' hover cards).
+   */
+  const details = (h: HeroState): HTMLElement | null => {
     const box = el("div.hs-details");
     const marvels = assemblable(h);
     for (const m of marvels) {
@@ -584,18 +706,11 @@ export async function openHeroScreen(
         ),
       );
     }
-    if (selected === null) {
-      box.append(
-        el(
-          "div.hs-dim",
-          "Click an item for details. Double-click or drag to wear, take off or use it.",
-        ),
-      );
-      return box;
-    }
+    const empty = box.childElementCount === 0 ? null : box;
+    if (selected === null) return empty;
     const sel = selected;
     const id = sel.place === "worn" ? h.worn[sel.index] : h.backpack[sel.index];
-    if (id === undefined || id === null) return box;
+    if (id === undefined || id === null) return empty;
     const def = findArtifact(id);
     const info = el(
       "div.hs-info",
@@ -741,28 +856,25 @@ export function heroArmySection(
     value,
   );
   const onSlot = options.onSlot;
-  if (onSlot !== undefined) {
-    head.append(
-      el(
-        "span.hs-dim.hs-army-hint",
-        "Click a stack, then a slot: move, merge or swap. Shift-click to split.",
-      ),
-    );
-  }
   const row = el("div.hs-army");
   const picked = options.selected ?? null;
   for (const v of views) {
     const cell = el("div.hs-army-slot");
     cell.setAttribute("data-slot", String(v.slot));
+    // What a click does here, at the foot of the slot's card (bead bzc.69:
+    // the section's instruction line moved into the cards).
+    const hint =
+      onSlot === undefined ? null : armySlotHint(views, picked, v.slot);
     if (v.creature === null) {
       cell.classList.add("hs-army-empty");
       cell.append(el("span.hs-army-spot"));
       cell.setAttribute("aria-label", "Empty slot");
+      if (hint !== null) setTip(cell, `Empty slot\n${hint}`);
     } else {
       const creature = v.creature;
       cell.append(...armyFigure(creature, v.count));
       cell.setAttribute("aria-label", `${v.count} ${v.name}`);
-      setTip(cell, () => creatureTip(creature, v.count));
+      setTip(cell, () => withHint(creatureTip(creature, v.count), hint));
     }
     if (picked === v.slot) cell.classList.add("hs-selected");
     if (onSlot !== undefined) {
@@ -776,6 +888,45 @@ export function heroArmySection(
     row.append(cell);
   }
   return el("section.hs-army-section", head, row);
+}
+
+/**
+ * What a click on army slot `slot` does, for its hover card: pick the
+ * stack up, or, with one picked, move, merge or swap it (shift-click
+ * splits). Null when a click does nothing (an empty slot, nothing picked).
+ */
+export function armySlotHint(
+  views: readonly ArmySlotView[],
+  picked: number | null,
+  slot: number,
+): string | null {
+  const here = views[slot];
+  if (here === undefined) return null;
+  if (picked === null) {
+    return here.creature === null
+      ? null
+      : "Click to pick this stack up, then click another slot to move, merge or swap it. Shift-click there to split it.";
+  }
+  if (picked === slot) return "Picked up. Click it again to put it back.";
+  const from = views[picked];
+  if (from === undefined || from.creature === null) return null;
+  if (here.creature === null) {
+    return "Click: move the picked stack here. Shift-click: move half of it.";
+  }
+  if (here.creature === from.creature) {
+    return "Click: merge the picked stack into this one. Shift-click: move half of it.";
+  }
+  return "Click: swap the two stacks.";
+}
+
+/** A hover card with a dim last line (the click hint), if any. */
+function withHint(card: TipBody, hint: string | null): TipBody {
+  if (hint === null) return card;
+  if (typeof card === "string") return `${card}\n${hint}`;
+  (card as HTMLElement).append(
+    el("div.gm-tip-line.gm-tip-dim.hs-tip-hint", hint),
+  );
+  return card;
 }
 
 /**
