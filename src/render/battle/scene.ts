@@ -69,7 +69,23 @@ export type HexMark =
   | "attack-from"
   | "target"
   | "target-blocked"
-  | "inspect";
+  | "inspect"
+  /** A valid target of the act being aimed. */
+  | "act-valid"
+  /** The valid target under the pointer. */
+  | "act-hover"
+  /** A target already chosen. */
+  | "chosen"
+  /** Where Hit and Run may step after the attack. */
+  | "after"
+  /** A linked partner under the pointer: swap with it. */
+  | "swap";
+
+/** A short label drawn on a hex (the order of chosen targets). */
+export interface HexLabel {
+  readonly hex: Hex;
+  readonly text: string;
+}
 
 export interface Overlay {
   /** Hex index -> mark; drawn in this order of precedence by the renderer. */
@@ -78,6 +94,11 @@ export interface Overlay {
   readonly active: Hex | null;
   /** Hex index of an attack target and the side the blow comes from. */
   readonly strike: { readonly from: Hex; readonly target: Hex } | null;
+  /** An area effect's hexes, drawn as one dashed outline. */
+  readonly area?: readonly Hex[];
+  /** Linked partners the active stack may swap with (a badge on each). */
+  readonly swaps?: readonly Hex[];
+  readonly labels?: readonly HexLabel[];
 }
 
 /** An enemy intent badge (RULES_V2 1.13) above a stack. */

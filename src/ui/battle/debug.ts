@@ -20,6 +20,10 @@
  *   auto=1         auto-resolve: AI on both sides, straight to the result
  *   speed=1|2|4    animation speed
  *   terrain=jungle battle ground
+ *   scenario=realm|horde|restless  a hand-built v0.2 faction battle with a
+ *                  hero's Command and item act (scenarios.ts)
+ *   active=a2      hand the turn to that stack
+ *   do=steps       a screenshot script, e.g. do=key:1;hover:d0 (runScript)
  *   armies=humans,undead   a faction battle with heroes (debug-armies.ts);
  *                  lean=magic gives both heroes the magic classes
  */
@@ -70,6 +74,7 @@ import type { Route } from "../../router.ts";
 import { HEX_SIZE, STAGE_W, hexToStage } from "../../render/battle/geometry.ts";
 import { factionBattleSetup } from "./debug-armies.ts";
 import { runBattleScreen } from "./screen.ts";
+import { decorateScenario, giveTurn, scenarioSetup } from "./scenarios.ts";
 import type { Speed } from "./animate.ts";
 
 const NEUTRALS: readonly NeutralCreatureId[] = [
@@ -261,6 +266,72 @@ function decorate(state: BattleState): BattleState {
   return d.toState();
 }
 
+/**
+ * A screenshot script (`do=`): steps separated by ";", each one of
+ * key:<key>, hover:<at>, click:<at>, rclick:<at>, bar:<action key> (point
+ * at a bar button for its tooltip) or wait:<ms>. <at> is a stack id or
+ * "col.row", optionally "@W" (a side of the hex, as `dir`).
+ */
+async function runScript(
+  container: HTMLElement,
+  canvas: HTMLCanvasElement,
+  state: BattleState,
+  script: string,
+): Promise<void> {
+  const pause = (ms: number): Promise<void> =>
+    new Promise((r) => setTimeout(r, ms));
+  for (const step of script.split(";")) {
+    const i = step.indexOf(":");
+    const verb = i < 0 ? step : step.slice(0, i);
+    const arg = i < 0 ? "" : step.slice(i + 1);
+    const [where = "", dir = null] = arg.split("@");
+    const h = hoverHex(state, where.replace(".", ","));
+    const at = h ? pointAt(canvas, h, dir) : null;
+    switch (verb) {
+      case "key":
+        window.dispatchEvent(new KeyboardEvent("keydown", { key: arg }));
+        break;
+      case "hover":
+        if (at)
+          canvas.dispatchEvent(
+            new PointerEvent("pointermove", { bubbles: true, ...at }),
+          );
+        break;
+      case "click":
+        if (at) {
+          canvas.dispatchEvent(
+            new PointerEvent("pointermove", { bubbles: true, ...at }),
+          );
+          canvas.dispatchEvent(
+            new MouseEvent("click", { bubbles: true, ...at }),
+          );
+        }
+        break;
+      case "rclick":
+        if (at)
+          canvas.dispatchEvent(
+            new MouseEvent("contextmenu", {
+              bubbles: true,
+              cancelable: true,
+              ...at,
+            }),
+          );
+        break;
+      case "bar": {
+        const b = container.querySelector(
+          `.bm-act[data-key="${CSS.escape(arg)}"]`,
+        );
+        b?.parentElement?.dispatchEvent(new PointerEvent("pointerenter"));
+        break;
+      }
+      case "wait":
+        await pause(Number(arg) || 200);
+        break;
+    }
+    await pause(120);
+  }
+}
+
 export function startBattleDebug(route: Route): void {
   const container = document.getElementById("ui") ?? document.body;
   const p = route.params;
@@ -271,14 +342,18 @@ export function startBattleDebug(route: Route): void {
   )
     ? (terrainParam as Terrain)
     : undefined;
+  const scenario = p.get("scenario");
+  const sc = scenario === null ? null : scenarioSetup(scenario, seed);
   const setup =
+    sc?.game ??
     factionBattleSetup(
       p,
       seed,
       terrain ?? (GROUND_TERRAINS[seed % GROUND_TERRAINS.length] as Terrain),
-    ) ?? sampleBattle(seed, terrain);
+    ) ??
+    sampleBattle(seed, terrain);
   if (p.has("armies")) registerSpells();
-  const magic = p.get("magic") === "1";
+  const magic = p.get("magic") === "1" || sc !== null;
   if (magic) {
     registerSpells();
     if (!casterOf({ ...CAVE_SHAMAN }))
@@ -317,7 +392,7 @@ export function startBattleDebug(route: Route): void {
         }
       : base;
   const engineSetup = (): EngineBattleSetup => {
-    const base = withItems(engineSetupFromGame(setup));
+    const base = withItems(sc?.engine ?? engineSetupFromGame(setup));
     return magic
       ? { ...base, attacker: { ...base.attacker, magic: DEBUG_BOOK } }
       : base;
@@ -338,6 +413,20 @@ export function startBattleDebug(route: Route): void {
   }
   if (p.get("grammar") === "1") {
     state = decorate(state ?? createBattle(engineSetup()).state);
+  }
+  if (scenario !== null && sc !== null) {
+    state = decorateScenario(
+      scenario,
+      state ?? createBattle(engineSetup()).state,
+    );
+  }
+  const activeParam = p.get("active");
+  if (activeParam !== null) {
+    try {
+      state = giveTurn(state ?? createBattle(engineSetup()).state, activeParam);
+    } catch {
+      // Unknown stack id: leave the turn order alone.
+    }
   }
   const speed = Number(p.get("speed") ?? "1");
   const hover = p.get("hover");
@@ -378,6 +467,8 @@ export function startBattleDebug(route: Route): void {
               );
             }
           }
+          const script = p.get("do");
+          if (script) void runScript(container, canvas, cur, script);
         }, 700);
       },
     }).then(({ result, engine }) => {

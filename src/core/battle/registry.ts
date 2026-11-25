@@ -408,6 +408,8 @@ export interface AbilityDef {
    * whole shot is this rule (Bomb).
    */
   readonly shootAnyHex?: boolean;
+  /** For interfaces only: the hexes a shot centred on `centre` covers. */
+  shotArea?(state: BattleState, centre: Hex): Hex[];
   /**
    * Replaces the owner's shot: called with the centre hex and the stack
    * on it (or null). The shot's use is already spent.
@@ -457,6 +459,22 @@ export interface ActDef {
    */
   readonly maxTargets?: (state: BattleState, actorId: StackId) => number;
   readonly targetStep?: number;
+  /**
+   * For interfaces only (the rules never read it): what each of the first
+   * `targets` targets is, repeated in steps of `targetStep` beyond them.
+   * "condition" is `{ stack, condition }`. Absent: a stack, or a hex when
+   * no stack stands there.
+   */
+  readonly targetKinds?: readonly ("stack" | "hex" | "condition")[];
+  /**
+   * For interfaces only: the hexes the act's area covers for these
+   * targets (the last one may be the one being aimed), for the outline.
+   */
+  area?(
+    state: BattleState,
+    actorId: StackId,
+    targets: readonly ActTarget[],
+  ): Hex[];
   /**
    * Requirements about who may be chosen (law 3): tested once, when the act
    * is chosen, never again. Returns a refusal message or null. With no

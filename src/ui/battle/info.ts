@@ -10,9 +10,19 @@
 
 import { ABILITIES } from "../../data/abilities.ts";
 import {
+  creatureAbilities,
+  getCreature,
+  isCreatureId,
+} from "../../data/creatures.ts";
+import { FACTIONS } from "../../data/factions.ts";
+import type { FactionDef } from "../../data/factions.ts";
+import { isBattleSpell, spellDef } from "../../core/magic/index.ts";
+import {
   HERO_ABILITY_PREFIX,
   ability as abilityDef,
+  casterOf,
   conditionKind,
+  creatureCastPower,
   defendedDefense,
   effectiveSpeed,
   isAdjacent,
@@ -35,6 +45,30 @@ export interface StatLine {
   readonly note: string;
 }
 
+/** One of a stack's abilities with its full text. */
+export interface AbilityLine {
+  readonly id: string;
+  readonly name: string;
+  readonly text: string;
+  /**
+   * "ability": the creature's own; "drill": taught by a town's Drill;
+   * "birthright": the faction's, on a native stack; "other": anything
+   * else a rule gave it.
+   */
+  readonly source: "ability" | "drill" | "birthright" | "other";
+  /** Activated abilities: "Activated · every turn · may walk first". */
+  readonly activated: string | null;
+}
+
+/** A creature caster's page (RULES_V2 2.6). */
+export interface PageLine {
+  readonly id: string;
+  readonly name: string;
+  /** The effect at the stack's casting Power. */
+  readonly text: string;
+  readonly spent: boolean;
+}
+
 export interface StackInfo {
   readonly title: string;
   readonly count: number;
@@ -43,7 +77,80 @@ export interface StackInfo {
   readonly owner: "attacker" | "defender";
   readonly stats: readonly StatLine[];
   readonly ability: { readonly name: string; readonly text: string } | null;
+  /** Every ability: its own first, then Drills, the birthright, others. */
+  readonly abilities: readonly AbilityLine[];
+  /** The faction's birthright, for a native stack. */
+  readonly birthright: { readonly name: string; readonly text: string } | null;
+  /** Names of the Drills (town buildings) that taught it abilities. */
+  readonly drills: readonly string[];
+  /** A creature caster's pages, with the effect at its casting Power. */
+  readonly pages: readonly PageLine[];
+  readonly castPower: number | null;
   readonly statuses: readonly string[];
+}
+
+/** Drill abilities: "<creature>:<ability>" -> the Drill building's name. */
+const DRILLS: ReadonlyMap<string, string> = new Map(
+  FACTIONS.flatMap((f) =>
+    Object.values(f.town?.buildings ?? {}).flatMap((b) =>
+      b.drill
+        ? [[`${b.drill.creature}:${b.drill.ability}`, b.name] as const]
+        : [],
+    ),
+  ),
+);
+
+/** The faction of a creature of src/data, or null (stubs, neutrals). */
+function factionOf(creatureId: string): FactionDef | null {
+  if (!isCreatureId(creatureId)) return null;
+  const def = getCreature(creatureId);
+  return FACTIONS.find((f) => f.id === def.faction) ?? null;
+}
+
+function activatedNote(id: string, stack: BattleStack): string | null {
+  const def = abilityDef(id);
+  if (def.act === undefined) return null;
+  const every = def.everyTurn === true;
+  const used = !every && stack.abilitiesUsed.includes(id);
+  return [
+    "Activated",
+    every ? "every turn" : "once per battle",
+    ...(def.moveFirst ? ["may walk first"] : []),
+    ...(every ? [] : [used ? "used" : "ready"]),
+  ].join(" · ");
+}
+
+/** Every ability of the stack with where it came from and its full text. */
+export function abilityLines(stack: BattleStack): AbilityLine[] {
+  const c = stack.creature;
+  const own = isCreatureId(c.id)
+    ? creatureAbilities(getCreature(c.id))
+    : c.abilities;
+  const birth = stack.native
+    ? (factionOf(c.id)?.birthright?.ability ?? null)
+    : null;
+  const rank = { ability: 0, drill: 1, birthright: 2, other: 3 } as const;
+  const out: AbilityLine[] = [];
+  for (const id of c.abilities) {
+    if (id.startsWith(HERO_ABILITY_PREFIX)) continue;
+    const def = abilityDef(id);
+    const source: AbilityLine["source"] =
+      id === birth
+        ? "birthright"
+        : own.includes(id)
+          ? "ability"
+          : DRILLS.has(`${c.id}:${id}`)
+            ? "drill"
+            : "other";
+    out.push({
+      id,
+      name: def.name,
+      text: def.description,
+      source,
+      activated: activatedNote(id, stack),
+    });
+  }
+  return out.sort((a, b) => rank[a.source] - rank[b.source]);
 }
 
 function signed(n: number): string {
@@ -167,6 +274,25 @@ export function stackInfo(state: BattleState, stack: BattleStack): StackInfo {
           text: abilityDef(abilityId).description,
         };
 
+  const abilities = abilityLines(stack);
+  const faction = stack.native ? factionOf(c.id) : null;
+  const birthright = faction?.birthright
+    ? { name: faction.birthright.name, text: faction.birthright.text }
+    : null;
+  const drills = abilities
+    .filter((a) => a.source === "drill")
+    .map((a) => DRILLS.get(`${c.id}:${a.id}`) ?? a.name);
+  const caster = casterOf(c);
+  const castPower = caster ? creatureCastPower(stack) : null;
+  const pages: PageLine[] = (caster?.pages ?? [])
+    .filter(isBattleSpell)
+    .map((id) => ({
+      id,
+      name: spellDef(id).name,
+      text: spellDef(id).text(castPower ?? 0),
+      spent: stack.abilitiesUsed.includes(`page:${id}`),
+    }));
+
   return {
     title: creatureName(c, stack.count),
     count: stack.count,
@@ -174,6 +300,11 @@ export function stackInfo(state: BattleState, stack: BattleStack): StackInfo {
     owner: stack.owner,
     stats,
     ability,
+    abilities,
+    birthright,
+    drills,
+    pages,
+    castPower,
     statuses,
   };
 }

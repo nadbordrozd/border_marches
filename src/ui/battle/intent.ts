@@ -44,6 +44,15 @@ export type HoverIntent =
       /** Path to the attack hex (empty when attacking from where it stands). */
       readonly path: readonly Hex[];
     }
+  /**
+   * A linked partner the active stack may swap hexes with in place of its
+   * walk (Sworn).
+   */
+  | {
+      readonly kind: "swap";
+      readonly action: Extract<BattleAction, { type: "move" }>;
+      readonly partner: BattleStack;
+    }
   /** An enemy the active stack cannot reach this turn. */
   | { readonly kind: "out-of-reach"; readonly stack: BattleStack }
   /** A stack of the active side, or any stack when it is not our turn. */
@@ -55,6 +64,13 @@ export interface LegalIndex {
   /** Attack actions by target id (one per attack hex). */
   readonly attacks: ReadonlyMap<string, readonly AttackAction[]>;
   readonly shots: ReadonlyMap<string, AttackAction>;
+  /** Swaps in place of the walk, by partner id (Sworn). */
+  readonly swaps: ReadonlyMap<string, Extract<BattleAction, { type: "move" }>>;
+  /**
+   * Shots that need a swap first, by target id: offered only when the
+   * stack cannot shoot where it stands.
+   */
+  readonly swapShots: ReadonlyMap<string, AttackAction>;
   readonly canWait: boolean;
 }
 
@@ -64,11 +80,14 @@ export function indexLegalActions(
   const moves = new Map<number, Extract<BattleAction, { type: "move" }>>();
   const attacks = new Map<string, AttackAction[]>();
   const shots = new Map<string, AttackAction>();
+  const swaps = new Map<string, Extract<BattleAction, { type: "move" }>>();
+  const swapShots = new Map<string, AttackAction>();
   let canWait = false;
   for (const a of actions) {
     switch (a.type) {
       case "move":
-        moves.set(hexIndex(a.to), a);
+        if (a.swapWith !== undefined) swaps.set(a.swapWith, a);
+        else moves.set(hexIndex(a.to), a);
         break;
       case "attack": {
         const list = attacks.get(a.targetId) ?? [];
@@ -77,7 +96,9 @@ export function indexLegalActions(
         break;
       }
       case "shoot":
-        shots.set(a.targetId, a);
+        if (a.swapWith !== undefined) {
+          if (!swapShots.has(a.targetId)) swapShots.set(a.targetId, a);
+        } else shots.set(a.targetId, a);
         break;
       case "wait":
         canWait = true;
@@ -86,7 +107,7 @@ export function indexLegalActions(
         break;
     }
   }
-  return { moves, attacks, shots, canWait };
+  return { moves, attacks, shots, swaps, swapShots, canWait };
 }
 
 /** Half-width and height of a unit's body box over its feet (stage px). */
@@ -180,9 +201,13 @@ export function hoverIntent(
     const path = findPath(state, move.stackId, move.to) ?? [];
     return { kind: "move", action: move, path };
   }
-  if (occupant.side === active.side)
-    return { kind: "inspect", stack: occupant };
-  const shot = legal.shots.get(occupant.id);
+  if (occupant.side === active.side) {
+    const swap = legal.swaps.get(occupant.id);
+    return swap
+      ? { kind: "swap", action: swap, partner: occupant }
+      : { kind: "inspect", stack: occupant };
+  }
+  const shot = legal.shots.get(occupant.id) ?? legal.swapShots.get(occupant.id);
   if (shot) {
     return {
       kind: "attack",
@@ -195,9 +220,10 @@ export function hoverIntent(
   if (melee === null || melee.type !== "attack") {
     return { kind: "out-of-reach", stack: occupant };
   }
-  const path = sameHex(melee.from, active.hex)
-    ? []
-    : (findPath(state, active.id, melee.from) ?? []);
+  const path =
+    sameHex(melee.from, active.hex) || melee.swapWith !== undefined
+      ? []
+      : (findPath(state, active.id, melee.from) ?? []);
   return {
     kind: "attack",
     action: melee,

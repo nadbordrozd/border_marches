@@ -278,6 +278,7 @@ registerAct({
   text: "Change one condition's clock by 2 either way, exactly as the Wind tool.",
   kind: "item",
   targets: 1,
+  targetKinds: ["condition"],
   check(state, _actorId, targets) {
     const t = targets[0];
     if (targets.length !== 1 || t === undefined || !("condition" in t)) {
@@ -327,6 +328,7 @@ registerAct({
   text: "Choose one of your stacks; move one condition from a stack adjacent to it to another stack adjacent to it.",
   kind: "item",
   targets: 3,
+  targetKinds: ["stack", "condition", "stack"],
   check(state, actorId, targets) {
     const [hubT, fromT, toT] = targets;
     if (
@@ -399,6 +401,7 @@ registerAct({
   text: "End Ripening on one of your stacks; it heals 3 x that size in HP, reviving.",
   kind: "item",
   targets: 1,
+  targetKinds: ["condition"],
   check(state, actorId, targets) {
     const t = targets[0];
     if (targets.length !== 1 || t === undefined || !("condition" in t))

@@ -264,7 +264,7 @@
 
 .bm-buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 6px;
   align-content: center;
 }
@@ -596,13 +596,15 @@
   color: #e8dcc0;
 }
 
+/* In the left margin beside the field, so it never hides a target. */
 .bm-cast {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 12px;
-  width: 440px;
-  max-width: calc(100% - 24px);
+  left: 8px;
+  top: 8px;
+  box-sizing: border-box;
+  width: clamp(230px, calc((100% - 900px) / 2 - 12px), 330px);
+  max-height: calc(100% - 16px);
+  overflow-y: auto;
   z-index: 4;
   padding: 8px 10px;
   background: rgba(30, 23, 15, 0.96);
@@ -694,4 +696,359 @@
 .bm-battle .gm-icon-framed {
   padding: var(--icon-px, 1px);
   border: calc(2 * var(--icon-px, 1px)) solid var(--icon-frame);
+}
+
+/* Action bar (actionbar.ts): the active stack's, its hero's and the turn's
+   actions, each with an icon, a hotkey and a use badge. */
+
+.bm-actionbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  min-height: 58px;
+  padding: 8px 12px 6px;
+  box-sizing: border-box;
+  background: #1d160e;
+  border-top: 2px solid #5c4626;
+  overflow-x: auto;
+}
+
+.bm-act-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-left: 8px;
+  border-left: 1px solid #3e3020;
+}
+
+.bm-act-group:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.bm-act-turn {
+  margin-left: auto;
+}
+
+.bm-act-caption {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #7d6c4e;
+}
+
+.bm-act-wrap {
+  display: inline-flex;
+}
+
+.bm-act {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 42px;
+  padding: 3px 9px 3px 3px;
+  color: #f0e6c8;
+  background: #3a2d1a;
+  border: 2px solid #8a6c3a;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.bm-act:hover:not(:disabled) {
+  background: #4f3d23;
+  border-color: #ffd65c;
+}
+
+.bm-act:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.bm-act.bm-act-st-used {
+  opacity: 0.35;
+  filter: grayscale(0.8);
+}
+
+.bm-act.bm-act-st-used .bm-act-label {
+  text-decoration: line-through;
+}
+
+.bm-act.bm-aiming {
+  background: #1d4741;
+  border-color: #8ff5e6;
+  box-shadow: 0 0 0 1px #8ff5e6;
+}
+
+.bm-act.bm-on {
+  border-color: #ffd65c;
+}
+
+.bm-act-key {
+  position: absolute;
+  top: -6px;
+  left: -5px;
+  min-width: 14px;
+  padding: 0 3px;
+  font:
+    bold 10px/14px Verdana,
+    Geneva,
+    sans-serif;
+  text-align: center;
+  color: #1b1712;
+  background: #ffd65c;
+  border: 1px solid #0d0b08;
+  border-radius: 3px;
+}
+
+.bm-act-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  line-height: 1;
+  color: #ffe9a8;
+  background: #241a0f;
+  border: 1px solid #6b5228;
+  border-radius: 4px;
+}
+
+.bm-act .gm-icon.bm-act-icon,
+.bm-act-tip .gm-icon.bm-act-icon {
+  width: 32px;
+  height: 32px;
+  background: #241a0f;
+  border-radius: 3px;
+}
+
+.bm-act-label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.bm-act-badge {
+  padding: 0 4px;
+  font-size: 10px;
+  color: #d8ccb0;
+  background: #241a0f;
+  border: 1px solid #5c4626;
+  border-radius: 7px;
+}
+
+.bm-aiming .bm-act-badge {
+  border-color: #8ff5e6;
+}
+
+.bm-act-tip {
+  position: absolute;
+  z-index: 20;
+  width: 320px;
+  padding: 7px 10px 8px;
+  pointer-events: none;
+  background: rgba(20, 14, 8, 0.97);
+  border: 2px solid #ffd65c;
+  border-radius: 6px;
+  box-shadow: 0 3px 0 #000;
+}
+
+.bm-act-tip[hidden] {
+  display: none;
+}
+
+.bm-act-tip-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 4px;
+}
+
+.bm-act-tip-title {
+  font:
+    bold 14px Georgia,
+    serif;
+  color: #ffd65c;
+}
+
+.bm-act-tip-line {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #e8dcc0;
+}
+
+.bm-act-tip-line + .bm-act-tip-line {
+  color: #a89a80;
+}
+
+.bm-act-tip-why {
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ff8a6a;
+}
+
+.bm-act-chosen {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #ffd65c;
+}
+
+.bm-tip-act {
+  font-weight: bold;
+  color: #8ff5e6;
+}
+
+.bm-swap-note {
+  font:
+    12px Verdana,
+    Geneva,
+    sans-serif;
+  color: #8ff5e6;
+}
+
+.bm-swap-line {
+  font-size: 15px;
+  color: #8ff5e6;
+}
+
+/* Stack info: every ability with its source, pages and conditions. */
+
+.bm-info {
+  max-height: calc(100% - 60px);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.bm-info-section {
+  margin: 8px 0 3px;
+  padding-bottom: 1px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #a89a80;
+  border-bottom: 1px solid #4a3a22;
+}
+
+.bm-info-ab-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  color: #ffd65c;
+}
+
+.bm-info-ab-text {
+  font-size: 12px;
+  color: #e8dcc0;
+}
+
+.bm-tag {
+  padding: 0 5px;
+  font-size: 10px;
+  font-weight: normal;
+  color: #d8ccb0;
+  background: #3a2e1c;
+  border: 1px solid #6b5228;
+  border-radius: 7px;
+}
+
+.bm-tag-drill {
+  color: #ffd0a0;
+  border-color: #b0783a;
+}
+
+.bm-tag-birthright {
+  color: #cfe6ff;
+  border-color: #6f93cf;
+}
+
+.bm-tag-act {
+  color: #8ff5e6;
+  border-color: #3e8f84;
+}
+
+.bm-info-page {
+  margin: 2px 0;
+  font-size: 12px;
+  color: #e8dcc0;
+}
+
+.bm-info-page b {
+  color: #ffd65c;
+}
+
+.bm-info-page.bm-spent {
+  opacity: 0.5;
+}
+
+.bm-info-page .gm-icon {
+  float: left;
+  margin: 1px 6px 2px 0;
+}
+
+.bm-info-page::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.bm-act-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.bm-act-title .bm-cast-name {
+  line-height: 1.1;
+}
+
+.bm-act-conds {
+  margin: 4px 0;
+}
+
+.bm-act-cond {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 3px 0;
+}
+
+.bm-act-cond .bm-toggle {
+  flex: 0 0 auto;
+}
+
+.bm-act-cond-effect {
+  font-size: 11px;
+  color: #9be07a;
+}
+
+.bm-cast-buttons .bm-btn {
+  flex: 1 1 0;
+  padding: 6px 4px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* In the narrow side panel the cast header's meta goes on its own line. */
+.bm-cast .bm-cast-head {
+  flex-wrap: wrap;
+}
+
+.bm-cast .bm-cast-head > .bm-dim {
+  flex-basis: 100%;
+}
+
+/* Long names (The Bellhop's Cap) stay on one short line; the tooltip has
+   the full name. */
+.bm-act-label {
+  max-width: 92px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

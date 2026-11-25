@@ -6,9 +6,13 @@
  */
 
 import {
+  ability,
+  act,
   conditionKind,
   getStack,
   groundKind,
+  hasAbility,
+  hasAct,
   hexIndex,
   isAlive,
   turnOrder,
@@ -45,6 +49,14 @@ const SCHOOL_NAMES: Readonly<Record<School, string>> = {
   hush: "Hush",
   storm: "Storm",
 };
+
+function abilityName(id: string): string {
+  return hasAbility(id) ? ability(id).name : id;
+}
+
+function actName(id: string): string {
+  return hasAct(id) ? act(id).name : id;
+}
 
 function clockLabel(clock: number | null): string {
   return clock === null
@@ -229,8 +241,45 @@ export function chainLines(
       case "contentError":
         out.push(`content error: ${e.message}`);
         break;
-      case "move":
-        if (e.mode !== "walk") out.push(`${name(e.stackId)} ${e.mode}ed`);
+      case "move": {
+        const n = e.path.length;
+        const hexes = `${n} hex${n === 1 ? "" : "es"}`;
+        if (e.mode === "push" || e.mode === "pull")
+          out.push(
+            n === 0
+              ? `${name(e.stackId)} cannot be ${e.mode}ed`
+              : `${name(e.stackId)} ${e.mode}ed ${hexes}`,
+          );
+        else if (e.mode === "swap") {
+          // A swap emits one move per stack: name the pair once.
+          const other = events.find(
+            (x) =>
+              x !== e &&
+              x.type === "move" &&
+              x.mode === "swap" &&
+              x.index === e.index + 1,
+          );
+          if (other && other.type === "move")
+            out.push(
+              `${name(e.stackId)} swap places with ${name(other.stackId)}`,
+            );
+        } else if (e.mode === "teleport")
+          out.push(`${name(e.stackId)} teleport`);
+        else if (e.rule === "engine:walk-after")
+          out.push(`${name(e.stackId)} step away ${hexes}`);
+        break;
+      }
+      case "ability":
+        out.push(`${name(e.stackId)}: ${abilityName(e.ability)}`);
+        break;
+      case "heroAct":
+        if (!e.cast) out.push(`${actName(e.act)}`);
+        break;
+      case "shootHex":
+        out.push(`${name(e.stackId)} bomb ${e.at.col},${e.at.row}`);
+        break;
+      case "getUp":
+        out.push(`${name(e.stackId)} get up (${e.count})`);
         break;
       default:
         break;

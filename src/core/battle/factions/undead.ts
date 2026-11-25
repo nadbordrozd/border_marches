@@ -11,6 +11,7 @@ import { registerAbility, registerAct } from "../registry.ts";
 import type { StackId } from "../types.ts";
 import {
   commandC,
+  discAround,
   enemiesOf,
   friendsOf,
   oneEach,
@@ -174,6 +175,7 @@ export function registerUndead(): void {
     text: "An adjacent enemy stack gains Asleep for 2 rounds, gate 30 HP per Vampire.",
     kind: "ability",
     targets: 1,
+    targetKinds: ["stack"],
     check(state, actorId, t) {
       const me = stackOf(state, actorId);
       const e = stackOf(state, targetStack(t[0]) ?? "");
@@ -208,6 +210,7 @@ export function registerUndead(): void {
     text: "Up to C friendly stacks that are not summoned gain the badge 'gets up': the next time each dies and leaves remains, it gets up as by Not Done Yet.",
     kind: "command",
     targets: 1,
+    targetKinds: ["stack"],
     maxTargets: (state, actorId) => {
       const me = stackOf(state, actorId);
       return me ? commandC(state, me.side) : 1;
@@ -237,6 +240,13 @@ export function registerUndead(): void {
     text: "Choose remains: they are consumed, and every enemy stack within C hexes gains Shaken (2 rounds) and Jinxed 25 (2 rounds).",
     kind: "command",
     targets: 1,
+    targetKinds: ["hex"],
+    area(state, actorId, t) {
+      const h = targetHex(t[0]);
+      const me = stackOf(state, actorId);
+      if (h === null || !me) return [];
+      return discAround(h, commandC(state, me.side));
+    },
     check(state, _actorId, t) {
       const h = targetHex(t[0]);
       if (h === null) return "choose remains";

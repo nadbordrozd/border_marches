@@ -87,6 +87,7 @@ export function registerHumans(): void {
     text: "One other friendly stack adjacent to the Squires gains Heartened, gate 20 HP per Squire.",
     kind: "ability",
     targets: 1,
+    targetKinds: ["stack"],
     check(state, actorId, t) {
       const me = stackOf(state, actorId);
       const id = targetStack(t[0]);
@@ -250,6 +251,7 @@ export function registerHumans(): void {
     text: "Choose a friendly stack and an enemy stack: the enemy gains Challenged naming the friendly stack, for min(3, C + 1) rounds.",
     kind: "command",
     targets: 2,
+    targetKinds: ["stack", "stack"],
     check(state, actorId, t) {
       const me = stackOf(state, actorId);
       const f = stackOf(state, targetStack(t[0]) ?? "");
@@ -285,6 +287,7 @@ export function registerHumans(): void {
     kind: "command",
     targets: 2,
     targetStep: 2,
+    targetKinds: ["stack", "stack"],
     maxTargets: (state, actorId) => {
       const me = stackOf(state, actorId);
       return 2 * (me ? commandC(state, me.side) : 1);

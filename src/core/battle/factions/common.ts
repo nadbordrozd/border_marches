@@ -8,7 +8,13 @@
 
 import { isAlive } from "../abilities.ts";
 import { turnOrder } from "../engine.ts";
-import { hexDistance, isAdjacent, sameHex } from "../hex.ts";
+import {
+  BATTLE_HEX_COUNT,
+  hexDistance,
+  hexFromIndex,
+  isAdjacent,
+  sameHex,
+} from "../hex.ts";
 import type { Hex } from "../hex.ts";
 import { registerAct } from "../registry.ts";
 import type {
@@ -68,6 +74,16 @@ export function inBlast(state: BattleState, centre: Hex): BattleStack[] {
   );
 }
 
+/** Every hex within `r` of `centre` (an area's outline). */
+export function discAround(centre: Hex, r: number): Hex[] {
+  const out: Hex[] = [];
+  for (let i = 0; i < BATTLE_HEX_COUNT; i++) {
+    const h = hexFromIndex(i);
+    if (hexDistance(h, centre) <= r) out.push(h);
+  }
+  return out;
+}
+
 /** Living stacks within `r` hexes of `centre`, field order. */
 export function within(
   state: BattleState,
@@ -110,6 +126,7 @@ export function registerStampede(): void {
     text: "Choose an enemy stack; up to C + 1 friendly stacks adjacent to it each make a melee Strike against it, in timeline order; it retaliates once.",
     kind: "command",
     targets: 1,
+    targetKinds: ["stack"],
     check(state, actorId, t) {
       const me = stackOf(state, actorId);
       const e = stackOf(state, targetStack(t[0]) ?? "");

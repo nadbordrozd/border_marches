@@ -286,18 +286,14 @@ export function renderCastPanel(
       );
   }
   const row = el("div", "bm-cast-buttons");
-  const cast = el(
-    "button",
-    "bm-btn bm-primary",
-    item ? "Use (Enter)" : "Cast (Enter)",
-  );
+  const cast = el("button", "bm-btn bm-primary", item ? "Use ⏎" : "Cast ⏎");
   cast.type = "button";
   cast.disabled = !m.complete || !(m.preview?.legal ?? false) || m.hovered;
   cast.addEventListener("click", h.onCast);
-  const back = el("button", "bm-btn", "Back");
+  const back = el("button", "bm-btn", "Back ⌫");
   back.type = "button";
   back.addEventListener("click", h.onBack);
-  const cancel = el("button", "bm-btn", "Cancel (Esc)");
+  const cancel = el("button", "bm-btn", "Cancel Esc");
   cancel.type = "button";
   cancel.addEventListener("click", h.onCancel);
   row.append(cast, back, cancel);

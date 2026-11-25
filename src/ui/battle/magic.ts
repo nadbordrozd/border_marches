@@ -517,14 +517,50 @@ export function castPreview(
   if (r.legal !== true)
     return { legal: false, message: r.legal.message, lines: [], summary: [] };
   const lines = chainLines(state, r.steps);
-  const summary = r.summary.map((s) => {
+  // Effects no number shows: pushes, pulls, teleports, swaps, badges.
+  const moved = new Map<StackId, string[]>();
+  for (const e of r.steps) {
+    if (
+      e.type === "condition" &&
+      (e.change === "wound" || e.change === "fed")
+    ) {
+      const name = conditionKind(e.condition.kind).name;
+      const was = state.stacks
+        .find((x) => x.id === e.stackId)
+        ?.conditions.find((c) => c.uid === e.condition.uid);
+      const what =
+        e.change === "wound"
+          ? `${name} clock ${was ? `${was.clock ?? "-"} → ` : ""}${e.condition.clock ?? "-"}`
+          : `${name} grows to ${e.condition.size}`;
+      moved.set(e.stackId, [...(moved.get(e.stackId) ?? []), what]);
+      continue;
+    }
+    if (e.type !== "move" || e.mode === "walk") continue;
+    const n = e.path.length;
+    const what =
+      e.mode === "swap"
+        ? "swaps places"
+        : e.mode === "teleport"
+          ? "teleported"
+          : `${e.mode}ed ${n} hex${n === 1 ? "" : "es"}`;
+    moved.set(e.stackId, [...(moved.get(e.stackId) ?? []), what]);
+  }
+  // The "gets up" badge (One More Time) changes no number: name it.
+  for (const s of r.after.stacks) {
+    const b = state.stacks.find((x) => x.id === s.id);
+    if (b && s.getsUp === true && b.getsUp !== true)
+      moved.set(s.id, [...(moved.get(s.id) ?? []), "gains 'gets up'"]);
+  }
+  const nameOf = (id: StackId): string => {
     const st =
-      state.stacks.find((x) => x.id === s.stackId) ??
-      r.after.stacks.find((x) => x.id === s.stackId);
-    const name = st
-      ? creatureName(st.creature, Math.max(1, st.count))
-      : s.stackId;
-    const parts: string[] = [];
+      state.stacks.find((x) => x.id === id) ??
+      r.after.stacks.find((x) => x.id === id);
+    return st ? creatureName(st.creature, Math.max(1, st.count)) : id;
+  };
+  const summary = r.summary.map((s) => {
+    const name = nameOf(s.stackId);
+    const parts: string[] = [...(moved.get(s.stackId) ?? [])];
+    moved.delete(s.stackId);
     if (s.hpLost > 0) parts.push(`−${s.hpLost} HP`);
     if (s.hpLost < 0) parts.push(`+${-s.hpLost} HP`);
     if (s.killed > 0) parts.push(`${s.killed} killed`);
@@ -533,6 +569,9 @@ export function castPreview(
     for (const k of s.conditionsLost) parts.push(`−${conditionKind(k).name}`);
     return `${name}: ${parts.join(", ") || "no change"}`;
   });
+  summary.unshift(
+    ...[...moved].map(([id, parts]) => `${nameOf(id)}: ${parts.join(", ")}`),
+  );
   const summoned = r.after.stacks.filter(
     (s) => !state.stacks.some((x) => x.id === s.id) && isAlive(s),
   );

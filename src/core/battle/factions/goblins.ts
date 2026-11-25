@@ -36,6 +36,11 @@ function towardEnemy(side: BattleSide): number {
   return side === "attacker" ? 0 : 3;
 }
 
+/** A hex and the hexes adjacent to it (a blast's outline). */
+function blastHexes(centre: Hex): Hex[] {
+  return [centre, ...neighbors(centre)];
+}
+
 /** The direction from `from` to a hex in a straight line from it, or null. */
 export function lineDirection(from: Hex, to: Hex): number | null {
   const n = hexDistance(from, to);
@@ -107,6 +112,7 @@ export function registerGoblins(): void {
     description:
       "The shot may target any hex and is an area effect centred there: a shot Strike on the stack in that hex and a shot Strike at x 50% on every stack adjacent to it, friend or foe.",
     shootAnyHex: true,
+    shotArea: (_state, centre) => blastHexes(centre),
     shot(fx, ownerId, centre, targetId) {
       const me = fx.stack(ownerId);
       const area: AreaRef = { centre, side: fx.sideOf(ownerId) };
@@ -167,6 +173,7 @@ export function registerGoblins(): void {
     text: "An adjacent stack of any side with total HP at most 40 per Ogre is pushed 6 hexes directly away from the Ogres.",
     kind: "ability",
     targets: 1,
+    targetKinds: ["stack"],
     check(state, actorId, t) {
       const me = stackOf(state, actorId);
       const s = stackOf(state, targetStack(t[0]) ?? "");
@@ -252,9 +259,27 @@ export function registerGoblins(): void {
     kind: "command",
     targets: 2,
     targetStep: 2,
+    targetKinds: ["stack", "hex"],
     maxTargets: (state, actorId) => {
       const me = stackOf(state, actorId);
       return 2 * ((me ? commandC(state, me.side) : 1) + 1);
+    },
+    area(state, _actorId, t) {
+      // The push line of the last pair: 4 hexes on from the stack.
+      const i = t.length % 2 === 0 ? t.length - 2 : t.length - 1;
+      const s = stackOf(state, targetStack(t[i]) ?? "");
+      const h = targetHex(t[i + 1]);
+      if (!s || h === null) return [];
+      const dir = lineDirection(s.hex, h);
+      if (dir === null) return [];
+      const out: Hex[] = [];
+      let cur = s.hex;
+      for (let k = 0; k < 4; k++) {
+        cur = stepHex(cur, dir);
+        if (!inBounds(cur)) break;
+        out.push(cur);
+      }
+      return out;
     },
     check(state, actorId, t) {
       const me = stackOf(state, actorId);
@@ -299,6 +324,11 @@ export function registerGoblins(): void {
     text: "Choose a hex: every stack on it or adjacent to it takes Harm 30 x C. An area effect.",
     kind: "command",
     targets: 1,
+    targetKinds: ["hex"],
+    area: (_s, _a, t) => {
+      const h = targetHex(t[0]);
+      return h === null ? [] : blastHexes(h);
+    },
     check: (_s, _a, t) => (targetHex(t[0]) === null ? "choose a hex" : null),
     aiTargets: (state, actorId) => {
       const seen = new Set<string>();

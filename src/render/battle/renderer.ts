@@ -19,8 +19,10 @@ import {
   HEX_SIZE,
   STAGE_H,
   STAGE_W,
+  feetPoint,
   hexCorners,
   hexToStage,
+  stageToHex,
 } from "./geometry.ts";
 import type { HexMark, Scene, UnitView } from "./scene.ts";
 
@@ -106,7 +108,23 @@ const MARK_STYLE: Readonly<
     width: 1.5,
   },
   inspect: { fill: null, stroke: "rgba(255, 255, 255, 0.75)", width: 1.5 },
+  "act-valid": {
+    fill: "rgba(96, 214, 200, 0.16)",
+    stroke: "rgba(120, 232, 216, 0.7)",
+    width: 1.5,
+  },
+  "act-hover": {
+    fill: "rgba(96, 214, 200, 0.34)",
+    stroke: "#8ff5e6",
+    width: 3,
+  },
+  chosen: { fill: "rgba(255, 214, 92, 0.30)", stroke: "#ffd65c", width: 3 },
+  after: { fill: "rgba(140, 230, 110, 0.2)", stroke: null, width: 0 },
+  swap: { fill: "rgba(96, 214, 200, 0.3)", stroke: "#8ff5e6", width: 2.5 },
 };
+
+/** Teal of swaps and act targets. */
+const TEAL = "#8ff5e6";
 
 function drawMarks(ctx: CanvasRenderingContext2D, scene: Scene): void {
   const { overlay } = scene;
@@ -148,6 +166,105 @@ function drawMarks(ctx: CanvasRenderingContext2D, scene: Scene): void {
     ctx.lineWidth = 2;
     ctx.stroke();
   }
+}
+
+/**
+ * An area as one outline: every hex edge whose neighbour across is not in
+ * the area, dashed orange over a light wash.
+ */
+function drawArea(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  const area = scene.overlay.area;
+  if (!area || area.length === 0) return;
+  const inside = new Set(area.map(hexIndex));
+  ctx.save();
+  for (const h of area) {
+    hexPath(ctx, h, 0.5);
+    ctx.fillStyle = "rgba(255, 150, 60, 0.16)";
+    ctx.fill();
+  }
+  ctx.beginPath();
+  for (const h of area) {
+    const c = hexToStage(h);
+    const pts = hexCorners(h, 1);
+    for (let i = 0; i < 6; i++) {
+      const a = pts[i] as { x: number; y: number };
+      const b = pts[(i + 1) % 6] as { x: number; y: number };
+      // The neighbour across this edge: the centre mirrored through it.
+      const across = stageToHex({
+        x: c.x + (a.x + b.x - 2 * c.x),
+        y: c.y + (a.y + b.y - 2 * c.y),
+      });
+      if (across !== null && inside.has(hexIndex(across))) continue;
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+    }
+  }
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "#1a1208";
+  ctx.lineWidth = 4.5;
+  ctx.stroke();
+  ctx.setLineDash([6, 4]);
+  ctx.strokeStyle = "#ffa04a";
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+  ctx.restore();
+}
+
+/** A round badge with a glyph (swap partners) above a unit's head. */
+function drawSwapBadges(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  const swaps = scene.overlay.swaps;
+  if (!swaps || swaps.length === 0) return;
+  for (const h of swaps) {
+    const f = feetPoint(h);
+    const x = f.x + 16;
+    const y = f.y - 54;
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(x, y, 8.5, 0, Math.PI * 2);
+    ctx.fillStyle = "#123a36";
+    ctx.fill();
+    ctx.strokeStyle = TEAL;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    // Two arrows: the swap glyph.
+    ctx.strokeStyle = TEAL;
+    ctx.lineWidth = 1.6;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.moveTo(x - 4.5, y - 2);
+    ctx.lineTo(x + 4.5, y - 2);
+    ctx.lineTo(x + 2, y - 4.5);
+    ctx.moveTo(x + 4.5, y + 2);
+    ctx.lineTo(x - 4.5, y + 2);
+    ctx.lineTo(x - 2, y + 4.5);
+    ctx.stroke();
+    ctx.restore();
+  }
+}
+
+/** Chosen-target order numbers, at the top of each hex. */
+function drawLabels(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  const labels = scene.overlay.labels;
+  if (!labels || labels.length === 0) return;
+  ctx.save();
+  ctx.font = "bold 11px Verdana, Geneva, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  for (const l of labels) {
+    const c = hexToStage(l.hex);
+    const x = c.x - 20;
+    const y = c.y - 4;
+    ctx.beginPath();
+    ctx.arc(x, y, 8, 0, Math.PI * 2);
+    ctx.fillStyle = "#ffd65c";
+    ctx.fill();
+    ctx.strokeStyle = "#1a1208";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillStyle = "#1a1208";
+    ctx.fillText(l.text, x, y + 0.5);
+  }
+  ctx.restore();
 }
 
 /** The attack arrow from the attack hex into the target. */
@@ -468,6 +585,8 @@ export function renderBattle(
   ctx.drawImage(input.background, 0, 0);
   drawGround(ctx, scene);
   drawMarks(ctx, scene);
+  drawArea(ctx, scene);
+  drawLabels(ctx, scene);
 
   const drawables: Drawable[] = [];
   for (const o of input.obstacles) {
@@ -490,6 +609,7 @@ export function renderBattle(
     if (u.visible) drawChip(ctx, u, u.id === input.activeId);
   }
   drawIntents(ctx, scene);
+  drawSwapBadges(ctx, scene);
   drawStrikeArrow(ctx, scene);
   drawEffects(ctx, scene);
 }

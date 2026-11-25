@@ -100,13 +100,78 @@ import {
 import type { BookEntry, CastPreview, ConditionOption } from "./magic.ts";
 import { renderBook, renderCastPanel } from "./spellbook.ts";
 import { registerSpells, lineThrough } from "../../core/magic/index.ts";
-import { act, conditionKind, hasAct } from "../../core/battle/index.ts";
+import {
+  BATTLE_HEX_COUNT,
+  ability as abilityDef,
+  act,
+  conditionKind,
+  findPath,
+  hasAct,
+  sameHex,
+} from "../../core/battle/index.ts";
+import type {
+  ActTarget,
+  AttackAction,
+  ConditionRef,
+  Hex,
+} from "../../core/battle/index.ts";
+import { actionBar, actionForKey } from "./actions.ts";
+import type { ActionIcon, BarAction, BarContext } from "./actions.ts";
+import { renderActPanel, renderActionBar, showActionTip } from "./actionbar.ts";
+import { iconElement } from "../icons.ts";
+import {
+  addTarget,
+  afterChoices,
+  areaHexes,
+  backStep,
+  choices,
+  choicesAt,
+  isComplete,
+  isFull,
+  modeAct,
+  modeAction,
+  modeName,
+  modePrompt,
+  pickFrom,
+  pickStack,
+  shotAreaHexes,
+  startMode,
+  stepKind,
+  walkAfterRange,
+  withAfter,
+  withHearten,
+} from "./targeting.ts";
+import type { ActMode, AfterChoice, Choice, ModeKind } from "./targeting.ts";
+import "./battle.css";
 
 function actName(id: string): string {
   return hasAct(id) ? act(id).name : id;
 }
-import type { ActTarget, ConditionRef, Hex } from "../../core/battle/index.ts";
-import "./battle.css";
+
+/** An act being aimed from the action bar (targeting.ts). */
+interface Aiming {
+  /** The bar action that started it (its icon and rule text). */
+  readonly bar: BarAction;
+  mode: ActMode;
+  choices: Choice[];
+  /** The walk-first hex of the completing target, once chosen. */
+  from: Hex | null;
+  /** The valid target under the pointer, with its exact rehearsal. */
+  hover: {
+    readonly key: string;
+    readonly choice: Choice;
+    readonly from: Hex | null;
+    readonly preview: CastPreview | null;
+  } | null;
+}
+
+/** Hit and Run: the attack is chosen, the step after it is being picked. */
+interface AfterStep {
+  readonly attack: AttackAction;
+  readonly choices: readonly AfterChoice[];
+  hover: AfterChoice | null;
+  preview: CastPreview;
+}
 
 /** A cast being aimed (RULES_V2 2.4): the page, targets, Echo and Fuel. */
 interface Casting {
@@ -194,15 +259,23 @@ class BattleScreen {
   private readonly activeCard = el("div", "bm-active");
   private readonly panel = el("div", "bm-preview");
   private readonly buttons = el("div", "bm-buttons");
-  private readonly waitBtn = el("button", "bm-btn", "Wait");
-  private readonly defendBtn = el("button", "bm-btn", "Defend");
   private readonly autoBtn = el("button", "bm-btn", "Auto");
   private readonly speedBtn = el("button", "bm-btn", "");
-  private readonly undoBtn = el("button", "bm-btn", "Undo");
-  private readonly spellBtn = el("button", "bm-btn bm-spells", "Spells");
+  private readonly actionBarEl = el("div", "bm-actionbar");
+  private readonly actTip = el("div", "bm-act-tip");
   private readonly book = el("div", "bm-book");
   private readonly castBox = el("div", "bm-cast");
   private casting: Casting | null = null;
+  /** The action bar as last computed, and what it was computed for. */
+  private bar: BarAction[] = [];
+  private barFor: { state: BattleState; ctx: string } | null = null;
+  private barHover: { key: string; anchor: HTMLElement } | null = null;
+  private barLook = "";
+  private aiming: Aiming | null = null;
+  private afterStep: AfterStep | null = null;
+  /** Heartened: spend it after this action (the player may keep it). */
+  private heartenSpend = true;
+  private heartenFor = "";
   /** Applied actions this battle, for take-back (RULES_V2 1.13). */
   private history: HistoryEntry[] = [];
   private readonly info = el("div", "bm-info");
@@ -268,36 +341,27 @@ class BattleScreen {
   private buildDom(): void {
     const { root } = this;
     this.stageWrap.append(this.canvas, this.tip);
-    this.buttons.append(
-      this.waitBtn,
-      this.defendBtn,
-      this.undoBtn,
-      this.spellBtn,
-      this.autoBtn,
-      this.speedBtn,
-    );
+    this.buttons.append(this.autoBtn, this.speedBtn);
     this.bottom.append(this.heroes, this.activeCard, this.panel, this.buttons);
     this.renderHeroes();
     this.info.hidden = true;
     this.book.hidden = true;
     this.castBox.hidden = true;
+    this.actTip.hidden = true;
     this.stageWrap.append(this.book, this.castBox);
-    root.append(this.top, this.stageWrap, this.bottom, this.info);
-    this.spellBtn.title =
-      "Spellbook (B): the hero casts one page or scroll a round, before this stack acts";
-    this.on(this.spellBtn, "click", () => this.toggleBook());
+    root.append(
+      this.top,
+      this.stageWrap,
+      this.actionBarEl,
+      this.bottom,
+      this.info,
+      this.actTip,
+    );
     this.container.append(root);
 
-    this.waitBtn.title = "Wait: act again after every other stack (W)";
-    this.defendBtn.title = "Defend: +30% Defense until the next turn (D)";
     this.autoBtn.title = "Auto-combat: the AI plays your side (A)";
-    this.undoBtn.title =
-      "Take back your last action this round (U); never across a round start";
-    this.on(this.undoBtn, "click", () => this.takeBack());
     this.speedBtn.title = "Animation speed (S); Space skips an animation";
 
-    this.on(this.waitBtn, "click", () => this.playerSimple("wait"));
-    this.on(this.defendBtn, "click", () => this.playerSimple("defend"));
     this.on(this.autoBtn, "click", () => this.toggleAuto());
     this.on(this.speedBtn, "click", () => this.cycleSpeed());
     this.on<PointerEvent>(this.canvas, "pointermove", (e) =>
@@ -450,6 +514,11 @@ class BattleScreen {
   private takeBack(): void {
     if (!this.pendingAction || this.animating) return;
     if (this.takeBackPoint() === null) return;
+    // Whatever was being aimed belongs to the board being taken back.
+    this.aiming = null;
+    this.afterStep = null;
+    this.casting = null;
+    this.castBox.hidden = true;
     this.pendingAction("undo");
   }
 
@@ -478,7 +547,15 @@ class BattleScreen {
   }
 
   private commit(action: BattleAction): void {
+    this.aiming = null;
+    this.afterStep = null;
+    this.castBox.hidden = true;
     if (this.pendingAction) this.pendingAction(action);
+  }
+
+  /** A player's action, with their Heartened choice. */
+  private commitPlayer(action: BattleAction): void {
+    this.commit(withHearten(action, this.heartenSpend));
   }
 
   private startFrames(): void {
@@ -530,12 +607,28 @@ class BattleScreen {
     this.pointer = this.toStage(e);
     this.updateHover();
     if (!this.pendingAction || this.animating) return;
+    if (this.aiming) {
+      this.aimClick();
+      return;
+    }
+    if (this.afterStep) {
+      this.afterClick();
+      return;
+    }
     if (this.casting) {
       this.castClick();
       return;
     }
     const it = this.intent;
-    if (it.kind === "move" || it.kind === "attack") this.commit(it.action);
+    if (it.kind === "attack" && it.action.type === "attack") {
+      const active = activeStack(this.state);
+      if (active && walkAfterRange(active) > 0) {
+        this.startAfter(it.action);
+        return;
+      }
+    }
+    if (it.kind === "move" || it.kind === "attack" || it.kind === "swap")
+      this.commitPlayer(it.action);
   }
 
   private onContextMenu(e: MouseEvent): void {
@@ -552,12 +645,26 @@ class BattleScreen {
   }
 
   private onKey(e: KeyboardEvent): void {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.key === "Escape") {
-      if (this.casting) this.cancelCast();
+      if (this.aiming) this.cancelAim();
+      else if (this.afterStep) this.cancelAfter();
+      else if (this.casting) this.cancelCast();
       else if (!this.book.hidden) this.closeBook();
       else this.closeInfo();
+    } else if (e.key === "Backspace") {
+      e.preventDefault();
+      if (this.aiming) this.aimBack();
+      else if (this.afterStep) this.cancelAfter();
+      else if (this.casting) this.castBack();
+    } else if (e.key === "Enter") {
+      if (this.aiming) this.aimUse();
+      else if (this.afterStep) this.commitPlayer(this.afterStep.attack);
+      else if (this.casting) this.castNow();
+    } else if (/^[1-9cChH]$/.test(e.key)) {
+      const a = actionForKey(this.bar, e.key);
+      if (a) this.onBarPress(a);
     } else if (e.key === "b" || e.key === "B") this.toggleBook();
-    else if (e.key === "Enter" && this.casting) this.castNow();
     else if (e.key === " ") {
       e.preventDefault();
       this.animator.skip();
@@ -573,7 +680,7 @@ class BattleScreen {
     const id = this.state.activeStackId;
     if (id === null) return;
     if (type === "wait" && !this.legal.canWait) return;
-    this.commit({ type, stackId: id });
+    this.commitPlayer({ type, stackId: id });
   }
 
   private toggleAuto(): void {
@@ -595,8 +702,10 @@ class BattleScreen {
 
   private updateHover(): void {
     const at = this.pointer ? pointAtField(this.state, this.pointer) : null;
+    const modal =
+      this.casting !== null || this.aiming !== null || this.afterStep !== null;
     this.intent =
-      at === null || this.animating || this.casting !== null
+      at === null || this.animating || modal
         ? { kind: "none" }
         : hoverIntent(
             this.state,
@@ -615,6 +724,14 @@ class BattleScreen {
             ? "not-allowed"
             : "default";
     if (this.casting) this.castHover(at?.hex ?? null);
+    if (this.aiming) this.aimHover(at?.hex ?? null, at?.pointer ?? null);
+    if (this.afterStep) this.afterHover(at?.hex ?? null);
+    if (this.aiming) {
+      const v = this.aiming.hover !== null;
+      this.canvas.style.cursor = v ? "crosshair" : "default";
+    } else if (this.afterStep) {
+      this.canvas.style.cursor = this.afterStep.hover ? "pointer" : "default";
+    } else if (it.kind === "swap") this.canvas.style.cursor = "pointer";
     this.updateOverlay();
     this.renderPanel();
     this.placeTip();
@@ -634,10 +751,16 @@ class BattleScreen {
       from: BattleStack["hex"];
       target: BattleStack["hex"];
     } | null = null;
+    let area: Hex[] = [];
+    let labels: { hex: Hex; text: string }[] = [];
     switch (it.kind) {
       case "move":
         for (const h of it.path) marks.set(hexIndex(h), "path");
         marks.set(hexIndex(it.action.to), "move-target");
+        break;
+      case "swap":
+        marks.set(hexIndex(it.partner.hex), "swap");
+        if (active) marks.set(hexIndex(active.hex), "swap");
         break;
       case "attack": {
         const target = getStack(this.state, it.action.targetId);
@@ -645,6 +768,13 @@ class BattleScreen {
         if (it.action.type === "attack") {
           marks.set(hexIndex(it.action.from), "attack-from");
           strike = { from: it.action.from, target: target.hex };
+        } else if (active) {
+          area = shotAreaHexes(this.state, active, target.hex) ?? [];
+        }
+        if (it.action.swapWith !== undefined) {
+          const p = getStack(this.state, it.action.swapWith);
+          marks.set(hexIndex(p.hex), "swap");
+          if (active) marks.set(hexIndex(active.hex), "swap");
         }
         marks.set(hexIndex(target.hex), "target");
         break;
@@ -659,6 +789,17 @@ class BattleScreen {
         break;
     }
     if (this.casting) this.castMarks(marks);
+    if (this.aiming) {
+      const r = this.aimMarks(marks);
+      area = r.area;
+      labels = r.labels;
+    }
+    if (this.afterStep) strike = this.afterMarks(marks);
+    // Swap badges on linked partners whenever the swap is legal.
+    const swaps =
+      playerTurn && !this.aiming && !this.afterStep && !this.casting
+        ? [...this.legal.swaps.keys()].map((id) => getStack(this.state, id).hex)
+        : [];
     this.scene.overlay =
       active === null && marks.size === 0
         ? EMPTY_OVERLAY
@@ -666,12 +807,26 @@ class BattleScreen {
             marks,
             active: !this.animating && active ? active.hex : null,
             strike,
+            area,
+            swaps,
+            labels,
           };
   }
 
   /** The floating damage tooltip above the hovered target. */
   private placeTip(): void {
     const it = this.intent;
+    const modeTip = this.modeTip();
+    if (modeTip !== null) {
+      this.tip.replaceChildren(...modeTip.lines);
+      this.tip.classList.remove("bm-below");
+      this.tip.hidden = false;
+      const c = hexToStage(modeTip.hex);
+      const p = this.toWrap({ x: c.x, y: c.y - 62 });
+      this.tip.style.left = `${Math.round(p.x)}px`;
+      this.tip.style.top = `${Math.round(p.y)}px`;
+      return;
+    }
     if (it.kind !== "attack") {
       this.placeInfoTip();
       return;
@@ -717,6 +872,76 @@ class BattleScreen {
     this.tip.style.top = `${Math.round(p.y)}px`;
   }
 
+  /** The tooltip of an aimed act or a Hit and Run step, at the hovered hex. */
+  private modeTip(): { hex: Hex; lines: HTMLElement[] } | null {
+    if (this.animating) return null;
+    const it = this.intent;
+    if (it.kind === "swap") {
+      const a = getStack(this.state, it.action.stackId);
+      return {
+        hex: it.partner.hex,
+        lines: [
+          el(
+            "div",
+            "bm-tip-act",
+            `⇄ Swap: ${creatureName(a.creature, a.count)} ↔ ${creatureName(it.partner.creature, it.partner.count)}`,
+          ),
+          el("div", "bm-tip-cond", "In place of the walk; ends the turn"),
+        ],
+      };
+    }
+    const a = this.aiming;
+    if (a?.hover) {
+      const p = a.hover.preview;
+      const lines: HTMLElement[] = [];
+      if (stepKind(a.mode, a.mode.targets.length) === "condition") {
+        lines.push(el("div", "bm-tip-act", "Click, then choose one:"));
+        for (const c of choicesAt(a.choices, a.hover.choice.hex)) {
+          const t = c.target as ConditionRef;
+          const cd = getStack(this.state, t.stack).conditions.find(
+            (x) => x.uid === t.condition,
+          );
+          if (cd)
+            lines.push(
+              el(
+                "div",
+                "bm-tip-cond",
+                `${conditionKind(cd.kind).name}${cd.clock === null ? "" : `, ${cd.clock} round${cd.clock === 1 ? "" : "s"} left`}`,
+              ),
+            );
+        }
+      } else if (p === null) {
+        lines.push(el("div", "bm-tip-cond", "Then choose the next target"));
+      } else if (!p.legal) {
+        lines.push(el("div", "bm-tip-ret", `Cannot: ${p.message ?? ""}`));
+      } else if (p.summary.length === 0) {
+        const rest = p.lines.slice(1, 4);
+        for (const s of rest) lines.push(el("div", "bm-tip-act", s));
+        if (rest.length === 0)
+          lines.push(el("div", "bm-tip-cond", "No visible change"));
+      } else {
+        for (const s of p.summary.slice(0, 4))
+          lines.push(el("div", "bm-tip-act", s));
+      }
+      return { hex: a.hover.choice.hex, lines };
+    }
+    const s = this.afterStep;
+    if (s?.hover) {
+      const n = s.hover.path.length;
+      return {
+        hex: s.hover.hex,
+        lines: [
+          el(
+            "div",
+            "bm-tip-none",
+            `Then step here: ${n} hex${n === 1 ? "" : "es"}`,
+          ),
+        ],
+      };
+    }
+    return null;
+  }
+
   /** Hover tooltip: a stack's conditions, or the ground under the pointer. */
   private placeInfoTip(): void {
     const at = this.pointer ? pointAtField(this.state, this.pointer) : null;
@@ -757,26 +982,488 @@ class BattleScreen {
   }
 
   private refreshButtons(): void {
-    const playerTurn =
-      this.pendingAction !== null && this.isPlayerTurn() && !this.animating;
-    this.waitBtn.disabled = !playerTurn || !this.legal.canWait;
-    this.defendBtn.disabled = !playerTurn;
-    this.undoBtn.disabled = !playerTurn || this.takeBackPoint() === null;
-    const side = heroSideNow(this.state, this.playerSides);
-    const magic = side ? this.state.sides[side].magic : undefined;
-    const hasBook =
-      (side !== null && heroBook(this.state, side).length > 0) ||
-      creatureBook(this.state).length > 0;
-    this.spellBtn.disabled = !playerTurn || !hasBook;
-    this.spellBtn.textContent = magic ? `Spells · ${magic.mana}` : "Spells";
-    this.spellBtn.classList.toggle(
-      "bm-on",
-      !this.book.hidden || this.casting !== null,
-    );
+    this.refreshBar();
     this.autoBtn.disabled = this.state.winner !== null;
     this.autoBtn.textContent = this.auto ? "Auto: on" : "Auto";
     this.autoBtn.classList.toggle("bm-on", this.auto);
     this.speedBtn.textContent = speedLabel(this.animator.speed);
+  }
+
+  // ---------------------------------------------------------- action bar
+
+  /** The Heartened switch belongs to one turn: reset it for a new one. */
+  private syncHearten(): void {
+    const a = activeStack(this.state);
+    const k = a ? `${this.state.round}:${a.id}:${a.extraTurnRound}` : "";
+    if (k !== this.heartenFor) {
+      this.heartenFor = k;
+      this.heartenSpend = true;
+    }
+  }
+
+  private barContext(): BarContext {
+    const playerTurn =
+      this.pendingAction !== null && this.isPlayerTurn() && !this.animating;
+    const a = activeStack(this.state);
+    const notTurnReason =
+      this.state.winner !== null
+        ? "The battle is over"
+        : this.animating
+          ? "Wait for the animation"
+          : this.auto
+            ? "Auto-combat is on"
+            : a && !this.playerSides.has(a.side)
+              ? "The enemy's turn"
+              : "Not your turn yet";
+    const side = a?.side ?? "attacker";
+    const heroName = this.setup[side]?.hero?.name;
+    return {
+      playerTurn,
+      notTurnReason,
+      canUndo: this.takeBackPoint() !== null,
+      heartenSpend: this.heartenSpend,
+      ...(heroName ? { heroName } : {}),
+    };
+  }
+
+  private refreshBar(): void {
+    this.syncHearten();
+    const ctx = this.barContext();
+    const key = JSON.stringify(ctx);
+    if (
+      this.barFor === null ||
+      this.barFor.state !== this.state ||
+      this.barFor.ctx !== key
+    ) {
+      this.bar = actionBar(this.state, ctx);
+      this.barFor = { state: this.state, ctx: key };
+    }
+    const on = new Set<string>();
+    if (this.aiming) on.add(this.aiming.bar.key);
+    if (this.afterStep) on.add("after");
+    if (
+      !this.book.hidden ||
+      (this.casting && this.casting.entry.source !== "creature")
+    )
+      on.add("spells");
+    if (this.casting?.entry.source === "creature")
+      on.add(`page:${this.casting.entry.id}`);
+    // Rebuild the buttons only when something on them changed.
+    const look = JSON.stringify([this.bar, [...on]]);
+    if (look === this.barLook) return;
+    this.barLook = look;
+    renderActionBar(this.actionBarEl, this.bar, on, {
+      onPress: (a) => this.onBarPress(a),
+      onHover: (a, anchor) => {
+        this.barHover = a && anchor ? { key: a.key, anchor } : null;
+        this.placeBarTip();
+      },
+    });
+    // The buttons were rebuilt: re-anchor an open tooltip.
+    if (this.barHover) {
+      const wrap = this.actionBarEl.querySelector(
+        `[data-key="${CSS.escape(this.barHover.key)}"]`,
+      )?.parentElement;
+      this.barHover = wrap ? { key: this.barHover.key, anchor: wrap } : null;
+    }
+    this.placeBarTip();
+  }
+
+  private placeBarTip(): void {
+    const h = this.barHover;
+    const a = h ? this.bar.find((x) => x.key === h.key) : undefined;
+    if (!h || !a) {
+      this.actTip.hidden = true;
+      return;
+    }
+    showActionTip(this.actTip, a, h.anchor, this.root);
+  }
+
+  private onBarPress(a: BarAction): void {
+    if (a.state !== "ready") return;
+    if (!this.pendingAction || this.animating || !this.isPlayerTurn()) return;
+    switch (a.key) {
+      case "spells":
+        this.cancelAim();
+        this.cancelAfter();
+        this.toggleBook();
+        return;
+      case "wait":
+      case "defend":
+        this.playerSimple(a.key);
+        return;
+      case "undo":
+        this.takeBack();
+        return;
+      case "hearten":
+        this.heartenSpend = !this.heartenSpend;
+        this.refreshButtons();
+        return;
+    }
+    if (a.page !== undefined) {
+      const entry = creatureBook(this.state).find((e) => e.id === a.page);
+      if (!entry || entry.status !== "ready") return;
+      this.cancelAim();
+      this.cancelAfter();
+      this.closeBook();
+      if (this.casting?.entry.id === entry.id) {
+        this.cancelCast();
+        return;
+      }
+      this.startCast(entry);
+      return;
+    }
+    if (a.mode) {
+      if (this.aiming?.bar.key === a.key) {
+        this.cancelAim();
+        return;
+      }
+      this.startAim(a, a.mode.kind, a.mode.id);
+    }
+  }
+
+  // ------------------------------------------------------------ aiming
+
+  private startAim(bar: BarAction, kind: ModeKind, id: string): void {
+    this.closeBook();
+    this.casting = null;
+    this.afterStep = null;
+    const mode = startMode(this.state, kind, id);
+    this.aiming = {
+      bar,
+      mode,
+      choices: choices(this.state, mode),
+      from: null,
+      hover: null,
+    };
+    this.castBox.hidden = false;
+    this.updateHover();
+    this.refreshAim();
+  }
+
+  private cancelAim(): void {
+    if (!this.aiming) return;
+    this.aiming = null;
+    this.castBox.hidden = true;
+    this.updateHover();
+    this.refreshButtons();
+  }
+
+  private aimSet(mode: ActMode): void {
+    const a = this.aiming;
+    if (!a) return;
+    a.mode = mode;
+    a.choices = choices(this.state, mode);
+    a.hover = null;
+    this.updateHover();
+    this.refreshAim();
+  }
+
+  private aimBack(): void {
+    const a = this.aiming;
+    if (!a) return;
+    const m = backStep(a.mode);
+    if (m === null) this.cancelAim();
+    else this.aimSet(m);
+  }
+
+  private aimHover(
+    h: Hex | null,
+    pointer: { x: number; y: number } | null,
+  ): void {
+    const a = this.aiming;
+    if (!a) return;
+    const choice = h === null ? undefined : choicesAt(a.choices, h)[0];
+    if (!choice) {
+      if (a.hover !== null) {
+        a.hover = null;
+        this.refreshAim();
+      }
+      return;
+    }
+    const targets = [...a.mode.targets, choice.target];
+    const kind = stepKind(a.mode, a.mode.targets.length);
+    const complete =
+      kind !== "condition" && isComplete(this.state, a.mode, targets);
+    const from = complete ? pickFrom(choice.froms, pointer) : null;
+    const key = JSON.stringify([choice.target, from]);
+    if (a.hover?.key === key) return;
+    const preview = complete
+      ? castPreview(this.state, modeAction(this.state, a.mode, targets, from))
+      : null;
+    a.hover = { key, choice, from, preview };
+    this.refreshAim();
+  }
+
+  private aimClick(): void {
+    const a = this.aiming;
+    if (!a?.hover) return;
+    const { choice, from } = a.hover;
+    if (stepKind(a.mode, a.mode.targets.length) === "condition") {
+      if ("stack" in choice.target)
+        this.aimSet(pickStack(a.mode, choice.target.stack));
+      return;
+    }
+    this.aimAdd(choice.target, from);
+  }
+
+  private aimAdd(t: ActTarget, from: Hex | null): void {
+    const a = this.aiming;
+    if (!a) return;
+    const mode = addTarget(a.mode, t);
+    if (isComplete(this.state, mode)) a.from = from;
+    if (isFull(this.state, mode)) {
+      const action = modeAction(this.state, mode, mode.targets, a.from);
+      if (castPreview(this.state, action).legal) {
+        this.commitPlayer(action);
+        return;
+      }
+    }
+    this.aimSet(mode);
+  }
+
+  private aimUse(): void {
+    const a = this.aiming;
+    if (!a || !this.pendingAction || this.animating) return;
+    if (!isComplete(this.state, a.mode)) return;
+    const action = modeAction(this.state, a.mode, a.mode.targets, a.from);
+    if (!castPreview(this.state, action).legal) return;
+    this.commitPlayer(action);
+  }
+
+  private aimMarks(marks: Map<number, HexMark>): {
+    area: Hex[];
+    labels: { hex: Hex; text: string }[];
+  } {
+    const a = this.aiming;
+    if (!a) return { area: [], labels: [] };
+    const s = this.state;
+    const me = getStack(s, a.mode.actorId);
+    marks.clear();
+    // When nearly every hex is valid (a shot at any hex), shading them all
+    // is noise: only the hovered hex and its area are drawn.
+    if (a.choices.length < BATTLE_HEX_COUNT * 0.6)
+      for (const c of a.choices) marks.set(hexIndex(c.hex), "act-valid");
+    const labels: { hex: Hex; text: string }[] = [];
+    a.mode.targets.forEach((t, i) => {
+      const h =
+        "hex" in t ? t.hex : "stack" in t ? getStack(s, t.stack).hex : null;
+      if (h === null) return;
+      marks.set(hexIndex(h), "chosen");
+      labels.push({ hex: h, text: String(i + 1) });
+    });
+    if (a.mode.pickFor !== null)
+      marks.set(hexIndex(getStack(s, a.mode.pickFor).hex), "chosen");
+    let targets: readonly ActTarget[] = a.mode.targets;
+    const hv = a.hover;
+    if (hv) {
+      marks.set(hexIndex(hv.choice.hex), "act-hover");
+      targets = [...targets, hv.choice.target];
+      if (hv.from && !sameHex(hv.from, me.hex)) {
+        for (const p of findPath(s, me.id, hv.from) ?? [])
+          marks.set(hexIndex(p), "path");
+        marks.set(hexIndex(hv.from), "attack-from");
+      }
+    }
+    return { area: areaHexes(s, a.mode, targets), labels };
+  }
+
+  private refreshAim(): void {
+    const a = this.aiming;
+    if (!a) return;
+    const s = this.state;
+    const mode = a.mode;
+    const n = mode.targets.length;
+    const kind = stepKind(mode, n);
+    const complete = isComplete(s, mode);
+    const name = (id: StackId): string => {
+      const st = getStack(s, id);
+      return creatureName(st.creature, Math.max(1, st.count));
+    };
+    const chosen = mode.targets.map((t, i) => {
+      const what =
+        "condition" in t
+          ? `${conditionKind(getStack(s, t.stack).conditions.find((c) => c.uid === t.condition)?.kind ?? "").name} on ${name(t.stack)}`
+          : "stack" in t
+            ? name(t.stack)
+            : "hex" in t
+              ? `hex ${t.hex.col},${t.hex.row}`
+              : t.choice;
+      return `${i + 1} ${what}`;
+    });
+    let conditions: ConditionOption[] | null = null;
+    if (kind === "condition" && mode.pickFor !== null) {
+      conditions = a.choices
+        .filter((c) => "condition" in c.target)
+        .map((c) => {
+          const t = c.target as ConditionRef;
+          const cd = getStack(s, t.stack).conditions.find(
+            (x) => x.uid === t.condition,
+          );
+          const pv = castPreview(
+            s,
+            modeAction(s, mode, [...mode.targets, t], null),
+          );
+          return {
+            ref: t,
+            label: cd
+              ? `${conditionKind(cd.kind).name}${cd.size ? ` ${cd.size}` : ""}${cd.clock === null ? "" : ` (${cd.clock})`}`
+              : "?",
+            effect: !pv.legal
+              ? `Cannot: ${pv.message ?? ""}`
+              : (pv.summary.length > 0 ? pv.summary : pv.lines).join("; "),
+          };
+        });
+    }
+    const def = modeAct(mode);
+    const preview = complete
+      ? castPreview(s, modeAction(s, mode, mode.targets, a.from))
+      : null;
+    const who = creatureName(
+      getStack(s, mode.actorId).creature,
+      getStack(s, mode.actorId).count,
+    );
+    const kindLine =
+      mode.kind === "command"
+        ? "· the hero's Command"
+        : mode.kind === "item"
+          ? "· item act"
+          : mode.kind === "shootHex"
+            ? `· ${who}' shot`
+            : `· ${who}' ability${abilityDef(mode.id).everyTurn ? ", every turn" : ", once per battle"}`;
+    const usePreview = a.hover?.preview ?? preview;
+    renderActPanel(
+      this.castBox,
+      {
+        icon: a.bar.icon,
+        name: modeName(mode),
+        kind: kindLine,
+        rule: def?.text ?? a.bar.rule,
+        prompt: modePrompt(s, mode),
+        conditions,
+        preview: usePreview,
+        hovered: (a.hover?.preview ?? null) !== null,
+        chosen,
+        // An act with no targets (Tinderbox) is used from the panel.
+        canUse:
+          complete &&
+          (preview?.legal ?? false) &&
+          (!isFull(s, mode) || mode.targets.length === 0),
+        useLabel: "Use ⏎",
+        canBack: true,
+      },
+      {
+        onCondition: (o) => this.aimAdd(o.ref, null),
+        onUse: () => this.aimUse(),
+        onBack: () => this.aimBack(),
+        onCancel: () => this.cancelAim(),
+      },
+    );
+    this.updateOverlay();
+    this.refreshButtons();
+  }
+
+  // ------------------------------------------------------- Hit and Run
+
+  private startAfter(attack: AttackAction): void {
+    const list = afterChoices(this.state, attack);
+    if (list.length === 0) {
+      this.commitPlayer(attack);
+      return;
+    }
+    this.afterStep = {
+      attack,
+      choices: list,
+      hover: null,
+      preview: castPreview(this.state, attack),
+    };
+    this.castBox.hidden = false;
+    this.updateHover();
+    this.refreshAfter();
+  }
+
+  private cancelAfter(): void {
+    if (!this.afterStep) return;
+    this.afterStep = null;
+    this.castBox.hidden = true;
+    this.updateHover();
+    this.refreshButtons();
+  }
+
+  private afterHover(h: Hex | null): void {
+    const s = this.afterStep;
+    if (!s) return;
+    const c = h === null ? undefined : s.choices.find((x) => sameHex(x.hex, h));
+    const next = c ?? null;
+    if (next === s.hover) return;
+    s.hover = next;
+    s.preview = castPreview(
+      this.state,
+      withAfter(s.attack, next === null ? null : next.hex),
+    );
+    this.refreshAfter();
+  }
+
+  private afterClick(): void {
+    const s = this.afterStep;
+    if (!s?.hover) return;
+    this.commitPlayer(withAfter(s.attack, s.hover.hex));
+  }
+
+  private afterMarks(marks: Map<number, HexMark>): {
+    from: Hex;
+    target: Hex;
+  } | null {
+    const s = this.afterStep;
+    if (!s || s.attack.type !== "attack") return null;
+    marks.clear();
+    for (const c of s.choices) marks.set(hexIndex(c.hex), "after");
+    const me = getStack(this.state, s.attack.stackId);
+    for (const p of findPath(this.state, me.id, s.attack.from) ?? [])
+      marks.set(hexIndex(p), "path");
+    marks.set(hexIndex(s.attack.from), "attack-from");
+    const target = getStack(this.state, s.attack.targetId);
+    marks.set(hexIndex(target.hex), "target");
+    if (s.hover) {
+      for (const p of s.hover.path) marks.set(hexIndex(p), "path");
+      marks.set(hexIndex(s.hover.hex), "move-target");
+    }
+    return { from: s.attack.from, target: target.hex };
+  }
+
+  private refreshAfter(): void {
+    const s = this.afterStep;
+    if (!s) return;
+    const me = getStack(this.state, s.attack.stackId);
+    const id = me.creature.abilities.find(
+      (x) => (abilityDef(x).walkAfterAttack ?? 0) > 0,
+    );
+    const def = id ? abilityDef(id) : null;
+    const icon: ActionIcon = { glyph: "↺" };
+    renderActPanel(
+      this.castBox,
+      {
+        icon,
+        name: def?.name ?? "Hit and Run",
+        kind: `· ${creatureName(me.creature, me.count)}, after the attack`,
+        rule: def?.description ?? "",
+        prompt: `Attack, then step to: click a green hex (up to ${walkAfterRange(me)} hexes from where they strike), or Stay (Enter).`,
+        conditions: null,
+        preview: s.preview,
+        hovered: s.hover !== null,
+        chosen: [],
+        canUse: true,
+        useLabel: "Stay ⏎",
+        canBack: true,
+      },
+      {
+        onCondition: () => {},
+        onUse: () => this.commitPlayer(s.attack),
+        onBack: () => this.cancelAfter(),
+        onCancel: () => this.cancelAfter(),
+      },
+    );
+    this.updateOverlay();
   }
 
   /** The portraits of the heroes leading the two sides (attacker first). */
@@ -895,12 +1582,31 @@ class BattleScreen {
           `${s.attacker} ${conjugate(s.verb.toLowerCase(), s.attackerCount)} ${s.target}`,
         ),
       );
-      if (s.hexesMoved > 0) {
+      if (it.action.swapWith !== undefined) {
+        const partner = getStack(this.state, it.action.swapWith);
+        head.append(
+          el(
+            "span",
+            "bm-swap-note",
+            `  ⇄ after swapping places with the ${creatureName(partner.creature, partner.count)}`,
+          ),
+        );
+      } else if (s.hexesMoved > 0) {
         head.append(
           el(
             "span",
             "bm-dim",
             `  after moving ${s.hexesMoved} hex${s.hexesMoved === 1 ? "" : "es"}`,
+          ),
+        );
+      }
+      const active = activeStack(this.state);
+      if (active && it.action.type === "attack" && walkAfterRange(active) > 0) {
+        head.append(
+          el(
+            "span",
+            "bm-swap-note",
+            `  ↺ click, then choose where to step (up to ${walkAfterRange(active)} hexes)`,
           ),
         );
       }
@@ -937,6 +1643,44 @@ class BattleScreen {
       return;
     }
     const name = creatureName(a.creature, a.count);
+    if (this.aiming) {
+      const m = this.aiming.mode;
+      p.append(
+        el("div", "bm-pv-head", `${modeName(m)}: aiming`),
+        el("div", "bm-dim", modePrompt(this.state, m)),
+        el(
+          "div",
+          "bm-dim",
+          "Teal hexes are valid targets; point at one for its exact effect. Backspace goes back, Esc cancels.",
+        ),
+      );
+      return;
+    }
+    if (this.afterStep) {
+      p.append(
+        el("div", "bm-pv-head", "Hit and Run: attack, then step to"),
+        el(
+          "div",
+          "bm-dim",
+          "Click a green hex to step there after the attack and its retaliation, or Enter to stay. Esc cancels the attack.",
+        ),
+      );
+      return;
+    }
+    if (it.kind === "swap") {
+      const pn = creatureName(it.partner.creature, it.partner.count);
+      p.append(
+        el("div", "bm-pv-head", `⇄ Swap places: ${name} and ${pn}`),
+        el(
+          "div",
+          "bm-pv-deal bm-swap-line",
+          "In place of the walk (Sworn): the two stacks trade hexes. Ends the turn.",
+        ),
+      );
+      for (const c of it.partner.conditions)
+        p.append(el("div", "bm-pv-cond", conditionTooltip(this.state, c)));
+      return;
+    }
     if (it.kind === "move") {
       p.append(
         el("div", "bm-pv-head", `Move ${name}`),
@@ -973,7 +1717,9 @@ class BattleScreen {
         el(
           "div",
           "bm-dim",
-          "Point at an enemy for the exact damage, kills and retaliation. Click a shaded hex to move. Right-click any stack for details.",
+          this.legal.swaps.size > 0
+            ? "Point at an enemy for the exact damage. Click a shaded hex to move, or a ⇄ partner to swap places. Right-click any stack for details."
+            : "Point at an enemy for the exact damage, kills and retaliation. Click a shaded hex to move. Right-click any stack for details; keys 1–9 use the bar.",
         ),
       );
     } else {
@@ -1039,6 +1785,8 @@ class BattleScreen {
     }
     if (!this.pendingAction || this.animating || !this.isPlayerTurn()) return;
     this.cancelCast();
+    this.cancelAim();
+    this.cancelAfter();
     const side = heroSideNow(this.state, this.playerSides);
     const pages = side ? heroBook(this.state, side) : [];
     const magic = side ? this.state.sides[side].magic : undefined;
@@ -1058,7 +1806,7 @@ class BattleScreen {
           : "No book.",
         pages: pages.filter((p) => p.source === "page"),
         scrolls: pages.filter((p) => p.source === "scroll"),
-        items: pages.filter((p) => p.source === "item"),
+        // Item acts are used from the action bar (one flow), not the book.
         creature:
           active && own.length > 0
             ? { name: creatureName(active.creature, active.count), pages: own }
@@ -1078,6 +1826,8 @@ class BattleScreen {
 
   private startCast(entry: BookEntry): void {
     this.closeBook();
+    this.aiming = null;
+    this.afterStep = null;
     this.casting = {
       entry,
       targets: [],
@@ -1097,6 +1847,17 @@ class BattleScreen {
     this.refreshButtons();
   }
 
+  /** Back one step of a cast: a condition stack, else the last target. */
+  private castBack(): void {
+    const c = this.casting;
+    if (!c) return;
+    if (c.pickFor !== null) c.pickFor = null;
+    else c.targets.pop();
+    c.echo = null;
+    c.fuel = null;
+    this.refreshCast();
+  }
+
   private castNow(): void {
     const c = this.casting;
     if (!c || !this.pendingAction || this.animating) return;
@@ -1108,7 +1869,7 @@ class BattleScreen {
     if (!castPreview(this.state, action).legal) return;
     this.casting = null;
     this.castBox.hidden = true;
-    this.commit(action);
+    this.commitPlayer(action);
   }
 
   /** The target a click or hover on `h` would add, or null. */
@@ -1274,13 +2035,7 @@ class BattleScreen {
           this.refreshCast();
         },
         onCast: () => this.castNow(),
-        onBack: () => {
-          c.targets.pop();
-          c.pickFor = null;
-          c.echo = null;
-          c.fuel = null;
-          this.refreshCast();
-        },
+        onBack: () => this.castBack(),
         onCancel: () => this.cancelCast(),
       },
     );
@@ -1331,14 +2086,58 @@ class BattleScreen {
       table.append(tr);
     }
     box.append(table);
-    if (info.ability) {
+    const section = (title: string): void => {
+      box.append(el("div", "bm-info-section", title));
+    };
+    const TAG = {
+      ability: null,
+      drill: "Drill",
+      birthright: "Birthright",
+      other: "Granted",
+    } as const;
+    if (info.abilities.length > 0) section("Abilities");
+    for (const a of info.abilities) {
       const ab = el("div", "bm-info-ability");
-      ab.append(
-        el("b", "", `${info.ability.name}. `),
-        document.createTextNode(info.ability.text),
-      );
+      const head = el("div", "bm-info-ab-head");
+      head.append(el("b", "", a.name));
+      const tag = TAG[a.source];
+      if (tag) head.append(el("span", `bm-tag bm-tag-${a.source}`, tag));
+      if (a.activated)
+        head.append(el("span", "bm-tag bm-tag-act", a.activated));
+      ab.append(head, el("div", "bm-info-ab-text", a.text));
       box.append(ab);
     }
+    if (
+      info.birthright &&
+      !info.abilities.some((a) => a.source === "birthright")
+    ) {
+      const ab = el("div", "bm-info-ability");
+      const head = el("div", "bm-info-ab-head");
+      head.append(
+        el("b", "", info.birthright.name),
+        el("span", "bm-tag bm-tag-birthright", "Birthright"),
+      );
+      ab.append(head, el("div", "bm-info-ab-text", info.birthright.text));
+      box.append(ab);
+    }
+    if (info.drills.length > 0)
+      box.append(
+        el("div", "bm-dim", `Drilled at the ${info.drills.join(", the ")}.`),
+      );
+    if (info.pages.length > 0) {
+      section(`Pages (Power ${info.castPower ?? 0}, once each per battle)`);
+      for (const pg of info.pages) {
+        const row = el("div", `bm-info-page${pg.spent ? " bm-spent" : ""}`);
+        row.append(
+          iconElement("spell", pg.id, { className: "bm-info-page-icon" }),
+          el("b", "", pg.name),
+          el("span", "", ` ${pg.text}`),
+        );
+        if (pg.spent) row.append(el("span", "bm-tag", "spent"));
+        box.append(row);
+      }
+    }
+    if (info.statuses.length > 0) section("Conditions and state");
     for (const st of info.statuses) box.append(el("div", "bm-info-status", st));
     box.append(el("div", "bm-dim bm-info-close", "Click or Esc to close"));
     box.hidden = false;
