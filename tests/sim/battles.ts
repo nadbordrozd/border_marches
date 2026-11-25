@@ -63,8 +63,8 @@ export type Policy = (state: BattleState) => BattleAction;
 export const crashes = new Map<string, number>();
 
 /**
- * v1 can throw (previewAttack on a shot whose strike never lands, e.g. a
- * Bomb's): the runner counts it and the stack Defends instead.
+ * A policy that throws is counted and the stack Defends instead (a guard:
+ * previewAttack no longer throws on an attack whose strike never lands).
  */
 function guarded(spec: string, p: Policy): Policy {
   return (s) => {

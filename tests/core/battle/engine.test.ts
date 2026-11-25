@@ -300,7 +300,7 @@ describe("Charge", () => {
     );
     const p = previewAttack(s, attack("a0", "d0", at(7, 5)));
     expect(p.hexesMoved).toBe(moved);
-    expect(p.strike.breakdown.abilityMultipliers).toEqual(
+    expect(p.strike!.breakdown.abilityMultipliers).toEqual(
       percent === null ? [] : [{ source: "charge", label: "Charge", percent }],
     );
   });
@@ -329,10 +329,10 @@ describe("Venom", () => {
     ]);
     // A second hit in round 2 refreshes the clock and still gives -3 once.
     const p = previewAttack(s, shoot("a0", "d0"));
-    expect(p.strike.breakdown.defenseModifiers).toEqual([
+    expect(p.strike!.breakdown.defenseModifiers).toEqual([
       { source: "venomed", label: "Venomed", amount: -3 },
     ]);
-    expect(p.strike.breakdown.defense).toBe(0); // 2 - 3 floors at 0
+    expect(p.strike!.breakdown.defense).toBe(0); // 2 - 3 floors at 0
     s = play(s, shoot("a0", "d0")).state;
     expect(conditionsOf(s, "d0")).toEqual([
       { kind: "venomed", clock: 2, size: 3 },
@@ -386,13 +386,13 @@ describe("adjacency abilities", () => {
   it.each([0, 1, 2, 3, 4, 5])("Mob with %i helpers", (n) => {
     const s = crowd(dummy({ speed: 9, abilities: ["mob"] }), n);
     const p = previewAttack(s, attack("a0", "d0", at(7, 5)));
-    expect(p.strike.breakdown.attack).toBe(5 + n);
+    expect(p.strike!.breakdown.attack).toBe(5 + n);
   });
 
   it.each([0, 1, 2, 3, 4, 5])("Pack Hunter with %i helpers", (n) => {
     const s = crowd(RAPTOR, n);
     const p = previewAttack(s, attack("a0", "d0", at(7, 5)));
-    expect(p.strike.breakdown.abilityMultipliers).toEqual(
+    expect(p.strike!.breakdown.abilityMultipliers).toEqual(
       n === 0
         ? []
         : [
@@ -417,14 +417,14 @@ describe("adjacency abilities", () => {
       [{ creature: dummy({ hp: 1000 }), count: 1, hex: at(8, 5) }],
     );
     const p = previewAttack(s, attack("a0", "d0", at(7, 5)));
-    expect(p.strike.breakdown.abilityMultipliers[0]!.percent).toBe(200);
+    expect(p.strike!.breakdown.abilityMultipliers[0]!.percent).toBe(200);
     const mob = previewAttack(
       patchStack(s, "a0", {
         creature: dummy({ speed: 9, abilities: ["mob"] }),
       }),
       attack("a0", "d0", at(7, 5)),
     );
-    expect(mob.strike.breakdown.attack).toBe(10);
+    expect(mob.strike!.breakdown.attack).toBe(10);
   });
 
   it("Mob and Pack Hunter apply to retaliations", () => {
@@ -452,7 +452,7 @@ describe("adjacency abilities", () => {
         [{ creature: dummy({ hp: 1000 }), count: 1, hex: at(8, 5) }],
       );
     const atk = (s: ReturnType<typeof base>) =>
-      previewAttack(s, attack("a0", "d0", at(7, 5))).strike.breakdown.attack;
+      previewAttack(s, attack("a0", "d0", at(7, 5))).strike!.breakdown.attack;
     expect(atk(base([at(0, 0)]))).toBe(5); // far away
     expect(atk(base([at(7, 4)]))).toBe(7); // adjacent to (7,5)
     expect(atk(base([at(7, 4), at(7, 6)]))).toBe(7); // two Shamans: still +2
@@ -461,9 +461,9 @@ describe("adjacency abilities", () => {
       [{ creature: SHAMAN, count: 1, hex: at(2, 5) }],
       [{ creature: dummy({ hp: 1000 }), count: 1, hex: at(12, 5) }],
     );
-    expect(previewAttack(solo, shoot("a0", "d0")).strike.breakdown.attack).toBe(
-      9,
-    );
+    expect(
+      previewAttack(solo, shoot("a0", "d0")).strike!.breakdown.attack,
+    ).toBe(9);
   });
 
   it("Warcry: +2 Defense to adjacent friends, not to the Warboss", () => {
@@ -476,9 +476,9 @@ describe("adjacency abilities", () => {
       ],
     );
     const p = previewAttack(s, attack("a0", "d0", at(7, 5)));
-    expect(p.strike.breakdown.defense).toBe(7);
+    expect(p.strike!.breakdown.defense).toBe(7);
     const boss = previewAttack(s, attack("a0", "d1", at(10, 5)));
-    expect(boss.strike.breakdown.defense).toBe(15 + 2); // only the other Warboss
+    expect(boss.strike!.breakdown.defense).toBe(15 + 2); // only the other Warboss
   });
 });
 
@@ -492,7 +492,7 @@ describe("ranged rules", () => {
     expect(legalActions(s).some((a) => a.type === "shoot")).toBe(false);
     expect(() => applyAction(s, shoot("a0", "d0"))).toThrow(/illegal/);
     const p = previewAttack(s, attack("a0", "d0", at(6, 5)));
-    expect(p.strike.breakdown.rangedInMelee).toBe(true);
+    expect(p.strike!.breakdown.rangedInMelee).toBe(true);
     expect(p.damage).toBe(15); // floor(10 x 3 x 1.0 / 2)
   });
 
@@ -516,12 +516,12 @@ describe("ranged rules", () => {
       [{ creature: SKELETON, count: 50, hex: at(12, 5) }],
     );
     const shot = previewAttack(s, shoot("a0", "d0"));
-    expect(shot.strike.breakdown.abilityMultipliers).toEqual([
+    expect(shot.strike!.breakdown.abilityMultipliers).toEqual([
       { source: "bony", label: "Bony", percent: 50 },
     ]);
     expect(shot.damage).toBe(Math.floor((10 * 2 * 21) / 20 / 2));
     const melee = previewAttack(s, attack("a0", "d0", at(11, 5)));
-    expect(melee.strike.breakdown.abilityMultipliers).toEqual([]);
+    expect(melee.strike!.breakdown.abilityMultipliers).toEqual([]);
   });
 });
 
@@ -534,8 +534,8 @@ describe("Defend, Regenerate, fortification", () => {
     s = play(s, defend("a0")).state;
     expect(stack(s, "a0").defending).toBe(true);
     const p = previewAttack(s, attack("d0", "a0", at(7, 5)));
-    expect(p.strike.breakdown.defenseBeforeDefend).toBe(5);
-    expect(p.strike.breakdown.defense).toBe(7); // 6.5 rounds up
+    expect(p.strike!.breakdown.defenseBeforeDefend).toBe(5);
+    expect(p.strike!.breakdown.defense).toBe(7); // 6.5 rounds up
     s = play(s, defend("d0")).state; // round 2: a0's turn begins
     expect(s.activeStackId).toBe("a0");
     expect(stack(s, "a0").defending).toBe(false);
@@ -582,8 +582,8 @@ describe("Defend, Regenerate, fortification", () => {
       },
     });
     const p = previewAttack(s, attack("a0", "d0", at(6, 5)));
-    expect(p.strike.breakdown.defense).toBe(5);
-    expect(p.strike.breakdown.defenseModifiers[0]).toEqual({
+    expect(p.strike!.breakdown.defense).toBe(5);
+    expect(p.strike!.breakdown.defenseModifiers[0]).toEqual({
       source: "fortified",
       label: "Fortified",
       amount: 2,

@@ -18,6 +18,7 @@ import {
   turnOrder,
 } from "../../core/battle/index.ts";
 import type {
+  AttackPreview,
   BattleEvent,
   BattleSide,
   BattleState,
@@ -27,7 +28,7 @@ import type {
   School,
   StackId,
 } from "../../core/battle/index.ts";
-import { creatureName } from "./preview.ts";
+import { conjugate, creatureName } from "./preview.ts";
 
 export {
   SCHOOL_COLORS,
@@ -155,6 +156,49 @@ function namer(state: BattleState): (id: StackId) => string {
 }
 
 /**
+ * "Wolf Riders walk into fire, take" for Harm dealt by hazard ground a move
+ * entered (the rule is `ground:<kind>`, the cause the move); else null.
+ */
+function hazardEntered(
+  before: BattleState,
+  events: readonly BattleEvent[],
+  e: Extract<BattleEvent, { type: "harm" }>,
+): string | null {
+  if (!e.rule.startsWith("ground:") || e.cause === null) return null;
+  const move = events.find((x) => x.index === e.cause);
+  if (!move || move.type !== "move" || move.stackId !== e.targetId) return null;
+  const ground = groundKind(e.rule.slice("ground:".length)).name.toLowerCase();
+  const s = before.stacks.find((x) => x.id === e.targetId);
+  const count = Math.max(1, s?.count ?? 1);
+  const who = s ? creatureName(s.creature, count) : e.targetId;
+  const take = conjugate("take", count);
+  switch (move.mode) {
+    case "walk":
+      return `${who} ${conjugate("walk into", count)} ${ground}, ${take}`;
+    case "push":
+    case "pull":
+      return `${who} ${move.mode}ed into ${ground}, ${take}`;
+    case "teleport":
+    case "swap":
+      return `${who} ${conjugate("land in", count)} ${ground}, ${take}`;
+  }
+}
+
+/**
+ * The chain of an attack preview; when no strike lands it ends so ("Wolf
+ * Riders walk into fire, take 20 Harm, all killed → Wolf Riders destroyed
+ * → ... → no attack").
+ */
+export function attackChainLines(
+  before: BattleState,
+  preview: AttackPreview,
+): string[] {
+  const lines = chainLines(before, preview.chain);
+  if (preview.noStrike === null) return lines;
+  return [...lines, preview.action.type === "shoot" ? "no shot" : "no attack"];
+}
+
+/**
  * One line per step of a rehearsed chain, e.g. "Trolls strike Triceratops
  * 140 → link → Ogres". Engine bookkeeping (turn starts) is left out.
  */
@@ -178,6 +222,8 @@ export function chainLines(
       }
       case "harm": {
         let line = `${name(e.targetId)} take ${e.harm} Harm`;
+        const entered = hazardEntered(before, events, e);
+        if (entered !== null) line = `${entered} ${e.harm} Harm`;
         if (e.redirectedTo !== null)
           line += ` → link → ${name(e.redirectedTo)}`;
         else if (e.countAfter === 0) line += `, all killed`;

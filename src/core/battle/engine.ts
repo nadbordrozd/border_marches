@@ -60,11 +60,14 @@ import type {
   AttackAction,
   AttackPreview,
   BattleAction,
+  BattleEvent,
   BattleSide,
   BattleStack,
   BattleState,
   BattleStep,
+  NoStrikeReason,
   StackId,
+  StrikeResult,
 } from "./types.ts";
 
 export { enemySide, isRangedCreature } from "./resolve.ts";
@@ -894,8 +897,8 @@ function walkTo(d: Draft, fx: Resolver, id: StackId, to: Hex): number {
   }
   const path = findPath(d.toState(), id, to);
   if (!path) throw new Error("hex not reachable");
-  fx.walk(id, path, "walk");
-  return path.length;
+  // Hexes actually entered: a walk stops where a hazard kills the stack.
+  return fx.walk(id, path, "walk");
 }
 
 /**
@@ -1272,7 +1275,9 @@ export function applyAction(
 /**
  * Exactly what an attack or shot will do: damage, kills, the retaliation on
  * the survivors, the modifiers that applied and the full chain. Throws on
- * an illegal action.
+ * an illegal action. A legal action that ends without the strike (the
+ * attacker walks into fire and dies, the target dies first, the shot is
+ * taken by an ability) gives `strike: null` and the reason in `noStrike`.
  */
 export function previewAttack(
   state: BattleState,
@@ -1289,7 +1294,7 @@ export function previewAttack(
   const strikes = chain.filter(
     (e): e is Extract<typeof e, { type: "damage" }> => e.type === "damage",
   );
-  const toResult = (e: (typeof strikes)[number]) => ({
+  const toResult = (e: (typeof strikes)[number]): StrikeResult => ({
     attackerId: e.sourceId,
     targetId: e.targetId,
     kind: e.kind,
@@ -1307,11 +1312,11 @@ export function previewAttack(
       e.targetId === action.targetId &&
       (e.kind === "melee" || e.kind === "shot"),
   );
-  if (!first) throw new Error("the attack made no strike");
-  const ret =
-    strikes.find(
-      (e) => e.kind === "retaliation" && e.sourceId === action.targetId,
-    ) ?? null;
+  const ret = first
+    ? (strikes.find(
+        (e) => e.kind === "retaliation" && e.sourceId === action.targetId,
+      ) ?? null)
+    : null;
   const conditionsApplied = chain.flatMap((e) =>
     e.type === "condition" && (e.change === "landed" || e.change === "merged")
       ? [
@@ -1324,20 +1329,33 @@ export function previewAttack(
         ]
       : [],
   );
-  const strike = toResult(first);
+  const strike = first ? toResult(first) : null;
   const retaliation = ret ? toResult(ret) : null;
   return {
     action,
     hexesMoved,
-    damage: strike.damage,
-    kills: strike.kills,
+    damage: strike?.damage ?? 0,
+    kills: strike?.kills ?? 0,
     retaliationDamage: retaliation?.damage ?? 0,
     retaliationKills: retaliation?.kills ?? 0,
     strike,
+    noStrike: strike !== null ? null : noStrikeReason(chain, action),
     retaliation,
     conditionsApplied,
     chain,
   };
+}
+
+/** Why an attack's chain holds no strike on its target (see previewAttack). */
+function noStrikeReason(
+  chain: readonly BattleEvent[],
+  action: AttackAction,
+): NoStrikeReason {
+  const died = (id: StackId) =>
+    chain.some((e) => e.type === "death" && e.stackId === id);
+  if (died(action.stackId)) return "attackerDied";
+  if (died(action.targetId)) return "targetDied";
+  return "averted";
 }
 
 /** Resolves battle-start rules of an army (4.6 form 2) by effect id. */

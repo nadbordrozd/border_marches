@@ -52,6 +52,8 @@ describe("preview == apply (property)", () => {
         const dmg = damageEvents(step.events);
         const [hit, back] = dmg;
         expect(hit).toBeDefined();
+        expect(p.noStrike).toBeNull();
+        const strike = p.strike!;
         expect([
           hit!.damage,
           hit!.kills,
@@ -60,12 +62,12 @@ describe("preview == apply (property)", () => {
         ]).toEqual([
           p.damage,
           p.kills,
-          p.strike.targetCountAfter,
-          p.strike.targetTopHpAfter,
+          strike.targetCountAfter,
+          strike.targetTopHpAfter,
         ]);
-        expect(hit!.breakdown).toEqual(p.strike.breakdown);
+        expect(hit!.breakdown).toEqual(strike.breakdown);
         expect(getStack(step.state, action.targetId).count).toBe(
-          p.strike.targetCountAfter,
+          strike.targetCountAfter,
         );
         if (p.retaliation === null) {
           expect(dmg).toHaveLength(1);
@@ -88,7 +90,7 @@ describe("preview == apply (property)", () => {
         }
         // Kills are consistent with the counts before the action.
         expect(getStack(state, action.targetId).count - p.kills).toBe(
-          p.strike.targetCountAfter,
+          strike.targetCountAfter,
         );
         checked++;
         state = step.state;

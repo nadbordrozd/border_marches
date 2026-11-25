@@ -82,9 +82,13 @@ export interface PreviewSummary {
   readonly attackerCount: number;
   readonly target: string;
   readonly hexesMoved: number;
-  readonly strike: StrikeSummary;
+  /** null when no strike lands; see `noStrike`. */
+  readonly strike: StrikeSummary | null;
+  /** Why no strike lands, e.g. "Wolf Riders die on the way: no attack". */
+  readonly noStrike: string | null;
   /** null when there is no retaliation; see `noRetaliation`. */
   readonly retaliation: StrikeSummary | null;
+  /** Why there is no retaliation; null when there is one or no strike. */
   readonly noRetaliation: string | null;
   /** Conditions applied, e.g. "Venomed on Orc Brutes (−3 Def, 2 rounds)". */
   readonly statuses: readonly string[];
@@ -99,21 +103,39 @@ export function summarizePreview(
   const attacker = getStack(state, action.stackId);
   const target = getStack(state, action.targetId);
   const s = preview.strike;
-  const strike: StrikeSummary = {
-    damage: s.damage,
-    kills: s.kills,
-    before: target.count,
-    after: s.targetCountAfter,
-    topAfter: s.targetTopHpAfter,
-    hp: target.creature.hp,
-    victim: creatureName(target.creature, target.count),
-    attackLine: attackLine(s.breakdown),
-    bonuses: breakdownBonuses(s.breakdown),
-  };
+  const strike: StrikeSummary | null =
+    s === null
+      ? null
+      : {
+          damage: s.damage,
+          kills: s.kills,
+          before: target.count,
+          after: s.targetCountAfter,
+          topAfter: s.targetTopHpAfter,
+          hp: target.creature.hp,
+          victim: creatureName(target.creature, target.count),
+          attackLine: attackLine(s.breakdown),
+          bonuses: breakdownBonuses(s.breakdown),
+        };
+  const attackerName = creatureName(attacker.creature, attacker.count);
+  const targetName = creatureName(target.creature, target.count);
+  const none = action.type === "shoot" ? "no shot" : "no attack";
+  const noStrike =
+    preview.noStrike === "attackerDied"
+      ? action.type === "attack" && preview.hexesMoved > 0
+        ? `${attackerName} ${conjugate("die", attacker.count)} on the way: ${none}`
+        : `${attackerName} ${conjugate("die", attacker.count)} first: ${none}`
+      : preview.noStrike === "targetDied"
+        ? `${targetName} ${conjugate("die", target.count)} first: ${none}`
+        : preview.noStrike === "averted"
+          ? `The ${action.type === "shoot" ? "shot" : "attack"} never lands`
+          : null;
   let retaliation: StrikeSummary | null = null;
   let noRetaliation: string | null = null;
   const r = preview.retaliation;
-  if (r !== null) {
+  if (s === null) {
+    // No strike, nothing to retaliate against: `noStrike` says why.
+  } else if (r !== null) {
     retaliation = {
       damage: r.damage,
       kills: r.kills,
@@ -150,11 +172,12 @@ export function summarizePreview(
   });
   return {
     verb: action.type === "shoot" ? "Shoot" : "Attack",
-    attacker: creatureName(attacker.creature, attacker.count),
+    attacker: attackerName,
     attackerCount: attacker.count,
-    target: creatureName(target.creature, target.count),
+    target: targetName,
     hexesMoved: preview.hexesMoved,
     strike,
+    noStrike,
     retaliation,
     noRetaliation,
     statuses,

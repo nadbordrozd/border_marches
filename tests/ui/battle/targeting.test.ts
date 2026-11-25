@@ -7,12 +7,14 @@
 
 import { describe, expect, it } from "vitest";
 import {
+  BATTLE_HEIGHT,
   actionError,
   applyAction,
   getStack,
   hexDistance,
   isAdjacent,
   neighbors,
+  previewAttack,
   sameHex,
 } from "../../../src/core/battle/index.ts";
 import type {
@@ -347,6 +349,25 @@ describe("Hit and Run", () => {
 
   it("offers nothing without the ability", () => {
     expect(afterChoices(field(false), attack)).toEqual([]);
+  });
+
+  it("offers nothing when the riders burn on the way (no strike, no throw)", () => {
+    const s = field(true);
+    const fire = Array.from({ length: BATTLE_HEIGHT }, (_, row) => ({
+      hex: at(5, row),
+      kind: "fire",
+      class: "hazard" as const,
+      school: "storm" as const,
+      size: 1000,
+      clock: null,
+      remains: null,
+      source: "test",
+    }));
+    const burning: BattleState = { ...s, ground: [...s.ground, ...fire] };
+    const p = previewAttack(burning, attack);
+    expect(p.strike).toBeNull();
+    expect(p.noStrike).toBe("attackerDied");
+    expect(afterChoices(burning, attack)).toEqual([]);
   });
 });
 

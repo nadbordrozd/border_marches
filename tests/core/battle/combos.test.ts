@@ -58,9 +58,9 @@ describe("4.1 Venom, Mob and Pack (worked example, exact)", () => {
       stackId: "a2",
       targetId: "d0",
     });
-    expect(shot.strike.breakdown.attack).toBe(8);
-    expect(shot.strike.breakdown.defense).toBe(6);
-    expect(shot.strike.breakdown.multiplier).toEqual({ num: 22, den: 20 });
+    expect(shot.strike!.breakdown.attack).toBe(8);
+    expect(shot.strike!.breakdown.defense).toBe(6);
+    expect(shot.strike!.breakdown.multiplier).toEqual({ num: 22, den: 20 });
     s = play(s, { type: "shoot", stackId: "a2", targetId: "d0" }).state;
     expect(shot.damage).toBe(29);
     expect(shot.kills).toBe(1);
@@ -157,9 +157,9 @@ describe("4.1 Venom, Mob and Pack (worked example, exact)", () => {
       from: at(10, 5),
     } as const;
     const preview = previewAttack(s, action);
-    expect(preview.strike.breakdown.attack).toBe(10);
-    expect(preview.strike.breakdown.multiplier).toEqual({ num: 27, den: 20 });
-    expect(preview.strike.breakdown.abilityMultipliers).toEqual([
+    expect(preview.strike!.breakdown.attack).toBe(10);
+    expect(preview.strike!.breakdown.multiplier).toEqual({ num: 27, den: 20 });
+    expect(preview.strike!.breakdown.abilityMultipliers).toEqual([
       { source: "pack-hunter", label: "Pack Hunter", percent: 140 },
     ]);
     expect(preview).toMatchObject({
@@ -186,7 +186,7 @@ describe("4.1 Venom, Mob and Pack (worked example, exact)", () => {
       targetId: "d0",
       from: at(10, 5),
     });
-    expect(p.strike.breakdown.multiplier).toEqual({ num: 24, den: 20 });
+    expect(p.strike!.breakdown.multiplier).toEqual({ num: 24, den: 20 });
     expect([p.damage, p.kills]).toEqual([42, 1]);
     // The doc writes floor(19 x 6 x 1.10) = 125; the rules compute the
     // retaliation on the survivors (18): floor(118.8) = 118. Same 5 kills.
@@ -221,8 +221,8 @@ describe("4.2 War Drums beside a charging Triceratops", () => {
     const s = setup(at(7, 4), at(2, 5));
     const p = previewAttack(s, charge);
     expect(p.hexesMoved).toBe(5);
-    expect(p.strike.breakdown.attack).toBe(17);
-    expect(p.strike.breakdown.attackModifiers).toEqual([
+    expect(p.strike!.breakdown.attack).toBe(17);
+    expect(p.strike!.breakdown.attackModifiers).toEqual([
       {
         source: "war-drums",
         label: "War Drums",
@@ -230,10 +230,10 @@ describe("4.2 War Drums beside a charging Triceratops", () => {
         stackKey: "war-drums",
       },
     ]);
-    expect(p.strike.breakdown.abilityMultipliers).toEqual([
+    expect(p.strike!.breakdown.abilityMultipliers).toEqual([
       { source: "charge", label: "Charge", percent: 175 },
     ]);
-    expect([p.damage, p.kills, p.strike.targetTopHpAfter]).toEqual([
+    expect([p.damage, p.kills, p.strike!.targetTopHpAfter]).toEqual([
       131, 1, 49,
     ]);
     expect(p.retaliation!.breakdown.defense).toBe(18);
@@ -245,7 +245,9 @@ describe("4.2 War Drums beside a charging Triceratops", () => {
     const s = setup(at(0, 0), at(7, 5));
     const p = previewAttack(s, charge);
     expect(p.hexesMoved).toBe(0);
-    expect([p.damage, p.kills, p.strike.targetTopHpAfter]).toEqual([69, 0, 21]);
+    expect([p.damage, p.kills, p.strike!.targetTopHpAfter]).toEqual([
+      69, 0, 21,
+    ]);
     expect([p.retaliationDamage, p.retaliationKills]).toEqual([80, 1]);
   });
 
@@ -254,8 +256,8 @@ describe("4.2 War Drums beside a charging Triceratops", () => {
       conditions: [cond("venomed", { size: 3, clock: 2 })],
     });
     const p = previewAttack(s, charge);
-    expect(p.strike.breakdown.defense).toBe(9);
-    expect([p.damage, p.kills, p.strike.targetTopHpAfter]).toEqual([
+    expect(p.strike!.breakdown.defense).toBe(9);
+    expect([p.damage, p.kills, p.strike!.targetTopHpAfter]).toEqual([
       147, 1, 33,
     ]);
     expect([p.retaliationDamage, p.retaliationKills]).toEqual([66, 0]);
@@ -286,9 +288,9 @@ describe("4.3 T-Rex finisher", () => {
       targetId: "d0",
       from: at(7, 5),
     });
-    expect(p.strike.breakdown.attack).toBe(24);
-    expect(p.strike.breakdown.defense).toBe(3);
-    expect(p.strike.breakdown.multiplier).toEqual({ num: 41, den: 20 });
+    expect(p.strike!.breakdown.attack).toBe(24);
+    expect(p.strike!.breakdown.defense).toBe(3);
+    expect(p.strike!.breakdown.multiplier).toEqual({ num: 41, den: 20 });
     expect(p.damage).toBe(82);
     expect(p.retaliation).toBeNull();
   });

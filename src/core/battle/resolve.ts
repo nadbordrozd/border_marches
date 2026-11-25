@@ -1399,21 +1399,35 @@ export class Resolver implements Effects {
 
   // --- Movement ----------------------------------------------------------
 
-  /** Walks a path, applying hazards on each hex entered (in order). */
+  /**
+   * Walks a path hex by hex, applying the hazard of each hex entered while
+   * standing on it. The walk stops on the hex where the stack dies (or is
+   * moved by the hazard): its remains lie there, and the move event is cut
+   * to end there. Returns the hexes actually entered.
+   */
   walk(
     stackId: StackId,
     path: readonly Hex[],
     mode: "walk" | "push" | "pull",
-  ): void {
+  ): number {
     const d = this.d;
-    if (path.length === 0) return;
+    if (path.length === 0) return 0;
     const s = d.get(stackId);
     const to = path[path.length - 1] as Hex;
-    const idx = d.emit({ type: "move", stackId, from: s.hex, to, path, mode });
-    d.update(stackId, { hex: to });
+    const move = {
+      type: "move",
+      stackId,
+      from: s.hex,
+      to,
+      path,
+      mode,
+    } as const;
+    const idx = d.emit(move);
+    let entered = 0;
     d.within(idx, null, () => {
       for (const h of path) {
-        if (!this.isAlive(stackId)) return;
+        d.update(stackId, { hex: h });
+        entered++;
         const g = groundAt(d, h);
         if (g && g.class === "hazard") {
           const def = groundKind(g.kind);
@@ -1422,9 +1436,25 @@ export class Resolver implements Effects {
               def.onEnter?.(this, stackId, g),
             );
         }
+        if (!this.isAlive(stackId) || !sameHex(d.get(stackId).hex, h)) break;
+      }
+      if (entered < path.length) {
+        // Cut short: the event ends where the walk did.
+        const cut = path.slice(0, entered);
+        const ev = d.events[idx] as BattleEvent;
+        d.events[idx] = {
+          ...move,
+          to: cut[cut.length - 1] as Hex,
+          path: cut,
+          index: ev.index,
+          cause: ev.cause,
+          rule: ev.rule,
+        };
+        return;
       }
       if (mode === "walk") this.walkEnded(stackId);
     });
+    return entered;
   }
 
   /** "On ending a walk" ability hooks (Feast), at once, before any attack. */
@@ -1464,8 +1494,8 @@ export class Resolver implements Effects {
       path.push(next);
       cur = next;
     }
-    this.walk(stackId, path, mode);
-    if (path.length > 0 && this.isAlive(stackId)) {
+    const hexes = this.walk(stackId, path, mode);
+    if (hexes > 0 && this.isAlive(stackId)) {
       const moved = d.get(stackId);
       const info: MovedInfo = {
         state: d.toState(),
@@ -1473,7 +1503,7 @@ export class Resolver implements Effects {
         mode,
         from: start,
         to: moved.hex,
-        hexes: path.length,
+        hexes,
         stoppedBy,
       };
       const idx = d.events.length - 1;
@@ -1482,7 +1512,8 @@ export class Resolver implements Effects {
         if (r) d.trigger(stackId, `ability:${aid}:moved`, idx, r, { order });
       });
     }
-    return this.isAlive(stackId) ? d.get(stackId).hex : cur;
+    // Where it stands, or where a hazard on the way killed it.
+    return d.get(stackId).hex;
   }
 
   pushDir(stackId: StackId, dir: number, n: number): Hex {

@@ -622,15 +622,32 @@ export interface AppliedCondition {
   readonly size: number;
 }
 
+/**
+ * Why a legal attack or shot makes no strike on its target:
+ * - `attackerDied`: the attacker died before striking (hazard ground on its
+ *   walk, Harm carried down a link, ...);
+ * - `targetDied`: the target died before the strike;
+ * - `averted`: both live but the strike never landed (an area shot taken by
+ *   the target's ability, a shot replaced by something else).
+ */
+export type NoStrikeReason = "attackerDied" | "targetDied" | "averted";
+
 /** What an attack or shot will do, exactly as {@link applyAction} does it. */
 export interface AttackPreview {
   readonly action: AttackAction;
   readonly hexesMoved: number;
+  /** The strike's damage and kills (0 when no strike lands). */
   readonly damage: number;
   readonly kills: number;
   readonly retaliationDamage: number;
   readonly retaliationKills: number;
-  readonly strike: StrikeResult;
+  /**
+   * The attacker's strike on its target; null when none lands (the attacker
+   * dies on the way, say). `noStrike` then says why.
+   */
+  readonly strike: StrikeResult | null;
+  /** Why no strike landed; null when it did. */
+  readonly noStrike: NoStrikeReason | null;
   /** null when there is no retaliation (shot, Terror, used, target dead). */
   readonly retaliation: StrikeResult | null;
   /** Conditions the chain put on stacks (e.g. Venomed). */

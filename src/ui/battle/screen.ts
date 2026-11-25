@@ -69,7 +69,7 @@ import type { HexMark, Scene } from "../../render/battle/scene.ts";
 import { Animator, nextSpeed, speedLabel } from "./animate.ts";
 import type { Speed } from "./animate.ts";
 import {
-  chainLines,
+  attackChainLines,
   conditionTooltip,
   groundTooltip,
   intentMarkers,
@@ -767,7 +767,9 @@ class BattleScreen {
         for (const h of it.path) marks.set(hexIndex(h), "path");
         if (it.action.type === "attack") {
           marks.set(hexIndex(it.action.from), "attack-from");
-          strike = { from: it.action.from, target: target.hex };
+          // No strike arrow when the attacker never gets to strike.
+          if (it.preview.strike !== null)
+            strike = { from: it.action.from, target: target.hex };
         } else if (active) {
           area = shotAreaHexes(this.state, active, target.hex) ?? [];
         }
@@ -834,21 +836,31 @@ class BattleScreen {
     const s = summarizePreview(this.state, it.preview);
     const target = getStack(this.state, it.action.targetId);
     this.tip.replaceChildren();
-    const dealt = el("div", "bm-tip-deal");
-    dealt.append(
-      el("span", "bm-tip-big", `\u2212${s.strike.damage}`),
-      el(
-        "span",
-        "bm-tip-kills",
-        s.strike.after === 0
-          ? ` all ${s.strike.before} slain`
-          : s.strike.kills === 0
-            ? " none slain"
-            : ` ${s.strike.kills} slain`,
-      ),
-    );
-    this.tip.append(dealt);
-    if (s.retaliation) {
+    const struck = s.strike;
+    if (struck === null) {
+      // The attacker dies on the way (fire ground, say): no strike lands.
+      this.tip.append(
+        el("div", "bm-tip-ret", s.noStrike ?? "The attack never lands"),
+      );
+    } else {
+      const dealt = el("div", "bm-tip-deal");
+      dealt.append(
+        el("span", "bm-tip-big", `\u2212${struck.damage}`),
+        el(
+          "span",
+          "bm-tip-kills",
+          struck.after === 0
+            ? ` all ${struck.before} slain`
+            : struck.kills === 0
+              ? " none slain"
+              : ` ${struck.kills} slain`,
+        ),
+      );
+      this.tip.append(dealt);
+    }
+    if (struck === null) {
+      // Nothing to retaliate against.
+    } else if (s.retaliation) {
       const r = s.retaliation;
       this.tip.append(
         el(
@@ -1601,7 +1613,13 @@ class BattleScreen {
         );
       }
       const active = activeStack(this.state);
-      if (active && it.action.type === "attack" && walkAfterRange(active) > 0) {
+      // No step after an attack that never strikes (the attacker dies first).
+      if (
+        active &&
+        it.action.type === "attack" &&
+        it.preview.strike !== null &&
+        walkAfterRange(active) > 0
+      ) {
         head.append(
           el(
             "span",
@@ -1611,11 +1629,28 @@ class BattleScreen {
         );
       }
       p.append(head);
+      const chain = attackChainLines(this.state, it.preview);
+      const struck = s.strike;
+      if (struck === null) {
+        // A legal attack that never strikes (the attacker dies on the way).
+        p.append(
+          el(
+            "div",
+            "bm-pv-ret",
+            s.noStrike ?? `The ${s.verb.toLowerCase()} never lands`,
+          ),
+        );
+        if (s.statuses.length > 0)
+          p.append(el("div", "bm-pv-why", s.statuses.join("  ·  ")));
+        if (chain.length > 0)
+          p.append(el("div", "bm-pv-chain", chain.join(" → ")));
+        return;
+      }
       const deal = el("div", "bm-pv-deal");
       deal.append(
         el("span", "bm-pv-label", "Deal "),
-        el("b", "", strikeHeadline(s.strike)),
-        el("span", "bm-dim", `   ${stackChange(s.strike)}`),
+        el("b", "", strikeHeadline(struck)),
+        el("span", "bm-dim", `   ${stackChange(struck)}`),
       );
       p.append(deal);
       const ret = el("div", "bm-pv-ret");
@@ -1630,9 +1665,8 @@ class BattleScreen {
         ret.append(el("b", "", s.noRetaliation ?? "No retaliation"));
       }
       p.append(ret);
-      const why = [s.strike.attackLine, ...s.strike.bonuses, ...s.statuses];
+      const why = [struck.attackLine, ...struck.bonuses, ...s.statuses];
       p.append(el("div", "bm-pv-why", why.join("  ·  ")));
-      const chain = chainLines(this.state, it.preview.chain);
       if (chain.length > 0)
         p.append(el("div", "bm-pv-chain", chain.join(" \u2192 ")));
       return;

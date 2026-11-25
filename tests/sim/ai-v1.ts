@@ -129,8 +129,12 @@ export function scoreActions(state: BattleState): ScoredAction[] {
         const target = state.stacks.find(
           (s) => s.id === action.targetId,
         ) as BattleStack;
-        const gained = p.strike.hpLost * aiValuePerHp(target.creature);
-        const lost = (p.retaliation?.hpLost ?? 0) * aiValuePerHp(self.creature);
+        const gained = (p.strike?.hpLost ?? 0) * aiValuePerHp(target.creature);
+        // Walking into fire and dying on the way costs the whole stack.
+        const lost =
+          p.noStrike === "attackerDied"
+            ? stackValue(self)
+            : (p.retaliation?.hpLost ?? 0) * aiValuePerHp(self.creature);
         out.push({ action, score: gained - lost });
         break;
       }
