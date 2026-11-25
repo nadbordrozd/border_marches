@@ -21,6 +21,7 @@ export {
   conditionKindIds,
   effect,
   groundKind,
+  groundKindIds,
   hasAct,
   hasConditionKind,
   registerAbility,

@@ -3,7 +3,8 @@
  * and size with two to four players, or a named map; the human's faction;
  * the computer players' difficulty) and Continue when a save exists, then
  * the adventure screen until the game ends or the player quits back to the
- * menu.
+ * menu. The menu also opens the gallery (src/ui/gallery.ts; `?gallery=<tab>`
+ * opens it at once).
  */
 import { newGame } from "../core/game/index.ts";
 import {
@@ -383,6 +384,29 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
     );
     continueButton.disabled = saved === null;
 
+    // The gallery (bead 3nb): every sprite and card of the game, in tabs.
+    const galleryButton = button(
+      "Gallery",
+      () => void openGalleryFromMenu(),
+      "gm-btn gm-menu-gallery",
+    );
+    setTip(
+      galleryButton,
+      "Every creature, hero, spell, artifact, skill, map object and building, with its sprites and full card.",
+    );
+    const openGalleryFromMenu = async (tab?: string | null): Promise<void> => {
+      const { openGallery } = await import("./gallery.ts");
+      const { isGalleryTab } = await import("./gallery-data.ts");
+      root.hidden = true;
+      try {
+        const wanted = tab ?? null;
+        await openGallery(host, isGalleryTab(wanted) ? wanted : undefined);
+      } finally {
+        root.hidden = false;
+        galleryButton.focus();
+      }
+    };
+
     const reroll = button("Random", () => {
       seedInput.value = String(randomSeed());
     });
@@ -412,6 +436,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
           seedField,
           newButton,
         ),
+        galleryButton,
         status,
         soundControl(),
         el(
@@ -435,6 +460,11 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
       if (e.key === "Enter") newButton.click();
     });
     if (params.get("autostart") === "1") newButton.click();
+    else if (params.has("gallery")) {
+      const tab = params.get("gallery");
+      params.delete("gallery"); // once: not again after a game
+      void openGalleryFromMenu(tab);
+    }
   });
 }
 

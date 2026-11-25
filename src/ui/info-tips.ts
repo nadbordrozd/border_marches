@@ -4,7 +4,12 @@
  * and what they unlock. Built with tipCard (src/ui/tooltip.ts).
  */
 import { ability as battleAbility } from "../core/battle/index.ts";
-import { isBattleSpell, spellDef } from "../core/magic/index.ts";
+import {
+  adventureSpell,
+  isAdventureSpell,
+  isBattleSpell,
+  spellDef,
+} from "../core/magic/index.ts";
 import { ABILITIES } from "../data/abilities.ts";
 import {
   creatureAbilities,
@@ -130,6 +135,38 @@ export function spellTip(id: string, power?: number): HTMLElement | string {
       },
     );
   }
+  if (isAdventureSpell(id)) {
+    const a = adventureSpell(id);
+    const move =
+      a.moveCost === undefined
+        ? ""
+        : a.moveCost === "all"
+          ? " · all movement"
+          : ` · ${a.moveCost} movement`;
+    return tipCard(
+      a.name,
+      [
+        a.text(power ?? 1),
+        el(
+          "div.gm-tip-dim",
+          "An adventure spell: cast it from the spellbook on the map (M).",
+        ),
+        a.scale === null
+          ? null
+          : el(
+              "div.gm-tip-dim",
+              power === undefined
+                ? "Shown at Power 1; numbers grow with the hero's Power."
+                : `At Power ${power}.`,
+            ),
+        a.deferred === undefined ? null : el("div.gm-tip-dim", a.deferred),
+      ],
+      {
+        icon: iconElement("spell", id),
+        subtitle: `${SCHOOL_LABEL[a.school] ?? a.school} ${a.tier} · ${a.mana} mana${move} · adventure`,
+      },
+    );
+  }
   const m = findMapSpell(id);
   return tipCard(
     spellName(id),
@@ -154,10 +191,15 @@ export function unlockedBy(faction: FactionId, id: BuildingId): BuildingId[] {
   );
 }
 
-/** A building's card: effect, cost, requirements and what it unlocks. */
+/**
+ * A building's card: effect, cost, requirements and what it unlocks. With
+ * `catalogue` (the gallery) the requirements are listed without the
+ * built / missing colours, since no town is meant.
+ */
 export function buildingTip(
-  town: TownState,
+  town: Pick<TownState, "faction" | "buildings">,
   id: BuildingId,
+  options: { catalogue?: boolean } = {},
 ): HTMLElement | string {
   const def = buildingDef(town.faction, id);
   if (def === undefined) return id;
@@ -182,7 +224,11 @@ export function buildingTip(
         if (i > 0) req.append(", ");
         req.append(
           el(
-            town.buildings.includes(r) ? "span.gm-tip-good" : "span.gm-tip-bad",
+            options.catalogue === true
+              ? "span"
+              : town.buildings.includes(r)
+                ? "span.gm-tip-good"
+                : "span.gm-tip-bad",
             name(r),
           ),
         );

@@ -644,6 +644,10 @@ export function casterOf(creature: BattleCreatureStats): CreatureCaster | null {
 export function hasGroundKind(id: string): boolean {
   return groundKinds.has(id);
 }
+/** Every registered ground kind id, in registration order (the gallery). */
+export function groundKindIds(): string[] {
+  return [...groundKinds.keys()];
+}
 export function hasAbility(id: string): boolean {
   return id in ABILITY_HOOKS || abilities.has(id);
 }
