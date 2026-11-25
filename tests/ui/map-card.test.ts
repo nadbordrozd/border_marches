@@ -252,6 +252,17 @@ describe("map cards", () => {
     expect(
       mine.lines.some((l) => l.kind === "text" && /^Moves /.test(l.text)),
     ).toBe(true);
+    // The stats line is a readout: no Power and Lore boxes (bead bzc.80).
+    const stats = mine.lines.find(
+      (l) => l.kind === "text" && /^Attack \d/.test(l.text),
+    );
+    expect(stats).toEqual(expect.objectContaining({ plain: true }));
+    const view = mapCardView(mine) as unknown as FakeElement;
+    const skipped = view
+      .all("gm-tip-line")
+      .filter((n) => n.dataset["kwSkip"] !== undefined)
+      .map((n) => n.textContent);
+    expect(skipped).toEqual([expect.stringMatching(/Power \d+, Lore \d+$/)]);
   });
 
   it("keeps unexplored ground a one-line card", () => {
@@ -288,6 +299,11 @@ describe("map cards", () => {
       expect(c.lines.every((l) => l.kind === "text" && l.plain === true)).toBe(
         true,
       );
+      // The view marks them so the tooltip's highlighter passes them by.
+      const view = mapCardView(c) as unknown as FakeElement;
+      const lines = view.all("gm-tip-line");
+      expect(lines.length).toBe(2);
+      for (const n of lines) expect(n.dataset["kwSkip"]).toBe("");
     }
   });
 });

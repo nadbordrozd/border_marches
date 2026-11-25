@@ -38,6 +38,7 @@ import { FACTIONS } from "../../src/data/factions.ts";
 import { FEAT_LIST } from "../../src/data/feats.ts";
 import {
   KEYWORDS,
+  NAMES,
   explainKeywords,
   findKeywords,
   keyword,
@@ -137,6 +138,45 @@ function rulesTexts(): Array<{ from: string; text: string }> {
   return out;
 }
 
+/** Every content name the game shows (titles, "Teaches X", lists). */
+function contentNames(): Array<{ from: string; name: string }> {
+  const out: Array<{ from: string; name: string }> = [];
+  const add = (from: string, name: string | undefined): void => {
+    if (name !== undefined && name !== "") out.push({ from, name });
+  };
+  for (const s of [...BATTLE_SPELLS, ...ADVENTURE_SPELLS])
+    add(`spell ${s.id}`, s.name);
+  for (const a of ARTIFACT_LIST) add(`artifact ${a.id}`, a.name);
+  for (const s of Object.values(SKILLS)) add(`skill ${s?.id}`, s?.name);
+  for (const f of FEAT_LIST) add(`feat ${f.id}`, f.name);
+  for (const [id, c] of Object.entries(COMMANDS)) add(`command ${id}`, c.name);
+  for (const h of NAMED_HEROES) add(`hero ${h.id}`, h.name);
+  const abilities = new Set<string>();
+  for (const c of Object.values(CREATURES)) {
+    add(`creature ${c.id}`, c.name);
+    add(`creature ${c.id}`, c.plural);
+    for (const a of creatureAbilities(c)) abilities.add(a);
+  }
+  for (const c of Object.values(SUMMONED_CREATURES))
+    for (const a of c.abilities) abilities.add(a);
+  for (const id of ITEM_ACT_IDS) add(`item act ${id}`, act(id).name);
+  for (const f of FACTIONS) {
+    add(`faction ${f.id}`, f.name);
+    add(`birthright ${f.id}`, f.birthright?.name);
+    if (f.birthright?.ability !== undefined)
+      abilities.add(f.birthright.ability);
+    for (const [id, b] of Object.entries(f.town?.buildings ?? {})) {
+      add(`building ${f.id} ${id}`, b.name);
+      if (b.drill !== undefined) abilities.add(b.drill.ability);
+    }
+  }
+  for (const a of abilities)
+    if (hasAbility(a)) add(`ability ${a}`, ability(a).name);
+  for (const [id, o] of Object.entries(OBJECT_TYPES))
+    add(`object ${id}`, o.name);
+  return out;
+}
+
 describe("keyword registry", () => {
   it("has unique ids and one-to-two sentence definitions", () => {
     const ids = KEYWORDS.map((k) => k.id);
@@ -188,6 +228,20 @@ describe("keyword registry", () => {
     expect(m).toEqual([{ start: 2, end: 16, id: "condition-tool" }]);
   });
 
+  it("passes over content names that only contain a keyword's word", () => {
+    // Bead bzc.80: a skill, a map object or an artifact named with a
+    // keyword's word is not that keyword.
+    expect(keywordIds("Teaches Drill Sergeant at rank 1.")).toEqual([]);
+    expect(keywordIds("Drill Yards sell a Drill.")).toEqual(["drill"]);
+    expect(keywordIds("Lucky Penny: the stack starts Lucky.")).toEqual([
+      "lucky",
+    ]);
+    expect(keywordIds("Hush Now, a Hush spell")).toEqual(["school-hush"]);
+    expect(keywordIds("the Border Gate's gate")).toEqual(["gate"]);
+    // A name that is the keyword itself stays one.
+    expect(keywordIds("Sworn")).toEqual(["sworn"]);
+  });
+
   it("explains nested keywords one level down, at most the cap", () => {
     const ids = explainKeywords(["hold"]).map((k) => k.id);
     expect(ids[0]).toBe("hold");
@@ -236,6 +290,26 @@ describe("rules texts and the glossary", () => {
       for (const n of keywordIds(keyword(id).text)) shown.add(n);
     const unused = KEYWORDS.map((k) => k.id).filter((id) => !shown.has(id));
     expect(unused).toEqual([]);
+  });
+
+  it("no content name is taken for a keyword it only contains", () => {
+    // Bead bzc.80: every name is free of keywords, the keyword itself
+    // ("Sworn", "Not Done Yet"), or listed in NAMES.
+    const names = contentNames();
+    expect(names.length).toBeGreaterThan(300);
+    for (const { from, name } of names) {
+      const found = findKeywords(name);
+      if (found.length === 0) continue;
+      expect(found, `${from}: ${name}`).toEqual([
+        { start: 0, end: name.length, id: found[0]?.id },
+      ]);
+    }
+  });
+
+  it("every listed name is a content name", () => {
+    const known = new Set(contentNames().map((n) => n.name));
+    expect(NAMES.filter((n) => !known.has(n))).toEqual([]);
+    expect(new Set(NAMES).size).toBe(NAMES.length);
   });
 
   it("spell texts use no undefined jargon", () => {

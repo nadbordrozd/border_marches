@@ -38,23 +38,47 @@ export function costLabel(cost: ResourceAmounts): string {
 }
 
 /**
- * HoMaM-style group words by size; the exact count is shown as well
- * (readable certainty), e.g. "a pack of 23 Goblins".
+ * Heroes-style count words by stack size (H3's thresholds), the one table
+ * behind both the map card's word ("Pack of Goblins", `countWord`) and the
+ * messages' group word ("a pack of 12 Goblins", `groupWord`), so a stack
+ * of 23 is "Lots" on its card and "lots of 23 Goblins" in a sentence
+ * (bead border_marches-bzc.80). `word` is the card's; `group` is the
+ * sentence's, the same word where it can take "of 23 Goblins" ("Few" and
+ * "Several" cannot, so a sentence says "a band" and "a group").
  */
-const GROUP_WORDS: ReadonlyArray<readonly [number, string]> = [
-  [1000, "a legion"],
-  [500, "a host"],
-  [250, "a swarm"],
-  [100, "a throng"],
-  [50, "a horde"],
-  [10, "a pack"],
-  [5, "a group"],
-  [1, "a band"],
+interface CountBand {
+  readonly min: number;
+  readonly word: string;
+  readonly group: string;
+}
+
+/** Below 1 (never a real stack) reads as the smallest band. */
+const FEW: CountBand = { min: 1, word: "Few", group: "a band" };
+
+const COUNT_WORDS: readonly CountBand[] = [
+  { min: 1000, word: "Legion", group: "a legion" },
+  { min: 500, word: "Zounds", group: "zounds" },
+  { min: 250, word: "Swarm", group: "a swarm" },
+  { min: 100, word: "Throng", group: "a throng" },
+  { min: 50, word: "Horde", group: "a horde" },
+  { min: 20, word: "Lots", group: "lots" },
+  { min: 10, word: "Pack", group: "a pack" },
+  { min: 5, word: "Several", group: "a group" },
+  FEW,
 ];
 
+function countBand(count: number): CountBand {
+  return COUNT_WORDS.find((b) => count >= b.min) ?? FEW;
+}
+
+/** "Few" (1-4), "Several" (5-9), "Pack" (10-19), "Lots" (20-49), "Horde" ... */
+export function countWord(count: number): string {
+  return countBand(count).word;
+}
+
+/** "a band" (1-4), "a group" (5-9), "a pack" (10-19), "lots" (20-49) ... */
 export function groupWord(count: number): string {
-  for (const [min, word] of GROUP_WORDS) if (count >= min) return word;
-  return "a band";
+  return countBand(count).group;
 }
 
 /** The creature name for a count ("1 Troll", "23 Goblins"). */
@@ -63,7 +87,7 @@ export function creatureCount(creature: string, count: number): string {
   return `${count} ${count === 1 ? def.name : def.plural}`;
 }
 
-/** "a pack of 23 Goblins" (a single creature: "a lone Troll"). */
+/** "a pack of 12 Goblins" (a single creature: "a lone Troll"). */
 export function stackPhrase(creature: string, count: number): string {
   if (count === 1) return `a lone ${getCreature(creature).name}`;
   return `${groupWord(count)} of ${creatureCount(creature, count)}`;

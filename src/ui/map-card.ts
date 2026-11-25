@@ -45,7 +45,12 @@ import {
   townAsset,
 } from "../render/map/scene.ts";
 import { el, img, resourceIcon } from "./dom.ts";
-import { describeCell, monsterSpellLine, objectAt } from "./format.ts";
+import {
+  countWord,
+  describeCell,
+  monsterSpellLine,
+  objectAt,
+} from "./format.ts";
 import { ODDS_TEXT, battleOdds, buildableTowns } from "./hints.ts";
 import type { ArmyLike, Odds } from "./hints.ts";
 import {
@@ -64,27 +69,10 @@ export const MAX_CARD_LINES = 6;
 
 // ------------------------------------------------------------ count words
 
-/**
- * Heroes-style count words by stack size (H3's thresholds): the card's
- * title says "Pack of Goblins" and the exact count stands beside it.
- */
-const COUNT_WORDS: ReadonlyArray<readonly [number, string]> = [
-  [1000, "Legion"],
-  [500, "Zounds"],
-  [250, "Swarm"],
-  [100, "Throng"],
-  [50, "Horde"],
-  [20, "Lots"],
-  [10, "Pack"],
-  [5, "Several"],
-  [1, "Few"],
-];
-
-/** "Few" (1-4), "Several" (5-9), "Pack" (10-19), "Lots" (20-49), "Horde" ... */
-export function countWord(count: number): string {
-  for (const [min, word] of COUNT_WORDS) if (count >= min) return word;
-  return "Few";
-}
+// The card's title says "Pack of Goblins" and the exact count stands beside
+// it. The words come from the one table in format.ts, shared with the
+// messages' "a pack of 12 Goblins" (bead bzc.80).
+export { countWord };
 
 /** "Pack of Goblins", "Few Skeletons", "Several Bats", "Lone Troll". */
 export function countPhrase(creature: string, count: number): string {
@@ -121,7 +109,10 @@ export type CardLine =
       readonly kind: "text";
       readonly text: string;
       readonly tone?: "good" | "bad" | "dim" | "hint";
-      /** Flavour, not rules: its words are never taken for keywords. */
+      /**
+       * Flavour or a stat readout, not rules: its words are never taken
+       * for keywords (the view marks it `data-kw-skip`).
+       */
       readonly plain?: boolean;
     }
   /** What it gives: resource icons and amounts, then words ("a day"). */
@@ -285,6 +276,8 @@ export function heroCard(
       {
         kind: "text",
         text: `Attack ${st.attack}, Defense ${st.defense}, Power ${st.power}, Lore ${st.lore}`,
+        // A stat readout, not rules: no Power and Lore boxes (bzc.80).
+        plain: true,
       },
       {
         kind: "text",

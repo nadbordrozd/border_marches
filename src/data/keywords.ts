@@ -593,17 +593,45 @@ export interface KeywordMatch {
   readonly id: string;
 }
 
+/**
+ * Proper names of content (skills, artifacts, feats, spells, buildings,
+ * map objects) that contain a keyword's word but name something else:
+ * "Teaches Drill Sergeant" is a skill, not the Drill building; a Border
+ * Gate is no HP gate. Inside one of these no keyword is found (bead
+ * border_marches-bzc.80). A name that is the keyword itself ("Sworn",
+ * "Scapegoat") stays highlighted. A test (tests/ui/keywords.test.ts)
+ * checks that every content name is either free of keywords, a keyword
+ * itself, or listed here, and that every name listed here exists.
+ */
+export const NAMES: readonly string[] = [
+  "Black Gate",
+  "Border Gate",
+  "Drill Sergeant",
+  "Drill Yard",
+  "Hush Now",
+  "Long Echo",
+  "Loose Scroll",
+  "Lucky Penny",
+  "Lucky Streak",
+  "Quest Gate",
+];
+
 const EDGE = "A-Za-z0-9_";
-const MATCHERS: ReadonlyArray<{ id: string; re: RegExp }> = KEYWORDS.map(
-  (k) => ({
-    id: k.id,
-    re: new RegExp(`(?<![${EDGE}])(?:${k.forms.join("|")})(?![${EDGE}])`, "g"),
-  }),
-);
+const escape = (s: string): string => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const NAME_ID = "";
+const MATCHERS: ReadonlyArray<{ id: string; re: RegExp }> = [
+  ...KEYWORDS.map((k) => ({ id: k.id, forms: k.forms })),
+  // A name answers with its plural too ("Drill Yards").
+  { id: NAME_ID, forms: NAMES.map((n) => `${escape(n)}s?`) },
+].map(({ id, forms }) => ({
+  id,
+  re: new RegExp(`(?<![${EDGE}])(?:${forms.join("|")})(?![${EDGE}])`, "g"),
+}));
 
 /**
  * Every keyword in `text`, left to right, without overlaps: where two
- * match at one place the longer wins ("condition tool" over "condition").
+ * match at one place the longer wins ("condition tool" over "condition"),
+ * and a proper name (`NAMES`) hides the keywords inside it.
  */
 export function findKeywords(text: string): KeywordMatch[] {
   const all: KeywordMatch[] = [];
@@ -625,7 +653,7 @@ export function findKeywords(text: string): KeywordMatch[] {
     out.push(m);
     at = m.end;
   }
-  return out;
+  return out.filter((m) => m.id !== NAME_ID);
 }
 
 /** The ids of the keywords in `text`, once each, in order of appearance. */

@@ -16,6 +16,7 @@ import {
   monsterSpellLine,
   stackPhrase,
 } from "../../src/ui/format.ts";
+import { countWord } from "../../src/ui/map-card.ts";
 import { cloneState } from "../../src/core/game/state.ts";
 import { withHeroMagic } from "../../src/core/magic/index.ts";
 import { field, gameOn, monster } from "../core/game/helpers.ts";
@@ -64,11 +65,32 @@ describe("format", () => {
   });
 
   it("describes stacks with a group word and the exact count", () => {
-    expect(groupWord(23)).toBe("a pack");
     expect(groupWord(12)).toBe("a pack");
     expect(stackPhrase("goblin", 12)).toBe("a pack of 12 Goblins");
     expect(stackPhrase("troll", 1)).toBe("a lone Troll");
     expect(stackPhrase("skeleton", 3)).toBe("a band of 3 Skeletons");
+    // The map card's thresholds (bead bzc.80): 23 is "Lots" on both.
+    expect(groupWord(23)).toBe("lots");
+    expect(stackPhrase("goblin", 23)).toBe("lots of 23 Goblins");
+    expect(stackPhrase("goblin", 600)).toBe("zounds of 600 Goblins");
+  });
+
+  it("changes the group word exactly where the card's count word changes", () => {
+    // One table (bead bzc.80): the sentence and the card never disagree on
+    // where a band starts, and say the same word where grammar allows.
+    const sentence: Record<string, string> = {
+      Few: "a band",
+      Several: "a group",
+    };
+    for (let n = 1; n <= 1200; n++) {
+      const word = countWord(n);
+      expect(groupWord(n), `${n}`).toBe(
+        sentence[word] ??
+          (["Lots", "Zounds"].includes(word)
+            ? word.toLowerCase()
+            : `a ${word.toLowerCase()}`),
+      );
+    }
   });
 
   it("lists costs in resource order", () => {
