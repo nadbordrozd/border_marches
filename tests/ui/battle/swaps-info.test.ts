@@ -17,7 +17,7 @@ import {
   hoverIntent,
   indexLegalActions,
 } from "../../../src/ui/battle/intent.ts";
-import { castPreview } from "../../../src/ui/battle/magic.ts";
+import { castPreview, roundsChange } from "../../../src/ui/battle/magic.ts";
 import {
   decorateScenario,
   giveTurn,
@@ -105,7 +105,16 @@ describe("previews of positional acts and clocks", () => {
       act: "a-pinch-of-sand",
       targets: [{ stack: "d0", condition: uid }],
     });
-    expect(pinch.summary).toEqual(["Goblins: Shaken clock 2 → 4"]);
+    expect(pinch.summary).toEqual(["Goblins: Shaken for 2 → 4 rounds"]);
+    expect(pinch.lines).toContain("Shaken on Goblins now lasts 4 rounds");
+  });
+
+  it("words a condition's new length in rounds, never as a clock", () => {
+    expect(roundsChange(2, 4)).toBe("for 2 → 4 rounds");
+    expect(roundsChange(2, 1)).toBe("for 2 → 1 round");
+    expect(roundsChange(undefined, 3)).toBe("for 3 rounds");
+    expect(roundsChange(null, 2)).toBe("for the whole battle → 2 rounds");
+    expect(roundsChange(2, null)).toBe("for 2 rounds → the whole battle");
   });
 });
 

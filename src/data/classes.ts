@@ -83,7 +83,7 @@ export const COMMANDS: Readonly<Record<string, CommandDef>> = {
   "swear-in": {
     id: "swear-in",
     name: "Swear In",
-    text: "Up to C times: pick two stacks that are not Sworn. They become Sworn to each other.",
+    text: "Up to C times: pick two stacks, friend or foe, that are not Sworn. They become Sworn to each other.",
   },
   "one-more-time": {
     id: "one-more-time",

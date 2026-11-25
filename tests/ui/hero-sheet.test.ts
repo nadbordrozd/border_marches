@@ -85,7 +85,10 @@ describe("hero sheet skill tiles", () => {
     const def = findSkill(id);
     if (def === undefined) throw new Error("no skill");
     const card = node(skillTipCard(id, 3));
-    expect(card.textContent).toContain(def.name);
+    // The bold title is the skill's name, not its first rank line.
+    expect(card.all("gm-tip-title").map((t) => t.textContent)).toEqual([
+      def.name,
+    ]);
     expect(card.textContent).toContain(`Expert ${def.family} skill`);
     for (const r of def.ranks) expect(card.textContent).toContain(r.text);
     // Ranks not held are dimmed; the held one is not.

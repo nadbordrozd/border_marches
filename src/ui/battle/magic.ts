@@ -510,6 +510,23 @@ export interface CastPreview {
   readonly summary: readonly string[];
 }
 
+/**
+ * A condition's new length in plain words: "for 2 → 4 rounds", "for 1
+ * round", "for the whole battle" (null clock). `was` is the length before,
+ * undefined when the preview does not know it.
+ */
+export function roundsChange(
+  was: number | null | undefined,
+  now: number | null,
+): string {
+  const len = (c: number | null): string =>
+    c === null ? "the whole battle" : `${c} round${c === 1 ? "" : "s"}`;
+  if (was === undefined) return `for ${len(now)}`;
+  if (was !== null && now !== null)
+    return `for ${was} → ${now} round${now === 1 ? "" : "s"}`;
+  return `for ${len(was)} → ${len(now)}`;
+}
+
 /** The rehearsed cast (RULES_V2 1.13): exactly what applying it does. */
 export function castPreview(
   state: BattleState,
@@ -532,7 +549,7 @@ export function castPreview(
         ?.conditions.find((c) => c.uid === e.condition.uid);
       const what =
         e.change === "wound"
-          ? `${name} clock ${was ? `${was.clock ?? "-"} → ` : ""}${e.condition.clock ?? "-"}`
+          ? `${name} ${roundsChange(was ? was.clock : undefined, e.condition.clock)}`
           : `${name} grows to ${e.condition.size}`;
       moved.set(e.stackId, [...(moved.get(e.stackId) ?? []), what]);
       continue;

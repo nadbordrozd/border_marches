@@ -43,7 +43,9 @@ import {
   conditionTooltip,
   groundTooltip,
 } from "../../src/ui/battle/grammar.ts";
-import { spellCastLines } from "../../src/ui/info-tips.ts";
+import { SCHOOL_COLOUR, spellCastLines } from "../../src/ui/info-tips.ts";
+import { SCHOOL_COLOURS } from "../../src/ui/battle/magic.ts";
+import { ICON_FRAMES } from "../../src/assets/icons.ts";
 
 registerSpells();
 
@@ -100,6 +102,13 @@ function rulesTexts(): Array<{ from: string; text: string }> {
     for (const a of creatureAbilities(c)) abilities.add(a);
   for (const c of Object.values(SUMMONED_CREATURES))
     for (const a of c.abilities) abilities.add(a);
+  // Drills (town buildings) and birthrights grant abilities too.
+  for (const f of FACTIONS) {
+    if (f.birthright?.ability !== undefined)
+      abilities.add(f.birthright.ability);
+    for (const b of Object.values(f.town?.buildings ?? {}))
+      if (b.drill !== undefined) abilities.add(b.drill.ability);
+  }
   for (const a of abilities)
     if (hasAbility(a)) add(`ability ${a}`, ability(a).description);
   for (const a of ARTIFACT_LIST) add(`artifact ${a.id}`, a.text);
@@ -256,5 +265,29 @@ describe("rules texts and the glossary", () => {
       expect(t.text, t.from).not.toMatch(shorthand);
       expect(t.text.length, t.from).toBeLessThanOrEqual(200);
     }
+  });
+
+  it("creature ability texts use no shorthand", () => {
+    // Bead bzc.74: faction, stray and summon abilities in the same style
+    // ("becomes Shaken for 2 rounds. Gate 12 HP per Banshee.", "deal 50%
+    // more damage", "instead of attacking"). "Adjacent" stays only where
+    // Long Shadow stretches the reach; elsewhere it is "next to". Ground
+    // sizes read like the spells' ("brambles of size 4").
+    const shorthand =
+      /\bclock \d|\bclock min\b|\bclockless\b|\bx \d+%|\bbears\b|\bbearing\b|\bnaming the\b|\bgate \d|\bmax \+|\bin place of\b|\bx count\b|\b\d+ x (?:their|its|the)\b|\bconsumed\b|\bApplies to\b/;
+    const checked = texts.filter((t) => t.from.startsWith("ability "));
+    expect(checked.length).toBeGreaterThan(50);
+    for (const t of checked) {
+      expect(t.text, t.from).not.toMatch(shorthand);
+      expect(t.text.length, t.from).toBeLessThanOrEqual(220);
+    }
+  });
+});
+
+describe("school colours", () => {
+  it("info cards use the spellbook's colours, which follow the icon frames", () => {
+    expect(SCHOOL_COLOUR).toBe(SCHOOL_COLOURS);
+    for (const s of ["bloom", "accord", "clock", "hush", "storm"] as const)
+      expect(SCHOOL_COLOUR[s], s).toBe(ICON_FRAMES[s].colour);
   });
 });

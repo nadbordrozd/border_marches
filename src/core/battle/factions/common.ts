@@ -6,6 +6,7 @@
  * named in their creature data (`caster`, cast with `creatureCast`).
  */
 
+import { COMMANDS } from "../../../data/classes.ts";
 import { isAlive } from "../abilities.ts";
 import { turnOrder } from "../engine.ts";
 import {
@@ -123,7 +124,7 @@ export function registerStampede(): void {
   registerAct({
     id: "stampede",
     name: "Stampede",
-    text: "Choose an enemy stack; up to C + 1 friendly stacks adjacent to it each make a melee Strike against it, in timeline order; it retaliates once.",
+    text: COMMANDS.stampede?.text ?? "",
     kind: "command",
     targets: 1,
     targetKinds: ["stack"],

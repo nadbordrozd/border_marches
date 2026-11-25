@@ -12,6 +12,7 @@ import {
   stepHex,
 } from "../hex.ts";
 import type { Hex } from "../hex.ts";
+import { COMMANDS } from "../../../data/classes.ts";
 import { withinReach } from "../abilities.ts";
 import { registerAbility, registerAct } from "../registry.ts";
 import type { AreaRef } from "../registry.ts";
@@ -60,7 +61,7 @@ export function registerGoblins(): void {
     id: "launched",
     name: "Launched",
     description:
-      "Caught in an area effect made by the side it fights for, this native stack takes no damage and no condition from it and is pushed 3 hexes directly away from the centre (from the centre hex: 3 hexes along its row toward the enemy).",
+      "When an area effect of its own side catches this native stack, it takes nothing from it and is thrown 3 hexes directly away from the centre (from the centre itself: 3 hexes toward the enemy).",
     onArea(fx, ownerId, area: AreaRef) {
       const side = fx.sideOf(ownerId);
       if (side !== area.side) return false;
@@ -82,7 +83,7 @@ export function registerGoblins(): void {
     id: "cannonball",
     name: "Cannonball",
     description:
-      "After being pushed or pulled 1 or more hexes and stopping adjacent to an enemy, the stack makes a special Strike on the stack that stopped it (or the nearest adjacent enemy) at +25% per hex moved (max +150%). Not retaliated.",
+      "When this stack is pushed or pulled and stops next to an enemy, it Strikes the stack that stopped it (or another enemy next to it) for 25% more damage per hex moved, at most 150% more. No retaliation.",
     onMoved(info, owner) {
       const me = owner.id;
       return (fx) => {
@@ -111,7 +112,7 @@ export function registerGoblins(): void {
     id: "bomb",
     name: "Bomb",
     description:
-      "The shot may target any hex and is an area effect centred there: a shot Strike on the stack in that hex and a shot Strike at x 50% on every stack adjacent to it, friend or foe.",
+      "The shot can target any hex and blasts it: a full shot at the stack on that hex and a half-damage shot at every stack next to it, friend or foe. An area effect.",
     shootAnyHex: true,
     shotArea: (_state, centre) => blastHexes(centre),
     shot(fx, ownerId, centre, targetId) {
@@ -150,7 +151,7 @@ export function registerGoblins(): void {
     id: "worry",
     name: "Worry",
     description:
-      "A stack struck by the Wolf Riders (attack or retaliation) gains Venomed 3 for 2 rounds.",
+      "A stack the Wolf Riders strike in melee (attacking or retaliating) gains Venomed 3 for 2 rounds.",
     onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id) return null;
       if (ctx.kind !== "melee" && ctx.kind !== "retaliation") return null;
@@ -171,7 +172,7 @@ export function registerGoblins(): void {
   registerAct({
     id: "hurl",
     name: "Hurl",
-    text: "An adjacent stack of any side with total HP at most 40 per Ogre is pushed 6 hexes directly away from the Ogres.",
+    text: "An adjacent stack, friend or foe, is thrown 6 hexes directly away from the Ogres. It works only on a stack with at most 40 HP per Ogre in total.",
     kind: "ability",
     targets: 1,
     targetKinds: ["stack"],
@@ -196,7 +197,7 @@ export function registerGoblins(): void {
     id: "hurl",
     name: "Hurl",
     description:
-      "Every turn, in place of an attack (may walk first): an adjacent stack of any side with total HP at most 40 per Ogre is pushed 6 hexes directly away from the Ogres.",
+      "Every turn, instead of attacking (it may move first): an adjacent stack, friend or foe, is thrown 6 hexes directly away from the Ogres. It works only on a stack with at most 40 HP per Ogre in total.",
     act: "hurl",
     moveFirst: true,
     everyTurn: true,
@@ -206,7 +207,7 @@ export function registerGoblins(): void {
     id: "stomp",
     name: "Stomp",
     description:
-      "The melee attack is an area effect centred on the Warbosses' hex: the Strike on the target and a special Strike at x 50% on every other stack adjacent to the Warbosses, friend or foe. Only the target retaliates.",
+      "The Warbosses' melee attack hits all around them: the target takes the full Strike and every other stack next to them, friend or foe, a half-damage Strike. Only the target retaliates. An area effect.",
     onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id || ctx.kind !== "melee") return null;
       const target = ctx.defender.id;
@@ -241,14 +242,14 @@ export function registerGoblins(): void {
     id: "fire-pots",
     name: "Fire Pots",
     description:
-      "The stack on a Bomb's centre hex gains Burning of 2 per Bomb Chucker for 3 rounds.",
+      "The stack a Bomb hits directly also gains Burning (2 per Bomb Chucker) for 3 rounds.",
   });
 
   registerAbility({
     id: "hit-and-run",
     name: "Hit and Run",
     description:
-      "After their melee attack and its retaliation, the Wolf Riders may walk up to 3 hexes.",
+      "After their melee attack and its retaliation, the Wolf Riders may walk up to 3 more hexes.",
     walkAfterAttack: 3,
   });
 
@@ -256,7 +257,7 @@ export function registerGoblins(): void {
   registerAct({
     id: "heave-ho",
     name: "Heave-Ho",
-    text: "Up to C + 1 times: choose a friendly stack and a hex in a straight line from it; the stack is pushed 4 hexes toward that hex.",
+    text: COMMANDS["heave-ho"]?.text ?? "",
     kind: "command",
     targets: 2,
     targetStep: 2,
@@ -322,7 +323,7 @@ export function registerGoblins(): void {
   registerAct({
     id: "kaboom",
     name: "Kaboom",
-    text: "Choose a hex: every stack on it or adjacent to it takes Harm 30 x C. An area effect.",
+    text: COMMANDS.kaboom?.text ?? "",
     kind: "command",
     targets: 1,
     targetKinds: ["hex"],

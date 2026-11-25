@@ -18,31 +18,31 @@ export const ABILITIES: Readonly<Record<AbilityId, AbilityDef>> = {
   mob: {
     id: "mob",
     name: "Mob",
-    text: "+1 Attack for each other friendly stack adjacent to the target (max +5). Applies to attacks and retaliations.",
+    text: "+1 Attack for each other friendly stack adjacent to the target (at most +5), retaliations included.",
     params: { attackPerStack: 1, maxAttack: 5 },
   },
   venom: {
     id: "venom",
     name: "Venom",
-    text: "A stack hit by this creature (shot or melee) has -3 Defense until the end of the next round. A new hit refreshes the duration; it never stacks. Defense cannot go below 0.",
+    text: "A stack this creature strikes (shot or melee) gets -3 Defense until the end of the next round. A new hit restarts the time but does not add up. Defense cannot go below 0.",
     params: { defense: 3, rounds: 1 },
   },
   "pack-hunter": {
     id: "pack-hunter",
     name: "Pack Hunter",
-    text: "+20% damage for each other friendly stack adjacent to the target (max +100%). Applies to attacks and retaliations.",
+    text: "Deals 20% more damage for each other friendly stack adjacent to the target (at most 100% more), retaliations included.",
     params: { percentPerStack: 20, maxPercent: 100 },
   },
   "war-drums": {
     id: "war-drums",
     name: "War Drums",
-    text: "Other friendly stacks adjacent to this stack get +2 Attack. Several War Drums do not stack.",
+    text: "Other friendly stacks adjacent to this stack get +2 Attack. Two War Drums on one stack do not add up.",
     params: { attack: 2 },
   },
   charge: {
     id: "charge",
     name: "Charge",
-    text: "+15% damage for each hex moved this turn before the attack (max +75% at 5 hexes). Retaliations have moved 0 hexes.",
+    text: "Its melee attack deals 15% more damage for each hex it walked this turn before attacking (at most 75% more, at 5 hexes). No bonus when it retaliates.",
     params: { percentPerHex: 15, maxPercent: 75 },
   },
   terror: {
@@ -54,7 +54,7 @@ export const ABILITIES: Readonly<Record<AbilityId, AbilityDef>> = {
   bony: {
     id: "bony",
     name: "Bony",
-    text: "Ranged attacks deal half damage to this creature.",
+    text: "Shots deal half damage to this creature.",
     params: { rangedPercent: 50 },
   },
   regenerate: {

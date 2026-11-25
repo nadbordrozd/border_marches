@@ -3,6 +3,7 @@
  * abilities, the three Drills, Challenged, and the two Commands.
  */
 
+import { COMMANDS } from "../../../data/classes.ts";
 import { isAlive, withinReach } from "../abilities.ts";
 import { canShoot } from "../engine.ts";
 import {
@@ -37,7 +38,7 @@ export function registerHumans(): void {
     defaultClock: null,
     swapAction: true,
     text: () =>
-      "A link: a Heal of X on the bearer also heals the far end X (same reviving); on its turn the bearer may swap hexes with the far end in place of its walk.",
+      "A link: when this stack is healed, the far end is healed as much (reviving if this heal revives). On its turn, instead of walking, it may swap places with the far end.",
     onHealed(fx, _holder, c, x, revive) {
       if (c.link !== null && fx.isAlive(c.link))
         fx.heal(c.link, x, { revive, shared: true });
@@ -56,7 +57,7 @@ export function registerHumans(): void {
     polarity: "bane",
     link: "other",
     text: (c) =>
-      `Its Strikes against any stack other than the far end are x 50%${c.clock === null ? "" : ` for ${c.clock} round${c.clock === 1 ? "" : "s"}`}.`,
+      `Its Strikes on any stack other than the far end deal half damage${c.clock === null ? "" : ` for ${c.clock} round${c.clock === 1 ? "" : "s"}`}.`,
     strikeMultiplier(ctx, holder, c) {
       if (holder.id !== ctx.attacker.id || c.link === ctx.defender.id)
         return null;
@@ -83,7 +84,7 @@ export function registerHumans(): void {
   registerAct({
     id: "attend",
     name: "Attend",
-    text: "One other friendly stack adjacent to the Squires gains Heartened, gate 20 HP per Squire.",
+    text: "Another friendly stack adjacent to the Squires becomes Heartened. Gate 20 HP per Squire.",
     kind: "ability",
     targets: 1,
     targetKinds: ["stack"],
@@ -113,7 +114,7 @@ export function registerHumans(): void {
     id: "attend",
     name: "Attend",
     description:
-      "Once per battle, in place of an attack (may walk first): one other friendly stack adjacent to the Squires gains Heartened, gate 20 HP per Squire.",
+      "Once per battle, instead of attacking (it may move first): another friendly stack adjacent to the Squires becomes Heartened. Gate 20 HP per Squire.",
     act: "attend",
     moveFirst: true,
   });
@@ -122,7 +123,7 @@ export function registerHumans(): void {
     id: "covering-volley",
     name: "Covering Volley",
     description:
-      "When the far end of a link the Longbowmen bear makes a melee attack and its target survives, the Longbowmen (if they could shoot now) shoot that target at x 50%, after its retaliation.",
+      "When the far end of one of the Longbowmen's links attacks in melee and its target survives, the Longbowmen shoot that target too, for half damage, after its retaliation (if they can shoot now).",
     onStrike(ctx, owner) {
       if (ctx.kind !== "melee" || ctx.attacker.id === owner.id) return null;
       const linked = owner.conditions.some((c) => c.link === ctx.attacker.id);
@@ -146,7 +147,7 @@ export function registerHumans(): void {
     id: "shield-wall",
     name: "Shield Wall",
     description:
-      "Other friendly stacks adjacent to the Men-at-Arms get +2 Defense. Several Shield Walls do not stack.",
+      "Other friendly stacks adjacent to the Men-at-Arms get +2 Defense. Two Shield Walls on one stack do not add up.",
     defenseModifier(ctx, owner) {
       const d = ctx.defender;
       if (owner.id === d.id || owner.side !== d.side) return null;
@@ -163,7 +164,8 @@ export function registerHumans(): void {
   registerAbility({
     id: "stand-fast",
     name: "Stand Fast",
-    description: "Retaliates against every melee attack, not once per round.",
+    description:
+      "Retaliates against every melee attack, not just once a round.",
     unlimitedRetaliation: true,
   });
 
@@ -171,7 +173,7 @@ export function registerHumans(): void {
     id: "paragon",
     name: "Paragon",
     description:
-      "+10% Strike damage for each boon the Dragonslayers bear (max +50%). Applies to attacks and retaliations.",
+      "The Dragonslayers' Strikes deal 10% more damage for each boon on them (at most 50% more), retaliations included.",
     damageMultiplier(ctx, owner) {
       if (owner.id !== ctx.attacker.id) return null;
       const bonus = Math.min(50, 10 * polarityCount(owner, "boon"));
@@ -186,7 +188,7 @@ export function registerHumans(): void {
     id: "pin-down",
     name: "Pin Down",
     description:
-      "A stack hit by the Longbowmen's shot gains Delayed for 2 rounds, gate 15 HP per Longbowman.",
+      "A stack hit by the Longbowmen's shot becomes Delayed for 2 rounds. Gate 15 HP per Longbowman.",
     onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id || ctx.kind !== "shot") return null;
       const target = ctx.defender.id;
@@ -208,7 +210,7 @@ export function registerHumans(): void {
     id: "bodyguard",
     name: "Bodyguard",
     description:
-      "When an enemy adjacent to the Men-at-Arms makes a melee attack on another friendly stack adjacent to them, the Men-at-Arms spend their retaliation (if they have it) on a retaliation Strike against it.",
+      "When an enemy adjacent to the Men-at-Arms attacks another friendly stack adjacent to them in melee, the Men-at-Arms strike that enemy back, using up their retaliation for the round (if they still have it).",
     onStrike(ctx, owner) {
       if (ctx.kind !== "melee") return null;
       const a = ctx.attacker;
@@ -235,7 +237,7 @@ export function registerHumans(): void {
     id: "follow-through",
     name: "Follow Through",
     description:
-      "After a melee attack that followed a walk of 4 or more hexes, the target is pushed 1 hex directly away from the Knights (no longer adjacent, it does not retaliate).",
+      "After a melee attack at the end of a walk of 4 or more hexes, the Knights push the target 1 hex directly away. No longer next to them, it does not retaliate.",
     onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id || ctx.kind !== "melee") return null;
       if (ctx.hexesMoved < 4) return null;
@@ -251,7 +253,7 @@ export function registerHumans(): void {
   registerAct({
     id: "single-combat",
     name: "Single Combat",
-    text: "Choose a friendly stack and an enemy stack: the enemy gains Challenged naming the friendly stack, for min(3, C + 1) rounds.",
+    text: COMMANDS["single-combat"]?.text ?? "",
     kind: "command",
     targets: 2,
     targetKinds: ["stack", "stack"],
@@ -286,7 +288,7 @@ export function registerHumans(): void {
   registerAct({
     id: "swear-in",
     name: "Swear In",
-    text: "Up to C times: choose two stacks, neither bearing Sworn; each gains Sworn naming the other. Any sides.",
+    text: COMMANDS["swear-in"]?.text ?? "",
     kind: "command",
     targets: 2,
     targetStep: 2,

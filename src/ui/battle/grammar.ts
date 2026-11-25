@@ -264,7 +264,7 @@ export function chainLines(
           moved: `${kind} moves to ${who}`,
           copied: `${kind} copied to ${who}`,
           fed: `${kind} on ${who} grows to ${e.condition.size}`,
-          wound: `${kind} on ${who}: clock ${e.condition.clock ?? "-"}`,
+          wound: `${kind} on ${who} now lasts ${e.condition.clock === null ? "the whole battle" : `${e.condition.clock} round${e.condition.clock === 1 ? "" : "s"}`}`,
           setOff: `${kind} on ${who} set off`,
           expired: `${kind} on ${who} expires`,
           ended: `${kind} on ${who} ends`,

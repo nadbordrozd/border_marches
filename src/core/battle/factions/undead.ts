@@ -5,6 +5,7 @@
  * opt into it.
  */
 
+import { COMMANDS } from "../../../data/classes.ts";
 import { withinReach } from "../abilities.ts";
 import { sameHex } from "../hex.ts";
 import type { Hex } from "../hex.ts";
@@ -30,7 +31,7 @@ export function registerUndead(): void {
     id: "not-done-yet",
     name: "Not Done Yet",
     description:
-      "Once per battle, when this native stack dies and leaves remains, it gets up at the next round start on its remains with a third of its starting count (rounded up) at full HP. It crumbles when the battle ends.",
+      "Once per battle, when this native stack dies and leaves remains, it gets up on them at the start of the next round with a third of its starting count (rounded up), at full health. It crumbles when the battle ends.",
     getUp: "once",
   });
 
@@ -39,7 +40,7 @@ export function registerUndead(): void {
     id: "feast",
     name: "Feast",
     description:
-      "When the Ghouls end a walk on remains, the remains are consumed and the Ghouls are healed 6 x their count, reviving. They may still attack.",
+      "When the Ghouls end a walk on remains, they eat them up and heal 6 HP per Ghoul, reviving. They can still attack.",
     onWalkEnd(fx, ownerId, hex) {
       const g = fx.state.ground.find((x) => sameHex(x.hex, hex));
       if (!g || g.class !== "remains") return;
@@ -52,7 +53,7 @@ export function registerUndead(): void {
     id: "wail",
     name: "Wail",
     description:
-      "A stack hit by the Banshees' shot gains Shaken for 2 rounds, gate 12 HP per Banshee.",
+      "A stack hit by the Banshees' shot becomes Shaken for 2 rounds. Gate 12 HP per Banshee.",
     onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id || ctx.kind !== "shot") return null;
       const target = ctx.defender.id;
@@ -74,7 +75,7 @@ export function registerUndead(): void {
     id: "keen",
     name: "Keen",
     description:
-      "The Banshees' shots get +10% damage for each remains feature on the field (max +50%).",
+      "The Banshees' shots deal 10% more damage for each set of remains on the field (at most 50% more).",
     damageMultiplier(ctx, owner) {
       if (owner.id !== ctx.attacker.id || ctx.kind !== "shot") return null;
       const bonus = Math.min(50, 10 * remainsCount(ctx.state));
@@ -88,7 +89,7 @@ export function registerUndead(): void {
     id: "drain",
     name: "Drain",
     description:
-      "After the Vampires' melee attack (not a retaliation), they are healed half the damage it dealt, rounded down, reviving.",
+      "After the Vampires attack in melee (not when they retaliate), they heal half the damage dealt, rounded down, reviving.",
     onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id || ctx.kind !== "melee") return null;
       return (fx) => {
@@ -109,7 +110,7 @@ export function registerUndead(): void {
     id: "mist",
     name: "Mist",
     description:
-      "The Vampires' walk is a teleport to any free hex within their Speed; nothing between matters.",
+      "The Vampires do not walk: they teleport to any free hex within their Speed, whatever is in the way.",
     teleportWalk: true,
   });
 
@@ -117,7 +118,7 @@ export function registerUndead(): void {
     id: "long-live-the-king",
     name: "Long Live the King",
     description:
-      "When the Late Kings die and will not get up otherwise, the nearest other remains are consumed and they get up as by Not Done Yet. No limit per battle.",
+      "When the Late Kings die and would not get up otherwise, they use up the nearest other remains and get up as with Not Done Yet. Any number of times per battle.",
     getUp: "paid",
   });
 
@@ -125,7 +126,7 @@ export function registerUndead(): void {
     id: "royal-displeasure",
     name: "Royal Displeasure",
     description:
-      "+25% Strike damage for each bane the target bears (max +100%). Applies to attacks and retaliations.",
+      "The Late Kings' Strikes deal 25% more damage for each bane on the target (at most 100% more), retaliations included.",
     damageMultiplier(ctx, owner) {
       if (owner.id !== ctx.attacker.id) return null;
       const bonus = Math.min(100, 25 * polarityCount(ctx.defender, "bane"));
@@ -144,7 +145,7 @@ export function registerUndead(): void {
     id: "spare-parts",
     name: "Spare Parts",
     description:
-      "When the Skeletons get up, their bones are not consumed: the feature stays under them.",
+      "When the Skeletons get up, their bones are not used up: they stay on the field under them.",
     keepsRemainsOnGetUp: true,
   });
 
@@ -152,7 +153,7 @@ export function registerUndead(): void {
     id: "grave-rot",
     name: "Grave Rot",
     description:
-      "A stack struck by the Ghouls in melee (attack or retaliation) gains Venomed 3 for 2 rounds.",
+      "A stack the Ghouls strike in melee (attacking or retaliating) gains Venomed 3 for 2 rounds.",
     onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id) return null;
       if (ctx.kind !== "melee" && ctx.kind !== "retaliation") return null;
@@ -173,7 +174,7 @@ export function registerUndead(): void {
   registerAct({
     id: "mesmerise",
     name: "Mesmerise",
-    text: "An adjacent enemy stack gains Asleep for 2 rounds, gate 30 HP per Vampire.",
+    text: "An adjacent enemy stack falls Asleep for 2 rounds. Gate 30 HP per Vampire.",
     kind: "ability",
     targets: 1,
     targetKinds: ["stack"],
@@ -199,7 +200,7 @@ export function registerUndead(): void {
     id: "mesmerise",
     name: "Mesmerise",
     description:
-      "Once per battle, in place of an attack (may move first): an adjacent enemy stack gains Asleep for 2 rounds, gate 30 HP per Vampire.",
+      "Once per battle, instead of attacking (it may move first): an adjacent enemy stack falls Asleep for 2 rounds. Gate 30 HP per Vampire.",
     act: "mesmerise",
     moveFirst: true,
   });
@@ -208,7 +209,7 @@ export function registerUndead(): void {
   registerAct({
     id: "one-more-time",
     name: "One More Time",
-    text: "Up to C friendly stacks that are not summoned gain the badge 'gets up': the next time each dies and leaves remains, it gets up as by Not Done Yet.",
+    text: COMMANDS["one-more-time"]?.text ?? "",
     kind: "command",
     targets: 1,
     targetKinds: ["stack"],
@@ -238,7 +239,7 @@ export function registerUndead(): void {
   registerAct({
     id: "last-rites",
     name: "Last Rites",
-    text: "Choose remains: they are consumed, and every enemy stack within C hexes gains Shaken (2 rounds) and Jinxed 25 (2 rounds).",
+    text: COMMANDS["last-rites"]?.text ?? "",
     kind: "command",
     targets: 1,
     targetKinds: ["hex"],

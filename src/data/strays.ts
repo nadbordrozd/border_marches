@@ -233,92 +233,95 @@ export const STRAY_ABILITY_TEXT: Readonly<
 > = {
   carry: {
     name: "Carry",
-    text: "Once per battle, instead of attacking, it moves one condition from an adjacent stack to another adjacent stack.",
+    text: "Once per battle, instead of attacking: move one condition from a stack next to the Bellhops onto another stack next to them.",
   },
   "takes-the-blame": {
     name: "Takes the Blame",
-    text: "Once per battle, instead of attacking, an adjacent friendly stack gains a Scapegoat link to the Whipping Boys for 3 rounds.",
+    text: "Once per battle, instead of attacking: a friendly stack next to the Whipping Boys gets a Scapegoat link to them for 3 rounds, so the Whipping Boys take its damage.",
   },
   sabotage: {
     name: "Sabotage",
-    text: "Its melee Strike adds Hushed for 2 rounds.",
+    text: "A stack the Gremlins attack in melee becomes Hushed for 2 rounds.",
   },
   "light-up": {
     name: "Light Up",
-    text: "Its Strikes are x 150% against a stack that bears Burning or stands in fire.",
+    text: "The Lamplighters' Strikes deal 50% more damage to a stack that is Burning or stands in fire.",
   },
   extra: {
     name: "Extra!",
-    text: "Once per battle, instead of attacking, every friendly stack adjacent to it gains Quickened 2 for 2 rounds.",
+    text: "Once per battle, instead of attacking: every friendly stack next to the Newsies gains Quickened 2 for 2 rounds.",
   },
   stamp: {
     name: "Stamp",
-    text: "Once per battle, instead of attacking, an adjacent enemy stack gains Turned for 1 round, gate 15 HP per Notary.",
+    text: "Once per battle, instead of attacking: an enemy stack next to the Notaries becomes Turned for 1 round. Gate 15 HP per Notary.",
   },
-  croon: { name: "Croon", text: "Its shot adds Mollified 30 for 2 rounds." },
+  croon: {
+    name: "Croon",
+    text: "A stack the Crooners shoot gains Mollified 30 for 2 rounds.",
+  },
   latch: {
     name: "Latch",
-    text: "Its melee Strike adds a Leeched link from the target to the Bog Leeches, size equal to their count (at most 40) for 2 rounds.",
+    text: "A stack the Bog Leeches attack in melee becomes Leeched by them for 2 rounds: at each of its turns it takes 1 Harm per Bog Leech (at most 40) and they heal that much.",
   },
   advance: {
     name: "Advance",
-    text: "Once per battle, instead of attacking, an adjacent stack gains Fired Up 4 and a Reckoning of 5 x the Loan Sharks' count (at most 150), both for 3 rounds.",
+    text: "Once per battle, instead of attacking: a stack next to the Loan Sharks gains Fired Up 4 and Reckoning (5 per Loan Shark, at most 150), both for 3 rounds.",
   },
   "wind-up": {
     name: "Wind Up",
-    text: "Once per battle, instead of attacking, a stack within 3 hexes gains Delayed for 2 rounds.",
+    text: "Once per battle, instead of attacking: a stack within 3 hexes of the Winders becomes Delayed for 2 rounds.",
   },
   tend: {
     name: "Tend",
-    text: "Once per battle, instead of attacking, an adjacent stack gains Mending 2 x count (at most 60) and Thorned of size count (at most 30), both for 3 rounds.",
+    text: "Once per battle, instead of attacking: a stack next to the Groundskeepers gains Mending (2 per Groundskeeper, at most 60) and Thorned (1 per Groundskeeper, at most 30), both for 3 rounds.",
   },
   tow: {
     name: "Tow",
-    text: "Once per battle, instead of attacking, it pulls a stack within 6 hexes 3 hexes toward itself, or 5 if that stack is Slowed.",
+    text: "Once per battle, instead of attacking: pull a stack within 6 hexes of the Riggers 3 hexes toward them, or 5 hexes if that stack is Slowed.",
   },
   "dead-to-rights": {
     name: "Dead to Rights",
-    text: "Its shots are x 150% against a Hushed stack.",
+    text: "The Gumshoes' shots deal 50% more damage to a Hushed stack.",
   },
   "pressure-suit": {
     name: "Pressure Suit",
-    text: "It starts each battle bearing Warded 50, clockless.",
+    text: "In each battle, the Deep-Sea Divers gain Warded 50 at their first turn, for the whole battle.",
   },
   "night-shift": {
     name: "Night Shift",
-    text: "Creature caster: Second Shift (raises Shades from remains).",
+    text: "Creature caster: the Sextons cast Second Shift, which raises Shades from remains.",
   },
   "drag-under": {
     name: "Drag Under",
-    text: "Its melee Strike adds Drenched 50 for 2 rounds.",
+    text: "A stack the Lagoon Lurkers attack in melee gains Drenched 50 for 2 rounds.",
   },
   breath: {
     name: "Breath",
-    text: "Instead of attacking, it places fire of size equal to its count (at most 30) for 2 rounds on the three hexes in a straight line from it.",
+    text: "Every turn, instead of attacking: the three hexes in a straight line from the Fire-Eaters catch fire for 2 rounds, of size 1 per Fire-Eater (at most 30).",
   },
   "cold-front": {
     name: "Cold Front",
-    text: "Once per battle, instead of attacking, every adjacent enemy stack gains Frozen for 1 round, gate 15 HP per Walrus.",
+    text: "Once per battle, instead of attacking: every enemy stack next to the Rime Walruses becomes Frozen for 1 round. Gate 15 HP per Walrus.",
   },
   "stand-behind-me": {
     name: "Stand Behind Me",
-    text: "At its turn start every adjacent friendly stack gains Shielded 3 for 2 rounds.",
+    text: "At the start of the Tin Titans' turn, every friendly stack next to them gains Shielded 3 for 2 rounds.",
   },
   "late-bloomer": {
     name: "Late Bloomer",
-    text: "It starts each battle bearing Ripening 10, clockless.",
+    text: "In each battle, the Prize Pumpkins gain Ripening 10 at their first turn, for the whole battle.",
   },
   "giant-stomp": {
     name: "Stomp",
-    text: "After its melee Strike, every other stack adjacent to the target takes Harm equal to a quarter of that Strike's damage.",
+    text: "After the Beanstalk Giants attack in melee, every other stack next to the target takes Harm equal to a quarter of the damage dealt.",
   },
   "gone-to-seed": {
     name: "Gone to Seed",
-    text: "When it dies its hex receives brambles of size 4 for 3 rounds.",
+    text: "When it dies, brambles of size 4 cover its hex for 3 rounds.",
   },
   fade: {
     name: "Fade",
-    text: "When it dies its hex receives mist for 2 rounds.",
+    text: "When it dies, mist covers its hex for 2 rounds.",
   },
 };
 

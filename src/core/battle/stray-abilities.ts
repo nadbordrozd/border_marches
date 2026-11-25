@@ -105,6 +105,19 @@ const target0 = (targets: readonly ActTarget[]): StackId => {
   return t !== undefined && "stack" in t ? t.stack : "";
 };
 
+/**
+ * An act's rule: the ability's text without its "Once per battle, instead
+ * of attacking:" lead (the action bar shows how often it works), like the
+ * faction acts' texts.
+ */
+function actText(text: string): string {
+  const rest = text.replace(
+    /^(?:Once per battle|Every turn), instead of attacking: /,
+    "",
+  );
+  return rest.charAt(0).toUpperCase() + rest.slice(1);
+}
+
 /** One-target activated ability: the act and its ability. */
 function activated(
   id: StrayAbilityId,
@@ -117,7 +130,7 @@ function activated(
   registerAct({
     id: `stray:${id}`,
     name: t.name,
-    text: t.text,
+    text: actText(t.text),
     kind: "ability",
     targets,
     ...(check !== undefined ? { check } : {}),

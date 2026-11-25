@@ -26,6 +26,7 @@ import { FACTIONS } from "../data/factions.ts";
 import { spellName, findMapSpell } from "../data/map-spells.ts";
 import type { BuildingId, FactionId } from "../data/types.ts";
 import type { TownState } from "../core/game/index.ts";
+import { SCHOOL_COLOURS } from "./battle/magic.ts";
 import { costView, el, img } from "./dom.ts";
 import { iconElement } from "./icons.ts";
 import { tipCard } from "./tooltip.ts";
@@ -38,13 +39,8 @@ export const SCHOOL_LABEL: Readonly<Record<string, string>> = {
   storm: "Storm",
 };
 
-export const SCHOOL_COLOUR: Readonly<Record<string, string>> = {
-  bloom: "#6fae4f",
-  accord: "#d9b44a",
-  clock: "#5a8fcf",
-  hush: "#8a6bb8",
-  storm: "#d0643c",
-};
+/** The school colours: the battle spellbook's one table (Accord blue, Clock yellow). */
+export const SCHOOL_COLOUR: Readonly<Record<string, string>> = SCHOOL_COLOURS;
 
 /** An ability's name and rule text, from the battle registry or the data. */
 export function abilityText(id: string): { name: string; text: string } {
