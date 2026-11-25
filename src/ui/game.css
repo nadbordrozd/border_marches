@@ -1304,20 +1304,6 @@
   color: var(--gm-red);
 }
 
-.gm-kingdom {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 8px;
-  background: var(--gm-wood-dark);
-  border: 1px solid var(--gm-edge);
-  font-size: 11px;
-}
-
-.gm-kingdom-row {
-  color: var(--gm-dim);
-}
-
 /* Narrow windows: the sidebar moves under the map. */
 @media (max-width: 760px) {
   .gm-game {
@@ -1455,18 +1441,6 @@
 
 .gm-table th {
   color: var(--gm-gold-dim);
-}
-
-.gm-kingdom-body h3 {
-  margin: 10px 0 4px;
-  color: var(--gm-gold-dim);
-  font-size: 14px;
-}
-
-.gm-rivals {
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 /* Content icons (src/ui/icons.ts, docs/art/classes/icons.md): the frame is
@@ -2499,31 +2473,6 @@
   flex-wrap: wrap;
 }
 
-.gm-modal.gm-kingdom-dialog {
-  width: min(640px, calc(100vw - 32px));
-  max-width: none;
-}
-
-.gm-kingdom-body h3.gm-rule {
-  margin: 12px 0 4px;
-}
-
-.gm-income-table th,
-.gm-income-table td {
-  text-align: right;
-}
-
-.gm-income-table th:first-child,
-.gm-income-table td:first-child {
-  text-align: left;
-}
-
-.gm-income-table .gm-total td {
-  font-weight: bold;
-  color: var(--gm-gold);
-  border-bottom: 0;
-}
-
 .gm-num {
   font-variant-numeric: tabular-nums;
 }
@@ -2544,34 +2493,6 @@
 
 .gm-linkish:hover {
   color: var(--gm-gold);
-}
-
-.gm-kingdom-hero {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.gm-kingdom-portrait {
-  width: 24px;
-  height: 24px;
-  image-rendering: pixelated;
-}
-
-.gm-mine-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 14px;
-}
-
-.gm-mine-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.gm-rivals li {
-  padding: 2px 0;
 }
 
 /* ------------------------------------------------------------ end screens */

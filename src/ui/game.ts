@@ -35,7 +35,6 @@ import {
   moveHeroAlong,
   sightRadius,
   takeChest,
-  townIncome,
   townsOf,
   xpForLevel,
 } from "../core/game/index.ts";
@@ -74,7 +73,6 @@ import { soundControl } from "./sound-control.ts";
 import { armyRow } from "./army.ts";
 import {
   button,
-  costView,
   el,
   img,
   kbd,
@@ -89,7 +87,6 @@ import {
 import { findFaction } from "../data/factions.ts";
 import { getCreature } from "../data/creatures.ts";
 import { creatureTip } from "./info-tips.ts";
-import { fortLevel } from "../core/game/index.ts";
 import {
   battleOdds,
   buildableTowns,
@@ -126,6 +123,7 @@ import { PRIMARY_STATS, STAT_NAMES } from "../data/effects.ts";
 import { browserStorage, deleteSave, readSave, saveGame } from "./save.ts";
 import { displayObjects, objectsSignature } from "./objects.ts";
 import { openTownScreen } from "./town.ts";
+import { openKingdom } from "./kingdom.ts";
 import {
   DOUBLE_CLICK_MS,
   PLAN_OPTIONS,
@@ -306,8 +304,6 @@ class GameScreen {
   private offModal: () => void = () => {};
   /** When the last queued float at the hero starts (ms). */
   private floatQueue = 0;
-  /** A town picked in the kingdom overview, opened when it closes. */
-  private kingdomTown: string | null = null;
   /**
    * An adventure spell aimed on the map (bead bzc.47): its valid targets
    * glow and the next click on one casts.
@@ -2280,165 +2276,24 @@ class GameScreen {
     this.refresh();
   }
 
-  /** The kingdom overview: income, towns, heroes, mines, rivals. */
+  /**
+   * The kingdom overview (UI2-12, src/ui/kingdom.ts): a click on a hero row
+   * selects that hero, one on a town row opens the town.
+   */
   private async kingdom(): Promise<void> {
     if (this.inputBlocked()) return;
-    const s = this.state;
-    const total = dailyIncome(s, this.human);
-    const parts = incomeBreakdown(s, this.human, total);
-    const income = el("table.gm-table.gm-income-table");
-    income.append(
-      el(
-        "tr",
-        el("th", ""),
-        ...RESOURCE_IDS.map((r) => el("th", resourceIcon(r, "gm-res-icon-24"))),
-      ),
-    );
-    for (const [label, row] of [
-      ["Towns", parts.towns],
-      ["Mines", parts.mines],
-      ["Heroes", parts.heroes],
-      ["Per day", parts.total],
-    ] as const) {
-      const tr = el(
-        "tr",
-        el("td", label),
-        ...RESOURCE_IDS.map((r) =>
-          el("td.gm-num", row[r] > 0 ? `+${row[r]}` : "-"),
-        ),
-      );
-      if (label === "Per day") tr.classList.add("gm-total");
-      income.append(tr);
-    }
-    const buildable = new Set(buildableTowns(s, this.human));
-    const towns = el("table.gm-table");
-    towns.append(
-      el(
-        "tr",
-        el("th", "Town"),
-        el("th", "Fort"),
-        el("th", "Income"),
-        el("th", "Garrison"),
-        el("th", "Today"),
-      ),
-    );
-    for (const t of townsOf(s, this.human)) {
-      const garrison = t.garrison.reduce((n, x) => n + (x?.count ?? 0), 0);
-      const name = button(t.name, () => void 0, "gm-linkish");
-      const row = el(
-        "tr",
-        el("td", name),
-        el("td.gm-num", fortLevel(t) === 0 ? "-" : String(fortLevel(t))),
-        el("td", costView(townIncome(t))),
-        el("td.gm-num", String(garrison)),
-        el(
-          "td",
-          t.builtToday
-            ? el("span.gm-dim", "built")
-            : buildable.has(t.id)
-              ? el("span.gm-good", "can build")
-              : el("span.gm-dim", "-"),
-        ),
-      );
-      setTip(name, () => this.townTip(t.id));
-      name.addEventListener("click", () => {
-        this.kingdomTown = t.id;
-      });
-      towns.append(row);
-    }
-    const heroes = el("table.gm-table");
-    heroes.append(
-      el(
-        "tr",
-        el("th", "Hero"),
-        el("th", "Level"),
-        el("th", "Army"),
-        el("th", "Moves"),
-      ),
-    );
-    for (const h of heroesOf(s, this.human)) {
-      const army = h.army.reduce((n, x) => n + (x?.count ?? 0), 0);
-      const name = el(
-        "span.gm-kingdom-hero",
-        img(namedHeroPortrait(h.defId, h.heroClass).key, "gm-kingdom-portrait"),
-        h.name,
-      );
-      setTip(name, () => this.heroTip(h));
-      heroes.append(
-        el(
-          "tr",
-          el("td", name),
-          el("td.gm-num", String(h.level)),
-          el("td.gm-num", String(army)),
-          el("td.gm-num", `${h.mp} / ${h.maxMp}`),
-        ),
-      );
-    }
-    const mineList = el("div.gm-mine-list");
-    for (const r of RESOURCE_IDS) {
-      const n = minesOf(s, this.human, r);
-      if (r === "gold" && n === 0) continue;
-      const item = el(
-        "span.gm-mine-item",
-        resourceIcon(r, "gm-cost-icon"),
-        `${n} ${MINES[r].name}${n === 1 ? "" : "s"}`,
-      );
-      if (n === 0) item.classList.add("gm-dim");
-      mineList.append(item);
-    }
-    const rivals = el("ul.gm-rivals");
-    for (const p of s.players) {
-      if (p.id === this.human) continue;
-      const chip = el("span.gm-turn-chip");
-      chip.style.background = playerColour(p.id).hex;
-      const faction = findFaction(p.faction)?.name ?? "";
-      const nTowns = townsOf(s, p.id).length;
-      rivals.append(
-        el(
-          "li",
-          chip,
-          `${playerColour(p.id).name}, ${faction} (${p.kind === "ai" ? "computer" : "human"}): `,
-          p.eliminated
-            ? el("span.gm-dim", "out of the game")
-            : `${nTowns} ${nTowns === 1 ? "town" : "towns"}`,
-        ),
-      );
-    }
-    this.kingdomTown = null;
-    await modal<undefined>({
-      title: "Kingdom",
-      className: "gm-kingdom-dialog",
-      body: el(
-        "div.gm-kingdom-body",
-        el("h3.gm-rule", "Income"),
-        income,
-        el("h3.gm-rule", "Mines"),
-        mineList,
-        el("h3.gm-rule", "Towns"),
-        towns,
-        el("h3.gm-rule", "Heroes"),
-        heroes,
-        el("h3.gm-rule", "Rivals"),
-        rivals,
-      ),
-      buttons: [{ label: "Close", value: undefined, primary: true }],
-      cancel: undefined,
-      onOpen: () => {
-        for (const b of towns.querySelectorAll<HTMLButtonElement>(
-          ".gm-linkish",
-        )) {
-          b.addEventListener("click", () => {
-            const close = document.querySelector<HTMLButtonElement>(
-              ".gm-kingdom-dialog .gm-modal-buttons .gm-btn",
-            );
-            close?.click();
-          });
-        }
+    const pick = await openKingdom({
+      state: this.state,
+      player: this.human,
+      selectedHeroId: this.hero()?.id ?? null,
+      tips: {
+        resource: (r) => this.resourceTip(r),
+        hero: (h) => this.heroTip(h),
+        town: (id) => this.townTip(id),
       },
     });
-    const town = this.kingdomTown;
-    this.kingdomTown = null;
-    if (town !== null) await this.openTown(town);
+    if (pick?.kind === "hero") this.selectHero(pick.id);
+    else if (pick?.kind === "town") await this.openTown(pick.id);
   }
 
   /** The adventure spellbook (RULES_V2 2.8) of the selected hero. */

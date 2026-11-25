@@ -39,7 +39,8 @@ Screens: `menu`, `menu-named`, `menu-options`, `menu-continue`,
 `adventure-pickup` (the grab cursor, stamped as a label because headless
 shots draw no cursor), `adventure-hover-resource`, `adventure-rich`,
 `endturn`, `hero`, `hero-hover`, `hero-hover-army`, `hero-hover-skill`,
-`hero-hover-feat`, `hero-hover-stat`, `kingdom`, `spellbook` (the
+`hero-hover-feat`, `hero-hover-stat`, `kingdom` (also checks that it fits
+and that its hero and town rows act), `kingdom-hover`, `spellbook` (the
 adventure tab), `spellbook-battle` (when the book has tabs), `adventure-aim`, `menu-dialog`, `meeting`, `town-<faction>`, `town-hover`,
 `town-hall` (a selected hall tile), `recruit`, `market`, `prebattle`,
 `site`, `levelup`, `levelup-hover`, `end-won`, `end-lost`, `battle`,
@@ -148,10 +149,14 @@ Left for bzc.18: the named map list will join the map size row.
 ### Marketplace, tavern, kingdom
 
 - Marketplace: framed like every dialog, key chips on Done.
-- Kingdom: an income table by source and resource, mines by kind, towns
-  with fort level, income, garrison and a "can build" flag (click a town
-  name to open it), heroes with portraits and hover cards, rivals with
-  faction and town count.
+- Kingdom (UI2-12, bzc.62, `src/ui/kingdom.ts`): one income row of
+  resource icons with "+N per day" (by source and mines in each hover
+  card); hero rows with portrait, level and class, movement and mana bars
+  and the army as portraits with counts (click selects the hero); town
+  rows with crest, fort and hall pictures, income, garrison portraits, the
+  creatures ready to hire and the BUILD badge (click opens the town);
+  rivals with faction and town count. A long kingdom scrolls inside the
+  dialog with the title and Close fixed.
 
 ### Meeting and trade
 

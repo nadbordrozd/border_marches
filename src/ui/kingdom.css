@@ -1,0 +1,427 @@
+/*
+ * The kingdom overview (bead border_marches-bzc.62, UI2-12, src/ui/kingdom.ts):
+ * hero rows and town rows, pictures first, and one income row. Five towns
+ * and two heroes fit 1280x800 without scrolling.
+ */
+
+/* A long kingdom scrolls inside the body; the title and Close stay put. */
+.gm-modal.kd-dialog {
+  display: flex;
+  flex-direction: column;
+  width: min(1100px, calc(100vw - 32px));
+  max-width: none;
+  padding: 12px 18px;
+  overflow: hidden;
+}
+
+.kd-dialog .gm-modal-title {
+  margin-bottom: 8px;
+}
+
+.kd-dialog .gm-modal-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-bottom: 8px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.kd-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.kd-dim {
+  color: var(--gm-dim);
+}
+
+/* ------------------------------------------------------------ income */
+
+.kd-income {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 22px;
+  padding: 4px 8px;
+  background: rgb(10 8 5 / 50%);
+  box-shadow: inset 0 0 0 1px var(--gm-trim-dark);
+}
+
+.kd-res {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font:
+    bold 13px Verdana,
+    sans-serif;
+  color: var(--gm-good);
+  font-variant-numeric: tabular-nums;
+  cursor: default;
+}
+
+.kd-res.kd-dim {
+  color: var(--gm-dim);
+  font-weight: normal;
+}
+
+.kd-res.kd-dim .kd-res-icon {
+  opacity: 0.55;
+}
+
+.kd-res-icon {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+/* ------------------------------------------------------------ sections */
+
+.kd-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kd-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--gm-trim-dark);
+}
+
+.kd-title {
+  margin: 0;
+  font: var(--gm-heading);
+  color: var(--gm-gold-dim);
+}
+
+.kd-hint {
+  font-size: 11px;
+  color: var(--gm-dim);
+}
+
+.kd-empty {
+  padding: 6px 2px;
+  color: var(--gm-dim);
+}
+
+.kd-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* ------------------------------------------------------------ rows */
+
+.kd-row {
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 2px 8px 2px 2px;
+  font: inherit;
+  color: var(--gm-text);
+  text-align: left;
+  background: rgb(10 8 5 / 50%);
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--gm-trim-dark);
+  cursor: pointer;
+}
+
+.kd-row:hover,
+.kd-row:focus-visible {
+  color: #fff;
+  background: rgb(255 214 92 / 6%);
+  box-shadow: inset 0 0 0 1px var(--gm-trim-light);
+  outline: none;
+}
+
+.kd-row.kd-selected {
+  background: rgb(255 214 92 / 10%);
+  box-shadow:
+    inset 0 0 0 1px var(--gm-gold),
+    0 0 6px rgb(255 214 92 / 35%);
+}
+
+.kd-row.kd-selected .kd-name-main {
+  color: var(--gm-gold);
+}
+
+.kd-hero-row {
+  grid-template-columns: 52px 250px 200px minmax(0, 1fr);
+}
+
+/* Town, fort, hall, income, garrison, ready to hire, today. */
+.kd-town-row,
+.kd-cols {
+  grid-template-columns:
+    190px 96px 120px 96px minmax(0, 1fr) minmax(0, 1fr)
+    52px;
+}
+
+.kd-cols {
+  display: grid;
+  gap: 10px;
+  padding: 0 8px 0 2px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--gm-dim);
+}
+
+.kd-cols > span:first-child {
+  padding-left: 26px;
+}
+
+.kd-name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.kd-name-main {
+  overflow: hidden;
+  font:
+    bold 14px Georgia,
+    serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kd-name-sub {
+  overflow: hidden;
+  font-size: 11px;
+  color: var(--gm-dim);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kd-none {
+  font-size: 11px;
+  color: var(--gm-dim);
+}
+
+/* ------------------------------------------------------------ heroes */
+
+.kd-portrait {
+  position: relative;
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin-left: 2px;
+  background: #2c3a1e;
+  box-shadow: inset 0 0 0 1px var(--gm-ink);
+}
+
+.kd-portrait-img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+}
+
+.kd-tired .kd-portrait-img {
+  filter: saturate(0.35) brightness(0.8);
+}
+
+.kd-level-up {
+  position: absolute;
+  top: -3px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  font:
+    bold 12px/15px Verdana,
+    sans-serif;
+  text-align: center;
+  color: #1b1208;
+  background: var(--gm-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--gm-ink);
+}
+
+.kd-meters {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.kd-meter {
+  display: block;
+  height: 16px;
+  padding: 0 6px;
+  overflow: hidden;
+  font-size: 10px;
+  line-height: 16px;
+  white-space: nowrap;
+  color: #fff4d0;
+  text-shadow:
+    1px 1px 0 #000,
+    -1px 0 0 #000;
+  background: linear-gradient(
+    to right,
+    var(--bar) var(--fill, 0%),
+    #0b0a08 var(--fill, 0%)
+  );
+  box-shadow: inset 0 0 0 1px var(--gm-edge);
+}
+
+.kd-meter.kd-mp {
+  --bar: #3f7a2a;
+}
+
+.kd-meter.kd-mana {
+  --bar: #2f5f9e;
+}
+
+/* ------------------------------------------------------------ towns */
+
+.kd-town-id {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* A shield in the faction colour with a pale band (the side panel's). */
+.kd-crest {
+  flex: none;
+  width: 18px;
+  height: 22px;
+  background:
+    linear-gradient(
+      transparent 36%,
+      rgb(255 244 208 / 60%) 36% 52%,
+      transparent 52%
+    ),
+    linear-gradient(rgb(255 255 255 / 18%), rgb(0 0 0 / 22%)),
+    var(--crest, #6b5a3e);
+  clip-path: polygon(0 0, 100% 0, 100% 58%, 50% 100%, 0 58%);
+}
+
+.kd-building {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  font-size: 11px;
+}
+
+.kd-building.kd-dim {
+  color: var(--gm-dim);
+}
+
+.kd-building-art {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+.kd-building-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kd-income-cell {
+  font-weight: bold;
+}
+
+.kd-build,
+.kd-built {
+  justify-self: start;
+  padding: 1px 5px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.kd-build {
+  color: #1b1208;
+  background: var(--gm-gold-dim);
+}
+
+.kd-built {
+  color: var(--gm-dim);
+  box-shadow: inset 0 0 0 1px var(--gm-trim-dark);
+}
+
+/* ------------------------------------------------------------ stacks */
+
+/* 40 px portraits (the 48 px art at 1x, its border cropped) over a count
+   plate, as in the side panel's army. */
+.kd-stacks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  min-width: 0;
+}
+
+.kd-stack {
+  display: flex;
+  flex-direction: column;
+  width: 40px;
+}
+
+.kd-stack-portrait {
+  width: 40px;
+  height: 40px;
+  object-fit: none;
+  image-rendering: pixelated;
+  background: #0f0c08;
+  box-shadow: inset 0 0 0 1px var(--gm-edge);
+}
+
+.kd-stack-count {
+  display: block;
+  height: 14px;
+  font:
+    bold 11px/14px Verdana,
+    sans-serif;
+  text-align: center;
+  color: #fff4d0;
+  background: #0b0906;
+  box-shadow: inset 0 0 0 1px var(--gm-edge);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Creatures ready to hire: a green count plate. */
+.kd-hire .kd-stack-count {
+  color: var(--gm-good);
+  box-shadow: inset 0 0 0 1px #3d6b2a;
+}
+
+/* ------------------------------------------------------------ rivals */
+
+.kd-rivals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 22px;
+  padding-top: 6px;
+  border-top: 1px solid var(--gm-trim-dark);
+}
+
+.kd-rival {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kd-rival-chip {
+  width: 10px;
+  height: 14px;
+  box-shadow: 0 0 0 1px var(--gm-ink);
+}
+
+.kd-rival-name {
+  font-weight: bold;
+}
+
+.kd-rival.kd-out {
+  opacity: 0.6;
+}

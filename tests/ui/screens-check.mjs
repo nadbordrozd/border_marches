@@ -29,7 +29,7 @@
 //   adventure, adventure-hover-object, adventure-pickup (grab cursor),
 //   adventure-hover-resource, adventure-rich, endturn, hero, hero-hover,
 //   hero-hover-army, hero-hover-skill, hero-hover-feat, hero-hover-stat,
-//   kingdom, spellbook (adventure tab), spellbook-battle, adventure-aim,
+//   kingdom, kingdom-hover, spellbook (adventure tab), spellbook-battle, adventure-aim,
 //   menu-dialog, meeting, meeting-picked, meeting-hover, meeting-swap
 //   (checks the swap in the state and swaps back), town-<faction>, town-hover, town-hall (a selected tile), recruit, market, prebattle,
 //   site, levelup, levelup-hover, end-won, end-lost, battle, battle-hover,
@@ -889,6 +889,99 @@ async function townScreens() {
   }
 }
 
+/**
+ * The kingdom overview (UI2-12, bead bzc.62): it fits without scrolling
+ * (five towns and two heroes), a resource's hover card, a click on a hero
+ * row selects that hero and one on a town row opens the town.
+ */
+async function kingdomScreens() {
+  const selected = () =>
+    evaluate(
+      "document.querySelector('.gm-hero-row.gm-selected .gm-hero-row-name')?.textContent ?? null",
+    );
+  const before = await selected();
+  await kingdomChecks();
+  // Later steps (the meeting) expect the first hero selected again.
+  if (before !== null && (await selected()) !== before) {
+    await key("k");
+    await waitFor("document.querySelector('.kd-dialog')", "kingdom overview");
+    await evaluate(`[...document.querySelectorAll('.kd-hero-row')]
+      .find((r) => r.querySelector('.kd-name-main').textContent === ${JSON.stringify(before)})?.click()`);
+    await waitFor("!document.querySelector('.kd-dialog')", "kingdom closed");
+    await sleep(300);
+  }
+}
+
+async function kingdomChecks() {
+  await key("k");
+  await waitFor("document.querySelector('.kd-dialog')", "kingdom overview");
+  await park();
+  await sleep(300);
+  await shot("kingdom");
+  const fit = await evaluate(`(() => {
+    const m = document.querySelector('.kd-dialog .gm-modal-body');
+    return { heroes: m.querySelectorAll('.kd-hero-row').length,
+      towns: m.querySelectorAll('.kd-town-row').length,
+      scroll: m.scrollHeight - m.clientHeight };
+  })()`);
+  note(`kingdom: ${JSON.stringify(fit)}`);
+  if (fit.heroes <= 2 && fit.towns <= 5 && fit.scroll > 1)
+    fail("kingdom", `scrolls by ${fit.scroll} px`);
+  if (want("kingdom-hover")) {
+    const p = await pointIn(".kd-res", 12, 12);
+    if (p === null) skip("kingdom-hover", "no income row");
+    else {
+      await mouse(p.x, p.y, 600);
+      await shot("kingdom-hover");
+      await park();
+    }
+  }
+  // A hero row selects that hero.
+  const picked = await evaluate(`(() => {
+    const r = document.querySelector('.kd-hero-row:not(.kd-selected)');
+    if (!r) return null;
+    r.click();
+    return r.querySelector('.kd-name-main').textContent;
+  })()`);
+  if (picked === null) {
+    note("kingdom: one hero, no other row to pick");
+    await escape();
+  } else {
+    await waitFor("!document.querySelector('.kd-dialog')", "kingdom closed");
+    const now = await evaluate(
+      "document.querySelector('.gm-hero-row.gm-selected .gm-hero-row-name')?.textContent ?? null",
+    );
+    if (now !== picked)
+      fail("kingdom", `hero row picked ${picked}, selected ${now}`);
+  }
+  await sleep(300);
+  // A town row opens the town.
+  await key("k");
+  await waitFor("document.querySelector('.kd-dialog')", "kingdom overview");
+  const town = await evaluate(`(() => {
+    const r = document.querySelector('.kd-town-row');
+    if (!r) return null;
+    r.click();
+    return r.querySelector('.kd-name-main').textContent;
+  })()`);
+  if (town === null) {
+    skip("kingdom", "no town row to open");
+    await escape();
+    await sleep(200);
+    return;
+  }
+  const opened = await waitMaybe("document.querySelector('.gm-town')", 5000);
+  if (!opened) fail("kingdom", `town row ${town} did not open the town`);
+  else {
+    note(
+      `kingdom: hero row ${picked ?? "-"} selected, town row ${town} opened`,
+    );
+    await escape();
+    await waitFor("!document.querySelector('.gm-town')", "town closed");
+  }
+  await sleep(200);
+}
+
 async function richScreens() {
   await editSave(RICH);
   note(`rich save: ${JSON.stringify(await evaluate("window.__rich"))}`);
@@ -898,13 +991,7 @@ async function richScreens() {
   if (want("adventure-rich")) await shot("adventure-rich");
   await endTurnWarning();
   await heroScreens();
-  if (want("kingdom")) {
-    await key("k");
-    await sleep(400);
-    await shot("kingdom");
-    await escape();
-    await sleep(200);
-  }
+  if (want("kingdom")) await kingdomScreens();
   if (wantFamily("spellbook")) {
     await key("m");
     await sleep(500);
