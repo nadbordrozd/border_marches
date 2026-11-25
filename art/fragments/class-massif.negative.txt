@@ -1,1 +1,0 @@
-pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass, soil, sky, clouds, background, cast shadow, row of separate identical cones, castle, building, face, eyes

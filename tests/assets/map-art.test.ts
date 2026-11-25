@@ -1,6 +1,7 @@
 /**
  * The studio map art of bead border_marches-xaj.14 (docs/art/MASSIF_ART.md):
- * massif pieces, 3x2 towns and doodads. Checks the geometry metadata the
+ * 3x2 towns and doodads (its massif pieces were retired by bead xaj.29).
+ * Checks the geometry metadata the
  * wiring bead relies on against the baked PNGs themselves (opaque box,
  * paint above the footprint, foot gap), so a re-bake cannot drift from the
  * manifest. Provenance (studio records, verdicts, hashes) is checked by
@@ -15,11 +16,7 @@ import {
   DOODAD_ASSETS,
   doodadsOf,
   GROUND_TERRAINS,
-  MASSIF_PALETTE_TERRAINS,
-  MASSIF_PIECES,
-  massifPieces,
   TOWN_3X2_ASSETS,
-  type MassifPalette,
   type PixelBox,
 } from "../../src/assets/manifest";
 
@@ -70,84 +67,6 @@ function opaqueBox(path: string): PixelBox & { cw: number; ch: number } {
       }
   return { x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1, cw: w, ch: h };
 }
-
-describe("massif pieces (xaj.14)", () => {
-  it("have footprint canvases and measured boxes that match the PNGs", () => {
-    for (const piece of MASSIF_PIECES) {
-      expect(piece.w).toBe(piece.cols * CELL_PX);
-      expect(piece.h).toBe(piece.rows * CELL_PX + piece.up);
-      expect(piece.up).toBe(
-        ["massif", "ridge", "peak", "spine", "plateau"].includes(piece.kind)
-          ? 48
-          : 24,
-      );
-      const measured = opaqueBox(piece.path);
-      expect({ key: piece.key, ...measured }).toEqual({
-        key: piece.key,
-        ...piece.box,
-        cw: piece.w,
-        ch: piece.h,
-      });
-      expect(piece.paintUp).toBe(piece.up - piece.box.y);
-      expect(piece.footGap).toBe(piece.h - piece.box.y - piece.box.h);
-      // Never clipped by the canvas top, never sitting on the bottom edge.
-      expect(piece.footGap).toBeGreaterThanOrEqual(3);
-    }
-  });
-
-  it("cover every palette with massifs, ridges, 1x1 pieces and a mine", () => {
-    const palettes: MassifPalette[] = ["granite", "sandstone", "basalt"];
-    expect(Object.keys(MASSIF_PALETTE_TERRAINS).sort()).toEqual(
-      [...palettes].sort(),
-    );
-    expect(Object.values(MASSIF_PALETTE_TERRAINS).flat().sort()).toEqual(
-      [...GROUND_TERRAINS].sort(),
-    );
-    for (const palette of palettes) {
-      expect(
-        massifPieces(palette, "massif", 2, 2).length,
-      ).toBeGreaterThanOrEqual(2);
-      expect(
-        massifPieces(palette, "massif", 3, 2).length,
-      ).toBeGreaterThanOrEqual(2);
-      expect(
-        massifPieces(palette, "ridge", 2, 1).length,
-      ).toBeGreaterThanOrEqual(3);
-      expect(
-        massifPieces(palette, "ridge", 3, 1).length,
-      ).toBeGreaterThanOrEqual(2);
-      expect(
-        massifPieces(palette).filter((p) => p.cols === 1 && p.kind !== "mine")
-          .length,
-      ).toBeGreaterThanOrEqual(3);
-      expect(massifPieces(palette, "mine").length).toBeGreaterThanOrEqual(1);
-      // Bead xaj.20 (every Mountain cell in a 2x2 block): a tall 2x3 for
-      // north-south bands, four or more 2x2 and 3x2 massifs, and a low 3x1
-      // hump for three-cell runs where a tall ridge may not stand.
-      expect(massifPieces(palette, "massif", 2, 3).length).toBeGreaterThan(0);
-      expect(
-        massifPieces(palette, "massif", 2, 2).length,
-      ).toBeGreaterThanOrEqual(4);
-      expect(
-        massifPieces(palette, "massif", 3, 2).length,
-      ).toBeGreaterThanOrEqual(4);
-      expect(massifPieces(palette, "rounded", 3, 1).length).toBeGreaterThan(0);
-    }
-  });
-
-  it("number variants 0..n-1 within each palette, kind and footprint", () => {
-    const groups = new Map<string, number[]>();
-    for (const p of MASSIF_PIECES) {
-      const key = `${p.palette}/${p.kind}/${p.cols}x${p.rows}`;
-      groups.set(key, [...(groups.get(key) ?? []), p.variant]);
-    }
-    for (const [key, variants] of groups)
-      expect({ key, variants: [...variants].sort((a, b) => a - b) }).toEqual({
-        key,
-        variants: variants.map((_, i) => i),
-      });
-  });
-});
 
 describe("3x2 towns (xaj.14)", () => {
   it("fill a 3x2 footprint canvas with a measured box", () => {

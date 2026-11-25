@@ -116,7 +116,7 @@ const RANGES_OVERLAY = [
   "...FFFFF..........MMMM..",
 ];
 
-/** A test map of mountain ranges of many shapes (evidence for the massifs). */
+/** A test map of mountain ranges of many shapes (evidence for the peaks). */
 export function rangesMap(): GameMap {
   const codes: Record<string, MapCell["terrain"]> = {
     g: "grass",

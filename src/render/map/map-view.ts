@@ -35,28 +35,17 @@ import { installCanopyBands, paintCanopyBand, toneTree } from "./canopy-paint";
 import { paintFog } from "./fog";
 import { FxField, drawFx } from "../fx/field.ts";
 import type { FxClock } from "../fx/field.ts";
-import { buildGroundLayout, paintGround } from "./ground";
+import { paintGround } from "./ground";
 import type { GroundLayout } from "./ground";
 import { hashUnit } from "./hash";
 import { doodadArt } from "./doodad-art";
 import { doodadSpecs } from "./doodads";
-import { packRanges } from "./massif";
 import { tonePeak } from "./peak-paint";
 import { paintPeakUnder } from "./peaks";
 import type { PeakField } from "./peaks";
-import { RELIEF, buildRelief, paintRelief } from "./relief";
-import type { Relief } from "./relief";
-import {
-  compareEntries,
-  doodadEntries,
-  featuredCells,
-  mapCanopy,
-  objectEntries,
-  terrainEntries,
-  unitEntry,
-} from "./scene";
+import { compareEntries, objectEntries, unitEntry } from "./scene";
 import type { SceneEntry } from "./scene";
-import { planTerrain, roadEnds } from "./terrain-plan";
+import { planTerrain } from "./terrain-plan";
 import type { TerrainPlan, WorldRect } from "./terrain-plan";
 
 const CELL = CELL_PX;
@@ -247,37 +236,6 @@ function starTile(): Surface {
 const isWhole = (value: number): boolean =>
   Math.abs(value - Math.round(value)) < 1e-6;
 
-/**
- * How mountains are drawn: the crowd of front-view peaks (peaks.ts, bead
- * xaj.30) by default; the code-drawn relief (`?mountains=relief`) and the old
- * massif sprites (`?mountains=sprites`) stay until cleanup bead xaj.29.
- */
-export function mountainMode(): "peaks" | "relief" | "sprites" {
-  const search = typeof location === "undefined" ? "" : location.search;
-  const mode = new URLSearchParams(search).get("mountains");
-  return mode === "sprites" || mode === "relief" ? mode : "peaks";
-}
-
-/** Mean colour of each ground texture (the relief's foot leans to it). */
-function groundMeans(assets: MapAssets): Record<string, number[]> {
-  const out: Record<string, number[]> = {};
-  for (const [terrain, tex] of Object.entries(assets.ground.textures)) {
-    let r = 0;
-    let g = 0;
-    let b = 0;
-    const n = tex.width * tex.height;
-    for (let i = 0; i < n; i += 1) {
-      r += tex.data[i * 4] ?? 0;
-      g += tex.data[i * 4 + 1] ?? 0;
-      b += tex.data[i * 4 + 2] ?? 0;
-    }
-    out[terrain] = [r / n, g / n, b / n];
-  }
-  return out;
-}
-
-const LIP_KEY = "relief-lip:";
-
 export function createMapView(
   canvas: HTMLCanvasElement,
   assets: MapAssets,
@@ -319,10 +277,6 @@ export function createMapView(
   };
   const stars = starTile();
   let starPattern: CanvasPattern | null = null;
-  const mode = mountainMode();
-  const reliefMode = mode === "relief";
-  const grounds = reliefMode ? groundMeans(assets) : {};
-  let relief: Relief | null = null;
   // The peaks, calmer than units, their outlines softened (peak-paint.ts).
   for (const peak of PEAK_ASSETS) {
     const image = images.get(peak.key);
@@ -330,8 +284,6 @@ export function createMapView(
       images.set(peak.key, tonePeak(image, peak.w, peak.h, peak.terrain));
   }
   let peakField: PeakField | null = null;
-  /** The relief's lips (relief-lip:x,y), cut from their chunk when built. */
-  const lipImages = new Map<string, Surface>();
 
   let map: GameMap | null = null;
   let objects: readonly MapObject[] = [];
@@ -346,7 +298,7 @@ export function createMapView(
   let bodies: readonly SceneEntry[] = [];
   let foreground: SceneEntry[] = [];
   let terrainForeground: readonly SceneEntry[] = [];
-  /** The peaks mode's terrain plan, updated in place on setObjects. */
+  /** The terrain plan, updated in place on setObjects. */
   let plan: TerrainPlan | null = null;
   const chunks = new Map<string, Chunk>();
   /** Per cached chunk, the world box to paint again before its next draw. */
@@ -431,110 +383,39 @@ export function createMapView(
   };
 
   /**
-   * The terrain of the map with the current objects. In the peaks mode
-   * `incremental` keeps the plan and places again only what the changed
-   * cells reach (terrain-plan.ts, bead xaj.31), dropping only the chunks and
-   * crown bands that changed.
+   * The terrain of the map with the current objects (the crowd of peaks,
+   * bead xaj.30: peaks and trees share the crown bands). `incremental` keeps
+   * the plan and places again only what the changed cells reach
+   * (terrain-plan.ts, bead xaj.31), dropping only the chunks and crown bands
+   * that changed.
    */
   const rebuildTerrain = (incremental = false): void => {
-    if (map !== null && mode === "peaks") {
-      // The crowd of peaks (bead xaj.30): no scree ring and no massif
-      // sprites; peaks and trees share the crown bands.
-      const update = planTerrain(map, objects, incremental ? plan : null);
-      plan = update.plan;
-      relief = null;
-      peakField = plan.peakField;
-      layout = plan.layout;
-      bodies = plan.bodies;
-      terrainForeground = plan.foreground;
-      if (update.dirty === null) {
-        chunks.clear();
-        patches.clear();
-        lipImages.clear();
-        installCanopyBands(images, plan.bands);
-      } else {
-        markChunks(update.dirty);
-        for (const key of update.drop) images.delete(key);
-        for (const band of update.paint)
-          images.set(band.key, paintCanopyBand(band, images));
-      }
-      return;
-    }
-    plan = null;
-    chunks.clear();
-    patches.clear();
-    lipImages.clear();
-    relief = null;
-    peakField = null;
     if (map === null) {
+      plan = null;
+      chunks.clear();
+      patches.clear();
+      peakField = null;
       layout = null;
       bodies = [];
       terrainForeground = [];
       return;
     }
-    const featured = featuredCells(map, objects);
-    // The forest canopy and its cached crown bands (bead xaj.26).
-    const canopy = mapCanopy(map, featured);
-    let terrain: SceneEntry[];
-    const lips: SceneEntry[] = [];
-    if (reliefMode) {
-      // Low relief (bead xaj.25): no scree ring and no massif sprites; the
-      // paint a range raises over the open cell north of it is drawn again
-      // in the foreground at the range's row, over the feet of a unit
-      // standing behind it.
-      relief = buildRelief(map, featured, grounds);
-      const base = buildGroundLayout(
-        map,
-        roadEnds(map, objects),
-        undefined,
-        featured,
-      );
-      layout = { ...base, nearMountain: new Uint8Array(base.mountain.length) };
-      terrain = terrainEntries(map, objects, canopy).filter(
-        (e) => !e.sprites.some((s) => s.key.startsWith("massif-")),
-      );
-      for (const [x, y] of relief.lips)
-        lips.push({
-          pass: "FOREGROUND",
-          row: y,
-          col: x,
-          layer: 1,
-          seq: 0,
-          shadows: [],
-          sprites: [
-            {
-              key: `${LIP_KEY}${x},${y}`,
-              sx: 0,
-              sy: 0,
-              sw: CELL,
-              sh: RELIEF.cap,
-              dx: x * CELL,
-              dy: y * CELL - RELIEF.cap,
-            },
-          ],
-          x0: x * CELL,
-          y0: y * CELL - RELIEF.cap,
-          x1: (x + 1) * CELL,
-          y1: y * CELL,
-        });
+    const update = planTerrain(map, objects, incremental ? plan : null);
+    plan = update.plan;
+    peakField = plan.peakField;
+    layout = plan.layout;
+    bodies = plan.bodies;
+    terrainForeground = plan.foreground;
+    if (update.dirty === null) {
+      chunks.clear();
+      patches.clear();
+      installCanopyBands(images, plan.bands);
     } else {
-      // The scree follows the pieces' silhouettes (bead xaj.21).
-      layout = buildGroundLayout(
-        map,
-        roadEnds(map, objects),
-        packRanges(map, featured),
-        featured,
-      );
-      terrain = terrainEntries(map, objects, canopy);
+      markChunks(update.dirty);
+      for (const key of update.drop) images.delete(key);
+      for (const band of update.paint)
+        images.set(band.key, paintCanopyBand(band, images));
     }
-    installCanopyBands(images, canopy.bands);
-    const entries = [
-      ...terrain,
-      ...lips,
-      ...doodadEntries(map, objects, layout),
-    ].sort(compareEntries);
-    bodies = entries.filter((e) => e.pass === "TALL_BODY");
-    terrainForeground = entries.filter((e) => e.pass === "FOREGROUND");
   };
 
   const rebuildForeground = (): void => {
@@ -579,7 +460,7 @@ export function createMapView(
       ctx.fill();
     }
     for (const s of e.sprites) {
-      const image = images.get(s.key) ?? lipImages.get(s.key);
+      const image = images.get(s.key);
       if (image === undefined) continue;
       ctx.drawImage(
         image,
@@ -595,43 +476,6 @@ export function createMapView(
     }
   };
 
-  /**
-   * The relief over the chunk's ground, and the lips inside the chunk cut
-   * from it (each lip lies in one chunk: chunks are cell-aligned).
-   */
-  const paintChunkRelief = (
-    model: Relief,
-    x0: number,
-    y0: number,
-    w: number,
-    h: number,
-    data: Uint8ClampedArray,
-  ): void => {
-    const paint = new Uint8ClampedArray(w * h * 4);
-    if (!paintRelief(model, x0, y0, w, h, paint)) return;
-    for (let o = 0; o < paint.length; o += 4)
-      if (paint[o + 3] !== 0) {
-        data[o] = paint[o] ?? 0;
-        data[o + 1] = paint[o + 1] ?? 0;
-        data[o + 2] = paint[o + 2] ?? 0;
-        data[o + 3] = 255;
-      }
-    const lipH = RELIEF.cap;
-    for (const [x, y] of model.lips) {
-      const lx = x * CELL - x0;
-      const ly = y * CELL - lipH - y0;
-      if (lx < 0 || ly < 0 || lx + CELL > w || ly + lipH > h) continue;
-      const lip = new ImageData(CELL, lipH);
-      for (let r = 0; r < lipH; r += 1) {
-        const from = ((ly + r) * w + lx) * 4;
-        lip.data.set(paint.subarray(from, from + CELL * 4), r * CELL * 4);
-      }
-      const surface = createSurface(CELL, lipH);
-      context2d(surface).putImageData(lip, 0, 0);
-      lipImages.set(`${LIP_KEY}${x},${y}`, surface);
-    }
-  };
-
   const buildChunk = (cx: number, cy: number): Chunk => {
     if (map === null || layout === null) return { surface: null };
     const t0 = performance.now();
@@ -644,7 +488,6 @@ export function createMapView(
     const ctx = context2d(surface);
     const image = ctx.createImageData(w, h);
     paintGround(layout, assets.ground, x0, y0, w, h, image.data);
-    if (relief !== null) paintChunkRelief(relief, x0, y0, w, h, image.data);
     if (peakField !== null) paintPeakUnder(peakField, x0, y0, w, h, image.data);
     ctx.putImageData(image, 0, 0);
     ctx.imageSmoothingEnabled = true;

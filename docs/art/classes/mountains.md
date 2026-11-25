@@ -1,8 +1,10 @@
 # Mountains asset contract
 
-Status: draft (2026-11-22, bead `border_marches-xaj.30`; orchestrator call
-after the user rejected the code-drawn relief for its dithered style and its
-from-above view). Specialises [`../ART_DIRECTION.md`](../ART_DIRECTION.md) for
+Status: approved by the user (bead `border_marches-xaj.30`, 2026-11-22; the
+orchestrator's call after the user rejected the code-drawn relief for its
+dithered style and its from-above view). Since bead `border_marches-xaj.29`
+the peaks are the only mountain renderer (see
+[Retired renderers](#retired-renderers)). Specialises [`../ART_DIRECTION.md`](../ART_DIRECTION.md) for
 the front-view peaks that make up every mountain range on the adventure map.
 
 ## Direction
@@ -96,3 +98,23 @@ Prompt fragments that worked:
 - Reviewed per recipe at native size and enlarged on light and dark, then in
   a whole-map poster (`npm run map:poster -- --seed N --size M --out file.png`)
   beside trees, units and buildings.
+
+## Retired renderers
+
+Removed by bead `border_marches-xaj.29` (2026-11-25), with their URL switches,
+tests and assets; the whole-map poster of seed 37 (size M) was byte-identical
+before and after.
+
+- **Massif sprites** (`?mountains=sprites`, beads `xaj.14` to `xaj.23`): the
+  packer `src/render/map/massif.ts`, the `MASSIF_PIECES` manifest entries, the
+  studio sets `massif-granite`, `massif-sandstone` and `massif-basalt` (their
+  recipes, records, verdicts, masters and `art/refs` style images), the
+  derived files under `public/assets/terrain/massifs/`, the scree and rock
+  base of the ground painter, and the review scripts that composed them.
+  History: [`../MASSIF_ART.md`](../MASSIF_ART.md); spend stays in
+  `art/costs.jsonl`.
+- **Code-drawn relief** (`?mountains=relief`, beads `xaj.25` and `xaj.28`):
+  the heightfield painter `src/render/map/relief.ts` and its lips.
+  History: [`../MASSIF_ART.md`](../MASSIF_ART.md) (iterations 9 and 10).
+
+Both are recoverable from git history before the bead's commit.

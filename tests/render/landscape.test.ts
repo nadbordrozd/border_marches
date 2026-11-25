@@ -1,6 +1,6 @@
 /**
  * Map beauty iteration 2 (bead border_marches-xaj.13): smooth roads, frayed
- * woods, the doodad layer, tinted scree, the fog's second layer, and the
+ * woods, the doodad layer, the fog's second layer, and the
  * manifest's pickup and mine sprites.
  */
 import { describe, expect, it } from "vitest";
@@ -18,10 +18,7 @@ import {
   placeDoodads,
 } from "../../src/render/map/doodads.ts";
 import { doodadArt } from "../../src/render/map/doodad-art.ts";
-import {
-  buildGroundLayout,
-  screePalette,
-} from "../../src/render/map/ground.ts";
+import { buildGroundLayout } from "../../src/render/map/ground.ts";
 import { FOG_TEXTURE_SIZE, fogTone } from "../../src/render/map/fog.ts";
 import {
   doodadEntries,
@@ -238,15 +235,7 @@ describe("doodads", () => {
   });
 });
 
-describe("scree, fog, objects", () => {
-  it("tints the scree from the ground it lies on", () => {
-    const red = screePalette([180, 80, 40]);
-    const green = screePalette([60, 160, 60]);
-    expect(red.dust[0]).toBeGreaterThan(red.dust[2]);
-    expect(green.dust[1]).toBeGreaterThan(green.dust[0]);
-    expect(red.rock[0]).toBeLessThan(red.dust[0]);
-  });
-
+describe("fog, objects", () => {
   it("repeats the fog only every 13 cells and shades it with a second layer", () => {
     expect(FOG_TEXTURE_SIZE).toBe(13 * CELL);
     const a = fogTone(100, 100);

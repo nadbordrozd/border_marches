@@ -1,5 +1,14 @@
 # Map beauty iteration 2: massif pieces, 3x2 towns, doodads (bead `border_marches-xaj.14`)
 
+> **Retired (bead `border_marches-xaj.29`, 2026-11-25).** The mountains of
+> this document, both the massif sprites and the later code-drawn relief, are
+> no longer in the game: the front-view peaks
+> ([classes/mountains.md](classes/mountains.md)) replaced them, and the
+> massif packer, the relief painter, the `massif-*` studio sets, their
+> masters, style refs, derived files and review scripts were removed. Paths
+> below name files as they were; they are in git history before that bead's
+> commit. The 3x2 towns and doodads described here are still in use.
+
 New adventure-map art made with the studio pipeline ([PIPELINE.md](PIPELINE.md))
 in the inherited Bold chibi direction ([ART_DIRECTION.md](ART_DIRECTION.md)).
 The target, in the user's words: "all the mountain ranges look unique ...

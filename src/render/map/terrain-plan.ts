@@ -1,6 +1,6 @@
 /**
- * The terrain draw plan of the adventure map in its default mountain mode
- * (the crowd of peaks, bead xaj.30), kept up to date when objects change
+ * The terrain draw plan of the adventure map (its mountains the crowd of
+ * peaks, bead xaj.30), kept up to date when objects change
  * (bead border_marches-xaj.31).
  *
  * Objects shape the terrain only through the cells they cover (a tree, a
@@ -76,7 +76,7 @@ export interface TerrainPlan {
   readonly roadEnds: string;
   /** The ground layout as built (its own canopy field). */
   readonly base: GroundLayout;
-  /** The layout the chunks paint: no scree, this plan's canopy field. */
+  /** The layout the chunks paint: this plan's canopy field. */
   readonly layout: GroundLayout;
   readonly canopyField: CanopyField;
   readonly peakField: PeakField;
@@ -229,12 +229,8 @@ export function planTerrain(
     base = prev.base;
     layout = { ...prev.layout, canopy: canopyField };
   } else {
-    base = buildGroundLayout(map, ends, undefined, featured);
-    layout = {
-      ...base,
-      nearMountain: new Uint8Array(base.mountain.length),
-      canopy: canopyField,
-    };
+    base = buildGroundLayout(map, ends, featured);
+    layout = { ...base, canopy: canopyField };
   }
   const canopy = again
     ? updateCanopy(prev.canopy, canopyField, TREE_SPECIES)

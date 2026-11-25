@@ -11,23 +11,13 @@ import {
   edgeDistance,
   GROUND_RANK,
   paintGround,
-  ROCK_BASE,
-  RUBBLE,
-  blockMask,
-  buildRockField,
-  rockFieldAt,
-  rubbleAt,
   spillReach,
   SPILL,
 } from "../../src/render/map/ground.ts";
 import type { GroundSources, PixelImage } from "../../src/render/map/ground.ts";
 import { paintFog } from "../../src/render/map/fog.ts";
 import { createMap } from "../../src/core/map/types.ts";
-import type {
-  GroundTerrain,
-  MassifPieceAsset,
-} from "../../src/assets/manifest.ts";
-import type { RangeCover } from "../../src/render/map/massif.ts";
+import type { GroundTerrain } from "../../src/assets/manifest.ts";
 
 /** A flat 80 x 80 raster of one colour. */
 const flat = (r: number, g: number, b: number): PixelImage => {
@@ -167,98 +157,18 @@ describe("paintFog", () => {
   });
 });
 
-describe("rock base", () => {
-  it("marks every mountain cell with its range's palette", () => {
-    const map = createMap(5, 5, 1);
-    map.cells.forEach((c) => (c.terrain = "wasteland"));
-    for (const i of [6, 7, 8, 11, 12, 13]) map.cells[i]!.obstacle = "mountain";
-    const layout = buildGroundLayout(map);
-    for (let i = 0; i < 25; i += 1)
-      expect(layout.rockPalette[i]).toBe(
-        map.cells[i]!.obstacle === "mountain" ? 3 : 0,
-      );
-  });
-
-  it("paints the shadowed rock deep inside a range", () => {
-    const map = createMap(5, 5, 1);
+describe("mountain cells (xaj.29)", () => {
+  it("paint as their own ground: the peaks draw the rock, not the ground", () => {
+    const map = createMap(5, 5, 1, "wasteland");
     map.cells.forEach((c) => (c.obstacle = "mountain"));
-    const layout = buildGroundLayout(map);
-    const out = new Uint8ClampedArray(80 * 80 * 4);
-    paintGround(layout, SOURCES, 160, 160, 80, 80, out);
-    // The middle cell's centre: mostly the granite base tone.
-    const o = (40 * 80 + 40) * 4;
-    expect(Math.abs((out[o] ?? 0) - ROCK_BASE.tones[0][0])).toBeLessThan(40);
-  });
-});
-
-describe("rubble (xaj.22)", () => {
-  it("varies the rock base in stones, cracks and lit rims, not one flat tone", () => {
-    const seen = new Set<number>();
-    let cracks = 0;
-    for (let y = 0; y < 80; y += 1)
-      for (let x = 0; x < 80; x += 1) {
-        const k = rubbleAt(x, y);
-        seen.add(Math.round(k * 100));
-        if (k === RUBBLE.crack) cracks += 1;
-        expect(k).toBeGreaterThanOrEqual(RUBBLE.crack);
-        expect(k).toBeLessThanOrEqual(Math.max(...RUBBLE.tints) * RUBBLE.lit);
-      }
-    expect(seen.size).toBeGreaterThan(5);
-    // Cracks are lines between stones, not the bulk.
-    expect(cracks / 6400).toBeGreaterThan(0.05);
-    expect(cracks / 6400).toBeLessThan(0.4);
-    // Two px blocks: a pure function of the block.
-    expect(rubbleAt(10, 20)).toBe(rubbleAt(11, 21));
-  });
-});
-
-describe("silhouette field (xaj.21)", () => {
-  // One 2x1 hump that covers only the left half of its footprint.
-  const asset = {
-    key: "test-hump",
-    w: 160,
-    h: 104,
-    up: 24,
-    rows: 1,
-    cols: 2,
-  } as unknown as MassifPieceAsset;
-  const half = new Uint8ClampedArray(160 * 104 * 4);
-  for (let y = 30; y < 96; y += 1)
-    for (let x = 0; x < 80; x += 1) half[(y * 160 + x) * 4 + 3] = 255;
-  const masks = new Map([
-    ["test-hump", blockMask({ width: 160, height: 104, data: half })],
-  ]);
-  const cover = {
-    pieces: [{ asset, x: 1, y: 1 }],
-    fills: [],
-    palette: new Map(),
-    pieceAt: new Map(),
-  } as unknown as RangeCover;
-
-  it("is high under a piece's paint and low where its cell stays open", () => {
-    const field = buildRockField(4, 3, cover, masks);
-    // Inside the painted half of the footprint (cell 1, 1).
-    expect(rockFieldAt(field, 120, 130)).toBeGreaterThan(0.8);
-    // The unpainted half (cell 2, 1) is a Mountain cell but shows ground.
-    expect(rockFieldAt(field, 230, 130)).toBeLessThan(0.1);
-    // Paint above the footprint (the up band) does not count.
-    expect(rockFieldAt(field, 120, 60)).toBeLessThan(0.3);
-  });
-
-  it("cuts the scree from the silhouette when the masks are given", () => {
-    const map = createMap(4, 3, 1);
-    map.cells[5]!.obstacle = "mountain";
-    map.cells[6]!.obstacle = "mountain";
-    const layout = buildGroundLayout(map, [], cover);
-    const sources: GroundSources = { ...SOURCES, pieceMasks: masks };
-    const out = new Uint8ClampedArray(80 * 80 * 4);
-    // The open half of the hump's footprint: plain grass, no scree.
-    paintGround(layout, sources, 160, 80, 80, 80, out);
-    expect(pixel(out, 80, 70, 50)).toEqual(COLOURS.grass);
-    // Without masks the cell field puts scree there, as before.
-    const old = new Uint8ClampedArray(80 * 80 * 4);
-    paintGround(layout, SOURCES, 160, 80, 80, 80, old);
-    expect(pixel(old, 80, 70, 50)).not.toEqual(COLOURS.grass);
+    const out = new Uint8ClampedArray(240 * 240 * 4);
+    paintGround(buildGroundLayout(map), SOURCES, 0, 0, 240, 240, out);
+    for (const [x, y] of [
+      [0, 0],
+      [120, 120],
+      [239, 17],
+    ] as const)
+      expect(pixel(out, 240, x, y)).toEqual(COLOURS.wasteland);
   });
 });
 

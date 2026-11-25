@@ -29,7 +29,6 @@ import {
 } from "../../assets/manifest";
 import type {
   GroundTerrain,
-  MassifPalette,
   Town3x2Asset,
   TownAsset,
   UnitAsset,
@@ -57,7 +56,6 @@ import { peaksOf } from "../../assets/peaks";
 import { buildPeakField, placePeaks } from "./peaks";
 import type { PeakField, PeakSprite, PeakTable, PlacedPeak } from "./peaks";
 import { CREATURES, isCreatureId } from "../../data/creatures";
-import { packRanges, paletteOf } from "./massif";
 
 const CELL = CELL_PX;
 
@@ -355,8 +353,9 @@ export function featuredCells(
 }
 
 /**
- * The terrain entries of a map: massif and forest bodies (TALL_BODY) and the
- * bands above low rock and tree tops (FOREGROUND).
+ * The forest entries of a map: the tree bodies (TALL_BODY) and the crown
+ * bands above the tree tops (FOREGROUND). The peaks come from the terrain
+ * plan (terrain-plan.ts).
  */
 export function terrainEntries(
   map: GameMap,
@@ -365,7 +364,6 @@ export function terrainEntries(
 ): SceneEntry[] {
   const featured = featuredCells(map, objects);
   const out: SceneEntry[] = [];
-  out.push(...massifEntries(map, featured));
   const canopy = canopy0 ?? mapCanopy(map, featured);
   for (const tree of canopy.trees) out.push(treeEntry(tree));
   for (const band of canopy.bands) out.push(bandEntry(band));
@@ -383,123 +381,6 @@ export function doodadEntries(
 ): SceneEntry[] {
   const featured = featuredCells(map, objects);
   return placeDoodads(map, layout, featured).map(doodadEntry);
-}
-
-/**
- * The mountain ranges (massif.ts): every piece's footprint and the paint it
- * raises over rock behind it in the body pass, sorted with its bottom row
- * (so a hero in front of a range is drawn over it); the paint it raises over
- * an open cell behind in the foreground at its top row, so it covers the
- * feet of a hero standing behind the range; and the back-fills on the joints
- * behind the row in front.
- */
-export function massifEntries(
-  map: GameMap,
-  featured: ReadonlySet<number>,
-): SceneEntry[] {
-  const out: SceneEntry[] = [];
-  const { width } = map;
-  const rock = (x: number, y: number): boolean => {
-    if (y < 0) return true;
-    const i = y * width + x;
-    return map.cells[i]?.obstacle === "mountain" && !featured.has(i);
-  };
-  const cover = packRanges(map, featured);
-  for (const fill of cover.fills)
-    if (fill.front !== true)
-      out.push(
-        entry("TALL_BODY", fill.row, fill.col, 0, [
-          {
-            key: fill.asset.key,
-            sx: 0,
-            sy: 0,
-            sw: fill.asset.w,
-            sh: fill.asset.h,
-            dx: fill.dx,
-            dy: fill.dy,
-          },
-        ]),
-      );
-  for (const { asset, x, y } of cover.pieces) {
-    const body: SpriteOp[] = [
-      {
-        key: asset.key,
-        sx: 0,
-        sy: asset.up,
-        sw: asset.w,
-        sh: asset.rows * CELL,
-        dx: x * CELL,
-        dy: y * CELL,
-      },
-    ];
-    for (let c = 0; c < asset.cols; c += 1) {
-      // Columns whose paint stays inside the footprint draw no band.
-      const band: SpriteOp = {
-        key: asset.key,
-        sx: c * CELL,
-        sy: 0,
-        sw: CELL,
-        sh: asset.up,
-        dx: (x + c) * CELL,
-        dy: y * CELL - asset.up,
-      };
-      if (asset.paintUp <= 0) continue;
-      if (rock(x + c, y - 1)) body.push(band);
-      else out.push(entry("FOREGROUND", y, x + c, LAYER.TERRAIN, [band]));
-    }
-    out.push(
-      entry(
-        "TALL_BODY",
-        y + asset.rows - 1,
-        x + asset.cols - 1,
-        LAYER.TERRAIN,
-        body,
-      ),
-    );
-  }
-  // Side boulders after the pieces (same row, column and layer: later seq).
-  for (const fill of cover.fills)
-    if (fill.front === true)
-      out.push(
-        entry("TALL_BODY", fill.row, fill.col, LAYER.TERRAIN, [
-          {
-            key: fill.asset.key,
-            sx: 0,
-            sy: 0,
-            sw: fill.asset.w,
-            sh: fill.asset.h,
-            dx: fill.dx,
-            dy: fill.dy,
-          },
-        ]),
-      );
-  return out;
-}
-
-/** The rock palette of the ground at (x, y): its mountains' or its own. */
-export function paletteNear(map: GameMap, x: number, y: number): MassifPalette {
-  const votes = new Map<MassifPalette, number>();
-  for (let dy = -1; dy <= 1; dy += 1)
-    for (let dx = -1; dx <= 1; dx += 1) {
-      const cell = map.cells[(y + dy) * map.width + x + dx];
-      if (
-        x + dx < 0 ||
-        x + dx >= map.width ||
-        cell === undefined ||
-        cell.obstacle !== "mountain"
-      )
-        continue;
-      const p = paletteOf(cell.terrain);
-      votes.set(p, (votes.get(p) ?? 0) + 1);
-    }
-  let best = paletteOf(map.cells[y * map.width + x]?.terrain ?? "grass");
-  let most = 0;
-  for (const [p, n] of votes)
-    if (n > most) {
-      best = p;
-      most = n;
-    }
-  return best;
 }
 
 // --------------------------------------------------------------- objects

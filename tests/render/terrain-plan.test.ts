@@ -42,7 +42,7 @@ const CHUNK = CHUNK_CELLS * CELL;
 
 /**
  * The terrain as map-view.ts rebuilt it in full on every setObjects before
- * this bead (the peaks mode of rebuildTerrain), with the scene's own entry
+ * this bead (rebuildTerrain), with the scene's own entry
  * builders and compareEntries.
  */
 function rebuiltInFull(map: GameMap, objects: readonly MapObject[]) {
@@ -57,20 +57,9 @@ function rebuiltInFull(map: GameMap, objects: readonly MapObject[]) {
       ),
     ),
   };
-  const base = buildGroundLayout(
-    map,
-    roadEnds(map, objects),
-    undefined,
-    featured,
-  );
-  const layout = {
-    ...base,
-    nearMountain: new Uint8Array(base.mountain.length),
-  };
+  const layout = buildGroundLayout(map, roadEnds(map, objects), featured);
   const terrain = [
-    ...terrainEntries(map, objects, canopy).filter(
-      (e) => !e.sprites.some((s) => s.key.startsWith("massif-")),
-    ),
+    ...terrainEntries(map, objects, canopy),
     ...peakEntries(range.peaks),
   ];
   const entries = [...terrain, ...doodadEntries(map, objects, layout)].sort(

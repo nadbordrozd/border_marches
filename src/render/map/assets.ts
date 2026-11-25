@@ -8,7 +8,6 @@ import {
   GROUND_TEXTURES,
   HERO_ASSETS,
   MOUNTAIN_PIECES,
-  MASSIF_PIECES,
   TOWN_3X2_ASSETS,
   DOODAD_ASSETS,
   OBJECT_ASSETS,
@@ -21,7 +20,7 @@ import type { GroundTerrain, ImageAsset } from "../../assets/manifest";
 import { MAP_OBJECT_ASSETS } from "../../assets/map-objects";
 import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
-import { GROUND_CALM, blockMask, calmTexture } from "./ground";
+import { GROUND_CALM, calmTexture } from "./ground";
 import type { GroundSources, PixelImage } from "./ground";
 
 export interface MapAssets {
@@ -82,7 +81,6 @@ export function mapAssetList(): ImageAsset[] {
     ...Object.values(GROUND_TEXTURES),
     ...WATER_TILES,
     ...MOUNTAIN_PIECES,
-    ...MASSIF_PIECES,
     ...TOWN_3X2_ASSETS,
     ...DOODAD_ASSETS,
     ...TREE_ASSETS,
@@ -124,19 +122,11 @@ export async function loadMapAssets(base = "/"): Promise<MapAssets> {
     WATER_TILES.filter((tile) => tile.depth === depth).map((tile) =>
       readPixels(get(tile), tile.w, tile.h),
     );
-  // The massif pieces' silhouettes for the scree (bead xaj.21).
-  const pieceMasks = new Map(
-    MASSIF_PIECES.map((asset) => [
-      asset.key,
-      blockMask(readPixels(get(asset), asset.w, asset.h)),
-    ]),
-  );
   return {
     images,
     ground: {
       textures,
       water: { shallow: water("shallow"), deep: water("deep") },
-      pieceMasks,
     },
   };
 }
