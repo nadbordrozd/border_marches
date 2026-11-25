@@ -307,11 +307,18 @@ export function nextActionHint(
   if (hero === undefined)
     return "No heroes: hire one in a town's tavern (T opens the town).";
   if (planned !== null) {
+    // The movement numbers are on the hero card's bar (UI2-07).
     if (planned.attack && planned.days === 0)
       return "Click the target again or press Space to attack.";
     if (planned.pickup === true && planned.days === 0)
-      return `Click again or press Space to pick it up. ${pathLine(planned)}.`;
-    return `Click again or press Space to walk. ${pathLine(planned)}.`;
+      return "Click the target again or press Space to pick it up.";
+    const when =
+      planned.days === 0
+        ? "today"
+        : planned.days === 1
+          ? "tomorrow"
+          : `in ${planned.days} days`;
+    return `Click the target again or press Space to walk: arrives ${when}.`;
   }
   if (hero.mp < SPENT_MP) {
     const others = state.heroes.some(

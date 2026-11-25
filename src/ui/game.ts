@@ -33,9 +33,7 @@ import {
   levelUpOffer,
   maxMana,
   moveHeroAlong,
-  isPickup,
   sightRadius,
-  standsOn,
   takeChest,
   townIncome,
   townsOf,
@@ -140,10 +138,15 @@ import { displayObjects, objectsSignature } from "./objects.ts";
 import { openTownScreen } from "./town.ts";
 import {
   DOUBLE_CLICK_MS,
+  clickTarget,
   isDoubleClick,
+  mapAction,
+  pathGuard,
   townClickAction,
   type LastClick,
+  type MapAction,
 } from "./map-clicks.ts";
+import { cursorImage, cursorStyle } from "./cursors.ts";
 
 /** The human player in the MVP flow (RULES_V2 5.1: player 0). */
 export const PLAYER = 0;
@@ -276,6 +279,10 @@ class GameScreen {
   private readonly log: Array<{ day: number; text: string }> = [];
   /** The hovered map cell, for the tooltip. */
   private hovered: { x: number; y: number } | null = null;
+  /** What a click on the hovered cell does (UI2-07): cursor and status. */
+  private hoverAction: MapAction | null = null;
+  /** The hero card's movement bar, which shows a planned walk's cost. */
+  private mpMeter: HTMLElement | null = null;
   private readonly view: MapView;
   private readonly minimap: Minimap;
   private readonly resolver = createBattleResolver();
@@ -352,6 +359,7 @@ class GameScreen {
     });
     this.canvas.addEventListener("pointerleave", () => {
       this.hovered = null;
+      this.renderHint();
       hideTip();
     });
     window.addEventListener("keydown", this.onKey);
@@ -477,7 +485,10 @@ class GameScreen {
 
   /** The map takes input only while the human could act (bead xaj.18). */
   private syncInput(): void {
-    this.view.setInputEnabled(!this.inputBlocked());
+    const blocked = this.inputBlocked();
+    this.view.setInputEnabled(!blocked);
+    // No action cursor while walking, fighting or in a dialog (UI2-07).
+    if (blocked && this.hoverAction !== null) this.renderHint();
   }
 
   private inputBlocked(): boolean {
@@ -627,15 +638,23 @@ class GameScreen {
     const player = this.player();
     const income = dailyIncome(this.state, this.human);
     const bar = el("div.gm-resources");
+    // Every resource, a zero greyed, the daily income always under it (UI2-07).
     for (const r of RESOURCE_IDS) {
+      const have = player?.resources[r] ?? 0;
       const item = el(
         "div.gm-res",
         resourceIcon(r),
         el(
           "span.gm-res-text",
-          el("span.gm-res-amount", String(player?.resources[r] ?? 0)),
-          income[r] > 0 ? el("span.gm-res-income", `+${income[r]}`) : null,
+          el("span.gm-res-amount", String(have)),
+          el("span.gm-res-income", `+${income[r]}`),
         ),
+      );
+      if (have <= 0) item.classList.add("gm-res-zero");
+      if (income[r] <= 0) item.classList.add("gm-res-no-income");
+      item.setAttribute(
+        "aria-label",
+        `${RESOURCE_NAMES[r]} ${have}, +${income[r]} a day`,
       );
       item.querySelector("img")?.removeAttribute("title");
       item.tabIndex = 0;
@@ -645,8 +664,13 @@ class GameScreen {
     return bar;
   }
 
-  /** The line under the map: what to do next, or the planned walk. */
+  /**
+   * The line under the map: what a click on the hovered cell does (UI2-07),
+   * else what to do next or the planned walk.
+   */
   private hintText(): string {
+    if (this.hoverAction !== null && this.hoverAction.text !== "")
+      return this.hoverAction.text;
     const hero = this.hero();
     const planned =
       this.plan !== null && hero !== undefined
@@ -657,11 +681,33 @@ class GameScreen {
   }
 
   private renderHint(): void {
-    this.hint.textContent = this.hintText();
+    this.updateHoverAction();
+    const kind = this.hoverAction?.cursor ?? "none";
+    const url =
+      kind === "none" || this.hoverAction?.text === ""
+        ? null
+        : cursorImage(kind);
+    const icon = url === null ? null : el("img.gm-hint-icon");
+    if (icon !== null) {
+      icon.src = url ?? "";
+      icon.alt = "";
+    }
+    this.hint.className = `gm-hint-line gm-hint-${kind}`;
+    this.hint.replaceChildren(
+      ...(icon === null ? [] : [icon]),
+      el("span.gm-hint-text", this.hintText()),
+    );
+    this.renderPlanMeter();
   }
 
   private renderBar(): void {
-    const date = el("div.gm-date", dateLabel(this.state.day));
+    // "Month 1 · Week 1 · Day 1", the day emphasised (UI2-07).
+    const c = calendar(this.state.day);
+    const date = el(
+      "div.gm-date",
+      el("span.gm-date-month", `Month ${c.month} · Week ${c.week} · `),
+      el("span.gm-date-day", `Day ${c.dayOfWeek}`),
+    );
     setTip(date, () => {
       const c = calendar(this.state.day);
       return tipCard(dateLabel(this.state.day), [
@@ -777,6 +823,7 @@ class GameScreen {
   private renderHeroPanel(): void {
     const hero = this.hero();
     this.heroPanel.replaceChildren();
+    this.mpMeter = null;
     if (hero === undefined) return;
     const cls = getHeroClass(hero.heroClass);
     const portrait = img(
@@ -830,17 +877,18 @@ class GameScreen {
       el("div.gm-hero-class", `Level ${hero.level} ${cls.name}`),
       sheet,
     );
+    this.mpMeter = meter(
+      "mp",
+      pct(hero.mp, hero.maxMp),
+      `Moves ${hero.mp} / ${hero.maxMp}`,
+      "Movement left today. Roads are cheaper; forest, swamp and rough ground cost more. A planned walk shows today's share in gold.",
+    );
     this.heroPanel.append(
       el("div.gm-hero-top", portrait, head),
       statLine,
       el(
         "div.gm-hero-meters",
-        meter(
-          "mp",
-          pct(hero.mp, hero.maxMp),
-          `Moves ${hero.mp} / ${hero.maxMp}`,
-          "Movement left today. Roads are cheaper; forest, swamp and rough ground cost more.",
-        ),
+        this.mpMeter,
         meter(
           "mana",
           pct(hero.mana, maxMana(hero)),
@@ -857,6 +905,30 @@ class GameScreen {
       armyRow(hero.army, { small: true }),
     );
     this.heroPanel.classList.add("gm-selected");
+    this.renderPlanMeter();
+  }
+
+  /**
+   * The movement numbers of a planned walk live on the hero card's bar
+   * (UI2-07): today's share of the plan in gold, "Moves 1500 → 1080".
+   */
+  private renderPlanMeter(): void {
+    const bar = this.mpMeter;
+    const hero = this.hero();
+    if (bar === null || hero === undefined) return;
+    const today =
+      this.plan?.path.steps.filter((s) => s.day === 0).at(-1)?.total ?? 0;
+    const spend = Math.max(0, Math.min(hero.mp, today));
+    const pct = (n: number): string =>
+      `${Math.max(0, Math.min(100, (n / Math.max(1, hero.maxMp)) * 100))}%`;
+    bar.style.setProperty("--fill", pct(hero.mp));
+    bar.style.setProperty("--keep", pct(hero.mp - spend));
+    if (spend > 0) bar.classList.add("gm-planned");
+    else bar.classList.remove("gm-planned");
+    bar.textContent =
+      spend > 0
+        ? `Moves ${hero.mp} → ${hero.mp - spend}`
+        : `Moves ${hero.mp} / ${hero.maxMp}`;
   }
 
   /** A town's card; on the map an own town also says how to open it. */
@@ -1003,29 +1075,35 @@ class GameScreen {
   private onHover(cell: { x: number; y: number } | null): void {
     if (cell === null || this.inputBlocked()) {
       this.hovered = null;
-      this.canvas.style.cursor = "";
+      this.renderHint();
       hideTip();
       return;
     }
     this.hovered = cell;
-    this.canvas.style.cursor = this.pickupAt(cell.x, cell.y) ? "grab" : "";
+    this.renderHint();
     this.showMapTip();
   }
 
   /**
-   * An explored, uncollected pickup lies at (x, y): the hand cursor says
-   * it is taken from a next cell (bead bzc.49).
+   * The action cursor and the status line for the hovered cell (UI2-07):
+   * walk, attack, visit, pick up (the hand of bzc.49), enter town, meet,
+   * can't reach, or cast while a spell is aimed (bzc.47).
    */
-  private pickupAt(x: number, y: number): boolean {
-    const w = this.state.map.width;
-    if (this.player()?.explored[y * w + x] !== true) return false;
-    return this.state.map.objects.some(
-      (o) =>
-        o.x === x &&
-        o.y === y &&
-        isPickup(o) &&
-        !this.state.collected.includes(o.id),
-    );
+  private updateHoverAction(): void {
+    const cell = this.hovered;
+    this.hoverAction =
+      cell === null || this.inputBlocked()
+        ? null
+        : mapAction({
+            state: this.state,
+            player: this.human,
+            heroId: this.hero()?.id ?? null,
+            x: cell.x,
+            y: cell.y,
+            planned: this.plan,
+            aiming: this.aiming,
+          });
+    this.canvas.style.cursor = cursorStyle(this.hoverAction?.cursor ?? "none");
   }
 
   private showMapTip(): void {
@@ -1085,8 +1163,7 @@ class GameScreen {
         }
       }
       if (!(hero.x === x && hero.y === y)) {
-        const tx = obj?.kind === "mine" ? obj.x : x;
-        const ty = obj?.kind === "mine" ? obj.y : y;
+        const { x: tx, y: ty } = clickTarget(obj, x, y);
         const path = this.pathTo(tx, ty);
         if (path !== null) lines.push(el("div.gm-tip-path", pathLine(path)));
         else if (this.isPassable(x, y)) subtitle = "No path from here";
@@ -1349,9 +1426,8 @@ class GameScreen {
       this.renderHeroPanel();
       return;
     }
-    // Clicking any cell of a mine targets its entrance.
-    const tx = obj?.kind === "mine" ? obj.x : x;
-    const ty = obj?.kind === "mine" ? obj.y : y;
+    // Clicking any cell of a mine or site targets its entrance.
+    const { x: tx, y: ty } = clickTarget(obj, x, y);
     if (this.plannedTo(tx, ty)) {
       void this.walk();
       return;
@@ -1426,34 +1502,13 @@ class GameScreen {
 
   /** Who the planned walk ends up fighting, as "a pack of 11 Skeletons". */
   private planGuard(): string | null {
-    const steps = this.plan?.path.steps ?? [];
-    const last = steps[steps.length - 1];
-    if (last === undefined) return null;
-    if (last.attack) {
-      const foe = this.state.heroes.find(
-        (h) => h.alive && h.x === last.x && h.y === last.y,
-      );
-      if (foe !== undefined) {
-        return `${foe.name} of ${playerColour(foe.owner).name} stands there`;
-      }
-    }
-    const stand = standsOn(last) ? last : steps[steps.length - 2];
-    const monsters = Object.values(this.state.monsters);
-    const target = last.attack
-      ? monsters.find((m) => m.x === last.x && m.y === last.y)
-      : undefined;
-    const near = (c: { x: number; y: number } | undefined) =>
-      c === undefined
-        ? undefined
-        : monsters.find(
-            (m) => Math.max(Math.abs(m.x - c.x), Math.abs(m.y - c.y)) <= 1,
-          );
+    if (this.plan === null) return null;
     // A pickup in a zone of control is fought for first (bead bzc.49).
-    const guard =
-      target ?? near(stand) ?? (last.pickup === true ? near(last) : undefined);
-    return guard === undefined
-      ? null
-      : `Guarded by ${stackPhrase(guard.creature, guard.count)}`;
+    const guard = pathGuard(this.state, this.plan.path);
+    if (guard === null) return null;
+    if (guard.kind === "hero")
+      return `${guard.hero.name} of ${playerColour(guard.hero.owner).name} stands there`;
+    return `Guarded by ${stackPhrase(guard.creature, guard.count)}`;
   }
 
   // ------------------------------------------------------------ walking

@@ -664,6 +664,17 @@
   white-space: nowrap;
 }
 
+/* "Month 1 · Week 1 · Day 1": the day stands out (UI2-07). */
+.gm-date-month {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.gm-date-day {
+  font-size: 16px;
+  color: var(--gm-trim-light);
+}
+
 .gm-side {
   flex: 0 0 248px;
   display: flex;
@@ -1802,8 +1813,9 @@
     inset 0 0 0 3px var(--gm-trim-dark);
 }
 
+/* The action cursor is set per hovered cell (cursors.ts, UI2-07). */
 .gm-map {
-  cursor: pointer;
+  cursor: default;
 }
 
 .gm-bar {
@@ -1851,16 +1863,70 @@
   color: var(--gm-good);
 }
 
+/* All resources always show (UI2-07): none in stock or no income greys. */
+.gm-res-zero .gm-res-amount {
+  color: #8a7c62;
+}
+
+.gm-res-zero .gm-res-icon {
+  opacity: 0.55;
+}
+
+.gm-res-no-income .gm-res-income {
+  color: #7d7260;
+}
+
+/*
+ * The status line (UI2-07): what a click on the hovered cell does, with
+ * the cursor's picture; the next-action hint (italic) when nothing is
+ * hovered. It wraps to a second line rather than cut a sentence.
+ */
 .gm-hint-line {
   flex: 1;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  text-align: center;
   color: var(--gm-parchment);
+  font-size: 13px;
+}
+
+.gm-hint-icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.gm-hint-text {
+  display: -webkit-box;
+  min-width: 0;
+  overflow: hidden;
+  line-height: 1.2;
+  text-align: center;
+  text-wrap: balance;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.gm-hint-none .gm-hint-text {
   font-size: 12px;
   font-style: italic;
+  color: #cdbd94;
+}
+
+.gm-hint-attack .gm-hint-text {
+  color: #ffc2a8;
+}
+
+.gm-hint-blocked .gm-hint-text {
+  color: #c9b48c;
+}
+
+.gm-hint-cast .gm-hint-text {
+  color: #dcc8ff;
 }
 
 .gm-side {
@@ -2292,6 +2358,16 @@
 
 .gm-hero-meter.gm-xp {
   --bar: #8a6a2c;
+}
+
+/* A planned walk: today's share of the movement bar in gold (UI2-07). */
+.gm-hero-meter.gm-mp.gm-planned {
+  background: linear-gradient(
+    to right,
+    var(--bar) var(--keep, 0%),
+    #b8892a var(--keep, 0%) var(--fill, 0%),
+    #0b0a08 var(--fill, 0%)
+  );
 }
 
 /*
