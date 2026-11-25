@@ -37,7 +37,8 @@ import { displayObjects } from "./objects.ts";
 
 /**
  * How a click plans the selected hero's walk (bead bzc.77): when every way
- * to the target crosses a zone of control, the walk to the first guard.
+ * to the target crosses a zone of control, the walk to the first guard;
+ * past a visit or a pickup in the way, the walk to that (bead bzc.79).
  */
 export const PLAN_OPTIONS: PathOptions = { throughGuards: true };
 
@@ -266,6 +267,21 @@ export function blockedWords(
   return `Blocked by ${creatureCount(m.creature, m.count)}: defeat ${them} first (${odds.join(", ")})`;
 }
 
+/**
+ * For a walk planned past a visit or a pickup in the way (Path.stopsAt,
+ * bead bzc.79): "On the way: visit the Water Wheel first (tomorrow)". Null
+ * for any other path, and when a guard comes first (blockedWords).
+ */
+export function stopsWords(state: GameState, path: Path): string | null {
+  if (path.stopsAt === undefined || path.blockedBy !== undefined) return null;
+  const obj = state.map.objects.find((o) => o.id === path.stopsAt);
+  if (obj === undefined) return null;
+  const verb = isPickup(obj) ? "pick up" : "visit";
+  const when = whenWords(path.steps[path.steps.length - 1]?.day ?? 0);
+  const words = `On the way: ${verb} ${targetName(state, obj)} first`;
+  return when === "" ? words : `${words} (${when})`;
+}
+
 function aimAction(
   state: GameState,
   aiming: NonNullable<MapActionInput["aiming"]>,
@@ -365,6 +381,10 @@ export function mapAction(input: MapActionInput): MapAction {
   });
   const blocked = blockedWords(state, hero, path);
   if (blocked !== null) return done("attack", blocked);
+  // Past a visit or a pickup in the way, the walk ends there (bzc.79).
+  const stops = stopsWords(state, path);
+  if (stops !== null)
+    return done(last?.pickup === true ? "pickup" : "visit", stops);
   // The click attacks an enemy hero (in a town: the town) or a stack.
   if (guard?.kind === "hero") {
     const foe = obj?.kind === "town" && name !== null ? name : guard.hero.name;

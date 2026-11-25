@@ -135,6 +135,7 @@ import {
   isDoubleClick,
   mapAction,
   pathGuard,
+  stopsWords,
   townClickAction,
   type LastClick,
   type MapAction,
@@ -1334,6 +1335,13 @@ class GameScreen {
         : blockedWords(this.state, hero, this.plan.path);
     if (blocked !== null) {
       toast(`${blocked}. ${clickAgain(true)}`);
+      return;
+    }
+    // Past a visit or a pickup in the way (bead bzc.79).
+    const stops =
+      this.plan === null ? null : stopsWords(this.state, this.plan.path);
+    if (stops !== null) {
+      toast(`${stops}. Click again to go.`);
       return;
     }
     const guard = this.planGuard();

@@ -272,6 +272,47 @@ describe("mapAction: blocked by a guard (bead bzc.77)", () => {
   });
 });
 
+describe("mapAction: past things in a one-cell gap (bead bzc.79)", () => {
+  // Only row 2 is open; the hero stands at (1,2).
+  const GAP = [
+    "MMMMMMMMMMM",
+    "MMMMMMMMMMM",
+    "ggggggggggg",
+    "MMMMMMMMMMM",
+    "MMMMMMMMMMM",
+  ];
+
+  it("a stack standing in the gap: the walk to the fight", () => {
+    const s = world(GAP, [
+      monster("m", 5, 2, "goblin", 10),
+      mine("mine-ore", 9, 2, "ore"),
+    ]);
+    const a = at(s, 9, 2);
+    expect(a.cursor).toBe("attack");
+    expect(a.text).toMatch(new RegExp(`^Blocked by ${goblins(10)}: defeat`));
+  });
+
+  it("a visit in the gap: the walk to it, named", () => {
+    const s = world(GAP, [mine("mine-ore", 5, 2, "ore")]);
+    expect(at(s, 9, 2)).toEqual({
+      cursor: "visit",
+      text: "On the way: visit the Ore Pit first",
+    });
+    hero(s).mp = 0;
+    expect(at(s, 9, 2).text).toBe(
+      "On the way: visit the Ore Pit first (tomorrow)",
+    );
+  });
+
+  it("a pickup in the gap: taken on the way", () => {
+    const s = world(GAP, [pickup("p", 5, 2, { resource: "wood", amount: 5 })]);
+    expect(at(s, 9, 2)).toEqual({
+      cursor: "pickup",
+      text: "On the way: pick up 5 wood first",
+    });
+  });
+});
+
 describe("mapAction: spell aiming (bead bzc.47)", () => {
   const aims: AdventureAim[] = [
     { x: 3, y: 2, label: "10 Goblin", target: { monsterId: "m" } },

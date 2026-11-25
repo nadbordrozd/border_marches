@@ -353,4 +353,28 @@ describe("map card path line", () => {
     // The planned target asks to attack.
     expect(ask({ x: 9, y: 2 })).toBe(`${path.text}. Click again to attack.`);
   });
+
+  it("agrees with the status line past a visit in a gap (bead bzc.79)", () => {
+    const rows = ["MMMMMMMMMMM", "ggggggggggg", "MMMMMMMMMMM"];
+    const s = cloneState(
+      gameOn(rows, [mine("mo", 5, 1, "ore"), mine("mw", 9, 1, "wood")], 1, 1),
+    );
+    for (const p of s.players) p.explored.fill(true);
+    const h = s.heroes[0]!;
+    h.mp = 1500;
+    h.maxMp = 1500;
+    const path = line(card(s, 9, 1), "path");
+    expect(path.text).toBe("On the way: visit the Ore Pit first");
+    expect(path.blocked).not.toBe(true);
+    const status = mapAction({
+      state: s,
+      player: 0,
+      heroId: h.id,
+      x: 9,
+      y: 1,
+      planned: null,
+      aiming: null,
+    }).text;
+    expect(status).toBe(path.text);
+  });
 });

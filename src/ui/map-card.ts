@@ -52,6 +52,7 @@ import {
   PLAN_OPTIONS,
   blockedWords,
   clickTarget,
+  stopsWords,
   whenWords,
 } from "./map-clicks.ts";
 import { displayObjects } from "./objects.ts";
@@ -225,7 +226,8 @@ function selected(
 
 /**
  * "Reach: today", "Reach: tomorrow", "Reach: in 3 days", "Blocked by 11
- * Crooners: defeat them first (...)", "Can't reach from here": the selected
+ * Crooners: defeat them first (...)", "On the way: visit the Ore Pit
+ * first", "Can't reach from here": the selected
  * hero's way to the click target of (x, y), planned as a click plans it.
  * Null when there is no hero or it stands there.
  */
@@ -243,6 +245,9 @@ export function pathLineTo(
     return { kind: "path", text: "Can't reach from here" };
   const blocked = blockedWords(state, hero, path);
   if (blocked !== null) return { kind: "path", text: blocked, blocked: true };
+  // Past a visit or a pickup in the way, the walk ends there (bead bzc.79).
+  const stops = stopsWords(state, path);
+  if (stops !== null) return { kind: "path", text: stops };
   const days = path.steps[path.steps.length - 1]?.day ?? 0;
   return { kind: "path", text: `Reach: ${whenWords(days) || "today"}` };
 }

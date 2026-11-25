@@ -23,7 +23,9 @@
  *   control, a visit) and the pickup waits for the next click.
  * - Opt-in `throughGuards` (bead bzc.77, the player's clicks): a target
  *   that only lies beyond zones of control gets the walk to the first
- *   guard on the way, ending with the fight (Path.blockedBy).
+ *   guard on the way, ending with the fight (Path.blockedBy); one beyond a
+ *   stack in a gap, a visit or a pickup gets the walk to that (bead
+ *   bzc.79, Path.blockedBy or Path.stopsAt).
  *
  * A* with an admissible octile heuristic; ties break by insertion order, so
  * results are deterministic.
@@ -95,6 +97,14 @@ export interface Path {
    * ends with the fight against it instead of reaching the target.
    */
   blockedBy?: string;
+  /**
+   * Set only on a walk planned with `throughGuards` (bead bzc.79): the
+   * target lies beyond this object (a visit that stops the hero, or a
+   * pickup in the way), and the path ends with visiting or taking it
+   * instead of reaching the target. With `blockedBy` too (a pickup in a
+   * zone of control), the fight comes first.
+   */
+  stopsAt?: string;
 }
 
 /** Everything a step check needs, precomputed from a state for one hero. */
@@ -141,12 +151,15 @@ export interface PathOptions {
   /** Plan through unexplored cells too (tests, AI). Default false. */
   ignoreFog?: boolean;
   /**
-   * When no path avoids every zone of control (bead bzc.77): plan the walk
-   * up to the first guard on the cheapest way that crosses as few zone
+   * When no single walk reaches the target (bead bzc.77): plan the walk up
+   * to the first guard on the cheapest way that crosses as few zone
    * cells as it can, ending with the fight against it (a stop in its zone
    * plus the attack step onto it; `Path.blockedBy` names the stack). The
-   * walk stops there, as moveHeroAlong does for any path. Default false:
-   * the AI and every other caller still get null.
+   * walk stops there, as moveHeroAlong does for any path. Stacks standing
+   * in a gap, visits and pickups in the way end the planned walk the same
+   * way (bead bzc.79: `Path.blockedBy` or `Path.stopsAt`), so every target
+   * the hero can get to over several walks gets a plan. Default false: the
+   * AI and every other caller still get null.
    */
   throughGuards?: boolean;
 }
@@ -284,6 +297,31 @@ export function canEnter(ctx: MoveContext, x: number, y: number): boolean {
     return false;
   }
   return ctx.explored === null || ctx.explored[i] === true;
+}
+
+/**
+ * Whether a walk planned through guards (PathOptions.throughGuards) may
+ * cross (x, y): as canEnter, but a neutral stack's cell and an uncollected
+ * pickup's cell count as open ground, since beating the stack or taking
+ * the pickup frees them (bead bzc.79: a stack or a pickup in a one-cell gap
+ * is the only way on, and the planned walk ends at it anyway).
+ */
+function canCrossPlanning(ctx: MoveContext, x: number, y: number): boolean {
+  if (canEnter(ctx, x, y)) return true;
+  if (!inBounds(ctx.map, x, y)) return false;
+  const i = y * ctx.map.width + x;
+  const cell = ctx.map.cells[i];
+  if (cell === undefined) return false;
+  if (ctx.explored !== null && ctx.explored[i] !== true) return false;
+  if (ctx.monsterAt.has(i)) {
+    return (
+      !isImpassableCell(ctx, x, y) &&
+      !ctx.enemyHeroAt.has(i) &&
+      !ctx.friendAt.has(i)
+    );
+  }
+  // A pickup cell is in objectBlocked; the ground under it must be open.
+  return ctx.pickupAt.has(i) && isPassable(cell);
 }
 
 /** True when a diagonal step from (fx, fy) to (tx, ty) cuts a blocked corner. */
@@ -484,9 +522,10 @@ export function findPath(
   const ctx = moveContext(state, hero, options);
   let steps = findPathInContext(ctx, hero.x, hero.y, tx, ty);
   let blockedBy: string | undefined;
+  let stopsAt: string | undefined;
   if (steps === null && options.throughGuards === true) {
-    const guarded = pathToFirstGuard(state, ctx, hero, tx, ty);
-    if (guarded !== null) ({ steps, guard: blockedBy } = guarded);
+    const planned = pathToFirstStop(state, ctx, hero, tx, ty);
+    if (planned !== null) ({ steps, guard: blockedBy, stopsAt } = planned);
   }
   if (steps === null) return null;
   const days = assignDays(
@@ -500,32 +539,107 @@ export function findPath(
     steps: withDays,
     total: last?.total ?? 0,
     ...(blockedBy === undefined ? {} : { blockedBy }),
+    ...(stopsAt === undefined ? {} : { stopsAt }),
   };
 }
 
+/** Object kinds whose entrance can be a visit stop (see moveContext). */
+const VISIT_KINDS: ReadonlySet<string> = new Set([
+  "mine",
+  "town",
+  "dwelling",
+  "site",
+  "bank",
+  "artifact",
+  "teleport",
+]);
+
+/** The visited object whose entrance is cell `i` (first in map order). */
+function entranceAt(ctx: MoveContext, i: number): string | undefined {
+  const w = ctx.map.width;
+  return ctx.map.objects.find(
+    (o) => VISIT_KINDS.has(o.kind) && o.y * w + o.x === i,
+  )?.id;
+}
+
 /**
- * The walk to the fight with the first guard on the way to (tx, ty)
+ * The walk to the first thing that ends it on the way to (tx, ty)
  * (PathOptions.throughGuards): the cheapest path that may cross zones of
- * control, cut at the first zone cell it enters, plus the attack step onto
- * the stack that moveHeroAlong would fight there (the cell's first guard in
- * map object order). Null when even that path does not exist.
+ * control, stacks, visits and pickups (as few as it can), cut at the first
+ * one it meets:
+ * - a zone cell: the walk stops there and ends with the attack step onto
+ *   the stack that moveHeroAlong would fight (the cell's first guard in map
+ *   object order); `guard` names it;
+ * - a stack with no zone against the hero (Parley, Silver Tongue) standing
+ *   in the way: the attack step onto it; `guard` names it;
+ * - an entrance whose visit stops the hero: the walk ends with the visit;
+ *   `stopsAt` names the object;
+ * - an uncollected pickup in the way: the pickup step; `stopsAt` names it.
+ * Null when even that path does not exist.
  */
-function pathToFirstGuard(
+function pathToFirstStop(
   state: GameState,
   ctx: MoveContext,
   hero: HeroState,
   tx: number,
   ty: number,
-): { steps: PathStep[]; guard: string } | null {
+): { steps: PathStep[]; guard?: string; stopsAt?: string } | null {
   const through = findPathInContext(ctx, hero.x, hero.y, tx, ty, true);
   if (through === null) return null;
   const w = ctx.map.width;
-  const k = through.findIndex(
-    (s) => standsOn(s) && ctx.guards.has(s.y * w + s.x),
-  );
-  const stop = through[k];
-  if (stop === undefined) return null;
-  const guard = ctx.guards.get(stop.y * w + stop.x)?.[0];
+  const k = through.findIndex((s) => {
+    if (!standsOn(s)) return false;
+    const i = s.y * w + s.x;
+    return (
+      ctx.guards.has(i) ||
+      ctx.monsterAt.has(i) ||
+      ctx.stops.has(i) ||
+      ctx.pickupAt.has(i)
+    );
+  });
+  const crossed = through[k];
+  if (crossed === undefined) return null;
+  const at = crossed.y * w + crossed.x;
+  const before = through[k - 1];
+  const onStack = ctx.monsterAt.get(at);
+  if (onStack !== undefined) {
+    // A stack with no zone against this hero (Parley, Silver Tongue) that
+    // still stands in the way: walk up to it and fight it.
+    return {
+      steps: [
+        ...through.slice(0, k),
+        { ...crossed, cost: 0, total: before?.total ?? 0, attack: true },
+      ],
+      guard: onStack,
+    };
+  }
+  const pickup = ctx.pickupAt.get(at);
+  if (pickup !== undefined) {
+    // Taken from the cell before, as a pickup target is (bead bzc.49); in
+    // a zone of control its guard attacks first (moveHeroAlong).
+    const guard = ctx.guards.get(at)?.[0];
+    return {
+      ...(guard === undefined ? {} : { guard }),
+      steps: [
+        ...through.slice(0, k),
+        {
+          ...crossed,
+          cost: 0,
+          total: before?.total ?? 0,
+          attack: false,
+          pickup: true,
+        },
+      ],
+      stopsAt: pickup,
+    };
+  }
+  const stop = crossed;
+  if (!ctx.guards.has(at)) {
+    const visit = entranceAt(ctx, at);
+    const steps = through.slice(0, k + 1);
+    return visit === undefined ? { steps } : { steps, stopsAt: visit };
+  }
+  const guard = ctx.guards.get(at)?.[0];
   const monster = guard === undefined ? undefined : state.monsters[guard];
   if (guard === undefined || monster === undefined) return null;
   const steps = through.slice(0, k + 1);
@@ -543,16 +657,16 @@ function pathToFirstGuard(
 }
 
 /**
- * Search-order cost of entering a zone of control when planning through
- * guards: more than any walk, so the path crosses as few zone cells as it
- * can, and only then is cheapest.
+ * Search-order cost of entering a zone of control, a stack's cell, a
+ * visit or a pickup when planning through guards: more than any walk, so
+ * the path crosses as few of them as it can, and only then is cheapest.
  */
 const ZONE_CROSSING = 100_000_000;
 
 /**
- * A* in a prepared context; `day` is left 0. With `throughGuards` a zone
- * of control does not end the walk (see pathToFirstGuard): callers cut
- * the result at its first zone cell.
+ * A* in a prepared context; `day` is left 0. With `throughGuards` no zone
+ * of control or visit ends the walk, and stacks and pickups in the way can
+ * be crossed (see pathToFirstStop): callers cut the result at the first.
  */
 export function findPathInContext(
   ctx: MoveContext,
@@ -587,8 +701,9 @@ export function findPathInContext(
     const cx = cur % w;
     const cy = (cur - cx) / w;
     const stop = cur !== start && isStopCell(ctx, cx, cy);
-    // Planning through guards, only a visit ends the walk.
-    const halt = throughGuards ? cur !== start && ctx.stops.has(cur) : stop;
+    // Planning through guards nothing ends the walk: callers cut it at the
+    // first stop (pathToFirstStop).
+    const halt = !throughGuards && stop;
     const gc = g.get(cur) ?? 0;
     for (const [dx, dy] of DIRECTIONS_8) {
       const nx = cx + dx;
@@ -607,10 +722,21 @@ export function findPathInContext(
         if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
         cost = stop ? STOP_BEFORE_PICKUP : 0;
       } else {
-        if (halt || !canEnter(ctx, nx, ny)) continue;
+        if (halt) continue;
+        if (!(throughGuards ? canCrossPlanning : canEnter)(ctx, nx, ny)) {
+          continue;
+        }
         if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
         cost = stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny, ctx.forestCost);
-        if (throughGuards && ctx.guards.has(ni)) cost += ZONE_CROSSING;
+        if (
+          throughGuards &&
+          (ctx.guards.has(ni) ||
+            ctx.monsterAt.has(ni) ||
+            ctx.stops.has(ni) ||
+            ctx.pickupAt.has(ni))
+        ) {
+          cost += ZONE_CROSSING;
+        }
       }
       const ng = gc + cost;
       const old = g.get(ni);
