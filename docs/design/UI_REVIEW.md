@@ -41,7 +41,15 @@ shots draw no cursor), `adventure-hover-resource`, `adventure-rich`,
 `endturn`, `hero`, `hero-hover`, `hero-hover-army`, `hero-hover-skill`,
 `hero-hover-feat`, `hero-hover-stat`, `kingdom` (also checks that it fits
 and that its hero and town rows act), `kingdom-hover`, `spellbook` (the
-adventure tab), `spellbook-battle` (when the book has tabs), `adventure-aim`, `menu-dialog`, `meeting`, `town-<faction>`, `town-hover`,
+adventure tab), `spellbook-battle` (when the book has tabs), `adventure-aim`,
+the right-click pinned cards (UI2-18) `pin-map` (also checks that neither
+the right-click nor the click that closes the card moves or plans),
+`pin-hero-row`, `pin-army` (Escape closes the card, not the sheet),
+`pin-spell`, `pin-keyword` (a keyword in the pinned card lights its box),
+`pin-keyword-more` (a keyword without a box shows one beside the card),
+`pin-town` (the closing click selects no tile), `pin-dwelling` and
+`pin-battle`, with a count of right-clicks that left the browser menu on
+(must be 0), `menu-dialog`, `meeting`, `town-<faction>`, `town-hover`,
 `town-hall` (a selected hall tile), `recruit`, `market`, `prebattle`,
 `site`, `levelup`, `levelup-hover`, `end-won`, `end-lost`, `battle`,
 `battle-hover`, `battle-info`, `battle-book`, `battle-spell`,

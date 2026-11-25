@@ -997,7 +997,9 @@ export function createMapView(
   };
 
   const onPointerDown = (event: PointerEvent): void => {
-    if (event.button !== 0) return;
+    // Only the left button acts; a right-click (or Control-click, the
+    // Mac's right-click) inspects and never moves or plans (UI2-18).
+    if (event.button !== 0 || event.ctrlKey) return;
     if (!input.pointerDown(event.offsetX, event.offsetY, camX, camY)) return;
     canvas.setPointerCapture(event.pointerId);
   };

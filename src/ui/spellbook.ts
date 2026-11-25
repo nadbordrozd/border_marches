@@ -36,6 +36,8 @@ import { spellTargetKind } from "./battle/spell-targets.ts";
 import { adventureTargetKind, adventureUsable } from "./adventure-targets.ts";
 import type { AdventureAim, AdventureUsable } from "./adventure-targets.ts";
 import { rulesText } from "./keywords.ts";
+import { spellTip } from "./info-tips.ts";
+import { setPinTip } from "./tooltip.ts";
 import { SCHOOL_COLOURS, SCHOOL_NAMES } from "./battle/magic.ts";
 
 const SCHOOLS: readonly School[] = [
@@ -246,6 +248,16 @@ export function openAdventureBook(
       return box;
     };
 
+    /** The Power a page is cast at (its card and the detail pane). */
+    const pagePower = (p: BookPage): number =>
+      isAdventureSpell(p.id) &&
+      p.usable !== null &&
+      ADVENTURE_SPELLS.some((x) => x.id === p.id)
+        ? adventurePower(hero, p.id, p.scroll)
+        : p.scroll
+          ? m.scrollPower
+          : m.pagePower[p.school];
+
     /** The detail pane: the whole page, its target, why not, the cast. */
     const detail = el("div.gm-book-detail");
     const showDetail = (p: BookPage): void => {
@@ -254,11 +266,7 @@ export function openAdventureBook(
       detail.dataset["spell"] = p.id;
       const adventure = isAdventureSpell(p.id) && p.usable !== null;
       const s = adventure ? ADVENTURE_SPELLS.find((x) => x.id === p.id) : null;
-      const power = s
-        ? adventurePower(hero, p.id, p.scroll)
-        : p.scroll
-          ? m.scrollPower
-          : m.pagePower[p.school];
+      const power = pagePower(p);
       const move =
         s?.moveCost === undefined
           ? ""
@@ -349,6 +357,8 @@ export function openAdventureBook(
           off ? shortReason(p.usable?.reason ?? "") : p.cost,
         ),
       );
+      // Right-click: the spell's card at the hero's Power (UI2-18).
+      setPinTip(b, () => spellTip(p.id, pagePower(p)));
       const select = (): void => {
         shown?.classList.remove("gm-book-sel");
         b.classList.add("gm-book-sel");

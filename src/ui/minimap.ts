@@ -235,6 +235,9 @@ export class Minimap {
       onJump(cell.x, cell.y);
     };
     this.canvas.addEventListener("pointerdown", (e) => {
+      // Only the left button moves the view; a right-click (or the Mac's
+      // Control-click) does nothing here (UI2-18, bead bzc.68).
+      if (e.button !== 0 || e.ctrlKey) return;
       this.canvas.setPointerCapture(e.pointerId);
       jump(e);
     });

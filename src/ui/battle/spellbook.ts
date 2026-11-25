@@ -14,6 +14,7 @@ import { iconElement } from "../icons.ts";
 import { targetLine } from "../target-icon.ts";
 import { ANYWHERE, spellTargetKind } from "./spell-targets.ts";
 import { rulesText } from "../keywords.ts";
+import { setPinTip, tipCard } from "../tooltip.ts";
 import { SCHOOL_COLOURS, SCHOOL_NAMES } from "./magic.ts";
 import type { BookEntry, CastPreview, ConditionOption } from "./magic.ts";
 
@@ -139,6 +140,40 @@ export function pageCaption(e: BookEntry): string {
   }
 }
 
+/** The line under a page's name: school, tier and Power, or the item's use. */
+function pageMeta(e: BookEntry): string {
+  if (e.source === "item")
+    return "Once per battle, before a friendly stack acts";
+  if (e.source === "creature")
+    return `${SCHOOL_NAMES[e.school]} ${e.tier} · Power ${e.power} · the stack's action`;
+  return `${SCHOOL_NAMES[e.school]} ${e.tier} · Power ${e.power}${e.fuel ? ` · Fuel doubles ${e.fuel.replace(/^The /, "the ")}` : ""}`;
+}
+
+/**
+ * A page's card, pinned by right-click (UI2-18): the strip's contents in
+ * the shared tooltip layout, so its keywords get their boxes.
+ */
+export function pageCard(e: BookEntry): HTMLElement {
+  const item = e.source === "item";
+  const kind = spellTargetKind(e.id);
+  const reason = e.reason
+    ? el("div", "gm-tip-line gm-tip-bad", e.reason)
+    : null;
+  return tipCard(
+    e.name + (e.count > 1 ? ` ×${e.count}` : ""),
+    [
+      e.text,
+      kind ? targetLine(kind, "bm-spell-target") : null,
+      el("div", "gm-tip-line gm-tip-dim", costText(e)),
+      reason,
+    ],
+    {
+      icon: iconElement(item ? "artifact" : "spell", e.id),
+      subtitle: pageMeta(e),
+    },
+  );
+}
+
 /** The detail strip: the whole page, its target and why it is greyed. */
 function pageDetail(box: HTMLElement, t: BookTile): void {
   const e = t.entry;
@@ -152,15 +187,7 @@ function pageDetail(box: HTMLElement, t: BookTile): void {
       className: "bm-spell-icon",
     }),
     el("span", "bm-spell-name", e.name + (e.count > 1 ? ` ×${e.count}` : "")),
-    el(
-      "span",
-      "bm-spell-meta",
-      item
-        ? "Once per battle, before a friendly stack acts"
-        : e.source === "creature"
-          ? `${SCHOOL_NAMES[e.school]} ${e.tier} · Power ${e.power} · the stack's action`
-          : `${SCHOOL_NAMES[e.school]} ${e.tier} · Power ${e.power}${e.fuel ? ` · Fuel doubles ${e.fuel.replace(/^The /, "the ")}` : ""}`,
-    ),
+    el("span", "bm-spell-meta", pageMeta(e)),
     el("span", "bm-spell-cost", costText(e)),
   );
   box.append(
@@ -207,6 +234,8 @@ function pageTile(
     el("span", "bm-spell-name", e.name),
     el("span", `bm-spell-cost${ready ? "" : " bm-spell-off"}`, pageCaption(e)),
   );
+  // Right-click: the page's card stays pinned (UI2-18).
+  setPinTip(b, () => pageCard(e));
   b.addEventListener("pointerenter", () => onShow(b));
   b.addEventListener("focus", () => onShow(b));
   b.addEventListener("click", () => {

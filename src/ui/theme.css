@@ -113,6 +113,28 @@ button:disabled .gm-kbd {
   display: block;
 }
 
+/*
+ * A card pinned by right-click (UI2-18) takes the pointer, so its keywords
+ * can be hovered; hover cards show above it. A light rim marks it as held.
+ */
+.gm-tip.gm-tip-pin {
+  z-index: 999;
+  cursor: default;
+  pointer-events: auto;
+}
+
+.gm-tip-pin:not(.gm-tip-kw),
+.gm-tip-pin .gm-kw-main {
+  outline: 1px solid var(--gm-trim-light);
+  outline-offset: 1px;
+}
+
+/* The box of the keyword pointed at in a pinned card lights up. */
+.gm-tip-pin .gm-kw-box.gm-kw-lit {
+  outline: 2px solid #ffd65c;
+  outline-offset: 1px;
+}
+
 .gm-tip-text {
   white-space: pre-line;
 }

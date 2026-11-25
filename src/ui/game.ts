@@ -91,7 +91,16 @@ import {
   SPENT_MP,
 } from "./hints.ts";
 import type { ResourceId } from "../core/map/types.ts";
-import { hideTip, setTip, showTipAt, tipCard } from "./tooltip.ts";
+import {
+  closeTips,
+  hideTip,
+  pinTipAt,
+  setPinTip,
+  setTip,
+  showTipAt,
+  tipCard,
+  unpinTip,
+} from "./tooltip.ts";
 import { dateLabel, objectAt, stackPhrase } from "./format.ts";
 import { loadGameMapAssets } from "./hero-sprite.ts";
 import {
@@ -166,6 +175,8 @@ export interface GameHook {
   targets(): HookTarget[];
   /** Hovers map cell (x, y): shows and returns the tooltip text. */
   hover(x: number, y: number): string | null;
+  /** The planned walk's goal cell, or null (right-click never plans). */
+  planned(): { x: number; y: number } | null;
   /** Opens a town screen by id (screenshot tours of every faction). */
   openTown(townId: string): void;
   /** The page point at the centre of map cell (x, y), or null off screen. */
@@ -346,6 +357,9 @@ class GameScreen {
       this.renderHint();
       hideTip();
     });
+    // Right-click inspects (UI2-18): the cell's card stays pinned; the
+    // hero neither moves nor plans (the map acts on the left button only).
+    this.canvas.addEventListener("contextmenu", (e) => this.onMapInspect(e));
     window.addEventListener("keydown", this.onKey);
     window.addEventListener("resize", this.onResize);
     this.refresh();
@@ -376,6 +390,8 @@ class GameScreen {
           ? (tip.innerText ?? tip.textContent)
           : null;
       },
+      planned: () =>
+        this.plan === null ? null : { x: this.plan.x, y: this.plan.y },
       previewEnd: (won) => this.showEnd(won),
       openTown: (id) => void this.openTown(id),
       cellToClient: (x, y) => this.cellToClient(x, y),
@@ -473,6 +489,8 @@ class GameScreen {
     this.view.setInputEnabled(!blocked);
     // No action cursor while walking, fighting or in a dialog (UI2-07).
     if (blocked && this.hoverAction !== null) this.renderHint();
+    // A map card pinned by right-click goes with the map's input (UI2-18).
+    if (blocked) unpinTip(this.canvas);
   }
 
   private inputBlocked(): boolean {
@@ -796,6 +814,8 @@ class GameScreen {
       "gm-hero-portrait",
     );
     setTip(portrait, "Centre the map on the hero. Double-click: hero sheet.");
+    // Right-click: the hero's own card, as in the hero list (UI2-18).
+    setPinTip(portrait, () => this.heroTip(hero));
     portrait.addEventListener("click", () => this.selectHero(hero.id));
     portrait.addEventListener("dblclick", () => void this.heroScreen(hero.id));
     const nextXp = xpForLevel(hero.level + 1);
@@ -1040,6 +1060,19 @@ class GameScreen {
             aiming: this.aiming,
           });
     this.canvas.style.cursor = cursorStyle(this.hoverAction?.cursor ?? "none");
+  }
+
+  /** A right-click on the map pins the card of the cell under it. */
+  private onMapInspect(e: MouseEvent): void {
+    e.preventDefault();
+    if (this.inputBlocked()) return;
+    const rect = this.canvas.getBoundingClientRect();
+    const cell = this.view.screenToCell(
+      e.clientX - rect.left,
+      e.clientY - rect.top,
+    );
+    if (cell === null) return;
+    pinTipAt(e.clientX, e.clientY, () => this.cellTip(cell), this.canvas);
   }
 
   private showMapTip(): void {
@@ -1423,7 +1456,7 @@ class GameScreen {
       return;
     }
     this.busy = true;
-    hideTip();
+    closeTips();
     // The camera comes back to the hero first if the player looked away.
     await this.view.glideTo(hero.x, hero.y, reducedMotion());
     if (moved?.type === "moved") await this.animateWalk(hero, moved.cells);
@@ -1976,7 +2009,7 @@ class GameScreen {
   private async runAiTurns(): Promise<void> {
     if (this.aiRunning || this.finished) return;
     this.aiRunning = true;
-    hideTip();
+    closeTips();
     this.refresh();
     try {
       for (let guard = 0; guard < 2000; guard++) {
@@ -2089,7 +2122,7 @@ class GameScreen {
   private async openTown(townId: string): Promise<void> {
     if (this.screenOpen || this.finished) return;
     this.screenOpen = true;
-    hideTip();
+    closeTips();
     await openTownScreen(
       {
         state: () => this.state,

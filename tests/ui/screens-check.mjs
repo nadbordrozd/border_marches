@@ -30,6 +30,11 @@
 //   adventure-hover-resource, adventure-rich, endturn, hero, hero-hover,
 //   hero-hover-army, hero-hover-skill, hero-hover-feat, hero-hover-stat,
 //   kingdom, kingdom-hover, spellbook (adventure tab), spellbook-battle, adventure-aim,
+//   pin-map, pin-hero-row, pin-army, pin-spell, pin-keyword,
+//   pin-keyword-more, pin-town,
+//   pin-dwelling, pin-battle (right-click pinned cards, UI2-18: checks the
+//   map neither moves nor plans, Escape closes only the card, the closing
+//   click does nothing else, and the browser menu never opens),
 //   menu-dialog, meeting, meeting-picked, meeting-hover, meeting-swap
 //   (checks the swap in the state and swaps back), town-<faction>, town-hover, town-hall (a selected tile), recruit, market, prebattle,
 //   site, levelup, levelup-hover, end-won, end-lost, battle, battle-hover,
@@ -369,6 +374,68 @@ async function hoverShot(name, selector, dx, dy) {
 }
 /** Parks the pointer in a corner so no hover card is left open. */
 const park = () => mouse(2, H - 2, 150);
+/** A real mouse press and release with `button` ("left" or "right"). */
+const press = async (x, y, button, ms = 400) => {
+  const buttons = button === "right" ? 2 : 1;
+  await send("Input.dispatchMouseEvent", { type: "mouseMoved", x, y });
+  await send("Input.dispatchMouseEvent", {
+    type: "mousePressed",
+    x,
+    y,
+    button,
+    buttons,
+    clickCount: 1,
+  });
+  await send("Input.dispatchMouseEvent", {
+    type: "mouseReleased",
+    x,
+    y,
+    button,
+    buttons: 0,
+    clickCount: 1,
+  });
+  await sleep(ms);
+};
+const rightClick = (x, y, ms) => press(x, y, "right", ms);
+const leftClick = (x, y, ms) => press(x, y, "left", ms);
+/** The pinned card's text (UI2-18), or null when none is pinned. */
+const pinnedText = () =>
+  evaluate(
+    "(() => { const p = document.querySelector('#gm-tip-pin.gm-tip-on'); return p ? p.innerText.trim() : null; })()",
+  );
+/**
+ * Counts right-clicks that reach the page with the browser menu still
+ * allowed (default not prevented), outside text fields: must stay 0.
+ */
+const watchMenus = () =>
+  evaluate(`(() => {
+    window.__menus = { seen: 0, open: 0 };
+    window.addEventListener('contextmenu', (e) => {
+      window.__menus.seen++;
+      const t = e.target;
+      if (!e.defaultPrevented && !(t instanceof HTMLInputElement || t instanceof HTMLTextAreaElement)) window.__menus.open++;
+    });
+  })()`);
+/**
+ * Right-clicks the first element of `selector`, checks that a card is
+ * pinned and shoots `name`. Returns the point, or null when none.
+ */
+async function pinShot(name, selector, dx = 16, dy = 16) {
+  const p = await pointIn(selector, dx, dy);
+  if (!p) {
+    skip(name, `nothing matches ${selector}`);
+    return null;
+  }
+  await rightClick(p.x, p.y, 500);
+  const text = await pinnedText();
+  if (text === null || text === "") {
+    fail(name, `right-click on ${selector} pinned no card`);
+    return null;
+  }
+  note(`${name}: pinned "${text.split("\n")[0]}"`);
+  if (want(name)) await shot(name);
+  return p;
+}
 
 /**
  * Headless screenshots do not draw the cursor: stamp the CSS cursor under
@@ -630,10 +697,12 @@ async function pickupHover(targets) {
     const cursor = await evaluate(
       `getComputedStyle(document.elementFromPoint(${pos.x}, ${pos.y})).cursor`,
     );
-    if (cursor !== "grab") {
+    // The drawn hand (UI2-07) is a url(...) image with "grab" behind it.
+    const kind = cursor.split(",").pop().trim();
+    if (kind !== "grab") {
       fail("adventure-pickup", `cursor over ${p.id} is "${cursor}", not grab`);
     } else note(`pickup ${p.id} (${p.kind}): cursor grab`);
-    await stampCursor(pos.x, pos.y, `cursor: ${cursor}`);
+    await stampCursor(pos.x, pos.y, `cursor: ${kind}`);
     await shot("adventure-pickup");
     await unstamp();
     return;
@@ -1011,6 +1080,7 @@ async function richScreens() {
     await sleep(200);
   }
   await adventureAim();
+  await pinScreens();
   if (want("menu-dialog")) {
     if (await clickText(".gm-side button", "Menu")) {
       await sleep(300);
@@ -1033,6 +1103,236 @@ async function richScreens() {
       await shot("prebattle");
     } else skip("prebattle", "no monster in reach");
   }
+}
+
+/**
+ * Right-click inspects (UI2-18, bead bzc.68). A pinned card on a map object
+ * (the hero neither moves nor plans, and the left click that closes the
+ * card does nothing else), on a hero in the side list, on an army slot of
+ * the hero sheet (Escape closes the card, not the sheet), on a spellbook
+ * page (a keyword in the pinned card hovered for its box), on a town hall
+ * tile (the closing click selects no tile) and a dwelling; the browser's
+ * own menu never opens.
+ */
+async function pinScreens() {
+  if (!wantFamily("pin")) return;
+  await idle();
+  await park();
+  await watchMenus();
+  const heroNow = () =>
+    evaluate(`(() => {
+      const g = window.__bmGame;
+      const h = g.state().heroes.find((x) => x.id === g.selectedHero());
+      return JSON.stringify({ x: h.x, y: h.y, mp: h.mp, plan: g.planned() });
+    })()`);
+  if (want("pin-map")) {
+    const before = await heroNow();
+    const spot = await evaluate(`(() => {
+      const g = window.__bmGame;
+      const ts = g.targets();
+      const t = ts.find((x) => x.kind === 'monster' && g.cellToClient(x.x, x.y))
+        ?? ts.find((x) => g.cellToClient(x.x, x.y));
+      return t ? { id: t.id, ...g.cellToClient(t.x, t.y) } : null;
+    })()`);
+    if (spot === null) skip("pin-map", "no target on screen");
+    else {
+      await rightClick(spot.x, spot.y, 600);
+      const text = await pinnedText();
+      if (!text) fail("pin-map", `right-click on ${spot.id} pinned no card`);
+      else note(`pin-map: ${spot.id} pinned "${text.split("\n")[0]}"`);
+      await shot("pin-map");
+      // The card stays while the pointer moves on (onto it, over the map).
+      await mouse(spot.x + 30, spot.y + 30, 300);
+      await mouse(spot.x - 60, spot.y + 10, 300);
+      if ((await pinnedText()) === null)
+        fail("pin-map", "the card closed when the pointer moved");
+      // A left click elsewhere on the map closes it and does nothing else.
+      const away = await evaluate(`(() => {
+        const g = window.__bmGame;
+        const h = g.state().heroes.find((x) => x.id === g.selectedHero());
+        for (const [dx, dy] of [[2, 1], [-2, 1], [2, -1], [-2, -1], [1, 2], [-1, -2]]) {
+          const p = g.cellToClient(h.x + dx, h.y + dy);
+          if (p) return p;
+        }
+        return null;
+      })()`);
+      if (away === null) skip("pin-map", "no map cell to click away");
+      else {
+        await leftClick(away.x, away.y, 500);
+        const after = await heroNow();
+        if ((await pinnedText()) !== null)
+          fail("pin-map", "a click elsewhere left the card pinned");
+        else if (after !== before)
+          fail("pin-map", `the hero moved or planned: ${before} -> ${after}`);
+        else
+          note(
+            "pin-map: neither the right-click nor the closing click moved or planned",
+          );
+      }
+    }
+    await park();
+  }
+  if (want("pin-hero-row")) {
+    if (await pinShot("pin-hero-row", ".gm-hero-row", 20, 20)) {
+      await escape();
+      await sleep(200);
+      if ((await pinnedText()) !== null)
+        fail("pin-hero-row", "Escape left the card pinned");
+    }
+    await park();
+  }
+  if (want("pin-army")) {
+    await key("i");
+    await waitFor("document.querySelector('.gm-backdrop')", "hero screen");
+    await park();
+    await sleep(300);
+    if (
+      await pinShot("pin-army", ".hs-army-slot:not(.hs-army-empty)", 40, 50)
+    ) {
+      await escape();
+      await sleep(200);
+      const open = await evaluate(
+        "Boolean(document.querySelector('.gm-backdrop'))",
+      );
+      if ((await pinnedText()) !== null)
+        fail("pin-army", "Escape left the card pinned");
+      else if (!open) fail("pin-army", "Escape closed the hero sheet too");
+    }
+    await park();
+    await escape();
+    await waitMaybe("!document.querySelector('.gm-backdrop')", 2000);
+    await sleep(200);
+  }
+  if (want("pin-spell") || want("pin-keyword")) {
+    await idle();
+    await key("m");
+    const open = await waitMaybe(
+      "document.querySelector('.gm-book-cell')",
+      3000,
+    );
+    if (!open) skip("pin-spell", "the spellbook did not open");
+    else {
+      await openBookTab("Adventure");
+      await park();
+      await sleep(300);
+      const p = await pointIn(".gm-book-cell", 30, 30);
+      if (p) {
+        await rightClick(p.x, p.y, 500);
+        const text = await pinnedText();
+        if (!text) fail("pin-spell", "right-click on a page pinned no card");
+        else note(`pin-spell: pinned "${text.split("\n")[0]}"`);
+        if (want("pin-spell")) await shot("pin-spell");
+        if (want("pin-keyword")) {
+          // Battle pages speak of boons and banes: right-click page after
+          // page (each right-click pins the next card in place of the
+          // last) until a pinned card has a keyword.
+          await openBookTab("Battle");
+          await sleep(300);
+          let kw = null;
+          for (let n = 0; n < 16 && kw === null; n++) {
+            const c = await pointIn(".gm-book-cell", 30, 30, n);
+            if (!c) break;
+            await rightClick(c.x, c.y, 300);
+            kw = await pointIn("#gm-tip-pin .gm-kw[data-kw-tip]", 6, 6);
+          }
+          if (!kw) skip("pin-keyword", "no keyword in a pinned card");
+          else {
+            // A keyword whose box the card shows lights that box; one
+            // without (a word inside a box) shows its box beside the card.
+            await mouse(kw.x, kw.y, 600);
+            const lit = await evaluate(
+              "Boolean(document.querySelector('#gm-tip-pin.gm-tip-on .gm-kw-lit, #gm-tip.gm-tip-on [data-kw-box]'))",
+            );
+            if (!lit)
+              fail("pin-keyword", "hovering a pinned keyword showed no box");
+            await shot("pin-keyword");
+            const more = await evaluate(`(() => {
+              const pin = document.querySelector('#gm-tip-pin');
+              const shown = new Set([...pin.querySelectorAll('[data-kw-box]')].map((b) => b.dataset.kwBox));
+              const k = [...pin.querySelectorAll('.gm-kw[data-kw-tip]')].find((s) => !shown.has(s.dataset.kw));
+              if (!k) return false;
+              k.setAttribute('data-tour-kw', '');
+              return k.dataset.kw;
+            })()`);
+            const at = more ? await pointIn("[data-tour-kw]", 6, 6) : null;
+            if (!at) skip("pin-keyword-more", "every keyword's box is shown");
+            else {
+              await mouse(at.x, at.y, 600);
+              const beside = await evaluate(`(() => {
+                const t = document.querySelector('#gm-tip.gm-tip-on');
+                const p = document.querySelector('#gm-tip-pin.gm-tip-on');
+                if (!t || !p) return false;
+                const a = t.getBoundingClientRect();
+                const b = p.getBoundingClientRect();
+                const overlap = a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+                return !overlap;
+              })()`);
+              if (!beside)
+                fail(
+                  "pin-keyword-more",
+                  `the box of ${more} covers the pinned card or is missing`,
+                );
+              else note(`pin-keyword-more: ${more} shown beside the card`);
+              if (want("pin-keyword-more")) await shot("pin-keyword-more");
+            }
+          }
+        }
+      } else skip("pin-spell", "no spellbook page");
+      await escape(); // the card
+      await sleep(200);
+      await escape(); // the book
+      await sleep(200);
+    }
+    await park();
+  }
+  if (want("pin-town") || want("pin-dwelling")) {
+    const st = await game("state()");
+    const id =
+      Object.values(st.towns).find((t) => t.owner === st.currentPlayer)?.id ??
+      Object.keys(st.towns)[0];
+    await game(`openTown(${JSON.stringify(id)})`);
+    await waitFor("document.querySelector('.gm-town')", "town screen");
+    await park();
+    await sleep(500);
+    if (
+      want("pin-town") &&
+      (await pinShot("pin-town", ".gm-hall-tile", 30, 20))
+    ) {
+      // A left click on another tile closes the card and selects nothing.
+      const other = await evaluate(`(() => {
+        const t = [...document.querySelectorAll('.gm-hall-tile')].filter((x) => !x.classList.contains('gm-selected'))[3];
+        if (!t) return null;
+        const b = t.getBoundingClientRect();
+        return { x: Math.round(b.x + b.width / 2), y: Math.round(b.y + b.height / 2), id: t.dataset.building };
+      })()`);
+      if (other) {
+        await leftClick(other.x, other.y, 400);
+        const selected = await evaluate(
+          `Boolean(document.querySelector('.gm-hall-tile.gm-selected[data-building=${JSON.stringify(other.id)}]'))`,
+        );
+        if ((await pinnedText()) !== null)
+          fail("pin-town", "a click elsewhere left the card pinned");
+        else if (selected)
+          fail("pin-town", `the closing click also selected ${other.id}`);
+        else note(`pin-town: the closing click did not select ${other.id}`);
+      }
+    }
+    await park();
+    if (want("pin-dwelling")) {
+      await pinShot("pin-dwelling", ".gm-town [data-creature]", 20, 20);
+      await escape();
+      await sleep(200);
+    }
+    await escape();
+    await waitFor("!document.querySelector('.gm-town')", "town closed");
+  }
+  const menus = await evaluate("window.__menus");
+  if (menus.open > 0)
+    fail(
+      "pin",
+      `${menus.open} of ${menus.seen} right-clicks left the browser menu on`,
+    );
+  else note(`pin: ${menus.seen} right-clicks, the browser menu never allowed`);
 }
 
 /** A site or dwelling within today's reach, so its dialog opens. */
@@ -1180,6 +1480,30 @@ async function battleSpell() {
   if (!none) skip("battle-spell-noeffect", "no no-effect target found");
 }
 
+/**
+ * Right-click in battle (UI2-18): a book page pins its card (Escape closes
+ * the card and leaves the book open); a stack still opens its info panel;
+ * the browser menu never opens.
+ */
+async function pinBattle() {
+  await watchMenus();
+  await park();
+  if (await pinShot("pin-battle", ".bm-spell", 24, 24)) {
+    await escape();
+    await sleep(200);
+    const book = await evaluate(
+      "Boolean([...document.querySelectorAll('.bm-spell')].find((b) => b.offsetParent !== null))",
+    );
+    if ((await pinnedText()) !== null)
+      fail("pin-battle", "Escape left the card pinned");
+    else if (!book) fail("pin-battle", "Escape closed the book too");
+  }
+  const menus = await evaluate("window.__menus");
+  if (menus.open > 0)
+    fail("pin-battle", `${menus.open} right-clicks left the browser menu on`);
+  await park();
+}
+
 async function battleScreens() {
   const battles = [
     ["battle", "view=battle&scenario=realm&steps=0"],
@@ -1193,7 +1517,12 @@ async function battleScreens() {
   ];
   for (const [name, q] of battles) {
     const spell = name === "battle-book" && wantFamily("battle-spell");
-    if (name === "battle-result" ? !named(name) : !want(name) && !spell)
+    const pinBook = name === "battle-book" && want("pin-battle");
+    if (
+      name === "battle-result"
+        ? !named(name)
+        : !want(name) && !spell && !pinBook
+    )
       continue;
     await go(`?mute=1&${q}`);
     await waitFor(
@@ -1234,6 +1563,7 @@ async function battleScreens() {
       if (cut.length > 0) fail(name, `action labels cut: ${cut.join(", ")}`);
       else note("action bar: every label whole");
     }
+    if (pinBook) await pinBattle();
     if (spell) await battleSpell();
   }
 }
