@@ -24,7 +24,14 @@ import {
   ROAD_MOVE_COST,
   TERRAIN_MOVE_COST,
 } from "../../data/movement.ts";
-import { terrainProfile, type TerrainProfile } from "./effects.ts";
+import {
+  armyFightValue,
+  parleyPercent,
+  terrainProfile,
+  type TerrainProfile,
+} from "./effects.ts";
+import { getCreature } from "../../data/creatures.ts";
+import { fightValue } from "./progression.ts";
 import {
   DIRECTIONS_8,
   type GameMap,
@@ -118,6 +125,10 @@ export function moveContext(
   );
   const forestCost =
     magic?.greenRoadDay === state.day ? GREEN_ROAD_MOVE_COST : null;
+  // Silver Tongue: neutral stacks at most this share of the army's FV
+  // have no zone of control against the hero (fight values, never chance).
+  const parleyPct = parleyPercent(hero);
+  const armyFv = parleyPct > 0 ? armyFightValue(hero) : 0;
   for (const obj of map.objects) {
     for (const [x, y] of obj.blocked) objectBlocked.add(y * map.width + x);
     const entrance = obj.y * map.width + obj.x;
@@ -127,6 +138,12 @@ export function moveContext(
         if (monster === undefined) break;
         monsterAt.set(monster.y * map.width + monster.x, monster.id);
         if (parley.has(monster.id)) break;
+        if (
+          parleyPct > 0 &&
+          monster.count * fightValue(getCreature(monster.creature)) * 100 <=
+            armyFv * parleyPct
+        )
+          break;
         for (const [dx, dy] of DIRECTIONS_8) {
           const gx = monster.x + dx;
           const gy = monster.y + dy;

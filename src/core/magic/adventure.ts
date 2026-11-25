@@ -27,6 +27,7 @@ import type {
   GameState,
   HeroState,
 } from "../game/types.ts";
+import { adventureMagicBonus, spellPowerBonus } from "../game/effects.ts";
 import { adventureSpell, spellInfo } from "./catalog.ts";
 import type { AdventureSpellDef } from "./catalog.ts";
 import { guildLevelOf, learnableFromGuild, townGuild } from "./guild.ts";
@@ -69,17 +70,25 @@ export function adventurePower(
   scroll: boolean,
 ): number {
   const m = heroMagic(hero);
-  if (scroll) return clampPower(m.scrollPower);
-  return clampPower(m.pagePower[spellInfo(spellId).school]);
+  // Wayfinder: adventure spells scale as if Power were higher.
+  const extra = adventureMagicBonus(hero).power;
+  if (scroll) return clampPower(m.scrollPower + extra);
+  return clampPower(
+    m.pagePower[spellInfo(spellId).school] +
+      extra +
+      spellPowerBonus(hero, spellId),
+  );
 }
 
 /** Mana an adventure page costs this hero (percentages, rounded up). */
 export function adventureManaCost(hero: HeroState, spellId: string): number {
   const m = heroMagic(hero);
-  return Math.max(
+  // Wayfinder: adventure spells cost less.
+  const pct = Math.max(
     1,
-    Math.ceil((adventureSpell(spellId).mana * m.costPercent) / 100),
+    m.costPercent + adventureMagicBonus(hero).costPercent,
   );
+  return Math.max(1, Math.ceil((adventureSpell(spellId).mana * pct) / 100));
 }
 
 /** Why the hero cannot cast this adventure spell now, or null. */
@@ -100,8 +109,14 @@ export function adventureCastError(
     const cost = adventureManaCost(hero, spellId);
     if (m.mana < cost) return `needs ${cost} mana, the hero has ${m.mana}`;
   }
-  if (storeOf(state, hero.id).castToday.includes(spellId))
-    return "already cast today";
+  const today = storeOf(state, hero.id).castToday.filter(
+    (x) => x === spellId,
+  ).length;
+  const perDay = adventureMagicBonus(hero).perDay;
+  if (today >= perDay)
+    return perDay > 1
+      ? `already cast ${perDay} times today`
+      : "already cast today";
   if (s.deferred) return `not on this map: ${s.deferred}`;
   if (typeof s.moveCost === "number" && hero.mp < s.moveCost)
     return `needs ${s.moveCost} movement`;

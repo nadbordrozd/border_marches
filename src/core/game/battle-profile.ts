@@ -26,7 +26,10 @@ import {
   armyLuck,
   armyMorale,
   commandStrength,
+  hasEffect,
   heroEffects,
+  highestTierPage,
+  spellPowerBonus,
   heroStats,
   manaCostPercent,
   maxMana,
@@ -36,6 +39,7 @@ import {
   scrollPower,
   vowRestrictions,
 } from "./effects.ts";
+import { isSpell, spellInfo } from "../magic/catalog.ts";
 import type { HeroState } from "./types.ts";
 
 export interface HeroBattleProfile {
@@ -70,6 +74,29 @@ export interface HeroBattleProfile {
   manaCostPercent: number;
   /** Vows' restrictions (casting rounds, barred schools). */
   restrictions: VowRestriction[];
+  /** Extra Power per spell id (a Spell specialty, RULES_V2 3.7). */
+  spellPower: Record<string, number>;
+  /** Pages spent before round 1 (The Missing Page). */
+  startSpent: string[];
+  /** The page that is never spent (The Unspent Page), if worn. */
+  unspentPage?: string;
+}
+
+/** Tier and listed mana of a battle page, or undefined. */
+function pageInfo(id: string): { tier: number; mana: number } | undefined {
+  if (!isSpell(id)) return undefined;
+  const s = spellInfo(id);
+  return s.kind === "battle" ? { tier: s.tier, mana: s.mana } : undefined;
+}
+
+/**
+ * The page The Unspent Page keeps: the one chosen on the map, else the
+ * highest-tier battle page (ties: costliest, then book order).
+ */
+export function unspentPageOf(hero: HeroState): string | undefined {
+  if (hero.unspentPage !== undefined && hero.pages.includes(hero.unspentPage))
+    return hero.unspentPage;
+  return highestTierPage(hero.pages, pageInfo);
 }
 
 /** The battle profile of a hero. Pure. */
@@ -119,6 +146,18 @@ export function heroBattleProfile(hero: HeroState): HeroBattleProfile {
     schoolRanks[school] = schoolRank(hero, school);
     powers[school] = pagePower(hero, school);
   }
+  const switches = ruleSwitches(hero);
+  const spellPower: Record<string, number> = {};
+  for (const id of new Set([...hero.pages, ...hero.scrolls])) {
+    const n = spellPowerBonus(hero, id);
+    if (n !== 0) spellPower[id] = n;
+  }
+  const missing = hasEffect(hero, "missing-page")
+    ? highestTierPage(hero.pages, pageInfo)
+    : undefined;
+  const unspent = switches.includes("unspent-page")
+    ? unspentPageOf(hero)
+    : undefined;
   return {
     level: hero.level,
     power: stats.power,
@@ -131,7 +170,7 @@ export function heroBattleProfile(hero: HeroState): HeroBattleProfile {
     stacks,
     startRules,
     itemActs,
-    switches: ruleSwitches(hero),
+    switches,
     command: getHeroClass(hero.heroClass).command,
     commandStrength: commandStrength(hero),
     pages: [...hero.pages],
@@ -141,5 +180,8 @@ export function heroBattleProfile(hero: HeroState): HeroBattleProfile {
     scrollPower: scrollPower(hero),
     manaCostPercent: manaCostPercent(hero),
     restrictions: vowRestrictions(hero),
+    spellPower,
+    startSpent: missing !== undefined && missing !== unspent ? [missing] : [],
+    ...(unspent !== undefined ? { unspentPage: unspent } : {}),
   };
 }

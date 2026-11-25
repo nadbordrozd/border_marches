@@ -35,9 +35,11 @@ import {
   type EffectFn,
 } from "./registry.ts";
 import { effectiveSpeed, sideOf } from "./resolve.ts";
+import { isAdjacent } from "./hex.ts";
 import type {
   BattleSide,
   BattleStack,
+  BattleState,
   ConditionSpec,
   EffectRef,
   JsonValue,
@@ -224,7 +226,9 @@ const heroStart: EffectFn = (fx, args, owner) => {
     kind: rule.condition,
     ...(rule.size !== undefined ? { size: rule.size } : {}),
     clock: rule.clock,
-    tier: 3,
+    // A gateless Hold says so (CONTENT_ARTIFACTS 4); rules give no gate.
+    gate: null,
+    tier: rule.tier ?? 3,
     source: rule.source ?? owner.source,
   };
   for (const s of selectStacks(
@@ -304,3 +308,121 @@ registerAct({
     fx.windCondition(t.stack, t.condition, longer ? 2 : -2);
   },
 });
+
+/** The side the active stack (the hero's acting stack) fights for. */
+function actorSide(state: BattleState, actorId: string): BattleSide | null {
+  const a = state.stacks.find((x) => x.id === actorId);
+  return a === undefined ? null : sideOf(a);
+}
+
+/**
+ * The Bellhop's Cap (CONTENT_ARTIFACTS 3): choose one of your stacks, then
+ * move one condition from a stack adjacent to it to another stack adjacent
+ * to it (landing rules apply). Targets: { stack: hub }, { stack, condition
+ * } (the condition to move), { stack } (where it goes).
+ */
+registerAct({
+  id: "the-bellhops-cap",
+  name: "The Bellhop's Cap",
+  text: "Choose one of your stacks; move one condition from a stack adjacent to it to another stack adjacent to it.",
+  kind: "item",
+  targets: 3,
+  check(state, actorId, targets) {
+    const [hubT, fromT, toT] = targets;
+    if (
+      targets.length !== 3 ||
+      hubT === undefined ||
+      !("stack" in hubT) ||
+      fromT === undefined ||
+      !("condition" in fromT) ||
+      toT === undefined ||
+      !("stack" in toT)
+    ) {
+      return "choose one of your stacks, a condition beside it and a stack beside it";
+    }
+    const find = (id: string): BattleStack | undefined =>
+      state.stacks.find((x) => x.id === id && isAlive(x));
+    const hub = find(hubT.stack);
+    const from = find(fromT.stack);
+    const to = find(toT.stack);
+    if (hub === undefined || from === undefined || to === undefined)
+      return "no such stack";
+    if (sideOf(hub) !== actorSide(state, actorId))
+      return "the first stack must be one of yours";
+    if (!isAdjacent(hub.hex, from.hex) || !isAdjacent(hub.hex, to.hex))
+      return "both stacks must be adjacent to your stack";
+    if (from.id === to.id) return "the condition must move to another stack";
+    return from.conditions.some((c) => c.uid === fromT.condition)
+      ? null
+      : "no such condition";
+  },
+  resolve(fx, _actorId, targets) {
+    const from = targets[1];
+    const to = targets[2];
+    if (from === undefined || !("condition" in from)) return;
+    if (to === undefined || !("stack" in to)) return;
+    fx.moveCondition(from.stack, from.condition, to.stack);
+  },
+});
+
+/**
+ * Tinderbox (CONTENT_ARTIFACTS 3): the side's spent Fuel is restored, so
+ * it may Fuel once more this battle (never above 3, RULES_V2 1.11).
+ */
+registerAct({
+  id: "tinderbox",
+  name: "Tinderbox",
+  text: "Your spent Fuel is restored, so you may Fuel a second time this battle.",
+  kind: "item",
+  targets: 0,
+  check(state, actorId) {
+    const side = actorSide(state, actorId);
+    const m = side === null ? undefined : state.sides[side].magic;
+    if (m === undefined) return "the hero has no magic";
+    return m.fuelMax >= 3 ? "Fuel is already at its most" : null;
+  },
+  resolve(fx, actorId) {
+    fx.changeMagic(fx.sideOf(actorId), (m) => ({
+      ...m,
+      fuelMax: Math.min(3, m.fuelMax + 1),
+    }));
+  },
+});
+
+/**
+ * Cider Flask (CONTENT_ARTIFACTS 3): end Ripening on one of your stacks;
+ * it heals 3 x that size in HP, reviving. Target: { stack, condition }.
+ */
+registerAct({
+  id: "cider-flask",
+  name: "Cider Flask",
+  text: "End Ripening on one of your stacks; it heals 3 x that size in HP, reviving.",
+  kind: "item",
+  targets: 1,
+  check(state, actorId, targets) {
+    const t = targets[0];
+    if (targets.length !== 1 || t === undefined || !("condition" in t))
+      return "choose Ripening on one of your stacks";
+    const s = state.stacks.find((x) => x.id === t.stack);
+    if (s === undefined || sideOf(s) !== actorSide(state, actorId))
+      return "the stack must be one of yours";
+    const c = s.conditions.find((x) => x.uid === t.condition);
+    return c?.kind === "ripening" ? null : "choose a Ripening";
+  },
+  resolve(fx, _actorId, targets) {
+    const t = targets[0];
+    if (t === undefined || !("condition" in t)) return;
+    const c = fx.stack(t.stack).conditions.find((x) => x.uid === t.condition);
+    if (c === undefined) return;
+    fx.endCondition(t.stack, c.uid);
+    fx.heal(t.stack, 3 * c.size, { revive: true });
+  },
+});
+
+/** Item act ids registered here (every artifact `itemActs` entry). */
+export const ITEM_ACT_IDS: readonly string[] = [
+  "a-pinch-of-sand",
+  "the-bellhops-cap",
+  "tinderbox",
+  "cider-flask",
+];

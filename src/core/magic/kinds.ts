@@ -19,6 +19,13 @@ import type {
   ConditionKindDef,
   GroundKindDef,
 } from "../battle/index.ts";
+import {
+  adjacentStacks,
+  hasRule,
+  nearestStack,
+  otherSide,
+  stackValue,
+} from "../battle/rules.ts";
 
 function clockText(clock: number | null): string {
   return clock === null
@@ -37,7 +44,27 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
     text: (c) =>
       `Heals ${c.size} HP at its turn start, reviving, ${clockText(c.clock)}.`,
     onTurnStart(fx, holder, c) {
-      fx.heal(holder, c.size, { revive: true });
+      const side = fx.sideOf(holder);
+      // Green Thumb: Mending heals half again as much.
+      const x = fx.hasRule(side, "green-thumb")
+        ? Math.floor((c.size * 3) / 2)
+        : c.size;
+      const healed = fx.heal(holder, x, { revive: true });
+      // Gardener's Apron: adjacent enemies gain Venomed 2, clock 2.
+      if (healed > 0 && fx.hasRule(side, "gardeners-apron")) {
+        const hex = fx.stack(holder).hex;
+        for (const foe of adjacentStacks(
+          fx.state.stacks,
+          hex,
+          (s) => s.side !== side,
+        ))
+          fx.addCondition(foe.id, {
+            kind: "venomed",
+            size: 2,
+            clock: 2,
+            tier: 3,
+          });
+      }
     },
   },
   {
@@ -50,10 +77,32 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
       `A stack striking it in melee takes ${c.size} Harm, ${clockText(c.clock)}.`,
     onStruck(ctx, holder, c) {
       if (holder.id !== ctx.defender.id) return null;
-      if (ctx.kind !== "melee" && ctx.kind !== "retaliation") return null;
+      const side = holder.side;
+      // Burr: Thorned also answers shots.
+      const answers =
+        ctx.kind === "melee" ||
+        ctx.kind === "retaliation" ||
+        (ctx.kind === "shot" && hasRule(ctx.state, side, "burr"));
+      if (!answers) return null;
       const striker = ctx.attacker.id;
       return (fx) => {
-        fx.harm(striker, c.size);
+        const dealt = fx.harm(striker, c.size);
+        if (dealt <= 0 || !fx.isAlive(striker)) return;
+        // Briar Patch and Hedge-Clipper Shears.
+        if (fx.hasRule(side, "briar-patch"))
+          fx.addCondition(striker, {
+            kind: "venomed",
+            size: 2,
+            clock: 2,
+            tier: 3,
+          });
+        if (fx.hasRule(side, "hedge-clipper-shears"))
+          fx.addCondition(striker, {
+            kind: "slowed",
+            size: 2,
+            clock: 2,
+            tier: 3,
+          });
       };
     },
   },
@@ -70,7 +119,9 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
       return { source: "ripening", label: "Ripening", percent: 100 + c.size };
     },
     onTurnStart(fx, holder, c) {
-      fx.feedCondition(holder, c.uid, 10);
+      // Harvest: Ripening grows by 20 instead of 10.
+      const grow = fx.hasRule(fx.sideOf(holder), "harvest") ? 20 : 10;
+      fx.feedCondition(holder, c.uid, grow);
     },
   },
   {
@@ -128,6 +179,21 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
     defaultClock: 2,
     text: (c) => `+${c.size} Speed ${clockText(c.clock)}.`,
     speedModifier: (_h, c) => c.size,
+    // Quickstep: also Attack equal to twice the size.
+    attackModifier(ctx, holder, c) {
+      if (holder.id !== ctx.attacker.id || c.size === 0) return null;
+      if (!hasRule(ctx.state, holder.side, "quickstep")) return null;
+      return { source: "quickstep", label: "Quickstep", amount: 2 * c.size };
+    },
+    // Metronome Spurs: its Strikes leave the target Slowed 1, clock 2.
+    onStrike(ctx, holder) {
+      if (holder.id !== ctx.attacker.id) return null;
+      if (!hasRule(ctx.state, holder.side, "metronome-spurs")) return null;
+      const target = ctx.defender.id;
+      return (fx) => {
+        fx.addCondition(target, { kind: "slowed", size: 1, clock: 2, tier: 3 });
+      };
+    },
   },
   {
     id: "slowed",
@@ -148,8 +214,35 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
     defaultClock: 3,
     text: (c) =>
       `A debt: takes ${c.size} Harm when the clock runs out (${clockText(c.clock)}).`,
+    onTurnStart(fx, holder, c) {
+      // Compound Interest: a Reckoning on an enemy of the rule's side grows.
+      const foes = otherSide(fx.sideOf(holder));
+      if (fx.hasRule(foes, "compound-interest"))
+        fx.feedCondition(holder, c.uid, 10);
+    },
     onExpire(fx, holder, c) {
-      fx.harm(holder, c.size);
+      const side = fx.sideOf(holder);
+      const hex = fx.stack(holder).hex;
+      let owed = c.size;
+      // Co-signer: half (rounded down) goes to the nearest enemy stack.
+      if (fx.hasRule(side, "co-signer")) {
+        const foe = nearestStack(fx.state.stacks, hex, (s) => s.side !== side);
+        const half = Math.floor(owed / 2);
+        if (foe !== null && half > 0) {
+          owed -= half;
+          fx.harm(foe.id, half);
+        }
+      }
+      fx.harm(holder, owed);
+      // Bailiff's Greatcoat: the creditor's weakest stack heals the debt.
+      const creditor = otherSide(side);
+      if (fx.hasRule(creditor, "bailiffs-greatcoat")) {
+        const weakest = fx.state.stacks
+          .filter((s) => s.count > 0 && s.side === creditor)
+          .sort((a, b) => stackValue(a) - stackValue(b))[0];
+        if (weakest !== undefined)
+          fx.heal(weakest.id, c.size, { revive: true });
+      }
     },
   },
   {
@@ -173,8 +266,21 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
       `Takes ${c.size} Harm at its turn start and the far end heals that much, reviving, ${clockText(c.clock)}.`,
     onTurnStart(fx, holder, c) {
       const dealt = fx.harm(holder, c.size);
-      if (c.link !== null && dealt > 0 && fx.isAlive(c.link))
-        fx.heal(c.link, dealt, { revive: true });
+      if (c.link !== null && dealt > 0 && fx.isAlive(c.link)) {
+        const far = c.link;
+        const side = fx.sideOf(far);
+        // Bloodletting: the far end heals twice the Harm.
+        const x = fx.hasRule(side, "bloodletting") ? 2 * dealt : dealt;
+        const healed = fx.heal(far, x, { revive: true });
+        // Thicker than Water: the healed stack gains Fired Up 2, clock 2.
+        if (healed > 0 && fx.hasRule(side, "thicker-than-water"))
+          fx.addCondition(far, {
+            kind: "fired-up",
+            size: 2,
+            clock: 2,
+            tier: 3,
+          });
+      }
     },
   },
   {
@@ -196,6 +302,34 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
     attackModifier(ctx, holder, c) {
       if (holder.id !== ctx.attacker.id || c.size === 0) return null;
       return { source: "fired-up", label: "Fired Up", amount: c.size };
+    },
+    // Whetstone Pendant: a kill by it gives Heartened, clock 1.
+    onStrike(ctx, holder) {
+      if (holder.id !== ctx.attacker.id) return null;
+      if (!hasRule(ctx.state, holder.side, "whetstone-pendant")) return null;
+      const target = ctx.defender.id;
+      const me = holder.id;
+      return (fx) => {
+        if (!fx.isAlive(target) && fx.isAlive(me))
+          fx.addCondition(me, { kind: "heartened", clock: 1, tier: 3 });
+      };
+    },
+    // Blaze of Glory: on expiry, adjacent enemies gain Burning of twice
+    // its size, clock 2.
+    onExpire(fx, holder, c) {
+      const side = fx.sideOf(holder);
+      if (!fx.hasRule(side, "blaze-of-glory")) return;
+      for (const foe of adjacentStacks(
+        fx.state.stacks,
+        fx.stack(holder).hex,
+        (s) => s.side !== side,
+      ))
+        fx.addCondition(foe.id, {
+          kind: "burning",
+          size: 2 * c.size,
+          clock: 2,
+          tier: 3,
+        });
     },
   },
 ];

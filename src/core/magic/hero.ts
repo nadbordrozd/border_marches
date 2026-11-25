@@ -19,6 +19,7 @@ import {
   schoolRank,
   scrollCaseSize,
   scrollPower,
+  vowRestrictions,
 } from "../game/effects.ts";
 import type { GameState, HeroState } from "../game/types.ts";
 
@@ -41,6 +42,13 @@ export interface HeroMagic {
   readonly costPercent: number;
   /** Fuels per battle. */
   readonly fuelMax: number;
+  /**
+   * Vows (RULES_V2 3.5): schools the hero may never cast, and the highest
+   * school rank a max-school-rank vow allows per school. Learning a page
+   * reads both ({@link canLearn}).
+   */
+  readonly barred?: readonly School[];
+  readonly rankCap?: { readonly [S in School]?: number };
 }
 
 /** Day effects of adventure spells (RULES_V2 2.8, CONTENT_SPELLS 4). */
@@ -90,6 +98,25 @@ export function heroMagic(hero: HeroState): HeroMagic {
     scrollCase: scrollCaseSize(hero),
     costPercent: Math.max(1, 100 + manaCostPercent(hero)),
     fuelMax: ruleSwitches(hero).includes("fuel-uses-plus-1") ? 2 : 1,
+    ...vowMagic(hero),
+  };
+}
+
+/** The vows' limits on learning pages (never-cast, max-school-rank). */
+function vowMagic(hero: HeroState): Pick<HeroMagic, "barred" | "rankCap"> {
+  const barred: School[] = [];
+  const rankCap: { [S in School]?: number } = {};
+  for (const r of vowRestrictions(hero)) {
+    if (r.kind === "never-cast") barred.push(r.school);
+    if (r.kind === "max-school-rank") {
+      for (const s of r.school === undefined ? SCHOOLS : [r.school]) {
+        rankCap[s] = Math.min(rankCap[s] ?? 3, r.rank);
+      }
+    }
+  }
+  return {
+    ...(barred.length > 0 ? { barred } : {}),
+    ...(Object.keys(rankCap).length > 0 ? { rankCap } : {}),
   };
 }
 
@@ -123,9 +150,15 @@ export function mutableStore(state: GameState, heroId: string): HeroMagicStore {
 
 /** Whether the hero's school rank allows learning a spell of this tier. */
 export function canLearn(
-  magic: Pick<HeroMagic, "schoolRanks">,
+  magic: Pick<HeroMagic, "schoolRanks" | "barred" | "rankCap">,
   school: School,
   tier: number,
 ): boolean {
-  return tier <= (RANK_MAX_TIER[magic.schoolRanks[school]] ?? 0);
+  // A vow's school is never learnt; a vow's rank cap limits the tier.
+  if (magic.barred?.includes(school)) return false;
+  const rank = Math.min(
+    magic.schoolRanks[school],
+    magic.rankCap?.[school] ?? 3,
+  );
+  return tier <= (RANK_MAX_TIER[rank] ?? 0);
 }

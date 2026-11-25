@@ -97,8 +97,9 @@ export function scaled(base: number, per: number, p: number): number {
   return base + per * p;
 }
 
+/** A Fuelled size: doubled, or tripled with Bonfire (fuel-triples). */
 function dbl(x: number, c: CastContext): number {
-  return c.fuelled ? 2 * x : x;
+  return c.fuelled ? (c.fuelFactor ?? 2) * x : x;
 }
 
 function bears(fx: Effects, id: StackId, kind: string): boolean {

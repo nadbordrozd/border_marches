@@ -327,6 +327,44 @@
   font-size: 12px;
 }
 
+/* Content icons before skill and feat names (src/ui/icons.ts). */
+.hs-skill > .hs-name-icon {
+  margin-right: 6px;
+}
+
+.hs-skill-name {
+  flex: 1;
+}
+
+.hs-feat-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hs-card-icon {
+  margin: 6px 0 2px;
+}
+
+/* An artifact or scroll with its own icon: the code-drawn grade frame
+   replaces the placeholder gradient. */
+.hs-item.hs-has-icon {
+  background: rgb(0 0 0 / 30%);
+  border-color: transparent;
+}
+
+.hs-item.hs-has-icon.hs-scroll {
+  background: linear-gradient(160deg, #d8c393, #8b7444);
+}
+
+.hs-item.hs-has-icon.hs-cursed {
+  border-color: var(--gm-red);
+}
+
+.hs-item > .gm-icon {
+  pointer-events: none;
+}
+
 .hs-details {
   display: flex;
   flex-wrap: wrap;

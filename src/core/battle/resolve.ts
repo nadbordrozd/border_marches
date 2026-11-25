@@ -28,6 +28,12 @@ import type {
 } from "./registry.ts";
 import { isAlive } from "./abilities.ts";
 import {
+  adjacentStacks,
+  hasRule,
+  nearestStack,
+  retaliationLimit,
+} from "./rules.ts";
+import {
   applyDamageToStack,
   computeDamage,
   computeHarm,
@@ -65,10 +71,25 @@ import type {
   RefusalReason,
   Remains,
   ScheduledEvent,
+  School,
+  SideMagic,
   StackId,
   StrikeKind,
   StrikeResult,
 } from "./types.ts";
+
+/**
+ * Who is acting now, for rules that read "your page", "your side makes"
+ * (hero rules, core/battle/rules.ts): set while a hero act, a creature
+ * cast or a battle-start rule resolves.
+ */
+export interface Acting {
+  readonly side: BattleSide;
+  readonly by: "page" | "scroll" | "creature" | "item" | "command" | "rule";
+  readonly school: School | null;
+  /** Fuel's factor for this cast (2, or 3 with Bonfire). */
+  readonly fuelFactor: number;
+}
 
 // ---------------------------------------------------------------------------
 // Caps (RULES_V2 1.11)
@@ -247,6 +268,57 @@ export function collectDamageMultipliers(
   return mods;
 }
 
+/**
+ * Hero rules that cancel a retaliation: Peace Dividend (Strikes by the
+ * side against a Mollified stack) and Gag Rule (Hushed enemy stacks).
+ */
+export function ruleBarsRetaliation(
+  state: Pick<BattleState, "sides">,
+  ctx: StrikeContext,
+): boolean {
+  const bearsKind = (kind: string): boolean =>
+    ctx.defender.conditions.some((c) => c.kind === kind);
+  if (
+    bearsKind("mollified") &&
+    hasRule(state, ctx.attacker.side, "peace-dividend")
+  )
+    return true;
+  const foes = ctx.defender.side === "attacker" ? "defender" : "attacker";
+  return bearsKind("hushed") && hasRule(state, foes, "gag-rule");
+}
+
+/**
+ * Hero rules that make a stack take no Harm from the rule now resolving:
+ * Mirror Ward (Warded, from ground), Firewalkers (Fired Up, from Burning
+ * or fire) and Vow of the Pyre (the side's own Storm pages).
+ */
+function harmSpared(d: Draft, target: BattleStack): boolean {
+  const side = target.side;
+  const bearsKind = (kind: string): boolean =>
+    target.conditions.some((c) => c.kind === kind);
+  const rule = d.rule;
+  if (
+    rule.startsWith("ground:") &&
+    bearsKind("warded") &&
+    hasRule(d, side, "mirror-ward")
+  )
+    return true;
+  if (
+    (rule === "condition:burning" || rule === "ground:fire") &&
+    bearsKind("fired-up") &&
+    hasRule(d, side, "firewalkers")
+  )
+    return true;
+  const a = d.acting;
+  return (
+    a !== null &&
+    a.by === "page" &&
+    a.school === "storm" &&
+    a.side === side &&
+    hasRule(d, side, "storm-spares-own")
+  );
+}
+
 export function retaliationPrevented(ctx: StrikeContext): boolean {
   for (const [def, owner] of abilityOwners(ctx.state)) {
     if (def.preventsRetaliation?.(ctx, owner)) return true;
@@ -360,6 +432,8 @@ export class Draft {
   nextUid: number;
   readonly laws: readonly string[];
   readonly events: BattleEvent[] = [];
+  /** The hero act or rule resolving now (see {@link Acting}). */
+  acting: Acting | null = null;
 
   private readonly index = new Map<StackId, number>();
   private readonly causes: number[] = [];
@@ -864,7 +938,8 @@ export class Resolver implements Effects {
     if (
       retaliable &&
       !retaliationPrevented(ctx) &&
-      !bears(ctx.defender, "cannotRetaliate")
+      !bears(ctx.defender, "cannotRetaliate") &&
+      !ruleBarsRetaliation(d, ctx)
     ) {
       const targetId = ctx.defender.id;
       const attackerId = ctx.attacker.id;
@@ -890,11 +965,16 @@ export class Resolver implements Effects {
     if (!this.isAlive(retaliatorId) || !this.isAlive(targetId)) return;
     const r = d.get(retaliatorId);
     if (bears(r, "cannotRetaliate")) return;
-    if (r.retaliatedThisRound && !this.unlimited(r)) return;
+    // Riposte and Shield Wall raise the limit (core/battle/rules.ts).
+    const made = r.retaliationsThisRound ?? (r.retaliatedThisRound ? 1 : 0);
+    if (made >= retaliationLimit(d, r) && !this.unlimited(r)) return;
     // A retaliation needs its target adjacent when it resolves (a push in
     // between, e.g. Follow Through, cancels it).
     if (!isAdjacent(r.hex, d.get(targetId).hex)) return;
-    d.update(retaliatorId, { retaliatedThisRound: true });
+    d.update(retaliatorId, {
+      retaliatedThisRound: true,
+      retaliationsThisRound: made + 1,
+    });
     const idx = d.emit({
       type: "retaliation",
       stackId: retaliatorId,
@@ -957,16 +1037,25 @@ export class Resolver implements Effects {
     const d = this.d;
     if (!this.isAlive(targetId)) return 0;
     const target = d.get(targetId);
+    if (!viaLink && harmSpared(d, target)) x = 0;
     const percents: number[] = [];
+    let warded = 0;
     if (!viaLink) {
       for (const c of target.conditions) {
         const p = conditionKind(c.kind).harmTakenPercent?.(target, c);
-        if (p !== undefined && p !== null) percents.push(p);
+        if (p !== undefined && p !== null) {
+          percents.push(p);
+          if (c.kind === "warded") warded = p;
+        }
       }
     }
+    // Bonfire: Fuel triples instead of doubling (fuel-triples).
+    if (fuelled && (d.acting?.fuelFactor ?? 2) === 3) percents.push(150);
     const { harm, q } = viaLink
       ? { harm: x, q: { num: 1, den: 1 } }
       : computeHarm(x, percents, fuelled);
+    if (!viaLink && x > 0)
+      this.harmReactions(target, x, harm, percents, warded);
     const link = viaLink ? null : redirectLinkOf(target);
     if (harm > 0 && link && link.link !== null && this.isAlive(link.link)) {
       const far = link.link;
@@ -1026,7 +1115,12 @@ export class Resolver implements Effects {
   ): void {
     const d = this.d;
     const farHp = stackTotalHp(d.get(farId));
-    const excess = Math.max(0, amount - farHp);
+    const near = d.get(nearId);
+    // The Blotter: a Scapegoat's excess does not come back.
+    const excess =
+      kind === "scapegoat" && hasRule(d, near.side, "scapegoat-no-backlash")
+        ? 0
+        : Math.max(0, amount - farHp);
     const idx = d.emit({
       type: "linkTransfer",
       nearId,
@@ -1054,6 +1148,7 @@ export class Resolver implements Effects {
   private kill(id: StackId): void {
     const d = this.d;
     const dead = d.get(id);
+    const passing = this.linksToPass(dead);
     const idx = d.emit({ type: "death", stackId: id });
     removeFromTurnLists(d, id);
     d.set({ ...dead, count: 0, topHp: 0, conditions: [], defending: false });
@@ -1076,11 +1171,24 @@ export class Resolver implements Effects {
           },
         );
       }
-      // Links naming it end.
+      // Links naming it end, unless Treaty Ink passes them on.
       for (const s of d.stacks) {
         if (!isAlive(s)) continue;
         for (const c of s.conditions) {
           if (c.link !== id) continue;
+          const to = passing.far.get(`${s.id}:${c.uid}`);
+          if (to !== undefined && this.isAlive(to) && to !== s.id) {
+            const next = { ...c, link: to };
+            this.replace(s.id, next);
+            d.emit({
+              type: "condition",
+              stackId: s.id,
+              change: "moved",
+              condition: next,
+              otherId: to,
+            });
+            continue;
+          }
           const def = conditionKind(c.kind);
           if (def.onFarEndDied)
             d.within(null, `condition:${c.kind}`, () =>
@@ -1088,6 +1196,11 @@ export class Resolver implements Effects {
             );
           this.end(s.id, c.uid, "ended");
         }
+      }
+      // Its own link ends pass to the nearest living stack (Treaty Ink).
+      for (const { c, to } of passing.near) {
+        if (this.isAlive(to) && c.link !== to)
+          this.land(to, { ...c, roundsBorne: 0 }, "moved", id);
       }
     });
     d.dropReactionsOf(id);
@@ -1493,8 +1606,12 @@ export class Resolver implements Effects {
     // 2. Gate (tested on every landing, never afterwards).
     if (incoming.gate) {
       const g = incoming.gate;
+      // Vow of Bare Hands: gates read the side's stacks at twice their HP.
+      const hpFactor = hasRule(d, target.side, "gates-double-hp") ? 2 : 1;
       const value =
-        g.measure === "hp" ? stackTotalHp(target) : target.creature.tier;
+        g.measure === "hp"
+          ? hpFactor * stackTotalHp(target)
+          : target.creature.tier;
       if (value > g.max) {
         return this.refuse(
           targetId,
@@ -1513,8 +1630,15 @@ export class Resolver implements Effects {
         "both ends of a link would be the same stack",
       );
     }
-    // 3. Hold rules.
+    // Links a side makes: Vow of the Still Air (clockless), The Quill (+1).
     let c = incoming;
+    if (mode === "landed" && c.link !== null && d.acting !== null) {
+      const maker = d.acting.side;
+      if (hasRule(d, maker, "links-clockless")) c = { ...c, clock: null };
+      else if (c.clock !== null && hasRule(d, maker, "link-clock-plus-1"))
+        c = { ...c, clock: Math.min(MAX_CLOCK, c.clock + 1) };
+    }
+    // 3. Hold rules.
     if (c.hold) {
       if (target.wary > 0) {
         return this.refuse(
@@ -1668,7 +1792,153 @@ export class Resolver implements Effects {
       d.update(stackId, { wary: Math.max(d.get(stackId).wary, rounds) });
       d.emit({ type: "wary", stackId, rounds });
     }
+    if ((change === "ended" || change === "expired") && isAlive(s)) {
+      this.endRules(stackId, c);
+    }
     return c;
+  }
+
+  /** Rules that act when a condition ends or expires on a stack. */
+  private endRules(stackId: StackId, c: Condition): void {
+    const d = this.d;
+    const s = d.get(stackId);
+    const side = s.side;
+    // Windfall: Ripening spreads half its size to adjacent friends.
+    if (c.kind === "ripening" && hasRule(d, side, "windfall")) {
+      const size = Math.floor(c.size / 2);
+      const friends = adjacentStacks(d.stacks, s.hex, (x) => x.side === side);
+      if (size > 0)
+        d.within(null, "windfall", () => {
+          for (const f of friends)
+            this.addCondition(f.id, {
+              kind: "ripening",
+              size,
+              clock: 2,
+              tier: 3,
+            });
+        });
+    }
+    // Double or Nothing: Lucky leaves Jinxed 25, clock 2.
+    if (c.kind === "lucky" && hasRule(d, side, "double-or-nothing")) {
+      d.within(null, "double-or-nothing", () =>
+        this.addCondition(stackId, {
+          kind: "jinxed",
+          size: 25,
+          clock: 2,
+          tier: 3,
+        }),
+      );
+    }
+  }
+
+  /**
+   * Treaty Ink: when `dead` dies, the links on it and naming it pass to
+   * the nearest living stack (friend or foe) when either end's side has
+   * the rule. Computed before death clears the dead stack's conditions.
+   */
+  private linksToPass(dead: BattleStack): {
+    far: Map<string, StackId>;
+    near: Array<{ c: Condition; to: StackId }>;
+  } {
+    const d = this.d;
+    const far = new Map<string, StackId>();
+    const near: Array<{ c: Condition; to: StackId }> = [];
+    const passes = (a: BattleSide, b: BattleSide): boolean =>
+      hasRule(d, a, "link-passes") || hasRule(d, b, "link-passes");
+    const pick = (avoid: StackId): StackId | null =>
+      nearestStack(
+        d.stacks,
+        dead.hex,
+        (x) => x.id !== dead.id && x.id !== avoid,
+      )?.id ?? null;
+    for (const s of d.stacks) {
+      if (!isAlive(s) || s.id === dead.id) continue;
+      for (const c of s.conditions) {
+        if (c.link !== dead.id || !passes(s.side, dead.side)) continue;
+        const to = pick(s.id);
+        if (to !== null) far.set(`${s.id}:${c.uid}`, to);
+      }
+    }
+    for (const c of dead.conditions) {
+      if (c.link === null || !this.isAlive(c.link)) continue;
+      if (!passes(dead.side, d.get(c.link).side)) continue;
+      const to = pick(c.link);
+      if (to !== null) near.push({ c, to });
+    }
+    return { far, near };
+  }
+
+  /**
+   * Rules reacting to Harm a stack is about to take (`x` before, `harm`
+   * after the percentages): Lightning Rod and Chain Lightning. Both queue
+   * reactions, so they resolve after the Harm.
+   */
+  private harmReactions(
+    target: BattleStack,
+    x: number,
+    harm: number,
+    percents: readonly number[],
+    warded: number,
+  ): void {
+    const d = this.d;
+    const side = target.side;
+    const cause = d.events.length - 1;
+    // Lightning Rod: what Warded prevented strikes the nearest enemy.
+    if (warded > 0 && warded < 100 && hasRule(d, side, "lightning-rod")) {
+      const rest = percents.slice();
+      rest.splice(rest.indexOf(warded), 1);
+      const prevented = Math.max(0, computeHarm(x, rest).harm - harm);
+      const foe = nearestStack(d.stacks, target.hex, (s) => s.side !== side);
+      if (prevented > 0 && foe !== null && d.rule !== "lightning-rod") {
+        const foeId = foe.id;
+        d.trigger(target.id, "lightning-rod", Math.max(0, cause), (fx) => {
+          fx.harm(foeId, prevented);
+        });
+      }
+    }
+    // Chain Lightning: a page's Harm to a Drenched enemy jumps for 15.
+    const a = d.acting;
+    if (
+      a !== null &&
+      a.by === "page" &&
+      side !== a.side &&
+      d.rule !== "chain-lightning" &&
+      hasRule(d, a.side, "chain-lightning") &&
+      target.conditions.some((c) => c.kind === "drenched")
+    ) {
+      const others = adjacentStacks(
+        d.stacks,
+        target.hex,
+        (s) => s.side === side && s.id !== target.id,
+      ).map((s) => s.id);
+      if (others.length > 0)
+        d.trigger(target.id, "chain-lightning", Math.max(0, cause), (fx) => {
+          for (const o of others) fx.harm(o, 15);
+        });
+    }
+  }
+
+  // --- Hero rules ---------------------------------------------------------
+
+  hasRule(side: BattleSide, id: string): boolean {
+    return hasRule(this.d, side, id);
+  }
+
+  useRule(side: BattleSide, key: string): boolean {
+    const d = this.d;
+    const st = d.sides[side];
+    const used = st.rulesUsed ?? [];
+    if (used.includes(key)) return false;
+    d.sides = { ...d.sides, [side]: { ...st, rulesUsed: [...used, key] } };
+    return true;
+  }
+
+  changeMagic(side: BattleSide, change: (m: SideMagic) => SideMagic): boolean {
+    const d = this.d;
+    const st = d.sides[side];
+    if (!st.magic) return false;
+    d.sides = { ...d.sides, [side]: { ...st, magic: change(st.magic) } };
+    return true;
   }
 
   endCondition(stackId: StackId, uid: number): boolean {
@@ -1881,6 +2151,14 @@ export class Resolver implements Effects {
     if (!g || g.class !== "remains" || !g.remains) return null;
     d.ground = d.ground.filter((x) => x !== g);
     d.emit({ type: "ground", change: "used", feature: g });
+    // Gleaner: the side whose rule used remains regains 2 mana.
+    const user =
+      d.acting?.side ??
+      (d.activeStackId !== null && d.has(d.activeStackId)
+        ? d.get(d.activeStackId).side
+        : null);
+    if (user !== null && hasRule(d, user, "gleaner"))
+      this.changeMagic(user, (m) => ({ ...m, mana: m.mana + 2 }));
     return g.remains;
   }
 

@@ -104,6 +104,11 @@ export function magicFromProfile(p: HeroBattleProfile): MagicSetup {
     echoRounds: p.switches.includes("echo-adds-2") ? 2 : 1,
     neverCast,
     ...(noCastRounds !== undefined ? { noCastRounds } : {}),
+    ...(Object.keys(p.spellPower ?? {}).length > 0
+      ? { spellPower: p.spellPower }
+      : {}),
+    ...((p.startSpent ?? []).length > 0 ? { startSpent: p.startSpent } : {}),
+    ...(p.unspentPage !== undefined ? { unspentPage: p.unspentPage } : {}),
   };
 }
 
@@ -163,6 +168,9 @@ function armyFromGame(
       ? {
           morale: Math.max(-3, Math.min(3, morale)),
           luck: profile?.luck ?? 0,
+          ...(side.hero && profile !== undefined && profile.switches.length > 0
+            ? { rules: profile.switches }
+            : {}),
         }
       : {}),
     ...(startRules.length > 0 ? { startRules } : {}),

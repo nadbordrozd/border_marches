@@ -47,8 +47,12 @@ import {
   fuelError,
   heroCastError,
   heroCastPower,
-  manaCost,
+  heroManaCost,
+  schoolRelation,
+  secondCastError,
 } from "./magic.ts";
+import { adjacentStacks, hasRule, otherSide, strongestOf } from "./rules.ts";
+import type { Acting } from "./resolve.ts";
 import type {
   CastInfo,
   JsonValue,
@@ -228,6 +232,11 @@ export function canShoot(
     isRangedCreature(s.creature) &&
     s.shotsLeft > 0 &&
     !bears(s, "cannotShoot") &&
+    // Soaked Powder: Drenched enemy stacks cannot shoot.
+    !(
+      s.conditions.some((c) => c.kind === "drenched") &&
+      hasRule(state, otherSide(s.side), "soaked-powder")
+    ) &&
     !(g !== null && groundKind(g.kind).cannotShoot === true) &&
     !enemyAdjacent(state, s, hex)
   );
@@ -378,6 +387,7 @@ export function heroActError(
   state: BattleState,
   side: BattleSide,
   actId: string,
+  scroll = false,
 ): string | null {
   const sideState = state.sides[side];
   if (!sideState.hero) return "this side has no hero";
@@ -385,7 +395,7 @@ export function heroActError(
   switch (def.kind) {
     case "cast":
       return sideState.castRound === state.round
-        ? "the hero has already cast this round"
+        ? secondCastError(state, side, def, scroll)
         : null;
     case "command":
       return sideState.commandUsed ? "the Command is used" : null;
@@ -496,7 +506,12 @@ export function actionError(
       );
     }
     case "heroAct": {
-      const err = heroActError(state, s.side, action.act);
+      const err = heroActError(
+        state,
+        s.side,
+        action.act,
+        action.scroll === true,
+      );
       if (err) return err;
       const def = actDef(action.act);
       if (def.kind !== "cast") {
@@ -634,17 +649,33 @@ function endRound(d: Draft, fx: Resolver): void {
   fx.resolveReactions();
   if (checkWinner(d)) return;
   // 3. Clocks tick: conditions in field order and list order, then ground.
+  // The Hourglass and its bulbs stop clocks on a side's stacks (Holds
+  // always tick).
   d.beginStep();
+  const strongest = new Set(
+    (["attacker", "defender"] as const).flatMap((side) =>
+      strongestOf(d.stacks, side, 1).map((x) => x.id),
+    ),
+  );
   for (const s of d.stacks.slice()) {
     if (!fx.isAlive(s.id)) continue;
     for (const c of d.get(s.id).conditions) {
       if (!fx.isAlive(s.id)) break;
       const cur = d.get(s.id).conditions.find((x) => x.uid === c.uid);
       if (!cur) continue;
+      const side = d.get(s.id).side;
+      const stopped =
+        !cur.hold &&
+        (hasRule(d, side, "own-clocks-frozen") ||
+          (cur.polarity === "bane" &&
+            hasRule(d, side, "own-bane-clocks-frozen")) ||
+          (cur.polarity === "boon" &&
+            strongest.has(s.id) &&
+            hasRule(d, side, "strongest-boon-clocks-frozen")));
       const next = {
         ...cur,
         roundsBorne: cur.roundsBorne + 1,
-        clock: cur.clock === null ? null : cur.clock - 1,
+        clock: cur.clock === null || stopped ? cur.clock : cur.clock - 1,
       };
       d.update(s.id, {
         conditions: d
@@ -678,7 +709,13 @@ function startRound(d: Draft, fx: Resolver, round: number): void {
   d.round = round;
   for (const s of d.stacks) {
     if (s.retaliatedThisRound || s.waitedThisRound) {
-      d.update(s.id, { retaliatedThisRound: false, waitedThisRound: false });
+      d.update(s.id, {
+        retaliatedThisRound: false,
+        waitedThisRound: false,
+        ...(s.retaliationsThisRound !== undefined
+          ? { retaliationsThisRound: 0 }
+          : {}),
+      });
     }
   }
   d.waiting = [];
@@ -898,6 +935,16 @@ function performAttack(d: Draft, fx: Resolver, action: AttackAction): number {
   if (action.type === "shoot") {
     const t = d.get(action.targetId);
     performShot(d, fx, action.stackId, action.targetId, t.hex);
+    // Seed Bombs: each shooter's first shot leaves brambles 6, clock 3.
+    const side = d.get(action.stackId).side;
+    if (
+      hasRule(d, side, "seed-bombs") &&
+      fx.useRule(side, `seed-bombs:${action.stackId}`)
+    ) {
+      d.within(null, "seed-bombs", () =>
+        fx.addGround({ hex: t.hex, kind: "brambles", size: 6, clock: 3 }),
+      );
+    }
     return 0;
   }
   const moved =
@@ -967,9 +1014,18 @@ export function applyAction(
       const magic = sideState.magic;
       let cast: CastInfo | undefined;
       let nextMagic = magic;
+      // Packrat 3: the first scroll each battle does not use the cast.
+      const free =
+        def.kind === "cast" &&
+        scroll &&
+        hasRule(d, side, "first-scroll-free") &&
+        fx.useRule(side, "first-scroll-free");
+      const previousPage = [...(magic?.casts ?? [])]
+        .reverse()
+        .find((c) => !c.scroll);
       if (def.kind === "cast") {
         const power = magic ? heroCastPower(magic, def, scroll) : 0;
-        const mana = magic && !scroll ? manaCost(def, magic) : 0;
+        const mana = magic ? heroManaCost(d, side, def, scroll) : 0;
         cast = {
           power,
           mana,
@@ -978,28 +1034,54 @@ export function applyAction(
           echoed: action.echo !== undefined,
         };
         if (magic) {
-          // The page is spent even if every target refuses (2.4).
+          // The page is spent even if every target refuses (2.4), unless a
+          // rule keeps it: The Unspent Page, Vow of the Grave.
+          const keepPage =
+            !scroll &&
+            (magic.unspentPage === action.act ||
+              graveKeeps(d, side, def.school ?? null, action.targets));
+          // Scrolls kept: Vow of the Borrowed Book (all, spent once per
+          // battle), Bookbinder's Thread (the first each battle).
+          const borrowed = scroll && hasRule(d, side, "scrolls-kept");
+          const keepScroll =
+            scroll &&
+            (borrowed ||
+              (hasRule(d, side, "first-scroll-kept") &&
+                fx.useRule(side, "first-scroll-kept")));
           const i = magic.scrolls.indexOf(action.act);
+          const spentNow = scroll
+            ? borrowed
+              ? [...magic.spent, `scroll:${action.act}`]
+              : magic.spent
+            : keepPage
+              ? magic.spent
+              : [...magic.spent, action.act];
           nextMagic = {
             ...magic,
             mana: magic.mana - mana,
             manaSpent: magic.manaSpent + mana,
-            spent: scroll ? magic.spent : [...magic.spent, action.act],
-            scrolls: scroll
-              ? [...magic.scrolls.slice(0, i), ...magic.scrolls.slice(i + 1)]
-              : magic.scrolls,
-            scrollsUsed: scroll
-              ? [...magic.scrollsUsed, action.act]
-              : magic.scrollsUsed,
+            spent: spentNow,
+            scrolls:
+              scroll && !keepScroll
+                ? [...magic.scrolls.slice(0, i), ...magic.scrolls.slice(i + 1)]
+                : magic.scrolls,
+            scrollsUsed:
+              scroll && !keepScroll
+                ? [...magic.scrollsUsed, action.act]
+                : magic.scrollsUsed,
             fuelUsed: magic.fuelUsed + (action.fuel ? 1 : 0),
+            casts: [
+              ...(magic.casts ?? []),
+              { round: d.round, school: def.school ?? null, scroll, free },
+            ],
           };
         }
       }
       d.sides = {
         ...d.sides,
         [side]: {
-          ...sideState,
-          ...(def.kind === "cast" ? { castRound: d.round } : {}),
+          ...d.sides[side],
+          ...(def.kind === "cast" && !free ? { castRound: d.round } : {}),
           ...(def.kind === "command" ? { commandUsed: true } : {}),
           ...(def.kind === "item"
             ? { itemActsUsed: [...sideState.itemActsUsed, action.act] }
@@ -1011,34 +1093,61 @@ export function applyAction(
         { type: "heroAct", side, act: action.act, ...(cast ? { cast } : {}) },
         action.act,
       );
-      d.within(idx, action.act, () => {
-        // Echo, then Fuel, then the spell (2.4).
-        if (action.echo) {
-          const { stack, condition } = action.echo;
-          const rounds = magic?.echoRounds ?? 1;
-          d.within(null, "echo", () =>
-            fx.windCondition(stack, condition, rounds),
+      const acting: Acting = {
+        side,
+        by:
+          def.kind === "cast"
+            ? scroll
+              ? "scroll"
+              : "page"
+            : def.kind === "command"
+              ? "command"
+              : "item",
+        school: def.school ?? null,
+        fuelFactor: hasRule(d, side, "fuel-triples") ? 3 : 2,
+      };
+      const before = d.events.length;
+      d.acting = acting;
+      try {
+        d.within(idx, action.act, () => {
+          // Echo, then Fuel, then the spell (2.4).
+          if (action.echo) {
+            const { stack, condition } = action.echo;
+            const rounds = magic?.echoRounds ?? 1;
+            d.within(null, "echo", () =>
+              fx.windCondition(stack, condition, rounds),
+            );
+          }
+          if (action.fuel) {
+            const { stack, condition } = action.fuel;
+            d.within(null, "fuel", () => fx.endCondition(stack, condition));
+          }
+          def.resolve(
+            fx,
+            id,
+            action.targets,
+            cast
+              ? {
+                  power: cast.power,
+                  fuelled: cast.fuelled,
+                  by: scroll ? "scroll" : "page",
+                  side,
+                  fuelFactor: acting.fuelFactor,
+                }
+              : undefined,
           );
-        }
-        if (action.fuel) {
-          const { stack, condition } = action.fuel;
-          d.within(null, "fuel", () => fx.endCondition(stack, condition));
-        }
-        def.resolve(
-          fx,
-          id,
-          action.targets,
-          cast
-            ? {
-                power: cast.power,
-                fuelled: cast.fuelled,
-                by: scroll ? "scroll" : "page",
-                side,
-              }
-            : undefined,
-        );
-      });
-      fx.resolveReactions();
+        });
+        afterHeroAct(d, fx, idx, before, action.targets, {
+          side,
+          kind: def.kind,
+          school: def.school ?? null,
+          scroll,
+          previousPageSchool: previousPage?.school ?? null,
+        });
+        fx.resolveReactions();
+      } finally {
+        d.acting = null;
+      }
       if (checkWinner(d)) return { state: d.toState(), events: d.events };
       // The stack has not acted yet: its turn goes on unless it cannot.
       const s = d.get(id);
@@ -1096,14 +1205,24 @@ export function applyAction(
         { type: "creatureCast", stackId: id, spell: action.spell, power },
         action.spell,
       );
-      d.within(idx, action.spell, () =>
-        actDef(action.spell).resolve(fx, id, action.targets, {
-          power,
-          fuelled: false,
-          by: "creature",
-          side: s.side,
-        }),
-      );
+      d.acting = {
+        side: s.side,
+        by: "creature",
+        school: actDef(action.spell).school ?? null,
+        fuelFactor: 2,
+      };
+      try {
+        d.within(idx, action.spell, () =>
+          actDef(action.spell).resolve(fx, id, action.targets, {
+            power,
+            fuelled: false,
+            by: "creature",
+            side: s.side,
+          }),
+        );
+      } finally {
+        d.acting = null;
+      }
       break;
     }
   }
@@ -1122,9 +1241,24 @@ export function applyAction(
     const hearten = "hearten" in action ? action.hearten !== false : true;
     const h = s.conditions.find((c) => c.kind === "heartened");
     if (hearten && h && isAlive(s) && s.extraTurnRound !== d.round) {
+      const side = s.side;
       d.within(null, "condition:heartened", () => {
-        fx.endCondition(id, h.uid);
+        // Vow of Flesh and Blood: it survives its first use each battle.
+        const survives =
+          hasRule(d, side, "heartened-survives-once") &&
+          fx.useRule(side, `heartened:${id}`);
+        if (!survives) fx.endCondition(id, h.uid);
         fx.extraTurn(id);
+        // Mob Rule: ending it for an extra turn gives Fired Up 3, clock 2.
+        if (!survives && hasRule(d, side, "mob-rule"))
+          d.within(null, "mob-rule", () =>
+            fx.addCondition(id, {
+              kind: "fired-up",
+              size: 3,
+              clock: 2,
+              tier: 3,
+            }),
+          );
       });
     }
   }
@@ -1214,8 +1348,145 @@ export function runStartRule(
 ): void {
   fx.d.beginStep();
   const idx = fx.d.emit({ type: "heroAct", side, act: ref.id }, ref.id);
-  fx.d.within(idx, ref.id, () =>
-    effect(ref.id)(fx, ref.args, { side, source: ref.id }),
-  );
-  fx.resolveReactions();
+  fx.d.acting = { side, by: "rule", school: null, fuelFactor: 2 };
+  try {
+    fx.d.within(idx, ref.id, () =>
+      effect(ref.id)(fx, ref.args, { side, source: ref.id }),
+    );
+    fx.resolveReactions();
+  } finally {
+    fx.d.acting = null;
+  }
+}
+
+/**
+ * Vow of the Grave: a Hush page cast only on the side's own stacks or on
+ * remains is not spent.
+ */
+function graveKeeps(
+  d: Draft,
+  side: BattleSide,
+  school: string | null,
+  targets: readonly ActTarget[],
+): boolean {
+  if (school !== "hush" || !hasRule(d, side, "hush-unspent-own")) return false;
+  if (targets.length === 0) return false;
+  return targets.every((t) => {
+    if ("stack" in t) return d.has(t.stack) && d.get(t.stack).side === side;
+    if ("hex" in t) {
+      const g = groundAt(d, t.hex);
+      return g !== null && g.class === "remains";
+    }
+    return false;
+  });
+}
+
+/**
+ * Rules that act after a hero act resolves: Spillover (the side's first
+ * bane each battle spills to an adjacent stack), The Odd Cufflink (a page
+ * opposed to the previous page fires up the strongest stack) and Drill
+ * Sergeant (stacks a Command chooses or moves).
+ */
+function afterHeroAct(
+  d: Draft,
+  fx: Resolver,
+  idx: number,
+  before: number,
+  targets: readonly ActTarget[],
+  info: {
+    readonly side: BattleSide;
+    readonly kind: string;
+    readonly school: string | null;
+    readonly scroll: boolean;
+    readonly previousPageSchool: string | null;
+  },
+): void {
+  const { side } = info;
+  const made = d.events.slice(before);
+  if (
+    hasRule(d, side, "spillover") &&
+    (info.kind === "cast" || info.kind === "item")
+  ) {
+    const bane = made.find(
+      (e) =>
+        e.type === "condition" &&
+        e.change === "landed" &&
+        e.condition.polarity === "bane",
+    );
+    if (
+      bane !== undefined &&
+      bane.type === "condition" &&
+      fx.useRule(side, "spillover")
+    ) {
+      const holder = bane.stackId;
+      if (fx.isAlive(holder)) {
+        const t = d.get(holder);
+        const pool = adjacentStacks(
+          d.stacks,
+          t.hex,
+          (s) => s.id !== holder && s.side === t.side,
+        );
+        const to =
+          strongestOf(pool, t.side, 1)[0] ??
+          adjacentStacks(d.stacks, t.hex, (s) => s.id !== holder)[0];
+        const c = bane.condition;
+        if (to !== undefined)
+          d.within(idx, "spillover", () => {
+            const still = d.get(holder).conditions.some((x) => x.uid === c.uid);
+            if (still) fx.copyCondition(holder, c.uid, to.id);
+            else
+              fx.addCondition(to.id, {
+                kind: c.kind,
+                size: c.size,
+                clock: c.clock,
+                gate: c.gate,
+                charge: c.charge,
+                ...(c.link !== null ? { link: c.link } : {}),
+              });
+          });
+      }
+    }
+  }
+  if (
+    info.kind === "cast" &&
+    !info.scroll &&
+    info.school !== null &&
+    info.previousPageSchool !== null &&
+    hasRule(d, side, "opposed-cast-fires-up") &&
+    schoolRelation(info.previousPageSchool as never, info.school as never) ===
+      "opposed"
+  ) {
+    const top = strongestOf(d.stacks, side, 1)[0];
+    if (top !== undefined)
+      d.within(idx, "the-odd-cufflink", () =>
+        fx.addCondition(top.id, {
+          kind: "fired-up",
+          size: 3,
+          clock: 2,
+          tier: 3,
+        }),
+      );
+  }
+  if (
+    info.kind === "command" &&
+    (hasRule(d, side, "drill-sergeant-1") ||
+      hasRule(d, side, "drill-sergeant-3"))
+  ) {
+    const touched = new Set<StackId>();
+    for (const t of targets) if ("stack" in t) touched.add(t.stack);
+    for (const e of made) if (e.type === "move") touched.add(e.stackId);
+    d.within(idx, "drill-sergeant", () => {
+      for (const sid of touched) {
+        if (!fx.isAlive(sid) || d.get(sid).side !== side) continue;
+        fx.addCondition(sid, { kind: "fired-up", size: 2, clock: 2, tier: 3 });
+        if (hasRule(d, side, "drill-sergeant-3"))
+          fx.addCondition(sid, {
+            kind: "shielded",
+            size: 3,
+            clock: 2,
+            tier: 3,
+          });
+      }
+    });
+  }
 }

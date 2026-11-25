@@ -44,6 +44,7 @@ import type {
   RefusalReason,
   Remains,
   School,
+  SideMagic,
   StackId,
   StrikeKind,
   StrikeResult,
@@ -222,6 +223,17 @@ export interface Effects {
     readonly returnsStack?: boolean;
   }): number | null;
   cancel(id: number): boolean;
+
+  // Hero rules (RULES_V2 4.6 form 5; core/battle/rules.ts)
+  /** Whether the hero of `side` has the battle rule `id`. */
+  hasRule(side: BattleSide, id: string): boolean;
+  /**
+   * Records a once-per-battle use `key` for `side`: true the first time,
+   * false once used.
+   */
+  useRule(side: BattleSide, key: string): boolean;
+  /** Changes the hero's battle magic of `side` (item acts, Gleaner). */
+  changeMagic(side: BattleSide, change: (m: SideMagic) => SideMagic): boolean;
 }
 
 /** A queued reaction: resolves later, in the fixed order of 1.10. */
@@ -502,6 +514,8 @@ export interface CastContext {
   readonly by: "page" | "scroll" | "creature";
   /** The side the spell is cast for (read at the cast). */
   readonly side: BattleSide;
+  /** What Fuel multiplies the size by: 2, or 3 with Bonfire. */
+  readonly fuelFactor?: number;
 }
 
 /** A named effect for scheduled events and battle-start rules. */

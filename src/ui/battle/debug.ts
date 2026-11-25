@@ -14,6 +14,9 @@
  *   magic=1        the hero brings a spellbook (pages of every school,
  *                  scrolls, 60 mana) and Shamans cast Mend and Thunderclap
  *   book=1         open the spellbook once the field is on screen
+ *   items=1        the hero wears every item-act artifact (Tinderbox, Cider
+ *                  Flask, The Bellhop's Cap, A Pinch of Sand) and its
+ *                  strongest stack starts Ripening 20 (the Flask's target)
  *   auto=1         auto-resolve: AI on both sides, straight to the result
  *   speed=1|2|4    animation speed
  *   terrain=jungle battle ground
@@ -43,6 +46,7 @@ import type {
 } from "../../core/battle/index.ts";
 import { casterOf, registerCreatureCaster } from "../../core/battle/index.ts";
 import { registerSpells } from "../../core/magic/index.ts";
+import { ITEM_ACT_IDS, startRuleRefs } from "../../core/battle/hero-effects.ts";
 
 const CREATURE_STUB = {
   id: "",
@@ -285,15 +289,41 @@ export function startBattleDebug(route: Route): void {
         castCap: 8,
       });
   }
+  const items = p.get("items") === "1";
+  if (items) registerSpells();
+  const withItems = (base: EngineBattleSetup): EngineBattleSetup =>
+    items && base.attacker.hero !== null
+      ? {
+          ...base,
+          attacker: {
+            ...base.attacker,
+            hero: { ...base.attacker.hero, itemActs: ITEM_ACT_IDS },
+            startRules: [
+              ...(base.attacker.startRules ?? []),
+              ...startRuleRefs([
+                {
+                  rule: {
+                    side: "own",
+                    selector: "strongest",
+                    condition: "ripening",
+                    size: 20,
+                    clock: 4,
+                  },
+                  source: "Late-Harvest Cordial",
+                },
+              ]),
+            ],
+          },
+        }
+      : base;
   const engineSetup = (): EngineBattleSetup => {
-    const base = engineSetupFromGame(setup);
+    const base = withItems(engineSetupFromGame(setup));
     return magic
       ? { ...base, attacker: { ...base.attacker, magic: DEBUG_BOOK } }
       : base;
   };
-  let state: BattleState | undefined = magic
-    ? createBattle(engineSetup()).state
-    : undefined;
+  let state: BattleState | undefined =
+    magic || items ? createBattle(engineSetup()).state : undefined;
   const steps = Number(p.get("steps") ?? "0");
   if (p.has("steps")) {
     let s = createBattle(engineSetup()).state;

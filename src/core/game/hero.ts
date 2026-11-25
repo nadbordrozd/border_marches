@@ -30,6 +30,7 @@ import {
   type SkillId,
 } from "../../data/skills.ts";
 import { WORN_SLOTS } from "../../data/artifacts.ts";
+import { getCreature, isCreatureId } from "../../data/creatures.ts";
 import { createRng, deriveSeed, type Rng } from "../rng.ts";
 import { vowRestrictions, xpPercent } from "./effects.ts";
 import { levelForXp } from "./progression.ts";
@@ -125,11 +126,30 @@ export function satisfies(hero: HeroState, r: VowRestriction): boolean {
     case "empty-slot":
       return WORN_SLOTS.every((k, i) => k !== r.slot || hero.worn[i] == null);
     case "never-cast":
-    case "no-cast-rounds":
+      // No skill of the school: a hero already invested in it is not
+      // offered a vow that throws the investment away.
+      return hero.skills.every((s) => findSkill(s.id)?.school !== r.school);
     case "barred-tag":
-      // Casting and creature tags are enforced in battle and in the army.
+      return hero.army.every(
+        (s) => s === null || !creatureTags(s.creature).includes(r.tag),
+      );
+    case "no-cast-rounds":
+      // Casting rounds are enforced in battle.
       return true;
   }
+}
+
+/**
+ * A creature's tags (`wreck`, ...), read from its data row's optional
+ * `tags` list (the factions bead fills them); none when absent.
+ */
+export function creatureTags(id: string): readonly string[] {
+  const def = (isCreatureId(id) ? getCreature(id) : undefined) as
+    { tags?: unknown } | undefined;
+  const tags = def?.tags;
+  return Array.isArray(tags)
+    ? tags.filter((t): t is string => typeof t === "string")
+    : [];
 }
 
 /** Whether the hero's vows leave a worn slot kind usable. */

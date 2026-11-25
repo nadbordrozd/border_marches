@@ -242,6 +242,9 @@ export function createBattle(setup: BattleSetup): BattleStep {
     castRound: 0,
     commandUsed: false,
     itemActsUsed: [],
+    ...(army.hero !== null && (army.rules ?? []).length > 0
+      ? { rules: [...(army.rules ?? [])], rulesUsed: [] }
+      : {}),
     flags: army.flags ?? [],
     ...(army.hero !== null && army.magic
       ? { magic: sideMagicFromSetup(army.magic) }

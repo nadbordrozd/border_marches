@@ -19,6 +19,7 @@ import {
   stepHex,
   turnOrder,
 } from "../battle/index.ts";
+import { hasRule } from "../battle/rules.ts";
 import type {
   ActTarget,
   BattleSide,
@@ -243,10 +244,27 @@ export function sideStacks(state: BattleState, side: BattleSide): StackId[] {
   );
 }
 
-/** Hexes holding remains of a stack `side` owned, in field order. */
+/**
+ * Whether `side`'s rules may use these remains: its own, or any owner's
+ * with Sexton's Spade (remains-any-owner).
+ */
+export function remainsQualify(
+  state: Pick<BattleState, "sides">,
+  side: BattleSide,
+  owner: BattleSide,
+): boolean {
+  return owner === side || hasRule(state, side, "remains-any-owner");
+}
+
+/** Hexes holding remains `side` may use, in field order. */
 export function ownRemains(state: BattleState, side: BattleSide): Hex[] {
   return state.ground
-    .filter((g) => g.class === "remains" && g.remains?.owner === side)
+    .filter(
+      (g) =>
+        g.class === "remains" &&
+        g.remains !== null &&
+        remainsQualify(state, side, g.remains.owner),
+    )
     .map((g) => g.hex);
 }
 
@@ -375,7 +393,7 @@ export function targetRuleError(
       if (!isHexTarget(t0)) return "choose remains";
       const g = groundAt(state, hexOf(t0));
       if (!g || g.class !== "remains" || !g.remains) return "choose remains";
-      return g.remains.owner === side
+      return remainsQualify(state, side, g.remains.owner)
         ? null
         : "the remains must be of a stack your side owned";
     }

@@ -18,7 +18,8 @@
  */
 
 import { ABILITIES as ABILITY_DATA } from "../../data/abilities.ts";
-import { isAdjacent } from "./hex.ts";
+import { hexDistance } from "./hex.ts";
+import { abilityReach } from "./rules.ts";
 import type { AbilityDef } from "./registry.ts";
 import type {
   AbilityId,
@@ -40,14 +41,29 @@ export function countAdjacentAllies(
   side: BattleSide,
   excludeId: string,
   target: BattleStack,
+  reach = 1,
 ): number {
   let n = 0;
   for (const s of state.stacks) {
     if (s.side !== side || s.id === excludeId || !isAlive(s)) continue;
     if (s.id === target.id) continue;
-    if (isAdjacent(s.hex, target.hex)) n++;
+    if (hexDistance(s.hex, target.hex) <= reach) n++;
   }
   return n;
+}
+
+/**
+ * Whether `a` is "adjacent" to `b` for an ability of `owner`: within its
+ * reach, 1 or 2 with Long Shadow (core/battle/rules.ts abilityReach).
+ */
+export function withinReach(
+  state: BattleState,
+  owner: BattleStack,
+  a: BattleStack,
+  b: BattleStack,
+): boolean {
+  const d = hexDistance(a.hex, b.hex);
+  return d >= 1 && d <= abilityReach(state, owner);
 }
 
 /** An ability's integer parameter from src/data/abilities.ts. */
@@ -86,6 +102,7 @@ export const ABILITY_HOOKS: { readonly [K in AbilityId]: AbilityDef } = {
         owner.side,
         owner.id,
         ctx.defender,
+        abilityReach(ctx.state, owner),
       );
       const amount = Math.min(
         param("mob", "maxAttack"),
@@ -122,6 +139,7 @@ export const ABILITY_HOOKS: { readonly [K in AbilityId]: AbilityDef } = {
         owner.side,
         owner.id,
         ctx.defender,
+        abilityReach(ctx.state, owner),
       );
       const bonus = Math.min(
         param("pack-hunter", "maxPercent"),
@@ -137,7 +155,7 @@ export const ABILITY_HOOKS: { readonly [K in AbilityId]: AbilityDef } = {
     attackModifier(ctx, owner) {
       const a = ctx.attacker;
       if (owner.id === a.id || owner.side !== a.side) return null;
-      if (!isAdjacent(owner.hex, a.hex)) return null;
+      if (!withinReach(ctx.state, owner, owner, a)) return null;
       return {
         source: "war-drums",
         label: "War Drums",
@@ -190,7 +208,7 @@ export const ABILITY_HOOKS: { readonly [K in AbilityId]: AbilityDef } = {
     defenseModifier(ctx, owner) {
       const d = ctx.defender;
       if (owner.id === d.id || owner.side !== d.side) return null;
-      if (!isAdjacent(owner.hex, d.hex)) return null;
+      if (!withinReach(ctx.state, owner, owner, d)) return null;
       return {
         source: "warcry",
         label: "Warcry",

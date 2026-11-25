@@ -22,7 +22,11 @@
  * | backpackSize, ...   | backpack-size, scroll-case-size               |
  * | commandStrength     | command-bonus                                 |
  * | battle.ts profile   | strike-percent, stack-stats, battle-start,    |
- * |                     | switch, spell-power, mana-cost-percent        |
+ * |                     | switch, spell-power, mana-cost-percent,       |
+ * |                     | missing-page                                  |
+ * | hirePrice, parley.. | hire-discount, parley (Silver Tongue)         |
+ * | sellPercent         | sell-percent (Packrat 2)                      |
+ * | adventureMagicBonus | adventure-magic (Wayfinder)                   |
  *
  * Pure functions of a HeroState; nothing here changes the state.
  */
@@ -60,6 +64,7 @@ import { siteBuffEffect } from "../../data/objectTypes.ts";
 import { findSkill } from "../../data/skills.ts";
 import type { CreatureId, Resources } from "../../data/types.ts";
 import type { Terrain } from "../map/types.ts";
+import { fightValue } from "./progression.ts";
 import { emptyResources } from "./resources.ts";
 import type { HeroState } from "./types.ts";
 
@@ -121,6 +126,12 @@ export function specialtyEffects(spec: Specialty): HeroEffect[] {
   }
 }
 
+/** A spell id as words: "pass-on" -> "Pass on". */
+function spellLabel(id: string): string {
+  const words = id.replace(/-/g, " ");
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
 /** One line describing a specialty, for the hero screen. */
 export function specialtyText(spec: Specialty): string {
   switch (spec.kind) {
@@ -129,7 +140,7 @@ export function specialtyText(spec: Specialty): string {
       return `${name}: +1 Attack and Defense (+1 per 5 levels) and +1 Speed.`;
     }
     case "spell":
-      return `Starts with ${spec.spell}, cast at +2 Power (+1 per 5 levels).`;
+      return `Starts with ${spellLabel(spec.spell)}, cast at +2 Power (+1 per 5 levels).`;
     case "skill": {
       const name = findSkill(spec.skill)?.name ?? spec.skill;
       return `Starts with ${name} at rank 2.`;
@@ -484,6 +495,94 @@ export function ruleSwitches(hero: HeroState): RuleSwitchId[] {
     if (!out.includes(effect.id)) out.push(effect.id);
   }
   return out;
+}
+
+/** The army's fight value: the sum of its stacks' (GAME_DESIGN 8.2). */
+export function armyFightValue(hero: HeroState): number {
+  let fv = 0;
+  for (const s of hero.army) {
+    if (s !== null) fv += s.count * fightValue(getCreature(s.creature));
+  }
+  return fv;
+}
+
+/** Silver Tongue's hiring discount in percent (the best source). */
+export function hireDiscountPercent(hero: HeroState): number {
+  return effectsOf(hero, "hire-discount").reduce(
+    (n, e) => Math.max(n, e.effect.percent),
+    0,
+  );
+}
+
+/** Hiring price after Silver Tongue, rounded up. */
+export function hirePrice(hero: HeroState, gold: number): number {
+  return Math.ceil((gold * (100 - hireDiscountPercent(hero))) / 100);
+}
+
+/**
+ * Silver Tongue's parley share: a neutral stack whose FV is at most this
+ * percent of the army's FV has no zone of control against the hero.
+ */
+export function parleyPercent(hero: HeroState): number {
+  return effectsOf(hero, "parley").reduce(
+    (n, e) => Math.max(n, e.effect.percent),
+    0,
+  );
+}
+
+/** What sites pay for the hero's artifacts and scrolls, percent of value. */
+export function sellPercent(hero: HeroState): number {
+  return effectsOf(hero, "sell-percent").reduce(
+    (n, e) => Math.max(n, e.effect.percent),
+    50,
+  );
+}
+
+/** Wayfinder's adventure-spell numbers (the best rank held). */
+export interface AdventureMagicBonus {
+  /** Mana cost percentage change (-10 is 10% cheaper). */
+  costPercent: number;
+  /** Power added to adventure spells. */
+  power: number;
+  /** Casts per day of each adventure spell. */
+  perDay: number;
+}
+
+export function adventureMagicBonus(hero: HeroState): AdventureMagicBonus {
+  const out: AdventureMagicBonus = { costPercent: 0, power: 0, perDay: 1 };
+  for (const { effect } of effectsOf(hero, "adventure-magic")) {
+    out.costPercent = Math.min(out.costPercent, effect.costPercent);
+    out.power = Math.max(out.power, effect.power);
+    out.perDay = Math.max(out.perDay, effect.perDay);
+  }
+  return out;
+}
+
+/**
+ * The page The Missing Page spends before each battle (CONTENT_ARTIFACTS
+ * 5): the highest-tier page, ties to the costliest, then book order.
+ */
+export function highestTierPage(
+  pages: readonly string[],
+  info: (id: string) => { tier: number; mana: number } | undefined,
+): string | undefined {
+  let best: { id: string; tier: number; mana: number } | undefined;
+  for (const id of pages) {
+    const i = info(id);
+    if (i === undefined) continue;
+    if (
+      best === undefined ||
+      i.tier > best.tier ||
+      (i.tier === best.tier && i.mana > best.mana)
+    )
+      best = { id, tier: i.tier, mana: i.mana };
+  }
+  return best?.id;
+}
+
+/** Whether the hero carries an effect of this kind (e.g. "missing-page"). */
+export function hasEffect(hero: HeroState, kind: HeroEffect["kind"]): boolean {
+  return heroEffects(hero).some((e) => e.effect.kind === kind);
 }
 
 /** The vows' restrictions the hero is bound by (RULES_V2 3.5). */

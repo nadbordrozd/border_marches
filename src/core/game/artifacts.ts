@@ -13,8 +13,12 @@ import {
   wornDef,
   type SlotKind,
 } from "../../data/artifacts.ts";
+import { getCreature } from "../../data/creatures.ts";
 import type { ResourceAmounts } from "../../data/types.ts";
+import { mutableStore } from "../magic/hero.ts";
 import { backpackSize, scrollCaseSize } from "./effects.ts";
+import { fightValue } from "./progression.ts";
+import { digHere } from "./sites.ts";
 import { slotBarred } from "./hero.ts";
 import { canAfford, subtractResources } from "./resources.ts";
 import {
@@ -295,10 +299,49 @@ export function useConsumable(
   if (use.kind === "redraw" && hero.redraw) {
     return fail("already-used", "the next offer is already redrawn");
   }
+  if (use.kind === "dig") {
+    // The shovel is a tool: it digs here (sites.ts digHere, 300 movement
+    // points whatever is spent) and stays in the backpack.
+    return digHere(state, heroId);
+  }
+  const conduct =
+    use.kind === "safe-conduct"
+      ? safeConductTarget(state, hero, use.maxFightValue)
+      : null;
+  if (use.kind === "safe-conduct" && conduct === null) {
+    return fail(
+      "no-target",
+      `no adjacent neutral stack of fight value ${use.maxFightValue} or less`,
+    );
+  }
+  const cache = use.kind === "mark-cache" ? nearestBuried(state, hero) : null;
+  if (use.kind === "mark-cache" && cache === null) {
+    return fail("no-target", "no buried cache on this map");
+  }
   const next = cloneState(state);
   const h = must(findHero(next, heroId), "hero");
   h.backpack.splice(index, 1);
   switch (use.kind) {
+    case "safe-conduct": {
+      // Recorded like Parley: no zone of control for this hero today.
+      const store = mutableStore(next, heroId);
+      if (store.parleyDay !== next.day) store.parley = [];
+      store.parleyDay = next.day;
+      store.parley = [...(store.parley ?? []), conduct as string];
+      break;
+    }
+    case "mark-cache": {
+      const m = next.magic ?? { heroes: {} };
+      const player = String(h.owner);
+      const old = m.marks?.[player] ?? [];
+      const cell = cache as [number, number];
+      const has = old.some((c) => c[0] === cell[0] && c[1] === cell[1]);
+      next.magic = {
+        ...m,
+        marks: { ...(m.marks ?? {}), [player]: has ? old : [...old, cell] },
+      };
+      break;
+    }
     case "next-battle":
       h.nextBattle.push(id);
       break;
@@ -319,6 +362,48 @@ export function useConsumable(
       break;
   }
   return success(next, [{ type: "consumable-used", heroId, artifact: id }]);
+}
+
+const chebyshev = (ax: number, ay: number, bx: number, by: number): number =>
+  Math.max(Math.abs(ax - bx), Math.abs(ay - by));
+
+/**
+ * Letter of Safe Conduct's stack: the strongest neutral stack adjacent to
+ * the hero whose stack fight value is at most `maxFv` (ties: monster id).
+ */
+export function safeConductTarget(
+  state: GameState,
+  hero: HeroState,
+  maxFv: number,
+): string | null {
+  let best: { id: string; fv: number } | null = null;
+  for (const m of Object.values(state.monsters).sort((a, b) =>
+    a.id < b.id ? -1 : 1,
+  )) {
+    if (chebyshev(m.x, m.y, hero.x, hero.y) !== 1) continue;
+    const fv = m.count * fightValue(getCreature(m.creature));
+    if (fv > maxFv) continue;
+    if (best === null || fv > best.fv) best = { id: m.id, fv };
+  }
+  return best?.id ?? null;
+}
+
+/** Dog-Eared Map's cell: the nearest buried object (ties: object order). */
+export function nearestBuried(
+  state: GameState,
+  hero: HeroState,
+): [number, number] | null {
+  let best: [number, number] | null = null;
+  let bestD = Infinity;
+  for (const o of state.map.objects) {
+    if (o.data["buried"] !== true) continue;
+    const d = chebyshev(o.x, o.y, hero.x, hero.y);
+    if (d < bestD) {
+      best = [o.x, o.y];
+      bestD = d;
+    }
+  }
+  return best;
 }
 
 /**

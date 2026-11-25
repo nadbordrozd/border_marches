@@ -8,7 +8,7 @@
  * three ranks' text and effects (src/data/effects.ts kinds). Each rank
  * lists its whole effect, not the difference from the rank before.
  */
-import type { HeroEffect, School } from "./effects.ts";
+import type { HeroEffect, RuleSwitchId, School } from "./effects.ts";
 
 export type SkillId =
   // School
@@ -114,6 +114,13 @@ function steps(
   ];
 }
 
+const RIPOSTE = ["riposte-1", "riposte-2", "riposte-3"] as const;
+const LONG_SHADOW = [
+  "long-shadow-1",
+  "long-shadow-2",
+  "long-shadow-3",
+] as const;
+
 const ROWS: SkillDef[] = [
   schoolSkill("greencraft", "Greencraft", "bloom"),
   schoolSkill("covenant", "Covenant", "accord"),
@@ -181,19 +188,93 @@ const ROWS: SkillDef[] = [
     ),
   },
   {
-    // The extra retaliation is a battle rule (bead bzc.12 registers it);
-    // the row exists because the Revenant starts with it.
+    // The extra retaliation is a battle rule (core/battle/rules.ts).
     id: "riposte",
     name: "Riposte",
     family: "army",
+    ranks: steps(
+      [
+        "Your strongest stack may retaliate twice per round.",
+        "Your two strongest stacks may retaliate twice per round.",
+        "Your three strongest stacks may retaliate twice per round.",
+      ],
+      (r) => [{ kind: "switch", id: RIPOSTE[r - 1] as RuleSwitchId }],
+    ),
+  },
+  {
+    // Reach of "adjacent" abilities (core/battle/abilities.ts withinReach).
+    id: "long-shadow",
+    name: "Long Shadow",
+    family: "army",
+    ranks: steps(
+      [
+        'Abilities of your strongest stack that say "adjacent" reach 2 hexes.',
+        'Abilities of your two strongest stacks that say "adjacent" reach 2 hexes.',
+        'Abilities of all your stacks that say "adjacent" reach 2 hexes.',
+      ],
+      (r) => [{ kind: "switch", id: LONG_SHADOW[r - 1] as RuleSwitchId }],
+    ),
+  },
+  {
+    id: "drill-sergeant",
+    name: "Drill Sergeant",
+    family: "army",
     ranks: [
       {
-        text: "Your strongest stack may retaliate twice per round.",
-        effects: [],
+        text: "Each stack your Command chooses or moves gains Fired Up 2, clock 2.",
+        effects: [{ kind: "switch", id: "drill-sergeant-1" }],
       },
-      { text: "Your two strongest stacks may.", effects: [] },
-      { text: "Your three strongest stacks may.", effects: [] },
+      {
+        text: "Also: your Command counts C one higher.",
+        effects: [
+          { kind: "switch", id: "drill-sergeant-1" },
+          { kind: "command-bonus", amount: 1 },
+        ],
+      },
+      {
+        text: "Also: each such stack gains Shielded 3, clock 2.",
+        effects: [
+          { kind: "switch", id: "drill-sergeant-3" },
+          { kind: "command-bonus", amount: 1 },
+        ],
+      },
     ],
+  },
+  {
+    id: "silver-tongue",
+    name: "Silver Tongue",
+    family: "journey",
+    ranks: steps(
+      [
+        "Hiring at outposts, stray huts and lodges costs 10% less gold, and a neutral stack whose FV is at most 10% of this army's FV has no zone of control against this hero.",
+        "Hiring costs 20% less, and neutral stacks of at most 20% of this army's FV have no zone of control against this hero.",
+        "Hiring costs 30% less, and neutral stacks of at most 30% of this army's FV have no zone of control against this hero.",
+      ],
+      (r) => [
+        { kind: "hire-discount", percent: 10 * r },
+        { kind: "parley", percent: 10 * r },
+      ],
+    ),
+  },
+  {
+    id: "wayfinder",
+    name: "Wayfinder",
+    family: "journey",
+    ranks: steps(
+      [
+        "Adventure spells cost 10% less mana and scale as if Power were 1 higher.",
+        "Adventure spells cost 20% less mana and scale as if Power were 2 higher.",
+        "Adventure spells cost 30% less mana and scale as if Power were 3 higher, and each may be cast twice a day.",
+      ],
+      (r) => [
+        {
+          kind: "adventure-magic",
+          costPercent: -10 * r,
+          power: r,
+          perDay: r === 3 ? 2 : 1,
+        },
+      ],
+    ),
   },
   {
     id: "banner",
@@ -327,6 +408,7 @@ const ROWS: SkillDef[] = [
           { kind: "scroll-case-size", size: 12 },
           { kind: "scroll-power", amount: 1 },
           { kind: "backpack-size", size: 16 },
+          { kind: "sell-percent", percent: 75 },
         ],
       },
       {
@@ -335,11 +417,23 @@ const ROWS: SkillDef[] = [
           { kind: "scroll-case-size", size: 12 },
           { kind: "scroll-power", amount: 1 },
           { kind: "backpack-size", size: 16 },
+          { kind: "sell-percent", percent: 75 },
+          { kind: "switch", id: "first-scroll-free" },
         ],
       },
     ],
   },
 ];
+
+/**
+ * Catalogue skills without a row yet, with the reason (the coverage test,
+ * tests/data/catalogue-coverage.test.ts, reads this). Offers never draw
+ * them.
+ */
+export const DEFERRED_SKILLS: Readonly<Partial<Record<SkillId, string>>> = {
+  vanguard:
+    "Needs a deployment step before round 1 where the player (and the battle AI) rearranges stacks; the battle screen has no such phase yet.",
+};
 
 function AMBUSH_1(): HeroEffect {
   return {

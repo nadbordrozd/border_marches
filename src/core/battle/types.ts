@@ -101,6 +101,12 @@ export interface MagicSetup {
   readonly neverCast?: readonly School[];
   /** Vows: rounds in which the hero cannot cast. */
   readonly noCastRounds?: "1-2" | "after-3" | "even";
+  /** Extra Power for named spells (a Spell specialty, RULES_V2 3.7). */
+  readonly spellPower?: { readonly [spell: string]: number };
+  /** Pages spent before round 1 (The Missing Page). */
+  readonly startSpent?: readonly string[];
+  /** The one page that is never spent (The Unspent Page). */
+  readonly unspentPage?: string;
 }
 
 /** A side's magic during a battle (pages spent, mana, Fuel). */
@@ -125,6 +131,17 @@ export interface SideMagic {
   readonly noCastRounds: "1-2" | "after-3" | "even" | null;
   /** Mana spent this battle (stays spent, 1.12). */
   readonly manaSpent: number;
+  /** Extra Power for named spells (a Spell specialty). */
+  readonly spellPower?: { readonly [spell: string]: number };
+  /** The page that is never spent (The Unspent Page), if any. */
+  readonly unspentPage?: string;
+  /** Hero casts this battle in order: round and school (switches). */
+  readonly casts?: ReadonlyArray<{
+    readonly round: number;
+    readonly school: School | null;
+    readonly scroll: boolean;
+    readonly free: boolean;
+  }>;
 }
 
 export interface HeroBattleStats {
@@ -198,6 +215,12 @@ export interface BattleArmySetup {
   readonly flags?: readonly string[];
   /** The hero's book, mana and scrolls (needs a hero). */
   readonly magic?: MagicSetup;
+  /**
+   * Battle rules of the hero (RULES_V2 4.6 form 5 switches, feat and vow
+   * rules, artifact reactions): ids of src/data/effects.ts RULE_SWITCH_IDS,
+   * read by the grammar through `hasRule`. Default none.
+   */
+  readonly rules?: readonly string[];
 }
 
 export interface BattleSetup {
@@ -290,6 +313,8 @@ export interface BattleStack {
    */
   readonly wary: number;
   readonly retaliatedThisRound: boolean;
+  /** Retaliations made this round when a rule allows more than one. */
+  readonly retaliationsThisRound?: number;
   readonly defending: boolean;
   readonly waitedThisRound: boolean;
   /** Round whose turn-start effects have run for this stack. */
@@ -361,6 +386,10 @@ export interface BattleSideState {
   readonly commandUsed: boolean;
   /** Item acts used this battle (act ids). */
   readonly itemActsUsed: readonly string[];
+  /** The hero's battle rules (BattleArmySetup.rules). Absent: none. */
+  readonly rules?: readonly string[];
+  /** Once-per-battle rule uses ("spillover", "seed-bombs:a2", ...). */
+  readonly rulesUsed?: readonly string[];
   /** Battle-setup flags (BattleArmySetup.flags). Default none. */
   readonly flags?: readonly string[];
   /**

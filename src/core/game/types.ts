@@ -119,6 +119,11 @@ export interface HeroState {
   levelUpStep: "skill" | "feat";
   /** The next offer or draft is redrawn once (Elixir of Hindsight). */
   redraw: boolean;
+  /**
+   * The page The Unspent Page keeps (chosen on the map when it is put
+   * on); absent: the highest-tier page (src/core/game/battle-profile.ts).
+   */
+  unspentPage?: string;
   /** At most six skills, ranks 1..3 (RULES_V2 3.4), in the order gained. */
   skills: HeroSkill[];
   /** Feat and vow ids (src/data/feats.ts), in the order drafted. */
@@ -438,6 +443,7 @@ export type CommandError =
   | "one-marvel"
   | "not-consumable"
   | "already-used"
+  | "no-target"
   | "no-assembly"
   | "site-used"
   | "locked"

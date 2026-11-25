@@ -28,6 +28,8 @@ export interface BookView {
   readonly status: string;
   readonly pages: readonly BookEntry[];
   readonly scrolls: readonly BookEntry[];
+  /** Item acts of the hero's worn artifacts (once per battle each). */
+  readonly items?: readonly BookEntry[];
   /** The active stack's own pages (creature caster), with its name. */
   readonly creature: {
     readonly name: string;
@@ -36,23 +38,28 @@ export interface BookView {
 }
 
 function entryNode(e: BookEntry, onPick: (e: BookEntry) => void): HTMLElement {
-  const b = el("button", `bm-spell bm-st-${e.status}`);
+  const item = e.source === "item";
+  const b = el("button", `bm-spell bm-st-${e.status}${item ? " bm-item" : ""}`);
   b.type = "button";
-  b.style.setProperty("--school", SCHOOL_COLOURS[e.school]);
+  b.style.setProperty("--school", item ? "#c9a227" : SCHOOL_COLOURS[e.school]);
   b.disabled = e.status !== "ready";
   b.title = e.reason ?? `${e.name}: ${e.text}`;
   const head = el("div", "bm-spell-head");
   head.append(
-    iconElement("spell", e.id, { className: "bm-spell-icon" }),
+    iconElement(item ? "artifact" : "spell", e.id, {
+      className: "bm-spell-icon",
+    }),
     el("span", "bm-spell-name", e.name + (e.count > 1 ? ` ×${e.count}` : "")),
     el(
       "span",
       "bm-spell-cost",
-      e.source === "page"
-        ? `${e.mana} mana`
-        : e.source === "scroll"
-          ? "scroll"
-          : "page",
+      item
+        ? "item act"
+        : e.source === "page" || e.mana > 0
+          ? `${e.mana} mana`
+          : e.source === "scroll"
+            ? "scroll"
+            : "page",
     ),
   );
   b.append(
@@ -60,7 +67,9 @@ function entryNode(e: BookEntry, onPick: (e: BookEntry) => void): HTMLElement {
     el(
       "div",
       "bm-spell-meta",
-      `Tier ${e.tier} · Power ${e.power}${e.fuel ? ` · Fuel doubles ${e.fuel.charAt(0).toLowerCase() + e.fuel.slice(1)}` : ""}`,
+      item
+        ? "Once per battle · before a friendly stack acts"
+        : `Tier ${e.tier} · Power ${e.power}${e.fuel ? ` · Fuel doubles ${e.fuel.charAt(0).toLowerCase() + e.fuel.slice(1)}` : ""}`,
     ),
     el("div", "bm-spell-text", e.text),
   );
@@ -103,6 +112,14 @@ export function renderBook(
     col.append(
       el("div", "bm-book-school", "Scrolls"),
       ...view.scrolls.map((p) => entryNode(p, onPick)),
+    );
+    cols.append(col);
+  }
+  if ((view.items ?? []).length > 0) {
+    const col = el("div", "bm-book-col");
+    col.append(
+      el("div", "bm-book-school", "Items"),
+      ...(view.items ?? []).map((p) => entryNode(p, onPick)),
     );
     cols.append(col);
   }
@@ -179,20 +196,28 @@ export function renderCastPanel(
   h: CastPanelHandlers,
 ): void {
   box.replaceChildren();
-  box.style.setProperty("--school", SCHOOL_COLOURS[m.entry.school]);
+  const item = m.entry.source === "item";
+  box.style.setProperty(
+    "--school",
+    item ? "#c9a227" : SCHOOL_COLOURS[m.entry.school],
+  );
   const head = el("div", "bm-cast-head");
   head.append(
-    iconElement("spell", m.entry.id, { className: "bm-spell-icon" }),
+    iconElement(item ? "artifact" : "spell", m.entry.id, {
+      className: "bm-spell-icon",
+    }),
     el("span", "bm-cast-name", m.entry.name),
     el(
       "span",
       "bm-dim",
-      ` ${SCHOOL_NAMES[m.entry.school]} ${m.entry.tier} · Power ${m.entry.power}` +
-        (m.entry.source === "page"
-          ? ` · ${m.entry.mana} mana`
-          : m.entry.source === "scroll"
-            ? " · scroll"
-            : " · the stack's action"),
+      item
+        ? " Item act · once per battle"
+        : ` ${SCHOOL_NAMES[m.entry.school]} ${m.entry.tier} · Power ${m.entry.power}` +
+            (m.entry.source === "page"
+              ? ` · ${m.entry.mana} mana`
+              : m.entry.source === "scroll"
+                ? " · scroll"
+                : " · the stack's action"),
     ),
   );
   box.append(head, el("div", "bm-spell-text", m.entry.text));
@@ -234,7 +259,7 @@ export function renderCastPanel(
     }
     box.append(pv);
   }
-  if (m.complete && m.entry.source !== "creature") {
+  if (m.complete && m.entry.source !== "creature" && !item) {
     if (m.echo.length > 0)
       box.append(toggles("Echo (free)", m.echo, m.echoOn, h.onEcho));
     else
@@ -261,7 +286,11 @@ export function renderCastPanel(
       );
   }
   const row = el("div", "bm-cast-buttons");
-  const cast = el("button", "bm-btn bm-primary", "Cast (Enter)");
+  const cast = el(
+    "button",
+    "bm-btn bm-primary",
+    item ? "Use (Enter)" : "Cast (Enter)",
+  );
   cast.type = "button";
   cast.disabled = !m.complete || !(m.preview?.legal ?? false) || m.hovered;
   cast.addEventListener("click", h.onCast);

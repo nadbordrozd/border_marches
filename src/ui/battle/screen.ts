@@ -1058,6 +1058,7 @@ class BattleScreen {
           : "No book.",
         pages: pages.filter((p) => p.source === "page"),
         scrolls: pages.filter((p) => p.source === "scroll"),
+        items: pages.filter((p) => p.source === "item"),
         creature:
           active && own.length > 0
             ? { name: creatureName(active.creature, active.count), pages: own }
@@ -1219,14 +1220,11 @@ class BattleScreen {
         effect: conditionKind(x.kind).text(x),
       }));
     }
+    const spell = c.entry.source === "page" || c.entry.source === "scroll";
     const echo =
-      complete && c.entry.source !== "creature"
-        ? echoOptions(this.state, id, c.targets)
-        : [];
+      complete && spell ? echoOptions(this.state, id, c.targets) : [];
     const fuel =
-      complete && c.entry.source !== "creature"
-        ? fuelOptions(this.state, id, c.targets)
-        : [];
+      complete && spell ? fuelOptions(this.state, id, c.targets) : [];
     const side = activeStack(this.state)?.side ?? "attacker";
     const magic = this.state.sides[side].magic;
     const preview = complete

@@ -3,7 +3,8 @@
  * sources, skills, feats and vows, the paper doll of eleven worn slots,
  * the backpack and the scroll case; click or drag to equip), the level-up
  * draft dialog and the item part of the meeting screen. Icons are
- * placeholders (initials on a grade colour) until bead bzc.17.
+ * content icons (src/ui/icons.ts), with initials on a grade colour as the
+ * fallback for content without an icon.
  */
 import {
   armyLuck,
@@ -56,7 +57,10 @@ import {
 } from "../data/effects.ts";
 import { findFeat } from "../data/feats.ts";
 import { MAX_SKILLS, findSkill } from "../data/skills.ts";
+import { iconFor, type IconKind } from "../assets/icons.ts";
+import { isSpell, spellInfo } from "../core/magic/catalog.ts";
 import { button, el, img, modal } from "./dom.ts";
+import { iconElement } from "./icons.ts";
 import "./hero.css";
 
 /** What the hero screens need from the game screen. */
@@ -105,10 +109,28 @@ export function itemTooltip(id: string): string {
   return `${head}\n${def.text}${piece}\nValue ${def.value} gold.`;
 }
 
-/** A placeholder artifact icon: initials on the grade colour. */
+/**
+ * A content icon (bead bzc.17 art, src/ui/icons.ts) when the content has
+ * its own, else null so the caller keeps its initials fallback.
+ */
+function ownIcon(kind: IconKind, id: string): HTMLElement | null {
+  if (iconFor(kind, id).fallback) return null;
+  const icon = iconElement(kind, id);
+  icon.removeAttribute("title");
+  return icon;
+}
+
+/**
+ * An artifact icon: its PixelLab icon in its grade frame, or initials on
+ * the grade colour when it has none.
+ */
 export function itemIcon(id: string, count = 1): HTMLElement {
   const def = findArtifact(id);
-  const node = el("div.hs-item", initials(def?.name ?? id));
+  const icon = ownIcon("artifact", id);
+  const node =
+    icon === null
+      ? el("div.hs-item", initials(def?.name ?? id))
+      : el("div.hs-item.hs-has-icon", icon);
   if (def !== undefined) node.classList.add(gradeClass(def));
   if (def?.kind === "worn" && def.cursed === true) {
     node.classList.add("hs-cursed");
@@ -118,11 +140,24 @@ export function itemIcon(id: string, count = 1): HTMLElement {
   return node;
 }
 
-/** A spell scroll icon (spells are bead bzc.9: the id is shown). */
+/** A spell scroll icon: the spell's icon on parchment, or its initials. */
 function scrollIcon(spell: string): HTMLElement {
-  const node = el("div.hs-item.hs-scroll", initials(spell.replace(/-/g, " ")));
-  node.title = `Scroll: ${spell}. Any hero may cast it once, at no mana.`;
+  const name = isSpell(spell) ? spellInfo(spell).name : spell;
+  const icon = ownIcon("spell", spell);
+  const node =
+    icon === null
+      ? el("div.hs-item.hs-scroll", initials(name.replace(/-/g, " ")))
+      : el("div.hs-item.hs-scroll.hs-has-icon", icon);
+  node.title = `Scroll: ${name}. Any hero may cast it once, at no mana.`;
   return node;
+}
+
+/** A small icon before a skill, feat or stat name (none if it has none). */
+function nameIcon(kind: IconKind, id: string): HTMLElement[] {
+  const icon = ownIcon(kind, id);
+  if (icon === null) return [];
+  icon.classList.add("hs-name-icon");
+  return [icon];
 }
 
 function statTooltip(hero: HeroState, stat: PrimaryStat): string {
@@ -351,6 +386,7 @@ export async function openHeroScreen(
       }
       const node = el(
         "div.hs-skill",
+        ...nameIcon("skill", s.id),
         el("span.hs-skill-name", def?.name ?? s.id),
         pips,
       );
@@ -370,9 +406,14 @@ export async function openHeroScreen(
     }
     for (const id of h.feats) {
       const def = findFeat(id);
+      const vowed = def?.restriction !== undefined;
       const node = el(
         "div.hs-feat",
-        el("b", def?.name ?? id),
+        el(
+          "div.hs-feat-head",
+          ...nameIcon(vowed ? "vow" : "feat", id),
+          el("b", def?.name ?? id),
+        ),
         el("div", def?.text ?? ""),
       );
       if (def?.restrictionText !== undefined) {
@@ -569,6 +610,7 @@ function offerCard(o: SkillOffer, hero: HeroState): HTMLElement {
   if (o.kind === "stat") {
     card.append(
       el("div.hs-card-kind", "Primary stat"),
+      ...cardIcon("stat", o.stat),
       el("div.hs-card-name", `+1 ${STAT_NAMES[o.stat]}`),
       el("div.hs-card-text", STAT_TEXT[o.stat]),
     );
@@ -578,6 +620,7 @@ function offerCard(o: SkillOffer, hero: HeroState): HTMLElement {
   const rank = o.kind === "new" ? 1 : o.rank;
   card.append(
     el("div.hs-card-kind", o.kind === "new" ? "New skill" : "Upgrade"),
+    ...cardIcon("skill", o.skill),
     el("div.hs-card-name", `${def?.name ?? o.skill}`),
     el("div.hs-card-rank", ["", "Basic", "Advanced", "Expert"][rank] ?? ""),
     el("div.hs-card-text", def?.ranks[rank - 1]?.text ?? ""),
@@ -589,11 +632,21 @@ function offerCard(o: SkillOffer, hero: HeroState): HTMLElement {
   return card;
 }
 
+/** The big icon of a level-up card (2x), or nothing when it has none. */
+function cardIcon(kind: IconKind, id: string): HTMLElement[] {
+  if (iconFor(kind, id).fallback) return [];
+  const icon = iconElement(kind, id, { scale: 2 });
+  icon.removeAttribute("title");
+  return [el("div.hs-card-icon", icon)];
+}
+
 function featCard(id: string): HTMLElement {
   const def = findFeat(id);
+  const vowed = def?.restriction !== undefined;
   const card = el(
     "div.hs-card",
-    el("div.hs-card-kind", def?.restriction !== undefined ? "Vow" : "Feat"),
+    el("div.hs-card-kind", vowed ? "Vow" : "Feat"),
+    ...cardIcon(vowed ? "vow" : "feat", id),
     el("div.hs-card-name", def?.name ?? id),
     el("div.hs-card-text", def?.text ?? ""),
   );

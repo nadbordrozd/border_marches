@@ -61,29 +61,95 @@ export interface BattleStartRule {
   clock: number | null;
   /** False: the Hold has no gate (CONTENT_ARTIFACTS 4). */
   gate?: boolean;
+  /** Tier of the maker, for the charge (Trinket 1, Wonder 3, Marvel 5). */
+  tier?: number;
   /** For a link: its far end. */
   linkTo?: { side: "own" | "enemy"; selector: StackSelector };
 }
 
 /**
- * Rule switches (RULES_V2 4.6 form 5) and other battle rules the engine
- * reads by id. The battle engine (bead bzc.8) implements each id; the
- * adventure layer only carries them into the battle profile.
+ * Hero battle rules the engine reads by id (core/battle/rules.ts
+ * `hasRule`): the rule switches of RULES_V2 4.6 form 5 and
+ * CONTENT_ARTIFACTS 7, and the feat, vow, skill and artifact rules that
+ * bend the grammar. The adventure layer only carries them into the battle
+ * profile; each is implemented where the comment says and tested in
+ * tests/core/battle/hero-rules.test.ts.
  */
-export type RuleSwitchId =
-  | "second-cast-opposed"
-  | "second-cast-opposed-round-1"
-  | "second-cast-round-1"
-  | "own-clocks-frozen"
-  | "own-bane-clocks-frozen"
-  | "strongest-boon-clocks-frozen"
-  | "fuel-uses-plus-1"
-  | "fuel-triples"
-  | "echo-adds-2"
-  | "hush-unspent-own"
-  | "opposed-page-discount"
-  | "opposed-cast-fires-up"
-  | "item-act-wind";
+export const RULE_SWITCH_IDS = [
+  // Casting (core/battle/magic.ts secondCastError, engine.ts heroAct)
+  "second-cast-opposed", // The Second Left Glove
+  "second-cast-opposed-round-1", // The Glove's Thumb
+  "second-cast-round-1", // Vow of the Opening
+  "first-scroll-free", // Packrat 3
+  "opposed-page-discount", // The Glove's Lining
+  "opposed-cast-fires-up", // The Odd Cufflink
+  "unspent-page", // The Unspent Page (its page rides in MagicSetup)
+  "tier1-twice", // The Torn Corner
+  "scrolls-kept", // Vow of the Borrowed Book
+  "first-scroll-kept", // Bookbinder's Thread
+  "hush-unspent-own", // Vow of the Grave
+  "fuel-uses-plus-1", // Vow of Empty Pockets
+  "fuel-triples", // Bonfire
+  "echo-adds-2", // Long Echo
+  "storm-spares-own", // Vow of the Pyre
+  "chain-lightning", // Chain Lightning
+  "spillover", // Spillover
+  // Clocks (engine.ts endRound)
+  "own-clocks-frozen", // The Hourglass with No Bottom
+  "own-bane-clocks-frozen", // The Upper Bulb
+  "strongest-boon-clocks-frozen", // The Lower Bulb
+  // Links (resolve.ts land, kill, transfer)
+  "link-passes", // Treaty Ink
+  "links-clockless", // Vow of the Still Air
+  "link-clock-plus-1", // The Quill
+  "scapegoat-no-backlash", // The Blotter
+  // Ground and remains
+  "remains-any-owner", // Sexton's Spade (core/magic/targets.ts)
+  "gleaner", // Gleaner
+  "mirror-ward", // Mirror Ward
+  "firewalkers", // Firewalkers
+  "seed-bombs", // Seed Bombs
+  // Retaliation (rules.ts retaliationLimit, resolve.ts)
+  "riposte-1",
+  "riposte-2",
+  "riposte-3",
+  "shield-wall",
+  "peace-dividend",
+  "gag-rule",
+  // Gates, shooting, timeline, the Command
+  "gates-double-hp", // Vow of Bare Hands
+  "soaked-powder",
+  "heartened-survives-once", // Vow of Flesh and Blood
+  "mob-rule",
+  "drill-sergeant-1", // Drill Sergeant ranks 1-2
+  "drill-sergeant-3", // Drill Sergeant rank 3
+  // Ability reach (core/battle/abilities.ts withinReach)
+  "long-shadow-1", // Long Shadow ranks 1-3
+  "long-shadow-2",
+  "long-shadow-3",
+  // Condition kinds (core/magic/kinds.ts, core/battle/standard.ts)
+  "cold-hands",
+  "double-or-nothing",
+  "green-thumb",
+  "briar-patch",
+  "burr",
+  "harvest",
+  "windfall",
+  "quickstep",
+  "co-signer",
+  "compound-interest",
+  "bloodletting",
+  "thicker-than-water",
+  "blaze-of-glory",
+  "gardeners-apron",
+  "hedge-clipper-shears",
+  "lightning-rod",
+  "metronome-spurs",
+  "bailiffs-greatcoat",
+  "whetstone-pendant",
+] as const;
+
+export type RuleSwitchId = (typeof RULE_SWITCH_IDS)[number];
 
 /** A vow's restriction, from the fixed list of RULES_V2 3.5. */
 export type VowRestriction =
@@ -163,7 +229,29 @@ export type HeroEffect =
   /** After a battle you win, each stack regains `tenths`/10 of its losses. */
   | { kind: "field-surgeon"; tenths: number }
   /** A spell page the hero casts at extra Power (a Spell specialty). */
-  | { kind: "spell-power"; spell: string; amount: number; perLevels: number };
+  | { kind: "spell-power"; spell: string; amount: number; perLevels: number }
+  /** Silver Tongue: hiring at outposts, stray huts and lodges is cheaper. */
+  | { kind: "hire-discount"; percent: number }
+  /**
+   * Silver Tongue: a neutral stack whose FV is at most `percent` of this
+   * army's FV has no zone of control against this hero.
+   */
+  | { kind: "parley"; percent: number }
+  /** Packrat 2: sites buy artifacts and scrolls at `percent` of value. */
+  | { kind: "sell-percent"; percent: number }
+  /**
+   * Wayfinder: adventure spells cost `costPercent` more (negative is
+   * cheaper), scale as if Power were `power` higher and may be cast
+   * `perDay` times a day.
+   */
+  | {
+      kind: "adventure-magic";
+      costPercent: number;
+      power: number;
+      perDay: number;
+    }
+  /** The Missing Page: the highest-tier page starts each battle spent. */
+  | { kind: "missing-page" };
 
 /** Short names for the UI and tooltips. */
 export const STAT_NAMES: Readonly<Record<PrimaryStat, string>> = {

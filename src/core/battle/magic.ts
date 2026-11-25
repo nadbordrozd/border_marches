@@ -7,6 +7,7 @@
 
 import { isAlive } from "./abilities.ts";
 import { act as actDef, casterOf, hasAct } from "./registry.ts";
+import { hasRule, ruleUsed } from "./rules.ts";
 import type { ActDef } from "./registry.ts";
 import type {
   ActTarget,
@@ -77,7 +78,7 @@ export function sideMagicFromSetup(m: MagicSetup): SideMagic {
     mana: Math.max(0, Math.trunc(m.mana)),
     schoolRanks: ranks,
     pages: [...new Set(m.pages)],
-    spent: [],
+    spent: (m.startSpent ?? []).filter((x) => m.pages.includes(x)),
     scrolls: [...(m.scrolls ?? [])],
     scrollsUsed: [],
     fuelUsed: 0,
@@ -89,6 +90,9 @@ export function sideMagicFromSetup(m: MagicSetup): SideMagic {
     echoRounds: Math.max(1, m.echoRounds ?? 1),
     neverCast: [...(m.neverCast ?? [])],
     noCastRounds: m.noCastRounds ?? null,
+    ...(m.spellPower !== undefined ? { spellPower: { ...m.spellPower } } : {}),
+    ...(m.unspentPage !== undefined ? { unspentPage: m.unspentPage } : {}),
+    casts: [],
   };
 }
 
@@ -108,14 +112,110 @@ export function heroCastPower(
   def: ActDef,
   scroll: boolean,
 ): number {
+  // A Spell specialty's extra Power for its spell (RULES_V2 3.7).
+  const special = magic.spellPower?.[def.id] ?? 0;
   if (scroll)
     return clampPower(
-      magic.scrollPower ?? Math.max(SCROLL_MIN_POWER, magic.power),
+      (magic.scrollPower ?? Math.max(SCROLL_MIN_POWER, magic.power)) + special,
     );
   const given = def.school ? magic.pagePower[def.school] : undefined;
-  if (given !== undefined) return clampPower(given);
+  if (given !== undefined) return clampPower(given + special);
   const rank = def.school ? magic.schoolRanks[def.school] : 0;
-  return clampPower(magic.power + (RANK_POWER_BONUS[rank] ?? 0));
+  return clampPower(magic.power + (RANK_POWER_BONUS[rank] ?? 0) + special);
+}
+
+/**
+ * Mana a hero cast costs now (RULES_V2 2.3) with the hero's rules: a
+ * scroll is free unless Vow of the Borrowed Book keeps it (then it costs
+ * its page's mana); The Glove's Lining makes a page of a school opposed to
+ * a page cast the round before 25% cheaper (rounded up, at least 1).
+ */
+export function heroManaCost(
+  state: Pick<BattleState, "sides" | "round">,
+  side: BattleSide,
+  def: ActDef,
+  scroll: boolean,
+): number {
+  const magic = state.sides[side].magic;
+  if (!magic) return 0;
+  if (scroll && !hasRule(state, side, "scrolls-kept")) return 0;
+  let cost = manaCost(def, magic);
+  if (
+    !scroll &&
+    def.school &&
+    hasRule(state, side, "opposed-page-discount") &&
+    (magic.casts ?? []).some(
+      (c) =>
+        c.round === state.round - 1 &&
+        !c.scroll &&
+        c.school !== null &&
+        schoolRelation(c.school, def.school as School) === "opposed",
+    )
+  ) {
+    cost = Math.max(1, Math.ceil((cost * 3) / 4));
+  }
+  return cost;
+}
+
+/**
+ * Times a page may be cast per battle: 1; 2 for a tier 1 page with The
+ * Torn Corner; unlimited for The Unspent Page's page.
+ */
+export function pageUses(
+  state: Pick<BattleState, "sides">,
+  side: BattleSide,
+  def: ActDef,
+): number {
+  const magic = state.sides[side].magic;
+  if (magic?.unspentPage === def.id) return Infinity;
+  return (def.tier ?? 1) === 1 && hasRule(state, side, "tier1-twice") ? 2 : 1;
+}
+
+/** Times this page is spent so far this battle. */
+export function timesSpent(magic: SideMagic, actId: string): number {
+  return magic.spent.filter((x) => x === actId).length;
+}
+
+/**
+ * Why the hero of `side`, having cast already this round, cannot cast
+ * `def` again now, or null when a rule allows it (RULES_V2 1.11: at most
+ * two casts a round): Packrat 3's first scroll is free; the Glove (any
+ * round) and its Thumb (round 1) allow a second page of an opposed
+ * school; Vow of the Opening a second of any school in round 1.
+ */
+export function secondCastError(
+  state: Pick<BattleState, "sides" | "round">,
+  side: BattleSide,
+  def: ActDef,
+  scroll: boolean,
+): string | null {
+  const used = "the hero has already cast this round";
+  if (
+    scroll &&
+    hasRule(state, side, "first-scroll-free") &&
+    !ruleUsed(state, side, "first-scroll-free")
+  )
+    return null;
+  const magic = state.sides[side].magic;
+  const now = (magic?.casts ?? []).filter(
+    (c) => c.round === state.round && !c.free,
+  );
+  if (now.length >= 2) return "the hero has already cast twice this round";
+  if (now.length === 0) return magic ? null : used;
+  if (state.round === 1 && hasRule(state, side, "second-cast-round-1"))
+    return null;
+  const opposedAllowed =
+    hasRule(state, side, "second-cast-opposed") ||
+    (state.round === 1 && hasRule(state, side, "second-cast-opposed-round-1"));
+  if (!opposedAllowed) return used;
+  const first = now[0]?.school ?? null;
+  if (
+    def.school &&
+    first !== null &&
+    schoolRelation(first, def.school) === "opposed"
+  )
+    return null;
+  return "the second cast this round must be of a school opposed to the first";
 }
 
 /** Effective Power of a creature caster stack, read at the cast (2.6). */
@@ -215,11 +315,20 @@ export function heroCastError(
   if (noCastRound(magic.noCastRounds, state.round))
     return "a vow bars casting this round";
   if (scroll) {
-    return magic.scrolls.includes(actId) ? null : "no such scroll";
+    if (!magic.scrolls.includes(actId)) return "no such scroll";
+    if (!hasRule(state, side, "scrolls-kept")) return null;
+    // Vow of the Borrowed Book: spent once per battle, for mana.
+    if (magic.spent.includes(`scroll:${actId}`))
+      return "this scroll is spent for the battle";
+    const cost = heroManaCost(state, side, def, true);
+    return magic.mana < cost
+      ? `needs ${cost} mana, the hero has ${magic.mana}`
+      : null;
   }
   if (!magic.pages.includes(actId)) return "this page is not in the book";
-  if (magic.spent.includes(actId)) return "this page is spent for the battle";
-  const cost = manaCost(def, magic);
+  if (timesSpent(magic, actId) >= pageUses(state, side, def))
+    return "this page is spent for the battle";
+  const cost = heroManaCost(state, side, def, false);
   if (magic.mana < cost)
     return `needs ${cost} mana, the hero has ${magic.mana}`;
   return null;

@@ -50,7 +50,9 @@ describe("artifact data (RULES_V2 4.2, 4.5)", () => {
       true,
     );
     expect(worn.some((a) => a.kind === "worn" && a.cursed === true)).toBe(true);
-    expect(ARTIFACT_LIST.filter((a) => a.kind === "consumable").length).toBe(6);
+    expect(ARTIFACT_LIST.filter((a) => a.kind === "consumable").length).toBe(
+      12,
+    );
   });
 
   it("keeps Marvels and their pieces consistent", () => {
@@ -97,8 +99,8 @@ describe("equipping (RULES_V2 4.1)", () => {
 
   it("refuses the wrong slot, consumables and a second Marvel", () => {
     const s = game((h) => {
-      h.backpack = ["tin-sabre", "blue-tonic", "hourglass-with-no-bottom"];
-      h.worn[9] = "hourglass-with-no-bottom";
+      h.backpack = ["tin-sabre", "blue-tonic", "the-hourglass-with-no-bottom"];
+      h.worn[9] = "the-hourglass-with-no-bottom";
     });
     expect(errorOf(equip(s, "hero-0", 0, 0))).toBe("bad-slot");
     expect(errorOf(equip(s, "hero-0", 1))).toBe("bad-item");
@@ -202,12 +204,12 @@ describe("Marvels in pieces (RULES_V2 4.5)", () => {
       h.worn[9] = "the-upper-bulb";
       h.backpack = ["the-lower-bulb", "a-pinch-of-sand"];
     });
-    expect(assemblable(hero(s))).toEqual(["hourglass-with-no-bottom"]);
-    s = ok(assemble(s, "hero-0", "hourglass-with-no-bottom")).state;
+    expect(assemblable(hero(s))).toEqual(["the-hourglass-with-no-bottom"]);
+    s = ok(assemble(s, "hero-0", "the-hourglass-with-no-bottom")).state;
     expect(hero(s).worn[9]).toBeNull();
-    expect(hero(s).backpack).toEqual(["hourglass-with-no-bottom"]);
-    expect(wornDef("hourglass-with-no-bottom")?.cursed).toBe(true);
-    expect(errorOf(assemble(s, "hero-0", "hourglass-with-no-bottom"))).toBe(
+    expect(hero(s).backpack).toEqual(["the-hourglass-with-no-bottom"]);
+    expect(wornDef("the-hourglass-with-no-bottom")?.cursed).toBe(true);
+    expect(errorOf(assemble(s, "hero-0", "the-hourglass-with-no-bottom"))).toBe(
       "no-assembly",
     );
   });

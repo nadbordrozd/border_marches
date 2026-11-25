@@ -5,6 +5,7 @@
  */
 
 import type { ConditionKindDef, GroundKindDef } from "./registry.ts";
+import { hasRule } from "./rules.ts";
 
 const plural = (n: number | null, word: string): string =>
   n === null ? "until the battle ends" : `${n} ${word}${n === 1 ? "" : "s"}`;
@@ -56,7 +57,9 @@ export const STANDARD_CONDITION_KINDS: readonly ConditionKindDef[] = [
       `Hold: cannot act or retaliate ${clockText(c.clock)}. The first Strike against it is x 200% and ends Frozen.`,
     strikeMultiplier(ctx, holder) {
       if (holder.id !== ctx.defender.id) return null;
-      return { source: "frozen", label: "Frozen", percent: 200 };
+      // Cold Hands: the striker's side makes it x 300%.
+      const cold = hasRule(ctx.state, ctx.attacker.side, "cold-hands");
+      return { source: "frozen", label: "Frozen", percent: cold ? 300 : 200 };
     },
   },
   {
@@ -135,7 +138,9 @@ export const STANDARD_CONDITION_KINDS: readonly ConditionKindDef[] = [
     strikeMultiplier(ctx, holder) {
       if (holder.id !== ctx.attacker.id) return null;
       if (ctx.kind !== "melee" && ctx.kind !== "shot") return null;
-      return { source: "lucky", label: "Lucky", percent: 150 };
+      // Double or Nothing: x 200% (and Jinxed when it ends, resolve.ts).
+      const double = hasRule(ctx.state, holder.side, "double-or-nothing");
+      return { source: "lucky", label: "Lucky", percent: double ? 200 : 150 };
     },
     onStrike(ctx, holder, c) {
       if (holder.id !== ctx.attacker.id) return null;
