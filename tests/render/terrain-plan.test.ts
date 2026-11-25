@@ -84,6 +84,7 @@ function expectSameList<T>(
 ): void {
   const n = Math.max(actual.length, expected.length);
   for (let i = 0; i < n; i += 1) {
+    if (actual[i] === expected[i] && i < actual.length) continue;
     const a = actual[i] === undefined ? "(none)" : show(actual[i] as T);
     const b = expected[i] === undefined ? "(none)" : show(expected[i] as T);
     if (a !== b)
@@ -394,28 +395,60 @@ describe("incremental terrain plan", () => {
   }, 120_000);
 
   it("stays equal over a long run of takes and returns", () => {
+    // The objects beside ranges or woods, taken one by one, then put back
+    // in reverse. Bead bzc.75: a full plan costs 0.1-0.5 s on this map, and
+    // one after each of the ~270 steps took minutes once maps grew denser,
+    // so the chain is checked with cheaper witnesses that still see every
+    // step:
+    // - each return's plan equals the take's plan holding the same objects,
+    //   reached by a different chain of updates (the last return's: the
+    //   first full plan);
+    // - a full rebuild every FULL_EVERY steps and with everything taken (a
+    //   wrong update is carried on by the next ones, so it is still there).
+    const FULL_EVERY = 25;
     const map = generateMap(12, { size: "S" });
     const all = map.objects.filter((o) => o.kind !== "buried");
-    // The objects beside ranges or woods, taken one by one, then put back.
-    const near = all.filter((o) => {
+    const chain = all.filter((o) => {
       const n = neighbours(map, o.x, o.y);
       return n.mountain + n.forest > 0 && roadEnds(map, [o]).length === 0;
     });
-    expect(near.length).toBeGreaterThan(10);
+    expect(chain.length).toBeGreaterThan(100);
+
+    const sameAs = (a: TerrainPlan, b: TerrainPlan, what: string): void => {
+      expectSameList(a.peaks.peaks, b.peaks.peaks, tree, `${what} peaks`);
+      expectSameList(a.canopy.trees, b.canopy.trees, tree, `${what} trees`);
+      expectSameList(a.bodies, b.bodies, drawn, `${what} bodies`);
+      expectSameList(a.foreground, b.foreground, drawn, `${what} foreground`);
+    };
     let objects = all;
     let plan = planTerrain(map, objects).plan;
-    const check = (next: MapObject[]): void => {
+    let fulls = 0;
+    const step = (next: MapObject[], k: number): void => {
       objects = next;
-      plan = planTerrain(map, objects, plan).plan;
-      const full = planTerrain(map, objects).plan;
-      expectSameList(plan.peaks.peaks, full.peaks.peaks, tree, "peaks");
-      expectSameList(plan.canopy.trees, full.canopy.trees, tree, "trees");
-      expectSameList(plan.bodies, full.bodies, drawn, "bodies");
-      expectSameList(plan.foreground, full.foreground, drawn, "foreground");
+      const update = planTerrain(map, objects, plan);
+      expect(update.dirty).not.toBeNull();
+      plan = update.plan;
+      if (k % FULL_EVERY === 0 || k === chain.length) {
+        sameAs(plan, planTerrain(map, objects).plan, `step ${k} vs full`);
+        fulls += 1;
+      }
     };
-    for (const o of near) check(objects.filter((x) => x !== o));
-    for (const o of [...near].reverse()) check([...objects, o]);
-  }, 120_000);
+    // takes[k]: the plan with the first k of the chain taken.
+    const takes: TerrainPlan[] = [plan];
+    chain.forEach((o, k) => {
+      step(
+        objects.filter((x) => x !== o),
+        k + 1,
+      );
+      takes.push(plan);
+    });
+    [...chain].reverse().forEach((o, k) => {
+      step([...objects, o], chain.length + k + 1);
+      const held = chain.length - k - 1;
+      sameAs(plan, takes[held]!, `return to ${held} taken`);
+    });
+    expect(fulls).toBeGreaterThanOrEqual(10);
+  }, 60_000);
 
   it("keeps the dirty chunks to the neighbourhood of the change", () => {
     const map = generateMap(11, { size: "S" });
