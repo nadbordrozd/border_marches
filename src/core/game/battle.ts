@@ -29,7 +29,12 @@ import { SPECIALS } from "../../data/factionTowns.ts";
 import type { CreatureId, FactionId } from "../../data/types.ts";
 import type { Terrain } from "../map/types.ts";
 import { deriveSeed } from "../rng.ts";
-import { captureTown, guardsAt, visitAtHero } from "./adventure.ts";
+import {
+  captureTown,
+  guardsAt,
+  takePickupAfterFight,
+  visitAtHero,
+} from "./adventure.ts";
 import { heroArtifacts, spoilsEvent, takeSpoils } from "./artifacts.ts";
 import { heroBattleProfile, type HeroBattleProfile } from "./battle-profile.ts";
 import { effectsOf, heroStats } from "./effects.ts";
@@ -642,7 +647,10 @@ export function applyBattleResult(
         kind: "monster",
         objectId: must(guards[0], "guard"),
         heroId: hero.id,
+        ...(battle.pickupId !== undefined ? { pickupId: battle.pickupId } : {}),
       };
+    } else if (battle.pickupId !== undefined) {
+      chained = takePickupAfterFight(next, hero, battle.pickupId, events);
     } else if (battle.kind === "monster") {
       chained = visitAtHero(next, hero, events);
     }

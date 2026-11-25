@@ -1,13 +1,17 @@
 /**
  * Multi-day reach for the AI (bead bzc.19): Dijkstra under the movement
  * rules of src/core/game/pathfinding.ts, with one difference: an object
- * entrance that only stops a walk (a site, a pickup, a mine) does not end
- * the search. A hero walking through it stops there, visits, and walks on
- * with its next move, so the ground behind it is reachable. Waystones
- * (iteration 3, bead bzc.23) carry the search to their exit (a one-way
- * waystone's exit, a two-way waystone's twin) when the hero could stand
- * there; a path through one ends on the waystone (the hero is carried
- * and plans again from the exit). Zones of control and entrances that
+ * entrance that only stops a walk (a site, a mine) does not end the
+ * search. A hero walking through it stops there, visits, and walks on
+ * with its next move, so the ground behind it is reachable. Pickups block
+ * their cell (bead bzc.49) but are taken for free from a next cell, after
+ * which the cell is open: the search walks on through an uncollected
+ * pickup at its cell's cost, a path through one ends by reaching for it
+ * (the hero plans again from beside it), and pickup cells are left out of
+ * `cost` (no hero stands there before taking it). Waystones (iteration 3, bead bzc.23) carry the
+ * search to their exit (a one-way waystone's exit, a two-way waystone's
+ * twin) when the hero could stand there; a path through one ends on the
+ * waystone (the hero is carried and plans again from the exit). Zones of control and entrances that
  * start a fight (another player's town, a guarded bank) still end a walk.
  */
 import { DIRECTIONS_8, inBounds } from "../map/types.ts";
@@ -32,6 +36,15 @@ export interface Reach {
   start: number;
   /** Cells reached by a waystone (their parent is the waystone). */
   jumps: Set<number>;
+}
+
+/** Whether the search may enter the cell: standable, or a pickup to take. */
+function enterable(ctx: MoveContext, x: number, y: number): boolean {
+  if (canEnter(ctx, x, y)) return true;
+  const i = y * ctx.map.width + x;
+  return (
+    ctx.pickupAt.has(i) && (ctx.explored === null || ctx.explored[i] === true)
+  );
 }
 
 /** Binary min-heap of (priority, insertion order) -> cell. */
@@ -93,10 +106,8 @@ function passThrough(state: GameState, hero: HeroState): Set<number> {
   for (const obj of state.map.objects) {
     const i = obj.y * w + obj.x;
     switch (obj.kind) {
-      case "pickup":
       case "mine":
       case "dwelling":
-      case "artifact":
         out.add(i);
         break;
       case "site": {
@@ -223,7 +234,7 @@ export function reachFor(
       const ny = cy + dy;
       if (!inBounds(map, nx, ny)) continue;
       const ni = ny * w + nx;
-      if (closed.has(ni) || !canEnter(ctx, nx, ny)) continue;
+      if (closed.has(ni) || !enterable(ctx, nx, ny)) continue;
       if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
       const step = stepCost(
         map,
@@ -246,6 +257,8 @@ export function reachFor(
       open.push(np, ni);
     }
   }
+  // A pickup's cell is a way through, never a place to stand (bead bzc.49).
+  for (const cell of ctx.pickupAt.keys()) cost.delete(cell);
   return { cost, parent, ctx, start, jumps };
 }
 
@@ -268,20 +281,26 @@ export function pathIn(
   // Through a waystone: the walk ends on it (the hero is carried on).
   const jump = cells.findIndex((c) => reach.jumps.has(c));
   if (jump >= 0) cells = cells.slice(0, jump);
+  // Through a pickup (bead bzc.49): the walk ends reaching for it.
+  const take = cells.findIndex((c) => reach.ctx.pickupAt.has(c));
+  if (take >= 0) cells = cells.slice(0, take + 1);
   if (cells.length === 0) return null;
   const steps: PathStep[] = [];
   let prev = reach.start;
   let total = 0;
   for (const c of cells) {
-    const cost = stepCost(
-      reach.ctx.map,
-      reach.ctx.nativeTerrain,
-      prev % w,
-      Math.floor(prev / w),
-      c % w,
-      Math.floor(c / w),
-      reach.ctx.forestCost,
-    );
+    const pickup = reach.ctx.pickupAt.has(c);
+    const cost = pickup
+      ? 0
+      : stepCost(
+          reach.ctx.map,
+          reach.ctx.nativeTerrain,
+          prev % w,
+          Math.floor(prev / w),
+          c % w,
+          Math.floor(c / w),
+          reach.ctx.forestCost,
+        );
     total += cost;
     steps.push({
       x: c % w,
@@ -290,6 +309,7 @@ export function pathIn(
       total,
       day: 0,
       attack: false,
+      ...(pickup ? { pickup: true } : {}),
     });
     prev = c;
   }

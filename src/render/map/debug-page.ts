@@ -247,6 +247,7 @@ export function debugRoute(
       friendAt: new Set(),
       guards: new Map(),
       stops: new Set(),
+      pickupAt: new Map(),
       explored: null,
       forestCost: null,
     },

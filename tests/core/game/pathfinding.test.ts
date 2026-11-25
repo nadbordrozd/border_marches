@@ -3,10 +3,11 @@ import {
   assignDays,
   diagonalCost,
   findPath,
+  reachableCells,
   stepCost,
   type Path,
 } from "../../../src/core/game/index.ts";
-import { buildMap, field, gameOn, monster, pickup } from "./helpers.ts";
+import { buildMap, field, gameOn, mine, monster, pickup } from "./helpers.ts";
 
 const costs = (p: Path | null) => p?.steps.map((s) => s.cost);
 
@@ -104,7 +105,7 @@ describe("findPath", () => {
     expect(p.total).toBe(200);
   });
 
-  it("stops at uncollected object entrances", () => {
+  it("an uncollected pickup blocks its cell; a path reaches for it", () => {
     const s = gameOn(
       ["ggggg"],
       [pickup("p", 2, 0, { resource: "wood", amount: 5 })],
@@ -112,9 +113,43 @@ describe("findPath", () => {
       0,
     );
     expect(findPath(s, "hero-0", 4, 0, { ignoreFog: true })).toBeNull();
-    expect(findPath(s, "hero-0", 2, 0)!.total).toBe(200);
+    const p = findPath(s, "hero-0", 2, 0)!;
+    expect(p.total).toBe(100);
+    expect(p.steps.at(-1)).toMatchObject({
+      x: 2,
+      cost: 0,
+      attack: false,
+      pickup: true,
+    });
+    expect(reachableCells(s, "hero-0").has(2)).toBe(false);
     const collected = { ...s, collected: ["p"] };
     expect(findPath(collected, "hero-0", 4, 0)!.total).toBe(400);
+  });
+
+  it("takes a pickup from a stop cell only when nothing else will do", () => {
+    // A corridor: the only cell beside the pile is a mine's entrance.
+    const s = gameOn(
+      ["gggg"],
+      [
+        mine("saw", 2, 0, "wood"),
+        pickup("p", 3, 0, { resource: "wood", amount: 5 }),
+      ],
+      0,
+      0,
+    );
+    const p = findPath(s, "hero-0", 3, 0)!;
+    expect(p.steps.map((st) => [st.x, st.cost])).toEqual([
+      [1, 100],
+      [2, 100],
+      [3, 0],
+    ]);
+    expect(p.total).toBe(200);
+  });
+
+  it("stops at uncollected object entrances", () => {
+    const s = gameOn(["ggggg"], [mine("saw", 2, 0, "wood")], 0, 0);
+    expect(findPath(s, "hero-0", 4, 0, { ignoreFog: true })).toBeNull();
+    expect(findPath(s, "hero-0", 2, 0)!.total).toBe(200);
   });
 
   it("splits the path into days by movement points", () => {

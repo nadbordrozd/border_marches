@@ -399,14 +399,27 @@ function freeTargets(
   const out: Array<{ x: number; y: number; cost: number }> = [];
   for (const obj of state.map.objects) {
     const i = obj.y * w + obj.x;
+    if (obj.kind === "pickup") {
+      // Taken from the cheapest unguarded next cell (bead bzc.49), and
+      // only when no stack guards its own cell.
+      if (collected.has(obj.id) || guarded.has(i)) continue;
+      let cost: number | undefined;
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          const j = (obj.y + dy) * w + obj.x + dx;
+          const c = reach.get(j);
+          if ((dx === 0 && dy === 0) || c === undefined || guarded.has(j))
+            continue;
+          if (obj.x + dx < 0 || obj.x + dx >= w) continue;
+          if (cost === undefined || c < cost) cost = c;
+        }
+      }
+      if (cost !== undefined) out.push({ x: obj.x, y: obj.y, cost });
+      continue;
+    }
     const cost = reach.get(i);
     if (cost === undefined || cost === 0 || guarded.has(i)) continue;
-    if (obj.kind === "pickup" && !collected.has(obj.id)) {
-      out.push({ x: obj.x, y: obj.y, cost });
-    } else if (
-      obj.kind === "mine" &&
-      state.mines[obj.id]?.owner !== hero.owner
-    ) {
+    if (obj.kind === "mine" && state.mines[obj.id]?.owner !== hero.owner) {
       out.push({ x: obj.x, y: obj.y, cost });
     }
   }

@@ -33,7 +33,9 @@ import {
   levelUpOffer,
   maxMana,
   moveHeroAlong,
+  isPickup,
   sightRadius,
+  standsOn,
   takeChest,
   townIncome,
   townsOf,
@@ -949,11 +951,29 @@ class GameScreen {
   private onHover(cell: { x: number; y: number } | null): void {
     if (cell === null || this.inputBlocked()) {
       this.hovered = null;
+      this.canvas.style.cursor = "";
       hideTip();
       return;
     }
     this.hovered = cell;
+    this.canvas.style.cursor = this.pickupAt(cell.x, cell.y) ? "grab" : "";
     this.showMapTip();
+  }
+
+  /**
+   * An explored, uncollected pickup lies at (x, y): the hand cursor says
+   * it is taken from a next cell (bead bzc.49).
+   */
+  private pickupAt(x: number, y: number): boolean {
+    const w = this.state.map.width;
+    if (this.player()?.explored[y * w + x] !== true) return false;
+    return this.state.map.objects.some(
+      (o) =>
+        o.x === x &&
+        o.y === y &&
+        isPickup(o) &&
+        !this.state.collected.includes(o.id),
+    );
   }
 
   private showMapTip(): void {
@@ -1348,19 +1368,20 @@ class GameScreen {
         return `${foe.name} of ${playerColour(foe.owner).name} stands there`;
       }
     }
-    const stand = last.attack ? steps[steps.length - 2] : last;
+    const stand = standsOn(last) ? last : steps[steps.length - 2];
     const monsters = Object.values(this.state.monsters);
     const target = last.attack
       ? monsters.find((m) => m.x === last.x && m.y === last.y)
       : undefined;
-    const guard =
-      target ??
-      (stand === undefined
+    const near = (c: { x: number; y: number } | undefined) =>
+      c === undefined
         ? undefined
         : monsters.find(
-            (m) =>
-              Math.max(Math.abs(m.x - stand.x), Math.abs(m.y - stand.y)) <= 1,
-          ));
+            (m) => Math.max(Math.abs(m.x - c.x), Math.abs(m.y - c.y)) <= 1,
+          );
+    // A pickup in a zone of control is fought for first (bead bzc.49).
+    const guard =
+      target ?? near(stand) ?? (last.pickup === true ? near(last) : undefined);
     return guard === undefined
       ? null
       : `Guarded by ${stackPhrase(guard.creature, guard.count)}`;

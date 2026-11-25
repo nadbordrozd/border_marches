@@ -31,6 +31,8 @@ export interface PathSummary {
   left: number;
   /** The last step attacks (a monster or a hero stands there). */
   attack: boolean;
+  /** The last step picks up an object from the next cell (bead bzc.49). */
+  pickup?: boolean;
 }
 
 /** How long a path takes the hero and what is left on arrival. */
@@ -53,14 +55,23 @@ export function pathSummary(path: Path, hero: HeroState): PathSummary {
     days,
     left: Math.max(0, left),
     attack: last.attack,
+    ...(last.pickup === true ? { pickup: true } : {}),
   };
 }
 
-/** "Today: 420 moves, 1080 left" / "2 days: 3160 moves, 340 left". */
+/**
+ * "Today: 420 moves, 1080 left" / "2 days: 3160 moves, 340 left" /
+ * "Today: 300 moves, then pick up" / "Pick up: right next to you".
+ */
 export function pathLine(s: PathSummary): string {
+  if (s.pickup === true && s.cost === 0) return "Pick up: right next to you";
   const when =
     s.days === 0 ? "Today" : s.days === 1 ? "Tomorrow" : `In ${s.days} days`;
-  const tail = s.attack ? "then attack" : `${s.left} moves left`;
+  const tail = s.attack
+    ? "then attack"
+    : s.pickup === true
+      ? "then pick up"
+      : `${s.left} moves left`;
   return `${when}: ${s.cost} moves, ${tail}`;
 }
 
@@ -202,7 +213,8 @@ export const END_TURN_MP_SHARE = 0.25;
 /**
  * Whether the hero can afford one step to a neighbouring cell today: a
  * walk onto a free cell it has the movement for, or an attack on a
- * neighbouring stack or enemy hero (that step costs nothing).
+ * neighbouring stack or enemy hero, or a neighbouring pickup to take (those
+ * steps cost nothing).
  */
 export function canAffordStep(state: GameState, hero: HeroState): boolean {
   if (hero.mp <= 0) return false;
@@ -215,6 +227,7 @@ export function canAffordStep(state: GameState, hero: HeroState): boolean {
     if (cutsCorner(ctx, hero.x, hero.y, x, y)) continue;
     const i = y * w + x;
     if (ctx.monsterAt.has(i) || ctx.enemyHeroAt.has(i)) return true;
+    if (ctx.pickupAt.has(i)) return true;
     if (!canEnter(ctx, x, y)) continue;
     const cost = stepCost(
       state.map,
@@ -294,9 +307,11 @@ export function nextActionHint(
   if (hero === undefined)
     return "No heroes: hire one in a town's tavern (T opens the town).";
   if (planned !== null) {
-    return planned.attack && planned.days === 0
-      ? "Click the target again or press Space to attack."
-      : `Click again or press Space to walk. ${pathLine(planned)}.`;
+    if (planned.attack && planned.days === 0)
+      return "Click the target again or press Space to attack.";
+    if (planned.pickup === true && planned.days === 0)
+      return `Click again or press Space to pick it up. ${pathLine(planned)}.`;
+    return `Click again or press Space to walk. ${pathLine(planned)}.`;
   }
   if (hero.mp < SPENT_MP) {
     const others = state.heroes.some(

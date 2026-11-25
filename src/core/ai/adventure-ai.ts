@@ -95,8 +95,10 @@ import {
   type PlayerController,
   type TownState,
 } from "../game/index.ts";
+import { canCarry } from "../game/artifacts.ts";
+import { scrollCaseSize } from "../game/effects.ts";
 import { featInfo, featWeight } from "../game/hero.ts";
-import { cutsCorner } from "../game/pathfinding.ts";
+import { cutsCorner, standsOn } from "../game/pathfinding.ts";
 import { pathIn, reachFor, type Reach } from "./reach.ts";
 import { gateOpen, inSanctuary, playerListed } from "../game/site-state.ts";
 import { slotFor } from "../game/state.ts";
@@ -226,8 +228,13 @@ interface Target {
   y: number;
   /** Movement points to reach it. */
   cost: number;
-  /** For an attack: the cell next to the target to attack from. */
+  /**
+   * For an attack: the cell next to the target to attack from; for a
+   * pickup (bead bzc.49): the cell next to it to take it from.
+   */
   via?: { x: number; y: number };
+  /** The last step takes a pickup from `via` instead of attacking. */
+  pickup?: boolean;
   /** Stacks whose zone covers `via`: they attack after the target. */
   chained?: string[];
   /** Gold-equivalent value before a fight's losses. */
@@ -435,6 +442,34 @@ function fallbackValue(
   return 0;
 }
 
+/** Whether visiting a bank or site starts a fight with its guard first. */
+function siteGuard(state: GameState, obj: MapObject): boolean {
+  return (
+    (obj.kind === "bank" || obj.kind === "site") &&
+    Array.isArray(obj.data["guard"]) &&
+    state.sites[obj.id]?.guard?.length !== 0 &&
+    state.sites[obj.id]?.done !== true
+  );
+}
+
+/**
+ * Whether the hero has room for what a pickup gives (bead bzc.49): an
+ * artifact in the backpack, a scroll in the case. A full hero would stand
+ * beside it for nothing.
+ */
+function roomFor(hero: HeroState, obj: MapObject): boolean {
+  const type = objectTypeOf(obj);
+  const art = obj.data["artifact"];
+  if (type === "loose-scroll")
+    return hero.scrolls.length < scrollCaseSize(hero);
+  // A loose artifact, the fallen adventurer's Wonder, a rich chest's Trinket.
+  const carries =
+    type === "loose-artifact" ||
+    type === "fallen-adventurer" ||
+    obj.kind === "pickup";
+  return typeof art !== "string" || !carries || canCarry(hero, art);
+}
+
 function chebyshev(ax: number, ay: number, bx: number, by: number): number {
   return Math.max(Math.abs(ax - bx), Math.abs(ay - by));
 }
@@ -456,6 +491,12 @@ export class AdventureAi implements PlayerController {
   private readonly goals = new Map<string, string>();
   /** "<day>:<hero>:<object>:<option>" site choices made (no repeats). */
   private readonly answered = new Set<string>();
+  /**
+   * "<day>:<hero>:<object>" pickups a hero reached for (bead bzc.49): one
+   * still there on a second try gave nothing (no room, eight heroes), so
+   * it is futile for a while, as a site the hero stood on is.
+   */
+  private readonly reached = new Set<string>();
   private day = 0;
   private turnKey = "";
   private turnSims = 0;
@@ -731,7 +772,8 @@ export class AdventureAi implements PlayerController {
     // Cells a visible enemy hero can attack on its next turn. Enemies do
     // not move during this turn: computed once per turn and enemy set
     // (a beaten enemy changes the key).
-    const dangerKey = `${state.day}:${player}:${enemies
+    // A pickup taken opens its cell (bead bzc.49): the key changes too.
+    const dangerKey = `${state.day}:${player}:${state.collected.length}:${enemies
       .map((h) => `${h.id}@${h.x},${h.y}:${Math.round(heroPower(h))}`)
       .join(";")}`;
     const cached = this.dangerCache;
@@ -1915,7 +1957,7 @@ export class AdventureAi implements PlayerController {
         const today = steps.filter((s) => s.day === 0);
         // Do not end the day where a stronger enemy hero can strike
         // (unless that enemy is the target).
-        const end = [...today].reverse().find((s) => !s.attack);
+        const end = [...today].reverse().find(standsOn);
         const endCell =
           end === undefined
             ? hero.y * turn.state.map.width + hero.x
@@ -1966,7 +2008,7 @@ export class AdventureAi implements PlayerController {
               return this.openingSalvo(hero, t);
             }
             const stop = today.findIndex(
-              (s) => !s.attack && chebyshev(s.x, s.y, t.x, t.y) === 2,
+              (s) => standsOn(s) && chebyshev(s.x, s.y, t.x, t.y) === 2,
             );
             if (stop >= 0) {
               return {
@@ -1977,6 +2019,20 @@ export class AdventureAi implements PlayerController {
             }
           }
         }
+        // The walk ends reaching for a pickup (the target, or one in the
+        // way): a second reach the same day means it cannot be taken.
+        const ending = today[today.length - 1];
+        const reachId =
+          ending?.pickup === true
+            ? this.reachOf(turn, hero).ctx.pickupAt.get(
+                ending.y * turn.state.map.width + ending.x,
+              )
+            : undefined;
+        if (reachId !== undefined && !this.firstReach(turn, hero, reachId)) {
+          continue;
+        }
+        const grab = this.grabOnTheWay(turn, hero, today, t);
+        if (grab !== null) return grab;
         return {
           type: "move",
           heroId: hero.id,
@@ -2088,7 +2144,7 @@ export class AdventureAi implements PlayerController {
     const pick = best as { cell: number; score: number } | null;
     if (pick === null) return null;
     const steps = pathIn(reach, hero, pick.cell);
-    const today = (steps ?? []).filter((x) => x.day === 0 && !x.attack);
+    const today = (steps ?? []).filter((x) => x.day === 0 && standsOn(x));
     const end = today[today.length - 1];
     if (end === undefined) return null;
     if (!this.safe(turn, hero, end.y * w + end.x)) return null;
@@ -2141,7 +2197,7 @@ export class AdventureAi implements PlayerController {
     const strong = turn.enemies.filter((f) => heroPower(f) > mine * 0.9);
     for (let i = today.length - 2; i >= 2; i--) {
       const s = today[i];
-      if (s === undefined || s.attack) continue;
+      if (s === undefined || !standsOn(s)) continue;
       const cell = s.y * w + s.x;
       if (ctx.guards.has(cell) || ctx.stops.has(cell)) continue;
       if (!this.safe(turn, hero, cell)) continue;
@@ -2220,8 +2276,110 @@ export class AdventureAi implements PlayerController {
   }
 
   /**
+   * A pickup worth having beside today's walk (bead bzc.49): taking one
+   * costs no movement, so the walk stops at the first cell beside it and
+   * reaches for it; the next decide walks on. (Before pickups blocked their
+   * cell, a walk over one took it on the way.) Null when there is none.
+   */
+  private grabOnTheWay(
+    turn: Turn,
+    hero: HeroState,
+    today: readonly PathStep[],
+    target: Target,
+  ): GameAction | null {
+    const { state } = turn;
+    const w = state.map.width;
+    const { ctx } = this.reachOf(turn, hero);
+    if (ctx.pickupAt.size === 0) return null;
+    for (let i = 0; i < today.length; i++) {
+      const s = today[i];
+      if (s === undefined || !standsOn(s)) break;
+      const cell = s.y * w + s.x;
+      if (ctx.guards.has(cell) || ctx.stops.has(cell)) break;
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          const px = s.x + dx;
+          const py = s.y + dy;
+          if (!inBounds(state.map, px, py)) continue;
+          const p = py * w + px;
+          const id = ctx.pickupAt.get(p);
+          if (id === undefined || ctx.guards.has(p)) continue;
+          if (target.x === px && target.y === py) continue;
+          if (cutsCorner(ctx, s.x, s.y, px, py)) continue;
+          const obj = state.map.objects.find((o) => o.id === id);
+          if (obj === undefined || siteGuard(state, obj)) continue;
+          if (this.objectValue(turn, hero, obj, 1) <= 0) continue;
+          if (!this.firstReach(turn, hero, id)) continue;
+          return {
+            type: "move",
+            heroId: hero.id,
+            path: [
+              ...today.slice(0, i + 1).map((x) => ({ x: x.x, y: x.y })),
+              { x: px, y: py },
+            ],
+          };
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Notes that the hero reaches for a pickup today; false (and the pickup
+   * is futile for a week) when it already did and the pickup is still
+   * there: taking it gave nothing.
+   */
+  private firstReach(turn: Turn, hero: HeroState, objectId: string): boolean {
+    const key = `${turn.state.day}:${hero.id}:${objectId}`;
+    if (this.reached.has(key)) {
+      this.markFutile(turn.player, objectId, turn.state.day, 7);
+      return false;
+    }
+    this.reached.add(key);
+    return true;
+  }
+
+  /**
+   * The cheapest cell next to a pickup at (x, y) the hero can take it from
+   * (bead bzc.49): reached, outside every zone of control, not cutting a
+   * corner, and not an entrance that would stop the walk (unless the hero
+   * stands there already).
+   */
+  private pickupSpot(
+    reach: Reach,
+    x: number,
+    y: number,
+  ): { cost: number; via: { x: number; y: number } } | undefined {
+    const { ctx } = reach;
+    const w = ctx.map.width;
+    let best: { cost: number; via: { x: number; y: number } } | undefined;
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) {
+        if (dx === 0 && dy === 0) continue;
+        const vx = x + dx;
+        const vy = y + dy;
+        if (!inBounds(ctx.map, vx, vy)) continue;
+        const i = vy * w + vx;
+        const c = reach.cost.get(i);
+        if (c === undefined) continue;
+        if (i !== reach.start) {
+          if (ctx.guards.has(i) || ctx.stops.has(i)) continue;
+          // A waystone carries the hero away before it could take it.
+          if (reach.jumps.has(i)) continue;
+        }
+        if (cutsCorner(ctx, vx, vy, x, y)) continue;
+        if (best === undefined || c < best.cost) {
+          best = { cost: c, via: { x: vx, y: vy } };
+        }
+      }
+    }
+    return best;
+  }
+
+  /**
    * The path to a target; an attack goes through its chosen neighbour
-   * cell (so no other stack's zone is crossed) and ends on the target.
+   * cell (so no other stack's zone is crossed) and ends on the target, and
+   * so does a pickup (taken from that cell, bead bzc.49).
    */
   private pathTo(turn: Turn, hero: HeroState, t: Target): PathStep[] | null {
     const reach = this.reachOf(turn, hero);
@@ -2247,7 +2405,9 @@ export class AdventureAi implements PlayerController {
         cost: 0,
         total: last?.total ?? 0,
         day: last?.day ?? 0,
-        attack: true,
+        ...(t.pickup === true
+          ? { attack: false, pickup: true }
+          : { attack: true }),
       },
     ];
   }
@@ -2356,7 +2516,8 @@ export class AdventureAi implements PlayerController {
   ): Target[] {
     const { state } = turn;
     const w = state.map.width;
-    const { cost: dist, ctx } = this.reachOf(turn, hero);
+    const reach = this.reachOf(turn, hero);
+    const { cost: dist, ctx } = reach;
     const isMain = hero === turn.main;
     const maxMp = Math.max(1, hero.maxMp);
     const out: Target[] = [];
@@ -2453,6 +2614,45 @@ export class AdventureAi implements PlayerController {
       const lead = leads.get(obj.id) ?? 0;
       const value = this.objectValue(turn, hero, obj, explore) + lead;
       if (value <= 0) continue;
+      if (ctx.pickupAt.has(i) && !ctx.guards.has(i)) {
+        // A pickup (bead bzc.49) is taken from a next cell outside every
+        // zone of control; with none, the stacks around it carry its value.
+        // One in a zone is fought for first: its guards carry its value
+        // (below), as for an entrance.
+        const near = this.pickupSpot(reach, obj.x, obj.y);
+        if (near !== undefined) {
+          add({
+            key: `obj:${obj.id}`,
+            x: obj.x,
+            y: obj.y,
+            cost: near.cost,
+            via: near.via,
+            pickup: true,
+            value,
+            ...(siteGuard(state, obj)
+              ? {
+                  battle: { kind: "site", objectId: obj.id, heroId: hero.id },
+                  maxLoss: isMain ? 0.3 : 0.12,
+                }
+              : {}),
+          });
+          continue;
+        }
+        // Every cell beside it lies in a zone: those stacks guard it.
+        const around = new Set<string>();
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            if (!inBounds(state.map, obj.x + dx, obj.y + dy)) continue;
+            const j = (obj.y + dy) * w + obj.x + dx;
+            if (!dist.has(j)) continue;
+            for (const g of ctx.guards.get(j) ?? []) around.add(g);
+          }
+        }
+        for (const g of around) {
+          bonusOf.set(g, (bonusOf.get(g) ?? 0) + value / around.size);
+        }
+        continue;
+      }
       const guards = ctx.guards.get(i);
       if (guards !== undefined && guards.length > 0) {
         // Behind a stack: the stack's fight carries the value.
@@ -2555,11 +2755,7 @@ export class AdventureAi implements PlayerController {
       }
       const cost = dist.get(i);
       if (cost === undefined || cost === 0) continue;
-      const siteGuarded =
-        (obj.kind === "bank" || obj.kind === "site") &&
-        Array.isArray(obj.data["guard"]) &&
-        state.sites[obj.id]?.guard?.length !== 0 &&
-        state.sites[obj.id]?.done !== true;
+      const siteGuarded = siteGuard(state, obj);
       add({
         key: `obj:${obj.id}`,
         x: obj.x,
@@ -3103,6 +3299,7 @@ export class AdventureAi implements PlayerController {
     const { state, player } = turn;
     const until = this.futile.get(`${player}:${obj.id}`);
     if (until !== undefined && until >= state.day) return 0;
+    if (!roomFor(hero, obj)) return 0;
     const type = objectTypeOf(obj);
     switch (type) {
       case "one-way-waystone": {

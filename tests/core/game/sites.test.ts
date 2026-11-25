@@ -9,6 +9,7 @@ import {
   endTurn,
   fightPendingBattle,
   gateOpen,
+  isPickup,
   moveHeroAlong,
   objectGuardFv,
   objectValueFor,
@@ -61,7 +62,10 @@ function site(
   };
 }
 
-/** Steps the hero onto (x, y) from its cell (adjacent). */
+/**
+ * Steps the hero onto (x, y) from its cell (adjacent); onto a pickup that
+ * takes it from where the hero stands (bead bzc.49).
+ */
 function step(
   s: GameState,
   x: number,
@@ -72,6 +76,46 @@ function step(
 } {
   return ok(moveHeroAlong(s, "hero-0", [{ x, y }]));
 }
+
+describe("pickups and buildings (bead bzc.49)", () => {
+  it("one-time objects that leave the map are pickups; lasting sites not", () => {
+    const pick = (type: string, kind: MapObject["kind"] = "site"): boolean =>
+      isPickup({
+        id: type,
+        kind,
+        x: 0,
+        y: 0,
+        footprint: { w: 1, h: 1 },
+        blocked: [],
+        data: { type },
+      });
+    for (const t of [
+      "campfire",
+      "loose-scroll",
+      "fallen-adventurer",
+      "scholar",
+      "sealed-box",
+      "prison",
+    ]) {
+      expect([t, pick(t)]).toEqual([t, true]);
+    }
+    expect(pick("loose-artifact", "artifact")).toBe(true);
+    expect(pick("resource-pile", "pickup")).toBe(true);
+    for (const t of [
+      "stat-shrine",
+      "wishing-well",
+      "windmill",
+      "seer-hut",
+      "event-tile",
+      "two-way-waystone",
+    ]) {
+      expect([t, pick(t)]).toEqual([t, false]);
+    }
+    expect(pick("sawmill", "mine")).toBe(false);
+    expect(pick("stray-hut", "dwelling")).toBe(false);
+    expect(pick("buried-cache", "buried")).toBe(false);
+  });
+});
 
 const hero = (s: GameState): HeroState =>
   s.heroes.find((h) => h.id === "hero-0")!;
@@ -386,7 +430,12 @@ describe("treasure", () => {
       site("sc", "loose-scroll", 2, 0, { spell }),
     ]);
     const before = s.players[0]!.resources;
-    const a = step(step(s, 1, 0).state, 2, 0).state;
+    // Taken from the next cell (bead bzc.49): the hero stays put, then the
+    // campfire's cell is free to walk onto.
+    const took = step(s, 1, 0).state;
+    expect(hero(took)).toMatchObject({ x: 0, y: 0 });
+    const a = step(step(took, 1, 0).state, 2, 0).state;
+    expect(hero(a)).toMatchObject({ x: 1, y: 0 });
     expect(a.players[0]!.resources.gold).toBe(before.gold + 500);
     expect(a.players[0]!.resources.wood).toBe(before.wood + 5);
     expect(hero(a).scrolls).toContain(spell);

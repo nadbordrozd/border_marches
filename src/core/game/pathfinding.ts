@@ -11,10 +11,16 @@
  *   allowed.
  * - Stop cells: a path may end on, but never pass through, a cell guarded by
  *   a neutral stack (zone of control: the 8 cells around it) or the entrance
- *   of an object whose visit does something (uncollected pickup, mine or town
- *   not owned by the hero's player).
+ *   of an object whose visit does something (a site, a mine or town not
+ *   owned by the hero's player).
  * - A neutral stack's own cell can only be the last step of a path: the
  *   attack. That step costs nothing and the hero does not move onto it.
+ * - An uncollected pickup (RULES_V2 5.6, bead bzc.49) blocks its cell. It
+ *   can only be the last step of a path, taken from a next cell: the
+ *   pickup step costs nothing and the hero does not move onto it. Paths
+ *   take it from a cell that is not a stop cell whenever there is one;
+ *   from a stop cell the walk stops there first (a fight in a zone of
+ *   control, a visit) and the pickup waits for the next click.
  *
  * A* with an admissible octile heuristic; ties break by insertion order, so
  * results are deterministic.
@@ -42,7 +48,7 @@ import {
   inBounds,
   isPassable,
 } from "../map/types.ts";
-import { gateOpen, inSanctuary } from "./site-state.ts";
+import { gateOpen, inSanctuary, isPickup } from "./site-state.ts";
 import { findHero } from "./state.ts";
 import type { GameState, HeroState } from "./types.ts";
 
@@ -60,6 +66,19 @@ export interface PathStep {
   day: number;
   /** The final step onto a neutral stack: the hero attacks, it does not move. */
   attack: boolean;
+  /**
+   * The final step onto a pickup (bead bzc.49): the hero takes it from the
+   * cell before and does not move. Absent: false.
+   */
+  pickup?: boolean;
+}
+
+/** Whether the hero ends up standing on this step's cell. */
+export function standsOn(step: {
+  readonly attack: boolean;
+  readonly pickup?: boolean;
+}): boolean {
+  return !step.attack && step.pickup !== true;
 }
 
 export interface Path {
@@ -92,6 +111,11 @@ export interface MoveContext {
   guards: Map<number, string[]>;
   /** Entrances whose visit stops the hero. */
   stops: Set<number>;
+  /**
+   * Cell index -> uncollected pickup lying there (bead bzc.49). Those cells
+   * are also in objectBlocked: taken from a next cell, never entered.
+   */
+  pickupAt: Map<number, string>;
   /** Explored flags of the hero's player, or null to ignore fog. */
   explored: boolean[] | null;
   /**
@@ -120,6 +144,7 @@ export function moveContext(
   const monsterAt = new Map<number, string>();
   const guards = new Map<number, string[]>();
   const stops = new Set<number>();
+  const pickupAt = new Map<number, string>();
   const collected = new Set(state.collected);
   // Adventure magic (src/core/magic/adventure.ts): Parley and Green Road.
   const magic = state.magic?.heroes[hero.id];
@@ -135,6 +160,13 @@ export function moveContext(
   for (const obj of map.objects) {
     for (const [x, y] of obj.blocked) objectBlocked.add(y * map.width + x);
     const entrance = obj.y * map.width + obj.x;
+    if (isPickup(obj)) {
+      if (!collected.has(obj.id)) {
+        objectBlocked.add(entrance);
+        pickupAt.set(entrance, obj.id);
+      }
+      continue;
+    }
     switch (obj.kind) {
       case "monster": {
         const monster = state.monsters[obj.id];
@@ -159,7 +191,6 @@ export function moveContext(
         break;
       }
       case "pickup":
-        if (!collected.has(obj.id)) stops.add(entrance);
         break;
       case "mine":
         if (state.mines[obj.id]?.owner !== hero.owner) stops.add(entrance);
@@ -202,6 +233,7 @@ export function moveContext(
     friendAt,
     guards,
     stops,
+    pickupAt,
     explored: options.ignoreFog === true ? null : (player?.explored ?? null),
     forestCost,
   };
@@ -394,6 +426,9 @@ class MinHeap {
 
 const ROAD_DIAGONAL = diagonalCost(ROAD_MOVE_COST);
 
+/** Search-order cost of taking a pickup from a stop cell (see findPath). */
+const STOP_BEFORE_PICKUP = 1_000_000;
+
 /**
  * Octile distance at road prices. `shrink` = 1 measures to the ring around
  * the target (attack paths end next to it), keeping the heuristic consistent
@@ -415,7 +450,9 @@ function heuristic(
 /**
  * The cheapest path for a hero to (tx, ty), or null when there is none.
  * Targeting a neutral stack's cell gives a path that ends next to it plus
- * an `attack` step onto it.
+ * an `attack` step onto it; targeting an uncollected pickup gives a path
+ * to the best next cell plus a `pickup` step onto it (just that step when
+ * the hero already stands next to it).
  */
 export function findPath(
   state: GameState,
@@ -453,14 +490,15 @@ export function findPathInContext(
   const start = sy * w + sx;
   const goal = ty * w + tx;
   const attackGoal = ctx.monsterAt.has(goal) || ctx.enemyHeroAt.has(goal);
+  const pickupGoal = !attackGoal && ctx.pickupAt.has(goal);
   if (ctx.explored !== null && ctx.explored[goal] !== true) return null;
-  if (!attackGoal && !canEnter(ctx, tx, ty)) return null;
+  if (!attackGoal && !pickupGoal && !canEnter(ctx, tx, ty)) return null;
 
   const g = new Map<number, number>([[start, 0]]);
   const parent = new Map<number, number>();
   const closed = new Set<number>();
   const open = new MinHeap();
-  const shrink = attackGoal ? 1 : 0;
+  const shrink = attackGoal || pickupGoal ? 1 : 0;
   open.push(heuristic(sx, sy, tx, ty, shrink), start);
 
   while (open.size > 0) {
@@ -482,6 +520,12 @@ export function findPathInContext(
       if (attackGoal && ni === goal) {
         if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
         cost = 0;
+      } else if (pickupGoal && ni === goal) {
+        // Taken from where the hero stands; from a cell whose zone or
+        // visit stops the walk first only when no other cell will do
+        // (the search order only: the step itself costs nothing).
+        if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
+        cost = stop ? STOP_BEFORE_PICKUP : 0;
       } else {
         if (stop || !canEnter(ctx, nx, ny)) continue;
         if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
@@ -505,19 +549,29 @@ export function findPathInContext(
   let prev = start;
   for (const c of cells) {
     const attack = attackGoal && c === goal;
-    const cost = attack
-      ? 0
-      : stepCost(
-          map,
-          ctx.nativeTerrain,
-          prev % w,
-          Math.floor(prev / w),
-          c % w,
-          Math.floor(c / w),
-          ctx.forestCost,
-        );
+    const pickup = pickupGoal && c === goal;
+    const cost =
+      attack || pickup
+        ? 0
+        : stepCost(
+            map,
+            ctx.nativeTerrain,
+            prev % w,
+            Math.floor(prev / w),
+            c % w,
+            Math.floor(c / w),
+            ctx.forestCost,
+          );
     total += cost;
-    steps.push({ x: c % w, y: Math.floor(c / w), cost, total, day: 0, attack });
+    steps.push({
+      x: c % w,
+      y: Math.floor(c / w),
+      cost,
+      total,
+      day: 0,
+      attack,
+      ...(pickup ? { pickup: true } : {}),
+    });
     prev = c;
   }
   return steps;

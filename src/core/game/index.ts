@@ -42,7 +42,9 @@ export {
   visitSite,
 } from "./sites.ts";
 export {
+  besidePickup,
   gateOpen,
+  isPickup,
   keysOf,
   objectTypeDef,
   objectTypeOf,
@@ -65,6 +67,7 @@ export {
   assignDays,
   isStopCell,
   canEnter,
+  standsOn,
   type Path,
   type PathStep,
   type PathOptions,

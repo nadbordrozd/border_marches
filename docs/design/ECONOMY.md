@@ -80,8 +80,10 @@ problem to solve, by trade or by reaching further.
 
 ## 5. Pickups
 
-Collected by visiting. Every amount is fixed by the map seed when the map is
-generated (shown before pickup on hover).
+Taken from a next cell (the pile blocks its own cell until then;
+[RULES_V2 5.6](RULES_V2.md#56-mines-dwellings-and-flags)). Every amount is
+fixed by the map seed when the map is generated (shown before pickup on
+hover).
 
 | Pickup           | Amount                                  | Start region target              |
 | ---------------- | --------------------------------------- | -------------------------------- |

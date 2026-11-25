@@ -261,6 +261,11 @@ export interface PendingBattle {
   /** The attacking hero. */
   heroId: string;
   townId?: string;
+  /**
+   * A pickup to take once this fight is won (bead bzc.49): its cell lies
+   * in the stack's zone of control, so its guards attack first.
+   */
+  pickupId?: string;
 }
 
 /** The human's view of the game: it ends when the human wins or is out. */
@@ -320,7 +325,7 @@ export interface GameState {
 }
 
 export type MoveStopReason =
-  "arrived" | "no-mp" | "guarded" | "object" | "attack";
+  "arrived" | "no-mp" | "guarded" | "object" | "attack" | "pickup";
 
 export type GameEvent =
   | {
@@ -339,7 +344,7 @@ export type GameEvent =
       resource: ResourceId;
       amount: number;
     }
-  /** The hero stands on a chest: call takeChest with "gold" or "xp". */
+  /** The hero is next to a chest: call takeChest with "gold" or "xp". */
   | { type: "chest-offer"; heroId: string; pickupId: string }
   | { type: "battle"; battle: PendingBattle }
   /**

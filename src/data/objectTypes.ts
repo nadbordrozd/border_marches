@@ -239,11 +239,11 @@ const ROWS: readonly Row[] = [
   // prettier-ignore
   ["keepers-vault", "Keepers' Vault", "bank", 3, 2, "", "one-time", 16000, [], 0, "A mixed caretaker guard; the winner sees three treasures and carries out one."],
   // prettier-ignore
-  ["resource-pile", "Resource Pile", "pickup", 1, 1, "v", "one-time", 0, [], 10, "Collected by the first hero to step on it."],
+  ["resource-pile", "Resource Pile", "pickup", 1, 1, "v", "one-time", 0, [], 10, "Taken from a next cell by the first hero to reach it."],
   // prettier-ignore
   ["treasure-chest", "Treasure Chest", "pickup", 1, 1, "v", "one-time", 1000, [], 7, "Choose gold or experience (a rich chest holds a Trinket)."],
   // prettier-ignore
-  ["campfire", "Campfire", "site", 1, 1, "v", "one-time", 1000, [], 4, "Collected by stepping on it: gold and wood or ore."],
+  ["campfire", "Campfire", "site", 1, 1, "v", "one-time", 1000, [], 4, "Taken from a next cell: gold and wood or ore."],
   // prettier-ignore
   ["loose-artifact", "Loose Artifact", "artifact", 1, 1, "v", "one-time", 2000, [], 5, "Picked up into the backpack."],
   // prettier-ignore
@@ -287,7 +287,7 @@ const ROWS: readonly Row[] = [
   // prettier-ignore
   ["event-tile", "Event Tile", "site", 1, 1, "v", "one-time", 0, [], 0, "Something happens to the first hero to enter."],
   // prettier-ignore
-  ["sealed-box", "Sealed Box", "site", 1, 1, "v", "one-time", 3000, [], 3, "Opened by the first hero to step on it; what is inside is a surprise."],
+  ["sealed-box", "Sealed Box", "site", 1, 1, "v", "one-time", 3000, [], 3, "Opened from a next cell by the first hero to reach it; what is inside is a surprise."],
   // prettier-ignore
   ["sign", "Sign", "site", 1, 1, "s", "each-visit", 0, [], 0, "Shows its text."],
 ];

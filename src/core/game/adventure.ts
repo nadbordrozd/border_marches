@@ -10,6 +10,7 @@ import { pickupInfo } from "./newGame.ts";
 import { canEnter, cutsCorner, moveContext, stepCost } from "./pathfinding.ts";
 import { checkEliminations } from "./players.ts";
 import { visitSite } from "./sites.ts";
+import { besidePickup, isPickup } from "./site-state.ts";
 import {
   armySize,
   checkTurn,
@@ -22,6 +23,7 @@ import {
   success,
   townAtHero,
 } from "./state.ts";
+import type { MapObject } from "../map/types.ts";
 import type {
   CommandResult,
   GameEvent,
@@ -59,7 +61,8 @@ export function captureTown(
 
 /**
  * Visits whatever object has its entrance under the hero, in place.
- * Returns a battle to start, if the visit starts one.
+ * Returns a battle to start, if the visit starts one. Pickups are not
+ * visited this way (they are taken from a next cell, bead bzc.49).
  */
 export function visitAtHero(
   state: GameState,
@@ -73,9 +76,24 @@ export function visitAtHero(
       o.kind !== "hero-start" &&
       o.kind !== "monster" &&
       o.kind !== "buried" &&
-      o.kind !== "gate",
+      o.kind !== "gate" &&
+      !isPickup(o),
   );
   if (obj === undefined) return null;
+  return visitObjectNow(state, hero, obj, events);
+}
+
+/**
+ * Visits `obj` for the hero, in place, wherever the hero stands (callers
+ * check the hero is on the entrance, or beside a pickup). Returns a battle
+ * to start, if the visit starts one.
+ */
+function visitObjectNow(
+  state: GameState,
+  hero: HeroState,
+  obj: MapObject,
+  events: GameEvent[],
+): PendingBattle | null {
   switch (obj.kind) {
     case "town": {
       const town = state.towns[obj.id];
@@ -145,6 +163,27 @@ export function visitAtHero(
 }
 
 /**
+ * After a won fight (bead bzc.49): the next guard of the pickup the hero
+ * reached for, or the pickup itself, taken from where the hero stands.
+ */
+export function takePickupAfterFight(
+  state: GameState,
+  hero: HeroState,
+  pickupId: string,
+  events: GameEvent[],
+): PendingBattle | null {
+  const obj = findObject(state.map, pickupId);
+  if (obj === undefined || state.collected.includes(pickupId)) return null;
+  if (!besidePickup(obj, hero.x, hero.y)) return null;
+  const ctx = moveContext(state, hero, { ignoreFog: true });
+  const guard = ctx.guards.get(obj.y * state.map.width + obj.x)?.[0];
+  if (guard !== undefined) {
+    return { kind: "monster", objectId: guard, heroId: hero.id, pickupId };
+  }
+  return visitObjectNow(state, hero, obj, events);
+}
+
+/**
  * The pending battle for `attackerId` attacking the hero `defenderId`. A
  * defender standing on its own town's entrance defends the town (fort,
  * no retreat, garrison next).
@@ -181,12 +220,17 @@ export function guardsAt(state: GameState, hero: HeroState): string[] {
  *   the guards, else the first guard in map object order);
  * - "object": it entered an object entrance that stops movement (visited);
  * - "attack": the next step is a neutral stack's cell (pendingBattle set);
+ * - "pickup": the last step is an uncollected pickup's cell (bead bzc.49):
+ *   the hero takes it from where it stands, at no movement cost; when that
+ *   cell lies in a zone of control the stop is "guarded" instead (the
+ *   first guard attacks, and the pickup is taken once every guard is
+ *   beaten: PendingBattle.pickupId);
  * - "no-mp": not enough MP for the next step (the rest stays for tomorrow).
  * Reaching the end ("arrived") on an object entrance visits it (own towns
  * produce a "visit-town" event for the UI).
  *
  * Fails with "bad-path" when a step that would be taken is not adjacent,
- * not enterable or cuts a corner.
+ * not enterable or cuts a corner (a pickup's cell anywhere but last).
  */
 export function moveHeroAlong(
   state: GameState,
@@ -217,6 +261,7 @@ export function moveHeroAlong(
   let spent = 0;
   let stop: MoveStopReason = "arrived";
   let battle: PendingBattle | null = null;
+  let pickup: MapObject | undefined;
 
   for (let i = 0; i < steps.length; i++) {
     const { x, y } = must(steps[i], "step");
@@ -237,6 +282,25 @@ export function moveHeroAlong(
       }
       battle = { kind: "monster", objectId: monsterId, heroId };
       stop = "attack";
+      break;
+    }
+    const pickupId = ctx.pickupAt.get(idx);
+    if (pickupId !== undefined) {
+      if (i !== steps.length - 1 || cutsCorner(ctx, hero.x, hero.y, x, y)) {
+        return fail("bad-path", `step ${i} runs into a pickup`);
+      }
+      pickup = findObject(map, pickupId);
+      const guards = ctx.guards.get(idx);
+      if (guards !== undefined) {
+        // In a zone of control: its guards attack first (RULES_V2 5.6).
+        battle = {
+          kind: "monster",
+          objectId: must(guards[0], "guard"),
+          heroId,
+          pickupId,
+        };
+        stop = "guarded";
+      } else stop = "pickup";
       break;
     }
     const enemyId = ctx.enemyHeroAt.get(idx);
@@ -295,6 +359,9 @@ export function moveHeroAlong(
   if (battle === null && (stop === "object" || stop === "arrived")) {
     battle = visitAtHero(next, hero, events);
   }
+  if (battle === null && stop === "pickup" && pickup !== undefined) {
+    battle = visitObjectNow(next, hero, pickup, events);
+  }
   if (battle !== null) {
     next.pendingBattle = battle;
     events.push({ type: "battle", battle });
@@ -303,9 +370,9 @@ export function moveHeroAlong(
 }
 
 /**
- * Visits the object the hero stands on (its entrance cell): re-opens an own
- * town, flags a mine, takes a pickup, offers a chest, or starts the battle
- * for an enemy town.
+ * Visits the object the hero stands on (its entrance cell), or a pickup
+ * next to it: re-opens an own town, flags a mine, takes a pickup, offers
+ * a chest, or starts the battle for an enemy town.
  */
 export function visitObject(
   state: GameState,
@@ -320,13 +387,25 @@ export function visitObject(
   if (blocked !== null) return blocked;
   const obj = findObject(state.map, objectId);
   if (obj === undefined) return fail("unknown-object", `no object ${objectId}`);
-  if (obj.x !== original.x || obj.y !== original.y) {
-    return fail("not-on-object", "the hero is not on the object's entrance");
+  const pickup = isPickup(obj);
+  if (
+    pickup
+      ? !besidePickup(obj, original.x, original.y)
+      : obj.x !== original.x || obj.y !== original.y
+  ) {
+    return fail(
+      "not-on-object",
+      pickup
+        ? "the hero is not next to the pickup"
+        : "the hero is not on the object's entrance",
+    );
   }
   const next = cloneState(state);
   const hero = must(findHero(next, heroId), "hero");
   const events: GameEvent[] = [];
-  const battle = visitAtHero(next, hero, events);
+  const battle = pickup
+    ? visitObjectNow(next, hero, obj, events)
+    : visitAtHero(next, hero, events);
   if (battle !== null) {
     next.pendingBattle = battle;
     events.push({ type: "battle", battle });
@@ -334,7 +413,7 @@ export function visitObject(
   return success(next, events);
 }
 
-/** Takes the treasure chest the hero stands on: 1000 gold or 750 XP. */
+/** Takes the treasure chest next to the hero: 1000 gold or 750 XP. */
 export function takeChest(
   state: GameState,
   heroId: string,
@@ -356,8 +435,8 @@ export function takeChest(
   ) {
     return fail("unknown-object", `no chest ${pickupId}`);
   }
-  if (obj.x !== original.x || obj.y !== original.y) {
-    return fail("not-on-object", "the hero is not on the chest");
+  if (!besidePickup(obj, original.x, original.y)) {
+    return fail("not-on-object", "the hero is not next to the chest");
   }
   if (choice !== "gold" && choice !== "xp") {
     return fail("bad-choice", `bad chest choice ${String(choice)}`);

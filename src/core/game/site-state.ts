@@ -88,6 +88,34 @@ export function isGone(state: GameState, obj: MapObject): boolean {
   return state.collected.includes(obj.id);
 }
 
+/**
+ * One-time pickups (RULES_V2 5.6, bead bzc.49): resource piles, chests,
+ * loose artifacts and scrolls, campfires, sealed boxes, the scholar, the
+ * fallen adventurer, prisons: every one-cell object that leaves the map
+ * once used. Until taken it blocks its cell; a hero takes it from any
+ * next cell. Buried treasure and event tiles (dug or stepped on) are not
+ * pickups, nor is anything bigger or lasting (mines, dwellings, towns,
+ * shrines, wells, banks: entered by stepping on their entrance).
+ */
+export function isPickup(obj: MapObject): boolean {
+  if (obj.kind === "pickup") return true;
+  if (obj.kind !== "site" && obj.kind !== "artifact") return false;
+  const def = objectTypeDef(obj);
+  if (def === null) return obj.kind === "artifact";
+  return (
+    def.vanishes &&
+    def.w === 1 &&
+    def.h === 1 &&
+    def.reset === "one-time" &&
+    def.id !== "event-tile"
+  );
+}
+
+/** Whether a hero at (x, y) can take the pickup: on it or next to it. */
+export function besidePickup(obj: MapObject, x: number, y: number): boolean {
+  return Math.max(Math.abs(obj.x - x), Math.abs(obj.y - y)) <= 1;
+}
+
 /** A hero standing on a Sanctuary's entrance cannot be attacked. */
 export function inSanctuary(state: GameState, x: number, y: number): boolean {
   return state.map.objects.some(

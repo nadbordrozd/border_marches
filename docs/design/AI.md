@@ -55,7 +55,16 @@ the most urgent action, in this order:
    stacks (what they guard plus a clearing value rising with the day plus
    the unexplored ground around them) and enemy heroes. Reach is the
    AI's own Dijkstra (`reach.ts`) that walks through object entrances a
-   visit only stops at, so ground behind a pickup in a narrow pass counts.
+   visit only stops at, so ground behind a site in a narrow pass counts.
+   Pickups block their cell (bead bzc.49, RULES_V2 5.6): a pickup is a
+   target at the cheapest next cell outside every zone and entrance, and
+   its walk ends by reaching for it; one whose cell lies in a zone gives
+   its value to the guarding stacks. Reach walks on through a pickup (it
+   is taken for free, then its cell is open), so ground behind one
+   counts, for a rival's reach too; a walk through one ends reaching for
+   it. A walk to any target also stops
+   beside a pickup worth having that it passes, takes it (free), and goes
+   on with the next decision.
 7. **Fights** (`strength.ts`): a fast fight-value ratio (hero Attack and
    Defense ~3% a point, the fort's Defense bonus) settles clear cases
    (below 0.8 lost, above 3 won); close calls are fought for real on a

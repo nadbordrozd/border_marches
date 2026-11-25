@@ -38,6 +38,7 @@ here.
 | GAME_DESIGN 11: should neutrals grow weekly?                              | No, not in v0.2                                                                                                     | 5.7     |
 | `StatusId` and `StatusInstance` (Venom) in `src/core/battle/types.ts`     | Conditions; Venom becomes the condition Venomed (Bloom, bane, size 3, clock 2), with the same numbers as before     | 1.3     |
 | ECONOMY 4: flags are permanent                                            | Flags are taken by visiting                                                                                         | 5.6     |
+| GAME_DESIGN 7.2: a pickup is collected by stepping onto it                | A pickup blocks its cell and is taken from any next cell; buildings and lasting sites are still stepped onto        | 5.6     |
 
 The four resources (gold, wood, ore, essence), the calendar, the square
 8-direction adventure grid, zones of control, the 15 x 11 hex field, the
@@ -1212,6 +1213,32 @@ when the defenders hold no living stack.
 - A flagged map dwelling keeps one stock; whoever holds the flag may
   recruit there with a hero on its cell.
 
+**Pickups are taken from the next cell; buildings are entered** (bead
+bzc.49):
+
+- A **pickup** is a one-cell object that leaves the map once used:
+  resource piles, treasure chests, loose artifacts and scrolls, campfires,
+  sealed boxes, the fallen adventurer, the scholar and prisons. Until it
+  is taken it **blocks its cell** like a rock. A hero takes it from any of
+  the 8 cells around it (never cutting a blocked corner). Clicking one
+  plans a walk to the cheapest such cell, preferring one outside every
+  zone of control and that is not another object's entrance; the walk
+  ends there and the hero reaches for it. Reaching costs no movement
+  points, so a hero already beside a pickup takes it at once. Once taken,
+  the cell is open ground. A pickup that cannot be taken (no room in the
+  backpack or scroll case) stays and keeps blocking its cell.
+- A pickup whose own cell lies in a neutral stack's zone of control is
+  fought for: reaching for it starts the fight with that stack (the first
+  in map order), as entering the cell did, and the pickup is taken once
+  every stack guarding its cell is beaten. A pickup outside every zone
+  but reachable only from guarded cells is fought for by walking into the
+  zone, as usual.
+- **Buildings and lasting sites** (towns, mines, map dwellings, shrines,
+  wells, banks, producers, waystones, gates and every other object that
+  stays on the map) are still entered by stepping onto their entrance,
+  which stops the walk; mines and dwellings are flagged that way. Buried
+  treasure is dug on its cell and an event tile triggers when entered.
+
 ### 5.7 Neutral stacks
 
 Zones of control, guard sizing and the split into up to three stacks are
@@ -1345,6 +1372,7 @@ These map the rules onto the existing code; they add no rules.
 | Neutrals do not grow                                                                                   | Keeps guard value in proportion to prizes on maze maps and gives the AI a stable target                                      |
 | Morale and luck become four ordinary conditions placed at battle start                                 | Deterministic, visible, and movable like every other condition; no new subsystem                                             |
 | The global start-of-day step pays every player before player 0 moves                                   | Simpler than per-turn upkeep and no player gains from order                                                                  |
+| Pickups block their cell and are taken from a next cell; buildings are still entered (5.6)             | The hero visibly stops beside what it picks up instead of riding over it; capturing a building still means standing on it    |
 
 ### 8.2 The concept's "left for fleshing out"
 

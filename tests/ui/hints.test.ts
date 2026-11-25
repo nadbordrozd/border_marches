@@ -102,6 +102,26 @@ describe("pathSummary", () => {
     expect(pathLine(sum)).toBe("In 2 days: 1700 moves, 1000 moves left");
   });
 
+  it("says when the walk ends by picking something up (bead bzc.49)", () => {
+    const s = fresh();
+    const h = hero(s);
+    h.mp = 1000;
+    h.maxMp = 1500;
+    const path: Path = {
+      steps: [step(1, 300, 300, 0), { ...step(2, 0, 300, 0), pickup: true }],
+      total: 300,
+    };
+    const sum = pathSummary(path, h);
+    expect(sum.pickup).toBe(true);
+    expect(pathLine(sum)).toBe("Today: 300 moves, then pick up");
+    expect(nextActionHint(s, 0, h, sum)).toMatch(/pick it up/);
+    const beside: Path = {
+      steps: [{ ...step(2, 0, 0, 0), pickup: true }],
+      total: 0,
+    };
+    expect(pathLine(pathSummary(beside, h))).toBe("Pick up: right next to you");
+  });
+
   it("agrees with a real path on a generated map", () => {
     const s = fresh();
     const h = hero(s);
