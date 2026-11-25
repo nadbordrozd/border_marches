@@ -28,6 +28,9 @@ import type {
   HeroState,
 } from "../game/types.ts";
 import { adventureMagicBonus, spellPowerBonus } from "../game/effects.ts";
+import { objectTypeOf, playerListed } from "../game/site-state.ts";
+import { secondHelping, secondHelpingError } from "../game/sites.ts";
+import type { MapObject } from "../map/types.ts";
 import { adventureSpell, spellInfo } from "./catalog.ts";
 import type { AdventureSpellDef } from "./catalog.ts";
 import { guildLevelOf, learnableFromGuild, townGuild } from "./guild.ts";
@@ -45,6 +48,8 @@ export const DAILY_MP_CAP = 3000;
 export const GREEN_ROAD_COST = 200;
 /** Ask the Dead's range from the hero. */
 export const ASK_RANGE = 15;
+/** Tow Line needs at least this much movement, and spends all of it. */
+export const TOW_LINE_MIN_MP = 300;
 
 export interface AdventureTarget {
   /** Parley, Opening Salvo: the neutral stack. */
@@ -120,7 +125,40 @@ export function adventureCastError(
   if (s.deferred) return `not on this map: ${s.deferred}`;
   if (typeof s.moveCost === "number" && hero.mp < s.moveCost)
     return `needs ${s.moveCost} movement`;
+  if (s.moveCost === "all" && hero.mp < TOW_LINE_MIN_MP)
+    return `needs at least ${TOW_LINE_MIN_MP} movement`;
+  if (spellId === "tow-line") {
+    if (pylonAtHero(state, hero) === undefined) return "stand on a pylon";
+    if (towLineStops(state, hero).length === 0)
+      return "no other pylon your player has marked";
+  }
+  if (spellId === "second-helping") return secondHelpingError(state, hero);
   return null;
+}
+
+/** The pylon whose cell the hero stands on, if any. */
+export function pylonAtHero(
+  state: GameState,
+  hero: HeroState,
+): MapObject | undefined {
+  return state.map.objects.find(
+    (o) => o.x === hero.x && o.y === hero.y && objectTypeOf(o) === "pylon",
+  );
+}
+
+/**
+ * Where Tow Line can take the hero (RULES_V2 2.8): every other pylon its
+ * player has marked by visiting, not held by a hero.
+ */
+export function towLineStops(state: GameState, hero: HeroState): MapObject[] {
+  const here = pylonAtHero(state, hero);
+  return state.map.objects.filter(
+    (o) =>
+      objectTypeOf(o) === "pylon" &&
+      o.id !== here?.id &&
+      playerListed(state, o.id, hero.owner) &&
+      !state.heroes.some((h) => h.alive && h.x === o.x && h.y === o.y),
+  );
 }
 
 type Effect = (
@@ -239,6 +277,26 @@ const EFFECTS: Readonly<Record<string, Effect>> = {
     for (const c of found)
       if (!merged.some((x) => x[0] === c[0] && x[1] === c[1])) merged.push(c);
     next.magic = { ...m, marks: { ...(m.marks ?? {}), [player]: merged } };
+    return null;
+  },
+  "second-helping": (next, hero, p, _t, events) =>
+    secondHelping(next, hero, 100 + 40 * p, events),
+  "tow-line": (next, hero, _p, t, events) => {
+    if (pylonAtHero(next, hero) === undefined) return "stand on a pylon";
+    const to = towLineStops(next, hero).find((o) => o.id === t.objectId);
+    if (to === undefined) return "choose another pylon your player has marked";
+    hero.x = to.x;
+    hero.y = to.y;
+    hero.mp = 0;
+    const player = findPlayer(next, hero.owner);
+    if (player) revealDisc(next.map, player.explored, to.x, to.y, 4);
+    events.push({
+      type: "teleported",
+      heroId: hero.id,
+      x: to.x,
+      y: to.y,
+      via: "tow-line",
+    });
     return null;
   },
   "opening-salvo": (next, hero, p, t, events) => {

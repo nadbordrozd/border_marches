@@ -68,9 +68,8 @@ export const ADVENTURE_SPELLS: readonly AdventureSpellDef[] = [
     mana: 10,
     target: "none",
     scale: { base: 100, per: 40 },
-    deferred: "v0.2 maps have no map dwellings, outposts or stray huts yet",
     text: (p) =>
-      `The dwelling the hero stands on gains creatures worth ${100 + 40 * p} fight value (once a week).`,
+      `The map dwelling the hero stands on (flying your flag) gains creatures worth ${100 + 40 * p} fight value (once a week per dwelling).`,
   }),
   A({
     id: "parley",
@@ -149,7 +148,6 @@ export const ADVENTURE_SPELLS: readonly AdventureSpellDef[] = [
     moveCost: "all",
     target: "pylon",
     scale: null,
-    deferred: "v0.2 maps have no pylons yet",
     text: () =>
       "From a pylon, move to any pylon you have visited (all movement, at least 300).",
   }),

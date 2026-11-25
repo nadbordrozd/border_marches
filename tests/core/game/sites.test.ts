@@ -584,9 +584,112 @@ describe("services and teleports", () => {
   });
 
   it("a pylon is marked once per player", () => {
-    const s = gameOn(field(4, 1), [site("py", "pylon", 1, 0)]);
+    const s = gameOn(field(4, 1), [site("py", "pylon", 1, 0, { value: 500 })]);
+    expect(
+      objectValueFor(
+        s,
+        0,
+        s.map.objects.find((o) => o.id === "py")!,
+      ),
+    ).toBe(500);
     const a = step(s, 1, 0).state;
     expect(a.sites["py"]?.players).toEqual([0]);
+    expect(
+      objectValueFor(
+        a,
+        0,
+        a.map.objects.find((o) => o.id === "py")!,
+      ),
+    ).toBe(0);
+  });
+
+  it("a one-way waystone moves the hero to its exit, worth nothing as a prize", () => {
+    const s = gameOn(field(8, 2), [
+      site("ow", "one-way-waystone", 1, 0, { exit: [6, 1] }),
+    ]);
+    const ow = s.map.objects.find((o) => o.id === "ow")!;
+    expect(objectValueFor(s, 0, ow)).toBe(0);
+    expect(describeObject(s, 0, ow)[1]).toMatch(/exit is at \(6, 1\)/);
+    const a = step(s, 1, 0);
+    expect([hero(a.state).x, hero(a.state).y]).toEqual([6, 1]);
+    expect(a.events).toContainEqual({
+      type: "teleported",
+      heroId: "hero-0",
+      x: 6,
+      y: 1,
+    });
+    expect(a.state.players[0]!.explored[1 * 8 + 7]).toBe(true);
+  });
+});
+
+describe("drill yards (ECONOMY 6.3)", () => {
+  /** A hero leading `army` beside a drill yard, its player holding `gold`. */
+  const yard = (army: Array<[string, number]>, gold: number): GameState => {
+    const s = gameOn(field(5, 2), [site("dy", "drill-yard", 1, 1)], 0, 1);
+    const h = hero(s);
+    h.army = h.army.map(() => null);
+    army.forEach(([creature, count], i) => {
+      h.army[i] = { creature: creature as never, count };
+    });
+    s.players[0]!.resources.gold = gold;
+    return s;
+  };
+  const dy = (s: GameState): MapObject =>
+    s.map.objects.find((o) => o.id === "dy")!;
+
+  it("sells the Drills of the hero's creatures at twice the town gold", () => {
+    const s = yard(
+      [
+        ["longbowman", 10],
+        ["knight", 2],
+        ["goblin", 30],
+      ],
+      6700,
+    );
+    // Butts 1000 and Tiltyard 2500 gold in town; Mosh Pit 800.
+    expect(objectValueFor(s, 0, dy(s))).toBe(1000 + 2500 + 800);
+    const a = step(s, 1, 1);
+    const ev = a.events.find((e) => e.type === "site");
+    const opts = ev?.type === "site" ? (ev.options ?? []) : [];
+    expect(opts.map((o) => o.id)).toEqual([
+      "drill:butts",
+      "drill:tiltyard",
+      "drill:mosh-pit",
+    ]);
+    expect(opts[0]!.label).toMatch(/2000 gold/);
+    expect(describeObject(a.state, 0, dy(a.state))[1]).toMatch(
+      /Butts \(2000 gold\), Tiltyard \(5000 gold\), Mosh Pit \(1600 gold\)/,
+    );
+    expect(opts.every((o) => o.disabled === undefined)).toBe(true);
+    const b = ok(useSite(a.state, "hero-0", "dy", "drill:tiltyard"));
+    expect(b.state.players[0]!.drills).toEqual(["knight:follow-through"]);
+    expect(b.state.players[0]!.resources.gold).toBe(1700);
+    expect(b.events).toContainEqual({
+      type: "drill",
+      player: 0,
+      creature: "knight",
+      ability: "follow-through",
+    });
+    // Owned now; the Butts (2000) is beyond the gold left.
+    const left = siteOptions(b.state, hero(b.state), dy(b.state));
+    expect(left.map((o) => o.id)).toEqual(["drill:butts", "drill:mosh-pit"]);
+    expect(left[0]!.disabled).toBe("not enough gold");
+    expect(errorOf(useSite(b.state, "hero-0", "dy", "drill:butts"))).toBe(
+      "bad-choice",
+    );
+    expect(errorOf(useSite(b.state, "hero-0", "dy", "drill:tiltyard"))).toBe(
+      "bad-choice",
+    );
+    // Only the affordable Mosh Pit still counts for the AI.
+    expect(objectValueFor(b.state, 0, dy(b.state))).toBe(800);
+  });
+
+  it("has nothing for an army without drillable creatures", () => {
+    const s = yard([["gremlin", 5]], 50000);
+    expect(objectValueFor(s, 0, dy(s))).toBe(0);
+    const a = step(s, 1, 1);
+    expect(texts(a.events)[0]).toMatch(/nothing to teach/);
+    expect(siteOptions(a.state, hero(a.state), dy(a.state))).toEqual([]);
   });
 });
 

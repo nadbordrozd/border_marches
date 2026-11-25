@@ -218,6 +218,9 @@ export function minDaysForValue(value: number): number {
   return 0;
 }
 
+/** Fill weight of the Drill Yard in middle and neutral-town zones. */
+const DRILL_YARD_WEIGHT = 3;
+
 /** Every object type the generator places, by row id. */
 export const MAP_OBJECT_ROWS: readonly MapObjectRow[] = [
   pile("wood", [5, 10, 1], { start: 3, middle: 3, town: 3, hold: 1 }),
@@ -259,6 +262,14 @@ export const MAP_OBJECT_ROWS: readonly MapObjectRow[] = [
       minDays: 1,
     },
   ),
+  // Last, so that a map generated without it (the named maps) draws from
+  // exactly the table it was authored with. Its count per map is capped by
+  // the generator's `objects.perMap` (bead bzc.32).
+  {
+    ...catalogueRow(OBJECT_TYPES["drill-yard"]),
+    weights: { middle: DRILL_YARD_WEIGHT, town: DRILL_YARD_WEIGHT },
+    perZone: 1,
+  },
 ];
 
 /**
@@ -273,6 +284,7 @@ export const RULE_ROWS: readonly MapObjectRow[] = (
     "buried-cache",
     "pylon",
     "two-way-waystone",
+    "one-way-waystone",
     "keymasters-tent",
     "keepers-vault",
   ] as const

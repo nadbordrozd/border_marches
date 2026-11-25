@@ -17,11 +17,16 @@ import { cloneState } from "../../../src/core/game/state.ts";
 import { engineSetupFromGame } from "../../../src/core/battle/index.ts";
 import {
   ADVENTURE_SPELLS,
+  adventureCastError,
+  adventurePower,
   castAdventureSpell,
   heroMagic,
   teachSpell,
+  towLineStops,
   withHeroMagic,
 } from "../../../src/core/magic/index.ts";
+import type { MapObject } from "../../../src/core/map/types.ts";
+import { getCreature } from "../../../src/data/creatures.ts";
 import {
   errorOf,
   field,
@@ -158,16 +163,159 @@ describe("casting adventure spells", () => {
     expect(heroMagic(hero(s1))).toMatchObject({ mana: 10, scrolls: [] });
   });
 
-  it("deferred spells refuse with the reason", () => {
-    const s0 = learn(gameOn(field(5, 5), []), ["tow-line", "second-helping"], {
-      ranks: { bloom: 3, accord: 1, clock: 1, hush: 1, storm: 3 },
-      mana: 50,
-    });
-    expect(cast(s0, "hero-0", "tow-line")).toMatchObject({
+  it("no adventure spell is deferred any more", () => {
+    expect(ADVENTURE_SPELLS.filter((s) => s.deferred)).toEqual([]);
+  });
+});
+
+/** A 1x1 catalogue object at (x, y). */
+function obj(
+  id: string,
+  type: string,
+  x: number,
+  y: number,
+  data: Record<string, unknown> = {},
+): MapObject {
+  const kind = type === "pylon" ? "site" : "dwelling";
+  return {
+    id,
+    kind,
+    x,
+    y,
+    footprint: { w: 1, h: 1 },
+    blocked: [],
+    data: { type, ...data },
+  };
+}
+
+describe("Tow Line (RULES_V2 2.8)", () => {
+  /** Pylons at x = 2, 6 and 9 of a 12x3 field; the hero at (1, 1). */
+  const pylons = (): GameState =>
+    learn(
+      gameOn(
+        field(12, 3),
+        [
+          obj("p1", "pylon", 2, 1),
+          obj("p2", "pylon", 6, 1),
+          obj("p3", "pylon", 9, 1),
+        ],
+        1,
+        1,
+      ),
+      ["tow-line"],
+      { ranks: { storm: 2 }, mana: 30 },
+    );
+  /** The hero steps onto p1 (marking it); p2 is marked by the player too. */
+  const onP1 = (): GameState => {
+    const s = ok(moveHeroAlong(pylons(), "hero-0", [{ x: 2, y: 1 }])).state;
+    s.sites["p2"] = { players: [0] };
+    return s;
+  };
+
+  it("needs a pylon underfoot and another marked pylon", () => {
+    const s0 = pylons();
+    expect(cast(s0, "hero-0", "tow-line", { objectId: "p2" })).toMatchObject({
       ok: false,
-      message: "not on this map: v0.2 maps have no pylons yet",
+      message: "stand on a pylon",
     });
-    expect(cast(s0, "hero-0", "second-helping")).toMatchObject({ ok: false });
+    const s1 = ok(moveHeroAlong(s0, "hero-0", [{ x: 2, y: 1 }])).state;
+    expect(s1.sites["p1"]?.players).toEqual([0]);
+    expect(towLineStops(s1, hero(s1))).toEqual([]);
+    expect(adventureCastError(s1, hero(s1), "tow-line")).toBe(
+      "no other pylon your player has marked",
+    );
+  });
+
+  it("hauls the hero to a marked pylon for all its movement", () => {
+    const s0 = onP1();
+    expect(towLineStops(s0, hero(s0)).map((o) => o.id)).toEqual(["p2"]);
+    const r = ok(cast(s0, "hero-0", "tow-line", { objectId: "p2" }));
+    expect([hero(r.state).x, hero(r.state).y]).toEqual([6, 1]);
+    expect(hero(r.state).mp).toBe(0);
+    expect(heroMagic(hero(r.state)).mana).toBe(30 - 14);
+    expect(r.events).toContainEqual({
+      type: "teleported",
+      heroId: "hero-0",
+      x: 6,
+      y: 1,
+      via: "tow-line",
+    });
+  });
+
+  it("refuses an unmarked pylon, an occupied one and a tired hero", () => {
+    const s0 = onP1();
+    expect(cast(s0, "hero-0", "tow-line", { objectId: "p3" })).toMatchObject({
+      ok: false,
+      message: "choose another pylon your player has marked",
+    });
+    expect(cast(s0, "hero-0", "tow-line", {})).toMatchObject({ ok: false });
+    const busy = cloneState(s0);
+    busy.heroes.push({ ...hero(busy), id: "hero-x", x: 6, y: 1 });
+    expect(towLineStops(busy, hero(busy))).toEqual([]);
+    const tired = cloneState(s0);
+    hero(tired).mp = 299;
+    expect(cast(tired, "hero-0", "tow-line", { objectId: "p2" })).toMatchObject(
+      { ok: false, message: "needs at least 300 movement" },
+    );
+  });
+});
+
+describe("Second Helping (CONTENT_SPELLS 4)", () => {
+  const hut = (): GameState =>
+    learn(
+      gameOn(field(5, 1), [
+        obj("hut", "stray-hut", 1, 0, { creature: "gremlin" }),
+      ]),
+      ["second-helping"],
+      { ranks: { bloom: 2 }, mana: 40 },
+    );
+
+  it("feeds the flagged dwelling underfoot once a week", () => {
+    const s0 = hut();
+    expect(cast(s0, "hero-0", "second-helping")).toMatchObject({
+      ok: false,
+      message: "stand on a map dwelling, outpost or stray hut",
+    });
+    const s1 = ok(moveHeroAlong(s0, "hero-0", [{ x: 1, y: 0 }])).state;
+    expect(s1.sites["hut"]?.stock).toBe(8);
+    const p = adventurePower(hero(s1), "second-helping", false);
+    const n = Math.max(
+      1,
+      Math.floor((100 + 40 * p) / getCreature("gremlin").fightValue),
+    );
+    const r = ok(cast(s1, "hero-0", "second-helping"));
+    expect(r.state.sites["hut"]?.stock).toBe(8 + n);
+    const ev = r.events.find((e) => e.type === "site");
+    expect(ev?.type === "site" && ev.options?.[0]?.id).toMatch(/^hire:/);
+    // The next day of the same week: refused.
+    const s2 = ok(endDay(r.state)).state;
+    expect(s2.day).toBe(2);
+    expect(cast(s2, "hero-0", "second-helping")).toMatchObject({
+      ok: false,
+      message: "the dwelling already had a second helping this week",
+    });
+    expect(s2.sites["hut"]?.stock).toBe(8 + n);
+  });
+
+  it("adds at least one creature, and only to a dwelling of your flag", () => {
+    const s1 = ok(moveHeroAlong(hut(), "hero-0", [{ x: 1, y: 0 }])).state;
+    const strong = cloneState(s1);
+    strong.map.objects = strong.map.objects.map((o) =>
+      o.id === "hut"
+        ? { ...o, data: { ...o.data, creature: "fire-eater" } }
+        : o,
+    );
+    delete strong.sites["hut"]!.stockWeek;
+    const p = adventurePower(hero(strong), "second-helping", false);
+    expect(getCreature("fire-eater").fightValue).toBeGreaterThan(100 + 40 * p);
+    const r = ok(cast(strong, "hero-0", "second-helping"));
+    expect(r.state.sites["hut"]!.stock).toBe(2 + 1);
+    const other = cloneState(s1);
+    other.sites["hut"]!.owner = 1;
+    expect(cast(other, "hero-0", "second-helping")).toMatchObject({
+      ok: false,
+      message: "the dwelling must fly your flag",
+    });
   });
 });
 

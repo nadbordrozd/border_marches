@@ -271,7 +271,7 @@ const ROWS: readonly Row[] = [
   // prettier-ignore
   ["tollhouse", "Tollhouse", "site", 2, 2, "", "each-visit", 0, [], 3, "Sells three items at their value and buys artifacts and scrolls at half value. New stock each week."],
   // prettier-ignore
-  ["drill-yard", "Drill Yard", "site", 2, 2, "", "each-visit", 0, [], 0, "Applies a faction Drill to the hero's stacks (waits for the faction rules)."],
+  ["drill-yard", "Drill Yard", "site", 2, 2, "", "each-visit", 0, [], 0, "Sells the Drill of a creature in the hero's army for twice its town gold cost: a permanent flag for your player."],
   // prettier-ignore
   ["curse-lifters-shrine", "Curse-Lifter's Shrine", "site", 1, 1, "", "each-visit", 0, [], 2, "Lifts one worn cursed artifact for 1000 gold and 2 essence."],
   // prettier-ignore
@@ -340,6 +340,9 @@ export const SHOVEL_DIG_MP = 300;
 /** Bonus movement of stables (per day) and an oasis (today). */
 export const STABLES_MP = 300;
 export const OASIS_MP = 400;
+
+/** A drill yard sells a Drill for this many times its town gold cost (ECONOMY 6.3). */
+export const DRILL_YARD_MARKUP = 2;
 
 /** Heroes a player may hold (a prison's hero needs a free place). */
 export const MAX_HEROES = 8;

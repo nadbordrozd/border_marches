@@ -429,6 +429,10 @@ export function placeObjects(st: GenState): PlacementReport {
     }
   }
 
+  // Rows drawn so far on the whole map, for the per-map caps.
+  const drawn = new Map<string, number>();
+  const capOf = (row: MapObjectRow): number =>
+    oc.perMap[row.id]?.[st.size]?.[1] ?? Infinity;
   const drawRow = (
     r: Rng,
     kind: MapZoneKind,
@@ -439,14 +443,19 @@ export function placeObjects(st: GenState): PlacementReport {
       (row) =>
         (row.weights[kind] ?? 0) > 0 &&
         (row.perZone === undefined || (count.get(row.id) ?? 0) < row.perZone) &&
+        (drawn.get(row.id) ?? 0) < capOf(row) &&
         filter(row),
     );
     if (rows.length === 0) return undefined;
-    return r.weighted(
+    const row = r.weighted(
       rows,
-      rows.map((row) => row.weights[kind] ?? 0),
+      rows.map((x) => x.weights[kind] ?? 0),
     );
+    drawn.set(row.id, (drawn.get(row.id) ?? 0) + 1);
+    return row;
   };
+
+  const kitRequests = requests.length;
 
   // Pocket prizes: one guard-worthy prize and a few more.
   const prng = stageRng(st, "pockets");
@@ -455,8 +464,15 @@ export function placeObjects(st: GenState): PlacementReport {
     const n = prng.int(...oc.pocketPrizes);
     const count = new Map<string, number>();
     for (let c = 0; c < n; c++) {
-      const row = drawRow(prng, kind, count, (r) =>
-        c === 0 ? r.value >= FREE_VALUE[kind] : true,
+      // Rows counted per map (services such as the Drill Yard) stay out
+      // of the dead ends: a pocket holds treasure.
+      const row = drawRow(
+        prng,
+        kind,
+        count,
+        (r) =>
+          oc.perMap[r.id] === undefined &&
+          (c === 0 ? r.value >= FREE_VALUE[kind] : true),
       );
       if (!row) continue;
       count.set(row.id, (count.get(row.id) ?? 0) + 1);
@@ -546,6 +562,46 @@ export function placeObjects(st: GenState): PlacementReport {
       });
     }
   }
+  // Rows the fill drew fewer times than their per-map minimum go into a
+  // random zone where they may appear (their own random stream: a map
+  // with no minimum is unchanged).
+  for (const [id, bySize] of Object.entries(oc.perMap)) {
+    const least = bySize[st.size]?.[0] ?? 0;
+    const row = oc.table.find((r) => r.id === id);
+    if (row === undefined || (drawn.get(id) ?? 0) >= least) continue;
+    const urng = stageRng(st, `per-map:${id}`);
+    const zones = st.zones.filter(
+      (z) => z.role !== "start" && (row.weights[z.role] ?? 0) > 0,
+    );
+    while (zones.length > 0 && (drawn.get(id) ?? 0) < least) {
+      const z = urng.pick(zones);
+      const data = roll(urng, row, tierOf(z.id));
+      const value = valueOf(row, data);
+      drawn.set(id, (drawn.get(id) ?? 0) + 1);
+      requests.push({
+        row,
+        data,
+        value,
+        zones: [z.id],
+        minCost: 0,
+        maxCost: Infinity,
+        minFar: farFor(row, value),
+        required: false,
+        pocket: -1,
+        guarded: guardedIn(row, value, z.id, data),
+        label: `per-map ${row.id} in zone ${z.id}`,
+      });
+    }
+  }
+  // Rows counted per map are few and big: right after the start kits, they
+  // find a site before the fill crowds their zone (no such row, no change).
+  const counted = (r: Request): boolean =>
+    oc.perMap[r.row.id] !== undefined && r.pocket < 0;
+  const rest = requests.splice(kitRequests);
+  requests.push(
+    ...rest.filter((r) => counted(r)),
+    ...rest.filter((r) => !counted(r)),
+  );
 
   // Objects placed by rule (CONTENT_MAP_OBJECTS 3.6, 3.9, 3.4): obelisks,
   // the buried Keystone and caches, waystone pairs, pylons, the vault.
@@ -977,7 +1033,103 @@ export function placeObjects(st: GenState): PlacementReport {
   }
   // Quests name placed objects and guards (CONTENT_MAP_OBJECTS section 5).
   assignQuests(st, stageRng(st, "quests"));
+  placeOneWayWaystones(st, {
+    free: (i) =>
+      free(i) &&
+      (pocketOf[i] ?? -1) < 0 &&
+      (crowd[i] ?? 0) < 2 &&
+      ringCost(i) >= oc.oneWayMinDays * day,
+    zoneCells,
+    row: ruleRow("one-way-waystone"),
+    nextId,
+    markCrowd,
+  });
   return report;
+}
+
+/**
+ * One-way waystones (CONTENT_MAP_OBJECTS 3.9, a stretch type), placed last
+ * from their own random stream so that nothing else on the map depends on
+ * them (with none configured, the map is unchanged).
+ *
+ * Rules: the entrance and its exit lie in two different wild zones (middle
+ * or neutral-town zones; never a start zone, the Hold's zone or a guarded
+ * pocket); the exit's zone is no deeper (tier) than the entrance's, so a
+ * waystone never skips a guard into richer land; both ends keep
+ * `oneWayMinDays` from every start (no shortcut out of or into a home);
+ * neither end touches a guard's zone of control or another object; the
+ * entrance is off the roads. A zone holds at most one entrance.
+ */
+function placeOneWayWaystones(
+  st: GenState,
+  ctx: {
+    /** An open cell an end may use (spacing, pockets, starts checked). */
+    free: (i: number) => boolean;
+    zoneCells: readonly number[][];
+    row: MapObjectRow | undefined;
+    nextId: (prefix: string) => string;
+    markCrowd: (cells: readonly number[]) => void;
+  },
+): void {
+  const { g, cfg } = st;
+  const count = cfg.objects.oneWayWaystones[st.size] ?? 0;
+  if (count <= 0 || ctx.row === undefined) return;
+  const rng = stageRng(st, "one-way");
+  // Guards' zones of control (the 3x3 round each stack).
+  const zoc = new Uint8Array(g.n);
+  for (const o of st.objects) {
+    if (o.kind !== "monster") continue;
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) {
+        if (g.inside(o.x + dx, o.y + dy)) zoc[g.idx(o.x + dx, o.y + dy)] = 1;
+      }
+    }
+  }
+  const ok = (i: number): boolean => zoc[i] === 0 && ctx.free(i);
+  const wild = st.zones.filter((z) => z.role === "middle" || z.role === "town");
+  const order = rng.shuffle(wild.map((z) => z.id));
+  let placed = 0;
+  for (const a of order) {
+    if (placed >= count) break;
+    const za = st.zones[a];
+    if (za === undefined) continue;
+    const entrances = (ctx.zoneCells[a] ?? []).filter(
+      (i) => ok(i) && st.road[i] === 0,
+    );
+    if (entrances.length === 0) continue;
+    const exitZones = rng.shuffle(
+      wild.filter((z) => z.id !== a && z.tier <= za.tier).map((z) => z.id),
+    );
+    let exit = -1;
+    for (const b of exitZones) {
+      const cells = (ctx.zoneCells[b] ?? []).filter(ok);
+      if (cells.length > 0) {
+        exit = rng.pick(cells);
+        break;
+      }
+    }
+    if (exit < 0) continue;
+    const e = rng.pick(entrances);
+    st.objects.push({
+      id: ctx.nextId(ctx.row.id),
+      kind: ctx.row.kind,
+      x: g.x(e),
+      y: g.y(e),
+      footprint: { w: 1, h: 1 },
+      blocked: [],
+      data: {
+        ...ctx.row.data,
+        type: ctx.row.type,
+        exit: [g.x(exit), g.y(exit)],
+        value: 0,
+      },
+    });
+    st.occupied[e] = 1;
+    // The exit is an ordinary cell, but nothing may stand on it.
+    st.occupied[exit] = 1;
+    ctx.markCrowd([e, exit]);
+    placed++;
+  }
 }
 
 /**

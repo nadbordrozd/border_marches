@@ -161,7 +161,10 @@ describe("doodads", () => {
     const open = map.cells.filter(
       (c) => c.terrain !== "water" && c.obstacle === "none",
     ).length;
-    expect(placed.length).toBeGreaterThan(open * 0.4);
+    // Generated M maps run 33-40% decorated (more objects, fewer doodads);
+    // this one was 40.4% before the generator placed drill yards and
+    // one-way waystones (bead bzc.32) and is 39.2% now.
+    expect(placed.length).toBeGreaterThan(open * 0.37);
     expect(placeDoodads(map, layout, featured)).toEqual(placed);
   });
 

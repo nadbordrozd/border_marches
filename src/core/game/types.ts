@@ -198,6 +198,8 @@ export interface SiteState {
   /** Tollhouse: indices of this week's stock already sold, and the week. */
   sold?: number[];
   soldWeek?: number;
+  /** A map dwelling: the week Second Helping last added to its stock. */
+  helpedWeek?: number;
 }
 
 export interface DwellingState {
@@ -348,7 +350,14 @@ export type GameEvent =
       options?: SiteOption[];
     }
   /** A hero moved by a waystone. */
-  | { type: "teleported"; heroId: string; x: number; y: number }
+  | {
+      type: "teleported";
+      heroId: string;
+      x: number;
+      y: number;
+      /** What carried the hero (absent: a waystone). */
+      via?: "tow-line";
+    }
   /** A dig: what was found (null: nothing). */
   | { type: "dug"; heroId: string; found: string | null }
   | { type: "hero-freed"; heroId: string; player: number }

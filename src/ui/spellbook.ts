@@ -18,6 +18,7 @@ import {
   isBattleSpell,
   spellDef,
   storeOf,
+  towLineStops,
 } from "../core/magic/index.ts";
 import type {
   AdventureSpellDef,
@@ -180,7 +181,11 @@ export function openAdventureBook(
         );
         actions.append(input, b);
       } else if (s.target === "pylon") {
-        pick({});
+        const stops = towLineStops(state, hero);
+        if (stops.length === 0)
+          actions.append(el("span.gm-dim", "No other marked pylon."));
+        for (const o of stops)
+          pick({ objectId: o.id }, `To the pylon at ${o.x},${o.y}`);
       } else {
         const opts = targetOptions(state, hero, s, power);
         if (opts.length === 0)

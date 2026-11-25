@@ -1404,7 +1404,12 @@ class GameScreen {
         }
         case "teleported": {
           const h = this.state.heroes.find((x) => x.id === e.heroId);
-          if (h?.owner === this.human) this.note("The waystone carries you.");
+          if (h?.owner === this.human)
+            this.note(
+              e.via === "tow-line"
+                ? "The tow line hauls you to the pylon."
+                : "The waystone carries you.",
+            );
           break;
         }
         case "dug":

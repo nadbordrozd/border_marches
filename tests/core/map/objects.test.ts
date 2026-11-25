@@ -3,10 +3,18 @@
  * value-proportional guards, rule-placed objects, quests and contents.
  */
 import { describe, expect, it } from "vitest";
-import { generateMap } from "../../../src/core/map/generate.ts";
+import {
+  generateMap,
+  generateMapWithInfo,
+} from "../../../src/core/map/generate.ts";
 import { mapDensity } from "../../../src/core/map/density.ts";
 import type { GameMap, MapObject } from "../../../src/core/map/types.ts";
-import { validateMap } from "../../../src/core/map/types.ts";
+import {
+  cellAt,
+  isPassable,
+  objectCells,
+  validateMap,
+} from "../../../src/core/map/types.ts";
 import {
   OBJECT_TYPES,
   type ObjectTypeId,
@@ -47,12 +55,7 @@ describe("catalogue placement", () => {
     for (const seed of [1, 2, 3, 4]) {
       for (const o of map(seed, "L").objects) seen.add(typeOf(o));
     }
-    const authored: ObjectTypeId[] = [
-      "event-tile",
-      "sign",
-      "drill-yard",
-      "one-way-waystone",
-    ];
+    const authored: ObjectTypeId[] = ["event-tile", "sign"];
     for (const t of Object.keys(OBJECT_TYPES) as ObjectTypeId[]) {
       if (authored.includes(t)) continue;
       expect(seen, t).toContain(t);
@@ -169,5 +172,133 @@ describe("catalogue placement", () => {
     });
     expect(s.sites).toEqual({});
     expect(Object.keys(s.mines).length).toBeGreaterThan(6);
+  });
+});
+
+describe("one-way waystones (stretch, bead bzc.32)", () => {
+  const ways = (m: GameMap): MapObject[] =>
+    m.objects.filter((o) => typeOf(o) === "one-way-waystone");
+
+  it("places one per size step, exits in another wild zone no deeper, far from starts", () => {
+    let total = 0;
+    for (const [seed, size, most] of [
+      [4, "S", 1],
+      [2, "M", 2],
+      [1, "L", 3],
+      [3, "L", 3],
+    ] as const) {
+      const { map: m, info } = generateMapWithInfo(seed, { size });
+      expect(validateMap(m)).toEqual([]);
+      const list = ways(m);
+      expect(list.length, `${size}${seed}`).toBeGreaterThanOrEqual(1);
+      expect(list.length).toBeLessThanOrEqual(most);
+      total += list.length;
+      const zoneAt = (x: number, y: number) =>
+        info.zones[m.zones?.[y * m.width + x] ?? -1];
+      const taken = new Set<string>();
+      for (const o of m.objects)
+        for (const [x, y] of objectCells(o)) taken.add(`${x},${y}`);
+      const starts = m.objects.filter(
+        (o) => o.kind === "town" && o.data["start"] !== undefined,
+      );
+      const guards = m.objects.filter((o) => o.kind === "monster");
+      const entranceZones = new Set<number>();
+      for (const w of list) {
+        const [ex, ey] = w.data["exit"] as [number, number];
+        const a = zoneAt(w.x, w.y);
+        const b = zoneAt(ex, ey);
+        expect(a?.role).toMatch(/^(middle|town)$/);
+        expect(b?.role).toMatch(/^(middle|town)$/);
+        expect(b?.id).not.toBe(a?.id);
+        expect(b!.tier).toBeLessThanOrEqual(a!.tier);
+        expect(entranceZones.has(a!.id)).toBe(false);
+        entranceZones.add(a!.id);
+        // The exit is open ground that no object covers.
+        expect(isPassable(cellAt(m, ex, ey)!)).toBe(true);
+        expect(taken.has(`${ex},${ey}`)).toBe(false);
+        expect(cellAt(m, w.x, w.y)?.road).toBe(false);
+        for (const [x, y] of [
+          [w.x, w.y],
+          [ex, ey],
+        ] as const) {
+          // The rule is a day of movement with the roads; on the ground
+          // that is never fewer than 6 cells from a start town.
+          for (const t of starts) {
+            expect(
+              Math.max(Math.abs(t.x - x), Math.abs(t.y - y)),
+            ).toBeGreaterThanOrEqual(6);
+          }
+          for (const g of guards) {
+            expect(
+              Math.max(Math.abs(g.x - x), Math.abs(g.y - y)),
+            ).toBeGreaterThan(1);
+          }
+        }
+      }
+    }
+    expect(total).toBeGreaterThanOrEqual(7);
+  });
+
+  it("is deterministic and leaves the rest of the map as it was without them", () => {
+    const on = generateMap(2, { size: "M" });
+    expect(JSON.stringify(generateMap(2, { size: "M" }))).toBe(
+      JSON.stringify(on),
+    );
+    const off = generateMap(2, {
+      size: "M",
+      config: { objects: { oneWayWaystones: { S: 0, M: 0, L: 0 } } },
+    });
+    expect(ways(off)).toEqual([]);
+    expect(JSON.stringify(off.cells)).toBe(JSON.stringify(on.cells));
+    expect(JSON.stringify(off.objects)).toBe(
+      JSON.stringify(
+        on.objects.filter((o) => typeOf(o) !== "one-way-waystone"),
+      ),
+    );
+  });
+});
+
+describe("drill yards (bead bzc.32)", () => {
+  it("places one on S and M maps and one or two on L, in wild zones, unguarded at value 0", () => {
+    for (const [size, least, most] of [
+      ["S", 1, 1],
+      ["M", 1, 1],
+      ["L", 1, 2],
+    ] as const) {
+      for (const seed of [1, 2, 3, 4]) {
+        const { map: m, info } = generateMapWithInfo(seed, { size });
+        const yards = m.objects.filter((o) => typeOf(o) === "drill-yard");
+        expect(yards.length, `${size}${seed}`).toBeGreaterThanOrEqual(least);
+        expect(yards.length, `${size}${seed}`).toBeLessThanOrEqual(most);
+        for (const y of yards) {
+          const zone = info.zones[m.zones?.[y.y * m.width + y.x] ?? -1];
+          expect(zone?.role).toMatch(/^(middle|town)$/);
+          expect(y.footprint).toEqual({ w: 2, h: 2 });
+          expect(y.data["value"]).toBe(OBJECT_TYPES["drill-yard"].value);
+          // Its value (0) is below every zone's free value: no guard.
+          expect(
+            m.objects.some(
+              (o) =>
+                o.kind === "monster" &&
+                Array.isArray(o.data["guards"]) &&
+                (o.data["guards"] as string[]).includes(y.id),
+            ),
+          ).toBe(false);
+        }
+      }
+    }
+  });
+
+  it("is left out when its per-map count is [0, 0] (the named maps)", () => {
+    const off = generateMap(1, {
+      size: "L",
+      config: {
+        objects: {
+          perMap: { "drill-yard": { S: [0, 0], M: [0, 0], L: [0, 0] } },
+        },
+      },
+    });
+    expect(off.objects.filter((o) => typeOf(o) === "drill-yard")).toEqual([]);
+    expect(validateMap(off)).toEqual([]);
   });
 });

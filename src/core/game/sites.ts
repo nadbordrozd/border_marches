@@ -28,6 +28,7 @@ import {
 } from "../../data/artifacts.ts";
 import { getCreature, isCreatureId } from "../../data/creatures.ts";
 import { RESOURCE_IDS } from "../../data/economy.ts";
+import { FACTIONS } from "../../data/factions.ts";
 import {
   battleSpellsOfTier,
   findMapSpell,
@@ -35,6 +36,7 @@ import {
   spellName,
 } from "../../data/map-spells.ts";
 import {
+  DRILL_YARD_MARKUP,
   MAX_HEROES,
   OASIS_MP,
   OBJECT_TYPES,
@@ -434,6 +436,83 @@ export function dwellingStock(state: GameState, obj: MapObject): number {
   return s.stockWeek === weekOf(state.day) ? (s.stock ?? 0) : offer.weekly;
 }
 
+const DWELLING_TYPES: readonly string[] = [
+  "faction-outpost",
+  "stray-hut",
+  "caretaker-lodge",
+];
+
+/** The map dwelling (outpost, stray hut, lodge) whose entrance the hero is on. */
+export function dwellingAtHero(
+  state: GameState,
+  hero: HeroState,
+): MapObject | undefined {
+  return state.map.objects.find(
+    (o) =>
+      o.x === hero.x &&
+      o.y === hero.y &&
+      DWELLING_TYPES.includes(String(o.data["type"])) &&
+      !isGone(state, o),
+  );
+}
+
+/**
+ * Why Second Helping cannot feed the dwelling the hero stands on, or null
+ * (CONTENT_SPELLS 4: a dwelling flying the caster's flag, once a week).
+ */
+export function secondHelpingError(
+  state: GameState,
+  hero: HeroState,
+): string | null {
+  const obj = dwellingAtHero(state, hero);
+  if (obj === undefined || dwellingOffer(state, obj) === null)
+    return "stand on a map dwelling, outpost or stray hut";
+  const s = siteOf(state, obj.id);
+  if (s.owner !== hero.owner) return "the dwelling must fly your flag";
+  if (s.helpedWeek === weekOf(state.day))
+    return "the dwelling already had a second helping this week";
+  return null;
+}
+
+/** Creatures Second Helping adds: fight value `fv` of the kind, at least one. */
+export function secondHelpingCount(creature: CreatureId, fv: number): number {
+  return Math.max(1, Math.floor(fv / getCreature(creature).fightValue));
+}
+
+/**
+ * Second Helping, in place: the dwelling under the hero gains creatures of
+ * its kind worth fight value `fv` (at least one). Returns a refusal or null.
+ */
+export function secondHelping(
+  state: GameState,
+  hero: HeroState,
+  fv: number,
+  events: GameEvent[],
+): string | null {
+  const err = secondHelpingError(state, hero);
+  if (err !== null) return err;
+  const obj = must(dwellingAtHero(state, hero), "dwelling");
+  const offer = must(dwellingOffer(state, obj), "offer");
+  const s = siteFor(state, obj.id);
+  const week = weekOf(state.day);
+  if (s.stockWeek !== week) {
+    s.stock = dwellingStock(state, obj);
+    s.stockWeek = week;
+  }
+  const n = secondHelpingCount(offer.creature, fv);
+  s.stock = (s.stock ?? 0) + n;
+  s.helpedWeek = week;
+  const d = getCreature(offer.creature);
+  say(
+    events,
+    hero,
+    obj,
+    `Second Helping: ${n} more ${n === 1 ? d.name : d.plural} (${s.stock} available).`,
+    siteOptions(state, hero, obj),
+  );
+  return null;
+}
+
 function lodgeOpen(state: GameState, obj: MapObject, player: number): boolean {
   return (
     obj.data["type"] !== "caretaker-lodge" ||
@@ -452,6 +531,70 @@ function maxHire(state: GameState, hero: HeroState, obj: MapObject): number {
     if (c > 0) n = Math.min(n, Math.floor(p.resources[r] / c));
   }
   return Math.max(0, n);
+}
+
+// ---------------------------------------------------------------------------
+// Drill yards (ECONOMY 6.3)
+
+/** A Drill as a drill yard sells it. */
+export interface DrillOffer {
+  /** The town building that teaches it ("butts"). */
+  readonly building: string;
+  readonly name: string;
+  /** The player flag it sets ("<creature>:<ability>"). */
+  readonly flag: string;
+  readonly creature: CreatureId;
+  /** The town building's gold cost; the yard charges twice this. */
+  readonly townGold: number;
+  /** What it teaches ("Longbowmen gain Pin Down"). */
+  readonly text: string;
+}
+
+let drillList: readonly DrillOffer[] | null = null;
+
+/** Every faction's Drills (nine in v0.2), in faction and tree order. */
+export function allDrills(): readonly DrillOffer[] {
+  if (drillList !== null) return drillList;
+  const out: DrillOffer[] = [];
+  for (const f of FACTIONS) {
+    if (!f.available || f.town === null) continue;
+    for (const id of f.town.order) {
+      const b = f.town.buildings[id];
+      if (b?.drill === undefined) continue;
+      out.push({
+        building: id,
+        name: b.name,
+        flag: `${b.drill.creature}:${b.drill.ability}`,
+        creature: b.drill.creature,
+        townGold: b.cost.gold ?? 0,
+        text: b.effect.replace(/^Drill: /, ""),
+      });
+    }
+  }
+  drillList = out;
+  return out;
+}
+
+/** The yard's gold price of a Drill: twice the town building's gold. */
+export function drillYardPrice(d: DrillOffer): number {
+  return d.townGold * DRILL_YARD_MARKUP;
+}
+
+/**
+ * The Drills a drill yard offers this hero: those of the creatures in its
+ * army that its player does not hold yet.
+ */
+export function drillYardOffers(
+  state: GameState,
+  hero: HeroState,
+): DrillOffer[] {
+  const owned = findPlayer(state, hero.owner)?.drills ?? [];
+  const led = new Set(
+    hero.army.filter((x) => x !== null).map((x) => x.creature),
+  );
+  return allDrills().filter(
+    (d) => led.has(d.creature) && !owned.includes(d.flag),
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -716,6 +859,16 @@ export function siteOptions(
       });
       break;
     }
+    case "drill-yard":
+      for (const d of drillYardOffers(state, hero)) {
+        const price = drillYardPrice(d);
+        out.push({
+          id: `drill:${d.building}`,
+          label: `Buy the ${d.name} drill (${d.text}) for ${price} gold`,
+          ...(gold < price ? { disabled: "not enough gold" } : {}),
+        });
+      }
+      break;
     case "altar-of-sacrifice": {
       hero.army.forEach((s, i) => {
         if (s === null) return;
@@ -1144,11 +1297,17 @@ export function visitSite(
       );
       return null;
     case "drill-yard":
-      say(
-        events,
-        hero,
-        obj,
-        "Drill Yard: the drill masters wait for the faction drills (not yet in the game).",
+      if (drillYardOffers(state, hero).length === 0) {
+        say(
+          events,
+          hero,
+          obj,
+          "Drill Yard: the drill masters have nothing to teach this army.",
+        );
+        return null;
+      }
+      offer(
+        "Drill Yard: the drill masters teach your creatures for twice a town's gold.",
       );
       return null;
     case "tollhouse":
@@ -1625,6 +1784,16 @@ export function useSite(
       );
       break;
     }
+    case "drill": {
+      const d = drillYardOffers(next, hero).find((x) => x.building === arg);
+      if (d === undefined) return fail("bad-choice", "no such drill");
+      player.resources.gold -= drillYardPrice(d);
+      player.drills = [...(player.drills ?? []), d.flag];
+      const [creature = "", ability = ""] = d.flag.split(":");
+      events.push({ type: "drill", player: player.id, creature, ability });
+      say(events, hero, obj, `Drill Yard: ${d.text}.`);
+      break;
+    }
     case "give": {
       const a = hero.backpack[Number(arg)];
       if (a === undefined) return fail("bad-item", "no such item");
@@ -1798,6 +1967,21 @@ export function objectValueFor(
         const b = `school-temple:${str(obj, "school")}`;
         return heroes.some((h) => !h.buffs.includes(b)) ? base : 0;
       }
+      if (t === "drill-yard") {
+        // A Drill is worth its town price to the player (the yard asks
+        // twice that): the best total any one hero could buy now.
+        const gold = findPlayer(state, player)?.resources.gold ?? 0;
+        let best = 0;
+        for (const h of heroes) {
+          let v = 0;
+          for (const d of drillYardOffers(state, h)) {
+            if (drillYardPrice(d) <= gold) v += d.townGold;
+          }
+          best = Math.max(best, v);
+        }
+        return best;
+      }
+      // Waystones carry a hero; travel is not a prize.
       return base;
     }
     default:
@@ -1988,6 +2172,22 @@ export function describeObject(
     case "sign":
     case "event-tile":
       if (str(obj, "text") !== "") what = str(obj, "text");
+      break;
+    case "one-way-waystone": {
+      const exit = obj.data["exit"];
+      if (Array.isArray(exit))
+        what = `${def.text} Its exit is at (${String(exit[0])}, ${String(exit[1])}).`;
+      break;
+    }
+    case "drill-yard":
+      if (hero !== undefined) {
+        const offers = drillYardOffers(state, hero);
+        what = `${def.text} ${
+          offers.length === 0
+            ? `Nothing for ${hero.name}'s army.`
+            : `For ${hero.name}'s army: ${offers.map((d) => `${d.name} (${drillYardPrice(d)} gold)`).join(", ")}.`
+        }`;
+      }
       break;
     default:
       break;

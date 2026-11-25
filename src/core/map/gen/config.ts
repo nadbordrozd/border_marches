@@ -241,6 +241,28 @@ export interface GenConfig {
     pocketMin: number;
     /** Guards stay this far (Chebyshev) from a town entrance. */
     guardTownClearance: number;
+    /**
+     * One-way waystones per map size (CONTENT_MAP_OBJECTS 3.9, a stretch
+     * type): entrance and exit in different wild zones, the exit never in
+     * a richer zone than the entrance, both far from every start. 0 turns
+     * them off (the named maps were authored without them).
+     */
+    oneWayWaystones: Readonly<Record<MapSize, number>>;
+    /**
+     * Per-map counts (by size) of table rows, by row id, as [least, most]:
+     * the random fill and pocket prizes draw such a row at most `most`
+     * times, and a map short of `least` gets the rest in random zones where
+     * the row may appear. [0, 0] leaves it out altogether (the named maps
+     * have no Drill Yard).
+     */
+    perMap: Readonly<
+      Record<string, Readonly<Record<MapSize, readonly [number, number]>>>
+    >;
+    /**
+     * Both ends of a one-way waystone lie at least this many days of
+     * movement (with the roads) from every start.
+     */
+    oneWayMinDays: number;
   };
 
   guards: {
@@ -433,6 +455,9 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     pocketPrizes: [2, 3],
     pocketMin: 8,
     guardTownClearance: 4,
+    oneWayWaystones: { S: 1, M: 2, L: 3 },
+    oneWayMinDays: 1,
+    perMap: { "drill-yard": { S: [1, 1], M: [1, 1], L: [1, 2] } },
   },
 
   guards: {
