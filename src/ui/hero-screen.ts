@@ -819,7 +819,7 @@ export const ARMY_GROUND_Y = 104;
  * native size, its feet on the slot's ground line over a small shadow, and
  * the count badge. No name: the creature card is on hover.
  */
-function armyFigure(creature: string, count: number): HTMLElement[] {
+export function armyFigure(creature: string, count: number): HTMLElement[] {
   const art = unitArt(creature);
   const { anchor, feet } = art;
   const sprite = img(art.key, "hs-army-sprite");
@@ -855,16 +855,42 @@ export function heroArmySection(
     el("h3", `Army (${filled} / ${views.length})`),
     value,
   );
+  return el("section.hs-army-section", head, armyBand(army, options));
+}
+
+export interface ArmyBandOptions extends HeroArmyOptions {
+  /**
+   * A stack picked up in another army (the town's other row, bead
+   * bzc.61): every slot of this band is a place to put it.
+   */
+  pickedElsewhere?: ArmySlotView | null;
+}
+
+/**
+ * The army band alone (beads bzc.45, bzc.61): one cell per slot, each
+ * filled one with its battle sprite on the ground line and its count, the
+ * creature card and the click hint on hover. The hero sheet heads it with
+ * the army's size and fight value; the town stacks two of them, garrison
+ * over visiting hero, slot for slot.
+ */
+export function armyBand(
+  army: ArmySlots,
+  options: ArmyBandOptions = {},
+): HTMLElement {
+  const views = armySlotViews(army);
   const onSlot = options.onSlot;
   const row = el("div.hs-army");
   const picked = options.selected ?? null;
+  const elsewhere = options.pickedElsewhere ?? null;
   for (const v of views) {
     const cell = el("div.hs-army-slot");
     cell.setAttribute("data-slot", String(v.slot));
     // What a click does here, at the foot of the slot's card (bead bzc.69:
     // the section's instruction line moved into the cards).
     const hint =
-      onSlot === undefined ? null : armySlotHint(views, picked, v.slot);
+      onSlot === undefined
+        ? null
+        : armySlotHint(views, picked, v.slot, elsewhere);
     if (v.creature === null) {
       cell.classList.add("hs-army-empty");
       cell.append(el("span.hs-army-spot"));
@@ -880,35 +906,42 @@ export function heroArmySection(
     if (onSlot !== undefined) {
       cell.classList.add("hs-army-clickable");
       // With a stack picked, every other slot is a place to put it.
-      if (picked !== null && picked !== v.slot) {
+      if (
+        (picked !== null && picked !== v.slot) ||
+        (elsewhere !== null && elsewhere.creature !== null)
+      ) {
         cell.classList.add("hs-army-target");
       }
       cell.addEventListener("click", (e) => onSlot(v.slot, e));
     }
     row.append(cell);
   }
-  return el("section.hs-army-section", head, row);
+  return row;
 }
 
 /**
  * What a click on army slot `slot` does, for its hover card: pick the
  * stack up, or, with one picked, move, merge or swap it (shift-click
  * splits). Null when a click does nothing (an empty slot, nothing picked).
+ * `elsewhere` is a stack picked up in another army (the town's other row):
+ * it stands in for `picked`.
  */
 export function armySlotHint(
   views: readonly ArmySlotView[],
   picked: number | null,
   slot: number,
+  elsewhere: ArmySlotView | null = null,
 ): string | null {
   const here = views[slot];
   if (here === undefined) return null;
-  if (picked === null) {
+  if (elsewhere === null && picked === null) {
     return here.creature === null
       ? null
       : "Click to pick this stack up, then click another slot to move, merge or swap it. Shift-click there to split it.";
   }
-  if (picked === slot) return "Picked up. Click it again to put it back.";
-  const from = views[picked];
+  if (elsewhere === null && picked === slot)
+    return "Picked up. Click it again to put it back.";
+  const from = elsewhere ?? (picked === null ? undefined : views[picked]);
   if (from === undefined || from.creature === null) return null;
   if (here.creature === null) {
     return "Click: move the picked stack here. Shift-click: move half of it.";

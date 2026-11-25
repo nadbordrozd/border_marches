@@ -1,13 +1,16 @@
 /**
  * The town screen: a header with the town's income, fort level and the
- * day's build as icons and the Tavern and Marketplace buttons; the town
- * picture with every built dwelling's stock; the build grid as a Heroes
- * hall (bead bzc.60, UI_V2.md UI2-09): rows Hall, Fort, Economy, Specials
- * and Magic, then the dwellings in tier columns, each building a compact
- * tile coloured by state, and a detail pane beside the grid with the
- * selected building's picture, effect, cost, requirements and the Build
- * button; then the garrison and visiting-hero rows with click-to-swap/merge
- * (shift-click splits in half).
+ * day's build as icons and the Tavern and Marketplace buttons; at the left
+ * the town picture over the dwellings strip (bead bzc.61, UI_V2.md UI2-10:
+ * every dwelling in tier order, "available / growth a week", locked until
+ * built, a click opens the recruit dialog with Heroes III's four boxes);
+ * at the right the build grid as a Heroes hall (bead bzc.60, UI2-09): rows
+ * Hall, Fort, Economy, Specials and Magic, then the dwellings in tier
+ * columns, each building a compact tile coloured by state, and a detail
+ * pane beside the grid with the selected building's picture, effect, cost,
+ * requirements and the Build button; under it the garrison over the
+ * visiting hero, two of the hero sheet's army bands slot for slot, where a
+ * stack moves by click (pick up, put down; shift moves half) or by drag.
  */
 import {
   FOREST_SETS,
@@ -25,13 +28,12 @@ import {
   tavernOffer,
   marketQuote,
   marketTrade,
-  maxAffordable,
   recruit,
-  scaleResources,
   townIncome,
   transferStack,
 } from "../core/game/index.ts";
 import type {
+  ArmySlots,
   CommandResult,
   GameState,
   SlotRef,
@@ -54,7 +56,11 @@ import {
   RESOURCE_NAMES,
 } from "../data/economy.ts";
 import type { BuildingId, CreatureId } from "../data/types.ts";
-import { armyRow } from "./army.ts";
+import { townArmyMove } from "./army.ts";
+import { armyBand, armyFigure, armySlotViews } from "./hero-screen.ts";
+import type { ArmySlotView } from "./hero-screen.ts";
+import { rulesText } from "./keywords.ts";
+import { dwellingStrip, growthNote, recruitQuote } from "./town-dwellings.ts";
 import { specialtyText } from "../core/game/effects.ts";
 import { abilityText, creatureTip, unlockedBy } from "./info-tips.ts";
 import { findFaction } from "../data/factions.ts";
@@ -99,6 +105,15 @@ const SCREEN_ROWS: readonly HallGroupId[] = [
   "specials",
   "magic",
 ];
+
+/**
+ * The hall's grid column (1-based, inside a group) of a group's `i`-th
+ * tile: column 1 is the group's name, then three tiles; column 5 is the
+ * right half's name column, which a wide group (Magic, Dwellings) skips.
+ */
+function hallColumn(i: number): number {
+  return i < 3 ? i + 2 : i + 3;
+}
 
 /** The building the detail pane opens on: the first one buildable today. */
 function firstChoice(
@@ -249,47 +264,8 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         if (art !== undefined) picture.append(img(art.key, "gm-town-city", 3));
       }
 
-      // Every built dwelling's stock at a glance, as the Heroes II castle
-      // screen shows it (bead bzc.25).
-      const stock = el("div.gm-town-stock", el("h3.gm-rule", "Recruit"));
-      const dwellings = (townTree(town.faction)?.order ?? [])
-        .map((b) => buildingDef(town.faction, b))
-        .filter(
-          (d) =>
-            d !== undefined &&
-            d.dwelling !== undefined &&
-            town.buildings.includes(d.id),
-        );
-      const stockRow = el("div.gm-stock-row");
-      for (const d of dwellings) {
-        const creature = d?.dwelling;
-        if (creature === undefined) continue;
-        const c = getCreature(creature);
-        const left = town.dwellings[creature]?.available ?? 0;
-        const cell = el(
-          "button.gm-stock",
-          img(`portrait-${c.sprite}`, "gm-stock-portrait"),
-          el("span.gm-stock-count", String(left)),
-        );
-        cell.type = "button";
-        cell.dataset["stock"] = creature;
-        cell.disabled = left <= 0;
-        cell.setAttribute("aria-label", `Recruit ${c.plural}: ${left}`);
-        setTip(cell, () => creatureTip(creature));
-        cell.addEventListener("click", () => recruitFrom(creature));
-        stockRow.append(cell);
-      }
-      stock.append(
-        dwellings.length === 0
-          ? el("div.gm-dim", "No dwellings yet: build one to recruit.")
-          : stockRow,
-      );
-
       // ------------------------------------------------ the hall
-      const body = el(
-        "div.gm-town-body",
-        el("div.gm-town-left", picture, stock),
-      );
+      const body = el("div.gm-town-body");
       const tree = townTree(town.faction);
       if (tree === undefined) {
         body.append(
@@ -307,9 +283,66 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           detailPane(state, town, chosen),
         );
       }
-      root.append(body);
+      root.append(
+        el(
+          "div.gm-town-main",
+          el("div.gm-town-left", picture, dwellingsStrip(town, state.day)),
+          el("div.gm-town-right", body, armyRows(town, hero)),
+        ),
+      );
+    };
 
-      // ------------------------------------------------ armies
+    /**
+     * Moves a stack between (or within) the two rows: the whole stack, or
+     * half of it with shift (bead bzc.61: a click on a picked stack's
+     * target or a drop).
+     */
+    const move = (from: SlotRef, to: SlotRef, half: boolean): void => {
+      selected = null;
+      const state = host.state();
+      const town = state.towns[townId];
+      if (town === undefined) return;
+      const hero = heroInTownOf(state, town);
+      const plan = townArmyMove(
+        { garrison: town.garrison, hero: hero?.army },
+        from,
+        to,
+        half,
+      );
+      if (plan === null) {
+        render();
+        return;
+      }
+      run(
+        transferStack(state, {
+          ...(hero !== undefined ? { heroId: hero.id } : {}),
+          townId: town.id,
+          ...plan,
+        }),
+      );
+    };
+
+    /** The stack being dragged, if any. */
+    let dragging: SlotRef | null = null;
+
+    /**
+     * The garrison over the visiting hero (UI2-10): two army bands of the
+     * hero sheet's kind, slot for slot, with the town's picture and the
+     * hero's portrait at their left. A click picks a stack up and a click
+     * elsewhere puts it down (move, merge or swap; shift: half); a stack
+     * can also be dragged. Each slot's hover card says what a click does.
+     */
+    const armyRows = (
+      town: TownState,
+      hero: ReturnType<typeof heroInTownOf>,
+    ): HTMLElement => {
+      const pickedView = (army: SlotRef["army"]): ArmySlotView | null => {
+        if (selected === null || selected.army === army) return null;
+        const source = selected.army === "hero" ? hero?.army : town.garrison;
+        return source === undefined
+          ? null
+          : (armySlotViews(source)[selected.slot] ?? null);
+      };
       const onSlot =
         (army: SlotRef["army"]) => (slot: number, e: MouseEvent) => {
           const here: SlotRef = { army, slot };
@@ -324,62 +357,212 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
             render();
             return;
           }
-          const from = selected;
-          const fromArmy = from.army === "hero" ? hero?.army : town.garrison;
-          const stack = fromArmy?.[from.slot];
-          selected = null;
-          if (stack == null) {
-            render();
-            return;
-          }
-          const count = e.shiftKey ? Math.floor(stack.count / 2) : undefined;
-          if (count === 0) {
-            render();
-            return;
-          }
-          run(
-            transferStack(state, {
-              ...(hero !== undefined ? { heroId: hero.id } : {}),
-              townId: town.id,
-              from,
-              to: here,
-              ...(count !== undefined ? { count } : {}),
-            }),
-          );
+          move(selected, here, e.shiftKey);
         };
-      const armies = el("div.gm-town-armies");
-      armies.append(
-        el(
-          "div.gm-army-line",
-          el("div.gm-army-label", "Garrison"),
-          armyRow(town.garrison, {
-            selected: selected?.army === "garrison" ? selected.slot : null,
-            onClick: onSlot("garrison"),
-          }),
-        ),
+      const band = (army: SlotRef["army"], slots: ArmySlots): HTMLElement => {
+        const node = armyBand(slots, {
+          selected: selected?.army === army ? selected.slot : null,
+          pickedElsewhere: pickedView(army),
+          onSlot: onSlot(army),
+        });
+        wireDrag(node, army, slots);
+        return node;
+      };
+
+      // The garrison's lead: the town's fort (or hall) on its colour.
+      const faction = findFaction(town.faction);
+      const level = fortLevel(town);
+      const hall = town.buildings.filter(
+        (b) => buildingDef(town.faction, b)?.hallIncome !== undefined,
       );
-      armies.append(
-        el(
-          "div.gm-army-line",
-          el("div.gm-army-label", hero !== undefined ? hero.name : "No hero"),
-          hero !== undefined
-            ? armyRow(hero.army, {
-                selected: selected?.army === "hero" ? selected.slot : null,
-                onClick: onSlot("hero"),
-              })
-            : el(
-                "div.gm-army-empty",
-                "No hero is visiting. Recruits join the garrison.",
-              ),
-        ),
+      const crestArt =
+        (level > 0 ? buildingArt(town.faction, `fort-${level}`) : null) ??
+        buildingArt(town.faction, hall.at(-1) ?? "village-hall");
+      // A town with no building art (neutral): its map sprite, shrunk.
+      const crest = el(
+        "div.gm-town-army-lead.gm-town-army-crest",
+        crestArt !== null
+          ? img(crestArt.key, "gm-town-army-lead-art")
+          : img(townArt(town.faction, level).key, "gm-town-army-lead-town"),
+        el("span.gm-town-army-caption", "Garrison"),
       );
-      armies.append(
-        el(
-          "div.gm-hint",
-          "Click a stack, then a slot: move, merge or swap. Shift-click the target to split the stack in half.",
-        ),
+      crest.style.setProperty(
+        "--gm-faction-colour",
+        faction?.colour ?? "#6b5a3e",
       );
-      root.append(el("div.gm-town-footer", armies));
+      setTip(crest, () =>
+        tipCard(`${town.name} garrison`, [
+          "Defends the town when it is attacked.",
+          hero === undefined
+            ? "Recruits join the garrison while no hero is visiting."
+            : `Recruits join ${hero.name}'s army (the garrison when it is full).`,
+        ]),
+      );
+      const garrison = el(
+        "div.gm-town-army-row",
+        crest,
+        band("garrison", town.garrison),
+      );
+      garrison.dataset["army"] = "garrison";
+
+      let visitor: HTMLElement;
+      if (hero !== undefined) {
+        const portrait = namedHeroPortrait(hero.defId, hero.heroClass);
+        const lead = el(
+          "div.gm-town-army-lead.gm-town-army-hero",
+          img(portrait.key, "gm-town-army-portrait", 2),
+          el("span.gm-town-army-caption", hero.name),
+        );
+        setTip(lead, () =>
+          tipCard(
+            hero.name,
+            [
+              "Visiting the town: move stacks between the hero and the garrison.",
+            ],
+            {
+              icon: img(portrait.key),
+              subtitle: `${getHeroClass(hero.heroClass).name}, level ${hero.level}`,
+            },
+          ),
+        );
+        visitor = el("div.gm-town-army-row", lead, band("hero", hero.army));
+      } else {
+        const lead = el(
+          "div.gm-town-army-lead.gm-town-army-nobody",
+          el("span.gm-town-army-lead-art"),
+          el("span.gm-town-army-caption", "No hero"),
+        );
+        setTip(lead, () =>
+          tipCard("No hero visiting", [
+            "A hero who stands in the town gate shows here, and stacks move between the hero and the garrison.",
+          ]),
+        );
+        // The empty band keeps the rows aligned; it takes no clicks.
+        visitor = el(
+          "div.gm-town-army-row.gm-town-army-vacant",
+          lead,
+          armyBand(town.garrison.map(() => null)),
+        );
+      }
+      visitor.dataset["army"] = "hero";
+      return el("div.gm-town-armies", garrison, visitor);
+    };
+
+    /** Drag a stack onto any slot of either row (bead bzc.61). */
+    const wireDrag = (
+      node: HTMLElement,
+      army: SlotRef["army"],
+      slots: ArmySlots,
+    ): void => {
+      for (const cell of node.querySelectorAll<HTMLElement>(".hs-army-slot")) {
+        const slot = Number(cell.dataset["slot"]);
+        if (slots[slot] != null) {
+          cell.draggable = true;
+          cell.addEventListener("dragstart", (e) => {
+            dragging = { army, slot };
+            e.dataTransfer?.setData("text/plain", `${army}:${slot}`);
+            if (e.dataTransfer !== null) e.dataTransfer.effectAllowed = "move";
+            cell.classList.add("gm-dragging");
+          });
+          cell.addEventListener("dragend", () => {
+            dragging = null;
+            cell.classList.remove("gm-dragging");
+            for (const n of root.querySelectorAll(".gm-drop-over"))
+              n.classList.remove("gm-drop-over");
+          });
+        }
+        cell.addEventListener("dragover", (e) => {
+          if (dragging === null) return;
+          e.preventDefault();
+          if (e.dataTransfer !== null) e.dataTransfer.dropEffect = "move";
+          cell.classList.add("gm-drop-over");
+        });
+        cell.addEventListener("dragleave", () =>
+          cell.classList.remove("gm-drop-over"),
+        );
+        cell.addEventListener("drop", (e) => {
+          e.preventDefault();
+          const from = dragging;
+          dragging = null;
+          if (from === null) return;
+          move(from, { army, slot }, e.shiftKey);
+        });
+      }
+    };
+
+    /**
+     * The dwellings strip (UI2-10): the faction's dwellings in tier order,
+     * each its creature's portrait with "available / growth a week"; a
+     * built one opens the recruit dialog, an unbuilt one is greyed and
+     * locked and shows its building in the hall.
+     */
+    const dwellingsStrip = (town: TownState, day: number): HTMLElement => {
+      const box = el("div.gm-town-stock", el("h3.gm-rule", "Recruit"));
+      const views = dwellingStrip(town);
+      if (views.length === 0) {
+        box.append(el("div.gm-dim", "This town has no dwellings."));
+        return box;
+      }
+      const grid = el("div.gm-dwell-grid");
+      for (const v of views) {
+        const c = getCreature(v.creature);
+        const cell = el(
+          "button.gm-dwell",
+          el(
+            "span.gm-dwell-pic",
+            img(`portrait-${c.sprite}`, "gm-dwell-portrait"),
+            v.built ? null : el("span.gm-dwell-lock"),
+          ),
+          el("span.gm-dwell-name", c.plural),
+        );
+        cell.type = "button";
+        cell.dataset["creature"] = v.creature;
+        if (v.built) {
+          // `.gm-stock` and `data-stock`: the recruit count-down and the
+          // screen tour find the built dwellings by them.
+          cell.classList.add("gm-stock");
+          cell.dataset["stock"] = v.creature;
+          cell.append(
+            el(
+              "span.gm-dwell-count",
+              el("b.gm-stock-count", String(v.available)),
+              el("span.gm-dwell-growth", ` / +${v.growth} a week`),
+            ),
+          );
+          if (v.available <= 0) cell.classList.add("gm-dwell-empty");
+          cell.setAttribute(
+            "aria-label",
+            `Recruit ${c.plural}: ${v.available} available, ${v.growth} more each week`,
+          );
+          setTip(cell, () => {
+            const card = creatureTip(v.creature);
+            const line = el(
+              "div.gm-tip-line.gm-tip-dim",
+              `${v.name}: ${v.available} to recruit, +${v.growth} each week. Click to recruit.`,
+            );
+            if (typeof card !== "string") card.append(line);
+            return card;
+          });
+          cell.addEventListener("click", () => recruitFrom(v.creature));
+        } else {
+          cell.classList.add("gm-dwell-locked");
+          cell.append(el("span.gm-dwell-count", "Not built"));
+          cell.setAttribute(
+            "aria-label",
+            `${c.plural}: build the ${v.name} first`,
+          );
+          setTip(cell, () =>
+            tipCard(v.name, [
+              `Not built yet: build it to recruit ${c.plural} (+${v.growth} a week).`,
+              "Click to see it in the hall.",
+            ]),
+          );
+          cell.addEventListener("click", () => choose(v.building));
+        }
+        grid.append(cell);
+      }
+      box.append(grid, el("div.gm-dwell-note", growthNote(day)));
+      return box;
     };
 
     /**
@@ -476,7 +659,12 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       );
     };
 
-    /** The hall: rows of tiles on a six-column grid, then the dwellings. */
+    /**
+     * The hall: two halves of three tile columns, each half led by a
+     * narrow column for its group's name written upwards (bead bzc.61:
+     * the names no longer take a line each, so the hall and the two army
+     * rows fit 1280x800). Rows of tiles, then the dwellings.
+     */
     const hallGrid = (
       state: GameState,
       town: TownState,
@@ -484,29 +672,40 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
     ): HTMLElement => {
       const grid = el("div.gm-hall");
       if (town.builtToday) grid.classList.add("gm-hall-today");
+      const label = (text: string, rows: number): HTMLElement => {
+        const node = el("div.gm-hall-label", text);
+        node.style.gridColumn = "1";
+        node.style.gridRow = `1 / span ${rows}`;
+        return node;
+      };
       for (const gid of SCREEN_ROWS) {
         const group = layout.groups.find((g) => g.id === gid);
         if (group === undefined || group.buildings.length === 0) continue;
-        const box = el(
-          "div.gm-hall-group",
-          el("div.gm-hall-label", group.label),
-        );
+        const box = el("div.gm-hall-group", label(group.label, 1));
         box.dataset["group"] = group.id;
-        box.style.gridColumn = `span ${group.buildings.length <= 3 ? 3 : 6}`;
-        for (const id of group.buildings) box.append(tile(state, town, id));
+        box.style.gridColumn = `span ${group.buildings.length <= 3 ? 4 : 8}`;
+        group.buildings.forEach((id, i) => {
+          const t = tile(state, town, id);
+          t.style.gridColumn = String(hallColumn(i));
+          t.style.gridRow = "1";
+          box.append(t);
+        });
         grid.append(box);
       }
       if (layout.dwellings.length > 0) {
+        const rows = Math.max(
+          ...layout.dwellings.map((c) => c.buildings.length),
+        );
         const box = el(
           "div.gm-hall-group.gm-hall-dwellings",
-          el("div.gm-hall-label", "Dwellings"),
+          label("Dwellings", rows),
         );
         box.dataset["group"] = "dwellings";
         layout.dwellings.forEach((column, i) => {
           column.buildings.forEach((id, row) => {
             const t = tile(state, town, id);
-            t.style.gridColumn = String(i + 1);
-            t.style.gridRow = String(row + 2);
+            t.style.gridColumn = String(hallColumn(i));
+            t.style.gridRow = String(row + 1);
             box.append(t);
           });
         });
@@ -806,7 +1005,12 @@ async function openTavern(
   });
 }
 
-/** The recruit dialog for one dwelling: slider, Max, total cost. */
+/**
+ * The recruit dialog for one dwelling (UI2-10): the creature standing on
+ * its ground beside its stats, the abilities with their keywords, then
+ * Heroes III's four boxes (cost each, available, to recruit, total) above
+ * the slider, the -/+ buttons and Max, and where the recruits go.
+ */
 async function openRecruit(
   host: TownHost,
   townId: string,
@@ -817,77 +1021,118 @@ async function openRecruit(
   const player = state.players.find((p) => p.id === town?.owner);
   if (town === undefined || player === undefined) return;
   const def = getCreature(creature);
+  const have = player.resources;
   const stock = town.dwellings[creature]?.available ?? 0;
-  const max = Math.max(
-    0,
-    Math.min(stock, maxAffordable(player.resources, def.cost)),
-  );
+  const first = recruitQuote(creature, stock, have);
+  const max = first.max;
   let count = max;
+  const hero = heroInTownOf(state, town);
 
   const slider = el("input.gm-slider");
   slider.type = "range";
   slider.min = "0";
   slider.max = String(max);
   slider.value = String(count);
-  const number = el("span.gm-recruit-count");
-  const total = el("div.gm-recruit-total");
+  slider.disabled = max === 0;
+  slider.setAttribute("aria-label", `${def.plural} to recruit`);
+  const toRecruit = el("b.gm-recruit-count");
+  const total = el("span.gm-recruit-total");
   let recruitButton: HTMLButtonElement | null = null;
+  const minus = button("−", () => set(count - 1), "gm-btn gm-recruit-step");
+  minus.setAttribute("aria-label", "One fewer");
+  const plus = button("+", () => set(count + 1), "gm-btn gm-recruit-step");
+  plus.setAttribute("aria-label", "One more");
+  const maxButton = button("Max", () => set(max));
   const update = (): void => {
-    number.textContent = `${count} / ${stock}`;
+    const q = recruitQuote(creature, stock, have, count);
+    toRecruit.textContent = String(q.count);
     total.replaceChildren(
-      "Total: ",
-      costView(scaleResources(def.cost, count), player.resources),
+      q.count === 0 ? el("span.gm-dim", "0") : costView(q.total, have),
     );
+    minus.disabled = count <= 0;
+    plus.disabled = count >= max;
+    maxButton.disabled = count >= max;
     if (recruitButton !== null) recruitButton.disabled = count < 1;
   };
-  slider.addEventListener("input", () => {
-    count = Number(slider.value);
+  const set = (n: number): void => {
+    count = Math.max(0, Math.min(max, n));
+    slider.value = String(count);
     update();
-  });
-  const maxButton = button("Max", () => {
-    count = max;
-    slider.value = String(max);
-    update();
-  });
+  };
+  slider.addEventListener("input", () => set(Number(slider.value)));
+
+  const box = (label: string, value: Node): HTMLElement =>
+    el(
+      "div.gm-recruit-box",
+      el("span.gm-recruit-box-label", label),
+      el("span.gm-recruit-box-value", value),
+    );
+  const stat = (label: string, value: string | number): HTMLElement[] => [
+    el("span", label),
+    el("b", String(value)),
+  ];
+  // The creature as it stands in battle, on the hero sheet's ground patch.
+  const stage = el(
+    "div.hs-army-slot.gm-recruit-stage",
+    ...armyFigure(creature, 0).slice(0, 2),
+  );
+  setTip(stage, () => creatureTip(creature));
+  const abilities = creatureAbilities(def);
   const body = el(
     "div.gm-recruit",
     el(
       "div.gm-recruit-top",
-      setTip(img(`portrait-${def.sprite}`, "gm-recruit-portrait", 2), () =>
-        creatureTip(creature),
-      ),
+      stage,
       el(
         "div.gm-recruit-stats",
-        el("div", `Attack ${def.attack}  Defense ${def.defense}`),
-        el("div", `Damage ${def.damage}  Health ${def.hp}`),
-        el(
-          "div",
-          `Speed ${def.speed}${def.shots > 0 ? `  Shots ${def.shots}` : ""}`,
-        ),
-        el("div", "Cost each: ", costView(def.cost)),
-        el("div", `Available: ${stock} · growth ${def.growth} a week`),
+        ...stat("Attack", def.attack),
+        ...stat("Defense", def.defense),
+        ...stat("Damage", def.damage),
+        ...stat("Health", def.hp),
+        ...stat("Speed", def.speed),
+        ...(def.shots > 0 ? stat("Shots", def.shots) : stat("Melee", "")),
       ),
     ),
-    creatureAbilities(def).length > 0
+    abilities.length > 0
       ? el(
           "div.gm-recruit-abilities",
-          ...creatureAbilities(def).map((a) => {
+          ...abilities.map((a) => {
             const t = abilityText(a);
             return el(
               "div",
               el("b", t.name),
-              t.text === "" ? "" : `: ${t.text}`,
+              t.text === "" ? "" : ": ",
+              t.text === "" ? null : rulesText(t.text, { hover: true }),
             );
           }),
         )
       : null,
-    el("div.gm-recruit-row", slider, number, maxButton),
-    total,
+    el(
+      "div.gm-recruit-boxes",
+      box("Cost each", costView(def.cost, have)),
+      box("Available", el("b", String(stock))),
+      box("To recruit", toRecruit),
+      box("Total", total),
+    ),
+    el("div.gm-recruit-row", minus, slider, plus, maxButton),
+    el(
+      "div.gm-recruit-note",
+      first.reason ??
+        (hero !== undefined
+          ? `They join ${hero.name}'s army (the garrison when it is full).`
+          : "They join the garrison."),
+    ),
   );
+  if (first.reason !== null) body.classList.add("gm-recruit-none");
   update();
   const choice = await modal<"recruit" | "cancel">({
     title: `Recruit ${def.plural}`,
     body,
+    className: "gm-recruit-dialog",
+    onOpen: (buttons) => {
+      recruitButton = buttons[0] ?? null;
+      update();
+    },
     buttons: [
       {
         label: "Recruit",
@@ -898,9 +1143,6 @@ async function openRecruit(
       { label: "Cancel", value: "cancel" },
     ],
     cancel: "cancel",
-    onOpen: (buttons) => {
-      recruitButton = buttons[0] ?? null;
-    },
   });
   if (choice === "recruit" && count > 0) {
     if (host.run(recruit(host.state(), townId, creature, count)))

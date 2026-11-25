@@ -966,8 +966,7 @@
 }
 
 .gm-chest-img,
-.gm-levelup-portrait,
-.gm-recruit-portrait {
+.gm-levelup-portrait {
   image-rendering: pixelated;
   flex: 0 0 auto;
 }
@@ -1155,15 +1154,6 @@
   image-rendering: pixelated;
 }
 
-.gm-town-footer {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  padding: 10px 14px;
-  background: var(--gm-wood);
-  border-top: 3px solid var(--gm-edge);
-}
-
 .gm-town-armies {
   display: flex;
   flex-direction: column;
@@ -1184,13 +1174,6 @@
   color: var(--gm-gold-dim);
 }
 
-.gm-army-empty {
-  color: var(--gm-dim);
-  height: 52px;
-  display: flex;
-  align-items: center;
-}
-
 .gm-hint {
   color: var(--gm-dim);
   font-size: 11px;
@@ -1202,10 +1185,6 @@
   display: flex;
   gap: 14px;
   margin-bottom: 10px;
-}
-
-.gm-recruit-portrait {
-  border: 1px solid var(--gm-edge);
 }
 
 .gm-recruit-stats {
@@ -1360,6 +1339,7 @@
     height: 120px;
   }
 
+  .gm-town-main,
   .gm-town-body {
     flex-direction: column;
     overflow-y: auto;
@@ -2682,15 +2662,6 @@
   margin: 4px;
 }
 
-.gm-town-footer {
-  border: 0;
-  background: var(--gm-wood-bg);
-  box-shadow:
-    inset 0 2px 0 var(--gm-ink),
-    inset 0 3px 0 var(--gm-trim),
-    inset 0 4px 0 var(--gm-ink);
-}
-
 .gm-tavern {
   background: rgb(10 8 5 / 50%);
   border: 0;
@@ -2763,17 +2734,41 @@
   box-shadow: var(--gm-inset-shadow);
 }
 
-.gm-stock-row {
+/* ------------------------------------- dwellings strip (bzc.61, UI2-10) */
+
+/* The strip fills the column under the picture; its note sits at the foot. */
+.gm-town-left .gm-town-stock {
+  flex: 1 0 auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.gm-dwell-note {
+  margin-top: auto;
+  padding-top: 5px;
+  font-size: 11px;
+  color: var(--gm-dim);
+}
+
+/* The cells share whatever height the column leaves (1920x1080: tall). */
+.gm-dwell-grid {
+  flex: 1 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   gap: 6px;
 }
 
-.gm-stock {
-  position: relative;
-  width: 56px;
-  height: 56px;
-  padding: 0;
+.gm-dwell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  min-width: 0;
+  padding: 4px 3px 5px;
+  font: inherit;
+  color: var(--gm-text);
   background: #1b150d;
   border: 0;
   box-shadow:
@@ -2782,35 +2777,297 @@
   cursor: pointer;
 }
 
-.gm-stock:hover:not(:disabled) {
+.gm-dwell:hover {
   box-shadow:
     0 0 0 1px var(--gm-ink),
     inset 0 0 0 1px var(--gm-trim-light),
     0 0 8px rgb(255 214 92 / 35%);
 }
 
-.gm-stock:disabled {
-  cursor: default;
-  filter: grayscale(0.7) brightness(0.7);
+.gm-dwell-pic {
+  position: relative;
+  display: flex;
 }
 
-.gm-stock-portrait {
+.gm-dwell-portrait {
   width: 48px;
   height: 48px;
   image-rendering: pixelated;
 }
 
-.gm-stock-count {
-  position: absolute;
-  right: 2px;
-  bottom: 1px;
+.gm-dwell-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
   font-weight: bold;
-  color: #fff;
-  text-shadow:
-    1px 1px 0 #000,
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000;
+  color: var(--gm-gold-dim);
+}
+
+.gm-dwell-count {
+  font-size: 11px;
+  white-space: nowrap;
+  color: var(--gm-dim);
+}
+
+.gm-dwell-count .gm-stock-count {
+  font-size: 13px;
+  color: #fff8e0;
+}
+
+.gm-dwell-empty .gm-stock-count {
+  color: var(--gm-dim);
+}
+
+/* Not built: greyed, with a small padlock on the portrait. */
+.gm-dwell-locked {
+  background: #120e09;
+}
+
+.gm-dwell-locked .gm-dwell-portrait {
+  filter: grayscale(1) brightness(0.55);
+}
+
+.gm-dwell-locked .gm-dwell-name {
+  color: var(--gm-dim);
+}
+
+.gm-dwell-lock {
+  position: absolute;
+  right: -3px;
+  bottom: -1px;
+  width: 12px;
+  height: 9px;
+  background: var(--gm-gold-dim);
+  border-radius: 1px;
+  box-shadow: 0 0 0 1px var(--gm-ink);
+}
+
+.gm-dwell-lock::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  bottom: 8px;
+  width: 4px;
+  height: 4px;
+  border: 2px solid var(--gm-gold-dim);
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+}
+
+/* ------------------------------------------ army rows (bzc.61, UI2-10) */
+
+/* The picture and dwellings at the left; the hall over the armies. */
+.gm-town-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 12px;
+  padding: 8px 12px;
+}
+
+.gm-town-right {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gm-town-main .gm-town-body {
+  padding: 0;
+}
+
+.gm-town-armies {
+  flex: none;
+  gap: 4px;
+  padding: 4px 6px;
+  background: rgb(10 8 5 / 50%);
+  box-shadow: var(--gm-inset-shadow);
+}
+
+/* Both rows on one grid: lead, then seven slots of the same width. */
+.gm-town-army-row {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 6px;
+}
+
+.gm-town-army-lead {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  /* The slot's 110 px and its border. */
+  height: 112px;
+  min-width: 0;
+  padding-bottom: 12px;
+  overflow: hidden;
+  background: var(--gm-wood-dark);
+  border: 1px solid var(--gm-edge);
+  cursor: default;
+}
+
+.gm-town-army-crest {
+  background:
+    linear-gradient(var(--gm-faction-colour) 0 4px, transparent 4px),
+    radial-gradient(rgb(255 214 92 / 10%), transparent 70%), var(--gm-wood-dark);
+}
+
+.gm-town-army-lead-art {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+}
+
+.gm-town-army-lead-town {
+  width: 96px;
+  height: auto;
+}
+
+.gm-town-army-portrait {
+  image-rendering: pixelated;
+  box-shadow: 0 0 0 1px var(--gm-ink);
+}
+
+/* The name on a band along the foot of the lead cell. */
+.gm-town-army-caption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1px 3px 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  font:
+    bold 11px/14px Georgia,
+    serif;
+  color: var(--gm-gold);
+  background: rgb(10 8 5 / 80%);
+}
+
+.gm-town-army-hero {
+  padding-bottom: 0;
+  justify-content: flex-start;
+}
+
+.gm-town-army-nobody {
+  border-style: dashed;
+  background: transparent;
+}
+
+.gm-town-army-nobody .gm-town-army-caption {
+  color: var(--gm-dim);
+}
+
+/*
+ * The hero sheet's slot is 118 px tall; 110 px keeps its ground line
+ * (104 px, the tallest sprite's head 7 px under the top), the shadow and
+ * the count badge, and lets the hall and both rows fit 1280x800.
+ */
+.gm-town-armies .hs-army-slot {
+  height: 110px;
+}
+
+/* No hero visiting: the empty row keeps the slots aligned, dimmed. */
+.gm-town-army-vacant .hs-army-slot {
+  opacity: 0.4;
+}
+
+.gm-town-armies .hs-army-slot[draggable="true"] {
+  cursor: grab;
+}
+
+.gm-town-armies .hs-army-slot.gm-dragging {
+  opacity: 0.45;
+}
+
+.gm-town-armies .hs-army-slot.gm-drop-over {
+  border: 1px solid var(--gm-gold);
+  box-shadow: inset 0 0 12px rgb(255 214 92 / 30%);
+}
+
+/* ------------------------------------- recruit dialog (bzc.61, UI2-10) */
+
+.gm-modal.gm-recruit-dialog {
+  width: min(540px, calc(100vw - 32px));
+}
+
+.gm-recruit-dialog .gm-recruit-top {
+  align-items: center;
+}
+
+.gm-recruit-stage {
+  flex: 0 0 120px;
+}
+
+.gm-recruit-dialog .gm-recruit-stats {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 3px 10px;
+  align-content: center;
+}
+
+.gm-recruit-stats b {
+  color: var(--gm-gold);
+}
+
+.gm-recruit-dialog .gm-recruit-abilities {
+  max-width: none;
+}
+
+.gm-recruit-boxes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.gm-recruit-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 5px 4px 7px;
+  background: rgb(10 8 5 / 50%);
+  box-shadow: var(--gm-inset-shadow);
+}
+
+.gm-recruit-box-label {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gm-dim);
+}
+
+.gm-recruit-box-value {
+  display: flex;
+  align-items: center;
+  min-height: 22px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.gm-recruit-dialog .gm-recruit-count {
+  min-width: 0;
+  text-align: center;
+}
+
+.gm-recruit-step {
+  min-width: 30px;
+  padding: 2px 6px;
+}
+
+.gm-recruit-note {
+  font-size: 12px;
+  color: var(--gm-dim);
+}
+
+.gm-recruit-none .gm-recruit-note {
+  color: #f0b040;
 }
 
 /* ------------------------------------------------- town hall (bzc.60) */
@@ -2883,6 +3140,7 @@
   --gm-hall-tile: 64px;
   --gm-hall-big: 128px;
   --gm-hall-detail: 250px;
+  --gm-hall-label-w: 14px;
 }
 
 .gm-town-body {
@@ -2890,14 +3148,17 @@
   padding: 8px 12px;
 }
 
+/* Two halves of three tile columns, each led by a name column (bzc.61). */
 .gm-hall {
   flex: 1 1 0;
   min-width: 0;
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns:
+    var(--gm-hall-label-w) repeat(3, minmax(0, 1fr))
+    var(--gm-hall-label-w) repeat(3, minmax(0, 1fr));
   grid-auto-flow: row dense;
   align-content: start;
-  gap: 6px 8px;
+  gap: 5px 8px;
   /* Never scrolls at 1280x800 or larger; a smaller window scrolls here. */
   min-height: 0;
   padding: 2px;
@@ -2917,16 +3178,21 @@
   grid-column: 1 / -1;
 }
 
+/* A group's name, written upwards beside its tiles. */
 .gm-hall-label {
-  grid-column: 1 / -1;
-  grid-row: 1;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
   font:
-    bold 11px/13px Georgia,
+    bold 10px/13px Georgia,
     serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gm-gold-dim);
-  border-bottom: 1px solid rgb(201 154 60 / 25%);
+  /* The right edge once turned: the line between name and tiles. */
+  border-left: 1px solid rgb(201 154 60 / 25%);
 }
 
 .gm-hall-tile {
@@ -2961,7 +3227,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(var(--gm-hall-tile) + 4px);
+  height: calc(var(--gm-hall-tile) + 1px);
 }
 
 .gm-hall-art-img {
@@ -2972,7 +3238,7 @@
 
 /* Drills keep the art at 1x when the hall grows to 2x. */
 .gm-hall-drill .gm-hall-art {
-  height: 68px;
+  height: 65px;
 }
 
 .gm-hall-drill .gm-hall-art-img {
@@ -3222,6 +3488,11 @@
 
   .gm-hall-detail {
     font-size: 13px;
+  }
+
+  .gm-dwell-portrait {
+    width: 96px;
+    height: 96px;
   }
 }
 
