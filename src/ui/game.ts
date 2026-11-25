@@ -54,7 +54,7 @@ import type {
 } from "../core/game/index.ts";
 import { AdventureAi } from "../core/ai/index.ts";
 import { createBattleResolver } from "../core/battle/resolver.ts";
-import type { MapObjectKind } from "../core/map/types.ts";
+import type { MapObject, MapObjectKind } from "../core/map/types.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { getHeroClass } from "../data/hero.ts";
 import { MAX_HEROES, playerColour } from "../data/players.ts";
@@ -125,6 +125,12 @@ import { Minimap } from "./minimap.ts";
 import { browserStorage, deleteSave, readSave, saveGame } from "./save.ts";
 import { displayObjects, objectsSignature } from "./objects.ts";
 import { openTownScreen } from "./town.ts";
+import {
+  DOUBLE_CLICK_MS,
+  isDoubleClick,
+  townClickAction,
+  type LastClick,
+} from "./map-clicks.ts";
 
 /** The human player in the MVP flow (RULES_V2 5.1: player 0). */
 export const PLAYER = 0;
@@ -264,6 +270,12 @@ class GameScreen {
   private objectsSig = "";
   /** The planned destination and its path. */
   private plan: { x: number; y: number; path: Path } | null = null;
+  /** The last click on a town, for double-clicks (map-clicks.ts). */
+  private lastTownClick:
+    (LastClick & { plan: { x: number; y: number; path: Path } | null }) | null =
+    null;
+  /** A walk to an own town waiting out the double-click window. */
+  private pendingWalk = 0;
   /**
    * Input is ignored while walking, fighting or in a dialog. The four flags
    * below turn the map's own input (pan, zoom, hover, click) off with them
@@ -526,7 +538,11 @@ class GameScreen {
       "gm-btn gm-primary gm-end-turn",
     );
     setTip(endTurnButton, () => {
-      const warnings = endTurnWarnings(this.state, this.human);
+      const warnings = endTurnWarnings(
+        this.state,
+        this.human,
+        this.plannedPaths(),
+      );
       return tipCard(
         "End turn",
         warnings.length === 0
@@ -804,7 +820,8 @@ class GameScreen {
     this.heroPanel.classList.add("gm-selected");
   }
 
-  private townTip(id: string): HTMLElement | string {
+  /** A town's card; on the map an own town also says how to open it. */
+  private townTip(id: string, onMap = false): HTMLElement | string {
     const town = this.state.towns[id];
     if (town === undefined) return "Town";
     const faction = findFaction(town.faction);
@@ -827,6 +844,7 @@ class GameScreen {
             : canBuild
               ? el("div.gm-tip-good", "Something can be built today.")
               : el("div.gm-tip-dim", "Nothing affordable to build today."),
+        mine && onMap ? el("div.gm-tip-hint", "Double-click to open") : null,
       ],
       {
         subtitle: `${faction?.name ?? "Town"}, fort level ${fortLevel(town)}`,
@@ -987,7 +1005,7 @@ class GameScreen {
       if (own !== undefined) return this.heroTip(own);
       const obj = objectAt(displayObjects(this.state), x, y);
       if (obj?.kind === "town") {
-        const tip = this.townTip(obj.id);
+        const tip = this.townTip(obj.id, true);
         if (typeof tip !== "string") {
           const path = this.pathTo(obj.x, obj.y);
           if (path !== null) tip.append(el("div.gm-tip-path", pathLine(path)));
@@ -1138,6 +1156,14 @@ class GameScreen {
     if (next !== undefined) this.selectHero(next.id);
   }
 
+  /** The planned path by hero id (only the selected hero has one). */
+  private plannedPaths(): Record<string, Path> {
+    const hero = this.hero();
+    return this.plan === null || hero === undefined
+      ? {}
+      : { [hero.id]: this.plan.path };
+  }
+
   private clearPlan(): void {
     this.plan = null;
     this.view.setPathPreview(null);
@@ -1150,12 +1176,14 @@ class GameScreen {
       this.view.setPathPreview(null);
       return;
     }
+    const hero = this.hero();
     this.view.setPathPreview(
       this.plan.path.steps.map((s) => ({
         x: s.x,
         y: s.y,
         reachable: s.day === 0,
       })),
+      hero === undefined ? undefined : { x: hero.x, y: hero.y },
     );
   }
 
@@ -1174,6 +1202,7 @@ class GameScreen {
 
   private onMapClick(x: number, y: number): void {
     if (this.inputBlocked()) return;
+    this.cancelPendingWalk();
     if (this.aiming !== null) {
       const aim = this.aiming;
       this.aiming = null;
@@ -1208,6 +1237,11 @@ class GameScreen {
       } else this.selectHero(clicked.id);
       return;
     }
+    const obj = objectAt(displayObjects(this.state), x, y);
+    if (obj?.kind === "town") {
+      this.onTownClick(obj, hero);
+      return;
+    }
     if (hero === undefined) return;
     if (hero.x === x && hero.y === y) {
       // Clicking the selected hero in its town opens the town.
@@ -1226,29 +1260,79 @@ class GameScreen {
       this.renderHeroPanel();
       return;
     }
-    // Clicking any cell of a town or mine targets its entrance.
-    let tx = x;
-    let ty = y;
-    const obj = objectAt(displayObjects(this.state), x, y);
-    if (obj !== undefined && (obj.kind === "town" || obj.kind === "mine")) {
-      tx = obj.x;
-      ty = obj.y;
-      if (obj.kind === "town" && hero.x === tx && hero.y === ty) {
-        if (this.state.towns[obj.id]?.owner === this.human)
-          void this.openTown(obj.id);
-        return;
-      }
-    }
-    if (this.plan !== null && this.plan.x === tx && this.plan.y === ty) {
+    // Clicking any cell of a mine targets its entrance.
+    const tx = obj?.kind === "mine" ? obj.x : x;
+    const ty = obj?.kind === "mine" ? obj.y : y;
+    if (this.plannedTo(tx, ty)) {
       void this.walk();
       return;
     }
-    if (!this.planTo(tx, ty)) {
+    this.planWithToast(tx, ty);
+  }
+
+  private plannedTo(x: number, y: number): boolean {
+    return this.plan !== null && this.plan.x === x && this.plan.y === y;
+  }
+
+  /** Plans the selected hero's path, saying when it ends in a fight. */
+  private planWithToast(x: number, y: number): void {
+    if (!this.planTo(x, y)) {
       toast("No way there");
       return;
     }
     const guard = this.planGuard();
     if (guard !== null) toast(`${guard}: click again to attack`);
+  }
+
+  /**
+   * A click on any cell of a town (map-clicks.ts): plan or walk there, or
+   * open an own town on a double-click, with no hero, or with the hero
+   * inside. The second click of a double-click puts back the plan the
+   * first one replaced, so the hero neither walks nor keeps a new path.
+   */
+  private onTownClick(obj: MapObject, hero: HeroState | undefined): void {
+    const now = performance.now();
+    const last = this.lastTownClick;
+    const double = isDoubleClick(last, obj.id, now);
+    this.lastTownClick = double
+      ? null
+      : { key: obj.id, at: now, plan: this.plan };
+    const action = townClickAction({
+      own: this.state.towns[obj.id]?.owner === this.human,
+      heroSelected: hero !== undefined,
+      heroInTown: hero !== undefined && hero.x === obj.x && hero.y === obj.y,
+      plannedHere: this.plannedTo(obj.x, obj.y),
+      double,
+    });
+    switch (action) {
+      case "open":
+        if (double && last !== null) {
+          this.plan = last.plan;
+          this.showPlan();
+        }
+        void this.openTown(obj.id);
+        return;
+      case "walk":
+        void this.walk();
+        return;
+      case "walk-later":
+        this.pendingWalk = window.setTimeout(() => {
+          this.pendingWalk = 0;
+          if (this.plannedTo(obj.x, obj.y)) void this.walk();
+        }, DOUBLE_CLICK_MS);
+        return;
+      case "plan":
+        this.planWithToast(obj.x, obj.y);
+        return;
+      case "none":
+        return;
+    }
+  }
+
+  private cancelPendingWalk(): void {
+    if (this.pendingWalk === 0) return;
+    window.clearTimeout(this.pendingWalk);
+    this.pendingWalk = 0;
   }
 
   /** Who the planned walk ends up fighting, as "a pack of 11 Skeletons". */
@@ -1350,6 +1434,7 @@ class GameScreen {
       remaining.shift();
       this.view.setPathPreview(
         remaining.map((s) => ({ x: s.x, y: s.y, reachable: s.day === 0 })),
+        { x, y },
       );
       this.view.setExplored(explored);
       this.syncHeroes({ id: hero.id, x, y });
@@ -1937,7 +2022,11 @@ class GameScreen {
 
   private async endTurn(): Promise<void> {
     if (this.inputBlocked()) return;
-    const warnings = endTurnWarnings(this.state, this.human);
+    const warnings = endTurnWarnings(
+      this.state,
+      this.human,
+      this.plannedPaths(),
+    );
     if (warnings.length > 0) {
       const list = el("ul.gm-warn-list");
       for (const w of warnings) list.append(el(`li.gm-warn-${w.kind}`, w.text));
@@ -2637,6 +2726,7 @@ class GameScreen {
     window.removeEventListener("keydown", this.onKey);
     window.removeEventListener("resize", this.onResize);
     window.clearInterval(this.viewportTimer);
+    this.cancelPendingWalk();
     this.view.destroy();
     this.root.remove();
   }

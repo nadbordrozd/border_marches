@@ -47,6 +47,8 @@ import { compareEntries, objectEntries, unitEntry } from "./scene";
 import type { SceneEntry } from "./scene";
 import { MapInput, WheelZoom, glideAt, glideMs } from "./input";
 import type { Glide } from "./input";
+import { pathMarkers } from "./path-markers";
+import type { PathMarker } from "./path-markers";
 import { planTerrain } from "./terrain-plan";
 import type { TerrainPlan, WorldRect } from "./terrain-plan";
 
@@ -116,7 +118,11 @@ export interface MapView {
   setHeroes(heroes: readonly MapHero[]): void;
   /** Owner flags (player colours) at object entrances. */
   setFlags(flags: readonly MapFlag[]): void;
-  setPathPreview(steps: readonly PathStep[] | null): void;
+  /**
+   * The planned path's markers (path-markers.ts); `from` is the hero's
+   * cell, for the half-way arrow into the first step.
+   */
+  setPathPreview(steps: readonly PathStep[] | null, from?: Cell): void;
   /** A selected cell: a monster there shows its count chip. */
   setSelected(cell: Cell | null): void;
   setZoom(zoom: number, anchor?: { sx: number; sy: number }): void;
@@ -185,6 +191,9 @@ interface Chunk {
   readonly surface: Surface | null;
 }
 
+/** Size of the path markers against their original 20 px drawing. */
+const PATH_MARKER_SCALE = 0.78;
+
 /** The arrows and crosses of the path preview, code-drawn once each. */
 function pathMarker(
   kind: "arrow" | "cross",
@@ -197,6 +206,8 @@ function pathMarker(
   const fill = green ? "#58d23c" : "#e2402e";
   const dark = "#10160c";
   ctx.translate(size / 2, size / 2);
+  // Three markers per cell (path-markers.ts): smaller, so the line stays calm.
+  ctx.scale(PATH_MARKER_SCALE, PATH_MARKER_SCALE);
   ctx.lineJoin = "round";
   ctx.lineCap = "round";
   if (kind === "cross") {
@@ -304,7 +315,7 @@ export function createMapView(
   let map: GameMap | null = null;
   let objects: readonly MapObject[] = [];
   let heroes: readonly MapHero[] = [];
-  let path: readonly PathStep[] | null = null;
+  let path: readonly PathMarker[] | null = null;
   let flags: readonly MapFlag[] = [];
   let selected: Cell | null = null;
   let hovered: Cell | null = null;
@@ -642,22 +653,13 @@ export function createMapView(
   };
 
   const drawPath = (ctx: Context): void => {
-    if (path === null || path.length === 0) return;
-    for (let i = 0; i < path.length; i += 1) {
-      const step = path[i];
-      if (step === undefined || !isExplored(step.x, step.y)) continue;
-      const next = path[i + 1];
-      let surface: Surface;
-      if (next === undefined) surface = marker("cross", 0, step.reachable);
-      else {
-        const angle = Math.atan2(next.y - step.y, next.x - step.x);
-        const dir = ((Math.round(angle / (Math.PI / 4)) % 8) + 8) % 8;
-        surface = marker("arrow", dir, step.reachable);
-      }
+    if (path === null) return;
+    for (const m of path) {
+      if (!isExplored(m.cell.x, m.cell.y)) continue;
       ctx.drawImage(
-        surface,
-        step.x * CELL + CELL / 2 - 16,
-        step.y * CELL + CELL / 2 - 16,
+        marker(m.kind, m.dir, m.reachable),
+        m.cx * CELL - 16,
+        m.cy * CELL - 16,
       );
     }
   };
@@ -1084,8 +1086,8 @@ export function createMapView(
       flags = next;
       requestRender();
     },
-    setPathPreview(steps) {
-      path = steps;
+    setPathPreview(steps, from) {
+      path = steps === null ? null : pathMarkers(steps, from ?? null);
       requestRender();
     },
     setSelected(cell) {

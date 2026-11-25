@@ -7,6 +7,13 @@
 import { buildStatus, townIncome } from "../core/game/index.ts";
 import type { GameState, HeroState, Path } from "../core/game/index.ts";
 import { heroStats } from "../core/game/effects.ts";
+import {
+  canEnter,
+  cutsCorner,
+  moveContext,
+  stepCost,
+} from "../core/game/pathfinding.ts";
+import { DIRECTIONS_8, inBounds } from "../core/map/types.ts";
 import type { ResourceId } from "../core/map/types.ts";
 import { getCreature, isCreatureId } from "../data/creatures.ts";
 import { MINES, RESOURCE_IDS } from "../data/economy.ts";
@@ -186,19 +193,83 @@ export function buildableTowns(state: GameState, player: number): string[] {
 }
 
 /**
- * What the player leaves undone by ending the turn now: heroes that have
- * not moved, heroes with movement left, towns that can still build.
+ * The end-turn dialog warns about a hero only while it has at least this
+ * share of its daily movement left (bead border_marches-50f): a few points
+ * left after a long walk are not worth a question.
+ */
+export const END_TURN_MP_SHARE = 0.25;
+
+/**
+ * Whether the hero can afford one step to a neighbouring cell today: a
+ * walk onto a free cell it has the movement for, or an attack on a
+ * neighbouring stack or enemy hero (that step costs nothing).
+ */
+export function canAffordStep(state: GameState, hero: HeroState): boolean {
+  if (hero.mp <= 0) return false;
+  const ctx = moveContext(state, hero);
+  const w = state.map.width;
+  for (const [dx, dy] of DIRECTIONS_8) {
+    const x = hero.x + dx;
+    const y = hero.y + dy;
+    if (!inBounds(state.map, x, y)) continue;
+    if (cutsCorner(ctx, hero.x, hero.y, x, y)) continue;
+    const i = y * w + x;
+    if (ctx.monsterAt.has(i) || ctx.enemyHeroAt.has(i)) return true;
+    if (!canEnter(ctx, x, y)) continue;
+    const cost = stepCost(
+      state.map,
+      ctx.nativeTerrain,
+      hero.x,
+      hero.y,
+      x,
+      y,
+      ctx.forestCost,
+    );
+    if (cost <= hero.mp) return true;
+  }
+  return false;
+}
+
+/** Whether the hero can take the first step of its planned path today. */
+export function canAdvanceOnPlan(
+  hero: HeroState,
+  plan: Path | null | undefined,
+): boolean {
+  const first = plan?.steps[0];
+  return first !== undefined && hero.mp > 0 && first.cost <= hero.mp;
+}
+
+/**
+ * Whether ending the turn wastes something for this hero: at least
+ * END_TURN_MP_SHARE of its daily movement left, and either a neighbouring
+ * step it can afford or a planned path it can still walk along.
+ */
+export function worthMovingOn(
+  state: GameState,
+  hero: HeroState,
+  plan: Path | null = null,
+): boolean {
+  if (hero.mp <= 0 || hero.mp < hero.maxMp * END_TURN_MP_SHARE) return false;
+  return canAdvanceOnPlan(hero, plan) || canAffordStep(state, hero);
+}
+
+/**
+ * What the player leaves undone by ending the turn now: heroes that could
+ * still make a meaningful move (worthMovingOn; `plans` are the planned
+ * paths by hero id) and towns that can still build.
  */
 export function endTurnWarnings(
   state: GameState,
   player: number,
+  plans: Readonly<Record<string, Path>> = {},
 ): TurnWarning[] {
   const out: TurnWarning[] = [];
   for (const h of state.heroes) {
     if (!h.alive || h.owner !== player) continue;
+    if (!worthMovingOn(state, h, plans[h.id] ?? null)) continue;
     if (h.maxMp > 0 && h.mp >= h.maxMp)
       out.push({ kind: "unmoved", id: h.id, text: `${h.name} has not moved` });
-    else if (h.mp >= SPENT_MP)
+    else
       out.push({
         kind: "moves-left",
         id: h.id,

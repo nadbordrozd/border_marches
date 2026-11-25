@@ -2054,6 +2054,12 @@
   color: var(--gm-trim-light);
 }
 
+.gm-tip-hint {
+  margin-top: 4px;
+  color: var(--gm-dim, #a89a80);
+  font-style: italic;
+}
+
 .gm-res-icon-24 {
   width: 24px;
   height: 24px;

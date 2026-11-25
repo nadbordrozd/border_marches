@@ -286,6 +286,7 @@ export async function startMapDebug(
   if (params.get("path") !== "0" && hero !== undefined && target !== undefined)
     view.setPathPreview(
       debugPath(map, [hero.x, hero.y], [target.x, target.y], 7),
+      { x: hero.x, y: hero.y },
     );
   const cx = Number(params.get("cx"));
   const cy = Number(params.get("cy"));

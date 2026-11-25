@@ -14,7 +14,11 @@ import {
   armyValue,
   battleOdds,
   buildableTowns,
+  canAdvanceOnPlan,
+  canAffordStep,
+  END_TURN_MP_SHARE,
   endTurnWarnings,
+  worthMovingOn,
   incomeBreakdown,
   nextActionHint,
   pathLine,
@@ -40,6 +44,22 @@ function hero(s: GameState) {
   const h = s.heroes.find((x) => x.alive && x.owner === 0);
   if (h === undefined) throw new Error("no hero");
   return h;
+}
+
+/** Turns the 8 cells round (x, y) to water; returns them. */
+function boxIn(s: GameState, x: number, y: number): Array<[number, number]> {
+  const ring: Array<[number, number]> = [];
+  for (let dy = -1; dy <= 1; dy++)
+    for (let dx = -1; dx <= 1; dx++) {
+      if (dx === 0 && dy === 0) continue;
+      const cell = s.map.cells[(y + dy) * s.map.width + x + dx];
+      if (cell === undefined) continue;
+      cell.terrain = "water";
+      cell.obstacle = "none";
+      cell.road = false;
+      ring.push([x + dx, y + dy]);
+    }
+  return ring;
 }
 
 function step(x: number, cost: number, total: number, day: number) {
@@ -150,6 +170,67 @@ describe("endTurnWarnings", () => {
     h.mp = SPENT_MP - 1;
     for (const t of Object.values(s.towns)) t.builtToday = true;
     expect(endTurnWarnings(s, 0)).toEqual([]);
+  });
+
+  it("warns only from END_TURN_MP_SHARE of the daily movement (bead 50f)", () => {
+    const s = fresh();
+    const h = hero(s);
+    for (const t of Object.values(s.towns)) t.builtToday = true;
+    h.maxMp = 2000;
+    h.mp = 2000 * END_TURN_MP_SHARE - 1;
+    expect(canAffordStep(s, h)).toBe(true);
+    expect(worthMovingOn(s, h)).toBe(false);
+    expect(endTurnWarnings(s, 0)).toEqual([]);
+    h.mp = 2000 * END_TURN_MP_SHARE;
+    expect(endTurnWarnings(s, 0)).toEqual([
+      { kind: "moves-left", id: h.id, text: `${h.name} has 500 moves left` },
+    ]);
+    h.mp = 2000;
+    expect(endTurnWarnings(s, 0)[0]?.kind).toBe("unmoved");
+  });
+
+  it("does not warn for a hero with no step it can take", () => {
+    const s = fresh();
+    const h = hero(s);
+    for (const t of Object.values(s.towns)) t.builtToday = true;
+    h.maxMp = 2000;
+    h.mp = 1500;
+    const ring = boxIn(s, h.x, h.y);
+    expect(canAffordStep(s, h)).toBe(false);
+    expect(endTurnWarnings(s, 0)).toEqual([]);
+    // A planned path it can still advance along counts.
+    const plan: Path = { steps: [{ ...step(0, 100, 100, 0) }], total: 100 };
+    expect(canAdvanceOnPlan(h, plan)).toBe(true);
+    expect(worthMovingOn(s, h, plan)).toBe(true);
+    expect(endTurnWarnings(s, 0, { [h.id]: plan }).map((w) => w.id)).toEqual([
+      h.id,
+    ]);
+    // ...but not one whose next step costs more than is left.
+    const far: Path = { steps: [step(0, 1600, 1600, 1)], total: 1600 };
+    expect(canAdvanceOnPlan(h, far)).toBe(false);
+    expect(endTurnWarnings(s, 0, { [h.id]: far })).toEqual([]);
+    // A neutral stack next to the hero is a step too (the attack is free).
+    // (Orthogonal: a diagonal between two water cells would cut a corner.)
+    const [ax, ay] = ring.find(([x, y]) => x === h.x || y === h.y) ?? [0, 0];
+    const cell = s.map.cells[ay * s.map.width + ax];
+    if (cell !== undefined) cell.terrain = "grass";
+    const monster = Object.values(s.monsters)[0];
+    if (monster === undefined) throw new Error("no monster");
+    monster.x = ax;
+    monster.y = ay;
+    expect(canAffordStep(s, h)).toBe(true);
+    expect(endTurnWarnings(s, 0).map((w) => w.id)).toEqual([h.id]);
+  });
+
+  it("does not warn when the cheapest neighbour costs more than is left", () => {
+    const s = fresh();
+    const h = hero(s);
+    h.maxMp = 200;
+    h.mp = 60;
+    // 30% of the day left, but no step costs under 75 (a road).
+    expect(h.mp >= h.maxMp * END_TURN_MP_SHARE).toBe(true);
+    expect(canAffordStep(s, h)).toBe(false);
+    expect(worthMovingOn(s, h)).toBe(false);
   });
 
   it("gives the next action for the selected hero", () => {
