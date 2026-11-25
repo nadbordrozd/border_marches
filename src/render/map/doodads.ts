@@ -247,13 +247,169 @@ export function placeDoodads(
   featured: ReadonlySet<number>,
   specs = doodadSpecs(),
 ): DoodadPlacement[] {
+  return [...placeDoodadSet(map, layout, featured, specs).doodads];
+}
+
+/**
+ * A placement of the doodads that {@link updateDoodads} can bring up to
+ * date after objects come and go (bead xaj.31).
+ */
+export interface DoodadSet {
+  readonly map: GameMap;
+  readonly layout: GroundLayout;
+  readonly featured: ReadonlySet<number>;
+  readonly specs: Readonly<Record<GroundTerrain, readonly DoodadSpec[]>>;
+  /** Every doodad in scan order: placeDoodads' result. */
+  readonly doodads: readonly DoodadPlacement[];
+  /** The doodad of each grid point, and its base (for the spacing test). */
+  readonly placed: readonly (DoodadPlacement | undefined)[];
+  readonly kept: readonly (readonly [number, number] | undefined)[];
+  /** After an update, the doodads gone and new; absent after a full one. */
+  readonly changes?: {
+    readonly removed: readonly DoodadPlacement[];
+    readonly added: readonly DoodadPlacement[];
+  };
+}
+
+/** {@link placeDoodads} with what {@link updateDoodads} needs to follow on. */
+export function placeDoodadSet(
+  map: GameMap,
+  layout: GroundLayout,
+  featured: ReadonlySet<number>,
+  specs = doodadSpecs(),
+): DoodadSet {
   const { width, height } = map;
   const cols = Math.ceil((width * CELL) / DOODAD_GRID);
   const rows = Math.ceil((height * CELL) / DOODAD_GRID);
-  const kept: (readonly [number, number] | undefined)[] = new Array(
-    cols * rows,
-  );
+  const kept: (readonly [number, number] | undefined)[] = new Array<
+    readonly [number, number] | undefined
+  >(cols * rows).fill(undefined);
+  const placed: (DoodadPlacement | undefined)[] = new Array<
+    DoodadPlacement | undefined
+  >(cols * rows).fill(undefined);
   const out: DoodadPlacement[] = [];
+  for (let gj = 0; gj < rows; gj += 1)
+    for (let gi = 0; gi < cols; gi += 1) {
+      const d = doodadAt(map, layout, featured, specs, kept, cols, gi, gj);
+      if (d === null) continue;
+      kept[gj * cols + gi] = d.base;
+      placed[gj * cols + gi] = d.placement;
+      out.push(d.placement);
+    }
+  return { map, layout, featured, specs, doodads: out, placed, kept };
+}
+
+/**
+ * The placement after the objects changed (`featured` differs): only the
+ * grid points on changed cells, and the later points whose spacing test a
+ * changed point takes part in, are tried again. The result equals
+ * {@link placeDoodadSet} exactly (tests/render/terrain-plan.test.ts). A new
+ * map or new road segments place everything again.
+ */
+export function updateDoodads(
+  prev: DoodadSet,
+  map: GameMap,
+  layout: GroundLayout,
+  featured: ReadonlySet<number>,
+): DoodadSet {
+  if (
+    map !== prev.map ||
+    layout.roads !== prev.layout.roads ||
+    layout.land !== prev.layout.land
+  )
+    return placeDoodadSet(map, layout, featured, prev.specs);
+  const { width, height } = map;
+  const changed: number[] = [];
+  for (const i of featured) if (!prev.featured.has(i)) changed.push(i);
+  for (const i of prev.featured) if (!featured.has(i)) changed.push(i);
+  if (changed.length === 0)
+    return {
+      ...prev,
+      layout,
+      featured,
+      changes: { removed: [], added: [] },
+    };
+  const cols = Math.ceil((width * CELL) / DOODAD_GRID);
+  const rows = Math.ceil((height * CELL) / DOODAD_GRID);
+  const n = cols * rows;
+  const kept = prev.kept.slice();
+  const placed = prev.placed.slice();
+  const redo = new Uint8Array(n);
+  const removed: DoodadPlacement[] = [];
+  const added: DoodadPlacement[] = [];
+  let lo = n;
+  let hi = -1;
+  for (const cell of changed) {
+    const cx = cell % width;
+    const cy = Math.floor(cell / width);
+    const gi0 = Math.max(0, Math.floor((cx * CELL) / DOODAD_GRID) - 1);
+    const gi1 = Math.min(cols - 1, Math.floor(((cx + 1) * CELL) / DOODAD_GRID));
+    const gj0 = Math.max(0, Math.floor((cy * CELL) / DOODAD_GRID) - 1);
+    const gj1 = Math.min(rows - 1, Math.floor(((cy + 1) * CELL) / DOODAD_GRID));
+    for (let gj = gj0; gj <= gj1; gj += 1)
+      for (let gi = gi0; gi <= gi1; gi += 1) {
+        const bx = (gi + unit(gi, gj, 1)) * DOODAD_GRID;
+        const by = (gj + unit(gi, gj, 2)) * DOODAD_GRID;
+        if (Math.floor(bx / CELL) !== cx || Math.floor(by / CELL) !== cy)
+          continue;
+        const idx = gj * cols + gi;
+        redo[idx] = 1;
+        lo = Math.min(lo, idx);
+        hi = Math.max(hi, idx);
+      }
+  }
+  // The later points whose spacing test reads point p (doodadAt): p + 1,
+  // p + 2 and the five points round p + cols and p + 2 cols.
+  const ahead = [1, 2];
+  for (const row of [cols, 2 * cols])
+    for (let di = -2; di <= 2; di += 1) ahead.push(row + di);
+  for (let idx = lo; idx <= hi; idx += 1) {
+    if (redo[idx] !== 1) continue;
+    const gi = idx % cols;
+    const gj = Math.floor(idx / cols);
+    const d = doodadAt(map, layout, featured, prev.specs, kept, cols, gi, gj);
+    const was = placed[idx];
+    // A grid point's doodad is fixed by the point: only whether it stands
+    // can change.
+    if ((was === undefined) === (d === null)) continue;
+    kept[idx] = d?.base;
+    placed[idx] = d?.placement;
+    if (was !== undefined) removed.push(was);
+    if (d !== null) added.push(d.placement);
+    for (const step of ahead)
+      if (idx + step < n) {
+        redo[idx + step] = 1;
+        hi = Math.max(hi, idx + step);
+      }
+  }
+  const doodads: DoodadPlacement[] = [];
+  for (const d of placed) if (d !== undefined) doodads.push(d);
+  return {
+    ...prev,
+    layout,
+    featured,
+    doodads,
+    placed,
+    kept,
+    changes: { removed, added },
+  };
+}
+
+/** The doodad at grid point (gi, gj), given the points kept before it. */
+function doodadAt(
+  map: GameMap,
+  layout: GroundLayout,
+  featured: ReadonlySet<number>,
+  specs: Readonly<Record<GroundTerrain, readonly DoodadSpec[]>>,
+  kept: readonly (readonly [number, number] | undefined)[],
+  cols: number,
+  gi: number,
+  gj: number,
+): {
+  readonly base: readonly [number, number];
+  readonly placement: DoodadPlacement;
+} | null {
+  const { width, height } = map;
   const nearWater = (cx: number, cy: number): boolean => {
     for (let dy = -1; dy <= 1; dy += 1)
       for (let dx = -1; dx <= 1; dx += 1) {
@@ -264,98 +420,83 @@ export function placeDoodads(
       }
     return false;
   };
-  for (let gj = 0; gj < rows; gj += 1)
-    for (let gi = 0; gi < cols; gi += 1) {
-      const bx = (gi + unit(gi, gj, 1)) * DOODAD_GRID;
-      const by = (gj + unit(gi, gj, 2)) * DOODAD_GRID;
-      const cx = Math.floor(bx / CELL);
-      const cy = Math.floor(by / CELL);
-      if (cx >= width || cy >= height) continue;
-      const index = cy * width + cx;
-      const cell = map.cells[index];
+  const bx = (gi + unit(gi, gj, 1)) * DOODAD_GRID;
+  const by = (gj + unit(gi, gj, 2)) * DOODAD_GRID;
+  const cx = Math.floor(bx / CELL);
+  const cy = Math.floor(by / CELL);
+  if (cx >= width || cy >= height) return null;
+  const index = cy * width + cx;
+  const cell = map.cells[index];
+  if (
+    cell === undefined ||
+    cell.terrain === "water" ||
+    cell.obstacle !== "none" ||
+    cell.road ||
+    featured.has(index)
+  )
+    return null;
+  const ground = cell.terrain;
+  // Density: thickets and bare stretches from two octaves of noise.
+  const field =
+    0.5 +
+    0.5 *
+      (0.7 * drift(bx, by, CELL * 4.2, 3) + 0.3 * drift(bx, by, CELL * 1.6, 4));
+  const density =
+    DOODAD_DENSITY[ground] * Math.max(0, Math.min(2.2, 2.6 * field - 0.55));
+  if (unit(gi, gj, 3) >= (density * DOODAD_GRID * DOODAD_GRID) / (CELL * CELL))
+    return null;
+  if (nearWater(cx, cy)) {
+    const land = cellField(layout.land, width, height, bx, by);
+    if (land.f < 0.85) return null;
+  }
+  for (const seg of layout.roads[index] ?? []) {
+    const rx = bx - seg.ax;
+    const ry = by - seg.ay;
+    const t = Math.max(
+      0,
+      Math.min(1, (rx * seg.cx + ry * seg.cy) / (seg.length * seg.length)),
+    );
+    const dx = rx - seg.cx * t;
+    const dy = ry - seg.cy * t;
+    if (dx * dx + dy * dy < (ROAD_REACH + 8) ** 2) return null;
+  }
+  for (let dj = -2; dj <= 0; dj += 1)
+    for (let di = -2; di <= 2; di += 1) {
+      if (dj === 0 && di >= 0) break;
+      const other = kept[(gj + dj) * cols + gi + di];
       if (
-        cell === undefined ||
-        cell.terrain === "water" ||
-        cell.obstacle !== "none" ||
-        cell.road ||
-        featured.has(index)
+        other !== undefined &&
+        (other[0] - bx) ** 2 + (other[1] - by) ** 2 < DOODAD_GAP ** 2
       )
-        continue;
-      const ground = cell.terrain;
-      // Density: thickets and bare stretches from two octaves of noise.
-      const field =
-        0.5 +
-        0.5 *
-          (0.7 * drift(bx, by, CELL * 4.2, 3) +
-            0.3 * drift(bx, by, CELL * 1.6, 4));
-      const density =
-        DOODAD_DENSITY[ground] * Math.max(0, Math.min(2.2, 2.6 * field - 0.55));
-      if (
-        unit(gi, gj, 3) >=
-        (density * DOODAD_GRID * DOODAD_GRID) / (CELL * CELL)
-      )
-        continue;
-      if (nearWater(cx, cy)) {
-        const land = cellField(layout.land, width, height, bx, by);
-        if (land.f < 0.85) continue;
-      }
-      let onRoad = false;
-      for (const seg of layout.roads[index] ?? []) {
-        const rx = bx - seg.ax;
-        const ry = by - seg.ay;
-        const t = Math.max(
-          0,
-          Math.min(1, (rx * seg.cx + ry * seg.cy) / (seg.length * seg.length)),
-        );
-        const dx = rx - seg.cx * t;
-        const dy = ry - seg.cy * t;
-        if (dx * dx + dy * dy < (ROAD_REACH + 8) ** 2) {
-          onRoad = true;
-          break;
-        }
-      }
-      if (onRoad) continue;
-      let crowded = false;
-      for (let dj = -2; dj <= 0 && !crowded; dj += 1)
-        for (let di = -2; di <= 2; di += 1) {
-          if (dj === 0 && di >= 0) break;
-          const other = kept[(gj + dj) * cols + gi + di];
-          if (
-            other !== undefined &&
-            (other[0] - bx) ** 2 + (other[1] - by) ** 2 < DOODAD_GAP ** 2
-          ) {
-            crowded = true;
-            break;
-          }
-        }
-      if (crowded) continue;
-      const list = specs[ground];
-      const total = list.reduce((sum, s) => sum + s.weight, 0);
-      if (total <= 0) continue;
-      let roll = unit(gi, gj, 4) * total;
-      let spec = list[list.length - 1] as DoodadSpec;
-      for (const s of list) {
-        roll -= s.weight;
-        if (roll < 0) {
-          spec = s;
-          break;
-        }
-      }
-      const centreX = cx * CELL + CELL / 2;
-      const centreY = cy * CELL + CELL / 2;
-      if (
-        !spec.flat &&
-        Math.abs(bx - centreX) < DOODAD_CENTRE &&
-        Math.abs(by - centreY) < DOODAD_CENTRE + 8
-      )
-        continue;
-      const w = Math.round(spec.w * spec.scale);
-      const h = Math.round(spec.h * spec.scale);
-      const left = Math.round(bx - w / 2);
-      // Upright doodads stand on their base; flat ones lie centred on it.
-      const top = Math.round(spec.flat ? by - h / 2 : by - h + 2);
-      kept[gj * cols + gi] = [bx, by];
-      out.push({ spec, x: left, y: top, w, h, col: cx, row: cy });
+        return null;
     }
-  return out;
+  const list = specs[ground];
+  const total = list.reduce((sum, s) => sum + s.weight, 0);
+  if (total <= 0) return null;
+  let roll = unit(gi, gj, 4) * total;
+  let spec = list[list.length - 1] as DoodadSpec;
+  for (const s of list) {
+    roll -= s.weight;
+    if (roll < 0) {
+      spec = s;
+      break;
+    }
+  }
+  const centreX = cx * CELL + CELL / 2;
+  const centreY = cy * CELL + CELL / 2;
+  if (
+    !spec.flat &&
+    Math.abs(bx - centreX) < DOODAD_CENTRE &&
+    Math.abs(by - centreY) < DOODAD_CENTRE + 8
+  )
+    return null;
+  const w = Math.round(spec.w * spec.scale);
+  const h = Math.round(spec.h * spec.scale);
+  const left = Math.round(bx - w / 2);
+  // Upright doodads stand on their base; flat ones lie centred on it.
+  const top = Math.round(spec.flat ? by - h / 2 : by - h + 2);
+  return {
+    base: [bx, by],
+    placement: { spec, x: left, y: top, w, h, col: cx, row: cy },
+  };
 }

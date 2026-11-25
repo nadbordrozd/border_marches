@@ -15,6 +15,11 @@
  *    objects, monsters, heroes, path arrows, chips;
  * 4. the fog of war, also cached in chunks, over everything.
  *
+ * Changes stay local (bead xaj.31): setObjects updates the terrain plan
+ * (terrain-plan.ts) around the cells whose objects changed and repaints only
+ * the changed boxes of cached chunks and the changed crown bands; a change
+ * of the explored cells rebuilds (and fades) only the fog chunks round them.
+ *
  * The camera is a world point at the viewport centre and a zoom step
  * (0.75, 1, 1.5, 2); the world origin is snapped to whole device pixels and
  * whole device scales draw nearest-neighbour, fractional ones smoothed.
@@ -26,8 +31,7 @@ import type { MapAssets, Surface } from "./assets";
 import { context2d, createSurface } from "./assets";
 import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
-import { canopyBands } from "./canopy";
-import { installCanopyBands, toneTree } from "./canopy-paint";
+import { installCanopyBands, paintCanopyBand, toneTree } from "./canopy-paint";
 import { paintFog } from "./fog";
 import { FxField, drawFx } from "../fx/field.ts";
 import type { FxClock } from "../fx/field.ts";
@@ -47,13 +51,13 @@ import {
   doodadEntries,
   featuredCells,
   mapCanopy,
-  mapPeaks,
   objectEntries,
-  peakEntries,
   terrainEntries,
   unitEntry,
 } from "./scene";
 import type { SceneEntry } from "./scene";
+import { planTerrain, roadEnds } from "./terrain-plan";
+import type { TerrainPlan, WorldRect } from "./terrain-plan";
 
 const CELL = CELL_PX;
 export const ZOOM_STEPS = [0.75, 1, 1.5, 2] as const;
@@ -104,6 +108,8 @@ export interface MapViewStats {
   readonly lastFrameMs: number;
   /** Chunks built so far and the total time spent building them, ms. */
   readonly chunksBuilt: number;
+  /** Cached chunks painted again in part after an object change. */
+  readonly chunksPatched: number;
   readonly chunkBuildMs: number;
   readonly fogChunksBuilt: number;
   readonly fogBuildMs: number;
@@ -337,10 +343,14 @@ export function createMapView(
   let explored: Uint8Array | null = null;
 
   let layout: GroundLayout | null = null;
-  let bodies: SceneEntry[] = [];
+  let bodies: readonly SceneEntry[] = [];
   let foreground: SceneEntry[] = [];
-  let terrainForeground: SceneEntry[] = [];
+  let terrainForeground: readonly SceneEntry[] = [];
+  /** The peaks mode's terrain plan, updated in place on setObjects. */
+  let plan: TerrainPlan | null = null;
   const chunks = new Map<string, Chunk>();
+  /** Per cached chunk, the world box to paint again before its next draw. */
+  const patches = new Map<string, WorldRect>();
   let fogChunks = new Map<string, Chunk>();
   // Motion (bead bzc.26): the fog being faded out, hero offsets, effects.
   let fadingFog: Map<string, Chunk> | null = null;
@@ -361,6 +371,7 @@ export function createMapView(
   const stat = {
     lastFrameMs: 0,
     chunksBuilt: 0,
+    chunksPatched: 0,
     chunkBuildMs: 0,
     fogChunksBuilt: 0,
     fogBuildMs: 0,
@@ -380,36 +391,78 @@ export function createMapView(
     explored === null ||
     e.cells.some(([x, y]) => isExplored(x, y));
 
-  /** Object entrances next to a road: the road runs into them. */
-  const roadEnds = (): [number, number][] => {
-    if (map === null) return [];
-    const m = map;
-    const out: [number, number][] = [];
-    for (const obj of objects) {
-      if (obj.kind !== "town" && obj.kind !== "mine") continue;
-      const near = [
-        [0, 1],
-        [1, 0],
-        [-1, 0],
-        [0, -1],
-      ].some(([dx = 0, dy = 0]) => {
-        const x = obj.x + dx;
-        const y = obj.y + dy;
-        return (
-          x >= 0 &&
-          y >= 0 &&
-          x < m.width &&
-          y < m.height &&
-          m.cells[y * m.width + x]?.road === true
-        );
-      });
-      if (near) out.push([obj.x, obj.y]);
+  /**
+   * Marks the parts of cached chunks that world rectangles overlap for
+   * painting again (patchChunk, when the chunk is next drawn): per chunk the
+   * bounding box of what changed in it.
+   */
+  const markChunks = (rects: readonly WorldRect[]): void => {
+    for (const key of chunks.keys()) {
+      const [cx = 0, cy = 0] = key.split(",").map(Number);
+      const x0 = cx * CHUNK_PX;
+      const y0 = cy * CHUNK_PX;
+      let box = patches.get(key) ?? null;
+      for (const r of rects) {
+        if (
+          r.x1 <= x0 ||
+          r.x0 >= x0 + CHUNK_PX ||
+          r.y1 <= y0 ||
+          r.y0 >= y0 + CHUNK_PX
+        )
+          continue;
+        const part = {
+          x0: Math.max(x0, r.x0),
+          y0: Math.max(y0, r.y0),
+          x1: Math.min(x0 + CHUNK_PX, r.x1),
+          y1: Math.min(y0 + CHUNK_PX, r.y1),
+        };
+        box =
+          box === null
+            ? part
+            : {
+                x0: Math.min(box.x0, part.x0),
+                y0: Math.min(box.y0, part.y0),
+                x1: Math.max(box.x1, part.x1),
+                y1: Math.max(box.y1, part.y1),
+              };
+      }
+      if (box !== null) patches.set(key, box);
     }
-    return out;
   };
 
-  const rebuildTerrain = (): void => {
+  /**
+   * The terrain of the map with the current objects. In the peaks mode
+   * `incremental` keeps the plan and places again only what the changed
+   * cells reach (terrain-plan.ts, bead xaj.31), dropping only the chunks and
+   * crown bands that changed.
+   */
+  const rebuildTerrain = (incremental = false): void => {
+    if (map !== null && mode === "peaks") {
+      // The crowd of peaks (bead xaj.30): no scree ring and no massif
+      // sprites; peaks and trees share the crown bands.
+      const update = planTerrain(map, objects, incremental ? plan : null);
+      plan = update.plan;
+      relief = null;
+      peakField = plan.peakField;
+      layout = plan.layout;
+      bodies = plan.bodies;
+      terrainForeground = plan.foreground;
+      if (update.dirty === null) {
+        chunks.clear();
+        patches.clear();
+        lipImages.clear();
+        installCanopyBands(images, plan.bands);
+      } else {
+        markChunks(update.dirty);
+        for (const key of update.drop) images.delete(key);
+        for (const band of update.paint)
+          images.set(band.key, paintCanopyBand(band, images));
+      }
+      return;
+    }
+    plan = null;
     chunks.clear();
+    patches.clear();
     lipImages.clear();
     relief = null;
     peakField = null;
@@ -421,38 +474,21 @@ export function createMapView(
     }
     const featured = featuredCells(map, objects);
     // The forest canopy and its cached crown bands (bead xaj.26).
-    let canopy = mapCanopy(map, featured);
+    const canopy = mapCanopy(map, featured);
     let terrain: SceneEntry[];
     const lips: SceneEntry[] = [];
-    if (mode === "peaks") {
-      // The crowd of peaks (bead xaj.30): no scree ring and no massif
-      // sprites. Peaks share the crown bands with the trees, in one base
-      // order, so what rises over an open cell covers only a unit's feet.
-      const range = mapPeaks(map, featured);
-      peakField = range.field;
-      canopy = {
-        trees: canopy.trees,
-        bands: canopyBands(
-          [...canopy.trees, ...range.peaks].sort(
-            (a, b) => a.baseY - b.baseY || a.baseX - b.baseX,
-          ),
-        ),
-      };
-      const base = buildGroundLayout(map, roadEnds(), undefined, featured);
-      layout = { ...base, nearMountain: new Uint8Array(base.mountain.length) };
-      terrain = [
-        ...terrainEntries(map, objects, canopy).filter(
-          (e) => !e.sprites.some((s) => s.key.startsWith("massif-")),
-        ),
-        ...peakEntries(range.peaks),
-      ];
-    } else if (reliefMode) {
+    if (reliefMode) {
       // Low relief (bead xaj.25): no scree ring and no massif sprites; the
       // paint a range raises over the open cell north of it is drawn again
       // in the foreground at the range's row, over the feet of a unit
       // standing behind it.
       relief = buildRelief(map, featured, grounds);
-      const base = buildGroundLayout(map, roadEnds(), undefined, featured);
+      const base = buildGroundLayout(
+        map,
+        roadEnds(map, objects),
+        undefined,
+        featured,
+      );
       layout = { ...base, nearMountain: new Uint8Array(base.mountain.length) };
       terrain = terrainEntries(map, objects, canopy).filter(
         (e) => !e.sprites.some((s) => s.key.startsWith("massif-")),
@@ -485,7 +521,7 @@ export function createMapView(
       // The scree follows the pieces' silhouettes (bead xaj.21).
       layout = buildGroundLayout(
         map,
-        roadEnds(),
+        roadEnds(map, objects),
         packRanges(map, featured),
         featured,
       );
@@ -622,9 +658,52 @@ export function createMapView(
     return { surface };
   };
 
+  /**
+   * Paints a box of a cached chunk again (bead xaj.31): the ground and the
+   * peak underlay of the box (both pure functions of the world pixel, the
+   * underlay in 2 px blocks, so the box snaps to even pixels), then every
+   * body over it, clipped to it: the same pixels as building the chunk anew.
+   */
+  const patchChunk = (cx: number, cy: number, box: WorldRect): void => {
+    const surface = chunks.get(chunkKey(cx, cy))?.surface ?? null;
+    if (surface === null || map === null || layout === null) return;
+    const t0 = performance.now();
+    const ox = cx * CHUNK_PX;
+    const oy = cy * CHUNK_PX;
+    const x0 = Math.max(ox, Math.floor(box.x0 / 2) * 2);
+    const y0 = Math.max(oy, Math.floor(box.y0 / 2) * 2);
+    const x1 = Math.min(ox + surface.width, Math.ceil(box.x1 / 2) * 2);
+    const y1 = Math.min(oy + surface.height, Math.ceil(box.y1 / 2) * 2);
+    if (x1 <= x0 || y1 <= y0) return;
+    const ctx = context2d(surface);
+    const image = ctx.createImageData(x1 - x0, y1 - y0);
+    paintGround(layout, assets.ground, x0, y0, x1 - x0, y1 - y0, image.data);
+    if (peakField !== null)
+      paintPeakUnder(peakField, x0, y0, x1 - x0, y1 - y0, image.data);
+    ctx.putImageData(image, x0 - ox, y0 - oy);
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.beginPath();
+    ctx.rect(x0 - ox, y0 - oy, x1 - x0, y1 - y0);
+    ctx.clip();
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    ctx.translate(-ox, -oy);
+    for (const e of bodies)
+      if (e.x1 > x0 && e.x0 < x1 && e.y1 > y0 && e.y0 < y1) drawSprites(ctx, e);
+    ctx.restore();
+    stat.chunksPatched += 1;
+    stat.chunkBuildMs += performance.now() - t0;
+  };
+
   const chunkAt = (cx: number, cy: number): Chunk => {
     const key = chunkKey(cx, cy);
     let chunk = chunks.get(key);
+    const box = patches.get(key);
+    if (box !== undefined) {
+      patches.delete(key);
+      if (chunk !== undefined) patchChunk(cx, cy, box);
+    }
     if (chunk === undefined) chunk = buildChunk(cx, cy);
     touch(chunks, key, chunk);
     return chunk;
@@ -1056,6 +1135,7 @@ export function createMapView(
     },
     setExplored(mask) {
       if (map === null) return;
+      const was = explored;
       if (mask === null) {
         if (explored === null) return;
         explored = null;
@@ -1067,7 +1147,46 @@ export function createMapView(
           return;
         explored = next;
       }
-      if (fogFade && fogChunks.size > 0) {
+      if (was !== null && explored !== null) {
+        // Only the fog chunks within a cell of a revealed (or hidden) cell
+        // change (a fog pixel reads its cell and the eight round it); only
+        // those are built again and fade (bead xaj.31).
+        const { width, height } = map;
+        const stale = new Set<string>();
+        for (let i = 0; i < explored.length; i += 1) {
+          if (explored[i] === was[i]) continue;
+          const x = i % width;
+          const y = Math.floor(i / width);
+          for (
+            let yy = Math.max(0, y - 1);
+            yy <= Math.min(height - 1, y + 1);
+            yy += 1
+          )
+            for (
+              let xx = Math.max(0, x - 1);
+              xx <= Math.min(width - 1, x + 1);
+              xx += 1
+            )
+              stale.add(
+                chunkKey(
+                  Math.floor(xx / CHUNK_CELLS),
+                  Math.floor(yy / CHUNK_CELLS),
+                ),
+              );
+        }
+        const fading = new Map<string, Chunk>();
+        for (const key of stale) {
+          const chunk = fogChunks.get(key);
+          if (chunk === undefined) continue;
+          fading.set(key, chunk);
+          fogChunks.delete(key);
+        }
+        if (fogFade && fading.size > 0) {
+          fadingFog = fading;
+          fogFadeStart = performance.now();
+          animate();
+        }
+      } else if (fogFade && fogChunks.size > 0) {
         fadingFog = fogChunks;
         fogFadeStart = performance.now();
         fogChunks = new Map();
@@ -1077,7 +1196,7 @@ export function createMapView(
     },
     setObjects(next) {
       objects = next;
-      rebuildTerrain();
+      rebuildTerrain(true);
       rebuildForeground();
       requestRender();
     },
@@ -1204,6 +1323,7 @@ export function createMapView(
       window.removeEventListener("keyup", onKeyUp);
       window.removeEventListener("resize", onResize);
       chunks.clear();
+      patches.clear();
       fogChunks.clear();
     },
   };

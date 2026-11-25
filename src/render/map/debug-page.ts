@@ -31,6 +31,8 @@ import type { MapView, PathStep } from "./map-view";
 declare global {
   interface Window {
     __mapView?: MapView;
+    /** The map shown (its objects, for scripted setObjects checks). */
+    __mapData?: GameMap;
     __mapReady?: boolean;
     /** The whole map's size in world px (tools/map-poster.mjs). */
     __mapPixels?: { width: number; height: number };
@@ -366,6 +368,7 @@ export async function startMapDebug(
     document.title = `bench ${JSON.stringify(window.__mapBench)} ${JSON.stringify(view.stats())}`;
   }
   window.__mapView = view;
+  window.__mapData = map;
   window.__mapPixels = {
     width: map.width * CELL_PX,
     height: map.height * CELL_PX,

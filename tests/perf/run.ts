@@ -5,6 +5,7 @@
  *
  *   npm run perf                      # every benchmark
  *   npm run perf -- --runs 15 large   # more runs, names containing "large"
+ *   npm run perf -- "object change"   # the map's per-change terrain cost
  *
  * Each benchmark warms up, then times several runs and checks the median
  * against its budget. Exits 1 when a median is over budget. Run it on a quiet
@@ -12,8 +13,10 @@
  */
 import { cpus, loadavg } from "node:os";
 import { performance } from "node:perf_hooks";
+import { runnerImport } from "vite";
 import { generateMap } from "../../src/core/map/generate.ts";
 import type { MapSize } from "../../src/core/map/generate.ts";
+import type * as Terrain from "./terrain.ts";
 
 interface Benchmark {
   readonly name: string;
@@ -30,11 +33,19 @@ const mapBenchmark = (size: MapSize, budgetMs: number): Benchmark => ({
   run: (k) => void generateMap(11 + (k % 5), { size }),
 });
 
+// The render code imports without extensions, which Node's own type
+// stripping cannot load: the terrain benchmarks come through Vite's runner.
+const { module: terrain } = await runnerImport<typeof Terrain>(
+  "./tests/perf/terrain.ts",
+);
+
 const BENCHMARKS: readonly Benchmark[] = [
   mapBenchmark("S", 120),
   mapBenchmark("M", 180),
   // The game's large map: the old unit-tier budget (300 ms).
   { ...mapBenchmark("L", 300), name: "generate map L (large)" },
+  // Bead xaj.31: a whole terrain plan, and one object change on it.
+  ...terrain.TERRAIN_BENCHMARKS,
 ];
 
 const args = process.argv.slice(2);

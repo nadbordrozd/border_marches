@@ -41,6 +41,7 @@ import { CELL_PX } from "../../assets/manifest";
 import type { GroundTerrain } from "../../assets/manifest";
 import type { GameMap } from "../../core/map/types";
 import { hash4 } from "./hash";
+import { updateSorted } from "./sorted";
 
 const CELL = CELL_PX;
 const TURN = (2 * Math.PI) / (CELL * 3);
@@ -522,11 +523,144 @@ function fit(
   };
 }
 
+/**
+ * A placement of the woods that {@link updateCanopy} can bring up to date
+ * after a few cells change (bead xaj.31). Each tree is a pure function of
+ * the map round it, so the trees a cell owns change only near a change.
+ */
+export interface CanopyPlacement {
+  readonly field: CanopyField;
+  readonly species: TreeSpeciesTable;
+  /** Every tree, sorted by base (north to south): placeCanopy's result. */
+  readonly trees: readonly CanopyTree[];
+  /** The trees each cell owns (their candidate lies in it), in grid order. */
+  readonly byCell: readonly (readonly CanopyTree[] | undefined)[];
+  /**
+   * After an update, the trees gone and the trees new since the previous
+   * placement (everything else is the very same objects); absent after a
+   * full placement.
+   */
+  readonly changes?: {
+    readonly removed: readonly CanopyTree[];
+    readonly added: readonly CanopyTree[];
+  };
+}
+
+const byBase = (a: CanopyTree, b: CanopyTree): number =>
+  a.baseY - b.baseY || a.baseX - b.baseX;
+
 /** Every tree of the map's woods, sorted by base (north to south). */
 export function placeCanopy(
   field: CanopyField,
   species: TreeSpeciesTable,
 ): CanopyTree[] {
+  return [...placeCanopySet(field, species).trees];
+}
+
+/** {@link placeCanopy} with what {@link updateCanopy} needs to follow on. */
+export function placeCanopySet(
+  field: CanopyField,
+  species: TreeSpeciesTable,
+): CanopyPlacement {
+  return canopyFrom(field, species, null, null);
+}
+
+/**
+ * How far, in cells, a change of one cell's facts can reach the trees a
+ * cell owns: the widest half tree and the bilinear field across, the
+ * tallest tree up, plus the neighbouring candidates a tree is tested
+ * against.
+ */
+export function canopyReach(species: TreeSpeciesTable): {
+  x: number;
+  y: number;
+} {
+  let w = 0;
+  let h = 0;
+  for (const list of Object.values(species) as (readonly TreeSpecies[])[])
+    for (const kind of list)
+      for (const s of kind.sprites) {
+        w = Math.max(w, s.w);
+        h = Math.max(h, s.h);
+      }
+  return {
+    x: Math.ceil((w / 2 + CANOPY.rx * 2 + 4) / CELL) + 2,
+    y: Math.ceil((h + CANOPY.ry * 2) / CELL) + 2,
+  };
+}
+
+/**
+ * The placement for a field that differs from `prev.field` only in some
+ * cells' open and object facts: only the cells near those are placed again.
+ * The result equals {@link placeCanopySet} of `field` exactly
+ * (tests/render/terrain-plan.test.ts).
+ */
+export function updateCanopy(
+  prev: CanopyPlacement,
+  field: CanopyField,
+  species: TreeSpeciesTable,
+): CanopyPlacement {
+  const old = prev.field;
+  if (
+    species !== prev.species ||
+    old.width !== field.width ||
+    old.height !== field.height
+  )
+    return placeCanopySet(field, species);
+  const n = field.width * field.height;
+  const changed: number[] = [];
+  for (let i = 0; i < n; i += 1) {
+    if (
+      old.forest[i] !== field.forest[i] ||
+      old.near[i] !== field.near[i] ||
+      old.set[i] !== field.set[i]
+    )
+      return placeCanopySet(field, species);
+    if (old.open[i] !== field.open[i] || old.featured[i] !== field.featured[i])
+      changed.push(i);
+  }
+  if (changed.length === 0)
+    return { ...prev, field, changes: { removed: [], added: [] } };
+  const reach = canopyReach(species);
+  const dirty = new Uint8Array(n);
+  for (const i of changed) {
+    const x = i % field.width;
+    const y = Math.floor(i / field.width);
+    for (
+      let yy = Math.max(0, y - reach.y);
+      yy <= Math.min(field.height - 1, y + reach.y);
+      yy += 1
+    )
+      for (
+        let xx = Math.max(0, x - reach.x);
+        xx <= Math.min(field.width - 1, x + reach.x);
+        xx += 1
+      )
+        dirty[yy * field.width + xx] = 1;
+  }
+  return canopyFrom(field, species, prev, dirty);
+}
+
+/** Two trees are the same sprite on the same spot. */
+function sameTree(a: CanopyTree, b: CanopyTree): boolean {
+  return (
+    a.key === b.key &&
+    a.x === b.x &&
+    a.y === b.y &&
+    a.w === b.w &&
+    a.h === b.h &&
+    a.baseX === b.baseX &&
+    a.baseY === b.baseY &&
+    a.spill === b.spill
+  );
+}
+
+function canopyFrom(
+  field: CanopyField,
+  species: TreeSpeciesTable,
+  prev: CanopyPlacement | null,
+  dirty: Uint8Array | null,
+): CanopyPlacement {
   const G = CANOPY.grid;
   const cols = Math.ceil((field.width * CELL) / G);
   const rows = Math.ceil((field.height * CELL) / G);
@@ -572,10 +706,20 @@ export function placeCanopy(
   };
   const reachI = Math.ceil(CANOPY.rx / G) + 1;
   const reachJ = Math.ceil(CANOPY.ry / G) + 1;
-  const out: CanopyTree[] = [];
+  const byCell: (readonly CanopyTree[] | undefined)[] =
+    prev !== null && dirty !== null
+      ? prev.byCell.slice()
+      : new Array<readonly CanopyTree[] | undefined>(
+          field.width * field.height,
+        ).fill(undefined);
+  const removed: CanopyTree[] = [];
+  const added: CanopyTree[] = [];
   for (let cy = 0; cy < field.height; cy += 1)
     for (let cx = 0; cx < field.width; cx += 1) {
-      if (field.near[cy * field.width + cx] !== 1) continue;
+      const cell = cy * field.width + cx;
+      if (field.near[cell] !== 1) continue;
+      if (dirty !== null && dirty[cell] !== 1) continue;
+      const out: CanopyTree[] = [];
       const gi0 = Math.floor((cx * CELL) / G);
       const gj0 = Math.floor((cy * CELL) / G);
       const gi1 = Math.floor(((cx + 1) * CELL - 1) / G);
@@ -606,8 +750,41 @@ export function placeCanopy(
             }
           if (!beaten && unit(gi, gj, 6) < own.keep) out.push(own.tree);
         }
+      const before = prev?.byCell[cell];
+      if (before === undefined) {
+        byCell[cell] = out.length > 0 ? out : undefined;
+        if (prev !== null) added.push(...out);
+        continue;
+      }
+      // Unchanged trees keep their identity (the scene caches by it).
+      const same = out.map((t) => before.find((b) => sameTree(b, t)) ?? t);
+      for (const t of before) if (!same.includes(t)) removed.push(t);
+      for (const t of same) if (!before.includes(t)) added.push(t);
+      byCell[cell] =
+        same.length === before.length && same.every((t, k) => t === before[k])
+          ? before
+          : same.length > 0
+            ? same
+            : undefined;
     }
-  return out.sort((a, b) => a.baseY - b.baseY || a.baseX - b.baseX);
+  const again = prev !== null && dirty !== null;
+  // The trees in base order (ties in cell order): after an update the
+  // previous order with the changes merged in, unless a change ties.
+  let trees = again
+    ? updateSorted(prev.trees, new Set(removed), added, byBase)
+    : null;
+  if (trees === null) {
+    trees = [];
+    for (const list of byCell) if (list !== undefined) trees.push(...list);
+    trees.sort(byBase);
+  }
+  return {
+    field,
+    species,
+    trees,
+    byCell,
+    ...(again ? { changes: { removed, added } } : {}),
+  };
 }
 
 /** Width of a crown band canvas, px. */

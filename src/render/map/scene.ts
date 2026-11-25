@@ -51,6 +51,7 @@ import type {
   TreeSpeciesTable,
 } from "./canopy";
 import { placeDoodads } from "./doodads";
+import type { DoodadPlacement } from "./doodads";
 import type { GroundLayout } from "./ground";
 import { peaksOf } from "../../assets/peaks";
 import { buildPeakField, placePeaks } from "./peaks";
@@ -276,25 +277,66 @@ export function mapPeaks(
 
 /** Peak bodies, sorted by their base like the trees they stand among. */
 export function peakEntries(peaks: readonly PlacedPeak[]): SceneEntry[] {
-  return peaks.map((peak) =>
-    entry(
-      "TALL_BODY",
-      (peak.baseY - 1) / CELL,
-      peak.baseX / CELL,
-      LAYER.TERRAIN,
-      [
-        {
-          key: peak.key,
-          sx: 0,
-          sy: 0,
-          sw: peak.w,
-          sh: peak.h,
-          dx: peak.x,
-          dy: peak.y,
-        },
-      ],
-    ),
+  return peaks.map(treeEntry);
+}
+
+/**
+ * The body of a tree or a peak (the same shape: canopy.ts, peaks.ts),
+ * sorted by its base, so crowns overlap from north to south.
+ */
+export function treeEntry(tree: CanopyTree): SceneEntry {
+  return entry(
+    "TALL_BODY",
+    (tree.baseY - 1) / CELL,
+    tree.baseX / CELL,
+    LAYER.TERRAIN,
+    [
+      {
+        key: tree.key,
+        sx: 0,
+        sy: 0,
+        sw: tree.w,
+        sh: tree.h,
+        dx: tree.x,
+        dy: tree.y,
+      },
+    ],
   );
+}
+
+/**
+ * The crowns rising above a row's top edge, again, after the row behind
+ * (its units and objects) and before the row itself.
+ */
+export function bandEntry(band: CanopyBand): SceneEntry {
+  return entry("FOREGROUND", band.row - 0.5, band.x / CELL, LAYER.TERRAIN, [
+    {
+      key: band.key,
+      sx: 0,
+      sy: 0,
+      sw: band.w,
+      sh: band.h,
+      dx: band.x,
+      dy: band.y,
+    },
+  ]);
+}
+
+/** A doodad (doodads.ts), drawn in the body pass after its row's pieces. */
+export function doodadEntry(d: DoodadPlacement): SceneEntry {
+  return entry("TALL_BODY", d.row + 0.25, d.col, LAYER.TERRAIN, [
+    {
+      key: d.spec.key,
+      sx: 0,
+      sy: 0,
+      sw: d.spec.w,
+      sh: d.spec.h,
+      dx: d.x,
+      dy: d.y,
+      dw: d.w,
+      dh: d.h,
+    },
+  ]);
 }
 
 // --------------------------------------------------------------- terrain
@@ -325,43 +367,8 @@ export function terrainEntries(
   const out: SceneEntry[] = [];
   out.push(...massifEntries(map, featured));
   const canopy = canopy0 ?? mapCanopy(map, featured);
-  for (const tree of canopy.trees)
-    // Sorted by the trunk base, so crowns overlap from north to south.
-    out.push(
-      entry(
-        "TALL_BODY",
-        (tree.baseY - 1) / CELL,
-        tree.baseX / CELL,
-        LAYER.TERRAIN,
-        [
-          {
-            key: tree.key,
-            sx: 0,
-            sy: 0,
-            sw: tree.w,
-            sh: tree.h,
-            dx: tree.x,
-            dy: tree.y,
-          },
-        ],
-      ),
-    );
-  // The crowns rising above a row's top edge, again, after the row behind
-  // (its units and objects) and before the row itself.
-  for (const band of canopy.bands)
-    out.push(
-      entry("FOREGROUND", band.row - 0.5, band.x / CELL, LAYER.TERRAIN, [
-        {
-          key: band.key,
-          sx: 0,
-          sy: 0,
-          sw: band.w,
-          sh: band.h,
-          dx: band.x,
-          dy: band.y,
-        },
-      ]),
-    );
+  for (const tree of canopy.trees) out.push(treeEntry(tree));
+  for (const band of canopy.bands) out.push(bandEntry(band));
   return out;
 }
 
@@ -375,21 +382,7 @@ export function doodadEntries(
   layout: GroundLayout,
 ): SceneEntry[] {
   const featured = featuredCells(map, objects);
-  return placeDoodads(map, layout, featured).map((d) =>
-    entry("TALL_BODY", d.row + 0.25, d.col, LAYER.TERRAIN, [
-      {
-        key: d.spec.key,
-        sx: 0,
-        sy: 0,
-        sw: d.spec.w,
-        sh: d.spec.h,
-        dx: d.x,
-        dy: d.y,
-        dw: d.w,
-        dh: d.h,
-      },
-    ]),
-  );
+  return placeDoodads(map, layout, featured).map(doodadEntry);
 }
 
 /**
