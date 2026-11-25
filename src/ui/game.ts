@@ -139,6 +139,8 @@ import { displayObjects, objectsSignature } from "./objects.ts";
 import { openTownScreen } from "./town.ts";
 import {
   DOUBLE_CLICK_MS,
+  PLAN_OPTIONS,
+  blockedWords,
   clickTarget,
   isDoubleClick,
   mapAction,
@@ -1347,7 +1349,8 @@ class GameScreen {
   private planTo(x: number, y: number): boolean {
     const hero = this.hero();
     if (hero === undefined) return false;
-    const path = findPath(this.state, hero.id, x, y);
+    // Behind a guard: the walk to the fight with it (bead bzc.77).
+    const path = findPath(this.state, hero.id, x, y, PLAN_OPTIONS);
     if (path === null) {
       this.clearPlan();
       return false;
@@ -1442,6 +1445,16 @@ class GameScreen {
   private planWithToast(x: number, y: number): void {
     if (!this.planTo(x, y)) {
       toast("No way there");
+      return;
+    }
+    // Behind a guard (bead bzc.77): the same words as the status line.
+    const hero = this.hero();
+    const blocked =
+      hero === undefined || this.plan === null
+        ? null
+        : blockedWords(this.state, hero, this.plan.path);
+    if (blocked !== null) {
+      toast(`${blocked}. Click again to attack.`);
       return;
     }
     const guard = this.planGuard();

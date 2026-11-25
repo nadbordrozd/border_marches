@@ -21,6 +21,9 @@
  *   take it from a cell that is not a stop cell whenever there is one;
  *   from a stop cell the walk stops there first (a fight in a zone of
  *   control, a visit) and the pickup waits for the next click.
+ * - Opt-in `throughGuards` (bead bzc.77, the player's clicks): a target
+ *   that only lies beyond zones of control gets the walk to the first
+ *   guard on the way, ending with the fight (Path.blockedBy).
  *
  * A* with an admissible octile heuristic; ties break by insertion order, so
  * results are deterministic.
@@ -86,6 +89,12 @@ export interface Path {
   steps: PathStep[];
   /** Total movement cost. */
   total: number;
+  /**
+   * Set only on a walk planned with `throughGuards` (bead bzc.77): the
+   * target lies beyond this neutral stack's zone of control, and the path
+   * ends with the fight against it instead of reaching the target.
+   */
+  blockedBy?: string;
 }
 
 /** Everything a step check needs, precomputed from a state for one hero. */
@@ -131,6 +140,15 @@ export const GREEN_ROAD_MOVE_COST = 200;
 export interface PathOptions {
   /** Plan through unexplored cells too (tests, AI). Default false. */
   ignoreFog?: boolean;
+  /**
+   * When no path avoids every zone of control (bead bzc.77): plan the walk
+   * up to the first guard on the cheapest way that crosses as few zone
+   * cells as it can, ending with the fight against it (a stop in its zone
+   * plus the attack step onto it; `Path.blockedBy` names the stack). The
+   * walk stops there, as moveHeroAlong does for any path. Default false:
+   * the AI and every other caller still get null.
+   */
+  throughGuards?: boolean;
 }
 
 /** Builds the movement context for a hero. */
@@ -464,7 +482,12 @@ export function findPath(
   const hero = findHero(state, heroId);
   if (hero === undefined || !hero.alive) return null;
   const ctx = moveContext(state, hero, options);
-  const steps = findPathInContext(ctx, hero.x, hero.y, tx, ty);
+  let steps = findPathInContext(ctx, hero.x, hero.y, tx, ty);
+  let blockedBy: string | undefined;
+  if (steps === null && options.throughGuards === true) {
+    const guarded = pathToFirstGuard(state, ctx, hero, tx, ty);
+    if (guarded !== null) ({ steps, guard: blockedBy } = guarded);
+  }
   if (steps === null) return null;
   const days = assignDays(
     steps.map((s) => s.cost),
@@ -473,16 +496,71 @@ export function findPath(
   );
   const withDays = steps.map((s, i) => ({ ...s, day: days[i] ?? 0 }));
   const last = withDays[withDays.length - 1];
-  return { steps: withDays, total: last?.total ?? 0 };
+  return {
+    steps: withDays,
+    total: last?.total ?? 0,
+    ...(blockedBy === undefined ? {} : { blockedBy }),
+  };
 }
 
-/** A* in a prepared context; `day` is left 0. */
+/**
+ * The walk to the fight with the first guard on the way to (tx, ty)
+ * (PathOptions.throughGuards): the cheapest path that may cross zones of
+ * control, cut at the first zone cell it enters, plus the attack step onto
+ * the stack that moveHeroAlong would fight there (the cell's first guard in
+ * map object order). Null when even that path does not exist.
+ */
+function pathToFirstGuard(
+  state: GameState,
+  ctx: MoveContext,
+  hero: HeroState,
+  tx: number,
+  ty: number,
+): { steps: PathStep[]; guard: string } | null {
+  const through = findPathInContext(ctx, hero.x, hero.y, tx, ty, true);
+  if (through === null) return null;
+  const w = ctx.map.width;
+  const k = through.findIndex(
+    (s) => standsOn(s) && ctx.guards.has(s.y * w + s.x),
+  );
+  const stop = through[k];
+  if (stop === undefined) return null;
+  const guard = ctx.guards.get(stop.y * w + stop.x)?.[0];
+  const monster = guard === undefined ? undefined : state.monsters[guard];
+  if (guard === undefined || monster === undefined) return null;
+  const steps = through.slice(0, k + 1);
+  if (!cutsCorner(ctx, stop.x, stop.y, monster.x, monster.y)) {
+    steps.push({
+      x: monster.x,
+      y: monster.y,
+      cost: 0,
+      total: stop.total,
+      day: 0,
+      attack: true,
+    });
+  }
+  return { steps, guard };
+}
+
+/**
+ * Search-order cost of entering a zone of control when planning through
+ * guards: more than any walk, so the path crosses as few zone cells as it
+ * can, and only then is cheapest.
+ */
+const ZONE_CROSSING = 100_000_000;
+
+/**
+ * A* in a prepared context; `day` is left 0. With `throughGuards` a zone
+ * of control does not end the walk (see pathToFirstGuard): callers cut
+ * the result at its first zone cell.
+ */
 export function findPathInContext(
   ctx: MoveContext,
   sx: number,
   sy: number,
   tx: number,
   ty: number,
+  throughGuards = false,
 ): PathStep[] | null {
   const { map } = ctx;
   if (!inBounds(map, tx, ty) || (sx === tx && sy === ty)) return null;
@@ -509,6 +587,8 @@ export function findPathInContext(
     const cx = cur % w;
     const cy = (cur - cx) / w;
     const stop = cur !== start && isStopCell(ctx, cx, cy);
+    // Planning through guards, only a visit ends the walk.
+    const halt = throughGuards ? cur !== start && ctx.stops.has(cur) : stop;
     const gc = g.get(cur) ?? 0;
     for (const [dx, dy] of DIRECTIONS_8) {
       const nx = cx + dx;
@@ -527,9 +607,10 @@ export function findPathInContext(
         if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
         cost = stop ? STOP_BEFORE_PICKUP : 0;
       } else {
-        if (stop || !canEnter(ctx, nx, ny)) continue;
+        if (halt || !canEnter(ctx, nx, ny)) continue;
         if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
         cost = stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny, ctx.forestCost);
+        if (throughGuards && ctx.guards.has(ni)) cost += ZONE_CROSSING;
       }
       const ng = gc + cost;
       const old = g.get(ni);

@@ -198,6 +198,20 @@ describe("mapAction: can't reach", () => {
     expect(at(s, 7, 1).text).toBe("Can't reach the Ore Pit");
   });
 
+  it("names an impassable prop (bead bzc.72)", () => {
+    const s = world(field(12, 5), []);
+    s.map.decorations = [{ id: "fallen-log", x: 6, y: 2, variant: 0 }];
+    // Two cells wide, from (6, 2) east.
+    for (const x of [6, 7]) {
+      const c = s.map.cells[2 * 12 + x];
+      if (c !== undefined) c.prop = true;
+    }
+    expect(at(s, 7, 2)).toEqual({
+      cursor: "blocked",
+      text: "Can't walk there: Fallen Log",
+    });
+  });
+
   it("refuses unexplored ground", () => {
     const s = world(field(12, 5), []);
     const p = s.players.find((x) => x.id === 0);
@@ -207,6 +221,54 @@ describe("mapAction: can't reach", () => {
       cursor: "blocked",
       text: "Can't reach: unexplored",
     });
+  });
+});
+
+describe("mapAction: blocked by a guard (bead bzc.77)", () => {
+  const BLOCKED = (who: string, them: string) =>
+    new RegExp(
+      `^Blocked by ${who}: defeat ${them} first \\((easy victory|likely victory|an even fight|risky|deadly)(, tomorrow)?\\)`,
+    );
+
+  it("names the guard in the way of a target, with the odds", () => {
+    // The stack at (5,2) guards rows 1-3; mountains close rows 0 and 4.
+    const rows = [
+      "ggggMMMgggg",
+      "ggggggggggg",
+      "ggggggggggg",
+      "ggggggggggg",
+      "ggggMMMgggg",
+    ];
+    const s = world(rows, [
+      monster("m", 5, 2, "goblin", 10),
+      mine("mine-ore", 9, 2, "ore"),
+    ]);
+    const a = at(s, 9, 2);
+    expect(a.cursor).toBe("attack");
+    expect(a.text).toMatch(BLOCKED(goblins(10), "them"));
+    expect(a.text).not.toMatch(/tomorrow/);
+    // A plain cell beyond the guard says the same.
+    expect(at(s, 10, 0).text).toMatch(BLOCKED(goblins(10), "them"));
+    // The planned target asks for the second click.
+    expect(at(s, 9, 2, { planned: { x: 9, y: 2 } }).text).toMatch(
+      /\)\. Click again to go\.$/,
+    );
+  });
+
+  it("says when the fight comes and words a single creature", () => {
+    const rows = ["gggMggg", "ggggggg", "ggggggg", "ggggggg", "gggMggg"];
+    const s = world(rows, [monster("m", 3, 2, "goblin", 1)]);
+    hero(s).mp = 0;
+    const a = at(s, 6, 2);
+    expect(a.text).toMatch(BLOCKED(`1 ${getCreature("goblin").name}`, "it"));
+    expect(a.text).toMatch(/, tomorrow\)$/);
+  });
+
+  it("still says can't reach when no fight opens the way", () => {
+    const rows = ["ggggg~ggg", "ggggg~ggg", "ggggg~ggg"];
+    const s = world(rows, [monster("m", 3, 1), mine("mine-ore", 7, 1, "ore")]);
+    hero(s).y = 1;
+    expect(at(s, 7, 1).text).toBe("Can't reach the Ore Pit");
   });
 });
 

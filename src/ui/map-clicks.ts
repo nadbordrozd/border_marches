@@ -18,13 +18,14 @@
  */
 import { findPath } from "../core/game/index.ts";
 import type { GameState, HeroState, Path } from "../core/game/index.ts";
-import { standsOn } from "../core/game/pathfinding.ts";
+import { standsOn, type PathOptions } from "../core/game/pathfinding.ts";
 import { pickupInfo } from "../core/game/newGame.ts";
 import { objectName } from "../core/game/sites.ts";
 import { isPickup } from "../core/game/site-state.ts";
-import type { MapObject } from "../core/map/types.ts";
+import { propAt, type MapObject } from "../core/map/types.ts";
 import { adventureSpell } from "../core/magic/index.ts";
 import { findArtifact } from "../data/artifacts.ts";
+import { decorationKind } from "../data/decorations.ts";
 import { CHEST, MINES, RESOURCE_NAMES } from "../data/economy.ts";
 import { aimHint } from "./adventure-targets.ts";
 import type { AdventureAim } from "./adventure-targets.ts";
@@ -33,6 +34,12 @@ import { creatureCount, objectAt } from "./format.ts";
 import { ODDS_TEXT, battleOdds } from "./hints.ts";
 import type { ArmyLike } from "./hints.ts";
 import { displayObjects } from "./objects.ts";
+
+/**
+ * How a click plans the selected hero's walk (bead bzc.77): when every way
+ * to the target crosses a zone of control, the walk to the first guard.
+ */
+export const PLAN_OPTIONS: PathOptions = { throughGuards: true };
 
 /** Two clicks on the same town within this many ms are a double-click. */
 export const DOUBLE_CLICK_MS = 400;
@@ -235,6 +242,25 @@ export function pathGuard(state: GameState, path: Path): PathGuard | null {
   return guard === undefined ? null : stack(guard, false);
 }
 
+/**
+ * For a walk planned through guards (Path.blockedBy, bead bzc.77): "Blocked
+ * by 10 Bog Leeches: defeat them first (likely victory, tomorrow)". Null
+ * for any other path.
+ */
+export function blockedWords(
+  state: GameState,
+  hero: HeroState,
+  path: Path,
+): string | null {
+  const id = path.blockedBy;
+  const m = id === undefined ? undefined : state.monsters[id];
+  if (m === undefined) return null;
+  const when = whenWords(path.steps[path.steps.length - 1]?.day ?? 0);
+  const odds = [oddsWords(hero, [m]), when].filter((p) => p !== "");
+  const them = m.count === 1 ? "it" : "them";
+  return `Blocked by ${creatureCount(m.creature, m.count)}: defeat ${them} first (${odds.join(", ")})`;
+}
+
 function aimAction(
   state: GameState,
   aiming: NonNullable<MapActionInput["aiming"]>,
@@ -299,8 +325,14 @@ export function mapAction(input: MapActionInput): MapAction {
   if (hero === undefined || (hero.x === x && hero.y === y)) return NONE;
   const target = clickTarget(obj, x, y);
   const name = obj === undefined ? null : targetName(state, obj);
-  const path = findPath(state, hero.id, target.x, target.y);
+  // Behind a guard, the click plans the walk to the fight (bead bzc.77).
+  const path = findPath(state, hero.id, target.x, target.y, PLAN_OPTIONS);
   if (path === null || path.steps.length === 0) {
+    // An impassable prop (bead bzc.72) is named: "Can't walk there: Fallen Log".
+    const prop = propAt(map, x, y);
+    const kind = prop === undefined ? undefined : decorationKind(prop.id);
+    if (kind !== undefined)
+      return { cursor: "blocked", text: `Can't walk there: ${kind.name}` };
     const monster = Object.values(state.monsters).find(
       (m) => m.x === target.x && m.y === target.y,
     );
@@ -326,6 +358,8 @@ export function mapAction(input: MapActionInput): MapAction {
     cursor,
     text: text + again,
   });
+  const blocked = blockedWords(state, hero, path);
+  if (blocked !== null) return done("attack", blocked);
   // The click attacks an enemy hero (in a town: the town) or a stack.
   if (guard?.kind === "hero") {
     const foe = obj?.kind === "town" && name !== null ? name : guard.hero.name;
