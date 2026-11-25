@@ -9,7 +9,9 @@ reproduced by the runner commands next to it.
 ## 1. Method
 
 - **Battles.** Seeded AI-against-AI battles through the real engine, with
-  battle AI v2 (`src/core/battle/ai.ts`) on both sides. Every chosen action
+  battle AI v2 (`src/core/battle/ai.ts`) on both sides, in its full mode
+  (policy `v2`; the fast mode of AI.md "Battle AI fast mode" is for
+  battles no human watches, not for balance runs). Every chosen action
   is checked with `actionError` first; no run in this document had an
   illegal action.
 - **Armies.** `tests/sim/armies.ts`: a faction army is bought with a gold

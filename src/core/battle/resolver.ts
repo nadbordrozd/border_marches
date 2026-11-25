@@ -6,7 +6,8 @@
  *   becomes slot i, id "a<i>" / "d<i>", deployed by the 9.1 table.
  * - {@link gameResultFromEngine}: engine result -> survivors per input stack.
  * - {@link createBattleResolver}: auto-combat (AI on both sides) as a
- *   BattleResolver.
+ *   BattleResolver, for battles no human watches (the battle AI's fast
+ *   mode, {@link UNWATCHED_BATTLE_AI}).
  *
  * Round limit (RULES_V2 1.12): the engine ends a battle after round 30 and
  * **the defender wins**; the attacker's (the hero's) stacks are reported as
@@ -29,6 +30,7 @@ import type { HeroBattleProfile } from "../game/battle-profile.ts";
 import { runAutoBattle } from "./auto.ts";
 import "./stray-abilities.ts";
 import type { AutoBattleOptions, BattleResult } from "./auto.ts";
+import type { AiMode } from "./ai.ts";
 import {
   heroAbilityIds,
   heroSpeedBonus,
@@ -285,13 +287,32 @@ export function gameResultFromEngine(
   return withMagic({ winner: result.winner, attacker, defender });
 }
 
-/** Auto-combat for the adventure layer: the AI plays both sides. */
+/**
+ * The battle AI mode of every battle resolved without the battle screen
+ * (bead bzc.37, docs/design/AI.md "Battle AI fast mode"): the adventure
+ * AI's fight simulations (core/ai/strength.ts, through the AI's
+ * resolver) and the battles of an AI with another AI or with neutrals
+ * (core/game/controller.ts settles them with the game's resolver). A
+ * battle with a human side, auto-combat and quick battle included, opens
+ * the battle screen, whose AI plays the full mode; so do balance runs
+ * (tests/sim/battles.ts). This is the one switch.
+ */
+export const UNWATCHED_BATTLE_AI: AiMode = "fast";
+
+/**
+ * Auto-combat for the adventure layer: the AI plays both sides, in
+ * {@link UNWATCHED_BATTLE_AI} mode unless `options.ai` says otherwise.
+ */
 export function createBattleResolver(
   options: AutoBattleOptions = {},
 ): BattleResolver {
+  const auto: AutoBattleOptions = {
+    ...options,
+    ai: options.ai ?? UNWATCHED_BATTLE_AI,
+  };
   return (setup) =>
     gameResultFromEngine(
       setup,
-      runAutoBattle(engineSetupFromGame(setup), options).result,
+      runAutoBattle(engineSetupFromGame(setup), auto).result,
     );
 }

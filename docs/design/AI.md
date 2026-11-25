@@ -543,3 +543,132 @@ Raw metrics: `.orchestration/sim/it2/b2-*.json` (before) and `f1-*.json`
 (after), table `final-table.txt` (git-ignored); reproduce with `node
 tools/sim/run-ts.mjs tools/sim/match.ts --size M --players 3 --seeds
 11,12,13 --days 84 [--idle 0]`.
+
+## Battle AI fast mode (bead bzc.37)
+
+The battle AI v2 (`src/core/battle/ai.ts`) scores every candidate by
+rehearsing it on the engine, and a hero side searches its best three hero
+acts one ply deeper (each a whole second search). A 13-14-stack battle
+took 1-1.7 s, both when the adventure AI simulated a fight
+(`src/core/ai/strength.ts`) and when the rules resolved an AI-only
+battle. The battle AI now has two modes (`AiOptions.mode`).
+
+### Where each mode is used
+
+One switch, `UNWATCHED_BATTLE_AI = "fast"` in
+`src/core/battle/resolver.ts`: `createBattleResolver()` plays that mode
+unless asked otherwise, and it is the resolver of every battle resolved
+without the battle screen: the adventure AI's fight simulations (the
+oracle in `strength.ts` gets it from `AdventureAi`) and the battles of an
+AI with another AI or with neutrals (`settle` in
+`core/game/controller.ts`, with the game's resolver in `src/ui/game.ts`).
+A battle with a human side opens the battle screen, whose AI calls
+`chooseAiAction` without a mode: the full mode, auto-combat and quick
+battle included; so do the battle screen's intents (`rehearse.ts`) and
+balance runs (`npm run sim:battles`, policy `v2`). `runAutoBattle` and
+`autoPlay` default to the full mode too (`AutoBattleOptions.ai`).
+
+### What the fast mode does
+
+- **Incremental placed estimate.** A move or attack hex is ranked by the
+  board's value with the stack standing there, without re-evaluating the
+  board: the threat map (every stack's best strike next turn) is computed
+  once per decision; per hex only the moving stack's own strike and the
+  strikes against it are recomputed, and an enemy shooter it would stand
+  next to loses its shot. It equals the full evaluation of the placed
+  board (a test checks it).
+- **Tighter pruning.** Two moves rehearsed (full: six); one hex per
+  attack target; attacks and shots ranked by that estimate plus the
+  strike's damage value, the best three rehearsed (full: every attack
+  from every hex, every shot); area shots ranked by the value around the
+  hex, three rehearsed; Hit and Run on the best attack only.
+- **Hero acts.** No second ply: a hero act counts its own gain (the
+  stack's best action is assumed to gain as much after it as now). Each
+  cast tries its three most valuable stack targets (and every target
+  without a stack); only the best cast gets Echo and Fuel options. In an
+  auto-played battle a side searches its hero acts at its first decision
+  of a round and at its last (the cheaper last-turn threshold), not at
+  every stack's turn between.
+- **Reuse within a battle.** An auto-played battle keeps one memo
+  (`createAiMemo`): strike rates (damage per creature of one stack on
+  another) by both stacks' identity, side and conditions, recomputed every
+  three rounds, and the round of each side's last hero search. The choice
+  then depends on the battle's earlier decisions, so only auto-play passes
+  a memo; `chooseAiAction` without one stays a pure function of the state.
+- **Determinism and legality.** Candidates still come only from the legal
+  lists (`legalActions`, the acts' own checks); ranking ties go to the
+  earliest. Same setup, same battle (tests replay auto-battles and check
+  every action with `actionError` over seeded faction and guard battles).
+
+Two exact speed-ups apply to both modes and change no decision: a
+creature's value per HP is memoised (it computed the fight value, with a
+square root, on every call) and the per-decision rate cache uses nested
+maps instead of string keys. The full mode's decisions are unchanged
+(identical `sim:battles` tables and identical adventure matches) at about
+3.5 times less time per decision (9.2 → 2.6 ms at the mid stage).
+
+### Results (2026-11-25, main at 6061468 merged)
+
+Resolve time of whole battles (all decisions and the engine), each mode
+on both sides of the same 12 seeded faction battles per size with full
+heroes and stage kits; the modes alternate battle by battle so load falls
+on both alike (`npm run sim:battles -- --mode timing --seeds 12`; the
+machine was shared with other runs, load 11-17, so absolute times are
+about twice a quiet machine's):
+
+| Size   | Stacks (mean) | Stage | Full mean / median / max ms | Fast mean / median / max ms | Full / fast |
+| ------ | ------------- | ----- | --------------------------- | --------------------------- | ----------- |
+| Small  | 6             | early | 142 / 169 / 246             | 32 / 35 / 53                | 4.5x        |
+| Medium | 10            | mid   | 409 / 419 / 694             | 98 / 101 / 156              | 4.2x        |
+| Large  | 12            | late  | 766 / 764 / 1403            | 146 / 154 / 221             | 5.2x        |
+
+Against the full mode as it was before this bead (without the two exact
+speed-ups) the fast mode is about 15-18 times faster.
+
+Fast against full in mirrored battles (`npm run sim:battles -- --a
+v2-fast --b v2 --only faction`, every faction pairing, each seed played
+twice with the sides swapped):
+
+| Stage | Budget, hero level | Battles | Fast wins | Decision ms fast / full |
+| ----- | ------------------ | ------- | --------- | ----------------------- |
+| Early | 8,000, 5           | 216     | 48.7%     | 0.70 / 3.42             |
+| Mid   | 30,000, 11         | 216     | 47.3%     | 1.15 / 4.94             |
+| Late  | 80,000, 18         | 144     | 46.7%     | 1.49 / 6.83             |
+| All   |                    | 576     | 47.7%     |                         |
+
+The fast mode gives up about 2 points (the standard error of 576 battles
+is about 2 points), within the 5 points allowed. No illegal action in any
+run. (Win rates were measured just before main's bzc.22 and bzc.39 were
+merged; those changed no battle code or battle numbers.)
+
+Adventure AI turn time (every player an AI, seeds 11 and 12, 60 days),
+before (main's battle AI) and after (this bead, fast by default), with
+the full mode for comparison; the six runs ran at the same time on the
+shared machine (absolute times inflated by the load, the ratios hold):
+
+| Map           | Seed | Turn ms p95: before → fast (full) | Turn ms max: before → fast (full) |
+| ------------- | ---- | --------------------------------- | --------------------------------- |
+| M, 2 players  | 11   | 623 → 66 (209)                    | 757 → 104 (278)                   |
+| M, 2 players  | 12   | 489 → 52 (213)                    | 1059 → 69 (393)                   |
+| Hourglass (L) | 11   | 391 → 67 (145)                    | 959 → 118 (324)                   |
+| Hourglass (L) | 12   | 316 → 80 (133)                    | 897 → 103 (362)                   |
+
+With the full mode the matches play exactly as before (same fights, same
+eliminations). With the fast mode the simulated fights come out a little
+differently, so the matches diverge: on M seed 12 the second player still
+falls (day 51 instead of 31) and 84% of the guards are cleared by day 56
+(100% before); on the Hourglass seed 11 a player is out on day 30 (none
+before); seed 12 plays 25 player battles instead of 15. A second run
+earlier in the day, before AI iteration 2 was merged, gave the same
+picture (turn p95 384-869 → 134-159 ms, max 641-1779 → 175-368 ms).
+
+The turn budget is unchanged: `predictedMs` (strength.ts) still counts in
+the full mode's milliseconds, so the AI simulates as many fights as
+before, five times faster. Passing the fast mode's cost model
+(`AdventureAiOptions.simCost`) would let it simulate more fights a turn
+instead (iteration 3).
+
+Raw metrics: `.orchestration/sim/c-{before,fast,full}-{M,HG}.json`
+(git-ignored); reproduce with `node tools/sim/run-ts.mjs
+tools/sim/match.ts --size M --seeds 11,12 --days 60 [--battle-ai
+full]` and `--map hourglass-marches`.

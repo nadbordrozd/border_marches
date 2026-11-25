@@ -40,6 +40,16 @@
  * - **Determinism.** Candidates are generated in a fixed order and ties go
  *   to the earliest, so the choice is a pure function of the state (the
  *   intents of RULES_V2 1.13 rely on it). Caches only memoise pure values.
+ * - **Fast mode** (`mode: "fast"`, bead bzc.37; docs/design/AI.md "Battle
+ *   AI fast mode"): for battles no human watches (the adventure AI's
+ *   fight simulations and AI-against-AI resolution, chosen in
+ *   resolver.ts). Moves, attack hexes and area shots are ranked by an
+ *   incremental estimate that reuses the decision's threat map (only the
+ *   moving stack's terms are recomputed); the best few are rehearsed
+ *   (one hex per attack target, two moves, three area shots). Hero acts
+ *   are judged by their own gain instead of a second ply, and only the
+ *   best cast gets Echo and Fuel options. Same determinism; every action
+ *   still comes from the legal candidates.
  */
 
 import { isAlive } from "./abilities.ts";
@@ -99,10 +109,17 @@ import type {
 // ---------------------------------------------------------------------------
 // Values
 
+/** Memoised value per HP by creature record (records are never mutated). */
+const valuePerHp = new WeakMap<BattleCreatureStats, number>();
+
 /** AI value per HP: the creature's fight value per hit point. */
 export function aiValuePerHp(creature: BattleCreatureStats): number {
   if (creature.aiValuePerHp !== undefined) return creature.aiValuePerHp;
-  return creatureFightValue(creature) / Math.max(1, creature.hp);
+  const hit = valuePerHp.get(creature);
+  if (hit !== undefined) return hit;
+  const v = creatureFightValue(creature) / Math.max(1, creature.hp);
+  valuePerHp.set(creature, v);
+  return v;
 }
 
 /** A stack's value: total HP x value per HP (0 when dead). */
@@ -194,11 +211,71 @@ export const DEFAULT_AI_WEIGHTS: AiWeights = {
   scrollFraction: 0.3,
 };
 
+/**
+ * How hard the AI searches: "full" (default) rehearses every candidate
+ * and searches hero acts one ply deeper; "fast" estimates first and
+ * rehearses the best few (battles no human watches, bead bzc.37).
+ */
+export type AiMode = "full" | "fast";
+
 export interface AiOptions {
   /** Consider hero acts (casts, the Command, item acts). Default true. */
   readonly heroActs?: boolean;
   /** Weight overrides (tuning and tests). */
   readonly weights?: Partial<AiWeights>;
+  /** Search mode (default "full"). */
+  readonly mode?: AiMode;
+  /**
+   * Values the AI may reuse across the decisions of one battle (fast
+   * mode; {@link createAiMemo}). With it the choice depends on the
+   * decisions before it in that battle, so the battle screen's intents
+   * (a pure function of the state) never pass one.
+   */
+  readonly memo?: AiMemo;
+}
+
+/**
+ * Strike rates kept across the decisions of one battle round (fast mode,
+ * bead bzc.37): the threat map's damage per creature of one stack
+ * striking another, by both stacks' identity, side and conditions. A new
+ * round (or another battle) starts it afresh. Owned by one auto-played
+ * battle (auto.ts).
+ */
+export interface AiMemo {
+  seed: number;
+  round: number;
+  readonly rates: Map<string, number>;
+  /**
+   * The round in which each side last searched its hero acts: with a
+   * memo the fast mode searches them at a side's first decision of a
+   * round and at its last, not at every stack's turn between.
+   */
+  readonly heroRound: { [S in BattleSide]: number };
+}
+
+/** Rounds a memo's strike rates are kept before they are recomputed. */
+const MEMO_ROUNDS = 3;
+
+export function createAiMemo(): AiMemo {
+  return {
+    seed: NaN,
+    round: 0,
+    rates: new Map(),
+    heroRound: { attacker: 0, defender: 0 },
+  };
+}
+
+/** Memo keys by stack record (records are never mutated). */
+const memoKeys = new WeakMap<BattleStack, string>();
+
+/** A stack's identity for the memo: id, creature, side and conditions. */
+function memoKey(s: BattleStack): string {
+  const hit = memoKeys.get(s);
+  if (hit !== undefined) return hit;
+  let k = `${s.id}:${s.creature.id}:${s.side}`;
+  for (const c of s.conditions) k += `:${c.kind}${c.size}`;
+  memoKeys.set(s, k);
+  return k;
 }
 
 export interface ScoredAction {
@@ -211,12 +288,76 @@ export interface ScoredAction {
 const SCROLL_GOLD: readonly number[] = [0, 300, 600, 1000, 1500, 2500];
 
 const WIN = 1e7;
-/** Moves rehearsed after the cheap estimate. */
-const MOVES_REHEARSED = 6;
-/** Hero acts searched one ply deeper. */
-const HERO_ACTS_SEARCHED = 3;
-/** Casts tried with Echo and Fuel options. */
-const CASTS_EXTENDED = 3;
+
+/** The search limits of a mode. */
+interface Limits {
+  /** Moves rehearsed after the cheap estimate. */
+  readonly movesRehearsed: number;
+  /** Hero acts searched (the best by their own net gain). */
+  readonly heroActsSearched: number;
+  /**
+   * Search each one ply deeper (the hero act, then the stack's best
+   * action); without it a hero act counts its own gain.
+   */
+  readonly heroFollowUp: boolean;
+  /** Casts tried with Echo and Fuel options. */
+  readonly castsExtended: number;
+  /** Stack targets tried per hero cast, the most valuable first. */
+  readonly castTargets: number;
+  /**
+   * Attack hexes rehearsed per target, ranked by the incremental
+   * placed-board estimate (Infinity: every hex, no estimate).
+   */
+  readonly attackHexes: number;
+  /**
+   * With ranked attack hexes: attacks and shots rehearsed in all, ranked
+   * by the placed estimate plus the strike's damage value.
+   */
+  readonly strikeTargets: number;
+  /** Area shots (any-hex) rehearsed, ranked by the stacks around them. */
+  readonly areaShots: number;
+  /** Hit and Run: attacks extended with a walk, and walks per attack. */
+  readonly walkAttacks: number;
+  readonly walksPerAttack: number;
+  /** Rank moves with the incremental estimate (else full evaluations). */
+  readonly incremental: boolean;
+  /**
+   * With a memo, search hero acts only at a side's first decision of a
+   * round and at its last (else at every decision).
+   */
+  readonly heroActsOnce: boolean;
+}
+
+const LIMITS: { readonly [M in AiMode]: Limits } = {
+  full: {
+    movesRehearsed: 6,
+    heroActsSearched: 3,
+    heroFollowUp: true,
+    castsExtended: 3,
+    castTargets: Infinity,
+    attackHexes: Infinity,
+    strikeTargets: Infinity,
+    areaShots: Infinity,
+    walkAttacks: 2,
+    walksPerAttack: 2,
+    incremental: false,
+    heroActsOnce: false,
+  },
+  fast: {
+    movesRehearsed: 2,
+    heroActsSearched: 3,
+    heroFollowUp: false,
+    castsExtended: 1,
+    castTargets: 3,
+    attackHexes: 1,
+    strikeTargets: 3,
+    areaShots: 3,
+    walkAttacks: 1,
+    walksPerAttack: 2,
+    incremental: true,
+    heroActsOnce: true,
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Static distances (blocking ground only), cached per obstacle layout
@@ -293,13 +434,39 @@ class Context {
   readonly w: AiWeights;
   readonly me: BattleSide;
   readonly dist: Uint8Array;
+  readonly limits: Limits;
   /** This side presses (behind at the limit, a guard, or the attacker). */
   readonly presses: boolean;
-  private readonly rates = new Map<string, number>();
+  /** Attacker id -> target id + "s"/"m" -> damage per creature. */
+  private readonly rates = new Map<string, Map<string, number>>();
+  private readonly memo: AiMemo | null;
 
-  constructor(state: BattleState, me: BattleSide, w: AiWeights) {
+  constructor(
+    state: BattleState,
+    me: BattleSide,
+    w: AiWeights,
+    mode: AiMode = "full",
+    memo: AiMemo | null = null,
+  ) {
     this.w = w;
     this.me = me;
+    this.limits = LIMITS[mode];
+    this.memo = memo;
+    if (
+      memo !== null &&
+      (memo.seed !== state.seed ||
+        state.round < memo.round ||
+        state.round >= memo.round + MEMO_ROUNDS)
+    ) {
+      // Another battle (or a later round): start afresh.
+      if (memo.seed !== state.seed || state.round < memo.round) {
+        memo.heroRound.attacker = 0;
+        memo.heroRound.defender = 0;
+      }
+      memo.rates.clear();
+      memo.round = state.round;
+      memo.seed = state.seed;
+    }
     this.dist = distances(state);
     this.presses =
       (w.guardsPress > 0 && isNeutralGuard(state, me)) ||
@@ -316,7 +483,8 @@ class Context {
 
   /**
    * Damage per creature of `a` striking `b` (melee or shot), with every
-   * modifier of the board it is first asked on (memoised per decision).
+   * modifier of the board it is first asked on (memoised per decision,
+   * and per round with a memo).
    */
   rate(
     state: BattleState,
@@ -324,9 +492,25 @@ class Context {
     b: BattleStack,
     shot: boolean,
   ): number {
-    const key = `${a.id}>${b.id}${shot ? "s" : "m"}`;
-    const hit = this.rates.get(key);
+    let row = this.rates.get(a.id);
+    if (row === undefined) {
+      row = new Map();
+      this.rates.set(a.id, row);
+    }
+    const key = shot ? `${b.id}s` : `${b.id}m`;
+    const hit = row.get(key);
     if (hit !== undefined) return hit;
+    const memoKeyAB =
+      this.memo === null
+        ? null
+        : `${memoKey(a)}>${memoKey(b)}${shot ? "s" : "m"}`;
+    if (memoKeyAB !== null) {
+      const kept = this.memo?.rates.get(memoKeyAB);
+      if (kept !== undefined) {
+        row.set(key, kept);
+        return kept;
+      }
+    }
     const bd = computeBreakdown({
       state,
       attacker: { ...a, defending: false },
@@ -335,7 +519,8 @@ class Context {
       hexesMoved: 0,
     });
     const r = bd.damage / Math.max(1, a.count);
-    this.rates.set(key, r);
+    row.set(key, r);
+    if (memoKeyAB !== null) this.memo?.rates.set(memoKeyAB, r);
     return r;
   }
 }
@@ -481,52 +666,107 @@ function threat(
     const enemyNear = alive.some(
       (e) => e.side !== side && isAdjacent(e.hex, a.hex),
     );
-    const shooter =
-      isRangedCreature(a.creature) &&
-      a.shotsLeft > 0 &&
-      !enemyNear &&
-      !bears(a, "cannotShoot");
-    const speed = Math.max(1, effectiveSpeed(a));
-    const reach = speed + 1;
-    const teleport = a.creature.abilities.some(
-      (x) => ability(x).teleportWalk === true,
-    );
+    const s = striker(a, a.hex, enemyNear);
     let best = 0;
     for (const b of alive) {
       if (b.side === side) continue;
-      let factor = 1;
-      if (!shooter) {
-        const d = teleport
-          ? hexDistance(a.hex, b.hex)
-          : ctx.distance(a.hex, b.hex);
-        if (d > reach) {
-          if (far <= 0 || d === 255) continue;
-          factor = far ** Math.min(6, (d - reach) / speed);
-        }
-      }
-      let dmg = ctx.rate(state, a, b, shooter) * a.count;
-      if (b.defending) dmg *= 0.8;
-      const hp = totalHp({
-        count: b.count,
-        hp: b.creature.hp,
-        topHp: b.topHp,
-      });
-      let v = Math.min(dmg, hp) * aiValuePerHp(b.creature);
-      // A shooter reached in melee loses its shots too.
-      if (
-        factor === 1 &&
-        !shooter &&
-        isRangedCreature(b.creature) &&
-        b.shotsLeft > 0 &&
-        !b.summoned
-      )
-        v += ctx.w.shooterExposure * stackValue(b);
-      v *= factor;
+      const v = strikeValue(ctx, state, s, b, b.hex, far);
       if (v > best) best = v;
     }
     total += best;
   }
   return total;
+}
+
+/** A stack that could strike next turn, from `hex`. */
+interface Striker {
+  readonly a: BattleStack;
+  readonly hex: Hex;
+  readonly shooter: boolean;
+  readonly speed: number;
+  readonly reach: number;
+  readonly teleport: boolean;
+}
+
+function striker(a: BattleStack, hex: Hex, enemyNear: boolean): Striker {
+  const shooter =
+    isRangedCreature(a.creature) &&
+    a.shotsLeft > 0 &&
+    !enemyNear &&
+    !bears(a, "cannotShoot");
+  const speed = Math.max(1, effectiveSpeed(a));
+  return {
+    a,
+    hex,
+    shooter,
+    speed,
+    reach: speed + 1,
+    teleport: a.creature.abilities.some(
+      (x) => ability(x).teleportWalk === true,
+    ),
+  };
+}
+
+/**
+ * The damage value striker `s` could deal to `b` standing on `bHex` (0
+ * out of reach unless `far` > 0 pulls it forward).
+ */
+function strikeValue(
+  ctx: Context,
+  state: BattleState,
+  s: Striker,
+  b: BattleStack,
+  bHex: Hex,
+  far: number,
+): number {
+  let factor = 1;
+  if (!s.shooter) {
+    const d = s.teleport ? hexDistance(s.hex, bHex) : ctx.distance(s.hex, bHex);
+    if (d > s.reach) {
+      if (far <= 0 || d === 255) return 0;
+      factor = far ** Math.min(6, (d - s.reach) / s.speed);
+    }
+  }
+  let dmg = ctx.rate(state, s.a, b, s.shooter) * s.a.count;
+  if (b.defending) dmg *= 0.8;
+  const hp = totalHp({
+    count: b.count,
+    hp: b.creature.hp,
+    topHp: b.topHp,
+  });
+  let v = Math.min(dmg, hp) * aiValuePerHp(b.creature);
+  // A shooter reached in melee loses its shots too.
+  if (
+    factor === 1 &&
+    !s.shooter &&
+    isRangedCreature(b.creature) &&
+    b.shotsLeft > 0 &&
+    !b.summoned
+  )
+    v += ctx.w.shooterExposure * stackValue(b);
+  v *= factor;
+  return v;
+}
+
+/** The threat weights of the board: enemy reach (fear) and own reach. */
+function threatWeights(
+  ctx: Context,
+  state: BattleState,
+): { fear: number; own: number } {
+  // The side behind on the round-limit verdict (1.12) must break the other
+  // before the limit: it fears the enemy's reach less and presses harder,
+  // more each round. Neutral guards always press, and so does a side well
+  // ahead in the last rounds (aheadRounds).
+  const att = ctx.presses;
+  const fade =
+    att && ctx.w.fearRounds > 0
+      ? Math.max(0, 1 - (state.round - 1) / ctx.w.fearRounds)
+      : 1;
+  const fear = ctx.w.enemyThreat * (att ? 1 - ctx.w.aggression : 1) * fade;
+  const own =
+    ctx.w.ownThreat * (att ? 1 + ctx.w.aggression : 1) +
+    (att ? ctx.w.urgency * Math.max(0, state.round - 1) : 0);
+  return { fear, own };
 }
 
 /** The board's value for `ctx.me` (higher is better). */
@@ -537,6 +777,24 @@ function evaluate(ctx: Context, state: BattleState): number {
     return state.winner === me ? WIN + v : -WIN + v;
   }
   const alive = state.stacks.filter(isAlive);
+  let v = staticValue(ctx, state, alive);
+  const them = enemySide(me);
+  const { fear, own } = threatWeights(ctx, state);
+  v -= fear * threat(ctx, state, them, alive, 0);
+  v += own * threat(ctx, state, me, alive, ctx.w.far);
+  return v;
+}
+
+/**
+ * The board's value without the threat terms: material, conditions and
+ * pending get-ups (nothing here depends on where a stack stands).
+ */
+function staticValue(
+  ctx: Context,
+  state: BattleState,
+  alive: readonly BattleStack[],
+): number {
+  const me = ctx.me;
   let v = materialOf(ctx, state);
   for (const s of alive) {
     const sign = s.owner === me ? 1 : -1;
@@ -556,23 +814,101 @@ function evaluate(ctx: Context, state: BattleState): number {
     if (!s || isAlive(s) || !hasRemainsOf(state, s.id)) continue;
     v += (s.owner === me ? 0.9 : -0.9) * getUpValue(s);
   }
-  const them = enemySide(me);
-  // The side behind on the round-limit verdict (1.12) must break the other
-  // before the limit: it fears the enemy's reach less and presses harder,
-  // more each round. Neutral guards always press, and so does a side well
-  // ahead in the last rounds (aheadRounds).
-  const att = ctx.presses;
-  const fade =
-    att && ctx.w.fearRounds > 0
-      ? Math.max(0, 1 - (state.round - 1) / ctx.w.fearRounds)
-      : 1;
-  const fear = ctx.w.enemyThreat * (att ? 1 - ctx.w.aggression : 1) * fade;
-  const own =
-    ctx.w.ownThreat * (att ? 1 + ctx.w.aggression : 1) +
-    (att ? ctx.w.urgency * Math.max(0, state.round - 1) : 0);
-  v -= fear * threat(ctx, state, them, alive, 0);
-  v += own * threat(ctx, state, me, alive, ctx.w.far);
   return v;
+}
+
+/**
+ * The incremental move estimate (fast mode): the value of the board with
+ * stack `moverId` placed on another hex, as {@link evaluate} would give it
+ * for `placed(state, moverId, hex)`, without re-evaluating the board.
+ * The threat map is computed once: every stack's best strike that does
+ * not involve the mover; per hex only the mover's own strike and the
+ * strikes against it are recomputed (and an enemy shooter it would stand
+ * next to loses its shot).
+ */
+function placedEstimator(
+  ctx: Context,
+  state: BattleState,
+  moverId: string,
+): (hex: Hex) => number {
+  const me = ctx.me;
+  const them = enemySide(me);
+  const alive = state.stacks.filter(isAlive);
+  const m = alive.find((x) => x.id === moverId);
+  const base = staticValue(ctx, state, alive);
+  const { fear, own } = threatWeights(ctx, state);
+  if (m === undefined || m.side !== me) {
+    const fixed = evaluate(ctx, state);
+    return () => fixed;
+  }
+  const moverActs = !bears(m, "cannotAct");
+  // Own side: every other stack's best strike (the enemies do not move).
+  let ownFixed = 0;
+  for (const a of alive) {
+    if (a.side !== me || a.id === m.id || bears(a, "cannotAct")) continue;
+    const near = alive.some((e) => e.side !== me && isAdjacent(e.hex, a.hex));
+    const s = striker(a, a.hex, near);
+    let best = 0;
+    for (const b of alive) {
+      if (b.side === me) continue;
+      const v = strikeValue(ctx, state, s, b, b.hex, ctx.w.far);
+      if (v > best) best = v;
+    }
+    ownFixed += best;
+  }
+  const targets = alive.filter((b) => b.side !== me);
+  // Enemy side: each stack's best strike at stacks other than the mover,
+  // as a shooter and in melee (the mover may stand next to it).
+  const enemies: {
+    readonly hex: Hex;
+    readonly nearExcl: boolean;
+    readonly shoot: Striker;
+    readonly melee: Striker;
+    readonly bestShoot: number;
+    readonly bestMelee: number;
+  }[] = [];
+  for (const e of alive) {
+    if (e.side !== them || bears(e, "cannotAct")) continue;
+    const nearExcl = alive.some(
+      (x) => x.side !== them && x.id !== m.id && isAdjacent(x.hex, e.hex),
+    );
+    const shoot = striker(e, e.hex, nearExcl);
+    const melee = striker(e, e.hex, true);
+    let bestShoot = 0;
+    let bestMelee = 0;
+    for (const b of alive) {
+      if (b.side === them || b.id === m.id) continue;
+      const vs = strikeValue(ctx, state, shoot, b, b.hex, 0);
+      if (vs > bestShoot) bestShoot = vs;
+      const vm =
+        shoot.shooter === melee.shooter
+          ? vs
+          : strikeValue(ctx, state, melee, b, b.hex, 0);
+      if (vm > bestMelee) bestMelee = vm;
+    }
+    enemies.push({ hex: e.hex, nearExcl, shoot, melee, bestShoot, bestMelee });
+  }
+  return (hex) => {
+    let enemyThreat = 0;
+    for (const e of enemies) {
+      const near = e.nearExcl || isAdjacent(hex, e.hex);
+      const best = near ? e.bestMelee : e.bestShoot;
+      const v = strikeValue(ctx, state, near ? e.melee : e.shoot, m, hex, 0);
+      enemyThreat += v > best ? v : best;
+    }
+    let mine = ownFixed;
+    if (moverActs) {
+      const near = targets.some((e) => isAdjacent(e.hex, hex));
+      const s = striker(m, hex, near);
+      let best = 0;
+      for (const b of targets) {
+        const v = strikeValue(ctx, state, s, b, b.hex, ctx.w.far);
+        if (v > best) best = v;
+      }
+      mine += best;
+    }
+    return base - fear * enemyThreat + own * mine;
+  };
 }
 
 function materialOf(ctx: Context, state: BattleState): number {
@@ -622,6 +958,38 @@ function targetsOf(
   actorId: string,
 ): readonly (readonly ActTarget[])[] {
   return def.aiTargets?.(state, actorId) ?? defaultTargets(state, def);
+}
+
+/**
+ * A hero cast's target choices: all of them in full mode; in fast mode
+ * the choices without a stack, and of those with stacks the
+ * `castTargets` whose stacks are worth the most (the biggest enemy to
+ * strike, the biggest own stack to bless).
+ */
+function castTargets(
+  ctx: Context,
+  state: BattleState,
+  def: ActDef,
+  actorId: string,
+): readonly (readonly ActTarget[])[] {
+  const all = targetsOf(state, def, actorId);
+  const n = ctx.limits.castTargets;
+  if (all.length <= n) return all;
+  const worth = (targets: readonly ActTarget[]): number => {
+    let v = -1;
+    for (const t of targets) {
+      if (!("stack" in t)) continue;
+      const s = state.stacks.find((x) => x.id === t.stack);
+      if (s !== undefined && isAlive(s)) v = Math.max(v, stackValue(s));
+    }
+    return v;
+  };
+  const ranked = all
+    .map((targets, i) => ({ targets, i, v: worth(targets) }))
+    .filter((x) => x.v >= 0);
+  ranked.sort((a, b) => b.v - a.v || a.i - b.i);
+  const keep = new Set(ranked.slice(0, n).map((x) => x.i));
+  return all.filter((targets, i) => keep.has(i) || worth(targets) < 0);
 }
 
 /** Activated abilities, creature casts and area shots of the active stack. */
@@ -692,11 +1060,23 @@ interface Scored {
   readonly after: BattleState;
 }
 
+/**
+ * Candidates rehearsed on the engine since the module loaded (the
+ * search's main cost; tests compare the modes by it, not by the clock).
+ */
+let rehearsals = 0;
+
+/** Rehearsals run so far (tests and tools). */
+export function aiRehearsals(): number {
+  return rehearsals;
+}
+
 function rehearsed(
   ctx: Context,
   state: BattleState,
   action: BattleAction,
 ): Scored {
+  rehearsals++;
   const after = applyAction(state, action).state;
   return { action, value: evaluate(ctx, after), after };
 }
@@ -720,25 +1100,100 @@ function hexesNear(ctx: Context, from: Hex, n: number): Hex[] {
 function scoreStackOptions(ctx: Context, state: BattleState): Scored[] {
   const self = activeStack(state);
   if (!self) return [];
+  const lim = ctx.limits;
+  // The cheap estimate of the active stack standing on another hex.
+  const placedValue = (board: BattleState): ((h: Hex) => number) =>
+    lim.incremental
+      ? placedEstimator(ctx, board, self.id)
+      : (h) => evaluate(ctx, placed(board, self.id, h));
+  let estimate: ((h: Hex) => number) | null = null;
   const out: Scored[] = [];
   const moves: BattleAction[] = [];
+  /** Walk-and-strike attacks by target (fast mode ranks their hexes). */
+  const strikes = new Map<
+    string,
+    Extract<BattleAction, { type: "attack" }>[]
+  >();
+  const shots: Extract<BattleAction, { type: "shoot" }>[] = [];
+  const ranking = lim.attackHexes !== Infinity;
   for (const action of legalActions(state)) {
     if (action.type === "move" && action.swapWith === undefined) {
       moves.push(action);
       continue;
     }
+    if (ranking && action.type === "attack" && action.swapWith === undefined) {
+      const list = strikes.get(action.targetId);
+      if (list) list.push(action);
+      else strikes.set(action.targetId, [action]);
+      continue;
+    }
+    if (ranking && action.type === "shoot" && action.swapWith === undefined) {
+      shots.push(action);
+      continue;
+    }
     out.push(rehearsed(ctx, state, action));
   }
+  if (ranking) {
+    // Fast mode: each target's attack hexes ranked by the placed
+    // estimate; the targets (and shots) by that plus the strike's own
+    // damage value; the best few rehearsed.
+    const est = (estimate ??= placedValue(state));
+    const gain = (target: string, from: Hex, shot: boolean): number => {
+      const b = state.stacks.find((x) => x.id === target);
+      if (b === undefined) return 0;
+      const s = striker(self, from, !shot);
+      return strikeValue(ctx, state, s, b, b.hex, 0);
+    };
+    const picks: { a: BattleAction; i: number; v: number }[] = [];
+    for (const list of strikes.values()) {
+      const hexes = list
+        .map((a, i) => ({ a, i, v: est(a.from) }))
+        .sort((x, y) => y.v - x.v || x.i - y.i)
+        .slice(0, lim.attackHexes);
+      for (const h of hexes)
+        picks.push({
+          a: h.a,
+          i: picks.length,
+          v: h.v + gain(h.a.targetId, h.a.from, false),
+        });
+    }
+    const here = shots.length > 0 ? est(self.hex) : 0;
+    for (const a of shots)
+      picks.push({
+        a,
+        i: picks.length,
+        v: here + gain(a.targetId, self.hex, true),
+      });
+    picks.sort((x, y) => y.v - x.v || x.i - y.i);
+    for (const p of picks.slice(0, lim.strikeTargets))
+      out.push(rehearsed(ctx, state, p.a));
+  }
   // Moves: a cheap estimate on the placed board, then the best rehearsed.
+  if (moves.length > 0) estimate ??= placedValue(state);
+  const est = estimate;
   const estimates = moves.map((m, i) => ({
     i,
-    v: m.type === "move" ? evaluate(ctx, placed(state, self.id, m.to)) : 0,
+    v: m.type === "move" && est !== null ? est(m.to) : 0,
   }));
   estimates.sort((a, b) => b.v - a.v || a.i - b.i);
-  for (const e of estimates.slice(0, MOVES_REHEARSED))
+  for (const e of estimates.slice(0, lim.movesRehearsed))
     out.push(rehearsed(ctx, state, moves[e.i] as BattleAction));
-  for (const action of extraActions(state, self))
+  const areaShots: { a: BattleAction; i: number; v: number }[] = [];
+  for (const action of extraActions(state, self)) {
+    if (lim.areaShots !== Infinity && action.type === "shootHex") {
+      areaShots.push({
+        a: action,
+        i: areaShots.length,
+        v: around(state, self.side, action.at),
+      });
+      continue;
+    }
     out.push(rehearsed(ctx, state, action));
+  }
+  // Area shots (fast mode): ranked by the value standing around the hex.
+  areaShots.sort((x, y) => y.v - x.v || x.i - y.i);
+  for (const s of areaShots.slice(0, lim.areaShots))
+    out.push(rehearsed(ctx, state, s.a));
   // Hit and Run: the best attacks, each with its best walk afterwards.
   const walk = Math.max(
     0,
@@ -748,17 +1203,18 @@ function scoreStackOptions(ctx: Context, state: BattleState): Scored[] {
     const attacks = out
       .filter((s) => s.action.type === "attack")
       .sort((a, b) => b.value - a.value)
-      .slice(0, 2);
+      .slice(0, lim.walkAttacks);
     for (const atk of attacks) {
       if (atk.action.type !== "attack") continue;
       const after = atk.after;
       const me = after.stacks.find((x) => x.id === self.id);
       if (!me || !isAlive(me)) continue;
+      const walkValue = placedValue(after);
       const options = hexesNear(ctx, me.hex, walk)
         .filter((h) => !after.stacks.some((s) => isAlive(s) && sameAt(s, h)))
-        .map((h, i) => ({ h, i, v: evaluate(ctx, placed(after, self.id, h)) }))
+        .map((h, i) => ({ h, i, v: walkValue(h) }))
         .sort((a, b) => b.v - a.v || a.i - b.i)
-        .slice(0, 2);
+        .slice(0, lim.walksPerAttack);
       for (const o of options) {
         const a: BattleAction = { ...atk.action, after: o.h };
         if (actionError(state, a) === null) out.push(rehearsed(ctx, state, a));
@@ -766,6 +1222,20 @@ function scoreStackOptions(ctx: Context, state: BattleState): Scored[] {
     }
   }
   return out;
+}
+
+/**
+ * Value standing on and around hex `h` (an area shot's rough worth to
+ * `side`): enemy stacks count for, own stacks against.
+ */
+function around(state: BattleState, side: BattleSide, h: Hex): number {
+  let v = 0;
+  for (const s of state.stacks) {
+    if (!isAlive(s)) continue;
+    if (!sameAt(s, h) && !isAdjacent(s.hex, h)) continue;
+    v += s.side === side ? -stackValue(s) : stackValue(s);
+  }
+  return v;
 }
 
 function sameAt(s: BattleStack, h: Hex): boolean {
@@ -842,7 +1312,7 @@ function heroOptions(ctx: Context, state: BattleState): HeroOption[] {
           : magic
             ? manaCost(def, magic) * ctx.w.manaValue
             : 0;
-        for (const targets of targetsOf(state, def, self.id)) {
+        for (const targets of castTargets(ctx, state, def, self.id)) {
           const o = tryAct(
             {
               type: "heroAct",
@@ -860,7 +1330,7 @@ function heroOptions(ctx: Context, state: BattleState): HeroOption[] {
       // Echo and Fuel options on the best casts.
       const top = [...casts]
         .sort((a, b) => b.value - b.cost - (a.value - a.cost))
-        .slice(0, CASTS_EXTENDED);
+        .slice(0, ctx.limits.castsExtended);
       const fuelLeft = magic ? magic.fuelUsed < magic.fuelMax : false;
       for (const o of top) {
         if (o.action.type !== "heroAct") continue;
@@ -952,7 +1422,7 @@ export function scoreActions(
 ): ScoredAction[] {
   const self = activeStack(state);
   if (!self || state.winner !== null) return [];
-  const ctx = new Context(state, self.side, weightsOf(options));
+  const ctx = new Context(state, self.side, weightsOf(options), options.mode);
   const before = evaluate(ctx, state);
   return scoreStackOptions(ctx, state).map((s) => ({
     action: s.action,
@@ -968,25 +1438,48 @@ export function chooseAiAction(
   const self = activeStack(state);
   if (!self || state.winner !== null)
     throw new Error("no action: the battle is over");
-  const ctx = new Context(state, self.side, weightsOf(options));
+  const ctx = new Context(
+    state,
+    self.side,
+    weightsOf(options),
+    options.mode,
+    options.memo ?? null,
+  );
+  const lim = ctx.limits;
   const stackBest = bestOf(scoreStackOptions(ctx, state));
   if (!stackBest) throw new Error("no action: the battle is over");
   if (options.heroActs === false || !state.sides[self.side].hero)
     return stackBest.action;
+  const last = lastTurnOfRound(state, self);
+  const memo = options.memo;
+  if (lim.heroActsOnce && memo !== undefined) {
+    // Fast mode: a side's first decision of the round and its last.
+    if (memo.heroRound[self.side] === state.round && !last)
+      return stackBest.action;
+    memo.heroRound[self.side] = state.round;
+  }
 
   const heroes = heroOptions(ctx, state)
     .map((o, i) => ({ o, i, net: o.value - o.cost }))
     .sort((a, b) => b.net - a.net || a.i - b.i)
-    .slice(0, HERO_ACTS_SEARCHED);
+    .slice(0, lim.heroActsSearched);
   const scale = Math.max(1, sideValue(state, self.side));
-  const last = lastTurnOfRound(state, self);
+  /** The stack's best gain on the board as it stands (fast mode). */
+  let stackGain: number | null = null;
   let pick: { action: BattleAction; margin: number } | null = null;
   for (const { o } of heroes) {
-    // One ply deeper: the hero act, then the stack's best action.
     let value = o.value;
     if (o.after.winner === null && o.after.activeStackId === self.id) {
-      const follow = bestOf(scoreStackOptions(ctx, o.after));
-      if (follow) value = follow.value;
+      if (lim.heroFollowUp) {
+        // One ply deeper: the hero act, then the stack's best action.
+        const follow = bestOf(scoreStackOptions(ctx, o.after));
+        if (follow) value = follow.value;
+      } else {
+        // The stack's best action is assumed to gain as much after the
+        // hero act as it would now.
+        stackGain ??= stackBest.value - evaluate(ctx, state);
+        value = o.value + stackGain;
+      }
     }
     const gain = value - stackBest.value - o.cost;
     const fraction =
@@ -1012,4 +1505,21 @@ export function evaluateFor(
   options: AiOptions = {},
 ): number {
   return evaluate(new Context(state, side, weightsOf(options)), state);
+}
+
+/**
+ * The fast mode's incremental estimates of the active stack standing on
+ * each of `hexes` (tests: they match {@link evaluateFor} on the placed
+ * board).
+ */
+export function placedEstimates(
+  state: BattleState,
+  hexes: readonly Hex[],
+  options: AiOptions = {},
+): number[] {
+  const self = activeStack(state);
+  if (!self) return [];
+  const ctx = new Context(state, self.side, weightsOf(options), "fast");
+  const est = placedEstimator(ctx, state, self.id);
+  return hexes.map(est);
 }

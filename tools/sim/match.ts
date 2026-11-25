@@ -21,6 +21,9 @@
  *   --no-families        no fight predictions from earlier fights of a
  *                        family (iteration 2 ablation)
  *   --no-openings        no faction openings in week one (ablation)
+ *   --battle-ai fast|full   the battle AI mode of every battle and of the
+ *                       AI's fight simulations (default the game's:
+ *                       fast, UNWATCHED_BATTLE_AI in resolver.ts)
  *   --out <file.json>    save every day's metrics (default
  *                        .orchestration/sim/match-<ai>-<size><players>.json)
  *
@@ -80,7 +83,15 @@ const trace =
       };
 
 registerSpells();
-const resolver = createBattleResolver();
+/**
+ * --battle-ai fast|full: the battle AI mode of the match's battles and of
+ * the adventure AI's simulations (default: the game's own choice,
+ * UNWATCHED_BATTLE_AI).
+ */
+const battleAi = opt("battle-ai", "");
+if (battleAi !== "" && battleAi !== "fast" && battleAi !== "full")
+  throw new Error(`unknown --battle-ai ${battleAi}`);
+const resolver = createBattleResolver(battleAi === "" ? {} : { ai: battleAi });
 
 function describe(a: GameAction, before: GameState): string {
   switch (a.type) {
@@ -149,11 +160,12 @@ function makeController(): (player: number) => PlayerController {
     const ai = new SimpleAi();
     return () => ai;
   }
-  // The AI's own simulated fights use its default resolver (a round
-  // limit for estimates); the match's battles use the game's.
+  // The AI's own simulated fights use its default resolver unless
+  // --battle-ai picks a mode for both; the match's battles use the game's.
   const ai = new AdventureAi({
     families: !args.includes("--no-families"),
     openings: !args.includes("--no-openings"),
+    ...(battleAi === "" ? {} : { resolver }),
   });
   current = ai;
   // --idle <p>: that player only ends its turns (a passive human).

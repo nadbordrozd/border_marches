@@ -127,11 +127,18 @@ export {
   DEFAULT_AI_WEIGHTS,
   aiValuePerHp,
   chooseAiAction,
+  createAiMemo,
   evaluateFor,
   scoreActions,
   stackValue,
 } from "./ai.ts";
-export type { AiOptions, AiWeights, ScoredAction } from "./ai.ts";
+export type {
+  AiMemo,
+  AiMode,
+  AiOptions,
+  AiWeights,
+  ScoredAction,
+} from "./ai.ts";
 export {
   enemyIntents,
   rehearse,
@@ -171,6 +178,7 @@ export {
 } from "./hero-effects.ts";
 export type { HeroStackModifier, HeroStrikeModifier } from "./hero-effects.ts";
 export {
+  UNWATCHED_BATTLE_AI,
   battleStatsFromCreature,
   createBattleResolver,
   engineSetupFromGame,

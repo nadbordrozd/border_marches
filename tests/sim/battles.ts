@@ -9,8 +9,9 @@
  *                       played twice with the policies' sides swapped.
  *                       balance: policy A on both sides; win rates per
  *                       faction pairing (both sides of every pairing).
- *   --a v2 --b v1       policies: v1 (the frozen baseline), v2, v2-nohero
- *                       (no hero acts), or v2:<weight>=<n>,... overrides.
+ *   --a v2 --b v1       policies: v1 (the frozen baseline), v2, v2-fast
+ *                       (the fast mode of bead bzc.37), v2-nohero (no
+ *                       hero acts), or v2:<weight>=<n>,... overrides.
  *   --seeds 20          seeds per matchup
  *   --budget 12000      army budget in gold equivalents (tests/sim/armies.ts)
  *   --level 6           hero level
@@ -35,6 +36,10 @@
  *                       (guard FV / army FV) per stage: win rate, rounds
  *                       and the hero's fight value lost.
  *   --mode tiers        fight value per 1000 gold by tier and faction.
+ *   --mode timing       resolve time of small, medium and large battles
+ *                       (3, 5 and 7 stacks a side, early, mid and late
+ *                       heroes) for policy A and B (default v2 and
+ *                       v2-fast), --seeds battles per size.
  *   --mode duels        one tier against the same tier of each other
  *                       faction, equal gold (--budget), no heroes.
  *   --pf <faction>=<policy>   that faction plays this policy in the report
@@ -58,6 +63,7 @@ import {
   activeStack,
   applyAction,
   chooseAiAction,
+  createAiMemo,
   createBattle,
   creatureFightValue,
   engineSetupFromGame,
@@ -128,6 +134,12 @@ export function parsePolicy(spec: string): Policy {
 function policyOf(spec: string): Policy {
   if (spec === "v1") return chooseV1;
   if (spec === "v2") return (s) => chooseAiAction(s);
+  if (spec === "v2-fast") {
+    // As auto-play runs it: one memo, started afresh by each new battle
+    // (another seed) or round.
+    const memo = createAiMemo();
+    return (s) => chooseAiAction(s, { mode: "fast", memo });
+  }
   if (spec === "v2-nohero")
     return (s) => chooseAiAction(s, { heroActs: false });
   if (spec.startsWith("v2:")) {
@@ -591,6 +603,82 @@ function applyTweaks(spec: string): void {
 }
 
 /**
+ * Battle sizes for --mode timing (bead bzc.37): stacks per side and the
+ * game stage of the armies and heroes (the side keeps its highest tiers).
+ */
+const TIMING_SIZES = [
+  { name: "small", stacks: 3, stage: "early" },
+  { name: "medium", stacks: 5, stage: "mid" },
+  { name: "large", stacks: 7, stage: "late" },
+] as const;
+
+/**
+ * Resolve time of whole battles (decisions and engine) by size, each
+ * policy on both sides of the same seeded faction battles with full
+ * heroes: mean, median and slowest milliseconds per battle.
+ */
+function timingMode(specs: readonly string[], seeds: number): void {
+  console.log(
+    "size    stacks  policy      battles  decisions  mean ms  median ms  max ms",
+  );
+  const means = new Map<string, number>();
+  for (const size of TIMING_SIZES) {
+    const { budget, level } = STAGES[size.stage];
+    const setups: GameBattleSetup[] = [];
+    for (let i = 0; i < seeds; i++) {
+      const a = FACTIONS[i % 3] as Faction;
+      const d = FACTIONS[(i + 1 + Math.floor(i / 3)) % 3] as Faction;
+      const seed = 2000 + i;
+      const side = (f: Faction, s: number, owner: number): GameBattleSide => {
+        const army = buildArmy(f, budget, s).slice(-size.stacks);
+        const hero = buildHero(
+          f,
+          level,
+          s,
+          s % 2 === 0 ? "might" : "magic",
+          kitFor(level),
+        );
+        return heroSide(f, hero, army, owner);
+      };
+      setups.push(gameSetup(seed, side(a, seed, 1), side(d, seed + 7777, 2)));
+    }
+    // The policies take turns battle by battle, so a change in the
+    // machine's load falls on both alike.
+    const runs = specs.map((spec) => ({
+      spec,
+      policy: parsePolicy(spec),
+      times: [] as number[],
+      decisions: 0,
+    }));
+    let stacks = 0;
+    for (const setup of setups) {
+      stacks += setup.attacker.stacks.length + setup.defender.stacks.length;
+      for (const run of runs) {
+        const t = performance.now();
+        const r = play(setup, { attacker: run.policy, defender: run.policy });
+        run.times.push(performance.now() - t);
+        run.decisions += r.decisions.attacker + r.decisions.defender;
+        if (r.illegal > 0) console.log(`  ${run.spec}: illegal action`);
+      }
+    }
+    for (const { spec, times, decisions } of runs) {
+      const sorted = [...times].sort((x, y) => x - y);
+      const mean = times.reduce((x, y) => x + y, 0) / times.length;
+      means.set(`${size.name}:${spec}`, mean);
+      console.log(
+        `${size.name.padEnd(7)} ${(stacks / setups.length).toFixed(1).padStart(6)}  ${spec.padEnd(10)} ${String(setups.length).padStart(8)}  ${String(decisions).padStart(9)}  ${mean.toFixed(0).padStart(7)}  ${(sorted[sorted.length >> 1] ?? 0).toFixed(0).padStart(9)}  ${(sorted[sorted.length - 1] ?? 0).toFixed(0).padStart(6)}`,
+      );
+    }
+    const [first, second] = specs;
+    if (first !== undefined && second !== undefined) {
+      const x = means.get(`${size.name}:${first}`) ?? 0;
+      const y = means.get(`${size.name}:${second}`) ?? 1;
+      console.log(`        ${first} / ${second}: ${(x / y).toFixed(1)}x`);
+    }
+  }
+}
+
+/**
  * Tier duels: one tier of a faction against the same tier of another,
  * equal gold (at least `budget`, at least 3 of the dearer creature), no
  * heroes, both sides of every pairing. A tier's win rate over the two
@@ -728,6 +816,12 @@ export function main(args: readonly string[]): number {
   }
   if (mode === "tiers") {
     tiersMode();
+    return 0;
+  }
+  if (mode === "timing") {
+    const specs = [opt.get("a") ?? "v2", opt.get("b") ?? "v2-fast"];
+    console.log(`timing: ${specs.join(" and ")}, ${seeds} battles per size`);
+    timingMode(specs, seeds);
     return 0;
   }
   if (mode === "report") {

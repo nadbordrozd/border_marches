@@ -5,7 +5,10 @@
  * factor for hero Attack and Defense and the fort's Defense bonus. Close
  * calls are fought for real on a copy: the battle the hero would start now
  * is set up exactly as the rules would (battleSetup) and auto-resolved by
- * the game's resolver, so the estimate knows the survivors.
+ * the game's resolver, so the estimate knows the survivors. That resolver
+ * plays the battle AI's fast mode (UNWATCHED_BATTLE_AI in
+ * core/battle/resolver.ts, bead bzc.37); {@link predictedMs} still counts
+ * in the full mode's milliseconds, so the budgets are unchanged.
  */
 import { getCreature } from "../../data/creatures.ts";
 import { deriveSeed } from "../rng.ts";

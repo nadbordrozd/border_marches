@@ -2,7 +2,8 @@
  * Auto-combat and the battle result the strategic layer needs.
  */
 
-import { chooseAiAction } from "./ai.ts";
+import { chooseAiAction, createAiMemo } from "./ai.ts";
+import type { AiMode, AiOptions } from "./ai.ts";
 import { autoDeploy } from "./deploy.ts";
 import { applyAction } from "./engine.ts";
 import { ROUND_LIMIT } from "./resolve.ts";
@@ -30,6 +31,11 @@ export interface AutoBattleOptions {
    * engine's own limit is ROUND_LIMIT (15).
    */
   readonly maxRounds?: number;
+  /**
+   * The battle AI's mode for both sides (default "full"; resolver.ts
+   * picks "fast" for the battles no human watches).
+   */
+  readonly ai?: AiMode;
 }
 
 export interface StackOutcome {
@@ -135,13 +141,17 @@ export function autoPlay(
   options: AutoBattleOptions = {},
 ): AutoPlayResult {
   const maxRounds = options.maxRounds ?? ROUND_LIMIT;
+  // The fast mode reuses strike rates across the battle's decisions.
+  const mode = options.ai ?? "full";
+  const ai: AiOptions =
+    mode === "fast" ? { mode, memo: createAiMemo() } : { mode };
   const events: BattleEvent[] = [];
   let cur = state;
   while (cur.winner === null) {
     if (cur.round > maxRounds) {
       return { state: cur, events, result: battleResult(cur, "roundLimit") };
     }
-    const step = applyAction(cur, chooseAiAction(cur));
+    const step = applyAction(cur, chooseAiAction(cur, ai));
     events.push(...step.events);
     cur = step.state;
   }
