@@ -20,11 +20,14 @@
   font: inherit;
 }
 
+/* The top bar (UI2-03): the round chip at the left, the turn queue of
+   portraits centred over the field. 30 px + 2 px border: the HUD budget. */
 .bm-top {
   flex: 0 0 auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 12px;
+  column-gap: 8px;
   height: 30px;
   padding: 0 10px;
   background: #241c13;
@@ -33,34 +36,40 @@
   white-space: nowrap;
 }
 
+.bm-hourglass {
+  display: inline-flex;
+}
+
+/* "Round 3 / 15"; the limit's verdict is in its hover card (RULES_V2 1.12). */
 .bm-round {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 1px 9px 1px 7px;
+  border: 1px solid #5c4626;
+  border-radius: 10px;
+  background: #1a140d;
   font:
-    bold 15px Georgia,
+    bold 14px Georgia,
     serif;
   color: #ffd65c;
   cursor: help;
 }
 
-/* Round limit: rounds left and who wins at the limit (RULES_V2 1.12). */
-.bm-limit {
-  flex: 0 0 auto;
-  padding: 1px 7px;
-  border: 1px solid #5c4626;
-  border-radius: 9px;
-  font-size: 12px;
-  color: #e7b9a6;
-  background: #3a1f17;
-  cursor: help;
+.bm-round.bm-round-near {
+  border-color: #ffd65c;
+  animation: bm-limit-pulse 1.2s ease-in-out infinite alternate;
 }
 
-.bm-limit.bm-limit-ours {
+.bm-round.bm-round-ours {
   color: #c8e6a8;
   background: #1f3317;
 }
 
-.bm-limit.bm-limit-near {
-  border-color: #ffd65c;
-  animation: bm-limit-pulse 1.2s ease-in-out infinite alternate;
+.bm-round.bm-round-theirs {
+  color: #ffb9a0;
+  background: #3a1f17;
 }
 
 @keyframes bm-limit-pulse {
@@ -73,47 +82,127 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bm-limit.bm-limit-near {
+  .bm-round.bm-round-near {
     animation: none;
   }
 }
 
-.bm-order {
+/* Tile widths are mirrored in queue.ts (QUEUE_TILE_W, QUEUE_NOW_W). */
+.bm-queue {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
+  min-width: 0;
   overflow: hidden;
 }
 
-.bm-chip {
-  padding: 1px 6px;
-  border-radius: 3px;
-  border: 1px solid #0d0b08;
-  font-size: 11px;
-  color: #fff;
+.bm-q {
+  position: relative;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #6f93cf;
+  border-radius: 2px;
+  background: #13203a;
+  cursor: pointer;
 }
 
-.bm-chip.bm-attacker {
+.bm-q.bm-defender {
+  border-color: #cf6f6f;
+  background: #3a1313;
+}
+
+.bm-q:hover {
+  border-color: #fff0a0;
+  filter: brightness(1.15);
+}
+
+.bm-q-img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.bm-q-letter {
+  font:
+    bold 14px/24px Georgia,
+    serif;
+  text-align: center;
+  color: #f0e6c8;
+}
+
+.bm-q.bm-q-now {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #ffd65c;
+}
+
+.bm-q.bm-q-now .bm-q-img {
+  width: 26px;
+  height: 26px;
+}
+
+.bm-q.bm-q-next {
+  opacity: 0.8;
+}
+
+.bm-q.bm-q-next:hover {
+  opacity: 1;
+}
+
+/* The count in the side's colour, Heroes style. */
+.bm-q-count {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  padding: 0 2px;
+  border-radius: 2px 0 0;
   background: #24477e;
+  font:
+    bold 9px/10px Verdana,
+    Geneva,
+    sans-serif;
+  color: #fff;
+  text-shadow: 0 1px 0 #000;
 }
 
-.bm-chip.bm-defender {
+.bm-q.bm-defender .bm-q-count {
   background: #7e2424;
 }
 
-.bm-chip.bm-now {
-  outline: 2px solid #ffd65c;
-  font-weight: bold;
+.bm-q.bm-q-now .bm-q-count {
+  right: -2px;
+  bottom: -2px;
+  font-size: 10px;
+  line-height: 11px;
 }
 
-.bm-chip.bm-later {
-  opacity: 0.55;
+.bm-q-event {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffd65c;
+  border-style: dashed;
+  cursor: help;
 }
 
-.bm-next {
-  margin-left: 6px;
-  color: #a89a80;
-  font-size: 11px;
+.bm-q-div {
+  flex: 0 0 auto;
+  margin: 0 3px;
+  padding: 2px 6px;
+  border-left: 2px solid #8a6c3a;
+  font-size: 10px;
+  color: #c9b88f;
+}
+
+.bm-q-card-img {
+  width: 48px;
+  height: 48px;
+}
+
+.bm-q-verdict {
+  color: #ffd65c;
 }
 
 .bm-stage-wrap {
@@ -507,11 +596,6 @@
 .bm-pv-cond {
   font-size: 12px;
   color: #d8ccb0;
-}
-
-.bm-chip.bm-event {
-  font-style: italic;
-  opacity: 0.9;
 }
 
 /* Spellbook and cast panel (src/ui/battle/spellbook.ts, RULES_V2 2.4). */

@@ -313,7 +313,7 @@ export function stackInfo(state: BattleState, stack: BattleStack): StackInfo {
   };
 }
 
-/** The round-limit indicator of the top bar (RULES_V2 1.12). */
+/** The round-limit indicator of the top bar (RULES_V2 1.12, UI2-03). */
 export interface RoundLimitInfo {
   readonly round: number;
   readonly limit: number;
@@ -323,14 +323,18 @@ export interface RoundLimitInfo {
   readonly winner: BattleSide;
   /** Fight value left per side (the verdict's numbers). */
   readonly value: { readonly [S in BattleSide]: number };
-  /** "Round 3 of 15". */
+  /** The chip: "Round 3 / 15". */
   readonly label: string;
+  /** The hover card's title: "Round 3 of 15". */
+  readonly title: string;
   /** "13 rounds left" or "Last round". */
   readonly left: string;
-  /** "At the limit: you win, 4200 to 3800". */
+  /** In plain words: "If the battle ends now, you win." */
   readonly verdict: string;
-  /** The rule and the numbers, for the hover. */
-  readonly tooltip: string;
+  /** "Fight value left: you 4200, the enemy 3800." */
+  readonly score: string;
+  /** The rule, for the hover card. */
+  readonly rule: string;
 }
 
 /**
@@ -351,28 +355,31 @@ export function roundLimitInfo(
     defender: fightValueLeft(state, "defender"),
   };
   const winner = roundLimitWinner(state);
-  const loser: BattleSide = winner === "attacker" ? "defender" : "attacker";
   const who =
     player === null
       ? `the ${winner} wins`
       : winner === player
         ? "you win"
         : "the enemy wins";
-  const tie =
-    value.attacker === value.defender ? " (a tie goes to the defender)" : "";
+  const tie = value.attacker === value.defender;
+  const other: BattleSide = player === "defender" ? "attacker" : "defender";
+  const score =
+    player === null
+      ? `Fight value left: attacker ${value.attacker}, defender ${value.defender}.`
+      : `Fight value left: you ${value[player]}, the enemy ${value[other]}.`;
   return {
     round,
     limit,
     roundsLeft,
     winner,
     value,
-    label: `Round ${round} of ${limit}`,
+    label: `Round ${round} / ${limit}`,
+    title: `Round ${round} of ${limit}`,
     left: roundsLeft <= 1 ? "Last round" : `${roundsLeft} rounds left`,
-    verdict: `At the limit: ${who}, ${value[winner]} to ${value[loser]}`,
-    tooltip:
+    verdict: `If the battle ends now, ${who}${tie ? " (a tie goes to the defender)" : ""}.`,
+    score,
+    rule:
       `If neither side is beaten by the end of round ${limit}, the side ` +
-      "with more fight value left wins and the loser's survivors flee. " +
-      `Fight value left now: attacker ${value.attacker}, defender ` +
-      `${value.defender}${tie}.`,
+      "with more fight value left wins and the loser's survivors flee.",
   };
 }

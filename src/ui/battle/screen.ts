@@ -19,7 +19,6 @@ import {
   battleResult,
   blockingHexes,
   chooseAiAction,
-  compareTurnOrder,
   createBattle,
   deployingSides,
   enemyIntents,
@@ -73,6 +72,7 @@ import {
 import type {
   HexLabel,
   HexMark,
+  Overlay,
   Scene,
   TargetFocus,
 } from "../../render/battle/scene.ts";
@@ -85,9 +85,11 @@ import {
   conditionTooltip,
   groundTooltip,
   intentMarkers,
-  timelineEntries,
 } from "./grammar.ts";
 import { roundLimitInfo, stackInfo } from "./info.ts";
+import { QUEUE_MAX, queueCount, queueSlots, turnQueue } from "./queue.ts";
+import type { QueueEntry } from "./queue.ts";
+import { setTip, tipCard } from "../tooltip.ts";
 import { hoverIntent, indexLegalActions, pointAtField } from "./intent.ts";
 import type { HoverIntent, LegalIndex } from "./intent.ts";
 import {
@@ -280,6 +282,22 @@ function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+/** How long a clicked queue portrait's stack blinks on the field. */
+const QUEUE_FLASH_MS = 1300;
+
+/** A small hourglass (the round chip, scheduled events). */
+function hourglass(): HTMLElement {
+  const span = el("span", "bm-hourglass");
+  span.setAttribute("aria-hidden", "true");
+  span.innerHTML =
+    '<svg viewBox="0 0 10 14" width="10" height="14">' +
+    '<path d="M1 1.5h8M1 12.5h8M2 1.5c0 4 3 4.5 3 5.5s-3 1.5-3 5.5' +
+    'M8 1.5c0 4-3 4.5-3 5.5s3 1.5 3 5.5" stroke="currentColor" ' +
+    'stroke-width="1.4" fill="none"/>' +
+    '<path d="M3 11.6h4L5 9.2z" fill="currentColor"/></svg>';
+  return span;
+}
+
 class BattleScreen {
   private readonly root = el("div", "bm-battle");
   private readonly top = el("div", "bm-top");
@@ -342,6 +360,10 @@ class BattleScreen {
   private animating = false;
   private pendingAction: ((a: BattleAction | "undo") => void) | null = null;
   private infoFor: StackId | null = null;
+  /** The stack whose queue portrait is under the pointer (UI2-03). */
+  private queueHover: StackId | null = null;
+  /** A queue portrait was clicked: that stack blinks from `t0`. */
+  private beacon: { id: StackId; t0: number } | null = null;
   private log: string[] = [];
   private readonly cleanup: (() => void)[] = [];
 
@@ -494,6 +516,8 @@ class BattleScreen {
     this.canvas.dataset.x = String(this.view.x);
     this.canvas.dataset.y = String(this.view.y);
     this.placeTip();
+    // The queue shows as many portraits as the new width holds.
+    this.renderTop(false);
   }
 
   /** CSS pixel position of a stage point, relative to the stage wrapper. */
@@ -707,6 +731,9 @@ class BattleScreen {
         this.canvas.height / k,
       );
     }
+    const overlay = this.scene.overlay;
+    const queued = this.queueOverlay();
+    if (queued) this.scene.overlay = queued;
     renderBattle(ctx, {
       scene: this.scene,
       art: this.art,
@@ -714,6 +741,8 @@ class BattleScreen {
       obstacles: blockingHexes(this.state),
       activeId: this.animating ? null : this.state.activeStackId,
     });
+    this.scene.overlay = overlay;
+    this.drawBeacon(ctx);
   }
 
   private destroy(): void {
@@ -1795,76 +1824,207 @@ class BattleScreen {
     );
   }
 
-  private renderTop(): void {
+  /**
+   * The top bar (UI2-03): the round chip ("Round 3 / 15" with an hourglass;
+   * the limit's verdict in its hover card) and the turn queue as creature
+   * portraits, as many as fit. Hover a portrait for its stack card; click
+   * it to flash the stack on the field.
+   */
+  private renderTop(animate = true): void {
     const s = this.state;
-    // The timeline slides: chips keep their place by stack id (FLIP).
+    // The queue slides: tiles keep their place by key (FLIP).
     const flip = flipChildren(
-      this.top.querySelector<HTMLElement>(".bm-order"),
-      !this.animator.reduced && this.animator.speed !== Infinity,
+      this.top.querySelector<HTMLElement>(".bm-queue"),
+      animate && !this.animator.reduced && this.animator.speed !== Infinity,
     );
     this.top.replaceChildren();
+    // The hovered tile is gone (its pointerleave will not come).
+    this.queueHover = null;
+    const player = this.playerSides.size === 1 ? this.playerSide() : null;
     const limit = roundLimitInfo(
       { ...s, round: this.scene.round || s.round },
-      this.playerSides.size === 1 ? this.playerSide() : null,
+      player,
     );
+    const near = !this.deploying && limit.roundsLeft <= 3;
     const round = el(
       "span",
-      "bm-round",
-      this.deploying ? "Deployment" : limit.label,
-    );
-    round.title = this.deploying
-      ? "Before round 1: rearrange your stacks (Vanguard)."
-      : limit.tooltip;
-    const verdict = el(
-      "span",
-      `bm-limit${limit.roundsLeft <= 3 ? " bm-limit-near" : ""}${
-        limit.winner === this.playerSide() ? " bm-limit-ours" : ""
+      `bm-round${near ? " bm-round-near" : ""}${
+        near && player !== null
+          ? limit.winner === player
+            ? " bm-round-ours"
+            : " bm-round-theirs"
+          : ""
       }`,
-      `${limit.left} \u00b7 ${limit.verdict}`,
     );
-    verdict.title = limit.tooltip;
-    this.top.append(round, verdict);
-    const entries = timelineEntries(s);
-    const next = s.stacks
-      .filter(isAlive)
-      .sort(compareTurnOrder)
-      .map((x) => x.id);
-    const strip = el("span", "bm-order");
-    const chip = (id: StackId, cls: string): void => {
-      const st = getStack(s, id);
-      if (!isAlive(st)) return;
-      const c = el(
-        "span",
-        `bm-chip bm-${st.side} ${cls}`,
-        `${creatureName(st.creature, st.count)} ${st.count}`,
-      );
-      c.dataset["flip"] = `${id}${cls === "bm-later" ? ":next" : ""}`;
-      if (s.waiting.includes(id)) c.title = "waiting";
-      strip.append(c);
-    };
-    entries.forEach((t, i) => {
-      if (t.kind === "stack") {
-        chip(t.id, i === 0 && s.winner === null ? "bm-now" : "");
-        const last = strip.lastElementChild as HTMLElement | null;
-        if (last && t.note !== "") last.title = t.note;
-      } else {
-        const ev = el(
-          "span",
-          `bm-chip bm-${t.side} bm-event`,
-          `\u23f1 ${t.label}`,
-        );
-        ev.title = `Scheduled by ${t.note}`;
-        strip.append(ev);
-      }
-    });
-    if (s.winner === null) {
-      strip.append(el("span", "bm-next", `Round ${s.round + 1}:`));
-      next
-        .slice(0, Math.max(2, 12 - entries.length))
-        .forEach((id) => chip(id, "bm-later"));
+    round.append(hourglass(), this.deploying ? "Deployment" : limit.label);
+    setTip(round, () =>
+      this.deploying
+        ? tipCard("Deployment", [
+            "Before round 1: rearrange your stacks (Vanguard).",
+          ])
+        : tipCard(limit.title, [
+            limit.left,
+            el("div", "gm-tip-line bm-q-verdict", limit.verdict),
+            limit.score,
+            el("div", "gm-tip-line bm-dim", limit.rule),
+          ]),
+    );
+    this.top.append(round);
+    const queue = el("div", "bm-queue");
+    this.top.append(queue);
+    // The queue is centred, so it has the bar less the chip on both sides
+    // (and the padding and gaps); a bar not laid out yet gets the full eight.
+    const width = this.top.clientWidth;
+    const room = width - 2 * round.offsetWidth - 36;
+    const entries = turnQueue(s, width > 0 ? queueSlots(room) : QUEUE_MAX);
+    for (const e of entries) queue.append(this.queueTile(e));
+    flip(queue);
+  }
+
+  /** One tile of the turn queue: a portrait, an event or the divider. */
+  private queueTile(e: QueueEntry): HTMLElement {
+    if (e.kind === "divider") {
+      const d = el("span", "bm-q-div", `Round ${e.round}`);
+      d.dataset["flip"] = e.key;
+      return d;
     }
-    this.top.append(strip);
-    flip(strip);
+    if (e.kind === "event") {
+      const t = el("span", `bm-q bm-q-event bm-${e.side}`);
+      t.dataset["flip"] = e.key;
+      t.append(hourglass());
+      setTip(t, () =>
+        tipCard("Scheduled", [e.label, e.note ? `Set by ${e.note}.` : null]),
+      );
+      return t;
+    }
+    const t = el(
+      "span",
+      `bm-q bm-${e.side}${e.now ? " bm-q-now" : ""}${
+        e.round > this.state.round ? " bm-q-next" : ""
+      }`,
+    );
+    t.dataset["flip"] = e.key;
+    t.setAttribute("aria-label", `${e.name} ${e.count}`);
+    const src = this.art?.portraits.get(e.creatureId);
+    if (src) {
+      const img = el("img", "bm-q-img");
+      img.src = src;
+      img.alt = "";
+      img.draggable = false;
+      t.append(img);
+    } else {
+      t.append(el("span", "bm-q-img bm-q-letter", e.name.slice(0, 1)));
+    }
+    t.append(el("span", "bm-q-count", queueCount(e.count)));
+    setTip(t, () => this.queueCard(e));
+    t.addEventListener("pointerenter", () => {
+      this.queueHover = e.id;
+    });
+    t.addEventListener("pointerleave", () => {
+      if (this.queueHover === e.id) this.queueHover = null;
+    });
+    t.addEventListener("click", () => {
+      this.flashStack(e.id);
+    });
+    return t;
+  }
+
+  /** The hover card of a queue portrait: who, whose and when, the stats. */
+  private queueCard(e: QueueEntry & { kind: "stack" }): HTMLElement | null {
+    const stack = this.state.stacks.find((x) => x.id === e.id);
+    if (!stack || !isAlive(stack)) return null;
+    const info = stackInfo(this.state, stack);
+    const whose = this.playerSides.has(info.side) ? "Your army" : "Enemy";
+    const when = e.now
+      ? "acting now"
+      : e.round > this.state.round
+        ? `round ${e.round}`
+        : "later this round";
+    const stats = el("div", "gm-tip-stats");
+    for (const st of info.stats) {
+      const cell = el("span", "", `${st.label} `);
+      cell.append(el("b", "", st.value));
+      stats.append(cell);
+    }
+    const src = this.art?.portraits.get(stack.creature.id);
+    let icon: HTMLImageElement | undefined;
+    if (src) {
+      icon = el("img", "bm-q-card-img");
+      icon.src = src;
+      icon.alt = "";
+    }
+    return tipCard(
+      `${info.title} \u00d7${info.count}`,
+      [
+        stats,
+        e.note ? `In the order: ${e.note}.` : null,
+        el(
+          "div",
+          "gm-tip-line bm-dim",
+          "Click to find it on the field; right-click it there for the full card.",
+        ),
+      ],
+      { subtitle: `${whose} \u00b7 ${when}`, ...(icon ? { icon } : {}) },
+    );
+  }
+
+  /** Click on a queue portrait: the stack's hex blinks gold for a moment. */
+  private flashStack(id: StackId): void {
+    this.beacon = { id, t0: performance.now() };
+  }
+
+  /**
+   * While a clicked queue stack blinks: a gold arrow bobbing over its head
+   * (in stage pixels, over everything; still under reduced motion).
+   */
+  private drawBeacon(ctx: CanvasRenderingContext2D): void {
+    if (this.beacon === null) return;
+    const u = this.scene.units.get(this.beacon.id);
+    if (!u || !u.visible) return;
+    const t = performance.now() - this.beacon.t0;
+    const tall = this.art?.units.get(u.creatureId)?.asset.feet.contactY ?? 48;
+    const bob = this.animator.reduced
+      ? 0
+      : ([0, 2, 4, 2][Math.floor(t / 110) % 4] ?? 0);
+    const x = Math.round(u.x);
+    const y = Math.round(u.y - u.lift - tall - 10 + bob);
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x - 9, y - 12);
+    ctx.lineTo(x + 9, y - 12);
+    ctx.lineTo(x + 9, y - 6);
+    ctx.lineTo(x, y + 3);
+    ctx.lineTo(x - 9, y - 6);
+    ctx.closePath();
+    ctx.fillStyle = "#ffd65c";
+    ctx.strokeStyle = "#2a1d08";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  /**
+   * The overlay with the queue's marks added: the hovered portrait's stack
+   * outlined, the clicked one blinking gold (steady under reduced motion).
+   * Null when there is nothing to add.
+   */
+  private queueOverlay(): Overlay | null {
+    const add: [StackId, HexMark][] = [];
+    if (this.queueHover !== null) add.push([this.queueHover, "inspect"]);
+    if (this.beacon !== null) {
+      const t = performance.now() - this.beacon.t0;
+      if (t > QUEUE_FLASH_MS) this.beacon = null;
+      else if (this.animator.reduced || Math.floor(t / 160) % 2 === 0)
+        add.push([this.beacon.id, "chosen"]);
+    }
+    if (add.length === 0) return null;
+    const marks = new Map(this.scene.overlay.marks);
+    for (const [id, mark] of add) {
+      const st = this.state.stacks.find((x) => x.id === id);
+      if (st && isAlive(st)) marks.set(hexIndex(st.hex), mark);
+    }
+    return { ...this.scene.overlay, marks };
   }
 
   private renderActive(): void {
