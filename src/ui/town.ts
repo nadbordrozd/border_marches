@@ -35,6 +35,7 @@ import type {
 } from "../core/game/index.ts";
 import type { ResourceId } from "../core/map/types.ts";
 import { playSound } from "../audio/sound.ts";
+import { recruitCue, townCue } from "../audio/cues.ts";
 import { fxEvent } from "../audio/fx.ts";
 import { bump, countUp } from "./anim.ts";
 import { buildingDef, townTree } from "../data/factions.ts";
@@ -92,6 +93,9 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
     const root = el("div.gm-town");
     (document.getElementById("ui") ?? document.body).append(root);
     let selected: SlotRef | null = null;
+    // A one-shot of the faction's town life as the screen opens.
+    const ambience = townCue(host.state().towns[townId]?.faction);
+    if (ambience !== null) playSound(ambience);
 
     const close = (): void => {
       window.removeEventListener("keydown", onKey);
@@ -607,7 +611,7 @@ async function openRecruit(
   });
   if (choice === "recruit" && count > 0) {
     if (host.run(recruit(host.state(), townId, creature, count)))
-      playSound("recruit");
+      playSound(recruitCue(getCreature(creature).faction));
   }
 }
 

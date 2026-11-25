@@ -128,5 +128,305 @@
     "verdict": "ACCEPTED",
     "notes": "broadband crack with a long thunder-like decay",
     "at": "2026-11-24T22:04:52.525Z"
+  },
+  "shot.spit#0": {
+    "verdict": "ACCEPTED",
+    "notes": "broadband splat with a low wet body, 0.45 s audible, fast decay: reads as a gloopy spit",
+    "at": "2026-11-25T01:51:06.700Z"
+  },
+  "shot.orb#0": {
+    "verdict": "ACCEPTED",
+    "notes": "fizzing high whoosh decaying over 0.45 s, quiet take lifted by gain; light magic missile",
+    "at": "2026-11-25T01:51:06.754Z"
+  },
+  "shot.wail#0": {
+    "verdict": "ACCEPTED",
+    "notes": "swelling mid-band whoosh with a tonal wail, 0.6 s audible, eerie flyby",
+    "at": "2026-11-25T01:51:06.813Z"
+  },
+  "shot.bomb#0": {
+    "verdict": "ACCEPTED",
+    "notes": "fuse hiss over a descending whistle tone, 0.68 s, no explosion as asked",
+    "at": "2026-11-25T01:51:06.875Z"
+  },
+  "shot.rock#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three tight low thumps in 0.19 s: a chunky sling crack, very punchy",
+    "at": "2026-11-25T01:51:06.934Z"
+  },
+  "spell.touch.bloom#0": {
+    "verdict": "REJECTED",
+    "notes": "quiet rustle (RMS -33) with sparse ticks and no chime; weak for the most used Bloom spell",
+    "at": "2026-11-25T01:51:06.992Z"
+  },
+  "spell.touch.bloom#1": {
+    "verdict": "ACCEPTED",
+    "notes": "bright high shimmer wash with a clear attack and 0.56 s decay; louder and better shaped than take 0",
+    "at": "2026-11-25T01:51:07.051Z"
+  },
+  "spell.bolt.bloom#0": {
+    "verdict": "ACCEPTED",
+    "notes": "woody snap transients over a leafy whoosh, 0.43 s audible, punchy",
+    "at": "2026-11-25T01:51:07.112Z"
+  },
+  "spell.bolt.accord#0": {
+    "verdict": "ACCEPTED",
+    "notes": "bell partials over a short shimmer, decays in 0.5 s",
+    "at": "2026-11-25T01:51:07.173Z"
+  },
+  "spell.touch.accord#0": {
+    "verdict": "ACCEPTED",
+    "notes": "steady harmonic shimmer with a gentle bell, 0.8 s, soft",
+    "at": "2026-11-25T01:51:07.235Z"
+  },
+  "spell.burst.accord#0": {
+    "verdict": "ACCEPTED",
+    "notes": "bright bell chord attack with a sparkling decay, 0.6 s audible",
+    "at": "2026-11-25T01:51:07.298Z"
+  },
+  "spell.bolt.clock#0": {
+    "verdict": "ACCEPTED",
+    "notes": "regular ratchet clicks then a low twang, 0.44 s: clockwork launch",
+    "at": "2026-11-25T01:51:07.357Z"
+  },
+  "spell.touch.clock#0": {
+    "verdict": "ACCEPTED",
+    "notes": "dense ticking whirr ending in a rising tone, 0.8 s; loud take normalised by gain",
+    "at": "2026-11-25T01:51:07.420Z"
+  },
+  "spell.burst.clock#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low grinding with gear striations and a deep whomp, 0.64 s",
+    "at": "2026-11-25T01:51:07.482Z"
+  },
+  "spell.bolt.hush#0": {
+    "verdict": "ACCEPTED",
+    "notes": "dark mid-band breathy whoosh, 0.39 s, clean decay",
+    "at": "2026-11-25T01:51:07.544Z"
+  },
+  "spell.touch.hush#0": {
+    "verdict": "ACCEPTED",
+    "notes": "sustained hissing mid hum fading at 0.74 s: shadowy whisper",
+    "at": "2026-11-25T01:51:07.606Z"
+  },
+  "spell.bolt.storm#0": {
+    "verdict": "ACCEPTED",
+    "notes": "dense high crackle for 0.6 s with a decay: electric zap",
+    "at": "2026-11-25T01:51:07.667Z"
+  },
+  "spell.burst.storm#0": {
+    "verdict": "ACCEPTED",
+    "notes": "loud low thunder boom with crackle, 0.64 s audible, ends in a short decay",
+    "at": "2026-11-25T01:51:07.730Z"
+  },
+  "spell.impact.bloom#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low leafy thump with snapping, 0.39 s, punchy",
+    "at": "2026-11-25T01:51:07.790Z"
+  },
+  "spell.impact.accord#0": {
+    "verdict": "ACCEPTED",
+    "notes": "bell strike partials decaying over 0.5 s, quiet take lifted by gain",
+    "at": "2026-11-25T01:51:07.851Z"
+  },
+  "spell.impact.clock#0": {
+    "verdict": "ACCEPTED",
+    "notes": "metallic clank with a ringing spring partial, 0.34 s",
+    "at": "2026-11-25T01:51:07.913Z"
+  },
+  "spell.impact.hush#0": {
+    "verdict": "ACCEPTED",
+    "notes": "soft low thud with a breathy tail, 0.4 s",
+    "at": "2026-11-25T01:51:07.973Z"
+  },
+  "spell.impact.storm#0": {
+    "verdict": "ACCEPTED",
+    "notes": "sharp crackling zap burst, 0.41 s",
+    "at": "2026-11-25T01:51:08.042Z"
+  },
+  "battle.getup#0": {
+    "verdict": "ACCEPTED",
+    "notes": "many small bone-rattle clicks over 0.8 s: skeleton clattering together",
+    "at": "2026-11-25T01:51:08.109Z"
+  },
+  "battle.summon#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rising whoosh with a low swell, 0.48 s audible",
+    "at": "2026-11-25T01:51:08.170Z"
+  },
+  "battle.push#0": {
+    "verdict": "ACCEPTED",
+    "notes": "blunt noise whump with a low tail, 0.38 s",
+    "at": "2026-11-25T01:51:08.238Z"
+  },
+  "battle.launch#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rising whistle tone over a springy attack, 0.38 s: clear upward launch",
+    "at": "2026-11-25T01:51:08.308Z"
+  },
+  "battle.land#0": {
+    "verdict": "ACCEPTED",
+    "notes": "single low thud with a short dusty tail, 0.32 s",
+    "at": "2026-11-25T01:51:08.375Z"
+  },
+  "battle.teleport#0": {
+    "verdict": "ACCEPTED",
+    "notes": "shimmering harmonic zip, 0.68 s, soft",
+    "at": "2026-11-25T01:51:08.440Z"
+  },
+  "condition.land#0": {
+    "verdict": "ACCEPTED",
+    "notes": "light high shimmer with a tiny chime, 0.48 s, subtle as wanted",
+    "at": "2026-11-25T01:51:08.501Z"
+  },
+  "condition.expire#0": {
+    "verdict": "ACCEPTED",
+    "notes": "faint descending tonal sparkle (peak -22 dBFS), shaped right; played quietly anyway",
+    "at": "2026-11-25T01:51:08.558Z"
+  },
+  "condition.frozen#0": {
+    "verdict": "ACCEPTED",
+    "notes": "crisp ice crackles over 0.68 s",
+    "at": "2026-11-25T01:51:08.613Z"
+  },
+  "condition.asleep#0": {
+    "verdict": "ACCEPTED",
+    "notes": "soft harp-like tonal glide decaying over 0.9 s",
+    "at": "2026-11-25T01:51:08.668Z"
+  },
+  "battle.command#0": {
+    "verdict": "ACCEPTED",
+    "notes": "loud brass-like low tones held 0.5 s then decaying: rallying horn",
+    "at": "2026-11-25T01:51:08.723Z"
+  },
+  "ground.fire#0": {
+    "verdict": "ACCEPTED",
+    "notes": "ignition whoosh with crackle, 0.53 s",
+    "at": "2026-11-25T01:51:08.775Z"
+  },
+  "ground.brambles#0": {
+    "verdict": "REJECTED",
+    "notes": "sparse quiet twig snaps starting late (0.09 s lead), weak",
+    "at": "2026-11-25T01:51:08.828Z"
+  },
+  "ground.brambles#1": {
+    "verdict": "ACCEPTED",
+    "notes": "dense dry snapping crackle from the first frame, 0.5 s",
+    "at": "2026-11-25T01:51:08.879Z"
+  },
+  "ground.mist#0": {
+    "verdict": "ACCEPTED",
+    "notes": "soft low airy whoosh, 0.57 s audible",
+    "at": "2026-11-25T01:51:08.932Z"
+  },
+  "map.flag#0": {
+    "verdict": "ACCEPTED",
+    "notes": "repeated cloth flaps over 0.76 s: a banner snapping up",
+    "at": "2026-11-25T01:51:08.983Z"
+  },
+  "ui.dialog.open#0": {
+    "verdict": "ACCEPTED",
+    "notes": "very quiet paper swish (peak -18 dBFS), 0.42 s; meant to sit far under the mix",
+    "at": "2026-11-25T01:51:09.038Z"
+  },
+  "ui.dialog.close#0": {
+    "verdict": "ACCEPTED",
+    "notes": "soft paper flap with one small transient, 0.38 s",
+    "at": "2026-11-25T01:51:09.093Z"
+  },
+  "ui.build.complete#0": {
+    "verdict": "ACCEPTED",
+    "notes": "small chime partial with a decaying sparkle, 0.8 s, quiet take lifted by gain",
+    "at": "2026-11-25T01:51:09.148Z"
+  },
+  "site.shrine#0": {
+    "verdict": "REJECTED",
+    "notes": "noisy broadband wash with no bell partials",
+    "at": "2026-11-25T01:51:09.200Z"
+  },
+  "site.shrine#1": {
+    "verdict": "ACCEPTED",
+    "notes": "clean ringing bell partials held and decaying over 1.2 s",
+    "at": "2026-11-25T01:51:09.255Z"
+  },
+  "site.bank#0": {
+    "verdict": "ACCEPTED",
+    "notes": "metallic ring burst over a low drum line, 0.5 s audible",
+    "at": "2026-11-25T01:51:09.308Z"
+  },
+  "site.waystone#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low rushing whoosh swelling and fading over 0.84 s",
+    "at": "2026-11-25T01:51:09.361Z"
+  },
+  "site.treasure#0": {
+    "verdict": "ACCEPTED",
+    "notes": "creak then many bright chime partials decaying over 1.2 s",
+    "at": "2026-11-25T01:51:09.413Z"
+  },
+  "site.gate#0": {
+    "verdict": "ACCEPTED",
+    "notes": "small key clicks then one solid clunk at 0.75 s, 1.0 s audible",
+    "at": "2026-11-25T01:51:09.468Z"
+  },
+  "site.dig#0": {
+    "verdict": "ACCEPTED",
+    "notes": "one quick gritty spade scoop, 0.25 s audible",
+    "at": "2026-11-25T01:51:09.526Z"
+  },
+  "site.quest#0": {
+    "verdict": "ACCEPTED",
+    "notes": "bright melodic jingle decaying over 0.83 s",
+    "at": "2026-11-25T01:51:09.587Z"
+  },
+  "site.market#0": {
+    "verdict": "ACCEPTED",
+    "notes": "dense coin clinks throughout 0.8 s",
+    "at": "2026-11-25T01:51:09.644Z"
+  },
+  "recruit.humans#0": {
+    "verdict": "ACCEPTED",
+    "notes": "single armour clank with a fast decay, 0.2 s audible, punchy",
+    "at": "2026-11-25T01:51:09.699Z"
+  },
+  "recruit.undead#0": {
+    "verdict": "ACCEPTED",
+    "notes": "hollow mid moan with a rattly attack, 0.63 s",
+    "at": "2026-11-25T01:51:09.754Z"
+  },
+  "recruit.goblins#0": {
+    "verdict": "ACCEPTED",
+    "notes": "two cackle-like swells over clatter, 0.71 s",
+    "at": "2026-11-25T01:51:09.808Z"
+  },
+  "victory.humans#0": {
+    "verdict": "ACCEPTED",
+    "notes": "stab then a held bright chord, 1.7 s audible: heroic fanfare",
+    "at": "2026-11-25T01:51:09.861Z"
+  },
+  "victory.undead#0": {
+    "verdict": "ACCEPTED",
+    "notes": "held dark chord decaying over 1.7 s: organ and bell",
+    "at": "2026-11-25T01:51:09.912Z"
+  },
+  "victory.goblins#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three goofy brassy blasts, 1.9 s audible: comic sting",
+    "at": "2026-11-25T01:51:09.965Z"
+  },
+  "town.humans#0": {
+    "verdict": "ACCEPTED",
+    "notes": "steady hammer strikes with tonal partials and murmur, 2.5 s, even level",
+    "at": "2026-11-25T01:51:10.016Z"
+  },
+  "town.undead#0": {
+    "verdict": "ACCEPTED",
+    "notes": "airy swell then low wind drone, 2.5 s",
+    "at": "2026-11-25T01:51:10.071Z"
+  },
+  "town.goblins#0": {
+    "verdict": "ACCEPTED",
+    "notes": "bubbling bursts and clangs in three phrases, 2.2 s",
+    "at": "2026-11-25T01:51:10.123Z"
   }
 }

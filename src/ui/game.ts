@@ -16,6 +16,7 @@ import {
   describeObject,
   digHere,
   objectName,
+  objectTypeOf,
   siteOptions,
   useSite,
   battlePlayers,
@@ -59,7 +60,7 @@ import { getHeroClass } from "../data/hero.ts";
 import { MAX_HEROES, playerColour } from "../data/players.ts";
 import { createMapView, ZOOM_STEPS } from "../render/map/map-view.ts";
 import type { MapFlag, MapView } from "../render/map/map-view.ts";
-import { pickupCue } from "../audio/cues.ts";
+import { pickupCue, siteCue } from "../audio/cues.ts";
 import { playSound } from "../audio/sound.ts";
 import { fxEvent } from "../audio/fx.ts";
 import { burst as fxBurst, sparkle as fxSparkle } from "../render/fx/emit.ts";
@@ -1329,9 +1330,9 @@ class GameScreen {
           const mine = this.state.mines[e.mineId];
           if (mine === undefined) break;
           const def = MINES[mine.resource];
+          // The flag going up is the sound (map.flag.raise).
           this.flagRaised(e.mineId);
           if (e.owner === this.human) {
-            playSound("pickup");
             this.note(
               `${def.name} claimed: +${def.income} ${mine.resource} per day`,
               "gain",
@@ -1398,21 +1399,33 @@ class GameScreen {
         case "site": {
           const h = this.state.heroes.find((x) => x.id === e.heroId);
           if (h?.owner === this.human && e.options === undefined) {
+            this.siteSound(e.objectId, e.text);
             this.note(e.text, "gain");
           }
           break;
         }
         case "teleported": {
           const h = this.state.heroes.find((x) => x.id === e.heroId);
-          if (h?.owner === this.human)
+          if (h?.owner === this.human) {
+            // A waystone or the Tow Line: the same magical rush.
+            playSound("site.waystone");
             this.note(
               e.via === "tow-line"
                 ? "The tow line hauls you to the pylon."
                 : "The waystone carries you.",
             );
+          }
           break;
         }
         case "dug":
+          if (
+            this.state.heroes.find((h) => h.id === e.heroId)?.owner ===
+            this.human
+          ) {
+            playSound("site.dig", { jitter: 0.05 });
+            // What turns up opens after the spade.
+            if (e.found !== null) playSound("site.treasure", { delay: 0.3 });
+          }
           this.note(
             e.found === null
               ? "You dig, and find nothing."
@@ -1452,6 +1465,7 @@ class GameScreen {
       }
       await this.levelUps();
       if (this.state.pendingBattle !== null) {
+        this.bankFightSound();
         await this.battles();
         return;
       }
@@ -1508,7 +1522,11 @@ class GameScreen {
       if (choice === "") return;
       const events = this.run(useSite(this.state, heroId, objectId, choice));
       if (events === null) return;
-      playSound("pickup");
+      // announce sounds the plain outcomes; one that asks again (a hire
+      // with stock left) sounds here.
+      for (const e of events)
+        if (e.type === "site" && e.options !== undefined)
+          this.siteSound(e.objectId, e.text);
       this.announce(events);
       this.refresh();
     }
@@ -1525,7 +1543,26 @@ class GameScreen {
     await this.afterCommand(events);
   }
 
+  /** The family sound of a visit's outcome (audio/cues.ts siteCue). */
+  private siteSound(objectId: string, text: string): void {
+    const obj = this.state.map.objects.find((o) => o.id === objectId);
+    if (obj === undefined) return;
+    const cue = siteCue(objectTypeOf(obj), text);
+    if (cue !== null) playSound(cue);
+  }
+
+  /** A sword drawn as the human's hero takes on a bank's guard. */
+  private bankFightSound(): void {
+    const b = this.state.pendingBattle;
+    if (b === null || b.kind !== "site") return;
+    const obj = this.state.map.objects.find((o) => o.id === b.objectId);
+    const hero = this.state.heroes.find((h) => h.id === b.heroId);
+    if (obj?.kind === "bank" && hero?.owner === this.human)
+      playSound("site.bank");
+  }
+
   private async chest(heroId: string, pickupId: string): Promise<void> {
+    playSound("site.treasure");
     const choice = await modal<"gold" | "xp">({
       title: CHEST.name,
       body: el(
@@ -1603,10 +1640,12 @@ class GameScreen {
   /** A flag goes up at an object the moment it is captured. */
   private flagRaised(objectId: string): void {
     const obj = this.state.map.objects.find((o) => o.id === objectId);
-    if (obj === undefined || reducedMotion()) return;
+    if (obj === undefined) return;
     const seen = this.player()?.explored[obj.y * this.state.map.width + obj.x];
     if (seen !== true) return;
+    // The flag sounds under reduced motion too; only the animation stops.
     fxEvent("map.flag.raise");
+    if (reducedMotion()) return;
     this.view.raiseFlag(obj.x, obj.y);
     const c = this.view.cellCentre(obj.x, obj.y);
     this.view.spawnFx((field, clock) =>

@@ -38,6 +38,13 @@ export interface PlayOptions {
   rate?: number;
   /** Random rate variation, e.g. 0.06 for +-6% (default 0). */
   jitter?: number;
+  /** Start this many seconds from now (default 0): lands with its visual. */
+  delay?: number;
+  /**
+   * The same sound again within this many seconds is dropped (default
+   * MIN_GAP): longer for sounds that come in runs (ground, conditions).
+   */
+  gap?: number;
 }
 
 /** What the system needs from its surroundings (tests pass fakes). */
@@ -58,8 +65,8 @@ export interface AudioEnv {
 
 /** Same sound again within this many seconds is dropped. */
 const MIN_GAP = 0.045;
-/** Simultaneous voices at most. */
-const MAX_VOICES = 12;
+/** Simultaneous voices at most: a busy beat drops its extras, not the mix. */
+export const MAX_VOICES = 10;
 /** A sound still loading is dropped when it is ready later than this. */
 const MAX_LATE = 0.35;
 /** Fade at the end of every sound against clicks from cut-off takes. */
@@ -231,7 +238,7 @@ export class SoundSystem {
     if (!this.audible || this.ctx === null) return false;
     const t = this.env.now();
     const last = this.lastPlayed.get(id);
-    if (last !== undefined && t - last < MIN_GAP) return false;
+    if (last !== undefined && t - last < (options.gap ?? MIN_GAP)) return false;
     if (this.voices >= MAX_VOICES) return false;
     this.lastPlayed.set(id, t);
     const buffer = this.ready.get(id);
@@ -260,7 +267,7 @@ export class SoundSystem {
       source.playbackRate.value = rate;
       const gain = ctx.createGain();
       const volume = level.gain * Math.min(1, Math.max(0, options.volume ?? 1));
-      const now = ctx.currentTime;
+      const now = ctx.currentTime + Math.max(0, options.delay ?? 0);
       const end = now + Math.max(0.01, (buffer.duration - level.start) / rate);
       gain.gain.setValueAtTime(volume, now);
       gain.gain.setValueAtTime(volume, Math.max(now, end - FADE_OUT));

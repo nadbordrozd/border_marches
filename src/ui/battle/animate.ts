@@ -23,7 +23,7 @@ import type {
   StackId,
 } from "../../core/battle/index.ts";
 import { act, hasAct } from "../../core/battle/index.ts";
-import { fxEvent } from "../../audio/fx.ts";
+import { fxCues } from "../../audio/fx.ts";
 import {
   discHexes,
   isBattleSpell,
@@ -287,7 +287,7 @@ export class Animator {
     this.batch = { beats, before, after, action };
     for (const beat of beats) {
       this.hooks.onLog(beat.event, before);
-      if (!this.fast()) for (const cue of beat.cues) fxEvent(cue);
+      if (!this.fast()) fxCues(beat.cues, { speed: this.speed });
       await this.playBeat(beat);
     }
     this.batch = null;

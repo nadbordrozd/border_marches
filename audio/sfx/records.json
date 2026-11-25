@@ -414,5 +414,965 @@
     "file": "battle.heavy-hit-2.mp3",
     "sha256": "c5d94f493067a19499ee74ab61c07569c26667132cbd20335864dab1ee74c60b",
     "bytes": 10492
+  },
+  "shot.spit#0": {
+    "id": "shot.spit",
+    "n": 0,
+    "at": "2026-11-25T01:46:40.207Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a wet cartoon spit shot, a quick juicy gloopy splat flung through the air, gross and funny, short, clean, no reverb",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "shot.spit-0.mp3",
+    "sha256": "363dbac3c536a71c5e58f0f1d8bc16ea4e54288ddf53e87118a7a4e3efe003e6",
+    "bytes": 10492
+  },
+  "spell.bolt.storm#0": {
+    "id": "spell.bolt.storm",
+    "n": 0,
+    "at": "2026-11-25T01:46:42.295Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a fast electric zap, a crackling lightning bolt sizzling through the air, short and snappy, fantasy game",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.bolt.storm-0.mp3",
+    "sha256": "67ecbb16cb2b54f4e0517cd2072560d15228636d0b32cf5e8bdbda85f9d5d254",
+    "bytes": 10492
+  },
+  "condition.land#0": {
+    "id": "condition.land",
+    "n": 0,
+    "at": "2026-11-25T01:46:44.304Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a soft magical status effect applied, a light airy shimmer with a tiny chime, very short, subtle, fantasy game",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "condition.land-0.mp3",
+    "sha256": "2d61141e9d8eb2c49b4156510ba74da6e2754ac9a9511e5eaf8cbb892cab0e6b",
+    "bytes": 8820
+  },
+  "site.treasure#0": {
+    "id": "site.treasure",
+    "n": 0,
+    "at": "2026-11-25T01:46:45.841Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a wooden treasure chest creaking open with a bright magical sparkle and a jingle of coins, short, fantasy game",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "site.treasure-0.mp3",
+    "sha256": "8c17fb2a0eb1c6cf2eb03ebb0311a7be57a9a73c5fe3f752e808d9aacb01190d",
+    "bytes": 20105
+  },
+  "shot.orb#0": {
+    "id": "shot.orb",
+    "n": 0,
+    "at": "2026-11-25T01:47:43.541Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a small magic orb fired, a bright quick whoomp with a fizzing sparkle trail, short, punchy, fantasy game, no reverb",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "shot.orb-0.mp3",
+    "sha256": "1d0cd311c77b8af2779afe0510b0404befe8483e0261a70343af3950bd7c7814",
+    "bytes": 10492
+  },
+  "shot.wail#0": {
+    "id": "shot.wail",
+    "n": 0,
+    "at": "2026-11-25T01:47:45.744Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a short ghostly banshee shriek flying past, an eerie high wail whooshing by, short, fantasy game",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "shot.wail-0.mp3",
+    "sha256": "ac641c966a07a5a6dfeef2da1afc11001c5b9750d8d5d5330f26844ca0da5f4e",
+    "bytes": 13835
+  },
+  "shot.bomb#0": {
+    "id": "shot.bomb",
+    "n": 0,
+    "at": "2026-11-25T01:47:47.941Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a cartoon bomb tossed, a lit fuse hiss and a quick whistling throw, short, fun, no explosion",
+      "duration_seconds": 0.7,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "shot.bomb-0.mp3",
+    "sha256": "d7f956e1e0d893820eb268b00a91cb5394952a638932d0483bee76522f57d757",
+    "bytes": 12163
+  },
+  "shot.rock#0": {
+    "id": "shot.rock",
+    "n": 0,
+    "at": "2026-11-25T01:47:49.429Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a small rock hurled from a sling, a quick leather whip and a fast whoosh, short, clean, cartoon",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "shot.rock-0.mp3",
+    "sha256": "fc0e9df0f8e86d3176771c5c68df56ff95ae4dd2ed9e1b4206d14662052c5c31",
+    "bytes": 8820
+  },
+  "spell.bolt.bloom#0": {
+    "id": "spell.bolt.bloom",
+    "n": 0,
+    "at": "2026-11-25T01:47:51.509Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a nature magic thorn dart shot, a quick leafy whoosh with a sharp woody snap, short, fantasy game",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.bolt.bloom-0.mp3",
+    "sha256": "056c87f2adc50702dd6df9295ee56e31502b5dda63c8186103e9ee7730d6dfa7",
+    "bytes": 10492
+  },
+  "spell.touch.bloom#0": {
+    "id": "spell.touch.bloom",
+    "n": 0,
+    "at": "2026-11-25T01:47:54.651Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a gentle nature healing spell, soft rustling leaves and a warm rising sparkling chime, short, fantasy game",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.touch.bloom-0.mp3",
+    "sha256": "e4581f1dc6f9d6b072e5c7752a11627fb827c01870239522bb7c51a098b9ff1b",
+    "bytes": 13835
+  },
+  "spell.bolt.accord#0": {
+    "id": "spell.bolt.accord",
+    "n": 0,
+    "at": "2026-11-25T01:47:56.275Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a holy magic bolt, a bright bell ping and a quick shimmering whoosh, short, fantasy game",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.bolt.accord-0.mp3",
+    "sha256": "91afc6d8c0f76001ba6355811aa9ab6c219fd2a479d10565973325667c18edab",
+    "bytes": 10492
+  },
+  "spell.touch.accord#0": {
+    "id": "spell.touch.accord",
+    "n": 0,
+    "at": "2026-11-25T01:47:58.347Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a blessing spell, a soft warm shimmering swell with a gentle small bell, short, fantasy game, no voice",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.touch.accord-0.mp3",
+    "sha256": "630fed6b5bf9e712ef5b55745f3598d15605c61f5dfc40e347749667c0753ae6",
+    "bytes": 13835
+  },
+  "spell.burst.accord#0": {
+    "id": "spell.burst.accord",
+    "n": 0,
+    "at": "2026-11-25T01:47:59.831Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a radiant holy magic burst, a bright ringing bell chord bursting out with a sparkling shimmer whoosh, short, fantasy game",
+      "duration_seconds": 0.9,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.burst.accord-0.mp3",
+    "sha256": "5979f6a44caa633af4dfa81e7c528d2d69b317bf6a0b0679db5010bd43ffcf67",
+    "bytes": 15089
+  },
+  "spell.bolt.clock#0": {
+    "id": "spell.bolt.clock",
+    "n": 0,
+    "at": "2026-11-25T01:48:02.112Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a clockwork magic bolt, a quick ratchet click-clack and a springy brass twang launched, short, fantasy game",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.bolt.clock-0.mp3",
+    "sha256": "5cd49b69d7d3f6d91ffa00f9d1202014a56976060b8852462256c45d008414f2",
+    "bytes": 10492
+  },
+  "spell.touch.clock#0": {
+    "id": "spell.touch.clock",
+    "n": 0,
+    "at": "2026-11-25T01:48:04.167Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a time magic spell, a fast ticking pocket watch and a little rising brass chime, short, fantasy game",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.touch.clock-0.mp3",
+    "sha256": "d95ee6880968c258d39eb2409d23356d1715fa264ae8f8f5387dc4612c2812d6",
+    "bytes": 13835
+  },
+  "spell.burst.clock#0": {
+    "id": "spell.burst.clock",
+    "n": 0,
+    "at": "2026-11-25T01:48:05.610Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a time magic burst, clockwork gears grinding to a halt with a deep warped slow-motion whomp and one clock bell, short, fantasy game",
+      "duration_seconds": 0.9,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.burst.clock-0.mp3",
+    "sha256": "abf60e18793827e4011d559e95bf44e5c0343951d47ad8662c2fedb86fcdb2cc",
+    "bytes": 15089
+  },
+  "spell.bolt.hush#0": {
+    "id": "spell.bolt.hush",
+    "n": 0,
+    "at": "2026-11-25T01:48:07.591Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a ghostly shadow bolt, a dark breathy whoosh with a hollow eerie whistle, short, fantasy game",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.bolt.hush-0.mp3",
+    "sha256": "7aef83b61427df1972b80fe858dfa8dbd2c11fd1cf8ae5c0bd87375436db368b",
+    "bytes": 10492
+  },
+  "spell.touch.hush#0": {
+    "id": "spell.touch.hush",
+    "n": 0,
+    "at": "2026-11-25T01:48:09.393Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a dark whispering curse, a quiet hissing shadow swirl and a low eerie hum, short, fantasy game",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.touch.hush-0.mp3",
+    "sha256": "5e8214f8e872c8f12c85cf44ebe30eaf91c79eeb150f8902e769b737b67e08a7",
+    "bytes": 13835
+  },
+  "spell.burst.storm#0": {
+    "id": "spell.burst.storm",
+    "n": 0,
+    "at": "2026-11-25T01:48:10.803Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "an elemental storm burst, a punchy boom of thunder with crackling sparks and a gust of wind, short, fantasy game",
+      "duration_seconds": 1,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.burst.storm-0.mp3",
+    "sha256": "9ad16ffc491545084ab53d24350e6e092435fe37085b4bdc8eebb416c59a7785",
+    "bytes": 17179
+  },
+  "spell.impact.bloom#0": {
+    "id": "spell.impact.bloom",
+    "n": 0,
+    "at": "2026-11-25T01:48:12.667Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a magic plant impact, a quick leafy thump with vines snapping tight, short, fantasy game, no reverb",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.impact.bloom-0.mp3",
+    "sha256": "fa8e30e620d6649f9689698911b84beda519dbf89ac9729d5d1db010e72ddb5b",
+    "bytes": 10492
+  },
+  "spell.impact.accord#0": {
+    "id": "spell.impact.accord",
+    "n": 0,
+    "at": "2026-11-25T01:48:14.233Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a holy magic impact, a bright bell strike with a sparkling shimmer, short, fantasy game",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.impact.accord-0.mp3",
+    "sha256": "c449643318b0a5788d6c2e2baebdaac7ad0629dca8d2f3d1e4de77d578403474",
+    "bytes": 10492
+  },
+  "spell.impact.clock#0": {
+    "id": "spell.impact.clock",
+    "n": 0,
+    "at": "2026-11-25T01:48:16.199Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a clockwork magic impact, a hard metallic clank with a spring boing and a tick, short, cartoon fantasy",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.impact.clock-0.mp3",
+    "sha256": "3ea67a3dd53efaec743495836d73fb9100c4a8e376c8d76f749411025eedc2b5",
+    "bytes": 10492
+  },
+  "spell.impact.hush#0": {
+    "id": "spell.impact.hush",
+    "n": 0,
+    "at": "2026-11-25T01:48:18.032Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a ghostly magic impact, a soft dark thud with a hollow eerie breath fading out, short, fantasy game",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.impact.hush-0.mp3",
+    "sha256": "5728a9cc962394188ebc30f73dc880dc2e98eb1880e8308bcc039f13754d1042",
+    "bytes": 10492
+  },
+  "spell.impact.storm#0": {
+    "id": "spell.impact.storm",
+    "n": 0,
+    "at": "2026-11-25T01:48:19.796Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "an electric magic impact, a sharp zap crack with sizzling sparks, short, punchy, fantasy game",
+      "duration_seconds": 0.6,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.impact.storm-0.mp3",
+    "sha256": "7e4b9dc2cb566fb1800aedddfe1b6c90591e3f56fbe227b8c44212d7ff7b86f7",
+    "bytes": 10492
+  },
+  "battle.getup#0": {
+    "id": "battle.getup",
+    "n": 0,
+    "at": "2026-11-25T01:48:21.365Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a skeleton rising from the dead, quick rattling bones clattering together and a creaky crack, short, cartoon fantasy game",
+      "duration_seconds": 0.9,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "battle.getup-0.mp3",
+    "sha256": "26908f82119f4893ef597ff596efb996540e6e88b265d3ec8fd14d187ced7d97",
+    "bytes": 15089
+  },
+  "battle.summon#0": {
+    "id": "battle.summon",
+    "n": 0,
+    "at": "2026-11-25T01:48:23.295Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a magic summoning, a swirling whoosh rising into a bright pop as a creature appears, short, fantasy game",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "battle.summon-0.mp3",
+    "sha256": "25955693b3aafdf190cc7c9a30f6c0390fb78b6b5571d63110c9b18081c4eca7",
+    "bytes": 13835
+  },
+  "battle.push#0": {
+    "id": "battle.push",
+    "n": 0,
+    "at": "2026-11-25T01:48:25.276Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a forceful shove, a quick blunt whump and a short scrape of boots sliding back, short, cartoon, no voice",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "battle.push-0.mp3",
+    "sha256": "292c80abaac964d5c0185bc2043158edfcb1ebb2dc2ebbba40470127a6168f76",
+    "bytes": 8820
+  },
+  "battle.launch#0": {
+    "id": "battle.launch",
+    "n": 0,
+    "at": "2026-11-25T01:48:26.797Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a cartoon launch, a springy catapult boing and a rising whistling whoosh, short, fun",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "battle.launch-0.mp3",
+    "sha256": "6928c26bd69aae893ca1d331b0e4d67fec0ce838ce512af7507744fc1362f70e",
+    "bytes": 8820
+  },
+  "battle.land#0": {
+    "id": "battle.land",
+    "n": 0,
+    "at": "2026-11-25T01:48:28.166Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a heavy body landing on the ground, a single dull cartoon thud with a puff of dust, short, clean",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "battle.land-0.mp3",
+    "sha256": "a37dee4ce3b52fddca7092474db812d1012250638589c301dbab9ec68c5f9b05",
+    "bytes": 8820
+  },
+  "battle.teleport#0": {
+    "id": "battle.teleport",
+    "n": 0,
+    "at": "2026-11-25T01:48:30.140Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a magical teleport, a quick shimmering zip and a bright vanishing pop, short, fantasy game",
+      "duration_seconds": 0.7,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "battle.teleport-0.mp3",
+    "sha256": "d0df5af8a49edb123cc0daf3d7d801b3242be15f6ca9430714fc952472740596",
+    "bytes": 12163
+  },
+  "condition.expire#0": {
+    "id": "condition.expire",
+    "n": 0,
+    "at": "2026-11-25T01:48:32.261Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a magic effect wearing off, a soft descending sparkle fading away, very short, subtle, fantasy game",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "condition.expire-0.mp3",
+    "sha256": "1b4d947cdb39abb5e7669171d281092e2e202f6365b8e6e041a428121f03762d",
+    "bytes": 8820
+  },
+  "condition.frozen#0": {
+    "id": "condition.frozen",
+    "n": 0,
+    "at": "2026-11-25T01:48:34.162Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "ice freezing solid, a crisp crackle of ice forming and a glassy crunch, short, fantasy game",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "condition.frozen-0.mp3",
+    "sha256": "6e749916800920d6564f5f84d24b2ad83912b271a754ec63e5c91562c36f8d09",
+    "bytes": 13835
+  },
+  "condition.asleep#0": {
+    "id": "condition.asleep",
+    "n": 0,
+    "at": "2026-11-25T01:48:36.137Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a sleep spell, a soft dreamy descending harp glissando, short, gentle, fantasy game",
+      "duration_seconds": 1,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "condition.asleep-0.mp3",
+    "sha256": "3cc6399710ef3765e96713572eff9bdf863880b092b8f5162b1465de20f8869e",
+    "bytes": 17179
+  },
+  "battle.command#0": {
+    "id": "battle.command",
+    "n": 0,
+    "at": "2026-11-25T01:48:37.954Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a short bold medieval war horn fanfare, two quick rallying brass notes, punchy, fantasy game",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "battle.command-0.mp3",
+    "sha256": "4604735f78af02245911711b2db1868bee1073b53301afa2119d83cba2d61be9",
+    "bytes": 20105
+  },
+  "ground.fire#0": {
+    "id": "ground.fire",
+    "n": 0,
+    "at": "2026-11-25T01:48:39.774Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "fire bursting into flames on the ground, a quick whoosh of ignition and crackling, short, fantasy game",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ground.fire-0.mp3",
+    "sha256": "8ef2fe8d385eb6b4c109e3c25ea160ba2c736ea05ee46b166f6e7f970559520e",
+    "bytes": 13835
+  },
+  "ground.brambles#0": {
+    "id": "ground.brambles",
+    "n": 0,
+    "at": "2026-11-25T01:48:41.583Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "thorny brambles bursting up from the ground, quick creaking woody growth and snapping twigs, short, fantasy game",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ground.brambles-0.mp3",
+    "sha256": "55b886be101dc6da43a24f9230fc609852cd35d8feee1c937922b3dd2338247e",
+    "bytes": 13835
+  },
+  "ground.mist#0": {
+    "id": "ground.mist",
+    "n": 0,
+    "at": "2026-11-25T01:48:43.272Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a magic fog rolling in, a soft low airy whoosh, short, gentle, fantasy game",
+      "duration_seconds": 1,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ground.mist-0.mp3",
+    "sha256": "c94fec98eff524a410b3e74c07316f82ba1eb0b72351109e3b3c4bebb620082c",
+    "bytes": 17179
+  },
+  "map.flag#0": {
+    "id": "map.flag",
+    "n": 0,
+    "at": "2026-11-25T01:48:45.402Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a cloth banner hoisted quickly up a pole, a rope squeak and a crisp snap of fabric in the wind, short",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "map.flag-0.mp3",
+    "sha256": "19cf3f038f31193114acda2dd937f990ac5898e3717b6ff26ca4c043c20a0897",
+    "bytes": 13835
+  },
+  "ui.dialog.open#0": {
+    "id": "ui.dialog.open",
+    "n": 0,
+    "at": "2026-11-25T01:48:46.979Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a soft parchment scroll unrolling, a quick light paper swish, short, subtle, game menu",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ui.dialog.open-0.mp3",
+    "sha256": "ffbcc637048ff7b13484ab3ae802cce300da3c20b9117358177884aec8ce6a19",
+    "bytes": 8820
+  },
+  "ui.dialog.close#0": {
+    "id": "ui.dialog.close",
+    "n": 0,
+    "at": "2026-11-25T01:48:48.143Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a soft parchment scroll rolling shut, a light paper flap, short, subtle, game menu",
+      "duration_seconds": 0.5,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ui.dialog.close-0.mp3",
+    "sha256": "e7d51aab410e652dd6c58972a170e1a9f5db692df028a8b20ba0d429ffa3e57f",
+    "bytes": 8820
+  },
+  "ui.build.complete#0": {
+    "id": "ui.build.complete",
+    "n": 0,
+    "at": "2026-11-25T01:48:49.948Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a bright short cartoon success sparkle chime, a quick rising glittering ta-da, fantasy game",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ui.build.complete-0.mp3",
+    "sha256": "2875c798111c3def6abfe6b5b8e0d3cd93fbdd13db011470abb541b794d9dfd7",
+    "bytes": 13835
+  },
+  "site.shrine#0": {
+    "id": "site.shrine",
+    "n": 0,
+    "at": "2026-11-25T01:48:51.322Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a magical shrine blessing, a clear resonant temple bell chime with a soft sparkling shimmer, short, fantasy game",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "site.shrine-0.mp3",
+    "sha256": "66849bece6a312136dbc1159b7cf4311220e9e2bba17d8ae0afae4e7977b6f1a",
+    "bytes": 20105
+  },
+  "site.bank#0": {
+    "id": "site.bank",
+    "n": 0,
+    "at": "2026-11-25T01:48:53.330Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a fight begins, a sword drawn from its sheath with a metallic ring and one low war drum hit, short, punchy, fantasy game",
+      "duration_seconds": 1,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "site.bank-0.mp3",
+    "sha256": "c074170f5ca73b60dfb9a8cce4a7c1d3adae8e09e2c1c858418da76824cbfbd6",
+    "bytes": 17179
+  },
+  "site.waystone#0": {
+    "id": "site.waystone",
+    "n": 0,
+    "at": "2026-11-25T01:48:55.295Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a magical portal, a deep rushing whoosh swelling and swirling away, short, fantasy game",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "site.waystone-0.mp3",
+    "sha256": "d75758e9d371451b0552045d49e050b8886431e9cdba22f2d960ae4b39e39015",
+    "bytes": 20105
+  },
+  "site.gate#0": {
+    "id": "site.gate",
+    "n": 0,
+    "at": "2026-11-25T01:48:56.811Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a heavy key turning in an old iron lock, a solid clunk and a gate creaking open, short, fantasy game",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "site.gate-0.mp3",
+    "sha256": "7e5f494981a7ac796625db38eeaa8ca07501b98c07e7140fce14ac1a37770321",
+    "bytes": 20105
+  },
+  "site.dig#0": {
+    "id": "site.dig",
+    "n": 0,
+    "at": "2026-11-25T01:48:58.572Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a shovel digging into dirt, two quick scoops of a spade into soil, short, clean, no reverb",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "site.dig-0.mp3",
+    "sha256": "3f8b7a2343847d949889ff9915828f6e4f0e65f015fe59f4af34722d60caf24a",
+    "bytes": 13835
+  },
+  "site.quest#0": {
+    "id": "site.quest",
+    "n": 0,
+    "at": "2026-11-25T01:49:00.088Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a short bright quest complete jingle, a cheerful rising flute and bell flourish, fantasy game",
+      "duration_seconds": 1.5,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "site.quest-0.mp3",
+    "sha256": "f9ac7335bce071de680a1770feb7d8d3b5ac92861873fa51eeb795628e4334c0",
+    "bytes": 24702
+  },
+  "site.market#0": {
+    "id": "site.market",
+    "n": 0,
+    "at": "2026-11-25T01:49:02.000Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a merchant trade, coins counted out and clinking onto a wooden table, a quick purse jingle, short",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "site.market-0.mp3",
+    "sha256": "38006d1e3c69ab624e2806daaf5024d96c175cd3bf0f7cd7a27dd200ccafa13d",
+    "bytes": 13835
+  },
+  "recruit.humans#0": {
+    "id": "recruit.humans",
+    "n": 0,
+    "at": "2026-11-25T01:49:03.889Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "soldiers enlisting, a quick clank of plate armor and two crisp snare drum taps, short, punchy, no voice",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "recruit.humans-0.mp3",
+    "sha256": "8706de987ce1038f99f0bfe66281d03a2ee84ef1e3cd7c8153610108a7f1c14e",
+    "bytes": 13835
+  },
+  "recruit.undead#0": {
+    "id": "recruit.undead",
+    "n": 0,
+    "at": "2026-11-25T01:49:05.910Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "undead troops rising, rattling bones and a short hollow ghostly moan, spooky, cartoon fantasy",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "recruit.undead-0.mp3",
+    "sha256": "0dec2e95925b9738b5c0cf1602a23163eceeaf0f57e7d525cd68d57a6a24fc67",
+    "bytes": 13835
+  },
+  "recruit.goblins#0": {
+    "id": "recruit.goblins",
+    "n": 0,
+    "at": "2026-11-25T01:49:07.761Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "goblins enlisting, a quick cheeky goblin cackle and a clatter of scrap junk weapons, short, cartoon fantasy",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "recruit.goblins-0.mp3",
+    "sha256": "144c571d18c16d709305a6944ef705cbc6b81018c492ac171520f0c02f8d882d",
+    "bytes": 13835
+  },
+  "victory.humans#0": {
+    "id": "victory.humans",
+    "n": 0,
+    "at": "2026-11-25T01:49:09.179Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a short noble heroic victory fanfare, bright trumpets and a snare drum, ends on a major chord, medieval fantasy game",
+      "duration_seconds": 2.5,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "victory.humans-0.mp3",
+    "sha256": "85c1ba61f2642ef0ee235b697257269a3d58a9b88d9fa5fe41f32bcb5d40c337",
+    "bytes": 40585
+  },
+  "victory.undead#0": {
+    "id": "victory.undead",
+    "n": 0,
+    "at": "2026-11-25T01:49:10.679Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a short dark gothic victory sting, a triumphant pipe organ chord and a deep bell toll, fantasy game",
+      "duration_seconds": 2.5,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "victory.undead-0.mp3",
+    "sha256": "c321aba333c6f27d7a9b29a7155b1a97bbbf56d77cb10b2c8e5d6ccc5e49dde1",
+    "bytes": 40585
+  },
+  "victory.goblins#0": {
+    "id": "victory.goblins",
+    "n": 0,
+    "at": "2026-11-25T01:49:12.563Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a short silly victory sting, goofy tuba and kazoo with a cymbal crash, cartoon goblin celebration",
+      "duration_seconds": 2.5,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "victory.goblins-0.mp3",
+    "sha256": "dc2e3f598f2db2e528b0282e5ada564267e65174907cc49d20dbc4ebf7f96f4e",
+    "bytes": 40585
+  },
+  "town.humans#0": {
+    "id": "town.humans",
+    "n": 0,
+    "at": "2026-11-25T01:49:14.138Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a medieval town square, a distant church bell, a blacksmith hammer ringing and a soft crowd murmur, short ambience",
+      "duration_seconds": 2.5,
+      "prompt_influence": 0.5,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "town.humans-0.mp3",
+    "sha256": "241094d270ad7ca80f407497a0f1207b103b07779c5189b5b3e4d5069ee11fd3",
+    "bytes": 40585
+  },
+  "town.undead#0": {
+    "id": "town.undead",
+    "n": 0,
+    "at": "2026-11-25T01:49:15.745Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a haunted necropolis, a low eerie wind, a distant crow caw and a creaking iron gate, short ambience",
+      "duration_seconds": 2.5,
+      "prompt_influence": 0.5,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "town.undead-0.mp3",
+    "sha256": "5b1c9704511b5587e49d75bf124f4da2dacbd51df9c1b6e3eaf93463df11eef5",
+    "bytes": 40585
+  },
+  "town.goblins#0": {
+    "id": "town.goblins",
+    "n": 0,
+    "at": "2026-11-25T01:49:17.380Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a goblin camp, a bubbling cauldron, clanging scrap metal and distant goblin cackles, short ambience",
+      "duration_seconds": 2.5,
+      "prompt_influence": 0.5,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "town.goblins-0.mp3",
+    "sha256": "de230b8c96af9030ed27c3adccb800adcb872a10a611d5dea26e1b8b95328b5e",
+    "bytes": 40585
+  },
+  "spell.touch.bloom#1": {
+    "id": "spell.touch.bloom",
+    "n": 1,
+    "at": "2026-11-25T01:50:27.323Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a nature healing spell, a warm rising sparkling chime with a soft rustle of leaves, short, bright, fantasy game",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "spell.touch.bloom-1.mp3",
+    "sha256": "004d63040f107527fbfcc4169e7885621504f2c58d3055511213dbd1fa352f23",
+    "bytes": 13835
+  },
+  "ground.brambles#1": {
+    "id": "ground.brambles",
+    "n": 1,
+    "at": "2026-11-25T01:50:28.758Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "thorny vines bursting up out of the ground, one quick creaking crunch of wood and snapping twigs, short, punchy, fantasy game",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "ground.brambles-1.mp3",
+    "sha256": "130826020bd0de5b6e9eed147b004201432a8cd13a96b858a538cc3c60edcf43",
+    "bytes": 13835
+  },
+  "site.shrine#1": {
+    "id": "site.shrine",
+    "n": 1,
+    "at": "2026-11-25T01:50:30.522Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a single clear ringing temple bell chime with a soft magical sparkle, short, fantasy game",
+      "duration_seconds": 1.2,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "site.shrine-1.mp3",
+    "sha256": "69064e7f9d53bf66b50a6704e679bfd5553640da5b5805a3303a9b6a2c2b69f6",
+    "bytes": 20105
   }
 }

@@ -48,7 +48,7 @@ import type {
   BattleResult as GameBattleResult,
   BattleSetup as GameBattleSetup,
 } from "../../core/game/battle.ts";
-import { battleCue } from "../../audio/cues.ts";
+import { battleCue, victoryCue } from "../../audio/cues.ts";
 import { playSound } from "../../audio/sound.ts";
 import {
   battleGround,
@@ -372,7 +372,8 @@ class BattleScreen {
         this.logEvent(e, before);
         if (this.animator.speed !== Infinity) {
           const cue = battleCue(e, before);
-          if (cue !== null) playSound(cue);
+          // A little pitch spread keeps a run of blows from sounding canned.
+          if (cue !== null) playSound(cue, { jitter: 0.06 });
         }
       },
     });
@@ -2356,7 +2357,8 @@ class BattleScreen {
         ? "defender"
         : "attacker";
     const won = engine.winner === player;
-    playSound(won ? "victory" : "defeat");
+    // The winner's faction sting (the generic one for neutral armies).
+    playSound(won ? victoryCue(this.setup[player].faction) : "defeat");
     const dlg = el("div", "bm-result");
     const box = el("div", `bm-result-box ${won ? "bm-won" : "bm-lost"}`);
     box.append(

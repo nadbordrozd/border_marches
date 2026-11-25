@@ -1,6 +1,24 @@
 import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { battleCue, pickupCue } from "../../src/audio/cues.ts";
+import {
+  battleCue,
+  pickupCue,
+  recruitCue,
+  siteCue,
+  townCue,
+  victoryCue,
+} from "../../src/audio/cues.ts";
+import {
+  FX_EVENTS,
+  FX_OPTIONS,
+  FX_SOUNDS,
+  SHOT_KINDS,
+  cueSounds,
+  soundForFx,
+} from "../../src/audio/fx.ts";
+import type { FxEvent } from "../../src/audio/fx.ts";
+import { BATTLE_SPELLS } from "../../src/core/magic/index.ts";
+import { spellFx } from "../../src/render/fx/spell-fx.ts";
 import { SOUND_LEVELS } from "../../src/audio/levels.ts";
 import {
   AUDIO_SETTINGS_KEY,
@@ -12,6 +30,7 @@ import {
 import type { SettingsStorage } from "../../src/audio/settings.ts";
 import {
   isAutomatedEnvironment,
+  MAX_VOICES,
   playSound,
   sound,
   SOUND_IDS,
@@ -313,12 +332,13 @@ describe("sound set and cues", () => {
     expect(battleCue(damage("a0", 5), state)).toBe("battle.hit");
     expect(battleCue(damage("a1", 5), state)).toBe("battle.heavy-hit");
     expect(battleCue(damage("a0", 100_000), state)).toBe("battle.heavy-hit");
+    // Shots sound through their projectile's effect (battle.shot.<kind>).
     expect(
       battleCue(
         { ...meta, type: "shoot", stackId: "a0", targetId: "d0" },
         state,
       ),
-    ).toBe("battle.shot");
+    ).toBeNull();
     expect(battleCue({ ...meta, type: "death", stackId: "d0" }, state)).toBe(
       "battle.death",
     );
@@ -327,5 +347,157 @@ describe("sound set and cues", () => {
     ).toBeNull();
     expect(pickupCue("gold")).toBe("gold");
     expect(pickupCue("wood")).toBe("pickup");
+  });
+
+  it("gives the three factions their own recruit, victory and town sounds", () => {
+    expect(recruitCue("humans")).toBe("recruit.humans");
+    expect(recruitCue("undead")).toBe("recruit.undead");
+    expect(recruitCue("goblins")).toBe("recruit.goblins");
+    expect(recruitCue("lost-world")).toBe("recruit");
+    expect(victoryCue("goblins")).toBe("victory.goblins");
+    expect(victoryCue(null)).toBe("victory");
+    expect(townCue("undead")).toBe("town.undead");
+    expect(townCue("neutral")).toBeNull();
+  });
+
+  it("sounds map visits by family, and visits that did nothing not at all", () => {
+    expect(siteCue("stat-shrine", "Stat Shrine: +1 Attack.")).toBe(
+      "site.shrine",
+    );
+    expect(siteCue("trading-post", "Bought Tin Sabre.")).toBe("site.market");
+    expect(siteCue("loose-artifact", "Found Tin Sabre.")).toBe("site.treasure");
+    expect(siteCue("keymasters-tent", "You now hold the red key.")).toBe(
+      "site.gate",
+    );
+    expect(siteCue("seer-hut", "Quest complete! 500 gold.")).toBe("site.quest");
+    expect(siteCue("seer-hut", "Seer Hut: bring 5 wood (3 missing).")).toBe(
+      null,
+    );
+    expect(siteCue("quest-gate", "Quest complete: the gate opens.")).toBe(
+      "site.gate",
+    );
+    expect(siteCue("prison", "Prison: Ana (level 3) is freed.")).toBe(
+      "site.quest",
+    );
+    expect(siteCue("stray-hut", "Hired 4 Goblins.")).toBe("recruit");
+    expect(siteCue("stray-hut", "Stray Hut flagged: 4 available.")).toBe(
+      "map.flag",
+    );
+    expect(siteCue("stray-hut", "Stray Hut: 4 available.")).toBeNull();
+    expect(siteCue("windmill", "Windmill: already collected this week.")).toBe(
+      null,
+    );
+    expect(siteCue("prison", "Prison: the cell is empty.")).toBeNull();
+    expect(siteCue("sign", "Turn left at the oak.")).toBeNull();
+    expect(siteCue(null, "Something")).toBeNull();
+  });
+
+  it("honours a sound's own gap, a start delay and the voice cap", async () => {
+    let t = 0;
+    const starts: number[] = [];
+    const { env: base } = env({ now: () => t });
+    const system = new SoundSystem({
+      ...base,
+      createContext: () => {
+        const ctx = base.createContext() as unknown as {
+          currentTime: number;
+          createBufferSource: () => { start: (when: number) => void };
+        };
+        const make = ctx.createBufferSource;
+        ctx.currentTime = 2;
+        ctx.createBufferSource = () => {
+          const source = make();
+          source.start = (when: number) => void starts.push(when);
+          return source;
+        };
+        return ctx as unknown as AudioContext;
+      },
+    });
+    system.unlock();
+    for (let i = 0; i < 5; i++) await flush();
+    expect(system.play("ground.fire", { gap: 0.45 })).toBe(true);
+    t = 0.2;
+    expect(system.play("ground.fire", { gap: 0.45 })).toBe(false);
+    expect(system.play("ground.mist")).toBe(true);
+    t = 0.5;
+    expect(system.play("ground.fire", { gap: 0.45 })).toBe(true);
+    expect(system.play("site.bank", { delay: 0.3 })).toBe(true);
+    expect(starts).toEqual([2, 2, 2, 2.3]);
+    const others = SOUND_IDS.filter(
+      (id) => !["ground.fire", "ground.mist", "site.bank"].includes(id),
+    );
+    const results = others.map((id) => system.play(id));
+    expect(results.filter(Boolean)).toHaveLength(MAX_VOICES - 4);
+  });
+});
+
+describe("effect sounds", () => {
+  it("registers only real sounds, and leaves frequent or doubled moments silent", () => {
+    for (const [name, id] of Object.entries(FX_SOUNDS)) {
+      expect(FX_EVENTS as readonly string[], name).toContain(name);
+      expect(SOUND_IDS, name).toContain(id);
+    }
+    for (const name of Object.keys(FX_OPTIONS))
+      expect(FX_EVENTS as readonly string[], name).toContain(name);
+    for (const silent of [
+      "battle.impact",
+      "battle.walk",
+      "battle.death",
+      "battle.turn",
+      "map.walk.bob",
+      "map.count.tick",
+      "map.day",
+      "map.week",
+      "ui.recruit.count",
+    ] as const)
+      expect(soundForFx(silent), silent).toBeNull();
+    for (const kind of SHOT_KINDS)
+      expect(soundForFx(`battle.shot.${kind}`)).not.toBeNull();
+  });
+
+  it("plays a shape's own sound instead of the school's cast sound", () => {
+    const ids = (cues: FxEvent[]) => cueSounds(cues).map((c) => c.id);
+    expect(
+      ids(["spell.cast.storm", "spell.bolt.storm", "spell.impact.storm"]),
+    ).toEqual(["spell.bolt.storm", "spell.impact.storm"]);
+    // A beam has no file of its own: the school's cast sound carries it.
+    expect(
+      ids(["spell.cast.accord", "spell.beam.accord", "spell.impact.accord"]),
+    ).toEqual(["spell.accord", "spell.impact.accord"]);
+    expect(ids(["battle.condition.land", "battle.hold.frozen"])).toEqual([
+      "condition.frozen",
+    ]);
+    expect(ids(["battle.condition.land", "battle.heartened"])).toEqual([
+      "condition.land",
+    ]);
+    expect(ids(["battle.teleport.out", "battle.teleport.in"])).toEqual([
+      "battle.teleport",
+    ]);
+    expect(ids(["battle.turn", "battle.timeline"])).toEqual([]);
+  });
+
+  it("sounds every battle spell through its shape or its school", () => {
+    for (const spell of BATTLE_SPELLS) {
+      const look = spellFx(spell.id, spell.school);
+      const cues = [
+        `spell.cast.${look.school}`,
+        `spell.${look.shape}.${look.school}`,
+        `spell.impact.${look.school}`,
+      ] as FxEvent[];
+      const ids = cueSounds(cues).map((c) => c.id);
+      expect(ids, spell.id).toHaveLength(2);
+      expect(ids[1], spell.id).toBe(`spell.impact.${look.school}`);
+    }
+  });
+
+  it("maps every effect event in docs/art/SOUND.md", () => {
+    const doc = readFileSync("docs/art/SOUND.md", "utf8");
+    for (const name of FX_EVENTS) {
+      const id = soundForFx(name);
+      const row = doc.split("\n").find((l) => l.startsWith(`| \`${name}\` |`));
+      expect(row, name).toBeDefined();
+      if (id !== null) expect(row, name).toContain(`\`${id}\``);
+      else expect(row, name).toMatch(/none/);
+    }
   });
 });
