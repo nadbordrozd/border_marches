@@ -26,6 +26,7 @@ import type {
   GameEvent,
   GameState,
   HeroState,
+  MonsterState,
 } from "../game/types.ts";
 import { adventureMagicBonus, spellPowerBonus } from "../game/effects.ts";
 import { objectTypeOf, playerListed } from "../game/site-state.ts";
@@ -50,9 +51,14 @@ export const GREEN_ROAD_COST = 200;
 export const ASK_RANGE = 15;
 /** Tow Line needs at least this much movement, and spends all of it. */
 export const TOW_LINE_MIN_MP = 300;
+/**
+ * Parley and Opening Salvo reach a neutral stack this many cells away
+ * (Chebyshev), so the hero can cast from outside its zone of control.
+ */
+export const MONSTER_SPELL_RANGE = 2;
 
 export interface AdventureTarget {
-  /** Parley, Opening Salvo: the neutral stack. */
+  /** Parley, Opening Salvo: the neutral stack (within 2 cells). */
   readonly monsterId?: string;
   /** Ask the Dead: the centre cell. */
   readonly x?: number;
@@ -169,15 +175,35 @@ type Effect = (
   events: GameEvent[],
 ) => string | null;
 
-function adjacentMonster(
+/** Whether a neutral stack at (x, y) is in Parley / Opening Salvo reach. */
+export function inMonsterSpellRange(
+  hero: HeroState,
+  x: number,
+  y: number,
+): boolean {
+  const d = chebyshev(x, y, hero.x, hero.y);
+  return d >= 1 && d <= MONSTER_SPELL_RANGE;
+}
+
+/** The neutral stacks Parley and Opening Salvo can target from here. */
+export function monstersInSpellRange(
+  state: GameState,
+  hero: HeroState,
+): MonsterState[] {
+  return Object.values(state.monsters).filter((m) =>
+    inMonsterSpellRange(hero, m.x, m.y),
+  );
+}
+
+function nearbyMonster(
   next: GameState,
   hero: HeroState,
   t: AdventureTarget,
 ): { id: string; creature: string; count: number } | string {
   const m = t.monsterId ? next.monsters[t.monsterId] : undefined;
   if (!m) return "choose a neutral stack";
-  if (chebyshev(m.x, m.y, hero.x, hero.y) !== 1)
-    return "the stack must be adjacent to the hero";
+  if (!inMonsterSpellRange(hero, m.x, m.y))
+    return `the stack must be within ${MONSTER_SPELL_RANGE} cells of the hero`;
   return { id: m.id, creature: m.creature, count: m.count };
 }
 
@@ -189,7 +215,7 @@ const EFFECTS: Readonly<Record<string, Effect>> = {
     return null;
   },
   parley: (next, hero, p, t) => {
-    const m = adjacentMonster(next, hero, t);
+    const m = nearbyMonster(next, hero, t);
     if (typeof m === "string") return m;
     const fv = getCreature(m.creature as never).fightValue * m.count;
     const max = 300 + 150 * p;
@@ -300,7 +326,7 @@ const EFFECTS: Readonly<Record<string, Effect>> = {
     return null;
   },
   "opening-salvo": (next, hero, p, t, events) => {
-    const m = adjacentMonster(next, hero, t);
+    const m = nearbyMonster(next, hero, t);
     if (typeof m === "string") return m;
     const hp = getCreature(m.creature as never).hp;
     const kills = Math.min(m.count, Math.floor((30 + 15 * p) / hp));

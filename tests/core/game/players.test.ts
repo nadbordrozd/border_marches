@@ -54,9 +54,13 @@ function twoPlayers(
     const [x, y] = opts.hero1 ?? [10, 1];
     objects.push(heroStart(x, y, 1));
   }
-  return newGame(buildMap(field(12, 3), [...objects, ...extra]), {
+  const s = newGame(buildMap(field(12, 3), [...objects, ...extra]), {
     players: LW,
   });
+  // These tests start from empty towns: send the starting militia
+  // (RULES_V2 5.5) home.
+  for (const t of Object.values(s.towns)) t.garrison.fill(null);
+  return s;
 }
 
 function attack(s: GameState, heroId: string, x: number, y: number): GameState {

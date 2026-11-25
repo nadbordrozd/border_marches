@@ -102,6 +102,14 @@ Recruits from the town join the hero's army when the hero is in the town,
 otherwise the town's garrison (7 slots); the hero swaps creatures with the
 garrison while in the town.
 
+**Starting militia** (v0.2, [RULES_V2 5.5](RULES_V2.md#55-towns-capture-and-defence)):
+every player's starting town begins with a garrison of one week's growth
+of its tier-1 dwelling plus half a week's growth (rounded down) of its
+tier-2 dwelling if built, on top of the dwelling stock (14 Squires, 15
+Skeletons, 20 Goblins or 14 Cavemen at the start). A capital is no longer
+empty for the first rival hero that finds it in week one, and the hero
+may take the militia along instead.
+
 ### 6.1 Experience and levels
 
 XP gained in a battle = the total HP of enemy creatures killed (count killed x

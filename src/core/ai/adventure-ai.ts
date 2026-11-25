@@ -47,6 +47,8 @@ import { inBounds, isPassable } from "../map/types.ts";
 import {
   adventureCastError,
   adventurePower,
+  inMonsterSpellRange,
+  MONSTER_SPELL_RANGE,
   towLineStops,
 } from "../magic/adventure.ts";
 import { registerSpells } from "../magic/index.ts";
@@ -1340,9 +1342,29 @@ export class AdventureAi implements PlayerController {
         if (rival !== null && today.length === steps.length) {
           this.noteAttack(turn.player, rival, turn.state.day);
         }
-        if (first.attack === true) {
-          const salvo = this.openingSalvo(turn, hero, t, first.cost);
-          if (salvo !== null) return salvo;
+        // Opening Salvo reaches 2 cells (bzc.39): cast it before the
+        // fight, stopping 2 cells short first when the walk would step
+        // into the stack's zone (which starts the fight at once).
+        const attack = today.find((s) => s.attack);
+        if (attack !== undefined && this.salvoWanted(turn, hero, t)) {
+          const into = today.indexOf(attack) - 1;
+          const zone = into >= 0 ? (today[into]?.total ?? 0) : 0;
+          // Keep enough movement to walk into the attack afterwards.
+          if (hero.mp >= 250 + zone) {
+            if (inMonsterSpellRange(hero, t.x, t.y)) {
+              return this.openingSalvo(hero, t);
+            }
+            const stop = today.findIndex(
+              (s) => !s.attack && chebyshev(s.x, s.y, t.x, t.y) === 2,
+            );
+            if (stop >= 0) {
+              return {
+                type: "move",
+                heroId: hero.id,
+                path: today.slice(0, stop + 1).map((s) => ({ x: s.x, y: s.y })),
+              };
+            }
+          }
         }
         return {
           type: "move",
@@ -1559,6 +1581,31 @@ export class AdventureAi implements PlayerController {
       }
       return best;
     };
+    // The cheapest cell within MONSTER_SPELL_RANGE of (x, y) from which
+    // Parley or Opening Salvo reaches the stack (bzc.39): where the hero
+    // stands, or a cell outside every zone of control.
+    const castSpot = (
+      x: number,
+      y: number,
+    ): { cost: number; x: number; y: number } | undefined => {
+      let best: { cost: number; x: number; y: number } | undefined;
+      const r = MONSTER_SPELL_RANGE;
+      for (let dy = -r; dy <= r; dy++) {
+        for (let dx = -r; dx <= r; dx++) {
+          if (dx === 0 && dy === 0) continue;
+          const vx = x + dx;
+          const vy = y + dy;
+          if (!inBounds(state.map, vx, vy)) continue;
+          const c = dist.get(vy * w + vx);
+          if (c === undefined) continue;
+          if (c > 0 && guarded(vy * w + vx)) continue;
+          if (best === undefined || c < best.cost) {
+            best = { cost: c, x: vx, y: vy };
+          }
+        }
+      }
+      return best;
+    };
     const explore = this.exploreWeight(turn);
     const leads = this.questLeads(turn);
     const bonusOf = new Map<string, number>();
@@ -1692,26 +1739,28 @@ export class AdventureAi implements PlayerController {
         battle: { kind: "monster", objectId: m.id, heroId: hero.id },
         maxLoss: isMain ? 0.3 : 0.1,
       });
-      // Parley (iteration 2): a small stack next to the hero, in front of
-      // something worth having, is talked past instead of fought (no
-      // losses, no clearing); what it guards then lies open for today.
-      // Taken when the fight is refused or costs more. Only from where the
-      // hero stands: stepping into a zone starts the fight at once.
+      // Parley (iteration 2): a small stack in front of something worth
+      // having is talked past instead of fought (no losses, no clearing);
+      // what it guards then lies open for today. Taken when the fight is
+      // refused or costs more. Cast from a cell within 2 of the stack
+      // outside every zone (bzc.39): stepping into a zone starts the
+      // fight at once, so the hero stops short and casts first.
       const behind = (bonusOf.get(m.id) ?? 0) + (leads.get(m.id) ?? 0);
+      const spot =
+        behind > 0 && near.others.length === 0 && hero.pages.includes("parley")
+          ? castSpot(m.x, m.y)
+          : undefined;
       if (
-        behind > 0 &&
-        near.cost === 0 &&
-        near.others.length === 0 &&
-        hero.pages.includes("parley") &&
+        spot !== undefined &&
         adventureCastError(state, hero, "parley") === null &&
         stackFv(m.creature, m.count) <=
           300 + 150 * adventurePower(hero, "parley", false)
       ) {
         add({
           key: `parley:${m.id}`,
-          x: near.via.x,
-          y: near.via.y,
-          cost: near.cost,
+          x: spot.x,
+          y: spot.y,
+          cost: spot.cost,
           value: behind * 0.85,
           parley: m.id,
         });
@@ -2278,29 +2327,28 @@ export class AdventureAi implements PlayerController {
   }
 
   /**
-   * Opening Salvo before attacking an adjacent stack: it kills some of
-   * the stack for 100 movement, so the fight costs fewer troops.
+   * Whether Opening Salvo is worth casting on the stack this target
+   * fights: it kills some of the stack for 100 movement, so the fight
+   * costs fewer troops.
    */
-  private openingSalvo(
-    turn: Turn,
-    hero: HeroState,
-    t: Target,
-    stepCost: number,
-  ): GameAction | null {
+  private salvoWanted(turn: Turn, hero: HeroState, t: Target): boolean {
     const spell = "opening-salvo";
     if (t.battle?.kind !== "monster" || !hero.pages.includes(spell)) {
-      return null;
+      return false;
     }
-    if (chebyshev(hero.x, hero.y, t.x, t.y) !== 1) return null;
-    // Keep enough movement to step into the attack afterwards.
-    if (hero.mp < 250 + stepCost) return null;
-    if ((t.fight?.lossShare ?? 0) <= 0) return null;
-    if (adventureCastError(turn.state, hero, spell) !== null) return null;
+    if ((t.fight?.lossShare ?? 0) <= 0) return false;
+    return adventureCastError(turn.state, hero, spell) === null;
+  }
+
+  /** Opening Salvo on the target's stack (within 2 cells of the hero). */
+  private openingSalvo(hero: HeroState, t: Target): GameAction {
     return {
       type: "cast",
       heroId: hero.id,
-      spell,
-      target: { monsterId: t.battle.objectId },
+      spell: "opening-salvo",
+      target: {
+        monsterId: t.battle?.kind === "monster" ? t.battle.objectId : "",
+      },
     };
   }
 

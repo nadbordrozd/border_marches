@@ -13,8 +13,12 @@ import {
   dateLabel,
   describeCell,
   groupWord,
+  monsterSpellLine,
   stackPhrase,
 } from "../../src/ui/format.ts";
+import { cloneState } from "../../src/core/game/state.ts";
+import { withHeroMagic } from "../../src/core/magic/index.ts";
+import { field, gameOn, monster } from "../core/game/helpers.ts";
 import { minimapPixels, TERRAIN_COLOURS } from "../../src/ui/minimap.ts";
 import {
   displayObjects,
@@ -88,6 +92,28 @@ describe("format", () => {
         Math.floor(hidden / s.map.width),
       ),
     ).toBe("Unexplored");
+  });
+
+  it("tells whether Parley and Opening Salvo reach a hovered stack", () => {
+    const s0 = gameOn(field(8, 3), [monster("m", 4, 1, "goblin", 5)], 1, 1);
+    const s = cloneState(s0);
+    const h = s.heroes[0]!;
+    // Without either spell, no line.
+    expect(monsterSpellLine(s, h, s.monsters["m"]!)).toBeNull();
+    withHeroMagic(h, { knownSpells: ["parley"], scrolls: ["opening-salvo"] });
+    // Three cells away: out of reach.
+    expect(monsterSpellLine(s, h, s.monsters["m"]!)).toBe(
+      "Out of reach of Parley or Opening Salvo: come within 2 cells to cast.",
+    );
+    h.x = 2;
+    expect(monsterSpellLine(s, h, s.monsters["m"]!)).toBe(
+      "In reach of Parley or Opening Salvo (within 2 cells).",
+    );
+    expect(describeCell(s, 0, 4, 1, h.id)).toContain(
+      "In reach of Parley or Opening Salvo",
+    );
+    // Another player's view never shows it.
+    expect(describeCell(s, 1, 4, 1, h.id) ?? "").not.toContain("reach");
   });
 });
 

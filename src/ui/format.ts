@@ -8,6 +8,13 @@ import type { GameState } from "../core/game/types.ts";
 import type { MapObject, Terrain } from "../core/map/types.ts";
 import { describeObject, objectName } from "../core/game/sites.ts";
 import { objectTypeOf } from "../core/game/site-state.ts";
+import {
+  MONSTER_SPELL_RANGE,
+  heroMagic,
+  inMonsterSpellRange,
+  spellInfo,
+  storeOf,
+} from "../core/magic/index.ts";
 import { getCreature } from "../data/creatures.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { getHeroClass } from "../data/hero.ts";
@@ -86,6 +93,33 @@ export function objectAt(
   );
 }
 
+/** The adventure spells that target a neutral stack (RULES_V2 2.8). */
+const MONSTER_SPELLS = ["parley", "opening-salvo"] as const;
+
+/**
+ * The hover line for a neutral stack when the hero has Parley or Opening
+ * Salvo (as a page or a scroll): whether it is in their 2-cell reach, and
+ * whether Parley already holds it today. Null when the hero has neither.
+ */
+export function monsterSpellLine(
+  state: GameState,
+  hero: GameState["heroes"][number],
+  monster: { id: string; x: number; y: number },
+): string | null {
+  const store = storeOf(state, hero.id);
+  if (store.parleyDay === state.day && store.parley?.includes(monster.id))
+    return "Parleyed: no zone of control against you today.";
+  const m = heroMagic(hero);
+  const names = MONSTER_SPELLS.filter(
+    (id) => m.knownSpells.includes(id) || m.scrolls.includes(id),
+  ).map((id) => spellInfo(id).name);
+  if (names.length === 0) return null;
+  const spells = names.join(" or ");
+  if (inMonsterSpellRange(hero, monster.x, monster.y))
+    return `In reach of ${spells} (within ${MONSTER_SPELL_RANGE} cells).`;
+  return `Out of reach of ${spells}: come within ${MONSTER_SPELL_RANGE} cells to cast.`;
+}
+
 /**
  * What the player sees when hovering a cell: one or two short lines, or
  * null for unexplored cells.
@@ -133,6 +167,13 @@ export function describeCell(
       lines.push(`Guards: ${names.join(", ")}.`);
     } else if (mobj?.data["pass"] === true) {
       lines.push("Guards a pass.");
+    }
+    const hero = state.heroes.find(
+      (h) => h.id === heroId && h.alive && h.owner === player,
+    );
+    if (hero !== undefined) {
+      const reach = monsterSpellLine(state, hero, monster);
+      if (reach !== null) lines.push(reach);
     }
     return lines.join("\n");
   }

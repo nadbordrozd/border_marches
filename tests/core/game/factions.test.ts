@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 import { build, buildStatus, recruit } from "../../../src/core/game/town.ts";
 import { battleSetup } from "../../../src/core/game/battle.ts";
 import { dailyIncome } from "../../../src/core/game/turn.ts";
-import { newGame } from "../../../src/core/game/newGame.ts";
+import { newGame, startingMilitia } from "../../../src/core/game/newGame.ts";
 import { engineSetupFromGame } from "../../../src/core/battle/index.ts";
 import { generateMap } from "../../../src/core/map/generate.ts";
 import { townTree } from "../../../src/data/factions.ts";
@@ -17,7 +17,7 @@ import { getHeroClass } from "../../../src/data/hero.ts";
 import { rosterFor } from "../../../src/data/players.ts";
 import { playerSetups } from "../../../src/ui/app.ts";
 import type { GameState } from "../../../src/core/game/types.ts";
-import type { FactionId } from "../../../src/data/types.ts";
+import type { CreatureId, FactionId } from "../../../src/data/types.ts";
 import { buildMap, field, heroStart, monster, ok, town } from "./helpers.ts";
 
 const FACTIONS: FactionId[] = ["humans", "undead", "goblins"];
@@ -288,5 +288,64 @@ describe("Setup and the map", () => {
     };
     const { events } = ok(build(s, "t0", "magic-guild-1"));
     expect(events.some((e) => e.type === "spells-learnt")).toBe(true);
+  });
+});
+
+describe("Starting militia (RULES_V2 5.5)", () => {
+  // One week of the tier-1 dwelling; half a week of the tier-2 one (rounded
+  // down) only once it is built, which no faction has at the start.
+  const EXPECTED: Record<
+    string,
+    { t1: CreatureId; n1: number; t2: CreatureId; n2: number }
+  > = {
+    humans: { t1: "squire", n1: 14, t2: "longbowman", n2: 4 },
+    undead: { t1: "skeleton", n1: 15, t2: "ghoul", n2: 4 },
+    goblins: { t1: "goblin", n1: 20, t2: "bomb-chucker", n2: 5 },
+  };
+
+  for (const faction of FACTIONS) {
+    const e = EXPECTED[faction]!;
+    it(`${faction}: the starting town holds a week of ${e.t1} on top of the dwelling stock`, () => {
+      const t0 = startAs(faction).towns["t0"]!;
+      expect(t0.garrison.filter((x) => x !== null)).toEqual([
+        { creature: e.t1, count: e.n1 },
+      ]);
+      // The dwelling stock is untouched.
+      expect(t0.dwellings[e.t1]?.available).toBe(e.n1);
+    });
+
+    it(`${faction}: a built tier-2 dwelling adds half a week of ${e.t2}`, () => {
+      const t0 = startAs(faction).towns["t0"]!;
+      const tree = townTree(faction)!;
+      const t2 = tree.order.find((b) => tree.buildings[b]?.dwelling === e.t2)!;
+      expect(
+        startingMilitia({ ...t0, buildings: [...t0.buildings, t2] }),
+      ).toEqual([
+        { creature: e.t1, count: e.n1 },
+        { creature: e.t2, count: e.n2 },
+      ]);
+    });
+  }
+
+  it("the opponent's starting town gets its own faction's militia", () => {
+    const s = startAs("humans");
+    expect(s.towns["t1"]!.garrison.filter((x) => x !== null)).toEqual([
+      { creature: "goblin", count: 20 },
+    ]);
+  });
+
+  it("neutral faction towns keep only their neutral garrison", () => {
+    const neutral = {
+      ...town("n", 5, 5, null),
+      data: { faction: "goblins", owner: null },
+    };
+    const n = startAs("humans", [neutral]).towns["n"]!;
+    expect(n.isHold).toBe(false);
+    expect(n.garrison.filter((x) => x !== null)).toEqual(
+      (townTree("goblins")?.neutralGarrison ?? []).map((g) => ({
+        creature: g.creature,
+        count: g.count,
+      })),
+    );
   });
 });

@@ -305,6 +305,85 @@ describe("spells and quests (iteration 2)", () => {
     ).toBe(false);
   });
 
+  it("stops 2 cells short of a guard to Parley it (bzc.39)", () => {
+    // As above, but the hero starts 4 cells from the goblins: it walks to
+    // a cell 2 away (outside their zone), casts, then walks past.
+    const rows = ["gggggggggggggg", "gggggggggggggg"];
+    const s0 = newGame(
+      buildMap(rows, [
+        town("t0", 0, 0, 0),
+        heroStart(1, 0, 0),
+        monster("m", 8, 0, "goblin", 5),
+        pickup("gold", 9, 1, { resource: "gold", amount: 3000, value: 3000 }),
+      ]),
+      { players: [{ kind: "ai", faction: "humans" }] },
+    );
+    const h = s0.heroes[0]!;
+    const s = allSeen({
+      ...withGold(s0, 0),
+      towns: {
+        t0: { ...s0.towns["t0"]!, garrison: army() },
+      },
+      heroes: [
+        {
+          ...h,
+          x: 4,
+          army: army(["squire", 2]),
+          pages: [...h.pages, "parley"],
+          skills: [...h.skills, { id: "covenant", rank: 2 }],
+          mana: 40,
+        },
+      ],
+    });
+    const { actions, state } = turnActions(s, fast());
+    const at = actions.findIndex(
+      (a) => a.type === "cast" && a.spell === "parley",
+    );
+    expect(at).toBeGreaterThan(0);
+    const before = actions[at - 1];
+    expect(before?.type).toBe("move");
+    const end = before?.type === "move" ? before.path.at(-1) : undefined;
+    expect(Math.max(Math.abs(end!.x - 8), Math.abs(end!.y - 0))).toBe(2);
+    expect(state.collected).toContain("gold");
+  });
+
+  it("casts Opening Salvo from 2 cells away before attacking (bzc.39)", () => {
+    const rows = field(14, 3);
+    const s0 = newGame(
+      buildMap(rows, [
+        town("t0", 0, 1, 0),
+        heroStart(1, 1, 0),
+        monster("m", 9, 1, "goblin", 30),
+      ]),
+      { players: [{ kind: "ai", faction: "humans" }] },
+    );
+    const h = s0.heroes[0]!;
+    const s = allSeen({
+      ...withGold(s0, 0),
+      towns: {
+        t0: { ...s0.towns["t0"]!, garrison: army() },
+      },
+      heroes: [
+        {
+          ...h,
+          x: 4,
+          army: army(["squire", 40], ["longbowman", 15]),
+          pages: [...h.pages, "opening-salvo"],
+          skills: [...h.skills, { id: "stormcalling", rank: 1 }],
+          mana: 40,
+        },
+      ],
+    });
+    const { actions } = turnActions(s, fast());
+    const at = actions.findIndex(
+      (a) => a.type === "cast" && a.spell === "opening-salvo",
+    );
+    expect(at).toBeGreaterThan(0);
+    const before = actions[at - 1];
+    const end = before?.type === "move" ? before.path.at(-1) : undefined;
+    expect(Math.max(Math.abs(end!.x - 9), Math.abs(end!.y - 1))).toBe(2);
+  });
+
   it("goes for the artifact a seer asks for", () => {
     const seer: MapObject = {
       id: "seer",

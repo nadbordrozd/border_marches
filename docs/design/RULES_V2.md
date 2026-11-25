@@ -745,13 +745,18 @@ Adventure spells are cast from the adventure map on the player's own turn.
   pages on the map.
 - Each has one number that scales as `base + per x Power` using the same
   effective Power as battle pages.
+- A spell that targets a neutral stack (Parley; Opening Salvo in
+  CONTENT_SPELLS 4) reaches a stack **within 2 cells** of the hero
+  (Chebyshev distance 1 or 2). A neutral stack's zone of control covers
+  only the cells next to it, so the hero can cast from outside the zone:
+  stepping next to the stack would start the fight at once.
 
 The reference set, one per school (content may add more):
 
 | Spell        | School | Tier | Exact rule                                                                                                                                                                   |
 | ------------ | ------ | ---: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Green Road   | Bloom  |    2 | Until the day ends this hero may enter forest cells at a move cost of 200. A hero standing in forest when the day ends is moved back to the last non-forest cell of its path |
-| Parley       | Accord |    3 | Target a neutral stack adjacent to the hero whose stack FV is at most 300 + 150 x P. Until the day ends it has no zone of control against this player                        |
+| Parley       | Accord |    3 | Target a neutral stack within 2 cells of the hero whose stack FV is at most 300 + 150 x P. Until the day ends it has no zone of control against this player                  |
 | Borrowed Day | Clock  |    3 | The hero gains 300 + 50 x P movement points now, at most 1000. At the start of the next day it has that many fewer                                                           |
 | Ask the Dead | Hush   |    1 | Reveal the cells in a disc of radius 4 + floor(P / 2) around any explored cell within 15 cells of the hero                                                                   |
 | Tow Line     | Storm  |    4 | The hero moves from a pylon it stands on to any pylon its player has visited. Costs all remaining movement points; needs at least 300                                        |
@@ -1155,6 +1160,15 @@ the MVP.
 
 ### 5.5 Towns: capture and defence
 
+- **Starting militia.** Every town a player owns when the game starts
+  begins with a garrison of its faction's own creatures: one week's growth
+  of its tier-1 dwelling plus half a week's growth (rounded down) of its
+  tier-2 dwelling, counting only dwellings the town has built (no v0.2
+  faction starts with its tier-2 dwelling, so in practice the militia is
+  the tier-1 part: 14 Squires, 15 Skeletons or 20 Goblins). The militia
+  comes on top of the dwelling stock, which is unchanged. Neutral towns
+  keep their own garrisons and get no militia. A hero can take the
+  militia into its army like any garrison.
 - A hero that enters a town not owned by its player fights the defenders
   and, on winning, **captures** it: the owner changes at once. Buildings,
   guild spells, dwelling stock and the remaining garrison (none) stay.

@@ -118,6 +118,32 @@ export function newFactionTown(
   return town;
 }
 
+/**
+ * The militia a player's starting town begins with (RULES_V2 5.5): one
+ * week's growth of its tier-1 dwelling plus half a week's growth (rounded
+ * down) of its tier-2 dwelling, the faction's own creatures, for the
+ * dwellings the town has built. On top of the dwelling stock.
+ */
+export function startingMilitia(
+  town: TownState,
+): Array<{ creature: CreatureId; count: number }> {
+  const tree = townTree(town.faction);
+  if (tree === undefined) return [];
+  const out: Array<{ creature: CreatureId; count: number }> = [];
+  for (const [tier, share] of [
+    [1, 1],
+    [2, 0.5],
+  ] as const) {
+    const creature = town.buildings
+      .map((b) => tree.buildings[b]?.dwelling)
+      .find((c) => c !== undefined && getCreature(c).tier === tier);
+    if (creature === undefined) continue;
+    const count = Math.floor(getCreature(creature).growth * share);
+    if (count > 0) out.push({ creature, count });
+  }
+  return out;
+}
+
 /** A new Lost World town with its start buildings and stocked dwellings. */
 export function newLostWorldTown(
   id: string,
@@ -277,12 +303,12 @@ export function newGame(
         const faction = obj.data["faction"];
         if (owner !== null) {
           const f = (setups.get(owner) as PlayerSetup).faction;
-          state.towns[obj.id] = newFactionTown(
-            obj.id,
-            f,
-            owner,
-            townName(f, obj),
-          );
+          const town = newFactionTown(obj.id, f, owner, townName(f, obj));
+          // A player's starting town begins with a militia (RULES_V2 5.5).
+          for (const s of startingMilitia(town)) {
+            addToArmy(town.garrison, s.creature, s.count);
+          }
+          state.towns[obj.id] = town;
         } else if (
           obj.data["hold"] !== true &&
           typeof faction === "string" &&

@@ -21,6 +21,9 @@ import {
   adventurePower,
   castAdventureSpell,
   heroMagic,
+  inMonsterSpellRange,
+  MONSTER_SPELL_RANGE,
+  monstersInSpellRange,
   teachSpell,
   towLineStops,
   withHeroMagic,
@@ -360,6 +363,41 @@ describe("Parley", () => {
     expect([hero(moved.state).x, hero(moved.state).y]).toEqual([4, 0]);
   });
 
+  it("reaches a stack 2 cells away, from outside its zone of control", () => {
+    // The hero at (1,0), the goblins at (3,1): Chebyshev distance 2.
+    const s0 = learn(
+      gameOn(field(7, 3), [monster("m", 3, 1, "goblin", 10)], 1, 0),
+      ["parley"],
+      { ranks: { bloom: 1, accord: 2, clock: 1, hush: 1, storm: 1 } },
+    );
+    const s1 = ok(cast(s0, "hero-0", "parley", { monsterId: "m" })).state;
+    const moved = ok(
+      moveHeroAlong(s1, "hero-0", [
+        { x: 2, y: 0 },
+        { x: 3, y: 0 },
+        { x: 4, y: 0 },
+        { x: 5, y: 0 },
+      ]),
+    );
+    expect(moved.state.pendingBattle).toBeNull();
+    expect([hero(moved.state).x, hero(moved.state).y]).toEqual([5, 0]);
+  });
+
+  it("refuses a stack 3 cells away", () => {
+    const s0 = learn(
+      gameOn(field(7, 3), [monster("m", 3, 1, "goblin", 10)], 0, 0),
+      ["parley"],
+      { ranks: { bloom: 1, accord: 2, clock: 1, hush: 1, storm: 1 } },
+    );
+    expect(cast(s0, "hero-0", "parley", { monsterId: "m" })).toMatchObject({
+      ok: false,
+      message: "the stack must be within 2 cells of the hero",
+    });
+    expect(monstersInSpellRange(s0, hero(s0))).toEqual([]);
+    expect(inMonsterSpellRange(hero(s0), 2, 2)).toBe(true);
+    expect(MONSTER_SPELL_RANGE).toBe(2);
+  });
+
   it("refuses a stack above 300 + 150 P fight value", () => {
     const s0 = learn(
       gameOn(field(7, 3), [monster("m", 3, 1, "goblin", 40)], 2, 0),
@@ -467,6 +505,31 @@ describe("Opening Salvo", () => {
     // Harm 45 at P 1: five 8-HP goblins die.
     expect(s1.monsters.m?.count).toBe(5);
     expect(hero(s1).mp).toBe(hero(s0).mp - 100);
+  });
+
+  it("reaches a stack 2 cells away but not 3", () => {
+    const near = learn(
+      gameOn(field(6, 3), [monster("m", 3, 2, "goblin", 10)], 1, 0),
+      ["opening-salvo"],
+    );
+    expect(monstersInSpellRange(near, hero(near)).map((m) => m.id)).toEqual([
+      "m",
+    ]);
+    const s1 = ok(
+      cast(near, "hero-0", "opening-salvo", { monsterId: "m" }),
+    ).state;
+    expect(s1.monsters.m?.count).toBe(5);
+    expect(s1.pendingBattle).toBeNull();
+    const far = learn(
+      gameOn(field(6, 3), [monster("m", 4, 2, "goblin", 10)], 1, 0),
+      ["opening-salvo"],
+    );
+    expect(
+      cast(far, "hero-0", "opening-salvo", { monsterId: "m" }),
+    ).toMatchObject({
+      ok: false,
+      message: "the stack must be within 2 cells of the hero",
+    });
   });
 
   it("removes a stack reduced to nothing, with no XP", () => {

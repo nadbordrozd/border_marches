@@ -173,9 +173,10 @@ describe("recruit", () => {
     const { state } = ok(recruit(start(), "t", "caveman", 10));
     expect(state.players[0]!.resources.gold).toBe(7000);
     expect(state.towns["t"]!.dwellings.caveman!.available).toBe(4);
+    // On top of the starting militia of 14 (RULES_V2 5.5).
     expect(state.towns["t"]!.garrison[0]).toEqual({
       creature: "caveman",
-      count: 10,
+      count: 14 + 10,
     });
     expect(state.heroes[0]!.army[0]).toEqual({
       creature: "caveman",
@@ -190,11 +191,15 @@ describe("recruit", () => {
       creature: "caveman",
       count: 32,
     });
-    expect(state.towns["t"]!.garrison[0]).toBeNull();
+    // The garrison keeps just its starting militia (RULES_V2 5.5).
+    expect(state.towns["t"]!.garrison[0]).toEqual({
+      creature: "caveman",
+      count: 14,
+    });
     const forced = ok(recruit(s, "t", "caveman", 4, "garrison")).state;
     expect(forced.towns["t"]!.garrison[0]).toEqual({
       creature: "caveman",
-      count: 4,
+      count: 14 + 4,
     });
     expect(errorOf(recruit(start(), "t", "caveman", 1, "hero"))).toBe(
       "not-in-town",

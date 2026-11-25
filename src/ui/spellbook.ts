@@ -1,7 +1,7 @@
 /**
  * The adventure spellbook (RULES_V2 2.8): the hero's adventure pages and
  * scrolls by school with mana, the number at its Power and why one cannot
- * be cast; picking one asks for its target (an adjacent neutral stack, an
+ * be cast; picking one asks for its target (a neutral stack within 2 cells, an
  * enemy hero or sealed site, an amount, or a cell on the map) and returns
  * the cast for the game screen to run. Battle pages are listed too, for
  * reference.
@@ -16,6 +16,7 @@ import {
   adventurePower,
   heroMagic,
   isBattleSpell,
+  monstersInSpellRange,
   spellDef,
   storeOf,
   towLineStops,
@@ -73,13 +74,11 @@ function targetOptions(
   s: AdventureSpellDef,
   power: number,
 ): Array<{ label: string; target: AdventureTarget }> {
-  if (s.target === "adjacentMonster") {
-    return Object.values(state.monsters)
-      .filter((m) => chebyshev(m.x, m.y, hero.x, hero.y) === 1)
-      .map((m) => ({
-        label: `${m.count} ${m.creature} at ${m.x},${m.y}`,
-        target: { monsterId: m.id },
-      }));
+  if (s.target === "nearbyMonster") {
+    return monstersInSpellRange(state, hero).map((m) => ({
+      label: `${m.count} ${m.creature} at ${m.x},${m.y}`,
+      target: { monsterId: m.id },
+    }));
   }
   if (s.target === "sealed") {
     const range = 6 + power;

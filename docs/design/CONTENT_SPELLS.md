@@ -246,20 +246,22 @@ Area Harm, fire, cold, pushing. Allied: Hush, Bloom. Opposed: Accord, Clock.
 Cast from the map on the player's own turn, once per day per hero, with
 the school rank for the tier (RULES_V2 2.8). The first of each school is
 RULES_V2's; the second is new. All ten are in the guild and shrine pool and
-exist as scrolls.
+exist as scrolls. Parley and Opening Salvo reach a neutral stack within 2
+cells (Chebyshev), so the hero casts from outside its zone of control
+(RULES_V2 2.8).
 
 | Spell              | School | Tier | Mana | Other cost                           | Rule                                                                                                                                                                         | Scales           |
 | ------------------ | ------ | ---- | ---- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
 | **Green Road**     | Bloom  | 2    | 7    | -                                    | RULES_V2 2.8: until the day ends this hero may enter forest cells at a move cost of 200; a hero in forest at day end is moved back to the last non-forest cell of its path.  | -                |
 | **Second Helping** | Bloom  | 3    | 10   | -                                    | The map dwelling, outpost or stray hut the hero stands on gains creatures of its kind worth fight value 100 + 40 P (at least one); each dwelling accepts this once per week. | 100 + 40 P       |
-| **Parley**         | Accord | 3    | 10   | -                                    | RULES_V2 2.8: a neutral stack adjacent to the hero with stack FV at most 300 + 150 P has no zone of control against this player until the day ends.                          | 300 + 150 P      |
+| **Parley**         | Accord | 3    | 10   | -                                    | RULES_V2 2.8: a neutral stack within 2 cells of the hero with stack FV at most 300 + 150 P has no zone of control against this player until the day ends.                    | 300 + 150 P      |
 | **Read the Seal**  | Accord | 1    | 4    | -                                    | Within 6 + P cells of the hero, show the contents of one sealed box, bank or vault, or the pages, scrolls, mana and backpack of one enemy hero.                              | 6 + P            |
 | **Borrowed Day**   | Clock  | 3    | 10   | -                                    | RULES_V2 2.8: the hero gains 300 + 50 P movement points now, at most 1000, and has that many fewer at the start of the next day.                                             | 300 + 50 P       |
 | **Saved Hour**     | Clock  | 1    | 4    | The points saved                     | The hero gives up any number of its remaining movement points, at most 200 + 50 P, and gains them at the start of the next day (the daily cap of 3000 still applies).        | 200 + 50 P       |
 | **Ask the Dead**   | Hush   | 1    | 4    | -                                    | RULES_V2 2.8: reveal the cells in a disc of radius 4 + floor(P / 2) around any explored cell within 15 cells of the hero.                                                    | 4 + floor(P / 2) |
 | **Dowse**          | Hush   | 2    | 7    | -                                    | Mark the exact cell of every buried cache, and of the buried Keystone, within 5 + P cells of the hero.                                                                       | 5 + P            |
 | **Tow Line**       | Storm  | 4    | 14   | All remaining movement, at least 300 | RULES_V2 2.8: the hero moves from a pylon it stands on to any pylon its player has visited.                                                                                  | -                |
-| **Opening Salvo**  | Storm  | 2    | 7    | 100 movement                         | A neutral stack adjacent to the hero takes Harm 30 + 15 P by the kill rule before any battle; it gives no XP, and a stack reduced to nothing is removed.                     | 30 + 15 P        |
+| **Opening Salvo**  | Storm  | 2    | 7    | 100 movement                         | A neutral stack within 2 cells of the hero takes Harm 30 + 15 P by the kill rule before any battle; it gives no XP, and a stack reduced to nothing is removed.               | 30 + 15 P        |
 
 ## 5. Cross-system combos
 

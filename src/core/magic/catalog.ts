@@ -10,8 +10,8 @@ import { BATTLE_SPELLS } from "./spells.ts";
 export type AdventureTargetKind =
   /** No choice. */
   | "none"
-  /** A neutral stack adjacent to the hero. */
-  | "adjacentMonster"
+  /** A neutral stack within MONSTER_SPELL_RANGE cells of the hero. */
+  | "nearbyMonster"
   /** An explored cell within 15 cells. */
   | "exploredCell"
   /** An enemy hero or a sealed site within range. */
@@ -77,10 +77,10 @@ export const ADVENTURE_SPELLS: readonly AdventureSpellDef[] = [
     school: "accord",
     tier: 3,
     mana: 10,
-    target: "adjacentMonster",
+    target: "nearbyMonster",
     scale: { base: 300, per: 150 },
     text: (p) =>
-      `An adjacent neutral stack of fight value at most ${300 + 150 * p} has no zone of control against you today.`,
+      `A neutral stack within 2 cells of fight value at most ${300 + 150 * p} has no zone of control against you today.`,
   }),
   A({
     id: "read-the-seal",
@@ -158,10 +158,10 @@ export const ADVENTURE_SPELLS: readonly AdventureSpellDef[] = [
     tier: 2,
     mana: 7,
     moveCost: 100,
-    target: "adjacentMonster",
+    target: "nearbyMonster",
     scale: { base: 30, per: 15 },
     text: (p) =>
-      `An adjacent neutral stack takes Harm ${30 + 15 * p} before any battle (no XP).`,
+      `A neutral stack within 2 cells takes Harm ${30 + 15 * p} before any battle (no XP).`,
   }),
 ];
 

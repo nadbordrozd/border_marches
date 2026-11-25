@@ -409,8 +409,11 @@ headless Chrome with the human only ending its turns.
   and 66). Level-ups weigh a school skill double when its rank unlocks an
   adventure page the hero knows but cannot cast (a page needs a rank in
   its school: tier 2 needs rank 1, tier 3 rank 2).
-- **Spells and sites.** Parley on an adjacent small stack in front of
-  something worth having when the fight is refused; Read the Seal on a
+- **Spells and sites.** Parley on a small stack in front of something
+  worth having when the fight is refused, cast from a cell within 2 of
+  the stack outside every zone (the hero walks there first; bzc.39);
+  Opening Salvo likewise stops 2 cells short of a stack it means to
+  fight, casts, then attacks; Read the Seal on a
   rival hero in range every three days when at least half the mana is
   left (the AI's estimates do not need the reading; no v0.2 object is
   `sealed`); Second Helping on our own dwelling before hiring; Tow Line
@@ -521,10 +524,11 @@ human sees nothing of this).
    home guard starts only in week two, and a rival coming out of
    unexplored ground is not seen until it arrives.
 2. **Adjacent-only map spells cannot be used by walking.** Parley and
-   Opening Salvo need the stack adjacent to the hero, but stepping into a
-   stack's zone starts the fight at once, so a hero is adjacent only when
-   it started there. The AI casts them only then (rare). A rules
-   follow-up: a range of two, or casting them as part of the attack.
+   Opening Salvo needed the stack adjacent to the hero, but stepping into
+   a stack's zone starts the fight at once, so a hero was adjacent only
+   when it started there. Fixed in bzc.39: both reach 2 cells (RULES_V2
+   2.8) and the AI stops 2 cells short to cast. (Item 1 is eased by the
+   same bead's starting militia, RULES_V2 5.5.)
 3. **Big battles still cost 1-4 s** (the battle AI's own cost, bzc.37);
    whole AI turns reach 2-4 s in AI-only games on busy cores.
 4. **Weak secondary heroes idle or wander with one creature**; neutral
