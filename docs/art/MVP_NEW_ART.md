@@ -36,7 +36,10 @@ The imported objects were reviewed at 1:1 and x3 on light and dark
 | UI resource items, 32 x 32 | **new** (own takes at 32 px) | `resource-item-{gold,wood,ore,essence}` (`RESOURCE_ITEMS`) | Generated at 32 x 32, not downscaled. |
 
 `RESOURCE_PICKUPS` and `RESOURCE_MINES` in `src/assets/manifest.ts` name the
-pickup and mine of each resource.
+pickup and mine of each resource. Since bead `border_marches-bzc.30` the map
+draws the mines with 2x2-scale studio sprites through `artFor`
+([classes/map-objects.md](classes/map-objects.md)); the mine art above stays
+in the manifest but is no longer drawn.
 
 **Essence colour:** violet, `#a855f7` with `#6b21a8` shadows and pale lilac
 `#e9d5ff`, used on the pickup, the spring and the item. Not the faction

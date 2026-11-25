@@ -342,9 +342,123 @@
       "seed": 16406,
       "subject": "Subject: one small map site, each image a different one of these: a wooden signpost #8a5a2c with one big blank plank sign on a stout post; a round striped pavilion tent of white and green #4fa04a with a big golden key over its door; a round striped pavilion tent of white and red #c8423a with a big golden key over its door; a round striped pavilion tent of white and blue #4f86c6 with a big golden key over its door. About three quarters of the image wide and nearly the full image tall, its front facing the viewer straight on.",
       "negative": "person, text, letters, arrow, smoke, road"
+    },
+    {
+      "id": "sawmill-b",
+      "concept": "SAWMILL (bzc.30, 2x1 mine at 2x2-site scale)",
+      "width": 128,
+      "height": 128,
+      "seed": 30001,
+      "subject": "Subject: a big lumber sawmill: a long timber mill shed #8a5a2c with a red clay tile roof #c0503a with #82321f shadows on a low stone footing, a huge round steel saw blade #c8ccd0 with #7e848c shadows at its left end, tall stacks of cut logs and yellow planks #d9b26a at the front left, a wide open dark doorway at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, water wheel, river, smoke, ground, grass"
+    },
+    {
+      "id": "ore-pit-b",
+      "concept": "ORE PIT (bzc.30, 2x1 mine at 2x2-site scale)",
+      "width": 128,
+      "height": 128,
+      "seed": 30002,
+      "subject": "Subject: an ore mine: a craggy rocky hill of warm grey stone #9a9286 with #625c54 shadows, a sturdy timber-framed mine entrance #8a5a2c at the front right, a wooden winch tower with a rope wheel on top of the hill, rails running out of the entrance with a mine cart heaped with dark iron ore #4a4a56 and rusty red #b0583a chunks, a pickaxe and an ore pile beside it. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, snow, mountain range, smoke, ground, grass"
+    },
+    {
+      "id": "gold-mine-b",
+      "concept": "GOLD MINE (bzc.30, 2x1 mine at 2x2-site scale)",
+      "width": 128,
+      "height": 128,
+      "seed": 30003,
+      "subject": "Subject: a rich gold mine: a rounded hill of sandy ochre rock #c9a46a with #8e6e3e shadows streaked with glittering gold veins #f2c230, a timber-framed mine entrance #8a5a2c at the front right with a hanging lantern, rails running out of it with a mine cart heaped with gold nuggets #f2c230 with #b08020 shadows, a small wooden shed and sacks of gold at the front left. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, coins in the air, snow, smoke, ground, grass"
+    },
+    {
+      "id": "essence-spring-b",
+      "concept": "ESSENCE SPRING (bzc.30, 2x1 mine at 2x2-site scale)",
+      "width": 128,
+      "height": 128,
+      "seed": 30004,
+      "subject": "Subject: a magical essence spring: a wide round pool of bright violet water #8a5ad0 with #5e3a9a shadows ringed by a low wall of pale grey stone blocks #a8a39a with #6e6a64 shadows, a big cluster of tall violet crystals #a77ae8 with #5e3a9a shadows rising behind the pool at the left, smaller crystals along the rim, a few stone steps down to the water at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, glow halo, sparkle cloud, waterfall, ground, grass"
+    },
+    {
+      "id": "haunted-mine-b",
+      "concept": "HAUNTED MINE (bzc.30, 2x1 mine at 2x2-site scale)",
+      "width": 128,
+      "height": 128,
+      "seed": 30005,
+      "subject": "Subject: a haunted mine: a craggy hill of dark grey rock #5a5660 with #3a3640 shadows, a crooked mine entrance of rotten black timber beams at the front right, a crooked lantern with a pale green #9fe0a8 light over it, rails running out of it with a broken tipped-over mine cart, cobwebs, a few bones and a tilted wooden warning post with a skull at the front left. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "ghost, person, skeleton figure, smoke, mountain range, ground, grass"
+    },
+    {
+      "id": "essence-spring-c",
+      "concept": "ESSENCE SPRING grotto (bzc.30, 2x1 mine at 2x2-site scale)",
+      "width": 128,
+      "height": 128,
+      "seed": 30006,
+      "subject": "Subject: a grand magical essence spring: a big craggy grotto of pale grey stone #a8a39a with #6e6a64 shadows, split open by huge tall violet crystals #a77ae8 with #5e3a9a shadows rising high above it, a wide pool of bright violet water #8a5ad0 filling the grotto's front inside a ring of stone blocks, smaller crystals along the rim, a few stone steps down to the water at the front right. The grotto and its crystals fill nearly the full image width and most of its height, its front facing the viewer straight on.",
+      "negative": "person, glow halo, sparkle cloud, waterfall, ground, grass"
     }
   ],
   "outputs": [
+    {
+      "path": "public/assets/objects/map/sawmill.png",
+      "from": "sawmill-b#0",
+      "width": 124,
+      "height": 88,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 29,
+          "width": 124,
+          "height": 88
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/ore-pit.png",
+      "from": "ore-pit-b#0",
+      "width": 102,
+      "height": 85,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 18,
+          "width": 102,
+          "height": 85
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/essence-spring.png",
+      "from": "essence-spring-c#1",
+      "width": 111,
+      "height": 107,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 11,
+          "width": 111,
+          "height": 107
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/gold-mine.png",
+      "from": "gold-mine-b#2",
+      "width": 120,
+      "height": 118,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 3,
+          "width": 120,
+          "height": 118
+        }
+      ]
+    },
     {
       "path": "public/assets/objects/map/haunted-mine.png",
       "from": "haunted-mine-a#2",

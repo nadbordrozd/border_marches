@@ -396,3 +396,9 @@
 {"at":"2026-11-24T23:53:12.239Z","set":"named-heroes","id":"ophelia-a-bust","endpoint":"edit-image-pixen","usd":0.006796718968285455}
 {"at":"2026-11-24T23:53:33.935Z","set":"named-heroes","id":"grukk-b","endpoint":"create-image-pixen","usd":0.007162486897574531}
 {"at":"2026-11-24T23:54:38.445Z","set":"faction-units","id":"orc-warboss-giant-a","endpoint":"create-image-pixen","usd":0.010788514216740926}
+{"at":"2026-11-25T00:02:56.930Z","set":"map-objects","id":"sawmill-b","endpoint":"generate-image-v2","usd":0.0805615275700887}
+{"at":"2026-11-25T00:04:14.016Z","set":"map-objects","id":"ore-pit-b","endpoint":"generate-image-v2","usd":0.08055375581317478}
+{"at":"2026-11-25T00:05:22.327Z","set":"map-objects","id":"gold-mine-b","endpoint":"generate-image-v2","usd":0.08096672042210896}
+{"at":"2026-11-25T00:06:45.485Z","set":"map-objects","id":"essence-spring-b","endpoint":"generate-image-v2","usd":0.08090607049730089}
+{"at":"2026-11-25T00:08:17.400Z","set":"map-objects","id":"haunted-mine-b","endpoint":"generate-image-v2","usd":0.08048925884564717}
+{"at":"2026-11-25T00:09:18.993Z","set":"map-objects","id":"essence-spring-c","endpoint":"generate-image-v2","usd":0.0806248808172014}

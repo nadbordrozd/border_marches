@@ -130,7 +130,12 @@ describe("artFor (bzc.16)", () => {
     expect(artFor("resource-pile", "gold")?.asset.key).toBe("gold-pile");
     expect(artFor("resource-pile")?.variant).toBe("wood");
     expect(artFor("resource-pile", "nonsense")?.variant).toBe("wood");
-    expect(artFor("sawmill")?.asset.key).toBe("sawmill");
+    // The mines' 2x2-scale studio art (bzc.30), not the older reused sprites.
+    for (const mine of ["sawmill", "ore-pit", "gold-mine", "essence-spring"]) {
+      const art = artFor(mine)!;
+      expect(art.asset.key).toBe(`map-object-${mine}`);
+      expect(art.asset.h).toBeGreaterThan(CELL_PX);
+    }
     expect(artFor("treasure-chest")?.seat).toBe("pickup");
   });
 

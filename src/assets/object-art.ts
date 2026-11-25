@@ -4,9 +4,10 @@
  * whether it is a placeholder. The adventure-objects bead (bzc.13) places
  * objects; this module only answers what they look like.
  *
- * New studio sprites come from ./map-objects.ts. Types that already had art
- * reuse it: the four mines (sawmill, mined mountain, gold claim, essence
- * spring), the four resource pickups, the imported chest and wishing well.
+ * New studio sprites come from ./map-objects.ts, the five mines' 2x2-scale
+ * sprites among them (bead bzc.30; drawn on their 2x1 footprint). Types that
+ * already had art reuse it: the four resource pickups, the imported chest
+ * and wishing well.
  * A type without art (or an unknown id) gets the imported shrine flagged as
  * a placeholder; a buried type has no art at all (null).
  */

@@ -3303,5 +3303,443 @@
         "height": 128
       }
     ]
+  },
+  "sawmill-b": {
+    "id": "sawmill-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b8d5e89e-4e06-4643-96c2-9cffcf84063c",
+    "submittedAt": "2026-11-25T00:01:24.555Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big lumber sawmill: a long timber mill shed #8a5a2c with a red clay tile roof #c0503a with #82321f shadows on a low stone footing, a huge round steel saw blade #c8ccd0 with #7e848c shadows at its left end, tall stacks of cut logs and yellow planks #d9b26a at the front left, a wide open dark doorway at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 30001,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a big lumber sawmill: a long timber mill shed #8a5a2c with a red clay tile roof #c0503a with #82321f shadows on a low stone footing, a huge round steel saw blade #c8ccd0 with #7e848c shadows at its left end, tall stacks of cut logs and yellow planks #d9b26a at the front left, a wide open dark doorway at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, water wheel, river, smoke, ground, grass."
+    },
+    "at": "2026-11-25T00:02:56.929Z",
+    "usageUsd": 0.0805615275700887,
+    "candidates": [
+      {
+        "file": "sawmill-b-0.png",
+        "sha256": "bc49d0e35a472187707c4cbb6f0939639c6ba81c704066b970304931f3c11b24",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sawmill-b-1.png",
+        "sha256": "c01b9026ca5311fb57f13178c9df5c4987318804b2af3882ccf0611f1d7632de",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sawmill-b-2.png",
+        "sha256": "dc28c051bfcb4e65cf6a048e7ad25f40c30f248094f4060639eb8ef58fe516cf",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sawmill-b-3.png",
+        "sha256": "0e86415b7188a7f2ab37833cbdb77911f497b5bb9aa4716a0a24910eb5b59678",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "ore-pit-b": {
+    "id": "ore-pit-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "fd93823d-c526-40ae-8e89-e3acb56b6382",
+    "submittedAt": "2026-11-25T00:02:57.019Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: an ore mine: a craggy rocky hill of warm grey stone #9a9286 with #625c54 shadows, a sturdy timber-framed mine entrance #8a5a2c at the front right, a wooden winch tower with a rope wheel on top of the hill, rails running out of the entrance with a mine cart heaped with dark iron ore #4a4a56 and rusty red #b0583a chunks, a pickaxe and an ore pile beside it. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 30002,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: an ore mine: a craggy rocky hill of warm grey stone #9a9286 with #625c54 shadows, a sturdy timber-framed mine entrance #8a5a2c at the front right, a wooden winch tower with a rope wheel on top of the hill, rails running out of the entrance with a mine cart heaped with dark iron ore #4a4a56 and rusty red #b0583a chunks, a pickaxe and an ore pile beside it. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, snow, mountain range, smoke, ground, grass."
+    },
+    "at": "2026-11-25T00:04:14.015Z",
+    "usageUsd": 0.08055375581317478,
+    "candidates": [
+      {
+        "file": "ore-pit-b-0.png",
+        "sha256": "44007df1698c11cdf353e32d1899981e9d75f0f8cfb91b22d69093b3038bbfc0",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "ore-pit-b-1.png",
+        "sha256": "033ff6419822e105aacc59caa6a18b0a7ae0025a746e89bef0460a32e4d34225",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "ore-pit-b-2.png",
+        "sha256": "ae49e7ec7b8f728f5d46b2629fe634776ca988bb35339ffdf3750901064c14c7",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "ore-pit-b-3.png",
+        "sha256": "a637792bf10fb9a5517edfbe0a26b543a621b4d0c1bf808787ff08475527e3f6",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "gold-mine-b": {
+    "id": "gold-mine-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "3af10172-919d-463e-bece-c515fc0d5114",
+    "submittedAt": "2026-11-25T00:04:14.119Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a rich gold mine: a rounded hill of sandy ochre rock #c9a46a with #8e6e3e shadows streaked with glittering gold veins #f2c230, a timber-framed mine entrance #8a5a2c at the front right with a hanging lantern, rails running out of it with a mine cart heaped with gold nuggets #f2c230 with #b08020 shadows, a small wooden shed and sacks of gold at the front left. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 30003,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a rich gold mine: a rounded hill of sandy ochre rock #c9a46a with #8e6e3e shadows streaked with glittering gold veins #f2c230, a timber-framed mine entrance #8a5a2c at the front right with a hanging lantern, rails running out of it with a mine cart heaped with gold nuggets #f2c230 with #b08020 shadows, a small wooden shed and sacks of gold at the front left. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, coins in the air, snow, smoke, ground, grass."
+    },
+    "at": "2026-11-25T00:05:22.324Z",
+    "usageUsd": 0.08096672042210896,
+    "candidates": [
+      {
+        "file": "gold-mine-b-0.png",
+        "sha256": "54910d91660da0b064e10dbf9e4f24a9e9406e78eb41eefc0cb763acb700d87f",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "gold-mine-b-1.png",
+        "sha256": "79c8bcf4466a2d49cc82c2b9dfead83e8233546c62b6e0030bab217db02515a6",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "gold-mine-b-2.png",
+        "sha256": "5ebd4a5b761507cd457e4fb7f66f24cda67baad469b56c1b7c931754328f1f14",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "gold-mine-b-3.png",
+        "sha256": "e7b45fe2e0ac146a836be7877e340442dbbbc68d760df913228f80bea3179b7d",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "essence-spring-b": {
+    "id": "essence-spring-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "372cb822-d233-4513-b2d5-574bb29b4802",
+    "submittedAt": "2026-11-25T00:05:22.417Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a magical essence spring: a wide round pool of bright violet water #8a5ad0 with #5e3a9a shadows ringed by a low wall of pale grey stone blocks #a8a39a with #6e6a64 shadows, a big cluster of tall violet crystals #a77ae8 with #5e3a9a shadows rising behind the pool at the left, smaller crystals along the rim, a few stone steps down to the water at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 30004,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a magical essence spring: a wide round pool of bright violet water #8a5ad0 with #5e3a9a shadows ringed by a low wall of pale grey stone blocks #a8a39a with #6e6a64 shadows, a big cluster of tall violet crystals #a77ae8 with #5e3a9a shadows rising behind the pool at the left, smaller crystals along the rim, a few stone steps down to the water at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, glow halo, sparkle cloud, waterfall, ground, grass."
+    },
+    "at": "2026-11-25T00:06:45.484Z",
+    "usageUsd": 0.08090607049730089,
+    "candidates": [
+      {
+        "file": "essence-spring-b-0.png",
+        "sha256": "20ca3943f5c33995890bca1fb759a995c3dbce4085c36cbfaa6373a057a5d383",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "essence-spring-b-1.png",
+        "sha256": "513c4b036602216350f0fa1473bf38f0ae167f31c1f207ab5599fa3d1a00bebc",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "essence-spring-b-2.png",
+        "sha256": "470578278ee36a639662ebb98c8a400e99a66dd7ec05a614e8d6a90df92a609f",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "essence-spring-b-3.png",
+        "sha256": "2bbd2d38f779c9eaa6708180a253dd71c8c185c92d6fcd77b53bec203b597167",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "haunted-mine-b": {
+    "id": "haunted-mine-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "545d6af2-75fb-4c3e-be2f-1285615fb53d",
+    "submittedAt": "2026-11-25T00:07:05.048Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a haunted mine: a craggy hill of dark grey rock #5a5660 with #3a3640 shadows, a crooked mine entrance of rotten black timber beams at the front right, a crooked lantern with a pale green #9fe0a8 light over it, rails running out of it with a broken tipped-over mine cart, cobwebs, a few bones and a tilted wooden warning post with a skull at the front left. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 30005,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a haunted mine: a craggy hill of dark grey rock #5a5660 with #3a3640 shadows, a crooked mine entrance of rotten black timber beams at the front right, a crooked lantern with a pale green #9fe0a8 light over it, rails running out of it with a broken tipped-over mine cart, cobwebs, a few bones and a tilted wooden warning post with a skull at the front left. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, ghost, person, skeleton figure, smoke, mountain range, ground, grass."
+    },
+    "at": "2026-11-25T00:08:17.399Z",
+    "usageUsd": 0.08048925884564717,
+    "candidates": [
+      {
+        "file": "haunted-mine-b-0.png",
+        "sha256": "951224b9b37f2488163026c0f069c50cc29e3cce84b1908a1c2f1cc5d68a9383",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "haunted-mine-b-1.png",
+        "sha256": "8826cac77b51e55391fedb173f38136db9deb4a5f4a652950aa41299b84457b9",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "haunted-mine-b-2.png",
+        "sha256": "d9efeeb5dabbe76bb5801558f9004d23a10066b9e8e283592f431490360f4e70",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "haunted-mine-b-3.png",
+        "sha256": "e77804f9a248face262d18140d5352b4b92f50d72fca6fb27343e025739212c9",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "essence-spring-c": {
+    "id": "essence-spring-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "747ed48f-3372-431b-b207-9760739e3f8c",
+    "submittedAt": "2026-11-25T00:08:17.487Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a grand magical essence spring: a big craggy grotto of pale grey stone #a8a39a with #6e6a64 shadows, split open by huge tall violet crystals #a77ae8 with #5e3a9a shadows rising high above it, a wide pool of bright violet water #8a5ad0 filling the grotto's front inside a ring of stone blocks, smaller crystals along the rim, a few stone steps down to the water at the front right. The grotto and its crystals fill nearly the full image width and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 30006,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a grand magical essence spring: a big craggy grotto of pale grey stone #a8a39a with #6e6a64 shadows, split open by huge tall violet crystals #a77ae8 with #5e3a9a shadows rising high above it, a wide pool of bright violet water #8a5ad0 filling the grotto's front inside a ring of stone blocks, smaller crystals along the rim, a few stone steps down to the water at the front right. The grotto and its crystals fill nearly the full image width and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, glow halo, sparkle cloud, waterfall, ground, grass."
+    },
+    "at": "2026-11-25T00:09:18.992Z",
+    "usageUsd": 0.0806248808172014,
+    "candidates": [
+      {
+        "file": "essence-spring-c-0.png",
+        "sha256": "b5c57725e9572fb34de1727542bbc712f2a857e9f7f3614e8ebf31f155635ae5",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "essence-spring-c-1.png",
+        "sha256": "28e54214f564d61fc88510db030e80e84d50cbdb0b7357ee25c1c3d1694d8058",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "essence-spring-c-2.png",
+        "sha256": "b7e5f110daa8d8cb7321e659b6e12abe34b2d9b0ecd1966d73860bb6df69f00f",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "essence-spring-c-3.png",
+        "sha256": "165a717c66f8546843922d09d1feb74c4155a25493f8ba4bc72107d05f7cc96c",
+        "width": 128,
+        "height": 128
+      }
+    ]
   }
 }

@@ -8,7 +8,6 @@ import {
   town3x2Asset,
   townAsset,
 } from "../../src/render/map/scene.ts";
-import { createMap } from "../../src/core/map/types.ts";
 import type { MapObject } from "../../src/core/map/types.ts";
 import type { SceneEntry } from "../../src/render/map/scene.ts";
 import { ALL_ASSETS } from "../../src/assets/manifest.ts";
@@ -119,24 +118,32 @@ describe("object entries", () => {
     expect(at("goblin", undefined, 3)).toBe("goblin-hold-3x2");
   });
 
-  it("draws an ore mine as the mine piece of the rock round it", () => {
-    const m = createMap(4, 3, 1);
-    for (const c of m.cells) c.terrain = "wasteland";
-    m.cells[1]!.obstacle = "mountain";
-    const mine: MapObject = {
-      id: "mine-ore-1",
+  it("draws every mine with its type's art seated on the 2x1 footprint", () => {
+    const mine = (data: Record<string, unknown>): MapObject => ({
+      id: "mine-1",
       kind: "mine",
-      x: 1,
+      x: 4,
       y: 2,
-      footprint: { w: 1, h: 2 },
-      blocked: [[1, 1]],
-      data: { resource: "ore" },
-    };
-    const sprite = objectEntries([mine], m)[0]!.sprites[0]!;
-    expect(sprite.key).toMatch(/^massif-basalt-mine-1x1-/);
-    expect([sprite.dx, sprite.dy + sprite.sh]).toEqual([80, 160]);
-    // Without the map: the imported mined mountain, as before.
-    expect(objectEntries([mine])[0]!.sprites[0]!.key).toBe("mountain-mine-a");
+      footprint: { w: 2, h: 1 },
+      blocked: [[3, 2]],
+      data,
+    });
+    const cases: [Record<string, unknown>, string][] = [
+      [{ type: "sawmill", resource: "wood" }, "map-object-sawmill"],
+      [{ type: "ore-pit", resource: "ore" }, "map-object-ore-pit"],
+      [{ type: "gold-mine", resource: "gold" }, "map-object-gold-mine"],
+      [{ resource: "essence" }, "map-object-essence-spring"],
+      [{ type: "haunted-mine", resource: "gold" }, "map-object-haunted-mine"],
+    ];
+    for (const [data, key] of cases) {
+      const sprite = objectEntries([mine(data)])[0]!.sprites[0]!;
+      expect(sprite.key).toBe(key);
+      // Bottom-centred on the footprint (cells 3-4 of row 2), seated 4 px
+      // above its bottom edge, rising over the row behind.
+      expect(sprite.dx + Math.floor(sprite.sw / 2)).toBe(4 * 80);
+      expect(sprite.dy + sprite.sh - 1).toBe(3 * 80 - 4);
+      expect(sprite.sh).toBeGreaterThan(80);
+    }
   });
 
   it("maps creatures to unit sprites and draws them on their cell", () => {

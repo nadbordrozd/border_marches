@@ -26,7 +26,7 @@ import { FOG_TEXTURE_SIZE, fogTone } from "../../src/render/map/fog.ts";
 import {
   doodadEntries,
   featuredCells,
-  mineKey,
+  mineType,
   objectEntries,
   pickupKey,
 } from "../../src/render/map/scene.ts";
@@ -256,13 +256,29 @@ describe("scree, fog, objects", () => {
   it("draws pickups, chests and mines with the manifest's sprites", () => {
     expect(pickupKey("wood")).toBe(RESOURCE_PICKUPS.wood);
     expect(pickupKey("gold", true)).toBe(TREASURE_PICKUP);
-    expect(mineKey("essence")).toBe(RESOURCE_MINES.essence);
+    const mine = (data: Record<string, unknown>) =>
+      mineType({
+        id: "m",
+        kind: "mine",
+        x: 1,
+        y: 0,
+        footprint: { w: 2, h: 1 },
+        blocked: [[0, 0]],
+        data,
+      });
+    expect(mine({ resource: "essence" })).toBe("essence-spring");
+    expect(mine({ type: "haunted-mine", resource: "ore" })).toBe(
+      "haunted-mine",
+    );
     const map = generateMap(1, { size: "M" });
     const keys = objectEntries(map.objects).flatMap((e) =>
       e.sprites.map((s) => s.key),
     );
+    // The mines' 2x2-scale art (bead bzc.30), not the older RESOURCE_MINES.
+    for (const type of ["sawmill", "ore-pit", "gold-mine", "essence-spring"])
+      expect(keys).toContain(`map-object-${type}`);
     for (const key of Object.values(RESOURCE_MINES))
-      expect(keys).toContain(key);
+      expect(keys).not.toContain(key);
     expect(keys).toContain(RESOURCE_PICKUPS.wood);
     expect(keys).toContain(TREASURE_PICKUP);
     expect(keys.some((k) => k.startsWith("code:"))).toBe(false);

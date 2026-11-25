@@ -1323,5 +1323,125 @@
     "verdict": "REJECTED",
     "notes": "roadside inn: near duplicate of #0",
     "at": "2026-11-24T23:16:29.519Z"
+  },
+  "sawmill-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "bzc.30 sawmill: clean three-quarter mill shed, big saw blade and log stacks at the left, dark door at the front right over the entrance cell; 124x88, matches the 2x2 sites",
+    "at": "2026-11-25T00:09:56.448Z"
+  },
+  "sawmill-b#1": {
+    "verdict": "REJECTED",
+    "notes": "caption text drawn under the building",
+    "at": "2026-11-25T00:09:56.498Z"
+  },
+  "sawmill-b#2": {
+    "verdict": "REJECTED",
+    "notes": "caption text drawn under the building",
+    "at": "2026-11-25T00:09:56.547Z"
+  },
+  "sawmill-b#3": {
+    "verdict": "REJECTED",
+    "notes": "caption text under it; the lean-to hides the saw blade",
+    "at": "2026-11-25T00:09:56.602Z"
+  },
+  "ore-pit-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "bzc.30 ore pit: wide craggy hill with a winch tower, timbered entrance at the front right, ore cart and rusty ore pile; reads as a mine and stays distinct from the dark haunted mine; 102x85",
+    "at": "2026-11-25T00:09:56.655Z"
+  },
+  "ore-pit-b#1": {
+    "verdict": "REJECTED",
+    "notes": "tall narrow peak; rails trail off loose to the bottom right",
+    "at": "2026-11-25T00:09:56.706Z"
+  },
+  "ore-pit-b#2": {
+    "verdict": "REJECTED",
+    "notes": "entrance centred with rails running out to the left, away from the entrance cell",
+    "at": "2026-11-25T00:09:56.759Z"
+  },
+  "ore-pit-b#3": {
+    "verdict": "REJECTED",
+    "notes": "stepped pyramid hill and loose trailing rails; less clear than #0",
+    "at": "2026-11-25T00:09:56.811Z"
+  },
+  "gold-mine-b#0": {
+    "verdict": "REJECTED",
+    "notes": "good, but the same design as #2 with fainter gold veins; #2 reads as gold sooner at 1x",
+    "at": "2026-11-25T00:09:56.863Z"
+  },
+  "gold-mine-b#1": {
+    "verdict": "REJECTED",
+    "notes": "empty cart and scattered loose nuggets (noise at 1x)",
+    "at": "2026-11-25T00:09:56.914Z"
+  },
+  "gold-mine-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "bzc.30 gold mine: ochre hill with bold gold veins, lantern-lit entrance at the front right, cart heaped with gold, shed and sacks at the left; 120x118",
+    "at": "2026-11-25T00:09:56.965Z"
+  },
+  "gold-mine-b#3": {
+    "verdict": "REJECTED",
+    "notes": "tents instead of a shed and no gold but the veins",
+    "at": "2026-11-25T00:09:57.017Z"
+  },
+  "essence-spring-b#0": {
+    "verdict": "REJECTED",
+    "notes": "too small for the 2x2 scale (59-74 px wide): a low pool that ignored the fill",
+    "at": "2026-11-25T00:09:57.069Z"
+  },
+  "essence-spring-b#2": {
+    "verdict": "REJECTED",
+    "notes": "too small for the 2x2 scale (59-74 px wide): a low pool that ignored the fill",
+    "at": "2026-11-25T00:09:57.121Z"
+  },
+  "essence-spring-b#3": {
+    "verdict": "REJECTED",
+    "notes": "too small for the 2x2 scale (59-74 px wide): a low pool that ignored the fill",
+    "at": "2026-11-25T00:09:57.172Z"
+  },
+  "essence-spring-b#1": {
+    "verdict": "REJECTED",
+    "notes": "best of its call but still small (83x86) beside the other mines; re-rolled as the grotto essence-spring-c",
+    "at": "2026-11-25T00:09:57.224Z"
+  },
+  "essence-spring-c#0": {
+    "verdict": "REJECTED",
+    "notes": "good grotto, but narrower (88 px) than #1 and its cave is a dark hole",
+    "at": "2026-11-25T00:09:57.277Z"
+  },
+  "essence-spring-c#1": {
+    "verdict": "ACCEPTED",
+    "notes": "bzc.30 essence spring: stone grotto with big violet crystals and a wide violet pool, steps at the front right; 111x107, matches the other mines",
+    "at": "2026-11-25T00:09:57.330Z"
+  },
+  "essence-spring-c#2": {
+    "verdict": "REJECTED",
+    "notes": "lopsided tall rock spire at the left; crystals bunched in the middle",
+    "at": "2026-11-25T00:09:57.383Z"
+  },
+  "essence-spring-c#3": {
+    "verdict": "REJECTED",
+    "notes": "horn-shaped rocks read as a creature's jaw; small crystals",
+    "at": "2026-11-25T00:09:57.434Z"
+  },
+  "haunted-mine-b#0": {
+    "verdict": "REJECTED",
+    "notes": "soft green glow halo round the lantern (no blur) and rails sprawling to the front left; no better than the accepted haunted-mine-a#2, which already sits at 2x2 scale",
+    "at": "2026-11-25T00:09:57.490Z"
+  },
+  "haunted-mine-b#1": {
+    "verdict": "REJECTED",
+    "notes": "soft green glow halo round the lantern (no blur) and rails sprawling to the front left; no better than the accepted haunted-mine-a#2, which already sits at 2x2 scale",
+    "at": "2026-11-25T00:09:57.556Z"
+  },
+  "haunted-mine-b#2": {
+    "verdict": "REJECTED",
+    "notes": "soft green glow halo round the lantern (no blur) and rails sprawling to the front left; no better than the accepted haunted-mine-a#2, which already sits at 2x2 scale",
+    "at": "2026-11-25T00:09:57.619Z"
+  },
+  "haunted-mine-b#3": {
+    "verdict": "REJECTED",
+    "notes": "soft green glow halo by the entrance (no blur), strewn bones and boards as noise; keep haunted-mine-a#2",
+    "at": "2026-11-25T00:09:57.679Z"
   }
 }

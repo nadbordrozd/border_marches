@@ -21,15 +21,11 @@
 import {
   CELL_PX,
   GROUND_TERRAINS,
-  MOUNTAIN_LOW_UP_PX,
-  OBJECT_ASSETS,
-  RESOURCE_MINES,
   RESOURCE_PICKUPS,
   TOWN_3X2_ASSETS,
   TOWN_ASSETS,
   TREASURE_PICKUP,
   UNIT_ASSETS,
-  massifPieces,
 } from "../../assets/manifest";
 import type {
   GroundTerrain,
@@ -60,7 +56,6 @@ import { peaksOf } from "../../assets/peaks";
 import { buildPeakField, placePeaks } from "./peaks";
 import type { PeakField, PeakSprite, PeakTable, PlacedPeak } from "./peaks";
 import { CREATURES, isCreatureId } from "../../data/creatures";
-import { hash4 } from "./hash";
 import { packRanges, paletteOf } from "./massif";
 
 const CELL = CELL_PX;
@@ -644,23 +639,24 @@ export function pickupKey(resource: unknown, chest = false): string {
   );
 }
 
-/** The mine piece of a palette, picked by the cell's hash. */
-export function mineAsset(
-  palette: MassifPalette,
-  x: number,
-  y: number,
-): { key: string } | undefined {
-  const list = massifPieces(palette, "mine");
-  return list[hash4(x, y, 0x31, 0x6e) % Math.max(1, list.length)];
-}
+/** The catalogue type of each resource's mine (src/data/mapObjects.ts). */
+const MINE_TYPES: Readonly<Record<string, string>> = {
+  wood: "sawmill",
+  ore: "ore-pit",
+  essence: "essence-spring",
+  gold: "gold-mine",
+};
 
-/** The mine image of a resource (RESOURCE_MINES). */
-export function mineKey(resource: unknown): string {
-  return (
-    (RESOURCE_MINES as Readonly<Record<string, string>>)[
-      typeof resource === "string" ? resource : ""
-    ] ?? "mountain-mine-a"
-  );
+/**
+ * The catalogue type whose art a mine is drawn with (bead bzc.30): its own
+ * type (the generator records it, e.g. "haunted-mine"), else the mine of its
+ * resource, else the ore pit.
+ */
+export function mineType(obj: MapObject): string {
+  const type = obj.data["type"];
+  if (typeof type === "string" && type !== "") return type;
+  const resource = obj.data["resource"];
+  return MINE_TYPES[typeof resource === "string" ? resource : ""] ?? "ore-pit";
 }
 
 /** A unit sprite standing on cell (x, y): its anchor on the cell centre. */
@@ -693,19 +689,11 @@ export function unitEntry(
   );
 }
 
-/** How far a mine building leans from its cell toward the entrance, px. */
-export const MINE_LEAN_PX = 10;
-/** How far above its cell's bottom edge a mine building's image ends, px. */
-export const MINE_SEAT_PX = 2;
-
 /** How far above the footprint's bottom edge a town's ground line sits. */
 export const TOWN_SEAT_PX = 8;
 
 /** The entries of the map's objects (towns, mines, pickups, monsters). */
-export function objectEntries(
-  objects: readonly MapObject[],
-  map?: GameMap,
-): SceneEntry[] {
+export function objectEntries(objects: readonly MapObject[]): SceneEntry[] {
   const out: SceneEntry[] = [];
   for (const obj of objects) {
     const box = objectBounds(obj);
@@ -782,13 +770,13 @@ export function objectEntries(
           { cells, objectId: obj.id },
         ),
       );
-    } else if (
-      SITE_KINDS.has(obj.kind) ||
-      obj.data["type"] === "haunted-mine"
-    ) {
+    } else if (SITE_KINDS.has(obj.kind) || obj.kind === "mine") {
       // Catalogue objects (bead bzc.13) drawn with their type's art
-      // (bead bzc.16); buried things are never drawn.
-      const art = artFor(String(obj.data["type"] ?? ""), artVariantOf(obj));
+      // (bead bzc.16); mines with their type's 2x2-scale art seated on the
+      // 2x1 footprint (bead bzc.30); buried things are never drawn.
+      const type =
+        obj.kind === "mine" ? mineType(obj) : String(obj.data["type"] ?? "");
+      const art = artFor(type, artVariantOf(obj));
       if (art === null) continue;
       const p = placeArt(art, box.x, box.y, box.w, box.h);
       const pickup = art.seat === "pickup";
@@ -821,97 +809,6 @@ export function objectEntries(
           { cells, objectId: obj.id },
         ),
       );
-    } else if (obj.kind === "mine") {
-      const key = mineKey(obj.data["resource"]);
-      const building = OBJECT_ASSETS.find((asset) => asset.key === key);
-      if (building === undefined) {
-        // The mined mountain on the blocked cell: the mine piece of the
-        // rock palette round it (bead xaj.14), else the imported one.
-        const [bx, by] = obj.blocked[0] ?? [obj.x, obj.y];
-        const piece =
-          map === undefined
-            ? undefined
-            : mineAsset(paletteNear(map, bx, by), bx, by);
-        const w = CELL;
-        const h = CELL + MOUNTAIN_LOW_UP_PX;
-        const left =
-          piece === undefined ? Math.round(centreX - w / 2) : bx * CELL;
-        const top = piece === undefined ? bottom - h : (by + 1) * CELL - h;
-        out.push(
-          entry(
-            "FOREGROUND",
-            row,
-            col,
-            LAYER.SETTLEMENT,
-            [
-              {
-                key: piece?.key ?? key,
-                sx: 0,
-                sy: 0,
-                sw: w,
-                sh: h,
-                dx: left,
-                dy: top,
-              },
-            ],
-            [
-              {
-                cx: left + 44,
-                cy: bottom - 10,
-                rx: 38,
-                ry: 10,
-                alpha: SHADOW_ALPHA / 2,
-              },
-              {
-                cx: left + 40,
-                cy: bottom - 8,
-                rx: 36,
-                ry: 9,
-                alpha: SHADOW_ALPHA,
-              },
-            ],
-            { cells, objectId: obj.id },
-          ),
-        );
-      } else {
-        // A mine building on its blocked cell, leaning toward the entrance
-        // (where the hero stands), its base a few pixels above the bottom.
-        const [bx, by] = obj.blocked[0] ?? [obj.x, obj.y];
-        const towardEntrance = Math.sign(obj.x - bx) * MINE_LEAN_PX;
-        const left = Math.round(
-          bx * CELL + CELL / 2 + towardEntrance - building.w / 2,
-        );
-        const top = (by + 1) * CELL - MINE_SEAT_PX - building.h;
-        out.push(
-          entry(
-            "FOREGROUND",
-            row,
-            col,
-            LAYER.SETTLEMENT,
-            [
-              {
-                key,
-                sx: 0,
-                sy: 0,
-                sw: building.w,
-                sh: building.h,
-                dx: left,
-                dy: top,
-              },
-            ],
-            [
-              {
-                cx: left + building.w / 2 + 2,
-                cy: top + building.h - 9,
-                rx: building.w * 0.44,
-                ry: 8,
-                alpha: SHADOW_ALPHA,
-              },
-            ],
-            { cells, objectId: obj.id },
-          ),
-        );
-      }
     } else if (obj.kind === "pickup") {
       const left = obj.x * CELL + 20;
       const top = obj.y * CELL + 20;

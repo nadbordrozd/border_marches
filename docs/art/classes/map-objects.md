@@ -35,14 +35,20 @@ footprint.
 | | Types |
 | --- | --- |
 | New studio art (53) | windmill, water wheel, orchard, haunted mine, faction outpost (3), stray hut, caretaker lodge, stat shrine (4), learning stone, arena, library, tree of knowledge, academy, tutor's hut, school shrine (3), hermit, rally camp, oasis, school temple (5), mana well, stables, sanctuary, observatory, scholar, the six banks (3 sizes each), keepers' vault, campfire, loose artifact, loose scroll, fallen adventurer, obelisk, keymaster's tent (4), border gate (4), seer hut, quest gate, prison, trading post, tollhouse, drill yard, curse-lifter's shrine, roadside inn, altar of sacrifice, two-way waystone (4), one-way waystone, pylon, event tile (a sparkle shimmer), sealed box, sign |
-| Reused (7) | sawmill, ore pit, essence spring, gold mine, wishing well, treasure chest, resource pile (4) |
+| Reused (3) | wishing well, treasure chest, resource pile (4) |
 | No art by design (2) | buried keystone, buried cache (hidden) |
 
 All 53 core and 9 stretch types are covered: 85 derived sprites, 35
 PixelLab calls (US$2.87).
-- Reused, not regenerated: the sawmill, ore pit (the mined mountain), gold
-  mine (gold claim) and essence spring; the four resource pickups; the
-  imported chest (treasure chest) and wishing well.
+- Reused, not regenerated: the four resource pickups; the imported chest
+  (treasure chest) and wishing well.
+- Mines (bead `border_marches-bzc.30`): the sawmill, ore pit, gold mine
+  and essence spring reused their older 72-80 px art until bzc.30 remade
+  them at 2x2-site scale with the same recipe (`sawmill-b`, `ore-pit-b`,
+  `gold-mine-b`, `essence-spring-c`; 6 PixelLab calls, US$0.48). The
+  older art stays in the manifest (`RESOURCE_MINES`) but is no longer
+  drawn; the haunted mine keeps `haunted-mine-a#2`, already at that
+  scale (the remake `haunted-mine-b` had glow halos). See Mines below.
 - Buried keystone and buried cache are hidden: `artFor` returns null and
   nothing is drawn. A type without art, or an unknown id, gets the imported
   roadside shrine flagged `placeholder: true`.
@@ -117,8 +123,19 @@ derived file keeps only the largest run of opaque rows (the crop in
 
 Known limits: 2x2 sites are drawn in the three-quarter view of the
 imported sawmill and the 3x2 towns (a front face and one side), the vault
-straight front-on. The reused mines (72-80 px canvases) are smaller than
-the new 2x2 sites; a 2x2 remake of the four mines is a follow-up.
+straight front-on.
+
+## Mines
+
+The game keeps every mine on a 2x1 footprint (`src/data/objectTypes.ts`,
+entrance the right cell), but draws it at 2x2-site scale: about 100-125 px
+wide and 85-118 px tall, generated on 128 x 128, its foot on the
+footprint's bottom centre `SEAT_PX` above the bottom edge, so it rises over
+the row behind like the other tall sites. The mine's door or steps are at
+the front right, over the entrance cell where the hero stands. The renderer
+(`objectEntries` in `src/render/map/scene.ts`) draws every `mine` object
+with `artFor(mineType(obj))`: its recorded type, else the mine of its
+resource.
 
 ## Acceptance
 

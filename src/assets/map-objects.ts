@@ -218,16 +218,14 @@ export interface ReusedObjectArt {
 }
 
 /**
- * Types that already had art keep it: the mines (MVP_NEW_ART, imported Pulp
- * Wars buildings), the resource pickups, the chest and the wishing well.
- * Each foot is the bottom centre of the image's opaque box.
+ * Types that already had art keep it: the resource pickups, the chest and
+ * the wishing well. Each foot is the bottom centre of the image's opaque box.
+ * The four mines reused their older, smaller art (sawmill, mined mountain,
+ * gold claim, essence spring) until bead bzc.30 gave them 2x2-scale studio
+ * sprites; that older art stays in the manifest but is no longer drawn.
  */
 export const REUSED_OBJECT_ART: readonly ReusedObjectArt[] = (
   [
-    ["sawmill", "", "sawmill", "objects/sawmill", 35, 68],
-    ["ore-pit", "", "mountain-mine-a", "terrain/mountains/mine-a", 40, 98],
-    ["essence-spring", "", "essence-spring", "objects/essence-spring", 35, 68],
-    ["gold-mine", "", "gold-claim", "objects/gold-claim", 41, 63],
     ["wishing-well", "", "wishing-well", "objects/wishing-well", 40, 66],
     ["treasure-chest", "", "treasure", "objects/treasure", 20, 37],
     ["resource-pile", "wood", "wood-pile", "objects/wood-pile", 20, 34],
@@ -270,6 +268,11 @@ const ART_ROWS: readonly (readonly [
   number,
   string,
 ])[] = [
+  // The four mines at 2x2-site scale, drawn on their 2x1 footprint (bzc.30).
+  ["sawmill", "", 124, 88, "sawmill-b#0"],
+  ["ore-pit", "", 102, 85, "ore-pit-b#0"],
+  ["essence-spring", "", 111, 107, "essence-spring-c#1"],
+  ["gold-mine", "", 120, 118, "gold-mine-b#2"],
   ["haunted-mine", "", 109, 104, "haunted-mine-a#2"],
   ["windmill", "", 73, 105, "windmill-s1#2"],
   ["water-wheel", "", 98, 89, "water-wheel-a#0"],
