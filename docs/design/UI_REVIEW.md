@@ -240,6 +240,18 @@ outline, a small palette per school, stepped fades, no blur or glow.
 - Sound hooks: every effect has a name in `FX_EVENTS` (`src/audio/fx.ts`);
   `fxEvent(name)` plays the sound registered in `FX_SOUNDS` (the five
   school cast sounds now; the sound pass fills the rest).
+- Map view polish (bead xaj.18): the map's input (`src/render/map/input.ts`)
+  is off under the town and battle screens, dialogs, walks and the AI's
+  turn, and drops a drag, held arrow key or edge scroll in progress; edge
+  scrolling waits 180 ms at the edge; arrow keys pan only the visible map;
+  wheel deltas gather into one zoom step per notch or flick. The camera
+  glides (eased, `glideTo`) on hero switches, before a walk, after a
+  waystone, along the AI's visible walks and to the human's hero at the
+  start of its turn; reduced motion snaps. Visit outcomes, experience and
+  mine claims float up from the hero (`floatText`) instead of toasting at
+  the top; a flying pickup is its own toast, and under reduced motion its
+  line floats in place. Evidence: `node tests/ui/map-view-check.mjs [url]
+[dir] [ai]`.
 - Evidence: `node tests/ui/fx-check.mjs [url] [dir] [only]` draws frame
   strips with the battle route `strip=` (a manual clock, so frames repeat
   exactly) and timed map and interface frames.

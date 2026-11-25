@@ -131,16 +131,31 @@ export interface ModalOptions<T> {
 }
 
 let modalDepth = 0;
+const modalListeners = new Set<() => void>();
 
 /** Whether a modal is open (keyboard shortcuts pause meanwhile). */
 export function modalOpen(): boolean {
   return modalDepth > 0;
 }
 
+/**
+ * Calls `listener` whenever a modal opens or closes (the map turns its
+ * input off meanwhile); returns the unsubscribe function.
+ */
+export function onModalChange(listener: () => void): () => void {
+  modalListeners.add(listener);
+  return () => modalListeners.delete(listener);
+}
+
+function modalChanged(): void {
+  for (const listener of modalListeners) listener();
+}
+
 /** Shows a modal dialog over everything; resolves with the clicked value. */
 export function modal<T>(options: ModalOptions<T>): Promise<T> {
   return new Promise((resolve) => {
     modalDepth++;
+    modalChanged();
     const backdrop = el("div.gm-backdrop");
     const box = el("div.gm-modal");
     box.setAttribute("role", "dialog");
@@ -157,6 +172,7 @@ export function modal<T>(options: ModalOptions<T>): Promise<T> {
     const close = (value: T): void => {
       window.removeEventListener("keydown", onKey, true);
       modalDepth--;
+      modalChanged();
       resolve(value);
       // Closing: a short fade (bead bzc.26); nothing waits for it.
       if (reducedMotion() || typeof backdrop.animate !== "function") {

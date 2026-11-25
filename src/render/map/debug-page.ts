@@ -1,11 +1,11 @@
 /**
  * The map renderer's debug page: ?view=map
  *
- *   seed=N        render generateMap(N) (src/core/map/generate.ts)
+ *   seed=N        render generateMap(N) (src/core/map/generate.ts);
+ *                 without seed, named or map, seed 1
  *   named=ID      render a named map (src/core/map/named.ts)
  *   size=S|M|L    generator map size (default M)
  *   players=2..4  generator player starts (default per size)
- *   map=big       the fixture tiled to 48 x 48 (benchmarks)
  *   map=ranges    a test map of mountain ranges of many shapes
  *   fog=0|1       fog of war off / on (explored: round the hero and town)
  *   zoom=Z        0.75 (default), 1, 1.5 or 2
@@ -14,13 +14,14 @@
  *   path=0        hide the path preview
  *   bench=N       render N frames after load and report the mean time
  *
- * Without seed or map, the page shows tests/fixtures/small-map.ts.
+ * The page builds every map from the game's own code: nothing from tests/
+ * (bead xaj.18 removed the test-fixture fallback; size=L is the big map
+ * for benchmarks).
  */
 import { CELL_PX } from "../../assets/manifest";
-import type { GameMap, MapCell, MapObject } from "../../core/map/types";
+import type { GameMap, MapCell } from "../../core/map/types";
 import { cellAt, isPassable, objectBlockedSet } from "../../core/map/types";
 import type { Route } from "../../router";
-import { buildSmallMap } from "../../../tests/fixtures/small-map";
 import { generateMap } from "../../core/map/generate";
 import { buildNamedMap } from "../../core/map/named";
 import { playableFactions } from "../../data/factions";
@@ -40,36 +41,8 @@ declare global {
   }
 }
 
-/** The fixture tiled `across` x `down` times and cropped to w x h. */
-export function tiledFixture(w: number, h: number): GameMap {
-  const base = buildSmallMap();
-  const cells = [];
-  for (let y = 0; y < h; y += 1)
-    for (let x = 0; x < w; x += 1) {
-      const from =
-        base.cells[(y % base.height) * base.width + (x % base.width)];
-      if (from !== undefined) cells.push({ ...from });
-    }
-  const objects: MapObject[] = [];
-  for (let ty = 0; ty * base.height < h; ty += 1)
-    for (let tx = 0; tx * base.width < w; tx += 1)
-      for (const obj of base.objects) {
-        const dx = tx * base.width;
-        const dy = ty * base.height;
-        const moved: MapObject = {
-          ...obj,
-          id: `${obj.id}@${tx},${ty}`,
-          x: obj.x + dx,
-          y: obj.y + dy,
-          blocked: obj.blocked.map(([bx, by]) => [bx + dx, by + dy]),
-        };
-        const inside = [[moved.x, moved.y], ...moved.blocked].every(
-          ([x = 0, y = 0]) => x < w && y < h,
-        );
-        if (inside) objects.push(moved);
-      }
-  return { width: w, height: h, seed: base.seed, cells, objects };
-}
+/** The seed shown when the address names no map. */
+export const DEFAULT_DEBUG_SEED = 1;
 
 // prettier-ignore
 const RANGES_GROUND = [
@@ -261,21 +234,24 @@ export async function startMapDebug(
   const size = params.get("size");
   const players = Number(params.get("players"));
   const named = params.get("named");
+  const seed = route.seed ?? DEFAULT_DEBUG_SEED;
   const map =
     named !== null
       ? buildNamedMap(named)
-      : which === "big"
-        ? tiledFixture(48, 48)
-        : which === "ranges"
-          ? rangesMap()
-          : route.seed !== null
-            ? generateMap(route.seed, {
-                size: size === "S" || size === "L" ? size : "M",
-                ...(players === 2 || players === 3 || players === 4
-                  ? { players }
-                  : {}),
-              })
-            : buildSmallMap();
+      : which === "ranges"
+        ? rangesMap()
+        : generateMap(seed, {
+            size: size === "S" || size === "L" ? size : "M",
+            ...(players === 2 || players === 3 || players === 4
+              ? { players }
+              : {}),
+          });
+  const source =
+    named !== null
+      ? `named ${named}`
+      : which === "ranges"
+        ? "ranges test map"
+        : `seed ${seed}${route.seed === null ? " (default)" : ""}`;
   // A generated map's start towns are drawn in the faction a new game
   // would seat there (the playable factions in seat order, as in setup); a
   // named map already carries its recommended factions.
@@ -333,7 +309,7 @@ export async function startMapDebug(
   const describe = (extra = ""): void => {
     const s = view.stats();
     label.textContent =
-      `map ${map.width}x${map.height} seed ${map.seed} ${route.seed !== null ? "(generated)" : "(fixture)"} zoom ${view.getZoom()}  ` +
+      `map ${map.width}x${map.height} ${source} zoom ${view.getZoom()}  ` +
       `frame ${s.lastFrameMs.toFixed(2)} ms, ${s.drawnEntries} sprites, ` +
       `${s.chunksBuilt} chunks in ${s.chunkBuildMs.toFixed(0)} ms${extra}`;
   };

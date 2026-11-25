@@ -325,7 +325,7 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       );
       const side = el("div.gm-town-actions");
       const market = button("Marketplace", () => {
-        void openMarket(host).then(render);
+        void openMarket(host, render).then(render);
       });
       market.disabled =
         town.owner === null || !hasMarketplace(state, town.owner);
@@ -615,8 +615,15 @@ async function openRecruit(
   }
 }
 
-/** The marketplace: pick what to give and what to get, an amount, trade. */
-async function openMarket(host: TownHost): Promise<void> {
+/**
+ * The marketplace: pick what to give and what to get, an amount, trade.
+ * `traded` runs after each trade, so the town header's resource totals
+ * behind the dialog stay current (bead xaj.18).
+ */
+async function openMarket(
+  host: TownHost,
+  traded: () => void = () => {},
+): Promise<void> {
   let give: ResourceId = "wood";
   let get: ResourceId = "gold";
   let amount = 1;
@@ -698,8 +705,10 @@ async function openMarket(host: TownHost): Promise<void> {
       "Trade",
       () => {
         const me = host.state().currentPlayer;
-        if (host.run(marketTrade(host.state(), me, give, amount, get)))
+        if (host.run(marketTrade(host.state(), me, give, amount, get))) {
           playSound("gold");
+          traded();
+        }
         render();
       },
       "gm-btn gm-primary",

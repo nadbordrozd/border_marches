@@ -354,6 +354,33 @@ button:disabled .gm-kbd {
   image-rendering: pixelated;
 }
 
+/* A line floating up from the hero (anim.ts floatText), under dialogs. */
+.gm-float {
+  position: fixed;
+  z-index: 40;
+  max-width: 280px;
+  pointer-events: none;
+  color: var(--gm-parchment);
+  font:
+    bold 13px Verdana,
+    Geneva,
+    sans-serif;
+  line-height: 1.25;
+  text-align: center;
+  text-shadow:
+    1px 1px 0 var(--gm-ink),
+    -1px -1px 0 var(--gm-ink),
+    1px -1px 0 var(--gm-ink),
+    -1px 1px 0 var(--gm-ink),
+    0 2px 0 var(--gm-ink);
+  transform: translate(-50%, -100%);
+  white-space: normal;
+}
+
+.gm-float-gain {
+  color: #b8f08a;
+}
+
 /* New day and new week: a plaque across the map. */
 .gm-daybanner {
   position: fixed;

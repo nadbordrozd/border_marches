@@ -367,14 +367,15 @@ export function levelUpOffer(
  * Takes the hero's oldest pending choice: `index` into its offers (0..2).
  * After a skill choice at a level divisible by 3, the feat draft of that
  * level is next (skipped when no feat is eligible). Allowed while a battle
- * is pending, so a chained fight uses the new skill.
+ * is pending, so a chained fight uses the new skill, and after a won game,
+ * so the battle that won it still pays out its levels (bead xaj.18).
  */
 export function chooseLevelUp(
   state: GameState,
   heroId: string,
   index: number,
 ): CommandResult {
-  if (state.status !== "playing") return fail("game-over", "the game is over");
+  if (state.status === "lost") return fail("game-over", "the game is over");
   const hero = findHero(state, heroId);
   if (hero === undefined || !hero.alive) {
     return fail("unknown-hero", `no hero ${heroId}`);

@@ -66,7 +66,7 @@ import { fxEvent } from "../audio/fx.ts";
 import { burst as fxBurst, sparkle as fxSparkle } from "../render/fx/emit.ts";
 import { PALETTES } from "../render/fx/pixels.ts";
 import { onMotionChange, reducedMotion } from "./motion.ts";
-import { bump, countUp, dayBanner, flyTo } from "./anim.ts";
+import { bump, countUp, dayBanner, floatText, flyTo } from "./anim.ts";
 import { openBattleScreen } from "./battle/screen.ts";
 import { openAdventureBook } from "./spellbook.ts";
 import { castAdventureSpell, registerSpells } from "../core/magic/index.ts";
@@ -81,6 +81,7 @@ import {
   keyButton,
   modal,
   modalOpen,
+  onModalChange,
   resourceIcon,
   toast,
   wait,
@@ -130,6 +131,10 @@ export const PLAYER = 0;
 const STEP_MS = 110;
 /** Pause per visible AI step, so the human can follow it. */
 const AI_STEP_MS = 90;
+/** Per cell of an AI hero's walk the human sees (ms). */
+const AI_WALK_MS = 70;
+/** Between two lines floating up from the hero (ms). */
+const FLOAT_GAP_MS = 380;
 const MINIMAP_PX = 216;
 
 /** The page hook the scripted browser check drives (window.__bmGame). */
@@ -158,6 +163,8 @@ export interface GameHook {
   openTown(townId: string): void;
   /** The page point at the centre of map cell (x, y), or null off screen. */
   cellToClient(x: number, y: number): { x: number; y: number } | null;
+  /** The canvas point of cell (x, y), on screen or not (camera evidence). */
+  cellToScreen(x: number, y: number): { x: number; y: number };
   /** Shows the victory (true) or defeat screen without ending the game. */
   previewEnd(won: boolean): void;
   /** Plays the capture flag-raise at a town or mine (animation evidence). */
@@ -258,15 +265,22 @@ class GameScreen {
   private objectsSig = "";
   /** The planned destination and its path. */
   private plan: { x: number; y: number; path: Path } | null = null;
-  /** Input is ignored while walking, fighting or in a dialog. */
-  private busy = false;
-  private aiRunning = false;
-  private screenOpen = false;
+  /**
+   * Input is ignored while walking, fighting or in a dialog. The four flags
+   * below turn the map's own input (pan, zoom, hover, click) off with them
+   * (syncInput, bead xaj.18).
+   */
+  private busyFlag = false;
+  private aiFlag = false;
+  private screenFlag = false;
+  private finishedFlag = false;
   private selectedId: string | null = null;
   private pointer = { x: 0, y: 0 };
   private viewportTimer = 0;
   private offMotion: () => void = () => {};
-  private finished = false;
+  private offModal: () => void = () => {};
+  /** When the last queued float at the hero starts (ms). */
+  private floatQueue = 0;
   /** A town picked in the kingdom overview, opened when it closes. */
   private kingdomTown: string | null = null;
   /** An adventure spell waiting for a map cell (Ask the Dead). */
@@ -282,7 +296,9 @@ class GameScreen {
     this.human = humanPlayer(initial);
     this.selectedId = heroesOf(initial, this.human)[0]?.id ?? null;
     this.mapWrap.append(this.canvas, this.banner);
-    this.minimap = new Minimap(MINIMAP_PX, (x, y) => this.view.centerOn(x, y));
+    this.minimap = new Minimap(MINIMAP_PX, (x, y) => {
+      if (!this.inputBlocked()) this.view.centerOn(x, y);
+    });
     this.buildSide();
     this.root.append(el("div.gm-main", this.mapWrap, this.bar), this.side);
     this.host.append(this.root);
@@ -294,6 +310,7 @@ class GameScreen {
     this.view.setMap(initial.map);
     this.view.onClick((cell) => this.onMapClick(cell.x, cell.y));
     this.view.onHover((cell) => this.onHover(cell));
+    this.offModal = onModalChange(() => this.syncInput());
     this.canvas.addEventListener("pointermove", (e) => {
       const moved =
         Math.abs(e.clientX - this.pointer.x) +
@@ -312,7 +329,10 @@ class GameScreen {
     const hero = this.hero();
     if (hero !== undefined) this.view.centerOn(hero.x, hero.y);
     else this.centreOnTown();
-    this.viewportTimer = window.setInterval(() => this.updateViewport(), 120);
+    this.viewportTimer = window.setInterval(() => {
+      this.updateViewport();
+      this.syncInput();
+    }, 120);
     toast(dateLabel(this.state.day));
     // Hook for the scripted browser check (tools and evidence only).
     window.__bmGame = {
@@ -336,6 +356,7 @@ class GameScreen {
       previewEnd: (won) => this.showEnd(won),
       openTown: (id) => void this.openTown(id),
       cellToClient: (x, y) => this.cellToClient(x, y),
+      cellToScreen: (x, y) => this.view.cellToScreen(x, y),
       raiseFlag: (id) => this.flagRaised(id),
       levelBurst: (id) => void this.levelBurst(id),
     };
@@ -371,19 +392,13 @@ class GameScreen {
     return out.sort((a, b) => a.cost - b.cost);
   }
 
+  /** The client point of a cell's centre, or null when off the map view. */
   private cellToClient(x: number, y: number): { x: number; y: number } | null {
     const rect = this.canvas.getBoundingClientRect();
-    const hits: Array<[number, number]> = [];
-    for (let sy = 2; sy < rect.height; sy += 4) {
-      for (let sx = 2; sx < rect.width; sx += 4) {
-        const c = this.view.screenToCell(sx, sy);
-        if (c?.x === x && c.y === y) hits.push([sx, sy]);
-      }
-    }
-    if (hits.length === 0) return null;
-    const mx = hits.reduce((n, h) => n + h[0], 0) / hits.length;
-    const my = hits.reduce((n, h) => n + h[1], 0) / hits.length;
-    return { x: rect.left + mx, y: rect.top + my };
+    const p = this.view.cellToScreen(x, y);
+    if (p.x < 0 || p.y < 0 || p.x > rect.width || p.y > rect.height)
+      return null;
+    return { x: rect.left + p.x, y: rect.top + p.y };
   }
 
   /** The selected hero (or the first of the human's heroes). */
@@ -398,6 +413,40 @@ class GameScreen {
 
   private ownTowns(): string[] {
     return townsOf(this.state, this.human).map((t) => t.id);
+  }
+
+  private get busy(): boolean {
+    return this.busyFlag;
+  }
+  private set busy(on: boolean) {
+    this.busyFlag = on;
+    this.syncInput();
+  }
+  private get aiRunning(): boolean {
+    return this.aiFlag;
+  }
+  private set aiRunning(on: boolean) {
+    this.aiFlag = on;
+    this.syncInput();
+  }
+  private get screenOpen(): boolean {
+    return this.screenFlag;
+  }
+  private set screenOpen(on: boolean) {
+    this.screenFlag = on;
+    this.syncInput();
+  }
+  private get finished(): boolean {
+    return this.finishedFlag;
+  }
+  private set finished(on: boolean) {
+    this.finishedFlag = on;
+    this.syncInput();
+  }
+
+  /** The map takes input only while the human could act (bead xaj.18). */
+  private syncInput(): void {
+    this.view.setInputEnabled(!this.inputBlocked());
   }
 
   private inputBlocked(): boolean {
@@ -849,9 +898,12 @@ class GameScreen {
     this.updateViewport();
   }
 
-  private syncHeroes(moving?: { id: string; x: number; y: number }): void {
+  private syncHeroes(
+    moving?: { id: string; x: number; y: number },
+    state: GameState = this.state,
+  ): void {
     this.view.setHeroes(
-      this.state.heroes
+      state.heroes
         .filter((h) => h.alive)
         .map((h) => ({
           id: h.id,
@@ -1070,7 +1122,7 @@ class GameScreen {
     if (hero === undefined) return;
     if (this.selectedId !== heroId) this.clearPlan();
     this.selectedId = heroId;
-    this.view.centerOn(hero.x, hero.y);
+    void this.view.glideTo(hero.x, hero.y, reducedMotion());
     this.renderHeroList();
     this.renderHeroPanel();
     this.renderHint();
@@ -1255,6 +1307,8 @@ class GameScreen {
     }
     this.busy = true;
     hideTip();
+    // The camera comes back to the hero first if the player looked away.
+    await this.view.glideTo(hero.x, hero.y, reducedMotion());
     if (moved?.type === "moved") await this.animateWalk(hero, moved.cells);
     this.state = result.state;
     const arrived = !(moved?.type === "moved" && moved.stop === "no-mp");
@@ -1320,11 +1374,16 @@ class GameScreen {
         case "pickup":
           if (this.state.currentPlayer !== this.human) break;
           playSound(pickupCue(e.resource));
-          this.flyPickup(e.resource, e.amount);
-          this.note(
-            `+${e.amount} ${RESOURCE_NAMES[e.resource].toLowerCase()}`,
-            "gain",
-          );
+          // The flying pickup is the toast; without it the line floats up.
+          if (this.flyPickup(e.resource, e.amount))
+            this.note(
+              `+${e.amount} ${RESOURCE_NAMES[e.resource].toLowerCase()}`,
+              "quiet",
+            );
+          else
+            this.noteAtHero(
+              `+${e.amount} ${RESOURCE_NAMES[e.resource].toLowerCase()}`,
+            );
           break;
         case "mine-flagged": {
           const mine = this.state.mines[e.mineId];
@@ -1333,9 +1392,8 @@ class GameScreen {
           // The flag going up is the sound (map.flag.raise).
           this.flagRaised(e.mineId);
           if (e.owner === this.human) {
-            this.note(
+            this.noteAtHero(
               `${def.name} claimed: +${def.income} ${mine.resource} per day`,
-              "gain",
             );
           } else if (this.aiRunning) {
             this.note(
@@ -1361,7 +1419,7 @@ class GameScreen {
             this.state.heroes.find((h) => h.id === e.heroId)?.owner ===
             this.human
           )
-            this.note(`+${e.amount} experience`, "gain");
+            this.noteAtHero(`+${e.amount} experience`, "gain", e.heroId);
           break;
         case "town-captured": {
           const name = this.state.towns[e.townId]?.name ?? "Town";
@@ -1400,7 +1458,7 @@ class GameScreen {
           const h = this.state.heroes.find((x) => x.id === e.heroId);
           if (h?.owner === this.human && e.options === undefined) {
             this.siteSound(e.objectId, e.text);
-            this.note(e.text, "gain");
+            this.noteAtHero(e.text, "gain", e.heroId);
           }
           break;
         }
@@ -1409,6 +1467,8 @@ class GameScreen {
           if (h?.owner === this.human) {
             // A waystone or the Tow Line: the same magical rush.
             playSound("site.waystone");
+            // The camera follows the hero to where it lands.
+            void this.view.glideTo(e.x, e.y, reducedMotion());
             this.note(
               e.via === "tow-line"
                 ? "The tow line hauls you to the pylon."
@@ -1426,16 +1486,17 @@ class GameScreen {
             // What turns up opens after the spade.
             if (e.found !== null) playSound("site.treasure", { delay: 0.3 });
           }
-          this.note(
+          this.noteAtHero(
             e.found === null
               ? "You dig, and find nothing."
               : `Dug up: ${e.found}!`,
-            e.found === null ? undefined : "gain",
+            e.found === null ? "info" : "gain",
+            e.heroId,
           );
           break;
         case "hero-freed":
           if (e.player === this.human)
-            this.note("A prisoner joins you!", "gain");
+            this.noteAtHero("A prisoner joins you!", "gain", e.heroId);
           break;
         case "player-eliminated":
           if (e.player !== this.human)
@@ -1582,21 +1643,27 @@ class GameScreen {
     if (events === null) return;
     playSound(choice === "gold" ? "gold" : "pickup");
     for (const e of events) {
-      if (e.type === "pickup") toast(`+${e.amount} gold`, "gain");
-      if (e.type === "xp") toast(`+${e.amount} experience`, "gain");
+      if (e.type === "pickup")
+        this.noteAtHero(`+${e.amount} gold`, "gain", heroId);
+      if (e.type === "xp")
+        this.noteAtHero(`+${e.amount} experience`, "gain", heroId);
     }
   }
 
-  /** A resource picked up flies from the hero to its place in the bar. */
-  private flyPickup(resource: ResourceId, amount: number): void {
+  /**
+   * A resource picked up flies from the hero to its place in the bar;
+   * false when nothing flew (reduced motion, the hero off screen).
+   */
+  private flyPickup(resource: ResourceId, amount: number): boolean {
     const i = RESOURCE_IDS.indexOf(resource);
     const slot = this.bar.querySelectorAll<HTMLElement>(".gm-res")[i];
     const amountEl = slot?.querySelector<HTMLElement>(".gm-res-amount");
     const hero = this.hero();
     const total = this.player()?.resources[resource] ?? 0;
-    if (!slot || !amountEl || hero === undefined || reducedMotion()) return;
+    if (!slot || !amountEl || hero === undefined || reducedMotion())
+      return false;
     const from = this.cellToClient(hero.x, hero.y);
-    if (from === null) return;
+    if (from === null) return false;
     amountEl.textContent = String(total - amount);
     const icon = resourceIcon(resource, "gm-fly-icon");
     const node = el("div.gm-fly-pickup", icon, el("span", `+${amount}`));
@@ -1614,6 +1681,7 @@ class GameScreen {
           "map.count.tick",
         );
     });
+    return true;
   }
 
   /** Gold bursts round a hero who levels up; false under reduced motion. */
@@ -1661,9 +1729,13 @@ class GameScreen {
     );
   }
 
+  /**
+   * Offers the human's pending level-ups one by one, also once the game is
+   * won (the final battle's levels come before the victory screen).
+   */
   private async levelUps(): Promise<void> {
     for (;;) {
-      if (this.state.status !== "playing") return;
+      if (this.state.status === "lost" || this.finished) return;
       const hero = heroesOf(this.state, this.human).find(
         (h) => h.pendingLevelUps > 0,
       );
@@ -1848,6 +1920,8 @@ class GameScreen {
       this.state = applied.state;
       this.refresh();
       this.announce(applied.events);
+      // A battle that wins the game still offers its level-ups first.
+      if (this.state.status === "won") await this.levelUps();
       if (this.checkEnd()) return;
       await this.levelUps();
       // A won fight on an object entrance may visit it (pickups, chests).
@@ -1936,6 +2010,8 @@ class GameScreen {
         await wait(1);
         const step = aiStep(this.state, this.controllers, this.resolver);
         const before = this.state;
+        const walk = step.events.find((e) => e.type === "moved");
+        if (walk?.type === "moved") await this.animateAiWalk(before, walk);
         this.state = step.state;
         this.refresh();
         await this.afterTurnEvents(step.events);
@@ -1959,9 +2035,67 @@ class GameScreen {
     this.refresh();
     saveGame(browserStorage(), this.state);
     this.note(`${dateLabel(this.state.day)}: your turn`);
-    const hero = this.hero();
-    if (hero !== undefined) this.view.centerOn(hero.x, hero.y);
+    this.centreOnTurnStart();
     await this.levelUps();
+  }
+
+  /**
+   * The start of the human's turn: the selected hero if it can still move,
+   * else the first hero that can, else the first town; the camera glides
+   * there (snaps under reduced motion).
+   */
+  private centreOnTurnStart(): void {
+    const own = heroesOf(this.state, this.human);
+    const selected = this.hero();
+    const hero =
+      selected !== undefined && selected.mp >= SPENT_MP
+        ? selected
+        : (own.find((h) => h.mp >= SPENT_MP) ?? selected);
+    if (hero === undefined) {
+      const id = this.ownTowns()[0];
+      const obj = this.state.map.objects.find((o) => o.id === id);
+      if (obj !== undefined)
+        void this.view.glideTo(obj.x, obj.y, reducedMotion());
+      return;
+    }
+    if (hero.id !== this.selectedId) this.selectHero(hero.id);
+    else void this.view.glideTo(hero.x, hero.y, reducedMotion());
+  }
+
+  /**
+   * An AI hero's walk, shown where the human can see it (bead xaj.18): the
+   * camera glides to the first seen cell and follows the hero along the
+   * seen part; unseen steps take no time. Reduced motion: the camera only
+   * glides (snaps) to where the hero ends up in sight.
+   */
+  private async animateAiWalk(
+    before: GameState,
+    walk: Extract<GameEvent, { type: "moved" }>,
+  ): Promise<void> {
+    const hero = before.heroes.find((h) => h.id === walk.heroId);
+    if (hero === undefined || hero.owner === this.human) return;
+    const explored = this.player()?.explored ?? [];
+    const w = before.map.width;
+    const seen = (x: number, y: number): boolean =>
+      explored[y * w + x] === true;
+    const cells: Array<[number, number]> = [[hero.x, hero.y], ...walk.cells];
+    const visible = cells.filter(([x, y]) => seen(x, y));
+    const first = visible[0];
+    if (first === undefined) return;
+    if (reducedMotion()) {
+      const last = visible[visible.length - 1] ?? first;
+      await this.view.glideTo(last[0], last[1], true);
+      return;
+    }
+    await this.view.glideTo(first[0], first[1]);
+    let prev = { x: hero.x, y: hero.y };
+    for (const [x, y] of walk.cells) {
+      if (seen(x, y) || seen(prev.x, prev.y)) {
+        this.syncHeroes({ id: hero.id, x, y }, before);
+        await this.view.walkHero(hero.id, prev, { x, y }, AI_WALK_MS);
+      }
+      prev = { x, y };
+    }
   }
 
   /** Whether the human sees the AI hero (start or end of its move). */
@@ -2268,6 +2402,33 @@ class GameScreen {
     }
   }
 
+  /**
+   * Records a message in the log and floats it up from the hero (bead
+   * xaj.18): what a visit or pickup gave, where it happened. Lines one after
+   * another queue so they never overlap; a hero off screen gets a toast.
+   */
+  private noteAtHero(
+    text: string,
+    kind: "info" | "gain" = "gain",
+    heroId?: string,
+  ): void {
+    const hero =
+      heroId === undefined
+        ? this.hero()
+        : this.state.heroes.find((h) => h.id === heroId);
+    const at = hero === undefined ? null : this.cellToClient(hero.x, hero.y);
+    if (at === null) {
+      this.note(text, kind);
+      return;
+    }
+    this.note(text, "quiet");
+    const now = performance.now();
+    const start = Math.max(now, this.floatQueue);
+    this.floatQueue = start + FLOAT_GAP_MS;
+    const lift = CELL_PX * 0.6 * this.view.getZoom();
+    floatText({ x: at.x, y: at.y - lift }, text, kind, start - now);
+  }
+
   /** Records a message in the log; toasts it unless it is quiet. */
   private note(
     text: string,
@@ -2472,6 +2633,7 @@ class GameScreen {
 
   private destroy(): void {
     this.offMotion();
+    this.offModal();
     delete window.__bmGame;
     window.removeEventListener("keydown", this.onKey);
     window.removeEventListener("resize", this.onResize);

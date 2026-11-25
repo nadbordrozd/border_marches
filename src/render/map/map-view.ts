@@ -45,6 +45,8 @@ import { paintPeakUnder } from "./peaks";
 import type { PeakField } from "./peaks";
 import { compareEntries, objectEntries, unitEntry } from "./scene";
 import type { SceneEntry } from "./scene";
+import { MapInput, WheelZoom, glideAt, glideMs } from "./input";
+import type { Glide } from "./input";
 import { planTerrain } from "./terrain-plan";
 import type { TerrainPlan, WorldRect } from "./terrain-plan";
 
@@ -58,9 +60,6 @@ export const CHUNK_CELLS = 8;
 const CHUNK_PX = CHUNK_CELLS * CELL;
 /** Cached chunks kept (each about 1.6 MB). */
 const CHUNK_LIMIT = 72;
-const EDGE_SCROLL_PX = 14;
-const EDGE_SCROLL_SPEED = 900; // world px per second
-const KEY_SCROLL_SPEED = 1100;
 
 export interface MapHero {
   readonly id: string;
@@ -122,8 +121,23 @@ export interface MapView {
   setSelected(cell: Cell | null): void;
   setZoom(zoom: number, anchor?: { sx: number; sy: number }): void;
   getZoom(): number;
-  /** Centres the view on cell (x, y). */
+  /** Centres the view on cell (x, y) at once (stops a glide). */
   centerOn(x: number, y: number): void;
+  /**
+   * Glides the camera to centre cell (x, y), eased; resolves when it is
+   * there (at once when it already is, or when another camera move takes
+   * over). `still` (reduced motion) snaps.
+   */
+  glideTo(x: number, y: number, still?: boolean): Promise<void>;
+  /**
+   * Map input on or off (bead xaj.18): off while a town or battle screen,
+   * a dialog, a walk or the AI's turn is up. Off, the map neither pans,
+   * zooms, hovers nor clicks, and a drag, held arrow key or edge scroll in
+   * progress is dropped.
+   */
+  setInputEnabled(on: boolean): void;
+  /** The canvas CSS pixel of a cell's centre (may lie off the canvas). */
+  cellToScreen(x: number, y: number): { x: number; y: number };
   /** The cell under canvas CSS pixel (sx, sy), or null off the map. */
   screenToCell(sx: number, sy: number): Cell | null;
   onHover(callback: (cell: Cell | null) => void): void;
@@ -162,6 +176,8 @@ export interface MapView {
 export const FOG_FADE_MS = 160;
 /** How long a captured flag takes to rise (ms). */
 export const FLAG_RAISE_MS = 520;
+/** The most a camera glide advances in one frame (ms). */
+const GLIDE_FRAME_MS = 40;
 
 type Context = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D;
 
@@ -843,43 +859,36 @@ export function createMapView(
 
   // ------------------------------------------------------------ input
 
-  let dragging: {
-    x: number;
-    y: number;
-    camX: number;
-    camY: number;
-    moved: boolean;
-  } | null = null;
-  let pointer: { x: number; y: number } | null = null;
-  const keys = new Set<string>();
+  const input = new MapInput();
+  const wheel = new WheelZoom();
   let lastTick = 0;
   let ticking = false;
+  /** The camera glide in progress and the promise waiting on it. */
+  let glide: (Glide & { resolve: () => void }) | null = null;
+
+  const stopGlide = (): void => {
+    const g = glide;
+    glide = null;
+    g?.resolve();
+  };
 
   const tick = (now: number): void => {
     ticking = false;
     const dt =
       lastTick === 0 ? 1 / 60 : Math.min(0.05, (now - lastTick) / 1000);
     lastTick = now;
-    let vx = 0;
-    let vy = 0;
-    if (keys.has("ArrowLeft")) vx -= KEY_SCROLL_SPEED;
-    if (keys.has("ArrowRight")) vx += KEY_SCROLL_SPEED;
-    if (keys.has("ArrowUp")) vy -= KEY_SCROLL_SPEED;
-    if (keys.has("ArrowDown")) vy += KEY_SCROLL_SPEED;
-    if (pointer !== null && dragging === null) {
-      if (pointer.x < EDGE_SCROLL_PX) vx -= EDGE_SCROLL_SPEED;
-      if (pointer.x > cssW - EDGE_SCROLL_PX) vx += EDGE_SCROLL_SPEED;
-      if (pointer.y < EDGE_SCROLL_PX) vy -= EDGE_SCROLL_SPEED;
-      if (pointer.y > cssH - EDGE_SCROLL_PX) vy += EDGE_SCROLL_SPEED;
+    const { vx, vy } = input.velocity(cssW, cssH, now);
+    if (vx !== 0 || vy !== 0) {
+      stopGlide();
+      camX += (vx * dt) / zoom;
+      camY += (vy * dt) / zoom;
+      clampCamera();
+      render();
     }
-    if (vx === 0 && vy === 0) {
+    if (!input.wantsTicks(cssW, cssH)) {
       lastTick = 0;
       return;
     }
-    camX += (vx * dt) / zoom;
-    camY += (vy * dt) / zoom;
-    clampCamera();
-    render();
     ticking = true;
     requestAnimationFrame(tick);
   };
@@ -896,70 +905,93 @@ export function createMapView(
     requestRender();
   };
 
+  /** Drops the gesture in progress and the hover (input off, blur). */
+  const dropInput = (): void => {
+    input.reset();
+    setHovered(null);
+  };
+
   const onPointerDown = (event: PointerEvent): void => {
+    if (event.button !== 0) return;
+    if (!input.pointerDown(event.offsetX, event.offsetY, camX, camY)) return;
     canvas.setPointerCapture(event.pointerId);
-    dragging = { x: event.offsetX, y: event.offsetY, camX, camY, moved: false };
   };
   const onPointerMove = (event: PointerEvent): void => {
-    pointer = { x: event.offsetX, y: event.offsetY };
-    if (dragging !== null) {
-      const dx = event.offsetX - dragging.x;
-      const dy = event.offsetY - dragging.y;
-      if (Math.abs(dx) + Math.abs(dy) > 4) dragging.moved = true;
-      if (dragging.moved) {
-        camX = dragging.camX - dx / zoom;
-        camY = dragging.camY - dy / zoom;
-        clampCamera();
-        requestRender();
-      }
-      return;
+    const out = input.pointerMove(event.offsetX, event.offsetY, zoom);
+    if (out.kind === "pan") {
+      stopGlide();
+      camX = out.camX;
+      camY = out.camY;
+      clampCamera();
+      requestRender();
+    } else if (out.kind === "hover") {
+      setHovered(view.screenToCell(out.x, out.y));
+      startTicking();
     }
-    setHovered(view.screenToCell(event.offsetX, event.offsetY));
-    startTicking();
   };
   const onPointerUp = (event: PointerEvent): void => {
-    const drag = dragging;
-    dragging = null;
-    if (drag !== null && !drag.moved) {
-      const cell = view.screenToCell(event.offsetX, event.offsetY);
-      if (cell !== null) clickCallback?.(cell, event);
-    }
+    // Settle the press before releasing the capture (lostpointercapture
+    // drops a drag in progress).
+    const click = input.pointerUp();
+    if (canvas.hasPointerCapture(event.pointerId))
+      canvas.releasePointerCapture(event.pointerId);
+    if (!click) return;
+    const cell = view.screenToCell(event.offsetX, event.offsetY);
+    if (cell !== null) clickCallback?.(cell, event);
+  };
+  const onPointerCancel = (): void => {
+    input.pointerUp();
+    input.pointerLeave();
   };
   const onPointerLeave = (): void => {
-    pointer = null;
+    input.pointerLeave();
     setHovered(null);
   };
   const onWheel = (event: WheelEvent): void => {
     event.preventDefault();
+    if (!input.isEnabled()) return;
+    const step = wheel.push(event.deltaY, event.deltaMode, performance.now());
+    if (step === 0) return;
     const index = ZOOM_STEPS.indexOf(zoom as (typeof ZOOM_STEPS)[number]);
     const next =
-      ZOOM_STEPS[
-        Math.max(
-          0,
-          Math.min(ZOOM_STEPS.length - 1, index + (event.deltaY < 0 ? 1 : -1)),
-        )
-      ];
-    if (next !== undefined && next !== zoom)
+      ZOOM_STEPS[Math.max(0, Math.min(ZOOM_STEPS.length - 1, index + step))];
+    if (next !== undefined && next !== zoom) {
+      stopGlide();
       view.setZoom(next, { sx: event.offsetX, sy: event.offsetY });
+    }
   };
+  /** Arrow keys pan only the map on screen, never under a text field. */
   const onKeyDown = (event: KeyboardEvent): void => {
-    if (!event.key.startsWith("Arrow")) return;
+    if (event.ctrlKey || event.metaKey || event.altKey) return;
+    const target = event.target;
+    if (
+      target instanceof HTMLInputElement ||
+      target instanceof HTMLTextAreaElement ||
+      target instanceof HTMLSelectElement ||
+      (target instanceof HTMLElement && target.isContentEditable)
+    )
+      return;
+    if (!canvas.isConnected || canvas.offsetParent === null) return;
+    if (!input.keyDown(event.key)) return;
     event.preventDefault();
-    keys.add(event.key);
     startTicking();
   };
   const onKeyUp = (event: KeyboardEvent): void => {
-    keys.delete(event.key);
+    input.keyUp(event.key);
   };
+  const onBlur = (): void => dropInput();
   const onResize = (): void => view.resize();
 
   canvas.addEventListener("pointerdown", onPointerDown);
   canvas.addEventListener("pointermove", onPointerMove);
   canvas.addEventListener("pointerup", onPointerUp);
+  canvas.addEventListener("pointercancel", onPointerCancel);
+  canvas.addEventListener("lostpointercapture", onPointerCancel);
   canvas.addEventListener("pointerleave", onPointerLeave);
   canvas.addEventListener("wheel", onWheel, { passive: false });
   window.addEventListener("keydown", onKeyDown);
   window.addEventListener("keyup", onKeyUp);
+  window.addEventListener("blur", onBlur);
   window.addEventListener("resize", onResize);
 
   const view: MapView = {
@@ -1073,10 +1105,59 @@ export function createMapView(
     },
     getZoom: () => zoom,
     centerOn(x, y) {
+      stopGlide();
       camX = x * CELL + CELL / 2;
       camY = y * CELL + CELL / 2;
       clampCamera();
       requestRender();
+    },
+    glideTo(x, y, still = false) {
+      stopGlide();
+      const from = { x: camX, y: camY };
+      camX = x * CELL + CELL / 2;
+      camY = y * CELL + CELL / 2;
+      clampCamera();
+      const to = { x: camX, y: camY };
+      const ms = glideMs(Math.hypot(to.x - from.x, to.y - from.y) * zoom);
+      if (still || ms === 0) {
+        requestRender();
+        return Promise.resolve();
+      }
+      camX = from.x;
+      camY = from.y;
+      return new Promise<void>((resolve) => {
+        const mine = { from, to, t0: 0, ms, resolve };
+        glide = mine;
+        // The glide's own clock: a slow frame (chunks built on the way)
+        // advances it by at most GLIDE_FRAME_MS, so the camera never jumps.
+        let clock = 0;
+        let last = performance.now();
+        const step = (): void => {
+          if (glide !== mine) return;
+          const now = performance.now();
+          clock += Math.min(GLIDE_FRAME_MS, now - last);
+          last = now;
+          const at = glideAt(mine, clock);
+          camX = at.x;
+          camY = at.y;
+          render();
+          if (at.done) stopGlide();
+          else requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    },
+    setInputEnabled(on) {
+      if (on === input.isEnabled()) return;
+      input.setEnabled(on);
+      if (!on) dropInput();
+    },
+    cellToScreen(x, y) {
+      const { ox, oy } = origin();
+      return {
+        x: ox + (x * CELL + CELL / 2) * zoom,
+        y: oy + (y * CELL + CELL / 2) * zoom,
+      };
     },
     screenToCell(sx, sy) {
       if (map === null) return null;
@@ -1117,6 +1198,7 @@ export function createMapView(
         heroOffsets.delete(id);
         return new Promise((r) => setTimeout(r, Math.max(0, ms)));
       }
+      stopGlide();
       const dx0 = (from.x - to.x) * CELL;
       const dy0 = (from.y - to.y) * CELL;
       const t0 = performance.now();
@@ -1160,10 +1242,14 @@ export function createMapView(
       canvas.removeEventListener("pointerdown", onPointerDown);
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerup", onPointerUp);
+      canvas.removeEventListener("pointercancel", onPointerCancel);
+      canvas.removeEventListener("lostpointercapture", onPointerCancel);
       canvas.removeEventListener("pointerleave", onPointerLeave);
       canvas.removeEventListener("wheel", onWheel);
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("blur", onBlur);
+      stopGlide();
       window.removeEventListener("resize", onResize);
       chunks.clear();
       patches.clear();

@@ -196,3 +196,46 @@ export function dayBanner(
   setTimeout(() => node.remove(), kind === "week" ? 2600 : 1700);
   return node;
 }
+
+/** How long a floating line stays up (ms). */
+export const FLOAT_MS = 1700;
+
+/**
+ * A short line floating up from a point on the map (bead xaj.18): what a
+ * visit or pickup gave, shown at the hero instead of the top of the
+ * screen. Under reduced motion it shows in place and goes. Removes itself.
+ */
+export function floatText(
+  at: { x: number; y: number },
+  text: string,
+  kind: "info" | "gain" = "gain",
+  delay = 0,
+): HTMLElement {
+  const node = document.createElement("div");
+  node.className = `gm-float gm-float-${kind}`;
+  node.setAttribute("aria-hidden", "true");
+  node.textContent = text;
+  node.style.left = `${Math.round(at.x)}px`;
+  node.style.top = `${Math.round(at.y)}px`;
+  (document.getElementById("ui") ?? document.body).append(node);
+  if (!reducedMotion() && typeof node.animate === "function") {
+    node.animate(
+      [
+        { transform: "translate(-50%, -100%) translateY(6px)", opacity: 0 },
+        { transform: "translate(-50%, -100%)", opacity: 1, offset: 0.1 },
+        {
+          transform: "translate(-50%, -100%) translateY(-22px)",
+          opacity: 1,
+          offset: 0.7,
+        },
+        { transform: "translate(-50%, -100%) translateY(-32px)", opacity: 0 },
+      ],
+      { duration: FLOAT_MS, delay, easing: "linear", fill: "both" },
+    );
+  } else if (delay > 0) {
+    node.style.visibility = "hidden";
+    setTimeout(() => (node.style.visibility = ""), delay);
+  }
+  setTimeout(() => node.remove(), delay + FLOAT_MS);
+  return node;
+}

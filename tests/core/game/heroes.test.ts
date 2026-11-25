@@ -215,6 +215,19 @@ describe("skill offers (RULES_V2 3.3)", () => {
     expect(errorOf(chooseLevelUp(s, "hero-0", 7))).toBe("bad-choice");
   });
 
+  it("still pays out levels once the game is won, not once it is lost", () => {
+    const s = plain([{ id: "onslaught", rank: 1 }]);
+    gainXp(hero(s), 400, []);
+    const won = cloneState(s);
+    won.status = "won";
+    const r = ok(chooseLevelUp(won, "hero-0", 0));
+    expect(hero(r.state).pendingLevelUps).toBe(0);
+    expect(r.state.status).toBe("won");
+    const lost = cloneState(s);
+    lost.status = "lost";
+    expect(errorOf(chooseLevelUp(lost, "hero-0", 0))).toBe("game-over");
+  });
+
   it("redraws the next offer once with the Elixir of Hindsight", () => {
     const s = plain([{ id: "onslaught", rank: 1 }]);
     gainXp(hero(s), 400, []);
