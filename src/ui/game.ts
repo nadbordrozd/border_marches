@@ -12,6 +12,7 @@ import { CELL_PX } from "../assets/manifest.ts";
 import {
   aiStep,
   applyBattleResult,
+  voidPendingBattle,
   describeObject,
   digHere,
   objectName,
@@ -41,6 +42,7 @@ import {
 import type {
   BattleResult,
   BattleSetup,
+  CommandError,
   CommandResult,
   GameEvent,
   GameState,
@@ -1319,6 +1321,17 @@ class GameScreen {
           }
           break;
         }
+        case "battle-error":
+          toast(`The battle could not be settled and was void: ${e.message}`);
+          break;
+        case "last-stand": {
+          const { attacker, defender } = battlePlayers(this.state, e.battle);
+          if (attacker !== this.human && defender !== this.human) break;
+          toast(
+            `Both armies fell at once; ${stackPhrase(e.creature, 1)} held the field.`,
+          );
+          break;
+        }
         case "xp":
           if (
             this.state.heroes.find((h) => h.id === e.heroId)?.owner ===
@@ -1576,6 +1589,15 @@ class GameScreen {
     };
   }
 
+  /** Settles a pending battle that cannot be applied as void (an error). */
+  private voidBattle(error: CommandError, message: string): void {
+    const r = voidPendingBattle(this.state, error, message);
+    if (!r.ok) return;
+    this.state = r.state;
+    this.refresh();
+    this.announce(r.events);
+  }
+
   /** Fights pending battles the human takes part in, one after another. */
   private async battles(): Promise<void> {
     while (
@@ -1583,7 +1605,11 @@ class GameScreen {
       this.state.status === "playing"
     ) {
       const setup = battleSetup(this.state);
-      if (setup === null) return;
+      if (setup === null) {
+        // Never wait on a battle that cannot be fought: void it.
+        this.voidBattle("no-battle", "the pending battle has no setup");
+        continue;
+      }
       const sides = battlePlayers(this.state, setup.battle);
       const humanSide: "attacker" | "defender" =
         sides.defender === this.human && sides.attacker !== this.human
@@ -1673,8 +1699,10 @@ class GameScreen {
       }
       const applied = applyBattleResult(this.state, result);
       if (!applied.ok) {
-        toast(applied.message);
-        return;
+        // A refused result (a resolver bug) must not leave the game
+        // waiting on the battle: it is voided and the error shown.
+        this.voidBattle(applied.error, applied.message);
+        continue;
       }
       this.state = applied.state;
       this.refresh();

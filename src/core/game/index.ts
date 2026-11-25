@@ -167,6 +167,7 @@ export {
   battlePlayers,
   battleSetup,
   fightPendingBattle,
+  voidPendingBattle,
   type BattleHero,
   type BattleResolver,
   type BattleResult,

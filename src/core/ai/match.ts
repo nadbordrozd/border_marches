@@ -107,6 +107,13 @@ export interface MatchResult {
   thinkMs: number[][];
   /** Actions the rules refused (each ended that player's turn early). */
   failures: Array<{ day: number; player: number; action: GameAction }>;
+  /**
+   * Battles whose result the rules refused, voided by the driver (a
+   * resolver bug; there should be none).
+   */
+  battleErrors: Array<{ day: number; player: number; message: string }>;
+  /** Battles where both sides fell at once (RULES_V2 1.12 last stand). */
+  lastStands: number;
 }
 
 const VALUE: Readonly<Record<string, number>> = {
@@ -271,6 +278,8 @@ export function playMatch(options: MatchOptions): MatchResult {
   let thinking = 0;
   const thinkMs: number[][] = state.players.map(() => []);
   const failures: MatchResult["failures"] = [];
+  const battleErrors: MatchResult["battleErrors"] = [];
+  let lastStands = 0;
   const wrapped = new Map<number, PlayerController>();
   const controllers = (p: number): PlayerController => {
     let c = wrapped.get(p);
@@ -303,6 +312,16 @@ export function playMatch(options: MatchOptions): MatchResult {
       });
     }
     decided = null;
+    for (const e of step.events) {
+      if (e.type === "last-stand") lastStands++;
+      if (e.type === "battle-error") {
+        battleErrors.push({
+          day: before.day,
+          player: before.currentPlayer,
+          message: `${e.error}: ${e.message}`,
+        });
+      }
+    }
     options.onAction?.(before, step);
   };
   const cleared = state.players.map(() => 0);
@@ -350,5 +369,14 @@ export function playMatch(options: MatchOptions): MatchResult {
     }
     if (turn.outcome === "game-over") break;
   }
-  return { days, state, guardsAtStart, turnMs, thinkMs, failures };
+  return {
+    days,
+    state,
+    guardsAtStart,
+    turnMs,
+    thinkMs,
+    failures,
+    battleErrors,
+    lastStands,
+  };
 }

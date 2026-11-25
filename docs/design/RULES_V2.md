@@ -463,7 +463,22 @@ cannot show; a keyword whose rule is longer than one sentence.
 - A side **loses** when it owns no living stack that is not summoned and
   has no scheduled event that will return one of its stacks. Ownership
   counts, not the current side: a Turned stack still belongs to its owner.
-- If both sides lose in the same step, the defender wins.
+- If both sides lose in the same step, the defender wins. It makes a
+  **last stand**: one creature of its weakest stack (the lowest fight
+  value per creature among the stacks it brought, the first in deployment
+  order on a tie) survives. The same holds for any winner left with no
+  creatures (see After the battle), so a winning hero, guard or garrison
+  never ends a battle empty and a hero always keeps at least one creature
+  (3.9). Everything else follows the ordinary win: the attacking hero is
+  defeated and leaves the map; a defending hero gains XP for every
+  attacker killed and takes the attacker's artifacts (4.4); a neutral
+  guard or a site guard stays with that one creature (it is not removed);
+  a defended town is not entered, so a hero beaten at the gate never
+  reaches its garrison battle (5.5), and a garrison that wins keeps the
+  town; nothing changes hands (mines, towns). A battle result the game
+  cannot apply (an engine or interface bug) never leaves the game
+  waiting: the battle is void, nothing changes but the battle count, and
+  the error is shown.
 - **Round limit.** If nobody has lost at the end of round 30, the defender
   wins and the attacker is treated as defeated. (The MVP's 100-round limit
   with no winner is replaced.)
@@ -478,7 +493,8 @@ cannot show; a keyword whose rule is longer than one sentence.
   the top creature heals, as in the MVP. A stack that returned from its
   remains by a birthright crumbles. If this would leave the winner with
   no creatures, the weakest of its stacks that would crumble survives
-  with 1 creature.
+  with 1 creature; if none would (all its stacks died), it makes the last
+  stand above.
 - **XP** to the winning hero: the total HP of enemy creatures killed,
   counting only non-summoned stacks (GAME_DESIGN 6.1). A hero defeated by
   a hero loses its artifacts to the winner (4.4).

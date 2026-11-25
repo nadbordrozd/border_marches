@@ -242,7 +242,6 @@ describe("applyBattleResult", () => {
       { winner: "attacker" as const, attacker: [19, 6], defender: [0, 0, 0] },
       { winner: "attacker" as const, attacker: [18, 6], defender: [1, 0, 0] },
       { winner: "defender" as const, attacker: [18, 6], defender: [0, 0, 0] },
-      { winner: "attacker" as const, attacker: [0, 0], defender: [0, 0, 0] },
       { winner: "attacker" as const, attacker: [1.5, 6], defender: [0, 0, 0] },
     ];
     for (const r of bad)

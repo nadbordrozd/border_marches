@@ -33,6 +33,7 @@ import {
   applyBattleResult,
   battlePlayers,
   battleSetup,
+  voidPendingBattle,
   type BattleResolver,
 } from "./battle.ts";
 import { chooseLevelUp, levelUpOffer, type LevelUpOffer } from "./hero.ts";
@@ -241,9 +242,15 @@ function settle(
     if (human(sides.attacker) || human(sides.defender)) {
       return { state: s, humanBattle: true };
     }
+    // Never stall on a pending battle: one without a setup, or whose
+    // result the rules refuse (a resolver bug), is voided with a
+    // "battle-error" event.
     const setup = battleSetup(s);
-    if (setup === null) break;
-    const r = applyBattleResult(s, resolver(setup));
+    let r =
+      setup === null
+        ? voidPendingBattle(s, "no-battle", "the pending battle has no setup")
+        : applyBattleResult(s, resolver(setup));
+    if (!r.ok) r = voidPendingBattle(s, r.error, r.message);
     if (!r.ok) break;
     s = r.state;
     events.push(...r.events);

@@ -250,8 +250,11 @@ for (const seed of seeds) {
   const thinkMean =
     think.reduce((a, b) => a + b, 0) / Math.max(1, think.length);
   console.log(
-    `guards at start ${guards}; status ${result.state.status}; turn ms mean ${mean.toFixed(0)} max ${max.toFixed(0)} (deciding: mean ${thinkMean.toFixed(0)} max ${thinkMax.toFixed(0)}); refused actions ${result.failures.length}`,
+    `guards at start ${guards}; status ${result.state.status}; turn ms mean ${mean.toFixed(0)} max ${max.toFixed(0)} (deciding: mean ${thinkMean.toFixed(0)} max ${thinkMax.toFixed(0)}); refused actions ${result.failures.length}; last stands ${result.lastStands}; void battles ${result.battleErrors.length}`,
   );
+  for (const b of result.battleErrors.slice(0, 5)) {
+    console.log(`  void battle d${b.day} p${b.player}: ${b.message}`);
+  }
   for (const f of result.failures.slice(0, 5)) {
     console.log(
       `  refused d${f.day} p${f.player}: ${JSON.stringify(f.action)}`,
@@ -268,6 +271,8 @@ for (const seed of seeds) {
     turnMs: { mean, max },
     thinkMs: { mean: thinkMean, max: thinkMax },
     failures: result.failures,
+    battleErrors: result.battleErrors,
+    lastStands: result.lastStands,
     days: result.days,
   });
 }

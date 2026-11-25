@@ -373,6 +373,26 @@ export type GameEvent =
       from?: number | null;
     }
   | { type: "hero-defeated"; heroId: string }
+  /**
+   * Both sides fell in the same step (RULES_V2 1.12): the winner keeps one
+   * creature of its weakest stack.
+   */
+  | {
+      type: "last-stand";
+      battle: PendingBattle;
+      side: "attacker" | "defender";
+      creature: string;
+    }
+  /**
+   * A battle result could not be applied (a resolver bug): the battle is
+   * void, nothing changes but the battle count (voidPendingBattle).
+   */
+  | {
+      type: "battle-error";
+      battle: PendingBattle;
+      error: CommandError;
+      message: string;
+    }
   | { type: "hero-retreated"; heroId: string }
   | { type: "hero-hired"; heroId: string; player: number; townId: string }
   | { type: "hero-dismissed"; heroId: string }

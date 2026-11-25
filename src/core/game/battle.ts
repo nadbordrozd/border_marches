@@ -56,6 +56,7 @@ import {
 } from "./state.ts";
 import type {
   ArmySlots,
+  CommandError,
   CommandResult,
   GameEvent,
   GameState,
@@ -164,7 +165,8 @@ export interface BattleResult {
 /**
  * The battle engine's entry point: a pure, deterministic function from the
  * setup to the outcome. Without a retreat the losing side must have no
- * survivors and the winner at least one.
+ * survivors. A winner with none (both sides fell in the same step, RULES_V2
+ * 1.12) is given its last stand by applyBattleResult.
  */
 export type BattleResolver = (setup: BattleSetup) => BattleResult;
 
@@ -345,6 +347,28 @@ function validSurvivors(
 
 const total = (ns: readonly number[]): number => ns.reduce((a, b) => a + b, 0);
 
+/**
+ * The last stand (RULES_V2 1.12): a winner left with no creatures keeps
+ * one creature of its weakest stack, the one with the lowest fight value
+ * per creature (the first in deployment order on a tie). Null when the
+ * side brought no stacks.
+ */
+function lastStand(
+  stacks: readonly BattleStack[],
+): { survivors: number[]; index: number } | null {
+  let index = -1;
+  let best = Infinity;
+  stacks.forEach((s, i) => {
+    const fv = getCreature(s.creature).fightValue;
+    if (fv < best) {
+      best = fv;
+      index = i;
+    }
+  });
+  if (index < 0) return null;
+  return { survivors: stacks.map((_, i) => (i === index ? 1 : 0)), index };
+}
+
 /** XP for killing: total HP of the creatures of `stacks` that died. */
 function killedHp(stacks: readonly BattleStack[], survivors: number[]): number {
   let xp = 0;
@@ -434,7 +458,9 @@ function heroLost(
 
 /**
  * Applies a battle outcome to the pending battle:
- * - casualties on both sides;
+ * - casualties on both sides; a winner with no survivors (both sides fell
+ *   in the same step) keeps one creature of its weakest stack, its last
+ *   stand (RULES_V2 1.12), so no hero, guard or garrison wins with nothing;
  * - the winning hero gains XP = total HP of the enemy creatures killed
  *   (pending level-ups added); a hero beaten by a hero loses its
  *   artifacts to it; a beaten hero leaves the map (pool, or its tavern
@@ -445,6 +471,10 @@ function heroLost(
  *   next adjacent neutral stack attacks (chained), or the object under the
  *   hero is visited;
  * - eliminations and the end of the game are settled (RULES_V2 5.9).
+ *
+ * A result that cannot be applied is refused ("bad-result" and others) and
+ * the battle stays pending: the caller must surface the refusal and settle
+ * the battle with voidPendingBattle rather than wait on it.
  */
 export function applyBattleResult(
   state: GameState,
@@ -460,10 +490,17 @@ export function applyBattleResult(
   ) {
     return fail("bad-result", "survivor lists do not match the setup");
   }
-  const attackerLeft = total(result.attacker);
-  const defenderLeft = total(result.defender);
+  if (result.winner !== "attacker" && result.winner !== "defender") {
+    return fail("bad-result", "the result names no winner");
+  }
+  let attackerSurvivors = result.attacker;
+  let defenderSurvivors = result.defender;
+  const attackerLeft = total(attackerSurvivors);
+  const defenderLeft = total(defenderSurvivors);
   const retreat = result.retreat;
   let attackerWon: boolean;
+  let stand: { side: "attacker" | "defender"; creature: CreatureId } | null =
+    null;
   if (retreat !== undefined) {
     const side = retreat === "attacker" ? setup.attacker : setup.defender;
     if (side.canRetreat !== true) {
@@ -475,12 +512,24 @@ export function applyBattleResult(
       return fail("bad-result", "the side that stays must win with survivors");
     }
   } else {
-    attackerWon =
-      result.winner === "attacker" && attackerLeft > 0 && defenderLeft === 0;
-    const defenderWon =
-      result.winner === "defender" && defenderLeft > 0 && attackerLeft === 0;
-    if (!attackerWon && !defenderWon) {
+    attackerWon = result.winner === "attacker";
+    if ((attackerWon ? defenderLeft : attackerLeft) > 0) {
       return fail("bad-result", "the loser must have no survivors");
+    }
+    // Both sides fell in the same step (the engine names the defender,
+    // RULES_V2 1.12): the winner keeps one creature of its weakest stack.
+    if ((attackerWon ? attackerLeft : defenderLeft) === 0) {
+      const side = attackerWon ? setup.attacker : setup.defender;
+      const last = lastStand(side.stacks);
+      if (last === null) {
+        return fail("bad-result", "the winner has no stacks");
+      }
+      if (attackerWon) attackerSurvivors = last.survivors;
+      else defenderSurvivors = last.survivors;
+      stand = {
+        side: result.winner,
+        creature: must(side.stacks[last.index], "stack").creature,
+      };
     }
   }
 
@@ -492,8 +541,9 @@ export function applyBattleResult(
   const foe =
     battle.kind === "hero" ? findHero(next, battle.objectId) : undefined;
   const events: GameEvent[] = [];
+  if (stand !== null) events.push({ type: "last-stand", battle, ...stand });
 
-  applySurvivors(hero.army, attackerSlots, result.attacker);
+  applySurvivors(hero.army, attackerSlots, attackerSurvivors);
   // One-battle consumables and site buffs end with the battle (6.1).
   hero.nextBattle = [];
   hero.buffs = [];
@@ -507,23 +557,23 @@ export function applyBattleResult(
   if (battle.kind === "town") {
     const town = next.towns[battle.objectId];
     if (town !== undefined) {
-      applySurvivors(town.garrison, defenderSlots, result.defender);
+      applySurvivors(town.garrison, defenderSlots, defenderSurvivors);
     }
   } else if (foe !== undefined) {
-    applySurvivors(foe.army, defenderSlots, result.defender);
+    applySurvivors(foe.army, defenderSlots, defenderSurvivors);
   }
 
   if (!attackerWon) {
     if (battle.kind === "monster") {
       const monster = next.monsters[battle.objectId];
-      if (monster !== undefined) monster.count = defenderLeft;
+      if (monster !== undefined) monster.count = total(defenderSurvivors);
     }
     if (battle.kind === "site") {
       // Guards killed stay dead.
       siteFor(next, battle.objectId).guard = setup.defender.stacks
         .map((s, i) => ({
           creature: s.creature,
-          count: result.defender[i] ?? 0,
+          count: defenderSurvivors[i] ?? 0,
         }))
         .filter((s) => s.count > 0);
     }
@@ -533,10 +583,10 @@ export function applyBattleResult(
           foe,
           setup.defender.stacks,
           defenderSlots,
-          result.defender,
+          defenderSurvivors,
         );
       }
-      gainXp(foe, killedHp(setup.attacker.stacks, result.attacker), events);
+      gainXp(foe, killedHp(setup.attacker.stacks, attackerSurvivors), events);
     }
     heroLost(next, hero, foe, retreat === "attacker", events);
     checkEliminations(next, events);
@@ -544,9 +594,9 @@ export function applyBattleResult(
   }
 
   if (retreat === undefined) {
-    fieldSurgeon(hero, setup.attacker.stacks, attackerSlots, result.attacker);
+    fieldSurgeon(hero, setup.attacker.stacks, attackerSlots, attackerSurvivors);
   }
-  const xp = killedHp(setup.defender.stacks, result.defender);
+  const xp = killedHp(setup.defender.stacks, defenderSurvivors);
   gainXp(hero, xp, events);
   // Loot Pile (FACTION_GOBLINS 9): gold equal to the battle's XP, once.
   if (xp > 0 && playerSpecials(next, hero.owner).includes(SPECIALS.lootPile)) {
@@ -603,6 +653,28 @@ export function applyBattleResult(
     events.push({ type: "battle", battle: chained });
   }
   return success(next, events);
+}
+
+/**
+ * The guard against a stalled game: settles a pending battle whose result
+ * could not be applied (a resolver bug) as void. Nothing changes but the
+ * battle count (so a new fight gets a new seed); the hero stays where the
+ * fight started. Emits a "battle-error" event with the refusal, so the
+ * error is surfaced rather than leaving the game waiting on the battle.
+ */
+export function voidPendingBattle(
+  state: GameState,
+  error: CommandError,
+  message: string,
+): CommandResult {
+  if (state.pendingBattle === null) {
+    return fail("no-battle", "no battle is pending");
+  }
+  const next = cloneState(state);
+  const battle = must(next.pendingBattle, "battle");
+  next.pendingBattle = null;
+  next.battles++;
+  return success(next, [{ type: "battle-error", battle, error, message }]);
 }
 
 /** battleSetup + resolver + applyBattleResult in one call. */
