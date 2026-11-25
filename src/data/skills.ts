@@ -349,7 +349,7 @@ const ROWS: SkillDef[] = [
         effects: [{ kind: "terrain-cost", reduce: 50 }],
       },
       {
-        text: "All passable terrain costs 100 (roads stay 75).",
+        text: "All passable terrain costs 100 (roads stay 70).",
         effects: [{ kind: "terrain-cost", reduce: 1000 }],
       },
     ],

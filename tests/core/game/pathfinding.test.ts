@@ -23,9 +23,9 @@ describe("step costs (GAME_DESIGN.md section 7.1)", () => {
     expect(stepCost(map, null, 2, 0, 3, 0)).toBe(150); // wasteland
     expect(stepCost(map, null, 0, 1, 1, 1)).toBe(100); // steppe
     expect(stepCost(map, null, 1, 1, 2, 1)).toBe(100); // onto a road from off it
-    expect(stepCost(map, null, 2, 1, 3, 1)).toBe(75); // road to road
-    expect(stepCost(map, null, 3, 1, 4, 0)).toBe(106); // diagonal road
-    expect(stepCost(map, null, 3, 1, 4, 1)).toBe(75); // road on jungle
+    expect(stepCost(map, null, 2, 1, 3, 1)).toBe(70); // road to road
+    expect(stepCost(map, null, 3, 1, 4, 0)).toBe(141); // across a road corner
+    expect(stepCost(map, null, 3, 1, 4, 1)).toBe(70); // road on jungle
     expect(stepCost(map, null, 0, 1, 1, 0)).toBe(212); // diagonal jungle
     expect(stepCost(map, "jungle", 0, 1, 1, 0)).toBe(141);
   });
@@ -47,10 +47,10 @@ describe("findPath", () => {
   });
 
   it("prefers a road when it is cheaper", () => {
-    // Along the road: 100 onto it, then 75s, then off.
+    // Along the road: 100 onto it, then 70s, then off.
     const s = gameOn(["g#####g", "ggggggg"], [], 0, 1);
     const p = findPath(s, "hero-0", 6, 1)!;
-    expect(p.total).toBe(141 + 4 * 75 + 141);
+    expect(p.total).toBe(141 + 4 * 70 + 141);
     expect(p.total).toBeLessThan(600);
   });
 

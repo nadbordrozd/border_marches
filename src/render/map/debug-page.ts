@@ -12,6 +12,8 @@
  *   cx=X&cy=Y     centre on a cell
  *   hud=0         hide the text overlay
  *   path=0        hide the path preview
+ *   route=X,Y,TX,TY  put the hero on (X, Y) and preview the game's own
+ *                 cheapest path to (TX, TY) (road costs, as a hero walks)
  *   bench=N       render N frames after load and report the mean time
  *
  * The page builds every map from the game's own code: nothing from tests/
@@ -23,6 +25,7 @@ import type { GameMap, MapCell } from "../../core/map/types";
 import { cellAt, isPassable, objectBlockedSet } from "../../core/map/types";
 import type { Route } from "../../router";
 import { generateMap } from "../../core/map/generate";
+import { findPathInContext } from "../../core/game/pathfinding";
 import { buildNamedMap } from "../../core/map/named";
 import { playableFactions } from "../../data/factions";
 import { loadMapAssets } from "./assets";
@@ -224,6 +227,41 @@ export function debugPath(
   }));
 }
 
+/**
+ * The game's cheapest path (src/core/game/pathfinding.ts, road costs and
+ * all) for a hero with no native terrain and no fog, monsters ignored.
+ */
+export function debugRoute(
+  map: GameMap,
+  from: readonly [number, number],
+  to: readonly [number, number],
+  reach: number,
+): PathStep[] {
+  const steps = findPathInContext(
+    {
+      map,
+      nativeTerrain: null,
+      objectBlocked: objectBlockedSet(map),
+      monsterAt: new Map(),
+      enemyHeroAt: new Map(),
+      friendAt: new Set(),
+      guards: new Map(),
+      stops: new Set(),
+      explored: null,
+      forestCost: null,
+    },
+    from[0],
+    from[1],
+    to[0],
+    to[1],
+  );
+  return (steps ?? []).map((s, i) => ({
+    x: s.x,
+    y: s.y,
+    reachable: i < reach,
+  }));
+}
+
 export async function startMapDebug(
   canvas: HTMLCanvasElement,
   route: Route,
@@ -273,17 +311,32 @@ export async function startMapDebug(
   const starts = map.objects.filter(
     (o) => o.kind === "hero-start" && (named !== null || o === hero),
   );
+  const leg = (params.get("route") ?? "").split(",").map(Number);
+  const [fromX = 0, fromY = 0, toX = 0, toY = 0] = leg;
+  const routed =
+    leg.length === 4 && leg.every((v) => Number.isInteger(v) && v >= 0);
   view.setHeroes(
-    starts.map((o, i) => ({
-      id: `hero-${i}`,
-      x: o.x,
-      y: o.y,
-      unit: "dinosaur-chieftain",
-    })),
+    routed
+      ? [{ id: "hero-0", x: fromX, y: fromY, unit: "dinosaur-chieftain" }]
+      : starts.map((o, i) => ({
+          id: `hero-${i}`,
+          x: o.x,
+          y: o.y,
+          unit: "dinosaur-chieftain",
+        })),
   );
   if (params.get("fog") === "1") view.setExplored(debugExplored(map));
   const target = map.objects.find((o) => o.kind === "monster");
-  if (params.get("path") !== "0" && hero !== undefined && target !== undefined)
+  if (routed)
+    view.setPathPreview(debugRoute(map, [fromX, fromY], [toX, toY], 12), {
+      x: fromX,
+      y: fromY,
+    });
+  else if (
+    params.get("path") !== "0" &&
+    hero !== undefined &&
+    target !== undefined
+  )
     view.setPathPreview(
       debugPath(map, [hero.x, hero.y], [target.x, target.y], 7),
       { x: hero.x, y: hero.y },

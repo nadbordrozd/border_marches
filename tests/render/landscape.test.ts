@@ -1,15 +1,19 @@
 /**
- * Map beauty iteration 2 (bead border_marches-xaj.13): smooth roads, frayed
- * woods, the doodad layer, the fog's second layer, and the
- * manifest's pickup and mine sprites.
+ * Map beauty iteration 2 (bead border_marches-xaj.13): frayed woods, the
+ * doodad layer, the fog's second layer, and the manifest's pickup and mine
+ * sprites. Roads follow the grid again (bead bzc.44): a hero's walk along a
+ * road stays on the drawn road.
  */
 import { describe, expect, it } from "vitest";
 import {
   roadChains,
   roadPaths,
   roadSegments,
-  smoothPath,
 } from "../../src/render/map/road.ts";
+import type { RoadSegment } from "../../src/render/map/road.ts";
+import { findPathInContext } from "../../src/core/game/pathfinding.ts";
+import { objectBlockedSet } from "../../src/core/map/types.ts";
+import { buildNamedMap } from "../../src/core/map/named.ts";
 import {
   DOODAD_CENTRE,
   DOODAD_GAP,
@@ -49,24 +53,33 @@ function roadMap(w: number, h: number, cells: [number, number][]): GameMap {
   return map;
 }
 
-/** The largest turn (radians) between successive segments of a path. */
-function sharpestTurn(path: readonly (readonly [number, number])[]): number {
-  let worst = 0;
-  for (let k = 1; k + 1 < path.length; k += 1) {
-    const [ax, ay] = path[k - 1]!;
-    const [bx, by] = path[k]!;
-    const [cx, cy] = path[k + 1]!;
-    const a = Math.atan2(by - ay, bx - ax);
-    const b = Math.atan2(cy - by, cx - bx);
-    let d = Math.abs(b - a);
-    if (d > Math.PI) d = 2 * Math.PI - d;
-    worst = Math.max(worst, d);
+/** Distance (px) from a world point to the nearest road link. */
+function roadDistance(
+  segments: readonly RoadSegment[],
+  px: number,
+  py: number,
+): number {
+  let best = Number.POSITIVE_INFINITY;
+  for (const s of segments) {
+    const rx = px - s.ax;
+    const ry = py - s.ay;
+    const t = Math.max(
+      0,
+      Math.min(1, (rx * s.cx + ry * s.cy) / (s.length * s.length)),
+    );
+    best = Math.min(best, Math.hypot(rx - s.cx * t, ry - s.cy * t));
   }
-  return worst;
+  return best;
 }
 
-describe("smooth roads", () => {
-  it("traces a turn as one chain with no shortcut across its corner", () => {
+/** Cell centre in world px. */
+const centre = (x: number, y: number): [number, number] => [
+  x * CELL + CELL / 2,
+  y * CELL + CELL / 2,
+];
+
+describe("grid roads", () => {
+  it("draws a right-angle turn as an L through its corner cell", () => {
     const map = roadMap(6, 6, [
       [0, 2],
       [1, 2],
@@ -76,10 +89,33 @@ describe("smooth roads", () => {
     ]);
     const chains = roadChains(map);
     expect(chains).toHaveLength(1);
-    expect(chains[0]!.cells).toHaveLength(5);
+    expect(chains[0]!.cells).toEqual([
+      [0, 2],
+      [1, 2],
+      [2, 2],
+      [2, 3],
+      [2, 4],
+    ]);
+    // No shortcut across the corner.
+    const [px, py] = centre(1.5, 2.5);
+    expect(roadDistance(roadSegments(map), px, py)).toBeGreaterThan(CELL / 3);
   });
 
-  it("splits a junction into chains that all end on the junction cell", () => {
+  it("keeps a straight diagonal road as one diagonal chain", () => {
+    const map = roadMap(6, 6, [
+      [0, 0],
+      [1, 1],
+      [2, 2],
+      [3, 3],
+    ]);
+    const chains = roadChains(map);
+    expect(chains).toHaveLength(1);
+    expect(chains[0]!.cells).toHaveLength(4);
+    for (const s of roadSegments(map))
+      expect(s.length).toBeCloseTo(CELL * Math.SQRT2, 6);
+  });
+
+  it("joins every arm of a plain T at the junction cell", () => {
     const map = roadMap(7, 7, [
       [0, 3],
       [1, 3],
@@ -89,43 +125,100 @@ describe("smooth roads", () => {
       [3, 4],
       [3, 5],
     ]);
-    const chains = roadChains(map);
-    expect(chains).toHaveLength(3);
-    for (const chain of chains) {
-      const ends = [chain.cells[0], chain.cells[chain.cells.length - 1]];
-      expect(ends.some((c) => c?.[0] === 3 && c?.[1] === 3)).toBe(true);
+    const segments = roadSegments(map);
+    // Six orthogonal links, the three arms meeting at the junction's centre.
+    expect(segments).toHaveLength(6);
+    for (const s of segments) expect(s.length).toBe(CELL);
+    const [jx, jy] = centre(3, 3);
+    const touching = segments.filter(
+      (s) =>
+        Math.hypot(s.ax - jx, s.ay - jy) < 1e-6 ||
+        Math.hypot(s.ax + s.cx - jx, s.ay + s.cy - jy) < 1e-6,
+    );
+    expect(touching).toHaveLength(3);
+    // No slip roads round the corners.
+    for (const [ax, ay, bx, by] of [
+      [2, 3, 3, 4],
+      [4, 3, 3, 4],
+    ] as const) {
+      const [px, py] = centre((ax + bx) / 2, (ay + by) / 2);
+      expect(roadDistance(segments, px, py)).toBeGreaterThan(CELL / 3);
     }
-    // Every path ends exactly at the junction cell's centre (a merge).
-    const junction = [3 * CELL + CELL / 2, 3 * CELL + CELL / 2];
-    for (const path of roadPaths(map)) {
-      const ends = [path[0]!, path[path.length - 1]!];
-      expect(
-        ends.some(
-          (p) =>
-            Math.hypot(p[0] - junction[0]!, p[1] - junction[1]!) < CELL * 0.3,
-        ),
-      ).toBe(true);
+    // Every path runs through cell centres.
+    for (const path of roadPaths(map))
+      for (const [x, y] of path) {
+        expect((x - CELL / 2) % CELL).toBe(0);
+        expect((y - CELL / 2) % CELL).toBe(0);
+      }
+  });
+
+  it("paints every road cell of the named and generated maps", () => {
+    for (const map of [
+      buildNamedMap("keepers-toll"),
+      buildNamedMap("hourglass-marches"),
+      generateMap(1, { size: "M" }),
+      generateMap(2, { size: "M" }),
+    ]) {
+      const segments = roadSegments(map);
+      map.cells.forEach((cell, i) => {
+        if (!cell.road) return;
+        const [x, y] = centre(i % map.width, Math.floor(i / map.width));
+        expect(roadDistance(segments, x, y)).toBeLessThan(1e-6);
+      });
     }
   });
 
-  it("rounds a right-angle turn and a staircase into gentle curves", () => {
-    const turn = smoothPath([
-      [40, 40],
-      [120, 40],
-      [200, 40],
-      [200, 120],
-      [200, 200],
-    ]);
-    expect(sharpestTurn(turn)).toBeLessThan(0.45);
-    const stairs: [number, number][] = [];
-    for (let k = 0; k < 8; k += 1) {
-      stairs.push([40 + k * 80, 40 + k * 80]);
-      stairs.push([120 + k * 80, 40 + k * 80]);
+  it("keeps a hero's road walk on the drawn road (named map)", () => {
+    const map = buildNamedMap("keepers-toll");
+    const segments = roadSegments(map);
+    const ctx = {
+      map,
+      nativeTerrain: null,
+      objectBlocked: objectBlockedSet(map),
+      monsterAt: new Map<number, string>(),
+      enemyHeroAt: new Map<number, string>(),
+      friendAt: new Set<number>(),
+      guards: new Map<number, string[]>(),
+      stops: new Set<number>(),
+      explored: null,
+      forestCost: null,
+    };
+    // Walks between road cells, corners included.
+    const ends: number[] = [];
+    map.cells.forEach((cell, i) => {
+      if (cell.road && !ctx.objectBlocked.has(i)) ends.push(i);
+    });
+    let steps = 0;
+    for (let k = 0; k < 60; k += 1) {
+      const a = ends[(k * 7919) % ends.length]!;
+      const b = ends[(k * 104729 + 31) % ends.length]!;
+      const w = map.width;
+      const path = findPathInContext(
+        ctx,
+        a % w,
+        (a / w) | 0,
+        b % w,
+        (b / w) | 0,
+      );
+      let [px, py] = [a % w, (a / w) | 0];
+      for (const s of path ?? []) {
+        if (map.cells[py * w + px]!.road && map.cells[s.y * w + s.x]!.road) {
+          steps += 1;
+          for (let q = 0; q <= 4; q += 1) {
+            const [x, y] = centre(
+              px + ((s.x - px) * q) / 4,
+              py + ((s.y - py) * q) / 4,
+            );
+            expect(roadDistance(segments, x, y)).toBeLessThan(1e-6);
+          }
+        }
+        [px, py] = [s.x, s.y];
+      }
     }
-    expect(sharpestTurn(smoothPath(stairs))).toBeLessThan(0.45);
+    expect(steps).toBeGreaterThan(200);
   });
 
-  it("cuts the paths into short segments measured along the whole path", () => {
+  it("links cell centres, measured along the whole path", () => {
     const map = roadMap(10, 3, [
       [0, 1],
       [1, 1],
@@ -136,15 +229,15 @@ describe("smooth roads", () => {
       [6, 1],
     ]);
     const segments = roadSegments(map);
-    expect(segments.length).toBeGreaterThan(6);
+    expect(segments).toHaveLength(6);
     for (const s of segments) {
-      expect(s.length).toBeLessThan(CELL);
+      expect(s.length).toBe(CELL);
       expect(s.s0 + s.length).toBeLessThanOrEqual(s.total + 1e-6);
+      // On the cells' centre line: no meander, no smoothing.
+      expect(s.ay).toBe(1.5 * CELL);
+      expect(s.cy).toBe(0);
     }
-    // The meander moves the road off the cells' centre line, but not far.
-    const ys = segments.map((s) => s.ay);
-    expect(Math.max(...ys) - Math.min(...ys)).toBeGreaterThan(1);
-    for (const y of ys) expect(Math.abs(y - 1.5 * CELL)).toBeLessThan(24);
+    expect(segments[0]!.total).toBe(6 * CELL);
   });
 });
 

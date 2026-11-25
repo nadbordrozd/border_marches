@@ -136,7 +136,7 @@ once are offered one after another.
 
 | Terrain               | Straight step | Diagonal step | Notes                                            |
 | --------------------- | ------------: | ------------: | ------------------------------------------------ |
-| Road                  |            75 |           106 | both cells on the road                           |
+| Road                  |            70 |            99 | both cells on the road (RULES_V2 3.9)            |
 | Grass                 |           100 |           141 |                                                  |
 | Steppe                |           100 |           141 |                                                  |
 | Jungle                |           150 |           212 | 100 / 141 for Lost World natives (the Chieftain) |

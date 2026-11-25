@@ -1,9 +1,11 @@
 /**
  * Adventure-map pathfinding (GAME_DESIGN.md section 7.1 and 7.2).
  *
- * - 8 directions. A step costs the entered cell's terrain cost (Road 75 when
+ * - 8 directions. A step costs the entered cell's terrain cost (Road 70 when
  *   both cells have a road; the hero's native terrain costs 100); a diagonal
- *   step costs that x 1.414 rounded to the nearest integer.
+ *   step costs that x 1.414 rounded to the nearest integer, except a
+ *   road-to-road diagonal with a road corner cell: 141, more than the two
+ *   road steps round the corner (140), so heroes follow the road as drawn.
  * - Water, mountains, forests and object-blocked cells are impassable. A
  *   diagonal step between two impassable cells (corner cutting) is not
  *   allowed.
@@ -21,6 +23,7 @@ import {
   DIAGONAL_DEN,
   DIAGONAL_NUM,
   NATIVE_MOVE_COST,
+  ROAD_CORNER_DIAGONAL_COST,
   ROAD_MOVE_COST,
   TERRAIN_MOVE_COST,
 } from "../../data/movement.ts";
@@ -278,8 +281,18 @@ export function stepCost(
       : nativeTerrain;
   let base: number;
   if (forestCost !== null && to.obstacle === "forest") base = forestCost;
-  else if (from.road && to.road) base = ROAD_MOVE_COST;
-  else if (to.terrain === profile.native) base = NATIVE_MOVE_COST;
+  else if (from.road && to.road) {
+    // A diagonal across a road corner costs more than the two road steps
+    // round it, so heroes walk the road as drawn (RULES_V2 3.9).
+    if (
+      fx !== tx &&
+      fy !== ty &&
+      (map.cells[fy * map.width + tx]?.road === true ||
+        map.cells[ty * map.width + fx]?.road === true)
+    )
+      return ROAD_CORNER_DIAGONAL_COST;
+    base = ROAD_MOVE_COST;
+  } else if (to.terrain === profile.native) base = NATIVE_MOVE_COST;
   else {
     const c = TERRAIN_MOVE_COST[to.terrain];
     if (c === null) throw new RangeError(`stepCost: (${tx},${ty}) impassable`);

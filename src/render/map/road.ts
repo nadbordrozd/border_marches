@@ -13,15 +13,20 @@
  *
  * Dock gangways are Polytopia-specific and were left out.
  *
- * Border Marches (bead border_marches-xaj.13): the track is no longer drawn
- * cell link by cell link (ruler lines with braces at the corners) but along
- * SMOOTH PATHS: the road cells form a graph, which is cut into chains
- * between junctions and ends (`roadChains`); each chain's cell centres are
- * averaged (a staircase becomes a diagonal), moved by a slow meander noise
- * and rounded by Chaikin corner cutting (`smoothPath`), and the painter
- * measures each pixel's distance to the resulting short straight segments
- * (`roadSegments`). Every chain meeting at a junction ends on the junction
- * cell's own point, so roads merge there.
+ * Border Marches (bead border_marches-bzc.44, replacing xaj.13's smoothed
+ * curves): the track follows the GRID, the way heroes walk. The road cells
+ * form a graph whose links run straight from one cell centre to the next,
+ * orthogonally or diagonally, exactly where the hero's walk and the path
+ * markers go; the graph is cut into chains between junctions and ends
+ * (`roadChains`) so ruts run along a whole chain, and the painter measures
+ * each pixel's distance to the links (`roadSegments`), so turns and
+ * junctions get round joins and ends a round cap. Every road cell is drawn:
+ * a right-angle turn is an L through its corner cell and a junction meets
+ * at its centre cell; a diagonal link only joins diagonal road cells with
+ * no road corner between them. Movement agrees: a diagonal step across a
+ * road corner costs more than the two road steps round it
+ * (src/core/game/pathfinding.ts `stepCost`), so heroes walk the road as
+ * drawn.
  */
 import type { GameMap } from "../../core/map/types";
 import { CELL_PX } from "../../assets/manifest";
@@ -72,10 +77,7 @@ const CRUMB_REACH = 3.2;
 export const ROAD_REACH =
   DIRT_ROAD.halfWidth + DIRT_ROAD.roughness + EDGE + CRUMB_REACH;
 
-/** A road as a smooth polyline through world pixels. */
-export type RoadPath = readonly (readonly [number, number])[];
-
-/** One straight piece of a smoothed road path, in world pixels. */
+/** One straight link of a road path, in world pixels. */
 export interface RoadSegment {
   /** Start point, world px. */
   readonly ax: number;
@@ -94,25 +96,13 @@ export interface RoadSegment {
   readonly salt: number;
 }
 
-/** How far the meander moves a road point, px at most. */
-export const ROAD_MEANDER = 20;
-/** Lattice spacing of the meander noise, px (about three cells). */
-const MEANDER_SPACING = CELL_PX * 3.2;
-
-/** A road point moved by the meander: a slow noise of its position. */
-export function meander(px: number, py: number): [number, number] {
-  return [
-    px + ROAD_MEANDER * drift(px, py, MEANDER_SPACING, 61),
-    py + ROAD_MEANDER * drift(px, py, MEANDER_SPACING, 67),
-  ];
-}
-
 /**
  * The road graph's paths: chains of road cells between junctions and ends
- * (a node with other than two road neighbours), as lists of cells. A road
- * cell joins its orthogonal road neighbours, and a diagonal one when neither
- * shared corner cell is a road node (so a turn never closes a triangle).
- * `extraNodes` (object entrances) join road cells only.
+ * (a node with other than two links), as lists of cells. A road cell links
+ * its orthogonal road neighbours, and a diagonal one only when neither
+ * shared corner cell is a road node (a genuinely diagonal road: a turn
+ * stays an L, a junction a plain T or plus). `extraNodes` (object
+ * entrances) join orthogonal road cells only, one each.
  */
 export function roadChains(
   map: GameMap,
@@ -141,6 +131,16 @@ export function roadChains(
     adjacency.set(a, [...(adjacency.get(a) ?? []), b]);
     adjacency.set(b, [...(adjacency.get(b) ?? []), a]);
   };
+  const unlink = (a: number, b: number): void => {
+    adjacency.set(
+      a,
+      (adjacency.get(a) ?? []).filter((k) => k !== b),
+    );
+    adjacency.set(
+      b,
+      (adjacency.get(b) ?? []).filter((k) => k !== a),
+    );
+  };
   for (let y = 0; y < height; y += 1)
     for (let x = 0; x < width; x += 1) {
       const own = kindAt(x, y);
@@ -161,19 +161,11 @@ export function roadChains(
         link(y * width + x, (y + dy) * width + x + dx);
       }
     }
-  // An entrance with several road neighbours keeps only the nearest one
-  // (orthogonal first): the road ends at the door, it does not loop round.
+  // An entrance with several road neighbours keeps only the first one: the
+  // road ends at the door, it does not loop round.
   for (const [index, list] of adjacency) {
     if (node[index] !== 2 || list.length <= 1) continue;
-    const keep = list[0] as number;
-    for (const other of list.slice(1)) {
-      const back = adjacency.get(other) ?? [];
-      adjacency.set(
-        other,
-        back.filter((k) => k !== index),
-      );
-    }
-    adjacency.set(index, [keep]);
+    for (const other of list.slice(1)) unlink(index, other);
   }
   const degree = (index: number): number => adjacency.get(index)?.length ?? 0;
   const seen = new Set<string>();
@@ -212,66 +204,20 @@ export function roadChains(
   return chains;
 }
 
-/**
- * Smooths a polyline whose ends stay put: two rounds of a [1/4, 1/2, 1/4]
- * average (a staircase of cells becomes a diagonal) and three of Chaikin's
- * corner cutting (corners become curves).
- */
-export function smoothPath(
-  points: RoadPath,
-  fixed: readonly boolean[] = [],
-): [number, number][] {
-  let pts = points.map((p): [number, number] => [p[0], p[1]]);
-  for (let round = 0; round < 2 && pts.length >= 3; round += 1)
-    pts = pts.map((p, k): [number, number] => {
-      if (k === 0 || k === pts.length - 1) return p;
-      const a = pts[k - 1] as [number, number];
-      const b = pts[k + 1] as [number, number];
-      return [(a[0] + 2 * p[0] + b[0]) / 4, (a[1] + 2 * p[1] + b[1]) / 4];
-    });
-  // The meander, after the averaging (which would flatten it): a slow noise
-  // of the position, so the two paths meeting at a junction agree on it.
-  pts = pts.map((p, k) => (fixed[k] === true ? p : meander(p[0], p[1])));
-  if (pts.length < 3) return pts;
-  for (let round = 0; round < 3; round += 1) {
-    const out: [number, number][] = [pts[0] as [number, number]];
-    for (let k = 0; k + 1 < pts.length; k += 1) {
-      const a = pts[k] as [number, number];
-      const b = pts[k + 1] as [number, number];
-      const q: [number, number] = [
-        0.75 * a[0] + 0.25 * b[0],
-        0.75 * a[1] + 0.25 * b[1],
-      ];
-      const r: [number, number] = [
-        0.25 * a[0] + 0.75 * b[0],
-        0.25 * a[1] + 0.75 * b[1],
-      ];
-      if (k > 0) out.push(q);
-      if (k + 2 < pts.length) out.push(r);
-    }
-    out.push(pts[pts.length - 1] as [number, number]);
-    pts = out;
-  }
-  return pts;
-}
-
-/** The smoothed road paths of a map, world pixels. */
+/** The road paths of a map: each chain's cell centres, world pixels. */
 export function roadPaths(
   map: GameMap,
   extraNodes: readonly (readonly [number, number])[] = [],
 ): [number, number][][] {
   return roadChains(map, extraNodes).map((chain) =>
-    smoothPath(
-      chain.cells.map(([x, y]) => [
-        x * CELL_PX + CELL_PX / 2,
-        y * CELL_PX + CELL_PX / 2,
-      ]),
-      chain.entrance,
-    ),
+    chain.cells.map(([x, y]): [number, number] => [
+      x * CELL_PX + CELL_PX / 2,
+      y * CELL_PX + CELL_PX / 2,
+    ]),
   );
 }
 
-/** The straight segments of the smoothed road paths of a map. */
+/** The straight links of the road paths of a map. */
 export function roadSegments(
   map: GameMap,
   extraNodes: readonly (readonly [number, number])[] = [],

@@ -373,7 +373,7 @@ describe("hook framework: adventure numbers (RULES_V2 2.3, 3.1, 3.9)", () => {
     expect(movementPoints(hero(s))).toBeLessThanOrEqual(3000);
   });
 
-  it("lowers rough terrain toward 100 (Trailcraft, Galoshes), roads stay 75", () => {
+  it("lowers rough terrain toward 100 (Trailcraft, Galoshes), roads stay 70", () => {
     const map = buildMap(["gjbw"], []);
     const t1 = plain([{ id: "trailcraft", rank: 1 }]);
     const p1 = terrainProfile(hero(t1));

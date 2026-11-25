@@ -978,12 +978,18 @@ mp    = min(3000, mp), minus any Borrowed Day debt
 ```
 
 An army whose slowest creature has Speed 4 gets the MVP's 1500. Step costs
-are GAME_DESIGN 7.1. Modifiers:
+are GAME_DESIGN 7.1, with two road rules. A road step costs 70 (99
+diagonally), not the MVP's 75: following a road must always beat cutting
+across the cheapest terrain, so two road steps (140) cost less than one
+grass or steppe diagonal (141). And a diagonal step between two road cells
+whose shared corner cell is also road costs 141 (two road steps plus one),
+so a hero turning a road corner walks through the corner cell, along the
+road as drawn. Modifiers:
 
 | Modifier                 | Rule                                                                                    |
 | ------------------------ | --------------------------------------------------------------------------------------- |
 | Native terrain           | The class's native terrain costs 100 per straight step (replaces the MVP's Jungle note) |
-| Terrain skills and items | May lower one terrain's cost toward 100, never below; roads stay 75                     |
+| Terrain skills and items | May lower one terrain's cost toward 100, never below; roads stay 70                     |
 | Percentage modifiers     | Skills 10, 20, 30 percent; artifacts 5 to 15 percent each                               |
 | Flat modifiers           | Artifacts and one-day map sites, +100 to +400                                           |
 | Hired or newly arrived   | A hero has full movement on the day it is hired                                         |
