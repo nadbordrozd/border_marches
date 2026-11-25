@@ -1,19 +1,19 @@
 /**
  * The battle spellbook and the cast panel (DOM only; the rules are in
- * magic.ts): pages by school with tier, mana and the effect at this cast's
- * Power, spent pages greyed with the reason, scrolls and a creature
- * caster's own pages; then the targeting prompt, the exact rehearsed chain
- * and the Echo and Fuel toggles with what each would do.
+ * magic.ts). The book docks beside the field (bead bzc.63, UI2-13): school
+ * chips, the pages as an icon grid with the castable ones first and the
+ * greyed ones saying why in two words, and a detail strip with the pointed
+ * page's effect at this cast's Power, its target and the reason it cannot
+ * be cast; scrolls and a creature caster's own pages follow the schools.
+ * Then the cast panel: the targeting prompt, the exact rehearsed chain and
+ * the Echo and Fuel toggles with what each would do.
  */
 
 import type { ConditionRef } from "../../core/battle/index.ts";
-import { isBattleSpell } from "../../core/magic/index.ts";
 import { iconElement } from "../icons.ts";
 import { targetLine } from "../target-icon.ts";
 import { ANYWHERE, spellTargetKind } from "./spell-targets.ts";
-import { spellTip } from "../info-tips.ts";
 import { rulesText } from "../keywords.ts";
-import { setTip, tipCard } from "../tooltip.ts";
 import { SCHOOL_COLOURS, SCHOOL_NAMES } from "./magic.ts";
 import type { BookEntry, CastPreview, ConditionOption } from "./magic.ts";
 
@@ -43,26 +43,109 @@ export interface BookView {
   } | null;
 }
 
-/** A page's hover card: the spell card at this Power, then why not now. */
-function entryTip(e: BookEntry): HTMLElement {
-  const card =
-    e.source !== "item" && isBattleSpell(e.id) ? spellTip(e.id, e.power) : null;
-  const why = e.reason ? el("div", "gm-tip-line gm-tip-bad", e.reason) : null;
-  if (card instanceof HTMLElement) {
-    if (why) card.append(why);
-    return card;
-  }
-  return tipCard(e.name, [e.text, why]);
+/** The groups of the book, in order: the five schools, then the rest. */
+const SCHOOLS = ["bloom", "accord", "clock", "hush", "storm"] as const;
+
+export interface BookGroup {
+  /** "bloom" ... "storm", "scroll", "item" or "creature". */
+  readonly key: string;
+  /** The chip's words. */
+  readonly label: string;
+  /** The chip and tile border colour. */
+  readonly colour: string;
+  readonly entries: readonly BookEntry[];
 }
 
-function entryNode(e: BookEntry, onPick: (e: BookEntry) => void): HTMLElement {
+/**
+ * The book's groups (bead bzc.63): the schools with pages, then scrolls,
+ * item acts and the active creature's own pages; empty ones are left out.
+ */
+export function bookGroups(view: BookView): BookGroup[] {
+  const groups: BookGroup[] = SCHOOLS.map((school) => ({
+    key: school,
+    label: SCHOOL_NAMES[school],
+    colour: SCHOOL_COLOURS[school],
+    entries: view.pages.filter((p) => p.school === school),
+  }));
+  groups.push(
+    {
+      key: "scroll",
+      label: "Scrolls",
+      colour: "#c8b490",
+      entries: view.scrolls,
+    },
+    {
+      key: "item",
+      label: "Items",
+      colour: "#c9a227",
+      entries: view.items ?? [],
+    },
+  );
+  if (view.creature)
+    groups.push({
+      key: "creature",
+      label: view.creature.name,
+      colour: "#9fd0c0",
+      entries: view.creature.pages,
+    });
+  return groups.filter((g) => g.entries.length > 0);
+}
+
+export interface BookTile {
+  readonly entry: BookEntry;
+  readonly group: BookGroup;
+}
+
+/**
+ * The pages shown under a chip (`"all"` or a group key): the ones that can
+ * be cast now first, then the greyed ones, each in book order.
+ */
+export function bookOrder(
+  groups: readonly BookGroup[],
+  filter: string,
+): BookTile[] {
+  const shown = groups
+    .filter((g) => filter === "all" || g.key === filter)
+    .flatMap((group) => group.entries.map((entry) => ({ entry, group })));
+  return [
+    ...shown.filter((x) => x.entry.status === "ready"),
+    ...shown.filter((x) => x.entry.status !== "ready"),
+  ];
+}
+
+function costText(e: BookEntry): string {
+  if (e.source === "item") return "item act";
+  if (e.source === "page" || e.mana > 0) return `${e.mana} mana`;
+  return e.source === "scroll" ? "scroll" : "page";
+}
+
+/** The words under a page's icon: its cost, or why it is greyed. */
+export function pageCaption(e: BookEntry): string {
+  switch (e.status) {
+    case "ready":
+      return e.source === "scroll" && e.count > 1
+        ? `scroll ×${e.count}`
+        : costText(e);
+    case "spent":
+      return "spent";
+    case "mana":
+      return "no mana";
+    case "cast":
+      return "cast this round";
+    case "wait":
+      return "not now";
+    case "target":
+      return /no effect/i.test(e.reason ?? "") ? "no effect" : "no target";
+  }
+}
+
+/** The detail strip: the whole page, its target and why it is greyed. */
+function pageDetail(box: HTMLElement, t: BookTile): void {
+  const e = t.entry;
   const item = e.source === "item";
-  const b = el("button", `bm-spell bm-st-${e.status}${item ? " bm-item" : ""}`);
-  b.type = "button";
-  b.dataset["spell"] = e.id;
-  b.style.setProperty("--school", item ? "#c9a227" : SCHOOL_COLOURS[e.school]);
-  b.disabled = e.status !== "ready";
-  setTip(b, () => entryTip(e));
+  box.replaceChildren();
+  box.style.setProperty("--school", t.group.colour);
+  box.dataset["spell"] = e.id;
   const head = el("div", "bm-spell-head");
   head.append(
     iconElement(item ? "artifact" : "spell", e.id, {
@@ -71,35 +154,73 @@ function entryNode(e: BookEntry, onPick: (e: BookEntry) => void): HTMLElement {
     el("span", "bm-spell-name", e.name + (e.count > 1 ? ` ×${e.count}` : "")),
     el(
       "span",
-      "bm-spell-cost",
-      item
-        ? "item act"
-        : e.source === "page" || e.mana > 0
-          ? `${e.mana} mana`
-          : e.source === "scroll"
-            ? "scroll"
-            : "page",
-    ),
-  );
-  b.append(
-    head,
-    el(
-      "div",
       "bm-spell-meta",
       item
-        ? "Once per battle · before a friendly stack acts"
-        : `Tier ${e.tier} · Power ${e.power}${e.fuel ? ` · Fuel doubles ${e.fuel.replace(/^The /, "the ")}` : ""}`,
+        ? "Once per battle, before a friendly stack acts"
+        : e.source === "creature"
+          ? `${SCHOOL_NAMES[e.school]} ${e.tier} · Power ${e.power} · the stack's action`
+          : `${SCHOOL_NAMES[e.school]} ${e.tier} · Power ${e.power}${e.fuel ? ` · Fuel doubles ${e.fuel.replace(/^The /, "the ")}` : ""}`,
     ),
-    rulesText(e.text, { tag: "div", className: "bm-spell-text" }),
+    el("span", "bm-spell-cost", costText(e)),
+  );
+  box.append(
+    head,
+    rulesText(e.text, { tag: "div", className: "bm-spell-text", hover: true }),
   );
   const kind = spellTargetKind(e.id);
-  if (kind) b.append(targetLine(kind, "bm-spell-target"));
-  if (e.reason) b.append(el("div", "bm-spell-why", e.reason));
-  b.addEventListener("click", () => onPick(e));
+  if (kind) box.append(targetLine(kind, "bm-spell-target"));
+  box.append(
+    e.reason
+      ? el("div", "bm-spell-why", e.reason)
+      : el("div", "bm-book-go", item ? "Click to use." : "Click to cast."),
+  );
+}
+
+/** One page of the grid: icon, name, and its cost or why not. */
+function pageTile(
+  t: BookTile,
+  onShow: (tile: HTMLElement) => void,
+  onPick: (e: BookEntry) => void,
+): HTMLButtonElement {
+  const e = t.entry;
+  const item = e.source === "item";
+  const ready = e.status === "ready";
+  const b = el("button", `bm-spell bm-st-${e.status}${item ? " bm-item" : ""}`);
+  b.type = "button";
+  b.dataset["spell"] = e.id;
+  b.style.setProperty("--school", t.group.colour);
+  // Greyed with the reason (bead bzc.47). aria-disabled rather than
+  // disabled, so pointing at a greyed page still shows why in the strip.
+  if (!ready) b.setAttribute("aria-disabled", "true");
+  b.setAttribute(
+    "aria-label",
+    `${e.name}, ${costText(e)}${e.reason ? `. ${e.reason}` : ""}`,
+  );
+  const icon = iconElement(item ? "artifact" : "spell", e.id, {
+    className: "bm-spell-icon",
+    scale: 2,
+  });
+  // The name is written under it; no browser tooltip on top.
+  icon.removeAttribute("title");
+  b.append(
+    icon,
+    el("span", "bm-spell-name", e.name),
+    el("span", `bm-spell-cost${ready ? "" : " bm-spell-off"}`, pageCaption(e)),
+  );
+  b.addEventListener("pointerenter", () => onShow(b));
+  b.addEventListener("focus", () => onShow(b));
+  b.addEventListener("click", () => {
+    onShow(b);
+    if (ready) onPick(e);
+  });
   return b;
 }
 
-/** Fills `box` with the book. */
+/**
+ * Fills `box` with the book: a title with mana, the group chips, the icon
+ * grid and the detail strip of the pointed page (the first castable one
+ * until the pointer moves). Clicking a bright page picks it.
+ */
 export function renderBook(
   box: HTMLElement,
   view: BookView,
@@ -113,48 +234,64 @@ export function renderBook(
   close.addEventListener("click", onClose);
   head.append(
     el("div", "bm-book-title", view.title),
-    el("div", "bm-dim", view.status),
+    el("div", "bm-dim bm-book-status", view.status),
     close,
   );
   box.append(head);
-  const cols = el("div", "bm-book-cols");
-  const schools = ["bloom", "accord", "clock", "hush", "storm"] as const;
-  for (const school of schools) {
-    const pages = view.pages.filter((p) => p.school === school);
-    if (pages.length === 0) continue;
-    const col = el("div", "bm-book-col");
-    const h = el("div", "bm-book-school", SCHOOL_NAMES[school]);
-    h.style.color = SCHOOL_COLOURS[school];
-    col.append(h, ...pages.map((p) => entryNode(p, onPick)));
-    cols.append(col);
+  const groups = bookGroups(view);
+  if (groups.length === 0) {
+    box.append(el("div", "bm-dim", "No pages, no scrolls."));
+    return;
   }
-  if (view.scrolls.length > 0) {
-    const col = el("div", "bm-book-col");
-    col.append(
-      el("div", "bm-book-school", "Scrolls"),
-      ...view.scrolls.map((p) => entryNode(p, onPick)),
+  const chips = el("div", "bm-book-chips");
+  const grid = el("div", "bm-book-grid");
+  const detail = el("div", "bm-book-detail");
+  let filter = "all";
+  let shownTile: HTMLElement | null = null;
+  const fill = (): void => {
+    grid.replaceChildren();
+    shownTile = null;
+    const order = bookOrder(groups, filter);
+    for (const t of order) {
+      const show = (tile: HTMLElement): void => {
+        if (shownTile === tile) return;
+        shownTile?.classList.remove("bm-shown");
+        tile.classList.add("bm-shown");
+        shownTile = tile;
+        pageDetail(detail, t);
+      };
+      const tile = pageTile(t, show, onPick);
+      grid.append(tile);
+      if (shownTile === null) show(tile);
+    }
+    for (const c of chips.children)
+      c.classList.toggle(
+        "bm-on",
+        (c as HTMLElement).dataset["group"] === filter,
+      );
+  };
+  const chip = (key: string, label: string, colour: string, n: number) => {
+    const c = el("button", "bm-book-chip", label);
+    c.append(el("span", "bm-book-chip-n", String(n)));
+    c.type = "button";
+    c.dataset["group"] = key;
+    c.style.setProperty("--school", colour);
+    c.addEventListener("click", () => {
+      filter = key;
+      fill();
+    });
+    chips.append(c);
+  };
+  if (groups.length > 1)
+    chip(
+      "all",
+      "All",
+      "#c9a227",
+      groups.reduce((n, g) => n + g.entries.length, 0),
     );
-    cols.append(col);
-  }
-  if ((view.items ?? []).length > 0) {
-    const col = el("div", "bm-book-col");
-    col.append(
-      el("div", "bm-book-school", "Items"),
-      ...(view.items ?? []).map((p) => entryNode(p, onPick)),
-    );
-    cols.append(col);
-  }
-  if (view.creature && view.creature.pages.length > 0) {
-    const col = el("div", "bm-book-col");
-    col.append(
-      el("div", "bm-book-school", `${view.creature.name}: own pages`),
-      ...view.creature.pages.map((p) => entryNode(p, onPick)),
-    );
-    cols.append(col);
-  }
-  if (cols.childElementCount === 0)
-    cols.append(el("div", "bm-dim", "No pages, no scrolls."));
-  box.append(cols);
+  for (const g of groups) chip(g.key, g.label, g.colour, g.entries.length);
+  box.append(chips, grid, detail);
+  fill();
 }
 
 export interface CastPanelModel {

@@ -43,6 +43,7 @@ import {
   spellDef,
   targetSteps,
 } from "../../core/magic/index.ts";
+import { ICON_FRAMES } from "../../assets/icons.ts";
 import { chainLines } from "./grammar.ts";
 import { creatureName } from "./preview.ts";
 
@@ -54,13 +55,16 @@ export const SCHOOL_NAMES: Readonly<Record<School, string>> = {
   storm: "Storm",
 };
 
-/** Placeholder school colours until the icon bead (bzc.17) lands. */
+/**
+ * School colours: the spell icons' frame colours (docs/art/classes/icons.md),
+ * so a book's chips and tile edges match the frames (bead bzc.63).
+ */
 export const SCHOOL_COLOURS: Readonly<Record<School, string>> = {
-  bloom: "#6fae4f",
-  accord: "#d9b44a",
-  clock: "#5a8fcf",
-  hush: "#8a6bb8",
-  storm: "#d0643c",
+  bloom: ICON_FRAMES.bloom.colour,
+  accord: ICON_FRAMES.accord.colour,
+  clock: ICON_FRAMES.clock.colour,
+  hush: ICON_FRAMES.hush.colour,
+  storm: ICON_FRAMES.storm.colour,
 };
 
 export type EntryStatus =

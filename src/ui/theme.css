@@ -445,31 +445,11 @@ button:disabled .gm-kbd {
   }
 }
 
-/* Spellbooks: pages turn in from the spine, one after another. */
-.bm-book-col,
-.gm-book-pagecol {
+/* Spellbooks: the page grid turns in from the spine (bead bzc.63). */
+.bm-book-grid,
+.gm-book-grid {
   transform-origin: left center;
   animation: gm-page 300ms steps(5) both;
-}
-
-.bm-book-col:nth-child(2),
-.gm-book-pagecol:nth-child(2) {
-  animation-delay: 50ms;
-}
-
-.bm-book-col:nth-child(3),
-.gm-book-pagecol:nth-child(3) {
-  animation-delay: 100ms;
-}
-
-.bm-book-col:nth-child(4),
-.gm-book-pagecol:nth-child(4) {
-  animation-delay: 150ms;
-}
-
-.bm-book-col:nth-child(n + 5),
-.gm-book-pagecol:nth-child(n + 5) {
-  animation-delay: 200ms;
 }
 
 @keyframes gm-page {

@@ -757,6 +757,12 @@ class BattleScreen {
       this.closeInfo();
       return;
     }
+    // The docked book leaves the field visible (bead bzc.63): a click on
+    // the field closes it rather than moving or attacking behind it.
+    if (!this.book.hidden) {
+      this.closeBook();
+      return;
+    }
     if (this.deploying !== null) {
       if (this.suppressClick) this.suppressClick = false;
       else this.deploying.click(this.hexOf(e));
