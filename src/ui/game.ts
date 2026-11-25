@@ -54,6 +54,7 @@ import type {
 } from "../core/game/index.ts";
 import { AdventureAi } from "../core/ai/index.ts";
 import { createBattleResolver } from "../core/battle/resolver.ts";
+import { isPassable } from "../core/map/types.ts";
 import type { MapObject, MapObjectKind } from "../core/map/types.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { getHeroClass } from "../data/hero.ts";
@@ -1187,9 +1188,7 @@ class GameScreen {
 
   private isPassable(x: number, y: number): boolean {
     const cell = this.state.map.cells[y * this.state.map.width + x];
-    return (
-      cell !== undefined && cell.obstacle === "none" && cell.terrain !== "water"
-    );
+    return cell !== undefined && isPassable(cell);
   }
 
   private readonly onResize = (): void => this.updateViewport();

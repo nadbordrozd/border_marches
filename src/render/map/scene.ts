@@ -36,7 +36,11 @@ import type {
 import { townArt } from "../../assets/town-art";
 import { artFor, placeArt } from "../../assets/object-art";
 import type { GameMap, MapObject } from "../../core/map/types";
-import { objectBounds, objectCells } from "../../core/map/types";
+import {
+  decorationCells as mapDecorationCells,
+  objectBounds,
+  objectCells,
+} from "../../core/map/types";
 import {
   TREE_SPECIES_DRIFT,
   TREE_SPECIES_WEIGHTS,
@@ -362,9 +366,34 @@ export function decorationEntry(p: PlacedDecoration): SceneEntry {
         dy: d.y,
       },
     ],
-    [],
+    d.def.passable ? [] : propShadows(d.asset.w, d.footX, d.footY),
     { cells: decorationCells(p) },
   );
+}
+
+/**
+ * A prop's soft shadow (bead bzc.72), like a settlement's on a smaller
+ * scale: a flat contact ellipse under its foot and a fainter cast one to
+ * the north-east (the sun is at the bottom left).
+ */
+export function propShadows(
+  width: number,
+  footX: number,
+  footY: number,
+): ShadowOp[] {
+  const rx = Math.max(10, width * 0.4);
+  const ry = Math.max(4, rx * 0.26);
+  const cy = footY - ry * 0.55;
+  return [
+    {
+      cx: footX + rx * 0.18,
+      cy: cy - ry * 0.35,
+      rx: rx * 1.05,
+      ry,
+      alpha: SHADOW_ALPHA / 2,
+    },
+    { cx: footX, cy, rx, ry, alpha: SHADOW_ALPHA * 0.8 },
+  ];
 }
 
 /** The entries of placed decorations, in draw order. */
@@ -376,16 +405,23 @@ export function decorationEntries(
 
 // --------------------------------------------------------------- terrain
 
-/** Row-major indices of every cell an object covers. */
+/**
+ * Row-major indices of every cell an object or one of the map's own
+ * decorations covers (bead bzc.72: doodads, spill trees and peaks keep off
+ * a decoration's cell as they do an object's).
+ */
 export function featuredCells(
   map: GameMap,
   objects: readonly MapObject[],
 ): Set<number> {
   const out = new Set<number>();
-  for (const obj of objects)
-    for (const [x, y] of objectCells(obj))
-      if (x >= 0 && y >= 0 && x < map.width && y < map.height)
-        out.add(y * map.width + x);
+  const add = (x: number, y: number): void => {
+    if (x >= 0 && y >= 0 && x < map.width && y < map.height)
+      out.add(y * map.width + x);
+  };
+  for (const obj of objects) for (const [x, y] of objectCells(obj)) add(x, y);
+  for (const d of map.decorations ?? [])
+    for (const [x, y] of mapDecorationCells(d)) add(x, y);
   return out;
 }
 

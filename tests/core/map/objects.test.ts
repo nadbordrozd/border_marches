@@ -245,15 +245,19 @@ describe("one-way waystones (stretch, bead bzc.32)", () => {
     expect(JSON.stringify(generateMap(2, { size: "M" }))).toBe(
       JSON.stringify(on),
     );
+    // Decorations go round every object, waystones too (bead bzc.72), so
+    // the two are compared before them.
+    const bare = generateMap(2, { size: "M", decorations: false });
     const off = generateMap(2, {
       size: "M",
+      decorations: false,
       config: { objects: { oneWayWaystones: { S: 0, M: 0, L: 0 } } },
     });
     expect(ways(off)).toEqual([]);
-    expect(JSON.stringify(off.cells)).toBe(JSON.stringify(on.cells));
+    expect(JSON.stringify(off.cells)).toBe(JSON.stringify(bare.cells));
     expect(JSON.stringify(off.objects)).toBe(
       JSON.stringify(
-        on.objects.filter((o) => typeOf(o) !== "one-way-waystone"),
+        bare.objects.filter((o) => typeOf(o) !== "one-way-waystone"),
       ),
     );
   });

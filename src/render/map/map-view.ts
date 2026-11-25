@@ -44,6 +44,7 @@ import { doodadSpecs } from "./doodads";
 import { tonePeak } from "./peak-paint";
 import { paintPeakUnder } from "./peaks";
 import type { PeakField } from "./peaks";
+import { mapDecorations } from "./decorations";
 import type { PlacedDecoration } from "./decorations";
 import {
   compareEntries,
@@ -126,7 +127,7 @@ export interface MapView {
    * Purely decorative pieces to draw (decorations.ts, bead bzc.48):
    * passable decorations and impassable props. Drawing only: the placer
    * keeps props off paths and makes their cells block movement. setMap
-   * clears them.
+   * resets them to the map's own (GameMap.decorations, bead bzc.72).
    */
   setDecorations(decorations: readonly PlacedDecoration[]): void;
   setHeroes(heroes: readonly MapHero[]): void;
@@ -1082,7 +1083,7 @@ export function createMapView(
     setMap(next) {
       map = next;
       objects = next.objects;
-      decorationBodies = [];
+      decorationBodies = decorationEntries(mapDecorations(next));
       explored = null;
       fogChunks.clear();
       fadingFog = null;

@@ -19,7 +19,8 @@ import {
   type NamedMapDef,
 } from "../../data/named-maps.ts";
 import { OBJECT_TYPES } from "../../data/objectTypes.ts";
-import { generateMap } from "./generate.ts";
+import { decorateMap } from "./decorate.ts";
+import { corridorCells, generateMapWithInfo } from "./generate.ts";
 import {
   cellAt,
   cellIndex,
@@ -44,11 +45,21 @@ export function findNamedMap(id: string): NamedMapDef | undefined {
  * were re-authored on the denser generator of bead bzc.50).
  */
 export function generateNamedBase(def: NamedMapDef): GameMap {
-  return generateMap(def.seed, {
+  return generateNamedBaseWithInfo(def).map;
+}
+
+/** The base and its corridors; decorations come after the edits. */
+function generateNamedBaseWithInfo(def: NamedMapDef): {
+  map: GameMap;
+  corridors: number[];
+} {
+  const { map, info } = generateMapWithInfo(def.seed, {
     size: def.size,
     players: def.players,
     activePlayers: def.players,
+    decorations: false,
   });
+  return { map, corridors: corridorCells(info) };
 }
 
 /**
@@ -72,6 +83,9 @@ export function mapFingerprint(map: GameMap): string {
     feed(`|${o.id}:${o.kind}@${o.x},${o.y}:${JSON.stringify(o.blocked)}`);
     feed(JSON.stringify(o.data));
   }
+  // Decorations (bead bzc.72): absent on a base, so its hash is unchanged.
+  for (const d of map.decorations ?? [])
+    feed(`|${d.id}@${d.x},${d.y}:${d.variant}`);
   return h.toString(16).padStart(8, "0");
 }
 
@@ -227,7 +241,7 @@ function applyEdit(map: GameMap, edit: MapEdit, k: number): void {
 export function buildNamedMap(defOrId: NamedMapDef | string): GameMap {
   const def = typeof defOrId === "string" ? findNamedMap(defOrId) : defOrId;
   if (def === undefined) throw new Error(`no named map ${String(defOrId)}`);
-  const map = generateNamedBase(def);
+  const { map, corridors } = generateNamedBaseWithInfo(def);
   // Start towns carry their seat's recommended faction, so the map (and
   // its poster) draws each start in its faction's art; a game re-seats
   // them from the actual setup (newGame).
@@ -239,6 +253,9 @@ export function buildNamedMap(defOrId: NamedMapDef | string): GameMap {
     }
   }
   def.edits.forEach((edit, k) => applyEdit(map, edit, k));
+  // Decorations last, seeded from the map, round the edited objects too
+  // (bead bzc.72).
+  decorateMap(map, { corridors });
   const problems = validateMap(map);
   if (problems.length > 0) {
     throw new Error(`named map ${def.id}: ${problems.slice(0, 3).join("; ")}`);

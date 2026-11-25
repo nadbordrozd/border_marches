@@ -25,6 +25,8 @@
  * 8. objects  everything from the shared object table (src/data/mapObjects.ts):
  *             start kits, pocket treasure, zone fill, roads between towns,
  *             guards sized by the value they hold (gen/objects.ts)
+ * 9. decorations  passable decorations and impassable props, clear of
+ *             every way, object and corridor (decorate.ts)
  *
  * Every tunable number lives in {@link DEFAULT_GEN_CONFIG} (gen/config.ts).
  */
@@ -32,6 +34,7 @@ import type { GameMap, MapCell } from "./types.ts";
 import { DEFAULT_GEN_CONFIG } from "./gen/config.ts";
 import type { GenConfig, MapSize, PlayerCount } from "./gen/config.ts";
 import { at } from "./gen/grid.ts";
+import { decorateMap } from "./decorate.ts";
 import { buildRooms } from "./gen/rooms.ts";
 import { buildBorders, cutPasses } from "./gen/borders.ts";
 import {
@@ -66,6 +69,11 @@ export interface GenerateOptions {
   /** Called as each stage finishes, with its name (for profiling). */
   onStage?: (stage: string) => void;
   /**
+   * Place the decorations and props last (decorate.ts, bead bzc.72).
+   * Default true; a named map turns it off and decorates after its edits.
+   */
+  decorations?: boolean;
+  /**
    * Overrides of the default configuration, merged one level deep (each
    * given section replaces only the keys it names).
    */
@@ -87,6 +95,14 @@ export interface GenerateInfo {
   skipped: string[];
   /** Optional requests (fill, pocket prizes, rules) that found no site. */
   unplaced: number;
+}
+
+/** Row-major cells of every pass and gap corridor (kept clear of props). */
+export function corridorCells(info: {
+  passes: readonly PassInfo[];
+  gaps: readonly GapInfo[];
+}): number[] {
+  return [...info.passes, ...info.gaps].flatMap((p) => p.cells);
 }
 
 /** Merge overrides into the default configuration (one level deep). */
@@ -194,6 +210,10 @@ export function generateMapWithInfo(
     objects: st.objects,
     zones: Array.from(st.zone),
   };
+  if (options.decorations !== false) {
+    decorateMap(map, { corridors: corridorCells(st) });
+    lap("decorations");
+  }
   return {
     map,
     info: {

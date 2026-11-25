@@ -5,6 +5,7 @@
  * Coordinates: x is the column (0 = left), y is the row (0 = top, growing
  * down, as on screen). Cells are stored row-major: index = y * width + x.
  */
+import { decorationKind } from "../../data/decorations.ts";
 
 /** Ground terrain. Every cell has exactly one. */
 export type Terrain =
@@ -34,6 +35,12 @@ export interface MapCell {
   road: boolean;
   /** Deep water (water cells only; absent or false means shallow). */
   deep?: boolean;
+  /**
+   * An impassable decorative prop stands here (a boulder, a fallen log:
+   * one of {@link GameMap.decorations}, bead bzc.72): the cell blocks
+   * movement like a forest. Only on open land; absent means false.
+   */
+  prop?: boolean;
 }
 
 /**
@@ -144,6 +151,22 @@ export interface MapObjectData {
   "hero-start": { player: number };
 }
 
+/**
+ * A purely decorative piece (bead bzc.72): a passable decoration (a
+ * butterfly, a molehill) or an impassable prop (a boulder, a fallen log)
+ * of the catalogue in src/data/decorations.ts. A prop covers `cols` cells
+ * from (x, y) to the east and marks them {@link MapCell.prop}.
+ */
+export interface MapDecoration {
+  /** A decoration kind id (DECORATION_KINDS). */
+  id: string;
+  /** Its cell, or a prop's footprint's top-left (westmost) cell. */
+  x: number;
+  y: number;
+  /** Which look (wraps round the kind's looks). */
+  variant: number;
+}
+
 export interface GameMap {
   width: number;
   height: number;
@@ -153,6 +176,11 @@ export interface GameMap {
   objects: MapObject[];
   /** Optional zone id per cell (row-major), from the generator. */
   zones?: number[];
+  /**
+   * Decorations and props (bead bzc.72), placed after the objects
+   * (decorate.ts); absent on maps made before them.
+   */
+  decorations?: MapDecoration[];
 }
 
 /** A cell with default values: `{ terrain, obstacle: "none", road: false }`. */
@@ -226,11 +254,38 @@ export function neighbours8(
 }
 
 /**
- * Whether the ground of a cell can be walked on: not water, no obstacle.
- * Objects are separate: see {@link objectBlockedSet}.
+ * Whether the ground of a cell can be walked on: not water, no obstacle,
+ * no prop. Objects are separate: see {@link objectBlockedSet}.
  */
 export function isPassable(cell: MapCell): boolean {
-  return cell.terrain !== "water" && cell.obstacle === "none";
+  return (
+    cell.terrain !== "water" && cell.obstacle === "none" && cell.prop !== true
+  );
+}
+
+/** The cells a decoration covers: its own, or a prop's footprint. */
+export function decorationCells(d: MapDecoration): Array<[number, number]> {
+  const kind = decorationKind(d.id);
+  const cols = kind === undefined || kind.passable ? 1 : kind.cols;
+  const rows = kind === undefined || kind.passable ? 1 : kind.rows;
+  const out: Array<[number, number]> = [];
+  for (let dy = 0; dy < rows; dy++)
+    for (let dx = 0; dx < cols; dx++) out.push([d.x + dx, d.y + dy]);
+  return out;
+}
+
+/** The impassable prop covering (x, y), if any. */
+export function propAt(
+  map: GameMap,
+  x: number,
+  y: number,
+): MapDecoration | undefined {
+  if (cellAt(map, x, y)?.prop !== true) return undefined;
+  return map.decorations?.find(
+    (d) =>
+      decorationKind(d.id)?.passable === false &&
+      decorationCells(d).some(([cx, cy]) => cx === x && cy === y),
+  );
 }
 
 /** The entrance cell followed by the blocked cells of an object. */
@@ -303,6 +358,11 @@ export function validateMap(map: GameMap): string[] {
     }
     if (cell.road && !isPassable(cell))
       problems.push(`${at}: road on impassable`);
+    if (
+      cell.prop === true &&
+      (cell.terrain === "water" || cell.obstacle !== "none")
+    )
+      problems.push(`${at}: prop off open land`);
   });
 
   const ids = new Set<string>();
@@ -340,5 +400,49 @@ export function validateMap(map: GameMap): string[] {
       taken.set(i, obj.id);
     }
   }
+  problems.push(...decorationProblems(map, taken));
+  return problems;
+}
+
+/**
+ * Decorations: known kinds on open land; props on cells no object uses,
+ * off the roads, not overlapping, and exactly the cells marked `prop`.
+ */
+function decorationProblems(
+  map: GameMap,
+  taken: ReadonlyMap<number, string>,
+): string[] {
+  const problems: string[] = [];
+  const props = new Set<number>();
+  for (const d of map.decorations ?? []) {
+    const at = `decoration ${d.id} at (${d.x},${d.y})`;
+    const kind = decorationKind(d.id);
+    if (kind === undefined) {
+      problems.push(`${at}: unknown kind`);
+      continue;
+    }
+    for (const [x, y] of decorationCells(d)) {
+      const cell = cellAt(map, x, y);
+      if (cell === undefined) {
+        problems.push(`${at}: (${x},${y}) off the map`);
+        continue;
+      }
+      if (cell.terrain === "water" || cell.obstacle !== "none")
+        problems.push(`${at}: (${x},${y}) not open land`);
+      if (kind.passable) continue;
+      const i = cellIndex(map, x, y);
+      if (props.has(i)) problems.push(`${at}: overlaps a prop`);
+      props.add(i);
+      if (cell.road) problems.push(`${at}: on a road`);
+      const other = taken.get(i);
+      if (other !== undefined) problems.push(`${at}: overlaps ${other}`);
+    }
+  }
+  map.cells.forEach((cell, i) => {
+    if ((cell.prop === true) !== props.has(i)) {
+      const at = `cell (${i % map.width},${Math.floor(i / map.width)})`;
+      problems.push(`${at}: prop flag does not match the decorations`);
+    }
+  });
   return problems;
 }

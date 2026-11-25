@@ -406,7 +406,10 @@ describe("incremental terrain plan", () => {
     // - a full rebuild every FULL_EVERY steps and with everything taken (a
     //   wrong update is carried on by the next ones, so it is still there).
     const FULL_EVERY = 25;
+    // Decorated (bead bzc.72): its props and decorations stay featured
+    // through every take and return.
     const map = generateMap(12, { size: "S" });
+    expect(map.cells.some((c) => c.prop === true)).toBe(true);
     const all = map.objects.filter((o) => o.kind !== "buried");
     const chain = all.filter((o) => {
       const n = neighbours(map, o.x, o.y);

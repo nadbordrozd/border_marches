@@ -21,6 +21,7 @@ import {
   type MapObject,
   inBounds,
   isPassable,
+  objectCells,
 } from "../map/types.ts";
 
 export interface StartSite {
@@ -319,7 +320,16 @@ export function prepareStarts(map: GameMap, players: number): GameMap {
     }
     objects.push(...site);
   }
-  return { ...map, objects };
+  if (map.decorations === undefined) return { ...map, objects };
+  // A passable decoration under a new start's object goes (bead bzc.72;
+  // props block, so nothing is placed on them).
+  const taken = new Set<string>();
+  for (const o of objects)
+    for (const [x, y] of objectCells(o)) taken.add(`${x},${y}`);
+  const decorations = map.decorations.filter(
+    (d) => !taken.has(`${d.x},${d.y}`),
+  );
+  return { ...map, objects, decorations };
 }
 
 function must0(obj: MapObject | undefined): { x: number; y: number } {

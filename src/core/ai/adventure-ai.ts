@@ -1813,8 +1813,7 @@ export class AdventureAi implements PlayerController {
             const j = ny * w + nx;
             if (reach.has(j)) continue;
             const cell = state.map.cells[j];
-            if (cell === undefined || cell.terrain === "water") continue;
-            if (cell.obstacle !== "none") continue;
+            if (cell === undefined || !isPassable(cell)) continue;
             const why = ctx.objectBlocked.has(j)
               ? "object"
               : ctx.monsterAt.has(j)

@@ -5,7 +5,9 @@
 import { calendar } from "../core/game/progression.ts";
 import { pickupInfo } from "../core/game/newGame.ts";
 import type { GameState } from "../core/game/types.ts";
+import { propAt } from "../core/map/types.ts";
 import type { MapObject, Terrain } from "../core/map/types.ts";
+import { decorationKind } from "../data/decorations.ts";
 import { describeObject, objectName } from "../core/game/sites.ts";
 import { objectTypeOf } from "../core/game/site-state.ts";
 import {
@@ -241,6 +243,10 @@ export function describeCell(
   }
   const cell = map.cells[y * map.width + x];
   if (cell === undefined) return null;
+  // An impassable prop (bead bzc.72): its name, its line, and that it blocks.
+  const prop = propAt(map, x, y);
+  const kind = prop === undefined ? undefined : decorationKind(prop.id);
+  if (kind !== undefined) return `${kind.name}\n${kind.text}\nBlocks the way.`;
   if (cell.obstacle === "mountain") return "Mountains";
   if (cell.obstacle === "forest")
     return `${TERRAIN_NAMES[cell.terrain]} forest`;

@@ -6,8 +6,10 @@ import { describe, expect, it } from "vitest";
 import { CELL_PX } from "../../src/assets/manifest";
 import { DECORATIONS } from "../../src/assets/decorations";
 import { SEAT_PX } from "../../src/assets/object-art";
+import { generateMap } from "../../src/core/map/generate";
 import {
   decorationCells,
+  mapDecorations,
   placeDecoration,
 } from "../../src/render/map/decorations";
 import { decorationShowcase } from "../../src/render/map/decoration-showcase";
@@ -15,6 +17,7 @@ import {
   compareEntries,
   decorationEntries,
   decorationEntry,
+  featuredCells,
 } from "../../src/render/map/scene";
 
 const CELL = CELL_PX;
@@ -100,5 +103,43 @@ describe("decoration showcase", () => {
         expect(y).toBeLessThan(map.height);
       }
     expect(map.cells).toHaveLength(map.width * map.height);
+  });
+});
+
+describe("the map's own decorations (bzc.72)", () => {
+  const map = generateMap(7, { size: "S" });
+  const placed = mapDecorations(map);
+
+  it("draws every decoration of the map, passable ones inside their cell", () => {
+    expect(placed).toHaveLength(map.decorations?.length ?? -1);
+    expect(placed.length).toBeGreaterThan(10);
+    for (const p of placed) {
+      const d = placeDecoration(p);
+      if (!d.def.passable) {
+        expect(p.at).toBeUndefined();
+        continue;
+      }
+      expect(d.footX).toBeGreaterThan(p.x * CELL + 16);
+      expect(d.footX).toBeLessThan((p.x + 1) * CELL - 16);
+      expect(d.footY).toBeGreaterThan(p.y * CELL + CELL / 3);
+      expect(d.footY).toBeLessThan((p.y + 1) * CELL - 8);
+    }
+    expect(mapDecorations(map)).toEqual(placed);
+  });
+
+  it("gives props a soft shadow, passable ones none", () => {
+    for (const p of placed) {
+      const def = DECORATIONS.find((d) => d.id === p.id);
+      expect(decorationEntry(p).shadows.length > 0).toBe(
+        def?.passable === false,
+      );
+    }
+  });
+
+  it("keeps doodads and spill trees off decoration cells (featured)", () => {
+    const featured = featuredCells(map, map.objects);
+    for (const p of placed)
+      for (const [x, y] of decorationCells(p))
+        expect(featured.has(y * map.width + x)).toBe(true);
   });
 });

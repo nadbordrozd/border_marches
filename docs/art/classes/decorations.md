@@ -77,11 +77,39 @@ patches, stones, mushroom pairs, ferns, palms, small logs, tumbleweed, the
 cattle skull, cacti, rocks, the small crater, stumps, bones, ash, twigs):
 `tests/assets/decorations.test.ts` checks no id equals a doodad kind.
 
-Nothing places them yet: the renderer draws a list handed to
-`MapView.setDecorations` (`src/render/map/decorations.ts`); map generation
-and the named maps get them in a later bead, which also makes the props'
-cells block movement. `?view=map&map=decorations` shows every look on each
-ground beside a hero.
+`?view=map&map=decorations` shows every look on each ground beside a hero.
+
+## Placement (bead bzc.72)
+
+The art-free kinds (id, name, line, grounds, passable, footprint, number of
+looks) live in `src/data/decorations.ts`, so the map code can place them;
+`src/assets/decorations.ts` adds the sprites. `src/core/map/decorate.ts`
+places them last on every map (generated maps after their objects, named
+maps after their edits), seeded from the map: `GameMap.decorations` lists
+them and each prop cell carries `MapCell.prop`, which `isPassable` reads, so
+pathfinding, the AI and every reach check treat a prop as a wall (also on
+the Green Road). They are saved with the map. `MapView.setMap` draws the
+map's own decorations; a passable one stands on a point of its cell picked
+by a hash of the cell. Their cells count as featured, so doodads and spill
+trees keep off them. Props get a soft contact and cast shadow.
+
+Rules (orchestrator calls under "decide yourself"; tunables in
+`DECORATE`):
+
+- Passable: about 7 per 100 open cells, in clusters of one to three (one
+  kind or a little mix of the ground's), never on a road, an object, a pass
+  or gap corridor, beside a pickup or artifact (no loot look-alikes) or in a
+  town's yard.
+- Props: about 2.6 per 100 open cells, three cells apart. Half in place of
+  an edge tree with open ground to its south (a wall stays a wall, so
+  movement is unchanged; the wood keeps its outline: no lone or
+  corner-joined trees). The rest on open ground, mostly against forest and
+  rock: two cells from every entrance (off approaches and zones of
+  control), three from a town's entrance, off roads and corridors, never
+  leaving a way less than two cells across, the open cells round it joined
+  close by, and a way round it at most one step dearer. Two-cell props are
+  tried first along the woods.
+- Hovering a prop names it with its line and "Blocks the way."
 
 ## Geometry
 

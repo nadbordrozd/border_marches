@@ -56,7 +56,7 @@ import type {
   ResourceId,
 } from "../../data/types.ts";
 import type { School } from "../battle/types.ts";
-import type { MapObject } from "../map/types.ts";
+import { isPassable, type MapObject } from "../map/types.ts";
 import { createRng, deriveSeed } from "../rng.ts";
 import { canCarry, giveArtifact, giveScroll } from "./artifacts.ts";
 import { maxMana, schoolRank, vowRestrictions } from "./effects.ts";
@@ -1466,12 +1466,7 @@ function freePrisoner(
     if (x < 0 || y < 0 || x >= state.map.width || y >= state.map.height)
       continue;
     const cell = state.map.cells[y * state.map.width + x];
-    if (
-      cell === undefined ||
-      cell.terrain === "water" ||
-      cell.obstacle !== "none"
-    )
-      continue;
+    if (cell === undefined || !isPassable(cell)) continue;
     if (heroAt(state, x, y) !== undefined) continue;
     if (
       state.map.objects.some(

@@ -1,9 +1,10 @@
 /**
  * Purely decorative map pieces (bead border_marches-bzc.48): where a placed
  * decoration of the catalogue (src/assets/decorations.ts) is drawn and its
- * scene entry. Nothing here decides where decorations go: a placer (map
- * generation or a named map, a later bead) hands the view a list of
- * {@link PlacedDecoration}s through MapView.setDecorations.
+ * scene entry. Nothing here decides where decorations go: the map's own
+ * (GameMap.decorations, placed by src/core/map/decorate.ts, bead bzc.72)
+ * come with MapView.setMap through {@link mapDecorations}; a test page may
+ * hand the view others through MapView.setDecorations.
  *
  * - A passable decoration (a butterfly, a molehill) stands with its foot on
  *   a ground point inside its cell, by default the cell centre; heroes and
@@ -18,6 +19,8 @@ import type { Point } from "../../assets/manifest";
 import { decorationById, decorationLook } from "../../assets/decorations";
 import type { DecorationAsset, DecorationDef } from "../../assets/decorations";
 import { SEAT_PX } from "../../assets/object-art";
+import type { GameMap } from "../../core/map/types";
+import { hashUnit } from "./hash";
 
 const CELL = CELL_PX;
 
@@ -66,6 +69,25 @@ export function placeDecoration(p: PlacedDecoration): DecorationDraw {
     footX,
     footY,
   };
+}
+
+/**
+ * The map's own decorations (GameMap.decorations, bead bzc.72) as placed
+ * decorations: a passable one stands on a point of its cell picked by a
+ * hash of the cell (off the centre, so a cluster does not line up on the
+ * grid); a prop on its footprint.
+ */
+export function mapDecorations(map: GameMap): PlacedDecoration[] {
+  return (map.decorations ?? []).map((d) => {
+    const def = decorationById(d.id);
+    if (def === undefined || !def.passable)
+      return { id: d.id, variant: d.variant, x: d.x, y: d.y };
+    const at = {
+      x: Math.round(CELL * (0.28 + 0.44 * hashUnit(d.x, d.y, 0xdec0))),
+      y: Math.round(CELL * (0.45 + 0.4 * hashUnit(d.x, d.y, 0xdec1))),
+    };
+    return { id: d.id, variant: d.variant, x: d.x, y: d.y, at };
+  });
 }
 
 /** The cells a placed decoration covers (a passable one: its own cell). */

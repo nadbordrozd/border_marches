@@ -250,11 +250,14 @@ describe("doodads", () => {
 
   it("decorates open ground deterministically", () => {
     const open = map.cells.filter(
-      (c) => c.terrain !== "water" && c.obstacle === "none",
+      (c, i) =>
+        c.terrain !== "water" && c.obstacle === "none" && !featured.has(i),
     ).length;
     // More objects, fewer doodads: this map was 40.4% decorated before the
     // generator placed drill yards and one-way waystones (bead bzc.32),
-    // 39.2% after, and is 32.1% on the denser maps of bead bzc.50.
+    // 39.2% after, and is 32.1% on the denser maps of bead bzc.50. Since
+    // bead bzc.72 the cells under objects and the map's own decorations
+    // (featured, kept bare) are left out of the open ground.
     expect(placed.length).toBeGreaterThan(open * 0.3);
     expect(placeDoodads(map, layout, featured)).toEqual(placed);
   });
