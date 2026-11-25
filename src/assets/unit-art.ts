@@ -45,6 +45,9 @@ export const CREATURE_ART: Readonly<Record<string, string>> = {
   boomshaman: "goblin-boomshaman",
   ogre: "goblin-ogre",
   "orc-warboss": "goblin-orc-warboss-giant",
+  // The MVP neutrals that are not faction units (src/data/neutrals.ts).
+  "orc-brute": "goblin-orc-brute",
+  troll: "goblin-troll",
   // Strays and caretakers (CONTENT_CREATURES.md section 1).
   bellhop: "stray-bellhop",
   "whipping-boy": "stray-whipping-boy",

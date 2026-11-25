@@ -41,9 +41,9 @@ describe("content icons", () => {
     );
     expect(counts).toEqual({
       spell: 60,
-      artifact: 84,
-      condition: 25,
-      ground: 7,
+      artifact: 85,
+      condition: 28,
+      ground: 8,
       skill: 24,
       feat: 28,
       vow: 12,
@@ -120,8 +120,30 @@ describe("content icons", () => {
     expect([breath.fallback, breath.frame]).toEqual([false, ICON_FRAMES.hush]);
   });
 
+  it("draws the Realm's conditions, Sweets and the Keystone with their own icons", () => {
+    // bead border_marches-9is: these drew the fallback swirl, mound or chest.
+    for (const [kind, id] of [
+      ["condition", "sworn"],
+      ["condition", "challenged"],
+      ["condition", "demo-guard"],
+      ["ground", "sweets"],
+      ["artifact", "keystone"],
+    ] as const)
+      expect({ kind, id, fallback: iconFor(kind, id).fallback }).toEqual({
+        kind,
+        id,
+        fallback: false,
+      });
+    for (const id of ["sworn", "challenged", "demo-guard"]) {
+      const small = iconFor("condition", id, 16);
+      expect([id, small.asset.w, small.fallback]).toEqual([id, 16, false]);
+    }
+    expect(iconFor("condition", "sworn").frame).toBe(ICON_FRAMES.accord);
+    expect(iconFor("artifact", "keystone").frame).toBe(ICON_FRAMES.marvel);
+  });
+
   it("has 16 px overlays for conditions and 32 px elsewhere", () => {
-    expect(SMALL_ICON_ASSETS).toHaveLength(25);
+    expect(SMALL_ICON_ASSETS).toHaveLength(28);
     const small = iconFor("condition", "Burning", 16);
     expect([small.asset.w, small.fallback]).toEqual([16, false]);
     expect(iconFor("skill", "banner", 16).asset.w).toBe(32);

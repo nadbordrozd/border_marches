@@ -6,7 +6,6 @@ import { namedHeroPortrait, unitArt } from "../../assets/unit-art.ts";
 import {
   FOREST_SETS,
   GROUND_TEXTURES,
-  UNIT_ASSETS,
   assetByKey,
   assetUrl,
   mountainPieces,
@@ -16,7 +15,6 @@ import type {
   ImageAsset,
   UnitAsset,
 } from "../../assets/manifest.ts";
-import { CREATURES, isCreatureId } from "../../data/creatures.ts";
 import type { Terrain } from "../../core/map/types.ts";
 import { conditionKindIds, hexIndex } from "../../core/battle/index.ts";
 import type { Hex } from "../../core/battle/index.ts";
@@ -63,9 +61,9 @@ const conditionIcons = new Map<string, CanvasImageSource>();
 
 /**
  * A condition's 16 px badge icon (`iconFor("condition", kind, 16)`), or
- * null while it loads; the first call starts the load. A kind without a
- * 16 px icon (Sworn and Challenged until bead border_marches-9is, demo
- * kinds) gets the condition fallback, reduced once to 16 px.
+ * null while it loads; the first call starts the load. Every condition kind
+ * has its own 16 px take; an unknown kind gets the condition fallback, which
+ * the badge draws into its 16 px square.
  */
 export function conditionIcon(kind: string): CanvasImageSource | null {
   const have = conditionIcons.get(kind);
@@ -83,23 +81,10 @@ async function loadConditionIcon(kind: string): Promise<void> {
   const ref = iconFor("condition", kind, 16);
   try {
     const img = await loadImage(ref.asset);
-    conditionIcons.set(kind, ref.asset.w === 16 ? img : reduceTo16(img));
+    conditionIcons.set(kind, img);
   } catch {
     // Missing file: the badge plate is drawn empty.
   }
-}
-
-/** A 32 px fallback drawn once at 16 px (smoothed, so it stays legible). */
-function reduceTo16(img: HTMLImageElement): CanvasImageSource {
-  const c = document.createElement("canvas");
-  c.width = 16;
-  c.height = 16;
-  const ctx = c.getContext("2d");
-  if (!ctx) return img;
-  ctx.imageSmoothingEnabled = true;
-  ctx.imageSmoothingQuality = "high";
-  ctx.drawImage(img, 0, 0, 16, 16);
-  return c;
 }
 
 /** Loads the badge icons of these condition kinds now. */
@@ -118,6 +103,7 @@ export const GROUND_ICON_KINDS = [
   "fire",
   "brambles",
   "mist",
+  "sweets",
 ] as const;
 
 function baseUrl(): string {
@@ -160,17 +146,12 @@ export function battleGround(terrain: Terrain): GroundTerrain {
   return terrain === "water" ? "grass" : terrain;
 }
 
-const UNIT_BY_KEY = new Map(UNIT_ASSETS.map((u) => [u.key, u]));
-
 /**
- * The sprite of a creature id: its data sprite, else the art lookup
- * (summons such as the Shade, and the placeholder for unknown ids).
+ * The sprite of a creature id. Kept for callers of the battle module: it is
+ * {@link unitArt}, the one lookup for every screen (bead border_marches-9is),
+ * whose table agrees with each creature's data sprite (tests/assets).
  */
-export function unitAssetFor(creatureId: string): UnitAsset | null {
-  if (isCreatureId(creatureId)) {
-    const own = UNIT_BY_KEY.get(CREATURES[creatureId].sprite);
-    if (own) return own;
-  }
+export function unitAssetFor(creatureId: string): UnitAsset {
   return unitArt(creatureId);
 }
 
@@ -228,8 +209,7 @@ export async function loadBattleArt(
   ]);
   const unitEntries = await Promise.all(
     [...new Set(creatureIds)].map(async (id) => {
-      const asset = unitAssetFor(id);
-      if (!asset) return null;
+      const asset = unitArt(id);
       const img = await loadImage(asset);
       return [id, { img, asset }] as const;
     }),
@@ -243,13 +223,11 @@ export async function loadBattleArt(
   );
   const portraits = new Map<string, string>();
   for (const id of creatureIds) {
-    const asset = unitAssetFor(id);
-    if (asset) {
-      portraits.set(id, assetUrl(assetByKey(asset.portrait), baseUrl()));
-    }
+    const asset = unitArt(id);
+    portraits.set(id, assetUrl(assetByKey(asset.portrait), baseUrl()));
   }
   const units = new Map<string, { img: HTMLImageElement; asset: UnitAsset }>();
-  for (const e of unitEntries) if (e) units.set(e[0], e[1]);
+  for (const [id, entry] of unitEntries) units.set(id, entry);
   await iconsP;
   return {
     ground: await groundP,

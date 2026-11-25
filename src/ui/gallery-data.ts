@@ -30,7 +30,7 @@ import { FEAT_LIST } from "../data/feats.ts";
 import { NEUTRAL_CREATURE_IDS } from "../data/neutrals.ts";
 import { OBJECT_TYPES, OBJECT_TYPE_IDS } from "../data/objectTypes.ts";
 import { SKILLS, type SkillDef } from "../data/skills.ts";
-import { STRAY_CREATURE_IDS, STRAY_HOMES } from "../data/strays.ts";
+import { STRAY_CREATURE_IDS } from "../data/strays.ts";
 import type { CreatureDef, FactionId } from "../data/types.ts";
 import { SPELL_ICON_ALIASES, iconFor, type IconKind } from "../assets/icons.ts";
 import { RESOURCE_ITEMS, RESOURCE_PICKUPS } from "../assets/manifest.ts";
@@ -50,7 +50,6 @@ import {
   namedHeroPortrait,
   unitArt,
 } from "../assets/unit-art.ts";
-import { unitAssetFor } from "../render/battle/assets.ts";
 
 export type GalleryTabId =
   | "creatures"
@@ -166,10 +165,9 @@ function section(
 // ------------------------------------------------------------ creatures
 
 function creatureEntry(def: CreatureDef): GalleryEntry {
-  // The sprite the battle and the map draw: the data sprite, else the art
-  // lookup (src/render/battle/assets.ts).
-  const art = unitAssetFor(def.id) ?? unitArt(def.id);
-  const own = art.key === def.sprite || hasUnitArt(def.id);
+  // The sprite every screen draws (unitArt, src/assets/unit-art.ts).
+  const art = unitArt(def.id);
+  const own = hasUnitArt(def.id);
   return {
     kind: "creature",
     id: def.id,
@@ -209,13 +207,7 @@ function creatureSections(): GallerySection[] {
   const out: GallerySection[] = [];
   for (const f of playableFactions())
     out.push(...section(f.name, take(rosterOf(f.id))));
-  const strays = STRAY_CREATURE_IDS.filter(
-    (id) => STRAY_HOMES[id].dwelling !== "summon",
-  );
-  const summons = STRAY_CREATURE_IDS.filter(
-    (id) => STRAY_HOMES[id].dwelling === "summon",
-  );
-  out.push(...section("Strays and caretakers", take(defs(strays))));
+  out.push(...section("Strays and caretakers", take(defs(STRAY_CREATURE_IDS))));
   const summoned = Object.values(SUMMONED_CREATURES)
     .filter((c) => !shown.has(c.id))
     .map((c): GalleryEntry => {
@@ -229,7 +221,7 @@ function creatureSections(): GallerySection[] {
         artNote: hasUnitArt(c.id) ? null : "No sprite of its own: placeholder.",
       };
     });
-  out.push(...section("Summons", [...take(defs(summons)), ...summoned]));
+  out.push(...section("Summons", summoned));
   out.push(
     ...section("Other neutrals", take(defs(NEUTRAL_CREATURE_IDS).sort(byTier))),
   );

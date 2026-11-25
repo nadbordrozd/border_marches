@@ -57,13 +57,14 @@ describe("catalogue coverage", () => {
   });
 
   it("artifacts: all 80 kinds and 4 Marvels, ids from names, with values", () => {
-    expect(ids("artifact")).toHaveLength(84);
-    // Plus the Keystone, a relic of the map objects (not a catalogue kind).
+    // The 84 catalogue kinds plus the Keystone, a relic of the map objects
+    // (not a catalogue kind) with an icon by its game id (bead 9is).
+    expect(ids("artifact")).toHaveLength(85);
     expect(ARTIFACT_LIST.filter((a) => a.kind !== "relic")).toHaveLength(84);
     for (const id of ids("artifact")) {
       const def = findArtifact(id);
       expect(def, id).toBeDefined();
-      expect(contentId(def!.name)).toBe(id);
+      expect(def!.kind === "relic" ? def!.id : contentId(def!.name)).toBe(id);
       expect(def!.value).toBeGreaterThan(0);
     }
     const grade = (g: string) =>

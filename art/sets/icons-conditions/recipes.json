@@ -169,6 +169,58 @@
       ],
       "subject": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a charcoal grey cat with big bright yellow eyes and a light grey chest, arching its back; (2) a fat crimson red leech with a pink belly and a round sucker mouth.",
       "notes": "Re-roll: the conditions-c black cats nearly vanished on a dark panel; a lighter leech for the same reason."
+    },
+    {
+      "id": "conditions-e",
+      "concept": "sworn challenged demo-guard ground:sweets",
+      "width": 32,
+      "height": 32,
+      "seed": 17306,
+      "covers": [
+        "sworn",
+        "challenged",
+        "demo-guard",
+        "ground:sweets"
+      ],
+      "subject": "Subject: each image shows exactly one of these 4 things, each thing about equally often: (1) two crossed silver swords with gold hilts, tied together where they cross by a bright blue ribbon bow; (2) a steel knight's gauntlet glove lying thrown down on its side, fingers spread, with a blue cuff; (3) a silver knight's helmet with a tall blue plume; (4) a small heap of wrapped candies in pink, yellow and mint green twisted wrappers.",
+      "notes": "Bead border_marches-9is: Sworn and Challenged (the Realm's Accord conditions), the demo Guarded condition (id demo-guard) and the Sweets remains ground had the fallback swirl."
+    },
+    {
+      "id": "conditions-e-16",
+      "concept": "sworn challenged demo-guard",
+      "width": 16,
+      "height": 16,
+      "seed": 17314,
+      "covers": [
+        "sworn",
+        "challenged",
+        "demo-guard"
+      ],
+      "subject": "Subject: each image shows exactly one of these 3 things, each thing about equally often: (1) two crossed swords with a blue ribbon; (2) a steel gauntlet glove; (3) a silver helmet with a blue plume.",
+      "fragments": [
+        "style",
+        "light-bottom-left",
+        "class-symbol-16"
+      ],
+      "notes": "Bead border_marches-9is: 16 px battle badges of Sworn, Challenged and Guarded, made at 16 px (never a downscale)."
+    },
+    {
+      "id": "conditions-f-16",
+      "concept": "challenged challenged",
+      "width": 16,
+      "height": 16,
+      "seed": 17315,
+      "covers": [
+        "challenged",
+        "challenged"
+      ],
+      "subject": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a steel gauntlet glove with a bright blue cuff, fingers spread, tilted as if thrown down; (2) a grey metal gauntlet with a wide blue cuff, lying on its side.",
+      "fragments": [
+        "style",
+        "light-bottom-left",
+        "class-symbol-16"
+      ],
+      "notes": "Bead border_marches-9is re-roll: the conditions-e-16 gauntlets were all-grey upright fists without the blue cuff of the 32 px Challenged icon, so the badge and the icon did not match."
     }
   ],
   "outputs": [
@@ -513,6 +565,48 @@
       "from": "grounds-a#54",
       "width": 32,
       "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/sworn.png",
+      "from": "conditions-e#34",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/challenged.png",
+      "from": "conditions-e#6",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions/demo-guard.png",
+      "from": "conditions-e#9",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/ground/sweets.png",
+      "from": "conditions-e#15",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions-16/sworn.png",
+      "from": "conditions-e-16#48",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/demo-guard.png",
+      "from": "conditions-e-16#61",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions-16/challenged.png",
+      "from": "conditions-f-16#18",
+      "width": 16,
+      "height": 16
     }
   ]
 }

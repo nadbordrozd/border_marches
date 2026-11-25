@@ -80,6 +80,21 @@ for (const line of arts.slice(at(arts, "## 5. Marvels"), at(arts, "## 6. Consuma
   if (match) add("artifact", match[1].trim(), "marvel", { grade: "marvel", slot: null });
 }
 
+// Content outside those tables (bead border_marches-9is), by its game id:
+// the Realm's two conditions (FACTION_HUMANS), the demo Guarded condition
+// of the battle grammar view (src/ui/battle/debug.ts), the Sweets remains
+// (RULES_V2) and the Keystone relic (CONTENT_MAP_OBJECTS 4), framed like
+// the Marvels as the hero screen colours it.
+const addId = (kind, id, name, frame, extra = {}) => {
+  if (catalogue[kind][id]) throw new Error(`duplicate ${kind} ${id}`);
+  catalogue[kind][id] = { name, frame, ...extra };
+};
+addId("condition", "sworn", "Sworn", "accord", { school: "accord", polarity: "boon" });
+addId("condition", "challenged", "Challenged", "accord", { school: "accord", polarity: "bane" });
+addId("condition", "demo-guard", "Guarded", "accord", { school: "accord", polarity: "boon", demo: true });
+addId("ground", "sweets", "sweets", null, { school: null, class: "remains" });
+addId("artifact", "keystone", "The Keystone", "marvel", { grade: "marvel", slot: null, relic: true });
+
 for (const s of ["Attack", "Defense", "Power", "Lore"]) add("stat", s, null);
 for (const s of ["Bloom", "Accord", "Clock", "Hush", "Storm"]) add("school", s, school(s));
 

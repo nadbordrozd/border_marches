@@ -29,12 +29,6 @@ import type {
 
 registerSpells();
 
-/**
- * Condition kinds whose 16 px icon is still the fallback: the art gap is
- * bead border_marches-9is. Their badge reduces the 32 px fallback.
- */
-const ART_GAPS = new Set(["sworn", "challenged"]);
-
 function pip(
   kind: string,
   over: Partial<{ bane: boolean; hold: boolean; link: string | null }> = {},
@@ -51,10 +45,12 @@ function pip(
 }
 
 describe("condition badges (UI2-04)", () => {
-  it("every condition kind in the engine has a registry icon", () => {
+  it("every condition kind in the engine has its own 16 px icon", () => {
     const ids = conditionKindIds();
     // The humans' link conditions and the spells' kinds are registered.
-    expect(ids).toEqual(expect.arrayContaining(["sworn", "venomed", "warded"]));
+    expect(ids).toEqual(
+      expect.arrayContaining(["sworn", "challenged", "venomed", "warded"]),
+    );
     for (const id of ids) {
       expect(isKeyword(id), `keyword ${id}`).toBe(true);
       expect(keyword(id).icon, `keyword icon ${id}`).toEqual({
@@ -64,13 +60,12 @@ describe("condition badges (UI2-04)", () => {
       const ref = iconFor("condition", id, 16);
       const file = join("public", ref.asset.path);
       expect(existsSync(file), file).toBe(true);
-      if (ART_GAPS.has(id)) {
-        expect(ref.fallback, `${id} still a gap`).toBe(true);
-      } else {
-        expect(ref.fallback, `${conditionKind(id).name} has art`).toBe(false);
-        expect(ref.asset.w, `${id} 16 px`).toBe(16);
-      }
+      expect(ref.fallback, `${conditionKind(id).name} has art`).toBe(false);
+      expect(ref.asset.w, `${id} 16 px`).toBe(16);
     }
+    // The grammar demo's Guarded (src/ui/battle/debug.ts) has art too.
+    const guard = iconFor("condition", "demo-guard", 16);
+    expect([guard.fallback, guard.asset.w]).toEqual([false, 16]);
   });
 
   it("shows at most three badges, Holds, links, banes then boons, and +N", () => {

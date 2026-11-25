@@ -231,6 +231,16 @@ export const PICKS = {
         "scholars-bookmark": [22, "red ribbon bookmark with a gold tassel"],
       },
     },
+    // bead border_marches-9is
+    "relics-a": {
+      picks: {
+        keystone: [8, "wedge of carved sandstone with a gold gem: reads as a precious stone block at 1x"],
+      },
+      notes: {
+        ...Object.fromEntries([4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31, 36, 37, 38, 39, 44, 45, 46, 47, 52, 53, 54, 55, 60, 61, 62, 63].map((n) => [n, "gold-banded block reads as a bucket or a pot, not a stone"])),
+        ...Object.fromEntries([3, 11, 19, 27, 35, 43, 51, 59].map((n) => [n, "pale grey slab with a flame-shaped gem reads as a candle or a tombstone"])),
+      },
+    },
   },
   "icons-conditions": {
     "conditions-a": {
@@ -325,6 +335,28 @@ export const PICKS = {
         mist: [54, "grey mist wisps, visible on a light panel"],
       },
       notes: { 22: "white mist nearly vanishes on a light panel", 60: "white mist nearly vanishes on a light panel", 61: "white mist nearly vanishes on a light panel" },
+    },
+    // bead border_marches-9is
+    "conditions-e": {
+      picks: {
+        sworn: [34, "crossed swords tied by a big blue bow: an oath, not a fight; clear on dark"],
+        challenged: [6, "thrown steel gauntlet with spread fingers and a blue cuff"],
+        "demo-guard": [9, "knight's helmet with a blue plume, visor reads at 1x"],
+        "ground:sweets": [15, "compact heap of wrapped candies in three colours"],
+      },
+      notes: Object.fromEntries([0, 1, 3, 16, 18, 19, 32, 33, 49, 51].map((n) => [n, "crossed swords without the ribbon: a generic battle sign, not an oath"])),
+    },
+    "conditions-e-16": {
+      picks: {
+        sworn: [48, "crossed swords over a bold blue ribbon band: the clearest X at 16 px"],
+        "demo-guard": [61, "helmet with a blue plume, crisp visor slit at 16 px"],
+      },
+      notes: Object.fromEntries([3, 11, 19, 27, 35, 43, 51, 12, 20, 28, 36, 44, 52, 50].map((n) => [n, "all-grey upright gauntlet without the blue cuff of the 32 px Challenged icon (re-rolled as conditions-f-16)"])),
+    },
+    "conditions-f-16": {
+      picks: {
+        challenged: [18, "open gauntlet with a blue cuff, tilted like the 32 px icon; fingers read at 16 px"],
+      },
     },
   },
   "icons-heroes": {

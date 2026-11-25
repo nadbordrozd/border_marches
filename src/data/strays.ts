@@ -2,7 +2,9 @@
  * Strays and caretakers (docs/design/CONTENT_CREATURES.md, bead bzc.13):
  * the neutral roster of v0.2. They guard the map (replacing the MVP
  * neutrals as guards), live in stray huts and caretaker lodges. The two summons
- * (Seedling, Shade) are magic's (src/core/magic/kinds.ts).
+ * of CONTENT_CREATURES section 4 (Seedling, Shade) are not in this roster or
+ * in CREATURES: only magic makes them, so they live in SUMMONED_CREATURES
+ * (src/core/magic/kinds.ts); their art is in src/assets/unit-art.ts.
  *
  * Stats are CONTENT_CREATURES section 1; abilities (section 2) are battle
  * rules registered in src/core/battle/stray-abilities.ts under the ids in
@@ -23,7 +25,7 @@ export interface StrayHome {
   terrain: readonly Terrain[];
   /** Guard rings (GAME_DESIGN 8.3) it is used in, inclusive. */
   rings: readonly [number, number];
-  dwelling: "hut" | "lodge" | "wild" | "summon";
+  dwelling: "hut" | "lodge" | "wild";
   /** Weekly stock of its hut or lodge (0 for wild ones). */
   weekly: number;
   /** Hire cost in gold (FV x 1.5, rounded to 5). */
@@ -199,14 +201,14 @@ export const STRAY_HOMES: Readonly<Record<StrayCreatureId, StrayHome>> =
     ]),
   ) as Record<StrayCreatureId, StrayHome>;
 
-/** Every stray and caretaker in roster order (summons last). */
+/** Every stray and caretaker in roster order (no summons: see the header). */
 export const STRAY_CREATURE_IDS: readonly StrayCreatureId[] = ROWS.map(
   (r) => r[0],
 );
 
-/** Strays and caretakers that guard the map (not the summons), by FV. */
+/** Strays and caretakers that guard the map (all of them), by FV. */
 export const GUARD_CREATURE_IDS: readonly StrayCreatureId[] =
-  STRAY_CREATURE_IDS.filter((id) => STRAY_HOMES[id].dwelling !== "summon");
+  STRAY_CREATURE_IDS;
 
 /** The caretaker of each school (the banks' guards). */
 export const CARETAKER_OF: Readonly<Record<CaretakerSchool, StrayCreatureId>> =

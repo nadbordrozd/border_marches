@@ -3805,5 +3805,428 @@
         "height": 32
       }
     ]
+  },
+  "relics-a": {
+    "id": "relics-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "9be7ed0e-77ec-4574-9807-6c6b485134d6",
+    "submittedAt": "2026-11-25T19:06:23.749Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) the keystone of a stone arch: one wedge-shaped block of pale grey carved stone, wider at the top than the bottom, with a glowing gold gem set in its face; (2) a wedge-shaped sandstone keystone block, wider at the top, banded with gold and set with a glowing blue gem."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17210,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) the keystone of a stone arch: one wedge-shaped block of pale grey carved stone, wider at the top than the bottom, with a glowing gold gem set in its face; (2) a wedge-shaped sandstone keystone block, wider at the top, banded with gold and set with a glowing blue gem. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-25T19:08:22.456Z",
+    "usageUsd": 0.08221974534458584,
+    "candidates": [
+      {
+        "file": "relics-a-0.png",
+        "sha256": "07f7ba2d223de521db72dfab1ed66f457b6ed4039d88f20d42e25e66d1a53f5e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-1.png",
+        "sha256": "a0c7bc643bd386a1c6a572f394c5f138279afa4e7024f82a4467638564cb2c41",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-2.png",
+        "sha256": "660e54922c27429a476418c52a55afcb46e09cc6473a00e5becba7cd56c7a412",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-3.png",
+        "sha256": "ec6ef3fd18bb7b7f0af62f58026e4c5bbc2fed6ed55299813b6838b1747af4e3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-4.png",
+        "sha256": "47aa6a6e3192a2cd56961821f4a508c310af8cc8f03a02e865f3a230cf7d2f93",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-5.png",
+        "sha256": "08f16b91003c12eb738ec5b8f379fc4520565fade2c5a5671f2367969dfad9e0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-6.png",
+        "sha256": "a5300f49f8c55225c3803be691b1a768d9b43cf167dec35736574d9cde05b1f4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-7.png",
+        "sha256": "23c45f50c63179ca2d6319b1b8ea348c8fb638a5c2e1a6064d33d74a833a294c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-8.png",
+        "sha256": "d22a2ea60bb46fc438dac53c6121e49ddfae682fb816d691f0fc7d5918d8b470",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-9.png",
+        "sha256": "46bd0f6666180fe7649bb9f6a3accc45872f981daf55f1ffd4d14c31b95fbd7c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-10.png",
+        "sha256": "2f866e70e15c20e6ce3cf36c6719ede7b5c8e738492a051042a21b06eb175029",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-11.png",
+        "sha256": "7d094d10142834c69c498c32013482580d53bbff3bdfec517dcd9066694939dc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-12.png",
+        "sha256": "0fc939df84f5865e7f4cb9002ab9819b0199f6126255335c5fb1365c0bdbfca9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-13.png",
+        "sha256": "403c5b92d6b7f3cf11620673c287b10fb45a10d86395bbd074237dd1eeee1b0d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-14.png",
+        "sha256": "641b5c7a157fa1040d7c120c1c11ec7003ec8c93be41b91bcf1e554109f67ead",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-15.png",
+        "sha256": "09194b76dc8c11e8b2e119b4b265c712039cbe5dba29d80b088ecedec530eb26",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-16.png",
+        "sha256": "9733661d4d6b637f8e4cd0f9ccc8477108b57e20b0520306a2082213eaa44fec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-17.png",
+        "sha256": "41d3734a38c84bfa530ea44edbb604c668d16d1d4e78bcf4e9865766d0d40248",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-18.png",
+        "sha256": "eefd4b2becc5ed292a47381cc01d498a2083b90b47c2a5430b40eff08ec022cd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-19.png",
+        "sha256": "3dd42f9855ad86ee1e0ad5e38901ecdfc07639309cc34bf8b1aab91da3977f7c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-20.png",
+        "sha256": "1c42b7dbadb78637ba2f3630f4a0ff31d1ba2e128ae2b0e6ea28726f20a46978",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-21.png",
+        "sha256": "03f38cdf72c1ea9b3dd2821f7271b3f4c9e661bf99f10e4b2ae1b902fd87c5eb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-22.png",
+        "sha256": "f2b1ce1942871067c8e9c81e8d5e3872a640cbd9bbd4313dd4322a0324e8f213",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-23.png",
+        "sha256": "562406785d122ae18a05df525bc7e8e6929afa2dd1c53416fe6494205532ea42",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-24.png",
+        "sha256": "37c37ba76af27d45057f62298c98596822d51cb2ebefc5949f6858991d20a4af",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-25.png",
+        "sha256": "0d4f9d3f1a150d44619a8c1c7a613d1cc1a1374bbe4d776fd57be9a46cdb9b07",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-26.png",
+        "sha256": "c6c1e52874a203f6b12dea0f55fc497c30254fb942e2b06d422c6af68c9fae36",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-27.png",
+        "sha256": "19e51a18d80a529b4996338a342f6fbac8593b3b4f13759c3bcd4bd30cde5f04",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-28.png",
+        "sha256": "66bfe60f75f32eceeaff1c93142ea4b5ccff28221eb22d68550b7237dcbd03eb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-29.png",
+        "sha256": "54ac6f8575bf16036ebcefcacba947012931dc562e15f0ccf8bd60138e377044",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-30.png",
+        "sha256": "6dcbaa531fb9853f8845e8dfc2c7847dd28893ac7a0a87caed499846c20924f0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-31.png",
+        "sha256": "49f2ad016fa9ac11c84662702abec488254130e9e24a08bf02e2b1641ff40ae3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-32.png",
+        "sha256": "69c06b85d55081445d5bc13436e722cf3bb5e42f1f4d28184598ff67ba6b9741",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-33.png",
+        "sha256": "be248db7221e921bdd192b33d47a484f8ea74387d0d6a6d6a5d0269f45465b7f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-34.png",
+        "sha256": "e2b27190a9592ca693153c6db9febd3c7d7101a5025fa3e7f92c902b704c0a87",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-35.png",
+        "sha256": "27d57be79b22f3cfeb880209f88493ca30a5c52ff42cab4b27e30716ee3729e2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-36.png",
+        "sha256": "dd6014694e9c51b2d8cd69cea9a8a786034edee3c9ea22033badbb6c46a755e9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-37.png",
+        "sha256": "8947b73e2166052d7bf1976fdbe15bfcec96271493c3a8fbe79aab40071d7fda",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-38.png",
+        "sha256": "3bd61333365c87f7dea37630b2ae884bec3a31a8ff2f01974ad0227248dcc7f1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-39.png",
+        "sha256": "68582019c62aeec5d59c87b5f5dcbb6193a1e75b32fd9ab48ed9756b097724ce",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-40.png",
+        "sha256": "bbc19d5334fb44f5fc28408a90cf9d6a5e042473100d18b7763ad678462049e1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-41.png",
+        "sha256": "422ae0bbeb130cc4fc7d77a422a4f8c75f0e57ce634032b083bc5f326a45bcdb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-42.png",
+        "sha256": "8356ce5cd06dda6f641036617e55a2cb6ca66a2e9563285919f38edc1d08d9d4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-43.png",
+        "sha256": "9df113532d05f9d400e83a3084db43c9dcc4534db135aca4c0da6938b33c335b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-44.png",
+        "sha256": "ee9e69fad7f058237c06361a2d725d811175b8b8a7975f5605742778f2ea5b86",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-45.png",
+        "sha256": "4a2a7e35727d30a0408f954937f573fbce2a168ae58b195c7d485ce2f0d8b9a8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-46.png",
+        "sha256": "b4682cc448579db66ab01c3e5baecc6bfdc21ea9bcf6a0c4069742666669bae6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-47.png",
+        "sha256": "cc24053a08995655d4b305c62322cf7713e1ffce9623a7732b1c0170625589a4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-48.png",
+        "sha256": "d1cc51f6b502975ae7bf3b395f0327e7d2d3e0518493709698f69bc07e21bb6d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-49.png",
+        "sha256": "bc44eca18ab8314237ac27d204dbd9e1fcb87c1734dfc2b200de53dcc18ed3cb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-50.png",
+        "sha256": "2b561845f2d8b27f6c35e2d2a9131c0eab34d4bd47bf5d88cc56dbab3fbc7ecf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-51.png",
+        "sha256": "36b87624e13dcee13f46a99022f08dc6d2ffe136d3c531a7fb1644d8d6ef66f4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-52.png",
+        "sha256": "87ce56ffc52482225e55469d07960c89ceb731c789de3adb75a50cc85bfa0d24",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-53.png",
+        "sha256": "ab358c2f370145a82dc03841cb683095c707a577f6c1cca1b2a4233e543f3c93",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-54.png",
+        "sha256": "6cc6cd4fb950c23b606ae51a69ecffe05aba426262fb8a2be3c574182d72a4ae",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-55.png",
+        "sha256": "191d87d814d7715d5815b9cfc71868ec97e7771777362d48c125075f577126ce",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-56.png",
+        "sha256": "0f941b46c184d9e95a402b410ed5fc20a7c27beba3fdf420989514d02de196b2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-57.png",
+        "sha256": "c00f9dbe45d4931a9c5d1d3dc1b1a6a7215e573ca17e41ccb6f930ce02b04477",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-58.png",
+        "sha256": "2ed2a7248025c3e0eee196e5660a8ee5b5226d4cdf24c03609720de7668200ef",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-59.png",
+        "sha256": "4c1a9f274ce0295303156cc87642fb2923f632d76b236745b75d27fe9c2ab519",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-60.png",
+        "sha256": "6fd3ad5beaf796f2f6e370cac86e596341d30f343f99c0588cea5e348e7848b0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-61.png",
+        "sha256": "9e09727e6e565b652d70108023f36d9ee4e6256357134fdc9a820833c91d5f69",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-62.png",
+        "sha256": "0eeba45adeeb7d4874a75615ff6543bbbdcee487e70e698ff42455b7cdc05d7f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "relics-a-63.png",
+        "sha256": "c8f38695499e87ef216c6595df207ef49c74ced471f115ee51ee61f823f003f9",
+        "width": 32,
+        "height": 32
+      }
+    ]
   }
 }

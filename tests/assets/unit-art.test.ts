@@ -22,6 +22,8 @@ import {
   unitPortrait,
 } from "../../src/assets/unit-art";
 import { NAMED_HEROES } from "../../src/data/classes";
+import { CREATURES } from "../../src/data/creatures";
+import { SUMMONED_CREATURES } from "../../src/core/magic";
 import { CHIEFTAIN_ROSTER } from "../../src/data/players";
 
 const PUBLIC = join(import.meta.dirname, "..", "..", "public");
@@ -50,6 +52,8 @@ const FACTION_CREATURES = [
   "ogre",
   "orc-warboss",
 ];
+/** The MVP neutrals that are not faction units (src/data/neutrals.ts). */
+const MVP_NEUTRALS = ["orc-brute", "troll"];
 /** docs/design/CONTENT_CREATURES.md sections 1 and 4. */
 const NEUTRALS = [
   "bellhop",
@@ -87,7 +91,7 @@ const HERO_CLASSES = [
 
 describe("unit art lookups", () => {
   it("gives every v0.2 creature its own sprite and portrait", () => {
-    for (const id of [...FACTION_CREATURES, ...NEUTRALS]) {
+    for (const id of [...FACTION_CREATURES, ...MVP_NEUTRALS, ...NEUTRALS]) {
       expect({ id, art: hasUnitArt(id) }).toEqual({ id, art: true });
       const unit = unitArt(id);
       expect(unit.category).toBe("unit");
@@ -101,8 +105,25 @@ describe("unit art lookups", () => {
     }
   });
 
+  it("is the one lookup: it agrees with every creature's data sprite", () => {
+    // bead border_marches-9is: Orc Brute and Troll drew the placeholder on
+    // screens that used unitArt alone.
+    for (const def of Object.values(CREATURES)) {
+      expect({ id: def.id, own: hasUnitArt(def.id) }).toEqual({
+        id: def.id,
+        own: true,
+      });
+      expect({ id: def.id, key: unitArt(def.id).key }).toEqual({
+        id: def.id,
+        key: def.sprite,
+      });
+    }
+    for (const id of Object.keys(SUMMONED_CREATURES))
+      expect({ id, own: hasUnitArt(id) }).toEqual({ id, own: true });
+  });
+
   it("uses a different sprite for every creature", () => {
-    const keys = [...FACTION_CREATURES, ...NEUTRALS].map(
+    const keys = [...FACTION_CREATURES, ...MVP_NEUTRALS, ...NEUTRALS].map(
       (id) => unitArt(id).key,
     );
     expect(new Set(keys).size).toBe(keys.length);

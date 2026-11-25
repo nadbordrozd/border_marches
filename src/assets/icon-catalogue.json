@@ -875,6 +875,13 @@
       "frame": "marvel",
       "grade": "marvel",
       "slot": null
+    },
+    "keystone": {
+      "name": "The Keystone",
+      "frame": "marvel",
+      "grade": "marvel",
+      "slot": null,
+      "relic": true
     }
   },
   "condition": {
@@ -1027,6 +1034,25 @@
       "frame": "storm",
       "school": "storm",
       "polarity": "boon"
+    },
+    "sworn": {
+      "name": "Sworn",
+      "frame": "accord",
+      "school": "accord",
+      "polarity": "boon"
+    },
+    "challenged": {
+      "name": "Challenged",
+      "frame": "accord",
+      "school": "accord",
+      "polarity": "bane"
+    },
+    "demo-guard": {
+      "name": "Guarded",
+      "frame": "accord",
+      "school": "accord",
+      "polarity": "boon",
+      "demo": true
     }
   },
   "ground": {
@@ -1071,6 +1097,12 @@
       "frame": "hush",
       "school": "hush",
       "class": "surface"
+    },
+    "sweets": {
+      "name": "sweets",
+      "frame": null,
+      "school": null,
+      "class": "remains"
     }
   },
   "skill": {

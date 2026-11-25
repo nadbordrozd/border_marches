@@ -523,6 +523,60 @@ const RECIPES = [
       ["fallback:school", "a clear crystal ball on a small stand"],
     ],
   ],
+  // ------------------- bead border_marches-9is: Realm conditions, Sweets, Keystone
+  [
+    "icons-conditions",
+    "conditions-e",
+    17306,
+    [
+      ["sworn", "two crossed silver swords with gold hilts, tied together where they cross by a bright blue ribbon bow"],
+      ["challenged", "a steel knight's gauntlet glove lying thrown down on its side, fingers spread, with a blue cuff"],
+      ["demo-guard", "a silver knight's helmet with a tall blue plume"],
+      ["ground:sweets", "a small heap of wrapped candies in pink, yellow and mint green twisted wrappers"],
+    ],
+    { notes: "Bead border_marches-9is: Sworn and Challenged (the Realm's Accord conditions), the demo Guarded condition (id demo-guard) and the Sweets remains ground had the fallback swirl." },
+  ],
+  [
+    "icons-conditions",
+    "conditions-e-16",
+    17314,
+    [
+      ["sworn", "two crossed swords with a blue ribbon"],
+      ["challenged", "a steel gauntlet glove"],
+      ["demo-guard", "a silver helmet with a blue plume"],
+    ],
+    {
+      fragments: ["style", "light-bottom-left", "class-symbol-16"],
+      width: 16,
+      height: 16,
+      notes: "Bead border_marches-9is: 16 px battle badges of Sworn, Challenged and Guarded, made at 16 px (never a downscale).",
+    },
+  ],
+  [
+    "icons-conditions",
+    "conditions-f-16",
+    17315,
+    [
+      ["challenged", "a steel gauntlet glove with a bright blue cuff, fingers spread, tilted as if thrown down"],
+      ["challenged", "a grey metal gauntlet with a wide blue cuff, lying on its side"],
+    ],
+    {
+      fragments: ["style", "light-bottom-left", "class-symbol-16"],
+      width: 16,
+      height: 16,
+      notes: "Bead border_marches-9is re-roll: the conditions-e-16 gauntlets were all-grey upright fists without the blue cuff of the 32 px Challenged icon, so the badge and the icon did not match.",
+    },
+  ],
+  [
+    "icons-artifacts",
+    "relics-a",
+    17210,
+    [
+      ["keystone", "the keystone of a stone arch: one wedge-shaped block of pale grey carved stone, wider at the top than the bottom, with a glowing gold gem set in its face"],
+      ["keystone", "a wedge-shaped sandstone keystone block, wider at the top, banded with gold and set with a glowing blue gem"],
+    ],
+    { notes: "Bead border_marches-9is: the Keystone relic (CONTENT_MAP_OBJECTS 4) had the artifact fallback chest. Two wordings of the same relic." },
+  ],
 ];
 
 const byId = new Map();

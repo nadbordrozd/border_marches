@@ -15,8 +15,8 @@ and listed in `src/assets/icons.ts` (`ICON_ASSETS`, looked up with
 | Set | Kinds | Content |
 | --- | --- | --- |
 | `art/sets/icons-spells` | `spell` | 50 battle and 10 adventure spells ([CONTENT_SPELLS.md](../../design/CONTENT_SPELLS.md)) |
-| `art/sets/icons-artifacts` | `artifact` | 30 Trinkets, 20 Wonders, 6 cursed Wonders, 12 Marvel pieces, 4 assembled Marvels, 12 consumables ([CONTENT_ARTIFACTS.md](../../design/CONTENT_ARTIFACTS.md)) |
-| `art/sets/icons-conditions` | `condition`, `ground` | 25 condition kinds, 7 ground kinds; 16 px variants for stack overlays |
+| `art/sets/icons-artifacts` | `artifact` | 30 Trinkets, 20 Wonders, 6 cursed Wonders, 12 Marvel pieces, 4 assembled Marvels, 12 consumables ([CONTENT_ARTIFACTS.md](../../design/CONTENT_ARTIFACTS.md)), the Keystone relic |
+| `art/sets/icons-conditions` | `condition`, `ground` | 25 catalogue condition kinds plus Sworn, Challenged and the demo Guarded, 7 ground kinds plus Sweets; 16 px variants for stack overlays |
 | `art/sets/icons-heroes` | `skill`, `feat`, `vow`, `stat`, `school`, `fallback` | 24 skills, 28 feats, 12 vows ([CONTENT_HEROES.md](../../design/CONTENT_HEROES.md)), Attack, Defense, Power, Lore, the five school emblems, and one fallback per kind |
 
 Content ids are the catalogue names in kebab case without apostrophes
@@ -129,6 +129,27 @@ Review sheets (not in git): `.orchestration/screens/bzc17/*.png`, rebuilt with
 node art/review/icon-sheet.mjs .orchestration/screens/bzc17/spells.png spells
 node art/review/icon-grid.mjs /tmp/bloom-a.png icons-spells bloom-a   # one recipe's 64 takes
 ```
+
+## Additions outside the content tables (bead `border_marches-9is`)
+
+The gallery found five ids on the fallback icon. They are catalogue entries
+by their game id, added in `art/review/icon-catalogue-build.mjs` (not read
+from a design table):
+
+| Id | Kind | Frame | Icon (32 px / 16 px) |
+| --- | --- | --- | --- |
+| `sworn` | condition (Realm, FACTION_HUMANS) | Accord | two crossed swords tied by a blue bow / the same with a ribbon band |
+| `challenged` | condition (Realm) | Accord | a thrown steel gauntlet with a blue cuff / the same, tilted |
+| `demo-guard` | condition (Guarded, battle grammar demo only) | Accord | a knight's helmet with a blue plume / the same |
+| `sweets` | ground (remains, RULES_V2; nothing leaves it in v0.2) | none | a heap of wrapped candies |
+| `keystone` | artifact (relic, CONTENT_MAP_OBJECTS 4) | Marvel, as the hero screen colours relics | a wedge of carved sandstone with a gold gem |
+
+Recipes `conditions-e`, `conditions-e-16`, `conditions-f-16` (a re-roll: the
+first 16 px gauntlets were all grey, without the 32 px icon's blue cuff) and
+`relics-a`; 4 PixelLab calls, US$0.33. The 16 px badges are their own
+16 px takes, never a downscale. Rejected: crossed swords without the ribbon
+(a battle sign, not an oath), gold-banded keystones (read as a bucket) and
+grey slabs with a flame gem (read as a candle or a tombstone).
 
 ## Acceptance
 
