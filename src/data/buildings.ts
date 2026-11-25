@@ -13,7 +13,7 @@ export const BUILDINGS: Readonly<
     requires: [],
     startBuilt: true,
     hallIncome: 500,
-    effect: "Income 500 gold per day",
+    effect: "+500 gold per day",
   },
   "town-hall": {
     id: "town-hall",
@@ -22,7 +22,7 @@ export const BUILDINGS: Readonly<
     requires: [],
     startBuilt: false,
     hallIncome: 1000,
-    effect: "Income 1000 gold per day (replaces the Village Hall)",
+    effect: "+1000 gold per day, in place of the Village Hall's 500",
   },
   "city-hall": {
     id: "city-hall",
@@ -31,7 +31,7 @@ export const BUILDINGS: Readonly<
     requires: ["town-hall", "palisade"],
     startBuilt: false,
     hallIncome: 2000,
-    effect: "Income 2000 gold per day (replaces the Town Hall)",
+    effect: "+2000 gold per day, in place of the Town Hall's 1000",
   },
   palisade: {
     id: "palisade",
@@ -40,7 +40,8 @@ export const BUILDINGS: Readonly<
     requires: [],
     startBuilt: false,
     fortLevel: 1,
-    effect: "Needed for tier 3+ dwellings; town defenders get +2 Defense",
+    effect:
+      "Town defenders get +2 Defense; needed for tier 3 and higher dwellings",
   },
   stockade: {
     id: "stockade",

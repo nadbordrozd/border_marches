@@ -53,11 +53,11 @@ const GUILD_COSTS: readonly ResourceAmounts[] = [
 ];
 
 const GUILD_TEXT = [
-  "Four tier 1 spells; heroes here start the day at full mana",
-  "Three tier 2 spells, one a condition tool",
-  "Three tier 3 spells; lifts curses for 2000 gold",
-  "Two tier 4 spells",
-  "One tier 5 spell",
+  "Teaches four tier 1 spells; heroes in town start each day with full mana",
+  "Teaches three tier 2 spells, one of them a condition tool",
+  "Teaches three tier 3 spells; takes a cursed artifact off a hero for 2000 gold",
+  "Teaches two tier 4 spells",
+  "Teaches one tier 5 spell",
 ];
 
 /** The buildings every town shares (ECONOMY 6.1, 6.2). */
@@ -69,14 +69,14 @@ function commonBuildings(names: FactionNames): BuildingDef[] {
       cost: {},
       startBuilt: true,
       hallIncome: 500,
-      effect: "Income 500 gold per day",
+      effect: "+500 gold per day",
     }),
     b({
       id: "town-hall",
       name: "Town Hall",
       cost: { gold: 2500, wood: 5, ore: 2 },
       hallIncome: 1000,
-      effect: "Income 1000 gold per day (replaces the Village Hall)",
+      effect: "+1000 gold per day, in place of the Village Hall's 500",
     }),
     b({
       id: "city-hall",
@@ -84,14 +84,14 @@ function commonBuildings(names: FactionNames): BuildingDef[] {
       cost: { gold: 5000, wood: 10, ore: 5, essence: 3 },
       requires: ["town-hall", "fort-1", "marketplace"],
       hallIncome: 2000,
-      effect: "Income 2000 gold per day (replaces the Town Hall)",
+      effect: "+2000 gold per day, in place of the Town Hall's 1000",
     }),
     b({
       id: "fort-1",
       name: names.fort[0],
       cost: { gold: 2000, wood: 15 },
       fortLevel: 1,
-      effect: "Fort level 1: defenders +2 Defense; needed for tier 3",
+      effect: "Town defenders get +2 Defense; needed for tier 3 dwellings",
     }),
     b({
       id: "fort-2",
@@ -99,7 +99,7 @@ function commonBuildings(names: FactionNames): BuildingDef[] {
       cost: { gold: 3000, wood: 10, ore: 10 },
       requires: ["fort-1"],
       fortLevel: 2,
-      effect: "Fort level 2: defenders +4 Defense",
+      effect: "Town defenders get +4 Defense",
     }),
     b({
       id: "fort-3",
@@ -107,7 +107,7 @@ function commonBuildings(names: FactionNames): BuildingDef[] {
       cost: { gold: 5000, wood: 10, ore: 15, essence: 2 },
       requires: ["fort-2", "city-hall"],
       fortLevel: 3,
-      effect: "Fort level 3: defenders +6 Defense and a tower",
+      effect: "Town defenders get +6 Defense and a tower",
     }),
     b({
       id: "marketplace",
@@ -158,7 +158,7 @@ function commonBuildings(names: FactionNames): BuildingDef[] {
       income: { gold: KEYSTONE_INCOME },
       growthBonus: true,
       special: names.keystone.special,
-      effect: `Needs the Keystone. +${KEYSTONE_INCOME} gold a day, +50% growth; ${names.keystone.effect}`,
+      effect: `Needs the Keystone. +${KEYSTONE_INCOME} gold a day, +50% creature growth; ${names.keystone.effect}`,
     }),
   );
   return out;
@@ -232,7 +232,7 @@ export const REALM_TREE: TreeData = assemble(
       id: "round-table",
       name: "Round Table",
       special: SPECIALS.roundTable,
-      effect: "every army of its owner has Morale +2",
+      effect: "all your armies get +2 Morale",
     },
   },
   [
@@ -328,7 +328,7 @@ export const REALM_TREE: TreeData = assemble(
       requires: ["friary"],
       special: SPECIALS.chapelOfOaths,
       effect:
-        "In its owner's battles, when a Sworn link ends because one end died, the other end gains Heartened and Lucky",
+        "In your battles, when one stack of a Sworn pair dies, the other becomes Heartened and Lucky",
     }),
   ],
 );
@@ -342,7 +342,7 @@ export const CHURCHYARD_TREE: TreeData = assemble(
       name: "Hall of Ancestors",
       special: SPECIALS.hallOfAncestors,
       effect:
-        "its owner's stacks that got up do not crumble after a battle won",
+        "your stacks that got up stay after a battle you win instead of crumbling",
     },
   },
   [
@@ -438,7 +438,7 @@ export const CHURCHYARD_TREE: TreeData = assemble(
       requires: ["funeral-parlour"],
       special: SPECIALS.familyCrypt,
       effect:
-        "Its owner's native stacks get up with half their starting count, rounded up, instead of a third",
+        "Your native stacks get up with half their starting count (rounded up) instead of a third",
     }),
   ],
 );
@@ -451,7 +451,7 @@ export const WARCAMP_TREE: TreeData = assemble(
       id: "great-flinger",
       name: "The Great Flinger",
       special: SPECIALS.greatFlinger,
-      effect: "every native stack in its owner's armies has Cannonball",
+      effect: "every native stack in your armies has Cannonball",
     },
   },
   [
@@ -530,7 +530,7 @@ export const WARCAMP_TREE: TreeData = assemble(
       requires: ["marketplace"],
       special: SPECIALS.lootPile,
       effect:
-        "After each battle won by its owner's hero, gold equal to the XP the battle gave (one Loot Pile counts)",
+        "After each battle your hero wins, gold equal to the experience it earned (only one Loot Pile counts)",
     }),
     b({
       id: "launch-ramp",
@@ -538,7 +538,7 @@ export const WARCAMP_TREE: TreeData = assemble(
       cost: { gold: 2500, wood: 15, ore: 5 },
       requires: ["ogre-pit"],
       special: SPECIALS.launchRamp,
-      effect: "In its owner's battles a native that is Launched gains Lucky",
+      effect: "In your battles, a native that is Launched also becomes Lucky",
     }),
   ],
 );

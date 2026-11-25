@@ -73,37 +73,37 @@ export const COMMANDS: Readonly<Record<string, CommandDef>> = {
   stampede: {
     id: "stampede",
     name: "Stampede",
-    text: "Choose an enemy stack; up to C + 1 friendly stacks adjacent to it each make a melee Strike against it, in timeline order; it retaliates once.",
+    text: "Pick an enemy stack. Up to C + 1 of your stacks next to it each Strike it in melee, in turn order; it retaliates only once.",
   },
   "single-combat": {
     id: "single-combat",
     name: "Single Combat",
-    text: "Choose a friendly stack and an enemy stack. The enemy gains Challenged naming the friendly stack, with clock min(3, C + 1).",
+    text: "Pick one of your stacks and an enemy stack. The enemy is Challenged by yours for C + 1 rounds (at most 3): its Strikes on anyone else do half damage.",
   },
   "swear-in": {
     id: "swear-in",
     name: "Swear In",
-    text: "Up to C times: choose two stacks, neither bearing Sworn; each gains Sworn naming the other.",
+    text: "Up to C times: pick two stacks that are not Sworn. They become Sworn to each other.",
   },
   "one-more-time": {
     id: "one-more-time",
     name: "One More Time",
-    text: "Choose up to C friendly stacks that are not summoned. Each gets up once more the next time it dies and leaves remains.",
+    text: "Pick up to C of your stacks that were not summoned. The next time each one dies and leaves remains, it gets up again.",
   },
   "last-rites": {
     id: "last-rites",
     name: "Last Rites",
-    text: "Choose one remains feature. It is consumed, and every enemy stack within C hexes of it gains Shaken (clock 2) and Jinxed 25 (clock 2).",
+    text: "Pick remains on the field and use them up. Every enemy stack within C hexes of them becomes Shaken and Jinxed 25 for 2 rounds.",
   },
   "heave-ho": {
     id: "heave-ho",
     name: "Heave-Ho",
-    text: "Up to C + 1 times: choose a friendly stack and a hex in a straight line from it; the stack is pushed 4 hexes toward that hex.",
+    text: "Up to C + 1 times: pick one of your stacks and a hex in a straight line from it. The stack is pushed 4 hexes toward that hex.",
   },
   kaboom: {
     id: "kaboom",
     name: "Kaboom",
-    text: "Choose a hex. Every stack on it or adjacent to it takes Harm 30 x C.",
+    text: "Pick a hex. Every stack on it or next to it, friend or foe, takes 30 x C Harm.",
   },
 };
 

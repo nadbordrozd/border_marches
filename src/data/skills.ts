@@ -90,7 +90,10 @@ export const MAX_SKILL_RANK = 3;
 function schoolSkill(id: SkillId, name: string, school: School): SkillDef {
   const label = school[0]?.toUpperCase() + school.slice(1);
   const rank = (r: number, tiers: string, power: number): SkillRank => ({
-    text: `Learn ${label} tiers ${tiers}; +${power} Power for ${label} pages.`,
+    text:
+      power === 0
+        ? `The hero can learn ${label} spells of tiers ${tiers}.`
+        : `The hero can learn ${label} spells of tiers ${tiers} and casts ${label} pages at +${power} Power.`,
     effects: [{ kind: "school-rank", school, rank: r }],
   });
   return {
@@ -98,7 +101,7 @@ function schoolSkill(id: SkillId, name: string, school: School): SkillDef {
     name,
     family: "school",
     school,
-    ranks: [rank(1, "1-2", 0), rank(2, "1-4", 2), rank(3, "1-5", 4)],
+    ranks: [rank(1, "1 and 2", 0), rank(2, "1 to 4", 2), rank(3, "1 to 5", 4)],
   };
 }
 
@@ -134,9 +137,9 @@ const ROWS: SkillDef[] = [
     family: "army",
     ranks: steps(
       [
-        "Melee Strikes by your stacks are x 110%.",
-        "Melee Strikes by your stacks are x 120%.",
-        "Melee Strikes by your stacks are x 130%.",
+        "Your stacks' melee Strikes deal 10% more damage.",
+        "Your stacks' melee Strikes deal 20% more damage.",
+        "Your stacks' melee Strikes deal 30% more damage.",
       ],
       (r) => [
         {
@@ -154,9 +157,9 @@ const ROWS: SkillDef[] = [
     family: "army",
     ranks: steps(
       [
-        "Shots by your stacks are x 110%.",
-        "Shots by your stacks are x 120%.",
-        "Shots by your stacks are x 130%.",
+        "Your stacks' shots deal 10% more damage.",
+        "Your stacks' shots deal 20% more damage.",
+        "Your stacks' shots deal 30% more damage.",
       ],
       (r) => [
         {
@@ -174,9 +177,9 @@ const ROWS: SkillDef[] = [
     family: "army",
     ranks: steps(
       [
-        "Strikes against your stacks are x 90%.",
-        "Strikes against your stacks are x 80%.",
-        "Strikes against your stacks are x 70%.",
+        "Strikes against your stacks deal 10% less damage.",
+        "Strikes against your stacks deal 20% less damage.",
+        "Strikes against your stacks deal 30% less damage.",
       ],
       (r) => [
         {
@@ -195,9 +198,9 @@ const ROWS: SkillDef[] = [
     family: "army",
     ranks: steps(
       [
-        "Your strongest stack may retaliate twice per round.",
-        "Your two strongest stacks may retaliate twice per round.",
-        "Your three strongest stacks may retaliate twice per round.",
+        "Your strongest stack can retaliate twice each round.",
+        "Your two strongest stacks can retaliate twice each round.",
+        "Your three strongest stacks can retaliate twice each round.",
       ],
       (r) => [{ kind: "switch", id: RIPOSTE[r - 1] as RuleSwitchId }],
     ),
@@ -209,9 +212,9 @@ const ROWS: SkillDef[] = [
     family: "army",
     ranks: steps(
       [
-        'Abilities of your strongest stack that say "adjacent" reach 2 hexes.',
-        'Abilities of your two strongest stacks that say "adjacent" reach 2 hexes.',
-        'Abilities of all your stacks that say "adjacent" reach 2 hexes.',
+        'Abilities of your strongest stack that say "adjacent" reach stacks up to 2 hexes away.',
+        'Abilities of your two strongest stacks that say "adjacent" reach stacks up to 2 hexes away.',
+        'Abilities of all your stacks that say "adjacent" reach stacks up to 2 hexes away.',
       ],
       (r) => [{ kind: "switch", id: LONG_SHADOW[r - 1] as RuleSwitchId }],
     ),
@@ -223,9 +226,9 @@ const ROWS: SkillDef[] = [
     family: "army",
     ranks: steps(
       [
-        "Before round 1 you may rearrange your stacks within your deployment column.",
-        "Before round 1 you may rearrange your stacks within your first 2 columns.",
-        "Before round 1 you may rearrange your stacks within your first 3 columns.",
+        "Before round 1 you may move your stacks around within your starting column.",
+        "Before round 1 you may move your stacks around within your first 2 columns.",
+        "Before round 1 you may move your stacks around within your first 3 columns.",
       ],
       (r) => [{ kind: "switch", id: VANGUARD[r - 1] as RuleSwitchId }],
     ),
@@ -236,18 +239,18 @@ const ROWS: SkillDef[] = [
     family: "army",
     ranks: [
       {
-        text: "Each stack your Command chooses or moves gains Fired Up 2, clock 2.",
+        text: "Each stack your Command picks or moves gains Fired Up 2 for 2 rounds.",
         effects: [{ kind: "switch", id: "drill-sergeant-1" }],
       },
       {
-        text: "Also: your Command counts C one higher.",
+        text: "Each stack your Command picks or moves gains Fired Up 2 for 2 rounds, and your Command works as if C were 1 higher.",
         effects: [
           { kind: "switch", id: "drill-sergeant-1" },
           { kind: "command-bonus", amount: 1 },
         ],
       },
       {
-        text: "Also: each such stack gains Shielded 3, clock 2.",
+        text: "Each stack your Command picks or moves gains Fired Up 2 and Shielded 3 for 2 rounds, and your Command works as if C were 1 higher.",
         effects: [
           { kind: "switch", id: "drill-sergeant-3" },
           { kind: "command-bonus", amount: 1 },
@@ -261,9 +264,9 @@ const ROWS: SkillDef[] = [
     family: "journey",
     ranks: steps(
       [
-        "Hiring at outposts, stray huts and lodges costs 10% less gold, and a neutral stack whose FV is at most 10% of this army's FV has no zone of control against this hero.",
-        "Hiring costs 20% less, and neutral stacks of at most 20% of this army's FV have no zone of control against this hero.",
-        "Hiring costs 30% less, and neutral stacks of at most 30% of this army's FV have no zone of control against this hero.",
+        "Hiring at outposts, stray huts and lodges costs 10% less gold. Neutral stacks with at most 10% of this army's fight value have no zone of control against this hero.",
+        "Hiring at outposts, stray huts and lodges costs 20% less gold. Neutral stacks with at most 20% of this army's fight value have no zone of control against this hero.",
+        "Hiring at outposts, stray huts and lodges costs 30% less gold. Neutral stacks with at most 30% of this army's fight value have no zone of control against this hero.",
       ],
       (r) => [
         { kind: "hire-discount", percent: 10 * r },
@@ -277,9 +280,9 @@ const ROWS: SkillDef[] = [
     family: "journey",
     ranks: steps(
       [
-        "Adventure spells cost 10% less mana and scale as if Power were 1 higher.",
-        "Adventure spells cost 20% less mana and scale as if Power were 2 higher.",
-        "Adventure spells cost 30% less mana and scale as if Power were 3 higher, and each may be cast twice a day.",
+        "Adventure spells cost 10% less mana and work as if the hero had 1 more Power.",
+        "Adventure spells cost 20% less mana and work as if the hero had 2 more Power.",
+        "Adventure spells cost 30% less mana, work as if the hero had 3 more Power, and can each be cast twice a day.",
       ],
       (r) => [
         {
@@ -313,15 +316,15 @@ const ROWS: SkillDef[] = [
     family: "army",
     ranks: [
       {
-        text: "Your fastest stack starts each battle Hastened, clock 1.",
+        text: "Your fastest stack starts each battle Hastened for 1 round.",
         effects: [AMBUSH_1()],
       },
       {
-        text: "Also: your strongest stack starts Shielded 3, clock 3.",
+        text: "Each battle, your fastest stack starts Hastened for 1 round and your strongest stack Shielded 3 for 3 rounds.",
         effects: [AMBUSH_1(), AMBUSH_2()],
       },
       {
-        text: "Also: the fastest enemy stack starts Delayed, clock 1.",
+        text: "Each battle, your fastest stack starts Hastened for 1 round, your strongest Shielded 3 for 3 rounds, and the fastest enemy Delayed for 1 round.",
         effects: [AMBUSH_1(), AMBUSH_2(), AMBUSH_3()],
       },
     ],
@@ -331,7 +334,11 @@ const ROWS: SkillDef[] = [
     name: "Wayfaring",
     family: "journey",
     ranks: steps(
-      ["+10% movement points.", "+20% movement points.", "+30%."],
+      [
+        "The hero has 10% more movement points each day.",
+        "The hero has 20% more movement points each day.",
+        "The hero has 30% more movement points each day.",
+      ],
       (r) => [{ kind: "movement-percent", percent: 10 * r }],
     ),
   },
@@ -341,15 +348,15 @@ const ROWS: SkillDef[] = [
     family: "journey",
     ranks: [
       {
-        text: "Terrain that costs more than 100 per straight step costs 25 less, never below 100.",
+        text: "Jungle, badlands and wasteland cost 25 fewer movement points a step, but never less than grass (100).",
         effects: [{ kind: "terrain-cost", reduce: 25 }],
       },
       {
-        text: "Terrain that costs more than 100 costs 50 less, never below 100.",
+        text: "Jungle, badlands and wasteland cost 50 fewer movement points a step, but never less than grass (100).",
         effects: [{ kind: "terrain-cost", reduce: 50 }],
       },
       {
-        text: "All passable terrain costs 100 (roads stay 70).",
+        text: "Every land terrain costs the same as grass, 100 movement points a step (roads stay 70).",
         effects: [{ kind: "terrain-cost", reduce: 1000 }],
       },
     ],
@@ -359,7 +366,11 @@ const ROWS: SkillDef[] = [
     name: "Lookout",
     family: "journey",
     ranks: steps(
-      ["+1 sight radius.", "+2 sight radius.", "+3 sight radius."],
+      [
+        "The hero sees 1 cell farther.",
+        "The hero sees 2 cells farther.",
+        "The hero sees 3 cells farther.",
+      ],
       (r) => [{ kind: "sight", amount: r }],
     ),
   },
@@ -369,9 +380,9 @@ const ROWS: SkillDef[] = [
     family: "journey",
     ranks: steps(
       [
-        "+10% maximum mana and +1 daily mana return.",
-        "+20% maximum mana and +2 daily mana return.",
-        "+30% maximum mana and +3 daily mana return.",
+        "10% more maximum mana, and 1 more mana back each day.",
+        "20% more maximum mana, and 2 more mana back each day.",
+        "30% more maximum mana, and 3 more mana back each day.",
       ],
       (r) => [
         { kind: "max-mana-percent", percent: 10 * r },
@@ -385,9 +396,9 @@ const ROWS: SkillDef[] = [
     family: "journey",
     ranks: steps(
       [
-        "+10% to every XP gain.",
-        "+20% to every XP gain.",
-        "+30% to every XP gain.",
+        "The hero earns 10% more experience.",
+        "The hero earns 20% more experience.",
+        "The hero earns 30% more experience.",
       ],
       (r) => [{ kind: "xp-percent", percent: 10 * r }],
     ),
@@ -411,14 +422,14 @@ const ROWS: SkillDef[] = [
     family: "journey",
     ranks: [
       {
-        text: "Scroll case 12; your scrolls are cast at +1 Power.",
+        text: "The scroll case holds 12 scrolls, and your scrolls are cast at +1 Power.",
         effects: [
           { kind: "scroll-case-size", size: 12 },
           { kind: "scroll-power", amount: 1 },
         ],
       },
       {
-        text: "Also: backpack 16, and sites buy your artifacts and scrolls at three quarters of value.",
+        text: "The scroll case holds 12 and the backpack 16; scrolls are cast at +1 Power; sites buy your artifacts and scrolls at 75% of their value.",
         effects: [
           { kind: "scroll-case-size", size: 12 },
           { kind: "scroll-power", amount: 1 },
@@ -427,7 +438,7 @@ const ROWS: SkillDef[] = [
         ],
       },
       {
-        text: "Also: the first scroll you cast each battle does not use the round's cast.",
+        text: "As rank 2, plus: the first scroll you cast each battle does not use up the round's cast.",
         effects: [
           { kind: "scroll-case-size", size: 12 },
           { kind: "scroll-power", amount: 1 },

@@ -167,15 +167,15 @@ const W: Terrain = "wasteland";
 // Flags: "s" stretch, "v" vanishes when used.
 const ROWS: readonly Row[] = [
   // prettier-ignore
-  ["sawmill", "Sawmill", "mine", 2, 1, "", "flag", 1200, [J, G], 0, "Visiting flags it for your player: +3 wood each day."],
+  ["sawmill", "Sawmill", "mine", 2, 1, "", "flag", 1200, [J, G], 0, "Enter it to claim it: +3 wood each day while you hold it."],
   // prettier-ignore
-  ["ore-pit", "Ore Pit", "mine", 2, 1, "", "flag", 1500, [B, S], 0, "Visiting flags it: +2 ore each day."],
+  ["ore-pit", "Ore Pit", "mine", 2, 1, "", "flag", 1500, [B, S], 0, "Enter it to claim it: +2 ore each day while you hold it."],
   // prettier-ignore
-  ["essence-spring", "Essence Spring", "mine", 2, 1, "", "flag", 5000, [W, J], 0, "Visiting flags it: +1 essence each day."],
+  ["essence-spring", "Essence Spring", "mine", 2, 1, "", "flag", 5000, [W, J], 0, "Enter it to claim it: +1 essence each day while you hold it."],
   // prettier-ignore
-  ["gold-mine", "Gold Mine", "mine", 2, 1, "", "flag", 6000, [B, S], 0, "Visiting flags it: +750 gold each day."],
+  ["gold-mine", "Gold Mine", "mine", 2, 1, "", "flag", 6000, [B, S], 0, "Enter it to claim it: +750 gold each day while you hold it."],
   // prettier-ignore
-  ["haunted-mine", "Haunted Mine", "mine", 2, 1, "s", "flag", 3000, [W], 1, "Visiting flags it: double the daily yield of its mine kind. Sextons keep watch beside it."],
+  ["haunted-mine", "Haunted Mine", "mine", 2, 1, "s", "flag", 3000, [W], 1, "Enter it to claim it: twice the daily yield of a normal mine of its kind. Sextons keep watch beside it."],
   // prettier-ignore
   ["windmill", "Windmill", "site", 2, 2, "", "weekly", 600, [G, S], 4, "The first hero to visit each week collects this week's wood or ore."],
   // prettier-ignore
@@ -183,47 +183,47 @@ const ROWS: readonly Row[] = [
   // prettier-ignore
   ["orchard", "Orchard", "site", 2, 2, "", "weekly", 800, [J, G], 3, "The first hero to visit each week collects this week's essence or gold."],
   // prettier-ignore
-  ["faction-outpost", "Faction Outpost", "dwelling", 2, 2, "", "flag", 1500, [], 5, "Visiting flags it; the flag-holder recruits its creature here at the normal cost. Stock refills each week."],
+  ["faction-outpost", "Faction Outpost", "dwelling", 2, 2, "", "flag", 1500, [], 5, "Enter it to claim it; then your heroes can recruit its creature here at the normal price. New recruits each week."],
   // prettier-ignore
-  ["stray-hut", "Stray Hut", "dwelling", 1, 1, "", "flag", 1500, [], 6, "Visiting flags it; the flag-holder hires its stray here. Stock refills each week."],
+  ["stray-hut", "Stray Hut", "dwelling", 1, 1, "", "flag", 1500, [], 6, "Enter it to claim it; then your heroes can hire its stray here. New recruits each week."],
   // prettier-ignore
-  ["caretaker-lodge", "Caretaker Lodge", "dwelling", 2, 2, "", "flag", 2000, [], 3, "Locked until your player completes its errand; then it hires its caretaker like a stray hut."],
+  ["caretaker-lodge", "Caretaker Lodge", "dwelling", 2, 2, "", "flag", 2000, [], 3, "Locked until you finish its errand; then your heroes can hire its caretaker here, as at a stray hut."],
   // prettier-ignore
-  ["stat-shrine", "Stat Shrine", "site", 1, 1, "", "per-hero", 1500, [], 6, "+1 to its stat."],
+  ["stat-shrine", "Stat Shrine", "site", 1, 1, "", "per-hero", 1500, [], 6, "The hero gains +1 to the stat the shrine shows."],
   // prettier-ignore
-  ["learning-stone", "Learning Stone", "site", 1, 1, "", "per-hero", 1000, [], 5, "+1000 experience."],
+  ["learning-stone", "Learning Stone", "site", 1, 1, "", "per-hero", 1000, [], 5, "The hero gains 1000 experience."],
   // prettier-ignore
-  ["arena", "Arena", "site", 2, 2, "", "per-hero", 3000, [S, B], 2, "Choose +2 Attack or +2 Defense."],
+  ["arena", "Arena", "site", 2, 2, "", "per-hero", 3000, [S, B], 2, "The hero gains +2 Attack or +2 Defense, your choice."],
   // prettier-ignore
   ["library", "Library", "site", 2, 2, "s", "per-hero", 6000, [], 1, "A hero of level 8 or more gains +1 to all four stats."],
   // prettier-ignore
-  ["tree-of-knowledge", "Tree of Knowledge", "site", 1, 1, "", "per-hero", 3000, [J, G], 2, "The hero gains experience to its next level, for its price."],
+  ["tree-of-knowledge", "Tree of Knowledge", "site", 1, 1, "", "per-hero", 3000, [J, G], 2, "Pay its price and the hero gains enough experience to reach its next level."],
   // prettier-ignore
-  ["academy", "Academy", "site", 2, 2, "s", "per-hero", 1000, [], 2, "Pay 2000 gold for +1 to either stat of its pair."],
+  ["academy", "Academy", "site", 2, 2, "s", "per-hero", 1000, [], 2, "Pay 2000 gold: the hero gains +1 to one of the two stats it teaches."],
   // prettier-ignore
-  ["tutors-hut", "Tutor's Hut", "site", 1, 1, "", "per-hero", 2000, [], 4, "Teaches its skill at rank 1 to a hero with fewer than six skills that lacks it."],
+  ["tutors-hut", "Tutor's Hut", "site", 1, 1, "", "per-hero", 2000, [], 4, "Teaches its skill at rank 1 to a hero who does not have it and has fewer than six skills."],
   // prettier-ignore
-  ["school-shrine", "School Shrine", "site", 1, 1, "", "per-hero", 800, [], 8, "Teaches its spell as a page if the hero can learn it, otherwise gives it as a scroll."],
+  ["school-shrine", "School Shrine", "site", 1, 1, "", "per-hero", 800, [], 8, "Teaches its spell as a page if the hero can learn it; otherwise gives it as a scroll."],
   // prettier-ignore
   ["hermit", "Hermit", "site", 1, 1, "", "per-hero", 1000, [W, J], 2, "Forget one skill of your choice, or have your next skill offer redrawn."],
   // prettier-ignore
-  ["rally-camp", "Rally Camp", "site", 1, 1, "", "each-visit", 300, [], 5, "+1 Morale until the hero's next battle ends (does not stack)."],
+  ["rally-camp", "Rally Camp", "site", 1, 1, "", "each-visit", 300, [], 5, "+1 Morale until the end of the hero's next battle. Visiting again adds no more."],
   // prettier-ignore
-  ["wishing-well", "Wishing Well", "site", 1, 1, "", "each-visit", 300, [], 5, "+1 Luck until the hero's next battle ends (does not stack)."],
+  ["wishing-well", "Wishing Well", "site", 1, 1, "", "each-visit", 300, [], 5, "+1 Luck until the end of the hero's next battle. Visiting again adds no more."],
   // prettier-ignore
-  ["oasis", "Oasis", "site", 2, 2, "", "per-day", 500, [W, B, S], 3, "+1 Morale until the hero's next battle ends and +400 movement today."],
+  ["oasis", "Oasis", "site", 2, 2, "", "per-day", 500, [W, B, S], 3, "+1 Morale until the end of the hero's next battle, and 400 more movement points today."],
   // prettier-ignore
-  ["school-temple", "School Temple", "site", 2, 2, "", "each-visit", 500, [], 4, "+2 Power for pages of its school until the hero's next battle ends (does not stack)."],
+  ["school-temple", "School Temple", "site", 2, 2, "", "each-visit", 500, [], 4, "The hero casts pages of its school at +2 Power until the end of its next battle. Visiting again adds no more."],
   // prettier-ignore
-  ["mana-well", "Mana Well", "site", 1, 1, "", "per-day", 800, [], 4, "Sets the hero's mana to its maximum."],
+  ["mana-well", "Mana Well", "site", 1, 1, "", "per-day", 800, [], 4, "Refills the hero's mana to its maximum."],
   // prettier-ignore
-  ["stables", "Stables", "site", 2, 2, "", "per-week-hero", 1000, [G, S], 3, "+300 movement on each remaining day of this week, starting today."],
+  ["stables", "Stables", "site", 2, 2, "", "per-week-hero", 1000, [G, S], 3, "300 more movement points each day for the rest of this week, starting today."],
   // prettier-ignore
   ["sanctuary", "Sanctuary", "site", 2, 2, "s", "each-visit", 300, [], 1, "A hero standing inside cannot be attacked."],
   // prettier-ignore
-  ["observatory", "Observatory", "site", 1, 1, "s", "each-visit", 800, [B, S], 2, "Reveals the land within 12 cells."],
+  ["observatory", "Observatory", "site", 1, 1, "s", "each-visit", 800, [B, S], 2, "Reveals the map within 12 cells."],
   // prettier-ignore
-  ["scholar", "Scholar", "site", 1, 1, "v", "one-time", 1500, [], 4, "The first hero to visit receives the scholar's gift; the scholar then leaves."],
+  ["scholar", "Scholar", "site", 1, 1, "v", "one-time", 1500, [], 4, "The first hero to walk up next to the scholar receives its gift; the scholar then leaves."],
   // prettier-ignore
   ["overgrown-greenhouse", "Overgrown Greenhouse", "bank", 2, 2, "", "one-time", 2500, [J, G], 3, "Groundskeepers guard it; win the battle to take the prize."],
   // prettier-ignore
@@ -235,47 +235,47 @@ const ROWS: readonly Row[] = [
   // prettier-ignore
   ["thunderstruck-pylon-yard", "Thunderstruck Pylon Yard", "bank", 2, 2, "", "one-time", 2500, [B, S], 3, "Riggers guard it; win the battle to take the prize."],
   // prettier-ignore
-  ["landfall-wreck", "Landfall Wreck", "bank", 2, 2, "", "one-time", 2500, [], 4, "Strays of the land guard it; win to take the prize, and strays join you."],
+  ["landfall-wreck", "Landfall Wreck", "bank", 2, 2, "", "one-time", 2500, [], 4, "Strays of the land guard it; win the battle to take the prize, and some strays join you."],
   // prettier-ignore
-  ["keepers-vault", "Keepers' Vault", "bank", 3, 2, "", "one-time", 16000, [], 0, "A mixed caretaker guard; the winner sees three treasures and carries out one."],
+  ["keepers-vault", "Keepers' Vault", "bank", 3, 2, "", "one-time", 16000, [], 0, "Guarded by a mix of caretakers; win the battle, then pick one of three treasures to carry out."],
   // prettier-ignore
-  ["resource-pile", "Resource Pile", "pickup", 1, 1, "v", "one-time", 0, [], 10, "Taken from a next cell by the first hero to reach it."],
+  ["resource-pile", "Resource Pile", "pickup", 1, 1, "v", "one-time", 0, [], 10, "The first hero to walk up next to it takes it."],
   // prettier-ignore
-  ["treasure-chest", "Treasure Chest", "pickup", 1, 1, "v", "one-time", 1000, [], 7, "Choose gold or experience (a rich chest holds a Trinket)."],
+  ["treasure-chest", "Treasure Chest", "pickup", 1, 1, "v", "one-time", 1000, [], 7, "Walk up next to it, then choose gold or experience (a rich chest holds a Trinket instead)."],
   // prettier-ignore
-  ["campfire", "Campfire", "site", 1, 1, "v", "one-time", 1000, [], 4, "Taken from a next cell: gold and wood or ore."],
+  ["campfire", "Campfire", "site", 1, 1, "v", "one-time", 1000, [], 4, "Walk up next to it to take gold and wood or ore."],
   // prettier-ignore
-  ["loose-artifact", "Loose Artifact", "artifact", 1, 1, "v", "one-time", 2000, [], 5, "Picked up into the backpack."],
+  ["loose-artifact", "Loose Artifact", "artifact", 1, 1, "v", "one-time", 2000, [], 5, "Walk up next to it to put it in the hero's backpack."],
   // prettier-ignore
-  ["loose-scroll", "Loose Scroll", "site", 1, 1, "v", "one-time", 600, [], 5, "Picked up into the scroll case."],
+  ["loose-scroll", "Loose Scroll", "site", 1, 1, "v", "one-time", 600, [], 5, "Walk up next to it to put it in the hero's scroll case."],
   // prettier-ignore
-  ["fallen-adventurer", "Fallen Adventurer", "site", 1, 1, "v", "one-time", 4500, [W, B], 2, "Take the adventurer's Wonder; -2 Morale until the hero's next battle ends."],
+  ["fallen-adventurer", "Fallen Adventurer", "site", 1, 1, "v", "one-time", 4500, [W, B], 2, "Walk up next to it to take the adventurer's Wonder, but -2 Morale until the end of the hero's next battle."],
   // prettier-ignore
-  ["obelisk", "Obelisk", "site", 1, 1, "", "per-player", 500, [], 0, "Uncovers one more share of your puzzle map, which leads to the buried Keystone."],
+  ["obelisk", "Obelisk", "site", 1, 1, "", "per-player", 500, [], 0, "Uncovers one more piece of your puzzle map, which leads to the buried Keystone."],
   // prettier-ignore
   ["buried-keystone", "Buried Keystone", "buried", 1, 1, "v", "one-time", 30000, [], 0, "Buried: dig on its cell to find the Keystone."],
   // prettier-ignore
   ["buried-cache", "Buried Cache", "buried", 1, 1, "v", "one-time", 4000, [], 0, "Buried: dig on its cell to find 2000 gold and a Trinket."],
   // prettier-ignore
-  ["keymasters-tent", "Keymaster's Tent", "site", 1, 1, "", "per-player", 0, [], 0, "Your player holds the key of its colour from now on."],
+  ["keymasters-tent", "Keymaster's Tent", "site", 1, 1, "", "per-player", 0, [], 0, "Gives you the key of its colour for the rest of the game."],
   // prettier-ignore
-  ["border-gate", "Border Gate", "gate", 1, 1, "", "permanent", 0, [], 0, "Passable only to heroes whose player holds the key of its colour."],
+  ["border-gate", "Border Gate", "gate", 1, 1, "", "permanent", 0, [], 0, "Only heroes of a player with the key of its colour can pass."],
   // prettier-ignore
-  ["seer-hut", "Seer Hut", "site", 1, 1, "", "one-time", 2000, [], 4, "Shows a quest and its reward; the first player to complete it and return is paid."],
+  ["seer-hut", "Seer Hut", "site", 1, 1, "", "one-time", 2000, [], 4, "Gives a quest and shows its reward; the first player to finish the quest and come back gets the reward."],
   // prettier-ignore
-  ["quest-gate", "Quest Gate", "gate", 1, 1, "", "per-player", 0, [], 0, "Passable to your heroes once your player completes its quest."],
+  ["quest-gate", "Quest Gate", "gate", 1, 1, "", "per-player", 0, [], 0, "Your heroes can pass once you have finished its quest."],
   // prettier-ignore
-  ["prison", "Prison", "site", 1, 1, "v", "one-time", 4500, [], 1, "Frees a named hero, who joins your player (at most 8 heroes)."],
+  ["prison", "Prison", "site", 1, 1, "v", "one-time", 4500, [], 1, "Walk up next to it to free a named hero, who joins you if you have fewer than 8 heroes."],
   // prettier-ignore
   ["trading-post", "Trading Post", "site", 2, 2, "", "each-visit", 0, [], 2, "Trade resources at the marketplace rates."],
   // prettier-ignore
-  ["tollhouse", "Tollhouse", "site", 2, 2, "", "each-visit", 0, [], 3, "Sells three items at their value and buys artifacts and scrolls at half value. New stock each week."],
+  ["tollhouse", "Tollhouse", "site", 2, 2, "", "each-visit", 0, [], 3, "Sells three items at their full value and buys artifacts and scrolls at half value. New stock each week."],
   // prettier-ignore
-  ["drill-yard", "Drill Yard", "site", 2, 2, "", "each-visit", 0, [], 0, "Sells the Drill of a creature in the hero's army for twice its town gold cost: a permanent flag for your player."],
+  ["drill-yard", "Drill Yard", "site", 2, 2, "", "each-visit", 0, [], 0, "Sells the Drill of a creature in the hero's army for twice its gold cost in town. You keep it for the rest of the game."],
   // prettier-ignore
-  ["curse-lifters-shrine", "Curse-Lifter's Shrine", "site", 1, 1, "", "each-visit", 0, [], 2, "Lifts one worn cursed artifact for 1000 gold and 2 essence."],
+  ["curse-lifters-shrine", "Curse-Lifter's Shrine", "site", 1, 1, "", "each-visit", 0, [], 2, "Takes one cursed artifact off the hero, into its backpack, for 1000 gold and 2 essence."],
   // prettier-ignore
-  ["roadside-inn", "Roadside Inn", "site", 2, 2, "s", "each-visit", 0, [], 2, "Sells a rumour for 250 gold: where a buried cache lies. A new rumour each week."],
+  ["roadside-inn", "Roadside Inn", "site", 2, 2, "s", "each-visit", 0, [], 2, "Sells a rumour for 250 gold telling where a buried cache lies. A new rumour each week."],
   // prettier-ignore
   ["altar-of-sacrifice", "Altar of Sacrifice", "site", 1, 1, "s", "each-visit", 0, [W], 1, "Give up creatures for experience equal to their total HP, or an artifact for half its value."],
   // prettier-ignore
@@ -283,11 +283,11 @@ const ROWS: readonly Row[] = [
   // prettier-ignore
   ["one-way-waystone", "One-Way Waystone", "teleport", 1, 1, "s", "each-visit", 0, [], 0, "Step on it to appear at its exit."],
   // prettier-ignore
-  ["pylon", "Pylon", "site", 1, 1, "", "per-player", 500, [], 0, "Marks it for your player: Tow Line travels between marked pylons."],
+  ["pylon", "Pylon", "site", 1, 1, "", "per-player", 500, [], 0, "Visit it to mark it for you: the Tow Line spell carries heroes between your marked pylons."],
   // prettier-ignore
   ["event-tile", "Event Tile", "site", 1, 1, "v", "one-time", 0, [], 0, "Something happens to the first hero to enter."],
   // prettier-ignore
-  ["sealed-box", "Sealed Box", "site", 1, 1, "v", "one-time", 3000, [], 3, "Opened from a next cell by the first hero to reach it; what is inside is a surprise."],
+  ["sealed-box", "Sealed Box", "site", 1, 1, "v", "one-time", 3000, [], 3, "The first hero to walk up next to it opens it; what is inside is a surprise."],
   // prettier-ignore
   ["sign", "Sign", "site", 1, 1, "s", "each-visit", 0, [], 0, "Shows its text."],
 ];

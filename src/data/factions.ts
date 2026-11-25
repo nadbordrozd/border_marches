@@ -122,7 +122,7 @@ export const FACTIONS: readonly FactionDef[] = [
     colour: "#2f6fd0",
     birthright: {
       name: "Sworn",
-      text: "Native stacks deploy linked in pairs (slot order): each Heal is shared, and a stack may swap hexes with its partner in place of its walk.",
+      text: "Native stacks start each battle Sworn in pairs (in army slot order): heals on one also heal its partner, and a stack may swap places with its partner instead of walking.",
       startRule: "birthright:sworn",
     },
     schools: { bloom: 3, accord: 4, clock: 2, hush: 0, storm: 1 },
@@ -139,7 +139,7 @@ export const FACTIONS: readonly FactionDef[] = [
     colour: "#7a4fb5",
     birthright: {
       name: "Not Done Yet",
-      text: "A dead native stack that leaves remains gets up at the next round start with a third of its starting count, once per battle; it crumbles after the battle.",
+      text: "Once a battle, a native stack that dies and leaves remains gets up at the start of the next round with a third of its starting count. It crumbles when the battle ends.",
       ability: "not-done-yet",
     },
     schools: { bloom: 0, accord: 1, clock: 3, hush: 4, storm: 2 },
@@ -156,7 +156,7 @@ export const FACTIONS: readonly FactionDef[] = [
     colour: "#5fa52a",
     birthright: {
       name: "Launched",
-      text: "Natives caught in their own side's area effects take nothing and are pushed 3 hexes away from the centre.",
+      text: "Natives caught in an area effect of their own side take nothing from it and are pushed 3 hexes away from its centre.",
       ability: "launched",
     },
     schools: { bloom: 4, accord: 0, clock: 1, hush: 2, storm: 3 },

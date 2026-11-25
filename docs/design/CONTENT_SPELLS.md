@@ -381,6 +381,19 @@ Spire style, with the keywords those definitions use one level down
 (`src/ui/keywords.ts`). `tests/ui/keywords.test.ts` checks that every
 condition and ground kind has an entry and that every entry is used.
 
+Bead `border_marches-bzc.70` (2026-11-25) put the other texts a player
+reads in the same style, again with no change to any rule or number:
+artifacts, skills, feats, vows, Commands, specialties, birthrights, town
+buildings and map objects. Clocks are rounds ("starts Frozen for 1
+round", "for the whole battle"), multipliers are plain percentages
+("deal 10% more damage"), "adjacent" is "next to" (except where Long
+Shadow names the word abilities use), battle-start rules open "In each
+battle, ...", and every skill rank reads on its own (no "Also:"), since
+an upgrade card shows one rank alone. "Page" stays where only known
+spells count (scrolls excluded), and "gate" is said in words where it
+helps ("however big it is"). The same test bans the old shorthand in
+these texts.
+
 **Simplification candidates.** These spells do not fit one or two plain
 sentences without leaning on a second rule; they are left as they are
 (this bead changes no mechanics) and listed here for a balance bead:

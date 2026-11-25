@@ -137,22 +137,22 @@ export function specialtyText(spec: Specialty): string {
   switch (spec.kind) {
     case "creature": {
       const name = getCreature(spec.creature as CreatureId).plural;
-      return `${name}: +1 Attack and Defense (+1 per 5 levels) and +1 Speed.`;
+      return `${name} in this hero's army get +1 Attack, +1 Defense and +1 Speed; Attack and Defense grow by 1 more every 5 hero levels.`;
     }
     case "spell":
-      return `Starts with ${spellLabel(spec.spell)}, cast at +2 Power (+1 per 5 levels).`;
+      return `Starts knowing ${spellLabel(spec.spell)} and casts it at +2 Power, plus 1 more every 5 hero levels.`;
     case "skill": {
       const name = findSkill(spec.skill)?.name ?? spec.skill;
-      return `Starts with ${name} at rank 2.`;
+      return `Starts with the ${name} skill at rank 2.`;
     }
     case "resource":
       return spec.resource === "gold"
-        ? "250 gold each day."
+        ? "+250 gold each day while the hero is on the map."
         : spec.resource === "wood-ore"
-          ? "1 wood and 1 ore each day."
-          : "1 essence every second day.";
+          ? "+1 wood and +1 ore each day while the hero is on the map."
+          : "+1 essence every second day while the hero is on the map.";
     case "command":
-      return "The Command counts C one higher.";
+      return "The hero's Command works as if C were 1 higher.";
   }
 }
 

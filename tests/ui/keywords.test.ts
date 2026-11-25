@@ -232,4 +232,30 @@ describe("rules texts and the glossary", () => {
       expect(text.length, s.id).toBeLessThanOrEqual(170);
     }
   });
+
+  it("hero, item, town and map texts use no shorthand", () => {
+    // Bead bzc.70: artifacts, skills, feats, vows, Commands, specialties,
+    // birthrights, buildings and map objects in the same plain style
+    // ("for 2 rounds", "deal 10% more damage", "next to"), each rank of a
+    // skill readable on its own (no "Also:").
+    const plain = new Set([
+      "artifact",
+      "skill",
+      "feat",
+      "vow",
+      "command",
+      "specialty",
+      "birthright",
+      "building",
+      "object",
+    ]);
+    const shorthand =
+      /\bclock \d|\bclock min\b|\bclockless\b|\bAlso:|\bBattle start:|\bx \d+%|\bbears\b|\bbearing\b|\bflags it\b|\bnext cell\b|\bFV\b|\bXP\b|\bstraight step\b|\bnaming the\b|\bsize \d/;
+    const checked = texts.filter((t) => plain.has(t.from.split(" ")[0] ?? ""));
+    expect(checked.length).toBeGreaterThan(300);
+    for (const t of checked) {
+      expect(t.text, t.from).not.toMatch(shorthand);
+      expect(t.text.length, t.from).toBeLessThanOrEqual(200);
+    }
+  });
 });

@@ -294,7 +294,7 @@ const ROWS: ArtifactDef[] = [
     "Sprig Pendant",
     "neck",
     2000,
-    "+2 Power for Bloom pages.",
+    "Your Bloom pages are cast at +2 Power.",
     [schoolPower("bloom")],
   ),
   trinket(
@@ -302,18 +302,23 @@ const ROWS: ArtifactDef[] = [
     "Sealing-Wax Locket",
     "neck",
     2000,
-    "+2 Power for Accord pages.",
+    "Your Accord pages are cast at +2 Power.",
     [schoolPower("accord")],
   ),
-  trinket("fob-chain", "Fob Chain", "neck", 2000, "+2 Power for Clock pages.", [
-    schoolPower("clock"),
-  ]),
+  trinket(
+    "fob-chain",
+    "Fob Chain",
+    "neck",
+    2000,
+    "Your Clock pages are cast at +2 Power.",
+    [schoolPower("clock")],
+  ),
   trinket(
     "mourning-brooch",
     "Mourning Brooch",
     "neck",
     2000,
-    "+2 Power for Hush pages.",
+    "Your Hush pages are cast at +2 Power.",
     [schoolPower("hush")],
   ),
   trinket(
@@ -321,7 +326,7 @@ const ROWS: ArtifactDef[] = [
     "Lightning-Glass Bead",
     "neck",
     2000,
-    "+2 Power for Storm pages.",
+    "Your Storm pages are cast at +2 Power.",
     [schoolPower("storm")],
   ),
   trinket(
@@ -348,7 +353,7 @@ const ROWS: ArtifactDef[] = [
     "Oilskin of Deep Pockets",
     "cloak",
     2000,
-    "+15% maximum mana.",
+    "The hero's maximum mana is 15% higher.",
     [{ kind: "max-mana-percent", percent: 15 }],
   ),
   trinket(
@@ -372,7 +377,7 @@ const ROWS: ArtifactDef[] = [
     "Moneylender's Ring",
     "ring",
     2000,
-    "+125 gold each day while its hero is on the map.",
+    "+125 gold each day while the hero is on the map.",
     [{ kind: "income", resources: { gold: 125 } }],
   ),
   trinket(
@@ -380,7 +385,7 @@ const ROWS: ArtifactDef[] = [
     "Seven-Furlong Boots",
     "feet",
     2500,
-    "+10% movement points.",
+    "The hero has 10% more movement points each day.",
     [{ kind: "movement-percent", percent: 10 }],
   ),
   trinket(
@@ -388,7 +393,7 @@ const ROWS: ArtifactDef[] = [
     "Sensible Shoes",
     "feet",
     2000,
-    "+200 movement points.",
+    "The hero has 200 more movement points each day.",
     [{ kind: "movement-flat", amount: 200 }],
   ),
   trinket(
@@ -396,7 +401,7 @@ const ROWS: ArtifactDef[] = [
     "Galoshes",
     "feet",
     1500,
-    "Wasteland costs this hero 100 per straight step.",
+    "Wasteland costs the hero only 100 movement points a step, like grass.",
     [{ kind: "terrain-cost", reduce: 1000, terrain: "wasteland" }],
   ),
   trinket("lucky-penny", "Lucky Penny", "pocket", 2000, "+1 Luck.", [
@@ -405,15 +410,20 @@ const ROWS: ArtifactDef[] = [
   trinket("brass-bugle", "Brass Bugle", "pocket", 2000, "+1 Morale.", [
     { kind: "morale", amount: 1 },
   ]),
-  trinket("spyglass", "Spyglass", "pocket", 1500, "+1 sight radius.", [
-    { kind: "sight", amount: 1 },
-  ]),
+  trinket(
+    "spyglass",
+    "Spyglass",
+    "pocket",
+    1500,
+    "The hero sees 1 cell farther.",
+    [{ kind: "sight", amount: 1 }],
+  ),
   trinket(
     "thermos-of-strong-tea",
     "Thermos of Strong Tea",
     "pocket",
     1500,
-    "+2 daily mana return.",
+    "The hero gets 2 more mana back each day.",
     [{ kind: "mana-regen", amount: 2 }],
   ),
   trinket(
@@ -421,7 +431,7 @@ const ROWS: ArtifactDef[] = [
     "Scholar's Bookmark",
     "pocket",
     1500,
-    "+10% to every XP gain.",
+    "The hero earns 10% more experience.",
     [{ kind: "xp-percent", percent: 10 }],
   ),
 
@@ -431,7 +441,7 @@ const ROWS: ArtifactDef[] = [
     "Winter's Pocket Watch",
     "pocket",
     6000,
-    "Battle start: the fastest enemy stack starts Frozen, clock 1.",
+    "In each battle, the fastest enemy stack starts Frozen for 1 round.",
     [start("enemy", "fastest", "frozen", 1)],
   ),
   wonder(
@@ -439,7 +449,7 @@ const ROWS: ArtifactDef[] = [
     "Sexton's Spade",
     "weapon",
     5000,
-    "Your rules that use remains may use the remains of any stack, whoever owned it.",
+    "Everything of yours that uses remains can use any stack's remains, friend's or foe's.",
     [sw("remains-any-owner")],
   ),
   wonder(
@@ -447,7 +457,7 @@ const ROWS: ArtifactDef[] = [
     "The Bellhop's Cap",
     "head",
     6000,
-    "Item act: choose one of your stacks; move one condition from a stack adjacent to it to another stack adjacent to it (landing rules apply).",
+    "Item act: pick one of your stacks. Move a condition from a stack next to it onto another stack next to it, if that stack can take it.",
     [],
     { itemActs: ["the-bellhops-cap"] },
   ),
@@ -456,7 +466,7 @@ const ROWS: ArtifactDef[] = [
     "Tinderbox",
     "pocket",
     5000,
-    "Item act: your spent Fuel is restored, so you may Fuel a second time this battle.",
+    "Item act: get your Fuel back, so you can Fuel a second time this battle.",
     [],
     { itemActs: ["tinderbox"] },
   ),
@@ -465,7 +475,7 @@ const ROWS: ArtifactDef[] = [
     "Watering Can",
     "pocket",
     4000,
-    "Battle start: your weakest stack starts with Mending 12, clock 4.",
+    "In each battle, your weakest stack starts Mending 12 for 4 rounds.",
     [start("own", "weakest", "mending", 4, { size: 12 })],
   ),
   wonder(
@@ -473,7 +483,7 @@ const ROWS: ArtifactDef[] = [
     "Gardener's Apron",
     "torso",
     4000,
-    "When Mending heals a stack of yours, each enemy stack adjacent to it gains Venomed 2, clock 2.",
+    "When Mending heals one of your stacks, every enemy stack next to it gains Venomed 2 for 2 rounds.",
     [sw("gardeners-apron")],
   ),
   wonder(
@@ -481,7 +491,7 @@ const ROWS: ArtifactDef[] = [
     "Thornmail Vest",
     "torso",
     5000,
-    "Battle start: your strongest stack starts with Thorned 12, clockless.",
+    "In every battle, your strongest stack is Thorned 12 throughout.",
     [start("own", "strongest", "thorned", null, { size: 12 })],
   ),
   wonder(
@@ -489,7 +499,7 @@ const ROWS: ArtifactDef[] = [
     "Hedge-Clipper Shears",
     "weapon",
     4000,
-    "When Thorned on your stack deals Harm, the striker gains Slowed 2, clock 2.",
+    "When Thorned on your stack deals Harm, the attacker gains Slowed 2 for 2 rounds.",
     [sw("hedge-clipper-shears")],
   ),
   wonder(
@@ -497,7 +507,7 @@ const ROWS: ArtifactDef[] = [
     "Cider Flask",
     "pocket",
     4000,
-    "Item act: end Ripening on one of your stacks; it heals 3 x that size in HP, reviving.",
+    "Item act: end Ripening on one of your stacks. It heals 3 HP for each point of Ripening, reviving.",
     [],
     { itemActs: ["cider-flask"] },
   ),
@@ -506,7 +516,7 @@ const ROWS: ArtifactDef[] = [
     "Notary's Seal",
     "ring",
     5000,
-    "Battle start: your strongest stack starts with a Scapegoat link to your weakest stack, clock 3.",
+    "In each battle, your strongest stack starts with a Scapegoat link to your weakest stack for 3 rounds: damage to it is taken by the weakest.",
     [
       start("own", "strongest", "scapegoat", 3, {
         linkTo: { side: "own", selector: "weakest" },
@@ -518,7 +528,7 @@ const ROWS: ArtifactDef[] = [
     "Umbrella of State",
     "shield",
     5000,
-    "Battle start: every stack of yours starts Warded 30, clock 3.",
+    "In each battle, every stack of yours starts Warded 30 for 3 rounds.",
     [start("own", "all", "warded", 3, { size: 30 })],
   ),
   wonder(
@@ -526,7 +536,7 @@ const ROWS: ArtifactDef[] = [
     "Lightning Rod",
     "weapon",
     5000,
-    "When Warded lowers Harm to your stack, the amount prevented is dealt as Harm to the nearest enemy stack.",
+    "When Warded saves your stack from Harm, the nearest enemy stack takes the Harm that was saved.",
     [sw("lightning-rod")],
   ),
   wonder(
@@ -534,7 +544,7 @@ const ROWS: ArtifactDef[] = [
     "Pressed Olive Branch",
     "neck",
     4000,
-    "Battle start: the strongest enemy stack starts Mollified 30, clock 2.",
+    "In each battle, the strongest enemy stack starts Mollified 30 for 2 rounds.",
     [start("enemy", "strongest", "mollified", 2, { size: 30 })],
   ),
   wonder(
@@ -542,7 +552,7 @@ const ROWS: ArtifactDef[] = [
     "Drum Major's Baton",
     "weapon",
     4000,
-    "Battle start: your two slowest stacks start Quickened 2, clock 3.",
+    "In each battle, your two slowest stacks start Quickened 2 for 3 rounds.",
     [start("own", "slowest", "quickened", 3, { size: 2, count: 2 })],
   ),
   wonder(
@@ -550,7 +560,7 @@ const ROWS: ArtifactDef[] = [
     "Metronome Spurs",
     "feet",
     4000,
-    "When a Quickened stack of yours Strikes, the target gains Slowed 1, clock 2.",
+    "When a Quickened stack of yours Strikes, its target gains Slowed 1 for 2 rounds.",
     [sw("metronome-spurs")],
   ),
   wonder(
@@ -558,7 +568,7 @@ const ROWS: ArtifactDef[] = [
     "Bailiff's Greatcoat",
     "cloak",
     5000,
-    "When a Reckoning expires on an enemy stack, your weakest stack heals that amount, reviving.",
+    "When a Reckoning falls due on an enemy stack, your weakest stack heals that much HP, reviving.",
     [sw("bailiffs-greatcoat")],
   ),
   wonder(
@@ -566,7 +576,7 @@ const ROWS: ArtifactDef[] = [
     "Felt Slippers of the Night Shift",
     "feet",
     4000,
-    "Battle start: the enemy shooter with the highest stack fight value starts Hushed, clock 2.",
+    "In each battle, the strongest enemy shooter starts Hushed for 2 rounds: it cannot shoot.",
     [start("enemy", "strongest-shooter", "hushed", 2)],
   ),
   wonder(
@@ -574,7 +584,7 @@ const ROWS: ArtifactDef[] = [
     "Bloodstone Ring",
     "ring",
     5000,
-    "Battle start: the strongest enemy stack starts with a Leeched link to your weakest stack, size 10, clock 3.",
+    "In each battle, the strongest enemy stack starts Leeched 10 for 3 rounds, linked to your weakest stack: each turn it takes 10 Harm and yours heals 10.",
     [
       start("enemy", "strongest", "leeched", 3, {
         size: 10,
@@ -587,7 +597,7 @@ const ROWS: ArtifactDef[] = [
     "Leaky Bucket",
     "head",
     4000,
-    "Battle start: the strongest enemy stack starts Drenched 50, clock 3.",
+    "In each battle, the strongest enemy stack starts Drenched 50 for 3 rounds.",
     [start("enemy", "strongest", "drenched", 3, { size: 50 })],
   ),
   wonder(
@@ -595,7 +605,7 @@ const ROWS: ArtifactDef[] = [
     "Whetstone Pendant",
     "neck",
     6000,
-    "When a Fired Up stack of yours kills a stack, it gains Heartened, clock 1.",
+    "When a Fired Up stack of yours kills a whole stack, it becomes Heartened for 1 round.",
     [sw("whetstone-pendant")],
   ),
 
@@ -605,7 +615,7 @@ const ROWS: ArtifactDef[] = [
     "The Albatross",
     "neck",
     4000,
-    "+4 Attack and +4 Defense. Drawback: your strongest stack starts Jinxed 30, clockless.",
+    "+4 Attack and +4 Defense. Drawback: in every battle your strongest stack is Jinxed 30 throughout.",
     [
       stat("attack", 4),
       stat("defense", 4),
@@ -618,7 +628,7 @@ const ROWS: ArtifactDef[] = [
     "Coat of Embers",
     "cloak",
     4000,
-    "Every stack of yours starts Fired Up 4, clock 3. Drawback: every stack of yours starts Burning 8, clock 3.",
+    "Every stack of yours starts each battle Fired Up 4 for 3 rounds. Drawback: each one also starts Burning 8 for 3 rounds.",
     [
       start("own", "all", "fired-up", 3, { size: 4 }),
       start("own", "all", "burning", 3, { size: 8 }),
@@ -630,7 +640,7 @@ const ROWS: ArtifactDef[] = [
     "IOU Pad",
     "pocket",
     4000,
-    "+3 Power. Drawback: your strongest stack starts with a Reckoning of 80, clock 3.",
+    "+3 Power. Drawback: your strongest stack starts each battle with Reckoning 80: it takes 80 Harm after 3 rounds.",
     [stat("power", 3), start("own", "strongest", "reckoning", 3, { size: 80 })],
     { cursed: true },
   ),
@@ -639,7 +649,7 @@ const ROWS: ArtifactDef[] = [
     "Sleeping Cap of the Night Watch",
     "head",
     4000,
-    "+4 Lore and +2 daily mana return. Drawback: your fastest stack starts Asleep, clock 2, with no gate.",
+    "+4 Lore and 2 more mana back each day. Drawback: your fastest stack starts each battle Asleep for 2 rounds, however big it is.",
     [
       stat("lore", 4),
       { kind: "mana-regen", amount: 2 },
@@ -652,7 +662,7 @@ const ROWS: ArtifactDef[] = [
     "Ball and Chain",
     "feet",
     4000,
-    "+5 Defense. Drawback: every stack of yours starts Delayed, clock 2.",
+    "+5 Defense. Drawback: every stack of yours starts each battle Delayed for 2 rounds.",
     [stat("defense", 5), start("own", "all", "delayed", 2)],
     { cursed: true },
   ),
@@ -661,7 +671,7 @@ const ROWS: ArtifactDef[] = [
     "The Thirteenth Chime",
     "ring",
     4000,
-    "+3 Power and +3 Lore. Drawback: your two strongest stacks start Shaken, clock 3.",
+    "+3 Power and +3 Lore. Drawback: your two strongest stacks start each battle Shaken for 3 rounds.",
     [
       stat("power", 3),
       stat("lore", 3),
@@ -675,7 +685,7 @@ const ROWS: ArtifactDef[] = [
     "the-second-left-glove",
     "The Second Left Glove",
     "ring",
-    "Your hero may cast twice per round; the second page must be of a school opposed to the first.",
+    "Your hero may cast two pages a round, if the second is of a school opposed to the first.",
     [sw("second-cast-opposed")],
     ["the-gloves-thumb", "the-gloves-lining", "the-odd-cufflink"],
   ),
@@ -684,7 +694,7 @@ const ROWS: ArtifactDef[] = [
     "The Glove's Thumb",
     "ring",
     "the-second-left-glove",
-    "In round 1 your hero may cast twice; the second page must be of a school opposed to the first.",
+    "In round 1 your hero may cast two pages, if the second is of a school opposed to the first.",
     [sw("second-cast-opposed-round-1")],
   ),
   piece(
@@ -692,7 +702,7 @@ const ROWS: ArtifactDef[] = [
     "The Glove's Lining",
     "cloak",
     "the-second-left-glove",
-    "A page of a school opposed to the page you cast in the round before costs 25% less mana.",
+    "A page costs 25% less mana if its school is opposed to the school of the page you cast the round before.",
     [sw("opposed-page-discount")],
   ),
   piece(
@@ -700,14 +710,14 @@ const ROWS: ArtifactDef[] = [
     "The Odd Cufflink",
     "ring",
     "the-second-left-glove",
-    "When you cast a page of a school opposed to your previous page this battle, your strongest stack gains Fired Up 3, clock 2.",
+    "When you cast a page of a school opposed to your last page this battle, your strongest stack gains Fired Up 3 for 2 rounds.",
     [sw("opposed-cast-fires-up")],
   ),
   marvel(
     "the-hourglass-with-no-bottom",
     "The Hourglass with No Bottom",
     "pocket",
-    "Clocks on conditions on your stacks do not tick, Holds excepted: boons and debts alike.",
+    "Conditions on your stacks never count down, boons, banes and debts alike. Holds still count down.",
     [sw("own-clocks-frozen")],
     ["the-upper-bulb", "the-lower-bulb", "a-pinch-of-sand"],
     { cursed: true },
@@ -717,7 +727,7 @@ const ROWS: ArtifactDef[] = [
     "The Upper Bulb",
     "pocket",
     "the-hourglass-with-no-bottom",
-    "Clocks on banes on your stacks do not tick, Holds excepted.",
+    "Banes on your stacks never count down, except Holds.",
     [sw("own-bane-clocks-frozen")],
     { cursed: true },
   ),
@@ -726,7 +736,7 @@ const ROWS: ArtifactDef[] = [
     "The Lower Bulb",
     "neck",
     "the-hourglass-with-no-bottom",
-    "Clocks on boons on your strongest stack do not tick.",
+    "Boons on your strongest stack never count down.",
     [sw("strongest-boon-clocks-frozen")],
   ),
   piece(
@@ -734,7 +744,7 @@ const ROWS: ArtifactDef[] = [
     "A Pinch of Sand",
     "pocket",
     "the-hourglass-with-no-bottom",
-    "Item act: change one condition's clock by 2, exactly as the Wind tool (longer for your boons and enemy banes, shorter otherwise).",
+    "Item act: pick a condition. It lasts 2 rounds longer if it is a boon on your stack or a bane on an enemy, or 2 rounds shorter otherwise.",
     [],
     { itemActs: ["a-pinch-of-sand"] },
   ),
@@ -742,7 +752,7 @@ const ROWS: ArtifactDef[] = [
     "treaty-ink",
     "Treaty Ink",
     "pocket",
-    "When a linked stack dies, its end of the link passes to the nearest living stack, friend or foe.",
+    "When a linked stack dies, its end of the link jumps to the nearest living stack, friend or foe.",
     [sw("link-passes")],
     ["the-quill", "the-blotter", "the-unsigned-treaty"],
   ),
@@ -751,7 +761,7 @@ const ROWS: ArtifactDef[] = [
     "The Quill",
     "weapon",
     "treaty-ink",
-    "When your side makes a link, its clock is 1 longer.",
+    "Links your side makes last 1 round longer.",
     [sw("link-clock-plus-1")],
   ),
   piece(
@@ -759,7 +769,7 @@ const ROWS: ArtifactDef[] = [
     "The Blotter",
     "shield",
     "treaty-ink",
-    "When the far end of a Scapegoat link on your stack dies, the excess Harm does not return to your stack.",
+    "When the far end of a Scapegoat link on your stack dies, the Harm it could not take is not passed back to your stack.",
     [sw("scapegoat-no-backlash")],
   ),
   piece(
@@ -767,7 +777,7 @@ const ROWS: ArtifactDef[] = [
     "The Unsigned Treaty",
     "torso",
     "treaty-ink",
-    "Battle start: your strongest stack starts with a Scapegoat link to the strongest enemy stack, clock 1.",
+    "In each battle, your strongest stack starts with a Scapegoat link to the strongest enemy stack for 1 round: damage to yours is taken by theirs.",
     [
       start("own", "strongest", "scapegoat", 1, {
         linkTo: { side: "enemy", selector: "strongest" },
@@ -778,7 +788,7 @@ const ROWS: ArtifactDef[] = [
     "the-unspent-page",
     "The Unspent Page",
     "neck",
-    "One page, chosen on the map when the Marvel is put on, is never spent; it still costs mana and a cast.",
+    "Pick one page when you put this on: it is never spent. It still costs mana and uses the round's cast.",
     [sw("unspent-page")],
     ["the-torn-corner", "bookbinders-thread", "the-missing-page"],
   ),
@@ -787,7 +797,7 @@ const ROWS: ArtifactDef[] = [
     "The Torn Corner",
     "pocket",
     "the-unspent-page",
-    "Each of your tier 1 pages may be cast twice per battle.",
+    "Each of your tier 1 pages can be cast twice a battle.",
     [sw("tier1-twice")],
   ),
   piece(
@@ -795,7 +805,7 @@ const ROWS: ArtifactDef[] = [
     "Bookbinder's Thread",
     "ring",
     "the-unspent-page",
-    "The first scroll you cast each battle is not destroyed.",
+    "The first scroll you cast each battle is not used up.",
     [sw("first-scroll-kept")],
   ),
   piece(
@@ -803,7 +813,7 @@ const ROWS: ArtifactDef[] = [
     "The Missing Page",
     "head",
     "the-unspent-page",
-    "+4 Power, and your highest-tier page (ties: the costliest, then book order) starts each battle spent.",
+    "+4 Power, but your highest-tier page starts every battle already spent (on a tie, the costliest, then the first in the book).",
     [stat("power", 4), { kind: "missing-page" }],
   ),
 
@@ -813,7 +823,7 @@ const ROWS: ArtifactDef[] = [
     "Bottled Cheer",
     "potion",
     400,
-    "+1 Morale until the hero's next battle ends.",
+    "+1 Morale until the end of the hero's next battle.",
     { kind: "next-battle", effects: [{ kind: "morale", amount: 1 }] },
   ),
   consumable(
@@ -821,7 +831,7 @@ const ROWS: ArtifactDef[] = [
     "Jar of Fair Chances",
     "potion",
     400,
-    "+1 Luck until the hero's next battle ends.",
+    "+1 Luck until the end of the hero's next battle.",
     { kind: "next-battle", effects: [{ kind: "luck", amount: 1 }] },
   ),
   consumable(
@@ -829,7 +839,7 @@ const ROWS: ArtifactDef[] = [
     "Blue Tonic",
     "potion",
     500,
-    "The hero gains 20 mana, which may take it above its maximum once.",
+    "The hero gains 20 mana, even above its maximum.",
     { kind: "mana", amount: 20 },
   ),
   consumable(
@@ -845,7 +855,7 @@ const ROWS: ArtifactDef[] = [
     "Fire-Eater's Draught",
     "potion",
     600,
-    "In the hero's next battle its strongest stack starts Fired Up 4, clock 3.",
+    "In the hero's next battle, its strongest stack starts Fired Up 4 for 3 rounds.",
     {
       kind: "next-battle",
       effects: [start("own", "strongest", "fired-up", 3, { size: 4 })],
@@ -856,7 +866,7 @@ const ROWS: ArtifactDef[] = [
     "Witch-Hazel",
     "potion",
     600,
-    "In the hero's next battle its weakest stack starts with Mending 10, clock 4.",
+    "In the hero's next battle, its weakest stack starts Mending 10 for 4 rounds.",
     {
       kind: "next-battle",
       effects: [start("own", "weakest", "mending", 4, { size: 10 })],
@@ -867,7 +877,7 @@ const ROWS: ArtifactDef[] = [
     "Late-Harvest Cordial",
     "potion",
     600,
-    "In the hero's next battle its strongest stack starts with Ripening 20, clock 4.",
+    "In the hero's next battle, its strongest stack starts Ripening 20 for 4 rounds.",
     {
       kind: "next-battle",
       effects: [start("own", "strongest", "ripening", 4, { size: 20 })],
@@ -878,7 +888,7 @@ const ROWS: ArtifactDef[] = [
     "Elixir of Hindsight",
     "potion",
     1000,
-    "The hero's next skill offer or feat draft is redrawn once, with the seed advanced by one.",
+    "The hero's next skill offer or feat draft is drawn again, once.",
     { kind: "redraw" },
   ),
   consumable(
@@ -886,7 +896,7 @@ const ROWS: ArtifactDef[] = [
     "Dog-Eared Map",
     "paper",
     800,
-    "Marks the exact cell of the nearest buried cache.",
+    "Marks the exact cell of the nearest buried cache on the map.",
     { kind: "mark-cache" },
   ),
   consumable(
@@ -894,7 +904,7 @@ const ROWS: ArtifactDef[] = [
     "Letter of Safe Conduct",
     "paper",
     1200,
-    "A neutral stack adjacent to the hero with stack FV at most 3000 has no zone of control against this player until the day ends.",
+    "Until the day ends, a neutral stack next to the hero with a fight value of 3000 or less loses its zone of control against your heroes.",
     { kind: "safe-conduct", maxFightValue: 3000 },
   ),
   consumable(
@@ -902,7 +912,7 @@ const ROWS: ArtifactDef[] = [
     "Signal Lantern",
     "tool",
     500,
-    "Reveals the cells in a disc of radius 8 around the hero.",
+    "Reveals every cell within 8 cells of the hero.",
     { kind: "reveal", radius: 8 },
   ),
   consumable(
@@ -910,7 +920,7 @@ const ROWS: ArtifactDef[] = [
     "Collapsible Shovel",
     "tool",
     500,
-    "The hero digs now for 300 movement points, whatever it has already spent today.",
+    "The hero digs here at once for 300 movement points, even if it has already moved today.",
     { kind: "dig", movement: 300 },
   ),
 ];
