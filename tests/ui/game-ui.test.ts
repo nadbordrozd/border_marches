@@ -19,7 +19,12 @@ import {
 import { cloneState } from "../../src/core/game/state.ts";
 import { withHeroMagic } from "../../src/core/magic/index.ts";
 import { field, gameOn, monster } from "../core/game/helpers.ts";
-import { minimapPixels, TERRAIN_COLOURS } from "../../src/ui/minimap.ts";
+import {
+  minimapCell,
+  minimapLayout,
+  minimapPixels,
+  TERRAIN_COLOURS,
+} from "../../src/ui/minimap.ts";
 import {
   displayObjects,
   objectsSignature,
@@ -335,6 +340,8 @@ describe("minimap", () => {
     expect(px.length).toBe(s.map.width * s.map.height * 4);
     const hidden = s.players[0]!.explored.indexOf(false);
     expect([...px.slice(hidden * 4, hidden * 4 + 3)]).toEqual([11, 10, 8]);
+    // Fog is see-through: the canvas paints its hatch under the map.
+    expect(px[hidden * 4 + 3]).toBe(0);
     // A plain explored cell shows its terrain colour.
     const plain = s.map.cells.findIndex(
       (c, i) =>
@@ -376,5 +383,39 @@ describe("minimap", () => {
       return n;
     };
     expect(fogCells(minimapPixels(s, 0))).toBeLessThan(fogCells(px));
+  });
+
+  it("fills its frame for every map size, aspect kept and centred", () => {
+    // S, M and L maps (and the named maps, all square) in the frame sizes
+    // the sidebar uses from 800x600 to 1920x1080, at 1x and 2x.
+    for (const frame of [120, 192, 248, 312, 496, 624]) {
+      for (const cells of [36, 48, 72]) {
+        const at = minimapLayout(frame, frame, cells, cells);
+        expect(at).toMatchObject({ x: 0, y: 0, w: frame, h: frame });
+        expect(at.scale).toBeCloseTo(frame / cells);
+      }
+    }
+    // A wide map is letterboxed top and bottom, centred.
+    const wide = minimapLayout(200, 200, 72, 36);
+    expect(wide).toMatchObject({ x: 0, y: 50, w: 200, h: 100 });
+    // A tall frame centres a square map vertically.
+    expect(minimapLayout(100, 140, 48, 48)).toMatchObject({
+      x: 0,
+      y: 20,
+      w: 100,
+      h: 100,
+    });
+  });
+
+  it("maps a click in the frame to the cell under it, clamped", () => {
+    const at = minimapLayout(192, 192, 48, 48); // 4 px per cell
+    expect(minimapCell(at, 48, 48, 0, 0)).toEqual({ x: 0, y: 0 });
+    expect(minimapCell(at, 48, 48, 9, 13)).toEqual({ x: 2, y: 3 });
+    expect(minimapCell(at, 48, 48, 191.9, 191.9)).toEqual({ x: 47, y: 47 });
+    expect(minimapCell(at, 48, 48, 500, -20)).toEqual({ x: 47, y: 0 });
+    // Letterbox: a click above the map goes to the top row.
+    const wide = minimapLayout(200, 200, 72, 36);
+    expect(minimapCell(wide, 72, 36, 100, 10)).toEqual({ x: 36, y: 0 });
+    expect(minimapCell(wide, 72, 36, 100, 100)).toEqual({ x: 36, y: 18 });
   });
 });

@@ -323,8 +323,8 @@
 .gm-minimap {
   align-self: center;
   width: 216px;
-  height: 216px;
-  object-fit: contain;
+  height: auto;
+  aspect-ratio: 1 / 1;
   image-rendering: pixelated;
   border: 2px solid #0d0b08;
   outline: 1px solid var(--gm-edge);
@@ -1525,7 +1525,7 @@
 }
 
 .gm-side {
-  flex: 0 0 248px;
+  flex: 0 0 clamp(248px, 17vw, 312px);
   gap: 8px;
   padding: 10px 12px 0;
   border: 0;
@@ -1572,6 +1572,20 @@
     0 0 0 2px var(--gm-trim),
     0 0 0 3px var(--gm-ink);
   margin: 3px auto;
+
+  /*
+   * Bead bzc.42: the frame follows the window. It takes the sidebar's full
+   * width (which itself grows on wide screens) but at most about a third
+   * of the window height, so 800x600 keeps room for the hero panel and
+   * 1920x1080 gets a large map. The canvas fills it (src/ui/minimap.ts).
+   */
+  width: min(100%, 32vh);
+}
+
+@media (max-width: 760px) {
+  .gm-minimap {
+    width: 120px;
+  }
 }
 
 .gm-side-lists {
@@ -2451,22 +2465,34 @@
   flex: 1;
 }
 
-.gm-map-row .gm-map {
+/*
+ * One map per row: the name on the left, its own details on the right;
+ * on a narrow row the details wrap under the name instead of overlapping.
+ * (Not `.gm-map`: that class is the adventure map canvas.)
+ */
+.gm-map-choice {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 8px;
+  gap: 0 8px;
+  min-width: 0;
   padding: 5px 8px;
   text-align: left;
 }
 
-.gm-map-row .gm-map small {
+.gm-map-choice .gm-map-name {
+  min-width: 0;
+}
+
+.gm-map-choice .gm-map-hint {
+  margin-left: auto;
   color: var(--gm-dim);
   font-size: 11px;
   white-space: nowrap;
 }
 
-.gm-map-row .gm-map.gm-selected small {
+.gm-map-choice.gm-selected .gm-map-hint {
   color: var(--gm-gold-dim);
 }
 

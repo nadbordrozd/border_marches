@@ -135,7 +135,6 @@ const AI_STEP_MS = 90;
 const AI_WALK_MS = 70;
 /** Between two lines floating up from the hero (ms). */
 const FLOAT_GAP_MS = 380;
-const MINIMAP_PX = 216;
 
 /** The page hook the scripted browser check drives (window.__bmGame). */
 export interface GameHook {
@@ -296,7 +295,7 @@ class GameScreen {
     this.human = humanPlayer(initial);
     this.selectedId = heroesOf(initial, this.human)[0]?.id ?? null;
     this.mapWrap.append(this.canvas, this.banner);
-    this.minimap = new Minimap(MINIMAP_PX, (x, y) => {
+    this.minimap = new Minimap((x, y) => {
       if (!this.inputBlocked()) this.view.centerOn(x, y);
     });
     this.buildSide();

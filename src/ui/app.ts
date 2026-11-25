@@ -274,35 +274,44 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
     const playersField = el("div.gm-field", el("label", "Players"), playersRow);
     const seedRow = el("div.gm-seed-row", seedInput);
     const seedField = el("div.gm-field", el("label", "Seed"), seedRow);
+    // One row per map: its name and its own details, both visible in the
+    // row, so no tooltip repeats them (bead bzc.42: a `title` tip of the
+    // clicked row used to float over the row below it). Selecting a row
+    // only moves the highlight; the rows are built once.
+    const choices: Array<{ id: string | null; label: string; hint: string }> = [
+      {
+        id: null,
+        label: "Random map",
+        hint: "Any size, 2 to 4 players",
+      },
+      ...NAMED_MAPS.map((m) => ({
+        id: m.id,
+        label: m.name,
+        hint: `${m.players} players, ${SIZES.find((s) => s.id === m.size)?.label ?? m.size}`,
+      })),
+    ];
+    const mapButtons = choices.map((c) => {
+      const b = button(
+        "",
+        () => {
+          mapId = c.id;
+          renderMaps();
+        },
+        "gm-btn gm-map-choice",
+      );
+      b.append(
+        el("span.gm-map-name", c.label),
+        el("small.gm-map-hint", c.hint),
+      );
+      mapRow.append(b);
+      return b;
+    });
     const renderMaps = (): void => {
-      mapRow.replaceChildren();
-      const choices: Array<{ id: string | null; label: string; hint: string }> =
-        [
-          {
-            id: null,
-            label: "Random map",
-            hint: "Any size, 2 to 4 players",
-          },
-          ...NAMED_MAPS.map((m) => ({
-            id: m.id,
-            label: m.name,
-            hint: `${m.players} players, ${SIZES.find((s) => s.id === m.size)?.label ?? m.size}`,
-          })),
-        ];
-      for (const c of choices) {
-        const b = button(
-          "",
-          () => {
-            mapId = c.id;
-            renderMaps();
-          },
-          "gm-btn gm-map",
-        );
-        b.append(el("span.gm-map-name", c.label), el("small", c.hint));
-        b.title = c.hint;
-        if (c.id === mapId) b.classList.add("gm-selected");
-        mapRow.append(b);
-      }
+      choices.forEach((c, i) => {
+        const selected = c.id === mapId;
+        mapButtons[i]?.classList.toggle("gm-selected", selected);
+        mapButtons[i]?.setAttribute("aria-pressed", String(selected));
+      });
       const def = mapId === null ? undefined : findNamedMap(mapId);
       for (const f of [sizeField, playersField, seedField]) {
         f.hidden = def !== undefined;
