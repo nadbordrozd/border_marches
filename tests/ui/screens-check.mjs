@@ -25,6 +25,7 @@
 // timeout. Screens (file <name>-<W>x<H>.png):
 //   menu, menu-named, menu-options, menu-continue,
 //   gallery-<tab> (every tab), gallery-hover, gallery-keyword,
+//   gallery-filter (the creature tier 4 chip on),
 //   adventure, adventure-hover-object, adventure-pickup (grab cursor),
 //   adventure-hover-resource, adventure-rich, endturn, hero, hero-hover,
 //   hero-hover-army, hero-hover-skill, hero-hover-feat, hero-hover-stat,
@@ -521,7 +522,12 @@ async function galleryScreens() {
   if (tabs.length === 0) return fail("gallery", "no tabs");
   for (const tab of tabs) {
     const name = `gallery-${tab}`;
-    if (!want(name) && !want("gallery-hover") && !want("gallery-keyword"))
+    if (
+      !want(name) &&
+      !want("gallery-hover") &&
+      !want("gallery-keyword") &&
+      !want("gallery-filter")
+    )
       continue;
     await evaluate(
       `document.querySelector('.gx-tab[data-tab=${JSON.stringify(tab)}]').click()`,
@@ -543,7 +549,36 @@ async function galleryScreens() {
       );
     }
     if (tab === "spells") {
+      // Bead bzc.67: spell cards carry their keyword boxes.
+      const boxes = await evaluate(
+        "document.querySelectorAll('.gx-card .gx-kws .gm-kw-box').length",
+      );
+      if (!(boxes > 0)) fail("gallery-spells", "no keyword boxes on cards");
       await hoverShot("gallery-keyword", ".gx-card .gm-kw", 6, 6);
+    }
+    if (tab === "creatures" && want("gallery-filter")) {
+      // Bead bzc.67: the tier 4 chip narrows the grid, then is cleared.
+      const chip = ".gx-chip[data-filter=tier][data-value='4']";
+      const pressed = await evaluate(`(() => {
+        const c = document.querySelector(${JSON.stringify(chip)});
+        if (!c) return false;
+        c.click();
+        return c.getAttribute('aria-pressed') === 'true';
+      })()`);
+      const shown = await evaluate(
+        "document.querySelectorAll('.gx-card:not([hidden])').length",
+      );
+      const all = await evaluate(
+        "document.querySelectorAll('.gx-card').length",
+      );
+      if (!pressed || !(shown > 0 && shown < all))
+        fail("gallery-filter", `chip ${pressed}, ${shown} of ${all} shown`);
+      else {
+        await park();
+        await sleep(300);
+        await shot("gallery-filter");
+      }
+      await evaluate(`document.querySelector('.gx-clear')?.click()`);
     }
   }
 }

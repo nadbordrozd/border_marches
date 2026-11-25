@@ -7,9 +7,14 @@
  * condition and ground text), so the text is never written twice. The
  * entries come from src/ui/gallery-data.ts, built from the registries.
  *
- * Each tab has a search box over names and card text. The tab, each tab's
- * search and scroll position are kept for the session. Esc or Back returns
- * to the menu.
+ * Each tab has a search box over names and card text, and the creature,
+ * spell and artifact tabs have filter chips (bead bzc.67: faction and tier,
+ * school and tier, slot and rarity) under the tabs in the fixed header. The
+ * cards' rules text uses the keyword renderer (bzc.46): keywords are
+ * highlighted and their boxes follow the card, as beside an in-game
+ * hover card, so the gallery doubles as the glossary. The tab, each tab's
+ * search, chips and scroll position are kept for the session. Esc or Back
+ * returns to the menu.
  */
 import type { BattleState, Condition } from "../core/battle/index.ts";
 import { conditionKind, groundKind } from "../core/battle/index.ts";
@@ -41,14 +46,17 @@ import {
   GALLERY_TAB_IDS,
   galleryTab,
   galleryTabLabel,
+  matchesFilters,
   tabEntries,
   type GalleryArt,
   type GalleryEntry,
+  type GalleryFilter,
   type GalleryTabId,
 } from "./gallery-data.ts";
 import { itemTooltip } from "./hero-screen.ts";
 import { iconElement } from "./icons.ts";
-import { highlightKeywords } from "./keywords.ts";
+import { explainKeywords, type KeywordDef } from "../data/keywords.ts";
+import { MAX_BOXES, highlightKeywords, keywordBox } from "./keywords.ts";
 import {
   abilityText,
   buildingTip,
@@ -63,10 +71,23 @@ const ENLARGED_PX = 128;
 /** A figure wider than this takes a whole row of the grid. */
 const WIDE_PX = 380;
 
-/** Session memory: the open tab, and each tab's search and scroll. */
+/** Session memory: the open tab, and each tab's search, chips and scroll. */
 let lastTab: GalleryTabId = "creatures";
 const queries = new Map<GalleryTabId, string>();
 const scrolls = new Map<GalleryTabId, number>();
+const chosen = new Map<GalleryTabId, Map<string, Set<string>>>();
+/** Whether the cards show their keyword boxes (a header toggle). */
+let showKeywords = true;
+
+/** A tab's chosen chips (created empty on first use). */
+function chipsOf(tab: GalleryTabId): Map<string, Set<string>> {
+  let sel = chosen.get(tab);
+  if (sel === undefined) {
+    sel = new Map();
+    chosen.set(tab, sel);
+  }
+  return sel;
+}
 
 /** The enlarged scale of a picture of size w x h: 2 to 4. */
 export function enlargedScale(w: number, h: number): number {
@@ -487,24 +508,45 @@ export function entryCard(entry: GalleryEntry): TipBody {
   }
 }
 
+/**
+ * The keyword boxes of a card (bead bzc.67): the keywords its rules text
+ * uses (`ids`) and those their definitions use, chosen as for an in-game
+ * hover card (explainKeywords, at most MAX_BOXES), less the entry's own
+ * term (a condition's card already is its definition).
+ */
+export function entryKeywords(
+  entry: GalleryEntry,
+  ids: readonly string[],
+): KeywordDef[] {
+  return explainKeywords(ids, MAX_BOXES + 1)
+    .filter((def) => def.term !== entry.name)
+    .slice(0, MAX_BOXES);
+}
+
 function entryNode(entry: GalleryEntry, sectionTitle: string): HTMLElement {
   const card = entryCard(entry);
-  const text = el(
-    "div.gx-text",
+  const main =
     typeof card === "string"
       ? el("div.gm-tip-card", el("div.gm-tip-title", card))
-      : card,
-  );
-  // Keywords in the card's rules text explain themselves on hover.
-  highlightKeywords(text, true);
+      : card;
+  const text = el("div.gx-text", main);
+  // Keywords in the card's rules text explain themselves on hover, and
+  // their boxes follow the card as they stand beside an in-game hover card.
+  const defs = entryKeywords(entry, highlightKeywords(text, true));
+  const boxes =
+    defs.length === 0
+      ? null
+      : el("div.gm-kw-col.gx-kws", ...defs.map(keywordBox));
   const figures = entry.art.map(figure);
   const node = el(
     "article.gx-card.gm-inset",
     figures.length === 0 ? null : el("div.gx-art", ...figures),
     text,
+    boxes,
     entry.artNote === null ? null : el("div.gx-note", entry.artNote),
     el("div.gx-id", `${entry.kind} · ${entry.id}`),
   );
+  if (boxes !== null) node.classList.add("gx-has-kw");
   if (figures.some((f) => f.classList.contains("gx-fig-wide")))
     node.classList.add("gx-wide");
   // Icons sit beside their card; sprites stand above it.
@@ -519,6 +561,84 @@ function entryNode(entry: GalleryEntry, sectionTitle: string): HTMLElement {
     .join(" ")
     .toLowerCase();
   return node;
+}
+
+// ------------------------------------------------------------ filters
+
+/**
+ * A tab's filter chips: one labelled group per filter, each chip a toggle
+ * (aria-pressed; its title says how many of the tab's entries it holds),
+ * and a Clear button while any chip is on. `onChange` runs after each
+ * toggle.
+ */
+function filterBar(
+  filters: readonly GalleryFilter[],
+  entries: readonly GalleryEntry[],
+  sel: Map<string, Set<string>>,
+  onChange: () => void,
+): HTMLElement[] {
+  const chips: HTMLButtonElement[] = [];
+  const clear = button(
+    "Clear",
+    () => {
+      sel.clear();
+      sync();
+      onChange();
+    },
+    "gm-btn gx-chip gx-clear",
+  );
+  clear.title = "Show every entry of this tab";
+  const sync = (): void => {
+    for (const c of chips) {
+      const on =
+        sel.get(c.dataset["filter"] ?? "")?.has(c.dataset["value"] ?? "") ??
+        false;
+      c.classList.toggle("gm-selected", on);
+      c.setAttribute("aria-pressed", String(on));
+    }
+    clear.hidden = ![...sel.values()].some((s) => s.size > 0);
+  };
+  const groups = filters.map((f) => {
+    const group = el("div.gx-filter", el("span.gx-filter-label", f.label));
+    group.setAttribute("role", "group");
+    group.setAttribute("aria-label", f.label);
+    for (const o of f.options) {
+      const n = entries.filter((e) => e.facets?.[f.id] === o.value).length;
+      const chip = button(
+        "",
+        () => {
+          let set = sel.get(f.id);
+          if (set === undefined) {
+            set = new Set();
+            sel.set(f.id, set);
+          }
+          if (set.has(o.value)) set.delete(o.value);
+          else set.add(o.value);
+          sync();
+          onChange();
+        },
+        "gm-btn gx-chip",
+      );
+      chip.dataset["filter"] = f.id;
+      chip.dataset["value"] = o.value;
+      if (o.icon !== undefined) {
+        const ic = iconElement(o.icon.kind, o.icon.id, {
+          framed: false,
+          size: 16,
+        });
+        ic.removeAttribute("title");
+        ic.classList.add("gx-chip-icon");
+        chip.append(ic);
+      }
+      chip.append(o.label);
+      chip.title = `${f.label} ${o.label}: ${n} ${n === 1 ? "entry" : "entries"}`;
+      chips.push(chip);
+      group.append(chip);
+    }
+    return group;
+  });
+  sync();
+  return [...groups, clear];
 }
 
 // ------------------------------------------------------------ screen
@@ -542,8 +662,11 @@ export function openGallery(
     search.type = "search";
     search.setAttribute("aria-label", "Search this tab");
     const count = el("span.gx-count");
+    const filters = el("div.gx-filters");
     const body = el("main.gx-body");
     body.tabIndex = -1;
+    /** The entry each card of the open tab shows. */
+    const entryOf = new Map<HTMLElement, GalleryEntry>();
 
     const close = (): void => {
       scrolls.set(current, body.scrollTop);
@@ -561,6 +684,22 @@ export function openGallery(
     };
     const back = button("Back", close, "gm-btn gx-back");
     back.append(kbd("Esc"));
+    // Keyword boxes on or off: on to read the rules, off to skim the art.
+    const kwToggle = button(
+      "Keyword boxes",
+      () => {
+        showKeywords = !showKeywords;
+        syncKeywords();
+      },
+      "gm-btn gx-chip gx-kw-toggle",
+    );
+    kwToggle.title = "Show or hide the keyword definitions under each card";
+    const syncKeywords = (): void => {
+      kwToggle.classList.toggle("gm-selected", showKeywords);
+      kwToggle.setAttribute("aria-pressed", String(showKeywords));
+      root.classList.toggle("gx-no-kw", !showKeywords);
+    };
+    syncKeywords();
 
     const tabButtons = GALLERY_TAB_IDS.map((id) => {
       const b = button(galleryTabLabel(id), () => show(id), "gm-btn gx-tab");
@@ -574,24 +713,40 @@ export function openGallery(
       const q = search.value.trim().toLowerCase();
       queries.set(current, search.value);
       const words = q.split(/\s+/).filter((w) => w !== "");
+      const sel = chipsOf(current);
+      const chipsOn = [...sel.values()].some((s) => s.size > 0);
+      const narrowed = q !== "" || chipsOn;
+      // With chips on, the few matches run in one grid without section
+      // heads (each card's subtitle names its faction, school or slot).
+      body.classList.toggle("gx-flat", chipsOn);
       let shown = 0;
       let total = 0;
       for (const sec of body.querySelectorAll<HTMLElement>(".gx-section")) {
-        let any = false;
-        for (const card of sec.querySelectorAll<HTMLElement>(".gx-card")) {
+        let inSection = 0;
+        const cards = sec.querySelectorAll<HTMLElement>(".gx-card");
+        for (const card of cards) {
           total++;
           const hay = card.dataset["search"] ?? "";
-          const hit = words.every((w) => hay.includes(w));
+          const entry = entryOf.get(card);
+          const hit =
+            words.every((w) => hay.includes(w)) &&
+            (entry === undefined || matchesFilters(entry, sel));
           card.hidden = !hit;
-          if (hit) {
-            any = true;
-            shown++;
-          }
+          if (hit) inSection++;
         }
-        sec.hidden = !any;
+        shown += inSection;
+        sec.hidden = inSection === 0;
+        const title = sec.querySelector<HTMLElement>(".gx-section-title");
+        if (title !== null)
+          title.textContent = `${sec.dataset["title"] ?? ""} (${
+            inSection === cards.length
+              ? cards.length
+              : `${inSection} of ${cards.length}`
+          })`;
       }
-      count.textContent =
-        q === "" ? `${total} entries` : `${shown} of ${total}`;
+      count.textContent = narrowed
+        ? `${shown} of ${total}`
+        : `${total} entries`;
       body.querySelector(".gx-empty")?.toggleAttribute("hidden", shown > 0);
     };
 
@@ -607,18 +762,35 @@ export function openGallery(
       }
       search.placeholder = `Search ${data.label.toLowerCase()}...`;
       search.value = queries.get(id) ?? "";
+      entryOf.clear();
+      const cardOf = (e: GalleryEntry, title: string): HTMLElement => {
+        const node = entryNode(e, title);
+        entryOf.set(node, e);
+        return node;
+      };
+      filters.replaceChildren(
+        ...filterBar(data.filters, tabEntries(data), chipsOf(id), filter),
+        kwToggle,
+      );
       body.replaceChildren(
-        ...data.sections.map((s) =>
-          el(
+        ...data.sections.map((s) => {
+          const sec = el(
             "section.gx-section",
             el(
               "h2.gm-rule.gx-section-title",
               `${s.title} (${s.entries.length})`,
             ),
-            el("div.gx-grid", ...s.entries.map((e) => entryNode(e, s.title))),
-          ),
+            el("div.gx-grid", ...s.entries.map((e) => cardOf(e, s.title))),
+          );
+          sec.dataset["title"] = s.title;
+          return sec;
+        }),
+        el(
+          "p.gx-empty",
+          data.filters.length === 0
+            ? "Nothing matches the search."
+            : "Nothing matches the search and filters.",
         ),
-        el("p.gx-empty", "Nothing matches the search."),
       );
       root.dataset["tab"] = id;
       root.dataset["entries"] = String(tabEntries(data).length);
@@ -634,6 +806,7 @@ export function openGallery(
         el("h1.gx-title", "Gallery"),
         tabs,
         el("div.gx-tools", search, count, back),
+        filters,
       ),
       body,
     );

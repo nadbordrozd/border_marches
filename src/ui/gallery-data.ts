@@ -2,8 +2,9 @@
  * What the main-menu gallery (bead border_marches-3nb) shows, built from
  * the content registries so new content appears without touching it: one
  * tab per content family, sections inside a tab, and per entry its id, name
- * and the art to show. No DOM here (unit-tested); src/ui/gallery.ts draws
- * the entries and their cards.
+ * and the art to show. Tabs may carry filter rows (bead bzc.67) and their
+ * entries the matching facet values. No DOM here (unit-tested);
+ * src/ui/gallery.ts draws the entries, their cards and the filter chips.
  *
  * The Lost World (not playable in v0.2) is left out: its creatures, its
  * Chieftain class and heroes, and its town.
@@ -19,7 +20,13 @@ import {
   allSpells,
   registerSpells,
 } from "../core/magic/index.ts";
-import { ARTIFACT_LIST, type ArtifactDef } from "../data/artifacts.ts";
+import {
+  ARTIFACT_LIST,
+  SLOT_NAMES,
+  WORN_SLOTS,
+  type ArtifactDef,
+  type SlotKind,
+} from "../data/artifacts.ts";
 import { HERO_CLASSES, NAMED_HEROES } from "../data/classes.ts";
 import { CREATURES } from "../data/creatures.ts";
 import { RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
@@ -101,6 +108,11 @@ export interface GalleryEntry {
    * icon, no art at all), or null when every picture is the entry's own.
    */
   readonly artNote: string | null;
+  /**
+   * The entry's value under each of its tab's filters (bead bzc.67), by
+   * filter id: "faction" -> "humans", "tier" -> "3". Absent: no filters.
+   */
+  readonly facets?: Readonly<Record<string, string>>;
 }
 
 export interface GallerySection {
@@ -108,10 +120,49 @@ export interface GallerySection {
   readonly entries: readonly GalleryEntry[];
 }
 
+/** One chip of a filter: a value, its label and an optional icon. */
+export interface GalleryFilterOption {
+  readonly value: string;
+  readonly label: string;
+  readonly icon?: { readonly kind: IconKind; readonly id: string };
+}
+
+/**
+ * A row of filter chips on a tab (faction, tier, school, slot, rarity):
+ * the options in display order, only those some entry of the tab has.
+ */
+export interface GalleryFilter {
+  readonly id: string;
+  readonly label: string;
+  readonly options: readonly GalleryFilterOption[];
+}
+
 export interface GalleryTab {
   readonly id: GalleryTabId;
   readonly label: string;
   readonly sections: readonly GallerySection[];
+  /** The tab's filter rows (empty when the tab has none). */
+  readonly filters: readonly GalleryFilter[];
+}
+
+/** Chosen chips: filter id -> chosen values (an empty or missing set: all). */
+export type GallerySelection = ReadonlyMap<string, ReadonlySet<string>>;
+
+/**
+ * Whether an entry passes the chosen chips: within one filter any chosen
+ * value matches (or), across filters every filter must match (and). A
+ * filter with nothing chosen lets everything through.
+ */
+export function matchesFilters(
+  entry: GalleryEntry,
+  selection: GallerySelection,
+): boolean {
+  for (const [id, chosen] of selection) {
+    if (chosen.size === 0) continue;
+    const value = entry.facets?.[id];
+    if (value === undefined || !chosen.has(value)) return false;
+  }
+  return true;
 }
 
 export const GALLERY_TAB_IDS: readonly GalleryTabId[] = [
@@ -162,7 +213,33 @@ function section(
   return entries.length === 0 ? [] : [{ title, entries }];
 }
 
+/**
+ * A filter row from its candidate options (in display order), keeping only
+ * the options some entry of `sections` has.
+ */
+function filterRow(
+  id: string,
+  label: string,
+  options: readonly GalleryFilterOption[],
+  sections: readonly GallerySection[],
+): GalleryFilter {
+  const used = new Set(
+    sections.flatMap((s) => s.entries.map((e) => e.facets?.[id])),
+  );
+  return { id, label, options: options.filter((o) => used.has(o.value)) };
+}
+
+const tierOptions = (max: number): GalleryFilterOption[] =>
+  Array.from({ length: max }, (_, i) => ({
+    value: String(i + 1),
+    label: String(i + 1),
+  }));
+
 // ------------------------------------------------------------ creatures
+
+/** Creature faction chip values beyond the playable factions' ids. */
+const NEUTRAL_FACET = "neutral";
+const SUMMON_FACET = "summon";
 
 function creatureEntry(def: CreatureDef): GalleryEntry {
   // The sprite every screen draws (unitArt, src/assets/unit-art.ts).
@@ -174,6 +251,7 @@ function creatureEntry(def: CreatureDef): GalleryEntry {
     name: def.name,
     art: [asset(art.key, "Battle sprite"), asset(art.portrait, "Portrait")],
     artNote: own ? null : "No sprite of its own: placeholder.",
+    facets: { faction: def.faction, tier: String(def.tier) },
   };
 }
 
@@ -219,6 +297,7 @@ function creatureSections(): GallerySection[] {
         name: c.name ?? c.id,
         art: [asset(art.key, "Battle sprite"), asset(art.portrait, "Portrait")],
         artNote: hasUnitArt(c.id) ? null : "No sprite of its own: placeholder.",
+        facets: { faction: SUMMON_FACET, tier: String(c.tier) },
       };
     });
   out.push(...section("Summons", summoned));
@@ -229,6 +308,27 @@ function creatureSections(): GallerySection[] {
     ...section("Other creatures", take(galleryCreatures().sort(byTier))),
   );
   return out;
+}
+
+function creatureFilters(sections: readonly GallerySection[]): GalleryFilter[] {
+  const tiers = Math.max(
+    ...sections.flatMap((s) =>
+      s.entries.map((e) => Number(e.facets?.["tier"])),
+    ),
+  );
+  return [
+    filterRow(
+      "faction",
+      "Faction",
+      [
+        ...playableFactions().map((f) => ({ value: f.id, label: f.name })),
+        { value: NEUTRAL_FACET, label: "Neutral" },
+        { value: SUMMON_FACET, label: "Summoned" },
+      ],
+      sections,
+    ),
+    filterRow("tier", "Tier", tierOptions(tiers), sections),
+  ];
 }
 
 // ------------------------------------------------------------ heroes
@@ -305,9 +405,27 @@ function spellSections(): GallerySection[] {
           name: s.name,
           art: [icon("spell", s.id)],
           artNote: iconNote("spell", s.id),
+          facets: { school: s.school, tier: String(s.tier) },
         })),
     ),
   );
+}
+
+function spellFilters(sections: readonly GallerySection[]): GalleryFilter[] {
+  const tiers = Math.max(...allSpells().map((s) => s.tier));
+  return [
+    filterRow(
+      "school",
+      "School",
+      SCHOOLS.map((s) => ({
+        value: s,
+        label: SCHOOL_NAMES[s],
+        icon: { kind: "school" as const, id: s },
+      })),
+      sections,
+    ),
+    filterRow("tier", "Tier", tierOptions(tiers), sections),
+  ];
 }
 
 // ------------------------------------------------------------ artifacts
@@ -343,10 +461,52 @@ function artifactSections(): GallerySection[] {
           name: a.name,
           art: [icon("artifact", a.id)],
           artNote: iconNote("artifact", a.id),
+          facets: { slot: artifactSlot(a), rarity: artifactRarity(a) },
         }),
       ),
     ),
   );
+}
+
+/** Where an artifact goes: its worn slot, else the backpack. */
+function artifactSlot(def: ArtifactDef): string {
+  return def.kind === "worn" ? def.slot : "backpack";
+}
+
+/** An artifact's rarity chip: its grade, or consumable or relic. */
+function artifactRarity(def: ArtifactDef): string {
+  return def.kind === "worn" ? def.grade : def.kind;
+}
+
+/** The slots in paper-doll order, then the backpack. */
+const SLOT_ORDER: readonly SlotKind[] = WORN_SLOTS.filter(
+  (s, i, all) => all.indexOf(s) === i,
+);
+
+function artifactFilters(sections: readonly GallerySection[]): GalleryFilter[] {
+  return [
+    filterRow(
+      "slot",
+      "Slot",
+      [
+        ...SLOT_ORDER.map((s) => ({ value: s, label: SLOT_NAMES[s] })),
+        { value: "backpack", label: "Backpack" },
+      ],
+      sections,
+    ),
+    filterRow(
+      "rarity",
+      "Rarity",
+      [
+        { value: "trinket", label: "Trinket" },
+        { value: "wonder", label: "Wonder" },
+        { value: "marvel", label: "Marvel" },
+        { value: "consumable", label: "Consumable" },
+        { value: "relic", label: "Relic" },
+      ],
+      sections,
+    ),
+  ];
 }
 
 // ------------------------------------------------------------ skills, feats
@@ -550,13 +710,15 @@ function otherSections(): GallerySection[] {
 
 // ------------------------------------------------------------ tabs
 
+type FilterBuilder = (sections: readonly GallerySection[]) => GalleryFilter[];
+
 const TABS: ReadonlyArray<
-  readonly [GalleryTabId, string, () => GallerySection[]]
+  readonly [GalleryTabId, string, () => GallerySection[], FilterBuilder?]
 > = [
-  ["creatures", "Creatures", creatureSections],
+  ["creatures", "Creatures", creatureSections, creatureFilters],
   ["heroes", "Heroes", heroSections],
-  ["spells", "Spells", spellSections],
-  ["artifacts", "Artifacts", artifactSections],
+  ["spells", "Spells", spellSections, spellFilters],
+  ["artifacts", "Artifacts", artifactSections, artifactFilters],
   ["skills", "Skills and feats", skillSections],
   ["objects", "Map objects", objectSections],
   ["towns", "Towns and buildings", townSections],
@@ -571,7 +733,13 @@ export function galleryTab(id: GalleryTabId): GalleryTab {
   if (cached !== undefined) return cached;
   const row = TABS.find(([tab]) => tab === id);
   if (row === undefined) throw new Error(`no gallery tab ${id}`);
-  const tab: GalleryTab = { id, label: row[1], sections: row[2]() };
+  const sections = row[2]();
+  const tab: GalleryTab = {
+    id,
+    label: row[1],
+    sections,
+    filters: row[3]?.(sections).filter((f) => f.options.length > 1) ?? [],
+  };
   built.set(id, tab);
   return tab;
 }

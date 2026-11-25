@@ -48,7 +48,7 @@
 }
 
 .gx-tab {
-  padding: 5px 10px;
+  padding: 5px 9px;
 }
 
 .gx-tools {
@@ -60,16 +60,74 @@
 }
 
 .gx-search {
-  width: 220px;
+  width: 184px;
   min-width: 0;
   user-select: text;
 }
 
 .gx-count {
-  min-width: 70px;
+  min-width: 56px;
   color: var(--gm-dim);
   font-size: 11px;
   white-space: nowrap;
+}
+
+/* Filter chips (bead bzc.67): a row under the tabs, one group per filter. */
+.gx-filters {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 18px;
+}
+
+.gx-clear[hidden] {
+  display: none;
+}
+
+.gx-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.gx-filter-label {
+  margin-right: 2px;
+  color: var(--gm-dim);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gx-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 0;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+.gx-chip-icon img {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+/* A chip that is on: filled gold, unlike the outlined selected tab. */
+.gm-btn.gx-chip.gm-selected {
+  color: #fff4d0;
+  background: linear-gradient(#b88d3a, #7d5a1f 55%, #5e4316);
+  box-shadow:
+    inset 0 1px 0 #f0c873,
+    inset 0 -1px 0 #3a2a0d,
+    0 1px 0 var(--gm-ink, #0b0805);
+}
+
+/* The keyword boxes toggle closes the row, on the right. */
+.gx-kw-toggle {
+  margin-left: auto;
 }
 
 .gx-body {
@@ -102,10 +160,29 @@
   background: var(--gm-ink);
 }
 
-.gx-grid {
+.gx-grid,
+.gx-body.gx-flat {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
   gap: 10px;
+}
+
+/* Chips on (bead bzc.67): the sections' cards run in one grid. */
+.gx-body.gx-flat {
+  align-content: start;
+}
+
+.gx-flat > .gx-section:not([hidden]),
+.gx-flat .gx-grid {
+  display: contents;
+}
+
+.gx-flat .gx-section-title {
+  display: none;
+}
+
+.gx-flat > .gx-empty {
+  grid-column: 1 / -1;
 }
 
 .gx-card {
@@ -158,6 +235,29 @@
   align-self: end;
 }
 
+/*
+ * An icon card's keyword boxes run under both columns, the id last: rows
+ * text, note, (art's end), boxes, id.
+ */
+.gx-card.gx-row.gx-has-kw {
+  grid-template-rows: auto auto auto auto 1fr;
+}
+
+.gx-row.gx-has-kw > .gx-art {
+  grid-row: 1 / 4;
+}
+
+.gx-row > .gx-kws {
+  grid-row: 4;
+  grid-column: 1 / -1;
+  margin-top: 4px;
+}
+
+.gx-row.gx-has-kw > .gx-id {
+  grid-row: 5;
+  grid-column: 1 / -1;
+}
+
 .gx-row > .gx-art .gx-pics {
   flex-direction: column;
   align-items: center;
@@ -205,6 +305,30 @@
 /* The card is the hover card, laid flat: no floating frame of its own. */
 .gx-text .gm-tip-card {
   max-width: 72ch;
+}
+
+/*
+ * A card's keyword boxes (bead bzc.67): the in-game boxes (keywords.css),
+ * laid flat in a grid across the card under its text. The header toggle
+ * hides them (.gx-no-kw) to skim the art.
+ */
+.gx-card > .gx-kws {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  align-items: start;
+  gap: 4px;
+  flex: none;
+  width: auto;
+}
+
+.gx-kws .gm-kw-box {
+  box-shadow:
+    0 0 0 1px var(--gm-ink, #120c06),
+    inset 0 0 0 1px rgb(201 154 60 / 45%);
+}
+
+.gx-no-kw .gx-kws {
+  display: none;
 }
 
 /* The art row already shows the picture the hover card leads with. */
