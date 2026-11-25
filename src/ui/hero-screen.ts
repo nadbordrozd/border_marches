@@ -54,7 +54,7 @@ import {
   wornDef,
   type ArtifactDef,
 } from "../data/artifacts.ts";
-import { namedHeroPortrait } from "../assets/unit-art.ts";
+import { namedHeroPortrait, unitArt } from "../assets/unit-art.ts";
 import { COMMANDS, getHeroClass } from "../data/classes.ts";
 import {
   PRIMARY_STATS,
@@ -198,19 +198,23 @@ function backpackSlots(
   return out;
 }
 
-/** Paper-doll grid positions of the eleven worn slots (column, row). */
+/**
+ * Paper-doll grid positions of the eleven worn slots (column, row): four
+ * rows of three, the middle of the third row left open (bead bzc.45 keeps
+ * the sheet within a 1280x800 window).
+ */
 const DOLL: ReadonlyArray<[number, number]> = [
   [2, 1], // head
-  [2, 2], // neck
-  [2, 3], // torso
-  [3, 2], // cloak
-  [1, 3], // weapon
-  [3, 3], // shield
-  [1, 4], // ring
-  [3, 4], // ring
-  [2, 5], // feet
-  [1, 5], // pocket
-  [3, 5], // pocket
+  [3, 1], // neck
+  [2, 2], // torso
+  [1, 1], // cloak
+  [1, 2], // weapon
+  [3, 2], // shield
+  [1, 3], // ring
+  [3, 3], // ring
+  [2, 4], // feet
+  [1, 4], // pocket
+  [3, 4], // pocket
 ];
 
 type Selection =
@@ -221,8 +225,9 @@ type Selection =
 /**
  * The hero sheet. Click an item to select it (its details and actions
  * show), double-click to wear, take off or use it, or drag it between the
- * backpack and the paper doll. The army row below shows every slot; on the
- * owner's turn its stacks rearrange like the town screen's.
+ * backpack and the paper doll. The army band below shows every slot as the
+ * stacks stand in battle; on the owner's turn they rearrange like the town
+ * screen's.
  */
 export async function openHeroScreen(
   host: HeroScreenHost,
@@ -351,7 +356,9 @@ export async function openHeroScreen(
       const [col, row] = DOLL[i] as [number, number];
       cell.style.gridColumn = String(col);
       cell.style.gridRow = String(row);
-      cell.append(el("span.hs-slot-name", SLOT_NAMES[kind]));
+      // The slot's name shows on an empty slot; a worn item names itself
+      // on hover.
+      if (id === null) cell.append(el("span.hs-slot-name", SLOT_NAMES[kind]));
       if (selected?.place === "worn" && selected.index === i) {
         cell.classList.add("hs-selected");
       }
@@ -418,22 +425,25 @@ export async function openHeroScreen(
     if (h.feats.length === 0) {
       feats.append(el("div.gm-dim", "No feats yet: one every third level."));
     }
+    // Feats as tiles like the skills; the text is on hover (bead bzc.45).
     for (const id of h.feats) {
       const def = findFeat(id);
       const vowed = def?.restriction !== undefined;
       const node = el(
         "div.hs-feat",
-        el(
-          "div.hs-feat-head",
-          ...nameIcon(vowed ? "vow" : "feat", id),
-          el("b", def?.name ?? id),
-        ),
-        el("div", def?.text ?? ""),
+        ...nameIcon(vowed ? "vow" : "feat", id),
+        el("span.hs-feat-name", def?.name ?? id),
       );
-      if (def?.restrictionText !== undefined) {
-        node.classList.add("hs-vow");
-        node.append(el("div.hs-restriction", def.restrictionText));
-      }
+      node.title = [
+        `${vowed ? "Vow" : "Feat"}: ${def?.name ?? id}`,
+        def?.text ?? "",
+        def?.restrictionText === undefined
+          ? ""
+          : `Restriction: ${def.restrictionText}`,
+      ]
+        .filter((line) => line !== "")
+        .join("\n");
+      if (vowed) node.classList.add("hs-vow");
       feats.append(node);
     }
     const ranks = SCHOOLS.filter((sc) => schoolRank(h, sc) > 0)
@@ -488,33 +498,38 @@ export async function openHeroScreen(
       ranks === "" ? el("div") : el("div.hs-dim", `School ranks: ${ranks}`),
       el("h3", "Feats and vows"),
       feats,
-      el("h3", `Backpack (${backpackSize(h)})`),
-      pack,
     );
-    // The scroll case under the doll and the book under the stats keep
-    // the sheet within a 800 px window (bead bzc.25).
+    // Four columns over the army band keep the sheet within a 1280x800
+    // window (beads bzc.25, bzc.45): the scroll case under the doll; the
+    // backpack, the book and the selected item's details on the far right.
     middle.append(
       el("h3", `Scroll case (${h.scrolls.length} / ${scrollCaseSize(h)})`),
       scrolls,
     );
-    left.append(el("h3", `Book (${h.pages.length} pages)`), bookPages(h));
+    const far = el(
+      "div.hs-col.hs-far",
+      el("h3", `Backpack (${backpackSize(h)})`),
+      pack,
+      el("h3", `Book (${h.pages.length} pages)`),
+      bookPages(h),
+    );
     if (holdsUnspentPage(h)) {
-      left.append(
+      far.append(
         unspentChooser(h, (page) =>
           act(chooseUnspentPage(host.state(), heroId, page)),
         ),
       );
     }
+    far.append(details(h));
 
     // Own stacks rearrange on the owner's turn, as in the town screen.
     const editable = h.owner === host.state().currentPlayer;
     body.replaceChildren(
-      el("div.hs-columns", left, middle, right),
+      el("div.hs-columns", left, middle, right, far),
       heroArmySection(
         h.army,
         editable ? { selected: armySel, onSlot: onArmySlot } : {},
       ),
-      details(h),
     );
   };
 
@@ -679,9 +694,35 @@ export interface HeroArmyOptions {
 }
 
 /**
- * The hero sheet's Army section (bead tez): one cell per army slot, empty
- * ones included, each filled one with the creature portrait, its count and
- * name, and the creature card on hover; the army's fight value in the head.
+ * Pixels from the top of an army slot to the ground line the creatures
+ * stand on: the tallest battle sprite (104 px, feet at 102) fits above it.
+ */
+export const ARMY_GROUND_Y = 104;
+
+/**
+ * One stack as it stands in battle (bead bzc.45): the full battle sprite at
+ * native size, its feet on the slot's ground line over a small shadow, and
+ * the count badge. No name: the creature card is on hover.
+ */
+function armyFigure(creature: string, count: number): HTMLElement[] {
+  const art = unitArt(creature);
+  const { anchor, feet } = art;
+  const sprite = img(art.key, "hs-army-sprite");
+  sprite.style.left = `calc(50% - ${anchor.x}px)`;
+  sprite.style.top = `${ARMY_GROUND_Y - feet.contactY}px`;
+  const shadow = el("span.hs-army-shadow");
+  const half = Math.max(12, Math.round((feet.baseRight - feet.baseLeft) / 2));
+  const mid = Math.round((feet.baseLeft + feet.baseRight) / 2) - anchor.x;
+  shadow.style.width = `${half * 2 + 8}px`;
+  shadow.style.left = `calc(50% + ${mid - half - 4}px)`;
+  return [shadow, sprite, el("span.hs-army-count", String(count))];
+}
+
+/**
+ * The hero sheet's Army section (beads tez, bzc.45): one cell per army
+ * slot, empty ones included, each filled one with the creature's battle
+ * sprite standing on the ground line and its count; the creature card on
+ * hover; the army's fight value in the head.
  */
 export function heroArmySection(
   army: ArmySlots,
@@ -709,28 +750,27 @@ export function heroArmySection(
     );
   }
   const row = el("div.hs-army");
+  const picked = options.selected ?? null;
   for (const v of views) {
-    const box = el("div.gm-slot");
-    const cell = el("div.hs-army-slot", box);
+    const cell = el("div.hs-army-slot");
     cell.setAttribute("data-slot", String(v.slot));
     if (v.creature === null) {
-      box.classList.add("gm-empty");
       cell.classList.add("hs-army-empty");
-      cell.append(el("span.hs-army-name", "Empty"));
+      cell.append(el("span.hs-army-spot"));
+      cell.setAttribute("aria-label", "Empty slot");
     } else {
       const creature = v.creature;
-      const def = getCreature(creature);
-      box.append(
-        img(`portrait-${def.sprite}`, "gm-slot-portrait"),
-        el("span.gm-slot-count", String(v.count)),
-      );
-      cell.append(el("span.hs-army-name", v.name));
+      cell.append(...armyFigure(creature, v.count));
       cell.setAttribute("aria-label", `${v.count} ${v.name}`);
       setTip(cell, () => creatureTip(creature, v.count));
     }
-    if (options.selected === v.slot) cell.classList.add("hs-selected");
+    if (picked === v.slot) cell.classList.add("hs-selected");
     if (onSlot !== undefined) {
       cell.classList.add("hs-army-clickable");
+      // With a stack picked, every other slot is a place to put it.
+      if (picked !== null && picked !== v.slot) {
+        cell.classList.add("hs-army-target");
+      }
       cell.addEventListener("click", (e) => onSlot(v.slot, e));
     }
     row.append(cell);

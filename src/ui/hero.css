@@ -1,8 +1,21 @@
 /* Hero sheet, level-up draft and meeting items (src/ui/hero-screen.ts). */
 
+/* Bead bzc.45: four columns over the army band, the Close button in the
+   title bar, so the sheet fits a 1280x800 window without scrolling. */
 .gm-modal.hs-dialog {
-  max-width: min(1040px, calc(100vw - 32px));
-  width: 1040px;
+  position: relative;
+  max-width: min(1220px, calc(100vw - 32px));
+  width: 1220px;
+}
+
+.hs-dialog > .gm-modal-buttons {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+}
+
+.hs-dialog > .gm-modal-body {
+  margin-bottom: 0;
 }
 
 .gm-modal.hs-draft-dialog {
@@ -12,8 +25,8 @@
 
 .hs-columns {
   display: grid;
-  grid-template-columns: 250px 240px 1fr;
-  gap: 18px;
+  grid-template-columns: 232px 212px minmax(0, 1fr) 314px;
+  gap: 16px;
   align-items: start;
 }
 
@@ -99,10 +112,25 @@
   font-size: 12px;
 }
 
+/* Mana and Movement on their own rows; Sight, Morale and Luck share one. */
 .hs-numbers {
   display: grid;
-  gap: 3px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 2px 4px;
   margin-bottom: 8px;
+}
+
+.hs-number {
+  grid-column: span 2;
+  gap: 6px;
+}
+
+.hs-number:nth-child(n + 3) {
+  padding: 2px 4px;
+}
+
+.hs-number:nth-child(-n + 2) {
+  grid-column: span 6;
 }
 
 .hs-number {
@@ -124,14 +152,14 @@
   color: var(--gm-gold);
 }
 
-/* Paper doll: three columns, five rows of 64 px slots. */
+/* Paper doll: three columns, four rows of 60 px slots (bead bzc.45). */
 .hs-doll {
   display: grid;
-  grid-template-columns: repeat(3, 68px);
-  grid-template-rows: repeat(5, 68px);
-  gap: 8px;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(4, 60px);
+  gap: 6px;
   justify-content: center;
-  padding: 10px 0;
+  padding: 8px 0;
   background:
     radial-gradient(ellipse at 50% 45%, rgb(255 214 92 / 8%), transparent 65%),
     var(--gm-wood-dark);
@@ -157,12 +185,9 @@
   border-color: var(--gm-gold-dim);
 }
 
+/* Only an empty slot names itself, in the middle of the slot. */
 .hs-slot-name {
-  position: absolute;
-  bottom: 2px;
-  left: 0;
-  right: 0;
-  font-size: 9px;
+  font-size: 10px;
   text-align: center;
   color: var(--gm-dim);
   pointer-events: none;
@@ -211,7 +236,6 @@
 .hs-slot .hs-item {
   width: 44px;
   height: 44px;
-  margin-bottom: 12px;
 }
 
 .hs-trinket {
@@ -306,16 +330,39 @@
   background: var(--gm-gold);
 }
 
+/* Feats as tiles beside each other, the text on hover (bead bzc.45). */
 .hs-feats {
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 5px;
   font-size: 13px;
 }
 
+.hs-feats > .gm-dim {
+  grid-column: 1 / -1;
+}
+
 .hs-feat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
   padding: 5px 8px;
   background: var(--gm-wood-dark);
+  border: 1px solid var(--gm-edge);
   border-left: 3px solid var(--gm-gold-dim);
+  cursor: help;
+}
+
+.hs-feat:hover,
+.hs-skill:hover {
+  border-color: var(--gm-gold-dim);
+}
+
+.hs-feat-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hs-vow {
@@ -334,12 +381,6 @@
 
 .hs-skill-name {
   flex: 1;
-}
-
-.hs-feat-head {
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .hs-card-icon {
@@ -617,15 +658,25 @@
   grid-template-columns: repeat(4, 48px);
 }
 
-.hs-details {
-  /* One hint line when nothing is selected (bead tez: room for the army). */
-  min-height: 32px;
-  margin-top: 8px;
+.hs-far .hs-grid {
+  grid-template-columns: repeat(6, 48px);
 }
 
-/* Bead tez: the army travelling with the hero, one cell per slot. */
+.hs-details {
+  /* Under the book in the far column (bead bzc.45). */
+  min-height: 32px;
+  margin-top: 10px;
+}
+
+/* The column is narrow: the item's text full width, its buttons below. */
+.hs-details > .hs-info {
+  flex-basis: 100%;
+}
+
+/* Bead tez: the army travelling with the hero, one cell per slot; bead
+   bzc.45: each stack as it stands in battle, no captions. */
 .hs-army-section {
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
 .hs-army-head {
@@ -659,40 +710,77 @@
 .hs-army {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 4px;
+  gap: 6px;
 }
 
+/* A slot is a patch of ground; ARMY_GROUND_Y (104 px) is where feet stand. */
 .hs-army-slot {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  min-width: 0;
-  padding: 2px;
-  background: var(--gm-wood-dark);
-  border: 1px solid var(--gm-edge);
-}
-
-.hs-army-slot .gm-slot {
-  flex: none;
-  /* The 48 px portrait at native size inside the 1 px border. */
-  width: 50px;
-  height: 50px;
-}
-
-.hs-army-name {
-  display: -webkit-box;
+  position: relative;
+  height: 118px;
   min-width: 0;
   overflow: hidden;
-  font-size: 12px;
-  line-height: 1.2;
-  hyphens: auto;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  background:
+    radial-gradient(
+      ellipse 46% 16% at 50% 104px,
+      rgb(120 150 70 / 22%),
+      transparent 100%
+    ),
+    linear-gradient(to bottom, rgb(0 0 0 / 0%) 55%, rgb(0 0 0 / 28%)),
+    var(--gm-wood-dark);
+  border: 1px solid var(--gm-edge);
+  transition:
+    border-color 0.12s,
+    box-shadow 0.12s;
 }
 
-.hs-army-empty .hs-army-name {
-  color: var(--gm-dim);
-  font-style: italic;
+.hs-army-sprite {
+  position: absolute;
+  image-rendering: pixelated;
+  pointer-events: none;
+  transition:
+    transform 0.12s,
+    filter 0.12s;
+}
+
+.hs-army-shadow {
+  position: absolute;
+  top: 99px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgb(0 0 0 / 55%),
+    rgb(0 0 0 / 30%) 60%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* The count badge by the feet, as in battle. */
+.hs-army-count {
+  position: absolute;
+  left: calc(50% + 14px);
+  bottom: 3px;
+  min-width: 14px;
+  padding: 0 4px;
+  font: bold 12px/15px sans-serif;
+  text-align: center;
+  color: #fff8e0;
+  background: rgb(20 14 8 / 88%);
+  border: 1px solid var(--gm-gold-dim);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+/* An empty slot: only the bare spot a stack would stand on. */
+.hs-army-spot {
+  position: absolute;
+  top: 98px;
+  left: calc(50% - 22px);
+  width: 44px;
+  height: 12px;
+  border: 1px dashed rgb(255 255 255 / 14%);
+  border-radius: 50%;
 }
 
 .hs-army-clickable {
@@ -701,4 +789,30 @@
 
 .hs-army-clickable:hover {
   border-color: var(--gm-gold-dim);
+}
+
+.hs-army-clickable:hover .hs-army-sprite {
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+}
+
+.hs-army-slot.hs-selected .hs-army-shadow {
+  box-shadow: 0 0 0 2px var(--gm-gold);
+}
+
+/* With a stack picked, the other slots invite the move. */
+.hs-army-target {
+  border-style: dashed;
+  border-color: var(--gm-gold-dim);
+}
+
+.hs-army-target .hs-army-spot {
+  border-color: var(--gm-gold-dim);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hs-army-sprite,
+  .hs-army-slot {
+    transition: none;
+  }
 }

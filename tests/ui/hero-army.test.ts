@@ -1,12 +1,18 @@
-// The hero sheet's Army section (bead border_marches-tez): one cell per
-// army slot, empty ones included, with the count and name of each stack
-// and the army's fight value. No DOM library in the unit tier, so a tiny
+// The hero sheet's Army section (beads border_marches-tez, bzc.45): one
+// cell per army slot, empty ones included, each stack as its full battle
+// sprite on the ground line with its count and no caption, and the army's
+// fight value. No DOM library in the unit tier, so a tiny
 // stand-in document covers what the section's builders touch.
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import type { ArmySlots } from "../../src/core/game/types.ts";
 import { CREATURES } from "../../src/data/creatures.ts";
 import type { CreatureId } from "../../src/data/types.ts";
-import { armySlotViews, heroArmySection } from "../../src/ui/hero-screen.ts";
+import { unitArt } from "../../src/assets/unit-art.ts";
+import {
+  ARMY_GROUND_Y,
+  armySlotViews,
+  heroArmySection,
+} from "../../src/ui/hero-screen.ts";
 import { armyValue } from "../../src/ui/hints.ts";
 
 class FakeElement {
@@ -127,7 +133,7 @@ describe("hero sheet army section", () => {
     expect(views[1]?.name).toBe("");
   });
 
-  it("renders one slot per army slot, with counts and names", () => {
+  it("renders one slot per army slot: battle sprite and count, no names", () => {
     const node = heroArmySection(army) as unknown as FakeElement;
     const slots = node.all("hs-army-slot");
     expect(slots).toHaveLength(army.length);
@@ -135,7 +141,7 @@ describe("hero sheet army section", () => {
       army.map((_, i) => String(i)),
     );
     expect(
-      slots.map((s) => s.one("gm-slot-count")?.textContent ?? null),
+      slots.map((s) => s.one("hs-army-count")?.textContent ?? null),
     ).toEqual(["24", null, "1", null, null, "7", null]);
     expect(slots.map((s) => s.classList.contains("hs-army-empty"))).toEqual([
       false,
@@ -146,11 +152,23 @@ describe("hero sheet army section", () => {
       false,
       true,
     ]);
-    expect(slots[0]?.one("hs-army-name")?.textContent).toBe(
-      CREATURES[a].plural,
+    // The full battle sprite (not the portrait) at native size, no caption.
+    const sprite = slots[0]?.one("hs-army-sprite");
+    const art = unitArt(a);
+    expect(sprite).toBeDefined();
+    expect(sprite?.width).toBe(art.w);
+    expect(sprite?.height).toBe(art.h);
+    expect(slots[0]?.one("gm-slot-portrait")).toBeUndefined();
+    expect(node.all("hs-army-name")).toHaveLength(0);
+    expect(slots[0]?.one("hs-army-shadow")).toBeDefined();
+    expect(slots[1]?.one("hs-army-sprite")).toBeUndefined();
+    expect(slots[1]?.one("hs-army-spot")).toBeDefined();
+    // The slot's only text is the count; the name is for screen readers.
+    expect(slots[0]?.textContent).toBe("24");
+    expect(slots[1]?.textContent).toBe("");
+    expect(slots[0]?.getAttribute("aria-label")).toBe(
+      `24 ${CREATURES[a].plural}`,
     );
-    expect(slots[0]?.one("gm-slot-portrait")).toBeDefined();
-    expect(slots[1]?.one("gm-slot-portrait")).toBeUndefined();
     // Filled slots carry the creature card on hover (setTip marks them).
     expect(slots[0]?.hasAttribute("data-tip")).toBe(true);
     expect(slots[1]?.hasAttribute("data-tip")).toBe(false);
@@ -161,6 +179,23 @@ describe("hero sheet army section", () => {
         CREATURES[b].fightValue +
         CREATURES[c].fightValue * 7,
     );
+  });
+
+  it("stands every sprite's feet on the ground line, big ones included", () => {
+    const big = ids.filter((id) => unitArt(id).h > 88);
+    expect(big.length).toBeGreaterThan(0);
+    const node = heroArmySection(
+      big.slice(0, 7).map((creature) => ({ creature, count: 2 })),
+    ) as unknown as FakeElement;
+    for (const [i, s] of node.all("hs-army-slot").entries()) {
+      const art = unitArt(big[i] as CreatureId);
+      const sprite = s.one("hs-army-sprite");
+      const top = Number.parseInt(String(sprite?.style.top), 10);
+      expect(top + art.feet.contactY).toBe(ARMY_GROUND_Y);
+      // The whole sprite fits in the slot: nothing cut off at the top.
+      expect(top).toBeGreaterThanOrEqual(0);
+      expect(sprite?.style.left).toBe(`calc(50% - ${art.anchor.x}px)`);
+    }
   });
 
   it("is read-only without a handler and clickable with one", () => {
@@ -175,6 +210,16 @@ describe("hero sheet army section", () => {
     }) as unknown as FakeElement;
     const slots = live.all("hs-army-slot");
     expect(slots[2]?.classList.contains("hs-selected")).toBe(true);
+    // With a stack picked, every other slot is marked as a place for it.
+    expect(slots.map((s) => s.classList.contains("hs-army-target"))).toEqual([
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+    ]);
     slots[5]?.listeners.get("click")?.forEach((fn) => fn({}));
     slots[1]?.listeners.get("click")?.forEach((fn) => fn({}));
     expect(clicked).toEqual([5, 1]);
