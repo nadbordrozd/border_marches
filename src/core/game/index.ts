@@ -21,6 +21,8 @@ export {
 export { mapStarts, prepareStarts, type StartSite } from "./starts.ts";
 export {
   describeObject,
+  describeSite,
+  type SiteDescription,
   digHere,
   dwellingOffer,
   dwellingStock,

@@ -251,7 +251,7 @@ describe("mapAction: blocked by a guard (bead bzc.77)", () => {
     expect(at(s, 10, 0).text).toMatch(BLOCKED(goblins(10), "them"));
     // The planned target asks for the second click.
     expect(at(s, 9, 2, { planned: { x: 9, y: 2 } }).text).toMatch(
-      /\)\. Click again to go\.$/,
+      /\)\. Click again to attack\.$/,
     );
   });
 

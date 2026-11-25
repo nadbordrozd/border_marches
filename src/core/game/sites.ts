@@ -2051,23 +2051,33 @@ export function objectName(state: GameState, obj: MapObject): string {
 }
 
 /**
- * Hover text for an object: its name, what it does (with its seeded
- * contents, except a sealed box's), whether the hero (or player) already
- * used it, its reset and its guard's strength. One line per entry.
+ * An object's hover facts (the map card of UI2-08 draws them; bead
+ * bzc.59): its name, what it does (with its seeded contents, except a
+ * sealed box's), whether the hero (or player) already used it, its reset
+ * and its guard line.
  */
-export function describeObject(
+export interface SiteDescription {
+  readonly name: string;
+  readonly what: string;
+  /** Whether the hero (or player) already used it; null when it never runs out. */
+  readonly visited: { readonly done: boolean; readonly text: string } | null;
+  readonly reset: string;
+  readonly guard: string | null;
+}
+
+/** The structured hover facts of a catalogue object, or null. */
+export function describeSite(
   state: GameState,
   player: number,
   obj: MapObject,
   heroId?: string,
-): string[] {
+): SiteDescription | null {
   const t = objectTypeOf(obj);
-  if (t === null) return [];
+  if (t === null) return null;
   const def = OBJECT_TYPES[t];
   const hero =
     heroId !== undefined ? findHero(state, heroId) : heroesOf(state, player)[0];
   const s = siteOf(state, obj.id);
-  const lines: string[] = [objectName(state, obj)];
   let what = def.text;
   switch (t) {
     case "school-shrine":
@@ -2187,27 +2197,56 @@ export function describeObject(
     default:
       break;
   }
-  lines.push(what);
+  let visited: SiteDescription["visited"] = null;
   if (hero !== undefined && def.reset !== "flag" && def.reset !== "permanent") {
     const u = used(state, obj, hero);
     if (def.reset === "per-player") {
-      lines.push(u ? "Already visited by your player." : "Not yet visited.");
+      visited = {
+        done: u,
+        text: u ? "Already visited by your player." : "Not yet visited.",
+      };
     } else if (def.reset === "weekly") {
-      lines.push(
-        u ? "Already collected this week." : "Not collected this week.",
-      );
+      visited = {
+        done: u,
+        text: u ? "Already collected this week." : "Not collected this week.",
+      };
     } else if (def.reset !== "each-visit" && def.reset !== "one-time") {
-      lines.push(
-        u
+      visited = {
+        done: u,
+        text: u
           ? `Already visited by ${hero.name}.`
           : `${hero.name} has not used it yet.`,
-      );
+      };
     }
   }
-  lines.push(RESET_TEXT[def.reset]);
-  const g = guardLine(state, obj);
-  if (g !== null) lines.push(g);
-  return lines;
+  return {
+    name: objectName(state, obj),
+    what,
+    visited,
+    reset: RESET_TEXT[def.reset],
+    guard: guardLine(state, obj),
+  };
+}
+
+/**
+ * Hover text for an object ({@link describeSite} as lines): its name, what
+ * it does, whether it was used, its reset and its guard's strength.
+ */
+export function describeObject(
+  state: GameState,
+  player: number,
+  obj: MapObject,
+  heroId?: string,
+): string[] {
+  const d = describeSite(state, player, obj, heroId);
+  if (d === null) return [];
+  return [
+    d.name,
+    d.what,
+    ...(d.visited === null ? [] : [d.visited.text]),
+    d.reset,
+    ...(d.guard === null ? [] : [d.guard]),
+  ];
 }
 
 /** School of a school temple or shrine, for effects. */

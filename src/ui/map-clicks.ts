@@ -150,6 +150,11 @@ export function clickTarget(
     : { x, y };
 }
 
+/** The second-click prompt: "Click again to attack." / "Click again to go." */
+export function clickAgain(fight: boolean): string {
+  return fight ? "Click again to attack." : "Click again to go.";
+}
+
 /** Today is left out; "tomorrow"; "in 3 days". */
 export function whenWords(days: number): string {
   return days <= 0 ? "" : days === 1 ? "tomorrow" : `in ${days} days`;
@@ -348,15 +353,15 @@ export function mapAction(input: MapActionInput): MapAction {
   const last = path.steps[path.steps.length - 1];
   const when = whenWords(last?.day ?? 0);
   const guard = pathGuard(state, path);
-  const again =
+  const planned =
     input.planned !== null &&
     input.planned.x === target.x &&
-    input.planned.y === target.y
-      ? ". Click again to go."
-      : "";
+    input.planned.y === target.y;
+  // The planned target asks for the second click in the same words
+  // everywhere: a plan that ends in a fight attacks, any other goes.
   const done = (cursor: CursorKind, text: string): MapAction => ({
     cursor,
-    text: text + again,
+    text: planned ? `${text}. ${clickAgain(cursor === "attack")}` : text,
   });
   const blocked = blockedWords(state, hero, path);
   if (blocked !== null) return done("attack", blocked);

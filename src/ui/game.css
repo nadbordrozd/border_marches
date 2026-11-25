@@ -2679,6 +2679,105 @@
   font-style: italic;
 }
 
+/* Picture-first map cards (UI2-08, bead bzc.59). */
+.gm-map-card {
+  min-width: 210px;
+}
+
+.gm-map-card .gm-tip-head {
+  align-items: flex-end;
+  margin-bottom: 5px;
+}
+
+.gm-card-frame {
+  display: flex;
+  flex: none;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 56px;
+  min-height: 56px;
+  padding: 3px;
+  background:
+    radial-gradient(ellipse at 50% 85%, rgb(120 150 80 / 35%), transparent 70%),
+    rgb(10 8 5 / 55%);
+  box-shadow:
+    0 0 0 1px var(--gm-ink),
+    inset 0 0 0 1px var(--gm-trim-dark);
+}
+
+.gm-card-pic {
+  display: block;
+  image-rendering: pixelated;
+}
+
+.gm-card-res {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: 6px;
+  font-weight: bold;
+  color: #fff4d0;
+  vertical-align: -3px;
+}
+
+.gm-card-gives {
+  font-size: 13px;
+}
+
+.gm-card-stacks {
+  margin: 4px 0 2px;
+}
+
+.gm-card-label {
+  color: var(--gm-trim-light);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gm-card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.gm-card-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 44px;
+  line-height: 1.15;
+}
+
+.gm-card-portrait {
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+  background: rgb(10 8 5 / 55%);
+  box-shadow: 0 0 0 1px var(--gm-trim-dark);
+}
+
+.gm-card-word {
+  margin-top: 2px;
+  color: var(--gm-gold, #ffd65c);
+  font-size: 10px;
+}
+
+.gm-card-count {
+  color: #fff4d0;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.gm-tip-path.gm-card-blocked {
+  color: var(--gm-bad);
+}
+
+.gm-card-threat b {
+  font-size: 13px;
+}
+
 .gm-res-icon-24 {
   width: 24px;
   height: 24px;

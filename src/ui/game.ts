@@ -54,7 +54,6 @@ import type {
 } from "../core/game/index.ts";
 import { AdventureAi } from "../core/ai/index.ts";
 import { createBattleResolver } from "../core/battle/resolver.ts";
-import { isPassable } from "../core/map/types.ts";
 import type { MapObject, MapObjectKind } from "../core/map/types.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { getHeroClass } from "../data/hero.ts";
@@ -101,10 +100,8 @@ import {
   minesOf,
   nextActionHint,
   ODDS_TEXT,
-  pathLine,
   pathSummary,
   SPENT_MP,
-  type PathSummary,
 } from "./hints.ts";
 import type { ResourceId } from "../core/map/types.ts";
 import { hideTip, setTip, showTipAt, tipCard } from "./tooltip.ts";
@@ -112,7 +109,6 @@ import {
   capitalize,
   creatureCount,
   dateLabel,
-  describeCell,
   objectAt,
   stackPhrase,
 } from "./format.ts";
@@ -124,14 +120,9 @@ import {
   openHeroScreen,
   type HeroScreenHost,
 } from "./hero-screen.ts";
+import { heroCard, mapCard, mapCardView, townCard } from "./map-card.ts";
 import { Minimap } from "./minimap.ts";
-import {
-  glyph,
-  heroRow,
-  readyToHire,
-  townRow,
-  type SideGlyph,
-} from "./side-panel.ts";
+import { glyph, heroRow, townRow, type SideGlyph } from "./side-panel.ts";
 import { iconElement } from "./icons.ts";
 import { PRIMARY_STATS, STAT_NAMES } from "../data/effects.ts";
 import { browserStorage, deleteSave, readSave, saveGame } from "./save.ts";
@@ -141,6 +132,7 @@ import {
   DOUBLE_CLICK_MS,
   PLAN_OPTIONS,
   blockedWords,
+  clickAgain,
   clickTarget,
   isDoubleClick,
   mapAction,
@@ -755,26 +747,7 @@ class GameScreen {
   }
 
   private heroTip(h: HeroState): HTMLElement {
-    const st = heroStats(h);
-    const army = h.army
-      .filter((s) => s !== null)
-      .map((s) => creatureCount(s.creature, s.count))
-      .join(", ");
-    return tipCard(
-      h.name,
-      [
-        `Attack ${st.attack}, Defense ${st.defense}, Power ${st.power}, Lore ${st.lore}`,
-        `Moves ${h.mp} / ${h.maxMp} · Mana ${h.mana} / ${maxMana(h)}`,
-        army === "" ? "No army" : army,
-        h.pendingLevelUps > 0
-          ? el("div.gm-tip-good", "A level-up is waiting: open the hero (I).")
-          : null,
-      ],
-      {
-        icon: img(namedHeroPortrait(h.defId, h.heroClass).key),
-        subtitle: `Level ${h.level} ${getHeroClass(h.heroClass).name}`,
-      },
-    );
+    return mapCardView(heroCard(this.state, h, this.human, this.hero()?.id));
   }
 
   private renderHeroList(): void {
@@ -934,39 +907,10 @@ class GameScreen {
         : `Moves ${hero.mp} / ${hero.maxMp}`;
   }
 
-  /** A town's card; on the map an own town also says how to open it. */
-  private townTip(id: string, onMap = false): HTMLElement | string {
-    const town = this.state.towns[id];
-    if (town === undefined) return "Town";
-    const faction = findFaction(town.faction);
-    const garrison = town.garrison
-      .filter((s) => s !== null)
-      .map((s) => creatureCount(s.creature, s.count))
-      .join(", ");
-    const mine = town.owner === this.human;
-    const canBuild =
-      mine && buildableTowns(this.state, this.human).includes(id);
-    return tipCard(
-      town.name,
-      [
-        el("div", "Income ", costView(townIncome(town))),
-        `Garrison: ${garrison === "" ? "none" : garrison}`,
-        mine && readyToHire(town) > 0
-          ? el("div.gm-tip-good", `${readyToHire(town)} creatures to hire.`)
-          : null,
-        !mine
-          ? null
-          : town.builtToday
-            ? el("div.gm-tip-dim", "Already built today.")
-            : canBuild
-              ? el("div.gm-tip-good", "Something can be built today.")
-              : el("div.gm-tip-dim", "Nothing affordable to build today."),
-        mine && onMap ? el("div.gm-tip-hint", "Double-click to open") : null,
-      ],
-      {
-        subtitle: `${faction?.name ?? "Town"}, fort level ${fortLevel(town)}`,
-      },
-    );
+  /** A town's card (UI2-08): picture, income, garrison, today's work. */
+  private townTip(id: string): HTMLElement | string {
+    const card = townCard(this.state, this.human, id);
+    return card === null ? "Town" : mapCardView(card);
   }
 
   private renderTownPanel(): void {
@@ -1116,81 +1060,18 @@ class GameScreen {
   }
 
   /**
-   * The hover card of a map cell: describeCell's lines (title first), the
-   * battle estimate for a monster or enemy hero, the path cost and turns
-   * for a reachable cell with the movement left after the step.
+   * The hover card of a map cell (UI2-08): picture first, count and threat
+   * words, what it gives, visited, and when the selected hero gets there.
    */
   private cellTip(cell: { x: number; y: number }): HTMLElement | null {
-    const { x, y } = cell;
-    const hero = this.hero();
-    const text = describeCell(this.state, this.human, x, y, hero?.id);
-    if (text === null) return null;
-    const [title = "", ...rest] = text.split("\n");
-    const lines: Array<string | HTMLElement> = [...rest];
-    const explored =
-      this.player()?.explored[y * this.state.map.width + x] === true;
-    let subtitle: string | null = null;
-    if (explored && hero !== undefined) {
-      const monster = Object.values(this.state.monsters).find(
-        (m) => m.x === x && m.y === y,
-      );
-      const foe = this.state.heroes.find(
-        (h) => h.alive && h.x === x && h.y === y && h.owner !== this.human,
-      );
-      const enemy =
-        monster !== undefined
-          ? [{ creature: monster.creature, count: monster.count }]
-          : foe !== undefined
-            ? foe.army.filter((s) => s !== null)
-            : null;
-      if (enemy !== null && enemy.length > 0) {
-        const { odds } = battleOdds(hero, enemy);
-        lines.push(
-          el(
-            `div.gm-tip-odds.gm-odds-${odds}`,
-            `Estimate for ${hero.name}: ${ODDS_TEXT[odds]}`,
-          ),
-        );
-      }
-      const own = this.state.heroes.find(
-        (h) => h.alive && h.x === x && h.y === y && h.owner === this.human,
-      );
-      if (own !== undefined) return this.heroTip(own);
-      const obj = objectAt(displayObjects(this.state), x, y);
-      if (obj?.kind === "town") {
-        const tip = this.townTip(obj.id, true);
-        if (typeof tip !== "string") {
-          const path = this.pathTo(obj.x, obj.y);
-          if (path !== null) tip.append(el("div.gm-tip-path", pathLine(path)));
-          return tip;
-        }
-      }
-      if (!(hero.x === x && hero.y === y)) {
-        const { x: tx, y: ty } = clickTarget(obj, x, y);
-        const path = this.pathTo(tx, ty);
-        if (path !== null) lines.push(el("div.gm-tip-path", pathLine(path)));
-        else if (this.isPassable(x, y)) subtitle = "No path from here";
-      }
-    }
-    return tipCard(title, lines, {
-      subtitle,
-      className: title === "Unexplored" ? "gm-tip-small" : "",
-    });
-  }
-
-  /** The selected hero's path summary to (x, y), or null. */
-  private pathTo(x: number, y: number): PathSummary | null {
-    const hero = this.hero();
-    if (hero === undefined) return null;
-    const path = findPath(this.state, hero.id, x, y);
-    return path === null || path.steps.length === 0
-      ? null
-      : pathSummary(path, hero);
-  }
-
-  private isPassable(x: number, y: number): boolean {
-    const cell = this.state.map.cells[y * this.state.map.width + x];
-    return cell !== undefined && isPassable(cell);
+    const card = mapCard(
+      this.state,
+      this.human,
+      cell.x,
+      cell.y,
+      this.hero()?.id,
+    );
+    return card === null ? null : mapCardView(card);
   }
 
   private readonly onResize = (): void => this.updateViewport();
@@ -1454,11 +1335,11 @@ class GameScreen {
         ? null
         : blockedWords(this.state, hero, this.plan.path);
     if (blocked !== null) {
-      toast(`${blocked}. Click again to attack.`);
+      toast(`${blocked}. ${clickAgain(true)}`);
       return;
     }
     const guard = this.planGuard();
-    if (guard !== null) toast(`${guard}: click again to attack`);
+    if (guard !== null) toast(`${guard}. ${clickAgain(true)}`);
   }
 
   /**
