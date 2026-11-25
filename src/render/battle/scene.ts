@@ -102,6 +102,8 @@ export type HexMark =
   | "act-valid"
   /** The valid target under the pointer. */
   | "act-hover"
+  /** A legal target the spell would change nothing on (muted). */
+  | "act-noeffect"
   /** A target already chosen. */
   | "chosen"
   /** Where Hit and Run may step after the attack. */
@@ -127,6 +129,23 @@ export interface Overlay {
   /** Linked partners the active stack may swap with (a badge on each). */
   readonly swaps?: readonly Hex[];
   readonly labels?: readonly HexLabel[];
+  /**
+   * Targeting (bead bzc.47): the hexes and stacks that may be chosen. The
+   * stacks get a pulsing ring at their feet; with `dim`, every other hex
+   * and stack is darkened.
+   */
+  readonly focus?: TargetFocus;
+}
+
+export interface TargetFocus {
+  /** Hex indices that stay lit. */
+  readonly hexes: ReadonlySet<number>;
+  /** Stacks that may be chosen (ringed) or are chosen (lit). */
+  readonly stacks: ReadonlySet<StackId>;
+  /** Stacks ringed as valid targets (a subset of `stacks`). */
+  readonly ringed: ReadonlySet<StackId>;
+  /** Darken everything else. */
+  readonly dim: boolean;
 }
 
 /** An enemy intent badge (RULES_V2 1.13) above a stack. */

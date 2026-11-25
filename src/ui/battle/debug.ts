@@ -285,7 +285,8 @@ function decorate(state: BattleState): BattleState {
 /**
  * A screenshot script (`do=`): steps separated by ";", each one of
  * key:<key>, hover:<at>, click:<at>, rclick:<at>, bar:<action key> (point
- * at a bar button for its tooltip) or wait:<ms>. <at> is a stack id or
+ * at a bar button for its tooltip), cast:<spell id> (open the book and pick
+ * that page) or wait:<ms>. <at> is a stack id or
  * "col.row", optionally "@W" (a side of the hex, as `dir`).
  */
 async function runScript(
@@ -338,6 +339,18 @@ async function runScript(
           `.bm-act[data-key="${CSS.escape(arg)}"]`,
         );
         b?.parentElement?.dispatchEvent(new PointerEvent("pointerenter"));
+        break;
+      }
+      case "cast": {
+        // Open the book and pick the page (bead bzc.47 screenshots).
+        if (!container.querySelector(".bm-book:not([hidden])"))
+          window.dispatchEvent(new KeyboardEvent("keydown", { key: "b" }));
+        await pause(120);
+        container
+          .querySelector<HTMLButtonElement>(
+            `.bm-spell[data-spell="${CSS.escape(arg)}"]`,
+          )
+          ?.click();
         break;
       }
       case "wait":

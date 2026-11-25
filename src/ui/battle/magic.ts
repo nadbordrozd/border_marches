@@ -72,7 +72,9 @@ export type EntryStatus =
   /** The hero already cast this round. */
   | "cast"
   /** Not the player's moment (no friendly stack's turn). */
-  | "wait";
+  | "wait"
+  /** Nothing on the field it can be cast on (spell-targets.ts). */
+  | "target";
 
 export interface BookEntry {
   readonly id: string;
@@ -268,6 +270,8 @@ function reasonFor(
       return "The hero has cast this round";
     case "wait":
       return "Cast on one of your stacks' turns";
+    case "target":
+      return "No valid target";
   }
 }
 

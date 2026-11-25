@@ -161,6 +161,11 @@ const MARK_STYLE: Readonly<
     stroke: "#8ff5e6",
     width: 3,
   },
+  "act-noeffect": {
+    fill: "rgba(150, 120, 70, 0.12)",
+    stroke: "rgba(190, 160, 105, 0.6)",
+    width: 1.5,
+  },
   chosen: { fill: "rgba(255, 214, 92, 0.30)", stroke: "#ffd65c", width: 3 },
   after: { fill: "rgba(140, 230, 110, 0.2)", stroke: null, width: 0 },
   swap: { fill: "rgba(96, 214, 200, 0.3)", stroke: "#8ff5e6", width: 2.5 },
@@ -169,8 +174,53 @@ const MARK_STYLE: Readonly<
 /** Teal of swaps and act targets. */
 const TEAL = "#8ff5e6";
 
+/** The stepped pulse of targeting marks: 0..3, still (1) when reduced. */
+function pulseStep(scene: Scene): number {
+  if (scene.reduced) return 1;
+  return [0, 1, 2, 3, 2, 1][Math.floor(scene.now / 140) % 6] ?? 1;
+}
+
+/** Targeting: a dark veil over every hex that cannot be chosen. */
+function drawVeil(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  const focus = scene.overlay.focus;
+  if (!focus?.dim) return;
+  ctx.save();
+  ctx.fillStyle = "rgba(6, 8, 4, 0.42)";
+  for (let i = 0; i < BATTLE_HEX_COUNT; i++) {
+    if (focus.hexes.has(i)) continue;
+    hexPath(ctx, hexFromIndex(i), 0);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+/** Targeting: a pulsing ring at the feet of each valid target stack. */
+function drawTargetRings(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  const focus = scene.overlay.focus;
+  if (!focus || focus.ringed.size === 0) return;
+  const b = pulseStep(scene);
+  ctx.save();
+  for (const id of focus.ringed) {
+    const u = scene.units.get(id);
+    if (!u || !u.visible) continue;
+    const rx = 21 + b * 1.5;
+    const ry = 8 + b * 0.6;
+    ctx.beginPath();
+    ctx.ellipse(u.x, u.y - 1, rx, ry, 0, 0, Math.PI * 2);
+    ctx.strokeStyle = "#0d2522";
+    ctx.lineWidth = 4.5;
+    ctx.stroke();
+    ctx.strokeStyle = b >= 2 ? "#c8fff6" : TEAL;
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
 function drawMarks(ctx: CanvasRenderingContext2D, scene: Scene): void {
   const { overlay } = scene;
+  drawVeil(ctx, scene);
+  const pulse = pulseStep(scene);
   // Reachable shading first, then everything else over it.
   for (const pass of [true, false]) {
     for (const [i, mark] of overlay.marks) {
@@ -183,9 +233,12 @@ function drawMarks(ctx: CanvasRenderingContext2D, scene: Scene): void {
         ctx.fill();
       }
       if (st.stroke) {
-        hexPath(ctx, h, 1 + st.width / 2);
-        ctx.strokeStyle = st.stroke;
-        ctx.lineWidth = st.width;
+        // Valid targets pulse (a stepped brightening, still when reduced).
+        const w = mark === "act-valid" ? st.width + pulse * 0.5 : st.width;
+        hexPath(ctx, h, 1 + w / 2);
+        ctx.strokeStyle =
+          mark === "act-valid" && pulse >= 2 ? "#c8fff6" : st.stroke;
+        ctx.lineWidth = w;
         ctx.stroke();
       }
       if (mark === "path") {
@@ -921,9 +974,19 @@ export function renderBattle(
     if (u.visible) drawables.push({ kind: "unit", y: u.y, unit: u });
   }
   drawables.sort((a, b) => a.y - b.y);
+  drawTargetRings(ctx, scene);
+  const focus = scene.overlay.focus;
   for (const d of drawables) {
-    if (d.kind === "unit") drawUnit(ctx, art, d.unit, scene.now, scene.reduced);
-    else drawObstacle(ctx, art, d.index);
+    if (d.kind === "unit") {
+      // Targeting: stacks that cannot be chosen are darkened.
+      const dim = focus?.dim === true && !focus.stacks.has(d.unit.id);
+      if (dim) {
+        ctx.save();
+        ctx.filter = "brightness(0.45) saturate(0.55)";
+      }
+      drawUnit(ctx, art, d.unit, scene.now, scene.reduced);
+      if (dim) ctx.restore();
+    } else drawObstacle(ctx, art, d.index);
   }
   drawLinks(ctx, scene);
   for (const u of scene.units.values()) {

@@ -9,6 +9,8 @@
 import type { ConditionRef } from "../../core/battle/index.ts";
 import { isBattleSpell } from "../../core/magic/index.ts";
 import { iconElement } from "../icons.ts";
+import { targetLine } from "../target-icon.ts";
+import { ANYWHERE, spellTargetKind } from "./spell-targets.ts";
 import { spellTip } from "../info-tips.ts";
 import { rulesText } from "../keywords.ts";
 import { setTip, tipCard } from "../tooltip.ts";
@@ -57,6 +59,7 @@ function entryNode(e: BookEntry, onPick: (e: BookEntry) => void): HTMLElement {
   const item = e.source === "item";
   const b = el("button", `bm-spell bm-st-${e.status}${item ? " bm-item" : ""}`);
   b.type = "button";
+  b.dataset["spell"] = e.id;
   b.style.setProperty("--school", item ? "#c9a227" : SCHOOL_COLOURS[e.school]);
   b.disabled = e.status !== "ready";
   setTip(b, () => entryTip(e));
@@ -89,6 +92,8 @@ function entryNode(e: BookEntry, onPick: (e: BookEntry) => void): HTMLElement {
     ),
     rulesText(e.text, { tag: "div", className: "bm-spell-text" }),
   );
+  const kind = spellTargetKind(e.id);
+  if (kind) b.append(targetLine(kind, "bm-spell-target"));
   if (e.reason) b.append(el("div", "bm-spell-why", e.reason));
   b.addEventListener("click", () => onPick(e));
   return b;
@@ -155,10 +160,22 @@ export function renderBook(
 export interface CastPanelModel {
   readonly entry: BookEntry;
   readonly prompt: string;
-  /** Conditions of a picked stack (condition steps). */
-  readonly conditions: readonly ConditionOption[] | null;
+  /** Conditions of a picked stack (condition steps); `valid` false greys one. */
+  readonly conditions:
+    | readonly (ConditionOption & {
+        readonly valid?: boolean;
+        /** Why it is greyed ("No effect: ..."). */
+        readonly why?: string;
+      })[]
+    | null;
+  /** Why the last click was refused, or null. */
+  readonly notice?: string | null;
   /** Named options (Wind: +2 / -2). */
   readonly choices: readonly string[] | null;
+  /** Options the cast refuses (Wind +2 on a Hold). */
+  readonly badChoices?: readonly string[];
+  /** How many valid targets glow on the field for this step, or null. */
+  readonly valid?: number | null;
   /** The rehearsal of the complete cast, or of the hovered last target. */
   readonly preview: CastPreview | null;
   readonly hovered: boolean;
@@ -244,7 +261,24 @@ export function renderCastPanel(
       hover: true,
     }),
   );
+  const kind = spellTargetKind(m.entry.id);
+  if (kind) box.append(targetLine(kind, "bm-spell-target"));
   if (!m.complete) box.append(el("div", "bm-cast-prompt", m.prompt));
+  if (!m.complete && m.notice)
+    box.append(el("div", "bm-cast-refused", m.notice));
+  const n = m.valid;
+  if (!m.complete && n !== undefined && n !== null && !m.conditions)
+    box.append(
+      el(
+        "div",
+        "bm-cast-valid",
+        n === 0
+          ? "Nothing valid left to choose: go Back or Cancel."
+          : n >= ANYWHERE
+            ? "Point anywhere on the field: the outline shows what it covers. Right-click or Esc cancels."
+            : `${n} valid target${n === 1 ? "" : "s"} glow on the field. Right-click or Esc cancels.`,
+      ),
+    );
   if (m.conditions) {
     const row = el("div", "bm-cast-toggles");
     if (m.conditions.length === 0)
@@ -252,7 +286,9 @@ export function renderCastPanel(
     for (const c of m.conditions) {
       const b = el("button", "bm-toggle", c.label);
       b.type = "button";
-      b.title = c.effect;
+      b.title =
+        c.valid === false ? (c.why ?? "This spell cannot take it") : c.effect;
+      b.disabled = c.valid === false;
       b.addEventListener("click", () => h.onCondition(c.ref));
       row.append(b);
     }
@@ -263,6 +299,7 @@ export function renderCastPanel(
     for (const c of m.choices) {
       const b = el("button", "bm-toggle", c);
       b.type = "button";
+      b.disabled = m.badChoices?.includes(c) ?? false;
       b.addEventListener("click", () => h.onChoice(c));
       row.append(b);
     }

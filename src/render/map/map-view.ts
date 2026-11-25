@@ -125,6 +125,11 @@ export interface MapView {
   setPathPreview(steps: readonly PathStep[] | null, from?: Cell): void;
   /** A selected cell: a monster there shows its count chip. */
   setSelected(cell: Cell | null): void;
+  /**
+   * Spell targeting (bead bzc.47): cells that may be chosen, outlined with
+   * a stepped pulse over the units (null clears).
+   */
+  setTargetCells(cells: readonly Cell[] | null): void;
   setZoom(zoom: number, anchor?: { sx: number; sy: number }): void;
   getZoom(): number;
   /** Centres the view on cell (x, y) at once (stops a glide). */
@@ -319,6 +324,7 @@ export function createMapView(
   let flags: readonly MapFlag[] = [];
   let selected: Cell | null = null;
   let hovered: Cell | null = null;
+  let targets: readonly Cell[] | null = null;
   let explored: Uint8Array | null = null;
 
   let layout: GroundLayout | null = null;
@@ -664,6 +670,49 @@ export function createMapView(
     }
   };
 
+  /** Valid spell targets: a gold outline with a stepped pulse. */
+  const drawTargets = (ctx: Context, now: number): void => {
+    if (targets === null || targets.length === 0) return;
+    const step = [0, 1, 2, 3, 2, 1][Math.floor(now / 140) % 6] ?? 1;
+    // A wide aim (an explored cell anywhere) is a soft wash, not outlines.
+    const wide = targets.length > 40;
+    ctx.save();
+    for (const c of targets) {
+      if (!isExplored(c.x, c.y)) continue;
+      const x = c.x * CELL;
+      const y = c.y * CELL;
+      if (wide) {
+        ctx.fillStyle = `rgba(255, 214, 92, ${0.08 + step * 0.025})`;
+        ctx.fillRect(x + 1, y + 1, CELL - 2, CELL - 2);
+        continue;
+      }
+      const inset = 3 - step * 0.5;
+      ctx.fillStyle = "rgba(255, 214, 92, 0.16)";
+      ctx.fillRect(x + 2, y + 2, CELL - 4, CELL - 4);
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "rgba(20, 14, 8, 0.8)";
+      ctx.strokeRect(x + inset, y + inset, CELL - 2 * inset, CELL - 2 * inset);
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = step >= 2 ? "#fff0a0" : "#ffd65c";
+      ctx.strokeRect(x + inset, y + inset, CELL - 2 * inset, CELL - 2 * inset);
+    }
+    if (
+      wide &&
+      hovered !== null &&
+      targets.some((c) => c.x === hovered?.x && c.y === hovered.y)
+    ) {
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = "#fff0a0";
+      ctx.strokeRect(
+        hovered.x * CELL + 2,
+        hovered.y * CELL + 2,
+        CELL - 4,
+        CELL - 4,
+      );
+    }
+    ctx.restore();
+  };
+
   /** A pole with a pennant; (px, py) is the foot of the pole. */
   const drawPennant = (
     ctx: Context,
@@ -735,6 +784,7 @@ export function createMapView(
         fx.size > 0 ||
         flagRaises.size > 0 ||
         heroOffsets.size > 0 ||
+        targets !== null ||
         (fadingFog !== null && now - fogFadeStart < FOG_FADE_MS);
       view.render();
       if (busy) requestAnimationFrame(loop);
@@ -834,6 +884,7 @@ export function createMapView(
     drawPath(ctx);
     if (chipCell !== null) drawChip(ctx, chipCell);
     const now = performance.now();
+    drawTargets(ctx, now);
     drawFx(ctx, fx, now);
     if (explored !== null) {
       for (let cy = r0; cy <= r1; cy += 1)
@@ -1092,6 +1143,12 @@ export function createMapView(
     },
     setSelected(cell) {
       selected = cell;
+      requestRender();
+    },
+    setTargetCells(cells) {
+      targets = cells === null ? null : [...cells];
+      // The pulse keeps the frame loop running while targets glow.
+      if (targets !== null) animate();
       requestRender();
     },
     setZoom(next, anchor) {

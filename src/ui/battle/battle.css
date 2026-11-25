@@ -589,7 +589,13 @@
 }
 
 .bm-spell:disabled {
-  cursor: default;
+  cursor: not-allowed;
+  background: #231d14;
+  border-left-color: #5c4626;
+}
+
+/* Greyed, but the reason stays readable (bead bzc.47). */
+.bm-spell:disabled > :not(.bm-spell-why) {
   opacity: 0.45;
   filter: grayscale(0.7);
 }
@@ -636,6 +642,31 @@
 .bm-spell-text {
   font-size: 12px;
   color: #e8dcc0;
+}
+
+/* The target-type line: a pictogram and plain words. */
+.bm-spell-target {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+  font-size: 11px;
+  color: #c8e8e0;
+}
+
+.bm-target-icon {
+  flex: none;
+  color: #c8e8e0;
+}
+
+.bm-spell-why {
+  font-weight: bold;
+}
+
+.bm-cast-valid {
+  margin: 2px 0 4px;
+  font-size: 11px;
+  color: #8ff5e6;
 }
 
 /* In the left margin beside the field, so it never hides a target. */

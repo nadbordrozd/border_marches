@@ -71,6 +71,8 @@ import { onMotionChange, reducedMotion } from "./motion.ts";
 import { bump, countUp, dayBanner, floatText, flyTo } from "./anim.ts";
 import { openBattleScreen } from "./battle/screen.ts";
 import { openAdventureBook } from "./spellbook.ts";
+import { aimHint } from "./adventure-targets.ts";
+import type { AdventureAim } from "./adventure-targets.ts";
 import { castAdventureSpell, registerSpells } from "../core/magic/index.ts";
 import { soundControl } from "./sound-control.ts";
 import { armyRow } from "./army.ts";
@@ -296,8 +298,15 @@ class GameScreen {
   private floatQueue = 0;
   /** A town picked in the kingdom overview, opened when it closes. */
   private kingdomTown: string | null = null;
-  /** An adventure spell waiting for a map cell (Ask the Dead). */
-  private aiming: { spell: string; scroll: boolean } | null = null;
+  /**
+   * An adventure spell aimed on the map (bead bzc.47): its valid targets
+   * glow and the next click on one casts.
+   */
+  private aiming: {
+    spell: string;
+    scroll: boolean;
+    aims: readonly AdventureAim[];
+  } | null = null;
 
   constructor(
     initial: GameState,
@@ -623,8 +632,7 @@ class GameScreen {
       this.plan !== null && hero !== undefined
         ? pathSummary(this.plan.path, hero)
         : null;
-    if (this.aiming !== null)
-      return "Click an explored cell within 15 cells of the hero (Esc cancels).";
+    if (this.aiming !== null) return aimHint(this.aiming.spell);
     return nextActionHint(this.state, this.human, hero, planned);
   }
 
@@ -1133,10 +1141,8 @@ class GameScreen {
         this.zoomBy(-1);
         break;
       case "Escape":
-        if (this.aiming !== null) {
-          this.aiming = null;
-          this.renderHint();
-        } else this.clearPlan();
+        if (this.aiming !== null) this.stopAiming();
+        else this.clearPlan();
         break;
       default:
         // Layouts without a plain +/- key: fall back to the key position.
@@ -1157,7 +1163,11 @@ class GameScreen {
   private selectHero(heroId: string): void {
     const hero = heroesOf(this.state, this.human).find((h) => h.id === heroId);
     if (hero === undefined) return;
-    if (this.selectedId !== heroId) this.clearPlan();
+    if (this.selectedId !== heroId) {
+      this.clearPlan();
+      // The aim belonged to the other hero.
+      if (this.aiming !== null) this.stopAiming();
+    }
     this.selectedId = heroId;
     void this.view.glideTo(hero.x, hero.y, reducedMotion());
     this.renderHeroList();
@@ -1182,6 +1192,13 @@ class GameScreen {
     return this.plan === null || hero === undefined
       ? {}
       : { [hero.id]: this.plan.path };
+  }
+
+  /** Leaves adventure-spell aiming: the glow goes, the hint returns. */
+  private stopAiming(): void {
+    this.aiming = null;
+    this.view.setTargetCells(null);
+    this.renderHint();
   }
 
   private clearPlan(): void {
@@ -1225,21 +1242,29 @@ class GameScreen {
     this.cancelPendingWalk();
     if (this.aiming !== null) {
       const aim = this.aiming;
-      this.aiming = null;
+      const hit = aim.aims.find((a) => a.x === x && a.y === y);
+      if (hit === undefined) {
+        // Not a valid target: keep aiming (Esc cancels).
+        toast("Not a valid target: click a glowing cell, or Esc to cancel.");
+        return;
+      }
+      if (hit.noEffect !== undefined) {
+        // Legal but pointless (bzc.47 review): refused with the reason.
+        toast(`No effect: ${hit.noEffect}. Click a glowing cell, or Esc.`);
+        return;
+      }
+      this.stopAiming();
       const hero = this.hero();
       if (hero !== undefined) {
         const events = this.run(
-          castAdventureSpell(
-            this.state,
-            hero.id,
-            aim.spell,
-            { x, y },
-            {
-              scroll: aim.scroll,
-            },
-          ),
+          castAdventureSpell(this.state, hero.id, aim.spell, hit.target, {
+            scroll: aim.scroll,
+          }),
         );
-        if (events !== null) toast("The dead answer.");
+        if (events !== null) {
+          this.syncHeroes();
+          toast(aim.spell === "ask-the-dead" ? "The dead answer." : "Cast.");
+        }
       }
       return;
     }
@@ -2043,6 +2068,7 @@ class GameScreen {
 
   private async endTurn(): Promise<void> {
     if (this.inputBlocked()) return;
+    if (this.aiming !== null) this.stopAiming();
     const warnings = endTurnWarnings(
       this.state,
       this.human,
@@ -2491,13 +2517,23 @@ class GameScreen {
     if (this.inputBlocked()) return;
     const hero = this.hero();
     if (hero === undefined) return;
+    if (this.aiming !== null) this.stopAiming();
     this.screenOpen = true;
     const choice = await openAdventureBook(this.state, hero);
     this.screenOpen = false;
     if (choice === null) return;
     if (choice.kind === "aim") {
-      this.aiming = { spell: choice.spell, scroll: choice.scroll };
-      toast("Click an explored cell within 15 cells of the hero.");
+      this.aiming = {
+        spell: choice.spell,
+        scroll: choice.scroll,
+        aims: choice.aims,
+      };
+      // Only targets that would change something glow.
+      this.view.setTargetCells(
+        choice.aims.filter((a) => a.noEffect === undefined),
+      );
+      this.renderHint();
+      toast(aimHint(choice.spell));
       return;
     }
     const events = this.run(

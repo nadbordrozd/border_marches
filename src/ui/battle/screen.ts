@@ -70,7 +70,12 @@ import {
   pruneEffects,
   syncScene,
 } from "../../render/battle/scene.ts";
-import type { HexMark, Scene } from "../../render/battle/scene.ts";
+import type {
+  HexLabel,
+  HexMark,
+  Scene,
+  TargetFocus,
+} from "../../render/battle/scene.ts";
 import { Animator, nextSpeed, speedLabel } from "./animate.ts";
 import { onMotionChange, reducedMotion } from "../motion.ts";
 import { flipChildren } from "../anim.ts";
@@ -106,9 +111,17 @@ import {
 } from "./magic.ts";
 import type { BookEntry, CastPreview, ConditionOption } from "./magic.ts";
 import { renderBook, renderCastPanel } from "./spellbook.ts";
-import { registerSpells, lineThrough } from "../../core/magic/index.ts";
+import { registerSpells, spellDef } from "../../core/magic/index.ts";
 import {
-  BATTLE_HEX_COUNT,
+  ANYWHERE,
+  castChoices,
+  castChoicesAt,
+  choiceStacks,
+  effectiveChoices,
+  withTargetStatus,
+} from "./spell-targets.ts";
+import type { CastChoice } from "./spell-targets.ts";
+import {
   ability as abilityDef,
   act,
   conditionKind,
@@ -190,8 +203,14 @@ interface Casting {
   pickFor: StackId | null;
   echo: ConditionRef | null;
   fuel: ConditionRef | null;
-  /** Rehearsal of the hovered last target, if any. */
-  hover: { target: ActTarget; preview: CastPreview } | null;
+  /** The valid target under the pointer; the rehearsal when it is the last. */
+  hover: { target: ActTarget; preview: CastPreview | null } | null;
+  /** Every valid target of the next step (spell-targets.ts). */
+  choices: CastChoice[];
+  /** The targets the choices were computed for. */
+  choicesFor: string;
+  /** Why the last click was refused (a target that would change nothing). */
+  notice: string | null;
 }
 
 export interface BattleScreenOptions {
@@ -774,6 +793,15 @@ class BattleScreen {
 
   private onContextMenu(e: MouseEvent): void {
     e.preventDefault();
+    // Right-click leaves targeting (as Esc does).
+    if (this.casting) {
+      this.cancelCast();
+      return;
+    }
+    if (this.aiming) {
+      this.cancelAim();
+      return;
+    }
     const h = pointAtField(this.state, this.toStage(e)).hex;
     const stack =
       h === null
@@ -886,7 +914,17 @@ class BattleScreen {
     if (this.casting) this.castHover(at?.hex ?? null);
     if (this.aiming) this.aimHover(at?.hex ?? null, at?.pointer ?? null);
     if (this.afterStep) this.afterHover(at?.hex ?? null);
-    if (this.aiming) {
+    if (this.casting) {
+      // Targeting: a crosshair on what may be chosen, "no" elsewhere.
+      const h = at?.hex ?? null;
+      const waiting = nextStep(this.casting.entry.id, this.casting.targets);
+      this.canvas.style.cursor =
+        waiting === null || waiting === "choice" || h === null
+          ? "default"
+          : this.castValidAt(h)
+            ? "crosshair"
+            : "not-allowed";
+    } else if (this.aiming) {
       const v = this.aiming.hover !== null;
       this.canvas.style.cursor = v ? "crosshair" : "default";
     } else if (this.afterStep) {
@@ -954,11 +992,18 @@ class BattleScreen {
       case "none":
         break;
     }
-    if (this.casting) this.castMarks(marks);
+    let focus: TargetFocus | null = null;
+    if (this.casting) {
+      const r = this.castMarks(marks);
+      area = r.area;
+      labels = r.labels;
+      focus = r.focus;
+    }
     if (this.aiming) {
       const r = this.aimMarks(marks);
       area = r.area;
       labels = r.labels;
+      focus = r.focus;
     }
     if (this.afterStep) strike = this.afterMarks(marks);
     // Swap badges on linked partners whenever the swap is legal.
@@ -976,6 +1021,7 @@ class BattleScreen {
             area,
             swaps,
             labels,
+            ...(focus && !this.animating ? { focus } : {}),
           };
   }
 
@@ -1066,6 +1112,8 @@ class BattleScreen {
         ],
       };
     }
+    const cast = this.castTip();
+    if (cast !== null) return cast;
     const a = this.aiming;
     if (a?.hover) {
       const p = a.hover.preview;
@@ -1116,6 +1164,62 @@ class BattleScreen {
       };
     }
     return null;
+  }
+
+  /** The tooltip of a cast's valid target under the pointer: the rehearsal. */
+  private castTip(): { hex: Hex; lines: HTMLElement[] } | null {
+    const c = this.casting;
+    if (!c) return null;
+    const at = this.pointer ? pointAtField(this.state, this.pointer).hex : null;
+    const none = this.noEffectAt(at);
+    if (at !== null && none !== null)
+      return {
+        hex: at,
+        // "No effect", then the refusal and its numbers on their own lines.
+        lines: [
+          el("div", "bm-tip-ret", "No effect: the click does nothing"),
+          ...none
+            .replace(/ \(/, "\n(")
+            .split("\n")
+            .map((t) => el("div", "bm-tip-cond", t)),
+        ],
+      };
+    if (at === null || !this.castValidAt(at)) return null;
+    const step = nextStep(c.entry.id, c.targets);
+    const lines: HTMLElement[] = [];
+    if (step === "condition") {
+      lines.push(el("div", "bm-tip-act", "Click, then choose one:"));
+      for (const x of effectiveChoices(castChoicesAt(c.choices, at))) {
+        const t = x.target as ConditionRef;
+        const cd = getStack(this.state, t.stack).conditions.find(
+          (y) => y.uid === t.condition,
+        );
+        if (cd)
+          lines.push(
+            el(
+              "div",
+              "bm-tip-cond",
+              `${conditionKind(cd.kind).name}${cd.clock === null ? "" : `, ${cd.clock} round${cd.clock === 1 ? "" : "s"} left`}`,
+            ),
+          );
+      }
+      return { hex: at, lines };
+    }
+    const p = c.hover?.preview ?? null;
+    if (p === null) {
+      lines.push(el("div", "bm-tip-cond", "Then choose the next target"));
+    } else if (!p.legal) {
+      lines.push(el("div", "bm-tip-ret", `Cannot: ${p.message ?? ""}`));
+    } else if (p.summary.length === 0) {
+      const rest = p.lines.slice(1, 4);
+      for (const s of rest) lines.push(el("div", "bm-tip-act", s));
+      if (rest.length === 0)
+        lines.push(el("div", "bm-tip-cond", "No visible change"));
+    } else {
+      for (const s of p.summary.slice(0, 4))
+        lines.push(el("div", "bm-tip-act", s));
+    }
+    return { hex: at, lines };
   }
 
   /** Hover tooltip: a stack's conditions, or the ground under the pointer. */
@@ -1417,15 +1521,16 @@ class BattleScreen {
   private aimMarks(marks: Map<number, HexMark>): {
     area: Hex[];
     labels: { hex: Hex; text: string }[];
+    focus: TargetFocus | null;
   } {
     const a = this.aiming;
-    if (!a) return { area: [], labels: [] };
+    if (!a) return { area: [], labels: [], focus: null };
     const s = this.state;
     const me = getStack(s, a.mode.actorId);
     marks.clear();
     // When nearly every hex is valid (a shot at any hex), shading them all
     // is noise: only the hovered hex and its area are drawn.
-    if (a.choices.length < BATTLE_HEX_COUNT * 0.6)
+    if (a.choices.length < ANYWHERE)
       for (const c of a.choices) marks.set(hexIndex(c.hex), "act-valid");
     const labels: { hex: Hex; text: string }[] = [];
     a.mode.targets.forEach((t, i) => {
@@ -1448,7 +1553,23 @@ class BattleScreen {
         marks.set(hexIndex(hv.from), "attack-from");
       }
     }
-    return { area: areaHexes(s, a.mode, targets), labels };
+    // Valid targets lit and ringed, the rest dimmed, as for a cast.
+    const kind = stepKind(a.mode, a.mode.targets.length);
+    const many = a.choices.length >= ANYWHERE;
+    const hexes = new Set<number>(marks.keys());
+    for (const c of a.choices) hexes.add(hexIndex(c.hex));
+    const ringed = new Set<StackId>();
+    if (kind === "stack" || kind === "condition")
+      for (const c of a.choices)
+        if ("stack" in c.target) ringed.add(c.target.stack);
+    const stacks = new Set<StackId>([me.id, ...ringed]);
+    for (const st of s.stacks)
+      if (isAlive(st) && hexes.has(hexIndex(st.hex))) stacks.add(st.id);
+    const focus: TargetFocus | null =
+      a.choices.length === 0 && a.mode.targets.length === 0
+        ? null
+        : { hexes, stacks, ringed, dim: a.choices.length > 0 && !many };
+    return { area: areaHexes(s, a.mode, targets), labels, focus };
   }
 
   private refreshAim(): void {
@@ -2022,10 +2143,13 @@ class BattleScreen {
     this.cancelAim();
     this.cancelAfter();
     const side = heroSideNow(this.state, this.playerSides);
-    const pages = side ? heroBook(this.state, side) : [];
+    // Pages with nothing to aim at are greyed with the reason (bzc.47).
+    const pages = side
+      ? withTargetStatus(this.state, heroBook(this.state, side))
+      : [];
     const magic = side ? this.state.sides[side].magic : undefined;
     const active = activeStack(this.state);
-    const own = creatureBook(this.state);
+    const own = withTargetStatus(this.state, creatureBook(this.state));
     renderBook(
       this.book,
       {
@@ -2069,9 +2193,13 @@ class BattleScreen {
       echo: null,
       fuel: null,
       hover: null,
+      choices: [],
+      choicesFor: "",
+      notice: null,
     };
     this.castBox.hidden = false;
     this.refreshCast();
+    this.updateHover();
   }
 
   private cancelCast(): void {
@@ -2086,7 +2214,11 @@ class BattleScreen {
     const c = this.casting;
     if (!c) return;
     if (c.pickFor !== null) c.pickFor = null;
-    else c.targets.pop();
+    else {
+      c.targets.pop();
+      // A line's third hex follows from the second: drop both.
+      if (this.isLine(c) && c.targets.length === 2) c.targets.pop();
+    }
     c.echo = null;
     c.fuel = null;
     this.refreshCast();
@@ -2106,17 +2238,59 @@ class BattleScreen {
     this.commitPlayer(action);
   }
 
-  /** The target a click or hover on `h` would add, or null. */
+  /** The cast aims a straight line (its third hex follows the second). */
+  private isLine(c: Casting): boolean {
+    return c.entry.source !== "item" && spellDef(c.entry.id).target === "line3";
+  }
+
+  /** Recomputes the valid targets when the chosen ones changed. */
+  private syncCastChoices(c: Casting): void {
+    const key = JSON.stringify(c.targets);
+    if (key === c.choicesFor) return;
+    c.choicesFor = key;
+    c.choices = castChoices(this.state, c.entry, c.targets);
+  }
+
+  /** The valid target a click or hover on `h` would add, or null. */
   private targetAt(h: Hex | null): ActTarget | null {
     const c = this.casting;
     if (!c || h === null) return null;
     const step = nextStep(c.entry.id, c.targets);
-    const stack = this.state.stacks.find(
-      (s) => isAlive(s) && s.hex.col === h.col && s.hex.row === h.row,
+    if (step !== "stack" && step !== "hex") return null;
+    return castChoicesAt(c.choices, h)[0]?.target ?? null;
+  }
+
+  /** The legal choice of a stack or hex step on hex `h`, or null. */
+  private choiceAt(h: Hex | null): CastChoice | null {
+    const c = this.casting;
+    if (!c || h === null) return null;
+    const step = nextStep(c.entry.id, c.targets);
+    if (step !== "stack" && step !== "hex") return null;
+    return castChoicesAt(c.choices, h)[0] ?? null;
+  }
+
+  /**
+   * Whether hex `h` holds something the next step may take that changes
+   * something (a legal target with no effect is not valid here).
+   */
+  private castValidAt(h: Hex | null): boolean {
+    const c = this.casting;
+    if (!c || h === null) return false;
+    const step = nextStep(c.entry.id, c.targets);
+    if (step === "condition")
+      return effectiveChoices(castChoicesAt(c.choices, h)).length > 0;
+    const ch = this.choiceAt(h);
+    return ch !== null && ch.noEffect === null;
+  }
+
+  /** Why the legal targets on hex `h` would change nothing, or null. */
+  private noEffectAt(h: Hex | null): string | null {
+    const c = this.casting;
+    if (!c || h === null || this.castValidAt(h)) return null;
+    return (
+      castChoicesAt(c.choices, h).find((x) => x.noEffect !== null)?.noEffect ??
+      null
     );
-    if (step === "stack") return stack ? { stack: stack.id } : null;
-    if (step === "hex") return { hex: h };
-    return null;
   }
 
   private castClick(): void {
@@ -2124,97 +2298,209 @@ class BattleScreen {
     if (!c) return;
     const at = this.pointer ? pointAtField(this.state, this.pointer).hex : null;
     const step = nextStep(c.entry.id, c.targets);
-    if (step === "condition") {
-      const stack =
-        at === null
-          ? undefined
-          : this.state.stacks.find(
-              (s) => isAlive(s) && s.hex.col === at.col && s.hex.row === at.row,
-            );
-      c.pickFor = stack ? stack.id : null;
+    // A legal target that would change nothing is refused with the reason
+    // (bzc.47 review: it must not look or act like a real target).
+    const none = this.noEffectAt(at);
+    if (none !== null) {
+      c.notice = `No effect: ${none}`;
       this.refreshCast();
       return;
     }
-    const t = this.targetAt(at);
+    c.notice = null;
+    if (step === "condition") {
+      // A stack with a valid condition: its conditions go to the panel;
+      // a single one is taken at once.
+      const here =
+        at === null ? [] : effectiveChoices(castChoicesAt(c.choices, at));
+      const first = here[0];
+      if (here.length === 1 && first) {
+        c.targets.push(first.target);
+        c.pickFor = null;
+      } else
+        c.pickFor =
+          first && "stack" in first.target ? first.target.stack : null;
+      c.hover = null;
+      this.refreshCast();
+      this.updateHover();
+      return;
+    }
+    const t = this.castValidAt(at) ? this.targetAt(at) : null;
     if (!t) return;
     c.targets.push(t);
     // A line of three: the second hex sets the direction, the third follows.
-    const rule = nextStep(c.entry.id, c.targets);
+    this.syncCastChoices(c);
+    const only = c.choices[0];
     if (
-      rule === "hex" &&
+      this.isLine(c) &&
       c.targets.length === 2 &&
-      c.entry.id === "bramble-row"
-    ) {
-      const [a, b] = c.targets.map((x) => ("hex" in x ? x.hex : null));
-      if (a && b) {
-        const line = lineThrough(a, b);
-        if (line[2]) c.targets.push({ hex: line[2] });
-      }
-    }
+      c.choices.length === 1 &&
+      only
+    )
+      c.targets.push(only.target);
     c.hover = null;
     this.refreshCast();
+    this.updateHover();
   }
 
   private castHover(h: Hex | null): void {
     const c = this.casting;
     if (!c) return;
-    const steps = nextStep(c.entry.id, c.targets);
     const t = this.targetAt(h);
-    const last =
-      steps !== null &&
-      nextStep(c.entry.id, [...c.targets, t ?? { hex: { col: 0, row: 0 } }]) ===
-        null;
-    if (t && last) {
-      const same =
-        c.hover !== null &&
-        JSON.stringify(c.hover.target) === JSON.stringify(t);
-      if (!same) {
-        const action = castAction(this.state, c.entry, [...c.targets, t]);
-        c.hover = { target: t, preview: castPreview(this.state, action) };
+    const same =
+      c.hover !== null &&
+      t !== null &&
+      JSON.stringify(c.hover.target) === JSON.stringify(t);
+    if (same) return;
+    if (t === null) {
+      if (c.hover !== null) {
+        c.hover = null;
         this.refreshCast();
       }
-    } else if (c.hover !== null) {
-      c.hover = null;
-      this.refreshCast();
+      return;
     }
+    // The rehearsal when this target completes the cast (a line's second
+    // hex completes it too: its third follows).
+    let full = [...c.targets, t];
+    if (this.isLine(c) && full.length === 2) {
+      const next = castChoices(this.state, c.entry, full)[0];
+      if (next) full = [...full, next.target];
+    }
+    const last = nextStep(c.entry.id, full) === null;
+    c.hover = {
+      target: t,
+      preview: last
+        ? castPreview(this.state, castAction(this.state, c.entry, full))
+        : null,
+    };
+    this.refreshCast();
   }
 
-  private castMarks(marks: Map<number, HexMark>): void {
+  /**
+   * The targeting overlay of a cast (bead bzc.47): valid targets glow and
+   * pulse, everything else dims; chosen targets are numbered; an area
+   * spell shows its footprint under the pointer.
+   */
+  private castMarks(marks: Map<number, HexMark>): {
+    area: Hex[];
+    labels: HexLabel[];
+    focus: TargetFocus | null;
+  } {
     const c = this.casting;
-    if (!c) return;
+    if (!c) return { area: [], labels: [], focus: null };
+    const s = this.state;
     marks.clear();
-    for (const t of c.targets) {
-      if ("hex" in t) marks.set(hexIndex(t.hex), "target");
-      else if ("stack" in t)
-        marks.set(hexIndex(getStack(this.state, t.stack).hex), "target");
-    }
-    const at = this.pointer ? pointAtField(this.state, this.pointer).hex : null;
     const step = nextStep(c.entry.id, c.targets);
-    if (at !== null && step === "hex") {
-      for (const h of spellAreaHexes(c.entry.id, at))
-        marks.set(hexIndex(h), "move-target");
-    } else if (at !== null && step !== null) {
-      marks.set(hexIndex(at), "inspect");
+    const hexes = new Set<number>();
+    const stacks = new Set<StackId>();
+    let shown = step === null ? [] : c.choices.filter((x) => x.hex !== null);
+    if (step === "condition" && c.pickFor !== null)
+      shown = shown.filter(
+        (x) => "stack" in x.target && x.target.stack === c.pickFor,
+      );
+    // Targets that would change nothing get a muted outline, no ring and
+    // stay dimmed; the rest glow.
+    const live = effectiveChoices(shown);
+    const dull = shown.filter((x) => x.noEffect !== null);
+    // When nearly every hex is valid (an area anywhere), shading them all
+    // is noise: only the hovered hex and its footprint are drawn.
+    const many = live.length >= ANYWHERE;
+    const lit = new Set<number>();
+    for (const x of live) {
+      const i = hexIndex(x.hex as Hex);
+      hexes.add(i);
+      lit.add(i);
+      if (!many) marks.set(i, "act-valid");
     }
-    if (c.pickFor !== null)
-      marks.set(hexIndex(getStack(this.state, c.pickFor).hex), "inspect");
+    if (!many)
+      for (const x of dull) {
+        const i = hexIndex(x.hex as Hex);
+        if (lit.has(i)) continue;
+        hexes.add(i);
+        marks.set(i, "act-noeffect");
+      }
+    const ringed = new Set<StackId>(
+      step === "stack" || step === "condition" ? choiceStacks(s, live) : [],
+    );
+    for (const id of ringed) stacks.add(id);
+    const labels: HexLabel[] = [];
+    c.targets.forEach((t, i) => {
+      const h =
+        "hex" in t ? t.hex : "stack" in t ? getStack(s, t.stack).hex : null;
+      if (h === null) return;
+      marks.set(hexIndex(h), "chosen");
+      hexes.add(hexIndex(h));
+      lit.add(hexIndex(h));
+      if ("stack" in t) stacks.add(t.stack);
+      if (!labels.some((l) => sameHex(l.hex, h)))
+        labels.push({ hex: h, text: String(i + 1) });
+    });
+    if (c.pickFor !== null) {
+      const h = getStack(s, c.pickFor).hex;
+      marks.set(hexIndex(h), "chosen");
+      hexes.add(hexIndex(h));
+      stacks.add(c.pickFor);
+    }
+    let area: Hex[] = [];
+    const at = this.pointer ? pointAtField(s, this.pointer).hex : null;
+    if (at !== null && step !== null && this.castValidAt(at))
+      marks.set(hexIndex(at), "act-hover");
+    if (at !== null && step === "hex" && this.choiceAt(at) !== null)
+      area = spellAreaHexes(c.entry.id, at);
+    // A complete area cast keeps its footprint on the chosen hex.
+    const first = c.targets[0];
+    if (step === null && first !== undefined && "hex" in first)
+      area = spellAreaHexes(c.entry.id, first.hex);
+    if (area.length <= 1) area = [];
+    // Stacks standing on lit hexes stay lit too.
+    for (const st of s.stacks)
+      if (isAlive(st) && lit.has(hexIndex(st.hex))) stacks.add(st.id);
+    return {
+      area,
+      labels,
+      focus: { hexes, stacks, ringed, dim: step !== null && !many },
+    };
   }
 
   private refreshCast(): void {
     const c = this.casting;
     if (!c) return;
     const id = c.entry.id;
+    this.syncCastChoices(c);
     const step = nextStep(id, c.targets);
     const complete = step === null;
-    let conditions: ConditionOption[] | null = null;
+    const choiceOf = (ref: ConditionRef): CastChoice | undefined =>
+      c.choices.find(
+        (x) =>
+          "condition" in x.target &&
+          x.target.stack === ref.stack &&
+          x.target.condition === ref.condition,
+      );
+    const validRef = (ref: ConditionRef): boolean =>
+      choiceOf(ref)?.noEffect === null;
+    const live = effectiveChoices(c.choices);
+    let conditions:
+      (ConditionOption & { valid: boolean; why?: string })[] | null = null;
     if (step === "condition" && c.pickFor !== null) {
       const s = getStack(this.state, c.pickFor);
-      conditions = s.conditions.map((x) => ({
-        ref: { stack: s.id, condition: x.uid },
-        label: `${conditionKind(x.kind).name}${x.size ? ` ${x.size}` : ""}${x.clock === null ? "" : ` (${x.clock})`}`,
-        effect: conditionKind(x.kind).text(x),
-      }));
+      conditions = s.conditions.map((x) => {
+        const ref = { stack: s.id, condition: x.uid };
+        return {
+          ref,
+          label: `${conditionKind(x.kind).name}${x.size ? ` ${x.size}` : ""}${x.clock === null ? "" : ` (${x.clock})`}`,
+          effect: conditionKind(x.kind).text(x),
+          valid: validRef(ref),
+          ...(choiceOf(ref)?.noEffect
+            ? { why: `No effect: ${choiceOf(ref)?.noEffect}` }
+            : {}),
+        };
+      });
     }
+    const valid =
+      step === "stack" || step === "hex"
+        ? live.length
+        : step === "condition"
+          ? choiceStacks(this.state, live).length
+          : null;
     const spell = c.entry.source === "page" || c.entry.source === "scroll";
     const echo =
       complete && spell ? echoOptions(this.state, id, c.targets) : [];
@@ -2241,6 +2527,12 @@ class BattleScreen {
             : stepPrompt(id, c.targets),
         conditions,
         choices: step === "choice" ? ["+2", "-2"] : null,
+        badChoices: ["+2", "-2"].filter(
+          (x) =>
+            !live.some((y) => "choice" in y.target && y.target.choice === x),
+        ),
+        valid,
+        notice: c.notice,
         preview,
         hovered: !complete && c.hover !== null,
         echo,
@@ -2252,6 +2544,7 @@ class BattleScreen {
       },
       {
         onCondition: (ref) => {
+          if (!validRef(ref)) return;
           c.targets.push(ref);
           c.pickFor = null;
           this.refreshCast();

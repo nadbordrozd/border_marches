@@ -38,6 +38,10 @@ import type {
 import type { IconKind } from "../../assets/icons.ts";
 import { isBattleSpell, spellDef } from "../../core/magic/index.ts";
 import { creatureBook, heroBook } from "./magic.ts";
+import {
+  castHasTarget,
+  noTargetReason as spellNoTarget,
+} from "./spell-targets.ts";
 import { anyTarget, canHearten, startMode, targetBounds } from "./targeting.ts";
 import type { ModeKind } from "./targeting.ts";
 
@@ -129,14 +133,8 @@ function noTargetReason(
     return "No valid target (a condition with a clock is needed)";
   if (kind === "item" && id === "cider-flask")
     return "No valid target (one of your stacks bearing Ripening is needed)";
-  if (kind === "page" && isBattleSpell(id)) {
-    const rule = spellDef(id).target;
-    if (rule === "remains" || rule === "allRemains")
-      return "No remains of your stacks on the field";
-    if (rule === "condition" || rule === "passOn" || rule === "wind")
-      return "No condition it could take";
-    if (rule === "share") return "No link it could share";
-  }
+  if (kind === "page" && isBattleSpell(id))
+    return spellNoTarget(spellDef(id).target);
   return "No valid target";
 }
 
@@ -246,8 +244,8 @@ function pageActions(state: BattleState, ctx: BarContext): BarAction[] {
         ? e.reason
         : !ctx.playerTurn
           ? (ctx.notTurnReason ?? "Not your turn")
-          : !hasTarget(state, "page", e.id)
-            ? noTargetReason(state, "page", e.id)
+          : !castHasTarget(state, e)
+            ? spellNoTarget(spellDef(e.id).target)
             : null;
     return {
       key: `page:${e.id}`,

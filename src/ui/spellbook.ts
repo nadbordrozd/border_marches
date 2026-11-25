@@ -1,25 +1,24 @@
 /**
  * The adventure spellbook (RULES_V2 2.8): the hero's adventure pages and
  * scrolls by school with mana, the number at its Power and why one cannot
- * be cast; picking one asks for its target (a neutral stack within 2 cells, an
- * enemy hero or sealed site, an amount, or a cell on the map) and returns
- * the cast for the game screen to run. Battle pages are listed too, for
- * reference.
+ * be cast (no valid target included, bead bzc.47), each with its target
+ * type; picking one returns the cast for the game screen to run, or an aim
+ * whose valid targets (a neutral stack within 2 cells, an enemy hero or
+ * sealed site, an explored cell) glow on the map for the next click. An
+ * amount and a pylon are chosen in the book. Battle pages are listed too,
+ * for reference.
  */
 
 import type { School } from "../core/battle/index.ts";
 import type { GameState, HeroState } from "../core/game/index.ts";
 import {
   ADVENTURE_SPELLS,
-  adventureCastError,
   adventureManaCost,
   adventurePower,
   heroMagic,
   isBattleSpell,
-  monstersInSpellRange,
   spellDef,
   storeOf,
-  towLineStops,
 } from "../core/magic/index.ts";
 import type {
   AdventureSpellDef,
@@ -29,6 +28,9 @@ import { setTip } from "./tooltip.ts";
 import { spellTip } from "./info-tips.ts";
 import { el, modal } from "./dom.ts";
 import { iconElement } from "./icons.ts";
+import { targetLine } from "./target-icon.ts";
+import { adventureTargetKind, adventureUsable } from "./adventure-targets.ts";
+import type { AdventureAim } from "./adventure-targets.ts";
 import { rulesText } from "./keywords.ts";
 
 const SCHOOLS: readonly School[] = [
@@ -60,48 +62,24 @@ export type BookChoice =
       readonly scroll: boolean;
       readonly target: AdventureTarget;
     }
-  /** Ask the Dead: the next map click picks the cell. */
-  | { readonly kind: "aim"; readonly spell: string; readonly scroll: boolean }
+  /**
+   * Aimed on the map: the valid targets glow and the next map click on
+   * one casts (bead bzc.47).
+   */
+  | {
+      readonly kind: "aim";
+      readonly spell: string;
+      readonly scroll: boolean;
+      readonly aims: readonly AdventureAim[];
+    }
   | null;
 
-function chebyshev(ax: number, ay: number, bx: number, by: number): number {
-  return Math.max(Math.abs(ax - bx), Math.abs(ay - by));
-}
-
-/** Target options for spells with a list to pick from. */
-function targetOptions(
-  state: GameState,
-  hero: HeroState,
-  s: AdventureSpellDef,
-  power: number,
-): Array<{ label: string; target: AdventureTarget }> {
-  if (s.target === "nearbyMonster") {
-    return monstersInSpellRange(state, hero).map((m) => ({
-      label: `${m.count} ${m.creature} at ${m.x},${m.y}`,
-      target: { monsterId: m.id },
-    }));
-  }
-  if (s.target === "sealed") {
-    const range = 6 + power;
-    const heroes = state.heroes
-      .filter(
-        (h) =>
-          h.alive &&
-          h.owner !== hero.owner &&
-          chebyshev(h.x, h.y, hero.x, hero.y) <= range,
-      )
-      .map((h) => ({ label: h.name, target: { heroId: h.id } }));
-    const sites = state.map.objects
-      .filter(
-        (o) =>
-          o.data.sealed === true &&
-          chebyshev(o.x, o.y, hero.x, hero.y) <= range,
-      )
-      .map((o) => ({ label: o.id, target: { objectId: o.id } }));
-    return [...heroes, ...sites];
-  }
-  return [];
-}
+/** Target kinds aimed on the map rather than chosen in the book. */
+const AIMED_ON_MAP: ReadonlySet<string> = new Set([
+  "nearbyMonster",
+  "sealed",
+  "exploredCell",
+]);
 
 /** Opens the book; resolves with the chosen cast, or null. */
 export function openAdventureBook(
@@ -124,7 +102,9 @@ export function openAdventureBook(
     const finish = (c: BookChoice): void => done?.(c);
     const entry = (s: AdventureSpellDef, scroll: boolean): HTMLElement => {
       const power = adventurePower(hero, s.id, scroll);
-      const err = adventureCastError(state, hero, s.id, scroll);
+      // Greyed with the reason when it cannot be cast or has no target.
+      const usable = adventureUsable(state, hero, s.id, scroll);
+      const err = usable.reason;
       const row = el("div.gm-book-spell");
       row.style.setProperty("--school", COLOURS[s.school]);
       if (err) row.classList.add("gm-book-off");
@@ -139,6 +119,7 @@ export function openAdventureBook(
             ` ${NAMES[s.school]} ${s.tier} · ${cost}${s.moveCost === undefined ? "" : s.moveCost === "all" ? " · all movement" : s.moveCost > 0 ? ` · ${s.moveCost} movement` : ""}`,
           ),
           rulesText(s.text(power), { tag: "div", hover: true }),
+          targetLine(adventureTargetKind(s.target), "gm-book-target"),
           err ? el("div.gm-book-why", err) : null,
         ),
       );
@@ -153,12 +134,18 @@ export function openAdventureBook(
         actions.append(b);
       };
       if (s.target === "none") pick({});
-      else if (s.target === "exploredCell") {
-        const b = el("button.gm-btn", "Choose a cell…");
+      else if (AIMED_ON_MAP.has(s.target)) {
+        const n = usable.aims?.length ?? 0;
+        const b = el("button.gm-btn.gm-book-aim", "Aim on the map…");
         b.type = "button";
         b.disabled = err !== null;
+        b.title =
+          err ??
+          (s.target === "exploredCell"
+            ? "The cells in reach glow on the map; click one to cast."
+            : `${n} valid target${n === 1 ? "" : "s"} glow on the map; click one to cast.`);
         b.addEventListener("click", () =>
-          finish({ kind: "aim", spell: s.id, scroll }),
+          finish({ kind: "aim", spell: s.id, scroll, aims: usable.aims ?? [] }),
         );
         actions.append(b);
       } else if (s.target === "amount") {
@@ -181,16 +168,8 @@ export function openAdventureBook(
         );
         actions.append(input, b);
       } else if (s.target === "pylon") {
-        const stops = towLineStops(state, hero);
-        if (stops.length === 0)
-          actions.append(el("span.gm-dim", "No other marked pylon."));
-        for (const o of stops)
-          pick({ objectId: o.id }, `To the pylon at ${o.x},${o.y}`);
-      } else {
-        const opts = targetOptions(state, hero, s, power);
-        if (opts.length === 0)
-          actions.append(el("span.gm-dim", "No target in range."));
-        for (const o of opts) pick(o.target, o.label);
+        // Destinations may lie anywhere on the map: chosen from a list.
+        for (const o of usable.aims ?? []) pick(o.target, `To the ${o.label}`);
       }
       row.append(actions);
       return row;
