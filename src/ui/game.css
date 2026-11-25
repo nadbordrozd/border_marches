@@ -97,83 +97,127 @@
     inset 0 2px 4px rgb(0 0 0 / 50%);
 }
 
-/* ------------------------------------------------------------ menu */
+/*
+ * The main menu and new-game setup (bead bzc.66, UI_V2 UI2-16): a header
+ * with the title, Continue and the Gallery; the setup in two columns (left
+ * the map, right the faction cards); a bar with the Options fold and New
+ * game; a footer with sound and keys. Fits 1280x800 without scrolling.
+ */
 
 .gm-menu {
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  overflow-y: auto;
   background:
-    radial-gradient(ellipse at 50% 35%, #2c3a1e 0%, #15110c 70%),
-    var(--gm-wood-dark);
+    radial-gradient(ellipse at 50% 30%, rgb(70 90 40 / 45%), transparent 60%),
+    radial-gradient(ellipse at 50% 120%, rgb(120 70 20 / 35%), transparent 55%),
+    var(--gm-ink);
 }
 
 .gm-menu-box {
-  width: 420px;
-  max-width: calc(100vw - 32px);
-  padding: 24px 28px;
-  background: var(--gm-wood);
-  border: 2px solid var(--gm-edge);
-  box-shadow: 0 10px 40px rgb(0 0 0 / 60%);
+  width: min(1180px, calc(100vw - 32px));
+  box-sizing: border-box;
+  /*
+   * Centred for a box about 760 px tall, but pinned by its top: choosing a
+   * map with a longer story grows the box downwards and nothing else moves.
+   */
+  margin: max(8px, calc(50vh - 380px)) 0 8px;
+  padding: 14px 28px 10px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
-  text-align: center;
+  gap: 12px;
+  text-align: left;
 }
 
-.gm-menu-hero {
-  align-self: center;
-  image-rendering: pixelated;
-  margin-bottom: -8px;
+.gm-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  flex-wrap: wrap;
 }
 
 .gm-title {
   margin: 0;
   font:
-    bold 40px Georgia,
+    bold 38px/1.1 Georgia,
     serif;
+  letter-spacing: 0.01em;
   color: var(--gm-gold);
-  text-shadow: 0 2px 0 #000;
+  text-shadow:
+    0 2px 0 #000,
+    0 0 18px rgb(255 190 60 / 25%);
 }
 
 .gm-subtitle {
-  margin: 0 0 6px;
+  margin: 2px 0 0;
   color: var(--gm-dim);
 }
 
-.gm-menu-main {
-  padding: 9px 12px;
-  font-size: 15px;
+.gm-menu-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.gm-menu-continue,
+.gm-menu-new {
+  min-width: 190px;
+  padding: 10px 22px;
+  font-size: 16px;
+}
+
+.gm-menu-gallery {
+  padding: 10px 18px;
+  font-size: 14px;
 }
 
 .gm-new {
-  border-top: 1px solid var(--gm-edge);
-  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--gm-trim-dark);
+}
+
+.gm-new-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.gm-new-col {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.gm-new h2 {
+.gm-new-col h2 {
   margin: 0;
   font:
     bold 18px Georgia,
     serif;
-  color: var(--gm-gold-dim);
+  color: var(--gm-gold);
 }
 
 .gm-field {
   display: flex;
   align-items: center;
   gap: 10px;
-  text-align: left;
+}
+
+.gm-field[hidden],
+.gm-map-intro[hidden] {
+  display: none;
 }
 
 .gm-field label {
-  width: 70px;
+  flex: none;
+  width: 80px;
   color: var(--gm-dim);
 }
 
@@ -182,16 +226,22 @@
   display: flex;
   gap: 6px;
   flex: 1;
+  min-width: 0;
+}
+
+.gm-seed-row .gm-seed {
+  width: 0;
 }
 
 .gm-size {
   flex: 1;
-  padding: 5px 4px;
+  padding: 6px 4px;
   font-size: 12px;
 }
 
 .gm-seed {
   flex: 1;
+  min-width: 0;
   font: inherit;
   color: var(--gm-text);
   background: var(--gm-wood-dark);
@@ -199,9 +249,270 @@
   padding: 5px 8px;
 }
 
+/* ------------------------------------------------ map column */
+
+.gm-map-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* (Not `.gm-map`: that class is the adventure map canvas.) */
+.gm-map-choice {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 4px 10px 4px 4px;
+  text-align: left;
+}
+
+.gm-map-thumb {
+  display: block;
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  background: var(--gm-ink);
+  box-shadow: 0 0 0 1px var(--gm-ink);
+}
+
+.gm-map-poster {
+  image-rendering: pixelated;
+}
+
+.gm-map-random {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font:
+    bold 26px Georgia,
+    serif;
+  color: var(--gm-gold-dim);
+  background:
+    linear-gradient(
+      135deg,
+      rgb(95 143 58 / 55%),
+      rgb(47 107 44 / 55%) 45%,
+      rgb(176 157 90 / 50%)
+    ),
+    var(--gm-ink);
+}
+
+.gm-map-text {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0 10px;
+  min-width: 0;
+}
+
+.gm-map-name {
+  font-size: 14px;
+}
+
+.gm-map-hint {
+  color: var(--gm-dim);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.gm-map-choice.gm-selected .gm-map-hint {
+  color: var(--gm-gold-dim);
+}
+
+.gm-map-intro {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 6px 12px;
+  padding: 10px;
+  font-size: 12px;
+  line-height: 1.45;
+  background: rgb(10 8 5 / 50%);
+  box-shadow: var(--gm-inset-shadow);
+}
+
+.gm-map-poster-big {
+  grid-row: span 2;
+  width: 120px;
+  height: 120px;
+  background: var(--gm-ink);
+  box-shadow: 0 0 0 1px var(--gm-trim-dark);
+}
+
+.gm-map-intro p {
+  margin: 0;
+}
+
+.gm-map-note {
+  margin: 2px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--gm-dim);
+}
+
+.gm-map-intro .gm-map-setup {
+  color: var(--gm-gold-dim);
+}
+
+/* ------------------------------------------------ faction column */
+
+.gm-faction-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gm-btn.gm-faction-card {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 14px;
+  padding: 4px 12px 4px 10px;
+  border-left: 5px solid var(--gm-faction-colour, #6b5a3e);
+  text-align: left;
+}
+
+.gm-faction-hero,
+.gm-faction-unit {
+  image-rendering: pixelated;
+  filter: drop-shadow(0 3px 2px rgb(0 0 0 / 55%));
+}
+
+.gm-faction-text {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.gm-faction-name {
+  font:
+    bold 17px Georgia,
+    serif;
+  color: var(--gm-gold-dim);
+}
+
+.gm-faction-style {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.gm-faction-army {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 0 4px 1px;
+  border-bottom: 1px solid rgb(201 154 60 / 35%);
+}
+
+.gm-faction-card.gm-selected .gm-faction-name {
+  color: var(--gm-gold);
+}
+
+.gm-faction-card:not(.gm-selected) img {
+  filter: saturate(0.55) brightness(0.8) drop-shadow(0 3px 2px rgb(0 0 0 / 55%));
+}
+
+.gm-faction-card:not(.gm-selected) .gm-faction-style {
+  color: var(--gm-dim);
+}
+
+/* Room for the longest faction text, so the bar below never moves. */
+.gm-faction-detail {
+  min-height: calc(5 * 1.45em);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--gm-dim);
+}
+
+.gm-faction-detail p {
+  margin: 0;
+}
+
+.gm-faction-detail b {
+  color: var(--gm-gold-dim);
+}
+
+/* ------------------------------------------------ bar: options, new game */
+
+.gm-new-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 10px;
+  border-top: 1px solid rgb(201 154 60 / 25%);
+}
+
+.gm-options summary {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 4px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.gm-options summary::-webkit-details-marker {
+  display: none;
+}
+
+.gm-options summary::before {
+  content: "\25B8";
+  color: var(--gm-gold-dim);
+}
+
+.gm-options[open] summary::before {
+  content: "\25BE";
+}
+
+.gm-options-label {
+  color: var(--gm-gold-dim);
+  font-weight: bold;
+}
+
+.gm-options-now {
+  color: var(--gm-dim);
+  font-size: 11px;
+}
+
+/* The fold opens as a panel above the bar, so the page never grows. */
+.gm-options-body {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 6px);
+  z-index: 5;
+  width: min(760px, 100%);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 16px;
+  padding: 14px 16px;
+  background: var(--gm-wood-bg, var(--gm-wood));
+  box-shadow: var(--gm-frame-shadow);
+}
+
+.gm-options-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.gm-options-blurb {
+  margin: 0 0 0 90px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--gm-dim);
+}
+
 .gm-menu-status {
+  flex: 1;
   min-height: 18px;
   color: var(--gm-gold-dim);
+  text-align: right;
 }
 
 .gm-loading .gm-btn {
@@ -209,9 +520,62 @@
   opacity: 0.6;
 }
 
+/* ------------------------------------------------ footer */
+
+.gm-menu-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding-top: 8px;
+  border-top: 1px solid rgb(201 154 60 / 25%);
+}
+
+.gm-menu .gm-menu-foot .gm-sound {
+  padding: 0;
+  border-top: 0;
+}
+
 .gm-keys {
   color: var(--gm-dim);
   font-size: 11px;
+  line-height: 1.9;
+  text-align: right;
+}
+
+/* Below 1100 px the columns stack and the menu scrolls. */
+@media (max-width: 1099px) {
+  .gm-new-cols,
+  .gm-menu-foot {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gm-keys {
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .gm-menu-box {
+    padding: 14px 16px 10px;
+  }
+
+  .gm-btn.gm-faction-card {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .gm-faction-army {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  .gm-new-bar {
+    flex-wrap: wrap;
+  }
+
+  .gm-options-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* ------------------------------------------------------------ adventure */
@@ -1130,29 +1494,6 @@
 }
 
 /* ------------------------------------------------------------ players */
-
-.gm-faction-row {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
-  flex: 1;
-}
-
-.gm-faction {
-  padding: 5px 4px;
-  font-size: 12px;
-}
-
-.gm-faction:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-.gm-soon {
-  margin-left: 6px;
-  color: var(--gm-dim);
-  font-style: italic;
-}
 
 .gm-turn-chip {
   display: inline-block;
@@ -2247,81 +2588,6 @@
   font-weight: bold;
 }
 
-/* ------------------------------------------------------------ main menu */
-
-.gm-menu {
-  background:
-    radial-gradient(ellipse at 50% 30%, rgb(70 90 40 / 45%), transparent 60%),
-    radial-gradient(ellipse at 50% 120%, rgb(120 70 20 / 35%), transparent 55%),
-    var(--gm-ink);
-}
-
-.gm-menu-box {
-  width: 460px;
-  max-height: calc(100vh - 32px);
-  overflow-y: auto;
-  box-sizing: border-box;
-  padding: 22px 30px 18px;
-}
-
-.gm-menu-hero-box {
-  display: flex;
-  justify-content: center;
-  height: 128px;
-  margin-bottom: -10px;
-}
-
-.gm-menu-hero {
-  margin: 0;
-  filter: drop-shadow(0 6px 3px rgb(0 0 0 / 55%));
-}
-
-.gm-title {
-  font-size: 42px;
-  letter-spacing: 0.01em;
-  text-shadow:
-    0 2px 0 #000,
-    0 0 18px rgb(255 190 60 / 25%);
-}
-
-.gm-new {
-  border-top: 1px solid var(--gm-trim-dark);
-  padding-top: 10px;
-}
-
-.gm-new h2 {
-  color: var(--gm-gold);
-}
-
-.gm-field label {
-  flex: none;
-  width: 96px;
-}
-
-.gm-faction {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.gm-faction .gm-town-chip {
-  height: 12px;
-}
-
-.gm-faction-blurb {
-  margin: -2px 0 2px 106px;
-  min-height: 32px;
-  font-size: 11px;
-  line-height: 1.4;
-  color: var(--gm-dim);
-  text-align: left;
-}
-
-.gm-keys {
-  line-height: 1.9;
-}
-
 .gm-menu .gm-sound {
   padding: 8px 0 2px;
   border-top: 1px solid rgb(201 154 60 / 25%);
@@ -2455,114 +2721,4 @@
 
 .gm-army-label {
   line-height: 1.2;
-}
-
-/* ------------------------------------------------------------ map picker */
-
-.gm-menu {
-  overflow-y: auto;
-  align-items: safe center;
-}
-
-.gm-map-row {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  flex: 1;
-}
-
-/*
- * One map per row: the name on the left, its own details on the right;
- * on a narrow row the details wrap under the name instead of overlapping.
- * (Not `.gm-map`: that class is the adventure map canvas.)
- */
-.gm-map-choice {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0 8px;
-  min-width: 0;
-  padding: 5px 8px;
-  text-align: left;
-}
-
-.gm-map-choice .gm-map-name {
-  min-width: 0;
-}
-
-.gm-map-choice .gm-map-hint {
-  margin-left: auto;
-  color: var(--gm-dim);
-  font-size: 11px;
-  white-space: nowrap;
-}
-
-.gm-map-choice.gm-selected .gm-map-hint {
-  color: var(--gm-gold-dim);
-}
-
-.gm-field[hidden],
-.gm-map-intro[hidden] {
-  display: none;
-}
-
-.gm-map-intro {
-  text-align: left;
-  font-size: 12px;
-  line-height: 1.45;
-  padding: 8px 10px;
-  background: var(--gm-wood-dark);
-  border: 1px solid var(--gm-edge);
-  border-radius: 3px;
-}
-
-.gm-map-intro p {
-  margin: 0;
-}
-
-.gm-map-intro .gm-map-setup {
-  margin-top: 6px;
-  color: var(--gm-gold-dim);
-}
-
-/* Bead bzc.25: the named map picker (bzc.18) in the shared frame style. */
-.gm-map-intro {
-  border: 0;
-  border-radius: 0;
-  background: rgb(10 8 5 / 50%);
-  box-shadow: var(--gm-inset-shadow);
-}
-
-.gm-menu-box {
-  width: 500px;
-}
-
-@media (max-height: 940px) {
-  .gm-menu-box {
-    padding-top: 14px;
-    gap: 7px;
-  }
-
-  .gm-menu-hero-box {
-    height: 64px;
-    margin-bottom: -4px;
-  }
-
-  .gm-menu-hero {
-    width: 64px;
-    height: 64px;
-  }
-
-  .gm-title {
-    font-size: 34px;
-  }
-
-  .gm-menu-main {
-    padding: 6px 12px;
-  }
-
-  .gm-faction-blurb {
-    min-height: 0;
-  }
 }

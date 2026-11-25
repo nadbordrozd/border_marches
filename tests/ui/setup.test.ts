@@ -6,7 +6,53 @@
  */
 import { describe, expect, it } from "vitest";
 import { buildNamedMap } from "../../src/core/map/named.ts";
-import { createGame, playerSetups } from "../../src/ui/app.ts";
+import { hasHeroArt, hasUnitArt } from "../../src/assets/unit-art.ts";
+import { getCreature } from "../../src/data/creatures.ts";
+import { playableFactions } from "../../src/data/factions.ts";
+import {
+  createGame,
+  factionShowcase,
+  playerSetups,
+  randomMapRows,
+} from "../../src/ui/app.ts";
+
+describe("two-column setup screen (bead bzc.66)", () => {
+  it("hides the size, players and seed rows for a named map", () => {
+    expect(randomMapRows(null)).toEqual({
+      size: true,
+      players: true,
+      seed: true,
+    });
+    expect(randomMapRows("keepers-toll")).toEqual({
+      size: false,
+      players: false,
+      seed: false,
+    });
+    // An unknown id falls back to the random map's rows.
+    expect(randomMapRows("nowhere").size).toBe(true);
+  });
+
+  it("shows each playable faction's hero and three of its own creatures, low to high", () => {
+    for (const f of playableFactions()) {
+      const show = factionShowcase(f.id);
+      expect(show.heroClass).toBe(f.heroClasses[0]);
+      expect(hasHeroArt(show.heroClass)).toBe(true);
+      expect(show.creatures).toHaveLength(3);
+      const tiers = show.creatures.map((id) => getCreature(id).tier);
+      expect(tiers).toEqual([...tiers].sort((a, b) => a - b));
+      expect(new Set(tiers).size).toBe(3);
+      for (const id of show.creatures) {
+        expect(getCreature(id).faction).toBe(f.id);
+        expect(hasUnitArt(id)).toBe(true);
+      }
+    }
+    expect(factionShowcase("humans").creatures).toEqual([
+      "squire",
+      "man-at-arms",
+      "dragonslayer",
+    ]);
+  });
+});
 
 describe("named maps in new-game setup", { timeout: 60_000 }, () => {
   it("seats the human's faction and the recommended rest", () => {

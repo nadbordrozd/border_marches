@@ -1,7 +1,9 @@
 /**
- * The game route: main menu with the new-game setup (a random map by seed
- * and size with two to four players, or a named map; the human's faction;
- * the computer players' difficulty) and Continue when a save exists, then
+ * The game route: main menu with the new-game setup in two columns (bead
+ * bzc.66: left the map, random by size and players or a named map with its
+ * poster; right the human's faction as three cards; the computer players'
+ * difficulty and the seed folded under Options) and Continue when a save
+ * exists, then
  * the adventure screen until the game ends or the player quits back to the
  * menu. The menu also opens the gallery (src/ui/gallery.ts; `?gallery=<tab>`
  * opens it at once).
@@ -15,15 +17,11 @@ import {
   type Difficulty,
 } from "../core/ai/difficulty.ts";
 import type { GameState, PlayerSetup } from "../core/game/index.ts";
-import { FACTIONS, playableFactions } from "../data/factions.ts";
-import {
-  HERO_ROSTER,
-  MAX_PLAYERS,
-  MIN_PLAYERS,
-  playerColour,
-} from "../data/players.ts";
-import { heroArt } from "../assets/unit-art.ts";
-import type { FactionId } from "../data/types.ts";
+import { findFaction, playableFactions } from "../data/factions.ts";
+import { CREATURES, getCreature } from "../data/creatures.ts";
+import { MAX_PLAYERS, MIN_PLAYERS, playerColour } from "../data/players.ts";
+import { heroArt, unitArt } from "../assets/unit-art.ts";
+import type { CreatureId, FactionId } from "../data/types.ts";
 import { generateMap } from "../core/map/generate.ts";
 import type { MapSize, PlayerCount } from "../core/map/generate.ts";
 import {
@@ -35,6 +33,7 @@ import {
 import { button, el, img, kbd, wait } from "./dom.ts";
 import { playGame } from "./game.ts";
 import { loadGameMapAssets } from "./hero-sprite.ts";
+import { minimapPixels } from "./minimap.ts";
 import { browserStorage, readSave, saveGame } from "./save.ts";
 import { installUiSounds, soundControl } from "./sound-control.ts";
 import { installTooltips, setTip } from "./tooltip.ts";
@@ -136,24 +135,96 @@ function createMapGame(setup: GameSetup): GameState {
   return newGame(map, { players: playerSetups(setup) });
 }
 
+/**
+ * The play style line of each faction card on the setup screen (bead
+ * bzc.66): one style word, then what the birthright does in practice. The
+ * longer blurb is the card's tooltip and the detail line under the cards.
+ */
+const PLAY_STYLE: Readonly<Partial<Record<FactionId, string>>> = {
+  humans: "Steady: paired stacks share heals and swap places.",
+  undead: "Attrition: the fallen rise once; outlast the enemy.",
+  goblins: "Explosive: bomb freely; your own goblins fly off unhurt.",
+};
+
+/**
+ * What a faction card shows: the faction's first hero class and three of
+ * its creatures (the lowest tier, a middle one and the highest).
+ */
+export function factionShowcase(faction: FactionId): {
+  heroClass: string;
+  creatures: CreatureId[];
+} {
+  const def = findFaction(faction);
+  const line = Object.values(CREATURES)
+    .filter((c) => c.faction === faction)
+    .sort((a, b) => a.tier - b.tier);
+  const picks = [
+    line[0],
+    line[Math.floor((line.length - 1) / 2)],
+    line[line.length - 1],
+  ];
+  const creatures: CreatureId[] = [];
+  for (const c of picks) {
+    if (c !== undefined && !creatures.includes(c.id)) creatures.push(c.id);
+  }
+  return { heroClass: def?.heroClasses[0] ?? "chieftain", creatures };
+}
+
+/**
+ * The setup rows that only a random map uses: a named map brings its own
+ * size, players and seed, so those rows hide when one is chosen.
+ */
+export function randomMapRows(mapId: string | null): {
+  size: boolean;
+  players: boolean;
+  seed: boolean;
+} {
+  const random = mapId === null || findNamedMap(mapId) === undefined;
+  return { size: random, players: random, seed: random };
+}
+
+/**
+ * Minimap pixels of each named map at its start, unfogged (the poster
+ * thumbnail of the map picker); built once per page, after the menu shows.
+ */
+const mapPosters = new Map<string, ImageData | null>();
+
+function namedMapPoster(def: NamedMapDef): ImageData | null {
+  if (mapPosters.has(def.id)) return mapPosters.get(def.id) ?? null;
+  let poster: ImageData | null = null;
+  try {
+    const state = createGame({
+      seed: def.seed,
+      size: def.size,
+      players: def.players,
+      faction: def.factions[0] ?? "humans",
+      map: def.id,
+    });
+    // Player -1 sees no fog: the whole map, every town in its owner colour.
+    poster = new ImageData(
+      minimapPixels(state, -1),
+      state.map.width,
+      state.map.height,
+    );
+  } catch (error) {
+    console.error(error);
+  }
+  mapPosters.set(def.id, poster);
+  return poster;
+}
+
 /** Shows the main menu until a game is started or continued. */
 function mainMenu(params: URLSearchParams): Promise<GameState> {
   return new Promise((resolve) => {
     const host = document.getElementById("ui") ?? document.body;
     const root = el("div.gm-menu");
+    const autostart = params.get("autostart") === "1";
+
+    // ------------------------------------------------ random map rows
     let size: MapSize =
       params.get("size") === "S" || params.get("size") === "L"
         ? (params.get("size") as MapSize)
         : "M";
-    const seedInput = el("input.gm-seed");
-    seedInput.type = "text";
-    seedInput.inputMode = "numeric";
-    const seedParam = params.get("seed");
-    seedInput.value =
-      seedParam !== null && /^\d+$/.test(seedParam)
-        ? seedParam
-        : String(randomSeed());
-    seedInput.setAttribute("aria-label", "Map seed");
     const sizeRow = el("div.gm-size-row");
     const renderSizes = (): void => {
       sizeRow.replaceChildren();
@@ -167,6 +238,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
           "gm-btn gm-size",
         );
         if (s.id === size) b.classList.add("gm-selected");
+        b.setAttribute("aria-pressed", String(s.id === size));
         sizeRow.append(b);
       }
     };
@@ -188,64 +260,42 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
           "gm-btn gm-size",
         );
         if (n === players) b.classList.add("gm-selected");
-        b.title = `You and ${n - 1} computer ${n === 2 ? "player" : "players"}`;
+        b.setAttribute("aria-pressed", String(n === players));
+        setTip(
+          b,
+          `You and ${n - 1} computer ${n === 2 ? "player" : "players"}`,
+        );
         playersRow.append(b);
       }
     };
     renderPlayers();
-    const wanted = playableFactions().find(
-      (f) => f.id === params.get("faction"),
-    );
-    let faction: FactionId =
-      wanted?.id ?? playableFactions()[0]?.id ?? "humans";
-    const factionRow = el("div.gm-faction-row");
-    const blurb = el("p.gm-faction-blurb");
-    const heroBox = el("div.gm-menu-hero-box");
-    const renderFactions = (): void => {
-      factionRow.replaceChildren();
-      const chosen = FACTIONS.find((x) => x.id === faction);
-      blurb.textContent = chosen?.blurb ?? "";
-      const hero = HERO_ROSTER.find((h) => h.faction === faction);
-      heroBox.replaceChildren(
-        img(
-          hero !== undefined
-            ? heroArt(hero.heroClass).key
-            : "dinosaur-chieftain",
-          "gm-menu-hero",
-          2,
-        ),
-      );
-      for (const f of FACTIONS.filter((x) => x.available)) {
-        const b = button(
-          f.name,
-          () => {
-            if (!f.available) return;
-            faction = f.id;
-            renderFactions();
-          },
-          "gm-btn gm-faction",
-        );
-        const chip = el("span.gm-town-chip");
-        chip.style.background = f.colour ?? "#6b5a3e";
-        b.prepend(chip);
-        setTip(b, f.blurb);
-        if (!f.available) {
-          b.disabled = true;
-          b.append(el("small.gm-soon", "soon"));
-        }
-        if (f.id === faction) b.classList.add("gm-selected");
-        factionRow.append(b);
-      }
-    };
-    renderFactions();
 
-    // The computer players' difficulty (bead bzc.23).
+    // ------------------------------------------------ options (folded)
+    const seedInput = el("input.gm-seed");
+    seedInput.type = "text";
+    seedInput.inputMode = "numeric";
+    const seedParam = params.get("seed");
+    seedInput.value =
+      seedParam !== null && /^\d+$/.test(seedParam)
+        ? seedParam
+        : String(randomSeed());
+    seedInput.setAttribute("aria-label", "Map seed");
+    const optionsSummary = el("small.gm-options-now");
     const wantedLevel = params.get("difficulty");
     let difficulty: Difficulty = isDifficulty(wantedLevel)
       ? wantedLevel
       : "normal";
     const difficultyRow = el("div.gm-size-row");
-    const difficultyBlurb = el("p.gm-faction-blurb");
+    const difficultyBlurb = el("p.gm-options-blurb");
+    let mapId: string | null =
+      findNamedMap(params.get("map") ?? "")?.id ?? null;
+    // The fold's summary says what the folded options are set to.
+    const renderSummary = (): void => {
+      const level = DIFFICULTY_INFO[difficulty].name;
+      optionsSummary.textContent = randomMapRows(mapId).seed
+        ? `${level} computer, seed ${seedInput.value.trim() || "random"}`
+        : `${level} computer`;
+    };
     const renderDifficulty = (): void => {
       difficultyRow.replaceChildren();
       difficultyBlurb.textContent = DIFFICULTY_INFO[difficulty].blurb;
@@ -261,34 +311,64 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         );
         setTip(b, info.blurb);
         if (d === difficulty) b.classList.add("gm-selected");
+        b.setAttribute("aria-pressed", String(d === difficulty));
         difficultyRow.append(b);
       }
+      renderSummary();
     };
     renderDifficulty();
-
-    // Map: a random map from the fields below, or a named map.
-    let mapId: string | null =
-      findNamedMap(params.get("map") ?? "")?.id ?? null;
-    const mapRow = el("div.gm-map-row");
-    const mapIntro = el("div.gm-map-intro");
-    const sizeField = el("div.gm-field", el("label", "Map size"), sizeRow);
-    const playersField = el("div.gm-field", el("label", "Players"), playersRow);
     const seedRow = el("div.gm-seed-row", seedInput);
     const seedField = el("div.gm-field", el("label", "Seed"), seedRow);
-    // One row per map: its name and its own details, both visible in the
-    // row, so no tooltip repeats them (bead bzc.42: a `title` tip of the
-    // clicked row used to float over the row below it). Selecting a row
-    // only moves the highlight; the rows are built once.
-    const choices: Array<{ id: string | null; label: string; hint: string }> = [
-      {
-        id: null,
-        label: "Random map",
-        hint: "Any size, 2 to 4 players",
-      },
+    seedRow.append(
+      button("Random", () => {
+        seedInput.value = String(randomSeed());
+        renderSummary();
+      }),
+    );
+    seedInput.addEventListener("input", renderSummary);
+
+    // ------------------------------------------------ map column
+    const posterCanvases = new Map<string, HTMLCanvasElement[]>();
+    const paintPoster = (canvas: HTMLCanvasElement, data: ImageData): void => {
+      canvas.width = data.width;
+      canvas.height = data.height;
+      canvas.getContext("2d")?.putImageData(data, 0, 0);
+      canvas.classList.add("gm-ready");
+    };
+    const posterCanvas = (def: NamedMapDef, cls: string): HTMLCanvasElement => {
+      const canvas = el("canvas.gm-map-poster");
+      canvas.classList.add(cls);
+      canvas.setAttribute("aria-hidden", "true");
+      const list = posterCanvases.get(def.id) ?? [];
+      list.push(canvas);
+      posterCanvases.set(def.id, list);
+      const ready = mapPosters.get(def.id);
+      if (ready) paintPoster(canvas, ready);
+      return canvas;
+    };
+    const mapRow = el("div.gm-map-row");
+    const mapIntro = el("div.gm-map-intro");
+    const bigPosters = new Map<string, HTMLCanvasElement>();
+    const randomNote = el(
+      "p.gm-map-note",
+      "A fresh map from the seed (under Options): every player starts with a town and a hero; neutral towns, mines, monsters and treasure lie between.",
+    );
+    const sizeField = el("div.gm-field", el("label", "Map size"), sizeRow);
+    const playersField = el("div.gm-field", el("label", "Players"), playersRow);
+    // One row per map: a poster thumbnail, its name and its own details,
+    // all visible in the row, so no tooltip repeats them (bead bzc.42).
+    const choices: Array<{
+      id: string | null;
+      label: string;
+      hint: string;
+      def?: NamedMapDef;
+    }> = [
+      { id: null, label: "Random map", hint: "Any size, 2 to 4 players" },
       ...NAMED_MAPS.map((m) => ({
         id: m.id,
         label: m.name,
         hint: `${m.players} players, ${SIZES.find((s) => s.id === m.size)?.label ?? m.size}`,
+        def: m,
       })),
     ];
     const mapButtons = choices.map((c) => {
@@ -301,8 +381,14 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         "gm-btn gm-map-choice",
       );
       b.append(
-        el("span.gm-map-name", c.label),
-        el("small.gm-map-hint", c.hint),
+        c.def !== undefined
+          ? posterCanvas(c.def, "gm-map-thumb")
+          : el("span.gm-map-thumb.gm-map-random", "?"),
+        el(
+          "span.gm-map-text",
+          el("span.gm-map-name", c.label),
+          el("small.gm-map-hint", c.hint),
+        ),
       );
       mapRow.append(b);
       return b;
@@ -313,24 +399,89 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         mapButtons[i]?.classList.toggle("gm-selected", selected);
         mapButtons[i]?.setAttribute("aria-pressed", String(selected));
       });
+      const rows = randomMapRows(mapId);
+      sizeField.hidden = !rows.size;
+      playersField.hidden = !rows.players;
+      seedField.hidden = !rows.seed;
       const def = mapId === null ? undefined : findNamedMap(mapId);
-      for (const f of [sizeField, playersField, seedField]) {
-        f.hidden = def !== undefined;
-      }
       mapIntro.hidden = def === undefined;
+      randomNote.hidden = def !== undefined;
       mapIntro.replaceChildren();
       if (def !== undefined) {
+        let big = bigPosters.get(def.id);
+        if (big === undefined) {
+          big = posterCanvas(def, "gm-map-poster-big");
+          bigPosters.set(def.id, big);
+        }
         mapIntro.append(
+          big,
           el("p", def.intro),
           el("p.gm-map-setup", `Recommended: ${def.setup}`),
         );
       }
+      renderSummary();
     };
     renderMaps();
 
-    const you = el("span.gm-turn-chip");
-    you.style.background = playerColour(0).hex;
+    // ------------------------------------------------ faction column
+    const wanted = playableFactions().find(
+      (f) => f.id === params.get("faction"),
+    );
+    let faction: FactionId =
+      wanted?.id ?? playableFactions()[0]?.id ?? "humans";
+    const factionCards = el("div.gm-faction-cards");
+    const factionDetail = el("div.gm-faction-detail");
+    const cards = playableFactions().map((f) => {
+      const show = factionShowcase(f.id);
+      const card = button(
+        "",
+        () => {
+          faction = f.id;
+          renderFactions();
+        },
+        "gm-btn gm-faction-card",
+      );
+      card.style.setProperty("--gm-faction-colour", f.colour ?? "#6b5a3e");
+      const army = el("span.gm-faction-army");
+      for (const id of show.creatures) {
+        const sprite = img(unitArt(id).key, "gm-faction-unit");
+        sprite.alt = getCreature(id).name;
+        army.append(sprite);
+      }
+      card.append(
+        img(heroArt(show.heroClass).key, "gm-faction-hero"),
+        el(
+          "span.gm-faction-text",
+          el("span.gm-faction-name", f.name),
+          el("span.gm-faction-style", PLAY_STYLE[f.id] ?? f.blurb),
+        ),
+        army,
+      );
+      factionCards.append(card);
+      return { id: f.id, card };
+    });
+    const renderFactions = (): void => {
+      for (const { id, card } of cards) {
+        card.classList.toggle("gm-selected", id === faction);
+        card.setAttribute("aria-pressed", String(id === faction));
+      }
+      const chosen = findFaction(faction);
+      factionDetail.replaceChildren(el("p", chosen?.blurb ?? ""));
+      if (chosen?.birthright !== undefined) {
+        factionDetail.append(
+          el(
+            "p.gm-faction-birthright",
+            el("b", `Birthright, ${chosen.birthright.name}: `),
+            chosen.birthright.text,
+          ),
+        );
+      }
+    };
+    renderFactions();
+
+    // ------------------------------------------------ status, start
     const status = el("div.gm-menu-status");
+    status.setAttribute("role", "status");
     const read = readSave(browserStorage());
     const saved = read.kind === "ok" ? read.state : null;
     if (read.kind === "rejected") {
@@ -355,6 +506,8 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
       }
     };
 
+    // Continue is the first, gold button when a save exists and absent
+    // otherwise; then New game is the gold one (UI_V2, UI2-16).
     const newButton = button(
       "New game",
       () => {
@@ -373,16 +526,18 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
           return state;
         });
       },
-      "gm-btn gm-primary gm-menu-main",
+      saved === null
+        ? "gm-btn gm-primary gm-menu-main gm-menu-new"
+        : "gm-btn gm-menu-main gm-menu-new",
     );
-    const continueButton = button(
-      saved === null ? "Continue" : `Continue (day ${saved.day})`,
-      () => {
-        if (saved !== null) void start(() => saved);
-      },
-      "gm-btn gm-menu-main",
-    );
-    continueButton.disabled = saved === null;
+    const continueButton =
+      saved === null
+        ? null
+        : button(
+            `Continue (day ${saved.day})`,
+            () => void start(() => saved),
+            "gm-btn gm-primary gm-menu-main gm-menu-continue",
+          );
 
     // The gallery (bead 3nb): every sprite and card of the game, in tabs.
     const galleryButton = button(
@@ -399,59 +554,88 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
       const { isGalleryTab } = await import("./gallery-data.ts");
       root.hidden = true;
       try {
-        const wanted = tab ?? null;
-        await openGallery(host, isGalleryTab(wanted) ? wanted : undefined);
+        const wantedTab = tab ?? null;
+        await openGallery(
+          host,
+          isGalleryTab(wantedTab) ? wantedTab : undefined,
+        );
       } finally {
         root.hidden = false;
         galleryButton.focus();
       }
     };
 
-    const reroll = button("Random", () => {
-      seedInput.value = String(randomSeed());
-    });
-    seedRow.append(reroll);
+    const options = el(
+      "details.gm-options",
+      el("summary", el("span.gm-options-label", "Options"), optionsSummary),
+      el(
+        "div.gm-options-body",
+        el(
+          "div.gm-options-col",
+          el("div.gm-field", el("label", "Computer"), difficultyRow),
+          difficultyBlurb,
+        ),
+        el("div.gm-options-col", seedField),
+      ),
+    );
+
+    const you = el("span.gm-turn-chip");
+    you.style.background = playerColour(0).hex;
 
     root.append(
       el(
         "div.gm-menu-box",
-        heroBox,
-        el("h1.gm-title", "Border Marches"),
         el(
-          "p.gm-subtitle",
-          "Raise an army, claim the marches and outlast every rival.",
+          "header.gm-menu-head",
+          el(
+            "div.gm-menu-titles",
+            el("h1.gm-title", "Border Marches"),
+            el(
+              "p.gm-subtitle",
+              "Raise an army, claim the marches and outlast every rival.",
+            ),
+          ),
+          el("div.gm-menu-actions", continueButton, galleryButton),
         ),
-        continueButton,
         el(
-          "div.gm-new",
-          el("h2", "New game"),
-          el("div.gm-field", el("label", "Map"), mapRow),
-          mapIntro,
-          sizeField,
-          playersField,
-          el("div.gm-field", el("label", you, "Your faction"), factionRow),
-          blurb,
-          el("div.gm-field", el("label", "Computer players"), difficultyRow),
-          difficultyBlurb,
-          seedField,
-          newButton,
+          "section.gm-new",
+          el(
+            "div.gm-new-cols",
+            el(
+              "div.gm-new-col.gm-new-map",
+              el("h2", "Choose a map"),
+              mapRow,
+              mapIntro,
+              sizeField,
+              playersField,
+              randomNote,
+            ),
+            el(
+              "div.gm-new-col.gm-new-faction",
+              el("h2", you, "Choose your faction"),
+              factionCards,
+              factionDetail,
+            ),
+          ),
+          el("div.gm-new-bar", options, status, newButton),
         ),
-        galleryButton,
-        status,
-        soundControl(),
         el(
-          "div.gm-keys",
-          "Click a cell to plan a path, click again or ",
-          kbd("Space"),
-          " to walk. ",
-          kbd("E"),
-          " end turn, ",
-          kbd("H"),
-          " next hero, ",
-          kbd("T"),
-          " town, ",
-          kbd("?"),
-          " all keys.",
+          "footer.gm-menu-foot",
+          soundControl(),
+          el(
+            "div.gm-keys",
+            "Click a cell to plan a path, click again or ",
+            kbd("Space"),
+            " to walk. ",
+            kbd("E"),
+            " end turn, ",
+            kbd("H"),
+            " next hero, ",
+            kbd("T"),
+            " town, ",
+            kbd("?"),
+            " all keys.",
+          ),
         ),
       ),
     );
@@ -459,12 +643,29 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
     seedInput.addEventListener("keydown", (e) => {
       if (e.key === "Enter") newButton.click();
     });
-    if (params.get("autostart") === "1") newButton.click();
-    else if (params.has("gallery")) {
+    if (autostart) {
+      newButton.click();
+      return;
+    }
+    if (params.has("gallery")) {
       const tab = params.get("gallery");
       params.delete("gallery"); // once: not again after a game
       void openGalleryFromMenu(tab);
     }
+    // Posters: one named map per tick once the menu has painted.
+    NAMED_MAPS.forEach((def, i) => {
+      setTimeout(
+        () => {
+          if (!root.isConnected) return;
+          const data = namedMapPoster(def);
+          if (data === null) return;
+          for (const c of posterCanvases.get(def.id) ?? []) {
+            paintPoster(c, data);
+          }
+        },
+        120 + i * 80,
+      );
+    });
   });
 }
 
