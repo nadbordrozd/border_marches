@@ -29,6 +29,8 @@ import { TREE_ASSETS } from "../../assets/trees";
 import { canopyBands } from "./canopy";
 import { installCanopyBands, toneTree } from "./canopy-paint";
 import { paintFog } from "./fog";
+import { FxField, drawFx } from "../fx/field.ts";
+import type { FxClock } from "../fx/field.ts";
 import { buildGroundLayout, paintGround } from "./ground";
 import type { GroundLayout } from "./ground";
 import { hashUnit } from "./hash";
@@ -139,7 +141,32 @@ export interface MapView {
   resize(): void;
   stats(): MapViewStats;
   destroy(): void;
+  /**
+   * Motion (bead bzc.26). Walks a hero sprite from one cell to the next
+   * with a bob, the camera following; resolves after `ms`. With `still`
+   * (reduced motion) it only waits.
+   */
+  walkHero(
+    id: string,
+    from: Cell,
+    to: Cell,
+    ms: number,
+    still?: boolean,
+  ): Promise<void>;
+  /** Pixel effects over the map (world pixels), drawn under the fog. */
+  spawnFx(fn: (field: FxField, clock: FxClock) => void): void;
+  /** A flag at cell (x, y) rises up its pole (a capture). */
+  raiseFlag(x: number, y: number): void;
+  /** Revealed fog fades out instead of vanishing (false: snaps). */
+  setFogFade(on: boolean): void;
+  /** World pixel of a cell's centre. */
+  cellCentre(x: number, y: number): { x: number; y: number };
 }
+
+/** How long newly revealed cells take to clear (ms). */
+export const FOG_FADE_MS = 160;
+/** How long a captured flag takes to rise (ms). */
+export const FLAG_RAISE_MS = 520;
 
 type Context = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D;
 
@@ -314,7 +341,15 @@ export function createMapView(
   let foreground: SceneEntry[] = [];
   let terrainForeground: SceneEntry[] = [];
   const chunks = new Map<string, Chunk>();
-  const fogChunks = new Map<string, Chunk>();
+  let fogChunks = new Map<string, Chunk>();
+  // Motion (bead bzc.26): the fog being faded out, hero offsets, effects.
+  let fadingFog: Map<string, Chunk> | null = null;
+  let fogFadeStart = 0;
+  let fogFade = true;
+  const heroOffsets = new Map<string, { dx: number; dy: number }>();
+  const flagRaises = new Map<string, number>();
+  const fx = new FxField(400);
+  let animating = false;
 
   let zoom = DEFAULT_ZOOM;
   let camX = 0;
@@ -712,27 +747,60 @@ export function createMapView(
   };
 
   const drawFlags = (ctx: Context): void => {
+    const now = performance.now();
     for (const f of flags) {
       if (!isExplored(f.x, f.y)) continue;
-      drawPennant(
-        ctx,
-        // Left of the entrance: a hero's pennant flies on the right.
-        f.x * CELL + 8,
-        f.y * CELL + CELL - 10,
-        f.colour,
-        30,
-      );
+      // A capture: the pole grows and the pennant climbs it.
+      const start = flagRaises.get(`${f.x},${f.y}`);
+      const k =
+        start === undefined ? 1 : Math.min(1, (now - start) / FLAG_RAISE_MS);
+      if (k >= 1 && start !== undefined) flagRaises.delete(`${f.x},${f.y}`);
+      const pole = Math.round(30 * (k < 0.6 ? k / 0.6 : 1));
+      const px = f.x * CELL + 8;
+      const py = f.y * CELL + CELL - 10;
+      if (k < 1) {
+        ctx.fillStyle = "#2a1f14";
+        ctx.fillRect(px - 1, py - pole, 2, pole);
+        if (k > 0.45)
+          drawPennant(
+            ctx,
+            px,
+            py - Math.round((1 - k) * 18),
+            f.colour,
+            30 - Math.round((1 - k) * 18),
+          );
+      } else drawPennant(ctx, px, py, f.colour, 30);
     }
     for (const h of heroes) {
       if (h.colour === undefined || !isExplored(h.x, h.y)) continue;
+      const off = heroOffsets.get(h.id);
       drawPennant(
         ctx,
-        h.x * CELL + CELL / 2 + 12,
-        h.y * CELL + 10,
+        h.x * CELL + CELL / 2 + 12 + (off?.dx ?? 0),
+        h.y * CELL + 10 + (off?.dy ?? 0),
         h.colour,
         20,
       );
     }
+  };
+
+  /** Renders every frame while something moves; stops when all is still. */
+  const animate = (): void => {
+    if (animating) return;
+    animating = true;
+    const loop = (): void => {
+      const now = performance.now();
+      fx.prune(now);
+      const busy =
+        fx.size > 0 ||
+        flagRaises.size > 0 ||
+        heroOffsets.size > 0 ||
+        (fadingFog !== null && now - fogFadeStart < FOG_FADE_MS);
+      view.render();
+      if (busy) requestAnimationFrame(loop);
+      else animating = false;
+    };
+    requestAnimationFrame(loop);
   };
 
   const drawChip = (ctx: Context, cell: Cell): void => {
@@ -810,7 +878,14 @@ export function createMapView(
     for (const e of foreground) {
       if (e.x1 < vx0 || e.x0 > vx1 || e.y1 < vy0 || e.y0 > vy1) continue;
       if (!visibleEntry(e)) continue;
-      drawSprites(ctx, e);
+      const off =
+        e.objectId === undefined ? undefined : heroOffsets.get(e.objectId);
+      if (off !== undefined) {
+        ctx.save();
+        ctx.translate(off.dx, off.dy);
+        drawSprites(ctx, e);
+        ctx.restore();
+      } else drawSprites(ctx, e);
       stat.drawnEntries += 1;
     }
     // Path markers above the units of their row: drawn after the whole
@@ -818,13 +893,28 @@ export function createMapView(
     drawFlags(ctx);
     drawPath(ctx);
     if (chipCell !== null) drawChip(ctx, chipCell);
-    if (explored !== null)
+    const now = performance.now();
+    drawFx(ctx, fx, now);
+    if (explored !== null) {
       for (let cy = r0; cy <= r1; cy += 1)
         for (let cx = c0; cx <= c1; cx += 1) {
           const chunk = fogChunkAt(cx, cy);
           if (chunk.surface !== null)
             ctx.drawImage(chunk.surface, cx * CHUNK_PX, cy * CHUNK_PX);
         }
+      // The fog as it was, fading out over the new fog (a reveal).
+      const k = (now - fogFadeStart) / FOG_FADE_MS;
+      if (fadingFog !== null && k < 1) {
+        ctx.globalAlpha = Math.ceil((1 - k) * 4) / 4;
+        for (let cy = r0; cy <= r1; cy += 1)
+          for (let cx = c0; cx <= c1; cx += 1) {
+            const chunk = fadingFog.get(chunkKey(cx, cy));
+            if (chunk?.surface)
+              ctx.drawImage(chunk.surface, cx * CHUNK_PX, cy * CHUNK_PX);
+          }
+        ctx.globalAlpha = 1;
+      } else fadingFog = null;
+    }
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     stat.lastFrameMs = performance.now() - t0;
   };
@@ -956,6 +1046,7 @@ export function createMapView(
       objects = next.objects;
       explored = null;
       fogChunks.clear();
+      fadingFog = null;
       rebuildTerrain();
       rebuildForeground();
       camX = (next.width * CELL) / 2;
@@ -965,13 +1056,23 @@ export function createMapView(
     },
     setExplored(mask) {
       if (map === null) return;
-      if (mask === null) explored = null;
-      else {
-        explored = new Uint8Array(map.width * map.height);
-        for (let i = 0; i < explored.length; i += 1)
-          explored[i] = mask[i] ? 1 : 0;
+      if (mask === null) {
+        if (explored === null) return;
+        explored = null;
+      } else {
+        const next = new Uint8Array(map.width * map.height);
+        for (let i = 0; i < next.length; i += 1) next[i] = mask[i] ? 1 : 0;
+        // Unchanged: keep the cached fog (and start no fade).
+        if (explored !== null && next.every((v, i) => v === explored?.[i]))
+          return;
+        explored = next;
       }
-      fogChunks.clear();
+      if (fogFade && fogChunks.size > 0) {
+        fadingFog = fogChunks;
+        fogFadeStart = performance.now();
+        fogChunks = new Map();
+        animate();
+      } else fogChunks.clear();
       requestRender();
     },
     setObjects(next) {
@@ -1049,6 +1150,50 @@ export function createMapView(
       requestRender();
     },
     stats: () => ({ ...stat }),
+    walkHero(id, from, to, ms, still = false) {
+      if (still || ms <= 0) {
+        heroOffsets.delete(id);
+        return new Promise((r) => setTimeout(r, Math.max(0, ms)));
+      }
+      const dx0 = (from.x - to.x) * CELL;
+      const dy0 = (from.y - to.y) * CELL;
+      const t0 = performance.now();
+      heroOffsets.set(id, { dx: dx0, dy: dy0 });
+      animate();
+      return new Promise((resolve) => {
+        const step = (): void => {
+          const k = Math.min(1, (performance.now() - t0) / ms);
+          const bob = Math.round(Math.abs(Math.sin(Math.PI * k)) * 3);
+          heroOffsets.set(id, {
+            dx: Math.round(dx0 * (1 - k)),
+            dy: Math.round(dy0 * (1 - k)) - bob,
+          });
+          // The camera glides with the hero.
+          camX = (to.x + (from.x - to.x) * (1 - k)) * CELL + CELL / 2;
+          camY = (to.y + (from.y - to.y) * (1 - k)) * CELL + CELL / 2;
+          clampCamera();
+          if (k < 1) requestAnimationFrame(step);
+          else {
+            heroOffsets.delete(id);
+            resolve();
+          }
+        };
+        requestAnimationFrame(step);
+      });
+    },
+    spawnFx(fn) {
+      fn(fx, { now: performance.now() });
+      animate();
+    },
+    raiseFlag(x, y) {
+      flagRaises.set(`${x},${y}`, performance.now());
+      animate();
+    },
+    setFogFade(on) {
+      fogFade = on;
+      if (!on) fadingFog = null;
+    },
+    cellCentre: (x, y) => ({ x: x * CELL + CELL / 2, y: y * CELL + CELL / 2 }),
     destroy() {
       canvas.removeEventListener("pointerdown", onPointerDown);
       canvas.removeEventListener("pointermove", onPointerMove);

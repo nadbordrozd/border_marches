@@ -35,6 +35,8 @@ import type {
 } from "../core/game/index.ts";
 import type { ResourceId } from "../core/map/types.ts";
 import { playSound } from "../audio/sound.ts";
+import { fxEvent } from "../audio/fx.ts";
+import { bump, countUp } from "./anim.ts";
 import { buildingDef, townTree } from "../data/factions.ts";
 import { getHeroClass } from "../data/hero.ts";
 import { namedHeroPortrait } from "../assets/unit-art.ts";
@@ -97,7 +99,8 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       resolve();
     };
     const onKey = (e: KeyboardEvent): void => {
-      if (document.querySelector(".gm-backdrop") !== null) return;
+      if (document.querySelector(".gm-backdrop:not(.gm-closing)") !== null)
+        return;
       if (e.key === "Escape" || e.key === "Enter") {
         e.preventDefault();
         close();
@@ -214,11 +217,26 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           el("span.gm-stock-count", String(left)),
         );
         cell.type = "button";
+        cell.dataset["stock"] = creature;
         cell.disabled = left <= 0;
         cell.setAttribute("aria-label", `Recruit ${c.plural}: ${left}`);
         setTip(cell, () => creatureTip(creature));
         cell.addEventListener("click", () => {
-          void openRecruit(host, town.id, creature).then(render);
+          void openRecruit(host, town.id, creature).then(() => {
+            render();
+            // The stock counts down to what is left (bead bzc.26).
+            const now =
+              host.state().towns[townId]?.dwellings[creature]?.available;
+            const node = document.querySelector<HTMLElement>(
+              `[data-stock="${creature}"]`,
+            );
+            const count = node?.querySelector<HTMLElement>(".gm-stock-count");
+            if (node && count && now !== undefined && now !== left) {
+              fxEvent("ui.recruit.count");
+              bump(node);
+              void countUp(count, left, now, 420);
+            }
+          });
         });
         stockRow.append(cell);
       }
@@ -408,6 +426,7 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           status = "resources";
       }
       const card = el("div.gm-building");
+      card.dataset["building"] = id;
       card.classList.add(`gm-b-${status}`);
       setTip(card, () => {
         const t = host.state().towns[town.id];
@@ -464,7 +483,15 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         const b = button(
           "Build",
           () => {
-            if (run(build(state, town.id, id))) playSound("build");
+            if (run(build(state, town.id, id))) {
+              playSound("build");
+              // The new building flashes gold and settles (bead bzc.26).
+              fxEvent("ui.build.complete");
+              bump(
+                document.querySelector(`[data-building="${id}"]`),
+                "gm-just-built",
+              );
+            }
           },
           "gm-btn gm-primary",
         );

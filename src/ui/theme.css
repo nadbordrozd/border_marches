@@ -232,9 +232,229 @@ button:disabled .gm-kbd {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .gm-modal,
-  .gm-end-box {
-    animation: none !important;
+/* ================================================================
+   Motion (bead bzc.26). Short, crisp, stepped where it suits pixel art.
+   html[data-motion="reduced"] (the Menu setting, or the system's
+   prefers-reduced-motion on "auto"; see src/ui/motion.ts) turns all of
+   it off.
+   ================================================================ */
+
+/* Dialogs: the backdrop fades in; closing fades and settles. */
+.gm-backdrop {
+  animation: gm-fade-in 120ms ease-out;
+}
+
+.gm-backdrop.gm-closing {
+  pointer-events: none;
+  animation: gm-fade-out 110ms ease-in forwards;
+}
+
+.gm-backdrop.gm-closing .gm-modal {
+  animation: gm-settle-out 110ms ease-in forwards;
+}
+
+@keyframes gm-fade-in {
+  from {
+    opacity: 0;
   }
+}
+
+@keyframes gm-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes gm-settle-out {
+  to {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+}
+
+/* Buttons press down a pixel (game.css) and spring back. */
+.gm-btn,
+.bm-btn,
+.bm-act {
+  transition:
+    filter 80ms,
+    box-shadow 80ms,
+    transform 60ms;
+}
+
+.bm-btn:active:not(:disabled),
+.bm-act:active:not(:disabled) {
+  transform: translateY(1px);
+  filter: brightness(0.92);
+}
+
+/* The tooltip fades in and lifts a few pixels. */
+.gm-tip.gm-tip-on {
+  animation: gm-tip-in 110ms ease-out;
+}
+
+@keyframes gm-tip-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+
+/* A value that changed hops once (anim.ts bump). */
+.gm-bump {
+  animation: gm-bump 280ms steps(4);
+}
+
+@keyframes gm-bump {
+  35% {
+    transform: translateY(-3px) scale(1.08);
+    filter: brightness(1.5);
+  }
+}
+
+.gm-counting {
+  color: var(--gm-trim-light);
+}
+
+/* A building just built flashes gold and settles. */
+.gm-just-built {
+  animation: gm-built 720ms steps(8);
+}
+
+@keyframes gm-built {
+  0% {
+    filter: brightness(2);
+    box-shadow: inset 0 0 0 4px var(--gm-trim-light);
+  }
+
+  35% {
+    transform: scale(1.04);
+    box-shadow: inset 0 0 0 3px var(--gm-trim-light);
+  }
+}
+
+/* A pickup flying to the resource bar (anim.ts flyTo). */
+.gm-fly-pickup {
+  position: fixed;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  color: var(--gm-trim-light);
+  font:
+    bold 13px Verdana,
+    Geneva,
+    sans-serif;
+  text-shadow:
+    1px 1px 0 var(--gm-ink),
+    -1px -1px 0 var(--gm-ink),
+    1px -1px 0 var(--gm-ink),
+    -1px 1px 0 var(--gm-ink);
+  image-rendering: pixelated;
+}
+
+/* New day and new week: a plaque across the map. */
+.gm-daybanner {
+  position: fixed;
+  top: 16%;
+  left: 50%;
+  z-index: 900;
+  min-width: 220px;
+  padding: 10px 40px 12px;
+  text-align: center;
+  pointer-events: none;
+  background: var(--gm-wood-bg);
+  box-shadow: var(--gm-frame-shadow);
+  transform: translateX(-50%);
+  animation: gm-banner 1.7s ease-out forwards;
+}
+
+.gm-daybanner-week {
+  animation-duration: 2.6s;
+}
+
+.gm-daybanner-title {
+  color: var(--gm-trim-light);
+  font:
+    bold 26px Georgia,
+    "Times New Roman",
+    serif;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 0 var(--gm-ink);
+}
+
+.gm-daybanner-week .gm-daybanner-title {
+  font-size: 32px;
+}
+
+.gm-daybanner-sub {
+  color: var(--gm-parchment);
+  font:
+    12px Verdana,
+    Geneva,
+    sans-serif;
+}
+
+@keyframes gm-banner {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -16px) scaleX(0.6);
+  }
+
+  12% {
+    opacity: 1;
+    transform: translate(-50%, 0) scaleX(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -6px);
+  }
+}
+
+/* Spellbooks: pages turn in from the spine, one after another. */
+.bm-book-col,
+.gm-book-pagecol {
+  transform-origin: left center;
+  animation: gm-page 300ms steps(5) both;
+}
+
+.bm-book-col:nth-child(2),
+.gm-book-pagecol:nth-child(2) {
+  animation-delay: 50ms;
+}
+
+.bm-book-col:nth-child(3),
+.gm-book-pagecol:nth-child(3) {
+  animation-delay: 100ms;
+}
+
+.bm-book-col:nth-child(4),
+.gm-book-pagecol:nth-child(4) {
+  animation-delay: 150ms;
+}
+
+.bm-book-col:nth-child(n + 5),
+.gm-book-pagecol:nth-child(n + 5) {
+  animation-delay: 200ms;
+}
+
+@keyframes gm-page {
+  from {
+    opacity: 0.25;
+    transform: perspective(700px) rotateY(-85deg);
+  }
+}
+
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation: none !important;
+  transition: none !important;
 }

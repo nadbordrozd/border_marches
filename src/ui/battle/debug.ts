@@ -431,6 +431,13 @@ export function startBattleDebug(route: Route): void {
       // Unknown stack id: leave the turn order alone.
     }
   }
+  if (p.has("strip")) {
+    const start = state ?? createBattle(engineSetup()).state;
+    void import("./fx-strip.ts").then((m) =>
+      m.startFxStrip(container, setup, start, p),
+    );
+    return;
+  }
   const speed = Number(p.get("speed") ?? "1");
   const hover = p.get("hover");
   const info = p.get("info");

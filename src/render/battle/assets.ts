@@ -21,8 +21,53 @@ import type { Terrain } from "../../core/map/types.ts";
 import { hexIndex } from "../../core/battle/index.ts";
 import type { Hex } from "../../core/battle/index.ts";
 import { hashInts } from "../../core/rng.ts";
+import { iconFor } from "../../assets/icons.ts";
 
 const cache = new Map<string, Promise<HTMLImageElement>>();
+
+/** Ground icons by kind, once loaded (drawn on their hexes). */
+const groundIcons = new Map<string, HTMLImageElement>();
+
+/**
+ * The 32 px icon of a ground kind (`iconFor("ground", kind)`), or null while
+ * it loads; the first call starts the load. Unknown kinds get the ground
+ * fallback icon.
+ */
+export function groundIcon(kind: string): HTMLImageElement | null {
+  const have = groundIcons.get(kind);
+  if (have) return have;
+  if (typeof Image === "undefined") return null;
+  void loadImage(iconFor("ground", kind).asset).then(
+    (img) => groundIcons.set(kind, img),
+    () => {},
+  );
+  return null;
+}
+
+/** Loads the icons of these ground kinds now. */
+export async function preloadGroundIcons(
+  kinds: readonly string[],
+): Promise<void> {
+  await Promise.all(
+    kinds.map((kind) =>
+      loadImage(iconFor("ground", kind).asset).then(
+        (img) => void groundIcons.set(kind, img),
+        () => {},
+      ),
+    ),
+  );
+}
+
+/** Every ground kind with an icon of its own. */
+export const GROUND_ICON_KINDS = [
+  "rock",
+  "corpse",
+  "bones",
+  "wreck",
+  "fire",
+  "brambles",
+  "mist",
+] as const;
 
 function baseUrl(): string {
   return import.meta.env.BASE_URL;
@@ -126,6 +171,7 @@ export async function loadBattleArt(
   obstacles: readonly Hex[],
 ): Promise<BattleArt> {
   const groundP = loadImage(GROUND_TEXTURES[terrain]);
+  const iconsP = preloadGroundIcons(GROUND_ICON_KINDS);
   const unitEntries = await Promise.all(
     [...new Set(creatureIds)].map(async (id) => {
       const asset = unitAssetFor(id);
@@ -150,6 +196,7 @@ export async function loadBattleArt(
   }
   const units = new Map<string, { img: HTMLImageElement; asset: UnitAsset }>();
   for (const e of unitEntries) if (e) units.set(e[0], e[1]);
+  await iconsP;
   return {
     ground: await groundP,
     units,

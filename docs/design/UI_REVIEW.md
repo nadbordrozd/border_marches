@@ -214,3 +214,32 @@ capped at the window height and scroll inside when they must.
   category layout would remove that.
 - The minimap is a plain canvas; a carved frame around a larger minimap
   would follow Heroes II more closely.
+
+## Animation pass (bead bzc.26)
+
+Code-drawn motion in the pixel style: whole-pixel particles with a dark
+outline, a small palette per school, stepped fades, no blur or glow.
+
+- Battle: `src/ui/battle/schedule.ts` plans each batch of engine events
+  into beats (event-index order, effect names, durations);
+  `src/ui/battle/animate.ts` plays them on the scene only. Effects live in
+  `src/render/fx/` (`field.ts` the capped effect field, `pixels.ts` the
+  sprites and palettes, `emit.ts` the recipes, `spell-fx.ts` the per-spell
+  registry with a school fallback, `shots.ts` the projectile per shooter).
+- Map: hero walk with a bob and a gliding camera, revealed fog fading out,
+  pickups flying to the resource bar and counting up, flags rising on a
+  capture, a level-up burst, day and week banners (`map-view.ts`,
+  `src/ui/anim.ts`).
+- Interface: dialog fade in and out, button presses, tooltip fade, level-up
+  cards dealt in, spellbook pages turning, a building flashing when built,
+  the recruit stock counting down (`theme.css`).
+- Reduced motion: the Menu's "Motion" button (auto, reduced, full; auto
+  follows `prefers-reduced-motion`) sets `html[data-motion="reduced"]`:
+  no particles, slides or bobs; news beats hold briefly in place.
+  Instant speed and quick battles skip every animation.
+- Sound hooks: every effect has a name in `FX_EVENTS` (`src/audio/fx.ts`);
+  `fxEvent(name)` plays the sound registered in `FX_SOUNDS` (the five
+  school cast sounds now; the sound pass fills the rest).
+- Evidence: `node tests/ui/fx-check.mjs [url] [dir] [only]` draws frame
+  strips with the battle route `strip=` (a manual clock, so frames repeat
+  exactly) and timed map and interface frames.

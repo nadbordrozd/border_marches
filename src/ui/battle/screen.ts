@@ -72,6 +72,8 @@ import {
 } from "../../render/battle/scene.ts";
 import type { HexMark, Scene } from "../../render/battle/scene.ts";
 import { Animator, nextSpeed, speedLabel } from "./animate.ts";
+import { onMotionChange, reducedMotion } from "../motion.ts";
+import { flipChildren } from "../anim.ts";
 import type { Speed } from "./animate.ts";
 import {
   attackChainLines,
@@ -375,6 +377,14 @@ class BattleScreen {
       },
     });
     this.animator.speed = options.autoResolve ? Infinity : (options.speed ?? 1);
+    this.animator.reduced = reducedMotion();
+    this.scene.reduced = this.animator.reduced;
+    this.cleanup.push(
+      onMotionChange((reduced) => {
+        this.animator.reduced = reduced;
+        this.scene.reduced = reduced;
+      }),
+    );
     this.buildDom();
   }
 
@@ -519,7 +529,7 @@ class BattleScreen {
       this.legal = indexLegalActions([]);
       this.intent = { kind: "none" };
       this.updateOverlay();
-      await this.animate(step.events, before, step.state);
+      await this.animate(step.events, before, step.state, action);
     }
     const engine = battleResult(this.state, this.state.endReason ?? reason);
     const result = gameResultFromEngine(this.setup, engine);
@@ -556,10 +566,11 @@ class BattleScreen {
     events: readonly BattleEvent[],
     before: BattleState,
     after: BattleState,
+    action: BattleAction | null = null,
   ): Promise<void> {
     this.animating = true;
     this.refreshButtons();
-    await this.animator.play(events, before, after);
+    await this.animator.play(events, before, after, action);
     this.animating = false;
     syncScene(this.scene, after);
   }
@@ -1625,6 +1636,11 @@ class BattleScreen {
 
   private renderTop(): void {
     const s = this.state;
+    // The timeline slides: chips keep their place by stack id (FLIP).
+    const flip = flipChildren(
+      this.top.querySelector<HTMLElement>(".bm-order"),
+      !this.animator.reduced && this.animator.speed !== Infinity,
+    );
     this.top.replaceChildren();
     const limit = roundLimitInfo(
       { ...s, round: this.scene.round || s.round },
@@ -1661,6 +1677,7 @@ class BattleScreen {
         `bm-chip bm-${st.side} ${cls}`,
         `${creatureName(st.creature, st.count)} ${st.count}`,
       );
+      c.dataset["flip"] = `${id}${cls === "bm-later" ? ":next" : ""}`;
       if (s.waiting.includes(id)) c.title = "waiting";
       strip.append(c);
     };
@@ -1686,6 +1703,7 @@ class BattleScreen {
         .forEach((id) => chip(id, "bm-later"));
     }
     this.top.append(strip);
+    flip(strip);
   }
 
   private renderActive(): void {

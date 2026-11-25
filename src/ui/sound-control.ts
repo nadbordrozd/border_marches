@@ -5,6 +5,13 @@
  * browsers and while muted (see src/audio/sound.ts).
  */
 import { playSound, sound } from "../audio/sound.ts";
+import {
+  MOTION_LABELS,
+  motionPref,
+  nextMotionPref,
+  reducedMotion,
+  setMotionPref,
+} from "./motion.ts";
 import type { AudioSettings } from "../audio/settings.ts";
 import { el } from "./dom.ts";
 
@@ -73,7 +80,26 @@ export function soundControl(): HTMLElement {
   const effects = slider("Effects", system.current.effects, (v) =>
     system.setEffects(v),
   );
-  const box = el("div.gm-sound", toggle, master.row, effects.row);
+  // The motion setting lives with the sound settings (bead bzc.26).
+  const motion = el("button.gm-btn.gm-motion-toggle");
+  motion.type = "button";
+  const syncMotion = (): void => {
+    const p = motionPref();
+    motion.textContent = MOTION_LABELS[p];
+    motion.title =
+      p === "auto"
+        ? `Animations follow the system setting (now ${reducedMotion() ? "reduced" : "full"}); click for reduced`
+        : p === "reduced"
+          ? "No particles, slides or bobs; click for full motion"
+          : "Every animation plays; click to follow the system setting";
+    motion.setAttribute("aria-pressed", String(reducedMotion()));
+  };
+  motion.addEventListener("click", () => {
+    setMotionPref(nextMotionPref(motionPref()));
+    syncMotion();
+  });
+  syncMotion();
+  const box = el("div.gm-sound", toggle, master.row, effects.row, motion);
   const sync = (s: Readonly<AudioSettings>): void => {
     toggle.textContent = s.muted ? "Sound: off" : "Sound: on";
     toggle.title = s.muted ? "Turn sound effects on" : "Mute all sound";

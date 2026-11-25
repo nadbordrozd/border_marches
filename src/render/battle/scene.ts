@@ -12,6 +12,7 @@ import type {
   Hex,
   StackId,
 } from "../../core/battle/index.ts";
+import { FxField } from "../fx/field.ts";
 import { feetPoint } from "./geometry.ts";
 import type { Point } from "./geometry.ts";
 import { conditionPips, groundMarks, linkLines } from "./grammar-view.ts";
@@ -34,6 +35,31 @@ export interface UnitView {
   pips: ConditionPip[];
   defending: boolean;
   visible: boolean;
+  /** Height factor, 0..1: a falling stack collapses, a rising one grows. */
+  squash: number;
+  /** Pixels above the ground (Launched arcs); the shadow stays below. */
+  lift: number;
+}
+
+/** A condition icon popping on (landed) or fading off (expired). */
+export interface Badge {
+  readonly stackId: StackId;
+  readonly glyph: string;
+  readonly color: string;
+  readonly bane: boolean;
+  readonly mode: "land" | "expire";
+  readonly t0: number;
+  readonly life: number;
+}
+
+/** A banner across the top of the field (the hero's Command, an item). */
+export interface Banner {
+  readonly text: string;
+  readonly sub: string;
+  readonly side: BattleSide;
+  readonly color: string;
+  readonly t0: number;
+  readonly life: number;
 }
 
 export interface FloatText {
@@ -45,6 +71,8 @@ export interface FloatText {
   readonly t0: number;
   readonly life: number;
   readonly big: boolean;
+  /** Reduced motion: shown in place, no rise. */
+  readonly still?: boolean;
 }
 
 export interface Projectile {
@@ -124,6 +152,14 @@ export interface Scene {
   now: number;
   /** Round banner. */
   round: number;
+  /** Pixel effects (bead bzc.26). */
+  readonly fx: FxField;
+  badges: Badge[];
+  banners: Banner[];
+  /** Reduced motion: no pulses, sparkles or idle motion. */
+  reduced: boolean;
+  /** Ground icons growing in: hex index -> start time (scene clock). */
+  groundGrow: Map<number, number>;
 }
 
 export const EMPTY_OVERLAY: Overlay = {
@@ -144,6 +180,11 @@ export function createScene(state: BattleState): Scene {
     poofs: [],
     now: 0,
     round: state.round,
+    fx: new FxField(),
+    badges: [],
+    banners: [],
+    reduced: false,
+    groundGrow: new Map(),
   };
   syncScene(scene, state);
   return scene;
@@ -166,12 +207,16 @@ export function syncScene(scene: Scene, state: BattleState): void {
       pips: [],
       defending: false,
       visible: true,
+      squash: 1,
+      lift: 0,
     };
     view.x = p.x;
     view.y = p.y;
     view.count = s.count;
     view.alpha = 1;
     view.flash = 0;
+    view.squash = 1;
+    view.lift = 0;
     view.visible = isAlive(s);
     view.pips = conditionPips(state, s.id);
     view.side = s.side;
@@ -183,8 +228,44 @@ export function syncScene(scene: Scene, state: BattleState): void {
   scene.round = state.round;
 }
 
+/**
+ * The view of a stack that appears mid-batch (a summon), created hidden so
+ * the animator can fade it in. Returns the existing view when there is one.
+ */
+export function ensureUnit(
+  scene: Scene,
+  state: BattleState,
+  id: StackId,
+): UnitView | undefined {
+  const have = scene.units.get(id);
+  if (have) return have;
+  const s = state.stacks.find((x) => x.id === id);
+  if (!s) return undefined;
+  const p = feetPoint(s.hex);
+  const view: UnitView = {
+    id: s.id,
+    side: s.side,
+    creatureId: s.creature.id,
+    x: p.x,
+    y: p.y,
+    count: s.count,
+    alpha: 0,
+    flash: 0,
+    pips: [],
+    defending: false,
+    visible: true,
+    squash: 1,
+    lift: 0,
+  };
+  scene.units.set(id, view);
+  return view;
+}
+
 /** Drops finished effects. */
 export function pruneEffects(scene: Scene): void {
   scene.texts = scene.texts.filter((t) => scene.now - t.t0 < t.life);
   scene.poofs = scene.poofs.filter((p) => scene.now - p.t0 < p.life);
+  scene.badges = scene.badges.filter((b) => scene.now - b.t0 < b.life);
+  scene.banners = scene.banners.filter((b) => scene.now - b.t0 < b.life);
+  scene.fx.prune(scene.now);
 }

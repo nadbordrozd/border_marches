@@ -61,6 +61,11 @@ import { createMapView, ZOOM_STEPS } from "../render/map/map-view.ts";
 import type { MapFlag, MapView } from "../render/map/map-view.ts";
 import { pickupCue } from "../audio/cues.ts";
 import { playSound } from "../audio/sound.ts";
+import { fxEvent } from "../audio/fx.ts";
+import { burst as fxBurst, sparkle as fxSparkle } from "../render/fx/emit.ts";
+import { PALETTES } from "../render/fx/pixels.ts";
+import { onMotionChange, reducedMotion } from "./motion.ts";
+import { bump, countUp, dayBanner, flyTo } from "./anim.ts";
 import { openBattleScreen } from "./battle/screen.ts";
 import { openAdventureBook } from "./spellbook.ts";
 import { castAdventureSpell, registerSpells } from "../core/magic/index.ts";
@@ -154,6 +159,10 @@ export interface GameHook {
   cellToClient(x: number, y: number): { x: number; y: number } | null;
   /** Shows the victory (true) or defeat screen without ending the game. */
   previewEnd(won: boolean): void;
+  /** Plays the capture flag-raise at a town or mine (animation evidence). */
+  raiseFlag(objectId: string): void;
+  /** Plays the level-up burst round a hero (animation evidence). */
+  levelBurst(heroId: string): void;
 }
 
 export interface HookTarget {
@@ -255,6 +264,7 @@ class GameScreen {
   private selectedId: string | null = null;
   private pointer = { x: 0, y: 0 };
   private viewportTimer = 0;
+  private offMotion: () => void = () => {};
   private finished = false;
   /** A town picked in the kingdom overview, opened when it closes. */
   private kingdomTown: string | null = null;
@@ -276,6 +286,10 @@ class GameScreen {
     this.root.append(el("div.gm-main", this.mapWrap, this.bar), this.side);
     this.host.append(this.root);
     this.view = createMapView(this.canvas, assets);
+    this.view.setFogFade(!reducedMotion());
+    this.offMotion = onMotionChange((reduced) =>
+      this.view.setFogFade(!reduced),
+    );
     this.view.setMap(initial.map);
     this.view.onClick((cell) => this.onMapClick(cell.x, cell.y));
     this.view.onHover((cell) => this.onHover(cell));
@@ -321,6 +335,8 @@ class GameScreen {
       previewEnd: (won) => this.showEnd(won),
       openTown: (id) => void this.openTown(id),
       cellToClient: (x, y) => this.cellToClient(x, y),
+      raiseFlag: (id) => this.flagRaised(id),
+      levelBurst: (id) => void this.levelBurst(id),
     };
     // Resume a battle, level-up or AI turn left pending.
     void this.afterCommand([]).then(() => {
@@ -1256,6 +1272,7 @@ class GameScreen {
     const explored = [...(this.player()?.explored ?? [])];
     const remaining = this.plan?.path.steps.slice() ?? [];
     const sight = sightRadius(hero);
+    let prev = { x: hero.x, y: hero.y };
     for (const [x, y] of cells) {
       for (
         let yy = Math.max(0, y - sight);
@@ -1282,10 +1299,14 @@ class GameScreen {
       );
       this.view.setExplored(explored);
       this.syncHeroes({ id: hero.id, x, y });
-      this.view.centerOn(x, y);
+      const still = reducedMotion();
+      if (still) this.view.centerOn(x, y);
       this.updateViewport();
       playSound("hero.step", { jitter: 0.08 });
-      await wait(STEP_MS);
+      if (!still) fxEvent("map.walk.bob");
+      // The sprite walks from the last cell with a bob, the camera following.
+      await this.view.walkHero(hero.id, prev, { x, y }, STEP_MS, still);
+      prev = { x, y };
     }
   }
 
@@ -1298,6 +1319,7 @@ class GameScreen {
         case "pickup":
           if (this.state.currentPlayer !== this.human) break;
           playSound(pickupCue(e.resource));
+          this.flyPickup(e.resource, e.amount);
           this.note(
             `+${e.amount} ${RESOURCE_NAMES[e.resource].toLowerCase()}`,
             "gain",
@@ -1307,6 +1329,7 @@ class GameScreen {
           const mine = this.state.mines[e.mineId];
           if (mine === undefined) break;
           const def = MINES[mine.resource];
+          this.flagRaised(e.mineId);
           if (e.owner === this.human) {
             playSound("pickup");
             this.note(
@@ -1341,6 +1364,7 @@ class GameScreen {
           break;
         case "town-captured": {
           const name = this.state.towns[e.townId]?.name ?? "Town";
+          this.flagRaised(e.townId);
           if (e.owner === this.human) {
             playSound("new-week");
             this.note(`${name} captured!`, "gain");
@@ -1521,6 +1545,78 @@ class GameScreen {
     }
   }
 
+  /** A resource picked up flies from the hero to its place in the bar. */
+  private flyPickup(resource: ResourceId, amount: number): void {
+    const i = RESOURCE_IDS.indexOf(resource);
+    const slot = this.bar.querySelectorAll<HTMLElement>(".gm-res")[i];
+    const amountEl = slot?.querySelector<HTMLElement>(".gm-res-amount");
+    const hero = this.hero();
+    const total = this.player()?.resources[resource] ?? 0;
+    if (!slot || !amountEl || hero === undefined || reducedMotion()) return;
+    const from = this.cellToClient(hero.x, hero.y);
+    if (from === null) return;
+    amountEl.textContent = String(total - amount);
+    const icon = resourceIcon(resource, "gm-fly-icon");
+    const node = el("div.gm-fly-pickup", icon, el("span", `+${amount}`));
+    fxEvent("map.pickup.fly");
+    void flyTo(node, { x: from.x - 14, y: from.y - 30 }, slot).then(() => {
+      fxEvent("map.pickup.land");
+      bump(slot);
+      if (amountEl.isConnected)
+        void countUp(
+          amountEl,
+          total - amount,
+          total,
+          520,
+          String,
+          "map.count.tick",
+        );
+    });
+  }
+
+  /** Gold bursts round a hero who levels up; false under reduced motion. */
+  private levelBurst(heroId: string): boolean {
+    const hero = this.state.heroes.find((h) => h.id === heroId);
+    if (hero === undefined || reducedMotion()) return false;
+    fxEvent("map.levelup.burst");
+    const c = this.view.cellCentre(hero.x, hero.y);
+    this.view.spawnFx((field, clock) => {
+      fxBurst(field, clock, { x: c.x, y: c.y + 4 }, PALETTES.gold, 22);
+      fxSparkle(
+        field,
+        clock,
+        { x: c.x, y: c.y - 24 },
+        "spark",
+        PALETTES.gold,
+        8,
+        22,
+      );
+    });
+    return true;
+  }
+
+  /** A flag goes up at an object the moment it is captured. */
+  private flagRaised(objectId: string): void {
+    const obj = this.state.map.objects.find((o) => o.id === objectId);
+    if (obj === undefined || reducedMotion()) return;
+    const seen = this.player()?.explored[obj.y * this.state.map.width + obj.x];
+    if (seen !== true) return;
+    fxEvent("map.flag.raise");
+    this.view.raiseFlag(obj.x, obj.y);
+    const c = this.view.cellCentre(obj.x, obj.y);
+    this.view.spawnFx((field, clock) =>
+      fxSparkle(
+        field,
+        clock,
+        { x: c.x - 24, y: c.y - 30 },
+        "spark",
+        PALETTES.gold,
+        6,
+        12,
+      ),
+    );
+  }
+
   private async levelUps(): Promise<void> {
     for (;;) {
       if (this.state.status !== "playing") return;
@@ -1531,6 +1627,7 @@ class GameScreen {
       const offer = levelUpOffer(this.state, hero.id);
       if (offer === null) return;
       playSound("level-up");
+      if (this.levelBurst(hero.id)) await wait(420);
       const portrait = namedHeroPortrait(hero.defId, hero.heroClass).key;
       const choice = await levelUpDialog(this.state, hero, offer, portrait);
       if (this.run(chooseLevelUp(this.state, hero.id, choice)) === null) return;
@@ -1765,12 +1862,19 @@ class GameScreen {
     const day = events.some((e) => e.type === "new-day");
     if (week) {
       playSound("new-week");
-      toast(
-        `Week ${calendar(this.state.day).weekOfGame}: creatures grow, taverns refresh`,
+      const c = calendar(this.state.day);
+      dayBanner(
+        `Week ${c.weekOfGame}`,
+        "Creatures grow, taverns refresh",
         "week",
+      );
+      this.note(
+        `Week ${c.weekOfGame}: creatures grow, taverns refresh`,
+        "quiet",
       );
     } else if (day) {
       playSound("new-day");
+      dayBanner(dateLabel(this.state.day), "A new day", "day");
     }
     await Promise.resolve();
   }
@@ -2323,6 +2427,7 @@ class GameScreen {
   }
 
   private destroy(): void {
+    this.offMotion();
     delete window.__bmGame;
     window.removeEventListener("keydown", this.onKey);
     window.removeEventListener("resize", this.onResize);

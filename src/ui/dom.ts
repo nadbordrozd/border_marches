@@ -2,6 +2,8 @@
  * Small DOM helpers shared by the game screens: element builder, modal
  * dialogs, toasts and image URLs of manifest assets.
  */
+import { fxEvent } from "../audio/fx.ts";
+import { reducedMotion } from "./motion.ts";
 import { assetByKey, assetUrl, RESOURCE_ITEMS } from "../assets/manifest.ts";
 import type { ResourceId } from "../core/map/types.ts";
 import { RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
@@ -154,9 +156,16 @@ export function modal<T>(options: ModalOptions<T>): Promise<T> {
     const row = el("div.gm-modal-buttons");
     const close = (value: T): void => {
       window.removeEventListener("keydown", onKey, true);
-      backdrop.remove();
       modalDepth--;
       resolve(value);
+      // Closing: a short fade (bead bzc.26); nothing waits for it.
+      if (reducedMotion() || typeof backdrop.animate !== "function") {
+        backdrop.remove();
+        return;
+      }
+      fxEvent("ui.dialog.close");
+      backdrop.classList.add("gm-closing");
+      setTimeout(() => backdrop.remove(), 110);
     };
     let primary: HTMLButtonElement | null = null;
     const nodes: HTMLButtonElement[] = [];
@@ -181,7 +190,7 @@ export function modal<T>(options: ModalOptions<T>): Promise<T> {
     (document.getElementById("ui") ?? document.body).append(backdrop);
     const onKey = (e: KeyboardEvent): void => {
       // Only the topmost modal reacts.
-      if (backdrop.nextElementSibling?.classList.contains("gm-backdrop"))
+      if (backdrop.nextElementSibling?.matches(".gm-backdrop:not(.gm-closing)"))
         return;
       if (e.key === "Escape" && "cancel" in options) {
         e.preventDefault();
@@ -195,6 +204,7 @@ export function modal<T>(options: ModalOptions<T>): Promise<T> {
       }
     };
     window.addEventListener("keydown", onKey, true);
+    fxEvent("ui.dialog.open");
     primary?.focus();
     options.onOpen?.(nodes);
   });

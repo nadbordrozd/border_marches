@@ -1,5 +1,6 @@
 import "./style.css";
 import { parseRoute } from "./router.ts";
+import { forceReducedMotion, installMotion } from "./ui/motion.ts";
 
 const TITLE = "Border Marches";
 
@@ -23,6 +24,11 @@ function showError(error: unknown): void {
 function start(): void {
   const route = parseRoute(window.location.search);
   document.title = TITLE;
+  // `?motion=reduced|full` overrides the setting for this page (checks).
+  const motion = route.params.get("motion");
+  if (motion === "reduced" || motion === "full")
+    forceReducedMotion(motion === "reduced");
+  installMotion();
   if (route.view === "map") {
     void import("./render/map/debug-page.ts")
       .then((m) => m.startMapDebug(getCanvas(), route))

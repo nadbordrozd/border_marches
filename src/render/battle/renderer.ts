@@ -15,6 +15,7 @@ import {
 } from "../../core/battle/index.ts";
 import type { Hex } from "../../core/battle/index.ts";
 import type { BattleArt } from "./assets.ts";
+import { groundIcon } from "./assets.ts";
 import {
   HEX_SIZE,
   STAGE_H,
@@ -24,7 +25,18 @@ import {
   hexToStage,
   stageToHex,
 } from "./geometry.ts";
-import type { HexMark, Scene, UnitView } from "./scene.ts";
+import type { Badge, Banner, HexMark, Scene, UnitView } from "./scene.ts";
+import { drawFx, motifScale, pixLine } from "../fx/field.ts";
+import {
+  PALETTES,
+  SCHOOL_PALETTES,
+  shapeSize,
+  shapeSprite,
+} from "../fx/pixels.ts";
+import type { Palette, ShapeId } from "../fx/pixels.ts";
+
+/** How long a new ground icon takes to grow in (ms, scene clock). */
+export const GROUND_GROW_MS = 320;
 
 export const SIDE_COLORS = {
   attacker: { chip: "#24477e", edge: "#9cc3ff" },
@@ -65,11 +77,19 @@ export function paintBackground(art: BattleArt): HTMLCanvasElement {
   return c;
 }
 
-const silhouettes = new Map<HTMLImageElement, HTMLCanvasElement>();
+const silhouettes = new Map<string, Map<HTMLImageElement, HTMLCanvasElement>>();
 
-/** A white copy of a sprite's opaque pixels, for the hit flash. */
-function silhouette(img: HTMLImageElement): HTMLCanvasElement {
-  let s = silhouettes.get(img);
+/** A one-colour copy of a sprite's opaque pixels (hit flash, frost tint). */
+function silhouette(
+  img: HTMLImageElement,
+  color = "#ff3b2a",
+): HTMLCanvasElement {
+  let byImg = silhouettes.get(color);
+  if (!byImg) {
+    byImg = new Map();
+    silhouettes.set(color, byImg);
+  }
+  let s = byImg.get(img);
   if (!s) {
     s = document.createElement("canvas");
     s.width = img.width;
@@ -78,12 +98,35 @@ function silhouette(img: HTMLImageElement): HTMLCanvasElement {
     if (ctx) {
       ctx.drawImage(img, 0, 0);
       ctx.globalCompositeOperation = "source-in";
-      ctx.fillStyle = "#ff3b2a";
+      ctx.fillStyle = color;
       ctx.fillRect(0, 0, s.width, s.height);
     }
-    silhouettes.set(img, s);
+    byImg.set(img, s);
   }
   return s;
+}
+
+/** Draws a sprite with its feet kept; squash shrinks it toward them. */
+function blitSquashed(
+  ctx: CanvasRenderingContext2D,
+  img: CanvasImageSource & { width: number; height: number },
+  left: number,
+  top: number,
+  squash: number,
+): void {
+  if (squash >= 0.999) {
+    ctx.drawImage(img, left, top);
+    return;
+  }
+  const h = Math.max(1, Math.round(img.height * squash));
+  const w = Math.round(img.width * (1 + (1 - squash) * 0.25));
+  ctx.drawImage(
+    img,
+    left - Math.round((w - img.width) / 2),
+    top + img.height - h,
+    w,
+    h,
+  );
 }
 
 const MARK_STYLE: Readonly<
@@ -158,13 +201,22 @@ function drawMarks(ctx: CanvasRenderingContext2D, scene: Scene): void {
     }
   }
   if (overlay.active) {
+    // The turn glow: a stepped pulse (no soft glow), still when reduced.
+    const step = Math.floor(scene.now / 160) % 6;
+    const bright = scene.reduced ? 1 : ([0, 1, 2, 3, 2, 1][step] ?? 1);
     hexPath(ctx, overlay.active, 1);
-    ctx.fillStyle = "rgba(255, 214, 92, 0.24)";
+    ctx.fillStyle = `rgba(255, 214, 92, ${0.18 + bright * 0.04})`;
     ctx.fill();
     hexPath(ctx, overlay.active, 2);
-    ctx.strokeStyle = "#ffd65c";
+    ctx.strokeStyle = bright >= 2 ? "#fff0a0" : "#ffd65c";
     ctx.lineWidth = 2;
     ctx.stroke();
+    if (bright >= 2) {
+      hexPath(ctx, overlay.active, -1 - (bright - 2) * 2);
+      ctx.strokeStyle = "rgba(255, 214, 92, 0.55)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
   }
 }
 
@@ -307,35 +359,144 @@ type Drawable =
   | { kind: "unit"; y: number; unit: UnitView }
   | { kind: "obstacle"; y: number; index: number };
 
+function hasPip(u: UnitView, kind: string): boolean {
+  return u.pips.some((p) => p.kind === kind);
+}
+
 function drawUnit(
   ctx: CanvasRenderingContext2D,
   art: BattleArt,
   u: UnitView,
+  now: number,
+  reduced: boolean,
 ): void {
   const entry = art.units.get(u.creatureId);
   ctx.globalAlpha = u.alpha;
   if (!entry) {
     ctx.fillStyle = SIDE_COLORS[u.side].chip;
-    ctx.fillRect(Math.round(u.x - 14), Math.round(u.y - 40), 28, 40);
+    ctx.fillRect(Math.round(u.x - 14), Math.round(u.y - 40 - u.lift), 28, 40);
     ctx.globalAlpha = 1;
     return;
   }
   const { img, asset } = entry;
   const f = asset.feet;
   const footW = f.footRight - f.footLeft;
-  // Contact shadow: a flat ellipse under the feet (no blur).
+  // Contact shadow: a flat ellipse under the feet (no blur); it shrinks
+  // while the stack is in the air.
+  const air = Math.min(1, u.lift / 40);
   ctx.fillStyle = "rgba(16, 20, 8, 0.28)";
   ctx.beginPath();
-  ctx.ellipse(u.x, u.y - 1, footW / 2 + 4, 5, 0, 0, Math.PI * 2);
+  ctx.ellipse(
+    u.x,
+    u.y - 1,
+    (footW / 2 + 4) * (1 - air * 0.5),
+    5 * (1 - air * 0.4),
+    0,
+    0,
+    Math.PI * 2,
+  );
   ctx.fill();
   const left = Math.round(u.x - (f.footLeft + f.footRight) / 2);
-  const top = Math.round(u.y - f.contactY);
-  ctx.drawImage(img, left, top);
+  const top = Math.round(u.y - f.contactY - u.lift);
+  blitSquashed(ctx, img, left, top, u.squash);
+  if (hasPip(u, "frozen")) {
+    // A hold: an icy tint over the sprite, with a few frost pixels.
+    ctx.globalAlpha = u.alpha * 0.5;
+    blitSquashed(ctx, silhouette(img, "#9ee6ff"), left, top, u.squash);
+    ctx.globalAlpha = u.alpha;
+    ctx.fillStyle = "#ffffff";
+    for (let i = 0; i < 4; i++)
+      ctx.fillRect(
+        left + 8 + ((i * 13) % Math.max(1, img.width - 16)),
+        top + 10 + ((i * 7) % 20),
+        2,
+        2,
+      );
+  }
   if (u.flash > 0) {
     ctx.globalAlpha = u.alpha * Math.min(1, u.flash) * 0.7;
-    ctx.drawImage(silhouette(img), left, top);
+    blitSquashed(ctx, silhouette(img), left, top, u.squash);
   }
   ctx.globalAlpha = 1;
+  if (u.alpha > 0.5) drawIdleMarks(ctx, u, top, now, reduced);
+}
+
+const IDLE_PALETTES: Readonly<Record<"heartened" | "lucky", Palette>> = {
+  heartened: PALETTES.gold,
+  lucky: SCHOOL_PALETTES.bloom,
+};
+
+function sprite(
+  ctx: CanvasRenderingContext2D,
+  shape: ShapeId,
+  pal: Palette,
+  x: number,
+  y: number,
+): void {
+  const scale = motifScale(shape);
+  const img = shapeSprite(shape, pal, scale);
+  if (!img) return;
+  const { w, h } = shapeSize(shape);
+  ctx.drawImage(
+    img as CanvasImageSource,
+    Math.round(x - (w * scale) / 2),
+    Math.round(y - (h * scale) / 2),
+  );
+}
+
+/** A repeatable 0..1 hash for idle sparkle spots. */
+function spot(a: number, b: number): number {
+  const v = Math.sin(a * 12.9898 + b * 78.233) * 43758.5453;
+  return v - Math.floor(v);
+}
+
+/**
+ * Marks of a stack's state drawn every frame: sleeping "z"s and the
+ * twinkles of Heartened and Lucky (still under reduced motion).
+ */
+function drawIdleMarks(
+  ctx: CanvasRenderingContext2D,
+  u: UnitView,
+  top: number,
+  now: number,
+  reduced: boolean,
+): void {
+  const hx = u.x + 12;
+  const hy = top + 4;
+  if (hasPip(u, "asleep")) {
+    if (reduced) sprite(ctx, "z", SCHOOL_PALETTES.hush, hx, hy - 6);
+    else
+      for (let i = 0; i < 3; i++) {
+        const k = (now / 1400 + i / 3) % 1;
+        if (k > 0.85) continue;
+        sprite(
+          ctx,
+          "z",
+          SCHOOL_PALETTES.hush,
+          hx + k * 10 + Math.sin(k * 6) * 2,
+          hy - k * 22,
+        );
+      }
+  }
+  if (reduced) return;
+  for (const kind of ["heartened", "lucky"] as const) {
+    if (!hasPip(u, kind)) continue;
+    const pal = IDLE_PALETTES[kind];
+    // Two twinkles at hashed spots, each lit for 160 ms of every 900.
+    for (let i = 0; i < 2; i++) {
+      const t = now + i * 450 + (kind === "lucky" ? 220 : 0);
+      const cycle = Math.floor(t / 900);
+      const phase = (t % 900) / 900;
+      if (phase > 0.18) continue;
+      sprite(
+        ctx,
+        phase < 0.09 ? "spark" : "dot",
+        pal,
+        u.x - 16 + spot(cycle + i, u.x) * 32,
+        top + 6 + spot(u.y, cycle * 3 + i) * 30,
+      );
+    }
+  }
 }
 
 function drawObstacle(
@@ -370,6 +531,8 @@ function drawChip(
   u: UnitView,
   active: boolean,
 ): void {
+  // A stack falling to 0 shows no chip while it collapses.
+  if (u.count <= 0) return;
   const text = String(u.count);
   ctx.font = NUMBER_FONT;
   const w = Math.max(20, Math.ceil(ctx.measureText(text).width) + 10);
@@ -424,14 +587,33 @@ function drawGround(ctx: CanvasRenderingContext2D, scene: Scene): void {
     ctx.setLineDash([4, 3]);
     ctx.stroke();
     ctx.setLineDash([]);
+    // The ground's own icon at 1x, centred low in the hex (a 32 px icon
+    // fits a hex; 2x would not).
     const c = hexToStage(g.hex);
-    ctx.globalAlpha = 0.85;
-    ctx.font = "bold 11px Verdana, Geneva, sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "#1a1208";
-    ctx.fillText(g.glyph, c.x - 16, c.y - 12);
     ctx.globalAlpha = 1;
+    const icon = groundIcon(g.kind);
+    if (icon) {
+      // A feature just added grows up out of the ground in four steps.
+      const key = hexIndex(g.hex);
+      const t0 = scene.groundGrow.get(key);
+      const k = t0 === undefined ? 1 : (scene.now - t0) / GROUND_GROW_MS;
+      if (k >= 1 && t0 !== undefined) scene.groundGrow.delete(key);
+      const h = Math.round(
+        icon.height * Math.min(1, Math.ceil(Math.max(0, k) * 4) / 4),
+      );
+      if (h > 0)
+        ctx.drawImage(
+          icon,
+          0,
+          0,
+          icon.width,
+          h,
+          Math.round(c.x - icon.width / 2),
+          Math.round(c.y + 26 - h),
+          icon.width,
+          h,
+        );
+    }
   }
 }
 
@@ -448,6 +630,8 @@ function drawLinks(ctx: CanvasRenderingContext2D, scene: Scene): void {
     ctx.strokeStyle = "#0d0b08";
     ctx.lineWidth = 5;
     ctx.setLineDash([10, 6]);
+    // The dashes creep from the bearer to the far end.
+    ctx.lineDashOffset = scene.reduced ? 0 : -(Math.floor(scene.now / 60) % 16);
     ctx.beginPath();
     ctx.moveTo(a.x, ay);
     ctx.lineTo(b.x, by);
@@ -456,6 +640,22 @@ function drawLinks(ctx: CanvasRenderingContext2D, scene: Scene): void {
     ctx.lineWidth = 2.5;
     ctx.stroke();
     ctx.setLineDash([]);
+    ctx.lineDashOffset = 0;
+    if (!scene.reduced) {
+      // A gentle pulse travelling along the link every 1.6 s.
+      const k = (scene.now % 1600) / 1600;
+      if (k < 0.7) {
+        const q = k / 0.7;
+        const px = Math.round(a.x + (b.x - a.x) * q);
+        const py = Math.round(ay + (by - ay) * q);
+        ctx.fillStyle = "#0d0b08";
+        ctx.fillRect(px - 3, py - 3, 6, 6);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(px - 2, py - 2, 4, 4);
+        ctx.fillStyle = l.color;
+        ctx.fillRect(px - 1, py - 1, 2, 2);
+      }
+    }
     // A ring at the near end (the bearer).
     ctx.beginPath();
     ctx.arc(a.x, ay, 5, 0, Math.PI * 2);
@@ -503,7 +703,128 @@ function drawIntents(ctx: CanvasRenderingContext2D, scene: Scene): void {
   }
 }
 
+/** Condition icons popping on a stack, or fading off it. */
+function drawBadges(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  for (const b of scene.badges) {
+    const u = scene.units.get(b.stackId);
+    if (!u || !u.visible) continue;
+    drawBadge(ctx, b, u, scene.now);
+  }
+}
+
+function drawBadge(
+  ctx: CanvasRenderingContext2D,
+  b: Badge,
+  u: UnitView,
+  now: number,
+): void {
+  const k = (now - b.t0) / b.life;
+  if (k < 0 || k > 1) return;
+  let y = u.y - 64 - u.lift;
+  let r = 8;
+  if (b.mode === "land") {
+    // Drops in with a bounce, holds, then fades in quarter steps.
+    if (k < 0.25) {
+      const q = k / 0.25;
+      y -= Math.round((1 - q) * 16 - Math.sin(q * Math.PI) * 4);
+      r = q < 0.5 ? 10 : 8;
+    }
+    ctx.globalAlpha = k < 0.75 ? 1 : Math.ceil(((1 - k) / 0.25) * 4) / 4;
+  } else {
+    // Greys, rises and blinks away.
+    y -= Math.round(k * 12);
+    ctx.globalAlpha =
+      Math.floor(k * 16) % 2 === 0 ? Math.ceil((1 - k) * 4) / 4 : 0.25;
+  }
+  const x = Math.round(u.x);
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fillStyle = b.mode === "expire" ? "#8a8478" : b.color;
+  ctx.fill();
+  ctx.strokeStyle = b.bane ? "#5a0a0a" : "#0d0b08";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.fillStyle = "#0d0b08";
+  ctx.font = "bold 10px Verdana, Geneva, sans-serif";
+  ctx.fillText(b.glyph, x, y + 0.5);
+  if (b.mode === "expire") {
+    ctx.beginPath();
+    ctx.moveTo(x - 6, y + 6);
+    ctx.lineTo(x + 6, y - 6);
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+}
+
+/** The Command or item banner: a plaque that slides in from its side. */
+function drawBanners(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  for (const b of scene.banners) drawBanner(ctx, b, scene.now);
+}
+
+function drawBanner(
+  ctx: CanvasRenderingContext2D,
+  b: Banner,
+  now: number,
+): void {
+  const k = (now - b.t0) / b.life;
+  if (k < 0 || k > 1) return;
+  ctx.font = "bold 16px Georgia, serif";
+  const tw = Math.ceil(ctx.measureText(b.text).width);
+  const w = Math.max(160, tw + 56);
+  const h = 34;
+  const q = Math.min(1, k / 0.18);
+  const slide = 1 - (1 - (1 - q) * (1 - q));
+  const dir = b.side === "attacker" ? -1 : 1;
+  const x = Math.round(STAGE_W / 2 - w / 2 + dir * slide * (STAGE_W / 2));
+  const y = 10;
+  ctx.globalAlpha = k > 0.8 ? Math.ceil(((1 - k) / 0.2) * 4) / 4 : 1;
+  // Pennant tails, then the plaque: dark edge, coloured rule, wood.
+  ctx.fillStyle = "#0d0b08";
+  ctx.fillRect(x - 14, y + 6, 18, h - 12);
+  ctx.fillRect(x + w - 4, y + 6, 18, h - 12);
+  ctx.fillStyle = "#7a2410";
+  ctx.fillRect(x - 12, y + 8, 14, h - 16);
+  ctx.fillRect(x + w - 2, y + 8, 14, h - 16);
+  ctx.fillStyle = "#0d0b08";
+  ctx.fillRect(x, y, w, h);
+  ctx.fillStyle = b.color;
+  ctx.fillRect(x + 2, y + 2, w - 4, h - 4);
+  ctx.fillStyle = "#3a2414";
+  ctx.fillRect(x + 4, y + 4, w - 8, h - 8);
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = b.color;
+  ctx.fillText(b.text, x + w / 2, y + h / 2 + 1);
+  ctx.font = "bold 8px Verdana, Geneva, sans-serif";
+  const sub = b.sub.toUpperCase();
+  const sw = Math.ceil(ctx.measureText(sub).width) + 10;
+  ctx.fillStyle = "#0d0b08";
+  ctx.fillRect(Math.round(x + w / 2 - sw / 2), y + h - 4, sw, 10);
+  ctx.fillStyle = b.color;
+  ctx.fillText(sub, x + w / 2, y + h + 1);
+  // Sparks fly off the corners as it lands.
+  if (k > 0.15 && k < 0.45) {
+    const d = 4 + ((k - 0.15) / 0.3) * 10;
+    for (const [sx, sy] of [
+      [x, y],
+      [x + w, y],
+      [x, y + h],
+      [x + w, y + h],
+    ] as const) {
+      pixLine(ctx, sx - d, sy, sx - d + 3, sy, 2, "#fff0a0");
+      pixLine(ctx, sx + d - 3, sy, sx + d, sy, 2, "#fff0a0");
+      pixLine(ctx, sx, sy - d, sx, sy - d + 3, 2, "#fff0a0");
+      pixLine(ctx, sx, sy + d - 3, sx, sy + d, 2, "#fff0a0");
+    }
+  }
+  ctx.globalAlpha = 1;
+}
+
 function drawEffects(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  drawFx(ctx, scene.fx, scene.now);
+  drawBadges(ctx, scene);
   for (const p of scene.poofs) {
     const t = (scene.now - p.t0) / p.life;
     if (t < 0 || t > 1) continue;
@@ -556,7 +877,7 @@ function drawEffects(ctx: CanvasRenderingContext2D, scene: Scene): void {
     ctx.font = t.big
       ? "bold 18px Verdana, Geneva, sans-serif"
       : "bold 13px Verdana, Geneva, sans-serif";
-    const y = t.y - k * 22;
+    const y = t.still ? t.y : t.y - k * 22;
     ctx.lineWidth = 4;
     ctx.strokeStyle = "#0d0b08";
     ctx.lineJoin = "round";
@@ -601,7 +922,7 @@ export function renderBattle(
   }
   drawables.sort((a, b) => a.y - b.y);
   for (const d of drawables) {
-    if (d.kind === "unit") drawUnit(ctx, art, d.unit);
+    if (d.kind === "unit") drawUnit(ctx, art, d.unit, scene.now, scene.reduced);
     else drawObstacle(ctx, art, d.index);
   }
   drawLinks(ctx, scene);
@@ -612,4 +933,5 @@ export function renderBattle(
   drawSwapBadges(ctx, scene);
   drawStrikeArrow(ctx, scene);
   drawEffects(ctx, scene);
+  drawBanners(ctx, scene);
 }
