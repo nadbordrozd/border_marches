@@ -120,6 +120,7 @@ const LONG_SHADOW = [
   "long-shadow-2",
   "long-shadow-3",
 ] as const;
+const VANGUARD = ["vanguard-1", "vanguard-2", "vanguard-3"] as const;
 
 const ROWS: SkillDef[] = [
   schoolSkill("greencraft", "Greencraft", "bloom"),
@@ -213,6 +214,20 @@ const ROWS: SkillDef[] = [
         'Abilities of all your stacks that say "adjacent" reach 2 hexes.',
       ],
       (r) => [{ kind: "switch", id: LONG_SHADOW[r - 1] as RuleSwitchId }],
+    ),
+  },
+  {
+    // The deployment phase before round 1 (core/battle/deploy.ts).
+    id: "vanguard",
+    name: "Vanguard",
+    family: "army",
+    ranks: steps(
+      [
+        "Before round 1 you may rearrange your stacks within your deployment column.",
+        "Before round 1 you may rearrange your stacks within your first 2 columns.",
+        "Before round 1 you may rearrange your stacks within your first 3 columns.",
+      ],
+      (r) => [{ kind: "switch", id: VANGUARD[r - 1] as RuleSwitchId }],
     ),
   },
   {
@@ -430,10 +445,7 @@ const ROWS: SkillDef[] = [
  * tests/data/catalogue-coverage.test.ts, reads this). Offers never draw
  * them.
  */
-export const DEFERRED_SKILLS: Readonly<Partial<Record<SkillId, string>>> = {
-  vanguard:
-    "Needs a deployment step before round 1 where the player (and the battle AI) rearranges stacks; the battle screen has no such phase yet.",
-};
+export const DEFERRED_SKILLS: Readonly<Partial<Record<SkillId, string>>> = {};
 
 function AMBUSH_1(): HeroEffect {
   return {

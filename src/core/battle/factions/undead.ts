@@ -5,7 +5,8 @@
  * opt into it.
  */
 
-import { isAdjacent, sameHex } from "../hex.ts";
+import { withinReach } from "../abilities.ts";
+import { sameHex } from "../hex.ts";
 import type { Hex } from "../hex.ts";
 import { registerAbility, registerAct } from "../registry.ts";
 import type { StackId } from "../types.ts";
@@ -180,7 +181,7 @@ export function registerUndead(): void {
       const me = stackOf(state, actorId);
       const e = stackOf(state, targetStack(t[0]) ?? "");
       if (!me || !e || e.side === me.side) return "choose an enemy stack";
-      return isAdjacent(me.hex, e.hex) ? null : "it must be adjacent";
+      return withinReach(state, me, me, e) ? null : "it must be adjacent";
     },
     aiTargets: (state, actorId) => oneEach(enemiesOf(state, actorId)),
     resolve(fx, actorId, t) {

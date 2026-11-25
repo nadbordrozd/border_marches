@@ -12,6 +12,7 @@ import {
   stepHex,
 } from "../hex.ts";
 import type { Hex } from "../hex.ts";
+import { withinReach } from "../abilities.ts";
 import { registerAbility, registerAct } from "../registry.ts";
 import type { AreaRef } from "../registry.ts";
 import { stackTotalHp } from "../resolve.ts";
@@ -178,7 +179,7 @@ export function registerGoblins(): void {
       const me = stackOf(state, actorId);
       const s = stackOf(state, targetStack(t[0]) ?? "");
       if (!me || !s || s.id === me.id) return "choose another stack";
-      if (!isAdjacent(me.hex, s.hex)) return "it must be adjacent";
+      if (!withinReach(state, me, me, s)) return "it must be adjacent";
       const limit = 40 * me.count;
       const hp = stackTotalHp(s);
       return hp <= limit ? null : `limit ${limit} HP, the stack has ${hp}`;

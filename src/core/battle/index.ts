@@ -104,9 +104,25 @@ export {
   MAX_STACKS_PER_SIDE,
   createBattle,
   deploymentHexes,
+  fieldState,
   generateObstacles,
   stackFightValue,
 } from "./setup.ts";
+export {
+  DEPLOY_RULES,
+  aiDeployment,
+  autoDeploy,
+  deploy,
+  deployBlocked,
+  deployColumns,
+  deployError,
+  deployZone,
+  deployZoneColumns,
+  deployedHexes,
+  deployingSides,
+  hasDeployment,
+  redeploy,
+} from "./deploy.ts";
 export {
   DEFAULT_AI_WEIGHTS,
   aiValuePerHp,

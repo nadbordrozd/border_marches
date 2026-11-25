@@ -3,9 +3,8 @@
  * abilities, the three Drills, Challenged, and the two Commands.
  */
 
-import { isAlive } from "../abilities.ts";
+import { isAlive, withinReach } from "../abilities.ts";
 import { canShoot } from "../engine.ts";
-import { isAdjacent } from "../hex.ts";
 import {
   registerAbility,
   registerAct,
@@ -95,7 +94,7 @@ export function registerHumans(): void {
       if (!me || !other || other.id === me.id)
         return "choose another friendly stack";
       if (other.side !== me.side) return "choose a friendly stack";
-      if (!isAdjacent(me.hex, other.hex)) return "it must be adjacent";
+      if (!withinReach(state, me, me, other)) return "it must be adjacent";
       return null;
     },
     aiTargets: (state, actorId) =>
@@ -151,7 +150,7 @@ export function registerHumans(): void {
     defenseModifier(ctx, owner) {
       const d = ctx.defender;
       if (owner.id === d.id || owner.side !== d.side) return null;
-      if (!isAdjacent(owner.hex, d.hex)) return null;
+      if (!withinReach(ctx.state, owner, owner, d)) return null;
       return {
         source: "shield-wall",
         label: "Shield Wall",
@@ -216,12 +215,16 @@ export function registerHumans(): void {
       const d = ctx.defender;
       if (d.id === owner.id || a.id === owner.id) return null;
       if (d.side !== owner.side || a.side === owner.side) return null;
-      if (!isAdjacent(owner.hex, a.hex) || !isAdjacent(owner.hex, d.hex))
+      if (
+        !withinReach(ctx.state, owner, owner, a) ||
+        !withinReach(ctx.state, owner, owner, d)
+      )
         return null;
       const me = owner.id;
       return (fx) => {
         if (!fx.isAlive(a.id) || !fx.isAlive(me)) return;
-        if (!isAdjacent(fx.stack(me).hex, fx.stack(a.id).hex)) return;
+        const now = fx.stack(me);
+        if (!withinReach(fx.state, now, now, fx.stack(a.id))) return;
         if (!fx.spendRetaliation(me)) return;
         fx.strike(me, a.id, { kind: "retaliation", label: "Bodyguard" });
       };

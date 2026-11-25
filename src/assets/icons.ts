@@ -202,6 +202,39 @@ const SMALL_BY_ID: ReadonlyMap<string, IconAsset> = new Map(
   SMALL_ICON_ASSETS.map((asset) => [`${asset.kind}:${asset.id}`, asset]),
 );
 
+/** A creature page that borrows a checked-in icon (SPELL_ICON_ALIASES). */
+export interface SpellIconAlias {
+  readonly name: string;
+  readonly school: SchoolId;
+  readonly kind: "spell" | "school";
+  readonly id: string;
+}
+
+/**
+ * Creature pages outside the catalogue (RULES_V2 2.4 budget: Mend,
+ * Thunderclap, Last Breath) borrow the icon of the catalogue page with the
+ * same shape, or their school's emblem, framed in their school's colour.
+ * No new art: these reuse checked-in icons.
+ */
+export const SPELL_ICON_ALIASES: Readonly<Record<string, SpellIconAlias>> = {
+  // Broadside's shape: Harm to each stack on a hex and the six around it.
+  thunderclap: {
+    name: "Thunderclap",
+    school: "storm",
+    kind: "spell",
+    id: "broadside",
+  },
+  // Regrow's shape: Heal, reviving.
+  mend: { name: "Mend", school: "bloom", kind: "spell", id: "regrow" },
+  // No Hush page is a plain Harm: the school emblem.
+  "last-breath": {
+    name: "Last Breath",
+    school: "hush",
+    kind: "school",
+    id: "hush",
+  },
+};
+
 export interface IconRef {
   readonly kind: IconKind;
   /** The normalised content id. */
@@ -228,6 +261,20 @@ export function iconFor(
   size: 16 | 32 = 32,
 ): IconRef {
   const id = contentId(idOrName);
+  const alias =
+    kind === "spell" && Object.hasOwn(SPELL_ICON_ALIASES, id)
+      ? SPELL_ICON_ALIASES[id]
+      : undefined;
+  if (alias !== undefined) {
+    const borrowed = iconFor(alias.kind, alias.id, size);
+    return {
+      ...borrowed,
+      kind,
+      id,
+      name: alias.name,
+      frame: ICON_FRAMES[alias.school],
+    };
+  }
   const content = iconContent(kind, id);
   const own =
     (size === 16 ? SMALL_BY_ID.get(`${kind}:${id}`) : undefined) ??

@@ -127,6 +127,10 @@ export const RULE_SWITCH_IDS = [
   "long-shadow-1", // Long Shadow ranks 1-3
   "long-shadow-2",
   "long-shadow-3",
+  // Deployment before round 1 (core/battle/deploy.ts deployColumns)
+  "vanguard-1", // Vanguard ranks 1-3: columns to rearrange within
+  "vanguard-2",
+  "vanguard-3",
   // Condition kinds (core/magic/kinds.ts, core/battle/standard.ts)
   "cold-hands",
   "double-or-nothing",

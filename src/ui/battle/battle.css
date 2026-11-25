@@ -1126,3 +1126,25 @@
     padding-right: 3px;
   }
 }
+
+/* Bead bzc.34: the deployment phase (Vanguard) in the bottom panel. */
+.bm-deploy {
+  display: grid;
+  gap: 4px;
+}
+
+.bm-deploy-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.bm-deploy-buttons .bm-btn {
+  min-width: 0;
+  padding: 4px 10px;
+}
+
+.bm-deploy-why {
+  color: #ffb070;
+}

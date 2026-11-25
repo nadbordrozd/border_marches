@@ -140,16 +140,36 @@ export function satisfies(hero: HeroState, r: VowRestriction): boolean {
 }
 
 /**
- * A creature's tags (`wreck`, ...), read from its data row's optional
- * `tags` list (the factions bead fills them); none when absent.
+ * A creature's tags: its remains tag (`corpse`, `bones`, `wreck`, `sweets`
+ * or `nothing`; CONTENT_SPELLS.md ground table) from its data row's `tags`.
+ * A row without tags leaves a `corpse`, as in battle (core/battle/setup.ts).
+ * Unknown ids have none.
  */
 export function creatureTags(id: string): readonly string[] {
-  const def = (isCreatureId(id) ? getCreature(id) : undefined) as
-    { tags?: unknown } | undefined;
-  const tags = def?.tags;
-  return Array.isArray(tags)
-    ? tags.filter((t): t is string => typeof t === "string")
-    : [];
+  if (!isCreatureId(id)) return [];
+  return [getCreature(id).tags?.remains ?? "corpse"];
+}
+
+/**
+ * Why `hero` may not take `creature` into its army (a vow's barred tag,
+ * Vow of Flesh and Blood), or null when it may.
+ */
+export function vowBarsCreature(
+  hero: HeroState,
+  creature: string,
+): string | null {
+  const tags = creatureTags(creature);
+  for (const f of hero.feats ?? []) {
+    const def = findFeat(f);
+    const r = def?.restriction;
+    if (def === undefined || r?.kind !== "barred-tag") continue;
+    if (!tags.includes(r.tag)) continue;
+    const name = isCreatureId(creature)
+      ? getCreature(creature).plural
+      : creature;
+    return `${hero.name} has sworn the ${def.name}: ${name} (tagged ${r.tag}) may not join the army`;
+  }
+  return null;
 }
 
 /** Whether the hero's vows leave a worn slot kind usable. */

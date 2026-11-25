@@ -145,6 +145,7 @@ export {
   assemble,
   backpackSlotsUsed,
   canCarry,
+  chooseUnspentPage,
   destroyArtifact,
   emptyWorn,
   equip,
@@ -161,7 +162,13 @@ export {
   wearError,
   type ItemRef,
 } from "./artifacts.ts";
-export { heroBattleProfile, type HeroBattleProfile } from "./battle-profile.ts";
+export {
+  heroBattleProfile,
+  holdsUnspentPage,
+  unspentPageChoices,
+  unspentPageOf,
+  type HeroBattleProfile,
+} from "./battle-profile.ts";
 export {
   applyBattleResult,
   battlePlayers,

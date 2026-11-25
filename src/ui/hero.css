@@ -587,6 +587,26 @@
   cursor: help;
 }
 
+/* Bead bzc.34: the page The Unspent Page keeps, and its chooser. */
+.hs-pages .hs-unspent {
+  outline: 2px solid var(--gm-gold);
+  outline-offset: 1px;
+}
+
+.hs-unspent-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.hs-unspent-select {
+  font: inherit;
+  min-width: 0;
+  max-width: 150px;
+}
+
 .hs-middle .hs-scrolls {
   grid-template-columns: repeat(4, 48px);
 }

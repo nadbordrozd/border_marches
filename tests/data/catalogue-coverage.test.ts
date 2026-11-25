@@ -24,7 +24,7 @@ const ids = (kind: keyof typeof catalogue): string[] =>
   Object.keys(catalogue[kind]);
 
 describe("catalogue coverage", () => {
-  it("skills: 24, each a row or deferred with a reason", () => {
+  it("skills: all 24 rows (none deferred)", () => {
     expect(ids("skill")).toHaveLength(24);
     expect([...SKILL_IDS].sort()).toEqual(ids("skill").sort());
     for (const id of ids("skill")) {
@@ -34,7 +34,7 @@ describe("catalogue coverage", () => {
         expect(findSkill(id)).toBeUndefined();
       } else expect(findSkill(id), id).toBeDefined();
     }
-    expect(Object.keys(DEFERRED_SKILLS)).toEqual(["vanguard"]);
+    expect(Object.keys(DEFERRED_SKILLS)).toEqual([]);
   });
 
   it("feats: all 28 rows, none a vow", () => {

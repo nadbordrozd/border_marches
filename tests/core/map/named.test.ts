@@ -138,8 +138,8 @@ const SNAPSHOT: Record<
   }
 > = {
   "keepers-toll": {
-    base: "b20051c7",
-    built: "37b01217",
+    base: "16dbae42",
+    built: "2cc300b2",
     objects: 190,
     towns: [
       ["town-1", 7, 7, null],
@@ -150,8 +150,8 @@ const SNAPSHOT: Record<
     ],
   },
   "hourglass-marches": {
-    base: "09da9dda",
-    built: "4a79b507",
+    base: "ac426544",
+    built: "c698b0a9",
     objects: 375,
     towns: [
       ["town-1", 30, 60, null],

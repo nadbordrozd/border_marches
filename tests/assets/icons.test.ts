@@ -106,6 +106,20 @@ describe("content icons", () => {
     expect(ref.frame).toBeNull();
   });
 
+  it("gives creature pages a borrowed icon in their school's frame", () => {
+    const clap = iconFor("spell", "Thunderclap");
+    expect(clap.fallback).toBe(false);
+    expect(clap.name).toBe("Thunderclap");
+    expect(clap.asset).toBe(iconFor("spell", "broadside").asset);
+    expect(clap.frame).toBe(ICON_FRAMES.storm);
+    expect(iconFor("spell", "mend").asset).toBe(
+      iconFor("spell", "regrow").asset,
+    );
+    const breath = iconFor("spell", "last-breath");
+    expect(breath.asset).toBe(iconFor("school", "hush").asset);
+    expect([breath.fallback, breath.frame]).toEqual([false, ICON_FRAMES.hush]);
+  });
+
   it("has 16 px overlays for conditions and 32 px elsewhere", () => {
     expect(SMALL_ICON_ASSETS).toHaveLength(25);
     const small = iconFor("condition", "Burning", 16);

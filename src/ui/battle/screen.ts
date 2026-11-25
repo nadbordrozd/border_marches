@@ -15,11 +15,13 @@ import {
   roundLimitOf,
   activeStack,
   applyAction,
+  autoDeploy,
   battleResult,
   blockingHexes,
   chooseAiAction,
   compareTurnOrder,
   createBattle,
+  deployingSides,
   enemyIntents,
   enemySide,
   engineSetupFromGame,
@@ -36,6 +38,7 @@ import type {
   HistoryEntry,
   BattleEvent,
   BattleResult as EngineBattleResult,
+  BattleSetup as EngineBattleSetup,
   BattleSide,
   BattleStack,
   BattleState,
@@ -118,6 +121,7 @@ import type {
   Hex,
 } from "../../core/battle/index.ts";
 import { actionBar, actionForKey } from "./actions.ts";
+import { DeployPhase } from "./deploy.ts";
 import type { ActionIcon, BarAction, BarContext } from "./actions.ts";
 import { renderActPanel, renderActionBar, showActionTip } from "./actionbar.ts";
 import { iconElement } from "../icons.ts";
@@ -289,7 +293,14 @@ class BattleScreen {
   private readonly maxRounds: number;
 
   private state: BattleState;
-  private readonly startEvents: readonly BattleEvent[];
+  private startEvents: readonly BattleEvent[];
+  /** The deployment phase before round 1 (Vanguard), while it lasts. */
+  private deploying: DeployPhase | null = null;
+  private deployDone: ((setup: EngineBattleSetup) => void) | null = null;
+  /** Where a drag started during deployment. */
+  private dragFrom: Hex | null = null;
+  /** A drag just ended: the click that follows it is not a pick. */
+  private suppressClick = false;
   private scene: Scene;
   private animator: Animator;
   private art: BattleArt | null = null;
@@ -319,9 +330,34 @@ class BattleScreen {
       this.state = options.startState;
       this.startEvents = [];
     } else {
-      const start = createBattle(engineSetupFromGame(setup));
-      this.state = start.state;
-      this.startEvents = start.events;
+      // Deployment (Vanguard): the AI places the sides it plays; the
+      // player's deploying side gets the phase, unless auto-resolving.
+      const engineSetup = engineSetupFromGame(setup);
+      const sides = deployingSides(engineSetup);
+      const mine = this.auto
+        ? undefined
+        : sides.find((s) => this.playerSides.has(s));
+      const placed = autoDeploy(
+        engineSetup,
+        sides.filter((s) => s !== mine),
+      );
+      if (mine !== undefined) {
+        this.deploying = new DeployPhase(placed, mine, {
+          changed: (state) => {
+            this.state = state;
+            syncScene(this.scene, state);
+            this.refreshHud();
+            this.updateOverlay();
+          },
+          done: (s) => this.deployDone?.(s),
+        });
+        this.state = this.deploying.state();
+        this.startEvents = [];
+      } else {
+        const start = createBattle(placed);
+        this.state = start.state;
+        this.startEvents = start.events;
+      }
     }
     this.scene = createScene(this.state);
     this.animator = new Animator(this.scene, {
@@ -378,6 +414,10 @@ class BattleScreen {
       this.updateHover();
     });
     this.on<MouseEvent>(this.canvas, "click", (e) => this.onClick(e));
+    this.on<PointerEvent>(this.canvas, "pointerdown", (e) =>
+      this.onPointerDown(e),
+    );
+    this.on<PointerEvent>(this.canvas, "pointerup", (e) => this.onPointerUp(e));
     this.on<MouseEvent>(this.canvas, "contextmenu", (e) =>
       this.onContextMenu(e),
     );
@@ -446,6 +486,7 @@ class BattleScreen {
     this.options.onReady?.();
 
     let reason: EngineBattleResult["reason"] = "eliminated";
+    if (this.deploying !== null) await this.runDeployment();
     if (this.startEvents.length > 0) {
       await this.animate(this.startEvents, this.state, this.state);
     }
@@ -486,6 +527,29 @@ class BattleScreen {
     if (this.options.showResult !== false) await this.showResult(engine);
     this.destroy();
     return { result, engine };
+  }
+
+  /**
+   * The deployment phase: waits for the player's "Start battle", then
+   * creates the battle on the deployed field (battle-start rules run
+   * here, after deployment, as RULES_V2 4.6 orders them).
+   */
+  private async runDeployment(): Promise<void> {
+    const setup = await new Promise<EngineBattleSetup>((resolve) => {
+      this.deployDone = resolve;
+      this.refreshHud();
+      this.updateOverlay();
+    });
+    this.deployDone = null;
+    this.deploying = null;
+    this.dragFrom = null;
+    const start = createBattle(setup);
+    this.state = start.state;
+    this.startEvents = start.events;
+    syncScene(this.scene, this.state);
+    this.canvas.style.cursor = "default";
+    this.refreshHud();
+    this.updateOverlay();
   }
 
   private async animate(
@@ -605,9 +669,39 @@ class BattleScreen {
     this.updateHover();
   }
 
+  /** The hex under a pointer event (deployment's drag and click). */
+  private hexOf(e: MouseEvent): Hex | null {
+    return pointAtField(this.state, this.toStage(e)).hex;
+  }
+
+  private onPointerDown(e: PointerEvent): void {
+    if (this.deploying === null || e.button !== 0) return;
+    const h = this.hexOf(e);
+    this.dragFrom = this.deploying.canDrag(h) ? h : null;
+  }
+
+  private onPointerUp(e: PointerEvent): void {
+    if (this.deploying === null || this.dragFrom === null) return;
+    const from = this.dragFrom;
+    const to = this.hexOf(e);
+    this.dragFrom = null;
+    // A press and release on one hex is a click (handled by onClick).
+    if (to === null || sameHex(from, to)) return;
+    this.deploying.drag(from, to);
+    this.suppressClick = true;
+    this.updateHover();
+  }
+
   private onClick(e: MouseEvent): void {
     if (!this.info.hidden) {
       this.closeInfo();
+      return;
+    }
+    if (this.deploying !== null) {
+      if (this.suppressClick) this.suppressClick = false;
+      else this.deploying.click(this.hexOf(e));
+      this.pointer = this.toStage(e);
+      this.updateHover();
       return;
     }
     this.pointer = this.toStage(e);
@@ -652,6 +746,16 @@ class BattleScreen {
 
   private onKey(e: KeyboardEvent): void {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (this.deploying !== null) {
+      // Deployment: Enter starts the battle, Escape puts a stack back.
+      if (e.key === "Enter") this.deploying.start();
+      else if (e.key === "Escape") {
+        if (!this.info.hidden) this.closeInfo();
+        else this.deploying.cancelSelection();
+        this.updateHover();
+      } else if (e.key === "s" || e.key === "S") this.cycleSpeed();
+      return;
+    }
     if (e.key === "Escape") {
       if (this.aiming) this.cancelAim();
       else if (this.afterStep) this.cancelAfter();
@@ -708,6 +812,15 @@ class BattleScreen {
 
   private updateHover(): void {
     const at = this.pointer ? pointAtField(this.state, this.pointer) : null;
+    if (this.deploying !== null) {
+      this.deploying.point(at?.hex ?? null);
+      this.intent = { kind: "none" };
+      this.canvas.style.cursor = this.deploying.cursor();
+      this.updateOverlay();
+      this.renderPanel();
+      this.placeTip();
+      return;
+    }
     const modal =
       this.casting !== null || this.aiming !== null || this.afterStep !== null;
     this.intent =
@@ -744,6 +857,10 @@ class BattleScreen {
   }
 
   private updateOverlay(): void {
+    if (this.deploying !== null) {
+      this.scene.overlay = this.deploying.overlay();
+      return;
+    }
     const marks = new Map<number, HexMark>();
     const playerTurn = this.pendingAction !== null && this.isPlayerTurn();
     const active = activeStack(this.state);
@@ -1045,6 +1162,9 @@ class BattleScreen {
   }
 
   private refreshBar(): void {
+    // No turn during deployment: the bar keeps its room but shows nothing.
+    this.actionBarEl.style.visibility = this.deploying ? "hidden" : "";
+    if (this.deploying) return;
     this.syncHearten();
     const ctx = this.barContext();
     const key = JSON.stringify(ctx);
@@ -1510,8 +1630,14 @@ class BattleScreen {
       { ...s, round: this.scene.round || s.round },
       this.playerSides.size === 1 ? this.playerSide() : null,
     );
-    const round = el("span", "bm-round", limit.label);
-    round.title = limit.tooltip;
+    const round = el(
+      "span",
+      "bm-round",
+      this.deploying ? "Deployment" : limit.label,
+    );
+    round.title = this.deploying
+      ? "Before round 1: rearrange your stacks (Vanguard)."
+      : limit.tooltip;
     const verdict = el(
       "span",
       `bm-limit${limit.roundsLeft <= 3 ? " bm-limit-near" : ""}${
@@ -1601,6 +1727,10 @@ class BattleScreen {
   private renderPanel(): void {
     const p = this.panel;
     p.replaceChildren();
+    if (this.deploying !== null) {
+      p.append(this.deploying.panel());
+      return;
+    }
     const it = this.intent;
     if (it.kind === "attack") {
       const s = summarizePreview(this.state, it.preview);

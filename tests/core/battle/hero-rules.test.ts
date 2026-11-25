@@ -11,6 +11,8 @@ import {
   canShoot,
   computeBreakdown,
   conditionKind,
+  deployColumns,
+  deployZone,
   heroActError,
   neighbors,
   registerAct,
@@ -687,6 +689,37 @@ describe("ability reach (Long Shadow)", () => {
     const s = withRules(board(), "attacker", ["long-shadow-3"]);
     for (const id of ["a0", "a1", "a2"])
       expect(abilityReach(s, stack(s, id))).toBe(2);
+  });
+});
+
+describe("deployment (Vanguard)", () => {
+  const army = (rules: string[]) => ({
+    hero: { attack: 0, defense: 0 },
+    rules,
+    stacks: [{ creature: PIKE, count: 5 }],
+  });
+  const setup = (rules: string[]) => ({
+    seed: 1,
+    obstacles: [],
+    attacker: army(rules),
+    defender: { hero: null, stacks: [{ creature: PIKE, count: 5 }] },
+  });
+  const cols = (rules: string[]) => [
+    ...new Set(deployZone(setup(rules), "attacker").map((h) => h.col)),
+  ];
+
+  rule("vanguard-1", "rearrange within the deployment column", () => {
+    expect(deployColumns(army(["vanguard-1"]))).toBe(1);
+    expect(cols(["vanguard-1"])).toEqual([0]);
+    expect(deployColumns(army([]))).toBe(0);
+  });
+
+  rule("vanguard-2", "within the first 2 columns", () => {
+    expect(cols(["vanguard-2"])).toEqual([0, 1]);
+  });
+
+  rule("vanguard-3", "within the first 3 columns", () => {
+    expect(cols(["vanguard-3"])).toEqual([0, 1, 2]);
   });
 });
 

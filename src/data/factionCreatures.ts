@@ -12,6 +12,12 @@ const UNDEAD_TAGS = {
   cannotBear: ["heartened", "shaken"],
 } as const;
 
+/**
+ * Every Realm and Horde creature leaves a `corpse` and bears every
+ * condition (FACTION_HUMANS.md and FACTION_GOBLINS.md section 3).
+ */
+const LIVING_TAGS = { remains: "corpse", cannotBear: [] } as const;
+
 /** Creature casters of all three factions share these numbers. */
 const caster = (...pages: string[]) => ({
   pages,
@@ -35,6 +41,7 @@ export const HUMAN_CREATURES: readonly CreatureDef[] = [
     shots: 0,
     ability: null,
     abilities: ["attend"],
+    tags: LIVING_TAGS,
     growth: 14,
     cost: { gold: 45 },
     fightValue: 65,
@@ -54,6 +61,7 @@ export const HUMAN_CREATURES: readonly CreatureDef[] = [
     shots: 12,
     ability: null,
     abilities: ["covering-volley"],
+    tags: LIVING_TAGS,
     growth: 9,
     cost: { gold: 115 },
     fightValue: 109,
@@ -73,6 +81,7 @@ export const HUMAN_CREATURES: readonly CreatureDef[] = [
     shots: 0,
     ability: null,
     abilities: ["shield-wall"],
+    tags: LIVING_TAGS,
     growth: 7,
     cost: { gold: 240 },
     fightValue: 211,
@@ -92,6 +101,7 @@ export const HUMAN_CREATURES: readonly CreatureDef[] = [
     shots: 0,
     ability: null,
     abilities: [],
+    tags: LIVING_TAGS,
     caster: caster("mend", "share"),
     growth: 4,
     cost: { gold: 400, essence: 1 },
@@ -112,6 +122,7 @@ export const HUMAN_CREATURES: readonly CreatureDef[] = [
     shots: 0,
     ability: "charge",
     abilities: ["charge"],
+    tags: LIVING_TAGS,
     growth: 2,
     cost: { gold: 1050, ore: 2 },
     fightValue: 875,
@@ -131,6 +142,7 @@ export const HUMAN_CREATURES: readonly CreatureDef[] = [
     shots: 0,
     ability: null,
     abilities: ["stand-fast", "paragon"],
+    tags: LIVING_TAGS,
     growth: 1,
     cost: { gold: 3500, ore: 3, essence: 2 },
     fightValue: 2277,
@@ -277,6 +289,7 @@ export const GOBLIN_CREATURES: readonly CreatureDef[] = [
     shots: 0,
     ability: null,
     abilities: ["cannonball"],
+    tags: LIVING_TAGS,
     growth: 20,
     cost: { gold: 40 },
     fightValue: 52,
@@ -296,6 +309,7 @@ export const GOBLIN_CREATURES: readonly CreatureDef[] = [
     shots: 8,
     ability: null,
     abilities: ["bomb"],
+    tags: LIVING_TAGS,
     growth: 10,
     cost: { gold: 110 },
     fightValue: 109,
@@ -315,6 +329,7 @@ export const GOBLIN_CREATURES: readonly CreatureDef[] = [
     shots: 0,
     ability: null,
     abilities: ["worry"],
+    tags: LIVING_TAGS,
     growth: 8,
     cost: { gold: 190 },
     fightValue: 136,
@@ -334,6 +349,7 @@ export const GOBLIN_CREATURES: readonly CreatureDef[] = [
     shots: 0,
     ability: null,
     abilities: [],
+    tags: LIVING_TAGS,
     caster: caster("thunderclap", "set-off"),
     growth: 4,
     cost: { gold: 380, essence: 1 },
@@ -354,6 +370,7 @@ export const GOBLIN_CREATURES: readonly CreatureDef[] = [
     shots: 0,
     ability: null,
     abilities: ["hurl"],
+    tags: LIVING_TAGS,
     growth: 2,
     cost: { gold: 950, wood: 3 },
     fightValue: 873,
@@ -373,6 +390,7 @@ export const GOBLIN_CREATURES: readonly CreatureDef[] = [
     shots: 0,
     ability: null,
     abilities: ["stomp"],
+    tags: LIVING_TAGS,
     growth: 1,
     cost: { gold: 2500, wood: 5, ore: 3 },
     fightValue: 1896,

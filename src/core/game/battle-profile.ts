@@ -99,6 +99,16 @@ export function unspentPageOf(hero: HeroState): string | undefined {
   return highestTierPage(hero.pages, pageInfo);
 }
 
+/** The pages The Unspent Page may keep: the battle pages in the book. */
+export function unspentPageChoices(hero: HeroState): string[] {
+  return hero.pages.filter((id) => pageInfo(id) !== undefined);
+}
+
+/** Whether the hero holds The Unspent Page's rule (the Marvel). */
+export function holdsUnspentPage(hero: HeroState): boolean {
+  return ruleSwitches(hero).includes("unspent-page");
+}
+
 /** The battle profile of a hero. Pure. */
 export function heroBattleProfile(hero: HeroState): HeroBattleProfile {
   const stats = heroStats(hero);

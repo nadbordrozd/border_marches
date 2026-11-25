@@ -184,8 +184,21 @@ function battleStart(fx: Resolver, setup: BattleSetup): void {
 /**
  * Creates a battle and starts round 1 (or `startRound`): the returned state
  * waits for the first stack's action; events hold roundStart and turnStart.
+ * Deployment (Vanguard, core/battle/deploy.ts) comes before this: it sets
+ * the stacks' hexes in the setup, and battle-start rules then run here.
  */
 export function createBattle(setup: BattleSetup): BattleStep {
+  return startBattle(fieldState(setup), setup.startRound ?? 1, (fx) =>
+    battleStart(fx, setup),
+  );
+}
+
+/**
+ * The field before round 0 ends: stacks deployed, obstacles and ground
+ * laid, no battle-start rule run and no turn given (round 0). The
+ * deployment phase shows and validates this state.
+ */
+export function fieldState(setup: BattleSetup): BattleState {
   const stacks = [
     ...buildStacks("attacker", setup.attacker),
     ...buildStacks("defender", setup.defender),
@@ -250,7 +263,7 @@ export function createBattle(setup: BattleSetup): BattleStep {
       ? { magic: sideMagicFromSetup(army.magic) }
       : {}),
   });
-  const state: BattleState = {
+  return {
     seed: setup.seed,
     ground,
     sides: { attacker: side(setup.attacker), defender: side(setup.defender) },
@@ -267,7 +280,4 @@ export function createBattle(setup: BattleSetup): BattleStep {
     laws: [],
     ...(setup.roundLimit !== undefined ? { roundLimit: setup.roundLimit } : {}),
   };
-  return startBattle(state, setup.startRound ?? 1, (fx) =>
-    battleStart(fx, setup),
-  );
 }

@@ -20,6 +20,7 @@ import { backpackSize, scrollCaseSize } from "./effects.ts";
 import { fightValue } from "./progression.ts";
 import { digHere } from "./sites.ts";
 import { slotBarred } from "./hero.ts";
+import { holdsUnspentPage, unspentPageChoices } from "./battle-profile.ts";
 import { canAfford, subtractResources } from "./resources.ts";
 import {
   checkTurn,
@@ -175,6 +176,29 @@ export function equip(
   h.backpack.splice(index, 1);
   if (occupant !== null) h.backpack.splice(index, 0, occupant);
   h.worn[target] = id;
+  return success(next);
+}
+
+/**
+ * Chooses the page The Unspent Page keeps (CONTENT_ARTIFACTS: "chosen on
+ * the map"): a battle page in the hero's book, while the hero holds the
+ * rule. Without a choice the highest-tier page is kept (unspentPageOf).
+ */
+export function chooseUnspentPage(
+  state: GameState,
+  heroId: string,
+  page: string,
+): CommandResult {
+  const got = heroOnTurn(state, heroId);
+  if ("fail" in got) return got.fail;
+  if (!holdsUnspentPage(got.hero)) {
+    return fail("bad-item", "the hero does not wear The Unspent Page");
+  }
+  if (!unspentPageChoices(got.hero).includes(page)) {
+    return fail("bad-choice", `${page} is not a battle page in the book`);
+  }
+  const next = cloneState(state);
+  must(findHero(next, heroId), "hero").unspentPage = page;
   return success(next);
 }
 

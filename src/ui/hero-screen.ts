@@ -12,12 +12,14 @@ import {
   assemblable,
   assemble,
   backpackSize,
+  chooseUnspentPage,
   commandStrength,
   destroyArtifact,
   equip,
   handOver,
   heroSpecialty,
   heroStats,
+  holdsUnspentPage,
   manaRegen,
   maxMana,
   movementBreakdown,
@@ -29,6 +31,8 @@ import {
   specialtyText,
   statBreakdown,
   unequip,
+  unspentPageChoices,
+  unspentPageOf,
   useConsumable,
   xpForLevel,
   type CommandResult,
@@ -486,6 +490,13 @@ export async function openHeroScreen(
       scrolls,
     );
     left.append(el("h3", `Book (${h.pages.length} pages)`), bookPages(h));
+    if (holdsUnspentPage(h)) {
+      left.append(
+        unspentChooser(h, (page) =>
+          act(chooseUnspentPage(host.state(), heroId, page)),
+        ),
+      );
+    }
 
     body.replaceChildren(el("div.hs-columns", left, middle, right), details(h));
   };
@@ -577,13 +588,48 @@ function bookPages(h: HeroState): HTMLElement {
   if (h.pages.length === 0) return el("div.hs-dim", "No pages.");
   const power = heroStats(h).power;
   const box = el("div.hs-pages");
+  const kept = holdsUnspentPage(h) ? unspentPageOf(h) : undefined;
   for (const id of h.pages) {
     const icon = iconElement("spell", id);
     icon.tabIndex = 0;
+    if (id === kept) icon.classList.add("hs-unspent");
     setTip(icon, () => spellTip(id, power));
     box.append(icon);
   }
   return box;
+}
+
+/**
+ * The Unspent Page chooser: which battle page the Marvel keeps (chosen on
+ * the map; without a choice the highest-tier page).
+ */
+export function unspentChooser(
+  h: HeroState,
+  onPick: (page: string) => void,
+): HTMLElement {
+  const choices = unspentPageChoices(h);
+  const kept = unspentPageOf(h);
+  const row = el("label.hs-unspent-row", el("b", "Unspent Page keeps: "));
+  if (choices.length === 0) {
+    row.append(el("span.hs-dim", "no battle page in the book"));
+    return row;
+  }
+  const select = el("select.hs-unspent-select");
+  select.setAttribute("aria-label", "Page The Unspent Page keeps");
+  for (const id of choices) {
+    const o = el("option", isSpell(id) ? spellInfo(id).name : id);
+    o.value = id;
+    o.selected = id === kept;
+    select.append(o);
+  }
+  select.addEventListener("change", () => onPick(select.value));
+  row.append(select);
+  setTip(
+    row,
+    () =>
+      "The Unspent Page: this page is never spent in battle; it still costs mana and the round's cast. Without a choice the highest-tier page is kept.",
+  );
+  return row;
 }
 
 function signed(n: number): string {

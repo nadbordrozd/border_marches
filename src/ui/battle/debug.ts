@@ -25,7 +25,8 @@
  *   active=a2      hand the turn to that stack
  *   do=steps       a screenshot script, e.g. do=key:1;hover:d0 (runScript)
  *   armies=humans,undead   a faction battle with heroes (debug-armies.ts);
- *                  lean=magic gives both heroes the magic classes
+ *                  lean=magic gives both heroes the magic classes;
+ *                  vanguard=1|2|3 opens with the deployment phase
  */
 
 import { GROUND_TERRAINS } from "../../assets/manifest.ts";

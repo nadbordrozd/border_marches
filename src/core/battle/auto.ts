@@ -3,6 +3,7 @@
  */
 
 import { chooseAiAction } from "./ai.ts";
+import { autoDeploy } from "./deploy.ts";
 import { applyAction } from "./engine.ts";
 import { ROUND_LIMIT } from "./resolve.ts";
 import { createBattle } from "./setup.ts";
@@ -151,12 +152,15 @@ export function autoPlay(
   };
 }
 
-/** Creates the battle and auto-plays it to the end (auto-combat). */
+/**
+ * Creates the battle and auto-plays it to the end (auto-combat). A side
+ * with a deploy rule (Vanguard) takes the battle AI's placement first.
+ */
 export function runAutoBattle(
   setup: BattleSetup,
   options: AutoBattleOptions = {},
 ): AutoPlayResult {
-  const start = createBattle(setup);
+  const start = createBattle(autoDeploy(setup));
   const played = autoPlay(start.state, options);
   return { ...played, events: [...start.events, ...played.events] };
 }

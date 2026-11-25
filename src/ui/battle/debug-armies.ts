@@ -4,6 +4,8 @@
  * led by a level 6 hero of the faction (`lean=magic` for the magic
  * classes, default might) with its Command and a few pages. With `steps=N`
  * or `auto=1` the battle AI plays both sides (bead bzc.20's visual check).
+ * `vanguard=N` (and `enemyVanguard=N`) give a hero Vanguard rank N, so
+ * the battle opens with the deployment phase (bead bzc.34).
  */
 
 import { heroBattleProfile } from "../../core/game/battle-profile.ts";
@@ -36,6 +38,7 @@ function side(
   faction: Faction,
   lean: "might" | "magic",
   owner: number,
+  vanguard = 0,
 ): GameBattleSide {
   const def = NAMED_HEROES.find(
     (h) => h.faction === faction && getHeroClass(h.heroClass).leaning === lean,
@@ -48,6 +51,13 @@ function side(
   if (lean === "magic")
     hero.pages = [...new Set([...hero.pages, ...PAGES[faction]])];
   hero.mana = maxMana(hero);
+  // vanguard=N: the hero holds Vanguard rank N (the deployment phase).
+  if (vanguard >= 1 && vanguard <= 3) {
+    hero.skills = [
+      ...hero.skills.filter((k) => k.id !== "vanguard"),
+      { id: "vanguard", rank: vanguard },
+    ];
+  }
   return {
     owner,
     hero: {
@@ -79,11 +89,12 @@ export function factionBattleSetup(
     (FACTIONS as readonly string[]).includes(x ?? "");
   if (!isFaction(a) || !isFaction(d)) return null;
   const lean = params.get("lean") === "magic" ? "magic" : "might";
+  const rank = (key: string): number => Number(params.get(key) ?? "0") || 0;
   return {
     seed,
     terrain,
-    attacker: side(a, lean, 0),
-    defender: side(d, lean, 1),
+    attacker: side(a, lean, 0, rank("vanguard")),
+    defender: side(d, lean, 1, rank("enemyVanguard")),
     battle: { kind: "hero", objectId: "debug-hero-2", heroId: "debug-hero" },
   };
 }

@@ -58,7 +58,7 @@ import type { MapObject } from "../map/types.ts";
 import { createRng, deriveSeed } from "../rng.ts";
 import { canCarry, giveArtifact, giveScroll } from "./artifacts.ts";
 import { maxMana, schoolRank, vowRestrictions } from "./effects.ts";
-import { gainXp, skillBarred } from "./hero.ts";
+import { gainXp, skillBarred, vowBarsCreature } from "./hero.ts";
 import { heroByDef, newHeroState, startingArmy } from "./players.ts";
 import { xpForLevel } from "./progression.ts";
 import { canAfford, subtractResources } from "./resources.ts";
@@ -279,6 +279,7 @@ export function grantPrize(
 ): string {
   const player = findPlayer(state, hero.owner);
   const lost: string[] = [];
+  const vowed: string[] = [];
   if (player !== undefined) {
     for (const r of RESOURCE_IDS) player.resources[r] += p[r] ?? 0;
   }
@@ -291,7 +292,10 @@ export function grantPrize(
   }
   for (const j of p.joiners ?? []) {
     if (!isCreatureId(j.creature)) continue;
-    if (!addToArmy(hero.army, j.creature, j.count)) {
+    // Vow of Flesh and Blood: barred joiners stay behind.
+    const barred = vowBarsCreature(hero, j.creature);
+    if (barred !== null) vowed.push(barred);
+    else if (!addToArmy(hero.army, j.creature, j.count)) {
       lost.push(getCreature(j.creature).plural);
     }
   }
@@ -301,7 +305,8 @@ export function grantPrize(
   }
   let extra = "";
   if (p.spell !== undefined) extra = `; the hero ${teachSpell(hero, p.spell)}`;
-  const text = prizeText(p) + extra;
+  const text =
+    prizeText(p) + extra + vowed.map((v) => ` (${v}: left behind)`).join("");
   return lost.length > 0
     ? `${text} (no room for ${lost.join(", ")}: left behind)`
     : text;
@@ -591,7 +596,9 @@ export function siteOptions(
       if (siteOf(state, obj.id).owner !== hero.owner) break;
       const n = maxHire(state, hero, obj);
       const d = getCreature(offer.creature);
-      const why = n > 0 ? undefined : "none affordable";
+      const why =
+        vowBarsCreature(hero, offer.creature) ??
+        (n > 0 ? undefined : "none affordable");
       out.push({
         id: `hire:${n}`,
         label: `Hire ${n} ${n === 1 ? d.name : d.plural}`,

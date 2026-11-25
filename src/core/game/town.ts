@@ -16,6 +16,7 @@ import { KEYSTONE_ITEM } from "../../data/factionTowns.ts";
 import { ARMY_SLOTS } from "../../data/hero.ts";
 import type { BuildingId, CreatureId, ResourceId } from "../../data/types.ts";
 import { learnInTown } from "../magic/adventure.ts";
+import { vowBarsCreature } from "./hero.ts";
 import { weeklyGrowth } from "./progression.ts";
 import { canAfford, scaleResources, subtractResources } from "./resources.ts";
 import {
@@ -226,15 +227,23 @@ export function recruit(
   if (to === "hero" && hero === undefined) {
     return fail("not-in-town", "no hero in the town");
   }
+  // A vow's barred tag (Vow of Flesh and Blood): never into that army.
+  const barred = hero === undefined ? null : vowBarsCreature(hero, creature);
+  if (barred !== null && to === "hero") return fail("vow", barred);
 
   const next = cloneState(state);
   const t = must(next.towns[townId], "town");
   const h = hero === undefined ? undefined : findHero(next, hero.id);
   const targets: ArmySlots[] = [];
-  if (to !== "garrison" && h !== undefined) targets.push(h.army);
+  if (to !== "garrison" && h !== undefined && barred === null)
+    targets.push(h.army);
   if (to !== "hero") targets.push(t.garrison);
   const army = targets.find((a) => slotFor(a, creature) >= 0);
-  if (army === undefined) return fail("army-full", "no free slot");
+  if (army === undefined) {
+    return barred !== null
+      ? fail("vow", `${barred}, and the garrison has no free slot`)
+      : fail("army-full", "no free slot");
+  }
   addToArmy(army, creature, count);
   must(t.dwellings[creature], "dwelling").available -= count;
   const p = must(
@@ -385,6 +394,19 @@ export function transferStack(
         "hero-needs-army",
         "the hero must keep at least one creature",
       );
+    }
+  }
+  // A vow's barred tag (Vow of Flesh and Blood): what arrives in a hero's
+  // army from another army must not be barred for that hero.
+  if (from.army !== to.army) {
+    const heroOf = (ref: SlotRef): HeroState | undefined =>
+      ref.army === "hero" ? h : ref.army === "other" ? o : undefined;
+    for (const ref of [to, from]) {
+      const x = heroOf(ref);
+      const arrived = armyOf(ref)[ref.slot] ?? null;
+      if (x === undefined || arrived === null) continue;
+      const barred = vowBarsCreature(x, arrived.creature);
+      if (barred !== null) return fail("vow", barred);
     }
   }
   return success(next);
