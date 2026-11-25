@@ -1,7 +1,13 @@
 /**
- * The town screen: the town picture, the building grid (one build per day),
- * recruiting per dwelling, the garrison and visiting-hero rows with
- * click-to-swap/merge (shift-click splits in half) and the marketplace.
+ * The town screen: a header with the town's income, fort level and the
+ * day's build as icons and the Tavern and Marketplace buttons; the town
+ * picture with every built dwelling's stock; the build grid as a Heroes
+ * hall (bead bzc.60, UI_V2.md UI2-09): rows Hall, Fort, Economy, Specials
+ * and Magic, then the dwellings in tier columns, each building a compact
+ * tile coloured by state, and a detail pane beside the grid with the
+ * selected building's picture, effect, cost, requirements and the Build
+ * button; then the garrison and visiting-hero rows with click-to-swap/merge
+ * (shift-click splits in half).
  */
 import {
   FOREST_SETS,
@@ -12,7 +18,6 @@ import { buildingArt, townArt, townBackdrop } from "../assets/town-art.ts";
 import {
   build,
   buildStatus,
-  canAfford,
   fortLevel,
   hasMarketplace,
   heroInTownOf,
@@ -27,7 +32,6 @@ import {
   transferStack,
 } from "../core/game/index.ts";
 import type {
-  BuildStatus,
   CommandResult,
   GameState,
   SlotRef,
@@ -38,7 +42,7 @@ import { playSound } from "../audio/sound.ts";
 import { recruitCue, townCue } from "../audio/cues.ts";
 import { fxEvent } from "../audio/fx.ts";
 import { bump, countUp } from "./anim.ts";
-import { buildingDef, townTree } from "../data/factions.ts";
+import { buildingDef, FORT_DEFENSE, townTree } from "../data/factions.ts";
 import { getHeroClass } from "../data/hero.ts";
 import { namedHeroPortrait } from "../assets/unit-art.ts";
 import { findHeroDef, HIRE_COST, MAX_HEROES } from "../data/players.ts";
@@ -52,11 +56,18 @@ import {
 import type { BuildingId, CreatureId } from "../data/types.ts";
 import { armyRow } from "./army.ts";
 import { specialtyText } from "../core/game/effects.ts";
-import { abilityText, buildingTip, creatureTip } from "./info-tips.ts";
+import { abilityText, creatureTip, unlockedBy } from "./info-tips.ts";
 import { findFaction } from "../data/factions.ts";
 import { setTip, tipCard } from "./tooltip.ts";
 import { creatureAbilities } from "../data/creatures.ts";
 import { townLevel } from "./objects.ts";
+import {
+  blockedReason,
+  hallLayout,
+  TILE_STATE_LABEL,
+  tileState,
+} from "./town-hall.ts";
+import type { HallGroupId, HallLayout, TileState } from "./town-hall.ts";
 import {
   button,
   costView,
@@ -76,23 +87,48 @@ export interface TownHost {
   resourceBar(): HTMLElement;
 }
 
-const STATUS_TEXT: Record<BuildStatus, string> = {
-  ok: "Can build",
-  built: "Built",
-  "start-only": "Built",
-  "not-owner": "Not your town",
-  "wrong-faction": "Cannot build here",
-  "built-today": "Already built today",
-  requirements: "Missing requirements",
-  keystone: "Needs the Keystone carried in",
-  resources: "Cannot afford",
-};
+/**
+ * The hall's rows on screen, two to a line where they fit: Hall beside
+ * Fort, Economy beside Specials, then Magic (up to five guilds) on a line
+ * of its own, then the dwellings.
+ */
+const SCREEN_ROWS: readonly HallGroupId[] = [
+  "hall",
+  "fort",
+  "economy",
+  "specials",
+  "magic",
+];
+
+/** The building the detail pane opens on: the first one buildable today. */
+function firstChoice(
+  state: GameState,
+  town: TownState,
+  layout: HallLayout,
+): BuildingId | null {
+  const ids = [
+    ...SCREEN_ROWS.flatMap(
+      (g) => layout.groups.find((x) => x.id === g)?.buildings ?? [],
+    ),
+    ...layout.dwellings.flatMap((c) => c.buildings),
+  ];
+  const look = (id: BuildingId): TileState =>
+    tileState(state, town.id, id).state;
+  return (
+    ids.find((id) => look(id) === "can") ??
+    ids.find((id) => look(id) !== "built") ??
+    ids[0] ??
+    null
+  );
+}
 
 export function openTownScreen(host: TownHost, townId: string): Promise<void> {
   return new Promise((resolve) => {
     const root = el("div.gm-town");
     (document.getElementById("ui") ?? document.body).append(root);
     let selected: SlotRef | null = null;
+    /** The building in the detail pane (kept across renders). */
+    let chosen: BuildingId | null = null;
     // A one-shot of the faction's town life as the screen opens.
     const ambience = townCue(host.state().towns[townId]?.faction);
     if (ambience !== null) playSound(ambience);
@@ -118,6 +154,53 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       return ok;
     };
 
+    const doBuild = (id: BuildingId): void => {
+      if (run(build(host.state(), townId, id))) {
+        playSound("build");
+        // The new building flashes gold and settles (bead bzc.26).
+        fxEvent("ui.build.complete");
+        bump(
+          root.querySelector(`.gm-hall [data-building="${id}"]`),
+          "gm-just-built",
+        );
+      }
+    };
+
+    const recruitFrom = (creature: CreatureId): void => {
+      const left =
+        host.state().towns[townId]?.dwellings[creature]?.available ?? 0;
+      void openRecruit(host, townId, creature).then(() => {
+        render();
+        // The stock counts down to what is left (bead bzc.26).
+        const now = host.state().towns[townId]?.dwellings[creature]?.available;
+        const node = root.querySelector<HTMLElement>(
+          `[data-stock="${creature}"]`,
+        );
+        const count = node?.querySelector<HTMLElement>(".gm-stock-count");
+        if (node && count && now !== undefined && now !== left) {
+          fxEvent("ui.recruit.count");
+          bump(node);
+          void countUp(count, left, now, 420);
+        }
+      });
+    };
+
+    /** Selects a building: the tiles' outline and the detail pane follow. */
+    const choose = (id: BuildingId): void => {
+      chosen = id;
+      const state = host.state();
+      const town = state.towns[townId];
+      if (town === undefined) return;
+      for (const t of root.querySelectorAll<HTMLElement>(".gm-hall-tile")) {
+        const on = t.dataset["building"] === id;
+        t.classList.toggle("gm-selected", on);
+        t.setAttribute("aria-pressed", String(on));
+      }
+      root
+        .querySelector(".gm-hall-detail")
+        ?.replaceWith(detailPane(state, town, id));
+    };
+
     const render = (): void => {
       const state = host.state();
       const town = state.towns[townId];
@@ -127,27 +210,9 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       }
       const hero = heroInTownOf(state, town);
       root.replaceChildren();
+      root.append(header(state, town));
 
-      const faction = findFaction(town.faction);
-      const chip = el("span.gm-town-chip.gm-town-chip-big");
-      chip.style.background = faction?.colour ?? "#6b5a3e";
-      const header = el(
-        "div.gm-town-header",
-        el(
-          "div.gm-town-title",
-          el("h1.gm-town-name", chip, town.name),
-          el(
-            "div.gm-town-sub",
-            `${faction?.name ?? "Town"} · ${fortLevel(town) === 0 ? "no fort" : `fort level ${fortLevel(town)}`} · ` +
-              (town.builtToday ? "built today" : "one building a day"),
-          ),
-        ),
-        host.resourceBar(),
-        keyButton("Leave", "Esc", close, "gm-btn gm-primary"),
-      );
-      root.append(header);
-
-      // ------------------------------------------------ picture + buildings
+      // ------------------------------------------------ picture + stock
       const picture = el("div.gm-town-view");
       const backdrop = townBackdrop(town.faction);
       if (backdrop !== null) {
@@ -183,20 +248,6 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           ) ?? TOWN_ASSETS[0];
         if (art !== undefined) picture.append(img(art.key, "gm-town-city", 3));
       }
-      const income = townIncome(town);
-      picture.append(
-        el(
-          "div.gm-town-caption",
-          `Income per day: `,
-          costView(income),
-          town.builtToday ? el("span.gm-built-today", " - built today") : null,
-        ),
-      );
-
-      const grid = el("div.gm-buildings");
-      const player = state.players.find((p) => p.id === town.owner);
-      for (const id of townTree(town.faction)?.order ?? [])
-        grid.append(buildingCard(state, town, id, player?.resources));
 
       // Every built dwelling's stock at a glance, as the Heroes II castle
       // screen shows it (bead bzc.25).
@@ -225,23 +276,7 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         cell.disabled = left <= 0;
         cell.setAttribute("aria-label", `Recruit ${c.plural}: ${left}`);
         setTip(cell, () => creatureTip(creature));
-        cell.addEventListener("click", () => {
-          void openRecruit(host, town.id, creature).then(() => {
-            render();
-            // The stock counts down to what is left (bead bzc.26).
-            const now =
-              host.state().towns[townId]?.dwellings[creature]?.available;
-            const node = document.querySelector<HTMLElement>(
-              `[data-stock="${creature}"]`,
-            );
-            const count = node?.querySelector<HTMLElement>(".gm-stock-count");
-            if (node && count && now !== undefined && now !== left) {
-              fxEvent("ui.recruit.count");
-              bump(node);
-              void countUp(count, left, now, 420);
-            }
-          });
-        });
+        cell.addEventListener("click", () => recruitFrom(creature));
         stockRow.append(cell);
       }
       stock.append(
@@ -249,9 +284,30 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           ? el("div.gm-dim", "No dwellings yet: build one to recruit.")
           : stockRow,
       );
-      root.append(
-        el("div.gm-town-body", el("div.gm-town-left", picture, stock), grid),
+
+      // ------------------------------------------------ the hall
+      const body = el(
+        "div.gm-town-body",
+        el("div.gm-town-left", picture, stock),
       );
+      const tree = townTree(town.faction);
+      if (tree === undefined) {
+        body.append(
+          el(
+            "div.gm-hall-none",
+            "Nothing can be built here: this town belongs to no faction.",
+          ),
+        );
+      } else {
+        const layout = hallLayout(tree);
+        if (chosen === null || buildingDef(town.faction, chosen) === undefined)
+          chosen = firstChoice(state, town, layout);
+        body.append(
+          hallGrid(state, town, layout),
+          detailPane(state, town, chosen),
+        );
+      }
+      root.append(body);
 
       // ------------------------------------------------ armies
       const onSlot =
@@ -323,193 +379,430 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           "Click a stack, then a slot: move, merge or swap. Shift-click the target to split the stack in half.",
         ),
       );
-      const side = el("div.gm-town-actions");
-      const market = button("Marketplace", () => {
+      root.append(el("div.gm-town-footer", armies));
+    };
+
+    /**
+     * The header: name and faction, then income, fort level and the day's
+     * build as icons with numbers (UI2-09 P3), the resources, the Tavern
+     * and Marketplace buttons and Leave.
+     */
+    const header = (state: GameState, town: TownState): HTMLElement => {
+      const faction = findFaction(town.faction);
+      const chip = el("span.gm-town-chip.gm-town-chip-big");
+      chip.style.background = faction?.colour ?? "#6b5a3e";
+      const income = townIncome(town);
+      const level = fortLevel(town);
+      const stat = (...children: Array<Node | string | null>): HTMLElement =>
+        el("span.gm-town-stat", ...children);
+      const earns = RESOURCE_IDS.some((r) => income[r] > 0);
+      const incomeStat = earns
+        ? stat(costView(income), el("span.gm-dim", "/day"))
+        : stat("No income");
+      setTip(incomeStat, () =>
+        tipCard("Income", [
+          el("div.gm-tip-line", "Every day: ", costView(income)),
+          "The best hall pays the gold; a Resource Silo and specials add to it.",
+        ]),
+      );
+      const fortArt =
+        level > 0 ? buildingArt(town.faction, `fort-${level}`) : null;
+      const fortStat = stat(
+        fortArt !== null ? img(fortArt.key, "gm-town-stat-art") : null,
+        level === 0 ? "No fort" : `Fort ${level}`,
+      );
+      setTip(fortStat, () =>
+        tipCard(level === 0 ? "No fort" : `Fort level ${level}`, [
+          level === 0
+            ? "Defenders fight without a wall bonus. Build a fort to raise their Defense."
+            : `Defending stacks get +${FORT_DEFENSE[level] ?? 0} Defense${level >= 3 ? " and a tower shoots" : ""}.`,
+        ]),
+      );
+      // Only a town with a building tree has a day's build to show.
+      const buildable = townTree(town.faction) !== undefined;
+      const buildStat = stat(
+        el(`span.gm-town-dot${town.builtToday ? ".gm-town-dot-done" : ""}`),
+        town.builtToday ? "Built today" : "Can build today",
+      );
+      buildStat.dataset["built"] = String(town.builtToday);
+      setTip(buildStat, () =>
+        tipCard(town.builtToday ? "Built today" : "Can build today", [
+          "Each town raises one building a day.",
+          town.builtToday
+            ? "The next one can go up tomorrow."
+            : "Pick a green building below and press Build.",
+        ]),
+      );
+
+      const tool = (
+        label: string,
+        artId: BuildingId,
+        onClick: () => void,
+      ): HTMLButtonElement => {
+        const b = button("", onClick, "gm-btn gm-town-tool");
+        const art = buildingArt(town.faction, artId);
+        if (art !== null) b.append(img(art.key, "gm-town-tool-art"));
+        b.append(el("span", label));
+        return b;
+      };
+      const tavernButton = tool("Tavern", "tavern", () => {
+        void openTavern(host, town.id, render);
+      });
+      tavernButton.disabled = town.owner === null;
+      const market = tool("Marketplace", "marketplace", () => {
         void openMarket(host, render).then(render);
       });
       market.disabled =
         town.owner === null || !hasMarketplace(state, town.owner);
       if (market.disabled) market.title = "Build a Marketplace first";
-      side.append(market);
-      side.append(tavern(state, town));
-      root.append(el("div.gm-town-footer", armies, side));
-    };
 
-    /** The tavern: this week's offer and retreated heroes (RULES_V2 5.4). */
-    const tavern = (state: GameState, town: TownState): HTMLElement => {
-      const box = el("div.gm-tavern", el("h3", "Tavern"));
-      if (town.owner === null) return box;
-      const player = state.players.find((p) => p.id === town.owner);
-      const obj = state.map.objects.find((o) => o.id === town.id);
-      const occupied = state.heroes.some(
-        (h) => h.alive && h.x === obj?.x && h.y === obj?.y,
-      );
-      const count = state.heroes.filter(
-        (h) => h.alive && h.owner === town.owner,
-      ).length;
-      const offer = tavernOffer(state, town.owner);
-      if (offer.length === 0) {
-        box.append(el("div.gm-dim", "Nobody this week. New faces next week."));
-      }
-      for (const entry of offer) {
-        const def = findHeroDef(entry.defId);
-        if (def === undefined) continue;
-        const known = state.heroes.find((h) => h.defId === entry.defId);
-        const level = known?.level ?? 1;
-        const reason = occupied
-          ? "A hero stands in the town gate"
-          : count >= MAX_HEROES
-            ? `At most ${MAX_HEROES} heroes`
-            : (player?.resources.gold ?? 0) < HIRE_COST
-              ? "Not enough gold"
-              : null;
-        const hire = button(
-          `Hire (${HIRE_COST} gold)`,
-          () => {
-            if (run(hireHero(host.state(), town.id, entry.defId)))
-              playSound("recruit");
-          },
-          "gm-btn gm-primary",
-        );
-        hire.disabled = reason !== null;
-        if (reason !== null) hire.title = reason;
-        const row = el(
-          "div.gm-tavern-hero",
-          img(
-            namedHeroPortrait(entry.defId, def.heroClass).key,
-            "gm-tavern-portrait",
-          ),
+      return el(
+        "div.gm-town-header",
+        el(
+          "div.gm-town-title",
+          el("h1.gm-town-name", chip, town.name),
           el(
-            "div.gm-tavern-text",
-            el("div.gm-tavern-name", def.name),
-            el(
-              "div.gm-dim",
-              `${getHeroClass(def.heroClass).name}, level ${level}` +
-                (entry.retreated ? " (retreated)" : ""),
-            ),
+            "div.gm-town-sub",
+            el("span.gm-town-faction", faction?.name ?? "Town"),
+            incomeStat,
+            fortStat,
+            buildable ? buildStat : null,
           ),
-          hire,
-        );
-        setTip(row.querySelector(".gm-tavern-text") ?? row, () =>
-          tipCard(
-            def.name,
-            [
-              def.specialty !== undefined
-                ? `Specialty: ${specialtyText(def.specialty)}`
-                : null,
-              entry.retreated
-                ? "Retreated from a battle: comes back with the army left at home."
-                : "Comes with a small starting army.",
-              `Hiring costs ${HIRE_COST} gold; the hero appears in the town gate.`,
-            ],
-            {
-              icon: img(namedHeroPortrait(entry.defId, def.heroClass).key),
-              subtitle: `${getHeroClass(def.heroClass).name}, level ${level}`,
-            },
-          ),
-        );
-        box.append(row);
-      }
-      return box;
+        ),
+        host.resourceBar(),
+        tavernButton,
+        market,
+        keyButton("Leave", "Esc", close, "gm-btn gm-primary"),
+      );
     };
 
-    const buildingCard = (
+    /** The hall: rows of tiles on a six-column grid, then the dwellings. */
+    const hallGrid = (
+      state: GameState,
+      town: TownState,
+      layout: HallLayout,
+    ): HTMLElement => {
+      const grid = el("div.gm-hall");
+      if (town.builtToday) grid.classList.add("gm-hall-today");
+      for (const gid of SCREEN_ROWS) {
+        const group = layout.groups.find((g) => g.id === gid);
+        if (group === undefined || group.buildings.length === 0) continue;
+        const box = el(
+          "div.gm-hall-group",
+          el("div.gm-hall-label", group.label),
+        );
+        box.dataset["group"] = group.id;
+        box.style.gridColumn = `span ${group.buildings.length <= 3 ? 3 : 6}`;
+        for (const id of group.buildings) box.append(tile(state, town, id));
+        grid.append(box);
+      }
+      if (layout.dwellings.length > 0) {
+        const box = el(
+          "div.gm-hall-group.gm-hall-dwellings",
+          el("div.gm-hall-label", "Dwellings"),
+        );
+        box.dataset["group"] = "dwellings";
+        layout.dwellings.forEach((column, i) => {
+          column.buildings.forEach((id, row) => {
+            const t = tile(state, town, id);
+            t.style.gridColumn = String(i + 1);
+            t.style.gridRow = String(row + 2);
+            box.append(t);
+          });
+        });
+        grid.append(box);
+      }
+      return grid;
+    };
+
+    /** One building: its picture and a name bar coloured by its state. */
+    const tile = (
       state: GameState,
       town: TownState,
       id: BuildingId,
-      have: GameState["players"][number]["resources"] | undefined,
     ): HTMLElement => {
       const def = buildingDef(town.faction, id);
       if (def === undefined) return el("div");
-      let status = buildStatus(state, town.id, id);
-      // Show the lasting reason first: "built today" passes tomorrow.
-      if (status === "built-today") {
-        if (!def.requires.every((r) => town.buildings.includes(r)))
-          status = "requirements";
-        else if (have !== undefined && !canAfford(have, def.cost))
-          status = "resources";
-      }
-      const card = el("div.gm-building");
-      card.dataset["building"] = id;
-      card.classList.add(`gm-b-${status}`);
-      setTip(card, () => {
-        const t = host.state().towns[town.id];
-        return t === undefined ? def.name : buildingTip(t, id);
-      });
-      const head = el("div.gm-building-head");
+      const { state: look, status } = tileState(state, town.id, id);
+      const b = el("button.gm-building.gm-hall-tile");
+      b.type = "button";
+      b.classList.add(`gm-hall-${look}`);
+      // A Drill is an add-on of the dwelling above it: a smaller tile.
+      if (def.drill !== undefined) b.classList.add("gm-hall-drill");
+      b.dataset["building"] = id;
+      b.dataset["state"] = look;
+      const on = id === chosen;
+      if (on) b.classList.add("gm-selected");
+      b.setAttribute("aria-pressed", String(on));
+      b.setAttribute("aria-label", `${def.name}: ${TILE_STATE_LABEL[look]}`);
+      const pic = el("span.gm-hall-art");
       const art = buildingArt(town.faction, id);
-      if (art !== null) head.append(img(art.key, "gm-building-art"));
-      if (def.dwelling !== undefined) {
-        head.append(
+      if (art !== null) pic.append(img(art.key, "gm-hall-art-img"));
+      const creature = def.dwelling ?? def.drill?.creature;
+      if (creature !== undefined)
+        pic.append(
+          img(`portrait-${getCreature(creature).sprite}`, "gm-hall-portrait"),
+        );
+      b.append(pic, el("span.gm-hall-name", def.name));
+      setTip(b, () =>
+        tipCard(def.name, [
+          def.effect,
+          el(
+            `div.gm-tip-line.gm-hall-tip-${look}`,
+            look === "can" && status === "built-today"
+              ? "Ready tomorrow"
+              : TILE_STATE_LABEL[look],
+          ),
+        ]),
+      );
+      b.addEventListener("click", () => choose(id));
+      // A double click on a green tile builds at once.
+      b.addEventListener("dblclick", () => {
+        if (buildStatus(host.state(), townId, id) === "ok") doBuild(id);
+      });
+      return b;
+    };
+
+    /** The selected building's full card with the Build button. */
+    const detailPane = (
+      state: GameState,
+      town: TownState,
+      id: BuildingId | null,
+    ): HTMLElement => {
+      const pane = el("div.gm-hall-detail");
+      const def = id === null ? undefined : buildingDef(town.faction, id);
+      if (id === null || def === undefined) {
+        pane.append(el("div.gm-dim", "Pick a building to see what it does."));
+        return pane;
+      }
+      const { state: look, status } = tileState(state, town.id, id);
+      const built = look === "built";
+      const have = state.players.find((p) => p.id === town.owner)?.resources;
+      pane.dataset["building"] = id;
+      pane.dataset["state"] = look;
+      const name = (b: BuildingId): string =>
+        buildingDef(town.faction, b)?.name ?? b;
+      /** A building name that selects that building. */
+      const link = (b: BuildingId, cls: string): HTMLElement => {
+        const node = button(name(b), () => choose(b), `gm-hall-link ${cls}`);
+        return node;
+      };
+
+      const pic = el("div.gm-hall-detail-art");
+      const art = buildingArt(town.faction, id);
+      if (art !== null) pic.append(img(art.key, "", 2));
+      const creature = def.dwelling;
+      if (creature !== undefined)
+        pic.append(
           img(
-            `portrait-${getCreature(def.dwelling).sprite}`,
-            "gm-building-portrait",
+            `portrait-${getCreature(creature).sprite}`,
+            "gm-hall-detail-portrait",
+          ),
+        );
+      pane.append(
+        el("h2.gm-hall-detail-name", def.name),
+        look === "can" && status === "built-today"
+          ? el("div.gm-hall-badge.gm-hall-badge-tomorrow", "Ready tomorrow")
+          : el(
+              `div.gm-hall-badge.gm-hall-badge-${look}`,
+              TILE_STATE_LABEL[look],
+            ),
+        pic,
+        el("div.gm-hall-effect", def.effect),
+      );
+      if (creature !== undefined) {
+        const c = getCreature(creature);
+        const line = el(
+          "div.gm-hall-line",
+          `${c.plural}: +${c.growth} a week`,
+          built
+            ? `, ${town.dwellings[creature]?.available ?? 0} to recruit`
+            : "",
+        );
+        setTip(line, () => creatureTip(creature));
+        pane.append(line);
+      }
+      if (!built) {
+        const free = RESOURCE_IDS.every((r) => (def.cost[r] ?? 0) <= 0);
+        pane.append(
+          el(
+            "div.gm-hall-row",
+            el("span.gm-hall-key", "Cost"),
+            free
+              ? el("span", def.needsKeystone === true ? "The Keystone" : "Free")
+              : costView(def.cost, have),
+          ),
+        );
+        if (def.requires.length > 0) {
+          pane.append(
+            el(
+              "div.gm-hall-row",
+              el("span.gm-hall-key", "Needs"),
+              el(
+                "span.gm-hall-links",
+                ...def.requires.map((r) =>
+                  link(
+                    r,
+                    town.buildings.includes(r)
+                      ? "gm-hall-met"
+                      : "gm-hall-missing",
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+      }
+      const unlocks = unlockedBy(town.faction, id);
+      if (unlocks.length > 0) {
+        pane.append(
+          el(
+            "div.gm-hall-row",
+            el("span.gm-hall-key", "Opens"),
+            el(
+              "span.gm-hall-links",
+              ...unlocks.map((u) => link(u, "gm-hall-plain")),
+            ),
           ),
         );
       }
-      head.append(el("div.gm-building-name", def.name));
-      card.append(head);
-      card.append(el("div.gm-building-effect", def.effect));
-      const built = status === "built" || status === "start-only";
-      if (!built) {
-        card.append(costView(def.cost, have));
-        if (def.requires.length > 0) {
-          const missing = def.requires.filter(
-            (r) => !town.buildings.includes(r),
-          );
-          card.append(
-            el(
-              "div.gm-building-req",
-              `Requires: ${def.requires.map((r) => buildingDef(town.faction, r)?.name ?? r).join(", ")}`,
-            ),
-          );
-          if (missing.length === 0)
-            card.lastElementChild?.classList.add("gm-met");
-        }
-      }
-      const actions = el("div.gm-building-actions");
+      const actions = el("div.gm-hall-actions");
       if (built) {
-        actions.append(el("span.gm-badge", "Built"));
-        const creature = def.dwelling;
         if (creature !== undefined) {
           const stock = town.dwellings[creature]?.available ?? 0;
-          const b = button(`Recruit (${stock})`, () => {
-            void openRecruit(host, town.id, creature).then(render);
-          });
+          const b = button(
+            `Recruit (${stock})`,
+            () => recruitFrom(creature),
+            "gm-btn gm-primary",
+          );
           b.disabled = stock <= 0;
-          b.title =
-            stock <= 0
-              ? "None left this week: dwellings grow on day 1 of each week."
-              : `${stock} ${getCreature(creature).plural} wait to be recruited.`;
+          if (stock <= 0)
+            b.title =
+              "None left this week: dwellings grow on day 1 of each week.";
           actions.append(b);
         }
       } else {
-        const b = button(
-          "Build",
-          () => {
-            if (run(build(state, town.id, id))) {
-              playSound("build");
-              // The new building flashes gold and settles (bead bzc.26).
-              fxEvent("ui.build.complete");
-              bump(
-                document.querySelector(`[data-building="${id}"]`),
-                "gm-just-built",
-              );
-            }
-          },
-          "gm-btn gm-primary",
-        );
+        // The reason, when the badge does not already say it.
+        const why =
+          status === "resources" || status === "requirements"
+            ? null
+            : blockedReason(status);
+        if (why !== null) actions.append(el("div.gm-hall-why", why));
+        const b = button("Build", () => doBuild(id), "gm-btn gm-primary");
         b.disabled = status !== "ok";
-        b.title = STATUS_TEXT[status];
         actions.append(b);
-        if (status !== "ok")
-          actions.append(el("span.gm-status", STATUS_TEXT[status]));
       }
-      card.append(actions);
-      return card;
+      pane.append(actions);
+      return pane;
     };
 
     render();
+  });
+}
+
+/**
+ * The tavern (RULES_V2 5.4): this week's offer and retreated heroes. Hiring
+ * closes the dialog; `changed` re-renders the town behind it.
+ */
+async function openTavern(
+  host: TownHost,
+  townId: string,
+  changed: () => void,
+): Promise<void> {
+  let closeButton: HTMLButtonElement | null = null;
+  const body = el("div.gm-tavern");
+  const render = (): void => {
+    body.replaceChildren();
+    const state = host.state();
+    const town = state.towns[townId];
+    if (town === undefined || town.owner === null) return;
+    const player = state.players.find((p) => p.id === town.owner);
+    const obj = state.map.objects.find((o) => o.id === town.id);
+    const occupied = state.heroes.some(
+      (h) => h.alive && h.x === obj?.x && h.y === obj?.y,
+    );
+    const count = state.heroes.filter(
+      (h) => h.alive && h.owner === town.owner,
+    ).length;
+    const offer = tavernOffer(state, town.owner);
+    if (offer.length === 0) {
+      body.append(el("div.gm-dim", "Nobody this week. New faces next week."));
+    }
+    for (const entry of offer) {
+      const def = findHeroDef(entry.defId);
+      if (def === undefined) continue;
+      const known = state.heroes.find((h) => h.defId === entry.defId);
+      const level = known?.level ?? 1;
+      const reason = occupied
+        ? "A hero stands in the town gate"
+        : count >= MAX_HEROES
+          ? `At most ${MAX_HEROES} heroes`
+          : (player?.resources.gold ?? 0) < HIRE_COST
+            ? "Not enough gold"
+            : null;
+      const hire = button(
+        `Hire (${HIRE_COST} gold)`,
+        () => {
+          if (host.run(hireHero(host.state(), townId, entry.defId))) {
+            playSound("recruit");
+            changed();
+            closeButton?.click();
+          } else render();
+        },
+        "gm-btn gm-primary",
+      );
+      hire.disabled = reason !== null;
+      if (reason !== null) hire.title = reason;
+      const row = el(
+        "div.gm-tavern-hero",
+        img(
+          namedHeroPortrait(entry.defId, def.heroClass).key,
+          "gm-tavern-portrait",
+        ),
+        el(
+          "div.gm-tavern-text",
+          el("div.gm-tavern-name", def.name),
+          el(
+            "div.gm-dim",
+            `${getHeroClass(def.heroClass).name}, level ${level}` +
+              (entry.retreated ? " (retreated)" : ""),
+          ),
+          def.specialty !== undefined
+            ? el("div.gm-tavern-spec", specialtyText(def.specialty))
+            : null,
+        ),
+        hire,
+      );
+      setTip(row.querySelector(".gm-tavern-text") ?? row, () =>
+        tipCard(
+          def.name,
+          [
+            def.specialty !== undefined
+              ? `Specialty: ${specialtyText(def.specialty)}`
+              : null,
+            entry.retreated
+              ? "Retreated from a battle: comes back with the army left at home."
+              : "Comes with a small starting army.",
+            `Hiring costs ${HIRE_COST} gold; the hero appears in the town gate.`,
+          ],
+          {
+            icon: img(namedHeroPortrait(entry.defId, def.heroClass).key),
+            subtitle: `${getHeroClass(def.heroClass).name}, level ${level}`,
+          },
+        ),
+      );
+      body.append(row);
+    }
+  };
+  render();
+  await modal<undefined>({
+    title: "Tavern",
+    body,
+    buttons: [{ label: "Close", value: undefined }],
+    cancel: undefined,
+    onOpen: (buttons) => {
+      closeButton = buttons[0] ?? null;
+    },
   });
 }
 

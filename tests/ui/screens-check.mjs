@@ -358,7 +358,10 @@ async function main() {
           await sleep(600);
           await shot("town-hover");
         }
-        if (await clickText(".gm-town button", "Recruit")) {
+        const stock = await evaluate(
+          "(() => { const b = document.querySelector('.gm-stock:not(:disabled)'); if (!b) return false; b.click(); return true; })()",
+        );
+        if (stock) {
           await sleep(400);
           await shot("recruit");
           await escape();

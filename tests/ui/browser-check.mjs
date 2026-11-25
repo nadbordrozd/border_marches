@@ -202,12 +202,17 @@ async function main() {
   await game("key('t')");
   await waitFor("document.querySelector('.gm-town')", "town screen");
   const townId = Object.values(s1.towns).find((t) => t.owner === 0).id;
-  const built = await clickText(".gm-building .gm-btn.gm-primary", "Build");
+  // The hall's detail pane opens on the first building buildable today.
+  const built = await clickText(".gm-hall-detail .gm-btn.gm-primary", "Build");
   if (!built) throw new Error("nothing to build");
   const s2 = await game("state()");
   if (!s2.towns[townId].builtToday) throw new Error("build did not happen");
   step(`built: ${s2.towns[townId].buildings.join(", ")}`);
-  if (!(await clickText(".gm-building .gm-btn", "Recruit"))) {
+  if (
+    !(await evaluate(
+      "(() => { const b = document.querySelector('.gm-stock:not(:disabled)'); if (!b) return false; b.click(); return true; })()",
+    ))
+  ) {
     throw new Error("no recruit button");
   }
   await waitFor("document.querySelector('.gm-modal')", "recruit dialog");
