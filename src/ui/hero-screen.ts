@@ -2,8 +2,8 @@
  * Hero screens (RULES_V2 3 and 4): the hero sheet (stats with their
  * sources, skills, feats and vows, the paper doll of eleven worn slots,
  * the backpack and the scroll case; click or drag to equip; the army
- * travelling with the hero, rearranged by clicks), the level-up
- * draft dialog and the item part of the meeting screen. Icons are
+ * travelling with the hero, rearranged by clicks) and the level-up
+ * draft dialog; the meeting screen (meeting.ts) reuses its pieces. Icons are
  * content icons (src/ui/icons.ts), with initials on a grade colour as the
  * fallback for content without an icon.
  */
@@ -17,7 +17,6 @@ import {
   commandStrength,
   destroyArtifact,
   equip,
-  handOver,
   heroSpecialty,
   heroStats,
   holdsUnspentPage,
@@ -153,7 +152,7 @@ export function itemIcon(id: string, count = 1): HTMLElement {
 }
 
 /** A spell scroll icon: the spell's icon on parchment, or its initials. */
-function scrollIcon(spell: string): HTMLElement {
+export function scrollIcon(spell: string): HTMLElement {
   const name = isSpell(spell) ? spellInfo(spell).name : spell;
   const icon = ownIcon("spell", spell);
   const node =
@@ -168,7 +167,7 @@ function scrollIcon(spell: string): HTMLElement {
  * An item's hover card with a last line saying what clicks do with it on
  * the hero sheet (bead bzc.69: the sheet's instruction line moved here).
  */
-function itemCard(id: string, hint: string): TipBody {
+export function itemCard(id: string, hint: string): TipBody {
   return withHint(titleCard(itemTooltip(id)), hint);
 }
 
@@ -311,7 +310,7 @@ function statTooltip(hero: HeroState, stat: PrimaryStat): string {
 }
 
 /** Backpack entries grouped as slots: consumables stack three a slot. */
-function backpackSlots(
+export function backpackSlots(
   hero: HeroState,
 ): Array<{ id: string; index: number; count: number }> {
   const out: Array<{ id: string; index: number; count: number }> = [];
@@ -1151,67 +1150,4 @@ export function levelUpDialog(
       });
     },
   });
-}
-
-// ------------------------------------------------------------------ meeting
-
-/**
- * The items half of a meeting (RULES_V2 5.3): each hero's worn items,
- * backpack and scrolls; click one to hand it to the other hero.
- */
-export function meetingItems(
-  host: HeroScreenHost,
-  aId: string,
-  bId: string,
-  rerender: () => void,
-): HTMLElement {
-  const s = host.state();
-  const a = s.heroes.find((h) => h.id === aId);
-  const b = s.heroes.find((h) => h.id === bId);
-  const box = el("div.hs-trade");
-  if (a === undefined || b === undefined) return box;
-  const side = (from: HeroState, to: HeroState): HTMLElement => {
-    const items = el("div.hs-trade-items");
-    const add = (
-      node: HTMLElement,
-      ref: Parameters<typeof handOver>[3],
-    ): void => {
-      node.classList.add("hs-tradeable");
-      node.title += `\nClick: give to ${to.name}.`;
-      node.addEventListener("click", () => {
-        host.run(handOver(host.state(), from.id, to.id, ref));
-        rerender();
-      });
-      items.append(node);
-    };
-    from.worn.forEach((id, index) => {
-      if (id === null) return;
-      const icon = itemIcon(id);
-      icon.classList.add("hs-worn-mark");
-      add(icon, { place: "worn", index });
-    });
-    from.backpack.forEach((id, index) =>
-      add(itemIcon(id), { place: "backpack", index }),
-    );
-    from.scrolls.forEach((spell, index) =>
-      add(scrollIcon(spell), { place: "scrolls", index }),
-    );
-    if (items.childElementCount === 0) {
-      items.append(el("span.gm-dim", "No items."));
-    }
-    return el(
-      "div.hs-trade-side",
-      el("div.hs-trade-label", `${from.name}'s items`),
-      items,
-    );
-  };
-  box.append(
-    side(a, b),
-    side(b, a),
-    el(
-      "div.gm-hint",
-      "Click an item to hand it over; worn items arrive in the backpack. Cursed worn items cannot be handed over.",
-    ),
-  );
-  return box;
 }

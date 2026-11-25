@@ -29,7 +29,8 @@
 //   adventure-hover-resource, adventure-rich, endturn, hero, hero-hover,
 //   hero-hover-army, hero-hover-skill, hero-hover-feat, hero-hover-stat,
 //   kingdom, spellbook (adventure tab), spellbook-battle, adventure-aim,
-//   menu-dialog, meeting, town-<faction>, town-hover, town-hall (a selected tile), recruit, market, prebattle,
+//   menu-dialog, meeting, meeting-picked, meeting-hover, meeting-swap
+//   (checks the swap in the state and swaps back), town-<faction>, town-hover, town-hall (a selected tile), recruit, market, prebattle,
 //   site, levelup, levelup-hover, end-won, end-lost, battle, battle-hover,
 //   battle-info, battle-book, battle-spell, battle-spell-hover,
 //   battle-spell-noeffect, [battle-result].
@@ -735,6 +736,65 @@ async function adventureAim() {
   await park();
 }
 
+/**
+ * The meeting (bead bzc.64): the two columns; a stack picked up with the
+ * pointer on the other hero's empty slot; an item's hover card; and Swap
+ * armies, checked in the state and pressed again to restore the armies.
+ */
+async function meetingScreens() {
+  const st = await game("state()");
+  const first = st.heroes.find((x) => x.owner === 0);
+  const other = st.heroes.find(
+    (h) => h.id.startsWith("hero-") && h.owner === 0 && h.id !== first?.id,
+  );
+  if (!other) return skip("meeting", "no second hero");
+  await game(`click(${other.x}, ${other.y})`);
+  await waitFor("document.querySelector('.hs-meet')", "meeting screen");
+  await park();
+  await sleep(500);
+  if (want("meeting")) await shot("meeting");
+  if (want("meeting-picked")) {
+    const picked = await clickFirst(
+      ".hs-meet-left .hs-army-slot:not(.hs-army-empty)",
+    );
+    const p = await pointIn(".hs-meet-right .hs-army-empty", 30, 40);
+    if (!picked || !p) skip("meeting-picked", "no stack or no empty slot");
+    else {
+      await mouse(p.x, p.y, 600);
+      await shot("meeting-picked");
+      // Click the picked stack again: put it back.
+      await clickFirst(".hs-meet-left .hs-army-slot.hs-selected");
+      await park();
+    }
+  }
+  await hoverShot("meeting-hover", ".hs-meet-left .hs-tradeable", 18, 18);
+  await park();
+  if (want("meeting-swap")) {
+    const armies = () =>
+      evaluate(`(() => {
+        const s = window.__bmGame.state();
+        const of = (id) => JSON.stringify(s.heroes.find((h) => h.id === id).army);
+        return [of(${JSON.stringify(first.id)}), of(${JSON.stringify(other.id)})];
+      })()`);
+    const [a, b] = await armies();
+    if (!(await clickFirst(".hs-meet-swap"))) {
+      fail("meeting-swap", "no Swap armies button");
+    } else {
+      await sleep(400);
+      const [a2, b2] = await armies();
+      if (a2 !== b || b2 !== a) fail("meeting-swap", "the armies did not swap");
+      await shot("meeting-swap");
+      await clickFirst(".hs-meet-swap");
+      await sleep(300);
+      const [a3, b3] = await armies();
+      if (a3 !== a || b3 !== b)
+        fail("meeting-swap", "a second swap did not restore");
+    }
+  }
+  await escape();
+  await sleep(200);
+}
+
 async function townScreens() {
   if (!wantFamily("town") && !want("recruit") && !want("market")) return;
   const st = await game("state()");
@@ -837,22 +897,7 @@ async function richScreens() {
       await sleep(200);
     } else skip("menu-dialog", "no Menu button");
   }
-  if (want("meeting")) {
-    const st = await game("state()");
-    const other = st.heroes.find(
-      (h) =>
-        h.id.startsWith("hero-") &&
-        h.owner === 0 &&
-        h.id !== st.heroes.find((x) => x.owner === 0)?.id,
-    );
-    if (other) {
-      await game(`click(${other.x}, ${other.y})`);
-      await sleep(500);
-      await shot("meeting");
-      await escape();
-      await sleep(200);
-    } else skip("meeting", "no second hero");
-  }
+  if (wantFamily("meeting")) await meetingScreens();
   await townScreens();
   if (want("prebattle")) {
     await idle();

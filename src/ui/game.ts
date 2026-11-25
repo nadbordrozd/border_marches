@@ -37,7 +37,6 @@ import {
   takeChest,
   townIncome,
   townsOf,
-  transferStack,
   xpForLevel,
 } from "../core/game/index.ts";
 import type {
@@ -50,7 +49,6 @@ import type {
   HeroState,
   Path,
   PlayerController,
-  SlotRef,
 } from "../core/game/index.ts";
 import { AdventureAi } from "../core/ai/index.ts";
 import { createBattleResolver } from "../core/battle/resolver.ts";
@@ -116,10 +114,10 @@ import { loadGameMapAssets } from "./hero-sprite.ts";
 import { heroArt, namedHeroPortrait } from "../assets/unit-art.ts";
 import {
   levelUpDialog,
-  meetingItems,
   openHeroScreen,
   type HeroScreenHost,
 } from "./hero-screen.ts";
+import { openMeeting } from "./meeting.ts";
 import { heroCard, mapCard, mapCardView, townCard } from "./map-card.ts";
 import { Minimap } from "./minimap.ts";
 import { glyph, heroRow, townRow, type SideGlyph } from "./side-panel.ts";
@@ -2264,82 +2262,13 @@ class GameScreen {
       this.clearPlan();
   }
 
-  /** Two own heroes side by side trade creatures (RULES_V2 5.3). */
+  /**
+   * Two own heroes side by side trade creatures and items (RULES_V2 5.3):
+   * the meeting screen's two mirrored columns (meeting.ts, bead bzc.64).
+   */
   private async meet(heroId: string, otherId: string): Promise<void> {
     if (this.inputBlocked()) return;
-    let selected: SlotRef | null = null;
-    const body = el("div.gm-meet");
-    const render = (): void => {
-      const a = this.state.heroes.find((h) => h.id === heroId);
-      const b = this.state.heroes.find((h) => h.id === otherId);
-      if (a === undefined || b === undefined) return;
-      const onSlot =
-        (army: "hero" | "other") =>
-        (slot: number, e: MouseEvent): void => {
-          const here: SlotRef = { army, slot };
-          if (selected === null) {
-            const src = army === "hero" ? a.army : b.army;
-            if (src[slot] != null) selected = here;
-            render();
-            return;
-          }
-          const from = selected;
-          selected = null;
-          if (from.army === army && from.slot === slot) {
-            render();
-            return;
-          }
-          const src = from.army === "hero" ? a.army : b.army;
-          const stack = src[from.slot];
-          const count =
-            e.shiftKey && stack != null
-              ? Math.floor(stack.count / 2)
-              : undefined;
-          if (count !== 0) {
-            this.run(
-              transferStack(this.state, {
-                heroId,
-                otherHeroId: otherId,
-                from,
-                to: here,
-                ...(count !== undefined ? { count } : {}),
-              }),
-            );
-          }
-          render();
-        };
-      body.replaceChildren(
-        el(
-          "div.gm-army-line",
-          el("div.gm-army-label", a.name),
-          armyRow(a.army, {
-            selected: selected?.army === "hero" ? selected.slot : null,
-            onClick: onSlot("hero"),
-          }),
-        ),
-        el(
-          "div.gm-army-line",
-          el("div.gm-army-label", b.name),
-          armyRow(b.army, {
-            selected: selected?.army === "other" ? selected.slot : null,
-            onClick: onSlot("other"),
-          }),
-        ),
-        el(
-          "div.gm-hint",
-          "Click a stack, then a slot: move, merge or swap. Shift-click the target to split in half. Each hero keeps at least one creature.",
-        ),
-        meetingItems(this.heroHost, heroId, otherId, render),
-      );
-    };
-    render();
-    await modal<undefined>({
-      title: "Heroes meet: trade creatures, artifacts and scrolls",
-      body,
-      className: "gm-meet-dialog",
-      buttons: [{ label: "Done", value: undefined, primary: true }],
-      cancel: undefined,
-    });
+    await openMeeting(this.heroHost, heroId, otherId);
     this.refresh();
   }
 

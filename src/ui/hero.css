@@ -598,34 +598,192 @@
   color: var(--gm-gold);
 }
 
-/* Meeting items. */
-.hs-trade {
-  margin-top: 10px;
-  padding-top: 8px;
-  border-top: 1px solid var(--gm-edge);
+/* The meeting (bead bzc.64, UI2-14): two mirrored hero columns on one grid,
+   so their rows line up; swap and give-all buttons between them; Done in
+   the title bar as on the hero sheet. */
+.gm-modal.hs-meet-dialog {
+  position: relative;
+  width: min(1400px, calc(100vw - 32px));
+  max-width: none;
 }
 
-.hs-trade-side {
-  margin-bottom: 8px;
+.hs-meet-dialog > .gm-modal-buttons {
+  position: absolute;
+  top: 10px;
+  right: 16px;
 }
 
-.hs-trade-label {
-  margin-bottom: 4px;
+.hs-meet-dialog > .gm-modal-body {
+  margin-bottom: 0;
+}
+
+.hs-meet {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px minmax(0, 1fr);
+  gap: 8px 16px;
+  align-items: start;
+}
+
+.hs-meet-col {
+  display: contents;
+}
+
+.hs-meet-left > * {
+  grid-column: 1;
+}
+
+.hs-meet-right > * {
+  grid-column: 3;
+}
+
+.hs-meet-head {
+  grid-row: 1;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.hs-meet-army {
+  grid-row: 2;
+}
+
+.hs-meet-worn {
+  grid-row: 3;
+}
+
+.hs-meet-bags {
+  grid-row: 4;
+  display: flex;
+  gap: 20px;
+}
+
+.hs-meet h3 {
+  margin: 0 0 5px;
   font:
     bold 14px Georgia,
     serif;
   color: var(--gm-gold-dim);
+  border-bottom: 1px solid var(--gm-edge);
 }
 
-.hs-trade-items {
+/* Mirrored: the right hero's portrait at the outer edge, its text and
+   item rows flush right. */
+.hs-meet-right.hs-meet-col > .hs-meet-head {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.hs-meet-right.hs-meet-col h3 {
+  text-align: right;
+}
+
+.hs-meet-right.hs-meet-col > .hs-meet-bags {
+  flex-direction: row-reverse;
+}
+
+.hs-meet-right.hs-meet-col .hs-meet-worn-row {
+  justify-content: end;
+}
+
+.hs-meet-portrait {
+  flex: none;
+}
+
+.hs-meet-id {
   display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  min-height: 44px;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.hs-meet-right .hs-meet-id {
+  align-items: flex-end;
+}
+
+.hs-meet-stats {
+  width: 240px;
+}
+
+.hs-meet-meters.gm-hero-meters {
+  width: 240px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.hs-meet-worn-row {
+  display: grid;
+  grid-template-columns: repeat(11, 44px);
+  gap: 4px;
+}
+
+.hs-meet-worn-row .hs-slot {
+  height: 44px;
+}
+
+.hs-meet-worn-row .hs-slot .hs-item,
+.hs-meet-bags .hs-item {
+  width: 38px;
+  height: 38px;
+}
+
+.hs-meet-worn-row .hs-slot-empty::before {
+  width: 28px;
+  height: 28px;
+}
+
+.hs-meet-pack {
+  grid-template-columns: repeat(6, 44px);
+  gap: 4px;
+}
+
+.hs-meet-scrolls {
+  grid-template-columns: repeat(4, 44px);
+  gap: 4px;
+}
+
+.hs-meet-bags .hs-cell {
+  width: 44px;
+  height: 44px;
+}
+
+/* The middle: Swap armies beside the bands, All items beside the items. */
+.hs-meet-mid {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-self: center;
+}
+
+.hs-meet-mid-army {
+  grid-row: 2;
+}
+
+.hs-meet-mid-items {
+  grid-row: 3 / span 2;
+}
+
+.hs-meet-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  padding: 8px 4px;
+}
+
+.hs-meet-glyph {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.hs-meet-label {
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 .hs-tradeable {
-  cursor: pointer;
+  cursor: grab;
 }
 
 .hs-tradeable:hover {
@@ -633,13 +791,23 @@
   border-color: var(--gm-gold);
 }
 
-.hs-worn-mark {
-  outline: 2px solid var(--gm-gold-dim);
-  outline-offset: 1px;
+/* An item dragged over the other hero's items. */
+.hs-meet-drop {
+  outline: 2px dashed var(--gm-gold);
+  outline-offset: 3px;
 }
 
-.gm-meet-dialog.gm-modal {
-  max-width: min(720px, calc(100vw - 32px));
+.hs-meet .hs-army-slot[draggable="true"] {
+  cursor: grab;
+}
+
+.hs-meet .hs-army-slot.gm-dragging {
+  opacity: 0.45;
+}
+
+.hs-meet .hs-army-slot.gm-drop-over {
+  border: 1px solid var(--gm-gold);
+  box-shadow: inset 0 0 12px rgb(255 214 92 / 30%);
 }
 
 /* Adventure sidebar: the hero sheet button when a level-up waits. */

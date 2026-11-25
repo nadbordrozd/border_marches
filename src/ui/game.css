@@ -1171,20 +1171,6 @@
   gap: 6px;
 }
 
-.gm-army-line {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.gm-army-label {
-  width: 80px;
-  font:
-    bold 13px Georgia,
-    serif;
-  color: var(--gm-gold-dim);
-}
-
 .gm-hint {
   color: var(--gm-dim);
   font-size: 11px;
@@ -1481,12 +1467,6 @@
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.gm-meet {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
 
 /* Content icons (src/ui/icons.ts, docs/art/classes/icons.md): the frame is
@@ -3715,12 +3695,4 @@
   margin: 4px 0 8px;
   text-align: center;
   font-weight: bold;
-}
-
-.gm-meet-dialog .gm-army-label {
-  width: 120px;
-}
-
-.gm-army-label {
-  line-height: 1.2;
 }

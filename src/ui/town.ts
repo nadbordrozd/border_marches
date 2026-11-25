@@ -56,7 +56,7 @@ import {
   RESOURCE_NAMES,
 } from "../data/economy.ts";
 import type { BuildingId, CreatureId } from "../data/types.ts";
-import { townArmyMove } from "./army.ts";
+import { townArmyMove, wireArmyDrag, type ArmyDrag } from "./army.ts";
 import { armyBand, armyFigure, armySlotViews } from "./hero-screen.ts";
 import type { ArmySlotView } from "./hero-screen.ts";
 import { rulesText } from "./keywords.ts";
@@ -323,7 +323,7 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
     };
 
     /** The stack being dragged, if any. */
-    let dragging: SlotRef | null = null;
+    const dragging: ArmyDrag = { from: null };
 
     /**
      * The garrison over the visiting hero (UI2-10): two army bands of the
@@ -453,42 +453,7 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       node: HTMLElement,
       army: SlotRef["army"],
       slots: ArmySlots,
-    ): void => {
-      for (const cell of node.querySelectorAll<HTMLElement>(".hs-army-slot")) {
-        const slot = Number(cell.dataset["slot"]);
-        if (slots[slot] != null) {
-          cell.draggable = true;
-          cell.addEventListener("dragstart", (e) => {
-            dragging = { army, slot };
-            e.dataTransfer?.setData("text/plain", `${army}:${slot}`);
-            if (e.dataTransfer !== null) e.dataTransfer.effectAllowed = "move";
-            cell.classList.add("gm-dragging");
-          });
-          cell.addEventListener("dragend", () => {
-            dragging = null;
-            cell.classList.remove("gm-dragging");
-            for (const n of root.querySelectorAll(".gm-drop-over"))
-              n.classList.remove("gm-drop-over");
-          });
-        }
-        cell.addEventListener("dragover", (e) => {
-          if (dragging === null) return;
-          e.preventDefault();
-          if (e.dataTransfer !== null) e.dataTransfer.dropEffect = "move";
-          cell.classList.add("gm-drop-over");
-        });
-        cell.addEventListener("dragleave", () =>
-          cell.classList.remove("gm-drop-over"),
-        );
-        cell.addEventListener("drop", (e) => {
-          e.preventDefault();
-          const from = dragging;
-          dragging = null;
-          if (from === null) return;
-          move(from, { army, slot }, e.shiftKey);
-        });
-      }
-    };
+    ): void => wireArmyDrag(node, army, slots, dragging, root, move);
 
     /**
      * The dwellings strip (UI2-10): the faction's dwellings in tier order,
