@@ -11,6 +11,8 @@
 
 import {
   DEFAULT_MAX_ROUNDS,
+  fightValueLeft,
+  roundLimitOf,
   activeStack,
   applyAction,
   battleResult,
@@ -75,7 +77,7 @@ import {
   intentMarkers,
   timelineEntries,
 } from "./grammar.ts";
-import { stackInfo } from "./info.ts";
+import { roundLimitInfo, stackInfo } from "./info.ts";
 import { hoverIntent, indexLegalActions, pointAtField } from "./intent.ts";
 import type { HoverIntent, LegalIndex } from "./intent.ts";
 import {
@@ -194,7 +196,11 @@ export interface BattleScreenOptions {
   readonly showResult?: boolean;
   /** Initial animation speed (default 1). */
   readonly speed?: Speed;
-  /** Round limit (default DEFAULT_MAX_ROUNDS: the engine's 30). */
+  /**
+   * A harness: stop after this many rounds with no winner (default
+   * DEFAULT_MAX_ROUNDS, the engine's limit, where the engine itself ends
+   * the battle with a verdict).
+   */
   readonly maxRounds?: number;
   /**
    * Start from this engine state (built from `engineSetupFromGame(setup)`)
@@ -1500,9 +1506,21 @@ class BattleScreen {
   private renderTop(): void {
     const s = this.state;
     this.top.replaceChildren();
-    this.top.append(
-      el("span", "bm-round", `Round ${this.scene.round || s.round}`),
+    const limit = roundLimitInfo(
+      { ...s, round: this.scene.round || s.round },
+      this.playerSides.size === 1 ? this.playerSide() : null,
     );
+    const round = el("span", "bm-round", limit.label);
+    round.title = limit.tooltip;
+    const verdict = el(
+      "span",
+      `bm-limit${limit.roundsLeft <= 3 ? " bm-limit-near" : ""}${
+        limit.winner === this.playerSide() ? " bm-limit-ours" : ""
+      }`,
+      `${limit.left} \u00b7 ${limit.verdict}`,
+    );
+    verdict.title = limit.tooltip;
+    this.top.append(round, verdict);
     const entries = timelineEntries(s);
     const next = s.stacks
       .filter(isAlive)
@@ -2199,7 +2217,9 @@ class BattleScreen {
         "div",
         "bm-dim",
         engine.reason === "roundLimit"
-          ? `The round limit (${this.maxRounds} rounds) was reached: the defenders hold the field.`
+          ? `The round limit (${roundLimitOf(this.state)} rounds) was reached: ${
+              won ? "you" : "the enemy"
+            } had more fight value left (${fightValueLeft(this.state, engine.winner ?? "defender")} to ${fightValueLeft(this.state, engine.winner === "attacker" ? "defender" : "attacker")}), and the other side's survivors fled.`
           : `After ${engine.rounds} round${engine.rounds === 1 ? "" : "s"}.`,
       ),
     );

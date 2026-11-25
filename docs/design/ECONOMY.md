@@ -27,9 +27,9 @@ Each faction leans on one resource, so a start region binds differently:
 
 | Faction  | Leans on        | All buildings (gold / wood / ore / essence) | One week of creatures                |
 | -------- | --------------- | ------------------------------------------- | ------------------------------------ |
-| Realm    | Gold and wood   | 52,500 / 155 / 104 / 22                     | 10,485 gold, 7 ore, 6 essence        |
-| Restless | Ore and essence | 56,000 / 117 / 132 / 34                     | 9930 gold, 2 ore, 9 essence          |
-| Horde    | Wood            | 45,800 / 179 / 72 / 13                      | 9740 gold, 11 wood, 3 ore, 4 essence |
+| Realm    | Gold and wood   | 52,500 / 155 / 104 / 22                     | 10,545 gold, 7 ore, 6 essence        |
+| Restless | Ore and essence | 56,000 / 117 / 132 / 34                     | 10,750 gold, 2 ore, 9 essence        |
+| Horde    | Wood            | 45,800 / 179 / 72 / 13                      | 9340 gold, 11 wood, 3 ore, 4 essence |
 
 ## 2. Starting resources
 
@@ -179,20 +179,29 @@ Fight value (FV) is GAME_DESIGN 8.2. Gold per FV is the gold price alone.
 
 | Tier | Realm                                | Restless                          | Horde                               | Lost World (reference)        |
 | ---: | ------------------------------------ | --------------------------------- | ----------------------------------- | ----------------------------- |
-|    1 | Squire 55 (0.85)                     | Skeleton 45 (0.73)                | Goblin 35 (0.67)                    | Caveman 50 (0.83)             |
+|    1 | Squire 45 (0.69)                     | Skeleton 45 (0.73)                | Goblin 40 (0.77)                    | Caveman 50 (0.83)             |
 |    2 | Longbowman 115 (1.06)                | Ghoul 115 (1.07)                  | Bomb Chucker 110 (1.01)             | Spitter 110 (0.90)            |
-|    3 | Man-at-Arms 240 (1.14)               | Banshee 240 (1.20)                | Wolf Rider 190 (1.40)               | Raptor 220 (1.27)             |
+|    3 | Man-at-Arms 240 (1.14)               | Banshee 260 (1.30)                | Wolf Rider 190 (1.40)               | Raptor 220 (1.27)             |
 |    4 | Friar 400 + 1 e (1.70)               | Gravecaller 420 + 1 e (1.74)      | Boomshaman 380 + 1 e (1.78)         | Shaman 450 + 1 e (1.16)       |
-|    5 | Knight 1200 + 2 o (1.37)             | Vampire 1100 + 1 e (1.49)         | Ogre 1050 + 3 w (1.20)              | Triceratops 1100 + 2 o (1.30) |
-|    6 | Dragonslayer 3000 + 3 o + 2 e (1.32) | Late King 2900 + 2 o + 3 e (1.34) | Orc Warboss 2800 + 5 w + 3 o (1.48) | T-Rex 3000 + 4 o + 2 e (1.20) |
+|    5 | Knight 1050 + 2 o (1.20)             | Vampire 1100 + 1 e (1.49)         | Ogre 950 + 3 w (1.09)               | Triceratops 1100 + 2 o (1.30) |
+|    6 | Dragonslayer 3500 + 3 o + 2 e (1.54) | Late King 3600 + 2 o + 3 e (1.66) | Orc Warboss 2500 + 5 w + 3 o (1.32) | T-Rex 3000 + 4 o + 2 e (1.20) |
 
 | Per week, all six dwellings |  Realm | Restless |  Horde | Lost World |
 | --------------------------- | -----: | -------: | -----: | ---------: |
 | Fight value                 |   8335 |     7700 |   7716 |       8899 |
-| Gold                        | 10,485 |     9930 |   9740 |     10,230 |
+| Gold                        | 10,545 |   10,750 |   9340 |     10,230 |
 | Gold-equivalent of the rest |   5350 |     5900 |   5900 |       5600 |
 | Tier 6 chain, gold          | 18,000 |   18,000 | 16,000 |     18,000 |
 
+- **Prices tuned by the balance bead (bzc.24).** Simulated equal-cost
+  battles ([BALANCE.md](BALANCE.md)) moved eight prices: Squire 55 to 45,
+  Goblin 35 to 40, Banshee 240 to 260, Knight 1200 to 1050, Ogre 1050 to
+  950, Dragonslayer 3000 to 3500, Late King 2900 to 3600, Orc Warboss 2800
+  to 2500. Weekly gold now differs by 15% (the Restless pay most, for the
+  strongest middle game); the week 1 ledgers below and the tier 6 dates
+  in 8.3 were computed with the old prices and have not been recomputed
+  (follow-up): the first Dragonslayer is 500 gold dearer, the first Late
+  King 700 dearer and the first Warboss 300 cheaper than they show.
 - The rule: tiers 1 to 3 cost 0.7 to 1.4 gold per FV, rising with tier;
   tier 5 and 6 cost 1.2 to 1.5 plus resources; **a caster costs about 1.7
   and an essence**, because its pages are not in its FV.

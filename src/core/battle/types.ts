@@ -234,6 +234,8 @@ export interface BattleSetup {
   readonly ground?: readonly GroundSpec[];
   /** Round to start in (default 1). */
   readonly startRound?: number;
+  /** Round limit (default ROUND_LIMIT; simulations and scenarios). */
+  readonly roundLimit?: number;
 }
 
 export type StackId = string;
@@ -424,6 +426,8 @@ export interface BattleState {
   readonly nextUid: number;
   /** Local laws of the battleground (none in v0.2). */
   readonly laws: readonly string[];
+  /** The round limit when not ROUND_LIMIT (simulations, scenarios). */
+  readonly roundLimit?: number;
 }
 
 /** A chosen target of an act or ability (law 5: anything can be one). */

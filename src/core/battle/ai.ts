@@ -25,8 +25,9 @@
  *   threat weighs more than one's own, so the AI does not walk into reach
  *   needlessly; a shooter an enemy can reach is worth less), targets out
  *   of reach discounted per turn away (the pull forward), Defend's reduced
- *   damage taken. The attacker, who loses at the round limit (1.12), is
- *   bolder: it fears the enemy's reach less, that fear fades over the
+ *   damage taken. The side that would lose at the round limit as the
+ *   board stands (1.12: less fight value left), and any neutral guard,
+ *   presses: it fears the enemy's reach less, that fear fades over the
  *   first rounds, and its own threat weighs more each round.
  * - **Tuning.** The weights ({@link DEFAULT_AI_WEIGHTS}) were set with the
  *   batch runner, tests/sim/battles.ts (`npm run sim:battles`).
@@ -76,6 +77,7 @@ import {
   computeBreakdown,
   effectiveSpeed,
   enemySide,
+  roundLimitWinner,
 } from "./resolve.ts";
 import type {
   ActTarget,
@@ -113,15 +115,23 @@ export interface AiWeights {
   readonly ownThreat: number;
   /** Discount per turn for targets out of reach (the pull forward). */
   readonly far: number;
-  /** Extra own-threat weight for the attacker per round (round limit). */
+  /** Extra own-threat weight per round for a side that presses. */
   readonly urgency: number;
   /**
-   * The attacker's boldness: its enemy-threat weight is x (1 - this), its
-   * own-threat weight x (1 + this).
+   * A pressing side's boldness: its enemy-threat weight is x (1 - this),
+   * its own-threat weight x (1 + this).
    */
   readonly aggression: number;
-  /** The attacker's enemy-threat weight fades to 0 over these rounds. */
+  /** A pressing side's enemy-threat weight fades to 0 over these rounds. */
   readonly fearRounds: number;
+  /**
+   * 1: the side that would lose at the round limit as the board stands
+   * presses (aggression, fading fear, urgency); 0: the attacker does (the
+   * v2 rule before bead bzc.24).
+   */
+  readonly behindPresses: number;
+  /** 1: a neutral guard (no hero, no native stack) always presses. */
+  readonly guardsPress: number;
   /** Fraction of a stack's value that a shooter in enemy reach loses. */
   readonly shooterExposure: number;
   /** Fraction of a stack's value it deals per round (condition values). */
@@ -148,7 +158,9 @@ export const DEFAULT_AI_WEIGHTS: AiWeights = {
   far: 0.5,
   urgency: 0.03,
   aggression: 0.3,
-  fearRounds: 12,
+  fearRounds: 6,
+  behindPresses: 1,
+  guardsPress: 1,
   shooterExposure: 0.15,
   tempo: 0.2,
   summonWeight: 0.6,
@@ -230,16 +242,31 @@ function distances(state: BattleState): Uint8Array {
 // ---------------------------------------------------------------------------
 // The decision context
 
+/** A neutral guard: no hero and no native (faction) stack. */
+function isNeutralGuard(state: BattleState, side: BattleSide): boolean {
+  return (
+    state.sides[side].hero === null &&
+    !state.stacks.some((s) => s.owner === side && s.native)
+  );
+}
+
 class Context {
   readonly w: AiWeights;
   readonly me: BattleSide;
   readonly dist: Uint8Array;
+  /** This side presses (behind at the limit, a guard, or the attacker). */
+  readonly presses: boolean;
   private readonly rates = new Map<string, number>();
 
   constructor(state: BattleState, me: BattleSide, w: AiWeights) {
     this.w = w;
     this.me = me;
     this.dist = distances(state);
+    this.presses =
+      (w.guardsPress > 0 && isNeutralGuard(state, me)) ||
+      (w.behindPresses > 0
+        ? roundLimitWinner(state) !== me
+        : me === "attacker");
   }
 
   /** Walking distance between two hexes around blocking ground. */
@@ -466,9 +493,10 @@ function evaluate(ctx: Context, state: BattleState): number {
     v += (s.owner === me ? 0.9 : -0.9) * getUpValue(s);
   }
   const them = enemySide(me);
-  // The attacker must break the defence before the round limit (1.12):
-  // it fears the enemy's reach less and presses harder, more each round.
-  const att = me === "attacker";
+  // The side behind on the round-limit verdict (1.12) must break the other
+  // before the limit: it fears the enemy's reach less and presses harder,
+  // more each round. Neutral guards always press.
+  const att = ctx.presses;
   const fade =
     att && ctx.w.fearRounds > 0
       ? Math.max(0, 1 - (state.round - 1) / ctx.w.fearRounds)

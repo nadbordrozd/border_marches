@@ -80,14 +80,14 @@ Notes:
 
 | Tier | Unit         |  HP | Atk | Def | Dmg | Speed | Shots | Growth/week | Cost                          |   FV | Abilities           |
 | ---: | ------------ | --: | --: | --: | --: | ----: | ----: | ----------: | ----------------------------- | ---: | ------------------- |
-|    1 | Squire       |  10 |   4 |   5 |   2 |     4 |     - |          14 | 55 gold                       |   65 | Attend              |
+|    1 | Squire       |  10 |   4 |   5 |   2 |     4 |     - |          14 | 45 gold                       |   65 | Attend              |
 |    2 | Longbowman   |  12 |   6 |   3 |   3 |     4 |    12 |           9 | 115 gold                      |  109 | Covering Volley     |
 |    3 | Man-at-Arms  |  26 |   8 |   9 |   5 |     5 |     - |           7 | 240 gold                      |  211 | Shield Wall         |
 |    4 | Friar        |  30 |   7 |   8 |   6 |     5 |     - |           4 | 400 gold + 1 essence          |  235 | Caster: Mend, Share |
-|    5 | Knight       |  85 |  15 |  14 |  15 |     8 |     - |           2 | 1200 gold + 2 ore             |  875 | Charge              |
-|    6 | Dragonslayer | 180 |  20 |  20 |  32 |     6 |     - |           1 | 3000 gold + 3 ore + 2 essence | 2277 | Stand Fast, Paragon |
+|    5 | Knight       |  85 |  15 |  14 |  15 |     8 |     - |           2 | 1050 gold + 2 ore             |  875 | Charge              |
+|    6 | Dragonslayer | 180 |  20 |  20 |  32 |     6 |     - |           1 | 3500 gold + 3 ore + 2 essence | 2277 | Stand Fast, Paragon |
 
-One week of all six dwellings: 10,485 gold, 7 ore, 6 essence; fight value 8335. The slowest creature has Speed 4, so a full army moves 1500 a day.
+One week of all six dwellings: 10,545 gold, 7 ore, 6 essence; fight value 8335 (prices tuned by the balance bead, [BALANCE.md](BALANCE.md) section 5). The slowest creature has Speed 4, so a full army moves 1500 a day.
 
 ## 5. Abilities
 

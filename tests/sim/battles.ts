@@ -16,7 +16,28 @@
  *   --level 6           hero level
  *   --only faction|neutral   restrict the matchups
  *   --guard 0.8         neutral guard fight value / army fight value
+ *   --limit 30          round limit of every battle (default the engine's)
+ *   --hero full|nobook|none   heroes in faction battles (default full)
+ *   --stage early|mid|late    budget and hero level of a game stage
+ *                       (tests/sim/armies.ts STAGES; overrides --budget
+ *                       and --level)
  *   --json <file>       also write the raw results as JSON
+ *
+ * Balance report modes (docs/design/BALANCE.md; policy A on both sides):
+ *
+ *   --mode report       every stage x hero mode: each faction's win rate
+ *                       over cross-faction battles (both sides), the
+ *                       attacker's win rate, rounds and round-limit share;
+ *                       --matrix also prints every pairing.
+ *   --mode guards       a hero against map guards (the generator's stray
+ *                       roster and deployment) at --ratios 0.4,0.6,...
+ *                       (guard FV / army FV) per stage: win rate, rounds
+ *                       and the hero's fight value lost.
+ *   --mode tiers        fight value per 1000 gold by tier and faction.
+ *   --mode duels        one tier against the same tier of each other
+ *                       faction, equal gold (--budget), no heroes.
+ *   --tweak id.field=n,...   override creature numbers (or
+ *                       class:<id>.<stat>) for this run only.
  *
  * Every battle runs from a seeded setup through the real engine; every
  * chosen action is checked with actionError first (an illegal one is
@@ -41,19 +62,32 @@ import type {
   BattleState,
 } from "../../src/core/battle/index.ts";
 import { registerSpells } from "../../src/core/magic/index.ts";
-import type { BattleSetup as GameBattleSetup } from "../../src/core/game/battle.ts";
+import type {
+  BattleSetup as GameBattleSetup,
+  BattleSide as GameBattleSide,
+} from "../../src/core/game/battle.ts";
 import { chooseAiAction as chooseV1 } from "./ai-v1.ts";
 import {
   FACTIONS,
+  HERO_MODES,
+  STAGES,
+  STAGE_IDS,
   armyFightValue,
   buildArmy,
   buildGuard,
   buildHero,
+  buildMapGuard,
+  creatureCost,
   gameSetup,
   guardSide,
+  heroLessSide,
   heroSide,
+  withoutBook,
 } from "./armies.ts";
-import type { Faction } from "./armies.ts";
+import type { Faction, HeroMode, Stage } from "./armies.ts";
+import { rosterOf } from "../../src/data/factionCreatures.ts";
+import { CREATURES } from "../../src/data/creatures.ts";
+import { getHeroClass } from "../../src/data/classes.ts";
 
 registerSpells();
 
@@ -112,6 +146,8 @@ export interface Played {
   readonly heroActs: Record<BattleSide, number>;
   /** Fight value left at the end (survivors), per side. */
   readonly left: Record<BattleSide, number>;
+  /** Fight value at the start, per side. */
+  readonly start: Record<BattleSide, number>;
 }
 
 /** Plays one battle with a policy per side. */
@@ -145,12 +181,21 @@ function describe(state: BattleState, action: BattleAction): string {
   }
 }
 
+/** Round limit override for every battle of the run (--limit). */
+let limitOverride: number | undefined;
+
 export function play(
   setup: GameBattleSetup,
   policies: Record<BattleSide, Policy>,
   trace = false,
 ): Played {
-  let state = createBattle(engineSetupFromGame(setup)).state;
+  let state = createBattle({
+    ...engineSetupFromGame(setup),
+    ...(limitOverride !== undefined ? { roundLimit: limitOverride } : {}),
+  }).state;
+  const start = { attacker: 0, defender: 0 };
+  for (const s of state.stacks)
+    if (!s.summoned) start[s.owner] += s.count * creatureFightValue(s.creature);
   const decisions = { attacker: 0, defender: 0 };
   const ms = { attacker: 0, defender: 0 };
   const heroActs = { attacker: 0, defender: 0 };
@@ -204,6 +249,7 @@ export function play(
     ms,
     heroActs,
     left,
+    start,
   };
 }
 
@@ -213,7 +259,27 @@ interface Matchup {
   readonly setup: (seed: number) => GameBattleSetup;
 }
 
-function factionMatchups(budget: number, level: number): Matchup[] {
+/** One side of a faction battle (hero per `mode`), seeded. */
+function factionSide(
+  f: Faction,
+  budget: number,
+  level: number,
+  seed: number,
+  lean: "might" | "magic",
+  mode: HeroMode,
+  owner: number,
+): GameBattleSide {
+  const army = buildArmy(f, budget, seed);
+  if (mode === "none") return heroLessSide(f, army, owner);
+  const hero = buildHero(f, level, seed, lean);
+  return heroSide(f, mode === "nobook" ? withoutBook(hero) : hero, army, owner);
+}
+
+function factionMatchups(
+  budget: number,
+  level: number,
+  mode: HeroMode = "full",
+): Matchup[] {
   const out: Matchup[] = [];
   for (const a of FACTIONS)
     for (const d of FACTIONS) {
@@ -224,18 +290,8 @@ function factionMatchups(budget: number, level: number): Matchup[] {
           const ld = (seed >> 1) % 2 === 0 ? "might" : "magic";
           return gameSetup(
             seed,
-            heroSide(
-              a,
-              buildHero(a, level, seed, la),
-              buildArmy(a, budget, seed),
-              1,
-            ),
-            heroSide(
-              d,
-              buildHero(d, level, seed + 7777, ld),
-              buildArmy(d, budget, seed + 7777),
-              2,
-            ),
+            factionSide(a, budget, level, seed, la, mode, 1),
+            factionSide(d, budget, level, seed + 7777, ld, mode, 2),
           );
         },
       });
@@ -247,6 +303,7 @@ function neutralMatchups(
   budget: number,
   level: number,
   ratio: number,
+  ring: number | null = null,
 ): Matchup[] {
   return FACTIONS.map((f: Faction) => ({
     name: `${f} v guard`,
@@ -257,7 +314,9 @@ function neutralMatchups(
       return gameSetup(
         seed,
         heroSide(f, buildHero(f, level, seed, lean), army, 1),
-        guardSide(buildGuard(fv, seed)),
+        guardSide(
+          ring === null ? buildGuard(fv, seed) : buildMapGuard(fv, seed, ring),
+        ),
       );
     },
   }));
@@ -294,6 +353,269 @@ function parseArgs(args: readonly string[]): Map<string, string> {
 const pct = (n: number, d: number): string =>
   d === 0 ? "   -" : `${((100 * n) / d).toFixed(0).padStart(3)}%`;
 
+interface Tally {
+  games: number;
+  attackerWins: number;
+  rounds: number;
+  roundLimit: number;
+  /** Wins per faction over cross-faction battles, and their games. */
+  wins: Record<Faction, number>;
+  played: Record<Faction, number>;
+  /** Attacker wins in each pairing (the matrix). */
+  pairs: Map<string, { games: number; att: number }>;
+}
+
+/** Plays every faction pairing with `policy` on both sides. */
+function tallyFactions(
+  policy: Policy,
+  budget: number,
+  level: number,
+  mode: HeroMode,
+  seeds: number,
+): Tally {
+  const t: Tally = {
+    games: 0,
+    attackerWins: 0,
+    rounds: 0,
+    roundLimit: 0,
+    wins: { humans: 0, undead: 0, goblins: 0 },
+    played: { humans: 0, undead: 0, goblins: 0 },
+    pairs: new Map(),
+  };
+  for (const m of factionMatchups(budget, level, mode)) {
+    const [att, , def] = m.name.split(" ") as [Faction, string, Faction];
+    const pair = { games: 0, att: 0 };
+    for (let i = 0; i < seeds; i++) {
+      const r = play(m.setup(1000 + i), {
+        attacker: policy,
+        defender: policy,
+      });
+      t.games++;
+      pair.games++;
+      t.rounds += r.rounds;
+      if (r.reason === "roundLimit") t.roundLimit++;
+      if (r.winner === "attacker") {
+        t.attackerWins++;
+        pair.att++;
+      }
+      if (att !== def) {
+        t.played[att]++;
+        t.played[def]++;
+        if (r.winner === "attacker") t.wins[att]++;
+        else if (r.winner === "defender") t.wins[def]++;
+      }
+    }
+    t.pairs.set(m.name, pair);
+  }
+  return t;
+}
+
+function reportMode(
+  policy: Policy,
+  seeds: number,
+  stages: readonly Stage[],
+  modes: readonly HeroMode[],
+  matrix: boolean,
+): void {
+  console.log(
+    "stage     heroes   humans  undead  goblins   att win  mirror att  rounds  at limit",
+  );
+  for (const stage of stages) {
+    const { budget, level } = STAGES[stage];
+    for (const mode of modes) {
+      const t = tallyFactions(policy, budget, level, mode, seeds);
+      let mirror = 0;
+      let mirrorN = 0;
+      for (const f of FACTIONS) {
+        const p = t.pairs.get(`${f} v ${f}`);
+        if (p) {
+          mirror += p.att;
+          mirrorN += p.games;
+        }
+      }
+      const f = (x: Faction) => pct(t.wins[x], t.played[x]).padStart(6);
+      console.log(
+        `${stage.padEnd(9)} ${mode.padEnd(7)} ${f("humans")}  ${f("undead")}   ${f("goblins")}     ${pct(t.attackerWins, t.games)}        ${pct(mirror, mirrorN)}  ${(t.rounds / t.games).toFixed(1).padStart(6)}      ${pct(t.roundLimit, t.games)}`,
+      );
+      if (matrix)
+        for (const [name, p] of t.pairs)
+          console.log(`    ${name.padEnd(22)} attacker ${pct(p.att, p.games)}`);
+    }
+  }
+}
+
+function guardsMode(
+  policy: Policy,
+  seeds: number,
+  stages: readonly Stage[],
+  ratios: readonly number[],
+): void {
+  console.log(
+    "stage     ratio  faction   win   rounds  at limit  hero FV lost (wins)",
+  );
+  for (const stage of stages) {
+    const { budget, level, ring } = STAGES[stage];
+    for (const ratio of ratios) {
+      const all = { games: 0, wins: 0, rounds: 0, limit: 0, lost: 0 };
+      for (const m of neutralMatchups(budget, level, ratio, ring)) {
+        const row = { games: 0, wins: 0, rounds: 0, limit: 0, lost: 0 };
+        for (let i = 0; i < seeds; i++) {
+          const r = play(m.setup(1000 + i), {
+            attacker: policy,
+            defender: policy,
+          });
+          row.games++;
+          row.rounds += r.rounds;
+          if (r.reason === "roundLimit") row.limit++;
+          if (r.winner === "attacker") {
+            row.wins++;
+            row.lost += 1 - r.left.attacker / Math.max(1, r.start.attacker);
+          }
+        }
+        for (const k of ["games", "wins", "rounds", "limit", "lost"] as const)
+          all[k] += row[k];
+        console.log(
+          `${stage.padEnd(9)} ${ratio.toFixed(2)}   ${m.name.split(" ")[0]?.padEnd(8)} ${pct(row.wins, row.games)}  ${(row.rounds / row.games).toFixed(1).padStart(6)}     ${pct(row.limit, row.games)}         ${pct(row.lost, row.wins)}`,
+        );
+      }
+      console.log(
+        `${stage.padEnd(9)} ${ratio.toFixed(2)}   all      ${pct(all.wins, all.games)}  ${(all.rounds / all.games).toFixed(1).padStart(6)}     ${pct(all.limit, all.games)}         ${pct(all.lost, all.wins)}`,
+      );
+    }
+  }
+}
+
+/**
+ * --tweak squire.hp=11,goblin.cost.gold=40,knight.growth=3: overrides
+ * creature numbers for this run only (trying a change before writing it
+ * into src/data). Fields: hp, attack, defense, damage, speed, shots,
+ * growth, cost.gold, cost.wood, cost.ore, cost.essence.
+ */
+function applyTweaks(spec: string): void {
+  for (const kv of spec.split(",")) {
+    const [path, v] = kv.split("=");
+    const [id, ...field] = (path ?? "").split(".");
+    if (id?.startsWith("class:")) {
+      // class:knight-errant.attack=3: a hero class's starting stats.
+      const stats = getHeroClass(id.slice(6)).stats as unknown as Record<
+        string,
+        number
+      >;
+      const key = field[0] as string;
+      if (typeof stats[key] !== "number" || Number.isNaN(Number(v)))
+        throw new Error(`bad tweak ${kv}`);
+      stats[key] = Number(v);
+      continue;
+    }
+    const def = CREATURES[id as keyof typeof CREATURES] as unknown as
+      Record<string, unknown> | undefined;
+    const n = Number(v);
+    if (def === undefined || field.length === 0 || Number.isNaN(n))
+      throw new Error(`bad tweak ${kv}`);
+    if (field[0] === "cost" && field[1] !== undefined) {
+      def.cost = { ...(def.cost as object), [field[1]]: n };
+    } else if (typeof def[field[0] as string] === "number") {
+      def[field[0] as string] = n;
+    } else throw new Error(`bad tweak field ${kv}`);
+  }
+  console.log(`tweaks: ${spec}`);
+}
+
+/**
+ * Tier duels: one tier of a faction against the same tier of another,
+ * equal gold (at least `budget`, at least 3 of the dearer creature), no
+ * heroes, both sides of every pairing. A tier's win rate over the two
+ * other factions shows which tier is off.
+ */
+function duelsMode(policy: Policy, seeds: number, budget: number): void {
+  console.log("tier  " + FACTIONS.map((f) => f.padEnd(10)).join(""));
+  for (let tier = 0; tier < 6; tier++) {
+    const wins: Record<Faction, number> = { humans: 0, undead: 0, goblins: 0 };
+    const games: Record<Faction, number> = { humans: 0, undead: 0, goblins: 0 };
+    for (const a of FACTIONS)
+      for (const d of FACTIONS) {
+        if (a === d) continue;
+        const ca = rosterOf(a)[tier];
+        const cd = rosterOf(d)[tier];
+        if (!ca || !cd) continue;
+        const gold = Math.max(
+          budget,
+          3 * Math.max(creatureCost(ca), creatureCost(cd)),
+        );
+        for (let i = 0; i < seeds; i++) {
+          const seed = 2000 + i;
+          // Split a tier into two stacks so area and adjacency rules apply.
+          const split = (c: typeof ca) => {
+            const n = Math.max(1, Math.floor(gold / creatureCost(c)));
+            return n >= 2
+              ? [
+                  { creature: c.id, count: Math.ceil(n / 2) },
+                  { creature: c.id, count: Math.floor(n / 2) },
+                ]
+              : [{ creature: c.id, count: n }];
+          };
+          const setup = gameSetup(
+            seed,
+            heroLessSide(a, split(ca), 1),
+            heroLessSide(d, split(cd), 2),
+          );
+          const r = play(setup, { attacker: policy, defender: policy });
+          games[a]++;
+          games[d]++;
+          if (r.winner === "attacker") wins[a]++;
+          else if (r.winner === "defender") wins[d]++;
+        }
+      }
+    console.log(
+      `${String(tier + 1).padStart(4)}  ` +
+        FACTIONS.map((f) => pct(wins[f], games[f]).padEnd(10)).join(""),
+    );
+  }
+}
+
+function tiersMode(): void {
+  console.log(
+    "tier  " +
+      FACTIONS.map((f) => `${f.padEnd(34)}`).join("") +
+      "\n      " +
+      FACTIONS.map(() => "creature        cost    FV  FV/1000g  ").join(""),
+  );
+  const rosters = FACTIONS.map((f) => rosterOf(f));
+  for (let tier = 0; tier < 6; tier++) {
+    let line = `${String(tier + 1).padStart(4)}  `;
+    for (const roster of rosters) {
+      const c = roster[tier];
+      if (!c) continue;
+      const fv = creatureFightValue(c);
+      const cost = creatureCost(c);
+      line += `${c.id.padEnd(15)} ${String(cost).padStart(5)} ${String(fv).padStart(5)}  ${((1000 * fv) / cost).toFixed(0).padStart(6)}    `;
+    }
+    console.log(line);
+  }
+  console.log("\nweekly growth (all six dwellings): fight value and cost");
+  for (const f of FACTIONS) {
+    let fv = 0;
+    let cost = 0;
+    for (const c of rosterOf(f)) {
+      fv += c.growth * creatureFightValue(c);
+      cost += c.growth * creatureCost(c);
+    }
+    console.log(
+      `${f.padEnd(9)} FV ${fv}  cost ${cost}  FV/1000g ${((1000 * fv) / cost).toFixed(0)}`,
+    );
+  }
+  console.log("\nseeded armies (20 seeds): fight value per stage budget");
+  for (const f of FACTIONS) {
+    const parts = STAGE_IDS.map((st) => {
+      let fv = 0;
+      for (let i = 0; i < 20; i++)
+        fv += armyFightValue(buildArmy(f, STAGES[st].budget, 1000 + i));
+      return `${st} ${(fv / 20).toFixed(0)}`;
+    });
+    console.log(`${f.padEnd(9)} ${parts.join("  ")}`);
+  }
+}
+
 export function main(args: readonly string[]): number {
   const opt = parseArgs(args);
   const mode = opt.get("mode") ?? "ai";
@@ -304,6 +626,47 @@ export function main(args: readonly string[]): number {
   const level = Number(opt.get("level") ?? "6");
   const ratio = Number(opt.get("guard") ?? "0.8");
   const only = opt.get("only");
+  const limit = opt.get("limit");
+  limitOverride = limit === undefined ? undefined : Number(limit);
+  const stageOpt = opt.get("stage");
+  const stages: Stage[] =
+    stageOpt === undefined || stageOpt === "all"
+      ? STAGE_IDS
+      : (stageOpt.split(",") as Stage[]);
+  for (const st of stages)
+    if (!(st in STAGES)) throw new Error(`unknown stage ${st}`);
+  const heroOpt = opt.get("hero");
+  const heroModes: HeroMode[] =
+    heroOpt === undefined || heroOpt === "all"
+      ? [...HERO_MODES]
+      : (heroOpt.split(",") as HeroMode[]);
+  const tweak = opt.get("tweak");
+  if (tweak !== undefined) applyTweaks(tweak);
+  if (mode === "duels") {
+    duelsMode(parsePolicy(aSpec), seeds, Number(opt.get("budget") ?? "6000"));
+    return 0;
+  }
+  if (mode === "tiers") {
+    tiersMode();
+    return 0;
+  }
+  if (mode === "report") {
+    const t0 = performance.now();
+    console.log(
+      `report: policy ${aSpec}, ${seeds} seeds per pairing, round limit ${limitOverride ?? "engine"}`,
+    );
+    reportMode(parsePolicy(aSpec), seeds, stages, heroModes, opt.has("matrix"));
+    console.log(`wall ${((performance.now() - t0) / 1000).toFixed(0)} s`);
+    return 0;
+  }
+  if (mode === "guards") {
+    const ratios = (opt.get("ratios") ?? "0.4,0.6,0.8,1.0")
+      .split(",")
+      .map(Number);
+    console.log(`guards: policy ${aSpec}, ${seeds} seeds per faction`);
+    guardsMode(parsePolicy(aSpec), seeds, stages, ratios);
+    return 0;
+  }
   const a = parsePolicy(aSpec);
   const b = parsePolicy(bSpec);
   const matchups = [

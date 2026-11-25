@@ -265,6 +265,7 @@ export function createBattle(setup: BattleSetup): BattleStep {
     scheduled: [],
     nextUid: 1,
     laws: [],
+    ...(setup.roundLimit !== undefined ? { roundLimit: setup.roundLimit } : {}),
   };
   return startBattle(state, setup.startRound ?? 1, (fx) =>
     battleStart(fx, setup),

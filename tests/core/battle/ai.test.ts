@@ -2,9 +2,12 @@ import { describe, expect, it } from "vitest";
 import {
   applyAction,
   chooseAiAction,
+  ROUND_LIMIT,
   createBattle,
+  fightValueLeft,
   hexDistance,
   isLegalAction,
+  roundLimitWinner,
   runAutoBattle,
 } from "../../../src/core/battle/index.ts";
 import type {
@@ -84,7 +87,7 @@ describe("battle AI", () => {
     expect(r.events.some((e) => e.type === "end")).toBe(false);
   });
 
-  it("the engine ends an unwinnable battle after round 30: the defender wins", () => {
+  it("the engine ends an unwinnable battle at the round limit: a tie goes to the defender", () => {
     const wall = Array.from({ length: 11 }, (_, row) => ({ col: 7, row }));
     const r = runAutoBattle({
       seed: 1,
@@ -92,15 +95,43 @@ describe("battle AI", () => {
       attacker: { hero: null, stacks: [{ creature: CAVEMAN, count: 5 }] },
       defender: { hero: null, stacks: [{ creature: CAVEMAN, count: 5 }] },
     });
+    expect(ROUND_LIMIT).toBe(15);
     expect(r.result).toMatchObject({
       winner: "defender",
       reason: "roundLimit",
-      rounds: 30,
+      rounds: ROUND_LIMIT,
     });
     expect(r.events.at(-1)).toMatchObject({
       type: "end",
       winner: "defender",
       reason: "roundLimit",
+    });
+  });
+
+  it("at the round limit the side with more fight value left wins", () => {
+    const wall = Array.from({ length: 11 }, (_, row) => ({ col: 7, row }));
+    const setup: BattleSetup = {
+      seed: 1,
+      obstacles: wall,
+      attacker: { hero: null, stacks: [{ creature: CAVEMAN, count: 6 }] },
+      defender: { hero: null, stacks: [{ creature: CAVEMAN, count: 5 }] },
+    };
+    const start = createBattle(setup).state;
+    expect(fightValueLeft(start, "attacker")).toBe(6 * 60);
+    expect(fightValueLeft(start, "defender")).toBe(5 * 60);
+    expect(roundLimitWinner(start)).toBe("attacker");
+    const r = runAutoBattle(setup);
+    expect(r.result).toMatchObject({
+      winner: "attacker",
+      reason: "roundLimit",
+      rounds: ROUND_LIMIT,
+    });
+    // A setup's own limit (simulations, scenarios).
+    const short = runAutoBattle({ ...setup, roundLimit: 4 });
+    expect(short.result).toMatchObject({
+      winner: "attacker",
+      reason: "roundLimit",
+      rounds: 4,
     });
   });
 

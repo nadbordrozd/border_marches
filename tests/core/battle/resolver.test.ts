@@ -147,4 +147,38 @@ describe("createBattleResolver", () => {
     });
     expect(r).toEqual({ winner: "defender", attacker: [0], defender: [2] });
   });
+
+  it("at the round limit the winner keeps its survivors and the loser's flee", () => {
+    const setup = gameSetup([["caveman", 5]], [["goblin", 3]]);
+    const stacks = [
+      {
+        id: "a0",
+        side: "attacker" as const,
+        slot: 0,
+        creatureId: "caveman",
+        initialCount: 5,
+        count: 4,
+      },
+      {
+        id: "d0",
+        side: "defender" as const,
+        slot: 0,
+        creatureId: "goblin",
+        initialCount: 3,
+        count: 2,
+      },
+    ];
+    const base = {
+      reason: "roundLimit" as const,
+      rounds: 15,
+      stacks,
+      killedHp: { attacker: 8, defender: 10 },
+    };
+    expect(
+      gameResultFromEngine(setup, { ...base, winner: "attacker" }),
+    ).toEqual({ winner: "attacker", attacker: [4], defender: [0] });
+    expect(
+      gameResultFromEngine(setup, { ...base, winner: "defender" }),
+    ).toEqual({ winner: "defender", attacker: [0], defender: [2] });
+  });
 });

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getStack, makeCondition } from "../../../src/core/battle/index.ts";
-import { stackInfo } from "../../../src/ui/battle/info.ts";
+import { roundLimitInfo, stackInfo } from "../../../src/ui/battle/info.ts";
 import { at, battle, patch, unit } from "./helpers.ts";
 
 describe("stackInfo", () => {
@@ -53,5 +53,32 @@ describe("stackInfo", () => {
     ]);
     // The Bomb Chucker is the Horde's since v0.2 (FACTION_GOBLINS 5).
     expect(info.ability?.name).toBe("Bomb");
+  });
+});
+
+describe("roundLimitInfo", () => {
+  it("shows rounds left and who wins at the limit as the board stands", () => {
+    // 7 Raptors (FV 173) against 5 Orc Brutes (FV 227).
+    const s = battle(
+      [unit("raptor", 7, at(3, 5))],
+      [unit("orc-brute", 5, at(10, 5))],
+    );
+    const info = roundLimitInfo(s, "attacker");
+    expect(info.label).toBe("Round 1 of 15");
+    expect(info.left).toBe("15 rounds left");
+    expect(info.value).toEqual({ attacker: 7 * 173, defender: 5 * 227 });
+    expect(info.winner).toBe("attacker");
+    expect(info.verdict).toBe("At the limit: you win, 1211 to 1135");
+    expect(roundLimitInfo(s, "defender").verdict).toBe(
+      "At the limit: the enemy wins, 1211 to 1135",
+    );
+    // A wounded top creature counts its HP left: 5 x 22 + 10 = 120 HP of
+    // 22-HP Raptors is floor(173 x 120 / 22) = 943. The last round says so.
+    const hurt = patch({ ...s, round: 15 }, "a0", { count: 6, topHp: 10 });
+    const last = roundLimitInfo(hurt, null);
+    expect(last.left).toBe("Last round");
+    expect(last.value.attacker).toBe(943);
+    expect(last.winner).toBe("defender");
+    expect(last.verdict).toBe("At the limit: the defender wins, 1135 to 943");
   });
 });

@@ -33,7 +33,7 @@ here.
 | GAME_DESIGN 9.3: five actions                                             | Adds hero cast, Command, item act, creature ability, retreat                                                        | 1.7     |
 | GAME_DESIGN 9.4: ability multipliers uncapped as a product                | Same formula; the product of percentage multipliers is capped at x 4 and floored at x 1/4; Harm is a second channel | 1.8     |
 | GAME_DESIGN 9.6: attack preview                                           | Rehearsal of any action as a full step chain, enemy intents, take-back                                              | 1.13    |
-| GAME_DESIGN 9.7: no retreat; round limit without a winner                 | Retreat; 30-round limit, the defender wins                                                                          | 1.12    |
+| GAME_DESIGN 9.7: no retreat; round limit without a winner                 | Retreat; 15-round limit, more fight value left wins                                                                 | 1.12    |
 | GAME_DESIGN 10: caps table                                                | Extended                                                                                                            | 1.11    |
 | GAME_DESIGN 11: should neutrals grow weekly?                              | No, not in v0.2                                                                                                     | 5.7     |
 | `StatusId` and `StatusInstance` (Venom) in `src/core/battle/types.ts`     | Conditions; Venom becomes the condition Venomed (Bloom, bane, size 3, clock 2), with the same numbers as before     | 1.3     |
@@ -447,7 +447,7 @@ target's retaliation with its own on-strike rules → everyone else's.
 | Effective Power                                  | 0 to 30                                                  |
 | Scheduled events pending                         | 12                                                       |
 | Reaction chain                                   | 64 steps                                                 |
-| Battle length                                    | 30 rounds                                                |
+| Battle length                                    | 15 rounds                                                |
 | Army Morale and Luck                             | -3 to +3                                                 |
 
 The MVP's ability caps (Mob +5, Pack Hunter x 2.0, Charge x 1.75) remain as
@@ -479,9 +479,21 @@ cannot show; a keyword whose rule is longer than one sentence.
   cannot apply (an engine or interface bug) never leaves the game
   waiting: the battle is void, nothing changes but the battle count, and
   the error is shown.
-- **Round limit.** If nobody has lost at the end of round 30, the defender
-  wins and the attacker is treated as defeated. (The MVP's 100-round limit
-  with no winner is replaced.)
+- **Round limit.** If nobody has lost at the end of round 15, the side
+  with more **fight value left** wins; a tie goes to the defender. Fight
+  value left is, per living stack the side owns that is not summoned, the
+  creature's fight value (GAME_DESIGN 8.2, base stats) x the stack's HP
+  left / the creature's HP, rounded down (ownership counts, as for losing).
+  The loser's survivors flee: the loser is defeated as if eliminated, and
+  the winner keeps its survivors. Neither side has lost, so the winner
+  always has living creatures and the last stand is never needed at the
+  limit; if they would all crumble after the battle, After the battle
+  keeps one, as for any winner. The battle screen shows the rounds left
+  and who wins at the limit as the board stands, so the verdict is never a
+  surprise. (Bead bzc.24 replaced "30 rounds, then the defender wins",
+  which made the attacker win only 30% of equal-value fights and stalled
+  guard fights; docs/design/BALANCE.md section 3 has the evidence. The
+  MVP's 100-round limit with no winner was replaced before that.)
 - **Retreat.** A hero may retreat on a friendly stack's turn unless the
   hero is defending inside a town or the hero's player owns no town. The
   battle ends as a loss; the army is lost; XP earned so far by the other
@@ -1293,26 +1305,26 @@ These map the rules onto the existing code; they add no rules.
 
 ### 8.1 Decisions made here
 
-| Decision                                                                                               | Why                                                                                                           |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| A full stack displaces its shortest-clock condition instead of refusing the seventh                    | Refusal would let six cheap boons make a stack immune to banes                                                |
-| Damage that travelled a link is never redirected again                                                 | The only loop guard links need; keeps link webs legal                                                         |
-| Fuel doubles one marked size per spell, or the gate of a sizeless gated spell; tools cannot be Fuelled | Answers the concept's open "what does Fuel double"; makes Fuel a way to Hold a bigger stack                   |
-| Echo and Fuel need no skill and work with scrolls                                                      | More meetings between pieces; school skills still gate tiers and Power                                        |
-| School rank 0 learns nothing; ranks 1, 2, 3 open tiers 2, 4, 5 and add 0, 2, 4 Power                   | Makes scrolls matter and a sixth of a hero's skill slots a real price per school                              |
-| Scrolls cost no mana                                                                                   | "Castable by anyone" must include heroes with Lore 1                                                          |
-| Clocks do not scale with Power                                                                         | Keeps the rehearsal readable and Echo and Wind meaningful                                                     |
-| Stat gains follow a fixed class pattern; offers are seeded per hero and level                          | No reload fishing; still the one-of-three choice                                                              |
-| Movement reads the slowest creature, anchored so Speed 4 gives the MVP's 1500                          | Heroes-like, and existing numbers stay true                                                                   |
-| Eleven worn slots including two pockets; one Marvel worn at a time                                     | The concept's example items need a slot that is not clothing; one Marvel keeps rule switches from compounding |
-| Cursed items are labelled, voluntary to wear, then stuck until lifted                                  | No hidden state; the drawback is the puzzle, not the surprise                                                 |
-| Round limit 30, defender wins; retreat added; no surrender                                             | A battle must end; retreat gives multi-hero play its Heroes shape                                             |
-| A hero in a town is fought first, then the garrison, as two battles                                    | Avoids merging two armies into seven slots                                                                    |
-| Fort is a flat Defense bonus and, at level 3, a scheduled tower shot; no walls                         | The cheap version the brief allowed                                                                           |
-| Explored cells stay visible (Heroes 1-3 fog)                                                           | No stale-memory model for the interface or the AI                                                             |
-| Neutrals do not grow                                                                                   | Keeps guard value in proportion to prizes on maze maps and gives the AI a stable target                       |
-| Morale and luck become four ordinary conditions placed at battle start                                 | Deterministic, visible, and movable like every other condition; no new subsystem                              |
-| The global start-of-day step pays every player before player 0 moves                                   | Simpler than per-turn upkeep and no player gains from order                                                   |
+| Decision                                                                                               | Why                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| A full stack displaces its shortest-clock condition instead of refusing the seventh                    | Refusal would let six cheap boons make a stack immune to banes                                                               |
+| Damage that travelled a link is never redirected again                                                 | The only loop guard links need; keeps link webs legal                                                                        |
+| Fuel doubles one marked size per spell, or the gate of a sizeless gated spell; tools cannot be Fuelled | Answers the concept's open "what does Fuel double"; makes Fuel a way to Hold a bigger stack                                  |
+| Echo and Fuel need no skill and work with scrolls                                                      | More meetings between pieces; school skills still gate tiers and Power                                                       |
+| School rank 0 learns nothing; ranks 1, 2, 3 open tiers 2, 4, 5 and add 0, 2, 4 Power                   | Makes scrolls matter and a sixth of a hero's skill slots a real price per school                                             |
+| Scrolls cost no mana                                                                                   | "Castable by anyone" must include heroes with Lore 1                                                                         |
+| Clocks do not scale with Power                                                                         | Keeps the rehearsal readable and Echo and Wind meaningful                                                                    |
+| Stat gains follow a fixed class pattern; offers are seeded per hero and level                          | No reload fishing; still the one-of-three choice                                                                             |
+| Movement reads the slowest creature, anchored so Speed 4 gives the MVP's 1500                          | Heroes-like, and existing numbers stay true                                                                                  |
+| Eleven worn slots including two pockets; one Marvel worn at a time                                     | The concept's example items need a slot that is not clothing; one Marvel keeps rule switches from compounding                |
+| Cursed items are labelled, voluntary to wear, then stuck until lifted                                  | No hidden state; the drawback is the puzzle, not the surprise                                                                |
+| Round limit 15, more fight value left wins; retreat added; no surrender                                | A battle must end, and a defender must not win it by stalling (BALANCE.md 3); retreat gives multi-hero play its Heroes shape |
+| A hero in a town is fought first, then the garrison, as two battles                                    | Avoids merging two armies into seven slots                                                                                   |
+| Fort is a flat Defense bonus and, at level 3, a scheduled tower shot; no walls                         | The cheap version the brief allowed                                                                                          |
+| Explored cells stay visible (Heroes 1-3 fog)                                                           | No stale-memory model for the interface or the AI                                                                            |
+| Neutrals do not grow                                                                                   | Keeps guard value in proportion to prizes on maze maps and gives the AI a stable target                                      |
+| Morale and luck become four ordinary conditions placed at battle start                                 | Deterministic, visible, and movable like every other condition; no new subsystem                                             |
+| The global start-of-day step pays every player before player 0 moves                                   | Simpler than per-turn upkeep and no player gains from order                                                                  |
 
 ### 8.2 The concept's "left for fleshing out"
 

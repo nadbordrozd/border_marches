@@ -13,6 +13,8 @@
  *   stacks, sized to a fight value.
  */
 import { createRng, deriveSeed } from "../../src/core/rng.ts";
+import { stackFor } from "../../src/core/map/gen/guards.ts";
+import { splitNeutralStack } from "../../src/core/game/progression.ts";
 import type { Rng } from "../../src/core/rng.ts";
 import { creatureFightValue } from "../../src/core/battle/damage.ts";
 import { NAMED_HEROES, getHeroClass } from "../../src/data/classes.ts";
@@ -41,6 +43,26 @@ import {
 
 export const FACTIONS = ["humans", "undead", "goblins"] as const;
 export type Faction = (typeof FACTIONS)[number];
+
+/**
+ * Army budgets and hero levels by stage of a game (docs/design/BALANCE.md
+ * section 2): from the week 1 ledger and weekly recruitment of
+ * ECONOMY.md section 8 and its XP estimate (level by end of week).
+ */
+export const STAGES = {
+  early: { budget: 8000, level: 5, label: "week 1-2", ring: 1 },
+  mid: { budget: 30000, level: 11, label: "week 4", ring: 2 },
+  late: { budget: 80000, level: 18, label: "week 8", ring: 3 },
+} as const;
+export type Stage = keyof typeof STAGES;
+export const STAGE_IDS = Object.keys(STAGES) as Stage[];
+
+/**
+ * How much hero a side gets: full (stats, Command, book and scrolls),
+ * nobook (stats and Command, no pages, scrolls or mana) or none (no hero).
+ */
+export type HeroMode = "full" | "nobook" | "none";
+export const HERO_MODES: readonly HeroMode[] = ["full", "nobook", "none"];
 
 /** Gold value of a resource unit when pricing an army. */
 export const RESOURCE_GOLD = { wood: 150, ore: 150, essence: 400 } as const;
@@ -101,6 +123,23 @@ export function buildArmy(
       count: counts[i] as number,
     }))
     .filter((s) => s.count > 0);
+}
+
+/**
+ * A map guard of about `fightValue` as the generator makes it
+ * (src/core/map/gen/guards.ts stackFor: a stray of the ring whose count
+ * fits 5-50), deployed as the game deploys it (splitNeutralStack).
+ */
+export function buildMapGuard(
+  fightValue: number,
+  seed: number,
+  ring: number,
+): GameBattleStack[] {
+  const g = stackFor(rngFor(seed, "map-guard"), fightValue, { ring });
+  return splitNeutralStack(g.count).map((count) => ({
+    creature: g.creature as CreatureId,
+    count,
+  }));
 }
 
 /** A neutral guard of about `fightValue`, seeded (one creature type). */
@@ -177,6 +216,14 @@ export function buildHero(
   return hero;
 }
 
+/** A hero without spells: no pages, scrolls or mana. */
+export function withoutBook(hero: HeroState): HeroState {
+  hero.pages = [];
+  hero.scrolls = [];
+  hero.mana = 0;
+  return hero;
+}
+
 export function heroSide(
   faction: Faction,
   hero: HeroState,
@@ -192,6 +239,23 @@ export function heroSide(
       defense: hero.defense,
       profile: heroBattleProfile(hero),
     },
+    stacks,
+    defenseBonus: 0,
+    faction,
+    drills: [],
+    specials: [],
+  };
+}
+
+/** A faction side with no hero (HeroMode none). */
+export function heroLessSide(
+  faction: Faction,
+  stacks: GameBattleStack[],
+  owner: number,
+): GameBattleSide {
+  return {
+    owner,
+    hero: null,
     stacks,
     defenseBonus: 0,
     faction,

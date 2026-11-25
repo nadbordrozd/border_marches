@@ -36,6 +36,7 @@ import {
 import {
   applyDamageToStack,
   computeDamage,
+  creatureFightValue,
   computeHarm,
   defendedDefense,
   totalHp,
@@ -102,7 +103,52 @@ export const MAX_REACTION_STEPS = 64;
 export const MAX_LIVING_STACKS_PER_SIDE = 10;
 export const MIN_SPEED = 1;
 export const MAX_SPEED = 12;
-export const ROUND_LIMIT = 30;
+export const ROUND_LIMIT = 15;
+
+/** The battle's round limit (RULES_V2 1.12). */
+export function roundLimitOf(state: {
+  readonly roundLimit?: number | undefined;
+}): number {
+  return state.roundLimit ?? ROUND_LIMIT;
+}
+
+/**
+ * Fight value a side has left (RULES_V2 1.12, the round-limit verdict):
+ * per living stack it owns that is not summoned, the creature's fight value
+ * (GAME_DESIGN 8.2, base stats) x the stack's HP left / the creature's HP,
+ * rounded down. Ownership counts, as for losing: a Turned stack counts for
+ * its owner.
+ */
+export function fightValueLeft(
+  state: { readonly stacks: readonly BattleStack[] },
+  side: BattleSide,
+): number {
+  let total = 0;
+  for (const s of state.stacks) {
+    if (s.owner !== side || s.summoned || !isAlive(s)) continue;
+    const hp = totalHp({
+      count: s.count,
+      hp: s.creature.hp,
+      topHp: s.topHp,
+    });
+    total += Math.floor(
+      (creatureFightValue(s.creature) * hp) / Math.max(1, s.creature.hp),
+    );
+  }
+  return total;
+}
+
+/**
+ * Who wins if the round limit is reached as the board stands: the side
+ * with more fight value left; a tie goes to the defender.
+ */
+export function roundLimitWinner(state: {
+  readonly stacks: readonly BattleStack[];
+}): BattleSide {
+  return fightValueLeft(state, "attacker") > fightValueLeft(state, "defender")
+    ? "attacker"
+    : "defender";
+}
 
 export function enemySide(side: BattleSide): BattleSide {
   return side === "attacker" ? "defender" : "attacker";
@@ -431,6 +477,7 @@ export class Draft {
   scheduled: ScheduledEvent[];
   nextUid: number;
   readonly laws: readonly string[];
+  readonly roundLimit: number | undefined;
   readonly events: BattleEvent[] = [];
   /** The hero act or rule resolving now (see {@link Acting}). */
   acting: Acting | null = null;
@@ -460,6 +507,7 @@ export class Draft {
     this.scheduled = state.scheduled.slice();
     this.nextUid = state.nextUid;
     this.laws = state.laws;
+    this.roundLimit = state.roundLimit;
     this.stacks.forEach((s, i) => this.index.set(s.id, i));
   }
 
@@ -512,6 +560,7 @@ export class Draft {
       scheduled: this.scheduled.slice(),
       nextUid: this.nextUid,
       laws: this.laws,
+      ...(this.roundLimit !== undefined ? { roundLimit: this.roundLimit } : {}),
     };
   }
 

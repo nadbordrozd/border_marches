@@ -72,7 +72,8 @@ export function weeklyGrowth(
 
 /**
  * Fight value per creature (GAME_DESIGN.md section 8.2): a map-generation
- * heuristic, never used in battle.
+ * heuristic; in battle only the round-limit verdict reads it (RULES_V2
+ * 1.12).
  * round(10 x sqrt(HP x Dmg) x (1 + 0.05 x (Atk + Def)) x (1.25 if ranged)).
  */
 export function fightValue(def: CreatureDef): number {

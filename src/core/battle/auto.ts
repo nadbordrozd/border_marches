@@ -16,8 +16,9 @@ import type {
 } from "./types.ts";
 
 /**
- * The engine ends every battle after round 30 with a defender win
- * (RULES_V2 1.12); kept under the old name for callers.
+ * The engine ends every battle at its round limit (RULES_V2 1.12: the
+ * side with more fight value left wins); kept under the old name for
+ * callers.
  */
 export const DEFAULT_MAX_ROUNDS = ROUND_LIMIT;
 
@@ -25,7 +26,7 @@ export interface AutoBattleOptions {
   /**
    * Stop auto-play once this many rounds have started without a winner (a
    * harness for tests and tools; the result then has winner null). The
-   * engine's own limit is 30.
+   * engine's own limit is ROUND_LIMIT (15).
    */
   readonly maxRounds?: number;
 }

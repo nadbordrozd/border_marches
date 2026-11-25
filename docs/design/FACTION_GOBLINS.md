@@ -69,14 +69,15 @@ RULES_V2 1.10, "area effects apply to their targets".
 
 | Tier | Unit         |  HP | Atk | Def | Dmg | Speed | Shots | Growth/week | Cost                       |   FV | Abilities                    |
 | ---: | ------------ | --: | --: | --: | --: | ----: | ----: | ----------: | -------------------------- | ---: | ---------------------------- |
-|    1 | Goblin       |   8 |   4 |   2 |   2 |     5 |     - |          20 | 35 gold                    |   52 | Cannonball                   |
+|    1 | Goblin       |   8 |   4 |   2 |   2 |     5 |     - |          20 | 40 gold                    |   52 | Cannonball                   |
 |    2 | Bomb Chucker |  12 |   6 |   3 |   3 |     4 |     8 |          10 | 110 gold                   |  109 | Bomb                         |
 |    3 | Wolf Rider   |  18 |   7 |   5 |   4 |     8 |     - |           8 | 190 gold                   |  136 | Worry                        |
 |    4 | Boomshaman   |  28 |   7 |   6 |   6 |     5 |     - |           4 | 380 gold + 1 essence       |  214 | Caster: Thunderclap, Set off |
-|    5 | Ogre         |  90 |  14 |  12 |  16 |     4 |     - |           2 | 1050 gold + 3 wood         |  873 | Hurl                         |
-|    6 | Orc Warboss  | 160 |  18 |  15 |  32 |     6 |     - |           1 | 2800 gold + 5 wood + 3 ore | 1896 | Stomp                        |
+|    5 | Ogre         |  90 |  14 |  12 |  16 |     4 |     - |           2 | 950 gold + 3 wood          |  873 | Hurl                         |
+|    6 | Orc Warboss  | 160 |  18 |  15 |  32 |     6 |     - |           1 | 2500 gold + 5 wood + 3 ore | 1896 | Stomp                        |
 
-One week of all six dwellings: 9740 gold, 11 wood, 3 ore, 4 essence; fight
+One week of all six dwellings: 9340 gold (prices tuned by the balance bead,
+[BALANCE.md](BALANCE.md) section 5), 11 wood, 3 ore, 4 essence; fight
 value 7716 on paper, before area damage, which the fight value formula does
 not see. The slowest creature has Speed 4, so a full army moves 1500 a day.
 

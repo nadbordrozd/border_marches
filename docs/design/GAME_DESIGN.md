@@ -190,7 +190,9 @@ Each has at most one simple, deterministic ability.
 FV per creature = round(10 x sqrt(HP x Dmg) x (1 + 0.05 x (Atk + Def)) x
 (1.25 if ranged)). A stack's FV is count x creature FV (the square root of a
 stack's Lanchester strength, so stacks add up roughly linearly). FV is a
-map-generation heuristic, never used in battle.
+map-generation heuristic. Its one use in battle (v0.2, bead bzc.24): at the
+round limit the side with more fight value left wins (RULES_V2 1.12, which
+replaces section 9.7's "no limit"; see BALANCE.md).
 
 Lost World reference values: Caveman 60, Spitter 122, Raptor 173, Shaman 387,
 Triceratops 849, T-Rex 2504. The starting army (18 Cavemen, 6 Spitters) is

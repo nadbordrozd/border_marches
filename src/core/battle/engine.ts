@@ -20,7 +20,8 @@ import {
 import {
   Draft,
   Resolver,
-  ROUND_LIMIT,
+  roundLimitOf,
+  roundLimitWinner,
   bears,
   blockingHexes,
   effectiveSpeed,
@@ -704,8 +705,9 @@ function endRound(d: Draft, fx: Resolver): void {
   for (const s of d.stacks) {
     if (s.wary > 0) d.update(s.id, { wary: s.wary - 1 });
   }
-  // Round limit: the defender wins.
-  if (d.round >= ROUND_LIMIT) finish(d, "defender", "roundLimit");
+  // Round limit (1.12): the side with more fight value left wins (a tie
+  // goes to the defender); the loser's survivors flee.
+  if (d.round >= roundLimitOf(d)) finish(d, roundLimitWinner(d), "roundLimit");
 }
 
 function startRound(d: Draft, fx: Resolver, round: number): void {

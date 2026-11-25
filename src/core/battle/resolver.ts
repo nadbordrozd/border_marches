@@ -225,8 +225,10 @@ export function engineSetupFromGame(setup: GameBattleSetup): BattleSetup {
 }
 
 /**
- * Survivors per input stack, as applyBattleResult expects. A round-limit
- * result becomes a defender win with no attacker survivors.
+ * Survivors per input stack, as applyBattleResult expects. At the round
+ * limit (RULES_V2 1.12) the side with more fight value left wins and the
+ * loser's survivors flee: it keeps none, as if eliminated. An abandoned
+ * battle (no winner) is a defender win with no attacker survivors.
  */
 export function gameResultFromEngine(
   setup: GameBattleSetup,
@@ -234,9 +236,7 @@ export function gameResultFromEngine(
 ): GameBattleResult {
   const survivors = (prefix: "a" | "d", n: number): number[] => {
     const side = prefix === "a" ? setup.attacker : setup.defender;
-    const won =
-      result.winner === (prefix === "a" ? "attacker" : "defender") &&
-      result.reason !== "roundLimit";
+    const won = result.winner === (prefix === "a" ? "attacker" : "defender");
     // RULES_V2 1.12: a stack that got up crumbles, unless its owner holds
     // the Hall of Ancestors and won.
     const keepRisen =
@@ -268,14 +268,14 @@ export function gameResultFromEngine(
   const defender = survivors("d", setup.defender.stacks.length);
   const withMagic = (r: GameBattleResult): GameBattleResult =>
     result.magic ? { ...r, magic: result.magic } : r;
-  if (result.winner === null || result.reason === "roundLimit") {
+  if (result.winner === null) {
     return withMagic({
       winner: "defender",
       attacker: attacker.map(() => 0),
       defender,
     });
   }
-  if (result.reason === "retreat") {
+  if (result.reason === "retreat" || result.reason === "roundLimit") {
     return withMagic(
       result.winner === "defender"
         ? { winner: "defender", attacker: attacker.map(() => 0), defender }
