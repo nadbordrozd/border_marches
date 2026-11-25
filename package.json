@@ -20,7 +20,8 @@
     "sim:battles": "node tests/sim/run.mjs ./tests/sim/battles.ts",
     "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build",
     "map:ascii": "node tests/print-map.ts",
-    "map:poster": "node tools/map-poster.mjs"
+    "map:poster": "node tools/map-poster.mjs",
+    "screens": "node tests/ui/screens-check.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

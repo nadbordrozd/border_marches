@@ -9,28 +9,43 @@ found, what was fixed and what is left.
 
 `tests/ui/screens-check.mjs` takes a muted screenshot of every screen in
 headless Chrome (`--mute-audio`, `?mute=1`) from hand-built saves and the
-battle debug routes. It never ends a turn, so no AI plays.
+battle debug routes. It never ends a turn (the end-turn warning is answered
+with Escape and the day is checked) and never resolves a battle, so no AI
+plays. It starts its own Vite server on a free port and lets Chrome pick a
+free DevTools port, so parallel workers never collide (bead bzc.52, UI2-01).
 
 ```text
-npx vite --port 6297 --strictPort &
-node tests/ui/screens-check.mjs http://localhost:6297/ .orchestration/screens/bzc25/after 1440x900
-node tests/ui/screens-check.mjs http://localhost:6297/ .orchestration/screens/bzc25/after 1280x800
-node tests/ui/screens-check.mjs http://localhost:6297/ .orchestration/screens/bzc25/after 1920x1080
+npm run screens -- --out=.orchestration/screens/<bead> --size=1280x800,1920x1080
+npm run screens -- --only=hero,town --size=1280x800
+npm run screens -- --url=http://127.0.0.1:6400/ --timeout=600
+CDP_PORT=9555 node tests/ui/screens-check.mjs --only=battle
 ```
 
-The fifth argument limits the run to some screens, for example
-`menu,adventure,hero,town`. The hand-built save gives the hero levels,
-artifacts, pages, scrolls and skills, makes every town the player's and
-puts a second hero next to the first for the meeting. The site dialog
-clears the neutral guards and reveals the map first. The end screens use
-the `previewEnd` page hook.
+`--only` takes screen names or families (`gallery` is every `gallery-*`
+shot). `--url` uses a running server instead of starting one; `CDP_PORT`
+fixes the DevTools port; `--timeout` (default 900 s) stops a stuck run.
+`battle-result` auto-resolves a battle and runs only when named in
+`--only`. The hand-built save gives the hero levels,
+artifacts, pages and scrolls (adventure spells included) and skills, makes
+every town the player's and puts a second hero next to the first for the
+meeting. The site step clears the neutral guards, reveals the map and walks
+to a site with a choice within today's reach. The end screens use the
+`previewEnd` page hook. A JSON line ends the run: `ok`, `failures`,
+`skipped` and page `errors`.
 
-Screens: `menu`, `adventure` (path plan and monster hover),
-`adventure-hover-object`, `adventure-hover-resource`, `adventure-rich`,
-`hero`, `hero-hover`, `kingdom`, `spellbook`, `menu-dialog`, `meeting`,
-`town-<faction>`, `town-hover`, `recruit`, `market`, `prebattle`, `site`,
-`levelup`, `levelup-hover`, `end-won`, `end-lost`, `battle`,
-`battle-hover`, `battle-info`, `battle-book` and `battle-result`.
+Screens: `menu`, `menu-named`, `menu-options`, `menu-continue`,
+`gallery-<tab>` (every tab), `gallery-hover`, `gallery-keyword`,
+`adventure` (path plan and monster hover), `adventure-hover-object`,
+`adventure-pickup` (the grab cursor, stamped as a label because headless
+shots draw no cursor), `adventure-hover-resource`, `adventure-rich`,
+`endturn`, `hero`, `hero-hover`, `hero-hover-army`, `hero-hover-skill`,
+`hero-hover-feat`, `hero-hover-stat`, `kingdom`, `spellbook` (the
+adventure tab), `spellbook-battle` (when the book has tabs), `adventure-aim`, `menu-dialog`, `meeting`, `town-<faction>`, `town-hover`,
+`town-hall` (a selected hall tile), `recruit`, `market`, `prebattle`,
+`site`, `levelup`, `levelup-hover`, `end-won`, `end-lost`, `battle`,
+`battle-hover`, `battle-info`, `battle-book`, `battle-spell`,
+`battle-spell-hover`, `battle-spell-noeffect` and, when named,
+`battle-result`.
 
 ## One visual language
 

@@ -1,62 +1,276 @@
-/* global Buffer, URL, WebSocket, console, fetch, process, setTimeout */
-// Screenshot tour of every screen (bead border_marches-bzc.25, UI review).
-// Not a simulation: hand-built saves and debug routes, no turn is ended.
+/* global AbortSignal, Buffer, URL, WebSocket, clearTimeout, console, fetch, process, setTimeout */
+// Screenshot tour of every screen (beads border_marches-bzc.25, bzc.52 UI2-01).
+// Not a simulation: hand-built saves and debug routes. The tour never ends a
+// turn (the end-turn warning is answered with Escape, "Keep playing", and the
+// day is checked) and never resolves a battle (battle-result, the one
+// auto-resolved screen, runs only when named in --only).
 //
-//   npx vite --port 6297 --strictPort &
-//   node tests/ui/screens-check.mjs [url] [screens-dir] [WxH] [only,names]
+//   node tests/ui/screens-check.mjs [options]          (npm run screens -- ...)
 //
-// Headless system Chrome, muted (--mute-audio, ?mute=1). Screens: the menu,
-// the adventure map (path plan and hover tooltip), the hero sheet, each
-// faction's town, recruit and marketplace, the kingdom, the meeting, the
-// adventure spellbook, a site dialog, the pre-battle dialog, the level-up
-// draft, the menu dialog, the victory and defeat screens, and the battle
-// debug routes (field, hover, info panel, spellbook, result). Prints a JSON
-// summary; exits non-zero on a page error or failed step.
+//   --url=http://127.0.0.1:6400/   a running dev server; default (or "auto"):
+//                                  the tour starts its own Vite on a free port
+//   --out=<dir>                    default .orchestration/screens/tour
+//   --size=1280x800,1920x1080      one run per size (default both)
+//   --only=menu,gallery,hero       some screens: a name or a family prefix
+//   --timeout=900                  whole-run limit in seconds, then exit 2
+//
+// Environment: SCREENS_URL (as --url), CDP_PORT (the Chrome DevTools port;
+// default a free port chosen by Chrome), SCREENS_TIMEOUT (as --timeout),
+// CHROME (the Chrome binary). The old positional form still works:
+// [url|auto] [out] [WxH[,WxH]] [only,names].
+//
+// Headless system Chrome, muted (--mute-audio, ?mute=1), its own profile,
+// server and DevTools port, so parallel workers never collide. Prints one
+// JSON summary line; exits non-zero on a page error, a failed check or the
+// timeout. Screens (file <name>-<W>x<H>.png):
+//   menu, menu-named, menu-options, menu-continue,
+//   gallery-<tab> (every tab), gallery-hover, gallery-keyword,
+//   adventure, adventure-hover-object, adventure-pickup (grab cursor),
+//   adventure-hover-resource, adventure-rich, endturn, hero, hero-hover,
+//   hero-hover-army, hero-hover-skill, hero-hover-feat, hero-hover-stat,
+//   kingdom, spellbook (adventure tab), spellbook-battle, adventure-aim,
+//   menu-dialog, meeting, town-<faction>, town-hover, town-hall (a selected tile), recruit, market, prebattle,
+//   site, levelup, levelup-hover, end-won, end-lost, battle, battle-hover,
+//   battle-info, battle-book, battle-spell, battle-spell-hover,
+//   battle-spell-noeffect, [battle-result].
 import { spawn } from "node:child_process";
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
+import { createServer } from "node:net";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const BASE = process.argv[2] ?? "http://localhost:6297/";
-const OUT = process.argv[3] ?? ".orchestration/screens/bzc25";
-const [W, H] = (process.argv[4] ?? "1440x900").split("x").map(Number);
-const ONLY = process.argv[5] ? new Set(process.argv[5].split(",")) : null;
+// ------------------------------------------------------------- options
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+const flags = {};
+const positional = [];
+for (const a of process.argv.slice(2)) {
+  const m = /^--([a-z]+)=(.*)$/.exec(a);
+  if (m) flags[m[1]] = m[2];
+  else positional.push(a);
+}
+const urlArg = flags.url ?? positional[0] ?? process.env.SCREENS_URL ?? "auto";
+const OUT = resolve(
+  flags.out ?? positional[1] ?? ".orchestration/screens/tour",
+);
+const SIZES = (flags.size ?? positional[2] ?? "1280x800,1920x1080")
+  .split(",")
+  .map((s) => s.split("x").map(Number));
+const onlyArg = flags.only ?? positional[3] ?? "";
+const ONLY = onlyArg === "" ? null : onlyArg.split(",");
+const TIMEOUT_S = Number(flags.timeout ?? process.env.SCREENS_TIMEOUT ?? 900);
 const CHROME =
   process.env.CHROME ??
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const PORT = 9345 + (W % 7);
+const CDP_WANTED = process.env.CDP_PORT ? Number(process.env.CDP_PORT) : 0;
+for (const [w, h] of SIZES) {
+  if (!(w > 0 && h > 0)) throw new Error(`bad size in ${SIZES}`);
+}
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-mkdirSync(OUT, { recursive: true });
-const profile = mkdtempSync(join(tmpdir(), "bm-screens-"));
-const chrome = spawn(
-  CHROME,
-  [
-    "--headless=new",
-    "--mute-audio",
-    "--no-first-run",
-    "--no-default-browser-check",
-    "--hide-scrollbars",
-    `--remote-debugging-port=${PORT}`,
-    `--user-data-dir=${profile}`,
-    `--window-size=${W},${H}`,
-    "about:blank",
-  ],
-  { stdio: "ignore" },
-);
-
-let ws;
+let W = 0;
+let H = 0;
+let BASE = "";
+let cdpPort = 0;
+let server = null;
+let chrome = null;
+let profile = null;
+let ws = null;
 let nextId = 1;
 const pending = new Map();
 const errors = [];
 const shots = [];
+const failures = [];
+const skipped = [];
+const notes = [];
 
-function send(method, params = {}) {
-  const id = nextId++;
-  ws.send(JSON.stringify({ id, method, params }));
-  return new Promise((resolve, reject) =>
-    pending.set(id, { resolve, reject, method }),
+/** True when the screen is wanted: no --only, its name, or a prefix family. */
+const want = (name) =>
+  ONLY === null || ONLY.some((o) => name === o || name.startsWith(`${o}-`));
+/** Some screen of the family `prefix` (prefix or prefix-...) is wanted. */
+const wantFamily = (prefix) =>
+  ONLY === null || ONLY.some((o) => o === prefix || o.startsWith(`${prefix}-`));
+/** Battle result auto-resolves a battle: only when named exactly. */
+const named = (name) => ONLY !== null && ONLY.includes(name);
+
+const skip = (name, why) => {
+  skipped.push(`${name}-${W}x${H}: ${why}`);
+  console.log(`- skipped ${name}: ${why}`);
+};
+const fail = (name, why) => {
+  failures.push(`${name}-${W}x${H}: ${why}`);
+  console.log(`- FAIL ${name}: ${why}`);
+};
+const note = (text) => {
+  notes.push(`${W}x${H} ${text}`);
+  console.log(`- ${text}`);
+};
+
+// ---------------------------------------------------- cleanup, timeout
+function cleanup() {
+  try {
+    ws?.close();
+  } catch {
+    // already closed
+  }
+  chrome?.kill("SIGKILL");
+  server?.kill("SIGTERM");
+  if (profile !== null) {
+    try {
+      rmSync(profile, { recursive: true, force: true });
+    } catch {
+      // Chrome may still hold a file for a moment.
+    }
+  }
+}
+const deadline = setTimeout(() => {
+  console.error(`FAIL: the tour passed its ${TIMEOUT_S} s limit`);
+  console.log(
+    JSON.stringify({ ok: false, timeout: true, shots: shots.length, failures }),
   );
+  cleanup();
+  process.exit(2);
+}, TIMEOUT_S * 1000);
+for (const sig of ["SIGINT", "SIGTERM"]) {
+  process.on(sig, () => {
+    cleanup();
+    process.exit(130);
+  });
+}
+
+// -------------------------------------------------------------- server
+function freePort() {
+  return new Promise((ok, no) => {
+    const s = createServer();
+    s.on("error", no);
+    s.listen(0, "127.0.0.1", () => {
+      const { port } = s.address();
+      s.close(() => ok(port));
+    });
+  });
+}
+
+async function startServer() {
+  const port = await freePort();
+  const vite = join(ROOT, "node_modules", "vite", "bin", "vite.js");
+  if (!existsSync(vite)) throw new Error(`no ${vite}: run npm ci first`);
+  let log = "";
+  server = spawn(
+    process.execPath,
+    [vite, "--port", String(port), "--strictPort", "--host", "127.0.0.1"],
+    { cwd: ROOT, stdio: ["ignore", "pipe", "pipe"] },
+  );
+  server.stdout.on("data", (d) => (log += d));
+  server.stderr.on("data", (d) => (log += d));
+  let exited = false;
+  server.on("exit", () => (exited = true));
+  const url = `http://127.0.0.1:${port}/`;
+  const t0 = Date.now();
+  while (Date.now() - t0 < 60000) {
+    if (exited) throw new Error(`Vite exited:\n${log.slice(-2000)}`);
+    try {
+      if ((await fetch(url)).ok) return url;
+    } catch {
+      // not listening yet
+    }
+    await sleep(200);
+  }
+  throw new Error(`Vite did not answer on ${url}:\n${log.slice(-2000)}`);
+}
+
+// -------------------------------------------------------------- chrome
+async function startChrome() {
+  profile = mkdtempSync(join(tmpdir(), "bm-screens-"));
+  const [w, h] = SIZES[0];
+  chrome = spawn(
+    CHROME,
+    [
+      "--headless=new",
+      "--mute-audio",
+      "--no-first-run",
+      "--no-default-browser-check",
+      "--hide-scrollbars",
+      `--remote-debugging-port=${CDP_WANTED}`,
+      `--user-data-dir=${profile}`,
+      `--window-size=${w},${h}`,
+      "about:blank",
+    ],
+    { stdio: "ignore" },
+  );
+  // Port 0: Chrome picks a free port and writes it to DevToolsActivePort.
+  const portFile = join(profile, "DevToolsActivePort");
+  let target;
+  for (let i = 0; i < 100 && !target; i++) {
+    await sleep(200);
+    try {
+      cdpPort =
+        CDP_WANTED || Number(readFileSync(portFile, "utf8").split("\n")[0]);
+      if (!cdpPort) continue;
+      const list = await (
+        await fetch(`http://127.0.0.1:${cdpPort}/json`)
+      ).json();
+      target = list.find((t) => t.type === "page");
+    } catch {
+      // Chrome is still starting.
+    }
+  }
+  if (!target) throw new Error(`Chrome did not start (DevTools ${cdpPort})`);
+  ws = new WebSocket(target.webSocketDebuggerUrl);
+  await new Promise((ok, no) => {
+    ws.onopen = ok;
+    ws.onerror = no;
+  });
+  ws.onclose = () => {
+    for (const p of pending.values()) p.reject(new Error("DevTools closed"));
+    pending.clear();
+  };
+  ws.onmessage = (event) => {
+    const msg = JSON.parse(event.data);
+    if (msg.id && pending.has(msg.id)) {
+      const p = pending.get(msg.id);
+      pending.delete(msg.id);
+      if (msg.error) p.reject(new Error(`${p.method}: ${msg.error.message}`));
+      else p.resolve(msg.result);
+    }
+    if (msg.method === "Runtime.exceptionThrown") {
+      errors.push(
+        msg.params.exceptionDetails.exception?.description ??
+          msg.params.exceptionDetails.text,
+      );
+    }
+  };
+  await send("Runtime.enable");
+  await send("Page.enable");
+}
+
+/** One DevTools call; rejects after `ms` so a stale page cannot hang us. */
+function send(method, params = {}, ms = 30000) {
+  const id = nextId++;
+  return new Promise((ok, no) => {
+    const timer = setTimeout(() => {
+      pending.delete(id);
+      no(new Error(`${method}: no answer in ${ms} ms`));
+    }, ms);
+    pending.set(id, {
+      method,
+      resolve: (v) => {
+        clearTimeout(timer);
+        ok(v);
+      },
+      reject: (e) => {
+        clearTimeout(timer);
+        no(e);
+      },
+    });
+    ws.send(JSON.stringify({ id, method, params }));
+  });
 }
 
 async function evaluate(expression) {
@@ -76,13 +290,20 @@ async function evaluate(expression) {
 async function waitFor(expression, what, timeout = 20000) {
   const t0 = Date.now();
   while (Date.now() - t0 < timeout) {
-    if (await evaluate(`Boolean(${expression})`)) return;
+    if (await evaluate(`Boolean(${expression})`)) return true;
     await sleep(100);
   }
   throw new Error(`timed out waiting for ${what}`);
 }
 
-const want = (name) => ONLY === null || ONLY.has(name);
+/** Like waitFor, but answers false instead of throwing. */
+async function waitMaybe(expression, timeout) {
+  try {
+    return await waitFor(expression, "", timeout);
+  } catch {
+    return false;
+  }
+}
 
 async function shot(name) {
   const r = await send("Page.captureScreenshot", { format: "png" });
@@ -112,13 +333,64 @@ const clickText = (selector, text) =>
     b.click();
     return true;
   })()`);
+/** Clicks the first enabled element of `selector`; false when none. */
+const clickFirst = (selector) =>
+  evaluate(`(() => {
+    const b = [...document.querySelectorAll(${JSON.stringify(selector)})].find((n) => !n.disabled);
+    if (!b) return false;
+    b.click();
+    return true;
+  })()`);
 const game = (expr) => evaluate(`window.__bmGame.${expr}`);
 const idle = () =>
   waitFor("window.__bmGame && !window.__bmGame.busy()", "idle");
-const mouse = async (x, y) => {
+const mouse = async (x, y, ms = 250) => {
   await send("Input.dispatchMouseEvent", { type: "mouseMoved", x, y });
-  await sleep(250);
+  await sleep(ms);
 };
+/** The point (dx, dy) inside the n-th element of `selector`, or null. */
+const pointIn = (selector, dx = 10, dy = 8, n = 0) =>
+  evaluate(`(() => {
+    const r = document.querySelectorAll(${JSON.stringify(selector)})[${n}];
+    if (!r) return null;
+    r.scrollIntoView({ block: 'nearest' });
+    const b = r.getBoundingClientRect();
+    return { x: Math.round(b.x + Math.min(${dx}, b.width / 2)), y: Math.round(b.y + Math.min(${dy}, b.height / 2)) };
+  })()`);
+/** Hovers the first element of `selector` and shoots `name`. */
+async function hoverShot(name, selector, dx, dy) {
+  if (!want(name)) return;
+  const p = await pointIn(selector, dx, dy);
+  if (!p) return skip(name, `nothing matches ${selector}`);
+  await mouse(p.x, p.y, 600);
+  await shot(name);
+}
+/** Parks the pointer in a corner so no hover card is left open. */
+const park = () => mouse(2, H - 2, 150);
+
+/**
+ * Headless screenshots do not draw the cursor: stamp the CSS cursor under
+ * the pointer as a small label at the pointer (removed after the shot).
+ */
+const stampCursor = (x, y, label) =>
+  evaluate(`(() => {
+    const d = document.createElement('div');
+    d.className = 'tour-cursor';
+    d.textContent = ${JSON.stringify(label)};
+    Object.assign(d.style, { position: 'fixed', left: '${x + 14}px', top: '${y - 24}px',
+      zIndex: 2147483647, font: 'bold 12px sans-serif', background: '#000c', color: '#ffd84a',
+      padding: '1px 5px', borderRadius: '3px', pointerEvents: 'none' });
+    const ring = document.createElement('div');
+    ring.className = 'tour-cursor';
+    Object.assign(ring.style, { position: 'fixed', left: '${x - 6}px', top: '${y - 6}px', width: '12px',
+      height: '12px', border: '2px solid #ffd84a', borderRadius: '50%', zIndex: 2147483647,
+      pointerEvents: 'none' });
+    document.body.append(d, ring);
+  })()`);
+const unstamp = () =>
+  evaluate(
+    "document.querySelectorAll('.tour-cursor').forEach((n) => n.remove())",
+  );
 
 /** Edits the stored save in the page (a function body over `s`). */
 const editSave = (body) =>
@@ -129,10 +401,16 @@ const editSave = (body) =>
     localStorage.setItem('border-marches.save', JSON.stringify(raw));
   })()`);
 
-async function continueSaved() {
+async function continueSaved(shotName = null) {
   await go("?mute=1");
   await waitFor("document.querySelector('.gm-menu')", "main menu");
-  await clickText(".gm-menu-main", "Continue");
+  if (shotName !== null && want(shotName)) {
+    await sleep(500);
+    await shot(shotName);
+  }
+  if (!(await clickText(".gm-menu button", "Continue"))) {
+    throw new Error("no Continue button on the menu");
+  }
   await waitFor("window.__bmGame", "adventure screen");
   await sleep(400);
 }
@@ -144,14 +422,17 @@ const RICH = `
   const skills = await import('/src/data/skills.ts');
   const feats = await import('/src/data/feats.ts');
   const roster = await import('/src/data/players.ts');
+  const magic = await import('/src/core/magic/index.ts');
   const p0 = s.players.find((p) => p.id === 0);
   for (const r of Object.keys(p0.resources)) p0.resources[r] = 40;
   p0.resources.gold = 42000;
   const h = s.heroes.find((x) => x.owner === 0 && x.alive);
   h.level = 9; h.xp = 9000; h.attack += 3; h.defense += 2; h.power += 3; h.lore += 2;
-  h.mp = 4000; h.maxMp = 4000; h.mana = 30;
-  h.pages = spells.MAP_SPELLS.slice(0, 18).map((x) => x.id);
-  h.scrolls = spells.MAP_SPELLS.slice(18, 21).map((x) => x.id);
+  h.mp = 4000; h.maxMp = 4000; h.mana = 60;
+  // Battle pages and every adventure spell (the book and map aiming).
+  h.pages = [...spells.MAP_SPELLS.slice(0, 18), ...magic.ADVENTURE_SPELLS].map((x) => x.id);
+  // Battle scrolls and two adventure scrolls (the book's scroll case).
+  h.scrolls = [...spells.MAP_SPELLS.slice(18, 21), ...magic.ADVENTURE_SPELLS.slice(0, 2)].map((x) => x.id);
   const skillIds = Object.keys(skills.SKILLS).slice(0, 5);
   h.skills = skillIds.map((id, i) => ({ id, rank: 1 + (i % 3) }));
   h.feats = feats.FEAT_LIST.filter((f) => !feats.isVow(f)).slice(0, 2).map((f) => f.id);
@@ -190,115 +471,338 @@ const RICH = `
   }
 `;
 
-async function main() {
-  let target;
-  for (let i = 0; i < 50 && !target; i++) {
-    await sleep(200);
-    try {
-      const list = await (await fetch(`http://127.0.0.1:${PORT}/json`)).json();
-      target = list.find((t) => t.type === "page");
-    } catch {
-      // Chrome is still starting.
-    }
-  }
-  if (!target) throw new Error("Chrome did not start");
-  ws = new WebSocket(target.webSocketDebuggerUrl);
-  await new Promise((resolve, reject) => {
-    ws.onopen = resolve;
-    ws.onerror = reject;
-  });
-  ws.onmessage = (event) => {
-    const msg = JSON.parse(event.data);
-    if (msg.id && pending.has(msg.id)) {
-      const p = pending.get(msg.id);
-      pending.delete(msg.id);
-      if (msg.error) p.reject(new Error(`${p.method}: ${msg.error.message}`));
-      else p.resolve(msg.result);
-    }
-    if (msg.method === "Runtime.exceptionThrown") {
-      errors.push(
-        msg.params.exceptionDetails.exception?.description ??
-          msg.params.exceptionDetails.text,
-      );
-    }
-  };
-  await send("Runtime.enable");
-  await send("Page.enable");
-  await send("Emulation.setDeviceMetricsOverride", {
-    width: W,
-    height: H,
-    deviceScaleFactor: 1,
-    mobile: false,
-  });
-
-  // ---------------------------------------------------------------- menu
+// --------------------------------------------------------------- steps
+async function menuScreens() {
   await go("?mute=1");
   await waitFor("document.querySelector('.gm-menu')", "main menu");
   await evaluate("localStorage.clear()");
   await go("?mute=1&seed=4242&size=S&players=3&faction=humans");
   await waitFor("document.querySelector('.gm-menu')", "main menu");
-  await sleep(400);
+  await sleep(700); // posters paint one per tick
   if (want("menu")) await shot("menu");
+  if (want("menu-named")) {
+    const picked = await evaluate(`(() => {
+      const b = [...document.querySelectorAll('.gm-map-choice, .gm-menu button')]
+        .find((n) => n.querySelector('.gm-map-name') && !n.querySelector('.gm-map-random') && !n.textContent.includes('Random'));
+      if (!b) return null;
+      b.click();
+      return b.querySelector('.gm-map-name').textContent;
+    })()`);
+    if (picked === null) skip("menu-named", "no named map in the list");
+    else {
+      note(`named map: ${picked}`);
+      await sleep(500);
+      await shot("menu-named");
+    }
+  }
+  if (want("menu-options")) {
+    const open = await evaluate(`(() => {
+      const d = document.querySelector('.gm-options');
+      if (!d) return false;
+      d.open = true;
+      return true;
+    })()`);
+    if (!open) skip("menu-options", "no Options fold");
+    else {
+      await sleep(300);
+      await shot("menu-options");
+    }
+  }
+}
 
-  // ------------------------------------------------------------ adventure
+async function galleryScreens() {
+  if (!wantFamily("gallery")) return;
+  await go("?mute=1&gallery=creatures");
+  await waitFor("document.querySelector('.gm-gallery .gx-grid')", "gallery");
+  const tabs = await evaluate(
+    "[...document.querySelectorAll('.gx-tab')].map((b) => b.dataset.tab)",
+  );
+  if (tabs.length === 0) return fail("gallery", "no tabs");
+  for (const tab of tabs) {
+    const name = `gallery-${tab}`;
+    if (!want(name) && !want("gallery-hover") && !want("gallery-keyword"))
+      continue;
+    await evaluate(
+      `document.querySelector('.gx-tab[data-tab=${JSON.stringify(tab)}]').click()`,
+    );
+    await waitFor(
+      `document.querySelector('.gm-gallery')?.dataset.tab === ${JSON.stringify(tab)}`,
+      `gallery tab ${tab}`,
+    );
+    await park();
+    await sleep(700);
+    if (want(name)) await shot(name);
+    if (tab === "creatures") {
+      // A creature card's art, then a keyword in its abilities.
+      await hoverShot(
+        "gallery-hover",
+        ".gx-card .gx-kw, .gx-card .gm-kw",
+        6,
+        6,
+      );
+    }
+    if (tab === "spells") {
+      await hoverShot("gallery-keyword", ".gx-card .gm-kw", 6, 6);
+    }
+  }
+}
+
+async function adventureScreens() {
   await go("?mute=1&seed=4242&size=S&players=3&faction=humans&autostart=1");
   await waitFor("window.__bmGame", "adventure screen");
   await idle();
   await sleep(2400); // toasts fade
+  if (!wantFamily("adventure")) return;
+  const targets = await game("targets()");
+  const t = targets.find((x) => x.kind === "monster");
   if (want("adventure")) {
-    const t = (await game("targets()")).find((x) => x.kind === "monster");
-    const far = (await game("targets()")).at(-1);
-    const goal = far ?? t;
+    // A path plan to the farthest target, then the first monster hovered.
+    const goal = targets.at(-1) ?? t;
     if (goal) await game(`click(${goal.x}, ${goal.y})`);
     await sleep(2400);
-    // Hover the first monster with the real mouse.
     if (t) {
       const pos = await game(`cellToClient(${t.x}, ${t.y})`);
       if (pos) await mouse(pos.x, pos.y);
     }
     await shot("adventure");
-    const pickup = (await game("targets()")).find((x) => x.kind !== "monster");
-    if (pickup) {
-      const pos = await game(`cellToClient(${pickup.x}, ${pickup.y})`);
-      if (pos) await mouse(pos.x, pos.y);
-      await shot("adventure-hover-object");
-    }
-    // Hover a side-panel resource for the income tooltip.
-    const res = await evaluate(
-      "(() => { const r = document.querySelector('.gm-res'); if (!r) return null; const b = r.getBoundingClientRect(); return {x: b.x + 10, y: b.y + 8}; })()",
-    );
-    if (res) {
-      await mouse(res.x, res.y);
-      await sleep(500);
-      await shot("adventure-hover-resource");
-    }
   }
+  const object = targets.find((x) => x.kind !== "monster");
+  if (object && want("adventure-hover-object")) {
+    const pos = await game(`cellToClient(${object.x}, ${object.y})`);
+    if (pos) {
+      await mouse(pos.x, pos.y);
+      await shot("adventure-hover-object");
+    } else skip("adventure-hover-object", "object off screen");
+  }
+  if (want("adventure-pickup")) await pickupHover(targets);
+  // Hover a side-panel resource for the income tooltip.
+  await hoverShot("adventure-hover-resource", ".gm-res", 10, 8);
+}
 
-  // --------------------------------------------------- hand-built rich save
-  await editSave(RICH);
-  console.log(
-    `- rich save: ${JSON.stringify(await evaluate("window.__rich"))}`,
+/** A pickup on screen under the mouse: the hand (grab) cursor and its card. */
+async function pickupHover(targets) {
+  const pickups = await evaluate(`(async () => {
+    const m = await import('/src/core/game/site-state.ts');
+    const s = window.__bmGame.state();
+    return s.map.objects.filter((o) => m.isPickup(o) && !s.collected.includes(o.id)).map((o) => o.id);
+  })()`);
+  const ids = new Set(pickups);
+  for (const p of targets.filter((x) => ids.has(x.id))) {
+    const pos = await game(`cellToClient(${p.x}, ${p.y})`);
+    if (!pos) continue;
+    await mouse(pos.x, pos.y, 500);
+    const cursor = await evaluate(
+      `getComputedStyle(document.elementFromPoint(${pos.x}, ${pos.y})).cursor`,
+    );
+    if (cursor !== "grab") {
+      fail("adventure-pickup", `cursor over ${p.id} is "${cursor}", not grab`);
+    } else note(`pickup ${p.id} (${p.kind}): cursor grab`);
+    await stampCursor(pos.x, pos.y, `cursor: ${cursor}`);
+    await shot("adventure-pickup");
+    await unstamp();
+    return;
+  }
+  skip("adventure-pickup", "no pickup on screen");
+}
+
+/** The end-turn warning: shown, answered with Escape, the day unchanged. */
+async function endTurnWarning() {
+  if (!want("endturn")) return;
+  await escape(); // no plan: the warning is computed as the game does
+  await sleep(200);
+  await idle();
+  const before = await evaluate(`(async () => {
+    const m = await import('/src/ui/hints.ts');
+    const s = window.__bmGame.state();
+    return { day: s.day, player: s.currentPlayer,
+      warnings: m.endTurnWarnings(s, s.currentPlayer, {}).map((w) => w.text) };
+  })()`);
+  // Without a warning, E would end the turn at once: never press it then.
+  if (before.warnings.length === 0) {
+    return fail("endturn", "no end-turn warning in this state; E not pressed");
+  }
+  await game("key('e')");
+  const shown = await waitMaybe(
+    "document.querySelector('.gm-endturn-dialog, .gm-modal')",
+    3000,
   );
-  await continueSaved();
+  if (!shown) return fail("endturn", "the warning dialog did not open");
+  await sleep(400);
+  await shot("endturn");
+  await escape();
+  await waitMaybe("!document.querySelector('.gm-modal')", 2000);
+  await sleep(300);
+  const after = await evaluate(
+    "(() => { const s = window.__bmGame.state(); return { day: s.day, player: s.currentPlayer, open: Boolean(document.querySelector('.gm-modal')) }; })()",
+  );
+  if (after.day !== before.day || after.player !== before.player) {
+    fail("endturn", `the turn moved on: ${JSON.stringify({ before, after })}`);
+  } else if (after.open) fail("endturn", "Escape left the dialog open");
+  else note(`end-turn warning: ${before.warnings.join("; ")}; day kept`);
+}
+
+async function heroScreens() {
+  if (!wantFamily("hero")) return;
+  await key("i");
+  await waitFor("document.querySelector('.gm-backdrop')", "hero screen");
+  await park();
+  await sleep(400);
+  if (want("hero")) await shot("hero");
+  await hoverShot(
+    "hero-hover",
+    ".hs-slot:not(.hs-slot-empty) .gm-icon, .hs-worn .gm-icon, .gm-backdrop .gm-icon",
+    8,
+    8,
+  );
+  await hoverShot(
+    "hero-hover-army",
+    ".hs-army-slot:not(.hs-army-empty)",
+    40,
+    60,
+  );
+  await hoverShot("hero-hover-skill", ".hs-tile.hs-skill, .hs-skill", 16, 16);
+  await hoverShot("hero-hover-feat", ".hs-tile.hs-feat, .hs-feat", 16, 16);
+  await hoverShot("hero-hover-stat", ".hs-stat", 20, 10);
+  await park();
+  await escape();
+  await sleep(200);
+}
+
+/** Clicks the adventure book's tab whose label starts with `label`. */
+const openBookTab = (label) =>
+  evaluate(`(() => {
+    const t = [...document.querySelectorAll('.gm-book-tab')]
+      .find((x) => x.textContent.trim().startsWith(${JSON.stringify(label)}));
+    if (!t) return false;
+    t.click();
+    return true;
+  })()`);
+
+/** An adventure spell aimed on the map: hover only, Escape cancels. */
+async function adventureAim() {
+  if (!want("adventure-aim")) return;
+  await idle();
+  await key("m");
+  const open = await waitMaybe(
+    "document.querySelector('.gm-book-spell, .gm-book-cell')",
+    3000,
+  );
+  if (!open) return skip("adventure-aim", "the spellbook did not open");
+  await openBookTab("Adventure");
+  // Rows with their own aim button (before bzc.63), or a grid of cells
+  // whose detail pane holds the aim button (bzc.63): select each castable
+  // cell until one offers "Aim on the map".
+  const spell = await evaluate(`(async () => {
+    const aimText = /^(Aim on the map|Choose a cell)/;
+    for (const row of document.querySelectorAll('.gm-book-spell')) {
+      const b = [...row.querySelectorAll('button')].find((x) => !x.disabled && aimText.test(x.textContent.trim()));
+      if (!b) continue;
+      const name = row.querySelector('b, strong, .gm-book-name')?.textContent ?? row.textContent.slice(0, 30);
+      b.click();
+      return name;
+    }
+    for (const cell of document.querySelectorAll('.gm-book-cell:not(.gm-book-off)')) {
+      cell.click();
+      await new Promise((r) => setTimeout(r, 60));
+      const b = [...document.querySelectorAll('.gm-book-aim, .gm-book-detail button')]
+        .find((x) => !x.disabled && aimText.test(x.textContent.trim()));
+      if (!b) continue;
+      const name = cell.querySelector('.gm-book-cell-name')?.textContent ?? cell.dataset.spell;
+      b.click();
+      return name;
+    }
+    return null;
+  })()`);
+  if (spell === null) {
+    await escape();
+    await sleep(200);
+    return skip("adventure-aim", "no spell to aim on the map");
+  }
+  await sleep(500);
+  // Point at a monster on screen, else two cells from the hero.
+  const pos = await evaluate(`(() => {
+    const g = window.__bmGame;
+    const s = g.state();
+    const h = s.heroes.find((x) => x.id === g.selectedHero());
+    const m = g.targets().find((t) => t.kind === 'monster' && g.cellToClient(t.x, t.y));
+    return m ? g.cellToClient(m.x, m.y) : g.cellToClient(h.x + 2, h.y + 1);
+  })()`);
+  if (pos) await mouse(pos.x, pos.y, 600);
+  note(`aimed spell: ${spell.trim()}`);
+  await shot("adventure-aim");
+  await escape();
+  await sleep(300);
+  await park();
+}
+
+async function townScreens() {
+  if (!wantFamily("town") && !want("recruit") && !want("market")) return;
+  const st = await game("state()");
+  const byFaction = new Map();
+  for (const t of Object.values(st.towns)) {
+    if (!byFaction.has(t.faction)) byFaction.set(t.faction, t.id);
+  }
+  let first = true;
+  for (const [faction, id] of byFaction) {
+    await game(`openTown(${JSON.stringify(id)})`);
+    await waitFor("document.querySelector('.gm-town')", "town screen");
+    await park();
+    await sleep(600);
+    if (want(`town-${faction}`)) await shot(`town-${faction}`);
+    if (first) {
+      first = false;
+      await hoverShot("town-hover", ".gm-hall-tile, .gm-building", 30, 20);
+      if (want("town-hall")) {
+        // The hall (bead bzc.60): pick a tile that is not selected yet.
+        const tile = await evaluate(`(() => {
+          const all = [...document.querySelectorAll('.gm-hall-tile')];
+          const t = all.filter((x) => !x.classList.contains('gm-selected'))[Math.floor(all.length / 2)] ?? null;
+          if (!t) return null;
+          t.click();
+          return t.dataset.building ?? t.textContent.slice(0, 30);
+        })()`);
+        if (tile === null) skip("town-hall", "no hall tiles (.gm-hall-tile)");
+        else {
+          await park();
+          await sleep(500);
+          note(`hall tile: ${tile}`);
+          await shot("town-hall");
+        }
+      }
+      if (want("recruit")) {
+        const opened =
+          (await clickFirst(".gm-stock")) ||
+          (await clickText(".gm-town button", "Recruit"));
+        if (opened) {
+          await sleep(400);
+          await shot("recruit");
+          await escape();
+          await sleep(200);
+        } else skip("recruit", "no recruit button");
+      }
+      if (want("market")) {
+        if (await clickText(".gm-town button", "Marketplace")) {
+          await sleep(400);
+          await shot("market");
+          await escape();
+          await sleep(200);
+        } else skip("market", "no Marketplace button");
+      }
+    }
+    await escape();
+    await waitFor("!document.querySelector('.gm-town')", "town closed");
+  }
+}
+
+async function richScreens() {
+  await editSave(RICH);
+  note(`rich save: ${JSON.stringify(await evaluate("window.__rich"))}`);
+  await continueSaved("menu-continue");
   await idle();
   await sleep(2400);
   if (want("adventure-rich")) await shot("adventure-rich");
-  if (want("hero")) {
-    await key("i");
-    await waitFor("document.querySelector('.gm-backdrop')", "hero screen");
-    await sleep(400);
-    await shot("hero");
-    const art = await evaluate(
-      "(() => { const r = document.querySelector('.hs-worn .gm-icon, .gm-backdrop .gm-icon'); if (!r) return null; const b = r.getBoundingClientRect(); return {x: b.x + 8, y: b.y + 8}; })()",
-    );
-    if (art) {
-      await mouse(art.x, art.y);
-      await sleep(600);
-      await shot("hero-hover");
-    }
-    await escape();
-    await sleep(200);
-  }
+  await endTurnWarning();
+  await heroScreens();
   if (want("kingdom")) {
     await key("k");
     await sleep(400);
@@ -306,19 +810,32 @@ async function main() {
     await escape();
     await sleep(200);
   }
-  if (want("spellbook")) {
+  if (wantFamily("spellbook")) {
     await key("m");
     await sleep(500);
-    await shot("spellbook");
+    // The adventure tab (bzc.63 has Adventure and Battle tabs), then battle.
+    await openBookTab("Adventure");
+    await park();
+    await sleep(300);
+    if (want("spellbook")) await shot("spellbook");
+    if (want("spellbook-battle")) {
+      if (await openBookTab("Battle")) {
+        await park();
+        await sleep(300);
+        await shot("spellbook-battle");
+      } else skip("spellbook-battle", "no Battle tab in the book");
+    }
     await escape();
     await sleep(200);
   }
+  await adventureAim();
   if (want("menu-dialog")) {
-    await clickText(".gm-side button", "Menu");
-    await sleep(300);
-    await shot("menu-dialog");
-    await escape();
-    await sleep(200);
+    if (await clickText(".gm-side button", "Menu")) {
+      await sleep(300);
+      await shot("menu-dialog");
+      await escape();
+      await sleep(200);
+    } else skip("menu-dialog", "no Menu button");
   }
   if (want("meeting")) {
     const st = await game("state()");
@@ -334,50 +851,9 @@ async function main() {
       await shot("meeting");
       await escape();
       await sleep(200);
-    }
+    } else skip("meeting", "no second hero");
   }
-  if (want("town")) {
-    const st = await game("state()");
-    const byFaction = new Map();
-    for (const t of Object.values(st.towns)) {
-      if (!byFaction.has(t.faction)) byFaction.set(t.faction, t.id);
-    }
-    let first = true;
-    for (const [faction, id] of byFaction) {
-      await game(`openTown(${JSON.stringify(id)})`);
-      await waitFor("document.querySelector('.gm-town')", "town screen");
-      await sleep(600);
-      await shot(`town-${faction}`);
-      if (first) {
-        first = false;
-        const b = await evaluate(
-          "(() => { const r = document.querySelector('.gm-building'); if (!r) return null; const b = r.getBoundingClientRect(); return {x: b.x + 30, y: b.y + 20}; })()",
-        );
-        if (b) {
-          await mouse(b.x, b.y);
-          await sleep(600);
-          await shot("town-hover");
-        }
-        const stock = await evaluate(
-          "(() => { const b = document.querySelector('.gm-stock:not(:disabled)'); if (!b) return false; b.click(); return true; })()",
-        );
-        if (stock) {
-          await sleep(400);
-          await shot("recruit");
-          await escape();
-          await sleep(200);
-        }
-        if (await clickText(".gm-town button", "Marketplace")) {
-          await sleep(400);
-          await shot("market");
-          await escape();
-          await sleep(200);
-        }
-      }
-      await escape();
-      await waitFor("!document.querySelector('.gm-town')", "town closed");
-    }
-  }
+  await townScreens();
   if (want("prebattle")) {
     await idle();
     const monster = (await game("targets()")).find((t) => t.kind === "monster");
@@ -385,66 +861,60 @@ async function main() {
       await game(`click(${monster.x}, ${monster.y})`);
       await sleep(200);
       await game(`click(${monster.x}, ${monster.y})`);
-      for (let i = 0; i < 80; i++) {
-        if (await evaluate("Boolean(document.querySelector('.gm-modal'))"))
-          break;
-        await sleep(100);
-      }
+      await waitMaybe("document.querySelector('.gm-modal')", 8000);
       await sleep(400);
       await shot("prebattle");
-    }
+    } else skip("prebattle", "no monster in reach");
   }
+}
 
-  if (want("site")) {
-    // Clear the neutral guards so the sites behind them are in reach.
-    await editSave(
-      "s.monsters = {}; s.players[0].explored = s.players[0].explored.map(() => true); for (const h of s.heroes) h.pendingLevelUps = 0;",
-    );
-    await continueSaved();
-    await idle();
-    const targets = await game("targets()");
-    console.log(
-      `- targets: ${[...new Set(targets.map((t) => t.kind + ":" + (t.type ?? "")))].join(" ")}`,
-    );
-    const site =
-      targets.find((t) => t.kind === "dwelling") ??
-      targets.find((t) => t.kind === "site");
-    if (site) {
-      await game(`click(${site.x}, ${site.y})`);
-      await sleep(200);
-      await game(`click(${site.x}, ${site.y})`);
-      for (let i = 0; i < 60; i++) {
-        if (await evaluate("Boolean(document.querySelector('.gm-modal'))"))
-          break;
-        await sleep(100);
-      }
-      await sleep(400);
-      await shot("site");
-      await escape();
-      await sleep(300);
-    }
-  }
+/** A site or dwelling within today's reach, so its dialog opens. */
+async function siteScreen() {
+  if (!want("site")) return;
+  // Clear the guards, reveal the map and refill the hero's movement.
+  await editSave(
+    "s.monsters = {}; s.players[0].explored = s.players[0].explored.map(() => true); for (const h of s.heroes) { h.pendingLevelUps = 0; if (h.owner === 0) h.mp = h.maxMp; }",
+  );
+  await continueSaved();
+  await idle();
+  const site = await evaluate(`(async () => {
+    const m = await import('/src/core/game/site-state.ts');
+    const sites = await import('/src/core/game/sites.ts');
+    const g = window.__bmGame;
+    const s = g.state();
+    const hero = s.heroes.find((h) => h.id === g.selectedHero());
+    const byId = new Map(s.map.objects.map((o) => [o.id, o]));
+    // Entered (not a pickup) and with something to choose: a dialog opens.
+    const ok = g.targets().filter((t) => t.today &&
+      ['dwelling', 'site', 'bank'].includes(t.kind) && byId.has(t.id) &&
+      !m.isPickup(byId.get(t.id)) && sites.siteOptions(s, hero, byId.get(t.id)).length > 0);
+    return ok.find((t) => t.kind === 'dwelling') ?? ok.find((t) => t.kind === 'site') ?? ok[0] ?? null;
+  })()`);
+  if (site === null)
+    return fail("site", "no site with a choice in today's reach");
+  note(`site: ${site.id} (${site.kind}, cost ${site.cost})`);
+  await game(`click(${site.x}, ${site.y})`);
+  await sleep(200);
+  await game(`click(${site.x}, ${site.y})`);
+  const open = await waitMaybe("document.querySelector('.gm-modal')", 10000);
+  await sleep(400);
+  await shot("site");
+  if (!open) fail("site", `no dialog after walking to ${site.id}`);
+  await escape();
+  await sleep(300);
+}
 
-  // ------------------------------------------------------- level-up draft
-  if (want("levelup")) {
+async function laterScreens() {
+  if (wantFamily("levelup")) {
     await editSave(
       "const h = s.heroes.find((x) => x.owner === 0 && x.alive); h.pendingLevelUps = 1; h.levelUpStep = 'skill';",
     );
     await continueSaved();
     await waitFor("document.querySelector('.hs-draft-dialog')", "draft");
     await sleep(600);
-    await shot("levelup");
-    const card = await evaluate(
-      "(() => { const r = document.querySelector('.hs-card'); if (!r) return null; const b = r.getBoundingClientRect(); return {x: b.x + 40, y: b.y + 30}; })()",
-    );
-    if (card) {
-      await mouse(card.x, card.y);
-      await sleep(600);
-      await shot("levelup-hover");
-    }
+    if (want("levelup")) await shot("levelup");
+    await hoverShot("levelup-hover", ".hs-card", 40, 30);
   }
-
-  // -------------------------------------------------------- end screens
   for (const status of ["won", "lost"]) {
     if (!want(`end-${status}`)) continue;
     await editSave("for (const h of s.heroes) h.pendingLevelUps = 0;");
@@ -455,8 +925,95 @@ async function main() {
     await sleep(500);
     await shot(`end-${status}`);
   }
+}
 
-  // -------------------------------------------------------------- battle
+/** Hex centres of the battlefield in page pixels (debug route's pointAt). */
+const hexPoints = () =>
+  evaluate(`(async () => {
+    const g = await import('/src/render/battle/geometry.ts');
+    const hx = await import('/src/core/battle/hex.ts');
+    const canvas = document.querySelector('.bm-battle canvas');
+    const rect = canvas.getBoundingClientRect();
+    const v = canvas.dataset;
+    const view = { zoom: Number(v.zoom ?? rect.width / g.STAGE_W), x: Number(v.x ?? 0), y: Number(v.y ?? 0) };
+    const out = [];
+    for (let row = 0; row < hx.BATTLE_HEIGHT; row++)
+      for (let col = 0; col < hx.BATTLE_WIDTH; col++) {
+        const p = g.stageToView(g.hexToStage({ col, row }), view);
+        out.push({ col, row, x: Math.round(rect.left + p.x), y: Math.round(rect.top + p.y) });
+      }
+    return out;
+  })()`);
+
+/** A castable battle page (greyed ones carry aria-disabled since bzc.63). */
+const READY_PAGE = "button.bm-spell.bm-st-ready:not([aria-disabled='true'])";
+
+/** What the pointer shows while a spell is chosen. */
+const castHover = () =>
+  evaluate(`(() => {
+    const tip = document.querySelector('.bm-tip');
+    const text = tip && !tip.hidden ? tip.innerText : '';
+    const pv = document.querySelector('.bm-cast-preview.bm-hovered');
+    return { text, hovered: Boolean(pv), refused: Boolean(pv?.querySelector('.bm-cast-refused')) };
+  })()`);
+
+/**
+ * Battle with a spell chosen: the first ready pages in turn, each swept over
+ * the field (pointer moves only, never a click) for a valid target and a
+ * target that would have no effect. Escape cancels each cast.
+ */
+async function battleSpell() {
+  const ready = await evaluate(
+    `[...document.querySelectorAll(${JSON.stringify(READY_PAGE)})].filter((b) => !b.disabled).length`,
+  );
+  if (ready === 0) return skip("battle-spell", "no ready page in the book");
+  const points = await hexPoints();
+  let first = true;
+  let valid = !want("battle-spell-hover");
+  let none = !want("battle-spell-noeffect");
+  for (let i = 0; i < Math.min(ready, 8) && !(valid && none); i++) {
+    if (!(await evaluate("Boolean(document.querySelector('button.bm-spell'))")))
+      await key("b");
+    await sleep(200);
+    const name = await evaluate(`(() => {
+      const b = [...document.querySelectorAll(${JSON.stringify(READY_PAGE)})].filter((x) => !x.disabled)[${i}];
+      if (!b) return null;
+      b.click();
+      return b.dataset.spell ?? b.querySelector('.bm-spell-name')?.textContent ?? '?';
+    })()`);
+    if (name === null) break;
+    await park();
+    await sleep(500);
+    if (first) {
+      first = false;
+      note(`battle spell chosen: ${name}`);
+      if (want("battle-spell")) await shot("battle-spell");
+    }
+    for (const p of points) {
+      if (valid && none) break;
+      await mouse(p.x, p.y, 30);
+      const h = await castHover();
+      if (!none && /no effect/i.test(h.text)) {
+        none = true;
+        await sleep(300);
+        note(`no-effect target: ${name} at ${p.col},${p.row}`);
+        await shot("battle-spell-noeffect");
+      } else if (!valid && h.hovered && !h.refused) {
+        valid = true;
+        await sleep(300);
+        note(`valid target: ${name} at ${p.col},${p.row}`);
+        await shot("battle-spell-hover");
+      }
+    }
+    await escape(); // cancel the cast
+    await park();
+    await sleep(200);
+  }
+  if (!valid) skip("battle-spell-hover", "no valid target found");
+  if (!none) skip("battle-spell-noeffect", "no no-effect target found");
+}
+
+async function battleScreens() {
   const battles = [
     ["battle", "view=battle&scenario=realm&steps=0"],
     ["battle-hover", "view=battle&scenario=realm&steps=2&hover=melee"],
@@ -468,7 +1025,9 @@ async function main() {
     ["battle-result", "view=battle&scenario=realm&auto=1&speed=4"],
   ];
   for (const [name, q] of battles) {
-    if (!want(name)) continue;
+    const spell = name === "battle-book" && wantFamily("battle-spell");
+    if (name === "battle-result" ? !named(name) : !want(name) && !spell)
+      continue;
     await go(`?mute=1&${q}`);
     await waitFor(
       "document.querySelector('.bm-battle canvas')",
@@ -483,31 +1042,74 @@ async function main() {
       );
     }
     await sleep(2500);
-    await shot(name);
+    if (want(name)) await shot(name);
+    if (spell) await battleSpell();
   }
 }
 
+async function tour() {
+  await send("Emulation.setDeviceMetricsOverride", {
+    width: W,
+    height: H,
+    deviceScaleFactor: 1,
+    mobile: false,
+  });
+  await menuScreens();
+  await galleryScreens();
+  await adventureScreens();
+  await richScreens();
+  await siteScreen();
+  await laterScreens();
+  await battleScreens();
+}
+
+// ---------------------------------------------------------------- main
 let failed = false;
 try {
-  await main();
+  mkdirSync(OUT, { recursive: true });
+  BASE = urlArg === "auto" || urlArg === "-" ? await startServer() : urlArg;
+  if (urlArg !== "auto" && urlArg !== "-") {
+    // A given server must answer now: a stale one fails fast.
+    const r = await fetch(BASE, { signal: AbortSignal.timeout(10000) });
+    if (!r.ok) throw new Error(`${BASE} answered ${r.status}`);
+  }
+  await startChrome();
+  console.log(`- server ${BASE}, DevTools port ${cdpPort}, out ${OUT}`);
+  for (const [w, h] of SIZES) {
+    W = w;
+    H = h;
+    console.log(`- size ${W}x${H}`);
+    try {
+      await tour();
+    } catch (error) {
+      failed = true;
+      console.error(`FAIL at ${W}x${H}: ${error.message}`);
+      try {
+        await shot("failure");
+      } catch {
+        // no page
+      }
+    }
+  }
 } catch (error) {
   failed = true;
   console.error(`FAIL: ${error.message}`);
-  try {
-    await shot("failure");
-  } catch {
-    // no page
-  }
 }
+const ok = !failed && errors.length === 0 && failures.length === 0;
 console.log(
   JSON.stringify({
-    ok: !failed && errors.length === 0,
+    ok,
+    url: BASE,
+    cdpPort,
+    out: OUT,
+    sizes: SIZES.map(([w, h]) => `${w}x${h}`),
     shots: shots.length,
+    failures,
+    skipped,
     errors,
   }),
 );
-ws?.close();
-chrome.kill();
+clearTimeout(deadline);
+cleanup();
 await sleep(300);
-rmSync(profile, { recursive: true, force: true });
-process.exit(failed || errors.length > 0 ? 1 : 0);
+process.exit(ok ? 0 : 1);
