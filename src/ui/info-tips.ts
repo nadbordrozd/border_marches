@@ -3,13 +3,18 @@
  * full stats and abilities, spells, and buildings with their requirements
  * and what they unlock. Built with tipCard (src/ui/tooltip.ts).
  */
-import { ability as battleAbility } from "../core/battle/index.ts";
+import {
+  ability as battleAbility,
+  alliedSchools,
+  opposedSchools,
+} from "../core/battle/index.ts";
 import {
   adventureSpell,
   isAdventureSpell,
   isBattleSpell,
   spellDef,
 } from "../core/magic/index.ts";
+import type { SpellDef } from "../core/magic/index.ts";
 import { ABILITIES } from "../data/abilities.ts";
 import {
   creatureAbilities,
@@ -111,6 +116,26 @@ export function creatureTip(id: string, count?: number): HTMLElement | string {
   );
 }
 
+/**
+ * A battle spell's Fuel and Echo lines: what Fuel doubles and which
+ * schools it burns, and which schools Echo lengthens.
+ */
+export function spellCastLines(d: SpellDef): string[] {
+  /** "a Bloom or Hush", "an Accord or Clock". */
+  const either = (ids: readonly string[]): string => {
+    const text = ids.map((s) => SCHOOL_LABEL[s] ?? s).join(" or ");
+    return `${/^[AEIOU]/.test(text) ? "an" : "a"} ${text}`;
+  };
+  const fuel =
+    d.fuel === null
+      ? "Fuel: none, as this spell has no size."
+      : `Fuel: burn ${either(opposedSchools(d.school))} condition to double ${d.fuel.replace(/^The /, "the ")}.`;
+  return [
+    fuel,
+    `Echo: ${either(alliedSchools(d.school))} condition lasts 1 round longer.`,
+  ];
+}
+
 /** A spell's card: school, tier, mana and its effect at Power `power`. */
 export function spellTip(id: string, power?: number): HTMLElement | string {
   if (isBattleSpell(id)) {
@@ -119,9 +144,7 @@ export function spellTip(id: string, power?: number): HTMLElement | string {
       d.name,
       [
         d.text(power ?? 1),
-        d.fuel !== null
-          ? el("div.gm-tip-dim", `Fuel doubles ${d.fuel.toLowerCase()}.`)
-          : null,
+        ...spellCastLines(d).map((line) => el("div.gm-tip-dim", line)),
         el(
           "div.gm-tip-dim",
           power === undefined

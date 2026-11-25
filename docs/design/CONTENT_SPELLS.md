@@ -354,3 +354,44 @@ consumes.
 | Ice, sweets and blocking ground made by spells are left out                 | They need landfall laws or pathing work that v0.2 does not have                                                          |
 | The Understudy's Mask is left out                                           | Copying any ability cannot be written in one sentence of the grammar yet                                                 |
 | First Bell ends Delayed and Late Bell ends Hastened before adding their own | RULES_V2 does not say which timeline class wins when a stack bears both; proposed for the engine: Delayed and Shaken win |
+
+## 7. In-game wording, keywords and simplification candidates
+
+Bead `border_marches-bzc.46` (2026-11-25) rewrote the texts the game shows
+for every spell (`text` in `src/core/magic/spells.ts`) in plain language,
+with no change to any rule or number. The tables above stay the rules of
+record; the in-game texts say the same thing in this shape:
+
+- **What it targets, what it does, the numbers**, in one or two
+  sentences: "Deal 30 Harm to a stack", "A stack gains Thorned 9 for 3
+  rounds", "An enemy stack becomes Turned for 1 round: it fights for you.
+  Gate 80 HP, or 160 if it is Mollified."
+- **Clocks are written as rounds** ("for 3 rounds", not "clock 3"); area
+  spells that hit both sides say "friend or foe".
+- **Then the Fuel and Echo lines**, built from the school wheel: "Fuel:
+  burn a Clock or Hush condition to double the heal." and "Echo: a Storm
+  or Accord condition lasts 1 round longer."
+
+Every grammar word a player meets (Bane, Boon, Hold, gate, clock, link,
+Harm, Strike, Fuel, Echo, the condition and ground kinds, the schools,
+Command, C and so on) is a keyword in `src/data/keywords.ts`, with a one
+or two sentence definition. The interface highlights keywords in all rules
+text and shows their definitions in boxes beside a hover card, Slay the
+Spire style, with the keywords those definitions use one level down
+(`src/ui/keywords.ts`). `tests/ui/keywords.test.ts` checks that every
+condition and ground kind has an entry and that every entry is used.
+
+**Simplification candidates.** These spells do not fit one or two plain
+sentences without leaning on a second rule; they are left as they are
+(this bead changes no mechanics) and listed here for a balance bead:
+
+| Spell                                              | Why it is hard to read                                                                                                                          | A simpler shape to consider                                              |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| **Set Off**                                        | Its Harm is the condition's "charge" (Harm per turn, or a debt's whole amount once, or 10 per tier of its maker) times rounds left, capped at 3 | A flat Harm per round left, or the condition's size times rounds left    |
+| **Share**                                          | Two picks (a link, then another condition on either end) and the copy lands on the opposite end                                                 | "Copy one condition of a linked stack to the stack it is linked to"      |
+| **The Long Table**                                 | Copies every condition to every neighbour, friend or foe: easy to say, hard to foresee                                                          | Copy only boons to friendly neighbours, or one chosen condition          |
+| **Gust**                                           | The push direction comes from a second picked hex beside the target                                                                             | Push straight away from the caster's side of the field                   |
+| **Sign Here, Change of Heart, Lullaby, Cold Snap** | Each carries a second rule: the gate doubles if the target bears a softener (Mollified, Hushed, Drenched)                                       | Drop the riders, or state the softener rule once as a keyword            |
+| **Sanctuary Oath**                                 | A second effect that depends on Shielded (it spreads to friendly neighbours)                                                                    | Always the target only, or always the target and its friendly neighbours |
+| **Encore, Late Bell**                              | Small riders: "unless it is Quickened", "or 3 if it is Slowed"                                                                                  | Drop the riders                                                          |
+| **Curtain Call**                                   | Budget in HP, capped at the dead stack's starting count, only on your side's remains                                                            | A count of creatures instead of an HP budget                             |

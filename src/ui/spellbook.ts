@@ -29,6 +29,7 @@ import { setTip } from "./tooltip.ts";
 import { spellTip } from "./info-tips.ts";
 import { el, modal } from "./dom.ts";
 import { iconElement } from "./icons.ts";
+import { rulesText } from "./keywords.ts";
 
 const SCHOOLS: readonly School[] = [
   "bloom",
@@ -137,7 +138,7 @@ export function openAdventureBook(
             "span.gm-dim",
             ` ${NAMES[s.school]} ${s.tier} · ${cost}${s.moveCost === undefined ? "" : s.moveCost === "all" ? " · all movement" : s.moveCost > 0 ? ` · ${s.moveCost} movement` : ""}`,
           ),
-          el("div", s.text(power)),
+          rulesText(s.text(power), { tag: "div", hover: true }),
           err ? el("div.gm-book-why", err) : null,
         ),
       );

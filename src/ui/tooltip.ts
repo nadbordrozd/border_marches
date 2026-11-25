@@ -16,6 +16,7 @@
  * subtitle, then lines.
  */
 import { el } from "./dom.ts";
+import { keywordCard, withKeywordBoxes } from "./keywords.ts";
 import "./theme.css";
 
 export type TipBody = string | Node;
@@ -129,9 +130,18 @@ function resolve(content: TipContent): TipBody | null {
 
 function fill(body: TipBody): HTMLDivElement {
   const p = ensurePanel();
-  p.replaceChildren(
-    typeof body === "string" ? el("div.gm-tip-text", body) : body,
+  // Cards get their keywords highlighted and explained beside them.
+  const node =
+    typeof body === "string"
+      ? el("div.gm-tip-text", body)
+      : withKeywordBoxes(body);
+  p.classList.toggle(
+    "gm-tip-kw",
+    node instanceof Element &&
+      (node.classList.contains("gm-kw-wrap") ||
+        node.classList.contains("gm-kw-col")),
   );
+  p.replaceChildren(node);
   p.classList.add("gm-tip-on");
   return p;
 }
@@ -184,8 +194,23 @@ export function tipVisible(): boolean {
 /** The element under `target` that has a tip, taking over `title`s. */
 function tipTarget(target: EventTarget | null): Element | null {
   if (!(target instanceof Element)) return null;
-  const node = target.closest("[data-tip], [title]");
+  let node = target.closest("[data-tip], [title], [data-kw-tip]");
   if (node === null) return null;
+  // A content icon inside something with a richer card (a spell page)
+  // shows that card, not just its own name.
+  if (node.classList.contains("gm-icon")) {
+    const outer = node.parentElement?.closest("[data-tip]") ?? null;
+    if (outer !== null && tips.has(outer)) node = outer;
+  }
+  // A hoverable keyword in rules text: its glossary box.
+  if (node instanceof HTMLElement && node.dataset["kwTip"] !== undefined) {
+    const id = node.dataset["kw"];
+    if (id !== undefined && !tips.has(node)) {
+      tips.set(node, () => keywordCard(id));
+      node.setAttribute("data-tip", "");
+    }
+    return node;
+  }
   const title = node.getAttribute("title");
   if (title !== null) {
     node.removeAttribute("title");

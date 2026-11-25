@@ -237,11 +237,11 @@ export const STRAY_ABILITY_TEXT: Readonly<
   },
   "takes-the-blame": {
     name: "Takes the Blame",
-    text: "Once per battle, instead of attacking, an adjacent friendly stack gains a Scapegoat link to the Whipping Boys, clock 3.",
+    text: "Once per battle, instead of attacking, an adjacent friendly stack gains a Scapegoat link to the Whipping Boys for 3 rounds.",
   },
   sabotage: {
     name: "Sabotage",
-    text: "Its melee Strike adds Hushed, clock 2.",
+    text: "Its melee Strike adds Hushed for 2 rounds.",
   },
   "light-up": {
     name: "Light Up",
@@ -249,28 +249,28 @@ export const STRAY_ABILITY_TEXT: Readonly<
   },
   extra: {
     name: "Extra!",
-    text: "Once per battle, instead of attacking, every friendly stack adjacent to it gains Quickened 2, clock 2.",
+    text: "Once per battle, instead of attacking, every friendly stack adjacent to it gains Quickened 2 for 2 rounds.",
   },
   stamp: {
     name: "Stamp",
-    text: "Once per battle, instead of attacking, an adjacent enemy stack gains Turned, clock 1, gate 15 x the Notaries' count in HP.",
+    text: "Once per battle, instead of attacking, an adjacent enemy stack gains Turned for 1 round, gate 15 HP per Notary.",
   },
-  croon: { name: "Croon", text: "Its shot adds Mollified 30, clock 2." },
+  croon: { name: "Croon", text: "Its shot adds Mollified 30 for 2 rounds." },
   latch: {
     name: "Latch",
-    text: "Its melee Strike adds a Leeched link from the target to the Bog Leeches, size equal to their count (at most 40), clock 2.",
+    text: "Its melee Strike adds a Leeched link from the target to the Bog Leeches, size equal to their count (at most 40) for 2 rounds.",
   },
   advance: {
     name: "Advance",
-    text: "Once per battle, instead of attacking, an adjacent stack gains Fired Up 4, clock 3, and a Reckoning of 5 x the Loan Sharks' count (at most 150), clock 3.",
+    text: "Once per battle, instead of attacking, an adjacent stack gains Fired Up 4 and a Reckoning of 5 x the Loan Sharks' count (at most 150), both for 3 rounds.",
   },
   "wind-up": {
     name: "Wind Up",
-    text: "Once per battle, instead of attacking, a stack within 3 hexes gains Delayed, clock 2.",
+    text: "Once per battle, instead of attacking, a stack within 3 hexes gains Delayed for 2 rounds.",
   },
   tend: {
     name: "Tend",
-    text: "Once per battle, instead of attacking, an adjacent stack gains Mending 2 x count (at most 60) and Thorned of size count (at most 30), both clock 3.",
+    text: "Once per battle, instead of attacking, an adjacent stack gains Mending 2 x count (at most 60) and Thorned of size count (at most 30), both for 3 rounds.",
   },
   tow: {
     name: "Tow",
@@ -290,19 +290,19 @@ export const STRAY_ABILITY_TEXT: Readonly<
   },
   "drag-under": {
     name: "Drag Under",
-    text: "Its melee Strike adds Drenched 50, clock 2.",
+    text: "Its melee Strike adds Drenched 50 for 2 rounds.",
   },
   breath: {
     name: "Breath",
-    text: "Instead of attacking, it places fire of size equal to its count (at most 30), clock 2, on the three hexes in a straight line from it.",
+    text: "Instead of attacking, it places fire of size equal to its count (at most 30) for 2 rounds on the three hexes in a straight line from it.",
   },
   "cold-front": {
     name: "Cold Front",
-    text: "Once per battle, instead of attacking, every adjacent enemy stack gains Frozen, clock 1, gate 15 x the Walruses' count in HP.",
+    text: "Once per battle, instead of attacking, every adjacent enemy stack gains Frozen for 1 round, gate 15 HP per Walrus.",
   },
   "stand-behind-me": {
     name: "Stand Behind Me",
-    text: "At its turn start every adjacent friendly stack gains Shielded 3, clock 2.",
+    text: "At its turn start every adjacent friendly stack gains Shielded 3 for 2 rounds.",
   },
   "late-bloomer": {
     name: "Late Bloomer",
@@ -314,9 +314,12 @@ export const STRAY_ABILITY_TEXT: Readonly<
   },
   "gone-to-seed": {
     name: "Gone to Seed",
-    text: "When it dies its hex receives brambles of size 4, clock 3.",
+    text: "When it dies its hex receives brambles of size 4 for 3 rounds.",
   },
-  fade: { name: "Fade", text: "When it dies its hex receives mist, clock 2." },
+  fade: {
+    name: "Fade",
+    text: "When it dies its hex receives mist for 2 rounds.",
+  },
 };
 
 export const STRAY_ABILITY_IDS = Object.keys(

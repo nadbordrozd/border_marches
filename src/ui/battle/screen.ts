@@ -127,6 +127,7 @@ import { DeployPhase } from "./deploy.ts";
 import type { ActionIcon, BarAction, BarContext } from "./actions.ts";
 import { renderActPanel, renderActionBar, showActionTip } from "./actionbar.ts";
 import { iconElement } from "../icons.ts";
+import { rulesText } from "../keywords.ts";
 import {
   addTarget,
   afterChoices,
@@ -1109,7 +1110,11 @@ class BattleScreen {
     );
     if (g && g.class !== "blocking") lines.push(groundTooltip(g));
     if (lines.length === 0) return;
-    this.tip.replaceChildren(...lines.map((l) => el("div", "bm-tip-cond", l)));
+    this.tip.replaceChildren(
+      ...lines.map((l) =>
+        rulesText(l, { tag: "div", className: "bm-tip-cond" }),
+      ),
+    );
     this.tip.classList.remove("bm-below");
     this.tip.hidden = false;
     const c = hexToStage(h);
@@ -2305,7 +2310,14 @@ class BattleScreen {
       if (tag) head.append(el("span", `bm-tag bm-tag-${a.source}`, tag));
       if (a.activated)
         head.append(el("span", "bm-tag bm-tag-act", a.activated));
-      ab.append(head, el("div", "bm-info-ab-text", a.text));
+      ab.append(
+        head,
+        rulesText(a.text, {
+          tag: "div",
+          className: "bm-info-ab-text",
+          hover: true,
+        }),
+      );
       box.append(ab);
     }
     if (
@@ -2318,7 +2330,14 @@ class BattleScreen {
         el("b", "", info.birthright.name),
         el("span", "bm-tag bm-tag-birthright", "Birthright"),
       );
-      ab.append(head, el("div", "bm-info-ab-text", info.birthright.text));
+      ab.append(
+        head,
+        rulesText(info.birthright.text, {
+          tag: "div",
+          className: "bm-info-ab-text",
+          hover: true,
+        }),
+      );
       box.append(ab);
     }
     if (info.drills.length > 0)
@@ -2332,14 +2351,17 @@ class BattleScreen {
         row.append(
           iconElement("spell", pg.id, { className: "bm-info-page-icon" }),
           el("b", "", pg.name),
-          el("span", "", ` ${pg.text}`),
+          rulesText(` ${pg.text}`, { hover: true }),
         );
         if (pg.spent) row.append(el("span", "bm-tag", "spent"));
         box.append(row);
       }
     }
     if (info.statuses.length > 0) section("Conditions and state");
-    for (const st of info.statuses) box.append(el("div", "bm-info-status", st));
+    for (const st of info.statuses)
+      box.append(
+        rulesText(st, { tag: "div", className: "bm-info-status", hover: true }),
+      );
     box.append(el("div", "bm-dim bm-info-close", "Click or Esc to close"));
     box.hidden = false;
   }

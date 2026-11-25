@@ -178,7 +178,8 @@ const BLOOM: SpellDef[] = [
     target: "stack",
     fuel: "The heal",
     scale: { base: 20, per: 10 },
-    text: (p) => `Heal ${n(20, 10, p)} (no reviving) and end Venomed.`,
+    text: (p) =>
+      `Heal a stack for ${n(20, 10, p)} HP and cure its Venomed. Does not revive.`,
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       fx.heal(id, dbl(n(20, 10, c.power), c));
@@ -194,7 +195,7 @@ const BLOOM: SpellDef[] = [
     target: "stack",
     fuel: "Thorned's size",
     scale: { base: 6, per: 3 },
-    text: (p) => `Add Thorned ${n(6, 3, p)}, clock 3.`,
+    text: (p) => `A stack gains Thorned ${n(6, 3, p)} for 3 rounds.`,
     resolve(fx, _a, t, c) {
       addSized(fx, stackOf(t[0]), "thorned", dbl(n(6, 3, c.power), c), 3, 1);
     },
@@ -208,7 +209,8 @@ const BLOOM: SpellDef[] = [
     target: "stack",
     fuel: "The Harm",
     scale: { base: 12, per: 6 },
-    text: (p) => `Harm ${n(12, 6, p)}, and add Venomed 2, clock 3.`,
+    text: (p) =>
+      `Deal ${n(12, 6, p)} Harm to a stack and give it Venomed 2 for 3 rounds.`,
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       fx.harm(id, n(12, 6, c.power), { fuelled: c.fuelled });
@@ -225,7 +227,7 @@ const BLOOM: SpellDef[] = [
     fuel: null,
     tool: true,
     text: () =>
-      "Condition tool: a condition's size grows by half, rounded up, to its maximum. Not Holds.",
+      "Condition tool. Pick a condition with a size: the size grows by half, rounded up, to its maximum. Not Holds.",
     check(state, _a, t) {
       const ref = conditionOf(t[0]);
       const c = findCondition(state, ref.stack, ref.uid);
@@ -246,7 +248,7 @@ const BLOOM: SpellDef[] = [
     target: "stack",
     fuel: "The heal",
     scale: { base: 30, per: 15 },
-    text: (p) => `Heal ${n(30, 15, p)}, reviving.`,
+    text: (p) => `Heal a stack for ${n(30, 15, p)} HP, reviving.`,
     resolve(fx, _a, t, c) {
       fx.heal(stackOf(t[0]), dbl(n(30, 15, c.power), c), { revive: true });
     },
@@ -261,7 +263,7 @@ const BLOOM: SpellDef[] = [
     fuel: "The summon budget",
     scale: { base: 30, per: 15 },
     text: (p) =>
-      `Summon Seedlings worth ${n(30, 15, p)} HP (${Math.max(1, Math.floor(n(30, 15, p) / SEEDLING.hp))} Seedlings).`,
+      `Summon ${Math.max(1, Math.floor(n(30, 15, p) / SEEDLING.hp))} Seedlings (${n(30, 15, p)} HP worth) on an empty hex.`,
     resolve(fx, _a, t, c) {
       const budget = dbl(n(30, 15, c.power), c);
       fx.summon(SEEDLING, summonBudget(SEEDLING, budget), hexOf(t[0]), {
@@ -279,7 +281,7 @@ const BLOOM: SpellDef[] = [
     fuel: "The brambles' size",
     scale: { base: 9, per: 4 },
     text: (p) =>
-      `Brambles of size ${n(9, 4, p)}, clock 3, on three hexes in a line.`,
+      `Cover three hexes in a line with brambles of size ${n(9, 4, p)} for 3 rounds.`,
     resolve(fx, _a, t, c) {
       const size = dbl(n(9, 4, c.power), c);
       for (const target of t)
@@ -294,7 +296,8 @@ const BLOOM: SpellDef[] = [
     mana: 9,
     target: "stack",
     fuel: "Ripening's size",
-    text: () => "Add Ripening 20 (Strikes x 120%, +10 a round), clock 3.",
+    text: () =>
+      "A stack gains Ripening 20 for 3 rounds: its Strikes do +20% damage, growing by 10% each turn.",
     resolve(fx, _a, t, c) {
       addSized(fx, stackOf(t[0]), "ripening", dbl(20, c), 3, 3);
     },
@@ -309,7 +312,7 @@ const BLOOM: SpellDef[] = [
     fuel: "Mending's size",
     scale: { base: 10, per: 4 },
     text: (p) =>
-      `Every stack of your side gains Mending ${n(10, 4, p)}, clock 3.`,
+      `Every stack on your side gains Mending ${n(10, 4, p)} for 3 rounds.`,
     resolve(fx, _a, _t, c) {
       const size = dbl(n(10, 4, c.power), c);
       for (const id of sideStacks(fx.state, c.side))
@@ -326,7 +329,7 @@ const BLOOM: SpellDef[] = [
     fuel: "The heal",
     scale: { base: 54, per: 21 },
     text: (p) =>
-      `Every stack of your side heals ${n(54, 21, p)}, reviving; twice that if it bears Mending.`,
+      `Every stack on your side heals ${n(54, 21, p)} HP, reviving; a stack with Mending heals twice that.`,
     resolve(fx, _a, _t, c) {
       const x = dbl(n(54, 21, c.power), c);
       for (const id of sideStacks(fx.state, c.side)) {
@@ -359,7 +362,7 @@ const ACCORD: SpellDef[] = [
     target: "twoFriendly",
     fuel: null,
     text: () =>
-      "The first stack gains a Scapegoat link to the second, clock 3: damage to it goes to the second as Harm.",
+      "Pick two friendly stacks: for 3 rounds, damage to the first is taken by the second as Harm (a Scapegoat link).",
     resolve(fx, _a, t) {
       fx.link(stackOf(t[0]), stackOf(t[1]), {
         kind: "scapegoat",
@@ -377,7 +380,7 @@ const ACCORD: SpellDef[] = [
     target: "stack",
     fuel: "Shielded's size",
     text: () =>
-      "It and every stack adjacent to it that is friendly to you gain Shielded 2, clock 3.",
+      "A stack and every friendly stack next to it gain Shielded 2 for 3 rounds.",
     touches(state, a, t) {
       const id = stackOf(t[0]);
       return [id, ...friendlyAdjacent(state, id, casterSide(state, a))];
@@ -396,7 +399,7 @@ const ACCORD: SpellDef[] = [
     mana: 5,
     target: "twoFriendly",
     fuel: null,
-    text: () => "Two friendly stacks swap their hexes.",
+    text: () => "Two friendly stacks swap places.",
     resolve(fx, _a, t) {
       fx.swap(stackOf(t[0]), stackOf(t[1]));
     },
@@ -411,7 +414,7 @@ const ACCORD: SpellDef[] = [
     fuel: null,
     tool: true,
     text: () =>
-      "Condition tool: choose a link and another condition on either end; the other end receives a copy. Not Holds, not links.",
+      "Condition tool. Pick a link and another condition on one of its two stacks: the stack at the other end gets a copy. Not Holds or links.",
     resolve(fx, _a, t) {
       const l = conditionOf(t[0]);
       const o = conditionOf(t[1]);
@@ -431,7 +434,7 @@ const ACCORD: SpellDef[] = [
     fuel: "The gate",
     scale: { base: 60, per: 20 },
     text: (p) =>
-      `Add Turned, clock 1, gate ${n(60, 20, p)} HP; the gate is doubled if the target is Mollified.`,
+      `An enemy stack becomes Turned for 1 round: it fights for you. Gate ${n(60, 20, p)} HP, or ${2 * n(60, 20, p)} if it is Mollified.`,
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       fx.addCondition(id, {
@@ -450,7 +453,8 @@ const ACCORD: SpellDef[] = [
     mana: 6,
     target: "stack",
     fuel: "Mollified's size",
-    text: () => "Add Mollified 30 (its Strikes x 70%), clock 3.",
+    text: () =>
+      "A stack gains Mollified 30 for 3 rounds: its Strikes do -30% damage.",
     resolve(fx, _a, t, c) {
       addSized(fx, stackOf(t[0]), "mollified", dbl(30, c), 3, 2);
     },
@@ -464,7 +468,7 @@ const ACCORD: SpellDef[] = [
     target: "stack",
     fuel: "Warded's size",
     text: () =>
-      "Add Warded 40 (Harm taken x 60%), clock 3; if it bears Shielded, every friendly stack adjacent to it gains the same.",
+      "A stack gains Warded 40 for 3 rounds: -40% Harm taken. If it is Shielded, every friendly stack next to it gains the same.",
     touches(state, a, t) {
       const id = stackOf(t[0]);
       const s = getStack(state, id);
@@ -490,7 +494,8 @@ const ACCORD: SpellDef[] = [
     mana: 11,
     target: "friendly",
     fuel: null,
-    text: () => "End Shaken on a friendly stack, then add Heartened, clock 3.",
+    text: () =>
+      "A friendly stack loses Shaken and becomes Heartened for 3 rounds.",
     resolve(fx, _a, t) {
       const id = stackOf(t[0]);
       endKind(fx, id, "shaken");
@@ -507,7 +512,7 @@ const ACCORD: SpellDef[] = [
     fuel: "The gate",
     scale: { base: 120, per: 40 },
     text: (p) =>
-      `Add Turned, clock 2, gate ${n(120, 40, p)} HP; the gate is doubled if the target is Mollified.`,
+      `An enemy stack becomes Turned for 2 rounds: it fights for you. Gate ${n(120, 40, p)} HP, or ${2 * n(120, 40, p)} if it is Mollified.`,
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       fx.addCondition(id, {
@@ -527,7 +532,7 @@ const ACCORD: SpellDef[] = [
     target: "stack",
     fuel: null,
     text: () =>
-      "Every condition on it that is neither a Hold nor a link is copied to each stack adjacent to it.",
+      "Every condition on a stack, except Holds and links, is copied to every stack next to it, friend or foe.",
     touches(state, _a, t) {
       const id = stackOf(t[0]);
       return [id, ...adjacentStacks(state, id)];
@@ -559,7 +564,7 @@ const CLOCK: SpellDef[] = [
     mana: 4,
     target: "stack",
     fuel: null,
-    text: () => "End Delayed on the target, then add Hastened, clock 2.",
+    text: () => "A stack loses Delayed and becomes Hastened for 2 rounds.",
     resolve(fx, _a, t) {
       const id = stackOf(t[0]);
       endKind(fx, id, "delayed");
@@ -575,7 +580,7 @@ const CLOCK: SpellDef[] = [
     target: "stack",
     fuel: null,
     text: () =>
-      "End Hastened on the target, then add Delayed, clock 2, or clock 3 if it is Slowed.",
+      "A stack loses Hastened and becomes Delayed for 2 rounds, or 3 if it is Slowed.",
     resolve(fx, _a, t) {
       const id = stackOf(t[0]);
       endKind(fx, id, "hastened");
@@ -592,7 +597,8 @@ const CLOCK: SpellDef[] = [
     target: "stack",
     fuel: "The Harm",
     scale: { base: 24, per: 12 },
-    text: (p) => `At the next round start: Harm ${n(24, 12, p)} to that stack.`,
+    text: (p) =>
+      `At the start of next round a stack takes ${n(24, 12, p)} Harm.`,
     resolve(fx, _a, t, c) {
       fx.schedule({
         round: fx.round + 1,
@@ -619,7 +625,7 @@ const CLOCK: SpellDef[] = [
     fuel: null,
     tool: true,
     text: () =>
-      "Condition tool: add 2 to a clock (to at most 9) or subtract 2; at 0 it expires now. Holds can only be shortened.",
+      "Condition tool. Pick a condition with a clock: add 2 rounds (to at most 9) or take 2 away; at 0 it expires at once. Holds can only be shortened.",
     resolve(fx, _a, t) {
       const ref = conditionOf(t[0]);
       fx.windCondition(ref.stack, ref.uid, choiceOf(t[1]) === "+2" ? 2 : -2);
@@ -634,7 +640,7 @@ const CLOCK: SpellDef[] = [
     target: "area1",
     fuel: "Slowed's size",
     text: () =>
-      "Each stack on a hex and the six around it gains Slowed 1, clock 3.",
+      "Every stack on a hex and the 6 around it gains Slowed 1 for 3 rounds, friend or foe.",
     resolve(fx, _a, t, c) {
       for (const id of stacksOn(fx.state, discHexes(hexOf(t[0]), 1)))
         addSized(fx, id, "slowed", dbl(1, c), 3, 2);
@@ -648,7 +654,7 @@ const CLOCK: SpellDef[] = [
     mana: 8,
     target: "allFriendly",
     fuel: "Quickened's size",
-    text: () => "Every stack of your side gains Quickened 1, clock 2.",
+    text: () => "Every stack on your side gains Quickened 1 for 2 rounds.",
     resolve(fx, _a, _t, c) {
       for (const id of sideStacks(fx.state, c.side))
         addSized(fx, id, "quickened", dbl(1, c), 2, 2);
@@ -663,7 +669,7 @@ const CLOCK: SpellDef[] = [
     target: "active",
     fuel: null,
     text: () =>
-      "The friendly stack about to act takes an extra turn after this one, then gains Delayed, clock 2, unless it is Quickened.",
+      "The friendly stack about to act takes an extra turn after this one, then becomes Delayed for 2 rounds unless it is Quickened.",
     resolve(fx, a) {
       fx.extraTurn(a);
       if (!bears(fx, a, "quickened"))
@@ -678,7 +684,7 @@ const CLOCK: SpellDef[] = [
     mana: 10,
     target: "allFriendly",
     fuel: null,
-    text: () => "Every stack of your side gains Hastened, clock 2.",
+    text: () => "Every stack on your side becomes Hastened for 2 rounds.",
     resolve(fx, _a, _t, c) {
       for (const id of sideStacks(fx.state, c.side))
         fx.addCondition(id, { kind: "hastened", clock: 2, tier: 3 });
@@ -694,7 +700,7 @@ const CLOCK: SpellDef[] = [
     fuel: "Reckoning's size",
     scale: { base: 75, per: 30 },
     text: (p) =>
-      `Add Reckoning ${n(75, 30, p)}, clock 2: that much Harm when it falls due.`,
+      `A stack gains Reckoning ${n(75, 30, p)} for 2 rounds: a debt of ${n(75, 30, p)} Harm when it runs out.`,
     resolve(fx, _a, t, c) {
       addSized(
         fx,
@@ -715,7 +721,7 @@ const CLOCK: SpellDef[] = [
     target: "allFriendly",
     fuel: null,
     text: () =>
-      "Every stack of your side gains Heartened, clock 1 (an extra turn this round or never).",
+      "Every stack on your side becomes Heartened for 1 round: each may take an extra turn this round.",
     resolve(fx, _a, _t, c) {
       for (const id of sideStacks(fx.state, c.side))
         fx.addCondition(id, { kind: "heartened", clock: 1, tier: 5 });
@@ -758,7 +764,7 @@ const HUSH: SpellDef[] = [
     mana: 4,
     target: "stack",
     fuel: null,
-    text: () => "Add Hushed (cannot shoot), clock 2.",
+    text: () => "A stack becomes Hushed for 2 rounds: it cannot shoot.",
     resolve(fx, _a, t) {
       fx.addCondition(stackOf(t[0]), { kind: "hushed", clock: 2, tier: 1 });
     },
@@ -773,7 +779,7 @@ const HUSH: SpellDef[] = [
     fuel: "The heal (not the debt)",
     scale: { base: 25, per: 12 },
     text: (p) =>
-      `Heal ${n(25, 12, p)}, reviving, and add Reckoning ${n(25, 12, p)}, clock 3.`,
+      `Heal a stack for ${n(25, 12, p)} HP, reviving, but it gains Reckoning ${n(25, 12, p)} for 3 rounds: a debt paid back as Harm.`,
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       const x = n(25, 12, c.power);
@@ -790,7 +796,7 @@ const HUSH: SpellDef[] = [
     target: "stack",
     fuel: "Jinxed's size",
     text: () =>
-      "Add Jinxed 25 (no retaliation; Strikes on it x 125%), clock 3.",
+      "A stack becomes Jinxed 25 for 3 rounds: it cannot retaliate and Strikes against it do +25% damage.",
     resolve(fx, _a, t, c) {
       addSized(fx, stackOf(t[0]), "jinxed", dbl(25, c), 3, 1);
     },
@@ -805,7 +811,7 @@ const HUSH: SpellDef[] = [
     fuel: null,
     tool: true,
     text: () =>
-      "Condition tool: a bane moves to a stack adjacent to its bearer (a refused bane stays).",
+      "Condition tool. Pick a bane and a stack next to its bearer: the bane moves to that stack (if refused, it stays).",
     resolve(fx, _a, t) {
       const ref = conditionOf(t[0]);
       fx.moveCondition(ref.stack, ref.uid, stackOf(t[1]));
@@ -821,7 +827,7 @@ const HUSH: SpellDef[] = [
     fuel: "The gate",
     scale: { base: 60, per: 20 },
     text: (p) =>
-      `Add Asleep, clock 2, gate ${n(60, 20, p)} HP; the gate is doubled if the target is Hushed.`,
+      `A stack falls Asleep for 2 rounds. Gate ${n(60, 20, p)} HP, or ${2 * n(60, 20, p)} if it is Hushed.`,
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       fx.addCondition(id, {
@@ -842,7 +848,7 @@ const HUSH: SpellDef[] = [
     fuel: "The summon budget",
     scale: { base: 30, per: 15 },
     text: (p) =>
-      `Raise Shades worth ${n(30, 15, p)} HP (${Math.max(1, Math.floor(n(30, 15, p) / SHADE.hp))} Shades) on remains of your side.`,
+      `Raise ${Math.max(1, Math.floor(n(30, 15, p) / SHADE.hp))} Shades (${n(30, 15, p)} HP worth) on remains of your side.`,
     check(state, _a, t) {
       return isFreeHex(state, hexOf(t[0])) ? null : "a stack stands on it";
     },
@@ -864,7 +870,7 @@ const HUSH: SpellDef[] = [
     fuel: "Leeched's size",
     scale: { base: 15, per: 7 },
     text: (p) =>
-      `The enemy gains a Leeched link to the friendly stack, ${n(15, 7, p)} a round, clock 3.`,
+      `Pick an enemy and a friendly stack: for 3 rounds the enemy takes ${n(15, 7, p)} Harm each turn and the friendly stack heals that much (a Leeched link).`,
     resolve(fx, _a, t, c) {
       fx.link(stackOf(t[0]), stackOf(t[1]), {
         kind: "leeched",
@@ -884,7 +890,7 @@ const HUSH: SpellDef[] = [
     fuel: "The summon budget",
     scale: { base: 45, per: 20 },
     text: (p) =>
-      `Raise the creature in the remains, worth ${n(45, 20, p)} HP, at most its initial count.`,
+      `Raise the creature in remains of your side: ${n(45, 20, p)} HP worth, never more than it started with.`,
     check(state, _a, t) {
       return isFreeHex(state, hexOf(t[0])) ? null : "a stack stands on it";
     },
@@ -912,8 +918,7 @@ const HUSH: SpellDef[] = [
     target: "area2",
     fuel: null,
     text: () =>
-      "Mist, clock 3, on a hex and every hex within 2: no shooting from it, shots into it x 50%.",
-    touches: () => [],
+      "Fill a hex and every hex within 2 of it with mist for 3 rounds: no shooting from it, and shots into it do half damage.",
     resolve(fx, _a, t) {
       for (const h of discHexes(hexOf(t[0]), 2)) {
         if (!isBlockingHex(fx.state, h))
@@ -931,7 +936,7 @@ const HUSH: SpellDef[] = [
     fuel: "The summon budget (each)",
     scale: { base: 40, per: 15 },
     text: (p) =>
-      `Every remains of your side rises as Shades worth ${n(40, 15, p)} HP, until the ten-stack limit.`,
+      `All remains of your side rise as Shades, ${n(40, 15, p)} HP worth each, until your side has ten stacks.`,
     resolve(fx, _a, _t, c) {
       const budget = dbl(n(40, 15, c.power), c);
       for (const h of ownRemains(fx.state, c.side)) {
@@ -957,7 +962,7 @@ const STORM: SpellDef[] = [
     target: "stack",
     fuel: "The Harm",
     scale: { base: 20, per: 10 },
-    text: (p) => `Harm ${n(20, 10, p)}.`,
+    text: (p) => `Deal ${n(20, 10, p)} Harm to a stack.`,
     resolve(fx, _a, t, c) {
       fx.harm(stackOf(t[0]), n(20, 10, c.power), { fuelled: c.fuelled });
     },
@@ -972,7 +977,7 @@ const STORM: SpellDef[] = [
     fuel: "The Harm",
     scale: { base: 8, per: 4 },
     text: (p) =>
-      `Harm ${n(8, 4, p)}, then push it 3 hexes away from the chosen hex beside it.`,
+      `Deal ${n(8, 4, p)} Harm to a stack, then push it 3 hexes away from a hex next to it that you pick.`,
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       fx.harm(id, n(8, 4, c.power), { fuelled: c.fuelled });
@@ -988,7 +993,8 @@ const STORM: SpellDef[] = [
     target: "stack",
     fuel: "Burning's size",
     scale: { base: 6, per: 3 },
-    text: (p) => `Add Burning ${n(6, 3, p)} and Fired Up 2, both clock 3.`,
+    text: (p) =>
+      `A stack gains Burning ${n(6, 3, p)} and Fired Up 2, both for 3 rounds.`,
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       addSized(fx, id, "burning", dbl(n(6, 3, c.power), c), 3, 1);
@@ -1005,7 +1011,7 @@ const STORM: SpellDef[] = [
     fuel: null,
     tool: true,
     text: () =>
-      "Condition tool: a condition ends and its bearer takes Harm = charge x rounds left (clockless 3; at most 3).",
+      "Condition tool. End a condition: its bearer takes its charge as Harm for each round it had left (at most 3; clockless counts as 3).",
     resolve(fx, _a, t) {
       const ref = conditionOf(t[0]);
       fx.setOffCondition(ref.stack, ref.uid);
@@ -1021,7 +1027,7 @@ const STORM: SpellDef[] = [
     fuel: "The Harm",
     scale: { base: 18, per: 9 },
     text: (p) =>
-      `Harm ${n(18, 9, p)} to each stack on a hex and the six around it.`,
+      `Deal ${n(18, 9, p)} Harm to every stack on a hex and the 6 around it, friend or foe.`,
     resolve(fx, _a, t, c) {
       // An area effect (FACTION_GOBLINS 3: Launched reads it).
       for (const id of stacksOn(fx.state, discHexes(hexOf(t[0]), 1)))
@@ -1041,7 +1047,7 @@ const STORM: SpellDef[] = [
     fuel: "The gate",
     scale: { base: 60, per: 20 },
     text: (p) =>
-      `Add Frozen, clock 2, gate ${n(60, 20, p)} HP; the gate is doubled if the target is Drenched.`,
+      `A stack is Frozen for 2 rounds. Gate ${n(60, 20, p)} HP, or ${2 * n(60, 20, p)} if it is Drenched.`,
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       fx.addCondition(id, {
@@ -1061,7 +1067,7 @@ const STORM: SpellDef[] = [
     target: "area2",
     fuel: "Drenched's size",
     text: () =>
-      "Each stack within 2 of a hex gains Drenched 40 (Harm taken x 140%), clock 3; fire there ends.",
+      "Every stack within 2 hexes of a hex gains Drenched 40 for 3 rounds (+40% Harm taken); fire there goes out.",
     resolve(fx, _a, t, c) {
       const hexes = discHexes(hexOf(t[0]), 2);
       for (const id of stacksOn(fx.state, hexes))
@@ -1081,7 +1087,7 @@ const STORM: SpellDef[] = [
     fuel: "The fire's size",
     scale: { base: 9, per: 4 },
     text: (p) =>
-      `Fire of size ${n(9, 4, p)}, clock 3, on a hex and the six around it.`,
+      `Set a hex and the 6 around it on fire for 3 rounds, size ${n(9, 4, p)}.`,
     check(state, _a, t) {
       return isBlockingHex(state, hexOf(t[0])) ? "the hex is blocking" : null;
     },
@@ -1104,7 +1110,7 @@ const STORM: SpellDef[] = [
     fuel: "The Harm",
     scale: { base: 36, per: 15 },
     text: (p) =>
-      `Harm ${n(36, 15, p)} to each stack within 2 of a hex, and Slowed 2, clock 2.`,
+      `Deal ${n(36, 15, p)} Harm to every stack within 2 hexes of a hex, friend or foe, and give each Slowed 2 for 2 rounds.`,
     resolve(fx, _a, t, c) {
       for (const id of stacksOn(fx.state, discHexes(hexOf(t[0]), 2))) {
         const h = fx.harm(id, n(36, 15, c.power), {
@@ -1126,7 +1132,7 @@ const STORM: SpellDef[] = [
     fuel: "The Harm",
     scale: { base: 54, per: 21 },
     text: (p) =>
-      `Harm ${n(54, 21, p)} to each stack within 3 of a hex that is not Warded; remains there become fire 10, clock 3.`,
+      `Deal ${n(54, 21, p)} Harm to every stack within 3 hexes of a hex that is not Warded, friend or foe; remains there become fire of size 10 for 3 rounds.`,
     resolve(fx, _a, t, c) {
       const hexes = discHexes(hexOf(t[0]), 3);
       for (const id of stacksOn(fx.state, hexes)) {
@@ -1160,7 +1166,7 @@ const FACTION_PAGES: SpellDef[] = [
     fuel: "The heal",
     pool: false,
     scale: { base: 20, per: 10 },
-    text: (p) => `Heal ${n(20, 10, p)}, reviving.`,
+    text: (p) => `Heal a stack for ${n(20, 10, p)} HP, reviving.`,
     resolve(fx, _a, t, c) {
       fx.heal(stackOf(t[0]), dbl(n(20, 10, c.power), c), { revive: true });
     },
@@ -1176,7 +1182,7 @@ const FACTION_PAGES: SpellDef[] = [
     pool: false,
     scale: { base: 12, per: 6 },
     text: (p) =>
-      `Harm ${n(12, 6, p)} to each stack on a hex and the six around it.`,
+      `Deal ${n(12, 6, p)} Harm to every stack on a hex and the 6 around it, friend or foe.`,
     resolve(fx, _a, t, c) {
       for (const id of stacksOn(fx.state, discHexes(hexOf(t[0]), 1)))
         fx.harm(id, n(12, 6, c.power), {
@@ -1195,7 +1201,7 @@ const FACTION_PAGES: SpellDef[] = [
     fuel: "The Harm",
     pool: false,
     scale: { base: 20, per: 10 },
-    text: (p) => `Harm ${n(20, 10, p)}.`,
+    text: (p) => `Deal ${n(20, 10, p)} Harm to a stack.`,
     resolve(fx, _a, t, c) {
       fx.harm(stackOf(t[0]), n(20, 10, c.power), { fuelled: c.fuelled });
     },

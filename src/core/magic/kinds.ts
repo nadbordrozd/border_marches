@@ -50,7 +50,7 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
         ? Math.floor((c.size * 3) / 2)
         : c.size;
       const healed = fx.heal(holder, x, { revive: true });
-      // Gardener's Apron: adjacent enemies gain Venomed 2, clock 2.
+      // Gardener's Apron: adjacent enemies gain Venomed 2 for 2 rounds.
       if (healed > 0 && fx.hasRule(side, "gardeners-apron")) {
         const hex = fx.stack(holder).hex;
         for (const foe of adjacentStacks(
@@ -185,7 +185,7 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
       if (!hasRule(ctx.state, holder.side, "quickstep")) return null;
       return { source: "quickstep", label: "Quickstep", amount: 2 * c.size };
     },
-    // Metronome Spurs: its Strikes leave the target Slowed 1, clock 2.
+    // Metronome Spurs: its Strikes leave the target Slowed 1 for 2 rounds.
     onStrike(ctx, holder) {
       if (holder.id !== ctx.attacker.id) return null;
       if (!hasRule(ctx.state, holder.side, "metronome-spurs")) return null;
@@ -272,7 +272,7 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
         // Bloodletting: the far end heals twice the Harm.
         const x = fx.hasRule(side, "bloodletting") ? 2 * dealt : dealt;
         const healed = fx.heal(far, x, { revive: true });
-        // Thicker than Water: the healed stack gains Fired Up 2, clock 2.
+        // Thicker than Water: the healed stack gains Fired Up 2 for 2 rounds.
         if (healed > 0 && fx.hasRule(side, "thicker-than-water"))
           fx.addCondition(far, {
             kind: "fired-up",
@@ -303,7 +303,7 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
       if (holder.id !== ctx.attacker.id || c.size === 0) return null;
       return { source: "fired-up", label: "Fired Up", amount: c.size };
     },
-    // Whetstone Pendant: a kill by it gives Heartened, clock 1.
+    // Whetstone Pendant: a kill by it gives Heartened for 1 round.
     onStrike(ctx, holder) {
       if (holder.id !== ctx.attacker.id) return null;
       if (!hasRule(ctx.state, holder.side, "whetstone-pendant")) return null;
@@ -315,7 +315,7 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
       };
     },
     // Blaze of Glory: on expiry, adjacent enemies gain Burning of twice
-    // its size, clock 2.
+    // its size for 2 rounds.
     onExpire(fx, holder, c) {
       const side = fx.sideOf(holder);
       if (!fx.hasRule(side, "blaze-of-glory")) return;
@@ -431,7 +431,8 @@ export function registerMagicKinds(): void {
   registerAbility({
     id: "gone-to-seed",
     name: "Gone to Seed",
-    description: "When it dies its hex receives brambles of size 4, clock 3.",
+    description:
+      "When it dies its hex receives brambles of size 4 for 3 rounds.",
     onDeath(deadId, owner) {
       if (deadId !== owner.id) return null;
       const hex = owner.hex;
@@ -443,7 +444,7 @@ export function registerMagicKinds(): void {
   registerAbility({
     id: "fade",
     name: "Fade",
-    description: "When it dies its hex receives mist, clock 2.",
+    description: "When it dies its hex receives mist for 2 rounds.",
     onDeath(deadId, owner) {
       if (deadId !== owner.id) return null;
       const hex = owner.hex;

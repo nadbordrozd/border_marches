@@ -1,0 +1,117 @@
+/* Keywords in rules text and their boxes (src/ui/keywords.ts). */
+
+.gm-kw {
+  color: #ffd65c;
+  font-weight: bold;
+}
+
+.gm-kw-boon {
+  color: #a6dc7e;
+}
+
+.gm-kw-bane {
+  color: #f29a7e;
+}
+
+/* Side notes (Fuel, Echo, Power lines) stay quiet: coloured, not bold. */
+.gm-tip-dim .gm-kw {
+  font-weight: normal;
+}
+
+.gm-kw[data-kw-tip] {
+  cursor: help;
+  text-underline-offset: 2px;
+}
+
+.gm-kw[data-kw-tip]:hover {
+  text-decoration: underline dotted;
+}
+
+/* The tooltip panel holding a card and its boxes: each part is framed. */
+.gm-tip.gm-tip-kw {
+  max-width: min(600px, calc(100vw - 16px));
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.gm-kw-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.gm-kw-main,
+.gm-kw-box {
+  background:
+    linear-gradient(rgb(255 236 190 / 5%), rgb(0 0 0 / 10%)),
+    rgb(22 16 10 / 97%);
+  box-shadow:
+    0 0 0 1px var(--gm-ink, #120c06),
+    inset 0 0 0 1px var(--gm-trim, #c99a3c),
+    inset 0 0 0 2px var(--gm-ink, #120c06),
+    0 6px 18px rgb(0 0 0 / 60%);
+  border-radius: 2px;
+}
+
+.gm-kw-main {
+  flex: 0 1 330px;
+  min-width: 0;
+  padding: 7px 10px 8px;
+}
+
+.gm-kw-col {
+  display: flex;
+  flex: 0 0 216px;
+  flex-direction: column;
+  gap: 4px;
+  width: 216px;
+}
+
+.gm-kw-box {
+  padding: 5px 8px 6px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.gm-kw-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.gm-kw-head img {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.gm-kw-term {
+  color: #ffd65c;
+  font:
+    bold 12px Georgia,
+    serif;
+}
+
+.gm-kw-tag {
+  color: var(--gm-dim, #a89a80);
+  font-size: 10px;
+}
+
+.gm-kw-text {
+  color: #e9dcb8;
+}
+
+/* Narrow screens: the boxes go under the card. */
+@media (width <= 560px) {
+  .gm-kw-wrap {
+    flex-direction: column;
+  }
+
+  .gm-kw-main,
+  .gm-kw-col {
+    flex: 0 1 auto;
+    width: 100%;
+  }
+}

@@ -7,7 +7,11 @@
  */
 
 import type { ConditionRef } from "../../core/battle/index.ts";
+import { isBattleSpell } from "../../core/magic/index.ts";
 import { iconElement } from "../icons.ts";
+import { spellTip } from "../info-tips.ts";
+import { rulesText } from "../keywords.ts";
+import { setTip, tipCard } from "../tooltip.ts";
 import { SCHOOL_COLOURS, SCHOOL_NAMES } from "./magic.ts";
 import type { BookEntry, CastPreview, ConditionOption } from "./magic.ts";
 
@@ -37,13 +41,25 @@ export interface BookView {
   } | null;
 }
 
+/** A page's hover card: the spell card at this Power, then why not now. */
+function entryTip(e: BookEntry): HTMLElement {
+  const card =
+    e.source !== "item" && isBattleSpell(e.id) ? spellTip(e.id, e.power) : null;
+  const why = e.reason ? el("div", "gm-tip-line gm-tip-bad", e.reason) : null;
+  if (card instanceof HTMLElement) {
+    if (why) card.append(why);
+    return card;
+  }
+  return tipCard(e.name, [e.text, why]);
+}
+
 function entryNode(e: BookEntry, onPick: (e: BookEntry) => void): HTMLElement {
   const item = e.source === "item";
   const b = el("button", `bm-spell bm-st-${e.status}${item ? " bm-item" : ""}`);
   b.type = "button";
   b.style.setProperty("--school", item ? "#c9a227" : SCHOOL_COLOURS[e.school]);
   b.disabled = e.status !== "ready";
-  b.title = e.reason ?? `${e.name}: ${e.text}`;
+  setTip(b, () => entryTip(e));
   const head = el("div", "bm-spell-head");
   head.append(
     iconElement(item ? "artifact" : "spell", e.id, {
@@ -69,9 +85,9 @@ function entryNode(e: BookEntry, onPick: (e: BookEntry) => void): HTMLElement {
       "bm-spell-meta",
       item
         ? "Once per battle · before a friendly stack acts"
-        : `Tier ${e.tier} · Power ${e.power}${e.fuel ? ` · Fuel doubles ${e.fuel.charAt(0).toLowerCase() + e.fuel.slice(1)}` : ""}`,
+        : `Tier ${e.tier} · Power ${e.power}${e.fuel ? ` · Fuel doubles ${e.fuel.replace(/^The /, "the ")}` : ""}`,
     ),
-    el("div", "bm-spell-text", e.text),
+    rulesText(e.text, { tag: "div", className: "bm-spell-text" }),
   );
   if (e.reason) b.append(el("div", "bm-spell-why", e.reason));
   b.addEventListener("click", () => onPick(e));
@@ -220,7 +236,14 @@ export function renderCastPanel(
                 : " · the stack's action"),
     ),
   );
-  box.append(head, el("div", "bm-spell-text", m.entry.text));
+  box.append(
+    head,
+    rulesText(m.entry.text, {
+      tag: "div",
+      className: "bm-spell-text",
+      hover: true,
+    }),
+  );
   if (!m.complete) box.append(el("div", "bm-cast-prompt", m.prompt));
   if (m.conditions) {
     const row = el("div", "bm-cast-toggles");

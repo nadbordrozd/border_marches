@@ -149,7 +149,7 @@ describe("the spell list", () => {
   });
 
   it("texts scale with Power", () => {
-    expect(spellDef("jolt").text(3)).toBe("Harm 50.");
+    expect(spellDef("jolt").text(3)).toBe("Deal 50 Harm to a stack.");
   });
 });
 

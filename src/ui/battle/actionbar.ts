@@ -8,6 +8,7 @@
  */
 
 import { iconElement } from "../icons.ts";
+import { rulesText } from "../keywords.ts";
 import { actionTooltip } from "./actions.ts";
 import type { ActionIcon, BarAction } from "./actions.ts";
 import type { CastPreview, ConditionOption } from "./magic.ts";
@@ -96,7 +97,8 @@ export function showActionTip(
   const head = el("div", "bm-act-tip-head");
   head.append(actionIcon(a.icon), el("span", "bm-act-tip-title", t.title));
   tip.append(head);
-  for (const line of t.lines) tip.append(el("div", "bm-act-tip-line", line));
+  for (const line of t.lines)
+    tip.append(rulesText(line, { tag: "div", className: "bm-act-tip-line" }));
   if (t.reason)
     tip.append(el("div", "bm-act-tip-why", `Unavailable: ${t.reason}`));
   tip.hidden = false;
@@ -149,7 +151,10 @@ export function renderActPanel(
   const title = el("div", "bm-act-title");
   title.append(el("div", "bm-cast-name", m.name), el("div", "bm-dim", m.kind));
   head.append(actionIcon(m.icon), title);
-  box.append(head, el("div", "bm-spell-text", m.rule));
+  box.append(
+    head,
+    rulesText(m.rule, { tag: "div", className: "bm-spell-text", hover: true }),
+  );
   if (m.chosen.length > 0)
     box.append(el("div", "bm-act-chosen", `Chosen: ${m.chosen.join(" · ")}`));
   box.append(el("div", "bm-cast-prompt", m.prompt));

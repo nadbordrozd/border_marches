@@ -47,6 +47,7 @@ import {
 } from "./gallery-data.ts";
 import { itemTooltip } from "./hero-screen.ts";
 import { iconElement } from "./icons.ts";
+import { highlightKeywords } from "./keywords.ts";
 import {
   abilityText,
   buildingTip,
@@ -463,6 +464,8 @@ function entryNode(entry: GalleryEntry, sectionTitle: string): HTMLElement {
       ? el("div.gm-tip-card", el("div.gm-tip-title", card))
       : card,
   );
+  // Keywords in the card's rules text explain themselves on hover.
+  highlightKeywords(text, true);
   const figures = entry.art.map(figure);
   const node = el(
     "article.gx-card.gm-inset",

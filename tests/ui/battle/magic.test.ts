@@ -42,7 +42,7 @@ describe("the battle spellbook", () => {
       ["wind", "scroll", 0, 2, "ready"],
     ]);
     expect(book[3]?.count).toBe(2);
-    expect(book[2]?.text).toBe("Harm 40.");
+    expect(book[2]?.text).toBe("Deal 40 Harm to a stack.");
   });
 
   it("greys spent pages, unaffordable pages and pages after the round's cast", () => {
