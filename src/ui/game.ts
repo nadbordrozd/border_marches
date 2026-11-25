@@ -126,6 +126,15 @@ import {
   type HeroScreenHost,
 } from "./hero-screen.ts";
 import { Minimap } from "./minimap.ts";
+import {
+  glyph,
+  heroRow,
+  readyToHire,
+  townRow,
+  type SideGlyph,
+} from "./side-panel.ts";
+import { iconElement } from "./icons.ts";
+import { PRIMARY_STATS, STAT_NAMES } from "../data/effects.ts";
 import { browserStorage, deleteSave, readSave, saveGame } from "./save.ts";
 import { displayObjects, objectsSignature } from "./objects.ts";
 import { openTownScreen } from "./town.ts";
@@ -501,53 +510,63 @@ class GameScreen {
   // ------------------------------------------------------------ layout
 
   private buildSide(): void {
-    const tips: Array<[string, string, () => void, string]> = [
+    const tips: Array<[string, string, () => void, string, SideGlyph]> = [
       [
         "Next",
         "H",
         () => this.nextHero(),
         "Select the next hero with movement left (H).",
+        "next",
       ],
       [
         "Kingdom",
         "K",
         () => void this.kingdom(),
         "Kingdom overview: towns, heroes, mines, income and rivals (K).",
+        "kingdom",
       ],
       [
         "Spells",
         "M",
         () => void this.spellbook(),
         "The selected hero's spellbook: cast adventure spells (M).",
+        "spells",
       ],
       [
         "Dig",
         "G",
         () => void this.dig(),
         "Dig for buried treasure on the hero's cell (G).",
+        "dig",
       ],
       [
         "Log",
         "L",
         () => void this.showLog(),
         "What happened recently, the other players' turns included (L).",
+        "log",
       ],
       [
         "Menu",
         "O",
         () => void this.gameMenu(),
         "Save, load, sound settings and quit (O).",
+        "menu",
       ],
     ];
     const buttons = el("div.gm-side-buttons");
-    for (const [label, key, run, tip] of tips)
-      buttons.append(setTip(keyButton(label, key, run), tip));
+    for (const [label, key, run, tip, icon] of tips) {
+      const b = keyButton(label, key, run);
+      b.prepend(glyph(icon));
+      buttons.append(setTip(b, tip));
+    }
     const endTurnButton = keyButton(
       "End turn",
       "E",
       () => void this.endTurn(),
       "gm-btn gm-primary gm-end-turn",
     );
+    endTurnButton.prepend(glyph("end"));
     setTip(endTurnButton, () => {
       const warnings = endTurnWarnings(
         this.state,
@@ -565,7 +584,8 @@ class GameScreen {
     this.side.append(
       this.turnPanel,
       this.minimap.canvas,
-      el("div.gm-side-lists", this.heroList, this.townPanel),
+      this.heroList,
+      this.townPanel,
       this.heroPanel,
       el("div.gm-side-foot", buttons, endTurnButton),
     );
@@ -712,36 +732,45 @@ class GameScreen {
     this.heroList.replaceChildren();
     const own = heroesOf(this.state, this.human);
     const selected = this.hero();
-    const strip = el("div.gm-hero-strip");
+    const rows = el("div.gm-hero-rows");
+    const bar = (kind: "mp" | "mana", fill: number): HTMLElement => {
+      const b = el(`span.gm-hero-row-bar.gm-${kind}`);
+      b.style.setProperty("--fill", `${fill}%`);
+      return b;
+    };
     for (const h of own) {
+      const row = heroRow(h);
       const item = el(
-        "button.gm-hero-item",
+        "button.gm-hero-row",
         img(
           namedHeroPortrait(h.defId, h.heroClass).key,
-          "gm-hero-item-portrait",
+          "gm-hero-row-portrait",
+        ),
+        el(
+          "span.gm-hero-row-body",
+          el("span.gm-hero-row-name", h.name),
+          bar("mp", row.mpPct),
+          bar("mana", row.manaPct),
         ),
       );
       item.type = "button";
-      item.setAttribute("aria-label", h.name);
-      const mp = el("span.gm-hero-item-mp");
-      mp.style.setProperty(
-        "--mp",
-        `${Math.max(0, Math.min(100, (h.mp / Math.max(1, h.maxMp)) * 100))}%`,
+      item.setAttribute(
+        "aria-label",
+        `${h.name}: moves ${row.mp} of ${row.maxMp}, mana ${row.mana} of ${row.maxMana}`,
       );
-      item.append(mp);
-      if (h.pendingLevelUps > 0) item.append(el("span.gm-hero-item-up", "+"));
+      if (row.levelUp) item.append(el("span.gm-hero-row-up", "+"));
       setTip(item, () => this.heroTip(h));
       if (h.id === selected?.id) item.classList.add("gm-selected");
-      if (h.mp < SPENT_MP) item.classList.add("gm-tired");
+      if (row.tired) item.classList.add("gm-tired");
       item.addEventListener("click", () => this.selectHero(h.id));
       item.addEventListener("dblclick", () => void this.heroScreen(h.id));
-      strip.append(item);
+      rows.append(item);
     }
     this.heroList.append(
       el("div.gm-side-label", `Heroes ${own.length} / ${MAX_HEROES}`),
       own.length === 0
         ? el("div.gm-dim", "No heroes: hire one in a town's tavern.")
-        : strip,
+        : rows,
     );
   }
 
@@ -753,7 +782,6 @@ class GameScreen {
     const portrait = img(
       namedHeroPortrait(hero.defId, hero.heroClass).key,
       "gm-hero-portrait",
-      2,
     );
     setTip(portrait, "Centre the map on the hero. Double-click: hero sheet.");
     portrait.addEventListener("click", () => this.selectHero(hero.id));
@@ -763,69 +791,70 @@ class GameScreen {
     const pct = (n: number, d: number): number =>
       Math.max(0, Math.min(100, (n / Math.max(1, d)) * 100));
     const st = heroStats(hero);
+    // Four stat cells: the stat icon and the number (UI2-06).
     const statLine = el("div.gm-hero-statline");
-    for (const [label, key, value] of [
-      ["Attack", "A", st.attack],
-      ["Defense", "D", st.defense],
-      ["Power", "P", st.power],
-      ["Lore", "L", st.lore],
-    ] as const) {
-      const cell = el("span.gm-stat", el("small", key), String(value));
-      setTip(cell, `${label} ${value}`);
+    for (const stat of PRIMARY_STATS) {
+      const icon = iconElement("stat", stat, { className: "gm-stat-icon" });
+      icon.removeAttribute("title");
+      const cell = el(
+        "span.gm-stat",
+        icon,
+        el("span.gm-stat-value", String(st[stat])),
+      );
+      cell.setAttribute("aria-label", `${STAT_NAMES[stat]} ${st[stat]}`);
+      setTip(cell, `${STAT_NAMES[stat]} ${st[stat]}`);
       statLine.append(cell);
     }
     const sheet = keyButton(
       "Hero sheet",
       "I",
       () => void this.heroScreen(hero.id),
+      "gm-btn gm-hero-sheet",
     );
-    sheet.classList.add("gm-hero-sheet-button");
+    sheet.prepend(glyph("sheet"));
     if (hero.pendingLevelUps > 0) sheet.classList.add("gm-attention");
-    const meterRow = (
+    // Moves, mana and XP as three bars in one row, the numbers inside.
+    const meter = (
       kind: string,
       fillPct: number,
       label: string,
       tip: string,
     ): HTMLElement => {
-      const fill = el(`div.gm-meter-fill.gm-${kind}`);
-      fill.style.width = `${fillPct}%`;
-      return setTip(
-        el(
-          "div.gm-meter-row",
-          el("div.gm-meter", fill),
-          el("div.gm-meter-label", label),
-        ),
-        tip,
-      );
+      const bar = el(`div.gm-hero-meter.gm-${kind}`, label);
+      bar.style.setProperty("--fill", `${fillPct}%`);
+      return setTip(bar, tip);
     };
-    const stats = el(
+    const head = el(
       "div.gm-hero-stats",
       el("div.gm-hero-name", hero.name),
       el("div.gm-hero-class", `Level ${hero.level} ${cls.name}`),
-      statLine,
+      sheet,
     );
     this.heroPanel.append(
-      el("div.gm-hero-top", portrait, stats),
-      meterRow(
-        "mp",
-        pct(hero.mp, hero.maxMp),
-        `Moves ${hero.mp} / ${hero.maxMp}`,
-        "Movement left today. Roads are cheaper; forest, swamp and rough ground cost more.",
-      ),
-      meterRow(
-        "mana",
-        pct(hero.mana, maxMana(hero)),
-        `Mana ${hero.mana} / ${maxMana(hero)}`,
-        "Mana for spells. It returns each day; Lore raises the maximum.",
-      ),
-      meterRow(
-        "xp",
-        pct(hero.xp - prevXp, nextXp - prevXp),
-        `XP ${hero.xp} / ${nextXp}`,
-        `Experience to level ${hero.level + 1}.`,
+      el("div.gm-hero-top", portrait, head),
+      statLine,
+      el(
+        "div.gm-hero-meters",
+        meter(
+          "mp",
+          pct(hero.mp, hero.maxMp),
+          `Moves ${hero.mp} / ${hero.maxMp}`,
+          "Movement left today. Roads are cheaper; forest, swamp and rough ground cost more.",
+        ),
+        meter(
+          "mana",
+          pct(hero.mana, maxMana(hero)),
+          `Mana ${hero.mana} / ${maxMana(hero)}`,
+          "Mana for spells. It returns each day; Lore raises the maximum.",
+        ),
+        meter(
+          "xp",
+          pct(hero.xp - prevXp, nextXp - prevXp),
+          `XP ${hero.xp} / ${nextXp}`,
+          `Experience to level ${hero.level + 1}.`,
+        ),
       ),
       armyRow(hero.army, { small: true }),
-      sheet,
     );
     this.heroPanel.classList.add("gm-selected");
   }
@@ -847,6 +876,9 @@ class GameScreen {
       [
         el("div", "Income ", costView(townIncome(town))),
         `Garrison: ${garrison === "" ? "none" : garrison}`,
+        mine && readyToHire(town) > 0
+          ? el("div.gm-tip-good", `${readyToHire(town)} creatures to hire.`)
+          : null,
         !mine
           ? null
           : town.builtToday
@@ -868,13 +900,25 @@ class GameScreen {
     const buildable = new Set(buildableTowns(this.state, this.human));
     const list = el("div.gm-town-list");
     towns.forEach((id, i) => {
-      const town = this.state.towns[id];
-      if (town === undefined) return;
+      const row = townRow(this.state, id, buildable.has(id));
+      if (row === null) return;
       const b = button("", () => void this.openTown(id), "gm-town-item");
-      const chip = el("span.gm-town-chip");
-      chip.style.background = findFaction(town.faction)?.colour ?? "#6b5a3e";
-      b.append(chip, el("span.gm-town-item-name", town.name));
-      if (buildable.has(id)) b.append(el("span.gm-town-build", "build"));
+      // Crest: a shield in the faction colour (UI2-06).
+      const crest = el("span.gm-town-crest");
+      crest.style.setProperty("--crest", row.colour);
+      crest.setAttribute("aria-hidden", "true");
+      b.append(crest, el("span.gm-town-item-name", row.name));
+      // Growth flag: creatures wait in the dwellings.
+      if (row.ready > 0) {
+        b.append(
+          el(
+            "span.gm-town-grow",
+            el("span.gm-town-grow-flag"),
+            String(row.ready),
+          ),
+        );
+      }
+      if (row.build) b.append(el("span.gm-town-build", "build"));
       if (i === 0) b.append(kbd("T"));
       setTip(b, () => this.townTip(id));
       list.append(b);

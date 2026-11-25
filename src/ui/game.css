@@ -1421,51 +1421,6 @@
   gap: 3px;
 }
 
-.gm-hero-item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 2px 6px 5px 2px;
-  font: inherit;
-  font-size: 13px;
-  color: var(--gm-text);
-  text-align: left;
-  background: var(--gm-wood-dark);
-  border: 1px solid var(--gm-edge);
-  cursor: pointer;
-}
-
-.gm-hero-item.gm-selected {
-  border-color: var(--gm-gold);
-  color: var(--gm-gold);
-}
-
-.gm-hero-item-portrait {
-  width: 24px;
-  height: 24px;
-  image-rendering: pixelated;
-}
-
-.gm-hero-item-mp {
-  position: absolute;
-  left: 30px;
-  right: 6px;
-  bottom: 2px;
-  height: 2px;
-  background: linear-gradient(
-    to right,
-    var(--gm-green) var(--mp, 0%),
-    #2c261c var(--mp, 0%)
-  );
-}
-
-.gm-hero-count {
-  color: var(--gm-dim);
-  font-size: 11px;
-  text-align: right;
-}
-
 .gm-warn {
   color: var(--gm-red);
 }
@@ -1763,9 +1718,9 @@
 }
 
 .gm-side {
-  flex: 0 0 clamp(248px, 17vw, 312px);
-  gap: 8px;
-  padding: 10px 12px 0;
+  flex: 0 0 clamp(320px, 17vw, 340px);
+  gap: 6px;
+  padding: 10px 10px 0 12px;
   border: 0;
   background: var(--gm-wood-bg);
   box-shadow:
@@ -1813,11 +1768,11 @@
 
   /*
    * Bead bzc.42: the frame follows the window. It takes the sidebar's full
-   * width (which itself grows on wide screens) but at most about a third
-   * of the window height, so 800x600 keeps room for the hero panel and
-   * 1920x1080 gets a large map. The canvas fills it (src/ui/minimap.ts).
+   * width but at most 28% of the window height (UI2-06: the hero rows,
+   * town list and army need the rest at 1280x800); 1920x1080 still gets a
+   * large map. The canvas fills it (src/ui/minimap.ts).
    */
-  width: min(100%, 32vh);
+  width: min(100%, 28vh);
 }
 
 @media (max-width: 760px) {
@@ -1826,12 +1781,12 @@
   }
 }
 
-.gm-side-lists {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
+/*
+ * Side panel (UI2-06, docs/design/UI_V2.md). The panel is a column that
+ * does not scroll in normal use: the town list takes the free height and
+ * scrolls inside itself; the panel itself scrolls only as a last resort.
+ * Width: room for the army's seven 40 px portraits at 1280 wide.
+ */
 .gm-side-label {
   margin-bottom: 3px;
   color: var(--gm-trim-light);
@@ -1840,92 +1795,145 @@
   text-transform: uppercase;
 }
 
+.gm-glyph {
+  flex: none;
+  display: inline-block;
+  fill: currentcolor;
+  vertical-align: -3px;
+}
+
+/* ------------------------------------------------ hero list (rows) */
+
 .gm-hero-list {
+  flex: none;
   gap: 0;
 }
 
-.gm-hero-strip {
+.gm-hero-rows {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 4px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3px;
 }
 
-.gm-hero-item {
+.gm-hero-row {
   position: relative;
-  display: block;
-  padding: 0;
-  aspect-ratio: 1;
-  background: #2c3a1e;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  padding: 1px 5px 1px 1px;
+  font: inherit;
+  color: var(--gm-text);
+  text-align: left;
+  background: rgb(10 8 5 / 50%);
   border: 0;
-  box-shadow:
-    0 0 0 1px var(--gm-ink),
-    inset 0 0 0 1px var(--gm-trim-dark);
+  box-shadow: inset 0 0 0 1px var(--gm-trim-dark);
+  cursor: pointer;
 }
 
-.gm-hero-item:hover {
-  box-shadow:
-    0 0 0 1px var(--gm-ink),
-    inset 0 0 0 1px var(--gm-trim-light);
+.gm-hero-row:hover {
+  color: #fff;
+  box-shadow: inset 0 0 0 1px var(--gm-trim-light);
 }
 
-.gm-hero-item.gm-selected {
+.gm-hero-row.gm-selected {
+  color: var(--gm-gold);
+  background: rgb(255 214 92 / 10%);
   box-shadow:
-    0 0 0 1px var(--gm-ink),
-    0 0 0 2px var(--gm-gold),
-    0 0 8px rgb(255 214 92 / 45%);
+    inset 0 0 0 1px var(--gm-gold),
+    0 0 6px rgb(255 214 92 / 35%);
 }
 
-.gm-hero-item.gm-tired .gm-hero-item-portrait {
+.gm-hero-row-portrait {
+  flex: none;
+  display: block;
+  width: 32px;
+  height: 32px;
+  background: #2c3a1e;
+  image-rendering: auto;
+  box-shadow: inset 0 0 0 1px var(--gm-ink);
+}
+
+.gm-hero-row.gm-tired .gm-hero-row-portrait {
   filter: saturate(0.35) brightness(0.8);
 }
 
-.gm-hero-item-portrait {
-  display: block;
-  width: 100%;
-  height: 100%;
+.gm-hero-row-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.gm-hero-item-mp {
-  left: 2px;
-  right: 2px;
-  bottom: 2px;
-  height: 3px;
+.gm-hero-row-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.gm-hero-row-bar {
+  display: block;
+  height: 4px;
   background: linear-gradient(
     to right,
-    var(--gm-green) var(--mp, 0%),
-    rgb(0 0 0 / 70%) var(--mp, 0%)
+    var(--bar) var(--fill, 0%),
+    rgb(0 0 0 / 65%) var(--fill, 0%)
   );
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 55%);
 }
 
-.gm-hero-item-up {
+.gm-hero-row-bar.gm-mp {
+  --bar: var(--gm-green);
+}
+
+.gm-hero-row-bar.gm-mana {
+  --bar: #4f8ee0;
+}
+
+.gm-hero-row-up {
   position: absolute;
   top: -3px;
-  right: -3px;
+  left: 24px;
   width: 13px;
   height: 13px;
   font:
     bold 11px/13px Verdana,
     sans-serif;
+  text-align: center;
   color: #1b1208;
   background: var(--gm-gold);
   border-radius: 50%;
   box-shadow: 0 0 0 1px var(--gm-ink);
 }
 
+/* ------------------------------------------------ town list */
+
+.gm-town-panel {
+  flex: 1 1 auto;
+  min-height: 46px;
+  gap: 0;
+}
+
 .gm-town-list {
+  flex: 1 1 0;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 3px;
-  max-height: 112px;
   overflow-y: auto;
   scrollbar-width: thin;
 }
 
 .gm-town-item {
+  flex: none;
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 3px 6px;
+  min-height: 26px;
+  padding: 2px 6px 2px 3px;
   font: inherit;
   font-size: 12px;
   color: var(--gm-text);
@@ -1948,6 +1956,23 @@
   box-shadow: 0 0 0 1px var(--gm-ink);
 }
 
+/* A shield in the faction colour with a pale band. */
+.gm-town-crest {
+  flex: none;
+  width: 16px;
+  height: 19px;
+  background:
+    linear-gradient(
+      transparent 36%,
+      rgb(255 244 208 / 60%) 36% 52%,
+      transparent 52%
+    ),
+    linear-gradient(rgb(255 255 255 / 18%), rgb(0 0 0 / 22%)),
+    var(--crest, #6b5a3e);
+  clip-path: polygon(0 0, 100% 0, 100% 58%, 50% 100%, 0 58%);
+  filter: drop-shadow(0 0 0 var(--gm-ink));
+}
+
 .gm-town-item-name {
   flex: 1;
   min-width: 0;
@@ -1956,7 +1981,29 @@
   white-space: nowrap;
 }
 
+/* Growth flag: creatures wait in the dwellings (their number). */
+.gm-town-grow {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--gm-good);
+  font-variant-numeric: tabular-nums;
+}
+
+.gm-town-grow-flag {
+  width: 8px;
+  height: 10px;
+  background:
+    linear-gradient(var(--gm-good), var(--gm-good)) 0 0 / 1px 100% no-repeat,
+    linear-gradient(var(--gm-good), var(--gm-good)) 1px 0 / 7px 6px no-repeat;
+  clip-path: polygon(0 0, 100% 0, 60% 30%, 100% 60%, 14% 60%, 14% 100%, 0 100%);
+}
+
 .gm-town-build {
+  flex: none;
   padding: 0 4px;
   font-size: 9px;
   letter-spacing: 0.05em;
@@ -1966,31 +2013,45 @@
   border-radius: 2px;
 }
 
+/* ------------------------------------------------ selected hero card */
+
 .gm-hero-panel {
   flex: none;
-  padding: 8px;
+  padding: 6px;
   background: rgb(10 8 5 / 50%);
   border: 0;
   box-shadow: var(--gm-inset-shadow);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .gm-hero-top {
-  margin-bottom: 4px;
+  display: flex;
+  gap: 8px;
+  margin: 0;
 }
 
 .gm-hero-portrait {
-  width: 64px;
-  height: 64px;
+  flex: none;
+  width: 48px;
+  height: 48px;
   border: 0;
   box-shadow:
     0 0 0 1px var(--gm-ink),
     0 0 0 2px var(--gm-trim-dark);
 }
 
+.gm-hero-stats {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .gm-hero-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font:
     bold 14px Georgia,
     serif;
@@ -2003,70 +2064,160 @@
   font-size: 11px;
 }
 
+.gm-btn.gm-hero-sheet {
+  align-self: flex-start;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px;
+  font-size: 11px;
+}
+
 .gm-hero-statline {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  margin-top: 4px;
-  font: inherit;
-  letter-spacing: 0;
-}
-
-.gm-stat {
-  padding: 1px 0;
-  text-align: center;
-  font-weight: bold;
-  font-size: 12px;
-  color: #fff4d0;
-  background: rgb(0 0 0 / 35%);
-  box-shadow: inset 0 0 0 1px rgb(201 154 60 / 30%);
-}
-
-.gm-stat small {
-  margin-right: 2px;
-  color: var(--gm-trim-light);
-  font-size: 9px;
-  font-weight: normal;
-}
-
-.gm-meter-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 6px;
-}
-
-.gm-meter-row .gm-meter {
+  gap: 3px;
   margin: 0;
 }
 
-.gm-meter-row .gm-meter-label {
-  min-width: 92px;
-  text-align: right;
+.gm-stat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 0 2px 0 0;
+  font:
+    bold 15px Georgia,
+    serif;
+  color: #fff4d0;
+  background: rgb(0 0 0 / 35%);
+  box-shadow: inset 0 0 0 1px rgb(201 154 60 / 30%);
+  cursor: help;
 }
 
-.gm-meter-fill.gm-mana {
-  background: #4f8ee0;
+.gm-stat .gm-icon {
+  flex: none;
+  display: block;
+  line-height: 0;
 }
 
+.gm-stat-value {
+  min-width: 1ch;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Moves, mana and XP: bars with their numbers inside, in one row. */
+.gm-hero-meters {
+  display: grid;
+  grid-template-columns: 5fr 4fr 4fr;
+  gap: 3px;
+}
+
+.gm-hero-meter {
+  overflow: hidden;
+  height: 15px;
+  padding: 0 4px;
+  font-size: 10px;
+  line-height: 15px;
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: clip;
+  color: #fff4d0;
+  text-shadow:
+    1px 1px 0 #000,
+    -1px 0 0 #000;
+  background: linear-gradient(
+    to right,
+    var(--bar) var(--fill, 0%),
+    #0b0a08 var(--fill, 0%)
+  );
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 70%);
+  cursor: help;
+}
+
+.gm-hero-meter.gm-mp {
+  --bar: #3f7a2a;
+}
+
+.gm-hero-meter.gm-mana {
+  --bar: #2f5f9e;
+}
+
+.gm-hero-meter.gm-xp {
+  --bar: #8a6a2c;
+}
+
+/*
+ * The army: seven 40 px portraits (the 48 px art shown at 1x, its border
+ * cropped, so the pixels stay crisp) with the count on a dark plate below.
+ */
 .gm-hero-panel .gm-army {
-  margin-top: 2px;
+  gap: 1px;
+  justify-content: space-between;
 }
 
 .gm-hero-panel .gm-army-small .gm-slot {
-  width: 29px;
-  height: 29px;
+  display: flex;
+  flex-direction: column;
+  width: 40px;
+  height: auto;
+  border: 0;
+  background: none;
 }
 
+.gm-hero-panel .gm-slot .gm-slot-portrait {
+  width: 40px;
+  height: 40px;
+  object-fit: none;
+  background: #0f0c08;
+  box-shadow: inset 0 0 0 1px var(--gm-edge);
+}
+
+.gm-hero-panel .gm-army-small .gm-slot-count {
+  position: static;
+  display: block;
+  height: 14px;
+  padding: 0;
+  font:
+    bold 11px/14px Verdana,
+    sans-serif;
+  text-align: center;
+  color: #fff4d0;
+  text-shadow: none;
+  background: #0b0906;
+  box-shadow: inset 0 0 0 1px var(--gm-edge);
+  font-variant-numeric: tabular-nums;
+}
+
+.gm-hero-panel .gm-slot.gm-empty::before {
+  content: "";
+  display: block;
+  height: 40px;
+  background: repeating-linear-gradient(45deg, #15110c 0 4px, #1b1610 4px 8px);
+  box-shadow: inset 0 0 0 1px var(--gm-edge);
+}
+
+.gm-hero-panel .gm-slot.gm-empty::after {
+  content: "";
+  display: block;
+  height: 14px;
+  background: #0b0906;
+  box-shadow: inset 0 0 0 1px var(--gm-edge);
+}
+
+/* ------------------------------------------------ buttons */
+
 .gm-side-foot {
+  flex: none;
   position: sticky;
   bottom: 0;
   margin-top: auto;
-  padding: 8px 0 10px;
+  padding: 6px 0 10px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background: linear-gradient(rgb(37 28 18 / 0%), #251c12 10px);
+  gap: 6px;
+  background: linear-gradient(rgb(37 28 18 / 0%), #251c12 8px);
 }
 
 .gm-side-buttons {
@@ -2075,17 +2226,25 @@
 }
 
 .gm-side-buttons .gm-btn {
-  padding: 4px 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 3px 2px;
   font-size: 11px;
 }
 
 .gm-side-buttons .gm-kbd {
-  margin-left: 3px;
+  margin-left: 0;
 }
 
 .gm-end-turn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   margin-top: 0;
-  padding: 9px;
+  padding: 8px;
 }
 
 .gm-warn-list {

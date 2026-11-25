@@ -642,18 +642,7 @@
   max-width: min(720px, calc(100vw - 32px));
 }
 
-/* Adventure sidebar: the selected hero's stat line and sheet button. */
-.gm-hero-statline {
-  font-family: Georgia, serif;
-  letter-spacing: 0.5px;
-  cursor: help;
-}
-
-.gm-hero-sheet-button {
-  width: 100%;
-  margin-top: 6px;
-}
-
+/* Adventure sidebar: the hero sheet button when a level-up waits. */
 .gm-attention {
   border-color: var(--gm-gold);
   color: var(--gm-gold);

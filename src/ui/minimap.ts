@@ -1,7 +1,8 @@
 /**
  * The adventure screen's minimap: one pixel block per cell with terrain
  * colours, obstacles, roads, towns and mines in owner colours, the heroes,
- * black fog over unexplored cells, and the viewport rectangle.
+ * dark parchment over unexplored cells inside a one-pixel map border, and
+ * the viewport rectangle.
  *
  * {@link minimapPixels}, {@link minimapLayout} and {@link minimapCell} are
  * pure (unit-tested); {@link Minimap} draws them.
@@ -25,13 +26,16 @@ const NEUTRAL_COLOUR: Rgb = [0xb8, 0xb0, 0xa0];
 const HERO_COLOUR: Rgb = [0xff, 0xf4, 0xd0];
 /**
  * Unexplored cells: this colour with alpha 0 in {@link minimapPixels}; the
- * canvas paints them with a dark slate cross-hatch (FOG_BASE, FOG_LINE) that
- * carries no map information but shows where the map ends inside the black
- * frame (bead bzc.42: a day-1 minimap read as a broken little square).
+ * canvas paints them as dark parchment with a faint cross-hatch (FOG_BASE,
+ * FOG_LINE) that carries no map information, inside a one-pixel map border
+ * (MAP_BORDER), so the map's bounds show from turn 1 (UI2-06; before it,
+ * bead bzc.42's slate hatch was nearly as dark as the frame).
  */
 const FOG: Rgb = [0x0b, 0x0a, 0x08];
-const FOG_BASE = "#16181d";
-const FOG_LINE = "#252931";
+export const FOG_BASE = "#3d3122";
+export const FOG_LINE = "#4a3c2a";
+/** The one-pixel line round the map area, the panel's trim colour. */
+export const MAP_BORDER = "#a0824a";
 
 export const TERRAIN_COLOURS: Readonly<Record<Terrain, Rgb>> = {
   grass: [0x5f, 0x8f, 0x3a],
@@ -126,14 +130,18 @@ export interface MinimapLayout {
 /**
  * Fits a `mapW` x `mapH` cell map into a `frameW` x `frameH` pixel frame:
  * as large as fits with the aspect ratio kept, centred, on whole pixels.
+ * `inset` pixels stay free on every side (room for the map border).
  */
 export function minimapLayout(
   frameW: number,
   frameH: number,
   mapW: number,
   mapH: number,
+  inset = 0,
 ): MinimapLayout {
-  const scale = Math.max(0, Math.min(frameW / mapW, frameH / mapH));
+  const innerW = Math.max(0, frameW - 2 * inset);
+  const innerH = Math.max(0, frameH - 2 * inset);
+  const scale = Math.max(0, Math.min(innerW / mapW, innerH / mapH));
   const w = Math.round(mapW * scale);
   const h = Math.round(mapH * scale);
   return {
@@ -260,7 +268,7 @@ export class Minimap {
   }
 
   /**
-   * A dark slate cross-hatch in device pixels (`line` px per hatch pixel),
+   * A dark parchment cross-hatch in device pixels (`line` px per hatch pixel),
    * so it stays crisp whatever the cell scale.
    */
   private fogPattern(
@@ -286,12 +294,18 @@ export class Minimap {
     return this.fog;
   }
 
+  /** One CSS pixel in device pixels: the map border and hatch width. */
+  private line(): number {
+    return Math.max(1, Math.round(window.devicePixelRatio || 1));
+  }
+
   private layout(): MinimapLayout {
     return minimapLayout(
       this.canvas.width,
       this.canvas.height,
       this.mapW,
       this.mapH,
+      this.line(),
     );
   }
 
@@ -299,10 +313,13 @@ export class Minimap {
     const ctx = this.canvas.getContext("2d");
     if (ctx === null || this.cells === null) return;
     const at = this.layout();
-    const line = Math.max(1, Math.round(window.devicePixelRatio || 1));
+    const line = this.line();
     ctx.fillStyle = LETTERBOX;
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    // Fog hatch under the whole map; unexplored cells are see-through.
+    // The map's bounds: a one-pixel border just outside the map area.
+    ctx.fillStyle = MAP_BORDER;
+    ctx.fillRect(at.x - line, at.y - line, at.w + 2 * line, at.h + 2 * line);
+    // Parchment hatch under the whole map; unexplored cells are see-through.
     ctx.fillStyle = this.fogPattern(ctx, line) ?? FOG_BASE;
     ctx.fillRect(at.x, at.y, at.w, at.h);
     ctx.imageSmoothingEnabled = false;
