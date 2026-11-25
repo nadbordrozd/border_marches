@@ -35,11 +35,23 @@ import type {
   BattleSide as GameBattleSide,
   BattleStack as GameBattleStack,
 } from "../../src/core/game/battle.ts";
-import type { HeroState } from "../../src/core/game/types.ts";
+import type { GameState, HeroState } from "../../src/core/game/types.ts";
 import {
   FACTION_SCHOOL_WEIGHTS,
+  factionMagic,
   guildSpells,
+  learnableFromGuild,
 } from "../../src/core/magic/guild.ts";
+import { canLearn, heroMagic } from "../../src/core/magic/hero.ts";
+import { allSpells } from "../../src/core/magic/catalog.ts";
+import { chooseLevelUp, levelUpOffer } from "../../src/core/game/hero.ts";
+import { wearError } from "../../src/core/game/artifacts.ts";
+import {
+  ARTIFACT_LIST,
+  WORN_SLOTS,
+  type WornArtifactDef,
+} from "../../src/data/artifacts.ts";
+import { AdventureAi } from "../../src/core/ai/adventure-ai.ts";
 
 export const FACTIONS = ["humans", "undead", "goblins"] as const;
 export type Faction = (typeof FACTIONS)[number];
@@ -176,18 +188,153 @@ function classesOf(faction: Faction): { might: string; magic: string } {
   return { might, magic };
 }
 
-/** A hero of the faction at `level`, seeded book and scrolls. */
+/**
+ * What a hero has gathered by a stage of the game (bead bzc.36): the guild
+ * level of its home town, spells from map shrines, scrolls and worn
+ * artifacts by grade. Skills and feats come from its level-ups.
+ */
+export interface HeroKit {
+  /** Highest guild level built in its town (capped by the faction). */
+  readonly guild: number;
+  /** Pages from shrines: random pool spells of tier 1-3, if learnable. */
+  readonly shrinePages: number;
+  readonly scrolls: number;
+  readonly trinkets: number;
+  readonly wonders: number;
+}
+
+/** Kits by stage (BALANCE.md section 8). */
+export const STAGE_KITS: Readonly<Record<Stage, HeroKit>> = {
+  early: { guild: 1, shrinePages: 0, scrolls: 1, trinkets: 1, wonders: 0 },
+  mid: { guild: 3, shrinePages: 1, scrolls: 1, trinkets: 2, wonders: 1 },
+  late: { guild: 5, shrinePages: 2, scrolls: 2, trinkets: 3, wonders: 2 },
+};
+
+/** Which heroes the runner builds: round 2's stage kits or round 1's bare. */
+export type HeroGear = "stage" | "bare";
+
+/**
+ * Level-ups as a player makes them: the pattern stat, then the adventure
+ * AI's pick among the real seeded skill offers and feat drafts.
+ */
+function levelUp(hero: HeroState, level: number, seed: number): HeroState {
+  const ai = new AdventureAi();
+  let state = {
+    seed: deriveSeed(seed, "sim-hero"),
+    status: "playing",
+    heroes: [hero],
+    map: null,
+  } as unknown as GameState;
+  const cls = getHeroClass(hero.heroClass);
+  for (let l = 2; l <= level; l++) {
+    const h = state.heroes[0] as HeroState;
+    h[patternStat(cls, l)] += 1;
+    h.level = l;
+    h.pendingLevelUps = 1;
+    h.levelUpStep = "skill";
+    for (let guard = 0; guard < 4 && h.pendingLevelUps > 0; guard++) {
+      const cur = state.heroes[0] as HeroState;
+      const offer = levelUpOffer(state, cur.id);
+      if (offer === null) break;
+      const r = chooseLevelUp(state, cur.id, ai.levelUp(state, cur.id, offer));
+      if (!r.ok) break;
+      state = r.state;
+      if ((state.heroes[0] as HeroState).pendingLevelUps <= 0) break;
+    }
+  }
+  return state.heroes[0] as HeroState;
+}
+
+/** Worn trinkets and wonders, seeded, each in a free slot of its kind. */
+function wearKit(hero: HeroState, kit: HeroKit, rng: Rng): void {
+  const worn = ARTIFACT_LIST.filter(
+    (a): a is WornArtifactDef =>
+      a.kind === "worn" && a.cursed !== true && a.pieceOf === undefined,
+  );
+  for (const [grade, n] of [
+    ["wonder", kit.wonders],
+    ["trinket", kit.trinkets],
+  ] as const) {
+    const pool = worn.filter((a) => a.grade === grade);
+    for (let k = 0; k < n && pool.length > 0; k++) {
+      for (let tries = 0; tries < 8 && pool.length > 0; tries++) {
+        const i = Math.floor(rng.next() * pool.length);
+        const def = pool.splice(i, 1)[0] as WornArtifactDef;
+        const slot = WORN_SLOTS.findIndex(
+          (s, j) => s === def.slot && hero.worn[j] === null,
+        );
+        if (slot >= 0 && wearError(hero, def.id, slot) === null) {
+          hero.worn[slot] = def.id;
+          break;
+        }
+      }
+    }
+  }
+}
+
+/** The book: every guild page it can learn, shrine pages and scrolls. */
+function learnKit(
+  hero: HeroState,
+  faction: Faction,
+  kit: HeroKit,
+  seed: number,
+  rng: Rng,
+): void {
+  const { weights, cap } = factionMagic(faction);
+  const offer = guildSpells(deriveSeed(seed, `book:${faction}`), weights, cap);
+  const level = Math.min(cap, kit.guild);
+  hero.pages = [
+    ...hero.pages,
+    ...learnableFromGuild(heroMagic(hero), offer, level),
+  ];
+  const pool = allSpells().filter(
+    (s) => s.pool && s.kind === "battle" && s.tier <= 3,
+  );
+  for (let k = 0; k < kit.shrinePages && pool.length > 0; k++) {
+    const s = pool.splice(Math.floor(rng.next() * pool.length), 1)[0];
+    if (s === undefined || hero.pages.includes(s.id)) continue;
+    if (canLearn(heroMagic(hero), s.school, s.tier)) hero.pages.push(s.id);
+  }
+  const scrolls = allSpells().filter(
+    (s) => s.pool && s.kind === "battle" && s.tier <= 2,
+  );
+  hero.scrolls = [];
+  for (let k = 0; k < kit.scrolls; k++) {
+    const s = scrolls[Math.floor(rng.next() * scrolls.length)];
+    if (s !== undefined) hero.scrolls.push(s.id);
+  }
+}
+
+/**
+ * A hero of the faction at `level`. With a kit (round 2, the default
+ * gear): real level-ups (pattern stat, the adventure AI's skill and feat
+ * picks), the stage's guild pages it can learn, shrine pages, scrolls and
+ * worn artifacts. Without one (round 1, `bare`): pattern stats only and a
+ * seeded book drawn from the guild weights whatever its school skills.
+ */
 export function buildHero(
   faction: Faction,
   level: number,
   seed: number,
   leaning: "might" | "magic",
+  kit: HeroKit | null = null,
 ): HeroState {
   const rng = rngFor(seed, "hero", faction, leaning);
   const classId = classesOf(faction)[leaning];
   const defs = NAMED_HEROES.filter((h) => h.heroClass === classId);
   const def = defs[Math.floor(rng.next() * defs.length)] ?? defs[0];
   if (def === undefined) throw new Error(`no hero of ${classId}`);
+  if (kit !== null) {
+    const hero = levelUp(
+      newHeroState(`sim-${faction}`, def, 0, 0, 0),
+      level,
+      seed,
+    );
+    wearKit(hero, kit, rng);
+    learnKit(hero, faction, kit, seed, rng);
+    hero.mana = maxMana(hero);
+    return hero;
+  }
   const hero = newHeroState(`sim-${faction}`, def, 0, 0, 0);
   const cls = getHeroClass(classId);
   for (let l = 2; l <= level; l++) {

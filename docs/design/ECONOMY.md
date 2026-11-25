@@ -27,9 +27,9 @@ Each faction leans on one resource, so a start region binds differently:
 
 | Faction  | Leans on        | All buildings (gold / wood / ore / essence) | One week of creatures                |
 | -------- | --------------- | ------------------------------------------- | ------------------------------------ |
-| Realm    | Gold and wood   | 52,500 / 155 / 104 / 22                     | 10,545 gold, 7 ore, 6 essence        |
-| Restless | Ore and essence | 56,000 / 117 / 132 / 34                     | 10,750 gold, 2 ore, 9 essence        |
-| Horde    | Wood            | 45,800 / 179 / 72 / 13                      | 9340 gold, 11 wood, 3 ore, 4 essence |
+| Realm    | Gold and wood   | 52,500 / 155 / 104 / 22                     | 11,045 gold, 7 ore, 6 essence        |
+| Restless | Ore and essence | 56,000 / 117 / 132 / 34                     | 10,350 gold, 2 ore, 9 essence        |
+| Horde    | Wood            | 45,800 / 179 / 72 / 13                      | 9300 gold, 11 wood, 3 ore, 4 essence |
 
 ## 2. Starting resources
 
@@ -179,17 +179,17 @@ Fight value (FV) is GAME_DESIGN 8.2. Gold per FV is the gold price alone.
 
 | Tier | Realm                                | Restless                          | Horde                               | Lost World (reference)        |
 | ---: | ------------------------------------ | --------------------------------- | ----------------------------------- | ----------------------------- |
-|    1 | Squire 45 (0.69)                     | Skeleton 45 (0.73)                | Goblin 40 (0.77)                    | Caveman 50 (0.83)             |
+|    1 | Squire 45 (0.69)                     | Skeleton 45 (0.73)                | Goblin 38 (0.73)                    | Caveman 50 (0.83)             |
 |    2 | Longbowman 115 (1.06)                | Ghoul 115 (1.07)                  | Bomb Chucker 110 (1.01)             | Spitter 110 (0.90)            |
 |    3 | Man-at-Arms 240 (1.14)               | Banshee 260 (1.30)                | Wolf Rider 190 (1.40)               | Raptor 220 (1.27)             |
 |    4 | Friar 400 + 1 e (1.70)               | Gravecaller 420 + 1 e (1.74)      | Boomshaman 380 + 1 e (1.78)         | Shaman 450 + 1 e (1.16)       |
-|    5 | Knight 1050 + 2 o (1.20)             | Vampire 1100 + 1 e (1.49)         | Ogre 950 + 3 w (1.09)               | Triceratops 1100 + 2 o (1.30) |
-|    6 | Dragonslayer 3500 + 3 o + 2 e (1.54) | Late King 3600 + 2 o + 3 e (1.66) | Orc Warboss 2500 + 5 w + 3 o (1.32) | T-Rex 3000 + 4 o + 2 e (1.20) |
+|    5 | Knight 1050 + 2 o (1.20)             | Vampire 1200 + 1 e (1.63)         | Ogre 950 + 3 w (1.09)               | Triceratops 1100 + 2 o (1.30) |
+|    6 | Dragonslayer 4000 + 3 o + 2 e (1.76) | Late King 3000 + 2 o + 3 e (1.38) | Orc Warboss 2500 + 5 w + 3 o (1.32) | T-Rex 3000 + 4 o + 2 e (1.20) |
 
 | Per week, all six dwellings |  Realm | Restless |  Horde | Lost World |
 | --------------------------- | -----: | -------: | -----: | ---------: |
 | Fight value                 |   8335 |     7700 |   7716 |       8899 |
-| Gold                        | 10,545 |   10,750 |   9340 |     10,230 |
+| Gold                        | 11,045 |   10,350 |   9300 |     10,230 |
 | Gold-equivalent of the rest |   5350 |     5900 |   5900 |       5600 |
 | Tier 6 chain, gold          | 18,000 |   18,000 | 16,000 |     18,000 |
 
@@ -197,16 +197,18 @@ Fight value (FV) is GAME_DESIGN 8.2. Gold per FV is the gold price alone.
   battles ([BALANCE.md](BALANCE.md)) moved eight prices: Squire 55 to 45,
   Goblin 35 to 40, Banshee 240 to 260, Knight 1200 to 1050, Ogre 1050 to
   950, Dragonslayer 3000 to 3500, Late King 2900 to 3600, Orc Warboss 2800
-  to 2500. Weekly gold now differs by 15% (the Restless pay most, for the
-  strongest middle game); the week 1 ledgers below and the tier 6 dates
-  in 8.3 were computed with the old prices and have not been recomputed
-  (follow-up): the first Dragonslayer is 500 gold dearer, the first Late
-  King 700 dearer and the first Warboss 300 cheaper than they show.
+  to 2500.
+- **Round 2 (bzc.36)** moved four more: Goblin 40 to 38, Vampire 1100 to
+  1200, Late King 3600 to 3000, Dragonslayer 3500 to 4000 (BALANCE.md
+  section 8). The week 1 ledgers (8.2) and tier 6 dates (8.3) below are
+  recomputed with these prices by `node tests/sim/run.mjs
+./tests/sim/ledger.ts`.
 - The rule: tiers 1 to 3 cost 0.7 to 1.4 gold per FV, rising with tier;
   tier 5 and 6 cost 1.2 to 1.5 plus resources; **a caster costs about 1.7
   and an essence**, because its pages are not in its FV.
-- Weekly gold is within 8% across the three and total weekly cost in gold
-  at marketplace buying prices is within 4% (15,835; 15,830; 15,640).
+- Weekly gold differs by up to 19% (the Realm pays most, for the
+  strongest late game) and total weekly cost in gold at marketplace buying
+  prices by up to 8% (16,395; 16,250; 15,200).
 - Weekly FV differs on purpose. The Restless get a third of each dead
   stack back inside the fight; the Horde's area Strikes and unretaliated
   Cannonballs are not in the formula; the Realm's edge (extra turns,
@@ -222,13 +224,13 @@ and buys every creature it can.
 
 | Day | Pickups and mines        | Build         | Recruit       | Gold | Wood | Ore | Essence |
 | --: | ------------------------ | ------------- | ------------- | ---: | ---: | --: | ------: |
-|   1 | wood 7, gold 500         | Town Hall     | 14 Squires    | 4730 |   22 |   8 |       4 |
-|   2 | gold 600, flag Sawmill   | Archery Range | 9 Longbowmen  | 4495 |   17 |   6 |       4 |
-|   3 | essence 3, wood 6        | Palisade      | -             | 3495 |   11 |   6 |       7 |
-|   4 | ore 4, chest (1000 gold) | Barracks      | 7 Men-at-Arms | 2615 |    9 |   5 |       7 |
-|   5 | flag Essence Spring      | Friary        | 4 Friars      |   15 |    2 |   7 |       1 |
-|   6 | wood 8                   | Marketplace   | -             |  515 |    8 |   9 |       2 |
-|   7 | gold 400                 | -             | -             | 1915 |   11 |  11 |       3 |
+|   1 | wood 7, gold 500         | Town Hall     | 14 Squires    | 4870 |   22 |   8 |       4 |
+|   2 | gold 600, flag Sawmill   | Archery Range | 9 Longbowmen  | 4635 |   17 |   6 |       4 |
+|   3 | essence 3, wood 6        | Palisade      | -             | 3635 |   11 |   6 |       7 |
+|   4 | ore 4, chest (1000 gold) | Barracks      | 7 Men-at-Arms | 2755 |    9 |   5 |       7 |
+|   5 | flag Essence Spring      | Friary        | 4 Friars      |  155 |    2 |   7 |       1 |
+|   6 | wood 8                   | Marketplace   | -             |  655 |    8 |   9 |       2 |
+|   7 | gold 400                 | -             | -             | 2055 |   11 |  11 |       3 |
 
 **Restless**
 
@@ -237,30 +239,30 @@ and buys every creature it can.
 |   1 | wood 7, gold 500         | Town Hall       | 15 Skeletons   | 4825 |   22 |   8 |       4 |
 |   2 | gold 600, flag Sawmill   | Charnel Pit     | 9 Ghouls       | 4590 |   20 |   3 |       4 |
 |   3 | essence 3, wood 6        | Iron Railings   | -              | 3590 |   14 |   3 |       7 |
-|   4 | ore 4, chest (1000 gold) | Wailing Tower   | 6 Banshees     | 2950 |   12 |   2 |       7 |
-|   5 | flag Essence Spring      | Marketplace     | -              | 3450 |   10 |   4 |       7 |
-|   6 | wood 8                   | Funeral Parlour | 4 Gravecallers |  770 |   21 |   1 |       1 |
-|   7 | gold 400                 | -               | -              | 2170 |   24 |   3 |       2 |
+|   4 | ore 4, chest (1000 gold) | Wailing Tower   | 6 Banshees     | 2830 |   12 |   2 |       7 |
+|   5 | flag Essence Spring      | Marketplace     | -              | 3330 |   10 |   4 |       7 |
+|   6 | wood 8                   | Funeral Parlour | 4 Gravecallers |  650 |   21 |   1 |       1 |
+|   7 | gold 400                 | -               | -              | 2050 |   24 |   3 |       2 |
 
 **Horde**
 
 | Day | Pickups and mines        | Build        | Recruit          | Gold | Wood | Ore | Essence |
 | --: | ------------------------ | ------------ | ---------------- | ---: | ---: | --: | ------: |
-|   1 | wood 7, gold 500         | Town Hall    | 20 Goblins       | 4800 |   22 |   8 |       4 |
-|   2 | gold 600, flag Sawmill   | Powder Shed  | 10 Bomb Chuckers | 4600 |   14 |   8 |       4 |
-|   3 | essence 3, wood 6        | Stakes       | -                | 3600 |    8 |   8 |       7 |
-|   4 | ore 4, chest (1000 gold) | Wolf Kennels | 8 Wolf Riders    | 3080 |    3 |  12 |       7 |
-|   5 | flag Essence Spring      | Marketplace  | -                | 3580 |    1 |  14 |       7 |
-|   6 | wood 8                   | Hex Hut      | 4 Boomshamans    | 1260 |    2 |  16 |       2 |
-|   7 | gold 400                 | -            | -                | 2660 |    5 |  18 |       3 |
+|   1 | wood 7, gold 500         | Town Hall    | 20 Goblins       | 4740 |   22 |   8 |       4 |
+|   2 | gold 600, flag Sawmill   | Powder Shed  | 10 Bomb Chuckers | 4540 |   14 |   8 |       4 |
+|   3 | essence 3, wood 6        | Stakes       | -                | 3540 |    8 |   8 |       7 |
+|   4 | ore 4, chest (1000 gold) | Wolf Kennels | 8 Wolf Riders    | 3020 |    3 |  12 |       7 |
+|   5 | flag Essence Spring      | Marketplace  | -                | 3520 |    1 |  14 |       7 |
+|   6 | wood 8                   | Hex Hut      | 4 Boomshamans    | 1200 |    2 |  16 |       2 |
+|   7 | gold 400                 | -            | -                | 2600 |    5 |  18 |       3 |
 
-| Week 1                           |                   Realm |                                     Restless |                                 Horde |
-| -------------------------------- | ----------------------: | -------------------------------------------: | ------------------------------------: |
-| Gold in (start, income, pickups) |                  16,000 |                                       16,000 |                                16,000 |
-| Spent on buildings               |                    9000 |                                         9000 |                                  8500 |
-| Spent on creatures               |                    5085 |                                         4830 |                                  4840 |
-| Army bought, fight value         |                    4308 |                                         4061 |                                  4074 |
-| Binding resource                 | Gold (15 left on day 5) | Ore (the Funeral Parlour waits a day for it) | Wood (the Hex Hut waits a day for it) |
+| Week 1                           |                    Realm |                                     Restless |                                 Horde |
+| -------------------------------- | -----------------------: | -------------------------------------------: | ------------------------------------: |
+| Gold in (start, income, pickups) |                   16,000 |                                       16,000 |                                16,000 |
+| Spent on buildings               |                     9000 |                                         9000 |                                  8500 |
+| Spent on creatures               |                     4945 |                                         4950 |                                  4900 |
+| Army bought, fight value         |                     4308 |                                         4061 |                                  4074 |
+| Binding resource                 | Gold (155 left on day 5) | Ore (the Funeral Parlour waits a day for it) | Wood (the Hex Hut waits a day for it) |
 
 Findings:
 
@@ -283,14 +285,23 @@ Findings:
 
 ### 8.3 When can the player field a tier 6 creature?
 
-A greedy ledger: build the Town Hall, then the tier 6 chain in order, as
-soon as each is affordable.
+A greedy ledger (`tests/sim/ledger.ts`, recomputed for round 2's
+prices): build the Town Hall, then the tier 6 chain in tree order, one
+building a day as soon as it is affordable, no trading; from week 2 the
+pickups of the section header arrive on the week's days 1 to 5.
 
 | Scenario                                | Realm: Lodge, first Dragonslayer | Restless: Mausoleum, first Late King | Horde: Boss Tent, first Warboss |
 | --------------------------------------- | -------------------------------- | ------------------------------------ | ------------------------------- |
-| Rush: recruit in week 1 only, then save | day 13, **day 14**               | day 14, **day 15**                   | day 12, **day 13**              |
-| Recruit everything affordable every day | day 20, **day 22**               | day 20, **day 22**                   | day 15, **day 17**              |
-| Rush with no essence spring             | day 20, day 27                   | day 27, day 34                       | day 13, day 13                  |
+| Rush: recruit in week 1 only, then save | day 12, **day 14**               | day 14, **day 15**                   | day 12, **day 13**              |
+| Recruit everything affordable every day | day 20, **day 22**               | day 20, **day 21**                   | day 15, **day 18**              |
+| Rush with no essence spring             | day 12, day 14                   | day 19, day 26                       | day 12, day 13                  |
+
+With the prices the hand ledger used (before bzc.24) the same script gives day 13, 15 and 13 for the
+rush, 22, 21 and 19 for recruiting everything, and reproduces 8.2 to the
+gold piece. Its no-spring row is earlier than the old hand ledger's (day
+27 and 34 for the Realm and the Restless) because it counts the weekly
+essence crystals; without them the Realm and the Restless wait for a
+bought or found essence.
 
 Answer: **a tier 6 creature at the end of week 2 for a player who rushes,
 and in week 3 to 4 for one who keeps recruiting**, the same pace as the
@@ -409,16 +420,17 @@ level 4). There is no cap and no change of formula at any level.
 
 ## 10. Changes
 
-| Change                                                                                                     | Why                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Hall incomes are totals that replace each other; no income on day 1; mines pay from the day after flagging | MVP brief left them unstated                                                                       |
-| Resource-to-resource trades go through gold at the listed rates                                            | "Trade resources at fixed rates" gave only gold rates                                              |
-| Start-region generator targets for mines and pickups                                                       | The sanity passes depend on them                                                                   |
-| Pickup amounts shown on hover before collection                                                            | Deterministic pillar: no hidden numbers                                                            |
-| v0.2: halls, forts, the Marketplace, Silo and guilds cost the same in every faction                        | "Normalised across factions": a faction's lean shows in its dwellings, Drills and creatures only   |
-| v0.2: forts are three plain levels; no growth building below the Keystone Hall                             | RULES_V2 5.5 and the taxonomy; growth bonuses are the Keystone's prize                             |
-| v0.2: the City Hall needs a Marketplace as well as Fort 1                                                  | Gives the cheapest building a place in every opening                                               |
-| v0.2: guild levels cost 0, 1, 2, 4, 6 essence                                                              | Essence is the magic resource; a level 5 guild is a 13-essence project                             |
-| v0.2: Drills are per-player flags, sold on the map at twice the gold                                       | No drilled and undrilled stacks to track; a captured or lost town cannot split an army's abilities |
-| v0.2: the Keystone Hall gives +2000 gold, +50% growth and one faction power, and costs only the Keystone   | The grail building of the taxonomy (7.3)                                                           |
-| v0.2: the XP table becomes 100 x (L - 1) x (L + 2)                                                         | Section 9; the rule is in RULES_V2 3.2 and GAME_DESIGN 6.1 points to it                            |
+| Change                                                                                                                           | Why                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Hall incomes are totals that replace each other; no income on day 1; mines pay from the day after flagging                       | MVP brief left them unstated                                                                       |
+| Resource-to-resource trades go through gold at the listed rates                                                                  | "Trade resources at fixed rates" gave only gold rates                                              |
+| Start-region generator targets for mines and pickups                                                                             | The sanity passes depend on them                                                                   |
+| Pickup amounts shown on hover before collection                                                                                  | Deterministic pillar: no hidden numbers                                                            |
+| v0.2: halls, forts, the Marketplace, Silo and guilds cost the same in every faction                                              | "Normalised across factions": a faction's lean shows in its dwellings, Drills and creatures only   |
+| v0.2: forts are three plain levels; no growth building below the Keystone Hall                                                   | RULES_V2 5.5 and the taxonomy; growth bonuses are the Keystone's prize                             |
+| v0.2: the City Hall needs a Marketplace as well as Fort 1                                                                        | Gives the cheapest building a place in every opening                                               |
+| v0.2: guild levels cost 0, 1, 2, 4, 6 essence                                                                                    | Essence is the magic resource; a level 5 guild is a 13-essence project                             |
+| v0.2: Drills are per-player flags, sold on the map at twice the gold                                                             | No drilled and undrilled stacks to track; a captured or lost town cannot split an army's abilities |
+| v0.2: the Keystone Hall gives +2000 gold, +50% growth and one faction power, and costs only the Keystone                         | The grail building of the taxonomy (7.3)                                                           |
+| v0.2: the XP table becomes 100 x (L - 1) x (L + 2)                                                                               | Section 9; the rule is in RULES_V2 3.2 and GAME_DESIGN 6.1 points to it                            |
+| v0.2 round 2 (bzc.36): Goblin 38, Vampire 1200, Late King 3000, Dragonslayer 4000; 8.2 and 8.3 recomputed by tests/sim/ledger.ts | Simulated battles ([BALANCE.md](BALANCE.md) section 8); the ledgers had kept the pre-bzc.24 prices |

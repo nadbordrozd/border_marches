@@ -69,7 +69,7 @@ RULES_V2 1.10, "area effects apply to their targets".
 
 | Tier | Unit         |  HP | Atk | Def | Dmg | Speed | Shots | Growth/week | Cost                       |   FV | Abilities                    |
 | ---: | ------------ | --: | --: | --: | --: | ----: | ----: | ----------: | -------------------------- | ---: | ---------------------------- |
-|    1 | Goblin       |   8 |   4 |   2 |   2 |     5 |     - |          20 | 40 gold                    |   52 | Cannonball                   |
+|    1 | Goblin       |   8 |   4 |   2 |   2 |     5 |     - |          20 | 38 gold                    |   52 | Cannonball                   |
 |    2 | Bomb Chucker |  12 |   6 |   3 |   3 |     4 |     8 |          10 | 110 gold                   |  109 | Bomb                         |
 |    3 | Wolf Rider   |  18 |   7 |   5 |   4 |     8 |     - |           8 | 190 gold                   |  136 | Worry                        |
 |    4 | Boomshaman   |  28 |   7 |   6 |   6 |     5 |     - |           4 | 380 gold + 1 essence       |  214 | Caster: Thunderclap, Set off |

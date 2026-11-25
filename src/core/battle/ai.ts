@@ -28,7 +28,11 @@
  *   damage taken. The side that would lose at the round limit as the
  *   board stands (1.12: less fight value left), and any neutral guard,
  *   presses: it fears the enemy's reach less, that fear fades over the
- *   first rounds, and its own threat weighs more each round.
+ *   first rounds, and its own threat weighs more each round. In the last
+ *   three rounds a side 1.5 times ahead presses too, to finish the fight.
+ * - **Links.** A Scapegoat is worth the value per HP it moves from the
+ *   bearer to the far end (negative the wrong way round); Warded and
+ *   Drenched only the share of damage that comes as Harm (bead bzc.36).
  * - **Tuning.** The weights ({@link DEFAULT_AI_WEIGHTS}) were set with the
  *   batch runner, tests/sim/battles.ts (`npm run sim:battles`).
  * - **Pruning.** Moves are first scored on a board with the stack simply
@@ -77,6 +81,8 @@ import {
   computeBreakdown,
   effectiveSpeed,
   enemySide,
+  fightValueLeft,
+  roundLimitOf,
   roundLimitWinner,
 } from "./resolve.ts";
 import type {
@@ -132,10 +138,23 @@ export interface AiWeights {
   readonly behindPresses: number;
   /** 1: a neutral guard (no hero, no native stack) always presses. */
   readonly guardsPress: number;
+  /**
+   * The side ahead on the round-limit verdict presses too in the last
+   * this many rounds when its fight value left is at least `aheadLead`
+   * times the other's (0: never).
+   */
+  readonly aheadRounds: number;
+  /** The lead (fight value left, ahead / behind) for `aheadRounds`. */
+  readonly aheadLead: number;
   /** Fraction of a stack's value that a shooter in enemy reach loses. */
   readonly shooterExposure: number;
   /** Fraction of a stack's value it deals per round (condition values). */
   readonly tempo: number;
+  /**
+   * Share of the damage a stack takes that comes as Harm (spells, burns):
+   * what Warded and Drenched act on.
+   */
+  readonly harmShare: number;
   /** Summoned stacks count this fraction of their value. */
   readonly summonWeight: number;
   /** Cast threshold as a fraction of this side's value. */
@@ -161,8 +180,11 @@ export const DEFAULT_AI_WEIGHTS: AiWeights = {
   fearRounds: 6,
   behindPresses: 1,
   guardsPress: 1,
+  aheadRounds: 3,
+  aheadLead: 1.5,
   shooterExposure: 0.15,
   tempo: 0.2,
+  harmShare: 0.2,
   summonWeight: 0.6,
   castFraction: 0.03,
   lastCastFraction: 0.01,
@@ -250,6 +272,23 @@ function isNeutralGuard(state: BattleState, side: BattleSide): boolean {
   );
 }
 
+/**
+ * The side ahead on the verdict by `aheadLead` presses in the last
+ * `aheadRounds` rounds: it would win at the limit anyway, so it spends some
+ * safety to finish the battle instead of waiting it out.
+ */
+function aheadPresses(
+  state: BattleState,
+  me: BattleSide,
+  w: AiWeights,
+): boolean {
+  if (w.aheadRounds <= 0) return false;
+  if (state.round <= roundLimitOf(state) - w.aheadRounds) return false;
+  const mine = fightValueLeft(state, me);
+  const theirs = fightValueLeft(state, enemySide(me));
+  return mine >= w.aheadLead * Math.max(1, theirs);
+}
+
 class Context {
   readonly w: AiWeights;
   readonly me: BattleSide;
@@ -266,7 +305,8 @@ class Context {
       (w.guardsPress > 0 && isNeutralGuard(state, me)) ||
       (w.behindPresses > 0
         ? roundLimitWinner(state) !== me
-        : me === "attacker");
+        : me === "attacker") ||
+      aheadPresses(state, me, w);
   }
 
   /** Walking distance between two hexes around blocking ground. */
@@ -303,12 +343,17 @@ class Context {
 // ---------------------------------------------------------------------------
 // Evaluation
 
-/** Fraction of the bearer's value a condition is worth per round left. */
+/**
+ * What a condition is worth to the bearer's side (negative for its
+ * enemy), in value, for the rounds it has left. `far` is the living far
+ * end of a link, if any.
+ */
 function conditionWorth(
   c: Condition,
   bearer: BattleStack,
   value: number,
   w: AiWeights,
+  far: BattleStack | undefined,
 ): number {
   const rounds = c.clock === null ? 3 : Math.min(3, c.clock);
   const vph = aiValuePerHp(bearer.creature);
@@ -349,7 +394,8 @@ function conditionWorth(
       break;
     case "warded":
     case "drenched":
-      worth = 0.005 * s * t * rounds * value;
+      // Only Harm is scaled (links carry theirs unscaled, 1.4).
+      worth = (Math.min(75, s) / 100) * w.harmShare * t * rounds * value;
       break;
     case "quickened":
     case "slowed":
@@ -374,9 +420,24 @@ function conditionWorth(
     case "thorned":
       worth = 5 * s * rounds;
       break;
-    case "scapegoat":
-      worth = 0.5 * t * rounds * value;
+    case "scapegoat": {
+      // Damage to the bearer goes to the far end as Harm, up to the far
+      // end's HP: worth the difference in value per HP between the two
+      // ends (negative when the far end is the dearer stack).
+      if (far === undefined) {
+        worth = 0;
+        break;
+      }
+      const farHp = totalHp({
+        count: far.count,
+        hp: far.creature.hp,
+        topHp: far.topHp,
+      });
+      const covered = Math.min(value, farHp * vph);
+      worth =
+        0.5 * t * rounds * covered * (1 - aiValuePerHp(far.creature) / vph);
       break;
+    }
     case "sworn":
       worth = 0.15 * t * value;
       break;
@@ -480,8 +541,11 @@ function evaluate(ctx: Context, state: BattleState): number {
   for (const s of alive) {
     const sign = s.owner === me ? 1 : -1;
     const value = stackValue(s);
-    for (const c of s.conditions)
-      v += sign * conditionWorth(c, s, value, ctx.w);
+    for (const c of s.conditions) {
+      const far =
+        c.link === null ? undefined : alive.find((x) => x.id === c.link);
+      v += sign * conditionWorth(c, s, value, ctx.w, far);
+    }
     if (s.getsUp === true) v += sign * 0.3 * getUpValue(s);
   }
   for (const e of state.scheduled) {
@@ -495,7 +559,8 @@ function evaluate(ctx: Context, state: BattleState): number {
   const them = enemySide(me);
   // The side behind on the round-limit verdict (1.12) must break the other
   // before the limit: it fears the enemy's reach less and presses harder,
-  // more each round. Neutral guards always press.
+  // more each round. Neutral guards always press, and so does a side well
+  // ahead in the last rounds (aheadRounds).
   const att = ctx.presses;
   const fade =
     att && ctx.w.fearRounds > 0

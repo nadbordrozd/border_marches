@@ -72,8 +72,8 @@ Attachment: on a native's death (RULES_V2 3.8). The rule it bends: RULES_V2
 |    2 | Ghoul       |  16 |   6 |   5 |   3 |     6 |     - |           9 | 115 gold                      |  107 | `corpse`  | Feast                                 |
 |    3 | Banshee     |  20 |   7 |   5 |   5 |     5 |     6 |           6 | 260 gold                      |  200 | `nothing` | Wail, Keen                            |
 |    4 | Gravecaller |  32 |   8 |   7 |   6 |     4 |     - |           4 | 420 gold + 1 essence          |  242 | `corpse`  | Caster: Second Shift, Pass on         |
-|    5 | Vampire     |  70 |  14 |  13 |  14 |     8 |     - |           2 | 1100 gold + 1 essence         |  736 | `corpse`  | Drain, Mist                           |
-|    6 | Late King   | 170 |  19 |  18 |  34 |     6 |     - |           1 | 3600 gold + 2 ore + 3 essence | 2167 | `bones`   | Long Live the King, Royal Displeasure |
+|    5 | Vampire     |  70 |  14 |  13 |  14 |     8 |     - |           2 | 1200 gold + 1 essence         |  736 | `corpse`  | Drain, Mist                           |
+|    6 | Late King   | 170 |  19 |  18 |  34 |     6 |     - |           1 | 3000 gold + 2 ore + 3 essence | 2167 | `bones`   | Long Live the King, Royal Displeasure |
 
 One week of all six dwellings: 10,750 gold (prices tuned by the balance
 bead, [BALANCE.md](BALANCE.md) section 5), 2 ore, 9 essence; fight value

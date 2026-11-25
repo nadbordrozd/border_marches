@@ -85,7 +85,7 @@ Notes:
 |    3 | Man-at-Arms  |  26 |   8 |   9 |   5 |     5 |     - |           7 | 240 gold                      |  211 | Shield Wall         |
 |    4 | Friar        |  30 |   7 |   8 |   6 |     5 |     - |           4 | 400 gold + 1 essence          |  235 | Caster: Mend, Share |
 |    5 | Knight       |  85 |  15 |  14 |  15 |     8 |     - |           2 | 1050 gold + 2 ore             |  875 | Charge              |
-|    6 | Dragonslayer | 180 |  20 |  20 |  32 |     6 |     - |           1 | 3500 gold + 3 ore + 2 essence | 2277 | Stand Fast, Paragon |
+|    6 | Dragonslayer | 180 |  20 |  20 |  32 |     6 |     - |           1 | 4000 gold + 3 ore + 2 essence | 2277 | Stand Fast, Paragon |
 
 One week of all six dwellings: 10,545 gold, 7 ore, 6 essence; fight value 8335 (prices tuned by the balance bead, [BALANCE.md](BALANCE.md) section 5). The slowest creature has Speed 4, so a full army moves 1500 a day.
 

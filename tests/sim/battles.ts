@@ -28,7 +28,8 @@
  *   --mode report       every stage x hero mode: each faction's win rate
  *                       over cross-faction battles (both sides), the
  *                       attacker's win rate, rounds and round-limit share;
- *                       --matrix also prints every pairing.
+ *                       --matrix also prints every pairing; --acts the
+ *                       hero acts per battle of each faction.
  *   --mode guards       a hero against map guards (the generator's stray
  *                       roster and deployment) at --ratios 0.4,0.6,...
  *                       (guard FV / army FV) per stage: win rate, rounds
@@ -36,6 +37,12 @@
  *   --mode tiers        fight value per 1000 gold by tier and faction.
  *   --mode duels        one tier against the same tier of each other
  *                       faction, equal gold (--budget), no heroes.
+ *   --pf <faction>=<policy>   that faction plays this policy in the report
+ *                       (for example humans=v2:castFraction=99: no casts).
+ *   --gear stage|bare   heroes with their stage's level-ups (the adventure
+ *                       AI's skill and feat picks), guild and shrine
+ *                       pages, scrolls and artifacts (stage, default), or
+ *                       round 1's pattern stats and seeded book (bare).
  *   --tweak id.field=n,...   override creature numbers (or
  *                       class:<id>.<stat>) for this run only.
  *
@@ -62,6 +69,7 @@ import type {
   BattleState,
 } from "../../src/core/battle/index.ts";
 import { registerSpells } from "../../src/core/magic/index.ts";
+import { FACTION_SCHOOL_WEIGHTS } from "../../src/core/magic/guild.ts";
 import type {
   BattleSetup as GameBattleSetup,
   BattleSide as GameBattleSide,
@@ -72,6 +80,7 @@ import {
   HERO_MODES,
   STAGES,
   STAGE_IDS,
+  STAGE_KITS,
   armyFightValue,
   buildArmy,
   buildGuard,
@@ -84,7 +93,7 @@ import {
   heroSide,
   withoutBook,
 } from "./armies.ts";
-import type { Faction, HeroMode, Stage } from "./armies.ts";
+import type { Faction, HeroGear, HeroKit, HeroMode, Stage } from "./armies.ts";
 import { rosterOf } from "../../src/data/factionCreatures.ts";
 import { CREATURES } from "../../src/data/creatures.ts";
 import { getHeroClass } from "../../src/data/classes.ts";
@@ -144,6 +153,8 @@ export interface Played {
   readonly ms: Record<BattleSide, number>;
   /** Hero acts per side by act kind (cast, command, item). */
   readonly heroActs: Record<BattleSide, number>;
+  /** The hero acts' ids per side, in order (the --acts tally). */
+  readonly acts: Record<BattleSide, string[]>;
   /** Fight value left at the end (survivors), per side. */
   readonly left: Record<BattleSide, number>;
   /** Fight value at the start, per side. */
@@ -184,6 +195,18 @@ function describe(state: BattleState, action: BattleAction): string {
 /** Round limit override for every battle of the run (--limit). */
 let limitOverride: number | undefined;
 
+/** One faction's own policy in the report (--pf <faction>=<spec>). */
+const factionPolicy: Partial<Record<Faction, Policy>> = {};
+
+/** Hero gear of the run (--gear stage|bare; default stage). */
+let gear: HeroGear = "stage";
+
+/** The stage kit for a hero level (bare gear: none, round 1's heroes). */
+function kitFor(level: number): HeroKit | null {
+  if (gear === "bare") return null;
+  return STAGE_KITS[level <= 7 ? "early" : level <= 14 ? "mid" : "late"];
+}
+
 export function play(
   setup: GameBattleSetup,
   policies: Record<BattleSide, Policy>,
@@ -199,6 +222,7 @@ export function play(
   const decisions = { attacker: 0, defender: 0 };
   const ms = { attacker: 0, defender: 0 };
   const heroActs = { attacker: 0, defender: 0 };
+  const acts: Record<BattleSide, string[]> = { attacker: [], defender: [] };
   let illegal = 0;
   let guard = 0;
   let lastRound = 0;
@@ -216,7 +240,10 @@ export function play(
       console.error(`illegal ${JSON.stringify(action)}: ${err}`);
       break;
     }
-    if (action.type === "heroAct") heroActs[side]++;
+    if (action.type === "heroAct") {
+      heroActs[side]++;
+      acts[side].push(action.act + (action.scroll === true ? "*" : ""));
+    }
     if (trace && state.round !== lastRound) {
       lastRound = state.round;
       console.log(
@@ -248,6 +275,7 @@ export function play(
     decisions,
     ms,
     heroActs,
+    acts,
     left,
     start,
   };
@@ -271,7 +299,7 @@ function factionSide(
 ): GameBattleSide {
   const army = buildArmy(f, budget, seed);
   if (mode === "none") return heroLessSide(f, army, owner);
-  const hero = buildHero(f, level, seed, lean);
+  const hero = buildHero(f, level, seed, lean, kitFor(level));
   return heroSide(f, mode === "nobook" ? withoutBook(hero) : hero, army, owner);
 }
 
@@ -313,7 +341,7 @@ function neutralMatchups(
       const lean = seed % 2 === 0 ? "might" : "magic";
       return gameSetup(
         seed,
-        heroSide(f, buildHero(f, level, seed, lean), army, 1),
+        heroSide(f, buildHero(f, level, seed, lean, kitFor(level)), army, 1),
         guardSide(
           ring === null ? buildGuard(fv, seed) : buildMapGuard(fv, seed, ring),
         ),
@@ -358,11 +386,16 @@ interface Tally {
   attackerWins: number;
   rounds: number;
   roundLimit: number;
+  /** Attacker wins among the battles decided at the round limit. */
+  limitAttackerWins: number;
   /** Wins per faction over cross-faction battles, and their games. */
   wins: Record<Faction, number>;
   played: Record<Faction, number>;
   /** Attacker wins in each pairing (the matrix). */
   pairs: Map<string, { games: number; att: number }>;
+  /** Hero acts per faction (act id, "*" for a scroll) and its sides. */
+  acts: Record<Faction, Map<string, number>>;
+  sides: Record<Faction, number>;
 }
 
 /** Plays every faction pairing with `policy` on both sides. */
@@ -378,22 +411,36 @@ function tallyFactions(
     attackerWins: 0,
     rounds: 0,
     roundLimit: 0,
+    limitAttackerWins: 0,
     wins: { humans: 0, undead: 0, goblins: 0 },
     played: { humans: 0, undead: 0, goblins: 0 },
     pairs: new Map(),
+    acts: { humans: new Map(), undead: new Map(), goblins: new Map() },
+    sides: { humans: 0, undead: 0, goblins: 0 },
   };
   for (const m of factionMatchups(budget, level, mode)) {
     const [att, , def] = m.name.split(" ") as [Faction, string, Faction];
     const pair = { games: 0, att: 0 };
     for (let i = 0; i < seeds; i++) {
       const r = play(m.setup(1000 + i), {
-        attacker: policy,
-        defender: policy,
+        attacker: factionPolicy[att] ?? policy,
+        defender: factionPolicy[def] ?? policy,
       });
       t.games++;
       pair.games++;
+      for (const [side, f] of [
+        ["attacker", att],
+        ["defender", def],
+      ] as const) {
+        t.sides[f]++;
+        for (const a of r.acts[side])
+          t.acts[f].set(a, (t.acts[f].get(a) ?? 0) + 1);
+      }
       t.rounds += r.rounds;
-      if (r.reason === "roundLimit") t.roundLimit++;
+      if (r.reason === "roundLimit") {
+        t.roundLimit++;
+        if (r.winner === "attacker") t.limitAttackerWins++;
+      }
       if (r.winner === "attacker") {
         t.attackerWins++;
         pair.att++;
@@ -416,9 +463,10 @@ function reportMode(
   stages: readonly Stage[],
   modes: readonly HeroMode[],
   matrix: boolean,
+  acts = false,
 ): void {
   console.log(
-    "stage     heroes   humans  undead  goblins   att win  mirror att  rounds  at limit",
+    "stage     heroes   humans  undead  goblins   att win  mirror att  rounds  at limit  att at limit",
   );
   for (const stage of stages) {
     const { budget, level } = STAGES[stage];
@@ -435,11 +483,18 @@ function reportMode(
       }
       const f = (x: Faction) => pct(t.wins[x], t.played[x]).padStart(6);
       console.log(
-        `${stage.padEnd(9)} ${mode.padEnd(7)} ${f("humans")}  ${f("undead")}   ${f("goblins")}     ${pct(t.attackerWins, t.games)}        ${pct(mirror, mirrorN)}  ${(t.rounds / t.games).toFixed(1).padStart(6)}      ${pct(t.roundLimit, t.games)}`,
+        `${stage.padEnd(9)} ${mode.padEnd(7)} ${f("humans")}  ${f("undead")}   ${f("goblins")}     ${pct(t.attackerWins, t.games)}        ${pct(mirror, mirrorN)}  ${(t.rounds / t.games).toFixed(1).padStart(6)}      ${pct(t.roundLimit, t.games)}          ${pct(t.limitAttackerWins, t.roundLimit)}`,
       );
       if (matrix)
         for (const [name, p] of t.pairs)
           console.log(`    ${name.padEnd(22)} attacker ${pct(p.att, p.games)}`);
+      if (acts)
+        for (const f of FACTIONS) {
+          const list = [...t.acts[f]]
+            .sort((a, b) => b[1] - a[1])
+            .map(([id, n]) => `${id} ${(n / t.sides[f]).toFixed(2)}`);
+          console.log(`    acts per battle, ${f}: ${list.join(", ")}`);
+        }
     }
   }
 }
@@ -495,6 +550,20 @@ function applyTweaks(spec: string): void {
   for (const kv of spec.split(",")) {
     const [path, v] = kv.split("=");
     const [id, ...field] = (path ?? "").split(".");
+    if (id?.startsWith("school:")) {
+      // school:goblins.storm=3: a faction's guild school weight.
+      const w = FACTION_SCHOOL_WEIGHTS[id.slice(7)]?.weights as unknown as
+        Record<string, number> | undefined;
+      const key = field[0] as string;
+      if (
+        w === undefined ||
+        typeof w[key] !== "number" ||
+        Number.isNaN(Number(v))
+      )
+        throw new Error(`bad tweak ${kv}`);
+      w[key] = Number(v);
+      continue;
+    }
     if (id?.startsWith("class:")) {
       // class:knight-errant.attack=3: a hero class's starting stats.
       const stats = getHeroClass(id.slice(6)).stats as unknown as Record<
@@ -628,6 +697,17 @@ export function main(args: readonly string[]): number {
   const only = opt.get("only");
   const limit = opt.get("limit");
   limitOverride = limit === undefined ? undefined : Number(limit);
+  const gearOpt = opt.get("gear") ?? "stage";
+  if (gearOpt !== "stage" && gearOpt !== "bare")
+    throw new Error(`unknown gear ${gearOpt}`);
+  gear = gearOpt;
+  const pf = opt.get("pf");
+  if (pf !== undefined) {
+    const [f, spec] = pf.split(/=(.*)/s) as [Faction, string | undefined];
+    if (!FACTIONS.includes(f) || spec === undefined)
+      throw new Error(`bad --pf ${pf}`);
+    factionPolicy[f] = parsePolicy(spec);
+  }
   const stageOpt = opt.get("stage");
   const stages: Stage[] =
     stageOpt === undefined || stageOpt === "all"
@@ -655,7 +735,14 @@ export function main(args: readonly string[]): number {
     console.log(
       `report: policy ${aSpec}, ${seeds} seeds per pairing, round limit ${limitOverride ?? "engine"}`,
     );
-    reportMode(parsePolicy(aSpec), seeds, stages, heroModes, opt.has("matrix"));
+    reportMode(
+      parsePolicy(aSpec),
+      seeds,
+      stages,
+      heroModes,
+      opt.has("matrix"),
+      opt.has("acts"),
+    );
     console.log(`wall ${((performance.now() - t0) / 1000).toFixed(0)} s`);
     return 0;
   }
@@ -670,7 +757,9 @@ export function main(args: readonly string[]): number {
   const a = parsePolicy(aSpec);
   const b = parsePolicy(bSpec);
   const matchups = [
-    ...(only === "neutral" ? [] : factionMatchups(budget, level)),
+    ...(only === "neutral"
+      ? []
+      : factionMatchups(budget, level, heroModes[0] ?? "full")),
     ...(only === "faction" ? [] : neutralMatchups(budget, level, ratio)),
   ];
   const traceName = opt.get("trace");
@@ -683,7 +772,7 @@ export function main(args: readonly string[]): number {
       console.log(
         `${side}: ${setup[side].stacks.map((s) => `${s.count} ${s.creature}`).join(", ")}` +
           (setup[side].hero?.profile
-            ? ` | pages ${setup[side].hero.profile.pages.join(" ")} mana ${setup[side].hero.profile.mana} scrolls ${setup[side].hero.profile.scrolls.join(" ")} command ${setup[side].hero.profile.command}`
+            ? ` | level ${setup[side].hero.profile.level} A${setup[side].hero.attack} D${setup[side].hero.defense} P${setup[side].hero.profile.power} | pages ${setup[side].hero.profile.pages.join(" ")} mana ${setup[side].hero.profile.mana} scrolls ${setup[side].hero.profile.scrolls.join(" ")} command ${setup[side].hero.profile.command} C${setup[side].hero.profile.commandStrength} | morale ${setup[side].hero.profile.morale} luck ${setup[side].hero.profile.luck} | strikes ${setup[side].hero.profile.strikes.map((x) => x.label).join(", ")} | stacks ${setup[side].hero.profile.stacks.map((x) => x.label).join(", ")} | start ${setup[side].hero.profile.startRules.map((x) => x.source).join(", ")} | items ${setup[side].hero.profile.itemActs.join(" ")}`
             : ""),
       );
     const r = play(setup, { attacker: a, defender: b }, true);
