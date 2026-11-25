@@ -3,6 +3,9 @@
 A pulpy, deterministic strategy game in the spirit of Heroes of Might and
 Magic II: an adventure map, towns, heroes and armies, and hex battles.
 
+**[Play in the browser](https://nadbordrozd.github.io/border_marches/)**
+(GitHub Pages, rebuilt from `main` on every push).
+
 ## Run it
 
 Needs Node 22.13 or newer.
