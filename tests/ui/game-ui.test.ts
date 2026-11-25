@@ -369,6 +369,7 @@ describe("minimap", () => {
       (c, i) =>
         s.players[0]!.explored[i] === true &&
         c.obstacle === "none" &&
+        c.prop !== true &&
         !c.road &&
         c.terrain !== "water" &&
         !s.map.objects.some((o) => o.y * s.map.width + o.x === i) &&
@@ -407,6 +408,37 @@ describe("minimap", () => {
       return n;
     };
     expect(fogCells(minimapPixels(s, 0))).toBeLessThan(fogCells(px));
+  });
+
+  it("paints props as blocking: forest by the woods, rock elsewhere (bzc.78)", () => {
+    // A prop in place of an edge tree, a boulder in the open, one against
+    // a mountain range, and a passable decoration (plain ground).
+    const s = cloneState(
+      gameOn(["FFFFgMMM", "FgggggMM", "gggggggg", "gggggggg"], [], 0, 3),
+    );
+    s.players[0]!.explored = s.players[0]!.explored.map(() => true);
+    const W = s.map.width;
+    for (const i of [1 * W + 0, 2 * W + 3, 2 * W + 6]) {
+      s.map.cells[i]!.obstacle = "none";
+      s.map.cells[i]!.prop = true;
+    }
+    s.map.decorations = [
+      { id: "big-boulder", x: 0, y: 1, variant: 0 },
+      { id: "big-boulder", x: 3, y: 2, variant: 0 },
+      { id: "big-boulder", x: 6, y: 2, variant: 0 },
+      { id: "butterflies", x: 2, y: 3, variant: 0 },
+    ];
+    const px = minimapPixels(s, 0);
+    const rgb = (x: number, y: number): number[] => [
+      ...px.slice((y * W + x) * 4, (y * W + x) * 4 + 3),
+    ];
+    const forest = rgb(1, 0);
+    const rock = rgb(6, 0);
+    expect(forest).not.toEqual(rock);
+    expect(rgb(0, 1)).toEqual(forest);
+    expect(rgb(3, 2)).toEqual(rock);
+    expect(rgb(6, 2)).toEqual(rock);
+    expect(rgb(2, 3)).toEqual([...TERRAIN_COLOURS.grass]);
   });
 
   it("fills its frame for every map size, aspect kept and centred", () => {

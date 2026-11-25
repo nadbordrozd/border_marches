@@ -12,6 +12,8 @@
  *   two ways:
  *   1. At a forest's edge, in place of an edge tree facing open ground to
  *      the south: a wall stays a wall, so movement is exactly as before.
+ *      Where the woods fall short (a land of rock), the same at a mountain
+ *      range's southern edge, in place of an edge rock (bead bzc.78).
  *   2. On open ground, mostly against forest and mountain edges and in
  *      nooks: off the roads, the pass and gap corridors, every object's
  *      approach (two cells from any entrance, so out of every guard's zone
@@ -272,15 +274,17 @@ export function decorateMap(map: GameMap, options: DecorateOptions = {}): void {
   };
   groundPass(targetGround);
 
-  // ----------------------------------------- props in place of edge trees
+  // ------------------------------ props in place of edge trees (or rocks)
   // A forest cell with open ground to its south (so the prop stands in
   // front of the trees, not hidden behind the next row), keeping most of
   // its wood: two or more forest cells beside it, so no tree is left alone.
-  const forest = (i: number): boolean => {
+  // Where the woods fall short (a land of rock), the same in front of a
+  // mountain range's southern edge (bead bzc.78).
+  const wall = (i: number, kind: "forest" | "mountain"): boolean => {
     const c = cell(i);
-    return c !== undefined && c.terrain !== "water" && c.obstacle === "forest";
+    return c !== undefined && c.terrain !== "water" && c.obstacle === kind;
   };
-  const woods = (i: number): number => {
+  const sameBeside = (i: number, kind: "forest" | "mountain"): number => {
     let k = 0;
     for (const [dx, dy] of [
       [1, 0],
@@ -290,37 +294,43 @@ export function decorateMap(map: GameMap, options: DecorateOptions = {}): void {
     ] as const) {
       const x = (i % W) + dx;
       const y = Math.floor(i / W) + dy;
-      if (x >= 0 && y >= 0 && x < W && y < H && forest(y * W + x)) k++;
+      if (x >= 0 && y >= 0 && x < W && y < H && wall(y * W + x, kind)) k++;
     }
     return k;
   };
-  const edgeOk = (i: number): boolean =>
-    forest(i) &&
-    i + W < n &&
-    walk(i + W) &&
-    at(nearEntrance, i) >= DECORATE.entranceGap &&
-    at(nearTown, i) >= DECORATE.townGap &&
-    at(nearCorridor, i) >= 1 &&
-    woods(i) >= 2 &&
-    spaced(i);
-  const edges = rng.shuffle(range(n).filter((i) => edgeOk(i)));
   let onEdge = 0;
   const targetEdge = targetProps - onGround;
-  // The long ones (a fallen log along the wood) first, then single cells.
-  const wideTarget = Math.round(targetEdge * DECORATE.wideShare);
-  for (const cols of [2, 1]) {
-    for (const i of edges) {
-      if (onEdge >= (cols === 2 ? wideTarget : targetEdge)) break;
-      const foot = footAt(i, cols);
-      if (foot === null || !foot.every((f) => edgeOk(f))) continue;
-      if (!keepsShape(map, foot)) continue;
-      const kinds = kindsFor(foot);
-      if (kinds.length === 0) continue;
-      addProp(foot, varied(rng, kinds, placed, i, W));
-      onEdge++;
+  /** Props in place of `kind` edge cells until `targetEdge` stand. */
+  const edgePass = (kind: "forest" | "mountain"): void => {
+    const edgeOk = (i: number): boolean =>
+      wall(i, kind) &&
+      i + W < n &&
+      walk(i + W) &&
+      at(nearEntrance, i) >= DECORATE.entranceGap &&
+      at(nearTown, i) >= DECORATE.townGap &&
+      at(nearCorridor, i) >= 1 &&
+      sameBeside(i, kind) >= 2 &&
+      spaced(i);
+    const edges = rng.shuffle(range(n).filter((i) => edgeOk(i)));
+    // The long ones (a fallen log along the wood) first, then single cells.
+    const wideTarget = Math.round(targetEdge * DECORATE.wideShare);
+    for (const cols of [2, 1]) {
+      for (const i of edges) {
+        if (onEdge >= (cols === 2 ? wideTarget : targetEdge)) break;
+        const foot = footAt(i, cols);
+        if (foot === null || !foot.every((f) => edgeOk(f))) continue;
+        if (!keepsShape(map, foot)) continue;
+        if (kind === "mountain" && !keepsBlocks(map, foot)) continue;
+        const kinds = kindsFor(foot);
+        if (kinds.length === 0) continue;
+        addProp(foot, varied(rng, kinds, placed, i, W));
+        onEdge++;
+      }
     }
-  }
-  // Few woods (a land of rock): more on the open ground instead.
+  };
+  edgePass("forest");
+  if (onEdge < targetEdge) edgePass("mountain");
+  // Still short: more on the open ground instead.
   groundPass(targetProps - onEdge);
 
   // ------------------------------------------------- passable decorations
@@ -531,6 +541,44 @@ function keepsShape(map: GameMap, foot: readonly number[]): boolean {
         if (u === t) same++;
       }
       if (any < 2 || same < 1) return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Whether every mountain cell beside the footprint still lies in an
+ * all-mountain 2x2 block without it (user decision, bead xaj.20: the
+ * smallest mountain is 2x2 cells).
+ */
+function keepsBlocks(map: GameMap, foot: readonly number[]): boolean {
+  const W = map.width;
+  const H = map.height;
+  const m = (x: number, y: number): boolean =>
+    x >= 0 &&
+    y >= 0 &&
+    x < W &&
+    y < H &&
+    !foot.includes(y * W + x) &&
+    map.cells[y * W + x]?.obstacle === "mountain";
+  for (const f of foot) {
+    for (const [dx, dy] of DIRECTIONS_8) {
+      const x = (f % W) + dx;
+      const y = Math.floor(f / W) + dy;
+      if (!m(x, y)) continue;
+      const inBlock = [
+        [-1, -1],
+        [0, -1],
+        [-1, 0],
+        [0, 0],
+      ].some(
+        ([ox = 0, oy = 0]) =>
+          m(x + ox, y + oy) &&
+          m(x + ox + 1, y + oy) &&
+          m(x + ox, y + oy + 1) &&
+          m(x + ox + 1, y + oy + 1),
+      );
+      if (!inBlock) return false;
     }
   }
   return true;

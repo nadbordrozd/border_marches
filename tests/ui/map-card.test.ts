@@ -9,6 +9,7 @@ import { cloneState } from "../../src/core/game/state.ts";
 import { generateMap } from "../../src/core/map/generate.ts";
 import { propAt } from "../../src/core/map/types.ts";
 import type { MapObject } from "../../src/core/map/types.ts";
+import { decorationKind } from "../../src/data/decorations.ts";
 import { OBJECT_TYPES } from "../../src/data/objectTypes.ts";
 import {
   MAX_CARD_LINES,
@@ -273,6 +274,22 @@ describe("map cards", () => {
     );
   });
 
+  it("names a passable decoration in one line (bead bzc.78)", () => {
+    const s = cloneState(gameOn(field(8, 3), [], 1, 1));
+    s.map.decorations = [{ id: "butterflies", x: 5, y: 2, variant: 0 }];
+    expect(card(s, 5, 2)).toEqual({
+      title: "Butterflies",
+      subtitle: null,
+      picture: null,
+      lines: [],
+      small: true,
+    });
+    // Unexplored, it stays unexplored; off it, the ground as before.
+    expect(card(s, 4, 2).title).toBe("Grass");
+    s.players[0]!.explored = s.players[0]!.explored.map(() => false);
+    expect(card(s, 5, 2).title).toBe("Unexplored");
+  });
+
   it("never exceeds six lines on a whole generated map", () => {
     const s = cloneState(newGame(generateMap(11, { size: "S" })));
     s.players[0]!.explored = s.players[0]!.explored.map(() => true);
@@ -305,6 +322,21 @@ describe("map cards", () => {
       expect(lines.length).toBe(2);
       for (const n of lines) expect(n.dataset["kwSkip"]).toBe("");
     }
+    // Passable decorations (bead bzc.78) name themselves, unless something
+    // stands on them.
+    const smalls = (s.map.decorations ?? []).filter(
+      (d) =>
+        !propAt(s.map, d.x, d.y) &&
+        !s.heroes.some((h) => h.x === d.x && h.y === d.y) &&
+        !Object.values(s.monsters).some((m) => m.x === d.x && m.y === d.y),
+    );
+    expect(smalls.length).toBeGreaterThan(0);
+    for (const d of smalls)
+      expect(mapCard(s, 0, d.x, d.y, hero.id)).toMatchObject({
+        title: decorationKind(d.id)!.name,
+        lines: [],
+        small: true,
+      });
   });
 });
 

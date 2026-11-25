@@ -30,6 +30,7 @@ import { objectTypeOf } from "../core/game/site-state.ts";
 import { propAt } from "../core/map/types.ts";
 import type { MapObject } from "../core/map/types.ts";
 import { findArtifact } from "../data/artifacts.ts";
+import { decorationKind } from "../data/decorations.ts";
 import { getCreature, isCreatureId } from "../data/creatures.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { findFaction } from "../data/factions.ts";
@@ -580,8 +581,9 @@ export function objectPictureKey(obj: MapObject): string | null {
 
 /**
  * The hover card of map cell (x, y) for `player` with the selected hero
- * `heroId`: a hero, a neutral stack, a town, mine, pickup or site, else a
- * small card naming the ground (describeCell). Null off the map.
+ * `heroId`: a hero, a neutral stack, a town, mine, pickup or site, a
+ * passable decoration's name, else a small card naming the ground
+ * (describeCell). Null off the map.
  */
 export function mapCard(
   state: GameState,
@@ -626,6 +628,20 @@ export function mapCard(
   else if (obj?.kind === "pickup") card = pickupCard(state, obj, hero);
   else if (obj !== undefined) card = siteCard(state, player, obj, hero);
   if (card !== null) return card;
+  // A passable decoration (bead bzc.78): one line, its name only.
+  const small = (map.decorations ?? []).find(
+    (d) => d.x === x && d.y === y && decorationKind(d.id)?.passable === true,
+  );
+  const smallName =
+    small === undefined ? undefined : decorationKind(small.id)?.name;
+  if (smallName !== undefined)
+    return {
+      title: smallName,
+      subtitle: null,
+      picture: null,
+      lines: [],
+      small: true,
+    };
   const text = describeCell(state, player, x, y, heroId);
   if (text === null) return null;
   const [title = "", ...rest] = text.split("\n");

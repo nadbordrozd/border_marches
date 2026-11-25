@@ -1,6 +1,7 @@
 /**
  * The adventure screen's minimap: one pixel block per cell with terrain
- * colours, obstacles, roads, towns and mines in owner colours, the heroes,
+ * colours, obstacles (impassable props among them, as forest or rock), roads,
+ * towns and mines in owner colours, the heroes,
  * dark parchment over unexplored cells inside a one-pixel map border, and
  * the viewport rectangle.
  *
@@ -56,6 +57,31 @@ export function ownerColour(owner: number | null): Rgb {
     : (PLAYER_COLOURS[owner % PLAYER_COLOURS.length] ?? NEUTRAL_COLOUR);
 }
 
+/**
+ * An impassable prop's cell (bead bzc.78) blocks like the wall it mostly
+ * stands against: forest where more forest than mountain is round it (a
+ * prop in place of an edge tree keeps the wood's outline), else rock (a
+ * boulder in the open is a dot of rock).
+ */
+function propColour(state: GameState, i: number): Rgb {
+  const { map } = state;
+  const x = i % map.width;
+  const y = Math.floor(i / map.width);
+  let forest = 0;
+  let rock = 0;
+  for (let dy = -1; dy <= 1; dy++)
+    for (let dx = -1; dx <= 1; dx++) {
+      const ax = x + dx;
+      const ay = y + dy;
+      if ((dx === 0 && dy === 0) || ax < 0 || ay < 0) continue;
+      if (ax >= map.width || ay >= map.height) continue;
+      const o = map.cells[ay * map.width + ax]?.obstacle;
+      if (o === "forest") forest++;
+      else if (o === "mountain") rock++;
+    }
+  return forest > rock ? FOREST : MOUNTAIN;
+}
+
 /** RGBA pixels, one per cell (row-major), as seen by `player`. */
 export function minimapPixels(
   state: GameState,
@@ -77,6 +103,7 @@ export function minimapPixels(
     if (cell.terrain === "water" && cell.deep === true) c = DEEP_WATER;
     if (cell.obstacle === "mountain") c = MOUNTAIN;
     else if (cell.obstacle === "forest") c = FOREST;
+    else if (cell.prop === true) c = propColour(state, i);
     else if (cell.road) c = ROAD;
     put(i, c);
   }
