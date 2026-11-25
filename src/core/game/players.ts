@@ -416,6 +416,12 @@ export function humanPlayer(state: GameState): number {
  */
 export function settleOutcome(state: GameState, events: GameEvent[]): void {
   if (state.status !== "playing") return;
+  if (!state.players.some((p) => p.kind === "human")) {
+    // An all-AI match (the match runner, bead bzc.19) has no one to win
+    // or lose for: it goes on (the last player keeps clearing the map)
+    // until the runner stops it.
+    return;
+  }
   const human = humanPlayer(state);
   const me = findPlayer(state, human);
   if (me === undefined || me.eliminated) {

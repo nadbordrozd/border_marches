@@ -7,12 +7,18 @@
  * resolver, AI level-ups and chests are chosen through the controller).
  * The interface waits on the human only for a battle the human fights.
  *
- * The AI bead (bzc.19) implements PlayerController; {@link SimpleAi} is a
- * stand-in that only collects pickups and flags mines it can reach today
- * without a fight, recruits in its towns, and ends its turn.
+ * The adventure AI (src/core/ai, bead bzc.19) implements PlayerController;
+ * {@link SimpleAi} is the old stand-in, kept as the baseline of the match
+ * runner (tools/sim/match.ts): it only collects pickups and flags mines it
+ * can reach today without a fight, recruits in its towns, and ends its
+ * turn.
  */
 import { getCreature } from "../../data/creatures.ts";
-import type { BuildingId, CreatureId } from "../../data/types.ts";
+import type { BuildingId, CreatureId, ResourceId } from "../../data/types.ts";
+import {
+  castAdventureSpell,
+  type AdventureTarget,
+} from "../magic/adventure.ts";
 import { takeChest } from "./adventure.ts";
 import {
   assemble,
@@ -31,12 +37,14 @@ import {
 } from "./battle.ts";
 import { chooseLevelUp, levelUpOffer, type LevelUpOffer } from "./hero.ts";
 import { findPath, reachableCells } from "./pathfinding.ts";
-import { dismissHero, hireHero, humanPlayer } from "./players.ts";
+import { dismissHero, hireHero } from "./players.ts";
 import { maxAffordable } from "./resources.ts";
+import { digHere, useSite } from "./sites.ts";
 import { fail, findPlayer, heroesOf, townsOf } from "./state.ts";
 import {
   build,
   heroInTownOf,
+  marketTrade,
   recruit,
   transferStack,
   type TransferArgs,
@@ -65,6 +73,20 @@ export type GameAction =
   | { type: "assemble"; heroId: string; marvel: string }
   /** Hand an item to an adjacent own hero (RULES_V2 5.3). */
   | { type: "hand-over"; heroId: string; toHeroId: string; item: ItemRef }
+  /** Answer the choice of the site the hero stands on (useSite). */
+  | { type: "use-site"; heroId: string; objectId: string; option: string }
+  /** Dig on the hero's cell (digHere). */
+  | { type: "dig"; heroId: string }
+  /** Cast an adventure spell from the book or a scroll (RULES_V2 2.8). */
+  | {
+      type: "cast";
+      heroId: string;
+      spell: string;
+      target?: AdventureTarget;
+      scroll?: boolean;
+    }
+  /** Trade at the marketplace rates (marketTrade). */
+  | { type: "trade"; give: ResourceId; amount: number; get: ResourceId }
   | { type: "end-turn" };
 
 /** Applies an action for the current player. */
@@ -101,6 +123,26 @@ export function applyAction(
       return assemble(state, action.heroId, action.marvel);
     case "hand-over":
       return handOver(state, action.heroId, action.toHeroId, action.item);
+    case "use-site":
+      return useSite(state, action.heroId, action.objectId, action.option);
+    case "dig":
+      return digHere(state, action.heroId);
+    case "cast":
+      return castAdventureSpell(
+        state,
+        action.heroId,
+        action.spell,
+        action.target ?? {},
+        action.scroll === true ? { scroll: true } : {},
+      );
+    case "trade":
+      return marketTrade(
+        state,
+        state.currentPlayer,
+        action.give,
+        action.amount,
+        action.get,
+      );
     case "end-turn":
       return endTurn(state);
     default:
@@ -192,8 +234,11 @@ function settle(
     const battle = s.pendingBattle;
     if (battle === null) break;
     const sides = battlePlayers(s, battle);
-    const human = humanPlayer(s);
-    if (sides.attacker === human || sides.defender === human) {
+    // A side waits for the human when its player has no controller (in an
+    // all-AI match none does, though humanPlayer() still names player 0).
+    const human = (p: number | null): boolean =>
+      p !== null && controllers(p) === null;
+    if (human(sides.attacker) || human(sides.defender)) {
       return { state: s, humanBattle: true };
     }
     const setup = battleSetup(s);

@@ -32,7 +32,6 @@ import {
   maxMana,
   moveHeroAlong,
   sightRadius,
-  SimpleAi,
   takeChest,
   townIncome,
   townsOf,
@@ -50,6 +49,7 @@ import type {
   PlayerController,
   SlotRef,
 } from "../core/game/index.ts";
+import { AdventureAi } from "../core/ai/index.ts";
 import { createBattleResolver } from "../core/battle/resolver.ts";
 import type { MapObjectKind } from "../core/map/types.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
@@ -184,8 +184,8 @@ class GameScreen {
   private readonly townPanel = el("div.gm-town-panel");
   private readonly view: MapView;
   private readonly minimap: Minimap;
-  private readonly ai = new SimpleAi();
   private readonly resolver = createBattleResolver();
+  private readonly ai = new AdventureAi({ resolver: this.resolver });
   private objectsSig = "";
   /** The planned destination and its path. */
   private plan: { x: number; y: number; path: Path } | null = null;
