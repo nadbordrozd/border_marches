@@ -456,6 +456,16 @@ export interface ActDef {
     targets: readonly ActTarget[],
   ): string | null;
   /**
+   * Target tuples worth considering, in a fixed order: the battle AI's
+   * candidate list (ai.ts). Every tuple still passes `check` before it is
+   * used. Absent: the AI tries no targets for a 0-target act and each
+   * living stack, then each remains hex, for a 1-target act.
+   */
+  aiTargets?(
+    state: BattleState,
+    actorId: StackId,
+  ): readonly (readonly ActTarget[])[];
+  /**
    * Casts (RULES_V2 2.4): the listed mana cost (default by tier: 4, 7, 10,
    * 14, 20).
    */

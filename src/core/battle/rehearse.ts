@@ -239,7 +239,8 @@ export function enemyIntents(
     const hypothetical: BattleState = { ...state, activeStackId: id };
     let action: BattleAction;
     try {
-      action = chooseAiAction(hypothetical);
+      // The stack's own action: a hero act would not end its turn.
+      action = chooseAiAction(hypothetical, { heroActs: false });
     } catch {
       continue;
     }

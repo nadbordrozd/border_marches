@@ -45,6 +45,7 @@ import {
   isBlockingHex,
   isFreeHex,
   ownRemains,
+  ruleCandidates,
   ruleTouches,
   sideStacks,
   stackOf,
@@ -1251,6 +1252,7 @@ export function registerSpells(): void {
         targetRuleError(s.target, state, actorId, targets) ??
         s.check?.(state, actorId, targets) ??
         null,
+      aiTargets: (state, actorId) => ruleCandidates(s.target, state, actorId),
       touches: (state, actorId, targets) =>
         s.touches
           ? s.touches(state, actorId, targets)

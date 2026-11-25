@@ -387,6 +387,162 @@ export function targetRuleError(
   }
 }
 
+// ---------------------------------------------------------------------------
+// Candidates (the battle AI's target lists)
+
+/** Hexes worth aiming an area or a free-hex rule at: stacks and their rings. */
+function nearStackHexes(
+  state: BattleState,
+  stacks: readonly BattleStack[],
+): Hex[] {
+  const seen = new Set<number>();
+  const out: Hex[] = [];
+  const add = (h: Hex): void => {
+    if (!inBounds(h)) return;
+    const k = h.row * 100 + h.col;
+    if (seen.has(k)) return;
+    seen.add(k);
+    out.push(h);
+  };
+  for (const s of stacks) add(s.hex);
+  for (const s of stacks) for (const n of neighbors(s.hex)) add(n);
+  return out.filter((h) => !isBlockingHex(state, h));
+}
+
+function conditionTargets(
+  state: BattleState,
+  keep: (c: Condition, s: BattleStack) => boolean = () => true,
+): ActTarget[] {
+  const out: ActTarget[] = [];
+  for (const s of state.stacks) {
+    if (!isAlive(s)) continue;
+    for (const c of s.conditions)
+      if (keep(c, s)) out.push({ stack: s.id, condition: c.uid });
+  }
+  return out;
+}
+
+/**
+ * Plausible target tuples for a rule, in a fixed order (the battle AI
+ * rehearses each that passes the check). Not every legal choice: hexes are
+ * limited to stacks' hexes and their neighbours, lines to those touching
+ * an enemy.
+ */
+export function ruleCandidates(
+  rule: TargetRule,
+  state: BattleState,
+  actorId: StackId,
+): ActTarget[][] {
+  const side = casterSide(state, actorId);
+  const alive = state.stacks.filter(isAlive);
+  const friends = alive.filter((s) => s.side === side);
+  const enemies = alive.filter((s) => s.side !== side);
+  const one = (xs: readonly BattleStack[]): ActTarget[][] =>
+    xs.map((s) => [{ stack: s.id }]);
+  switch (rule) {
+    case "stack":
+      return one(alive);
+    case "friendly":
+      return one(friends);
+    case "enemy":
+      return one(enemies);
+    case "twoFriendly": {
+      const out: ActTarget[][] = [];
+      for (const a of friends)
+        for (const b of friends)
+          if (a.id !== b.id) out.push([{ stack: a.id }, { stack: b.id }]);
+      return out;
+    }
+    case "enemyFriendly": {
+      const out: ActTarget[][] = [];
+      for (const e of enemies)
+        for (const f of friends) out.push([{ stack: e.id }, { stack: f.id }]);
+      return out;
+    }
+    case "stackHex": {
+      const out: ActTarget[][] = [];
+      for (const s of alive)
+        for (const h of neighbors(s.hex))
+          if (inBounds(h)) out.push([{ stack: s.id }, { hex: h }]);
+      return out;
+    }
+    case "freeHex":
+      return nearStackHexes(state, alive)
+        .filter((h) => isFreeHex(state, h))
+        .map((h) => [{ hex: h }]);
+    case "line3": {
+      const out: ActTarget[][] = [];
+      const seen = new Set<string>();
+      for (const e of enemies) {
+        for (const start of neighbors(e.hex)) {
+          for (let d = 0; d < 6; d++) {
+            const b = stepHex(start, d);
+            const c = stepHex(b, d);
+            const line = [start, b, c];
+            if (line.some((h) => !inBounds(h) || isBlockingHex(state, h)))
+              continue;
+            const key = line
+              .map((h) => h.row * 100 + h.col)
+              .sort((x, y) => x - y)
+              .join(",");
+            if (seen.has(key)) continue;
+            seen.add(key);
+            out.push(line.map((h) => ({ hex: h })));
+          }
+        }
+      }
+      return out;
+    }
+    case "area1":
+    case "area2":
+    case "area3":
+      return nearStackHexes(state, enemies).map((h) => [{ hex: h }]);
+    case "condition":
+      return conditionTargets(state).map((t) => [t]);
+    case "share": {
+      const out: ActTarget[][] = [];
+      for (const s of alive) {
+        for (const l of s.conditions) {
+          if (l.link === null) continue;
+          const far = alive.find((x) => x.id === l.link);
+          if (!far) continue;
+          for (const end of [s, far])
+            for (const o of end.conditions)
+              if (o.uid !== l.uid && !o.hold && o.link === null)
+                out.push([
+                  { stack: s.id, condition: l.uid },
+                  { stack: end.id, condition: o.uid },
+                ]);
+        }
+      }
+      return out;
+    }
+    case "passOn": {
+      const out: ActTarget[][] = [];
+      for (const s of alive)
+        for (const c of s.conditions) {
+          if (c.polarity !== "bane") continue;
+          for (const o of alive)
+            if (o.id !== s.id && isAdjacent(o.hex, s.hex))
+              out.push([{ stack: s.id, condition: c.uid }, { stack: o.id }]);
+        }
+      return out;
+    }
+    case "wind": {
+      const out: ActTarget[][] = [];
+      for (const t of conditionTargets(state, (c) => c.clock !== null))
+        for (const choice of ["+2", "-2"]) out.push([t, { choice }]);
+      return out;
+    }
+    case "remains":
+      return ownRemains(state, side).map((h) => [{ hex: h }]);
+    case "allFriendly":
+    case "allRemains":
+    case "active":
+      return [[]];
+  }
+}
+
 /** The stacks a spell with this rule touches (2.4), before overrides. */
 export function ruleTouches(
   rule: TargetRule,

@@ -36,6 +36,22 @@ export function targetCondition(t: ActTarget | undefined): number | null {
 }
 
 /** Living stacks in field order. */
+export function friendsOf(state: BattleState, actorId: StackId): BattleStack[] {
+  const me = stackOf(state, actorId);
+  return living(state).filter((s) => me !== null && s.side === me.side);
+}
+
+export function enemiesOf(state: BattleState, actorId: StackId): BattleStack[] {
+  const me = stackOf(state, actorId);
+  return living(state).filter((s) => me !== null && s.side !== me.side);
+}
+
+/** One-stack target tuples (the AI's candidates, ActDef.aiTargets). */
+export function oneEach(stacks: readonly BattleStack[]): ActTarget[][] {
+  return stacks.map((s) => [{ stack: s.id }]);
+}
+
+/** Living stacks in field order. */
 export function living(state: BattleState): BattleStack[] {
   return state.stacks.filter(isAlive);
 }
@@ -99,6 +115,7 @@ export function registerStampede(): void {
       const e = stackOf(state, targetStack(t[0]) ?? "");
       return me && e && e.side !== me.side ? null : "choose an enemy stack";
     },
+    aiTargets: (state, actorId) => oneEach(enemiesOf(state, actorId)),
     resolve(fx, actorId, t) {
       const enemy = targetStack(t[0]) as StackId;
       const side = fx.sideOf(actorId);

@@ -3,14 +3,23 @@
  * units' abilities, the three Drills and the two Commands.
  */
 
-import { hexDistance, isAdjacent, sameHex, stepHex } from "../hex.ts";
+import {
+  hexDistance,
+  inBounds,
+  isAdjacent,
+  neighbors,
+  sameHex,
+  stepHex,
+} from "../hex.ts";
 import type { Hex } from "../hex.ts";
 import { registerAbility, registerAct } from "../registry.ts";
 import type { AreaRef } from "../registry.ts";
 import { stackTotalHp } from "../resolve.ts";
-import type { BattleSide, BattleStack, StackId } from "../types.ts";
+import type { ActTarget, BattleSide, BattleStack, StackId } from "../types.ts";
 import {
   commandC,
+  enemiesOf,
+  friendsOf,
   inBlast,
   living,
   sideFlags,
@@ -167,6 +176,10 @@ export function registerGoblins(): void {
       const hp = stackTotalHp(s);
       return hp <= limit ? null : `limit ${limit} HP, the stack has ${hp}`;
     },
+    aiTargets: (state, actorId) =>
+      living(state)
+        .filter((s) => s.id !== actorId)
+        .map((s) => [{ stack: s.id }]),
     resolve(fx, actorId, t) {
       fx.push(targetStack(t[0]) as StackId, fx.stack(actorId).hex, 6);
     },
@@ -254,6 +267,21 @@ export function registerGoblins(): void {
       }
       return null;
     },
+    aiTargets: (state, actorId) => {
+      const out: ActTarget[][] = [];
+      for (const s of friendsOf(state, actorId)) {
+        for (let dir = 0; dir < 6; dir++) {
+          let h = s.hex;
+          for (let i = 0; i < 4; i++) {
+            const n = stepHex(h, dir);
+            if (!inBounds(n)) break;
+            h = n;
+          }
+          if (!sameHex(h, s.hex)) out.push([{ stack: s.id }, { hex: h }]);
+        }
+      }
+      return out;
+    },
     resolve(fx, _actorId, t) {
       for (let i = 0; i + 1 < t.length; i += 2) {
         const id = targetStack(t[i]) as StackId;
@@ -272,6 +300,19 @@ export function registerGoblins(): void {
     kind: "command",
     targets: 1,
     check: (_s, _a, t) => (targetHex(t[0]) === null ? "choose a hex" : null),
+    aiTargets: (state, actorId) => {
+      const seen = new Set<string>();
+      const out: ActTarget[][] = [];
+      for (const e of enemiesOf(state, actorId)) {
+        for (const h of [e.hex, ...neighbors(e.hex)]) {
+          const k = `${h.col},${h.row}`;
+          if (!inBounds(h) || seen.has(k)) continue;
+          seen.add(k);
+          out.push([{ hex: h }]);
+        }
+      }
+      return out;
+    },
     resolve(fx, actorId, t) {
       const centre = targetHex(t[0]) as Hex;
       const side = fx.sideOf(actorId);

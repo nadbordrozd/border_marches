@@ -17,6 +17,8 @@
  *   auto=1         auto-resolve: AI on both sides, straight to the result
  *   speed=1|2|4    animation speed
  *   terrain=jungle battle ground
+ *   armies=humans,undead   a faction battle with heroes (debug-armies.ts);
+ *                  lean=magic gives both heroes the magic classes
  */
 
 import { GROUND_TERRAINS } from "../../assets/manifest.ts";
@@ -62,6 +64,7 @@ import { CREATURES } from "../../data/creatures.ts";
 import type { NeutralCreatureId } from "../../data/types.ts";
 import type { Route } from "../../router.ts";
 import { HEX_SIZE, STAGE_W, hexToStage } from "../../render/battle/geometry.ts";
+import { factionBattleSetup } from "./debug-armies.ts";
 import { runBattleScreen } from "./screen.ts";
 import type { Speed } from "./animate.ts";
 
@@ -264,7 +267,13 @@ export function startBattleDebug(route: Route): void {
   )
     ? (terrainParam as Terrain)
     : undefined;
-  const setup = sampleBattle(seed, terrain);
+  const setup =
+    factionBattleSetup(
+      p,
+      seed,
+      terrain ?? (GROUND_TERRAINS[seed % GROUND_TERRAINS.length] as Terrain),
+    ) ?? sampleBattle(seed, terrain);
+  if (p.has("armies")) registerSpells();
   const magic = p.get("magic") === "1";
   if (magic) {
     registerSpells();

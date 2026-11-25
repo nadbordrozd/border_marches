@@ -11,6 +11,9 @@ import { registerAbility, registerAct } from "../registry.ts";
 import type { StackId } from "../types.ts";
 import {
   commandC,
+  enemiesOf,
+  friendsOf,
+  oneEach,
   polarityCount,
   remainsCount,
   stackOf,
@@ -177,6 +180,7 @@ export function registerUndead(): void {
       if (!me || !e || e.side === me.side) return "choose an enemy stack";
       return isAdjacent(me.hex, e.hex) ? null : "it must be adjacent";
     },
+    aiTargets: (state, actorId) => oneEach(enemiesOf(state, actorId)),
     resolve(fx, actorId, t) {
       const me = fx.stack(actorId);
       fx.addCondition(targetStack(t[0]) as StackId, {
@@ -220,6 +224,8 @@ export function registerUndead(): void {
       }
       return null;
     },
+    aiTargets: (state, actorId) =>
+      oneEach(friendsOf(state, actorId).filter((s) => !s.summoned)),
     resolve(fx, _actorId, t) {
       for (const x of t) fx.setGetsUp(targetStack(x) as StackId, true);
     },
@@ -237,6 +243,10 @@ export function registerUndead(): void {
       const g = state.ground.find((x) => sameHex(x.hex, h));
       return g && g.class === "remains" ? null : "no remains there";
     },
+    aiTargets: (state) =>
+      state.ground
+        .filter((g) => g.class === "remains")
+        .map((g) => [{ hex: g.hex }]),
     resolve(fx, actorId, t) {
       const h = targetHex(t[0]) as Hex;
       const side = fx.sideOf(actorId);

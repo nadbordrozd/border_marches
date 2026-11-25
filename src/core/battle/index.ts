@@ -105,13 +105,14 @@ export {
   stackFightValue,
 } from "./setup.ts";
 export {
-  AI_VALUE_PER_HP_BY_TIER,
+  DEFAULT_AI_WEIGHTS,
   aiValuePerHp,
   chooseAiAction,
+  evaluateFor,
   scoreActions,
   stackValue,
 } from "./ai.ts";
-export type { ScoredAction } from "./ai.ts";
+export type { AiOptions, AiWeights, ScoredAction } from "./ai.ts";
 export {
   enemyIntents,
   rehearse,

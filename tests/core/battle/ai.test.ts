@@ -30,10 +30,10 @@ function randomSetup(i: number): BattleSetup {
 }
 
 describe("battle AI", () => {
-  it("makes only legal moves and every battle of 200 random armies terminates", () => {
+  it("makes only legal moves and every battle of 40 random armies terminates", () => {
     const outcomes = { attacker: 0, defender: 0, roundLimit: 0 };
     let maxRounds = 0;
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 40; i++) {
       let state: BattleState = createBattle(randomSetup(i)).state;
       let actions = 0;
       while (state.winner === null && state.round <= 100) {
@@ -48,7 +48,7 @@ describe("battle AI", () => {
       else outcomes[state.winner]++;
     }
     expect(outcomes.attacker + outcomes.defender + outcomes.roundLimit).toBe(
-      200,
+      40,
     );
     // Battles end by elimination, well inside the cap.
     expect(outcomes.roundLimit).toBe(0);

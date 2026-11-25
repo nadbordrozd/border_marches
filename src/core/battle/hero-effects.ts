@@ -284,6 +284,14 @@ registerAct({
     if (c === undefined) return "no such condition";
     return c.clock === null ? "the condition has no clock" : null;
   },
+  aiTargets: (state) =>
+    state.stacks.flatMap((s) =>
+      s.count > 0
+        ? s.conditions
+            .filter((c) => c.clock !== null)
+            .map((c) => [{ stack: s.id, condition: c.uid }])
+        : [],
+    ),
   resolve(fx, actorId, targets) {
     const t = targets[0];
     if (t === undefined || !("condition" in t)) return;

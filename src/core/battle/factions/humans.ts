@@ -15,6 +15,9 @@ import {
 import type { BattleStack, StackId } from "../types.ts";
 import {
   commandC,
+  enemiesOf,
+  friendsOf,
+  oneEach,
   polarityCount,
   sideFlags,
   stackOf,
@@ -94,6 +97,8 @@ export function registerHumans(): void {
       if (!isAdjacent(me.hex, other.hex)) return "it must be adjacent";
       return null;
     },
+    aiTargets: (state, actorId) =>
+      oneEach(friendsOf(state, actorId).filter((s) => s.id !== actorId)),
     resolve(fx, actorId, t) {
       const me = fx.stack(actorId);
       fx.addCondition(targetStack(t[0]) as StackId, {
@@ -254,6 +259,13 @@ export function registerHumans(): void {
       if (e.side === me.side) return "the second must be an enemy";
       return null;
     },
+    aiTargets: (state, actorId) =>
+      friendsOf(state, actorId).flatMap((f) =>
+        enemiesOf(state, actorId).map((e) => [
+          { stack: f.id },
+          { stack: e.id },
+        ]),
+      ),
     resolve(fx, actorId, t) {
       const c = commandC(fx.state, fx.sideOf(actorId));
       const friend = targetStack(t[0]) as StackId;
@@ -288,6 +300,14 @@ export function registerHumans(): void {
           return "a stack already bears Sworn";
       }
       return null;
+    },
+    aiTargets: (state, actorId) => {
+      const free = friendsOf(state, actorId).filter(
+        (s) => !s.conditions.some((c) => c.kind === "sworn"),
+      );
+      return free.flatMap((a, i) =>
+        free.slice(i + 1).map((b) => [{ stack: a.id }, { stack: b.id }]),
+      );
     },
     resolve(fx, _actorId, t) {
       for (let i = 0; i + 1 < t.length; i += 2) {
