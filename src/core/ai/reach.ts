@@ -3,9 +3,12 @@
  * rules of src/core/game/pathfinding.ts, with one difference: an object
  * entrance that only stops a walk (a site, a pickup, a mine) does not end
  * the search. A hero walking through it stops there, visits, and walks on
- * with its next move, so the ground behind it is reachable. Zones of
- * control, teleports and entrances that start a fight (another player's
- * town, a guarded bank) still end a walk.
+ * with its next move, so the ground behind it is reachable. Waystones
+ * (iteration 3, bead bzc.23) carry the search to their exit (a one-way
+ * waystone's exit, a two-way waystone's twin) when the hero could stand
+ * there; a path through one ends on the waystone (the hero is carried
+ * and plans again from the exit). Zones of control and entrances that
+ * start a fight (another player's town, a guarded bank) still end a walk.
  */
 import { DIRECTIONS_8, inBounds } from "../map/types.ts";
 import {
@@ -27,6 +30,8 @@ export interface Reach {
   parent: Map<number, number>;
   ctx: MoveContext;
   start: number;
+  /** Cells reached by a waystone (their parent is the waystone). */
+  jumps: Set<number>;
 }
 
 /** Binary min-heap of (priority, insertion order) -> cell. */
@@ -110,6 +115,34 @@ function passThrough(state: GameState, hero: HeroState): Set<number> {
   return out;
 }
 
+/** Waystone entrance cell -> the cell it carries a hero to. */
+export function waystoneExits(state: GameState): Map<number, number> {
+  const w = state.map.width;
+  const out = new Map<number, number>();
+  for (const obj of state.map.objects) {
+    if (obj.kind !== "teleport") continue;
+    const type = obj.data["type"];
+    let to: { x: number; y: number } | undefined;
+    if (type === "one-way-waystone") {
+      const exit = obj.data["exit"];
+      if (Array.isArray(exit)) {
+        to = { x: Number(exit[0]), y: Number(exit[1]) };
+      }
+    } else if (type === "two-way-waystone") {
+      const twin = state.map.objects.find(
+        (o) =>
+          o.id !== obj.id &&
+          o.data["type"] === "two-way-waystone" &&
+          o.data["pair"] === obj.data["pair"],
+      );
+      if (twin !== undefined) to = { x: twin.x, y: twin.y };
+    }
+    if (to === undefined || !inBounds(state.map, to.x, to.y)) continue;
+    out.set(obj.y * w + obj.x, to.y * w + to.x);
+  }
+  return out;
+}
+
 /** Every cell the hero can reach within `budget` movement points. */
 export function reachFor(
   state: GameState,
@@ -123,6 +156,8 @@ export function reachFor(
   const cost = new Map<number, number>([[start, 0]]);
   const parent = new Map<number, number>();
   const through = passThrough(state, hero);
+  const exits = waystoneExits(state);
+  const jumps = new Set<number>();
   const open = new Heap();
   open.push(0, start);
   const closed = new Set<number>();
@@ -138,7 +173,29 @@ export function reachFor(
       // a hero starting inside a zone walked "through" the stack, a fight
       // its estimate never saw).
       if (ctx.monsterAt.has(cur)) continue;
-      if (ctx.stops.has(cur) && !through.has(cur)) continue;
+      // A waystone carries the hero to its exit at no extra cost; the
+      // exit (even a twin waystone) is where it walks on from.
+      const exit = jumps.has(cur) ? undefined : exits.get(cur);
+      if (exit !== undefined) {
+        const ex = exit % w;
+        const ey = (exit - ex) / w;
+        const g = cost.get(cur) ?? 0;
+        const old = cost.get(exit);
+        if (
+          !closed.has(exit) &&
+          (old === undefined || g < old) &&
+          canEnter(ctx, ex, ey)
+        ) {
+          cost.set(exit, g);
+          parent.set(exit, cur);
+          jumps.add(exit);
+          open.push(g, exit);
+        }
+        continue;
+      }
+      if (ctx.stops.has(cur) && !through.has(cur) && !jumps.has(cur)) {
+        continue;
+      }
     }
     const gc = cost.get(cur) ?? 0;
     for (const [dx, dy] of DIRECTIONS_8) {
@@ -155,10 +212,11 @@ export function reachFor(
       if (old !== undefined && old <= ng) continue;
       cost.set(ni, ng);
       parent.set(ni, cur);
+      jumps.delete(ni);
       open.push(ng, ni);
     }
   }
-  return { cost, parent, ctx, start };
+  return { cost, parent, ctx, start, jumps };
 }
 
 /** The steps from the hero to `cell` (with days), or null if unreached. */
@@ -169,7 +227,7 @@ export function pathIn(
 ): PathStep[] | null {
   if (!reach.cost.has(cell) || cell === reach.start) return null;
   const w = reach.ctx.map.width;
-  const cells: number[] = [];
+  let cells: number[] = [];
   for (let c = cell; c !== reach.start;) {
     cells.push(c);
     const p = reach.parent.get(c);
@@ -177,6 +235,10 @@ export function pathIn(
     c = p;
   }
   cells.reverse();
+  // Through a waystone: the walk ends on it (the hero is carried on).
+  const jump = cells.findIndex((c) => reach.jumps.has(c));
+  if (jump >= 0) cells = cells.slice(0, jump);
+  if (cells.length === 0) return null;
   const steps: PathStep[] = [];
   let prev = reach.start;
   let total = 0;

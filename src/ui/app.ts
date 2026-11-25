@@ -1,10 +1,18 @@
 /**
  * The game route: main menu with the new-game setup (a random map by seed
- * and size with two to four players, or a named map; the human's faction)
- * and Continue when a save exists, then the adventure screen until the
- * game ends or the player quits back to the menu.
+ * and size with two to four players, or a named map; the human's faction;
+ * the computer players' difficulty) and Continue when a save exists, then
+ * the adventure screen until the game ends or the player quits back to the
+ * menu.
  */
 import { newGame } from "../core/game/index.ts";
+import {
+  applyDifficulty,
+  DIFFICULTIES,
+  DIFFICULTY_INFO,
+  isDifficulty,
+  type Difficulty,
+} from "../core/ai/difficulty.ts";
 import type { GameState, PlayerSetup } from "../core/game/index.ts";
 import { FACTIONS, playableFactions } from "../data/factions.ts";
 import {
@@ -53,6 +61,11 @@ export interface GameSetup {
    * player count come from it, and seed, size and players are ignored.
    */
   map?: string;
+  /**
+   * The computer players' difficulty (bead bzc.23; default normal): kept
+   * in the state; Hard also gives them a small head start.
+   */
+  difficulty?: Difficulty;
 }
 
 /**
@@ -99,6 +112,10 @@ export function playerSetups(setup: GameSetup): PlayerSetup[] {
  * A named map is built from its seed and edits instead (bead bzc.18).
  */
 export function createGame(setup: GameSetup): GameState {
+  return applyDifficulty(createMapGame(setup), setup.difficulty ?? "normal");
+}
+
+function createMapGame(setup: GameSetup): GameState {
   if (setup.map !== undefined) {
     const def = findNamedMap(setup.map);
     if (def === undefined) throw new Error(`no map called ${setup.map}`);
@@ -221,6 +238,33 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
     };
     renderFactions();
 
+    // The computer players' difficulty (bead bzc.23).
+    const wantedLevel = params.get("difficulty");
+    let difficulty: Difficulty = isDifficulty(wantedLevel)
+      ? wantedLevel
+      : "normal";
+    const difficultyRow = el("div.gm-size-row");
+    const difficultyBlurb = el("p.gm-faction-blurb");
+    const renderDifficulty = (): void => {
+      difficultyRow.replaceChildren();
+      difficultyBlurb.textContent = DIFFICULTY_INFO[difficulty].blurb;
+      for (const d of DIFFICULTIES) {
+        const info = DIFFICULTY_INFO[d];
+        const b = button(
+          info.name,
+          () => {
+            difficulty = d;
+            renderDifficulty();
+          },
+          "gm-btn gm-size",
+        );
+        setTip(b, info.blurb);
+        if (d === difficulty) b.classList.add("gm-selected");
+        difficultyRow.append(b);
+      }
+    };
+    renderDifficulty();
+
     // Map: a random map from the fields below, or a named map.
     let mapId: string | null =
       findNamedMap(params.get("map") ?? "")?.id ?? null;
@@ -312,6 +356,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
             size,
             players,
             faction,
+            difficulty,
             ...(mapId !== null ? { map: mapId } : {}),
           });
           saveGame(browserStorage(), state);
@@ -353,6 +398,8 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
           playersField,
           el("div.gm-field", el("label", you, "Your faction"), factionRow),
           blurb,
+          el("div.gm-field", el("label", "Computer players"), difficultyRow),
+          difficultyBlurb,
           seedField,
           newButton,
         ),

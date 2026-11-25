@@ -36,6 +36,7 @@ import {
 } from "../map/generate.ts";
 import { buildNamedMap, findNamedMap } from "../map/named.ts";
 import { isPassable } from "../map/types.ts";
+import { applyDifficulty, type Difficulty } from "./difficulty.ts";
 
 /** One player's standing at the end of a day. */
 export interface PlayerMetrics {
@@ -82,6 +83,13 @@ export interface MatchOptions {
   /** The controller of each player. */
   controller: (player: number) => PlayerController;
   resolver: BattleResolver;
+  /**
+   * The game's difficulty (iteration 3; default normal): set on the state,
+   * with Hard's starting bonus for every player not in `noBonus`.
+   */
+  difficulty?: Difficulty;
+  /** Players without the difficulty's starting bonus (a passive human). */
+  noBonus?: number[];
   /** Called after each finished day. */
   onDay?: (
     metrics: PlayerMetrics[],
@@ -115,6 +123,12 @@ export interface MatchResult {
   firstPlayerFight: number | null;
   firstTownLoss: number | null;
   playerFights: Array<{ day: number; attacker: number; defender: number }>;
+  /**
+   * Towns taken from another player (iteration 3): day, town, taker and
+   * loser. A town taken again within two weeks of changing hands is a
+   * flip (back and forth).
+   */
+  townsTaken: Array<{ day: number; town: string; by: number; from: number }>;
   /** Day each player was eliminated (null: still in). */
   eliminatedOn: Array<number | null>;
   /**
@@ -281,6 +295,9 @@ export function playMatch(options: MatchOptions): MatchResult {
     options.players,
     options.named,
   );
+  if (options.difficulty !== undefined) {
+    state = applyDifficulty(state, options.difficulty, options.noBonus);
+  }
   const guardsAtStart = Object.keys(state.monsters).length;
   // Remember each decided action: one the rules refused shows up as the
   // driver's own end-turn (a controller bug: it cost that player its turn).
@@ -341,6 +358,7 @@ export function playMatch(options: MatchOptions): MatchResult {
   let firstPlayerFight: number | null = null;
   let firstTownLoss: number | null = null;
   const playerFights: MatchResult["playerFights"] = [];
+  const townsTaken: MatchResult["townsTaken"] = [];
   const eliminatedOn: Array<number | null> = state.players.map(() => null);
   while (state.status === "playing" && state.day <= options.days) {
     const day = state.day;
@@ -377,6 +395,7 @@ export function playMatch(options: MatchOptions): MatchResult {
         e.from !== undefined
       ) {
         firstTownLoss ??= day;
+        townsTaken.push({ day, town: e.townId, by: e.owner, from: e.from });
       }
     }
     // Idle: alive before and after and never moved (same cell, no move).
@@ -419,6 +438,7 @@ export function playMatch(options: MatchOptions): MatchResult {
     firstPlayerFight,
     firstTownLoss,
     playerFights,
+    townsTaken,
     eliminatedOn,
     battleErrors,
     lastStands,

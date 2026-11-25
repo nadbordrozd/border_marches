@@ -7,8 +7,10 @@
  * is set up exactly as the rules would (battleSetup) and auto-resolved by
  * the game's resolver, so the estimate knows the survivors. That resolver
  * plays the battle AI's fast mode (UNWATCHED_BATTLE_AI in
- * core/battle/resolver.ts, bead bzc.37); {@link predictedMs} still counts
- * in the full mode's milliseconds, so the budgets are unchanged.
+ * core/battle/resolver.ts, bead bzc.37); the AI's turn budget counts it
+ * with {@link fastPredictedMs} (iteration 3, bead bzc.23), so a turn
+ * affords about four times the simulations the full mode's
+ * {@link predictedMs} allowed.
  */
 import { getCreature } from "../../data/creatures.ts";
 import { deriveSeed } from "../rng.ts";
@@ -109,6 +111,18 @@ function enemyHp(side: BattleSide): number {
 export function predictedMs(setup: BattleSetup): number {
   const n = setup.attacker.stacks.length + setup.defender.stacks.length;
   return 5 * n * n;
+}
+
+/**
+ * Predicted milliseconds of one simulated battle with the battle AI's fast
+ * mode (bead bzc.37; the default of {@link createBattleResolver} and so of
+ * the adventure AI's simulations): 4.2-5.2 times cheaper than the full
+ * mode by the timing table in docs/design/AI.md, so 1.2 ms per stack
+ * squared, on the same scale as {@link predictedMs} (iteration 3).
+ */
+export function fastPredictedMs(setup: BattleSetup): number {
+  const n = setup.attacker.stacks.length + setup.defender.stacks.length;
+  return 1.2 * n * n;
 }
 
 /**

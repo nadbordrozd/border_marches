@@ -19,3 +19,13 @@ export {
   chooseHire,
   chooseRecruit,
 } from "./economy.ts";
+export {
+  applyDifficulty,
+  DIFFICULTIES,
+  DIFFICULTY,
+  DIFFICULTY_INFO,
+  difficultyOf,
+  isDifficulty,
+  type Difficulty,
+  type DifficultyParams,
+} from "./difficulty.ts";

@@ -93,3 +93,34 @@ describe("named maps in new-game setup", { timeout: 60_000 }, () => {
     ).toThrow(/nowhere/);
   });
 });
+
+describe(
+  "difficulty in new-game setup (bead bzc.23)",
+  { timeout: 60_000 },
+  () => {
+    const setup = {
+      seed: 3,
+      size: "S" as const,
+      players: 2,
+      faction: "humans" as const,
+    };
+
+    it("is normal by default and kept in the state", () => {
+      const s = createGame(setup);
+      expect(s.difficulty).toBe("normal");
+      expect(createGame({ ...setup, difficulty: "easy" }).difficulty).toBe(
+        "easy",
+      );
+    });
+
+    it("gives the computer, never the human, Hard's head start", () => {
+      const normal = createGame(setup);
+      const hard = createGame({ ...setup, difficulty: "hard" });
+      expect(hard.difficulty).toBe("hard");
+      expect(hard.players[0]!.resources).toEqual(normal.players[0]!.resources);
+      expect(hard.players[1]!.resources.gold).toBeGreaterThan(
+        normal.players[1]!.resources.gold,
+      );
+    });
+  },
+);

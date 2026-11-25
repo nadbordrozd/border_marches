@@ -312,6 +312,11 @@ export interface GameState {
    * books and mana, adventure-spell day effects. Absent in older saves.
    */
   magic?: MagicGameState;
+  /**
+   * The computer players' difficulty (src/core/ai/difficulty.ts, bead
+   * bzc.23), chosen in the new-game setup. Absent: normal (older saves).
+   */
+  difficulty?: "easy" | "normal" | "hard";
 }
 
 export type MoveStopReason =

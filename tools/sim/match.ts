@@ -23,7 +23,12 @@
  *   --no-openings        no faction openings in week one (ablation)
  *   --battle-ai fast|full   the battle AI mode of every battle and of the
  *                       AI's fight simulations (default the game's:
- *                       fast, UNWATCHED_BATTLE_AI in resolver.ts)
+ *                       fast, UNWATCHED_BATTLE_AI in resolver.ts); full
+ *                       also counts the turn budget in the full mode's
+ *                       predicted milliseconds
+ *   --difficulty easy|normal|hard   the AI's difficulty (default normal;
+ *                       hard gives every AI player, not the --idle one,
+ *                       its starting bonus)
  *   --out <file.json>    save every day's metrics (default
  *                        .orchestration/sim/match-<ai>-<size><players>.json)
  *
@@ -35,6 +40,8 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { AdventureAi } from "../../src/core/ai/index.ts";
+import { isDifficulty } from "../../src/core/ai/difficulty.ts";
+import { predictedMs } from "../../src/core/ai/strength.ts";
 import { playMatch, type PlayerMetrics } from "../../src/core/ai/match.ts";
 import { createBattleResolver } from "../../src/core/battle/resolver.ts";
 import {
@@ -92,6 +99,10 @@ const battleAi = opt("battle-ai", "");
 if (battleAi !== "" && battleAi !== "fast" && battleAi !== "full")
   throw new Error(`unknown --battle-ai ${battleAi}`);
 const resolver = createBattleResolver(battleAi === "" ? {} : { ai: battleAi });
+const difficultyArg = opt("difficulty", "normal");
+if (!isDifficulty(difficultyArg))
+  throw new Error(`unknown --difficulty ${difficultyArg}`);
+const difficulty = difficultyArg;
 
 function describe(a: GameAction, before: GameState): string {
   switch (a.type) {
@@ -166,6 +177,7 @@ function makeController(): (player: number) => PlayerController {
     families: !args.includes("--no-families"),
     openings: !args.includes("--no-openings"),
     ...(battleAi === "" ? {} : { resolver }),
+    ...(battleAi === "full" ? { simCost: predictedMs } : {}),
   });
   current = ai;
   // --idle <p>: that player only ends its turns (a passive human).
@@ -247,7 +259,7 @@ const header =
 const saved: unknown[] = [];
 for (const seed of seeds) {
   console.log(
-    `\n== ${aiName} seed ${seed} ${named !== undefined ? `map ${named}` : `size ${size} players ${players}`} days ${days}`,
+    `\n== ${aiName} ${difficulty} seed ${seed} ${named !== undefined ? `map ${named}` : `size ${size} players ${players}`} days ${days}`,
   );
   console.log(header);
   const controller = makeController();
@@ -259,6 +271,8 @@ for (const seed of seeds) {
     days,
     controller,
     resolver,
+    difficulty,
+    ...(idlePlayer === null ? {} : { noBonus: [idlePlayer] }),
     ...(trace === null && explain === null
       ? {}
       : {
@@ -315,6 +329,7 @@ for (const seed of seeds) {
     firstPlayerFight: result.firstPlayerFight,
     firstTownLoss: result.firstTownLoss,
     playerFights: result.playerFights,
+    townsTaken: result.townsTaken,
     eliminatedOn: result.eliminatedOn,
     guardsClearedD56: cleared56,
     turnP95: percentile(all, 0.95),
