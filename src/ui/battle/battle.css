@@ -581,6 +581,60 @@
   color: #f0e6c8;
 }
 
+/* A stack's conditions on hover (UI2-04): the card and its keyword boxes
+   are framed themselves (keywords.css), so the tip drops its own frame. */
+.bm-tip.bm-tip-kw {
+  transform: none;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  white-space: normal;
+  text-align: left;
+}
+
+.bm-cond-card {
+  width: 300px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: #f0e6c8;
+}
+
+.bm-cond-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.bm-cond-row + .bm-cond-row {
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px solid rgb(255 214 92 / 30%);
+}
+
+.bm-cond-row .gm-icon {
+  flex: 0 0 auto;
+}
+
+.bm-cond-name {
+  font:
+    bold 13px Georgia,
+    serif;
+}
+
+.bm-cond-boon {
+  color: #a6dc7e;
+}
+
+.bm-cond-bane {
+  color: #f29a7e;
+}
+
+.bm-cond-meta {
+  color: #a89a80;
+  font-size: 11px;
+}
+
 .bm-tip-cond + .bm-tip-cond {
   margin-top: 4px;
   padding-top: 4px;

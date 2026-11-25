@@ -31,7 +31,7 @@ export interface UnitView {
   alpha: number;
   /** Red hit flash, 0..1. */
   flash: number;
-  /** Condition pips beside the count chip, in list order. */
+  /** Conditions in list order, drawn as badges under the count chip. */
   pips: ConditionPip[];
   defending: boolean;
   visible: boolean;
@@ -44,8 +44,8 @@ export interface UnitView {
 /** A condition icon popping on (landed) or fading off (expired). */
 export interface Badge {
   readonly stackId: StackId;
-  readonly glyph: string;
-  readonly color: string;
+  /** The condition kind, whose icon pops. */
+  readonly kind: string;
   readonly bane: boolean;
   readonly mode: "land" | "expire";
   readonly t0: number;

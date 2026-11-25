@@ -267,8 +267,13 @@ function decorate(state: BattleState): BattleState {
       });
       fx.addCondition("d0", { kind: "jinxed", size: 25, clock: 3 });
     }
-    if (has("d1"))
+    if (has("d1")) {
       fx.addCondition("d1", { kind: "venomed", size: 3, clock: 2 });
+      // Four conditions: three badges and a "+1" (UI2-04).
+      fx.addCondition("d1", { kind: "shaken", clock: 2 });
+      fx.addCondition("d1", { kind: "burning", size: 2, clock: 2 });
+      fx.addCondition("d1", { kind: "lucky" });
+    }
     fx.addGround({ hex: { col: 6, row: 5 }, kind: "demo-embers", size: 5 });
     fx.addGround({ hex: { col: 7, row: 4 }, kind: "demo-embers", size: 5 });
     fx.addGround({ hex: { col: 5, row: 8 }, kind: "corpse" });

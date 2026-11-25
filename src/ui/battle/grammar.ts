@@ -32,7 +32,7 @@ import { conjugate, creatureName } from "./preview.ts";
 
 export {
   SCHOOL_COLORS,
-  conditionGlyph,
+  badgeAt,
   conditionPips,
   groundMarks,
   linkLines,
@@ -70,6 +70,18 @@ function clockLabel(clock: number | null): string {
  * for 2 rounds."
  */
 export function conditionTooltip(state: BattleState, c: Condition): string {
+  const p = conditionParts(state, c);
+  return `${p.name} (${p.meta}): ${p.text}`;
+}
+
+/**
+ * A condition's tooltip in parts: its name, the "Bloom bane, size 3, 2
+ * rounds left" line and what it does now (with the far end of a link).
+ */
+export function conditionParts(
+  state: BattleState,
+  c: Condition,
+): { readonly name: string; readonly meta: string; readonly text: string } {
   const def = conditionKind(c.kind);
   const bits = [`${SCHOOL_NAMES[c.school]} ${c.polarity}`];
   if (c.hold) bits.push("Hold");
@@ -81,12 +93,12 @@ export function conditionTooltip(state: BattleState, c: Condition): string {
         ? `gate ${c.gate.max} HP`
         : `gate tier ${c.gate.max}`,
     );
-  let text = `${def.name} (${bits.join(", ")}): ${def.text(c)}`;
+  let text = def.text(c);
   if (c.link !== null) {
     const far = state.stacks.find((s) => s.id === c.link);
     if (far) text += ` Linked to ${creatureName(far.creature, far.count)}.`;
   }
-  return text;
+  return { name: def.name, meta: bits.join(", "), text };
 }
 
 export function groundTooltip(g: GroundFeature): string {

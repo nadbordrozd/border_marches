@@ -793,8 +793,7 @@ export class Animator {
       if (deco) {
         this.scene.badges.push({
           stackId: u.id,
-          glyph: pip.glyph,
-          color: pip.color,
+          kind: c.kind,
           bane: pip.bane,
           mode: "land",
           t0: this.scene.now,
@@ -860,8 +859,7 @@ export class Animator {
       if (deco) {
         this.scene.badges.push({
           stackId: u.id,
-          glyph: pip.glyph,
-          color: pip.color,
+          kind: c.kind,
           bane: pip.bane,
           mode: "expire",
           t0: this.scene.now,

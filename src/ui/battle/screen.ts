@@ -82,10 +82,11 @@ import { flipChildren } from "../anim.ts";
 import type { Speed } from "./animate.ts";
 import {
   attackChainLines,
+  badgeAt,
   conditionTooltip,
-  groundTooltip,
   intentMarkers,
 } from "./grammar.ts";
+import { conditionCard } from "./condition-card.ts";
 import { roundLimitInfo, stackInfo } from "./info.ts";
 import { QUEUE_MAX, queueCount, queueSlots, turnQueue } from "./queue.ts";
 import type { QueueEntry } from "./queue.ts";
@@ -740,6 +741,7 @@ class BattleScreen {
       background: this.background,
       obstacles: blockingHexes(this.state),
       activeId: this.animating ? null : this.state.activeStackId,
+      hoverId: this.animating ? null : this.hoveredStackId(),
     });
     this.scene.overlay = overlay;
     this.drawBeacon(ctx);
@@ -1063,6 +1065,7 @@ class BattleScreen {
   /** The floating damage tooltip above the hovered target. */
   private placeTip(): void {
     const it = this.intent;
+    this.tip.classList.remove("bm-tip-kw");
     const modeTip = this.modeTip();
     if (modeTip !== null) {
       this.tip.replaceChildren(...modeTip.lines);
@@ -1257,37 +1260,60 @@ class BattleScreen {
     return { hex: at, lines };
   }
 
-  /** Hover tooltip: a stack's conditions, or the ground under the pointer. */
+  /**
+   * The stack under the pointer: one whose condition badges are pointed at,
+   * else the one standing on the pointed hex (UI2-04: its links show).
+   */
+  private hoveredStackId(): StackId | null {
+    if (this.pointer === null) return null;
+    const badge = badgeAt(this.scene.units.values(), this.pointer);
+    if (badge !== null) return badge;
+    const h = pointAtField(this.state, this.pointer).hex;
+    if (h === null) return null;
+    return (
+      this.state.stacks.find((s) => isAlive(s) && sameHex(s.hex, h))?.id ?? null
+    );
+  }
+
+  /**
+   * Hover card: a stack's conditions with their icons and keyword boxes
+   * (pointing at its body or its badges), or the ground under the pointer.
+   */
   private placeInfoTip(): void {
-    const at = this.pointer ? pointAtField(this.state, this.pointer) : null;
-    const h = at?.hex ?? null;
     this.tip.hidden = true;
-    if (h === null || this.animating) return;
-    const stack = this.state.stacks.find(
-      (s) => isAlive(s) && s.hex.col === h.col && s.hex.row === h.row,
-    );
-    const lines: string[] = [];
-    if (stack) {
-      for (const c of stack.conditions)
-        lines.push(conditionTooltip(this.state, c));
-      if (stack.wary > 0) lines.push(`Wary: refuses Holds (${stack.wary})`);
-    }
-    const g = this.state.ground.find(
-      (x) => x.hex.col === h.col && x.hex.row === h.row,
-    );
-    if (g && g.class !== "blocking") lines.push(groundTooltip(g));
-    if (lines.length === 0) return;
-    this.tip.replaceChildren(
-      ...lines.map((l) =>
-        rulesText(l, { tag: "div", className: "bm-tip-cond" }),
-      ),
-    );
-    this.tip.classList.remove("bm-below");
+    this.tip.classList.remove("bm-tip-kw");
+    if (this.pointer === null || this.animating) return;
+    const badge = badgeAt(this.scene.units.values(), this.pointer);
+    const h =
+      badge !== null
+        ? getStack(this.state, badge).hex
+        : pointAtField(this.state, this.pointer).hex;
+    if (h === null) return;
+    const stack =
+      this.state.stacks.find((s) => isAlive(s) && sameHex(s.hex, h)) ?? null;
+    const g =
+      badge !== null
+        ? null
+        : (this.state.ground.find((x) => sameHex(x.hex, h)) ?? null);
+    const card = conditionCard(this.state, stack, g);
+    if (card === null) return;
+    this.tip.replaceChildren(card);
+    this.tip.classList.add("bm-tip-kw");
     this.tip.hidden = false;
+    // Beside the stack (right, else left), level with its body and kept
+    // inside the stage, so the stack and its badges stay in view.
+    this.tip.classList.remove("bm-below");
     const c = hexToStage(h);
-    const p = this.toWrap({ x: c.x, y: c.y - 70 });
-    this.tip.style.left = `${Math.round(p.x)}px`;
-    this.tip.style.top = `${Math.round(p.y)}px`;
+    const w = this.tip.offsetWidth;
+    const tall = this.tip.offsetHeight;
+    const right = this.toWrap({ x: c.x + 34, y: c.y - 16 });
+    const left = this.toWrap({ x: c.x - 34, y: c.y - 16 });
+    const roomW = this.stageWrap.clientWidth;
+    const roomH = this.stageWrap.clientHeight;
+    const x = right.x + w <= roomW - 4 || left.x - w < 4 ? right.x : left.x - w;
+    const y = Math.min(Math.max(4, right.y - tall / 2), roomH - tall - 4);
+    this.tip.style.left = `${Math.round(Math.max(4, x))}px`;
+    this.tip.style.top = `${Math.round(Math.max(4, y))}px`;
   }
 
   // ----------------------------------------------------------------- HUD

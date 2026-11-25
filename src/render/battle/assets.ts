@@ -18,7 +18,7 @@ import type {
 } from "../../assets/manifest.ts";
 import { CREATURES, isCreatureId } from "../../data/creatures.ts";
 import type { Terrain } from "../../core/map/types.ts";
-import { hexIndex } from "../../core/battle/index.ts";
+import { conditionKindIds, hexIndex } from "../../core/battle/index.ts";
 import type { Hex } from "../../core/battle/index.ts";
 import { hashInts } from "../../core/rng.ts";
 import { iconFor } from "../../assets/icons.ts";
@@ -56,6 +56,57 @@ export async function preloadGroundIcons(
       ),
     ),
   );
+}
+
+/** 16 px condition icons by kind, once loaded (badges under count chips). */
+const conditionIcons = new Map<string, CanvasImageSource>();
+
+/**
+ * A condition's 16 px badge icon (`iconFor("condition", kind, 16)`), or
+ * null while it loads; the first call starts the load. A kind without a
+ * 16 px icon (Sworn and Challenged until bead border_marches-9is, demo
+ * kinds) gets the condition fallback, reduced once to 16 px.
+ */
+export function conditionIcon(kind: string): CanvasImageSource | null {
+  const have = conditionIcons.get(kind);
+  if (have) return have;
+  if (typeof Image === "undefined") return null;
+  void loadConditionIcon(kind);
+  return null;
+}
+
+const conditionIconsAsked = new Set<string>();
+
+async function loadConditionIcon(kind: string): Promise<void> {
+  if (conditionIconsAsked.has(kind)) return;
+  conditionIconsAsked.add(kind);
+  const ref = iconFor("condition", kind, 16);
+  try {
+    const img = await loadImage(ref.asset);
+    conditionIcons.set(kind, ref.asset.w === 16 ? img : reduceTo16(img));
+  } catch {
+    // Missing file: the badge plate is drawn empty.
+  }
+}
+
+/** A 32 px fallback drawn once at 16 px (smoothed, so it stays legible). */
+function reduceTo16(img: HTMLImageElement): CanvasImageSource {
+  const c = document.createElement("canvas");
+  c.width = 16;
+  c.height = 16;
+  const ctx = c.getContext("2d");
+  if (!ctx) return img;
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  ctx.drawImage(img, 0, 0, 16, 16);
+  return c;
+}
+
+/** Loads the badge icons of these condition kinds now. */
+export async function preloadConditionIcons(
+  kinds: readonly string[],
+): Promise<void> {
+  await Promise.all(kinds.map(loadConditionIcon));
 }
 
 /** Every ground kind with an icon of its own. */
@@ -171,7 +222,10 @@ export async function loadBattleArt(
   obstacles: readonly Hex[],
 ): Promise<BattleArt> {
   const groundP = loadImage(GROUND_TEXTURES[terrain]);
-  const iconsP = preloadGroundIcons(GROUND_ICON_KINDS);
+  const iconsP = Promise.all([
+    preloadGroundIcons(GROUND_ICON_KINDS),
+    preloadConditionIcons(conditionKindIds()),
+  ]);
   const unitEntries = await Promise.all(
     [...new Set(creatureIds)].map(async (id) => {
       const asset = unitAssetFor(id);

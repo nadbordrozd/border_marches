@@ -55,9 +55,11 @@ describe("battle grammar view", () => {
     });
     expect(conditionPips(s, "d0")).toEqual([
       expect.objectContaining({
-        glyph: "F",
+        kind: "frozen",
         color: SCHOOL_COLORS.storm,
         bane: true,
+        hold: true,
+        linked: false,
       }),
     ]);
     expect(conditionTooltip(s, getStack(s, "d0").conditions[0]!)).toBe(

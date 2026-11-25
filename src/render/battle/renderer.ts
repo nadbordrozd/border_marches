@@ -13,9 +13,17 @@ import {
   hexFromIndex,
   hexIndex,
 } from "../../core/battle/index.ts";
-import type { Hex } from "../../core/battle/index.ts";
+import type { Hex, StackId } from "../../core/battle/index.ts";
 import type { BattleArt } from "./assets.ts";
-import { groundIcon } from "./assets.ts";
+import { conditionIcon, groundIcon } from "./assets.ts";
+import {
+  BADGE_SIZE,
+  CHIP_DX,
+  CHIP_DY,
+  CHIP_H,
+  badgeRects,
+  visibleLinks,
+} from "./grammar-view.ts";
 import {
   HEX_SIZE,
   STAGE_H,
@@ -44,7 +52,7 @@ export const SIDE_COLORS = {
 } as const;
 
 const NUMBER_FONT = "bold 12px Verdana, Geneva, sans-serif";
-const PIP_FONT = "bold 8px Verdana, Geneva, sans-serif";
+const MORE_FONT = "bold 10px Verdana, Geneva, sans-serif";
 
 function hexPath(ctx: CanvasRenderingContext2D, h: Hex, inset = 0): void {
   const pts = hexCorners(h, inset);
@@ -589,9 +597,9 @@ function drawChip(
   const text = String(u.count);
   ctx.font = NUMBER_FONT;
   const w = Math.max(20, Math.ceil(ctx.measureText(text).width) + 10);
-  const h = 15;
-  const x = Math.round(u.x + 4);
-  const y = Math.round(u.y + 2);
+  const h = CHIP_H;
+  const x = Math.round(u.x + CHIP_DX);
+  const y = Math.round(u.y + CHIP_DY);
   ctx.globalAlpha = u.alpha;
   ctx.fillStyle = SIDE_COLORS[u.side].chip;
   ctx.strokeStyle = active ? "#ffd65c" : "#0d0b08";
@@ -604,27 +612,70 @@ function drawChip(
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillText(text, x + w / 2, y + h / 2 + 0.5);
-  // Pips left of the chip: blue Defend, then one per condition in the
-  // school's colour with a placeholder glyph (banes ringed dark red).
-  let px = x - 8;
-  const pip = (color: string, glyph: string, ring: string): void => {
-    ctx.fillStyle = color;
-    ctx.strokeStyle = ring;
+  // Defend: a blue pip left of the chip.
+  if (u.defending) {
+    ctx.fillStyle = "#5aa8ff";
+    ctx.strokeStyle = "#0d0b08";
     ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.arc(px, y + h / 2, 6, 0, Math.PI * 2);
+    ctx.arc(x - 8, y + h / 2, 6, 0, Math.PI * 2);
     ctx.fill();
     ctx.stroke();
-    if (glyph !== "") {
-      ctx.fillStyle = "#0d0b08";
-      ctx.font = PIP_FONT;
-      ctx.fillText(glyph, px, y + h / 2 + 0.5);
-    }
-    px -= 13;
-  };
-  if (u.defending) pip("#5aa8ff", "", "#0d0b08");
-  for (const p of u.pips) pip(p.color, p.glyph, p.bane ? "#5a0a0a" : "#0d0b08");
+  }
+  // Conditions: icon badges in a row under the chip, then "+N".
+  for (const r of badgeRects(u, u.pips)) {
+    if (r.pip === null) drawMorePlate(ctx, r.x, r.y, r.w, r.more);
+    else
+      drawConditionPlate(ctx, r.x, r.y, r.pip.kind, r.pip.bane ? BANE : BOON);
+  }
   ctx.globalAlpha = 1;
+}
+
+/** Badge borders: the keyword tones of boons and banes (keywords.css). */
+const BOON = "#a6dc7e";
+const BANE = "#f29a7e";
+const PLATE = "#17110a";
+const INK = "#0d0b08";
+
+/** A condition's 16 px icon on a dark plate with a 1 px coloured border. */
+function drawConditionPlate(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  kind: string,
+  border: string,
+): void {
+  const s = BADGE_SIZE;
+  ctx.fillStyle = INK;
+  ctx.fillRect(x - 1, y - 1, s + 2, s + 2);
+  ctx.fillStyle = border;
+  ctx.fillRect(x, y, s, s);
+  ctx.fillStyle = PLATE;
+  ctx.fillRect(x + 1, y + 1, s - 2, s - 2);
+  const icon = conditionIcon(kind);
+  if (icon) ctx.drawImage(icon, x + 1, y + 1, 16, 16);
+}
+
+/** The "+N" plate after three badges. */
+function drawMorePlate(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  more: number,
+): void {
+  const s = BADGE_SIZE;
+  ctx.fillStyle = INK;
+  ctx.fillRect(x - 1, y - 1, w + 2, s + 2);
+  ctx.fillStyle = "#d8c89a";
+  ctx.fillRect(x, y, w, s);
+  ctx.fillStyle = PLATE;
+  ctx.fillRect(x + 1, y + 1, w - 2, s - 2);
+  ctx.fillStyle = "#f0e6c8";
+  ctx.font = MORE_FONT;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(`+${more}`, x + w / 2, y + s / 2 + 0.5);
 }
 
 /** Tinted hexes for non-blocking ground (hazards, surfaces, remains). */
@@ -670,9 +721,18 @@ function drawGround(ctx: CanvasRenderingContext2D, scene: Scene): void {
   }
 }
 
-/** Links as dashed lines in the school's colour, near end to far end. */
-function drawLinks(ctx: CanvasRenderingContext2D, scene: Scene): void {
-  for (const l of scene.links) {
+/**
+ * Links as dashed lines in the school's colour, near end to far end: only
+ * those touching the active or the hovered stack (UI2-04); the others are
+ * told by their badges.
+ */
+function drawLinks(
+  ctx: CanvasRenderingContext2D,
+  scene: Scene,
+  activeId: StackId | null,
+  hoverId: StackId | null,
+): void {
+  for (const l of visibleLinks(scene.links, activeId, hoverId)) {
     const a = scene.units.get(l.near);
     const b = scene.units.get(l.far);
     if (!a || !b || !a.visible || !b.visible) continue;
@@ -681,7 +741,7 @@ function drawLinks(ctx: CanvasRenderingContext2D, scene: Scene): void {
     ctx.save();
     ctx.lineCap = "round";
     ctx.strokeStyle = "#0d0b08";
-    ctx.lineWidth = 5;
+    ctx.lineWidth = 4;
     ctx.setLineDash([10, 6]);
     // The dashes creep from the bearer to the far end.
     ctx.lineDashOffset = scene.reduced ? 0 : -(Math.floor(scene.now / 60) % 16);
@@ -690,7 +750,7 @@ function drawLinks(ctx: CanvasRenderingContext2D, scene: Scene): void {
     ctx.lineTo(b.x, by);
     ctx.stroke();
     ctx.strokeStyle = l.color;
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2;
     ctx.stroke();
     ctx.setLineDash([]);
     ctx.lineDashOffset = 0;
@@ -776,13 +836,11 @@ function drawBadge(
   const k = (now - b.t0) / b.life;
   if (k < 0 || k > 1) return;
   let y = u.y - 64 - u.lift;
-  let r = 8;
   if (b.mode === "land") {
     // Drops in with a bounce, holds, then fades in quarter steps.
     if (k < 0.25) {
       const q = k / 0.25;
       y -= Math.round((1 - q) * 16 - Math.sin(q * Math.PI) * 4);
-      r = q < 0.5 ? 10 : 8;
     }
     ctx.globalAlpha = k < 0.75 ? 1 : Math.ceil(((1 - k) / 0.25) * 4) / 4;
   } else {
@@ -791,21 +849,27 @@ function drawBadge(
     ctx.globalAlpha =
       Math.floor(k * 16) % 2 === 0 ? Math.ceil((1 - k) * 4) / 4 : 0.25;
   }
-  const x = Math.round(u.x);
-  ctx.beginPath();
-  ctx.arc(x, y, r, 0, Math.PI * 2);
-  ctx.fillStyle = b.mode === "expire" ? "#8a8478" : b.color;
-  ctx.fill();
-  ctx.strokeStyle = b.bane ? "#5a0a0a" : "#0d0b08";
-  ctx.lineWidth = 2;
-  ctx.stroke();
-  ctx.fillStyle = "#0d0b08";
-  ctx.font = "bold 10px Verdana, Geneva, sans-serif";
-  ctx.fillText(b.glyph, x, y + 0.5);
-  if (b.mode === "expire") {
+  // The condition's icon on its badge plate, centred above the head.
+  const x = Math.round(u.x - BADGE_SIZE / 2);
+  const top = Math.round(y - BADGE_SIZE / 2);
+  const expire = b.mode === "expire";
+  drawConditionPlate(
+    ctx,
+    x,
+    top,
+    b.kind,
+    expire ? "#8a8478" : b.bane ? BANE : BOON,
+  );
+  if (expire) {
+    // Struck through.
+    ctx.strokeStyle = INK;
+    ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.moveTo(x - 6, y + 6);
-    ctx.lineTo(x + 6, y - 6);
+    ctx.moveTo(x + 2, top + BADGE_SIZE - 2);
+    ctx.lineTo(x + BADGE_SIZE - 2, top + 2);
+    ctx.stroke();
+    ctx.strokeStyle = "#c8c0b0";
+    ctx.lineWidth = 1.5;
     ctx.stroke();
   }
   ctx.globalAlpha = 1;
@@ -947,6 +1011,8 @@ export interface RenderInput {
   readonly background: HTMLCanvasElement;
   readonly obstacles: readonly Hex[];
   readonly activeId: string | null;
+  /** The stack under the pointer (its body or badges): its links show. */
+  readonly hoverId?: string | null;
 }
 
 /** Draws the whole stage; the caller sets the zoom transform. */
@@ -988,7 +1054,7 @@ export function renderBattle(
       if (dim) ctx.restore();
     } else drawObstacle(ctx, art, d.index);
   }
-  drawLinks(ctx, scene);
+  drawLinks(ctx, scene, input.activeId, input.hoverId ?? null);
   for (const u of scene.units.values()) {
     if (u.visible) drawChip(ctx, u, u.id === input.activeId);
   }
