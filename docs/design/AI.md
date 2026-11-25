@@ -6,6 +6,11 @@ Bead `border_marches-bzc.19`. The computer player of the adventure map:
 game (`src/ui/game.ts`). `SimpleAi` stays as the baseline of the match
 runner.
 
+The design below is v1; [Iteration 1](#iteration-1-bead-bzc21) at the end
+of this file lists what changed since (fight estimates, the turn budget,
+town defence, troop trips, puzzle sites) and supersedes v1 where they
+differ.
+
 ## Design
 
 Every `decide(state, player)` call looks at the state afresh and returns
@@ -164,3 +169,181 @@ any run.
 
 Raw per-day metrics: `.orchestration/sim/match-v1-*.json` and
 `final-*.txt` (git-ignored, reproducible with the commands above).
+
+## Iteration 1 (bead bzc.21)
+
+Played AI-against-AI matches on S (2 players), M (3 players) and both
+named maps, seeds 11-13, 84 days each; traced the worst players day by
+day; watched rounds in muted headless Chrome (port 6295, `?mute=1`, the
+human side only ending its turns); and replayed the passive-human case
+headless (`--idle 0`).
+
+### What was wrong (worst first)
+
+1. **Whole armies thrown away on "easy" fights.** The fast estimate called
+   fights at a fight-value ratio of 3 to 6 sure wins, and the one
+   simulation of a close call used the real battle's seed (a prophecy
+   that did not hold once anything changed). Before the 15-round limit
+   was adjudicated by fight value (bead bzc.24), the auto-battle could not
+   finish some stray stacks: 9 whipping boys held 59 undead troops (ratio
+   5.0) in 12 seeds of 20, 33 bellhops held 72 (ratio 6.1) in 19 of 20.
+   The undead main hero died that way on day 1-9 in several seeds and the
+   player was out by week two or three.
+2. **The main hero changed at every hire.** A fresh hire with a bigger
+   starting army became "main" and the old main ferried it every stack,
+   then the hire lost them all in its first fight.
+3. **A broke player never recruited.** Saving for the Town Hall kept the
+   gold back on every day, even with the army gone; heroes idled with one
+   creature for a week while 5000 gold sat in the treasury.
+4. **Towns emptied in front of an enemy.** The main hero took the whole
+   garrison except tier 1 even with an enemy hero two days away, and a
+   town under threat was worth less than an enemy town nearby.
+5. **Hero wars on coin flips.** Enemy heroes were attacked at 55% expected
+   losses on one simulation.
+6. **Turn time.** 75% of all CPU went into simulated battles (the battle AI
+   v2 rehearses moves; a 14-stack battle takes 1-1.7 s); four per turn
+   made 1.5-5 s turns.
+7. **Back-and-forth for troops; thin ferrying** (secondaries fetched troops
+   only for a main hero more than 10 cells away, and only 300 fight value
+   or more).
+8. **Puzzle sites ignored.** A Keymaster's Tent was worth 0 (so keys came
+   only by accident), obelisks 500, the Keystone was never dug, seer
+   quests were never pursued.
+
+### What changed
+
+- **Fight estimates** (`strength.ts`): simulations use their own seed
+  (`deriveSeed(seed, "ai", ...)`), never the battle's. Fights up to a ratio
+  of 6 are simulated (was 3). A won fight is simulated again with a second
+  seed and the worse outcome counts; when the budget has no room for the
+  second, the first is kept and the fight waits for a later decision. An
+  unsimulated fight below ratio 3, or against creatures a simulation saw
+  hold out at ratio 2 or more ("stubborn"), waits for budget rather than
+  being taken on a guess; bigger fights take the guess with its losses
+  doubled.
+- **Turn budget**: per turn at most 6 simulations (2 per decision) and
+  500 predicted milliseconds of them (`predictedMs`, 5 ms per stack
+  squared on the field, so a 14-stack battle is never simulated). The
+  budget counts predictions, not the clock, so a match plays identically
+  on any machine and under any load.
+- **Sticky main hero**: the main hero changes only when it is gone or
+  another hero scores 1.6 times as much (+500).
+- **Town defence**: a town with a visible enemy hero within about two days
+  is on alert: its garrison stays home (unless the main hero is there and,
+  with the garrison, 1.3 times the enemy), and it recruits everything. A
+  threatened town (enemy stronger than its defence) is worth 40000 to the
+  main hero (was 20000), an alert one 6000; an enemy hero near one of our
+  towns is worth 5000 more as a target (counter-attack).
+- **Clear advantage**: enemy heroes are attacked only at a fight-value
+  ratio of 1.3 or more, both simulations won and at most 40% losses (main;
+  secondaries 15%); enemy towns with a garrison at ratio 1.2 and 45%.
+- **Townless**: with no town left every town is worth 40000 more and may
+  cost 90% of the army; a town the player once owned is worth 6000 more.
+- **Troops**: after the main hero took troops in a town, it walks back
+  there within five days only for 45% of its army (30% when a secondary can
+  ferry, else 15%). Secondaries pick up a garrison worth 10% of the main
+  army and fetch troops for a main hero more than 6 cells away. A player
+  whose main hero has less than 1500 + 150 x day of power recruits before
+  saving for any building.
+- **Puzzle sites**: a Keymaster's Tent is worth 2500 plus what each closed
+  gate of its colour hides (a flood fill behind the gate: object values
+  and unexplored cells); an obelisk 500 + 6000 / obelisks; once every
+  obelisk is seen the Keystone's cell is a dig target worth 9000; a seer
+  hut's "defeat that stack" or "visit that site" quest adds 60% of its
+  reward to the stack or site.
+- **Spells**: Opening Salvo before attacking an adjacent stack; Green Road
+  when walking through forest reaches a target today that scores 1.3
+  times the best without it. Both are guild-level-2 pages, which the build
+  order reaches late: neither was cast in the traced matches (Dowse and
+  Borrowed Day were).
+- **Runner** (`tools/sim/match.ts`): a `SUMMARY` line per seed with the
+  first player-against-player battle, the first town lost, eliminations,
+  guards cleared by day 56, end armies and turn time (mean, p95, max);
+  `--idle <p>` makes a player pass (a passive human); `run-ts.mjs` bundles
+  per process so runs can go in parallel.
+- **UI**: the game's AI uses its own default resolver for estimates (one
+  line in `src/ui/game.ts`).
+
+### Before and after
+
+Before: the AI of main at 4e8de38 (after the balance bead's adjudicated
+round limit); after: this iteration on the same main. Both measured the
+same evening on the same machine, seeds 11-13, 84 days, every player an
+AI; "a → b" is before → after. Turn ms is the whole AI turn including the
+battles it fights; deciding ms is the controller alone.
+
+| Map           | Seed | 1st PvP fight (day) | 1st town lost (day) | 1st elimination (day) | Guards cleared by d56 | Leader's army d84 | Turn ms mean | Turn ms p95 | Turn ms max | Deciding ms max |
+| ------------- | ---- | ------------------- | ------------------- | --------------------- | --------------------- | ----------------- | ------------ | ----------- | ----------- | --------------- |
+| S, 2 players  | 11   | 10 → 8              | 10 → 22             | 44 → 30               | 100% → 100%           | 141k → 171k       | 277 → 196    | 1135 → 564  | 2494 → 1314 | 2404 → 561      |
+| S, 2 players  | 12   | 8 → 8               | 12 → 14             | 16 → 14               | 72% → 100%            | 193k → 203k       | 93 → 86      | 381 → 305   | 528 → 531   | 527 → 330       |
+| S, 2 players  | 13   | 12 → 3              | 15 → 48             | 23 → 48               | 96% → 89%             | 178k → 137k       | 115 → 122    | 456 → 352   | 629 → 625   | 627 → 625       |
+| M, 3 players  | 11   | 8 → 8               | 8 → 12              | 18 → 60               | 100% → 96%            | 247k → 83k        | 216 → 192    | 743 → 539   | 1512 → 1428 | 1510 → 1132     |
+| M, 3 players  | 12   | 15 → 16             | 19 → 16             | 25 → 20               | 80% → 83%             | 257k → 284k       | 155 → 255    | 595 → 764   | 1049 → 1023 | 792 → 927       |
+| M, 3 players  | 13   | 13 → 7              | 14 → 6              | 31 → 20               | 78% → 96%             | 119k → 285k       | 451 → 313    | 1573 → 1081 | 4654 → 1734 | 2145 → 894      |
+| Keepers' Toll | 11   | 22 → 20             | 23 → 20             | 47 → 80               | 79% → 98%             | 173k → 124k       | 442 → 213    | 2004 → 662  | 3077 → 1241 | 3075 → 582      |
+| Keepers' Toll | 12   | 16 → 29             | 23 → 29             | - → -                 | 91% → 79%             | 167k → 151k       | 247 → 203    | 928 → 578   | 3202 → 1078 | 3179 → 689      |
+| Keepers' Toll | 13   | 15 → 15             | 41 → 15             | 69 → 30               | 79% → 100%            | 136k → 229k       | 654 → 334    | 2992 → 1008 | 5392 → 1606 | 5132 → 1061     |
+| Hourglass (L) | 11   | 18 → 20             | 22 → 24             | 43 → 42               | 91% → 67%             | 243k → 154k       | 294 → 196    | 985 → 527   | 2148 → 1154 | 1199 → 535      |
+| Hourglass (L) | 12   | 15 → 13             | 15 → 23             | 19 → 47               | 72% → 67%             | 130k → 166k       | 270 → 261    | 1082 → 773  | 1979 → 2113 | 1447 → 679      |
+| Hourglass (L) | 13   | 13 → 18             | 15 → 15             | 19 → 37               | 82% → 73%             | 177k → 110k       | 451 → 268    | 1474 → 695  | 3031 → 964  | 3019 → 871      |
+
+Means over the twelve matches:
+
+| Metric                                   | Before | After |
+| ---------------------------------------- | ------ | ----- |
+| First player-against-player battle (day) | 13.8   | 13.8  |
+| First town lost (day)                    | 18.1   | 20.3  |
+| First elimination (day; 85 if none)      | 36.6   | 42.8  |
+| Matches with an elimination by day 21    | 4      | 3     |
+| Guards cleared by day 56                 | 85%    | 87%   |
+| Turn ms p95                              | 1196   | 654   |
+| Turn ms max                              | 2475   | 1234  |
+| Deciding ms max                          | 2088   | 740   |
+
+On main before the balance change (old 30-round limit, the stall fix
+only) the same comparison was starker, because the round-limit losses
+were the main killer: first town lost on day 19.6 → 36.8, first
+elimination 39.3 → 50.2, eliminations by day 21 in 4 → 2 matches, turn p95
+762 → 495 ms; guards cleared by day 56 fell 86% → 78% (more players stay
+in and contest the map). Against a passive human on the Keepers' Toll
+the AI grew to 33-67k fight value by day 42, cleared 36-37 of 53 guards
+and took the human's town on day 18 and 39 (the human army never moved).
+
+On M maps the controller now decides in at most 0.9-1.1 s in the worst
+turn (was 0.8-2.1 s), and the whole turn's p95 is 0.5-1.1 s; the whole turn
+still reaches 1.0-1.7 s when the AI fights a big real battle (the battle
+AI's own cost, outside the adventure AI).
+
+Puzzle sites and spells in full-length traces of five players during
+the iteration (Hourglass seed 12, Keepers' Toll seed 12): keys taken by
+two players (one took two), obelisks visited by four of the five (up to
+six), Dowse cast 14 times with 3 digs, Borrowed Day 4 times.
+
+### Remaining weaknesses (iteration 2), worst first
+
+1. **Big battles cost too much time.** The battle AI v2 takes 1-1.7 s for
+   a 13-14-stack battle, both when the AI simulates and when the rules
+   resolve the real one; the adventure AI never simulates those (it
+   guesses), and whole turns with such a battle still pass 1 s. A cheap
+   battle-AI mode for simulations (no rehearsal, no hero acts) would let
+   the AI simulate big fights and keep turns short.
+2. **Estimates are reset by every army change.** The cache is keyed by
+   both armies, so after each fight or recruit all estimates are
+   recomputed; with the budget a hero fights about two simulated fights a
+   turn. Clearing on the large three-player map is slower than before
+   (67-73% of guards by day 56 on the Hourglass vs 72-91%).
+3. **Three-player wars of attrition.** 7-46 player battles per match on M
+   and L maps with towns changing hands back and forth; no joint attack by
+   two heroes, no regrouping, no reading of who is winning.
+4. **Early losses still decide some matches.** 3 of 12 had an elimination
+   by day 21 (S seed 12 on day 14, M seeds 12 and 13 on day 20); a second
+   town taken early is left empty and falls to the first passing hero, and
+   the build order and first-week plan are not adapted per faction.
+5. **Adventure spells.** Green Road and Opening Salvo need guild level 2
+   (rank 66 in the build order) and a school rank, so the AI rarely knows
+   them; Parley and Read the Seal are not used at all; seer quests for an
+   artifact, creatures or level are not pursued.
+
+Raw metrics: `.orchestration/sim/base3-*.json` and `it7-*.json`
+(git-ignored); reproduce with `node tools/sim/run-ts.mjs
+tools/sim/match.ts --size M --players 3 --seeds 11,12,13 --days 84`.

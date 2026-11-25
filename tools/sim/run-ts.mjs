@@ -10,7 +10,7 @@
  * `.orchestration/sim/` (git-ignored) and imported from there. The
  * arguments after the entry reach it as `process.argv.slice(2)`.
  */
-import { mkdirSync } from "node:fs";
+import { mkdirSync, rmSync } from "node:fs";
 import { basename, dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { build } from "rolldown";
@@ -23,7 +23,11 @@ if (entry === undefined) {
 }
 const outDir = resolve(root, ".orchestration/sim");
 mkdirSync(outDir, { recursive: true });
-const outFile = resolve(outDir, `${basename(entry, ".ts")}.bundle.mjs`);
+// One bundle per process: parallel runs never overwrite each other's.
+const outFile = resolve(
+  outDir,
+  `${basename(entry, ".ts")}.${process.pid}.bundle.mjs`,
+);
 await build({
   input: resolve(entry),
   platform: "node",
@@ -31,4 +35,8 @@ await build({
   output: { file: outFile, format: "esm", sourcemap: false },
 });
 process.argv = [process.argv[0], outFile, ...process.argv.slice(3)];
-await import(pathToFileURL(outFile).href);
+try {
+  await import(pathToFileURL(outFile).href);
+} finally {
+  rmSync(outFile, { force: true });
+}

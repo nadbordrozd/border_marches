@@ -8,6 +8,7 @@
  * the game's resolver, so the estimate knows the survivors.
  */
 import { getCreature } from "../../data/creatures.ts";
+import { deriveSeed } from "../rng.ts";
 import {
   battleSetup,
   heroStats,
@@ -69,14 +70,42 @@ export interface FightEstimate {
 
 /** Below this strength ratio a fight is lost without simulating. */
 export const HOPELESS_RATIO = 0.8;
-/** Above this ratio a fight is won with small losses, not simulated. */
-export const EASY_RATIO = 3;
+/**
+ * Above this ratio a fight is won with small losses, not simulated.
+ * Fight values can be far off (before the 15-round limit was adjudicated
+ * by fight value, bead bzc.24, 33 bellhops beat 72 undead troops at a
+ * ratio of 6.1 in 19 seeds of 20), so fights up to this ratio are
+ * simulated while the time budget lasts (iteration 1, bead bzc.21; it
+ * was 3).
+ */
+export const EASY_RATIO = 6;
+/**
+ * Below this ratio an unsimulated fight waits for the budget; above it a
+ * guess (losses counted double) will do unless its creatures are suspect.
+ */
+export const CLOSE_RATIO = 3;
+
+/** Reads a monotonic clock where one exists (Node, browsers), else 0. */
+export function nowMs(): number {
+  const g = globalThis as { performance?: { now(): number } };
+  return g.performance?.now() ?? 0;
+}
 
 function enemyHp(side: BattleSide): number {
   return side.stacks.reduce(
     (n, s) => n + s.count * getCreature(s.creature).hp,
     0,
   );
+}
+
+/**
+ * Predicted milliseconds of one simulated battle: the battle AI's cost
+ * grows with the square of the stacks on the field (measured on M maps,
+ * about 0.7-1 ms per stack squared and round, 6 rounds typical).
+ */
+export function predictedMs(setup: BattleSetup): number {
+  const n = setup.attacker.stacks.length + setup.defender.stacks.length;
+  return 5 * n * n;
 }
 
 function setupKey(setup: BattleSetup): string {
@@ -100,6 +129,10 @@ function setupKey(setup: BattleSetup): string {
  */
 export class FightOracle {
   private readonly cache = new Map<string, FightEstimate>();
+  /** Creatures that held out in a simulation against a far bigger army. */
+  private readonly stubborn = new Set<string>();
+  /** Won first simulations still waiting for their second. */
+  private readonly half = new Map<string, FightEstimate>();
   /** Battles simulated since construction (for profiling). */
   simulations = 0;
   /**
@@ -107,6 +140,22 @@ export class FightOracle {
    * time); beyond it close calls get the fast estimate, uncached.
    */
   budget = Infinity;
+  /** Milliseconds spent simulating since construction (profiling). */
+  simMs = 0;
+  /** Predicted milliseconds of all simulations so far (the budget's unit). */
+  simCost = 0;
+  /**
+   * Predicted milliseconds of simulation still allowed (the AI sets it
+   * per decision); a battle predicted to take longer gets the fast
+   * estimate. Predictions, not the clock, keep matches deterministic.
+   */
+  msBudget = Infinity;
+  /**
+   * The longest simulation a turn can afford (the AI's turn budget): a
+   * fight predicted within it is deferred, not guessed, when this turn's
+   * budget is spent.
+   */
+  maxSimMs = 0;
 
   constructor(private readonly resolver: BattleResolver | null) {}
 
@@ -149,13 +198,31 @@ export class FightOracle {
     } else if (
       ratio >= EASY_RATIO ||
       this.resolver === null ||
-      this.budget <= 0
+      this.budget <= 0 ||
+      predictedMs(setup) > this.msBudget
     ) {
       // Without a resolver (or simulations left) the fast estimate
-      // decides; a fast answer for want of budget is not cached.
-      const share = ratio >= 1.2 ? Math.min(1, 0.45 / (ratio * ratio)) : 1;
+      // decides; a fast answer for want of budget is not cached. Below
+      // EASY_RATIO it is a guess where fight values can be off, so its
+      // losses count double.
+      const unsure = ratio < EASY_RATIO && this.resolver !== null ? 2 : 1;
+      const share =
+        ratio >= 1.2 ? Math.min(1, (unsure * 0.45) / (ratio * ratio)) : 1;
+      // A close fight (or one against creatures a simulation has seen
+      // hold out against a much bigger army) small enough to simulate
+      // within a turn's budget waits for a turn with budget left instead
+      // of being taken on a guess: a budget-starved guess sent whole
+      // armies into stacks the auto-battle cannot finish. Bigger fights,
+      // and clear ones against creatures not suspected, take the guess.
+      const suspect = setup.defender.stacks.some((s) =>
+        this.stubborn.has(s.creature),
+      );
+      const deferred =
+        unsure === 2 &&
+        predictedMs(setup) <= this.maxSimMs &&
+        (ratio < CLOSE_RATIO || suspect);
       const fast: FightEstimate = {
-        win: ratio >= 1.2,
+        win: ratio >= 1.2 && !deferred,
         lossFv: Math.round(own * share),
         lossShare: share,
         ratio,
@@ -165,32 +232,74 @@ export class FightOracle {
       if (ratio < EASY_RATIO && this.resolver !== null) return fast;
       est = fast;
     } else {
-      this.simulations++;
-      this.budget--;
-      const r = this.resolver(setup);
-      const win = r.winner === "attacker" && r.retreat !== "attacker";
-      let lossFv = 0;
-      setup.attacker.stacks.forEach((s, i) => {
-        const left = win ? (r.attacker[i] ?? 0) : 0;
-        lossFv += stackFv(s.creature, s.count - left);
-      });
-      let xp = 0;
-      if (win) {
-        setup.defender.stacks.forEach((s, i) => {
-          xp += (s.count - (r.defender[i] ?? 0)) * getCreature(s.creature).hp;
-        });
+      est = this.half.get(key) ?? this.simulate(setup, own, ratio, "a");
+      // A won fight is fought again with another seed and the worse
+      // outcome counts: outcomes can be all or nothing (a stack the
+      // attacker cannot finish holds out to the round limit), and one
+      // lucky roll must not risk the army. Without the budget for the
+      // second, the first is kept and the fight waits (not won yet).
+      if (est.win) {
+        if (this.budget > 0 && predictedMs(setup) <= this.msBudget) {
+          this.half.delete(key);
+          const again = this.simulate(setup, own, ratio, "b");
+          if (!again.win || again.lossFv > est.lossFv) est = again;
+        } else {
+          if (this.half.size > 500) this.half.clear();
+          this.half.set(key, est);
+          return { ...est, win: false, lossFv: own, lossShare: 1 };
+        }
       }
-      est = {
-        win,
-        lossFv,
-        lossShare: own <= 0 ? 1 : lossFv / own,
-        ratio,
-        xp,
-        simulated: true,
-      };
     }
     if (this.cache.size > 4000) this.cache.clear();
     this.cache.set(key, est);
     return est;
+  }
+
+  /**
+   * One simulated battle on a copy. The seed is not the one the real
+   * battle will use (the AI must not foresee the dice), so the estimate
+   * is one plausible outcome.
+   */
+  private simulate(
+    setup: BattleSetup,
+    own: number,
+    ratio: number,
+    salt: string,
+  ): FightEstimate {
+    const resolver = this.resolver;
+    if (resolver === null) throw new Error("no resolver");
+    this.simulations++;
+    this.budget--;
+    const t0 = nowMs();
+    const r = resolver({ ...setup, seed: deriveSeed(setup.seed, "ai", salt) });
+    this.simMs += nowMs() - t0;
+    const cost = predictedMs(setup);
+    this.simCost += cost;
+    this.msBudget -= cost;
+    const win = r.winner === "attacker" && r.retreat !== "attacker";
+    // Lost (or undecided) at twice the defender's fight value: its
+    // creatures are suspected of holding out (always simulated from now).
+    if (!win && ratio >= 2) {
+      for (const s of setup.defender.stacks) this.stubborn.add(s.creature);
+    }
+    let lossFv = 0;
+    setup.attacker.stacks.forEach((s, i) => {
+      const left = win ? (r.attacker[i] ?? 0) : 0;
+      lossFv += stackFv(s.creature, s.count - left);
+    });
+    let xp = 0;
+    if (win) {
+      setup.defender.stacks.forEach((s, i) => {
+        xp += (s.count - (r.defender[i] ?? 0)) * getCreature(s.creature).hp;
+      });
+    }
+    return {
+      win,
+      lossFv,
+      lossShare: own <= 0 ? 1 : lossFv / own,
+      ratio,
+      xp,
+      simulated: true,
+    };
   }
 }

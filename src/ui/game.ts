@@ -244,7 +244,7 @@ class GameScreen {
   private readonly view: MapView;
   private readonly minimap: Minimap;
   private readonly resolver = createBattleResolver();
-  private readonly ai = new AdventureAi({ resolver: this.resolver });
+  private readonly ai = new AdventureAi();
   private objectsSig = "";
   /** The planned destination and its path. */
   private plan: { x: number; y: number; path: Path } | null = null;

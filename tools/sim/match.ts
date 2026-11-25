@@ -17,6 +17,7 @@
  *                        battles and taverns)
  *   --trace <p>[:a-b]    print player p's actions on days a..b
  *   --explain <p>:<day>  print player p's targets and view on that day
+ *   --idle <p>           player p only ends its turns (a passive human)
  *   --out <file.json>    save every day's metrics (default
  *                        .orchestration/sim/match-<ai>-<size><players>.json)
  *
@@ -55,6 +56,8 @@ const seeds = opt("seeds", "11,12")
   .map((s) => Number(s.trim()));
 const days = Number(opt("days", "84"));
 const every = Number(opt("every", "7"));
+const idleArg = opt("idle", "");
+const idlePlayer = idleArg === "" ? null : Number(idleArg);
 const namedId = opt("map", "");
 const named = namedId === "" ? undefined : namedId;
 const out = opt(
@@ -143,9 +146,13 @@ function makeController(): (player: number) => PlayerController {
     const ai = new SimpleAi();
     return () => ai;
   }
-  const ai = new AdventureAi({ resolver });
+  // The AI's own simulated fights use its default resolver (a round
+  // limit for estimates); the match's battles use the game's.
+  const ai = new AdventureAi();
   current = ai;
-  return () => ai;
+  // --idle <p>: that player only ends its turns (a passive human).
+  const passive: PlayerController = { decide: () => ({ type: "end-turn" }) };
+  return (p) => (idlePlayer === p ? passive : ai);
 }
 
 let explained = false;
@@ -187,6 +194,13 @@ function explainStep(before: GameState): void {
 }
 
 const pct = (x: number): string => `${Math.round(x * 100)}%`;
+function percentile(xs: readonly number[], q: number): number {
+  if (xs.length === 0) return 0;
+  const sorted = [...xs].sort((a, b) => a - b);
+  return (
+    sorted[Math.min(sorted.length - 1, Math.floor(q * sorted.length))] ?? 0
+  );
+}
 function row(m: PlayerMetrics, guards: number): string {
   return [
     `d${m.day}`.padEnd(4),
@@ -252,6 +266,15 @@ for (const seed of seeds) {
   console.log(
     `guards at start ${guards}; status ${result.state.status}; turn ms mean ${mean.toFixed(0)} max ${max.toFixed(0)} (deciding: mean ${thinkMean.toFixed(0)} max ${thinkMax.toFixed(0)}); refused actions ${result.failures.length}; last stands ${result.lastStands}; void battles ${result.battleErrors.length}`,
   );
+  // Human-relevant summary (bead bzc.21): when players first fight, when
+  // a town first falls, how much of the map is cleared by month two.
+  const d56 = result.days[Math.min(55, result.days.length - 1)]?.[0];
+  const cleared56 =
+    d56 === undefined || guards === 0 ? 0 : (guards - d56.guardsLeft) / guards;
+  const last = result.days[result.days.length - 1] ?? [];
+  console.log(
+    `SUMMARY seed ${seed} first-player-fight d${result.firstPlayerFight ?? "-"} first-town-loss d${result.firstTownLoss ?? "-"} player-fights ${result.playerFights.length} guards-cleared-d56 ${pct(cleared56)} eliminated ${result.eliminatedOn.map((d) => d ?? "-").join("/")} army-end ${last.map((m) => m.armyFv).join("/")} turn-ms mean ${mean.toFixed(0)} max ${max.toFixed(0)} p95 ${percentile(all, 0.95).toFixed(0)} last-stands ${result.lastStands} void ${result.battleErrors.length}`,
+  );
   for (const b of result.battleErrors.slice(0, 5)) {
     console.log(`  void battle d${b.day} p${b.player}: ${b.message}`);
   }
@@ -271,6 +294,12 @@ for (const seed of seeds) {
     turnMs: { mean, max },
     thinkMs: { mean: thinkMean, max: thinkMax },
     failures: result.failures,
+    firstPlayerFight: result.firstPlayerFight,
+    firstTownLoss: result.firstTownLoss,
+    playerFights: result.playerFights,
+    eliminatedOn: result.eliminatedOn,
+    guardsClearedD56: cleared56,
+    turnP95: percentile(all, 0.95),
     battleErrors: result.battleErrors,
     lastStands: result.lastStands,
     days: result.days,

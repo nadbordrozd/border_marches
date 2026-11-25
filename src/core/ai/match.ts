@@ -108,6 +108,16 @@ export interface MatchResult {
   /** Actions the rules refused (each ended that player's turn early). */
   failures: Array<{ day: number; player: number; action: GameAction }>;
   /**
+   * Player-against-player fighting (bead bzc.21): the day of the first
+   * battle against another player's hero or town, the first town a
+   * player lost, and every such battle (day, attacker, defender player).
+   */
+  firstPlayerFight: number | null;
+  firstTownLoss: number | null;
+  playerFights: Array<{ day: number; attacker: number; defender: number }>;
+  /** Day each player was eliminated (null: still in). */
+  eliminatedOn: Array<number | null>;
+  /**
    * Battles whose result the rules refused, voided by the driver (a
    * resolver bug; there should be none).
    */
@@ -328,6 +338,10 @@ export function playMatch(options: MatchOptions): MatchResult {
   const turnMs: number[][] = state.players.map(() => []);
   const days: PlayerMetrics[][] = [];
   let idle = state.players.map(() => 0);
+  let firstPlayerFight: number | null = null;
+  let firstTownLoss: number | null = null;
+  const playerFights: MatchResult["playerFights"] = [];
+  const eliminatedOn: Array<number | null> = state.players.map(() => null);
   while (state.status === "playing" && state.day <= options.days) {
     const day = state.day;
     const player = state.currentPlayer;
@@ -342,6 +356,27 @@ export function playMatch(options: MatchOptions): MatchResult {
     for (const e of turn.events) {
       if (e.type === "monster-defeated") {
         cleared[player] = (cleared[player] ?? 0) + 1;
+      }
+      if (e.type === "battle") {
+        const b = e.battle;
+        let defender: number | null = null;
+        if (b.kind === "hero") {
+          defender =
+            state.heroes.find((h) => h.id === b.objectId)?.owner ?? null;
+        } else if (b.kind === "town") {
+          defender = state.towns[b.objectId]?.owner ?? null;
+        }
+        if (defender !== null && defender !== player) {
+          firstPlayerFight ??= day;
+          playerFights.push({ day, attacker: player, defender });
+        }
+      }
+      if (
+        e.type === "town-captured" &&
+        e.from !== null &&
+        e.from !== undefined
+      ) {
+        firstTownLoss ??= day;
       }
     }
     // Idle: alive before and after and never moved (same cell, no move).
@@ -362,7 +397,12 @@ export function playMatch(options: MatchOptions): MatchResult {
       const metrics = state.players.map((p) =>
         playerMetrics(state, p.id, cleared[p.id] ?? 0, idle[p.id] ?? 0),
       );
-      for (const m of metrics) m.day = day;
+      for (const m of metrics) {
+        m.day = day;
+        if (m.eliminated && eliminatedOn[m.player] === null) {
+          eliminatedOn[m.player] = day;
+        }
+      }
       days.push(metrics);
       options.onDay?.(metrics, state, guardsAtStart);
       idle = state.players.map(() => 0);
@@ -376,6 +416,10 @@ export function playMatch(options: MatchOptions): MatchResult {
     turnMs,
     thinkMs,
     failures,
+    firstPlayerFight,
+    firstTownLoss,
+    playerFights,
+    eliminatedOn,
     battleErrors,
     lastStands,
   };
