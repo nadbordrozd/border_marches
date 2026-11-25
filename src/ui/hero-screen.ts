@@ -61,6 +61,8 @@ import { iconFor, type IconKind } from "../assets/icons.ts";
 import { isSpell, spellInfo } from "../core/magic/catalog.ts";
 import { button, el, img, modal } from "./dom.ts";
 import { iconElement } from "./icons.ts";
+import { spellTip } from "./info-tips.ts";
+import { setTip } from "./tooltip.ts";
 import "./hero.css";
 
 /** What the hero screens need from the game screen. */
@@ -476,11 +478,14 @@ export async function openHeroScreen(
       feats,
       el("h3", `Backpack (${backpackSize(h)})`),
       pack,
+    );
+    // The scroll case under the doll and the book under the stats keep
+    // the sheet within a 800 px window (bead bzc.25).
+    middle.append(
       el("h3", `Scroll case (${h.scrolls.length} / ${scrollCaseSize(h)})`),
       scrolls,
-      el("h3", "Book"),
-      el("div.hs-dim", h.pages.length === 0 ? "No pages." : h.pages.join(", ")),
     );
+    left.append(el("h3", `Book (${h.pages.length} pages)`), bookPages(h));
 
     body.replaceChildren(el("div.hs-columns", left, middle, right), details(h));
   };
@@ -559,12 +564,26 @@ export async function openHeroScreen(
 
   render();
   await modal<undefined>({
-    title: "Hero",
+    title: "Hero sheet",
     body,
     className: "hs-dialog",
     buttons: [{ label: "Close", value: undefined, primary: true }],
     cancel: undefined,
   });
+}
+
+/** The hero's pages as spell icons; hover for the spell at its Power. */
+function bookPages(h: HeroState): HTMLElement {
+  if (h.pages.length === 0) return el("div.hs-dim", "No pages.");
+  const power = heroStats(h).power;
+  const box = el("div.hs-pages");
+  for (const id of h.pages) {
+    const icon = iconElement("spell", id);
+    icon.tabIndex = 0;
+    setTip(icon, () => spellTip(id, power));
+    box.append(icon);
+  }
+  return box;
 }
 
 function signed(n: number): string {

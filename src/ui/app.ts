@@ -7,7 +7,13 @@
 import { newGame } from "../core/game/index.ts";
 import type { GameState, PlayerSetup } from "../core/game/index.ts";
 import { FACTIONS, playableFactions } from "../data/factions.ts";
-import { MAX_PLAYERS, MIN_PLAYERS, playerColour } from "../data/players.ts";
+import {
+  HERO_ROSTER,
+  MAX_PLAYERS,
+  MIN_PLAYERS,
+  playerColour,
+} from "../data/players.ts";
+import { heroArt } from "../assets/unit-art.ts";
 import type { FactionId } from "../data/types.ts";
 import { generateMap } from "../core/map/generate.ts";
 import type { MapSize, PlayerCount } from "../core/map/generate.ts";
@@ -17,11 +23,12 @@ import {
   findNamedMap,
   type NamedMapDef,
 } from "../core/map/named.ts";
-import { button, el, img, wait } from "./dom.ts";
+import { button, el, img, kbd, wait } from "./dom.ts";
 import { playGame } from "./game.ts";
 import { loadGameMapAssets } from "./hero-sprite.ts";
 import { browserStorage, readSave, saveGame } from "./save.ts";
 import { installUiSounds, soundControl } from "./sound-control.ts";
+import { installTooltips, setTip } from "./tooltip.ts";
 import "./game.css";
 
 const SIZES: ReadonlyArray<{ id: MapSize; label: string }> = [
@@ -174,8 +181,22 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
     let faction: FactionId =
       wanted?.id ?? playableFactions()[0]?.id ?? "humans";
     const factionRow = el("div.gm-faction-row");
+    const blurb = el("p.gm-faction-blurb");
+    const heroBox = el("div.gm-menu-hero-box");
     const renderFactions = (): void => {
       factionRow.replaceChildren();
+      const chosen = FACTIONS.find((x) => x.id === faction);
+      blurb.textContent = chosen?.blurb ?? "";
+      const hero = HERO_ROSTER.find((h) => h.faction === faction);
+      heroBox.replaceChildren(
+        img(
+          hero !== undefined
+            ? heroArt(hero.heroClass).key
+            : "dinosaur-chieftain",
+          "gm-menu-hero",
+          2,
+        ),
+      );
       for (const f of FACTIONS.filter((x) => x.available)) {
         const b = button(
           f.name,
@@ -186,7 +207,10 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
           },
           "gm-btn gm-faction",
         );
-        b.title = f.blurb;
+        const chip = el("span.gm-town-chip");
+        chip.style.background = f.colour ?? "#6b5a3e";
+        b.prepend(chip);
+        setTip(b, f.blurb);
         if (!f.available) {
           b.disabled = true;
           b.append(el("small.gm-soon", "soon"));
@@ -313,11 +337,11 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
     root.append(
       el(
         "div.gm-menu-box",
-        img("dinosaur-chieftain", "gm-menu-hero", 2),
+        heroBox,
         el("h1.gm-title", "Border Marches"),
         el(
           "p.gm-subtitle",
-          "Lead your tribe across the marches and outlast every rival.",
+          "Raise an army, claim the marches and outlast every rival.",
         ),
         continueButton,
         el(
@@ -328,6 +352,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
           sizeField,
           playersField,
           el("div.gm-field", el("label", you, "Your faction"), factionRow),
+          blurb,
           seedField,
           newButton,
         ),
@@ -335,7 +360,17 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         soundControl(),
         el(
           "div.gm-keys",
-          "Click a cell to plan a path, click again (or Space) to walk. E end turn, H next hero, K kingdom, T town, arrows pan, +/- zoom.",
+          "Click a cell to plan a path, click again or ",
+          kbd("Space"),
+          " to walk. ",
+          kbd("E"),
+          " end turn, ",
+          kbd("H"),
+          " next hero, ",
+          kbd("T"),
+          " town, ",
+          kbd("?"),
+          " all keys.",
         ),
       ),
     );
@@ -352,6 +387,7 @@ export async function startGameApp(params: URLSearchParams): Promise<void> {
   const canvas = document.getElementById("game");
   if (canvas !== null) canvas.style.display = "none";
   installUiSounds();
+  installTooltips();
   for (;;) {
     const state = await mainMenu(params);
     params.delete("autostart");

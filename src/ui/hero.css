@@ -575,3 +575,23 @@
     animation: none;
   }
 }
+
+/* Bead bzc.25: the book as spell icons with hover cards. */
+.hs-pages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.hs-pages .gm-icon {
+  cursor: help;
+}
+
+.hs-middle .hs-scrolls {
+  grid-template-columns: repeat(4, 48px);
+}
+
+.hs-details {
+  min-height: 44px;
+  margin-top: 8px;
+}

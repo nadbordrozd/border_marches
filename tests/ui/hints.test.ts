@@ -1,0 +1,190 @@
+// The adventure screen's hints and the tooltip placement (bead bzc.25):
+// path cost and turns, battle estimates, income by source, end-of-turn
+// warnings and the next-action hint, on small hand-built states.
+import { describe, expect, it } from "vitest";
+import {
+  dailyIncome,
+  endTurn,
+  findPath,
+  newGame,
+} from "../../src/core/game/index.ts";
+import type { GameState, Path } from "../../src/core/game/index.ts";
+import { generateMap } from "../../src/core/map/generate.ts";
+import {
+  armyValue,
+  battleOdds,
+  buildableTowns,
+  endTurnWarnings,
+  incomeBreakdown,
+  nextActionHint,
+  pathLine,
+  pathSummary,
+  SPENT_MP,
+} from "../../src/ui/hints.ts";
+import { placeTip } from "../../src/ui/tooltip.ts";
+import { getCreature } from "../../src/data/creatures.ts";
+
+function fresh(): GameState {
+  return structuredClone(
+    (cached ??= newGame(generateMap(7, { size: "S", players: 2 }), {
+      players: [
+        { kind: "human", faction: "humans" },
+        { kind: "ai", faction: "undead" },
+      ],
+    })),
+  );
+}
+let cached: GameState | null = null;
+
+function hero(s: GameState) {
+  const h = s.heroes.find((x) => x.alive && x.owner === 0);
+  if (h === undefined) throw new Error("no hero");
+  return h;
+}
+
+function step(x: number, cost: number, total: number, day: number) {
+  return { x, y: 0, cost, total, day, attack: false };
+}
+
+describe("pathSummary", () => {
+  it("counts today's movement left after the last step", () => {
+    const s = fresh();
+    const h = hero(s);
+    h.mp = 1000;
+    h.maxMp = 1500;
+    const path: Path = {
+      steps: [step(1, 100, 100, 0), step(2, 150, 250, 0)],
+      total: 250,
+    };
+    const sum = pathSummary(path, h);
+    expect(sum).toEqual({ cost: 250, days: 0, left: 750, attack: false });
+    expect(pathLine(sum)).toBe("Today: 250 moves, 750 moves left");
+  });
+
+  it("counts the arrival day's movement for a walk of several days", () => {
+    const s = fresh();
+    const h = hero(s);
+    h.mp = 200;
+    h.maxMp = 1500;
+    const path: Path = {
+      steps: [
+        step(1, 200, 200, 0),
+        step(2, 1000, 1200, 1),
+        step(3, 400, 1600, 2),
+        step(4, 100, 1700, 2),
+      ],
+      total: 1700,
+    };
+    const sum = pathSummary(path, h);
+    expect(sum.days).toBe(2);
+    // Day 2 spends 1700 - 1200 = 500 of a fresh 1500.
+    expect(sum.left).toBe(1000);
+    expect(pathLine(sum)).toBe("In 2 days: 1700 moves, 1000 moves left");
+  });
+
+  it("agrees with a real path on a generated map", () => {
+    const s = fresh();
+    const h = hero(s);
+    let path: Path | null = null;
+    for (let dx = 3; dx < 8 && path === null; dx++)
+      path =
+        findPath(s, h.id, h.x + dx, h.y) ?? findPath(s, h.id, h.x, h.y + dx);
+    expect(path).not.toBeNull();
+    const sum = pathSummary(path as Path, h);
+    expect(sum.cost).toBe((path as Path).total);
+    expect(sum.left).toBeGreaterThanOrEqual(0);
+    expect(sum.left).toBeLessThanOrEqual(h.maxMp);
+  });
+});
+
+describe("battleOdds", () => {
+  it("rates armies by fight value with the hero's Attack and Defense", () => {
+    const s = fresh();
+    const h = hero(s);
+    const own = armyValue(h.army);
+    expect(own).toBeGreaterThan(0);
+    const fv = getCreature("goblin").fightValue;
+    const tiny = battleOdds(h, [{ creature: "goblin", count: 1 }]);
+    expect(tiny.odds).toBe("easy");
+    const huge = battleOdds(h, [
+      { creature: "goblin", count: Math.ceil((own * 10) / fv) },
+    ]);
+    expect(huge.odds).toBe("deadly");
+    expect(armyValue([null, { creature: "goblin", count: 3 }])).toBe(fv * 3);
+  });
+});
+
+describe("incomeBreakdown", () => {
+  it("splits the daily income into towns, mines and heroes", () => {
+    const s = fresh();
+    const mine = Object.values(s.mines)[0];
+    if (mine !== undefined) mine.owner = 0;
+    const total = dailyIncome(s, 0);
+    const parts = incomeBreakdown(s, 0, total);
+    expect(parts.towns.gold).toBeGreaterThan(0);
+    if (mine !== undefined)
+      expect(parts.mines[mine.resource]).toBeGreaterThan(0);
+    for (const r of Object.keys(total) as Array<keyof typeof total>) {
+      expect(parts.towns[r] + parts.mines[r] + parts.heroes[r]).toBe(total[r]);
+    }
+  });
+});
+
+describe("endTurnWarnings", () => {
+  it("names unmoved heroes, movement left and towns that can build", () => {
+    const s = fresh();
+    const h = hero(s);
+    const warnings = endTurnWarnings(s, 0);
+    expect(warnings.some((w) => w.kind === "unmoved" && w.id === h.id)).toBe(
+      true,
+    );
+    const towns = buildableTowns(s, 0);
+    expect(towns.length).toBeGreaterThan(0);
+    expect(warnings.filter((w) => w.kind === "can-build").length).toBe(
+      towns.length,
+    );
+    h.mp = h.maxMp - 300;
+    expect(endTurnWarnings(s, 0).find((w) => w.id === h.id)?.kind).toBe(
+      "moves-left",
+    );
+    h.mp = SPENT_MP - 1;
+    for (const t of Object.values(s.towns)) t.builtToday = true;
+    expect(endTurnWarnings(s, 0)).toEqual([]);
+  });
+
+  it("gives the next action for the selected hero", () => {
+    const s = fresh();
+    const h = hero(s);
+    expect(nextActionHint(s, 0, h, null)).toMatch(/plan/);
+    h.mp = 0;
+    expect(nextActionHint(s, 0, h, null)).toMatch(/end the turn/);
+    expect(
+      nextActionHint(s, 0, h, { cost: 10, days: 0, left: 5, attack: true }),
+    ).toMatch(/attack/);
+    expect(nextActionHint(s, 0, undefined, null)).toMatch(/tavern/);
+    const next = endTurn(s);
+    if (next.ok && next.state.currentPlayer !== 0)
+      expect(nextActionHint(next.state, 0, h, null)).toMatch(/other players/);
+  });
+});
+
+describe("placeTip", () => {
+  it("puts the tip below-right of the pointer", () => {
+    expect(placeTip(100, 100, 200, 80, 1280, 800)).toEqual({
+      left: 114,
+      top: 118,
+    });
+  });
+
+  it("flips left and up near the right and bottom edges", () => {
+    const p = placeTip(1250, 780, 200, 80, 1280, 800);
+    expect(p.left).toBe(1250 - 14 - 200);
+    expect(p.top).toBe(780 - 14 - 80);
+  });
+
+  it("stays inside a viewport smaller than the tip", () => {
+    const p = placeTip(10, 10, 400, 300, 300, 200);
+    expect(p.left).toBeGreaterThanOrEqual(6);
+    expect(p.top).toBeGreaterThanOrEqual(6);
+  });
+});

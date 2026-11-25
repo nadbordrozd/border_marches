@@ -23,6 +23,8 @@ import type {
   AdventureSpellDef,
   AdventureTarget,
 } from "../core/magic/index.ts";
+import { setTip } from "./tooltip.ts";
+import { spellTip } from "./info-tips.ts";
 import { el, modal } from "./dom.ts";
 import { iconElement } from "./icons.ts";
 
@@ -217,15 +219,33 @@ export function openAdventureBook(
       body.append(
         el("h3.gm-book-school", "Battle pages"),
         el(
-          "div.gm-dim",
-          battle
-            .map((id) => {
-              const d = spellDef(id);
-              return `${d.name} (${NAMES[d.school]} ${d.tier}, ${d.mana})`;
-            })
-            .join(" · "),
+          "div.gm-dim.gm-book-note",
+          "Cast in battle from the action bar. Hover a page for its effect.",
         ),
       );
+      const grid = el("div.gm-book-pages");
+      for (const school of SCHOOLS) {
+        const ids = battle.filter((id) => spellDef(id).school === school);
+        if (ids.length === 0) continue;
+        const col = el("div.gm-book-pagecol");
+        const head = el("div.gm-book-pagehead", NAMES[school]);
+        head.style.color = COLOURS[school];
+        col.append(head);
+        for (const id of ids) {
+          const d = spellDef(id);
+          const page = el(
+            "div.gm-book-page",
+            iconElement("spell", id),
+            el("span.gm-book-page-name", d.name),
+            el("span.gm-book-page-mana", String(d.mana)),
+          );
+          page.tabIndex = 0;
+          setTip(page, () => spellTip(id, m.power));
+          col.append(page);
+        }
+        grid.append(col);
+      }
+      body.append(grid);
     }
     let picked: BookChoice = null;
     void modal<BookChoice>({

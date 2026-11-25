@@ -69,12 +69,33 @@ import {
   costView,
   el,
   img,
+  kbd,
+  keyButton,
   modal,
   modalOpen,
   resourceIcon,
   toast,
   wait,
 } from "./dom.ts";
+import { findFaction } from "../data/factions.ts";
+import { getCreature } from "../data/creatures.ts";
+import { creatureTip } from "./info-tips.ts";
+import { fortLevel } from "../core/game/index.ts";
+import {
+  battleOdds,
+  buildableTowns,
+  endTurnWarnings,
+  incomeBreakdown,
+  minesOf,
+  nextActionHint,
+  ODDS_TEXT,
+  pathLine,
+  pathSummary,
+  SPENT_MP,
+  type PathSummary,
+} from "./hints.ts";
+import type { ResourceId } from "../core/map/types.ts";
+import { hideTip, setTip, showTipAt, tipCard } from "./tooltip.ts";
 import {
   capitalize,
   creatureCount,
@@ -92,7 +113,7 @@ import {
   type HeroScreenHost,
 } from "./hero-screen.ts";
 import { Minimap } from "./minimap.ts";
-import { browserStorage, deleteSave, saveGame } from "./save.ts";
+import { browserStorage, deleteSave, readSave, saveGame } from "./save.ts";
 import { displayObjects, objectsSignature } from "./objects.ts";
 import { openTownScreen } from "./town.ts";
 
@@ -125,6 +146,12 @@ export interface GameHook {
   targets(): HookTarget[];
   /** Hovers map cell (x, y): shows and returns the tooltip text. */
   hover(x: number, y: number): string | null;
+  /** Opens a town screen by id (screenshot tours of every faction). */
+  openTown(townId: string): void;
+  /** The page point at the centre of map cell (x, y), or null off screen. */
+  cellToClient(x: number, y: number): { x: number; y: number } | null;
+  /** Shows the victory (true) or defeat screen without ending the game. */
+  previewEnd(won: boolean): void;
 }
 
 export interface HookTarget {
@@ -167,6 +194,32 @@ export async function playGame(initial: GameState): Promise<GameExit> {
   });
 }
 
+/** The adventure screen's keys, for the Keys dialog (?) and the menu. */
+export const ADVENTURE_KEYS: ReadonlyArray<readonly [string, string]> = [
+  ["Click", "Plan a path; click the end again to walk"],
+  ["Space", "Walk the planned path"],
+  ["Esc", "Cancel the plan or the aimed spell"],
+  ["E", "End the turn"],
+  ["H", "Next hero with movement left"],
+  ["I", "Hero sheet"],
+  ["T", "Town (the hero's, else the first)"],
+  ["K", "Kingdom overview"],
+  ["M", "Spellbook"],
+  ["G", "Dig for treasure"],
+  ["L", "Adventure log"],
+  ["O", "Menu: save, load, sound, quit"],
+  ["Arrows", "Pan the map"],
+  ["+ / -", "Zoom"],
+  ["?", "This list"],
+];
+
+function keysTable(): HTMLElement {
+  const table = el("table.gm-table.gm-keys-table");
+  for (const [key, what] of ADVENTURE_KEYS)
+    table.append(el("tr", el("td", kbd(key)), el("td", what)));
+  return table;
+}
+
 class GameScreen {
   private state: GameState;
   private readonly human: number;
@@ -174,7 +227,6 @@ class GameScreen {
   private readonly root = el("div.gm-game");
   private readonly mapWrap = el("div.gm-mapwrap");
   private readonly canvas = el("canvas.gm-map");
-  private readonly tooltip = el("div.gm-tooltip");
   private readonly banner = el("div.gm-ai-banner");
   private readonly bar = el("div.gm-bar");
   private readonly side = el("aside.gm-side");
@@ -182,6 +234,11 @@ class GameScreen {
   private readonly heroList = el("div.gm-hero-list");
   private readonly heroPanel = el("div.gm-hero-panel");
   private readonly townPanel = el("div.gm-town-panel");
+  private readonly hint = el("div.gm-hint-line");
+  /** Recent events for the log (L), oldest first. */
+  private readonly log: Array<{ day: number; text: string }> = [];
+  /** The hovered map cell, for the tooltip. */
+  private hovered: { x: number; y: number } | null = null;
   private readonly view: MapView;
   private readonly minimap: Minimap;
   private readonly resolver = createBattleResolver();
@@ -197,6 +254,8 @@ class GameScreen {
   private pointer = { x: 0, y: 0 };
   private viewportTimer = 0;
   private finished = false;
+  /** A town picked in the kingdom overview, opened when it closes. */
+  private kingdomTown: string | null = null;
   /** An adventure spell waiting for a map cell (Ask the Dead). */
   private aiming: { spell: string; scroll: boolean } | null = null;
 
@@ -209,7 +268,7 @@ class GameScreen {
     this.state = initial;
     this.human = humanPlayer(initial);
     this.selectedId = heroesOf(initial, this.human)[0]?.id ?? null;
-    this.mapWrap.append(this.canvas, this.tooltip, this.banner);
+    this.mapWrap.append(this.canvas, this.banner);
     this.minimap = new Minimap(MINIMAP_PX, (x, y) => this.view.centerOn(x, y));
     this.buildSide();
     this.root.append(el("div.gm-main", this.mapWrap, this.bar), this.side);
@@ -219,11 +278,16 @@ class GameScreen {
     this.view.onClick((cell) => this.onMapClick(cell.x, cell.y));
     this.view.onHover((cell) => this.onHover(cell));
     this.canvas.addEventListener("pointermove", (e) => {
-      this.pointer = { x: e.offsetX, y: e.offsetY };
-      this.placeTooltip();
+      const moved =
+        Math.abs(e.clientX - this.pointer.x) +
+          Math.abs(e.clientY - this.pointer.y) >
+        2;
+      this.pointer = { x: e.clientX, y: e.clientY };
+      if (moved && this.hovered !== null) this.showMapTip();
     });
     this.canvas.addEventListener("pointerleave", () => {
-      this.tooltip.style.display = "none";
+      this.hovered = null;
+      hideTip();
     });
     window.addEventListener("keydown", this.onKey);
     window.addEventListener("resize", this.onResize);
@@ -244,12 +308,17 @@ class GameScreen {
       selectedHero: () => this.hero()?.id ?? null,
       targets: () => this.targets(),
       hover: (x, y) => {
-        this.pointer = { x: 200, y: 200 };
+        const rect = this.canvas.getBoundingClientRect();
+        this.pointer = { x: rect.left + 200, y: rect.top + 200 };
         this.onHover({ x, y });
-        return this.tooltip.style.display === "none"
-          ? null
-          : this.tooltip.textContent;
+        const tip = document.getElementById("gm-tip");
+        return tip?.classList.contains("gm-tip-on") === true
+          ? (tip.innerText ?? tip.textContent)
+          : null;
       },
+      previewEnd: (won) => this.showEnd(won),
+      openTown: (id) => void this.openTown(id),
+      cellToClient: (x, y) => this.cellToClient(x, y),
     };
     // Resume a battle, level-up or AI turn left pending.
     void this.afterCommand([]).then(() => {
@@ -281,6 +350,21 @@ class GameScreen {
       });
     }
     return out.sort((a, b) => a.cost - b.cost);
+  }
+
+  private cellToClient(x: number, y: number): { x: number; y: number } | null {
+    const rect = this.canvas.getBoundingClientRect();
+    const hits: Array<[number, number]> = [];
+    for (let sy = 2; sy < rect.height; sy += 4) {
+      for (let sx = 2; sx < rect.width; sx += 4) {
+        const c = this.view.screenToCell(sx, sy);
+        if (c?.x === x && c.y === y) hits.push([sx, sy]);
+      }
+    }
+    if (hits.length === 0) return null;
+    const mx = hits.reduce((n, h) => n + h[0], 0) / hits.length;
+    const my = hits.reduce((n, h) => n + h[1], 0) / hits.length;
+    return { x: rect.left + mx, y: rect.top + my };
   }
 
   /** The selected hero (or the first of the human's heroes). */
@@ -327,30 +411,101 @@ class GameScreen {
   // ------------------------------------------------------------ layout
 
   private buildSide(): void {
-    const title = el("div.gm-side-title", "Border Marches");
-    const buttons = el(
-      "div.gm-side-buttons",
-      button("Next hero (H)", () => this.nextHero()),
-      button("Kingdom (K)", () => void this.kingdom()),
-      button("Spells (M)", () => void this.spellbook()),
-      button("Dig (G)", () => void this.dig()),
-      button("Menu", () => void this.quitToMenu()),
-    );
-    const endTurnButton = button(
-      "End turn (E)",
+    const tips: Array<[string, string, () => void, string]> = [
+      [
+        "Next",
+        "H",
+        () => this.nextHero(),
+        "Select the next hero with movement left (H).",
+      ],
+      [
+        "Kingdom",
+        "K",
+        () => void this.kingdom(),
+        "Kingdom overview: towns, heroes, mines, income and rivals (K).",
+      ],
+      [
+        "Spells",
+        "M",
+        () => void this.spellbook(),
+        "The selected hero's spellbook: cast adventure spells (M).",
+      ],
+      [
+        "Dig",
+        "G",
+        () => void this.dig(),
+        "Dig for buried treasure on the hero's cell (G).",
+      ],
+      [
+        "Log",
+        "L",
+        () => void this.showLog(),
+        "What happened recently, the other players' turns included (L).",
+      ],
+      [
+        "Menu",
+        "O",
+        () => void this.gameMenu(),
+        "Save, load, sound settings and quit (O).",
+      ],
+    ];
+    const buttons = el("div.gm-side-buttons");
+    for (const [label, key, run, tip] of tips)
+      buttons.append(setTip(keyButton(label, key, run), tip));
+    const endTurnButton = keyButton(
+      "End turn",
+      "E",
       () => void this.endTurn(),
       "gm-btn gm-primary gm-end-turn",
     );
+    setTip(endTurnButton, () => {
+      const warnings = endTurnWarnings(this.state, this.human);
+      return tipCard(
+        "End turn",
+        warnings.length === 0
+          ? ["Everything is done for today."]
+          : warnings.map((w) => w.text),
+        { subtitle: "The other players move, then a new day starts." },
+      );
+    });
     this.side.append(
-      title,
-      this.minimap.canvas,
       this.turnPanel,
-      this.heroList,
+      this.minimap.canvas,
+      el("div.gm-side-lists", this.heroList, this.townPanel),
       this.heroPanel,
-      this.townPanel,
-      buttons,
-      endTurnButton,
-      soundControl(),
+      el("div.gm-side-foot", buttons, endTurnButton),
+    );
+  }
+
+  /** Rich tooltip of one resource: stock, income by source, mines. */
+  private resourceTip(r: ResourceId): HTMLElement {
+    const player = this.player();
+    const total = dailyIncome(this.state, this.human);
+    const parts = incomeBreakdown(this.state, this.human, total);
+    const rows = el("div.gm-tip-res");
+    const add = (label: string, n: number): void => {
+      if (n <= 0) return;
+      rows.append(el("span", label), el("span", `+${n}`));
+    };
+    add("Towns", parts.towns[r]);
+    const mines = minesOf(this.state, this.human, r);
+    add(mines > 0 ? `Mines (${mines})` : "Mines", parts.mines[r]);
+    add("Heroes and artifacts", parts.heroes[r]);
+    return tipCard(
+      RESOURCE_NAMES[r],
+      [
+        `You have ${player?.resources[r] ?? 0}.`,
+        el("div.gm-tip-section", `Income +${total[r]} per day`),
+        rows.childElementCount > 0
+          ? rows
+          : el(
+              "div.gm-tip-dim",
+              r === "gold"
+                ? "Build halls in your towns for gold."
+                : `Flag a ${MINES[r].name} for +${MINES[r].income} a day.`,
+            ),
+      ],
+      { icon: resourceIcon(r) },
     );
   }
 
@@ -362,19 +517,49 @@ class GameScreen {
       const item = el(
         "div.gm-res",
         resourceIcon(r),
-        el("span.gm-res-amount", String(player?.resources[r] ?? 0)),
+        el(
+          "span.gm-res-text",
+          el("span.gm-res-amount", String(player?.resources[r] ?? 0)),
+          income[r] > 0 ? el("span.gm-res-income", `+${income[r]}`) : null,
+        ),
       );
-      item.title = `${RESOURCE_NAMES[r]}: +${income[r]} per day`;
+      item.querySelector("img")?.removeAttribute("title");
+      item.tabIndex = 0;
+      setTip(item, () => this.resourceTip(r));
       bar.append(item);
     }
     return bar;
   }
 
+  /** The line under the map: what to do next, or the planned walk. */
+  private hintText(): string {
+    const hero = this.hero();
+    const planned =
+      this.plan !== null && hero !== undefined
+        ? pathSummary(this.plan.path, hero)
+        : null;
+    if (this.aiming !== null)
+      return "Click an explored cell within 15 cells of the hero (Esc cancels).";
+    return nextActionHint(this.state, this.human, hero, planned);
+  }
+
+  private renderHint(): void {
+    this.hint.textContent = this.hintText();
+  }
+
   private renderBar(): void {
-    this.bar.replaceChildren(
-      this.resourceBar(),
-      el("div.gm-date", dateLabel(this.state.day)),
-    );
+    const date = el("div.gm-date", dateLabel(this.state.day));
+    setTip(date, () => {
+      const c = calendar(this.state.day);
+      return tipCard(dateLabel(this.state.day), [
+        `Day ${this.state.day} of the game.`,
+        c.dayOfWeek === 7
+          ? "A new week starts tomorrow: dwellings grow and taverns refresh."
+          : `${8 - c.dayOfWeek} days to the new week: dwellings grow and taverns refresh.`,
+      ]);
+    });
+    this.renderHint();
+    this.bar.replaceChildren(this.resourceBar(), this.hint, date);
   }
 
   private renderTurn(): void {
@@ -383,12 +568,16 @@ class GameScreen {
     const mine = current === this.human;
     const chip = el("span.gm-turn-chip");
     chip.style.background = colour.hex;
+    const faction = findFaction(
+      this.state.players.find((p) => p.id === current)?.faction ?? "",
+    );
     this.turnPanel.replaceChildren(
       chip,
       el(
         "span.gm-turn-text",
         mine ? "Your turn" : `${colour.name} is thinking...`,
       ),
+      el("span.gm-turn-faction", faction?.name ?? ""),
     );
     this.turnPanel.classList.toggle("gm-turn-ai", !mine);
     this.banner.replaceChildren();
@@ -403,10 +592,34 @@ class GameScreen {
     }
   }
 
+  private heroTip(h: HeroState): HTMLElement {
+    const st = heroStats(h);
+    const army = h.army
+      .filter((s) => s !== null)
+      .map((s) => creatureCount(s.creature, s.count))
+      .join(", ");
+    return tipCard(
+      h.name,
+      [
+        `Attack ${st.attack}, Defense ${st.defense}, Power ${st.power}, Lore ${st.lore}`,
+        `Moves ${h.mp} / ${h.maxMp} · Mana ${h.mana} / ${maxMana(h)}`,
+        army === "" ? "No army" : army,
+        h.pendingLevelUps > 0
+          ? el("div.gm-tip-good", "A level-up is waiting: open the hero (I).")
+          : null,
+      ],
+      {
+        icon: img(namedHeroPortrait(h.defId, h.heroClass).key),
+        subtitle: `Level ${h.level} ${getHeroClass(h.heroClass).name}`,
+      },
+    );
+  }
+
   private renderHeroList(): void {
     this.heroList.replaceChildren();
     const own = heroesOf(this.state, this.human);
     const selected = this.hero();
+    const strip = el("div.gm-hero-strip");
     for (const h of own) {
       const item = el(
         "button.gm-hero-item",
@@ -414,27 +627,28 @@ class GameScreen {
           namedHeroPortrait(h.defId, h.heroClass).key,
           "gm-hero-item-portrait",
         ),
-        el("span.gm-hero-item-name", h.name),
       );
       item.type = "button";
+      item.setAttribute("aria-label", h.name);
       const mp = el("span.gm-hero-item-mp");
       mp.style.setProperty(
         "--mp",
-        `${Math.max(0, Math.min(100, (h.mp / h.maxMp) * 100))}%`,
+        `${Math.max(0, Math.min(100, (h.mp / Math.max(1, h.maxMp)) * 100))}%`,
       );
       item.append(mp);
-      item.title = `${h.name}, level ${h.level}: ${h.mp} / ${h.maxMp} moves`;
+      if (h.pendingLevelUps > 0) item.append(el("span.gm-hero-item-up", "+"));
+      setTip(item, () => this.heroTip(h));
       if (h.id === selected?.id) item.classList.add("gm-selected");
+      if (h.mp < SPENT_MP) item.classList.add("gm-tired");
       item.addEventListener("click", () => this.selectHero(h.id));
-      this.heroList.append(item);
-    }
-    if (own.length === 0) {
-      this.heroList.append(
-        el("div.gm-dim", "No heroes: hire one in a town's tavern."),
-      );
+      item.addEventListener("dblclick", () => void this.heroScreen(h.id));
+      strip.append(item);
     }
     this.heroList.append(
-      el("div.gm-hero-count", `Heroes ${own.length} / ${MAX_HEROES}`),
+      el("div.gm-side-label", `Heroes ${own.length} / ${MAX_HEROES}`),
+      own.length === 0
+        ? el("div.gm-dim", "No heroes: hire one in a town's tavern.")
+        : strip,
     );
   }
 
@@ -448,84 +662,137 @@ class GameScreen {
       "gm-hero-portrait",
       2,
     );
-    portrait.title = "Centre on the hero";
+    setTip(portrait, "Centre the map on the hero. Double-click: hero sheet.");
     portrait.addEventListener("click", () => this.selectHero(hero.id));
+    portrait.addEventListener("dblclick", () => void this.heroScreen(hero.id));
     const nextXp = xpForLevel(hero.level + 1);
     const prevXp = xpForLevel(hero.level);
-    const xpPct = Math.max(
-      0,
-      Math.min(100, ((hero.xp - prevXp) / (nextXp - prevXp)) * 100),
-    );
-    const mpPct = Math.max(0, Math.min(100, (hero.mp / hero.maxMp) * 100));
+    const pct = (n: number, d: number): number =>
+      Math.max(0, Math.min(100, (n / Math.max(1, d)) * 100));
     const st = heroStats(hero);
-    const statLine = el(
-      "div.gm-hero-statline",
-      `A ${st.attack}  D ${st.defense}  P ${st.power}  L ${st.lore}`,
+    const statLine = el("div.gm-hero-statline");
+    for (const [label, key, value] of [
+      ["Attack", "A", st.attack],
+      ["Defense", "D", st.defense],
+      ["Power", "P", st.power],
+      ["Lore", "L", st.lore],
+    ] as const) {
+      const cell = el("span.gm-stat", el("small", key), String(value));
+      setTip(cell, `${label} ${value}`);
+      statLine.append(cell);
+    }
+    const sheet = keyButton(
+      "Hero sheet",
+      "I",
+      () => void this.heroScreen(hero.id),
     );
-    statLine.title = `Attack ${st.attack}, Defense ${st.defense}, Power ${st.power}, Lore ${st.lore}. Mana ${hero.mana} / ${maxMana(hero)}. Open the hero screen (I) for details.`;
-    const sheet = button("Hero (I)", () => void this.heroScreen(hero.id));
     sheet.classList.add("gm-hero-sheet-button");
     if (hero.pendingLevelUps > 0) sheet.classList.add("gm-attention");
+    const meterRow = (
+      kind: string,
+      fillPct: number,
+      label: string,
+      tip: string,
+    ): HTMLElement => {
+      const fill = el(`div.gm-meter-fill.gm-${kind}`);
+      fill.style.width = `${fillPct}%`;
+      return setTip(
+        el(
+          "div.gm-meter-row",
+          el("div.gm-meter", fill),
+          el("div.gm-meter-label", label),
+        ),
+        tip,
+      );
+    };
     const stats = el(
       "div.gm-hero-stats",
-      el("div.gm-hero-name", `${hero.name}, ${cls.name} ${hero.level}`),
+      el("div.gm-hero-name", hero.name),
+      el("div.gm-hero-class", `Level ${hero.level} ${cls.name}`),
       statLine,
-      el("div.gm-dim", `Mana ${hero.mana} / ${maxMana(hero)}`),
-      el("div.gm-meter", el("div.gm-meter-fill.gm-xp")),
-      el("div.gm-meter-label", `XP ${hero.xp} / ${nextXp}`),
-      el("div.gm-meter", el("div.gm-meter-fill.gm-mp")),
-      el("div.gm-meter-label", `Moves ${hero.mp} / ${hero.maxMp}`),
     );
-    const fills = stats.querySelectorAll<HTMLElement>(".gm-meter-fill");
-    fills[0]?.style.setProperty("width", `${xpPct}%`);
-    fills[1]?.style.setProperty("width", `${mpPct}%`);
     this.heroPanel.append(
       el("div.gm-hero-top", portrait, stats),
+      meterRow(
+        "mp",
+        pct(hero.mp, hero.maxMp),
+        `Moves ${hero.mp} / ${hero.maxMp}`,
+        "Movement left today. Roads are cheaper; forest, swamp and rough ground cost more.",
+      ),
+      meterRow(
+        "mana",
+        pct(hero.mana, maxMana(hero)),
+        `Mana ${hero.mana} / ${maxMana(hero)}`,
+        "Mana for spells. It returns each day; Lore raises the maximum.",
+      ),
+      meterRow(
+        "xp",
+        pct(hero.xp - prevXp, nextXp - prevXp),
+        `XP ${hero.xp} / ${nextXp}`,
+        `Experience to level ${hero.level + 1}.`,
+      ),
       armyRow(hero.army, { small: true }),
       sheet,
     );
     this.heroPanel.classList.add("gm-selected");
   }
 
+  private townTip(id: string): HTMLElement | string {
+    const town = this.state.towns[id];
+    if (town === undefined) return "Town";
+    const faction = findFaction(town.faction);
+    const garrison = town.garrison
+      .filter((s) => s !== null)
+      .map((s) => creatureCount(s.creature, s.count))
+      .join(", ");
+    const mine = town.owner === this.human;
+    const canBuild =
+      mine && buildableTowns(this.state, this.human).includes(id);
+    return tipCard(
+      town.name,
+      [
+        el("div", "Income ", costView(townIncome(town))),
+        `Garrison: ${garrison === "" ? "none" : garrison}`,
+        !mine
+          ? null
+          : town.builtToday
+            ? el("div.gm-tip-dim", "Already built today.")
+            : canBuild
+              ? el("div.gm-tip-good", "Something can be built today.")
+              : el("div.gm-tip-dim", "Nothing affordable to build today."),
+      ],
+      {
+        subtitle: `${faction?.name ?? "Town"}, fort level ${fortLevel(town)}`,
+      },
+    );
+  }
+
   private renderTownPanel(): void {
     this.townPanel.replaceChildren();
-    for (const id of this.ownTowns()) {
+    const towns = this.ownTowns();
+    const buildable = new Set(buildableTowns(this.state, this.human));
+    const list = el("div.gm-town-list");
+    towns.forEach((id, i) => {
       const town = this.state.towns[id];
-      if (town === undefined) continue;
-      const b = button(
-        `${town.name} (T)`,
-        () => void this.openTown(id),
-        "gm-btn gm-town-btn",
-      );
-      if (town.builtToday) b.title = "Already built today";
-      this.townPanel.append(b);
-    }
-    const mines = Object.values(this.state.mines).filter(
-      (m) => m.owner === this.human,
-    );
-    const counts = RESOURCE_IDS.map((r) => ({
-      r,
-      n: mines.filter((m) => m.resource === r).length,
-    })).filter((c) => c.n > 0);
+      if (town === undefined) return;
+      const b = button("", () => void this.openTown(id), "gm-town-item");
+      const chip = el("span.gm-town-chip");
+      chip.style.background = findFaction(town.faction)?.colour ?? "#6b5a3e";
+      b.append(chip, el("span.gm-town-item-name", town.name));
+      if (buildable.has(id)) b.append(el("span.gm-town-build", "build"));
+      if (i === 0) b.append(kbd("T"));
+      setTip(b, () => this.townTip(id));
+      list.append(b);
+    });
     const player = this.player();
     this.townPanel.append(
-      el(
-        "div.gm-kingdom",
-        el("div.gm-kingdom-row", "Daily income"),
-        costView(dailyIncome(this.state, this.human)),
-        el(
-          "div.gm-kingdom-row",
-          mines.length === 0
-            ? "No mines yet"
-            : `Mines: ${counts.map((c) => `${c.n} ${MINES[c.r].name}${c.n > 1 ? "s" : ""}`).join(", ")}`,
-        ),
-        this.ownTowns().length === 0 && player !== undefined
-          ? el(
-              "div.gm-kingdom-row.gm-warn",
-              `No town! Out of the game in ${7 - player.townlessDays} days.`,
-            )
-          : null,
-      ),
+      el("div.gm-side-label", `Towns ${towns.length}`),
+      towns.length === 0 && player !== undefined
+        ? el(
+            "div.gm-warn",
+            `No town! Out of the game in ${7 - player.townlessDays} days.`,
+          )
+        : list,
     );
   }
 
@@ -593,30 +860,99 @@ class GameScreen {
 
   private onHover(cell: { x: number; y: number } | null): void {
     if (cell === null || this.inputBlocked()) {
-      this.tooltip.style.display = "none";
+      this.hovered = null;
+      hideTip();
       return;
     }
-    const text = describeCell(
-      this.state,
-      this.human,
-      cell.x,
-      cell.y,
-      this.hero()?.id,
-    );
-    if (text === null) {
-      this.tooltip.style.display = "none";
-      return;
-    }
-    this.tooltip.textContent = text;
-    this.tooltip.style.display = "block";
-    this.placeTooltip();
+    this.hovered = cell;
+    this.showMapTip();
   }
 
-  private placeTooltip(): void {
-    const w = this.mapWrap.clientWidth;
-    const x = Math.min(this.pointer.x + 16, w - this.tooltip.offsetWidth - 4);
-    this.tooltip.style.left = `${Math.max(4, x)}px`;
-    this.tooltip.style.top = `${this.pointer.y + 18}px`;
+  private showMapTip(): void {
+    const cell = this.hovered;
+    if (cell === null || this.inputBlocked()) return;
+    showTipAt(this.pointer.x, this.pointer.y, () => this.cellTip(cell));
+  }
+
+  /**
+   * The hover card of a map cell: describeCell's lines (title first), the
+   * battle estimate for a monster or enemy hero, the path cost and turns
+   * for a reachable cell with the movement left after the step.
+   */
+  private cellTip(cell: { x: number; y: number }): HTMLElement | null {
+    const { x, y } = cell;
+    const hero = this.hero();
+    const text = describeCell(this.state, this.human, x, y, hero?.id);
+    if (text === null) return null;
+    const [title = "", ...rest] = text.split("\n");
+    const lines: Array<string | HTMLElement> = [...rest];
+    const explored =
+      this.player()?.explored[y * this.state.map.width + x] === true;
+    let subtitle: string | null = null;
+    if (explored && hero !== undefined) {
+      const monster = Object.values(this.state.monsters).find(
+        (m) => m.x === x && m.y === y,
+      );
+      const foe = this.state.heroes.find(
+        (h) => h.alive && h.x === x && h.y === y && h.owner !== this.human,
+      );
+      const enemy =
+        monster !== undefined
+          ? [{ creature: monster.creature, count: monster.count }]
+          : foe !== undefined
+            ? foe.army.filter((s) => s !== null)
+            : null;
+      if (enemy !== null && enemy.length > 0) {
+        const { odds } = battleOdds(hero, enemy);
+        lines.push(
+          el(
+            `div.gm-tip-odds.gm-odds-${odds}`,
+            `Estimate for ${hero.name}: ${ODDS_TEXT[odds]}`,
+          ),
+        );
+      }
+      const own = this.state.heroes.find(
+        (h) => h.alive && h.x === x && h.y === y && h.owner === this.human,
+      );
+      if (own !== undefined) return this.heroTip(own);
+      const obj = objectAt(displayObjects(this.state), x, y);
+      if (obj?.kind === "town") {
+        const tip = this.townTip(obj.id);
+        if (typeof tip !== "string") {
+          const path = this.pathTo(obj.x, obj.y);
+          if (path !== null) tip.append(el("div.gm-tip-path", pathLine(path)));
+          return tip;
+        }
+      }
+      if (!(hero.x === x && hero.y === y)) {
+        const tx = obj?.kind === "mine" ? obj.x : x;
+        const ty = obj?.kind === "mine" ? obj.y : y;
+        const path = this.pathTo(tx, ty);
+        if (path !== null) lines.push(el("div.gm-tip-path", pathLine(path)));
+        else if (this.isPassable(x, y)) subtitle = "No path from here";
+      }
+    }
+    return tipCard(title, lines, {
+      subtitle,
+      className: title === "Unexplored" ? "gm-tip-small" : "",
+    });
+  }
+
+  /** The selected hero's path summary to (x, y), or null. */
+  private pathTo(x: number, y: number): PathSummary | null {
+    const hero = this.hero();
+    if (hero === undefined) return null;
+    const path = findPath(this.state, hero.id, x, y);
+    return path === null || path.steps.length === 0
+      ? null
+      : pathSummary(path, hero);
+  }
+
+  private isPassable(x: number, y: number): boolean {
+    const cell = this.state.map.cells[y * this.state.map.width + x];
+    return (
+      cell !== undefined && cell.obstacle === "none" && cell.terrain !== "water"
+    );
   }
 
   private readonly onResize = (): void => this.updateViewport();
@@ -654,10 +990,28 @@ class GameScreen {
         break;
       case "t":
       case "T": {
-        const id = this.ownTowns()[0];
+        // The town the selected hero stands in, else the first town.
+        const hero = this.hero();
+        const here = this.ownTowns().find((id) =>
+          this.state.map.objects.some(
+            (o) => o.id === id && o.x === hero?.x && o.y === hero?.y,
+          ),
+        );
+        const id = here ?? this.ownTowns()[0];
         if (id !== undefined) void this.openTown(id);
         break;
       }
+      case "l":
+      case "L":
+        void this.showLog();
+        break;
+      case "o":
+      case "O":
+        void this.gameMenu();
+        break;
+      case "?":
+        void this.showKeys();
+        break;
       case " ":
         e.preventDefault();
         void this.walk();
@@ -671,7 +1025,10 @@ class GameScreen {
         this.zoomBy(-1);
         break;
       case "Escape":
-        this.clearPlan();
+        if (this.aiming !== null) {
+          this.aiming = null;
+          this.renderHint();
+        } else this.clearPlan();
         break;
       default:
         // Layouts without a plain +/- key: fall back to the key position.
@@ -697,23 +1054,28 @@ class GameScreen {
     this.view.centerOn(hero.x, hero.y);
     this.renderHeroList();
     this.renderHeroPanel();
+    this.renderHint();
   }
 
-  /** Cycles to the next hero (H). */
+  /** Cycles to the next hero, preferring heroes with movement left (H). */
   private nextHero(): void {
     const own = heroesOf(this.state, this.human);
     if (own.length === 0) return;
     const i = own.findIndex((h) => h.id === this.hero()?.id);
-    const next = own[(i + 1) % own.length];
+    const order = own.map((_, k) => own[(i + 1 + k) % own.length]);
+    const next =
+      order.find((h) => h !== undefined && h.mp >= SPENT_MP) ?? order[0];
     if (next !== undefined) this.selectHero(next.id);
   }
 
   private clearPlan(): void {
     this.plan = null;
     this.view.setPathPreview(null);
+    this.renderHint();
   }
 
   private showPlan(): void {
+    this.renderHint();
     if (this.plan === null) {
       this.view.setPathPreview(null);
       return;
@@ -873,7 +1235,7 @@ class GameScreen {
       return;
     }
     this.busy = true;
-    this.tooltip.style.display = "none";
+    hideTip();
     if (moved?.type === "moved") await this.animateWalk(hero, moved.cells);
     this.state = result.state;
     const arrived = !(moved?.type === "moved" && moved.stop === "no-mp");
@@ -934,7 +1296,7 @@ class GameScreen {
         case "pickup":
           if (this.state.currentPlayer !== this.human) break;
           playSound(pickupCue(e.resource));
-          toast(
+          this.note(
             `+${e.amount} ${RESOURCE_NAMES[e.resource].toLowerCase()}`,
             "gain",
           );
@@ -945,9 +1307,14 @@ class GameScreen {
           const def = MINES[mine.resource];
           if (e.owner === this.human) {
             playSound("pickup");
-            toast(
+            this.note(
               `${def.name} claimed: +${def.income} ${mine.resource} per day`,
               "gain",
+            );
+          } else if (this.aiRunning) {
+            this.note(
+              `${playerColour(e.owner).name} flags a ${def.name}`,
+              "quiet",
             );
           }
           break;
@@ -957,15 +1324,15 @@ class GameScreen {
             this.state.heroes.find((h) => h.id === e.heroId)?.owner ===
             this.human
           )
-            toast(`+${e.amount} experience`, "gain");
+            this.note(`+${e.amount} experience`, "gain");
           break;
         case "town-captured": {
           const name = this.state.towns[e.townId]?.name ?? "Town";
           if (e.owner === this.human) {
             playSound("new-week");
-            toast(`${name} captured!`, "gain");
+            this.note(`${name} captured!`, "gain");
           } else if (e.from === this.human) {
-            toast(`${name} has fallen to ${playerColour(e.owner).name}!`);
+            this.note(`${name} has fallen to ${playerColour(e.owner).name}!`);
           }
           break;
         }
@@ -974,13 +1341,13 @@ class GameScreen {
           const h = this.state.heroes.find((x) => x.id === e.heroId);
           if (h === undefined) break;
           if (h.owner === this.human) {
-            toast(
+            this.note(
               e.type === "hero-retreated"
                 ? `${h.name} retreats to the tavern`
                 : `${h.name} has fallen`,
             );
           } else {
-            toast(
+            this.note(
               `${h.name} of ${playerColour(h.owner).name} is beaten`,
               "gain",
             );
@@ -989,22 +1356,22 @@ class GameScreen {
         }
         case "artifacts-won":
           if (e.artifacts.length > 0)
-            toast(`${e.artifacts.length} artifacts taken`, "gain");
+            this.note(`${e.artifacts.length} artifacts taken`, "gain");
           break;
         case "site": {
           const h = this.state.heroes.find((x) => x.id === e.heroId);
           if (h?.owner === this.human && e.options === undefined) {
-            toast(e.text, "gain");
+            this.note(e.text, "gain");
           }
           break;
         }
         case "teleported": {
           const h = this.state.heroes.find((x) => x.id === e.heroId);
-          if (h?.owner === this.human) toast("The waystone carries you.");
+          if (h?.owner === this.human) this.note("The waystone carries you.");
           break;
         }
         case "dug":
-          toast(
+          this.note(
             e.found === null
               ? "You dig, and find nothing."
               : `Dug up: ${e.found}!`,
@@ -1012,11 +1379,15 @@ class GameScreen {
           );
           break;
         case "hero-freed":
-          if (e.player === this.human) toast("A prisoner joins you!", "gain");
+          if (e.player === this.human)
+            this.note("A prisoner joins you!", "gain");
           break;
         case "player-eliminated":
           if (e.player !== this.human)
-            toast(`${playerColour(e.player).name} is out of the game!`, "week");
+            this.note(
+              `${playerColour(e.player).name} is out of the game!`,
+              "week",
+            );
           break;
         default:
           break;
@@ -1221,12 +1592,32 @@ class GameScreen {
       const own = setup[humanSide];
       const enemy = setup[humanSide === "attacker" ? "defender" : "attacker"];
       const { title, phrase } = this.battleText(setup);
-      const list = el("ul.gm-enemy-list");
-      for (const s of enemy.stacks)
-        list.append(el("li", creatureCount(s.creature, s.count)));
-      const ownList = el("ul.gm-enemy-list");
-      for (const s of own.stacks)
-        ownList.append(el("li", creatureCount(s.creature, s.count)));
+      const armyList = (
+        stacks: ReadonlyArray<{ creature: string; count: number }>,
+      ): HTMLElement => {
+        const list = el("ul.gm-enemy-list");
+        for (const s of stacks) {
+          const def = getCreature(s.creature);
+          const li = el(
+            "li",
+            img(`portrait-${def.sprite}`, "gm-versus-portrait"),
+            creatureCount(s.creature, s.count),
+          );
+          setTip(li, () => creatureTip(s.creature, s.count));
+          list.append(li);
+        }
+        return list;
+      };
+      const list = armyList(enemy.stacks);
+      const ownList = armyList(own.stacks);
+      const ownHero = this.state.heroes.find((h) => h.id === own.hero?.id);
+      const estimate =
+        ownHero === undefined
+          ? null
+          : battleOdds(
+              { ...ownHero, army: own.stacks.map((x) => ({ ...x })) },
+              enemy.stacks,
+            ).odds;
       const buttons: Array<{
         label: string;
         value: "fight" | "auto" | "retreat";
@@ -1249,6 +1640,12 @@ class GameScreen {
             el("div", el("h3", "Your army"), ownList),
             el("div", el("h3", "Enemy"), list),
           ),
+          estimate === null
+            ? null
+            : el(
+                `p.gm-estimate.gm-odds-${estimate}`,
+                `Estimate: ${ODDS_TEXT[estimate]}`,
+              ),
           el(
             "p.gm-dim",
             own.canRetreat === true
@@ -1298,6 +1695,33 @@ class GameScreen {
 
   private async endTurn(): Promise<void> {
     if (this.inputBlocked()) return;
+    const warnings = endTurnWarnings(this.state, this.human);
+    if (warnings.length > 0) {
+      const list = el("ul.gm-warn-list");
+      for (const w of warnings) list.append(el(`li.gm-warn-${w.kind}`, w.text));
+      const choice = await modal<"end" | "stay">({
+        title: "End the turn?",
+        className: "gm-endturn-dialog",
+        body: el(
+          "div",
+          list,
+          el(
+            "p.gm-dim",
+            "Unspent movement and unbuilt buildings do not carry over.",
+          ),
+        ),
+        buttons: [
+          { label: "End turn", value: "end", primary: true },
+          { label: "Keep playing", value: "stay" },
+        ],
+        cancel: "stay",
+      });
+      if (choice !== "end") {
+        const first = warnings.find((w) => w.kind !== "can-build");
+        if (first !== undefined) this.selectHero(first.id);
+        return;
+      }
+    }
     const events = this.run(endTurn(this.state));
     if (events === null) return;
     this.clearPlan();
@@ -1327,7 +1751,7 @@ class GameScreen {
   private async runAiTurns(): Promise<void> {
     if (this.aiRunning || this.finished) return;
     this.aiRunning = true;
-    this.tooltip.style.display = "none";
+    hideTip();
     this.refresh();
     try {
       for (let guard = 0; guard < 2000; guard++) {
@@ -1358,7 +1782,7 @@ class GameScreen {
     if (this.finished || this.state.status !== "playing") return;
     this.refresh();
     saveGame(browserStorage(), this.state);
-    toast(`${dateLabel(this.state.day)}: your turn`);
+    this.note(`${dateLabel(this.state.day)}: your turn`);
     const hero = this.hero();
     if (hero !== undefined) this.view.centerOn(hero.x, hero.y);
     await this.levelUps();
@@ -1380,7 +1804,7 @@ class GameScreen {
   private async openTown(townId: string): Promise<void> {
     if (this.screenOpen || this.finished) return;
     this.screenOpen = true;
-    this.tooltip.style.display = "none";
+    hideTip();
     await openTownScreen(
       {
         state: () => this.state,
@@ -1482,24 +1906,71 @@ class GameScreen {
     this.refresh();
   }
 
-  /** The kingdom summary: towns, heroes, income, rivals. */
+  /** The kingdom overview: income, towns, heroes, mines, rivals. */
   private async kingdom(): Promise<void> {
     if (this.inputBlocked()) return;
     const s = this.state;
+    const total = dailyIncome(s, this.human);
+    const parts = incomeBreakdown(s, this.human, total);
+    const income = el("table.gm-table.gm-income-table");
+    income.append(
+      el(
+        "tr",
+        el("th", ""),
+        ...RESOURCE_IDS.map((r) => el("th", resourceIcon(r, "gm-res-icon-24"))),
+      ),
+    );
+    for (const [label, row] of [
+      ["Towns", parts.towns],
+      ["Mines", parts.mines],
+      ["Heroes", parts.heroes],
+      ["Per day", parts.total],
+    ] as const) {
+      const tr = el(
+        "tr",
+        el("td", label),
+        ...RESOURCE_IDS.map((r) =>
+          el("td.gm-num", row[r] > 0 ? `+${row[r]}` : "-"),
+        ),
+      );
+      if (label === "Per day") tr.classList.add("gm-total");
+      income.append(tr);
+    }
+    const buildable = new Set(buildableTowns(s, this.human));
     const towns = el("table.gm-table");
     towns.append(
-      el("tr", el("th", "Town"), el("th", "Income"), el("th", "Garrison")),
+      el(
+        "tr",
+        el("th", "Town"),
+        el("th", "Fort"),
+        el("th", "Income"),
+        el("th", "Garrison"),
+        el("th", "Today"),
+      ),
     );
     for (const t of townsOf(s, this.human)) {
       const garrison = t.garrison.reduce((n, x) => n + (x?.count ?? 0), 0);
-      towns.append(
+      const name = button(t.name, () => void 0, "gm-linkish");
+      const row = el(
+        "tr",
+        el("td", name),
+        el("td.gm-num", fortLevel(t) === 0 ? "-" : String(fortLevel(t))),
+        el("td", costView(townIncome(t))),
+        el("td.gm-num", String(garrison)),
         el(
-          "tr",
-          el("td", t.name),
-          el("td", costView(townIncome(t))),
-          el("td", String(garrison)),
+          "td",
+          t.builtToday
+            ? el("span.gm-dim", "built")
+            : buildable.has(t.id)
+              ? el("span.gm-good", "can build")
+              : el("span.gm-dim", "-"),
         ),
       );
+      setTip(name, () => this.townTip(t.id));
+      name.addEventListener("click", () => {
+        this.kingdomTown = t.id;
+      });
+      towns.append(row);
     }
     const heroes = el("table.gm-table");
     heroes.append(
@@ -1513,48 +1984,87 @@ class GameScreen {
     );
     for (const h of heroesOf(s, this.human)) {
       const army = h.army.reduce((n, x) => n + (x?.count ?? 0), 0);
+      const name = el(
+        "span.gm-kingdom-hero",
+        img(namedHeroPortrait(h.defId, h.heroClass).key, "gm-kingdom-portrait"),
+        h.name,
+      );
+      setTip(name, () => this.heroTip(h));
       heroes.append(
         el(
           "tr",
-          el("td", h.name),
-          el("td", String(h.level)),
-          el("td", String(army)),
-          el("td", `${h.mp} / ${h.maxMp}`),
+          el("td", name),
+          el("td.gm-num", String(h.level)),
+          el("td.gm-num", String(army)),
+          el("td.gm-num", `${h.mp} / ${h.maxMp}`),
         ),
       );
+    }
+    const mineList = el("div.gm-mine-list");
+    for (const r of RESOURCE_IDS) {
+      const n = minesOf(s, this.human, r);
+      if (r === "gold" && n === 0) continue;
+      const item = el(
+        "span.gm-mine-item",
+        resourceIcon(r, "gm-cost-icon"),
+        `${n} ${MINES[r].name}${n === 1 ? "" : "s"}`,
+      );
+      if (n === 0) item.classList.add("gm-dim");
+      mineList.append(item);
     }
     const rivals = el("ul.gm-rivals");
     for (const p of s.players) {
       if (p.id === this.human) continue;
       const chip = el("span.gm-turn-chip");
       chip.style.background = playerColour(p.id).hex;
+      const faction = findFaction(p.faction)?.name ?? "";
+      const nTowns = townsOf(s, p.id).length;
       rivals.append(
         el(
           "li",
           chip,
-          `${playerColour(p.id).name} (${p.kind === "ai" ? "AI" : "human"}): ${p.eliminated ? "out of the game" : "in the game"}`,
+          `${playerColour(p.id).name}, ${faction} (${p.kind === "ai" ? "computer" : "human"}): `,
+          p.eliminated
+            ? el("span.gm-dim", "out of the game")
+            : `${nTowns} ${nTowns === 1 ? "town" : "towns"}`,
         ),
       );
     }
-    const mines = Object.values(s.mines).filter((m) => m.owner === this.human);
+    this.kingdomTown = null;
     await modal<undefined>({
       title: "Kingdom",
       className: "gm-kingdom-dialog",
       body: el(
         "div.gm-kingdom-body",
-        el("h3", "Daily income"),
-        costView(dailyIncome(s, this.human)),
-        el("div.gm-dim", `${mines.length} mines`),
-        el("h3", "Towns"),
+        el("h3.gm-rule", "Income"),
+        income,
+        el("h3.gm-rule", "Mines"),
+        mineList,
+        el("h3.gm-rule", "Towns"),
         towns,
-        el("h3", "Heroes"),
+        el("h3.gm-rule", "Heroes"),
         heroes,
-        el("h3", "Rivals"),
+        el("h3.gm-rule", "Rivals"),
         rivals,
       ),
       buttons: [{ label: "Close", value: undefined, primary: true }],
       cancel: undefined,
+      onOpen: () => {
+        for (const b of towns.querySelectorAll<HTMLButtonElement>(
+          ".gm-linkish",
+        )) {
+          b.addEventListener("click", () => {
+            const close = document.querySelector<HTMLButtonElement>(
+              ".gm-kingdom-dialog .gm-modal-buttons .gm-btn",
+            );
+            close?.click();
+          });
+        }
+      },
     });
+    const town = this.kingdomTown;
+    this.kingdomTown = null;
+    if (town !== null) await this.openTown(town);
   }
 
   /** The adventure spellbook (RULES_V2 2.8) of the selected hero. */
@@ -1582,20 +2092,124 @@ class GameScreen {
     }
   }
 
-  private async quitToMenu(): Promise<void> {
+  /** Records a message in the log; toasts it unless it is quiet. */
+  private note(
+    text: string,
+    kind: "info" | "gain" | "week" | "quiet" = "info",
+  ): void {
+    this.log.push({ day: this.state.day, text });
+    if (this.log.length > 120) this.log.splice(0, this.log.length - 120);
+    if (kind !== "quiet") toast(text, kind);
+  }
+
+  /** The adventure log (L): recent events, the AI turns included. */
+  private async showLog(): Promise<void> {
     if (this.inputBlocked()) return;
-    const choice = await modal<"quit" | "stay">({
-      title: "Return to the main menu?",
-      body: "The game is saved; Continue picks it up from here.",
+    const list = el("ol.gm-log");
+    let day = -1;
+    for (const entry of this.log.slice(-60)) {
+      if (entry.day !== day) {
+        day = entry.day;
+        list.append(el("li.gm-log-day", dateLabel(day)));
+      }
+      list.append(el("li", entry.text));
+    }
+    if (this.log.length === 0)
+      list.append(el("li.gm-dim", "Nothing has happened yet."));
+    await modal<undefined>({
+      title: "Adventure log",
+      className: "gm-log-dialog",
+      body: list,
+      buttons: [{ label: "Close", value: undefined, primary: true }],
+      cancel: undefined,
+      onOpen: () => {
+        list.scrollTop = list.scrollHeight;
+      },
+    });
+  }
+
+  /** Every keyboard shortcut of the adventure screen (?). */
+  private async showKeys(): Promise<void> {
+    if (this.inputBlocked()) return;
+    await modal<undefined>({
+      title: "Keyboard",
+      className: "gm-keys-dialog",
+      body: keysTable(),
+      buttons: [{ label: "Close", value: undefined, primary: true }],
+      cancel: undefined,
+    });
+  }
+
+  /** The game menu (O): save, load, sound settings, keys, quit. */
+  private async gameMenu(): Promise<void> {
+    if (this.inputBlocked()) return;
+    const saved = readSave(browserStorage());
+    const savedDay = saved.kind === "ok" ? saved.state.day : null;
+    const choice = await modal<"save" | "load" | "keys" | "quit" | "stay">({
+      title: "Menu",
+      className: "gm-menu-dialog",
+      body: el(
+        "div.gm-menu-dialog-body",
+        el(
+          "p.gm-dim",
+          "The game saves itself at the end of every turn. Save now to keep this moment.",
+        ),
+        el("h3.gm-rule", "Sound"),
+        soundControl(),
+      ),
       buttons: [
-        { label: "Save and quit", value: "quit", primary: true },
-        { label: "Keep playing", value: "stay" },
+        { label: "Save game", value: "save", primary: true },
+        {
+          label: savedDay === null ? "Load (no save)" : `Load day ${savedDay}`,
+          value: "load",
+          disabled: savedDay === null,
+        },
+        { label: "Keys", value: "keys" },
+        { label: "Quit to menu", value: "quit" },
+        { label: "Back", value: "stay" },
       ],
       cancel: "stay",
     });
-    if (choice !== "quit") return;
-    saveGame(browserStorage(), this.state);
-    this.finish({ reason: "menu" });
+    if (choice === "save") {
+      const ok = saveGame(browserStorage(), this.state);
+      this.note(ok ? "Game saved." : "Could not save: storage is full or off.");
+    } else if (choice === "keys") {
+      await this.showKeys();
+    } else if (choice === "load") {
+      const again = readSave(browserStorage());
+      if (again.kind !== "ok") return;
+      const sure = await modal<boolean>({
+        title: `Load the save of day ${again.state.day}?`,
+        body: "Anything done since that save is lost.",
+        buttons: [
+          { label: "Load", value: true, primary: true },
+          { label: "Cancel", value: false },
+        ],
+        cancel: false,
+      });
+      if (!sure) return;
+      this.state = again.state;
+      this.selectedId = heroesOf(this.state, this.human)[0]?.id ?? null;
+      this.clearPlan();
+      this.objectsSig = "";
+      this.refresh();
+      const hero = this.hero();
+      if (hero !== undefined) this.view.centerOn(hero.x, hero.y);
+      this.note(`Loaded the save of day ${this.state.day}.`);
+    } else if (choice === "quit") {
+      const sure = await modal<"quit" | "stay">({
+        title: "Return to the main menu?",
+        body: "The game is saved first; Continue picks it up from here.",
+        buttons: [
+          { label: "Save and quit", value: "quit", primary: true },
+          { label: "Keep playing", value: "stay" },
+        ],
+        cancel: "stay",
+      });
+      if (sure !== "quit") return;
+      saveGame(browserStorage(), this.state);
+      this.finish({ reason: "menu" });
+    }
   }
 
   /** Shows the victory or defeat screen when the game is over. */
@@ -1606,8 +2220,15 @@ class GameScreen {
     playSound(won ? "victory" : "defeat");
     deleteSave(browserStorage());
     this.finished = true;
+    this.showEnd(won);
+    return true;
+  }
+
+  /** The victory or defeat screen (also previewEnd for screenshots). */
+  private showEnd(won: boolean): void {
     const c = calendar(this.state.day);
-    const best = heroesOf(this.state, this.human).reduce<HeroState | null>(
+    const own = heroesOf(this.state, this.human);
+    const best = own.reduce<HeroState | null>(
       (a, h) => (a === null || h.level > a.level ? h : a),
       null,
     );
@@ -1618,18 +2239,38 @@ class GameScreen {
         ? "The Warlord's Hold has fallen. The border marches belong to the Lost World."
         : "Every rival has fallen. The border marches are yours."
       : "Your last town and your last hero are gone. The marches belong to others now.";
+    const stat = (label: string, value: string, wide = false): HTMLElement =>
+      el(
+        `div.gm-end-stat${wide ? ".gm-wide" : ""}`,
+        el("span", label),
+        el("b", value),
+      );
+    const mines = Object.values(this.state.mines).filter(
+      (m) => m.owner === this.human,
+    ).length;
     const screen = el(
       "div.gm-end",
       el(
         "div.gm-end-box",
+        best !== null
+          ? img(
+              namedHeroPortrait(best.defId, best.heroClass).key,
+              "gm-end-portrait",
+              2,
+            )
+          : null,
         el("h1", won ? "Victory!" : "Defeat"),
-        el("p", text),
+        el("p.gm-end-text", text),
         el(
-          "p.gm-dim",
-          `Month ${c.month}, week ${c.week}, day ${c.dayOfWeek} (day ${this.state.day})` +
-            (best !== null
-              ? `. ${best.name} reached level ${best.level}.`
-              : "."),
+          "div.gm-end-stats",
+          stat("Date", `Month ${c.month}, week ${c.week}, day ${c.dayOfWeek}`),
+          stat("Days played", String(this.state.day)),
+          stat("Towns", String(townsOf(this.state, this.human).length)),
+          stat("Heroes", String(own.length)),
+          stat("Mines", String(mines)),
+          best !== null
+            ? stat("Best hero", `${best.name}, level ${best.level}`, true)
+            : null,
         ),
         button(
           "Main menu",
@@ -1638,13 +2279,13 @@ class GameScreen {
             this.destroy();
             this.exit({ reason: won ? "won" : "lost" });
           },
-          "gm-btn gm-primary",
+          "gm-btn gm-primary gm-end-button",
         ),
       ),
     );
     screen.classList.add(won ? "gm-won" : "gm-lost");
     this.host.append(screen);
-    return true;
+    screen.querySelector<HTMLButtonElement>(".gm-end-button")?.focus();
   }
 
   private finish(result: GameExit): void {

@@ -1052,3 +1052,39 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Bead bzc.25: the action bar fits 1280 px with a full hero (spells, a
+   Command and five item acts): tighter spacing, then icon-only acts in a
+   crowded group (the act's tooltip still names it). */
+@media (max-width: 1520px) {
+  .bm-actionbar {
+    gap: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .bm-act-group {
+    gap: 4px;
+    padding-left: 6px;
+  }
+
+  .bm-act {
+    padding-right: 6px;
+  }
+
+  .bm-act-label {
+    max-width: 84px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 1380px) {
+  .bm-act-group:has(.bm-act-wrap:nth-child(6)) .bm-act-label {
+    display: none;
+  }
+
+  .bm-act-group:has(.bm-act-wrap:nth-child(6)) .bm-act {
+    padding-right: 3px;
+  }
+}

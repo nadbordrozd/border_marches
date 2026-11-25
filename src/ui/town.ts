@@ -48,6 +48,11 @@ import {
 } from "../data/economy.ts";
 import type { BuildingId, CreatureId } from "../data/types.ts";
 import { armyRow } from "./army.ts";
+import { specialtyText } from "../core/game/effects.ts";
+import { abilityText, buildingTip, creatureTip } from "./info-tips.ts";
+import { findFaction } from "../data/factions.ts";
+import { setTip, tipCard } from "./tooltip.ts";
+import { creatureAbilities } from "../data/creatures.ts";
 import { townLevel } from "./objects.ts";
 import {
   button,
@@ -55,6 +60,7 @@ import {
   el,
   img,
   imageUrl,
+  keyButton,
   modal,
   resourceIcon,
 } from "./dom.ts";
@@ -115,11 +121,22 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       const hero = heroInTownOf(state, town);
       root.replaceChildren();
 
+      const faction = findFaction(town.faction);
+      const chip = el("span.gm-town-chip.gm-town-chip-big");
+      chip.style.background = faction?.colour ?? "#6b5a3e";
       const header = el(
         "div.gm-town-header",
-        el("h1.gm-town-name", town.name),
+        el(
+          "div.gm-town-title",
+          el("h1.gm-town-name", chip, town.name),
+          el(
+            "div.gm-town-sub",
+            `${faction?.name ?? "Town"} · ${fortLevel(town) === 0 ? "no fort" : `fort level ${fortLevel(town)}`} · ` +
+              (town.builtToday ? "built today" : "one building a day"),
+          ),
+        ),
         host.resourceBar(),
-        button("Leave (Esc)", close, "gm-btn gm-primary"),
+        keyButton("Leave", "Esc", close, "gm-btn gm-primary"),
       );
       root.append(header);
 
@@ -174,7 +191,45 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       for (const id of townTree(town.faction)?.order ?? [])
         grid.append(buildingCard(state, town, id, player?.resources));
 
-      root.append(el("div.gm-town-body", picture, grid));
+      // Every built dwelling's stock at a glance, as the Heroes II castle
+      // screen shows it (bead bzc.25).
+      const stock = el("div.gm-town-stock", el("h3.gm-rule", "Recruit"));
+      const dwellings = (townTree(town.faction)?.order ?? [])
+        .map((b) => buildingDef(town.faction, b))
+        .filter(
+          (d) =>
+            d !== undefined &&
+            d.dwelling !== undefined &&
+            town.buildings.includes(d.id),
+        );
+      const stockRow = el("div.gm-stock-row");
+      for (const d of dwellings) {
+        const creature = d?.dwelling;
+        if (creature === undefined) continue;
+        const c = getCreature(creature);
+        const left = town.dwellings[creature]?.available ?? 0;
+        const cell = el(
+          "button.gm-stock",
+          img(`portrait-${c.sprite}`, "gm-stock-portrait"),
+          el("span.gm-stock-count", String(left)),
+        );
+        cell.type = "button";
+        cell.disabled = left <= 0;
+        cell.setAttribute("aria-label", `Recruit ${c.plural}: ${left}`);
+        setTip(cell, () => creatureTip(creature));
+        cell.addEventListener("click", () => {
+          void openRecruit(host, town.id, creature).then(render);
+        });
+        stockRow.append(cell);
+      }
+      stock.append(
+        dwellings.length === 0
+          ? el("div.gm-dim", "No dwellings yet: build one to recruit.")
+          : stockRow,
+      );
+      root.append(
+        el("div.gm-town-body", el("div.gm-town-left", picture, stock), grid),
+      );
 
       // ------------------------------------------------ armies
       const onSlot =
@@ -296,25 +351,42 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         );
         hire.disabled = reason !== null;
         if (reason !== null) hire.title = reason;
-        box.append(
+        const row = el(
+          "div.gm-tavern-hero",
+          img(
+            namedHeroPortrait(entry.defId, def.heroClass).key,
+            "gm-tavern-portrait",
+          ),
           el(
-            "div.gm-tavern-hero",
-            img(
-              namedHeroPortrait(entry.defId, def.heroClass).key,
-              "gm-tavern-portrait",
-            ),
+            "div.gm-tavern-text",
+            el("div.gm-tavern-name", def.name),
             el(
-              "div.gm-tavern-text",
-              el("div.gm-tavern-name", def.name),
-              el(
-                "div.gm-dim",
-                `${getHeroClass(def.heroClass).name}, level ${level}` +
-                  (entry.retreated ? " (retreated)" : ""),
-              ),
+              "div.gm-dim",
+              `${getHeroClass(def.heroClass).name}, level ${level}` +
+                (entry.retreated ? " (retreated)" : ""),
             ),
-            hire,
+          ),
+          hire,
+        );
+        setTip(row.querySelector(".gm-tavern-text") ?? row, () =>
+          tipCard(
+            def.name,
+            [
+              def.specialty !== undefined
+                ? `Specialty: ${specialtyText(def.specialty)}`
+                : null,
+              entry.retreated
+                ? "Retreated from a battle: comes back with the army left at home."
+                : "Comes with a small starting army.",
+              `Hiring costs ${HIRE_COST} gold; the hero appears in the town gate.`,
+            ],
+            {
+              icon: img(namedHeroPortrait(entry.defId, def.heroClass).key),
+              subtitle: `${getHeroClass(def.heroClass).name}, level ${level}`,
+            },
           ),
         );
+        box.append(row);
       }
       return box;
     };
@@ -337,6 +409,10 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       }
       const card = el("div.gm-building");
       card.classList.add(`gm-b-${status}`);
+      setTip(card, () => {
+        const t = host.state().towns[town.id];
+        return t === undefined ? def.name : buildingTip(t, id);
+      });
       const head = el("div.gm-building-head");
       const art = buildingArt(town.faction, id);
       if (art !== null) head.append(img(art.key, "gm-building-art"));
@@ -378,6 +454,10 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
             void openRecruit(host, town.id, creature).then(render);
           });
           b.disabled = stock <= 0;
+          b.title =
+            stock <= 0
+              ? "None left this week: dwellings grow on day 1 of each week."
+              : `${stock} ${getCreature(creature).plural} wait to be recruited.`;
           actions.append(b);
         }
       } else {
@@ -449,7 +529,9 @@ async function openRecruit(
     "div.gm-recruit",
     el(
       "div.gm-recruit-top",
-      img(`portrait-${def.sprite}`, "gm-recruit-portrait", 2),
+      setTip(img(`portrait-${def.sprite}`, "gm-recruit-portrait", 2), () =>
+        creatureTip(creature),
+      ),
       el(
         "div.gm-recruit-stats",
         el("div", `Attack ${def.attack}  Defense ${def.defense}`),
@@ -459,9 +541,22 @@ async function openRecruit(
           `Speed ${def.speed}${def.shots > 0 ? `  Shots ${def.shots}` : ""}`,
         ),
         el("div", "Cost each: ", costView(def.cost)),
-        el("div", `Available: ${stock}`),
+        el("div", `Available: ${stock} · growth ${def.growth} a week`),
       ),
     ),
+    creatureAbilities(def).length > 0
+      ? el(
+          "div.gm-recruit-abilities",
+          ...creatureAbilities(def).map((a) => {
+            const t = abilityText(a);
+            return el(
+              "div",
+              el("b", t.name),
+              t.text === "" ? "" : `: ${t.text}`,
+            );
+          }),
+        )
+      : null,
     el("div.gm-recruit-row", slider, number, maxButton),
     total,
   );

@@ -37,6 +37,27 @@ export function button(
   return b;
 }
 
+/** A small key chip ("E") shown on buttons and in hints. */
+export function kbd(key: string): HTMLElement {
+  return el("kbd.gm-kbd", key);
+}
+
+/**
+ * A button that shows its keyboard shortcut as a chip after the label and
+ * announces it (aria-keyshortcuts).
+ */
+export function keyButton(
+  label: string,
+  key: string,
+  onClick: (e: MouseEvent) => void,
+  className = "gm-btn",
+): HTMLButtonElement {
+  const b = button(label, onClick, className);
+  b.append(kbd(key));
+  b.setAttribute("aria-keyshortcuts", key);
+  return b;
+}
+
 /** The URL of a manifest image by key. */
 export function imageUrl(key: string): string {
   return assetUrl(assetByKey(key), import.meta.env.BASE_URL);
@@ -120,6 +141,9 @@ export function modal<T>(options: ModalOptions<T>): Promise<T> {
     modalDepth++;
     const backdrop = el("div.gm-backdrop");
     const box = el("div.gm-modal");
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-modal", "true");
+    box.setAttribute("aria-label", options.title);
     if (options.className) box.classList.add(options.className);
     box.append(el("h2.gm-modal-title", options.title));
     if (options.body !== undefined) {
@@ -136,11 +160,17 @@ export function modal<T>(options: ModalOptions<T>): Promise<T> {
     };
     let primary: HTMLButtonElement | null = null;
     const nodes: HTMLButtonElement[] = [];
+    const hasCancel = "cancel" in options;
     for (const b of options.buttons) {
       const node = button(b.label, () => close(b.value));
       if (b.primary === true) {
         node.classList.add("gm-primary");
         primary = node;
+        node.append(kbd("Enter"));
+        node.setAttribute("aria-keyshortcuts", "Enter");
+      } else if (hasCancel && Object.is(b.value, options.cancel)) {
+        node.append(kbd("Esc"));
+        node.setAttribute("aria-keyshortcuts", "Escape");
       }
       node.disabled = b.disabled === true;
       nodes.push(node);

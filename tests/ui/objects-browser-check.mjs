@@ -235,7 +235,7 @@ async function main() {
       );
       const leave = await evaluate(`(() => {
         const bs = [...document.querySelectorAll('.gm-modal button')];
-        const b = bs.find((n) => n.textContent.trim() === 'Leave');
+        const b = bs.find((n) => n.textContent.trim().startsWith('Leave'));
         return Boolean(b);
       })()`);
       if (leave) {
@@ -246,7 +246,7 @@ async function main() {
       await evaluate(`(() => {
         const bs = [...document.querySelectorAll('.gm-modal button')];
         const b =
-          bs.find((n) => n.textContent.trim() === 'Leave') ??
+          bs.find((n) => n.textContent.trim().startsWith('Leave')) ??
           bs.find((n) => !n.disabled);
         if (b) b.click();
       })()`);

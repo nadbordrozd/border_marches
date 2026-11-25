@@ -74,6 +74,7 @@ import type { Route } from "../../router.ts";
 import { HEX_SIZE, STAGE_W, hexToStage } from "../../render/battle/geometry.ts";
 import { factionBattleSetup } from "./debug-armies.ts";
 import { runBattleScreen } from "./screen.ts";
+import { installTooltips } from "../tooltip.ts";
 import { decorateScenario, giveTurn, scenarioSetup } from "./scenarios.ts";
 import type { Speed } from "./animate.ts";
 
@@ -333,6 +334,7 @@ async function runScript(
 }
 
 export function startBattleDebug(route: Route): void {
+  installTooltips();
   const container = document.getElementById("ui") ?? document.body;
   const p = route.params;
   const seed = route.seed ?? 1;

@@ -6,6 +6,8 @@ import type { ArmySlots } from "../core/game/types.ts";
 import { getCreature } from "../data/creatures.ts";
 import { creatureCount } from "./format.ts";
 import { el, img } from "./dom.ts";
+import { creatureTip } from "./info-tips.ts";
+import { setTip } from "./tooltip.ts";
 
 export interface ArmyRowOptions {
   /** Slot index highlighted as selected. */
@@ -26,7 +28,11 @@ export function armyRow(
       const def = getCreature(stack.creature);
       slot.append(img(`portrait-${def.sprite}`, "gm-slot-portrait"));
       slot.append(el("span.gm-slot-count", String(stack.count)));
-      slot.title = `${creatureCount(stack.creature, stack.count)} (Atk ${def.attack}, Def ${def.defense}, Dmg ${def.damage}, HP ${def.hp}, Speed ${def.speed})`;
+      slot.setAttribute(
+        "aria-label",
+        creatureCount(stack.creature, stack.count),
+      );
+      setTip(slot, () => creatureTip(stack.creature, stack.count));
     } else {
       slot.classList.add("gm-empty");
     }
