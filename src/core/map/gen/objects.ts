@@ -38,7 +38,8 @@ import { rollContents, strangeThing } from "./contents.ts";
 import type { MapObjectRow } from "../../../data/mapObjects.ts";
 import { deriveSeed } from "../../rng.ts";
 import type { Rng } from "../../rng.ts";
-import type { MapObject } from "../types.ts";
+import type { GameMap, MapObject } from "../types.ts";
+import type { GenConfig, MapSize, PlayerCount } from "./config.ts";
 import { chamferDistance, N8, noiseField } from "./grid.ts";
 import {
   HOLD_DEFENSE_BONUS,
@@ -56,12 +57,15 @@ import {
   roadCosts,
   roadPath,
 } from "./paths.ts";
+import type { RoadCosts } from "./paths.ts";
 import {
+  O,
   T,
   TERRAIN_OF,
   corridorMask,
   homeCell,
   isWalkable,
+  newState,
   stageRng,
   stageSalt,
 } from "./state.ts";
@@ -896,6 +900,60 @@ export function placeObjects(st: GenState): PlacementReport {
   const guardReqs: GuardRequest[] = [];
   const gateSites: number[] = [];
 
+  /** Entrances a road may not cross (bead bzc.95). */
+  const entrances = new Uint8Array(g.n);
+  for (const o of st.objects)
+    if (roadMayCross(o) === "never") entrances[g.idx(o.x, o.y)] = 1;
+  /**
+   * Bead bzc.95, for a footprint placed before the roads: shutting it and
+   * its entrance (with every entrance a road may not cross shut already)
+   * cuts no town off the first town's ground, leaves its entrance a way in
+   * from that ground, and takes no way in from the entrances next to it.
+   * So the roads join the towns round every such entrance. Measured
+   * against the map before it (cached until the next placement), so a way
+   * lost earlier never blocks everything after it.
+   */
+  let shutVer = 0;
+  let shutSeen: { ver: number; seen: Uint8Array } | undefined;
+  const shutWalk = (k: number): boolean =>
+    isWalkable(st, k) && entrances[k] !== 1;
+  const waysOpen = (e: number, foot: readonly number[]): boolean => {
+    if (shutSeen?.ver !== shutVer) {
+      shutSeen = { ver: shutVer, seen: reachable(st, homeCell(st), shutWalk) };
+    }
+    const before = shutSeen.seen;
+    const seen = reachable(
+      st,
+      homeCell(st),
+      (k) => shutWalk(k) && !foot.includes(k),
+    );
+    if (st.towns.some((t) => before[t.cell] === 1 && seen[t.cell] !== 1))
+      return false;
+    const door = (d: number, from: Uint8Array, open: (k: number) => boolean) =>
+      g
+        .around(d, N8)
+        .some(
+          (j) =>
+            from[j] === 1 &&
+            canStep(st, j, g.x(d) - g.x(j), g.y(d) - g.y(j), open),
+        );
+    const openBefore = (k: number): boolean => isWalkable(st, k);
+    const openAfter = (k: number): boolean =>
+      isWalkable(st, k) && (k === e || !foot.includes(k));
+    if (!door(e, seen, openAfter)) return false;
+    for (const f of foot) {
+      for (let dy = -2; dy <= 2; dy++) {
+        for (let dx = -2; dx <= 2; dx++) {
+          if (!g.inside(g.x(f) + dx, g.y(f) + dy)) continue;
+          const k = g.idx(g.x(f) + dx, g.y(f) + dy);
+          if (entrances[k] !== 1) continue;
+          if (door(k, before, openBefore) && !door(k, seen, openAfter))
+            return false;
+        }
+      }
+    }
+    return true;
+  };
   /** Cells of pickups taken from beside them, blocked while placing. */
   const besideCells: number[] = [];
   /** Every pickup next to `e` keeps an open cell beside it but `e`. */
@@ -934,8 +992,10 @@ export function placeObjects(st: GenState): PlacementReport {
         continue;
       const x = g.x(e);
       const y = g.y(e);
-      if (!canStep(st, j, x - g.x(j), y - g.y(j), (k) => isWalkable(st, k)))
-        continue;
+      // The footprint walls its corners too (bead bzc.95, as in visitable).
+      const walk = (k: number): boolean =>
+        !(oc.keepWaysOpen && foot.includes(k)) && isWalkable(st, k);
+      if (!canStep(st, j, x - g.x(j), y - g.y(j), walk)) continue;
       if (
         cover &&
         g
@@ -969,6 +1029,11 @@ export function placeObjects(st: GenState): PlacementReport {
     const costs = req.from !== undefined ? startCost[req.from] : undefined;
     const multi = req.row.footprint.w * req.row.footprint.h > 1;
     const beside = collectedBeside(req.row);
+    // Bead bzc.95: an object a road may not cross. A footprint (placed
+    // before the roads) leaves the towns a way round it (waysOpen); a single
+    // cell (placed after them) keeps off them.
+    const offRoad =
+      oc.keepWaysOpen && roadMayCross({ kind: req.row.kind }) === "never";
     const corner = (e: number): number => {
       const x = g.x(e) - req.row.entrance[0];
       const y = g.y(e) - req.row.entrance[1];
@@ -987,7 +1052,8 @@ export function placeObjects(st: GenState): PlacementReport {
           st.terrain[e] !== req.ground
         )
           continue;
-        if (roads && (strict > 0 || beside) && st.road[e] === 1) continue;
+        if (roads && (strict > 0 || beside || offRoad) && st.road[e] === 1)
+          continue;
         if (strict > 0 && (crowd[e] ?? 0) >= strict) continue;
         if (costs) {
           const c = costs[e] ?? Infinity;
@@ -1039,6 +1105,7 @@ export function placeObjects(st: GenState): PlacementReport {
           if (gc < 0) continue;
         }
         if ((multi || beside) && !keepsConnected(st, e, foot, beside)) continue;
+        if (offRoad && !roads && !waysOpen(e, foot)) continue;
         // Nor may it wall in a pickup next door.
         if (beside && !leavesSide(e)) continue;
         // A pocket's pickup is taken only from inside the pocket.
@@ -1069,6 +1136,8 @@ export function placeObjects(st: GenState): PlacementReport {
       };
       commit(st, obj);
       markCrowd(c.foot);
+      if (roadMayCross(obj) === "never") entrances[c.e] = 1;
+      shutVer++;
       // Later placements treat it as the wall it will be in play.
       if (beside) {
         st.objBlocked[c.e] = 1;
@@ -1150,9 +1219,13 @@ export function placeObjects(st: GenState): PlacementReport {
     if (!tryPlace(anywhere, roads)) report.skipped.push(r.label);
   };
   for (const r of requests.filter(multi)) place(r, false);
+  // Bead bzc.95: with keepWaysOpen the roads keep off every entrance
+  // placed so far (the footprints left a way round each), and the single
+  // cells placed after them keep off the roads.
   buildRoads(
     st,
     guardReqs.map((q) => q.cell),
+    oc.keepWaysOpen,
   );
   for (const r of [...requests.filter((q) => !multi(q)), ...stand]) {
     place(r, true);
@@ -1351,6 +1424,7 @@ export function placeObjects(st: GenState): PlacementReport {
     row: ruleRow("one-way-waystone"),
     nextId,
     markCrowd,
+    ...(oc.keepWaysOpen ? { shut: entrances } : {}),
   });
   return report;
 }
@@ -1380,6 +1454,8 @@ function placeOneWayWaystones(
     row: MapObjectRow | undefined;
     nextId: (prefix: string) => string;
     markCrowd: (cells: readonly number[]) => void;
+    /** Entrances shut for the one-cell-way check (bead bzc.95). */
+    shut?: Uint8Array;
   },
 ): void {
   const { g, cfg } = st;
@@ -1413,7 +1489,10 @@ function placeOneWayWaystones(
     // a one-cell way (another way goes round it close by).
     const entrances = roomiest(
       (ctx.zoneCells[a] ?? []).filter(
-        (i) => ok(i) && st.road[i] === 0 && keepsConnected(st, i, [i], true),
+        (i) =>
+          ok(i) &&
+          st.road[i] === 0 &&
+          keepsConnected(st, i, [i], true, ctx.shut),
       ),
     );
     if (entrances.length === 0) continue;
@@ -1445,6 +1524,7 @@ function placeOneWayWaystones(
       },
     });
     st.occupied[e] = 1;
+    if (ctx.shut) ctx.shut[e] = 1;
     // The exit is an ordinary cell, but nothing may stand on it.
     st.occupied[exit] = 1;
     ctx.markCrowd([e, exit]);
@@ -1526,13 +1606,21 @@ function visitable(
   free: (i: number) => boolean,
 ): boolean {
   const { g } = st;
+  // One of them at least by a step the footprint does not wall off (bead
+  // bzc.95: a diagonal past the footprint and a wood cell is no way in;
+  // with keepWaysOpen, as the named maps were placed without the check).
+  const corners = st.cfg.objects.keepWaysOpen;
+  const walk = (k: number): boolean => !foot.includes(k) && isWalkable(st, k);
   let n = 0;
+  let stepIn = !corners;
   for (const j of g.around(e, N8)) {
     if (foot.includes(j)) continue;
     if (row.visit === "front" && g.y(j) <= g.y(e)) continue;
-    if (free(j) || (isWalkable(st, j) && st.road[j] === 1)) n++;
+    if (!(free(j) || (isWalkable(st, j) && st.road[j] === 1))) continue;
+    n++;
+    if (canStep(st, j, g.x(e) - g.x(j), g.y(e) - g.y(j), walk)) stepIn = true;
   }
-  return n >= 2;
+  return n >= 2 && stepIn;
 }
 
 /**
@@ -1547,6 +1635,8 @@ function keepsConnected(
   e: number,
   foot: readonly number[],
   blockEntrance = false,
+  /** Cells that count as blocked too (bead bzc.95: other entrances). */
+  shut?: Uint8Array,
 ): boolean {
   const { g } = st;
   let x0 = Infinity;
@@ -1564,14 +1654,19 @@ function keepsConnected(
   x1 = Math.min(g.w - 1, x1 + 2);
   y1 = Math.min(g.h - 1, y1 + 2);
   const blocked = new Set(foot.filter((f) => blockEntrance || f !== e));
-  const walk = (k: number): boolean => !blocked.has(k) && isWalkable(st, k);
+  /** Open ground (entrances are open: a diagonal past one is a step). */
+  const open = (k: number): boolean => !blocked.has(k) && isWalkable(st, k);
+  const walk = (k: number): boolean => open(k) && shut?.[k] !== 1;
   const inside = (k: number): boolean =>
     g.x(k) >= x0 && g.x(k) <= x1 && g.y(k) >= y0 && g.y(k) <= y1;
-  // Cells next to the footprint that must stay joined.
+  // Cells next to the footprint that must stay joined, and the shut
+  // entrances next to it, which must each keep a way in.
   const ring: number[] = [];
+  const doors: number[] = [];
   for (const f of foot) {
     for (const j of g.around(f, N8)) {
       if (walk(j) && !ring.includes(j)) ring.push(j);
+      else if (open(j) && !doors.includes(j)) doors.push(j);
     }
   }
   const start = ring[0];
@@ -1586,12 +1681,23 @@ function keepsConnected(
       if (!g.inside(nx, ny)) continue;
       const j = g.idx(nx, ny);
       if (seen.has(j) || !inside(j) || !walk(j)) continue;
-      if (!canStep(st, i, dx, dy, walk)) continue;
+      if (!canStep(st, i, dx, dy, shut ? open : walk)) continue;
       seen.add(j);
       stack.push(j);
     }
   }
-  return ring.every((j) => seen.has(j));
+  return (
+    ring.every((j) => seen.has(j)) &&
+    doors.every((d) =>
+      g
+        .around(d, N8)
+        .some(
+          (j) =>
+            seen.has(j) &&
+            canStep(st, j, g.x(d) - g.x(j), g.y(d) - g.y(j), open),
+        ),
+    )
+  );
 }
 
 /**
@@ -1651,23 +1757,64 @@ function findPockets(
 
 /** Extra road cost of a cell in a guard's zone of control. */
 const GUARD_ROAD_PENALTY = 400;
+/**
+ * Extra road cost of a resource pile (bead bzc.95): a road runs over one
+ * only where going round it is long, so a pile sometimes lies on a road.
+ */
+const PICKUP_ROAD_PENALTY = 600;
+/**
+ * Extra road cost of any other object's entrance when no road round it
+ * exists at all (a last resort; the map tests expect it never to be used).
+ */
+const SITE_ROAD_FALLBACK = 20_000;
+/** Longest bend that joins a road back round an entrance (relayRoads). */
+const STUB_JOIN = 6;
+
+/**
+ * How the final roads treat an object's entrance (bead bzc.95: getting
+ * from A to B by road never makes a hero enter anything). Towns are the
+ * roads' ends and a hero start is only where a hero stands; guards and
+ * gates hold a way and resource piles are picked up in passing, so a road
+ * may sometimes cross them; every other object (mines, dwellings, shrines,
+ * wells, banks, waystones, buried treasure, chests and loose artifacts)
+ * stays off the road.
+ */
+export function roadMayCross(
+  o: Pick<MapObject, "kind">,
+): "free" | "guard" | "pickup" | "never" {
+  switch (o.kind) {
+    case "town":
+    case "hero-start":
+      return "free";
+    case "monster":
+    case "gate":
+      return "guard";
+    case "pickup":
+      return "pickup";
+    default:
+      return "never";
+  }
+}
 
 /**
  * Roads join every town: from the first player's town outwards, each town
  * (nearest first) runs a road to the network so far, sharing it where it
  * can, and round the zones of control of the `guards` placed so far where
  * it can (bead bzc.50). Then short spurs to the mines.
+ *
+ * With `clear` (bead bzc.95) every placed object counts: roads go round
+ * every entrance {@link roadMayCross} keeps them off, and a mine's spur
+ * stops at the cell before its entrance.
  */
-function buildRoads(st: GenState, guards: readonly number[] = []): void {
+function buildRoads(
+  st: GenState,
+  guards: readonly number[] = [],
+  clear = false,
+): void {
   const { g } = st;
-  const wobble = noiseField(g, 4, stageSalt(st, "road-wobble"), 2);
-  const costs = roadCosts(st, wobble);
-  const zoc = new Set<number>();
-  for (const c of guards) for (const j of [c, ...g.around(c, N8)]) zoc.add(j);
-  for (const j of zoc)
-    costs.enter[j] = (costs.enter[j] ?? 0) + GUARD_ROAD_PENALTY;
-  const mark = (path: number[] | undefined): void => {
-    if (path) for (const i of path) st.road[i] = 1;
+  const { costs, ways } = roadRules(st, guards, clear);
+  const mark = (path: number[] | undefined, from = 0): void => {
+    if (path) for (const i of path.slice(from)) st.road[i] = 1;
   };
   const home = homeCell(st);
   if (home < 0) return;
@@ -1676,21 +1823,214 @@ function buildRoads(st: GenState, guards: readonly number[] = []): void {
     .map((t) => t.cell)
     .filter((c) => c !== home)
     .sort((a, b) => (st.cost[a] ?? 0) - (st.cost[b] ?? 0) || a - b);
+  const onRoad = (i: number): boolean => st.road[i] === 1;
   for (const t of towns) {
-    mark(roadPath(st, [t], (i) => st.road[i] === 1, costs));
+    mark(
+      roadPath(st, [t], onRoad, costs) ??
+        (ways ? ways.fallback([t], onRoad) : undefined),
+    );
   }
   const mines = st.objects
     .filter((o) => o.kind === "mine")
     .map((o) => g.idx(o.x, o.y))
     .sort((a, b) => (st.cost[a] ?? 0) - (st.cost[b] ?? 0) || a - b);
   for (const e of mines) {
+    const path = roadPath(st, [e], onRoad, costs, st.cfg.roads.maxSpur);
+    // The final spur leads up to the mine's door, not onto it.
+    mark(path, clear ? 1 : 0);
+  }
+}
+
+/**
+ * Road costs, dearer in the zones of control of the `guards`, with the
+ * rules of bead bzc.95 when `clear`.
+ */
+function roadRules(
+  st: GenState,
+  guards: readonly number[],
+  clear: boolean,
+): { costs: RoadCosts; ways: ReturnType<typeof clearWays> | undefined } {
+  const { g } = st;
+  const wobble = noiseField(g, 4, stageSalt(st, "road-wobble"), 2);
+  const costs = roadCosts(st, wobble);
+  const zoc = new Set<number>();
+  for (const c of guards) for (const j of [c, ...g.around(c, N8)]) zoc.add(j);
+  for (const j of zoc)
+    costs.enter[j] = (costs.enter[j] ?? 0) + GUARD_ROAD_PENALTY;
+  const ways = clear ? clearWays(st, costs) : undefined;
+  return { costs, ways };
+}
+
+/**
+ * Mends a finished map's roads (bead bzc.95): a named map keeps its roads
+ * as authored, but no road may run over an entrance {@link roadMayCross}
+ * keeps them off (some stood on the authored roads, and the edits add
+ * more). Those cells lose their road, and each piece of road that splits
+ * off is joined back by a short bend round the entrance. Writes the roads
+ * back into `map.cells`.
+ */
+export function relayRoads(map: GameMap, cfg: GenConfig, size: MapSize): void {
+  const startsOf = map.objects
+    .filter((o) => o.kind === "town" && typeof o.data["start"] === "number")
+    .sort((a, b) => Number(a.data["start"]) - Number(b.data["start"]));
+  const players = Math.min(4, Math.max(2, startsOf.length)) as PlayerCount;
+  const st = newState(
+    map.seed | 0,
+    size,
+    players,
+    players,
+    cfg,
+    map.width,
+    map.height,
+  );
+  const { g } = st;
+  map.cells.forEach((c, i) => {
+    st.terrain[i] = T[c.terrain];
+    st.obstacle[i] =
+      c.obstacle === "mountain"
+        ? O.mountain
+        : c.obstacle === "forest"
+          ? O.forest
+          : O.none;
+  });
+  for (const o of map.objects) commit(st, o);
+  const towns = map.objects.filter((o) => o.kind === "town");
+  for (const t of [...startsOf, ...towns.filter((o) => !startsOf.includes(o))])
+    st.towns.push({ cell: g.idx(t.x, t.y), zone: 0, role: "neutral" });
+  /** Connected road pieces (8-way), as a label per cell and the cells. */
+  const label = (): { part: Int32Array; pieces: number[][] } => {
+    const part = new Int32Array(g.n).fill(-1);
+    const pieces: number[][] = [];
+    for (let s = 0; s < g.n; s++) {
+      if (st.road[s] !== 1 || part[s] !== -1) continue;
+      const cells = [s];
+      part[s] = pieces.length;
+      for (let k = 0; k < cells.length; k++) {
+        for (const j of g.around(cells[k] ?? 0, N8)) {
+          if (st.road[j] !== 1 || part[j] !== -1) continue;
+          part[j] = pieces.length;
+          cells.push(j);
+        }
+      }
+      pieces.push(cells);
+    }
+    return { part, pieces };
+  };
+  map.cells.forEach((c, i) => {
+    st.road[i] = c.road ? 1 : 0;
+  });
+  // The networks as authored (an edit may have closed a road on purpose).
+  const net = label().part;
+  const cut = new Uint8Array(g.n);
+  for (const o of map.objects) {
+    if (roadMayCross(o) !== "never") continue;
+    for (const [x, y] of [[o.x, o.y] as const, ...o.blocked]) {
+      const i = g.idx(x, y);
+      if (st.road[i] === 1) cut[i] = 1;
+      st.road[i] = 0;
+    }
+  }
+  // The bend goes the short way, through a zone of control as the road
+  // it mends did.
+  const { costs, ways } = roadRules(st, [], true);
+  // Each run of cut cells joined pieces of road: join them again by a
+  // short bend round it (only them, so no new short cut appears).
+  const rims: number[][] = [];
+  const seen = new Uint8Array(g.n);
+  for (let s = 0; s < g.n; s++) {
+    if (cut[s] !== 1 || seen[s] === 1) continue;
+    const run = [s];
+    seen[s] = 1;
+    for (let k = 0; k < run.length; k++) {
+      for (const j of g.around(run[k] ?? 0, N8)) {
+        if (cut[j] !== 1 || seen[j] === 1) continue;
+        seen[j] = 1;
+        run.push(j);
+      }
+    }
+    const rim = new Set<number>();
+    for (const i of run)
+      for (const j of g.around(i, N8)) if (cut[j] !== 1) rim.add(j);
+    rims.push([...rim].sort((a, b) => a - b));
+  }
+  const done = new Set<number>();
+  for (let round = 0; round < 1024; round++) {
+    const { part } = label();
+    const k = rims.findIndex((rim, r) => {
+      if (done.has(r)) return false;
+      return (
+        new Set(rim.filter((i) => st.road[i] === 1).map((i) => part[i])).size >
+        1
+      );
+    });
+    if (k < 0) break;
+    const rim = (rims[k] ?? []).filter((i) => st.road[i] === 1);
+    const first = part[rim[0] ?? 0];
+    const from = rim.filter((i) => part[i] === first);
     const path = roadPath(
       st,
-      [e],
-      (i) => (st.road[i] ?? 0) === 1,
+      from,
+      (i) => part[i] !== first && rim.includes(i),
       costs,
-      st.cfg.roads.maxSpur,
+      STUB_JOIN,
     );
-    mark(path);
+    if (path) for (const i of path) st.road[i] = 1;
+    else done.add(k);
   }
+  // A town whose road no bend rejoined joins its network's first town by
+  // any way round (the shipped maps' edits leave none: named.test.ts).
+  const towns0 = st.towns.map((t) => t.cell);
+  for (const t of towns0) {
+    const { part } = label();
+    const head = towns0.find((u) => net[u] === net[t]);
+    if (head === undefined || part[head] === part[t]) continue;
+    const own = part[t];
+    const from = [...part.keys()].filter((i) => part[i] === own);
+    const goal = (i: number): boolean => part[i] === part[head];
+    const path = roadPath(st, from, goal, costs) ?? ways?.fallback(from, goal);
+    if (path) for (const i of path) st.road[i] = 1;
+  }
+  // A scrap of road a cut left alone (a cell or two leading nowhere) goes.
+  for (const piece of label().pieces)
+    if (piece.length <= 2 && !piece.some((i) => towns0.includes(i)))
+      for (const i of piece) st.road[i] = 0;
+  map.cells.forEach((c, i) => {
+    c.road = st.road[i] === 1;
+  });
+}
+
+/**
+ * The final roads' rules (bead bzc.95), applied to `costs` in place: every
+ * entrance {@link roadMayCross} keeps off the road is refused; resource
+ * piles and gates cost extra. Returns the last resort for a town no road
+ * reaches under them, a road over the fewest entrances (the generator's
+ * placement leaves a way round every one, so the map tests expect it
+ * never to be used).
+ */
+function clearWays(
+  st: GenState,
+  costs: RoadCosts,
+): {
+  fallback: (
+    from: readonly number[],
+    onRoad: (i: number) => boolean,
+  ) => number[] | undefined;
+} {
+  const { g } = st;
+  const soft: RoadCosts = { walk: costs.walk, enter: costs.enter.slice() };
+  for (const o of st.objects) {
+    const e = g.idx(o.x, o.y);
+    const rule = roadMayCross(o);
+    const extra =
+      rule === "never"
+        ? SITE_ROAD_FALLBACK
+        : rule === "pickup"
+          ? PICKUP_ROAD_PENALTY
+          : o.kind === "gate"
+            ? GUARD_ROAD_PENALTY
+            : 0;
+    soft.enter[e] = (soft.enter[e] ?? 0) + extra;
+    costs.enter[e] = rule === "never" ? Infinity : (soft.enter[e] ?? 0);
+  }
+  return { fallback: (from, onRoad) => roadPath(st, from, onRoad, soft) };
 }

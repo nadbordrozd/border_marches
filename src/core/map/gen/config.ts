@@ -312,6 +312,16 @@ export interface GenConfig {
      * movement (with the roads) from every start.
      */
     oneWayMinDays: number;
+    /**
+     * Bead bzc.95: no object a road may not cross (anything but a town, a
+     * guard, a gate or a resource pile; see roadMayCross in gen/objects.ts)
+     * stands on a road. A footprint, placed before the roads, never cuts a
+     * town off when its entrance is shut too (the roads go round it); a
+     * single cell, placed after them, never takes a road cell. Off for the
+     * named maps, whose edits name generated objects by place: their
+     * builder steps sites off the authored roads instead (named.ts).
+     */
+    keepWaysOpen: boolean;
   };
 
   guards: {
@@ -529,14 +539,17 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     ],
     // Bead bzc.50 ("the map was too empty"): about twice the fill of v0.2's
     // first maps (start 9, middle 10, town 9, hold 10; pockets 2-3 prizes,
-    // two pockets a zone).
-    density: { start: 26, middle: 20, town: 22, hold: 24 },
+    // two pockets a zone). Bead bzc.95 raised it from start 26, middle 20,
+    // town 22, hold 24: sites no longer take road cells, and the start
+    // zones (filled once for every player) had the room to spare.
+    density: { start: 33, middle: 22, town: 24, hold: 26 },
     pocketPrizes: [3, 5],
     pocketMin: 8,
     pocketsPerZone: 2,
     guardTownClearance: 4,
     oneWayWaystones: { S: 1, M: 2, L: 3 },
     oneWayMinDays: 1,
+    keepWaysOpen: true,
     perMap: { "drill-yard": { S: [1, 1], M: [1, 1], L: [1, 2] } },
   },
 

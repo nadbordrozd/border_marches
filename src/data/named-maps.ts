@@ -352,6 +352,21 @@ const KEEPERS_TOLL: NamedMapDef = {
       },
       note: "A guarded event in the Hold's ring: 10 winders (2050) for 1500 gold and 1000 experience.",
     },
+    // Bead bzc.95: no road runs over a site. The builder steps one-cell
+    // sites off the roads and bends the roads round the rest; these sites
+    // fill the only ways the roads could bend.
+    {
+      op: "remove",
+      id: "curse-lifters-shrine-4",
+      at: [12, 42],
+      note: "The south-west road bends round the Landfall Wreck through this cell.",
+    },
+    {
+      op: "remove",
+      id: "school-shrine-4",
+      at: [24, 42],
+      note: "The school shrine fills the gap the south road runs through.",
+    },
   ],
 };
 
@@ -921,6 +936,21 @@ const HOURGLASS_MARCHES: NamedMapDef = {
         text: "ROAD CLOSED by order of nobody. The tree fell in a storm from another world. Mind the wasteland.",
       },
       note: "Explain the tree on the road.",
+    },
+    // Bead bzc.95: no road runs over a site. The builder steps one-cell
+    // sites off the roads and bends the roads round the rest; these sites
+    // fill the only way the road could bend.
+    {
+      op: "remove",
+      id: "learning-stone-27",
+      at: [54, 62],
+      note: "The south-eastern road bends round the Quiet Yard through this cell...",
+    },
+    {
+      op: "remove",
+      id: "learning-stone-13",
+      at: [55, 63],
+      note: "...and this one.",
     },
   ],
 };
@@ -1502,6 +1532,15 @@ const NINEFOLD_LANDFALL: NamedMapDef = {
         value: 3950,
       },
       note: "A guarded event below the Hold: 14 winders (2870) for 2000 gold and 1500 experience.",
+    },
+    // Bead bzc.95: no road runs over a site. The builder steps one-cell
+    // sites off the roads and bends the roads round the rest; this wood
+    // fills the only way the road could bend.
+    {
+      op: "ground",
+      cells: [[12, 44]],
+      obstacle: "none",
+      note: "A clearing beside the western ore pit, so the road bends round its door (still in its notaries' zone of control).",
     },
   ],
 };

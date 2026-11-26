@@ -21,14 +21,17 @@ import {
 } from "../../data/named-maps.ts";
 import { OBJECT_TYPES } from "../../data/objectTypes.ts";
 import { decorateMap } from "./decorate.ts";
+import { relayRoads, roadMayCross } from "./gen/objects.ts";
 import {
   DEFAULT_GEN_CONFIG,
   corridorCells,
   generateMapWithInfo,
+  resolveConfig,
   type ConfigOverrides,
   type GenConfig,
 } from "./generate.ts";
 import {
+  DIRECTIONS_8,
   cellAt,
   cellIndex,
   inBounds,
@@ -65,7 +68,16 @@ export function generateNamedBase(def: NamedMapDef): GameMap {
  */
 const NAMED_CONFIG: {
   terrain: Pick<GenConfig["terrain"], NamedLandscape>;
+  objects: Pick<GenConfig["objects"], "keepWaysOpen" | "density">;
 } = {
+  // Placed as authored (bead bzc.95): without the generator's off-road
+  // rules and at the fill they were authored at (bead bzc.95 raised the
+  // default to make up for the room those rules take). buildNamedMap
+  // steps their sites off the roads instead.
+  objects: {
+    keepWaysOpen: false,
+    density: { start: 26, middle: 20, town: 22, hold: 24 },
+  },
   terrain: {
     volcanic: {
       ...DEFAULT_GEN_CONFIG.terrain.volcanic,
@@ -118,7 +130,8 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
       desert: biome("desert"),
     },
     objects: {
-      density: { ...base.density, ...gen.density },
+      ...NAMED_CONFIG.objects,
+      density: { ...NAMED_CONFIG.objects.density, ...gen.density },
       pocketPrizes: gen.pocketPrizes ?? base.pocketPrizes,
       pocketsPerZone: gen.pocketsPerZone ?? base.pocketsPerZone,
     },
@@ -315,6 +328,102 @@ function applyEdit(map: GameMap, edit: MapEdit, k: number): void {
   }
 }
 
+/** How far (Chebyshev) a one-cell site steps off a road (bead bzc.95). */
+const STEP_OFF = 5;
+
+/**
+ * Bead bzc.95: no road runs over a site. The named maps keep their roads
+ * as authored (their balance is measured along them), so each one-cell
+ * site that stands on a road (generated there before the rule, or put
+ * there by an edit) steps off it to the nearest open cell beside the
+ * road: still next to its guard if it has one, never into another
+ * guard's zone of control, and never onto a waystone's exit. A site
+ * entrance is open ground, so no way opens or closes. Bigger objects
+ * (and any site with no such cell) are left to relayRoads.
+ */
+function stepOffRoads(map: GameMap): void {
+  const w = map.width;
+  const taken = new Set<number>();
+  for (const o of map.objects) {
+    for (const [x, y] of objectCells(o)) taken.add(cellIndex(map, x, y));
+    const exit = o.data["exit"];
+    if (Array.isArray(exit)) taken.add(cellIndex(map, exit[0], exit[1]));
+  }
+  const blocked = new Set<number>();
+  for (const o of map.objects)
+    for (const [x, y] of o.blocked) blocked.add(cellIndex(map, x, y));
+  const guardOf = new Map<string, MapObject>();
+  const zoc = new Set<number>();
+  for (const m of map.objects) {
+    if (m.kind !== "monster") continue;
+    const held = m.data["guards"];
+    if (Array.isArray(held)) for (const id of held) guardOf.set(String(id), m);
+    for (const [dx, dy] of [[0, 0] as const, ...DIRECTIONS_8]) {
+      if (inBounds(map, m.x + dx, m.y + dy))
+        zoc.add(cellIndex(map, m.x + dx, m.y + dy));
+    }
+  }
+  const passable = (x: number, y: number): boolean => {
+    const c = cellAt(map, x, y);
+    return c !== undefined && isPassable(c) && !blocked.has(y * w + x);
+  };
+  // Room for the roads to bend round the bigger sites that stay on them.
+  const bend = new Set<number>();
+  for (const o of map.objects) {
+    if (roadMayCross(o) !== "never" || o.blocked.length === 0) continue;
+    for (const [x, y] of objectCells(o)) {
+      if (cellAt(map, x, y)?.road !== true) continue;
+      for (const [dx, dy] of DIRECTIONS_8)
+        if (inBounds(map, x + dx, y + dy))
+          bend.add(cellIndex(map, x + dx, y + dy));
+    }
+  }
+  const cheb = (a: MapObject, x: number, y: number): number =>
+    Math.max(Math.abs(a.x - x), Math.abs(a.y - y));
+  for (const o of map.objects) {
+    if (roadMayCross(o) !== "never" || o.blocked.length > 0) continue;
+    const from = cellIndex(map, o.x, o.y);
+    if (map.cells[from]?.road !== true) continue;
+    const guard = guardOf.get(o.id);
+    let best: { x: number; y: number; s: number } | undefined;
+    for (let dy = -STEP_OFF; dy <= STEP_OFF; dy++) {
+      for (let dx = -STEP_OFF; dx <= STEP_OFF; dx++) {
+        const x = o.x + dx;
+        const y = o.y + dy;
+        if (!inBounds(map, x, y) || !passable(x, y)) continue;
+        const i = y * w + x;
+        if (taken.has(i) || bend.has(i) || map.cells[i]?.road === true)
+          continue;
+        const near = guard !== undefined && cheb(guard, x, y) <= 1;
+        if (zoc.has(i) && !near) continue;
+        // A hero steps onto it from two cells at least.
+        const ways = DIRECTIONS_8.filter(
+          ([ex, ey]) =>
+            passable(x + ex, y + ey) &&
+            (ex === 0 ||
+              ey === 0 ||
+              passable(x + ex, y) ||
+              passable(x, y + ey)),
+        ).length;
+        if (ways < 2) continue;
+        const byRoad = DIRECTIONS_8.some(
+          ([ex, ey]) => cellAt(map, x + ex, y + ey)?.road === true,
+        );
+        const s =
+          Math.max(Math.abs(dx), Math.abs(dy)) * 10 +
+          (byRoad ? 0 : 5) +
+          (guard !== undefined && !near ? 40 : 0);
+        if (best === undefined || s < best.s) best = { x, y, s };
+      }
+    }
+    if (best === undefined) continue;
+    taken.delete(from);
+    taken.add(best.y * w + best.x);
+    o.x = best.x;
+    o.y = best.y;
+  }
+}
+
 /** Builds a named map: generate, then apply the edits. Throws on drift. */
 export function buildNamedMap(defOrId: NamedMapDef | string): GameMap {
   const def = typeof defOrId === "string" ? findNamedMap(defOrId) : defOrId;
@@ -331,6 +440,10 @@ export function buildNamedMap(defOrId: NamedMapDef | string): GameMap {
     }
   }
   def.edits.forEach((edit, k) => applyEdit(map, edit, k));
+  // Bead bzc.95: sites step off the roads, and the roads bend round the
+  // few that cannot.
+  stepOffRoads(map);
+  relayRoads(map, resolveConfig(namedConfig(def)), def.size);
   // Decorations last, seeded from the map, round the edited objects too
   // (bead bzc.72).
   decorateMap(map, { corridors });

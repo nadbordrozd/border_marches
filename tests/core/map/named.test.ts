@@ -146,8 +146,8 @@ const SNAPSHOT: Record<
 > = {
   "keepers-toll": {
     base: "6c151624",
-    built: "c64ed1bd",
-    objects: 356,
+    built: "005da416",
+    objects: 354,
     towns: [
       ["town-1", 7, 7, null],
       ["town-2", 35, 40, null],
@@ -158,8 +158,8 @@ const SNAPSHOT: Record<
   },
   "hourglass-marches": {
     base: "96e6c49b",
-    built: "b1b1d58a",
-    objects: 721,
+    built: "93f19ff8",
+    objects: 719,
     towns: [
       ["town-1", 30, 60, null],
       ["town-2", 11, 20, null],
@@ -172,7 +172,7 @@ const SNAPSHOT: Record<
   },
   "ninefold-landfall": {
     base: "72e779c3",
-    built: "30e59ca3",
+    built: "e1a8b60c",
     objects: 791,
     towns: [
       ["town-1", 62, 59, null],

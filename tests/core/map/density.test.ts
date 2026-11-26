@@ -70,6 +70,13 @@ describe("denser maps (bzc.50)", { timeout: 120_000 }, () => {
       "sun-temple",
       "sunken-tomb",
     ];
+    // Bead bzc.95: gates need a loop and S maps rarely leave room for a
+    // bank once sites keep off the roads; bzc.96 restores them on S.
+    const rareOnS: ObjectTypeId[] = [
+      "border-gate",
+      "keymasters-tent",
+      "thunderstruck-pylon-yard",
+    ];
     for (const size of ["S", "M", "L"] as const) {
       const seen = new Set<string>();
       for (const seed of SEEDS[size]) {
@@ -80,6 +87,7 @@ describe("denser maps (bzc.50)", { timeout: 120_000 }, () => {
           !authored.includes(t) &&
           !desert.includes(t) &&
           !(size === "S" && t === "keepers-vault") &&
+          !(size === "S" && rareOnS.includes(t)) &&
           !seen.has(t),
       );
       expect(missing, size).toEqual([]);
