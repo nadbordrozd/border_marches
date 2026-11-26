@@ -134,6 +134,33 @@ const SCENARIOS: Readonly<Record<string, Scenario>> = {
       fx.addCondition("d0", { kind: "jinxed", size: 25, clock: 3 });
     },
   },
+  // Several stacks of one creature, as a neutral group splits on the map,
+  // for the result screen's losses per unit type (bead bzc.92).
+  split: {
+    terrain: "grass",
+    attacker: {
+      faction: "humans",
+      heroName: "Sir Aldric",
+      stacks: [
+        ["squire", 20, 1, 2],
+        ["longbowman", 8, 0, 4],
+        ["knight", 4, 2, 5],
+        ["squire", 15, 1, 6],
+        ["longbowman", 6, 0, 8],
+      ],
+    },
+    defender: {
+      faction: null,
+      heroName: null,
+      stacks: [
+        ["goblin", 30, 12, 1],
+        ["wolf-rider", 14, 11, 3],
+        ["goblin", 28, 12, 4],
+        ["wolf-rider", 12, 11, 6],
+        ["goblin", 28, 12, 7],
+      ],
+    },
+  },
 };
 
 export function scenarioNames(): string[] {

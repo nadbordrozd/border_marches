@@ -89,6 +89,8 @@ import { setTip, tipCard } from "../tooltip.ts";
 import { hoverIntent, indexLegalActions, pointAtField } from "./intent.ts";
 import type { HoverIntent, LegalIndex } from "./intent.ts";
 import { conjugate, creatureName, summarizePreview } from "./preview.ts";
+import { battleLosses, lossText } from "./losses.ts";
+import { getCreature } from "../../data/creatures.ts";
 import {
   castAction,
   castPreview,
@@ -601,7 +603,8 @@ class BattleScreen {
     const engine = battleResult(this.state, this.state.endReason ?? reason);
     const result = gameResultFromEngine(this.setup, engine);
     this.refreshHud();
-    if (this.options.showResult !== false) await this.showResult(engine);
+    if (this.options.showResult !== false)
+      await this.showResult(engine, result);
     this.destroy();
     return { result, engine };
   }
@@ -2844,7 +2847,10 @@ class BattleScreen {
 
   // -------------------------------------------------------------- result
 
-  private showResult(engine: EngineBattleResult): Promise<void> {
+  private showResult(
+    engine: EngineBattleResult,
+    result: GameBattleResult,
+  ): Promise<void> {
     const player: BattleSide =
       this.playerSides.has("defender") && !this.playerSides.has("attacker")
         ? "defender"
@@ -2862,10 +2868,12 @@ class BattleScreen {
         engine.reason === "roundLimit"
           ? `The round limit (${roundLimitOf(this.state)} rounds) was reached: ${
               won ? "you" : "the enemy"
-            } had more fight value left (${fightValueLeft(this.state, engine.winner ?? "defender")} to ${fightValueLeft(this.state, engine.winner === "attacker" ? "defender" : "attacker")}), and the other side's survivors fled.`
+            } had more fight value left (${fightValueLeft(this.state, engine.winner ?? "defender")} to ${fightValueLeft(this.state, engine.winner === "attacker" ? "defender" : "attacker")}), and the other side's survivors are lost.`
           : `After ${engine.rounds} round${engine.rounds === 1 ? "" : "s"}.`,
       ),
     );
+    // One row per creature type per side, its stacks summed (bead bzc.92).
+    const losses = battleLosses(this.setup, result);
     const cols = el("div", "bm-result-cols");
     for (const side of ["attacker", "defender"] as const) {
       const col = el("div", "bm-result-col");
@@ -2876,30 +2884,24 @@ class BattleScreen {
           side === player ? "Your casualties" : "Enemy casualties",
         ),
       );
-      let any = false;
-      for (const s of this.state.stacks.filter((x) => x.side === side)) {
-        const lost = s.initialCount - s.count;
+      for (const r of losses[side]) {
         const row = el("div", "bm-result-row");
-        const src = this.art?.portraits.get(s.creature.id);
+        const src = this.art?.portraits.get(r.creature);
         if (src) {
           const img = el("img", "bm-portrait");
           img.src = src;
           img.alt = "";
           row.append(img);
         }
+        const def = getCreature(r.creature);
         row.append(
-          el("span", "", creatureName(s.creature, s.initialCount)),
-          el(
-            "span",
-            "bm-num",
-            lost === 0 ? "none lost" : `${lost} of ${s.initialCount} lost`,
-          ),
+          el("span", "", r.before === 1 ? def.name : def.plural),
+          el("span", "bm-num", lossText(r)),
         );
-        if (lost === 0) row.classList.add("bm-dim");
+        if (r.lost === 0) row.classList.add("bm-dim");
         col.append(row);
-        any = true;
       }
-      if (!any) col.append(el("div", "bm-dim", "none"));
+      if (losses[side].length === 0) col.append(el("div", "bm-dim", "none"));
       cols.append(col);
     }
     box.append(cols);

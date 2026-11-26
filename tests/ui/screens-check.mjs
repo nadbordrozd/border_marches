@@ -43,7 +43,8 @@
 //   site results as dialogs),
 //   levelup, levelup-hover, end-won, end-lost, battle, battle-hover,
 //   battle-info, battle-book, battle-spell, battle-spell-hover,
-//   battle-spell-noeffect, [battle-result].
+//   battle-spell-noeffect, [battle-result], [battle-result-split],
+//   prebattle-retreat (the retreat warning, bead bzc.92).
 import { spawn } from "node:child_process";
 import {
   existsSync,
@@ -542,6 +543,27 @@ const RICH = `
       heroClass: free.heroClass, x: spot[0], y: spot[1], worn: h.worn.map(() => null),
       backpack: [], scrolls: [], army: [h.army[0] ? { ...h.army[0], count: 5 } : null, null, null, null, null, null, null] });
   }
+`;
+
+/** A neutral guard moved next to player 0's first hero (prebattle). */
+const GUARD_NEXT = `
+  const h = s.heroes.find((x) => x.owner === 0 && x.alive);
+  const free = (x, y) => {
+    const c = s.map.cells[y * s.map.width + x];
+    return c && c.obstacle === 'none' && c.terrain !== 'water' &&
+      !s.map.objects.some((o) => (o.x === x && o.y === y) || o.blocked.some(([bx, by]) => bx === x && by === y)) &&
+      !s.heroes.some((o) => o.alive && o.x === x && o.y === y);
+  };
+  let spot = null;
+  for (const [dx, dy] of [[0,1],[-1,0],[0,-1],[1,0],[-1,1],[1,1],[-1,-1],[1,-1]]) {
+    if (free(h.x + dx, h.y + dy)) { spot = [h.x + dx, h.y + dy]; break; }
+  }
+  const o = s.map.objects.find((x) => x.kind === 'monster' && s.monsters[x.id]);
+  if (spot && o) {
+    o.x = spot[0]; o.y = spot[1]; o.blocked = [];
+    s.monsters[o.id].x = spot[0]; s.monsters[o.id].y = spot[1];
+  }
+  window.__guard = { id: o?.id ?? null, spot };
 `;
 
 // --------------------------------------------------------------- steps
@@ -1163,16 +1185,54 @@ async function richScreens() {
   if (want("menu-dev")) await menuDev();
   if (wantFamily("meeting")) await meetingScreens();
   await townScreens();
-  if (want("prebattle")) {
+  if (wantFamily("prebattle")) {
     await idle();
-    const monster = (await game("targets()")).find((t) => t.kind === "monster");
+    let monster = (await game("targets()")).find((t) => t.kind === "monster");
+    if (!monster) {
+      // Every guard is out of reach: one steps next to the hero (a
+      // hand-built state, as RICH is) and the saved game is reloaded.
+      await editSave(GUARD_NEXT);
+      note(`guard moved: ${JSON.stringify(await evaluate("window.__guard"))}`);
+      await continueSaved();
+      await idle();
+      monster = (await game("targets()")).find((t) => t.kind === "monster");
+    }
     if (monster) {
       await game(`click(${monster.x}, ${monster.y})`);
       await sleep(200);
       await game(`click(${monster.x}, ${monster.y})`);
       await waitMaybe("document.querySelector('.gm-modal')", 8000);
       await sleep(400);
-      await shot("prebattle");
+      if (want("prebattle")) await shot("prebattle");
+      // The retreat warning (bead bzc.92): Cancel (Escape) goes back.
+      if (want("prebattle-retreat")) {
+        if (await clickText(".gm-battle-confirm button", "Retreat")) {
+          await waitMaybe("document.querySelector('.gm-retreat-dialog')", 4000);
+          await sleep(400);
+          await park();
+          await shot("prebattle-retreat");
+          const check = await evaluate(`(() => {
+            const b = document.querySelector('.gm-retreat-dialog .gm-primary');
+            return { focus: document.activeElement === b, label: b?.firstChild?.textContent ?? null };
+          })()`);
+          if (!check.focus || check.label !== "Cancel")
+            fail(
+              "prebattle-retreat",
+              `Cancel is not the focused default: ${JSON.stringify(check)}`,
+            );
+          await escape();
+          await sleep(500);
+          // Escape cancels: back to the pre-battle dialog, nothing retreated.
+          const back = await evaluate(
+            "!!document.querySelector('.gm-battle-confirm') && !document.querySelector('.gm-retreat-dialog:not(.gm-closing)')",
+          );
+          if (!back)
+            fail(
+              "prebattle-retreat",
+              "Escape did not return to the pre-battle dialog",
+            );
+        } else skip("prebattle-retreat", "no Retreat button");
+      }
     } else skip("prebattle", "no monster in reach");
   }
 }
@@ -1725,12 +1785,14 @@ async function battleScreens() {
       "view=battle&scenario=restless&magic=1&items=1&steps=0&book=1",
     ],
     ["battle-result", "view=battle&scenario=realm&auto=1&speed=4"],
+    // Losses per unit type with split stacks (bead bzc.92).
+    ["battle-result-split", "view=battle&scenario=split&auto=1&speed=4"],
   ];
   for (const [name, q] of battles) {
     const spell = name === "battle-book" && wantFamily("battle-spell");
     const pinBook = name === "battle-book" && want("pin-battle");
     if (
-      name === "battle-result"
+      name.startsWith("battle-result")
         ? !named(name)
         : !want(name) && !spell && !pinBook
     )
@@ -1741,7 +1803,7 @@ async function battleScreens() {
       "battle",
       30000,
     );
-    if (name === "battle-result") {
+    if (name.startsWith("battle-result")) {
       await waitFor(
         "document.querySelector('.bm-ok')",
         "battle result",

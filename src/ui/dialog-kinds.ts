@@ -9,6 +9,8 @@
  *   hero sheet's army band (full battle sprites with counts, the creature
  *   card on hover), a note when a neutral stack splits into several, the
  *   estimate as a coloured word over a strength bar.
+ * - Retreat (bead bzc.92): Retreat asks first, listing what is lost and
+ *   what is kept (tests/ui/retreat-dialog.test.ts); Cancel is the default.
  * - Site: the site's map picture enlarged, one sentence, the options as
  *   rows with resource icons (costs and rewards) and number keys, Leave on
  *   Escape.
@@ -32,11 +34,16 @@ import type {
 } from "../core/game/index.ts";
 import type { ArmySlots, Stack } from "../core/game/types.ts";
 import type { MapObject } from "../core/map/types.ts";
-import { playerColour } from "../data/players.ts";
+import {
+  HIRE_COST,
+  RETREAT_OFFER_REFRESHES,
+  playerColour,
+} from "../data/players.ts";
 import type { ResourceAmounts } from "../data/types.ts";
 import { creatureAsset } from "../render/map/scene.ts";
+import { totalsByCreature } from "./battle/losses.ts";
 import { dialog } from "./dialog.ts";
-import type { DialogButton, DialogChoice } from "./dialog.ts";
+import type { DialogButton, DialogChoice, DialogOptions } from "./dialog.ts";
 import { costView, el, img } from "./dom.ts";
 import { creatureCount } from "./format.ts";
 import { armyBand } from "./hero-screen.ts";
@@ -275,6 +282,125 @@ export function preBattleDialog(
     consequence: model.consequence,
     buttons,
   });
+}
+
+// ------------------------------------------------------------ retreat
+
+/**
+ * The retreat warning (bead bzc.92): what a retreat costs under the real
+ * rules (RULES_V2 1.12, 4.4, 5.4; applyBattleResult and sendToTavern):
+ * the battle is lost, the whole army is lost, the hero leaves the map,
+ * keeps its level, skills, pages, scrolls and artifacts, and waits in its
+ * owner's tavern until the second weekly refresh, for the hiring price.
+ */
+export interface RetreatModel {
+  readonly title: string;
+  /** The hero's portrait key. */
+  readonly portrait: string | null;
+  readonly sentence: string;
+  /** What is lost, one line each. */
+  readonly lost: readonly string[];
+  /** What is kept, one line each. */
+  readonly kept: readonly string[];
+  /** Against fighting on and losing. */
+  readonly consequence: string;
+}
+
+/** "for the rest of this week and all of next week" for 2 refreshes. */
+function tavernStay(refreshes: number): string {
+  if (refreshes <= 1) return "for the rest of this week";
+  if (refreshes === 2) return "for the rest of this week and all of next week";
+  return `for the rest of this week and the next ${refreshes - 1} weeks`;
+}
+
+/** The retreat warning's model for the player's `side` of the battle. */
+export function retreatModel(
+  state: GameState,
+  setup: BattleSetup,
+  side: "attacker" | "defender",
+): RetreatModel {
+  const own = setup[side];
+  const enemy = setup[side === "attacker" ? "defender" : "attacker"];
+  const hero = state.heroes.find((h) => h.id === own.hero?.id);
+  const name = hero?.name ?? own.hero?.name ?? "Your hero";
+  const army = totalsByCreature(own.stacks).map((s) =>
+    creatureCount(s.creature, s.count),
+  );
+  const lost: string[] = [
+    army.length === 0
+      ? "Your whole army."
+      : `Your whole army: ${listWords(army)}.`,
+    `${name}, who leaves the map at once.`,
+  ];
+  if (
+    hero !== undefined &&
+    (hero.nextBattle.length > 0 || hero.buffs.length > 0)
+  )
+    lost.push("Potions and site blessings readied for this battle.");
+  const kept: string[] = [
+    `The hero's level ${hero?.level ?? 1}, stats, skills, feats, spells, scrolls and artifacts.`,
+    `A place in your tavern ${tavernStay(RETREAT_OFFER_REFRESHES)}: rehiring costs ${HIRE_COST} gold and brings only a fresh starting army.`,
+  ];
+  const foe = enemy.hero?.name ?? null;
+  return {
+    title: "Retreat and lose your army?",
+    portrait:
+      hero === undefined
+        ? null
+        : namedHeroPortrait(hero.defId, hero.heroClass).key,
+    sentence: `${name} flees without a fight, and the battle is lost.`,
+    lost,
+    kept,
+    consequence:
+      foe === null
+        ? "Fighting and losing costs the army too, and the hero goes to the common pool, where any player may hire it."
+        : `Fighting and losing costs the army too, the hero goes to the common pool, and ${foe} takes its artifacts.`,
+  };
+}
+
+function retreatList(
+  head: string,
+  kind: "lost" | "kept",
+  lines: readonly string[],
+): HTMLElement {
+  return el(
+    `div.gm-retreat-list.gm-retreat-${kind}`,
+    el("div.gm-retreat-head", head),
+    el("ul", ...lines.map((line) => el("li", line))),
+  );
+}
+
+/**
+ * The retreat warning's dialog: true retreats. Cancel is the default
+ * (Enter, focused at open, and Escape); retreating takes a click, with no
+ * letter key, so a second R from the pre-battle dialog cannot confirm it.
+ */
+export function retreatDialogOptions(
+  model: RetreatModel,
+): DialogOptions<boolean> {
+  return {
+    title: model.title,
+    className: "gm-retreat-dialog",
+    picture:
+      model.portrait === null ? null : img(model.portrait, "gm-dialog-hero", 2),
+    sentence: model.sentence,
+    body: el(
+      "div.gm-retreat-lists",
+      retreatList("You lose", "lost", model.lost),
+      retreatList("You keep", "kept", model.kept),
+    ),
+    consequence: model.consequence,
+    buttons: [
+      { label: "Cancel", value: false, primary: true },
+      { label: "Retreat anyway", value: true },
+    ],
+    cancel: false,
+  };
+}
+
+/** Shows the retreat warning; resolves true to retreat. */
+export function retreatDialog(model: RetreatModel): Promise<boolean> {
+  return dialog<boolean>(retreatDialogOptions(model));
 }
 
 // ------------------------------------------------------------ sites

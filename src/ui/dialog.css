@@ -231,6 +231,43 @@
   background: #e8a24a;
 }
 
+/* ------------------------------------------------------------ retreat */
+
+/* The retreat warning (bead bzc.92): what is lost, what is kept. */
+.gm-modal.gm-retreat-dialog {
+  width: min(520px, calc(100vw - 32px));
+}
+
+.gm-retreat-lists {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 10px;
+  text-align: left;
+}
+
+.gm-retreat-head {
+  margin-bottom: 2px;
+  font:
+    bold 14px Georgia,
+    serif;
+}
+
+.gm-retreat-lost .gm-retreat-head {
+  color: var(--gm-bad);
+}
+
+.gm-retreat-kept .gm-retreat-head {
+  color: var(--gm-good);
+}
+
+.gm-retreat-list ul {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
 /* ------------------------------------------------------------ results */
 
 /* A visit's outcome, a learnt page, a rumour (bead bzc.81). */

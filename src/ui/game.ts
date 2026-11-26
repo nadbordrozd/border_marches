@@ -110,6 +110,8 @@ import {
   noSchoolDialog,
   preBattleDialog,
   preBattleModel,
+  retreatDialog,
+  retreatModel,
   resultDialog,
   siteDialog,
   siteDialogModel,
@@ -2071,7 +2073,14 @@ class GameScreen {
       }
       const model = preBattleModel(this.state, setup, this.human);
       const humanSide = model.side;
-      const choice = await preBattleDialog(model);
+      let choice = await preBattleDialog(model);
+      // A retreat is confirmed first, with what it costs (bead bzc.92);
+      // Cancel goes back to the pre-battle dialog.
+      while (
+        choice === "retreat" &&
+        !(await retreatDialog(retreatModel(this.state, setup, humanSide)))
+      )
+        choice = await preBattleDialog(model);
       let result: BattleResult;
       if (choice === "retreat") {
         result = {
