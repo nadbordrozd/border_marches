@@ -47,7 +47,11 @@
 //   levelup, levelup-hover, end-won, end-lost, battle, battle-hover,
 //   battle-info, battle-book, battle-spell, battle-spell-hover,
 //   battle-spell-noeffect, [battle-result], [battle-result-split],
-//   prebattle-retreat (the retreat warning, bead bzc.92).
+//   prebattle-retreat (the retreat warning, bead bzc.92),
+//   wheel-menu, wheel-hover-school, wheel-hover-link, wheel-hover-faction,
+//   wheel-hover-lost, wheel-hero, wheel-book (the magic wheel from the
+//   faction column, the hero sheet and the spellbook, bead bzc.100: checks
+//   it fits and that Escape closes the wheel only).
 import { spawn } from "node:child_process";
 import {
   existsSync,
@@ -606,6 +610,144 @@ async function menuScreens() {
       await shot("menu-options");
     }
   }
+  if (wantFamily("wheel")) {
+    // The new-game faction column's wheel; the card hovers go with it.
+    await wheelScreen("wheel-menu", ".gm-faction-magic .mw-open", true);
+  }
+}
+
+/**
+ * The magic wheel (bead bzc.100): clicks `opener`, shoots `name`, with
+ * `hovers` the school, link and faction cards too, then checks Escape
+ * closes the wheel and only the wheel.
+ */
+async function wheelScreen(name, opener, hovers = false) {
+  if (!want(name) && !(hovers && wantFamily("wheel-hover"))) return;
+  const before = await evaluate(
+    "document.querySelectorAll('.gm-backdrop').length",
+  );
+  if (!(await clickFirst(opener))) return skip(name, `no ${opener}`);
+  if (!(await waitMaybe("document.querySelector('.mw-dialog')", 3000)))
+    return fail(name, "the wheel did not open");
+  await park();
+  await sleep(400);
+  const fit = await evaluate(`(() => {
+    const d = document.querySelector('.mw-dialog').getBoundingClientRect();
+    return { l: d.left, r: d.right, t: d.top, b: d.bottom, w: innerWidth, h: innerHeight,
+      scrolls: document.querySelector('.mw-dialog').scrollHeight > document.querySelector('.mw-dialog').clientHeight + 1 };
+  })()`);
+  if (fit.l < 0 || fit.t < 0 || fit.r > fit.w || fit.b > fit.h || fit.scrolls)
+    fail(name, `the wheel does not fit: ${JSON.stringify(fit)}`);
+  if (want(name)) await shot(name);
+  if (hovers) {
+    await hoverShot(
+      "wheel-hover-school",
+      ".mw-school[data-school='storm']",
+      48,
+      40,
+    );
+    await hoverShot("wheel-hover-link", ".mw-badge-opposed", 12, 12);
+    await hoverShot(
+      "wheel-hover-faction",
+      ".mw-faction[data-faction='undead']",
+      32,
+      32,
+    );
+    await hoverShot("wheel-hover-lost", ".mw-faction.mw-nomagic", 32, 32);
+    await park();
+    await wheelOneCard(name);
+    // Tab reaches the parts: focus lands on a wheel button.
+    await evaluate("document.querySelector('.mw-school').focus()");
+    const focused = await evaluate(
+      "document.activeElement?.classList.contains('mw-school') === true",
+    );
+    if (!focused) fail(name, "a school cannot take focus");
+  }
+  await escape();
+  await sleep(300);
+  const after = await evaluate(
+    "({ wheel: Boolean(document.querySelector('.mw-dialog')), backdrops: document.querySelectorAll('.gm-backdrop:not(.gm-closing)').length })",
+  );
+  if (after.wheel) fail(name, "Escape left the wheel open");
+  else if (after.backdrops !== before)
+    fail(name, `Escape closed more than the wheel: ${JSON.stringify(after)}`);
+  else note(`${name}: Escape closed the wheel only`);
+}
+
+/** The hover cards on screen: panels shown, cards in them, keyword boxes. */
+const cardsShown = () =>
+  evaluate(`(() => {
+    const on = [...document.querySelectorAll('#gm-tip.gm-tip-on, #gm-tip-pin.gm-tip-on')];
+    const cards = on.flatMap((p) => [...p.querySelectorAll('.gm-tip-card')]);
+    return {
+      panels: on.length,
+      cards: cards.length,
+      boxes: on.reduce((n, p) => n + p.querySelectorAll('.gm-kw-box').length, 0),
+      titles: cards.map((c) => c.querySelector('.gm-tip-title')?.textContent ?? ''),
+    };
+  })()`);
+
+/**
+ * The wheel shows one card at a time (bead bzc.100 review): pointing at a
+ * school, a badge, a faction and the Lost World in turn, and Tab twice,
+ * each shows exactly one card and no keyword boxes;
+ * leaving, and a click-to-keep-lit selection, leave none behind.
+ */
+async function wheelOneCard(name) {
+  const expect = async (what, want, title) => {
+    const s = await cardsShown();
+    const ok =
+      s.boxes === 0 &&
+      s.panels <= 1 &&
+      s.cards === want &&
+      (title === undefined || (s.titles[0] ?? "").includes(title));
+    if (!ok)
+      fail(name, `${what}: expected ${want} card(s), got ${JSON.stringify(s)}`);
+    return ok;
+  };
+  const at = async (selector, dx, dy) => {
+    const p = await pointIn(selector, dx, dy);
+    if (p) await mouse(p.x, p.y, 450);
+    return p;
+  };
+  let good = true;
+  await at(".mw-school[data-school='storm']", 48, 40);
+  good = (await expect("pointing at Storm", 1, "Storm")) && good;
+  await at(".mw-badge-opposed", 12, 12);
+  good = (await expect("then at an opposed badge", 1, "opposed")) && good;
+  await at(".mw-faction[data-faction='undead']", 32, 32);
+  good = (await expect("then at the Restless", 1, "The Restless")) && good;
+  await at(".mw-faction.mw-nomagic", 32, 32);
+  good = (await expect("then at the Lost World", 1, "Lost World")) && good;
+  await park();
+  await sleep(200);
+  good = (await expect("after leaving", 0)) && good;
+  // A click keeps the school lit, not its card: leaving shows none.
+  const p = await at(".mw-school[data-school='bloom']", 48, 40);
+  if (p) await leftClick(p.x, p.y, 300);
+  await park();
+  await sleep(200);
+  const lit = await evaluate(
+    "document.querySelector('.mw')?.classList.contains('mw-lit') === true",
+  );
+  if (!lit) fail(name, "a click did not keep the school lit");
+  good = (await expect("after a click and leaving", 0)) && good;
+  // Keyboard: Tab moves the card from part to part, one at a time.
+  const tab = async () => {
+    for (const type of ["keyDown", "keyUp"])
+      await send("Input.dispatchKeyEvent", {
+        type,
+        key: "Tab",
+        code: "Tab",
+        windowsVirtualKeyCode: 9,
+      });
+    await sleep(350);
+  };
+  await tab();
+  good = (await expect("after Tab", 1)) && good;
+  await tab();
+  good = (await expect("after a second Tab", 1)) && good;
+  if (good) note(`${name}: one card at a time (pointer, click, Tab)`);
 }
 
 async function galleryScreens() {
@@ -776,7 +918,7 @@ async function endTurnWarning() {
 }
 
 async function heroScreens() {
-  if (!wantFamily("hero")) return;
+  if (!wantFamily("hero") && !want("wheel-hero")) return;
   await key("i");
   await waitFor("document.querySelector('.gm-backdrop')", "hero screen");
   await park();
@@ -840,6 +982,7 @@ async function heroScreens() {
     } else skip("hero-book", "no spellbook button");
   }
   await park();
+  await wheelScreen("wheel-hero", ".hs-dialog .mw-open");
   await escape();
   await sleep(200);
 }
@@ -1236,6 +1379,17 @@ async function richScreens() {
         await shot("spellbook-battle");
       } else skip("spellbook-battle", "no Combat tab in the book");
     }
+    await escape();
+    await sleep(200);
+  }
+  if (want("wheel-book")) {
+    // The book's "Schools of magic" ribbon opens the wheel over the book.
+    await key("m");
+    await waitMaybe("document.querySelector('.gm-book-dialog')", 3000);
+    await sleep(300);
+    await wheelScreen("wheel-book", ".sb-ribbon-wheel");
+    if (!(await evaluate("Boolean(document.querySelector('.gm-book-dialog'))")))
+      fail("wheel-book", "closing the wheel closed the book");
     await escape();
     await sleep(200);
   }

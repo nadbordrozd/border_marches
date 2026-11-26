@@ -33,6 +33,8 @@ import {
 import { button, el, img, kbd, wait } from "./dom.ts";
 import { playGame } from "./game.ts";
 import { loadGameMapAssets } from "./hero-sprite.ts";
+import { installMagicWheel, magicWheelButton } from "./magic-wheel.ts";
+import { magicWheelModel } from "./magic-wheel-model.ts";
 import { minimapPixels } from "./minimap.ts";
 import { browserStorage, readSave, saveGame } from "./save.ts";
 import { installUiSounds, soundControl } from "./sound-control.ts";
@@ -460,6 +462,8 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
       factionCards.append(card);
       return { id: f.id, card };
     });
+    const wheelModel = magicWheelModel();
+    const wheelButton = magicWheelButton(() => ({ faction }));
     const renderFactions = (): void => {
       for (const { id, card } of cards) {
         card.classList.toggle("gm-selected", id === faction);
@@ -475,6 +479,23 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
             chosen.birthright.text,
           ),
         );
+      }
+      // Its magic in one line and the wheel (bead bzc.100).
+      const magic = wheelModel.factions.find((f) => f.id === faction);
+      if (magic !== undefined && magic.magical) {
+        const row = el(
+          "p.gm-faction-magic",
+          el("b", "Magic: "),
+          magic.schools
+            .map(
+              (s) =>
+                `${wheelModel.schools.find((x) => x.id === s)?.name ?? s} ${magic.weights[s]}`,
+            )
+            .join(", "),
+          `; guild to level ${magic.guildCap}. `,
+        );
+        row.append(wheelButton);
+        factionDetail.append(row);
       }
     };
     renderFactions();
@@ -675,6 +696,7 @@ export async function startGameApp(params: URLSearchParams): Promise<void> {
   if (canvas !== null) canvas.style.display = "none";
   installUiSounds();
   installTooltips();
+  installMagicWheel();
   for (;;) {
     const state = await mainMenu(params);
     params.delete("autostart");

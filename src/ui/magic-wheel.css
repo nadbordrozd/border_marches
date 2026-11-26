@@ -1,0 +1,644 @@
+/*
+ * The magic wheel (bead border_marches-bzc.100, magic-wheel.ts): a gold-
+ * rimmed disc of five coloured school wedges, the schools in their spell
+ * frames on a gold ring (allied), a red star across (opposed), faction
+ * portraits around it and the Lost World apart. Drawn in CSS and SVG over
+ * the existing frames, icons and portraits; no new art.
+ */
+
+.gm-modal.mw-dialog {
+  width: fit-content;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 24px);
+}
+
+.mw-dialog .gm-modal-body {
+  margin-bottom: 8px;
+}
+
+.mw {
+  --mw-gold: #d9a93a;
+  --mw-gold-light: #f2cf7a;
+  --mw-red: #e0503a;
+  --mw-ink: #0b0805;
+  --mw-parch: #f6e9c6;
+  --mw-parch-shade: #dcc28b;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.mw-stage-frame {
+  position: relative;
+  flex: none;
+  overflow: hidden;
+}
+
+.mw-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}
+
+.mw-svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+/* ------------------------------------------------------------ the disc */
+
+.mw-shadow {
+  fill: rgb(0 0 0 / 45%);
+}
+
+.mw-disc {
+  fill: #1d1610;
+}
+
+.mw-spoke {
+  stroke: var(--mw-gold);
+  stroke-width: 2;
+  opacity: 0.75;
+}
+
+.mw-rim {
+  fill: none;
+  stroke: #a87a26;
+  stroke-width: 12;
+}
+
+.mw-rim-braid {
+  fill: none;
+  stroke: var(--mw-gold-light);
+  stroke-width: 5;
+  stroke-dasharray: 3 5;
+  opacity: 0.85;
+}
+
+.mw-rim-edge {
+  fill: none;
+  stroke: var(--mw-ink);
+  stroke-width: 2;
+}
+
+.mw-hub {
+  fill: #2a2016;
+  stroke: var(--mw-gold);
+  stroke-width: 3;
+}
+
+.mw-hub-pin {
+  fill: var(--mw-gold);
+}
+
+/* ------------------------------------------------------------ links */
+
+.mw-allied-under {
+  fill: none;
+  stroke: var(--mw-ink);
+  stroke-width: 12;
+}
+
+.mw-allied-line {
+  fill: none;
+  stroke: var(--mw-gold);
+  stroke-width: 7;
+}
+
+.mw-allied-shine {
+  fill: none;
+  stroke: #fff0b0;
+  stroke-width: 1.5;
+  opacity: 0.75;
+}
+
+.mw-opposed-under {
+  stroke: var(--mw-ink);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.mw-opposed-line {
+  stroke: var(--mw-red);
+  stroke-width: 3.5;
+  stroke-dasharray: 12 7;
+  stroke-linecap: round;
+}
+
+.mw-tether-under {
+  stroke: var(--mw-ink);
+  stroke-linecap: round;
+  opacity: 0.8;
+}
+
+.mw-tether-line {
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+
+/* Lesser leanings show only when their faction or school is lit. */
+.mw-tether.mw-minor {
+  display: none;
+}
+
+.mw-lit .mw-tether.mw-minor.mw-on {
+  display: inline;
+}
+
+/* ------------------------------------------------------------ lighting */
+
+.mw [data-hl] {
+  transition: opacity 0.15s;
+}
+
+.mw-lit [data-hl]:not(.mw-on) {
+  opacity: 0.2;
+}
+
+.mw-lit .mw-link.mw-on .mw-allied-line,
+.mw-lit .mw-link.mw-on .mw-opposed-line {
+  filter: brightness(1.25);
+}
+
+/* ------------------------------------------------------------ badges */
+
+.mw-badge {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  font:
+    bold 17px/1 Georgia,
+    serif;
+  border: 2px solid var(--mw-ink);
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 60%);
+}
+
+.mw-badge-allied {
+  color: #2a1a05;
+  background: var(--mw-gold-light);
+}
+
+.mw-badge-opposed {
+  color: #fff3e6;
+  background: #b8321f;
+}
+
+.mw-badge:hover,
+.mw-badge.mw-on {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.mw-badge:focus-visible,
+.mw-school:focus-visible .mw-medal,
+.mw-faction:focus-visible .mw-ring {
+  outline: 3px solid var(--gm-focus, #ffe08a);
+  outline-offset: 2px;
+}
+
+.mw-badge[aria-pressed="true"],
+.mw-school[aria-pressed="true"] .mw-medal,
+.mw-faction[aria-pressed="true"] .mw-ring {
+  outline: 2px dashed var(--gm-focus, #ffe08a);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------ schools */
+
+.mw-school {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  color: #fff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transform: translate(-50%, -48px);
+}
+
+.mw-medal {
+  position: relative;
+  display: block;
+  filter: drop-shadow(0 3px 3px rgb(0 0 0 / 70%));
+}
+
+.mw-parch {
+  position: absolute;
+  background: var(--mw-parch);
+  box-shadow:
+    inset 2px -2px 0 var(--mw-parch-shade),
+    inset -2px 2px 0 #fff6dc;
+}
+
+.mw-frame {
+  position: absolute;
+  inset: 0;
+  image-rendering: pixelated;
+}
+
+.mw-medal > .mw-icon {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.mw-medal > .mw-icon img {
+  display: block;
+  image-rendering: pixelated;
+}
+
+.mw-school-name {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-top: -8px;
+  padding: 1px 9px;
+  font:
+    bold 14px Georgia,
+    serif;
+  text-shadow: 0 1px 0 #000;
+  background: rgb(11 8 5 / 82%);
+  border: 1px solid var(--mw-school);
+  border-radius: 9px;
+}
+
+.mw-rank-pips {
+  display: flex;
+  gap: 2px;
+}
+
+.mw-rank-pip {
+  width: 6px;
+  height: 6px;
+  background: var(--gm-gold, #ffd65c);
+  border: 1px solid #000;
+  border-radius: 50%;
+}
+
+.mw-school.mw-on.mw-as-allied .mw-medal {
+  filter: drop-shadow(0 0 6px var(--mw-gold-light))
+    drop-shadow(0 0 2px var(--mw-gold-light));
+}
+
+.mw-school.mw-on.mw-as-opposed .mw-medal {
+  filter: drop-shadow(0 0 6px #ff5a3c) drop-shadow(0 0 2px #ff5a3c);
+}
+
+.mw-school:hover .mw-medal {
+  transform: scale(1.06);
+}
+
+/* ------------------------------------------------------------ factions */
+
+.mw-faction {
+  position: absolute;
+  z-index: 4;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  color: var(--gm-text, #f0e6c8);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.mw-ring {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, #4a3a26, #1a130c);
+  border: 4px solid var(--mw-faction);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2px var(--mw-ink),
+    0 0 0 4px var(--mw-gold),
+    0 0 0 5px var(--mw-ink),
+    0 4px 10px rgb(0 0 0 / 60%);
+}
+
+.mw-portrait {
+  display: block;
+  image-rendering: pixelated;
+}
+
+.mw-chosen .mw-ring {
+  box-shadow:
+    0 0 0 2px var(--mw-ink),
+    0 0 0 5px var(--gm-focus, #ffe08a),
+    0 0 0 6px var(--mw-ink),
+    0 0 18px 4px rgb(255 224 138 / 55%);
+}
+
+.mw-fcard {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 8px);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-sizing: border-box;
+  width: 124px;
+  padding: 4px 8px 5px;
+  text-align: left;
+  background: rgb(11 8 5 / 78%);
+  border: 1px solid var(--mw-faction);
+  border-radius: 6px;
+  transform: translateY(-50%);
+}
+
+.mw-fcard-left {
+  right: calc(100% + 8px);
+  left: auto;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.mw-fname {
+  font:
+    bold 13px Georgia,
+    serif;
+  color: #fff;
+  white-space: nowrap;
+  text-shadow: 0 1px 0 #000;
+  border-bottom: 2px solid var(--mw-faction);
+}
+
+.mw-pips {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 1px 8px;
+}
+
+.mw-pip-row {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.mw-pip-row .gm-icon img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.mw-pip-dots {
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: var(--mw-gold-light);
+}
+
+.mw-fnote {
+  font-size: 11px;
+  color: var(--gm-dim, #a89a80);
+}
+
+/* The Lost World: apart, greyed, a dashed ring. */
+.mw-apart {
+  position: absolute;
+  top: 504px;
+  left: 548px;
+  width: 244px;
+  height: 90px;
+  box-sizing: border-box;
+  border: 1px dashed rgb(201 154 60 / 55%);
+  border-radius: 12px;
+}
+
+.mw-apart-label {
+  position: absolute;
+  top: -9px;
+  left: 12px;
+  padding: 0 6px;
+  font:
+    italic 12px Georgia,
+    serif;
+  color: var(--gm-dim, #a89a80);
+  background: var(--gm-wood, #241c13);
+}
+
+.mw-nomagic .mw-ring {
+  border-style: dashed;
+}
+
+.mw-nomagic .mw-portrait {
+  filter: grayscale(0.55) brightness(0.9);
+}
+
+/* ------------------------------------------------------------ caption */
+
+.mw-aside {
+  flex: 0 1 240px;
+  min-width: 200px;
+  max-width: 260px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--gm-text, #f0e6c8);
+}
+
+.mw-aside-title {
+  margin: 0 0 6px;
+  padding-bottom: 3px;
+  font:
+    bold 15px Georgia,
+    serif;
+  color: var(--gm-gold, #ffd65c);
+  border-bottom: 1px solid var(--gm-trim-dark, #6b4b1e);
+}
+
+.mw-lead {
+  margin: 0 0 8px;
+}
+
+.mw-keys {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.mw-key {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.mw-key b {
+  color: var(--gm-gold-dim, #e8c77a);
+}
+
+.mw-swatch {
+  flex: none;
+  width: 28px;
+  height: 14px;
+  margin-top: 2px;
+}
+
+.mw-swatch-allied {
+  background: linear-gradient(
+    transparent 3px,
+    var(--mw-ink) 3px,
+    var(--mw-ink) 4px,
+    var(--mw-gold) 4px,
+    var(--mw-gold) 10px,
+    var(--mw-ink) 10px,
+    var(--mw-ink) 11px,
+    transparent 11px
+  );
+}
+
+.mw-swatch-opposed {
+  background: repeating-linear-gradient(
+      90deg,
+      var(--mw-red) 0 8px,
+      transparent 8px 12px
+    )
+    0 5px / 100% 4px no-repeat;
+}
+
+.mw-swatch-faction {
+  background:
+    radial-gradient(circle, var(--mw-gold-light) 2px, transparent 3px) 0 3px /
+      8px 8px repeat-x,
+    none;
+}
+
+.mw-swatch-apart {
+  box-sizing: border-box;
+  width: 14px;
+  margin: 0 7px;
+  border: 2px dashed var(--gm-dim, #a89a80);
+  border-radius: 50%;
+}
+
+.mw-swatch-gilded {
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  margin: 1px 6px 0;
+  border: 3px double var(--gm-gold, #ffd65c);
+}
+
+.mw-hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--gm-dim, #a89a80);
+}
+
+/* Tooltip bits. */
+.mw-tip-allied {
+  color: var(--mw-gold-light, #f2cf7a);
+}
+
+.mw-tip-opposed {
+  color: #ff8a70;
+}
+
+.mw-tip-portrait {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+/* ------------------------------------------------------------ opener */
+
+.mw-open {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.mw-open-mark {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background: conic-gradient(
+    from -36deg,
+    #4caf50 0 72deg,
+    #3f7fd9 72deg 144deg,
+    #d4a017 144deg 216deg,
+    #8a63b8 216deg 288deg,
+    #d9472b 288deg 360deg
+  );
+  border: 2px solid var(--gm-trim, #c99a3c);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #000;
+}
+
+.mw-open-star {
+  position: absolute;
+  inset: 5px;
+  background: #1d1610;
+  border-radius: 50%;
+}
+
+/* On the hero sheet: after the school ranks, the mark alone when narrow. */
+.hs-ranks .mw-open {
+  align-self: center;
+  margin-left: 4px;
+  padding: 3px 9px 3px 5px;
+  font-size: 12px;
+}
+
+@media (max-width: 1100px) {
+  .hs-ranks .mw-open {
+    padding: 4px;
+  }
+
+  .hs-ranks .mw-open-label {
+    display: none;
+  }
+}
+
+.gm-faction-magic .mw-open {
+  margin-top: 2px;
+  padding: 1px 8px;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+/* Big windows: the stage zooms up; the caption grows with it. */
+@media (min-width: 1600px) and (min-height: 1000px) {
+  .mw-aside {
+    flex-basis: 300px;
+    max-width: 320px;
+    font-size: 15px;
+  }
+
+  .mw-aside-title {
+    font-size: 18px;
+  }
+
+  .mw-hint {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mw [data-hl],
+  .mw-badge {
+    transition: none;
+  }
+}

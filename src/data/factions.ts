@@ -159,7 +159,7 @@ export const FACTIONS: readonly FactionDef[] = [
       text: "Natives caught in an area effect of their own side take nothing from it and are pushed 3 hexes away from its centre.",
       ability: "launched",
     },
-    schools: { bloom: 4, accord: 0, clock: 1, hush: 2, storm: 3 },
+    schools: { bloom: 4, accord: 0, clock: 2, hush: 2, storm: 2 },
     guildCap: 3,
   },
   {

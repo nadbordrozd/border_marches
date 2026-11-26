@@ -84,6 +84,7 @@ import { button, el, img, kbd, modal, resourceIcon } from "./dom.ts";
 import { iconElement } from "./icons.ts";
 import { armyValue } from "./hints.ts";
 import { creatureTip } from "./info-tips.ts";
+import { magicWheelButton } from "./magic-wheel.ts";
 import { openAdventureBook, type BookChoice } from "./spellbook.ts";
 import { setTip, tipCard, titleCard, type TipBody } from "./tooltip.ts";
 import "./hero.css";
@@ -928,10 +929,21 @@ export async function openHeroScreen(
     );
 
     // ---- left: skills and feats as icon rows; the book and school ranks
+    // The magic wheel (bead bzc.100), the hero's schools gilded on it, at
+    // the end of the school ranks so it wraps with them.
+    const wheel = magicWheelButton(() => ({
+      ranks: Object.fromEntries(
+        SCHOOLS.map((sc) => [sc, schoolRank(h, sc)]),
+      ) as Record<(typeof SCHOOLS)[number], number>,
+      faction: cls.faction,
+      who: h.name,
+    }));
+    const ranks = schoolRankRow(h);
+    ranks?.append(wheel);
     const book = el(
       "div.hs-book-row",
       spellbookButton(h, () => void openBook()),
-      schoolRankRow(h),
+      ranks ?? wheel,
     );
     if (holdsUnspentPage(h)) {
       book.append(

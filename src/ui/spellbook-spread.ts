@@ -148,14 +148,17 @@ const SCALE = 2;
 
 // --------------------------------------------------------------- the hook
 
-let schoolsOfMagic: (() => void) | null = null;
+let schoolsOfMagic: ((ranks: SchoolRanks) => void) | null = null;
 
 /**
  * Bead bzc.100's hook: with a handler, every book opened afterwards shows
- * a "Schools of magic" ribbon that calls it (the magic wheel). Null removes
- * it. The book itself never builds the wheel.
+ * a "Schools of magic" ribbon that calls it with the hero's school ranks
+ * (the magic wheel, src/ui/magic-wheel.ts). Null removes it. The book
+ * itself never builds the wheel.
  */
-export function setSchoolsOfMagic(open: (() => void) | null): void {
+export function setSchoolsOfMagic(
+  open: ((ranks: SchoolRanks) => void) | null,
+): void {
   schoolsOfMagic = open;
 }
 
@@ -321,9 +324,23 @@ export function renderSpread(
   const slot = el("div.sb-schools-slot");
   if (schoolsOfMagic !== null) {
     const open = schoolsOfMagic;
-    const b = el("button.sb-ribbon.sb-ribbon-wheel", "Schools of magic");
+    // The wheel's sign: the five school colours round a dark hub.
+    const b = el(
+      "button.sb-ribbon.sb-ribbon-wheel",
+      el("span.sb-wheel-mark"),
+      el("span.sb-ribbon-name", "Schools of magic"),
+    );
+    b.setAttribute("aria-label", "Schools of magic");
     b.type = "button";
-    b.addEventListener("click", () => open());
+    b.addEventListener("click", () => open(ranks));
+    setTip(b, () => {
+      const card = tipCard("Schools of magic", [
+        "The wheel: which schools are allied and which opposed, and where each faction's Magic Guild leans.",
+      ]);
+      // One card, no keyword boxes beside it (as the wheel's own cards).
+      card.setAttribute("data-kw-skip", "");
+      return card;
+    });
     slot.append(b);
   }
   ribbons.append(slot);

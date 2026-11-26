@@ -464,9 +464,35 @@
   --ribbon: #a47a3c;
   width: 52px;
   height: 46px;
-  font-size: 9px;
-  line-height: 10px;
-  text-align: left;
+}
+
+/* The magic wheel's ribbon (bead bzc.100): a small wheel of the schools. */
+.sb-wheel-mark {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-left: 6px;
+  background: conic-gradient(
+    from -36deg,
+    #4caf50 0 72deg,
+    #3f7fd9 72deg 144deg,
+    #d4a017 144deg 216deg,
+    #8a63b8 216deg 288deg,
+    #d9472b 288deg 360deg
+  );
+  border: 2px solid #f2cf7a;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #000;
+}
+
+.sb-wheel-mark::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  background: #1d1610;
+  border: 1px solid #f2cf7a;
+  border-radius: 50%;
 }
 
 /* Combat and Adventure: tabs under the book. */
