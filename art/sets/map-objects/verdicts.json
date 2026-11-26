@@ -1443,5 +1443,25 @@
     "verdict": "REJECTED",
     "notes": "soft green glow halo by the entrance (no blur), strewn bones and boards as noise; keep haunted-mine-a#2",
     "at": "2026-11-25T00:09:57.679Z"
+  },
+  "sawmill-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Sawmill (bzc.97): plump plank mill house with a red tile roof and dormer, a big shiny saw blade biting a log on a trestle, a round log stack, dark doorway at the front right over the entrance cell; chunkier and more characterful than sawmill-b, in the roadside inn's style",
+    "at": "2026-11-26T21:08:58.672Z"
+  },
+  "sawmill-c#1": {
+    "verdict": "REJECTED",
+    "notes": "good, but the log pile hides the saw and the lean-to adds a thin post; #0 reads clearer",
+    "at": "2026-11-26T21:08:58.756Z"
+  },
+  "sawmill-c#2": {
+    "verdict": "REJECTED",
+    "notes": "saw under a small roof reads less at 1x than #0",
+    "at": "2026-11-26T21:08:58.844Z"
+  },
+  "sawmill-c#3": {
+    "verdict": "REJECTED",
+    "notes": "flatter, boxier mill with a hooked pole; less cute than #0",
+    "at": "2026-11-26T21:08:58.934Z"
   }
 }

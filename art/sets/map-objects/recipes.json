@@ -353,6 +353,19 @@
       "negative": "person, water wheel, river, smoke, ground, grass"
     },
     {
+      "id": "sawmill-c",
+      "concept": "SAWMILL (bzc.97: chunkier, in the style of the roadside inn)",
+      "width": 128,
+      "height": 128,
+      "seed": 97601,
+      "styleImage": {
+        "file": "art/masters/map-objects/inn-a-0.png",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject and not the layout"
+      },
+      "subject": "Subject: a cute chunky lumber sawmill: a plump two-storey timber mill house of warm brown planks #8a5a2c under a steep red clay tile roof #c0503a with #82321f shadows and a little dormer, on a low stone footing; at its left a huge round shiny steel saw blade #c8ccd0 with #7e848c shadows biting into a fat log on a wooden trestle; tall neat stacks of round cut logs and yellow planks #d9b26a at the front left; a wide open dark doorway at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, water wheel, river, smoke, ground, grass"
+    },
+    {
       "id": "ore-pit-b",
       "concept": "ORE PIT (bzc.30, 2x1 mine at 2x2-site scale)",
       "width": 128,
@@ -401,15 +414,15 @@
   "outputs": [
     {
       "path": "public/assets/objects/map/sawmill.png",
-      "from": "sawmill-b#0",
-      "width": 124,
+      "from": "sawmill-c#0",
+      "width": 108,
       "height": 88,
       "steps": [
         {
           "op": "crop",
-          "x": 1,
-          "y": 29,
-          "width": 124,
+          "x": 8,
+          "y": 23,
+          "width": 108,
           "height": 88
         }
       ]

@@ -1,0 +1,435 @@
+{
+  "set": "chunky-towns",
+  "bead": "border_marches-bzc.97",
+  "class": "towns",
+  "exploration": false,
+  "_doc": "Adventure-map town sprites remade cute and chunky (bead bzc.97): dense, tall clusters of buildings round a central landmark in the style of the liked map objects (the roadside inn is the style image), replacing the thin wall rings of faction-towns and towns-3x2. 3x2 towns are requested at 232x176 and seated in the 240x184 canvas; the level towns (Lost World and goblin cities 1-3, the neutral village) at their own canvas sizes. Gate at the bottom centre over the entry cell; no flags. Class contract: docs/art/classes/towns.md. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "styleInn": {
+      "file": "art/masters/map-objects/inn-a-0.png",
+      "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+    },
+    "styleLostWorld": {
+      "take": "lost-world-fort-a#0",
+      "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the huts; not the layout"
+    },
+    "styleHorde": {
+      "take": "horde-fort-s1#0",
+      "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the shacks; not the layout"
+    },
+    "styleRealm": {
+      "take": "realm-fort-s1#0",
+      "usage": "copy the outline thickness, pixel size and the chunky rounded shapes of the houses; not the castle and not the layout"
+    },
+    "styleOpts": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    },
+    "palOpts": {
+      "color_palette": true,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-map-town"
+    ],
+    "noBackground": true,
+    "styleImage": "@styleInn",
+    "styleOptions": "@styleOpts",
+    "width": 232,
+    "height": 176
+  },
+  "recipes": [
+    {
+      "id": "realm-fort-s1",
+      "concept": "REALM CASTLE (fort 2-3) sample",
+      "seed": 97101,
+      "subject": "Subject: the Realm's storybook castle town filling the whole image width: at the back centre a tall fat round castle keep of cream limestone #e6d8b4 with #b3a07a shadows under a big tabard blue #2f6fd0 conical roof with #1f4a8f shadows, two plump round towers with blue cones at either side, crowded in front and at the sides by half-timbered houses with white plaster, dark timbers and warm red-brown roofs #a8492f and a little chapel; across the front a short thick crenellated cream stone wall with a big twin-towered gatehouse and a dark arched gate in the exact middle."
+    },
+    {
+      "id": "restless-fort-s1",
+      "concept": "RESTLESS CHURCHYARD (fort 2-3) sample",
+      "seed": 97201,
+      "subject": "Subject: the Restless' spooky-cute haunted town filling the whole image width: at the back centre a tall crooked gothic cathedral of dark slate #5b5866 with #3a3842 shadows, a pointed bell tower and steep shroud violet #7a4fb5 roofs with #4e2f7a shadows and glowing violet windows, crowded round it a crooked manor house, a round domed mausoleum of bone white stone #d8d0bc, little crypts and leaning cream tombstones; across the front a short thick slate wall topped with black iron railings and a big black iron gate between two fat stone pillars with violet lanterns in the exact middle.",
+      "negative": "skeleton, ghost, blood, gore, skull"
+    },
+    {
+      "id": "horde-fort-s1",
+      "concept": "HORDE WARLORD'S HOLD (fort 2-3) sample",
+      "seed": 97301,
+      "subject": "Subject: the goblin Horde's ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of riveted light grey tin #b8bcc0 with #7d8288 shadows under a bright hazard yellow #f2c230 roof, a crooked wooden lookout tower beside it, crowded round it tin shacks with yellow roofs, a big tawny spotted hide tent and heaps of scrap; across the front a short thick wall of crooked sharpened log stakes #b8733a with #7a4a22 shadows and a big gate crowned by a cream horned ox skull in the exact middle.",
+      "negative": "goblin, red"
+    },
+    {
+      "id": "realm-camp-a",
+      "concept": "REALM VILLAGE (fort 0-1)",
+      "seed": 97111,
+      "styleImage": {
+        "take": "realm-fort-s1#0",
+        "usage": "copy the palette, outline thickness, pixel size, chunky rounded shapes and the size of the houses; not the castle and not the layout"
+      },
+      "subject": "Subject: the Realm's cosy storybook village, smaller than a castle, about three quarters of the image wide: at the back centre a plump cream stone chapel #e6d8b4 with a tall bell tower under a tabard blue #2f6fd0 conical roof with #1f4a8f shadows, crowded round it chunky half-timbered cottages with white plaster, dark timbers and warm red-brown roofs #a8492f, a stone well and stacked barrels; across the front a short low fence of pale timber planks #c99a5e with a little timber gatehouse with a blue roof in the exact middle.",
+      "negative": "castle, crenellations, stone curtain wall, keep"
+    },
+    {
+      "id": "restless-camp-a",
+      "concept": "RESTLESS GRAVEYARD (fort 0-1)",
+      "seed": 97211,
+      "styleImage": {
+        "take": "restless-fort-s1#0",
+        "usage": "copy the palette, outline thickness, pixel size, chunky rounded shapes and the size of the buildings; not the cathedral and not the layout"
+      },
+      "subject": "Subject: the Restless' spooky-cute country graveyard village, smaller than a town, about three quarters of the image wide: at the back centre a plump crooked slate chapel #5b5866 with #3a3842 shadows, a little bell gable and steep shroud violet #7a4fb5 roofs with #4e2f7a shadows and glowing violet windows, crowded round it two small stone crypts, a crooked gravedigger's hut, leaning cream tombstones #d8d0bc and one bare crooked dead tree; across the front thin black iron railings with a small iron gate between two short stone posts with violet lanterns in the exact middle.",
+      "negative": "skeleton, ghost, blood, gore, skull, cathedral, manor, dome"
+    },
+    {
+      "id": "realm-camp-b",
+      "concept": "REALM VILLAGE (fort 0-1), re-roll: no keep",
+      "seed": 97112,
+      "subject": "Subject: the Realm's cosy storybook farming village, about two thirds of the image wide and lower than a castle: at the back centre a plump white plaster chapel with dark timbers and a slim steeple under a tabard blue #2f6fd0 roof with #1f4a8f shadows, crowded round it chunky half-timbered cottages with white plaster, dark timbers and warm red-brown roofs #a8492f, a stone well, haystacks and barrels; across the front a short low fence of pale timber planks #c99a5e with a little timber gate under a blue roof in the exact middle.",
+      "negative": "castle, crenellations, stone wall, keep, round tower, turret"
+    },
+    {
+      "id": "restless-camp-b",
+      "concept": "RESTLESS GRAVEYARD (fort 0-1), re-roll: inn style image, no cathedral",
+      "seed": 97212,
+      "subject": "Subject: the Restless' spooky-cute country graveyard hamlet, about two thirds of the image wide and lower than a town: at the back centre a plump crooked little slate chapel #5b5866 with #3a3842 shadows, a stubby bell gable and a steep shroud violet #7a4fb5 roof with #4e2f7a shadows and glowing violet windows, crowded round it a crooked gravedigger's cottage with a violet roof, two square stone crypts, leaning cream tombstones #d8d0bc and a bare dead tree; across the front short black iron railings with a small iron gate between violet lantern posts in the exact middle.",
+      "negative": "skeleton, ghost, gore, skull, cathedral, dome"
+    },
+    {
+      "id": "horde-camp-a",
+      "concept": "HORDE WARCAMP (fort 0-1)",
+      "seed": 97311,
+      "styleImage": {
+        "take": "horde-fort-s1#0",
+        "usage": "copy the palette, outline thickness, pixel size, chunky rounded shapes and the size of the shacks; not the tin hall and not the layout"
+      },
+      "subject": "Subject: the goblin Horde's ramshackle warcamp, smaller than a fortress, about three quarters of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots and a crooked pole on top, crowded round it little tin shacks of riveted light grey tin #b8bcc0 with bright hazard yellow #f2c230 roofs, a crooked stove chimney and a heap of scrap loot; across the front a short crooked fence of sharpened log stakes #b8733a with #7a4a22 shadows and a gap framed by two tall stakes crowned by a cream horned ox skull in the exact middle.",
+      "negative": "goblin, red, tin wall, watchtower, stone wall"
+    },
+    {
+      "id": "lost-world-fort-a",
+      "concept": "LOST WORLD TOWN (3x2, full growth)",
+      "seed": 97401,
+      "subject": "Subject: the Lost World's cheerful prehistoric tribal town filling the whole image width: at the back centre a huge round chieftain's longhouse with a fat tawny thatch roof and walls of tawny hide with big dark brown spots, a tall cream bone totem with bright red-orange paint beside it, crowded round it plump round huts with tawny thatch roofs and spotted hide walls, dark basalt stones and drying racks; across the front a short thick fence of sharpened tawny logs and in the exact middle a big gate made of a giant cream dinosaur skull whose open jaws are the entrance.",
+      "negative": "dinosaur, caveman, red walls"
+    },
+    {
+      "id": "lost-world-city-1-a",
+      "concept": "LOST WORLD CAMP (level 1)",
+      "width": 88,
+      "height": 96,
+      "seed": 97411,
+      "styleImage": "@styleLostWorld",
+      "subject": "Subject: a small cheerful Lost World camp filling most of the image: three plump round huts with fat tawny thatch roofs and tawny hide walls with big dark brown spots huddled round a tall cream bone totem with bright red-orange paint at the back centre, a dark basalt stone and a little log fence; the front hut's dark doorway at the bottom centre.",
+      "negative": "dinosaur, caveman, red walls",
+      "styleOptions": "@palOpts"
+    },
+    {
+      "id": "lost-world-city-2-a",
+      "concept": "LOST WORLD VILLAGE (level 2)",
+      "width": 96,
+      "height": 100,
+      "seed": 97421,
+      "styleImage": "@styleLostWorld",
+      "subject": "Subject: a cheerful Lost World village filling most of the image: at the back centre a big round longhouse with a fat tawny thatch roof and spotted tawny hide walls, crowded round it four plump round thatched huts with spotted hide walls, a cream bone totem with bright red-orange paint and a short fence of sharpened tawny logs across the front with a little bone gate at the bottom centre.",
+      "negative": "dinosaur, caveman, red walls",
+      "styleOptions": "@palOpts"
+    },
+    {
+      "id": "lost-world-city-3-a",
+      "concept": "LOST WORLD TOWN (level 3)",
+      "width": 96,
+      "height": 104,
+      "seed": 97431,
+      "styleImage": "@styleLostWorld",
+      "subject": "Subject: a big cheerful Lost World tribal town filling the whole image: at the back centre a huge round chieftain's longhouse with a fat tawny thatch roof, two tall cream bone totems with bright red-orange paint, crowded round it plump thatched huts with spotted tawny hide walls, and across the front a thick fence of sharpened tawny logs with a gate made of a giant cream dinosaur skull at the bottom centre.",
+      "negative": "dinosaur, caveman, red walls",
+      "styleOptions": "@palOpts"
+    },
+    {
+      "id": "goblin-city-1-a",
+      "concept": "GOBLIN CAMP (level 1)",
+      "width": 88,
+      "height": 96,
+      "seed": 97311,
+      "styleImage": "@styleHorde",
+      "subject": "Subject: a small goblin scrap camp filling most of the image: a plump tawny hide tent with big dark brown spots at the back centre, two little shacks of riveted light grey tin #b8bcc0 with bright hazard yellow #f2c230 roofs huddled in front of it, a heap of scrap and a crooked stove chimney; a dark doorway at the bottom centre.",
+      "negative": "goblin, red",
+      "styleOptions": "@palOpts"
+    },
+    {
+      "id": "goblin-city-2-a",
+      "concept": "GOBLIN WARCAMP (level 2)",
+      "width": 96,
+      "height": 100,
+      "seed": 97321,
+      "styleImage": "@styleHorde",
+      "subject": "Subject: a goblin scrap warcamp filling most of the image: at the back centre a chunky riveted light grey tin #b8bcc0 hall with a bright hazard yellow #f2c230 roof, a crooked wooden lookout tower beside it, crowded round it a spotted tawny hide tent and tin shacks with yellow roofs, and a short fence of sharpened log stakes #b8733a across the front with a gap at the bottom centre.",
+      "negative": "goblin, red",
+      "styleOptions": "@palOpts"
+    },
+    {
+      "id": "goblin-city-3-a",
+      "concept": "GOBLIN HOLD (level 3)",
+      "width": 96,
+      "height": 104,
+      "seed": 97331,
+      "styleImage": "@styleHorde",
+      "subject": "Subject: a big goblin scrap fortress filling the whole image: at the back centre a tall fat riveted light grey tin #b8bcc0 boss hall under a bright hazard yellow #f2c230 roof, a crooked wooden lookout tower, crowded round it tin shacks with yellow roofs and a spotted hide tent, and across the front a thick wall of sharpened log stakes #b8733a with a gate crowned by a cream horned ox skull at the bottom centre.",
+      "negative": "goblin, red",
+      "styleOptions": "@palOpts"
+    },
+    {
+      "id": "village-a",
+      "concept": "NEUTRAL VILLAGE (no faction)",
+      "width": 72,
+      "height": 72,
+      "seed": 97501,
+      "styleImage": "@styleRealm",
+      "subject": "Subject: a tiny cosy neutral hamlet filling most of the image: three plump cottages with golden straw thatch roofs and cream plaster walls huddled round a little stone well, a stacked woodpile and a small barn with a warm red-brown roof #a8492f at the back centre; a dark doorway at the bottom centre.",
+      "negative": "castle, wall, keep, tower"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/towns/realm-village-3x2.png",
+      "from": "realm-camp-b#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 4,
+          "width": 232,
+          "height": 162
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 166,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/realm-castle-3x2.png",
+      "from": "realm-fort-s1#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 11,
+          "width": 232,
+          "height": 151
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 155,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/restless-graveyard-3x2.png",
+      "from": "restless-camp-b#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 9,
+          "width": 232,
+          "height": 159
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 163,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/restless-churchyard-3x2.png",
+      "from": "restless-fort-s1#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 4,
+          "width": 232,
+          "height": 158
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 162,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/horde-warcamp-3x2.png",
+      "from": "horde-camp-a#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 13,
+          "width": 232,
+          "height": 156
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 160,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/goblin-hold-3x2.png",
+      "from": "horde-fort-s1#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 6,
+          "width": 232,
+          "height": 163
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 167,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/dinosaur-town-3x2.png",
+      "from": "lost-world-fort-a#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 16,
+          "width": 232,
+          "height": 150
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 154,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/dinosaur-city-1.png",
+      "from": "lost-world-city-1-a#0",
+      "width": 88,
+      "height": 96
+    },
+    {
+      "path": "public/assets/towns/dinosaur-city-2.png",
+      "from": "lost-world-city-2-a#3",
+      "width": 96,
+      "height": 100
+    },
+    {
+      "path": "public/assets/towns/dinosaur-city-3.png",
+      "from": "lost-world-city-3-a#1",
+      "width": 96,
+      "height": 104
+    },
+    {
+      "path": "public/assets/towns/goblin-city-1.png",
+      "from": "goblin-city-1-a#0",
+      "width": 88,
+      "height": 96
+    },
+    {
+      "path": "public/assets/towns/goblin-city-2.png",
+      "from": "goblin-city-2-a#1",
+      "width": 96,
+      "height": 100
+    },
+    {
+      "path": "public/assets/towns/goblin-city-3.png",
+      "from": "goblin-city-3-a#0",
+      "width": 96,
+      "height": 104
+    },
+    {
+      "path": "public/assets/towns/village.png",
+      "from": "village-a#3",
+      "width": 72,
+      "height": 72
+    }
+  ]
+}

@@ -288,7 +288,7 @@ const ART_ROWS: readonly (readonly [
   string,
 ])[] = [
   // The four mines at 2x2-site scale, drawn on their 2x1 footprint (bzc.30).
-  ["sawmill", "", 124, 88, "sawmill-b#0"],
+  ["sawmill", "", 108, 88, "sawmill-c#0"],
   ["ore-pit", "", 102, 85, "ore-pit-b#0"],
   ["essence-spring", "", 111, 107, "essence-spring-c#1"],
   ["gold-mine", "", 120, 118, "gold-mine-b#2"],

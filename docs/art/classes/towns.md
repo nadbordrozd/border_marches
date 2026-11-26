@@ -1,16 +1,53 @@
 # Towns asset contract
 
 Status: draft (2026-11-24, bead `border_marches-bzc.15`; orchestrator call).
-Specialises [`../ART_DIRECTION.md`](../ART_DIRECTION.md) for the faction
-towns of v0.2 (the Realm, the Restless, the Goblin Horde): their 3x2 map
-sprites and their town-screen art (building sprites and backdrops).
+Map towns redrawn cute and chunky on 2026-11-26 (bead `border_marches-bzc.97`,
+see [Map town direction](#map-town-direction-bzc97)). Specialises
+[`../ART_DIRECTION.md`](../ART_DIRECTION.md) for the faction towns: their
+map sprites and their town-screen art (building sprites and backdrops).
+
+## Map town direction (bzc.97)
+
+The user found the first map towns "primitive and not cute": thin rings of
+wall round a transparent yard with a few small flat houses. They liked the
+creatures, forests, mountains and the wood pile, chest, well, roadside inn
+and toppled statue. The map towns now follow those:
+
+- **A dense, tall cluster, not a ring.** One big central landmark rises
+  highest at the back centre (the Realm's blue-coned keep, the Restless'
+  crooked cathedral, the Horde's tin boss hall or hide tent, the Lost
+  World's thatched longhouse); smaller buildings are packed round it and
+  overlap; no empty yard, no thin ring wall. A short, thick front wall or
+  fence carries a big gate at the bottom centre, over the entry cell.
+- **The liked objects' style.** Thick black outline, big rounded toy-like
+  shapes, saturated flat colours with one shadow tone, low detail, the same
+  slightly-from-above front view and the sun at the bottom left. The style
+  image is the roadside inn (`art/masters/map-objects/inn-a-0.png`).
+- **Faction at a glance.** Faction colours on the roofs (blue cones, violet
+  slate, hazard yellow, tawny thatch) and one signature gate (twin-towered
+  gatehouse, iron gate between lantern pillars, horned ox skull, dinosaur
+  skull jaws).
+- **Two stages read apart.** The camp stage (fort 0-1) is lower and has a
+  fence and a smaller landmark (a chapel, a hide tent); the fort stage
+  (fort 2-3) has the stone wall and the big keep or hall. A camp take that
+  copies its fort's landmark is rejected (realm-camp-a, restless-camp-a).
+- **Level towns** (the Lost World and goblin cities 1-3 and the neutral
+  village, drawn for towns that are not 3x2 or not grown yet) use the same
+  class layer at their own canvas, the family's accepted 3x2 town as style
+  image with its palette.
+
+Studio set `art/sets/chunky-towns` (class fragment
+`art/fragments/class-map-town.txt`). The sets `faction-towns` and
+`towns-3x2` keep their history and masters but no longer derive game files.
 
 ## Inventory
 
 | Asset | Size (px) | Studio set | Game file | Lookup |
 | --- | --- | --- | --- | --- |
-| Map town, camp stage (fort 0-1) | 240 x 184 | `faction-towns` | `public/assets/towns/{realm-village,restless-graveyard,horde-warcamp}-3x2.png` | `townArt(faction, fortLevel)` |
-| Map town, fort stage (fort 2-3) | 240 x 184 | `faction-towns`, `towns-3x2` | `public/assets/towns/{realm-castle,restless-churchyard}-3x2.png`, `goblin-hold-3x2.png` | `townArt(faction, fortLevel)` |
+| Map town, camp stage (fort 0-1) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-village,restless-graveyard,horde-warcamp}-3x2.png` | `townArt(faction, fortLevel)` |
+| Map town, fort stage (fort 2-3) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-castle,restless-churchyard}-3x2.png`, `goblin-hold-3x2.png` | `townArt(faction, fortLevel)` |
+| Lost World town, 3x2 | 240 x 184 | `chunky-towns` | `public/assets/towns/dinosaur-town-3x2.png` | `town3x2Asset(obj)` |
+| Level towns (Lost World, goblin; levels 1-3), neutral village | 88 x 96, 96 x 100, 96 x 104; 72 x 72 | `chunky-towns` | `public/assets/towns/{dinosaur,goblin}-city-{1,2,3}.png`, `village.png` | `townAsset(obj)`, the Lost World town screen |
 | Building sprite, one per building of each tree (22 x 3) | 64 x 64 | `town-buildings` | `public/assets/towns/buildings/<faction>/<building>.png` | `buildingArt(faction, building)` |
 | Town-screen backdrop, one per faction | 256 x 224 (shown x2) | `town-backdrops` | `public/assets/towns/backdrops/<faction>.png` | `townBackdrop(faction)` |
 
@@ -29,18 +66,25 @@ role aliases.
 
 | Faction | Materials and colours | Map town, camp / fort |
 | --- | --- | --- |
-| Realm (`humans`) | cream limestone `#e6d8b4` / `#b3a07a`, white plaster with dark timbers, tabard blue `#2f6fd0` / `#1f4a8f` and red-brown `#a8492f` roofs | plank palisade village with a blue-roofed gatehouse / crenellated castle ring with blue-coned towers and a twin-towered gatehouse |
-| Restless (`undead`) | slate `#5b5866` / `#3a3842`, shroud violet `#7a4fb5` / `#4e2f7a` roofs, bone white `#d8d0bc`, black iron; spooky-cute, never gory | iron-railed graveyard with an open grave / slate-walled churchyard with a black iron gate, chapel, manor and domed mausoleum |
-| Horde (`goblins`) | riveted tin `#b8bcc0` / `#7d8288`, hazard yellow `#f2c230` roofs, sharpened logs `#b8733a`, tawny spotted hide | ring of stakes with a horned-skull gate / the Warlord's Hold |
+| Realm (`humans`) | cream limestone `#e6d8b4` / `#b3a07a`, white plaster with dark timbers, tabard blue `#2f6fd0` / `#1f4a8f` and red-brown `#a8492f` roofs | a white chapel with a blue steeple among packed red-roofed cottages behind a plank fence and a little blue-roofed gate / a fat blue-coned keep among packed timber houses behind a thick crenellated wall with a twin-towered gatehouse |
+| Restless (`undead`) | slate `#5b5866` / `#3a3842`, shroud violet `#7a4fb5` / `#4e2f7a` roofs, bone white `#d8d0bc`, black iron; spooky-cute, never gory | a little violet-roofed chapel among crypts, a gravedigger's cottage and tombstones behind iron railings / a tall crooked slate cathedral with a manor and a bone-white domed mausoleum behind a slate wall with a black iron gate |
+| Horde (`goblins`) | riveted tin `#b8bcc0` / `#7d8288`, hazard yellow `#f2c230` roofs, sharpened logs `#b8733a`, tawny spotted hide | a big spotted hide tent among yellow-roofed tin shacks behind a stake fence with a horned-skull gate / the Warlord's Hold: a tall tin boss hall and a lookout tower behind a stake wall |
+| Lost World (`lost-world`) | tawny thatch, tawny hide with dark brown spots, cream bone, red-orange paint, basalt | one 3x2 stage: a huge thatched longhouse among plump huts behind a log fence with a dinosaur-skull gate; levels 1-3 grow from three huts round a totem |
 
 ## Geometry
 
 - **Map towns**: generated at 232 x 176, cropped to their opaque rows and
   seated in the 240 x 184 canvas of the 3x2 footprint (bottom 160 rows the
   footprint, 24 rows rising into the row behind), lowest opaque row 4 px
-  above the canvas bottom; measured boxes in `TOWN_3X2_ASSETS`. The gate is
-  in the middle of the front wall, over the entry cell. Yards are
-  transparent so the map ground shows through.
+  above the canvas bottom; measured boxes in `TOWN_3X2_ASSETS`. The take is
+  kept at its full width (4 px pad each side) so the gate, drawn in the
+  image's middle, stays over the entry cell. Gaps between buildings are
+  transparent; there is no yard to show.
+- **Level towns**: generated at their canvas size and used as generated
+  (no crop); the ground line (`TownAsset.ground`) is measured from the
+  opaque pixels of the bottom rows.
+- **Shadows**: never baked. The renderer gives every town the shared ground
+  shadow (`groundShadows` in `src/render/map/scene.ts`).
 - **Building sprites**: generated at 64 x 64, cropped to the building (stray
   specks dropped), seated bottom-centred 2 px above the bottom of a 64 x 64
   canvas, so every building stands on one baseline in a row or a composed
@@ -72,8 +116,13 @@ role aliases.
   size only"). For the first map towns the Lost World town gave the layout
   ("round walled town with its gate in the middle of the front wall") with
   `color_palette: false`; a faction's second stage copies its first.
-- Map towns: layers `style`, `camera-three-quarter`, `light-south-west`,
-  subject. One candidate per call.
+- Map towns (bzc.97): layers `style`, `light-south-west`, `class-map-town`,
+  subject; style image the roadside inn with `color_palette: false` (colours
+  as hex in the subject); a camp stage written without its fort's landmark
+  and, when the fort's take as style image copied the layout, the inn
+  again. One candidate per call at 232 x 176; four at the level towns'
+  sizes. The first map towns (bzc.15) used `camera-three-quarter` and the
+  Lost World ring as layout.
 - Building sprites: layers `style`, `light-south-west`,
   `class-town-building`, subject "each image a different one of these N
   ...: Name (description); ...". At 64 x 64 one call returns 16 candidates
@@ -93,6 +142,8 @@ undead on any faction.
 ## Acceptance
 
 Beyond the shared checks: map towns keep the gate centred over the entry
-cell and a transparent yard; building sprites have nothing under them (no
+cell, a central landmark and a dense cluster (no ring of wall round an
+empty yard), and the camp stage must not read as a copy of the fort stage;
+building sprites have nothing under them (no
 grass plot, skirt or slab), no specks after cropping, and one building per
 sprite; every building of every tree has a sprite (`tests/assets/town-art.test.ts`).

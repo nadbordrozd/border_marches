@@ -46,6 +46,9 @@ PixelLab calls (US$2.87).
   and essence spring reused their older 72-80 px art until bzc.30 remade
   them at 2x2-site scale with the same recipe (`sawmill-b`, `ore-pit-b`,
   `gold-mine-b`, `essence-spring-c`; 6 PixelLab calls, US$0.48). The
+  sawmill was redrawn chunkier by bead bzc.97 (`sawmill-c#0`, the roadside
+  inn as style image: a plump plank mill with a dormer and a saw blade
+  biting a log on a trestle, 108 x 88). The
   older art stays in the manifest (`RESOURCE_MINES`) but is no longer
   drawn; the haunted mine keeps `haunted-mine-a#2`, already at that
   scale (the remake `haunted-mine-b` had glow halos). See Mines below.
@@ -154,7 +157,11 @@ resource.
 
 ## Acceptance
 
-- No ground plate, shadow, people or second object in the image.
+- No ground plate, shadow, people or second object in the image. The
+  renderer adds the shared ground shadow (bead bzc.97, `groundShadows` in
+  `src/render/map/scene.ts`): a contact ellipse as wide as about 0.8 of the
+  sprite whose lowest edge is at most 1 px under the foot, and a fainter
+  cast ellipse to the north-east, both drawn before any sprite.
 - Lit from the left; no mirrored copies.
 - Reviewed per recipe on a grid contact sheet (native and enlarged, light
   and dark), then in context on every terrain:

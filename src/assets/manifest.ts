@@ -484,96 +484,68 @@ function town(
   };
 }
 
-/** Lost World camps, the goblin scrap camps (the neutral Warlord's Hold), a village. */
+/**
+ * The level towns: Lost World camps, the goblin scrap camps (the neutral
+ * Warlord's Hold) and a neutral village, redrawn cute and chunky by bead
+ * bzc.97 (set chunky-towns). No flag is painted (owner colour is the
+ * interface's); `ground` is measured from the bottom 14 opaque rows.
+ */
 export const TOWN_ASSETS: readonly TownAsset[] = [
-  town(
-    "dinosaur-city-1",
-    "dinosaur",
-    1,
-    88,
-    96,
-    { x: 44, y: 56 },
-    { x: 30.5, y: 0, pole: 6 },
-    { contactY: 79, left: 7, right: 80, leftY: 64, rightY: 64, fullness: 0.78 },
-  ),
-  town(
-    "dinosaur-city-2",
-    "dinosaur",
-    2,
-    96,
-    100,
-    { x: 48, y: 60 },
-    { x: 66.5, y: 11, pole: 0 },
-    {
-      contactY: 80,
-      left: 7,
-      right: 89,
-      leftY: 63.5,
-      rightY: 63.5,
-      fullness: 0.76,
-    },
-  ),
-  town(
-    "dinosaur-city-3",
-    "dinosaur",
-    3,
-    96,
-    104,
-    { x: 48, y: 64 },
-    { x: 68.5, y: 0, pole: 12 },
-    { contactY: 87, left: 1, right: 94, leftY: 66, rightY: 73, fullness: 0.77 },
-  ),
-  town(
-    "goblin-city-1",
-    "goblin",
-    1,
-    88,
-    96,
-    { x: 44, y: 56 },
-    { x: 71, y: 31, pole: 0 },
-    {
-      contactY: 93,
-      left: 11,
-      right: 78,
-      leftY: 79.5,
-      rightY: 54.5,
-      fullness: 0.9,
-    },
-  ),
-  town(
-    "goblin-city-2",
-    "goblin",
-    2,
-    96,
-    100,
-    { x: 48, y: 60 },
-    { x: 57.5, y: 33, pole: 11 },
-    { contactY: 97, left: 9, right: 88, leftY: 79, rightY: 78, fullness: 0.75 },
-  ),
-  town(
-    "goblin-city-3",
-    "goblin",
-    3,
-    96,
-    104,
-    { x: 48, y: 64 },
-    { x: 60.5, y: 29, pole: 10 },
-    {
-      contactY: 101,
-      left: 2,
-      right: 94,
-      leftY: 80,
-      rightY: 80,
-      fullness: 0.75,
-    },
-  ),
+  town("dinosaur-city-1", "dinosaur", 1, 88, 96, { x: 44, y: 56 }, null, {
+    contactY: 94,
+    left: 0,
+    right: 80,
+    leftY: 83.5,
+    rightY: 83.5,
+    fullness: 0.58,
+  }),
+  town("dinosaur-city-2", "dinosaur", 2, 96, 100, { x: 48, y: 60 }, null, {
+    contactY: 87,
+    left: 7,
+    right: 89,
+    leftY: 81.5,
+    rightY: 81.5,
+    fullness: 0.65,
+  }),
+  town("dinosaur-city-3", "dinosaur", 3, 96, 104, { x: 48, y: 64 }, null, {
+    contactY: 101,
+    left: 5,
+    right: 91,
+    leftY: 89.5,
+    rightY: 89.5,
+    fullness: 0.54,
+  }),
+  town("goblin-city-1", "goblin", 1, 88, 96, { x: 44, y: 56 }, null, {
+    contactY: 92,
+    left: 0,
+    right: 78,
+    leftY: 84.5,
+    rightY: 85.5,
+    fullness: 0.74,
+  }),
+  town("goblin-city-2", "goblin", 2, 96, 100, { x: 48, y: 60 }, null, {
+    contactY: 98,
+    left: 5,
+    right: 90,
+    leftY: 90.5,
+    rightY: 89.5,
+    fullness: 0.64,
+  }),
+  town("goblin-city-3", "goblin", 3, 96, 104, { x: 48, y: 64 }, null, {
+    contactY: 96,
+    left: 1,
+    right: 96,
+    leftY: 86.5,
+    rightY: 86.5,
+    fullness: 0.66,
+  }),
   town("village", "neutral", null, 72, 72, { x: 36, y: 32 }, null, {
-    contactY: 69,
-    left: 11,
-    right: 61,
-    leftY: 59,
-    rightY: 58,
-    fullness: 0.77,
+    contactY: 72,
+    left: 6,
+    right: 66,
+    leftY: 61.5,
+    rightY: 65.5,
+    fullness: 0.66,
   }),
 ];
 
@@ -1090,9 +1062,10 @@ export const RESOURCE_ITEMS: Readonly<Record<ResourceId, ResourceItemAsset>> =
  * wide, 2 rows deep. The canvas is the footprint plus 24 rows above it
  * (240 x 184); draw it at (x0 x 80, y0 x 80 - 24) for a footprint whose
  * north-west cell is (x0, y0). The art is centred and its lowest opaque row
- * sits 4 px above the canvas bottom (`box`). The yards inside the walls are
- * transparent, so the cell grounds show through; no flag (the owner shows
- * in the interface). The v0.2 factions (bead bzc.15, set faction-towns)
+ * sits 4 px above the canvas bottom (`box`). Since bead bzc.97 each is a
+ * dense cluster round a central landmark (set chunky-towns), gaps between
+ * buildings transparent; no flag (the owner shows in the interface). The
+ * v0.2 factions (bead bzc.15)
  * have two growth stages each, picked by the town's fort level:
  * `townArt` in src/assets/town-art.ts.
  */
@@ -1138,57 +1111,58 @@ function town3x2(
 
 /**
  * The Lost World town, the goblin Warlord's Hold (also the Horde town's fort
- * stage) and the v0.2 faction towns at 3x2.
+ * stage) and the v0.2 faction towns at 3x2, redrawn as cute, chunky clusters
+ * round a central landmark by bead bzc.97 (set chunky-towns).
  */
 export const TOWN_3X2_ASSETS: readonly Town3x2Asset[] = [
   town3x2(
     "dinosaur-town-3x2",
     "dinosaur",
     "fort",
-    [4, 13, 232, 167],
-    "towns-3x2/lost-world-a-clean2#0",
+    [25, 30, 192, 150],
+    "chunky-towns/lost-world-fort-a#0",
   ),
   town3x2(
     "goblin-hold-3x2",
     "goblin",
     "fort",
-    [4, 10, 232, 170],
-    "towns-3x2/goblin-hold-v4a#0",
+    [24, 17, 191, 163],
+    "chunky-towns/horde-fort-s1#0",
   ),
   town3x2(
     "horde-warcamp-3x2",
     "goblin",
     "camp",
-    [4, 18, 232, 162],
-    "faction-towns/horde-camp-a#0",
+    [24, 24, 191, 156],
+    "chunky-towns/horde-camp-a#0",
   ),
   town3x2(
     "realm-village-3x2",
     "humans",
     "camp",
-    [4, 44, 232, 136],
-    "faction-towns/realm-camp-a#0",
+    [22, 18, 195, 162],
+    "chunky-towns/realm-camp-b#0",
   ),
   town3x2(
     "realm-castle-3x2",
     "humans",
     "fort",
-    [4, 6, 232, 174],
-    "faction-towns/realm-fort-a#0",
+    [31, 29, 178, 151],
+    "chunky-towns/realm-fort-s1#0",
   ),
   town3x2(
     "restless-graveyard-3x2",
     "undead",
     "camp",
-    [4, 5, 232, 175],
-    "faction-towns/restless-camp-a#0",
+    [36, 21, 172, 159],
+    "chunky-towns/restless-camp-b#0",
   ),
   town3x2(
     "restless-churchyard-3x2",
     "undead",
     "fort",
-    [4, 5, 232, 175],
-    "faction-towns/restless-fort-a#0",
+    [54, 22, 133, 158],
+    "chunky-towns/restless-fort-s1#0",
   ),
 ];
 

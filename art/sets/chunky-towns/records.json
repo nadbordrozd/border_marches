@@ -1,0 +1,1038 @@
+{
+  "realm-fort-s1": {
+    "id": "realm-fort-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "47f843dc-78bc-4a56-b028-9194d19f76d7",
+    "submittedAt": "2026-11-26T20:57:50.337Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the Realm's storybook castle town filling the whole image width: at the back centre a tall fat round castle keep of cream limestone #e6d8b4 with #b3a07a shadows under a big tabard blue #2f6fd0 conical roof with #1f4a8f shadows, two plump round towers with blue cones at either side, crowded in front and at the sides by half-timbered houses with white plaster, dark timbers and warm red-brown roofs #a8492f and a little chapel; across the front a short thick crenellated cream stone wall with a big twin-towered gatehouse and a dark arched gate in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 97101,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: the Realm's storybook castle town filling the whole image width: at the back centre a tall fat round castle keep of cream limestone #e6d8b4 with #b3a07a shadows under a big tabard blue #2f6fd0 conical roof with #1f4a8f shadows, two plump round towers with blue cones at either side, crowded in front and at the sides by half-timbered houses with white plaster, dark timbers and warm red-brown roofs #a8492f and a little chapel; across the front a short thick crenellated cream stone wall with a big twin-towered gatehouse and a dark arched gate in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall."
+    },
+    "at": "2026-11-26T20:59:07.381Z",
+    "usageUsd": 0.08037325421969096,
+    "candidates": [
+      {
+        "file": "realm-fort-s1-0.png",
+        "sha256": "dbc3377e6114e446d8758777178c5bc2586e999dfab61df44585381c25733691",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "restless-fort-s1": {
+    "id": "restless-fort-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "62add2ec-8f26-44d3-88f9-2116fb041979",
+    "submittedAt": "2026-11-26T20:59:07.525Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the Restless' spooky-cute haunted town filling the whole image width: at the back centre a tall crooked gothic cathedral of dark slate #5b5866 with #3a3842 shadows, a pointed bell tower and steep shroud violet #7a4fb5 roofs with #4e2f7a shadows and glowing violet windows, crowded round it a crooked manor house, a round domed mausoleum of bone white stone #d8d0bc, little crypts and leaning cream tombstones; across the front a short thick slate wall topped with black iron railings and a big black iron gate between two fat stone pillars with violet lanterns in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 97201,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: the Restless' spooky-cute haunted town filling the whole image width: at the back centre a tall crooked gothic cathedral of dark slate #5b5866 with #3a3842 shadows, a pointed bell tower and steep shroud violet #7a4fb5 roofs with #4e2f7a shadows and glowing violet windows, crowded round it a crooked manor house, a round domed mausoleum of bone white stone #d8d0bc, little crypts and leaning cream tombstones; across the front a short thick slate wall topped with black iron railings and a big black iron gate between two fat stone pillars with violet lanterns in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, skeleton, ghost, blood, gore, skull."
+    },
+    "at": "2026-11-26T21:00:24.678Z",
+    "usageUsd": 0.0804478031264411,
+    "candidates": [
+      {
+        "file": "restless-fort-s1-0.png",
+        "sha256": "c581f12717e661c1e8453d4604a0a12080f1d6ef459ed55ea9f616104666091a",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "horde-fort-s1": {
+    "id": "horde-fort-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "74a8e242-c58d-463a-948d-1b44d6764649",
+    "submittedAt": "2026-11-26T21:00:24.799Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the goblin Horde's ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of riveted light grey tin #b8bcc0 with #7d8288 shadows under a bright hazard yellow #f2c230 roof, a crooked wooden lookout tower beside it, crowded round it tin shacks with yellow roofs, a big tawny spotted hide tent and heaps of scrap; across the front a short thick wall of crooked sharpened log stakes #b8733a with #7a4a22 shadows and a big gate crowned by a cream horned ox skull in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 97301,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: the goblin Horde's ramshackle scrap fortress town filling the whole image width: at the back centre a tall fat boss hall of riveted light grey tin #b8bcc0 with #7d8288 shadows under a bright hazard yellow #f2c230 roof, a crooked wooden lookout tower beside it, crowded round it tin shacks with yellow roofs, a big tawny spotted hide tent and heaps of scrap; across the front a short thick wall of crooked sharpened log stakes #b8733a with #7a4a22 shadows and a big gate crowned by a cream horned ox skull in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, red."
+    },
+    "at": "2026-11-26T21:01:26.630Z",
+    "usageUsd": 0.08033145509825812,
+    "candidates": [
+      {
+        "file": "horde-fort-s1-0.png",
+        "sha256": "58edb2df1dedc2f32054decc84c31fac2c58eb0e01f1d04aff3bc68abf7b7e1a",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "realm-camp-a": {
+    "id": "realm-camp-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "7bee21ce-b61e-4530-b842-3258f332fa1e",
+    "submittedAt": "2026-11-26T21:02:51.328Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the Realm's cosy storybook village, smaller than a castle, about three quarters of the image wide: at the back centre a plump cream stone chapel #e6d8b4 with a tall bell tower under a tabard blue #2f6fd0 conical roof with #1f4a8f shadows, crowded round it chunky half-timbered cottages with white plaster, dark timbers and warm red-brown roofs #a8492f, a stone well and stacked barrels; across the front a short low fence of pale timber planks #c99a5e with a little timber gatehouse with a blue roof in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/realm-fort-s1#0 sha256 dbc3377e6114e446d8758777178c5bc2586e999dfab61df44585381c25733691",
+        "usage": "copy the palette, outline thickness, pixel size, chunky rounded shapes and the size of the houses; not the castle and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 97111,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: the Realm's cosy storybook village, smaller than a castle, about three quarters of the image wide: at the back centre a plump cream stone chapel #e6d8b4 with a tall bell tower under a tabard blue #2f6fd0 conical roof with #1f4a8f shadows, crowded round it chunky half-timbered cottages with white plaster, dark timbers and warm red-brown roofs #a8492f, a stone well and stacked barrels; across the front a short low fence of pale timber planks #c99a5e with a little timber gatehouse with a blue roof in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, castle, crenellations, stone curtain wall, keep."
+    },
+    "at": "2026-11-26T21:04:29.858Z",
+    "usageUsd": 0.0805746942891015,
+    "candidates": [
+      {
+        "file": "realm-camp-a-0.png",
+        "sha256": "b704e398eb856c587e77f6daae7e1214db566d3c4e0af9491474a71d03358641",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "restless-camp-a": {
+    "id": "restless-camp-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "dbef8d59-0158-417d-9c1e-b94bbecf8873",
+    "submittedAt": "2026-11-26T21:04:30.002Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the Restless' spooky-cute country graveyard village, smaller than a town, about three quarters of the image wide: at the back centre a plump crooked slate chapel #5b5866 with #3a3842 shadows, a little bell gable and steep shroud violet #7a4fb5 roofs with #4e2f7a shadows and glowing violet windows, crowded round it two small stone crypts, a crooked gravedigger's hut, leaning cream tombstones #d8d0bc and one bare crooked dead tree; across the front thin black iron railings with a small iron gate between two short stone posts with violet lanterns in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/restless-fort-s1#0 sha256 c581f12717e661c1e8453d4604a0a12080f1d6ef459ed55ea9f616104666091a",
+        "usage": "copy the palette, outline thickness, pixel size, chunky rounded shapes and the size of the buildings; not the cathedral and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 97211,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: the Restless' spooky-cute country graveyard village, smaller than a town, about three quarters of the image wide: at the back centre a plump crooked slate chapel #5b5866 with #3a3842 shadows, a little bell gable and steep shroud violet #7a4fb5 roofs with #4e2f7a shadows and glowing violet windows, crowded round it two small stone crypts, a crooked gravedigger's hut, leaning cream tombstones #d8d0bc and one bare crooked dead tree; across the front thin black iron railings with a small iron gate between two short stone posts with violet lanterns in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, skeleton, ghost, blood, gore, skull, cathedral, manor, dome."
+    },
+    "at": "2026-11-26T21:05:26.890Z",
+    "usageUsd": 0.08036270085970561,
+    "candidates": [
+      {
+        "file": "restless-camp-a-0.png",
+        "sha256": "9a15df3171c62e597a839ad85fd9eaa5a7edc604a9b54aaac96c6766891b15e4",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "horde-camp-a": {
+    "id": "horde-camp-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "050e0122-14ae-423d-98ee-a50e2cad92a9",
+    "submittedAt": "2026-11-26T21:05:27.077Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the goblin Horde's ramshackle warcamp, smaller than a fortress, about three quarters of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots and a crooked pole on top, crowded round it little tin shacks of riveted light grey tin #b8bcc0 with bright hazard yellow #f2c230 roofs, a crooked stove chimney and a heap of scrap loot; across the front a short crooked fence of sharpened log stakes #b8733a with #7a4a22 shadows and a gap framed by two tall stakes crowned by a cream horned ox skull in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/horde-fort-s1#0 sha256 58edb2df1dedc2f32054decc84c31fac2c58eb0e01f1d04aff3bc68abf7b7e1a",
+        "usage": "copy the palette, outline thickness, pixel size, chunky rounded shapes and the size of the shacks; not the tin hall and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 97311,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: the goblin Horde's ramshackle warcamp, smaller than a fortress, about three quarters of the image wide: at the back centre a big plump tawny hide boss tent with big dark brown spots and a crooked pole on top, crowded round it little tin shacks of riveted light grey tin #b8bcc0 with bright hazard yellow #f2c230 roofs, a crooked stove chimney and a heap of scrap loot; across the front a short crooked fence of sharpened log stakes #b8733a with #7a4a22 shadows and a gap framed by two tall stakes crowned by a cream horned ox skull in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, red, tin wall, watchtower, stone wall."
+    },
+    "at": "2026-11-26T21:06:28.724Z",
+    "usageUsd": 0.08076315228144328,
+    "candidates": [
+      {
+        "file": "horde-camp-a-0.png",
+        "sha256": "88e60f34cdbbe30026109ceae502623f4cf94b1b3a5e32eba8d20caa9125577b",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "lost-world-fort-a": {
+    "id": "lost-world-fort-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b503741f-5cbf-489c-82ba-a6a35c6e3882",
+    "submittedAt": "2026-11-26T21:06:28.918Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the Lost World's cheerful prehistoric tribal town filling the whole image width: at the back centre a huge round chieftain's longhouse with a fat tawny thatch roof and walls of tawny hide with big dark brown spots, a tall cream bone totem with bright red-orange paint beside it, crowded round it plump round huts with tawny thatch roofs and spotted hide walls, dark basalt stones and drying racks; across the front a short thick fence of sharpened tawny logs and in the exact middle a big gate made of a giant cream dinosaur skull whose open jaws are the entrance."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 97401,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: the Lost World's cheerful prehistoric tribal town filling the whole image width: at the back centre a huge round chieftain's longhouse with a fat tawny thatch roof and walls of tawny hide with big dark brown spots, a tall cream bone totem with bright red-orange paint beside it, crowded round it plump round huts with tawny thatch roofs and spotted hide walls, dark basalt stones and drying racks; across the front a short thick fence of sharpened tawny logs and in the exact middle a big gate made of a giant cream dinosaur skull whose open jaws are the entrance. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, dinosaur, caveman, red walls."
+    },
+    "at": "2026-11-26T21:07:41.268Z",
+    "usageUsd": 0.08036219885614183,
+    "candidates": [
+      {
+        "file": "lost-world-fort-a-0.png",
+        "sha256": "f3c95e2a1e958f43051be17344be4c417b0b2f06c31777a1f3e1372206622732",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "realm-camp-b": {
+    "id": "realm-camp-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "e5d68065-bb51-41f9-9657-fac03d2b75c4",
+    "submittedAt": "2026-11-26T21:09:15.967Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the Realm's cosy storybook farming village, about two thirds of the image wide and lower than a castle: at the back centre a plump white plaster chapel with dark timbers and a slim steeple under a tabard blue #2f6fd0 roof with #1f4a8f shadows, crowded round it chunky half-timbered cottages with white plaster, dark timbers and warm red-brown roofs #a8492f, a stone well, haystacks and barrels; across the front a short low fence of pale timber planks #c99a5e with a little timber gate under a blue roof in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 97112,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: the Realm's cosy storybook farming village, about two thirds of the image wide and lower than a castle: at the back centre a plump white plaster chapel with dark timbers and a slim steeple under a tabard blue #2f6fd0 roof with #1f4a8f shadows, crowded round it chunky half-timbered cottages with white plaster, dark timbers and warm red-brown roofs #a8492f, a stone well, haystacks and barrels; across the front a short low fence of pale timber planks #c99a5e with a little timber gate under a blue roof in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, castle, crenellations, stone wall, keep, round tower, turret."
+    },
+    "at": "2026-11-26T21:11:16.552Z",
+    "usageUsd": 0.0804950204425388,
+    "candidates": [
+      {
+        "file": "realm-camp-b-0.png",
+        "sha256": "0851f39e802888d86eaec29c7c500a4e636092856a4189c694c52cdd858e3e3a",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "restless-camp-b": {
+    "id": "restless-camp-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5e701018-c8bc-4e0a-9dfe-c9dbeedc8f80",
+    "submittedAt": "2026-11-26T21:11:34.968Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the Restless' spooky-cute country graveyard hamlet, about two thirds of the image wide and lower than a town: at the back centre a plump crooked little slate chapel #5b5866 with #3a3842 shadows, a stubby bell gable and a steep shroud violet #7a4fb5 roof with #4e2f7a shadows and glowing violet windows, crowded round it a crooked gravedigger's cottage with a violet roof, two square stone crypts, leaning cream tombstones #d8d0bc and a bare dead tree; across the front short black iron railings with a small iron gate between violet lantern posts in the exact middle."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 232,
+        "height": 176
+      },
+      "no_background": true,
+      "seed": 97212,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: the Restless' spooky-cute country graveyard hamlet, about two thirds of the image wide and lower than a town: at the back centre a plump crooked little slate chapel #5b5866 with #3a3842 shadows, a stubby bell gable and a steep shroud violet #7a4fb5 roof with #4e2f7a shadows and glowing violet windows, crowded round it a crooked gravedigger's cottage with a violet roof, two square stone crypts, leaning cream tombstones #d8d0bc and a bare dead tree; across the front short black iron railings with a small iron gate between violet lantern posts in the exact middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, skeleton, ghost, gore, skull, cathedral, dome."
+    },
+    "at": "2026-11-26T21:13:14.127Z",
+    "usageUsd": 0.08059850295384725,
+    "candidates": [
+      {
+        "file": "restless-camp-b-0.png",
+        "sha256": "9494b2b61dd3de10e924c04e240218c582cf7d76233c8f83ee1d42a644177281",
+        "width": 232,
+        "height": 176
+      }
+    ]
+  },
+  "lost-world-city-1-a": {
+    "id": "lost-world-city-1-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "33ce7e04-2c6f-401f-8ed8-6782a2435ac8",
+    "submittedAt": "2026-11-26T21:13:14.252Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small cheerful Lost World camp filling most of the image: three plump round huts with fat tawny thatch roofs and tawny hide walls with big dark brown spots huddled round a tall cream bone totem with bright red-orange paint at the back centre, a dark basalt stone and a little log fence; the front hut's dark doorway at the bottom centre."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/lost-world-fort-a#0 sha256 f3c95e2a1e958f43051be17344be4c417b0b2f06c31777a1f3e1372206622732",
+        "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the huts; not the layout"
+      },
+      "image_size": {
+        "width": 88,
+        "height": 96
+      },
+      "no_background": true,
+      "seed": 97411,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a small cheerful Lost World camp filling most of the image: three plump round huts with fat tawny thatch roofs and tawny hide walls with big dark brown spots huddled round a tall cream bone totem with bright red-orange paint at the back centre, a dark basalt stone and a little log fence; the front hut's dark doorway at the bottom centre. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, dinosaur, caveman, red walls."
+    },
+    "at": "2026-11-26T21:14:32.071Z",
+    "usageUsd": 0.0807214896943834,
+    "candidates": [
+      {
+        "file": "lost-world-city-1-a-0.png",
+        "sha256": "802269725f5cd4f43f09138f9177b1c99b6ddd77722bb4e69322e0b39aabb45e",
+        "width": 88,
+        "height": 96
+      },
+      {
+        "file": "lost-world-city-1-a-1.png",
+        "sha256": "7f709a5fb60a10e8ca4ad4d19abe18ae501fce7a4fd248f6feda8ed804bf81ed",
+        "width": 88,
+        "height": 96
+      },
+      {
+        "file": "lost-world-city-1-a-2.png",
+        "sha256": "2656cae62af53355b9d11f240633da30d59458b13c0aacb23906a5c38a70718c",
+        "width": 88,
+        "height": 96
+      },
+      {
+        "file": "lost-world-city-1-a-3.png",
+        "sha256": "8cd875fa9e5c27d05c657b754622b790bb7e6c9785166c805b4ef42989a0db95",
+        "width": 88,
+        "height": 96
+      }
+    ]
+  },
+  "lost-world-city-2-a": {
+    "id": "lost-world-city-2-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "aa14ff89-72a8-4eca-9346-7ebe6d47c1f8",
+    "submittedAt": "2026-11-26T21:14:32.210Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cheerful Lost World village filling most of the image: at the back centre a big round longhouse with a fat tawny thatch roof and spotted tawny hide walls, crowded round it four plump round thatched huts with spotted hide walls, a cream bone totem with bright red-orange paint and a short fence of sharpened tawny logs across the front with a little bone gate at the bottom centre."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/lost-world-fort-a#0 sha256 f3c95e2a1e958f43051be17344be4c417b0b2f06c31777a1f3e1372206622732",
+        "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the huts; not the layout"
+      },
+      "image_size": {
+        "width": 96,
+        "height": 100
+      },
+      "no_background": true,
+      "seed": 97421,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a cheerful Lost World village filling most of the image: at the back centre a big round longhouse with a fat tawny thatch roof and spotted tawny hide walls, crowded round it four plump round thatched huts with spotted hide walls, a cream bone totem with bright red-orange paint and a short fence of sharpened tawny logs across the front with a little bone gate at the bottom centre. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, dinosaur, caveman, red walls."
+    },
+    "at": "2026-11-26T21:15:54.425Z",
+    "usageUsd": 0.0804031662940979,
+    "candidates": [
+      {
+        "file": "lost-world-city-2-a-0.png",
+        "sha256": "a21b9b3658dec485909323e018d6003dbb5e032505917c7413d2cdfc1ceae198",
+        "width": 96,
+        "height": 100
+      },
+      {
+        "file": "lost-world-city-2-a-1.png",
+        "sha256": "68ecf463bcb048069a1ad19f727e3de4e81ab8491cef89f0c1df9674229ebf76",
+        "width": 96,
+        "height": 100
+      },
+      {
+        "file": "lost-world-city-2-a-2.png",
+        "sha256": "cf5cd8b26376363f819ba555efcf526ed0cee56785022133d15909da5cff2127",
+        "width": 96,
+        "height": 100
+      },
+      {
+        "file": "lost-world-city-2-a-3.png",
+        "sha256": "7ffa548c2a6846dd866e531e413f8141b35309f267354d91fcd74790fd4471e5",
+        "width": 96,
+        "height": 100
+      }
+    ]
+  },
+  "lost-world-city-3-a": {
+    "id": "lost-world-city-3-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "cd0a22b4-f6e6-424c-858e-d63a58380d72",
+    "submittedAt": "2026-11-26T21:15:54.565Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big cheerful Lost World tribal town filling the whole image: at the back centre a huge round chieftain's longhouse with a fat tawny thatch roof, two tall cream bone totems with bright red-orange paint, crowded round it plump thatched huts with spotted tawny hide walls, and across the front a thick fence of sharpened tawny logs with a gate made of a giant cream dinosaur skull at the bottom centre."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/lost-world-fort-a#0 sha256 f3c95e2a1e958f43051be17344be4c417b0b2f06c31777a1f3e1372206622732",
+        "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the huts; not the layout"
+      },
+      "image_size": {
+        "width": 96,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 97431,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a big cheerful Lost World tribal town filling the whole image: at the back centre a huge round chieftain's longhouse with a fat tawny thatch roof, two tall cream bone totems with bright red-orange paint, crowded round it plump thatched huts with spotted tawny hide walls, and across the front a thick fence of sharpened tawny logs with a gate made of a giant cream dinosaur skull at the bottom centre. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, dinosaur, caveman, red walls."
+    },
+    "at": "2026-11-26T21:17:18.505Z",
+    "usageUsd": 0.08047010856204563,
+    "candidates": [
+      {
+        "file": "lost-world-city-3-a-0.png",
+        "sha256": "f75378e2201710bef4b6d0dba5c3147516866701b34947601172c28c7f10ac57",
+        "width": 96,
+        "height": 104
+      },
+      {
+        "file": "lost-world-city-3-a-1.png",
+        "sha256": "66429c15fd6a05dab2149cc1763ea36ad9a34a92bf854f2774d15861446b014b",
+        "width": 96,
+        "height": 104
+      },
+      {
+        "file": "lost-world-city-3-a-2.png",
+        "sha256": "aa030452701441fb99b1d25d3f617b1308394b88ae432e207acc743288bf4e92",
+        "width": 96,
+        "height": 104
+      },
+      {
+        "file": "lost-world-city-3-a-3.png",
+        "sha256": "6fbbca94b7a8b345e09acfca2b55559421d0975abbcf5330dfab4b112f5b9d58",
+        "width": 96,
+        "height": 104
+      }
+    ]
+  },
+  "goblin-city-1-a": {
+    "id": "goblin-city-1-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "432a9002-969e-4596-8284-188f43d14e85",
+    "submittedAt": "2026-11-26T21:17:18.693Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small goblin scrap camp filling most of the image: a plump tawny hide tent with big dark brown spots at the back centre, two little shacks of riveted light grey tin #b8bcc0 with bright hazard yellow #f2c230 roofs huddled in front of it, a heap of scrap and a crooked stove chimney; a dark doorway at the bottom centre."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/horde-fort-s1#0 sha256 58edb2df1dedc2f32054decc84c31fac2c58eb0e01f1d04aff3bc68abf7b7e1a",
+        "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the shacks; not the layout"
+      },
+      "image_size": {
+        "width": 88,
+        "height": 96
+      },
+      "no_background": true,
+      "seed": 97311,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a small goblin scrap camp filling most of the image: a plump tawny hide tent with big dark brown spots at the back centre, two little shacks of riveted light grey tin #b8bcc0 with bright hazard yellow #f2c230 roofs huddled in front of it, a heap of scrap and a crooked stove chimney; a dark doorway at the bottom centre. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, red."
+    },
+    "at": "2026-11-26T21:19:13.193Z",
+    "usageUsd": 0.08048708433575101,
+    "candidates": [
+      {
+        "file": "goblin-city-1-a-0.png",
+        "sha256": "13ffaabae089529a6bae1cda76a8867a043880c3abfeb84887f609ca2e3838d8",
+        "width": 88,
+        "height": 96
+      },
+      {
+        "file": "goblin-city-1-a-1.png",
+        "sha256": "49e5551f45d3e3004f7d6c3e004afe7011548ee2d5b53b13054d2474c45e8b34",
+        "width": 88,
+        "height": 96
+      },
+      {
+        "file": "goblin-city-1-a-2.png",
+        "sha256": "a145f5f254636bb452c01e2b848304a697326869312a90f7aba80e2088ea385b",
+        "width": 88,
+        "height": 96
+      },
+      {
+        "file": "goblin-city-1-a-3.png",
+        "sha256": "104f37318f7e6641467abc0ff2ed5a36788393b538774d1a696d05113e519a54",
+        "width": 88,
+        "height": 96
+      }
+    ]
+  },
+  "goblin-city-2-a": {
+    "id": "goblin-city-2-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "bf436692-64e8-411a-bbcf-065225d8b4aa",
+    "submittedAt": "2026-11-26T21:19:13.357Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a goblin scrap warcamp filling most of the image: at the back centre a chunky riveted light grey tin #b8bcc0 hall with a bright hazard yellow #f2c230 roof, a crooked wooden lookout tower beside it, crowded round it a spotted tawny hide tent and tin shacks with yellow roofs, and a short fence of sharpened log stakes #b8733a across the front with a gap at the bottom centre."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/horde-fort-s1#0 sha256 58edb2df1dedc2f32054decc84c31fac2c58eb0e01f1d04aff3bc68abf7b7e1a",
+        "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the shacks; not the layout"
+      },
+      "image_size": {
+        "width": 96,
+        "height": 100
+      },
+      "no_background": true,
+      "seed": 97321,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a goblin scrap warcamp filling most of the image: at the back centre a chunky riveted light grey tin #b8bcc0 hall with a bright hazard yellow #f2c230 roof, a crooked wooden lookout tower beside it, crowded round it a spotted tawny hide tent and tin shacks with yellow roofs, and a short fence of sharpened log stakes #b8733a across the front with a gap at the bottom centre. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, red."
+    },
+    "at": "2026-11-26T21:20:40.908Z",
+    "usageUsd": 0.08042000934812758,
+    "candidates": [
+      {
+        "file": "goblin-city-2-a-0.png",
+        "sha256": "a50bcf3642d47be1dc08968724ee4420739a68c18057b7007d43266de98f989d",
+        "width": 96,
+        "height": 100
+      },
+      {
+        "file": "goblin-city-2-a-1.png",
+        "sha256": "f5fabfa01ee59de9d36416e447273e35348455885fea5f720148ee2d810bdfe4",
+        "width": 96,
+        "height": 100
+      },
+      {
+        "file": "goblin-city-2-a-2.png",
+        "sha256": "0abff56bb6dc49eea9c3e994fdb0fc5ff8d6b543be819da04d6d4140454de335",
+        "width": 96,
+        "height": 100
+      },
+      {
+        "file": "goblin-city-2-a-3.png",
+        "sha256": "51fc1c534551ad957230c35b41ee6351ae799b739db86d985052de89296d3ab5",
+        "width": 96,
+        "height": 100
+      }
+    ]
+  },
+  "goblin-city-3-a": {
+    "id": "goblin-city-3-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f1690152-76b0-4b22-84ae-529d2554b445",
+    "submittedAt": "2026-11-26T21:20:41.039Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big goblin scrap fortress filling the whole image: at the back centre a tall fat riveted light grey tin #b8bcc0 boss hall under a bright hazard yellow #f2c230 roof, a crooked wooden lookout tower, crowded round it tin shacks with yellow roofs and a spotted hide tent, and across the front a thick wall of sharpened log stakes #b8733a with a gate crowned by a cream horned ox skull at the bottom centre."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/horde-fort-s1#0 sha256 58edb2df1dedc2f32054decc84c31fac2c58eb0e01f1d04aff3bc68abf7b7e1a",
+        "usage": "copy the palette, outline thickness, pixel size and the chunky rounded shapes of the shacks; not the layout"
+      },
+      "image_size": {
+        "width": 96,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 97331,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a big goblin scrap fortress filling the whole image: at the back centre a tall fat riveted light grey tin #b8bcc0 boss hall under a bright hazard yellow #f2c230 roof, a crooked wooden lookout tower, crowded round it tin shacks with yellow roofs and a spotted hide tent, and across the front a thick wall of sharpened log stakes #b8733a with a gate crowned by a cream horned ox skull at the bottom centre. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, goblin, red."
+    },
+    "at": "2026-11-26T21:22:08.235Z",
+    "usageUsd": 0.08060844792260065,
+    "candidates": [
+      {
+        "file": "goblin-city-3-a-0.png",
+        "sha256": "a10d95e0933e9d234d1e1e9755fd35d797d2ce35c354b1573cc8245c9571f875",
+        "width": 96,
+        "height": 104
+      },
+      {
+        "file": "goblin-city-3-a-1.png",
+        "sha256": "ba6dc3f0862a2c2115c70f65aae83ab81c501308f652805456b25d899f14d2e4",
+        "width": 96,
+        "height": 104
+      },
+      {
+        "file": "goblin-city-3-a-2.png",
+        "sha256": "7b9ff1ceb672a21f5cc6c1ea99e8837336be5f2ea10edbe779e6534361f5e218",
+        "width": 96,
+        "height": 104
+      },
+      {
+        "file": "goblin-city-3-a-3.png",
+        "sha256": "c5d1a2f3c653f33773d3d8691f9f9d328951b94b272233f0d83b9be322e5680e",
+        "width": 96,
+        "height": 104
+      }
+    ]
+  },
+  "village-a": {
+    "id": "village-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "65b5fe42-b90a-4c0e-a9eb-5613d2cf2d22",
+    "submittedAt": "2026-11-26T21:22:08.355Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-town.txt",
+          "text": "Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a tiny cosy neutral hamlet filling most of the image: three plump cottages with golden straw thatch roofs and cream plaster walls huddled round a little stone well, a stacked woodpile and a small barn with a warm red-brown roof #a8492f at the back centre; a dark doorway at the bottom centre."
+        }
+      ],
+      "style_image": {
+        "source": "take chunky-towns/realm-fort-s1#0 sha256 dbc3377e6114e446d8758777178c5bc2586e999dfab61df44585381c25733691",
+        "usage": "copy the outline thickness, pixel size and the chunky rounded shapes of the houses; not the castle and not the layout"
+      },
+      "image_size": {
+        "width": 72,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 97501,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a faction town on a strategy-game adventure map, seen from the front with the camera slightly above: building fronts and their roofs. A dense, tall, chunky cluster of cute buildings packed tightly round one big central landmark rising highest at the back centre, smaller buildings crowded in front and at both sides, no empty yard, no thin ring of wall; a big gate at the bottom centre. Thick black outline, big rounded toy-like shapes, saturated flat colours with one shadow tone, low detail. Alone on a transparent background, nothing under it. Subject: a tiny cosy neutral hamlet filling most of the image: three plump cottages with golden straw thatch roofs and cream plaster walls huddled round a little stone well, a stacked woodpile and a small barn with a warm red-brown roof #a8492f at the back centre; a dark doorway at the bottom centre. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, background, flag, banner, pennant, people, character, smoke, empty courtyard, thin ring wall, castle, wall, keep, tower."
+    },
+    "at": "2026-11-26T21:24:01.738Z",
+    "usageUsd": 0.11653032949235705,
+    "candidates": [
+      {
+        "file": "village-a-0.png",
+        "sha256": "118b5b6cd87a99f414aacff03c634707420932f9e2ba9583f016e21729101d34",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "file": "village-a-1.png",
+        "sha256": "8d82f2b42f51d19e2809db7f37e87aeb6218b1831159e716786f860d837d17ff",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "file": "village-a-2.png",
+        "sha256": "642e2e06a4847ad788aef076d9147bb5d7fd5812eb518fdc89399b5df231a439",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "file": "village-a-3.png",
+        "sha256": "5da128a1075ae0b1afed8fc5f2168fec81f13d1524e69c5cc6cccd6a27f7adaa",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "file": "village-a-4.png",
+        "sha256": "f88b4f937d2266edb10300cb4ffd72b075671794e0f6715fdac6a10219c8bbf2",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "file": "village-a-5.png",
+        "sha256": "278fa0973c93fab012394f37303cc77c7f0640423130380c5000f70906863c12",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "file": "village-a-6.png",
+        "sha256": "aacbfe3ebcd6f750cea01364713c6097894676bdcded2bc14f0e6455ef6a6f88",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "file": "village-a-7.png",
+        "sha256": "4134e187626faaa2cce383252eed90c2bedf6e7574e32d3414018b0d18a144fb",
+        "width": 72,
+        "height": 72
+      },
+      {
+        "file": "village-a-8.png",
+        "sha256": "346825331e16ee32f5f94eadba71993662206222f61f452f9a6ec11ecc046b37",
+        "width": 72,
+        "height": 72
+      }
+    ]
+  }
+}

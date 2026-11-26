@@ -96,6 +96,8 @@ export const CHUNK_CELLS = 8;
 const CHUNK_PX = CHUNK_CELLS * CELL;
 /** Cached chunks kept (each about 1.6 MB). */
 const CHUNK_LIMIT = 72;
+/** Nested ellipse scales of a soft ground shadow (bead bzc.97). */
+const SHADOW_STEPS = [1, 0.8, 0.6] as const;
 
 export interface MapHero {
   readonly id: string;
@@ -586,13 +588,24 @@ export function createMapView(
     }
   };
 
-  const drawSprites = (ctx: Context, e: SceneEntry): void => {
+  /**
+   * An entry's ground shadows (bead bzc.97): each ellipse as three nested
+   * steps of a third of its alpha, a soft edge without a gradient. Drawn
+   * for a whole set of entries before any of their sprites, so a shadow
+   * falls on the ground and never on a neighbouring piece.
+   */
+  const drawShadows = (ctx: Context, e: SceneEntry): void => {
     for (const s of e.shadows) {
-      ctx.fillStyle = `rgba(18, 22, 30, ${s.alpha})`;
-      ctx.beginPath();
-      ctx.ellipse(s.cx, s.cy, s.rx, s.ry, 0, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.fillStyle = `rgba(18, 22, 30, ${s.alpha / SHADOW_STEPS.length})`;
+      for (const k of SHADOW_STEPS) {
+        ctx.beginPath();
+        ctx.ellipse(s.cx, s.cy, s.rx * k, s.ry * k, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
+  };
+
+  const drawSprites = (ctx: Context, e: SceneEntry): void => {
     for (const s of e.sprites) {
       const image = images.get(s.key);
       if (image === undefined) continue;
@@ -763,7 +776,9 @@ export function createMapView(
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     ctx.translate(-x0, -y0);
-    for (const e of bodiesOver(x0, y0, x0 + w, y0 + h)) drawSprites(ctx, e);
+    const over = bodiesOver(x0, y0, x0 + w, y0 + h);
+    for (const e of over) drawShadows(ctx, e);
+    for (const e of over) drawSprites(ctx, e);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     const anim =
       ground !== null && hot !== undefined
@@ -829,7 +844,9 @@ export function createMapView(
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     ctx.translate(-ox, -oy);
-    for (const e of bodiesOver(x0, y0, x1, y1)) drawSprites(ctx, e);
+    const over = bodiesOver(x0, y0, x1, y1);
+    for (const e of over) drawShadows(ctx, e);
+    for (const e of over) drawSprites(ctx, e);
     ctx.restore();
     const chunk = chunks.get(chunkKey(cx, cy));
     if (chunk !== undefined) chunk.anim = null;
@@ -1303,20 +1320,25 @@ export function createMapView(
     const tm = motionOn ? Math.max(1, performance.now() - motionEpoch) : 0;
     animatedInView = drawTerrainMotion(ctx, anims, tm, vx0, vy0, vx1, vy1);
     // Foreground in row, column, layer order.
+    // Every visible shadow first, then the sprites (bead bzc.97).
     const chipCell = selected ?? hovered;
-    for (const e of foreground) {
-      if (e.x1 < vx0 || e.x0 > vx1 || e.y1 < vy0 || e.y0 > vy1) continue;
-      if (!visibleEntry(e)) continue;
-      const off =
-        e.objectId === undefined ? undefined : heroOffsets.get(e.objectId);
-      if (off !== undefined) {
-        ctx.save();
-        ctx.translate(off.dx, off.dy);
-        drawSprites(ctx, e);
-        ctx.restore();
-      } else drawSprites(ctx, e);
-      stat.drawnEntries += 1;
-    }
+    const shown = foreground.filter(
+      (e) =>
+        !(e.x1 < vx0 || e.x0 > vx1 || e.y1 < vy0 || e.y0 > vy1) &&
+        visibleEntry(e),
+    );
+    for (const draw of [drawShadows, drawSprites])
+      for (const e of shown) {
+        const off =
+          e.objectId === undefined ? undefined : heroOffsets.get(e.objectId);
+        if (off !== undefined) {
+          ctx.save();
+          ctx.translate(off.dx, off.dy);
+          draw(ctx, e);
+          ctx.restore();
+        } else draw(ctx, e);
+      }
+    stat.drawnEntries += shown.length;
     // Path markers above the units of their row: drawn after the whole
     // foreground so a tree top never hides the route (HoMaM does the same).
     drawFlags(ctx);

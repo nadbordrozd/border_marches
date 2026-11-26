@@ -372,27 +372,53 @@ export function decorationEntry(p: PlacedDecoration): SceneEntry {
 }
 
 /**
- * A prop's soft shadow (bead bzc.72), like a settlement's on a smaller
- * scale: a flat contact ellipse under its foot and a fainter cast one to
- * the north-east (the sun is at the bottom left).
+ * A prop's soft shadow (bead bzc.72): the shared ground shadow (bead
+ * bzc.97) on a base of most of its width.
  */
 export function propShadows(
   width: number,
   footX: number,
   footY: number,
 ): ShadowOp[] {
-  const rx = Math.max(10, width * 0.4);
-  const ry = Math.max(4, rx * 0.26);
-  const cy = footY - ry * 0.55;
+  return groundShadows(footX, footY, Math.max(20, width * 0.85));
+}
+
+/**
+ * The one ground shadow of every standing piece (bead bzc.97): the sun is
+ * low at the bottom left (south-west), so the shadow lies on the ground
+ * behind the piece and to its right (north-east), never in front of it.
+ *
+ * - A contact ellipse as wide as the piece's base whose lowest edge sits
+ *   at most 2 px below the foot line: a thin dark rim round the foot, never
+ *   a dark disc in front of the piece.
+ * - A fainter cast ellipse shifted right and resting on the foot line:
+ *   mostly hidden by the piece itself, it shows as a band of shade beyond
+ *   the piece's shaded right side.
+ *
+ * The renderer draws every shadow before any sprite (map-view.ts), with a
+ * soft stepped edge, so a shadow darkens only the ground and never a
+ * neighbouring piece.
+ */
+export function groundShadows(
+  footX: number,
+  footY: number,
+  base: number,
+  options: { depth?: number; alpha?: number; cast?: number } = {},
+): ShadowOp[] {
+  const rx = base / 2;
+  const ry = options.depth ?? Math.max(3, Math.min(14, rx * 0.28));
+  const alpha = options.alpha ?? GROUND_SHADOW_ALPHA;
+  const cast = options.cast ?? 1;
+  const castRy = ry * (1 + 0.4 * cast);
   return [
     {
-      cx: footX + rx * 0.18,
-      cy: cy - ry * 0.35,
+      cx: footX + rx * 0.3 * cast,
+      cy: footY + 1 - castRy,
       rx: rx * 1.05,
-      ry,
-      alpha: SHADOW_ALPHA / 2,
+      ry: castRy,
+      alpha: alpha * 0.6,
     },
-    { cx: footX, cy, rx, ry, alpha: SHADOW_ALPHA * 0.8 },
+    { cx: footX + rx * 0.05, cy: footY + 2 - ry, rx, ry, alpha },
   ];
 }
 
@@ -459,6 +485,8 @@ export function doodadEntries(
 // --------------------------------------------------------------- objects
 
 const SHADOW_ALPHA = 0.24;
+/** A ground shadow's contact alpha (bead bzc.97): it shows only as a rim. */
+const GROUND_SHADOW_ALPHA = 0.3;
 
 /** Unit shadow (after Pulp Wars unit-shadows-v7.ts): an ellipse on the feet. */
 export function unitShadow(
@@ -490,30 +518,18 @@ export function unitShadow(
   };
 }
 
-/** The settlement shadow (settlement-shadow-v7.ts): contact plus cast. */
+/** A level town's shadow: the ground shadow (bead bzc.97) on its base. */
 export function townShadows(
   town: TownAsset,
   left: number,
   top: number,
 ): ShadowOp[] {
   const g = town.ground;
-  const half = (g.right - g.left) / 2;
-  const cx = left + (g.left + g.right) / 2;
-  const depth =
-    0.3 + (0.58 - 0.3) * Math.min(1, Math.max(0, (g.fullness - 0.7) / 0.3));
-  const ry = Math.max(6, half * depth * 0.6);
-  const cy = top + Math.max(g.leftY, g.rightY, g.contactY - ry) + 1;
-  const rx = half + 2.5;
-  return [
-    {
-      cx: cx + rx * 0.2,
-      cy: cy - rx * 0.1,
-      rx: rx * 1.06,
-      ry,
-      alpha: SHADOW_ALPHA / 2,
-    },
-    { cx, cy, rx, ry, alpha: SHADOW_ALPHA },
-  ];
+  return groundShadows(
+    left + (g.left + g.right) / 2,
+    top + g.contactY,
+    (g.right - g.left) * 0.92,
+  );
 }
 
 export function townAsset(obj: MapObject): TownAsset {
@@ -651,13 +667,16 @@ export function objectEntries(objects: readonly MapObject[]): SceneEntry[] {
     const bottom = (box.y + box.h) * CELL;
     const big = obj.kind === "town" ? town3x2Asset(obj) : null;
     if (big !== null) {
-      // The 3x2 canvas on its footprint plus its 24 rows above; the contact
-      // and cast shadows under the measured opaque box.
+      // The 3x2 canvas on its footprint plus its 24 rows above; the ground
+      // shadow (bead bzc.97) under the measured opaque box.
       const left = box.x * CELL;
       const top = box.y * CELL - big.up;
-      const half = big.box.w / 2;
-      const cx = left + big.box.x + half;
-      const cy = top + big.contactY - 6;
+      const shadows = groundShadows(
+        left + big.box.x + big.box.w / 2,
+        top + big.contactY,
+        big.box.w * 0.9,
+        { depth: 12 },
+      );
       out.push(
         entry(
           "FOREGROUND",
@@ -675,16 +694,7 @@ export function objectEntries(objects: readonly MapObject[]): SceneEntry[] {
               dy: top,
             },
           ],
-          [
-            {
-              cx: cx + half * 0.12,
-              cy: cy - 2,
-              rx: half * 1.04,
-              ry: 16,
-              alpha: SHADOW_ALPHA / 2,
-            },
-            { cx, cy, rx: half * 0.96, ry: 13, alpha: SHADOW_ALPHA },
-          ],
+          shadows,
           { cells, objectId: obj.id },
         ),
       );
@@ -744,15 +754,12 @@ export function objectEntries(objects: readonly MapObject[]): SceneEntry[] {
               dy: p.y,
             },
           ],
-          [
-            {
-              cx: p.x + art.foot.x + 2,
-              cy: p.y + art.foot.y - 3,
-              rx: Math.min(art.asset.w * 0.42, box.w * CELL * 0.5),
-              ry: pickup ? 5 : 9,
-              alpha: SHADOW_ALPHA,
-            },
-          ],
+          groundShadows(
+            p.x + art.foot.x,
+            p.y + art.foot.y,
+            Math.min(art.asset.w * 0.9, box.w * CELL),
+            pickup ? { depth: 4, cast: 0.5 } : {},
+          ),
           { cells, objectId: obj.id },
         ),
       );
@@ -776,7 +783,8 @@ export function objectEntries(objects: readonly MapObject[]): SceneEntry[] {
               dy: top,
             },
           ],
-          [{ cx: left + 21, cy: top + 35, rx: 16, ry: 5, alpha: SHADOW_ALPHA }],
+          // The pickups' lowest opaque rows are 33-37 of their 40 x 40.
+          groundShadows(left + 20, top + 35, 28, { depth: 4, cast: 0.5 }),
           { cells, objectId: obj.id },
         ),
       );

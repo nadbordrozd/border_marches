@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   compareEntries,
   creatureAsset,
+  groundShadows,
   objectEntries,
   TOWN_SEAT_PX,
   terrainEntries,
@@ -152,5 +153,31 @@ describe("object entries", () => {
     const monster = entries.find((e) => e.objectId === "monster-1")!;
     expect(monster.row).toBe(9);
     expect(monster.shadows.length).toBe(1);
+  });
+});
+
+describe("ground shadows (bzc.97)", () => {
+  it("never show in front of the foot and cast to the north-east", () => {
+    for (const base of [20, 60, 180]) {
+      const [cast, contact] = groundShadows(100, 200, base);
+      // The contact ellipse's lowest edge is at most 2 px under the foot.
+      expect(contact!.cy + contact!.ry).toBeLessThanOrEqual(202);
+      expect(contact!.rx).toBeCloseTo(base / 2);
+      // The cast one lies behind and to the right (the sun is bottom left).
+      expect(cast!.cx).toBeGreaterThan(contact!.cx);
+      expect(cast!.cy).toBeLessThan(contact!.cy);
+      expect(cast!.alpha).toBeLessThan(contact!.alpha);
+    }
+  });
+
+  it("seat every object's shadow on its foot, not in front of it", () => {
+    const map = buildSmallMap();
+    for (const e of objectEntries(map.objects)) {
+      if (e.shadows.length !== 2) continue; // units keep their own
+      const sprite = e.sprites[0]!;
+      const bottom = sprite.dy + (sprite.dh ?? sprite.sh);
+      for (const s of e.shadows)
+        expect(s.cy + s.ry, e.objectId).toBeLessThanOrEqual(bottom + 2);
+    }
   });
 });

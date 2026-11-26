@@ -3,7 +3,7 @@
   "bead": "border_marches-xaj.14",
   "class": "settlements",
   "exploration": false,
-  "_doc": "Multi-cell towns for the 3x2 town footprint (3 cells wide, 2 rows deep): the Lost World town and the goblin Warlord's Hold. Requested at 232x176 (about the footprint, 240x160, plus headroom for roofs and totems), then seated in a 240x184 canvas whose bottom 160 rows are the footprint and whose top 24 rows rise into the row behind. Bold black-outlined building class like the imported Pulp Wars cities; no flags (owner colour is shown by the interface). Layers: style, camera, light, faction (Lost World only), class-building, subject. A ground-removal edit follows when Pixen draws a plate. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "_doc": "Multi-cell towns for the 3x2 town footprint (3 cells wide, 2 rows deep): the Lost World town and the goblin Warlord's Hold. Requested at 232x176 (about the footprint, 240x160, plus headroom for roofs and totems), then seated in a 240x184 canvas whose bottom 160 rows are the footprint and whose top 24 rows rise into the row behind. Bold black-outlined building class like the imported Pulp Wars cities; no flags (owner colour is shown by the interface). Layers: style, camera, light, faction (Lost World only), class-building, subject. A ground-removal edit follows when Pixen draws a plate. Recipes are never edited after generation: add a new id (new seed) instead. Retired by bead bzc.97: its map towns were redrawn in set chunky-towns, so it derives no game files any more (masters and records stay as history).",
   "shared": {
     "piece": {
       "outline": "single color black outline",
@@ -172,60 +172,5 @@
       "negative": "flag, banner, people, character, goblin, rust, copper, red, castle, stone blocks, bricks, ground plate, grass, small, distant, tiny"
     }
   ],
-  "outputs": [
-    {
-      "path": "public/assets/towns/dinosaur-town-3x2.png",
-      "from": "lost-world-a-clean2#0",
-      "width": 240,
-      "height": 184,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 0,
-          "y": 5,
-          "width": 232,
-          "height": 167
-        },
-        {
-          "op": "pad",
-          "width": 240,
-          "height": 171,
-          "anchor": "top"
-        },
-        {
-          "op": "pad",
-          "width": 240,
-          "height": 184,
-          "anchor": "bottom"
-        }
-      ]
-    },
-    {
-      "path": "public/assets/towns/goblin-hold-3x2.png",
-      "from": "goblin-hold-v4a#0",
-      "width": 240,
-      "height": 184,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 0,
-          "y": 2,
-          "width": 232,
-          "height": 170
-        },
-        {
-          "op": "pad",
-          "width": 240,
-          "height": 174,
-          "anchor": "top"
-        },
-        {
-          "op": "pad",
-          "width": 240,
-          "height": 184,
-          "anchor": "bottom"
-        }
-      ]
-    }
-  ]
+  "outputs": []
 }

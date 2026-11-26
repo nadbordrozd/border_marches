@@ -20,7 +20,7 @@ on light and dark).
 | --- | --- |
 | Units | 36 (13 added by bead bzc.14) |
 | Portraits | 36 (13 added by bead bzc.14) |
-| Towns | 7 |
+| Towns | 0 (7 replaced by studio art, bead bzc.97) |
 | Textured grounds | 5 |
 | Ground swatches | 5 |
 | Water | 4 |
@@ -29,7 +29,7 @@ on light and dark).
 | Forest pieces | 100 |
 | Forest seam clumps | 18 |
 | Map objects | 18 |
-| **Total** | **259** |
+| **Total** | **252** |
 
 ## How these files relate to the studio pipeline
 
@@ -171,15 +171,15 @@ Source paths are relative to the Pulp Wars repository root.
 
 ### Towns
 
-| Source | Destination | Size | sha256 |
-| --- | --- | --- | --- |
-| `public/assets/chibi/settlements/chibi-direction-dinosaur-city-1.png` | `public/assets/towns/dinosaur-city-1.png` | 88x96 | `2a3a581b060e5f2aa348be057c62a6b541404ee3727be442e35a2370658fa410` |
-| `public/assets/chibi/settlements/chibi-direction-dinosaur-city-2.png` | `public/assets/towns/dinosaur-city-2.png` | 96x100 | `ddb12be27458be46802af411b47aee38465c6cec46d6b88a934c6aed19452208` |
-| `public/assets/chibi/settlements/chibi-direction-dinosaur-city-3.png` | `public/assets/towns/dinosaur-city-3.png` | 96x104 | `1d7798c7bd691454e5b77ca5dc278fb67b0015ef2f27cc8d1543965eb46fa643` |
-| `public/assets/chibi/settlements/chibi-direction-goblin-city-1.png` | `public/assets/towns/goblin-city-1.png` | 88x96 | `8a8bf88b4499bd284a18c59157b7de1ba1d7263e4dcd50b1ae11aaecac5fe4e2` |
-| `public/assets/chibi/settlements/chibi-direction-goblin-city-2.png` | `public/assets/towns/goblin-city-2.png` | 96x100 | `daca3b8515f27ed0e13bb95498532f34f6386f07a64d75dad6202c5eb6a3b13b` |
-| `public/assets/chibi/settlements/chibi-direction-goblin-city-3.png` | `public/assets/towns/goblin-city-3.png` | 96x104 | `51fa40e9fe9cce62eb0510740dfa87283a555b4bc5f5c0c2c984727a30e11bf0` |
-| `public/assets/chibi/settlements/chibi-direction-village.png` | `public/assets/towns/village.png` | 72x72 | `214c4584da3e885e711022b5013edce085b91de51b3d067fb00f496b2063c4ed` |
+None left. The seven imported towns (`dinosaur-city-1` to `-3`,
+`goblin-city-1` to `-3` and `village`, from
+`public/assets/chibi/settlements/chibi-direction-<name>.png` in Pulp Wars)
+were replaced at the same paths and sizes by studio art in bead bzc.97 (set
+`chunky-towns`, see [classes/towns.md](classes/towns.md)); the originals
+stay in Pulp Wars and in this repository's git history. The `towns-3x2`
+recipes that name `public/assets/towns/goblin-city-3.png` as their style
+image were generated from the imported file (sha256
+`51fa40e9fe9cce62eb0510740dfa87283a555b4bc5f5c0c2c984727a30e11bf0`).
 
 ### Textured grounds
 

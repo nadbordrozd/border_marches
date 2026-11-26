@@ -3741,5 +3741,78 @@
         "height": 128
       }
     ]
+  },
+  "sawmill-c": {
+    "id": "sawmill-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "18ce783b-0c1d-4ea1-a81f-c56eedd784dc",
+    "submittedAt": "2026-11-26T21:06:08.454Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cute chunky lumber sawmill: a plump two-storey timber mill house of warm brown planks #8a5a2c under a steep red clay tile roof #c0503a with #82321f shadows and a little dormer, on a low stone footing; at its left a huge round shiny steel saw blade #c8ccd0 with #7e848c shadows biting into a fat log on a wooden trestle; tall neat stacks of round cut logs and yellow planks #d9b26a at the front left; a wide open dark doorway at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 97601,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a cute chunky lumber sawmill: a plump two-storey timber mill house of warm brown planks #8a5a2c under a steep red clay tile roof #c0503a with #82321f shadows and a little dormer, on a low stone footing; at its left a huge round shiny steel saw blade #c8ccd0 with #7e848c shadows biting into a fat log on a wooden trestle; tall neat stacks of round cut logs and yellow planks #d9b26a at the front left; a wide open dark doorway at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, water wheel, river, smoke, ground, grass."
+    },
+    "at": "2026-11-26T21:08:33.814Z",
+    "usageUsd": 0.08081721207830642,
+    "candidates": [
+      {
+        "file": "sawmill-c-0.png",
+        "sha256": "6de3e2c7d64f4cf5ba6af3adf267194873d8493f8f736dc76beaec2d0eb6cd48",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sawmill-c-1.png",
+        "sha256": "7afa8172d9f4856baa5c4501f7a8b0ea5f6e137cbf293ccec71d466b353c8a6f",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sawmill-c-2.png",
+        "sha256": "b1e0ae86aaa7565a54f406d8bd4d9464f2c346c9ef1ea7f3cba2adb6b1287fa8",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sawmill-c-3.png",
+        "sha256": "5c126a2a3130d9fd320b8d3c3368c085f325a39c7eb2754364268231f1c18efd",
+        "width": 128,
+        "height": 128
+      }
+    ]
   }
 }

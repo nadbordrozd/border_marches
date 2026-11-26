@@ -1,0 +1,212 @@
+{
+  "realm-fort-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Realm castle: fat cream keep with a big blue cone and two blue-coned towers at the back centre, packed half-timbered red-roofed houses, thick crenellated front wall with a twin-towered gatehouse centred over the entry cell; dense, tall, cute; reads on light and dark at 1:1",
+    "at": "2026-11-26T21:02:27.065Z"
+  },
+  "restless-fort-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Restless churchyard: tall crooked slate cathedral with violet roofs and a bell tower, crooked manor, bone-white domed mausoleum, crypts, tombstones, iron gate between lantern pillars centred; spooky-cute, no gore; narrower (about 150 px) but tall",
+    "at": "2026-11-26T21:02:27.155Z"
+  },
+  "horde-fort-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Warlord's Hold: tall riveted tin boss hall under a hazard-yellow roof, wooden lookout tower, yellow-roofed tin shacks, spotted hide tent, scrap heaps, a thick stake wall with a horned ox skull gate centred; chunky and dense",
+    "at": "2026-11-26T21:02:27.241Z"
+  },
+  "horde-camp-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Horde warcamp: big spotted hide boss tent at the back centre, yellow-roofed tin shacks and scrap heaps packed round it, a crooked stake fence with the horned ox skull gate centred; same palette as the Hold but clearly the lighter stage (no tin hall, no tower)",
+    "at": "2026-11-26T21:08:58.393Z"
+  },
+  "lost-world-fort-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Lost World town: huge thatched longhouse at the back centre, plump spotted-hide huts, red-painted bone totem, drying racks, basalt stones, a log fence and a giant dinosaur-skull gate centred over the entry cell; the cutest of the set",
+    "at": "2026-11-26T21:08:58.494Z"
+  },
+  "restless-camp-a#0": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of restless-fort-s1 (same cathedral, mausoleum and gate): the style image copied the layout, so the camp stage would not read as smaller",
+    "at": "2026-11-26T21:08:58.583Z"
+  },
+  "realm-camp-a#0": {
+    "verdict": "REJECTED",
+    "notes": "reads as a second castle: the round keep with a big blue cone copied from the fort, so the camp and fort stages are hard to tell apart",
+    "at": "2026-11-26T21:11:40.809Z"
+  },
+  "realm-camp-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Realm village: white half-timbered chapel with a blue roof and steeple at the back centre, chunky red-roofed cottages packed round it, well, haystacks, a low plank fence with a small blue-roofed gate centred; clearly the village stage beside the castle",
+    "at": "2026-11-26T21:11:40.935Z"
+  },
+  "restless-camp-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Restless graveyard: huddle of crooked violet-roofed houses round a little slate chapel with a bell gable, crypts, tombstones, a bare dead tree, iron railings with lantern posts and a small gate centred; no cathedral or mausoleum, so it reads as the camp stage",
+    "at": "2026-11-26T21:19:57.053Z"
+  },
+  "lost-world-city-1-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Lost World level 1: three plump thatched spotted-hide huts round a tall bone totem, small fence; the smallest, simplest stage",
+    "at": "2026-11-26T21:19:57.126Z"
+  },
+  "lost-world-city-1-a#1": {
+    "verdict": "REJECTED",
+    "notes": "horned totem and big rocks read busier than #0 for the first stage",
+    "at": "2026-11-26T21:19:57.203Z"
+  },
+  "lost-world-city-1-a#2": {
+    "verdict": "REJECTED",
+    "notes": "five huts: too big for level 1",
+    "at": "2026-11-26T21:19:57.283Z"
+  },
+  "lost-world-city-1-a#3": {
+    "verdict": "REJECTED",
+    "notes": "ribcage totem and many huts: too busy for level 1",
+    "at": "2026-11-26T21:19:57.363Z"
+  },
+  "lost-world-city-2-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "Lost World level 2: big thatched longhouse, plump huts, a red-painted bone totem and a small bone gate in a log fence; between level 1 and the skull-gated level 3",
+    "at": "2026-11-26T21:19:57.477Z"
+  },
+  "lost-world-city-2-a#0": {
+    "verdict": "REJECTED",
+    "notes": "sparse: gaps between the huts read as a ring, less dense than #3",
+    "at": "2026-11-26T21:19:57.558Z"
+  },
+  "lost-world-city-2-a#1": {
+    "verdict": "REJECTED",
+    "notes": "skeletal gate muddled at 1x",
+    "at": "2026-11-26T21:19:57.637Z"
+  },
+  "lost-world-city-2-a#2": {
+    "verdict": "REJECTED",
+    "notes": "dinosaur-skull gate belongs to level 3; would not read as growth",
+    "at": "2026-11-26T21:19:57.713Z"
+  },
+  "lost-world-city-3-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "Lost World level 3: huge thatched longhouse, two red-painted bone totems, packed huts and a giant dinosaur-skull gate in a log fence; matches the 3x2 town",
+    "at": "2026-11-26T21:19:57.794Z"
+  },
+  "lost-world-city-3-a#0": {
+    "verdict": "REJECTED",
+    "notes": "flatter longhouse, less height than #1",
+    "at": "2026-11-26T21:19:57.873Z"
+  },
+  "lost-world-city-3-a#2": {
+    "verdict": "REJECTED",
+    "notes": "stacked tiered roof reads as a beehive; spiky stakes busy",
+    "at": "2026-11-26T21:19:57.955Z"
+  },
+  "lost-world-city-3-a#3": {
+    "verdict": "REJECTED",
+    "notes": "skull gate small and muddy at 1x",
+    "at": "2026-11-26T21:19:58.034Z"
+  },
+  "goblin-city-1-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Goblin level 1: big spotted hide tent behind two yellow-roofed tin shacks with a stove chimney, scrap and barrels; small and chunky",
+    "at": "2026-11-26T21:19:58.141Z"
+  },
+  "goblin-city-1-a#1": {
+    "verdict": "REJECTED",
+    "notes": "tyre scrap heap is noisy at 1x",
+    "at": "2026-11-26T21:19:58.223Z"
+  },
+  "goblin-city-1-a#2": {
+    "verdict": "REJECTED",
+    "notes": "plank shack muddles the tin and yellow identity",
+    "at": "2026-11-26T21:19:58.305Z"
+  },
+  "goblin-city-1-a#3": {
+    "verdict": "REJECTED",
+    "notes": "grey boxes without yellow roofs at the front; #0 reads more Horde",
+    "at": "2026-11-26T21:19:58.385Z"
+  },
+  "goblin-city-2-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "Goblin level 2: tin hall under a yellow roof, a lookout tower, hide tents and shacks inside a stake fence with a plank gate centred; lighter than level 3 (no skull gate)",
+    "at": "2026-11-26T21:23:38.271Z"
+  },
+  "goblin-city-2-a#0": {
+    "verdict": "REJECTED",
+    "notes": "skull gate and density of level 3; would not read as growth",
+    "at": "2026-11-26T21:23:38.373Z"
+  },
+  "goblin-city-2-a#2": {
+    "verdict": "REJECTED",
+    "notes": "flat-topped grey block hall without the yellow roof loses the Horde read",
+    "at": "2026-11-26T21:23:38.475Z"
+  },
+  "goblin-city-2-a#3": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of goblin-city-3-a#0",
+    "at": "2026-11-26T21:23:38.575Z"
+  },
+  "goblin-city-3-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Goblin level 3: tall tin boss hall under a yellow roof, lookout tower, packed yellow-roofed shacks and a hide tent, stake wall with the horned ox skull gate centred; matches the Warlord's Hold",
+    "at": "2026-11-26T21:23:38.674Z"
+  },
+  "goblin-city-3-a#1": {
+    "verdict": "REJECTED",
+    "notes": "hall partly hidden, gate small",
+    "at": "2026-11-26T21:23:38.781Z"
+  },
+  "goblin-city-3-a#2": {
+    "verdict": "REJECTED",
+    "notes": "pennant-like poles read as flags",
+    "at": "2026-11-26T21:23:38.889Z"
+  },
+  "goblin-city-3-a#3": {
+    "verdict": "REJECTED",
+    "notes": "hall's yellow helmet roof reads oddly and muddy",
+    "at": "2026-11-26T21:23:38.992Z"
+  },
+  "village-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "Neutral village: red-roofed barn at the back centre, golden-thatched cottages packed round a little well, a woodpile; dense, cute and faction-free",
+    "at": "2026-11-26T21:24:13.419Z"
+  },
+  "village-a#0": {
+    "verdict": "REJECTED",
+    "notes": "looser scatter of separate houses with gaps between them than #3; the cluster reads weaker at 72 px",
+    "at": "2026-11-26T21:24:13.534Z"
+  },
+  "village-a#1": {
+    "verdict": "REJECTED",
+    "notes": "looser scatter of separate houses with gaps between them than #3; the cluster reads weaker at 72 px",
+    "at": "2026-11-26T21:24:13.645Z"
+  },
+  "village-a#2": {
+    "verdict": "REJECTED",
+    "notes": "looser scatter of separate houses with gaps between them than #3; the cluster reads weaker at 72 px",
+    "at": "2026-11-26T21:24:13.754Z"
+  },
+  "village-a#4": {
+    "verdict": "REJECTED",
+    "notes": "looser scatter of separate houses with gaps between them than #3; the cluster reads weaker at 72 px",
+    "at": "2026-11-26T21:24:13.865Z"
+  },
+  "village-a#5": {
+    "verdict": "REJECTED",
+    "notes": "looser scatter of separate houses with gaps between them than #3; the cluster reads weaker at 72 px",
+    "at": "2026-11-26T21:24:13.976Z"
+  },
+  "village-a#6": {
+    "verdict": "REJECTED",
+    "notes": "looser scatter of separate houses with gaps between them than #3; the cluster reads weaker at 72 px",
+    "at": "2026-11-26T21:24:14.093Z"
+  },
+  "village-a#7": {
+    "verdict": "REJECTED",
+    "notes": "looser scatter of separate houses with gaps between them than #3; the cluster reads weaker at 72 px",
+    "at": "2026-11-26T21:24:14.202Z"
+  },
+  "village-a#8": {
+    "verdict": "REJECTED",
+    "notes": "looser scatter of separate houses with gaps between them than #3; the cluster reads weaker at 72 px",
+    "at": "2026-11-26T21:24:14.309Z"
+  }
+}
