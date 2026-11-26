@@ -476,3 +476,7 @@
 {"at":"2026-11-26T14:22:49.689Z","set":"desert-sites","id":"sun-temple-a","endpoint":"generate-image-v2","usd":0.0806719331741333}
 {"at":"2026-11-26T14:24:19.054Z","set":"desert-sites","id":"tomb-a","endpoint":"generate-image-v2","usd":0.08053215437465244}
 {"at":"2026-11-26T14:26:01.898Z","set":"desert-sites","id":"pyramid-b","endpoint":"generate-image-v2","usd":0.08029675165812175}
+{"at":"2026-11-26T20:58:57.107Z","set":"spell-frames","id":"frames-a","endpoint":"generate-image-v2","usd":0.08267334100935195}
+{"at":"2026-11-26T21:00:30.152Z","set":"spell-frames","id":"frames-b","endpoint":"generate-image-v2","usd":0.08199036995569865}
+{"at":"2026-11-26T21:03:48.567Z","set":"spell-frames","id":"frames-c","endpoint":"generate-image-v2","usd":0.0823401136663225}
+{"at":"2026-11-26T21:05:31.743Z","set":"spell-frames","id":"frames-d","endpoint":"generate-image-v2","usd":0.0827550302081638}

@@ -1,0 +1,36 @@
+{
+  "_doc": "Written by art/review/spell-frames.mjs (bead bzc.99): the frame size and, per school, the bounding box of the frame's hole, where the book paints the parchment medallion under the frame.",
+  "size": 48,
+  "holes": {
+    "bloom": {
+      "x": 10,
+      "y": 10,
+      "width": 29,
+      "height": 29
+    },
+    "accord": {
+      "x": 12,
+      "y": 12,
+      "width": 26,
+      "height": 26
+    },
+    "clock": {
+      "x": 12,
+      "y": 12,
+      "width": 26,
+      "height": 26
+    },
+    "hush": {
+      "x": 11,
+      "y": 11,
+      "width": 27,
+      "height": 27
+    },
+    "storm": {
+      "x": 11,
+      "y": 11,
+      "width": 28,
+      "height": 27
+    }
+  }
+}

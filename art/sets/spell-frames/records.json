@@ -1,0 +1,704 @@
+{
+  "frames-a": {
+    "id": "frames-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b0025150-225f-433f-918c-b18e2544ca3e",
+    "submittedAt": "2026-11-26T20:57:34.537Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style-frame.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-frame-48.txt",
+          "text": "Class: one empty ornamental picture frame for a spell icon in a game menu, seen straight on: a thick chunky border with a thick single-colour black outline, flat saturated colours with one shadow tone and one highlight, few details; the frame fills the whole square edge to edge and is the same on all four sides; its middle is a big empty hole showing the transparent background, nothing is drawn inside the hole."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 5 things, each thing about equally often: (1) a round frame ring made of bright green leaves woven around a green vine; (2) a round frame ring of shiny blue steel with four round silver rivets at the top, bottom, left and right; (3) a round frame ring of yellow brass shaped like a clock face rim with twelve dark tick marks; (4) a round frame ring of dark plum purple with four small silver crescent moons at the top, bottom, left and right; (5) a round frame ring of bright red with four jagged orange lightning-bolt spikes pointing outwards at the corners. The middle of every ring is an empty hole."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 19901,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one empty ornamental picture frame for a spell icon in a game menu, seen straight on: a thick chunky border with a thick single-colour black outline, flat saturated colours with one shadow tone and one highlight, few details; the frame fills the whole square edge to edge and is the same on all four sides; its middle is a big empty hole showing the transparent background, nothing is drawn inside the hole. Subject: each image shows exactly one of these 5 things, each thing about equally often: (1) a round frame ring made of bright green leaves woven around a green vine; (2) a round frame ring of shiny blue steel with four round silver rivets at the top, bottom, left and right; (3) a round frame ring of yellow brass shaped like a clock face rim with twelve dark tick marks; (4) a round frame ring of dark plum purple with four small silver crescent moons at the top, bottom, left and right; (5) a round frame ring of bright red with four jagged orange lightning-bolt spikes pointing outwards at the corners. The middle of every ring is an empty hole. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, cropped subject, picture inside the frame, symbol in the middle, filled centre, gem in the middle, numbers, ground, shadow on the ground, cropped frame."
+    },
+    "at": "2026-11-26T20:58:57.107Z",
+    "usageUsd": 0.08267334100935195,
+    "candidates": [
+      {
+        "file": "frames-a-0.png",
+        "sha256": "9389e41cceedc97c0c07f97a2d4ffac93a33b0005f9b152f17e5f0921c7ebee2",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-1.png",
+        "sha256": "70dc00033a09141136db85d0b66f0ff176cee3b852a3cd90942359621b083d8e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-2.png",
+        "sha256": "51610921f1ddf6e5274e00adfd00cea040a17199bfec9e284e0d84c6515a5ab4",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-3.png",
+        "sha256": "e9725f560122c7fca0eece03b3baa712fbca7e94b3f174a3681a1cececccb06c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-4.png",
+        "sha256": "33ac5459e5bceb1216e67f1fd8cbc9b1bef76fc0d434bce873f1c2bff87f7bc9",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-5.png",
+        "sha256": "475d6be4ea25f2079be1aa6530d6cff4abff622404878c56935e2fe0709ff05d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-6.png",
+        "sha256": "e4d457068df146be5dc404237e18d5430da1cfd4204eb09e15592024fbd09b4d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-7.png",
+        "sha256": "cec668d56aa1837a8bca37d3eb1788015b4a96281c39ac5b2519d122481b6225",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-8.png",
+        "sha256": "ed93192cb5fd5f5e9087971b3cf1a9e4b8cebbd0929aeada56cf18dccea9b45f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-9.png",
+        "sha256": "894b7da9a1ec571f3a2d4f8d81878bb2880a486099e73319e8f05f3eaa9fb2e0",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-10.png",
+        "sha256": "e0dc02bc5d20586cfda22479a8b3f2c5790bcbd52bd0ea6ed9ae6c59b7af55ca",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-11.png",
+        "sha256": "62f4e4034b2ca8ac1556f5610d307ee7ca8a0a9412e4155be96c43c3c15adff7",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-12.png",
+        "sha256": "1c76ff634aa1e1621c538e7300f9158022b4e90eea5efc1d6778f62663f7689d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-13.png",
+        "sha256": "a6bf4306b89b1239ca771ce94324ca7ad996249168b4e60cdc582224f662b669",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-14.png",
+        "sha256": "43578595f31a71a16e86c4e9b3ac5f19de3dc397b685a1000872d4b3b45feccd",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-15.png",
+        "sha256": "ee338316609d74cd4bfa8e7eb8851689b3f4d0ec4a9e668a3e42a68efdbe260e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-16.png",
+        "sha256": "a2eb2e3debb7632ca2be8bc362a18ba15bda4c0a5dce70e17d0dcc32ce7649dd",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-17.png",
+        "sha256": "e0dea226179de7aed77da2f47afa9265e26dae4931362b1a4e3753b663f39e08",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-18.png",
+        "sha256": "cb054c8cbb9499fd9bd85b9ae7568c6130df6258c484a15cfc127c14f3614939",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-19.png",
+        "sha256": "c68634bb7cddf8128b07c5aae6d0cdf86b2048600adeb69e53e696e64b29fac1",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-20.png",
+        "sha256": "6203c5571648e757203f52c8c762542f7dba537d9bb70dbd589505d78ff77a5b",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-21.png",
+        "sha256": "b326715e7b9ff9f3e19ccff1f66804afdc3f7414831cf3a31b8b88d79de730b8",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-22.png",
+        "sha256": "7b38b33a2189a929146f61d552c00dab822fec0df08a003b5052561f7b33738c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-23.png",
+        "sha256": "ea51700988d45ee56e990bc844c26ae2a674649c46da62f7930d7f06e2bfec3a",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-a-24.png",
+        "sha256": "ddbc6c9535e1b78d7b47293d41f7dd69bdbbba3dce9910107fd2cf1f6c25cf5e",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "frames-b": {
+    "id": "frames-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c36a62ff-3925-430a-8d3d-1468c2cfe06a",
+    "submittedAt": "2026-11-26T20:58:57.228Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style-frame.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-frame-48.txt",
+          "text": "Class: one empty ornamental picture frame for a spell icon in a game menu, seen straight on: a thick chunky border with a thick single-colour black outline, flat saturated colours with one shadow tone and one highlight, few details; the frame fills the whole square edge to edge and is the same on all four sides; its middle is a big empty hole showing the transparent background, nothing is drawn inside the hole."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 5 things, each thing about equally often: (1) a square picture frame with rounded corners made of bright green leaves woven along a green vine, a big leaf at each corner; (2) a square picture frame with rounded corners of shiny blue steel with a round silver rivet at each corner; (3) a square picture frame with rounded corners of yellow brass with a small brass cog at each corner; (4) a square picture frame with rounded corners of dark plum purple with a small silver crescent moon at each corner; (5) a square picture frame with rounded corners of bright red with a jagged orange lightning bolt at each corner. The middle of every frame is a big empty square hole."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 19902,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one empty ornamental picture frame for a spell icon in a game menu, seen straight on: a thick chunky border with a thick single-colour black outline, flat saturated colours with one shadow tone and one highlight, few details; the frame fills the whole square edge to edge and is the same on all four sides; its middle is a big empty hole showing the transparent background, nothing is drawn inside the hole. Subject: each image shows exactly one of these 5 things, each thing about equally often: (1) a square picture frame with rounded corners made of bright green leaves woven along a green vine, a big leaf at each corner; (2) a square picture frame with rounded corners of shiny blue steel with a round silver rivet at each corner; (3) a square picture frame with rounded corners of yellow brass with a small brass cog at each corner; (4) a square picture frame with rounded corners of dark plum purple with a small silver crescent moon at each corner; (5) a square picture frame with rounded corners of bright red with a jagged orange lightning bolt at each corner. The middle of every frame is a big empty square hole. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, cropped subject, picture inside the frame, symbol in the middle, filled centre, gem in the middle, numbers, ground, shadow on the ground, cropped frame."
+    },
+    "at": "2026-11-26T21:00:30.152Z",
+    "usageUsd": 0.08199036995569865,
+    "candidates": [
+      {
+        "file": "frames-b-0.png",
+        "sha256": "de7ae898bf005572e363739d2c5f8b025a4d6bcfa0005b43fa075436bd821ec1",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-1.png",
+        "sha256": "c06662d85d2848c3017b2214b8df82ad3cfb74ff87f1d26312b98652a4bad99d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-2.png",
+        "sha256": "b98361ffd03609c886a2c070d49ec0cfd738b433a63129ff806beb1459fa2755",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-3.png",
+        "sha256": "82e4461628cb2ec24f80428e59af560ebffa2721d70c9bddb54525703c757b9c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-4.png",
+        "sha256": "b76e88b07f6c06e8bb5b9164fd9467e006178e788afed2cbe116a0364a73f9c7",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-5.png",
+        "sha256": "eee5ba098b6a2cbc1b687c5832c0b622ab40169efc1df69b989323c91f621aa5",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-6.png",
+        "sha256": "7f8ccc73723f82ba17448e48e45355ce2d6226ad59ebb289603f6762aca4069d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-7.png",
+        "sha256": "eb7ce7a157b837ecba0648ca93a1f23c06560cc55ebf4e43d667bd6b24b9c772",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-8.png",
+        "sha256": "9437704b67f3b2c76deb2e807ca5f7d1616489bb60b5e5f8e71c6bf1d2799b4f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-9.png",
+        "sha256": "6d5841560d1725a8a3c228a6a65bd706eb84a0969d115c488f4a4b1ad632356f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-10.png",
+        "sha256": "2e46403f8b1c6ea806a301a6a818b87342f7a9187ddec38c6dfb477c1da34bd0",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-11.png",
+        "sha256": "ea3d16ffd6559541571117936e0e2eafe0dcda2b25f44c333aa19ce49be75e72",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-12.png",
+        "sha256": "15bc78ff3596d160865e012e5add5a59f20b0984cc4db6d65a97bc756d666a31",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-13.png",
+        "sha256": "ce5a11a899c17145db1f7ba7862d9951938029cc0a6b573320cbccf48ae1e877",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-14.png",
+        "sha256": "8ee23f2106be620b51dafe6b509ff16711da271387b03bb8ffafa91d14c0579f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-15.png",
+        "sha256": "ed749859a90b794b5e73ad8c161d0976a157b350d8d84946abf56ccfaf1d3acc",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-16.png",
+        "sha256": "ee766c83466bc74070c6b50cb1071785f7731bfe7159856a4f2a33ae468bf174",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-17.png",
+        "sha256": "9fcc6089d533780c6d4e0d5b89157de885089c130745ed30fbb75ee5ff458613",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-18.png",
+        "sha256": "45e54b591e818960556c7fdecd26716ee880ecb60b6ac46c2bfbca532a3638f2",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-19.png",
+        "sha256": "2ecc493db8db07e928c9a47afb3f827bc799821d78b153ee8f5c81cd8718d761",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-20.png",
+        "sha256": "0d3afe1f1c81291a666a38cb1690137dae2648ee1fdc47f200173914720a6c60",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-21.png",
+        "sha256": "7ca9cb3d2ddaea3aa36ffceb066be6f3dff391551020d9d8b3e53fad994ad749",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-22.png",
+        "sha256": "8023518090a1939bd3428f555eca10eef9949ebc8e60ed9342cabbb92504f486",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-23.png",
+        "sha256": "eda6460ee9cc0ceb0de2a6df5feb30dc994c5b990bd24667c7b3b94d9b20e5f3",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-b-24.png",
+        "sha256": "b85bd477780f2500e7a7f79749bddd351f8dfce02875d3abf65f9a9b6cffd9e5",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "frames-c": {
+    "id": "frames-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "e7a83c1c-f9e0-4bf1-8f75-36955e61e40c",
+    "submittedAt": "2026-11-26T21:01:50.026Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style-frame.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-frame-48.txt",
+          "text": "Class: one empty ornamental picture frame for a spell icon in a game menu, seen straight on: a thick chunky border with a thick single-colour black outline, flat saturated colours with one shadow tone and one highlight, few details; the frame fills the whole square edge to edge and is the same on all four sides; its middle is a big empty hole showing the transparent background, nothing is drawn inside the hole."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 5 things, each thing about equally often: (1) a square picture frame with slim bars of twisted green vine and a big bright green leaf at each corner; (2) a square picture frame with slim bars of shiny blue steel and a round silver rivet at each corner; (3) a square picture frame with slim bars of yellow brass and a small brass cog at each corner; (4) a square picture frame with slim bars of dark plum purple and a small silver crescent moon at each corner; (5) a square picture frame with slim bars of bright red and a jagged orange lightning bolt at each corner. The bars are thin, only about one eighth of the frame's width; the empty square hole in the middle is big, about two thirds of the frame's width; the corner ornaments may be bigger than the bars."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 19903,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one empty ornamental picture frame for a spell icon in a game menu, seen straight on: a thick chunky border with a thick single-colour black outline, flat saturated colours with one shadow tone and one highlight, few details; the frame fills the whole square edge to edge and is the same on all four sides; its middle is a big empty hole showing the transparent background, nothing is drawn inside the hole. Subject: each image shows exactly one of these 5 things, each thing about equally often: (1) a square picture frame with slim bars of twisted green vine and a big bright green leaf at each corner; (2) a square picture frame with slim bars of shiny blue steel and a round silver rivet at each corner; (3) a square picture frame with slim bars of yellow brass and a small brass cog at each corner; (4) a square picture frame with slim bars of dark plum purple and a small silver crescent moon at each corner; (5) a square picture frame with slim bars of bright red and a jagged orange lightning bolt at each corner. The bars are thin, only about one eighth of the frame's width; the empty square hole in the middle is big, about two thirds of the frame's width; the corner ornaments may be bigger than the bars. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, cropped subject, picture inside the frame, symbol in the middle, filled centre, gem in the middle, numbers, ground, shadow on the ground, cropped frame."
+    },
+    "at": "2026-11-26T21:03:48.566Z",
+    "usageUsd": 0.0823401136663225,
+    "candidates": [
+      {
+        "file": "frames-c-0.png",
+        "sha256": "71cda3415a94c3e62de977b059b389adbf4c30249fa8140f2252537b8e980b94",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-1.png",
+        "sha256": "03a51f7cbfde5a94ce6d4ad183a75fcead481c8783d871f2d7c47f3cca879aa9",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-2.png",
+        "sha256": "d06b259488a6cf1650b8fc7791c46b2f87c41fd1c0c2fad7122715f2a8c23895",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-3.png",
+        "sha256": "468113f891a93552c182893a330b2a027d02e355d94ff5c8be70c41738f158e1",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-4.png",
+        "sha256": "ef5cb1156b06f4f8cb8e7746a566a0b25f8ce755ca9087d95d56cf1d3c22c954",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-5.png",
+        "sha256": "645c29b38a137d330239d28928d6609fbb4f084b438a0304f970436b4c282501",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-6.png",
+        "sha256": "68764b6274c985b14b607acc274d3da51614ab1ceee8a9298219eb5d7b76d1d4",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-7.png",
+        "sha256": "62cc9e6af35ebb1075865680b6f2ea104f4dbcc831c1145649433fd5c4fc4a18",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-8.png",
+        "sha256": "91dd06d09394afa4b1b0388d37893e78e05255dc30bcc35631f645e29df6a986",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-9.png",
+        "sha256": "cd1ed3fb29d3f12e97821703f1ea310159d8e25f273d501e8cd2cc9dbe0d2253",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-10.png",
+        "sha256": "138f6612a4d04228b9629b44c53cb4ce3ad7fe5bbb33ae2c91530989ffdfea3e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-11.png",
+        "sha256": "360fdb7db43e43e462888630fe77a59e55dd70b706032d69ba72bc0c42ab7a1f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-12.png",
+        "sha256": "daa8464b36b13a8527a256615bae5e676171c03ac577e9151f9d9323468b77ee",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-13.png",
+        "sha256": "e8b215135c8c135ef5fa772e405e2de216a2ba682ef58ec6829933cee872d233",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-14.png",
+        "sha256": "af2b675857a9a01b2e2998706909873cca87d28f6a95b713b7987609642a8686",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-15.png",
+        "sha256": "50bbe675419d2547f6e8646475fc311ebb077ba16de161a9eb78350e77388371",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-16.png",
+        "sha256": "8bfb57ba744cda67d885f54e4081f8d49d40e5ee7413618dabfb0c88b43038a3",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-17.png",
+        "sha256": "483dd9d6ce6521e4ec0a6ad493c81e48252fd0f16302bde1420a689bc540c3ea",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-18.png",
+        "sha256": "f0b7b9ad36183b97204771ecb32ed24b4ca9708e134d3486f06400294f1f4060",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-19.png",
+        "sha256": "afdc7e1bbb31972465919307704ccaf81b8dbb7b892e277dcfd027e8fb429135",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-20.png",
+        "sha256": "631cb05e316b24cdd1bf4001c890fd197f1f68db2da1a59d49aa4771d0a59408",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-21.png",
+        "sha256": "48082ea90c2cc1321d9d43b9acac1972dad2a3c60fc56ce880e6bff0748faa90",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-22.png",
+        "sha256": "3fa297dce8cf8cab7961752bd41b4081d520726b10cbb40f16f83e8ecd08ccc6",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-23.png",
+        "sha256": "cc7be3ae4d66150ee6da6596e3c2e518bf56a513ac9b1f44eebe41e8aeb0595a",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "frames-c-24.png",
+        "sha256": "1d5a90d39d910edb76334f0d411f89813ced9bd69728974cc1449faa69a78a92",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "frames-d": {
+    "id": "frames-d",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "8f64d322-67fa-46cb-be10-1eeb78a3066c",
+    "submittedAt": "2026-11-26T21:03:48.698Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style-frame.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-frame-48.txt",
+          "text": "Class: one empty ornamental picture frame for a spell icon in a game menu, seen straight on: a thick chunky border with a thick single-colour black outline, flat saturated colours with one shadow tone and one highlight, few details; the frame fills the whole square edge to edge and is the same on all four sides; its middle is a big empty hole showing the transparent background, nothing is drawn inside the hole."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 5 things, each thing about equally often: (1) a square picture frame with slim bars of twisted green vine and a big bright green leaf at each corner; (2) a square picture frame with slim bars of shiny blue steel and a round silver rivet at each corner; (3) a square picture frame with slim bars of yellow brass and a small brass cog at each corner; (4) a square picture frame with slim bars of dark plum purple and a small silver crescent moon at each corner; (5) a square picture frame with slim bars of bright red and a jagged orange lightning bolt at each corner. The bars are thin, only about one eighth of the frame's width; the empty square hole in the middle is big, about two thirds of the frame's width; the corner ornaments may be bigger than the bars."
+        }
+      ],
+      "image_size": {
+        "width": 52,
+        "height": 52
+      },
+      "no_background": true,
+      "seed": 19904,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one empty ornamental picture frame for a spell icon in a game menu, seen straight on: a thick chunky border with a thick single-colour black outline, flat saturated colours with one shadow tone and one highlight, few details; the frame fills the whole square edge to edge and is the same on all four sides; its middle is a big empty hole showing the transparent background, nothing is drawn inside the hole. Subject: each image shows exactly one of these 5 things, each thing about equally often: (1) a square picture frame with slim bars of twisted green vine and a big bright green leaf at each corner; (2) a square picture frame with slim bars of shiny blue steel and a round silver rivet at each corner; (3) a square picture frame with slim bars of yellow brass and a small brass cog at each corner; (4) a square picture frame with slim bars of dark plum purple and a small silver crescent moon at each corner; (5) a square picture frame with slim bars of bright red and a jagged orange lightning bolt at each corner. The bars are thin, only about one eighth of the frame's width; the empty square hole in the middle is big, about two thirds of the frame's width; the corner ornaments may be bigger than the bars. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, cropped subject, picture inside the frame, symbol in the middle, filled centre, gem in the middle, numbers, ground, shadow on the ground, cropped frame."
+    },
+    "at": "2026-11-26T21:05:31.743Z",
+    "usageUsd": 0.0827550302081638,
+    "candidates": [
+      {
+        "file": "frames-d-0.png",
+        "sha256": "8e43efbf6ce1a3b1a764e1450771c4a609e1d75243dadea8be6f95ffc3efea7b",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-1.png",
+        "sha256": "296e013b7e129f3505610580f71d4635bc3f408b2a84dbd8ff6a88ec0a8a220d",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-2.png",
+        "sha256": "3d69dde8d7cc0ae9112827ee5f80a857c612357383cd273c075f0df8933b419b",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-3.png",
+        "sha256": "f1f7d83572d870c9a3890a77dbed14d3e602a0f480d0b96886caa857919ddaed",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-4.png",
+        "sha256": "fb598459e87af62f04f9ac832e96fd3072fb8751b73085115513e093a618ad88",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-5.png",
+        "sha256": "6d3679d90eb34b9e27f0a5bd318a682e479de015a06e03c3b19b151738e0956b",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-6.png",
+        "sha256": "e4b11f776b9f6e514b2fb449c0050925912f06e4e803ccd0cce8d5bd0676eca4",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-7.png",
+        "sha256": "9a6bf2124f3693d51cf1b149721107ec6e5d48fbac0c75e5a6a8b46864142765",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-8.png",
+        "sha256": "4b70f7dddd65c1ff54fba374f0e6c9863d85168e41a0c97f29219402fe82bde0",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-9.png",
+        "sha256": "1692fbeb14552ccb8fea282cf8666d9ef694c8abecf5ba75d11689f7936de9e1",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-10.png",
+        "sha256": "b1cc3cf82d356ae58710b290f55066fba73629a57b4f115b6b130901ac7008f4",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-11.png",
+        "sha256": "c65c234a9b047c5134c2bea0b7d78c82c95a7db34b5218d999a1f7c82f19aa26",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-12.png",
+        "sha256": "2e1b1fffa1cdea4da0adc42b960a66b2996cc3d57280ba24838d11277be46451",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-13.png",
+        "sha256": "a1f1236b23b677ea7d5015138d50df518abc5af127e206575d72518eb9c78962",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-14.png",
+        "sha256": "26682ff5c00fb460423475e0477336aa40da94ef3492ef075d066de988965297",
+        "width": 52,
+        "height": 52
+      },
+      {
+        "file": "frames-d-15.png",
+        "sha256": "d7e01b3985faea4e16c6a71adf160f6a226cd733e9092d8e2b68ebda1c4c62de",
+        "width": 52,
+        "height": 52
+      }
+    ]
+  }
+}

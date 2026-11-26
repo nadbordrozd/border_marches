@@ -1,0 +1,560 @@
+/*
+ * Spellbook v3 (bead bzc.99, src/ui/spellbook-spread.ts): an open book of
+ * two parchment pages in a leather cover, school ribbons down the right
+ * edge, Combat and Adventure tabs under it, each spell on a parchment
+ * medallion in its school's frame (gilded with mastery). Shared by the
+ * adventure book (a dialog) and the battle book (docked over the field).
+ */
+
+.sb-book {
+  --sb-leather: #5b2c18;
+  --sb-leather-dark: #34170b;
+  --sb-leather-light: #8a4a26;
+  --sb-parchment: #f0dfb4;
+  --sb-parchment-edge: #d6bb80;
+  --sb-ink: #3a2812;
+  --sb-ink-soft: #6e5530;
+  --sb-medal: #f6e9c6;
+  --sb-medal-shade: #dcc28b;
+  --sb-cell-w: 104px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.sb-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 12px;
+  row-gap: 2px;
+}
+
+.sb-title {
+  font:
+    bold 18px Georgia,
+    serif;
+  color: #ffd65c;
+}
+
+.sb-status {
+  flex: 1 1 auto;
+  font-size: 12px;
+  color: #d8ccb0;
+}
+
+/* The ribbons hang out of the book's right edge, behind the cover. */
+.sb-body {
+  position: relative;
+  align-self: flex-start;
+  margin-right: 42px;
+}
+
+.sb-spread {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto 10px auto;
+  padding: 7px 7px 9px;
+  background: linear-gradient(
+    180deg,
+    var(--sb-leather-light) 0,
+    var(--sb-leather) 6px,
+    var(--sb-leather) calc(100% - 6px),
+    var(--sb-leather-dark) 100%
+  );
+  border: 2px solid #1d0d05;
+  border-radius: 7px;
+  box-shadow:
+    inset 0 0 0 1px #a7683c,
+    0 4px 0 #000;
+}
+
+.sb-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: calc(var(--sb-cell-w) * 2 + 24px);
+  padding: 6px 10px 4px;
+  color: var(--sb-ink);
+  background: var(--sb-parchment);
+}
+
+/* Darker towards the spine and the outer edge: the pages curve. */
+.sb-page-left {
+  background: linear-gradient(
+    90deg,
+    var(--sb-parchment-edge) 0,
+    var(--sb-parchment) 5%,
+    var(--sb-parchment) 82%,
+    var(--sb-parchment-edge) 100%
+  );
+  border-radius: 4px 0 0 4px;
+}
+
+.sb-page-right {
+  background: linear-gradient(
+    270deg,
+    var(--sb-parchment-edge) 0,
+    var(--sb-parchment) 5%,
+    var(--sb-parchment) 82%,
+    var(--sb-parchment-edge) 100%
+  );
+  border-radius: 0 4px 4px 0;
+}
+
+.sb-spine {
+  background: linear-gradient(
+    90deg,
+    #b59457 0,
+    #6d4b22 45%,
+    #6d4b22 55%,
+    #b59457 100%
+  );
+}
+
+.sb-page-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  min-height: 18px;
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--ribbon, #c9a227);
+}
+
+.sb-page-title {
+  font:
+    bold 14px Georgia,
+    serif;
+  color: var(--sb-ink);
+}
+
+.sb-page-rank {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--sb-ink-soft);
+}
+
+.sb-grid {
+  display: grid;
+  grid-template-columns: repeat(2, var(--sb-cell-w));
+  grid-template-rows: repeat(3, auto);
+  align-content: start;
+  gap: 2px 8px;
+  min-height: calc(3 * 128px + 4px);
+  padding-top: 3px;
+}
+
+.sb-empty {
+  grid-column: 1 / -1;
+  padding: 24px 6px;
+  font:
+    italic 13px Georgia,
+    serif;
+  color: var(--sb-ink-soft);
+  text-align: center;
+}
+
+.sb-page-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 18px;
+  font:
+    italic 11px Georgia,
+    serif;
+  color: var(--sb-ink-soft);
+}
+
+.sb-page-right .sb-folio {
+  margin-left: auto;
+}
+
+.sb-book .sb-turn {
+  min-width: 0;
+  padding: 0 7px;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--sb-parchment);
+  background: var(--sb-leather);
+  border: 1px solid #1d0d05;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.sb-turn:hover:not(:disabled),
+.sb-turn:focus-visible {
+  background: var(--sb-leather-light);
+}
+
+.sb-turn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.sb-turn[hidden] {
+  display: none;
+}
+
+.sb-page-right .sb-turn {
+  margin-left: 8px;
+}
+
+.sb-page-left .sb-turn {
+  margin-right: 8px;
+}
+
+/* One spell: the medallion, its name, tier and cost. */
+.sb-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  width: var(--sb-cell-w);
+  padding: 2px 0 3px;
+  color: var(--sb-ink);
+  text-align: center;
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sb-cell:hover,
+.sb-cell:focus-visible {
+  background: rgb(255 255 255 / 30%);
+  outline: none;
+}
+
+.sb-cell:focus-visible {
+  box-shadow: 0 0 0 2px var(--sb-ink);
+}
+
+.sb-cell.sb-shown {
+  background: rgb(255 248 220 / 70%);
+  box-shadow: inset 0 0 0 2px var(--school, var(--sb-ink-soft));
+}
+
+.sb-medal {
+  position: relative;
+  display: block;
+  flex: none;
+}
+
+.sb-parch {
+  position: absolute;
+  background: var(--sb-medal);
+  box-shadow:
+    inset 2px -2px 0 var(--sb-medal-shade),
+    inset -2px 2px 0 #fff6dc;
+}
+
+.sb-frame {
+  position: absolute;
+  inset: 0;
+  image-rendering: pixelated;
+}
+
+.sb-medal > .sb-icon {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.sb-medal > .sb-icon img {
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* An item act: no school, a plain gold-trimmed disc behind the icon. */
+.sb-medal-plain::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  background: var(--sb-medal);
+  border: 4px solid #c9a227;
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px #3b2a05;
+}
+
+.sb-name {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 100%;
+  margin-top: 1px;
+  font:
+    bold 12px/14px Georgia,
+    serif;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow-wrap: anywhere;
+}
+
+.sb-meta {
+  font-size: 11px;
+  line-height: 13px;
+  color: var(--sb-ink-soft);
+  white-space: nowrap;
+}
+
+.sb-note {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  z-index: 1;
+  max-width: 70px;
+  overflow: hidden;
+  padding: 0 4px;
+  font-size: 10px;
+  line-height: 13px;
+  color: var(--sb-parchment);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: var(--sb-leather);
+  border-radius: 3px;
+}
+
+/* Cannot be cast now: dimmed, the reason on a tag across the medallion. */
+.sb-cell.sb-off {
+  cursor: help;
+}
+
+.sb-cell.sb-off .sb-medal > :not(.sb-why),
+.sb-cell.sb-off .sb-name,
+.sb-cell.sb-off .sb-meta {
+  opacity: 0.5;
+  filter: grayscale(0.85);
+}
+
+/* A spell of the other half of the book: readable, a little faded. */
+.sb-cell.sb-off.sb-away .sb-medal > *,
+.sb-cell.sb-off.sb-away .sb-name,
+.sb-cell.sb-off.sb-away .sb-meta {
+  opacity: 0.85;
+  filter: grayscale(0.35);
+}
+
+.sb-why {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  z-index: 1;
+  padding: 0 5px;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #ffe2b8;
+  white-space: nowrap;
+  background: #6b1f10;
+  border: 1px solid #2a0c05;
+  border-radius: 3px;
+  transform: translateX(-50%);
+}
+
+/* The ribbons: a bookmark per school, the chosen one pulled out. */
+.sb-ribbons {
+  position: absolute;
+  top: 18px;
+  right: -42px;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sb-schools-slot:empty {
+  display: none;
+}
+
+.sb-ribbon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  width: 52px;
+  height: 46px;
+  padding: 0 0 0 12px;
+  color: #fff;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--ribbon) 82%, #fff) 0,
+    var(--ribbon) 30%,
+    color-mix(in srgb, var(--ribbon) 70%, #000) 100%
+  );
+  border: 0;
+  clip-path: polygon(0 0, 100% 0, 80% 50%, 100% 100%, 0 100%);
+  cursor: pointer;
+  filter: brightness(0.82) saturate(0.85);
+  transform: translateX(-10px);
+  transition:
+    transform 120ms ease-out,
+    filter 120ms ease-out;
+}
+
+.sb-ribbon:hover,
+.sb-ribbon:focus-visible {
+  filter: none;
+  outline: none;
+  transform: translateX(-4px);
+}
+
+.sb-ribbon.sb-on {
+  filter: none;
+  transform: translateX(0);
+}
+
+.sb-ribbon.sb-on::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 3px 0 rgb(255 255 255 / 35%);
+}
+
+.sb-ribbon:focus-visible::before {
+  content: "";
+  position: absolute;
+  inset: 2px auto 2px 10px;
+  width: 2px;
+  background: #fff;
+}
+
+.sb-ribbon.sb-ribbon-empty .sb-ribbon-icon {
+  opacity: 0.55;
+}
+
+.sb-ribbon-icon {
+  flex: none;
+}
+
+.sb-ribbon-icon img {
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* The name is in the tooltip and the page head; the ribbon shows the sign. */
+.sb-ribbon-name {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* Rank pips: one gold pip per school rank. */
+.sb-pips {
+  position: absolute;
+  bottom: 3px;
+  left: 14px;
+  display: flex;
+  gap: 2px;
+}
+
+.sb-pip {
+  width: 5px;
+  height: 5px;
+  background: #ffd65c;
+  border: 1px solid #3b2a05;
+}
+
+.sb-book .sb-ribbon-wheel {
+  --ribbon: #a47a3c;
+  width: 52px;
+  height: 46px;
+  font-size: 9px;
+  line-height: 10px;
+  text-align: left;
+}
+
+/* Combat and Adventure: tabs under the book. */
+.sb-tabs {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 4px;
+  align-self: flex-start;
+  margin: -4px 0 0 18px;
+}
+
+.sb-book .sb-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 12px 4px 6px;
+  font:
+    bold 14px Georgia,
+    serif;
+  color: #e8d6b0;
+  background: var(--sb-leather-dark);
+  border: 2px solid #1d0d05;
+  border-top: 0;
+  border-radius: 0 0 7px 7px;
+  cursor: pointer;
+}
+
+.sb-tab:hover,
+.sb-tab:focus-visible {
+  color: #fff;
+  outline: none;
+  background: var(--sb-leather);
+}
+
+.sb-tab:focus-visible {
+  box-shadow: 0 0 0 2px #ffd65c;
+}
+
+.sb-tab.sb-on {
+  color: var(--sb-ink);
+  background: var(--sb-parchment);
+}
+
+.sb-tab-icon img {
+  display: block;
+  image-rendering: pixelated;
+}
+
+.sb-tab-n {
+  font:
+    12px system-ui,
+    sans-serif;
+  opacity: 0.8;
+}
+
+/* What the frames mean. */
+.sb-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 6px;
+  max-width: 560px;
+  font-size: 11px;
+  line-height: 13px;
+  color: #d8ccb0;
+}
+
+.sb-legend > span {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+
+.sb-legend-frame {
+  flex: none;
+  image-rendering: pixelated;
+}
+
+.sb-tip-frame {
+  color: #ffd65c;
+}
+
+:root[data-motion="reduced"] .sb-ribbon {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-ribbon {
+    transition: none;
+  }
+}

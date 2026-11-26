@@ -82,7 +82,8 @@ export type AssetCategory =
   | "map-object"
   | "building"
   | "town-backdrop"
-  | "icon";
+  | "icon"
+  | "frame";
 
 /** One PNG under public/. */
 export interface ImageAsset {
@@ -1272,6 +1273,27 @@ export function doodadsOf(terrain: GroundTerrain): readonly DoodadAsset[] {
   return DOODAD_ASSETS.filter((doodad) => doodad.terrain === family);
 }
 
+// ---------------------------------------------------------- spell frames
+
+/** The schools whose spells get a frame in the book. */
+const FRAME_SCHOOLS = ["bloom", "accord", "clock", "hush", "storm"] as const;
+
+/**
+ * The spellbook's ornate school frames (bead bzc.99, set `spell-frames`):
+ * 48 x 48 around the 32 x 32 spell icon, a plain and a gilded (mastery)
+ * frame per school. Key `frame-spell-<school>[-gilded]`.
+ */
+export const SPELL_FRAME_ASSETS: readonly ImageAsset[] = FRAME_SCHOOLS.flatMap(
+  (school) =>
+    (["", "-gilded"] as const).map((v) => ({
+      key: `frame-spell-${school}${v}`,
+      path: `assets/frames/spell-${school}${v}.png`,
+      w: 48,
+      h: 48,
+      category: "frame" as const,
+    })),
+);
+
 // -------------------------------------------------------------- registry
 
 /** Every image in the manifest, once. */
@@ -1301,6 +1323,7 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...BUILDING_ART_ASSETS,
   ...TOWN_BACKDROP_ASSETS,
   ...ALL_ICON_ASSETS,
+  ...SPELL_FRAME_ASSETS,
 ];
 
 const BY_KEY: ReadonlyMap<string, ImageAsset> = new Map(

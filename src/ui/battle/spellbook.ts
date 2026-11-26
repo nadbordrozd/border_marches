@@ -1,22 +1,35 @@
 /**
  * The battle spellbook and the cast panel (DOM only; the rules are in
- * magic.ts). The book docks beside the field (bead bzc.63, UI2-13): school
- * chips, the pages as an icon grid with the castable ones first and the
- * greyed ones saying why in two words, and a detail strip with the pointed
- * page's effect at this cast's Power, its target and the reason it cannot
- * be cast; scrolls and a creature caster's own pages follow the schools.
+ * magic.ts). The book docks beside the field (bead bzc.63, UI2-13) and is
+ * an open book since bzc.99 (spellbook-spread.ts): school ribbons, Combat
+ * and Adventure tabs, each page on a medallion in its school's frame
+ * (gilded with rank), the castable ones first and the dimmed ones saying
+ * why; then a detail strip with the pointed page's effect at this cast's
+ * Power, its target and the reason it cannot be cast. Scrolls, item acts
+ * and a creature caster's own pages are tagged on their medallions.
  * Then the cast panel: the targeting prompt, the exact rehearsed chain and
  * the Echo and Fuel toggles with what each would do.
  */
 
-import type { ConditionRef } from "../../core/battle/index.ts";
+import type { ConditionRef, School } from "../../core/battle/index.ts";
 import { iconElement } from "../icons.ts";
 import { targetLine } from "../target-icon.ts";
 import { ANYWHERE, spellTargetKind } from "./spell-targets.ts";
 import { rulesText } from "../keywords.ts";
-import { setPinTip, tipCard } from "../tooltip.ts";
+import { tipCard } from "../tooltip.ts";
 import { SCHOOL_COLOURS, SCHOOL_NAMES } from "./magic.ts";
 import type { BookEntry, CastPreview, ConditionOption } from "./magic.ts";
+import { renderSpread } from "../spellbook-spread.ts";
+import type { SchoolRanks, SpreadCard } from "../spellbook-spread.ts";
+
+/** No rank in any school: every frame plain. */
+const NO_RANKS: SchoolRanks = {
+  bloom: 0,
+  accord: 0,
+  clock: 0,
+  hush: 0,
+  storm: 0,
+};
 
 function el<K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -42,6 +55,10 @@ export interface BookView {
     readonly name: string;
     readonly pages: readonly BookEntry[];
   } | null;
+  /** The hero's school ranks: a rank gilds the school's frames (bzc.99). */
+  readonly ranks?: SchoolRanks;
+  /** The hero's adventure pages and scrolls, shown on the Adventure tab. */
+  readonly adventure?: readonly AdventurePageRef[];
 }
 
 /** The groups of the book, in order: the five schools, then the rest. */
@@ -203,52 +220,83 @@ function pageDetail(box: HTMLElement, t: BookTile): void {
   );
 }
 
-/** One page of the grid: icon, name, and its cost or why not. */
-function pageTile(
-  t: BookTile,
-  onShow: (tile: HTMLElement) => void,
-  onPick: (e: BookEntry) => void,
-): HTMLButtonElement {
-  const e = t.entry;
-  const item = e.source === "item";
-  const ready = e.status === "ready";
-  const b = el("button", `bm-spell bm-st-${e.status}${item ? " bm-item" : ""}`);
-  b.type = "button";
-  b.dataset["spell"] = e.id;
-  b.style.setProperty("--school", t.group.colour);
-  // Greyed with the reason (bead bzc.47). aria-disabled rather than
-  // disabled, so pointing at a greyed page still shows why in the strip.
-  if (!ready) b.setAttribute("aria-disabled", "true");
-  b.setAttribute(
-    "aria-label",
-    `${e.name}, ${costText(e)}${e.reason ? `. ${e.reason}` : ""}`,
-  );
-  const icon = iconElement(item ? "artifact" : "spell", e.id, {
-    className: "bm-spell-icon",
-    scale: 2,
+/** An adventure page the hero knows, listed (dimmed) on the Adventure tab. */
+export interface AdventurePageRef {
+  readonly id: string;
+  readonly name: string;
+  readonly school: School;
+  readonly tier: number;
+  readonly mana: number;
+  readonly scroll: boolean;
+}
+
+/** Why an adventure page is dimmed in the battle book. */
+export const ON_THE_MAP =
+  "An adventure spell: cast it on the adventure map (M), not in battle.";
+
+/**
+ * The book's spells (bead bzc.99): the combat pages castable first, each
+ * with its group (school, scroll, item act or the creature's own page),
+ * then the hero's adventure pages, dimmed lightly: they are cast on the
+ * map. Keys map back to the tiles for the detail strip.
+ */
+export function battleCards(view: BookView): {
+  cards: SpreadCard[];
+  tiles: Map<string, BookTile>;
+} {
+  const tiles = new Map<string, BookTile>();
+  const cards: SpreadCard[] = bookOrder(bookGroups(view), "all").map((t, i) => {
+    const e = t.entry;
+    const item = e.source === "item";
+    const key = `combat:${t.group.key}:${e.id}:${i}`;
+    tiles.set(key, t);
+    const ready = e.status === "ready";
+    return {
+      key,
+      id: e.id,
+      icon: item ? "artifact" : "spell",
+      name: e.name,
+      school: item ? null : e.school,
+      context: "combat",
+      tier: item ? null : e.tier,
+      cost: ready ? pageCaption(e) : costText(e),
+      note:
+        t.group.key === "scroll"
+          ? "scroll"
+          : t.group.key === "creature"
+            ? t.group.label
+            : item
+              ? "item"
+              : null,
+      reason: ready ? null : (e.reason ?? pageCaption(e)),
+      short: ready ? null : pageCaption(e),
+      className: `bm-spell bm-st-${e.status}${item ? " bm-item" : ""}`,
+      pin: () => pageCard(e),
+    };
   });
-  // The name is written under it; no browser tooltip on top.
-  icon.removeAttribute("title");
-  b.append(
-    icon,
-    el("span", "bm-spell-name", e.name),
-    el("span", `bm-spell-cost${ready ? "" : " bm-spell-off"}`, pageCaption(e)),
-  );
-  // Right-click: the page's card stays pinned (UI2-18).
-  setPinTip(b, () => pageCard(e));
-  b.addEventListener("pointerenter", () => onShow(b));
-  b.addEventListener("focus", () => onShow(b));
-  b.addEventListener("click", () => {
-    onShow(b);
-    if (ready) onPick(e);
-  });
-  return b;
+  for (const p of view.adventure ?? [])
+    cards.push({
+      key: `adventure:${p.id}${p.scroll ? ":scroll" : ""}`,
+      id: p.id,
+      icon: "spell",
+      name: p.name,
+      school: p.school,
+      context: "adventure",
+      tier: p.tier,
+      cost: p.scroll ? "scroll" : `${p.mana} mana`,
+      note: p.scroll ? "scroll" : null,
+      reason: ON_THE_MAP,
+      short: "on the map",
+      away: true,
+    });
+  return { cards, tiles };
 }
 
 /**
- * Fills `box` with the book: a title with mana, the group chips, the icon
- * grid and the detail strip of the pointed page (the first castable one
- * until the pointer moves). Clicking a bright page picks it.
+ * Fills `box` with the book (bead bzc.99): the open book with its school
+ * ribbons and Combat / Adventure tabs, and the detail strip of the pointed
+ * page (the first castable one until the pointer moves). Clicking a bright
+ * page picks it.
  */
 export function renderBook(
   box: HTMLElement,
@@ -256,71 +304,64 @@ export function renderBook(
   onPick: (e: BookEntry) => void,
   onClose: () => void,
 ): void {
-  box.replaceChildren();
-  const head = el("div", "bm-book-head");
   const close = el("button", "bm-btn bm-book-close", "Close (Esc)");
   close.type = "button";
   close.addEventListener("click", onClose);
-  head.append(
-    el("div", "bm-book-title", view.title),
-    el("div", "bm-dim bm-book-status", view.status),
-    close,
-  );
-  box.append(head);
-  const groups = bookGroups(view);
-  if (groups.length === 0) {
-    box.append(el("div", "bm-dim", "No pages, no scrolls."));
-    return;
-  }
-  const chips = el("div", "bm-book-chips");
-  const grid = el("div", "bm-book-grid");
+  const { cards, tiles } = battleCards(view);
+  const host = el("div", "bm-book-spread");
   const detail = el("div", "bm-book-detail");
-  let filter = "all";
-  let shownTile: HTMLElement | null = null;
-  const fill = (): void => {
-    grid.replaceChildren();
-    shownTile = null;
-    const order = bookOrder(groups, filter);
-    for (const t of order) {
-      const show = (tile: HTMLElement): void => {
-        if (shownTile === tile) return;
-        shownTile?.classList.remove("bm-shown");
-        tile.classList.add("bm-shown");
-        shownTile = tile;
+  box.replaceChildren(host, detail);
+  renderSpread(host, {
+    title: view.title,
+    status: view.status,
+    cards,
+    ranks: view.ranks ?? NO_RANKS,
+    context: "combat",
+    mode: "hover",
+    headExtra: close,
+    tabCount: (t, list) =>
+      t === "combat" && list.length > 0
+        ? `${list.filter((c) => c.reason === null).length} of ${list.length} ready`
+        : String(list.length),
+    empty: (t, ribbon) =>
+      t === "adventure"
+        ? "No adventure spells in the book."
+        : ribbon === "all"
+          ? "No pages, no scrolls."
+          : `No ${SCHOOL_NAMES[ribbon]} pages or scrolls.`,
+    onShow: (card) => {
+      const t = card === null ? undefined : tiles.get(card.key);
+      if (t) {
+        detail.hidden = false;
         pageDetail(detail, t);
-      };
-      const tile = pageTile(t, show, onPick);
-      grid.append(tile);
-      if (shownTile === null) show(tile);
-    }
-    for (const c of chips.children)
-      c.classList.toggle(
-        "bm-on",
-        (c as HTMLElement).dataset["group"] === filter,
-      );
-  };
-  const chip = (key: string, label: string, colour: string, n: number) => {
-    const c = el("button", "bm-book-chip", label);
-    c.append(el("span", "bm-book-chip-n", String(n)));
-    c.type = "button";
-    c.dataset["group"] = key;
-    c.style.setProperty("--school", colour);
-    c.addEventListener("click", () => {
-      filter = key;
-      fill();
-    });
-    chips.append(c);
-  };
-  if (groups.length > 1)
-    chip(
-      "all",
-      "All",
-      "#c9a227",
-      groups.reduce((n, g) => n + g.entries.length, 0),
-    );
-  for (const g of groups) chip(g.key, g.label, g.colour, g.entries.length);
-  box.append(chips, grid, detail);
-  fill();
+      } else if (card !== null) {
+        detail.hidden = false;
+        const head = el("div", "bm-spell-head");
+        head.append(
+          iconElement("spell", card.id, { className: "bm-spell-icon" }),
+          el("span", "bm-spell-name", card.name),
+          el(
+            "span",
+            "bm-spell-meta",
+            `${card.school ? SCHOOL_NAMES[card.school] : ""} ${card.tier ?? ""}`,
+          ),
+          el("span", "bm-spell-cost", card.cost),
+        );
+        detail.replaceChildren(
+          head,
+          el("div", "bm-spell-why", card.reason ?? ""),
+        );
+        detail.style.setProperty(
+          "--school",
+          card.school ? SCHOOL_COLOURS[card.school] : "#c9a227",
+        );
+      } else detail.hidden = true;
+    },
+    onPick: (card) => {
+      const t = tiles.get(card.key);
+      if (t && t.entry.status === "ready") onPick(t.entry);
+    },
+  });
 }
 
 export interface CastPanelModel {

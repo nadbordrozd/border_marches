@@ -37,8 +37,9 @@ import { adventureTargetKind, adventureUsable } from "./adventure-targets.ts";
 import type { AdventureAim, AdventureUsable } from "./adventure-targets.ts";
 import { rulesText } from "./keywords.ts";
 import { spellTip } from "./info-tips.ts";
-import { setPinTip } from "./tooltip.ts";
 import { SCHOOL_COLOURS, SCHOOL_NAMES } from "./battle/magic.ts";
+import { medallion, renderSpread } from "./spellbook-spread.ts";
+import type { BookContext, SpreadCard } from "./spellbook-spread.ts";
 
 const SCHOOLS: readonly School[] = [
   "bloom",
@@ -166,6 +167,51 @@ export function shortReason(reason: string): string {
   return "no target";
 }
 
+/** A page's key in the book: its half, id and whether it is a scroll. */
+export function pageKey(p: BookPage): string {
+  return `${p.usable === null ? "combat" : "adventure"}:${p.id}${p.scroll ? ":scroll" : ""}`;
+}
+
+/** Why a combat page is dimmed in the adventure book. */
+export const IN_BATTLE =
+  "A combat spell: cast it in battle (B opens the book there).";
+
+/**
+ * The book's spells (bead bzc.99): the adventure pages, castable or dimmed
+ * with their reason, and the combat pages, dimmed lightly because they
+ * are cast in battle. `pin` gives a page its right-click card.
+ */
+export function bookCards(
+  pages: Record<BookTab, BookPage[]>,
+  pin?: (p: BookPage) => () => string | Node,
+): SpreadCard[] {
+  const card = (p: BookPage, context: BookContext): SpreadCard => {
+    const reason =
+      context === "combat" ? IN_BATTLE : (p.usable?.reason ?? null);
+    return {
+      key: pageKey(p),
+      id: p.id,
+      icon: "spell",
+      name: p.name,
+      school: p.school,
+      context,
+      tier: p.tier,
+      cost: p.cost,
+      note: p.scroll ? "scroll" : null,
+      reason,
+      short: reason === null ? null : shortReason(reason),
+      away: context === "combat",
+      className: `gm-book-cell${reason !== null ? " gm-book-off" : ""}`,
+      ...(p.scroll ? { data: { scroll: "true" } } : {}),
+      ...(pin ? { pin: pin(p) } : {}),
+    };
+  };
+  return [
+    ...pages.adventure.map((p) => card(p, "adventure")),
+    ...pages.battle.map((p) => card(p, "combat")),
+  ];
+}
+
 export interface AdventureBookOptions {
   /**
    * Reading only (bead bzc.82: the hero sheet's book when the hero cannot
@@ -279,7 +325,7 @@ export function openAdventureBook(
 
     /** The detail pane: the whole page, its target, why not, the cast. */
     const detail = el("div.gm-book-detail");
-    const showDetail = (p: BookPage): void => {
+    const showDetail = (p: BookPage, art?: HTMLElement): void => {
       detail.replaceChildren();
       detail.style.setProperty("--school", COLOURS[p.school]);
       detail.dataset["spell"] = p.id;
@@ -297,7 +343,7 @@ export function openAdventureBook(
       detail.append(
         el(
           "div.gm-book-detail-head",
-          iconElement("spell", p.id, { scale: 2 }),
+          art ?? iconElement("spell", p.id, { scale: 2 }),
           el(
             "div",
             el(
@@ -343,134 +389,54 @@ export function openAdventureBook(
       }
     };
 
-    const tabs = el("div.gm-book-tabs");
-    tabs.setAttribute("role", "tablist");
-    const chips = el("div.gm-book-chips");
-    const grid = el("div.gm-book-grid");
-    const main = el("div.gm-book-main", grid, detail);
-    let tab: BookTab = "adventure";
-    let school: School | "all" = "all";
-    let shown: HTMLElement | null = null;
-
-    const cell = (p: BookPage): HTMLElement => {
-      const off = p.usable !== null && p.usable.reason !== null;
-      const b = el("button.gm-book-cell");
-      b.type = "button";
-      b.dataset["spell"] = p.id;
-      if (p.scroll) b.dataset["scroll"] = "true";
-      b.style.setProperty("--school", COLOURS[p.school]);
-      // Greyed, but still selectable: the pane then says why in full.
-      if (off) b.classList.add("gm-book-off");
-      b.setAttribute(
-        "aria-label",
-        `${p.name}${p.scroll ? " (scroll)" : ""}, ${p.cost}${off ? `. ${p.usable?.reason ?? ""}` : ""}`,
-      );
-      const icon = iconElement("spell", p.id, { scale: 2 });
-      // The name is written under it; no browser tooltip on top.
-      icon.removeAttribute("title");
-      b.append(
-        icon,
-        el("span.gm-book-cell-name", p.name),
-        el(
-          `span.gm-book-cell-cost${off ? ".gm-book-cell-why" : ""}`,
-          off ? shortReason(p.usable?.reason ?? "") : p.cost,
-        ),
-      );
-      // Right-click: the spell's card at the hero's Power (UI2-18).
-      setPinTip(b, () => spellTip(p.id, pagePower(p)));
-      const select = (): void => {
-        shown?.classList.remove("gm-book-sel");
-        b.classList.add("gm-book-sel");
-        shown = b;
-        showDetail(p);
-      };
-      b.addEventListener("click", select);
-      // A second click on a castable page with a single action casts it.
-      b.addEventListener("dblclick", () => {
-        select();
+    const pageOf = new Map<string, BookPage>();
+    for (const t of ["adventure", "battle"] as const)
+      for (const p of pages[t]) pageOf.set(pageKey(p), p);
+    const host = el("div.gm-book-spread");
+    const main = el("div.gm-book-main", host, detail);
+    renderSpread(host, {
+      title: "",
+      status: "",
+      cards: bookCards(pages, (p) => () => spellTip(p.id, pagePower(p))),
+      ranks: m.schoolRanks,
+      context: "adventure",
+      mode: "select",
+      tabCount: (t, list) =>
+        t === "adventure" && list.length > 0
+          ? `${list.filter((c) => c.reason === null).length} of ${list.length} ready`
+          : String(list.length),
+      empty: (t, ribbon) =>
+        ribbon !== "all"
+          ? `No ${NAMES[ribbon]} ${t === "combat" ? "combat" : "adventure"} spells in the book.`
+          : t === "adventure"
+            ? "No adventure spells yet: a Magic Guild or a shrine teaches them."
+            : "No combat spells yet: a Magic Guild or a shrine teaches them.",
+      onShow: (card) => {
+        const p = card === null ? undefined : pageOf.get(card.key);
+        if (p && card) showDetail(p, medallion(card, m.schoolRanks));
+        else
+          detail.replaceChildren(
+            el("div.gm-dim", "Choose a spell on the pages."),
+          );
+      },
+      onPick: () => {
+        // A double click casts a page with a single action.
         const only = detail.querySelectorAll<HTMLButtonElement>(
           ".gm-book-cast:not(:disabled)",
         );
         if (only.length === 1 && !detail.querySelector(".gm-book-amount"))
           only[0]?.click();
-      });
-      return b;
-    };
-
-    const fill = (): void => {
-      const list = pages[tab].filter(
-        (p) => school === "all" || p.school === school,
-      );
-      grid.replaceChildren(...list.map(cell));
-      shown = null;
-      const first = grid.firstElementChild;
-      if (first instanceof HTMLElement) first.click();
-      else
-        detail.replaceChildren(
-          el(
-            "div.gm-dim",
-            tab === "adventure"
-              ? "No adventure spells yet: a Magic Guild or a shrine teaches them."
-              : "No battle pages yet: a Magic Guild or a shrine teaches them.",
-          ),
-        );
-      for (const t of tabs.children)
-        t.setAttribute(
-          "aria-selected",
-          String((t as HTMLElement).dataset["tab"] === tab),
-        );
-      // Only the schools this tab has pages of get a chip.
-      const here = SCHOOLS.filter((s) =>
-        pages[tab].some((p) => p.school === s),
-      );
-      chips.replaceChildren();
-      if (here.length > 1)
-        for (const s of ["all" as const, ...here]) {
-          const c = el("button.gm-book-chip", s === "all" ? "All" : NAMES[s]);
-          c.type = "button";
-          c.dataset["school"] = s;
-          if (s !== "all") c.style.setProperty("--school", COLOURS[s]);
-          if (s === school) c.classList.add("gm-on");
-          c.addEventListener("click", () => {
-            school = s;
-            fill();
-          });
-          chips.append(c);
-        }
-    };
-
-    for (const t of ["adventure", "battle"] as const) {
-      const ready = pages[t].filter(castable).length;
-      const b = el(
-        "button.gm-book-tab",
-        t === "adventure" ? "Adventure" : "Battle",
-        el(
-          "span.gm-book-tab-n",
-          t === "adventure" && pages[t].length > 0
-            ? `${ready} of ${pages[t].length} ready`
-            : String(pages[t].length),
-        ),
-      );
-      b.type = "button";
-      b.dataset["tab"] = t;
-      b.setAttribute("role", "tab");
-      b.addEventListener("click", () => {
-        if (tab === t) return;
-        tab = t;
-        school = "all";
-        fill();
-      });
-      tabs.append(b);
-    }
-    body.append(tabs, chips, main);
-    fill();
+      },
+    });
+    body.append(main);
 
     let picked: BookChoice = null;
     void modal<BookChoice>({
       title: `${hero.name}'s spellbook`,
       className: "gm-book-dialog",
       body,
-      buttons: [{ label: "Close", value: null, primary: true }],
+      // Not primary: Enter belongs to the focused spell or button.
+      buttons: [{ label: "Close", value: null }],
       cancel: null,
       onOpen: (buttons) => {
         done = (c) =>
@@ -480,6 +446,8 @@ export function openAdventureBook(
           picked = c;
           buttons[0]?.click();
         });
+        // Keyboard: start on the shown spell (arrows move, Page keys turn).
+        body.querySelector<HTMLElement>(".sb-cell.sb-shown")?.focus();
       },
     }).then(() => resolve(picked));
   });

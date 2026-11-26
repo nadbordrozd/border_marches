@@ -106,9 +106,11 @@ import {
 import type { BookEntry, CastPreview, ConditionOption } from "./magic.ts";
 import { renderBook, renderCastPanel } from "./spellbook.ts";
 import {
+  isAdventureSpell,
   isBattleSpell,
   registerSpells,
   spellDef,
+  spellInfo,
 } from "../../core/magic/index.ts";
 import {
   ANYWHERE,
@@ -2321,6 +2323,30 @@ class BattleScreen {
           active && own.length > 0
             ? { name: creatureName(active.creature, active.count), pages: own }
             : null,
+        // Bead bzc.99: rank gilds a school's frames; the hero's adventure
+        // pages are listed (dimmed) on the book's Adventure tab.
+        ...(magic ? { ranks: magic.schoolRanks } : {}),
+        adventure: magic
+          ? [
+              ...magic.pages.map((id) => [id, false] as const),
+              ...[...new Set(magic.scrolls)].map((id) => [id, true] as const),
+            ]
+              .filter(([id]) => isAdventureSpell(id))
+              .map(([id, scroll]) => {
+                const s = spellInfo(id);
+                return {
+                  id,
+                  name: s.name,
+                  school: s.school,
+                  tier: s.tier,
+                  mana: Math.max(
+                    1,
+                    Math.ceil((s.mana * magic.costPercent) / 100),
+                  ),
+                  scroll,
+                };
+              })
+          : [],
       },
       (entry) => this.startCast(entry),
       () => this.closeBook(),

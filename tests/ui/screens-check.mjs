@@ -847,7 +847,7 @@ async function heroScreens() {
 /** Clicks the adventure book's tab whose label starts with `label`. */
 const openBookTab = (label) =>
   evaluate(`(() => {
-    const t = [...document.querySelectorAll('.gm-book-tab')]
+    const t = [...document.querySelectorAll('.sb-tab, .gm-book-tab')]
       .find((x) => x.textContent.trim().startsWith(${JSON.stringify(label)}));
     if (!t) return false;
     t.click();
@@ -1224,17 +1224,17 @@ async function richScreens() {
   if (wantFamily("spellbook")) {
     await key("m");
     await sleep(500);
-    // The adventure tab (bzc.63 has Adventure and Battle tabs), then battle.
+    // The Adventure tab, then the Combat tab (bzc.99; Battle before).
     await openBookTab("Adventure");
     await park();
     await sleep(300);
     if (want("spellbook")) await shot("spellbook");
     if (want("spellbook-battle")) {
-      if (await openBookTab("Battle")) {
+      if (await openBookTab("Combat")) {
         await park();
         await sleep(300);
         await shot("spellbook-battle");
-      } else skip("spellbook-battle", "no Battle tab in the book");
+      } else skip("spellbook-battle", "no Combat tab in the book");
     }
     await escape();
     await sleep(200);

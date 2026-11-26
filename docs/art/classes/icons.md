@@ -197,6 +197,44 @@ cost; its subject had a sword and a spear tip); `crest-b` is the same list
 without them. The chevron crest was the runner-up (its maroon outline sinks
 on a dark tab). 3 calls, 2 billed, US$0.164.
 
+## Spellbook frames (bead `border_marches-bzc.99`)
+
+The spellbook (Spellbook v3, `src/ui/spellbook-spread.ts`) shows each
+spell on a parchment medallion inside an ornate frame of its school, gilded
+when the hero has rank in that school (the Heroes III mastery frame). The
+frame is its own asset, never part of the spell's take: the same 32 px
+icon sits in it, and the code-drawn frames above stay for every other
+screen.
+
+| File | From | Derivation |
+| --- | --- | --- |
+| `public/assets/frames/spell-<school>.png` | `spell-frames/frames-c#4` Bloom, `#7` Accord, `#12` Clock, `#16` Hush, `#22` Storm | none |
+| `public/assets/frames/spell-<school>-gilded.png` | the same take | recorded pixel edits from `art/review/spell-frames.mjs`: a gold fillet lining the hole (light on the left and bottom) and a gold rim with a dark ink line around the frame |
+
+- 48 x 48, square with ornaments at the corners (a vine with four leaves;
+  riveted blue steel; brass with four cogs; plum with silver crescent moons;
+  red with orange lightning bolts), shown at 2x around the icon at 2x
+  (the icon's top left at 8, 8). The transparent hole is 26 to 29 px; the
+  icons' few pixels of margin overlap the inner bar edge a little, by design.
+- The parchment is painted by CSS under the frame over the hole's bounding
+  box, recorded per school in `src/ui/spell-frames.json` (written by the
+  same script), so the hole stays transparent in the file.
+- The gilded frame differs in outline and size, not only in colour, so a
+  colour-blind player sees it too; on the Clock frame (brass already) the
+  fillet and the ink line carry it.
+- Recipe: `generate-image-v2`, 48 x 48, layers `style-frame` (the style
+  text without the "frame, UI" negatives), `light-bottom-left`,
+  `class-frame-48`; one call returns 25 candidates of a five-thing list.
+  Worked: square frames "with slim bars" and an ornament per corner
+  (`frames-c`). Did not work: round rings (`frames-a`; the square icon's
+  corners cover the ring), thick bars (`frames-b`; a 22 px hole), 52 px
+  thin frames (`frames-d`; reads as a plain box).
+- 4 calls, US$0.33; every take has a verdict with its reason. Review sheets
+  (not in git): `.orchestration/shots/bzc.99/spell-frames-sheet.png`
+  (`node art/review/spell-frames.mjs --sheet <out.png>`: plain and gilded,
+  1x and 3x, light and dark, with a sample icon on the parchment) and
+  `spell-frames-outputs.png` (`studio-art.mjs sheet ... --set spell-frames --outputs`).
+
 ## Acceptance
 
 - Every take reviewed on a 64-candidate grid at 1x and 3x on light and dark

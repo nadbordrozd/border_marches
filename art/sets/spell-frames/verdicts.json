@@ -1,0 +1,457 @@
+{
+  "frames-c#4": {
+    "verdict": "ACCEPTED",
+    "notes": "Bloom: twisted vine with a big leaf at each corner, hole 29 px fits the 32 px icon, reads on light and dark",
+    "at": "2026-11-26T21:08:27.831Z"
+  },
+  "frames-c#7": {
+    "verdict": "ACCEPTED",
+    "notes": "Accord: blue steel bars with silver rivets at the corners and sides, clean outline",
+    "at": "2026-11-26T21:08:27.946Z"
+  },
+  "frames-c#12": {
+    "verdict": "ACCEPTED",
+    "notes": "Clock: brass bars with a cog at each corner, the clearest clockwork take",
+    "at": "2026-11-26T21:08:28.061Z"
+  },
+  "frames-c#16": {
+    "verdict": "ACCEPTED",
+    "notes": "Hush: plum bars with silver crescent moons at the corners, holds on a dark panel through its pale moons",
+    "at": "2026-11-26T21:08:28.181Z"
+  },
+  "frames-c#22": {
+    "verdict": "ACCEPTED",
+    "notes": "Storm: red bars with an orange lightning bolt at each corner, even on all four sides",
+    "at": "2026-11-26T21:08:28.356Z"
+  },
+  "frames-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:39.299Z"
+  },
+  "frames-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:39.626Z"
+  },
+  "frames-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:39.734Z"
+  },
+  "frames-a#3": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:39.985Z"
+  },
+  "frames-a#4": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:40.135Z"
+  },
+  "frames-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:40.350Z"
+  },
+  "frames-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:40.501Z"
+  },
+  "frames-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:40.620Z"
+  },
+  "frames-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:40.777Z"
+  },
+  "frames-a#9": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:40.943Z"
+  },
+  "frames-a#10": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:41.085Z"
+  },
+  "frames-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:41.219Z"
+  },
+  "frames-a#12": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:41.371Z"
+  },
+  "frames-a#13": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:41.523Z"
+  },
+  "frames-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:41.649Z"
+  },
+  "frames-a#15": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:41.767Z"
+  },
+  "frames-a#16": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:41.875Z"
+  },
+  "frames-a#17": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:41.980Z"
+  },
+  "frames-a#18": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:42.095Z"
+  },
+  "frames-a#19": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:42.201Z"
+  },
+  "frames-a#20": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:42.312Z"
+  },
+  "frames-a#21": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:42.421Z"
+  },
+  "frames-a#22": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:42.537Z"
+  },
+  "frames-a#23": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:42.650Z"
+  },
+  "frames-a#24": {
+    "verdict": "REJECTED",
+    "notes": "Round ring: the hole is about 22 px, so the square 32 px icon's corners cover the ring; the square frames fit the icons",
+    "at": "2026-11-26T21:08:42.780Z"
+  },
+  "frames-b#0": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:42.892Z"
+  },
+  "frames-b#1": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:42.999Z"
+  },
+  "frames-b#2": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:43.111Z"
+  },
+  "frames-b#3": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:43.251Z"
+  },
+  "frames-b#4": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:43.359Z"
+  },
+  "frames-b#5": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:43.472Z"
+  },
+  "frames-b#6": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:43.583Z"
+  },
+  "frames-b#7": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:43.712Z"
+  },
+  "frames-b#8": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:43.846Z"
+  },
+  "frames-b#9": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:43.957Z"
+  },
+  "frames-b#10": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:44.091Z"
+  },
+  "frames-b#11": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:44.215Z"
+  },
+  "frames-b#12": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:44.321Z"
+  },
+  "frames-b#13": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:44.426Z"
+  },
+  "frames-b#14": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:44.534Z"
+  },
+  "frames-b#15": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:44.642Z"
+  },
+  "frames-b#16": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:44.745Z"
+  },
+  "frames-b#17": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:44.851Z"
+  },
+  "frames-b#18": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:44.958Z"
+  },
+  "frames-b#19": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:45.065Z"
+  },
+  "frames-b#20": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:45.173Z"
+  },
+  "frames-b#21": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:45.277Z"
+  },
+  "frames-b#22": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:45.378Z"
+  },
+  "frames-b#23": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:45.478Z"
+  },
+  "frames-b#24": {
+    "verdict": "REJECTED",
+    "notes": "Bars too thick: the hole is 21-25 px and a 32 px icon covers the frame; frames-c is the slim version",
+    "at": "2026-11-26T21:08:45.583Z"
+  },
+  "frames-c#0": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:45.688Z"
+  },
+  "frames-c#1": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:45.898Z"
+  },
+  "frames-c#2": {
+    "verdict": "REJECTED",
+    "notes": "Bloom without corner leaves: a plain wiggly vine, the school is less clear",
+    "at": "2026-11-26T21:08:46.005Z"
+  },
+  "frames-c#3": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:46.118Z"
+  },
+  "frames-c#5": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:46.235Z"
+  },
+  "frames-c#6": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:46.377Z"
+  },
+  "frames-c#8": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:46.482Z"
+  },
+  "frames-c#9": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:46.585Z"
+  },
+  "frames-c#10": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:46.695Z"
+  },
+  "frames-c#11": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:46.800Z"
+  },
+  "frames-c#13": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:46.961Z"
+  },
+  "frames-c#14": {
+    "verdict": "REJECTED",
+    "notes": "Clock without cogs: a plain gold box, reads as a generic frame",
+    "at": "2026-11-26T21:08:47.067Z"
+  },
+  "frames-c#15": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:47.197Z"
+  },
+  "frames-c#17": {
+    "verdict": "REJECTED",
+    "notes": "Hush with stray pale pixels on the left bar",
+    "at": "2026-11-26T21:08:47.370Z"
+  },
+  "frames-c#18": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:47.494Z"
+  },
+  "frames-c#19": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:47.617Z"
+  },
+  "frames-c#20": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:47.751Z"
+  },
+  "frames-c#21": {
+    "verdict": "REJECTED",
+    "notes": "Storm with mottled bars: noisy at 1x",
+    "at": "2026-11-26T21:08:47.864Z"
+  },
+  "frames-c#23": {
+    "verdict": "REJECTED",
+    "notes": "Spare: the accepted take of this school is clearer",
+    "at": "2026-11-26T21:08:47.984Z"
+  },
+  "frames-c#24": {
+    "verdict": "REJECTED",
+    "notes": "Storm with a filled white centre: the hole is not transparent",
+    "at": "2026-11-26T21:08:48.088Z"
+  },
+  "frames-d#0": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:48.203Z"
+  },
+  "frames-d#1": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:48.326Z"
+  },
+  "frames-d#2": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:48.449Z"
+  },
+  "frames-d#3": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:48.569Z"
+  },
+  "frames-d#4": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:48.705Z"
+  },
+  "frames-d#5": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:48.816Z"
+  },
+  "frames-d#6": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:48.962Z"
+  },
+  "frames-d#7": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:49.091Z"
+  },
+  "frames-d#8": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:49.261Z"
+  },
+  "frames-d#9": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:49.382Z"
+  },
+  "frames-d#10": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:49.512Z"
+  },
+  "frames-d#11": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:49.616Z"
+  },
+  "frames-d#12": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:49.727Z"
+  },
+  "frames-d#13": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:49.835Z"
+  },
+  "frames-d#14": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:49.951Z"
+  },
+  "frames-d#15": {
+    "verdict": "REJECTED",
+    "notes": "52 px with thin plain bars and small corner ornaments: reads as a plain box; frames-c is richer at the 48 px cell",
+    "at": "2026-11-26T21:08:50.055Z"
+  }
+}
