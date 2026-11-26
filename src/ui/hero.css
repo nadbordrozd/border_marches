@@ -23,10 +23,24 @@
   width: 760px;
 }
 
+/* Bead bzc.82 (Heroes II hero screen): the top band holds who the hero
+   is, the four primary stats as big icons with their numbers and the
+   other numbers as small icons; skills, feats, doll, backpack and scroll
+   case in three columns under it; the army band at the bottom. */
+.hs-top {
+  display: grid;
+  grid-template-columns: 290px auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--gm-edge);
+}
+
 .hs-columns {
   display: grid;
-  grid-template-columns: 232px 212px minmax(0, 1fr) 314px;
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) 212px 313px;
+  gap: 20px;
   align-items: start;
 }
 
@@ -39,25 +53,31 @@
   border-bottom: 1px solid var(--gm-edge);
 }
 
-.hs-col h3:first-child {
-  margin-top: 0;
+.hs-col > h3:first-child {
+  margin-top: 6px;
 }
 
 .hs-id {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
-  margin-bottom: 8px;
+  min-width: 0;
+}
+
+.hs-id-text {
+  min-width: 0;
 }
 
 .hs-portrait {
+  flex: none;
   border: 2px solid var(--gm-edge);
   background: var(--gm-wood-dark);
+  image-rendering: pixelated;
 }
 
 .hs-name {
   font:
-    bold 18px Georgia,
+    bold 20px/1.15 Georgia,
     serif;
   color: var(--gm-gold);
 }
@@ -68,88 +88,275 @@
   font-size: 13px;
 }
 
-.hs-meter {
-  margin-bottom: 8px;
+.hs-class {
+  margin-top: 2px;
+  font-size: 14px;
 }
 
-.hs-stats {
+.hs-pending,
+.hs-tip-pending {
+  margin-top: 4px;
+  color: var(--gm-gold);
+  font-size: 13px;
+}
+
+/* The four primary stats: caption, the icon at 2x, the number. */
+.hs-primaries {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin-bottom: 8px;
+  grid-template-columns: repeat(4, 92px);
+  gap: 8px;
 }
 
-.hs-stat {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  padding: 6px 8px;
-  background: var(--gm-wood-dark);
+.hs-pstat,
+.hs-mini {
+  background:
+    radial-gradient(ellipse at 50% 40%, rgb(255 214 92 / 7%), transparent 70%),
+    var(--gm-wood-dark);
   border: 1px solid var(--gm-edge);
   cursor: help;
+  transition: border-color 0.12s;
 }
 
-.hs-stat:hover,
-.hs-number:hover {
+.hs-pstat:hover,
+.hs-pstat:focus-visible,
+.hs-mini:hover,
+.hs-mini:focus-visible {
   border-color: var(--gm-gold-dim);
+  outline: none;
 }
 
-.hs-stat-name {
-  flex: 1;
-  color: var(--gm-dim);
-  font-size: 13px;
+.hs-pstat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  padding: 5px 4px 6px;
 }
 
-.hs-stat-value {
+.hs-pstat-name {
   font:
-    bold 20px Georgia,
+    bold 11px Georgia,
+    serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gm-gold-dim);
+}
+
+.hs-pstat-value {
+  font:
+    bold 24px/1 Georgia,
     serif;
   color: var(--gm-text);
+  font-variant-numeric: tabular-nums;
 }
 
-.hs-stat-bonus {
-  color: var(--gm-green);
-  font-size: 12px;
+.hs-pstat > .gm-icon,
+.hs-mini > .gm-icon {
+  display: block;
+  line-height: 0;
 }
 
-/* Mana and Movement on their own rows; Sight, Morale and Luck share one. */
-.hs-numbers {
+/* A number raised (green) or lowered (red) by skills and items. */
+.hs-pstat-value.hs-good,
+.hs-mini-value.hs-good {
+  color: #9be07a;
+}
+
+.hs-pstat-value.hs-bad,
+.hs-mini-value.hs-bad {
+  color: #ff8a73;
+}
+
+/* The other numbers: a 32 px icon, the number beside it, a bar under it
+   for mana, movement and experience. */
+.hs-minis {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 2px 4px;
-  margin-bottom: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px 6px;
 }
 
-.hs-number {
-  grid-column: span 2;
+.hs-mini {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+  height: 40px;
+  padding: 0 8px 0 3px;
+}
+
+.hs-mini > :first-child {
+  flex: none;
+}
+
+.hs-mini-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.hs-mini-value {
+  overflow: hidden;
+  font:
+    bold 15px/18px Georgia,
+    serif;
+  color: var(--gm-text);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+
+.hs-bar {
+  display: block;
+  height: 5px;
+  margin-top: 2px;
+  overflow: hidden;
+  background: rgb(0 0 0 / 50%);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 6%);
+}
+
+.hs-bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--gm-gold);
+}
+
+.hs-bar-mana .hs-bar-fill {
+  background: #4f9be8;
+}
+
+.hs-bar-movement .hs-bar-fill {
+  background: #6cc24a;
+}
+
+.hs-bar-experience .hs-bar-fill {
+  background: #e8b923;
+}
+
+/* A specialty's picture: a creature portrait or resource kept at its own
+   size, centred on the 32 px icon spot. */
+.hs-mini-portrait,
+.hs-mini-res {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  overflow: visible;
+}
+
+.hs-mini-portrait-img {
+  image-rendering: pixelated;
+}
+
+/* The schools the hero has a rank in, beside the spellbook button. */
+.hs-ranks {
+  display: flex;
   gap: 6px;
 }
 
-.hs-number:nth-child(n + 3) {
-  padding: 2px 4px;
-}
-
-.hs-number:nth-child(-n + 2) {
-  grid-column: span 6;
-}
-
-.hs-number {
-  display: flex;
-  justify-content: space-between;
-  padding: 2px 6px;
-  border: 1px solid transparent;
+.hs-rank {
+  position: relative;
+  line-height: 0;
   cursor: help;
-  font-size: 13px;
 }
 
-.hs-note {
-  margin: 6px 0;
-  font-size: 13px;
-  line-height: 1.35;
+.hs-rank-n {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  min-width: 13px;
+  padding: 0 2px;
+  font: bold 11px/13px sans-serif;
+  text-align: center;
+  color: #fff8e0;
+  background: rgb(20 14 8 / 90%);
+  border: 1px solid var(--gm-gold-dim);
+  border-radius: 3px;
 }
 
-.hs-pending {
+.hs-left .hs-tiles {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+/* The spellbook button (bead bzc.82): the spells live in the book; the
+   Unspent Page's chooser, when held, beside it. */
+.hs-book-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.hs-book-row .hs-unspent-row {
+  margin-top: 0;
+}
+
+.hs-book-btn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 4px 14px 4px 6px;
+  font: inherit;
+  color: var(--gm-text);
+  text-align: left;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgb(168 85 247 / 16%), transparent 70%),
+    var(--gm-wood-dark);
+  border: 1px solid var(--gm-gold-dim);
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    border-color 0.12s,
+    transform 0.12s;
+}
+
+.hs-book-btn:hover,
+.hs-book-btn:focus-visible {
+  border-color: var(--gm-gold);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.hs-book-btn > .gm-icon {
+  line-height: 0;
+}
+
+.hs-book-text {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2px 10px;
+  align-items: center;
+}
+
+.hs-book-title {
+  font:
+    bold 17px Georgia,
+    serif;
   color: var(--gm-gold);
+}
+
+.hs-book-n {
+  grid-column: 1;
+  font-size: 13px;
+  color: var(--gm-dim);
+}
+
+.hs-book-kbd {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.hs-icon-head {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.hs-icon-head > .gm-icon {
+  line-height: 0;
 }
 
 /* Paper doll: three columns, four rows of 60 px slots (bead bzc.45). */
@@ -829,23 +1036,7 @@
   }
 }
 
-/* Bead bzc.25: the book as spell icons with hover cards. */
-.hs-pages {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.hs-pages .gm-icon {
-  cursor: help;
-}
-
-/* Bead bzc.34: the page The Unspent Page keeps, and its chooser. */
-.hs-pages .hs-unspent {
-  outline: 2px solid var(--gm-gold);
-  outline-offset: 1px;
-}
-
+/* Bead bzc.34: which page The Unspent Page keeps (beside the book). */
 .hs-unspent-row {
   display: flex;
   align-items: center;
@@ -860,16 +1051,12 @@
   max-width: 150px;
 }
 
-.hs-middle .hs-scrolls {
-  grid-template-columns: repeat(4, 48px);
-}
-
 .hs-far .hs-grid {
   grid-template-columns: repeat(6, 48px);
 }
 
 .hs-details {
-  /* Under the book in the far column (bead bzc.45). */
+  /* Under the scroll case in the far column (beads bzc.45, bzc.82). */
   min-height: 32px;
   margin-top: 10px;
 }

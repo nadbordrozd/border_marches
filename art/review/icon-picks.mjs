@@ -477,6 +477,30 @@ export const PICKS = {
       },
       notes: Object.fromEntries([5, 13, 37, 45].map((n) => [n, "watchtower stands on a grass patch (ground under the subject)"])),
     },
+    // Bead border_marches-bzc.82: the hero screen's other stats.
+    "stats-b": {
+      picks: {
+        "stat:mana": [0, "tall blue crystal with a white shine, apart from Lore's blue book"],
+        "stat:movement": [25, "brown boot with a white wing clear of the heel"],
+        "stat:experience": [42, "gold star with a shine, warmer than the teal feat fallback star"],
+        "stat:level": [27, "full laurel wreath with a red ribbon"],
+        "stat:sight": [28, "brass spyglass with a bright lens"],
+        "stat:morale": [29, "bright red heart with a gold crown, readable on dark"],
+        "stat:luck": [30, "gold horseshoe, open end up"],
+        "stat:command": [36, "red marshal's baton with gold ends"],
+        "stat:spellbook": [44, "purple spellbook, star on the cover, gold clasp"],
+        "stat:scroll-case": [47, "leather scroll tube with a strap and a scroll in it"],
+      },
+      notes: {
+        ...Object.fromEntries([18, 49, 58].map((n) => [n, "cyan crystal cluster or slab: reads as ice, not mana"])),
+        ...Object.fromEntries([6, 21, 33, 45].map((n) => [n, "dark crimson heart sinks on a dark panel"])),
+        54: "book stood on its spine: reads as a box, not a spellbook",
+        53: "book lying open at an angle: the cover star is small at 1x",
+        ...Object.fromEntries([55, 62].map((n) => [n, "upright tube reads as a bottle"])),
+        59: "laurel with no ribbon and a gap: reads as two leaves",
+        34: "stray sparkle pixels beside the star",
+      },
+    },
   },
 };
 

@@ -95,7 +95,8 @@ addId("condition", "demo-guard", "Guarded", "accord", { school: "accord", polari
 addId("ground", "sweets", "sweets", null, { school: null, class: "remains" });
 addId("artifact", "keystone", "The Keystone", "marvel", { grade: "marvel", slot: null, relic: true });
 
-for (const s of ["Attack", "Defense", "Power", "Lore"]) add("stat", s, null);
+// Bead bzc.82: the hero screen's other numbers, each an icon (HoMM2 style).
+for (const s of ["Attack", "Defense", "Power", "Lore", "Mana", "Movement", "Experience", "Level", "Sight", "Morale", "Luck", "Command", "Spellbook", "Scroll case"]) add("stat", s, null);
 for (const s of ["Bloom", "Accord", "Clock", "Hush", "Storm"]) add("school", s, school(s));
 
 const counts = Object.fromEntries(Object.entries(catalogue).map(([k, v]) => [k, Object.keys(v).length]));

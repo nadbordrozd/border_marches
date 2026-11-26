@@ -61,7 +61,7 @@ import { PALETTES } from "../render/fx/pixels.ts";
 import { onMotionChange, reducedMotion } from "./motion.ts";
 import { bump, countUp, dayBanner, floatText, flyTo } from "./anim.ts";
 import { openBattleScreen } from "./battle/screen.ts";
-import { openAdventureBook } from "./spellbook.ts";
+import { openAdventureBook, type BookChoice } from "./spellbook.ts";
 import { aimHint } from "./adventure-targets.ts";
 import type { AdventureAim } from "./adventure-targets.ts";
 import { castAdventureSpell, registerSpells } from "../core/magic/index.ts";
@@ -1878,15 +1878,29 @@ class GameScreen {
   private readonly heroHost: HeroScreenHost = {
     state: () => this.state,
     run: (result) => this.run(result) !== null,
+    // The sheet's spellbook casts as the map's does: the human's own hero
+    // on the human's turn (bead bzc.82).
+    canCast: (heroId) =>
+      this.state.currentPlayer === this.human &&
+      this.state.heroes.some(
+        (h) => h.id === heroId && h.owner === this.human && h.alive,
+      ),
   };
 
-  /** The hero sheet: stats, skills, feats, worn items, backpack. */
+  /**
+   * The hero sheet: stats, skills, feats, worn items, backpack. A spell
+   * picked in its spellbook closes it and is cast or aimed for that hero.
+   */
   private async heroScreen(heroId?: string): Promise<void> {
     if (this.inputBlocked()) return;
     const id = heroId ?? this.hero()?.id;
     if (id === undefined) return;
-    await openHeroScreen(this.heroHost, id);
+    const choice = await openHeroScreen(this.heroHost, id);
     this.refresh();
+    if (choice === null) return;
+    this.selectHero(id);
+    const hero = this.hero();
+    if (hero?.id === id) this.useBookChoice(hero, choice);
   }
 
   /** Settles a pending battle that cannot be applied as void (an error). */
@@ -2185,6 +2199,14 @@ class GameScreen {
     const choice = await openAdventureBook(this.state, hero);
     this.screenOpen = false;
     if (choice === null) return;
+    this.useBookChoice(hero, choice);
+  }
+
+  /** Casts a spell picked in a spellbook, or aims it on the map. */
+  private useBookChoice(
+    hero: HeroState,
+    choice: NonNullable<BookChoice>,
+  ): void {
     if (choice.kind === "aim") {
       this.aiming = {
         spell: choice.spell,

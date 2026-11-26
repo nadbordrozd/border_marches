@@ -47,7 +47,7 @@ describe("content icons", () => {
       skill: 24,
       feat: 28,
       vow: 12,
-      stat: 4,
+      stat: 14,
       school: 5,
     });
   });

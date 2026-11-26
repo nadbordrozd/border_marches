@@ -577,6 +577,25 @@ const RECIPES = [
     ],
     { notes: "Bead border_marches-9is: the Keystone relic (CONTENT_MAP_OBJECTS 4) had the artifact fallback chest. Two wordings of the same relic." },
   ],
+  // ------------------- bead border_marches-bzc.82: the hero screen's other stats
+  [
+    "icons-heroes",
+    "stats-b",
+    17409,
+    [
+      ["stat:mana", "a tall bright blue magic crystal with a white shine"],
+      ["stat:movement", "a brown leather boot with a small white wing on its heel"],
+      ["stat:experience", "a big shiny gold five-pointed star"],
+      ["stat:level", "a green laurel wreath tied with a red ribbon"],
+      ["stat:sight", "a brass spyglass telescope"],
+      ["stat:morale", "a big red heart with a small gold crown on top"],
+      ["stat:luck", "a golden horseshoe with its open end up"],
+      ["stat:command", "a short red marshal's baton with gold ends"],
+      ["stat:spellbook", "a big thick purple spellbook with a gold star on its cover and a gold clasp"],
+      ["stat:scroll-case", "a brown leather scroll tube with a strap and a rolled scroll sticking out of its top"],
+    ],
+    { notes: "Bead border_marches-bzc.82: the hero screen shows every stat as an icon with its number (HoMM2 style): Mana, Movement, Experience, Level, Sight, Morale, Luck, Command, the spellbook button and the scroll case, beside the bzc.17 Attack, Defense, Power and Lore." },
+  ],
 ];
 
 const byId = new Map();

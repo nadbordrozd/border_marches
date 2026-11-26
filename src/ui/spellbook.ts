@@ -166,11 +166,22 @@ export function shortReason(reason: string): string {
   return "no target";
 }
 
+export interface AdventureBookOptions {
+  /**
+   * Reading only (bead bzc.82: the hero sheet's book when the hero cannot
+   * cast now, such as another player's turn): the cast buttons are off and
+   * the pane says where spells are cast.
+   */
+  readonly readOnly?: boolean;
+}
+
 /** Opens the book; resolves with the chosen cast, or null. */
 export function openAdventureBook(
   state: GameState,
   hero: HeroState,
+  options: AdventureBookOptions = {},
 ): Promise<BookChoice> {
+  const readOnly = options.readOnly === true;
   const m = heroMagic(hero);
   const cast = storeOf(state, hero.id).castToday;
   const pages = bookPages(state, hero);
@@ -191,7 +202,15 @@ export function openAdventureBook(
     const actions = (s: AdventureSpellDef, p: BookPage): HTMLElement => {
       const box = el("div.gm-book-actions");
       const usable = p.usable ?? { reason: "", aims: null };
-      const off = usable.reason !== null;
+      const off = usable.reason !== null || readOnly;
+      if (readOnly) {
+        box.append(
+          el(
+            "div.gm-book-how.gm-book-readonly",
+            "Read only here: cast from the map on your turn (M).",
+          ),
+        );
+      }
       const scroll = p.scroll;
       const pick = (target: AdventureTarget, label = "Cast"): void => {
         const b = el("button.gm-btn.gm-primary.gm-book-cast", label);

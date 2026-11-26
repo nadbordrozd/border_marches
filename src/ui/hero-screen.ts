@@ -1,9 +1,10 @@
 /**
- * Hero screens (RULES_V2 3 and 4): the hero sheet (stats with their
- * sources, skills, feats and vows, the paper doll of eleven worn slots,
- * the backpack and the scroll case; click or drag to equip; the army
- * travelling with the hero, rearranged by clicks) and the level-up
- * draft dialog; the meeting screen (meeting.ts) reuses its pieces. Icons are
+ * Hero screens (RULES_V2 3 and 4): the hero sheet (bead bzc.82, Heroes II
+ * style: every number an icon with its sources in the hover card, skills
+ * and feats as icon rows, the paper doll of eleven worn slots with the
+ * spellbook button under it, the backpack and the scroll case; click or
+ * drag to equip; the army travelling with the hero, rearranged by clicks)
+ * and the level-up draft dialog; the meeting screen (meeting.ts) reuses its pieces. Icons are
  * content icons (src/ui/icons.ts), with initials on a grade colour as the
  * fallback for content without an icon.
  */
@@ -16,6 +17,7 @@ import {
   chooseUnspentPage,
   commandStrength,
   destroyArtifact,
+  effectsOf,
   equip,
   heroSpecialty,
   heroStats,
@@ -25,6 +27,7 @@ import {
   movementBreakdown,
   patternStat,
   pendingLevel,
+  SCHOOL_RANK_POWER,
   schoolRank,
   scrollCaseSize,
   sightRadius,
@@ -36,6 +39,7 @@ import {
   unspentPageOf,
   useConsumable,
   xpForLevel,
+  xpPercent,
   type CommandResult,
   type GameState,
   type HeroState,
@@ -54,8 +58,12 @@ import {
   type ArtifactDef,
   type SlotKind,
 } from "../data/artifacts.ts";
-import { namedHeroPortrait, unitArt } from "../assets/unit-art.ts";
-import { COMMANDS, getHeroClass } from "../data/classes.ts";
+import {
+  namedHeroPortrait,
+  unitArt,
+  unitPortrait,
+} from "../assets/unit-art.ts";
+import { COMMANDS, getHeroClass, type Specialty } from "../data/classes.ts";
 import {
   PRIMARY_STATS,
   SCHOOLS,
@@ -64,13 +72,19 @@ import {
   type PrimaryStat,
 } from "../data/effects.ts";
 import { findFeat } from "../data/feats.ts";
+import {
+  NATIVE_MOVE_COST,
+  ROAD_MOVE_COST,
+  TERRAIN_MOVE_COST,
+} from "../data/movement.ts";
 import { MAX_SKILLS, findSkill } from "../data/skills.ts";
 import { iconFor, type IconKind } from "../assets/icons.ts";
 import { isSpell, spellInfo } from "../core/magic/catalog.ts";
-import { button, el, img, modal } from "./dom.ts";
+import { button, el, img, kbd, modal, resourceIcon } from "./dom.ts";
 import { iconElement } from "./icons.ts";
 import { armyValue } from "./hints.ts";
-import { creatureTip, spellTip } from "./info-tips.ts";
+import { creatureTip } from "./info-tips.ts";
+import { openAdventureBook, type BookChoice } from "./spellbook.ts";
 import { setTip, tipCard, titleCard, type TipBody } from "./tooltip.ts";
 import "./hero.css";
 
@@ -79,13 +93,18 @@ export interface HeroScreenHost {
   state(): GameState;
   /** Applies a command; false (with a message shown) when it failed. */
   run(result: CommandResult): boolean;
+  /**
+   * Whether the hero may cast adventure spells from the sheet's spellbook
+   * now (the owner's turn on the map). Without it the book is read only.
+   */
+  canCast?(heroId: string): boolean;
 }
 
 const STAT_TEXT: Readonly<Record<PrimaryStat, string>> = {
   attack: "Added to the Attack of every stack in the hero's army.",
   defense: "Added to the Defense of every stack in the hero's army.",
   power: "The P in every spell: bigger Harm, heals and summons.",
-  lore: "Maximum mana 10 x Lore; daily return 1 + Lore / 3.",
+  lore: "Maximum mana is 10 per point; each day 1 + a third of it (rounded down) returns.",
 };
 
 /** Two letters for a placeholder icon. */
@@ -302,13 +321,6 @@ export function featTiles(h: HeroState): HTMLElement {
   return box;
 }
 
-function statTooltip(hero: HeroState, stat: PrimaryStat): string {
-  const parts = statBreakdown(hero, stat)
-    .map((c) => `${c.label} ${c.amount >= 0 ? "+" : ""}${c.amount}`)
-    .join("\n");
-  return `${STAT_NAMES[stat]}: ${STAT_TEXT[stat]}\n${parts}`;
-}
-
 /** Backpack entries grouped as slots: consumables stack three a slot. */
 export function backpackSlots(
   hero: HeroState,
@@ -389,32 +401,484 @@ const SLOT_ITEMS: Readonly<Record<SlotKind, string>> = {
   feet: "boots",
   pocket: "a pocket item",
 };
-
 type Selection =
   | { place: "worn"; index: number }
   | { place: "backpack"; index: number }
   | null;
 
+// ------------------------------------------------------------------ numbers
+
+/** A stat icon (public/assets/icons/stats, bead bzc.82) with no title. */
+function statIcon(id: string, scale = 1): HTMLElement {
+  const icon = iconElement("stat", id, { scale });
+  icon.removeAttribute("title");
+  return icon;
+}
+
+/** A line of a stat card that is a source, not rules (no keyword boxes). */
+function sourceLine(text: string): HTMLElement {
+  const line = el("div.gm-tip-line.gm-tip-dim", text);
+  line.dataset["kwSkip"] = "";
+  return line;
+}
+
+function signed(n: number): string {
+  return n > 0 ? `+${n}` : String(n);
+}
+
 /**
- * The hero sheet. Click an item to select it (its details and actions
- * show), double-click to wear, take off or use it, or drag it between the
- * backpack and the paper doll. The army band below shows every slot as the
- * stacks stand in battle; on the owner's turn they rearrange like the town
- * screen's.
+ * One number of the hero sheet (bead bzc.82, Heroes II style): the icon,
+ * the number under or beside it, a bar for the numbers that run out or
+ * fill up, and the explanation in its hover card (right-click pins it).
+ */
+export interface StatTileView {
+  /** The stat icon's id; a specialty brings its own picture instead. */
+  readonly icon: string;
+  readonly label: string;
+  readonly value: string;
+  /** 0..100: a bar under the value (mana, movement, experience). */
+  readonly pct?: number;
+  readonly tone?: "good" | "bad";
+  readonly card: () => TipBody;
+  /** A picture to show instead of the stat icon (the specialty's). */
+  readonly picture?: () => HTMLElement;
+}
+
+/** The four primary stats with the sources that make them up. */
+export function primaryStatViews(h: HeroState): StatTileView[] {
+  const stats = heroStats(h);
+  return PRIMARY_STATS.map((stat) => {
+    return {
+      icon: stat,
+      label: STAT_NAMES[stat],
+      value: String(stats[stat]),
+      card: () =>
+        tipCard(
+          `${STAT_NAMES[stat]} ${stats[stat]}`,
+          [
+            STAT_TEXT[stat],
+            ...statBreakdown(h, stat).map((c) =>
+              sourceLine(
+                c.label === "Base"
+                  ? `Base ${c.amount}`
+                  : `${c.label} ${signed(c.amount)}`,
+              ),
+            ),
+          ],
+          { icon: statIcon(stat), subtitle: "Primary stat" },
+        ),
+    };
+  });
+}
+
+/** Grass steps a number of movement points buys. */
+export function moveSteps(points: number): number {
+  return Math.max(0, Math.floor(points / NATIVE_MOVE_COST));
+}
+
+/** What a step costs where, from the movement table (data/movement.ts). */
+function stepCosts(): string {
+  const by = new Map<number, string[]>();
+  for (const [terrain, cost] of Object.entries(TERRAIN_MOVE_COST)) {
+    if (cost === null) continue;
+    by.set(cost, [...(by.get(cost) ?? []), terrain]);
+  }
+  const parts = [...by.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([cost, names]) => `${cost} on ${names.join(" and ")}`);
+  return `A step costs ${ROAD_MOVE_COST} on a road, ${parts.join(", ")}; a diagonal step 1.4 times as much.`;
+}
+
+/** Sources of a summed hero effect (morale, luck, sight) as card lines. */
+function effectLines(
+  h: HeroState,
+  kind: "morale" | "luck" | "sight",
+): HTMLElement[] {
+  return effectsOf(h, kind).map((e) =>
+    sourceLine(`${e.source.label} ${signed(e.effect.amount)}`),
+  );
+}
+
+/** The specialty's picture: its spell, skill, creature, resource or Command. */
+function specialtyPicture(spec: Specialty): HTMLElement {
+  switch (spec.kind) {
+    case "spell":
+      return iconElement("spell", spec.spell, { framed: false });
+    case "skill":
+      return iconElement("skill", spec.skill, { framed: false });
+    case "creature":
+      return el(
+        "span.hs-mini-portrait",
+        img(unitPortrait(spec.creature).key, "hs-mini-portrait-img"),
+      );
+    case "resource":
+      return el(
+        "span.hs-mini-res",
+        resourceIcon(
+          spec.resource === "wood-ore" ? "wood" : spec.resource,
+          "hs-mini-res-img",
+        ),
+      );
+    case "command":
+      return statIcon("command");
+  }
+}
+
+/** The specialty in two words, for under its picture. */
+function specialtyWord(spec: Specialty): string {
+  switch (spec.kind) {
+    case "spell":
+      return isSpell(spec.spell) ? spellInfo(spec.spell).name : spec.spell;
+    case "skill":
+      return findSkill(spec.skill)?.name ?? spec.skill;
+    case "creature":
+      return isCreatureId(spec.creature)
+        ? getCreature(spec.creature).plural
+        : spec.creature;
+    case "resource":
+      return spec.resource === "gold"
+        ? "+250 gold"
+        : spec.resource === "wood-ore"
+          ? "Wood, ore"
+          : "Essence";
+    case "command":
+      return "C +1";
+  }
+}
+
+/**
+ * The other numbers (bead bzc.82): level, experience, mana, movement,
+ * morale, luck, sight, the Command and the specialty, each an icon with its
+ * number; what it means and where it comes from in the hover card.
+ */
+export function otherStatViews(h: HeroState): StatTileView[] {
+  const next = xpForLevel(h.level + 1);
+  const prev = xpForLevel(h.level);
+  const xpPct = Math.max(
+    0,
+    Math.min(100, ((h.xp - prev) / Math.max(1, next - prev)) * 100),
+  );
+  const max = maxMana(h);
+  const move = movementBreakdown(h);
+  const morale = armyMorale(h);
+  const luck = armyLuck(h);
+  const cls = getHeroClass(h.heroClass);
+  const command = COMMANDS[cls.command];
+  const spec = heroSpecialty(h);
+  const tone = (n: number): Pick<StatTileView, "tone"> =>
+    n > 0 ? { tone: "good" } : n < 0 ? { tone: "bad" } : {};
+  const pct = (a: number, b: number): number =>
+    b <= 0 ? 0 : Math.max(0, Math.min(100, (a / b) * 100));
+  const views: StatTileView[] = [
+    {
+      icon: "level",
+      label: "Level",
+      value: String(h.level),
+      card: () =>
+        tipCard(
+          `Level ${h.level} ${cls.name}`,
+          [
+            "Each level: +1 to a primary stat from the class's pattern and a choice of skills. Every third level: a feat.",
+            h.pendingLevelUps > 0
+              ? el(
+                  "div.gm-tip-line.hs-tip-pending",
+                  `Level ${pendingLevel(h)}: a ${h.levelUpStep === "feat" ? "feat" : "skill"} choice is waiting.`,
+                )
+              : null,
+          ],
+          { icon: statIcon("level"), subtitle: "Hero level" },
+        ),
+    },
+    {
+      icon: "experience",
+      label: "Experience",
+      value: String(h.xp),
+      pct: xpPct,
+      card: () => {
+        const bonus = xpPercent(h);
+        return tipCard(
+          `Experience ${h.xp}`,
+          [
+            `Level ${h.level + 1} at ${next}: ${Math.max(0, next - h.xp)} to go.`,
+            "Won battles and some sites give experience.",
+            bonus === 0
+              ? null
+              : sourceLine(
+                  `${signed(bonus)}% experience from skills and items.`,
+                ),
+          ],
+          { icon: statIcon("experience"), subtitle: "Toward the next level" },
+        );
+      },
+    },
+    {
+      icon: "mana",
+      label: "Mana",
+      value: `${h.mana} / ${max}`,
+      pct: pct(h.mana, max),
+      card: () =>
+        tipCard(
+          `Mana ${h.mana} / ${max}`,
+          [
+            "Spent to cast pages, on the map and in battle.",
+            `The maximum is 10 per point of Lore, plus modifiers; ${manaRegen(h)} returns each day.`,
+          ],
+          { icon: statIcon("mana"), subtitle: "Spell points" },
+        ),
+    },
+    {
+      icon: "movement",
+      label: "Movement",
+      value: `${moveSteps(h.mp)} / ${moveSteps(h.maxMp)}`,
+      pct: pct(h.mp, h.maxMp),
+      card: () =>
+        tipCard(
+          `Movement: ${moveSteps(h.mp)} of ${moveSteps(h.maxMp)} steps`,
+          [
+            `${h.mp} of ${h.maxMp} movement points left today: about ${moveSteps(h.mp)} steps on grass.`,
+            stepCosts(),
+            sourceLine(
+              `A day's movement: ${move.base} from the slowest creature's Speed` +
+                (move.percent === 0 ? "" : `, ${signed(move.percent)}%`) +
+                (move.flat === 0 ? "" : `, ${signed(move.flat)}`) +
+                (move.debt === 0 ? "" : `, ${-move.debt} owed`) +
+                `; tomorrow ${move.total} (${moveSteps(move.total)} steps).`,
+            ),
+          ],
+          { icon: statIcon("movement"), subtitle: "On the map, today" },
+        ),
+    },
+    {
+      icon: "morale",
+      label: "Morale",
+      value: signed(morale),
+      ...tone(morale),
+      card: () =>
+        tipCard(
+          `Morale ${signed(morale)}`,
+          [
+            "From -3 to +3. At the start of a battle, +n makes the n strongest stacks Heartened; -n makes them Shaken.",
+            ...effectLines(h, "morale"),
+          ],
+          { icon: statIcon("morale"), subtitle: "Army, at battle start" },
+        ),
+    },
+    {
+      icon: "luck",
+      label: "Luck",
+      value: signed(luck),
+      ...tone(luck),
+      card: () =>
+        tipCard(
+          `Luck ${signed(luck)}`,
+          [
+            "From -3 to +3. At the start of a battle, +n makes the n strongest stacks Lucky; -n makes them Jinxed.",
+            ...effectLines(h, "luck"),
+          ],
+          { icon: statIcon("luck"), subtitle: "Army, at battle start" },
+        ),
+    },
+    {
+      icon: "sight",
+      label: "Sight",
+      value: String(sightRadius(h)),
+      card: () =>
+        tipCard(
+          `Sight ${sightRadius(h)}`,
+          [
+            "How many cells around the hero are revealed on the map (at most 12).",
+            ...effectLines(h, "sight"),
+          ],
+          { icon: statIcon("sight"), subtitle: "On the map" },
+        ),
+    },
+  ];
+  if (command !== undefined) {
+    const c = commandStrength(h);
+    views.push({
+      icon: "command",
+      label: "Command",
+      value: `C ${c}`,
+      card: () =>
+        tipCard(
+          `${command.name} (C ${c})`,
+          [command.text, "C is 1, plus 1 for every 5 hero levels."],
+          { icon: statIcon("command"), subtitle: "Class order, once a battle" },
+        ),
+    });
+  }
+  if (spec !== undefined) {
+    views.push({
+      icon: "specialty",
+      label: "Specialty",
+      value: specialtyWord(spec),
+      picture: () => specialtyPicture(spec),
+      card: () =>
+        tipCard(specialtyWord(spec), [specialtyText(spec)], {
+          icon: specialtyPicture(spec),
+          subtitle: `${h.name}'s specialty`,
+        }),
+    });
+  }
+  return views;
+}
+
+/** One number as a tile: `big` for the primary stats (2x icon, caption). */
+export function statTile(view: StatTileView, big = false): HTMLElement {
+  const picture = view.picture?.() ?? statIcon(view.icon, big ? 2 : 1);
+  const value = el(
+    big ? "span.hs-pstat-value" : "span.hs-mini-value",
+    view.value,
+  );
+  if (view.tone !== undefined) value.classList.add(`hs-${view.tone}`);
+  const text = big ? null : el("div.hs-mini-text", value);
+  const tile =
+    text === null
+      ? el("div.hs-pstat", el("span.hs-pstat-name", view.label), picture, value)
+      : el("div.hs-mini", picture, text);
+  tile.dataset["stat"] = view.icon;
+  if (view.pct !== undefined) {
+    const fill = el("span.hs-bar-fill");
+    fill.style.width = `${Math.round(view.pct)}%`;
+    (text ?? tile).append(el(`span.hs-bar.hs-bar-${view.icon}`, fill));
+  }
+  tile.tabIndex = 0;
+  tile.setAttribute("aria-label", `${view.label} ${view.value}`);
+  setTip(tile, view.card);
+  return tile;
+}
+
+/** Rank n opens pages up to this tier (RULES_V2 2.2). */
+const RANK_TIERS: readonly number[] = [0, 2, 4, 5];
+
+/** The schools the hero has a rank in, as emblems with the rank. */
+export function schoolRankRow(h: HeroState): HTMLElement | null {
+  const ranked = SCHOOLS.filter((sc) => schoolRank(h, sc) > 0);
+  if (ranked.length === 0) return null;
+  const row = el("div.hs-ranks");
+  for (const sc of ranked) {
+    const rank = schoolRank(h, sc);
+    const icon = iconElement("school", sc);
+    icon.removeAttribute("title");
+    const chip = el("div.hs-rank", icon, el("span.hs-rank-n", String(rank)));
+    chip.tabIndex = 0;
+    chip.dataset["school"] = sc;
+    chip.setAttribute("aria-label", `${SCHOOL_NAMES[sc]} rank ${rank}`);
+    setTip(chip, () =>
+      tipCard(
+        `${SCHOOL_NAMES[sc]} rank ${rank}`,
+        [
+          `Learns ${SCHOOL_NAMES[sc]} pages up to tier ${RANK_TIERS[rank] ?? 5}; they are cast at ${signed(SCHOOL_RANK_POWER[rank] ?? 0)} Power.`,
+        ],
+        { icon: iconElement("school", sc), subtitle: "School rank" },
+      ),
+    );
+    row.append(chip);
+  }
+  return row;
+}
+
+/** Pages and scrolls in the hero's book: the spellbook button's count. */
+export function bookCount(h: HeroState): { pages: number; scrolls: number } {
+  return { pages: h.pages.length, scrolls: h.scrolls.length };
+}
+
+/**
+ * The spellbook button (bead bzc.82): the spells left the sheet for the
+ * book; the button shows how many pages it holds and opens the book (M).
+ */
+export function spellbookButton(
+  h: HeroState,
+  onOpen: () => void,
+): HTMLButtonElement {
+  const { pages, scrolls } = bookCount(h);
+  const b = el(
+    "button.hs-book-btn",
+    statIcon("spellbook", 2),
+    el(
+      "span.hs-book-text",
+      el("span.hs-book-title", "Spellbook"),
+      el("span.hs-book-n", `${pages} page${pages === 1 ? "" : "s"}`),
+      el("span.hs-book-kbd", kbd("M")),
+    ),
+  );
+  b.type = "button";
+  b.setAttribute("aria-label", `Spellbook, ${pages} pages (M)`);
+  setTip(b, () =>
+    tipCard(
+      "Spellbook",
+      [
+        pages === 0
+          ? "No pages yet: a Magic Guild in a town or a shrine on the map teaches spells."
+          : `${pages} page${pages === 1 ? "" : "s"}${scrolls > 0 ? ` and ${scrolls} scroll${scrolls === 1 ? "" : "s"}` : ""}, by school. Adventure spells are cast from the book; battle pages in battle.`,
+        el(
+          "div.gm-tip-line.gm-tip-dim.hs-tip-hint",
+          "Click or press M to open it.",
+        ),
+      ],
+      {
+        icon: statIcon("spellbook"),
+        subtitle: `Mana ${h.mana} / ${maxMana(h)}`,
+      },
+    ),
+  );
+  b.addEventListener("click", onOpen);
+  return b;
+}
+
+/** A section head with a stat icon: "[icon] Scroll case 5 / 8". */
+function iconHead(icon: string, text: string): HTMLElement {
+  return el("h3.hs-icon-head", statIcon(icon), el("span", text));
+}
+
+/**
+ * The hero sheet (bead bzc.82, laid out like the Heroes II hero screen):
+ * the portrait, name and class at the top left, the four primary stats as
+ * big icons beside them and the other numbers as small ones; then the
+ * skills and feats as icon rows, the paper doll with the spellbook button
+ * under it, the backpack and scroll case; the army band at the bottom.
+ * Click an item to select it (its details and actions show), double-click
+ * to wear, take off or use it, or drag it between the backpack and the
+ * doll. The army rearranges on the owner's turn like the town screen's.
+ *
+ * Resolves with the adventure spell picked in the spellbook (the sheet
+ * closes for it, and the game casts or aims it), else null.
  */
 export async function openHeroScreen(
   host: HeroScreenHost,
   heroId: string,
-): Promise<void> {
+): Promise<BookChoice> {
   let selected: Selection = null;
   /** The army slot picked to move, merge, swap or split. */
   let armySel: number | null = null;
+  /** The spell picked in the book, handed to the game as the sheet closes. */
+  let picked: BookChoice = null;
+  let close: (() => void) | null = null;
+  let bookOpen = false;
   const body = el("div.hs-sheet");
   const hero = (): HeroState | undefined =>
     host.state().heroes.find((h) => h.id === heroId);
 
   const act = (result: CommandResult): void => {
     if (host.run(result)) selected = null;
+    render();
+  };
+
+  /** The book over the sheet; a cast or aim closes the sheet for the map. */
+  const openBook = async (): Promise<void> => {
+    const h = hero();
+    if (h === undefined || bookOpen) return;
+    bookOpen = true;
+    const canCast = host.canCast?.(heroId) ?? false;
+    const choice = await openAdventureBook(host.state(), h, {
+      readOnly: !canCast,
+    });
+    bookOpen = false;
+    if (choice !== null && canCast) {
+      picked = choice;
+      close?.();
+      return;
+    }
     render();
   };
 
@@ -436,96 +900,60 @@ export async function openHeroScreen(
     const h = hero();
     if (h === undefined) return;
     const cls = getHeroClass(h.heroClass);
-    const stats = heroStats(h);
 
-    // ---- left: identity and numbers
-    const next = xpForLevel(h.level + 1);
-    const prev = xpForLevel(h.level);
-    const xpPct = Math.max(
-      0,
-      Math.min(100, ((h.xp - prev) / (next - prev)) * 100),
+    // ---- top: who, the four primary stats, the other numbers
+    const id = el(
+      "div.hs-id",
+      img(namedHeroPortrait(h.defId, h.heroClass).key, "hs-portrait", 2),
+      el(
+        "div.hs-id-text",
+        el("div.hs-name", h.name),
+        el("div.hs-class", `Level ${h.level} ${cls.name}`),
+        h.pendingLevelUps > 0
+          ? el(
+              "div.hs-pending",
+              `Level ${pendingLevel(h)}: a ${h.levelUpStep === "feat" ? "feat" : "skill"} choice is waiting.`,
+            )
+          : null,
+      ),
     );
-    const statRows = PRIMARY_STATS.map((stat) => {
-      const row = el(
-        "div.hs-stat",
-        el("span.hs-stat-name", STAT_NAMES[stat]),
-        el("span.hs-stat-value", String(stats[stat])),
+    const top = el(
+      "div.hs-top",
+      id,
+      el(
+        "div.hs-primaries",
+        ...primaryStatViews(h).map((v) => statTile(v, true)),
+      ),
+      el("div.hs-minis", ...otherStatViews(h).map((v) => statTile(v))),
+    );
+
+    // ---- left: skills and feats as icon rows; the book and school ranks
+    const book = el(
+      "div.hs-book-row",
+      spellbookButton(h, () => void openBook()),
+      schoolRankRow(h),
+    );
+    if (holdsUnspentPage(h)) {
+      book.append(
+        unspentChooser(h, (page) =>
+          act(chooseUnspentPage(host.state(), heroId, page)),
+        ),
       );
-      const bonus = stats[stat] - h[stat];
-      if (bonus !== 0) {
-        row.append(el("span.hs-stat-bonus", `${bonus > 0 ? "+" : ""}${bonus}`));
-      }
-      row.title = statTooltip(h, stat);
-      return row;
-    });
-    const move = movementBreakdown(h);
-    const numbers: Array<[string, string, string]> = [
-      [
-        "Mana",
-        `${h.mana} / ${maxMana(h)}`,
-        `Maximum 10 x Lore plus modifiers; +${manaRegen(h)} each day.`,
-      ],
-      [
-        "Movement",
-        `${h.mp} / ${h.maxMp}`,
-        `Base ${move.base} from the slowest creature, +${move.percent}%, +${move.flat}; ${move.total} tomorrow.`,
-      ],
-      ["Sight", String(sightRadius(h)), "Cells seen around the hero (max 12)."],
-      [
-        "Morale",
-        signed(armyMorale(h)),
-        "At battle start the strongest stacks start Heartened (or Shaken).",
-      ],
-      [
-        "Luck",
-        signed(armyLuck(h)),
-        "At battle start the strongest stacks start Lucky (or Jinxed).",
-      ],
-    ];
-    const command = COMMANDS[cls.command];
-    const spec = heroSpecialty(h);
+    }
     const left = el(
       "div.hs-col.hs-left",
-      el(
-        "div.hs-id",
-        img(namedHeroPortrait(h.defId, h.heroClass).key, "hs-portrait", 2),
-        el(
-          "div",
-          el("div.hs-name", h.name),
-          el("div.hs-class", `Level ${h.level} ${cls.name}`),
-        ),
-      ),
-      meter(`XP ${h.xp} / ${next}`, xpPct, "hs-xp"),
-      el("div.hs-stats", ...statRows),
-      el(
-        "div.hs-numbers",
-        ...numbers.map(([k, v, tip]) => {
-          const n = el("div.hs-number", el("span", k), el("b", v));
-          n.title = tip;
-          return n;
-        }),
-      ),
-      command === undefined
-        ? el("div")
-        : titled(
-            el(
-              "div.hs-note",
-              el("b", `Command: ${command.name}`),
-              ` (C ${commandStrength(h)})`,
-            ),
-            command.text,
-          ),
-      spec === undefined
-        ? el("div")
-        : el("div.hs-note", el("b", "Specialty: "), specialtyText(spec)),
-      pendingNote(h),
+      el("h3", `Skills ${h.skills.length} / ${MAX_SKILLS}`),
+      skillTiles(h),
+      el("h3", "Feats and vows"),
+      featTiles(h),
+      book,
     );
 
-    // ---- middle: paper doll
+    // ---- middle: the paper doll
     const doll = el("div.hs-doll");
     WORN_SLOTS.forEach((kind, i) => {
-      const id = h.worn[i] ?? null;
-      const cell = dollSlot(kind, id);
+      const worn = h.worn[i] ?? null;
+      const cell = dollSlot(kind, worn);
       const [col, row] = DOLL[i] as [number, number];
       cell.style.gridColumn = String(col);
       cell.style.gridRow = String(row);
@@ -533,14 +961,14 @@ export async function openHeroScreen(
         cell.classList.add("hs-selected");
       }
       const icon = cell.firstElementChild;
-      if (id !== null && icon instanceof HTMLElement) {
+      if (worn !== null && icon instanceof HTMLElement) {
         drag(icon, { place: "worn", index: i });
         cell.addEventListener("dblclick", () =>
           act(unequip(host.state(), heroId, i)),
         );
       }
       cell.addEventListener("click", () => {
-        selected = id === null ? null : { place: "worn", index: i };
+        selected = worn === null ? null : { place: "worn", index: i };
         render();
       });
       cell.addEventListener("dragover", (e) => {
@@ -561,11 +989,7 @@ export async function openHeroScreen(
     });
     const middle = el("div.hs-col.hs-middle", el("h3", "Worn"), doll);
 
-    // ---- right: skills, feats, backpack, scrolls
-    const ranks = SCHOOLS.filter((sc) => schoolRank(h, sc) > 0)
-      .map((sc) => `${SCHOOL_NAMES[sc]} ${schoolRank(h, sc)}`)
-      .join(", ");
-
+    // ---- right: backpack, scroll case, the selected item
     const pack = el("div.hs-grid");
     const slots = backpackSlots(h);
     for (let i = 0; i < backpackSize(h); i++) {
@@ -608,42 +1032,29 @@ export async function openHeroScreen(
       if (spell !== undefined) cell.append(scrollIcon(spell));
       scrolls.append(cell);
     }
-    const right = el(
-      "div.hs-col.hs-right",
-      el("h3", `Skills ${h.skills.length} / ${MAX_SKILLS}`),
-      skillTiles(h),
-      ranks === "" ? el("div") : el("div.hs-dim", `School ranks: ${ranks}`),
-      el("h3", "Feats and vows"),
-      featTiles(h),
+    const scrollHead = iconHead(
+      "scroll-case",
+      `Scroll case ${h.scrolls.length} / ${scrollCaseSize(h)}`,
     );
-    // Four columns over the army band keep the sheet within a 1280x800
-    // window (beads bzc.25, bzc.45): the scroll case under the doll; the
-    // backpack, the book and the selected item's details on the far right.
-    middle.append(
-      el("h3", `Scroll case (${h.scrolls.length} / ${scrollCaseSize(h)})`),
+    setTip(
+      scrollHead,
+      "Scroll case: spells on paper. Any hero may cast a scroll once, at no mana; it is listed in the spellbook too.",
+    );
+    const right = el(
+      "div.hs-col.hs-far",
+      el("h3", `Backpack ${backpackSlots(h).length} / ${backpackSize(h)}`),
+      pack,
+      scrollHead,
       scrolls,
     );
-    const far = el(
-      "div.hs-col.hs-far",
-      el("h3", `Backpack (${backpackSize(h)})`),
-      pack,
-      el("h3", `Book (${h.pages.length} pages)`),
-      bookPages(h),
-    );
-    if (holdsUnspentPage(h)) {
-      far.append(
-        unspentChooser(h, (page) =>
-          act(chooseUnspentPage(host.state(), heroId, page)),
-        ),
-      );
-    }
     const info = details(h);
-    if (info !== null) far.append(info);
+    if (info !== null) right.append(info);
 
     // Own stacks rearrange on the owner's turn, as in the town screen.
     const editable = h.owner === host.state().currentPlayer;
     body.replaceChildren(
-      el("div.hs-columns", left, middle, right, far),
+      top,
+      el("div.hs-columns", left, middle, right),
       heroArmySection(
         h.army,
         editable ? { selected: armySel, onSlot: onArmySlot } : {},
@@ -749,30 +1160,41 @@ export async function openHeroScreen(
     return box;
   };
 
-  render();
-  await modal<undefined>({
-    title: "Hero sheet",
-    body,
-    className: "hs-dialog",
-    buttons: [{ label: "Close", value: undefined, primary: true }],
-    cancel: undefined,
-  });
-}
+  // M (or B) opens the book while the sheet is the topmost dialog.
+  const onKey = (e: KeyboardEvent): void => {
+    if (bookOpen || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key !== "m" && e.key !== "M" && e.key !== "b" && e.key !== "B")
+      return;
+    const backdrop = body.closest(".gm-backdrop");
+    if (backdrop === null) return;
+    if (backdrop.nextElementSibling?.matches(".gm-backdrop")) return;
+    const target = e.target;
+    if (
+      target instanceof HTMLElement &&
+      target.matches("input, select, textarea")
+    )
+      return;
+    e.preventDefault();
+    void openBook();
+  };
 
-/** The hero's pages as spell icons; hover for the spell at its Power. */
-function bookPages(h: HeroState): HTMLElement {
-  if (h.pages.length === 0) return el("div.hs-dim", "No pages.");
-  const power = heroStats(h).power;
-  const box = el("div.hs-pages");
-  const kept = holdsUnspentPage(h) ? unspentPageOf(h) : undefined;
-  for (const id of h.pages) {
-    const icon = iconElement("spell", id);
-    icon.tabIndex = 0;
-    if (id === kept) icon.classList.add("hs-unspent");
-    setTip(icon, () => spellTip(id, power));
-    box.append(icon);
+  render();
+  window.addEventListener("keydown", onKey);
+  try {
+    await modal<undefined>({
+      title: "Hero sheet",
+      body,
+      className: "hs-dialog",
+      buttons: [{ label: "Close", value: undefined, primary: true }],
+      cancel: undefined,
+      onOpen: (buttons) => {
+        close = () => buttons[0]?.click();
+      },
+    });
+  } finally {
+    window.removeEventListener("keydown", onKey);
   }
-  return box;
+  return picked;
 }
 
 /** One army slot as the hero sheet shows it (empty: no creature, count 0). */
@@ -992,34 +1414,6 @@ export function unspentChooser(
       "The Unspent Page: this page is never spent in battle; it still costs mana and the round's cast. Without a choice the highest-tier page is kept.",
   );
   return row;
-}
-
-function signed(n: number): string {
-  return n > 0 ? `+${n}` : String(n);
-}
-
-function titled(node: HTMLElement, title: string): HTMLElement {
-  node.title = title;
-  return node;
-}
-
-function meter(label: string, pct: number, kind: string): HTMLElement {
-  const fill = el("div.gm-meter-fill");
-  fill.classList.add(kind);
-  fill.style.width = `${pct}%`;
-  return el(
-    "div.hs-meter",
-    el("div.gm-meter", fill),
-    el("div.gm-meter-label", label),
-  );
-}
-
-function pendingNote(h: HeroState): HTMLElement {
-  if (h.pendingLevelUps <= 0) return el("div");
-  return el(
-    "div.hs-note.hs-pending",
-    `Level ${pendingLevel(h)}: a ${h.levelUpStep === "feat" ? "feat" : "skill"} choice is waiting.`,
-  );
 }
 
 // ------------------------------------------------------------------ level-up

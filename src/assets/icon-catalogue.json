@@ -1412,6 +1412,46 @@
     "lore": {
       "name": "Lore",
       "frame": null
+    },
+    "mana": {
+      "name": "Mana",
+      "frame": null
+    },
+    "movement": {
+      "name": "Movement",
+      "frame": null
+    },
+    "experience": {
+      "name": "Experience",
+      "frame": null
+    },
+    "level": {
+      "name": "Level",
+      "frame": null
+    },
+    "sight": {
+      "name": "Sight",
+      "frame": null
+    },
+    "morale": {
+      "name": "Morale",
+      "frame": null
+    },
+    "luck": {
+      "name": "Luck",
+      "frame": null
+    },
+    "command": {
+      "name": "Command",
+      "frame": null
+    },
+    "spellbook": {
+      "name": "Spellbook",
+      "frame": null
+    },
+    "scroll-case": {
+      "name": "Scroll case",
+      "frame": null
     }
   },
   "school": {

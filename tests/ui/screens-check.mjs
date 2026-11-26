@@ -29,6 +29,7 @@
 //   adventure, adventure-hover-object, adventure-pickup (grab cursor),
 //   adventure-hover-resource, adventure-rich, endturn, hero, hero-hover,
 //   hero-hover-army, hero-hover-skill, hero-hover-feat, hero-hover-stat,
+//   hero-hover-mini, hero-book (the spellbook opened from the sheet),
 //   kingdom, kingdom-hover, spellbook (adventure tab), spellbook-battle, adventure-aim,
 //   pin-map, pin-hero-row, pin-army, pin-spell, pin-keyword,
 //   pin-keyword-more, pin-town,
@@ -752,7 +753,26 @@ async function heroScreens() {
   await waitFor("document.querySelector('.gm-backdrop')", "hero screen");
   await park();
   await sleep(400);
-  if (want("hero")) await shot("hero");
+  if (want("hero")) {
+    await shot("hero");
+    // The sheet fits the window without scrolling (beads bzc.45, bzc.82).
+    const fit = await evaluate(`(() => {
+      const d = document.querySelector('.hs-dialog');
+      if (!d) return null;
+      const r = d.getBoundingClientRect();
+      const scrolls = [d, ...d.querySelectorAll('*')].some(
+        (n) => n.scrollHeight > n.clientHeight + 1 &&
+          /(auto|scroll)/.test(getComputedStyle(n).overflowY));
+      return { top: r.top, bottom: r.bottom, h: innerHeight, scrolls };
+    })()`);
+    if (fit === null) fail("hero", "no hero sheet");
+    else if (fit.scrolls || fit.top < 0 || fit.bottom > fit.h) {
+      fail("hero", `the sheet does not fit: ${JSON.stringify(fit)}`);
+    } else
+      note(
+        `hero sheet fits: ${Math.round(fit.top)}..${Math.round(fit.bottom)} of ${fit.h}`,
+      );
+  }
   await hoverShot(
     "hero-hover",
     ".hs-slot:not(.hs-slot-empty) .gm-icon, .hs-worn .gm-icon, .gm-backdrop .gm-icon",
@@ -767,7 +787,30 @@ async function heroScreens() {
   );
   await hoverShot("hero-hover-skill", ".hs-tile.hs-skill, .hs-skill", 16, 16);
   await hoverShot("hero-hover-feat", ".hs-tile.hs-feat, .hs-feat", 16, 16);
-  await hoverShot("hero-hover-stat", ".hs-stat", 20, 10);
+  await hoverShot("hero-hover-stat", ".hs-pstat, .hs-stat", 20, 10);
+  await hoverShot("hero-hover-mini", ".hs-mini[data-stat='movement']", 12, 12);
+  // The spellbook button opens the book over the sheet (bead bzc.82);
+  // Escape closes the book and leaves the sheet open.
+  if (want("hero-book")) {
+    if (await clickFirst(".hs-book-btn")) {
+      const open = await waitMaybe(
+        "document.querySelector('.gm-book-dialog')",
+        3000,
+      );
+      if (!open) fail("hero-book", "the spellbook did not open");
+      else {
+        await park();
+        await sleep(400);
+        await shot("hero-book");
+        await escape();
+        await sleep(300);
+        const sheet = await evaluate(
+          "Boolean(document.querySelector('.hs-dialog')) && !document.querySelector('.gm-book-dialog')",
+        );
+        if (!sheet) fail("hero-book", "Escape did not return to the sheet");
+      }
+    } else skip("hero-book", "no spellbook button");
+  }
   await park();
   await escape();
   await sleep(200);

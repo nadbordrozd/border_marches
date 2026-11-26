@@ -4,7 +4,7 @@ Status: draft (2026-11-24, bead `border_marches-bzc.17`; orchestrator call,
 the user said "make all the decisions"). Specialises
 [`../ART_DIRECTION.md`](../ART_DIRECTION.md) for the small symbols of the
 interface: spells, artifacts, secondary skills, feats and vows, battle
-conditions and ground, the four primary stats and the five school emblems.
+conditions and ground, the hero sheet's stats and the five school emblems.
 
 ## Inventory
 
@@ -17,7 +17,7 @@ and listed in `src/assets/icons.ts` (`ICON_ASSETS`, looked up with
 | `art/sets/icons-spells` | `spell` | 50 battle and 10 adventure spells ([CONTENT_SPELLS.md](../../design/CONTENT_SPELLS.md)) |
 | `art/sets/icons-artifacts` | `artifact` | 30 Trinkets, 20 Wonders, 6 cursed Wonders, 12 Marvel pieces, 4 assembled Marvels, 12 consumables ([CONTENT_ARTIFACTS.md](../../design/CONTENT_ARTIFACTS.md)), the Keystone relic |
 | `art/sets/icons-conditions` | `condition`, `ground` | 25 catalogue condition kinds plus Sworn, Challenged and the demo Guarded, 7 ground kinds plus Sweets; 16 px variants for stack overlays |
-| `art/sets/icons-heroes` | `skill`, `feat`, `vow`, `stat`, `school`, `fallback` | 24 skills, 28 feats, 12 vows ([CONTENT_HEROES.md](../../design/CONTENT_HEROES.md)), Attack, Defense, Power, Lore, the five school emblems, and one fallback per kind |
+| `art/sets/icons-heroes` | `skill`, `feat`, `vow`, `stat`, `school`, `fallback` | 24 skills, 28 feats, 12 vows ([CONTENT_HEROES.md](../../design/CONTENT_HEROES.md)), the 14 hero-sheet stats (Attack, Defense, Power, Lore; Mana, Movement, Experience, Level, Sight, Morale, Luck, Command, Spellbook, Scroll case), the five school emblems, and one fallback per kind |
 
 Content ids are the catalogue names in kebab case without apostrophes
 (`Ringmaster's Whip` -> `ringmasters-whip`, `The Sky Falls` ->
@@ -113,7 +113,7 @@ Every catalogue id has its own icon; `ICON_MISSING` is empty.
 | Ground | 7 / 7 | school frame for fire, brambles, mist |
 | Skills | 24 / 24 | school frame for the five school skills, steel otherwise |
 | Feats, vows | 28 / 28, 12 / 12 | one icon each, none shared |
-| Stats, schools | 4 / 4, 5 / 5 | unframed / school frame |
+| Stats, schools | 14 / 14, 5 / 5 | unframed / school frame |
 | Fallbacks | 9 (one per kind) | for ids added later |
 
 31 PixelLab calls (`generate-image-v2`, 64 candidates each, 1,984 takes),
@@ -150,6 +150,32 @@ first 16 px gauntlets were all grey, without the 32 px icon's blue cuff) and
 16 px takes, never a downscale. Rejected: crossed swords without the ribbon
 (a battle sign, not an oath), gold-banded keystones (read as a bucket) and
 grey slabs with a flame gem (read as a candle or a tombstone).
+
+## Hero sheet stats (bead `border_marches-bzc.82`)
+
+The Heroes II style hero sheet shows every number as an icon. Recipe
+`stats-b` (seed 17409, one call, 64 takes) added ten `stat` icons beside
+the bzc.17 four:
+
+| Id | Icon | Take |
+| --- | --- | --- |
+| `mana` | a tall blue crystal with a white shine | 0 |
+| `movement` | a brown boot with a white wing at the heel | 25 |
+| `experience` | a gold star with a shine | 42 |
+| `level` | a laurel wreath tied with a red ribbon | 27 |
+| `sight` | a brass spyglass | 28 |
+| `morale` | a red heart with a gold crown | 29 |
+| `luck` | a gold horseshoe, open end up | 30 |
+| `command` | a red marshal's baton with gold ends | 36 |
+| `spellbook` | a purple spellbook with a gold star and clasp | 44 |
+| `scroll-case` | a leather scroll tube with a strap | 47 |
+
+Rejected: cyan crystal clusters (read as ice), dark crimson hearts (sink
+on a dark panel), a book stood on its spine, upright tubes (read as
+bottles), a broken laurel without its ribbon, a star with stray sparkle
+pixels; every other take is a spare. The sheet is
+`.orchestration/shots/bzc.82/icons-sheet.png`, rebuilt with
+`node art/review/icon-sheet.mjs <out.png> stats`.
 
 ## Acceptance
 

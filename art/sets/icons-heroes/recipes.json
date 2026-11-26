@@ -176,6 +176,27 @@
         "fallback:school"
       ],
       "subject": "Subject: each image shows exactly one of these 9 things, each thing about equally often: (1) a rolled spell scroll tied with a purple ribbon; (2) a small closed wooden treasure chest with gold bands; (3) a small grey swirl of smoke; (4) a small brown mound of dirt; (5) a plain round steel medal on a grey ribbon; (6) a teal five-pointed star medal; (7) a lit white candle; (8) a grey cut gemstone; (9) a clear crystal ball on a small stand."
+    },
+    {
+      "id": "stats-b",
+      "concept": "stat:mana stat:movement stat:experience stat:level stat:sight stat:morale stat:luck stat:command stat:spellbook stat:scroll-case",
+      "width": 32,
+      "height": 32,
+      "seed": 17409,
+      "covers": [
+        "stat:mana",
+        "stat:movement",
+        "stat:experience",
+        "stat:level",
+        "stat:sight",
+        "stat:morale",
+        "stat:luck",
+        "stat:command",
+        "stat:spellbook",
+        "stat:scroll-case"
+      ],
+      "subject": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a tall bright blue magic crystal with a white shine; (2) a brown leather boot with a small white wing on its heel; (3) a big shiny gold five-pointed star; (4) a green laurel wreath tied with a red ribbon; (5) a brass spyglass telescope; (6) a big red heart with a small gold crown on top; (7) a golden horseshoe with its open end up; (8) a short red marshal's baton with gold ends; (9) a big thick purple spellbook with a gold star on its cover and a gold clasp; (10) a brown leather scroll tube with a strap and a rolled scroll sticking out of its top.",
+      "notes": "Bead border_marches-bzc.82: the hero screen shows every stat as an icon with its number (HoMM2 style): Mana, Movement, Experience, Level, Sight, Morale, Luck, Command, the spellbook button and the scroll case, beside the bzc.17 Attack, Defense, Power and Lore."
     }
   ],
   "outputs": [
@@ -668,6 +689,66 @@
     {
       "path": "public/assets/icons/skills/wayfinder.png",
       "from": "skills-b#23",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/mana.png",
+      "from": "stats-b#0",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/movement.png",
+      "from": "stats-b#25",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/experience.png",
+      "from": "stats-b#42",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/level.png",
+      "from": "stats-b#27",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/sight.png",
+      "from": "stats-b#28",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/morale.png",
+      "from": "stats-b#29",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/luck.png",
+      "from": "stats-b#30",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/command.png",
+      "from": "stats-b#36",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/spellbook.png",
+      "from": "stats-b#44",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/stats/scroll-case.png",
+      "from": "stats-b#47",
       "width": 32,
       "height": 32
     }

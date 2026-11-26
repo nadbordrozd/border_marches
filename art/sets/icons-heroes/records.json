@@ -3382,5 +3382,427 @@
         "height": 32
       }
     ]
+  },
+  "stats-b": {
+    "id": "stats-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "38394522-6b95-4ec7-8d76-afb19905c04a",
+    "submittedAt": "2026-11-26T10:38:18.774Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a tall bright blue magic crystal with a white shine; (2) a brown leather boot with a small white wing on its heel; (3) a big shiny gold five-pointed star; (4) a green laurel wreath tied with a red ribbon; (5) a brass spyglass telescope; (6) a big red heart with a small gold crown on top; (7) a golden horseshoe with its open end up; (8) a short red marshal's baton with gold ends; (9) a big thick purple spellbook with a gold star on its cover and a gold clasp; (10) a brown leather scroll tube with a strap and a rolled scroll sticking out of its top."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17409,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 10 things, each thing about equally often: (1) a tall bright blue magic crystal with a white shine; (2) a brown leather boot with a small white wing on its heel; (3) a big shiny gold five-pointed star; (4) a green laurel wreath tied with a red ribbon; (5) a brass spyglass telescope; (6) a big red heart with a small gold crown on top; (7) a golden horseshoe with its open end up; (8) a short red marshal's baton with gold ends; (9) a big thick purple spellbook with a gold star on its cover and a gold clasp; (10) a brown leather scroll tube with a strap and a rolled scroll sticking out of its top. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-26T10:40:53.729Z",
+    "candidates": [
+      {
+        "file": "stats-b-0.png",
+        "sha256": "aad4bb57c5bf2bbe643afbc93e7e7de6721ca0da150475cb16c030597857e496",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-1.png",
+        "sha256": "448150160fd58268a6bf7bf0b48b6cde7769828d44255cc43c96e38cc47b2da3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-2.png",
+        "sha256": "a3bf7120b1ee0f9d8ace28cb202619bc01e7fc75c422223001661dc3ae1c4e0c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-3.png",
+        "sha256": "0ecea3e27868dbd13895550514609175488fc34bb569e13a9271608e9ac05ea2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-4.png",
+        "sha256": "384d8c29c70186b61412ad4d18741b164abd39883ef91b535c10ff35cf1a7317",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-5.png",
+        "sha256": "56ec5e51b4552d35403051f663371bb1392ff96faf61bf5df54e998b9a497c6a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-6.png",
+        "sha256": "b5d4501316848ca84aab3b76fbacd3f5aec6eb049fc8ca0b40a054480c3294e0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-7.png",
+        "sha256": "92fad357dd7b37296b283b2bf64c9f6c1cfb73ad751596ac33e931b3ae232eb2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-8.png",
+        "sha256": "e059c5ca30b3ab16dd2eaff93f29b19e64c42e53ca8cf5785156ec6c1d7f9228",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-9.png",
+        "sha256": "8b06db830ec3944c24c6f4188d4a01f99fd860fd89b7039a28dd82bf7c1ef35b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-10.png",
+        "sha256": "9ffb744b945d875dc0cba222f59de358603ec636022d35cc6e04fd4054cf727d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-11.png",
+        "sha256": "00e7adb58bcc964a7c27dca34196c19883d496ee75087b636c6dea8b4836b53d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-12.png",
+        "sha256": "efa951a4e75589df2eb50b7b35f9fcc96c11d13fb23287b0cc1390cb707a5e67",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-13.png",
+        "sha256": "bcaa7e4d3b300a0d5b769c6e6652b6587fceab500dc93b3522d6d928862f81f5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-14.png",
+        "sha256": "51f73f0330643a90ce55b498d2040c4ffbd2e13a90f41665c931d86e623e568c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-15.png",
+        "sha256": "72e039a05d2b2b768cc4b9664bab92b48be48ed31b932cb80dc25aae9b244bd4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-16.png",
+        "sha256": "33b9efc82336ea8da6d5e1ed1c3e1361026f827b319903b98468fad1ddf2f707",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-17.png",
+        "sha256": "79ddef0fbaa4f8cff6d09d411f4559c6de4724cda3c54793be9b69485b15a618",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-18.png",
+        "sha256": "c7fc2b3de5d8270ec85506f43518c11c2d831f9e5cf31f71e0867f9f371787f7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-19.png",
+        "sha256": "128c3a7bb7c160f98db0d5f6e62e099242154b37a50b9cb099e8839f3824917c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-20.png",
+        "sha256": "0fb34d037b855488695b63e26594aeaa29ebb4fd38e9376b73486e6e4173de1d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-21.png",
+        "sha256": "be4b15ac6ffb7e418bb234ac782a9a07b656433a9f02a60f2b0dff8658cb8dd7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-22.png",
+        "sha256": "4b3ae338ff4c84ada988de91969ca74378565f764d4bbbfe66c13a185ccc1215",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-23.png",
+        "sha256": "8c78b5fed534611fdfbda2d9c3a806821ab6af71908cf2b47f85b34d897fcafc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-24.png",
+        "sha256": "9c1205b275c6dab4853236fd0920f3439afeed184c2ae388217b57f9e771801d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-25.png",
+        "sha256": "0e35904ac64a9de72a43532cae761183b72be37225fb021b1040410bc3ad96f2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-26.png",
+        "sha256": "e83c6a36467dc8389697cdfb1199543c5c5e4af7b336a44dd3f96c753820332f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-27.png",
+        "sha256": "1dbd1d36825079703e0eaf994a9aacdfe9eba8358eb857e4aaaad2804809301d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-28.png",
+        "sha256": "b7426c89138fcbc0ee795913fb055d7d321b3235cbed8f9d69509debdac4d9ee",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-29.png",
+        "sha256": "7aaeb650b47ca462749666ac5cce60f19341d9f8c63f435cbfada69734869bf4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-30.png",
+        "sha256": "3d297580d681a28eb35502069d7c63ee60e4946755e9e99ab4fcdf37b7510cd4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-31.png",
+        "sha256": "d62261816497f99f85026b1a541e2cbf10b3019ba2f4bdad9dac1bb52849bf64",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-32.png",
+        "sha256": "3185079810af3a895198af318f81baa1af67ad35d08ee598062230b746a1b32f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-33.png",
+        "sha256": "227f7368c78567d9e0c650dcf973865eaad842ff4efc1d0ae308a49f82dbb2fa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-34.png",
+        "sha256": "b6abb89c6d0aa480c4be10dd5720622f96f4665b39f27fe746c1b28ef6286e05",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-35.png",
+        "sha256": "06f98cc0433f25d2810a0809e702b5cf72e58d0ffd554076336eaab94f4453bf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-36.png",
+        "sha256": "9de00fe8e9abc32977d638678786d133d185100c8137391cca8e31ac1523dd48",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-37.png",
+        "sha256": "05eac76948dd327551867bc2eb38f05e6858ba808916bcba29b3307077872780",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-38.png",
+        "sha256": "d71537666616b0a1cf6cd793a605ef1a53a5e0a321b7b5d05f7e655bd0c8ba7f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-39.png",
+        "sha256": "d844d53e7691ed9fa1b3e2f610aca1c24a35f38e5ab3c09474686bf5ccb62d31",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-40.png",
+        "sha256": "d2c8da6b9aa84ea76bb731ed39e4f776dd405fd2e343656ba483a106129710cb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-41.png",
+        "sha256": "2f0ae1b386b7bea4086279b5bfa0fe60be832609a28dd0f4205a8848f6c87912",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-42.png",
+        "sha256": "f76d4f920a04cb8d7f1153d6e7ba72333f913721721995c250cb1274bad86cf4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-43.png",
+        "sha256": "170ecea6b032a32b0fd7bccca9a2a0e646b25a521a646893a81d6dce5f7020b8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-44.png",
+        "sha256": "273d7ac0b0c6d863193eb119efecc08b90b1b25afe0b2ba6ef85bd6237fad553",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-45.png",
+        "sha256": "c3b3f708fe21d58844f8dc021749682b004cc88a121c69cac5d17da8de54ce08",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-46.png",
+        "sha256": "52403cd355124553aedf5bb790290947cf54854cb7a3c239d1c598c0bc0bb6bd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-47.png",
+        "sha256": "6e8e60297ae5aa832a1996c5e17dcb8eae518a9c5bac179832ced0aab87b8d1f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-48.png",
+        "sha256": "5aacde3378a1f3fa7d3d941f72e6abc46c232ed3bb6590e0f3ae08088cc431c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-49.png",
+        "sha256": "bb43a65370c0e3c0ad5b8e4a3c6c9ea8245f6b00664c8787e29f004c3be1f97c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-50.png",
+        "sha256": "534cd0169d36b63c18a3d5891f5d4b705480708585081f3b458b39535bb4c4b3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-51.png",
+        "sha256": "43ffccdbcf9d7029f89202cda0b88e8ea49578fda54fcb8029b0ebaf78c2f04e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-52.png",
+        "sha256": "d8c066e7784dcf26fa4601e77d386fa77b8bea4d0f018b117b1995d8cd19d992",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-53.png",
+        "sha256": "346947fbf9a98f608532d5e313ba23e2a4308a6786b15bcaf4005da986767324",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-54.png",
+        "sha256": "7706aeaeb6d87ac747fc83e09310f44236aae7c2376982ed61af484b514c0c86",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-55.png",
+        "sha256": "e0156f1b86b801bae465a53de5f3cbc7b72cdc938a90e0ca3fdab7be4dab334f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-56.png",
+        "sha256": "dcbf008382eee3389906467b47917ba7fb3deb307d32e4fd7db31ca5a89ab544",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-57.png",
+        "sha256": "41e93010affb83ef4ac1ee68c3818def38403bef7f98deed38a9b84c9b21fdcc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-58.png",
+        "sha256": "b7942b3faa0cf825d1779506f7b3e947caf8f56f3ea78759fd10edebc8800d78",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-59.png",
+        "sha256": "078a2eebc83a01d97b8b68bcab9f462b48662c8e3a724e7d4947a50eb06547d1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-60.png",
+        "sha256": "8bce93f795bbfa59e628c4f2b596fc052e9a1ea6d847e4571b7f7a56562da513",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-61.png",
+        "sha256": "9b5b2eb83ba24577618ccca7af3c1c808caab94c3f474756a4af21b6d0a4b168",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-62.png",
+        "sha256": "20362a7618841fa12cc5cf94e73baf53d2200975d0d88ad66a11f0eb27c2c045",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "stats-b-63.png",
+        "sha256": "79b9f39e3a9586ff70b1aef6601658bd5a0c45acd4bf3004b435422f94bd8213",
+        "width": 32,
+        "height": 32
+      }
+    ]
   }
 }

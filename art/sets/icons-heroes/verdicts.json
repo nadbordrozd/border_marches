@@ -2558,5 +2558,325 @@
     "verdict": "REJECTED",
     "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
     "at": "2026-11-24T23:12:51.357Z"
+  },
+  "stats-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "stat:mana: tall blue crystal with a white shine, apart from Lore's blue book",
+    "at": "2026-11-26T10:41:56.196Z"
+  },
+  "stats-b#25": {
+    "verdict": "ACCEPTED",
+    "notes": "stat:movement: brown boot with a white wing clear of the heel",
+    "at": "2026-11-26T10:41:56.334Z"
+  },
+  "stats-b#42": {
+    "verdict": "ACCEPTED",
+    "notes": "stat:experience: gold star with a shine, warmer than the teal feat fallback star",
+    "at": "2026-11-26T10:41:56.474Z"
+  },
+  "stats-b#27": {
+    "verdict": "ACCEPTED",
+    "notes": "stat:level: full laurel wreath with a red ribbon",
+    "at": "2026-11-26T10:41:56.661Z"
+  },
+  "stats-b#28": {
+    "verdict": "ACCEPTED",
+    "notes": "stat:sight: brass spyglass with a bright lens",
+    "at": "2026-11-26T10:41:56.806Z"
+  },
+  "stats-b#29": {
+    "verdict": "ACCEPTED",
+    "notes": "stat:morale: bright red heart with a gold crown, readable on dark",
+    "at": "2026-11-26T10:41:56.959Z"
+  },
+  "stats-b#30": {
+    "verdict": "ACCEPTED",
+    "notes": "stat:luck: gold horseshoe, open end up",
+    "at": "2026-11-26T10:41:57.092Z"
+  },
+  "stats-b#36": {
+    "verdict": "ACCEPTED",
+    "notes": "stat:command: red marshal's baton with gold ends",
+    "at": "2026-11-26T10:41:57.235Z"
+  },
+  "stats-b#44": {
+    "verdict": "ACCEPTED",
+    "notes": "stat:spellbook: purple spellbook, star on the cover, gold clasp",
+    "at": "2026-11-26T10:41:57.376Z"
+  },
+  "stats-b#47": {
+    "verdict": "ACCEPTED",
+    "notes": "stat:scroll-case: leather scroll tube with a strap and a scroll in it",
+    "at": "2026-11-26T10:41:57.513Z"
+  },
+  "stats-b#1": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#2": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#3": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#4": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#5": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#6": {
+    "verdict": "REJECTED",
+    "notes": "dark crimson heart sinks on a dark panel",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#7": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#8": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#9": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#10": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#11": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#12": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#13": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#14": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#16": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#17": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#18": {
+    "verdict": "REJECTED",
+    "notes": "cyan crystal cluster or slab: reads as ice, not mana",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#19": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#20": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#21": {
+    "verdict": "REJECTED",
+    "notes": "dark crimson heart sinks on a dark panel",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#22": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#23": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#24": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#26": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#31": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#32": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#33": {
+    "verdict": "REJECTED",
+    "notes": "dark crimson heart sinks on a dark panel",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#34": {
+    "verdict": "REJECTED",
+    "notes": "stray sparkle pixels beside the star",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#35": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#37": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#38": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#39": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#40": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#41": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#43": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#45": {
+    "verdict": "REJECTED",
+    "notes": "dark crimson heart sinks on a dark panel",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#46": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#48": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#49": {
+    "verdict": "REJECTED",
+    "notes": "cyan crystal cluster or slab: reads as ice, not mana",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#50": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#51": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#52": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#53": {
+    "verdict": "REJECTED",
+    "notes": "book lying open at an angle: the cover star is small at 1x",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#54": {
+    "verdict": "REJECTED",
+    "notes": "book stood on its spine: reads as a box, not a spellbook",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#55": {
+    "verdict": "REJECTED",
+    "notes": "upright tube reads as a bottle",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#56": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#57": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#58": {
+    "verdict": "REJECTED",
+    "notes": "cyan crystal cluster or slab: reads as ice, not mana",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#59": {
+    "verdict": "REJECTED",
+    "notes": "laurel with no ribbon and a gap: reads as two leaves",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#60": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#61": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#62": {
+    "verdict": "REJECTED",
+    "notes": "upright tube reads as a bottle",
+    "at": "2026-11-26T10:41:55.995Z"
+  },
+  "stats-b#63": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-26T10:41:55.995Z"
   }
 }
