@@ -124,12 +124,14 @@ export function siteCue(
     case "thunderstruck-pylon-yard":
     case "landfall-wreck":
     case "keepers-vault":
+    case "frost-giants-barrow":
       return "site.treasure";
     case "prison":
       return "site.quest";
     case "faction-outpost":
     case "stray-hut":
     case "caretaker-lodge":
+    case "walrus-rookery":
       // Arriving flags the dwelling; a hire made there recruits.
       return /^Hired/.test(text)
         ? "recruit"

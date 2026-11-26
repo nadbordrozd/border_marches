@@ -251,6 +251,10 @@ export const LIVING_MOTION: Readonly<Record<string, LivingMotion>> = {
   scorpion: "twitch",
   hedgehog: "breathe",
   "tree-frog": "breathe",
+  // Winter (bead bzc.87).
+  "arctic-hare": "twitch",
+  "snowy-owl": "hop",
+  fox: "breathe",
 };
 
 /** The pose of a living decoration (or one of its parts) at a moment. */

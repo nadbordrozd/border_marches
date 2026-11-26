@@ -18,6 +18,7 @@ Studio set `art/sets/trees`, derived files in
 | Steppe | oak (3.4), bent (1), birch (0.7) | `steppe-a` |
 | Badlands | pinyon (3.2), juniper (2), gnarled (0.8), mesquite (0.45) | `badlands-a`, `badlands-b` |
 | Wasteland | deadoak (3), pine (2), leafy (1.6), snag (0.6) | `wasteland-a`, `wasteland-b` |
+| Snow (bzc.87) | spruce (5), fir (2.4), larch (2, in drifts only), birch (0.9) | set `winter-trees`: `snow-conifer-a`, `snow-mixed-a` |
 
 The same trees stand alone on open ground through the doodad layer
 (`doodads.ts`, kind `tree`), at their native size, as common as their

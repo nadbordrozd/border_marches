@@ -170,7 +170,9 @@ export interface GroundSources {
  * Palest to darkest as in Pulp Wars (FACTION_GRASS_IDS_V7): default grass,
  * the goblin dry grass, the dinosaur jungle floor, the martian regolith,
  * the undead burnt ground; then the volcanic basalt (bead bzc.83), the
- * darkest, whose cracked rock runs out over every other ground.
+ * darkest, whose cracked rock runs out over every other ground. The snow
+ * of bead bzc.87 sits just before it: it drifts out over every ground but
+ * the volcanic (the two never meet: winter zones keep off volcanic ones).
  */
 export const GROUND_RANK: readonly GroundTerrain[] = [
   "grass",
@@ -178,6 +180,7 @@ export const GROUND_RANK: readonly GroundTerrain[] = [
   "jungle",
   "badlands",
   "wasteland",
+  "snow",
   "volcanic",
 ];
 
@@ -450,6 +453,7 @@ const FOREST_SHADE: Readonly<
   badlands: [72, 32, 20],
   wasteland: [34, 30, 28],
   volcanic: [26, 20, 20],
+  snow: [60, 78, 96],
 };
 
 /**

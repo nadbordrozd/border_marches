@@ -3,7 +3,10 @@
  * has a texture of its own; the trees, peaks, doodads and imported forest
  * set come from its art family. A volcanic ground has only its texture (and
  * the glowing cracks in it) and borrows the wasteland's family: dark basalt
- * peaks with ash, dead trees, bones and ash doodads.
+ * peaks with ash, dead trees, bones and ash doodads. The snow of bead
+ * bzc.87 is a family of its own (snowy trees and peaks, snow doodads) but
+ * has no imported forest set: its battles borrow the grass family's conifer
+ * clumps (FOREST_FAMILY).
  *
  * Its own module (no imports of values), so the asset tables of trees,
  * peaks and the manifest can all use it without an import cycle.
@@ -22,6 +25,7 @@ export const ART_GROUNDS: readonly ArtGround[] = [
   "steppe",
   "badlands",
   "wasteland",
+  "snow",
 ];
 
 /** The art family each land ground draws its pieces from. */
@@ -32,4 +36,29 @@ export const GROUND_FAMILY: Readonly<Record<Land, ArtGround>> = {
   badlands: "badlands",
   wasteland: "wasteland",
   volcanic: "wasteland",
+  snow: "snow",
+};
+
+/** The art families with an imported (Pulp Wars) composed-forest set. */
+export type ForestGround = Exclude<ArtGround, "snow">;
+
+export const FOREST_GROUNDS: readonly ForestGround[] = [
+  "grass",
+  "jungle",
+  "steppe",
+  "badlands",
+  "wasteland",
+];
+
+/**
+ * The forest set (battle tree clumps) each art family uses: its own, or a
+ * borrowed one (bead bzc.87: snow borrows the grass family's conifers).
+ */
+export const FOREST_FAMILY: Readonly<Record<ArtGround, ForestGround>> = {
+  grass: "grass",
+  jungle: "jungle",
+  steppe: "steppe",
+  badlands: "badlands",
+  wasteland: "wasteland",
+  snow: "grass",
 };

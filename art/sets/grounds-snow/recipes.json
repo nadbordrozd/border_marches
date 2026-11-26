@@ -1,0 +1,87 @@
+{
+  "set": "grounds-snow",
+  "bead": "border_marches-bzc.87",
+  "class": "grounds",
+  "exploration": false,
+  "_doc": "The snow ground of the winter landscape (bead bzc.87, docs/art/classes/grounds.md). After bzc.83: no chibi style layer (it turns a texture into a character), no words 'texture' or 'tile' (pixen draws grids), pixflux 400 x 400 flat shading for a 5-cell long-period base. Recipes are never edited after generation: add a new id (new seed) instead. '@name' values come from shared.",
+  "shared": {
+    "flux": {
+      "shading": "flat shading"
+    },
+    "snow3": "Subject: a wide flat field of smooth fresh snow seen from directly above, filling the whole image edge to edge: soft white #e4eaf1 with large soft, slightly bluer wind drifts #d3dce8 that blend gently into each other and a few faint thin curved wind lines, very calm, quiet and low in contrast, the same everywhere.",
+    "snow": "Subject: a wide flat field of fresh snow seen from directly above, filling the whole image edge to edge: soft white #e6ecf2 with gentle pale blue-grey #ccd7e3 wind drifts and shallow ripples, a few faint blue shadows #b9c7d8 in the hollows and a few tiny scattered grey pebbles peeking through, very calm, quiet and low in contrast, the same everywhere.",
+    "snow2": "Subject: a wide flat snowfield seen from directly above, filling the whole image edge to edge: packed snow of soft blue-white #dde6ef with large soft slightly bluer drifts #c8d4e2 and slightly whiter patches #edf2f7, a few tiny grey-brown stones and dry grass stalks poking through here and there, very calm and low in contrast, the same everywhere."
+  },
+  "defaults": {
+    "endpoint": "create-image-pixflux",
+    "fragments": [],
+    "noBackground": false,
+    "options": "@flux",
+    "negative": "tiles, tile grid, cobblestones, bricks, plates, slabs, paving, ice sheet, cracks, footprints, tracks, tree, rock, snowman, snowflake, object, character, frame, border, horizon, sky"
+  },
+  "recipes": [
+    {
+      "id": "base-a",
+      "concept": "SNOW BASE (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 87101,
+      "subject": "@snow"
+    },
+    {
+      "id": "base-b",
+      "concept": "SNOW BASE (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 87102,
+      "subject": "@snow"
+    },
+    {
+      "id": "base-c",
+      "concept": "SNOW BASE (pixflux 5-cell, packed)",
+      "width": 400,
+      "height": 400,
+      "seed": 87103,
+      "subject": "@snow2"
+    },
+    {
+      "id": "base-d",
+      "concept": "SNOW BASE (pixflux 5-cell, smooth drifts)",
+      "width": 400,
+      "height": 400,
+      "seed": 87104,
+      "subject": "@snow3",
+      "negative": "tiles, tile grid, squares, bricks, plates, slabs, paving, puddles, holes, blobs, dots, circles, stones, rocks, pebbles, ice sheet, cracks, footprints, tracks, tree, snowman, snowflake, object, character, frame, border, horizon, sky"
+    },
+    {
+      "id": "base-e",
+      "concept": "SNOW BASE (pixflux 5-cell, smooth drifts)",
+      "width": 400,
+      "height": 400,
+      "seed": 87105,
+      "subject": "@snow3",
+      "negative": "tiles, tile grid, squares, bricks, plates, slabs, paving, puddles, holes, blobs, dots, circles, stones, rocks, pebbles, ice sheet, cracks, footprints, tracks, tree, snowman, snowflake, object, character, frame, border, horizon, sky"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/grounds/snow.png",
+      "from": "base-e#0"
+    },
+    {
+      "path": "public/assets/terrain/grounds/snow-swatch.png",
+      "from": "base-e#0",
+      "width": 80,
+      "height": 80,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 160,
+          "y": 160,
+          "width": 80,
+          "height": 80
+        }
+      ]
+    }
+  ]
+}

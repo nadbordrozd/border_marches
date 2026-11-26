@@ -9,6 +9,17 @@ Status: draft (bead `border_marches-bzc.83`; the five imported grounds follow
 | --- | --- | --- | --- |
 | grass, jungle, steppe, badlands, wasteland | `<ground>.png`, `<ground>-swatch.png` | 8 cells (jungle 6) | Pulp Wars |
 | volcanic | `volcanic.png` (400 x 400), `volcanic-swatch.png` (80 x 80), `volcanic-cracks.png` (480 x 480) | 5 cells; cracks 6 cells | studio set `grounds-volcanic` |
+| snow | `snow.png` (400 x 400), `snow-swatch.png` (80 x 80) | 5 cells | studio set `grounds-snow` (bead bzc.87) |
+
+The snow (take `base-e`) is calm blue-white with faint white wind marks.
+It is an art family of its own (`GROUND_FAMILY`): snowy spruces, firs,
+birches and larches ([trees.md](trees.md)), snow-capped peaks
+([mountains.md](mountains.md)), snow doodads (set `winter-doodads`) and
+winter decorations ([decorations.md](decorations.md)); it has no imported
+forest set, so battles on snow borrow the grass conifer clumps
+(`FOREST_FAMILY`). In `GROUND_RANK` it sits just before the volcanic: it
+drifts out over every ground but the lava (winter zones never touch
+volcanic ones).
 
 The volcanic texture is two layers: the calm basalt base (take `base-b`) and
 an overlay of lava cracks (take `pixen-a`) drawn at its own period, so the
@@ -39,6 +50,12 @@ ground; the rest is plain basalt so units and pieces stand out.
 - `create-image-pixen` 480 x 480 gives organic crack networks, but any
   mention of a seamless texture or tile makes it draw a paving grid.
 - Never ask for "volcanic" alone: the models draw a volcano.
+- Snow (bzc.87): pixflux 400 x 400, no fragments, "smooth fresh snow ...
+  large soft, slightly bluer wind drifts ... faint thin curved wind lines".
+  Asking for blue shadows in hollows drew round puddle blobs; asking for
+  stones drew a stamped rock motif; one take came back as a faint brick
+  grid. The negative lists puddles, blobs, dots, circles, squares and
+  stones.
 
 ## Acceptance
 

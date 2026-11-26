@@ -49,11 +49,11 @@ function rgbaOf(path: string): { w: number; h: number; px: Uint8Array } {
 }
 
 describe("map object types (bzc.16)", () => {
-  it("list the 62 catalogued types, 53 core and 9 stretch", () => {
+  it("list the 62 catalogued types, 53 core and 9 stretch, and the 4 winter sites (bzc.87)", () => {
     expect(MAP_OBJECT_TYPES.map((type) => type.id)).toEqual([
       ...MAP_OBJECT_TYPE_IDS,
     ]);
-    expect(new Set(MAP_OBJECT_TYPE_IDS).size).toBe(62);
+    expect(new Set(MAP_OBJECT_TYPE_IDS).size).toBe(62 + 4);
     expect(MAP_OBJECT_TYPES.filter((type) => type.stretch)).toHaveLength(9);
     expect(
       MAP_OBJECT_TYPES.filter((type) => type.hidden).map((type) => type.id),

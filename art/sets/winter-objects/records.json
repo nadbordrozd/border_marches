@@ -1,0 +1,366 @@
+{
+  "barrow-a": {
+    "id": "barrow-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "ee5d6de6-40e7-4d4e-ae19-6ce33400d064",
+    "submittedAt": "2026-11-26T14:01:43.228Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a frost giant's barrow, a creature bank: a big burial mound of packed snow and pale blue ice #9fd0ea with a dark doorway framed by huge grey standing slabs #7a808c at the front, icicles hanging off the lintel, a giant horned iron helmet and a broken frosted axe on top of the mound, each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 87601,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a frost giant's barrow, a creature bank: a big burial mound of packed snow and pale blue ice #9fd0ea with a dark doorway framed by huge grey standing slabs #7a808c at the front, icicles hanging off the lintel, a giant horned iron helmet and a broken frosted axe on top of the mound, each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, ground, grass, snow plate, flag."
+    },
+    "at": "2026-11-26T14:02:44.834Z",
+    "usageUsd": 0.08079055428504944,
+    "candidates": [
+      {
+        "file": "barrow-a-0.png",
+        "sha256": "a873ca5aa6dc6603507b5bc26df981171b01f5fab02bd5e7593bfbaf74b06b08",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "barrow-a-1.png",
+        "sha256": "b4848368ff19a21b7c5b973d74c3aea74e36c3f3adc5277b18429c6a1b64c62b",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "barrow-a-2.png",
+        "sha256": "0b1ca1e5e338495323b213f391cee71dafae6b59f42ab61bccecb352ef8bb031",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "barrow-a-3.png",
+        "sha256": "8794501411700a7017acaa69f2e8cc57f8d74371d542c59807ff353bc078192a",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "spire-a": {
+    "id": "spire-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "062fb76a-ace2-416b-849c-e275d4647ce3",
+    "submittedAt": "2026-11-26T14:02:44.926Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: an aurora spire: a tall slender spire of pale blue ice crystal #bfe6f6 rising from a small ring of frosted grey stones, its tip glowing with soft green #6ef0b0 and violet #b07ef0 aurora light that ripples down its faces. About half of the image wide and nearly the full image tall, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 87602,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: an aurora spire: a tall slender spire of pale blue ice crystal #bfe6f6 rising from a small ring of frosted grey stones, its tip glowing with soft green #6ef0b0 and violet #b07ef0 aurora light that ripples down its faces. About half of the image wide and nearly the full image tall, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, ground, grass, snow plate, flag, sky, cloud."
+    },
+    "at": "2026-11-26T14:05:24.216Z",
+    "usageUsd": 0.08165124869346618,
+    "candidates": [
+      {
+        "file": "spire-a-0.png",
+        "sha256": "96a5faa705094a063ebf915f589a77048ba8e0c28c59bf455fa8bda8fd2dfdcf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-1.png",
+        "sha256": "e6a4629e47589675711f509983efb3cbeedb61cd8a703cca1c6eab72545d38c6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-2.png",
+        "sha256": "7c95c336078d79a99b98028f204be8c8727b6244595a4053aec2c16feb37e395",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-3.png",
+        "sha256": "3a0d669bc66a4f612fcc98f025070cc96ad85ad554b1ea346d6520c9a7e98fe3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-4.png",
+        "sha256": "5ee99d26729a09d5c6a3617ab3bad08fe32d5735ba3835f084ecf531265aa88f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-5.png",
+        "sha256": "72be41894bedc782a4e0b0f065ba31cd0e14beef50818d28aed6242211bbfef7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-6.png",
+        "sha256": "d7b44756450854b19f758847800411bca906bd918ce0ed4bd4e92c2c7547e687",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-7.png",
+        "sha256": "13c3faa666d07372b880d76f35f93dbcc503ef5fd207681ffcafde258a1cd308",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-8.png",
+        "sha256": "23f4c26c815921efa0bd3b201caa735ffdceca9061b8e2269a40f20c2a5c6230",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-9.png",
+        "sha256": "ff684b69b142d46e89dfef7edd54b8f6f909e2bfa71808fe46a81b843d02fe66",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-10.png",
+        "sha256": "8feea00d668740a7e422b9bb9629df3a27c24410e6efe51c561176aa6b534804",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-11.png",
+        "sha256": "7ff6ab46145658bc429388aae9606cd3c1a50de93dd5060c97782cc645bd4716",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-12.png",
+        "sha256": "353119db4255831ff95591a1c94ad41fd48bdbc4b0d0e952364294526ed79df4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-13.png",
+        "sha256": "0ecc3afec2d97fd72261e08d632ae365fd208c5247afea0287ea25569dd99c95",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-14.png",
+        "sha256": "8a2c5c54a21424e63d0d1cf13287c1ef2cfdebcd50615afe4ad88d8a7a3337bb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "spire-a-15.png",
+        "sha256": "fc086f5b27351d831263e7ae85a91f1b26eab9247ce4a0fb3715ee2c763c9e48",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "lodge-a": {
+    "id": "lodge-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "2b7ea842-d552-4889-b047-4a4d7555a9cf",
+    "submittedAt": "2026-11-26T14:05:24.308Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a snowy hunter's lodge: a sturdy log cabin of dark brown logs #6a4428 with a steep roof thick with snow, a stone chimney, a big pair of antlers over the front door, crossed skis and two round snowshoes leaning by the door, a rack of drying furs at the side. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 87603,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a snowy hunter's lodge: a sturdy log cabin of dark brown logs #6a4428 with a steep roof thick with snow, a stone chimney, a big pair of antlers over the front door, crossed skis and two round snowshoes leaning by the door, a rack of drying furs at the side. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, animal, ground, grass, snow plate, smoke, flag."
+    },
+    "at": "2026-11-26T14:07:53.658Z",
+    "usageUsd": 0.08055890931023492,
+    "candidates": [
+      {
+        "file": "lodge-a-0.png",
+        "sha256": "ddcc4647de85c5cc223637360da398ded59a85609a2fdfca398993172812124a",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "lodge-a-1.png",
+        "sha256": "28d8c340d3ef3892352b70e5d43064c9ac94c2922140ed26e987387c17ec97d1",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "lodge-a-2.png",
+        "sha256": "4d9d8bb694d7e9404e48b2f96051abe85b9a7a9bee394d39aa9c75e8f2aae10f",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "lodge-a-3.png",
+        "sha256": "dca83f0da37dbde7142bf1e847d6cea76122615c9a1f5dfe485d7f5d216f13c3",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "rookery-a": {
+    "id": "rookery-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "0bbfdfdb-6fb8-4d18-b3d1-d3cd7b6e985c",
+    "submittedAt": "2026-11-26T14:07:53.749Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a walrus rookery, the den of the rime walruses: a big low dome of pale blue ice blocks #a8d8f0 like a giant igloo with a wide dark entrance at the front, two huge curved ivory walrus tusks #ece0c4 crossed over the entrance, a wooden rack of frozen fish beside it and a pile of snow at its side. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 87604,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a walrus rookery, the den of the rime walruses: a big low dome of pale blue ice blocks #a8d8f0 like a giant igloo with a wide dark entrance at the front, two huge curved ivory walrus tusks #ece0c4 crossed over the entrance, a wooden rack of frozen fish beside it and a pile of snow at its side. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, ground, grass, snow plate, flag, water."
+    },
+    "at": "2026-11-26T14:09:43.470Z",
+    "usageUsd": 0.08084517942534553,
+    "candidates": [
+      {
+        "file": "rookery-a-0.png",
+        "sha256": "33ec4ad762ad525ff74d10c6500e34e97cbeaebec9a29f705466b8782d2eaaa0",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "rookery-a-1.png",
+        "sha256": "ba167fe846d50f726119a052463ea9b8130dd95fe6205e549ca3e1bfb06bd084",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "rookery-a-2.png",
+        "sha256": "36365720772dba49a4b977961a64145f31e49ec05fad68cb31afeefc8179176f",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "rookery-a-3.png",
+        "sha256": "3ee9d7398d3aeadd3b17953ffcc007f5e8cde992374218556dd187df9b3c8731",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  }
+}

@@ -13,6 +13,9 @@ export const TERRAIN_MOVE_COST: Readonly<Record<Terrain, number | null>> = {
   // Volcanic ground (bead bzc.83): cracked basalt and ash, as rough as the
   // wasteland.
   volcanic: 150,
+  // Snow (bead bzc.87): as heavy as the roughest grounds, like Heroes'
+  // snow; a Hunter's Lodge's snowshoes bring it down to 100.
+  snow: 150,
   water: null,
 };
 

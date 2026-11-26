@@ -31,6 +31,7 @@ Studio set `art/sets/peaks`, derived files in
 | Steppe | dry crags | jagged tan and brown rock peaks |
 | Badlands | buttes | red-orange flat-topped strata, mesas and hoodoos |
 | Wasteland | basalt | dark jagged spires with thin ember cracks |
+| Snow (bzc.87) | alpine | blue-grey rock under snow caps and snowfields; set `winter-peaks` (10 foothills, 12 peaks, 7 summits; 6 calls) |
 
 Each family has three tiers: `foothill` (from 56 x 44 requests), `peak` (from
 80 x 64) and `summit` (from 120 x 88): 170 accepted sprites of 284 takes, 31
@@ -90,6 +91,10 @@ Prompt fragments that worked:
   stripes #e8c07a".
 - Wasteland: "Rock charcoal #4e4a50, shadow #2e2b32, lit #77717a on the left
   faces, a few thin ember cracks #a05a30".
+- Snow: "Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces;
+  snow #eef4fa, shadow #b4c4d8 on right faces"; summits with a negative of
+  "terraces, steps, crater, flat top" (the first summits came back as
+  banded cakes and a crater).
 
 ## Acceptance
 

@@ -55,6 +55,7 @@ import {
   roadPath,
 } from "./paths.ts";
 import {
+  T,
   TERRAIN_OF,
   corridorMask,
   homeCell,
@@ -66,6 +67,14 @@ import type { GenState, PassInfo, TownSite } from "./state.ts";
 
 // ---------------------------------------------------------------------------
 // Towns
+
+/** The winter sites each snow zone gets (bead bzc.87), in placing order. */
+export const WINTER_SITES: readonly ObjectTypeId[] = [
+  "frost-giants-barrow",
+  "walrus-rookery",
+  "aurora-spire",
+  "hunters-lodge",
+];
 
 const TOWN_NAMES = [
   "Ashford",
@@ -275,6 +284,11 @@ interface Request {
   fallback?: Fill;
   /** A big rare site (the vault): one more try at half the distance. */
   relax?: boolean;
+  /**
+   * Its entrance stands on this terrain while any such site is free (the
+   * winter sites on snow, bead bzc.87); the last try takes any ground.
+   */
+  ground?: number;
 }
 
 /** A drawn fill row with its rolled payload. */
@@ -769,6 +783,43 @@ export function placeObjects(st: GenState): PlacementReport {
     }
   }
 
+  // Winter sites (bead bzc.87): in each snow zone a Frost Giant's Barrow,
+  // an Aurora Spire and a Walrus Rookery, and a Hunter's Lodge in it or
+  // next door; rolled from their own stream and placed right after the
+  // start kits, before the fill crowds the zone. A map without snow has
+  // no winter zone, so it draws and places exactly as before.
+  const winterReqs: Request[] = [];
+  const winterZones = st.zones.filter((z) => z.main === "snow");
+  if (winterZones.length > 0) {
+    const wrng = stageRng(st, "winter-sites");
+    for (const z of winterZones) {
+      const around = [z.id, ...neighbours(z.id)];
+      for (const type of WINTER_SITES) {
+        const row = ruleRow(type);
+        if (row === undefined) continue;
+        const zones = type === "hunters-lodge" ? around : [z.id];
+        const data = roll(wrng, row, tierOf(z.id));
+        const value = valueOf(row, data);
+        winterReqs.push({
+          row,
+          data,
+          value,
+          zones,
+          minCost: 0,
+          maxCost: Infinity,
+          minFar: farFor(row, value, data),
+          required: false,
+          pocket: -1,
+          guarded: guardedIn(row, value, z.id, data),
+          label: `winter ${type} in zone ${z.id}`,
+          relax: true,
+          ground: T.snow,
+        });
+      }
+    }
+    requests.splice(kitRequests, 0, ...winterReqs);
+  }
+
   // 4. Placement: blocking footprints, roads, then single cells.
   const counters = new Map<string, number>();
   const nextId = (prefix: string): string => {
@@ -884,6 +935,12 @@ export function placeObjects(st: GenState): PlacementReport {
       for (const e of cells) {
         if (req.pocket < 0 && (pocketOf[e] ?? -1) >= 0) continue;
         if (!free(e)) continue;
+        if (
+          req.ground !== undefined &&
+          strict > 0 &&
+          st.terrain[e] !== req.ground
+        )
+          continue;
         if (roads && (strict > 0 || beside) && st.road[e] === 1) continue;
         if (strict > 0 && (crowd[e] ?? 0) >= strict) continue;
         if (costs) {

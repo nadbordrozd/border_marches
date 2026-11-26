@@ -65,6 +65,11 @@ const NAMED_CONFIG = {
       ...DEFAULT_GEN_CONFIG.terrain.volcanic,
       chance: { S: 0, M: 0, L: 0 },
     },
+    // Nor the winter zones of bead bzc.87, for the same reason.
+    winter: {
+      ...DEFAULT_GEN_CONFIG.terrain.winter,
+      chance: { S: 0, M: 0, L: 0 },
+    },
   },
 };
 

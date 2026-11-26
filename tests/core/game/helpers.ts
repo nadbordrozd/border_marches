@@ -21,6 +21,7 @@ const CODES: Record<string, MapCell> = {
   s: { terrain: "steppe", obstacle: "none", road: false },
   b: { terrain: "badlands", obstacle: "none", road: false },
   w: { terrain: "wasteland", obstacle: "none", road: false },
+  n: { terrain: "snow", obstacle: "none", road: false },
   "~": { terrain: "water", obstacle: "none", road: false },
   M: { terrain: "grass", obstacle: "mountain", road: false },
   F: { terrain: "grass", obstacle: "forest", road: false },

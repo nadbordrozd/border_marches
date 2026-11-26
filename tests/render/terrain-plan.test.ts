@@ -530,3 +530,44 @@ describe("volcanic ground in the terrain plan (bead bzc.83)", () => {
     expect(next.dirty).not.toBeNull();
   });
 });
+
+describe("snow ground in the terrain plan (bead bzc.87)", () => {
+  // The first small map that rolls a winter zone.
+  const map = [1, 2, 3, 4, 5, 6, 7, 8]
+    .map((seed) => generateMap(seed, { size: "S" }))
+    .find((m) => m.cells.some((c) => c.terrain === "snow"))!;
+  const snow = map.cells
+    .map((c, i) => (c.terrain === "snow" ? i : -1))
+    .filter((i) => i >= 0);
+
+  it("drifts out over every ground but the volcanic", () => {
+    expect(snow.length).toBeGreaterThan(0);
+    const layout = planTerrain(map, map.objects).plan.layout;
+    const rank = GROUND_RANK.indexOf("snow");
+    expect(rank).toBe(GROUND_RANK.indexOf("volcanic") - 1);
+    for (const i of snow) expect(layout.kind[i]).toBe(rank);
+    const border = snow.find((i) => (layout.ranks[i]?.length ?? 0) > 1);
+    expect(border).toBeDefined();
+    expect(layout.ranks[border!]?.at(-1)).toBe(rank);
+  });
+
+  it("grows the snowy trees and peaks of its own family", () => {
+    const plan = planTerrain(map, map.objects).plan;
+    // GROUNDS index of the snow in canopy.ts and peaks.ts.
+    const family = 5;
+    let woods = 0;
+    let rock = 0;
+    for (const i of snow) {
+      const cell = map.cells[i]!;
+      if (cell.obstacle === "forest") {
+        woods += 1;
+        expect(plan.canopyField.set[i]).toBe(family);
+      }
+      if (cell.obstacle === "mountain" && plan.peakField.rock[i] === 1) {
+        rock += 1;
+        expect(plan.peakField.family[i]).toBe(family);
+      }
+    }
+    expect(woods + rock).toBeGreaterThan(0);
+  });
+});

@@ -1,0 +1,1109 @@
+{
+  "snow-small-a": {
+    "id": "snow-small-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "e9dad84e-ca19-42c5-93e8-81b3b785c3b8",
+    "submittedAt": "2026-11-26T14:01:43.220Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-doodad.txt",
+          "text": "Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tiny winter detail, each image a different one of these: a white arctic hare sitting up with grey ear tips and a black eye, a white snowy owl with black speckles and yellow eyes sitting on the ground, a red fox #d0642a with a white tail tip curled up asleep, a little snowman of two snowballs with a carrot nose and twig arms. Small and low, about half of the image wide, much smaller than a person."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 87401,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one tiny winter detail, each image a different one of these: a white arctic hare sitting up with grey ear tips and a black eye, a white snowy owl with black speckles and yellow eyes sitting on the ground, a red fox #d0642a with a white tail tip curled up asleep, a little snowman of two snowballs with a carrot nose and twig arms. Small and low, about half of the image wide, much smaller than a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, soil disc, grass square, platform, background, badge, character, building, tree, bush, ground, snow patch, person, bright red, neon, gold, coins, gem, chest, hat."
+    },
+    "at": "2026-11-26T14:03:56.790Z",
+    "usageUsd": 0.08192102299796211,
+    "candidates": [
+      {
+        "file": "snow-small-a-0.png",
+        "sha256": "886a4a52d5bcffc864706f80b237cc988dc967c7f326fee94d7037aa82ee92a9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-1.png",
+        "sha256": "ab48fb53e06ebc90797ee4ee5a27929a25cd4c88ca1adeacd173fe222876780e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-2.png",
+        "sha256": "fdb82c23298408952a8cf7e4de5123e1974fef38787f4af79ce57b676afbfadf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-3.png",
+        "sha256": "9e9e5c70062b8e18a2067d3f98c2ef7a8bcc03e6ce523a026a53c4231943bef3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-4.png",
+        "sha256": "49d04b0c82b8dbd7401634e5c4f748657946b8e17961483583a764c208ffca50",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-5.png",
+        "sha256": "f49351a0aea3d1e61aea035e773232159df43f7dd3013add4d6dc113dedcd9cb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-6.png",
+        "sha256": "b5f45e07273983ce3b9695d08bccbc278b650aee289bbf26c3936a66bda6aaa1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-7.png",
+        "sha256": "ce041f018876512e7cb6250e2b8351c53a4193dd59f3412c84337ed31b0e4840",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-8.png",
+        "sha256": "6eccd93f7b1288be1260e7bb5c5c016132b9332b40d258410f9296510290395d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-9.png",
+        "sha256": "a4282ad08513d8206d08251462ebd67ab790032de2f530c954030694d9a0a6fc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-10.png",
+        "sha256": "9d7b0ef00bab95e14184e94d8546a64fc1e8ed84e9ec473f03c996876be18f2d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-11.png",
+        "sha256": "ab6bf9b7c79c379e7b96747dc02333a40898878a20cfaf535fb05979a83b9e5c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-12.png",
+        "sha256": "5b0dd6dc6181ca29734cb15f726c23dfb2b38c8bbb893f63ca3271065d67c8bd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-13.png",
+        "sha256": "f412ddf0f80ea89bd49bc9331563561f043d3c16c0b5544299e85a7c1ea709dc",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-14.png",
+        "sha256": "a1c9696e91eeeec0162232d84ec9d391a31c30e9e2bf14ac5a53504776997cf2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-15.png",
+        "sha256": "ab8307db8238a036702a930d6f79b468d9585fff50738dcc4edbcabf77e73f44",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-16.png",
+        "sha256": "278ce4ce1787aa9bec4edb98bced6810680070547a5f1d0519665a5dfa5b4eeb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-17.png",
+        "sha256": "1f2ed89d2e9a3f10ece730e40e37c0eed0e59945bef20b3c35c6a4de0ebd2eb1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-18.png",
+        "sha256": "33b0459dddb8228719335e38bfd8f79c6f5b17ca9b4b9fdbf61255a7dd88e14f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-19.png",
+        "sha256": "caa2bdb1337bcbdd7f6be25a66aec7efd522666cdacb737d3ffec6a5b4fb7f99",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-20.png",
+        "sha256": "983ef623775291c46ca01119e00ed7ee8aa14d8b2cc241d806928353b1dd9e91",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-21.png",
+        "sha256": "0a6a6577c88d2cf18fd3e32ce83ade54d9fd9859d58e10200b4d1450ed5b4c4e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-22.png",
+        "sha256": "d87e684abfb7b3bc139b7ba8ad457a7df4bc5961ee62d58273cfae195012175a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-23.png",
+        "sha256": "f1abe825f7e34be324fd3426fe119475ac4586b91a22256a0413e99cb64a1140",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-24.png",
+        "sha256": "254713a14aaa3ebfcaefa087f8ca7efa317afb24db3908ce0e6cd721f8374da4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-25.png",
+        "sha256": "a2cc4a45583edb44b7f9a8edcd6d7a4506b4ab72ae33339ef354c8f0ee2838c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-26.png",
+        "sha256": "c3d6b6f5ad5c58be7b625e5250009e07503ee54d21640ba4fb1e95302d3f6a55",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-27.png",
+        "sha256": "4f6035c93776383f5d216b980b8314ad68ec7a377f0f2c98c795169cbbafe530",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-28.png",
+        "sha256": "e82df6b2810ef0f1aafc9e79845545573baaf72ae9f1e5cdc2e509503fb7371e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-29.png",
+        "sha256": "1817a05ee808b8f3793d5db76100f2c2087f356c7d729a2ec4e43fdd2450b400",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-30.png",
+        "sha256": "abcc769eaa57ca58e062d678c86d4b462d4b8d944fe41421042bc684f37c3aa4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-31.png",
+        "sha256": "4efe98b3f9991ff0bf45f283e630c005ee81fc5ed115f12cbfbb5dcc6bdf3f7c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-32.png",
+        "sha256": "e7d597e254370e64db5f42008ffc2bd702307969037b0ba6ab045d39290433a6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-33.png",
+        "sha256": "10d7f72b99425f6f2d63aa9d594407fa4501d33541ddb6932d98ca34b402cfb5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-34.png",
+        "sha256": "02ed1dccfcf005a9e76f5c012dfa444a499a776434d8ca644e8470065f23593e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-35.png",
+        "sha256": "dc1d2a50b7d104330fb9c9b9168a3b05a90ad01676b332191a5e70edabf7d7d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-36.png",
+        "sha256": "4cdc4b7938cc0b5473e151c0fdd276bf37d3b4839fa93f113a5a8fb0df800788",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-37.png",
+        "sha256": "84c07273e09ac2c950cc6e0b50a3d7dbbfca6e3fdb0a8975111d5e351ff068c8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-38.png",
+        "sha256": "7e5666ba78097624da6c684203543addad1ac45c88c79f7ad2b91665dbadf98a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-39.png",
+        "sha256": "070b1d0e2df1e90faf88edf426372599f56aeb7a1a996fcb4c255015a6bf5a26",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-40.png",
+        "sha256": "177abbe8daeef0d4d20207628fcb5f93f75b1981a9803d060a260619032a63d7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-41.png",
+        "sha256": "edfe80f1ba0511a9d3c4a8b5abadf09d1743c4f80bc0301801f51ce1a0473655",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-42.png",
+        "sha256": "b665c2835afae0b5b5f20d454ddd70d049540f1b679b128dd15e187fa81fdbb6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-43.png",
+        "sha256": "5ad6dbf5750196c7376e22503a44f20edcfce85c1d018e797eb6bbee88820140",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-44.png",
+        "sha256": "ab1a3ac70b38639e45d41bc8e09bf16f3404af6e14abb7ea7ad6bf6d2ac5635e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-45.png",
+        "sha256": "2974bccd0ad46e3fd531f8078dc5bec2ef9cfd7a9158efe9c0082b929a9739f6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-46.png",
+        "sha256": "aac9d4c208abd392202257272ea9184888e85285e3861f072fa6ac442fddeffd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-47.png",
+        "sha256": "9a1a59d26ce1a7b8f20e9e20acb1de4f0efff6dcd2b40690c96005904507fab3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-48.png",
+        "sha256": "8a9f709ca401c12dc2ce0b5d1fe670f0b07f1c08e65ce7b480c92a25ee776b6f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-49.png",
+        "sha256": "9208e30729a91c51edf87207e303dfe761d5cfe01f8fa0d3826d8b4684fd6de5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-50.png",
+        "sha256": "f02e0e049b9a5552f6d5ece02f9b70fd4cf4256301393e938de931794eb2f235",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-51.png",
+        "sha256": "91f554cc04eec53f139dd6d3f445d3ea0d58c5257ccc26c6800527ac16d2b3fa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-52.png",
+        "sha256": "c69f2692ec28fd51724bda6e43273faaa4fde154abaed21a060437d172bd32b7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-53.png",
+        "sha256": "ac4061496e97395a443afefbdcfd66db7d2f600058f7358f06ca7fec21ac8b03",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-54.png",
+        "sha256": "bd315278c332f9fd7f44a73fcf95c1921cff7994e7a634a4104d696dbd4314d5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-55.png",
+        "sha256": "a83d1d0b1cad3c621f0e0cbf1fc94e68bfb0debbbda86cb0022b4923ff1f3d6d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-56.png",
+        "sha256": "e57ee42e246cf7f7275eb4256512dfdc79848e2ca989659fabe5a4be37e2467b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-57.png",
+        "sha256": "0811e9f9c50eacc8dc48072137cad0f073f8f307828fad4ed2ba87db7e16a172",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-58.png",
+        "sha256": "4c88254fcec05458ddff0b9cd9b8d53734fda7e80daaf1b910352e2b02e2cbc7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-59.png",
+        "sha256": "52c4216bc58e29bc74f2f5625c1e1d7c0990f06ecdef669bd40feab419b736d4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-60.png",
+        "sha256": "a8a93faf7e3c6f1946c38de3ea7959d10fb988ecfbb11b299559922157f8ee9a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-61.png",
+        "sha256": "5f46f87e8169f64d6f5054513f8fea3ea803c93c3b0284d2758c21aa38a674cf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-62.png",
+        "sha256": "a032cc9ae28b42c738aec37cbfe5cb8dde177a16f471c807426e451ce46aa012",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-a-63.png",
+        "sha256": "93220e2874ef6f6adce3cbd357544e0015b43baa228b1e5aa58327b81e63f2d2",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "snow-small-b": {
+    "id": "snow-small-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "9358d6a2-067f-4d63-9b07-43b02605f896",
+    "submittedAt": "2026-11-26T14:03:56.870Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-doodad.txt",
+          "text": "Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tiny winter detail, each image a different one of these: a small frozen shrub of pale blue frosted twigs hung with icicles, a tuft of frosted dry straw grass #b8a070 poking up, a short trail of small grey-blue animal paw prints #8fa2bb, a few sharp pale blue ice crystals #a8d8f0 sticking up. Small and low, about half of the image wide, much smaller than a person."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 87402,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one small calm terrain decoration for a strategy map, seen in three-quarter view looking slightly down, much smaller and less saturated than units, a thin dark outline, simple shapes, flat colours with one shadow tone, no face. It sits directly on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one tiny winter detail, each image a different one of these: a small frozen shrub of pale blue frosted twigs hung with icicles, a tuft of frosted dry straw grass #b8a070 poking up, a short trail of small grey-blue animal paw prints #8fa2bb, a few sharp pale blue ice crystals #a8d8f0 sticking up. Small and low, about half of the image wide, much smaller than a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, soil disc, grass square, platform, background, badge, character, building, tree, ground, snow patch, person, bright red, neon, gold, coins, gem, chest, flower pot."
+    },
+    "at": "2026-11-26T14:06:03.069Z",
+    "usageUsd": 0.08175150561332703,
+    "candidates": [
+      {
+        "file": "snow-small-b-0.png",
+        "sha256": "2aa2efc116ebe75f0285088c804f3aedb5370b5858603fefe1614d35f41c865c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-1.png",
+        "sha256": "9e71c8ecdb327f37571b3825bea30c10975b6f3865f008fecdacd2f70303c7e7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-2.png",
+        "sha256": "3beb87e73a6b0329a1c4bb777fc7499e09b69b841946c14139bed6a704ab5a35",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-3.png",
+        "sha256": "9586df7d3bd4ff4f894d487ee8bceed2cbc207ebe8169dffbf753b6056b68495",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-4.png",
+        "sha256": "8b4b98bcfa2b3603087de09a2977597f7d915ad0c520bae162ed50d0ebaa41ca",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-5.png",
+        "sha256": "b97fd2a2072aa0794b9396d4b54752a115d41ceb1bd041b1e235c6e8af8a2eab",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-6.png",
+        "sha256": "b2d0c6a17b9e21db1816ecdec0e8df95b066b68392c481e7b917c41521b079c9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-7.png",
+        "sha256": "3c3030e3c14d53a3699a2ac4399fbb1104a58b815d1849f8fe9b6f8c87d1abb9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-8.png",
+        "sha256": "7fcc12b3dac9c926a3e7065e7fdd0f2bba605ac90f862dcae5d24852842c838c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-9.png",
+        "sha256": "24d54c63bd4eb22e451df703771a351e14ab9393a6fe4f9e65d118a3166bf9d3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-10.png",
+        "sha256": "450cc27a3e46e70bf70e401ecd55526a254c432ffe83c6d8ce011c13d7ba78c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-11.png",
+        "sha256": "fb4da256eddf582c3434020d3a4416b509afa9317da3e8f26005d30c0e4775d3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-12.png",
+        "sha256": "41001b45ca08bf60dac75372d1adbcf309ef8225f4bfda5476cf324a50e1c4f5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-13.png",
+        "sha256": "113a70af407e3a8ec2da335be096e57438f373f06808eb103e82be3f6223917a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-14.png",
+        "sha256": "3dfdbeca918ae88dad9db2a84b140dde3af26051d2767f09c263f8443317bf2d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-15.png",
+        "sha256": "22136b9069abd3446b81f03a7b3fbd44bba535e3563549b4a58b0f27f60d028e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-16.png",
+        "sha256": "0d0183b226bdeb3f0914652669e5a3b68ab82a61c049e24bb87a2311e9622ae5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-17.png",
+        "sha256": "9f4425188f34104693f54d65c0f62c0c463699bec3912b41c94f0ed3bd3d0831",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-18.png",
+        "sha256": "fae4fc9c09eef1b936062aa18a4b2be363274ce24109c96b83a2296601602c09",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-19.png",
+        "sha256": "7281cedfa6a4801fd308181f03a3fd20e176f19cab89ab80feea4b1753cec11d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-20.png",
+        "sha256": "af12ad12cea4cb190d873c52cf1b4b67e184c6f4fdf0ef85b04862ec25af2316",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-21.png",
+        "sha256": "23579807141bf12117c321ecfbfe914c38cf3b58edd3d07f616bcea7ae40bb42",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-22.png",
+        "sha256": "aad46bbe3628f370270b4a76b3dcdde9520e59b71a4127c89784221161ce5a65",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-23.png",
+        "sha256": "11cdfeb66673d8954dcfeb2cb02a4d8d77c70bff27a2d2926a641e69052d004a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-24.png",
+        "sha256": "aa85b891a25ed6d21418788e802bc26c8f330e07a0019bdfa96153ee57fbb37b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-25.png",
+        "sha256": "98c9393705110acfdcd5bbe4c0acce4379a62c4e9e0acfb2f2cdb523f4ee8868",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-26.png",
+        "sha256": "f01e0845a40da308883b8bcbb134c27f25c093691490400a838b7442154ff01f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-27.png",
+        "sha256": "621796ff49cba4a861c4bda107024f5757e612d7c1b60cea06372e7277653387",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-28.png",
+        "sha256": "a358d8e61e36c5018317857b7590ad8bd1156dca93b2b0d0d0c3980e1210d2c0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-29.png",
+        "sha256": "431e7ebf25ae3032c25732c297d4361c0f7904e77ed31a1d5cba6e65e4d06297",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-30.png",
+        "sha256": "3ae3b7a0a7ff02440165645e280d16a42145a136958eecb26f7869a5d7f0afaf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-31.png",
+        "sha256": "6ef0bc196edc8c53a224e0b65a6c3ee0d27429be6c2d35048366bebab377ed9e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-32.png",
+        "sha256": "d4f0d890a3f4d224e394d1c15ad26d3e339e3e387a60322007aded3003634f44",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-33.png",
+        "sha256": "2ced7714829606ccec86b9d8792c4bc84c48fe489c8fd7e0eaaa1239de39b123",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-34.png",
+        "sha256": "936d677cbbfcd86722e9ef8cbbda4e298280ad1c199a9f5398c9f5c6bd0f3c56",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-35.png",
+        "sha256": "9f649d2df681543f4fd66be678ebc2d610428a813e1c7b7961d09415c8f707cd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-36.png",
+        "sha256": "ee9d1bf7545a452d5032cee3daa92547fdb10af6a37591f0790ab2b27dbcaf9d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-37.png",
+        "sha256": "dd4a1a553e930b488b1af950233675d00c20d8e387008e22f280c70753359941",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-38.png",
+        "sha256": "5dac5f9232ba93b8b5c032e7ecb742d1eb337283fdbff4c190fe14cfffaa90f3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-39.png",
+        "sha256": "7cc703f522d95fd764163759bd333057abab439a9b04199c1c668d5ccc5348b9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-40.png",
+        "sha256": "2feadacb9ee2766eb7f5a9f3cfc12e4cde3c654b5fea1a658f1c6725c51fac51",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-41.png",
+        "sha256": "00f5e85acf6708784b98402d0a7bd3e061a09dab7dfaa48ae71797f770b809e7",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-42.png",
+        "sha256": "25b0d20196d491ee11576ed63c36a80ead3b2c0e4a89e990d08b3ae823a7a89e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-43.png",
+        "sha256": "7417bc0b580166233a9f092938c7e1c07af2fc4b7a0567938791c8352b75beae",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-44.png",
+        "sha256": "8d7e2948944a88ae7933b7184bbf063f295c555c5ad6b79f382813d0cde0e1ff",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-45.png",
+        "sha256": "54c7955a92660fbc47a04d5bcfcb8f5d97d80494a2913530e90449ce65bad2d2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-46.png",
+        "sha256": "64e00948f2b43148c0e0ae1f9620b5b55a9ca552fbff720c1d482e14b941f489",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-47.png",
+        "sha256": "9e19229e3bebd00d68cf544825b5703cdd51cd57b82762e2b022ed6637172f63",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-48.png",
+        "sha256": "fbbe138219b086f1965c9cf01314608f1051ca80271fa4a35f618857a59a65c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-49.png",
+        "sha256": "c70d8530e2d8f4178d1d33fad0a561753fa8647c829caaeff41e16eaf26eef09",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-50.png",
+        "sha256": "fc5d3c3f196debb99f954c941737f39c1447af6dc4ce5dad3294cb524f87554e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-51.png",
+        "sha256": "184ae6cd787bb4b656d65df8e2ccb4ec8e9430e7fedb63f00899525bae5496a2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-52.png",
+        "sha256": "392638d574e730baedb8a361f593a30d211efcf10a65d4efd66b9f03ef22a65f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-53.png",
+        "sha256": "1a0026489eb2f517fb8789eb94ecea9e524ac3a1431cb8162db582437aa881fe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-54.png",
+        "sha256": "a81e4d1b79c21d9a2a7dd3202a7ea16a362578614357b316afcf6bf205156825",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-55.png",
+        "sha256": "a2f0c8d164fb051437fe95a350615dfb4b25919f6495795dfa9e3d3894011513",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-56.png",
+        "sha256": "df3090d9b348724cd082e627a6a5ca9fad779d83b36a2b6816d26155f712b71c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-57.png",
+        "sha256": "b9161e2e61b699cd105db0f66b03633b22d97d2917302abebe535081064b098a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-58.png",
+        "sha256": "a2920281c41fbe53ddf9251db9e6507de554122b75f7c6812623ab6b51438f90",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-59.png",
+        "sha256": "1c75c1434efc2db90b17d7788dff01970b6bb532dc1e5ef8d368ab1323abe99e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-60.png",
+        "sha256": "58e4980b4c3c94f14b15a2ec044f82f16925e9a9bde86f520b3c616dc3921a4a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-61.png",
+        "sha256": "2fb561b3e166747f52f81e5b733df142742068dcc98f8f599370b9c0de379822",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-62.png",
+        "sha256": "70d097e665a0b8b28676c3cddf1a6b828078f53ddab94c6eeaffd99bfa686049",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "snow-small-b-63.png",
+        "sha256": "10b67d25584ccac4a199d4d220f43717836650e30137aec92a7953c62d5cecf8",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "props-1x1-a": {
+    "id": "props-1x1-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "af125829-e5d4-4010-94fa-d7cc42812b23",
+    "submittedAt": "2026-11-26T14:06:03.249Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big blocking winter prop that fills one map cell, each image a different one of these: a huge rounded boulder of translucent pale blue ice #9fd0ea with #5f96b8 shadows, a tall jagged spire of blue ice crystals, an abandoned wooden sled #8a5a2c tipped on its side with a fur bundle and snow on it, a tall wind-carved snowdrift with an overhanging crest and blue shadows #b4c4d8. About three quarters of the image wide and about three quarters of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 87411,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one big blocking winter prop that fills one map cell, each image a different one of these: a huge rounded boulder of translucent pale blue ice #9fd0ea with #5f96b8 shadows, a tall jagged spire of blue ice crystals, an abandoned wooden sled #8a5a2c tipped on its side with a fur bundle and snow on it, a tall wind-carved snowdrift with an overhanging crest and blue shadows #b4c4d8. About three quarters of the image wide and about three quarters of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, flag, banner, fence, road, horse, dog, person, ground patch, snow plate."
+    },
+    "at": "2026-11-26T14:08:11.457Z",
+    "usageUsd": 0.0818267038928138,
+    "candidates": [
+      {
+        "file": "props-1x1-a-0.png",
+        "sha256": "75d6f0c718f658ec28294d4163eadacd2ffa1d5f7af6acb17f9c5aaba905ad0a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-1.png",
+        "sha256": "8abc9af2d2eb1baa1193ac606368041c3169fab8fa03e1917d49bcf81ec45982",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-2.png",
+        "sha256": "c78edec51e44a93d812bae7fd1269871aff87f6f52257a111588b3d3af6623a8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-3.png",
+        "sha256": "775f45edda88883516928866d0ed9d821460c20f2fc521e05b4df8d1f1c8e961",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-4.png",
+        "sha256": "94633e710e129d4230da79b34f54e2f19abb78458df062e69889419d20be7b0e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-5.png",
+        "sha256": "e0fdc37199b3c8359a6f26e99247799a450a12f76e8f3433e9cd5c9a4f820ba6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-6.png",
+        "sha256": "e6bb6b9030c34156cada4850573ae4e1855877b8e8f12d321b60631494ad1da4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-7.png",
+        "sha256": "d27b1d9e518793fd2600b5765dd7a5839b785fc565775554963739884082edef",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-8.png",
+        "sha256": "76065aeda467354ffe064399a8684b1a09c155dba3c8d405464e8589dd320d82",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-9.png",
+        "sha256": "bb0d369995fc51bc11a8a6383612caf59073432a5e100eab964c3270028e0f18",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-10.png",
+        "sha256": "58b16504e40dc2a808e54c76c3e92c9cc9078c2f929e891fbfe97f6a438c4145",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-11.png",
+        "sha256": "80a13c9156359b81a2a7ffb37146b2da3ad4a9d7de85b5caf8357ff95aaed80c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-12.png",
+        "sha256": "28bb0fc7ffdaa8d5ba9cd5511f2f7510c600df3e23da6e72a5d875aad3921751",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-13.png",
+        "sha256": "6d17fb34b284ce78009b7bc38072b25272061dfe29237e588e0b5e403183cd97",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-14.png",
+        "sha256": "5a4b53bf1ebcfdccbda324ef55777c40567041a465e207c06c4e3a6586bf9968",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "props-1x1-a-15.png",
+        "sha256": "3af1986c3c551ad6de2fe33b0ed40159f881545d725a01d7ba3f27fe936be26a",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "mammoth-2x1-a": {
+    "id": "mammoth-2x1-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "cd2b63f4-33df-47f5-bd2d-6196a21417a0",
+    "submittedAt": "2026-11-26T14:08:12.111Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: the old bleached skeleton of a woolly mammoth lying across the image from left to right: a huge skull at the left with two long curved ivory tusks #e8dcc0, a row of big curved ribs, a long spine, bones of cream #e0d6c0 with #a89a80 shadows, snow lying on top of the bones. Nearly the full image wide and about two thirds of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 128,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 87412,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: the old bleached skeleton of a woolly mammoth lying across the image from left to right: a huge skull at the left with two long curved ivory tusks #e8dcc0, a row of big curved ribs, a long spine, bones of cream #e0d6c0 with #a89a80 shadows, snow lying on top of the bones. Nearly the full image wide and about two thirds of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, flesh, fur, blood, living animal, person, ground patch, snow plate."
+    },
+    "at": "2026-11-26T14:10:01.064Z",
+    "usageUsd": 0.08171323257022434,
+    "candidates": [
+      {
+        "file": "mammoth-2x1-a-0.png",
+        "sha256": "f584b4b5ea2084a29e17cc06682cef037023a72be6392456ab4c5b7ce3fd55ab",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "mammoth-2x1-a-1.png",
+        "sha256": "49dc0208641c8d13763cb3c783c79aee0679dfa185f9a86d1b1b24383c59fc37",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "mammoth-2x1-a-2.png",
+        "sha256": "9a28e919aa8bcef25092cac6623e2411cfea02d895a9fad176720ad15b298317",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "mammoth-2x1-a-3.png",
+        "sha256": "ad15c043ee73a0836951b921c2c29b55d8af5eaef93c17a4b757902bea956ad5",
+        "width": 128,
+        "height": 64
+      }
+    ]
+  },
+  "log-2x1-a": {
+    "id": "log-2x1-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b85cf38f-7cc8-44e2-ad1e-4c598eb650c1",
+    "submittedAt": "2026-11-26T14:10:01.385Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-prop.txt",
+          "text": "Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one huge frozen fallen tree trunk lying on its side across the image from left to right, dark rough bark #5a4030 with #3a2a20 shadows, a thick layer of snow on top, icicles hanging along its side, a pale cut end with rings facing the viewer at the left, a few broken snowy branch stubs. Nearly the full image wide and about half of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 128,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 87413,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big impassable terrain prop for a strategy map, a natural feature or old ruin that blocks the way, seen from the front with the camera slightly above it like the trees and mountains of the same map: we see its front face and a little of its top, never a plan from straight above. Calmer and less saturated than units and buildings, a dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: one huge frozen fallen tree trunk lying on its side across the image from left to right, dark rough bark #5a4030 with #3a2a20 shadows, a thick layer of snow on top, icicles hanging along its side, a pale cut end with rings facing the viewer at the left, a few broken snowy branch stubs. Nearly the full image wide and about half of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, house, building, glow, leaves, crown, standing tree, axe, fire, ground patch, snow plate."
+    },
+    "at": "2026-11-26T14:11:34.130Z",
+    "usageUsd": 0.08129538419511584,
+    "candidates": [
+      {
+        "file": "log-2x1-a-0.png",
+        "sha256": "352e06972f07127ef18d57a8036151e9b76877af43af0d98345ab46d9773c2b7",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "log-2x1-a-1.png",
+        "sha256": "36e41964ab53cedc5c6a52c2dd99e38be516210c3a28b73778134ba98032555e",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "log-2x1-a-2.png",
+        "sha256": "40201f6f3fc06b546e7eec8de2f40937bf3b50438dc707bb9df9d599d311d399",
+        "width": 128,
+        "height": 64
+      },
+      {
+        "file": "log-2x1-a-3.png",
+        "sha256": "29d7a8fe0a54ed6f295d44850228ed0eba3ee76ea14a11dae351842711ffcc84",
+        "width": 128,
+        "height": 64
+      }
+    ]
+  }
+}

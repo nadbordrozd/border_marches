@@ -1,0 +1,354 @@
+{
+  "set": "winter-trees",
+  "bead": "border_marches-bzc.87",
+  "class": "trees",
+  "exploration": false,
+  "_doc": "Small single snowy trees for the woods of the snow ground (bead bzc.87, docs/art/classes/trees.md): generate-image-v2 at 48 x 48 returns 25 candidates of a mixed subject; the best distinct ones are accepted and cropped to their opaque box plus 1 px. Layers: style, light, class-tree, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-tree"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "snow-conifer-a",
+      "concept": "SNOWY CONIFERS",
+      "width": 48,
+      "height": 48,
+      "seed": 87201,
+      "subject": "Subject: one small evergreen conifer laden with fresh snow, each image a different one of these: a slim pointed spruce with a white snow cap on every layer of branches, a fir with three stacked drooping layers heavy with thick snow, a narrow pine with a blunt snowy tip, a young bushy spruce dusted with snow. Dark cool blue-green needles #2a5a52, shadow #1b3d3a, snow white #eef4fa with pale blue shadows #b8c8dc on the right side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall.",
+      "negative": "snowman, ground, snow mound, snow patch under the tree, ornaments, star, lights, person"
+    },
+    {
+      "id": "snow-mixed-a",
+      "concept": "SNOWY LARCH, BIRCH, JUNIPER, PINE",
+      "width": 48,
+      "height": 48,
+      "seed": 87202,
+      "subject": "Subject: one small tree in deep winter, chunky and simple, each image a different one of these: a frosted larch with a full cone-shaped crown of bare golden-brown twigs #8a6a3c capped with snow, a white birch with a white trunk and a full round crown of thick snow-covered branches, a squat dark juniper with snow lying on top, a round snow-laden pine with a dense dark green crown #2f5a48. Snow white #eef4fa with pale blue shadows #b8c8dc on the right side. About two thirds of the image wide and nearly the full image tall.",
+      "negative": "snowman, ground, snow mound, snow patch under the tree, ornaments, person, thin bare pole"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-1.png",
+      "from": "snow-conifer-a#0",
+      "width": 20,
+      "height": 36,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 5,
+          "width": 20,
+          "height": 36
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-2.png",
+      "from": "snow-conifer-a#1",
+      "width": 28,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 7,
+          "width": 28,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-3.png",
+      "from": "snow-conifer-a#3",
+      "width": 26,
+      "height": 31,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 9,
+          "width": 26,
+          "height": 31
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-4.png",
+      "from": "snow-conifer-a#4",
+      "width": 26,
+      "height": 37,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 4,
+          "width": 26,
+          "height": 37
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-5.png",
+      "from": "snow-conifer-a#5",
+      "width": 30,
+      "height": 38,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 3,
+          "width": 30,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-6.png",
+      "from": "snow-conifer-a#6",
+      "width": 30,
+      "height": 36,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 5,
+          "width": 30,
+          "height": 36
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-7.png",
+      "from": "snow-conifer-a#8",
+      "width": 28,
+      "height": 36,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 5,
+          "width": 28,
+          "height": 36
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-8.png",
+      "from": "snow-conifer-a#11",
+      "width": 26,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 5,
+          "width": 26,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-9.png",
+      "from": "snow-conifer-a#14",
+      "width": 28,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 7,
+          "width": 28,
+          "height": 33
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-10.png",
+      "from": "snow-conifer-a#16",
+      "width": 31,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 5,
+          "width": 31,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-11.png",
+      "from": "snow-conifer-a#19",
+      "width": 22,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 5,
+          "width": 22,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/spruce-12.png",
+      "from": "snow-conifer-a#21",
+      "width": 27,
+      "height": 34,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 6,
+          "width": 27,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/fir-1.png",
+      "from": "snow-conifer-a#9",
+      "width": 30,
+      "height": 29,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 10,
+          "width": 30,
+          "height": 29
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/fir-2.png",
+      "from": "snow-conifer-a#17",
+      "width": 21,
+      "height": 34,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 6,
+          "width": 21,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/fir-3.png",
+      "from": "snow-conifer-a#18",
+      "width": 28,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 5,
+          "width": 28,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/fir-4.png",
+      "from": "snow-mixed-a#22",
+      "width": 32,
+      "height": 37,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 5,
+          "width": 32,
+          "height": 37
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/birch-1.png",
+      "from": "snow-mixed-a#1",
+      "width": 26,
+      "height": 41,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 3,
+          "width": 26,
+          "height": 41
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/birch-2.png",
+      "from": "snow-mixed-a#5",
+      "width": 33,
+      "height": 38,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 5,
+          "width": 33,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/birch-3.png",
+      "from": "snow-mixed-a#14",
+      "width": 32,
+      "height": 41,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 3,
+          "width": 32,
+          "height": 41
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/larch-1.png",
+      "from": "snow-mixed-a#0",
+      "width": 26,
+      "height": 38,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 5,
+          "width": 26,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/snow/larch-2.png",
+      "from": "snow-mixed-a#24",
+      "width": 35,
+      "height": 37,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 5,
+          "width": 35,
+          "height": 37
+        }
+      ]
+    }
+  ]
+}

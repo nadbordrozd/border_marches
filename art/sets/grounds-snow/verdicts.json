@@ -1,0 +1,27 @@
+{
+  "base-a#0": {
+    "verdict": "REJECTED",
+    "notes": "round blue puddle blobs scattered evenly: a loud repeating motif, not calm snow",
+    "at": "2026-11-26T13:57:33.274Z"
+  },
+  "base-b#0": {
+    "verdict": "REJECTED",
+    "notes": "faint but regular brick grid over the whole field: breaks the no-grid rule",
+    "at": "2026-11-26T13:57:33.373Z"
+  },
+  "base-c#0": {
+    "verdict": "REJECTED",
+    "notes": "grey rock clumps every cell repeat as stamps; too busy for a ground",
+    "at": "2026-11-26T13:57:33.472Z"
+  },
+  "base-e#0": {
+    "verdict": "ACCEPTED",
+    "notes": "calm blue-white snowfield with faint white wind marks, no grid, no motif, no visible seam in the 3x3 repeat: the snow base",
+    "at": "2026-11-26T13:59:34.727Z"
+  },
+  "base-d#0": {
+    "verdict": "REJECTED",
+    "notes": "grey-teal, reads as frozen slush, and its dark speckle clumps repeat as stamps",
+    "at": "2026-11-26T13:59:34.813Z"
+  }
+}

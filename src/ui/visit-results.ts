@@ -8,7 +8,7 @@
  * floats or shows them, dialog-kinds.ts draws the dialog.
  */
 import type { GameState, HeroState } from "../core/game/index.ts";
-import { objectName, objectTypeOf } from "../core/game/index.ts";
+import { auroraSkill, objectName, objectTypeOf } from "../core/game/index.ts";
 import { heroMagic, isSpell, spellInfo } from "../core/magic/index.ts";
 import type { MapObject } from "../core/map/types.ts";
 import type { IconKind } from "../assets/icons.ts";
@@ -151,7 +151,12 @@ export function siteIcons(obj: MapObject): VisitIcon[] {
     case "quiet-yard":
     case "thunderstruck-pylon-yard":
     case "landfall-wreck":
+    case "frost-giants-barrow":
       return prizeIcons(prizeOf(obj, "prize"));
+    case "aurora-spire": {
+      const skill = auroraSkill(obj);
+      return skill === undefined ? [] : [{ kind: "skill", id: skill.id }];
+    }
     default:
       return [];
   }
@@ -209,6 +214,12 @@ export function siteResult(
   let note = scrollNote(hero, taughtSpell(obj), text);
   if (note === null && skill?.family === "school" && /learns/.test(text))
     note = `${skill.ranks[0].text} The Mage Guilds of your towns now teach them.`;
+  // An Aurora Spire's school rank (bead bzc.87): what the new rank allows.
+  const aurora =
+    objectTypeOf(obj) === "aurora-spire" ? auroraSkill(obj) : undefined;
+  const auroraRank = /rank (\d)/.exec(text)?.[1];
+  if (note === null && aurora !== undefined && auroraRank !== undefined)
+    note = aurora.ranks[Number(auroraRank) - 1]?.text ?? null;
   if (area !== null)
     note =
       "The area is uncovered on your map. Dig there with a hero (the whole day's movement).";

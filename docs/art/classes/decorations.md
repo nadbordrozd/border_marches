@@ -71,6 +71,28 @@ cell, 5 of two cells; the fallen log and the toppled statue have two looks),
 | Prop 2x1 | `beast-skeleton` (Beast Skeleton) | badlands, steppe, wasteland | 113x61 |
 | Prop 2x1 | `ruined-wall` (Ruined Wall) | jungle, grass | 128x60 |
 | Prop 2x1 | `broken-catapult` (Broken Catapult) | wasteland, grass | 90x63 |
+| Passable | `arctic-hare` (Arctic Hare) | snow | 22x28 (2 looks) |
+| Passable | `snowy-owl` (Snowy Owl) | snow | 25x25 (2) |
+| Passable | `fox` (Fox) | snow | 29x21 (2) |
+| Passable | `snowman` (Snowman) | snow | 28x25, 18x30 |
+| Passable | `frozen-shrub` (Frozen Shrub) | snow | 23x20, 23x22 |
+| Passable | `snow-tufts` (Snow Tufts) | snow | 23x20, 24x22 |
+| Passable | `paw-prints` (Paw Prints) | snow | 22x22, 23x22 |
+| Passable | `ice-crystals` (Ice Crystals) | snow | 22x21, 22x22 |
+| Prop 1x1 | `ice-boulder` (Ice Boulder) | snow | 61x55, 62x53 |
+| Prop 1x1 | `ice-spire` (Ice Spire) | snow | 48x61, 46x61 |
+| Prop 1x1 | `abandoned-sled` (Abandoned Sled) | snow | 62x42, 61x41 |
+| Prop 1x1 | `snowdrift` (Snowdrift) | snow | 62x57, 62x60 |
+| Prop 2x1 | `mammoth-skeleton` (Mammoth Skeleton) | snow | 127x55, 128x49 |
+| Prop 2x1 | `frozen-log` (Frozen Log) | snow | 124x63, 121x64 |
+
+Winter (bead bzc.87, set `winter-decorations`, 5 calls): 8 passable kinds
+and 6 props, two looks each, snow only, so every other ground decorates as
+before. The hare and the fox move a little, the owl hops
+(`LIVING_MOTION`). Snow gets a second sprinkle of its own passable
+decorations (`DECORATE.snowExtraShare`, its own random stream). The frozen
+shrubs and straw tufts keep a thin snow-coloured base: on the snow ground
+it reads as a little drift, so they were accepted.
 
 They are new subjects, not repeats of the older doodads (bushes, flower
 patches, stones, mushroom pairs, ferns, palms, small logs, tumbleweed, the

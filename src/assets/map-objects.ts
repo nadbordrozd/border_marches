@@ -91,6 +91,11 @@ export const MAP_OBJECT_TYPE_IDS = [
   "event-tile",
   "sealed-box",
   "sign",
+  // 3.11 Winter sites (bead bzc.87)
+  "frost-giants-barrow",
+  "aurora-spire",
+  "hunters-lodge",
+  "walrus-rookery",
 ] as const;
 
 export type MapObjectTypeId = (typeof MAP_OBJECT_TYPE_IDS)[number];
@@ -183,6 +188,11 @@ const TYPE_ROWS: readonly (readonly [
   ["event-tile", "Event Tile", 1, 1, "p"],
   ["sealed-box", "Sealed Box", 1, 1, "p"],
   ["sign", "Sign", 1, 1, "s"],
+  // Winter sites (bead bzc.87).
+  ["frost-giants-barrow", "Frost Giant's Barrow", 2, 2, ""],
+  ["aurora-spire", "Aurora Spire", 1, 1, ""],
+  ["hunters-lodge", "Hunter's Lodge", 2, 2, ""],
+  ["walrus-rookery", "Walrus Rookery", 2, 2, ""],
 ];
 
 export const MAP_OBJECT_TYPES: readonly MapObjectType[] = TYPE_ROWS.map(
@@ -358,6 +368,13 @@ const ART_ROWS: readonly (readonly [
   ["event-tile", "", 26, 24, "pickups-a#29"],
   ["sealed-box", "", 30, 32, "pickups-a#10"],
   ["sign", "", 38, 50, "sites-e#0"],
+  // Winter sites (bead bzc.87): studio set winter-objects.
+  ["frost-giants-barrow", "small", 58, 51, "@winter-objects/barrow-a#0"],
+  ["frost-giants-barrow", "medium", 85, 72, "@winter-objects/barrow-a#1"],
+  ["frost-giants-barrow", "large", 121, 111, "@winter-objects/barrow-a#3"],
+  ["aurora-spire", "", 40, 64, "@winter-objects/spire-a#0"],
+  ["hunters-lodge", "", 109, 93, "@winter-objects/lodge-a#2"],
+  ["walrus-rookery", "", 116, 78, "@winter-objects/rookery-a#1"],
 ];
 
 export const MAP_OBJECT_ASSETS: readonly MapObjectAsset[] = ART_ROWS.map(
@@ -372,7 +389,9 @@ export const MAP_OBJECT_ASSETS: readonly MapObjectAsset[] = ART_ROWS.map(
       type,
       variant,
       foot: { x: Math.floor(w / 2), y: h - 1 },
-      source: `map-objects/${source}`,
+      source: source.startsWith("@")
+        ? source.slice(1)
+        : `map-objects/${source}`,
     };
   },
 );

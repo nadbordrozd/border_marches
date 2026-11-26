@@ -1,0 +1,120 @@
+{
+  "set": "winter-doodads",
+  "bead": "border_marches-bzc.87",
+  "class": "doodads",
+  "exploration": false,
+  "_doc": "Small scattered ground clutter of the snow ground (bead bzc.87): generate-image-v2 at 48 x 48, a mixed subject, cropped to the opaque box plus 1 px. Layers: style, light, class-doodad, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-doodad"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "snow-a",
+      "concept": "SNOW DOODADS",
+      "width": 48,
+      "height": 48,
+      "seed": 87501,
+      "subject": "Subject: one small snowy decoration, each image a different one of these: a small grey stone #7a808c with a white snow cap, a clump of frosted dry straw grass #b8a070, a small round snow-covered dark green bush #2f5a48, a small chunk of pale blue ice #a8d0e8, a few frost-covered brown twigs sticking up. Snow white #eef4fa with pale blue shadows #b4c4d8, small and low, about half of the image wide.",
+      "negative": "tree, flower pot, person, animal, bright red, neon, ground patch, snow plate"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/doodads/snow/stones-a.png",
+      "from": "snow-a#3",
+      "width": 34,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 12,
+          "width": 34,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/doodads/snow/stones-b.png",
+      "from": "snow-a#2",
+      "width": 27,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 11,
+          "width": 27,
+          "height": 26
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/doodads/snow/grass-a.png",
+      "from": "snow-a#7",
+      "width": 29,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 15,
+          "width": 29,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/doodads/snow/bush-a.png",
+      "from": "snow-a#13",
+      "width": 29,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 14,
+          "width": 29,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/doodads/snow/ice-a.png",
+      "from": "snow-a#18",
+      "width": 29,
+      "height": 32,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 9,
+          "width": 29,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/doodads/snow/twigs-a.png",
+      "from": "snow-a#22",
+      "width": 30,
+      "height": 32,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 8,
+          "width": 30,
+          "height": 32
+        }
+      ]
+    }
+  ]
+}

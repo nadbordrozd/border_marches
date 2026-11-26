@@ -1,0 +1,501 @@
+{
+  "set": "winter-decorations",
+  "bead": "border_marches-bzc.87",
+  "class": "decorations",
+  "exploration": false,
+  "_doc": "Winter decorations of the snow ground (bead bzc.87, docs/art/classes/decorations.md): passable details at 32 x 32 (64 candidates of a mixed subject), one-cell props at 64 x 64 (16 candidates, four subjects), two-cell props at 128 x 64 (4 candidates, one subject). Layers: style, light, class-doodad or class-prop, subject; no background, no style image. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-doodad"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "snow-small-a",
+      "concept": "SNOW SMALL ANIMALS (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 87401,
+      "subject": "Subject: one tiny winter detail, each image a different one of these: a white arctic hare sitting up with grey ear tips and a black eye, a white snowy owl with black speckles and yellow eyes sitting on the ground, a red fox #d0642a with a white tail tip curled up asleep, a little snowman of two snowballs with a carrot nose and twig arms. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "tree, bush, ground, snow patch, person, bright red, neon, gold, coins, gem, chest, hat"
+    },
+    {
+      "id": "snow-small-b",
+      "concept": "SNOW SMALL PLANTS AND TRACES (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 87402,
+      "subject": "Subject: one tiny winter detail, each image a different one of these: a small frozen shrub of pale blue frosted twigs hung with icicles, a tuft of frosted dry straw grass #b8a070 poking up, a short trail of small grey-blue animal paw prints #8fa2bb, a few sharp pale blue ice crystals #a8d8f0 sticking up. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "tree, ground, snow patch, person, bright red, neon, gold, coins, gem, chest, flower pot"
+    },
+    {
+      "id": "props-1x1-a",
+      "concept": "SNOW PROPS 1x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 64,
+      "height": 64,
+      "seed": 87411,
+      "subject": "Subject: one big blocking winter prop that fills one map cell, each image a different one of these: a huge rounded boulder of translucent pale blue ice #9fd0ea with #5f96b8 shadows, a tall jagged spire of blue ice crystals, an abandoned wooden sled #8a5a2c tipped on its side with a fur bundle and snow on it, a tall wind-carved snowdrift with an overhanging crest and blue shadows #b4c4d8. About three quarters of the image wide and about three quarters of the image tall.",
+      "negative": "glow, flag, banner, fence, road, horse, dog, person, ground patch, snow plate"
+    },
+    {
+      "id": "mammoth-2x1-a",
+      "concept": "MAMMOTH SKELETON 2x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 128,
+      "height": 64,
+      "seed": 87412,
+      "subject": "Subject: the old bleached skeleton of a woolly mammoth lying across the image from left to right: a huge skull at the left with two long curved ivory tusks #e8dcc0, a row of big curved ribs, a long spine, bones of cream #e0d6c0 with #a89a80 shadows, snow lying on top of the bones. Nearly the full image wide and about two thirds of the image tall.",
+      "negative": "flesh, fur, blood, living animal, person, ground patch, snow plate"
+    },
+    {
+      "id": "log-2x1-a",
+      "concept": "FROZEN LOG 2x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 128,
+      "height": 64,
+      "seed": 87413,
+      "subject": "Subject: one huge frozen fallen tree trunk lying on its side across the image from left to right, dark rough bark #5a4030 with #3a2a20 shadows, a thick layer of snow on top, icicles hanging along its side, a pale cut end with rings facing the viewer at the left, a few broken snowy branch stubs. Nearly the full image wide and about half of the image tall.",
+      "negative": "leaves, crown, standing tree, axe, fire, ground patch, snow plate"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/decorations/arctic-hare-1.png",
+      "from": "snow-small-a#0",
+      "width": 22,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 2,
+          "width": 22,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/arctic-hare-2.png",
+      "from": "snow-small-a#24",
+      "width": 22,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 2,
+          "width": 22,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/snowy-owl-1.png",
+      "from": "snow-small-a#1",
+      "width": 25,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 25,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/snowy-owl-2.png",
+      "from": "snow-small-a#9",
+      "width": 25,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 25,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fox-1.png",
+      "from": "snow-small-a#12",
+      "width": 29,
+      "height": 21,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 9,
+          "width": 29,
+          "height": 21
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fox-2.png",
+      "from": "snow-small-a#22",
+      "width": 29,
+      "height": 21,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 9,
+          "width": 29,
+          "height": 21
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/snowman-1.png",
+      "from": "snow-small-a#7",
+      "width": 28,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 28,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/snowman-2.png",
+      "from": "snow-small-a#21",
+      "width": 18,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 0,
+          "width": 18,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/frozen-shrub-1.png",
+      "from": "snow-small-b#49",
+      "width": 23,
+      "height": 20,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 23,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/frozen-shrub-2.png",
+      "from": "snow-small-b#57",
+      "width": 23,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 4,
+          "width": 23,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/snow-tufts-1.png",
+      "from": "snow-small-b#3",
+      "width": 23,
+      "height": 20,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 23,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/snow-tufts-2.png",
+      "from": "snow-small-b#24",
+      "width": 24,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 24,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/paw-prints-1.png",
+      "from": "snow-small-b#13",
+      "width": 22,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 22,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/paw-prints-2.png",
+      "from": "snow-small-b#45",
+      "width": 23,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 23,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/ice-crystals-1.png",
+      "from": "snow-small-b#7",
+      "width": 22,
+      "height": 21,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 22,
+          "height": 21
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/ice-crystals-2.png",
+      "from": "snow-small-b#43",
+      "width": 22,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 4,
+          "width": 22,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/ice-boulder-1.png",
+      "from": "props-1x1-a#0",
+      "width": 61,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 4,
+          "width": 61,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/ice-boulder-2.png",
+      "from": "props-1x1-a#3",
+      "width": 62,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 5,
+          "width": 62,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/ice-spire-1.png",
+      "from": "props-1x1-a#5",
+      "width": 48,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 1,
+          "width": 48,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/ice-spire-2.png",
+      "from": "props-1x1-a#6",
+      "width": 46,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 1,
+          "width": 46,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/abandoned-sled-1.png",
+      "from": "props-1x1-a#8",
+      "width": 62,
+      "height": 42,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 13,
+          "width": 62,
+          "height": 42
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/abandoned-sled-2.png",
+      "from": "props-1x1-a#10",
+      "width": 61,
+      "height": 41,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 14,
+          "width": 61,
+          "height": 41
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/snowdrift-1.png",
+      "from": "props-1x1-a#14",
+      "width": 62,
+      "height": 57,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 3,
+          "width": 62,
+          "height": 57
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/snowdrift-2.png",
+      "from": "props-1x1-a#15",
+      "width": 62,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 1,
+          "width": 62,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/mammoth-skeleton-1.png",
+      "from": "mammoth-2x1-a#0",
+      "width": 127,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 8,
+          "width": 127,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/mammoth-skeleton-2.png",
+      "from": "mammoth-2x1-a#2",
+      "width": 128,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 14,
+          "width": 128,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/frozen-log-1.png",
+      "from": "log-2x1-a#0",
+      "width": 124,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 0,
+          "width": 124,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/frozen-log-2.png",
+      "from": "log-2x1-a#2",
+      "width": 121,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 0,
+          "width": 121,
+          "height": 64
+        }
+      ]
+    }
+  ]
+}

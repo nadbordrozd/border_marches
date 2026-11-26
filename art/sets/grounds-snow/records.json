@@ -1,0 +1,172 @@
+{
+  "base-a": {
+    "id": "base-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-422fccec-23ad-4270-8615-3e2ccd9eee88",
+    "submittedAt": "2026-11-26T13:54:54.226Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of fresh snow seen from directly above, filling the whole image edge to edge: soft white #e6ecf2 with gentle pale blue-grey #ccd7e3 wind drifts and shallow ripples, a few faint blue shadows #b9c7d8 in the hollows and a few tiny scattered grey pebbles peeking through, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 87101,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of fresh snow seen from directly above, filling the whole image edge to edge: soft white #e6ecf2 with gentle pale blue-grey #ccd7e3 wind drifts and shallow ripples, a few faint blue shadows #b9c7d8 in the hollows and a few tiny scattered grey pebbles peeking through, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, cobblestones, bricks, plates, slabs, paving, ice sheet, cracks, footprints, tracks, tree, rock, snowman, snowflake, object, character, frame, border, horizon, sky."
+    },
+    "at": "2026-11-26T13:54:54.228Z",
+    "usageUsd": 0.008944938235812716,
+    "candidates": [
+      {
+        "file": "base-a-0.png",
+        "sha256": "6f175ecd6ca9d571a748ed7ec076f5498a60140c42ddc5f2af9b720a17de82cc",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "base-b": {
+    "id": "base-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-310daf24-3ec1-4fcf-ae7b-341e7df7379f",
+    "submittedAt": "2026-11-26T13:55:26.772Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of fresh snow seen from directly above, filling the whole image edge to edge: soft white #e6ecf2 with gentle pale blue-grey #ccd7e3 wind drifts and shallow ripples, a few faint blue shadows #b9c7d8 in the hollows and a few tiny scattered grey pebbles peeking through, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 87102,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of fresh snow seen from directly above, filling the whole image edge to edge: soft white #e6ecf2 with gentle pale blue-grey #ccd7e3 wind drifts and shallow ripples, a few faint blue shadows #b9c7d8 in the hollows and a few tiny scattered grey pebbles peeking through, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, cobblestones, bricks, plates, slabs, paving, ice sheet, cracks, footprints, tracks, tree, rock, snowman, snowflake, object, character, frame, border, horizon, sky."
+    },
+    "at": "2026-11-26T13:55:26.774Z",
+    "usageUsd": 0.008456392023298476,
+    "candidates": [
+      {
+        "file": "base-b-0.png",
+        "sha256": "cb96fb0f4d14ea9fb0e1fb91ce42f2a06ae7037f272f49beacf585cc2c0e1edd",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "base-c": {
+    "id": "base-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-9ee92016-a21c-4256-b53c-e6bda82649f4",
+    "submittedAt": "2026-11-26T13:55:54.749Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat snowfield seen from directly above, filling the whole image edge to edge: packed snow of soft blue-white #dde6ef with large soft slightly bluer drifts #c8d4e2 and slightly whiter patches #edf2f7, a few tiny grey-brown stones and dry grass stalks poking through here and there, very calm and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 87103,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat snowfield seen from directly above, filling the whole image edge to edge: packed snow of soft blue-white #dde6ef with large soft slightly bluer drifts #c8d4e2 and slightly whiter patches #edf2f7, a few tiny grey-brown stones and dry grass stalks poking through here and there, very calm and low in contrast, the same everywhere. Must not include: tiles, tile grid, cobblestones, bricks, plates, slabs, paving, ice sheet, cracks, footprints, tracks, tree, rock, snowman, snowflake, object, character, frame, border, horizon, sky."
+    },
+    "at": "2026-11-26T13:55:54.751Z",
+    "usageUsd": 0.00792917897966173,
+    "candidates": [
+      {
+        "file": "base-c-0.png",
+        "sha256": "39dc4ae6a9b44aa7e4338a636c91d38ff50a20b80683f1574949b00272b472c7",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "base-d": {
+    "id": "base-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-b56eaad4-851c-4adc-92cf-e2f169738ac2",
+    "submittedAt": "2026-11-26T13:58:37.154Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of smooth fresh snow seen from directly above, filling the whole image edge to edge: soft white #e4eaf1 with large soft, slightly bluer wind drifts #d3dce8 that blend gently into each other and a few faint thin curved wind lines, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 87104,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of smooth fresh snow seen from directly above, filling the whole image edge to edge: soft white #e4eaf1 with large soft, slightly bluer wind drifts #d3dce8 that blend gently into each other and a few faint thin curved wind lines, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, cobblestones, bricks, plates, slabs, paving, ice sheet, cracks, footprints, tracks, tree, rock, snowman, snowflake, object, character, frame, border, horizon, sky, squares, puddles, holes, blobs, dots, circles, stones, rocks, pebbles."
+    },
+    "at": "2026-11-26T13:58:37.160Z",
+    "usageUsd": 0.010681564966837566,
+    "candidates": [
+      {
+        "file": "base-d-0.png",
+        "sha256": "e05c45eecc3d7b06f3a5f5795007da7a3291f8b25cdd830ef5b700423a9144f8",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "base-e": {
+    "id": "base-e",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-00290d5b-9751-4630-86e6-0a16c8207df4",
+    "submittedAt": "2026-11-26T13:59:25.170Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of smooth fresh snow seen from directly above, filling the whole image edge to edge: soft white #e4eaf1 with large soft, slightly bluer wind drifts #d3dce8 that blend gently into each other and a few faint thin curved wind lines, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 87105,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of smooth fresh snow seen from directly above, filling the whole image edge to edge: soft white #e4eaf1 with large soft, slightly bluer wind drifts #d3dce8 that blend gently into each other and a few faint thin curved wind lines, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, cobblestones, bricks, plates, slabs, paving, ice sheet, cracks, footprints, tracks, tree, rock, snowman, snowflake, object, character, frame, border, horizon, sky, squares, puddles, holes, blobs, dots, circles, stones, rocks, pebbles."
+    },
+    "at": "2026-11-26T13:59:25.172Z",
+    "usageUsd": 0.010064353651470608,
+    "candidates": [
+      {
+        "file": "base-e-0.png",
+        "sha256": "a937df03ba30e726afc63e5d2eefae799bf47e3f8bdd36cbcef99cd59d8fac59",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  }
+}

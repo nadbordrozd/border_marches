@@ -39,10 +39,11 @@ const T: Readonly<Record<string, DecorationGround>> = {
   b: "badlands",
   w: "wasteland",
   v: "volcanic",
+  n: "snow",
 };
 
 /**
- * [id, name, terrains (letters g j s b w v), "p" passable or "x" prop, cols,
+ * [id, name, terrains (letters g j s b w v n), "p" passable or "x" prop, cols,
  * looks, text].
  */
 // prettier-ignore
@@ -72,6 +73,15 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["dead-weeds", "Dead Weeds", "wv", "p", 1, 1, "Burnt, thorny weeds."],
   ["toadstools", "Toadstools", "wj", "p", 1, 1, "Pale toadstools nobody should eat."],
   ["broken-spear", "Broken Spear", "wv", "p", 1, 1, "A spear shaft from a battle long ago."],
+  // Winter (bead bzc.87): snow only, so other grounds draw what they drew.
+  ["arctic-hare", "Arctic Hare", "n", "p", 1, 2, "A white hare, nearly invisible until it moves."],
+  ["snowy-owl", "Snowy Owl", "n", "p", 1, 2, "A snowy owl, watching with yellow eyes."],
+  ["fox", "Fox", "n", "p", 1, 2, "A red fox curled up asleep in the snow."],
+  ["snowman", "Snowman", "n", "p", 1, 2, "Someone built a snowman out here. Who?"],
+  ["frozen-shrub", "Frozen Shrub", "n", "p", 1, 2, "A shrub hung with icicles."],
+  ["snow-tufts", "Snow Tufts", "n", "p", 1, 2, "Dry grass poking up through the snow."],
+  ["paw-prints", "Paw Prints", "n", "p", 1, 2, "Fresh tracks: something passed this way."],
+  ["ice-crystals", "Ice Crystals", "n", "p", 1, 2, "Blue crystals of ice grown out of the frost."],
   // Impassable props: they block the way.
   ["big-boulder", "Big Boulder", "gsj", "x", 1, 1, "A mossy boulder too big to climb."],
   ["stump-cluster", "Stumps", "gs", "x", 1, 1, "Three thick stumps of a cleared wood."],
@@ -92,6 +102,13 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["beast-skeleton", "Beast Skeleton", "bswv", "x", 2, 1, "The bones of a giant beast."],
   ["ruined-wall", "Ruined Wall", "jg", "x", 2, 1, "A stretch of ancient wall under creepers."],
   ["broken-catapult", "Broken Catapult", "wg", "x", 2, 1, "A siege engine abandoned after a battle."],
+  // Winter props (bead bzc.87): snow only.
+  ["ice-boulder", "Ice Boulder", "n", "x", 1, 2, "A boulder of clear blue ice, too slick to climb."],
+  ["ice-spire", "Ice Spire", "n", "x", 1, 2, "Blue ice crystals taller than a rider."],
+  ["abandoned-sled", "Abandoned Sled", "n", "x", 1, 2, "A sled left in the snow. Its owner did not come back."],
+  ["snowdrift", "Snowdrift", "n", "x", 1, 2, "A wall of wind-packed snow."],
+  ["mammoth-skeleton", "Mammoth Skeleton", "n", "x", 2, 2, "The bones of a woolly mammoth, tusks and all."],
+  ["frozen-log", "Frozen Log", "n", "x", 2, 2, "A huge trunk frozen to the ground, hung with icicles."],
 ];
 
 export const DECORATION_KINDS: readonly DecorationKind[] = ROWS.map(

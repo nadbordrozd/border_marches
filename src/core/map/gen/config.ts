@@ -119,6 +119,22 @@ export interface GenConfig {
       /** Secondary patches of a volcanic zone: one of these. */
       secondary: readonly Terrain[];
     };
+    /**
+     * Winter (bead bzc.87): on some maps a wild zone away from the starts
+     * is snow (gen/terrain.ts placeWinter), picked like the volcanic zones
+     * from its own random stream after them, never next to a volcanic zone,
+     * so a map that rolls no winter is the map it was before snow existed.
+     */
+    winter: {
+      /** Chance per map size that the map has winter zones at all. */
+      chance: Readonly<Record<MapSize, number>>;
+      /** Most winter zones per map size (each further one at half the chance). */
+      maxZones: Readonly<Record<MapSize, number>>;
+      /** Lowest tier (steps from the nearest start zone) of a winter zone. */
+      minTier: number;
+      /** Secondary patches of a winter zone: one of these. */
+      secondary: readonly Terrain[];
+    };
   };
 
   water: {
@@ -361,6 +377,12 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       minTier: 1,
       secondary: ["wasteland", "badlands"],
     },
+    winter: {
+      chance: { S: 0.35, M: 0.5, L: 0.6 },
+      maxZones: { S: 1, M: 1, L: 2 },
+      minTier: 1,
+      secondary: ["steppe", "wasteland"],
+    },
   },
 
   water: {
@@ -387,6 +409,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       badlands: 0.85,
       wasteland: 0.75,
       volcanic: 0.85,
+      snow: 0.6,
       water: 0.5,
     },
     edgeDepth: 2.8,
@@ -418,6 +441,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       badlands: 0.7,
       wasteland: 0.6,
       volcanic: 0.75,
+      snow: 0.6,
       water: 0.5,
     },
     ridgeBias: 2.2,
@@ -437,6 +461,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
         badlands: 0.8,
         wasteland: 0,
         volcanic: 0.5,
+        snow: 0.45,
         water: 0,
       },
       size: [22, 36],
@@ -504,6 +529,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       badlands: 125,
       wasteland: 150,
       volcanic: 150,
+      snow: 150,
     },
     road: 75,
     day: 1500,

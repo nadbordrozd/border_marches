@@ -14,7 +14,8 @@
  *             deep in their zones
  * 3. water    coast and lakes (gen/water.ts)
  * 4. terrain  main terrain per zone with secondary patches; on some maps a
- *             wild zone turns volcanic (gen/terrain.ts)
+ *             wild zone turns volcanic, and on some one turns
+ *             to snow (gen/terrain.ts)
  * 5. borders  mountain ranges and forest belts along zone borders, a frame
  *             along the map edge, spurs, and passes (gen/borders.ts)
  * 6. rooms    walls of forest and rock inside each zone with unguarded gaps:
@@ -52,6 +53,7 @@ import {
   mergeSmallRegions,
   paintTerrain,
   placeVolcanic,
+  placeWinter,
 } from "./gen/terrain.ts";
 import { wobbleEdges } from "./gen/wobble.ts";
 import { markDeep, placeWater, tidyWater } from "./gen/water.ts";
@@ -151,6 +153,7 @@ export function generateMapWithInfo(
   layoutZones(st);
   placeTowns(st);
   placeVolcanic(st);
+  placeWinter(st);
   lap("zones+towns");
   placeWater(st);
   paintTerrain(st);

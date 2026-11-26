@@ -152,6 +152,28 @@ const TREE_ROWS: readonly (readonly [
   ["wasteland", "leafy", 3, 30, 39],
   ["wasteland", "leafy", 4, 30, 40],
   ["wasteland", "deadoak", 8, 30, 38],
+  // Snowy woods (bead bzc.87, set winter-trees).
+  ["snow", "spruce", 1, 20, 36],
+  ["snow", "spruce", 2, 28, 33],
+  ["snow", "spruce", 3, 26, 31],
+  ["snow", "spruce", 4, 26, 37],
+  ["snow", "spruce", 5, 30, 38],
+  ["snow", "spruce", 6, 30, 36],
+  ["snow", "spruce", 7, 28, 36],
+  ["snow", "spruce", 8, 26, 35],
+  ["snow", "spruce", 9, 28, 33],
+  ["snow", "spruce", 10, 31, 35],
+  ["snow", "spruce", 11, 22, 35],
+  ["snow", "spruce", 12, 27, 34],
+  ["snow", "fir", 1, 30, 29],
+  ["snow", "fir", 2, 21, 34],
+  ["snow", "fir", 3, 28, 35],
+  ["snow", "fir", 4, 32, 37],
+  ["snow", "birch", 1, 26, 41],
+  ["snow", "birch", 2, 33, 38],
+  ["snow", "birch", 3, 32, 41],
+  ["snow", "larch", 1, 26, 38],
+  ["snow", "larch", 2, 35, 37],
 ];
 
 export const TREE_ASSETS: readonly TreeAsset[] = TREE_ROWS.map(
@@ -179,6 +201,9 @@ const OWN_SPECIES_WEIGHTS: Readonly<
   steppe: { oak: 3.4, birch: 0.7, bent: 1 },
   badlands: { juniper: 2, pinyon: 3.2, mesquite: 0.45, gnarled: 0.8 },
   wasteland: { deadoak: 3, leafy: 1.6, pine: 2, snag: 0.6 },
+  // Snow (bead bzc.87): snow-laden spruces with darker firs to break up the
+  // white, a few birches, golden larches in drifts.
+  snow: { spruce: 5, fir: 2.4, birch: 0.9, larch: 2 },
 };
 
 /** The species mix of each ground's woods: its art family's. */
@@ -199,6 +224,7 @@ export const TREE_SPECIES_DRIFT: Readonly<
   Partial<Record<GroundTerrain, Readonly<Record<string, number>>>>
 > = {
   grass: { autumn: 0.57 },
+  snow: { larch: 0.6 },
 };
 
 /** The trees of one ground and species. */

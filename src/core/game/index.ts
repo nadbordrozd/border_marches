@@ -20,6 +20,7 @@ export {
 } from "./newGame.ts";
 export { mapStarts, prepareStarts, type StartSite } from "./starts.ts";
 export {
+  auroraSkill,
   describeObject,
   describeSite,
   type SiteDescription,

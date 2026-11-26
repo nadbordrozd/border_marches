@@ -1,0 +1,277 @@
+{
+  "snow-low-a#0": {
+    "verdict": "REJECTED",
+    "notes": "flat snow mound: reads as a drift, not rock",
+    "at": "2026-11-26T14:04:45.970Z"
+  },
+  "snow-low-a#1": {
+    "verdict": "REJECTED",
+    "notes": "stacked blocks read as stairs",
+    "at": "2026-11-26T14:04:46.023Z"
+  },
+  "snow-low-a#5": {
+    "verdict": "REJECTED",
+    "notes": "snow pile reads as a drift",
+    "at": "2026-11-26T14:04:46.075Z"
+  },
+  "snow-low-a#6": {
+    "verdict": "REJECTED",
+    "notes": "terraced cake shape",
+    "at": "2026-11-26T14:04:46.128Z"
+  },
+  "snow-low-a#7": {
+    "verdict": "REJECTED",
+    "notes": "snowball dome",
+    "at": "2026-11-26T14:04:46.183Z"
+  },
+  "snow-low-a#9": {
+    "verdict": "REJECTED",
+    "notes": "thin outline slope, no rock mass",
+    "at": "2026-11-26T14:04:46.238Z"
+  },
+  "snow-low-a#11": {
+    "verdict": "REJECTED",
+    "notes": "flat slab",
+    "at": "2026-11-26T14:04:46.292Z"
+  },
+  "snow-low-a#12": {
+    "verdict": "REJECTED",
+    "notes": "pebbles, too small",
+    "at": "2026-11-26T14:04:46.346Z"
+  },
+  "snow-low-a#13": {
+    "verdict": "REJECTED",
+    "notes": "rubble pile, noise in a crowd",
+    "at": "2026-11-26T14:04:46.401Z"
+  },
+  "snow-low-a#14": {
+    "verdict": "REJECTED",
+    "notes": "snow dome",
+    "at": "2026-11-26T14:04:46.457Z"
+  },
+  "snow-low-a#16": {
+    "verdict": "REJECTED",
+    "notes": "flat mound",
+    "at": "2026-11-26T14:04:46.512Z"
+  },
+  "snow-low-a#17": {
+    "verdict": "REJECTED",
+    "notes": "bent clipped shape",
+    "at": "2026-11-26T14:04:46.565Z"
+  },
+  "snow-low-a#18": {
+    "verdict": "REJECTED",
+    "notes": "snow dome",
+    "at": "2026-11-26T14:04:46.620Z"
+  },
+  "snow-low-a#21": {
+    "verdict": "REJECTED",
+    "notes": "reads as an igloo",
+    "at": "2026-11-26T14:04:46.675Z"
+  },
+  "snow-low-a#23": {
+    "verdict": "REJECTED",
+    "notes": "cloud-like lumps",
+    "at": "2026-11-26T14:04:46.730Z"
+  },
+  "snow-mid-a#1": {
+    "verdict": "REJECTED",
+    "notes": "flat-topped tiers",
+    "at": "2026-11-26T14:04:46.783Z"
+  },
+  "snow-mid-a#4": {
+    "verdict": "REJECTED",
+    "notes": "terraced cake",
+    "at": "2026-11-26T14:04:46.839Z"
+  },
+  "snow-mid-a#8": {
+    "verdict": "REJECTED",
+    "notes": "terraced cake",
+    "at": "2026-11-26T14:04:46.894Z"
+  },
+  "snow-big-a#1": {
+    "verdict": "REJECTED",
+    "notes": "banded terraces read as a cake",
+    "at": "2026-11-26T14:04:46.951Z"
+  },
+  "snow-big-a#3": {
+    "verdict": "REJECTED",
+    "notes": "crater top seen from above",
+    "at": "2026-11-26T14:04:47.008Z"
+  },
+  "snow-low-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "clear rock-and-snow foothill, lit left, no plate",
+    "at": "2026-11-26T14:04:47.066Z"
+  },
+  "snow-low-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "clear rock-and-snow foothill, lit left, no plate",
+    "at": "2026-11-26T14:04:47.124Z"
+  },
+  "snow-low-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "clear rock-and-snow foothill, lit left, no plate",
+    "at": "2026-11-26T14:04:47.180Z"
+  },
+  "snow-low-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "clear rock-and-snow foothill, lit left, no plate",
+    "at": "2026-11-26T14:04:47.240Z"
+  },
+  "snow-low-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "clear rock-and-snow foothill, lit left, no plate",
+    "at": "2026-11-26T14:04:47.297Z"
+  },
+  "snow-low-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "clear rock-and-snow foothill, lit left, no plate",
+    "at": "2026-11-26T14:04:47.353Z"
+  },
+  "snow-low-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "clear rock-and-snow foothill, lit left, no plate",
+    "at": "2026-11-26T14:04:47.412Z"
+  },
+  "snow-low-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "clear rock-and-snow foothill, lit left, no plate",
+    "at": "2026-11-26T14:04:47.469Z"
+  },
+  "snow-low-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "clear rock-and-snow foothill, lit left, no plate",
+    "at": "2026-11-26T14:04:47.525Z"
+  },
+  "snow-low-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "clear rock-and-snow foothill, lit left, no plate",
+    "at": "2026-11-26T14:04:47.583Z"
+  },
+  "snow-mid-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak with rock faces, reads as one mass",
+    "at": "2026-11-26T14:04:47.641Z"
+  },
+  "snow-mid-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak with rock faces, reads as one mass",
+    "at": "2026-11-26T14:04:47.706Z"
+  },
+  "snow-mid-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak with rock faces, reads as one mass",
+    "at": "2026-11-26T14:04:47.769Z"
+  },
+  "snow-mid-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak with rock faces, reads as one mass",
+    "at": "2026-11-26T14:04:47.835Z"
+  },
+  "snow-mid-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak with rock faces, reads as one mass",
+    "at": "2026-11-26T14:04:47.900Z"
+  },
+  "snow-mid-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak with rock faces, reads as one mass",
+    "at": "2026-11-26T14:04:47.968Z"
+  },
+  "snow-big-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "big alpine summit, clean silhouette",
+    "at": "2026-11-26T14:04:48.030Z"
+  },
+  "snow-big-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "big alpine summit, clean silhouette",
+    "at": "2026-11-26T14:04:48.099Z"
+  },
+  "snow-big-b#1": {
+    "verdict": "REJECTED",
+    "notes": "thin single slope with a flat skirt reads as a tent",
+    "at": "2026-11-26T14:13:25.636Z"
+  },
+  "snow-big-b#3": {
+    "verdict": "REJECTED",
+    "notes": "banded terraces",
+    "at": "2026-11-26T14:13:25.684Z"
+  },
+  "snow-big-c#3": {
+    "verdict": "REJECTED",
+    "notes": "stacked terraces",
+    "at": "2026-11-26T14:13:25.735Z"
+  },
+  "snow-mid-b#4": {
+    "verdict": "REJECTED",
+    "notes": "stepped cake",
+    "at": "2026-11-26T14:13:25.785Z"
+  },
+  "snow-mid-b#5": {
+    "verdict": "REJECTED",
+    "notes": "rounded snow blob reads as a boulder",
+    "at": "2026-11-26T14:13:25.837Z"
+  },
+  "snow-mid-b#8": {
+    "verdict": "REJECTED",
+    "notes": "snow blob reads as a boulder",
+    "at": "2026-11-26T14:13:25.893Z"
+  },
+  "snow-big-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "big alpine summit, rock ribs and snowfields, clean silhouette",
+    "at": "2026-11-26T14:13:25.947Z"
+  },
+  "snow-big-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "big alpine summit, rock ribs and snowfields, clean silhouette",
+    "at": "2026-11-26T14:13:26.007Z"
+  },
+  "snow-big-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "big alpine summit, rock ribs and snowfields, clean silhouette",
+    "at": "2026-11-26T14:13:26.061Z"
+  },
+  "snow-big-c#1": {
+    "verdict": "ACCEPTED",
+    "notes": "big alpine summit, rock ribs and snowfields, clean silhouette",
+    "at": "2026-11-26T14:13:26.119Z"
+  },
+  "snow-big-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "big alpine summit, rock ribs and snowfields, clean silhouette",
+    "at": "2026-11-26T14:13:26.176Z"
+  },
+  "snow-mid-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak, reads as one mass",
+    "at": "2026-11-26T14:13:26.234Z"
+  },
+  "snow-mid-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak, reads as one mass",
+    "at": "2026-11-26T14:13:26.292Z"
+  },
+  "snow-mid-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak, reads as one mass",
+    "at": "2026-11-26T14:13:26.350Z"
+  },
+  "snow-mid-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak, reads as one mass",
+    "at": "2026-11-26T14:13:26.407Z"
+  },
+  "snow-mid-b#6": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak, reads as one mass",
+    "at": "2026-11-26T14:13:26.462Z"
+  },
+  "snow-mid-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-capped peak, reads as one mass",
+    "at": "2026-11-26T14:13:26.518Z"
+  }
+}

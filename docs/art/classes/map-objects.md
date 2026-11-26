@@ -53,6 +53,11 @@ PixelLab calls (US$2.87).
   nothing is drawn. A type without art, or an unknown id, gets the imported
   roadside shrine flagged `placeholder: true`.
 
+Winter sites (bead bzc.87, set `winter-objects`, 4 calls, same recipe and
+style image): Frost Giant's Barrow (small, medium, large), Aurora Spire,
+Hunter's Lodge, Walrus Rookery; `ART_ROWS` name their takes as
+`@winter-objects/<take>`.
+
 The per-type coverage, takes and verdicts are in
 `art/sets/map-objects/verdicts.json` (every take has a one-line reason).
 

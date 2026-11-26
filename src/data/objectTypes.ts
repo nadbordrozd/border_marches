@@ -1,6 +1,7 @@
 /**
  * The adventure-map object catalogue (docs/design/CONTENT_MAP_OBJECTS.md,
- * bead bzc.13): 62 object types, 53 core and 9 stretch. Type ids are the
+ * bead bzc.13): 62 object types, 53 core and 9 stretch, and the four
+ * winter sites of bead bzc.87 (placed by the generator's winter rule only). Type ids are the
  * catalogue names in kebab case (shared with the object art of bead
  * bzc.16). A placed object carries its type in `data.type`.
  *
@@ -85,6 +86,11 @@ export const OBJECT_TYPE_IDS = [
   "event-tile",
   "sealed-box",
   "sign",
+  // 3.11 Winter sites (bead bzc.87): placed only in and next to snow zones
+  "frost-giants-barrow",
+  "aurora-spire",
+  "hunters-lodge",
+  "walrus-rookery",
 ] as const;
 
 export type ObjectTypeId = (typeof OBJECT_TYPE_IDS)[number];
@@ -163,6 +169,7 @@ const J: Terrain = "jungle";
 const S: Terrain = "steppe";
 const B: Terrain = "badlands";
 const W: Terrain = "wasteland";
+const SN: Terrain = "snow";
 
 // Flags: "s" stretch, "v" vanishes when used.
 const ROWS: readonly Row[] = [
@@ -290,6 +297,16 @@ const ROWS: readonly Row[] = [
   ["sealed-box", "Sealed Box", "site", 1, 1, "v", "one-time", 3000, [], 3, "The first hero to walk up next to it opens it; what is inside is a surprise."],
   // prettier-ignore
   ["sign", "Sign", "site", 1, 1, "s", "each-visit", 0, [], 0, "Shows its text."],
+  // Winter sites (bead bzc.87): weight 0, placed by the winter rule in and
+  // next to snow zones (gen/objects.ts), so maps without snow are unchanged.
+  // prettier-ignore
+  ["frost-giants-barrow", "Frost Giant's Barrow", "bank", 2, 2, "", "one-time", 6500, [SN], 0, "Rime Walruses den in a frost giant's tomb; win the battle to take the giant's hoard: its artifacts, gold and ore."],
+  // prettier-ignore
+  ["aurora-spire", "Aurora Spire", "site", 1, 1, "", "per-hero", 3000, [SN], 0, "The hero gains a rank in the spire's school of magic (rank 1 if it lacks the school's skill and has a free skill slot) and its mana is refilled."],
+  // prettier-ignore
+  ["hunters-lodge", "Hunter's Lodge", "site", 2, 2, "", "per-week-hero", 1000, [SN], 0, "Snowshoes: snow costs the hero no more than grass until its next battle ends; and the hunters guide it: +300 movement today."],
+  // prettier-ignore
+  ["walrus-rookery", "Walrus Rookery", "dwelling", 2, 2, "", "flag", 4500, [SN], 0, "Enter it to claim it; then your heroes can hire Rime Walruses here, 2 a week at 1300 gold each. Rime Walruses keep watch beside it."],
 ];
 
 export const OBJECT_TYPES: Readonly<Record<ObjectTypeId, ObjectTypeDef>> =
@@ -340,6 +357,15 @@ export const SHOVEL_DIG_MP = 300;
 /** Bonus movement of stables (per day) and an oasis (today). */
 export const STABLES_MP = 300;
 export const OASIS_MP = 400;
+
+/** A Hunter's Lodge (bead bzc.87): movement today, and the snowshoes' cut. */
+export const HUNTERS_LODGE_MP = 300;
+/** Snowshoes take this off a snow step (150 down to the 100 of grass). */
+export const SNOWSHOES_REDUCE = 50;
+
+/** A Walrus Rookery's weekly Rime Walruses and their price (FV 868 x 1.5). */
+export const ROOKERY_WEEKLY = 2;
+export const ROOKERY_HIRE = 1300;
 
 /** A drill yard sells a Drill for this many times its town gold cost (ECONOMY 6.3). */
 export const DRILL_YARD_MARKUP = 2;
@@ -396,6 +422,8 @@ export function siteBuffEffect(buff: string): {
   luck?: number;
   school?: string;
   power?: number;
+  /** Cheaper steps on one terrain (a Hunter's Lodge's snowshoes). */
+  terrain?: { terrain: Terrain; reduce: number };
 } {
   if (buff.startsWith("school-temple:")) {
     return {
@@ -413,6 +441,11 @@ export function siteBuffEffect(buff: string): {
       return { label: "Oasis", morale: 1 };
     case "fallen-adventurer":
       return { label: "Fallen Adventurer", morale: -2 };
+    case "hunters-lodge":
+      return {
+        label: "Snowshoes",
+        terrain: { terrain: "snow", reduce: SNOWSHOES_REDUCE },
+      };
     default:
       return { label: buff };
   }

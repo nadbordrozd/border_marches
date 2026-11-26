@@ -1,0 +1,380 @@
+{
+  "snow-conifer-a": {
+    "id": "snow-conifer-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "753337d3-660b-4740-9eea-c6439156eadf",
+    "submittedAt": "2026-11-26T13:55:55.602Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small evergreen conifer laden with fresh snow, each image a different one of these: a slim pointed spruce with a white snow cap on every layer of branches, a fir with three stacked drooping layers heavy with thick snow, a narrow pine with a blunt snowy tip, a young bushy spruce dusted with snow. Dark cool blue-green needles #2a5a52, shadow #1b3d3a, snow white #eef4fa with pale blue shadows #b8c8dc on the right side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 87201,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one small evergreen conifer laden with fresh snow, each image a different one of these: a slim pointed spruce with a white snow cap on every layer of branches, a fir with three stacked drooping layers heavy with thick snow, a narrow pine with a blunt snowy tip, a young bushy spruce dusted with snow. Dark cool blue-green needles #2a5a52, shadow #1b3d3a, snow white #eef4fa with pale blue shadows #b8c8dc on the right side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, snowman, ground, snow mound, snow patch under the tree, ornaments, star, lights, person."
+    },
+    "at": "2026-11-26T13:57:38.451Z",
+    "usageUsd": 0.08189902128113641,
+    "candidates": [
+      {
+        "file": "snow-conifer-a-0.png",
+        "sha256": "103010942ac4ed8b37b7332fd64dfd18537ab3f3b5892183340506dc3a40e73f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-1.png",
+        "sha256": "aab184b8f5ebe53a206d74c90dc2b25af96bf419450baf9d0b11a2d81af4b2cb",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-2.png",
+        "sha256": "cf63665efb25c71a7b42341a61f168335cc887fd5a31c11497c1b1ad90873116",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-3.png",
+        "sha256": "29ddca2b7f0ea3d1710e9b25a4abacabc9decf30d120fef408bbbc0508c7f220",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-4.png",
+        "sha256": "88e2bdc0a4925f12c1cb367eda7e37a6d9db4444f2092edb9b04b8b11d42a50f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-5.png",
+        "sha256": "a701c6a5340d0ac2f16d81212dadea1b41e1f2df664ac808473c15229abd098f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-6.png",
+        "sha256": "4b41d1ddf2f6e67aec5a7a437bddae3f187e66b1a00ce1a5097adcd72dbc6078",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-7.png",
+        "sha256": "8b04b1cae405b07ee2a8c44dd3dc9cb37f90798c96f9eae1db6db90bdbcbaf2e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-8.png",
+        "sha256": "66cd3be42091b925e2f43381f88b08342821d25e87ce7449b844fb3013e69d73",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-9.png",
+        "sha256": "3dbce9437a6160d15096f443853cf0c93eba4997a02271678e58fd9cfd32a006",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-10.png",
+        "sha256": "f81dda3f0823e6639e64f8b82daaa1e47bc3845ba19fef728c95189fd7173b0c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-11.png",
+        "sha256": "83d17872236f27c45d3044311226d79405d3418721e34617ffaf67ad1162a985",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-12.png",
+        "sha256": "e4df10dd789a79b3802e3aefdcdb26eacabbfed8211f27762f25dd20db28534e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-13.png",
+        "sha256": "2aa91f7fe8ac0e3c299e70c7634ed74737af698f30a8b523d19f0922d3f372bd",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-14.png",
+        "sha256": "98efe5f7b7d5ce3585f21549492ad03ac6f83bfdace3663e99d16a1748a4b7ca",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-15.png",
+        "sha256": "87b2c9af4a91295464cca1e95eb7b3ee4d7433323f3c04faedffc8265915fa3e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-16.png",
+        "sha256": "a2c5137a6123a8c45a3f3dc6afade5b4834bd17fb068ab0cb944c2ecef4857b5",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-17.png",
+        "sha256": "8fd0cb4ee90ee1bd7397d822dce09343888547641641df29e20e7e3ef70a5101",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-18.png",
+        "sha256": "81907d20f05c5e02847fb1dc9bdc36ab461298008e92b68f156172131a79b055",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-19.png",
+        "sha256": "a342d2ec6029cd855faf511c40ae3a95875bcf91a7b6dfa4f048951ae67c2bf2",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-20.png",
+        "sha256": "d380a57284adfc9462ca8cac3088dab687324f086b806e14563d6a96b22004c7",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-21.png",
+        "sha256": "29365d4e1db30d03fee58a084f3951e8a779429c77afc17829938f2c4db07858",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-22.png",
+        "sha256": "bee8e66d96cc5815515016979f1f6a6a52c932089ee913fb488c77d68d78947f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-23.png",
+        "sha256": "7a95441cfcd3f812aeb4ed97e2db671b7d0955874f242db194c4453e908e6e41",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-conifer-a-24.png",
+        "sha256": "4ee3a319fc85791100d7894bb3f681187972d08e802a4b1ccb3fc246a8c03e3c",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "snow-mixed-a": {
+    "id": "snow-mixed-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "7ecd8cfd-0d22-4099-aa73-8a9c1092240d",
+    "submittedAt": "2026-11-26T13:57:38.533Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small tree in deep winter, chunky and simple, each image a different one of these: a frosted larch with a full cone-shaped crown of bare golden-brown twigs #8a6a3c capped with snow, a white birch with a white trunk and a full round crown of thick snow-covered branches, a squat dark juniper with snow lying on top, a round snow-laden pine with a dense dark green crown #2f5a48. Snow white #eef4fa with pale blue shadows #b8c8dc on the right side. About two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 87202,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one small tree in deep winter, chunky and simple, each image a different one of these: a frosted larch with a full cone-shaped crown of bare golden-brown twigs #8a6a3c capped with snow, a white birch with a white trunk and a full round crown of thick snow-covered branches, a squat dark juniper with snow lying on top, a round snow-laden pine with a dense dark green crown #2f5a48. Snow white #eef4fa with pale blue shadows #b8c8dc on the right side. About two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, snowman, ground, snow mound, snow patch under the tree, ornaments, person, thin bare pole."
+    },
+    "at": "2026-11-26T13:59:37.776Z",
+    "usageUsd": 0.08330344067679511,
+    "candidates": [
+      {
+        "file": "snow-mixed-a-0.png",
+        "sha256": "6f8503e470666c75bcd96b1e7a4e9c9ebbeb84fab00f0ec533146de6e2c3ab8c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-1.png",
+        "sha256": "048c40935edfb352e6a688eae951cf1014ac6f78d0c4e05175504e461d045ea0",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-2.png",
+        "sha256": "7a39fe15521700d11fc4f29896cea2ac1db4b0b10bbd04f7e4be1c1ab8a2c32c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-3.png",
+        "sha256": "f26ae232f7c80ac661ba2d55097f2d8aa812c6e3e052d3a5503d6f47becff840",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-4.png",
+        "sha256": "080f01f1096ddf4463818b762a2412208808ab6739099dc47d4c9a86d8dcb130",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-5.png",
+        "sha256": "a21389cc1a1e63cd685f5870640c756dc6d2122e826279c9b62aba3771973eb9",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-6.png",
+        "sha256": "18d5d98a6287ba00f60e54fcea4c66314a16195e5cb0ae033f019d712e832d56",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-7.png",
+        "sha256": "c7471312bea92ce56d24333a854a4fddad4e4828d50ec81a2965dc78cef80cd0",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-8.png",
+        "sha256": "14376139d93fd142a7375bfb0bc200d335a61a5c568491e0607538afc0eca915",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-9.png",
+        "sha256": "da44179f9b703b67b80cf9364d584d71efdd6a3b77e54ff4809b57c1085fe176",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-10.png",
+        "sha256": "bf33bf69a26560612a22af82bf50a783c093a4cb2b1372cd0cfd497ed4437c76",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-11.png",
+        "sha256": "49b51302d0864f4ec55c9afc6ee37f71d6ade38068fc2b840fb305b353d394ad",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-12.png",
+        "sha256": "7f4050113789fd7f1288289435404c7a0ec5e463d9f8cc3cbf7225b772cef0ed",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-13.png",
+        "sha256": "c0b1430d989f9f602f256218be201a4b096ef0593dd4c0c2d528c1d0e51a733b",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-14.png",
+        "sha256": "b9acb016700c750ec1ef135f02ba21ba2309347d8ee4520e649c511f481119d8",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-15.png",
+        "sha256": "78f22c33cac948b1e81970611543c4310e5752f1e4593b3dc073f94a624103cc",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-16.png",
+        "sha256": "d101696f1db0e62f12cdebc2609c1323139f928cbbba8266eb6c45b672604253",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-17.png",
+        "sha256": "7e08e5c198f568db69426b63807121a20c654c0d90dd5875afcb111d08af89ca",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-18.png",
+        "sha256": "a5e7b3cf0b551c5e728f7cf7c91241105687b6d24e3adc9318652d4b43f8a428",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-19.png",
+        "sha256": "ff27f97467409d728e8566da63d297f88603d4620ecefb835182cc282e80972e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-20.png",
+        "sha256": "506574c3f04e510e76699d6f13145c5a0c36667819ee4729fcef3e9d159fa51b",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-21.png",
+        "sha256": "85c7770c746545017127f04390706b7728fc194dc19a663337ec53c55bb45223",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-22.png",
+        "sha256": "e71026f400db63a2ec9800b972079a1283c2632b759d1711baf22e78d4353f66",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-23.png",
+        "sha256": "6983eea35b3e632ef65df47558d7d4bfdb6d89ad4009f362d1c1dcc9c3c9d449",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "snow-mixed-a-24.png",
+        "sha256": "a19ecaf162b0d6914bab8dc06f3ade4dce621403f6631ffdbfb6c8be0fbb9f61",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  }
+}

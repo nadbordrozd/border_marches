@@ -16,7 +16,8 @@ export const T = {
   badlands: 3,
   wasteland: 4,
   volcanic: 5,
-  water: 6,
+  snow: 6,
+  water: 7,
 } as const satisfies Record<Terrain, number>;
 
 export const TERRAIN_OF: readonly Terrain[] = [
@@ -26,6 +27,7 @@ export const TERRAIN_OF: readonly Terrain[] = [
   "badlands",
   "wasteland",
   "volcanic",
+  "snow",
   "water",
 ];
 

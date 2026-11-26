@@ -20,6 +20,8 @@ import { battleSpellsOfTier, SCROLL_VALUE } from "../../../data/map-spells.ts";
 import {
   BANK_GUARD_SHARE,
   BANK_VALUE,
+  ROOKERY_HIRE,
+  ROOKERY_WEEKLY,
   VAULT_VALUE,
   type BankSize,
   type ObjectTypeId,
@@ -229,6 +231,16 @@ function bankPrize(
         { ore: 20, gold: 3500 },
         { artifacts: wonder(), ore: 30, gold: 5500 },
       ][s] as Prize;
+    case "frost-giants-barrow": {
+      // The giant's own gear (bead bzc.87): always an artifact, with gold
+      // and ore; worth the bank values of its size like the others.
+      const t = trinket();
+      return [
+        { artifacts: t, gold: 500 },
+        { artifacts: trinket(), gold: 3000, ore: 10 },
+        { artifacts: [...wonder(), ...t], gold: 5000, ore: 15 },
+      ][s] as Prize;
+    }
     case "landfall-wreck": {
       const piece = pickArtifact(rng, "piece");
       return [
@@ -383,6 +395,26 @@ export function rollContents(type: ObjectTypeId, rng: Rng, tier: number): Data {
         prize: bankPrize(rng, type, size, tier),
       };
     }
+    // Winter sites (bead bzc.87).
+    case "frost-giants-barrow": {
+      const size = bankSize(rng, tier);
+      const value = BANK_VALUE[size];
+      return {
+        size,
+        value,
+        guard: bankGuard(rng, ["rime-walrus"], value * BANK_GUARD_SHARE),
+        prize: bankPrize(rng, type, size, tier),
+      };
+    }
+    case "aurora-spire":
+      return { school: rng.pick(SCHOOLS) };
+    case "walrus-rookery":
+      return {
+        creature: "rime-walrus",
+        weekly: ROOKERY_WEEKLY,
+        hire: ROOKERY_HIRE,
+        guardCreature: "rime-walrus",
+      };
     case "keepers-vault": {
       const choices: Prize[] = [];
       for (let i = 0; i < 3; i++) {

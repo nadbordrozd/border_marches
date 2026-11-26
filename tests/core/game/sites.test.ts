@@ -140,8 +140,8 @@ function toDay(s: GameState, day: number): GameState {
 }
 
 describe("the catalogue", () => {
-  it("lists 62 types, 53 core and 9 stretch, each with a visit text", () => {
-    expect(OBJECT_TYPE_IDS).toHaveLength(62);
+  it("lists 62 types, 53 core and 9 stretch, and the 4 winter sites (bzc.87), each with a visit text", () => {
+    expect(OBJECT_TYPE_IDS).toHaveLength(62 + 4);
     const stretch = OBJECT_TYPE_IDS.filter((t) => OBJECT_TYPES[t].stretch);
     expect(stretch).toHaveLength(9);
     for (const t of OBJECT_TYPE_IDS) {

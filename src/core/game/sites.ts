@@ -37,6 +37,7 @@ import {
 } from "../../data/map-spells.ts";
 import {
   DRILL_YARD_MARKUP,
+  HUNTERS_LODGE_MP,
   MAX_HEROES,
   OASIS_MP,
   OBJECT_TYPES,
@@ -48,7 +49,13 @@ import {
   type Quest,
 } from "../../data/objectTypes.ts";
 import { findHeroDef } from "../../data/players.ts";
-import { findSkill, MAX_SKILL_RANK, MAX_SKILLS } from "../../data/skills.ts";
+import {
+  findSkill,
+  MAX_SKILL_RANK,
+  MAX_SKILLS,
+  SKILL_IDS,
+  type SkillDef,
+} from "../../data/skills.ts";
 import { STRAY_HOMES } from "../../data/strays.ts";
 import type {
   CreatureId,
@@ -420,6 +427,11 @@ export function dwellingOffer(
   const c = obj.data["creature"];
   if (!isCreatureId(c)) return null;
   const def = getCreature(c);
+  // A dwelling with its own terms (a Walrus Rookery, bead bzc.87).
+  const hire = obj.data["hire"];
+  if (typeof hire === "number") {
+    return { creature: c, weekly: num(obj, "weekly", 1), cost: { gold: hire } };
+  }
   const home = STRAY_HOMES[c as keyof typeof STRAY_HOMES];
   if (home !== undefined) {
     return { creature: c, weekly: home.weekly, cost: { gold: home.hire } };
@@ -440,6 +452,7 @@ const DWELLING_TYPES: readonly string[] = [
   "faction-outpost",
   "stray-hut",
   "caretaker-lodge",
+  "walrus-rookery",
 ];
 
 /** The map dwelling (outpost, stray hut, lodge) whose entrance the hero is on. */
@@ -735,7 +748,8 @@ export function siteOptions(
   switch (t) {
     case "faction-outpost":
     case "stray-hut":
-    case "caretaker-lodge": {
+    case "caretaker-lodge":
+    case "walrus-rookery": {
       const offer = dwellingOffer(state, obj);
       if (offer === null || !lodgeOpen(state, obj, hero.owner)) break;
       if (siteOf(state, obj.id).owner !== hero.owner) break;
@@ -898,6 +912,14 @@ export function siteOptions(
   return out;
 }
 
+/** The school skill an Aurora Spire raises (bead bzc.87), by its school. */
+export function auroraSkill(obj: MapObject): SkillDef | undefined {
+  const school = str(obj, "school");
+  return SKILL_IDS.map((id) => findSkill(id)).find(
+    (s): s is SkillDef => s?.family === "school" && s.school === school,
+  );
+}
+
 /**
  * Visits an object at the hero's cell, in place: dwellings, sites, banks,
  * artifacts and teleports. Returns a battle to start, if the visit starts
@@ -943,7 +965,8 @@ export function visitSite(
     // --- Dwellings -------------------------------------------------------
     case "faction-outpost":
     case "stray-hut":
-    case "caretaker-lodge": {
+    case "caretaker-lodge":
+    case "walrus-rookery": {
       if (t === "caretaker-lodge" && !lodgeOpen(state, obj, hero.owner)) {
         const q = questOf(obj);
         const missing = q === null ? null : questMissing(state, hero, q);
@@ -1102,6 +1125,46 @@ export function visitSite(
       );
       return null;
     }
+    // --- Winter sites (bead bzc.87) ------------------------------------
+    case "aurora-spire": {
+      if (already) break;
+      const skill = auroraSkill(obj);
+      const name = skill?.name ?? "its school";
+      const why =
+        skill === undefined ? "no school" : skillRefusal(hero, skill.id);
+      if (skill === undefined || why !== null) {
+        say(
+          events,
+          hero,
+          obj,
+          `Aurora Spire: the lights cannot teach ${name} (${why ?? "no school"}).`,
+        );
+        return null;
+      }
+      markUsed(state, obj, hero);
+      addSkill(hero, skill.id, events);
+      hero.mana = Math.max(hero.mana, maxMana(hero));
+      const rank = hero.skills.find((x) => x.id === skill.id)?.rank ?? 1;
+      say(
+        events,
+        hero,
+        obj,
+        `Aurora Spire: learns ${name} rank ${rank}; mana restored.`,
+      );
+      return null;
+    }
+    case "hunters-lodge":
+      if (already) break;
+      markUsed(state, obj, hero);
+      addBuff(hero, "hunters-lodge");
+      hero.mp += HUNTERS_LODGE_MP;
+      say(
+        events,
+        hero,
+        obj,
+        `Hunter's Lodge: snowshoes (snow costs as grass until the next battle ends) and +${HUNTERS_LODGE_MP} movement today.`,
+      );
+      return null;
     case "mana-well":
       if (already) break;
       markUsed(state, obj, hero);
@@ -1151,6 +1214,7 @@ export function visitSite(
     case "quiet-yard":
     case "thunderstruck-pylon-yard":
     case "landfall-wreck":
+    case "frost-giants-barrow":
     case "keepers-vault": {
       if (s0.done === true) {
         say(events, hero, obj, `${def.name}: already plundered.`);
@@ -2034,6 +2098,8 @@ export function objectName(state: GameState, obj: MapObject): string {
         const sp = findMapSpell(str(obj, "spell"));
         return sp !== undefined ? sp.name : str(obj, "school");
       }
+      case "aurora-spire":
+        return auroraSkill(obj)?.name ?? "";
       case "faction-outpost":
       case "stray-hut":
       case "caretaker-lodge": {
@@ -2123,7 +2189,8 @@ export function describeSite(
       break;
     case "faction-outpost":
     case "stray-hut":
-    case "caretaker-lodge": {
+    case "caretaker-lodge":
+    case "walrus-rookery": {
       const offer = dwellingOffer(state, obj);
       if (offer !== null) {
         what = `${def.text} ${dwellingStock(state, obj)} ${getCreature(offer.creature).plural} for ${prizeText(offer.cost)} each.`;
@@ -2156,12 +2223,19 @@ export function describeSite(
     case "quiet-yard":
     case "thunderstruck-pylon-yard":
     case "landfall-wreck":
+    case "frost-giants-barrow":
       what =
         t === "keepers-vault"
           ? `${def.text} Each treasure: a Marvel piece, a Wonder and 5000 gold.`
           : `${def.text} Prize: ${prizeText(prizeOf(obj))}.`;
       if (s.done === true) what = "Plundered.";
       break;
+    case "aurora-spire": {
+      const skill = auroraSkill(obj);
+      if (skill !== undefined)
+        what = `The hero gains a rank of ${skill.name} (rank 1 if it lacks it and has a free skill slot) and its mana is refilled.`;
+      break;
+    }
     case "prison":
       what = `${def.text} The prisoner is level ${num(obj, "level", 3)}.`;
       break;

@@ -143,6 +143,9 @@ export const CANOPY_GROUND: Readonly<Record<GroundTerrain, CanopyGround>> = {
   wasteland: { spacing: 1, tint: 0.85 },
   // Volcanic ground grows the wasteland's dead trees (GROUND_FAMILY).
   volcanic: { spacing: 1, tint: 0.85 },
+  // Snowy conifers pack like the green woods; a lighter under-tint, so the
+  // gaps read as snow in shade.
+  snow: { spacing: 0.86, tint: 0.7 },
 };
 
 /** Per-cell facts of the canopy, computed once per map. */
@@ -167,6 +170,7 @@ const GROUNDS: readonly GroundTerrain[] = [
   "steppe",
   "badlands",
   "wasteland",
+  "snow",
 ];
 
 /** The canopy facts of a map; `featured` are the cells under objects. */

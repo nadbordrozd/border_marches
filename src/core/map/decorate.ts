@@ -45,6 +45,12 @@ import {
 export const DECORATE = {
   /** Passable decorations per open land cell (a few per screen). */
   passableShare: 0.07,
+  /**
+   * Winter (bead bzc.87): snow gets this many more passable decorations
+   * per open snow cell, from their own random stream after the rest (a
+   * map without snow decorates exactly as before).
+   */
+  snowExtraShare: 0.05,
   /** Cluster sizes 1, 2, 3 and their weights. */
   clusterWeights: [5, 4, 2],
   /** Cells between two clusters' first pieces (Chebyshev). */
@@ -379,6 +385,35 @@ export function decorateMap(map: GameMap, options: DecorateOptions = {}): void {
         variant: rng.int(0, kind.looks - 1),
       });
       small++;
+    }
+  }
+
+  // A second sprinkle on the snow: a white field wants a few more things
+  // on it (hares, owls, tracks), one per free cell with nothing beside it.
+  const snowCells = range(n).filter(
+    (k) => cell(k)?.terrain === "snow" && taken[k] === 0 && smallOk(k),
+  );
+  if (snowCells.length > 0) {
+    const srng = createRng(deriveSeed(map.seed, "decorations-snow"));
+    const kinds = decorationKindsFor("snow", true);
+    const extra = Math.round(snowCells.length * DECORATE.snowExtraShare);
+    let added = 0;
+    for (const i of srng.shuffle(snowCells)) {
+      if (added >= extra || kinds.length === 0) break;
+      const x = i % W;
+      const y = Math.floor(i / W);
+      let crowded = false;
+      for (const [dx, dy] of DIRECTIONS_8) {
+        const nx = x + dx;
+        const ny = y + dy;
+        if (nx >= 0 && ny >= 0 && nx < W && ny < H && taken[ny * W + nx])
+          crowded = true;
+      }
+      if (crowded || taken[i] === 1) continue;
+      taken[i] = 1;
+      const kind = srng.pick(kinds);
+      placed.push({ id: kind.id, x, y, variant: srng.int(0, kind.looks - 1) });
+      added++;
     }
   }
 

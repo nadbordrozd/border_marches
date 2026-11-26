@@ -104,6 +104,7 @@ const TERRAIN_NAMES: Readonly<Record<Terrain, string>> = {
   badlands: "Badlands",
   wasteland: "Wasteland",
   volcanic: "Volcanic ground",
+  snow: "Snow",
   water: "Water",
 };
 

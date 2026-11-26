@@ -157,6 +157,10 @@ const PER_ZONE: Partial<Record<ObjectTypeId, number>> = {
   "quiet-yard": 1,
   "thunderstruck-pylon-yard": 1,
   "caretaker-lodge": 1,
+  "frost-giants-barrow": 1,
+  "aurora-spire": 1,
+  "hunters-lodge": 1,
+  "walrus-rookery": 1,
 };
 
 /** Types whose guard is inside (banks) or that are never guarded. */
@@ -171,6 +175,7 @@ const NEVER_GUARDED: ReadonlySet<ObjectTypeId> = new Set<ObjectTypeId>([
   "keepers-vault",
   "buried-cache",
   "buried-keystone",
+  "frost-giants-barrow",
 ]);
 
 /**
@@ -287,6 +292,11 @@ export const RULE_ROWS: readonly MapObjectRow[] = (
     "one-way-waystone",
     "keymasters-tent",
     "keepers-vault",
+    // Winter sites (bead bzc.87): the winter rule places them.
+    "frost-giants-barrow",
+    "aurora-spire",
+    "hunters-lodge",
+    "walrus-rookery",
   ] as const
 ).map((t) => catalogueRow(OBJECT_TYPES[t]));
 

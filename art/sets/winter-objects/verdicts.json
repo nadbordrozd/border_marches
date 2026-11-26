@@ -1,0 +1,142 @@
+{
+  "barrow-a#2": {
+    "verdict": "REJECTED",
+    "notes": "door stones carry R and K letters: text-like runes",
+    "at": "2026-11-26T14:07:13.757Z"
+  },
+  "spire-a#1": {
+    "verdict": "REJECTED",
+    "notes": "good but one look is enough; #0 has the clearest silhouette",
+    "at": "2026-11-26T14:07:13.806Z"
+  },
+  "spire-a#2": {
+    "verdict": "REJECTED",
+    "notes": "spiral twist reads as a drill or soft ice cream",
+    "at": "2026-11-26T14:07:13.853Z"
+  },
+  "spire-a#3": {
+    "verdict": "REJECTED",
+    "notes": "good but one look is enough; #0 has the clearest silhouette",
+    "at": "2026-11-26T14:07:13.902Z"
+  },
+  "spire-a#4": {
+    "verdict": "REJECTED",
+    "notes": "good but one look is enough; #0 has the clearest silhouette",
+    "at": "2026-11-26T14:07:13.952Z"
+  },
+  "spire-a#5": {
+    "verdict": "REJECTED",
+    "notes": "spiral twist reads as a drill or soft ice cream",
+    "at": "2026-11-26T14:07:14.003Z"
+  },
+  "spire-a#6": {
+    "verdict": "REJECTED",
+    "notes": "good but one look is enough; #0 has the clearest silhouette",
+    "at": "2026-11-26T14:07:14.055Z"
+  },
+  "spire-a#7": {
+    "verdict": "REJECTED",
+    "notes": "stepped cake shape",
+    "at": "2026-11-26T14:07:14.106Z"
+  },
+  "spire-a#8": {
+    "verdict": "REJECTED",
+    "notes": "stepped cake shape",
+    "at": "2026-11-26T14:07:14.161Z"
+  },
+  "spire-a#9": {
+    "verdict": "REJECTED",
+    "notes": "good but one look is enough; #0 has the clearest silhouette",
+    "at": "2026-11-26T14:07:14.216Z"
+  },
+  "spire-a#10": {
+    "verdict": "REJECTED",
+    "notes": "good but one look is enough; #0 has the clearest silhouette",
+    "at": "2026-11-26T14:07:14.271Z"
+  },
+  "spire-a#11": {
+    "verdict": "REJECTED",
+    "notes": "good but one look is enough; #0 has the clearest silhouette",
+    "at": "2026-11-26T14:07:14.326Z"
+  },
+  "spire-a#12": {
+    "verdict": "REJECTED",
+    "notes": "good but one look is enough; #0 has the clearest silhouette",
+    "at": "2026-11-26T14:07:14.381Z"
+  },
+  "spire-a#13": {
+    "verdict": "REJECTED",
+    "notes": "good but one look is enough; #0 has the clearest silhouette",
+    "at": "2026-11-26T14:07:14.437Z"
+  },
+  "spire-a#14": {
+    "verdict": "REJECTED",
+    "notes": "good but one look is enough; #0 has the clearest silhouette",
+    "at": "2026-11-26T14:07:14.492Z"
+  },
+  "spire-a#15": {
+    "verdict": "REJECTED",
+    "notes": "good but one look is enough; #0 has the clearest silhouette",
+    "at": "2026-11-26T14:07:14.546Z"
+  },
+  "barrow-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "small snowy barrow, slab door, horned helmet: reads as a tomb mound",
+    "at": "2026-11-26T14:07:14.602Z"
+  },
+  "barrow-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "medium barrow with helmet and axe, icicles on the lintel",
+    "at": "2026-11-26T14:07:14.663Z"
+  },
+  "barrow-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "grand barrow with standing slabs and draped ice: the large size",
+    "at": "2026-11-26T14:07:14.724Z"
+  },
+  "spire-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "clean ice crystal spire with a green aurora crown on a frosted stone ring",
+    "at": "2026-11-26T14:07:14.785Z"
+  },
+  "lodge-a#0": {
+    "verdict": "REJECTED",
+    "notes": "angled three-quarter view; the catalogue faces the viewer",
+    "at": "2026-11-26T14:13:26.623Z"
+  },
+  "lodge-a#1": {
+    "verdict": "REJECTED",
+    "notes": "angled view, extra wing",
+    "at": "2026-11-26T14:13:26.677Z"
+  },
+  "lodge-a#3": {
+    "verdict": "REJECTED",
+    "notes": "double roof, busy",
+    "at": "2026-11-26T14:13:26.732Z"
+  },
+  "rookery-a#0": {
+    "verdict": "REJECTED",
+    "notes": "tusks apart read as an arch, less clear",
+    "at": "2026-11-26T14:13:26.787Z"
+  },
+  "rookery-a#2": {
+    "verdict": "REJECTED",
+    "notes": "loose snow chunks scatter like pickups",
+    "at": "2026-11-26T14:13:26.843Z"
+  },
+  "rookery-a#3": {
+    "verdict": "REJECTED",
+    "notes": "smooth dome without blocks: plainer than #1",
+    "at": "2026-11-26T14:13:26.898Z"
+  },
+  "lodge-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "log cabin straight on, snowy roof, antlers, skis and snowshoes: reads as a hunters lodge",
+    "at": "2026-11-26T14:13:26.954Z"
+  },
+  "rookery-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "ice-block dome with crossed walrus tusks and a fish rack: the rookery",
+    "at": "2026-11-26T14:13:27.016Z"
+  }
+}

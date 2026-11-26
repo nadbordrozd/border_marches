@@ -168,6 +168,29 @@ The map bead owns the final sizing; this table is the data it reads.
 | **Sealed Box**     | 1x1                     | Opened from a next cell by the first hero to reach it; contents are fixed by the seed and hidden: gold 2000-5000, 1500-4000 XP, a Trinket or Wonder, creatures, or "a fight" for a larger prize. | One-time                                        | Seeded, hidden | 2000-6000; a fight inside is 60% of its prize | Any     | 3            |
 | **Sign** (stretch) | 1x1                     | Shows its text.                                                                                                                                                                                  | Each visit                                      | Text           | 0                                             | Any     | map-authored |
 
+### 3.11 Winter sites (4, bead bzc.87)
+
+Placed only by the winter rule (weight 0 in the fill): each snow zone gets
+a Frost Giant's Barrow, a Walrus Rookery and an Aurora Spire, and a
+Hunter's Lodge in it or next door, from their own random stream, right
+after the start kits and on snow while any snow site is free. A map that
+rolls no winter zone has none of them and is generated exactly as before
+(named maps never roll winter).
+
+| Object                   | Footprint | Visit rule                                                                                                                                                                                          | Reset                | Reward                                                                                                          | Value                                   | Terrain | Weight      |
+| ------------------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------- | ------- | ----------- |
+| **Frost Giant's Barrow** | 2x2       | A bank: a battle against Rime Walruses (60% of its value in fight value, as every bank); the winner takes the giant's hoard.                                                                        | One-time             | Small: a Trinket, 500 gold. Medium: a Trinket, 10 ore, 3000 gold. Large: a Wonder, a Trinket, 15 ore, 5000 gold | 2500 / 6500 / 15000 (size by zone tier) | Snow    | winter rule |
+| **Aurora Spire**         | 1x1       | The hero gains one rank of the spire's school skill (seeded school; rank 1 if it lacks the skill and has a free slot) and its mana is refilled. A refusal (mastered, no slot, a vow) uses no visit. | Once per hero        | A school rank and full mana                                                                                     | 3000 (guarded)                          | Snow    | winter rule |
+| **Hunter's Lodge**       | 2x2       | Snowshoes: snow costs the hero 100 a step (150 - 50) until its next battle ends; the hunters guide it: +300 movement today.                                                                         | Once a week per hero | Movement                                                                                                        | 1000                                    | Snow    | winter rule |
+| **Walrus Rookery**       | 2x2       | A dwelling: entering flags it; the player's heroes hire Rime Walruses here, 2 a week at 1300 gold each (FV 868 x 1.5). Rime Walruses keep watch beside it.                                          | Flag                 | Rime Walruses                                                                                                   | 4500 (guarded by Rime Walruses)         | Snow    | winter rule |
+
+Balance: the barrow's prizes are worth its bank value like the six banks
+(a Trinket 2000, a Wonder 5000, ore 150); the spire sits between the
+Tutor's Hut (2000, rank 1 only) and the Library (6000); the lodge is a
+Stables for snow; the rookery is the only place to hire the tier-5 Rime
+Walrus, priced like the caretakers (FV x 1.5) and guarded like the
+Haunted Mine.
+
 ## 4. Banks, digging and the Keystone
 
 **Bank sizes.** A bank's size is fixed by the seed and shown on hover with

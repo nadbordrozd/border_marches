@@ -1,0 +1,252 @@
+{
+  "snow-conifer-a#2": {
+    "verdict": "REJECTED",
+    "notes": "almost no snow and an egg-shaped crown: off-subject",
+    "at": "2026-11-26T14:00:33.991Z"
+  },
+  "snow-conifer-a#7": {
+    "verdict": "REJECTED",
+    "notes": "a white blob, no conifer silhouette",
+    "at": "2026-11-26T14:00:34.086Z"
+  },
+  "snow-conifer-a#10": {
+    "verdict": "REJECTED",
+    "notes": "curled tip reads as a hat",
+    "at": "2026-11-26T14:00:34.180Z"
+  },
+  "snow-conifer-a#13": {
+    "verdict": "REJECTED",
+    "notes": "thin sparse branches: noise in a crowd",
+    "at": "2026-11-26T14:00:34.277Z"
+  },
+  "snow-conifer-a#20": {
+    "verdict": "REJECTED",
+    "notes": "half the tree white: reads as cut in two",
+    "at": "2026-11-26T14:00:34.372Z"
+  },
+  "snow-conifer-a#22": {
+    "verdict": "REJECTED",
+    "notes": "round blob, near duplicate of a bush",
+    "at": "2026-11-26T14:00:34.465Z"
+  },
+  "snow-conifer-a#12": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #4 and #14",
+    "at": "2026-11-26T14:00:34.564Z"
+  },
+  "snow-conifer-a#15": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #16",
+    "at": "2026-11-26T14:00:34.661Z"
+  },
+  "snow-conifer-a#23": {
+    "verdict": "REJECTED",
+    "notes": "bent tip reads as a hat",
+    "at": "2026-11-26T14:00:34.758Z"
+  },
+  "snow-mixed-a#2": {
+    "verdict": "REJECTED",
+    "notes": "flat spreading bush: not a tree",
+    "at": "2026-11-26T14:00:34.854Z"
+  },
+  "snow-mixed-a#3": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted spruces",
+    "at": "2026-11-26T14:00:34.949Z"
+  },
+  "snow-mixed-a#4": {
+    "verdict": "REJECTED",
+    "notes": "thin bare branches: noise in a crowd",
+    "at": "2026-11-26T14:00:35.046Z"
+  },
+  "snow-mixed-a#6": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted spruces",
+    "at": "2026-11-26T14:00:35.141Z"
+  },
+  "snow-mixed-a#7": {
+    "verdict": "REJECTED",
+    "notes": "snow dome, reads as a drift not a tree",
+    "at": "2026-11-26T14:00:35.233Z"
+  },
+  "snow-mixed-a#8": {
+    "verdict": "REJECTED",
+    "notes": "shapeless golden bush",
+    "at": "2026-11-26T14:00:35.332Z"
+  },
+  "snow-mixed-a#9": {
+    "verdict": "REJECTED",
+    "notes": "bonsai-like windswept pine, too fussy at 1x",
+    "at": "2026-11-26T14:00:35.430Z"
+  },
+  "snow-mixed-a#10": {
+    "verdict": "REJECTED",
+    "notes": "thin white twigs: noise",
+    "at": "2026-11-26T14:00:35.529Z"
+  },
+  "snow-mixed-a#11": {
+    "verdict": "REJECTED",
+    "notes": "snow dome, reads as a drift",
+    "at": "2026-11-26T14:00:35.626Z"
+  },
+  "snow-mixed-a#12": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted spruces",
+    "at": "2026-11-26T14:00:35.722Z"
+  },
+  "snow-mixed-a#13": {
+    "verdict": "REJECTED",
+    "notes": "thin bare branches: noise",
+    "at": "2026-11-26T14:00:35.818Z"
+  },
+  "snow-mixed-a#16": {
+    "verdict": "REJECTED",
+    "notes": "thin bare twigs: noise",
+    "at": "2026-11-26T14:00:35.910Z"
+  },
+  "snow-mixed-a#17": {
+    "verdict": "REJECTED",
+    "notes": "flat acacia-like crown: savanna, not winter",
+    "at": "2026-11-26T14:00:36.004Z"
+  },
+  "snow-mixed-a#18": {
+    "verdict": "REJECTED",
+    "notes": "twisted bonsai shape",
+    "at": "2026-11-26T14:00:36.098Z"
+  },
+  "snow-mixed-a#19": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted spruces",
+    "at": "2026-11-26T14:00:36.194Z"
+  },
+  "snow-mixed-a#20": {
+    "verdict": "REJECTED",
+    "notes": "small blob, no trunk",
+    "at": "2026-11-26T14:00:36.299Z"
+  },
+  "snow-mixed-a#21": {
+    "verdict": "REJECTED",
+    "notes": "thin bare dead tree",
+    "at": "2026-11-26T14:00:36.397Z"
+  },
+  "snow-mixed-a#23": {
+    "verdict": "REJECTED",
+    "notes": "thin pole with a cap: noise",
+    "at": "2026-11-26T14:00:36.498Z"
+  },
+  "snow-conifer-a#24": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #8",
+    "at": "2026-11-26T14:00:36.601Z"
+  },
+  "snow-conifer-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:36.710Z"
+  },
+  "snow-conifer-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:36.827Z"
+  },
+  "snow-conifer-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:36.937Z"
+  },
+  "snow-conifer-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:37.041Z"
+  },
+  "snow-conifer-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:37.149Z"
+  },
+  "snow-conifer-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:37.249Z"
+  },
+  "snow-conifer-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:37.350Z"
+  },
+  "snow-conifer-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:37.535Z"
+  },
+  "snow-conifer-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:37.665Z"
+  },
+  "snow-conifer-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:37.782Z"
+  },
+  "snow-conifer-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:37.887Z"
+  },
+  "snow-conifer-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce, clear layered silhouette, lit left",
+    "at": "2026-11-26T14:00:37.989Z"
+  },
+  "snow-conifer-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "darker, fuller fir or pine with less snow: breaks up the white of a wood",
+    "at": "2026-11-26T14:00:38.093Z"
+  },
+  "snow-conifer-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "darker, fuller fir or pine with less snow: breaks up the white of a wood",
+    "at": "2026-11-26T14:00:38.196Z"
+  },
+  "snow-conifer-a#18": {
+    "verdict": "ACCEPTED",
+    "notes": "darker, fuller fir or pine with less snow: breaks up the white of a wood",
+    "at": "2026-11-26T14:00:38.300Z"
+  },
+  "snow-mixed-a#15": {
+    "verdict": "REJECTED",
+    "notes": "44x46: taller than the 44 px a canopy tree may be; a crowd would rise over the row behind",
+    "at": "2026-11-26T14:00:46.028Z"
+  },
+  "snow-mixed-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "darker, fuller fir or pine with less snow: breaks up the white of a wood",
+    "at": "2026-11-26T14:00:38.502Z"
+  },
+  "snow-mixed-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden birch with white trunk, full round crown",
+    "at": "2026-11-26T14:00:38.604Z"
+  },
+  "snow-mixed-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden birch with white trunk, full round crown",
+    "at": "2026-11-26T14:00:38.710Z"
+  },
+  "snow-mixed-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden birch with white trunk, full round crown",
+    "at": "2026-11-26T14:00:38.809Z"
+  },
+  "snow-mixed-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "golden-brown larch crown under snow: a warm accent for drifts",
+    "at": "2026-11-26T14:00:38.911Z"
+  },
+  "snow-mixed-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "golden-brown larch crown under snow: a warm accent for drifts",
+    "at": "2026-11-26T14:00:39.010Z"
+  }
+}

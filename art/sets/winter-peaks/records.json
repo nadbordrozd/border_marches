@@ -1,0 +1,566 @@
+{
+  "snow-low-a": {
+    "id": "snow-low-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "74689336-5352-468c-8da3-d708f8603ced",
+    "submittedAt": "2026-11-26T13:59:57.728Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one low snowy hill or rock knob, each image a different one: a low round hill nearly buried in snow with a few rocks showing, a small jagged rock knob with snow on its ledges, a broad snow mound with a rocky left face, a little pointed crag with a snowy top. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. About three quarters of the image wide and half its height."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 44
+      },
+      "no_background": true,
+      "seed": 87301,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one low snowy hill or rock knob, each image a different one: a low round hill nearly buried in snow with a few rocks showing, a small jagged rock knob with snow on its ledges, a broad snow mound with a rocky left face, a little pointed crag with a snowy top. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. About three quarters of the image wide and half its height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building."
+    },
+    "at": "2026-11-26T14:01:30.032Z",
+    "usageUsd": 0.08198706277211508,
+    "candidates": [
+      {
+        "file": "snow-low-a-0.png",
+        "sha256": "401d20d25b404b0199f705e0718725525c35c8cc00988db0b0dce7017d016318",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-1.png",
+        "sha256": "9dcbc2eb4abc10e69107998b1dd788df1865e84ad56b660fb4ccdfb635315f87",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-2.png",
+        "sha256": "1a9ae8287362e4edc36e3c50c1e09d7043577cb9c8d89d4147eb6bcdc96851a4",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-3.png",
+        "sha256": "b6212fa6b5533fc904849e36e54866fc1e8999acb292a075677cae0565dd373b",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-4.png",
+        "sha256": "9e034fbdbcfcb20b3c0fb44cffc1903e16d5eb46b47114ccdc9b5ee803e46288",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-5.png",
+        "sha256": "0342c4d30195f9fc692262f74472044ecab4915684fadbde0330c9705e70e99b",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-6.png",
+        "sha256": "e17b0c8afb7dcf3318af1ff5a157c540029b8c56209e0797765c248363658eaa",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-7.png",
+        "sha256": "520c32d32d5028770764963664f73d59028bd61429c6a2a8d02f48ac9eab4803",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-8.png",
+        "sha256": "4edd124fbf45cbc66c000411fe2e3b8b7c3f8c0c06475ec32afe1311c4285679",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-9.png",
+        "sha256": "808800ce702753ee8163ba57aa7f38b95e287ef43a48944f28b3fabcf3457c91",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-10.png",
+        "sha256": "4d8a848c4c6177b7576fa874b176b4d704b89754452811838c8123123c62658c",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-11.png",
+        "sha256": "dd2ad0369d53ed43d1d517d57e9bc17c9c4dc6b407c08caa2b0825914b890158",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-12.png",
+        "sha256": "4af2ca58267566747e2b8376277c3fd4290ed5e6a0e853c4af90124f491087b3",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-13.png",
+        "sha256": "5f97294297c0688d18525eff48747302cf200dae9ab7e97078dc0e562d47849d",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-14.png",
+        "sha256": "0e391ce1f36d4593690620c7c1b503081bf0371dffc8b79bedb53fb96683733f",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-15.png",
+        "sha256": "d45d89257ce326d4a76b652e414c303b04299aadc4518ed42726a812aaab50fa",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-16.png",
+        "sha256": "bdee0d7dc378d71f5fd1abc2a9dcc936fe3f989425170baeabd04199cf9bcc1f",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-17.png",
+        "sha256": "c3cb2648f6a16a1b9d01cf8e38d7872c3b081159fdc8ce68354edd36308795f7",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-18.png",
+        "sha256": "d318b553c4db40c95c0eaff3bccf172f135a1355b224e12a5e117a0a856eef5a",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-19.png",
+        "sha256": "e17b4227b8b0dccdcf5dd54fe89c85bdce80f165f4c34f5b1bc47341c6c7215e",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-20.png",
+        "sha256": "1f5eaa41938033dbaa649b21685bb434a7f4417b4f407d7c9de7cbbe24b1fb70",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-21.png",
+        "sha256": "7e67b3df70b7c3fd56ba64dcb8c32791e81ea272be6be87ca59cd6e2c7c2f69d",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-22.png",
+        "sha256": "298d9ea82a28593a380232ef2e036df2354e0978bf3933d535dba9d44749d09e",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-23.png",
+        "sha256": "6b42b5e22382bd409817612c084a8c15bfccc8b623fea62d3934afaab646d299",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "snow-low-a-24.png",
+        "sha256": "af192a237ce20c22565143cf16d2016b310e26a137bf637e600e25e2fcefbe07",
+        "width": 56,
+        "height": 44
+      }
+    ]
+  },
+  "snow-mid-a": {
+    "id": "snow-mid-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "8fc24521-929d-4f13-91aa-cb7bb8d05227",
+    "submittedAt": "2026-11-26T14:01:30.159Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one snow-capped rock mountain, each image a different one: a sharp peak with a thick snow cap and snow streaks down its gullies, a broad shouldered mountain with snowfields on its upper half, a jagged twin peak with snowy ridges, a steep pointed mountain with a snowy tip. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. About three quarters of the image wide and two thirds of its height."
+        }
+      ],
+      "image_size": {
+        "width": 80,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 87302,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one snow-capped rock mountain, each image a different one: a sharp peak with a thick snow cap and snow streaks down its gullies, a broad shouldered mountain with snowfields on its upper half, a jagged twin peak with snowy ridges, a steep pointed mountain with a snowy tip. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. About three quarters of the image wide and two thirds of its height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building."
+    },
+    "at": "2026-11-26T14:02:41.924Z",
+    "usageUsd": 0.11617689026726617,
+    "candidates": [
+      {
+        "file": "snow-mid-a-0.png",
+        "sha256": "a3e74799a5e2f5c64e2bb3936b9d0dae878ef5e20b621f67c97b3641a9f2ac97",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-a-1.png",
+        "sha256": "d02b8e426ed9bb6e48381594a9c7e2dd5cecaaf5e8be00e5035a38d38c69d4bd",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-a-2.png",
+        "sha256": "118d9a161232458a38c62f61cda6045abf5a2b67e737de99c4c5f40a7b7ddf43",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-a-3.png",
+        "sha256": "cb2b01581abdda690d14fa9e8c0436ed964eab9d00c3fcb49efd12f02b916256",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-a-4.png",
+        "sha256": "c879b292cf733c1e8ec3adadcb1bd5293c7b83473cc283d594b416460946dde3",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-a-5.png",
+        "sha256": "96158150d349785e52468c04e9291fafac965cdee87e938fdc4190b777f86b0e",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-a-6.png",
+        "sha256": "45c3a49478257315133274066bb24e2fcf1d3d82fc15adfb1088e9038cc9fbf8",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-a-7.png",
+        "sha256": "52c00d43ed8adad551d8b927a1a67cfd8e4bdca646f3383964ea6cb7776915f2",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-a-8.png",
+        "sha256": "821f488df8f3d3e5e0d3de6d81662718d922237841932d61bfc1110aa012ed54",
+        "width": 80,
+        "height": 64
+      }
+    ]
+  },
+  "snow-big-a": {
+    "id": "snow-big-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "6deec2f3-f1fe-4a05-a927-0a78fce88325",
+    "submittedAt": "2026-11-26T14:02:42.014Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big snow-capped alpine mountain, each image a different one: a tall pointed peak with a glacier on its shoulder, a massive broad mountain with deep snowfields and rock ribs, a jagged twin-peaked mountain with snowy ridges. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. Fills nearly the full image, with a little room above the top."
+        }
+      ],
+      "image_size": {
+        "width": 120,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 87303,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one big snow-capped alpine mountain, each image a different one: a tall pointed peak with a glacier on its shoulder, a massive broad mountain with deep snowfields and rock ribs, a jagged twin-peaked mountain with snowy ridges. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. Fills nearly the full image, with a little room above the top. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building."
+    },
+    "at": "2026-11-26T14:04:25.099Z",
+    "usageUsd": 0.08110786363813613,
+    "candidates": [
+      {
+        "file": "snow-big-a-0.png",
+        "sha256": "cbe5fec09877a6afb12797f08b4332742a207d0044695a5ddee48a8f2036711f",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "snow-big-a-1.png",
+        "sha256": "ad15625f3ec838c9979030b126305a3a2851dee44745a6eaae961ef325326059",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "snow-big-a-2.png",
+        "sha256": "9f977f9e9a740cd24d17fd7b3652de9cfbf3acdaa0eba6732a46c765c474f956",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "snow-big-a-3.png",
+        "sha256": "230808c8a27b49727581e841382d7d6370d4336d437a5bfe12009bb50e7aea57",
+        "width": 120,
+        "height": 88
+      }
+    ]
+  },
+  "snow-big-b": {
+    "id": "snow-big-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "77ccc070-b365-4baa-8911-ca2de2dad79a",
+    "submittedAt": "2026-11-26T14:05:42.828Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big snow-capped alpine mountain each image a different one: a tall jagged peak with snow in its gullies, a massive pointed mountain with a long snowy ridge, a broad twin-peaked mountain with snowfields between the peaks. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. Fills nearly the full image,."
+        }
+      ],
+      "image_size": {
+        "width": 120,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 87304,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one big snow-capped alpine mountain each image a different one: a tall jagged peak with snow in its gullies, a massive pointed mountain with a long snowy ridge, a broad twin-peaked mountain with snowfields between the peaks. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. Fills nearly the full image,. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, terraces, steps, crater, flat top."
+    },
+    "at": "2026-11-26T14:08:18.459Z",
+    "usageUsd": 0.08101308912701077,
+    "candidates": [
+      {
+        "file": "snow-big-b-0.png",
+        "sha256": "27ca49ea23bf666a3c35732bde86ee7e4f7478498d3539a382ac97eaada8a867",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "snow-big-b-1.png",
+        "sha256": "0e95a2881882bebd1c2f3e9814d03847471d2c22956941b0e59ab36afd0a5f27",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "snow-big-b-2.png",
+        "sha256": "81d2d99b93b40980c382018420ae34c143614e3708ec7919008ea57b0eac4182",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "snow-big-b-3.png",
+        "sha256": "67d46584f49cf7bd5bf2c074fc23e2feae6758ec464c03568b46aec9cdb5bebb",
+        "width": 120,
+        "height": 88
+      }
+    ]
+  },
+  "snow-big-c": {
+    "id": "snow-big-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "2947aee8-ef78-4be5-9530-519facb9d982",
+    "submittedAt": "2026-11-26T14:08:18.567Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big snow-capped alpine mountain each image a different one: a tall jagged peak with snow in its gullies, a massive pointed mountain with a long snowy ridge, a broad twin-peaked mountain with snowfields between the peaks. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. Fills nearly the full image,."
+        }
+      ],
+      "image_size": {
+        "width": 120,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 87305,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one big snow-capped alpine mountain each image a different one: a tall jagged peak with snow in its gullies, a massive pointed mountain with a long snowy ridge, a broad twin-peaked mountain with snowfields between the peaks. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. Fills nearly the full image,. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, terraces, steps, crater, flat top."
+    },
+    "at": "2026-11-26T14:09:53.384Z",
+    "usageUsd": 0.0810967235300276,
+    "candidates": [
+      {
+        "file": "snow-big-c-0.png",
+        "sha256": "d1a7e44976ddcb87621e45bdea7a32c2b012b01cd93073a1b1dffc85113d8cf7",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "snow-big-c-1.png",
+        "sha256": "d4ad1e2112ba4737eea35fe91f3191194288bb99c96cdb950986ead01b638c6f",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "snow-big-c-2.png",
+        "sha256": "18d98b815a911853d80ce65e8b1d8614e9e720cb8c370b8615871e7a534958ca",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "snow-big-c-3.png",
+        "sha256": "d0eec9bf57daa789b79c0cc186bd5b4f0dc195d6d1bbf2c46122afbb10ee4460",
+        "width": 120,
+        "height": 88
+      }
+    ]
+  },
+  "snow-mid-b": {
+    "id": "snow-mid-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b75adf9b-ce42-48f3-995c-c0ae66035ae5",
+    "submittedAt": "2026-11-26T14:09:53.500Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one snow-capped rock mountain, each image a different one: a sharp peak with a thick snow cap, a broad shouldered mountain, a jagged twin peak with snowy ridges, a steep pointed mountain with a snowy tip. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. About three quarters of the image wide and two thirds of its height."
+        }
+      ],
+      "image_size": {
+        "width": 80,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 87306,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one snow-capped rock mountain, each image a different one: a sharp peak with a thick snow cap, a broad shouldered mountain, a jagged twin peak with snowy ridges, a steep pointed mountain with a snowy tip. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces. About three quarters of the image wide and two thirds of its height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, terraces, crater, flat top."
+    },
+    "at": "2026-11-26T14:11:12.808Z",
+    "usageUsd": 0.11628467702865601,
+    "candidates": [
+      {
+        "file": "snow-mid-b-0.png",
+        "sha256": "b33e348808965b54b1ef074e4f759e82988ca608ee7951e1eecdfe3d1ec0c08a",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-b-1.png",
+        "sha256": "f8d824f1cb5dffbc5d98c47479d20ed1ed493872bf82eb2fe941f9f116925055",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-b-2.png",
+        "sha256": "1bba2ad66a15b37ef997938b02f09f17a0dcc7fad224c288b8f10ef143560f5f",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-b-3.png",
+        "sha256": "c4ca5ea806397910c29502b913e6ebe89d6c042ece2e2c7c73c77fba92a34e91",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-b-4.png",
+        "sha256": "545154eb2bc7107232c0e0ff758b969ee921d0efaea6f9d34f613e779f058267",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-b-5.png",
+        "sha256": "fe31e7bf8312dee279a33cd2395591cbd3d9335f5b277e797c3a9664f261d4a6",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-b-6.png",
+        "sha256": "b33fcb48fc9ea5d31e56564b75c9d98f4ba3063053da97983063e47b40c2ec16",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-b-7.png",
+        "sha256": "72cf661db57c51d0a05c6ad487cc803b2961833d4a5de1372bafa6cfb149be16",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "snow-mid-b-8.png",
+        "sha256": "99b29ea34de35271ba515ec1e97809d2d235f367b44f3e0643063c3076694a47",
+        "width": 80,
+        "height": 64
+      }
+    ]
+  }
+}

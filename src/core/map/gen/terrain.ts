@@ -7,6 +7,7 @@
 import { at, N4, N8, noiseField, quantile } from "./grid.ts";
 import { T, TERRAIN_OF, stageRng, stageSalt } from "./state.ts";
 import type { GenState, ZoneInfo } from "./state.ts";
+import type { Terrain } from "../types.ts";
 
 /**
  * Volcanic zones (bead border_marches-bzc.83): on some maps one wild zone
@@ -22,8 +23,29 @@ import type { GenState, ZoneInfo } from "./state.ts";
  * up, so the lava sits out in the wilds. Returns the volcanic zone ids.
  */
 export function placeVolcanic(st: GenState): number[] {
-  const cfg = st.cfg.terrain.volcanic;
-  const rng = stageRng(st, "volcanic");
+  return placeBiome(st, "volcanic", st.cfg.terrain.volcanic, []);
+}
+
+/**
+ * Winter zones (bead border_marches-bzc.87): like the volcanic zones, from
+ * their own random stream and after them, so a map that rolls no winter
+ * zone is the map it was before snow existed. A winter zone is never a
+ * volcanic zone nor next to one. Returns the winter zone ids.
+ */
+export function placeWinter(st: GenState): number[] {
+  const lava = st.zones.filter((z) => z.main === "volcanic").map((z) => z.id);
+  return placeBiome(st, "snow", st.cfg.terrain.winter, lava, "frost");
+}
+
+/** One biome's zones (see placeVolcanic), avoiding the zones `avoid`. */
+function placeBiome(
+  st: GenState,
+  main: Terrain,
+  cfg: GenState["cfg"]["terrain"]["volcanic"],
+  avoid: readonly number[],
+  stream: string = main,
+): number[] {
+  const rng = stageRng(st, stream);
   const picked: number[] = [];
   let chance = cfg.chance[st.size];
   for (let k = 0; k < cfg.maxZones[st.size]; k++) {
@@ -32,15 +54,16 @@ export function placeVolcanic(st: GenState): number[] {
       (z) =>
         z.role === "middle" &&
         z.tier >= cfg.minTier &&
-        z.main !== "volcanic" &&
-        !touches(st, z, picked),
+        z.main !== main &&
+        !avoid.includes(z.id) &&
+        !touches(st, z, [...picked, ...avoid]),
     );
     if (options.length === 0) break;
     const zone = rng.weighted(
       options,
       options.map((z) => z.tier * z.tier),
     );
-    zone.main = "volcanic";
+    zone.main = main;
     zone.secondary = rng.pick(cfg.secondary);
     picked.push(zone.id);
     chance /= 2;

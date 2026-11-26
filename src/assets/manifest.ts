@@ -36,8 +36,8 @@
  * and the fog of war, its puffs and lift (fog-of-war-v7.ts, fog-puff-v7.ts,
  * fog-lift-v7.ts).
  */
-import { ART_GROUNDS, GROUND_FAMILY } from "./ground-family";
-import type { ArtGround } from "./ground-family";
+import { FOREST_FAMILY, FOREST_GROUNDS, GROUND_FAMILY } from "./ground-family";
+import type { ForestGround } from "./ground-family";
 import type { ResourceId, Terrain } from "../core/map/types";
 import { DECORATION_ASSETS } from "./decorations";
 import { ALL_ICON_ASSETS } from "./icons";
@@ -588,6 +588,7 @@ export const GROUND_TERRAINS: readonly GroundTerrain[] = [
   "badlands",
   "wasteland",
   "volcanic",
+  "snow",
 ];
 
 export { ART_GROUNDS, GROUND_FAMILY } from "./ground-family";
@@ -620,6 +621,7 @@ export const GROUND_SOURCES: Readonly<Record<GroundTerrain, string>> = {
   badlands: "MARTIAN",
   wasteland: "UNDEAD",
   volcanic: "none: PixelLab set grounds-volcanic (bead bzc.83)",
+  snow: "none: PixelLab set grounds-snow (bead bzc.87)",
 };
 
 /** Texture period in cells (FACTION_GRASS_WORLDS_V7). */
@@ -630,6 +632,7 @@ const GROUND_PERIODS: Readonly<Record<GroundTerrain, number>> = {
   badlands: 8,
   wasteland: 8,
   volcanic: 5,
+  snow: 5,
 };
 
 export const GROUND_TEXTURES: Readonly<
@@ -873,7 +876,7 @@ const FOREST_VARIANTS: Readonly<Record<ForestShape, number>> = {
 
 /** Each set's seam clump sizes, by index (file seam-<index + 1>.png). */
 const FOREST_SEAM_SIZES: Readonly<
-  Record<ArtGround, readonly (readonly [number, number])[]>
+  Record<ForestGround, readonly (readonly [number, number])[]>
 > = {
   grass: [
     [63, 63],
@@ -905,7 +908,7 @@ const FOREST_SEAM_SIZES: Readonly<
   ],
 };
 
-function forestSet(terrain: ArtGround): ForestSet {
+function forestSet(terrain: ForestGround): ForestSet {
   const dir = `assets/terrain/forest/${terrain}`;
   const pieces = (Object.keys(FOREST_VARIANTS) as ForestShape[]).flatMap(
     (shape) => {
@@ -947,20 +950,21 @@ function forestSet(terrain: ArtGround): ForestSet {
   return { terrain, source: GROUND_SOURCES[terrain], pieces, seams };
 }
 
-const OWN_FOREST_SETS: Readonly<Record<ArtGround, ForestSet>> =
+const OWN_FOREST_SETS: Readonly<Record<ForestGround, ForestSet>> =
   Object.fromEntries(
-    ART_GROUNDS.map((terrain) => [terrain, forestSet(terrain)]),
-  ) as Record<ArtGround, ForestSet>;
+    FOREST_GROUNDS.map((terrain) => [terrain, forestSet(terrain)]),
+  ) as Record<ForestGround, ForestSet>;
 
 /**
  * One composed-forest set per land terrain: each art family's own (a
- * volcanic ground shares the wasteland's, GROUND_FAMILY).
+ * volcanic ground shares the wasteland's, GROUND_FAMILY; snow borrows the
+ * grass set, FOREST_FAMILY).
  */
 export const FOREST_SETS: Readonly<Record<GroundTerrain, ForestSet>> =
   Object.fromEntries(
     GROUND_TERRAINS.map((terrain) => [
       terrain,
-      OWN_FOREST_SETS[GROUND_FAMILY[terrain]],
+      OWN_FOREST_SETS[FOREST_FAMILY[GROUND_FAMILY[terrain]]],
     ]),
   ) as Record<GroundTerrain, ForestSet>;
 
@@ -1236,6 +1240,13 @@ const DOODAD_ROWS: readonly (readonly [
   ["wasteland", "ash", "a", 36, 19],
   ["wasteland", "twigs", "a", 34, 27],
   ["wasteland", "stone", "a", 30, 28],
+  // Snow (bead bzc.87, set winter-doodads).
+  ["snow", "stones", "a", 34, 25],
+  ["snow", "stones", "b", 27, 26],
+  ["snow", "grass", "a", 29, 23],
+  ["snow", "bush", "a", 29, 24],
+  ["snow", "ice", "a", 29, 32],
+  ["snow", "twigs", "a", 30, 32],
 ];
 
 export const DOODAD_ASSETS: readonly DoodadAsset[] = DOODAD_ROWS.map(

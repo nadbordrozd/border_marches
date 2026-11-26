@@ -67,6 +67,14 @@ const LOOKS: Readonly<Record<string, readonly (readonly [number, number])[]>> = 
   "dead-weeds": [[28, 23]],
   "toadstools": [[24, 23]],
   "broken-spear": [[24, 27]],
+  "arctic-hare": [[22, 28], [22, 28]],
+  "snowy-owl": [[25, 25], [25, 25]],
+  "fox": [[29, 21], [29, 21]],
+  "snowman": [[28, 25], [18, 30]],
+  "frozen-shrub": [[23, 20], [23, 22]],
+  "snow-tufts": [[23, 20], [24, 22]],
+  "paw-prints": [[22, 22], [23, 22]],
+  "ice-crystals": [[22, 21], [22, 22]],
   "big-boulder": [[58, 52]],
   "stump-cluster": [[56, 44]],
   "broken-cart": [[54, 53]],
@@ -86,6 +94,12 @@ const LOOKS: Readonly<Record<string, readonly (readonly [number, number])[]>> = 
   "beast-skeleton": [[113, 61]],
   "ruined-wall": [[128, 60]],
   "broken-catapult": [[90, 63]],
+  "ice-boulder": [[61, 55], [62, 53]],
+  "ice-spire": [[48, 61], [46, 61]],
+  "abandoned-sled": [[62, 42], [61, 41]],
+  "snowdrift": [[62, 57], [62, 60]],
+  "mammoth-skeleton": [[127, 55], [128, 49]],
+  "frozen-log": [[124, 63], [121, 64]],
 };
 
 export const DECORATIONS: readonly DecorationDef[] = DECORATION_KINDS.map(

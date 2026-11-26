@@ -1,0 +1,160 @@
+{
+  "set": "winter-objects",
+  "bead": "border_marches-bzc.87",
+  "class": "map-objects",
+  "exploration": false,
+  "_doc": "The winter special sites (bead bzc.87, docs/art/classes/map-objects.md): generate-image-v2 at native display size, 1x1 sites on 64 x 64, 2x2 sites on 128 x 128; one call returns several candidates. Layers: style, light-south-west, class-map-object, subject; the imported sawmill is the style image for outline, pixel size and viewing angle only (as set map-objects). Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "styleSawmill": {
+      "file": "public/assets/objects/sawmill.png",
+      "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+    },
+    "styleOpts": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-map-object"
+    ],
+    "noBackground": true,
+    "styleImage": "@styleSawmill",
+    "styleOptions": "@styleOpts"
+  },
+  "recipes": [
+    {
+      "id": "barrow-a",
+      "concept": "FROST GIANT'S BARROW bank (2x2)",
+      "width": 128,
+      "height": 128,
+      "seed": 87601,
+      "subject": "Subject: a frost giant's barrow, a creature bank: a big burial mound of packed snow and pale blue ice #9fd0ea with a dark doorway framed by huge grey standing slabs #7a808c at the front, icicles hanging off the lintel, a giant horned iron helmet and a broken frosted axe on top of the mound, each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, ground, grass, snow plate, flag"
+    },
+    {
+      "id": "spire-a",
+      "concept": "AURORA SPIRE (1x1)",
+      "width": 64,
+      "height": 64,
+      "seed": 87602,
+      "subject": "Subject: an aurora spire: a tall slender spire of pale blue ice crystal #bfe6f6 rising from a small ring of frosted grey stones, its tip glowing with soft green #6ef0b0 and violet #b07ef0 aurora light that ripples down its faces. About half of the image wide and nearly the full image tall, its front facing the viewer straight on.",
+      "negative": "person, ground, grass, snow plate, flag, sky, cloud"
+    },
+    {
+      "id": "lodge-a",
+      "concept": "HUNTER'S LODGE (2x2)",
+      "width": 128,
+      "height": 128,
+      "seed": 87603,
+      "subject": "Subject: a snowy hunter's lodge: a sturdy log cabin of dark brown logs #6a4428 with a steep roof thick with snow, a stone chimney, a big pair of antlers over the front door, crossed skis and two round snowshoes leaning by the door, a rack of drying furs at the side. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, animal, ground, grass, snow plate, smoke, flag"
+    },
+    {
+      "id": "rookery-a",
+      "concept": "WALRUS ROOKERY dwelling (2x2)",
+      "width": 128,
+      "height": 128,
+      "seed": 87604,
+      "subject": "Subject: a walrus rookery, the den of the rime walruses: a big low dome of pale blue ice blocks #a8d8f0 like a giant igloo with a wide dark entrance at the front, two huge curved ivory walrus tusks #ece0c4 crossed over the entrance, a wooden rack of frozen fish beside it and a pile of snow at its side. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, ground, grass, snow plate, flag, water"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/objects/map/frost-giants-barrow-small.png",
+      "from": "barrow-a#0",
+      "width": 58,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 36,
+          "y": 38,
+          "width": 58,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/frost-giants-barrow-medium.png",
+      "from": "barrow-a#1",
+      "width": 85,
+      "height": 72,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 22,
+          "y": 27,
+          "width": 85,
+          "height": 72
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/frost-giants-barrow-large.png",
+      "from": "barrow-a#3",
+      "width": 121,
+      "height": 111,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 4,
+          "width": 121,
+          "height": 111
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/aurora-spire.png",
+      "from": "spire-a#0",
+      "width": 40,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 0,
+          "width": 40,
+          "height": 64
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/hunters-lodge.png",
+      "from": "lodge-a#2",
+      "width": 109,
+      "height": 93,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 13,
+          "width": 109,
+          "height": 93
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/walrus-rookery.png",
+      "from": "rookery-a#1",
+      "width": 116,
+      "height": 78,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 24,
+          "width": 116,
+          "height": 78
+        }
+      ]
+    }
+  ]
+}
