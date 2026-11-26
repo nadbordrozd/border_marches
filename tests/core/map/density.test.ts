@@ -70,13 +70,13 @@ describe("denser maps (bzc.50)", { timeout: 120_000 }, () => {
       "sun-temple",
       "sunken-tomb",
     ];
-    // Bead bzc.95: gates need a loop and S maps rarely leave room for a
-    // bank once sites keep off the roads; bzc.96 restores them on S.
-    const rareOnS: ObjectTypeId[] = [
-      "border-gate",
-      "keymasters-tent",
-      "thunderstruck-pylon-yard",
-    ];
+    // Bead bzc.95: gates need a loop between wild zones or a one-cell
+    // choke with a way round, which an S map rarely has (one gate site in
+    // seeds 1-14, a quest gate). Bead bzc.96 reserves room for the banks
+    // (the Thunderstruck Pylon Yard is back on S) and sets the keymaster's
+    // tents down before the fill, but cannot make the gate sites; a
+    // follow-up bead looks at gate sites on S maps.
+    const rareOnS: ObjectTypeId[] = ["border-gate", "keymasters-tent"];
     for (const size of ["S", "M", "L"] as const) {
       const seen = new Set<string>();
       for (const seed of SEEDS[size]) {

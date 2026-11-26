@@ -225,6 +225,20 @@ export interface GenConfig {
   clusters: {
     /** Share of a zone's interior covered by obstacle clusters. */
     density: readonly [number, number];
+    /**
+     * The same for a start zone, when set (bead bzc.96: the start kit
+     * needs its room near home); else `density`.
+     */
+    startDensity?: readonly [number, number];
+    /**
+     * Cluster size, small share and attach chance in a start zone, when
+     * set (bead bzc.96: the kit's windows near home); else the ones above.
+     */
+    startShape?: {
+      size: readonly [number, number];
+      smallShare: number;
+      attachChance: number;
+    };
     /** Cluster size in cells (inclusive range). */
     size: readonly [number, number];
     /** Mountain share of clusters by the zone's main terrain. */
@@ -322,6 +336,77 @@ export interface GenConfig {
      * builder steps sites off the authored roads instead (named.ts).
      */
     keepWaysOpen: boolean;
+    /**
+     * Bead bzc.96: rare big sites (banks and the other rows a zone holds
+     * once) find their room before the common footprints of the fill, and
+     * the keymaster's tents are set down before the single-cell fill (and
+     * taken up again where no border gate wants them). Off for the named
+     * maps, which were authored without it.
+     */
+    reserveRare: boolean;
+  };
+
+  /**
+   * Guarded treasure clusters (bead bzc.96, docs/design/MAP_COMPOSITION.md):
+   * a few resource piles and sometimes an artifact or two in a nook of
+   * forest, round a guard that stands in front of them (so its zone of
+   * control covers every cell they can be taken from), sized by what it
+   * holds, as on a Heroes III random map.
+   */
+  hoards: {
+    /** Clusters per 100 open cells of a zone, by zone kind (0: none). */
+    rate: Readonly<Record<MapZoneKind, number>>;
+    /** Resource piles per cluster (inclusive range). */
+    piles: readonly [number, number];
+    /** Chance of an artifact in a cluster, and then of a second one. */
+    artifacts: readonly [number, number];
+    /** Most things in one cluster (five fit round a guard). */
+    most: number;
+    /** Free cells (Chebyshev) kept from a pass or gap corridor. */
+    corridorGap: number;
+  };
+
+  /**
+   * Treasure clearings (bead bzc.96): a guarded dead-end room of at least
+   * `minCells` open cells holds a set mix of good things instead of a
+   * random draw: resource piles, artifacts and a shrine or two.
+   */
+  clearings: {
+    /** Off: pockets draw their prizes from the table as before. */
+    enabled: boolean;
+    /** Smallest pocket (open cells) that becomes a clearing. */
+    minCells: number;
+    piles: readonly [number, number];
+    artifacts: readonly [number, number];
+    /** Shrines and other visit-once sites (rows of `siteRows`). */
+    sites: readonly [number, number];
+    siteRows: readonly string[];
+  };
+
+  /**
+   * Ponds in clearings (bead bzc.96, gen/fields.ts): the widest open ground
+   * of a zone outside the starts gets a small pond on some maps.
+   */
+  fields: {
+    /** Off: no ponds. */
+    enabled: boolean;
+    /**
+     * Open discs (radius in cells) set aside per wild zone before the
+     * ranges and woods grow, so its big sites (banks, libraries, the
+     * desert's and winter's sites) find room (gen/fields.ts reservePlazas);
+     * 0: none.
+     */
+    plazaRadius: number;
+    /** Wild-zone open cells per plaza (one at least). */
+    plazaArea: number;
+    /** Chance per zone. */
+    chance: number;
+    /** Least clearing radius (cells from anything busy) for a pond. */
+    pond: number;
+    /** Pond size in cells (inclusive range). */
+    pondCells: readonly [number, number];
+    /** Keep this far (Chebyshev) from a town entrance. */
+    townGap: number;
   };
 
   guards: {
@@ -355,6 +440,49 @@ export interface GenConfig {
     maxSpur: number;
   };
 }
+
+/**
+ * The obstacle clusters before bead bzc.96 (many small clumps): the named
+ * maps keep them, so their generated bases stay as authored.
+ */
+export const LEGACY_CLUSTERS: Pick<
+  GenConfig["clusters"],
+  | "density"
+  | "startDensity"
+  | "startShape"
+  | "size"
+  | "smallShare"
+  | "attachChance"
+  | "lonePeaks"
+> = {
+  density: [0.12, 0.16],
+  startDensity: [0.12, 0.16],
+  startShape: { size: [2, 12], smallShare: 0.3, attachChance: 0.22 },
+  size: [2, 12],
+  smallShare: 0.3,
+  attachChance: 0.22,
+  lonePeaks: 5,
+};
+
+/**
+ * The map composition before bead bzc.96 (docs/design/MAP_COMPOSITION.md):
+ * the old clusters, and no treasure clusters, clearings, ponds, plazas or
+ * reordering of the rare sites. The named maps use it (their edits name
+ * generated objects by place), and so do tests written on a map as it was.
+ */
+export const LEGACY_COMPOSITION: {
+  clusters: Partial<GenConfig["clusters"]>;
+  hoards: Pick<GenConfig["hoards"], "rate">;
+  clearings: Pick<GenConfig["clearings"], "enabled">;
+  fields: Pick<GenConfig["fields"], "enabled" | "plazaRadius">;
+  objects: Pick<GenConfig["objects"], "reserveRare">;
+} = {
+  clusters: LEGACY_CLUSTERS,
+  hoards: { rate: { start: 0, middle: 0, town: 0, hold: 0 } },
+  clearings: { enabled: false },
+  fields: { enabled: false, plazaRadius: 0 },
+  objects: { reserveRare: false },
+};
 
 export const DEFAULT_GEN_CONFIG: GenConfig = {
   sizes: { S: 36, M: 48, L: 72 },
@@ -465,8 +593,15 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
   },
 
   clusters: {
-    density: [0.12, 0.16],
-    size: [2, 12],
+    // Bead bzc.96: fewer, larger masses that lean on the ranges (the user:
+    // "a smaller number of larger ranges" rather than many small clumps).
+    // The open-land share of a Heroes III map is reached after the objects
+    // (fields, below), so the clusters leave the objects their room.
+    // Before: LEGACY_CLUSTERS.
+    density: [0.2, 0.25],
+    startDensity: [0.12, 0.16],
+    startShape: { size: [4, 16], smallShare: 0.15, attachChance: 0.4 },
+    size: [8, 24],
     mountainShare: {
       grass: 0.35,
       jungle: 0.2,
@@ -481,8 +616,8 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     ridgeBias: 2.2,
     lumpScale: 2.5,
     lumpAmount: 0.3,
-    smallShare: 0.3,
-    attachChance: 0.22,
+    smallShare: 0.05,
+    attachChance: 0.6,
     gap: 2,
     lonePeaks: 5,
     townClearance: 3,
@@ -550,7 +685,43 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     oneWayWaystones: { S: 1, M: 2, L: 3 },
     oneWayMinDays: 1,
     keepWaysOpen: true,
+    reserveRare: true,
     perMap: { "drill-yard": { S: [1, 1], M: [1, 1], L: [1, 2] } },
+  },
+
+  hoards: {
+    rate: { start: 0, middle: 2.2, town: 2, hold: 2.4 },
+    piles: [2, 4],
+    artifacts: [0.45, 0.25],
+    most: 5,
+    corridorGap: 2,
+  },
+
+  clearings: {
+    enabled: true,
+    minCells: 12,
+    piles: [2, 3],
+    artifacts: [1, 2],
+    sites: [1, 2],
+    siteRows: [
+      "stat-shrine",
+      "school-shrine",
+      "learning-stone",
+      "tree-of-knowledge",
+      "mana-well",
+      "tutors-hut",
+      "scholar",
+    ],
+  },
+
+  fields: {
+    enabled: true,
+    plazaRadius: 3,
+    plazaArea: 180,
+    chance: 0.6,
+    pond: 2.2,
+    pondCells: [9, 13],
+    townGap: 5,
   },
 
   guards: {

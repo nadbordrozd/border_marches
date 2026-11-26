@@ -3,20 +3,26 @@
  * for them), then everything else from the shared object table in
  * src/data/mapObjects.ts.
  *
- * 1. Costs: movement cost from every start town (plus a lower bound as if
- *    roads ran everywhere, for "at least N days away" rules).
- * 2. Pockets: dead-end rooms behind a single gap. A guard in the gap holds
- *    the whole room, which is filled with prizes.
- * 3. Requests: the start kit (rolled once, placed for every player, so every
+ * 1. Pockets: dead-end rooms behind a single gap. A guard in the gap holds
+ *    the whole room, which is filled with prizes (a big one is a treasure
+ *    clearing with a set mix, bead bzc.96). Then the guarded treasure
+ *    clusters' nooks (gen/hoards.ts, bead bzc.96), and the costs: movement
+ *    cost from every start town (plus a lower bound as if roads ran
+ *    everywhere, for "at least N days away" rules).
+ * 2. Requests: the start kit (rolled once, placed for every player, so every
  *    start is equally fair), the pocket prizes, and a random fill per zone
  *    from the table's weights up to the zone kind's density (start zones are
- *    filled once and the same list goes into every start zone).
- * 4. Placement: footprints that block cells first (only where they cannot
- *    cut anything off), then roads between all towns and spurs to mines,
- *    then single-cell objects. A fill footprint with no room left gets a
- *    single-cell stand-in; one-time pickups are placed as if they block
- *    their cell (taken from beside them), off the roads (bead bzc.50).
- * 5. Guards: every object worth at least its zone's free value gets a guard
+ *    filled once and the same list goes into every start zone); a zone's
+ *    treasure clusters stand in for as many of its loose pickups.
+ * 3. Placement: the clusters' loot first, then footprints that block cells
+ *    (only where they cannot cut anything off; with reserveRare the rule
+ *    and rare big sites before the common ones, on the plazas kept for
+ *    them), then roads between all towns and spurs to mines, then
+ *    single-cell objects. A rare big site with no room left tries the
+ *    other wild zones; a fill footprint then gets a single-cell stand-in;
+ *    one-time pickups are placed as if they block their cell (taken from
+ *    beside them), off the roads (bead bzc.50).
+ * 4. Guards: every object worth at least its zone's free value gets a guard
  *    beside its entrance unless a pocket guard already holds it; passes get
  *    a guard from the value of the zone they open; neutral towns get a
  *    garrison. Every guard's fight value follows the value it holds.
@@ -33,6 +39,7 @@ import { GATE_COLOURS, WAYSTONE_COLOURS } from "../../../data/objectTypes.ts";
 import type { ObjectTypeId } from "../../../data/objectTypes.ts";
 import { isPickup } from "../../game/site-state.ts";
 import { desertSites } from "./desert.ts";
+import { carveHoards, hoardRate } from "./hoards.ts";
 import { assignQuests } from "./quests.ts";
 import { rollContents, strangeThing } from "./contents.ts";
 import type { MapObjectRow } from "../../../data/mapObjects.ts";
@@ -290,6 +297,8 @@ interface Request {
   fallback?: Fill;
   /** A big rare site (the vault): one more try at half the distance. */
   relax?: boolean;
+  /** Placed by rule (CONTENT_MAP_OBJECTS 3.6, 3.9, 3.4). */
+  rule?: boolean;
   /**
    * Its entrance stands on this terrain while any such site is free (the
    * winter sites on snow, bead bzc.87); the last try takes any ground.
@@ -334,6 +343,10 @@ export interface PlacementReport {
   skipped: string[];
   /** Optional requests (fill, pocket prizes, rules) that found no site. */
   unplaced: number;
+  /** Treasure clusters placed (bead bzc.96): guard and loot cells. */
+  hoards: Array<{ guard: number; loot: number[] }>;
+  /** Pockets that became treasure clearings (their gap cells). */
+  clearings: number[];
 }
 
 /**
@@ -362,13 +375,69 @@ export function placeObjects(st: GenState): PlacementReport {
   const { g, cfg } = st;
   const oc = cfg.objects;
   const day = cfg.movement.day;
-  const report: PlacementReport = { skipped: [], unplaced: 0 };
+  const report: PlacementReport = {
+    skipped: [],
+    unplaced: 0,
+    hoards: [],
+    clearings: [],
+  };
   const rng = stageRng(st, "objects");
 
-  // 1. Costs from every start town.
   const starts = st.towns.filter(
     (t) => t.role === "player" || t.role === "open-start",
   );
+  const nearTown = (i: number, r: number): boolean =>
+    st.towns.some((t) => g.cheb(t.cell, i) <= r);
+
+  // 1. Pockets (dead-end rooms behind a gap), first.
+  const pocketOf = new Int32Array(g.n).fill(-1);
+  const pockets = findPockets(
+    st,
+    reachable(st, homeCell(st)),
+    pocketOf,
+    nearTown,
+  );
+  for (const p of pockets) st.occupied[p.cell] = 1;
+
+  // Treasure clusters (bead bzc.96): how many things each holds, drawn per
+  // zone from their own stream, then the sites and their walls, before
+  // the costs (the walls lengthen some ways) and the fill.
+  const hrng = stageRng(st, "hoards");
+  const hc = cfg.hoards;
+  const hoardSizes: number[][] = st.zones.map(() => []);
+  const hoardOpen: number[] = st.zones.map(() => 0);
+  const hoardArts: number[][] = st.zones.map(() => []);
+  if (Object.values(hc.rate).some((r) => r > 0)) {
+    const seen = reachable(st, homeCell(st));
+    for (let i = 0; i < g.n; i++) {
+      if (seen[i] === 1 && isWalkable(st, i) && (pocketOf[i] ?? -1) < 0) {
+        const z = st.zone[i] ?? 0;
+        hoardOpen[z] = (hoardOpen[z] ?? 0) + 1;
+      }
+    }
+    for (const z of st.zones) {
+      const want = Math.round(
+        ((hoardOpen[z.id] ?? 0) * hoardRate(st, z.id)) / 100,
+      );
+      for (let k = 0; k < want; k++) {
+        const arts = hrng.chance(hc.artifacts[0])
+          ? 1 + (hrng.chance(hc.artifacts[1]) ? 1 : 0)
+          : 0;
+        const piles = Math.min(hrng.int(...hc.piles), hc.most - arts);
+        hoardSizes[z.id]?.push(piles + arts);
+        hoardArts[z.id]?.push(arts);
+      }
+    }
+  }
+  const hoardSites = carveHoards(st, {
+    open: hoardOpen,
+    pocketOf,
+    pocketGaps: pockets.map((p) => p.cell),
+    sizes: (z) => hoardSizes[z] ?? [],
+  });
+  report.hoards = hoardSites.map((h) => ({ guard: h.guard, loot: h.loot }));
+
+  // Then the costs from every start town.
   const startCost = starts.map((t) => movementCost(st, t.cell));
   // A lower bound as if roads ran everywhere: roads built later cannot
   // bring anything closer than this.
@@ -381,8 +450,6 @@ export function placeObjects(st: GenState): PlacementReport {
   );
   st.cost = startCost[0] ?? near;
   const reach = reachable(st, homeCell(st));
-  const nearTown = (i: number, r: number): boolean =>
-    st.towns.some((t) => g.cheb(t.cell, i) <= r);
   // Cells an object may use: reachable open ground, not a pass or gap
   // corridor and not a town yard (footprints and guards are tracked in
   // st.occupied). Other kept-open cells (pass mouths) are fine: objects
@@ -406,12 +473,7 @@ export function placeObjects(st: GenState): PlacementReport {
       zoneCells[st.zone[i] ?? 0]?.push(i);
   }
 
-  // 2. Pockets.
-  const pocketOf = new Int32Array(g.n).fill(-1);
-  const pockets = findPockets(st, reach, pocketOf, nearTown);
-  for (const p of pockets) st.occupied[p.cell] = 1;
-
-  // 3. Requests.
+  // 2. Requests.
   const roll = (
     r: Rng,
     row: MapObjectRow,
@@ -540,8 +602,73 @@ export function placeObjects(st: GenState): PlacementReport {
 
   // Pocket prizes: one guard-worthy prize and a few more.
   const prng = stageRng(st, "pockets");
+  // Treasure clearings (bead bzc.96): a big pocket holds a set mix of good
+  // things, from its own stream.
+  const cc = cfg.clearings;
+  const crng = stageRng(st, "clearings");
+  const rowById = (id: string): MapObjectRow | undefined =>
+    oc.table.find((r) => r.id === id);
+  const resourceRows = oc.table.filter(
+    (r) =>
+      r.kind === "pickup" &&
+      r.type === "resource-pile" &&
+      r.footprint.w * r.footprint.h === 1,
+  );
   pockets.forEach((p, k) => {
     const kind = kindOf(p.zone);
+    if (cc.enabled && p.cells.length >= cc.minCells) {
+      report.clearings.push(p.cell);
+      const tier = tierOf(p.zone);
+      const things: MapObjectRow[] = [];
+      const art = rowById("loose-artifact");
+      for (let c = crng.int(...cc.artifacts); c > 0 && art; c--)
+        things.push(art);
+      const sites = cc.siteRows
+        .map(rowById)
+        .filter(
+          (r): r is MapObjectRow =>
+            r !== undefined && (r.weights[kind] ?? 0) > 0,
+        );
+      const count = new Map<string, number>();
+      for (let c = crng.int(...cc.sites); c > 0 && sites.length > 0; c--) {
+        const open = sites.filter(
+          (r) => r.perZone === undefined || (count.get(r.id) ?? 0) < r.perZone,
+        );
+        if (open.length === 0) break;
+        const row = crng.weighted(
+          open,
+          open.map((r) => r.weights[kind] ?? 0),
+        );
+        count.set(row.id, (count.get(row.id) ?? 0) + 1);
+        things.push(row);
+      }
+      for (let c = crng.int(...cc.piles); c > 0; c--) {
+        things.push(
+          crng.weighted(
+            resourceRows,
+            resourceRows.map((r) => r.weights[kind] ?? 0),
+          ),
+        );
+      }
+      for (const row of things) {
+        const data = roll(crng, row, tier);
+        const value = valueOf(row, data);
+        requests.push({
+          row,
+          data,
+          value,
+          zones: [p.zone],
+          minCost: 0,
+          maxCost: Infinity,
+          minFar: farFor(row, value, data),
+          required: false,
+          pocket: k,
+          guarded: false,
+          label: `clearing ${k} ${row.id}`,
+        });
+      }
+      return;
+    }
     const n = prng.int(...oc.pocketPrizes);
     const count = new Map<string, number>();
     for (let c = 0; c < n; c++) {
@@ -553,6 +680,9 @@ export function placeObjects(st: GenState): PlacementReport {
         count,
         (r) =>
           oc.perMap[r.id] === undefined &&
+          // A bank holds its own guards: no pocket guard stands for one
+          // (bead bzc.96, with the clearings).
+          !(cc.enabled && r.kind === "bank") &&
           (c === 0 ? r.value >= FREE_VALUE[kind] : true),
       );
       if (!row) continue;
@@ -653,7 +783,20 @@ export function placeObjects(st: GenState): PlacementReport {
     if (z.role === "start") continue;
     let open = 0;
     for (const i of zoneCells[z.id] ?? []) if ((pocketOf[i] ?? 0) < 0) open++;
-    for (const f of fillFor(z.role, open, 0, tierOf(z.id))) {
+    // A treasure cluster's things count towards the zone's share (bead
+    // bzc.96): the fill draws as before, and as many of its loose
+    // pickups as the clusters hold are left out, so the zone holds as many
+    // things as before, more of them in guarded groups and fewer strewn
+    // one by one (its sites are drawn as they were).
+    let hoarded = hoardSites
+      .filter((h) => h.zone === z.id)
+      .reduce((n, h) => n + h.loot.length, 0);
+    const drawnFill = fillFor(z.role, open, 0, tierOf(z.id)).filter((f) => {
+      if (hoarded <= 0 || f.row.kind !== "pickup") return true;
+      hoarded--;
+      return false;
+    });
+    for (const f of drawnFill) {
       const value = valueOf(f.row, f.data);
       requests.push({
         row: f.row,
@@ -747,6 +890,7 @@ export function placeObjects(st: GenState): PlacementReport {
       pocket: -1,
       guarded: guardedIn(row, value, zones[0] ?? 0, data),
       label: `rule ${type}`,
+      rule: true,
       ...(first ? { relax: true } : {}),
     });
   };
@@ -870,7 +1014,7 @@ export function placeObjects(st: GenState): PlacementReport {
     }
   }
 
-  // 4. Placement: blocking footprints, roads, then single cells.
+  // 3. Placement: blocking footprints, roads, then single cells.
   const counters = new Map<string, number>();
   const nextId = (prefix: string): string => {
     const n = (counters.get(prefix) ?? 0) + 1;
@@ -968,6 +1112,58 @@ export function placeObjects(st: GenState): PlacementReport {
       );
   const free = (i: number): boolean =>
     base[i] === 1 && st.occupied[i] === 0 && st.objBlocked[i] === 0;
+  /** Whether a request may use a plaza's ground (bead bzc.96). */
+  let plazaFor: (r: Request) => boolean = () => true;
+
+  // The treasure clusters' loot and guards (bead bzc.96), before anything
+  // else takes their cells: artifacts at the middle of the back, resource
+  // piles drawn by the zone's weights. Each pickup is a wall while the
+  // rest is placed, like any pickup taken from beside it; the guard's zone
+  // of control stays clear of other objects.
+  const lrng = stageRng(st, "hoard-loot");
+  const artifactRow = oc.table.find((r) => r.id === "loose-artifact");
+  for (const site of hoardSites) {
+    const kind = kindOf(site.zone);
+    const tier = tierOf(site.zone);
+    const arts = hoardArts[site.zone]?.[site.slot] ?? 0;
+    const ids: string[] = [];
+    let total = 0;
+    site.loot.forEach((cell, n) => {
+      const row =
+        n < arts && artifactRow !== undefined
+          ? artifactRow
+          : lrng.weighted(
+              resourceRows,
+              resourceRows.map((r) => r.weights[kind] ?? 0),
+            );
+      const data = roll(lrng, row, tier);
+      const value = valueOf(row, data);
+      const id = nextId(row.id);
+      commit(st, {
+        id,
+        kind: row.kind,
+        x: g.x(cell),
+        y: g.y(cell),
+        footprint: { w: 1, h: 1 },
+        blocked: [],
+        data: { ...data, value },
+      });
+      st.objBlocked[cell] = 1;
+      besideCells.push(cell);
+      if (roadMayCross({ kind: row.kind }) === "never") entrances[cell] = 1;
+      ids.push(id);
+      total += value;
+    });
+    markCrowd(site.loot);
+    for (const j of [site.guard, ...g.around(site.guard, N8)])
+      st.occupied[j] = 1;
+    guardReqs.push({
+      cell: site.guard,
+      value: total,
+      ringAt: site.guard,
+      guards: ids,
+    });
+  }
 
   /**
    * A free neighbour of `e` for a guard, nearest the starts. With `cover`
@@ -1045,6 +1241,7 @@ export function placeObjects(st: GenState): PlacementReport {
       const cand: Array<{ e: number; s: number }> = [];
       for (const e of cells) {
         if (req.pocket < 0 && (pocketOf[e] ?? -1) >= 0) continue;
+        if (st.plaza[e] === 1 && !plazaFor(req)) continue;
         if (!free(e)) continue;
         if (
           req.ground !== undefined &&
@@ -1090,7 +1287,8 @@ export function placeObjects(st: GenState): PlacementReport {
             !free(f) ||
             st.road[f] === 1 ||
             (strict > 0 && (crowd[f] ?? 0) >= strict) ||
-            pocketOf[f] !== pocketOf[e]
+            pocketOf[f] !== pocketOf[e] ||
+            (st.plaza[f] === 1 && !plazaFor(req))
           ) {
             ok = false;
             break;
@@ -1178,6 +1376,31 @@ export function placeObjects(st: GenState): PlacementReport {
     // Its own stream, so the rest of the map draws as it would without.
     const again = { ...r, minFar: r.minFar * 0.5 };
     if (r.relax && tryPlace(again, roads, stageRng(st, "relax"))) return;
+    // Bead bzc.96 (reserveRare): a rare big site of the wilds with no room
+    // in its zone (a bank, a library, a drill yard) tries every other wild
+    // zone where its row may stand before it gives way to a stand-in.
+    if (
+      oc.reserveRare &&
+      !r.required &&
+      r.pocket < 0 &&
+      r.from === undefined &&
+      r.row.footprint.w * r.row.footprint.h > 1 &&
+      r.relax !== true &&
+      r.rule !== true &&
+      (counted(r) || r.row.kind === "bank" || r.row.perZone === 1)
+    ) {
+      const zones = st.zones
+        .filter(
+          (z) =>
+            z.role !== "start" &&
+            !r.zones.includes(z.id) &&
+            (r.row.weights[z.role] ?? 0) > 0,
+        )
+        .map((z) => z.id);
+      const wider = { ...r, zones };
+      if (zones.length > 0 && tryPlace(wider, roads, stageRng(st, "rare")))
+        return;
+    }
     if (r.fallback !== undefined) {
       // The fill's single-cell stand-in, placed with the other single
       // cells after the roads.
@@ -1218,7 +1441,35 @@ export function placeObjects(st: GenState): PlacementReport {
     };
     if (!tryPlace(anywhere, roads)) report.skipped.push(r.label);
   };
-  for (const r of requests.filter(multi)) place(r, false);
+  // Bead bzc.96 (reserveRare): the kit, the rule sites and the rows a
+  // map or zone holds once or twice (banks, libraries, drill yards) find
+  // their room before the common fill crowds the zones; otherwise in the
+  // order drawn.
+  const early = (r: Request): boolean =>
+    r.required || r.relax === true || r.rule === true || counted(r);
+  const rank = (r: Request): number =>
+    early(r) || r.pocket >= 0
+      ? 0
+      : r.row.kind === "bank" || r.row.perZone === 1
+        ? 1
+        : 2;
+  const byRank = (list: Request[]): Request[] =>
+    oc.reserveRare
+      ? list
+          .map((r, k) => ({ r, k }))
+          .sort((a, b) => rank(a.r) - rank(b.r) || a.k - b.k)
+          .map((x) => x.r)
+      : list;
+  // The plazas (gen/fields.ts reservePlazas) hold the rare big sites
+  // while the footprints are placed: the kit and the common fill keep off
+  // them till then.
+  plazaFor = (r) => rank(r) <= 1 && !r.required;
+  for (const r of byRank(requests.filter(multi))) {
+    // The rare sites have had their turn: the plazas are free for all.
+    if (rank(r) === 2) plazaFor = () => true;
+    place(r, false);
+  }
+  plazaFor = () => true;
   // Bead bzc.95: with keepWaysOpen the roads keep off every entrance
   // placed so far (the footprints left a way round each), and the single
   // cells placed after them keep off the roads.
@@ -1227,7 +1478,41 @@ export function placeObjects(st: GenState): PlacementReport {
     guardReqs.map((q) => q.cell),
     oc.keepWaysOpen,
   );
-  for (const r of [...requests.filter((q) => !multi(q)), ...stand]) {
+  // Bead bzc.96 (reserveRare): the keymaster's tents of the border gates
+  // to come are set down before the single-cell fill takes the room; a
+  // tent no gate wants is taken up again below.
+  const gateCount = [1, 1, 2][big] ?? 1;
+  const keyRow = ruleRow("keymasters-tent");
+  const tentRequest = (colour: string): Request | undefined =>
+    keyRow === undefined
+      ? undefined
+      : {
+          row: keyRow,
+          data: { type: "keymasters-tent", colour },
+          value: 0,
+          zones: ruleZones.map((z) => z.id),
+          minCost: 0,
+          maxCost: Infinity,
+          minFar: 0,
+          required: false,
+          pocket: -1,
+          guarded: false,
+          label: `keymaster's tent ${colour}`,
+        };
+  const reservedTents = new Map<string, MapObject>();
+  if (oc.reserveRare) {
+    for (let k = 0; k < gateCount; k++) {
+      const colour = GATE_COLOURS[k % GATE_COLOURS.length] ?? "red";
+      const tent = tentRequest(colour);
+      if (tent === undefined || !tryPlace(tent, true)) continue;
+      const placed = st.objects[st.objects.length - 1];
+      if (placed !== undefined) reservedTents.set(colour, placed);
+    }
+  }
+  const singles = [...requests.filter((q) => !multi(q)), ...stand];
+  for (const r of oc.reserveRare
+    ? [...singles.filter(early), ...singles.filter((q) => !early(q))]
+    : singles) {
     place(r, true);
   }
   // A waystone whose twin found no site would lead nowhere: drop it.
@@ -1247,7 +1532,7 @@ export function placeObjects(st: GenState): PlacementReport {
   // measured without it.
   for (const i of besideCells) st.objBlocked[i] = 0;
 
-  // 5. Guards.
+  // 4. Guards.
   const grng = stageRng(st, "guards");
   for (const p of pockets) {
     if (p.ids.length === 0) {
@@ -1294,7 +1579,6 @@ export function placeObjects(st: GenState): PlacementReport {
     });
   }
   // Gates on open loops: border gates (keys in tents) and quest gates.
-  const gateCount = [1, 1, 2][big] ?? 1;
   if (gateSites.length <= gateCount) {
     // Few open loops between zones (small maps): one-cell gaps in the room
     // walls of wild zones that close the way there but cut nothing off (a
@@ -1322,7 +1606,6 @@ export function placeObjects(st: GenState): PlacementReport {
       if (n === total - 1) gateSites.push(c);
     }
   }
-  const keyRow = ruleRow("keymasters-tent");
   // A map with one site has a border gate or a quest gate, seeded.
   const loneQuest = gateSites.length === 1 && stageRng(st, "gates").chance(0.5);
   gateSites.forEach((cell, k) => {
@@ -1332,21 +1615,13 @@ export function placeObjects(st: GenState): PlacementReport {
     const quest = k === gateCount || loneQuest;
     const colour = GATE_COLOURS[k % GATE_COLOURS.length] ?? "red";
     if (!quest && keyRow !== undefined) {
-      // The tent first: no tent, no gate.
-      const tent: Request = {
-        row: keyRow,
-        data: { type: "keymasters-tent", colour },
-        value: 0,
-        zones: ruleZones.map((z) => z.id),
-        minCost: 0,
-        maxCost: Infinity,
-        minFar: 0,
-        required: false,
-        pocket: -1,
-        guarded: false,
-        label: `keymaster's tent ${colour}`,
-      };
-      if (!tryPlace(tent, true)) return;
+      // The tent first: no tent, no gate. A tent set down early is used.
+      const reserved = reservedTents.get(colour);
+      if (reserved !== undefined) reservedTents.delete(colour);
+      else {
+        const tent = tentRequest(colour);
+        if (tent === undefined || !tryPlace(tent, true)) return;
+      }
     }
     st.occupied[cell] = 1;
     commit(st, {
@@ -1361,6 +1636,13 @@ export function placeObjects(st: GenState): PlacementReport {
         : { type: "border-gate", colour, value: 0 },
     });
   });
+  // Tents set down early that no border gate wanted are taken up again.
+  for (const tent of reservedTents.values()) {
+    st.objects = st.objects.filter((o) => o !== tent);
+    const i = g.idx(tent.x, tent.y);
+    st.occupied[i] = 0;
+    entrances[i] = 0;
+  }
 
   // Rings from the costs after roads (closer than before, never farther).
   const after = movementCost(

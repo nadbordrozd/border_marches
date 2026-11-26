@@ -111,6 +111,12 @@ export interface GenState {
   spine: Uint8Array;
   /** Cells that must stay open (pass corridors, objects and clearances). */
   keepOpen: Uint8Array;
+  /**
+   * Open ground set aside in a wild zone for its big sites (bead bzc.96,
+   * gen/fields.ts reservePlazas): kept open like `keepOpen`, and no
+   * treasure cluster takes it.
+   */
+  plaza: Uint8Array;
   /** Cells that already carry an object (entrance or blocked). */
   occupied: Uint8Array;
   /** Cells blocked by an object footprint (impassable). */
@@ -151,6 +157,7 @@ export function newState(
     obstacle: new Uint8Array(g.n),
     spine: new Uint8Array(g.n),
     keepOpen: new Uint8Array(g.n),
+    plaza: new Uint8Array(g.n),
     occupied: new Uint8Array(g.n),
     objBlocked: new Uint8Array(g.n),
     road: new Uint8Array(g.n),

@@ -22,6 +22,7 @@ import {
 import { OBJECT_TYPES } from "../../data/objectTypes.ts";
 import { decorateMap } from "./decorate.ts";
 import { relayRoads, roadMayCross } from "./gen/objects.ts";
+import { LEGACY_COMPOSITION } from "./gen/config.ts";
 import {
   DEFAULT_GEN_CONFIG,
   corridorCells,
@@ -68,7 +69,14 @@ export function generateNamedBase(def: NamedMapDef): GameMap {
  */
 const NAMED_CONFIG: {
   terrain: Pick<GenConfig["terrain"], NamedLandscape>;
-  objects: Pick<GenConfig["objects"], "keepWaysOpen" | "density">;
+  objects: Pick<
+    GenConfig["objects"],
+    "keepWaysOpen" | "density" | "reserveRare"
+  >;
+  clusters: Partial<GenConfig["clusters"]>;
+  hoards: Pick<GenConfig["hoards"], "rate">;
+  clearings: Pick<GenConfig["clearings"], "enabled">;
+  fields: Pick<GenConfig["fields"], "enabled" | "plazaRadius">;
 } = {
   // Placed as authored (bead bzc.95): without the generator's off-road
   // rules and at the fill they were authored at (bead bzc.95 raised the
@@ -77,7 +85,16 @@ const NAMED_CONFIG: {
   objects: {
     keepWaysOpen: false,
     density: { start: 26, middle: 20, town: 22, hold: 24 },
+    reserveRare: false,
   },
+  // Bead bzc.96 (map composition): the named maps keep the obstacle
+  // clusters, fill and pockets they were authored on, with no treasure
+  // clusters, clearings, ponds or plazas, so their edits find every
+  // generated object where they expect it.
+  clusters: LEGACY_COMPOSITION.clusters,
+  hoards: LEGACY_COMPOSITION.hoards,
+  clearings: LEGACY_COMPOSITION.clearings,
+  fields: LEGACY_COMPOSITION.fields,
   terrain: {
     volcanic: {
       ...DEFAULT_GEN_CONFIG.terrain.volcanic,
@@ -124,6 +141,10 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
     ...(towns !== undefined
       ? { neutralTowns: { S: towns, M: towns, L: towns } }
       : {}),
+    clusters: NAMED_CONFIG.clusters,
+    hoards: NAMED_CONFIG.hoards,
+    clearings: NAMED_CONFIG.clearings,
+    fields: NAMED_CONFIG.fields,
     terrain: {
       volcanic: biome("volcanic"),
       winter: biome("winter"),

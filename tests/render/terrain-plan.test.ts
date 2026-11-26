@@ -12,6 +12,7 @@ import {
   DEFAULT_GEN_CONFIG,
   generateMap,
 } from "../../src/core/map/generate.ts";
+import { LEGACY_COMPOSITION } from "../../src/core/map/gen/config.ts";
 import type { GameMap, MapObject } from "../../src/core/map/types.ts";
 import { objectCells } from "../../src/core/map/types.ts";
 import { canopyBands, canopyTint } from "../../src/render/map/canopy.ts";
@@ -277,7 +278,8 @@ function freeCellBesideRange(
 
 describe("incremental terrain plan", () => {
   it("equals a full rebuild after every kind of object change", () => {
-    const map = generateMap(11, { size: "S" });
+    // The map this was written on, before bead bzc.96's composition.
+    const map = generateMap(11, { size: "S", config: LEGACY_COMPOSITION });
     let objects: MapObject[] = map.objects.filter((o) => o.kind !== "buried");
     let update = planTerrain(map, objects);
     expect(update.dirty).toBeNull();
@@ -411,10 +413,12 @@ describe("incremental terrain plan", () => {
     const FULL_EVERY = 25;
     // Decorated (bead bzc.72): its props and decorations stay featured
     // through every take and return.
-    // The map as it was before the desert (bead bzc.88) could roll on it.
+    // The map as it was before the desert (bead bzc.88) could roll on it,
+    // and before bead bzc.96's composition.
     const map = generateMap(12, {
       size: "S",
       config: {
+        ...LEGACY_COMPOSITION,
         terrain: {
           desert: {
             ...DEFAULT_GEN_CONFIG.terrain.desert,

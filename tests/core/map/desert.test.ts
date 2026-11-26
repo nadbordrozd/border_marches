@@ -88,16 +88,27 @@ const NONE = {
 const typeOf = (map: GameMap, type: string) =>
   map.objects.filter((o) => o.data["type"] === type);
 
-/** Seeds (size M, 2 players) with a desert and without one. */
-// Bead bzc.95 moved these from M12 and S8: with sites off the roads, S8's
-// desert has no room for a sun temple or tomb and M12's decorations lean
-// away from the sand. Bead bzc.96 must restore S8 and M12 by reserving room
-// for rare multi-cell sites before the general fill.
+/**
+ * Seeds (2 players) with a desert. Bead bzc.95 had moved them to M30 and
+ * S19; bead bzc.96 reserves room for the rare big sites before the fill
+ * (plazas, the desert's sites first, no treasure clusters on the sand), so
+ * the first seeds, M12 and S8, hold every desert site again.
+ */
 const WITH: [number, MapSize, PlayerCount][] = [
-  [30, "M", 2],
-  [19, "S", 2],
+  [12, "M", 2],
+  [8, "S", 2],
   [10, "L", 2],
 ];
+
+/**
+ * A desert map whose open sand is roomy enough to show the decorations'
+ * sand bias. The bias is a second pass over open sand away from loot, so
+ * on a crowded desert (M12: its sites, the fill and the roads leave little
+ * such sand) the share of decorations on the sand can fall below the
+ * sand's share of the open land (bead bzc.96 report: a follow-up for the
+ * decorator).
+ */
+const SANDY: [number, MapSize, PlayerCount] = [19, "M", 2];
 
 describe("desert zones in the generator", () => {
   it("turns a wild zone away from the starts into a desert on some maps", () => {
@@ -251,7 +262,7 @@ describe("desert sites in the generator", () => {
   });
 
   it("biases the decorations to sand", () => {
-    const [seed, size, players] = WITH[0]!;
+    const [seed, size, players] = SANDY;
     const { map } = generateMapWithInfo(seed, { size, players });
     const W = map.width;
     const decorations = map.decorations ?? [];

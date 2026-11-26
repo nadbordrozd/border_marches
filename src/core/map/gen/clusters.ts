@@ -46,12 +46,18 @@ export function growClusters(st: GenState): void {
   for (const z of st.zones) {
     const interior: number[] = [];
     for (let i = 0; i < g.n; i++) if (free(i, z.id)) interior.push(i);
-    const target = Math.round(rng.float(...cc.density) * interior.length);
+    const share =
+      z.role === "start" && cc.startDensity !== undefined
+        ? cc.startDensity
+        : cc.density;
+    const target = Math.round(rng.float(...share) * interior.length);
     let placed = 0;
     let attempts = 0;
     while (placed < target && attempts < 400) {
       attempts++;
-      const attach = rng.chance(cc.attachChance);
+      const shape =
+        z.role === "start" && cc.startShape !== undefined ? cc.startShape : cc;
+      const attach = rng.chance(shape.attachChance);
       let seed: number | undefined;
       let type: number = rng.chance(cc.mountainShare[z.main])
         ? O.mountain
@@ -88,7 +94,7 @@ export function growClusters(st: GenState): void {
         }
         if (seed === undefined) continue;
       }
-      const small = rng.chance(cc.smallShare);
+      const small = rng.chance(shape.smallShare);
       // A deep block: big and round, so the range has an interior.
       const deep =
         type === O.mountain &&
@@ -100,8 +106,8 @@ export function growClusters(st: GenState): void {
         : small
           ? 1 + Math.floor(rng.next() * 3)
           : Math.round(
-              cc.size[0] +
-                (cc.size[1] - cc.size[0]) * Math.pow(rng.next(), 1.4),
+              shape.size[0] +
+                (shape.size[1] - shape.size[0]) * Math.pow(rng.next(), 1.4),
             );
       // The smallest mountain is a 2x2 hill (squareMountains squares it).
       const size = type === O.mountain ? Math.max(4, drawn) : drawn;

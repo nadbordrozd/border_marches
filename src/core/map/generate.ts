@@ -14,20 +14,24 @@
  *             deep in their zones
  * 3. water    coast and lakes (gen/water.ts)
  * 4. terrain  main terrain per zone with secondary patches; on some maps a
- *             wild zone turns volcanic, and on some one turns
- *             to snow (gen/terrain.ts)
- *             wild zone turns volcanic, on some a sand desert (gen/terrain.ts)
+ *             wild zone turns volcanic, on some one turns to snow, on some
+ *             a sand desert (gen/terrain.ts); each wild zone sets aside an
+ *             open plaza for its big sites (gen/fields.ts, bead bzc.96)
  * 5. borders  mountain ranges and forest belts along zone borders, a frame
  *             along the map edge, spurs, and passes (gen/borders.ts)
  * 6. rooms    walls of forest and rock inside each zone with unguarded gaps:
  *             valleys, dead ends and pockets (gen/rooms.ts)
- * 7. clusters forests and mountain groups inside zones, clean-up, pockets,
- *             and the 2x2 rule: every mountain cell lies in an all-mountain
- *             2x2 block (gen/clusters.ts); then no range or ground edge
- *             runs straight for more than three cells (gen/wobble.ts)
+ * 7. clusters forests and mountain groups inside zones (fewer, larger, most
+ *             leaning on a range), clean-up, pockets, and the 2x2 rule:
+ *             every mountain cell lies in an all-mountain 2x2 block
+ *             (gen/clusters.ts); then no range or ground edge runs straight
+ *             for more than three cells (gen/wobble.ts); a zone's widest
+ *             clearing gets a pond on some maps (gen/fields.ts)
  * 8. objects  everything from the shared object table (src/data/mapObjects.ts):
- *             start kits, pocket treasure, zone fill, roads between towns,
- *             guards sized by the value they hold (gen/objects.ts)
+ *             guarded treasure clusters cut into nooks (gen/hoards.ts),
+ *             start kits, pocket treasure (big pockets: treasure
+ *             clearings), the rare big sites, zone fill, roads between
+ *             towns, guards sized by the value they hold (gen/objects.ts)
  * 9. decorations  passable decorations and impassable props, clear of
  *             every way, object and corridor (decorate.ts)
  *
@@ -58,6 +62,8 @@ import {
   placeWinter,
 } from "./gen/terrain.ts";
 import { wobbleEdges } from "./gen/wobble.ts";
+import { fillFields, reservePlazas } from "./gen/fields.ts";
+import type { FieldReport } from "./gen/fields.ts";
 import { markDeep, placeWater, tidyWater } from "./gen/water.ts";
 import { layoutZones } from "./gen/zones.ts";
 
@@ -106,6 +112,12 @@ export interface GenerateInfo {
   unplaced: number;
   /** Row-major zone id of every cell (bead bzc.88: tests of placement). */
   zoneOf: Int32Array;
+  /** Guarded treasure clusters (bead bzc.96): guard and loot cells. */
+  hoards: Array<{ guard: number; loot: number[] }>;
+  /** Gap cells of the pockets that became treasure clearings. */
+  clearings: number[];
+  /** Ponds put in clearings (bead bzc.96). */
+  fields: FieldReport;
 }
 
 /** Row-major cells of every pass and gap corridor (kept clear of props). */
@@ -162,6 +174,8 @@ export function generateMapWithInfo(
   lap("zones+towns");
   placeWater(st);
   paintTerrain(st);
+  // Room set aside for the big sites of the wild zones (bead bzc.96).
+  reservePlazas(st);
   lap("water+terrain");
   buildBorders(st);
   cutPasses(st);
@@ -192,6 +206,8 @@ export function generateMapWithInfo(
   resolvePockets(st);
   squareMountains(st, false);
   mergeSmallRegions(st);
+  // A clearing gets a pond on some maps (bead bzc.96).
+  const fields = fillFields(st);
   markDeep(st);
   lap("wobble");
   const report = placeObjects(st);
@@ -239,6 +255,9 @@ export function generateMapWithInfo(
       skipped: report.skipped,
       unplaced: report.unplaced,
       zoneOf: st.zone,
+      hoards: report.hoards,
+      clearings: report.clearings,
+      fields,
     },
   };
 }
