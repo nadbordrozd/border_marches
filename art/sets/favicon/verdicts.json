@@ -1,0 +1,72 @@
+{
+  "crest-b#41": {
+    "verdict": "ACCEPTED",
+    "notes": "favicon 32 px and the source of the 180/192 icons: crimson and blue halves (two realms meeting at the march) in a bright gold rim that keeps the silhouette on a dark tab; clean, symmetric, no stray pixels",
+    "at": "2026-11-26T14:00:36.528Z"
+  },
+  "crest-a-16#34": {
+    "verdict": "ACCEPTED",
+    "notes": "favicon 16 px: the cleanest split crest at 16 px, symmetric rim and point; its shades are snapped to five flat colours by recorded edits in outputs[]",
+    "at": "2026-11-26T14:00:36.629Z"
+  },
+  "crest-b#0": {
+    "verdict": "REJECTED",
+    "notes": "chevron crest: clear, but its maroon outline sinks on a dark tab and it says less than the split crest",
+    "at": "2026-11-26T14:00:52.818Z"
+  },
+  "crest-b#8": {
+    "verdict": "REJECTED",
+    "notes": "chevron crest with a notch bitten out of the top right corner",
+    "at": "2026-11-26T14:00:52.908Z"
+  },
+  "crest-b#1": {
+    "verdict": "REJECTED",
+    "notes": "split crest with an uneven, lumpy point",
+    "at": "2026-11-26T14:00:53.002Z"
+  },
+  "crest-b#17": {
+    "verdict": "REJECTED",
+    "notes": "split crest: good, but the rim is thinner on the right than on #41",
+    "at": "2026-11-26T14:00:53.096Z"
+  },
+  "crest-b#49": {
+    "verdict": "REJECTED",
+    "notes": "split crest leaning right, asymmetric rim",
+    "at": "2026-11-26T14:00:53.196Z"
+  },
+  "crest-a-16#2": {
+    "verdict": "REJECTED",
+    "notes": "16 px split crest with stray dark pixels in the rim and a broken left edge",
+    "at": "2026-11-26T14:00:53.294Z"
+  },
+  "crest-a-16#10": {
+    "verdict": "REJECTED",
+    "notes": "16 px split crest with a red speck in the right rim",
+    "at": "2026-11-26T14:00:53.391Z"
+  },
+  "crest-a-16#18": {
+    "verdict": "REJECTED",
+    "notes": "16 px split crest with a ragged, dotted rim",
+    "at": "2026-11-26T14:00:53.492Z"
+  },
+  "crest-a-16#26": {
+    "verdict": "REJECTED",
+    "notes": "16 px split crest: clean, but the rim fades to brown on the left, the lit side",
+    "at": "2026-11-26T14:00:53.590Z"
+  },
+  "crest-a-16#42": {
+    "verdict": "REJECTED",
+    "notes": "16 px split crest with a pinched, uneven top",
+    "at": "2026-11-26T14:00:53.690Z"
+  },
+  "crest-a-16#50": {
+    "verdict": "REJECTED",
+    "notes": "16 px split crest: left rim dark and the point smudged",
+    "at": "2026-11-26T14:00:53.788Z"
+  },
+  "crest-a-16#58": {
+    "verdict": "REJECTED",
+    "notes": "16 px split crest with a stray gold pixel off the right rim",
+    "at": "2026-11-26T14:00:53.888Z"
+  }
+}

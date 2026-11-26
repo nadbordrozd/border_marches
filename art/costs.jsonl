@@ -433,3 +433,5 @@
 {"at":"2026-11-26T11:21:54.822Z","set":"grounds-volcanic","id":"pixen-e","endpoint":"create-image-pixen","usd":0.013607824431525337}
 {"at":"2026-11-26T11:24:08.040Z","set":"grounds-volcanic","id":"base-a","endpoint":"create-image-pixen","usd":0.01168144800927904}
 {"at":"2026-11-26T11:24:35.681Z","set":"grounds-volcanic","id":"base-b","endpoint":"create-image-pixflux","usd":0.007929646889368694}
+{"at":"2026-11-26T13:53:28.904Z","set":"favicon","id":"crest-b","endpoint":"generate-image-v2","usd":0.08319108864996169}
+{"at":"2026-11-26T13:59:18.502Z","set":"favicon","id":"crest-a-16","endpoint":"generate-image-v2","usd":0.08102658902274237}

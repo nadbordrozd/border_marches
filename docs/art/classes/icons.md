@@ -177,6 +177,26 @@ pixels; every other take is a spare. The sheet is
 `.orchestration/shots/bzc.82/icons-sheet.png`, rebuilt with
 `node art/review/icon-sheet.mjs <out.png> stats`.
 
+## Favicon (bead `border_marches-bzc.86`)
+
+The browser-tab icon is a heater shield split crimson and royal blue in a
+gold rim: two realms meeting at the march. Set `art/sets/favicon`, recipe
+data and verdicts there; the files go to `public/` and `index.html` links
+them with root-absolute paths that Vite rewrites to `./` under the relative
+`base`, so they resolve under the GitHub Pages sub-path.
+
+| File | From | Derivation |
+| --- | --- | --- |
+| `public/favicon-16.png` | `crest-a-16#34`, its own 16 px take | 88 recorded pixel edits snap its shades to five flat colours (outline `#160613`, gold `#e8ae1c`, gold shadow `#b8781a`, crimson `#a71238`, blue `#1e569a`) |
+| `public/favicon-32.png` | `crest-b#41` | none |
+| `public/apple-touch-icon.png` | `crest-b#41` | cropped to the 20 x 27 shield, x5, on an opaque 180 px plate in the theme colour `#1b1712` |
+| `public/icon-192.png` | `crest-b#41` | x6, transparent |
+
+Recipe `crest-a` was refused by PixelLab's content policy (no images, no
+cost; its subject had a sword and a spear tip); `crest-b` is the same list
+without them. The chevron crest was the runner-up (its maroon outline sinks
+on a dark tab). 3 calls, 2 billed, US$0.164.
+
 ## Acceptance
 
 - Every take reviewed on a 64-candidate grid at 1x and 3x on light and dark

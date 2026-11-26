@@ -1,0 +1,886 @@
+{
+  "crest-a": {
+    "id": "crest-a",
+    "status": "FAILED",
+    "endpoint": "generate-image-v2",
+    "jobId": "00bdba17-f1b2-4933-aa6c-f1263b1f0333",
+    "submittedAt": "2026-11-26T13:48:23.001Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 6 things, each thing about equally often: (1) a tall pointed heater shield, crimson red with a bold gold chevron; (2) a tall pointed heater shield split down the middle, left half crimson red and right half royal blue, with a gold rim; (3) a crimson red swallow-tailed banner flying from a wooden pole with a gold spear tip; (4) a tall pointed heater shield, crimson red with a gold castle tower on it; (5) a tall pointed heater shield, royal blue with a gold crown on it; (6) a crimson red heater shield with a steel sword behind it, the hilt above and the point below."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 18601,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 6 things, each thing about equally often: (1) a tall pointed heater shield, crimson red with a bold gold chevron; (2) a tall pointed heater shield split down the middle, left half crimson red and right half royal blue, with a gold rim; (3) a crimson red swallow-tailed banner flying from a wooden pole with a gold spear tip; (4) a tall pointed heater shield, crimson red with a gold castle tower on it; (5) a tall pointed heater shield, royal blue with a gold crown on it; (6) a crimson red heater shield with a steel sword behind it, the hilt above and the point below. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "failedAt": "2026-11-26T13:48:40Z",
+    "error": "PixelLab job failed: Generation failed because it is against policy (code 5000); no images, no cost recorded. Likely trigger: the sword and spear tip in the subject; crest-b drops them.",
+    "candidates": []
+  },
+  "crest-b": {
+    "id": "crest-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "48e5af68-f2ec-4d0d-b61d-7eec05a679b8",
+    "submittedAt": "2026-11-26T13:51:10.197Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 6 things, each thing about equally often: (1) a tall pointed heater shield, crimson red with a bold gold chevron; (2) a tall pointed heater shield split down the middle, left half crimson red and right half royal blue, with a gold rim; (3) a crimson red swallow-tailed flag flying from a wooden pole with a round gold knob on top; (4) a tall pointed heater shield, crimson red with a gold castle tower on it; (5) a tall pointed heater shield, royal blue with a gold crown on it; (6) a tall pointed heater shield, crimson red with a gold rim and a gold star in the middle."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 18603,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 6 things, each thing about equally often: (1) a tall pointed heater shield, crimson red with a bold gold chevron; (2) a tall pointed heater shield split down the middle, left half crimson red and right half royal blue, with a gold rim; (3) a crimson red swallow-tailed flag flying from a wooden pole with a round gold knob on top; (4) a tall pointed heater shield, crimson red with a gold castle tower on it; (5) a tall pointed heater shield, royal blue with a gold crown on it; (6) a tall pointed heater shield, crimson red with a gold rim and a gold star in the middle. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-26T13:53:28.903Z",
+    "usageUsd": 0.08319108864996169,
+    "candidates": [
+      {
+        "file": "crest-b-0.png",
+        "sha256": "1da38c27aef472d47f1aea0cdb2fa54b3cd3adc4282874e9116229f5c0871dd0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-1.png",
+        "sha256": "ed539eb32dbe0cecd71fbb31ce5b4e465fb74c8bcc9bab0741a944cb666ece6e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-2.png",
+        "sha256": "644b5fa9fb897070efcf0d7351515ce84b8e90a248763c871bea1d537e94ae48",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-3.png",
+        "sha256": "204b53d7aeb6e3c6d38e4d5253cc9012e10b8608e0f1ca85b2c9164aaf988db9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-4.png",
+        "sha256": "99fd0daaac8246bebdf3142181a058591fc88daa47503e03f73d50a2cb1b100c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-5.png",
+        "sha256": "06dc78d2c62a364bb4f31271ea5a3e31137ad70b55528e0f0863b049e6cffcb8",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-6.png",
+        "sha256": "c4c85a55327bf7f6dc04deaabfe656a9b1df12b9159333792928c6ec2e2a392d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-7.png",
+        "sha256": "c138442b7c4a32c03ac6eb2ca4cef2574d2f168e5508809cea45536aaa0bcd12",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-8.png",
+        "sha256": "32af93ee7fb6dd612201dfae4c98b693aff5cff4306542bc221453930158ac23",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-9.png",
+        "sha256": "1c731455c47fa948dc005064159fa20a196bcea5b187f6f5832168f5025fcb1e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-10.png",
+        "sha256": "29e211334385dce03e26cb3b5f05164118e8bff63ad9bffbde8e7a797d729fb0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-11.png",
+        "sha256": "bb1a0f819ec0c9c89b15f1d85c5ad6a5267de2cc818d2fba99597056fe849828",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-12.png",
+        "sha256": "fae5b0d7349f65d2c4d39f8b988d733746a4996fb65887e0cff84393826f877e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-13.png",
+        "sha256": "e94ef20493fd39b7540311987743430130375615f10819115521b252c4a3980c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-14.png",
+        "sha256": "98de420373e22c64a8a4b5fcb1e2ca8132d1d00a6fc0762f3fde51a244748641",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-15.png",
+        "sha256": "103b07dd4bd1eae86be35c396fc439867d877fdc1a5da8040c8ee92abeca4d66",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-16.png",
+        "sha256": "630a84fe325b1ce6ad7bd7ce1970f90fc79cb993689fc67884ae8559c7ae5445",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-17.png",
+        "sha256": "5171e2dcaaf72ce131f7e62a873616daa837b424c68b96cf79a9857dc87e3477",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-18.png",
+        "sha256": "9b3814c30e446ea0456233d066a6e779654a2fa79a5509f9c42c1c18e3097f4c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-19.png",
+        "sha256": "bbb1b8d14a7ce9c2ac284dc1caa96e1af49cdfe7c870749fdbc9a29841b15a34",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-20.png",
+        "sha256": "293db7b8f42e19d617601d992ac513c9dc3c38f866e87f8ab1311f6aa128fdf0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-21.png",
+        "sha256": "94ff095db71f374b6681aa417071ad3c4c43ba5a9341d99660f98c4516936853",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-22.png",
+        "sha256": "f1b8c1cea1f7456f9ccd0926119411aaf3dcff67ca6cb435e4e8505a180b276c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-23.png",
+        "sha256": "d0d5dfb5cbaa3ff610f33fddc526d8fd9426ffe0c533c4f8f9d084930661bcb0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-24.png",
+        "sha256": "073136eda70007578db4840b5d829d7525874eefadd249689097e2bf41607880",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-25.png",
+        "sha256": "581617b462e8cd895dbe63f8a0458ca96ad706617d4d4a11972678d3a36533b3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-26.png",
+        "sha256": "9fafdc0abc08c8681628922017a4c7544890f2e1b2827816370507283e66c41f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-27.png",
+        "sha256": "d20abef7ee74165c2e2e89bbddd8c3b2f992b442eb668a04722c018e810b15ee",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-28.png",
+        "sha256": "9db35b4e32ac69d75c8ece8535c457ac9a5c2485aac5f00a09b8ad6f31177075",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-29.png",
+        "sha256": "96ec6a7a6c824f5d2d5ad251a13a9b8ae56cf1eebeba428ba66a3d3453189e0c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-30.png",
+        "sha256": "c73782cb43f1edc1b572baf0d9aaf6f02b406647adf8ecb20f79c43a8cc14c31",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-31.png",
+        "sha256": "52e518a1e7c396420be202ec031fe0b974f120274f59c78890af820773804f53",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-32.png",
+        "sha256": "a0e3ff8dfb482f7c3400fadb13ddba5d7c53adcbaafde88eab7db9045f544d3b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-33.png",
+        "sha256": "10446570eeed20c374f53e4767d2d96191299e7e160a6c8dee24f7f26377d7f4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-34.png",
+        "sha256": "db7c29ae566977ad756beb6556f34db3284be8d18dbc4f6ea824f3f5bfb3ee11",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-35.png",
+        "sha256": "c1b732b1cb51c1cf60836ae7b2341ba0c0ec82fb397517f9869dc456004f5a27",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-36.png",
+        "sha256": "983d0479258764886ff472d00fa657e19c05853d96633a94d50b0a517ea04192",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-37.png",
+        "sha256": "c7d2c44d2855c227e1b6a5155b6db87897f018ddcfa8fe26bf71f26946778f3b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-38.png",
+        "sha256": "3d023e53b8e48507192c994e517c2931bb8fc54ca17333c1bd8e99f79706a219",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-39.png",
+        "sha256": "b7b316bedbbd6097fd51195c600ab2d49ecc773d296a5da8c29ce7afef4e29c2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-40.png",
+        "sha256": "5342cc6de350f5eec6ce0f51670daaa3ecd018340bbeb1471a3f56ec795a022d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-41.png",
+        "sha256": "fd76a66f88f9c228bffd94c13dd153da35a4cdb992e339b2cf41f0d9fe9bc87d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-42.png",
+        "sha256": "552cb572d614080c37f5028e3e073b97e31c10a56f9551a0b84171e08074d462",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-43.png",
+        "sha256": "e50dcdd30b94bd77d53cdbebb8238fda0205d9c2f878616a0f24b05d378b5af6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-44.png",
+        "sha256": "04de7d31bfd44e7925b4c24874ddf012f3e1ac653fb3c61719fa90f67cffca80",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-45.png",
+        "sha256": "26bf3d6a4f7becbd9e04f9aa8d97e485646d96380bf1537abe5aee71ac100f30",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-46.png",
+        "sha256": "851efbf15106f9355fd582c50be47cc8e2ab11abdfd97a70a805d4db59728b35",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-47.png",
+        "sha256": "09d136777c14f39e306f0de9146f788d818d9b42fc767c81ff9e960fa84b1172",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-48.png",
+        "sha256": "97ce65844f4d472a374ab7de510a369747f7327c33c73283a1cc84a5298b7c24",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-49.png",
+        "sha256": "acc118d864ef2428e1a3885fe1a23a1e3ee5a4a77da3d79f690dd4386943bd78",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-50.png",
+        "sha256": "951e265719d99401e2633ac3256c74cd882be0c649d78d35fc040494e1d605d0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-51.png",
+        "sha256": "7226696cd0a274b563bfb72022d113016d86ace1c9a67b926bd34ce270774201",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-52.png",
+        "sha256": "b8a6d1a97af0fa24a977617c570b78204f0d3a6ab3d18bae67acfff12b98ae6a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-53.png",
+        "sha256": "68035b3cb0b9dd503bfc540d7ec8ec1926dca870a04e234e8cc2bdd5cb9cff85",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-54.png",
+        "sha256": "d635382b4248067355f5d093b64bfcf1a0b689ecfdc0cc1cf978a8453cc629bf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-55.png",
+        "sha256": "7e2215259bfc8e9c0d79014aa6694e34df18b2e4f12b6e397993799192f43247",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-56.png",
+        "sha256": "5dcc274788c6f39a7989e65795935d3e21638baeeede19529cd0fa6592fc2c1f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-57.png",
+        "sha256": "c700aec44f6621f2c6267a196a288edebf52cb5bc7c8fc1e8f35e0ee9606ac3c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-58.png",
+        "sha256": "f74326c2f98c38360a67f690238825418118de94bbf4decd4e05efa945f56a34",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-59.png",
+        "sha256": "236549b8c02fb48c40c137bb59879e132eae5836479c62d79277ae1929a03766",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-60.png",
+        "sha256": "a24c42eac41ff5e5a69a5e4425d4c377b37f687f8580810d91ec2a7712f2d3a1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-61.png",
+        "sha256": "094d77d177f5067b9c996a0651fe63a7d0462c19581f8859382d9a763c8d96e4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-62.png",
+        "sha256": "7c2ae2555f723f49d0b2e6dde9349fb3b956131de23fa6d7fb7a4f4bde269598",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "crest-b-63.png",
+        "sha256": "340cb34460ca188136f1027a6a4b7cd3d2ee2a18b52d050e20a375e7da7d733d",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "crest-a-16": {
+    "id": "crest-a-16",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "6557719e-3a24-4270-8486-4b3eb24b7d24",
+    "submittedAt": "2026-11-26T13:53:29.000Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-16.txt",
+          "text": "Class: one tiny bold symbol sprite for a status marker: a single object with a very big simple silhouette, a thick single-colour black outline, two or three flat saturated colours, no small details; it must read at a glance at 16 pixels. It floats alone, centred, filling the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 5 things, each thing about equally often: (1) a pointed heater shield, crimson red with a bold gold chevron; (2) a pointed heater shield split down the middle, left half crimson red and right half royal blue, with a gold rim; (3) a crimson red swallow-tailed flag on a wooden pole with a gold knob; (4) a pointed heater shield, crimson red with a gold castle tower; (5) a pointed heater shield, royal blue with a gold crown."
+        }
+      ],
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "seed": 18602,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one tiny bold symbol sprite for a status marker: a single object with a very big simple silhouette, a thick single-colour black outline, two or three flat saturated colours, no small details; it must read at a glance at 16 pixels. It floats alone, centred, filling the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 5 things, each thing about equally often: (1) a pointed heater shield, crimson red with a bold gold chevron; (2) a pointed heater shield split down the middle, left half crimson red and right half royal blue, with a gold rim; (3) a crimson red swallow-tailed flag on a wooden pole with a gold knob; (4) a pointed heater shield, crimson red with a gold castle tower; (5) a pointed heater shield, royal blue with a gold crown. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-26T13:59:18.501Z",
+    "usageUsd": 0.08102658902274237,
+    "candidates": [
+      {
+        "file": "crest-a-16-0.png",
+        "sha256": "581a64c7b9b76bacda6debbe003599b7565f8ebcf51740b659bc7d5d98972f5d",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-1.png",
+        "sha256": "a05fb93ac6bcf4286b7bc802b4aed9523fe17949a7e3aa93d039aeade3fc8a3a",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-2.png",
+        "sha256": "276f4e7838c506a8ecd63ae6e8e7d7a4fed6b46ee2a4069fbf73c56299249af9",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-3.png",
+        "sha256": "6c587ed7fc53506787cecddd970a056acf5eccbe1f380644784742c5fad4aad3",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-4.png",
+        "sha256": "c0633a06f5364cb024e270b228b9b5b3c632816b57101d783e979ed625a52fb3",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-5.png",
+        "sha256": "52472f5cd2b31070902cb6de64ee3677987290a1a621074ec19a0bcb78f535f3",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-6.png",
+        "sha256": "079e76d059fcbf94d675863cf39fde35f480d5fa58e3188b268dd61f6518f0d5",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-7.png",
+        "sha256": "5ce52fd30e89a2de77186e86e8d6d8826e9139df11e9931d7fd32a4b8bda3730",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-8.png",
+        "sha256": "872caa37ec0d237b89c1baae31db857bca69faa8229c2750bc902a5f20ee36cb",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-9.png",
+        "sha256": "202ca2d7a0da63582116e835821e1965932fd80f7ed8a2e63235112f7ecf6895",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-10.png",
+        "sha256": "03e1163576a5e95a2736c62fcc67d138b76d33b53bc5050edb15589cb3ac8646",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-11.png",
+        "sha256": "7eca1ac22907c0f289793ed10e113bc43151f24f8a5ac59e75de5db1c8eac987",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-12.png",
+        "sha256": "7f340ae06e4a41f008ba84a897a9c0814cb0e97842d8d4077ec854344f7533ff",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-13.png",
+        "sha256": "f264315e022540303d3c8319fac34ae559352c309828564a1e49f47c21d40ba8",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-14.png",
+        "sha256": "9d3b9f03674b2d6d6a25be7e13e53235cb811870eb8a821c50a4f48afa3bd3d7",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-15.png",
+        "sha256": "dcc91ddf90c43ec6b1f0563422719d7e4cc693458756825941ffc24fd723e75c",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-16.png",
+        "sha256": "69e318c109c1fabbc36e0da928fa468a542ab2da4f9612e1cf1dfd662a67ccfc",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-17.png",
+        "sha256": "ba4f7198b6ef2c298e8d4fbe42286156708864e56485bb7cf02ca35d36e39569",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-18.png",
+        "sha256": "9ff8f7d71895896a75dc7445ebfef39a57fbef23c3397f8c1f249a858509de51",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-19.png",
+        "sha256": "eb69691489280ab5b9b27b3e306f61537c3ebca5916cbfee79778109bb257739",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-20.png",
+        "sha256": "f4a224a53a09bb0ad626820d53867f18dc0b37efd6e6c053be3bcd0e401c89c1",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-21.png",
+        "sha256": "ceb104e4533ac95d7a82632cdaa5875832e6503a6333fc89063f9eb85a0afd47",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-22.png",
+        "sha256": "a5ba0ad6d69f4c9744f0178df461ec1ec2c1c3408addbeec83e8989967bbf5ca",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-23.png",
+        "sha256": "c4f3340db1cbb35ad6af4e885ea12d194cafb53dee57b384e77f2b6144a9c810",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-24.png",
+        "sha256": "0fa5db3489da97a6a9d7f4eb6b4c10b8aeb01f8e48c8edd4792a79491cb4e8b7",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-25.png",
+        "sha256": "e7fa39f6cee8b2ab2c84570647602e9901663d5000e6b70b18b2ee18fddfa300",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-26.png",
+        "sha256": "e5c9e4e2c4aace8da8660ea8d16674556ada467bdb205bab023a4fe5ffaa8cfb",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-27.png",
+        "sha256": "b3069e1e19118f0a207927aa87a4789ffbc861c9b052ed6773311241dd902bef",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-28.png",
+        "sha256": "9ceb678bec8f39f88787b807d52fb5e4257725bf7444984f84f9547825c522a5",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-29.png",
+        "sha256": "9120cea716d25ab6e2e03b0537779d62f2b05629cc4298c14708ab5948c7331f",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-30.png",
+        "sha256": "81869be4812518d469a6860784eec680b6f9ba35a6d077756410d84aae0b0d0f",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-31.png",
+        "sha256": "03185506520265a8028a95dae3d9fe6da7cb09d09e7b2c22d2937e78244ffb6b",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-32.png",
+        "sha256": "cfd284ef39a6ec3ae36a228e9bb6229cc943163cdf01c8e32d78af8fadd54b4d",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-33.png",
+        "sha256": "e59dcbd964c495712b42ef8d1618bd7e50aa4b154486ea5fc8db95a355ced2d3",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-34.png",
+        "sha256": "70db7bb9f2a8608ea703057ce96ebdc529e332d49983a26247a273094e8f7408",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-35.png",
+        "sha256": "7676ea1fec94acd4e1c5537c94ce571447cdd9ca10ef30639fdf92e825933b88",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-36.png",
+        "sha256": "d5231bca309d575d52cbcc8aef38c9b7aa0eed071e2ec2a9d6de2b3045b2d68f",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-37.png",
+        "sha256": "118b134a7ce9c521567b85b9955cd2e63db77a6e040cce5db755cc4609d4ced3",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-38.png",
+        "sha256": "7e5d8137969b2cd8114f2d2e4cd507b7f2035fd0ea0467d29e504d642a1b4ea5",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-39.png",
+        "sha256": "3ea294f9e357b4336777a4280aa9b47833a32664458d7fbd1352f890b2c458b4",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-40.png",
+        "sha256": "ec2d6cd53a3ce83fcbb1270d3b05336ba188de04242f88c0ecbaaf31aaf22b68",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-41.png",
+        "sha256": "1f3c06dbfa8c10d18f115c49ecca63fd4208a1202b040ed5eb5dc202433f7964",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-42.png",
+        "sha256": "00af8aa6ddb53d8e32ac16cb350d5605b973bb84b8cdd8905acd183f03fda241",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-43.png",
+        "sha256": "c0114705017fbf18e8b00e62c4060e189e2c8bb0c7c84a5635a8e1aa0a91e55d",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-44.png",
+        "sha256": "de9eda87cdcbeab8786c136319f2e6026ea67ecf892f5729a96ca98cc56fb014",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-45.png",
+        "sha256": "e209a6bbd7d1ab0a5aa00b505cc2bf7537063a2babdb842d86a473e305855ef6",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-46.png",
+        "sha256": "3a27e02430df4c4289e899b834f79e5d630a503961d918ca083618f44c3db832",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-47.png",
+        "sha256": "eca6e3eef5ae698e0860b53044e10b2573cf32eb87b268136658e7463f69d535",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-48.png",
+        "sha256": "3a53eecf0bb7f8a939121de4884f1aa2f3f1094b29d1b251d9b3a910b1f7df3e",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-49.png",
+        "sha256": "ddad0ab0865a8076c839383bafc8390414a2666b0b6cb7f05fb5a862feea78e2",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-50.png",
+        "sha256": "47a79614e4179630327d353c5669e6695c93d78da3da39f15480223f1136837b",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-51.png",
+        "sha256": "640396179c7e1f5e27999e78f1efbb5c3b36f8e0aee49d12b737aa67ee62e1df",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-52.png",
+        "sha256": "727d9b1e86c1cfa492b9adba073899fef8930f8227b0c1299665288f9f541fba",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-53.png",
+        "sha256": "7c38c7132cff089f833f763081bbcfac2b5943950943b2b21996ebe6c2c9f16e",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-54.png",
+        "sha256": "6076863d3471cd5f69e786084da21d764451124c0e7d3851d3b34270628e8003",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-55.png",
+        "sha256": "2a909d62cb6d2b8b9d5d5c0bbb3dcfd58b318b7a699cae0fbaacaeb896373713",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-56.png",
+        "sha256": "6977c5d9f6104396ac2eb534ead8883eb7147dde58d3aba8a07c624671a3ef43",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-57.png",
+        "sha256": "9ae623d33be84f7d9eacfcb0e803d68e58ea5e87c660108f2ea966d9c868a394",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-58.png",
+        "sha256": "6011689c18112bc0fb1fc3179b30bdd2c7f5d3b8d2336bdc55e4f58e80d0d06f",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-59.png",
+        "sha256": "049fcafd2cee8eb37d1e0515e5495b212df4592f51c994a4248d67ce6d95125a",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-60.png",
+        "sha256": "8b8537fa5727bef358c51cff25e2cc9adcee11fdc1779c24d30b66254b543e70",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-61.png",
+        "sha256": "8228abe281769e13f4450b301db804148780fee5dad125d28e854197b43e8593",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-62.png",
+        "sha256": "df7b424229cc47252ac8ebeacaaaf2e5dcd71475f5b544db5901232e02748027",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "crest-a-16-63.png",
+        "sha256": "d684da9ead0f61f41bed54a6d331cac33a76c2fc727fe1945bb1539b90692e4b",
+        "width": 16,
+        "height": 16
+      }
+    ]
+  }
+}

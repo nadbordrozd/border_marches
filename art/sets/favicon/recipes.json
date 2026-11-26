@@ -1,0 +1,544 @@
+{
+  "set": "favicon",
+  "bead": "border_marches-bzc.86",
+  "class": "icons",
+  "exploration": false,
+  "_doc": "The browser-tab icon of Border Marches: a heraldic crest in the Realm's crimson and gold (docs/art/classes/icons.md, Favicon). generate-image-v2 returns 64 candidates of a mixed subject; the clearest is accepted. The 16 px favicon is its own 16 px take, never a downscale; the 32 px take is enlarged by whole factors onto an opaque plate for the apple-touch and app icons. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-bottom-left",
+      "class-symbol-32"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "crest-a",
+      "concept": "heraldic crest or banner for the game's browser tab",
+      "width": 32,
+      "height": 32,
+      "seed": 18601,
+      "subject": "Subject: each image shows exactly one of these 6 things, each thing about equally often: (1) a tall pointed heater shield, crimson red with a bold gold chevron; (2) a tall pointed heater shield split down the middle, left half crimson red and right half royal blue, with a gold rim; (3) a crimson red swallow-tailed banner flying from a wooden pole with a gold spear tip; (4) a tall pointed heater shield, crimson red with a gold castle tower on it; (5) a tall pointed heater shield, royal blue with a gold crown on it; (6) a crimson red heater shield with a steel sword behind it, the hilt above and the point below."
+    },
+    {
+      "id": "crest-b",
+      "concept": "heraldic crest or banner for the game's browser tab (crest-a without weapons)",
+      "width": 32,
+      "height": 32,
+      "seed": 18603,
+      "subject": "Subject: each image shows exactly one of these 6 things, each thing about equally often: (1) a tall pointed heater shield, crimson red with a bold gold chevron; (2) a tall pointed heater shield split down the middle, left half crimson red and right half royal blue, with a gold rim; (3) a crimson red swallow-tailed flag flying from a wooden pole with a round gold knob on top; (4) a tall pointed heater shield, crimson red with a gold castle tower on it; (5) a tall pointed heater shield, royal blue with a gold crown on it; (6) a tall pointed heater shield, crimson red with a gold rim and a gold star in the middle."
+    },
+    {
+      "id": "crest-a-16",
+      "concept": "the same crests and banners at 16 px for the browser tab",
+      "width": 16,
+      "height": 16,
+      "seed": 18602,
+      "fragments": [
+        "style",
+        "light-bottom-left",
+        "class-symbol-16"
+      ],
+      "subject": "Subject: each image shows exactly one of these 5 things, each thing about equally often: (1) a pointed heater shield, crimson red with a bold gold chevron; (2) a pointed heater shield split down the middle, left half crimson red and right half royal blue, with a gold rim; (3) a crimson red swallow-tailed flag on a wooden pole with a gold knob; (4) a pointed heater shield, crimson red with a gold castle tower; (5) a pointed heater shield, royal blue with a gold crown."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/favicon-16.png",
+      "from": "crest-a-16#34",
+      "_doc": "Own 16 px take; the edits snap its anti-aliased shades to the crest's five colours (outline, gold, gold shadow, crimson, blue) and square up the rim, keeping the take's silhouette.",
+      "steps": [
+        {
+          "op": "edits",
+          "pixels": [
+            [
+              5,
+              1,
+              "#160613"
+            ],
+            [
+              7,
+              1,
+              "#160613"
+            ],
+            [
+              8,
+              1,
+              "#160613"
+            ],
+            [
+              9,
+              1,
+              "#160613"
+            ],
+            [
+              10,
+              1,
+              "#160613"
+            ],
+            [
+              3,
+              2,
+              "#160613"
+            ],
+            [
+              4,
+              2,
+              "#160613"
+            ],
+            [
+              5,
+              2,
+              "#e8ae1c"
+            ],
+            [
+              6,
+              2,
+              "#e8ae1c"
+            ],
+            [
+              7,
+              2,
+              "#e8ae1c"
+            ],
+            [
+              8,
+              2,
+              "#e8ae1c"
+            ],
+            [
+              9,
+              2,
+              "#e8ae1c"
+            ],
+            [
+              10,
+              2,
+              "#e8ae1c"
+            ],
+            [
+              11,
+              2,
+              "#160613"
+            ],
+            [
+              12,
+              2,
+              "#160613"
+            ],
+            [
+              2,
+              3,
+              "#160613"
+            ],
+            [
+              3,
+              3,
+              "#e8ae1c"
+            ],
+            [
+              4,
+              3,
+              "#e8ae1c"
+            ],
+            [
+              6,
+              3,
+              "#a71238"
+            ],
+            [
+              7,
+              3,
+              "#a71238"
+            ],
+            [
+              8,
+              3,
+              "#1e569a"
+            ],
+            [
+              9,
+              3,
+              "#1e569a"
+            ],
+            [
+              10,
+              3,
+              "#1e569a"
+            ],
+            [
+              11,
+              3,
+              "#e8ae1c"
+            ],
+            [
+              12,
+              3,
+              "#b8781a"
+            ],
+            [
+              13,
+              3,
+              "#160613"
+            ],
+            [
+              2,
+              4,
+              "#160613"
+            ],
+            [
+              3,
+              4,
+              "#e8ae1c"
+            ],
+            [
+              4,
+              4,
+              "#a71238"
+            ],
+            [
+              12,
+              4,
+              "#b8781a"
+            ],
+            [
+              13,
+              4,
+              "#160613"
+            ],
+            [
+              3,
+              5,
+              "#e8ae1c"
+            ],
+            [
+              4,
+              5,
+              "#a71238"
+            ],
+            [
+              8,
+              5,
+              "#1e569a"
+            ],
+            [
+              12,
+              5,
+              "#b8781a"
+            ],
+            [
+              13,
+              5,
+              "#160613"
+            ],
+            [
+              3,
+              6,
+              "#e8ae1c"
+            ],
+            [
+              8,
+              6,
+              "#1e569a"
+            ],
+            [
+              12,
+              6,
+              "#b8781a"
+            ],
+            [
+              13,
+              6,
+              "#160613"
+            ],
+            [
+              3,
+              7,
+              "#e8ae1c"
+            ],
+            [
+              4,
+              7,
+              "#a71238"
+            ],
+            [
+              12,
+              7,
+              "#b8781a"
+            ],
+            [
+              13,
+              7,
+              "#160613"
+            ],
+            [
+              2,
+              8,
+              "#160613"
+            ],
+            [
+              3,
+              8,
+              "#e8ae1c"
+            ],
+            [
+              4,
+              8,
+              "#a71238"
+            ],
+            [
+              8,
+              8,
+              "#1e569a"
+            ],
+            [
+              12,
+              8,
+              "#b8781a"
+            ],
+            [
+              13,
+              8,
+              "#160613"
+            ],
+            [
+              2,
+              9,
+              "#160613"
+            ],
+            [
+              3,
+              9,
+              "#e8ae1c"
+            ],
+            [
+              4,
+              9,
+              "#a71238"
+            ],
+            [
+              11,
+              9,
+              "#1e569a"
+            ],
+            [
+              12,
+              9,
+              "#b8781a"
+            ],
+            [
+              13,
+              9,
+              "#160613"
+            ],
+            [
+              2,
+              10,
+              "#160613"
+            ],
+            [
+              3,
+              10,
+              "#e8ae1c"
+            ],
+            [
+              4,
+              10,
+              "#a71238"
+            ],
+            [
+              8,
+              10,
+              "#1e569a"
+            ],
+            [
+              11,
+              10,
+              "#1e569a"
+            ],
+            [
+              12,
+              10,
+              "#b8781a"
+            ],
+            [
+              13,
+              10,
+              "#160613"
+            ],
+            [
+              3,
+              11,
+              "#160613"
+            ],
+            [
+              4,
+              11,
+              "#e8ae1c"
+            ],
+            [
+              5,
+              11,
+              "#a71238"
+            ],
+            [
+              8,
+              11,
+              "#1e569a"
+            ],
+            [
+              11,
+              11,
+              "#b8781a"
+            ],
+            [
+              12,
+              11,
+              "#160613"
+            ],
+            [
+              4,
+              12,
+              "#160613"
+            ],
+            [
+              5,
+              12,
+              "#e8ae1c"
+            ],
+            [
+              6,
+              12,
+              "#a71238"
+            ],
+            [
+              10,
+              12,
+              "#b8781a"
+            ],
+            [
+              11,
+              12,
+              "#160613"
+            ],
+            [
+              4,
+              13,
+              "#160613"
+            ],
+            [
+              5,
+              13,
+              "#160613"
+            ],
+            [
+              6,
+              13,
+              "#e8ae1c"
+            ],
+            [
+              7,
+              13,
+              "#a71238"
+            ],
+            [
+              8,
+              13,
+              "#1e569a"
+            ],
+            [
+              9,
+              13,
+              "#b8781a"
+            ],
+            [
+              11,
+              13,
+              "#160613"
+            ],
+            [
+              6,
+              14,
+              "#160613"
+            ],
+            [
+              7,
+              14,
+              "#e8ae1c"
+            ],
+            [
+              8,
+              14,
+              "#b8781a"
+            ],
+            [
+              9,
+              14,
+              "#160613"
+            ],
+            [
+              10,
+              14,
+              "transparent"
+            ],
+            [
+              7,
+              15,
+              "#160613"
+            ],
+            [
+              8,
+              15,
+              "#160613"
+            ]
+          ]
+        }
+      ],
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/favicon-32.png",
+      "from": "crest-b#41",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/apple-touch-icon.png",
+      "from": "crest-b#41",
+      "_doc": "The shield cropped to its 20x27 box, enlarged 5x and centred on an opaque plate in the page's theme colour (iOS fills transparency with black and rounds the corners).",
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 3,
+          "width": 20,
+          "height": 27
+        },
+        {
+          "op": "plate",
+          "size": 180,
+          "scale": 5,
+          "background": "#1b1712"
+        }
+      ],
+      "width": 180,
+      "height": 180
+    },
+    {
+      "path": "public/icon-192.png",
+      "from": "crest-b#41",
+      "steps": [
+        {
+          "op": "scale",
+          "factor": 6
+        }
+      ],
+      "width": 192,
+      "height": 192
+    }
+  ]
+}

@@ -53,11 +53,8 @@ interface StudioOutput {
   readonly height?: number;
 }
 
-/**
- * Studio-generated game files: every `outputs[]` entry under public/ of a
- * set in art/sets/, keyed by its path relative to public/.
- */
-const STUDIO: ReadonlyMap<string, StudioOutput> = new Map(
+/** Every studio `outputs[]` entry under public/, keyed by its path relative to public/. */
+const STUDIO_PUBLIC: ReadonlyMap<string, StudioOutput> = new Map(
   readdirSync(join(ROOT, "art/sets"))
     .filter((set) => existsSync(join(ROOT, "art/sets", set, "recipes.json")))
     .flatMap((set) =>
@@ -77,6 +74,15 @@ const STUDIO: ReadonlyMap<string, StudioOutput> = new Map(
           { ...output, set },
         ]),
     ),
+);
+
+/**
+ * Studio-generated game files: the outputs under public/assets/, which the
+ * manifest lists. Page files at the root of public/ (the favicons, linked
+ * from index.html, never loaded by the game) are checked separately.
+ */
+const STUDIO: ReadonlyMap<string, StudioOutput> = new Map(
+  [...STUDIO_PUBLIC].filter(([path]) => path.startsWith("assets/")),
 );
 
 /** Width and height from a PNG's IHDR chunk. */
@@ -189,6 +195,28 @@ describe("asset manifest", () => {
     // About 1.5 s alone (mostly the validate child process), several times
     // that when parallel test runs share the machine.
   }, 60_000);
+
+  it("links page icons from index.html to studio outputs at the public root", () => {
+    const html = readFileSync(join(ROOT, "index.html"), "utf8");
+    const icons = [
+      ...html.matchAll(
+        /<link rel="(?:icon|apple-touch-icon)"[^>]*\bsizes="(\d+)x(\d+)"[^>]*\bhref="\/([^"]+)"/g,
+      ),
+    ].map(([, w, h, path]) => ({ path: path!, w: Number(w), h: Number(h) }));
+    expect(icons.length).toBeGreaterThan(0);
+    for (const icon of icons) {
+      // Not a game asset: never in the manifest, always a studio output.
+      expect(icon.path).not.toContain("/");
+      expect({ path: icon.path, studio: STUDIO_PUBLIC.has(icon.path) }).toEqual(
+        { path: icon.path, studio: true },
+      );
+      expect({ path: icon.path, ...pngSize(join(PUBLIC, icon.path)) }).toEqual({
+        path: icon.path,
+        w: icon.w,
+        h: icon.h,
+      });
+    }
+  });
 
   it("names a pickup, a mine and a 32 px item for every resource", () => {
     for (const resource of ["wood", "ore", "gold", "essence"] as const) {
