@@ -9,12 +9,15 @@
  */
 import type { GameState, HeroState } from "../core/game/index.ts";
 import { auroraSkill, objectName, objectTypeOf } from "../core/game/index.ts";
+import { tollhouseStock } from "../core/game/sites.ts";
 import { heroMagic, isSpell, spellInfo } from "../core/magic/index.ts";
 import type { MapObject } from "../core/map/types.ts";
 import type { IconKind } from "../assets/icons.ts";
+import { ARTIFACT_LIST, findArtifact } from "../data/artifacts.ts";
 import { SCHOOL_NAMES } from "../data/effects.ts";
+import { MAP_SPELLS } from "../data/map-spells.ts";
 import { OBJECT_TYPES, type Prize } from "../data/objectTypes.ts";
-import { findSkill } from "../data/skills.ts";
+import { SKILL_IDS, findSkill } from "../data/skills.ts";
 import { rankForTier } from "./guild-learning.ts";
 import { objectPictureKey } from "./map-card.ts";
 
@@ -31,6 +34,8 @@ export interface VisitArea {
 export interface VisitIcon {
   readonly kind: IconKind;
   readonly id: string;
+  /** A skill's rank (its card brightens that rank); 1 when absent. */
+  readonly rank?: number;
 }
 
 export interface VisitResult {
@@ -103,7 +108,8 @@ export function visitShow(
   return "dialog";
 }
 
-function prizeIcons(p: Prize): VisitIcon[] {
+/** What a prize gives, as icons: artifacts, scrolls, a spell, a skill, a stat. */
+export function prizeIcons(p: Prize): VisitIcon[] {
   const out: VisitIcon[] = [];
   for (const a of p.artifacts ?? []) out.push({ kind: "artifact", id: a });
   for (const s of p.scrolls ?? []) out.push({ kind: "spell", id: s });
@@ -161,6 +167,165 @@ export function siteIcons(obj: MapObject): VisitIcon[] {
     }
     default:
       return [];
+  }
+}
+
+/** Whole-word, case-sensitive: "Galoshes", not "galoshes-like". */
+function names(text: string, name: string): boolean {
+  if (name === "") return false;
+  const at = text.indexOf(name);
+  if (at < 0) return false;
+  const before = text.charAt(at - 1);
+  const after = text.charAt(at + name.length);
+  return !/[\w-]/.test(before) && !/[\w-]/.test(after);
+}
+
+/**
+ * What a result's words say was found, won, bought or taught (bead
+ * bzc.108), as icons: every artifact named; a spell after "scroll of",
+ * "the spell", "learns" or "knows"; a skill after "learns" or before
+ * "rises to rank", at the rank the line gives. This is the generic path
+ * for any grant the site's own data does not list (a rich chest's
+ * Trinket, a mystery pickup, a sphinx's skill, a dig): whatever gives an
+ * artifact names it in its line.
+ */
+export function textIcons(text: string): VisitIcon[] {
+  const out: VisitIcon[] = [];
+  let rest = text;
+  // Longest names first, each taken out once found ("The Glove's Thumb"
+  // before a shorter name inside it).
+  const arts = [...ARTIFACT_LIST].sort((a, b) => b.name.length - a.name.length);
+  for (const a of arts) {
+    if (!names(rest, a.name)) continue;
+    out.push({ kind: "artifact", id: a.id });
+    rest = rest.split(a.name).join(" ");
+  }
+  for (const sp of MAP_SPELLS) {
+    const said = [
+      "scroll of",
+      "Scroll of",
+      "the spell",
+      "learns",
+      "knows",
+    ].some((w) => names(rest, `${w} ${sp.name}`));
+    if (said) out.push({ kind: "spell", id: sp.id });
+  }
+  const rank = Number(/\brank (\d)/.exec(rest)?.[1] ?? 1);
+  for (const id of SKILL_IDS) {
+    const def = findSkill(id);
+    if (def === undefined) continue;
+    if (
+      names(rest, `learns ${def.name}`) ||
+      names(rest, `${def.name} rises to rank`)
+    )
+      out.push({ kind: "skill", id, rank });
+  }
+  return out;
+}
+
+/** Icons in order, each kind and id once (a later one may add a rank). */
+export function mergeIcons(
+  ...lists: ReadonlyArray<readonly VisitIcon[]>
+): VisitIcon[] {
+  const out: VisitIcon[] = [];
+  for (const list of lists)
+    for (const i of list) {
+      const at = out.findIndex((o) => o.kind === i.kind && o.id === i.id);
+      if (at < 0) out.push(i);
+      else if (out[at]?.rank === undefined && i.rank !== undefined) out[at] = i;
+    }
+  return out;
+}
+
+/** Skill icons at the rank the hero now holds (its card brightens it). */
+function heldRanks(
+  icons: readonly VisitIcon[],
+  hero: HeroState | undefined,
+): VisitIcon[] {
+  return icons.map((i) => {
+    if (i.kind !== "skill") return i;
+    const held = hero?.skills.find((s) => s.id === i.id)?.rank;
+    return held === undefined ? i : { ...i, rank: held };
+  });
+}
+
+/**
+ * Battle spoils (bead bzc.108): the artifacts a winning hero of the
+ * player's took from the beaten one, each an inspectable card.
+ */
+export function spoilsResult(
+  winner: string,
+  loser: string,
+  artifacts: readonly string[],
+): VisitResult {
+  const list = artifacts.map((a) => findArtifact(a)?.name ?? a);
+  const sentence = `${winner} takes ${listNames(list)} from ${loser}.`;
+  return {
+    show: "dialog",
+    title: "Spoils of battle",
+    sentence,
+    text: sentence,
+    picture: null,
+    icons: artifacts.map((id) => ({ kind: "artifact" as const, id })),
+    note: "They are in the backpack; wear them from the hero sheet.",
+    area: null,
+  };
+}
+
+/** "A, B and C". */
+function listNames(parts: readonly string[]): string {
+  if (parts.length <= 1) return parts.join("");
+  return `${parts.slice(0, -1).join(", ")} and ${parts[parts.length - 1]}`;
+}
+
+/**
+ * The thing a site's option offers (bead bzc.108), for its inspectable
+ * icon: a tollhouse's ware (artifact or scroll), a backpack item to sell
+ * or give, a cursed item to lift, a vault's prize, a skill to forget.
+ * Null when the option is not about one thing.
+ */
+export function optionItem(
+  state: GameState,
+  hero: HeroState,
+  obj: MapObject,
+  option: string,
+): VisitIcon | null {
+  const [verb = "", arg = ""] = option.split(":");
+  const n = Number(arg);
+  const artifact = (id: string | null | undefined): VisitIcon | null =>
+    id === null || id === undefined ? null : { kind: "artifact", id };
+  switch (verb) {
+    case "buy": {
+      if (objectTypeOf(obj) !== "tollhouse") return null;
+      const item = tollhouseStock(state, obj)[n];
+      if (item === undefined) return null;
+      return item.startsWith("scroll:")
+        ? { kind: "spell", id: item.slice(7) }
+        : artifact(item);
+    }
+    case "sell":
+    case "give":
+      return artifact(hero.backpack[n]);
+    case "lift":
+      return artifact(hero.worn[n]);
+    case "sell-scroll": {
+      const sp = hero.scrolls[n];
+      return sp === undefined ? null : { kind: "spell", id: sp };
+    }
+    case "forget": {
+      const held = hero.skills.find((s) => s.id === arg);
+      return held === undefined
+        ? null
+        : { kind: "skill", id: arg, rank: held.rank };
+    }
+    case "take": {
+      const choices = obj.data["choices"];
+      const prize = Array.isArray(choices) ? (choices[n] as Prize) : undefined;
+      if (prize === undefined) return null;
+      return prizeIcons(prize).find((i) => i.kind !== "stat") ?? null;
+    }
+    default:
+      return null;
   }
 }
 
@@ -231,7 +396,12 @@ export function siteResult(
     sentence,
     text,
     picture: objectPictureKey(obj),
-    icons: show === "dialog" ? siteIcons(obj) : [],
+    // What the site holds, and whatever the line says it gave (bead
+    // bzc.108: every granted thing is an inspectable card).
+    icons:
+      show === "dialog"
+        ? heldRanks(mergeIcons(siteIcons(obj), textIcons(sentence)), hero)
+        : [],
     note,
     area: area === null ? null : clipArea(state, area),
   };
@@ -269,7 +439,8 @@ export function digResult(found: string | null): VisitResult {
         : `You dig, and find ${found}.`,
     text,
     picture: null,
-    icons: [],
+    // The Keystone, a buried artifact or scroll: inspectable (bzc.108).
+    icons: show === "dialog" && found !== null ? textIcons(found) : [],
     note:
       found === null
         ? "Digging takes the whole day's movement (300 with a shovel). Obelisks and rumours point at buried things."

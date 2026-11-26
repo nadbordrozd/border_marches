@@ -16,7 +16,7 @@ import { learntModel } from "./guild-learning.ts";
 import type { GuildSpellView, GuildView } from "./guild-learning.ts";
 import { spellTip } from "./info-tips.ts";
 import { rulesText } from "./keywords.ts";
-import { setTip } from "./tooltip.ts";
+import { setInspect } from "./tooltip.ts";
 
 /** One guild spell: icon, name and its state for the hero. */
 export function guildSpellRow(s: GuildSpellView): HTMLElement {
@@ -37,7 +37,8 @@ export function guildSpellRow(s: GuildSpellView): HTMLElement {
   row.dataset["spell"] = s.id;
   row.dataset["state"] = s.state.kind;
   if (s.state.kind === "not-built") row.classList.add("gm-guild-unbuilt");
-  setTip(icon, () => spellTip(s.id));
+  // Offered spells open the spellbook's card on click too (bead bzc.108).
+  setInspect(icon, () => spellTip(s.id), `spell:${s.id}`);
   return row;
 }
 

@@ -1204,3 +1204,135 @@
     transition: none;
   }
 }
+
+/* Bead bzc.108: a picked (or dragged) backpack item lights the doll slots
+   it goes in, pulsing; the rest dim; an occupied slot shows a swap mark; a
+   barred slot (a vow, the one-Marvel rule, a cursed item) is red. A hovered
+   or focused item gives a lighter hint. */
+.hs-doll-pick .hs-pick-off {
+  opacity: 0.32;
+  filter: grayscale(0.7);
+}
+
+.hs-pick-fits,
+.hs-pick-swap {
+  border-color: var(--gm-good) !important;
+  box-shadow:
+    0 0 0 2px rgb(143 224 106 / 75%),
+    0 0 16px 2px rgb(143 224 106 / 50%);
+  animation: hs-fit-pulse 1.1s ease-in-out infinite;
+}
+
+.hs-pick-fits.hs-slot-empty::before {
+  background: rgb(143 224 106 / 70%);
+}
+
+.hs-pick-swap::after,
+.hs-pick-barred::after {
+  position: absolute;
+  top: 1px;
+  right: 3px;
+  font:
+    bold 13px/1 Georgia,
+    serif;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 90%);
+  pointer-events: none;
+}
+
+.hs-pick-swap::after {
+  content: "\21C4";
+  color: var(--gm-focus);
+}
+
+.hs-pick-barred {
+  border-color: var(--gm-bad) !important;
+  box-shadow: inset 0 0 12px rgb(255 122 100 / 45%);
+}
+
+.hs-pick-barred::after {
+  content: "\2715";
+  color: var(--gm-bad);
+}
+
+.hs-doll-hint .hs-hint-fits,
+.hs-doll-hint .hs-hint-swap {
+  border-color: rgb(143 224 106 / 80%);
+  box-shadow: 0 0 8px rgb(143 224 106 / 40%);
+}
+
+.hs-doll-hint .hs-hint-fits.hs-slot-empty::before {
+  background: rgb(143 224 106 / 45%);
+}
+
+.hs-doll-hint .hs-hint-barred {
+  border-color: rgb(255 122 100 / 70%);
+}
+
+@keyframes hs-fit-pulse {
+  50% {
+    box-shadow:
+      0 0 0 2px rgb(143 224 106 / 95%),
+      0 0 22px 5px rgb(143 224 106 / 70%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hs-pick-fits,
+  .hs-pick-swap {
+    animation: none;
+  }
+}
+
+.hs-slot:focus-visible,
+.hs-cell:focus-visible {
+  outline: 2px solid var(--gm-focus);
+  outline-offset: 1px;
+}
+
+.hs-fit-note {
+  flex-basis: 100%;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--gm-good);
+}
+
+/* Level-up cards (bead bzc.108): every rank of the skill, the offered one
+   bright; a details button opens the hero sheet's card. */
+.hs-card {
+  position: relative;
+}
+
+.hs-card-ranks .gm-tip-line {
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.hs-card-held {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--gm-gold-dim);
+}
+
+.hs-card-details {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  font:
+    italic bold 13px/20px Georgia,
+    serif;
+  color: var(--gm-gold);
+  cursor: help;
+  background: rgb(0 0 0 / 40%);
+  border: 1px solid var(--gm-gold-dim);
+  border-radius: 50%;
+}
+
+.hs-card-details:hover,
+.hs-card-details:focus-visible {
+  color: var(--gm-ink);
+  background: var(--gm-gold);
+}

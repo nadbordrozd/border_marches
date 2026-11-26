@@ -51,12 +51,16 @@ import { ODDS_TEXT, battleOdds } from "./hints.ts";
 import type { Odds, TurnWarning } from "./hints.ts";
 import { objectPictureKey, textWithIcons } from "./map-card.ts";
 import { townRow } from "./side-panel.ts";
-import { iconElement } from "./icons.ts";
-import { spellTip } from "./info-tips.ts";
+import { inspectCard, inspectIcon, inspectTiles } from "./inspect.ts";
 import { rulesText } from "./keywords.ts";
 import { setTip } from "./tooltip.ts";
 import type { LearntModel, NoSchoolModel } from "./guild-learning.ts";
-import { siteNames, withoutName } from "./visit-results.ts";
+import {
+  optionItem,
+  siteNames,
+  textIcons,
+  withoutName,
+} from "./visit-results.ts";
 import type { VisitIcon, VisitResult } from "./visit-results.ts";
 
 // ------------------------------------------------------------ pictures
@@ -416,6 +420,11 @@ export interface SiteChoiceModel {
   readonly portrait: string | null;
   /** What it costs, when the words do not say (a hire). */
   readonly cost: ResourceAmounts | null;
+  /**
+   * The one thing it offers (bead bzc.108: a ware to buy, an item to sell,
+   * a vault's prize, a skill to forget), shown as an inspectable icon.
+   */
+  readonly item: VisitIcon | null;
 }
 
 export interface SiteDialogModel {
@@ -425,6 +434,11 @@ export interface SiteDialogModel {
   readonly choices: readonly SiteChoiceModel[];
   /** When it can be used again, or whether this hero already has. */
   readonly consequence: string | null;
+  /**
+   * What the last choice gave (bead bzc.108: a ware just bought, a prize
+   * just taken), as inspectable cards above the next question.
+   */
+  readonly gained: readonly VisitIcon[];
 }
 
 /**
@@ -470,6 +484,7 @@ export function siteDialogModel(
           ? creatureAsset(offer.creature).portrait
           : null,
       cost,
+      item: optionItem(state, hero, obj, o.id),
     };
   });
   const site = describeSite(state, hero.owner, obj, hero.id);
@@ -488,11 +503,22 @@ export function siteDialogModel(
     sentence,
     choices,
     consequence,
+    gained: first || last === null ? [] : textIcons(last),
   };
 }
 
 function capital(text: string): string {
   return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+/**
+ * A choice row's picture: what it offers, inspectable (its click pins the
+ * card and does not pick the row; the row's own hover and focus show the
+ * card too), or a hired creature's portrait.
+ */
+function choicePicture(c: SiteChoiceModel): HTMLElement | null {
+  if (c.item !== null) return inspectIcon(c.item, { focusable: false });
+  return c.portrait === null ? null : img(c.portrait, "gm-dialog-portrait");
 }
 
 /** Shows a site's choice; resolves with the option id, or "" to leave. */
@@ -502,7 +528,7 @@ export function siteDialog(model: SiteDialogModel): Promise<string> {
     value: c.value,
     label: textWithIcons(c.label),
     text: c.why === null ? c.label : `${c.label} (${c.why})`,
-    picture: c.portrait === null ? null : img(c.portrait, "gm-dialog-portrait"),
+    picture: choicePicture(c),
     note:
       c.why !== null
         ? capital(c.why)
@@ -513,15 +539,26 @@ export function siteDialog(model: SiteDialogModel): Promise<string> {
     // The one thing to do here is the default; with several, none is.
     primary: enabled.length === 1 && enabled[0] === c,
   }));
+  const gained = resultIcons(model.gained);
   return dialog<string>({
     title: model.title,
     className: "gm-site-dialog",
     picture: model.picture === null ? null : pictureView(model.picture),
     sentence: model.sentence,
+    ...(gained !== null ? { body: gained } : {}),
     choices,
     consequence: model.consequence,
     buttons: [{ label: "Leave", value: "" }],
     cancel: "",
+    // A row that offers one thing shows its card on hover and focus.
+    onOpen: (_buttons, rows) =>
+      model.choices.forEach((c, i) => {
+        const row = rows[i];
+        if (c.item !== null && row !== undefined) {
+          const item = c.item;
+          setTip(row, () => inspectCard(item));
+        }
+      }),
   });
 }
 
@@ -622,13 +659,13 @@ export async function endTurnDialog(
 
 // ------------------------------------------------------------ results
 
-function iconTile(icon: VisitIcon): HTMLElement {
-  const node = iconElement(icon.kind, icon.id, { scale: 2 });
-  const name = node.title;
-  node.removeAttribute("title");
-  if (icon.kind === "spell") setTip(node, () => spellTip(icon.id));
-  else setTip(node, name);
-  return el("div.gm-result-icon", node, el("span", name));
+/**
+ * What a result gave or holds (bead bzc.108): a tile per artifact, spell,
+ * skill or stat, each opening the hero sheet's or spellbook's own card on
+ * hover, focus, click or tap. Null without any.
+ */
+export function resultIcons(icons: readonly VisitIcon[]): HTMLElement | null {
+  return icons.length === 0 ? null : inspectTiles(icons);
 }
 
 export type ResultChoice = "ok" | "show";
@@ -645,18 +682,22 @@ export function resultDialog(result: VisitResult): Promise<ResultChoice> {
   if (result.area !== null)
     buttons.push({ label: "Show on map", value: "show", key: "S" });
   const key = result.picture;
+  const icons = resultIcons(result.icons);
   return dialog<ResultChoice>({
     title: result.title,
     className: "gm-result-dialog",
     picture: key === null ? null : pictureView(dialogPicture(key)),
     sentence: rulesText(result.sentence),
-    ...(result.icons.length > 0
-      ? { body: el("div.gm-result-icons", ...result.icons.map(iconTile)) }
-      : {}),
+    ...(icons !== null ? { body: icons } : {}),
     consequence: result.note,
     buttons,
     cancel: "ok",
   });
+}
+
+/** The spells a guild taught, as inspectable icons (bead bzc.108). */
+export function learntIcons(model: LearntModel): VisitIcon[] {
+  return model.spells.map((s) => ({ kind: "spell", id: s.id }));
 }
 
 /** The hero learnt pages (bead bzc.81): portrait, the new spells, OK. */
@@ -669,10 +710,7 @@ export function learntDialog(
     className: "gm-result-dialog",
     picture: portrait === null ? null : img(portrait, "gm-dialog-hero", 2),
     sentence: model.sentence,
-    body: el(
-      "div.gm-result-icons",
-      ...model.spells.map((s) => iconTile({ kind: "spell", id: s.id })),
-    ),
+    body: inspectTiles(learntIcons(model)),
     consequence:
       model.consequence === null
         ? null

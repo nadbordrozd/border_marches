@@ -38,6 +38,7 @@ import {
   unspentPageChoices,
   unspentPageOf,
   useConsumable,
+  wearError,
   xpForLevel,
   xpPercent,
   type CommandResult,
@@ -54,6 +55,7 @@ import {
   WORN_SLOTS,
   findArtifact,
   gradeLabel,
+  isCursed,
   wornDef,
   type ArtifactDef,
   type SlotKind,
@@ -83,10 +85,16 @@ import { isSpell, spellInfo } from "../core/magic/catalog.ts";
 import { button, el, img, kbd, modal, resourceIcon } from "./dom.ts";
 import { iconElement } from "./icons.ts";
 import { armyValue } from "./hints.ts";
-import { creatureTip } from "./info-tips.ts";
+import { creatureTip, spellTip } from "./info-tips.ts";
 import { magicWheelButton } from "./magic-wheel.ts";
 import { openAdventureBook, type BookChoice } from "./spellbook.ts";
-import { setTip, tipCard, titleCard, type TipBody } from "./tooltip.ts";
+import {
+  setInspect,
+  setTip,
+  tipCard,
+  titleCard,
+  type TipBody,
+} from "./tooltip.ts";
 import "./hero.css";
 
 /** What the hero screens need from the game screen. */
@@ -188,7 +196,131 @@ export function scrollIcon(spell: string): HTMLElement {
  * the hero sheet (bead bzc.69: the sheet's instruction line moved here).
  */
 export function itemCard(id: string, hint: string): TipBody {
-  return withHint(titleCard(itemTooltip(id)), hint);
+  return withHint(artifactTipCard(id), hint);
+}
+
+/**
+ * An artifact's card (bead bzc.108): the backpack's and the doll's hover
+ * card without the click hint, and the card a found, won or bought
+ * artifact opens in its dialog. Its icon heads the card.
+ */
+export function artifactTipCard(id: string): TipBody {
+  const [head = id, ...rest] = itemTooltip(id)
+    .split("\n")
+    .filter((l) => l.trim() !== "");
+  if (findArtifact(id) === undefined) return titleCard(itemTooltip(id));
+  return tipCard(head, rest, { icon: ownIcon("artifact", id) });
+}
+
+/** A primary stat's card: what the stat does (a stat shrine's gift). */
+export function statTipCard(stat: string): TipBody {
+  if (!(PRIMARY_STATS as readonly string[]).includes(stat)) return stat;
+  const s = stat as PrimaryStat;
+  return tipCard(`${STAT_NAMES[s]}`, [STAT_TEXT[s]], {
+    icon: ownIcon("stat", s),
+    subtitle: "Primary stat",
+  });
+}
+
+/**
+ * Which worn slots a backpack item goes in (bead bzc.108), slot by slot in
+ * WORN_SLOTS order: "fits" (empty and allowed), "swap" (allowed; what is
+ * there goes to the backpack), "barred" (its kind, but a vow, the one-Marvel
+ * rule or a cursed item in the way forbids it) or "off" (another kind, or
+ * the item is not worn at all). `target` marks the slot a double-click
+ * fills (core equip's default); `why` is the line for the slot's card.
+ */
+export type SlotFit = "fits" | "swap" | "barred" | "off";
+
+export interface SlotFitView {
+  readonly fit: SlotFit;
+  readonly target: boolean;
+  readonly why: string | null;
+}
+
+export function slotFits(hero: HeroState, id: string): SlotFitView[] {
+  const def = wornDef(id);
+  const off: SlotFitView = { fit: "off", target: false, why: null };
+  if (def === undefined) return WORN_SLOTS.map(() => off);
+  const kind = WORN_SLOTS.map((k, i) => (k === def.slot ? i : -1)).filter(
+    (i) => i >= 0,
+  );
+  const target =
+    kind.find((i) => (hero.worn[i] ?? null) === null) ?? kind[0] ?? -1;
+  return WORN_SLOTS.map((k, i): SlotFitView => {
+    if (k !== def.slot) return off;
+    const why = wearError(hero, id, i);
+    if (why !== null)
+      return { fit: "barred", target: false, why: `${capital(why.message)}.` };
+    const there = hero.worn[i] ?? null;
+    if (there !== null && isCursed(there))
+      return {
+        fit: "barred",
+        target: false,
+        why: `${findArtifact(there)?.name ?? there} is cursed and cannot come off.`,
+      };
+    if (there !== null)
+      return {
+        fit: "swap",
+        target: i === target,
+        why: `Swap: ${def.name} goes on, ${findArtifact(there)?.name ?? there} goes to the backpack.`,
+      };
+    return {
+      fit: "fits",
+      target: i === target,
+      why: `${def.name} goes here.`,
+    };
+  });
+}
+
+function capital(text: string): string {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+const FITS: readonly SlotFit[] = ["fits", "swap", "barred", "off"];
+
+/**
+ * Lights the doll's cells (WORN_SLOTS order) for `fits` (bead bzc.108):
+ * `pick` for an item picked or dragged (strong: a glow that pulses unless
+ * motion is reduced, the other slots dimmed, a swap mark), `hint` for one
+ * hovered or focused (a lighter outline). Null clears that mode. Classes:
+ * `hs-<mode>-<fit>`, `hs-<mode>-target`, and `hs-doll-<mode>` on the doll.
+ */
+export function paintSlotFits(
+  doll: HTMLElement,
+  cells: readonly HTMLElement[],
+  fits: readonly SlotFitView[] | null,
+  mode: "pick" | "hint",
+): void {
+  cells.forEach((cell, i) => {
+    for (const f of FITS) cell.classList.remove(`hs-${mode}-${f}`);
+    cell.classList.remove(`hs-${mode}-target`);
+    const v = fits?.[i];
+    if (v === undefined) return;
+    cell.classList.add(`hs-${mode}-${v.fit}`);
+    if (v.target) cell.classList.add(`hs-${mode}-target`);
+  });
+  if (fits === null) doll.classList.remove(`hs-doll-${mode}`);
+  else doll.classList.add(`hs-doll-${mode}`);
+}
+
+/** Where a picked backpack item goes, in words (the details pane). */
+export function fitNote(hero: HeroState, id: string): string {
+  const def = findArtifact(id);
+  if (def === undefined) return "";
+  if (def.kind === "consumable")
+    return "Not worn: double-click it, or Use, to drink or read it.";
+  if (def.kind !== "worn") return "Carried, not worn.";
+  const fits = slotFits(hero, id);
+  const open = fits.filter((f) => f.fit === "fits" || f.fit === "swap");
+  const where = SLOT_NAMES[def.slot];
+  if (open.length === 0) {
+    const why = fits.find((f) => f.why !== null)?.why ?? "it is barred.";
+    return `Worn on the ${where} slot, but ${why.charAt(0).toLowerCase()}${why.slice(1)}`;
+  }
+  return open.length > 1
+    ? `Worn on a ${where} slot: click a lit slot on the doll to wear it there.`
+    : `Worn on the ${where} slot: click the lit slot on the doll to wear it.`;
 }
 
 /** What a double-click or drag does with a worn or carried item. */
@@ -220,23 +352,30 @@ function tileIcon(kind: IconKind, id: string): HTMLElement | null {
   return icon;
 }
 
+/**
+ * Every rank's rule of a skill, one line each ("Advanced: ..."), rank
+ * `rank` bright and the others dim: the hero sheet's skill card and the
+ * level-up cards (bead bzc.108) share them.
+ */
+export function skillRankLines(id: string, rank: number): HTMLElement[] {
+  const def = findSkill(id);
+  if (def === undefined) return [];
+  return def.ranks.map((r, k) => {
+    const line = el("div.gm-tip-line", el("b", `${RANK_WORDS[k]}: `), r.text);
+    if (k + 1 !== rank) line.classList.add("gm-tip-dim");
+    return line;
+  });
+}
+
 /** A skill's hover card: every rank's rule, the held one bright. */
 export function skillTipCard(id: string, rank: number): TipBody {
   const def = findSkill(id);
   if (def === undefined) return id;
   const word = RANK_WORDS[rank - 1] ?? "";
-  return tipCard(
-    def.name,
-    def.ranks.map((r, k) => {
-      const line = el("div.gm-tip-line", el("b", `${RANK_WORDS[k]}: `), r.text);
-      if (k + 1 !== rank) line.classList.add("gm-tip-dim");
-      return line;
-    }),
-    {
-      icon: ownIcon("skill", id),
-      subtitle: `${word} ${FAMILY_WORDS[def.family] ?? "skill"}`.trim(),
-    },
-  );
+  return tipCard(def.name, skillRankLines(id, rank), {
+    icon: ownIcon("skill", id),
+    subtitle: `${word} ${FAMILY_WORDS[def.family] ?? "skill"}`.trim(),
+  });
 }
 
 /** A feat's or vow's hover card: its rule and, for a vow, the restriction. */
@@ -897,6 +1036,25 @@ export async function openHeroScreen(
     }
   };
 
+  /** The slot the keyboard picked, focused again after the render. */
+  let focusKey: string | null = null;
+  /**
+   * Makes a doll or backpack slot keyboard-pickable (bead bzc.108): Tab to
+   * it, Enter or Space does what a click does.
+   */
+  const keyed = (cell: HTMLElement, key: string): void => {
+    cell.tabIndex = 0;
+    cell.setAttribute("role", "button");
+    cell.dataset["key"] = key;
+    cell.dataset["ownEnter"] = "";
+    cell.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      focusKey = key;
+      cell.click();
+    });
+  };
+
   const render = (): void => {
     const h = hero();
     if (h === undefined) return;
@@ -963,16 +1121,36 @@ export async function openHeroScreen(
 
     // ---- middle: the paper doll
     const doll = el("div.hs-doll");
+    // What a picked backpack item fits (bead bzc.108): lit on the doll.
+    const pickedId =
+      selected?.place === "backpack"
+        ? (h.backpack[selected.index] ?? null)
+        : null;
+    const fits = pickedId === null ? null : slotFits(h, pickedId);
+    const cells: HTMLElement[] = [];
     WORN_SLOTS.forEach((kind, i) => {
       const worn = h.worn[i] ?? null;
       const cell = dollSlot(kind, worn);
       const [col, row] = DOLL[i] as [number, number];
       cell.style.gridColumn = String(col);
       cell.style.gridRow = String(row);
+      keyed(cell, `doll:${i}`);
       if (selected?.place === "worn" && selected.index === i) {
         cell.classList.add("hs-selected");
       }
       const icon = cell.firstElementChild;
+      const fit = fits?.[i];
+      if (fit !== undefined && fit.why !== null) {
+        // The slot's card says what a click does with the picked item.
+        const why =
+          fit.fit === "barred" ? fit.why : `${fit.why} Click to wear it here.`;
+        if (worn !== null && icon instanceof HTMLElement)
+          setTip(icon, () => itemCard(worn, why));
+        else
+          setTip(cell, () =>
+            tipCard(SLOT_NAMES[kind], [why], { subtitle: "Worn slot" }),
+          );
+      }
       if (worn !== null && icon instanceof HTMLElement) {
         drag(icon, { place: "worn", index: i });
         cell.addEventListener("dblclick", () =>
@@ -980,6 +1158,16 @@ export async function openHeroScreen(
         );
       }
       cell.addEventListener("click", () => {
+        // A picked backpack item goes on a lit slot (or says why not).
+        const from = selected;
+        if (
+          from?.place === "backpack" &&
+          fit !== undefined &&
+          fit.fit !== "off"
+        ) {
+          act(equip(host.state(), heroId, from.index, i));
+          return;
+        }
         selected = worn === null ? null : { place: "worn", index: i };
         render();
       });
@@ -997,9 +1185,14 @@ export async function openHeroScreen(
           act(equip(host.state(), heroId, from.index, i));
         }
       });
+      cells.push(cell);
       doll.append(cell);
     });
+    paintSlotFits(doll, cells, fits, "pick");
     const middle = el("div.hs-col.hs-middle", el("h3", "Worn"), doll);
+    /** A lighter hint while a backpack item is hovered or focused. */
+    const hint = (id: string | null): void =>
+      paintSlotFits(doll, cells, id === null ? null : slotFits(h, id), "hint");
 
     // ---- right: backpack, scroll case, the selected item
     const pack = el("div.hs-grid");
@@ -1011,14 +1204,27 @@ export async function openHeroScreen(
         const icon = itemIcon(entry.id, entry.count);
         setTip(icon, () => itemCard(entry.id, itemHint("backpack", entry.id)));
         drag(icon, { place: "backpack", index: entry.index });
+        // Dragging lights the doll as picking does.
+        icon.addEventListener("dragstart", () =>
+          paintSlotFits(doll, cells, slotFits(h, entry.id), "pick"),
+        );
+        icon.addEventListener("dragend", () => render());
         cell.append(icon);
+        keyed(cell, `pack:${entry.index}`);
         if (selected?.place === "backpack" && selected.index === entry.index) {
           cell.classList.add("hs-selected");
         }
         cell.addEventListener("click", () => {
-          selected = { place: "backpack", index: entry.index };
+          // A second click on the picked item puts it down.
+          const again =
+            selected?.place === "backpack" && selected.index === entry.index;
+          selected = again ? null : { place: "backpack", index: entry.index };
           render();
         });
+        cell.addEventListener("mouseenter", () => hint(entry.id));
+        cell.addEventListener("mouseleave", () => hint(null));
+        cell.addEventListener("focus", () => hint(entry.id));
+        cell.addEventListener("blur", () => hint(null));
         cell.addEventListener("dblclick", () => {
           const def = findArtifact(entry.id);
           act(
@@ -1041,7 +1247,9 @@ export async function openHeroScreen(
     for (let i = 0; i < scrollCaseSize(h); i++) {
       const spell = h.scrolls[i];
       const cell = el("div.hs-cell");
-      if (spell !== undefined) cell.append(scrollIcon(spell));
+      // A scroll's card is the spell's, as in the spellbook (bead bzc.108).
+      if (spell !== undefined)
+        cell.append(setTip(scrollIcon(spell), () => spellTip(spell)));
       scrolls.append(cell);
     }
     const scrollHead = iconHead(
@@ -1072,6 +1280,10 @@ export async function openHeroScreen(
         editable ? { selected: armySel, onSlot: onArmySlot } : {},
       ),
     );
+    if (focusKey !== null) {
+      body.querySelector<HTMLElement>(`[data-key="${focusKey}"]`)?.focus();
+      focusKey = null;
+    }
   };
 
   /**
@@ -1139,6 +1351,9 @@ export async function openHeroScreen(
       itemIcon(id),
       el("pre.hs-text", itemTooltip(id)),
     );
+    // Where a picked backpack item goes (bead bzc.108), as the doll shows.
+    const note =
+      sel.place === "backpack" ? el("div.hs-fit-note", fitNote(h, id)) : null;
     const actions = el("div.hs-actions");
     if (sel.place === "worn") {
       const b = button("Take off", () =>
@@ -1168,7 +1383,9 @@ export async function openHeroScreen(
         ),
       );
     }
-    box.append(info, actions);
+    box.append(info);
+    if (note !== null) box.append(note);
+    box.append(actions);
     return box;
   };
 
@@ -1438,30 +1655,57 @@ function offerTitle(o: SkillOffer, hero: HeroState): string {
   return o.kind === "new" ? `${name} 1` : `${name} ${o.rank}`;
 }
 
-function offerCard(o: SkillOffer, hero: HeroState): HTMLElement {
+/**
+ * A level-up card's details button (bead bzc.108): the same card the hero
+ * sheet shows, on hover, focus, click or tap; the click does not pick.
+ */
+function detailsButton(name: string, card: () => TipBody): HTMLElement {
+  const b = el("button.hs-card-details", "i");
+  b.setAttribute("type", "button");
+  b.setAttribute("aria-label", `Details of ${name}`);
+  return setInspect(b, card, "details");
+}
+
+/**
+ * One level-up skill card (bead bzc.108: every option's full effect is
+ * read before choosing): the offered rank's rule bright, with the skill's
+ * other ranks dim under it, what the hero holds now, and a details button
+ * for the hero sheet's card.
+ */
+export function offerCard(o: SkillOffer, hero: HeroState): HTMLElement {
   const card = el("div.hs-card");
   if (o.kind === "stat") {
     card.append(
+      detailsButton(STAT_NAMES[o.stat], () => statTipCard(o.stat)),
       el("div.hs-card-kind", "Primary stat"),
       ...cardIcon("stat", o.stat),
       el("div.hs-card-name", `+1 ${STAT_NAMES[o.stat]}`),
       el("div.hs-card-text", STAT_TEXT[o.stat]),
     );
+    card.dataset["offer"] = `stat:${o.stat}`;
     return card;
   }
   const def = findSkill(o.skill);
   const rank = o.kind === "new" ? 1 : o.rank;
+  const held = hero.skills.find((s) => s.id === o.skill)?.rank ?? 0;
   card.append(
+    detailsButton(def?.name ?? o.skill, () => skillTipCard(o.skill, rank)),
     el("div.hs-card-kind", o.kind === "new" ? "New skill" : "Upgrade"),
     ...cardIcon("skill", o.skill),
     el("div.hs-card-name", `${def?.name ?? o.skill}`),
-    el("div.hs-card-rank", ["", "Basic", "Advanced", "Expert"][rank] ?? ""),
-    el("div.hs-card-text", def?.ranks[rank - 1]?.text ?? ""),
+    el("div.hs-card-rank", RANK_WORDS[rank - 1] ?? ""),
+    // The whole ladder, the offered rank bright.
+    el("div.hs-card-text.hs-card-ranks", ...skillRankLines(o.skill, rank)),
   );
+  if (held > 0)
+    card.append(
+      el("div.hs-card-held", `You hold ${RANK_WORDS[held - 1] ?? ""} now.`),
+    );
   if (def?.family !== undefined) card.classList.add(`hs-family-${def.family}`);
   if (o.kind === "new" && hero.skills.length >= MAX_SKILLS - 1) {
     card.append(el("div.hs-card-warn", "Fills your last skill slot."));
   }
+  card.dataset["offer"] = `skill:${o.skill}`;
   return card;
 }
 
@@ -1478,6 +1722,7 @@ function featCard(id: string): HTMLElement {
   const vowed = def?.restriction !== undefined;
   const card = el(
     "div.hs-card",
+    detailsButton(def?.name ?? id, () => featTipCard(id)),
     el("div.hs-card-kind", vowed ? "Vow" : "Feat"),
     ...cardIcon(vowed ? "vow" : "feat", id),
     el("div.hs-card-name", def?.name ?? id),

@@ -123,6 +123,7 @@ import {
   areaCells,
   digResult,
   siteResult,
+  spoilsResult,
   type VisitArea,
   type VisitResult,
 } from "./visit-results.ts";
@@ -1738,10 +1739,23 @@ class GameScreen {
           }
           break;
         }
-        case "artifacts-won":
-          if (e.artifacts.length > 0)
-            this.note(`${e.artifacts.length} artifacts taken`, "gain");
+        case "artifacts-won": {
+          if (e.artifacts.length === 0) break;
+          const winner = this.state.heroes.find((x) => x.id === e.heroId);
+          // The player's spoils open as inspectable cards (bead bzc.108).
+          if (winner?.owner === this.human) {
+            const loser = this.state.heroes.find((x) => x.id === e.fromHeroId);
+            this.present(
+              spoilsResult(
+                winner.name,
+                loser?.name ?? "the beaten hero",
+                e.artifacts,
+              ),
+              e.heroId,
+            );
+          } else this.note(`${e.artifacts.length} artifacts taken`, "gain");
           break;
+        }
         case "site": {
           // A choice's outcome is read in its dialog (siteChoice).
           if (!sites) break;

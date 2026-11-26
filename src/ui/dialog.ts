@@ -57,8 +57,8 @@ export interface DialogOptions<T> {
   /** Value for Escape; omit to make Escape do nothing. */
   cancel?: T;
   className?: string;
-  /** Called once the dialog is in the page, with its buttons in order. */
-  onOpen?: (buttons: HTMLButtonElement[]) => void;
+  /** Called once the dialog is in the page, with its buttons and choice rows in order. */
+  onOpen?: (buttons: HTMLButtonElement[], choices: HTMLButtonElement[]) => void;
 }
 
 // ------------------------------------------------------------ keys
@@ -263,6 +263,19 @@ function typing(): boolean {
   );
 }
 
+/**
+ * Whether the focus is on something that answers Enter itself (bead
+ * bzc.108): an inspectable icon (Enter opens its card) or a hero sheet
+ * slot (`data-own-enter`: Enter picks it), not the dialog's primary.
+ */
+function inspecting(): boolean {
+  const a = document.activeElement;
+  return (
+    a instanceof HTMLElement &&
+    (a.dataset["inspect"] !== undefined || a.dataset["ownEnter"] !== undefined)
+  );
+}
+
 /** Shows a dialog over everything; resolves with the chosen value. */
 export function dialog<T>(options: DialogOptions<T>): Promise<T> {
   return new Promise((resolve) => {
@@ -301,7 +314,7 @@ export function dialog<T>(options: DialogOptions<T>): Promise<T> {
         return;
       }
       if (e.key === "Enter" && primary !== null && !primary.disabled) {
-        if (typing()) return;
+        if (typing() || inspecting()) return;
         e.preventDefault();
         e.stopPropagation();
         primary.click();
@@ -323,7 +336,7 @@ export function dialog<T>(options: DialogOptions<T>): Promise<T> {
       box.tabIndex = -1;
       box.focus();
     }
-    options.onOpen?.(built.buttons);
+    options.onOpen?.(built.buttons, built.choices);
   });
 }
 

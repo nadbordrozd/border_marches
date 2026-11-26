@@ -350,3 +350,32 @@
   display: block;
   line-height: 1.4;
 }
+
+/* Bead bzc.108: what a result gave is a button that opens its card (hover,
+   focus) and pins it (click, tap, Enter). */
+button.gm-result-icon {
+  padding: 6px 4px 4px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--gm-gold-dim);
+  cursor: help;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+}
+
+button.gm-result-icon:hover,
+button.gm-result-icon:focus-visible {
+  color: var(--gm-gold);
+  background: rgb(255 214 92 / 8%);
+  border-color: var(--gm-gold-dim);
+}
+
+.gm-result-name {
+  text-decoration: underline dotted rgb(232 199 122 / 60%);
+  text-underline-offset: 3px;
+}
+
+.gm-dialog-choice-pic .gm-inspect {
+  cursor: help;
+}

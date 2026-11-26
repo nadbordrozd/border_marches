@@ -70,6 +70,37 @@ export function setTip<T extends Element>(node: T, content: TipContent): T {
   return node;
 }
 
+/**
+ * Makes `node` inspectable (bead bzc.108): hover and keyboard focus show its
+ * card, as any tip; a click, a tap or Enter pins the card (as a right-click
+ * does) so it can be read on a touch screen too, and a second click closes
+ * it. The click goes no further (a choice row or a level-up card holding
+ * the node is not picked). `node` is focusable and marked `data-inspect`.
+ */
+export function setInspect<T extends HTMLElement>(
+  node: T,
+  content: TipContent,
+  what = "",
+): T {
+  setTip(node, content);
+  node.dataset["inspect"] = what;
+  if (!(node.tabIndex >= 0)) node.tabIndex = 0;
+  const pin = (e: Event): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    const r = node.getBoundingClientRect();
+    pinTipAt(r.left + Math.min(24, r.width / 2), r.bottom - 6, content, node);
+  };
+  node.addEventListener("click", pin);
+  // A button clicks itself on Enter; any other node is given the key.
+  if (node.tagName !== "BUTTON")
+    node.addEventListener("keydown", (e) => {
+      const key = (e as KeyboardEvent).key;
+      if (key === "Enter" || key === " ") pin(e);
+    });
+  return node;
+}
+
 export interface TipCardOptions {
   icon?: Node | null;
   subtitle?: string | null;
