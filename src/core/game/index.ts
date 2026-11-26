@@ -94,6 +94,16 @@ export {
   type TransferArgs,
 } from "./town.ts";
 export {
+  DEV_GOLD,
+  DEV_OTHER,
+  devAddResources,
+  devBuildAll,
+  devBuildAllTowns,
+  devRefillHero,
+  devResourceGift,
+  devRevealMap,
+} from "./dev.ts";
+export {
   endDay,
   endTurn,
   startDay,

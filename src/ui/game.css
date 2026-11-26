@@ -2429,6 +2429,56 @@
   flex-wrap: wrap;
 }
 
+/* Developer tools in the Menu (bead bzc.93). */
+.gm-dev {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.gm-dev-toggle {
+  align-self: flex-start;
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+.gm-dev-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  border: 1px dashed var(--gm-gold-dim);
+  border-radius: 4px;
+}
+
+.gm-dev-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.gm-dev-row > .gm-btn,
+.gm-dev-town {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 4px 6px;
+  font-size: 11px;
+}
+
+.gm-dev-town {
+  font: inherit;
+  font-size: 11px;
+  color: inherit;
+  background: var(--gm-ink);
+  border: 1px solid var(--gm-gold-dim);
+}
+
+.gm-dev-status {
+  margin: 0;
+  font-size: 11px;
+}
+
 .gm-num {
   font-variant-numeric: tabular-nums;
 }

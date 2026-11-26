@@ -36,7 +36,7 @@
 //   pin-dwelling, pin-battle (right-click pinned cards, UI2-18: checks the
 //   map neither moves nor plans, Escape closes only the card, the closing
 //   click does nothing else, and the browser menu never opens),
-//   menu-dialog, meeting, meeting-picked, meeting-hover, meeting-swap
+//   menu-dialog, menu-dev (the Dev panel, bzc.93), meeting, meeting-picked, meeting-hover, meeting-swap
 //   (checks the swap in the state and swaps back), town-<faction>, town-hover, town-hall (a selected tile), recruit, market, prebattle,
 //   site, magic-learn, magic-guild, magic-guild-pane, magic-noschool,
 //   magic-rumour, magic-rumour-map (bead bzc.81: learning made visible,
@@ -1097,6 +1097,31 @@ async function kingdomChecks() {
   await sleep(200);
 }
 
+/**
+ * The Menu with the Dev panel (bead bzc.93): the "Developer tools" toggle
+ * turned on, shot, and turned off again (the tour's own profile). No dev
+ * action is clicked, so the game state is unchanged.
+ */
+async function menuDev() {
+  if (!(await clickText(".gm-side button", "Menu"))) {
+    skip("menu-dev", "no Menu button");
+    return;
+  }
+  await sleep(300);
+  await evaluate(`document.querySelector('.gm-dev-toggle')?.click()`);
+  await sleep(200);
+  const shown = await evaluate("!!document.querySelector('.gm-dev-panel')");
+  if (!shown) fail("menu-dev", "the Dev panel did not appear");
+  else {
+    await park();
+    await sleep(200);
+    await shot("menu-dev");
+  }
+  await evaluate(`document.querySelector('.gm-dev-toggle')?.click()`);
+  await escape();
+  await sleep(200);
+}
+
 async function richScreens() {
   await editSave(RICH);
   note(`rich save: ${JSON.stringify(await evaluate("window.__rich"))}`);
@@ -1135,6 +1160,7 @@ async function richScreens() {
       await sleep(200);
     } else skip("menu-dialog", "no Menu button");
   }
+  if (want("menu-dev")) await menuDev();
   if (wantFamily("meeting")) await meetingScreens();
   await townScreens();
   if (want("prebattle")) {

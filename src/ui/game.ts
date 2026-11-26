@@ -66,6 +66,7 @@ import { aimHint } from "./adventure-targets.ts";
 import type { AdventureAim } from "./adventure-targets.ts";
 import { castAdventureSpell, registerSpells } from "../core/magic/index.ts";
 import { soundControl } from "./sound-control.ts";
+import { devSettings } from "./dev-panel.ts";
 import { armyRow } from "./army.ts";
 import {
   button,
@@ -475,6 +476,16 @@ class GameScreen {
 
   private ownTowns(): string[] {
     return townsOf(this.state, this.human).map((t) => t.id);
+  }
+
+  /** The own town the selected hero stands in, if any. */
+  private heroTownId(): string | undefined {
+    const hero = this.hero();
+    return this.ownTowns().find((id) =>
+      this.state.map.objects.some(
+        (o) => o.id === id && o.x === hero?.x && o.y === hero?.y,
+      ),
+    );
   }
 
   private get busy(): boolean {
@@ -1166,13 +1177,7 @@ class GameScreen {
       case "t":
       case "T": {
         // The town the selected hero stands in, else the first town.
-        const hero = this.hero();
-        const here = this.ownTowns().find((id) =>
-          this.state.map.objects.some(
-            (o) => o.id === id && o.x === hero?.x && o.y === hero?.y,
-          ),
-        );
-        const id = here ?? this.ownTowns()[0];
+        const id = this.heroTownId() ?? this.ownTowns()[0];
         if (id !== undefined) void this.openTown(id);
         break;
       }
@@ -2485,6 +2490,15 @@ class GameScreen {
         ),
         el("h3.gm-rule", "Sound"),
         soundControl(),
+        el("h3.gm-rule", "Developer"),
+        devSettings({
+          state: () => this.state,
+          player: this.human,
+          heroId: () => this.hero()?.id ?? null,
+          townId: () => this.heroTownId() ?? this.ownTowns()[0] ?? null,
+          run: (result) => this.run(result),
+          note: (text) => this.note(text),
+        }),
       ),
       buttons: [
         { label: "Save game", value: "save", primary: true },
