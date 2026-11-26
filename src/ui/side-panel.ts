@@ -4,7 +4,9 @@
  * buttons. The models are pure (unit-tested in tests/ui/side-panel.test.ts);
  * src/ui/game.ts builds the rows from them.
  */
-import { maxMana } from "../core/game/index.ts";
+import { townArt, townBackdrop } from "../assets/town-art.ts";
+import type { PixelBox } from "../assets/manifest.ts";
+import { fortLevel, maxMana } from "../core/game/index.ts";
 import type { GameState, HeroState, TownState } from "../core/game/index.ts";
 import { findFaction } from "../data/factions.ts";
 import { SPENT_MP } from "./hints.ts";
@@ -66,6 +68,15 @@ export interface TownRow {
   build: boolean;
   /** Creatures ready to hire (the growth flag shows when above 0). */
   ready: number;
+  /**
+   * The town's picture (bead bzc.94): its map sprite at the fort level
+   * built (townArt, so new town art drops in) over the faction's town
+   * backdrop (null: Lost World and neutral towns, a plain sky and field).
+   */
+  art: string;
+  backdrop: string | null;
+  /** Where the sprite sits in the picture box. */
+  thumb: ThumbPlacement;
 }
 
 const NEUTRAL_CREST = "#6b5a3e";
@@ -78,6 +89,7 @@ export function townRow(
   const town = state.towns[townId];
   if (town === undefined) return null;
   const faction = findFaction(town.faction);
+  const art = townArt(town.faction, fortLevel(town));
   return {
     id: town.id,
     name: town.name,
@@ -85,6 +97,54 @@ export function townRow(
     factionName: faction?.name ?? "Town",
     build: buildable,
     ready: readyToHire(town),
+    art: art.key,
+    backdrop: townBackdrop(town.faction)?.key ?? null,
+    thumb: townThumbPlacement(art),
+  };
+}
+
+// ------------------------------------------------------------ town picture
+
+/**
+ * The town tile's picture box (bead bzc.94): three tiles to a row in the
+ * 320-340 px panel, 3:2 like the town sprites. The tile may come out a
+ * few pixels wider; the sprite stays centred in it.
+ */
+export const TOWN_THUMB = { w: 92, h: 54 } as const;
+
+/** Where the town sprite sits in the picture box, in CSS pixels. */
+export interface ThumbPlacement {
+  /** The whole sprite canvas, scaled. */
+  width: number;
+  height: number;
+  /** Offset of the canvas's left edge from the box's centre line. */
+  fromCentre: number;
+  /** Offset of the canvas's top edge from the box's top. */
+  top: number;
+}
+
+/**
+ * Fits a sprite's opaque box into the picture box: as large as fits with
+ * a small margin (never enlarged past 1x: pixel art stays sharp), centred
+ * across and standing on the box's foot, as the town stands on its field.
+ */
+export function townThumbPlacement(
+  sprite: { w: number; h: number; box: PixelBox },
+  frame: { w: number; h: number } = TOWN_THUMB,
+  margin = 2,
+): ThumbPlacement {
+  const { box } = sprite;
+  const scale = Math.min(
+    1,
+    (frame.w - 2 * margin) / Math.max(1, box.w),
+    (frame.h - 2 * margin) / Math.max(1, box.h),
+  );
+  const round = (n: number): number => Math.round(n * 100) / 100;
+  return {
+    width: round(sprite.w * scale),
+    height: round(sprite.h * scale),
+    fromCentre: round(-(box.x + box.w / 2) * scale),
+    top: round(frame.h - margin - (box.y + box.h) * scale),
   };
 }
 

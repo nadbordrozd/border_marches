@@ -37,7 +37,10 @@
 //   map neither moves nor plans, Escape closes only the card, the closing
 //   click does nothing else, and the browser menu never opens),
 //   menu-dialog, menu-dev (the Dev panel, bzc.93), meeting, meeting-picked, meeting-hover, meeting-swap
-//   (checks the swap in the state and swaps back), town-<faction>, town-hover, town-hall (a selected tile), recruit, market, prebattle,
+//   (checks the swap in the state and swaps back), town-<faction>, town-hover, town-hall (a selected tile), recruit, market,
+//   town-visiting, town-hero-sheet (bead bzc.94: the visiting hero's
+//   portrait opens the hero sheet over the town; checks the way back),
+//   prebattle,
 //   site, magic-learn, magic-guild, magic-guild-pane, magic-noschool,
 //   magic-rumour, magic-rumour-map (bead bzc.81: learning made visible,
 //   site results as dialogs),
@@ -1027,6 +1030,70 @@ async function townScreens() {
 }
 
 /**
+ * A hero visiting a town (bead bzc.94): the hero is set on the first own
+ * town's gate for the step (and put back after), the town opens, a click
+ * on the hero's portrait opens the hero sheet over it, and Escape returns
+ * to the same town with its hero row.
+ */
+async function townHeroScreens() {
+  if (!want("town-visiting") && !want("town-hero-sheet")) return;
+  const placed = await evaluate(`(() => {
+    const s = window.__bmGame.state();
+    const h = s.heroes.find((x) => x.owner === 0 && x.alive);
+    const t = Object.values(s.towns).find((x) => x.owner === 0);
+    const o = t && s.map.objects.find((x) => x.kind === 'town' && x.id === t.id);
+    if (!h || !o) return null;
+    window.__townHero = { id: h.id, x: h.x, y: h.y };
+    h.x = o.x; h.y = o.y;
+    return { hero: h.id, name: h.name, town: t.id };
+  })()`);
+  if (placed === null) {
+    skip("town-visiting", "no own hero or town");
+    return;
+  }
+  try {
+    await game(`openTown(${JSON.stringify(placed.town)})`);
+    await waitFor("document.querySelector('.gm-town')", "town screen");
+    await park();
+    await sleep(600);
+    if (want("town-visiting")) await shot("town-visiting");
+    if (!(await clickFirst(".gm-town-army-hero"))) {
+      fail("town-hero-sheet", "no visiting hero portrait (.gm-town-army-hero)");
+    } else if (
+      !(await waitMaybe("document.querySelector('.hs-dialog')", 5000))
+    ) {
+      fail("town-hero-sheet", "the portrait did not open the hero sheet");
+    } else {
+      await park();
+      await sleep(500);
+      if (want("town-hero-sheet")) await shot("town-hero-sheet");
+      await escape();
+      await waitFor("!document.querySelector('.hs-dialog')", "sheet closed");
+      await sleep(300);
+      const back = await evaluate(`(() => ({
+        town: Boolean(document.querySelector('.gm-town')),
+        hero: document.querySelector('.gm-town-army-hero')?.dataset.hero ?? null,
+      }))()`);
+      if (!back.town || back.hero !== placed.hero)
+        fail(
+          "town-hero-sheet",
+          `closing the sheet left ${JSON.stringify(back)}`,
+        );
+      else
+        note(`town-hero-sheet: ${placed.name}'s sheet over the town and back`);
+    }
+    await escape();
+    await waitFor("!document.querySelector('.gm-town')", "town closed");
+  } finally {
+    await evaluate(`(() => {
+      const p = window.__townHero;
+      const h = p && window.__bmGame.state().heroes.find((x) => x.id === p.id);
+      if (h) { h.x = p.x; h.y = p.y; }
+    })()`);
+  }
+}
+
+/**
  * The kingdom overview (UI2-12, bead bzc.62): it fits without scrolling
  * (five towns and two heroes), a resource's hover card, a click on a hero
  * row selects that hero and one on a town row opens the town.
@@ -1185,6 +1252,7 @@ async function richScreens() {
   if (want("menu-dev")) await menuDev();
   if (wantFamily("meeting")) await meetingScreens();
   await townScreens();
+  await townHeroScreens();
   if (wantFamily("prebattle")) {
     await idle();
     let monster = (await game("targets()")).find((t) => t.kind === "monster");

@@ -13,8 +13,13 @@ import {
   glyphRuns,
   heroRow,
   readyToHire,
+  TOWN_THUMB,
   townRow,
+  townThumbPlacement,
 } from "../../src/ui/side-panel.ts";
+import { TOWN_3X2_ASSETS } from "../../src/assets/manifest.ts";
+import { townArt, townBackdrop } from "../../src/assets/town-art.ts";
+import { fortLevel } from "../../src/core/game/index.ts";
 
 let cached: GameState | undefined;
 function game(): GameState {
@@ -94,6 +99,54 @@ describe("town rows", () => {
     } as typeof town.dwellings;
     expect(readyToHire(town)).toBe(10);
     expect(townRow(s, town.id, false)!.ready).toBe(10);
+  });
+});
+
+describe("town pictures (bead bzc.94)", () => {
+  it("show the town's map sprite at its fort level on its backdrop", () => {
+    const s = game();
+    const town = Object.values(s.towns).find((t) => t.owner === 0)!;
+    const row = townRow(s, town.id, false)!;
+    expect(row.art).toBe(townArt(town.faction, fortLevel(town)).key);
+    expect(row.backdrop).toBe(townBackdrop(town.faction)!.key);
+    expect(row.thumb).toEqual(
+      townThumbPlacement(townArt(town.faction, fortLevel(town))),
+    );
+    // Lost World and neutral towns have no backdrop: a plain field.
+    const wild = { ...town, faction: "lost-world" as typeof town.faction };
+    s.towns[town.id] = wild;
+    expect(townRow(s, town.id, false)!.backdrop).toBeNull();
+  });
+
+  it("fit every town sprite's opaque box in the picture, standing on its foot", () => {
+    const margin = 2;
+    for (const art of TOWN_3X2_ASSETS) {
+      const at = townThumbPlacement(art);
+      const scale = at.width / art.w;
+      expect(scale, art.key).toBeLessThanOrEqual(1);
+      expect(at.height / art.h).toBeCloseTo(scale, 2);
+      // The opaque box, in the picture box's coordinates (centre at w/2).
+      const left = TOWN_THUMB.w / 2 + at.fromCentre + art.box.x * scale;
+      const right = left + art.box.w * scale;
+      const top = at.top + art.box.y * scale;
+      const foot = top + art.box.h * scale;
+      expect(left, art.key).toBeGreaterThanOrEqual(margin - 0.05);
+      expect(right, art.key).toBeLessThanOrEqual(TOWN_THUMB.w - margin + 0.05);
+      expect(top, art.key).toBeGreaterThanOrEqual(margin - 0.05);
+      expect(foot, art.key).toBeCloseTo(TOWN_THUMB.h - margin, 1);
+      // Centred across.
+      expect(Math.abs(left - (TOWN_THUMB.w - right))).toBeLessThan(0.1);
+      // As large as fits: one side touches its margin.
+      expect(Math.min(left - margin, top - margin), art.key).toBeLessThan(0.1);
+    }
+  });
+
+  it("never enlarge a small sprite past 1x", () => {
+    const at = townThumbPlacement(
+      { w: 40, h: 30, box: { x: 0, y: 0, w: 40, h: 30 } },
+      { w: 92, h: 60 },
+    );
+    expect(at).toEqual({ width: 40, height: 30, fromCentre: -20, top: 28 });
   });
 });
 

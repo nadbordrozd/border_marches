@@ -188,6 +188,16 @@ Changes:
    existing attack, defense, power and lore icons and a number; the army as
    seven 40 px portraits with the count in a dark plate below, not over, the
    sprite; buttons keep their text and key chips but gain an icon.
+   Amended by bead bzc.94 (the user found the crest and 32 px portraits
+   puny): heroes are framed 48 px portraits between a vertical movement
+   bar and mana bar, four to a row, the name in the hover card; towns are
+   framed pictures, three to a row, of the town's map sprite at its fort
+   level on the faction's town backdrop, a faction-colour band on top, the
+   name below and the growth flag, BUILD badge and T key on the picture.
+   Up to 860 px tall the minimap takes 23% of the height (28% above), so
+   1280x800 shows five towns and 900x700 the whole panel. In the town
+   screen a click on the visiting hero's portrait opens the hero sheet over
+   the town (its spellbook read only there); closing it returns to the town.
 2. P1 Minimap (UI2-06): unexplored ground drawn as dark parchment inside a
    one-pixel map border, so the map's bounds are always visible; the frame
    keeps the map square and centred.

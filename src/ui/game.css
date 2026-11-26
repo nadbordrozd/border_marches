@@ -1910,6 +1910,17 @@
   width: min(100%, 28vh);
 }
 
+/*
+ * Bead bzc.94: the hero and town lists grew into framed pictures; up to
+ * 860 px tall the map gives them 5% of the height, so 1280x800 still
+ * shows two rows of towns and 900x700 the whole panel without scrolling.
+ */
+@media (max-height: 860px) {
+  .gm-minimap {
+    width: min(100%, 23vh);
+  }
+}
+
 @media (max-width: 760px) {
   .gm-minimap {
     width: 120px;
@@ -1937,8 +1948,13 @@
   vertical-align: -3px;
 }
 
-/* ------------------------------------------------ hero list (rows) */
+/* ------------------------------------------------ hero list (tiles) */
 
+/*
+ * Bead bzc.94: Heroes' hero list. Each hero is a framed 48 px portrait
+ * (native size: crisp) between its movement bar (left, green) and its
+ * mana bar (right, blue), four to a row; the name is in the hover card.
+ */
 .gm-hero-list {
   flex: none;
   gap: 0;
@@ -1946,78 +1962,79 @@
 
 .gm-hero-rows {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 3px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
 }
 
 .gm-hero-row {
   position: relative;
   display: flex;
-  align-items: center;
-  gap: 5px;
+  align-items: stretch;
+  justify-content: center;
+  gap: 3px;
   min-width: 0;
-  padding: 1px 5px 1px 1px;
+  padding: 2px;
   font: inherit;
   color: var(--gm-text);
-  text-align: left;
-  background: rgb(10 8 5 / 50%);
+  background: rgb(10 8 5 / 55%);
   border: 0;
   box-shadow: inset 0 0 0 1px var(--gm-trim-dark);
   cursor: pointer;
 }
 
 .gm-hero-row:hover {
-  color: #fff;
   box-shadow: inset 0 0 0 1px var(--gm-trim-light);
 }
 
 .gm-hero-row.gm-selected {
-  color: var(--gm-gold);
-  background: rgb(255 214 92 / 10%);
+  background: rgb(255 214 92 / 12%);
   box-shadow:
     inset 0 0 0 1px var(--gm-gold),
-    0 0 6px rgb(255 214 92 / 35%);
+    0 0 6px rgb(255 214 92 / 40%);
+}
+
+/* The portrait's frame: ink, a bronze band, ink (gold when selected). */
+.gm-hero-row-frame {
+  flex: none;
+  display: block;
+  padding: 1px;
+  background: var(--gm-ink);
+  border: 2px solid var(--gm-trim-dark);
+  box-shadow: 0 0 0 1px var(--gm-ink);
+}
+
+.gm-hero-row:hover .gm-hero-row-frame {
+  border-color: var(--gm-trim);
+}
+
+.gm-hero-row.gm-selected .gm-hero-row-frame {
+  border-color: var(--gm-gold);
 }
 
 .gm-hero-row-portrait {
-  flex: none;
   display: block;
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   background: #2c3a1e;
-  image-rendering: auto;
-  box-shadow: inset 0 0 0 1px var(--gm-ink);
+  image-rendering: pixelated;
 }
 
 .gm-hero-row.gm-tired .gm-hero-row-portrait {
   filter: saturate(0.35) brightness(0.8);
 }
 
-.gm-hero-row-body {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.gm-hero-row-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 11px;
-  line-height: 13px;
-}
-
+/* The bars fill from the foot, as Heroes' do. */
 .gm-hero-row-bar {
+  flex: none;
   display: block;
-  height: 4px;
+  width: 5px;
+  margin: 1px 0;
   background: linear-gradient(
-    to right,
+    to top,
     var(--bar) var(--fill, 0%),
-    rgb(0 0 0 / 65%) var(--fill, 0%)
+    rgb(0 0 0 / 70%) var(--fill, 0%)
   );
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 55%);
+  box-shadow: 0 0 0 1px var(--gm-ink);
 }
 
 .gm-hero-row-bar.gm-mp {
@@ -2028,14 +2045,24 @@
   --bar: #4f8ee0;
 }
 
+/* The name is read out and found by the screen tour, not shown. */
+.gm-hero-row-name {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
 .gm-hero-row-up {
   position: absolute;
-  top: -3px;
-  left: 24px;
-  width: 13px;
-  height: 13px;
+  top: 0;
+  right: 6px;
+  width: 15px;
+  height: 15px;
   font:
-    bold 11px/13px Verdana,
+    bold 12px/15px Verdana,
     sans-serif;
   text-align: center;
   color: #1b1208;
@@ -2044,37 +2071,46 @@
   box-shadow: 0 0 0 1px var(--gm-ink);
 }
 
-/* ------------------------------------------------ town list */
+/* ------------------------------------------------ town list (tiles) */
 
+/*
+ * Bead bzc.94: each town is a framed picture, three to a row: its map
+ * sprite (townArt, at the fort level built) standing on the faction's
+ * town backdrop, a band in the faction colour along the top and the name
+ * under it. The growth flag, BUILD badge and T key sit on the picture.
+ * The list takes the panel's free height and scrolls inside itself.
+ */
 .gm-town-panel {
   flex: 1 1 auto;
-  min-height: 46px;
+  min-height: 92px;
   gap: 0;
 }
 
 .gm-town-list {
   flex: 1 1 0;
   min-height: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: start;
+  gap: 4px;
   overflow-y: auto;
   scrollbar-width: thin;
+  scroll-snap-type: y proximity;
 }
 
 .gm-town-item {
-  flex: none;
   display: flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 26px;
-  padding: 2px 6px 2px 3px;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 2px 3px 1px;
+  scroll-snap-align: start;
   font: inherit;
-  font-size: 12px;
   color: var(--gm-text);
-  text-align: left;
-  background: rgb(10 8 5 / 45%);
+  text-align: center;
+  background: rgb(10 8 5 / 55%);
   border: 0;
+  border-top: 3px solid var(--crest, #6b5a3e);
   box-shadow: inset 0 0 0 1px var(--gm-trim-dark);
   cursor: pointer;
 }
@@ -2084,6 +2120,35 @@
   box-shadow: inset 0 0 0 1px var(--gm-trim-light);
 }
 
+.gm-town-item:hover .gm-town-pic {
+  border-color: var(--gm-trim);
+}
+
+.gm-town-pic {
+  position: relative;
+  display: block;
+  height: 54px;
+  overflow: hidden;
+  background-color: #6f9a46;
+  background-position: center 62%;
+  background-size: cover;
+  image-rendering: pixelated;
+  border: 1px solid var(--gm-trim-dark);
+  box-shadow: 0 0 0 1px var(--gm-ink);
+}
+
+/* No backdrop (Lost World, neutral towns): sky over a field. */
+.gm-town-pic-plain {
+  background: linear-gradient(#9cc6e4 0 38%, #7aa851 38% 100%);
+}
+
+.gm-town-pic-art {
+  position: absolute;
+  max-width: none;
+  image-rendering: auto;
+  filter: drop-shadow(0 1px 0 rgb(0 0 0 / 45%));
+}
+
 .gm-town-chip {
   flex: none;
   width: 8px;
@@ -2091,7 +2156,7 @@
   box-shadow: 0 0 0 1px var(--gm-ink);
 }
 
-/* A shield in the faction colour with a pale band. */
+/* A shield in the faction colour with a pale band (dialogs, kingdom). */
 .gm-town-crest {
   flex: none;
   width: 16px;
@@ -2109,23 +2174,37 @@
 }
 
 .gm-town-item-name {
-  flex: 1;
+  display: block;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font:
+    bold 11px/13px Georgia,
+    serif;
+  color: var(--gm-parchment);
+}
+
+.gm-town-item:hover .gm-town-item-name {
+  color: var(--gm-gold);
 }
 
 /* Growth flag: creatures wait in the dwellings (their number). */
 .gm-town-grow {
-  flex: none;
+  position: absolute;
+  top: 2px;
+  left: 2px;
   display: inline-flex;
   align-items: center;
   gap: 2px;
+  padding: 0 3px 0 2px;
   font-size: 10px;
   font-weight: bold;
+  line-height: 13px;
   color: var(--gm-good);
   font-variant-numeric: tabular-nums;
+  background: rgb(10 8 5 / 78%);
+  border-radius: 2px;
 }
 
 .gm-town-grow-flag {
@@ -2138,14 +2217,25 @@
 }
 
 .gm-town-build {
-  flex: none;
-  padding: 0 4px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  padding: 0 3px;
   font-size: 9px;
+  line-height: 13px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #1b1208;
-  background: var(--gm-gold-dim);
+  background: var(--gm-gold);
   border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--gm-ink);
+}
+
+.gm-town-pic .gm-kbd {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  margin: 0;
 }
 
 /* ------------------------------------------------ selected hero card */
@@ -3031,9 +3121,27 @@
   background: rgb(10 8 5 / 80%);
 }
 
+/* A button (bead bzc.94): a click opens the hero sheet over the town. */
 .gm-town-army-hero {
-  padding-bottom: 0;
+  width: 100%;
+  padding: 0;
+  font: inherit;
+  color: inherit;
   justify-content: flex-start;
+  cursor: pointer;
+}
+
+.gm-town-army-hero:hover,
+.gm-town-army-hero:focus-visible {
+  border-color: var(--gm-trim-light);
+  outline: 0;
+}
+
+.gm-town-army-hero:hover .gm-town-army-portrait,
+.gm-town-army-hero:focus-visible .gm-town-army-portrait {
+  box-shadow:
+    0 0 0 1px var(--gm-ink),
+    0 0 0 2px var(--gm-gold);
 }
 
 .gm-town-army-nobody {

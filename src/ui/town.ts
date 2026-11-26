@@ -36,6 +36,7 @@ import type {
   ArmySlots,
   CommandResult,
   GameState,
+  HeroState,
   SlotRef,
   TownState,
 } from "../core/game/index.ts";
@@ -57,8 +58,13 @@ import {
 } from "../data/economy.ts";
 import type { BuildingId, CreatureId } from "../data/types.ts";
 import { townArmyMove, wireArmyDrag, type ArmyDrag } from "./army.ts";
-import { armyBand, armyFigure, armySlotViews } from "./hero-screen.ts";
-import type { ArmySlotView } from "./hero-screen.ts";
+import {
+  armyBand,
+  armyFigure,
+  armySlotViews,
+  openHeroScreen,
+} from "./hero-screen.ts";
+import type { ArmySlotView, HeroScreenHost } from "./hero-screen.ts";
 import { rulesText } from "./keywords.ts";
 import { guildLevels, guildView } from "./guild-learning.ts";
 import { guildDialog, guildLevelPane, showLearnt } from "./town-guild.ts";
@@ -138,6 +144,61 @@ function firstChoice(
     ids[0] ??
     null
   );
+}
+
+/**
+ * The visiting hero's cell at the head of the town's hero row: the
+ * portrait at 2x and the name. A click (or Enter) opens the hero sheet
+ * over the town (bead bzc.94).
+ */
+export function visitingHeroLead(
+  hero: HeroState,
+  onOpen: (heroId: string) => void,
+): HTMLButtonElement {
+  const portrait = namedHeroPortrait(hero.defId, hero.heroClass);
+  const lead = el(
+    "button.gm-town-army-lead.gm-town-army-hero",
+    img(portrait.key, "gm-town-army-portrait", 2),
+    el("span.gm-town-army-caption", hero.name),
+  );
+  lead.type = "button";
+  lead.dataset["hero"] = hero.id;
+  lead.setAttribute("aria-label", `${hero.name}: open the hero sheet`);
+  setTip(lead, () =>
+    tipCard(
+      hero.name,
+      [
+        "Visiting the town: move stacks between the hero and the garrison.",
+        "Click the portrait for the hero sheet.",
+      ],
+      {
+        icon: img(portrait.key),
+        subtitle: `${getHeroClass(hero.heroClass).name}, level ${hero.level}`,
+      },
+    ),
+  );
+  lead.addEventListener("click", () => onOpen(hero.id));
+  return lead;
+}
+
+/**
+ * Opens a hero's sheet over the town screen (bead bzc.94) and redraws the
+ * town when it closes: the town stays open underneath with its selected
+ * building, and shows whatever the sheet changed (the army, the items).
+ * The sheet's spellbook is read only here (the host has no canCast): a
+ * spell is cast from the map. `open` is the hero screen (tests stub it).
+ */
+export async function openHeroFromTown(
+  host: TownHost,
+  heroId: string,
+  redraw: () => void,
+  open: (
+    host: HeroScreenHost,
+    heroId: string,
+  ) => Promise<unknown> = openHeroScreen,
+): Promise<void> {
+  await open({ state: () => host.state(), run: (r) => host.run(r) }, heroId);
+  redraw();
 }
 
 export function openTownScreen(host: TownHost, townId: string): Promise<void> {
@@ -424,24 +485,11 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
 
       let visitor: HTMLElement;
       if (hero !== undefined) {
-        const portrait = namedHeroPortrait(hero.defId, hero.heroClass);
-        const lead = el(
-          "div.gm-town-army-lead.gm-town-army-hero",
-          img(portrait.key, "gm-town-army-portrait", 2),
-          el("span.gm-town-army-caption", hero.name),
-        );
-        setTip(lead, () =>
-          tipCard(
-            hero.name,
-            [
-              "Visiting the town: move stacks between the hero and the garrison.",
-            ],
-            {
-              icon: img(portrait.key),
-              subtitle: `${getHeroClass(hero.heroClass).name}, level ${hero.level}`,
-            },
-          ),
-        );
+        const lead = visitingHeroLead(hero, (id) => {
+          // A stack picked up is put back: the sheet may move the army.
+          selected = null;
+          void openHeroFromTown(host, id, render);
+        });
         visitor = el("div.gm-town-army-row", lead, band("hero", hero.army));
       } else {
         const lead = el(

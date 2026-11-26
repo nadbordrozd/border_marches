@@ -72,6 +72,7 @@ import {
   button,
   el,
   img,
+  imageUrl,
   kbd,
   keyButton,
   modal,
@@ -814,20 +815,23 @@ class GameScreen {
       b.style.setProperty("--fill", `${fill}%`);
       return b;
     };
+    // Bead bzc.94: a framed 48 px portrait between a movement bar (left)
+    // and a mana bar (right), as Heroes' hero list; the name is in the
+    // hover card, the label and the selected hero's card below.
     for (const h of own) {
       const row = heroRow(h);
       const item = el(
         "button.gm-hero-row",
-        img(
-          namedHeroPortrait(h.defId, h.heroClass).key,
-          "gm-hero-row-portrait",
-        ),
+        bar("mp", row.mpPct),
         el(
-          "span.gm-hero-row-body",
-          el("span.gm-hero-row-name", h.name),
-          bar("mp", row.mpPct),
-          bar("mana", row.manaPct),
+          "span.gm-hero-row-frame",
+          img(
+            namedHeroPortrait(h.defId, h.heroClass).key,
+            "gm-hero-row-portrait",
+          ),
         ),
+        bar("mana", row.manaPct),
+        el("span.gm-hero-row-name", h.name),
       );
       item.type = "button";
       item.setAttribute(
@@ -978,14 +982,24 @@ class GameScreen {
       const row = townRow(this.state, id, buildable.has(id));
       if (row === null) return;
       const b = button("", () => void this.openTown(id), "gm-town-item");
-      // Crest: a shield in the faction colour (UI2-06).
-      const crest = el("span.gm-town-crest");
-      crest.style.setProperty("--crest", row.colour);
-      crest.setAttribute("aria-hidden", "true");
-      b.append(crest, el("span.gm-town-item-name", row.name));
+      // Bead bzc.94: the town's picture (its map sprite on the faction's
+      // backdrop) in a frame, a band in the faction colour on top, the
+      // name under it; the growth flag and BUILD badge on the picture.
+      b.style.setProperty("--crest", row.colour);
+      const pic = el("span.gm-town-pic");
+      if (row.backdrop !== null)
+        pic.style.backgroundImage = `url("${imageUrl(row.backdrop)}")`;
+      else pic.classList.add("gm-town-pic-plain");
+      const sprite = img(row.art, "gm-town-pic-art");
+      const at = row.thumb;
+      sprite.style.width = `${at.width}px`;
+      sprite.style.height = `${at.height}px`;
+      sprite.style.left = `calc(50% + ${at.fromCentre}px)`;
+      sprite.style.top = `${at.top}px`;
+      pic.append(sprite);
       // Growth flag: creatures wait in the dwellings.
       if (row.ready > 0) {
-        b.append(
+        pic.append(
           el(
             "span.gm-town-grow",
             el("span.gm-town-grow-flag"),
@@ -993,8 +1007,19 @@ class GameScreen {
           ),
         );
       }
-      if (row.build) b.append(el("span.gm-town-build", "build"));
-      if (i === 0) b.append(kbd("T"));
+      if (row.build) pic.append(el("span.gm-town-build", "build"));
+      if (i === 0) pic.append(kbd("T"));
+      b.append(pic, el("span.gm-town-item-name", row.name));
+      b.setAttribute(
+        "aria-label",
+        [
+          row.name,
+          row.ready > 0 ? `${row.ready} creatures to recruit` : "",
+          row.build ? "can build today" : "",
+        ]
+          .filter((s) => s !== "")
+          .join(", "),
+      );
       setTip(b, () => this.townTip(id));
       list.append(b);
     });
