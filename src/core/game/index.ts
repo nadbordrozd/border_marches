@@ -83,6 +83,8 @@ export {
   build,
   buildStatus,
   recruit,
+  recruitAll,
+  recruitAllPlan,
   transferStack,
   marketTrade,
   marketQuote,
@@ -90,6 +92,9 @@ export {
   heroInTownOf,
   type BuildStatus,
   type MarketQuote,
+  type RecruitAllBlock,
+  type RecruitAllPlan,
+  type RecruitAllStep,
   type SlotRef,
   type TransferArgs,
 } from "./town.ts";

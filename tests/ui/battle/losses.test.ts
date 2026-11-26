@@ -1,6 +1,7 @@
-// After-battle losses per unit type (bead border_marches-bzc.92): the
-// result screen sums every stack of one creature into one row per side,
-// from the survivors the game applies.
+// After-battle losses per unit type (beads border_marches-bzc.92, bzc.104):
+// the result screen sums every stack of one creature into one row per side,
+// from the survivors the game applies, and lists only the types that lost
+// units, each with the number killed.
 import { describe, expect, it } from "vitest";
 import type {
   BattleResult,
@@ -8,7 +9,7 @@ import type {
 } from "../../../src/core/game/battle.ts";
 import {
   battleLosses,
-  lossText,
+  NO_LOSSES,
   totalsByCreature,
 } from "../../../src/ui/battle/losses.ts";
 
@@ -47,22 +48,20 @@ describe("battle losses", () => {
     },
   } as unknown as BattleSetup;
 
-  it("gives one row per creature type per side with the total lost", () => {
+  it("gives one row per creature type that lost units, with the number killed", () => {
     const result: BattleResult = {
       winner: "attacker",
       attacker: [4, 2, 0],
       defender: [0, 0, 0],
     };
     const l = battleLosses(setup, result);
+    // The trolls lost nothing: no row.
     expect(l.attacker).toEqual([
       { creature: "goblin", before: 16, left: 4, lost: 12 },
-      { creature: "troll", before: 2, left: 2, lost: 0 },
     ]);
     expect(l.defender).toEqual([
       { creature: "wolf-rider", before: 10, left: 0, lost: 10 },
     ]);
-    expect(l.attacker.map(lossText)).toEqual(["12 of 16 lost", "none lost"]);
-    expect(l.defender.map(lossText)).toEqual(["all 10 lost"]);
   });
 
   it("counts a loser's whole army as lost, as the game applies it", () => {
@@ -72,15 +71,23 @@ describe("battle losses", () => {
       attacker: [0, 0, 0],
       defender: [2, 3, 0],
     });
-    expect(l.attacker.map((r) => r.lost)).toEqual([16, 2]);
+    expect(l.attacker.map((r) => [r.creature, r.lost])).toEqual([
+      ["goblin", 16],
+      ["troll", 2],
+    ]);
     expect(l.defender).toEqual([
       { creature: "wolf-rider", before: 10, left: 5, lost: 5 },
     ]);
   });
 
-  it("says a single creature was lost without a count", () => {
-    expect(lossText({ creature: "troll", before: 1, left: 0, lost: 1 })).toBe(
-      "lost",
-    );
+  it("leaves a side that lost nothing with no rows", () => {
+    const l = battleLosses(setup, {
+      winner: "attacker",
+      attacker: [10, 2, 6],
+      defender: [0, 0, 0],
+    });
+    expect(l.attacker).toEqual([]);
+    expect(l.defender.map((r) => r.lost)).toEqual([10]);
+    expect(NO_LOSSES).toBe("No losses");
   });
 });

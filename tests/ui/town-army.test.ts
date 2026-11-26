@@ -6,7 +6,11 @@
 // boxes. No DOM library in the unit tier: tests/ui/fake-dom.ts.
 import { describe, expect, it } from "vitest";
 import { build, transferStack } from "../../src/core/game/index.ts";
-import type { GameState, SlotRef } from "../../src/core/game/index.ts";
+import type {
+  GameState,
+  RecruitAllPlan,
+  SlotRef,
+} from "../../src/core/game/index.ts";
 import { newGame } from "../../src/core/game/newGame.ts";
 import type { ArmySlots, TownState } from "../../src/core/game/types.ts";
 import { getCreature } from "../../src/data/creatures.ts";
@@ -22,6 +26,8 @@ import {
   daysToGrowth,
   dwellingStrip,
   growthNote,
+  RECRUIT_ALL_BLOCKED,
+  recruitAllSummary,
   recruitQuote,
 } from "../../src/ui/town-dwellings.ts";
 import { hallLayout } from "../../src/ui/town-hall.ts";
@@ -333,5 +339,40 @@ describe("recruitQuote: the four boxes", () => {
     const poor = recruitQuote(squire, 10, purse(gold - 1));
     expect(poor.max).toBe(0);
     expect(poor.reason).toBe("Not enough gold for one.");
+  });
+});
+
+describe("recruit all: the toast and the greyed button (bead bzc.104)", () => {
+  const plan = (
+    steps: Array<{ creature: string; count: number }>,
+  ): RecruitAllPlan => ({
+    steps: steps.map((s) => ({
+      creature: s.creature as CreatureId,
+      count: s.count,
+      to: "garrison",
+    })),
+    cost: { gold: 0, wood: 0, ore: 0, essence: 0 },
+    blocked: steps.length === 0 ? "no-stock" : null,
+  });
+
+  it("lists what was bought, highest tier first, singular for one", () => {
+    expect(
+      recruitAllSummary(
+        plan([
+          { creature: "t-rex", count: 1 },
+          { creature: "raptor", count: 3 },
+          { creature: "caveman", count: 14 },
+        ]),
+      ),
+    ).toBe("Recruited 1 T-Rex, 3 Raptors and 14 Cavemen.");
+    expect(recruitAllSummary(plan([{ creature: "raptor", count: 1 }]))).toBe(
+      "Recruited 1 Raptor.",
+    );
+    expect(recruitAllSummary(plan([]))).toBe("Nothing recruited.");
+  });
+
+  it("says why nothing can be bought", () => {
+    expect(RECRUIT_ALL_BLOCKED.resources).toMatch(/not enough resources/);
+    expect(RECRUIT_ALL_BLOCKED["army-full"]).toMatch(/no free slot/);
   });
 });

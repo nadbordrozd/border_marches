@@ -2778,11 +2778,25 @@
   flex-direction: column;
 }
 
-.gm-dwell-note {
+/* The foot: the growth note, and "Recruit all" at the right (bzc.104). */
+.gm-dwell-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   margin-top: auto;
   padding-top: 5px;
+}
+
+.gm-dwell-note {
   font-size: 11px;
   color: var(--gm-dim);
+}
+
+.gm-recruit-all {
+  flex: none;
+  padding: 3px 10px;
+  font-size: 12px;
 }
 
 /* The cells share whatever height the column leaves (1920x1080: tall). */

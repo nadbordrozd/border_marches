@@ -29,6 +29,8 @@ import {
   marketQuote,
   marketTrade,
   recruit,
+  recruitAll,
+  recruitAllPlan,
   townIncome,
   transferStack,
 } from "../core/game/index.ts";
@@ -69,7 +71,14 @@ import { rulesText } from "./keywords.ts";
 import { guildLevels, guildView } from "./guild-learning.ts";
 import { guildDialog, guildLevelPane, showLearnt } from "./town-guild.ts";
 import { guildLevelOf } from "../core/magic/index.ts";
-import { dwellingStrip, growthNote, recruitQuote } from "./town-dwellings.ts";
+import {
+  dwellingStrip,
+  growthNote,
+  RECRUIT_ALL_BLOCKED,
+  recruitAllList,
+  recruitAllSummary,
+  recruitQuote,
+} from "./town-dwellings.ts";
 import { specialtyText } from "../core/game/effects.ts";
 import { abilityText, creatureTip, unlockedBy } from "./info-tips.ts";
 import { findFaction } from "../data/factions.ts";
@@ -92,6 +101,7 @@ import {
   keyButton,
   modal,
   resourceIcon,
+  toast,
 } from "./dom.ts";
 
 export interface TownHost {
@@ -223,6 +233,15 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       if (e.key === "Escape" || e.key === "Enter") {
         e.preventDefault();
         close();
+      } else if (
+        (e.key === "r" || e.key === "R") &&
+        !e.ctrlKey &&
+        !e.metaKey &&
+        !e.altKey &&
+        !(e.target instanceof HTMLInputElement)
+      ) {
+        e.preventDefault();
+        doRecruitAll();
       }
     };
     window.addEventListener("keydown", onKey);
@@ -276,6 +295,62 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           void countUp(count, left, now, 420);
         }
       });
+    };
+
+    /**
+     * "Recruit all" (bead bzc.104): from the highest tier down, as many as
+     * the stock and the treasury allow, then a toast of what was bought
+     * and each emptied dwelling's count ticking down.
+     */
+    const doRecruitAll = (): void => {
+      const state = host.state();
+      const plan = recruitAllPlan(state, townId);
+      if (plan.steps.length === 0) return;
+      const before = new Map(
+        plan.steps.map((s) => [
+          s.creature,
+          state.towns[townId]?.dwellings[s.creature]?.available ?? 0,
+        ]),
+      );
+      if (!run(recruitAll(state, townId))) return;
+      const top = plan.steps[0];
+      if (top !== undefined)
+        playSound(recruitCue(getCreature(top.creature).faction));
+      toast(recruitAllSummary(plan), "gain");
+      fxEvent("ui.recruit.count");
+      for (const [creature, left] of before) {
+        const now = host.state().towns[townId]?.dwellings[creature]?.available;
+        const node = root.querySelector<HTMLElement>(
+          `[data-stock="${creature}"]`,
+        );
+        const count = node?.querySelector<HTMLElement>(".gm-stock-count");
+        if (node && count && now !== undefined && now !== left) {
+          bump(node);
+          void countUp(count, left, now, 420);
+        }
+      }
+    };
+
+    /** The strip's "Recruit all" button, greyed with the reason when idle. */
+    const recruitAllButton = (): HTMLButtonElement => {
+      const plan = recruitAllPlan(host.state(), townId);
+      const b = keyButton(
+        "Recruit all",
+        "R",
+        doRecruitAll,
+        "gm-btn gm-recruit-all",
+      );
+      b.disabled = plan.steps.length === 0;
+      if (plan.blocked !== null) b.title = RECRUIT_ALL_BLOCKED[plan.blocked];
+      else
+        setTip(b, () =>
+          tipCard("Recruit all", [
+            "Buys from the highest tier down, as many as the dwellings have and the treasury allows.",
+            `Now: ${recruitAllList(plan)}.`,
+            el("div.gm-tip-line", "Cost: ", costView(plan.cost)),
+          ]),
+        );
+      return b;
     };
 
     /** Selects a building: the tiles' outline and the detail pane follow. */
@@ -591,7 +666,14 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         }
         grid.append(cell);
       }
-      box.append(grid, el("div.gm-dwell-note", growthNote(day)));
+      box.append(
+        grid,
+        el(
+          "div.gm-dwell-foot",
+          el("div.gm-dwell-note", growthNote(day)),
+          recruitAllButton(),
+        ),
+      );
       return box;
     };
 

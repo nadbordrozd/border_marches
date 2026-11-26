@@ -89,7 +89,7 @@ import { setTip, tipCard } from "../tooltip.ts";
 import { hoverIntent, indexLegalActions, pointAtField } from "./intent.ts";
 import type { HoverIntent, LegalIndex } from "./intent.ts";
 import { conjugate, creatureName, summarizePreview } from "./preview.ts";
-import { battleLosses, lossText } from "./losses.ts";
+import { battleLosses, NO_LOSSES } from "./losses.ts";
 import { getCreature } from "../../data/creatures.ts";
 import {
   castAction,
@@ -2898,7 +2898,8 @@ class BattleScreen {
           : `After ${engine.rounds} round${engine.rounds === 1 ? "" : "s"}.`,
       ),
     );
-    // One row per creature type per side, its stacks summed (bead bzc.92).
+    // One row per creature type that lost units, its stacks summed, with
+    // just the number killed (beads bzc.92, bzc.104).
     const losses = battleLosses(this.setup, result);
     const cols = el("div", "bm-result-cols");
     for (const side of ["attacker", "defender"] as const) {
@@ -2921,13 +2922,12 @@ class BattleScreen {
         }
         const def = getCreature(r.creature);
         row.append(
-          el("span", "", r.before === 1 ? def.name : def.plural),
-          el("span", "bm-num", lossText(r)),
+          el("span", "", r.lost === 1 ? def.name : def.plural),
+          el("span", "bm-num", String(r.lost)),
         );
-        if (r.lost === 0) row.classList.add("bm-dim");
         col.append(row);
       }
-      if (losses[side].length === 0) col.append(el("div", "bm-dim", "none"));
+      if (losses[side].length === 0) col.append(el("div", "bm-dim", NO_LOSSES));
       cols.append(col);
     }
     box.append(cols);

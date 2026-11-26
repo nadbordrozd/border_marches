@@ -14,11 +14,22 @@ import {
 import { buildingDef, townTree } from "../../data/factions.ts";
 import { KEYSTONE_ITEM } from "../../data/factionTowns.ts";
 import { ARMY_SLOTS } from "../../data/hero.ts";
-import type { BuildingId, CreatureId, ResourceId } from "../../data/types.ts";
+import type {
+  BuildingId,
+  CreatureId,
+  ResourceId,
+  Resources,
+} from "../../data/types.ts";
 import { learnInTown } from "../magic/adventure.ts";
 import { vowBarsCreature } from "./hero.ts";
 import { weeklyGrowth } from "./progression.ts";
-import { canAfford, scaleResources, subtractResources } from "./resources.ts";
+import {
+  canAfford,
+  emptyResources,
+  maxAffordable,
+  scaleResources,
+  subtractResources,
+} from "./resources.ts";
 import {
   addToArmy,
   armySize,
@@ -251,6 +262,127 @@ export function recruit(
     "player",
   );
   p.resources = subtractResources(p.resources, cost);
+  return success(next);
+}
+
+/** One purchase of {@link recruitAllPlan}: a dwelling's creatures and where they go. */
+export interface RecruitAllStep {
+  readonly creature: CreatureId;
+  readonly count: number;
+  readonly to: "hero" | "garrison";
+}
+
+/** Why "Recruit all" buys nothing. */
+export type RecruitAllBlock =
+  "not-owner" | "no-dwellings" | "no-stock" | "resources" | "army-full";
+
+export interface RecruitAllPlan {
+  /** Highest tier first; empty when nothing can be bought. */
+  readonly steps: readonly RecruitAllStep[];
+  /** What the whole plan costs. */
+  readonly cost: Resources;
+  /** Why `steps` is empty, or null. */
+  readonly blocked: RecruitAllBlock | null;
+}
+
+/**
+ * The town's "Recruit all" (bead bzc.104): from the highest tier dwelling
+ * down, as many creatures as the stock and the owner's treasury allow
+ * (every resource of the cost counts), each placed by {@link recruit}'s
+ * rule: the visiting hero's army (merging a stack of the same creature or
+ * taking a free slot) unless a vow bars it, else the garrison; a creature
+ * with no slot in either is skipped. Within a tier the dearer creature
+ * goes first. Pure: the state is not changed.
+ */
+export function recruitAllPlan(
+  state: GameState,
+  townId: string,
+): RecruitAllPlan {
+  const none = (blocked: RecruitAllBlock): RecruitAllPlan => ({
+    steps: [],
+    cost: emptyResources(),
+    blocked,
+  });
+  const town = state.towns[townId];
+  if (town === undefined || town.owner === null) return none("not-owner");
+  const player = state.players.find((p) => p.id === town.owner);
+  if (player === undefined) return none("not-owner");
+  const stocked = (Object.keys(town.dwellings) as CreatureId[])
+    .filter((c) => isCreatureId(c))
+    .map((c) => ({
+      creature: c,
+      available: town.dwellings[c]?.available ?? 0,
+      def: getCreature(c),
+    }));
+  if (stocked.length === 0) return none("no-dwellings");
+  const order = stocked
+    .filter((d) => d.available > 0)
+    .sort(
+      (a, b) =>
+        b.def.tier - a.def.tier ||
+        (b.def.cost.gold ?? 0) - (a.def.cost.gold ?? 0) ||
+        a.creature.localeCompare(b.creature),
+    );
+  if (order.length === 0) return none("no-stock");
+
+  const hero = heroInTownOf(state, town);
+  const heroArmy: ArmySlots | null =
+    hero === undefined
+      ? null
+      : hero.army.map((s) => (s === null ? s : { ...s }));
+  const garrison: ArmySlots = town.garrison.map((s) =>
+    s === null ? s : { ...s },
+  );
+  let have: Resources = { ...player.resources };
+  const steps: RecruitAllStep[] = [];
+  let affordable = false;
+  for (const d of order) {
+    const count = Math.min(d.available, maxAffordable(have, d.def.cost));
+    if (count < 1) continue;
+    affordable = true;
+    const intoHero =
+      heroArmy !== null &&
+      hero !== undefined &&
+      vowBarsCreature(hero, d.creature) === null &&
+      slotFor(heroArmy, d.creature) >= 0;
+    const to = intoHero ? "hero" : "garrison";
+    const army = intoHero ? heroArmy : garrison;
+    if (army === null || !addToArmy(army, d.creature, count)) continue;
+    have = subtractResources(have, scaleResources(d.def.cost, count));
+    steps.push({ creature: d.creature, count, to });
+  }
+  if (steps.length === 0) return none(affordable ? "army-full" : "resources");
+  return {
+    steps,
+    cost: subtractResources({ ...player.resources }, have),
+    blocked: null,
+  };
+}
+
+const RECRUIT_ALL_ERRORS = {
+  "not-owner": "not-owner",
+  "no-dwellings": "no-dwelling",
+  "no-stock": "stock",
+  resources: "resources",
+  "army-full": "army-full",
+} as const;
+
+/**
+ * Carries out {@link recruitAllPlan} as one command: each step is a
+ * {@link recruit} into the army the plan chose.
+ */
+export function recruitAll(state: GameState, townId: string): CommandResult {
+  const plan = recruitAllPlan(state, townId);
+  if (plan.steps.length === 0) {
+    const blocked = plan.blocked ?? "no-stock";
+    return fail(RECRUIT_ALL_ERRORS[blocked], `nothing to recruit: ${blocked}`);
+  }
+  let next = state;
+  for (const step of plan.steps) {
+    const r = recruit(next, townId, step.creature, step.count, step.to);
+    if (!r.ok) return r;
+    next = r.state;
+  }
   return success(next);
 }
 

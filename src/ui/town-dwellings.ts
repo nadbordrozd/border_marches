@@ -9,13 +9,19 @@
  * - {@link recruitQuote} is the recruit dialog's four boxes, Heroes III
  *   style: cost each, available, to recruit and total, with the most the
  *   player can recruit and, when that is none, why.
+ * - {@link recruitAllSummary} and {@link RECRUIT_ALL_BLOCKED} are the
+ *   "Recruit all" button's toast and disabled tooltip (bead bzc.104).
  */
 import {
   maxAffordable,
   scaleResources,
   weeklyGrowth,
 } from "../core/game/index.ts";
-import type { TownState } from "../core/game/index.ts";
+import type {
+  RecruitAllBlock,
+  RecruitAllPlan,
+  TownState,
+} from "../core/game/index.ts";
 import type { ResourceId } from "../core/map/types.ts";
 import { getCreature } from "../data/creatures.ts";
 import { RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
@@ -105,6 +111,37 @@ export interface RecruitQuote {
 function shortOf(cost: ResourceAmounts, have: Resources): ResourceId | null {
   return RESOURCE_IDS.find((r) => (cost[r] ?? 0) > have[r]) ?? null;
 }
+
+/**
+ * What a "Recruit all" plan buys (bead bzc.104), in its order (highest
+ * tier first): "1 T-Rex, 3 Raptors and 14 Cavemen"; "" for none.
+ */
+export function recruitAllList(plan: RecruitAllPlan): string {
+  const parts = plan.steps.map((s) => {
+    const def = getCreature(s.creature);
+    return `${s.count} ${s.count === 1 ? def.name : def.plural}`;
+  });
+  const last = parts.pop() ?? "";
+  return parts.length > 0 ? `${parts.join(", ")} and ${last}` : last;
+}
+
+/** The toast after "Recruit all": "Recruited 1 T-Rex and 3 Raptors." */
+export function recruitAllSummary(plan: RecruitAllPlan): string {
+  return plan.steps.length === 0
+    ? "Nothing recruited."
+    : `Recruited ${recruitAllList(plan)}.`;
+}
+
+/** Why "Recruit all" is disabled: the tooltip of the greyed button. */
+export const RECRUIT_ALL_BLOCKED: Readonly<Record<RecruitAllBlock, string>> = {
+  "not-owner": "Only the town's owner can recruit here.",
+  "no-dwellings": "Nothing to recruit: build a dwelling first.",
+  "no-stock":
+    "Nothing to recruit: the dwellings are empty until day 1 of next week.",
+  resources: "Nothing to recruit: not enough resources for any creature.",
+  "army-full":
+    "Nothing to recruit: the garrison and the visiting hero have no free slot.",
+};
 
 export function recruitQuote(
   creature: CreatureId,

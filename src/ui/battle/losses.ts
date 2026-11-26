@@ -1,10 +1,11 @@
 /**
- * After-battle losses per unit type (bead bzc.92): the result screen lists
- * one row per creature per side, summing every stack of that creature,
- * instead of one row per stack. Losses come from the game-level result
- * (the survivors the game applies), so a side that loses everything shows
- * everything lost and a crumbling risen stack counts as lost. Summoned
- * stacks are not part of either army and are left out.
+ * After-battle losses per unit type (beads bzc.92, bzc.104): the result
+ * screen lists, per side, one row per creature type that lost units,
+ * summing every stack of that creature, with just the number killed; a
+ * type that lost nothing is left out. Losses come from the game-level
+ * result (the survivors the game applies), so a side that loses everything
+ * shows everything lost and a crumbling risen stack counts as lost.
+ * Summoned stacks are not part of either army and are left out.
  */
 import type {
   BattleResult as GameBattleResult,
@@ -71,20 +72,20 @@ function sideRows(
   return rows.map((r) => ({ ...r, lost: r.before - r.left }));
 }
 
-/** Each side's losses, one row per creature type, in deployment order. */
+/**
+ * Each side's losses, one row per creature type that lost units, in
+ * deployment order; types with no losses are left out.
+ */
 export function battleLosses(
   setup: GameBattleSetup,
   result: GameBattleResult,
 ): BattleLosses {
+  const killed = (rows: LossRow[]): LossRow[] => rows.filter((r) => r.lost > 0);
   return {
-    attacker: sideRows(setup.attacker.stacks, result.attacker),
-    defender: sideRows(setup.defender.stacks, result.defender),
+    attacker: killed(sideRows(setup.attacker.stacks, result.attacker)),
+    defender: killed(sideRows(setup.defender.stacks, result.defender)),
   };
 }
 
-/** "12 of 30 lost", "all 5 lost" or "none lost". */
-export function lossText(row: LossRow): string {
-  if (row.lost === 0) return "none lost";
-  if (row.left === 0) return row.before === 1 ? "lost" : `all ${row.lost} lost`;
-  return `${row.lost} of ${row.before} lost`;
-}
+/** The line a side with no losses shows instead of rows. */
+export const NO_LOSSES = "No losses";
