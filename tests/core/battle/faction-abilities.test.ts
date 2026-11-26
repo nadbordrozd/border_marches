@@ -596,7 +596,7 @@ describe("The Horde's abilities", () => {
     });
     expect(strikes(events)).toEqual([]);
     expect(getStack(state, "a0").hex).toEqual(at(7, 5));
-    expect(countTop(state, "a0")).toEqual([10, 8]);
+    expect(countTop(state, "a0")).toEqual([10, 10]);
   });
 
   it("Fire Pots: the centre stack Burns 2 per Bomb Chucker", () => {

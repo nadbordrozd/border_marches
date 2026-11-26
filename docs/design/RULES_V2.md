@@ -675,7 +675,8 @@ Defense or Speed; Speed at half, rounded down, minimum 1).
   doubles a clock, an area, a number of targets or a second number.
   A spell with no marked size cannot be Fuelled.
 - Each hero may Fuel once per battle (1.11 for the ceiling).
-- Any condition qualifies: on friend or foe, boon or bane, made by anyone.
+- Any condition qualifies: on friend or foe, boon or bane, made by anyone,
+  except Sworn (FACTION_HUMANS 3; balance round 4).
 
 Echo and Fuel are chosen with the cast and resolve before the spell, in
 that order, using conditions already on the board. One cast may use both.
@@ -781,8 +782,10 @@ cap its guild below 5 (set in faction data, with building costs).
 - Drawing is weighted by the faction's school weights (faction data, 0 to
   4 per school; at least two schools above 0).
 - Guarantees: level 1 has at least one spell of the faction's heaviest
-  school; level 2 of every town has exactly one condition tool, of a
-  school the faction weights above 0.
+  school (and, for a faction that names a second school, one battle
+  spell of that school: the Realm's Bloom since balance round 4); level 2
+  of every town has exactly one condition tool, of a school the faction
+  weights above 0.
 - A hero in a town of its own player learns, at once and free, every
   guild spell it is able to learn (on entering, when a level is built
   while it is there, and at the start of each day).

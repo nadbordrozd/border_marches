@@ -29,10 +29,10 @@ describe("v0.2 faction data", () => {
   it("has six creatures per faction with the documented weekly totals", () => {
     // [gold, wood, ore, essence, fight value] for one week of all six.
     const week = {
-      // Prices tuned by the balance beads (BALANCE.md sections 5, 8 and 9).
+      // Prices tuned by the balance beads (BALANCE.md sections 5, 8, 9, 10).
       humans: [11059, 0, 7, 6, 8335],
       undead: [10625, 0, 2, 9, 7700],
-      goblins: [9280, 11, 3, 4, 7716],
+      goblins: [9340, 11, 3, 4, 7836],
     };
     for (const [faction, roster] of Object.entries(ROSTERS)) {
       expect(roster.map((c) => c.tier)).toEqual([1, 2, 3, 4, 5, 6]);
@@ -87,8 +87,8 @@ describe("v0.2 faction data", () => {
       enchanter: 1795,
       revenant: 1775,
       mortician: 1780,
-      warlord: 1798,
-      weatherwitch: 1800,
+      warlord: 1814,
+      weatherwitch: 1792,
     };
     for (const [id, want] of Object.entries(fv)) {
       const army = getHeroClass(id).startingArmy;

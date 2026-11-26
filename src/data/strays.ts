@@ -263,7 +263,7 @@ export const STRAY_ABILITY_TEXT: Readonly<
   },
   stamp: {
     name: "Stamp",
-    text: "Once per battle, instead of attacking: an enemy stack next to the Notaries becomes Turned for 1 round. Gate 15 HP per Notary.",
+    text: "Once per battle, instead of attacking: an enemy stack next to the Notaries becomes Turned for 1 round. Gate 15 HP per Notary, doubled against a Mollified stack.",
   },
   croon: {
     name: "Croon",
@@ -279,7 +279,7 @@ export const STRAY_ABILITY_TEXT: Readonly<
   },
   "wind-up": {
     name: "Wind Up",
-    text: "Once per battle, instead of attacking: a stack within 3 hexes of the Winders becomes Delayed for 2 rounds.",
+    text: "Once per battle, instead of attacking: a stack within 3 hexes of the Winders becomes Delayed for 2 rounds. Quickened Winders reach 6 hexes.",
   },
   tend: {
     name: "Tend",
@@ -291,7 +291,7 @@ export const STRAY_ABILITY_TEXT: Readonly<
   },
   "dead-to-rights": {
     name: "Dead to Rights",
-    text: "The Gumshoes' shots deal 50% more damage to a Hushed stack.",
+    text: "The Gumshoes' shots ignore Shielded and deal 50% more damage to a Hushed stack.",
   },
   "pressure-suit": {
     name: "Pressure Suit",
@@ -311,7 +311,7 @@ export const STRAY_ABILITY_TEXT: Readonly<
   },
   "cold-front": {
     name: "Cold Front",
-    text: "Once per battle, instead of attacking: every enemy stack next to the Rime Walruses becomes Frozen for 1 round. Gate 15 HP per Walrus.",
+    text: "Once per battle, instead of attacking: every enemy stack next to the Rime Walruses becomes Frozen for 1 round. Gate 15 HP per Walrus, doubled against a Drenched stack.",
   },
   "stand-behind-me": {
     name: "Stand Behind Me",

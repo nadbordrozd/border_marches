@@ -277,7 +277,6 @@ const heroStart: EffectFn = (fx, args, owner) => {
     clock: rule.clock,
     // A gateless Hold says so (CONTENT_ARTIFACTS 4); rules give no gate.
     gate: null,
-    tier: rule.tier ?? 3,
     source: rule.source ?? owner.source,
   };
   for (const s of selectStacks(

@@ -33,7 +33,7 @@ a faction; strays and caretakers take over guard duty (concept section 7).
 
 | School | Bloom | Accord | Clock | Hush | Storm |
 | ------ | ----: | -----: | ----: | ---: | ----: |
-| Weight |     4 |      0 |     1 |    2 |     3 |
+| Weight |     4 |      0 |     2 |    2 |     2 |
 
 - **Magic Guild cap: level 3.** The Horde learns tier 4 and 5 pages only in
   captured towns and at shrines, and leans on scrolls. The heaviest school
@@ -43,10 +43,13 @@ a faction; strays and caretakers take over guard duty (concept section 7).
   Storm 4, Bloom 3 until balance round 3 ([BALANCE.md](BALANCE.md)
   section 9), when a Weatherwitch with three or four Storm damage pages
   at level 5 won four battles in five against the other magic heroes.
+  Balance round 4 (section 10) moved one more weight from Storm to Clock
+  (Clock 2, Storm 2; was Clock 1, Storm 3).
 - **What the wheel gives the Horde.** Storm owns area Harm, and Launched
   turns every area page into one a goblin army can cast into its own melee.
-  Storm is opposed to Accord and Clock: a Sworn link, a Challenged or a
-  Delayed on the target is Fuel for a doubled blast. Bloom is allied, so a
+  Storm is opposed to Accord and Clock: a Challenged or a Delayed on the
+  target is Fuel for a doubled blast (a Sworn link is not, since balance
+  round 4). Bloom is allied, so a
   Storm page can Echo the Wolf Riders' Venomed.
 
 ## 3. Birthright: Launched
@@ -73,21 +76,22 @@ RULES_V2 1.10, "area effects apply to their targets".
 
 | Tier | Unit         |  HP | Atk | Def | Dmg | Speed | Shots | Growth/week | Cost                       |   FV | Abilities                    |
 | ---: | ------------ | --: | --: | --: | --: | ----: | ----: | ----------: | -------------------------- | ---: | ---------------------------- |
-|    1 | Goblin       |   8 |   4 |   2 |   2 |     5 |     - |          20 | 37 gold                    |   52 | Cannonball                   |
+|    1 | Goblin       |  10 |   4 |   2 |   2 |     5 |     - |          20 | 40 gold                    |   58 | Cannonball                   |
 |    2 | Bomb Chucker |  12 |   6 |   3 |   3 |     4 |     8 |          10 | 110 gold                   |  109 | Bomb                         |
 |    3 | Wolf Rider   |  18 |   7 |   5 |   4 |     8 |     - |           8 | 190 gold                   |  136 | Worry                        |
 |    4 | Boomshaman   |  28 |   7 |   6 |   6 |     5 |     - |           4 | 380 gold + 1 essence       |  214 | Caster: Thunderclap, Set off |
 |    5 | Ogre         |  90 |  14 |  12 |  16 |     4 |     - |           2 | 950 gold + 3 wood          |  873 | Hurl                         |
 |    6 | Orc Warboss  | 160 |  18 |  15 |  32 |     6 |     - |           1 | 2500 gold + 5 wood + 3 ore | 1896 | Stomp                        |
 
-One week of all six dwellings: 9280 gold (prices tuned by the balance beads,
-[BALANCE.md](BALANCE.md) sections 5, 8 and 9), 11 wood, 3 ore, 4 essence; fight
-value 7716 on paper, before area damage, which the fight value formula does
+One week of all six dwellings: 9340 gold (prices tuned by the balance beads,
+[BALANCE.md](BALANCE.md) sections 5, 8, 9 and 10), 11 wood, 3 ore, 4 essence; fight
+value 7836 on paper, before area damage, which the fight value formula does
 not see. The slowest creature has Speed 4, so a full army moves 1500 a day.
 
-Goblin, Bomb Chucker, Wolf Rider and Ogre keep their MVP neutral stats
+Bomb Chucker, Wolf Rider and Ogre keep their MVP neutral stats
 (GAME_DESIGN 8.1); the Warboss gains 20 HP and 1 Attack and trades Warcry
-for Stomp.
+for Stomp. The Goblin has 10 HP since balance round 4 (was 8; one record,
+so neutral Goblins on the map have it too).
 
 ## 5. Abilities
 
@@ -97,7 +101,7 @@ for Stomp.
 | Bomb Chucker | **Bomb**       | The Bomb Chuckers' shot may target any hex and is an area effect centred there: a shot Strike on the stack in that hex and a shot Strike at x 50% on every stack adjacent to it, friend or foe.                                                                                                                   |
 | Wolf Rider   | **Worry**      | A stack struck by the Wolf Riders (attack or retaliation) gains Venomed, size 3, clock 2 (the MVP Venom).                                                                                                                                                                                                         |
 | Boomshaman   | **Caster**     | Pages: **Thunderclap** and **Set off**. `castPower` 1, `castDivisor` 2, `castCap` 8.                                                                                                                                                                                                                              |
-| Ogre         | **Hurl**       | Activated, usable every turn, in place of an attack (the Ogres may walk first): choose an adjacent stack of any side whose total HP is at most 40 x the Ogres' count. It is pushed 6 hexes directly away from the Ogres.                                                                                          |
+| Ogre         | **Hurl**       | Activated, usable every turn, in place of an attack (the Ogres may walk first): choose an adjacent stack of any side whose total HP is at most 40 x the Ogres' count and that is not Shielded. It is pushed 6 hexes directly away from the Ogres.                                                                 |
 | Orc Warboss  | **Stomp**      | The Warbosses' melee attack is an area effect centred on their own hex: the Strike on the target, and a special Strike at x 50% on every other stack adjacent to the Warbosses, friend or foe. Only the target retaliates. Bends GAME_DESIGN 9.3 (a melee attack strikes one stack). Retaliations are not Stomps. |
 
 - **Thunderclap** is the Storm tier 1 area page at the RULES_V2 2.4 budget:
@@ -142,16 +146,16 @@ The Horde's own 15 Bomb Chuckers shoot the Brutes' hex.
 | Goblins B land three hexes back toward their own lines    | -                                                   | Out of the Brutes' reach this round                                 |
 
 Without the combo, Goblins A attack the Brutes for 25 and the retaliation
-(10 x 6 x 1.30 = 78) kills nine of them. With it, one shot deals 101 damage
+(10 x 6 x 1.30 = 78) kills seven of them. With it, one shot deals 101 damage
 to two stacks, silences the shooters and nobody is retaliated against.
 
 ### 6.2 Fastball, then the boss (Hurl, Cannonball, Stomp)
 
 | Step                                                                                             | Calculation                                               | Result                                                        |
 | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------- | ------------------------------------------------------------- |
-| Round 1. Three Ogres hurl 15 Goblins at 14 enemy Bomb Chuckers across the field                  | Limit 40 x 3 = 120 HP; the Goblins have 120               | The Goblins fly 6 hexes and stop beside the shooters          |
+| Round 1. Four Ogres hurl 15 Goblins at 14 enemy Bomb Chuckers across the field                   | Limit 40 x 4 = 160 HP; the Goblins have 150               | The Goblins fly 6 hexes and stop beside the shooters          |
 | Cannonball at +150%                                                                              | A 7, D 3, M 1.20; 15 x 2 x 1.20 x 2.50 = 90               | 90: **7 of 14 Bomb Chuckers die**, no retaliation, in round 1 |
-| The same Goblins walking there instead                                                           | Two rounds under fire; 15 x 2 x 1.20 = 36, retaliation 18 | 3 kills for 2 dead Goblins, a round later                     |
+| The same Goblins walking there instead                                                           | Two rounds under fire; 15 x 2 x 1.20 = 36, retaliation 18 | 3 kills for 1 dead Goblin, a round later                      |
 | Round 2. Two Warbosses attack 20 Orc Brutes with a second Brute stack and 14 Goblins beside them | A 21, D 6, M 1.75; 2 x 32 x 1.75 = 112, and half that     | 112 on the target (4 kills), 56 on the other stack (2 kills)  |
 | The 14 Goblins are Launched off the Warbosses into a third enemy stack of Brutes                 | A 7, D 6, M 1.05, +75%; 14 x 2 x 1.05 x 1.75 = 51.45      | 51 more, no retaliation                                       |
 
@@ -182,7 +186,7 @@ section 3.2; the content bead fixes the final names.
 | Starting stats  | Attack 3, Defense 1, Power 1, Lore 1  | Attack 1, Defense 0, Power 3, Lore 2                 |
 | Stat pattern    | A, D, A, P, A, D, A, L, A, P          | P, L, P, A, P, L, A, P, L, D                         |
 | Starting skills | Offence 1, Logistics 1                | Storm 1, Scrollcraft 1; page: Thunderclap            |
-| Starting army   | 22 Goblins, 6 Bomb Chuckers (FV 1798) | 18 Goblins, 4 Bomb Chuckers, 2 Boomshamans (FV 1800) |
+| Starting army   | 20 Goblins, 6 Bomb Chuckers (FV 1814) | 16 Goblins, 4 Bomb Chuckers, 2 Boomshamans (FV 1792) |
 | Native terrain  | Badlands                              | Badlands                                             |
 | Command         | Heave-Ho                              | Kaboom                                               |
 

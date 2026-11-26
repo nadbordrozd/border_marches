@@ -80,7 +80,9 @@ describe("the action bar", () => {
       usage: "Every turn, instead of attacking. It may walk first.",
       mode: { kind: "ability", id: "hurl" },
     });
-    expect(hurl.rule).toMatch(/at most 40 HP per Ogre in total/);
+    expect(hurl.rule).toMatch(
+      /at most 40 HP per Ogre, never on a Shielded one/,
+    );
     expect(byKey(bar, "command:heave-ho")).toMatchObject({
       badge: "C2",
       icon: { icon: "skill", id: "banner" },

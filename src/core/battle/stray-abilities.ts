@@ -301,10 +301,13 @@ export function registerStrayAbilities(): void {
     1,
     (fx, a, t) => {
       const n = fx.stack(a).count;
-      tryCondition(fx, target0(t), {
+      const id = target0(t);
+      // Doubled against a Mollified stack (a softened stack signs).
+      const soft = fx.isAlive(id) && bears(fx.stack(id), "mollified") ? 2 : 1;
+      tryCondition(fx, id, {
         kind: "turned",
         clock: 1,
-        gate: { measure: "hp", max: 15 * n },
+        gate: { measure: "hp", max: 15 * n * soft },
         source: "stamp",
       });
     },
@@ -313,15 +316,26 @@ export function registerStrayAbilities(): void {
     const me = fx.stack(a);
     for (const s of adjacentStacks(fx, a)) {
       if (s.side === me.side) continue;
+      // Doubled against a Drenched stack (wet things freeze).
+      const wet = bears(s, "drenched") ? 2 : 1;
       tryCondition(fx, s.id, {
         kind: "frozen",
         clock: 1,
-        gate: { measure: "hp", max: 15 * me.count },
+        gate: { measure: "hp", max: 15 * me.count * wet },
         source: "cold-front",
       });
     }
   });
-  activated("wind-up", oneStack({ within: 3 }), 1, (fx, _a, t) => {
+  // Quickened Winders reach 6 hexes instead of 3.
+  const windUpReach = oneStack({ within: 6 });
+  const windUpShort = oneStack({ within: 3 });
+  const windUpCheck: NonNullable<ActDef["check"]> = (state, actorId, t) => {
+    const me = state.stacks.find((s) => s.id === actorId);
+    return me !== undefined && bears(me, "quickened")
+      ? windUpReach(state, actorId, t)
+      : windUpShort(state, actorId, t);
+  };
+  activated("wind-up", windUpCheck, 1, (fx, _a, t) => {
     tryCondition(fx, target0(t), {
       kind: "delayed",
       clock: 2,

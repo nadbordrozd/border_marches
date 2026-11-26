@@ -118,13 +118,11 @@ export const ABILITY_HOOKS: { readonly [K in AbilityId]: AbilityDef } = {
     onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id) return null;
       const target = ctx.defender.id;
-      const tier = owner.creature.tier;
       return (fx) => {
         fx.addCondition(target, {
           kind: "venomed",
           size: param("venom", "defense"),
           clock: param("venom", "rounds") + 1,
-          tier,
           source: owner.id,
         });
       };

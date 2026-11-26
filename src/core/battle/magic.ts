@@ -291,6 +291,7 @@ export function fuelError(
   if (!c) return "no such condition";
   if (!touchedStacks(state, def, actorId, targets).includes(ref.stack))
     return "Fuel needs a condition on a stack the spell touches";
+  if (c.kind === "sworn") return "Sworn cannot be burnt as Fuel";
   if (schoolRelation(def.school, c.school) !== "opposed")
     return "Fuel needs a condition of an opposed school";
   return null;

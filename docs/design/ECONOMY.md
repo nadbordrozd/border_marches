@@ -29,7 +29,7 @@ Each faction leans on one resource, so a start region binds differently:
 | -------- | --------------- | ------------------------------------------- | ------------------------------------ |
 | Realm    | Gold and wood   | 52,500 / 155 / 104 / 22                     | 11,059 gold, 7 ore, 6 essence        |
 | Restless | Ore and essence | 56,000 / 117 / 132 / 34                     | 10,625 gold, 2 ore, 9 essence        |
-| Horde    | Wood            | 45,800 / 179 / 72 / 13                      | 9280 gold, 11 wood, 3 ore, 4 essence |
+| Horde    | Wood            | 45,800 / 179 / 72 / 13                      | 9340 gold, 11 wood, 3 ore, 4 essence |
 
 ## 2. Starting resources
 
@@ -181,7 +181,7 @@ Fight value (FV) is GAME_DESIGN 8.2. Gold per FV is the gold price alone.
 
 | Tier | Realm                                | Restless                          | Horde                               | Lost World (reference)        |
 | ---: | ------------------------------------ | --------------------------------- | ----------------------------------- | ----------------------------- |
-|    1 | Squire 46 (0.71)                     | Skeleton 42 (0.68)                | Goblin 37 (0.71)                    | Caveman 50 (0.83)             |
+|    1 | Squire 46 (0.71)                     | Skeleton 42 (0.68)                | Goblin 40 (0.69)                    | Caveman 50 (0.83)             |
 |    2 | Longbowman 115 (1.06)                | Ghoul 115 (1.07)                  | Bomb Chucker 110 (1.01)             | Spitter 110 (0.90)            |
 |    3 | Man-at-Arms 240 (1.14)               | Banshee 260 (1.30)                | Wolf Rider 190 (1.40)               | Raptor 220 (1.27)             |
 |    4 | Friar 400 + 1 e (1.70)               | Gravecaller 500 + 1 e (2.07)      | Boomshaman 380 + 1 e (1.78)         | Shaman 450 + 1 e (1.16)       |
@@ -190,8 +190,8 @@ Fight value (FV) is GAME_DESIGN 8.2. Gold per FV is the gold price alone.
 
 | Per week, all six dwellings |  Realm | Restless |  Horde | Lost World |
 | --------------------------- | -----: | -------: | -----: | ---------: |
-| Fight value                 |   8335 |     7700 |   7716 |       8899 |
-| Gold                        | 11,059 |   10,625 |   9280 |     10,230 |
+| Fight value                 |   8335 |     7700 |   7836 |       8899 |
+| Gold                        | 11,059 |   10,625 |   9340 |     10,230 |
 | Gold-equivalent of the rest |   5350 |     5900 |   5900 |       5600 |
 | Tier 6 chain, gold          | 18,000 |   18,000 | 16,000 |     18,000 |
 
@@ -204,7 +204,8 @@ Fight value (FV) is GAME_DESIGN 8.2. Gold per FV is the gold price alone.
   1200, Late King 3600 to 3000, Dragonslayer 3500 to 4000 (BALANCE.md
   section 8). **Round 3 (bzc.38)** moved four: Squire 45 to 46, Skeleton
   45 to 42, Goblin 38 to 37, Gravecaller 420 to 500 (BALANCE.md section
-  9). The week 1 ledgers (8.2) and tier 6 dates (8.3) below are
+  9). **Round 4 (bzc.40)** moved the Goblin: 37 to 40 gold with HP 8 to
+  10 (FV 52 to 58; BALANCE.md section 10). The week 1 ledgers (8.2) and tier 6 dates (8.3) below are
   recomputed with these prices by `node tests/sim/run.mjs
 ./tests/sim/ledger.ts`.
 - The rule: tiers 1 to 3 cost 0.7 to 1.4 gold per FV, rising with tier;
@@ -212,9 +213,9 @@ Fight value (FV) is GAME_DESIGN 8.2. Gold per FV is the gold price alone.
   to 2.1 and an essence**, because its pages are not in its FV (the
   Gravecaller is the dearest since round 3: its summons and Pass on carried
   the Restless's middle game).
-- Weekly gold differs by up to 19% (the Realm pays most, for the
+- Weekly gold differs by up to 18% (the Realm pays most, for the
   strongest late game) and total weekly cost in gold at marketplace buying
-  prices by up to 9% (16,409; 16,525; 15,180).
+  prices by up to 8% (16,409; 16,525; 15,240).
 - Weekly FV differs on purpose. The Restless get a third of each dead
   stack back inside the fight; the Horde's area Strikes and unretaliated
   Cannonballs are not in the formula; the Realm's edge (extra turns,
@@ -254,20 +255,20 @@ and buys every creature it can.
 
 | Day | Pickups and mines        | Build        | Recruit          | Gold | Wood | Ore | Essence |
 | --: | ------------------------ | ------------ | ---------------- | ---: | ---: | --: | ------: |
-|   1 | wood 7, gold 500         | Town Hall    | 20 Goblins       | 4760 |   22 |   8 |       4 |
-|   2 | gold 600, flag Sawmill   | Powder Shed  | 10 Bomb Chuckers | 4560 |   14 |   8 |       4 |
-|   3 | essence 3, wood 6        | Stakes       | -                | 3560 |    8 |   8 |       7 |
-|   4 | ore 4, chest (1000 gold) | Wolf Kennels | 8 Wolf Riders    | 3040 |    3 |  12 |       7 |
-|   5 | flag Essence Spring      | Marketplace  | -                | 3540 |    1 |  14 |       7 |
-|   6 | wood 8                   | Hex Hut      | 4 Boomshamans    | 1220 |    2 |  16 |       2 |
-|   7 | gold 400                 | -            | -                | 2620 |    5 |  18 |       3 |
+|   1 | wood 7, gold 500         | Town Hall    | 20 Goblins       | 4700 |   22 |   8 |       4 |
+|   2 | gold 600, flag Sawmill   | Powder Shed  | 10 Bomb Chuckers | 4500 |   14 |   8 |       4 |
+|   3 | essence 3, wood 6        | Stakes       | -                | 3500 |    8 |   8 |       7 |
+|   4 | ore 4, chest (1000 gold) | Wolf Kennels | 8 Wolf Riders    | 2980 |    3 |  12 |       7 |
+|   5 | flag Essence Spring      | Marketplace  | -                | 3480 |    1 |  14 |       7 |
+|   6 | wood 8                   | Hex Hut      | 4 Boomshamans    | 1160 |    2 |  16 |       2 |
+|   7 | gold 400                 | -            | -                | 2560 |    5 |  18 |       3 |
 
 | Week 1                           |                    Realm |                                     Restless |                                 Horde |
 | -------------------------------- | -----------------------: | -------------------------------------------: | ------------------------------------: |
 | Gold in (start, income, pickups) |                   16,000 |                                       16,000 |                                16,000 |
 | Spent on buildings               |                     9000 |                                         9000 |                                  8500 |
-| Spent on creatures               |                     4959 |                                         5225 |                                  4880 |
-| Army bought, fight value         |                     4308 |                                         4061 |                                  4074 |
+| Spent on creatures               |                     4959 |                                         5225 |                                  4940 |
+| Army bought, fight value         |                     4308 |                                         4061 |                                  4194 |
 | Binding resource                 | Gold (141 left on day 5) | Ore (the Funeral Parlour waits a day for it) | Wood (the Hex Hut waits a day for it) |
 
 Findings:
@@ -291,7 +292,7 @@ Findings:
 
 ### 8.3 When can the player field a tier 6 creature?
 
-A greedy ledger (`tests/sim/ledger.ts`, recomputed for round 3's
+A greedy ledger (`tests/sim/ledger.ts`, recomputed for round 4's
 prices): build the Town Hall, then the tier 6 chain in tree order, one
 building a day as soon as it is affordable, no trading; from week 2 the
 pickups of the section header arrive on the week's days 1 to 5.

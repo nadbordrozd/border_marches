@@ -1,9 +1,10 @@
 # Battle balance (v0.2)
 
 Status: beads `border_marches-bzc.24` (round 1, sections 1-7),
-`border_marches-bzc.36` (round 2, section 8) and `border_marches-bzc.38`
-(round 3, section 9), 2026-11-25. Section 7 lists what round 1 left, 8.6
-what round 2 left, 9.5 what is left now. Simulations are a design
+`border_marches-bzc.36` (round 2, section 8), `border_marches-bzc.38`
+(round 3, section 9), 2026-11-25, and `border_marches-bzc.40` (round 4,
+section 10), 2026-11-26. Section 7 lists what round 1 left, 8.6 what
+round 2 left, 9.5 what round 3 left, 10.6 what is left now. Simulations are a design
 tool, not unit tests: nothing here runs in `npx vitest run`. Every table is
 reproduced by the runner commands next to it.
 
@@ -626,3 +627,144 @@ cell by 5 points either way; and single magic changes are best read with
   but its strongest cell.
 - The attacker wins 51-55% in every cell; about a quarter of battles end
   at the limit (13-34%).
+
+## 10. Round 4 (bzc.40)
+
+Round 3 left the Realm's middle game with heroes and the Restless late
+without heroes. Round 4 also reads balance mode with one leaning per hero
+(level 6, budget 12,000, 80 seeds per ordered pairing), where three
+pairings were above 65%: the magic Horde and the magic Restless attacking
+the Realm, and the might Realm and the might Restless attacking the Horde.
+The bead first gave six conditions users they lacked (Mollified, Shielded,
+Quickened, Slowed, Hushed and Drenched now each change some ability) and
+dropped the dead `ConditionSpec.tier`; the balance changes below are
+content: one rule, two guild settings and one creature. The battle AI is
+unchanged.
+
+### 10.1 Before
+
+"Before" is this bead's condition-users commit (a53ec3b, round 3 merged
+with main at 0f13021). Report, 40 seeds per pairing (a faction cell is 160
+battles, about plus or minus 4 points), Realm / Restless / Horde:
+
+| Stage | Full         | Nobook       | None         |
+| ----- | ------------ | ------------ | ------------ |
+| early | 40 / 53 / 57 | 51 / 50 / 49 | 55 / 51 / 44 |
+| mid   | 37 / 62 / 51 | 46 / 59 / 45 | 42 / 58 / 50 |
+| late  | 59 / 40 / 51 | 55 / 45 / 50 | 51 / 36 / 64 |
+
+Balance mode, 80 seeds per pairing (a faction rate is 320 battles, a
+pairing 80, about plus or minus 6 points):
+
+| Leaning | Realm / Restless / Horde | Pairings above 65% (attacker v defender)                                       |
+| ------- | ------------------------ | ------------------------------------------------------------------------------ |
+| mixed   | 50 / 56 / 44             | none (Restless v Horde 65)                                                     |
+| magic   | 42 / 54 / 55             | Horde v Realm 70, Restless v Realm 68                                          |
+| might   | 62 / 55 / 33             | Realm v Restless 74, Restless v Horde 69, Realm v Horde 68 (Horde v any 34-35) |
+
+What the levers showed:
+
+- **The Horde's hero book is its magic edge.** With the Weatherwitch's
+  casts turned off, the magic Horde fell from 75% to 39% early. Kaboom at
+  15 x C instead of 30 x C changed nothing; fewer guild Storm pages did.
+- **A Sworn link was free Fuel** for every Storm and Hush page aimed at a
+  Realm stack (round 3 measured it and kept the rule). With one leaning at
+  80 seeds, making Sworn no Fuel moved the magic Horde attacking the Realm
+  from 70% to 65%.
+- **The might Horde is its Goblins.** Only the Goblin moved it: HP 9 gave
+  the might Horde 39%, HP 10 gave 44%. Wolf Rider Attack 8 or 170 gold,
+  Ogre 850, Bomb Chucker 100, Warboss 3300, and the Warlord starting with
+  Drill Sergeant or Riposte (in place of Wayfaring) or Defense 2 each left
+  it at 31-38%.
+
+### 10.2 The changes
+
+| What                                                    | Was                                  | Now                                                      | Why                                                                                                                                                                  |
+| ------------------------------------------------------- | ------------------------------------ | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sworn as Fuel (`fuelError`, RULES_V2 2.4)               | Any condition is Fuel                | Any condition but Sworn                                  | Every Realm stack bears one from deployment, so every opposed page against the Realm was doubled for free; the Realm's birthright should not be the enemy's resource |
+| Horde guild weights (`guild.ts`)                        | Bloom 4, Clock 1, Hush 2, Storm 3    | Bloom 4, Clock 2, Hush 2, Storm 2                        | One fewer Storm draw in ten: fewer guild damage pages for the Weatherwitch; she keeps Stormcalling and Thunderclap, the Boomshamans keep Thunderclap                 |
+| Realm guild level 1 (`alsoFirst`)                       | One guaranteed page, of Accord       | Also a Bloom battle page (Poultice, Thornskin or Nettle) | The Enchanter starts in Bloom and takes Accord later, so the Accord guarantee was often a page it could not learn; now its first visit always teaches a battle page  |
+| Goblin (one record: the Horde's tier 1 and the neutral) | HP 8, 37 gold, FV 52                 | HP 10, 40 gold, FV 58                                    | The might Horde at 33%; Goblins are most of an early Horde army. The price keeps gold per FV at 0.69                                                                 |
+| Warlord and Weatherwitch starting armies                | 22 and 18 Goblins (FV 1798 and 1800) | 20 and 16 Goblins (FV 1814 and 1792)                     | Keeps every class's starting army at about FV 1800                                                                                                                   |
+
+The Goblin's HP changes FACTION_GOBLINS 6.1 and 6.2 (the Brutes'
+retaliation now kills seven Goblins, not nine; the Fastball needs four
+Ogres to hurl 15 Goblins, whose 150 HP is above three Ogres' 120) and
+neutral Goblin guards on the map (fewer per guard of the same fight value;
+no named map's fingerprint moved). FACTION_HUMANS 2 and 3, FACTION_GOBLINS
+2, 4 and 7, FACTION_UNDEAD 2, GAME_DESIGN 8.1, RULES_V2 2.4 and 2.9 and
+ECONOMY 8 (prices, weekly totals, the week 1 ledger and the tier 6 dates,
+recomputed by `node tests/sim/run.mjs ./tests/sim/ledger.ts`) follow, and
+the Sworn and Fuel hover texts say "never".
+
+### 10.3 After
+
+The committed state (d8c17ed), the same runs. Report, 40 seeds, Realm /
+Restless / Horde; out of the 40-60% band in bold:
+
+| Stage | Heroes | Before               | After                | Att win before / after |
+| ----- | ------ | -------------------- | -------------------- | ---------------------: |
+| early | full   | 40 / 53 / 57         | **39** / 50 / **61** |                51 / 49 |
+| early | nobook | 51 / 50 / 49         | 46 / 48 / 57         |                52 / 52 |
+| early | none   | 55 / 51 / 44         | 51 / 52 / 47         |                55 / 54 |
+| mid   | full   | **37** / **62** / 51 | **36** / 58 / 57     |                55 / 56 |
+| mid   | nobook | 46 / 59 / 45         | 46 / 56 / 48         |                54 / 53 |
+| mid   | none   | 42 / 58 / 50         | 41 / 58 / 51         |                53 / 52 |
+| late  | full   | 59 / 40 / 51         | **62** / **39** / 49 |                54 / 56 |
+| late  | nobook | 55 / 45 / 50         | 54 / 44 / 52         |                56 / 55 |
+| late  | none   | 51 / **36** / **64** | 49 / 40 / **61**     |                51 / 52 |
+
+All 27 cells stay inside 35-65%. The widest gap per stage: early 22
+points (before 17), mid 22 (25), late 23 (28). Cells outside 40-60%: 6
+(before 4), none more than 4 points outside it; the report moved
+within its noise, as round 3's did, while balance mode moved more:
+
+| Leaning | Before H / U / G | After H / U / G | Pairings above 65% after                     |
+| ------- | ---------------- | --------------- | -------------------------------------------- |
+| mixed   | 50 / 56 / 44     | 51 / 52 / 48    | none (highest: Realm v Restless 61)          |
+| magic   | 42 / 54 / 55     | 47 / 47 / 56    | none (Horde v Realm 64, Restless v Realm 58) |
+| might   | 62 / 55 / 33     | 59 / 54 / 37    | Realm v Restless 74, Restless v Horde 70     |
+
+No run had an illegal action.
+
+### 10.4 Tried and dropped
+
+- **Vampire 1100** (was 1200) for the Restless late without heroes. With
+  the other changes it moved that cell by 1 point (40 to 41) and raised
+  the Restless's middle game (mid none 58 to 62) and lowered the Realm's
+  (mid full 36 to 34). The Vampire stays at 1200.
+- **Goblin HP 9 at 37 gold** (with the rest of the package and the
+  Vampire at 1100): the report's Horde went to 66% early with heroes and
+  the Realm to 34% mid; HP 10 at 40 gold gave 61-63% and 34-36%.
+- Enchanter changes: Mend at 30 + 15 P, Packrat in place of Deep Wells,
+  Nettle as the starting page, Power 3 with Defense 0, and the Realm's
+  guild at Bloom 4, Accord 3. None raised the magic Realm beyond the
+  noise (20 seeds, magic heroes only: 19-29% early against 29% before).
+- Kaboom at 15 x C; a Weatherwitch with Power 2 and Defense 1.
+- Late King 2700 for the Restless late (35% without heroes, no better);
+  a dearer Gravecaller, which raised the Restless's middle game.
+- Wolf Rider, Ogre, Bomb Chucker, Warboss and Warlord changes for the
+  might Horde (section 10.1).
+
+### 10.5 How the runs were made
+
+Variants ran on scratch copies of the source with one process per cell:
+`--mode report --seeds 40 --matrix --stage <s> --hero <h>` (nine
+processes, about twelve minutes on ten cores) and `--mode balance --only
+faction --seeds 80 [--lean magic|might]`, with `--pairs` for single
+pairings and `--tweak` for creature numbers. About 40 variants in all.
+
+### 10.6 Remaining imbalances
+
+- **The might Horde: 37%** in balance mode (Realm attacking the Restless
+  74% and the Restless attacking the Horde 70% with might heroes). The
+  Goblin was the only creature lever; the next candidates are the
+  Warlord's Command (Heave-Ho) or its starting skills, not more Goblin HP,
+  which already lifts the mixed Horde to 61% early in the report.
+- **The Realm's middle game with heroes: 36%** (37-38% in rounds 2 and 3).
+  Its later book is still Accord set-up magic; the Bloom guarantee helped
+  the early book (magic Restless attacking the Realm 68% to 58%) but not
+  the middle one.
+- **The late game with heroes: Realm 62%, Restless 39%**, and the Horde
+  without heroes late at 61%.
+- The attacker wins 49-56% in every cell.

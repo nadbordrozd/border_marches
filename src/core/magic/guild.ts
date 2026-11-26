@@ -25,18 +25,31 @@ export const MAX_GUILD_LEVEL = 5;
 
 /** Weights and guild caps from FACTION_HUMANS/UNDEAD/GOBLINS section 2. */
 export const FACTION_SCHOOL_WEIGHTS: Readonly<
-  Record<string, { readonly weights: SchoolWeights; readonly cap: number }>
+  Record<
+    string,
+    {
+      readonly weights: SchoolWeights;
+      readonly cap: number;
+      /**
+       * A second school whose battle page level 1 also guarantees (the
+       * Realm's Bloom since balance round 4: the Enchanter starts in Bloom,
+       * so its first guild visit always finds a page it can learn).
+       */
+      readonly alsoFirst?: School;
+    }
+  >
 > = {
   humans: {
     weights: { bloom: 3, accord: 4, clock: 2, hush: 0, storm: 1 },
     cap: 4,
+    alsoFirst: "bloom",
   },
   undead: {
     weights: { bloom: 0, accord: 1, clock: 3, hush: 4, storm: 2 },
     cap: 5,
   },
   goblins: {
-    weights: { bloom: 4, accord: 0, clock: 1, hush: 2, storm: 3 },
+    weights: { bloom: 4, accord: 0, clock: 2, hush: 2, storm: 2 },
     cap: 3,
   },
 };
@@ -53,6 +66,7 @@ export const EVEN_WEIGHTS: SchoolWeights = {
 export function factionMagic(faction: string): {
   weights: SchoolWeights;
   cap: number;
+  alsoFirst?: School;
 } {
   return FACTION_SCHOOL_WEIGHTS[faction] ?? { weights: EVEN_WEIGHTS, cap: 5 };
 }
@@ -93,14 +107,16 @@ function heaviest(weights: SchoolWeights): School {
 /**
  * The spells of every guild level of one town, levels 1 to `cap` (index =
  * level - 1), drawn without replacement, weighted by school (2.9).
- * Guarantees: level 1 has a spell of the heaviest school; level 2 has
- * exactly one condition tool, of a school weighted above 0. The pool holds
+ * Guarantees: level 1 has a spell of the heaviest school, and a battle
+ * spell of `alsoFirst` when given; level 2 has exactly one condition tool,
+ * of a school weighted above 0. The pool holds
  * battle and adventure spells; faction-only pages are not in it.
  */
 export function guildSpells(
   seed: number,
   weights: SchoolWeights,
   cap = MAX_GUILD_LEVEL,
+  alsoFirst?: School,
 ): string[][] {
   validate(weights);
   const rng = createRng(deriveSeed(seed, "magic-guild"));
@@ -124,6 +140,16 @@ export function guildSpells(
           weights,
         ),
       );
+      if (alsoFirst !== undefined && alsoFirst !== top)
+        take(
+          pick(
+            rng,
+            tierPool.filter(
+              (s) => s.school === alsoFirst && s.kind === "battle",
+            ),
+            weights,
+          ),
+        );
     }
     if (level === 2) {
       take(
@@ -153,8 +179,8 @@ export function townGuild(
   gameSeed: number,
   town: { readonly id: string; readonly faction: string },
 ): string[][] {
-  const { weights, cap } = factionMagic(town.faction);
-  return guildSpells(townGuildSeed(gameSeed, town.id), weights, cap);
+  const { weights, cap, alsoFirst } = factionMagic(town.faction);
+  return guildSpells(townGuildSeed(gameSeed, town.id), weights, cap, alsoFirst);
 }
 
 /**

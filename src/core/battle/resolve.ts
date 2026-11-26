@@ -1892,7 +1892,6 @@ export class Resolver implements Effects {
               kind: "ripening",
               size,
               clock: 2,
-              tier: 3,
             });
         });
     }
@@ -1903,7 +1902,6 @@ export class Resolver implements Effects {
           kind: "jinxed",
           size: 25,
           clock: 2,
-          tier: 3,
         }),
       );
     }

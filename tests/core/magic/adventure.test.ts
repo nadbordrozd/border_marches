@@ -406,7 +406,7 @@ describe("Parley", () => {
     );
     expect(cast(s0, "hero-0", "parley", { monsterId: "m" })).toMatchObject({
       ok: false,
-      message: "fight value 2080 is above 750",
+      message: "fight value 2320 is above 750",
     });
   });
 });
@@ -502,8 +502,8 @@ describe("Opening Salvo", () => {
     const s1 = ok(
       cast(s0, "hero-0", "opening-salvo", { monsterId: "m" }),
     ).state;
-    // Harm 45 at P 1: five 8-HP goblins die.
-    expect(s1.monsters.m?.count).toBe(5);
+    // Harm 45 at P 1: four 10-HP goblins die.
+    expect(s1.monsters.m?.count).toBe(6);
     expect(hero(s1).mp).toBe(hero(s0).mp - 100);
   });
 
@@ -518,7 +518,7 @@ describe("Opening Salvo", () => {
     const s1 = ok(
       cast(near, "hero-0", "opening-salvo", { monsterId: "m" }),
     ).state;
-    expect(s1.monsters.m?.count).toBe(5);
+    expect(s1.monsters.m?.count).toBe(6);
     expect(s1.pendingBattle).toBeNull();
     const far = learn(
       gameOn(field(6, 3), [monster("m", 4, 2, "goblin", 10)], 1, 0),

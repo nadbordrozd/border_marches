@@ -184,7 +184,7 @@ Each has at most one simple, deterministic ability.
 
 | Tier | Creature              |  HP | Atk | Def | Dmg | Speed | Shots | Ability                                                                    |   FV |
 | ---: | --------------------- | --: | --: | --: | --: | ----: | ----: | -------------------------------------------------------------------------- | ---: |
-|    1 | Goblin                |   8 |   4 |   2 |   2 |     5 |     - | -                                                                          |   52 |
+|    1 | Goblin                |  10 |   4 |   2 |   2 |     5 |     - | -                                                                          |   58 |
 |    1 | Skeleton              |   9 |   5 |   4 |   2 |     4 |     - | **Bony**: ranged attacks deal half damage to it                            |   62 |
 |    2 | Bomb Chucker (ranged) |  12 |   6 |   3 |   3 |     4 |     8 | -                                                                          |  109 |
 |    2 | Wolf Rider            |  18 |   7 |   5 |   4 |     8 |     - | -                                                                          |  136 |

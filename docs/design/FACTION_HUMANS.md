@@ -36,7 +36,10 @@ landfalls whether they asked or not.
 | ------ | ----: | -----: | ----: | ---: | ----: |
 | Weight |     3 |      4 |     2 |    0 |     1 |
 
-- **Magic Guild cap: level 4.** The heaviest school is Accord; the level 2
+- **Magic Guild cap: level 4.** The heaviest school is Accord; level 1
+  also always holds a Bloom battle page (Poultice, Thornskin or Nettle),
+  so the Enchanter, who starts in Bloom, learns one on its first visit
+  (balance round 4, [BALANCE.md](BALANCE.md) section 10). The level 2
   condition tool is Share, Feed or Wind (never Pass on).
 - **What the wheel gives the Realm.** Sworn links make Share work from round
   one: any boon on one partner can be copied to the other. Bloom heals are
@@ -72,9 +75,12 @@ Notes:
   stacks are skipped.
 - Both ends bear a Sworn, each counting toward its six conditions. When one
   end dies both conditions end (RULES_V2 1.4).
-- Sworn is a thing (law 2): it can be ended, burnt as Fuel by a Hush or
-  Storm page, set off, and created between any two stacks by the Enchanter's
-  Command. Whoever bears it gets its two rules, native or not.
+- Sworn is a thing (law 2): it can be ended, set off, and created between
+  any two stacks by the Enchanter's Command. Whoever bears it gets its two
+  rules, native or not.
+- Sworn is never Fuel (RULES_V2 2.4). Until balance round 4 it was, so
+  every Storm or Hush page aimed at a Realm stack could be doubled for
+  free ([BALANCE.md](BALANCE.md) section 10).
 
 ## 4. Roster
 
@@ -119,7 +125,7 @@ stacks of the creature (ECONOMY 6.3).
 
 | Drill building | Unit        | Ability            | Exact rule                                                                                                                                                                                                               |
 | -------------- | ----------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Butts          | Longbowman  | **Pin Down**       | A stack hit by the Longbowmen's shot (a Covering Volley included) gains Delayed with clock 2 and gate `{ hp, max: 15 x the Longbowmen's count }`.                                                                        |
+| Butts          | Longbowman  | **Pin Down**       | A stack hit by the Longbowmen's shot (a Covering Volley included) gains Delayed with clock 2 and gate `{ hp, max: 15 x the Longbowmen's count }`, doubled against a Slowed stack.                                        |
 | Guardroom      | Man-at-Arms | **Bodyguard**      | Reaction: when an enemy stack adjacent to the Men-at-Arms makes a melee attack on another friendly stack adjacent to them, the Men-at-Arms, if they have their retaliation, spend it on a retaliation Strike against it. |
 | Tiltyard       | Knight      | **Follow Through** | On strike: after a melee attack that followed a walk of 4 or more hexes, the target is pushed 1 hex directly away from the Knights. A stack no longer adjacent to its attacker does not retaliate.                       |
 

@@ -61,8 +61,6 @@ export interface BattleStartRule {
   clock: number | null;
   /** False: the Hold has no gate (CONTENT_ARTIFACTS 4). */
   gate?: boolean;
-  /** Tier of the maker, for the charge (Trinket 1, Wonder 3, Marvel 5). */
-  tier?: number;
   /** For a link: its far end. */
   linkTo?: { side: "own" | "enemy"; selector: StackSelector };
 }

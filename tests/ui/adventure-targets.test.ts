@@ -93,7 +93,7 @@ describe("adventure targets", () => {
       ["parley"],
     );
     expect(adventureUsable(strong, hero(strong), "parley", false).reason).toBe(
-      "No stack nearby it can take: fight value 2080 is above 750",
+      "No stack nearby it can take: fight value 2320 is above 750",
     );
   });
 

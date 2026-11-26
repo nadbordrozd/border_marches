@@ -276,8 +276,6 @@ export interface ConditionSpec {
   readonly clock?: number | null;
   readonly gate?: Gate | null;
   readonly link?: StackId | null;
-  /** Tier of what made it (a record of the maker; no rule reads it). */
-  readonly tier?: number;
   readonly source?: string;
 }
 

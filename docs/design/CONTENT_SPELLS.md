@@ -34,10 +34,10 @@ in the faction documents, not here.
 
 Eleven kinds are engine-standard (RULES_V2 1.3, marked "std"); fourteen are
 new here. Clocks shown are typical; each maker states its own. "3 x" is
-the default maximum of RULES_V2 1.3. Charge follows RULES_V2 2.7: size for
-kinds that deal Harm each round (Burning, Leeched), the whole size for the
-debt (Reckoning), otherwise 10 x the tier of the maker. Only Turned,
-Asleep and Frozen are Holds; Scapegoat and Leeched are links.
+the default maximum of RULES_V2 1.3. A condition does not record the tier
+of its maker (the "charge" it fed went with bzc.71's Set Off, and the field
+with bzc.40). Only Turned, Asleep and Frozen are Holds; Scapegoat and
+Leeched are links.
 
 | Kind          | School | Polarity | Clock | Size                          | Gate                 | Notes     | Rule                                                                                              |
 | ------------- | ------ | -------- | ----- | ----------------------------- | -------------------- | --------- | ------------------------------------------------------------------------------------------------- |
@@ -103,33 +103,46 @@ among a kind's makers and users. Faction creatures will add to these lists.
 | **Turned**    | std | 3: Sign Here (spell), Change of Heart (spell), Notary (creature)                                                                                                                                                  | 0                                                                                                                                                 | 1       |
 | **Heartened** | std | 7: Take Heart (spell), Double Time (spell), Banner (skill), Regimental Sash (Trinket), Brass Bugle (Trinket), Whetstone Pendant (Wonder), Bottled Cheer (consumable)                                              | 2: Mob Rule (feat), Vow of Flesh and Blood (vow)                                                                                                  | 5       |
 | **Scapegoat** | new | 4: Scapegoat (spell), Notary's Seal (Wonder), The Unsigned Treaty (Marvel piece), Whipping Boy (creature)                                                                                                         | 4: Vow of the Still Air (vow), Treaty Ink (Marvel), The Quill (Marvel piece), The Blotter (Marvel piece)                                          | 4       |
-| **Shielded**  | new | 4: Close Ranks (spell), Drill Sergeant (skill), Ambush (skill), Tin Titan (creature)                                                                                                                              | 2: Shield Wall (feat), Gumshoe (creature)                                                                                                         | 4       |
+| **Shielded**  | new | 4: Close Ranks (spell), Drill Sergeant (skill), Ambush (skill), Tin Titan (creature)                                                                                                                              | 3: Shield Wall (feat), Gumshoe (creature), Ogre (creature)                                                                                        | 4       |
 | **Warded**    | new | 3: Sanctuary Oath (spell), Umbrella of State (Wonder), Deep-Sea Diver (creature)                                                                                                                                  | 3: The Sky Falls (spell), Mirror Ward (feat), Lightning Rod (Wonder)                                                                              | 5       |
-| **Mollified** | new | 3: Soft Words (spell), Pressed Olive Branch (Wonder), Crooner (creature)                                                                                                                                          | 1: Peace Dividend (feat)                                                                                                                          | 4       |
+| **Mollified** | new | 3: Soft Words (spell), Pressed Olive Branch (Wonder), Crooner (creature)                                                                                                                                          | 3: Peace Dividend (feat), Notary (creature), Vampire (drill)                                                                                      | 5       |
 | **Delayed**   | std | 5: Late Bell (spell), Encore (spell), Ambush (skill), Ball and Chain (cursed Wonder), Winder (creature)                                                                                                           | 2: First Bell (spell), Pile On (feat)                                                                                                             | 4       |
 | **Hastened**  | std | 3: First Bell (spell), Forced March (spell), Ambush (skill)                                                                                                                                                       | 1: Late Bell (spell)                                                                                                                              | 2       |
-| **Quickened** | new | 3: Quick March (spell), Drum Major's Baton (Wonder), Newsie (creature)                                                                                                                                            | 2: Quickstep (feat), Metronome Spurs (Wonder)                                                                                                     | 4       |
-| **Slowed**    | new | 5: Bramble Row (spell), Treacle (spell), Whiteout (spell), Hedge-Clipper Shears (Wonder), Metronome Spurs (Wonder)                                                                                                | 2: Pile On (feat), Rigger (creature)                                                                                                              | 5       |
+| **Quickened** | new | 3: Quick March (spell), Drum Major's Baton (Wonder), Newsie (creature)                                                                                                                                            | 3: Quickstep (feat), Metronome Spurs (Wonder), Winder (creature)                                                                                  | 4       |
+| **Slowed**    | new | 5: Bramble Row (spell), Treacle (spell), Whiteout (spell), Hedge-Clipper Shears (Wonder), Metronome Spurs (Wonder)                                                                                                | 3: Pile On (feat), Rigger (creature), Longbowman (drill)                                                                                          | 6       |
 | **Asleep**    | std | 2: Lullaby (spell), Sleeping Cap of the Night Watch (cursed Wonder)                                                                                                                                               | 0                                                                                                                                                 | 2       |
 | **Shaken**    | std | 1: The Thirteenth Chime (cursed Wonder)                                                                                                                                                                           | 2: Take Heart (spell), Pile On (feat)                                                                                                             | 3       |
 | **Jinxed**    | std | 3: Bad Omen (spell), Double or Nothing (feat), The Albatross (cursed Wonder)                                                                                                                                      | 0                                                                                                                                                 | 3       |
 | **Reckoning** | new | 4: Deadline (spell), On Credit (spell), IOU Pad (cursed Wonder), Loan Shark (creature)                                                                                                                            | 5: Co-signer (feat), Compound Interest (feat), Bailiff's Greatcoat (Wonder), The Hourglass with No Bottom (Marvel), The Upper Bulb (Marvel piece) | 6       |
-| **Hushed**    | new | 3: Hush Now (spell), Felt Slippers of the Night Shift (Wonder), Gremlin (creature)                                                                                                                                | 2: Gag Rule (feat), Gumshoe (creature)                                                                                                            | 4       |
+| **Hushed**    | new | 3: Hush Now (spell), Felt Slippers of the Night Shift (Wonder), Gremlin (creature)                                                                                                                                | 3: Gag Rule (feat), Gumshoe (creature), Vampire (drill)                                                                                           | 5       |
 | **Leeched**   | new | 3: Leech Line (spell), Bloodstone Ring (Wonder), Bog Leech (creature)                                                                                                                                             | 5: Bloodletting (feat), Thicker than Water (feat), Vow of the Still Air (vow), Treaty Ink (Marvel), The Quill (Marvel piece)                      | 5       |
 | **Burning**   | std | 3: Hothead (spell), Blaze of Glory (feat), Coat of Embers (cursed Wonder)                                                                                                                                         | 2: Firewalkers (feat), Lamplighter (creature)                                                                                                     | 4       |
 | **Frozen**    | std | 3: Cold Snap (spell), Winter's Pocket Watch (Wonder), Rime Walrus (creature)                                                                                                                                      | 1: Cold Hands (feat)                                                                                                                              | 4       |
-| **Drenched**  | new | 3: Downpour (spell), Leaky Bucket (Wonder), Lagoon Lurker (creature)                                                                                                                                              | 2: Soaked Powder (feat), Chain Lightning (feat)                                                                                                   | 4       |
+| **Drenched**  | new | 3: Downpour (spell), Leaky Bucket (Wonder), Lagoon Lurker (creature)                                                                                                                                              | 3: Soaked Powder (feat), Chain Lightning (feat), Rime Walrus (creature)                                                                           | 4       |
 | **Fired Up**  | new | 8: Hothead (spell), Drill Sergeant (skill), Mob Rule (feat), Thicker than Water (feat), Coat of Embers (cursed Wonder), The Odd Cufflink (Marvel piece), Fire-Eater's Draught (consumable), Loan Shark (creature) | 3: Firewalkers (feat), Blaze of Glory (feat), Whetstone Pendant (Wonder)                                                                          | 7       |
 
-All 14 new kinds have at least three makers from at least two sources.
-Bead `border_marches-bzc.71` took the spell riders that read a second
-condition out of eight spells (section 7), so six new kinds now have
-fewer than three users: Mollified 1, Shielded, Quickened, Slowed, Hushed
-and Drenched 2 each. Each still does its own job (weaker Strikes, Defense,
-Speed, no shooting, more Harm taken), and the kinds stay; new users should
-come from creatures, feats or artifacts, not from spell riders. The
-standard kinds are exempt: for several of them (Jinxed, Asleep, Turned)
-the kind's own rule is the payoff, and the factions will add named users.
+All 14 new kinds have at least three makers from at least two sources,
+and at least three users. Bead `border_marches-bzc.71` took the spell
+riders that read a second condition out of eight spells (section 7),
+which left Mollified with 1 user and Shielded, Quickened, Slowed, Hushed
+and Drenched with 2. Bead `border_marches-bzc.40` gave them creature
+users, most of them the old softener riders moved from the Hold spells
+onto the creatures' own Holds:
+
+| Kind      | New user                     | Rule                                                                                |
+| --------- | ---------------------------- | ----------------------------------------------------------------------------------- |
+| Mollified | Notary, Stamp                | The Turned gate (15 HP per Notary) is doubled against a Mollified stack             |
+| Mollified | Vampire, Mesmerise (drill)   | The Asleep gate (30 HP per Vampire) is doubled against a Hushed or Mollified stack  |
+| Hushed    | Vampire, Mesmerise (drill)   | As above                                                                            |
+| Drenched  | Rime Walrus, Cold Front      | The Frozen gate (15 HP per Walrus) is doubled against a Drenched stack              |
+| Slowed    | Longbowman, Pin Down (drill) | The Delayed gate (15 HP per Longbowman) is doubled against a Slowed stack           |
+| Quickened | Winder, Wind Up              | Quickened Winders reach 6 hexes instead of 3                                        |
+| Shielded  | Gumshoe, Dead to Rights      | Its shots ignore Shielded (CONTENT_CREATURES 2 always said so; now the engine does) |
+| Shielded  | Ogre, Hurl                   | Never works on a Shielded stack                                                     |
+
+The standard kinds are exempt: for several of them (Jinxed, Asleep,
+Turned) the kind's own rule is the payoff, and the factions will add
+named users.
 
 Ground, counted the same way (remains are made by any death; the
 users listed for corpse, bones and wreck are the rules that use remains):

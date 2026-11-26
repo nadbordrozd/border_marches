@@ -280,8 +280,13 @@ function learnKit(
   seed: number,
   rng: Rng,
 ): void {
-  const { weights, cap } = factionMagic(faction);
-  const offer = guildSpells(deriveSeed(seed, `book:${faction}`), weights, cap);
+  const { weights, cap, alsoFirst } = factionMagic(faction);
+  const offer = guildSpells(
+    deriveSeed(seed, `book:${faction}`),
+    weights,
+    cap,
+    alsoFirst,
+  );
   const level = Math.min(cap, kit.guild);
   hero.pages = [
     ...hero.pages,

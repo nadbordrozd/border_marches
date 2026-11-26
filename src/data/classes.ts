@@ -418,7 +418,7 @@ export const MORTICIAN: HeroClassDef = {
   portrait: "portrait-hero-mortician",
 };
 
-/** Warlord (FACTION_GOBLINS 7). Army: 22 Goblins, 6 Bomb Chuckers. */
+/** Warlord (FACTION_GOBLINS 7). Army: 20 Goblins, 6 Bomb Chuckers. */
 export const WARLORD: HeroClassDef = {
   id: "warlord",
   name: "Warlord",
@@ -459,14 +459,14 @@ export const WARLORD: HeroClassDef = {
   startingSkills: ["onslaught", "wayfaring"],
   command: "heave-ho",
   startingArmy: [
-    { creature: "goblin", count: 22 },
+    { creature: "goblin", count: 20 },
     { creature: "bomb-chucker", count: 6 },
   ],
   sprite: "hero-warlord",
   portrait: "portrait-hero-warlord",
 };
 
-/** Weatherwitch (FACTION_GOBLINS 7). Army: 18 Goblins, 4 Bomb Chuckers, 2 Boomshamans. */
+/** Weatherwitch (FACTION_GOBLINS 7). Army: 16 Goblins, 4 Bomb Chuckers, 2 Boomshamans. */
 export const WEATHERWITCH: HeroClassDef = {
   id: "weatherwitch",
   name: "Weatherwitch",
@@ -508,7 +508,7 @@ export const WEATHERWITCH: HeroClassDef = {
   startingPage: "thunderclap",
   command: "kaboom",
   startingArmy: [
-    { creature: "goblin", count: 18 },
+    { creature: "goblin", count: 16 },
     { creature: "bomb-chucker", count: 4 },
     { creature: "boomshaman", count: 2 },
   ],

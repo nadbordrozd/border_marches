@@ -153,7 +153,6 @@ if (!hasConditionKind("scapegoat")) {
         kind: "turned",
         clock: 1,
         gate: { measure: "hp", max: 800 },
-        tier: 2,
       });
     },
   });
@@ -241,7 +240,6 @@ if (!hasConditionKind("scapegoat")) {
       fx.link(stackTarget(targets[0]), stackTarget(targets[1]), {
         kind: "scapegoat",
         clock: 3,
-        tier: 1,
       });
     },
   });

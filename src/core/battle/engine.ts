@@ -1261,7 +1261,6 @@ export function applyAction(
               kind: "fired-up",
               size: 3,
               clock: 2,
-              tier: 3,
             }),
           );
       });
@@ -1482,7 +1481,6 @@ function afterHeroAct(
           kind: "fired-up",
           size: 3,
           clock: 2,
-          tier: 3,
         }),
       );
   }
@@ -1497,13 +1495,12 @@ function afterHeroAct(
     d.within(idx, "drill-sergeant", () => {
       for (const sid of touched) {
         if (!fx.isAlive(sid) || d.get(sid).side !== side) continue;
-        fx.addCondition(sid, { kind: "fired-up", size: 2, clock: 2, tier: 3 });
+        fx.addCondition(sid, { kind: "fired-up", size: 2, clock: 2 });
         if (hasRule(d, side, "drill-sergeant-3"))
           fx.addCondition(sid, {
             kind: "shielded",
             size: 3,
             clock: 2,
-            tier: 3,
           });
       }
     });

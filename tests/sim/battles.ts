@@ -50,6 +50,9 @@
  *                       round 1's pattern stats and seeded book (bare).
  *   --lean might|magic  every hero of the run leans this way (default:
  *                       might and magic alternate by seed).
+ *   --pairs "undead v goblins,goblins v humans"   play only these faction
+ *                       pairings (attacker v defender), to rerun outlier
+ *                       cells with more seeds.
  *   --tweak id.field=n,...   override creature numbers (or
  *                       class:<id>.<stat>) for this run only.
  *
@@ -215,6 +218,9 @@ const factionPolicy: Partial<Record<Faction, Policy>> = {};
 /** Hero gear of the run (--gear stage|bare; default stage). */
 let gear: HeroGear = "stage";
 
+/** Only these pairings ("undead v goblins", ...) when set (--pairs). */
+let pairFilter: ReadonlySet<string> | undefined;
+
 /** Every hero's leaning (--lean); undefined alternates by seed. */
 let leanOverride: "might" | "magic" | undefined;
 
@@ -328,6 +334,7 @@ function factionMatchups(
   const out: Matchup[] = [];
   for (const a of FACTIONS)
     for (const d of FACTIONS) {
+      if (pairFilter !== undefined && !pairFilter.has(`${a} v ${d}`)) continue;
       out.push({
         name: `${a} v ${d}`,
         setup: (seed) => {
@@ -799,6 +806,11 @@ export function main(args: readonly string[]): number {
   if (leanOpt !== undefined && leanOpt !== "might" && leanOpt !== "magic")
     throw new Error(`unknown lean ${leanOpt}`);
   leanOverride = leanOpt;
+  const pairs = opt.get("pairs");
+  pairFilter =
+    pairs === undefined
+      ? undefined
+      : new Set(pairs.split(",").map((x) => x.trim()));
   const pf = opt.get("pf");
   if (pf !== undefined) {
     const [f, spec] = pf.split(/=(.*)/s) as [Faction, string | undefined];

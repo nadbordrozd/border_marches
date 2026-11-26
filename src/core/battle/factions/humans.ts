@@ -105,7 +105,6 @@ export function registerHumans(): void {
       fx.addCondition(targetStack(t[0]) as StackId, {
         kind: "heartened",
         gate: { measure: "hp", max: 20 * me.count },
-        tier: me.creature.tier,
         source: actorId,
       });
     },
@@ -188,18 +187,20 @@ export function registerHumans(): void {
     id: "pin-down",
     name: "Pin Down",
     description:
-      "A stack hit by the Longbowmen's shot becomes Delayed for 2 rounds. Gate 15 HP per Longbowman.",
+      "A stack hit by the Longbowmen's shot becomes Delayed for 2 rounds. Gate 15 HP per Longbowman, doubled against a Slowed stack.",
     onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id || ctx.kind !== "shot") return null;
       const target = ctx.defender.id;
       const gate = 15 * owner.count;
-      const tier = owner.creature.tier;
       return (fx) => {
+        // Doubled against a Slowed stack (a slow stack is easy to pin).
+        const slowed =
+          fx.isAlive(target) &&
+          fx.stack(target).conditions.some((c) => c.kind === "slowed");
         fx.addCondition(target, {
           kind: "delayed",
           clock: 2,
-          gate: { measure: "hp", max: gate },
-          tier,
+          gate: { measure: "hp", max: slowed ? 2 * gate : gate },
           source: owner.id,
         });
       };

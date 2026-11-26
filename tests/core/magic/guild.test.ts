@@ -67,6 +67,24 @@ describe("guild draws", () => {
     }
   });
 
+  it("the Realm's level 1 also holds a Bloom battle page (balance round 4)", () => {
+    expect(humans.alsoFirst).toBe("bloom");
+    for (let seed = 0; seed < 30; seed++) {
+      const g = guildSpells(seed, humans.weights, humans.cap, humans.alsoFirst);
+      expect(g[0]).toHaveLength(4);
+      expect(
+        g[0]!.some((id) => {
+          const s = spellInfo(id);
+          return s.school === "bloom" && s.kind === "battle";
+        }),
+      ).toBe(true);
+      expect(g[0]!.some((id) => spellInfo(id).school === "accord")).toBe(true);
+    }
+    // A town's guild uses it too.
+    const t = townGuild(9, { id: "t1", faction: "humans" });
+    expect(t[0]!.some((id) => spellInfo(id).school === "bloom")).toBe(true);
+  });
+
   it("weights favour heavy schools", () => {
     const count: Record<string, number> = {};
     for (let seed = 0; seed < 200; seed++) {
@@ -76,7 +94,9 @@ describe("guild draws", () => {
       }
     }
     expect(count.accord ?? 0).toBe(0);
-    expect(count.storm!).toBeGreaterThan(count.clock!);
+    // Horde weights since balance round 4: Bloom 4, Clock 2, Hush 2, Storm 2.
+    expect(count.bloom!).toBeGreaterThan(count.storm!);
+    expect(count.bloom!).toBeGreaterThan(count.clock!);
   });
 
   it("rejects weights with fewer than two schools above 0", () => {

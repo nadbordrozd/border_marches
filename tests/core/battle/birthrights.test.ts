@@ -289,7 +289,7 @@ describe("Launched (the Horde)", () => {
         .filter((e) => e.type === "harm")
         .map((e) => e.type === "harm" && e.targetId),
     ).toEqual(["d0", "a1"]);
-    expect(countTop(state, "a0")).toEqual([10, 8]);
+    expect(countTop(state, "a0")).toEqual([10, 10]);
     expect(getStack(state, "a0").hex).toEqual(at(3, 5));
     // The guest takes the blast.
     expect(getStack(state, "a1").count).toBeLessThan(10);

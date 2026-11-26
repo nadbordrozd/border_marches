@@ -308,7 +308,7 @@ export const KEYWORDS: readonly KeywordDef[] = [
     id: "fuel",
     term: "Fuel",
     forms: ["Fuel(?:s|led|ling)?"],
-    text: "Once a battle: end one condition of an opposed school on a touched stack to double the spell's size.",
+    text: "Once a battle: end one condition of an opposed school on a touched stack to double the spell's size. Never a Sworn.",
   },
   school(
     "bloom",
@@ -486,7 +486,7 @@ export const KEYWORDS: readonly KeywordDef[] = [
     "sworn",
     "Sworn",
     "Accord boon · link",
-    "Heals on it also heal the far end, and it may swap hexes with the far end instead of walking.",
+    "Heals on it also heal the far end, and it may swap hexes with the far end instead of walking. Never burnt as Fuel.",
     "boon",
   ),
   condition(

@@ -133,7 +133,7 @@ describe("applyBattleResult", () => {
       creature: "caveman",
       count: 15,
     });
-    expect(state.heroes[0]!.xp).toBe(10 * 8); // 10 goblins x 8 HP
+    expect(state.heroes[0]!.xp).toBe(10 * 10); // 10 goblins x 10 HP
     expect(state.battles).toBe(1);
     expect(events).toContainEqual({ type: "monster-defeated", monsterId: "m" });
     // The way is open now.
@@ -198,7 +198,7 @@ describe("applyBattleResult", () => {
     expect(first.events.at(-1)).toMatchObject({ type: "battle" });
     const second = ok(fightPendingBattle(first.state, winLosing(0))).state;
     expect(second.pendingBattle).toBeNull();
-    expect(second.heroes[0]!.xp).toBe(160);
+    expect(second.heroes[0]!.xp).toBe(200);
   });
 
   it("collects a guarded pickup after the fight", () => {

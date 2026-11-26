@@ -58,13 +58,11 @@ export function registerUndead(): void {
       if (owner.id !== ctx.attacker.id || ctx.kind !== "shot") return null;
       const target = ctx.defender.id;
       const gate = 12 * owner.count;
-      const tier = owner.creature.tier;
       return (fx) => {
         fx.addCondition(target, {
           kind: "shaken",
           clock: 2,
           gate: { measure: "hp", max: gate },
-          tier,
           source: owner.id,
         });
       };
@@ -158,13 +156,11 @@ export function registerUndead(): void {
       if (owner.id !== ctx.attacker.id) return null;
       if (ctx.kind !== "melee" && ctx.kind !== "retaliation") return null;
       const target = ctx.defender.id;
-      const tier = owner.creature.tier;
       return (fx) => {
         fx.addCondition(target, {
           kind: "venomed",
           size: 3,
           clock: 2,
-          tier,
           source: owner.id,
         });
       };
@@ -174,7 +170,7 @@ export function registerUndead(): void {
   registerAct({
     id: "mesmerise",
     name: "Mesmerise",
-    text: "An adjacent enemy stack falls Asleep for 2 rounds. Gate 30 HP per Vampire.",
+    text: "An adjacent enemy stack falls Asleep for 2 rounds. Gate 30 HP per Vampire, doubled against a Hushed or Mollified stack.",
     kind: "ability",
     targets: 1,
     targetKinds: ["stack"],
@@ -187,11 +183,20 @@ export function registerUndead(): void {
     aiTargets: (state, actorId) => oneEach(enemiesOf(state, actorId)),
     resolve(fx, actorId, t) {
       const me = fx.stack(actorId);
-      fx.addCondition(targetStack(t[0]) as StackId, {
+      const id = targetStack(t[0]) as StackId;
+      // Doubled against a Hushed or Mollified stack (a quiet or soothed
+      // stack is easier to lull).
+      const soft =
+        fx.isAlive(id) &&
+        fx
+          .stack(id)
+          .conditions.some((c) => c.kind === "hushed" || c.kind === "mollified")
+          ? 2
+          : 1;
+      fx.addCondition(id, {
         kind: "asleep",
         clock: 2,
-        gate: { measure: "hp", max: 30 * me.count },
-        tier: me.creature.tier,
+        gate: { measure: "hp", max: 30 * me.count * soft },
         source: actorId,
       });
     },
@@ -200,7 +205,7 @@ export function registerUndead(): void {
     id: "mesmerise",
     name: "Mesmerise",
     description:
-      "Once per battle, instead of attacking (it may move first): an adjacent enemy stack falls Asleep for 2 rounds. Gate 30 HP per Vampire.",
+      "Once per battle, instead of attacking (it may move first): an adjacent enemy stack falls Asleep for 2 rounds. Gate 30 HP per Vampire, doubled against a Hushed or Mollified stack.",
     act: "mesmerise",
     moveFirst: true,
   });

@@ -328,6 +328,18 @@ describe("Fuel (2.4)", () => {
     expect(err("jolt", ref(s0, "d1", "shielded"))).toMatch(/touches/);
   });
 
+  it("never burns a Sworn (balance round 4)", () => {
+    // Sworn is Accord, opposed to Storm, but it is not Fuel.
+    let s0 = withConditions(basic(), "d0", [{ kind: "sworn", link: "d1" }]);
+    s0 = withConditions(s0, "d1", [{ kind: "sworn", link: "d0" }]);
+    expect(
+      actionError(
+        s0,
+        castAction(s0, "jolt", [S("d0")], { fuel: ref(s0, "d0", "sworn") }),
+      ),
+    ).toMatch(/Sworn cannot be burnt/);
+  });
+
   it("burning a Hold makes its bearer Wary", () => {
     const s0 = withConditions(basic(), "d0", [{ kind: "turned", clock: 1 }]);
     // Turned d0 now fights for the attacker; Turned is Accord, opposed to Storm.

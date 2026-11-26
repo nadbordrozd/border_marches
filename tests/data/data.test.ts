@@ -75,7 +75,8 @@ describe("creatures", () => {
       return [c.tier, c.hp, c.attack, c.defense, c.damage, c.speed, c.shots];
     });
     expect(rows).toEqual([
-      [1, 8, 4, 2, 2, 5, 0],
+      // The Goblin is the Horde's tier 1 too: HP 10 since balance round 4.
+      [1, 10, 4, 2, 2, 5, 0],
       [1, 9, 5, 4, 2, 4, 0],
       [2, 12, 6, 3, 3, 4, 8],
       // The Wolf Rider is the Horde's tier 3 and the Orc Warboss gains 20

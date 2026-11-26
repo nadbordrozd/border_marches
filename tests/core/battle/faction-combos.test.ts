@@ -492,7 +492,7 @@ describe("The Horde, 6.1: bomb the pile", () => {
     ]);
     expect(countTop(state, "d0")).toEqual([9, 5]);
     // Unhurt, thrown 3 hexes each way.
-    expect(countTop(state, "a0")).toEqual([12, 8]);
+    expect(countTop(state, "a0")).toEqual([12, 10]);
     expect(getStack(state, "a0").hex).toEqual(at(11, 5));
     expect(getStack(state, "a1").hex).toEqual(at(3, 5));
     expect(countTop(state, "d1")).toEqual([8, 10]);
@@ -500,14 +500,14 @@ describe("The Horde, 6.1: bomb the pile", () => {
 });
 
 describe("The Horde, 6.2: fastball, then the boss", () => {
-  it("three Ogres hurl 15 Goblins: Cannonball +150% kills 7 of 14", () => {
+  it("four Ogres hurl 15 Goblins: Cannonball +150% kills 7 of 14", () => {
     let s = battle(
       {
         hero: WARLORD,
         birthright: "launched",
         stacks: [
           unit("goblin", 15, at(4, 5), { native: true }), // a0
-          unit("ogre", 3, at(3, 5), { native: true }), // a1
+          unit("ogre", 4, at(3, 5), { native: true }), // a1
         ],
       },
       { stacks: [unit("bomb-chucker", 14, at(11, 5))] },
@@ -564,7 +564,7 @@ describe("The Horde, 6.2: fastball, then the boss", () => {
     expect(hits[1]).toEqual(["a0", "d1", "special", 56, 2]);
     // The Goblins take nothing and fly 3 hexes west, beside the Brutes.
     expect(getStack(state, "a1").hex).toEqual(at(2, 5));
-    expect(countTop(state, "a1")).toEqual([14, 8]);
+    expect(countTop(state, "a1")).toEqual([14, 10]);
     expect(hits).toContainEqual(["a1", "d2", "special", 51, 1]);
     // Only the target retaliated.
     expect(hits.filter((h) => h[2] === "retaliation").map((h) => h[0])).toEqual(

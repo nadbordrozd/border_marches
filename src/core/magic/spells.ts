@@ -133,7 +133,6 @@ function addSized(
   kind: string,
   size: number,
   clock: number,
-  tier: number,
 ): void {
   const s = capped(kind, size);
   const m = MAX_SIZE[kind];
@@ -141,7 +140,6 @@ function addSized(
     kind,
     size: s,
     clock,
-    tier,
     ...(m !== undefined ? { maxSize: m } : {}),
   });
 }
@@ -191,7 +189,7 @@ const BLOOM: SpellDef[] = [
     scale: { base: 6, per: 3 },
     text: (p) => `A stack gains Thorned ${n(6, 3, p)} for 3 rounds.`,
     resolve(fx, _a, t, c) {
-      addSized(fx, stackOf(t[0]), "thorned", dbl(n(6, 3, c.power), c), 3, 1);
+      addSized(fx, stackOf(t[0]), "thorned", dbl(n(6, 3, c.power), c), 3);
     },
   },
   {
@@ -208,7 +206,7 @@ const BLOOM: SpellDef[] = [
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       fx.harm(id, n(12, 6, c.power), { fuelled: c.fuelled });
-      if (fx.isAlive(id)) addSized(fx, id, "venomed", 2, 3, 1);
+      if (fx.isAlive(id)) addSized(fx, id, "venomed", 2, 3);
     },
   },
   {
@@ -293,7 +291,7 @@ const BLOOM: SpellDef[] = [
     text: () =>
       "A stack gains Ripening 20 for 3 rounds: its Strikes do +20% damage, growing by 10% each turn.",
     resolve(fx, _a, t, c) {
-      addSized(fx, stackOf(t[0]), "ripening", dbl(20, c), 3, 3);
+      addSized(fx, stackOf(t[0]), "ripening", dbl(20, c), 3);
     },
   },
   {
@@ -310,7 +308,7 @@ const BLOOM: SpellDef[] = [
     resolve(fx, _a, _t, c) {
       const size = dbl(n(10, 4, c.power), c);
       for (const id of sideStacks(fx.state, c.side))
-        addSized(fx, id, "mending", size, 3, 4);
+        addSized(fx, id, "mending", size, 3);
     },
   },
   {
@@ -361,7 +359,6 @@ const ACCORD: SpellDef[] = [
       fx.link(stackOf(t[0]), stackOf(t[1]), {
         kind: "scapegoat",
         clock: 3,
-        tier: 1,
       });
     },
   },
@@ -382,7 +379,7 @@ const ACCORD: SpellDef[] = [
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       const ids = [id, ...friendlyAdjacent(fx.state, id, c.side)];
-      for (const x of ids) addSized(fx, x, "shielded", dbl(2, c), 3, 1);
+      for (const x of ids) addSized(fx, x, "shielded", dbl(2, c), 3);
     },
   },
   {
@@ -430,7 +427,6 @@ const ACCORD: SpellDef[] = [
       fx.addCondition(stackOf(t[0]), {
         kind: "turned",
         clock: 1,
-        tier: 2,
         gate: holdGate(n(75, 25, c.power), c),
       });
     },
@@ -446,7 +442,7 @@ const ACCORD: SpellDef[] = [
     text: () =>
       "A stack gains Mollified 30 for 3 rounds: its Strikes do -30% damage.",
     resolve(fx, _a, t, c) {
-      addSized(fx, stackOf(t[0]), "mollified", dbl(30, c), 3, 2);
+      addSized(fx, stackOf(t[0]), "mollified", dbl(30, c), 3);
     },
   },
   {
@@ -466,7 +462,7 @@ const ACCORD: SpellDef[] = [
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
       const ids = [id, ...friendlyAdjacent(fx.state, id, c.side)];
-      for (const x of ids) addSized(fx, x, "warded", dbl(30, c), 3, 3);
+      for (const x of ids) addSized(fx, x, "warded", dbl(30, c), 3);
     },
   },
   {
@@ -482,7 +478,7 @@ const ACCORD: SpellDef[] = [
     resolve(fx, _a, t) {
       const id = stackOf(t[0]);
       endKind(fx, id, "shaken");
-      fx.addCondition(id, { kind: "heartened", clock: 3, tier: 3 });
+      fx.addCondition(id, { kind: "heartened", clock: 3 });
     },
   },
   {
@@ -500,7 +496,6 @@ const ACCORD: SpellDef[] = [
       fx.addCondition(stackOf(t[0]), {
         kind: "turned",
         clock: 2,
-        tier: 4,
         gate: holdGate(n(150, 50, c.power), c),
       });
     },
@@ -552,7 +547,7 @@ const CLOCK: SpellDef[] = [
     resolve(fx, _a, t) {
       const id = stackOf(t[0]);
       endKind(fx, id, "delayed");
-      fx.addCondition(id, { kind: "hastened", clock: 2, tier: 1 });
+      fx.addCondition(id, { kind: "hastened", clock: 2 });
     },
   },
   {
@@ -567,7 +562,7 @@ const CLOCK: SpellDef[] = [
     resolve(fx, _a, t) {
       const id = stackOf(t[0]);
       endKind(fx, id, "hastened");
-      fx.addCondition(id, { kind: "delayed", clock: 2, tier: 1 });
+      fx.addCondition(id, { kind: "delayed", clock: 2 });
     },
   },
   {
@@ -625,7 +620,7 @@ const CLOCK: SpellDef[] = [
       "Every stack on a hex and the 6 around it gains Slowed 1 for 3 rounds, friend or foe.",
     resolve(fx, _a, t, c) {
       for (const id of stacksOn(fx.state, discHexes(hexOf(t[0]), 1)))
-        addSized(fx, id, "slowed", dbl(1, c), 3, 2);
+        addSized(fx, id, "slowed", dbl(1, c), 3);
     },
   },
   {
@@ -639,7 +634,7 @@ const CLOCK: SpellDef[] = [
     text: () => "Every stack on your side gains Quickened 1 for 2 rounds.",
     resolve(fx, _a, _t, c) {
       for (const id of sideStacks(fx.state, c.side))
-        addSized(fx, id, "quickened", dbl(1, c), 2, 2);
+        addSized(fx, id, "quickened", dbl(1, c), 2);
     },
   },
   {
@@ -654,7 +649,7 @@ const CLOCK: SpellDef[] = [
       "The friendly stack about to act takes an extra turn after this one, then becomes Delayed for 2 rounds.",
     resolve(fx, a) {
       fx.extraTurn(a);
-      fx.addCondition(a, { kind: "delayed", clock: 2, tier: 3 });
+      fx.addCondition(a, { kind: "delayed", clock: 2 });
     },
   },
   {
@@ -668,7 +663,7 @@ const CLOCK: SpellDef[] = [
     text: () => "Every stack on your side becomes Hastened for 2 rounds.",
     resolve(fx, _a, _t, c) {
       for (const id of sideStacks(fx.state, c.side))
-        fx.addCondition(id, { kind: "hastened", clock: 2, tier: 3 });
+        fx.addCondition(id, { kind: "hastened", clock: 2 });
     },
   },
   {
@@ -683,14 +678,7 @@ const CLOCK: SpellDef[] = [
     text: (p) =>
       `A stack gains Reckoning ${n(75, 30, p)} for 2 rounds: a debt of ${n(75, 30, p)} Harm when it runs out.`,
     resolve(fx, _a, t, c) {
-      addSized(
-        fx,
-        stackOf(t[0]),
-        "reckoning",
-        dbl(n(75, 30, c.power), c),
-        2,
-        4,
-      );
+      addSized(fx, stackOf(t[0]), "reckoning", dbl(n(75, 30, c.power), c), 2);
     },
   },
   {
@@ -705,7 +693,7 @@ const CLOCK: SpellDef[] = [
       "Every stack on your side becomes Heartened for 1 round: each may take an extra turn this round.",
     resolve(fx, _a, _t, c) {
       for (const id of sideStacks(fx.state, c.side))
-        fx.addCondition(id, { kind: "heartened", clock: 1, tier: 5 });
+        fx.addCondition(id, { kind: "heartened", clock: 1 });
     },
   },
 ];
@@ -747,7 +735,7 @@ const HUSH: SpellDef[] = [
     fuel: null,
     text: () => "A stack becomes Hushed for 2 rounds: it cannot shoot.",
     resolve(fx, _a, t) {
-      fx.addCondition(stackOf(t[0]), { kind: "hushed", clock: 2, tier: 1 });
+      fx.addCondition(stackOf(t[0]), { kind: "hushed", clock: 2 });
     },
   },
   {
@@ -765,7 +753,7 @@ const HUSH: SpellDef[] = [
       const id = stackOf(t[0]);
       const x = n(25, 12, c.power);
       fx.heal(id, dbl(x, c), { revive: true });
-      addSized(fx, id, "reckoning", x, 3, 1);
+      addSized(fx, id, "reckoning", x, 3);
     },
   },
   {
@@ -779,7 +767,7 @@ const HUSH: SpellDef[] = [
     text: () =>
       "A stack becomes Jinxed 25 for 3 rounds: it cannot retaliate and Strikes against it do +25% damage.",
     resolve(fx, _a, t, c) {
-      addSized(fx, stackOf(t[0]), "jinxed", dbl(25, c), 3, 1);
+      addSized(fx, stackOf(t[0]), "jinxed", dbl(25, c), 3);
     },
   },
   {
@@ -812,7 +800,6 @@ const HUSH: SpellDef[] = [
       fx.addCondition(stackOf(t[0]), {
         kind: "asleep",
         clock: 2,
-        tier: 2,
         gate: holdGate(n(75, 25, c.power), c),
       });
     },
@@ -855,7 +842,6 @@ const HUSH: SpellDef[] = [
         kind: "leeched",
         size: dbl(n(15, 7, c.power), c),
         clock: 3,
-        tier: 3,
       });
     },
   },
@@ -979,8 +965,8 @@ const STORM: SpellDef[] = [
       `A stack gains Burning ${n(6, 3, p)} and Fired Up 2, both for 3 rounds.`,
     resolve(fx, _a, t, c) {
       const id = stackOf(t[0]);
-      addSized(fx, id, "burning", dbl(n(6, 3, c.power), c), 3, 1);
-      addSized(fx, id, "fired-up", 2, 3, 1);
+      addSized(fx, id, "burning", dbl(n(6, 3, c.power), c), 3);
+      addSized(fx, id, "fired-up", 2, 3);
     },
   },
   {
@@ -1034,7 +1020,6 @@ const STORM: SpellDef[] = [
       fx.addCondition(stackOf(t[0]), {
         kind: "frozen",
         clock: 2,
-        tier: 2,
         gate: holdGate(n(75, 25, c.power), c),
       });
     },
@@ -1052,7 +1037,7 @@ const STORM: SpellDef[] = [
     resolve(fx, _a, t, c) {
       const hexes = discHexes(hexOf(t[0]), 2);
       for (const id of stacksOn(fx.state, hexes))
-        addSized(fx, id, "drenched", dbl(40, c), 3, 3);
+        addSized(fx, id, "drenched", dbl(40, c), 3);
       for (const h of hexes) {
         if (groundAt(fx.state, h)?.kind === "fire") fx.endGround(h);
       }
@@ -1099,7 +1084,7 @@ const STORM: SpellDef[] = [
           area: { centre: hexOf(t[0]), side: c.side },
         });
         // A stack the area effect did not reach (Launched) gains nothing.
-        if (h > 0 && fx.isAlive(id)) addSized(fx, id, "slowed", 2, 2, 4);
+        if (h > 0 && fx.isAlive(id)) addSized(fx, id, "slowed", 2, 2);
       }
     },
   },

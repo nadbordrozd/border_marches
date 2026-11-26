@@ -39,7 +39,8 @@ polite reminders. The Restless keep getting up.
   condition tool is Pass on, Wind, Set off or Share (never Feed).
 - **What the wheel gives the Restless.** Hush is opposed to Bloom and
   Accord. The Ghouls' Grave Rot (Venomed, a Bloom bane) is home-made Fuel
-  on an enemy stack, and every Sworn link on a Realm stack is Fuel too.
+  on an enemy stack (a Sworn link on a Realm stack is not Fuel, since
+  balance round 4).
   Clock pages Echo the Shaken and Jinxed the faction hands out.
 
 ## 3. Birthright: Not Done Yet
@@ -112,11 +113,11 @@ when the condition is made, from the maker's count at that moment.
 A Drill is bought once per player and then applies to all of that player's
 stacks of the creature (ECONOMY 6.3).
 
-| Drill building | Unit     | Ability         | Exact rule                                                                                                                                                                           |
-| -------------- | -------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Bone Yard      | Skeleton | **Spare Parts** | When the Skeletons get up, their bones are not consumed: the feature stays under them for Keen, Feast, Last Rites and the King.                                                      |
-| Rot Cellar     | Ghoul    | **Grave Rot**   | A stack struck by the Ghouls in melee (attack or retaliation) gains Venomed, size 3, clock 2 (the MVP Venom).                                                                        |
-| Drawing Room   | Vampire  | **Mesmerise**   | Activated, once per battle, in place of an attack (the Vampires may move first): an adjacent enemy stack gains Asleep with clock 2 and gate `{ hp, max: 30 x the Vampires' count }`. |
+| Drill building | Unit     | Ability         | Exact rule                                                                                                                                                                                                                        |
+| -------------- | -------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bone Yard      | Skeleton | **Spare Parts** | When the Skeletons get up, their bones are not consumed: the feature stays under them for Keen, Feast, Last Rites and the King.                                                                                                   |
+| Rot Cellar     | Ghoul    | **Grave Rot**   | A stack struck by the Ghouls in melee (attack or retaliation) gains Venomed, size 3, clock 2 (the MVP Venom).                                                                                                                     |
+| Drawing Room   | Vampire  | **Mesmerise**   | Activated, once per battle, in place of an attack (the Vampires may move first): an adjacent enemy stack gains Asleep with clock 2 and gate `{ hp, max: 30 x the Vampires' count }`, doubled against a Hushed or Mollified stack. |
 
 ## 6. Combos
 

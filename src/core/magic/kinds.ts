@@ -63,7 +63,6 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
             kind: "venomed",
             size: 2,
             clock: 2,
-            tier: 3,
           });
       }
     },
@@ -95,14 +94,12 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
             kind: "venomed",
             size: 2,
             clock: 2,
-            tier: 3,
           });
         if (fx.hasRule(side, "hedge-clipper-shears"))
           fx.addCondition(striker, {
             kind: "slowed",
             size: 2,
             clock: 2,
-            tier: 3,
           });
       };
     },
@@ -144,6 +141,12 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
     text: (c) => `+${c.size} Defense ${clockText(c.clock)}.`,
     defenseModifier(ctx, holder, c) {
       if (holder.id !== ctx.defender.id || c.size === 0) return null;
+      // The Gumshoes' Dead to Rights: their shots ignore Shielded.
+      if (
+        ctx.kind === "shot" &&
+        ctx.attacker.creature.abilities.includes("dead-to-rights")
+      )
+        return null;
       return { source: "shielded", label: "Shielded", amount: c.size };
     },
   },
@@ -194,7 +197,7 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
       if (!hasRule(ctx.state, holder.side, "metronome-spurs")) return null;
       const target = ctx.defender.id;
       return (fx) => {
-        fx.addCondition(target, { kind: "slowed", size: 1, clock: 2, tier: 3 });
+        fx.addCondition(target, { kind: "slowed", size: 1, clock: 2 });
       };
     },
   },
@@ -278,7 +281,6 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
             kind: "fired-up",
             size: 2,
             clock: 2,
-            tier: 3,
           });
       }
     },
@@ -312,7 +314,7 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
       const me = holder.id;
       return (fx) => {
         if (!fx.isAlive(target) && fx.isAlive(me))
-          fx.addCondition(me, { kind: "heartened", clock: 1, tier: 3 });
+          fx.addCondition(me, { kind: "heartened", clock: 1 });
       };
     },
     // Blaze of Glory: on expiry, adjacent enemies gain Burning of twice
@@ -329,7 +331,6 @@ export const MAGIC_CONDITION_KINDS: readonly ConditionKindDef[] = [
           kind: "burning",
           size: 2 * c.size,
           clock: 2,
-          tier: 3,
         });
     },
   },
@@ -365,11 +366,11 @@ export const MAGIC_GROUND_KINDS: readonly GroundKindDef[] = [
       `Brambles: ${f.size} Harm and Slowed 1 to a stack that enters or starts its turn here.`,
     onEnter: (fx, id, f) => {
       fx.harm(id, f.size);
-      fx.addCondition(id, { kind: "slowed", size: 1, clock: 2, tier: 3 });
+      fx.addCondition(id, { kind: "slowed", size: 1, clock: 2 });
     },
     onTurnStart: (fx, id, f) => {
       fx.harm(id, f.size);
-      fx.addCondition(id, { kind: "slowed", size: 1, clock: 2, tier: 3 });
+      fx.addCondition(id, { kind: "slowed", size: 1, clock: 2 });
     },
   },
   {

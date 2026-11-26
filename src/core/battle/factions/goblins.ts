@@ -130,7 +130,6 @@ export function registerGoblins(): void {
             kind: "burning",
             size: 2 * count,
             clock: 3,
-            tier: me.creature.tier,
             source: "fire-pots",
           });
         }
@@ -156,13 +155,11 @@ export function registerGoblins(): void {
       if (owner.id !== ctx.attacker.id) return null;
       if (ctx.kind !== "melee" && ctx.kind !== "retaliation") return null;
       const target = ctx.defender.id;
-      const tier = owner.creature.tier;
       return (fx) => {
         fx.addCondition(target, {
           kind: "venomed",
           size: 3,
           clock: 2,
-          tier,
           source: owner.id,
         });
       };
@@ -172,7 +169,7 @@ export function registerGoblins(): void {
   registerAct({
     id: "hurl",
     name: "Hurl",
-    text: "An adjacent stack, friend or foe, is thrown 6 hexes directly away from the Ogres. It works only on a stack with at most 40 HP per Ogre in total.",
+    text: "An adjacent stack, friend or foe, is thrown 6 hexes directly away from the Ogres. It works only on a stack with at most 40 HP per Ogre, never on a Shielded one.",
     kind: "ability",
     targets: 1,
     targetKinds: ["stack"],
@@ -181,6 +178,8 @@ export function registerGoblins(): void {
       const s = stackOf(state, targetStack(t[0]) ?? "");
       if (!me || !s || s.id === me.id) return "choose another stack";
       if (!withinReach(state, me, me, s)) return "it must be adjacent";
+      if (s.conditions.some((c) => c.kind === "shielded"))
+        return "a Shielded stack stands firm";
       const limit = 40 * me.count;
       const hp = stackTotalHp(s);
       return hp <= limit ? null : `limit ${limit} HP, the stack has ${hp}`;
@@ -197,7 +196,7 @@ export function registerGoblins(): void {
     id: "hurl",
     name: "Hurl",
     description:
-      "Every turn, instead of attacking (it may move first): an adjacent stack, friend or foe, is thrown 6 hexes directly away from the Ogres. It works only on a stack with at most 40 HP per Ogre in total.",
+      "Every turn, instead of attacking (it may move first): an adjacent stack, friend or foe, is thrown 6 hexes directly away from the Ogres. It works only on a stack with at most 40 HP per Ogre, never on a Shielded one.",
     act: "hurl",
     moveFirst: true,
     everyTurn: true,
