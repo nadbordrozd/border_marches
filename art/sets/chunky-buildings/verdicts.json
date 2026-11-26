@@ -1,0 +1,1602 @@
+{
+  "realm-s1#5": {
+    "verdict": "ACCEPTED",
+    "notes": "keep: fat round cream keep with a big blue cone and arched door; cute, chunky, clear at 64 px on wood and light",
+    "at": "2026-11-26T21:42:01.497Z"
+  },
+  "realm-s1#10": {
+    "verdict": "ACCEPTED",
+    "notes": "tavern: crooked half-timbered inn with chimney and tankard sign; chunky, reads at 64 px",
+    "at": "2026-11-26T21:42:01.572Z"
+  },
+  "realm-s1#12": {
+    "verdict": "ACCEPTED",
+    "notes": "slayers-lodge: cream stone lodge under a red roof with a giant green dragon skull over the door; strongest signature of the set",
+    "at": "2026-11-26T21:42:01.650Z"
+  },
+  "restless-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "town-hall: crooked slate hall with a violet roof and a clock tower; clear on dark wood thanks to the outline",
+    "at": "2026-11-26T21:42:01.734Z"
+  },
+  "restless-s1#5": {
+    "verdict": "ACCEPTED",
+    "notes": "manor: lopsided slate manor with violet gables and glowing windows; spooky-cute",
+    "at": "2026-11-26T21:42:01.823Z"
+  },
+  "restless-s1#10": {
+    "verdict": "ACCEPTED",
+    "notes": "wailing-tower: leaning slate tower with a gabled violet roof, crooked and characterful",
+    "at": "2026-11-26T21:42:01.906Z"
+  },
+  "restless-s1#12": {
+    "verdict": "ACCEPTED",
+    "notes": "family-crypt: squat bone-white crypt with a violet roof and dark door; reads apart from the slate buildings",
+    "at": "2026-11-26T21:42:01.987Z"
+  },
+  "horde-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "boss-tent: big round spotted hide tent with two huge horns; chunky and cute",
+    "at": "2026-11-26T21:42:02.069Z"
+  },
+  "horde-s1#7": {
+    "verdict": "ACCEPTED",
+    "notes": "wolf-kennels: chunky log kennel with a tin roof and a giant bone; cute dog-house silhouette",
+    "at": "2026-11-26T21:42:02.155Z"
+  },
+  "horde-s1#12": {
+    "verdict": "ACCEPTED",
+    "notes": "marketplace: tin stall with a striped yellow awning, crates and sacks",
+    "at": "2026-11-26T21:42:02.233Z"
+  },
+  "realm-s1#2": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: roof crowded with dormers, smaller silhouette",
+    "at": "2026-11-26T21:42:02.313Z"
+  },
+  "realm-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: busy, stairs on the side read as a second structure",
+    "at": "2026-11-26T21:42:02.391Z"
+  },
+  "realm-s1#4": {
+    "verdict": "REJECTED",
+    "notes": "Keep alternative; #5 has the cleaner door and crenellation",
+    "at": "2026-11-26T21:42:02.474Z"
+  },
+  "realm-s1#6": {
+    "verdict": "REJECTED",
+    "notes": "Keep alternative; near-duplicate of #5",
+    "at": "2026-11-26T21:42:02.553Z"
+  },
+  "realm-s1#7": {
+    "verdict": "REJECTED",
+    "notes": "Keep: tall and narrow, less chunky than #5",
+    "at": "2026-11-26T21:42:02.637Z"
+  },
+  "realm-s1#8": {
+    "verdict": "REJECTED",
+    "notes": "Tavern alternative; sign smaller than #10",
+    "at": "2026-11-26T21:42:02.716Z"
+  },
+  "realm-s1#9": {
+    "verdict": "REJECTED",
+    "notes": "Tavern: no tankard sign, plain house",
+    "at": "2026-11-26T21:42:02.796Z"
+  },
+  "realm-s1#11": {
+    "verdict": "REJECTED",
+    "notes": "Tavern alternative; near-duplicate of #10",
+    "at": "2026-11-26T21:42:02.874Z"
+  },
+  "realm-s1#13": {
+    "verdict": "REJECTED",
+    "notes": "Slayers' Lodge: no timber, skull overlaps the roof edge awkwardly",
+    "at": "2026-11-26T21:42:02.952Z"
+  },
+  "realm-s1#14": {
+    "verdict": "REJECTED",
+    "notes": "Slayers' Lodge: dark legs under the lodge read as a pier",
+    "at": "2026-11-26T21:42:03.031Z"
+  },
+  "realm-s1#15": {
+    "verdict": "REJECTED",
+    "notes": "Slayers' Lodge: skull too small, plain house",
+    "at": "2026-11-26T21:42:03.113Z"
+  },
+  "restless-s1#1": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: two structures side by side",
+    "at": "2026-11-26T21:42:03.194Z"
+  },
+  "restless-s1#2": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: violet roof swallows the facade, little slate",
+    "at": "2026-11-26T21:42:03.272Z"
+  },
+  "restless-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: grey roof, reads as a ruined church",
+    "at": "2026-11-26T21:42:03.353Z"
+  },
+  "restless-s1#4": {
+    "verdict": "REJECTED",
+    "notes": "Manor alternative; fewer glowing windows than #5",
+    "at": "2026-11-26T21:42:03.431Z"
+  },
+  "restless-s1#6": {
+    "verdict": "REJECTED",
+    "notes": "Manor: roof-heavy, no windows",
+    "at": "2026-11-26T21:42:03.513Z"
+  },
+  "restless-s1#7": {
+    "verdict": "REJECTED",
+    "notes": "Manor: muddled roofs",
+    "at": "2026-11-26T21:42:03.593Z"
+  },
+  "restless-s1#8": {
+    "verdict": "REJECTED",
+    "notes": "Wailing Tower: curly spire reads as a rooster vane",
+    "at": "2026-11-26T21:42:03.674Z"
+  },
+  "restless-s1#9": {
+    "verdict": "REJECTED",
+    "notes": "Wailing Tower: thin and stacked, a stray bright speck at its foot",
+    "at": "2026-11-26T21:42:03.752Z"
+  },
+  "restless-s1#11": {
+    "verdict": "REJECTED",
+    "notes": "Wailing Tower: dark blob, no violet roof",
+    "at": "2026-11-26T21:42:03.832Z"
+  },
+  "restless-s1#14": {
+    "verdict": "REJECTED",
+    "notes": "Family Crypt: a cross on top reads as a church",
+    "at": "2026-11-26T21:42:03.918Z"
+  },
+  "restless-s1#15": {
+    "verdict": "REJECTED",
+    "notes": "Family Crypt: cracked roof reads broken, not cute",
+    "at": "2026-11-26T21:42:04.007Z"
+  },
+  "horde-s1#1": {
+    "verdict": "REJECTED",
+    "notes": "Boss Tent: plain teepee, less chunky",
+    "at": "2026-11-26T21:42:04.094Z"
+  },
+  "horde-s1#2": {
+    "verdict": "REJECTED",
+    "notes": "Boss Tent: ram horns, flatter",
+    "at": "2026-11-26T21:42:04.180Z"
+  },
+  "horde-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "Boss Tent alternative; near-duplicate of #0",
+    "at": "2026-11-26T21:42:04.270Z"
+  },
+  "horde-s1#4": {
+    "verdict": "REJECTED",
+    "notes": "Wolf Kennels: yellow thatch, reads as a hut",
+    "at": "2026-11-26T21:42:04.369Z"
+  },
+  "horde-s1#5": {
+    "verdict": "REJECTED",
+    "notes": "Wolf Kennels: flat, low",
+    "at": "2026-11-26T21:42:04.458Z"
+  },
+  "horde-s1#6": {
+    "verdict": "REJECTED",
+    "notes": "Wolf Kennels: busy roof patches",
+    "at": "2026-11-26T21:42:04.557Z"
+  },
+  "horde-s1#8": {
+    "verdict": "REJECTED",
+    "notes": "Skull Tower: spindly log legs, thin brown outline; redone with the fort family",
+    "at": "2026-11-26T21:42:04.662Z"
+  },
+  "horde-s1#9": {
+    "verdict": "REJECTED",
+    "notes": "Skull Tower: spindly legs; redone with the fort family",
+    "at": "2026-11-26T21:42:04.746Z"
+  },
+  "horde-s1#10": {
+    "verdict": "REJECTED",
+    "notes": "Skull Tower: spindly legs and ladder; redone with the fort family",
+    "at": "2026-11-26T21:42:04.826Z"
+  },
+  "horde-s1#11": {
+    "verdict": "REJECTED",
+    "notes": "Skull Tower: still on thin legs, not chunky; redone with the fort family",
+    "at": "2026-11-26T21:42:04.904Z"
+  },
+  "horde-s1#13": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace: pale awning, busy wooden frame",
+    "at": "2026-11-26T21:42:04.984Z"
+  },
+  "horde-s1#14": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace: grey tin box swallows the stall",
+    "at": "2026-11-26T21:42:05.065Z"
+  },
+  "horde-s1#15": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace alternative; #12 reads clearer",
+    "at": "2026-11-26T21:42:05.147Z"
+  },
+  "realm-s1#1": {
+    "verdict": "ACCEPTED",
+    "notes": "village-hall: plump half-timbered hall with a red-brown roof and a bell turret; the base the Town and City Hall grow from",
+    "at": "2026-11-26T21:43:07.942Z"
+  },
+  "realm-s1#0": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall alternative; #1 has the fuller front and clearer bell turret",
+    "at": "2026-11-26T21:43:08.023Z"
+  },
+  "realm-halls-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "town-hall: the village hall grown: two half-timbered storeys, a side wing and a clock tower under red-brown roofs; reads as the same building, bigger",
+    "at": "2026-11-26T21:48:44.730Z"
+  },
+  "realm-halls-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "city-hall: the timber hall grown grand: red-brown wings round a blue dome with a clock; keeps the family's timbers and roofs",
+    "at": "2026-11-26T21:48:44.826Z"
+  },
+  "realm-castle-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "royal-castle: the round keep inside a small castle: blue-coned towers and a big arched gate; chunky and cute",
+    "at": "2026-11-26T21:48:44.927Z"
+  },
+  "realm-castle-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "round-table: round cream hall under a big blue dome with a gold crown; simple, bold silhouette",
+    "at": "2026-11-26T21:48:45.017Z"
+  },
+  "realm-halls-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: tower too thin and tall, small body",
+    "at": "2026-11-26T21:48:45.108Z"
+  },
+  "realm-halls-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: long low wing, tower small",
+    "at": "2026-11-26T21:48:45.204Z"
+  },
+  "realm-halls-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: crowded with a stray annex at the right",
+    "at": "2026-11-26T21:48:45.305Z"
+  },
+  "realm-halls-a#4": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall alternative; close to #3 with a weaker front",
+    "at": "2026-11-26T21:48:45.410Z"
+  },
+  "realm-halls-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: dormer row makes it read as a barracks",
+    "at": "2026-11-26T21:48:45.509Z"
+  },
+  "realm-halls-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: L-shape spreads wide, tower lost",
+    "at": "2026-11-26T21:48:45.605Z"
+  },
+  "realm-halls-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall alternative; busier roof than #3",
+    "at": "2026-11-26T21:48:45.695Z"
+  },
+  "realm-halls-a#8": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: cream palace loses the family's timbers",
+    "at": "2026-11-26T21:48:45.842Z"
+  },
+  "realm-halls-a#9": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: small church-like, not grand",
+    "at": "2026-11-26T21:48:46.002Z"
+  },
+  "realm-halls-a#10": {
+    "verdict": "REJECTED",
+    "notes": "City Hall alternative; close to #14 with a smaller dome",
+    "at": "2026-11-26T21:48:46.180Z"
+  },
+  "realm-halls-a#11": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: plain stone block, no timbers",
+    "at": "2026-11-26T21:48:46.311Z"
+  },
+  "realm-halls-a#12": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: cross plan reads as a cathedral",
+    "at": "2026-11-26T21:48:46.452Z"
+  },
+  "realm-halls-a#13": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: low and flat, little dome",
+    "at": "2026-11-26T21:48:46.588Z"
+  },
+  "realm-halls-a#15": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: busy brown facade, dark at 64 px",
+    "at": "2026-11-26T21:48:46.710Z"
+  },
+  "realm-castle-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Royal Castle alternative; gate smaller than #2",
+    "at": "2026-11-26T21:48:46.859Z"
+  },
+  "realm-castle-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Royal Castle: towers crowd and merge",
+    "at": "2026-11-26T21:48:46.986Z"
+  },
+  "realm-castle-a#3": {
+    "verdict": "REJECTED",
+    "notes": "Royal Castle: no gate, crowded cones",
+    "at": "2026-11-26T21:48:47.111Z"
+  },
+  "realm-castle-a#4": {
+    "verdict": "REJECTED",
+    "notes": "Royal Castle: keep has no blue cone, reads as another building",
+    "at": "2026-11-26T21:48:47.237Z"
+  },
+  "realm-castle-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Royal Castle: thin walls round an empty yard (the rejected ring look)",
+    "at": "2026-11-26T21:48:47.358Z"
+  },
+  "realm-castle-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Royal Castle: keep without its cone",
+    "at": "2026-11-26T21:48:47.487Z"
+  },
+  "realm-castle-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Royal Castle: busy, an extra cottage",
+    "at": "2026-11-26T21:48:47.646Z"
+  },
+  "realm-castle-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Round Table alternative; plainer drum than #13",
+    "at": "2026-11-26T21:48:47.769Z"
+  },
+  "realm-castle-a#9": {
+    "verdict": "REJECTED",
+    "notes": "Round Table: drum frilled like a skirt",
+    "at": "2026-11-26T21:48:47.872Z"
+  },
+  "realm-castle-a#10": {
+    "verdict": "REJECTED",
+    "notes": "Round Table alternative; close to #13",
+    "at": "2026-11-26T21:48:47.973Z"
+  },
+  "realm-castle-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Round Table: side wings reads as a city hall",
+    "at": "2026-11-26T21:48:48.072Z"
+  },
+  "realm-castle-a#12": {
+    "verdict": "REJECTED",
+    "notes": "Round Table: busy timbered drum",
+    "at": "2026-11-26T21:48:48.175Z"
+  },
+  "realm-castle-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Round Table: tiered cake look",
+    "at": "2026-11-26T21:48:48.327Z"
+  },
+  "realm-castle-a#15": {
+    "verdict": "REJECTED",
+    "notes": "Round Table: dark navy dome, drum hidden",
+    "at": "2026-11-26T21:48:48.455Z"
+  },
+  "realm-dwell-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "squires-hall: plump half-timbered hall under a blue roof with a big round shield over the door and a straw dummy; blue sets it apart from the red village hall",
+    "at": "2026-11-26T21:49:06.453Z"
+  },
+  "realm-dwell-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "archery-range: chunky open timber shed under a red-brown roof with a big red and white target",
+    "at": "2026-11-26T21:49:06.588Z"
+  },
+  "realm-dwell-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "barracks: long stout cream stone barracks with a blue roof and a spear rack",
+    "at": "2026-11-26T21:49:06.716Z"
+  },
+  "realm-dwell-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "friary: cosy cream stone friary with a bell gable and round window; cute",
+    "at": "2026-11-26T21:49:06.880Z"
+  },
+  "realm-dwell-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Squires' Hall: red roof like the village hall, shield small",
+    "at": "2026-11-26T21:49:06.999Z"
+  },
+  "realm-dwell-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Squires' Hall: red roof, busy dormers",
+    "at": "2026-11-26T21:49:07.133Z"
+  },
+  "realm-dwell-a#3": {
+    "verdict": "REJECTED",
+    "notes": "Squires' Hall alternative; no shield over the door",
+    "at": "2026-11-26T21:49:07.254Z"
+  },
+  "realm-dwell-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Archery Range alternative; near-duplicate of #4",
+    "at": "2026-11-26T21:49:07.370Z"
+  },
+  "realm-dwell-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Archery Range: blue like the barracks; #4 keeps them apart",
+    "at": "2026-11-26T21:49:07.487Z"
+  },
+  "realm-dwell-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Archery Range: a dirt patch under the shed",
+    "at": "2026-11-26T21:49:07.607Z"
+  },
+  "realm-dwell-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Barracks alternative; red roof, #10 kept for contrast",
+    "at": "2026-11-26T21:49:07.720Z"
+  },
+  "realm-dwell-a#9": {
+    "verdict": "REJECTED",
+    "notes": "Barracks: red roof, spears faint",
+    "at": "2026-11-26T21:49:07.837Z"
+  },
+  "realm-dwell-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Barracks alternative; near-duplicate of #10",
+    "at": "2026-11-26T21:49:07.952Z"
+  },
+  "realm-dwell-a#12": {
+    "verdict": "REJECTED",
+    "notes": "Friary alternative; flatter roof than #13",
+    "at": "2026-11-26T21:49:08.067Z"
+  },
+  "realm-dwell-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Friary: blue roof reads as the Chapel of Oaths",
+    "at": "2026-11-26T21:49:08.219Z"
+  },
+  "realm-dwell-a#15": {
+    "verdict": "REJECTED",
+    "notes": "Friary: blue, steep gables cramped",
+    "at": "2026-11-26T21:49:08.340Z"
+  },
+  "realm-dwell-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "stables: fat half-timbered barn-roofed stable with a gold horseshoe over the doors and hay bales",
+    "at": "2026-11-26T21:51:00.581Z"
+  },
+  "realm-dwell-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "butts: three red and white straw targets under a little red-brown timber roof; clear at 64 px",
+    "at": "2026-11-26T21:51:00.668Z"
+  },
+  "realm-dwell-b#9": {
+    "verdict": "ACCEPTED",
+    "notes": "guardroom: squat square cream guard tower with crenellations and crossed axes; chunky, apart from the round keep",
+    "at": "2026-11-26T21:51:00.756Z"
+  },
+  "realm-dwell-b#13": {
+    "verdict": "ACCEPTED",
+    "notes": "tiltyard: timber stand under a blue and white striped canopy behind a striped tilt rail",
+    "at": "2026-11-26T21:51:00.843Z"
+  },
+  "realm-dwell-b#1": {
+    "verdict": "REJECTED",
+    "notes": "Stables: blue lean-to roofs spread, horseshoe small",
+    "at": "2026-11-26T21:51:00.928Z"
+  },
+  "realm-dwell-b#2": {
+    "verdict": "REJECTED",
+    "notes": "Stables alternative; #0 has the clearer horseshoe",
+    "at": "2026-11-26T21:51:01.012Z"
+  },
+  "realm-dwell-b#3": {
+    "verdict": "REJECTED",
+    "notes": "Stables: plain house, no horseshoe or hay",
+    "at": "2026-11-26T21:51:01.097Z"
+  },
+  "realm-dwell-b#5": {
+    "verdict": "REJECTED",
+    "notes": "Butts: grey slate roof off palette",
+    "at": "2026-11-26T21:51:01.187Z"
+  },
+  "realm-dwell-b#6": {
+    "verdict": "REJECTED",
+    "notes": "Butts: an A-frame rack, reads as firewood",
+    "at": "2026-11-26T21:51:01.271Z"
+  },
+  "realm-dwell-b#7": {
+    "verdict": "REJECTED",
+    "notes": "Butts: grey roof, stone feet",
+    "at": "2026-11-26T21:51:01.357Z"
+  },
+  "realm-dwell-b#8": {
+    "verdict": "REJECTED",
+    "notes": "Guardroom: round red-roofed tower reads as a silo or windmill",
+    "at": "2026-11-26T21:51:01.442Z"
+  },
+  "realm-dwell-b#10": {
+    "verdict": "REJECTED",
+    "notes": "Guardroom: plain blue-roofed shed",
+    "at": "2026-11-26T21:51:01.533Z"
+  },
+  "realm-dwell-b#11": {
+    "verdict": "REJECTED",
+    "notes": "Guardroom: cluttered with a side door",
+    "at": "2026-11-26T21:51:01.625Z"
+  },
+  "realm-dwell-b#12": {
+    "verdict": "REJECTED",
+    "notes": "Tiltyard: thin posts, little mass",
+    "at": "2026-11-26T21:51:01.715Z"
+  },
+  "realm-dwell-b#14": {
+    "verdict": "REJECTED",
+    "notes": "Tiltyard: open pavilion of thin poles",
+    "at": "2026-11-26T21:51:01.807Z"
+  },
+  "realm-dwell-b#15": {
+    "verdict": "REJECTED",
+    "notes": "Tiltyard: busy pavilion, reads as a market",
+    "at": "2026-11-26T21:51:01.892Z"
+  },
+  "realm-misc-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "palisade: a fat ring of sharpened stakes hugging a timber gate tower; dense, no empty yard; the wooden first stage of the fort family",
+    "at": "2026-11-26T21:52:21.527Z"
+  },
+  "realm-misc-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "tithe-barn: plump half-timbered barn under a red-brown roof with a heap of gold and wheat",
+    "at": "2026-11-26T21:52:21.611Z"
+  },
+  "realm-misc-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "chapel-of-oaths: cream stone chapel with a blue roof, a bell turret and a giant sword at its door",
+    "at": "2026-11-26T21:52:21.699Z"
+  },
+  "realm-misc-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "magic-guild: round cream tower under a floppy blue wizard hat dotted with gold stars; the cutest of the set",
+    "at": "2026-11-26T21:52:21.784Z"
+  },
+  "realm-misc-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Palisade: thin ring round an empty yard (the rejected ring look)",
+    "at": "2026-11-26T21:52:21.867Z"
+  },
+  "realm-misc-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Palisade: ring with a house inside, reads as a farm",
+    "at": "2026-11-26T21:52:21.957Z"
+  },
+  "realm-misc-a#3": {
+    "verdict": "REJECTED",
+    "notes": "Palisade: open ring, white inner wall",
+    "at": "2026-11-26T21:52:22.044Z"
+  },
+  "realm-misc-a#4": {
+    "verdict": "REJECTED",
+    "notes": "Tithe Barn: reads as a house, little wheat",
+    "at": "2026-11-26T21:52:22.128Z"
+  },
+  "realm-misc-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Tithe Barn: dormer house with gold, not a barn",
+    "at": "2026-11-26T21:52:22.215Z"
+  },
+  "realm-misc-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Tithe Barn: long and low, gold small",
+    "at": "2026-11-26T21:52:22.304Z"
+  },
+  "realm-misc-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Chapel of Oaths: plain hall, sword thin at the side",
+    "at": "2026-11-26T21:52:22.395Z"
+  },
+  "realm-misc-a#10": {
+    "verdict": "REJECTED",
+    "notes": "Chapel of Oaths: round blue cone reads as the keep",
+    "at": "2026-11-26T21:52:22.479Z"
+  },
+  "realm-misc-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Chapel of Oaths: wide cross roof, swords stuck on the sides",
+    "at": "2026-11-26T21:52:22.565Z"
+  },
+  "realm-misc-a#13": {
+    "verdict": "REJECTED",
+    "notes": "Magic Guild: a stair spiral and chimney clutter",
+    "at": "2026-11-26T21:52:22.661Z"
+  },
+  "realm-misc-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Magic Guild: tiered domes read as a palace",
+    "at": "2026-11-26T21:52:22.760Z"
+  },
+  "realm-misc-a#15": {
+    "verdict": "REJECTED",
+    "notes": "Magic Guild alternative; plainer than #12",
+    "at": "2026-11-26T21:52:22.847Z"
+  },
+  "realm-trade-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "marketplace: chunky timber stall under a big blue and white striped awning full of goods",
+    "at": "2026-11-26T21:53:41.734Z"
+  },
+  "realm-trade-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "resource-silo: fat round cream silo with a low blue dome and chimney beside logs and an ore cart; squat, so it does not read as the keep",
+    "at": "2026-11-26T21:53:41.845Z"
+  },
+  "realm-trade-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace: a shopfront house, the stall lost",
+    "at": "2026-11-26T21:53:41.951Z"
+  },
+  "realm-trade-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace: low and wide, crates spill",
+    "at": "2026-11-26T21:53:42.058Z"
+  },
+  "realm-trade-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace: thin posts, coloured crates noisy",
+    "at": "2026-11-26T21:53:42.161Z"
+  },
+  "realm-trade-a#3": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace: two stalls, thin posts",
+    "at": "2026-11-26T21:53:42.271Z"
+  },
+  "realm-trade-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace: pale awning, busy",
+    "at": "2026-11-26T21:53:42.374Z"
+  },
+  "realm-trade-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace: long double stall",
+    "at": "2026-11-26T21:53:42.478Z"
+  },
+  "realm-trade-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace: muddled stalls",
+    "at": "2026-11-26T21:53:42.584Z"
+  },
+  "realm-trade-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Resource Silo: tall blue cone reads as the keep",
+    "at": "2026-11-26T21:53:42.693Z"
+  },
+  "realm-trade-a#9": {
+    "verdict": "REJECTED",
+    "notes": "Resource Silo: tall blue cone reads as the keep",
+    "at": "2026-11-26T21:53:42.794Z"
+  },
+  "realm-trade-a#10": {
+    "verdict": "REJECTED",
+    "notes": "Resource Silo: brick tower with a cone, keep-like",
+    "at": "2026-11-26T21:53:42.897Z"
+  },
+  "realm-trade-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Resource Silo alternative; #13 squatter",
+    "at": "2026-11-26T21:53:43.003Z"
+  },
+  "realm-trade-a#12": {
+    "verdict": "REJECTED",
+    "notes": "Resource Silo: keep-like cone",
+    "at": "2026-11-26T21:53:43.106Z"
+  },
+  "realm-trade-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Resource Silo: navy cap, small props",
+    "at": "2026-11-26T21:53:43.210Z"
+  },
+  "realm-trade-a#15": {
+    "verdict": "REJECTED",
+    "notes": "Resource Silo: stacked drum, keep-like cone",
+    "at": "2026-11-26T21:53:43.319Z"
+  },
+  "restless-halls-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "village-hall: the slate town hall smaller: a little crooked parish hall with a violet roof, bell turret and lit windows",
+    "at": "2026-11-26T21:55:17.898Z"
+  },
+  "restless-halls-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "city-hall: the slate hall grown grand: the clock tower among three violet spires over a crooked gothic hall",
+    "at": "2026-11-26T21:55:18.033Z"
+  },
+  "restless-halls-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: small and plain, a bright door only",
+    "at": "2026-11-26T21:55:18.166Z"
+  },
+  "restless-halls-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: muddy dark facade",
+    "at": "2026-11-26T21:55:18.293Z"
+  },
+  "restless-halls-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall alternative; #7 has the clearer bell and windows",
+    "at": "2026-11-26T21:55:18.408Z"
+  },
+  "restless-halls-a#3": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: roof swallows the front",
+    "at": "2026-11-26T21:55:18.534Z"
+  },
+  "restless-halls-a#4": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: chimney and door clutter",
+    "at": "2026-11-26T21:55:18.694Z"
+  },
+  "restless-halls-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: roof heavy, no door",
+    "at": "2026-11-26T21:55:18.818Z"
+  },
+  "restless-halls-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: squashed, chimney reads as a stovepipe",
+    "at": "2026-11-26T21:55:18.942Z"
+  },
+  "restless-halls-a#8": {
+    "verdict": "REJECTED",
+    "notes": "City Hall alternative; fewer spires than #11",
+    "at": "2026-11-26T21:55:19.087Z"
+  },
+  "restless-halls-a#9": {
+    "verdict": "REJECTED",
+    "notes": "City Hall alternative; spiked railing on the roof edge",
+    "at": "2026-11-26T21:55:19.213Z"
+  },
+  "restless-halls-a#10": {
+    "verdict": "REJECTED",
+    "notes": "City Hall alternative; railings on the roof",
+    "at": "2026-11-26T21:55:19.361Z"
+  },
+  "restless-halls-a#12": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: railing clutter, small spire",
+    "at": "2026-11-26T21:55:19.492Z"
+  },
+  "restless-halls-a#13": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: spires merge into one mass",
+    "at": "2026-11-26T21:55:19.623Z"
+  },
+  "restless-halls-a#14": {
+    "verdict": "REJECTED",
+    "notes": "City Hall alternative; railings on the roof",
+    "at": "2026-11-26T21:55:19.774Z"
+  },
+  "restless-halls-a#15": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: busy roofline",
+    "at": "2026-11-26T21:55:19.904Z"
+  },
+  "restless-forts-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "iron-railings: curved black iron railings between two fat slate posts with violet lanterns; first stage of the fort family",
+    "at": "2026-11-26T21:56:53.386Z"
+  },
+  "restless-forts-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "lych-wall: thick slate wall with iron railings and a roofed violet lych-gate; the railings grown into a wall",
+    "at": "2026-11-26T21:56:53.500Z"
+  },
+  "restless-forts-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "black-gate: big black iron gate between two fat slate towers with violet cones; the wall grown into a gatehouse",
+    "at": "2026-11-26T21:56:53.606Z"
+  },
+  "restless-forts-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Iron Railings alternative; flatter than #3",
+    "at": "2026-11-26T21:56:53.710Z"
+  },
+  "restless-forts-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Iron Railings: lacework busy at 64 px",
+    "at": "2026-11-26T21:56:53.825Z"
+  },
+  "restless-forts-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Iron Railings: bone-white arches read as a bridge",
+    "at": "2026-11-26T21:56:53.915Z"
+  },
+  "restless-forts-a#4": {
+    "verdict": "REJECTED",
+    "notes": "Iron Railings alternative; near-duplicate of #3",
+    "at": "2026-11-26T21:56:54.006Z"
+  },
+  "restless-forts-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Lych Wall alternative; brick wall busier than #8",
+    "at": "2026-11-26T21:56:54.099Z"
+  },
+  "restless-forts-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Lych Wall: cream arch, thin fence",
+    "at": "2026-11-26T21:56:54.188Z"
+  },
+  "restless-forts-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Lych Wall: no roof on the gate, plain wall",
+    "at": "2026-11-26T21:56:54.280Z"
+  },
+  "restless-forts-a#9": {
+    "verdict": "REJECTED",
+    "notes": "Lych Wall: cream brick wall off palette, busy",
+    "at": "2026-11-26T21:56:54.369Z"
+  },
+  "restless-forts-a#10": {
+    "verdict": "REJECTED",
+    "notes": "Black Gate: thin towers, gate small",
+    "at": "2026-11-26T21:56:54.457Z"
+  },
+  "restless-forts-a#12": {
+    "verdict": "REJECTED",
+    "notes": "Black Gate: broken-looking gate",
+    "at": "2026-11-26T21:56:54.545Z"
+  },
+  "restless-forts-a#13": {
+    "verdict": "REJECTED",
+    "notes": "Black Gate alternative; solid doors, less iron",
+    "at": "2026-11-26T21:56:54.632Z"
+  },
+  "restless-forts-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Black Gate: cream arch off the family look",
+    "at": "2026-11-26T21:56:54.715Z"
+  },
+  "restless-forts-a#15": {
+    "verdict": "REJECTED",
+    "notes": "Black Gate: cream towers off the slate family",
+    "at": "2026-11-26T21:56:54.800Z"
+  },
+  "restless-dwell-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "potters-field: a cosy crowd of crooked cream tombstones behind a low black iron fence; nothing under it",
+    "at": "2026-11-26T21:58:30.059Z"
+  },
+  "restless-dwell-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "charnel-pit: round slate pit heaped with bones under a little violet roof",
+    "at": "2026-11-26T21:58:30.153Z"
+  },
+  "restless-dwell-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "funeral-parlour: narrow crooked slate house with a violet awning and a coffin by the door",
+    "at": "2026-11-26T21:58:30.247Z"
+  },
+  "restless-dwell-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "royal-mausoleum: bone-white domed mausoleum with columns and a big gold crown on the dome",
+    "at": "2026-11-26T21:58:30.336Z"
+  },
+  "restless-dwell-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Potter's Field: dark ground blob under the stones",
+    "at": "2026-11-26T21:58:30.423Z"
+  },
+  "restless-dwell-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Potter's Field: dead tree and a dark plot inside the fence",
+    "at": "2026-11-26T21:58:30.510Z"
+  },
+  "restless-dwell-a#3": {
+    "verdict": "REJECTED",
+    "notes": "Potter's Field: dark ground slab",
+    "at": "2026-11-26T21:58:30.597Z"
+  },
+  "restless-dwell-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Charnel Pit: rubble ring on the ground around the pit",
+    "at": "2026-11-26T21:58:30.682Z"
+  },
+  "restless-dwell-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Charnel Pit: small lanterns clutter; #4 cleaner",
+    "at": "2026-11-26T21:58:30.768Z"
+  },
+  "restless-dwell-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Charnel Pit: grey stone off the slate, bones faint",
+    "at": "2026-11-26T21:58:30.854Z"
+  },
+  "restless-dwell-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Funeral Parlour: stilt-like legs under the awning",
+    "at": "2026-11-26T21:58:30.940Z"
+  },
+  "restless-dwell-a#10": {
+    "verdict": "REJECTED",
+    "notes": "Funeral Parlour: chimney, coffin hidden",
+    "at": "2026-11-26T21:58:31.027Z"
+  },
+  "restless-dwell-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Funeral Parlour: coffin reads as a plank",
+    "at": "2026-11-26T21:58:31.110Z"
+  },
+  "restless-dwell-a#12": {
+    "verdict": "REJECTED",
+    "notes": "Royal Mausoleum alternative; small crown",
+    "at": "2026-11-26T21:58:31.196Z"
+  },
+  "restless-dwell-a#13": {
+    "verdict": "REJECTED",
+    "notes": "Royal Mausoleum: ribbed drum busy",
+    "at": "2026-11-26T21:58:31.277Z"
+  },
+  "restless-dwell-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Royal Mausoleum: tiered and busy",
+    "at": "2026-11-26T21:58:31.361Z"
+  },
+  "restless-dwell-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "bone-yard: a fat heap of skulls and bones inside black iron railings; reads as bones at 64 px",
+    "at": "2026-11-26T21:59:52.110Z"
+  },
+  "restless-dwell-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "rot-cellar: squat slate house with a violet roof, a slanted cellar door and green glowing jars",
+    "at": "2026-11-26T21:59:52.233Z"
+  },
+  "restless-dwell-b#10": {
+    "verdict": "ACCEPTED",
+    "notes": "drawing-room: elegant slate parlour house with steep violet roofs and tall glowing violet windows; apart from the manor's yellow windows",
+    "at": "2026-11-26T21:59:52.411Z"
+  },
+  "restless-dwell-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "essence-still: fat copper still bubbling violet essence beside a little stone furnace; cute and clear",
+    "at": "2026-11-26T21:59:52.536Z"
+  },
+  "restless-dwell-b#0": {
+    "verdict": "REJECTED",
+    "notes": "Bone Yard: bones a pale blur",
+    "at": "2026-11-26T21:59:52.666Z"
+  },
+  "restless-dwell-b#1": {
+    "verdict": "REJECTED",
+    "notes": "Bone Yard: dome of bones reads as a hay mound",
+    "at": "2026-11-26T21:59:52.790Z"
+  },
+  "restless-dwell-b#2": {
+    "verdict": "REJECTED",
+    "notes": "Bone Yard: bone-white posts, bones blur",
+    "at": "2026-11-26T21:59:52.897Z"
+  },
+  "restless-dwell-b#5": {
+    "verdict": "REJECTED",
+    "notes": "Rot Cellar: green glow spills on the ground",
+    "at": "2026-11-26T21:59:53.006Z"
+  },
+  "restless-dwell-b#6": {
+    "verdict": "REJECTED",
+    "notes": "Rot Cellar alternative; flat roof, grey stone",
+    "at": "2026-11-26T21:59:53.137Z"
+  },
+  "restless-dwell-b#7": {
+    "verdict": "REJECTED",
+    "notes": "Rot Cellar: no violet, dark blob",
+    "at": "2026-11-26T21:59:53.278Z"
+  },
+  "restless-dwell-b#8": {
+    "verdict": "REJECTED",
+    "notes": "Drawing Room: plain church-like hall",
+    "at": "2026-11-26T21:59:53.423Z"
+  },
+  "restless-dwell-b#9": {
+    "verdict": "REJECTED",
+    "notes": "Drawing Room: reads as the manor",
+    "at": "2026-11-26T21:59:53.571Z"
+  },
+  "restless-dwell-b#11": {
+    "verdict": "REJECTED",
+    "notes": "Drawing Room: dark lumpy house",
+    "at": "2026-11-26T21:59:53.751Z"
+  },
+  "restless-dwell-b#13": {
+    "verdict": "REJECTED",
+    "notes": "Essence Still: smoke puffs and brick drum busy",
+    "at": "2026-11-26T21:59:53.903Z"
+  },
+  "restless-dwell-b#14": {
+    "verdict": "REJECTED",
+    "notes": "Essence Still: coil and twin furnaces busy",
+    "at": "2026-11-26T21:59:54.029Z"
+  },
+  "restless-dwell-b#15": {
+    "verdict": "REJECTED",
+    "notes": "Essence Still: spiky ball reads as a mine",
+    "at": "2026-11-26T21:59:54.148Z"
+  },
+  "restless-civic-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "hall-of-ancestors: grand bone-white hall with tall windows, pinnacles and a big ribbed violet dome; the grandest silhouette of the faction",
+    "at": "2026-11-26T22:01:31.764Z"
+  },
+  "restless-civic-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "magic-guild: crooked slate tower under a floppy violet witch hat with glowing windows; cute",
+    "at": "2026-11-26T22:01:31.812Z"
+  },
+  "restless-civic-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "tavern: creaky slate inn with a crooked violet roof, chimney and a hanging sign",
+    "at": "2026-11-26T22:01:31.861Z"
+  },
+  "restless-civic-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "marketplace: stall under a violet and black striped awning with little lanterns",
+    "at": "2026-11-26T22:01:31.911Z"
+  },
+  "restless-civic-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "resource-silo: round slate silo with a violet cone beside logs and an ore cart",
+    "at": "2026-11-26T22:01:31.961Z"
+  },
+  "restless-civic-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Hall of Ancestors alternative; plainer than #2",
+    "at": "2026-11-26T22:01:32.012Z"
+  },
+  "restless-civic-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Hall of Ancestors: plain dome block, reads as the mausoleum",
+    "at": "2026-11-26T22:01:32.064Z"
+  },
+  "restless-civic-a#4": {
+    "verdict": "REJECTED",
+    "notes": "Magic Guild: frilly skirt and specks around the tower",
+    "at": "2026-11-26T22:01:32.116Z"
+  },
+  "restless-civic-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Magic Guild alternative; busier than #3",
+    "at": "2026-11-26T22:01:32.170Z"
+  },
+  "restless-civic-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Tavern: plain house, sign tiny",
+    "at": "2026-11-26T22:01:32.223Z"
+  },
+  "restless-civic-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Tavern: sign on a thin pole apart from the house",
+    "at": "2026-11-26T22:01:32.276Z"
+  },
+  "restless-civic-a#10": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace: low wide stall, thin posts",
+    "at": "2026-11-26T22:01:32.330Z"
+  },
+  "restless-civic-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Marketplace: open thin-posted canopy",
+    "at": "2026-11-26T22:01:32.383Z"
+  },
+  "restless-civic-a#12": {
+    "verdict": "REJECTED",
+    "notes": "Resource Silo: steep roof house, no silo",
+    "at": "2026-11-26T22:01:32.435Z"
+  },
+  "restless-civic-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Resource Silo: cross-gabled house, no silo",
+    "at": "2026-11-26T22:01:32.491Z"
+  },
+  "restless-civic-a#15": {
+    "verdict": "REJECTED",
+    "notes": "extra take: a bone-white chapel, not in the list",
+    "at": "2026-11-26T22:01:32.543Z"
+  },
+  "horde-halls-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "village-hall: fat riveted tin shack with a yellow roof and a big war horn on top; cute and simple",
+    "at": "2026-11-26T22:03:06.324Z"
+  },
+  "horde-halls-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "town-hall: the tin shack grown: two lopsided tin storeys, yellow roofs, a ladder and the war horn on top",
+    "at": "2026-11-26T22:03:06.372Z"
+  },
+  "horde-halls-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "city-hall: the hall grown huge: a domed tin palace with big horns over yellow-roofed wings on log props",
+    "at": "2026-11-26T22:03:06.420Z"
+  },
+  "horde-halls-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: a second shed cut off at the right edge",
+    "at": "2026-11-26T22:03:06.468Z"
+  },
+  "horde-halls-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: pieces cut off at both edges",
+    "at": "2026-11-26T22:03:06.517Z"
+  },
+  "horde-halls-a#3": {
+    "verdict": "REJECTED",
+    "notes": "Village Hall: a stray grey blob at the left edge",
+    "at": "2026-11-26T22:03:06.566Z"
+  },
+  "horde-halls-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: horns not the horn, spreads wide",
+    "at": "2026-11-26T22:03:06.615Z"
+  },
+  "horde-halls-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: hide patch and scaffold clutter",
+    "at": "2026-11-26T22:03:06.664Z"
+  },
+  "horde-halls-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: timber tower loses the tin family",
+    "at": "2026-11-26T22:03:06.714Z"
+  },
+  "horde-halls-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Town Hall: cluster of shacks, reads as a town",
+    "at": "2026-11-26T22:03:06.767Z"
+  },
+  "horde-halls-a#10": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: tall narrow junk pile",
+    "at": "2026-11-26T22:03:06.815Z"
+  },
+  "horde-halls-a#11": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: round hut with a crane, low",
+    "at": "2026-11-26T22:03:06.864Z"
+  },
+  "horde-halls-a#12": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: crane arm clutter",
+    "at": "2026-11-26T22:03:06.914Z"
+  },
+  "horde-halls-a#13": {
+    "verdict": "REJECTED",
+    "notes": "City Hall alternative; busier than #9",
+    "at": "2026-11-26T22:03:06.964Z"
+  },
+  "horde-halls-a#14": {
+    "verdict": "REJECTED",
+    "notes": "City Hall alternative; boxy, small horns",
+    "at": "2026-11-26T22:03:07.013Z"
+  },
+  "horde-halls-a#15": {
+    "verdict": "REJECTED",
+    "notes": "City Hall: crowded roofs",
+    "at": "2026-11-26T22:03:07.062Z"
+  },
+  "horde-forts-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "stakes: a curved row of fat sharpened log stakes lashed with rope, an ox skull on the middle stake; first stage of the fort family",
+    "at": "2026-11-26T22:04:40.730Z"
+  },
+  "horde-forts-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "scrap-wall: riveted tin wall with a yellow-awned gate, bundles of the stakes at both ends; the stakes grown into a wall",
+    "at": "2026-11-26T22:04:40.779Z"
+  },
+  "horde-forts-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "skull-tower: squat riveted tin lookout on thick log stilts under a yellow roof crowned with a horned ox skull; chunky, unlike the spindly sample",
+    "at": "2026-11-26T22:04:40.828Z"
+  },
+  "horde-forts-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Stakes alternative; yellow rope busy",
+    "at": "2026-11-26T22:04:40.876Z"
+  },
+  "horde-forts-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Stakes: yellow rag, skull off centre",
+    "at": "2026-11-26T22:04:40.924Z"
+  },
+  "horde-forts-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Stakes: yellow paint stripes noisy",
+    "at": "2026-11-26T22:04:40.974Z"
+  },
+  "horde-forts-a#4": {
+    "verdict": "REJECTED",
+    "notes": "Stakes alternative; near-duplicate of #3",
+    "at": "2026-11-26T22:04:41.023Z"
+  },
+  "horde-forts-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Scrap Wall: thin poles, no stakes",
+    "at": "2026-11-26T22:04:41.073Z"
+  },
+  "horde-forts-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Scrap Wall: plain tin wall, no stakes",
+    "at": "2026-11-26T22:04:41.123Z"
+  },
+  "horde-forts-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Scrap Wall: thin wall, little mass",
+    "at": "2026-11-26T22:04:41.173Z"
+  },
+  "horde-forts-a#9": {
+    "verdict": "REJECTED",
+    "notes": "Scrap Wall: plain tin wall, no stakes",
+    "at": "2026-11-26T22:04:41.223Z"
+  },
+  "horde-forts-a#10": {
+    "verdict": "REJECTED",
+    "notes": "Skull Tower: thin legs",
+    "at": "2026-11-26T22:04:41.273Z"
+  },
+  "horde-forts-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Skull Tower alternative; close to #13",
+    "at": "2026-11-26T22:04:41.322Z"
+  },
+  "horde-forts-a#12": {
+    "verdict": "REJECTED",
+    "notes": "Skull Tower: ladder and thin legs",
+    "at": "2026-11-26T22:04:41.372Z"
+  },
+  "horde-forts-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Skull Tower: round tank reads as a water tower",
+    "at": "2026-11-26T22:04:41.420Z"
+  },
+  "horde-forts-a#15": {
+    "verdict": "REJECTED",
+    "notes": "Skull Tower alternative; boxy, short legs",
+    "at": "2026-11-26T22:04:41.470Z"
+  },
+  "horde-dwell-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "goblin-holes: a fat mossy mound of scrap with round burrow doors and a little lookout; cute hobbit-hole read",
+    "at": "2026-11-26T22:06:16.584Z"
+  },
+  "horde-dwell-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "powder-shed: squat riveted tin shed with a bright yellow roof and black powder barrels; clean silhouette",
+    "at": "2026-11-26T22:06:16.632Z"
+  },
+  "horde-dwell-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "hex-hut: round spotted hide hut on stilts with bones, a lightning rod and a bubbling cauldron",
+    "at": "2026-11-26T22:06:16.680Z"
+  },
+  "horde-dwell-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "ogre-pit: round stockade of sharpened logs with a huge club leaning on it",
+    "at": "2026-11-26T22:06:16.729Z"
+  },
+  "horde-dwell-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Goblin Holes: log pile clutter and smoke specks",
+    "at": "2026-11-26T22:06:16.777Z"
+  },
+  "horde-dwell-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Goblin Holes: a log teepee, no burrows",
+    "at": "2026-11-26T22:06:16.826Z"
+  },
+  "horde-dwell-a#3": {
+    "verdict": "REJECTED",
+    "notes": "Goblin Holes: green blob, mossy noise",
+    "at": "2026-11-26T22:06:16.874Z"
+  },
+  "horde-dwell-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Powder Shed: patchy roof, tyres stacked",
+    "at": "2026-11-26T22:06:16.921Z"
+  },
+  "horde-dwell-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Powder Shed: two storeys reads as the town hall",
+    "at": "2026-11-26T22:06:16.969Z"
+  },
+  "horde-dwell-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Powder Shed: patched roof, debris at its foot",
+    "at": "2026-11-26T22:06:17.020Z"
+  },
+  "horde-dwell-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Hex Hut: thin legs, small",
+    "at": "2026-11-26T22:06:17.068Z"
+  },
+  "horde-dwell-a#9": {
+    "verdict": "REJECTED",
+    "notes": "Hex Hut: thin stilts and ladder",
+    "at": "2026-11-26T22:06:17.117Z"
+  },
+  "horde-dwell-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Hex Hut: grey patchwork, ladder clutter",
+    "at": "2026-11-26T22:06:17.165Z"
+  },
+  "horde-dwell-a#12": {
+    "verdict": "REJECTED",
+    "notes": "Ogre Pit: empty ring, club small",
+    "at": "2026-11-26T22:06:17.215Z"
+  },
+  "horde-dwell-a#13": {
+    "verdict": "REJECTED",
+    "notes": "Ogre Pit: log heap with a gate, no pit",
+    "at": "2026-11-26T22:06:17.264Z"
+  },
+  "horde-dwell-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Ogre Pit: bones on the rim, club small",
+    "at": "2026-11-26T22:06:17.314Z"
+  },
+  "horde-special-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "mosh-pit: a ring of fat logs round a dirt pit with a big brass gong on a frame",
+    "at": "2026-11-26T22:07:52.211Z"
+  },
+  "horde-special-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "pitch-vats: two fat black pitch vats bubbling over a fire on a log rack",
+    "at": "2026-11-26T22:07:52.258Z"
+  },
+  "horde-special-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "racing-track: a starting gate with yellow and black chequered bar, tyre stacks and a little go-kart; no writing",
+    "at": "2026-11-26T22:07:52.306Z"
+  },
+  "horde-special-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "loot-pile: a big heap of gold coins with chests, junk and a crown on top",
+    "at": "2026-11-26T22:07:52.354Z"
+  },
+  "horde-special-a#1": {
+    "verdict": "REJECTED",
+    "notes": "Mosh Pit: spiky rim and yellow roof busy",
+    "at": "2026-11-26T22:07:52.401Z"
+  },
+  "horde-special-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Mosh Pit alternative; skulls on the stakes read as undead",
+    "at": "2026-11-26T22:07:52.449Z"
+  },
+  "horde-special-a#3": {
+    "verdict": "REJECTED",
+    "notes": "Mosh Pit: dull grey gong, tall back fence",
+    "at": "2026-11-26T22:07:52.497Z"
+  },
+  "horde-special-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Pitch Vats: ladder and pipe clutter",
+    "at": "2026-11-26T22:07:52.545Z"
+  },
+  "horde-special-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Pitch Vats: a stove box, vats hidden",
+    "at": "2026-11-26T22:07:52.595Z"
+  },
+  "horde-special-a#7": {
+    "verdict": "REJECTED",
+    "notes": "Pitch Vats: grey vats read as kettles",
+    "at": "2026-11-26T22:07:52.644Z"
+  },
+  "horde-special-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Racing Track: thin gallows-like frame",
+    "at": "2026-11-26T22:07:52.693Z"
+  },
+  "horde-special-a#9": {
+    "verdict": "REJECTED",
+    "notes": "Racing Track: blank sign and spikes, kart tiny",
+    "at": "2026-11-26T22:07:52.742Z"
+  },
+  "horde-special-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Racing Track alternative; kart smaller than #10",
+    "at": "2026-11-26T22:07:52.791Z"
+  },
+  "horde-special-a#13": {
+    "verdict": "REJECTED",
+    "notes": "Loot Pile: yellow flag, scattered",
+    "at": "2026-11-26T22:07:52.839Z"
+  },
+  "horde-special-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Loot Pile: a stall roof over the loot reads as a market",
+    "at": "2026-11-26T22:07:52.889Z"
+  },
+  "horde-special-a#15": {
+    "verdict": "REJECTED",
+    "notes": "Loot Pile: a cart, reads as a vehicle",
+    "at": "2026-11-26T22:07:52.938Z"
+  },
+  "horde-civic-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "launch-ramp: a tall chunky timber ramp on log trestles with hazard-striped edge and tin bracing",
+    "at": "2026-11-26T22:09:29.025Z"
+  },
+  "horde-civic-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "great-flinger: a fat wheeled catapult of logs and tin with a bright yellow arm and spoon; the Keystone at a glance",
+    "at": "2026-11-26T22:09:29.075Z"
+  },
+  "horde-civic-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "magic-guild: crooked hide and tin shaman tower with tin horns on top and a glowing violet door",
+    "at": "2026-11-26T22:09:29.126Z"
+  },
+  "horde-civic-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "tavern: tin grog shack with a yellow roof, a big mug sign and barrels",
+    "at": "2026-11-26T22:09:29.174Z"
+  },
+  "horde-civic-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "resource-silo: riveted tin silo with a yellow cone beside a woodpile and an ore wheelbarrow",
+    "at": "2026-11-26T22:09:29.224Z"
+  },
+  "horde-civic-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Launch Ramp: low wedge, spring reads as a coil of rope",
+    "at": "2026-11-26T22:09:29.282Z"
+  },
+  "horde-civic-a#2": {
+    "verdict": "REJECTED",
+    "notes": "Launch Ramp: tarp ramp reads as a tent",
+    "at": "2026-11-26T22:09:29.336Z"
+  },
+  "horde-civic-a#4": {
+    "verdict": "REJECTED",
+    "notes": "Great Flinger alternative; thin ropes, smaller body",
+    "at": "2026-11-26T22:09:29.385Z"
+  },
+  "horde-civic-a#5": {
+    "verdict": "REJECTED",
+    "notes": "Great Flinger: thin arm, dark frame",
+    "at": "2026-11-26T22:09:29.436Z"
+  },
+  "horde-civic-a#6": {
+    "verdict": "REJECTED",
+    "notes": "Magic Guild: spiky blur with specks",
+    "at": "2026-11-26T22:09:29.486Z"
+  },
+  "horde-civic-a#8": {
+    "verdict": "REJECTED",
+    "notes": "Magic Guild: skulls on the walls read as undead",
+    "at": "2026-11-26T22:09:29.535Z"
+  },
+  "horde-civic-a#10": {
+    "verdict": "REJECTED",
+    "notes": "Tavern: patched roof busy",
+    "at": "2026-11-26T22:09:29.584Z"
+  },
+  "horde-civic-a#11": {
+    "verdict": "REJECTED",
+    "notes": "Tavern alternative; lantern clutter",
+    "at": "2026-11-26T22:09:29.634Z"
+  },
+  "horde-civic-a#13": {
+    "verdict": "REJECTED",
+    "notes": "Resource Silo: patched drum, logs spill under it",
+    "at": "2026-11-26T22:09:29.683Z"
+  },
+  "horde-civic-a#14": {
+    "verdict": "REJECTED",
+    "notes": "Resource Silo: two tanks, reads as a still",
+    "at": "2026-11-26T22:09:29.731Z"
+  },
+  "horde-civic-a#15": {
+    "verdict": "REJECTED",
+    "notes": "extra take: a stilted barn, not in the list",
+    "at": "2026-11-26T22:09:29.782Z"
+  },
+  "restless-s1#13": {
+    "verdict": "REJECTED",
+    "notes": "Family Crypt: domed, reads as the Royal Mausoleum; #12 kept",
+    "at": "2026-11-26T22:09:37.914Z"
+  },
+  "realm-inn-s1#0": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.260Z"
+  },
+  "realm-inn-s1#1": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.306Z"
+  },
+  "realm-inn-s1#2": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.353Z"
+  },
+  "realm-inn-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.400Z"
+  },
+  "realm-inn-s1#4": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.449Z"
+  },
+  "realm-inn-s1#5": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.497Z"
+  },
+  "realm-inn-s1#6": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.547Z"
+  },
+  "realm-inn-s1#7": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.595Z"
+  },
+  "realm-inn-s1#8": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.643Z"
+  },
+  "realm-inn-s1#9": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.692Z"
+  },
+  "realm-inn-s1#10": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.740Z"
+  },
+  "realm-inn-s1#11": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.787Z"
+  },
+  "realm-inn-s1#12": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.837Z"
+  },
+  "realm-inn-s1#13": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.888Z"
+  },
+  "realm-inn-s1#14": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.939Z"
+  },
+  "realm-inn-s1#15": {
+    "verdict": "REJECTED",
+    "notes": "trial (inn as style image): warmer red and lit windows, but off the Realm map town's red-brown and the accepted hall family; kept as an option for a later pass",
+    "at": "2026-11-26T22:12:19.987Z"
+  }
+}

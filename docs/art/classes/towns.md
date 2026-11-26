@@ -2,7 +2,9 @@
 
 Status: draft (2026-11-24, bead `border_marches-bzc.15`; orchestrator call).
 Map towns redrawn cute and chunky on 2026-11-26 (bead `border_marches-bzc.97`,
-see [Map town direction](#map-town-direction-bzc97)). Specialises
+see [Map town direction](#map-town-direction-bzc97)); town-screen buildings
+redrawn in the same style on 2026-11-26 (bead `border_marches-bzc.98`, see
+[Town-screen buildings](#town-screen-buildings-bzc98)). Specialises
 [`../ART_DIRECTION.md`](../ART_DIRECTION.md) for the faction towns: their
 map sprites and their town-screen art (building sprites and backdrops).
 
@@ -40,6 +42,47 @@ Studio set `art/sets/chunky-towns` (class fragment
 `art/fragments/class-map-town.txt`). The sets `faction-towns` and
 `towns-3x2` keep their history and masters but no longer derive game files.
 
+## Town-screen buildings (bzc.98)
+
+The first building sprites (set `town-buildings`, bzc.15) were thin
+isometric boxes floating small in their 64 px tile with thin outlines: the
+same "primitive and not cute" look the user rejected on the map. They are
+redrawn in the map towns' style:
+
+- **One chunky toy building per tile.** A single building in three-quarter
+  view from slightly above (front, one side, roof), fat and rounded, thick
+  dark outline, flat colours with one shadow tone, filling most of the 64 px
+  tile; one oversized signature feature (dragon skull, horned skull, giant
+  bone, tankard sign, clock tower, glowing windows).
+- **The faction's map town as style image.** The accepted chunky fort town
+  of the faction (`chunky-towns/{realm,restless,horde}-fort-s1`) gives the
+  palette, outline and pixel size, so the hall tiles and the town picture
+  above them read as one place.
+- **Families grow.** Village, Town and City Hall are one building growing
+  (the Realm's half-timbered hall gains a clock tower, then a blue dome; the
+  Restless' slate hall gains its clock tower, then spires; the Horde's tin
+  shack gains a storey, then a horned dome), and the fort buildings likewise
+  (Realm: stake palisade, round blue-coned keep, the same keep inside a small
+  castle; Restless: lantern-post railings, a slate wall with a lych-gate, a
+  gate between two violet-coned towers; Horde: a stake row, a tin wall
+  between stake bundles, a squat skull tower). A bigger stage is generated
+  with the accepted smaller one as a reference image ("the same building,
+  grown") where they share a body (the halls, the Royal Castle), or in one
+  call with the family when they do not (the walls).
+- **Taller things are stout.** Towers on legs came out spindly with thin
+  brown outlines (`horde-s1` skull towers): describe them as fat, squat, on
+  thick stilts.
+- **One palette per faction.** A trial with the roadside inn as style image
+  (`realm-inn-s1`) gave warmer reds and lit windows, but off the Realm map
+  town's red-brown and the accepted hall family; it is recorded as an option
+  for a later pass, not used.
+
+Studio set `art/sets/chunky-buildings` (class fragment
+`art/fragments/class-screen-building.txt`); `town-buildings` keeps its
+history and masters but no longer derives game files. The backdrops
+(`town-backdrops`) already match the style (thick outlines, flat colours)
+and are kept.
+
 ## Inventory
 
 | Asset | Size (px) | Studio set | Game file | Lookup |
@@ -48,7 +91,7 @@ Studio set `art/sets/chunky-towns` (class fragment
 | Map town, fort stage (fort 2-3) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-castle,restless-churchyard}-3x2.png`, `goblin-hold-3x2.png` | `townArt(faction, fortLevel)` |
 | Lost World town, 3x2 | 240 x 184 | `chunky-towns` | `public/assets/towns/dinosaur-town-3x2.png` | `town3x2Asset(obj)` |
 | Level towns (Lost World, goblin; levels 1-3), neutral village | 88 x 96, 96 x 100, 96 x 104; 72 x 72 | `chunky-towns` | `public/assets/towns/{dinosaur,goblin}-city-{1,2,3}.png`, `village.png` | `townAsset(obj)`, the Lost World town screen |
-| Building sprite, one per building of each tree (22 x 3) | 64 x 64 | `town-buildings` | `public/assets/towns/buildings/<faction>/<building>.png` | `buildingArt(faction, building)` |
+| Building sprite, one per building of each tree (22 x 3) | 64 x 64 | `chunky-buildings` | `public/assets/towns/buildings/<faction>/<building>.png` | `buildingArt(faction, building)` |
 | Town-screen backdrop, one per faction | 256 x 224 (shown x2) | `town-backdrops` | `public/assets/towns/backdrops/<faction>.png` | `townBackdrop(faction)` |
 
 The lookups are in `src/assets/town-art.ts`; the data lists (building ids per
@@ -86,9 +129,10 @@ role aliases.
 - **Shadows**: never baked. The renderer gives every town the shared ground
   shadow (`groundShadows` in `src/render/map/scene.ts`).
 - **Building sprites**: generated at 64 x 64, cropped to the building (stray
-  specks dropped), seated bottom-centred 2 px above the bottom of a 64 x 64
-  canvas, so every building stands on one baseline in a row or a composed
-  town picture. Never scaled.
+  specks under 8 px dropped as recorded pixel edits), seated bottom-centred
+  2 px above the bottom of a 64 x 64 canvas (less when the building fills 63
+  or 64 rows), so every building stands on one baseline in a row or a
+  composed town picture. Never scaled.
 - **Backdrops**: generated opaque at 256 x 232, cropped to rows 4-227 (the
   provider framed two of them with white rows) to 256 x 224, drawn at x2
   (512 x 448) behind the town
@@ -123,12 +167,17 @@ role aliases.
   again. One candidate per call at 232 x 176; four at the level towns'
   sizes. The first map towns (bzc.15) used `camera-three-quarter` and the
   Lost World ring as layout.
-- Building sprites: layers `style`, `light-south-west`,
-  `class-town-building`, subject "each image a different one of these N
-  ...: Name (description); ...". At 64 x 64 one call returns 16 candidates
-  that follow the list in order, so 6-8 buildings per call give 2-3 takes
-  each. Each accepted take's verdict starts with the building id it shows;
-  `outputs[]` maps it to its file.
+- Building sprites (bzc.98, set `chunky-buildings`): layers `style`,
+  `light-south-west`, `class-screen-building`, subject "each image a
+  different one of these N ..., four takes of each in this order: Name
+  (description); ..." and the faction's colours as hex; style image the
+  faction's chunky fort town with `color_palette: true`. At 64 x 64 one call
+  returns 16 candidates that follow the list in order: 4 buildings per call
+  give 4 takes each (2 give 8, 5 give 3). A grown stage (Town and City Hall,
+  Royal Castle) adds the accepted smaller stage as a reference image. Each
+  accepted take's verdict starts with the building id it shows; `outputs[]`
+  maps it to its file. The bzc.15 sprites used `class-town-building`, the
+  thin-ring map towns as style image and 6-8 buildings per call.
 - Backdrops: layers `style`, `light-south-west`, `class-town-backdrop`,
   subject with the faction's ground hex, sky, horizon and edge scenery.
 - Descriptions are capped at 2000 characters: the icon recipes drop the

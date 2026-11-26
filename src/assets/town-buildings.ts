@@ -2,7 +2,8 @@
  * Town-screen art of the three v0.2 factions (bead border_marches-bzc.15,
  * docs/art/classes/towns.md): one 64 x 64 building sprite per building of
  * each faction's tree and one 256 x 224 backdrop per faction. Studio sets
- * `town-buildings` and `town-backdrops`; every file is an `outputs[]` entry
+ * `chunky-buildings` (redrawn in the chunky map-town style, bead bzc.98)
+ * and `town-backdrops`; every file is an `outputs[]` entry
  * derived from an accepted master. Look them up with `buildingArt` and
  * `townBackdrop` (src/assets/town-art.ts), which normalise names and fall
  * back sensibly.

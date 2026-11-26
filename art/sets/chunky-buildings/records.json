@@ -1,0 +1,2920 @@
+{
+  "realm-s1": {
+    "id": "realm-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "7ffe3568-1ca9-4857-949a-44dd7bbe7e40",
+    "submittedAt": "2026-11-26T21:35:02.385Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 storybook kingdom buildings, four takes of each in this order: Village Hall (plump little half-timbered hall, steep red-brown roof, small bell turret); Keep (fat round cream stone keep tower with crenellations, a big blue cone roof and an arched door); Tavern (cosy crooked half-timbered inn, red-brown roof, chimney, hanging tankard sign); Slayers' Lodge (stout cream stone lodge, red-brown roof, a giant green dragon skull over the door). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/realm-fort-s1-0.png sha256 dbc3377e6114e446d8758777178c5bc2586e999dfab61df44585381c25733691",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its houses and towers; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98101,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 storybook kingdom buildings, four takes of each in this order: Village Hall (plump little half-timbered hall, steep red-brown roof, small bell turret); Keep (fat round cream stone keep tower with crenellations, a big blue cone roof and an arched door); Tavern (cosy crooked half-timbered inn, red-brown roof, chimney, hanging tankard sign); Slayers' Lodge (stout cream stone lodge, red-brown roof, a giant green dragon skull over the door). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T21:36:51.701Z",
+    "usageUsd": 0.08350842735502455,
+    "candidates": [
+      {
+        "file": "realm-s1-0.png",
+        "sha256": "d9119b19eeb893a3250a89d9666642f607daa5a13f06e3c4078fc5b31cb20927",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-1.png",
+        "sha256": "ae6dfa2571fb80b20d270dc0d03b1f18a9a7466f390e3f54238885942114a291",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-2.png",
+        "sha256": "d7953e25aee9aa2298d927966045f1a93e192041e22bd1b4080ffc63af5dd41a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-3.png",
+        "sha256": "07bad79768ac364994e9731246097eed03857ea25499eab9c7b79569496249b1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-4.png",
+        "sha256": "e245474bedc8fa358d109efc30aaaa842293f6a62169da6c7139cdfa4621a31f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-5.png",
+        "sha256": "38288497442a1c5891e14e3c4d6ae2bb6d2da49529545a2cb0157e6e1cbbd24f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-6.png",
+        "sha256": "4928b8599413ecaebfd51bd9959bb4389a96d6b447c3aa6109f28c38fd70c5be",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-7.png",
+        "sha256": "2fc6eccca9b1d2dae13d195a2ea9c0a51bc8530be1f7dcbd5444c9498282ea15",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-8.png",
+        "sha256": "6a14427c91562cb39428a68454d88b68617ef3f5dd4e89b4b06cb32265ae94d2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-9.png",
+        "sha256": "4826207a0303094d17b6d7216bbd5f13c3a68fcea8e957c21d78d310b606bde7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-10.png",
+        "sha256": "1e62d66abf1de27def1c035d37c6a54adaf9967753bd512d7c58bccae6602926",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-11.png",
+        "sha256": "2855ae854dfb7445367764893bec96172a5358bfd1bd41d9c8a1c5b6d36f9644",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-12.png",
+        "sha256": "de4981c2e398285393e937613867f3c92171fdbe4e269595ab68dd2a7445f262",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-13.png",
+        "sha256": "f850435d7df3ab45f5cb85ce5195b2d99b3393cd01fa188f440f6d463c10c1db",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-14.png",
+        "sha256": "3f75db7a3f799eb16b96aac61d4b3f4f6ae68565d1df5e9990e6b14b887e7e13",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-s1-15.png",
+        "sha256": "01e80782ddca22a8d0e8c35b5c8ba79063004a780e8f156234dd3a3f8db0b9ea",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "restless-s1": {
+    "id": "restless-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "911b8363-0c71-4ee5-a968-ce66d0e2aa43",
+    "submittedAt": "2026-11-26T21:36:52.075Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 haunted town buildings, four takes of each in this order: Town Hall (crooked slate hall with a violet roof and a tall clock tower); Manor (lopsided slate manor house with steep violet gables and glowing windows); Wailing Tower (thin leaning slate tower with a gabled violet roof and round dark windows); Family Crypt (squat bone white stone crypt with a violet roof and a black iron door). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/restless-fort-s1-0.png sha256 c581f12717e661c1e8453d4604a0a12080f1d6ef459ed55ea9f616104666091a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its buildings; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98201,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 haunted town buildings, four takes of each in this order: Town Hall (crooked slate hall with a violet roof and a tall clock tower); Manor (lopsided slate manor house with steep violet gables and glowing windows); Wailing Tower (thin leaning slate tower with a gabled violet roof and round dark windows); Family Crypt (squat bone white stone crypt with a violet roof and a black iron door). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, skeleton, ghost, blood, gore."
+    },
+    "at": "2026-11-26T21:38:19.922Z",
+    "usageUsd": 0.08220854465166728,
+    "candidates": [
+      {
+        "file": "restless-s1-0.png",
+        "sha256": "b964a6dfa4275952a92ec241c9eb079d81d9d7e6306f17c2b7236dfd39e5136d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-1.png",
+        "sha256": "e5a41b056bcafd94e217543001e7024c4042b0b3eaf075016a6f2a864344c70b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-2.png",
+        "sha256": "cfe72ecc2391ff3973a6a9a10a9cb48466bec2ee0c9a7cddfa96eae417f7aa7d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-3.png",
+        "sha256": "045ee966adca6be95b1981368c8264fd6ec3799721dc5d2270ec35ca0ecf4f47",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-4.png",
+        "sha256": "ed5a50789c3bdd8ddaec6e431a5bb671350933ded12a6a29f7e2619e88e15c9c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-5.png",
+        "sha256": "458c14491692073809b57058187a0bec17eeab5b0c8e5668ace3da7c4cf93457",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-6.png",
+        "sha256": "70afed87f2d996a2628054f3ee19933eefdc9921d34e3dfb26a16bd4396fef0e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-7.png",
+        "sha256": "7c98aa8df0715024bb239b68acd9be68bebcc6eb9fdaf923dfd93f4183cf620d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-8.png",
+        "sha256": "d27245bcb61e209596ee0ff5db95863def8c6d4f3d49830bdd753d768d8bac70",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-9.png",
+        "sha256": "c05af1d4f6d00299e0fed3bf6f9fb9e22f02fdd8d928aa4f4efc2eff4cc00065",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-10.png",
+        "sha256": "32445d5068e4724367d6d53228dbe04cee18f2bab2210bbed76a1464f025cc95",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-11.png",
+        "sha256": "e4c606751ac494d3bba648744384977fa57b66e4602f3f5ddf16bbf1427292b9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-12.png",
+        "sha256": "5da6cd040c631b528743e5aa9726f32705a535a85cd2f16943e876c990cf1642",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-13.png",
+        "sha256": "3fcad78e7a3b24b9cacf94d9c73108567fd742a24e658d0d81aaa28e301a3149",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-14.png",
+        "sha256": "2dacf0d8d39952fb43bd596907e588c3b2625ce4d484697fd6ec16bafc1d2c2d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-s1-15.png",
+        "sha256": "4d47b88fa102a8bf31da2ba94cfefb658ac3654ae16aa36fa593b3005ec4ed01",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "horde-s1": {
+    "id": "horde-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "63511c2a-5881-439f-9004-3d908d7947e8",
+    "submittedAt": "2026-11-26T21:38:20.540Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 ramshackle goblin buildings, four takes of each in this order: Boss Tent (big round tent of tawny spotted hide with two huge horns on top); Wolf Kennels (log kennel with a tin roof and a giant bone by the door); Skull Tower (tall tin lookout tower on log legs crowned with a horned ox skull); Marketplace (tin stall with a striped yellow awning piled with crates and sacks). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/horde-fort-s1-0.png sha256 58edb2df1dedc2f32054decc84c31fac2c58eb0e01f1d04aff3bc68abf7b7e1a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98301,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 ramshackle goblin buildings, four takes of each in this order: Boss Tent (big round tent of tawny spotted hide with two huge horns on top); Wolf Kennels (log kennel with a tin roof and a giant bone by the door); Skull Tower (tall tin lookout tower on log legs crowned with a horned ox skull); Marketplace (tin stall with a striped yellow awning piled with crates and sacks). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T21:40:35.039Z",
+    "usageUsd": 0.08187973133722941,
+    "candidates": [
+      {
+        "file": "horde-s1-0.png",
+        "sha256": "68a12161d6fe83fb2ede529d62e9ab4a491719a16ae6067ee9431ef166789ded",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-1.png",
+        "sha256": "88f4a6eeee99792ca7e5527ea774f9e432cf7c8cf8835210422f04e177882fa5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-2.png",
+        "sha256": "cba980c5b99014b4242f24277f1ea9e4a90ac4eb2f73007f5cae766e14da7674",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-3.png",
+        "sha256": "730b263ae46b559eb76f5fe42870bfc587fb967b5014f96862135e75a285929f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-4.png",
+        "sha256": "46cbce532b43209654e6fd16f99793acd3b465cdc43fef9af3950e21816419f8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-5.png",
+        "sha256": "2818de3180c5657fa0bcda24aad5d974887240b23adea2e2b95da35afbac9fa6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-6.png",
+        "sha256": "f0579df28f426d5a843f77e8ad047f1fba84e3a6d242e30aac1ac7b1966d11b6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-7.png",
+        "sha256": "d628e5ab068cde995e61aefd2bf094d1bdcc7d17e4a535ffa95259d7e935a136",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-8.png",
+        "sha256": "cd9ae98f8ea21824beae059341ffcf132322bef469b881570d55fc55255df671",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-9.png",
+        "sha256": "0c3b2eabfcef5b5f3383f2b7c6c2381dc2c7578ca14564ea688b3b81d32cfb4d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-10.png",
+        "sha256": "e89deeb1032fb34b07ff8421c3d6b27bf6845982385a3a1eba0ba31996c6738b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-11.png",
+        "sha256": "363937e030d7800cd4265bd8dc433666bfeed353d42e2884375f16a2db3cc2ec",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-12.png",
+        "sha256": "fb5ac2a934ecb3766f2cf5aa264f74dbc32560cd48b20f5581948d03859ec8dd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-13.png",
+        "sha256": "005225194cb516f0b1ecec13654ac34bef20457b2311ac439d039521c58ab4fa",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-14.png",
+        "sha256": "43069152da5fcc8e9b44f95f822e920a2f28ca97433f0f53ab4d97d574cd73fe",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-s1-15.png",
+        "sha256": "0e4f4b1b666bc575bda02969a1277274dbad6380cc1aed5813fe39c2f7faeb97",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "realm-halls-a": {
+    "id": "realm-halls-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "d9a1d7ae-7173-499b-b15a-da605881eef9",
+    "submittedAt": "2026-11-26T21:43:12.669Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these two storybook kingdom buildings, eight takes of each in this order: Town Hall (the same half-timbered village hall grown: two storeys, a side wing and a tall clock tower with a red-brown roof); City Hall (the same hall grown grand: three storeys of cream stone and timber, a blue dome and a big clock). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/realm-fort-s1-0.png sha256 dbc3377e6114e446d8758777178c5bc2586e999dfab61df44585381c25733691",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its houses and towers; not the layout: draw only one building"
+      },
+      "reference_images": [
+        {
+          "source": "take chunky-buildings/realm-s1#1 sha256 ae6dfa2571fb80b20d270dc0d03b1f18a9a7466f390e3f54238885942114a291",
+          "usage": "the same village hall: keep its shape, materials, colours and outline, and draw it grown as described"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98111,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these two storybook kingdom buildings, eight takes of each in this order: Town Hall (the same half-timbered village hall grown: two storeys, a side wing and a tall clock tower with a red-brown roof); City Hall (the same hall grown grand: three storeys of cream stone and timber, a blue dome and a big clock). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T21:44:56.801Z",
+    "usageUsd": 0.08241890263557435,
+    "candidates": [
+      {
+        "file": "realm-halls-a-0.png",
+        "sha256": "b458830bb85c6c86618c7c9a46e23b00eb35239f63ab51e702d01c3f24e4d12b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-1.png",
+        "sha256": "81f7e5bbf3243bf2b9a2d1e0a5fa7e3b6e331fec8f25679a1944be7c56791bc0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-2.png",
+        "sha256": "30b5c19a58d2fd830d04c2693f5e115daeb521785201042aba6bb0516374b28f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-3.png",
+        "sha256": "57e77731b0d4435a0a01ab04d270bf3835ba9066fcc436168b73d4d8eb20816d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-4.png",
+        "sha256": "96003be62f7c4bce78dba2c63b143c7389afc27a875dbd6438140e77870bbebb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-5.png",
+        "sha256": "b06b4111da9a35d90280c533391d6b4a5f319cfc61f1048ab9f108719d48d2f1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-6.png",
+        "sha256": "e67f17bd10b49002f4263fe4d953c588ba4215d6f601eb564b7f11ba00ae182a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-7.png",
+        "sha256": "9232aaea6213decd19db74f8cc6e7556e0cf9f3ca1bf8a3bdc45e0861b1303d3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-8.png",
+        "sha256": "d0a5e6e42e6ec35515d6a27d1edd743051294b4b594e82f430ed6f70c7fccc0f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-9.png",
+        "sha256": "4ef412633462683e7d56eccec37c8805136e32c85a811cda98d29af6334e86ee",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-10.png",
+        "sha256": "417f2a7232c9e1790c9ca6fd1736eee85dd09a78e5af414917b69c657d5c52a5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-11.png",
+        "sha256": "d5c68698807196de27e8cbc3b68415d113491cc90ab39540ac394eda28bb415d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-12.png",
+        "sha256": "031a9704eed291643313510b565c6b3bffc5a39bedf0c22e6843190c91405ff5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-13.png",
+        "sha256": "5b0e4ed566c0f28154d7300349ab0f190e722249354be380556dc0ffda391385",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-14.png",
+        "sha256": "0f6ada813d4a67bcb85dfc132435c63097db9836c7fdeafa4f741d5f2717bc8d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-halls-a-15.png",
+        "sha256": "a5d0074b68f72d089d386e0804c8ddc4b8cea9ab5cbbe4390da1df496f2eb219",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "realm-castle-a": {
+    "id": "realm-castle-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f59c818e-ca91-4a07-b6c7-53796280485f",
+    "submittedAt": "2026-11-26T21:44:56.927Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these two storybook kingdom buildings, eight takes of each in this order: Royal Castle (the same round keep grown into a small castle: the keep at the back, two plump blue-coned towers and a gatehouse); Round Table (a grand round hall of cream stone with a big blue dome and a gold crown on top). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/realm-fort-s1-0.png sha256 dbc3377e6114e446d8758777178c5bc2586e999dfab61df44585381c25733691",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its houses and towers; not the layout: draw only one building"
+      },
+      "reference_images": [
+        {
+          "source": "take chunky-buildings/realm-s1#5 sha256 38288497442a1c5891e14e3c4d6ae2bb6d2da49529545a2cb0157e6e1cbbd24f",
+          "usage": "the same cream stone keep with its blue cone roof: keep its shape, stone and colours"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98112,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these two storybook kingdom buildings, eight takes of each in this order: Royal Castle (the same round keep grown into a small castle: the keep at the back, two plump blue-coned towers and a gatehouse); Round Table (a grand round hall of cream stone with a big blue dome and a gold crown on top). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T21:46:55.884Z",
+    "usageUsd": 0.08336275519265068,
+    "candidates": [
+      {
+        "file": "realm-castle-a-0.png",
+        "sha256": "ecf09a3d2598bf01fa132e1de77e5cb226a00a3bee1b9d711803da459be8a9e4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-1.png",
+        "sha256": "871a2c332216194893fa7ca626deac55f9009d6499422358689c36e9ae19195e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-2.png",
+        "sha256": "8131f7b5e717fd1e5d19ea9ac24aa451d3d0749dcd9be38c816b96b01db91071",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-3.png",
+        "sha256": "e2b22d50755563505938debd60e166ce22e0a4fec20d3c4b416b728ee24c11c1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-4.png",
+        "sha256": "1b01007613e223c86775494aa9d24ba6dc2befde7ca8f8799de579ecf793aab6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-5.png",
+        "sha256": "b60d2839dd4698a177528022dc2e9626c01ebb5f766b9abd3347efadb960c4fc",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-6.png",
+        "sha256": "c7c3b013d6acc72493f216022c947ef5bf3d6d4a8433d895bd4c8bdb2fd1b1f1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-7.png",
+        "sha256": "8706d314140f460f15c8809decd7300fe505a8bcf3e75c40fad601458f523548",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-8.png",
+        "sha256": "6cdf18fa05aefa0a858632d31200caa09c2ef57ca95b6e1f3aff73ac83dee069",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-9.png",
+        "sha256": "5df4946220cc127c9f26734ef8c2e0b57d3557c33928d9bc20ce4de190aac181",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-10.png",
+        "sha256": "006231a83cc26fab8d468d8128ae42358098a5f598ca3fd3279047fb252d23f9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-11.png",
+        "sha256": "fba4250be64f01cf672b45b0b577e022324fc5959c6b46aef403fe0968057f1f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-12.png",
+        "sha256": "7c07b7551b50c0948ff6131a41a3ab371902cc69b7cac0a2829055618ad0f2ee",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-13.png",
+        "sha256": "8abb04b9c57c16b9c6e699c0f7e2da0bb96084d98bd3180ed583176fe69c54ca",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-14.png",
+        "sha256": "85f59fa3984850815a1f1b0c693c4ade4edab36e8430a425512191917bb27eac",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-castle-a-15.png",
+        "sha256": "73f27f94f51b98fc3235c7071af1d8a17e73028e9a0c40da7a530a2c53749569",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "realm-dwell-a": {
+    "id": "realm-dwell-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "143dd63b-cbcc-4123-8a2e-0d33b034be94",
+    "submittedAt": "2026-11-26T21:46:55.997Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 storybook kingdom buildings, four takes of each in this order: Squires' Hall (a plump timber-framed hall with a big round shield over the door and a straw practice dummy); Archery Range (a chunky open timber shed with a red-brown roof and a big red and white straw target); Barracks (a long stout cream stone barracks with a red-brown roof and a rack of spears by the door); Friary (a cosy little cream stone friary with a bell gable and a round window). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/realm-fort-s1-0.png sha256 dbc3377e6114e446d8758777178c5bc2586e999dfab61df44585381c25733691",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its houses and towers; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98113,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 storybook kingdom buildings, four takes of each in this order: Squires' Hall (a plump timber-framed hall with a big round shield over the door and a straw practice dummy); Archery Range (a chunky open timber shed with a red-brown roof and a big red and white straw target); Barracks (a long stout cream stone barracks with a red-brown roof and a rack of spears by the door); Friary (a cosy little cream stone friary with a bell gable and a round window). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T21:48:28.282Z",
+    "usageUsd": 0.08328544841872322,
+    "candidates": [
+      {
+        "file": "realm-dwell-a-0.png",
+        "sha256": "a79a73e0c5f37e00c5585eb70648e930e3060f96013ac13df8b27ba08ab225b0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-1.png",
+        "sha256": "076739f73c00e51162ccb313dfad2bcbda78cb5156c8e06906a866afe0c86507",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-2.png",
+        "sha256": "b265ebf3d6679a8112038b2c1f65ceb31260887d28969a6ce47231f663d83a8b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-3.png",
+        "sha256": "321e16f503ae1bb8916b7a43abb0b3eb6a223da2108866eb257f3fef911a7a6e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-4.png",
+        "sha256": "cacc4fbc76c09bb9c83dec34db0eb5cce359cf62935e1c77d5f0b1b9d1331b98",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-5.png",
+        "sha256": "8615b07548b09a940ed55c40f3ef66c9213d5df0e084650a7828e8251275eee8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-6.png",
+        "sha256": "f96d72aa318b91cf5bff97af2914df549b62bac161eda36caeaf011efb207405",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-7.png",
+        "sha256": "f66000a230f4eac7c4ed6320590cc457e4db88305f197e9ffb2dd8671b8edb49",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-8.png",
+        "sha256": "a0eefe61bfbe3eee51ed21bd6730f25da2c8e51df1d9957051806ef7e4a2caad",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-9.png",
+        "sha256": "f92a310ee6831722a8cdf8dd46335bcd4c398a5846e96675cef7740493390997",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-10.png",
+        "sha256": "5d765ddc5e6401d14a9f4d65ea28d29a414f06d08695829c0340bb42cfc58cb7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-11.png",
+        "sha256": "e1c59872664a44582e007c255fdd9484aa5c6119bfc87d77c6b2196f3bbf9cf0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-12.png",
+        "sha256": "819cb66c1464ca4f2c3e99055c59e859ed51a1c750240fd6cf3d7dab924a9c8f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-13.png",
+        "sha256": "eab1f86fa1dfc55074c70d50ef8b375c71cf8028a96fbc78a7ec0180311ee109",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-14.png",
+        "sha256": "5f704777d006ced47b8ac925dd47746093e7e99a58c98f47d181ae0ccd2383f9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-a-15.png",
+        "sha256": "837c53d9e5cf52c8606ee81b9052505c74a68924adb0f7cff5c0c1759c76ed94",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "realm-dwell-b": {
+    "id": "realm-dwell-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1ccbd7e5-8ab7-43ad-9cb8-a9cfa4c2c697",
+    "submittedAt": "2026-11-26T21:48:28.491Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 storybook kingdom buildings, four takes of each in this order: Stables (a fat timber stable with a hay-loft door, hay bales and a gold horseshoe over the door); Butts (three fat straw archery targets with red and white rings under a small timber roof); Guardroom (a squat cream stone guardhouse with an iron-studded door and crossed halberds); Tiltyard (a jousting stand with a blue and white striped canopy behind a striped tilt rail). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/realm-fort-s1-0.png sha256 dbc3377e6114e446d8758777178c5bc2586e999dfab61df44585381c25733691",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its houses and towers; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98114,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 storybook kingdom buildings, four takes of each in this order: Stables (a fat timber stable with a hay-loft door, hay bales and a gold horseshoe over the door); Butts (three fat straw archery targets with red and white rings under a small timber roof); Guardroom (a squat cream stone guardhouse with an iron-studded door and crossed halberds); Tiltyard (a jousting stand with a blue and white striped canopy behind a striped tilt rail). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T21:50:35.205Z",
+    "usageUsd": 0.08188656947347853,
+    "candidates": [
+      {
+        "file": "realm-dwell-b-0.png",
+        "sha256": "8d3e5f918e63b2f73c97a52b22237ff4c10b1146129f64a7ad574bdcf6ea73d2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-1.png",
+        "sha256": "68583cd57f4dffa3f4a94ab2f9b80d418f8b21cf07b29de5e6c10fbd116927f6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-2.png",
+        "sha256": "4dcb581cd13eb5421862a872ba9adf0a63fe259e26279b3de29843df9a00b673",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-3.png",
+        "sha256": "329534dee0d42b22475c63e38d2c333d43e4bf5090a9822949c55fd328e9d0f9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-4.png",
+        "sha256": "ecbb71959fa476b509e7f34bc7cd395f2350194cf07a8b8a6b4c3f41c03ca1a9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-5.png",
+        "sha256": "183806414175ab2ee333bd85dc5b876540da0e3b00d18e76cea34d55f1e3360a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-6.png",
+        "sha256": "e2b4d5f3c7a3d543400831b9a59fdeec82e799933c90a4cefa079f4eefb52d22",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-7.png",
+        "sha256": "224054ae66e1a9aa5523213e85860bab7a9a69eb09aa4ab18278bf513b61d7fc",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-8.png",
+        "sha256": "6fda681b82beb47582e62e9cdbc481eb3401dc8daa56036b9142b40037f91622",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-9.png",
+        "sha256": "0f24f63fce2e50f58cfed22a9017dd1d2f274487764e2ad3f7a5ccd6be9bac99",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-10.png",
+        "sha256": "803e67be21e9298def8a53ce3f05cf6f1040bb2dd8c0d82e254a1c17767c8e4b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-11.png",
+        "sha256": "f48830ac96f84be4a283604a87a467e3042b56a7c4a7172e1e3aea28b7a31321",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-12.png",
+        "sha256": "2adf5b49b894defcc55ebfd3affca4992f0e3c8ae6ad8c2c654537c87b01748e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-13.png",
+        "sha256": "2362d3edb7fb6efaab97cab353a99c3a5f1f03a434fb4c659f9dfcac77313e9e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-14.png",
+        "sha256": "4aa509de2525619b5ba2e900c85752b5939c762fbc11cbee145635f999f07fd4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-dwell-b-15.png",
+        "sha256": "3e189ab6b42b19a9edcfbfa4fe11b9e5f0c7c11c943ed9e9a10acc112b7d1e0e",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "realm-misc-a": {
+    "id": "realm-misc-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1dfa4238-9f94-4278-9265-67dab4e1b501",
+    "submittedAt": "2026-11-26T21:50:35.361Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 storybook kingdom buildings, four takes of each in this order: Palisade (a chunky ring of sharpened log stakes round a small timber gate tower); Tithe Barn (a big plump timber barn with a red-brown roof, wheat sheaves and sacks of gold); Chapel of Oaths (a small cream stone chapel with a blue roof and a giant sword planted over its door); Magic Guild (a fat round cream stone wizard tower with a tall blue pointed hat roof dotted with gold stars). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/realm-fort-s1-0.png sha256 dbc3377e6114e446d8758777178c5bc2586e999dfab61df44585381c25733691",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its houses and towers; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98115,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 storybook kingdom buildings, four takes of each in this order: Palisade (a chunky ring of sharpened log stakes round a small timber gate tower); Tithe Barn (a big plump timber barn with a red-brown roof, wheat sheaves and sacks of gold); Chapel of Oaths (a small cream stone chapel with a blue roof and a giant sword planted over its door); Magic Guild (a fat round cream stone wizard tower with a tall blue pointed hat roof dotted with gold stars). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T21:51:58.573Z",
+    "usageUsd": 0.0818850343492296,
+    "candidates": [
+      {
+        "file": "realm-misc-a-0.png",
+        "sha256": "23b53d2100756fb2c22b3585658625c7a7c137035131b0e8465bb339cb5c7769",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-1.png",
+        "sha256": "074b527285a7898dec368f95259687ff4a6873b600b392b3c55cafdbd37bed46",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-2.png",
+        "sha256": "557b678508cc9222f48af43604cb00539cc4c73abf8a407707acb05a0529061f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-3.png",
+        "sha256": "5ae1b36cecb7829c23d2bf2040d170381e93b76e188674f8829eb28aa07bf923",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-4.png",
+        "sha256": "759f3f6a6fd69440ac7848ee4052a3a50e82447329d01bba02c64e5171a06f54",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-5.png",
+        "sha256": "bc971dd0f71d7c884f5bed4845173dfa515ea9cd4b243627aee0c2352718479f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-6.png",
+        "sha256": "e1641fc317114e7d1d980af6da318adef480cca9095a9179a23e3466d9f5337c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-7.png",
+        "sha256": "b317a683ee8d99f5e92f01b2fac9848a23ea1b772a622a5b62a87ab158d10f30",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-8.png",
+        "sha256": "623c31eadfebbc7aa06cf348055f02a5398a45bb5b0f20905f65d0a6eb3d3cee",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-9.png",
+        "sha256": "3cb9ecbc4c321c3abd9df3526221b91949be22037a1835447e7f5705744cf9bf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-10.png",
+        "sha256": "1af753dafc37dbb4498ceb8b3ceff778e8478a9f70440e2efb7b82abea64b9cf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-11.png",
+        "sha256": "477f5eb28f9b1c39cb2ac91c402aca7ecf5e9645cc41b15e2f3413a20de6dd77",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-12.png",
+        "sha256": "e892ad7b1b5fd549cbcb1b041a94ef63e9b9c88096adbd19750dd8cb99f33d42",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-13.png",
+        "sha256": "47f00868e446939a475139a5d5704f1b0ad3bc284686fabcd2b2eedc787c4d02",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-14.png",
+        "sha256": "72ecc37d47aa52998a391dc41b8c13eb202dd63a14f6c94121f6e70423d43252",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-misc-a-15.png",
+        "sha256": "cb3e30a652a60828472a569bba70a1124d1b2a194d3fa93ffe343b951d4134c9",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "realm-trade-a": {
+    "id": "realm-trade-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b5b4896e-011f-4ce2-af67-26f6c6812bb0",
+    "submittedAt": "2026-11-26T21:51:58.722Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these two storybook kingdom buildings, eight takes of each in this order: Marketplace (a chunky timber market stall with a big blue and white striped awning and crates of goods); Resource Silo (a fat round cream stone silo with a blue cone roof beside a woodpile and an ore cart). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/realm-fort-s1-0.png sha256 dbc3377e6114e446d8758777178c5bc2586e999dfab61df44585381c25733691",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its houses and towers; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98116,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these two storybook kingdom buildings, eight takes of each in this order: Marketplace (a chunky timber market stall with a big blue and white striped awning and crates of goods); Resource Silo (a fat round cream stone silo with a blue cone roof beside a woodpile and an ore cart). Colours: cream limestone #e6d8b4 with #b3a07a shadows, white plaster with dark brown timbers, roofs tabard blue #2f6fd0 with #1f4a8f shadows or warm red-brown #a8492f. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T21:53:21.124Z",
+    "usageUsd": 0.08187133971850077,
+    "candidates": [
+      {
+        "file": "realm-trade-a-0.png",
+        "sha256": "3ce7a77af6ebe85892d5a59daaf32ac0db0e6efd714d76a5a6ea732d7c550652",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-1.png",
+        "sha256": "c397fa9d9cfbd6351889fecd01d42a46a3e810239f68438c3c3e732ec9b58c7a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-2.png",
+        "sha256": "f28dc8a501fd1be95c5f8dbede57dbcc062ca6b36f1ce2cbb51e367f566b5827",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-3.png",
+        "sha256": "982aea9d21271471e6810ed23ddb0f29d38f108ba6c69db4125022a80472eb8f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-4.png",
+        "sha256": "0df3aef2275fd31cb997c05db297aa635319ac712b41bf89fb534acc2b712348",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-5.png",
+        "sha256": "0c9458a8cbbb52c7bba66d64a0c8250ef535f25d1b74abc741342a8d10171b7a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-6.png",
+        "sha256": "064065e872ed108c638f8d7ef45ffb8abe8508273d7f2db713baae82899e6830",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-7.png",
+        "sha256": "bfc3da9b5e4bf5862ae5fec5ddab8aa3b93d32bc887301d00046a78c40132f6b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-8.png",
+        "sha256": "1066196e96542fb92b4747a9406248d73734a28f3043ebc43e4f09f4f90d3494",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-9.png",
+        "sha256": "1513fc6d3646dfbcd8e2c2ea490035a7b52338a5c859fa89fb1c26cb38637b1f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-10.png",
+        "sha256": "9f389a1ae0fea76adf2995b500b1ba16e183ba49120a1e4236a05a086bf6a90c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-11.png",
+        "sha256": "f6fd241e01a6cf5cfa661db86d02efc85705d319bde99c25f9772c73d8b725c6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-12.png",
+        "sha256": "e5f57b83c8c24fbe4ccd9485a2309a7b2569881a9d45fb02dc3c0cd946e916b5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-13.png",
+        "sha256": "fa46f71d63deb20c71a8a1c0d26b080fba81e343456049efe18675ae090a4064",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-14.png",
+        "sha256": "5c6b21819a3a2664159043a5a2715db85b7317ea98f1572cd9e96a19cc7f27db",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-trade-a-15.png",
+        "sha256": "803d07962dc353b7088a5fd3c18ca58dbe65f93633fb61be0b135011d3899654",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "restless-halls-a": {
+    "id": "restless-halls-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "e2fba8a6-a709-40ab-8e15-b4778875f53c",
+    "submittedAt": "2026-11-26T21:53:21.250Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these two haunted town buildings, eight takes of each in this order: Village Hall (the same slate hall smaller: a little crooked parish hall with a violet roof and a small bell); City Hall (the same hall grown grand: a big crooked gothic hall with the clock tower and three violet spires). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/restless-fort-s1-0.png sha256 c581f12717e661c1e8453d4604a0a12080f1d6ef459ed55ea9f616104666091a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its buildings; not the layout: draw only one building"
+      },
+      "reference_images": [
+        {
+          "source": "take chunky-buildings/restless-s1#0 sha256 b964a6dfa4275952a92ec241c9eb079d81d9d7e6306f17c2b7236dfd39e5136d",
+          "usage": "the same slate town hall with its clock tower: keep its shape, materials, colours and outline, and draw it grown as described"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98211,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these two haunted town buildings, eight takes of each in this order: Village Hall (the same slate hall smaller: a little crooked parish hall with a violet roof and a small bell); City Hall (the same hall grown grand: a big crooked gothic hall with the clock tower and three violet spires). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, skeleton, ghost, blood, gore."
+    },
+    "at": "2026-11-26T21:54:49.501Z",
+    "usageUsd": 0.08172945517963834,
+    "candidates": [
+      {
+        "file": "restless-halls-a-0.png",
+        "sha256": "2da62acd87ccf4663320e35b8aa4788fe113a13065b63c1a6a743a974f32a1a3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-1.png",
+        "sha256": "c1ad224419974f1253bed0504072574f72d5babcfbf9127736aa0395c9231b15",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-2.png",
+        "sha256": "bc70f7a3890294074e899632504901d79125f39d1bbc106130cf847136869be4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-3.png",
+        "sha256": "f605ece38eae3720997ef863602b3738fe17fcd39e78798cc537f5423ef723fd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-4.png",
+        "sha256": "b3b3199c8dc54845eb6ff8d60fe7e5a104c675c16bd1d11623863878afa1d37b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-5.png",
+        "sha256": "fa26b7871def2fcbf558691476357c3c3c7e33f388191c98c2912bb2e916f021",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-6.png",
+        "sha256": "0b1e6e6d3776e0d557092ca619b891cd418bfa364be187b78c9458aadcd0c717",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-7.png",
+        "sha256": "ac86c38ef20606dd40e6d0a41f1b4478d2f5217224b341912f4260a554fdc1f1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-8.png",
+        "sha256": "014b281f3e72bb03bcbdf4f94133a0ad51fc20a8d958cef7f05e54b9bbb5e8f8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-9.png",
+        "sha256": "4d034f30bf9ca2b1593878f32b89a1f7ad70e7365279b5e02cc50fafdd616279",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-10.png",
+        "sha256": "2675164e180b0be0d19aab15c8b8135aa42fdd0f1a7a68b99d4a56f1c6b44d7e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-11.png",
+        "sha256": "de44e075caaf8842cc53775fe5120730ff48c204302a68e69ad7546c953ad2ef",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-12.png",
+        "sha256": "2d28675ade89c1a15d53a3a54758c7e47fea40b8ebf4077edd189958d83ce599",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-13.png",
+        "sha256": "92ee978cf032cfd630ce680f06a013bda6197df3d1333d9fecce3ecc13b9a9ab",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-14.png",
+        "sha256": "f85756c9db29a7ad2f0268bb0e29bd5d908f02e82f1a3b7181261052979378ba",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-halls-a-15.png",
+        "sha256": "3176194d7a83effd045015cfdf30d68e2fbd0c379c57f918cb4acf997b351f3f",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "restless-forts-a": {
+    "id": "restless-forts-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1f72584a-c7bb-437b-a263-252e27b0cb19",
+    "submittedAt": "2026-11-26T21:54:49.606Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three haunted town buildings, five takes of each in this order: Iron Railings (a short curved stretch of black iron railings between two fat slate posts with violet lanterns); Lych Wall (a thick slate wall with black iron railings and a roofed violet lych-gate in the middle); Black Gate (a big black iron gate between two fat slate towers with violet cone roofs). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/restless-fort-s1-0.png sha256 c581f12717e661c1e8453d4604a0a12080f1d6ef459ed55ea9f616104666091a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its buildings; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98212,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three haunted town buildings, five takes of each in this order: Iron Railings (a short curved stretch of black iron railings between two fat slate posts with violet lanterns); Lych Wall (a thick slate wall with black iron railings and a roofed violet lych-gate in the middle); Black Gate (a big black iron gate between two fat slate towers with violet cone roofs). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, skeleton, ghost, blood, gore."
+    },
+    "at": "2026-11-26T21:56:32.491Z",
+    "usageUsd": 0.08189817357063293,
+    "candidates": [
+      {
+        "file": "restless-forts-a-0.png",
+        "sha256": "ce9c85156ea3ef9a307f1812973cdee378493a1fe860a3c93b16a0d605e3532e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-1.png",
+        "sha256": "51b0ab0946eddd0d23f76582554fe5cfb9a39f0729f45347f87a1166c29b0223",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-2.png",
+        "sha256": "770081d8fecc5341427b12d569128c07f709764cef5b5d7d3ea8bba60881161c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-3.png",
+        "sha256": "7e5559715613b78eae7be4e648dc14b7a19b814c666f1860dcc3a40c89a0a50d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-4.png",
+        "sha256": "8e2f38d5615a33958261aa8489a2f32e33f12526f8de98781d53e3120615377c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-5.png",
+        "sha256": "d58c20e3d67017173a5389ac71bfe467d4495538b640019c19fcb12adefa3908",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-6.png",
+        "sha256": "c2090674b324af7905e9270f12f1a425e11a242f78d91ede0aad66ea62deb7e4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-7.png",
+        "sha256": "5c96f2f79c34084dbea756f668636268ad4f58b206a5c45b679cc2cbc6bbe87f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-8.png",
+        "sha256": "7def03abc85c251bd23f1824c5046f1688437a1f2fce342b64c67d21702c800f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-9.png",
+        "sha256": "4cf24f9fcab6acb0d8588dd74a422bc6777898d73d1220f79713e061f576ef42",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-10.png",
+        "sha256": "8845e944185a1adc9b6c8eca9ea9501a92a858ead35054ef16c3c2bc38e287ca",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-11.png",
+        "sha256": "323d086706cef6502995129bf675da06983456c1c73fbff9a98e302b18a3c772",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-12.png",
+        "sha256": "78e4cbf86faa52243875a5fb761586313b0d51374e34c9a5a3ef5c9c96a53068",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-13.png",
+        "sha256": "310348b5ccd437dfd146d9ad70720042c3530477ee6f346a04a5f5385255588f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-14.png",
+        "sha256": "4fa5b7dde13f528df1ed464ef82a52133fb8628484fcb08d68ece6e3c68a6b40",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-forts-a-15.png",
+        "sha256": "f584539cfde75ffffa40e643ab7bbd8937d44d381543c4af5f1c8aa6161e4607",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "restless-dwell-a": {
+    "id": "restless-dwell-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c410a89b-a87b-46bd-b1ff-116e2d26a5ab",
+    "submittedAt": "2026-11-26T21:56:32.606Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 haunted town buildings, four takes of each in this order: Potter's Field (a cosy cluster of crooked cream tombstones behind a low black iron fence); Charnel Pit (a round slate well-like pit heaped with cream bones under a little violet roof); Funeral Parlour (a narrow crooked slate funeral house with a violet awning and a coffin by the door); Royal Mausoleum (a grand bone white domed mausoleum with fat columns and a gold crown on the dome). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/restless-fort-s1-0.png sha256 c581f12717e661c1e8453d4604a0a12080f1d6ef459ed55ea9f616104666091a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its buildings; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98213,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 haunted town buildings, four takes of each in this order: Potter's Field (a cosy cluster of crooked cream tombstones behind a low black iron fence); Charnel Pit (a round slate well-like pit heaped with cream bones under a little violet roof); Funeral Parlour (a narrow crooked slate funeral house with a violet awning and a coffin by the door); Royal Mausoleum (a grand bone white domed mausoleum with fat columns and a gold crown on the dome). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, ghost, blood, gore."
+    },
+    "at": "2026-11-26T21:57:58.855Z",
+    "usageUsd": 0.08289401067627801,
+    "candidates": [
+      {
+        "file": "restless-dwell-a-0.png",
+        "sha256": "a424426af8fc8f370998241fca7fb5807883727ca65502379b9d20b619d30496",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-1.png",
+        "sha256": "8c78963ac8db0e3ce0ba4aa23e1d2a2777a00e6f923a82c1d1ae93bf5c31c8e5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-2.png",
+        "sha256": "1f4671027d68fef810d6f55aea5085fe8c48235b67bf5d1199021316b816f39b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-3.png",
+        "sha256": "fdd709708f20d984edbadd2827df68edb260f07a452c21a4e3bdf4dcdef85e88",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-4.png",
+        "sha256": "b014806c118f1f2f38fd47a6f6f739e56ed038fe853b184409a0a4c32097c795",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-5.png",
+        "sha256": "0c55efe5cfa49882a46ae54db01879cac572cd6430885db8a7ee7b9968410959",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-6.png",
+        "sha256": "4898278edee3054cf06a17b4a98f6a01cf7c4c51cf352ad6866ae3b8ca108394",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-7.png",
+        "sha256": "3ae6ab43fe0142cf3f1c304b99877179060f0f48e17ea21be223d89be3503f8e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-8.png",
+        "sha256": "012cb2009bbb6016f9a57be25746f1b60c85401496d6ec1addcfc1e5899d9dd1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-9.png",
+        "sha256": "ec50ec694044d244dca7f4c77668151c3f44afb7fcdc3586a1cc3587bc095484",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-10.png",
+        "sha256": "c8997b991fa6b3cfe4864f74706811a2ad0d3ae5e8deb8a921ef8554625de02d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-11.png",
+        "sha256": "3d565c841bb35a8d394ba4625c1df65d12e9e8ae63f69358a113d2766607334e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-12.png",
+        "sha256": "2b5f850bf67d39a972a99388d88c78c4f10a0a7afec38f35bc0d807277b683fb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-13.png",
+        "sha256": "9d9026bc97c01a005e5228f3f5dc9270587452651c25eff029222a3b7e5b2e6c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-14.png",
+        "sha256": "db484aba9f92c42db1bbb88587764bbecfc4ae95217b4978a65836691047e56f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-a-15.png",
+        "sha256": "aafb7ebace5404eb19a0a300dd8b4aa07177ab5051b22a1457483db91a41c96c",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "restless-dwell-b": {
+    "id": "restless-dwell-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1ae20517-ccbf-40d9-b552-e18206b639e5",
+    "submittedAt": "2026-11-26T21:57:59.023Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 haunted town buildings, four takes of each in this order: Bone Yard (a fat heap of cream bones and skulls inside a black iron fence); Rot Cellar (a squat slate cellar house with a slanted cellar door and green glowing jars); Drawing Room (an elegant crooked slate parlour house with tall violet-curtained windows); Essence Still (a fat copper still bubbling violet essence over a round stone furnace). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/restless-fort-s1-0.png sha256 c581f12717e661c1e8453d4604a0a12080f1d6ef459ed55ea9f616104666091a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its buildings; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98214,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 haunted town buildings, four takes of each in this order: Bone Yard (a fat heap of cream bones and skulls inside a black iron fence); Rot Cellar (a squat slate cellar house with a slanted cellar door and green glowing jars); Drawing Room (an elegant crooked slate parlour house with tall violet-curtained windows); Essence Still (a fat copper still bubbling violet essence over a round stone furnace). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, ghost, blood, gore."
+    },
+    "at": "2026-11-26T21:59:31.668Z",
+    "usageUsd": 0.08190663663546245,
+    "candidates": [
+      {
+        "file": "restless-dwell-b-0.png",
+        "sha256": "6b70305ebdad3c385f0d60e0644a33194df7c0d9414ca5f25e37270ae0e235f1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-1.png",
+        "sha256": "b0b85cf627dd413a0d9e6d4de3f0c994112b2b39334ca57e62ca781bc0d0d9eb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-2.png",
+        "sha256": "815e8ec41e05ac2491f7a40fd19f4dafd97085ee652c4ba3f3afcddea8552d87",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-3.png",
+        "sha256": "0380c0c7269fd9fe60d0cf1d5c6bfbf71bc8780a0bc2341265773a71be06e106",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-4.png",
+        "sha256": "d20e34838ac230c7a10f6b8665e3ea5cb209ca8cf3a724f67a794fe2749906cf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-5.png",
+        "sha256": "81a155b2b9e78c84509c3c922f4956bdb74ffa350a727391ec67e25fbda6f873",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-6.png",
+        "sha256": "9660046972dc0b588c32740ed69547099c5ea8d036ca9dfe8174d73eaaee9990",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-7.png",
+        "sha256": "c5f47197d9cbef11efce09145d8b057a44e79fd2a6dea7bf63cc942a3e8233cc",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-8.png",
+        "sha256": "ee9635b3482e253eb7b2904015ceb391ace3a5207c6742fe207dd9a93d84e9e0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-9.png",
+        "sha256": "36a2da533725a75a271dee412c83f35585b71cc66c66094df4ed937057866d20",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-10.png",
+        "sha256": "bfc1c340286b3affdf02caaf0f6fc35c6234ec17c6eeb21bcb27199417d18230",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-11.png",
+        "sha256": "387db801f4058203712faa4b48420dc72aa31ef12f75313606813fdcd3d6d889",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-12.png",
+        "sha256": "269b035e6ee0810fe6036a38c86116b9f9ec02dfde419e0990ac0bdafccf3227",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-13.png",
+        "sha256": "c6f2a14b0f76d2b35d91b296bbd0a0d6c7e3c6c2f72fee72f4c2ad9eed9e64a2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-14.png",
+        "sha256": "b47b790f71d050ecd5f082f1ca7e2ed02d463dedcb2759df33c5a26b9565f6b0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-dwell-b-15.png",
+        "sha256": "bb66ff1cf29a474bfeefdc9d5842f9c5ab506061375a65818b55f89b283a4c83",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "restless-civic-a": {
+    "id": "restless-civic-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5337535c-a9a8-43ac-b827-c6fd041fd439",
+    "submittedAt": "2026-11-26T21:59:31.786Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 5 haunted town buildings, three takes of each in this order: Hall of Ancestors (a grand bone white hall with tall portrait windows and a big violet dome); Magic Guild (a crooked slate wizard tower with a tall violet hat roof and glowing windows); Tavern (a creaky slate inn with a violet roof and a coffin-shaped sign); Marketplace (a crooked stall with a violet and black striped awning and lanterns); Resource Silo (a slate storehouse with a violet roof beside a woodpile and an ore cart). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/restless-fort-s1-0.png sha256 c581f12717e661c1e8453d4604a0a12080f1d6ef459ed55ea9f616104666091a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its buildings; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98215,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 5 haunted town buildings, three takes of each in this order: Hall of Ancestors (a grand bone white hall with tall portrait windows and a big violet dome); Magic Guild (a crooked slate wizard tower with a tall violet hat roof and glowing windows); Tavern (a creaky slate inn with a violet roof and a coffin-shaped sign); Marketplace (a crooked stall with a violet and black striped awning and lanterns); Resource Silo (a slate storehouse with a violet roof beside a woodpile and an ore cart). Colours: dark slate #5b5866 with #3a3842 shadows, roofs shroud violet #7a4fb5 with #4e2f7a shadows, bone white stone #d8d0bc, black iron, glowing violet windows; spooky but cute, never gory. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, skeleton, ghost, blood, gore."
+    },
+    "at": "2026-11-26T22:01:05.007Z",
+    "usageUsd": 0.08208261322975159,
+    "candidates": [
+      {
+        "file": "restless-civic-a-0.png",
+        "sha256": "b4782535537cf184548d2a686ec65c422f1bc54e7cebc06688281e4958e0b92a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-1.png",
+        "sha256": "1120e92e738d7aed2471ada0857a92dc2e3fae92c98c1842096853e3dbc68a9c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-2.png",
+        "sha256": "dd35caf97646805f152bb7e3ee9afe2e5f397760f898baa44223770542a619e4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-3.png",
+        "sha256": "fad69ac3b25f62cdceb04c871038e0dbc876eb06a6c1ed21a30ee0e6bc0387e0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-4.png",
+        "sha256": "1db507f45396ee705519e050d0b758e3e354b88b1b104945c9f1ade2d637d5af",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-5.png",
+        "sha256": "7cc21bc208513bbfb4176eef55ff03aa19551fa4b2e5e0ffd26dd78152372053",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-6.png",
+        "sha256": "8ddfef5848b6f7466a722773090291eb1ac3ae6af36f634dd81de6936d434f79",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-7.png",
+        "sha256": "238b2a9b0929e0222403a352219ca8ca3f6e344d21b2f829cb28935c8c35d577",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-8.png",
+        "sha256": "ffefabeab34a84bf8a428ef59746066e4f65e3d4d0ca72a3fb8b9c601d0f58c5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-9.png",
+        "sha256": "380dce009f3c05b9ae4b6f2afda0069292243ba3702ff735a9c84f271c144a2d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-10.png",
+        "sha256": "9237746c5b1de0eaa4915f1a6d913bed26ec65f6a88d66b9d3a7bacc9e48c37e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-11.png",
+        "sha256": "b9cb8600052fb0f68e893a4f9fb313f4cf388385014d12f00e16397cd8aa5197",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-12.png",
+        "sha256": "e8e5b53a4dc5f835530d072b5cc1c4f809c2850c7bb95a6533d4b43aa0f32c16",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-13.png",
+        "sha256": "6fb3551f3616a522a1f4577c4b57dad40333620d200222530d16fa6e0190cdb0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-14.png",
+        "sha256": "22b688e416b55a43196c02f076195fcb75c1eceaa7b6f7a85f1c68e33dbf33f6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "restless-civic-a-15.png",
+        "sha256": "82c6c798e1930e5755b84b8c7f4aa09f960969e6e577e76b1f99384fc9277e55",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "horde-halls-a": {
+    "id": "horde-halls-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "443f508c-b137-4ac9-b554-b99af6a14e6d",
+    "submittedAt": "2026-11-26T22:01:05.137Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Village Hall (a small fat tin shack with a yellow roof and a big war horn on top); Town Hall (the same tin shack grown: two lopsided storeys of tin and logs, yellow roofs and the war horn); City Hall (the same hall grown huge: a fat lopsided junk palace of tin with yellow roofs and big horns). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/horde-fort-s1-0.png sha256 58edb2df1dedc2f32054decc84c31fac2c58eb0e01f1d04aff3bc68abf7b7e1a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98311,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Village Hall (a small fat tin shack with a yellow roof and a big war horn on top); Town Hall (the same tin shack grown: two lopsided storeys of tin and logs, yellow roofs and the war horn); City Hall (the same hall grown huge: a fat lopsided junk palace of tin with yellow roofs and big horns). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T22:02:34.552Z",
+    "usageUsd": 0.08178395083215502,
+    "candidates": [
+      {
+        "file": "horde-halls-a-0.png",
+        "sha256": "ec09a5b1a631b77b945ddb7d9c3d03be7b1f1aa8054f2e7159f63bf5edb02619",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-1.png",
+        "sha256": "cbdd0d3f7f9e7ff1591e01454c565f6498d83678c6ad5eb538c4a97418168d06",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-2.png",
+        "sha256": "1f2b6b73c33e43d584fda597ffd2dc968af1b5c83a82a87d18f0fa70d0e49ad1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-3.png",
+        "sha256": "59133149ccc05d4a54bfb5e63f8fbb45f3b41bc7581d78d5e8d130b46f9e1264",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-4.png",
+        "sha256": "87decc367c88f46e6029fe25c0222ebe66efa9437116f292448cd6b2403d1176",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-5.png",
+        "sha256": "201a8a346ec9370875ba4b9e3998ef5c014610817396fdd156f81d6f821a7c0d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-6.png",
+        "sha256": "c9862b7d8fc61e01f7fc1a3acb93d17b9631a6b9eb8c707c0c8902935d2c075a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-7.png",
+        "sha256": "eb051b0250f1d843656df8598bea174cbb2a91b0d34ca6e402232cfcc18d7e13",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-8.png",
+        "sha256": "012ed9acfcffa06090ddcbe4c0531c248c1f3471e5719a02a3e8aaaa20f7873b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-9.png",
+        "sha256": "037dbde8ac97ededbc8e19dd2622927b7441fcb60f3af2949664c6e20e160354",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-10.png",
+        "sha256": "1ac24e64236dc5d1b6faefcf3f2083dc740fe77d1264c70c8d0f8c18f86d2274",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-11.png",
+        "sha256": "6d341def64a45a4af72743118dc1945ee0e79bddf7395762458ab148e5bf447e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-12.png",
+        "sha256": "f06efe6c1a1251444bdbdb4070dea92b90402ef3191fdb68dd445611099e5e11",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-13.png",
+        "sha256": "4c0f24e3deade0d3370c68d89ace0f31fc121916d207416afaeb5dc7af704856",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-14.png",
+        "sha256": "64968698c43e7ce9089cdf1931c79584eebdbd8c001c4c34cd8cd076f6486e59",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-halls-a-15.png",
+        "sha256": "e767bcf01ddc68387d92eb799e5f7faaf5373d4bca7a76e37bb64e831dc3aec1",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "horde-forts-a": {
+    "id": "horde-forts-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "d1f56542-dc2f-40d6-8026-3693a95066fa",
+    "submittedAt": "2026-11-26T22:02:34.743Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Stakes (a short curved row of fat sharpened log stakes lashed with rope, a cream ox skull on the middle one); Scrap Wall (a thick riveted tin wall with fat sharpened logs and a small tin gate); Skull Tower (a fat squat lookout tower of riveted tin on thick log stilts with a huge horned ox skull on top). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/horde-fort-s1-0.png sha256 58edb2df1dedc2f32054decc84c31fac2c58eb0e01f1d04aff3bc68abf7b7e1a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98312,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Stakes (a short curved row of fat sharpened log stakes lashed with rope, a cream ox skull on the middle one); Scrap Wall (a thick riveted tin wall with fat sharpened logs and a small tin gate); Skull Tower (a fat squat lookout tower of riveted tin on thick log stilts with a huge horned ox skull on top). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T22:04:17.328Z",
+    "usageUsd": 0.0815325567457411,
+    "candidates": [
+      {
+        "file": "horde-forts-a-0.png",
+        "sha256": "c17df072db72b617fc7e37389acea42e022fb1a069faeea3627587ffa7c4184f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-1.png",
+        "sha256": "570b485fafed224de4a3e6b266b8a64973e0cea3397b53a6936d5246071953a8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-2.png",
+        "sha256": "e13a1a2075a60815666c7cf3f0ae0694669adfc560940308802672706a1cf10c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-3.png",
+        "sha256": "4302b7f0fd9dcce450721ed3024b725b1ac75d3b52bb939019987d522dbdd691",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-4.png",
+        "sha256": "78f34265ec01e20c25e209c4d0de81587f4120b036030890fb515761aaf12775",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-5.png",
+        "sha256": "a7ea2ead03f3eeedda3a32ef6ce15cccb073cb371cb1584a3894290ce751dc0d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-6.png",
+        "sha256": "2dc013f74421f3b7c1e10c2a79eae7f1f365a38803b05b61e5163d599e171e6d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-7.png",
+        "sha256": "7a562cf77cb7a42052cd7e03132675886aa396b9abf1c4f971ef880f541364d5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-8.png",
+        "sha256": "f81f5344e90e6fb661326d02d103279a04aacc3e2b24e61294de8b3a445e454c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-9.png",
+        "sha256": "81396c61db7d0f78b66a8723b2687164c245e1c448c0c36b60f2d74e519b5639",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-10.png",
+        "sha256": "e80d04ff738a3604a8a5cc0f3d367169713f4c7dd1a5f28981a7f6e7ec584909",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-11.png",
+        "sha256": "fec5959715ef6b11d9058e68d51f0ad85503404596b1a725d2c42f5e5bf89cb9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-12.png",
+        "sha256": "ef98d06f352cf4e05b6a9b9f4e33a08c1c50e7d785c216186f95229e5fdef403",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-13.png",
+        "sha256": "a9418c821f5764eccc3b7e368d300550dcf05ed0e0098c1555d91f0222b7c9ed",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-14.png",
+        "sha256": "3e3943cecd650f1d5cfd4f8508ebd41c84bf6dbacf8264b05403bf12b868b145",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-forts-a-15.png",
+        "sha256": "da8d21c4b90f8cb0887e4f7e923b2d1fac2108a823427f57cdd3db3bf44f3090",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "horde-dwell-a": {
+    "id": "horde-dwell-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "528e846a-5da0-46cc-84e2-5fa346f6aad1",
+    "submittedAt": "2026-11-26T22:04:17.434Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 ramshackle goblin buildings, four takes of each in this order: Goblin Holes (a fat mound of scrap and logs with round burrow doors); Powder Shed (a squat tin shed with a yellow roof and black powder barrels by the door); Hex Hut (a crooked hide hut on fat stilts with a lightning rod and a bubbling cauldron); Ogre Pit (a round log stockade arena with a huge club leaning on it). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/horde-fort-s1-0.png sha256 58edb2df1dedc2f32054decc84c31fac2c58eb0e01f1d04aff3bc68abf7b7e1a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98313,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 ramshackle goblin buildings, four takes of each in this order: Goblin Holes (a fat mound of scrap and logs with round burrow doors); Powder Shed (a squat tin shed with a yellow roof and black powder barrels by the door); Hex Hut (a crooked hide hut on fat stilts with a lightning rod and a bubbling cauldron); Ogre Pit (a round log stockade arena with a huge club leaning on it). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T22:05:56.717Z",
+    "usageUsd": 0.08202922508451674,
+    "candidates": [
+      {
+        "file": "horde-dwell-a-0.png",
+        "sha256": "423d05201ca116ace385f8a32d9fcd524981bc2f10326f3a562bb025afcb252b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-1.png",
+        "sha256": "f6b0092cef2946ae9be075eca4faf66f67433c1e200af718417fcc6bc0c0419c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-2.png",
+        "sha256": "ee817e5519cd9385533d86b5661ada993b5cf8fac6447d3e260c2e50a0e2efb3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-3.png",
+        "sha256": "be480e4821f060bec99ef8a7d770cd722c1b9cb74cbab1c805d89945c10b1b72",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-4.png",
+        "sha256": "68db527faa38395118ef51686ec7f926404f627c179a44efbecb2eccf4abc396",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-5.png",
+        "sha256": "27874cd2cb92c5c4987952283f94ef238a2205fb9cb32d0b1daa37d908922d09",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-6.png",
+        "sha256": "37b99787f080c5f48e0ed7f0a64619db0141d38e9f3ab9c03ed24ebd865e9b1d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-7.png",
+        "sha256": "1f2dea4890872dbf5c64e16a00b9e509e1ab2fb36474a6ba885d52e289e17b06",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-8.png",
+        "sha256": "acf60fe83ac147eefd9b87d1351f855b3f90a697e0e00873cd72b5330a15eef2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-9.png",
+        "sha256": "98bdd66ceb43a9b2882b4f94ac34a44a6986f77b9bf386179d2c1597c7b37938",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-10.png",
+        "sha256": "ea67bbca60ac81fb8e50a130c3d79ffa91acf10e537dc774f1c6b45fb0ded887",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-11.png",
+        "sha256": "3be40650dc02d9ea5765273c37876e7ab1f1a563c868eea8130f0ca234510fc1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-12.png",
+        "sha256": "4b768acde73bf9edb8aec096134f1f14aecf328873ac8994f56778bb6067919e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-13.png",
+        "sha256": "3998e4faa4c2f3d64220f9cef7be60b367837e1a62d85445f4cb44f3baf13272",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-14.png",
+        "sha256": "9486e3b61564ee1a5257d91c7fcf6663e78c12f5884d0b431ce5bb8140f219b0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-dwell-a-15.png",
+        "sha256": "241b02e9d73a13cd4b8f08260b466b24dad828baf776fe84a4aee9f466a19ca1",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "horde-special-a": {
+    "id": "horde-special-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "7c0ceb84-75e6-44ea-b66f-a2ec8a9fd957",
+    "submittedAt": "2026-11-26T22:05:56.873Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 ramshackle goblin buildings, four takes of each in this order: Mosh Pit (a ring of fat logs round a big brass gong on a frame); Pitch Vats (two fat bubbling black pitch vats over a fire); Racing Track (a wooden starting gate with yellow and black chequered posts and a small go-kart); Loot Pile (a big heap of gold coins, chests and junk). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/horde-fort-s1-0.png sha256 58edb2df1dedc2f32054decc84c31fac2c58eb0e01f1d04aff3bc68abf7b7e1a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98314,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 ramshackle goblin buildings, four takes of each in this order: Mosh Pit (a ring of fat logs round a big brass gong on a frame); Pitch Vats (two fat bubbling black pitch vats over a fire); Racing Track (a wooden starting gate with yellow and black chequered posts and a small go-kart); Loot Pile (a big heap of gold coins, chests and junk). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T22:07:30.940Z",
+    "usageUsd": 0.08201407400767009,
+    "candidates": [
+      {
+        "file": "horde-special-a-0.png",
+        "sha256": "d0d54534398aa3a577613037e2e28aeb63079d7fe55668baa03eec8da7a815ae",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-1.png",
+        "sha256": "a8ef7dd60b113c667e4fc52e5253d7acdbad16f3ec7bb8672e98955a4c8c8203",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-2.png",
+        "sha256": "07fc044d140bc26242fa2a825dbcbac2d3b582520819c926fd933d5be0a8387b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-3.png",
+        "sha256": "51f42a9b26deb40fd05feb66f04706afb41cb30b2a60822132c144c8359cd7f2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-4.png",
+        "sha256": "5cd2df9923cc73f67e5f0bac2a2dcc9af2df1c6e7f57cd62222f5eb6c5fd481e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-5.png",
+        "sha256": "92676a7414ed135c304c5e0d567d891de76fc1d04b9a6940da969803c10f05be",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-6.png",
+        "sha256": "091242742651edceb7441b3f69ea96b27f03d9a06a99f56e248473b7245849cf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-7.png",
+        "sha256": "825224c504a13911a13697cfdec55e918e0ca578706a9729754a4200eda3bc8b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-8.png",
+        "sha256": "43d7696142a2b0a77b70dc10e9d58bafea8037b7542d4a483e61e8587318ba9d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-9.png",
+        "sha256": "23876f7301806414bda5b0e7116fedea0057c5e017f680b2583568921af13548",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-10.png",
+        "sha256": "97cc007a101b1fc8aa7bfee7adca6d5b7228b9b06dc16f87845ebda30f915d25",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-11.png",
+        "sha256": "5f1b06b1b81e0b5d144edbffccb0f0c2d2eb38ed89c0dced93031a8f24e6343d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-12.png",
+        "sha256": "48ab516591ca5813a5d3f5a8c48b1fac2201968a3b6db17bb733cdfbe4a636d6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-13.png",
+        "sha256": "a1aaa4431e81ae9292adf7c690daac0b13af9188012404ede28f698cf4da73eb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-14.png",
+        "sha256": "f186d4c350b4d2d3bb0dd3254d77895f6f1f80712d87fb0ebb137fe527afd290",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-special-a-15.png",
+        "sha256": "1e28641c0d7d3505f967036ca5d4d57034a14e7e39001d5b4e5925262dd980c0",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "horde-civic-a": {
+    "id": "horde-civic-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5c7fed73-4747-40df-b8e8-58b3d5d251f5",
+    "submittedAt": "2026-11-26T22:07:31.046Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 5 ramshackle goblin buildings, three takes of each in this order: Launch Ramp (a tall chunky wooden ramp with a big spring at its foot); Great Flinger (a giant catapult of logs and tin with a yellow arm); Magic Guild (a crooked hide and tin shaman tower with a lightning rod); Tavern (a tin grog shack with a yellow roof, barrels and a mug sign); Resource Silo (a fat tin silo beside a woodpile and an ore wheelbarrow). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/horde-fort-s1-0.png sha256 58edb2df1dedc2f32054decc84c31fac2c58eb0e01f1d04aff3bc68abf7b7e1a",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98315,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 5 ramshackle goblin buildings, three takes of each in this order: Launch Ramp (a tall chunky wooden ramp with a big spring at its foot); Great Flinger (a giant catapult of logs and tin with a yellow arm); Magic Guild (a crooked hide and tin shaman tower with a lightning rod); Tavern (a tin grog shack with a yellow roof, barrels and a mug sign); Resource Silo (a fat tin silo beside a woodpile and an ore wheelbarrow). Colours: riveted light grey tin #b8bcc0 with #7d8288 shadows, bright hazard yellow #f2c230 roofs, sharpened logs #b8733a, tawny spotted hide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T22:08:59.000Z",
+    "usageUsd": 0.08214695713255141,
+    "candidates": [
+      {
+        "file": "horde-civic-a-0.png",
+        "sha256": "f6bcd74c7048110b3f9905327c90b269ef1126e87c2d314d98ad42cfdfdb9f9d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-1.png",
+        "sha256": "89ee597d049b0dcd1459ced4a7a3b4671fe62111af20137b278d7410ef84c915",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-2.png",
+        "sha256": "8bba9203237d47f22380f8c8dca4d97ccc93115307620e0d79105096172115e2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-3.png",
+        "sha256": "ae35f4c3693a8e564328a7ce9f8a15bdae30fc1382490d67213122c05c442969",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-4.png",
+        "sha256": "b46443d16e95aae474ae187b7ed9b51a763f6178e5363eba1739e1dda7d35792",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-5.png",
+        "sha256": "b9393a196b4a4a49a6851e41fab1ac63b4a530325e76f8aa1bf0cfad9c330645",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-6.png",
+        "sha256": "09fcc91a53a31f2f9f0393afac71f8545aeb756a13aec1be14b7c2d989a05c27",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-7.png",
+        "sha256": "1fa502a7cb83869a300387bf44c459051cef7cfb1b54f3489534316ca83d2677",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-8.png",
+        "sha256": "145924a353c5c71f8547f494b097dbfacc756ae7c557594fe84743b762ff3db6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-9.png",
+        "sha256": "d71ed57ebb205275a66abb853bedb0074473c00791e0af2ecce41cbdc5eea847",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-10.png",
+        "sha256": "9c432a9c06efebb75e5f73a7070fb639d8d28a8f42ef4bfcc4279f1ab439d16e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-11.png",
+        "sha256": "1b2da82a89fabc86ec27b16060a478a62f0fcbbbd1e8e02fb5d07c6288380a57",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-12.png",
+        "sha256": "c7bcf52464e07694fdc10562ba61be7211db616336f1437da6a549ce23df04f6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-13.png",
+        "sha256": "0965719a60637ad410559fedd3f6bf9ee9ff438046de68f75138f18f6948917f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-14.png",
+        "sha256": "cda3a2af56b27b1ee828212699fd60f3f29563cdd913cb6cf4756497f58cf9ad",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "horde-civic-a-15.png",
+        "sha256": "38a577d27139c90b08f750fdbdfbc3059211bccb9f74ccbee46a9950c1e4355b",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "realm-inn-s1": {
+    "id": "realm-inn-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "374207e0-a7fc-4e79-ab1a-7bc964ceef40",
+    "submittedAt": "2026-11-26T22:10:38.394Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 storybook kingdom buildings, four takes of each in this order: Tavern (cosy crooked half-timbered inn with a chimney, warm lit windows and a hanging tankard sign); Village Hall (plump little half-timbered hall with a small bell turret and warm lit windows); Stables (fat half-timbered stable with a hay-loft door, hay bales and a gold horseshoe over the doors); Tithe Barn (big plump half-timbered barn with wheat sheaves and a heap of gold). Colours: cream plaster with dark brown timbers, warm red roof tiles, golden lit windows."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy the palette, the thick dark outline, the pixel size, the warm lit windows and the chunky toy-like shapes; not the layout: draw only the one building described"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 98121,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 storybook kingdom buildings, four takes of each in this order: Tavern (cosy crooked half-timbered inn with a chimney, warm lit windows and a hanging tankard sign); Village Hall (plump little half-timbered hall with a small bell turret and warm lit windows); Stables (fat half-timbered stable with a hay-loft door, hay bales and a gold horseshoe over the doors); Tithe Barn (big plump half-timbered barn with wheat sheaves and a heap of gold). Colours: cream plaster with dark brown timbers, warm red roof tiles, golden lit windows. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant."
+    },
+    "at": "2026-11-26T22:12:02.644Z",
+    "usageUsd": 0.0817730614874098,
+    "candidates": [
+      {
+        "file": "realm-inn-s1-0.png",
+        "sha256": "cdb1be1e8362dfb5649277d57cf693fa88b6ace553c2f152429ae1ce00e5a70f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-1.png",
+        "sha256": "74d50c0afa820f75c7d55dff5834b348ca65e48a6801bc4272ed01959e8cb9bd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-2.png",
+        "sha256": "71fe585a44ce159bcd432d940e3a083ed3fc1fd9840e520e01cd3cfae7d40eaa",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-3.png",
+        "sha256": "c97155fc58d6055ed230a92de0eb9e051dbd2a2f7c950dea8de6802ee0816385",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-4.png",
+        "sha256": "586f5cfe399624a2108b2bc91fb31c9ff676dee0ccb2f07d584627b8e9cca913",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-5.png",
+        "sha256": "22a67acaa8a5512021443fc164246b53f6ce7601f42e116c3cdba5633642f3c4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-6.png",
+        "sha256": "a868758c759c90ce027675e3d041cc2e6c66d70b9481ac9f60c14b0d2aaa3fd4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-7.png",
+        "sha256": "d5bf5b41c1944d55b788735da01e21ccb7b97c4cce5012a2d987af3296dfe8bd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-8.png",
+        "sha256": "ff3e8b37e2c11015368b50b9097365e4980a35ba120418a312c21c74f5aa1eff",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-9.png",
+        "sha256": "7273909ac43e98be3690e4c55c60f5942b92b096e4ac602d3dfe499485db0ac0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-10.png",
+        "sha256": "9e07aa837eb70214ab1632f00a38c619005fff92d1e7c5e6c0802625c0cd48cf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-11.png",
+        "sha256": "507a936b8a03e1ea5dad3d21f8f9f3ef4bd689376a35bc0060e65c416a3ea86d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-12.png",
+        "sha256": "cb1454373a6ce8f278047534b85ded37fa08351b38c0dd4971ccce71ee5abfe5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-13.png",
+        "sha256": "67f34a4f9c52281bc736a2427146371adb169f75f83f776024849abc0436722f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-14.png",
+        "sha256": "d7df79e0718ade7fd28db3ba66c408e70e6d91f079556a79b13a1dd916bcfd33",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "realm-inn-s1-15.png",
+        "sha256": "7014bd0a02e4b7ee3319f34d133beac355a9b8bec0a3a4a8f16b788db3e833cd",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  }
+}
