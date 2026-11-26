@@ -31,6 +31,7 @@ import { findPathInContext } from "../../core/game/pathfinding";
 import { buildNamedMap } from "../../core/map/named";
 import { playableFactions } from "../../data/factions";
 import { loadMapAssets } from "./assets";
+import { artifactShowcase } from "./artifact-showcase";
 import { decorationShowcase } from "./decoration-showcase";
 import { DEFAULT_ZOOM, createMapView } from "./map-view";
 import type { MapView, PathStep } from "./map-view";
@@ -286,12 +287,14 @@ export async function startMapDebug(
         ? showcase.map
         : which === "ranges"
           ? rangesMap()
-          : generateMap(seed, {
-              size: size === "S" || size === "L" ? size : "M",
-              ...(players === 2 || players === 3 || players === 4
-                ? { players }
-                : {}),
-            });
+          : which === "artifacts"
+            ? artifactShowcase()
+            : generateMap(seed, {
+                size: size === "S" || size === "L" ? size : "M",
+                ...(players === 2 || players === 3 || players === 4
+                  ? { players }
+                  : {}),
+              });
   const source =
     named !== null
       ? `named ${named}`
@@ -299,7 +302,9 @@ export async function startMapDebug(
         ? "decorations showcase"
         : which === "ranges"
           ? "ranges test map"
-          : `seed ${seed}${route.seed === null ? " (default)" : ""}`;
+          : which === "artifacts"
+            ? "artifacts showcase"
+            : `seed ${seed}${route.seed === null ? " (default)" : ""}`;
   // A generated map's start towns are drawn in the faction a new game
   // would seat there (the playable factions in seat order, as in setup); a
   // named map already carries its recommended factions.

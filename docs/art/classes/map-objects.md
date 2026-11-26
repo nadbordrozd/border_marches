@@ -74,6 +74,32 @@ tomb's small and medium sizes share it). `ART_ROWS` names them by
 guardians and the word tomb) was refused by the provider's policy check
 and is recorded as `FAILED`.
 
+### Artifacts on the map and the Mystery Bag (bead bzc.105)
+
+Studio set `art/sets/artifact-pickups`, the pickups' recipe (the sawmill as
+style image, 40 x 40, one call of 25+ candidates each) with the layers
+`style`, `light-south-west` and the subject only (the class layer forbids
+letters and platforms, and these are a cloth and a bag with a question
+mark). 2 calls, US$0.24.
+
+- A loose artifact is drawn as **the artifact itself**: its own 32 px icon
+  (`public/assets/icons/artifacts`, `iconFor("artifact", id)`) at 1:1,
+  resting on a flat purple oval cloth with a gold rim
+  (`artifact-cloth.png`, 38 x 17, from `cloth-a#0`): the cloth's foot on
+  the pickup seat (22 px above the cell's bottom), the icon's bottom edge
+  4 px above it, so it sits on the middle of the cloth; the shared ground
+  shadow under the cloth. The renderer does it
+  (`artifactPickupEntry` in `src/render/map/scene.ts`); no per-artifact art
+  is made. The older amulet-on-cloth sprite (`loose-artifact.png`) stays
+  for the gallery and for a loose artifact with no artifact id.
+- The Mystery Bag (`mystery-bag.png`, 27 x 31, from `mystery-a#15`): a
+  purple sack tied with gold cord and a big gold question mark, seated like
+  the other pickups. Purple is the colour of artifact pickups (the cloth
+  and the bag); brown stays the chest's and the sealed box's.
+- The recipe concept says "satchel": the brown satchels came out close to
+  the chest and the box, so the purple sack was chosen and the type named
+  the Mystery Bag.
+
 ## Geometry
 
 | Footprint | Generated on | Derived file | Seat |

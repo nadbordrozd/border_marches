@@ -61,7 +61,9 @@ describe("denser maps (bzc.50)", { timeout: 120_000 }, () => {
   it("places every placeable catalogue type on some map of each size", () => {
     // Event tiles and signs are map-authored; the Keepers' Vault is a rule
     // of medium and large maps (CONTENT_MAP_OBJECTS 3.4).
-    const authored: ObjectTypeId[] = ["event-tile", "sign"];
+    // The Mystery Bag (bead bzc.105) waits for its placing rule (bead
+    // bzc.110, which drops it from this list).
+    const authored: ObjectTypeId[] = ["event-tile", "sign", "mystery-bag"];
     // The desert sites (bead bzc.88) stand only on maps that roll a desert
     // (tests/core/map/desert.test.ts).
     const desert: ObjectTypeId[] = [

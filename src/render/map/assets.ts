@@ -19,7 +19,8 @@ import {
 } from "../../assets/manifest";
 import type { GroundTerrain, ImageAsset } from "../../assets/manifest";
 import { DECORATION_ASSETS } from "../../assets/decorations";
-import { MAP_OBJECT_ASSETS } from "../../assets/map-objects";
+import { FALLBACK_ICON_ASSETS, ICON_ASSETS } from "../../assets/icons";
+import { ARTIFACT_CLOTH, MAP_OBJECT_ASSETS } from "../../assets/map-objects";
 import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
 import { GROUND_CALM, calmTexture } from "./ground";
@@ -96,6 +97,10 @@ export function mapAssetList(): ImageAsset[] {
     ...HERO_ASSETS,
     ...OBJECT_ASSETS,
     ...MAP_OBJECT_ASSETS,
+    // Loose artifacts are drawn as their own icon on a cloth (bzc.105).
+    ARTIFACT_CLOTH,
+    ...ICON_ASSETS.filter((a) => a.kind === "artifact"),
+    FALLBACK_ICON_ASSETS.artifact,
   ];
 }
 

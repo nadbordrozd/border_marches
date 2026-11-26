@@ -66,6 +66,7 @@ import type {
   ResourceId,
 } from "../../data/types.ts";
 import type { School } from "../battle/types.ts";
+import { mysteryArtifactOf } from "../map/mystery.ts";
 import { isPassable, type MapObject } from "../map/types.ts";
 import { createRng, deriveSeed } from "../rng.ts";
 import { canCarry, giveArtifact, giveScroll } from "./artifacts.ts";
@@ -1329,6 +1330,19 @@ export function visitSite(
       say(events, hero, obj, `Found ${findArtifact(a)?.name ?? a}.`);
       return null;
     }
+    case "mystery-bag": {
+      // Bead bzc.105: the hidden artifact, chosen from the map seed.
+      const a = mysteryArtifactOf(state.map, obj);
+      if (!canCarry(hero, a)) {
+        // Still a surprise: a full hero leaves it sealed.
+        say(events, hero, obj, "No room in the backpack: it stays sealed.");
+        return null;
+      }
+      giveArtifact(hero, a);
+      markUsed(state, obj, hero);
+      say(events, hero, obj, `Opened the bag: ${findArtifact(a)?.name ?? a}!`);
+      return null;
+    }
     case "loose-scroll": {
       const sp = str(obj, "spell");
       if (!giveScroll(hero, sp)) {
@@ -2273,6 +2287,10 @@ export function describeSite(
       }
       break;
     }
+    case "mystery-bag":
+      // The artifact stays a secret until a hero opens it (bead bzc.105).
+      what = `Holds an unknown artifact (a ${obj.data["grade"] === "wonder" ? "Wonder" : "Trinket"}). Walk up next to it to open it.`;
+      break;
     case "loose-scroll":
       what = `A scroll of ${spellName(str(obj, "spell"))}.`;
       break;

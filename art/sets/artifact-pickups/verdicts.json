@@ -1,0 +1,362 @@
+{
+  "cloth-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "flat purple oval cloth with a gold rim: low and wide, every icon reads on it on grass, snow, sand and dark ground; continues the old loose artifact's purple cloth",
+    "at": "2026-11-26T23:38:27.870Z"
+  },
+  "mystery-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "purple sack tied with gold cord, big clean gold question mark, symmetric silhouette; distinct from the brown sealed box and chest, purple like the artifact cloth",
+    "at": "2026-11-26T23:38:28.002Z"
+  },
+  "cloth-a#2": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted cloth-a#0, a lumpier oval",
+    "at": "2026-11-26T23:38:47.022Z"
+  },
+  "cloth-a#8": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted cloth-a#0, a lumpier oval",
+    "at": "2026-11-26T23:38:47.142Z"
+  },
+  "cloth-a#1": {
+    "verdict": "REJECTED",
+    "notes": "square cloth lying on the diagonal reads as a rug and widens the pickup unevenly",
+    "at": "2026-11-26T23:38:47.278Z"
+  },
+  "cloth-a#3": {
+    "verdict": "REJECTED",
+    "notes": "square cloth lying on the diagonal reads as a rug and widens the pickup unevenly",
+    "at": "2026-11-26T23:38:47.428Z"
+  },
+  "cloth-a#4": {
+    "verdict": "REJECTED",
+    "notes": "square cloth lying on the diagonal reads as a rug and widens the pickup unevenly",
+    "at": "2026-11-26T23:38:47.627Z"
+  },
+  "cloth-a#5": {
+    "verdict": "REJECTED",
+    "notes": "square cloth lying on the diagonal reads as a rug and widens the pickup unevenly",
+    "at": "2026-11-26T23:38:47.768Z"
+  },
+  "cloth-a#6": {
+    "verdict": "REJECTED",
+    "notes": "square cloth lying on the diagonal reads as a rug and widens the pickup unevenly",
+    "at": "2026-11-26T23:38:47.922Z"
+  },
+  "cloth-a#7": {
+    "verdict": "REJECTED",
+    "notes": "square cloth lying on the diagonal reads as a rug and widens the pickup unevenly",
+    "at": "2026-11-26T23:38:48.077Z"
+  },
+  "cloth-a#9": {
+    "verdict": "REJECTED",
+    "notes": "red tasselled cushion: icons sink into its high top and the tassels add noise at 1x",
+    "at": "2026-11-26T23:38:48.209Z"
+  },
+  "cloth-a#10": {
+    "verdict": "REJECTED",
+    "notes": "red tasselled cushion: icons sink into its high top and the tassels add noise at 1x",
+    "at": "2026-11-26T23:38:48.355Z"
+  },
+  "cloth-a#11": {
+    "verdict": "REJECTED",
+    "notes": "red tasselled cushion: icons sink into its high top and the tassels add noise at 1x",
+    "at": "2026-11-26T23:38:48.496Z"
+  },
+  "cloth-a#12": {
+    "verdict": "REJECTED",
+    "notes": "red tasselled cushion: icons sink into its high top and the tassels add noise at 1x",
+    "at": "2026-11-26T23:38:48.634Z"
+  },
+  "cloth-a#13": {
+    "verdict": "REJECTED",
+    "notes": "red tasselled cushion: icons sink into its high top and the tassels add noise at 1x",
+    "at": "2026-11-26T23:38:48.778Z"
+  },
+  "cloth-a#14": {
+    "verdict": "REJECTED",
+    "notes": "red tasselled cushion: icons sink into its high top and the tassels add noise at 1x",
+    "at": "2026-11-26T23:38:48.913Z"
+  },
+  "cloth-a#15": {
+    "verdict": "REJECTED",
+    "notes": "red tasselled cushion: icons sink into its high top and the tassels add noise at 1x",
+    "at": "2026-11-26T23:38:49.049Z"
+  },
+  "cloth-a#16": {
+    "verdict": "REJECTED",
+    "notes": "red tasselled cushion: icons sink into its high top and the tassels add noise at 1x",
+    "at": "2026-11-26T23:38:49.197Z"
+  },
+  "cloth-a#17": {
+    "verdict": "REJECTED",
+    "notes": "red tasselled cushion: icons sink into its high top and the tassels add noise at 1x",
+    "at": "2026-11-26T23:38:49.350Z"
+  },
+  "cloth-a#18": {
+    "verdict": "REJECTED",
+    "notes": "folded blue cloth is boxy and tall: lifts the icon too high, reads as a pile of linen",
+    "at": "2026-11-26T23:38:49.481Z"
+  },
+  "cloth-a#19": {
+    "verdict": "REJECTED",
+    "notes": "folded blue cloth is boxy and tall: lifts the icon too high, reads as a pile of linen",
+    "at": "2026-11-26T23:38:49.609Z"
+  },
+  "cloth-a#20": {
+    "verdict": "REJECTED",
+    "notes": "folded blue cloth is boxy and tall: lifts the icon too high, reads as a pile of linen",
+    "at": "2026-11-26T23:38:49.734Z"
+  },
+  "cloth-a#21": {
+    "verdict": "REJECTED",
+    "notes": "folded blue cloth is boxy and tall: lifts the icon too high, reads as a pile of linen",
+    "at": "2026-11-26T23:38:49.867Z"
+  },
+  "cloth-a#22": {
+    "verdict": "REJECTED",
+    "notes": "folded blue cloth is boxy and tall: lifts the icon too high, reads as a pile of linen",
+    "at": "2026-11-26T23:38:49.995Z"
+  },
+  "cloth-a#23": {
+    "verdict": "REJECTED",
+    "notes": "folded blue cloth is boxy and tall: lifts the icon too high, reads as a pile of linen",
+    "at": "2026-11-26T23:38:50.129Z"
+  },
+  "cloth-a#24": {
+    "verdict": "REJECTED",
+    "notes": "folded blue cloth is boxy and tall: lifts the icon too high, reads as a pile of linen",
+    "at": "2026-11-26T23:38:50.261Z"
+  },
+  "cloth-a#25": {
+    "verdict": "REJECTED",
+    "notes": "folded blue cloth is boxy and tall: lifts the icon too high, reads as a pile of linen",
+    "at": "2026-11-26T23:38:50.389Z"
+  },
+  "cloth-a#26": {
+    "verdict": "REJECTED",
+    "notes": "folded blue cloth is boxy and tall: lifts the icon too high, reads as a pile of linen",
+    "at": "2026-11-26T23:38:50.543Z"
+  },
+  "cloth-a#27": {
+    "verdict": "REJECTED",
+    "notes": "grey stone slab is low contrast on snow and rocky ground",
+    "at": "2026-11-26T23:38:50.666Z"
+  },
+  "cloth-a#28": {
+    "verdict": "REJECTED",
+    "notes": "grey stone slab is low contrast on snow and rocky ground",
+    "at": "2026-11-26T23:38:50.804Z"
+  },
+  "cloth-a#29": {
+    "verdict": "REJECTED",
+    "notes": "grey stone slab is low contrast on snow and rocky ground",
+    "at": "2026-11-26T23:38:50.922Z"
+  },
+  "cloth-a#30": {
+    "verdict": "REJECTED",
+    "notes": "grey stone slab is low contrast on snow and rocky ground",
+    "at": "2026-11-26T23:38:51.059Z"
+  },
+  "cloth-a#31": {
+    "verdict": "REJECTED",
+    "notes": "grey stone slab is low contrast on snow and rocky ground",
+    "at": "2026-11-26T23:38:51.188Z"
+  },
+  "cloth-a#32": {
+    "verdict": "REJECTED",
+    "notes": "grey stone slab is low contrast on snow and rocky ground",
+    "at": "2026-11-26T23:38:51.310Z"
+  },
+  "cloth-a#33": {
+    "verdict": "REJECTED",
+    "notes": "grey stone slab is low contrast on snow and rocky ground",
+    "at": "2026-11-26T23:38:51.434Z"
+  },
+  "cloth-a#34": {
+    "verdict": "REJECTED",
+    "notes": "grey stone slab is low contrast on snow and rocky ground",
+    "at": "2026-11-26T23:38:51.564Z"
+  },
+  "cloth-a#35": {
+    "verdict": "REJECTED",
+    "notes": "grey stone slab is low contrast on snow and rocky ground",
+    "at": "2026-11-26T23:38:51.675Z"
+  },
+  "mystery-a#0": {
+    "verdict": "REJECTED",
+    "notes": "brown leather satchel: reads well but brown is too close to the sealed box and treasure chest",
+    "at": "2026-11-26T23:38:51.816Z"
+  },
+  "mystery-a#1": {
+    "verdict": "REJECTED",
+    "notes": "brown leather satchel: reads well but brown is too close to the sealed box and treasure chest",
+    "at": "2026-11-26T23:38:51.955Z"
+  },
+  "mystery-a#2": {
+    "verdict": "REJECTED",
+    "notes": "brown leather satchel: reads well but brown is too close to the sealed box and treasure chest",
+    "at": "2026-11-26T23:38:52.104Z"
+  },
+  "mystery-a#3": {
+    "verdict": "REJECTED",
+    "notes": "brown leather satchel: reads well but brown is too close to the sealed box and treasure chest",
+    "at": "2026-11-26T23:38:52.233Z"
+  },
+  "mystery-a#6": {
+    "verdict": "REJECTED",
+    "notes": "brown leather satchel: reads well but brown is too close to the sealed box and treasure chest",
+    "at": "2026-11-26T23:38:52.373Z"
+  },
+  "mystery-a#7": {
+    "verdict": "REJECTED",
+    "notes": "brown leather satchel: reads well but brown is too close to the sealed box and treasure chest",
+    "at": "2026-11-26T23:38:52.514Z"
+  },
+  "mystery-a#8": {
+    "verdict": "REJECTED",
+    "notes": "brown leather satchel: reads well but brown is too close to the sealed box and treasure chest",
+    "at": "2026-11-26T23:38:52.650Z"
+  },
+  "mystery-a#9": {
+    "verdict": "REJECTED",
+    "notes": "brown leather satchel: reads well but brown is too close to the sealed box and treasure chest",
+    "at": "2026-11-26T23:38:52.971Z"
+  },
+  "mystery-a#10": {
+    "verdict": "REJECTED",
+    "notes": "brown leather satchel: reads well but brown is too close to the sealed box and treasure chest",
+    "at": "2026-11-26T23:38:53.101Z"
+  },
+  "mystery-a#11": {
+    "verdict": "REJECTED",
+    "notes": "brown leather satchel: reads well but brown is too close to the sealed box and treasure chest",
+    "at": "2026-11-26T23:38:53.244Z"
+  },
+  "mystery-a#4": {
+    "verdict": "REJECTED",
+    "notes": "brown sack: too close to the gold pile and chest browns",
+    "at": "2026-11-26T23:38:53.374Z"
+  },
+  "mystery-a#5": {
+    "verdict": "REJECTED",
+    "notes": "brown sack: too close to the gold pile and chest browns",
+    "at": "2026-11-26T23:38:53.508Z"
+  },
+  "mystery-a#12": {
+    "verdict": "REJECTED",
+    "notes": "purple sack like the accepted mystery-a#15; less clean ties or a smaller question mark",
+    "at": "2026-11-26T23:38:53.617Z"
+  },
+  "mystery-a#13": {
+    "verdict": "REJECTED",
+    "notes": "purple sack like the accepted mystery-a#15; less clean ties or a smaller question mark",
+    "at": "2026-11-26T23:38:53.734Z"
+  },
+  "mystery-a#14": {
+    "verdict": "REJECTED",
+    "notes": "purple sack like the accepted mystery-a#15; less clean ties or a smaller question mark",
+    "at": "2026-11-26T23:38:53.903Z"
+  },
+  "mystery-a#16": {
+    "verdict": "REJECTED",
+    "notes": "purple sack like the accepted mystery-a#15; less clean ties or a smaller question mark",
+    "at": "2026-11-26T23:38:54.010Z"
+  },
+  "mystery-a#17": {
+    "verdict": "REJECTED",
+    "notes": "purple sack like the accepted mystery-a#15; less clean ties or a smaller question mark",
+    "at": "2026-11-26T23:38:54.140Z"
+  },
+  "mystery-a#18": {
+    "verdict": "REJECTED",
+    "notes": "purple sack like the accepted mystery-a#15; less clean ties or a smaller question mark",
+    "at": "2026-11-26T23:38:54.273Z"
+  },
+  "mystery-a#19": {
+    "verdict": "REJECTED",
+    "notes": "purple sack like the accepted mystery-a#15; less clean ties or a smaller question mark",
+    "at": "2026-11-26T23:38:54.414Z"
+  },
+  "mystery-a#20": {
+    "verdict": "REJECTED",
+    "notes": "purple sack like the accepted mystery-a#15; less clean ties or a smaller question mark",
+    "at": "2026-11-26T23:38:54.564Z"
+  },
+  "mystery-a#21": {
+    "verdict": "REJECTED",
+    "notes": "purple sack like the accepted mystery-a#15; less clean ties or a smaller question mark",
+    "at": "2026-11-26T23:38:54.700Z"
+  },
+  "mystery-a#22": {
+    "verdict": "REJECTED",
+    "notes": "purple sack like the accepted mystery-a#15; less clean ties or a smaller question mark",
+    "at": "2026-11-26T23:38:54.831Z"
+  },
+  "mystery-a#23": {
+    "verdict": "REJECTED",
+    "notes": "purple sack like the accepted mystery-a#15; less clean ties or a smaller question mark",
+    "at": "2026-11-26T23:38:54.964Z"
+  },
+  "mystery-a#24": {
+    "verdict": "REJECTED",
+    "notes": "blue bundle: the gold question mark has less contrast on blue, ribbon bows noisy",
+    "at": "2026-11-26T23:38:55.087Z"
+  },
+  "mystery-a#25": {
+    "verdict": "REJECTED",
+    "notes": "blue bundle: the gold question mark has less contrast on blue, ribbon bows noisy",
+    "at": "2026-11-26T23:38:55.211Z"
+  },
+  "mystery-a#26": {
+    "verdict": "REJECTED",
+    "notes": "blue bundle: the gold question mark has less contrast on blue, ribbon bows noisy",
+    "at": "2026-11-26T23:38:55.344Z"
+  },
+  "mystery-a#27": {
+    "verdict": "REJECTED",
+    "notes": "blue bundle: the gold question mark has less contrast on blue, ribbon bows noisy",
+    "at": "2026-11-26T23:38:55.468Z"
+  },
+  "mystery-a#28": {
+    "verdict": "REJECTED",
+    "notes": "blue bundle: the gold question mark has less contrast on blue, ribbon bows noisy",
+    "at": "2026-11-26T23:38:55.597Z"
+  },
+  "mystery-a#29": {
+    "verdict": "REJECTED",
+    "notes": "blue bundle: the gold question mark has less contrast on blue, ribbon bows noisy",
+    "at": "2026-11-26T23:38:55.729Z"
+  },
+  "mystery-a#30": {
+    "verdict": "REJECTED",
+    "notes": "purple coffer reads as another treasure chest",
+    "at": "2026-11-26T23:38:55.860Z"
+  },
+  "mystery-a#31": {
+    "verdict": "REJECTED",
+    "notes": "purple coffer reads as another treasure chest",
+    "at": "2026-11-26T23:38:55.992Z"
+  },
+  "mystery-a#32": {
+    "verdict": "REJECTED",
+    "notes": "purple coffer reads as another treasure chest",
+    "at": "2026-11-26T23:38:56.122Z"
+  },
+  "mystery-a#33": {
+    "verdict": "REJECTED",
+    "notes": "purple coffer reads as another treasure chest",
+    "at": "2026-11-26T23:38:56.234Z"
+  },
+  "mystery-a#34": {
+    "verdict": "REJECTED",
+    "notes": "purple coffer reads as another treasure chest",
+    "at": "2026-11-26T23:38:56.359Z"
+  },
+  "mystery-a#35": {
+    "verdict": "REJECTED",
+    "notes": "purple coffer reads as another treasure chest",
+    "at": "2026-11-26T23:38:56.489Z"
+  }
+}

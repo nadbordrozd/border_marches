@@ -112,7 +112,7 @@ The map bead owns the final sizing; this table is the data it reads.
 | **Landfall Wreck**           | 2x2       | A battle against the strays of its terrain.                                                               | One-time                                            | Small: strays worth FV 1200 join, 700 gold. Medium: strays worth FV 3000 join, 2000 gold. Large: strays worth FV 6000 join and a Marvel piece | 2500 / 6500 / 15000 | Any                 | 4                       |
 | **Keepers' Vault**           | 3x2       | A battle against a mixed caretaker guard; the winner is shown three seeded treasures and carries out one. | One-time                                            | Each treasure: a Marvel piece, a Wonder and 5000 gold                                                                                         | 16000               | Any                 | rule: at most 1 per map |
 
-### 3.5 One-time treasure (6)
+### 3.5 One-time treasure (6, and the Mystery Bag of bead bzc.105)
 
 | Object                | Footprint | Visit rule                                                                        | Reset    | Reward                                                  | Value                                            | Terrain             | Weight |
 | --------------------- | --------- | --------------------------------------------------------------------------------- | -------- | ------------------------------------------------------- | ------------------------------------------------ | ------------------- | ------ |
@@ -122,6 +122,35 @@ The map bead owns the final sizing; this table is the data it reads.
 | **Loose Artifact**    | 1x1       | Picked up into the backpack; a cursed one is labelled before pickup.              | One-time | One artifact or consumable                              | The artifact's value                             | Any                 | 5      |
 | **Loose Scroll**      | 1x1       | Picked up into the scroll case.                                                   | One-time | One scroll                                              | 300 / 600 / 1000 / 1500 / 2500 by tier           | Any                 | 5      |
 | **Fallen Adventurer** | 1x1       | The hero takes a seeded Wonder and has -2 Morale until its next battle ends.      | One-time | A Wonder                                                | 4500                                             | Wasteland, Badlands | 2      |
+| **Mystery Bag**       | 1x1       | Opened from a next cell; its artifact is hidden until then (bead bzc.105).        | One-time | A Trinket (or a Wonder), never cursed, never a piece    | The grade's value (2000 / 4500)                  | Any                 | rule   |
+
+Loose artifacts lie on the map in full view (bead bzc.105): the map draws
+each as its own 32 px icon resting on a small cloth, and its hover card
+names it, shows its grade, slot and rule text, and warns of a curse.
+
+#### The Mystery Bag (bead bzc.105)
+
+A purple sack with a gold question mark: the one artifact pickup whose
+artifact is a surprise. Its map card, the walk messages and the AI's quest
+search never name the artifact; opening it shows the usual pickup dialog
+with the artifact's icon. A hero with a full backpack leaves it sealed.
+
+- The artifact is a pure function of the map seed, the object's id and its
+  grade (`mysteryArtifact(seed, id, grade)` in `src/core/map/mystery.ts`):
+  a wearable Trinket or Wonder, never cursed, never a Marvel piece.
+- Catalogue type `mystery-bag` (`src/data/objectTypes.ts`), map object kind
+  `artifact`, 1x1, vanishes, weight 0: the fill never places it.
+- Placing it (bead bzc.110, the generator): build the object with
+  `mysteryItem(map, id, x, y, { grade })` (`grade` is `"trinket"`, the
+  default, or `"wonder"`; `data` may add guard bookkeeping) and push it
+  into `map.objects`. It stores the artifact in `data.artifact` and the
+  grade's value in `data.value` at creation. A bare
+  `{ type: "mystery-bag" }` object of kind `artifact` also works: the rules
+  derive the same artifact from the seed on the visit
+  (`mysteryArtifactOf(map, obj)`). Its cell must be passable open land, as
+  for any pickup. Quests that ask for an artifact on the map
+  (`gen/quests.ts`) should skip Mystery Bags (`isMystery(obj)`), since the
+  player cannot see which artifact it holds.
 
 ### 3.6 Hidden treasure (3)
 

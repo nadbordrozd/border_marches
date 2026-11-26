@@ -34,7 +34,10 @@ import type {
   UnitAsset,
 } from "../../assets/manifest";
 import { townArt } from "../../assets/town-art";
-import { artFor, placeArt } from "../../assets/object-art";
+import { artFor, placeArt, SEAT_PX } from "../../assets/object-art";
+import { iconFor } from "../../assets/icons";
+import { ARTIFACT_CLOTH } from "../../assets/map-objects";
+import { isMystery } from "../../core/map/mystery";
 import type { GameMap, MapObject } from "../../core/map/types";
 import {
   decorationCells as mapDecorationCells,
@@ -602,6 +605,76 @@ export function pickupKey(resource: unknown, chest = false): string {
   );
 }
 
+/**
+ * The artifact a map object shows on the map (bead bzc.105): a loose
+ * artifact's own id, or null for anything else, a Mystery Bag (whose
+ * artifact is a surprise) among them.
+ */
+export function shownArtifact(obj: MapObject): string | null {
+  if (obj.kind !== "artifact" || isMystery(obj)) return null;
+  const type = obj.data["type"];
+  if (type !== undefined && type !== "loose-artifact") return null;
+  const id = obj.data["artifact"];
+  return typeof id === "string" && id !== "" ? id : null;
+}
+
+/** The 32 px icon key an artifact is drawn with (its own, else the fallback). */
+export function artifactIconKey(id: string): string {
+  return iconFor("artifact", id).asset.key;
+}
+
+/**
+ * Rows between the artifact cloth's foot and the icon's bottom edge: the
+ * icon rests on the middle of the cloth (its few transparent margin rows
+ * sink into it).
+ */
+export const ARTIFACT_REST_PX = 4;
+
+/**
+ * A loose artifact lying on the map (bead bzc.105): its own 32 px icon at
+ * 1:1 resting on a small cloth (studio set artifact-pickups), seated like
+ * every pickup ({@link SEAT_PX} above the cell's bottom), with the shared
+ * ground shadow (bead bzc.97) under the cloth.
+ */
+export function artifactPickupEntry(obj: MapObject, id: string): SceneEntry {
+  const footX = obj.x * CELL + CELL / 2;
+  const footY = (obj.y + 1) * CELL - SEAT_PX.pickup;
+  const cloth = ARTIFACT_CLOTH;
+  const icon = iconFor("artifact", id).asset;
+  const clothX = Math.round(footX - cloth.foot.x);
+  const clothY = footY - cloth.foot.y;
+  const iconX = Math.round(footX - icon.w / 2);
+  const iconY = footY - ARTIFACT_REST_PX - icon.h + 1;
+  return entry(
+    "FOREGROUND",
+    obj.y,
+    obj.x,
+    LAYER.RESOURCE,
+    [
+      {
+        key: cloth.key,
+        sx: 0,
+        sy: 0,
+        sw: cloth.w,
+        sh: cloth.h,
+        dx: clothX,
+        dy: clothY,
+      },
+      {
+        key: icon.key,
+        sx: 0,
+        sy: 0,
+        sw: icon.w,
+        sh: icon.h,
+        dx: iconX,
+        dy: iconY,
+      },
+    ],
+    groundShadows(footX, footY, cloth.w * 0.9, { depth: 4, cast: 0.5 }),
+    { cells: objectCells(obj), objectId: obj.id },
+  );
+}
+
 /** The catalogue type of each resource's mine (src/data/mapObjects.ts). */
 const MINE_TYPES: Readonly<Record<string, string>> = {
   wood: "sawmill",
@@ -727,6 +800,9 @@ export function objectEntries(objects: readonly MapObject[]): SceneEntry[] {
           { cells, objectId: obj.id },
         ),
       );
+    } else if (shownArtifact(obj) !== null) {
+      // A loose artifact is drawn as the artifact itself (bead bzc.105).
+      out.push(artifactPickupEntry(obj, shownArtifact(obj) ?? ""));
     } else if (SITE_KINDS.has(obj.kind) || obj.kind === "mine") {
       // Catalogue objects (bead bzc.13) drawn with their type's art
       // (bead bzc.16); mines with their type's 2x2-scale art seated on the

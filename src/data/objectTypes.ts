@@ -1,7 +1,8 @@
 /**
  * The adventure-map object catalogue (docs/design/CONTENT_MAP_OBJECTS.md,
  * bead bzc.13): 62 object types, 53 core and 9 stretch, and the four
- * winter sites of bead bzc.87 (placed by the generator's winter rule only). Type ids are the
+ * winter sites of bead bzc.87 (placed by the generator's winter rule only),
+ * and the Mystery Bag of bead bzc.105 (placed by a rule). Type ids are the
  * catalogue names in kebab case (shared with the object art of bead
  * bzc.16). A placed object carries its type in `data.type`.
  *
@@ -61,6 +62,8 @@ export const OBJECT_TYPE_IDS = [
   "loose-artifact",
   "loose-scroll",
   "fallen-adventurer",
+  // Bead bzc.105: a pickup hiding a surprise artifact (src/core/map/mystery.ts)
+  "mystery-bag",
   // 3.6 Hidden treasure
   "obelisk",
   "buried-keystone",
@@ -263,6 +266,11 @@ const ROWS: readonly Row[] = [
   ["loose-scroll", "Loose Scroll", "site", 1, 1, "v", "one-time", 600, [], 5, "Walk up next to it to put it in the hero's scroll case."],
   // prettier-ignore
   ["fallen-adventurer", "Fallen Adventurer", "site", 1, 1, "v", "one-time", 4500, [W, B], 2, "Walk up next to it to take the adventurer's Wonder, but -2 Morale until the end of the hero's next battle."],
+  // prettier-ignore
+  // Bead bzc.105: weight 0, placed by a rule (bead bzc.110) with
+  // mysteryItem in src/core/map/mystery.ts; the artifact stays hidden until opened.
+  // prettier-ignore
+  ["mystery-bag", "Mystery Bag", "artifact", 1, 1, "v", "one-time", 2000, [], 0, "Holds an unknown artifact. Walk up next to it to open it: the surprise goes into the hero's backpack."],
   // prettier-ignore
   ["obelisk", "Obelisk", "site", 1, 1, "", "per-player", 500, [], 0, "Uncovers one more piece of your puzzle map, which leads to the buried Keystone."],
   // prettier-ignore

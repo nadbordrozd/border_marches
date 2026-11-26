@@ -29,7 +29,12 @@ import type { GameState, HeroState } from "../core/game/index.ts";
 import { objectTypeOf } from "../core/game/site-state.ts";
 import { propAt } from "../core/map/types.ts";
 import type { MapObject } from "../core/map/types.ts";
-import { findArtifact } from "../data/artifacts.ts";
+import {
+  findArtifact,
+  gradeLabel,
+  isCursed,
+  SLOT_NAMES,
+} from "../data/artifacts.ts";
 import { decorationKind } from "../data/decorations.ts";
 import { getCreature, isCreatureId } from "../data/creatures.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
@@ -38,10 +43,12 @@ import { getHeroClass } from "../data/hero.ts";
 import { playerColour } from "../data/players.ts";
 import type { ResourceAmounts, ResourceId } from "../data/types.ts";
 import {
+  artifactIconKey,
   artVariantOf,
   creatureAsset,
   mineType,
   pickupKey,
+  shownArtifact,
   town3x2Asset,
   townAsset,
 } from "../render/map/scene.ts";
@@ -90,7 +97,10 @@ export function countPhrase(creature: string, count: number): string {
 
 export interface CardPicture {
   readonly key: string;
-  /** Drawn at this scale (1, 1/2 or 1/3) so it fits the picture box. */
+  /**
+   * Drawn at this scale (1, 1/2 or 1/3) so it fits the picture box; a
+   * 32 px artifact icon at 2 (bead bzc.105).
+   */
   readonly scale: number;
 }
 
@@ -165,6 +175,11 @@ export function picture(key: string): CardPicture {
     (s) => a.w * s <= PICTURE_BOX.w && a.h * s <= PICTURE_BOX.h,
   );
   return { key, scale: scale ?? 1 / 4 };
+}
+
+/** A 32 px content icon, drawn twice its size so it can be read (bzc.105). */
+export function iconPicture(key: string): CardPicture {
+  return { key, scale: 2 };
 }
 
 function stackOf(creature: string, count: number): CardStack {
@@ -538,6 +553,50 @@ function pickupCard(
   };
 }
 
+/**
+ * A loose artifact's card (bead bzc.105): the artifact itself, named and
+ * shown as its own icon, its grade and slot, and its rule text, so the
+ * player can judge it before walking over. (A Mystery Bag keeps its
+ * artifact secret: it gets the site card.)
+ */
+function artifactCard(
+  state: GameState,
+  player: number,
+  obj: MapObject,
+  hero: HeroState | undefined,
+): MapCard | null {
+  const id = shownArtifact(obj);
+  const def = id === null ? undefined : findArtifact(id);
+  if (id === null || def === undefined)
+    return siteCard(state, player, obj, hero);
+  const guard = guardStacks(state, obj);
+  const slot =
+    def.kind === "worn" && def.slot !== "pocket"
+      ? ` · ${SLOT_NAMES[def.slot]}`
+      : "";
+  const lines: Array<CardLine | null> = [
+    { kind: "text", text: def.text },
+    isCursed(def.id)
+      ? {
+          kind: "text",
+          text: "Cursed: once worn, it cannot be taken off.",
+          tone: "bad",
+        }
+      : null,
+    { kind: "text", text: "Pick it up from the next cell.", tone: "dim" },
+    stacksLine("Guarded by", guard),
+    threatLine(hero, guard),
+  ];
+  const target = clickTarget(obj, obj.x, obj.y);
+  lines.push(pathLineTo(state, hero, target.x, target.y));
+  return {
+    title: def.name,
+    subtitle: `${gradeLabel(def)}${slot}`,
+    picture: iconPicture(artifactIconKey(id)),
+    lines: lines.filter((l): l is CardLine => l !== null),
+  };
+}
+
 function siteCard(
   state: GameState,
   player: number,
@@ -581,6 +640,9 @@ export function objectPictureKey(obj: MapObject): string | null {
     return artFor(mineType(obj), artVariantOf(obj))?.asset.key ?? null;
   if (obj.kind === "pickup")
     return pickupKey(obj.data["resource"], obj.data["chest"] === true);
+  // A loose artifact is pictured as itself (bead bzc.105).
+  const shown = shownArtifact(obj);
+  if (shown !== null) return artifactIconKey(shown);
   return (
     artFor(String(obj.data["type"] ?? ""), artVariantOf(obj))?.asset.key ?? null
   );
@@ -633,6 +695,8 @@ export function mapCard(
     card = townCard(state, player, obj.id, { onMap: true, heroId });
   else if (obj?.kind === "mine") card = mineCard(state, player, obj, hero);
   else if (obj?.kind === "pickup") card = pickupCard(state, obj, hero);
+  else if (obj?.kind === "artifact")
+    card = artifactCard(state, player, obj, hero);
   else if (obj !== undefined) card = siteCard(state, player, obj, hero);
   if (card !== null) return card;
   // A passable decoration (bead bzc.78): one line, its name only.

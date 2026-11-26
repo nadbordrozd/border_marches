@@ -1,0 +1,524 @@
+{
+  "cloth-a": {
+    "id": "cloth-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1617d720-607b-45c3-9574-380554eff716",
+    "submittedAt": "2026-11-26T23:32:22.084Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small empty cloth lying flat on the ground of a board-game map, seen from the front with the camera slightly above it, so it looks like a wide, low, flat oval mat with a thick black outline. Each image a different one of these: a scrap of deep purple velvet cloth #6a3fa0 with a #3f2266 shadow fold and a thin gold #f2c230 fringe; a small flat round red velvet cushion #b03a3a with four little gold tassels; a folded square of deep blue cloth #2f4f9f with a gold trim; a small flat round slab of grey stone #9a9aa8, low and wide. Nothing lies on it: it is empty. It is wide and flat: nearly the full image wide and only about a quarter of the image high, and it is the only thing in the image."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 10501,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: one small empty cloth lying flat on the ground of a board-game map, seen from the front with the camera slightly above it, so it looks like a wide, low, flat oval mat with a thick black outline. Each image a different one of these: a scrap of deep purple velvet cloth #6a3fa0 with a #3f2266 shadow fold and a thin gold #f2c230 fringe; a small flat round red velvet cushion #b03a3a with four little gold tassels; a folded square of deep blue cloth #2f4f9f with a gold trim; a small flat round slab of grey stone #9a9aa8, low and wide. Nothing lies on it: it is empty. It is wide and flat: nearly the full image wide and only about a quarter of the image high, and it is the only thing in the image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, jewel, amulet, coin, object on top, person, grass, ground, shadow."
+    },
+    "at": "2026-11-26T23:35:18.148Z",
+    "usageUsd": 0.1211707362069024,
+    "candidates": [
+      {
+        "file": "cloth-a-0.png",
+        "sha256": "7553e0cddb682a3ec978b9d56a747214fed5d37a67d7c4b7bdcac276239fbbb8",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-1.png",
+        "sha256": "44028ad544f3a9876f7986cfd1e4d58049300a495f6e998dd865183be1f0e62f",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-2.png",
+        "sha256": "864117ca80e033923640c2f3eec0e856f75c53fc8bc925ae179157e0b7686425",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-3.png",
+        "sha256": "d08fa90617ccd66c62c06db173141c9c2dad60baa515d7f89d6a891ab80a94a4",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-4.png",
+        "sha256": "0521009f576a59ffa048639f97814e9dc51355b223f6e6ff622d46e745cff6ce",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-5.png",
+        "sha256": "5292e12add1cdc2ea840b6b6058c37d7b63c3532bcd073f90d30920bfe7e96e7",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-6.png",
+        "sha256": "0bb039fe8e57e423a767f12dcab11cefc10e2399d8feadb0849987bffbb63b4f",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-7.png",
+        "sha256": "1997e289314848263c283d8f48b1b474f77c337b5ec661139b33f768be1b63a9",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-8.png",
+        "sha256": "d6297dc477ce6278443dc287cae2147506609836835712e35433df5091d3a028",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-9.png",
+        "sha256": "6b6007f927a23a670e2ab73ec6759659854276daf67b23f34a21e3282e9c4fc8",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-10.png",
+        "sha256": "898c8db27f6afb713122cc3177d88c892cfdb665d904c4d1150483778ee351dc",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-11.png",
+        "sha256": "cbb78a95fdb84423f89f4fc694669089f6c0fcdf8b070e0d3b7d504bcb9b97da",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-12.png",
+        "sha256": "850f4eac0b52738c56f588dc727aabf5d02c23539d8dbdf60b6c34aa8d0c45f8",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-13.png",
+        "sha256": "4ceb04ee0c7512b30c0f251e1eca19e27e479bd586ed45e0e76d8c26e90807f0",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-14.png",
+        "sha256": "86a2498da6f8b965c59d90433c952b68ea5d9e2b8094b78675465063f17eaef5",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-15.png",
+        "sha256": "486b775299af4abf069038094fc53ba3600b6e34dca0098001ec7e18277ef602",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-16.png",
+        "sha256": "967cf0b8fab70bb29917eff16b58e179a62bfa2cd9030279f0625602462765ea",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-17.png",
+        "sha256": "0ed316d32ff0b8a586d18f883337529d7fea40f007ade476fc83c3a2eb40c86c",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-18.png",
+        "sha256": "5e5e6f9b360f70dad411a182aef3ee4d6bbf721a372d57fcba83dd86301d9035",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-19.png",
+        "sha256": "309ca1a99cefebe86b3c667abc6fe880ff921d69ce9ed3e3af15b9614d553664",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-20.png",
+        "sha256": "c4683adc4bc83a6d893f00dc525e4c2102a9ac409ee0872ca8dd5d752ca19454",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-21.png",
+        "sha256": "99527e28f49e1cad13f0bad977fcec821ec1b29b37ac35842ddc9bfaf3a455b7",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-22.png",
+        "sha256": "cc2b73e408b17d354666a984a9bfb14e3e98be56c9f899b83bf4f28073428e00",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-23.png",
+        "sha256": "aaf364fffffb5528bd36a628ff0e56a36b3dd60a14c2bcdd904835d8a71b765b",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-24.png",
+        "sha256": "c09313322a27d78d337849ae357b820012e45c323c9056632f862730446975a9",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-25.png",
+        "sha256": "43327c9045f33bbfcd904ecf20cd279734808715ebb781867d8d76fe53ab0ac4",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-26.png",
+        "sha256": "f8c7cfd9d1e719a11cc8b12c63fd3f0964412afd605f1caa8ddc121665fddf55",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-27.png",
+        "sha256": "391dd892da297e76d562b4c606f2b4608aee856d5b88b748071006ad74f77501",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-28.png",
+        "sha256": "4e0ccad9c5bda88f12a5c095412ef7767741935a0ccb944a58ac5b3f0dd1a2f2",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-29.png",
+        "sha256": "3c9d50d61a470f13d1eee96cd344279bf131f56b2ca77ead96dc271fec4a2c2d",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-30.png",
+        "sha256": "31da13c4098c18005038e263340c621b7f1625aa5bfacca6da818ec69749cc0b",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-31.png",
+        "sha256": "6b950f548547f7aeab170373012558c46b72068218b295644ffa1f02ac3286d8",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-32.png",
+        "sha256": "92e4acb158fe02b2abd704c2b69146097a115b0081432e95dbac303460d1c509",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-33.png",
+        "sha256": "f7d1e92628bc44e7fccc09a339fc33ac9c76a34b16f2f78e602a1adf00a0fc37",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-34.png",
+        "sha256": "8d0c87fcd68f8e469fc82c3f09fd6e2da934d333c01ba7e69f8c3254e6e08e9f",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "cloth-a-35.png",
+        "sha256": "8b1c2f00b38986e74c448c3e19c97664766f58d166cd932538530b246d7c73a2",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  },
+  "mystery-a": {
+    "id": "mystery-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "25a06776-e5e0-4d54-a2a2-ebb037e2e0f6",
+    "submittedAt": "2026-11-26T23:35:18.233Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small mysterious treasure lying on a board-game map that hides a surprise artifact, seen from the front with the camera slightly above it, chunky and simple with a thick black outline. Each image a different one of these: a plump little leather satchel #8a5a2e with a #5a3518 shadow, its flap tied shut with gold cord, a big bright gold #f2c230 question mark stitched on the front flap; a small round sack of deep purple cloth #6a3fa0 tied at the neck with gold cord, a big bright gold question mark on its belly; a small bundle wrapped in blue cloth #2f6fd0 tied with a red ribbon, a big gold question mark on its side; a small purple #6a3fa0 coffer bound in gold with a big gold question mark on its lid. The question mark is one big simple symbol that fills most of the front. The treasure is wide and is the only thing in the image, with nothing under it."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 40,
+        "height": 40
+      },
+      "no_background": true,
+      "seed": 10502,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: one small mysterious treasure lying on a board-game map that hides a surprise artifact, seen from the front with the camera slightly above it, chunky and simple with a thick black outline. Each image a different one of these: a plump little leather satchel #8a5a2e with a #5a3518 shadow, its flap tied shut with gold cord, a big bright gold #f2c230 question mark stitched on the front flap; a small round sack of deep purple cloth #6a3fa0 tied at the neck with gold cord, a big bright gold question mark on its belly; a small bundle wrapped in blue cloth #2f6fd0 tied with a red ribbon, a big gold question mark on its side; a small purple #6a3fa0 coffer bound in gold with a big gold question mark on its lid. The question mark is one big simple symbol that fills most of the front. The treasure is wide and is the only thing in the image, with nothing under it. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, chest of coins, coins, person, ground, grass, shadow, smoke, words, other letters."
+    },
+    "at": "2026-11-26T23:37:17.681Z",
+    "usageUsd": 0.11740115904808045,
+    "candidates": [
+      {
+        "file": "mystery-a-0.png",
+        "sha256": "1c7d7a4f134af6c1e0689dd18f5c9fcf21ebb63298e1aefa15b497165320caf6",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-1.png",
+        "sha256": "5c20b59b450f289b43217b061b5e7e0b28b44c429be0efe2421b8003fec17c9d",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-2.png",
+        "sha256": "8287fba38b65b2c22eb65706574c7f6e2826409b193dc437d75e8764d7b1c031",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-3.png",
+        "sha256": "5d901a30fdfab82f5a6856384f52006c28cd55497e3e85d2672069e7b773278d",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-4.png",
+        "sha256": "8f432b50b2bca2b549c5b7af389d7fd708d1227efb31eb07d5d0c45099aa810c",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-5.png",
+        "sha256": "e59a77e3359e44753163bcdfedd4abb1471b1da55ca534da64c8717f0e9ac34e",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-6.png",
+        "sha256": "2681f6fd324e24fec692b629982099dce653c533efccee58b5c389a34d63197a",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-7.png",
+        "sha256": "c103a5467afc66976a5ac0c908b353a3b110c8c51522bb14c10c2815b3ca9c5e",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-8.png",
+        "sha256": "9fef3687adb5e265fd8b5a220364a3cccc3f27d1b260dc7bce58b265877b54e4",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-9.png",
+        "sha256": "1f4d5a284a5f8bec8fec64677ebd269af398048f199b9f86131e1a024ce98a0b",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-10.png",
+        "sha256": "3ab88d499752aa187013e17cf020e2ae7f0752a9186fa76b68d932569e0a6a28",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-11.png",
+        "sha256": "d6a08325dd8d673a6c53d8cbe0265fe558c1ba89ba3d96d4933e7d564a85d2b4",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-12.png",
+        "sha256": "4a1cc10b1d2c778705d0195df3329643c233cba365bf28001aaf6e832814d0a6",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-13.png",
+        "sha256": "5f8171cfc54dfde7c19399830c0561b4ab9389750d8ac7eb00fff7c1e9651f81",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-14.png",
+        "sha256": "1acdaa5c90a64c2cca68878df79814722c9c3e26f1b2bd5b32550e1adf72e97f",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-15.png",
+        "sha256": "f11d99f0c808f4db814eeb1be488b20d729daa92a38c991722a87131bb73f816",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-16.png",
+        "sha256": "72aee2b62107f1d64b27e132c4cdc6c16c8d0b57cba166ff314c833e11e49213",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-17.png",
+        "sha256": "3a59980c9c810c8be9d82e7d65f8ebefa36500de300c871e2d53b43b4393a361",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-18.png",
+        "sha256": "ec34c29861efe76488635730dc9180773e4e54b237279e3fff2ab212814af0d6",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-19.png",
+        "sha256": "825ddcfef22db1621a258a3e3baf8f00ea6463fd0ee38bf01dbcd62f6c3bcd18",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-20.png",
+        "sha256": "ed5e5a01141046add8f7d75ac800494f9bd416a2f71a1df0c87a96cd6b1281dd",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-21.png",
+        "sha256": "95ae4bfe074d4232050f1e4509724e2d46f0d123a275df6620728865219552b9",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-22.png",
+        "sha256": "18af257d740ee38e864f301da915d84987def71ab78b94af37b27301b210c7b1",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-23.png",
+        "sha256": "842c8e8935c7d81be4c52121dd850d91350b540211b90f99021b22a6520d9598",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-24.png",
+        "sha256": "ba94d76bacaf83143ce01077b76f1a70df18c348669fcb189e2acd8c657b611c",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-25.png",
+        "sha256": "82aca613fa7a3366cffe5c5377817748725e5ce34bd1b646d1c7293a716c1c97",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-26.png",
+        "sha256": "08cdff97800abd9c040d5654b5a950b340085a8bb87ed49c7381c85cd547348b",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-27.png",
+        "sha256": "c40df4e66efd77093e5bacb316639a723d80999b97cdb78c85826ac26241aaf9",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-28.png",
+        "sha256": "35c897f128782d1bd062565ebe21ed28cff25961d4adc661abba4c753f78e849",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-29.png",
+        "sha256": "f9b1c3ca8a6cea17f305cfed6054f746268e8178cae36761b5afcd90edc4d66a",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-30.png",
+        "sha256": "d4a249669d7a5b9fa0a407543c3987403d64dfb74fe6931eec386df34322b224",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-31.png",
+        "sha256": "c334713a8f47ba17da37ccf7a66e52fc5c5470f1613f2a1079423f0a919bcc2f",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-32.png",
+        "sha256": "b80d8640e2570bd7dbdb8279cc6d96966287a5cdf76004702f51eb8293b58b54",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-33.png",
+        "sha256": "983773c124e743e2d1f17bc8f1d68e63c4103139a4d683bc38da40e44dd13e35",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-34.png",
+        "sha256": "3f0c30de9f034c55e58f39140f686f722eba11b06ebc4decde7de214149ac54c",
+        "width": 40,
+        "height": 40
+      },
+      {
+        "file": "mystery-a-35.png",
+        "sha256": "7f3d51c57feafcbd11624816e9d09fba6234358bc13c494a9f006b716a82b47f",
+        "width": 40,
+        "height": 40
+      }
+    ]
+  }
+}

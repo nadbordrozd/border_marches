@@ -466,6 +466,7 @@ function roomFor(hero: HeroState, obj: MapObject): boolean {
   const carries =
     type === "loose-artifact" ||
     type === "fallen-adventurer" ||
+    type === "mystery-bag" ||
     obj.kind === "pickup";
   return typeof art !== "string" || !carries || canCarry(hero, art);
 }
@@ -3489,6 +3490,8 @@ export class AdventureAi implements PlayerController {
         if (carried) continue;
         for (const a of state.map.objects) {
           if (a.kind !== "artifact" || a.data["artifact"] !== art) continue;
+          // A Mystery Bag's artifact is a secret (bead bzc.105).
+          if (a.data["type"] === "mystery-bag") continue;
           if (state.collected.includes(a.id)) continue;
           leads.set(a.id, (leads.get(a.id) ?? 0) + reward * 0.6);
         }

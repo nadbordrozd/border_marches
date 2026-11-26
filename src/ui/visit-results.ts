@@ -11,6 +11,7 @@ import type { GameState, HeroState } from "../core/game/index.ts";
 import { auroraSkill, objectName, objectTypeOf } from "../core/game/index.ts";
 import { tollhouseStock } from "../core/game/sites.ts";
 import { heroMagic, isSpell, spellInfo } from "../core/magic/index.ts";
+import { isMystery, mysteryArtifactOf } from "../core/map/mystery.ts";
 import type { MapObject } from "../core/map/types.ts";
 import type { IconKind } from "../assets/icons.ts";
 import { ARTIFACT_LIST, findArtifact } from "../data/artifacts.ts";
@@ -168,6 +169,21 @@ export function siteIcons(obj: MapObject): VisitIcon[] {
     default:
       return [];
   }
+}
+
+/**
+ * The icons of what a site gives or holds; a Mystery Bag (bead bzc.105)
+ * shows its artifact only once it was opened.
+ */
+function resultIcons(
+  state: GameState,
+  obj: MapObject,
+  text: string,
+): VisitIcon[] {
+  if (!isMystery(obj)) return siteIcons(obj);
+  return state.collected.includes(obj.id) || /Opened/.test(text)
+    ? [{ kind: "artifact", id: mysteryArtifactOf(state.map, obj) }]
+    : [];
 }
 
 /** Whole-word, case-sensitive: "Galoshes", not "galoshes-like". */
@@ -397,10 +413,14 @@ export function siteResult(
     text,
     picture: objectPictureKey(obj),
     // What the site holds, and whatever the line says it gave (bead
-    // bzc.108: every granted thing is an inspectable card).
+    // bzc.108: every granted thing is an inspectable card); a Mystery Bag
+    // shows its artifact only once opened (bead bzc.105).
     icons:
       show === "dialog"
-        ? heldRanks(mergeIcons(siteIcons(obj), textIcons(sentence)), hero)
+        ? heldRanks(
+            mergeIcons(resultIcons(state, obj, text), textIcons(sentence)),
+            hero,
+          )
         : [],
     note,
     area: area === null ? null : clipArea(state, area),

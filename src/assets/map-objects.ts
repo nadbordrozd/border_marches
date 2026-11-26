@@ -66,6 +66,7 @@ export const MAP_OBJECT_TYPE_IDS = [
   "loose-artifact",
   "loose-scroll",
   "fallen-adventurer",
+  "mystery-bag",
   // 3.6 Hidden treasure
   "obelisk",
   "buried-keystone",
@@ -173,6 +174,7 @@ const TYPE_ROWS: readonly (readonly [
   ["loose-artifact", "Loose Artifact", 1, 1, "p"],
   ["loose-scroll", "Loose Scroll", 1, 1, "p"],
   ["fallen-adventurer", "Fallen Adventurer", 1, 1, ""],
+  ["mystery-bag", "Mystery Bag", 1, 1, "p"],
   ["obelisk", "Obelisk", 1, 1, ""],
   ["buried-keystone", "Buried Keystone", 1, 1, "h"],
   ["buried-cache", "Buried Cache", 1, 1, "h"],
@@ -377,6 +379,8 @@ const ART_ROWS: readonly (readonly [
   ["event-tile", "", 26, 24, "pickups-a#29"],
   ["sealed-box", "", 30, 32, "pickups-a#10"],
   ["sign", "", 38, 50, "sites-e#0"],
+  // The Mystery Bag (bead bzc.105, set artifact-pickups).
+  ["mystery-bag", "", 27, 31, "@artifact-pickups/mystery-a#15"],
   // Winter sites (bead bzc.87): studio set winter-objects.
   ["frost-giants-barrow", "small", 58, 51, "@winter-objects/barrow-a#0"],
   ["frost-giants-barrow", "medium", 85, 72, "@winter-objects/barrow-a#1"],
@@ -390,6 +394,25 @@ const ART_ROWS: readonly (readonly [
   ["sun-temple", "", 102, 113, "@desert-sites/sun-temple-a#1"],
   ["sunken-tomb", "", 120, 108, "@desert-sites/tomb-a#2"],
 ];
+
+/**
+ * The cloth a loose artifact's own 32 px icon rests on (bead bzc.105, set
+ * artifact-pickups): not an object type of its own; the renderer
+ * (`artifactPickupEntry` in src/render/map/scene.ts) draws it under the
+ * icon, its foot on the pickup's seat.
+ */
+export const ARTIFACT_CLOTH: ImageAsset & {
+  readonly foot: Point;
+  readonly source: string;
+} = {
+  key: "map-object-artifact-cloth",
+  path: "assets/objects/map/artifact-cloth.png",
+  w: 38,
+  h: 17,
+  category: "map-object",
+  foot: { x: 19, y: 16 },
+  source: "artifact-pickups/cloth-a#0",
+};
 
 export const MAP_OBJECT_ASSETS: readonly MapObjectAsset[] = ART_ROWS.map(
   ([type, variant, w, h, source]) => {

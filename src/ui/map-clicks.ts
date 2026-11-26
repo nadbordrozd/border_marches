@@ -174,6 +174,8 @@ function oddsWords(hero: HeroState, enemy: readonly ArmyLike[]): string {
 
 /** An artifact named in the object's data, if any. */
 function artifactName(obj: MapObject): string | undefined {
+  // A Mystery Bag keeps its artifact secret (bead bzc.105).
+  if (obj.data["type"] === "mystery-bag") return undefined;
   const art = obj.data["artifact"];
   return typeof art === "string" ? findArtifact(art)?.name : undefined;
 }

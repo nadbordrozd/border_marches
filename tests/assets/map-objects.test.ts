@@ -53,8 +53,9 @@ describe("map object types (bzc.16)", () => {
     expect(MAP_OBJECT_TYPES.map((type) => type.id)).toEqual([
       ...MAP_OBJECT_TYPE_IDS,
     ]);
-    // 62 catalogue types, 4 winter sites (bzc.87), 4 desert sites (bzc.88).
-    expect(new Set(MAP_OBJECT_TYPE_IDS).size).toBe(62 + 4 + 4);
+    // 62 catalogue types, 4 winter sites (bzc.87), 4 desert sites (bzc.88),
+    // the Mystery Bag (bzc.105).
+    expect(new Set(MAP_OBJECT_TYPE_IDS).size).toBe(62 + 4 + 4 + 1);
     for (const t of ["pyramid", "sphinx", "sun-temple", "sunken-tomb"])
       expect(MAP_OBJECT_TYPE_IDS).toContain(t);
     const pyramid = MAP_OBJECT_TYPES.find((type) => type.id === "pyramid");

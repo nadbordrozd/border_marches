@@ -1,0 +1,62 @@
+{
+  "set": "artifact-pickups",
+  "bead": "border_marches-bzc.105",
+  "class": "map-objects",
+  "exploration": false,
+  "_doc": "Artifacts lying on the adventure map (bead bzc.105, docs/art/classes/map-objects.md): the small cloth each loose artifact's own 32 px icon rests on, and the Mystery Satchel pickup that hides a surprise artifact. generate-image-v2 at native display size (40 x 40, one call gives 25 candidates) like the pickups of set map-objects; the imported sawmill is the style image for outline, pixel size and viewing angle only. Layers: style, light-south-west, subject (the class-map-object layer is left out: it describes buildings and forbids letters and platforms, and these are a flat cloth and a pickup with a question mark). Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "styleSawmill": {
+      "file": "public/assets/objects/sawmill.png",
+      "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+    },
+    "styleOpts": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": ["style", "light-south-west"],
+    "noBackground": true,
+    "styleImage": "@styleSawmill",
+    "styleOptions": "@styleOpts"
+  },
+  "recipes": [
+    {
+      "id": "cloth-a",
+      "concept": "ARTIFACT CLOTH (the base a loose artifact's icon rests on)",
+      "width": 40,
+      "height": 40,
+      "seed": 10501,
+      "subject": "Subject: one small empty cloth lying flat on the ground of a board-game map, seen from the front with the camera slightly above it, so it looks like a wide, low, flat oval mat with a thick black outline. Each image a different one of these: a scrap of deep purple velvet cloth #6a3fa0 with a #3f2266 shadow fold and a thin gold #f2c230 fringe; a small flat round red velvet cushion #b03a3a with four little gold tassels; a folded square of deep blue cloth #2f4f9f with a gold trim; a small flat round slab of grey stone #9a9aa8, low and wide. Nothing lies on it: it is empty. It is wide and flat: nearly the full image wide and only about a quarter of the image high, and it is the only thing in the image.",
+      "negative": "jewel, amulet, coin, object on top, person, grass, ground, shadow, text, letters"
+    },
+    {
+      "id": "mystery-a",
+      "concept": "MYSTERY SATCHEL (a pickup holding a surprise artifact)",
+      "width": 40,
+      "height": 40,
+      "seed": 10502,
+      "subject": "Subject: one small mysterious treasure lying on a board-game map that hides a surprise artifact, seen from the front with the camera slightly above it, chunky and simple with a thick black outline. Each image a different one of these: a plump little leather satchel #8a5a2e with a #5a3518 shadow, its flap tied shut with gold cord, a big bright gold #f2c230 question mark stitched on the front flap; a small round sack of deep purple cloth #6a3fa0 tied at the neck with gold cord, a big bright gold question mark on its belly; a small bundle wrapped in blue cloth #2f6fd0 tied with a red ribbon, a big gold question mark on its side; a small purple #6a3fa0 coffer bound in gold with a big gold question mark on its lid. The question mark is one big simple symbol that fills most of the front. The treasure is wide and is the only thing in the image, with nothing under it.",
+      "negative": "chest of coins, coins, person, ground, grass, shadow, smoke, words, other letters"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/objects/map/artifact-cloth.png",
+      "from": "cloth-a#0",
+      "width": 38,
+      "height": 17,
+      "steps": [{ "op": "crop", "x": 1, "y": 12, "width": 38, "height": 17 }]
+    },
+    {
+      "path": "public/assets/objects/map/mystery-bag.png",
+      "from": "mystery-a#15",
+      "width": 27,
+      "height": 31,
+      "steps": [{ "op": "crop", "x": 7, "y": 4, "width": 27, "height": 31 }]
+    }
+  ]
+}
