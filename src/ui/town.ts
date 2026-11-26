@@ -60,6 +60,9 @@ import { townArmyMove, wireArmyDrag, type ArmyDrag } from "./army.ts";
 import { armyBand, armyFigure, armySlotViews } from "./hero-screen.ts";
 import type { ArmySlotView } from "./hero-screen.ts";
 import { rulesText } from "./keywords.ts";
+import { guildLevels, guildView } from "./guild-learning.ts";
+import { guildDialog, guildLevelPane, showLearnt } from "./town-guild.ts";
+import { guildLevelOf } from "../core/magic/index.ts";
 import { dwellingStrip, growthNote, recruitQuote } from "./town-dwellings.ts";
 import { specialtyText } from "../core/game/effects.ts";
 import { abilityText, creatureTip, unlockedBy } from "./info-tips.ts";
@@ -170,7 +173,8 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
     };
 
     const doBuild = (id: BuildingId): void => {
-      if (run(build(host.state(), townId, id))) {
+      const result = build(host.state(), townId, id);
+      if (run(result)) {
         playSound("build");
         // The new building flashes gold and settles (bead bzc.26).
         fxEvent("ui.build.complete");
@@ -178,7 +182,20 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           root.querySelector(`.gm-hall [data-building="${id}"]`),
           "gm-just-built",
         );
+        // A guild level built while a hero is in town: its new pages.
+        const owner = host.state().towns[townId]?.owner ?? null;
+        if (result.ok && owner !== null)
+          void showLearnt(host.state(), result.events, owner);
       }
+    };
+
+    /** Opens the Mage Guild: every level and the visiting hero's states. */
+    const openGuild = (): void => {
+      const state = host.state();
+      const town = state.towns[townId];
+      if (town === undefined) return;
+      const view = guildView(state, town, heroInTownOf(state, town));
+      if (view !== null) void guildDialog(town.name, view);
     };
 
     const recruitFrom = (creature: CreatureId): void => {
@@ -603,6 +620,24 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       market.disabled =
         town.owner === null || !hasMarketplace(state, town.owner);
       if (market.disabled) market.title = "Build a Marketplace first";
+      // The Mage Guild (bead bzc.81): who learns what here, and why not.
+      const guild =
+        guildLevels(town) > 0
+          ? tool(
+              "Mage Guild",
+              `magic-guild-${Math.max(1, guildLevelOf(town))}`,
+              openGuild,
+            )
+          : null;
+      if (guild !== null) {
+        guild.classList.add("gm-town-guild-tool");
+        setTip(guild, () =>
+          tipCard("Mage Guild", [
+            "Every hero has a spellbook. A hero in its own town learns each guild spell its school ranks allow, at once and free.",
+            "Click to see which spells the hero here has learnt, and why not.",
+          ]),
+        );
+      }
 
       return el(
         "div.gm-town-header",
@@ -618,6 +653,7 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           ),
         ),
         host.resourceBar(),
+        guild,
         tavernButton,
         market,
         keyButton("Leave", "Esc", close, "gm-btn gm-primary"),
@@ -785,6 +821,23 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         );
         setTip(line, () => creatureTip(creature));
         pane.append(line);
+      }
+      // A guild level: its spells and where each stands for the hero here
+      // (bead bzc.81); the whole guild opens from the link.
+      const view =
+        def.guildLevel === undefined
+          ? null
+          : guildView(state, town, heroInTownOf(state, town));
+      if (view !== null && def.guildLevel !== undefined) {
+        pane.classList.add("gm-hall-detail-guild");
+        pane.append(
+          guildLevelPane(view, def.guildLevel),
+          button(
+            "Whole guild and how to learn more",
+            openGuild,
+            "gm-hall-link gm-hall-plain gm-guild-open",
+          ),
+        );
       }
       if (!built) {
         const free = RESOURCE_IDS.every((r) => (def.cost[r] ?? 0) <= 0);

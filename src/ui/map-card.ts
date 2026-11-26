@@ -52,6 +52,7 @@ import {
   monsterSpellLine,
   objectAt,
 } from "./format.ts";
+import { guildCardLine, siteLearningLine } from "./guild-learning.ts";
 import { ODDS_TEXT, battleOdds, buildableTowns } from "./hints.ts";
 import type { ArmyLike, Odds } from "./hints.ts";
 import {
@@ -373,6 +374,9 @@ export function townCard(
               tone: "dim",
             },
     );
+    // What the guild would teach the selected hero (bead bzc.81).
+    const guild = guildCardLine(state, town, hero);
+    if (guild !== null) lines.push({ kind: "text", ...guild });
     if (options.onMap === true)
       lines.push({ kind: "text", text: "Double-click to open", tone: "hint" });
   }
@@ -544,8 +548,11 @@ function siteCard(
   if (site === null) return null;
   const outside = guardStacks(state, obj);
   const inside = obj.kind === "bank" ? siteGuard(state, obj) : [];
+  // A shrine's page or a tutor's school, for the selected hero (bzc.81).
+  const learning = siteLearningLine(obj, hero);
   const lines: Array<CardLine | null> = [
     { kind: "text", text: site.what },
+    learning === null ? null : { kind: "text", ...learning },
     site.visited === null
       ? { kind: "text", text: site.reset, tone: "dim" }
       : { kind: "visited", ...site.visited },

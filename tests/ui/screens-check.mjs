@@ -38,7 +38,10 @@
 //   click does nothing else, and the browser menu never opens),
 //   menu-dialog, meeting, meeting-picked, meeting-hover, meeting-swap
 //   (checks the swap in the state and swaps back), town-<faction>, town-hover, town-hall (a selected tile), recruit, market, prebattle,
-//   site, levelup, levelup-hover, end-won, end-lost, battle, battle-hover,
+//   site, magic-learn, magic-guild, magic-guild-pane, magic-noschool,
+//   magic-rumour, magic-rumour-map (bead bzc.81: learning made visible,
+//   site results as dialogs),
+//   levelup, levelup-hover, end-won, end-lost, battle, battle-hover,
 //   battle-info, battle-book, battle-spell, battle-spell-hover,
 //   battle-spell-noeffect, [battle-result].
 import { spawn } from "node:child_process";
@@ -1414,6 +1417,145 @@ async function siteScreen() {
   await sleep(300);
 }
 
+/**
+ * Magic made visible (bead bzc.81): the hero placed next to a human town
+ * with guild levels 1-2 and Storm and Bloom rank 1 steps in: the learn
+ * dialog, then the Mage Guild dialog and a guild tile's pane; a hero with
+ * no school steps in: the one-time explanation; a Roadside Inn and a buried
+ * cache by the hero: the bought rumour's dialog and its area on the map.
+ */
+const MAGIC_SETUP = `
+  s.monsters = {};
+  s.players[0].explored = s.players[0].explored.map(() => true);
+  s.players[0].resources.gold = 20000;
+  const h = s.heroes.find((x) => x.owner === 0 && x.alive);
+  for (const x of s.heroes) x.pendingLevelUps = 0;
+  h.mp = h.maxMp = 2000;
+  h.pages = []; h.feats = [];
+  const occupied = (x, y) =>
+    s.map.objects.some((o) => (o.x === x && o.y === y && o.kind !== 'buried') || o.blocked.some(([bx, by]) => bx === x && by === y)) ||
+    s.heroes.some((o) => o.alive && o !== h && o.x === x && o.y === y);
+  const passable = (x, y) => {
+    const c = s.map.cells[y * s.map.width + x];
+    return c && c.obstacle === 'none' && c.terrain !== 'water' && !occupied(x, y);
+  };
+  const near = (x, y) => [[0,1],[1,0],[-1,0],[0,-1],[1,1],[-1,1],[1,-1],[-1,-1]]
+    .map(([dx, dy]) => [x + dx, y + dy]).find(([a, b]) => passable(a, b)) ?? null;
+`;
+
+async function magicScreens() {
+  if (!wantFamily("magic")) return;
+  // The learn dialog, the guild dialog and a guild tile's pane.
+  await editSave(`${MAGIC_SETUP}
+    const t = Object.values(s.towns).find((x) => x.faction === 'humans');
+    const o = s.map.objects.find((x) => x.id === t.id);
+    t.owner = 0;
+    for (const b of ['magic-guild-1', 'magic-guild-2']) if (!t.buildings.includes(b)) t.buildings.push(b);
+    h.skills = [{ id: 'stormcalling', rank: 1 }, { id: 'greencraft', rank: 1 }];
+    const spot = near(o.x, o.y);
+    h.x = spot[0]; h.y = spot[1];
+    window.__magic = { town: t.id, x: o.x, y: o.y, spot };
+  `);
+  const at = await evaluate("window.__magic");
+  note(`magic town: ${JSON.stringify(at)}`);
+  await continueSaved();
+  await idle();
+  await sleep(1200);
+  await game(`click(${at.x}, ${at.y})`);
+  await sleep(700); // past the double-click window: a walk, not "open"
+  await game(`click(${at.x}, ${at.y})`);
+  if (!(await waitMaybe("document.querySelector('.gm-modal')", 10000))) {
+    await shot("magic-failure");
+    note(
+      `hero now: ${JSON.stringify(await evaluate("(() => { const s = window.__bmGame.state(); const h = s.heroes.find((x) => x.owner === 0 && x.alive); return [h.x, h.y, h.mp, h.pages.length]; })()"))}`,
+    );
+    return fail("magic-learn", "no learn dialog on entering the town");
+  }
+  await sleep(500);
+  if (want("magic-learn")) await shot("magic-learn");
+  await key("Enter");
+  await waitFor("document.querySelector('.gm-town')", "town screen");
+  await park();
+  await sleep(400);
+  if (want("magic-guild")) {
+    if (await clickText(".gm-town button", "Mage Guild")) {
+      await sleep(500);
+      await shot("magic-guild");
+      await escape();
+      await sleep(300);
+    } else fail("magic-guild", "no Mage Guild button");
+  }
+  if (want("magic-guild-pane")) {
+    await clickFirst('.gm-hall-tile[data-building="magic-guild-1"]');
+    await park();
+    await sleep(400);
+    await shot("magic-guild-pane");
+  }
+  await escape();
+  await waitFor("!document.querySelector('.gm-town')", "town closed");
+
+  // A hero with no school: the one-time explanation.
+  if (want("magic-noschool")) {
+    await editSave(`${MAGIC_SETUP}
+      const t = s.towns[${JSON.stringify(at.town)}];
+      h.skills = [];
+      h.pages = [];
+      const spot = near(${at.x}, ${at.y});
+      h.x = spot[0]; h.y = spot[1];
+    `);
+    await continueSaved();
+    await idle();
+    await sleep(1200);
+    await game(`click(${at.x}, ${at.y})`);
+    await sleep(700);
+    await game(`click(${at.x}, ${at.y})`);
+    if (
+      await waitMaybe("document.querySelector('.gm-noschool-dialog')", 10000)
+    ) {
+      await sleep(500);
+      await shot("magic-noschool");
+      await key("Enter");
+      await waitMaybe("document.querySelector('.gm-town')", 5000);
+      await escape();
+      await sleep(300);
+    } else fail("magic-noschool", "no explanation for a hero with no school");
+  }
+
+  // A Roadside Inn and a buried cache beside the hero: the rumour.
+  if (!want("magic-rumour") && !want("magic-rumour-map")) return;
+  await editSave(`${MAGIC_SETUP}
+    const inn = near(h.x, h.y);
+    s.map.objects.push({ id: 'tour-inn', kind: 'site', x: inn[0], y: inn[1], footprint: { w: 1, h: 1 }, blocked: [], data: { type: 'roadside-inn' } });
+    let cache = null;
+    for (let r = 4; r < 9 && cache === null; r++)
+      for (const [dx, dy] of [[r, 0], [-r, 0], [0, r], [0, -r], [r, r], [-r, -r]]) {
+        if (passable(h.x + dx, h.y + dy)) { cache = [h.x + dx, h.y + dy]; break; }
+      }
+    s.map.objects.push({ id: 'tour-cache', kind: 'buried', x: cache[0], y: cache[1], footprint: { w: 1, h: 1 }, blocked: [], data: { type: 'buried-cache', prize: { gold: 2000 } } });
+    window.__inn = { x: inn[0], y: inn[1], cache };
+  `);
+  const inn = await evaluate("window.__inn");
+  note(`rumour inn: ${JSON.stringify(inn)}`);
+  await continueSaved();
+  await idle();
+  await sleep(1200);
+  await game(`click(${inn.x}, ${inn.y})`);
+  await sleep(200);
+  await game(`click(${inn.x}, ${inn.y})`);
+  if (!(await waitMaybe("document.querySelector('.gm-site-dialog')", 10000)))
+    return fail("magic-rumour", "no inn dialog");
+  await sleep(300);
+  // The one open choice (Buy a rumour) is the default: Enter.
+  await key("Enter");
+  if (!(await waitMaybe("document.querySelector('.gm-result-dialog')", 5000)))
+    return fail("magic-rumour", "no rumour dialog after buying");
+  await sleep(500);
+  if (want("magic-rumour")) await shot("magic-rumour");
+  await key("s");
+  await sleep(1800);
+  if (want("magic-rumour-map")) await shot("magic-rumour-map");
+}
+
 async function laterScreens() {
   if (wantFamily("levelup")) {
     await editSave(
@@ -1623,6 +1765,7 @@ async function tour() {
   await adventureScreens();
   await richScreens();
   await siteScreen();
+  await magicScreens();
   await laterScreens();
   await battleScreens();
 }

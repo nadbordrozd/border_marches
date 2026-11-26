@@ -704,6 +704,7 @@ function say(
   obj: MapObject,
   text: string,
   options?: SiteOption[],
+  area?: { x: number; y: number; w: number; h: number },
 ): void {
   events.push({
     type: "site",
@@ -711,6 +712,7 @@ function say(
     objectId: obj.id,
     text,
     ...(options !== undefined && options.length > 0 ? { options } : {}),
+    ...(area !== undefined ? { area } : {}),
   });
 }
 
@@ -1761,6 +1763,8 @@ export function useSite(
         hero,
         obj,
         `Rumour: a cache lies buried within the 5x5 area from (${x0}, ${y0}) to (${x0 + 4}, ${y0 + 4}).`,
+        undefined,
+        { x: x0, y: y0, w: 5, h: 5 },
       );
       break;
     }

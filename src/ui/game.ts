@@ -106,11 +106,22 @@ import { loadGameMapAssets } from "./hero-sprite.ts";
 import {
   endTurnDialog,
   endTurnRows,
+  noSchoolDialog,
   preBattleDialog,
   preBattleModel,
+  resultDialog,
   siteDialog,
   siteDialogModel,
 } from "./dialog-kinds.ts";
+import { learnsNothingForNoSchool, noSchoolModel } from "./guild-learning.ts";
+import { showLearnt } from "./town-guild.ts";
+import {
+  areaCells,
+  digResult,
+  siteResult,
+  type VisitArea,
+  type VisitResult,
+} from "./visit-results.ts";
 import { heroArt, namedHeroPortrait } from "../assets/unit-art.ts";
 import {
   levelUpDialog,
@@ -152,6 +163,8 @@ const AI_STEP_MS = 90;
 const AI_WALK_MS = 70;
 /** Between two lines floating up from the hero (ms). */
 const FLOAT_GAP_MS = 380;
+/** How long a rumour's area pulses on the map after "Show on map" (ms). */
+const AREA_MARK_MS = 7000;
 
 /** The page hook the scripted browser check drives (window.__bmGame). */
 export interface GameHook {
@@ -309,6 +322,14 @@ class GameScreen {
   private offModal: () => void = () => {};
   /** When the last queued float at the hero starts (ms). */
   private floatQueue = 0;
+  /** Visit outcomes waiting to be shown as dialogs (bead bzc.81). */
+  private results: VisitResult[] = [];
+  /** Pages the human's heroes learnt at a day's start, shown at its turn. */
+  private learntQueue: GameEvent[] = [];
+  /** Whether the no-school explanation was shown this game. */
+  private noSchoolExplained = false;
+  /** Clears a rumour's marked area. */
+  private markTimer = 0;
   /**
    * An adventure spell aimed on the map (bead bzc.47): its valid targets
    * glow and the next click on one casts.
@@ -1518,8 +1539,77 @@ class GameScreen {
 
   // ------------------------------------------------------------ events
 
+  /**
+   * A visit's outcome (bead bzc.81): a plain pickup floats over the hero;
+   * anything else is logged and queued as a dialog the player dismisses
+   * ({@link showResults}).
+   */
+  private present(result: VisitResult, heroId: string): void {
+    if (result.show === "float") {
+      this.noteAtHero(result.text, "gain", heroId);
+      return;
+    }
+    this.note(result.text, "quiet");
+    this.results.push(result);
+  }
+
+  /** Shows the queued outcome dialogs one by one. */
+  private async showResults(): Promise<void> {
+    while (this.results.length > 0) {
+      const r = this.results.shift();
+      if (r === undefined) break;
+      const choice = await resultDialog(r);
+      if (choice === "show" && r.area !== null) this.markArea(r.area);
+    }
+  }
+
+  /**
+   * A rumour's area (bead bzc.81): the camera glides there and its cells
+   * pulse for a few seconds.
+   */
+  private markArea(area: VisitArea): void {
+    if (this.aiming !== null) return;
+    window.clearTimeout(this.markTimer);
+    this.view.setTargetCells(areaCells(area));
+    void this.view.glideTo(
+      area.x + Math.floor(area.w / 2),
+      area.y + Math.floor(area.h / 2),
+      reducedMotion(),
+    );
+    this.markTimer = window.setTimeout(() => {
+      if (this.aiming === null) this.view.setTargetCells(null);
+    }, AREA_MARK_MS);
+  }
+
+  /**
+   * The human's heroes' new pages (bead bzc.81), then, once a game, why a
+   * hero with no school learnt nothing in a guild town it entered.
+   */
+  private async learnt(events: readonly GameEvent[]): Promise<void> {
+    await showLearnt(this.state, events, this.human);
+    if (this.noSchoolExplained) return;
+    for (const e of events) {
+      if (e.type !== "visit-town") continue;
+      const hero = this.state.heroes.find((h) => h.id === e.heroId);
+      if (hero?.owner !== this.human) continue;
+      const learnt = events.some(
+        (x) => x.type === "spells-learnt" && x.heroId === e.heroId,
+      );
+      if (learnt || !learnsNothingForNoSchool(this.state, e.heroId, e.townId))
+        continue;
+      const model = noSchoolModel(this.state, e.heroId, e.townId);
+      if (model === null) continue;
+      this.noSchoolExplained = true;
+      await noSchoolDialog(
+        model,
+        namedHeroPortrait(hero.defId, hero.heroClass).key,
+      );
+      return;
+    }
+  }
+
   /** Toasts and sounds for events that concern the human. */
-  private announce(events: readonly GameEvent[]): void {
+  private announce(events: readonly GameEvent[], sites = true): void {
     for (const e of events) {
       switch (e.type) {
         case "pickup":
@@ -1606,10 +1696,20 @@ class GameScreen {
             this.note(`${e.artifacts.length} artifacts taken`, "gain");
           break;
         case "site": {
+          // A choice's outcome is read in its dialog (siteChoice).
+          if (!sites) break;
           const h = this.state.heroes.find((x) => x.id === e.heroId);
+          const obj = this.state.map.objects.find((o) => o.id === e.objectId);
           if (h?.owner === this.human && e.options === undefined) {
             this.siteSound(e.objectId, e.text);
-            this.noteAtHero(e.text, "gain", e.heroId);
+            if (obj === undefined) {
+              this.noteAtHero(e.text, "gain", e.heroId);
+              break;
+            }
+            this.present(
+              siteResult(this.state, obj, e.text, e.area ?? null, h),
+              e.heroId,
+            );
           }
           break;
         }
@@ -1637,17 +1737,12 @@ class GameScreen {
             // What turns up opens after the spade.
             if (e.found !== null) playSound("site.treasure", { delay: 0.3 });
           }
-          this.noteAtHero(
-            e.found === null
-              ? "You dig, and find nothing."
-              : `Dug up: ${e.found}!`,
-            e.found === null ? "info" : "gain",
-            e.heroId,
-          );
+          this.present(digResult(e.found), e.heroId);
           break;
         case "hero-freed":
+          // The prison's own line says who joins, in a dialog.
           if (e.player === this.human)
-            this.noteAtHero("A prisoner joins you!", "gain", e.heroId);
+            this.note("A prisoner joins you!", "quiet");
           break;
         case "player-eliminated":
           if (e.player !== this.human)
@@ -1668,6 +1763,9 @@ class GameScreen {
     try {
       let openTown: string | null = null;
       this.announce(events);
+      // What the visit said, then what a guild taught (bead bzc.81).
+      await this.showResults();
+      await this.learnt(events);
       for (const e of events) {
         if (e.type === "chest-offer") await this.chest(e.heroId, e.pickupId);
         if (e.type === "site" && e.options !== undefined) {
@@ -1693,32 +1791,61 @@ class GameScreen {
 
   /**
    * A map object's choice (bead bzc.13): its options as buttons, plus
-   * "Leave"; picking one runs useSite and asks again while options remain
-   * (a dwelling, a tollhouse).
+   * "Leave"; picking one runs useSite and asks again while an option is
+   * still open (a dwelling, a tollhouse), the outcome leading the next
+   * question. When nothing is left to pick, the outcome shows on its own
+   * (bead bzc.81): a dialog to dismiss, or a float for a plain one (a
+   * hire, a sale). A rumour always gets its own dialog (Show on map).
    */
   private async siteChoice(
     heroId: string,
     objectId: string,
     text: string,
   ): Promise<void> {
+    let last: string | null = null;
     for (let round = 0; round < 12; round++) {
       const hero = this.state.heroes.find((h) => h.id === heroId);
       const obj = this.state.map.objects.find((o) => o.id === objectId);
       if (hero === undefined || obj === undefined) return;
       if (hero.owner !== this.human) return;
-      const model = siteDialogModel(this.state, hero, obj, text, round === 0);
+      const model = siteDialogModel(
+        this.state,
+        hero,
+        obj,
+        text,
+        round === 0,
+        last,
+      );
       if (model.choices.length === 0) return;
       const choice = await siteDialog(model);
       if (choice === "") return;
       const events = this.run(useSite(this.state, heroId, objectId, choice));
       if (events === null) return;
-      // announce sounds the plain outcomes; one that asks again (a hire
-      // with stock left) sounds here.
-      for (const e of events)
-        if (e.type === "site" && e.options !== undefined)
-          this.siteSound(e.objectId, e.text);
-      this.announce(events);
+      this.announce(events, false);
       this.refresh();
+      const lines = events.filter(
+        (e): e is Extract<GameEvent, { type: "site" }> =>
+          e.type === "site" && e.heroId === heroId,
+      );
+      for (const e of lines) this.siteSound(e.objectId, e.text);
+      last = lines.map((e) => e.text).join(" ") || null;
+      const after = this.state.heroes.find((h) => h.id === heroId);
+      const results = lines.map((e) =>
+        siteResult(this.state, obj, e.text, e.area ?? null, after),
+      );
+      const again =
+        after !== undefined &&
+        results.every((r) => r.area === null) &&
+        siteDialogModel(this.state, after, obj, text, false, last).choices.some(
+          (c) => !c.disabled,
+        );
+      if (again) {
+        for (const e of lines) this.note(e.text, "quiet");
+        continue;
+      }
+      for (const r of results) this.present(r, heroId);
+      await this.showResults();
+      return;
     }
   }
 
@@ -1956,6 +2083,9 @@ class GameScreen {
       // A battle that wins the game still offers its level-ups first.
       if (this.state.status === "won") await this.levelUps();
       if (this.checkEnd()) return;
+      // A bank's prize, a captured town's guild pages (bead bzc.81).
+      await this.showResults();
+      await this.learnt(applied.events);
       await this.levelUps();
       // A won fight on an object entrance may visit it (pickups, chests).
       for (const e of applied.events) {
@@ -1992,11 +2122,20 @@ class GameScreen {
     this.clearPlan();
     await this.afterTurnEvents(events);
     await this.runAiTurns();
+    // No AI to wait for (or it already ended): the queue shows now.
+    if (this.state.currentPlayer === this.human) await this.flushLearnt();
   }
 
   /** New day / week toasts and sounds. */
   private async afterTurnEvents(events: readonly GameEvent[]): Promise<void> {
     this.announce(events);
+    // Pages learnt in town at a day's start wait for the human's turn.
+    for (const e of events)
+      if (
+        e.type === "spells-learnt" &&
+        this.state.heroes.find((h) => h.id === e.heroId)?.owner === this.human
+      )
+        this.learntQueue.push(e);
     if (this.checkEnd()) return;
     const week = events.some((e) => e.type === "new-week");
     const day = events.some((e) => e.type === "new-day");
@@ -2058,7 +2197,17 @@ class GameScreen {
     saveGame(browserStorage(), this.state);
     this.note(`${dateLabel(this.state.day)}: your turn`);
     this.centreOnTurnStart();
+    await this.flushLearnt();
     await this.levelUps();
+  }
+
+  /** The pages learnt at the day's start, now that it is the human's turn. */
+  private async flushLearnt(): Promise<void> {
+    await this.showResults();
+    if (this.learntQueue.length === 0) return;
+    const events = this.learntQueue;
+    this.learntQueue = [];
+    await showLearnt(this.state, events, this.human);
   }
 
   /**

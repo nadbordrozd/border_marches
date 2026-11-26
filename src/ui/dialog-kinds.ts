@@ -44,6 +44,13 @@ import { ODDS_TEXT, battleOdds } from "./hints.ts";
 import type { Odds, TurnWarning } from "./hints.ts";
 import { objectPictureKey, textWithIcons } from "./map-card.ts";
 import { townRow } from "./side-panel.ts";
+import { iconElement } from "./icons.ts";
+import { spellTip } from "./info-tips.ts";
+import { rulesText } from "./keywords.ts";
+import { setTip } from "./tooltip.ts";
+import type { LearntModel, NoSchoolModel } from "./guild-learning.ts";
+import { siteNames, withoutName } from "./visit-results.ts";
+import type { VisitIcon, VisitResult } from "./visit-results.ts";
 
 // ------------------------------------------------------------ pictures
 
@@ -296,7 +303,9 @@ export interface SiteDialogModel {
 
 /**
  * The site dialog's model: the visit's text without the site's name in
- * front (the title says it), or "Anything else?" after a first choice.
+ * front (the title says it), or "Anything else?" after a first choice,
+ * led by that choice's outcome (`last`, bead bzc.81: what was bought or
+ * learnt is read here, not floated behind the dialog).
  */
 export function siteDialogModel(
   state: GameState,
@@ -304,13 +313,16 @@ export function siteDialogModel(
   obj: MapObject,
   text: string,
   first: boolean,
+  last: string | null = null,
 ): SiteDialogModel {
   const title = objectName(state, obj);
-  let sentence = text;
-  if (sentence.startsWith(`${title}: `))
-    sentence = sentence.slice(title.length + 2);
-  sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
-  if (!first) sentence = "Anything else?";
+  const names = siteNames(state, obj);
+  let sentence = withoutName(names, text);
+  if (!first)
+    sentence =
+      last === null
+        ? "Anything else?"
+        : `${withoutName(names, last)} Anything else?`;
   const offer = dwellingOffer(state, obj);
   const choices = siteOptions(state, hero, obj).map((o): SiteChoiceModel => {
     const hire = /^hire:(\d+)$/.exec(o.id);
@@ -480,4 +492,86 @@ export async function endTurnDialog(
     cancel: "stay",
   });
   return endTurnChoice(value);
+}
+
+// ------------------------------------------------------------ results
+
+function iconTile(icon: VisitIcon): HTMLElement {
+  const node = iconElement(icon.kind, icon.id, { scale: 2 });
+  const name = node.title;
+  node.removeAttribute("title");
+  if (icon.kind === "spell") setTip(node, () => spellTip(icon.id));
+  else setTip(node, name);
+  return el("div.gm-result-icon", node, el("span", name));
+}
+
+export type ResultChoice = "ok" | "show";
+
+/**
+ * A visit's informative outcome (bead bzc.81): the site's picture, the
+ * outcome, what it gave or holds as icons, a dim note, and OK (Enter or
+ * Escape); a rumour adds "Show on map" (S).
+ */
+export function resultDialog(result: VisitResult): Promise<ResultChoice> {
+  const buttons: Array<DialogButton<ResultChoice>> = [
+    { label: "OK", value: "ok", primary: true },
+  ];
+  if (result.area !== null)
+    buttons.push({ label: "Show on map", value: "show", key: "S" });
+  const key = result.picture;
+  return dialog<ResultChoice>({
+    title: result.title,
+    className: "gm-result-dialog",
+    picture: key === null ? null : pictureView(dialogPicture(key)),
+    sentence: rulesText(result.sentence),
+    ...(result.icons.length > 0
+      ? { body: el("div.gm-result-icons", ...result.icons.map(iconTile)) }
+      : {}),
+    consequence: result.note,
+    buttons,
+    cancel: "ok",
+  });
+}
+
+/** The hero learnt pages (bead bzc.81): portrait, the new spells, OK. */
+export function learntDialog(
+  model: LearntModel,
+  portrait: string | null,
+): Promise<void> {
+  return dialog<undefined>({
+    title: model.title,
+    className: "gm-result-dialog",
+    picture: portrait === null ? null : img(portrait, "gm-dialog-hero", 2),
+    sentence: model.sentence,
+    body: el(
+      "div.gm-result-icons",
+      ...model.spells.map((s) => iconTile({ kind: "spell", id: s.id })),
+    ),
+    consequence:
+      model.consequence === null
+        ? null
+        : rulesText(model.consequence, { hover: true }),
+    buttons: [{ label: "OK", value: undefined, primary: true }],
+    cancel: undefined,
+  });
+}
+
+/** Why a hero with no school learnt nothing in a guild town (once). */
+export function noSchoolDialog(
+  model: NoSchoolModel,
+  portrait: string | null,
+): Promise<void> {
+  return dialog<undefined>({
+    title: model.title,
+    className: "gm-noschool-dialog",
+    picture: portrait === null ? null : img(portrait, "gm-dialog-hero", 2),
+    sentence: model.sentence,
+    body: el(
+      "div.gm-noschool-body",
+      rulesText(model.howTo, { tag: "div", hover: true }),
+      el("div.gm-dim", model.scrolls),
+    ),
+    buttons: [{ label: "OK", value: undefined, primary: true }],
+    cancel: undefined,
+  });
 }

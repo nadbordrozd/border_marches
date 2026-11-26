@@ -358,6 +358,11 @@ export type GameEvent =
       objectId: string;
       text: string;
       options?: SiteOption[];
+      /**
+       * A map area the text points at (a rumour's 5x5 square, bead
+       * bzc.81): the UI can highlight it and centre the view on it.
+       */
+      area?: { x: number; y: number; w: number; h: number };
     }
   /** A hero moved by a waystone. */
   | {

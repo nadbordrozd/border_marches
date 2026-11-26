@@ -230,3 +230,86 @@
 .gm-odds-bg-deadly {
   background: #e8a24a;
 }
+
+/* ------------------------------------------------------------ results */
+
+/* A visit's outcome, a learnt page, a rumour (bead bzc.81). */
+.gm-modal.gm-result-dialog,
+.gm-modal.gm-noschool-dialog {
+  width: min(480px, calc(100vw - 32px));
+}
+
+.gm-dialog-hero {
+  display: block;
+  image-rendering: pixelated;
+  box-shadow:
+    0 0 0 1px var(--gm-ink),
+    0 0 0 2px var(--gm-trim-dark);
+}
+
+.gm-result-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 14px;
+  margin: 0 0 10px;
+}
+
+.gm-result-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 92px;
+  font-size: 12px;
+  text-align: center;
+  color: var(--gm-gold-dim);
+}
+
+.gm-noschool-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------------------ guild */
+
+.gm-modal.gm-guild-dialog {
+  width: min(720px, calc(100vw - 32px));
+}
+
+.gm-guild-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 10px;
+}
+
+.gm-guild-level {
+  padding: 6px 8px 8px;
+  background: rgb(10 8 5 / 45%);
+  box-shadow: var(--gm-inset-shadow);
+}
+
+.gm-guild-level-head {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: var(--gm-gold);
+}
+
+.gm-guild-levels .gm-guild-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 6px 12px;
+}
+
+.gm-guild-howto {
+  display: block;
+  line-height: 1.4;
+}

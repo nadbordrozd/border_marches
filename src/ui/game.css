@@ -3541,3 +3541,89 @@
 .gm-modal {
   max-width: min(640px, calc(100vw - 32px));
 }
+
+/* The Mage Guild (bead bzc.81): each spell's icon, name and its state for
+   the hero in the town, in a guild building's detail pane and the guild
+   dialog (town-guild.ts). */
+.gm-hall-detail-guild .gm-hall-detail-art {
+  width: 56px;
+  height: 56px;
+}
+
+.gm-hall-detail-guild .gm-hall-detail-art > img:first-child {
+  width: 48px;
+  height: 48px;
+}
+
+@media (min-width: 1600px) and (min-height: 1000px) {
+  .gm-hall-detail-guild .gm-hall-detail-art {
+    width: 104px;
+    height: 104px;
+  }
+
+  .gm-hall-detail-guild .gm-hall-detail-art > img:first-child {
+    width: 96px;
+    height: 96px;
+  }
+}
+
+.gm-guild-pane-head {
+  margin: 2px 0 4px;
+  font-size: 11px;
+  color: var(--gm-gold-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.gm-guild-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.gm-guild-spell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.gm-guild-spell > .gm-icon {
+  flex: none;
+}
+
+.gm-guild-spell-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.gm-guild-spell-name {
+  color: var(--gm-text);
+  font-weight: bold;
+}
+
+.gm-guild-state {
+  font-size: 11px;
+}
+
+.gm-guild-good {
+  color: var(--gm-good);
+}
+
+.gm-guild-bad {
+  color: var(--gm-bad);
+}
+
+.gm-guild-dim {
+  color: var(--gm-dim);
+}
+
+.gm-guild-unbuilt > .gm-icon {
+  filter: grayscale(0.85) brightness(0.7);
+}
+
+.gm-hall-link.gm-guild-open {
+  align-self: flex-start;
+}
