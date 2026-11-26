@@ -99,6 +99,12 @@ describe("doodads (xaj.14)", () => {
   it("give every land terrain 4-6 small decorations anchored at the foot", () => {
     for (const terrain of GROUND_TERRAINS) {
       const set = doodadsOf(terrain);
+      // The desert sand (bead bzc.88) has none by design: its own
+      // decorations (skull, tumbleweed) would repeat the doodad subjects.
+      if (terrain === "sand") {
+        expect(set).toEqual([]);
+        continue;
+      }
       expect(set.length).toBeGreaterThanOrEqual(4);
       expect(set.length).toBeLessThanOrEqual(6);
     }

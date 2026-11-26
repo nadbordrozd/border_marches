@@ -1,0 +1,252 @@
+{
+  "palm-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:07.453Z"
+  },
+  "palm-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:07.542Z"
+  },
+  "palm-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:07.642Z"
+  },
+  "palm-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:07.741Z"
+  },
+  "palm-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:07.837Z"
+  },
+  "palm-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:07.938Z"
+  },
+  "palm-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:08.034Z"
+  },
+  "palm-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:08.134Z"
+  },
+  "palm-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:08.234Z"
+  },
+  "palm-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:08.334Z"
+  },
+  "palm-a#18": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:08.434Z"
+  },
+  "palm-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:08.536Z"
+  },
+  "palm-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:08.635Z"
+  },
+  "palm-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:08.735Z"
+  },
+  "palm-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "full palm crown on a ringed trunk, clear at 1x, lit from the left: a desert grove palm",
+    "at": "2026-11-26T13:58:08.836Z"
+  },
+  "palm-a#5": {
+    "verdict": "REJECTED",
+    "notes": "the base reads as a flower pot",
+    "at": "2026-11-26T13:58:08.933Z"
+  },
+  "palm-a#6": {
+    "verdict": "REJECTED",
+    "notes": "a shapeless shrub, not a palm; reads as a bush",
+    "at": "2026-11-26T13:58:09.027Z"
+  },
+  "palm-a#9": {
+    "verdict": "REJECTED",
+    "notes": "a shapeless shrub, not a palm; reads as a bush",
+    "at": "2026-11-26T13:58:09.123Z"
+  },
+  "palm-a#7": {
+    "verdict": "REJECTED",
+    "notes": "umbrella or mushroom crown: reads as a giant mushroom",
+    "at": "2026-11-26T13:58:09.221Z"
+  },
+  "palm-a#8": {
+    "verdict": "REJECTED",
+    "notes": "umbrella or mushroom crown: reads as a giant mushroom",
+    "at": "2026-11-26T13:58:09.321Z"
+  },
+  "palm-a#12": {
+    "verdict": "REJECTED",
+    "notes": "trunk bent flat to the ground: too wide and odd in a crowd",
+    "at": "2026-11-26T13:58:09.424Z"
+  },
+  "palm-a#14": {
+    "verdict": "REJECTED",
+    "notes": "bare thin pole with a tiny crown: noise in a crowd (trees class rule)",
+    "at": "2026-11-26T13:58:09.534Z"
+  },
+  "palm-a#17": {
+    "verdict": "REJECTED",
+    "notes": "two tiny palms with gaps: too small and fragmented",
+    "at": "2026-11-26T13:58:09.642Z"
+  },
+  "palm-a#20": {
+    "verdict": "REJECTED",
+    "notes": "tiny sapling, reads as a weed",
+    "at": "2026-11-26T13:58:09.746Z"
+  },
+  "palm-a#23": {
+    "verdict": "REJECTED",
+    "notes": "weeping fringe of fronds: noise in a crowd",
+    "at": "2026-11-26T13:58:09.844Z"
+  },
+  "cactus-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "chunky saguaro with raised arms, solid silhouette at 1x",
+    "at": "2026-11-26T13:58:16.201Z"
+  },
+  "cactus-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "chunky saguaro with raised arms, solid silhouette at 1x",
+    "at": "2026-11-26T13:58:16.298Z"
+  },
+  "cactus-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "chunky saguaro with raised arms, solid silhouette at 1x",
+    "at": "2026-11-26T13:58:16.399Z"
+  },
+  "cactus-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "chunky saguaro with raised arms, solid silhouette at 1x",
+    "at": "2026-11-26T13:58:16.497Z"
+  },
+  "cactus-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "chunky saguaro with raised arms, solid silhouette at 1x",
+    "at": "2026-11-26T13:58:16.599Z"
+  },
+  "cactus-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "chunky saguaro with raised arms, solid silhouette at 1x",
+    "at": "2026-11-26T13:58:16.701Z"
+  },
+  "cactus-a#1": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted saguaro; six are enough",
+    "at": "2026-11-26T13:58:16.796Z"
+  },
+  "cactus-a#3": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted saguaro; six are enough",
+    "at": "2026-11-26T13:58:16.889Z"
+  },
+  "cactus-a#6": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted saguaro; six are enough",
+    "at": "2026-11-26T13:58:16.986Z"
+  },
+  "cactus-a#8": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted saguaro; six are enough",
+    "at": "2026-11-26T13:58:17.081Z"
+  },
+  "cactus-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "prickly pear clump with pink fruit, compact and readable",
+    "at": "2026-11-26T13:58:17.181Z"
+  },
+  "cactus-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "prickly pear clump with pink fruit, compact and readable",
+    "at": "2026-11-26T13:58:17.281Z"
+  },
+  "cactus-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "prickly pear clump with pink fruit, compact and readable",
+    "at": "2026-11-26T13:58:17.381Z"
+  },
+  "cactus-a#11": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of pear 10",
+    "at": "2026-11-26T13:58:17.480Z"
+  },
+  "cactus-a#14": {
+    "verdict": "REJECTED",
+    "notes": "thin stalked pads with gaps: noise in a crowd",
+    "at": "2026-11-26T13:58:17.582Z"
+  },
+  "cactus-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "cluster of ribbed column cacti, solid shape",
+    "at": "2026-11-26T13:58:17.682Z"
+  },
+  "cactus-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "cluster of ribbed column cacti, solid shape",
+    "at": "2026-11-26T13:58:17.780Z"
+  },
+  "cactus-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "cluster of ribbed column cacti, solid shape",
+    "at": "2026-11-26T13:58:17.880Z"
+  },
+  "cactus-a#16": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate column cluster",
+    "at": "2026-11-26T13:58:17.979Z"
+  },
+  "cactus-a#18": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate column cluster",
+    "at": "2026-11-26T13:58:18.076Z"
+  },
+  "cactus-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "round barrel cactus with a yellow flower, low filler for the grove edge",
+    "at": "2026-11-26T13:58:18.179Z"
+  },
+  "cactus-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "round barrel cactus with a yellow flower, low filler for the grove edge",
+    "at": "2026-11-26T13:58:18.276Z"
+  },
+  "cactus-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "round barrel cactus with a yellow flower, low filler for the grove edge",
+    "at": "2026-11-26T13:58:18.376Z"
+  },
+  "cactus-a#21": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate barrel cactus",
+    "at": "2026-11-26T13:58:18.474Z"
+  },
+  "cactus-a#23": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate barrel cactus",
+    "at": "2026-11-26T13:58:18.572Z"
+  }
+}

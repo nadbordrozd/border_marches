@@ -62,6 +62,14 @@ describe("denser maps (bzc.50)", { timeout: 120_000 }, () => {
     // Event tiles and signs are map-authored; the Keepers' Vault is a rule
     // of medium and large maps (CONTENT_MAP_OBJECTS 3.4).
     const authored: ObjectTypeId[] = ["event-tile", "sign"];
+    // The desert sites (bead bzc.88) stand only on maps that roll a desert
+    // (tests/core/map/desert.test.ts).
+    const desert: ObjectTypeId[] = [
+      "pyramid",
+      "sphinx",
+      "sun-temple",
+      "sunken-tomb",
+    ];
     for (const size of ["S", "M", "L"] as const) {
       const seen = new Set<string>();
       for (const seed of SEEDS[size]) {
@@ -70,6 +78,7 @@ describe("denser maps (bzc.50)", { timeout: 120_000 }, () => {
       const missing = OBJECT_TYPE_IDS.filter(
         (t) =>
           !authored.includes(t) &&
+          !desert.includes(t) &&
           !(size === "S" && t === "keepers-vault") &&
           !seen.has(t),
       );

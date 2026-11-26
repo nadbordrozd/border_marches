@@ -1,0 +1,17 @@
+{
+  "base-a#0": {
+    "verdict": "REJECTED",
+    "notes": "bright white bead-like ripple stripes and dark pebble rings: too loud, reads as a pattern when repeated",
+    "at": "2026-11-26T13:53:42.917Z"
+  },
+  "base-b#0": {
+    "verdict": "REJECTED",
+    "notes": "cell-shaped outlines all over: reads as paving, not sand",
+    "at": "2026-11-26T13:53:43.004Z"
+  },
+  "dunes-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "calm golden sand with soft diagonal wind ripples, low contrast, no visible seam in a 3x3 repeat: the sand base",
+    "at": "2026-11-26T13:53:43.101Z"
+  }
+}

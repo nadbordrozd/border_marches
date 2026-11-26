@@ -215,6 +215,8 @@ export function heroEffects(hero: HeroState): SourcedEffect[] {
     if (b.luck !== undefined) effects.push({ kind: "luck", amount: b.luck });
     if (b.terrain !== undefined)
       effects.push({ kind: "terrain-cost", ...b.terrain });
+    if (b.attack !== undefined)
+      effects.push({ kind: "stat", stat: "attack", amount: b.attack });
     if (b.school !== undefined && b.power !== undefined) {
       effects.push({
         kind: "school-power",

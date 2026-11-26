@@ -8,7 +8,10 @@
  */
 import { describe, expect, it } from "vitest";
 import { CELL_PX } from "../../src/assets/manifest.ts";
-import { generateMap } from "../../src/core/map/generate.ts";
+import {
+  DEFAULT_GEN_CONFIG,
+  generateMap,
+} from "../../src/core/map/generate.ts";
 import type { GameMap, MapObject } from "../../src/core/map/types.ts";
 import { objectCells } from "../../src/core/map/types.ts";
 import { canopyBands, canopyTint } from "../../src/render/map/canopy.ts";
@@ -408,7 +411,18 @@ describe("incremental terrain plan", () => {
     const FULL_EVERY = 25;
     // Decorated (bead bzc.72): its props and decorations stay featured
     // through every take and return.
-    const map = generateMap(12, { size: "S" });
+    // The map as it was before the desert (bead bzc.88) could roll on it.
+    const map = generateMap(12, {
+      size: "S",
+      config: {
+        terrain: {
+          desert: {
+            ...DEFAULT_GEN_CONFIG.terrain.desert,
+            chance: { S: 0, M: 0, L: 0 },
+          },
+        },
+      },
+    });
     expect(map.cells.some((c) => c.prop === true)).toBe(true);
     const all = map.objects.filter((o) => o.kind !== "buried");
     const chain = all.filter((o) => {
@@ -486,7 +500,9 @@ describe("volcanic ground in the terrain plan (bead bzc.83)", () => {
     expect(volcanic.length).toBeGreaterThan(0);
     const layout = planTerrain(map, map.objects).plan.layout;
     const rank = GROUND_RANK.indexOf("volcanic");
-    expect(rank).toBe(GROUND_RANK.length - 1);
+    // Above every older ground; the desert sand (bead bzc.88) ranks after
+    // it but never meets it (a desert zone never borders a volcanic one).
+    expect(rank).toBe(GROUND_RANK.indexOf("sand") - 1);
     for (const i of volcanic) expect(layout.kind[i]).toBe(rank);
     // Where volcanic ground meets another, the border cells list both, the
     // volcanic last (it runs out over the other).
@@ -569,5 +585,61 @@ describe("snow ground in the terrain plan (bead bzc.87)", () => {
       }
     }
     expect(woods + rock).toBeGreaterThan(0);
+  });
+});
+
+describe("desert sand in the terrain plan (bead bzc.88)", () => {
+  // The first medium map that rolls a desert zone.
+  const map = [12, 3, 4, 5, 7, 8, 1, 2]
+    .map((seed) => generateMap(seed, { size: "M", players: 2 }))
+    .find((m) => m.cells.some((c) => c.terrain === "sand"))!;
+  const sand = map.cells
+    .map((c, i) => (c.terrain === "sand" ? i : -1))
+    .filter((i) => i >= 0);
+
+  it("ranks the sand last, so the older grounds keep their ranks", () => {
+    expect(sand.length).toBeGreaterThan(0);
+    const layout = planTerrain(map, map.objects).plan.layout;
+    const rank = GROUND_RANK.indexOf("sand");
+    expect(rank).toBe(GROUND_RANK.length - 1);
+    for (const i of sand) expect(layout.kind[i]).toBe(rank);
+    const border = sand.find((i) => (layout.ranks[i]?.length ?? 0) > 1);
+    expect(border).toBeDefined();
+    expect(layout.ranks[border!]?.at(-1)).toBe(rank);
+  });
+
+  it("grows the desert's own palms, cacti and sandstone peaks on sand", () => {
+    const plan = planTerrain(map, map.objects).plan;
+    // GROUNDS index of the sand family in canopy.ts and peaks.ts.
+    const desert = 6;
+    let woods = 0;
+    let rock = 0;
+    for (const i of sand) {
+      const cell = map.cells[i]!;
+      if (cell.obstacle === "forest") {
+        woods += 1;
+        expect(plan.canopyField.set[i]).toBe(desert);
+      }
+      if (cell.obstacle === "mountain" && plan.peakField.rock[i] === 1) {
+        rock += 1;
+        expect(plan.peakField.family[i]).toBe(desert);
+      }
+    }
+    expect(woods + rock).toBeGreaterThan(0);
+  });
+
+  it("updates a desert zone incrementally as a full rebuild would", () => {
+    let objects: MapObject[] = map.objects.filter((o) => o.kind !== "buried");
+    const update = planTerrain(map, objects);
+    const onSand = objects.find(
+      (o) =>
+        (o.kind === "pickup" || o.kind === "monster") &&
+        map.cells[o.y * map.width + o.x]?.terrain === "sand",
+    );
+    expect(onSand).toBeDefined();
+    objects = objects.filter((o) => o !== onSand);
+    const next = planTerrain(map, objects, update.plan);
+    expectSameAsFull(map, objects, next);
+    expect(next.dirty).not.toBeNull();
   });
 });

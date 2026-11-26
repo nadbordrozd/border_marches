@@ -83,6 +83,9 @@ const KIND_WEIGHTS: Readonly<
   // Snow (bead bzc.87): snowy stones and boulders and lone snowy trees; no
   // flowers, cracks or puddles on the snow.
   snow: { rock: 2, boulder: 0.8, tree: 1.6 },
+  // Desert sand (bead bzc.88): a few sandstone rocks, bones and lone palms
+  // or cacti; the decorations (tumbleweed, scarab, skull) are the detail.
+  sand: { rock: 1.6, boulder: 0.5, bones: 1, tree: 0.7 },
 };
 
 const FLAT: ReadonlySet<string> = new Set(["flowers", "puddle", "crack"]);
@@ -98,6 +101,8 @@ export const DOODAD_DENSITY: Readonly<Record<GroundTerrain, number>> = {
   volcanic: 0.7,
   // A quiet white field with a few things on it.
   snow: 0.9,
+  // Open dunes: sparse, so the ripples of the sand read.
+  sand: 0.6,
 };
 
 /** Share of each ground's doodads drawn from the code-drawn placeholders. */

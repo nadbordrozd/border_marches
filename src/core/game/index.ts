@@ -41,6 +41,8 @@ export {
   questText,
   siteGuard,
   siteOptions,
+  sphinxRiddle,
+  sphinxSkill,
   useSite,
   visitSite,
 } from "./sites.ts";

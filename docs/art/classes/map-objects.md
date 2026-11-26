@@ -61,6 +61,16 @@ Hunter's Lodge, Walrus Rookery; `ART_ROWS` name their takes as
 The per-type coverage, takes and verdicts are in
 `art/sets/map-objects/verdicts.json` (every take has a one-line reason).
 
+### Desert sites (bead bzc.88)
+
+Studio set `art/sets/desert-sites`, same recipe as above (the sawmill as
+style image, native size): the Pyramid on 200 x 144 (3x2), the Sphinx, the
+Sun Temple and the Sunken Tomb on 128 x 128 (2x2), one look each (the
+tomb's small and medium sizes share it). `ART_ROWS` names them by
+`desert-sites/<take>`. The first Pyramid recipe (`pyramid-a`, with jackal
+guardians and the word tomb) was refused by the provider's policy check
+and is recorded as `FAILED`.
+
 ## Geometry
 
 | Footprint | Generated on | Derived file | Seat |

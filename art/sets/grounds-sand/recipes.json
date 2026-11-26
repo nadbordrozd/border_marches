@@ -1,0 +1,68 @@
+{
+  "set": "grounds-sand",
+  "bead": "border_marches-bzc.88",
+  "class": "grounds",
+  "exploration": false,
+  "_doc": "Desert sand ground (bead bzc.88, docs/art/classes/grounds.md). Lessons of grounds-volcanic: no chibi style layer (it turns a field into a character), never the words texture or tile (pixen draws a paving grid), a long-period base from pixflux at 400 x 400 (5 cells). Recipes are never edited after generation: add a new id (new seed) instead. '@name' values come from shared.",
+  "shared": {
+    "flux": {
+      "shading": "flat shading"
+    },
+    "base": "Subject: a wide flat field of golden desert sand seen from directly above, filling the whole image edge to edge: warm golden sand #dcb46c with soft, long, gently curving wind ripples in slightly lighter #e8c684 and slightly darker #c99e5a stripes, the ripples wavy and broken, running in many slightly different directions, a few tiny scattered pebbles, very calm, quiet and low in contrast, the same everywhere.",
+    "dunes": "Subject: rolling golden desert dunes seen from straight above, filling the whole image edge to edge: smooth warm golden sand #dcb46c, broad soft lighter #e8c684 crests and slightly darker #c99e5a hollows, fine wavy wind ripples over them, a few tiny scattered pebbles, very calm and low in contrast, no single big dune, the same everywhere."
+  },
+  "defaults": {
+    "endpoint": "create-image-pixflux",
+    "fragments": [],
+    "noBackground": false,
+    "options": "@flux",
+    "negative": "tiles, tile grid, bricks, plates, slabs, paving, cobblestones, object, character, building, plant, cactus, rock, water, grass, frame, border, horizon, sky, perspective, text"
+  },
+  "recipes": [
+    {
+      "id": "base-a",
+      "concept": "SAND BASE (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 88101,
+      "subject": "@base"
+    },
+    {
+      "id": "base-b",
+      "concept": "SAND BASE (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 88102,
+      "subject": "@base"
+    },
+    {
+      "id": "dunes-a",
+      "concept": "SAND DUNES (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 88103,
+      "subject": "@dunes"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/grounds/sand.png",
+      "from": "dunes-a#0"
+    },
+    {
+      "path": "public/assets/terrain/grounds/sand-swatch.png",
+      "from": "dunes-a#0",
+      "width": 80,
+      "height": 80,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 160,
+          "y": 160,
+          "width": 80,
+          "height": 80
+        }
+      ]
+    }
+  ]
+}

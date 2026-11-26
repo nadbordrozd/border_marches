@@ -22,11 +22,13 @@ import {
   BANK_VALUE,
   ROOKERY_HIRE,
   ROOKERY_WEEKLY,
+  PYRAMID_VALUE,
   VAULT_VALUE,
   type BankSize,
   type ObjectTypeId,
   type Prize,
 } from "../../../data/objectTypes.ts";
+import { RIDDLES } from "../../../data/riddles.ts";
 import { SKILL_IDS, SKILLS } from "../../../data/skills.ts";
 import {
   CARETAKER_OF,
@@ -541,10 +543,104 @@ export function rollContents(type: ObjectTypeId, rng: Rng, tier: number): Data {
     }
     case "buried-keystone":
       return { buried: true, value: 30000 };
+    // Desert sites (bead bzc.88), placed by gen/desert.ts.
+    case "pyramid":
+    case "sunken-tomb":
+    case "sphinx":
+    case "sun-temple":
+      return desertContents(type, rng, tier);
     default:
       return {};
   }
   return {};
+}
+
+/**
+ * A guard of about `fv` fight value for a desert tomb (bead bzc.88): the
+ * Restless dead (undead faction creatures as neutral stacks) in fixed
+ * shares, each count nudged by up to 10%.
+ */
+function tombGuard(
+  rng: Rng,
+  fv: number,
+  shares: ReadonlyArray<readonly [CreatureId, number]>,
+): Array<{ creature: CreatureId; count: number }> {
+  return shares.map(([creature, share]) => {
+    const each = CREATURES[creature].fightValue;
+    const count = Math.max(
+      1,
+      Math.round(((fv * share) / each) * (1 + rng.float(-0.1, 0.1))),
+    );
+    return { creature, count };
+  });
+}
+
+/** Seeded contents of the desert sites (bead bzc.88). */
+function desertContents(type: ObjectTypeId, rng: Rng, tier: number): Data {
+  switch (type) {
+    case "pyramid": {
+      // A large bank's worth (about 15000): a Wonder, a tier 4 or 5 spell (a page if the
+      // hero can learn it, else a scroll) and gold, behind the dead.
+      const wonder = pickArtifact(rng, "wonder");
+      const spell = pickSpell(rng, rng.chance(0.5) ? 4 : 5);
+      return {
+        value: PYRAMID_VALUE,
+        guard: tombGuard(rng, PYRAMID_VALUE * BANK_GUARD_SHARE, [
+          ["vampire", 0.4],
+          ["banshee", 0.35],
+          ["ghoul", 0.25],
+        ]),
+        prize: {
+          ...(wonder !== undefined ? { artifacts: [wonder] } : {}),
+          ...(spell !== undefined ? { spell } : {}),
+          gold: 5000,
+          essence: 5,
+        },
+      };
+    }
+    case "sunken-tomb": {
+      // A small or medium bank (never large): grave goods.
+      const size: BankSize =
+        tier >= 2 || (tier === 1 && rng.chance(0.4)) ? "medium" : "small";
+      const value = BANK_VALUE[size];
+      const trinket = pickArtifact(rng, "trinket");
+      const scroll = pickSpell(rng, 3);
+      const goods = trinket === undefined ? [] : [trinket];
+      return {
+        size,
+        value,
+        guard: tombGuard(
+          rng,
+          value * BANK_GUARD_SHARE,
+          size === "small"
+            ? [
+                ["skeleton", 0.55],
+                ["ghoul", 0.45],
+              ]
+            : [
+                ["ghoul", 0.5],
+                ["banshee", 0.5],
+              ],
+        ),
+        prize:
+          size === "small"
+            ? { gold: 1000, artifacts: goods }
+            : {
+                gold: 2500,
+                artifacts: goods,
+                ...(scroll !== undefined ? { scrolls: [scroll] } : {}),
+                essence: 2,
+              },
+      };
+    }
+    case "sphinx": {
+      // A pool of three riddles (each hero hears one) and the gift.
+      const pool = rng.shuffle(RIDDLES.map((_, i) => i)).slice(0, 3);
+      return { riddles: pool, gift: rng.chance(0.5) ? "skill" : "xp" };
+    }
+    default:
+      return {};
+  }
 }
 
 /** "The strange thing near home" (concept section 3): its type and data. */

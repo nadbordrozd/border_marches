@@ -152,6 +152,8 @@ export function siteIcons(obj: MapObject): VisitIcon[] {
     case "thunderstruck-pylon-yard":
     case "landfall-wreck":
     case "frost-giants-barrow":
+    case "pyramid":
+    case "sunken-tomb":
       return prizeIcons(prizeOf(obj, "prize"));
     case "aurora-spire": {
       const skill = auroraSkill(obj);

@@ -40,10 +40,11 @@ const T: Readonly<Record<string, DecorationGround>> = {
   w: "wasteland",
   v: "volcanic",
   n: "snow",
+  d: "sand",
 };
 
 /**
- * [id, name, terrains (letters g j s b w v n), "p" passable or "x" prop, cols,
+ * [id, name, terrains (letters g j s b w v n d), "p" passable or "x" prop, cols,
  * looks, text].
  */
 // prettier-ignore
@@ -65,10 +66,10 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["crow", "Crow", "sgwv", "p", 1, 1, "A crow watching the road."],
   ["cart-wheel", "Cart Wheel", "sg", "p", 1, 1, "An old cart wheel left by the way."],
   ["cairn", "Cairn", "sb", "p", 1, 1, "A little stack of stones someone left."],
-  ["lizard", "Lizard", "bs", "p", 1, 1, "A lizard basking on the warm ground."],
+  ["lizard", "Lizard", "bsd", "p", 1, 1, "A lizard basking on the warm ground."],
   ["agave", "Agave", "bs", "p", 1, 1, "A spiky agave, thirsty and tough."],
   ["pot-shards", "Broken Pot", "b", "p", 1, 1, "A clay pot, long broken and long empty."],
-  ["scorpion", "Scorpion", "bwv", "p", 1, 1, "A small scorpion with its tail up."],
+  ["scorpion", "Scorpion", "bwvd", "p", 1, 1, "A small scorpion with its tail up."],
   ["grave-marker", "Grave Marker", "w", "p", 1, 1, "A crooked plank over a forgotten grave."],
   ["dead-weeds", "Dead Weeds", "wv", "p", 1, 1, "Burnt, thorny weeds."],
   ["toadstools", "Toadstools", "wj", "p", 1, 1, "Pale toadstools nobody should eat."],
@@ -82,6 +83,18 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["snow-tufts", "Snow Tufts", "n", "p", 1, 2, "Dry grass poking up through the snow."],
   ["paw-prints", "Paw Prints", "n", "p", 1, 2, "Fresh tracks: something passed this way."],
   ["ice-crystals", "Ice Crystals", "n", "p", 1, 2, "Blue crystals of ice grown out of the frost."],
+  // The desert (bead bzc.88, set desert-decorations): sand only.
+  ["desert-tumbleweed", "Tumbleweed", "d", "p", 1, 2, "A tumbleweed, going wherever the wind goes."],
+  ["scarab", "Scarab", "d", "p", 1, 2, "A scarab rolling its precious ball across the sand."],
+  ["dry-grass", "Dry Grass", "d", "p", 1, 2, "A tuft of grass that has not seen rain for months."],
+  ["desert-flower", "Desert Flower", "d", "p", 1, 2, "Pink flowers, out after the one rain of the year."],
+  ["barrel-cactus", "Barrel Cactus", "d", "p", 1, 2, "A small round cactus wearing a yellow flower."],
+  ["ox-skull", "Ox Skull", "d", "p", 1, 2, "A bleached ox skull: the desert keeps no secrets."],
+  ["sand-snake", "Sand Snake", "d", "p", 1, 2, "A coiled sand snake, warming itself."],
+  ["pear-pads", "Prickly Pear", "d", "p", 1, 2, "Two prickly pear pads with a fruit nobody dares pick."],
+  ["bone-heap", "Old Bones", "d", "p", 1, 2, "Bones of a camel that did not make it."],
+  ["dry-shrub", "Dry Shrub", "d", "p", 1, 2, "A grey thorny shrub, more twig than leaf."],
+  ["fennec", "Fennec", "d", "p", 1, 2, "A fennec fox asleep in the shade of its own ears."],
   // Impassable props: they block the way.
   ["big-boulder", "Big Boulder", "gsj", "x", 1, 1, "A mossy boulder too big to climb."],
   ["stump-cluster", "Stumps", "gs", "x", 1, 1, "Three thick stumps of a cleared wood."],
@@ -93,13 +106,18 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["termite-mound", "Termite Mound", "sb", "x", 1, 1, "A tall mound full of busy termites."],
   ["ruined-pillars", "Ruined Pillars", "gsb", "x", 1, 1, "Broken columns of a forgotten temple."],
   ["stone-head", "Stone Head", "j", "x", 1, 1, "The mossy head of an ancient statue."],
-  ["beast-skull", "Beast Skull", "wsbv", "x", 1, 1, "The skull of something very big."],
+  ["beast-skull", "Beast Skull", "wsbvd", "x", 1, 1, "The skull of something very big."],
   ["basalt-spikes", "Basalt Spikes", "wbv", "x", 1, 1, "Black rock spikes, sharp as knives."],
-  ["saguaro", "Saguaro", "b", "x", 1, 1, "A tall cactus waving at nobody."],
+  ["saguaro", "Saguaro", "bd", "x", 1, 1, "A tall cactus waving at nobody."],
+  ["sandstone-boulder", "Sandstone Boulder", "d", "x", 1, 2, "A boulder the wind has been carving for ages."],
+  ["broken-column", "Broken Column", "d", "x", 1, 2, "A column of a temple the sand swallowed."],
+  ["buried-head", "Buried Head", "d", "x", 1, 2, "The head of a great statue, sunk to its chin in sand."],
+  ["fallen-pillar", "Fallen Pillar", "d", "x", 2, 1, "A great pillar that fell and broke where it lay."],
+  ["temple-ruin", "Temple Ruin", "d", "x", 2, 1, "A sandstone wall and a doorway to nowhere."],
   ["hollow-stump", "Hollow Stump", "jw", "x", 1, 1, "The hollow stump of a giant tree."],
   ["fallen-log", "Fallen Log", "gjw", "x", 2, 2, "A huge fallen trunk across the way."],
   ["toppled-statue", "Toppled Statue", "gj", "x", 2, 2, "A stone king, fallen and broken."],
-  ["beast-skeleton", "Beast Skeleton", "bswv", "x", 2, 1, "The bones of a giant beast."],
+  ["beast-skeleton", "Beast Skeleton", "bswvd", "x", 2, 1, "The bones of a giant beast."],
   ["ruined-wall", "Ruined Wall", "jg", "x", 2, 1, "A stretch of ancient wall under creepers."],
   ["broken-catapult", "Broken Catapult", "wg", "x", 2, 1, "A siege engine abandoned after a battle."],
   // Winter props (bead bzc.87): snow only.

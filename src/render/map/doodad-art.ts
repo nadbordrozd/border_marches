@@ -103,6 +103,17 @@ const PALETTE: Readonly<
     ],
     water: [160, 196, 220],
   },
+  // Desert sand (bead bzc.88): golden sandstone rocks, dry olive scrub.
+  sand: {
+    rock: [196, 150, 92],
+    bush: [130, 130, 70],
+    petals: [
+      [236, 120, 160],
+      [250, 220, 120],
+      [250, 246, 220],
+    ],
+    water: [110, 150, 160],
+  },
 };
 
 const OUTLINE: Rgb = [28, 24, 22];

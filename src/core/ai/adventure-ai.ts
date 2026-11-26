@@ -1234,6 +1234,9 @@ export class AdventureAi implements PlayerController {
             : undefined;
           v = prize === undefined ? 1 : 1 + prizeValue(prize as never);
         } else if (verb === "lift") v = 300;
+        // A sphinx's riddle (bead bzc.88): the AI guesses, by the day.
+        else if (verb === "answer")
+          v = 300 + ((Number(arg) + state.day) % options.length);
         else if (verb === "drill") {
           // A Drill (bead bzc.32) for the army's creatures, when the
           // treasury keeps a week of recruiting after it.

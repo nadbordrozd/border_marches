@@ -71,6 +71,22 @@ function placeBiome(
   return picked;
 }
 
+/**
+ * Desert zones (bead border_marches-bzc.88): the same as volcanic and winter
+ * zones ({@link placeVolcanic}, {@link placeWinter}), from a random stream
+ * of their own and after them, so a map that rolls no desert is the map it
+ * was before sand existed. A desert zone's main terrain is sand dunes with
+ * badlands or steppe patches; it is never a volcanic or winter zone nor
+ * next to one (sand beside lava or snow reads as a mistake). The desert's
+ * sites follow it (gen/desert.ts). Returns the desert zone ids.
+ */
+export function placeDesert(st: GenState): number[] {
+  const avoid = st.zones
+    .filter((z) => z.main === "volcanic" || z.main === "snow")
+    .map((z) => z.id);
+  return placeBiome(st, "sand", st.cfg.terrain.desert, avoid, "desert-zones");
+}
+
 /** Whether zone `z` shares a border with any of the zones `ids`. */
 function touches(st: GenState, z: ZoneInfo, ids: readonly number[]): boolean {
   if (ids.length === 0) return false;

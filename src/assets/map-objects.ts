@@ -96,6 +96,11 @@ export const MAP_OBJECT_TYPE_IDS = [
   "aurora-spire",
   "hunters-lodge",
   "walrus-rookery",
+  // 3.12 Desert sites (bead bzc.88, set desert-sites)
+  "pyramid",
+  "sphinx",
+  "sun-temple",
+  "sunken-tomb",
 ] as const;
 
 export type MapObjectTypeId = (typeof MAP_OBJECT_TYPE_IDS)[number];
@@ -193,6 +198,10 @@ const TYPE_ROWS: readonly (readonly [
   ["aurora-spire", "Aurora Spire", 1, 1, ""],
   ["hunters-lodge", "Hunter's Lodge", 2, 2, ""],
   ["walrus-rookery", "Walrus Rookery", 2, 2, ""],
+  ["pyramid", "Pyramid", 3, 2, ""],
+  ["sphinx", "Sphinx", 2, 2, ""],
+  ["sun-temple", "Sun Temple", 2, 2, ""],
+  ["sunken-tomb", "Sunken Tomb", 2, 2, ""],
 ];
 
 export const MAP_OBJECT_TYPES: readonly MapObjectType[] = TYPE_ROWS.map(
@@ -375,6 +384,11 @@ const ART_ROWS: readonly (readonly [
   ["aurora-spire", "", 40, 64, "@winter-objects/spire-a#0"],
   ["hunters-lodge", "", 109, 93, "@winter-objects/lodge-a#2"],
   ["walrus-rookery", "", 116, 78, "@winter-objects/rookery-a#1"],
+  // Desert sites (bead bzc.88, set desert-sites).
+  ["pyramid", "", 172, 118, "@desert-sites/pyramid-b#0"],
+  ["sphinx", "", 107, 98, "@desert-sites/sphinx-a#3"],
+  ["sun-temple", "", 102, 113, "@desert-sites/sun-temple-a#1"],
+  ["sunken-tomb", "", 120, 108, "@desert-sites/tomb-a#2"],
 ];
 
 export const MAP_OBJECT_ASSETS: readonly MapObjectAsset[] = ART_ROWS.map(

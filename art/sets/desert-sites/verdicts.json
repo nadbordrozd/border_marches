@@ -1,0 +1,67 @@
+{
+  "sphinx-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "front-facing stone sphinx, striped headdress, riddle tablet with a question mark between its paws; reads at 1x",
+    "at": "2026-11-26T14:21:43.525Z"
+  },
+  "sphinx-a#0": {
+    "verdict": "REJECTED",
+    "notes": "turned three-quarter, its face less readable than #3",
+    "at": "2026-11-26T14:21:43.573Z"
+  },
+  "sphinx-a#1": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of #3, a less clear tablet",
+    "at": "2026-11-26T14:21:43.620Z"
+  },
+  "sphinx-a#2": {
+    "verdict": "REJECTED",
+    "notes": "turned three-quarter, the tablet too small to read",
+    "at": "2026-11-26T14:21:43.669Z"
+  },
+  "sun-temple-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "sandstone shrine under a big rayed golden sun disc, lit braziers: the sun reads at 1x",
+    "at": "2026-11-26T14:23:07.549Z"
+  },
+  "sun-temple-a#0": {
+    "verdict": "REJECTED",
+    "notes": "sun disc smaller and flatter than #1",
+    "at": "2026-11-26T14:23:07.603Z"
+  },
+  "sun-temple-a#2": {
+    "verdict": "REJECTED",
+    "notes": "a plain disc without rays reads as a coin; smoke wisps",
+    "at": "2026-11-26T14:23:07.651Z"
+  },
+  "sun-temple-a#3": {
+    "verdict": "REJECTED",
+    "notes": "busier, red trim; weaker than #1",
+    "at": "2026-11-26T14:23:07.699Z"
+  },
+  "tomb-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "sand mound with a scarab-carved lintel over a dark doorway, steps down, broken urn and bones: a half-buried tomb at 1x",
+    "at": "2026-11-26T14:24:30.108Z"
+  },
+  "tomb-a#0": {
+    "verdict": "REJECTED",
+    "notes": "cut-off sand mound, reads as a slab under it",
+    "at": "2026-11-26T14:24:30.155Z"
+  },
+  "tomb-a#1": {
+    "verdict": "REJECTED",
+    "notes": "busy, the cloth dominates; weaker than #2",
+    "at": "2026-11-26T14:24:30.202Z"
+  },
+  "tomb-a#3": {
+    "verdict": "REJECTED",
+    "notes": "lintel and doorway too small, the cloth too big",
+    "at": "2026-11-26T14:24:30.251Z"
+  },
+  "pyramid-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "stepped golden pyramid with a gold capstone, a dark door up the steps between lion statues: reads as the great treasure at 1x",
+    "at": "2026-11-26T14:26:14.366Z"
+  }
+}

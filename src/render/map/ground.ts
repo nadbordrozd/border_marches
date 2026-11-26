@@ -173,6 +173,10 @@ export interface GroundSources {
  * darkest, whose cracked rock runs out over every other ground. The snow
  * of bead bzc.87 sits just before it: it drifts out over every ground but
  * the volcanic (the two never meet: winter zones keep off volcanic ones).
+ * darkest, whose cracked rock runs out over every other ground; then the
+ * desert sand (bead bzc.88), last so that the ranks (and the spill shapes)
+ * of every older ground stay as they were: its drifting sand runs out over
+ * the grounds round it.
  */
 export const GROUND_RANK: readonly GroundTerrain[] = [
   "grass",
@@ -182,6 +186,7 @@ export const GROUND_RANK: readonly GroundTerrain[] = [
   "wasteland",
   "snow",
   "volcanic",
+  "sand",
 ];
 
 const WATER = GROUND_RANK.length;
@@ -454,6 +459,7 @@ const FOREST_SHADE: Readonly<
   wasteland: [34, 30, 28],
   volcanic: [26, 20, 20],
   snow: [60, 78, 96],
+  sand: [120, 88, 44],
 };
 
 /**

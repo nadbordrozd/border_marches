@@ -48,6 +48,8 @@ export const TERRAIN_COLOURS: Readonly<Record<Terrain, Rgb>> = {
   volcanic: [0x4a, 0x30, 0x2a],
   // Blue-white, apart from the pale steppe.
   snow: [0xd8, 0xe2, 0xee],
+  // Golden dune sand, lighter and yellower than the steppe (bead bzc.88).
+  sand: [0xe0, 0xb8, 0x62],
   water: [0x2d, 0x5f, 0x9a],
 };
 const DEEP_WATER: Rgb = [0x1d, 0x3f, 0x72];

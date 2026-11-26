@@ -91,6 +91,11 @@ export const OBJECT_TYPE_IDS = [
   "aurora-spire",
   "hunters-lodge",
   "walrus-rookery",
+  // 3.12 Desert sites (bead bzc.88): placed only in desert zones
+  "pyramid",
+  "sphinx",
+  "sun-temple",
+  "sunken-tomb",
 ] as const;
 
 export type ObjectTypeId = (typeof OBJECT_TYPE_IDS)[number];
@@ -170,6 +175,7 @@ const S: Terrain = "steppe";
 const B: Terrain = "badlands";
 const W: Terrain = "wasteland";
 const SN: Terrain = "snow";
+const D: Terrain = "sand";
 
 // Flags: "s" stretch, "v" vanishes when used.
 const ROWS: readonly Row[] = [
@@ -218,7 +224,7 @@ const ROWS: readonly Row[] = [
   // prettier-ignore
   ["wishing-well", "Wishing Well", "site", 1, 1, "", "each-visit", 300, [], 5, "+1 Luck until the end of the hero's next battle. Visiting again adds no more."],
   // prettier-ignore
-  ["oasis", "Oasis", "site", 2, 2, "", "per-day", 500, [W, B, S], 3, "+1 Morale until the end of the hero's next battle, and 400 more movement points today."],
+  ["oasis", "Oasis", "site", 2, 2, "", "per-day", 500, [D, W, B, S], 3, "+1 Morale until the end of the hero's next battle, and 400 more movement points today."],
   // prettier-ignore
   ["school-temple", "School Temple", "site", 2, 2, "", "each-visit", 500, [], 4, "The hero casts pages of its school at +2 Power until the end of its next battle. Visiting again adds no more."],
   // prettier-ignore
@@ -307,6 +313,16 @@ const ROWS: readonly Row[] = [
   ["hunters-lodge", "Hunter's Lodge", "site", 2, 2, "", "per-week-hero", 1000, [SN], 0, "Snowshoes: snow costs the hero no more than grass until its next battle ends; and the hunters guide it: +300 movement today."],
   // prettier-ignore
   ["walrus-rookery", "Walrus Rookery", "dwelling", 2, 2, "", "flag", 4500, [SN], 0, "Enter it to claim it; then your heroes can hire Rime Walruses here, 2 a week at 1300 gold each. Rime Walruses keep watch beside it."],
+  // 3.12 Desert sites (bead bzc.88): weight 0, placed by the desert rule
+  // (gen/desert.ts) in the desert zones only.
+  // prettier-ignore
+  ["pyramid", "Pyramid", "bank", 3, 2, "", "one-time", 15000, [D], 0, "The Restless dead guard its burial chamber; win the battle to take the pharaoh's treasure: a Wonder, a great spell and gold. One to a map."],
+  // prettier-ignore
+  ["sphinx", "Sphinx", "site", 2, 2, "", "per-hero", 3000, [D], 0, "Answer the sphinx's riddle. Right: a rank in one of the hero's skills (or 2500 experience). Wrong: the hero loses the rest of today's movement. Each hero gets one try."],
+  // prettier-ignore
+  ["sun-temple", "Sun Temple", "site", 2, 2, "", "each-visit", 600, [D], 0, "+2 Attack until the end of the hero's next battle. Visiting again adds no more."],
+  // prettier-ignore
+  ["sunken-tomb", "Sunken Tomb", "bank", 2, 2, "", "one-time", 2500, [D], 0, "Restless dead guard it; win the battle to take the grave goods."],
 ];
 
 export const OBJECT_TYPES: Readonly<Record<ObjectTypeId, ObjectTypeDef>> =
@@ -370,6 +386,15 @@ export const ROOKERY_HIRE = 1300;
 /** A drill yard sells a Drill for this many times its town gold cost (ECONOMY 6.3). */
 export const DRILL_YARD_MARKUP = 2;
 
+/** The Pyramid's value (a large bank's); its guard is 60% of it. */
+export const PYRAMID_VALUE = 15000;
+
+/** Experience of a sphinx's riddle answered right (no skill to raise). */
+export const SPHINX_XP = 2500;
+
+/** Attack of a Sun Temple's blessing, until the next battle ends. */
+export const SUN_TEMPLE_ATTACK = 2;
+
 /** Heroes a player may hold (a prison's hero needs a free place). */
 export const MAX_HEROES = 8;
 
@@ -424,6 +449,7 @@ export function siteBuffEffect(buff: string): {
   power?: number;
   /** Cheaper steps on one terrain (a Hunter's Lodge's snowshoes). */
   terrain?: { terrain: Terrain; reduce: number };
+  attack?: number;
 } {
   if (buff.startsWith("school-temple:")) {
     return {
@@ -446,6 +472,8 @@ export function siteBuffEffect(buff: string): {
         label: "Snowshoes",
         terrain: { terrain: "snow", reduce: SNOWSHOES_REDUCE },
       };
+    case "sun-temple":
+      return { label: "Sun Temple", attack: SUN_TEMPLE_ATTACK };
     default:
       return { label: buff };
   }

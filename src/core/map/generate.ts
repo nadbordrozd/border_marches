@@ -16,6 +16,7 @@
  * 4. terrain  main terrain per zone with secondary patches; on some maps a
  *             wild zone turns volcanic, and on some one turns
  *             to snow (gen/terrain.ts)
+ *             wild zone turns volcanic, on some a sand desert (gen/terrain.ts)
  * 5. borders  mountain ranges and forest belts along zone borders, a frame
  *             along the map edge, spurs, and passes (gen/borders.ts)
  * 6. rooms    walls of forest and rock inside each zone with unguarded gaps:
@@ -52,6 +53,7 @@ import type { Connection, GapInfo, PassInfo, ZoneInfo } from "./gen/state.ts";
 import {
   mergeSmallRegions,
   paintTerrain,
+  placeDesert,
   placeVolcanic,
   placeWinter,
 } from "./gen/terrain.ts";
@@ -102,6 +104,8 @@ export interface GenerateInfo {
   skipped: string[];
   /** Optional requests (fill, pocket prizes, rules) that found no site. */
   unplaced: number;
+  /** Row-major zone id of every cell (bead bzc.88: tests of placement). */
+  zoneOf: Int32Array;
 }
 
 /** Row-major cells of every pass and gap corridor (kept clear of props). */
@@ -154,6 +158,7 @@ export function generateMapWithInfo(
   placeTowns(st);
   placeVolcanic(st);
   placeWinter(st);
+  placeDesert(st);
   lap("zones+towns");
   placeWater(st);
   paintTerrain(st);
@@ -233,6 +238,7 @@ export function generateMapWithInfo(
       gaps: st.gaps,
       skipped: report.skipped,
       unplaced: report.unplaced,
+      zoneOf: st.zone,
     },
   };
 }

@@ -94,6 +94,23 @@ decorations (`DECORATE.snowExtraShare`, its own random stream). The frozen
 shrubs and straw tufts keep a thin snow-coloured base: on the snow ground
 it reads as a little drift, so they were accepted.
 
+### The desert (bead bzc.88)
+
+Studio set `art/sets/desert-decorations` (same recipes and crops as above),
+sand only, two looks each: passable `desert-tumbleweed` (Tumbleweed),
+`scarab`, `dry-grass`, `desert-flower`, `barrel-cactus`, `ox-skull`,
+`sand-snake`, `pear-pads` (Prickly Pear), `bone-heap` (Old Bones),
+`dry-shrub` and `fennec`; props `sandstone-boulder`, `broken-column` and
+`buried-head` (1x1), `fallen-pillar` and `temple-ruin` (2x1). The lizard,
+scorpion, saguaro, beast skull and beast skeleton also stand on sand. The
+tumbleweed and the skull share a subject with steppe doodads, so the sand
+draws no imported doodads (its art family has none): the two never meet. Living ones
+move (`LIVING_MOTION`): the tumbleweed rolls a few pixels to and fro, the
+scarab creeps, the fennec breathes, the snake flicks. The sand gets a
+second, sand-only pass of single passable pieces (`DECORATE.sandBias`).
+Three recipes (`small-a`, `props-2x1-a`, `props-2x1-b`) were refused by the
+provider's policy check (no candidates); they are recorded as `FAILED`.
+
 They are new subjects, not repeats of the older doodads (bushes, flower
 patches, stones, mushroom pairs, ferns, palms, small logs, tumbleweed, the
 cattle skull, cacti, rocks, the small crater, stumps, bones, ash, twigs):

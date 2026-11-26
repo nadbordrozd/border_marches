@@ -125,6 +125,8 @@ export function siteCue(
     case "landfall-wreck":
     case "keepers-vault":
     case "frost-giants-barrow":
+    case "pyramid":
+    case "sunken-tomb":
       return "site.treasure";
     case "prison":
       return "site.quest";

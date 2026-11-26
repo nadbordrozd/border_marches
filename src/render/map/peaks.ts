@@ -96,6 +96,7 @@ export const PEAK_SPACING: Readonly<Record<GroundTerrain, number>> = {
   wasteland: 1.16,
   volcanic: 1.16,
   snow: 0.95,
+  sand: 1.04,
 };
 
 /** Per-cell facts of the ranges, computed once per map. */
@@ -125,6 +126,7 @@ const GROUNDS: readonly GroundTerrain[] = [
   "badlands",
   "wasteland",
   "snow",
+  "sand",
 ];
 
 const NEIGHBOURS = [
@@ -971,6 +973,7 @@ export const PEAK_UNDER: Readonly<
   wasteland: [58, 54, 60],
   volcanic: [58, 54, 60],
   snow: [110, 118, 132],
+  sand: [154, 108, 60],
 };
 
 /**

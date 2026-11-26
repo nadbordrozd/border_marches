@@ -234,7 +234,7 @@ export function crackOverlay(
 
 /** How a living decoration moves. */
 export type LivingMotion =
-  "flap" | "hover" | "hop" | "breathe" | "creep" | "twitch";
+  "flap" | "hover" | "hop" | "breathe" | "creep" | "twitch" | "roll";
 
 /**
  * The living decorations (src/data/decorations.ts) and their idle. A flap
@@ -255,6 +255,12 @@ export const LIVING_MOTION: Readonly<Record<string, LivingMotion>> = {
   "arctic-hare": "twitch",
   "snowy-owl": "hop",
   fox: "breathe",
+  // The desert (bead bzc.88): a tumbleweed rolls to and fro in the wind,
+  // a scarab pushes its ball along, a fennec sleeps, a snake flicks.
+  "desert-tumbleweed": "roll",
+  scarab: "creep",
+  fennec: "breathe",
+  "sand-snake": "twitch",
 };
 
 /** The pose of a living decoration (or one of its parts) at a moment. */
@@ -314,6 +320,16 @@ export function livingPose(
     case "twitch": {
       const k = (t / 4300 + p) % 1;
       return { dx: k < 0.07 ? 1 : 0, dy: 0, frame: 0 };
+    }
+    case "roll": {
+      // Blown three pixels each way over five seconds, with a little bump
+      // on the way (bead bzc.88: the tumbleweed).
+      const k = (t / 5200 + p) % 1;
+      return {
+        dx: Math.round(3 * wave(t, 5200, p)),
+        dy: k % 0.25 < 0.04 ? -1 : 0,
+        frame: 0,
+      };
     }
   }
 }

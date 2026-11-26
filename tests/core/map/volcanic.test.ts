@@ -62,8 +62,14 @@ describe("volcanic ground data", () => {
   });
 });
 
+const NO_DESERT = {
+  ...DEFAULT_GEN_CONFIG.terrain.desert,
+  chance: { S: 0, M: 0, L: 0 },
+};
+
 const NONE = {
   terrain: {
+    desert: NO_DESERT,
     volcanic: {
       ...DEFAULT_GEN_CONFIG.terrain.volcanic,
       chance: { S: 0, M: 0, L: 0 },
@@ -110,7 +116,13 @@ describe("volcanic zones in the generator", () => {
 
   it("draws from its own stream: the other zones keep their terrains", () => {
     const [seed, size, players] = runs[0]!;
-    const withLava = generateMapWithInfo(seed, { size, players }).info;
+    // Both without the desert (bead bzc.88), which picks among the zones
+    // the lava leaves.
+    const withLava = generateMapWithInfo(seed, {
+      size,
+      players,
+      config: { terrain: { desert: NO_DESERT } },
+    }).info;
     const without = generateMapWithInfo(seed, {
       size,
       players,

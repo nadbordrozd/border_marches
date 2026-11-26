@@ -1,0 +1,503 @@
+{
+  "low-a": {
+    "id": "low-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "43af3c44-3f99-492e-8ad8-0a28daeb6bbc",
+    "submittedAt": "2026-11-26T13:57:40.286Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one low wind-carved sandstone rock, each image a different one of these: a small flat-topped mesa with level stripes, a rounded wind-smoothed rock with a hollow, a pair of stubby rock fingers. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa. Fills the image width and about two thirds of its height."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 44
+      },
+      "no_background": true,
+      "seed": 88301,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one low wind-carved sandstone rock, each image a different one of these: a small flat-topped mesa with level stripes, a rounded wind-smoothed rock with a hollow, a pair of stubby rock fingers. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa. Fills the image width and about two thirds of its height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, red rock, snow, trees, cactus, buildings."
+    },
+    "at": "2026-11-26T13:59:02.443Z",
+    "usageUsd": 0.08193725225660536,
+    "candidates": [
+      {
+        "file": "low-a-0.png",
+        "sha256": "7517fad58e5f512fccd344c209c0fdfafd7eee9bcffc68bcf9e22f52c2c9b1dc",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-1.png",
+        "sha256": "d5de29d51cdef557322fecd91b8c43b2195ec72439d4913940c606a870024ca5",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-2.png",
+        "sha256": "a3421f37e2bd96cc27ff30293e738df8b6a4e576230def0f046c26c35df8f421",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-3.png",
+        "sha256": "fcf8c9c002822042b524768f09948387d9d366790d36777c1134823eee4494d3",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-4.png",
+        "sha256": "8d9f52aca2e60a1c6fb92cec10b12fff5d019e1a58a1a76b4580db966ac0e5f1",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-5.png",
+        "sha256": "7beb972abfc10a1e539b7437739d6da8cbb318d1f520a0455d0758285414f219",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-6.png",
+        "sha256": "dc7c3c6d42e19c9e310efc9eb386f14e5ebf9b6fc6cb0747743ad261f13f160d",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-7.png",
+        "sha256": "a7033244bf57e06a603a3260837d73e53877c727c137bb4e92e1c826bd7da297",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-8.png",
+        "sha256": "cf316f24d3bd40e4da18046dc50842cb087350a5050df9432c89aa54f27a672b",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-9.png",
+        "sha256": "76cfee0e0125a484239bde3001100222d4aebe26c4d07ef885eb48bcb3a6e843",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-10.png",
+        "sha256": "bb7bd2c4d046219bc8c2cd10da29fb3500649ccd7c1afa758a47623e3b5558d1",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-11.png",
+        "sha256": "01ea567314d83fcaea4b684b5b4aaeed94ab5671c10993f1314ee58430c764e4",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-12.png",
+        "sha256": "5e8b2f94ec135fda56587d66158c65f91d08996a4c2b3150d225665b0adc74cf",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-13.png",
+        "sha256": "12a4997358b71a5fbad7099d2102e80071ad54015e7dea6ba46379a9f0241b57",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-14.png",
+        "sha256": "af51550769b5398806ffa345313865a4e25c3554aebec09827e8c01540e8e799",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-15.png",
+        "sha256": "39358098a864ac4a76f818bd592a4ee302cdb83eb9a2cb12aa38f816ad52a025",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-16.png",
+        "sha256": "5decbcc526da8abb22a34a3015cd198faa638619eef5b09c0fabfd197e677c50",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-17.png",
+        "sha256": "5f37b24bd0b842656391a427e7962d270e3623ad0ec60c3e19edaa4dc8f28653",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-18.png",
+        "sha256": "f2eb11fac37eec3816ad5d907ad2d05fc4a5547f5cbabe6b35cf6a18a50b44c6",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-19.png",
+        "sha256": "f0f8abc40a8e5c21ec47c4d9ad874c7dc88aa974b2b82c56e6ce51a3f97add0b",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-20.png",
+        "sha256": "495654b215c58c29ff70a3c8d75d891b507b5150247583edeb1870e23c0c70af",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-21.png",
+        "sha256": "8ef3264906c0bfa931e4f54be0643d4ccf178aac919e8bd8045b4f0865dc2b15",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-22.png",
+        "sha256": "38f5f16ecaa0c16f9828a73ff9e3da8e19b6fadc184d01c4f5763c85de3aae68",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-23.png",
+        "sha256": "076e95e6a204a3cd9ded33c2fef416c4765b76c9aa6ba80f065aae8c921ee86c",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-24.png",
+        "sha256": "51898857b6c6a7cf9b96cfe781acf3e8fa8af2211f653fd1afda7491d79ccd33",
+        "width": 56,
+        "height": 44
+      }
+    ]
+  },
+  "mid-a": {
+    "id": "mid-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "a2d14e1d-aff1-4afc-be4c-94a79d0fcb47",
+    "submittedAt": "2026-11-26T13:59:02.541Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one golden sandstone rock formation, each image a different one of these: a flat-topped mesa with steep fluted cliffs, a tall narrow rock spire with a wider cap, a cluster of two wind-carved rock needles. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa. Nearly the full image wide, three quarters of its height."
+        }
+      ],
+      "image_size": {
+        "width": 80,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 88302,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one golden sandstone rock formation, each image a different one of these: a flat-topped mesa with steep fluted cliffs, a tall narrow rock spire with a wider cap, a cluster of two wind-carved rock needles. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa. Nearly the full image wide, three quarters of its height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, red rock, snow, trees, cactus, buildings."
+    },
+    "at": "2026-11-26T14:01:42.083Z",
+    "usageUsd": 0.11754615693622165,
+    "candidates": [
+      {
+        "file": "mid-a-0.png",
+        "sha256": "7a7e3ccc55f914608b21c9542e2053d01d7e49d7bf09f099fadd0bb22eb54c2d",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-1.png",
+        "sha256": "7616e551d4f2f57e25b63aa11af96e71900821e5127ecf5b60259e6ad9809094",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-2.png",
+        "sha256": "783bbb2a11ef0f59473560ff738124aa07d7d011c51068b6aeaaca665b2a16a2",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-3.png",
+        "sha256": "9d83c44fb37b87944e6214de66ab3cb52115dff298817e14e8f24185bb0b4afb",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-4.png",
+        "sha256": "dd95753137c101a8f669b4f26a1d0087f6ad4cf1e972b2cf6194833605f80c22",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-5.png",
+        "sha256": "6d92b542bd5b06bef7605a89d78a77ca947dde9199d1b24bad64c9ae884c46b4",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-6.png",
+        "sha256": "7245ea6964d93483f1e69c0069380b27bcc5d69d4ed4ae6ba449cfc3339e4a16",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-7.png",
+        "sha256": "d31e639d4326fa68b02c4dfbb9e7ca9edc688cc6590be230ff2f510e31c9122c",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-8.png",
+        "sha256": "946fd245be26e98e3cc37a1384f113425d6b42ce603608b36d36a4681f503747",
+        "width": 80,
+        "height": 64
+      }
+    ]
+  },
+  "big-a": {
+    "id": "big-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "0e6e55e2-79f3-4d38-b9f3-19ab242a9b35",
+    "submittedAt": "2026-11-26T14:01:42.213Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big golden sandstone formation, each image a different one of these: a wide flat-topped mesa with fluted cliffs and level strata, a group of three tall rock spires on one base, a broad terraced mesa with a sloping sand skirt. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa. Fills nearly the full image."
+        }
+      ],
+      "image_size": {
+        "width": 120,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 88303,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one big golden sandstone formation, each image a different one of these: a wide flat-topped mesa with fluted cliffs and level strata, a group of three tall rock spires on one base, a broad terraced mesa with a sloping sand skirt. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa. Fills nearly the full image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, red rock, snow, trees, cactus, buildings."
+    },
+    "at": "2026-11-26T14:03:14.404Z",
+    "usageUsd": 0.08121714933713277,
+    "candidates": [
+      {
+        "file": "big-a-0.png",
+        "sha256": "07f4968b8db011021041416f70306ed080ba5ca8c93be9e113e3e4e37db4a016",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-a-1.png",
+        "sha256": "396bc1f2fdd9f0ccf710b894c5a0fcc200b3741b65141d235f959bf85834a237",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-a-2.png",
+        "sha256": "18b524044d881b7aa20c2e738b41d6a73842fe558b9c72473b9297c74fab0e6d",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-a-3.png",
+        "sha256": "0595173db1e78cac743ae899ce057cdad7be54c647e92b6c437cd58c3a694310",
+        "width": 120,
+        "height": 88
+      }
+    ]
+  },
+  "big-b": {
+    "id": "big-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "af2d04eb-efc0-401c-96bd-0ee7f764c8cc",
+    "submittedAt": "2026-11-26T14:10:48.963Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big golden sandstone formation, each image a different one of these: a long flat-topped mesa with fluted cliffs, two joined table rocks , a tall butte on a wide stepped base, a broad rock with three tall needles on its back. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa. Fills nearly the full image."
+        }
+      ],
+      "image_size": {
+        "width": 120,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 88305,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one big golden sandstone formation, each image a different one of these: a long flat-topped mesa with fluted cliffs, two joined table rocks , a tall butte on a wide stepped base, a broad rock with three tall needles on its back. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa. Fills nearly the full image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, red rock, snow, trees, cactus, buildings."
+    },
+    "at": "2026-11-26T14:12:26.662Z",
+    "usageUsd": 0.08185317047437032,
+    "candidates": [
+      {
+        "file": "big-b-0.png",
+        "sha256": "24de6998d41582cb93e98970073abb24c963434a0e21e78324504c8e2d5101a5",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-b-1.png",
+        "sha256": "e52f439a11b121ba3b898e95c1d08933c905a1476f3ddc157f2aa5764636bc6f",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-b-2.png",
+        "sha256": "943e324680f0efd72b2424136da0ff52069d1f8100b377d08bb07b6ee1f601d8",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-b-3.png",
+        "sha256": "e8cf3b664b99ca78fac5b2b12e54da9c33df81a8ae20f663a5e2af2796c71ce5",
+        "width": 120,
+        "height": 88
+      }
+    ]
+  },
+  "mid-b": {
+    "id": "mid-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "83228fa3-5d22-4456-b689-7945e6c4c1ce",
+    "submittedAt": "2026-11-26T14:17:20.469Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one golden sandstone rock formation, each image a different one of these: a wide flat-topped mesa with fluted cliffs, a broad butte with two steps, a chunky cluster of three rock towers, a wide rock with a notched top. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa. Solid and wide at the base. Nearly the full image wide, three quarters of its height."
+        }
+      ],
+      "image_size": {
+        "width": 80,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 88304,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one golden sandstone rock formation, each image a different one of these: a wide flat-topped mesa with fluted cliffs, a broad butte with two steps, a chunky cluster of three rock towers, a wide rock with a notched top. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa. Solid and wide at the base. Nearly the full image wide, three quarters of its height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, red rock, snow, trees, cactus, buildings."
+    },
+    "at": "2026-11-26T14:19:14.025Z",
+    "usageUsd": 0.11621192717552185,
+    "candidates": [
+      {
+        "file": "mid-b-0.png",
+        "sha256": "2013a43ba59ea70d08cda790873cc9b2c7fdf0159395ea776d223d8afe704649",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-1.png",
+        "sha256": "891a71bf1e87bb80511e4ba88368090c00420d2a2ed76e1e407985167e4cd9e8",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-2.png",
+        "sha256": "d6b4bc4b10b96af147234aa9db42d0e89d12c1b19c4fd18382bc66fbc7040c2b",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-3.png",
+        "sha256": "b1ac5a28d29da0921217b16e2d82c6cede96cc4b9992c0153f9a3b5ffa6f6788",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-4.png",
+        "sha256": "378ce7989e4ee2f19296a09dbf5cb2c7448a10620e858a9b766a763d24d025a2",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-5.png",
+        "sha256": "58d00ec75776c6643a4f82a5f93109fb17842c8d5d663122dfa9e71eac4bbda0",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-6.png",
+        "sha256": "e2bfda8d1ddfeb6af2ef370e4739a15d8449d6131c7696a6808bee593697a944",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-7.png",
+        "sha256": "c845749b1ba345410ebae518deafc5398f4ff1ce62c114ca9f9bf049a409f865",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-8.png",
+        "sha256": "29b2243715544fbaf78bb86e22aa5554abceb289daca8f68f25b29e86e67ff25",
+        "width": 80,
+        "height": 64
+      }
+    ]
+  }
+}

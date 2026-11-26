@@ -135,6 +135,22 @@ export interface GenConfig {
       /** Secondary patches of a winter zone: one of these. */
       secondary: readonly Terrain[];
     };
+    /**
+     * Desert sand (bead bzc.88): on some maps a wild zone turns into a sand
+     * desert (gen/terrain.ts placeDesert), the same way as the volcanic
+     * zones and from its own random stream; the desert's sites go into it
+     * (gen/desert.ts placeDesertSites).
+     */
+    desert: {
+      /** Chance per map size that the map has a desert at all. */
+      chance: Readonly<Record<MapSize, number>>;
+      /** Most desert zones per map size (each further one at half the chance). */
+      maxZones: Readonly<Record<MapSize, number>>;
+      /** Lowest tier (steps from the nearest start zone) of a desert zone. */
+      minTier: number;
+      /** Secondary patches of a desert zone: one of these. */
+      secondary: readonly Terrain[];
+    };
   };
 
   water: {
@@ -383,6 +399,12 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       minTier: 1,
       secondary: ["steppe", "wasteland"],
     },
+    desert: {
+      chance: { S: 0.35, M: 0.5, L: 0.6 },
+      maxZones: { S: 1, M: 1, L: 2 },
+      minTier: 1,
+      secondary: ["badlands", "steppe"],
+    },
   },
 
   water: {
@@ -410,6 +432,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       wasteland: 0.75,
       volcanic: 0.85,
       snow: 0.6,
+      sand: 0.7,
       water: 0.5,
     },
     edgeDepth: 2.8,
@@ -442,6 +465,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       wasteland: 0.6,
       volcanic: 0.75,
       snow: 0.6,
+      sand: 0.6,
       water: 0.5,
     },
     ridgeBias: 2.2,
@@ -462,6 +486,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
         wasteland: 0,
         volcanic: 0.5,
         snow: 0.45,
+        sand: 0.4,
         water: 0,
       },
       size: [22, 36],
@@ -530,6 +555,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       wasteland: 150,
       volcanic: 150,
       snow: 150,
+      sand: 125,
     },
     road: 75,
     day: 1500,

@@ -23,6 +23,7 @@
  */
 import type { MapZoneKind } from "../../../data/mapObjects.ts";
 import {
+  DESERT_ROWS,
   FREE_VALUE,
   NEUTRAL_TOWN_VALUE,
   PASS_VALUE,
@@ -31,6 +32,7 @@ import {
 import { GATE_COLOURS, WAYSTONE_COLOURS } from "../../../data/objectTypes.ts";
 import type { ObjectTypeId } from "../../../data/objectTypes.ts";
 import { isPickup } from "../../game/site-state.ts";
+import { desertSites } from "./desert.ts";
 import { assignQuests } from "./quests.ts";
 import { rollContents, strangeThing } from "./contents.ts";
 import type { MapObjectRow } from "../../../data/mapObjects.ts";
@@ -289,6 +291,12 @@ interface Request {
    * winter sites on snow, bead bzc.87); the last try takes any ground.
    */
   ground?: number;
+  /**
+   * The candidate-order stream (default: the stage's own). The desert's
+   * sites (bead bzc.88) use their own, so trying them leaves the other
+   * placements' draws as they were.
+   */
+  order?: Rng;
 }
 
 /** A drawn fill row with its rolled payload. */
@@ -820,6 +828,44 @@ export function placeObjects(st: GenState): PlacementReport {
     requests.splice(kitRequests, 0, ...winterReqs);
   }
 
+  // The desert's sites (bead bzc.88): their own random stream, and none on
+  // a map without a desert, which so draws exactly as before.
+  // The Pyramid goes first of all; the others right after the start kits,
+  // before the fill crowds the desert.
+  const sites = desertSites(st);
+  if (sites.length > 0) {
+    const drng = stageRng(st, "desert-sites");
+    const orng = stageRng(st, "desert-place");
+    let at = kitRequests;
+    for (const site of sites) {
+      const row =
+        DESERT_ROWS.find((r) => r.type === site.type) ??
+        oc.table.find((r) => r.type === site.type);
+      if (row === undefined) continue;
+      const data = roll(drng, row, site.tier);
+      const value = valueOf(row, data);
+      const req: Request = {
+        row,
+        data,
+        value,
+        zones: site.zones,
+        minCost: 0,
+        maxCost: Infinity,
+        minFar: farFor(row, value, data),
+        required: false,
+        pocket: -1,
+        guarded: guardedIn(row, value, site.zones[0] ?? 0, data),
+        label: `desert ${site.type}`,
+        relax: true,
+        order: orng,
+      };
+      if (site.first) {
+        requests.unshift(req);
+        at++;
+      } else requests.splice(at++, 0, req);
+    }
+  }
+
   // 4. Placement: blocking footprints, roads, then single cells.
   const counters = new Map<string, number>();
   const nextId = (prefix: string): string => {
@@ -1059,7 +1105,7 @@ export function placeObjects(st: GenState): PlacementReport {
    */
   const stand: Request[] = [];
   const place = (r: Request, roads: boolean): void => {
-    if (tryPlace(r, roads)) return;
+    if (tryPlace(r, roads, r.order ?? rng)) return;
     // Its own stream, so the rest of the map draws as it would without.
     const again = { ...r, minFar: r.minFar * 0.5 };
     if (r.relax && tryPlace(again, roads, stageRng(st, "relax"))) return;

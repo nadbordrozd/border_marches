@@ -1,0 +1,104 @@
+{
+  "base-a": {
+    "id": "base-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-d51db989-c964-4415-ab86-bf25b66e8a24",
+    "submittedAt": "2026-11-26T13:52:04.452Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of golden desert sand seen from directly above, filling the whole image edge to edge: warm golden sand #dcb46c with soft, long, gently curving wind ripples in slightly lighter #e8c684 and slightly darker #c99e5a stripes, the ripples wavy and broken, running in many slightly different directions, a few tiny scattered pebbles, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 88101,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of golden desert sand seen from directly above, filling the whole image edge to edge: warm golden sand #dcb46c with soft, long, gently curving wind ripples in slightly lighter #e8c684 and slightly darker #c99e5a stripes, the ripples wavy and broken, running in many slightly different directions, a few tiny scattered pebbles, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, object, character, building, plant, cactus, rock, water, grass, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-26T13:52:04.455Z",
+    "usageUsd": 0.007659553766250611,
+    "candidates": [
+      {
+        "file": "base-a-0.png",
+        "sha256": "065fb25aca408c1b6ec7e467f8914206247b9806fc90b96c2a5c2dedc50e53ca",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "base-b": {
+    "id": "base-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-dc585f54-63ec-42fd-8632-193d76d072b4",
+    "submittedAt": "2026-11-26T13:52:39.908Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of golden desert sand seen from directly above, filling the whole image edge to edge: warm golden sand #dcb46c with soft, long, gently curving wind ripples in slightly lighter #e8c684 and slightly darker #c99e5a stripes, the ripples wavy and broken, running in many slightly different directions, a few tiny scattered pebbles, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 88102,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of golden desert sand seen from directly above, filling the whole image edge to edge: warm golden sand #dcb46c with soft, long, gently curving wind ripples in slightly lighter #e8c684 and slightly darker #c99e5a stripes, the ripples wavy and broken, running in many slightly different directions, a few tiny scattered pebbles, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, object, character, building, plant, cactus, rock, water, grass, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-26T13:52:39.910Z",
+    "usageUsd": 0.008783815489874947,
+    "candidates": [
+      {
+        "file": "base-b-0.png",
+        "sha256": "c21c6dd5a3274e921a58530f849f286e6189350ff7522bdb62fb6768e910009c",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "dunes-a": {
+    "id": "dunes-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-d3faa574-df72-419f-8a3a-3edfd15edc67",
+    "submittedAt": "2026-11-26T13:53:14.621Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: rolling golden desert dunes seen from straight above, filling the whole image edge to edge: smooth warm golden sand #dcb46c, broad soft lighter #e8c684 crests and slightly darker #c99e5a hollows, fine wavy wind ripples over them, a few tiny scattered pebbles, very calm and low in contrast, no single big dune, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 88103,
+      "shading": "flat shading",
+      "description": "Subject: rolling golden desert dunes seen from straight above, filling the whole image edge to edge: smooth warm golden sand #dcb46c, broad soft lighter #e8c684 crests and slightly darker #c99e5a hollows, fine wavy wind ripples over them, a few tiny scattered pebbles, very calm and low in contrast, no single big dune, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, object, character, building, plant, cactus, rock, water, grass, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-26T13:53:14.624Z",
+    "usageUsd": 0.00865030688709683,
+    "candidates": [
+      {
+        "file": "dunes-a-0.png",
+        "sha256": "56081d8e1460d9103c591ba80c3343de9c27cd96629e8b6caf5440bde0d156df",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  }
+}

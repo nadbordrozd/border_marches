@@ -174,6 +174,37 @@ const TREE_ROWS: readonly (readonly [
   ["snow", "birch", 3, 32, 41],
   ["snow", "larch", 1, 26, 38],
   ["snow", "larch", 2, 35, 37],
+  // Desert groves (bead bzc.88, set desert-trees): palms and cacti.
+  ["sand", "palm", 1, 32, 40],
+  ["sand", "palm", 2, 33, 41],
+  ["sand", "palm", 3, 32, 41],
+  ["sand", "palm", 4, 31, 40],
+  ["sand", "palm", 5, 33, 41],
+  ["sand", "palm", 6, 35, 38],
+  ["sand", "palm", 7, 28, 37],
+  ["sand", "palm", 8, 24, 35],
+  ["sand", "palm", 9, 41, 41],
+  ["sand", "palm", 10, 39, 41],
+  ["sand", "palm", 11, 39, 41],
+  ["sand", "palm", 12, 43, 39],
+  ["sand", "palm", 13, 42, 35],
+  ["sand", "palm", 14, 29, 39],
+  ["sand", "palm", 15, 33, 39],
+  ["sand", "saguaro", 1, 28, 35],
+  ["sand", "saguaro", 2, 29, 36],
+  ["sand", "saguaro", 3, 27, 37],
+  ["sand", "saguaro", 4, 31, 32],
+  ["sand", "saguaro", 5, 31, 31],
+  ["sand", "saguaro", 6, 30, 32],
+  ["sand", "pear", 1, 38, 33],
+  ["sand", "pear", 2, 39, 36],
+  ["sand", "pear", 3, 37, 36],
+  ["sand", "column", 1, 28, 33],
+  ["sand", "column", 2, 29, 35],
+  ["sand", "column", 3, 31, 33],
+  ["sand", "barrel", 1, 26, 25],
+  ["sand", "barrel", 2, 26, 26],
+  ["sand", "barrel", 3, 26, 26],
 ];
 
 export const TREE_ASSETS: readonly TreeAsset[] = TREE_ROWS.map(
@@ -204,6 +235,7 @@ const OWN_SPECIES_WEIGHTS: Readonly<
   // Snow (bead bzc.87): snow-laden spruces with darker firs to break up the
   // white, a few birches, golden larches in drifts.
   snow: { spruce: 5, fir: 2.4, birch: 0.9, larch: 2 },
+  sand: { palm: 3.4, saguaro: 1.4, column: 0.8, pear: 0.8, barrel: 0.5 },
 };
 
 /** The species mix of each ground's woods: its art family's. */

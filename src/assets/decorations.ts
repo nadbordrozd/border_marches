@@ -100,6 +100,23 @@ const LOOKS: Readonly<Record<string, readonly (readonly [number, number])[]>> = 
   "snowdrift": [[62, 57], [62, 60]],
   "mammoth-skeleton": [[127, 55], [128, 49]],
   "frozen-log": [[124, 63], [121, 64]],
+  // The desert (bead bzc.88, set desert-decorations).
+  "desert-tumbleweed": [[25, 23], [23, 24]],
+  "scarab": [[22, 18], [26, 19]],
+  "dry-grass": [[25, 22], [28, 22]],
+  "desert-flower": [[24, 22], [24, 22]],
+  "barrel-cactus": [[20, 22], [21, 23]],
+  "ox-skull": [[27, 25], [25, 24]],
+  "sand-snake": [[26, 25], [24, 24]],
+  "pear-pads": [[26, 26], [26, 26]],
+  "bone-heap": [[28, 19], [27, 20]],
+  "dry-shrub": [[26, 24], [28, 24]],
+  "fennec": [[27, 20], [28, 19]],
+  "sandstone-boulder": [[62, 50], [58, 58]],
+  "broken-column": [[44, 60], [46, 61]],
+  "buried-head": [[58, 60], [60, 49]],
+  "fallen-pillar": [[127, 47]],
+  "temple-ruin": [[128, 46]],
 };
 
 export const DECORATIONS: readonly DecorationDef[] = DECORATION_KINDS.map(

@@ -1,0 +1,742 @@
+{
+  "small-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "tumbleweed: round tangle of pale twigs, reads at 1x",
+    "at": "2026-11-26T14:11:18.780Z"
+  },
+  "small-c#1": {
+    "verdict": "ACCEPTED",
+    "notes": "scarab beetle, small and clear",
+    "at": "2026-11-26T14:11:18.829Z"
+  },
+  "small-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "tuft of dry yellow desert grass",
+    "at": "2026-11-26T14:11:18.879Z"
+  },
+  "small-c#3": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:18.926Z"
+  },
+  "small-c#4": {
+    "verdict": "ACCEPTED",
+    "notes": "pink desert flowers on a grey-green stem",
+    "at": "2026-11-26T14:11:18.976Z"
+  },
+  "small-c#5": {
+    "verdict": "ACCEPTED",
+    "notes": "small barrel cactus with a yellow flower",
+    "at": "2026-11-26T14:11:19.026Z"
+  },
+  "small-c#6": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:19.076Z"
+  },
+  "small-c#7": {
+    "verdict": "ACCEPTED",
+    "notes": "bleached ox skull with short horns",
+    "at": "2026-11-26T14:11:19.128Z"
+  },
+  "small-c#8": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:19.179Z"
+  },
+  "small-c#9": {
+    "verdict": "ACCEPTED",
+    "notes": "tumbleweed, second look",
+    "at": "2026-11-26T14:11:19.231Z"
+  },
+  "small-c#10": {
+    "verdict": "ACCEPTED",
+    "notes": "scarab rolling its dung ball",
+    "at": "2026-11-26T14:11:19.283Z"
+  },
+  "small-c#11": {
+    "verdict": "ACCEPTED",
+    "notes": "dry grass tuft, second look",
+    "at": "2026-11-26T14:11:19.336Z"
+  },
+  "small-c#12": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:19.387Z"
+  },
+  "small-c#13": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:19.442Z"
+  },
+  "small-c#14": {
+    "verdict": "ACCEPTED",
+    "notes": "ox skull, second look",
+    "at": "2026-11-26T14:11:19.494Z"
+  },
+  "small-c#15": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:19.545Z"
+  },
+  "small-c#16": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:19.597Z"
+  },
+  "small-c#17": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:19.649Z"
+  },
+  "small-c#18": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:19.702Z"
+  },
+  "small-c#19": {
+    "verdict": "ACCEPTED",
+    "notes": "desert flowers, second look",
+    "at": "2026-11-26T14:11:19.755Z"
+  },
+  "small-c#20": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:19.809Z"
+  },
+  "small-c#21": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:19.864Z"
+  },
+  "small-c#22": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:19.918Z"
+  },
+  "small-c#23": {
+    "verdict": "ACCEPTED",
+    "notes": "small barrel cactus, second look",
+    "at": "2026-11-26T14:11:19.972Z"
+  },
+  "small-c#24": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.025Z"
+  },
+  "small-c#25": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.078Z"
+  },
+  "small-c#26": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.129Z"
+  },
+  "small-c#27": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.182Z"
+  },
+  "small-c#28": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.235Z"
+  },
+  "small-c#29": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.287Z"
+  },
+  "small-c#30": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.340Z"
+  },
+  "small-c#31": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.395Z"
+  },
+  "small-c#32": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.446Z"
+  },
+  "small-c#33": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.498Z"
+  },
+  "small-c#34": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.552Z"
+  },
+  "small-c#35": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.604Z"
+  },
+  "small-c#36": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.656Z"
+  },
+  "small-c#37": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.708Z"
+  },
+  "small-c#38": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.761Z"
+  },
+  "small-c#39": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.815Z"
+  },
+  "small-c#40": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.869Z"
+  },
+  "small-c#41": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.922Z"
+  },
+  "small-c#42": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:20.974Z"
+  },
+  "small-c#43": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.026Z"
+  },
+  "small-c#44": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.080Z"
+  },
+  "small-c#45": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.132Z"
+  },
+  "small-c#46": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.185Z"
+  },
+  "small-c#47": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.240Z"
+  },
+  "small-c#48": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.291Z"
+  },
+  "small-c#49": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.344Z"
+  },
+  "small-c#50": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.397Z"
+  },
+  "small-c#51": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.450Z"
+  },
+  "small-c#52": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.504Z"
+  },
+  "small-c#53": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.554Z"
+  },
+  "small-c#54": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.607Z"
+  },
+  "small-c#55": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.658Z"
+  },
+  "small-c#56": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.709Z"
+  },
+  "small-c#57": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.761Z"
+  },
+  "small-c#58": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.813Z"
+  },
+  "small-c#59": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.864Z"
+  },
+  "small-c#60": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.918Z"
+  },
+  "small-c#61": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:21.969Z"
+  },
+  "small-c#62": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:22.021Z"
+  },
+  "small-c#63": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject (two looks per kind are enough)",
+    "at": "2026-11-26T14:11:22.072Z"
+  },
+  "small-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "coiled sand snake, clear head and stripes",
+    "at": "2026-11-26T14:12:00.759Z"
+  },
+  "small-b#1": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:00.806Z"
+  },
+  "small-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "two prickly pear pads with a pink fruit",
+    "at": "2026-11-26T14:12:00.854Z"
+  },
+  "small-b#3": {
+    "verdict": "REJECTED",
+    "notes": "a clay jar reads as loot (decorations are never loot look-alikes)",
+    "at": "2026-11-26T14:12:00.901Z"
+  },
+  "small-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "scattered bones, second look",
+    "at": "2026-11-26T14:12:00.951Z"
+  },
+  "small-b#5": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:01.000Z"
+  },
+  "small-b#6": {
+    "verdict": "ACCEPTED",
+    "notes": "dry thorny grey shrub",
+    "at": "2026-11-26T14:12:01.050Z"
+  },
+  "small-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "sleeping fennec fox curled up",
+    "at": "2026-11-26T14:12:01.101Z"
+  },
+  "small-b#8": {
+    "verdict": "ACCEPTED",
+    "notes": "sand snake, second look",
+    "at": "2026-11-26T14:12:01.154Z"
+  },
+  "small-b#9": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:01.206Z"
+  },
+  "small-b#10": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:01.258Z"
+  },
+  "small-b#11": {
+    "verdict": "REJECTED",
+    "notes": "a clay jar reads as loot (decorations are never loot look-alikes)",
+    "at": "2026-11-26T14:12:01.310Z"
+  },
+  "small-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "camel bones and skull half in the sand",
+    "at": "2026-11-26T14:12:01.365Z"
+  },
+  "small-b#13": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:01.418Z"
+  },
+  "small-b#14": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:01.470Z"
+  },
+  "small-b#15": {
+    "verdict": "ACCEPTED",
+    "notes": "fennec fox, second look",
+    "at": "2026-11-26T14:12:01.523Z"
+  },
+  "small-b#16": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:01.577Z"
+  },
+  "small-b#17": {
+    "verdict": "ACCEPTED",
+    "notes": "prickly pear pads, second look",
+    "at": "2026-11-26T14:12:01.630Z"
+  },
+  "small-b#18": {
+    "verdict": "REJECTED",
+    "notes": "a clay jar reads as loot (decorations are never loot look-alikes)",
+    "at": "2026-11-26T14:12:01.684Z"
+  },
+  "small-b#19": {
+    "verdict": "REJECTED",
+    "notes": "a clay jar reads as loot (decorations are never loot look-alikes)",
+    "at": "2026-11-26T14:12:01.736Z"
+  },
+  "small-b#20": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:01.793Z"
+  },
+  "small-b#21": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:01.851Z"
+  },
+  "small-b#22": {
+    "verdict": "ACCEPTED",
+    "notes": "dry shrub, second look",
+    "at": "2026-11-26T14:12:01.906Z"
+  },
+  "small-b#23": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:01.962Z"
+  },
+  "small-b#24": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.016Z"
+  },
+  "small-b#25": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.073Z"
+  },
+  "small-b#26": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.129Z"
+  },
+  "small-b#27": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.185Z"
+  },
+  "small-b#28": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.243Z"
+  },
+  "small-b#29": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.301Z"
+  },
+  "small-b#30": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.359Z"
+  },
+  "small-b#31": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.415Z"
+  },
+  "small-b#32": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.472Z"
+  },
+  "small-b#33": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.528Z"
+  },
+  "small-b#34": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.584Z"
+  },
+  "small-b#35": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.639Z"
+  },
+  "small-b#36": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.695Z"
+  },
+  "small-b#37": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.750Z"
+  },
+  "small-b#38": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.807Z"
+  },
+  "small-b#39": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.863Z"
+  },
+  "small-b#40": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.918Z"
+  },
+  "small-b#41": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:02.974Z"
+  },
+  "small-b#42": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.029Z"
+  },
+  "small-b#43": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.084Z"
+  },
+  "small-b#44": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.138Z"
+  },
+  "small-b#45": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.192Z"
+  },
+  "small-b#46": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.248Z"
+  },
+  "small-b#47": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.304Z"
+  },
+  "small-b#48": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.360Z"
+  },
+  "small-b#49": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.413Z"
+  },
+  "small-b#50": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.467Z"
+  },
+  "small-b#51": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.525Z"
+  },
+  "small-b#52": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.583Z"
+  },
+  "small-b#53": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.639Z"
+  },
+  "small-b#54": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.696Z"
+  },
+  "small-b#55": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.752Z"
+  },
+  "small-b#56": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.807Z"
+  },
+  "small-b#57": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.861Z"
+  },
+  "small-b#58": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.917Z"
+  },
+  "small-b#59": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:03.971Z"
+  },
+  "small-b#60": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:04.029Z"
+  },
+  "small-b#61": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:04.084Z"
+  },
+  "small-b#62": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:04.139Z"
+  },
+  "small-b#63": {
+    "verdict": "REJECTED",
+    "notes": "near-duplicate of an accepted look of the same subject, or a jar that reads as loot",
+    "at": "2026-11-26T14:12:04.193Z"
+  },
+  "props-1x1-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a giant saguaro repeats the existing saguaro prop (now also on sand)",
+    "at": "2026-11-26T14:13:04.772Z"
+  },
+  "props-1x1-a#1": {
+    "verdict": "REJECTED",
+    "notes": "a giant saguaro repeats the existing saguaro prop; grass tuft at its foot",
+    "at": "2026-11-26T14:13:04.821Z"
+  },
+  "props-1x1-a#2": {
+    "verdict": "REJECTED",
+    "notes": "a giant saguaro repeats the existing saguaro prop",
+    "at": "2026-11-26T14:13:04.870Z"
+  },
+  "props-1x1-a#3": {
+    "verdict": "REJECTED",
+    "notes": "a giant saguaro repeats the existing saguaro prop",
+    "at": "2026-11-26T14:13:04.917Z"
+  },
+  "props-1x1-a#4": {
+    "verdict": "REJECTED",
+    "notes": "plain dome boulder repeats the grass big boulder",
+    "at": "2026-11-26T14:13:04.966Z"
+  },
+  "props-1x1-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "wind-carved sandstone boulder with level strata, solid and calm",
+    "at": "2026-11-26T14:13:05.017Z"
+  },
+  "props-1x1-a#6": {
+    "verdict": "REJECTED",
+    "notes": "reads as a small mesa: the retired mini-mesa look",
+    "at": "2026-11-26T14:13:05.067Z"
+  },
+  "props-1x1-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "heap of rounded sandstone boulders, second look",
+    "at": "2026-11-26T14:13:05.119Z"
+  },
+  "props-1x1-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "broken sandstone column with a fallen drum",
+    "at": "2026-11-26T14:13:05.171Z"
+  },
+  "props-1x1-a#9": {
+    "verdict": "REJECTED",
+    "notes": "squat stump of a column, weaker than #8",
+    "at": "2026-11-26T14:13:05.223Z"
+  },
+  "props-1x1-a#10": {
+    "verdict": "REJECTED",
+    "notes": "leaning column on a sand heap, weaker than #8 and #11",
+    "at": "2026-11-26T14:13:05.275Z"
+  },
+  "props-1x1-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "broken column with a carved capital, second look",
+    "at": "2026-11-26T14:13:05.328Z"
+  },
+  "props-1x1-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "huge stone head with a striped headdress half buried in the sand",
+    "at": "2026-11-26T14:13:05.381Z"
+  },
+  "props-1x1-a#13": {
+    "verdict": "REJECTED",
+    "notes": "crowned head too close to the grass stone head prop",
+    "at": "2026-11-26T14:13:05.433Z"
+  },
+  "props-1x1-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "round stone head sunk to the chin in a sand drift, second look",
+    "at": "2026-11-26T14:13:05.485Z"
+  },
+  "props-1x1-a#15": {
+    "verdict": "REJECTED",
+    "notes": "a blocky head without sand reads as a crate with a face",
+    "at": "2026-11-26T14:13:05.536Z"
+  },
+  "props-2x1-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "huge fallen sandstone pillar broken in pieces, solid two-cell wall",
+    "at": "2026-11-26T14:21:23.591Z"
+  },
+  "props-2x1-c#1": {
+    "verdict": "REJECTED",
+    "notes": "thin columns standing on a flat slab: a ground plate, and the poles turn to noise",
+    "at": "2026-11-26T14:21:23.640Z"
+  },
+  "props-2x1-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "crumbling sandstone temple wall with a carved doorway",
+    "at": "2026-11-26T14:21:23.690Z"
+  },
+  "props-2x1-c#3": {
+    "verdict": "REJECTED",
+    "notes": "a shapeless slumped wall with stray pebbles; unclear at 1x",
+    "at": "2026-11-26T14:21:23.738Z"
+  }
+}

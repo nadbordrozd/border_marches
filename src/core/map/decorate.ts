@@ -83,6 +83,11 @@ export const DECORATE = {
    * prop instead of through its cells, between any two cells beside it.
    */
   maxDetour: 100,
+  /**
+   * The open sand of a desert holds this many times the passable
+   * decorations of other ground (bead bzc.88): a second pass over the sand.
+   */
+  sandBias: 2,
 } as const;
 
 export interface DecorateOptions {
@@ -414,6 +419,35 @@ export function decorateMap(map: GameMap, options: DecorateOptions = {}): void {
       const kind = srng.pick(kinds);
       placed.push({ id: kind.id, x, y, variant: srng.int(0, kind.looks - 1) });
       added++;
+    }
+  }
+
+  // The desert (bead bzc.88): the open sand gets a second, sand-only pass
+  // of single pieces (skulls, scarabs, tumbleweed), after everything else
+  // and only where there is sand, so a map without a desert draws exactly
+  // as before.
+  const sandy = range(n).filter(
+    (k) => cell(k)?.terrain === "sand" && smallOk(k) && taken[k] === 0,
+  );
+  if (sandy.length > 0) {
+    const kinds = decorationKindsFor("sand", true);
+    const targetSand = Math.round(
+      sandy.length * DECORATE.passableShare * (DECORATE.sandBias - 1),
+    );
+    let extra = 0;
+    for (const i of rng.shuffle(sandy)) {
+      if (extra >= targetSand || kinds.length === 0) break;
+      if (seeds.some((s) => cheb(W, i, s) < 2)) continue;
+      seeds.push(i);
+      taken[i] = 1;
+      const kind = rng.pick(kinds);
+      placed.push({
+        id: kind.id,
+        x: i % W,
+        y: Math.floor(i / W),
+        variant: rng.int(0, kind.looks - 1),
+      });
+      extra++;
     }
   }
 

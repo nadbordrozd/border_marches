@@ -43,7 +43,9 @@ import {
   OBJECT_TYPES,
   RESET_TEXT,
   SHOVEL_DIG_MP,
+  SPHINX_XP,
   STABLES_MP,
+  SUN_TEMPLE_ATTACK,
   type ObjectTypeId,
   type Prize,
   type Quest,
@@ -56,6 +58,7 @@ import {
   SKILL_IDS,
   type SkillDef,
 } from "../../data/skills.ts";
+import { riddleAt, type Riddle } from "../../data/riddles.ts";
 import { STRAY_HOMES } from "../../data/strays.ts";
 import type {
   CreatureId,
@@ -655,6 +658,54 @@ function itemValue(item: string): number {
 }
 
 // ---------------------------------------------------------------------------
+// The Sphinx (bead bzc.88)
+
+/**
+ * The riddle a sphinx asks this hero: one of the site's seeded pool
+ * (`data.riddles`), by the hero, so two heroes may hear different ones.
+ */
+export function sphinxRiddle(obj: MapObject, hero: HeroState): Riddle {
+  const raw = obj.data["riddles"];
+  const pool = Array.isArray(raw)
+    ? raw.filter((r): r is number => typeof r === "number")
+    : [];
+  if (pool.length === 0) return riddleAt(0);
+  let h = 0;
+  for (let i = 0; i < hero.id.length; i++)
+    h = (Math.imul(h, 31) + hero.id.charCodeAt(i)) >>> 0;
+  return riddleAt(pool[h % pool.length] ?? 0);
+}
+
+/**
+ * The skill a sphinx raises: the hero's lowest-ranked skill that may go
+ * up a rank (the first gained of equals), or null.
+ */
+export function sphinxSkill(hero: HeroState): string | null {
+  let best: { id: string; rank: number } | null = null;
+  for (const s of hero.skills) {
+    if (skillRefusal(hero, s.id) !== null) continue;
+    if (best === null || s.rank < best.rank) best = s;
+  }
+  return best?.id ?? null;
+}
+
+/** A right answer's gift, given in place; returns what it was. */
+function sphinxGift(
+  obj: MapObject,
+  hero: HeroState,
+  events: GameEvent[],
+): string {
+  const skill = str(obj, "gift") === "skill" ? sphinxSkill(hero) : null;
+  if (skill !== null) {
+    addSkill(hero, skill, events);
+    const rank = hero.skills.find((s) => s.id === skill)?.rank ?? 1;
+    return `${findSkill(skill)?.name ?? skill} rises to rank ${rank}`;
+  }
+  gainXp(hero, SPHINX_XP, events);
+  return `+${SPHINX_XP} experience`;
+}
+
+// ---------------------------------------------------------------------------
 // Visiting
 
 function used(state: GameState, obj: MapObject, hero: HeroState): boolean {
@@ -797,6 +848,12 @@ export function siteOptions(
       });
       break;
     }
+    case "sphinx":
+      if (used(state, obj, hero)) break;
+      sphinxRiddle(obj, hero).answers.forEach((a, i) => {
+        out.push({ id: `answer:${i}`, label: a });
+      });
+      break;
     case "hermit":
       if (used(state, obj, hero)) break;
       for (const s of hero.skills) {
@@ -1089,6 +1146,20 @@ export function visitSite(
       if (already) break;
       offer(`${def.name}: ${def.text}`);
       return null;
+    case "sphinx":
+      if (already) break;
+      offer(`Sphinx: "${sphinxRiddle(obj, hero).text}"`);
+      return null;
+    case "sun-temple": {
+      const added = addBuff(hero, "sun-temple");
+      say(
+        events,
+        hero,
+        obj,
+        `Sun Temple: ${added ? `+${SUN_TEMPLE_ATTACK} Attack` : "already blessed"} until the next battle ends.`,
+      );
+      return null;
+    }
     // --- Buffs ----------------------------------------------------------
     case "rally-camp":
     case "wishing-well": {
@@ -1215,7 +1286,9 @@ export function visitSite(
     case "thunderstruck-pylon-yard":
     case "landfall-wreck":
     case "frost-giants-barrow":
-    case "keepers-vault": {
+    case "keepers-vault":
+    case "pyramid":
+    case "sunken-tomb": {
       if (s0.done === true) {
         say(events, hero, obj, `${def.name}: already plundered.`);
         return null;
@@ -1857,6 +1930,28 @@ export function useSite(
       say(events, hero, obj, `Drill Yard: ${d.text}.`);
       break;
     }
+    case "answer": {
+      const riddle = sphinxRiddle(obj, hero);
+      const said = riddle.answers[Number(arg)] ?? arg;
+      markUsed(next, obj, hero);
+      if (Number(arg) !== riddle.right) {
+        hero.mp = 0;
+        say(
+          events,
+          hero,
+          obj,
+          `Sphinx: "${said}" is wrong. The sphinx laughs, and ${hero.name} sits out the rest of the day pondering the answer (no movement left today).`,
+        );
+        break;
+      }
+      say(
+        events,
+        hero,
+        obj,
+        `Sphinx: "${said}" is right! ${sphinxGift(obj, hero, events)}.`,
+      );
+      break;
+    }
     case "give": {
       const a = hero.backpack[Number(arg)];
       if (a === undefined) return fail("bad-item", "no such item");
@@ -2023,7 +2118,7 @@ export function objectValueFor(
       if (t === "seer-hut") return prizeValue(prizeOf(obj, "reward"));
       return base;
     case "each-visit": {
-      if (t === "rally-camp" || t === "wishing-well") {
+      if (t === "rally-camp" || t === "wishing-well" || t === "sun-temple") {
         return heroes.some((h) => !h.buffs.includes(t)) ? base : 0;
       }
       if (t === "school-temple") {
@@ -2224,6 +2319,8 @@ export function describeSite(
     case "thunderstruck-pylon-yard":
     case "landfall-wreck":
     case "frost-giants-barrow":
+    case "pyramid":
+    case "sunken-tomb":
       what =
         t === "keepers-vault"
           ? `${def.text} Each treasure: a Marvel piece, a Wonder and 5000 gold.`
@@ -2238,6 +2335,12 @@ export function describeSite(
     }
     case "prison":
       what = `${def.text} The prisoner is level ${num(obj, "level", 3)}.`;
+      break;
+    case "sphinx":
+      what =
+        str(obj, "gift") === "skill"
+          ? `Answer the sphinx's riddle. Right: a rank in the hero's lowest skill that can rise (${SPHINX_XP} experience without one). Wrong: the hero loses the rest of today's movement. Each hero gets one try.`
+          : `Answer the sphinx's riddle. Right: ${SPHINX_XP} experience. Wrong: the hero loses the rest of today's movement. Each hero gets one try.`;
       break;
     case "obelisk":
       what = `${def.text} You have seen ${obelisksVisited(state, player)} of ${obeliskCount(state)}.`;

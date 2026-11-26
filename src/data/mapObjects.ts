@@ -176,6 +176,11 @@ const NEVER_GUARDED: ReadonlySet<ObjectTypeId> = new Set<ObjectTypeId>([
   "buried-cache",
   "buried-keystone",
   "frost-giants-barrow",
+  // Desert sites (bead bzc.88): the tombs' guards are inside; the sphinx's
+  // riddle is its own challenge.
+  "pyramid",
+  "sunken-tomb",
+  "sphinx",
 ]);
 
 /**
@@ -298,6 +303,15 @@ export const RULE_ROWS: readonly MapObjectRow[] = (
     "hunters-lodge",
     "walrus-rookery",
   ] as const
+).map((t) => catalogueRow(OBJECT_TYPES[t]));
+
+/**
+ * Rows of the desert's sites (bead bzc.88), placed only in desert zones by
+ * the generator's desert pass (src/core/map/gen/desert.ts); the oasis row is
+ * the fill's own.
+ */
+export const DESERT_ROWS: readonly MapObjectRow[] = (
+  ["pyramid", "sphinx", "sun-temple", "sunken-tomb"] as const
 ).map((t) => catalogueRow(OBJECT_TYPES[t]));
 
 export const MAP_OBJECT_ROW_BY_ID: Readonly<Record<string, MapObjectRow>> =

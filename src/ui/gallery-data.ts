@@ -574,6 +574,7 @@ const OBJECT_SECTIONS: ReadonlyArray<readonly [string, string]> = [
   ["two-way-waystone", "Teleports"],
   ["event-tile", "Events and signs"],
   ["frost-giants-barrow", "Winter sites"],
+  ["pyramid", "Desert sites"],
 ];
 
 function objectEntry(id: (typeof OBJECT_TYPE_IDS)[number]): GalleryEntry {

@@ -1,0 +1,139 @@
+{
+  "set": "desert-sites",
+  "bead": "border_marches-bzc.88",
+  "class": "map-objects",
+  "exploration": false,
+  "_doc": "The desert's special sites (bead bzc.88, docs/art/classes/map-objects.md, docs/design/CONTENT_MAP_OBJECTS.md): the Pyramid (3x2 on 200 x 144), the Sphinx, the Sun Temple and the Sunken Tomb (2x2 on 128 x 128). generate-image-v2 at native display size like set map-objects; the imported sawmill is the style image for outline, pixel size and viewing angle only. Layers: style, light-south-west, class-map-object, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "styleSawmill": {
+      "file": "public/assets/objects/sawmill.png",
+      "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+    },
+    "styleOpts": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-map-object"
+    ],
+    "noBackground": true,
+    "styleImage": "@styleSawmill",
+    "styleOptions": "@styleOpts"
+  },
+  "recipes": [
+    {
+      "id": "pyramid-a",
+      "concept": "PYRAMID (3x2 guarded treasure)",
+      "width": 200,
+      "height": 144,
+      "seed": 88601,
+      "subject": "Subject: an ancient desert pyramid, a guarded treasure tomb: a big stepped pyramid of golden sandstone blocks #d6a862 with #9a6a3a shadows and a capstone of gold #e8b83a on its tip, a dark square doorway at the middle of its front bottom between two small seated stone guardian statues with jackal heads, a short flight of steps up to the door, a few gold coins on the steps. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, camel, palm tree, sand dune, ground, sky, sun"
+    },
+    {
+      "id": "pyramid-b",
+      "concept": "PYRAMID (3x2; pyramid-a was refused by the provider's policy check)",
+      "width": 200,
+      "height": 144,
+      "seed": 88605,
+      "subject": "Subject: a big ancient desert pyramid: a stepped pyramid of golden sandstone blocks #d6a862 with #9a6a3a shadows, a shining gold capstone #e8b83a on its tip, a dark square doorway in the middle of its front at the bottom, a short flight of stone steps up to the door between two small stone lion statues, two tall sandstone pillars with gold tops at the front corners. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, camel, palm tree, sand dune, ground, sky, sun"
+    },
+    {
+      "id": "sphinx-a",
+      "concept": "SPHINX (2x2 riddle site)",
+      "width": 128,
+      "height": 128,
+      "seed": 88602,
+      "subject": "Subject: a great stone sphinx lying on a low stone plinth: the body of a lion of golden sandstone #d6a862 with #9a6a3a shadows lying down with its front paws stretched out towards the viewer, a calm wise human head wearing a striped headdress of blue #3f6fb0 and gold #e8b83a, eyes open, a small stone tablet carved with a question mark between its paws. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, palm tree, pyramid, sand dune, ground, text, letters"
+    },
+    {
+      "id": "sun-temple-a",
+      "concept": "SUN TEMPLE (2x2 buff site)",
+      "width": 128,
+      "height": 128,
+      "seed": 88603,
+      "subject": "Subject: a small open sun temple of the desert: a square sandstone shrine #d6a862 with #9a6a3a shadows, four thick columns holding a flat roof, a big golden sun disc #f0b830 with short rays standing on top of the roof, a stone altar with a small flame #f08a2a inside between the columns, wide steps at the front, two sandstone braziers at the front corners. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, palm tree, pyramid, sand dune, ground, sky"
+    },
+    {
+      "id": "tomb-a",
+      "concept": "SUNKEN TOMB (2x2 guarded bank)",
+      "width": 128,
+      "height": 128,
+      "seed": 88604,
+      "subject": "Subject: a half-buried ancient desert tomb, a creature bank: the top of a sandstone tomb entrance #c99a5a with #8a6038 shadows sunk deep into a mound of sand, a dark doorway framed by two square pillars and a heavy lintel carved with a scarab, a few broken steps going down into it, a cracked clay urn and some scattered bones at the front, a torn grey cloth flapping from the lintel. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, mummy, skeleton figure, palm tree, pyramid, ground, sky"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/objects/map/pyramid.png",
+      "from": "pyramid-b#0",
+      "width": 172,
+      "height": 118,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 13,
+          "width": 172,
+          "height": 118
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/sphinx.png",
+      "from": "sphinx-a#3",
+      "width": 107,
+      "height": 98,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 18,
+          "width": 107,
+          "height": 98
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/sun-temple.png",
+      "from": "sun-temple-a#1",
+      "width": 102,
+      "height": 113,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 5,
+          "width": 102,
+          "height": 113
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/sunken-tomb.png",
+      "from": "tomb-a#2",
+      "width": 120,
+      "height": 108,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 2,
+          "width": 120,
+          "height": 108
+        }
+      ]
+    }
+  ]
+}

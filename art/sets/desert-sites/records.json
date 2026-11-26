@@ -1,0 +1,323 @@
+{
+  "pyramid-a": {
+    "id": "pyramid-a",
+    "status": "FAILED",
+    "endpoint": "generate-image-v2",
+    "jobId": "3090d5ab-40e8-41dd-a06e-1da47d0b352d",
+    "submittedAt": "2026-11-26T14:14:25.066Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: an ancient desert pyramid, a guarded treasure tomb: a big stepped pyramid of golden sandstone blocks #d6a862 with #9a6a3a shadows and a capstone of gold #e8b83a on its tip, a dark square doorway at the middle of its front bottom between two small seated stone guardian statues with jackal heads, a short flight of steps up to the door, a few gold coins on the steps. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 200,
+        "height": 144
+      },
+      "no_background": true,
+      "seed": 88601,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: an ancient desert pyramid, a guarded treasure tomb: a big stepped pyramid of golden sandstone blocks #d6a862 with #9a6a3a shadows and a capstone of gold #e8b83a on its tip, a dark square doorway at the middle of its front bottom between two small seated stone guardian statues with jackal heads, a short flight of steps up to the door, a few gold coins on the steps. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, camel, palm tree, sand dune, ground, sky, sun."
+    },
+    "candidates": [],
+    "failure": "PixelLab refused the job (policy check: Generation failed because it is against policy); no candidates, no charge recorded"
+  },
+  "sphinx-a": {
+    "id": "sphinx-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5fce4813-32c5-4ce8-b6d8-0b6154f397d6",
+    "submittedAt": "2026-11-26T14:18:46.712Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a great stone sphinx lying on a low stone plinth: the body of a lion of golden sandstone #d6a862 with #9a6a3a shadows lying down with its front paws stretched out towards the viewer, a calm wise human head wearing a striped headdress of blue #3f6fb0 and gold #e8b83a, eyes open, a small stone tablet carved with a question mark between its paws. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 88602,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a great stone sphinx lying on a low stone plinth: the body of a lion of golden sandstone #d6a862 with #9a6a3a shadows lying down with its front paws stretched out towards the viewer, a calm wise human head wearing a striped headdress of blue #3f6fb0 and gold #e8b83a, eyes open, a small stone tablet carved with a question mark between its paws. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, palm tree, pyramid, sand dune, ground."
+    },
+    "at": "2026-11-26T14:20:55.535Z",
+    "usageUsd": 0.08117469053798251,
+    "candidates": [
+      {
+        "file": "sphinx-a-0.png",
+        "sha256": "35aead5650cbb35bc091ad593f98d8a171361a867aaf09c41b90991428a11af0",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sphinx-a-1.png",
+        "sha256": "84e91f9d2b98e655e4d80f8f70c2a69124b9da8e075f6e3f0f33fa1478f5b422",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sphinx-a-2.png",
+        "sha256": "0580156e25958ad5c9c243727c4f467e05d0c1283e3e423dd090928f2388d6d2",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sphinx-a-3.png",
+        "sha256": "f1c1023041021b412d13fac8f8249cbfb1616838ce6d79f832f1340877658c9c",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "sun-temple-a": {
+    "id": "sun-temple-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "0e1bc99b-c9eb-4bdb-a3ce-98fe1e44bc03",
+    "submittedAt": "2026-11-26T14:20:55.618Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small open sun temple of the desert: a square sandstone shrine #d6a862 with #9a6a3a shadows, four thick columns holding a flat roof, a big golden sun disc #f0b830 with short rays standing on top of the roof, a stone altar with a small flame #f08a2a inside between the columns, wide steps at the front, two sandstone braziers at the front corners. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 88603,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a small open sun temple of the desert: a square sandstone shrine #d6a862 with #9a6a3a shadows, four thick columns holding a flat roof, a big golden sun disc #f0b830 with short rays standing on top of the roof, a stone altar with a small flame #f08a2a inside between the columns, wide steps at the front, two sandstone braziers at the front corners. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, palm tree, pyramid, sand dune, ground, sky."
+    },
+    "at": "2026-11-26T14:22:49.688Z",
+    "usageUsd": 0.0806719331741333,
+    "candidates": [
+      {
+        "file": "sun-temple-a-0.png",
+        "sha256": "5ea05637a03a9e370d71d2dc2aeb4b08c2bd44a1364e1f88e8c94220f322a53c",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sun-temple-a-1.png",
+        "sha256": "6e6d9cc3eff91208962e342bf3d88630b6667af26498aa9b5a0181134f666495",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sun-temple-a-2.png",
+        "sha256": "be57236f139d6edfba94f88182107b1d3593f4f6ab469251afc3d2b5aeea607f",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "sun-temple-a-3.png",
+        "sha256": "a0dc7aa3fc44cef565030820176878d5c7b7235da6920b4d8e6fb0a177faf467",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "tomb-a": {
+    "id": "tomb-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "2396e0e3-a2f4-4b74-b7f3-b391831042ea",
+    "submittedAt": "2026-11-26T14:22:49.916Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a half-buried ancient desert tomb, a creature bank: the top of a sandstone tomb entrance #c99a5a with #8a6038 shadows sunk deep into a mound of sand, a dark doorway framed by two square pillars and a heavy lintel carved with a scarab, a few broken steps going down into it, a cracked clay urn and some scattered bones at the front, a torn grey cloth flapping from the lintel. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 88604,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a half-buried ancient desert tomb, a creature bank: the top of a sandstone tomb entrance #c99a5a with #8a6038 shadows sunk deep into a mound of sand, a dark doorway framed by two square pillars and a heavy lintel carved with a scarab, a few broken steps going down into it, a cracked clay urn and some scattered bones at the front, a torn grey cloth flapping from the lintel. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, mummy, skeleton figure, palm tree, pyramid, ground, sky."
+    },
+    "at": "2026-11-26T14:24:19.053Z",
+    "usageUsd": 0.08053215437465244,
+    "candidates": [
+      {
+        "file": "tomb-a-0.png",
+        "sha256": "d279357ba2ec7deae04d15bc2a5d2211cb222c263e1864ab88959ce98a602669",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "tomb-a-1.png",
+        "sha256": "5b6440449f86571552f9d1570bd87a1a939700b5723ad38eec049ad12564624b",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "tomb-a-2.png",
+        "sha256": "89321a8e4be6c61f88a0298ec54969b35601bbc4e0a738b2a655df9138f376ac",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "tomb-a-3.png",
+        "sha256": "7ae5da5af3f99a02c65b779426e131f901762484757d5dc7a9c7b6ac0c878c9f",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "pyramid-b": {
+    "id": "pyramid-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "cb140abd-b781-4ca0-98ae-2bf0bccf415d",
+    "submittedAt": "2026-11-26T14:24:19.148Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a big ancient desert pyramid: a stepped pyramid of golden sandstone blocks #d6a862 with #9a6a3a shadows, a shining gold capstone #e8b83a on its tip, a dark square doorway in the middle of its front at the bottom, a short flight of stone steps up to the door between two small stone lion statues, two tall sandstone pillars with gold tops at the front corners. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 200,
+        "height": 144
+      },
+      "no_background": true,
+      "seed": 88605,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a big ancient desert pyramid: a stepped pyramid of golden sandstone blocks #d6a862 with #9a6a3a shadows, a shining gold capstone #e8b83a on its tip, a dark square doorway in the middle of its front at the bottom, a short flight of stone steps up to the door between two small stone lion statues, two tall sandstone pillars with gold tops at the front corners. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, camel, palm tree, sand dune, ground, sky, sun."
+    },
+    "at": "2026-11-26T14:26:01.897Z",
+    "usageUsd": 0.08029675165812175,
+    "candidates": [
+      {
+        "file": "pyramid-b-0.png",
+        "sha256": "93e14a860237a674492a150a43c5ce9dcd45d9a9c670b99bcc3769a22ba88f1e",
+        "width": 200,
+        "height": 144
+      }
+    ]
+  }
+}

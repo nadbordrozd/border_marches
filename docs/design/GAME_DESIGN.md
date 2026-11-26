@@ -142,6 +142,7 @@ once are offered one after another.
 | Jungle                |           150 |           212 | 100 / 141 for Lost World natives (the Chieftain) |
 | Badlands              |           125 |           177 |                                                  |
 | Wasteland             |           150 |           212 |                                                  |
+| Sand (desert)         |           125 |           177 | bead bzc.88: as slow as the badlands             |
 | Water (shallow, deep) |    impassable |               | no boats in the MVP                              |
 | Mountains             |    impassable |               |                                                  |
 | Forest                |    impassable |               |                                                  |

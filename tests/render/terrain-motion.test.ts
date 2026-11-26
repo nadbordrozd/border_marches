@@ -269,6 +269,20 @@ describe("living decorations", () => {
     }
   });
 
+  it("rolls the desert's tumbleweed a few pixels each way (bead bzc.88)", () => {
+    expect(LIVING_MOTION["desert-tumbleweed"]).toBe("roll");
+    expect(livingPose("roll", 0.3, 0)).toEqual({ dx: 0, dy: 0, frame: 0 });
+    const dx = new Set<number>();
+    for (let t = 1; t < 11000; t += 37) {
+      const p = livingPose("roll", 0.3, t);
+      expect(Math.abs(p.dx)).toBeLessThanOrEqual(3);
+      expect(p.dy === 0 || p.dy === -1).toBe(true);
+      dx.add(p.dx);
+    }
+    expect(Math.min(...dx)).toBe(-3);
+    expect(Math.max(...dx)).toBe(3);
+  });
+
   it("flaps: both frames, each part and each phase out of step", () => {
     const frames = new Set<number>();
     let apart = 0;

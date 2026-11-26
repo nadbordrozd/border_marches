@@ -16,6 +16,9 @@ export const TERRAIN_MOVE_COST: Readonly<Record<Terrain, number | null>> = {
   // Snow (bead bzc.87): as heavy as the roughest grounds, like Heroes'
   // snow; a Hunter's Lodge's snowshoes bring it down to 100.
   snow: 150,
+  // Desert sand (bead bzc.88): soft dunes, as slow as the badlands (150
+  // pushed the start kit of a home next to a desert out of reach).
+  sand: 125,
   water: null,
 };
 

@@ -57,7 +57,8 @@ export function generateNamedBase(def: NamedMapDef): GameMap {
  * volcanic zones of bead bzc.83. The named maps were authored before volcanic
  * ground existed and their edits name generated objects by place; volcanic
  * zones draw from their own random stream, so turning them off leaves each
- * named map's base exactly as it was authored.
+ * named map's base exactly as it was authored. The same holds for the
+ * desert zones of bead bzc.88 (and so for the desert's sites).
  */
 const NAMED_CONFIG = {
   terrain: {
@@ -68,6 +69,10 @@ const NAMED_CONFIG = {
     // Nor the winter zones of bead bzc.87, for the same reason.
     winter: {
       ...DEFAULT_GEN_CONFIG.terrain.winter,
+      chance: { S: 0, M: 0, L: 0 },
+    },
+    desert: {
+      ...DEFAULT_GEN_CONFIG.terrain.desert,
       chance: { S: 0, M: 0, L: 0 },
     },
   },

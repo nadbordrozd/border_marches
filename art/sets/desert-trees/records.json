@@ -1,0 +1,380 @@
+{
+  "palm-a": {
+    "id": "palm-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "a39917f2-e227-4b53-a5cf-67ccac65af29",
+    "submittedAt": "2026-11-26T13:52:45.392Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small desert oasis palm tree, each image a different one of these: a date palm with a round crown of arching fronds and a cluster of orange dates, a short squat fan palm with a bushy crown, a young palm with a slightly leaning ringed trunk, a double palm with two crowns from one base. Fronds deep olive green #4f7a3a, shadow #2f5028, light #7fa356 on the left side; a ringed tan trunk #a27a4a with shadow #6e4e2c. A full crown about two thirds of the image wide, nearly the full image tall."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 88201,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one small desert oasis palm tree, each image a different one of these: a date palm with a round crown of arching fronds and a cluster of orange dates, a short squat fan palm with a bushy crown, a young palm with a slightly leaning ringed trunk, a double palm with two crowns from one base. Fronds deep olive green #4f7a3a, shadow #2f5028, light #7fa356 on the left side; a ringed tan trunk #a27a4a with shadow #6e4e2c. A full crown about two thirds of the image wide, nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, coconut, beach, sand patch, ground, grass, flowers, pot."
+    },
+    "at": "2026-11-26T13:54:58.713Z",
+    "usageUsd": 0.08237021398544311,
+    "candidates": [
+      {
+        "file": "palm-a-0.png",
+        "sha256": "a2bb9d30a10f057a28b5f07c0dd1758152a89ccf22d055f66aefc7fbe4776bf5",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-1.png",
+        "sha256": "8d251b75cce412289492bbc57f8c2cd1d78e32f58b50116400a4cea5fe6979bd",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-2.png",
+        "sha256": "6a7566a59245cf67d4a4dc9ad1a38e37cd34bdbb66cb7d7d0789cae23c4db9e5",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-3.png",
+        "sha256": "d17a4fc3ff814cde666a7193cc71da0f7b83f58157d0b2e0978cff81b47e71bd",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-4.png",
+        "sha256": "4690141f8d9e3edce0854c19129c50218d1172deca515571a06a5eb5d6195eb7",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-5.png",
+        "sha256": "473f7eb83250fa9268b1782cbe4f7db56f86acf8841d8d3f1f0a6d9e80185c9d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-6.png",
+        "sha256": "49749f55cd040f2d0e93304fe4ae2dedb66920cc063b6fb31cd591e62afc7821",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-7.png",
+        "sha256": "68e088a932960d28d61b4eb130266da4c6c1e91b5db8ccf80a0625109f2d0cd6",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-8.png",
+        "sha256": "b237b51e2f3cb0d36380133af0af15750c6392ef03f937cf2ba97ebc5092aef2",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-9.png",
+        "sha256": "29a6307a542abeff52ce3211baa6e9b7ca00cb1d2a005c84ae32180e705619b3",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-10.png",
+        "sha256": "ba8a989fb4fca49fe1594bf55b8405348dc5f5e397e04c81f7053e65397f7d68",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-11.png",
+        "sha256": "57c816a77ac3c643f9ceb2776aeb42e92d905c74e9a42d2ce9157b8d10c61418",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-12.png",
+        "sha256": "5ba70fc72b1aceccdee4147edf099f1ee73d454c29ec2bb54d1e15b8c616f066",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-13.png",
+        "sha256": "71da01aa66468a329164768e0db96044302e593a37766873de504b601caedfb2",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-14.png",
+        "sha256": "988fe8f9f12f36570c910de4adec19e03e65030cdccd8dd1b485fa3130956005",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-15.png",
+        "sha256": "1ad78eff44e1adabf747a134b90a02dad019718d95c732bfbb20367faed71e78",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-16.png",
+        "sha256": "89c81638c365faff567a903c93dc8fffbbd381f9fd3e2706cb1da0261452ab25",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-17.png",
+        "sha256": "b48699539b12e622f032151c215109fc96658b40c7d25d1b05918d09a011d553",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-18.png",
+        "sha256": "0a494a900b35ffab83bb71f1f42119edb6856df52418727dbc82f6192d2837bf",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-19.png",
+        "sha256": "1d463b017383958f2fd2f60d5a52c0b53502579f51edcf3e5d3dbd2192689aac",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-20.png",
+        "sha256": "f8a5db02aeaae77b23b93e67dc8d6ae9b07c90842177310ad56f0bf2a9503d5a",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-21.png",
+        "sha256": "2932e5702eea57ebb6faa95a8b3c2e16ddbf06f0e09b4263ea7d461a25e9bb8e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-22.png",
+        "sha256": "ee66a5484767ed6936f2ef4fadb1e812df3a384a50a15d699a7f96417079790b",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-23.png",
+        "sha256": "4d00da7bb2fcbdf8fa4a46e4e18d4ab14034b4000cf23d8108fa05e4661afb2c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "palm-a-24.png",
+        "sha256": "9b2b091c9242f40390670dc3cec462e5dc01dfa71e615f8f7bd9abe5ed51f2e4",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "cactus-a": {
+    "id": "cactus-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "9812e5e5-3df9-469f-aae0-68f880a9d098",
+    "submittedAt": "2026-11-26T13:54:58.791Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one desert cactus, each image a different one of these: a tall saguaro with two raised arms, a chunky saguaro with one arm, a big clump of round prickly pear pads with a few pink fruits, a cluster of three ribbed column cacti of different heights, a fat round barrel cactus with a yellow flower on top. Cactus green #5f8a4a, shadow #3a5a34, light #8fb36a on the left side, pale spines. Chunky and solid, about half of the image wide and most of the image tall."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 88202,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one desert cactus, each image a different one of these: a tall saguaro with two raised arms, a chunky saguaro with one arm, a big clump of round prickly pear pads with a few pink fruits, a cluster of three ribbed column cacti of different heights, a fat round barrel cactus with a yellow flower on top. Cactus green #5f8a4a, shadow #3a5a34, light #8fb36a on the left side, pale spines. Chunky and solid, about half of the image wide and most of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, pot, flower pot, sand patch, ground, eyes, skull."
+    },
+    "at": "2026-11-26T13:57:03.980Z",
+    "usageUsd": 0.08324540426996019,
+    "candidates": [
+      {
+        "file": "cactus-a-0.png",
+        "sha256": "541ca8a824900bc0c4ffe6148273cdefa95881646156532e17d7c3ea80f3ad1b",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-1.png",
+        "sha256": "fe1549b64b1d9c9a2f5ebae92c299ac6ad8c0cf80ecb3481cdedce54e9bb4455",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-2.png",
+        "sha256": "42942a57d83643a0877edaeea7d01948b46b60e74952cd34525836eb8bf80f17",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-3.png",
+        "sha256": "d4c32583bab3ce16da211cf3f1c0bce944879916371b7631097c4bfe6cb2afac",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-4.png",
+        "sha256": "eebb5850473b584b540974cc0ef37831c56b5cbfdb80c2c78d6c0299bae1586a",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-5.png",
+        "sha256": "523425229c69663aca0ada7d47bf65714632faa6aa8b14c617a04093b8a29f84",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-6.png",
+        "sha256": "223a64a6a2104de8358670e27fe7f00513d45d2c2695b9a1a4c94b8161a22636",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-7.png",
+        "sha256": "6a81abecaa6fd13efc2e4aea7be0537782ba6e56f3aed33caf245095ca63863c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-8.png",
+        "sha256": "16fcfd0b60c5ddd4929f5b7d0d992d82c7d3c5dedd8618b383c22ec85498c10c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-9.png",
+        "sha256": "99c3c90a9886fc8f4c822475a1222a7ccec65f8901f00af39f65a99b6393de3d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-10.png",
+        "sha256": "f4d00c0f76f9ef94036311a58aacb9bbcbe668c21d2434eb4961022b4a2f5a47",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-11.png",
+        "sha256": "7bb6549c3ff6ce1a081c48d2491bc36c7baa6b1b71513ca247e10a430672d2e5",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-12.png",
+        "sha256": "cf7ce6c5538126aa16e9de8e14ab44b0fbc606866259bf1c879785f08e78e030",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-13.png",
+        "sha256": "2c7935002aa7cf4ec45aad42912c3530b19bf95c596ccb83bbac55a4c7758f7c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-14.png",
+        "sha256": "3a39114383cc0d7dea3c2858ef45fe5eeaf299a6c1d5cb7d1857dcde95526883",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-15.png",
+        "sha256": "ce75dd7156bebccaef7abc2a491d2c30f1e43f9eee6eb071b16d2e8b402ef9cb",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-16.png",
+        "sha256": "30558556a0c9b960d15423bbc1f43aa4993141f7ac44b2e848cdbf8cff83b40c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-17.png",
+        "sha256": "fede4cdc06fce3fc7ca9cb06ebd1bd17df00306f42227b60a55e38433071d291",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-18.png",
+        "sha256": "025680175e2721d8771a83d1744d75b13c41d59135843373a693cfa2479f3a04",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-19.png",
+        "sha256": "998bc4123c304a2a3d4793ce03e55ee625eccbb4f867893bb1ff993ee012287e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-20.png",
+        "sha256": "d591825c18192877585a6cfed92ccb7199bead81730b0480cbf2ec467780386d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-21.png",
+        "sha256": "56dae2d7a75f34a73e33e5992d1c40ae8304502ba5d4c11991e6532a54a90765",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-22.png",
+        "sha256": "d564ec4fa2eb69be3dc8004f181c62e291626e68b770075cf7d7c2f29d48b6ca",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-23.png",
+        "sha256": "1e432a27a51968cda6debec310ab5edc0a7e2d3cbe43d2886f384b4d6ff2fa92",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "cactus-a-24.png",
+        "sha256": "e83c543bf61b6614ae20d85b22a7c32ff90178b1728db04ea95ea39c37e38975",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  }
+}

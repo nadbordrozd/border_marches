@@ -20,6 +20,17 @@ forest set, so battles on snow borrow the grass conifer clumps
 (`FOREST_FAMILY`). In `GROUND_RANK` it sits just before the volcanic: it
 drifts out over every ground but the lava (winter zones never touch
 volcanic ones).
+| sand | `sand.png` (400 x 400), `sand-swatch.png` (80 x 80) | 5 cells | studio set `grounds-sand` (bead bzc.88) |
+
+The sand (bead bzc.88) is one calm layer: golden dunes with soft diagonal
+wind ripples (take `dunes-a`), low in contrast and seamless in a 3 x 3
+repeat. It ranks last (`GROUND_RANK`), so the older grounds keep their
+ranks and spill shapes; its drifting edge runs out over its neighbours. It
+has its own trees and peaks (palm and cactus groves, golden sandstone mesas
+and spires: its own art family in `src/assets/ground-family.ts`) and borrows
+the steppe's imported forest set (`FOREST_FAMILY`, battle and town screens); no
+imported doodads stand on it, since its own decorations (skulls, tumbleweed)
+would repeat them.
 
 The volcanic texture is two layers: the calm basalt base (take `base-b`) and
 an overlay of lava cracks (take `pixen-a`) drawn at its own period, so the
@@ -56,6 +67,10 @@ ground; the rest is plain basalt so units and pieces stand out.
   stones drew a stamped rock motif; one take came back as a faint brick
   grid. The negative lists puddles, blobs, dots, circles, squares and
   stones.
+- Sand: pixflux 400 x 400, flat shading, no fragments at all; "rolling
+  dunes seen from straight above ... no single big dune" gave the calm
+  ripples (`dunes-a`); "a wide flat field of sand with wind ripples" gave
+  loud white bead-like stripes or cell outlines that read as paving.
 
 ## Acceptance
 
