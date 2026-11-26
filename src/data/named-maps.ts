@@ -8,6 +8,7 @@
  */
 import type { MapSize, PlayerCount } from "../core/map/gen/config.ts";
 import type { Obstacle } from "../core/map/types.ts";
+import type { MapZoneKind } from "./mapObjects.ts";
 import type { ObjectTypeId } from "./objectTypes.ts";
 import type { FactionId } from "./types.ts";
 
@@ -43,6 +44,31 @@ export type MapEdit =
   /** Raises or clears obstacles on land cells. */
   | { op: "ground"; cells: readonly XY[]; obstacle: Obstacle; note: string };
 
+/** A landscape a named map can ask the generator for (bead bzc.89). */
+export type NamedLandscape = "volcanic" | "winter" | "desert";
+
+/**
+ * Generator options of a named map beyond seed, size and players (bead
+ * bzc.89). A map without them is generated with no volcanic, winter or
+ * desert zones and the generator's own fill, as the first named maps were.
+ */
+export interface NamedMapGen {
+  /**
+   * Zones of each landscape the map must have. The generator picks the
+   * zones (deep wild zones, never a start, a neutral town or the Hold) from
+   * the seed; the map's tests check that every one was placed.
+   */
+  landscapes?: Readonly<Partial<Record<NamedLandscape, number>>>;
+  /** Neutral towns (each in its own middle zone), as the generator's range. */
+  neutralTowns?: readonly [number, number];
+  /** Visitable objects per 100 open cells, by zone kind (a richer fill). */
+  density?: Readonly<Partial<Record<MapZoneKind, number>>>;
+  /** Prizes in each guarded pocket (inclusive range). */
+  pocketPrizes?: readonly [number, number];
+  /** Most guarded pockets in one zone. */
+  pocketsPerZone?: number;
+}
+
 export interface NamedMapDef {
   id: string;
   name: string;
@@ -51,6 +77,8 @@ export interface NamedMapDef {
   size: MapSize;
   players: PlayerCount;
   seed: number;
+  /** Generator options (absent on the first two maps). */
+  gen?: NamedMapGen;
   /** Recommended faction per player slot (slot 0 is the human). */
   factions: readonly FactionId[];
   /** One line on the recommended setup. */
@@ -897,7 +925,589 @@ const HOURGLASS_MARCHES: NamedMapDef = {
   ],
 };
 
+/**
+ * The showcase (bead bzc.89): three players on a large map that uses every
+ * landscape. The Realm starts in the south-eastern jungle, the Restless in
+ * the western meadows, the Horde on the northern steppe; the generator is
+ * asked for one volcanic, one winter and one desert zone (seed 4354 puts
+ * the snow in the north-west, the lava in the south-west and the desert
+ * round an oasis lake south of the Hold) and three neutral towns, with a
+ * denser fill. Three players, not four: one start per faction, and the
+ * generator's fourth start would sit on slow wasteland.
+ */
+const NINEFOLD_LANDFALL: NamedMapDef = {
+  id: "ninefold-landfall",
+  name: "The Ninefold Landfall",
+  intro:
+    "Nine worlds sank on the same night and landed here together, stitched into one patchwork shore: meadow, jungle and steppe, red badlands and grey waste, a frozen north, a field of lava, a desert round an oasis lake, and the sea. Three courts wake among them: the Realm in the south-eastern jungle, the Restless in the western meadows and the Goblin Horde on the northern steppe. One drowned world buried its giant with the Second Left Glove, and the landing tore it in three: the Thumb lies with a king in the Pyramid beside the oasis, the Lining in the Frost Giant's Barrow under the northern snow, and the Odd Cufflink under four tyrant lizards at the bottom of the lava fields. Between them wait the Sphinx and her riddles, the Sun Temple, the Aurora Spire, the walruses' rookery and more treasure than any one world ever held. Victory: be the last court standing.",
+  size: "L",
+  players: 3,
+  seed: 4354,
+  gen: {
+    landscapes: { volcanic: 1, winter: 1, desert: 1 },
+    neutralTowns: [3, 3],
+    density: { start: 30, middle: 27, town: 28, hold: 30 },
+  },
+  factions: ["humans", "undead", "goblins"],
+  setup:
+    "You as The Realm in the south-east, The Restless (computer) in the west and The Goblin Horde (computer) in the north; pick any faction and the computer takes the other two.",
+  edits: [
+    // Names.
+    {
+      op: "set",
+      id: "town-4",
+      at: [28, 51],
+      data: { faction: "goblins", name: "Cinderford" },
+      note: "Name the south-western neutral town, between the lava fields and the desert; a Horde town. Each faction has one neutral town, never the faction of the start nearest it.",
+    },
+    {
+      op: "set",
+      id: "town-5",
+      at: [63, 37],
+      data: { faction: "undead", name: "Greyfold" },
+      note: "Name the eastern neutral town in the grey wasteland; a Restless town.",
+    },
+    {
+      op: "set",
+      id: "town-6",
+      at: [64, 11],
+      data: { faction: "humans", name: "Redcairn" },
+      note: "Name the north-eastern neutral town in the red badlands; a Realm town.",
+    },
+    // The Second Left Glove, one piece in each of the three wild lands.
+    {
+      op: "set",
+      id: "pyramid-1",
+      at: [39, 50],
+      data: {
+        value: 21000,
+        guard: [
+          { creature: "late-king", count: 2 },
+          { creature: "vampire", count: 5 },
+          { creature: "banshee", count: 16 },
+          { creature: "ghoul", count: 20 },
+        ],
+        prize: {
+          artifacts: ["the-gloves-thumb", "bloodstone-ring"],
+          spell: "whiteout",
+          gold: 5000,
+          essence: 5,
+        },
+      },
+      note: "The Pyramid beside the oasis keeps the Glove's Thumb with its Bloodstone Ring and great spell; two Late Kings join its dead (guard fight value 13354, 64% of 21000).",
+    },
+    {
+      op: "set",
+      id: "frost-giants-barrow-1",
+      at: [9, 16],
+      data: {
+        size: "large",
+        value: 15000,
+        guard: [{ creature: "rime-walrus", count: 10 }],
+        prize: {
+          artifacts: ["the-gloves-lining", "sensible-shoes"],
+          gold: 5000,
+          ore: 15,
+        },
+      },
+      note: "The Frost Giant's Barrow in the frozen north becomes a large bank holding the Glove's Lining: 10 rime walruses (8680, 58% of 15000) instead of 2.",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-cufflink",
+      type: "loose-artifact",
+      at: [7, 71],
+      data: { artifact: "the-odd-cufflink", value: 6000 },
+      note: "The Odd Cufflink at the bottom of the lava fields, against the south edge.",
+    },
+    {
+      op: "guard",
+      id: "monster-cufflink",
+      at: [7, 70],
+      creature: "t-rex",
+      count: 4,
+      value: 10000,
+      guards: ["loose-artifact-cufflink"],
+      note: "Four tyrant lizards bask on the warm rock over it (fight value 10016): the lava's dragon.",
+    },
+    // Fair starts: gold for the west.
+    {
+      op: "set",
+      id: "haunted-mine-2",
+      at: [9, 57],
+      data: { resource: "gold", value: 12000 },
+      note: "The west's nearest gold lay 2.44 days out against 1.09 and 1.08: the haunted sawmill south of its start becomes a haunted gold mine, 0.99 days out.",
+    },
+    {
+      op: "set",
+      id: "monster-26",
+      at: [9, 56],
+      data: { count: 22, value: 12000 },
+      note: "Its sextons grow with it, 4 to 22 (fight value 1608 to 8844).",
+    },
+    // Fair starts: the north reached far more fights within two days.
+    {
+      op: "remove",
+      id: "tree-of-knowledge-3",
+      at: [26, 15],
+      note: "Four guarded sites crowd the valley south-west of the northern start: the tree of knowledge goes.",
+    },
+    {
+      op: "remove",
+      id: "monster-102",
+      at: [27, 16],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "stray-hut-12",
+      at: [28, 15],
+      note: "So does the stray hut.",
+    },
+    {
+      op: "remove",
+      id: "monster-105",
+      at: [27, 15],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "tutors-hut-14",
+      at: [29, 13],
+      note: "And a tutor's hut.",
+    },
+    {
+      op: "remove",
+      id: "monster-106",
+      at: [28, 14],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "faction-outpost-6",
+      at: [28, 22],
+      note: "Two faction outposts stood side by side south of the valley: one goes.",
+    },
+    {
+      op: "remove",
+      id: "monster-24",
+      at: [27, 21],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "faction-outpost-7",
+      at: [26, 25],
+      note: "And the other outpost's neighbours thin too: the second outpost goes.",
+    },
+    {
+      op: "remove",
+      id: "monster-25",
+      at: [25, 24],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "tutors-hut-15",
+      at: [27, 22],
+      note: "And the tutor's hut beside it.",
+    },
+    {
+      op: "remove",
+      id: "monster-107",
+      at: [27, 23],
+      note: "With its guard.",
+    },
+    // Fair starts: the northern start had one free mine within two days
+    // against two for the others; each start's second sawmill gets a guard.
+    {
+      op: "guard",
+      id: "monster-sawmill-se",
+      at: [60, 52],
+      creature: "crooner",
+      count: 10,
+      value: 1400,
+      guards: ["mine-wood-4"],
+      note: "10 crooners (1090) at the south-eastern start's second sawmill, 0.86 days out.",
+    },
+    {
+      op: "guard",
+      id: "monster-sawmill-w",
+      at: [23, 38],
+      creature: "crooner",
+      count: 10,
+      value: 1400,
+      guards: ["mine-wood-5"],
+      note: "The same at the western start's second sawmill, 0.5 days out.",
+    },
+    // ...and Wonders behind guards in nooks on the other starts' sides.
+    {
+      op: "add",
+      id: "loose-artifact-can",
+      type: "loose-artifact",
+      at: [66, 49],
+      data: { artifact: "watering-can", value: 6000 },
+      note: "A Watering Can in a jungle nook north of the south-eastern start, 1.3 days out.",
+    },
+    {
+      op: "guard",
+      id: "monster-can",
+      at: [67, 49],
+      creature: "groundskeeper",
+      count: 20,
+      value: 6000,
+      guards: ["loose-artifact-can"],
+      note: "Its guard: 20 groundskeepers (4560).",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-umbrella",
+      type: "loose-artifact",
+      at: [45, 60],
+      data: { artifact: "umbrella-of-state", value: 6000 },
+      note: "An Umbrella of State in a sandy nook west of the oasis, 1.4 days from the south-eastern start.",
+    },
+    {
+      op: "guard",
+      id: "monster-umbrella",
+      at: [46, 60],
+      creature: "sexton",
+      count: 11,
+      value: 6000,
+      guards: ["loose-artifact-umbrella"],
+      note: "Its guard: 11 sextons (4422).",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-slippers",
+      type: "loose-artifact",
+      at: [7, 27],
+      data: { artifact: "felt-slippers-of-the-night-shift", value: 6000 },
+      note: "Felt Slippers of the Night Shift in a badlands nook north of the western start, 1.5 days out.",
+    },
+    {
+      op: "guard",
+      id: "monster-slippers",
+      at: [8, 27],
+      creature: "gumshoe",
+      count: 17,
+      value: 6000,
+      guards: ["loose-artifact-slippers"],
+      note: "Its guard: 17 gumshoes (4471).",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-rod",
+      type: "loose-artifact",
+      at: [15, 28],
+      data: { artifact: "lightning-rod", value: 6000 },
+      note: "A Lightning Rod in a badlands nook north-east of the western start, 1.2 days out.",
+    },
+    {
+      op: "guard",
+      id: "monster-rod",
+      at: [15, 27],
+      creature: "notary",
+      count: 42,
+      value: 6000,
+      guards: ["loose-artifact-rod"],
+      note: "Its guard: 42 notaries (4494).",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-greatcoat",
+      type: "loose-artifact",
+      at: [2, 35],
+      data: { artifact: "bailiffs-greatcoat", value: 6000 },
+      note: "A Bailiff's Greatcoat in a meadow nook north-west of the western start, 1.1 days out.",
+    },
+    {
+      op: "guard",
+      id: "monster-greatcoat",
+      at: [3, 35],
+      creature: "sexton",
+      count: 11,
+      value: 6000,
+      guards: ["loose-artifact-greatcoat"],
+      note: "Its guard: 11 sextons (4422).",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-apron",
+      type: "loose-artifact",
+      at: [68, 67],
+      data: { artifact: "gardeners-apron", value: 6000 },
+      note: "A Gardener's Apron in a jungle nook south-east of the south-eastern start, 0.7 days out.",
+    },
+    {
+      op: "guard",
+      id: "monster-apron",
+      at: [68, 66],
+      creature: "groundskeeper",
+      count: 20,
+      value: 6000,
+      guards: ["loose-artifact-apron"],
+      note: "Its guard: 20 groundskeepers (4560).",
+    },
+    // Room to breathe: six wells and camps crowd the fields south of the
+    // northern start, and two camps stand side by side north of the Hold;
+    // four go, so the ground has room for its flowers and stones.
+    {
+      op: "remove",
+      id: "wishing-well-26",
+      at: [39, 21],
+      note: "A wishing well beside another wishing well goes.",
+    },
+    {
+      op: "remove",
+      id: "rally-camp-12",
+      at: [42, 21],
+      note: "A rally camp in the crowded field goes.",
+    },
+    {
+      op: "remove",
+      id: "rally-camp-11",
+      at: [45, 22],
+      note: "So does a second.",
+    },
+    {
+      op: "remove",
+      id: "rally-camp-26",
+      at: [41, 35],
+      note: "A rally camp beside another north of the Hold goes.",
+    },
+    // More banks: one more in each wild land, a second in the snow, and
+    // two in the east.
+    {
+      op: "add",
+      id: "sunken-tomb-oasis",
+      type: "sunken-tomb",
+      at: [42, 68],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [
+          { creature: "ghoul", count: 18 },
+          { creature: "banshee", count: 10 },
+        ],
+        prize: { gold: 2500, artifacts: ["lucky-penny"], essence: 2 },
+      },
+      note: "A second Sunken Tomb half buried at the desert's southern edge: 18 ghouls and 10 banshees (3926, 60% of 6500).",
+    },
+    {
+      op: "add",
+      id: "frost-giants-barrow-north",
+      type: "frost-giants-barrow",
+      at: [16, 10],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [{ creature: "rime-walrus", count: 5 }],
+        prize: { artifacts: ["fob-chain"], gold: 3000, ore: 10 },
+      },
+      note: "The giant's brother lies in a smaller barrow east of him: 5 rime walruses (4340, 67% of 6500).",
+    },
+    {
+      op: "add",
+      id: "landfall-wreck-lava",
+      type: "landfall-wreck",
+      at: [5, 69],
+      data: {
+        size: "large",
+        value: 15000,
+        guard: [{ creature: "fire-eater", count: 23 }],
+        prize: {
+          joiners: [{ creature: "fire-eater", count: 8 }],
+          artifacts: ["cider-flask"],
+          gold: 3000,
+        },
+      },
+      note: "A ship that landed on the lava beside the lizards, still burning, crewed by 23 fire-eaters (8924, 59% of 15000); eight of them join the victor.",
+    },
+    {
+      op: "add",
+      id: "quiet-yard-east",
+      type: "quiet-yard",
+      at: [70, 28],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [{ creature: "sexton", count: 10 }],
+        prize: { essence: 8, gold: 2500 },
+      },
+      note: "A quiet yard on the east edge between the south-eastern and northern starts (2.6 and 2.9 days): 10 sextons (4020, 62% of 6500).",
+    },
+    {
+      op: "add",
+      id: "stopped-belfry-frost",
+      type: "stopped-belfry",
+      at: [7, 11],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [{ creature: "winder", count: 20 }],
+        prize: { xp: 3000, gold: 2500 },
+      },
+      note: "A belfry frozen silent in the far north-west, more than three days from every start: 20 winders (4100, 63% of 6500).",
+    },
+    {
+      op: "add",
+      id: "overgrown-greenhouse-east",
+      type: "overgrown-greenhouse",
+      at: [65, 35],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [{ creature: "groundskeeper", count: 17 }],
+        prize: { wood: 20, essence: 5, gold: 2000 },
+      },
+      note: "An overgrown greenhouse in the meadow by Greyfold: 17 groundskeepers (3876, 60% of 6500).",
+    },
+    // Free loot: the new guards closed some off (south-east 3900, west
+    // 4000, north 5100 within two days).
+    {
+      op: "add",
+      id: "chest-southeast",
+      type: "treasure-chest",
+      at: [71, 61],
+      data: { resource: "gold", amount: 1000, chest: true, xp: 750 },
+      note: "A chest in a jungle nook against the east edge, 0.6 days from the south-eastern start.",
+    },
+    {
+      op: "add",
+      id: "chest-west",
+      type: "treasure-chest",
+      at: [5, 39],
+      data: { resource: "gold", amount: 1000, chest: true, xp: 750 },
+      note: "A chest in a meadow nook west of the western start, 0.9 days out.",
+    },
+    // A find beside each start's road, the same for all three.
+    {
+      op: "add",
+      id: "event-tile-southeast",
+      type: "event-tile",
+      at: [60, 62],
+      data: {
+        text: "Nine worlds fell here in one night. A crate from one of them lies split open beside the road.",
+        prize: { gold: 750, wood: 5 },
+        value: 1250,
+      },
+      note: "First-week find beside the south-eastern road.",
+    },
+    {
+      op: "add",
+      id: "event-tile-west",
+      type: "event-tile",
+      at: [17, 42],
+      data: {
+        text: "Nine worlds fell here in one night. A crate from one of them lies split open beside the road.",
+        prize: { gold: 750, wood: 5 },
+        value: 1250,
+      },
+      note: "The same find beside the western road.",
+    },
+    {
+      op: "add",
+      id: "event-tile-north",
+      type: "event-tile",
+      at: [37, 13],
+      data: {
+        text: "Nine worlds fell here in one night. A crate from one of them lies split open beside the road.",
+        prize: { gold: 750, wood: 5 },
+        value: 1250,
+      },
+      note: "The same find beside the northern road.",
+    },
+    {
+      op: "add",
+      id: "sign-southeast",
+      type: "sign",
+      at: [65, 58],
+      data: {
+        text: "West: the oasis, the Sphinx and the Pyramid, where the dead keep a thumb that is not theirs. North: Greyfold.",
+      },
+      note: "A signpost on the south-eastern road.",
+    },
+    {
+      op: "add",
+      id: "sign-west",
+      type: "sign",
+      at: [11, 42],
+      data: {
+        text: "South: the lava fields, and something large that likes the heat. North: the snow, and a giant's barrow.",
+      },
+      note: "A signpost on the western road.",
+    },
+    {
+      op: "add",
+      id: "sign-north",
+      type: "sign",
+      at: [42, 14],
+      data: {
+        text: "West: the frozen north and the Frost Giant's Barrow. South: the Warlord's Hold, and past it the desert.",
+      },
+      note: "A signpost on the northern road.",
+    },
+    // Signs at the showpieces.
+    {
+      op: "add",
+      id: "sign-pyramid",
+      type: "sign",
+      at: [37, 51],
+      data: {
+        text: "THE PYRAMID. Within: a king, his court, and the Thumb of the Second Left Glove. Visitors are expected to stay.",
+      },
+      note: "Announce the Pyramid's Marvel piece.",
+    },
+    {
+      op: "add",
+      id: "sign-sphinx",
+      type: "sign",
+      at: [36, 56],
+      data: {
+        text: "The Sphinx asks one riddle of every traveller. A wrong answer costs the day; a right one, she says, costs her nothing.",
+      },
+      note: "A sign on the desert road past the Sphinx.",
+    },
+    {
+      op: "add",
+      id: "sign-lava",
+      type: "sign",
+      at: [18, 61],
+      data: {
+        text: "HOT GROUND. The lizards at the bottom of the fields sit on a cufflink and will not be moved by anything polite.",
+      },
+      note: "Point at the lava's guarded Marvel piece.",
+    },
+    {
+      op: "add",
+      id: "sign-frost",
+      type: "sign",
+      at: [17, 12],
+      data: {
+        text: "West, under the snow: the Frost Giant's Barrow. The giant took a glove lining to his grave; his walruses kept it.",
+      },
+      note: "Point at the Barrow's Marvel piece.",
+    },
+    // The contested middle.
+    {
+      op: "add",
+      id: "event-tile-hold",
+      type: "event-tile",
+      at: [44, 41],
+      data: {
+        text: "A herald of nine crowns, none of them real, demands that you kneel to all of them at once.",
+        prize: { gold: 2000, xp: 1500 },
+        guard: [{ creature: "winder", count: 14 }],
+        value: 3950,
+      },
+      note: "A guarded event below the Hold: 14 winders (2870) for 2000 gold and 1500 experience.",
+    },
+  ],
+};
+
 export const NAMED_MAPS: readonly NamedMapDef[] = [
   KEEPERS_TOLL,
   HOURGLASS_MARCHES,
+  NINEFOLD_LANDFALL,
 ];

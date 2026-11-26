@@ -11,7 +11,8 @@
  *   --seeds 11,12        map and game seeds (default 11,12)
  *   --days 84            days to play (default 84, three months)
  *   --every 7            print a table row every N days (default 7)
- *   --map <id>           a named map (keepers-toll, hourglass-marches)
+ *   --map <id>           a named map (keepers-toll, hourglass-marches,
+ *                        ninefold-landfall)
  *                        instead of a generated one; its own size,
  *                        players and factions (the seeds then only feed
  *                        battles and taverns)

@@ -210,8 +210,12 @@ describe("winter zones in the generator", () => {
     });
   });
 
-  it("keeps the named maps free of snow", () => {
-    for (const def of NAMED_MAPS)
-      expect(snowCells(generateNamedBase(def)), def.id).toBe(0);
+  it("keeps the named maps free of snow unless they ask for winter", () => {
+    for (const def of NAMED_MAPS) {
+      const winter = (def.gen?.landscapes?.winter ?? 0) > 0;
+      const snow = snowCells(generateNamedBase(def));
+      if (winter) expect(snow, def.id).toBeGreaterThan(0);
+      else expect(snow, def.id).toBe(0);
+    }
   });
 });

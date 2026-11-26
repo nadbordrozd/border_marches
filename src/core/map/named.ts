@@ -16,6 +16,7 @@ import { getCreature, isCreatureId } from "../../data/creatures.ts";
 import {
   NAMED_MAPS,
   type MapEdit,
+  type NamedLandscape,
   type NamedMapDef,
 } from "../../data/named-maps.ts";
 import { OBJECT_TYPES } from "../../data/objectTypes.ts";
@@ -24,6 +25,8 @@ import {
   DEFAULT_GEN_CONFIG,
   corridorCells,
   generateMapWithInfo,
+  type ConfigOverrides,
+  type GenConfig,
 } from "./generate.ts";
 import {
   cellAt,
@@ -60,7 +63,9 @@ export function generateNamedBase(def: NamedMapDef): GameMap {
  * named map's base exactly as it was authored. The same holds for the
  * desert zones of bead bzc.88 (and so for the desert's sites).
  */
-const NAMED_CONFIG = {
+const NAMED_CONFIG: {
+  terrain: Pick<GenConfig["terrain"], NamedLandscape>;
+} = {
   terrain: {
     volcanic: {
       ...DEFAULT_GEN_CONFIG.terrain.volcanic,
@@ -78,6 +83,48 @@ const NAMED_CONFIG = {
   },
 };
 
+/**
+ * The generator configuration of one named map: {@link NAMED_CONFIG} plus
+ * its own options (bead bzc.89). A map without options gets NAMED_CONFIG
+ * itself, so the first named maps generate exactly as they were authored.
+ *
+ * A landscape asked for `n` zones gets chance 2^(n-1) on every size and at
+ * most `n` zones: the generator halves the chance after each zone it
+ * places and a chance of 1 or more always passes, so it places all `n`
+ * unless it runs out of candidate zones (the map's tests check it did not).
+ */
+export function namedConfig(def: NamedMapDef): ConfigOverrides {
+  const gen = def.gen;
+  if (gen === undefined) return NAMED_CONFIG;
+  const biome = (key: NamedLandscape): GenConfig["terrain"][NamedLandscape] => {
+    const n = gen.landscapes?.[key] ?? 0;
+    if (n <= 0) return NAMED_CONFIG.terrain[key];
+    const chance = 2 ** (n - 1);
+    return {
+      ...DEFAULT_GEN_CONFIG.terrain[key],
+      chance: { S: chance, M: chance, L: chance },
+      maxZones: { S: n, M: n, L: n },
+    };
+  };
+  const base = DEFAULT_GEN_CONFIG.objects;
+  const towns = gen.neutralTowns;
+  return {
+    ...(towns !== undefined
+      ? { neutralTowns: { S: towns, M: towns, L: towns } }
+      : {}),
+    terrain: {
+      volcanic: biome("volcanic"),
+      winter: biome("winter"),
+      desert: biome("desert"),
+    },
+    objects: {
+      density: { ...base.density, ...gen.density },
+      pocketPrizes: gen.pocketPrizes ?? base.pocketPrizes,
+      pocketsPerZone: gen.pocketsPerZone ?? base.pocketsPerZone,
+    },
+  };
+}
+
 /** The base and its corridors; decorations come after the edits. */
 function generateNamedBaseWithInfo(def: NamedMapDef): {
   map: GameMap;
@@ -88,7 +135,7 @@ function generateNamedBaseWithInfo(def: NamedMapDef): {
     players: def.players,
     activePlayers: def.players,
     decorations: false,
-    config: NAMED_CONFIG,
+    config: namedConfig(def),
   });
   return { map, corridors: corridorCells(info) };
 }
