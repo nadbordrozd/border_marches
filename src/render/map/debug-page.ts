@@ -15,6 +15,7 @@
  *   path=0        hide the path preview
  *   route=X,Y,TX,TY  put the hero on (X, Y) and preview the game's own
  *                 cheapest path to (TX, TY) (road costs, as a hero walks)
+ *   motion=0      hold the animated terrain still (bead bzc.83; default on)
  *   bench=N       render N frames after load and report the mean time
  *
  * The page builds every map from the game's own code: nothing from tests/
@@ -312,6 +313,7 @@ export async function startMapDebug(
   }
   const view = createMapView(canvas, assets);
   view.setMap(map);
+  view.setTerrainMotion(params.get("motion") !== "0");
   if (showcase !== null) view.setDecorations(showcase.decorations);
   const zoom = Number(params.get("zoom") ?? DEFAULT_ZOOM);
   view.setZoom(Number.isFinite(zoom) ? zoom : DEFAULT_ZOOM);

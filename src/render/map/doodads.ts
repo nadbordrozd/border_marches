@@ -77,6 +77,9 @@ const KIND_WEIGHTS: Readonly<
     tree: 1.4,
     puddle: 0.4,
   },
+  // Volcanic ground (bead bzc.83): dark rocks and a few bones and dead
+  // trees; no code-drawn cracks or puddles beside the glowing lava cracks.
+  volcanic: { rock: 3, boulder: 1, bones: 0.8, tree: 0.6 },
 };
 
 const FLAT: ReadonlySet<string> = new Set(["flowers", "puddle", "crack"]);
@@ -88,6 +91,8 @@ export const DOODAD_DENSITY: Readonly<Record<GroundTerrain, number>> = {
   steppe: 0.95,
   badlands: 1.05,
   wasteland: 1.15,
+  // Sparser, so the glowing cracks of the ground stay the detail.
+  volcanic: 0.7,
 };
 
 /** Share of each ground's doodads drawn from the code-drawn placeholders. */

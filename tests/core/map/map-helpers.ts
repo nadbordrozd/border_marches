@@ -20,6 +20,7 @@ const COST: Record<string, number> = {
   jungle: 100,
   badlands: 125,
   wasteland: 150,
+  volcanic: 150,
 };
 
 /** Walkable ground not covered by an object footprint. */

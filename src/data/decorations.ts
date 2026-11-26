@@ -38,10 +38,11 @@ const T: Readonly<Record<string, DecorationGround>> = {
   s: "steppe",
   b: "badlands",
   w: "wasteland",
+  v: "volcanic",
 };
 
 /**
- * [id, name, terrains (letters g j s b w), "p" passable or "x" prop, cols,
+ * [id, name, terrains (letters g j s b w v), "p" passable or "x" prop, cols,
  * looks, text].
  */
 // prettier-ignore
@@ -60,17 +61,17 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["swamp-reeds", "Swamp Reeds", "jg", "p", 1, 1, "Reeds and cattails from a wet hollow."],
   ["jungle-flower", "Jungle Flower", "j", "p", 1, 1, "A big red flower lying on the jungle floor."],
   ["thistles", "Thistles", "sg", "p", 1, 1, "Purple thistles: pretty, prickly."],
-  ["crow", "Crow", "sgw", "p", 1, 1, "A crow watching the road."],
+  ["crow", "Crow", "sgwv", "p", 1, 1, "A crow watching the road."],
   ["cart-wheel", "Cart Wheel", "sg", "p", 1, 1, "An old cart wheel left by the way."],
   ["cairn", "Cairn", "sb", "p", 1, 1, "A little stack of stones someone left."],
   ["lizard", "Lizard", "bs", "p", 1, 1, "A lizard basking on the warm ground."],
   ["agave", "Agave", "bs", "p", 1, 1, "A spiky agave, thirsty and tough."],
   ["pot-shards", "Broken Pot", "b", "p", 1, 1, "A clay pot, long broken and long empty."],
-  ["scorpion", "Scorpion", "bw", "p", 1, 1, "A small scorpion with its tail up."],
+  ["scorpion", "Scorpion", "bwv", "p", 1, 1, "A small scorpion with its tail up."],
   ["grave-marker", "Grave Marker", "w", "p", 1, 1, "A crooked plank over a forgotten grave."],
-  ["dead-weeds", "Dead Weeds", "w", "p", 1, 1, "Burnt, thorny weeds."],
+  ["dead-weeds", "Dead Weeds", "wv", "p", 1, 1, "Burnt, thorny weeds."],
   ["toadstools", "Toadstools", "wj", "p", 1, 1, "Pale toadstools nobody should eat."],
-  ["broken-spear", "Broken Spear", "w", "p", 1, 1, "A spear shaft from a battle long ago."],
+  ["broken-spear", "Broken Spear", "wv", "p", 1, 1, "A spear shaft from a battle long ago."],
   // Impassable props: they block the way.
   ["big-boulder", "Big Boulder", "gsj", "x", 1, 1, "A mossy boulder too big to climb."],
   ["stump-cluster", "Stumps", "gs", "x", 1, 1, "Three thick stumps of a cleared wood."],
@@ -78,17 +79,17 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["standing-stones", "Standing Stones", "gsb", "x", 1, 1, "Two old stones leaning together."],
   ["giant-mushroom", "Giant Mushroom", "jg", "x", 1, 1, "A mushroom the size of a hut."],
   ["thornbush", "Thornbush", "sbw", "x", 1, 1, "A thicket of thorns nobody walks through."],
-  ["dead-tree", "Dead Tree", "wb", "x", 1, 1, "A gnarled tree, long dead."],
+  ["dead-tree", "Dead Tree", "wbv", "x", 1, 1, "A gnarled tree, long dead."],
   ["termite-mound", "Termite Mound", "sb", "x", 1, 1, "A tall mound full of busy termites."],
   ["ruined-pillars", "Ruined Pillars", "gsb", "x", 1, 1, "Broken columns of a forgotten temple."],
   ["stone-head", "Stone Head", "j", "x", 1, 1, "The mossy head of an ancient statue."],
-  ["beast-skull", "Beast Skull", "wsb", "x", 1, 1, "The skull of something very big."],
-  ["basalt-spikes", "Basalt Spikes", "wb", "x", 1, 1, "Black rock spikes, sharp as knives."],
+  ["beast-skull", "Beast Skull", "wsbv", "x", 1, 1, "The skull of something very big."],
+  ["basalt-spikes", "Basalt Spikes", "wbv", "x", 1, 1, "Black rock spikes, sharp as knives."],
   ["saguaro", "Saguaro", "b", "x", 1, 1, "A tall cactus waving at nobody."],
   ["hollow-stump", "Hollow Stump", "jw", "x", 1, 1, "The hollow stump of a giant tree."],
   ["fallen-log", "Fallen Log", "gjw", "x", 2, 2, "A huge fallen trunk across the way."],
   ["toppled-statue", "Toppled Statue", "gj", "x", 2, 2, "A stone king, fallen and broken."],
-  ["beast-skeleton", "Beast Skeleton", "bsw", "x", 2, 1, "The bones of a giant beast."],
+  ["beast-skeleton", "Beast Skeleton", "bswv", "x", 2, 1, "The bones of a giant beast."],
   ["ruined-wall", "Ruined Wall", "jg", "x", 2, 1, "A stretch of ancient wall under creepers."],
   ["broken-catapult", "Broken Catapult", "wg", "x", 2, 1, "A siege engine abandoned after a battle."],
 ];

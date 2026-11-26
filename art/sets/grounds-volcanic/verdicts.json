@@ -1,0 +1,52 @@
+{
+  "flux-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a chibi character standing on a purple field, not a ground texture",
+    "at": "2026-11-26T11:26:02.623Z"
+  },
+  "flux-b#0": {
+    "verdict": "REJECTED",
+    "notes": "three glowing towers on a scaled plum field; objects, no cracks",
+    "at": "2026-11-26T11:26:02.799Z"
+  },
+  "flux-c#0": {
+    "verdict": "REJECTED",
+    "notes": "a skull wallpaper pattern with one long lava stroke; repeating motif, off-style",
+    "at": "2026-11-26T11:26:02.987Z"
+  },
+  "pixen-b#0": {
+    "verdict": "REJECTED",
+    "notes": "three horizontal bands repeat across the image: stripes would show on the map",
+    "at": "2026-11-26T11:26:03.169Z"
+  },
+  "pixen-c#0": {
+    "verdict": "REJECTED",
+    "notes": "cobblestone tile grid with star cracks: reads as paving, not ground",
+    "at": "2026-11-26T11:26:03.347Z"
+  },
+  "pixen-d#0": {
+    "verdict": "REJECTED",
+    "notes": "square paving slabs with heavy lava stars; a grid and far too loud",
+    "at": "2026-11-26T11:26:03.511Z"
+  },
+  "pixen-e#0": {
+    "verdict": "REJECTED",
+    "notes": "a square tile grid; straight lines break the no-grid rule",
+    "at": "2026-11-26T11:26:03.675Z"
+  },
+  "base-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a volcano with a smoke column in the middle, not a calm field",
+    "at": "2026-11-26T11:26:03.836Z"
+  },
+  "base-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "calm dark basalt-plum field, low luma spread, nearly seamless at 400 px (wrap error 3.4 vs 2.5 inside): the volcanic base",
+    "at": "2026-11-26T11:26:03.999Z"
+  },
+  "pixen-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "organic branching lava cracks with yellow cores; used only for its crack pixels (hot pixels plus a dark rim, thinned in code) over the base, its plates are dropped",
+    "at": "2026-11-26T11:26:04.133Z"
+  }
+}

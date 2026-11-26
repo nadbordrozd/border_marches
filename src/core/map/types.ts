@@ -9,7 +9,13 @@ import { decorationKind } from "../../data/decorations.ts";
 
 /** Ground terrain. Every cell has exactly one. */
 export type Terrain =
-  "grass" | "jungle" | "steppe" | "badlands" | "wasteland" | "water";
+  | "grass"
+  | "jungle"
+  | "steppe"
+  | "badlands"
+  | "wasteland"
+  | "volcanic"
+  | "water";
 
 /**
  * An impassable feature standing on the ground terrain. Water cells never
@@ -23,6 +29,7 @@ export const TERRAINS: readonly Terrain[] = [
   "steppe",
   "badlands",
   "wasteland",
+  "volcanic",
   "water",
 ];
 

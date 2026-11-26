@@ -116,6 +116,50 @@ export function installMotion(): void {
   osQuery()?.addEventListener?.("change", changed);
 }
 
+// ------------------------------------------------------- animated terrain
+
+/**
+ * The "Animated terrain" setting (bead bzc.83): water glints, pulsing magma
+ * and moving butterflies on the adventure map. On by default; it never
+ * moves while motion is reduced.
+ */
+export const TERRAIN_MOTION_KEY = "border-marches.terrain-motion";
+
+let terrainPref: boolean | null = null;
+
+export function parseTerrainMotion(raw: string | null): boolean {
+  return raw !== "off";
+}
+
+/** The stored "Animated terrain" setting (default on). */
+export function terrainMotionPref(): boolean {
+  if (terrainPref === null) {
+    try {
+      terrainPref = parseTerrainMotion(
+        storage()?.getItem(TERRAIN_MOTION_KEY) ?? null,
+      );
+    } catch {
+      terrainPref = true;
+    }
+  }
+  return terrainPref;
+}
+
+export function setTerrainMotionPref(on: boolean): void {
+  terrainPref = on;
+  try {
+    storage()?.setItem(TERRAIN_MOTION_KEY, on ? "on" : "off");
+  } catch {
+    // Unavailable storage: the choice lasts for this page.
+  }
+  changed();
+}
+
+/** Whether the map's terrain animates now: the setting, unless reduced. */
+export function terrainAnimated(): boolean {
+  return terrainMotionPref() && !reducedMotion();
+}
+
 export const MOTION_LABELS: Readonly<Record<MotionPref, string>> = {
   auto: "Motion: as the system",
   reduced: "Motion: reduced",

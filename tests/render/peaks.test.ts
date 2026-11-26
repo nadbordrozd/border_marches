@@ -7,7 +7,11 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { inflateSync } from "node:zlib";
 import { describe, expect, it } from "vitest";
-import { CELL_PX, GROUND_TERRAINS } from "../../src/assets/manifest.ts";
+import {
+  CELL_PX,
+  GROUND_FAMILY,
+  GROUND_TERRAINS,
+} from "../../src/assets/manifest.ts";
 import type { GroundTerrain } from "../../src/assets/manifest.ts";
 import { PEAK_ASSETS, peaksOf } from "../../src/assets/peaks.ts";
 import { createMap } from "../../src/core/map/types.ts";
@@ -148,8 +152,10 @@ describe("peak placement", () => {
     for (const terrain of GROUND_TERRAINS) {
       const peaks = place(rangeMap(RANGE, terrain));
       expect(peaks.length).toBeGreaterThan(0);
+      // Volcanic ground borrows the wasteland's basalt (bead bzc.83).
+      const family = GROUND_FAMILY[terrain];
       for (const peak of peaks)
-        expect(peak.key.startsWith(`peak-${terrain}-`), peak.key).toBe(true);
+        expect(peak.key.startsWith(`peak-${family}-`), peak.key).toBe(true);
     }
   });
 

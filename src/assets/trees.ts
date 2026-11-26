@@ -5,12 +5,14 @@
  * 1 px, never scaled or mirrored. `src/render/map/canopy.ts` crowds them
  * into woods; lone ones dot open ground (doodads.ts).
  */
+import { GROUND_FAMILY } from "./ground-family";
+import type { ArtGround } from "./ground-family";
 import type { GroundTerrain, ImageAsset } from "./manifest";
 
 export interface TreeAsset extends ImageAsset {
   readonly category: "tree";
-  /** The ground whose woods use it. */
-  readonly terrain: GroundTerrain;
+  /** The art family whose woods use it (ground-family.ts). */
+  readonly terrain: ArtGround;
   /** conifer, broadleaf, autumn, palm, ... */
   readonly species: string;
   readonly index: number;
@@ -18,7 +20,7 @@ export interface TreeAsset extends ImageAsset {
 
 /** [terrain, species, index, w, h] of every tree (file <species>-<index>.png). */
 const TREE_ROWS: readonly (readonly [
-  GroundTerrain,
+  ArtGround,
   string,
   number,
   number,
@@ -169,14 +171,22 @@ export const TREE_ASSETS: readonly TreeAsset[] = TREE_ROWS.map(
  * How common each species is in the woods of each ground (relative). The
  * canopy also gathers each species into loose patches.
  */
-export const TREE_SPECIES_WEIGHTS: Readonly<
-  Record<GroundTerrain, Readonly<Record<string, number>>>
+const OWN_SPECIES_WEIGHTS: Readonly<
+  Record<ArtGround, Readonly<Record<string, number>>>
 > = {
   grass: { conifer: 5, broadleaf: 3, autumn: 5 },
   jungle: { broadleaf: 3, palm: 2.4, banana: 1 },
   steppe: { oak: 3.4, birch: 0.7, bent: 1 },
   badlands: { juniper: 2, pinyon: 3.2, mesquite: 0.45, gnarled: 0.8 },
   wasteland: { deadoak: 3, leafy: 1.6, pine: 2, snag: 0.6 },
+};
+
+/** The species mix of each ground's woods: its art family's. */
+export const TREE_SPECIES_WEIGHTS: Readonly<
+  Record<GroundTerrain, Readonly<Record<string, number>>>
+> = {
+  ...OWN_SPECIES_WEIGHTS,
+  volcanic: OWN_SPECIES_WEIGHTS[GROUND_FAMILY.volcanic],
 };
 
 /**
@@ -196,9 +206,10 @@ export function treesOf(
   terrain: GroundTerrain,
   species?: string,
 ): readonly TreeAsset[] {
+  const family = GROUND_FAMILY[terrain];
   return TREE_ASSETS.filter(
     (tree) =>
-      tree.terrain === terrain &&
+      tree.terrain === family &&
       (species === undefined || tree.species === species),
   );
 }

@@ -20,7 +20,11 @@ import {
 } from "../../data/named-maps.ts";
 import { OBJECT_TYPES } from "../../data/objectTypes.ts";
 import { decorateMap } from "./decorate.ts";
-import { corridorCells, generateMapWithInfo } from "./generate.ts";
+import {
+  DEFAULT_GEN_CONFIG,
+  corridorCells,
+  generateMapWithInfo,
+} from "./generate.ts";
 import {
   cellAt,
   cellIndex,
@@ -48,6 +52,22 @@ export function generateNamedBase(def: NamedMapDef): GameMap {
   return generateNamedBaseWithInfo(def).map;
 }
 
+/**
+ * The generator configuration of the named maps: the defaults without the
+ * volcanic zones of bead bzc.83. The named maps were authored before volcanic
+ * ground existed and their edits name generated objects by place; volcanic
+ * zones draw from their own random stream, so turning them off leaves each
+ * named map's base exactly as it was authored.
+ */
+const NAMED_CONFIG = {
+  terrain: {
+    volcanic: {
+      ...DEFAULT_GEN_CONFIG.terrain.volcanic,
+      chance: { S: 0, M: 0, L: 0 },
+    },
+  },
+};
+
 /** The base and its corridors; decorations come after the edits. */
 function generateNamedBaseWithInfo(def: NamedMapDef): {
   map: GameMap;
@@ -58,6 +78,7 @@ function generateNamedBaseWithInfo(def: NamedMapDef): {
     players: def.players,
     activePlayers: def.players,
     decorations: false,
+    config: NAMED_CONFIG,
   });
   return { map, corridors: corridorCells(info) };
 }

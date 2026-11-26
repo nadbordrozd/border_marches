@@ -26,6 +26,7 @@ export const PEAK_DARKEN: Readonly<Record<GroundTerrain, number>> = {
   steppe: 0.06,
   badlands: 0.06,
   wasteland: 0.06,
+  volcanic: 0.06,
 };
 
 /** The outline colour of each family. */
@@ -37,6 +38,7 @@ export const PEAK_LINE: Readonly<
   steppe: [78, 58, 34],
   badlands: [84, 40, 24],
   wasteland: [34, 30, 38],
+  volcanic: [34, 30, 38],
 };
 
 /** A toned copy of a peak image of `terrain`'s family. */

@@ -1,0 +1,170 @@
+{
+  "set": "grounds-volcanic",
+  "bead": "border_marches-bzc.83",
+  "class": "grounds",
+  "exploration": false,
+  "_doc": "See docs/art/PIPELINE.md and docs/art/classes/grounds.md. Recipes are never edited after generation: add a new id (new seed) instead. '@name' values come from shared.",
+  "shared": {
+    "flux": {
+      "shading": "flat shading"
+    },
+    "pixen": {
+      "outline": "lineless",
+      "detail": "low detail",
+      "view": "high top-down"
+    },
+    "ground": "Subject: cooled volcanic ground seen from straight above, filling the whole image: dark charcoal brown-grey basalt rock #3b3330 with soft flat slightly lighter ash drifts #4a413c and a few tiny scattered dark pebbles, crossed by a few thin jagged branching cracks of glowing molten lava, bright orange #ff7a1a with small yellow #ffd04a cores and a dark rim, each crack narrow, 1 to 3 pixels wide and about one fifth of the image long, spread evenly with plenty of calm dark rock between them.",
+    "ground2": "Subject: a seamless top-down pixel art terrain texture of dark volcanic ground: flat dark grey-brown basalt #3b3330 with a few soft slightly lighter ash patches #4a413c and tiny dark pebbles, and a handful of thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, scattered evenly. Only the ground itself, nothing standing on it.",
+    "ground3": "Subject: a seamless top-down pixel art terrain texture of cooled volcanic ground: mostly smooth, flat, dark grey-brown basalt #3b3330 with soft slightly lighter ash drifts #463d38 and a few tiny dark pebbles, very calm and quiet, no cobblestones, no tile grid, no plates. Scattered evenly over it, six to eight small separate thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, each crack short, about one tenth of the image long, with lots of plain dark rock between them.",
+    "base": "Subject: a wide flat field of cooled dark volcanic ash and basalt seen from directly above, filling the whole image edge to edge: dark charcoal grey-brown #3b3330 with soft, slightly lighter ash drifts #463d38, a few tiny dark pebbles and faint hairline cracks, very calm, quiet and low in contrast, the same everywhere. No lava, no glow."
+  },
+  "defaults": {
+    "endpoint": "create-image-pixflux",
+    "fragments": [
+      "style",
+      "class-ground"
+    ],
+    "noBackground": false,
+    "options": "@pixen",
+    "negative": "lava lake, lava river, fire, flames, smoke, volcano, mountain, glowing everywhere, bright red, grass, water, snow"
+  },
+  "recipes": [
+    {
+      "id": "flux-a",
+      "concept": "VOLCANIC GROUND (pixflux 5-cell texture)",
+      "options": "@flux",
+      "width": 400,
+      "height": 400,
+      "seed": 83101,
+      "subject": "@ground"
+    },
+    {
+      "id": "flux-b",
+      "concept": "VOLCANIC GROUND (pixflux 5-cell texture)",
+      "options": "@flux",
+      "width": 400,
+      "height": 400,
+      "seed": 83102,
+      "subject": "@ground"
+    },
+    {
+      "id": "pixen-a",
+      "concept": "VOLCANIC GROUND (pixen 6-cell texture)",
+      "endpoint": "create-image-pixen",
+      "fragments": [
+        "class-ground"
+      ],
+      "width": 480,
+      "height": 480,
+      "seed": 83103,
+      "subject": "@ground2"
+    },
+    {
+      "id": "flux-c",
+      "concept": "VOLCANIC GROUND (pixflux 5-cell texture, no chibi style layer)",
+      "fragments": [
+        "class-ground"
+      ],
+      "options": "@flux",
+      "width": 400,
+      "height": 400,
+      "seed": 83104,
+      "subject": "@ground2"
+    },
+    {
+      "id": "pixen-b",
+      "concept": "VOLCANIC GROUND (pixen 6-cell texture)",
+      "endpoint": "create-image-pixen",
+      "fragments": [
+        "class-ground"
+      ],
+      "width": 480,
+      "height": 480,
+      "seed": 83105,
+      "subject": "@ground2"
+    },
+    {
+      "id": "pixen-c",
+      "concept": "VOLCANIC GROUND (pixen 6-cell texture, calmer)",
+      "endpoint": "create-image-pixen",
+      "fragments": [
+        "class-ground"
+      ],
+      "width": 480,
+      "height": 480,
+      "seed": 83106,
+      "subject": "@ground3"
+    },
+    {
+      "id": "pixen-d",
+      "concept": "VOLCANIC GROUND (pixen 6-cell texture, calmer)",
+      "endpoint": "create-image-pixen",
+      "fragments": [
+        "class-ground"
+      ],
+      "width": 480,
+      "height": 480,
+      "seed": 83107,
+      "subject": "@ground3"
+    },
+    {
+      "id": "pixen-e",
+      "concept": "VOLCANIC GROUND (pixen 6-cell texture, calmer)",
+      "endpoint": "create-image-pixen",
+      "fragments": [
+        "class-ground"
+      ],
+      "width": 480,
+      "height": 480,
+      "seed": 83108,
+      "subject": "@ground3"
+    },
+    {
+      "id": "base-a",
+      "concept": "VOLCANIC BASE (pixen, no cracks)",
+      "endpoint": "create-image-pixen",
+      "fragments": [],
+      "width": 480,
+      "height": 480,
+      "seed": 83109,
+      "subject": "@base",
+      "negative": "tiles, tile grid, cobblestones, bricks, plates, slabs, paving, lava, glow, orange, fire, object, frame, border"
+    },
+    {
+      "id": "base-b",
+      "concept": "VOLCANIC BASE (pixflux, no cracks)",
+      "fragments": [],
+      "options": "@flux",
+      "width": 400,
+      "height": 400,
+      "seed": 83110,
+      "subject": "@base",
+      "negative": "tiles, tile grid, cobblestones, bricks, plates, slabs, paving, lava, glow, orange, fire, object, character, frame, border"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/grounds/volcanic.png",
+      "from": "base-b#0"
+    },
+    {
+      "path": "public/assets/terrain/grounds/volcanic-swatch.png",
+      "from": "base-b#0",
+      "width": 80,
+      "height": 80,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 160,
+          "y": 160,
+          "width": 80,
+          "height": 80
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/grounds/volcanic-cracks.png",
+      "from": "pixen-a#0"
+    }
+  ]
+}

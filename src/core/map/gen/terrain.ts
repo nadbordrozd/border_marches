@@ -5,8 +5,60 @@
  * most common neighbour, so there are no specks and no straight lines.
  */
 import { at, N4, N8, noiseField, quantile } from "./grid.ts";
-import { T, stageRng, stageSalt } from "./state.ts";
-import type { GenState } from "./state.ts";
+import { T, TERRAIN_OF, stageRng, stageSalt } from "./state.ts";
+import type { GenState, ZoneInfo } from "./state.ts";
+
+/**
+ * Volcanic zones (bead border_marches-bzc.83): on some maps one wild zone
+ * (two on a large map) away from the starts turns volcanic, its main
+ * terrain cracked basalt with wasteland or badlands patches. A biome choice
+ * per zone, made after the zones have their terrains and before the water
+ * and ground are painted, from its own random stream: a map that rolls no
+ * volcanic zone is the map it was before volcanic ground existed, and the
+ * zones that stay as they were keep their terrains.
+ *
+ * Candidates are "middle" zones (never a start, a neutral town or the Hold)
+ * at least `minTier` steps from every start; the deepest tiers are weighted
+ * up, so the lava sits out in the wilds. Returns the volcanic zone ids.
+ */
+export function placeVolcanic(st: GenState): number[] {
+  const cfg = st.cfg.terrain.volcanic;
+  const rng = stageRng(st, "volcanic");
+  const picked: number[] = [];
+  let chance = cfg.chance[st.size];
+  for (let k = 0; k < cfg.maxZones[st.size]; k++) {
+    if (rng.float(0, 1) >= chance) break;
+    const options = st.zones.filter(
+      (z) =>
+        z.role === "middle" &&
+        z.tier >= cfg.minTier &&
+        z.main !== "volcanic" &&
+        !touches(st, z, picked),
+    );
+    if (options.length === 0) break;
+    const zone = rng.weighted(
+      options,
+      options.map((z) => z.tier * z.tier),
+    );
+    zone.main = "volcanic";
+    zone.secondary = rng.pick(cfg.secondary);
+    picked.push(zone.id);
+    chance /= 2;
+  }
+  return picked;
+}
+
+/** Whether zone `z` shares a border with any of the zones `ids`. */
+function touches(st: GenState, z: ZoneInfo, ids: readonly number[]): boolean {
+  if (ids.length === 0) return false;
+  const { g } = st;
+  for (let i = 0; i < g.n; i++) {
+    if ((st.zone[i] ?? -1) !== z.id) continue;
+    for (const j of g.around(i, N4))
+      if (ids.includes(st.zone[j] ?? -1)) return true;
+  }
+  return false;
+}
 
 export function paintTerrain(st: GenState): void {
   const { g, cfg } = st;
@@ -37,7 +89,7 @@ export function paintTerrain(st: GenState): void {
 /** Majority filter over land cells (water is fixed). */
 export function smoothTerrain(st: GenState, rounds: number): void {
   const { g } = st;
-  const tally = new Int32Array(6);
+  const tally = new Int32Array(TERRAIN_OF.length);
   for (let r = 0; r < rounds; r++) {
     const next = st.terrain.slice();
     for (let i = 0; i < g.n; i++) {
@@ -63,7 +115,7 @@ export function smoothTerrain(st: GenState, rounds: number): void {
 /** Merge land regions smaller than the minimum into a neighbouring terrain. */
 export function mergeSmallRegions(st: GenState): void {
   const { g, cfg } = st;
-  const tally = new Int32Array(6);
+  const tally = new Int32Array(TERRAIN_OF.length);
   for (let round = 0; round < 8; round++) {
     let changed = false;
     // Regions are same-terrain 4-connected pieces of land.

@@ -11,6 +11,8 @@ import {
   nextMotionPref,
   reducedMotion,
   setMotionPref,
+  setTerrainMotionPref,
+  terrainMotionPref,
 } from "./motion.ts";
 import type { AudioSettings } from "../audio/settings.ts";
 import { el } from "./dom.ts";
@@ -94,12 +96,38 @@ export function soundControl(): HTMLElement {
           : "Every animation plays; click to follow the system setting";
     motion.setAttribute("aria-pressed", String(reducedMotion()));
   };
+  // Animated terrain (bead bzc.83): water, butterflies, magma.
+  const terrain = el("button.gm-btn.gm-terrain-toggle");
+  terrain.type = "button";
+  const syncTerrain = (): void => {
+    const on = terrainMotionPref();
+    terrain.textContent = on ? "Animated terrain: on" : "Animated terrain: off";
+    terrain.title = !on
+      ? "Water, butterflies and magma hold still; click to animate them"
+      : reducedMotion()
+        ? "On, but held still while motion is reduced; click to turn off"
+        : "Water shimmers, butterflies flap, magma glows; click to hold them still";
+    terrain.setAttribute("aria-pressed", String(on));
+  };
+  terrain.addEventListener("click", () => {
+    setTerrainMotionPref(!terrainMotionPref());
+    syncTerrain();
+  });
   motion.addEventListener("click", () => {
     setMotionPref(nextMotionPref(motionPref()));
     syncMotion();
+    syncTerrain();
   });
   syncMotion();
-  const box = el("div.gm-sound", toggle, master.row, effects.row, motion);
+  syncTerrain();
+  const box = el(
+    "div.gm-sound",
+    toggle,
+    master.row,
+    effects.row,
+    motion,
+    terrain,
+  );
   const sync = (s: Readonly<AudioSettings>): void => {
     toggle.textContent = s.muted ? "Sound: off" : "Sound: on";
     toggle.title = s.muted ? "Turn sound effects on" : "Mute all sound";

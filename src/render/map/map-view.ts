@@ -21,6 +21,14 @@
  * the changed boxes of cached chunks and the changed crown bands; a change
  * of the explored cells rebuilds (and fades) only the fog chunks round them.
  *
+ * Animated terrain (bead bzc.83, terrain-motion.ts): water glints, the
+ * pulsing glow of volcanic cracks and the living decorations are overlays
+ * drawn after the cached chunks and before the foreground, only for the
+ * visible chunks, at MOTION.fps while any is in view; the chunks are never
+ * painted again for them. setTerrainMotion(false) (reduced motion, the
+ * "Animated terrain" setting off, a screen over the map) stops the clock
+ * and draws every overlay at time 0; a hidden tab gets no frames at all.
+ *
  * The camera is a world point at the viewport centre and a zoom step
  * (0.75, 1, 1.5, 2); the world origin is snapped to whole device pixels and
  * whole device scales draw nearest-neighbour, fractional ones smoothed.
@@ -36,15 +44,33 @@ import { installCanopyBands, paintCanopyBand, toneTree } from "./canopy-paint";
 import { paintFog } from "./fog";
 import { FxField, drawFx } from "../fx/field.ts";
 import type { FxClock } from "../fx/field.ts";
-import { paintGround } from "./ground";
+import { openWaterAt, paintGround } from "./ground";
 import type { GroundLayout } from "./ground";
+import {
+  LIVING_MOTION,
+  MOTION,
+  cellGlintSlots,
+  cellPhase,
+  frameDue,
+  glintLevel,
+  livingPose,
+  magmaAlpha,
+  spriteParts,
+  squashX,
+  squashY,
+} from "./terrain-motion";
+import type { GlintSlot, LivingMotion } from "./terrain-motion";
 import { hashUnit } from "./hash";
 import { doodadArt } from "./doodad-art";
 import { doodadSpecs } from "./doodads";
 import { tonePeak } from "./peak-paint";
 import { paintPeakUnder } from "./peaks";
 import type { PeakField } from "./peaks";
-import { mapDecorations } from "./decorations";
+import {
+  decorationCells,
+  mapDecorations,
+  placeDecoration,
+} from "./decorations";
 import type { PlacedDecoration } from "./decorations";
 import {
   compareEntries,
@@ -112,6 +138,8 @@ export interface MapViewStats {
   readonly fogChunksBuilt: number;
   readonly fogBuildMs: number;
   readonly drawnEntries: number;
+  /** Frames drawn by the terrain animation clock (bead bzc.83). */
+  readonly motionFrames: number;
 }
 
 export interface MapView {
@@ -196,6 +224,11 @@ export interface MapView {
   setFogFade(on: boolean): void;
   /** World pixel of a cell's centre. */
   cellCentre(x: number, y: number): { x: number; y: number };
+  /**
+   * Animated terrain on or off (bead bzc.83): water glints, pulsing magma
+   * and living decorations move only while on; off, they hold still.
+   */
+  setTerrainMotion(on: boolean): void;
 }
 
 /** How long newly revealed cells take to clear (ms). */
@@ -210,6 +243,47 @@ type Context = CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D;
 interface Chunk {
   readonly surface: Surface | null;
 }
+
+/** The animated overlays of a ground chunk (bead bzc.83). */
+interface ChunkAnim {
+  /** Glint slots on open water nothing is drawn over. */
+  readonly glints: readonly GlintSlot[];
+  /** Per magma pulse group, a half-size glow image (null: none). */
+  readonly magma: readonly (Surface | null)[];
+}
+
+const NO_ANIM: ChunkAnim = { glints: [], magma: [] };
+
+interface GroundChunk extends Chunk {
+  /** Its overlays; null when they must be worked out again (a patch). */
+  anim: ChunkAnim | null;
+}
+
+/** A living decoration (bead bzc.83): drawn every frame, not cached. */
+interface LivingDecoration {
+  readonly key: string;
+  readonly motion: LivingMotion;
+  readonly phase: number;
+  /** Top-left of the sprite, world px. */
+  readonly x: number;
+  readonly y: number;
+  readonly w: number;
+  readonly h: number;
+  readonly footY: number;
+  readonly cells: readonly (readonly [number, number])[];
+}
+
+/** The parts of a living sprite and the two frames of each. */
+interface LivingArt {
+  readonly parts: readonly {
+    readonly x: number;
+    readonly y: number;
+    readonly frames: readonly [Surface, Surface];
+  }[];
+}
+
+/** The glow colour of the magma, drawn additively. */
+const MAGMA_GLOW: readonly [number, number, number] = [255, 132, 40];
 
 /** Size of the path markers against their original 20 px drawing. */
 const PATH_MARKER_SCALE = 0.78;
@@ -346,11 +420,20 @@ export function createMapView(
   let bodies: readonly SceneEntry[] = [];
   /** Placed decorations and props (setDecorations, bead bzc.48). */
   let decorationBodies: readonly SceneEntry[] = [];
+  /** The living decorations, drawn each frame (bead bzc.83). */
+  let living: readonly LivingDecoration[] = [];
+  const livingArt = new Map<string, LivingArt>();
+  let motionOn = false;
+  let motionEpoch = 0;
+  let motionLoopId = 0;
+  let lastMotionFrame = 0;
+  /** Whether the last frame drew anything that moves. */
+  let animatedInView = true;
   let foreground: SceneEntry[] = [];
   let terrainForeground: readonly SceneEntry[] = [];
   /** The terrain plan, updated in place on setObjects. */
   let plan: TerrainPlan | null = null;
-  const chunks = new Map<string, Chunk>();
+  const chunks = new Map<string, GroundChunk>();
   /** Per cached chunk, the world box to paint again before its next draw. */
   const patches = new Map<string, WorldRect>();
   let fogChunks = new Map<string, Chunk>();
@@ -378,6 +461,7 @@ export function createMapView(
     fogChunksBuilt: 0,
     fogBuildMs: 0,
     drawnEntries: 0,
+    motionFrames: 0,
   };
 
   let hoverCallback: ((cell: Cell | null) => void) | null = null;
@@ -488,10 +572,10 @@ export function createMapView(
 
   const chunkKey = (cx: number, cy: number): string => `${cx},${cy}`;
 
-  const touch = (
-    cache: Map<string, Chunk>,
+  const touch = <C extends Chunk>(
+    cache: Map<string, C>,
     key: string,
-    chunk: Chunk,
+    chunk: C,
   ): void => {
     cache.delete(key);
     cache.set(key, chunk);
@@ -544,27 +628,174 @@ export function createMapView(
     return [...terrain, ...decor].sort(compareEntries);
   };
 
-  const buildChunk = (cx: number, cy: number): Chunk => {
-    if (map === null || layout === null) return { surface: null };
+  /**
+   * Whether a chunk can hold animated ground: water, or volcanic ground
+   * (or a cell next to it, whose cracks spill over) in or round it.
+   */
+  const chunkMoves = (cx: number, cy: number): boolean => {
+    if (map === null) return false;
+    const xa = Math.max(0, cx * CHUNK_CELLS - 1);
+    const ya = Math.max(0, cy * CHUNK_CELLS - 1);
+    const xb = Math.min(map.width - 1, (cx + 1) * CHUNK_CELLS);
+    const yb = Math.min(map.height - 1, (cy + 1) * CHUNK_CELLS);
+    for (let y = ya; y <= yb; y += 1)
+      for (let x = xa; x <= xb; x += 1) {
+        const t = map.cells[y * map.width + x]?.terrain;
+        if (t === "water" || t === "volcanic") return true;
+      }
+    return false;
+  };
+
+  /**
+   * The overlays of a chunk from its ground as painted (`ground`, before
+   * the peak underlay and the bodies), the chunk as drawn (`final`) and
+   * the hot cracks (`hot`): only pixels where the drawn chunk still shows
+   * the ground glint or glow, so nothing lights up over a rock or a tree.
+   */
+  const chunkAnim = (
+    x0: number,
+    y0: number,
+    w: number,
+    h: number,
+    ground: Uint8ClampedArray,
+    final: Uint8ClampedArray,
+    hot: Uint8Array,
+  ): ChunkAnim => {
+    if (map === null || layout === null) return NO_ANIM;
+    const lay = layout;
+    const bare = (x: number, y: number): boolean => {
+      const o = ((y - y0) * w + (x - x0)) * 4;
+      return (
+        final[o] === ground[o] &&
+        final[o + 1] === ground[o + 1] &&
+        final[o + 2] === ground[o + 2]
+      );
+    };
+    const glints: GlintSlot[] = [];
+    const cx1 = Math.floor((x0 + w - 1) / CELL);
+    const cy1 = Math.floor((y0 + h - 1) / CELL);
+    for (let cy = Math.floor(y0 / CELL); cy <= cy1; cy += 1)
+      for (let cx = Math.floor(x0 / CELL); cx <= cx1; cx += 1) {
+        if (map.cells[cy * map.width + cx]?.terrain !== "water") continue;
+        for (const slot of cellGlintSlots(cx, cy)) {
+          // The line and the twinkle's pixels above and below its middle.
+          const mid = slot.x + (slot.len >> 1);
+          const pixels: [number, number][] = [
+            [mid, slot.y - 1],
+            [mid, slot.y + 1],
+          ];
+          for (let k = 0; k < slot.len; k += 1)
+            pixels.push([slot.x + k, slot.y]);
+          const ok = pixels.every(
+            ([x, y]) =>
+              openWaterAt(lay, x, y, MOTION.glint.shoreMargin) && bare(x, y),
+          );
+          if (ok) glints.push(slot);
+        }
+      }
+    const groups = MOTION.magma.groups;
+    const hw = Math.ceil(w / 2);
+    const hh = Math.ceil(h / 2);
+    const sums: (Float32Array | null)[] = Array.from(
+      { length: groups },
+      () => null,
+    );
+    for (let y = 0; y < h; y += 1)
+      for (let x = 0; x < w; x += 1) {
+        const g = hot[y * w + x] ?? 0;
+        if (g === 0 || !bare(x0 + x, y0 + y)) continue;
+        let sum = sums[g - 1];
+        if (sum === undefined) continue;
+        if (sum === null) {
+          sum = new Float32Array(hw * hh);
+          sums[g - 1] = sum;
+        }
+        const i = (y >> 1) * hw + (x >> 1);
+        sum[i] = (sum[i] ?? 0) + 1;
+      }
+    const magma = sums.map((sum) => {
+      if (sum === null) return null;
+      // A soft halo: a 3 x 3 box blur of the half-size hot counts.
+      const surface = createSurface(hw, hh);
+      const ctx = context2d(surface);
+      const image = ctx.createImageData(hw, hh);
+      for (let y = 0; y < hh; y += 1)
+        for (let x = 0; x < hw; x += 1) {
+          let s = 0;
+          for (let dy = -1; dy <= 1; dy += 1)
+            for (let dx = -1; dx <= 1; dx += 1) {
+              const xx = x + dx;
+              const yy = y + dy;
+              if (xx >= 0 && yy >= 0 && xx < hw && yy < hh)
+                s += (sum[yy * hw + xx] ?? 0) * (dx === 0 && dy === 0 ? 3 : 1);
+            }
+          if (s <= 0) continue;
+          const o = (y * hw + x) * 4;
+          image.data[o] = MAGMA_GLOW[0];
+          image.data[o + 1] = MAGMA_GLOW[1];
+          image.data[o + 2] = MAGMA_GLOW[2];
+          image.data[o + 3] = Math.min(255, Math.round(s * 22));
+        }
+      ctx.putImageData(image, 0, 0);
+      return surface;
+    });
+    return { glints, magma };
+  };
+
+  const buildChunk = (cx: number, cy: number): GroundChunk => {
+    if (map === null || layout === null)
+      return { surface: null, anim: NO_ANIM };
     const t0 = performance.now();
     const x0 = cx * CHUNK_PX;
     const y0 = cy * CHUNK_PX;
     const w = Math.min(CHUNK_PX, map.width * CELL - x0);
     const h = Math.min(CHUNK_PX, map.height * CELL - y0);
-    if (w <= 0 || h <= 0) return { surface: null };
+    if (w <= 0 || h <= 0) return { surface: null, anim: NO_ANIM };
     const surface = createSurface(w, h);
     const ctx = context2d(surface);
     const image = ctx.createImageData(w, h);
-    paintGround(layout, assets.ground, x0, y0, w, h, image.data);
+    const moves = chunkMoves(cx, cy);
+    const hot = moves ? new Uint8Array(w * h) : undefined;
+    paintGround(layout, assets.ground, x0, y0, w, h, image.data, hot);
+    const ground = moves ? image.data.slice() : null;
     if (peakField !== null) paintPeakUnder(peakField, x0, y0, w, h, image.data);
     ctx.putImageData(image, 0, 0);
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
     ctx.translate(-x0, -y0);
     for (const e of bodiesOver(x0, y0, x0 + w, y0 + h)) drawSprites(ctx, e);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    const anim =
+      ground !== null && hot !== undefined
+        ? chunkAnim(
+            x0,
+            y0,
+            w,
+            h,
+            ground,
+            ctx.getImageData(0, 0, w, h).data,
+            hot,
+          )
+        : NO_ANIM;
     stat.chunksBuilt += 1;
     stat.chunkBuildMs += performance.now() - t0;
-    return { surface };
+    return { surface, anim };
+  };
+
+  /** Works a patched chunk's overlays out again from its ground. */
+  const refreshAnim = (cx: number, cy: number, chunk: GroundChunk): void => {
+    chunk.anim = NO_ANIM;
+    const surface = chunk.surface;
+    if (surface === null || map === null || layout === null) return;
+    if (!chunkMoves(cx, cy)) return;
+    const x0 = cx * CHUNK_PX;
+    const y0 = cy * CHUNK_PX;
+    const { width: w, height: h } = surface;
+    const ground = new Uint8ClampedArray(w * h * 4);
+    const hot = new Uint8Array(w * h);
+    paintGround(layout, assets.ground, x0, y0, w, h, ground, hot);
+    const final = context2d(surface).getImageData(0, 0, w, h).data;
+    chunk.anim = chunkAnim(x0, y0, w, h, ground, final, hot);
   };
 
   /**
@@ -600,11 +831,13 @@ export function createMapView(
     ctx.translate(-ox, -oy);
     for (const e of bodiesOver(x0, y0, x1, y1)) drawSprites(ctx, e);
     ctx.restore();
+    const chunk = chunks.get(chunkKey(cx, cy));
+    if (chunk !== undefined) chunk.anim = null;
     stat.chunksPatched += 1;
     stat.chunkBuildMs += performance.now() - t0;
   };
 
-  const chunkAt = (cx: number, cy: number): Chunk => {
+  const chunkAt = (cx: number, cy: number): GroundChunk => {
     const key = chunkKey(cx, cy);
     let chunk = chunks.get(key);
     const box = patches.get(key);
@@ -613,6 +846,7 @@ export function createMapView(
       if (chunk !== undefined) patchChunk(cx, cy, box);
     }
     if (chunk === undefined) chunk = buildChunk(cx, cy);
+    if (chunk.anim === null) refreshAnim(cx, cy, chunk);
     touch(chunks, key, chunk);
     return chunk;
   };
@@ -850,6 +1084,173 @@ export function createMapView(
     ctx.fillText(text, x, y + 0.5);
   };
 
+  /** The two frames of each part of a living decoration's sprite. */
+  const artOf = (d: LivingDecoration): LivingArt | null => {
+    const found = livingArt.get(d.key);
+    if (found !== undefined) return found;
+    const image = images.get(d.key);
+    if (image === undefined) return null;
+    const read = createSurface(d.w, d.h);
+    const rctx = context2d(read);
+    rctx.drawImage(image, 0, 0);
+    const pixels = {
+      width: d.w,
+      height: d.h,
+      data: rctx.getImageData(0, 0, d.w, d.h).data,
+    };
+    const toSurface = (p: {
+      width: number;
+      height: number;
+      data: Uint8ClampedArray;
+    }): Surface => {
+      const s = createSurface(p.width, p.height);
+      const c = context2d(s);
+      const img = c.createImageData(p.width, p.height);
+      img.data.set(p.data);
+      c.putImageData(img, 0, 0);
+      return s;
+    };
+    const parts =
+      d.motion === "flap"
+        ? spriteParts(pixels).map((part) => ({
+            x: part.x,
+            y: part.y,
+            frames: [
+              toSurface(part.image),
+              toSurface(squashX(part.image)),
+            ] as const,
+          }))
+        : [
+            {
+              x: 0,
+              y: 0,
+              frames: [
+                read,
+                d.motion === "breathe" ? toSurface(squashY(pixels)) : read,
+              ] as const,
+            },
+          ];
+    const art: LivingArt = { parts };
+    livingArt.set(d.key, art);
+    return art;
+  };
+
+  /**
+   * Draws the animated terrain over the visible chunks at clock `t` (ms;
+   * 0 = still): water glints, the magma glow, the living decorations.
+   * Returns whether anything that moves is in view.
+   */
+  const drawTerrainMotion = (
+    ctx: Context,
+    anims: readonly { anim: ChunkAnim; x: number; y: number }[],
+    t: number,
+    vx0: number,
+    vy0: number,
+    vx1: number,
+    vy1: number,
+  ): boolean => {
+    let any = false;
+    // Glints: one path per brightness, filled once each.
+    const dim = new Path2D();
+    const bright = new Path2D();
+    for (const { anim } of anims)
+      for (const g of anim.glints) {
+        if (g.x > vx1 || g.x + g.len < vx0 || g.y > vy1 || g.y < vy0) continue;
+        any = true;
+        const level = t > 0 ? glintLevel(g, t) : g.phase < 0.3 ? 1 : 0;
+        if (level === 1) dim.rect(g.x, g.y, g.len, 1);
+        else if (level === 2) {
+          // A bright glint twinkles: its line and a pixel above and below.
+          const mid = g.x + (g.len >> 1);
+          bright.rect(g.x, g.y, g.len, 1);
+          bright.rect(mid, g.y - 1, 1, 1);
+          bright.rect(mid, g.y + 1, 1, 1);
+        }
+      }
+    ctx.fillStyle = MOTION.glint.dim;
+    ctx.fill(dim);
+    ctx.fillStyle = MOTION.glint.bright;
+    ctx.fill(bright);
+    // The magma glow, added over the cracks, its groups out of step.
+    const glowing = anims.filter(({ anim }) => anim.magma.some((m) => m));
+    if (glowing.length > 0) {
+      any = true;
+      ctx.save();
+      ctx.globalCompositeOperation = "lighter";
+      ctx.imageSmoothingEnabled = true;
+      for (const { anim, x, y } of glowing)
+        anim.magma.forEach((glow, g) => {
+          if (glow === null) return;
+          ctx.globalAlpha = magmaAlpha(g, t);
+          ctx.drawImage(glow, x, y, glow.width * 2, glow.height * 2);
+        });
+      ctx.restore();
+    }
+    // The living decorations, each in its own pose.
+    for (const d of living) {
+      if (d.x > vx1 || d.x + d.w < vx0 || d.y > vy1 || d.y + d.h < vy0)
+        continue;
+      if (!d.cells.some(([x, y]) => isExplored(x, y))) continue;
+      const art = artOf(d);
+      if (art === null) continue;
+      any = true;
+      art.parts.forEach((part, k) => {
+        const pose = livingPose(d.motion, d.phase, t, k);
+        ctx.drawImage(
+          part.frames[pose.frame],
+          d.x + part.x + pose.dx,
+          d.y + part.y + pose.dy,
+        );
+      });
+    }
+    return any;
+  };
+
+  /** The animation clock: a frame at MOTION.fps while anything moves. */
+  const motionTick = (now: number): void => {
+    motionLoopId = 0;
+    if (!motionOn) return;
+    const hidden = typeof document !== "undefined" && document.hidden;
+    if (
+      !hidden &&
+      !animating &&
+      animatedInView &&
+      frameDue(lastMotionFrame, now)
+    ) {
+      lastMotionFrame = now;
+      stat.motionFrames += 1;
+      render();
+    }
+    motionLoopId = requestAnimationFrame(motionTick);
+  };
+
+  /** Splits placed decorations into cached bodies and living ones. */
+  const setDecorationLists = (placed: readonly PlacedDecoration[]): void => {
+    const still: PlacedDecoration[] = [];
+    const moving: LivingDecoration[] = [];
+    for (const p of placed) {
+      const motion = LIVING_MOTION[p.id];
+      if (motion === undefined) {
+        still.push(p);
+        continue;
+      }
+      const d = placeDecoration(p);
+      moving.push({
+        key: d.asset.key,
+        motion,
+        phase: cellPhase(p.x, p.y),
+        x: d.x,
+        y: d.y,
+        w: d.asset.w,
+        h: d.asset.h,
+        footY: d.footY,
+        cells: decorationCells(p),
+      });
+    }
+    decorationBodies = decorationEntries(still);
+    living = moving.sort((a, b) => a.footY - b.footY || a.x - b.x);
+  };
+
   const render = (): void => {
     const t0 = performance.now();
     const ctx = screen;
@@ -889,12 +1290,18 @@ export function createMapView(
     const c1 = Math.min(chunkCols - 1, Math.floor(vx1 / CHUNK_PX));
     const r0 = Math.max(0, Math.floor(vy0 / CHUNK_PX));
     const r1 = Math.min(chunkRows - 1, Math.floor(vy1 / CHUNK_PX));
+    const anims: { anim: ChunkAnim; x: number; y: number }[] = [];
     for (let cy = r0; cy <= r1; cy += 1)
       for (let cx = c0; cx <= c1; cx += 1) {
         const chunk = chunkAt(cx, cy);
         if (chunk.surface !== null)
           ctx.drawImage(chunk.surface, cx * CHUNK_PX, cy * CHUNK_PX);
+        if (chunk.anim !== null && chunk.anim !== NO_ANIM)
+          anims.push({ anim: chunk.anim, x: cx * CHUNK_PX, y: cy * CHUNK_PX });
       }
+    // Animated terrain over the cached ground (bead bzc.83).
+    const tm = motionOn ? Math.max(1, performance.now() - motionEpoch) : 0;
+    animatedInView = drawTerrainMotion(ctx, anims, tm, vx0, vy0, vx1, vy1);
     // Foreground in row, column, layer order.
     const chipCell = selected ?? hovered;
     for (const e of foreground) {
@@ -1085,7 +1492,7 @@ export function createMapView(
     setMap(next) {
       map = next;
       objects = next.objects;
-      decorationBodies = decorationEntries(mapDecorations(next));
+      setDecorationLists(mapDecorations(next));
       explored = null;
       fogChunks.clear();
       fadingFog = null;
@@ -1165,7 +1572,7 @@ export function createMapView(
     },
     setDecorations(next) {
       const was = decorationBodies;
-      decorationBodies = decorationEntries(next);
+      setDecorationLists(next);
       // Paint the boxes of the decorations gone and new again.
       markChunks(
         [...was, ...decorationBodies].map((e) => ({
@@ -1346,7 +1753,23 @@ export function createMapView(
       if (!on) fadingFog = null;
     },
     cellCentre: (x, y) => ({ x: x * CELL + CELL / 2, y: y * CELL + CELL / 2 }),
+    setTerrainMotion(on) {
+      if (on === motionOn) return;
+      motionOn = on;
+      if (on) {
+        motionEpoch = performance.now();
+        animatedInView = true;
+        if (motionLoopId === 0)
+          motionLoopId = requestAnimationFrame(motionTick);
+      } else if (motionLoopId !== 0) {
+        cancelAnimationFrame(motionLoopId);
+        motionLoopId = 0;
+      }
+      requestRender();
+    },
     destroy() {
+      motionOn = false;
+      if (motionLoopId !== 0) cancelAnimationFrame(motionLoopId);
       canvas.removeEventListener("pointerdown", onPointerDown);
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerup", onPointerUp);

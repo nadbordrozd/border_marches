@@ -1,0 +1,406 @@
+{
+  "flux-a": {
+    "id": "flux-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-8b1c35a9-c35e-4b22-b75d-c4b18d314c01",
+    "submittedAt": "2026-11-26T11:10:01.649Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/class-ground.txt",
+          "text": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: cooled volcanic ground seen from straight above, filling the whole image: dark charcoal brown-grey basalt rock #3b3330 with soft flat slightly lighter ash drifts #4a413c and a few tiny scattered dark pebbles, crossed by a few thin jagged branching cracks of glowing molten lava, bright orange #ff7a1a with small yellow #ffd04a cores and a dark rim, each crack narrow, 1 to 3 pixels wide and about one fifth of the image long, spread evenly with plenty of calm dark rock between them."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 83101,
+      "outline": "lineless",
+      "shading": "flat shading",
+      "detail": "low detail",
+      "view": "high top-down",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly. Subject: cooled volcanic ground seen from straight above, filling the whole image: dark charcoal brown-grey basalt rock #3b3330 with soft flat slightly lighter ash drifts #4a413c and a few tiny scattered dark pebbles, crossed by a few thin jagged branching cracks of glowing molten lava, bright orange #ff7a1a with small yellow #ffd04a cores and a dark rim, each crack narrow, 1 to 3 pixels wide and about one fifth of the image long, spread evenly with plenty of calm dark rock between them. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, vignette, horizon, sky, perspective, isometric slab, object, building, character, tree, big rock, lava lake, lava river, fire, flames, smoke, volcano, mountain, glowing everywhere, bright red, grass, water, snow."
+    },
+    "at": "2026-11-26T11:10:01.654Z",
+    "usageUsd": 0.01057241415977478,
+    "candidates": [
+      {
+        "file": "flux-a-0.png",
+        "sha256": "a8ef181bf69b60ad7380653dbf805bd83f8652b1c96f25af5ee956fba72068b1",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "flux-b": {
+    "id": "flux-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-eb701184-582d-4240-b5c5-afb0087d1dde",
+    "submittedAt": "2026-11-26T11:10:38.757Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/class-ground.txt",
+          "text": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: cooled volcanic ground seen from straight above, filling the whole image: dark charcoal brown-grey basalt rock #3b3330 with soft flat slightly lighter ash drifts #4a413c and a few tiny scattered dark pebbles, crossed by a few thin jagged branching cracks of glowing molten lava, bright orange #ff7a1a with small yellow #ffd04a cores and a dark rim, each crack narrow, 1 to 3 pixels wide and about one fifth of the image long, spread evenly with plenty of calm dark rock between them."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 83102,
+      "outline": "lineless",
+      "shading": "flat shading",
+      "detail": "low detail",
+      "view": "high top-down",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly. Subject: cooled volcanic ground seen from straight above, filling the whole image: dark charcoal brown-grey basalt rock #3b3330 with soft flat slightly lighter ash drifts #4a413c and a few tiny scattered dark pebbles, crossed by a few thin jagged branching cracks of glowing molten lava, bright orange #ff7a1a with small yellow #ffd04a cores and a dark rim, each crack narrow, 1 to 3 pixels wide and about one fifth of the image long, spread evenly with plenty of calm dark rock between them. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, vignette, horizon, sky, perspective, isometric slab, object, building, character, tree, big rock, lava lake, lava river, fire, flames, smoke, volcano, mountain, glowing everywhere, bright red, grass, water, snow."
+    },
+    "at": "2026-11-26T11:10:38.759Z",
+    "usageUsd": 0.008949152840508356,
+    "candidates": [
+      {
+        "file": "flux-b-0.png",
+        "sha256": "1204ba6f05d6bf7130f455f90a412fae194af2c42042b3240a600d89835da39d",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "pixen-a": {
+    "id": "pixen-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-088704bc-f7b8-428a-b416-4631e9099d9a",
+    "submittedAt": "2026-11-26T11:12:41.905Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/class-ground.txt",
+          "text": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a seamless top-down pixel art terrain texture of dark volcanic ground: flat dark grey-brown basalt #3b3330 with a few soft slightly lighter ash patches #4a413c and tiny dark pebbles, and a handful of thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, scattered evenly. Only the ground itself, nothing standing on it."
+        }
+      ],
+      "image_size": {
+        "width": 480,
+        "height": 480
+      },
+      "no_background": false,
+      "seed": 83103,
+      "outline": "lineless",
+      "detail": "low detail",
+      "view": "high top-down",
+      "description": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly. Subject: a seamless top-down pixel art terrain texture of dark volcanic ground: flat dark grey-brown basalt #3b3330 with a few soft slightly lighter ash patches #4a413c and tiny dark pebbles, and a handful of thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, scattered evenly. Only the ground itself, nothing standing on it. Must not include: frame, border, vignette, horizon, sky, perspective, isometric slab, object, building, character, tree, big rock, text, lava lake, lava river, fire, flames, smoke, volcano, mountain, glowing everywhere, bright red, grass, water, snow."
+    },
+    "at": "2026-11-26T11:12:41.910Z",
+    "usageUsd": 0.012193540043301053,
+    "candidates": [
+      {
+        "file": "pixen-a-0.png",
+        "sha256": "147fa4f8eb7757c895551bdc627262f1a26f2b60d7b65e3fb14404a13de39e60",
+        "width": 480,
+        "height": 480
+      }
+    ]
+  },
+  "flux-c": {
+    "id": "flux-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-7d09fd04-1931-451d-bde6-72e92b93dd23",
+    "submittedAt": "2026-11-26T11:13:49.908Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "fragments/class-ground.txt",
+          "text": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a seamless top-down pixel art terrain texture of dark volcanic ground: flat dark grey-brown basalt #3b3330 with a few soft slightly lighter ash patches #4a413c and tiny dark pebbles, and a handful of thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, scattered evenly. Only the ground itself, nothing standing on it."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 83104,
+      "outline": "lineless",
+      "detail": "low detail",
+      "view": "high top-down",
+      "shading": "flat shading",
+      "description": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly. Subject: a seamless top-down pixel art terrain texture of dark volcanic ground: flat dark grey-brown basalt #3b3330 with a few soft slightly lighter ash patches #4a413c and tiny dark pebbles, and a handful of thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, scattered evenly. Only the ground itself, nothing standing on it. Must not include: frame, border, vignette, horizon, sky, perspective, isometric slab, object, building, character, tree, big rock, text, lava lake, lava river, fire, flames, smoke, volcano, mountain, glowing everywhere, bright red, grass, water, snow."
+    },
+    "at": "2026-11-26T11:13:49.910Z",
+    "usageUsd": 0.012131250434451634,
+    "candidates": [
+      {
+        "file": "flux-c-0.png",
+        "sha256": "93f090d9ebb63fba9547a69037f1ea7068361d062d43e798d6803583dfe0e00d",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "pixen-b": {
+    "id": "pixen-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-3e838213-e5a3-4fbb-b9ea-a32b318d8acb",
+    "submittedAt": "2026-11-26T11:15:10.842Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/class-ground.txt",
+          "text": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a seamless top-down pixel art terrain texture of dark volcanic ground: flat dark grey-brown basalt #3b3330 with a few soft slightly lighter ash patches #4a413c and tiny dark pebbles, and a handful of thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, scattered evenly. Only the ground itself, nothing standing on it."
+        }
+      ],
+      "image_size": {
+        "width": 480,
+        "height": 480
+      },
+      "no_background": false,
+      "seed": 83105,
+      "outline": "lineless",
+      "detail": "low detail",
+      "view": "high top-down",
+      "description": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly. Subject: a seamless top-down pixel art terrain texture of dark volcanic ground: flat dark grey-brown basalt #3b3330 with a few soft slightly lighter ash patches #4a413c and tiny dark pebbles, and a handful of thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, scattered evenly. Only the ground itself, nothing standing on it. Must not include: frame, border, vignette, horizon, sky, perspective, isometric slab, object, building, character, tree, big rock, text, lava lake, lava river, fire, flames, smoke, volcano, mountain, glowing everywhere, bright red, grass, water, snow."
+    },
+    "at": "2026-11-26T11:15:10.844Z",
+    "usageUsd": 0.013652933968438044,
+    "candidates": [
+      {
+        "file": "pixen-b-0.png",
+        "sha256": "3660c317ef63061e31a48ff4051bceaa8b5f8e320351be9f02749aa35eb7c49d",
+        "width": 480,
+        "height": 480
+      }
+    ]
+  },
+  "pixen-c": {
+    "id": "pixen-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-9f3649f5-b9ae-47b1-a257-0086bd9b285b",
+    "submittedAt": "2026-11-26T11:19:34.177Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/class-ground.txt",
+          "text": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a seamless top-down pixel art terrain texture of cooled volcanic ground: mostly smooth, flat, dark grey-brown basalt #3b3330 with soft slightly lighter ash drifts #463d38 and a few tiny dark pebbles, very calm and quiet, no cobblestones, no tile grid, no plates. Scattered evenly over it, six to eight small separate thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, each crack short, about one tenth of the image long, with lots of plain dark rock between them."
+        }
+      ],
+      "image_size": {
+        "width": 480,
+        "height": 480
+      },
+      "no_background": false,
+      "seed": 83106,
+      "outline": "lineless",
+      "detail": "low detail",
+      "view": "high top-down",
+      "description": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly. Subject: a seamless top-down pixel art terrain texture of cooled volcanic ground: mostly smooth, flat, dark grey-brown basalt #3b3330 with soft slightly lighter ash drifts #463d38 and a few tiny dark pebbles, very calm and quiet, no cobblestones, no tile grid, no plates. Scattered evenly over it, six to eight small separate thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, each crack short, about one tenth of the image long, with lots of plain dark rock between them. Must not include: frame, border, vignette, horizon, sky, perspective, isometric slab, object, building, character, tree, big rock, text, lava lake, lava river, fire, flames, smoke, volcano, mountain, glowing everywhere, bright red, grass, water, snow."
+    },
+    "at": "2026-11-26T11:19:34.181Z",
+    "usageUsd": 0.01311093020439148,
+    "candidates": [
+      {
+        "file": "pixen-c-0.png",
+        "sha256": "b7465634ea594228d5ad8475e898c572e429e73e0c3a880cf6e3b1a650156bc0",
+        "width": 480,
+        "height": 480
+      }
+    ]
+  },
+  "pixen-d": {
+    "id": "pixen-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-d86ebe1f-0e6c-4f27-8eae-609f91c5afff",
+    "submittedAt": "2026-11-26T11:20:30.719Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/class-ground.txt",
+          "text": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a seamless top-down pixel art terrain texture of cooled volcanic ground: mostly smooth, flat, dark grey-brown basalt #3b3330 with soft slightly lighter ash drifts #463d38 and a few tiny dark pebbles, very calm and quiet, no cobblestones, no tile grid, no plates. Scattered evenly over it, six to eight small separate thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, each crack short, about one tenth of the image long, with lots of plain dark rock between them."
+        }
+      ],
+      "image_size": {
+        "width": 480,
+        "height": 480
+      },
+      "no_background": false,
+      "seed": 83107,
+      "outline": "lineless",
+      "detail": "low detail",
+      "view": "high top-down",
+      "description": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly. Subject: a seamless top-down pixel art terrain texture of cooled volcanic ground: mostly smooth, flat, dark grey-brown basalt #3b3330 with soft slightly lighter ash drifts #463d38 and a few tiny dark pebbles, very calm and quiet, no cobblestones, no tile grid, no plates. Scattered evenly over it, six to eight small separate thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, each crack short, about one tenth of the image long, with lots of plain dark rock between them. Must not include: frame, border, vignette, horizon, sky, perspective, isometric slab, object, building, character, tree, big rock, text, lava lake, lava river, fire, flames, smoke, volcano, mountain, glowing everywhere, bright red, grass, water, snow."
+    },
+    "at": "2026-11-26T11:20:30.723Z",
+    "usageUsd": 0.011014902141359119,
+    "candidates": [
+      {
+        "file": "pixen-d-0.png",
+        "sha256": "f99f6a9c72f2c0ac060220ef7fe808b3a5ddcab6c0982a7f741b687984209dc8",
+        "width": 480,
+        "height": 480
+      }
+    ]
+  },
+  "pixen-e": {
+    "id": "pixen-e",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-a990d28e-e649-4081-81aa-89297f75d524",
+    "submittedAt": "2026-11-26T11:21:54.819Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/class-ground.txt",
+          "text": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a seamless top-down pixel art terrain texture of cooled volcanic ground: mostly smooth, flat, dark grey-brown basalt #3b3330 with soft slightly lighter ash drifts #463d38 and a few tiny dark pebbles, very calm and quiet, no cobblestones, no tile grid, no plates. Scattered evenly over it, six to eight small separate thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, each crack short, about one tenth of the image long, with lots of plain dark rock between them."
+        }
+      ],
+      "image_size": {
+        "width": 480,
+        "height": 480
+      },
+      "no_background": false,
+      "seed": 83108,
+      "outline": "lineless",
+      "detail": "low detail",
+      "view": "high top-down",
+      "description": "Class: a seamless tileable ground texture for a strategy map, seen from straight above, filling the whole image edge to edge with the same calm ground everywhere: no centre, no border, no horizon, no perspective and no single subject. Quiet and low in contrast so pieces stand out over it: a flat base colour with soft slightly lighter and darker drifts and a few small, discrete details scattered evenly. Subject: a seamless top-down pixel art terrain texture of cooled volcanic ground: mostly smooth, flat, dark grey-brown basalt #3b3330 with soft slightly lighter ash drifts #463d38 and a few tiny dark pebbles, very calm and quiet, no cobblestones, no tile grid, no plates. Scattered evenly over it, six to eight small separate thin jagged cracks glowing bright orange #ff7a1a with yellow #ffd04a centres, each crack short, about one tenth of the image long, with lots of plain dark rock between them. Must not include: frame, border, vignette, horizon, sky, perspective, isometric slab, object, building, character, tree, big rock, text, lava lake, lava river, fire, flames, smoke, volcano, mountain, glowing everywhere, bright red, grass, water, snow."
+    },
+    "at": "2026-11-26T11:21:54.822Z",
+    "usageUsd": 0.013607824431525337,
+    "candidates": [
+      {
+        "file": "pixen-e-0.png",
+        "sha256": "d6bca4141efb1d938a311cbe5e2cab5faca69f2c5526843a7ce404ee40cbb95e",
+        "width": 480,
+        "height": 480
+      }
+    ]
+  },
+  "base-a": {
+    "id": "base-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-1de14518-7188-4872-bb99-8202c074ad1d",
+    "submittedAt": "2026-11-26T11:24:08.036Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of cooled dark volcanic ash and basalt seen from directly above, filling the whole image edge to edge: dark charcoal grey-brown #3b3330 with soft, slightly lighter ash drifts #463d38, a few tiny dark pebbles and faint hairline cracks, very calm, quiet and low in contrast, the same everywhere. No lava, no glow."
+        }
+      ],
+      "image_size": {
+        "width": 480,
+        "height": 480
+      },
+      "no_background": false,
+      "seed": 83109,
+      "outline": "lineless",
+      "detail": "low detail",
+      "view": "high top-down",
+      "description": "Subject: a wide flat field of cooled dark volcanic ash and basalt seen from directly above, filling the whole image edge to edge: dark charcoal grey-brown #3b3330 with soft, slightly lighter ash drifts #463d38, a few tiny dark pebbles and faint hairline cracks, very calm, quiet and low in contrast, the same everywhere. No lava, no glow. Must not include: lava lake, lava river, fire, flames, smoke, volcano, mountain, glowing everywhere, bright red, grass, water, snow, tiles, tile grid, cobblestones, bricks, plates, slabs, paving, lava, glow, orange, object, frame, border."
+    },
+    "at": "2026-11-26T11:24:08.040Z",
+    "usageUsd": 0.01168144800927904,
+    "candidates": [
+      {
+        "file": "base-a-0.png",
+        "sha256": "e596f87935ffc95d455b58423a70240c55a133208bfcd21b0c6197796a3a152c",
+        "width": 480,
+        "height": 480
+      }
+    ]
+  },
+  "base-b": {
+    "id": "base-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-3e33bbfa-5175-4d71-a236-5628eb4d77f9",
+    "submittedAt": "2026-11-26T11:24:35.678Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of cooled dark volcanic ash and basalt seen from directly above, filling the whole image edge to edge: dark charcoal grey-brown #3b3330 with soft, slightly lighter ash drifts #463d38, a few tiny dark pebbles and faint hairline cracks, very calm, quiet and low in contrast, the same everywhere. No lava, no glow."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 83110,
+      "outline": "lineless",
+      "detail": "low detail",
+      "view": "high top-down",
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of cooled dark volcanic ash and basalt seen from directly above, filling the whole image edge to edge: dark charcoal grey-brown #3b3330 with soft, slightly lighter ash drifts #463d38, a few tiny dark pebbles and faint hairline cracks, very calm, quiet and low in contrast, the same everywhere. No lava, no glow. Must not include: lava lake, lava river, fire, flames, smoke, volcano, mountain, glowing everywhere, bright red, grass, water, snow, tiles, tile grid, cobblestones, bricks, plates, slabs, paving, lava, glow, orange, object, character, frame, border."
+    },
+    "at": "2026-11-26T11:24:35.680Z",
+    "usageUsd": 0.007929646889368694,
+    "candidates": [
+      {
+        "file": "base-b-0.png",
+        "sha256": "9dfd38c2326ac69b6faebe011e02821c00dcfe10b04b66cc1081170e761280ab",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  }
+}

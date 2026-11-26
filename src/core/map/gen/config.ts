@@ -104,6 +104,21 @@ export interface GenConfig {
     minRegion: number;
     /** Majority-filter rounds that round off terrain borders. */
     smoothRounds: number;
+    /**
+     * Volcanic ground (bead bzc.83): on some maps a wild zone away from the
+     * starts is volcanic (gen/terrain.ts placeVolcanic), its own random
+     * stream, so the other zones and stages draw what they drew before.
+     */
+    volcanic: {
+      /** Chance per map size that the map has volcanic zones at all. */
+      chance: Readonly<Record<MapSize, number>>;
+      /** Most volcanic zones per map size (each further one at half the chance). */
+      maxZones: Readonly<Record<MapSize, number>>;
+      /** Lowest tier (steps from the nearest start zone) of a volcanic zone. */
+      minTier: number;
+      /** Secondary patches of a volcanic zone: one of these. */
+      secondary: readonly Terrain[];
+    };
   };
 
   water: {
@@ -340,6 +355,12 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     patchScale: 7,
     minRegion: 6,
     smoothRounds: 2,
+    volcanic: {
+      chance: { S: 0.35, M: 0.5, L: 0.6 },
+      maxZones: { S: 1, M: 1, L: 2 },
+      minTier: 1,
+      secondary: ["wasteland", "badlands"],
+    },
   },
 
   water: {
@@ -365,6 +386,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       steppe: 0.6,
       badlands: 0.85,
       wasteland: 0.75,
+      volcanic: 0.85,
       water: 0.5,
     },
     edgeDepth: 2.8,
@@ -395,6 +417,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       steppe: 0.45,
       badlands: 0.7,
       wasteland: 0.6,
+      volcanic: 0.75,
       water: 0.5,
     },
     ridgeBias: 2.2,
@@ -413,6 +436,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
         steppe: 0.45,
         badlands: 0.8,
         wasteland: 0,
+        volcanic: 0.5,
         water: 0,
       },
       size: [22, 36],
@@ -479,6 +503,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       jungle: 100,
       badlands: 125,
       wasteland: 150,
+      volcanic: 150,
     },
     road: 75,
     day: 1500,

@@ -10,6 +10,9 @@ export const TERRAIN_MOVE_COST: Readonly<Record<Terrain, number | null>> = {
   jungle: 150,
   badlands: 125,
   wasteland: 150,
+  // Volcanic ground (bead bzc.83): cracked basalt and ash, as rough as the
+  // wasteland.
+  volcanic: 150,
   water: null,
 };
 

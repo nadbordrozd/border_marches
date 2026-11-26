@@ -13,7 +13,8 @@
  * 2. towns    every start town, the neutral towns and the Warlord's Hold,
  *             deep in their zones
  * 3. water    coast and lakes (gen/water.ts)
- * 4. terrain  main terrain per zone with secondary patches (gen/terrain.ts)
+ * 4. terrain  main terrain per zone with secondary patches; on some maps a
+ *             wild zone turns volcanic (gen/terrain.ts)
  * 5. borders  mountain ranges and forest belts along zone borders, a frame
  *             along the map edge, spurs, and passes (gen/borders.ts)
  * 6. rooms    walls of forest and rock inside each zone with unguarded gaps:
@@ -47,7 +48,11 @@ import {
 import { placeObjects, placeTowns } from "./gen/objects.ts";
 import { O, TERRAIN_OF, newState } from "./gen/state.ts";
 import type { Connection, GapInfo, PassInfo, ZoneInfo } from "./gen/state.ts";
-import { mergeSmallRegions, paintTerrain } from "./gen/terrain.ts";
+import {
+  mergeSmallRegions,
+  paintTerrain,
+  placeVolcanic,
+} from "./gen/terrain.ts";
 import { wobbleEdges } from "./gen/wobble.ts";
 import { markDeep, placeWater, tidyWater } from "./gen/water.ts";
 import { layoutZones } from "./gen/zones.ts";
@@ -145,6 +150,7 @@ export function generateMapWithInfo(
 
   layoutZones(st);
   placeTowns(st);
+  placeVolcanic(st);
   lap("zones+towns");
   placeWater(st);
   paintTerrain(st);

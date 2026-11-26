@@ -83,6 +83,16 @@ const PALETTE: Readonly<
     ],
     water: [80, 96, 90],
   },
+  volcanic: {
+    rock: [78, 70, 68],
+    bush: [96, 86, 78],
+    petals: [
+      [240, 140, 60],
+      [210, 200, 190],
+      [250, 200, 90],
+    ],
+    water: [70, 60, 58],
+  },
 };
 
 const OUTLINE: Rgb = [28, 24, 22];

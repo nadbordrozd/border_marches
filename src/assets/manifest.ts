@@ -36,6 +36,8 @@
  * and the fog of war, its puffs and lift (fog-of-war-v7.ts, fog-puff-v7.ts,
  * fog-lift-v7.ts).
  */
+import { ART_GROUNDS, GROUND_FAMILY } from "./ground-family";
+import type { ArtGround } from "./ground-family";
 import type { ResourceId, Terrain } from "../core/map/types";
 import { DECORATION_ASSETS } from "./decorations";
 import { ALL_ICON_ASSETS } from "./icons";
@@ -64,6 +66,7 @@ export type AssetCategory =
   | "town"
   | "ground"
   | "ground-swatch"
+  | "ground-overlay"
   | "water"
   | "mountain"
   | "mountain-extra"
@@ -584,7 +587,11 @@ export const GROUND_TERRAINS: readonly GroundTerrain[] = [
   "steppe",
   "badlands",
   "wasteland",
+  "volcanic",
 ];
+
+export { ART_GROUNDS, GROUND_FAMILY } from "./ground-family";
+export type { ArtGround } from "./ground-family";
 
 /**
  * A periodic texture of `columns` x `rows` cells (Pulp Wars'
@@ -612,6 +619,7 @@ export const GROUND_SOURCES: Readonly<Record<GroundTerrain, string>> = {
   steppe: "GOBLIN",
   badlands: "MARTIAN",
   wasteland: "UNDEAD",
+  volcanic: "none: PixelLab set grounds-volcanic (bead bzc.83)",
 };
 
 /** Texture period in cells (FACTION_GRASS_WORLDS_V7). */
@@ -621,6 +629,7 @@ const GROUND_PERIODS: Readonly<Record<GroundTerrain, number>> = {
   steppe: 8,
   badlands: 8,
   wasteland: 8,
+  volcanic: 5,
 };
 
 export const GROUND_TEXTURES: Readonly<
@@ -658,6 +667,31 @@ export const GROUND_SWATCHES: Readonly<
     return [terrain, asset];
   }),
 ) as Record<GroundTerrain, GroundSwatchAsset>;
+
+/**
+ * A ground's overlay (bead bzc.83): a second periodic image whose glowing
+ * pixels the renderer lays over the ground texture at its own period, so
+ * the two repeat together only every lcm of the periods. The volcanic
+ * cracks: the hot lava pixels of studio take grounds-volcanic/pixen-a,
+ * picked out (and thinned) at load by render/map/ground.ts crackOverlay.
+ */
+export interface GroundOverlayAsset extends ImageAsset {
+  readonly category: "ground-overlay";
+  readonly terrain: GroundTerrain;
+}
+
+export const GROUND_OVERLAYS: Readonly<
+  Partial<Record<GroundTerrain, GroundOverlayAsset>>
+> = {
+  volcanic: {
+    key: "ground-volcanic-cracks",
+    path: "assets/terrain/grounds/volcanic-cracks.png",
+    w: 480,
+    h: 480,
+    category: "ground-overlay",
+    terrain: "volcanic",
+  },
+};
 
 // ------------------------------------------------------------------ water
 
@@ -839,7 +873,7 @@ const FOREST_VARIANTS: Readonly<Record<ForestShape, number>> = {
 
 /** Each set's seam clump sizes, by index (file seam-<index + 1>.png). */
 const FOREST_SEAM_SIZES: Readonly<
-  Record<GroundTerrain, readonly (readonly [number, number])[]>
+  Record<ArtGround, readonly (readonly [number, number])[]>
 > = {
   grass: [
     [63, 63],
@@ -871,7 +905,7 @@ const FOREST_SEAM_SIZES: Readonly<
   ],
 };
 
-function forestSet(terrain: GroundTerrain): ForestSet {
+function forestSet(terrain: ArtGround): ForestSet {
   const dir = `assets/terrain/forest/${terrain}`;
   const pieces = (Object.keys(FOREST_VARIANTS) as ForestShape[]).flatMap(
     (shape) => {
@@ -913,10 +947,21 @@ function forestSet(terrain: GroundTerrain): ForestSet {
   return { terrain, source: GROUND_SOURCES[terrain], pieces, seams };
 }
 
-/** One composed-forest set per land terrain. */
+const OWN_FOREST_SETS: Readonly<Record<ArtGround, ForestSet>> =
+  Object.fromEntries(
+    ART_GROUNDS.map((terrain) => [terrain, forestSet(terrain)]),
+  ) as Record<ArtGround, ForestSet>;
+
+/**
+ * One composed-forest set per land terrain: each art family's own (a
+ * volcanic ground shares the wasteland's, GROUND_FAMILY).
+ */
 export const FOREST_SETS: Readonly<Record<GroundTerrain, ForestSet>> =
   Object.fromEntries(
-    GROUND_TERRAINS.map((terrain) => [terrain, forestSet(terrain)]),
+    GROUND_TERRAINS.map((terrain) => [
+      terrain,
+      OWN_FOREST_SETS[GROUND_FAMILY[terrain]],
+    ]),
   ) as Record<GroundTerrain, ForestSet>;
 
 // ---------------------------------------------------------------- objects
@@ -1209,7 +1254,8 @@ export const DOODAD_ASSETS: readonly DoodadAsset[] = DOODAD_ROWS.map(
 
 /** The doodads of one terrain. */
 export function doodadsOf(terrain: GroundTerrain): readonly DoodadAsset[] {
-  return DOODAD_ASSETS.filter((doodad) => doodad.terrain === terrain);
+  const family = GROUND_FAMILY[terrain];
+  return DOODAD_ASSETS.filter((doodad) => doodad.terrain === family);
 }
 
 // -------------------------------------------------------------- registry
@@ -1222,10 +1268,14 @@ export const ALL_ASSETS: readonly ImageAsset[] = [
   ...TOWN_ASSETS,
   ...Object.values(GROUND_TEXTURES),
   ...Object.values(GROUND_SWATCHES),
+  ...Object.values(GROUND_OVERLAYS).filter((a) => a !== undefined),
   ...WATER_TILES,
   ...MOUNTAIN_PIECES,
   ...MOUNTAIN_EXTRAS,
-  ...Object.values(FOREST_SETS).flatMap((set) => [...set.pieces, ...set.seams]),
+  ...Object.values(OWN_FOREST_SETS).flatMap((set) => [
+    ...set.pieces,
+    ...set.seams,
+  ]),
   ...OBJECT_ASSETS,
   ...Object.values(RESOURCE_ITEMS),
   ...TOWN_3X2_ASSETS,

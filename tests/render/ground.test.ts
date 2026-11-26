@@ -32,6 +32,7 @@ const COLOURS: Record<GroundTerrain, [number, number, number]> = {
   jungle: [10, 120, 10],
   badlands: [200, 80, 10],
   wasteland: [80, 80, 80],
+  volcanic: [40, 20, 20],
 };
 
 const SOURCES: GroundSources = {

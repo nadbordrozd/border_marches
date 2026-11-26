@@ -24,7 +24,7 @@
  * again into the cached crown bands drawn in the foreground, so it covers only
  * the feet of a unit standing behind the range.
  */
-import { CELL_PX } from "../../assets/manifest";
+import { CELL_PX, GROUND_FAMILY } from "../../assets/manifest";
 import type { GroundTerrain } from "../../assets/manifest";
 import type { GameMap } from "../../core/map/types";
 import type { CanopyTree } from "./canopy";
@@ -94,6 +94,7 @@ export const PEAK_SPACING: Readonly<Record<GroundTerrain, number>> = {
   steppe: 1,
   badlands: 1,
   wasteland: 1.16,
+  volcanic: 1.16,
 };
 
 /** Per-cell facts of the ranges, computed once per map. */
@@ -154,7 +155,7 @@ export function buildPeakField(
     if (cell.terrain === "water") return;
     if (cell.obstacle === "mountain" && !featured.has(i)) {
       rock[i] = 1;
-      family[i] = GROUNDS.indexOf(cell.terrain);
+      family[i] = GROUNDS.indexOf(GROUND_FAMILY[cell.terrain]);
     } else if (cell.obstacle === "forest") wood[i] = 1;
     else if (cell.obstacle === "none" && !cell.road && !featured.has(i))
       open[i] = 1;
@@ -966,6 +967,7 @@ export const PEAK_UNDER: Readonly<
   steppe: [132, 106, 68],
   badlands: [140, 74, 48],
   wasteland: [58, 54, 60],
+  volcanic: [58, 54, 60],
 };
 
 /**

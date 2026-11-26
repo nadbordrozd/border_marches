@@ -58,7 +58,7 @@ import { playSound } from "../audio/sound.ts";
 import { fxEvent } from "../audio/fx.ts";
 import { burst as fxBurst, sparkle as fxSparkle } from "../render/fx/emit.ts";
 import { PALETTES } from "../render/fx/pixels.ts";
-import { onMotionChange, reducedMotion } from "./motion.ts";
+import { onMotionChange, reducedMotion, terrainAnimated } from "./motion.ts";
 import { bump, countUp, dayBanner, floatText, flyTo } from "./anim.ts";
 import { openBattleScreen } from "./battle/screen.ts";
 import { openAdventureBook, type BookChoice } from "./spellbook.ts";
@@ -358,10 +358,12 @@ class GameScreen {
     this.host.append(this.root);
     this.view = createMapView(this.canvas, assets);
     this.view.setFogFade(!reducedMotion());
-    this.offMotion = onMotionChange((reduced) =>
-      this.view.setFogFade(!reduced),
-    );
+    this.offMotion = onMotionChange((reduced) => {
+      this.view.setFogFade(!reduced);
+      this.syncTerrainMotion();
+    });
     this.view.setMap(initial.map);
+    this.syncTerrainMotion();
     this.view.onClick((cell) => this.onMapClick(cell.x, cell.y));
     this.view.onHover((cell) => this.onHover(cell));
     this.offModal = onModalChange(() => this.syncInput());
@@ -504,10 +506,21 @@ class GameScreen {
     this.syncInput();
   }
 
+  /**
+   * The map's terrain animates (bead bzc.83) when the setting says so and
+   * no town, battle or end screen covers the map.
+   */
+  private syncTerrainMotion(): void {
+    this.view.setTerrainMotion(
+      terrainAnimated() && !this.screenOpen && !this.finished,
+    );
+  }
+
   /** The map takes input only while the human could act (bead xaj.18). */
   private syncInput(): void {
     const blocked = this.inputBlocked();
     this.view.setInputEnabled(!blocked);
+    this.syncTerrainMotion();
     // No action cursor while walking, fighting or in a dialog (UI2-07).
     if (blocked && this.hoverAction !== null) this.renderHint();
     // A map card pinned by right-click goes with the map's input (UI2-18).

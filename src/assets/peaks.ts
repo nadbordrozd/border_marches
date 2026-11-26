@@ -5,20 +5,22 @@
  * the last row), never scaled or mirrored. `src/render/map/peaks.ts` crowds
  * them into ranges.
  */
+import { GROUND_FAMILY } from "./ground-family";
+import type { ArtGround } from "./ground-family";
 import type { GroundTerrain, ImageAsset } from "./manifest";
 import type { PeakTier } from "../render/map/peaks";
 
 export interface PeakAsset extends ImageAsset {
   readonly category: "peak";
-  /** The ground whose mountains use it. */
-  readonly terrain: GroundTerrain;
+  /** The art family whose mountains use it (ground-family.ts). */
+  readonly terrain: ArtGround;
   readonly tier: PeakTier;
   readonly index: number;
 }
 
 /** [terrain, tier, index, w, h] of every peak (file <tier>-<index>.png). */
 const PEAK_ROWS: readonly (readonly [
-  GroundTerrain,
+  ArtGround,
   PeakTier,
   number,
   number,
@@ -211,5 +213,6 @@ export const PEAK_ASSETS: readonly PeakAsset[] = PEAK_ROWS.map(
 
 /** The peaks of one ground. */
 export function peaksOf(terrain: GroundTerrain): readonly PeakAsset[] {
-  return PEAK_ASSETS.filter((peak) => peak.terrain === terrain);
+  const family = GROUND_FAMILY[terrain];
+  return PEAK_ASSETS.filter((peak) => peak.terrain === family);
 }

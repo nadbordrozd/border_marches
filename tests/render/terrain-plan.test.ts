@@ -13,7 +13,7 @@ import type { GameMap, MapObject } from "../../src/core/map/types.ts";
 import { objectCells } from "../../src/core/map/types.ts";
 import { canopyBands, canopyTint } from "../../src/render/map/canopy.ts";
 import type { CanopyBand, CanopyTree } from "../../src/render/map/canopy.ts";
-import { buildGroundLayout } from "../../src/render/map/ground.ts";
+import { GROUND_RANK, buildGroundLayout } from "../../src/render/map/ground.ts";
 import { CHUNK_CELLS } from "../../src/render/map/map-view.ts";
 import { paintPeakUnder } from "../../src/render/map/peaks.ts";
 import {
@@ -472,5 +472,61 @@ describe("incremental terrain plan", () => {
       expect(r.y0).toBeGreaterThan((y - 5) * CELL);
       expect(r.y1).toBeLessThan((y + 5) * CELL);
     }
+  });
+});
+
+describe("volcanic ground in the terrain plan (bead bzc.83)", () => {
+  // Seed 9 (S) rolls a volcanic zone.
+  const map = generateMap(9, { size: "S" });
+  const volcanic = map.cells
+    .map((c, i) => (c.terrain === "volcanic" ? i : -1))
+    .filter((i) => i >= 0);
+
+  it("ranks volcanic ground darkest, so its cracked rock spills over every other ground", () => {
+    expect(volcanic.length).toBeGreaterThan(0);
+    const layout = planTerrain(map, map.objects).plan.layout;
+    const rank = GROUND_RANK.indexOf("volcanic");
+    expect(rank).toBe(GROUND_RANK.length - 1);
+    for (const i of volcanic) expect(layout.kind[i]).toBe(rank);
+    // Where volcanic ground meets another, the border cells list both, the
+    // volcanic last (it runs out over the other).
+    const border = volcanic.find((i) => (layout.ranks[i]?.length ?? 0) > 1);
+    expect(border).toBeDefined();
+    expect(layout.ranks[border!]?.at(-1)).toBe(rank);
+  });
+
+  it("grows the wasteland's trees and peaks on volcanic ground", () => {
+    const plan = planTerrain(map, map.objects).plan;
+    // GROUNDS index of the wasteland in canopy.ts and peaks.ts.
+    const wasteland = 4;
+    let woods = 0;
+    let rock = 0;
+    for (const i of volcanic) {
+      const cell = map.cells[i]!;
+      if (cell.obstacle === "forest") {
+        woods += 1;
+        expect(plan.canopyField.set[i]).toBe(wasteland);
+      }
+      if (cell.obstacle === "mountain" && plan.peakField.rock[i] === 1) {
+        rock += 1;
+        expect(plan.peakField.family[i]).toBe(wasteland);
+      }
+    }
+    expect(woods + rock).toBeGreaterThan(0);
+  });
+
+  it("updates a volcanic zone incrementally as a full rebuild would", () => {
+    let objects: MapObject[] = map.objects.filter((o) => o.kind !== "buried");
+    const update = planTerrain(map, objects);
+    const onLava = objects.find(
+      (o) =>
+        (o.kind === "pickup" || o.kind === "monster") &&
+        map.cells[o.y * map.width + o.x]?.terrain === "volcanic",
+    );
+    expect(onLava).toBeDefined();
+    objects = objects.filter((o) => o !== onLava);
+    const next = planTerrain(map, objects, update.plan);
+    expectSameAsFull(map, objects, next);
+    expect(next.dirty).not.toBeNull();
   });
 });

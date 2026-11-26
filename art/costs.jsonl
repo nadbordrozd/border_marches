@@ -423,3 +423,13 @@
 {"at":"2026-11-25T19:08:22.462Z","set":"icons-artifacts","id":"relics-a","endpoint":"generate-image-v2","usd":0.08221974534458584}
 {"at":"2026-11-25T19:09:54.570Z","set":"icons-conditions","id":"conditions-f-16","endpoint":"generate-image-v2","usd":0.08163567707273696}
 {"at":"2026-11-26T10:40:53.731Z","set":"icons-heroes","id":"stats-b","endpoint":"generate-image-v2","usd":null}
+{"at":"2026-11-26T11:10:01.655Z","set":"grounds-volcanic","id":"flux-a","endpoint":"create-image-pixflux","usd":0.01057241415977478}
+{"at":"2026-11-26T11:10:38.760Z","set":"grounds-volcanic","id":"flux-b","endpoint":"create-image-pixflux","usd":0.008949152840508356}
+{"at":"2026-11-26T11:12:41.910Z","set":"grounds-volcanic","id":"pixen-a","endpoint":"create-image-pixen","usd":0.012193540043301053}
+{"at":"2026-11-26T11:13:49.910Z","set":"grounds-volcanic","id":"flux-c","endpoint":"create-image-pixflux","usd":0.012131250434451634}
+{"at":"2026-11-26T11:15:10.845Z","set":"grounds-volcanic","id":"pixen-b","endpoint":"create-image-pixen","usd":0.013652933968438044}
+{"at":"2026-11-26T11:19:34.182Z","set":"grounds-volcanic","id":"pixen-c","endpoint":"create-image-pixen","usd":0.01311093020439148}
+{"at":"2026-11-26T11:20:30.723Z","set":"grounds-volcanic","id":"pixen-d","endpoint":"create-image-pixen","usd":0.011014902141359119}
+{"at":"2026-11-26T11:21:54.822Z","set":"grounds-volcanic","id":"pixen-e","endpoint":"create-image-pixen","usd":0.013607824431525337}
+{"at":"2026-11-26T11:24:08.040Z","set":"grounds-volcanic","id":"base-a","endpoint":"create-image-pixen","usd":0.01168144800927904}
+{"at":"2026-11-26T11:24:35.681Z","set":"grounds-volcanic","id":"base-b","endpoint":"create-image-pixflux","usd":0.007929646889368694}

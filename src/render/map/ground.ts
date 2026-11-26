@@ -45,6 +45,7 @@ import {
   roadSegments,
 } from "./road";
 import type { RoadSegment } from "./road";
+import type { CrackOverlay } from "./terrain-motion";
 
 const CELL = CELL_PX;
 const TURN = (2 * Math.PI) / (CELL * 3);
@@ -153,6 +154,11 @@ export function calmTexture(image: PixelImage, calm: GroundCalm): PixelImage {
 
 export interface GroundSources {
   readonly textures: Readonly<Record<GroundTerrain, PixelImage>>;
+  /**
+   * Overlays laid over a ground's texture at their own period (bead
+   * bzc.83: the volcanic cracks, terrain-motion.ts crackOverlay).
+   */
+  readonly overlays?: Readonly<Partial<Record<GroundTerrain, CrackOverlay>>>;
   readonly water: {
     readonly shallow: readonly PixelImage[];
     readonly deep: readonly PixelImage[];
@@ -163,7 +169,8 @@ export interface GroundSources {
  * Ground ranks, lowest first: a ground spills over every ground before it.
  * Palest to darkest as in Pulp Wars (FACTION_GRASS_IDS_V7): default grass,
  * the goblin dry grass, the dinosaur jungle floor, the martian regolith,
- * the undead burnt ground.
+ * the undead burnt ground; then the volcanic basalt (bead bzc.83), the
+ * darkest, whose cracked rock runs out over every other ground.
  */
 export const GROUND_RANK: readonly GroundTerrain[] = [
   "grass",
@@ -171,6 +178,7 @@ export const GROUND_RANK: readonly GroundTerrain[] = [
   "jungle",
   "badlands",
   "wasteland",
+  "volcanic",
 ];
 
 const WATER = GROUND_RANK.length;
@@ -400,6 +408,38 @@ export function waterDepthShare(
   return Math.max(step, SHELF.shelfDepth * band);
 }
 
+/**
+ * Whether world pixel (wx, wy) is open water at least `margin` px from the
+ * shore as paintGround draws it (no sand, wet edge, surf or foam), for the
+ * water's glints (bead bzc.83).
+ */
+export function openWaterAt(
+  layout: GroundLayout,
+  wx: number,
+  wy: number,
+  margin: number,
+): boolean {
+  const cx = Math.floor(wx / CELL);
+  const cy = Math.floor(wy / CELL);
+  if (cx < 0 || cy < 0 || cx >= layout.width || cy >= layout.height)
+    return false;
+  const i = cy * layout.width + cx;
+  if (layout.kind[i] !== WATER) return false;
+  if ((layout.coast[i] ?? 0) === 0) return true;
+  const field = cellField(
+    layout.land,
+    layout.width,
+    layout.height,
+    wx + 0.5,
+    wy + 0.5,
+  );
+  const t = coastThreshold(wx + 0.5, wy + 0.5);
+  if (field.f > t) return false;
+  return (
+    (t - field.f) / Math.max(1e-4, Math.hypot(field.gx, field.gy)) > margin
+  );
+}
+
 /** The forest shade: a dark tone of each ground (alpha from canopy.ts). */
 const FOREST_SHADE: Readonly<
   Record<GroundTerrain, readonly [number, number, number]>
@@ -409,6 +449,7 @@ const FOREST_SHADE: Readonly<
   steppe: [74, 60, 22],
   badlands: [72, 32, 20],
   wasteland: [34, 30, 28],
+  volcanic: [26, 20, 20],
 };
 
 /**
@@ -582,7 +623,9 @@ const modulo = (value: number, by: number): number => ((value % by) + by) % by;
 
 /**
  * Paints the ground of world rectangle (x0, y0, w, h) (master pixels) into
- * `out` (RGBA, w x h). Pixels outside the map are left transparent.
+ * `out` (RGBA, w x h). Pixels outside the map are left transparent. With
+ * `hot` (w x h), each pixel that shows a glowing crack of an overlay gets
+ * its pulse group (1...), the others 0 (bead bzc.83).
  */
 export function paintGround(
   layout: GroundLayout,
@@ -592,8 +635,10 @@ export function paintGround(
   w: number,
   h: number,
   out: Uint8ClampedArray,
+  hot?: Uint8Array,
 ): void {
   const textures = GROUND_RANK.map((terrain) => sources.textures[terrain]);
+  const overlays = GROUND_RANK.map((terrain) => sources.overlays?.[terrain]);
   const cx0 = Math.max(0, Math.floor(x0 / CELL));
   const cy0 = Math.max(0, Math.floor(y0 / CELL));
   const cx1 = Math.min(layout.width - 1, Math.floor((x0 + w - 1) / CELL));
@@ -716,8 +761,21 @@ export function paintGround(
                   : kind;
             const tex = textures[rank];
             if (tex !== undefined) sample(o, tex, wx, wy);
+            const over = overlays[rank];
+            if (over !== undefined) {
+              const img = over.image;
+              const s =
+                modulo(wy, img.height) * img.width + modulo(wx, img.width);
+              if ((img.data[s * 4 + 3] ?? 0) > 0) {
+                out[o] = img.data[s * 4] ?? 0;
+                out[o + 1] = img.data[s * 4 + 1] ?? 0;
+                out[o + 2] = img.data[s * 4 + 2] ?? 0;
+                if (hot !== undefined) hot[o >> 2] = over.hot[s] ?? 0;
+              }
+            }
             if (coastBits !== 0) {
               const k = coastAt(true, shore, wx + 0.5, wy + 0.5);
+              if (k !== "none" && hot !== undefined) hot[o >> 2] = 0;
               if (k === "sand") put(o, COAST.sand);
               else if (k === "wet") put(o, COAST.wet);
               else if (k === "lip") put(o, COAST.lip);
@@ -731,7 +789,10 @@ export function paintGround(
           }
           if (links.length > 0) {
             const r = roadPixelAt(links, wx, wy);
-            if (r !== ROAD_PIXEL.CLEAR) put(o, ROAD_COLOURS[r] ?? [0, 0, 0]);
+            if (r !== ROAD_PIXEL.CLEAR) {
+              put(o, ROAD_COLOURS[r] ?? [0, 0, 0]);
+              if (hot !== undefined) hot[o >> 2] = 0;
+            }
           }
         }
     }

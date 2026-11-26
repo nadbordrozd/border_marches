@@ -331,6 +331,7 @@ const TERRAIN_NAMES: Readonly<Record<string, string>> = {
   steppe: "Steppe",
   badlands: "Badlands",
   wasteland: "Wasteland",
+  volcanic: "Volcanic ground",
 };
 
 function decorationCard(id: string): TipBody {

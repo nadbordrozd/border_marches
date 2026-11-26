@@ -44,6 +44,8 @@ export const TERRAIN_COLOURS: Readonly<Record<Terrain, Rgb>> = {
   steppe: [0xb0, 0x9d, 0x5a],
   badlands: [0xa8, 0x5a, 0x36],
   wasteland: [0x6f, 0x6a, 0x5e],
+  // Dark basalt with a warm glow, apart from the grey wasteland.
+  volcanic: [0x4a, 0x30, 0x2a],
   water: [0x2d, 0x5f, 0x9a],
 };
 const DEEP_WATER: Rgb = [0x1d, 0x3f, 0x72];

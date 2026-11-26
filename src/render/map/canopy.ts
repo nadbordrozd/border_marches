@@ -37,7 +37,7 @@
  * cached BAND canvases drawn in the foreground just before that row, so the
  * crowns cover the feet of units and objects standing behind the wood.
  */
-import { CELL_PX } from "../../assets/manifest";
+import { CELL_PX, GROUND_FAMILY } from "../../assets/manifest";
 import type { GroundTerrain } from "../../assets/manifest";
 import type { GameMap } from "../../core/map/types";
 import { hash4 } from "./hash";
@@ -141,6 +141,8 @@ export const CANOPY_GROUND: Readonly<Record<GroundTerrain, CanopyGround>> = {
   steppe: { spacing: 0.92, tint: 1 },
   badlands: { spacing: 0.86, tint: 1.45 },
   wasteland: { spacing: 1, tint: 0.85 },
+  // Volcanic ground grows the wasteland's dead trees (GROUND_FAMILY).
+  volcanic: { spacing: 1, tint: 0.85 },
 };
 
 /** Per-cell facts of the canopy, computed once per map. */
@@ -184,7 +186,7 @@ export function buildCanopyField(
     if (cell.terrain === "water") return;
     if (cell.obstacle === "forest") {
       forest[i] = 1;
-      set[i] = GROUNDS.indexOf(cell.terrain);
+      set[i] = GROUNDS.indexOf(GROUND_FAMILY[cell.terrain]);
     } else if (cell.obstacle === "none" && !cell.road && !featured.has(i))
       open[i] = 1;
   });

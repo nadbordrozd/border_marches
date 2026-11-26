@@ -20,7 +20,11 @@ import {
   featuredCells,
   terrainEntries,
 } from "../../src/render/map/scene.ts";
-import { CELL_PX, GROUND_TERRAINS } from "../../src/assets/manifest.ts";
+import {
+  CELL_PX,
+  GROUND_FAMILY,
+  GROUND_TERRAINS,
+} from "../../src/assets/manifest.ts";
 import { TREE_ASSETS } from "../../src/assets/trees.ts";
 import { createMap } from "../../src/core/map/types.ts";
 import type { GameMap, MapObject } from "../../src/core/map/types.ts";
@@ -60,7 +64,10 @@ function testMap(): { map: GameMap; mine: MapObject } {
 describe("tree assets", () => {
   it("gives every ground at least three trees of 20-48 px", () => {
     for (const terrain of GROUND_TERRAINS) {
-      const trees = TREE_ASSETS.filter((t) => t.terrain === terrain);
+      // Volcanic ground grows the wasteland's trees (bead bzc.83).
+      const trees = TREE_ASSETS.filter(
+        (t) => t.terrain === GROUND_FAMILY[terrain],
+      );
       expect(trees.length, terrain).toBeGreaterThanOrEqual(3);
       expect(TREE_SPECIES[terrain].length, terrain).toBeGreaterThan(0);
       for (const t of trees) {

@@ -4,6 +4,7 @@
  * textured grounds and the water tiles).
  */
 import {
+  GROUND_OVERLAYS,
   GROUND_TERRAINS,
   GROUND_TEXTURES,
   HERO_ASSETS,
@@ -23,6 +24,8 @@ import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
 import { GROUND_CALM, calmTexture } from "./ground";
 import type { GroundSources, PixelImage } from "./ground";
+import { crackOverlay } from "./terrain-motion";
+import type { CrackOverlay } from "./terrain-motion";
 
 export interface MapAssets {
   /** Every loaded image by manifest key. */
@@ -80,6 +83,7 @@ function readPixels(
 export function mapAssetList(): ImageAsset[] {
   return [
     ...Object.values(GROUND_TEXTURES),
+    ...Object.values(GROUND_OVERLAYS).filter((a) => a !== undefined),
     ...WATER_TILES,
     ...MOUNTAIN_PIECES,
     ...TOWN_3X2_ASSETS,
@@ -120,6 +124,15 @@ export async function loadMapAssets(base = "/"): Promise<MapAssets> {
       return [terrain, calm === undefined ? pixels : calmTexture(pixels, calm)];
     }),
   ) as Record<GroundTerrain, PixelImage>;
+  // The glowing cracks over a ground (bead bzc.83).
+  const overlays: Partial<Record<GroundTerrain, CrackOverlay>> = {};
+  for (const terrain of GROUND_TERRAINS) {
+    const asset = GROUND_OVERLAYS[terrain];
+    if (asset !== undefined)
+      overlays[terrain] = crackOverlay(
+        readPixels(get(asset), asset.w, asset.h),
+      );
+  }
   const water = (depth: "shallow" | "deep"): PixelImage[] =>
     WATER_TILES.filter((tile) => tile.depth === depth).map((tile) =>
       readPixels(get(tile), tile.w, tile.h),
@@ -128,6 +141,7 @@ export async function loadMapAssets(base = "/"): Promise<MapAssets> {
     images,
     ground: {
       textures,
+      overlays,
       water: { shallow: water("shallow"), deep: water("deep") },
     },
   };
