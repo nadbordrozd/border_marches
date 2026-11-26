@@ -299,8 +299,10 @@ describe("pointless stops (reach.ts)", () => {
     const hero = s.heroes[0]!;
     const goal = 1 * 9 + 8;
     const well = 1 * 9 + 4;
+    // Since bead bzc.107 every building is walked round when it is not
+    // the target, a well worth something too.
     const plain = pathIn(reachFor(s, hero, 3000), hero, goal);
-    expect(plain?.some((p) => p.y * 9 + p.x === well)).toBe(true);
+    expect(plain?.some((p) => p.y * 9 + p.x === well)).toBe(false);
     const r = reachFor(s, hero, 3000, new Set([well]));
     const around = pathIn(r, hero, goal);
     expect(around?.some((p) => p.y * 9 + p.x === well)).toBe(false);

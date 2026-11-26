@@ -6,8 +6,9 @@
  * the next step, or the destination cross on the last one) and
  * MARKERS_PER_STEP - 1 arrows evenly spaced along the segment that enters
  * it, pointing along that segment. A marker takes the colour of the step
- * it leads to: reachable today or later. Pure (no canvas), so the layout is
- * unit-tested.
+ * it leads to: reachable today or later. A step standing on a building
+ * that is not the target (bead bzc.107: the only way on) gets a ring at
+ * its centre instead. Pure (no canvas), so the layout is unit-tested.
  */
 
 /** Markers per step of the path, the cell-centre one included. */
@@ -18,13 +19,15 @@ export interface PathMarkerStep {
   readonly y: number;
   /** Reachable with today's movement (green) or later (red). */
   readonly reachable: boolean;
+  /** Stands on a building that is not the target (bead bzc.107). */
+  readonly visit?: boolean;
 }
 
 export interface PathMarker {
   /** Marker centre in cell units (a cell centre is x + 0.5). */
   readonly cx: number;
   readonly cy: number;
-  readonly kind: "arrow" | "cross";
+  readonly kind: "arrow" | "cross" | "visit";
   /** Arrow direction in eighths of a turn, 0 = east, 2 = south. */
   readonly dir: number;
   readonly reachable: boolean;
@@ -73,7 +76,8 @@ export function pathMarkers(
     out.push({
       cx: step.x + 0.5,
       cy: step.y + 0.5,
-      kind: next === undefined ? "cross" : "arrow",
+      kind:
+        step.visit === true ? "visit" : next === undefined ? "cross" : "arrow",
       dir:
         next === undefined ? 0 : stepDirection(step.x, step.y, next.x, next.y),
       reachable: step.reachable,

@@ -161,6 +161,13 @@ allowed.
 | Own town       | Visiting opens the town screen (build, recruit, swap armies).                                                                                                                                                                                                              |
 | Warlord's Hold | Visiting starts the battle against its garrison.                                                                                                                                                                                                                           |
 
+Paths go round buildings (bead bzc.107): a planned path stands on the
+entrance of a mine, town, dwelling, site, bank or waystone (own ones and
+spent ones too) only when that building is the clicked target, or when no
+way round exists; then the preview rings that step instead of an arrow.
+Pickups are not buildings: one on the only way ends the planned walk with
+taking it.
+
 In battles on the adventure map the hero is always the attacking side (left),
 whoever started the fight.
 

@@ -1310,6 +1310,8 @@ class GameScreen {
         x: s.x,
         y: s.y,
         reachable: s.day === 0,
+        // Through a building only when no way round exists (bzc.107).
+        ...(s.building === undefined ? {} : { visit: true }),
       })),
       hero === undefined ? undefined : { x: hero.x, y: hero.y },
     );

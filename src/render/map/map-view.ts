@@ -122,6 +122,11 @@ export interface PathStep {
   readonly y: number;
   /** Reachable this turn (green) or beyond (red). */
   readonly reachable: boolean;
+  /**
+   * The step stands on a building that is not the target (bead bzc.107):
+   * the only way on; marked with a ring. Absent: false.
+   */
+  readonly visit?: boolean;
 }
 
 export interface Cell {
@@ -292,7 +297,7 @@ const PATH_MARKER_SCALE = 0.78;
 
 /** The arrows and crosses of the path preview, code-drawn once each. */
 function pathMarker(
-  kind: "arrow" | "cross",
+  kind: PathMarker["kind"],
   angle: number,
   green: boolean,
 ): Surface {
@@ -306,6 +311,28 @@ function pathMarker(
   ctx.scale(PATH_MARKER_SCALE, PATH_MARKER_SCALE);
   ctx.lineJoin = "round";
   ctx.lineCap = "round";
+  if (kind === "visit") {
+    // A building the walk cannot avoid (bead bzc.107): an amber ring with
+    // a dot in the day colour.
+    for (const [width, colour] of [
+      [8, dark],
+      [4, "#ffc83a"],
+    ] as const) {
+      ctx.strokeStyle = colour;
+      ctx.lineWidth = width;
+      ctx.beginPath();
+      ctx.arc(0, 0, 9, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.arc(0, 0, 4, 0, Math.PI * 2);
+    ctx.fillStyle = fill;
+    ctx.strokeStyle = dark;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fill();
+    return surface;
+  }
   if (kind === "cross") {
     for (const [width, colour] of [
       [8, dark],
@@ -386,7 +413,7 @@ export function createMapView(
     }
   const markers = new Map<string, Surface>();
   const marker = (
-    kind: "arrow" | "cross",
+    kind: PathMarker["kind"],
     dir: number,
     green: boolean,
   ): Surface => {

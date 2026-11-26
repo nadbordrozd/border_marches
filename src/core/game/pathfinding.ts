@@ -21,6 +21,12 @@
  *   take it from a cell that is not a stop cell whenever there is one;
  *   from a stop cell the walk stops there first (a fight in a zone of
  *   control, a visit) and the pickup waits for the next click.
+ * - Buildings stay beside the way (bead bzc.107): a path steps onto the
+ *   entrance of a visitable building (a mine, town, dwelling, site, bank
+ *   or waystone still on the map, whether or not its visit would stop the
+ *   hero) only when it is the target or when no way round exists; such a
+ *   step carries PathStep.building so the preview can mark it. Pickups are
+ *   not buildings: they may lie on the way.
  * - Opt-in `throughGuards` (bead bzc.77, the player's clicks): a target
  *   that only lies beyond zones of control gets the walk to the first
  *   guard on the way, ending with the fight (Path.blockedBy); one beyond a
@@ -76,6 +82,13 @@ export interface PathStep {
    * cell before and does not move. Absent: false.
    */
   pickup?: boolean;
+  /**
+   * Set when the hero stands on this step's cell and it is the entrance of
+   * a visitable building that is not the path's target (bead bzc.107): the
+   * id of that building. Paths only do this when no way round exists, so
+   * the preview marks the step. Absent: no building.
+   */
+  building?: string;
 }
 
 /** Whether the hero ends up standing on this step's cell. */
@@ -131,6 +144,14 @@ export interface MoveContext {
   /** Entrances whose visit stops the hero. */
   stops: Set<number>;
   /**
+   * Entrance cell -> the visitable building there (bead bzc.107; first in
+   * map order): every mine, town, dwelling, site, bank or waystone still
+   * on the map, whether or not its visit stops this hero (own towns and
+   * mines, spent sites too). Paths go round them unless they are the
+   * target. Pickups and gone objects are not buildings.
+   */
+  buildings: Map<number, string>;
+  /**
    * Cell index -> uncollected pickup lying there (bead bzc.49). Those cells
    * are also in objectBlocked: taken from a next cell, never entered.
    */
@@ -164,6 +185,20 @@ export interface PathOptions {
   throughGuards?: boolean;
 }
 
+/**
+ * Object kinds whose entrance can be a visit stop; the same kinds are the
+ * buildings paths go round (see moveContext).
+ */
+const VISIT_KINDS: ReadonlySet<string> = new Set([
+  "mine",
+  "town",
+  "dwelling",
+  "site",
+  "bank",
+  "artifact",
+  "teleport",
+]);
+
 /** Builds the movement context for a hero. */
 export function moveContext(
   state: GameState,
@@ -175,6 +210,7 @@ export function moveContext(
   const monsterAt = new Map<number, string>();
   const guards = new Map<number, string[]>();
   const stops = new Set<number>();
+  const buildings = new Map<number, string>();
   const pickupAt = new Map<number, string>();
   const collected = new Set(state.collected);
   // Adventure magic (src/core/magic/adventure.ts): Parley and Green Road.
@@ -197,6 +233,13 @@ export function moveContext(
         pickupAt.set(entrance, obj.id);
       }
       continue;
+    }
+    if (
+      VISIT_KINDS.has(obj.kind) &&
+      !collected.has(obj.id) &&
+      !buildings.has(entrance)
+    ) {
+      buildings.set(entrance, obj.id);
     }
     switch (obj.kind) {
       case "monster": {
@@ -264,6 +307,7 @@ export function moveContext(
     friendAt,
     guards,
     stops,
+    buildings,
     pickupAt,
     explored: options.ignoreFog === true ? null : (player?.explored ?? null),
     forestCost,
@@ -486,6 +530,15 @@ const ROAD_DIAGONAL = diagonalCost(ROAD_MOVE_COST);
 const STOP_BEFORE_PICKUP = 1_000_000;
 
 /**
+ * Search-order cost of standing on a building's entrance that is not the
+ * target (bead bzc.107): more than any walk round it, so a path passes a
+ * building only when no way round exists; less than a zone crossing
+ * (ZONE_CROSSING), which planning through guards counts first. The AI's
+ * reach (src/core/ai/reach.ts) uses it the same way.
+ */
+export const BUILDING_DETOUR = 10_000_000;
+
+/**
  * Octile distance at road prices. `shrink` = 1 measures to the ring around
  * the target (attack paths end next to it), keeping the heuristic consistent
  * with the free attack step.
@@ -533,7 +586,17 @@ export function findPath(
     hero.mp,
     hero.maxMp,
   );
-  const withDays = steps.map((s, i) => ({ ...s, day: days[i] ?? 0 }));
+  const goal = ty * state.map.width + tx;
+  const withDays = steps.map((s, i) => {
+    const at = s.y * state.map.width + s.x;
+    const building =
+      at !== goal && standsOn(s) ? ctx.buildings.get(at) : undefined;
+    return {
+      ...s,
+      day: days[i] ?? 0,
+      ...(building === undefined ? {} : { building }),
+    };
+  });
   const last = withDays[withDays.length - 1];
   return {
     steps: withDays,
@@ -542,17 +605,6 @@ export function findPath(
     ...(stopsAt === undefined ? {} : { stopsAt }),
   };
 }
-
-/** Object kinds whose entrance can be a visit stop (see moveContext). */
-const VISIT_KINDS: ReadonlySet<string> = new Set([
-  "mine",
-  "town",
-  "dwelling",
-  "site",
-  "bank",
-  "artifact",
-  "teleport",
-]);
 
 /** The visited object whose entrance is cell `i` (first in map order). */
 function entranceAt(ctx: MoveContext, i: number): string | undefined {
@@ -664,7 +716,9 @@ function pathToFirstStop(
 const ZONE_CROSSING = 100_000_000;
 
 /**
- * A* in a prepared context; `day` is left 0. With `throughGuards` no zone
+ * A* in a prepared context; `day` is left 0. Building entrances other
+ * than the target are stood on only when no way round exists (bead
+ * bzc.107; findPath marks them). With `throughGuards` no zone
  * of control or visit ends the walk, and stacks and pickups in the way can
  * be crossed (see pathToFirstStop): callers cut the result at the first.
  */
@@ -728,6 +782,8 @@ export function findPathInContext(
         }
         if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
         cost = stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny, ctx.forestCost);
+        // Round buildings that are not the target (bead bzc.107).
+        if (ni !== goal && ctx.buildings.has(ni)) cost += BUILDING_DETOUR;
         if (
           throughGuards &&
           (ctx.guards.has(ni) ||

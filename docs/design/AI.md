@@ -1017,6 +1017,14 @@ showed where the 24-46 player battles of a three-player match came from:
   the costs kept are the real ones), so routes pass beside them whenever
   a way of similar length exists. The rules stop a walk on any such
   entrance, so stepping over one is never free.
+- **Buildings beside the way** (bead bzc.107, `reach.ts`). Like the
+  player's paths, the reach walks on beyond a building's entrance (every
+  mine, town, dwelling, site, bank or waystone still on the map,
+  `MoveContext.buildings`) only when no way round exists:
+  `BUILDING_DETOUR` in the planning order. Reaching the entrance itself
+  costs nothing extra, so a targeted site is walked onto as before; a
+  waystone the search is carried by is not a detour. Pickups are not
+  buildings.
 - **Runner** (`tools/sim/match.ts`, `src/core/ai/match.ts`): each player
   battle with its kind, armies and winner; `cappedTurns` (turns cut at
   the 200-action cap: none in any run, after a transfer loop between the

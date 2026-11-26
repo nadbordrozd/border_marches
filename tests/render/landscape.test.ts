@@ -180,6 +180,7 @@ describe("grid roads", () => {
       friendAt: new Set<number>(),
       guards: new Map<number, string[]>(),
       stops: new Set<number>(),
+      buildings: new Map<number, string>(),
       pickupAt: new Map<number, string>(),
       explored: null,
       forestCost: null,

@@ -13,6 +13,11 @@
  * twin) when the hero could stand there; a path through one ends on the
  * waystone (the hero is carried and plans again from the exit). Zones of control and entrances that
  * start a fight (another player's town, a guarded bank) still end a walk.
+ * Like the player's paths (bead bzc.107), routes go round every building
+ * entrance (MoveContext.buildings) whenever a way round exists: walking
+ * on beyond one costs BUILDING_DETOUR in the planning order, so the hero
+ * visits only what it targets. Reaching the entrance itself costs nothing
+ * extra, and a waystone the search is carried by is not a detour.
  */
 import { DIRECTIONS_8, inBounds } from "../map/types.ts";
 import {
@@ -25,7 +30,7 @@ import {
   type MoveContext,
   type PathStep,
 } from "../game/index.ts";
-import { cutsCorner } from "../game/pathfinding.ts";
+import { BUILDING_DETOUR, cutsCorner } from "../game/pathfinding.ts";
 
 export interface Reach {
   /** Cell index -> cheapest movement cost. */
@@ -228,7 +233,13 @@ export function reachFor(
       }
     }
     const gc = cost.get(cur) ?? 0;
-    const gp = prio.get(cur) ?? gc;
+    // Walking on beyond a building's entrance passes it (bead bzc.107):
+    // only when no way round exists.
+    const past =
+      cur !== start && !jumps.has(cur) && ctx.buildings.has(cur)
+        ? BUILDING_DETOUR
+        : 0;
+    const gp = (prio.get(cur) ?? gc) + past;
     for (const [dx, dy] of DIRECTIONS_8) {
       const nx = cx + dx;
       const ny = cy + dy;
