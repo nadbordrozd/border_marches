@@ -16,10 +16,11 @@
  *    objects, monsters, heroes, path arrows, chips;
  * 4. the fog of war, also cached in chunks, over everything.
  *
- * Changes stay local (bead xaj.31): setObjects updates the terrain plan
- * (terrain-plan.ts) around the cells whose objects changed and repaints only
- * the changed boxes of cached chunks and the changed crown bands; a change
- * of the explored cells rebuilds (and fades) only the fog chunks round them.
+ * The terrain is planned once per map (terrain-plan.ts, bead bzc.106): it
+ * reads only the map, so setObjects (a pickup taken, a monster beaten, a
+ * gate opened) changes only the foreground and never a tree, a peak, a
+ * doodad or a cached ground chunk; a change of the explored cells rebuilds
+ * (and fades) only the fog chunks round them.
  *
  * Animated terrain (bead bzc.83, terrain-motion.ts): water glints, the
  * pulsing glow of volcanic cracks and the living decorations are overlays
@@ -40,7 +41,7 @@ import type { MapAssets, Surface } from "./assets";
 import { context2d, createSurface } from "./assets";
 import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
-import { installCanopyBands, paintCanopyBand, toneTree } from "./canopy-paint";
+import { installCanopyBands, toneTree } from "./canopy-paint";
 import { paintFog } from "./fog";
 import { FxField, drawFx } from "../fx/field.ts";
 import type { FxClock } from "../fx/field.ts";
@@ -84,7 +85,7 @@ import type { Glide } from "./input";
 import { pathMarkers } from "./path-markers";
 import type { PathMarker } from "./path-markers";
 import { planTerrain } from "./terrain-plan";
-import type { TerrainPlan, WorldRect } from "./terrain-plan";
+import type { WorldRect } from "./terrain-plan";
 
 const CELL = CELL_PX;
 export const ZOOM_STEPS = [0.75, 1, 1.5, 2] as const;
@@ -139,7 +140,7 @@ export interface MapViewStats {
   readonly lastFrameMs: number;
   /** Chunks built so far and the total time spent building them, ms. */
   readonly chunksBuilt: number;
-  /** Cached chunks painted again in part after an object change. */
+  /** Cached chunks painted again in part after a decoration change. */
   readonly chunksPatched: number;
   readonly chunkBuildMs: number;
   readonly fogChunksBuilt: number;
@@ -460,8 +461,6 @@ export function createMapView(
   let animatedInView = true;
   let foreground: SceneEntry[] = [];
   let terrainForeground: readonly SceneEntry[] = [];
-  /** The terrain plan, updated in place on setObjects. */
-  let plan: TerrainPlan | null = null;
   const chunks = new Map<string, GroundChunk>();
   /** Per cached chunk, the world box to paint again before its next draw. */
   const patches = new Map<string, WorldRect>();
@@ -546,39 +545,25 @@ export function createMapView(
   };
 
   /**
-   * The terrain of the map with the current objects (the crowd of peaks,
-   * bead xaj.30: peaks and trees share the crown bands). `incremental` keeps
-   * the plan and places again only what the changed cells reach
-   * (terrain-plan.ts, bead xaj.31), dropping only the chunks and crown bands
-   * that changed.
+   * The terrain of the map (the crowd of peaks, bead xaj.30: peaks and
+   * trees share the crown bands), planned from the map alone (bead bzc.106).
    */
-  const rebuildTerrain = (incremental = false): void => {
+  const rebuildTerrain = (): void => {
+    chunks.clear();
+    patches.clear();
     if (map === null) {
-      plan = null;
-      chunks.clear();
-      patches.clear();
       peakField = null;
       layout = null;
       bodies = [];
       terrainForeground = [];
       return;
     }
-    const update = planTerrain(map, objects, incremental ? plan : null);
-    plan = update.plan;
+    const plan = planTerrain(map);
     peakField = plan.peakField;
     layout = plan.layout;
     bodies = plan.bodies;
     terrainForeground = plan.foreground;
-    if (update.dirty === null) {
-      chunks.clear();
-      patches.clear();
-      installCanopyBands(images, plan.bands);
-    } else {
-      markChunks(update.dirty);
-      for (const key of update.drop) images.delete(key);
-      for (const band of update.paint)
-        images.set(band.key, paintCanopyBand(band, images));
-    }
+    installCanopyBands(images, plan.bands);
   };
 
   const rebuildForeground = (): void => {
@@ -1614,8 +1599,8 @@ export function createMapView(
       requestRender();
     },
     setObjects(next) {
+      // The terrain stays as it is: it reads only the map (bead bzc.106).
       objects = next;
-      rebuildTerrain(true);
       rebuildForeground();
       requestRender();
     },

@@ -1,43 +1,33 @@
 /**
  * The terrain draw plan of the adventure map (its mountains the crowd of
- * peaks, bead xaj.30), kept up to date when objects change
- * (bead border_marches-xaj.31).
+ * peaks, bead xaj.30): the ground layout, the canopy of the woods, the
+ * peaks of the ranges, the doodads and the crown bands.
  *
- * Objects shape the terrain only through the cells they cover (a tree, a
- * peak or a doodad never stands on them, and the woods' and ranges'
- * outlines keep off them) and through the entrances a road runs into. So
- * when a pickup is taken, a monster beaten or an object added, the plan
- * places again only what stands near the cells that changed: the canopy
- * cell by cell (canopy.ts updateCanopy), the peaks by retrying the feet near
- * the change and those whose neighbours changed (peaks.ts updatePeaks), the
- * doodads by grid point (doodads.ts updateDoodads). Each update equals a
- * full placement exactly (tests/render/terrain-plan.test.ts), keeps the
- * identity of everything unchanged, and says which world rectangles of the
- * cached ground chunks and which crown bands must be painted again.
- *
- * Only the ground layout's road ends depend on objects otherwise; a change
- * of those (a town or mine appearing beside a road) places everything again.
+ * The plan is a function of the map alone (bead border_marches-bzc.106).
+ * Objects shape the terrain through the cells they cover (a tree, a peak or
+ * a doodad never stands on them, and the woods' and ranges' outlines keep
+ * off them) and through the entrances a road runs into, and those are read
+ * from the map's own objects as it was made ({@link terrainObjects}), never
+ * from the objects still standing. So taking a pickup, beating a monster,
+ * opening a gate or revealing fog never changes a tree, a peak or a doodad:
+ * a cell an object leaves stays the clearing it was, and its neighbours keep
+ * their sprites. Before this bead the plan followed the live objects
+ * (bead xaj.31), and a pickup taken beside a range placed the peaks round it
+ * again, often with other sprites.
  */
-import { CELL_PX } from "../../assets/manifest";
 import type { GameMap, MapObject } from "../../core/map/types";
-import {
-  buildCanopyField,
-  canopyBands,
-  placeCanopySet,
-  treeRow,
-  updateCanopy,
-} from "./canopy";
+import { buildCanopyField, canopyBands, placeCanopySet } from "./canopy";
 import type {
   CanopyBand,
   CanopyField,
   CanopyPlacement,
   CanopyTree,
 } from "./canopy";
-import { placeDoodadSet, updateDoodads } from "./doodads";
-import type { DoodadPlacement, DoodadSet } from "./doodads";
+import { placeDoodadSet } from "./doodads";
+import type { DoodadSet } from "./doodads";
 import { buildGroundLayout } from "./ground";
 import type { GroundLayout } from "./ground";
-import { buildPeakField, placePeakSet, updatePeaks } from "./peaks";
+import { buildPeakField, placePeakSet } from "./peaks";
 import type { PeakField, PeakPlacement } from "./peaks";
 import {
   PEAK_SPRITES,
@@ -48,17 +38,7 @@ import {
   treeEntry,
 } from "./scene";
 import type { SceneEntry } from "./scene";
-import { mergeSorted, updateSorted } from "./sorted";
-
-const CELL = CELL_PX;
-
-/**
- * How far (cells) a changed cell reaches the painted ground round it: the
- * forest shade (canopy.ts canopyTint) and the peak underlay (peaks.ts
- * paintPeakUnder) read the cell under a point a little south of the pixel
- * and the bilinear field of the cells round it, so one cell each way.
- */
-export const GROUND_REACH = 1;
+import { mergeSorted } from "./sorted";
 
 /** A world rectangle, px: [x0, x1) x [y0, y1). */
 export interface WorldRect {
@@ -70,10 +50,8 @@ export interface WorldRect {
 
 export interface TerrainPlan {
   readonly map: GameMap;
-  /** Row-major indices of the cells under objects. */
+  /** Row-major indices of the cells under the map's terrain objects. */
   readonly featured: ReadonlySet<number>;
-  /** The road ends (object entrances beside a road), as a key. */
-  readonly roadEnds: string;
   /** The ground layout as built (its own canopy field). */
   readonly base: GroundLayout;
   /** The layout the chunks paint: this plan's canopy field. */
@@ -91,14 +69,15 @@ export interface TerrainPlan {
   readonly foreground: readonly SceneEntry[];
 }
 
-export interface TerrainUpdate {
-  readonly plan: TerrainPlan;
-  /** World rectangles whose ground chunks changed; null: every chunk. */
-  readonly dirty: readonly WorldRect[] | null;
-  /** Crown bands to paint (new or changed); all of them when dirty is null. */
-  readonly paint: readonly CanopyBand[];
-  /** Keys of crown bands gone. */
-  readonly drop: readonly string[];
+/**
+ * The objects that shape the terrain: the map's own objects as it was made
+ * (hero starts too: a hero stands there on the first day, on clear ground),
+ * but for buried things (never drawn, so never a clearing that gives them
+ * away). The game never adds objects to its map, only takes them off the
+ * screen, so this list stays the same through a whole game.
+ */
+export function terrainObjects(map: GameMap): MapObject[] {
+  return map.objects.filter((o) => o.kind !== "buried");
 }
 
 /** Object entrances next to a road: the road runs into them. */
@@ -130,25 +109,6 @@ export function roadEnds(
   return out;
 }
 
-// Entries are made once per placed tree, peak, doodad and band, so an
-// unchanged one keeps its entry (and the chunks can tell what changed).
-const treeEntries = new WeakMap<CanopyTree, SceneEntry>();
-const doodadEntries = new WeakMap<DoodadPlacement, SceneEntry>();
-const bandEntries = new WeakMap<CanopyBand, SceneEntry>();
-
-function cached<K extends object>(
-  cache: WeakMap<K, SceneEntry>,
-  key: K,
-  make: (key: K) => SceneEntry,
-): SceneEntry {
-  let found = cache.get(key);
-  if (found === undefined) {
-    found = make(key);
-    cache.set(key, found);
-  }
-  return found;
-}
-
 /**
  * Draw order (scene.ts compareEntries) without the insertion tie-breaker:
  * a stable sort of entries listed in creation order gives the same order.
@@ -162,183 +122,30 @@ const drawOrder = (a: SceneEntry, b: SceneEntry): number =>
 const byBase = (a: CanopyTree, b: CanopyTree): number =>
   a.baseY - b.baseY || a.baseX - b.baseX;
 
-/** A band paints the same as before: same rectangle, same trees. */
-function sameBand(a: CanopyBand, b: CanopyBand): boolean {
-  return (
-    a.key === b.key &&
-    a.x === b.x &&
-    a.y === b.y &&
-    a.w === b.w &&
-    a.h === b.h &&
-    a.trees.length === b.trees.length &&
-    a.trees.every((t, i) => t === b.trees[i])
-  );
-}
-
-/** The trees of a base-sorted list whose crowns fall in the given rows. */
-function inRows(
-  sorted: readonly CanopyTree[],
-  rows: readonly number[],
-): CanopyTree[] {
-  const out: CanopyTree[] = [];
-  for (const row of rows) {
-    // treeRow is floor((baseY - 1) / CELL): rows are runs of the list.
-    let lo = 0;
-    let hi = sorted.length;
-    while (lo < hi) {
-      const mid = (lo + hi) >> 1;
-      if (treeRow(sorted[mid] as CanopyTree) < row) lo = mid + 1;
-      else hi = mid;
-    }
-    for (let i = lo; i < sorted.length; i += 1) {
-      const t = sorted[i] as CanopyTree;
-      if (treeRow(t) !== row) break;
-      out.push(t);
-    }
-  }
-  return out;
-}
-
-/**
- * The terrain plan of `map` with `objects`. With `prev` (the plan of the
- * same map with other objects) only what the changed cells reach is placed
- * again; the result is the same as without it.
- */
-export function planTerrain(
-  map: GameMap,
-  objects: readonly MapObject[],
-  prev: TerrainPlan | null = null,
-): TerrainUpdate {
+/** The terrain plan of `map`: the same for the whole of a game on it. */
+export function planTerrain(map: GameMap): TerrainPlan {
+  const objects = terrainObjects(map);
   const featured = featuredCells(map, objects);
-  const ends = roadEnds(map, objects);
-  const endsKey = ends.map(([x, y]) => `${x},${y}`).join(";");
-  const again = prev !== null && prev.map === map && prev.roadEnds === endsKey;
-  // Objects that changed but cover the same cells (a monster's count, a
-  // town's level, an owner) change nothing here.
-  if (
-    again &&
-    featured.size === prev.featured.size &&
-    [...featured].every((i) => prev.featured.has(i))
-  )
-    return { plan: prev, dirty: [], paint: [], drop: [] };
   const canopyField = buildCanopyField(map, featured);
   const peakField = buildPeakField(map, featured);
-  let base: GroundLayout;
-  let layout: GroundLayout;
-  if (again) {
-    base = prev.base;
-    layout = { ...prev.layout, canopy: canopyField };
-  } else {
-    base = buildGroundLayout(map, ends, featured);
-    layout = { ...base, canopy: canopyField };
-  }
-  const canopy = again
-    ? updateCanopy(prev.canopy, canopyField, TREE_SPECIES)
-    : placeCanopySet(canopyField, TREE_SPECIES);
-  const peaks = again
-    ? updatePeaks(prev.peaks, peakField, PEAK_SPRITES)
-    : placePeakSet(peakField, PEAK_SPRITES);
-  const doodads = again
-    ? updateDoodads(prev.doodads, map, layout, featured)
-    : placeDoodadSet(map, layout, featured);
-  const tree = (t: CanopyTree): SceneEntry => cached(treeEntries, t, treeEntry);
-  const doodad = (d: DoodadPlacement): SceneEntry =>
-    cached(doodadEntries, d, doodadEntry);
-  const band = (b: CanopyBand): SceneEntry => cached(bandEntries, b, bandEntry);
-  // What came and went, when every placement could follow on.
-  const changes =
-    again &&
-    canopy.changes !== undefined &&
-    peaks.changes !== undefined &&
-    doodads.changes !== undefined
-      ? {
-          removed: [
-            ...canopy.changes.removed.map(tree),
-            ...peaks.changes.removed.map(tree),
-            ...doodads.changes.removed.map(doodad),
-          ],
-          added: [
-            ...canopy.changes.added.map(tree),
-            ...peaks.changes.added.map(tree),
-            ...doodads.changes.added.map(doodad),
-          ],
-          rows: [
-            ...new Set(
-              [
-                ...canopy.changes.removed,
-                ...canopy.changes.added,
-                ...peaks.changes.removed,
-                ...peaks.changes.added,
-              ].map(treeRow),
-            ),
-          ].sort((a, b) => a - b),
-        }
-      : null;
+  const base = buildGroundLayout(map, roadEnds(map, objects), featured);
+  const layout = { ...base, canopy: canopyField };
+  const canopy = placeCanopySet(canopyField, TREE_SPECIES);
+  const peaks = placePeakSet(peakField, PEAK_SPRITES);
+  const doodads = placeDoodadSet(map, layout, featured);
   // Peaks share the crown bands with the trees, in one base order (trees
   // first on a tie), so what rises over an open cell covers only a unit's
-  // feet. A row's bands hold only that row's trees: after a local change
-  // only the rows of the trees and peaks that came or went are grouped again.
-  let bands: CanopyBand[];
-  if (changes !== null && again) {
-    const rows = new Set(changes.rows);
-    bands = [
-      ...prev.bands.filter((b) => !rows.has(b.row)),
-      ...canopyBands(
-        mergeSorted(
-          inRows(canopy.trees, changes.rows),
-          inRows(peaks.peaks, changes.rows),
-          byBase,
-        ),
-      ),
-    ];
-  } else bands = canopyBands(mergeSorted(canopy.trees, peaks.peaks, byBase));
-  const paint: CanopyBand[] = [];
-  const drop: string[] = [];
-  const gone = new Set<CanopyBand>();
-  if (again) {
-    const before = new Map(prev.bands.map((b) => [b.key, b]));
-    bands = bands.map((b) => {
-      const was = before.get(b.key);
-      if (was !== undefined && sameBand(was, b)) return was;
-      if (was !== undefined) gone.add(was);
-      paint.push(b);
-      return b;
-    });
-    const now = new Set(bands.map((b) => b.key));
-    for (const [key, b] of before)
-      if (!now.has(key)) {
-        drop.push(key);
-        gone.add(b);
-      }
-  } else paint.push(...bands);
-  // Draw order: after a local change the previous order with the changes
-  // merged in (scene entries tie only on the same spot, rarely).
-  const bodies =
-    (changes !== null &&
-      updateSorted(
-        prev?.bodies ?? [],
-        new Set(changes.removed),
-        changes.added,
-        drawOrder,
-      )) ||
-    [
-      ...canopy.trees.map(tree),
-      ...peaks.peaks.map(tree),
-      ...doodads.doodads.map(doodad),
-    ].sort(drawOrder);
-  const foreground =
-    (again &&
-      updateSorted(
-        prev.foreground,
-        new Set([...gone].map(band)),
-        paint.map(band),
-        drawOrder,
-      )) ||
-    bands.map(band).sort(drawOrder);
-  const plan: TerrainPlan = {
+  // feet.
+  const bands = canopyBands(mergeSorted(canopy.trees, peaks.peaks, byBase));
+  const bodies = [
+    ...canopy.trees.map(treeEntry),
+    ...peaks.peaks.map(treeEntry),
+    ...doodads.doodads.map(doodadEntry),
+  ].sort(drawOrder);
+  const foreground = bands.map(bandEntry).sort(drawOrder);
+  return {
     map,
     featured,
-    roadEnds: endsKey,
     base,
     layout,
     canopyField,
@@ -350,29 +157,4 @@ export function planTerrain(
     bodies,
     foreground,
   };
-  if (!again) return { plan, dirty: null, paint, drop };
-  // The chunks to paint again: the ground round every changed cell (the
-  // canopy's shade, the peaks' underlay) and every body that came or went.
-  const dirty: WorldRect[] = [];
-  const changed: number[] = [];
-  for (const i of featured) if (!prev.featured.has(i)) changed.push(i);
-  for (const i of prev.featured) if (!featured.has(i)) changed.push(i);
-  for (const i of changed) {
-    const x = i % map.width;
-    const y = Math.floor(i / map.width);
-    dirty.push({
-      x0: (x - GROUND_REACH) * CELL,
-      y0: (y - GROUND_REACH) * CELL,
-      x1: (x + 1 + GROUND_REACH) * CELL,
-      y1: (y + 1 + GROUND_REACH) * CELL,
-    });
-  }
-  if (changes !== null) dirty.push(...changes.removed, ...changes.added);
-  else {
-    const was = new Set(prev.bodies);
-    const now = new Set(bodies);
-    for (const e of prev.bodies) if (!now.has(e)) dirty.push(e);
-    for (const e of bodies) if (!was.has(e)) dirty.push(e);
-  }
-  return { plan, dirty, paint, drop };
 }

@@ -5,7 +5,7 @@
  *
  *   npm run perf                      # every benchmark
  *   npm run perf -- --runs 15 large   # more runs, names containing "large"
- *   npm run perf -- "object change"   # the map's per-change terrain cost
+ *   npm run perf -- terrain           # the map's whole terrain plan
  *
  * Each benchmark warms up, then times several runs and checks the median
  * against its budget. Exits 1 when a median is over budget. Run it on a quiet
@@ -44,7 +44,7 @@ const BENCHMARKS: readonly Benchmark[] = [
   mapBenchmark("M", 180),
   // The game's large map: the old unit-tier budget (300 ms).
   { ...mapBenchmark("L", 300), name: "generate map L (large)" },
-  // Bead xaj.31: a whole terrain plan, and one object change on it.
+  // Bead xaj.31: a whole terrain plan (made once per map, bead bzc.106).
   ...terrain.TERRAIN_BENCHMARKS,
 ];
 
