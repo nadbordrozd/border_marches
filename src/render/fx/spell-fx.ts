@@ -83,6 +83,8 @@ export const SPELL_FX: Readonly<Record<string, SpellFx>> = {
   wildfire: { shape: "ground", element: "fire" },
   whiteout: { shape: "burst", element: "frost" },
   "the-sky-falls": { shape: "burst", element: "lightning" },
+  // NAVAL 7.2 (bead bzc.154): a rain-coloured wave over the row.
+  "tidal-wave": { shape: "wave", element: "rain" },
   thunderclap: { shape: "burst", element: "lightning" },
 };
 

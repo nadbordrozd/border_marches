@@ -1,7 +1,9 @@
 /**
  * Artifacts and consumables (CONTENT_ARTIFACTS.md, RULES_V2 section 4):
  * all 80 catalogue kinds (30 Trinkets, 20 Wonders, 6 cursed Wonders, 12
- * Marvel pieces, 12 consumables) and the 4 assembled Marvels.
+ * Marvel pieces, 12 consumables) and the 4 assembled Marvels, the two
+ * faction Wonders, and the naval layer's eight sea artifacts (NAVAL.md
+ * 7.4, `naval: true`: drawn only on naval maps).
  *
  * Ids are the catalogue names in kebab case (src/assets/icons.ts
  * `contentId`), and each row carries its gold value: map placement and
@@ -102,6 +104,11 @@ export interface WornArtifactDef {
   pieces?: readonly [string, string, string];
   /** A piece's Marvel. */
   pieceOf?: string;
+  /**
+   * A sea artifact (NAVAL 7.4, bead bzc.154): drawn into loot only on a
+   * naval map (7.5); every other map's loot never sees it.
+   */
+  naval?: boolean;
 }
 
 /** What using a consumable does (CONTENT_ARTIFACTS 6.1, adopted). */
@@ -168,6 +175,7 @@ function trinket(
   value: number,
   text: string,
   effects: HeroEffect[],
+  extra: Partial<WornArtifactDef> = {},
 ): WornArtifactDef {
   return {
     id,
@@ -178,6 +186,7 @@ function trinket(
     value,
     text,
     effects,
+    ...extra,
   };
 }
 
@@ -941,6 +950,93 @@ const ROWS: ArtifactDef[] = [
     "The hero digs here at once for 300 movement points, even if it has already moved today.",
     { kind: "dig", movement: 300 },
   ),
+
+  // ------------------------------------------------ Sea artifacts (8)
+  // NAVAL 7.4 (bead bzc.154): drawn only on naval maps (`naval: true`;
+  // src/core/map/gen/contents.ts and mystery.ts filter them out of every
+  // other map's loot before drawing).
+  trinket(
+    "captains-tricorne",
+    "Captain's Tricorne",
+    "head",
+    2000,
+    "+15% sea movement.",
+    [{ kind: "sea-movement-percent", percent: 15 }],
+    { naval: true },
+  ),
+  trinket(
+    "brass-sextant",
+    "Brass Sextant",
+    "pocket",
+    2000,
+    "+2 sight while afloat.",
+    [{ kind: "sea-sight", amount: 2 }],
+    { naval: true },
+  ),
+  trinket(
+    "mermaids-comb",
+    "Mermaid's Comb",
+    "pocket",
+    2000,
+    "+1 Luck.",
+    [{ kind: "luck", amount: 1 }],
+    { naval: true },
+  ),
+  wonder(
+    "ship-in-a-bottle",
+    "Ship in a Bottle",
+    "pocket",
+    4500,
+    "Once a day the hero may cast Call the Boat without mana or school rank, at Power at least 2.",
+    [{ kind: "free-adventure-spell", spell: "call-the-boat", minPower: 2 }],
+    { naval: true },
+  ),
+  wonder(
+    "ships-anchor",
+    "Ship's Anchor",
+    "shield",
+    4500,
+    "In each battle, your slowest stack starts Shielded 4 for 3 rounds and Stuck for 2 rounds.",
+    [
+      start("own", "slowest", "shielded", 3, { size: 4 }),
+      start("own", "slowest", "stuck", 2),
+    ],
+    { naval: true },
+  ),
+  wonder(
+    "conch-of-the-deep",
+    "Conch of the Deep",
+    "pocket",
+    5000,
+    "Item act: summon Hermit Crabs worth 120 HP (12 crabs) on a free hex; a sea hex is free to them.",
+    [],
+    { itemActs: ["conch-of-the-deep"], naval: true },
+  ),
+  wonder(
+    "corsairs-cutlass",
+    "Corsair's Cutlass",
+    "weapon",
+    5000,
+    "In each battle, your fastest stack starts Fired Up 3 and Hastened, both for 2 rounds.",
+    [
+      start("own", "fastest", "fired-up", 2, { size: 3 }),
+      start("own", "fastest", "hastened", 2),
+    ],
+    { naval: true },
+  ),
+  wonder(
+    "the-drowned-mans-locket",
+    "The Drowned Man's Locket",
+    "neck",
+    4000,
+    "+15% sea movement and +2 Defense. Drawback: in every battle your strongest stack is Drenched 50 throughout.",
+    [
+      { kind: "sea-movement-percent", percent: 15 },
+      stat("defense", 2),
+      start("own", "strongest", "drenched", null, { size: 50 }),
+    ],
+    { cursed: true, naval: true },
+  ),
 ];
 
 /** A Marvel (RULES_V2 4.5): assembled from three pieces, worth 20000. */
@@ -1023,6 +1119,11 @@ export function wornDef(id: string): WornArtifactDef | undefined {
 
 export function isCursed(id: string): boolean {
   return wornDef(id)?.cursed === true;
+}
+
+/** A sea artifact, drawn only on naval maps (NAVAL 7.5, bead bzc.154). */
+export function isNavalArtifact(id: string): boolean {
+  return wornDef(id)?.naval === true;
 }
 
 /** Grade label for the UI: "Marvel piece" for pieces. */

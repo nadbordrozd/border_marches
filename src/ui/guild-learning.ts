@@ -10,6 +10,7 @@
 import type { School } from "../core/battle/index.ts";
 import { RANK_MAX_TIER, SCHOOLS } from "../core/battle/index.ts";
 import type { GameState, HeroState, TownState } from "../core/game/index.ts";
+import { isNavalMap } from "../core/game/index.ts";
 import {
   canLearn,
   guildLevelOf,
@@ -248,7 +249,10 @@ export function guildView(
   const max = guildLevels(town);
   if (max === 0) return null;
   const built = guildLevelOf(town);
-  const offer = townGuild(state.seed, town).slice(0, max);
+  const offer = townGuild(state.seed, town, isNavalMap(state.map)).slice(
+    0,
+    max,
+  );
   const levels = offer.map((ids, i): GuildLevelView => {
     const level = i + 1;
     return {

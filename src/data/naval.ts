@@ -80,3 +80,65 @@ export const WET_LANDING_DRENCHED = 25;
 export const WET_LANDING_ROUNDS = 2;
 /** The Seafaring rank that removes Wet Landing. */
 export const WET_LANDING_SEAFARING_IMMUNE = 3;
+
+// ---------------------------------------------------------------------------
+// Naval spells, Seafaring and sea artifacts (NAVAL 7, bead bzc.154)
+
+/**
+ * The five naval spells (NAVAL 7.1, 7.2): drawn by guilds, shrines,
+ * scholars and the Shrine of the Tides only on a naval map (7.5).
+ */
+export const NAVAL_SPELLS: readonly string[] = [
+  "call-the-boat",
+  "scuttle",
+  "lily-road",
+  "fair-wind",
+  "tidal-wave",
+];
+
+/**
+ * The eight sea artifacts (NAVAL 7.4): in loose artifacts, banks, Mystery
+ * Bags and the Tollhouse only on a naval map (7.5).
+ */
+export const NAVAL_ARTIFACTS: readonly string[] = [
+  "captains-tricorne",
+  "brass-sextant",
+  "mermaids-comb",
+  "ship-in-a-bottle",
+  "ships-anchor",
+  "conch-of-the-deep",
+  "corsairs-cutlass",
+  "the-drowned-mans-locket",
+];
+
+/**
+ * Seafaring's class offer weight (NAVAL 7.3: Might 4, Magic 3) on a naval
+ * map; on any other map it weighs 0 and is never offered.
+ */
+export const SEAFARING_WEIGHT = { might: 4, magic: 3 } as const;
+
+/** Call the Boat (NAVAL 7.1): reach 10 + 5 x Power cells (Chebyshev). */
+export const CALL_THE_BOAT_REACH = { base: 10, per: 5 } as const;
+/** Scuttle: an empty ship within 6 + Power cells sinks. */
+export const SCUTTLE_REACH = { base: 6, per: 1 } as const;
+/** Lily Road: a shallow water cell costs this much (283 diagonally). */
+export const LILY_ROAD_COST = 200;
+/** Fair Wind: 200 + 50 x Power sea points now, at most 700. */
+export const FAIR_WIND = { base: 200, per: 50, max: 700 } as const;
+/** Ship in a Bottle: its free Call the Boat is cast at least at this Power. */
+export const SHIP_IN_A_BOTTLE_POWER = 2;
+/** Conch of the Deep: Hermit Crabs worth this much HP (12 of 10 HP). */
+export const CONCH_SUMMON_HP = 120;
+
+/**
+ * Naval content without an icon of its own yet (NAVAL 10.2): the icon
+ * catalogue (src/assets/icon-catalogue.json) and the art come with art bead
+ * 9c (bzc.159). Until then iconFor gives each its kind's fallback icon, and
+ * the catalogue coverage test (tests/data/catalogue-coverage.test.ts) skips
+ * exactly these ids. Remove an id here when its icon lands.
+ */
+export const NAVAL_ICONS_PENDING = {
+  spell: NAVAL_SPELLS,
+  skill: [SEAFARING_SKILL],
+  artifact: NAVAL_ARTIFACTS,
+} as const;

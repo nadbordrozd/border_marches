@@ -1,5 +1,6 @@
 /**
- * The battle spells of CONTENT_SPELLS.md section 3 (fifty, ten per school)
+ * The battle spells of CONTENT_SPELLS.md section 3 (fifty, ten per school),
+ * the naval Tidal Wave (NAVAL 7.2, bead bzc.154; drawn only on naval maps)
  * plus the three faction pages the faction documents define by their
  * RULES_V2 2.4 budget (Mend, Thunderclap, Last Breath; not in the guild
  * pool). Each spell is data (school, tier, mana, target rule, what Fuel
@@ -17,6 +18,7 @@ import {
   groundAt,
   hasAct,
   isAlive,
+  neighbors,
   registerAct,
   registerEffect,
   stepHex,
@@ -31,7 +33,14 @@ import type {
   School,
   StackId,
 } from "../battle/index.ts";
-import { MAX_SIZE, SHADE, SEEDLING, registerMagicKinds } from "./kinds.ts";
+import { CONCH_SUMMON_HP } from "../../data/naval.ts";
+import {
+  HERMIT_CRAB,
+  MAX_SIZE,
+  SHADE,
+  SEEDLING,
+  registerMagicKinds,
+} from "./kinds.ts";
 import {
   AREA_RADIUS,
   TARGET_COUNT,
@@ -45,9 +54,11 @@ import {
   isBlockingHex,
   linkedStacks,
   isFreeHex,
+  isFreeHexFor,
   ownRemains,
   ruleCandidates,
   ruleTouches,
+  rowHexes,
   sideStacks,
   stackOf,
   stacksOn,
@@ -69,6 +80,8 @@ export interface SpellDef {
   readonly tool?: boolean;
   /** In the guild and shrine pool (default true). */
   readonly pool?: boolean;
+  /** Drawn only on naval maps (NAVAL 7.5, bead bzc.154). */
+  readonly naval?: boolean;
   /** The scaling number as base + per x P, for display. */
   readonly scale?: { readonly base: number; readonly per: number };
   /** The effect with the numbers at Power `p`. */
@@ -1114,6 +1127,28 @@ const STORM: SpellDef[] = [
       }
     },
   },
+  // NAVAL 7.2 (bead bzc.154): drawn only on naval maps; it works on land
+  // too. Stacks resolve in timeline order, so a pushed stack may stop
+  // against one not yet pushed; a push stops a non-Swimmer at the rail.
+  {
+    id: "tidal-wave",
+    name: "Tidal Wave",
+    school: "storm",
+    tier: 4,
+    mana: 14,
+    target: "row",
+    fuel: "The Harm",
+    naval: true,
+    scale: { base: 36, per: 15 },
+    text: (p) =>
+      `Every stack in one row of hexes, friend or foe, takes ${n(36, 15, p)} Harm and is pushed 2 hexes along the row away from your edge of the field.`,
+    resolve(fx, _a, t, c) {
+      for (const id of stacksOn(fx.state, rowHexes(hexOf(t[0]).row))) {
+        fx.harm(id, n(36, 15, c.power), { fuelled: c.fuelled });
+        if (fx.isAlive(id)) fx.push(id, behind(fx.stack(id).hex, c.side), 2);
+      }
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -1196,14 +1231,69 @@ export function isBattleSpell(id: string): boolean {
   return BY_ID.has(id);
 }
 
-/** The battle spells guilds and shrines draw from. */
-export function poolBattleSpells(): SpellDef[] {
-  return BATTLE_SPELLS.filter((s) => s.pool !== false);
+/**
+ * The battle spells guilds and shrines draw from; Tidal Wave only on a
+ * naval map (`naval`, NAVAL 7.5).
+ */
+export function poolBattleSpells(naval = false): SpellDef[] {
+  return BATTLE_SPELLS.filter(
+    (s) => s.pool !== false && (naval || s.naval !== true),
+  );
+}
+
+/**
+ * The Conch of the Deep (NAVAL 7.4, bead bzc.154): an item act that
+ * summons Hermit Crabs worth 120 HP on a free hex, and a sea hex is free to
+ * them (they swim, NAVAL 3.1). Registered with the spells because the
+ * Hermit Crab lives with the magic's summons; core/battle/hero-effects.ts
+ * lists it in ITEM_ACT_IDS with the other item acts.
+ */
+export const CONCH_ACT = "conch-of-the-deep";
+
+function registerConch(): void {
+  if (hasAct(CONCH_ACT)) return;
+  const crabs = Math.max(1, Math.floor(CONCH_SUMMON_HP / HERMIT_CRAB.hp));
+  const hexOfTarget = (t: ActTarget | undefined): Hex | null =>
+    t !== undefined && "hex" in t ? t.hex : null;
+  registerAct({
+    id: CONCH_ACT,
+    name: "Conch of the Deep",
+    text: `Summon ${crabs} Hermit Crabs (${CONCH_SUMMON_HP} HP worth) on an empty hex; a sea hex is empty ground to them.`,
+    kind: "item",
+    targets: 1,
+    targetKinds: ["hex"],
+    check(state, _actorId, targets) {
+      const h = hexOfTarget(targets[0]);
+      if (targets.length !== 1 || h === null) return "choose an empty hex";
+      return isFreeHexFor(state, h, HERMIT_CRAB) ? null : "choose an empty hex";
+    },
+    // Beside the side's own stacks and the enemy's, where crabs can stand.
+    aiTargets: (state) => {
+      const seen = new Set<string>();
+      const out: ActTarget[][] = [];
+      for (const s of state.stacks) {
+        if (!isAlive(s)) continue;
+        for (const h of neighbors(s.hex)) {
+          const key = `${h.col},${h.row}`;
+          if (seen.has(key) || !isFreeHexFor(state, h, HERMIT_CRAB)) continue;
+          seen.add(key);
+          out.push([{ hex: h }]);
+        }
+      }
+      return out;
+    },
+    resolve(fx, actorId, targets) {
+      const h = hexOfTarget(targets[0]);
+      if (h === null) return;
+      fx.summon(HERMIT_CRAB, crabs, h, { side: fx.sideOf(actorId) });
+    },
+  });
 }
 
 /** Registers every battle spell as a cast act (idempotent). */
 export function registerSpells(): void {
   registerMagicKinds();
+  registerConch();
   if (hasAct("jolt")) return;
   registerEffect("spell:appointment", (fx, args) => {
     const a = args as { target: string; x: number; fuelled: boolean };

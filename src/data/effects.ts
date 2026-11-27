@@ -205,6 +205,11 @@ export type HeroEffect =
    */
   | { kind: "terrain-cost"; reduce: number; terrain?: Terrain }
   | { kind: "sight"; amount: number }
+  /**
+   * Sight while the hero is afloat (NAVAL 2.8, bead bzc.154): Seafaring
+   * rank 2 and the Brass Sextant; within the cap of 12, never on land.
+   */
+  | { kind: "sea-sight"; amount: number }
   | { kind: "xp-percent"; percent: number }
   /** Daily income while on the map; `everyDays` 2 pays on even days. */
   | { kind: "income"; resources: ResourceAmounts; everyDays?: number }
@@ -264,7 +269,13 @@ export type HeroEffect =
       perDay: number;
     }
   /** The Missing Page: the highest-tier page starts each battle spent. */
-  | { kind: "missing-page" };
+  | { kind: "missing-page" }
+  /**
+   * The Ship in a Bottle (NAVAL 7.4, bead bzc.154): the hero may cast this
+   * adventure spell as a page without knowing it, without mana and without
+   * school rank, at Power at least `minPower` (still once a day).
+   */
+  | { kind: "free-adventure-spell"; spell: string; minPower: number };
 
 /** Short names for the UI and tooltips. */
 export const STAT_NAMES: Readonly<Record<PrimaryStat, string>> = {

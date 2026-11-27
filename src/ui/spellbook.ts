@@ -22,6 +22,7 @@ import {
   heroMagic,
   isAdventureSpell,
   isBattleSpell,
+  isFreeAdventureCast,
   spellDef,
   storeOf,
 } from "../core/magic/index.ts";
@@ -76,6 +77,7 @@ const AIMED_ON_MAP: ReadonlySet<string> = new Set([
   "nearbyMonster",
   "sealed",
   "exploredCell",
+  "ship",
 ]);
 
 export type BookTab = "adventure" | "battle";
@@ -111,20 +113,28 @@ export function bookPages(
 ): Record<BookTab, BookPage[]> {
   const m = heroMagic(hero);
   const known = new Set(m.knownSpells);
+  // Adventure pages an artifact grants (the Ship in a Bottle, NAVAL 7.4).
+  const adventureKnown = new Set(known);
+  for (const s of ADVENTURE_SPELLS)
+    if (isFreeAdventureCast(hero, s.id)) adventureKnown.add(s.id);
   const scrolls = new Set(m.scrolls);
   const adventure: BookPage[] = [];
   for (const school of SCHOOLS)
     for (const s of ADVENTURE_SPELLS) {
       if (s.school !== school) continue;
       for (const scroll of [false, true]) {
-        if (!(scroll ? scrolls : known).has(s.id)) continue;
+        if (!(scroll ? scrolls : adventureKnown).has(s.id)) continue;
         adventure.push({
           id: s.id,
           name: s.name,
           school: s.school,
           tier: s.tier,
           scroll,
-          cost: scroll ? "scroll" : `${adventureManaCost(hero, s.id)} mana`,
+          cost: scroll
+            ? "scroll"
+            : isFreeAdventureCast(hero, s.id)
+              ? "free"
+              : `${adventureManaCost(hero, s.id)} mana`,
           usable: adventureUsable(state, hero, s.id, scroll),
         });
       }

@@ -74,7 +74,11 @@ import {
   inBounds,
   isPassable,
 } from "../map/types.ts";
-import { BOARD_STEP_COST, SEA_STEP_COST } from "../../data/naval.ts";
+import {
+  BOARD_STEP_COST,
+  LILY_ROAD_COST,
+  SEA_STEP_COST,
+} from "../../data/naval.ts";
 import {
   isAfloat,
   isMoored,
@@ -209,6 +213,14 @@ export interface MoveContext {
   forestCost: number | null;
   /** The sea graph on a naval map (bead bzc.149); absent or null: dry. */
   naval?: NavalMove | null;
+  /**
+   * Lily Road today (NAVAL 7.1, bead bzc.154), or absent / null: shallow
+   * water cells ({@link isLilyCell}) are crossed on lily pads at `cost` a
+   * step (283 diagonally) but never stood on at a walk's end, and the
+   * whole crossing, the step back onto land included, must fit in `mp`,
+   * the hero's points now (the spell ends with the day).
+   */
+  lily?: { readonly cost: number; readonly mp: number } | null;
 }
 
 /** What planning at sea needs (MoveContext.naval). */
@@ -283,6 +295,11 @@ export function moveContext(
   );
   const forestCost =
     magic?.greenRoadDay === state.day ? GREEN_ROAD_MOVE_COST : null;
+  // Lily Road (NAVAL 7.1): shallow water on lily pads, today only.
+  const lily =
+    magic?.lilyRoadDay === state.day
+      ? { cost: LILY_ROAD_COST, mp: hero.mp }
+      : null;
   // Silver Tongue: neutral stacks at most this share of the army's FV
   // have no zone of control against the hero (fight values, never chance).
   const parleyPct = parleyPercent(hero);
@@ -397,7 +414,54 @@ export function moveContext(
     explored: options.ignoreFog === true ? null : (player?.explored ?? null),
     forestCost,
     ...(naval === null ? {} : { naval }),
+    ...(lily === null ? {} : { lily }),
   };
+}
+
+/**
+ * Whether Lily Road lets the hero cross (x, y) today (NAVAL 7.1): shallow
+ * water (not deep), explored, with no object (a whirlpool, a sea site's
+ * entrance, a pickup), stack, hero or moored ship on it, outside every
+ * zone of control. Such a cell is crossed, never the end of a walk.
+ */
+export function isLilyCell(ctx: MoveContext, x: number, y: number): boolean {
+  if (ctx.lily === undefined || ctx.lily === null) return false;
+  if (!inBounds(ctx.map, x, y)) return false;
+  const i = y * ctx.map.width + x;
+  const cell = ctx.map.cells[i];
+  if (cell === undefined || cell.terrain !== "water" || cell.deep === true)
+    return false;
+  if (cell.obstacle !== "none" || cell.prop === true) return false;
+  if (
+    ctx.objectBlocked.has(i) ||
+    ctx.monsterAt.has(i) ||
+    ctx.enemyHeroAt.has(i) ||
+    ctx.friendAt.has(i) ||
+    ctx.guards.has(i) ||
+    ctx.stops.has(i) ||
+    ctx.buildings.has(i) ||
+    ctx.pickupAt.has(i) ||
+    ctx.naval?.moored.has(i) === true
+  )
+    return false;
+  return ctx.explored === null || ctx.explored[i] === true;
+}
+
+/** A Lily Road step onto a water cell: 200, or 283 diagonally. */
+export function lilyStepCost(
+  ctx: MoveContext,
+  fx: number,
+  fy: number,
+  tx: number,
+  ty: number,
+): number {
+  const base = ctx.lily?.cost ?? LILY_ROAD_COST;
+  return fx !== tx && fy !== ty ? diagonalCost(base) : base;
+}
+
+/** Whether (x, y) is a water cell (a hero on foot there is on lily pads). */
+function isWaterCell(map: GameMap, x: number, y: number): boolean {
+  return map.cells[y * map.width + x]?.terrain === "water";
 }
 
 /** Ground or object makes the cell impassable (used for corner cutting). */
@@ -496,15 +560,21 @@ function closedToShip(
   return nav.sea[i] !== 1 || ctx.objectBlocked.has(i);
 }
 
-/** What an ordinary step does on a naval map (bead bzc.149). */
-export type NavalStepKind = "walk" | "sail" | "board" | "land";
+/**
+ * What an ordinary step does on a naval map (bead bzc.149); "lily" is a
+ * step on foot onto shallow water under Lily Road (bead bzc.154).
+ */
+export type NavalStepKind = "walk" | "sail" | "board" | "land" | "lily";
 
 /**
  * The kind of an ordinary step (not an attack or a pickup step) on a
  * naval map, or null when it may not be taken: walk (land to land), sail
  * (sea to sea, onto a free sea cell), board (a shore cell onto a moored
- * ship) or land (the ship onto a free land cell). `planning` lets stacks
- * and pickups count as open ground, as canCrossPlanning does.
+ * ship), land (the ship onto a free land cell) or lily (on foot onto a
+ * Lily Road water cell). `planning` lets stacks and pickups count as open
+ * ground, as canCrossPlanning does. `onFoot`: the hero stands on lily pads
+ * on (fx, fy), not aboard a ship; from there it may only go on over lily
+ * pads or step onto land.
  */
 export function navalStepKind(
   ctx: MoveContext,
@@ -513,13 +583,18 @@ export function navalStepKind(
   tx: number,
   ty: number,
   planning = false,
+  onFoot = false,
 ): NavalStepKind | null {
   const nav = ctx.naval;
   if (nav === undefined || nav === null) return null;
   if (!inBounds(ctx.map, tx, ty)) return null;
   const w = ctx.map.width;
   const ti = ty * w + tx;
-  const fromSea = nav.sea[fy * w + fx] === 1;
+  const fromSea = !onFoot && nav.sea[fy * w + fx] === 1;
+  if (!fromSea && isLilyCell(ctx, tx, ty)) {
+    return cutsCorner(ctx, fx, fy, tx, ty) ? null : "lily";
+  }
+  if (onFoot && isWaterCell(ctx.map, tx, ty)) return null;
   if (nav.sea[ti] !== 1) {
     const ok = planning ? canCrossPlanning(ctx, tx, ty) : canEnter(ctx, tx, ty);
     if (!ok || cutsCorner(ctx, fx, fy, tx, ty)) return null;
@@ -550,6 +625,7 @@ export function navalStepCost(
   ty: number,
 ): number {
   const diagonal = fx !== tx && fy !== ty;
+  if (kind === "lily") return lilyStepCost(ctx, fx, fy, tx, ty);
   if (kind === "sail") {
     return diagonal ? diagonalCost(SEA_STEP_COST) : SEA_STEP_COST;
   }
@@ -935,6 +1011,10 @@ export function findPathInContext(
   const open = new MinHeap();
   const shrink = attackGoal || pickupGoal ? 1 : 0;
   open.push(heuristic(sx, sy, tx, ty, shrink), start);
+  // Lily Road (bead bzc.154): points really spent, to keep a crossing
+  // within today; absent unless the spell is on.
+  const lily = ctx.lily ?? null;
+  const real = lily === null ? null : new Map<number, number>([[start, 0]]);
 
   while (open.size > 0) {
     const cur = open.pop();
@@ -948,6 +1028,8 @@ export function findPathInContext(
     // first stop (pathToFirstStop).
     const halt = !throughGuards && stop;
     const gc = g.get(cur) ?? 0;
+    // On lily pads: only on over the water or back onto land, today.
+    const onPads = lily !== null && isWaterCell(map, cx, cy);
     for (const [dx, dy] of DIRECTIONS_8) {
       const nx = cx + dx;
       const ny = cy + dy;
@@ -955,22 +1037,37 @@ export function findPathInContext(
       const ni = ny * w + nx;
       if (closed.has(ni)) continue;
       let cost: number;
+      let spent = 0;
       if (attackGoal && ni === goal) {
-        if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
+        if (onPads || cutsCorner(ctx, cx, cy, nx, ny)) continue;
         cost = 0;
       } else if (pickupGoal && ni === goal) {
         // Taken from where the hero stands; from a cell whose zone or
         // visit stops the walk first only when no other cell will do
         // (the search order only: the step itself costs nothing).
-        if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
+        if (onPads || cutsCorner(ctx, cx, cy, nx, ny)) continue;
         cost = stop ? STOP_BEFORE_PICKUP : 0;
       } else {
         if (halt) continue;
-        if (!(throughGuards ? canCrossPlanning : canEnter)(ctx, nx, ny)) {
+        const pads = lily !== null && ni !== goal && isLilyCell(ctx, nx, ny);
+        if (
+          !pads &&
+          !(throughGuards ? canCrossPlanning : canEnter)(ctx, nx, ny)
+        ) {
           continue;
         }
         if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
-        cost = stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny, ctx.forestCost);
+        cost = pads
+          ? lilyStepCost(ctx, cx, cy, nx, ny)
+          : stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny, ctx.forestCost);
+        spent = cost;
+        // A crossing and the step off it happen today.
+        if (
+          lily !== null &&
+          (pads || onPads) &&
+          (real?.get(cur) ?? 0) + cost > lily.mp
+        )
+          continue;
         // Round buildings that are not the target (bead bzc.107).
         if (ni !== goal && ctx.buildings.has(ni)) cost += BUILDING_DETOUR;
         if (
@@ -987,6 +1084,7 @@ export function findPathInContext(
       const old = g.get(ni);
       if (old !== undefined && old <= ng) continue;
       g.set(ni, ng);
+      real?.set(ni, (real.get(cur) ?? 0) + spent);
       parent.set(ni, cur);
       open.push(ng + heuristic(nx, ny, tx, ty, shrink), ni);
     }
@@ -1002,18 +1100,16 @@ export function findPathInContext(
   for (const c of cells) {
     const attack = attackGoal && c === goal;
     const pickup = pickupGoal && c === goal;
+    const px = prev % w;
+    const py = Math.floor(prev / w);
+    const cx = c % w;
+    const cy = Math.floor(c / w);
     const cost =
       attack || pickup
         ? 0
-        : stepCost(
-            map,
-            ctx.nativeTerrain,
-            prev % w,
-            Math.floor(prev / w),
-            c % w,
-            Math.floor(c / w),
-            ctx.forestCost,
-          );
+        : lily !== null && isWaterCell(map, cx, cy)
+          ? lilyStepCost(ctx, px, py, cx, cy)
+          : stepCost(map, ctx.nativeTerrain, px, py, cx, cy, ctx.forestCost);
     total += cost;
     steps.push({
       x: c % w,
@@ -1056,6 +1152,8 @@ export function reachableCells(
   const open = new MinHeap();
   open.push(0, start);
   const closed = new Set<number>();
+  // Lily Road (bead bzc.154): crossings within today, never a stand.
+  const lily = ctx.lily ?? null;
   while (open.size > 0) {
     const cur = open.pop();
     if (closed.has(cur)) continue;
@@ -1064,22 +1162,33 @@ export function reachableCells(
     const cy = (cur - cx) / w;
     if (cur !== start && isStopCell(ctx, cx, cy)) continue;
     const gc = out.get(cur) ?? 0;
+    const onPads = lily !== null && isWaterCell(map, cx, cy);
     for (const [dx, dy] of DIRECTIONS_8) {
       const nx = cx + dx;
       const ny = cy + dy;
       if (!inBounds(map, nx, ny)) continue;
       const ni = ny * w + nx;
-      if (closed.has(ni) || !canEnter(ctx, nx, ny)) continue;
+      if (closed.has(ni)) continue;
+      const pads = lily !== null && isLilyCell(ctx, nx, ny);
+      if (!pads && !canEnter(ctx, nx, ny)) continue;
       if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
       const ng =
-        gc + stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny, ctx.forestCost);
+        gc +
+        (pads
+          ? lilyStepCost(ctx, cx, cy, nx, ny)
+          : stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny, ctx.forestCost));
       if (ng > limit) continue;
+      if (lily !== null && (pads || onPads) && ng > lily.mp) continue;
       const old = out.get(ni);
       if (old !== undefined && old <= ng) continue;
       out.set(ni, ng);
       open.push(ng, ni);
     }
   }
+  if (lily !== null)
+    for (const i of [...out.keys()])
+      if (i !== start && isWaterCell(map, i % w, Math.floor(i / w)))
+        out.delete(i);
   return out;
 }
 
@@ -1152,6 +1261,10 @@ function findNavalPath(
   // The heuristic at the cheapest step anywhere (a road, or the sea).
   const hScale = Math.min(1, (SEA_STEP_COST * ratio) / ROAD_MOVE_COST);
 
+  // Search nodes: a cell index, or N + a cell index for the hero on foot
+  // on that water cell's lily pads (Lily Road, bead bzc.154), so a sea
+  // cell crossed on foot and the same cell sailed are different states.
+  const N = w * map.height;
   const g = new Map<number, number>([[start, 0]]);
   const real = new Map<number, number>([[start, 0]]);
   const parent = new Map<number, number>();
@@ -1165,8 +1278,10 @@ function findNavalPath(
     if (closed.has(cur)) continue;
     if (cur === goal) break;
     closed.add(cur);
-    const cx = cur % w;
-    const cy = (cur - cx) / w;
+    const onFoot = cur >= N;
+    const cell = onFoot ? cur - N : cur;
+    const cx = cell % w;
+    const cy = (cell - cx) / w;
     const stop = cur !== start && isStopCell(ctx, cx, cy);
     const halt = !throughGuards && stop;
     const gc = g.get(cur) ?? 0;
@@ -1176,20 +1291,20 @@ function findNavalPath(
       const ny = cy + dy;
       if (!inBounds(map, nx, ny)) continue;
       const ni = ny * w + nx;
-      if (closed.has(ni)) continue;
+      let node = ni;
       let cost: number;
       let spent: number;
       if (attackGoal && ni === goal) {
-        if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
+        if (onFoot || cutsCorner(ctx, cx, cy, nx, ny)) continue;
         cost = 0;
         spent = 0;
       } else if (pickupGoal && ni === goal) {
-        if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
+        if (onFoot || cutsCorner(ctx, cx, cy, nx, ny)) continue;
         cost = stop ? STOP_BEFORE_PICKUP : 0;
         spent = 0;
       } else {
         if (halt) continue;
-        const kind = navalStepKind(ctx, cx, cy, nx, ny, throughGuards);
+        const kind = navalStepKind(ctx, cx, cy, nx, ny, throughGuards, onFoot);
         if (kind === null) continue;
         const c = navalStepCost(ctx, kind, cx, cy, nx, ny);
         spent =
@@ -1198,6 +1313,9 @@ function findNavalPath(
             : c < 0
               ? restOfDay(rc, mp0, nav.landMax)
               : c;
+        // Lily pads: the crossing and the step off it happen today.
+        if ((kind === "lily" || onFoot) && rc + spent > mp0) continue;
+        if (kind === "lily") node = N + ni;
         cost = spent;
         if (ni !== goal && ctx.buildings.has(ni)) cost += BUILDING_DETOUR;
         if (
@@ -1210,35 +1328,39 @@ function findNavalPath(
           cost += ZONE_CROSSING;
         }
       }
+      if (closed.has(node)) continue;
       const ng = gc + cost;
-      const old = g.get(ni);
+      const old = g.get(node);
       if (old !== undefined && old <= ng) continue;
-      g.set(ni, ng);
-      real.set(ni, rc + spent);
-      parent.set(ni, cur);
-      open.push(ng + heuristic(nx, ny, tx, ty, shrink) * hScale, ni);
+      g.set(node, ng);
+      real.set(node, rc + spent);
+      parent.set(node, cur);
+      open.push(ng + heuristic(nx, ny, tx, ty, shrink) * hScale, node);
     }
   }
 
   if (!g.has(goal)) return null;
-  const cells: number[] = [];
-  for (let c = goal; c !== start; c = parent.get(c) ?? start) cells.push(c);
-  cells.reverse();
+  const nodes: number[] = [];
+  for (let c = goal; c !== start; c = parent.get(c) ?? start) nodes.push(c);
+  nodes.reverse();
   const steps: PathStep[] = [];
   let total = 0;
   let prev = start;
   let afloat = nav.afloat;
-  for (const c of cells) {
-    const px = prev % w;
-    const py = Math.floor(prev / w);
+  for (const node of nodes) {
+    const c = node >= N ? node - N : node;
+    const prevCell = prev >= N ? prev - N : prev;
+    const px = prevCell % w;
+    const py = Math.floor(prevCell / w);
     const x = c % w;
     const y = Math.floor(c / w);
-    const attack = attackGoal && c === goal;
-    const pickup = pickupGoal && c === goal;
+    const attack = attackGoal && node === goal;
+    const pickup = pickupGoal && node === goal;
     let cost = 0;
     const flags: { board?: string; land?: boolean; endsDay?: boolean } = {};
     if (!attack && !pickup) {
-      const kind = navalStepKind(ctx, px, py, x, y, throughGuards) ?? "walk";
+      const kind =
+        navalStepKind(ctx, px, py, x, y, throughGuards, prev >= N) ?? "walk";
       const raw = navalStepCost(ctx, kind, px, py, x, y);
       cost = Math.max(0, raw);
       if (kind === "board") {
@@ -1263,7 +1385,7 @@ function findNavalPath(
       ...(afloat ? { afloat: true } : {}),
       ...flags,
     });
-    prev = c;
+    prev = node;
   }
   return steps;
 }
@@ -1348,7 +1470,10 @@ function reachableNaval(
   const budget = nav.afloat ? limit * ratio : limit;
   const mp0 = nav.afloat ? nav.mp * ratio : nav.mp;
   const start = sy * w + sx;
-  out.set(start, 0);
+  // Nodes as findNavalPath's: N + cell is the hero on lily pads there
+  // (Lily Road), crossed but never reached as a place to stand.
+  const N = w * map.height;
+  const dist = new Map<number, number>([[start, 0]]);
   const open = new MinHeap();
   open.push(0, start);
   const closed = new Set<number>();
@@ -1356,18 +1481,21 @@ function reachableNaval(
     const cur = open.pop();
     if (closed.has(cur)) continue;
     closed.add(cur);
-    const cx = cur % w;
-    const cy = (cur - cx) / w;
+    const onFoot = cur >= N;
+    const cell = onFoot ? cur - N : cur;
+    const cx = cell % w;
+    const cy = (cell - cx) / w;
     if (cur !== start && isStopCell(ctx, cx, cy)) continue;
-    const gc = out.get(cur) ?? 0;
+    const gc = dist.get(cur) ?? 0;
     for (const [dx, dy] of DIRECTIONS_8) {
       const nx = cx + dx;
       const ny = cy + dy;
       if (!inBounds(map, nx, ny)) continue;
       const ni = ny * w + nx;
-      if (closed.has(ni)) continue;
-      const kind = navalStepKind(ctx, cx, cy, nx, ny);
+      const kind = navalStepKind(ctx, cx, cy, nx, ny, false, onFoot);
       if (kind === null) continue;
+      const node = kind === "lily" ? N + ni : ni;
+      if (closed.has(node)) continue;
       const c = navalStepCost(ctx, kind, cx, cy, nx, ny);
       const ng =
         gc +
@@ -1377,11 +1505,13 @@ function reachableNaval(
             ? restOfDay(gc, mp0, nav.landMax)
             : c);
       if (ng > budget) continue;
-      const old = out.get(ni);
+      if ((kind === "lily" || onFoot) && ng > mp0) continue;
+      const old = dist.get(node);
       if (old !== undefined && old <= ng) continue;
-      out.set(ni, ng);
-      open.push(ng, ni);
+      dist.set(node, ng);
+      open.push(ng, node);
     }
   }
+  for (const [node, cost] of dist) if (node < N) out.set(node, cost);
   return out;
 }

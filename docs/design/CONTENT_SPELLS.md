@@ -288,6 +288,11 @@ cells (Chebyshev), so the hero casts from outside its zone of control
 | **Tow Line**       | Storm  | 4    | 14   | All remaining movement, at least 300 | RULES_V2 2.8: the hero moves from a pylon it stands on to any pylon its player has visited.                                                                                  | -                |
 | **Opening Salvo**  | Storm  | 2    | 7    | 100 movement                         | A neutral stack within 2 cells of the hero takes Harm 30 + 15 P by the kill rule before any battle; it gives no XP, and a stack reduced to nothing is removed.               | 30 + 15 P        |
 
+The naval layer adds four adventure spells (Call the Boat, Scuttle, Lily
+Road, Fair Wind) and one battle spell (Tidal Wave, Storm 4), drawn only on
+naval maps: [NAVAL.md](NAVAL.md) sections 7.1, 7.2, 7.5 and 20 (bead
+bzc.154).
+
 ## 5. Cross-system combos
 
 Each is a chain the rules allow, not a scripted pair. "Price" is what it

@@ -17,6 +17,7 @@ import {
   adventureSpell,
   castAdventureSpell,
   monstersInSpellRange,
+  scuttleTargets,
   towLineStops,
 } from "../core/magic/index.ts";
 import type {
@@ -60,6 +61,8 @@ export function adventureTargetKind(kind: AdventureTargetKind): TargetKind {
       return { icon: "self", label: "The hero's own movement (an amount)" };
     case "pylon":
       return { icon: "hex", label: "Another pylon you have marked" };
+    case "ship":
+      return { icon: "enemy", label: "An empty ship within reach" };
   }
 }
 
@@ -143,6 +146,18 @@ export function adventureAims(
         label: `pylon at ${o.x},${o.y}`,
         target: { objectId: o.id },
       }));
+    case "ship":
+      // Scuttle (NAVAL 7.1): every empty ship in reach, anyone's.
+      return scuttleTargets(
+        state,
+        hero,
+        adventurePower(hero, spellId, scroll),
+      ).map((ship) => ({
+        x: ship.x,
+        y: ship.y,
+        label: `${ship.owner === hero.owner ? "your" : ship.owner === null ? "a neutral" : "an enemy"} ship at ${ship.x},${ship.y}`,
+        target: { shipId: ship.id },
+      }));
     case "exploredCell": {
       const player = state.players.find((p) => p.id === hero.owner);
       if (!player) return [];
@@ -207,6 +222,8 @@ function noAimReason(
       return "No other pylon your player has marked";
     case "exploredCell":
       return "No explored cell in range";
+    case "ship":
+      return "No empty ship in reach";
     default:
       return "No valid target";
   }
@@ -268,6 +285,8 @@ export function aimHint(spellId: string): string {
         ? "a glowing enemy hero or sealed site"
         : s.target === "exploredCell"
           ? `a glowing cell (explored, within ${ASK_RANGE} cells)`
-          : "a glowing target";
+          : s.target === "ship"
+            ? "a glowing empty ship"
+            : "a glowing target";
   return `${s.name}: click ${what} to cast. Esc cancels.`;
 }

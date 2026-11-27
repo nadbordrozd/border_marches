@@ -5,7 +5,8 @@ Status: content for v0.2 (bead `border_marches-bzc.6`, 2026-11-24).
 82 artifact kinds for v0.2: 30 Trinkets, 22 Wonders (the Candy Kingdom's
 Flypaper Ribbon and the Deepforge's Pocket Boiler the last), 6 cursed
 Wonders, 12 Marvel pieces that assemble into 4 Marvels, and 12
-consumables.
+consumables. The naval layer adds eight sea artifacts, drawn only on naval
+maps ([NAVAL.md](NAVAL.md) 7.4 and 7.5, bead bzc.154).
 [RULES_V2.md](RULES_V2.md) section 4 governs. Condition kinds are defined
 in [CONTENT_SPELLS.md](CONTENT_SPELLS.md).
 

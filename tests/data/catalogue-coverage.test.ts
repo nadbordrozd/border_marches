@@ -19,6 +19,17 @@ import {
   SKILL_IDS,
   findSkill,
 } from "../../src/data/skills.ts";
+import { NAVAL_ICONS_PENDING } from "../../src/data/naval.ts";
+
+/**
+ * The naval content (bead bzc.154) has data rows but no catalogue icon yet:
+ * its icons are art bead 9c (bzc.159). The explicit list lives in
+ * src/data/naval.ts; each id there must be real content, and nothing else
+ * may be missing from the catalogue.
+ */
+const pending = (kind: keyof typeof NAVAL_ICONS_PENDING): string[] => [
+  ...NAVAL_ICONS_PENDING[kind],
+];
 
 const ids = (kind: keyof typeof catalogue): string[] =>
   Object.keys(catalogue[kind]);
@@ -26,7 +37,10 @@ const ids = (kind: keyof typeof catalogue): string[] =>
 describe("catalogue coverage", () => {
   it("skills: all 24 rows (none deferred)", () => {
     expect(ids("skill")).toHaveLength(24);
-    expect([...SKILL_IDS].sort()).toEqual(ids("skill").sort());
+    expect([...SKILL_IDS].sort()).toEqual(
+      [...ids("skill"), ...pending("skill")].sort(),
+    );
+    for (const id of pending("skill")) expect(findSkill(id), id).toBeDefined();
     for (const id of ids("skill")) {
       const deferred = DEFERRED_SKILLS[id as keyof typeof DEFERRED_SKILLS];
       if (deferred !== undefined) {
@@ -63,8 +77,16 @@ describe("catalogue coverage", () => {
     // relic of the map objects (not a catalogue kind) with an icon by its
     // game id (bead 9is).
     expect(ids("artifact")).toHaveLength(87);
-    // The 84, the Flypaper Ribbon and the Pocket Boiler.
-    expect(ARTIFACT_LIST.filter((a) => a.kind !== "relic")).toHaveLength(86);
+    // The 84, the Flypaper Ribbon and the Pocket Boiler, and the eight sea
+    // artifacts (bead bzc.154) whose icons are pending (bzc.159).
+    expect(ARTIFACT_LIST.filter((a) => a.kind !== "relic")).toHaveLength(94);
+    const listed = new Set([...ids("artifact"), ...pending("artifact")]);
+    for (const a of ARTIFACT_LIST) expect(listed.has(a.id), a.id).toBe(true);
+    for (const id of pending("artifact")) {
+      const def = findArtifact(id);
+      expect(def, id).toBeDefined();
+      expect(contentId(def!.name)).toBe(id);
+    }
     for (const id of ids("artifact")) {
       const def = findArtifact(id);
       expect(def, id).toBeDefined();
@@ -79,9 +101,10 @@ describe("catalogue coverage", () => {
           a.pieceOf === undefined &&
           a.cursed !== true,
       ).length;
-    expect(grade("trinket")).toBe(30);
-    // 20, the Flypaper Ribbon and the Pocket Boiler.
-    expect(grade("wonder")).toBe(22);
+    // 30 and three sea Trinkets.
+    expect(grade("trinket")).toBe(33);
+    // 20, the Flypaper Ribbon, the Pocket Boiler and four sea Wonders.
+    expect(grade("wonder")).toBe(26);
     expect(
       ARTIFACT_LIST.filter(
         (a) =>
@@ -90,7 +113,7 @@ describe("catalogue coverage", () => {
           a.grade === "wonder" &&
           a.pieceOf === undefined,
       ),
-    ).toHaveLength(6);
+    ).toHaveLength(7); // six and the Drowned Man's Locket
     expect(
       ARTIFACT_LIST.filter((a) => a.kind === "worn" && a.pieceOf !== undefined),
     ).toHaveLength(12);
@@ -120,6 +143,7 @@ describe("catalogue coverage", () => {
     expect(ids("spell")).toHaveLength(60);
     const known = new Set(allSpells().map((s) => s.id));
     for (const id of ids("spell")) expect(known.has(id), id).toBe(true);
+    for (const id of pending("spell")) expect(known.has(id), id).toBe(true);
     const deferred = allSpells()
       .filter((s) => s.kind === "adventure")
       .filter((s) => adventureSpell(s.id).deferred !== undefined);

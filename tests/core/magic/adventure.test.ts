@@ -131,8 +131,11 @@ describe("the hero magic view", () => {
 });
 
 describe("casting adventure spells", () => {
-  it("lists ten adventure spells, two per school", () => {
-    expect(ADVENTURE_SPELLS).toHaveLength(10);
+  it("lists ten adventure spells, two per school, and four naval ones", () => {
+    expect(ADVENTURE_SPELLS.filter((s) => s.naval !== true)).toHaveLength(10);
+    expect(
+      ADVENTURE_SPELLS.filter((s) => s.naval === true).map((s) => s.id),
+    ).toEqual(["call-the-boat", "scuttle", "lily-road", "fair-wind"]);
   });
 
   it("needs the page, the rank for its tier, mana, once a day", () => {

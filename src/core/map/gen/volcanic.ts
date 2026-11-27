@@ -12,8 +12,10 @@
 import {
   ARTIFACT_LIST,
   isCursed,
+  isNavalArtifact,
   type ArtifactDef,
 } from "../../../data/artifacts.ts";
+import { navalPoolsOn } from "./naval-pools.ts";
 import { CREATURES } from "../../../data/creatures.ts";
 import {
   BANK_GUARD_SHARE,
@@ -59,14 +61,19 @@ export function volcanicSites(st: GenState): VolcanicSite[] {
   return out;
 }
 
-/** Wearable, uncursed artifacts of a grade, never a Marvel piece. */
+/**
+ * Wearable, uncursed artifacts of a grade, never a Marvel piece; the sea
+ * artifacts only on a naval map (NAVAL 7.5).
+ */
 function wearable(grade: "trinket" | "wonder"): ArtifactDef[] {
+  const naval = navalPoolsOn();
   return ARTIFACT_LIST.filter(
     (a) =>
       a.kind === "worn" &&
       a.grade === grade &&
       a.pieceOf === undefined &&
-      !isCursed(a.id),
+      !isCursed(a.id) &&
+      (naval || !isNavalArtifact(a.id)),
   );
 }
 

@@ -27,7 +27,7 @@ import {
 } from "../../data/naval.ts";
 import { DIRECTIONS_8, inBounds, isPassable } from "../map/types.ts";
 import type { GameMap } from "../map/types.ts";
-import { heroEffects } from "./effects.ts";
+import { heroEffects, sightRadius } from "./effects.ts";
 import type {
   GameEvent,
   GameState,
@@ -157,6 +157,14 @@ export function shipOfHero(
 /** A hero aboard a ship stands on a sea cell and is afloat (2.1). */
 export function isAfloat(state: GameState, hero: HeroState): boolean {
   return shipOfHero(state, hero) !== undefined;
+}
+
+/**
+ * The hero's sight radius where it stands now (NAVAL 2.8, bead bzc.154):
+ * afloat, Seafaring rank 2 and the Brass Sextant add to it (cap 12).
+ */
+export function heroSight(state: GameState, hero: HeroState): number {
+  return sightRadius(hero, isAfloat(state, hero));
 }
 
 /**

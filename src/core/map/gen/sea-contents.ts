@@ -30,7 +30,7 @@ import {
 import { HUT_STRAYS, STRAY_CREATURES } from "../../../data/strays.ts";
 import type { CreatureId } from "../../../data/types.ts";
 import type { Rng } from "../../rng.ts";
-import { bankSize, pickArtifact } from "./contents.ts";
+import { bankSize, pickSeaArtifact } from "./contents.ts";
 
 type Data = Record<string, unknown>;
 type Guard = Array<{ creature: CreatureId; count: number }>;
@@ -54,8 +54,12 @@ function crew(
   });
 }
 
+/**
+ * A sea bank's artifact: on a naval map half of its Trinket and Wonder
+ * draws are sea artifacts (NAVAL 7.5, bead bzc.154; pickSeaArtifact).
+ */
 const artifact = (rng: Rng, grade: "trinket" | "wonder" | "piece") => {
-  const a = pickArtifact(rng, grade);
+  const a = pickSeaArtifact(rng, grade);
   return a === undefined ? [] : [a];
 };
 
@@ -201,7 +205,7 @@ export function seaContents(
     case "sea-chest": {
       // The rich chest of rings 2-3 holds a Trinket and 500 gold.
       if (tier >= 2 && rng.chance(0.5)) {
-        const a = pickArtifact(rng, "trinket");
+        const a = pickSeaArtifact(rng, "trinket");
         if (a !== undefined)
           return { artifact: a, gold: SEA_CHEST.richGold, value: 2500 };
       }

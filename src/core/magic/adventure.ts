@@ -28,7 +28,27 @@ import type {
   HeroState,
   MonsterState,
 } from "../game/types.ts";
-import { adventureMagicBonus, spellPowerBonus } from "../game/effects.ts";
+import {
+  adventureMagicBonus,
+  freeAdventureSpells,
+  spellPowerBonus,
+} from "../game/effects.ts";
+import {
+  addShip,
+  findShip,
+  isAfloat,
+  isNavalMap,
+  scuttleShip,
+} from "../game/naval.ts";
+import { subtractResources } from "../game/resources.ts";
+import { SHIP_PRICE } from "../../data/naval.ts";
+import {
+  callTheBoat,
+  fairWindGain,
+  scuttleError,
+  scuttleReach,
+  scuttleTargets,
+} from "./naval-spells.ts";
 import { objectTypeOf, playerListed } from "../game/site-state.ts";
 import { secondHelping, secondHelpingError } from "../game/sites.ts";
 import type { MapObject } from "../map/types.ts";
@@ -68,6 +88,8 @@ export interface AdventureTarget {
   readonly objectId?: string;
   /** Saved Hour: movement points to save. */
   readonly amount?: number;
+  /** Scuttle: the moored ship to sink (Call the Boat: `x`, `y` a berth). */
+  readonly shipId?: string;
 }
 
 function chebyshev(ax: number, ay: number, bx: number, by: number): number {
@@ -84,11 +106,23 @@ export function adventurePower(
   // Wayfinder: adventure spells scale as if Power were higher.
   const extra = adventureMagicBonus(hero).power;
   if (scroll) return clampPower(m.scrollPower + extra);
-  return clampPower(
+  const page = clampPower(
     m.pagePower[spellInfo(spellId).school] +
       extra +
       spellPowerBonus(hero, spellId),
   );
+  // The Ship in a Bottle (NAVAL 7.4): its free cast is at least this.
+  const floor = freeAdventureSpells(hero).get(spellId);
+  return floor === undefined ? page : clampPower(Math.max(page, floor));
+}
+
+/**
+ * Whether a page cast of this spell is free: an artifact grants it (the
+ * Ship in a Bottle's Call the Boat, NAVAL 7.4), so it needs no knowing,
+ * no school rank and no mana. Still once a day.
+ */
+export function isFreeAdventureCast(hero: HeroState, spellId: string): boolean {
+  return freeAdventureSpells(hero).has(spellId);
 }
 
 /** Mana an adventure page costs this hero (percentages, rounded up). */
@@ -113,7 +147,7 @@ export function adventureCastError(
   const m = heroMagic(hero);
   if (scroll) {
     if (!m.scrolls.includes(spellId)) return "no such scroll";
-  } else {
+  } else if (!isFreeAdventureCast(hero, spellId)) {
     if (!m.knownSpells.includes(spellId)) return "the hero does not know it";
     if (!canLearn(m, s.school, s.tier))
       return `needs ${s.school} rank for tier ${s.tier}`;
@@ -139,7 +173,38 @@ export function adventureCastError(
       return "no other pylon your player has marked";
   }
   if (spellId === "second-helping") return secondHelpingError(state, hero);
+  if (s.naval === true) return navalCastError(state, hero, spellId, scroll);
   return null;
+}
+
+/**
+ * The naval spells' requirements before any target (NAVAL 7.1): Call the
+ * Boat needs a shore, free water beside it and a ship in reach or the
+ * price; Scuttle an empty ship in reach; Fair Wind a hero afloat. Lily
+ * Road needs nothing.
+ */
+function navalCastError(
+  state: GameState,
+  hero: HeroState,
+  spellId: string,
+  scroll: boolean,
+): string | null {
+  const p = adventurePower(hero, spellId, scroll);
+  switch (spellId) {
+    case "call-the-boat": {
+      const plan = callTheBoat(state, hero, p);
+      return typeof plan === "string" ? plan : null;
+    }
+    case "scuttle":
+      if (!isNavalMap(state.map)) return "there is no sea on this map";
+      return scuttleTargets(state, hero, p).length > 0
+        ? null
+        : `no empty ship within ${scuttleReach(p)} cells`;
+    case "fair-wind":
+      return isAfloat(state, hero) ? null : "the hero must be afloat";
+    default:
+      return null;
+  }
 }
 
 /** The pylon whose cell the hero stands on, if any. */
@@ -343,6 +408,47 @@ const EFFECTS: Readonly<Record<string, Effect>> = {
     }
     return null;
   },
+  // Naval spells (NAVAL 7.1, bead bzc.154; rules in naval-spells.ts).
+  "call-the-boat": (next, hero, p, t, events) => {
+    const plan = callTheBoat(next, hero, p, t);
+    if (typeof plan === "string") return plan;
+    let shipId: string;
+    if (plan.kind === "move") {
+      const ship = must(findShip(next, plan.ship.id), "ship");
+      ship.x = plan.x;
+      ship.y = plan.y;
+      shipId = ship.id;
+    } else {
+      const player = must(findPlayer(next, hero.owner), "player");
+      player.resources = subtractResources(player.resources, SHIP_PRICE);
+      shipId = addShip(next, plan.x, plan.y, hero.owner).id;
+    }
+    events.push({
+      type: "ship-called",
+      heroId: hero.id,
+      shipId,
+      x: plan.x,
+      y: plan.y,
+      built: plan.kind === "build",
+    });
+    return null;
+  },
+  scuttle: (next, hero, p, t, events) => {
+    const why = scuttleError(next, hero, p, t.shipId);
+    if (why !== null) return why;
+    return scuttleShip(next, must(t.shipId, "ship"), events)
+      ? null
+      : "a hero is aboard that ship";
+  },
+  "lily-road": (next, hero) => {
+    mutableStore(next, hero.id).lilyRoadDay = next.day;
+    return null;
+  },
+  "fair-wind": (next, hero, p) => {
+    if (!isAfloat(next, hero)) return "the hero must be afloat";
+    hero.mp += fairWindGain(p);
+    return null;
+  },
 };
 
 /**
@@ -383,7 +489,7 @@ export function castAdventureSpell(
     withHeroMagic(hero, {
       scrolls: [...m.scrolls.slice(0, i), ...m.scrolls.slice(i + 1)],
     });
-  } else {
+  } else if (!isFreeAdventureCast(hero, spellId)) {
     withHeroMagic(hero, {
       mana: m.mana - adventureManaCost(hero, spellId),
     });
@@ -484,7 +590,11 @@ export function learnInTown(
   const level = guildLevelOf(town);
   if (level === 0) return [];
   const m = heroMagic(hero);
-  const learnt = learnableFromGuild(m, townGuild(state.seed, town), level);
+  const learnt = learnableFromGuild(
+    m,
+    townGuild(state.seed, town, isNavalMap(state.map)),
+    level,
+  );
   if (learnt.length > 0)
     withHeroMagic(hero, { knownSpells: [...m.knownSpells, ...learnt] });
   if (learnt.length > 0)

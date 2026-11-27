@@ -40,6 +40,7 @@ import {
   AREA_RADIUS,
   discHexes,
   isBattleSpell,
+  rowHexes,
   spellDef,
   targetSteps,
 } from "../../core/magic/index.ts";
@@ -326,6 +327,8 @@ function itemPrompt(id: string, i: number): string {
       return "Choose a stack, then the condition whose clock moves by 2.";
     case "cider-flask":
       return "Choose one of your stacks, then its Ripening.";
+    case "conch-of-the-deep":
+      return "Choose a free hex for the Hermit Crabs (sea hexes too).";
     case "the-bellhops-cap":
       return i === 0
         ? "Choose one of your stacks."
@@ -382,6 +385,8 @@ export function stepPrompt(
         : "Wind it forward or back.";
     case "remains":
       return "Choose remains of one of your stacks.";
+    case "row":
+      return "Choose a hex: the wave sweeps its whole row.";
     case "stack":
       return "Choose a stack.";
     default:
@@ -604,6 +609,8 @@ export function castPreview(
 /** Hexes an area spell would cover around `centre` (for the overlay). */
 export function spellAreaHexes(spellId: string, centre: Hex): Hex[] {
   if (isItemAct(spellId)) return [centre];
+  // Tidal Wave (NAVAL 7.2): the whole row.
+  if (spellDef(spellId).target === "row") return rowHexes(centre.row);
   const r = AREA_RADIUS[spellDef(spellId).target];
   return r === undefined ? [centre] : discHexes(centre, r);
 }

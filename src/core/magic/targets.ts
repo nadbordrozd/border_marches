@@ -7,6 +7,8 @@
 
 import {
   BATTLE_HEX_COUNT,
+  BATTLE_WIDTH,
+  blocksCreature,
   getStack,
   groundAt,
   hexDistance,
@@ -22,6 +24,7 @@ import {
 import { hasRule } from "../battle/rules.ts";
 import type {
   ActTarget,
+  BattleCreatureStats,
   BattleSide,
   BattleStack,
   BattleState,
@@ -64,7 +67,12 @@ export type TargetRule =
   /** Every remains of the caster's side (no choice). */
   | "allRemains"
   /** The friendly stack about to act (no choice). */
-  | "active";
+  | "active"
+  /**
+   * One row of hexes, chosen by any hex in it (Tidal Wave, NAVAL 7.2):
+   * every stack standing in the row.
+   */
+  | "row";
 
 export const TARGET_COUNT: Readonly<Record<TargetRule, number>> = {
   stack: 1,
@@ -85,6 +93,7 @@ export const TARGET_COUNT: Readonly<Record<TargetRule, number>> = {
   allFriendly: 0,
   allRemains: 0,
   active: 0,
+  row: 1,
 };
 
 export const AREA_RADIUS: Partial<Record<TargetRule, number>> = {
@@ -110,6 +119,7 @@ export function targetSteps(
     case "area2":
     case "area3":
     case "remains":
+    case "row":
       return ["hex"];
     case "line3":
       return ["hex", "hex", "hex"];
@@ -189,6 +199,30 @@ export function isBlockingHex(state: BattleState, h: Hex): boolean {
 
 export function isFreeHex(state: BattleState, h: Hex): boolean {
   return inBounds(h) && !isBlockingHex(state, h) && stackAt(state, h) === null;
+}
+
+/**
+ * A free hex for a summon of this creature (NAVAL 3.1, bead bzc.154): as
+ * {@link isFreeHex}, but a sea hex is free to a Swimmer (the Conch of the
+ * Deep's Hermit Crabs), as the engine's own summon reads it.
+ */
+export function isFreeHexFor(
+  state: BattleState,
+  h: Hex,
+  creature: BattleCreatureStats,
+): boolean {
+  return (
+    inBounds(h) &&
+    !blocksCreature(groundAt(state, h), creature) &&
+    stackAt(state, h) === null
+  );
+}
+
+/** Every hex of one row, west to east (Tidal Wave). */
+export function rowHexes(row: number): Hex[] {
+  const out: Hex[] = [];
+  for (let col = 0; col < BATTLE_WIDTH; col++) out.push({ col, row });
+  return out;
 }
 
 /** A hex and every hex within `r` of it, in field (row) order. */
@@ -403,6 +437,9 @@ export function targetRuleError(
       return null;
     case "active":
       return null;
+    case "row":
+      if (!isHexTarget(t0) || !inBounds(hexOf(t0))) return "choose a row";
+      return null;
   }
 }
 
@@ -540,6 +577,15 @@ export function ruleCandidates(
     case "allRemains":
     case "active":
       return [[]];
+    case "row": {
+      // One target per row holding an enemy, aimed at its middle hex.
+      const rows = [...new Set(enemies.map((s) => s.hex.row))].sort(
+        (a, b) => a - b,
+      );
+      return rows.map((row) => [
+        { hex: { col: Math.floor(BATTLE_WIDTH / 2), row } },
+      ]);
+    }
   }
 }
 
@@ -576,6 +622,8 @@ export function ruleTouches(
       return sideStacks(state, casterSide(state, actorId));
     case "active":
       return [actorId];
+    case "row":
+      return stacksOn(state, rowHexes(hexOf(t0).row));
     case "freeHex":
     case "line3":
     case "remains":

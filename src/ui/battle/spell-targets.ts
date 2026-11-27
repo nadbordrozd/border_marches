@@ -108,6 +108,8 @@ export function targetKind(rule: TargetRule): TargetKind {
       return { icon: "remains", label: "All your remains (no aiming)" };
     case "active":
       return { icon: "self", label: "The stack about to act (no aiming)" };
+    case "row":
+      return { icon: "line", label: "A whole row of hexes" };
   }
 }
 
@@ -152,6 +154,8 @@ export function noTargetReason(rule: TargetRule): string {
     case "allFriendly":
     case "active":
       return "Nothing it can affect now";
+    case "row":
+      return "No row it can be aimed at";
   }
 }
 

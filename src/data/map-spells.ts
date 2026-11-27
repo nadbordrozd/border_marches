@@ -18,6 +18,11 @@ export interface MapSpell {
   school: School;
   tier: number;
   adventure: boolean;
+  /**
+   * A naval spell (NAVAL 7.5, bead bzc.154): the map's draws hold it only
+   * on a naval map.
+   */
+  naval: boolean;
 }
 
 // prettier-ignore
@@ -84,15 +89,34 @@ const ROWS: ReadonlyArray<readonly [string, string, School, number, boolean]> = 
   ["opening-salvo", "Opening Salvo", "storm", 2, true],
 ];
 
-export const MAP_SPELLS: readonly MapSpell[] = ROWS.map(
-  ([id, name, school, tier, adventure]) => ({
+/** The naval spells (NAVAL 7.1, 7.2): drawn only on naval maps. */
+// prettier-ignore
+const NAVAL_ROWS: ReadonlyArray<readonly [string, string, School, number, boolean]> = [
+  ["tidal-wave", "Tidal Wave", "storm", 4, false],
+  ["call-the-boat", "Call the Boat", "accord", 2, true],
+  ["scuttle", "Scuttle", "hush", 2, true],
+  ["lily-road", "Lily Road", "bloom", 3, true],
+  ["fair-wind", "Fair Wind", "storm", 1, true],
+];
+
+export const MAP_SPELLS: readonly MapSpell[] = [
+  ...ROWS.map(([id, name, school, tier, adventure]) => ({
     id,
     name,
     school,
     tier,
     adventure,
-  }),
-);
+    naval: false,
+  })),
+  ...NAVAL_ROWS.map(([id, name, school, tier, adventure]) => ({
+    id,
+    name,
+    school,
+    tier,
+    adventure,
+    naval: true,
+  })),
+];
 
 const BY_ID = new Map(MAP_SPELLS.map((s) => [s.id, s]));
 
@@ -110,9 +134,23 @@ export function spellName(id: string): string {
     .join(" ");
 }
 
-/** Battle spells of a tier (shrines and scrolls teach battle spells). */
-export function battleSpellsOfTier(tier: number): MapSpell[] {
-  return MAP_SPELLS.filter((s) => !s.adventure && s.tier === tier);
+/**
+ * Battle spells of a tier (shrines and scrolls teach battle spells); the
+ * naval Tidal Wave only when `naval` (NAVAL 7.5), so a map that is not
+ * naval draws from exactly the list it drew from before it.
+ */
+export function battleSpellsOfTier(tier: number, naval = false): MapSpell[] {
+  return MAP_SPELLS.filter(
+    (s) => !s.adventure && s.tier === tier && (naval || !s.naval),
+  );
+}
+
+/**
+ * The spells of a tier a naval map's School Shrines and Scholars may also
+ * teach (NAVAL 7.5): the naval spells, battle and adventure.
+ */
+export function navalSpellsOfTier(tier: number): MapSpell[] {
+  return MAP_SPELLS.filter((s) => s.naval && s.tier === tier);
 }
 
 /** Scroll value by tier (CONTENT_MAP_OBJECTS 3.5, Loose Scroll). */

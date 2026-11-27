@@ -125,17 +125,22 @@ function heaviest(weights: SchoolWeights): School {
  * Guarantees: level 1 has a spell of the heaviest school, and a battle
  * spell of `alsoFirst` when given; level 2 has exactly one condition tool,
  * of a school weighted above 0. The pool holds
- * battle and adventure spells; faction-only pages are not in it.
+ * battle and adventure spells; faction-only pages are not in it, and the
+ * naval spells only when `naval` (NAVAL 7.5: filtered before drawing, so a
+ * map that is not naval draws exactly what it drew before them).
  */
 export function guildSpells(
   seed: number,
   weights: SchoolWeights,
   cap = MAX_GUILD_LEVEL,
   alsoFirst?: School,
+  naval = false,
 ): string[][] {
   validate(weights);
   const rng = createRng(deriveSeed(seed, "magic-guild"));
-  const pool = allSpells().filter((s) => s.pool && weights[s.school] > 0);
+  const pool = allSpells().filter(
+    (s) => s.pool && weights[s.school] > 0 && (naval || !s.naval),
+  );
   const levels: string[][] = [];
   for (let level = 1; level <= Math.min(cap, MAX_GUILD_LEVEL); level++) {
     const want = GUILD_OFFERS[level - 1] as number;
@@ -189,13 +194,23 @@ export function townGuildSeed(gameSeed: number, townId: string): number {
   return deriveSeed(gameSeed, `guild:${townId}`);
 }
 
-/** A town's guild offer for its faction (all levels up to the cap). */
+/**
+ * A town's guild offer for its faction (all levels up to the cap); on a
+ * naval map (`naval`) the naval spells are in its pool (NAVAL 7.5).
+ */
 export function townGuild(
   gameSeed: number,
   town: { readonly id: string; readonly faction: string },
+  naval = false,
 ): string[][] {
   const { weights, cap, alsoFirst } = factionMagic(town.faction);
-  return guildSpells(townGuildSeed(gameSeed, town.id), weights, cap, alsoFirst);
+  return guildSpells(
+    townGuildSeed(gameSeed, town.id),
+    weights,
+    cap,
+    alsoFirst,
+    naval,
+  );
 }
 
 /**

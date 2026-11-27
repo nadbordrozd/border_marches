@@ -2,8 +2,10 @@
  * Secondary skills (CONTENT_HEROES.md section 1, RULES_V2 3.4): three
  * ranks, six held at most.
  *
- * {@link SKILL_IDS} names all 24 catalogue skills so class weights can list
- * them; {@link SKILLS} holds the rows implemented so far. Offers only draw
+ * {@link SKILL_IDS} names all 24 catalogue skills and the naval layer's
+ * Seafaring (NAVAL 7.3, bead bzc.154: offered and drawn only on naval
+ * maps, see {@link drawableSkillIds}) so class weights can list them;
+ * {@link SKILLS} holds the rows implemented so far. Offers only draw
  * skills that have a row. To add one (bead bzc.12): add a row with its
  * three ranks' text and effects (src/data/effects.ts kinds). Each rank
  * lists its whole effect, not the difference from the rank before.
@@ -37,7 +39,9 @@ export type SkillId =
   | "stewardship"
   | "silver-tongue"
   | "packrat"
-  | "wayfinder";
+  | "wayfinder"
+  // Journey, offered only on naval maps (NAVAL 7.3, bead bzc.154)
+  | "seafaring";
 
 export const SKILL_IDS: readonly SkillId[] = [
   "greencraft",
@@ -64,6 +68,7 @@ export const SKILL_IDS: readonly SkillId[] = [
   "silver-tongue",
   "packrat",
   "wayfinder",
+  "seafaring",
 ];
 
 export type SkillFamily = "school" | "army" | "journey";
@@ -449,6 +454,35 @@ const ROWS: SkillDef[] = [
       },
     ],
   },
+  // NAVAL 7.3 (bead bzc.154). Landing (rank 1), whirlpools (rank 2), the
+  // deck gun's +15 a rank and Wet Landing (rank 3) read the rank itself
+  // (core/game/naval.ts seafaringRank); sea movement and sight afloat are
+  // effects, inert ashore and on maps that are not naval.
+  {
+    id: "seafaring",
+    name: "Seafaring",
+    family: "journey",
+    ranks: [
+      {
+        text: "10% more sea movement; landing is an ordinary step, not the end of the day.",
+        effects: [{ kind: "sea-movement-percent", percent: 10 }],
+      },
+      {
+        text: "20% more sea movement and 2 more sight afloat; landing is an ordinary step; whirlpools take nothing; your deck gun deals 15 more Harm a rank.",
+        effects: [
+          { kind: "sea-movement-percent", percent: 20 },
+          { kind: "sea-sight", amount: 2 },
+        ],
+      },
+      {
+        text: "As rank 2 with 30% more sea movement, and your army never makes a Wet Landing.",
+        effects: [
+          { kind: "sea-movement-percent", percent: 30 },
+          { kind: "sea-sight", amount: 2 },
+        ],
+      },
+    ],
+  },
 ];
 
 /**
@@ -508,4 +542,16 @@ export function schoolSkillOf(school: School): SkillDef {
   const def = ROWS.find((s) => s.school === school);
   if (def === undefined) throw new Error(`no skill for school ${school}`);
   return def;
+}
+
+/**
+ * The skills a map's seeded draws may hold (tutors, scholars, witches):
+ * every implemented skill in SKILL_IDS order, Seafaring only on a naval
+ * map (NAVAL 7.5). Off a naval map the list is the one drawn before
+ * Seafaring existed, so those draws keep their fingerprints.
+ */
+export function drawableSkillIds(naval: boolean): SkillId[] {
+  return SKILL_IDS.filter(
+    (id) => SKILLS[id] !== undefined && (naval || id !== "seafaring"),
+  );
 }

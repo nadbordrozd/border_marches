@@ -31,6 +31,7 @@ import {
   pagePower,
   scrollCaseSize,
   scrollPower,
+  seaMovementBreakdown,
   sightRadius,
   terrainProfile,
   xpPercent,
@@ -46,7 +47,10 @@ import { ARTIFACT_LIST, WORN_SLOTS } from "../../../src/data/artifacts.ts";
 import type { HeroEffect } from "../../../src/data/effects.ts";
 import { FEAT_LIST } from "../../../src/data/feats.ts";
 import { SKILLS } from "../../../src/data/skills.ts";
-import { registerSpells } from "../../../src/core/magic/index.ts";
+import {
+  isFreeAdventureCast,
+  registerSpells,
+} from "../../../src/core/magic/index.ts";
 import { field, gameOn, monster, ok } from "./helpers.ts";
 
 registerSpells();
@@ -140,6 +144,27 @@ function checkEffects(
         break;
       case "sight":
         expect(sightRadius(after)).toBe(sightRadius(before) + e.amount);
+        break;
+      // Naval effects (bead bzc.154): afloat only.
+      case "sea-sight":
+        expect(sightRadius(after, true)).toBe(
+          sightRadius(before, true) + e.amount,
+        );
+        expect(sightRadius(after)).toBe(sightRadius(before));
+        break;
+      case "sea-movement-percent":
+        expect(seaMovementBreakdown(s, after).percent).toBe(
+          seaMovementBreakdown(s, before).percent + e.percent,
+        );
+        break;
+      case "sea-movement-flat":
+        expect(seaMovementBreakdown(s, after).flat).toBe(
+          seaMovementBreakdown(s, before).flat + e.amount,
+        );
+        break;
+      case "free-adventure-spell":
+        expect(isFreeAdventureCast(after, e.spell)).toBe(true);
+        expect(isFreeAdventureCast(before, e.spell)).toBe(false);
         break;
       case "xp-percent":
         expect(xpPercent(after)).toBe(xpPercent(before) + e.percent);

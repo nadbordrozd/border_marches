@@ -25,7 +25,8 @@ import {
   type ObjectTypeId,
   type Prize,
 } from "../../../data/objectTypes.ts";
-import { SKILL_IDS, SKILLS } from "../../../data/skills.ts";
+import { SKILLS, drawableSkillIds } from "../../../data/skills.ts";
+import { navalPoolsOn } from "./naval-pools.ts";
 import type { CreatureId } from "../../../data/types.ts";
 import type { Rng } from "../../rng.ts";
 import { pickArtifact, pickSpell } from "./contents.ts";
@@ -158,7 +159,8 @@ function templePrize(rng: Rng, size: BankSize): Prize {
 function skillPools(): { school: string[]; other: string[] } {
   const school: string[] = [];
   const other: string[] = [];
-  for (const id of SKILL_IDS) {
+  // Seafaring only on a naval map (NAVAL 7.5).
+  for (const id of drawableSkillIds(navalPoolsOn())) {
     const s = SKILLS[id];
     if (s === undefined) continue;
     (s.family === "school" ? school : other).push(id);

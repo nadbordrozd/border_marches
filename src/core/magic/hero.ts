@@ -59,6 +59,8 @@ export interface HeroMagicStore {
   greenRoadDay?: number;
   /** Last non-forest cell the hero stood on (Green Road). */
   lastClear?: [number, number];
+  /** Lily Road (NAVAL 7.1, bead bzc.154): the day it is active. */
+  lilyRoadDay?: number;
   /** Saved Hour: movement to add at the next day start. */
   saved?: number;
   /** Parley: monster ids without zone of control for this hero today. */

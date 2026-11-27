@@ -432,9 +432,18 @@ export function terrainProfile(hero: HeroState): TerrainProfile {
   return profile;
 }
 
-/** Sight radius (RULES_V2 3.9): 6 plus modifiers, at most 12. */
-export function sightRadius(hero: HeroState): number {
-  const add = effectsOf(hero, "sight").reduce((n, e) => n + e.effect.amount, 0);
+/**
+ * Sight radius (RULES_V2 3.9): 6 plus modifiers, at most 12. A hero
+ * `afloat` also counts its sea-sight effects (NAVAL 2.8: Seafaring rank 2,
+ * the Brass Sextant); core/game/naval.ts heroSight passes it.
+ */
+export function sightRadius(hero: HeroState, afloat = false): number {
+  let add = effectsOf(hero, "sight").reduce((n, e) => n + e.effect.amount, 0);
+  if (afloat)
+    add += effectsOf(hero, "sea-sight").reduce(
+      (n, e) => n + e.effect.amount,
+      0,
+    );
   return clamp(HERO_SIGHT + add, 0, MAX_SIGHT);
 }
 
@@ -563,6 +572,21 @@ export function adventureMagicBonus(hero: HeroState): AdventureMagicBonus {
     out.power = Math.max(out.power, effect.power);
     out.perDay = Math.max(out.perDay, effect.perDay);
   }
+  return out;
+}
+
+/**
+ * The adventure spells the hero may cast for free (the Ship in a Bottle,
+ * NAVAL 7.4): spell id -> the least Power of the cast (the highest of its
+ * sources).
+ */
+export function freeAdventureSpells(hero: HeroState): Map<string, number> {
+  const out = new Map<string, number>();
+  for (const { effect } of effectsOf(hero, "free-adventure-spell"))
+    out.set(
+      effect.spell,
+      Math.max(out.get(effect.spell) ?? 0, effect.minPower),
+    );
   return out;
 }
 

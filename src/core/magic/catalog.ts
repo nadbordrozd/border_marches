@@ -19,7 +19,9 @@ export type AdventureTargetKind =
   /** A number of movement points. */
   | "amount"
   /** A pylon the player has visited. */
-  | "pylon";
+  | "pylon"
+  /** A moored ship within the spell's reach (Scuttle, NAVAL 7.1). */
+  | "ship";
 
 export interface AdventureSpellDef {
   readonly id: string;
@@ -36,6 +38,11 @@ export interface AdventureSpellDef {
   readonly halfPower?: boolean;
   /** v0.2 maps have no site this spell needs: it always refuses. */
   readonly deferred?: string;
+  /**
+   * A naval spell (NAVAL 7, bead bzc.154): drawn by guilds, shrines and
+   * scholars only on a naval map (7.5).
+   */
+  readonly naval?: boolean;
   text(p: number): string;
 }
 
@@ -163,6 +170,55 @@ export const ADVENTURE_SPELLS: readonly AdventureSpellDef[] = [
     text: (p) =>
       `A neutral stack within 2 cells takes Harm ${30 + 15 * p} before any battle (no XP).`,
   }),
+  // ------------------------------------------- naval (NAVAL 7.1, bzc.154)
+  A({
+    id: "call-the-boat",
+    name: "Call the Boat",
+    school: "accord",
+    tier: 2,
+    mana: 7,
+    target: "none",
+    scale: { base: 10, per: 5 },
+    naval: true,
+    text: (p) =>
+      `The hero, ashore beside the sea, calls your nearest empty ship within ${10 + 5 * p} cells to the water next to it; with none in reach a new one is built there for 1000 gold and 10 wood.`,
+  }),
+  A({
+    id: "scuttle",
+    name: "Scuttle",
+    school: "hush",
+    tier: 2,
+    mana: 7,
+    target: "ship",
+    scale: { base: 6, per: 1 },
+    naval: true,
+    text: (p) =>
+      `An empty ship (anyone's) within ${6 + p} cells of the hero sinks.`,
+  }),
+  A({
+    id: "lily-road",
+    name: "Lily Road",
+    school: "bloom",
+    tier: 3,
+    mana: 10,
+    target: "none",
+    scale: null,
+    naval: true,
+    text: () =>
+      "Until the day ends this hero may cross shallow water on lily pads at a move cost of 200, but never stop on water, nor cross it next to a sea guard.",
+  }),
+  A({
+    id: "fair-wind",
+    name: "Fair Wind",
+    school: "storm",
+    tier: 1,
+    mana: 4,
+    target: "none",
+    scale: { base: 200, per: 50 },
+    naval: true,
+    text: (p) =>
+      `The hero, afloat, gains ${Math.min(700, 200 + 50 * p)} sea movement now.`,
+  }),
 ];
 
 const ADV = new Map(ADVENTURE_SPELLS.map((s) => [s.id, s]));
@@ -188,6 +244,8 @@ export interface SpellInfo {
   readonly tool: boolean;
   /** Drawn by guilds and shrines. */
   readonly pool: boolean;
+  /** Drawn only on naval maps (NAVAL 7.5, bead bzc.154). */
+  readonly naval: boolean;
   text(p: number): string;
 }
 
@@ -203,6 +261,7 @@ const INFO = new Map<string, SpellInfo>([
       kind: "battle",
       tool: s.tool === true,
       pool: s.pool !== false,
+      naval: s.naval === true,
       text: (p) => s.text(p),
     },
   ]),
@@ -217,6 +276,7 @@ const INFO = new Map<string, SpellInfo>([
       kind: "adventure",
       tool: false,
       pool: true,
+      naval: s.naval === true,
       text: (p) => s.text(p),
     },
   ]),

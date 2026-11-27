@@ -13,3 +13,4 @@ export * from "./catalog.ts";
 export * from "./hero.ts";
 export * from "./guild.ts";
 export * from "./adventure.ts";
+export * from "./naval-spells.ts";

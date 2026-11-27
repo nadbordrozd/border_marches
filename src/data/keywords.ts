@@ -264,6 +264,13 @@ export const KEYWORDS: readonly KeywordDef[] = [
     text: "A summoned spirit (8 HP, Attack 5, Defense 3, Speed 6). When it dies it leaves mist.",
     tag: "Summoned creature",
   },
+  {
+    id: "hermit-crab",
+    term: "Hermit Crab",
+    forms: ["Hermit Crabs?"],
+    text: "A summoned crab from the Conch of the Deep (10 HP, Attack 4, Defense 8, Speed 4). A Swimmer; shots deal half damage to it.",
+    tag: "Summoned creature",
+  },
 
   // -------------------------------------------------------------- magic
   {

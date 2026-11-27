@@ -15,16 +15,19 @@
  * - The rules (src/core/game/sites.ts) grant {@link mysteryArtifactOf}.
  *
  * Pool: wearable Trinkets or Wonders, never cursed, never a Marvel piece or
- * a Marvel (the surprise is always a fair one).
+ * a Marvel (the surprise is always a fair one); the sea artifacts only on a
+ * naval map (NAVAL 7.5, bead bzc.154), so every other map's bags hold what
+ * they held before them.
  */
 import {
   ARTIFACT_LIST,
   GRADE_VALUES,
   HELD_ARTIFACTS,
   isCursed,
+  isNavalArtifact,
 } from "../../data/artifacts.ts";
 import { deriveSeed } from "../rng.ts";
-import { leftOutOfLoot } from "./gen/contents.ts";
+import { leftOutOfLoot, navalPoolsOn } from "./gen/contents.ts";
 import type { GameMap, MapObject } from "./types.ts";
 
 /** The catalogue type id (src/data/objectTypes.ts). */
@@ -40,8 +43,14 @@ export function isMystery(obj: MapObject): boolean {
   return obj.data["type"] === MYSTERY_TYPE;
 }
 
-/** The artifact ids a bag of `grade` may hold, in catalogue order. */
-export function mysteryPool(grade: MysteryGrade): readonly string[] {
+/**
+ * The artifact ids a bag of `grade` may hold, in catalogue order; the sea
+ * artifacts only when `naval` (default: the map being generated is naval).
+ */
+export function mysteryPool(
+  grade: MysteryGrade,
+  naval = navalPoolsOn(),
+): readonly string[] {
   return ARTIFACT_LIST.filter(
     (a) =>
       a.kind === "worn" &&
@@ -49,7 +58,8 @@ export function mysteryPool(grade: MysteryGrade): readonly string[] {
       a.pieceOf === undefined &&
       !isCursed(a.id) &&
       !HELD_ARTIFACTS.has(a.id) &&
-      !leftOutOfLoot(a.id),
+      !leftOutOfLoot(a.id) &&
+      (naval || !isNavalArtifact(a.id)),
   ).map((a) => a.id);
 }
 
@@ -66,9 +76,10 @@ export function mysteryArtifact(
   seed: number,
   objectId: string,
   grade: MysteryGrade = "trinket",
+  naval = navalPoolsOn(),
 ): string {
-  const pool = mysteryPool(grade);
-  const fallback = pool.length > 0 ? pool : mysteryPool("trinket");
+  const pool = mysteryPool(grade, naval);
+  const fallback = pool.length > 0 ? pool : mysteryPool("trinket", naval);
   const pick = deriveSeed(seed, "mystery-bag", objectId, grade);
   const id = fallback[pick % fallback.length];
   if (id === undefined) throw new Error("mystery bag: no artifacts");
@@ -81,12 +92,17 @@ export function mysteryArtifact(
  * `data.grade`.
  */
 export function mysteryArtifactOf(
-  map: Pick<GameMap, "seed">,
+  map: Pick<GameMap, "seed" | "naval">,
   obj: MapObject,
 ): string {
   const stored = obj.data["artifact"];
   if (typeof stored === "string" && stored !== "") return stored;
-  return mysteryArtifact(map.seed, obj.id, gradeOf(obj.data["grade"]));
+  return mysteryArtifact(
+    map.seed,
+    obj.id,
+    gradeOf(obj.data["grade"]),
+    map.naval === true,
+  );
 }
 
 /** The gold-equivalent value of a bag of `grade` (the AI and fairness read it). */
@@ -108,7 +124,7 @@ export interface MysteryItemOptions {
  * passable open land like any pickup's.
  */
 export function mysteryItem(
-  map: Pick<GameMap, "seed">,
+  map: Pick<GameMap, "seed" | "naval">,
   id: string,
   x: number,
   y: number,
@@ -127,7 +143,12 @@ export function mysteryItem(
       ...options.data,
       type: MYSTERY_TYPE,
       grade,
-      artifact: mysteryArtifact(map.seed, id, grade),
+      artifact: mysteryArtifact(
+        map.seed,
+        id,
+        grade,
+        map.naval === true || navalPoolsOn(),
+      ),
     },
   };
 }

@@ -4,14 +4,21 @@
 import { CHEST } from "../../data/economy.ts";
 import { TOWN_SIGHT } from "../../data/hero.ts";
 import { SEA_CHEST } from "../../data/sea-objects.ts";
-import { sightRadius } from "./effects.ts";
 import { gainXp } from "./hero.ts";
 import { learnInTown, noteHeroPath } from "../magic/adventure.ts";
 import { pickupInfo } from "./newGame.ts";
-import { isAfloat, shipAt, toLandPoints, toSeaPoints } from "./naval.ts";
+import {
+  heroSight,
+  isAfloat,
+  shipAt,
+  toLandPoints,
+  toSeaPoints,
+} from "./naval.ts";
 import {
   canEnter,
   cutsCorner,
+  isLilyCell,
+  lilyStepCost,
   moveContext,
   navalStepCost,
   navalStepKind,
@@ -279,6 +286,17 @@ export function moveHeroAlong(
   let pickup: MapObject | undefined;
   /** Boardings and landings on the way (naval maps). */
   const navalEvents: GameEvent[] = [];
+  /**
+   * Lily Road (NAVAL 7.1, bead bzc.154): the walk as it stood on the last
+   * cell that was not lily pads. A walk never stops on water: if it would
+   * (out of points, or a path ending there), it ends back there instead.
+   */
+  let ashore = { x: hero.x, y: hero.y, mp: hero.mp, cells: 0, spent: 0 };
+  const onPads = (): boolean =>
+    ctx.lily !== undefined &&
+    ctx.lily !== null &&
+    map.cells[hero.y * map.width + hero.x]?.terrain === "water" &&
+    !isAfloat(next, hero);
 
   for (let i = 0; i < steps.length; i++) {
     const { x, y } = must(steps[i], "step");
@@ -292,6 +310,15 @@ export function moveHeroAlong(
       return fail("bad-path", `step ${i} to (${x},${y}) is not adjacent`);
     }
     const idx = y * map.width + x;
+    const padsNow = onPads();
+    if (
+      padsNow &&
+      (ctx.monsterAt.has(idx) ||
+        ctx.pickupAt.has(idx) ||
+        ctx.enemyHeroAt.has(idx))
+    ) {
+      return fail("bad-path", `step ${i}: nothing is done from lily pads`);
+    }
     const monsterId = ctx.monsterAt.get(idx);
     if (monsterId !== undefined) {
       if (i !== steps.length - 1 || cutsCorner(ctx, hero.x, hero.y, x, y)) {
@@ -331,8 +358,8 @@ export function moveHeroAlong(
     }
     const nav = ctx.naval;
     if (nav !== undefined && nav !== null) {
-      // Naval maps (bead bzc.149): walk, sail, board or land.
-      const kind = navalStepKind(ctx, hero.x, hero.y, x, y);
+      // Naval maps (bead bzc.149): walk, sail, board, land or lily pads.
+      const kind = navalStepKind(ctx, hero.x, hero.y, x, y, false, padsNow);
       if (kind === null) {
         return fail("bad-path", `step ${i} to (${x},${y}) is blocked`);
       }
@@ -344,18 +371,24 @@ export function moveHeroAlong(
       }
       spent += paid;
     } else {
-      if (!canEnter(ctx, x, y) || cutsCorner(ctx, hero.x, hero.y, x, y)) {
+      const pads = isLilyCell(ctx, x, y);
+      if (
+        (!pads && !canEnter(ctx, x, y)) ||
+        cutsCorner(ctx, hero.x, hero.y, x, y)
+      ) {
         return fail("bad-path", `step ${i} to (${x},${y}) is blocked`);
       }
-      const cost = stepCost(
-        map,
-        ctx.nativeTerrain,
-        hero.x,
-        hero.y,
-        x,
-        y,
-        ctx.forestCost,
-      );
+      const cost = pads
+        ? lilyStepCost(ctx, hero.x, hero.y, x, y)
+        : stepCost(
+            map,
+            ctx.nativeTerrain,
+            hero.x,
+            hero.y,
+            x,
+            y,
+            ctx.forestCost,
+          );
       if (cost > hero.mp) {
         stop = "no-mp";
         break;
@@ -367,8 +400,9 @@ export function moveHeroAlong(
     hero.y = y;
     cells.push([x, y]);
     if (player !== undefined) {
-      revealDisc(map, player.explored, x, y, sightRadius(hero));
+      revealDisc(map, player.explored, x, y, heroSight(next, hero));
     }
+    if (!onPads()) ashore = { x, y, mp: hero.mp, cells: cells.length, spent };
     const guards = ctx.guards.get(idx);
     if (guards !== undefined) {
       const target =
@@ -383,6 +417,15 @@ export function moveHeroAlong(
       stop = "object";
       break;
     }
+  }
+  if (onPads()) {
+    // Never left standing on lily pads: back to the last cell ashore.
+    hero.x = ashore.x;
+    hero.y = ashore.y;
+    hero.mp = ashore.mp;
+    cells.length = ashore.cells;
+    spent = ashore.spent;
+    stop = "no-mp";
   }
 
   noteHeroPath(next, hero, [original.x, original.y], cells);
@@ -425,6 +468,7 @@ function navalStep(
   const w = state.map.width;
   switch (kind) {
     case "walk":
+    case "lily":
       if (cost > hero.mp) return null;
       hero.mp -= cost;
       return cost;

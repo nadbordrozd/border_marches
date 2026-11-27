@@ -6,6 +6,7 @@
  * src/core/map/gen/sea-contents.ts.
  */
 import type { ResourceId } from "../core/map/types.ts";
+import { NAVAL_SPELLS } from "./naval.ts";
 import type { SeaCreatureId } from "./types.ts";
 
 /** The twenty sea and coastal object types, in NAVAL.md 5's order. */
@@ -98,13 +99,7 @@ export const FLOTSAM = {
 export const KRAKENS_DEEP_VALUE = 16000;
 
 /**
- * The five naval spells (NAVAL 7) a Shrine of the Tides draws from (bead
- * 6 adds them); until then it teaches a Storm spell of tier 1-3.
+ * The five naval spells (NAVAL 7) a Shrine of the Tides draws from: the
+ * naval spell list of src/data/naval.ts (bead bzc.154).
  */
-export const NAVAL_SPELL_IDS: readonly string[] = [
-  "call-the-boat",
-  "scuttle",
-  "lily-road",
-  "fair-wind",
-  "tidal-wave",
-];
+export const NAVAL_SPELL_IDS: readonly string[] = NAVAL_SPELLS;

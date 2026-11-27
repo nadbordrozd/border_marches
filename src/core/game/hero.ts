@@ -33,7 +33,9 @@ import {
 import { WORN_SLOTS } from "../../data/artifacts.ts";
 import { getCreature, isCreatureId } from "../../data/creatures.ts";
 import { createRng, deriveSeed, type Rng } from "../rng.ts";
+import { SEAFARING_SKILL, SEAFARING_WEIGHT } from "../../data/naval.ts";
 import { vowRestrictions, xpPercent } from "./effects.ts";
+import { isNavalMap } from "./naval.ts";
 import { levelForXp } from "./progression.ts";
 import { cloneState, fail, findHero, must, success } from "./state.ts";
 import type {
@@ -217,7 +219,11 @@ export function skillWeight(
   if (def === undefined) return 0;
   if (skillBarred(vowRestrictions(hero), skill, rankAfter)) return 0;
   const cls = getHeroClass(hero.heroClass);
-  const base = cls.weights[skill] ?? 0;
+  // Seafaring (NAVAL 7.3): Might 4, Magic 3 unless the class names one;
+  // skillOffers never draws it off a naval map.
+  const base =
+    cls.weights[skill] ??
+    (skill === SEAFARING_SKILL ? SEAFARING_WEIGHT[cls.leaning] : 0);
   if (def.school === undefined) return base * 2;
   let allied = false;
   let opposed = false;
@@ -251,8 +257,16 @@ export function skillOffers(state: GameState, hero: HeroState): SkillOffer[] {
   const rng = createRng(offerSeed(state, hero, "skill"));
   const level = pendingLevel(hero);
   const offers: SkillOffer[] = [];
+  // Seafaring weighs 0 off a naval map (NAVAL 7.3, 7.5): never offered,
+  // not even as a held skill's next rank, and never a draw consumed.
+  const naval = isNavalMap(state.map);
   const upgrades = hero.skills
-    .filter((s) => s.rank < MAX_SKILL_RANK && findSkill(s.id) !== undefined)
+    .filter(
+      (s) =>
+        s.rank < MAX_SKILL_RANK &&
+        findSkill(s.id) !== undefined &&
+        (naval || s.id !== SEAFARING_SKILL),
+    )
     .map((s) => ({
       item: {
         kind: "upgrade",
@@ -280,6 +294,7 @@ export function skillOffers(state: GameState, hero: HeroState): SkillOffer[] {
   );
   if (hero.skills.length < MAX_SKILLS) {
     for (const id of SKILL_IDS) {
+      if (!naval && id === SEAFARING_SKILL) continue;
       if (hero.skills.some((s) => s.id === id)) continue;
       const weight = skillWeight(hero, id, 1);
       if (weight > 0) pool.push({ item: { kind: "new", skill: id }, weight });

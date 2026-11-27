@@ -422,6 +422,18 @@ export type GameEvent =
       x: number;
       y: number;
     }
+  /**
+   * Call the Boat (NAVAL 7.1, bead bzc.154): a moored ship of the hero's
+   * player came to (x, y) beside it, or (`built`) a new one was built there.
+   */
+  | {
+      type: "ship-called";
+      heroId: string;
+      shipId: string;
+      x: number;
+      y: number;
+      built: boolean;
+    }
   /** A ship changed hands outside boarding (a won battle, NAVAL 2.5). */
   | { type: "ship-captured"; shipId: string; owner: Owner; from: Owner }
   /** A ship left the map: sunk with a beaten hero, or scuttled. */

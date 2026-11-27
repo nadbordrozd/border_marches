@@ -14,10 +14,16 @@ import {
   HELD_ARTIFACTS,
   GRADE_VALUES,
   isCursed,
+  isNavalArtifact,
   type ArtifactDef,
 } from "../../../data/artifacts.ts";
 import { CREATURES } from "../../../data/creatures.ts";
-import { battleSpellsOfTier, SCROLL_VALUE } from "../../../data/map-spells.ts";
+import {
+  battleSpellsOfTier,
+  findMapSpell,
+  navalSpellsOfTier,
+  SCROLL_VALUE,
+} from "../../../data/map-spells.ts";
 import {
   BANK_GUARD_SHARE,
   BANK_VALUE,
@@ -31,7 +37,7 @@ import {
   type Prize,
 } from "../../../data/objectTypes.ts";
 import { RIDDLES } from "../../../data/riddles.ts";
-import { SKILL_IDS, SKILLS } from "../../../data/skills.ts";
+import { drawableSkillIds } from "../../../data/skills.ts";
 import {
   CARETAKER_OF,
   GUARD_CREATURE_IDS,
@@ -43,6 +49,7 @@ import {
 } from "../../../data/strays.ts";
 import type { CreatureId, StrayCreatureId } from "../../../data/types.ts";
 import type { Rng } from "../../rng.ts";
+import { navalPoolsOn } from "./naval-pools.ts";
 import { volcanicContents } from "./volcanic.ts";
 
 type Data = Record<string, unknown>;
@@ -92,13 +99,18 @@ export function leftOutOfLoot(id: string): boolean {
   return lootWithout.has(id);
 }
 
+export { navalPoolsOn, withNavalPools } from "./naval-pools.ts";
+
 /** Artifacts of a grade ("piece": Marvel pieces; "consumable"). */
 function artifactsOf(
   grade: "trinket" | "wonder" | "piece" | "consumable" | "cursed",
 ): ArtifactDef[] {
+  const naval = navalPoolsOn();
   return ARTIFACT_LIST.filter((a) => {
     if (a.kind === "relic" || HELD_ARTIFACTS.has(a.id)) return false;
     if (lootWithout.has(a.id)) return false;
+    // The sea artifacts only in a naval map's loot (NAVAL 7.5).
+    if (!naval && isNavalArtifact(a.id)) return false;
     if (grade === "consumable") return a.kind === "consumable";
     if (a.kind !== "worn") return false;
     if (grade === "cursed") return isCursed(a.id);
@@ -121,14 +133,47 @@ export function pickArtifact(
   return any.length > 0 ? rng.pick(any).id : undefined;
 }
 
+/**
+ * A sea bank's or Sea Chest's artifact (NAVAL 7.5): on a naval map half
+ * of its Trinket and Wonder draws come from the sea artifacts of that
+ * grade; otherwise exactly pickArtifact.
+ */
+export function pickSeaArtifact(
+  rng: Rng,
+  grade: "trinket" | "wonder" | "piece",
+): string | undefined {
+  if (navalPoolsOn() && grade !== "piece" && rng.chance(0.5)) {
+    const sea = artifactsOf(grade).filter((a) => isNavalArtifact(a.id));
+    if (sea.length > 0) return rng.pick(sea).id;
+  }
+  return pickArtifact(rng, grade);
+}
+
 function artifactValue(id: string | undefined, fallback: number): number {
   const a = ARTIFACT_LIST.find((x) => x.id === id);
   return a?.value ?? fallback;
 }
 
-/** A spell of the tier (battle spells), or undefined. */
+/** A spell of the tier (battle spells, Tidal Wave on a naval map), or undefined. */
 export function pickSpell(rng: Rng, tier: number): string | undefined {
-  const list = battleSpellsOfTier(Math.max(1, Math.min(5, tier)));
+  const list = battleSpellsOfTier(
+    Math.max(1, Math.min(5, tier)),
+    navalPoolsOn(),
+  );
+  return list.length > 0 ? rng.pick(list).id : undefined;
+}
+
+/**
+ * A School Shrine's or Scholar's spell of the tier: pickSpell, and on a
+ * naval map the naval spells of the tier too (NAVAL 7.5).
+ */
+function pickTeachSpell(rng: Rng, tier: number): string | undefined {
+  if (!navalPoolsOn()) return pickSpell(rng, tier);
+  const t = Math.max(1, Math.min(5, tier));
+  const list = [
+    ...battleSpellsOfTier(t, true),
+    ...navalSpellsOfTier(t).filter((s) => s.adventure),
+  ];
   return list.length > 0 ? rng.pick(list).id : undefined;
 }
 
@@ -398,14 +443,15 @@ export function rollContents(
         stats: rng.chance(0.5) ? ["attack", "defense"] : ["power", "lore"],
       };
     case "tutors-hut": {
-      const skills = SKILL_IDS.filter((id) => SKILLS[id] !== undefined);
+      const skills = drawableSkillIds(navalPoolsOn());
       return skills.length > 0 ? { skill: rng.pick(skills) } : {};
     }
     case "school-shrine": {
       const t =
         tier <= 0 ? 1 : tier === 1 ? rng.pick([1, 2]) : rng.pick([2, 3]);
-      const spell = pickSpell(rng, t);
-      const school = battleSpellsOfTier(t).find((s) => s.id === spell)?.school;
+      const spell = pickTeachSpell(rng, t);
+      const school =
+        spell === undefined ? undefined : findMapSpell(spell)?.school;
       return { tier: t, spell, school, value: [0, 800, 1500, 2500][t] };
     }
     case "school-temple":
@@ -415,10 +461,10 @@ export function rollContents(
       if (k === "stat")
         return { gift: { stat: { stat: rng.pick(STATS), amount: 1 } } };
       if (k === "skill") {
-        const skills = SKILL_IDS.filter((id) => SKILLS[id] !== undefined);
+        const skills = drawableSkillIds(navalPoolsOn());
         return { gift: { skill: rng.pick(skills) } };
       }
-      return { gift: { spell: pickSpell(rng, rng.int(1, 3)) } };
+      return { gift: { spell: pickTeachSpell(rng, rng.int(1, 3)) } };
     }
     case "overgrown-greenhouse":
     case "sealed-registry":

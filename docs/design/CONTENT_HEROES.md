@@ -54,6 +54,9 @@ school skills.
 | **Packrat**       | Scrolls and artifacts   | Scroll case 12; your scrolls are cast at +1 Power.                                                                                                                     | Also: backpack 16, and sites buy your artifacts and scrolls at three quarters of value. | Also: the first scroll you cast each battle does not use the round's cast. | 3     | 6     |
 | **Wayfinder**     | Adventure spells        | Adventure spells cost 10% less mana and scale as if Power were 1 higher.                                                                                               | 20% and 2 higher.                                                                       | 30% and 3 higher, and each may be cast twice a day.                        | 2     | 6     |
 
+The tenth Journey skill, **Seafaring** (Might 4, Magic 3), is offered only
+on naval maps: [NAVAL.md](NAVAL.md) 7.3 (bead bzc.154).
+
 Notes: Vanguard's rearranging is a visible step before the battle-start
 rules of RULES_V2 4.6. Silver Tongue's threshold reads fight values, never
 chance. Packrat rank 3 is the one rule besides a Marvel that gives a second

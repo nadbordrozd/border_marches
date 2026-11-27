@@ -470,10 +470,15 @@ registerAct({
   },
 });
 
-/** Item act ids registered here (every artifact `itemActs` entry). */
+/**
+ * Every artifact `itemActs` entry: registered here, except the Conch of
+ * the Deep (NAVAL 7.4), which summons the magic's Hermit Crab and so is
+ * registered by core/magic (registerSpells).
+ */
 export const ITEM_ACT_IDS: readonly string[] = [
   "a-pinch-of-sand",
   "the-bellhops-cap",
   "tinderbox",
   "cider-flask",
+  "conch-of-the-deep",
 ];
