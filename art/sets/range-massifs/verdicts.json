@@ -258,5 +258,105 @@
     "verdict": "REJECTED",
     "notes": "busy hanging vines and loose rocks at the foot: reads as rubble",
     "at": "2026-11-27T09:33:56.200Z"
+  },
+  "frosting-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a strawberry cake on a plate: two berries on an icing layer with a white line under the foot",
+    "at": "2026-11-27T10:30:23.315Z"
+  },
+  "frosting-a#1": {
+    "verdict": "REJECTED",
+    "notes": "boxy rock-candy cubes in a row with stray thin lines down both sides; reads as blocks, not one mountain",
+    "at": "2026-11-27T10:30:23.707Z"
+  },
+  "frosting-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a big gumdrop mountain under a dripping icing crown; its wide pale pink skirt is the frosting's own colour and melts into the icing plain",
+    "at": "2026-11-27T10:30:24.156Z"
+  },
+  "frosting-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "three gumdrop summits joined by poured icing over a frosting-pink foot that vanishes into the plain",
+    "at": "2026-11-27T10:30:24.648Z"
+  },
+  "swamp-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "two mossy peat summits on long mud-coloured slopes that spread out and sink into the swamp ground",
+    "at": "2026-11-27T10:30:30.422Z"
+  },
+  "swamp-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "a craggy peat massif with mossy ledges and hanging moss over a mud foot; distinct from the rounded ones",
+    "at": "2026-11-27T10:30:30.541Z"
+  },
+  "swamp-a#2": {
+    "verdict": "REJECTED",
+    "notes": "one moss-capped dome over a dark stump base: reads as a giant mossy stump or mushroom, not a massif",
+    "at": "2026-11-27T10:30:30.776Z"
+  },
+  "swamp-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "three mossy rock summits with deep gullies running down into mud-coloured slopes",
+    "at": "2026-11-27T10:30:30.928Z"
+  },
+  "volcanic-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three sharp basalt summits on long dark cinder slopes that melt into the volcanic plain (the wasteland massifs stood on a pale ash rim)",
+    "at": "2026-11-27T10:30:31.129Z"
+  },
+  "volcanic-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "a broken volcanic cone seen from the front, its rim only a low ellipse, one ember crack, dark cinder foot (a front-view cone, not a crater seen from above)",
+    "at": "2026-11-27T10:30:31.273Z"
+  },
+  "volcanic-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a jagged multi-summit basalt ridge with glowing ember cracks over a cinder foot: the clearest volcanic form",
+    "at": "2026-11-27T10:30:31.456Z"
+  },
+  "volcanic-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "twin broken summits on a broad cone with fluted cinder slopes; the dark foot sits in the ground",
+    "at": "2026-11-27T10:30:31.588Z"
+  },
+  "frosting-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "twin gumdrop summits under one dripping icing cap on a wide frosting skirt that melts into the plain",
+    "at": "2026-11-27T10:32:26.378Z"
+  },
+  "frosting-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "a big gumdrop mountain with a lower iced shoulder; the pale pink foot vanishes into the frosting",
+    "at": "2026-11-27T10:32:26.435Z"
+  },
+  "frosting-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "three iced gumdrop summits joined on one frosting skirt, a candy range in one form",
+    "at": "2026-11-27T10:32:26.490Z"
+  },
+  "frosting-b#3": {
+    "verdict": "REJECTED",
+    "notes": "two loose gumdrop lumps beside the dome read as separate candies, not one massif",
+    "at": "2026-11-27T10:32:26.547Z"
+  },
+  "swamp-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a long low mossy ridge with two rounded summits; mud-coloured slopes spread out into the swamp",
+    "at": "2026-11-27T10:32:26.602Z"
+  },
+  "swamp-b#1": {
+    "verdict": "REJECTED",
+    "notes": "stacked square peat boulders read as built blocks, not a mountain face",
+    "at": "2026-11-27T10:32:26.659Z"
+  },
+  "swamp-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "three mossy knobs over fluted peat slopes running down into mud",
+    "at": "2026-11-27T10:32:26.719Z"
+  },
+  "swamp-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "craggy peat summits over long mossy slopes tapering to points; the boldest swamp silhouette",
+    "at": "2026-11-27T10:32:26.776Z"
   }
 }

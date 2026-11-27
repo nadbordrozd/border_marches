@@ -136,10 +136,13 @@ describe("volcanic ground in the terrain plan (bead bzc.83)", () => {
     expect(layout.ranks[border!]?.at(-1)).toBe(rank);
   });
 
-  it("grows the wasteland's trees and peaks on volcanic ground", () => {
+  it("grows the wasteland's trees and the volcanic peaks on volcanic ground", () => {
     const plan = planTerrain(map);
-    // GROUNDS index of the wasteland in canopy.ts and peaks.ts.
+    // GROUNDS index of the wasteland in canopy.ts; since bead bzc.140 the
+    // volcanic ranges are a peak family of their own (index 9 in peaks.ts),
+    // with their own massifs and the wasteland's smaller tiers.
     const wasteland = 4;
+    const volcanicPeaks = 9;
     let woods = 0;
     let rock = 0;
     for (const i of volcanic) {
@@ -150,7 +153,7 @@ describe("volcanic ground in the terrain plan (bead bzc.83)", () => {
       }
       if (cell.obstacle === "mountain" && plan.peakField.rock[i] === 1) {
         rock += 1;
-        expect(plan.peakField.family[i]).toBe(wasteland);
+        expect(plan.peakField.family[i]).toBe(volcanicPeaks);
       }
     }
     expect(woods + rock).toBeGreaterThan(0);

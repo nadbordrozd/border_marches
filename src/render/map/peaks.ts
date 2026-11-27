@@ -29,8 +29,9 @@
  * again into the cached crown bands drawn in the foreground, so it covers only
  * the feet of a unit standing behind the range.
  */
-import { CELL_PX, GROUND_FAMILY } from "../../assets/manifest";
+import { CELL_PX } from "../../assets/manifest";
 import type { GroundTerrain } from "../../assets/manifest";
+import { PEAK_FAMILY } from "../../assets/peaks";
 import type { GameMap } from "../../core/map/types";
 import type { CanopyTree } from "./canopy";
 import { hash4 } from "./hash";
@@ -150,6 +151,8 @@ const GROUNDS: readonly GroundTerrain[] = [
   "sand",
   "frosting",
   "swamp",
+  // Volcanic ranges have massifs of their own (bead bzc.140, PEAK_FAMILY).
+  "volcanic",
 ];
 
 const NEIGHBOURS = [
@@ -182,7 +185,7 @@ export function buildPeakField(
     if (cell.terrain === "water") return;
     if (cell.obstacle === "mountain" && !featured.has(i)) {
       rock[i] = 1;
-      family[i] = GROUNDS.indexOf(GROUND_FAMILY[cell.terrain]);
+      family[i] = GROUNDS.indexOf(PEAK_FAMILY[cell.terrain]);
     } else if (cell.obstacle === "forest") wood[i] = 1;
     else if (cell.obstacle === "none" && !cell.road && !featured.has(i))
       open[i] = 1;

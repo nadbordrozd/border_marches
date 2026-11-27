@@ -30,7 +30,7 @@ export const PEAK_DARKEN: Readonly<Record<GroundTerrain, number>> = {
   wasteland: 0.06,
   volcanic: 0.06,
   snow: 0.06,
-  sand: 0.14,
+  sand: 0.08,
   frosting: 0.12,
   swamp: 0.08,
 };
@@ -71,23 +71,45 @@ export const MASSIF_TONE = {
   lineSoften: 0.4,
 } as const;
 
+/** How far a family's older tiers are toned toward their ground. */
+export interface GroundLift {
+  /** Brightening of the green (vegetation) pixels. */
+  readonly gain: number;
+  /** Share of the way a green pixel moves to the ground's hue. */
+  readonly share: number;
+  /** The ground's measured colour (its texture's mean). */
+  readonly hue: readonly [number, number, number];
+  /** The same for every other (rock) pixel; none when absent. */
+  readonly rest?: { readonly gain: number; readonly share: number };
+}
+
 /**
- * The grass family's older tiers were drawn in a deep forest green, darker
- * than the meadow; beside the massifs, whose slopes are the meadow's own
- * green, they read as dark patches. Their green pixels are brightened and
- * pulled toward the meadow's hue, keeping each pixel's shading.
+ * The older tiers (foothill, peak, summit) were drawn before the massifs
+ * and in their own colours; beside the massifs, whose lower slopes are the
+ * ground's own colour, they read as patches. Their pixels are brightened
+ * and pulled toward the ground's hue, keeping each pixel's shading.
+ *
+ * - Grass (bead xaj.32): the deep forest green of the grass, toward the
+ *   meadow.
+ * - Jungle (bead bzc.140): the dark moss toward the jungle floor's green,
+ *   and the pale limestone a little, so the towers stop reading as grey
+ *   rubble on green.
+ * - Sand (bead bzc.140): the dull tan sandstone toward the dunes' gold.
  */
-export const GREEN_LIFT: Partial<
-  Record<
-    GroundTerrain,
-    {
-      readonly gain: number;
-      readonly share: number;
-      readonly hue: readonly [number, number, number];
-    }
-  >
-> = {
+export const GROUND_LIFT: Partial<Record<GroundTerrain, GroundLift>> = {
   grass: { gain: 1.32, share: 0.45, hue: [139, 185, 94] },
+  jungle: {
+    gain: 1.3,
+    share: 0.55,
+    hue: [101, 162, 90],
+    rest: { gain: 1.02, share: 0.32 },
+  },
+  sand: {
+    gain: 1,
+    share: 0,
+    hue: [228, 185, 98],
+    rest: { gain: 1.1, share: 0.55 },
+  },
 };
 
 /** A toned copy of a peak image of `terrain`'s family. */
@@ -125,7 +147,7 @@ export function toneRgba(
   ) as [number, number, number];
   const desaturate = massif ? MASSIF_TONE.desaturate : PEAK_TONE.desaturate;
   const darken = massif ? 0 : PEAK_DARKEN[terrain];
-  const lift = massif ? undefined : GREEN_LIFT[terrain];
+  const lift = massif ? undefined : GROUND_LIFT[terrain];
   const hueGrey =
     lift === undefined
       ? 1
@@ -136,20 +158,25 @@ export function toneRgba(
     let g = px[o + 1] ?? 0;
     let b = px[o + 2] ?? 0;
     let grey = 0.3 * r + 0.59 * g + 0.11 * b;
+    const step =
+      lift === undefined || grey < PEAK_TONE.outlineGrey
+        ? undefined
+        : g > r + 8 && g > b + 8
+          ? lift
+          : lift.rest;
     if (
       lift !== undefined &&
-      grey >= PEAK_TONE.outlineGrey &&
-      g > r + 8 &&
-      g > b + 8
+      step !== undefined &&
+      step.share + step.gain > 1
     ) {
-      const lit = Math.min(255, grey * lift.gain);
+      const lit = Math.min(255, grey * step.gain);
       const k = lit / hueGrey;
-      r = Math.min(255, r * lift.gain);
-      g = Math.min(255, g * lift.gain);
-      b = Math.min(255, b * lift.gain);
-      r += (lift.hue[0] * k - r) * lift.share;
-      g += (lift.hue[1] * k - g) * lift.share;
-      b += (lift.hue[2] * k - b) * lift.share;
+      r = Math.min(255, r * step.gain);
+      g = Math.min(255, g * step.gain);
+      b = Math.min(255, b * step.gain);
+      r += (lift.hue[0] * k - r) * step.share;
+      g += (lift.hue[1] * k - g) * step.share;
+      b += (lift.hue[2] * k - b) * step.share;
       grey = 0.3 * r + 0.59 * g + 0.11 * b;
     }
     if (grey < PEAK_TONE.outlineGrey) {
@@ -187,14 +214,19 @@ function openFoot(px: Uint8ClampedArray, w: number, h: number): void {
       for (let x = 0; x < w; x += 1) {
         const o = (y * w + x) * 4;
         if (alpha(x, y) === 0 || grey(o) >= PEAK_TONE.outlineGrey) continue;
+        // The top edge counts too (bead bzc.140): a wide, low skirt (the
+        // candy massifs' icing) has a nearly level upper edge in the foot
+        // band, whose line would otherwise draw a rim on the ground.
         const outside =
           alpha(x - 1, y) === 0 ||
           alpha(x + 1, y) === 0 ||
           alpha(x, y + 1) === 0 ||
+          alpha(x, y - 1) === 0 ||
           y === h - 1 ||
           edge[y * w + x - 1] === 1 ||
           edge[y * w + x + 1] === 1 ||
-          (y + 1 < h && edge[(y + 1) * w + x] === 1);
+          (y + 1 < h && edge[(y + 1) * w + x] === 1) ||
+          (y > top && edge[(y - 1) * w + x] === 1);
         if (!outside) continue;
         for (const [dx, dy] of [
           [0, -1],
@@ -203,6 +235,10 @@ function openFoot(px: Uint8ClampedArray, w: number, h: number): void {
           [-1, 0],
           [1, 0],
           [0, -2],
+          [0, 1],
+          [-1, 1],
+          [1, 1],
+          [0, 2],
         ] as const) {
           const sx = x + dx;
           const sy = y + dy;

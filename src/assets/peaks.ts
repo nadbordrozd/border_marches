@@ -10,17 +10,36 @@ import type { ArtGround } from "./ground-family";
 import type { GroundTerrain, ImageAsset } from "./manifest";
 import type { PeakTier } from "../render/map/peaks";
 
+/**
+ * The mountain family of a ground: its art family (ground-family.ts), except
+ * that the volcanic ground has massifs of its own (bead bzc.140), whose
+ * lower slopes are its dark cinder; the wasteland's massifs stood on a pale
+ * ash foot that read as a grey rim on the dark volcanic plain. The tiers a
+ * family has none of come from the family it borrows ({@link PEAK_BORROW}).
+ */
+export type PeakFamily = ArtGround | "volcanic";
+
+export const PEAK_FAMILY: Readonly<Record<GroundTerrain, PeakFamily>> = {
+  ...GROUND_FAMILY,
+  volcanic: "volcanic",
+};
+
+/** The family whose sprites fill the tiers a family has none of. */
+export const PEAK_BORROW: Readonly<Partial<Record<PeakFamily, ArtGround>>> = {
+  volcanic: "wasteland",
+};
+
 export interface PeakAsset extends ImageAsset {
   readonly category: "peak";
-  /** The art family whose mountains use it (ground-family.ts). */
-  readonly terrain: ArtGround;
+  /** The mountain family that uses it ({@link PEAK_FAMILY}). */
+  readonly terrain: PeakFamily;
   readonly tier: PeakTier;
   readonly index: number;
 }
 
 /** [terrain, tier, index, w, h] of every peak (file <tier>-<index>.png). */
 const PEAK_ROWS: readonly (readonly [
-  ArtGround,
+  PeakFamily,
   PeakTier,
   number,
   number,
@@ -355,6 +374,24 @@ const PEAK_ROWS: readonly (readonly [
   ["jungle", "massif", 1, 139, 84],
   ["jungle", "massif", 2, 140, 80],
   ["jungle", "massif", 3, 156, 89],
+  // Bead bzc.140: the families that had none. Gumdrop massifs whose icing
+  // skirt is the frosting's pink, mossy peat massifs on mud-coloured slopes,
+  // and volcanic basalt massifs on dark cinder (PEAK_FAMILY).
+  ["frosting", "massif", 1, 140, 87],
+  ["frosting", "massif", 2, 140, 83],
+  ["frosting", "massif", 3, 143, 74],
+  ["frosting", "massif", 4, 131, 64],
+  ["frosting", "massif", 5, 146, 60],
+  ["swamp", "massif", 1, 137, 58],
+  ["swamp", "massif", 2, 137, 74],
+  ["swamp", "massif", 3, 137, 70],
+  ["swamp", "massif", 4, 143, 56],
+  ["swamp", "massif", 5, 139, 62],
+  ["swamp", "massif", 6, 143, 57],
+  ["volcanic", "massif", 1, 151, 73],
+  ["volcanic", "massif", 2, 148, 72],
+  ["volcanic", "massif", 3, 148, 83],
+  ["volcanic", "massif", 4, 148, 79],
   // Swamp (bead bzc.126, set swamp-peaks): mossy peat hummocks and crags
   // under thick olive moss, some with roots down their faces.
   ["swamp", "foothill", 1, 40, 25],
@@ -412,8 +449,17 @@ export const PEAK_ASSETS: readonly PeakAsset[] = PEAK_ROWS.map(
   }),
 );
 
-/** The peaks of one ground. */
+/** The peaks of one ground: its family's, then the borrowed tiers. */
 export function peaksOf(terrain: GroundTerrain): readonly PeakAsset[] {
-  const family = GROUND_FAMILY[terrain];
-  return PEAK_ASSETS.filter((peak) => peak.terrain === family);
+  const family = PEAK_FAMILY[terrain];
+  const own = PEAK_ASSETS.filter((peak) => peak.terrain === family);
+  const lender = PEAK_BORROW[family];
+  if (lender === undefined) return own;
+  const tiers = new Set(own.map((peak) => peak.tier));
+  return [
+    ...own,
+    ...PEAK_ASSETS.filter(
+      (peak) => peak.terrain === lender && !tiers.has(peak.tier),
+    ),
+  ];
 }

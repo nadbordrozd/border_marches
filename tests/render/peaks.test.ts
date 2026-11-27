@@ -7,13 +7,14 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { inflateSync } from "node:zlib";
 import { describe, expect, it } from "vitest";
-import {
-  CELL_PX,
-  GROUND_FAMILY,
-  GROUND_TERRAINS,
-} from "../../src/assets/manifest.ts";
+import { CELL_PX, GROUND_TERRAINS } from "../../src/assets/manifest.ts";
 import type { GroundTerrain } from "../../src/assets/manifest.ts";
-import { PEAK_ASSETS, peaksOf } from "../../src/assets/peaks.ts";
+import {
+  PEAK_ASSETS,
+  PEAK_BORROW,
+  PEAK_FAMILY,
+  peaksOf,
+} from "../../src/assets/peaks.ts";
 import { createMap } from "../../src/core/map/types.ts";
 import type { GameMap, MapObject } from "../../src/core/map/types.ts";
 import { generateMap } from "../../src/core/map/generate.ts";
@@ -150,9 +151,13 @@ describe("massifs (bead xaj.32)", () => {
     "wasteland",
     "snow",
     "sand",
+    // Bead bzc.140: the candy, swamp and volcanic ranges.
+    "frosting",
+    "swamp",
+    "volcanic",
   ] as const;
 
-  it("gives the main families their big forms", () => {
+  it("gives every family its big forms", () => {
     for (const terrain of FAMILIES)
       expect(
         peaksOf(terrain).filter((p) => p.tier === "massif").length,
@@ -208,6 +213,42 @@ describe("massifs (bead xaj.32)", () => {
     expect(grey(massif, 1, 0)).toBeLessThan(100);
   });
 
+  it("opens the level top edge of a low skirt in the foot band (bead bzc.140)", () => {
+    // 4 x 6: transparent above, a dark line along the skirt's top (row 3),
+    // pale icing below it.
+    const px = new Uint8ClampedArray(4 * 6 * 4);
+    for (let x = 0; x < 4; x += 1) {
+      px.set([20, 10, 20, 255], (3 * 4 + x) * 4);
+      for (const y of [4, 5]) px.set([250, 214, 222, 255], (y * 4 + x) * 4);
+    }
+    toneRgba(px, 4, 6, "frosting", "massif");
+    for (let x = 0; x < 4; x += 1) {
+      const o = (3 * 4 + x) * 4;
+      expect(
+        0.3 * px[o]! + 0.59 * px[o + 1]! + 0.11 * px[o + 2]!,
+      ).toBeGreaterThan(180);
+    }
+  });
+
+  it("gives volcanic ranges their own massifs and the wasteland's small tiers", () => {
+    const peaks = peaksOf("volcanic");
+    expect(
+      peaks
+        .filter((p) => p.tier === "massif")
+        .every((p) => p.terrain === "volcanic"),
+    ).toBe(true);
+    for (const tier of ["foothill", "peak", "summit"] as const)
+      expect(
+        peaks.filter((p) => p.tier === tier && p.terrain === "wasteland")
+          .length,
+        tier,
+      ).toBeGreaterThan(0);
+    // The wasteland keeps its own massifs.
+    expect(peaksOf("wasteland").every((p) => p.terrain === "wasteland")).toBe(
+      true,
+    );
+  });
+
   it("builds a range from fewer sprites, the massifs first", () => {
     const peaks = place(rangeMap(RANGE, "grass"));
     const area = (key: string): number =>
@@ -232,12 +273,20 @@ describe("peak placement", () => {
     for (const terrain of GROUND_TERRAINS) {
       const peaks = place(rangeMap(RANGE, terrain));
       expect(peaks.length).toBeGreaterThan(0);
-      // Volcanic ground borrows the wasteland's basalt (bead bzc.83);
-      // the desert sand has its own sandstone (bead bzc.88), the frosting
-      // its gumdrop hills (bead bzc.115).
-      const family = GROUND_FAMILY[terrain];
+      // Volcanic ground borrows the wasteland's basalt (bead bzc.83) for
+      // all but its own massifs (bead bzc.140); the desert sand has its own
+      // sandstone (bead bzc.88), the frosting its gumdrop hills (bead
+      // bzc.115).
+      const family = PEAK_FAMILY[terrain];
+      const lender = PEAK_BORROW[family];
       for (const peak of peaks)
-        expect(peak.key.startsWith(`peak-${family}-`), peak.key).toBe(true);
+        expect(
+          peak.key.startsWith(`peak-${family}-`) ||
+            (lender !== undefined &&
+              peak.key.startsWith(`peak-${lender}-`) &&
+              !peak.key.includes("-massif-")),
+          peak.key,
+        ).toBe(true);
     }
   });
 

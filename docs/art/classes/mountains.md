@@ -30,6 +30,14 @@ massifs leave, mostly along the edges and in narrow runs. The grass family's
 older tiers are toned toward the meadow's green so they sit with the massifs,
 and the underlay between sprites is the ground itself in shade.
 
+**Every family (bead `border_marches-bzc.140`, 2026-11-27).** The candy,
+swamp and volcanic ranges got massifs of their own the same way: gumdrop
+summits whose icing skirt is the frosting's own pale pink, mossy peat
+summits on mud-coloured slopes, and basalt summits on the volcanic plain's
+dark cinder (the wasteland massifs they borrowed stood on a pale ash rim).
+The jungle's and the desert's older tiers are toned toward their ground as
+the grass family's are.
+
 ## Inventory
 
 Studio set `art/sets/peaks`, derived files in
@@ -43,9 +51,9 @@ Studio set `art/sets/peaks`, derived files in
 | Steppe | dry crags | jagged tan and brown rock peaks |
 | Badlands | buttes | red-orange flat-topped strata, mesas and hoodoos |
 | Wasteland | basalt | dark jagged spires with thin ember cracks |
+| Volcanic (bzc.140) | basalt | the wasteland's foothills, peaks and summits, and massifs of its own (`PEAK_FAMILY`, `PEAK_BORROW` in `src/assets/peaks.ts`) |
 | Snow (bzc.87) | alpine | blue-grey rock under snow caps and snowfields; set `winter-peaks` (10 foothills, 12 peaks, 7 summits; 6 calls) |
 | Frosting (bzc.115) | candy | strawberry gumdrop hills and rock-candy crags under poured royal icing (the snow caps' candy answer); set `candy-peaks` (24 foothills, 16 peaks, 7 summits; 5 calls) |
-
 | Swamp (bzc.126) | mossy peat | dark peat rock under thick olive moss, mossy hummocks and crags with roots; set `swamp-peaks` (see its verdicts) |
 
 Each family has three tiers: `foothill` (from 56 x 44 requests), `peak` (from
@@ -54,9 +62,10 @@ PixelLab calls. Every take has a verdict in `art/sets/peaks/verdicts.json`.
 
 The fourth tier, `massif` (bead xaj.32), is the studio set
 `art/sets/range-massifs` (layer `class-massif`), files
-`public/assets/terrain/peaks/<terrain>/massif-<n>.png`: 35 accepted of 52
-takes in 13 calls (US$1.51), generated at 160 x 112 or 168 x 104 (four
-candidates a call) and cropped to about 136-161 x 45-89.
+`public/assets/terrain/peaks/<terrain>/massif-<n>.png`: 50 accepted of 72
+takes in 18 calls (US$2.08; bead bzc.140 added 15 of 20 takes in 5 calls,
+US$0.58), generated at 160 x 112 or 168 x 104 (four candidates a call) and
+cropped to about 131-161 x 45-89.
 
 | Family | Massifs | Shape |
 | --- | ---: | --- |
@@ -65,14 +74,17 @@ candidates a call) and cropped to about 136-161 x 45-89.
 | Badlands | 6 | flat-topped buttes and mesas on one strata ridge over a red scree skirt |
 | Snow | 5 | snow-capped twin and triple summits over a snowfield foot |
 | Sand | 7 | sandstone mesas, spires and wind-carved knobs over drifted sand |
-| Wasteland (and volcanic) | 4 | jagged basalt ridges with ember cracks over an ash foot |
+| Wasteland | 4 | jagged basalt ridges with ember cracks over an ash foot |
 | Jungle | 3 | limestone towers under moss on a jungle-green foot |
-| Frosting | 0 | none yet: candy ranges keep the three older tiers (follow-up) |
-| Swamp | 0 | none yet: swamp ranges keep their three tiers of mossy peat hummocks and crags (bead bzc.126; follow-up) |
+| Frosting (bzc.140) | 5 | one, two or three strawberry gumdrop summits under dripping icing on a wide pale pink frosting skirt that vanishes into the plain |
+| Swamp (bzc.140) | 6 | rounded and craggy peat summits under olive moss over long mud-coloured slopes |
+| Volcanic (bzc.140) | 4 | sharp basalt ridges, one broken cone, ember cracks, over dark cinder slopes |
 
 Rejected on sight for massifs, besides the list below: a flat cut bottom or a
 rectangular snow or sand plate under the form (with a white line under it),
-a heap of separate lumps or blocks, pyramids, and bare rock lower slopes that
+a heap of separate lumps or blocks (also stacked square boulders and loose
+gumdrops beside the form), a cake on a plate, a lone dome on a stump base
+(reads as a mushroom), pyramids, and bare rock lower slopes that
 sit on the ground as a block.
 
 ## Geometry
@@ -104,16 +116,23 @@ sit on the ground as a block.
 
 - Peaks are calmer than units and pickups: the map draws a toned copy
   (`peak-paint.ts`: 18% toward grey, 6% toward the family's line colour, 26%
-  for the pale jungle limestone, which otherwise reads as speckled rubble).
+  for the pale jungle limestone, which otherwise reads as speckled rubble,
+  8% for the desert sandstone).
 - The black outline becomes a dark tone of the family's rock, so the lines
   between overlapping peaks sit back and a range reads as one mass.
 - Massifs keep more of their colour (8% toward grey, no darkening), their
   line is 40% of the way from the family's line colour to its slope shadow,
   and the outline along the lower 45% of their silhouette takes the colour of
-  the slope beside it, so the foot melts into the ground.
-- The grass family's foothills, peaks and summits (drawn in a deep forest
-  green) have their green pixels brightened 32% and pulled 45% toward the
-  meadow's hue (`GREEN_LIFT`), so they sit with the meadow-green massifs.
+  the slope beside it, so the foot melts into the ground. That includes the
+  top edge of a wide, low skirt in that band (bead bzc.140: the candy
+  massifs' icing skirt otherwise drew a dark rim on the pale frosting).
+- The older tiers are toned toward their ground (`GROUND_LIFT`), so they sit
+  with the massifs: the grass family's deep forest green has its green
+  pixels brightened 32% and pulled 45% toward the meadow's hue; the jungle's
+  moss is brightened 30% and pulled 55% toward the jungle floor's green and
+  its limestone pulled 32% toward it (bead bzc.140); the desert's tan
+  sandstone is brightened 10% and pulled 55% toward the dunes' gold (bead
+  bzc.140).
 - Spacing is per family (`PEAK_SPACING`): the spiky basalt gets the most air.
   Inside a range a foothill only fills a real hole.
 - No two copies of a sprite stand within 64 px, and a sprite prefers no copy
@@ -162,11 +181,25 @@ own colour for the lower slopes, for example "Its slopes are the meadow grass
 of the plain around it: grass #8bb95e, lit #a6cf6e on the left faces, shadow
 #5e8f45 and deep gullies #44703c on the right faces" (ground means measured
 from the textures: grass #8bb95e, steppe #ccb86f, badlands #b36a45, snow
-#d5e2f5, sand #e4b962, wasteland #79726b, jungle #65a25a). Adding "tapering
+#d5e2f5, sand #e4b962, wasteland #79726b, jungle #65a25a; bead bzc.140:
+frosting #fad5dd, swamp #4f502d, volcanic #42373f). Adding "tapering
 out (to points) at both sides" and negatives "flat cut bottom, straight
 bottom edge, line under it" fixed the boxy plates of the first steppe and
 snow takes; the sandstone ones kept coming back with a cut base until the
 subject said "rising out of sand dunes".
+
+Bead bzc.140, the same layers: frosting "two round strawberry gumdrop
+summits on a long iced ridge ... its lower slopes are smooth pale pink
+frosting like the plain around it, #fad5dd, shadow #e2a9bf" (negatives
+"cake, strawberries, cubes, blocks" after a strawberry cake and a row of
+rock-candy cubes); swamp "peat rock #5a5040 ... olive moss #6b7f3c on the
+upper slopes; its lower slopes are wet mud like the swamp around it,
+#4f502d, shadow #3a3b22, lit #646638" (negatives "mushroom, stump" after a
+moss dome on a stump); volcanic "rock charcoal #4e4a50 ... a few thin
+glowing ember cracks #d0682c; its lower slopes are dark cinder like the
+volcanic plain around it, #42373f, shadow #30282e, lit #5a4c56". All three
+worked at the first call; the description limit leaves about 600
+characters for the subject.
 
 ## Acceptance
 

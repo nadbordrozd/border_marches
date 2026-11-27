@@ -706,3 +706,8 @@
 {"at":"2026-11-27T09:17:03.947Z","set":"chunky-buildings","id":"horde-sheds-r1","endpoint":"generate-image-v2","usd":0.08197606319851346}
 {"at":"2026-11-27T09:18:28.199Z","set":"chunky-towns","id":"goblin-city-3-r1","endpoint":"generate-image-v2","usd":0.08082187403572931}
 {"at":"2026-11-27T09:18:52.268Z","set":"chunky-buildings","id":"horde-yard-r1","endpoint":"generate-image-v2","usd":0.08199595957332187}
+{"at":"2026-11-27T10:26:40.503Z","set":"range-massifs","id":"frosting-a","endpoint":"generate-image-v2","usd":0.1158494630654653}
+{"at":"2026-11-27T10:28:23.231Z","set":"range-massifs","id":"swamp-a","endpoint":"generate-image-v2","usd":0.11580967222319709}
+{"at":"2026-11-27T10:29:35.033Z","set":"range-massifs","id":"volcanic-a","endpoint":"generate-image-v2","usd":0.11602018038431804}
+{"at":"2026-11-27T10:30:41.342Z","set":"range-massifs","id":"frosting-b","endpoint":"generate-image-v2","usd":0.11548669770028856}
+{"at":"2026-11-27T10:31:37.750Z","set":"range-massifs","id":"swamp-b","endpoint":"generate-image-v2","usd":0.11551189308696323}
