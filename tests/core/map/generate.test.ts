@@ -21,7 +21,7 @@ const cache = new Map<number, { map: GameMap; info: GenerateInfo }>();
 function gen(seed: number): { map: GameMap; info: GenerateInfo } {
   let out = cache.get(seed);
   if (!out) {
-    out = generateMapWithInfo(seed);
+    out = generateMapWithInfo(seed, { size: "SM" });
     cache.set(seed, out);
   }
   return out;
@@ -35,9 +35,9 @@ function heroStart(map: GameMap): MapObject {
 
 describe("generateMap", { timeout: HEAVY_TIMEOUT }, () => {
   it("is deterministic and seed-dependent", () => {
-    const a = JSON.stringify(generateMap(7));
-    const b = JSON.stringify(generateMap(7));
-    const c = JSON.stringify(generateMap(8));
+    const a = JSON.stringify(generateMap(7, { size: "SM" }));
+    const b = JSON.stringify(generateMap(7, { size: "SM" }));
+    const c = JSON.stringify(generateMap(8, { size: "SM" }));
     expect(a).toBe(b);
     expect(a).not.toBe(c);
     expect(JSON.stringify(generateMap(7, { size: "S" }))).toBe(
@@ -46,11 +46,67 @@ describe("generateMap", { timeout: HEAVY_TIMEOUT }, () => {
   });
 
   it("makes the requested sizes", () => {
-    for (const size of ["S", "M", "L"] as const) {
+    for (const size of ["S", "SM", "M"] as const) {
       const map = generateMap(3, { size });
       expect(map.width).toBe(DEFAULT_GEN_CONFIG.sizes[size]);
       expect(map.height).toBe(DEFAULT_GEN_CONFIG.sizes[size]);
       expect(validateMap(map)).toEqual([]);
+    }
+    // Medium, the setup screen's size, is the default (bead bzc.147).
+    expect(generateMap(3).width).toBe(72);
+  });
+
+  it("makes the Heroes sizes L 108 and XL 144 with every start served (bead bzc.147)", () => {
+    for (const [size, players] of [
+      ["L", 4],
+      ["L", 2],
+      ["XL", 4],
+    ] as const) {
+      const { map, info } = generateMapWithInfo(3, {
+        size,
+        players,
+        activePlayers: players,
+      });
+      const label = `${size} ${players}p`;
+      expect(map.width, label).toBe(DEFAULT_GEN_CONFIG.sizes[size]);
+      expect(validateMap(map), label).toEqual([]);
+      expect(info.skipped, label).toEqual([]);
+      // Zones and neutral towns as the size's configuration asks.
+      const [least, most] = DEFAULT_GEN_CONFIG.middleZones[size][players];
+      const middle = info.zones.filter(
+        (z) => z.role === "middle" || z.role === "town",
+      ).length;
+      expect(middle, label).toBeGreaterThanOrEqual(least);
+      expect(middle, label).toBeLessThanOrEqual(most);
+      const neutral = towns(map).filter(
+        (t) => t.data["hold"] === false && typeof t.data["start"] !== "number",
+      );
+      expect(neutral.length, label).toBeGreaterThanOrEqual(
+        DEFAULT_GEN_CONFIG.neutralTowns[size][0],
+      );
+      // Every start reaches every other start, and on Large has a neutral
+      // town within four days (zones.townsBesideStarts). Extra Large, not
+      // offered yet, may have one further off (seed 3: 7 days from start
+      // 1, the beside-town deep in a 687-cell zone).
+      const starts = towns(map).filter(
+        (t) => typeof t.data["start"] === "number",
+      );
+      expect(starts, label).toHaveLength(players);
+      for (const s of starts) {
+        const cost = moveCosts(map, s.x, s.y);
+        const days = Math.min(
+          ...neutral.map((t) => cost[t.y * map.width + t.x]! / DAY),
+        );
+        expect(days, `${label}: start ${String(s.data["start"])}`).toBeLessThan(
+          size === "L" ? 4 : 8,
+        );
+        for (const t of starts) {
+          expect(
+            Number.isFinite(cost[t.y * map.width + t.x]!),
+            `${label}: ${s.id} to ${t.id}`,
+          ).toBe(true);
+        }
+      }
     }
   });
 
@@ -61,7 +117,7 @@ describe("generateMap", { timeout: HEAVY_TIMEOUT }, () => {
       expect(info.skipped, `seed ${seed}`).toEqual([]);
     }
     for (const seed of [1, 2, 3, 4, 5]) {
-      for (const size of ["S", "L"] as const) {
+      for (const size of ["S", "M"] as const) {
         const { map, info } = generateMapWithInfo(seed, { size });
         expect(validateMap(map), `${size} seed ${seed}`).toEqual([]);
         expect(info.skipped, `${size} seed ${seed}`).toEqual([]);
@@ -383,7 +439,7 @@ describe("generateMap", { timeout: HEAVY_TIMEOUT }, () => {
     const maps = [
       ...SEEDS.map((seed) => gen(seed).map),
       ...[1, 2, 3].map((seed) => generateMap(seed, { size: "S" })),
-      ...[1, 2].map((seed) => generateMap(seed, { size: "L" })),
+      ...[1, 2].map((seed) => generateMap(seed, { size: "M" })),
     ];
     for (const map of maps) {
       const m = (x: number, y: number): boolean =>
@@ -494,8 +550,8 @@ describe("generateMap", { timeout: HEAVY_TIMEOUT }, () => {
   // not here: wall-clock budgets flake when test runs share a machine.
   it("generates valid large maps for the perf seeds", () => {
     for (const seed of [11, 12, 13]) {
-      const { map, info } = generateMapWithInfo(seed, { size: "L" });
-      expect(map.width, `seed ${seed}`).toBe(DEFAULT_GEN_CONFIG.sizes.L);
+      const { map, info } = generateMapWithInfo(seed, { size: "M" });
+      expect(map.width, `seed ${seed}`).toBe(DEFAULT_GEN_CONFIG.sizes.M);
       expect(validateMap(map), `seed ${seed}`).toEqual([]);
       expect(info.skipped, `seed ${seed}`).toEqual([]);
     }

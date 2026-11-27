@@ -23,6 +23,7 @@ import { peaksOf } from "../../../src/assets/peaks.ts";
 import { TREE_SPECIES_WEIGHTS, treesOf } from "../../../src/assets/trees.ts";
 import type { MapSize, PlayerCount } from "../../../src/core/map/generate.ts";
 import type { GameMap } from "../../../src/core/map/types.ts";
+import { everySize } from "../../../src/core/map/gen/config.ts";
 
 const DESERT_TYPES = ["pyramid", "sphinx", "sun-temple", "sunken-tomb"];
 
@@ -81,7 +82,7 @@ const NONE = {
   terrain: {
     desert: {
       ...DEFAULT_GEN_CONFIG.terrain.desert,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
   },
 };
@@ -96,9 +97,9 @@ const typeOf = (map: GameMap, type: string) =>
  * the first seeds, M12 and S8, hold every desert site again.
  */
 const WITH: [number, MapSize, PlayerCount][] = [
-  [12, "M", 2],
+  [12, "SM", 2],
   [8, "S", 2],
-  [10, "L", 2],
+  [10, "M", 2],
 ];
 
 /**
@@ -109,7 +110,7 @@ const WITH: [number, MapSize, PlayerCount][] = [
  * sand's share of the open land (bead bzc.96 report: a follow-up for the
  * decorator).
  */
-const SANDY: [number, MapSize, PlayerCount] = [19, "M", 2];
+const SANDY: [number, MapSize, PlayerCount] = [19, "SM", 2];
 
 describe("desert zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   it("turns a wild zone away from the starts into a desert on some maps", () => {
@@ -134,7 +135,7 @@ describe("desert zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   it("leaves no desert on many maps", () => {
     let without = 0;
     for (let seed = 1; seed <= 12; seed += 1) {
-      const size = (["S", "M", "L"] as const)[seed % 3] ?? "M";
+      const size = (["S", "SM", "M"] as const)[seed % 3] ?? "SM";
       const { info } = generateMapWithInfo(seed, { size, players: 2 });
       if (!info.zones.some((z) => z.main === "sand")) without += 1;
     }
@@ -146,7 +147,7 @@ describe("desert zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
     let both = 0;
     for (let seed = 1; seed <= 10; seed += 1) {
       const { map, info } = generateMapWithInfo(seed, {
-        size: "L",
+        size: "M",
         players: 2,
       });
       const kind = (i: number): string =>
@@ -252,7 +253,7 @@ describe("desert sites in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   it("puts no desert site on a map without a desert", () => {
     for (let seed = 1; seed <= 6; seed += 1) {
       const { map, info } = generateMapWithInfo(seed, {
-        size: "M",
+        size: "SM",
         players: 2,
         config: NONE,
       });

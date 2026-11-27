@@ -204,7 +204,7 @@ describe("snow ground in the terrain plan (bead bzc.87)", () => {
 describe("desert sand in the terrain plan (bead bzc.88)", () => {
   // The first medium map that rolls a desert zone.
   const map = [12, 3, 4, 5, 7, 8, 1, 2]
-    .map((seed) => generateMap(seed, { size: "M", players: 2 }))
+    .map((seed) => generateMap(seed, { size: "SM", players: 2 }))
     .find((m) => m.cells.some((c) => c.terrain === "sand"))!;
   const sand = map.cells
     .map((c, i) => (c.terrain === "sand" ? i : -1))
@@ -246,7 +246,7 @@ describe("desert sand in the terrain plan (bead bzc.88)", () => {
 describe("frosting in the terrain plan (bead bzc.115)", () => {
   // The first medium map that rolls a candy zone (M 3).
   const map = [3, 6, 10]
-    .map((seed) => generateMap(seed, { size: "M", players: 2 }))
+    .map((seed) => generateMap(seed, { size: "SM", players: 2 }))
     .find((m) => m.cells.some((c) => c.terrain === "frosting"))!;
   const icing = map.cells
     .map((c, i) => (c.terrain === "frosting" ? i : -1))
@@ -288,7 +288,7 @@ describe("frosting in the terrain plan (bead bzc.115)", () => {
 
 describe("swamp in the terrain plan (bead bzc.126)", () => {
   // The first medium map that rolls a swamp (M 1).
-  const map = generateMap(1, { size: "M", players: 2 });
+  const map = generateMap(1, { size: "SM", players: 2 });
   const mud = map.cells
     .map((c, i) => (c.terrain === "swamp" ? i : -1))
     .filter((i) => i >= 0);

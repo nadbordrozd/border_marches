@@ -4,7 +4,7 @@
  *   npm run map:ascii -- --seed 7 --size M [--players 2|3|4] [--zones]
  *                        [--no-objects] [--narrow] [--shapes] [--stages]
  */
-import { generateMapWithInfo } from "../src/core/map/generate.ts";
+import { MAP_SIZES, generateMapWithInfo } from "../src/core/map/generate.ts";
 import type { MapSize, PlayerCount } from "../src/core/map/generate.ts";
 import { ASCII_LEGEND, mapToAscii } from "../src/core/map/ascii.ts";
 import { mapDensity } from "../src/core/map/density.ts";
@@ -16,10 +16,12 @@ const value = (name: string): string | undefined => {
 };
 const seed = Number(value("--seed") ?? "1");
 const sizeArg = (value("--size") ?? "M").toUpperCase();
-if (sizeArg !== "S" && sizeArg !== "M" && sizeArg !== "L") {
-  throw new Error(`--size must be S, M or L, got ${sizeArg}`);
+const size: MapSize | undefined = MAP_SIZES.find((s) => s === sizeArg);
+if (size === undefined) {
+  throw new Error(
+    `--size must be one of ${MAP_SIZES.join(", ")}, got ${sizeArg}`,
+  );
 }
-const size: MapSize = sizeArg;
 const playersArg = value("--players");
 const players =
   playersArg === undefined ? undefined : (Number(playersArg) as PlayerCount);

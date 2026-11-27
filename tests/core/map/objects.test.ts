@@ -23,9 +23,10 @@ import {
 import { GUARD_CREATURE_IDS } from "../../../src/data/strays.ts";
 import { getCreature } from "../../../src/data/creatures.ts";
 import { newGame } from "../../../src/core/game/index.ts";
+import { everySize } from "../../../src/core/map/gen/config.ts";
 
 const maps = new Map<string, GameMap>();
-function map(seed: number, size: "S" | "M" | "L"): GameMap {
+function map(seed: number, size: "S" | "SM" | "M"): GameMap {
   const k = `${seed}${size}`;
   let m = maps.get(k);
   if (m === undefined) {
@@ -38,7 +39,7 @@ const typeOf = (o: MapObject): string => String(o.data["type"] ?? o.kind);
 
 describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
   it("places a wide variety of catalogued types, valid and deterministic", () => {
-    const m = map(3, "L");
+    const m = map(3, "M");
     expect(validateMap(m)).toEqual([]);
     const types = new Set(m.objects.map(typeOf));
     expect(types.size).toBeGreaterThanOrEqual(45);
@@ -47,14 +48,14 @@ describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
         continue;
       expect(OBJECT_TYPES[typeOf(o) as ObjectTypeId]).toBeDefined();
     }
-    const again = generateMap(3, { size: "L", players: 3 });
+    const again = generateMap(3, { size: "M", players: 3 });
     expect(JSON.stringify(again.objects)).toBe(JSON.stringify(m.objects));
   });
 
   it("over a few maps, places every type that the fill or rules can", () => {
     const seen = new Set<string>();
     for (const seed of [1, 2, 3, 4]) {
-      for (const o of map(seed, "L").objects) seen.add(typeOf(o));
+      for (const o of map(seed, "M").objects) seen.add(typeOf(o));
     }
     // The Mystery Bag (bead bzc.105) is placed since bead bzc.110.
     const authored: ObjectTypeId[] = ["event-tile", "sign"];
@@ -68,15 +69,15 @@ describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
     // Three starts crowd a small map with town yards: 15 there.
     for (const [seed, size, least] of [
       [1, "S", 15],
-      [2, "M", 18],
-      [3, "L", 18],
+      [2, "SM", 18],
+      [3, "M", 18],
     ] as const) {
       expect(mapDensity(map(seed, size)).visitable).toBeGreaterThan(least);
     }
   });
 
   it("guards are strays sized in proportion to what they guard", () => {
-    const m = map(2, "M");
+    const m = map(2, "SM");
     const ratios: number[] = [];
     for (const o of m.objects) {
       if (o.kind !== "monster" || o.data["pass"] === true) continue;
@@ -95,7 +96,7 @@ describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
   });
 
   it("never guards banks, seer huts or buried things on the map", () => {
-    const m = map(1, "L");
+    const m = map(1, "M");
     const guarded = new Set<string>();
     for (const o of m.objects) {
       const g = o.data["guards"];
@@ -115,7 +116,7 @@ describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
   });
 
   it("places the rule objects: obelisks, the Keystone, caches, waystone pairs", () => {
-    const m = map(2, "M");
+    const m = map(2, "SM");
     const count = (t: string): number =>
       m.objects.filter((o) => typeOf(o) === t).length;
     expect(count("obelisk")).toBeGreaterThanOrEqual(4);
@@ -133,7 +134,7 @@ describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
 
   it("every border gate has a keymaster's tent of its colour", () => {
     for (const seed of [1, 2, 3]) {
-      const m = map(seed, "L");
+      const m = map(seed, "M");
       for (const g of m.objects.filter((o) => typeOf(o) === "border-gate")) {
         expect(
           m.objects.some(
@@ -147,7 +148,7 @@ describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
   });
 
   it("gives every seer hut, quest gate and lodge a quest", () => {
-    const m = map(4, "L");
+    const m = map(4, "M");
     for (const o of m.objects) {
       const t = typeOf(o);
       if (t === "seer-hut" || t === "quest-gate" || t === "caretaker-lodge") {
@@ -158,7 +159,7 @@ describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
   });
 
   it("gives every start the same strange thing near home", () => {
-    const m = map(5, "M");
+    const m = map(5, "SM");
     const strange = m.objects.filter((o) => o.data["strange"] === true);
     expect(strange.length).toBeGreaterThanOrEqual(3);
     const kinds = new Set(strange.map((o) => typeOf(o)));
@@ -166,7 +167,7 @@ describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
   });
 
   it("starts a playable game on a full map", () => {
-    const s = newGame(map(2, "M"), {
+    const s = newGame(map(2, "SM"), {
       players: [
         { kind: "human", faction: "humans" },
         { kind: "ai", faction: "undead" },
@@ -189,9 +190,9 @@ describe(
       let total = 0;
       for (const [seed, size, most] of [
         [4, "S", 1],
-        [2, "M", 2],
-        [1, "L", 3],
-        [3, "L", 3],
+        [2, "SM", 2],
+        [1, "M", 3],
+        [3, "M", 3],
       ] as const) {
         const { map: m, info } = generateMapWithInfo(seed, { size });
         expect(validateMap(m)).toEqual([]);
@@ -246,17 +247,17 @@ describe(
     });
 
     it("is deterministic and leaves the rest of the map as it was without them", () => {
-      const on = generateMap(2, { size: "M" });
-      expect(JSON.stringify(generateMap(2, { size: "M" }))).toBe(
+      const on = generateMap(2, { size: "SM" });
+      expect(JSON.stringify(generateMap(2, { size: "SM" }))).toBe(
         JSON.stringify(on),
       );
       // Decorations go round every object, waystones too (bead bzc.72), so
       // the two are compared before them.
-      const bare = generateMap(2, { size: "M", decorations: false });
+      const bare = generateMap(2, { size: "SM", decorations: false });
       const off = generateMap(2, {
-        size: "M",
+        size: "SM",
         decorations: false,
-        config: { objects: { oneWayWaystones: { S: 0, M: 0, L: 0 } } },
+        config: { objects: { oneWayWaystones: everySize(0) } },
       });
       expect(ways(off)).toEqual([]);
       expect(JSON.stringify(off.cells)).toBe(JSON.stringify(bare.cells));
@@ -273,8 +274,8 @@ describe("drill yards (bead bzc.32)", { timeout: HEAVY_TIMEOUT }, () => {
   it("places one on S and M maps and one or two on L, in wild zones, unguarded at value 0", () => {
     for (const [size, least, most] of [
       ["S", 1, 1],
-      ["M", 1, 1],
-      ["L", 1, 2],
+      ["SM", 1, 1],
+      ["M", 1, 2],
     ] as const) {
       for (const seed of [1, 2, 3, 4]) {
         const { map: m, info } = generateMapWithInfo(seed, { size });
@@ -302,10 +303,10 @@ describe("drill yards (bead bzc.32)", { timeout: HEAVY_TIMEOUT }, () => {
 
   it("is left out when its per-map count is [0, 0] (the named maps)", () => {
     const off = generateMap(1, {
-      size: "L",
+      size: "M",
       config: {
         objects: {
-          perMap: { "drill-yard": { S: [0, 0], M: [0, 0], L: [0, 0] } },
+          perMap: { "drill-yard": everySize<[number, number]>([0, 0]) },
         },
       },
     });

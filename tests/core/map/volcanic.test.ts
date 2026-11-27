@@ -19,6 +19,7 @@ import {
   GROUND_TEXTURES,
 } from "../../../src/assets/manifest.ts";
 import type { MapSize, PlayerCount } from "../../../src/core/map/generate.ts";
+import { everySize } from "../../../src/core/map/gen/config.ts";
 
 describe("volcanic ground data", () => {
   it("is a land terrain as rough as the wasteland", () => {
@@ -65,13 +66,13 @@ describe("volcanic ground data", () => {
 
 const NO_DESERT = {
   ...DEFAULT_GEN_CONFIG.terrain.desert,
-  chance: { S: 0, M: 0, L: 0 },
+  chance: everySize(0),
 };
 
 /** Nor the candy zones (bead bzc.115), which also pick after the lava. */
 const NO_CANDY = {
   ...DEFAULT_GEN_CONFIG.terrain.candy,
-  chance: { S: 0, M: 0, L: 0 },
+  chance: everySize(0),
 };
 
 const NONE = {
@@ -80,16 +81,16 @@ const NONE = {
     candy: NO_CANDY,
     volcanic: {
       ...DEFAULT_GEN_CONFIG.terrain.volcanic,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
   },
 };
 
 describe("volcanic zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   const runs: [number, MapSize, PlayerCount][] = [
-    [4, "M", 2],
+    [4, "SM", 2],
     [9, "S", 2],
-    [5, "L", 2],
+    [5, "M", 2],
   ];
 
   it("turns a wild zone away from the starts volcanic on some maps", () => {
@@ -114,7 +115,7 @@ describe("volcanic zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   it("leaves no volcanic ground on many maps", () => {
     let without = 0;
     for (let seed = 1; seed <= 12; seed += 1) {
-      const size = (["S", "M", "L"] as const)[seed % 3] ?? "M";
+      const size = (["S", "SM", "M"] as const)[seed % 3] ?? "SM";
       const { info } = generateMapWithInfo(seed, { size, players: 2 });
       if (!info.zones.some((z) => z.main === "volcanic")) without += 1;
     }

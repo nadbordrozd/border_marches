@@ -144,8 +144,8 @@ describe("aiStep", () => {
 describe("map starts", () => {
   it.each([
     ["S", 2],
-    ["M", 3],
-    ["M", 4],
+    ["SM", 3],
+    ["SM", 4],
   ] as const)("derives %s-map starts for %i players", (size, n) => {
     const map = prepareStarts(generateMap(11, { size }), n);
     expect(validateMap(map)).toEqual([]);

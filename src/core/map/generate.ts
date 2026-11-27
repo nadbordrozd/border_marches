@@ -72,13 +72,16 @@ import type { FieldReport } from "./gen/fields.ts";
 import { markDeep, placeWater, tidyWater } from "./gen/water.ts";
 import { layoutZones } from "./gen/zones.ts";
 
-export { DEFAULT_GEN_CONFIG } from "./gen/config.ts";
+export { DEFAULT_GEN_CONFIG, MAP_SIZES } from "./gen/config.ts";
 export type { GenConfig, MapSize, PlayerCount } from "./gen/config.ts";
 
 export interface GenerateOptions {
-  /** S = 36x36, M = 48x48 (default), L = 72x72. */
+  /**
+   * S = 36x36, M = 72x72 (default), L = 108x108, XL = 144x144; SM = 48x48
+   * (bead bzc.147; see MapSize in gen/config.ts).
+   */
   size?: MapSize;
-  /** Player starts, 2 to 4 (default per size: S 2, M 3, L 4). */
+  /** Player starts, 2 to 4 (default per size: S 2, SM 3, M, L and XL 4). */
   players?: PlayerCount;
   /**
    * Players with a town and a hero today (default 1, the single-player

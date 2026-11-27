@@ -135,10 +135,12 @@ const MAPS: Array<[MapSize, 2 | 3 | 4, number[]]> = [
   ["S", 2, [1, 2, 3, 4, 5, 6, 7, 8]],
   ["S", 3, [11, 12, 13, 14, 15, 16]],
   ["S", 4, [21, 22, 23, 24]],
-  ["M", 2, [31, 32]],
-  ["M", 3, [41, 42]],
-  ["M", 4, [51]],
-  ["L", 4, [61]],
+  ["SM", 2, [31, 32]],
+  ["SM", 3, [41, 42]],
+  ["SM", 4, [51]],
+  ["M", 4, [61]],
+  // Bead bzc.147: the Large map (108x108) passes too (L 2 players, seed
+  // 71, checked once), but at about two minutes it stays out of the tier.
 ];
 
 describe(

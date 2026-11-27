@@ -23,6 +23,7 @@ import { peaksOf } from "../../../src/assets/peaks.ts";
 import { TREE_SPECIES_WEIGHTS, treesOf } from "../../../src/assets/trees.ts";
 import { findObstructions } from "../../../src/core/map/passages.ts";
 import type { MapSize, PlayerCount } from "../../../src/core/map/generate.ts";
+import { everySize } from "../../../src/core/map/gen/config.ts";
 
 describe("swamp ground data", () => {
   it("is a land terrain, the slowest one", () => {
@@ -67,7 +68,7 @@ const NO_SWAMP = {
   terrain: {
     swamp: {
       ...DEFAULT_GEN_CONFIG.terrain.swamp,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
   },
 };
@@ -75,8 +76,8 @@ const NO_SWAMP = {
 /** Seeds (2 players) with a swamp. */
 const WITH: [number, MapSize, PlayerCount][] = [
   [3, "S", 2],
-  [1, "M", 2],
-  [8, "L", 2],
+  [1, "SM", 2],
+  [8, "M", 2],
 ];
 
 const KINDS = ["volcanic", "snow", "sand", "frosting"];
@@ -149,14 +150,14 @@ describe("swamp zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
       }
     }
     // Seed L 8 has volcanic and desert zones beside its swamp's map.
-    const { info } = generateMapWithInfo(8, { size: "L", players: 2 });
+    const { info } = generateMapWithInfo(8, { size: "M", players: 2 });
     expect(info.zones.some((z) => KINDS.includes(z.main))).toBe(true);
   });
 
   it("changes nothing on a map that rolls no swamp", () => {
     let checked = 0;
     for (let seed = 1; seed <= 8 && checked < 3; seed += 1) {
-      const size = (["S", "M"] as const)[seed % 2] ?? "S";
+      const size = (["S", "SM"] as const)[seed % 2] ?? "S";
       const a = generateMapWithInfo(seed, { size, players: 2 });
       if (a.info.zones.some((z) => z.main === "swamp")) continue;
       const b = generateMapWithInfo(seed, {
@@ -195,11 +196,7 @@ describe("swamp zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
       // Bead bzc.129: the Cartographer's Folly asks for one (chance 1).
       const n = def.gen?.landscapes?.swamp ?? 0;
       const chance = n > 0 ? 2 ** (n - 1) : 0;
-      expect(cfg.terrain?.swamp?.chance, def.id).toEqual({
-        S: chance,
-        M: chance,
-        L: chance,
-      });
+      expect(cfg.terrain?.swamp?.chance, def.id).toEqual(everySize(chance));
     }
   });
 });

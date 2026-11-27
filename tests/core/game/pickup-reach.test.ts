@@ -98,7 +98,7 @@ describe("pickups never seal ground off (bead bzc.49)", () => {
     [3, "S"],
     [6, "S"],
     [7, "S"],
-    [1, "M"],
+    [1, "SM"],
   ] as const) {
     it(`generated ${size} map, seed ${seed}`, () => {
       checkMap(generateMap(seed, { size, players: 2 }), 2);

@@ -68,7 +68,7 @@ are cut first if a wave runs long.
 | 33  | Morale and luck                  | random extra turn or freeze; random double damage   | Army Morale and Luck -3 to +3, placed as Heartened, Shaken, Lucky, Jinxed (RULES_V2 6) | [2](#2-randomness-and-our-deterministic-rules), [8](#8-battle-mechanics) |
 | 34  | Battle mechanics                 | retaliation, flying, ranged penalties, terrain      | 13 adopted rules, ~30 ability keywords; terrain laws deferred                          | [8](#8-battle-mechanics)                                                 |
 | 35  | Victory and loss conditions      | 13 victory, 3 loss (H3 with HotA)                   | elimination + 2 scenario victories; elimination loss                                   | [9.1](#91-victory-and-loss-conditions)                                   |
-| 36  | Map sizes and underground        | 36-144 (H2-H3), to 252 (HotA); underground (H3, H4) | S 36, M 48, L 72; two named maps; no underground                                       | [9.2](#92-map-sizes-and-the-underground)                                 |
+| 36  | Map sizes and underground        | 36-144 (H2-H3), to 252 (HotA); underground (H3, H4) | S 36, M 72, L 108, XL 144 (bead bzc.147); named maps; no underground                   | [9.2](#92-map-sizes-and-the-underground)                                 |
 | 37  | Weekly events                    | random "week of" creature and plague events         | none in v0.2                                                                           | [2](#2-randomness-and-our-deterministic-rules)                           |
 
 ## 2. Randomness and our deterministic rules
@@ -670,12 +670,16 @@ hero) are deferred.
 - **H2, H3.** Small 36, medium 72, large 108, extra large 144 tiles a side;
   HotA adds 180, 216 and 252. H3 and H4 maps may have an underground level
   joined by gates.
-- Ours today: S 36, M 48, L 72 (`src/core/map/gen/config.ts`).
+- Ours today: S 36, M 72, L 108, XL 144 (`src/core/map/gen/config.ts`).
 
-**Ours.** Sizes stay S 36, M 48 and L 72; no new size. The two v0.2 maps are
-dense and maze-like and use these sizes (L for the larger). **No
+**Ours.** The user (bead bzc.147): "let's go with homm map sizes. 72x72 is
+medium. 108x108 is large." The setup screen offers Small 36, Medium 72 (the
+default) and Large 108; Extra Large 144 is generated but not offered yet
+(its save and start-up time, docs/design/MAP_COMPOSITION.md section 9);
+the 48x48 size of before stays as SM ("Small+") for The Keepers' Toll, and
+the three 72x72 named maps are Medium. **No
 underground** in v0.2: it doubles the map work and the AI's pathing for
-little gain on maps this size.
+little gain.
 
 ## 10. Decisions made here
 

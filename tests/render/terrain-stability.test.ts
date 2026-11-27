@@ -117,7 +117,7 @@ const MAPS: readonly { name: string; each: boolean; make: () => GameMap }[] = [
   {
     name: "seed 7 M",
     each: false,
-    make: () => generateMap(7, { size: "M" }),
+    make: () => generateMap(7, { size: "SM" }),
   },
   ...NAMED_MAPS.map((def) => ({
     name: def.id,

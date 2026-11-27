@@ -31,6 +31,7 @@ import {
 import { peaksOf } from "../../../src/assets/peaks.ts";
 import { treesOf, TREE_SPECIES_WEIGHTS } from "../../../src/assets/trees.ts";
 import type { MapSize } from "../../../src/core/map/generate.ts";
+import { everySize } from "../../../src/core/map/gen/config.ts";
 
 describe("snow ground data", () => {
   it("is a land terrain as heavy as the roughest grounds", () => {
@@ -88,7 +89,7 @@ const OFF = {
   terrain: {
     winter: {
       ...DEFAULT_GEN_CONFIG.terrain.winter,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
   },
 };
@@ -102,7 +103,7 @@ describe("winter zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   const runs: Array<{ seed: number; size: MapSize }> = [];
   const plain: Array<{ seed: number; size: MapSize }> = [];
   for (let seed = 1; seed <= 12; seed += 1) {
-    const size = (["S", "M", "L"] as const)[seed % 3] ?? "M";
+    const size = (["S", "SM", "M"] as const)[seed % 3] ?? "SM";
     const { info } = generateMapWithInfo(seed, { size, players: 2 });
     (info.zones.some((z) => z.main === "snow") ? runs : plain).push({
       seed,

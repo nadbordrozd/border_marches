@@ -10,7 +10,22 @@ import { MAP_OBJECT_ROWS, RULE_ROWS } from "../../../data/mapObjects.ts";
 import type { MapObjectRow, MapZoneKind } from "../../../data/mapObjects.ts";
 import type { Terrain } from "../types.ts";
 
-export type MapSize = "S" | "M" | "L";
+/**
+ * Map sizes (bead bzc.147: the Heroes sizes). S 36x36, M 72x72 (the
+ * default), L 108x108 and XL 144x144 are offered on the setup screen; SM
+ * (48x48, "Small+") is the medium map of before, kept for The Keepers'
+ * Toll and for tests written on it. M has the tuning the old 72x72 large
+ * map had, so a seed makes the map it made at size L before.
+ */
+export type MapSize = "S" | "SM" | "M" | "L" | "XL";
+
+/** Every map size, smallest first. */
+export const MAP_SIZES: readonly MapSize[] = ["S", "SM", "M", "L", "XL"];
+
+/** The same value for every map size. */
+export function everySize<T>(value: T): Record<MapSize, T> {
+  return { S: value, SM: value, M: value, L: value, XL: value };
+}
 
 /** Number of player starts a map can have. */
 export type PlayerCount = 2 | 3 | 4;
@@ -65,10 +80,11 @@ export interface GenConfig {
     /**
      * Bead bzc.129: each start first gets a neutral town in a middle zone
      * connected to it (the largest such zone), the rest of the towns going
-     * to the deep zones as before. Off on random maps; on a two-player large
-     * map the deep zones are four or more days from either start.
+     * to the deep zones as before: on a two-player map of many zones the
+     * deep zones are four or more days from either start. True or false for
+     * every size, or per size (bead bzc.147: on the L and XL random maps).
      */
-    townsBesideStarts: boolean;
+    townsBesideStarts: boolean | Readonly<Record<MapSize, boolean>>;
   };
 
   /**
@@ -155,6 +171,8 @@ export interface GenConfig {
       maxZones: Readonly<Record<MapSize, number>>;
       /** Lowest tier (steps from the nearest start zone) of a desert zone. */
       minTier: number;
+      /** The first desert zone gets a second Sunken Tomb (by map size). */
+      secondTomb?: Readonly<Record<MapSize, boolean>>;
       /** Secondary patches of a desert zone: one of these. */
       secondary: readonly Terrain[];
     };
@@ -349,6 +367,26 @@ export interface GenConfig {
      * them off (the named maps were authored without them).
      */
     oneWayWaystones: Readonly<Record<MapSize, number>>;
+    /**
+     * Objects placed by rule (CONTENT_MAP_OBJECTS 3.6, 3.9) per map size:
+     * obelisks, buried caches, pylons, two-way waystone pairs (four
+     * colours, so four pairs at most), whether the Keepers' Vault is in,
+     * and border gates with their keymaster's tents (four colours at most;
+     * a quest gate comes on top where a site is left).
+     */
+    rules: Readonly<
+      Record<
+        MapSize,
+        {
+          obelisks: number;
+          caches: number;
+          pylons: number;
+          waystonePairs: number;
+          vault: boolean;
+          borderGates: number;
+        }
+      >
+    >;
     /**
      * Per-map counts (by size) of table rows, by row id, as [least, most]:
      * the random fill and pocket prizes draw such a row at most `most`
@@ -608,15 +646,33 @@ export const LEGACY_COMPOSITION: {
   },
 };
 
+/** One size's line of `objects.rules`. */
+function rules(
+  obelisks: number,
+  caches: number,
+  pylons: number,
+  waystonePairs: number,
+  vault: boolean,
+  borderGates: number,
+): GenConfig["objects"]["rules"][MapSize] {
+  return { obelisks, caches, pylons, waystonePairs, vault, borderGates };
+}
+
 export const DEFAULT_GEN_CONFIG: GenConfig = {
-  sizes: { S: 36, M: 48, L: 72 },
-  players: { S: 2, M: 3, L: 4 },
+  // Bead bzc.147: the Heroes sizes. SM and M are the medium and large maps
+  // of before, number for number; L and XL keep M's zone size (about 400
+  // open cells a zone) and add zones, so a bigger map is more of the same
+  // land, not the same land stretched.
+  sizes: { S: 36, SM: 48, M: 72, L: 108, XL: 144 },
+  players: { S: 2, SM: 3, M: 4, L: 4, XL: 4 },
   middleZones: {
     S: { 2: [2, 2], 3: [1, 2], 4: [1, 1] },
-    M: { 2: [4, 4], 3: [4, 4], 4: [3, 4] },
-    L: { 2: [8, 9], 3: [8, 8], 4: [7, 8] },
+    SM: { 2: [4, 4], 3: [4, 4], 4: [3, 4] },
+    M: { 2: [8, 9], 3: [8, 8], 4: [7, 8] },
+    L: { 2: [20, 22], 3: [19, 21], 4: [18, 20] },
+    XL: { 2: [36, 39], 3: [35, 38], 4: [34, 37] },
   },
-  neutralTowns: { S: [1, 1], M: [1, 2], L: [2, 3] },
+  neutralTowns: { S: [1, 1], SM: [1, 2], M: [2, 3], L: [4, 6], XL: [7, 10] },
 
   zones: {
     warp: 0.42,
@@ -624,11 +680,11 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     fineWarp: 1.5,
     fineWarpScale: 3,
     relax: 2,
-    loops: { S: [1, 1], M: [1, 2], L: [3, 4] },
+    loops: { S: [1, 1], SM: [1, 2], M: [3, 4], L: [7, 9], XL: [12, 15] },
     minConnectBorder: 5,
     startWeight: 1.18,
     holdWeight: 0.95,
-    townsBesideStarts: false,
+    townsBesideStarts: { S: false, SM: false, M: false, L: true, XL: true },
   },
 
   rooms: {
@@ -651,34 +707,35 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     minRegion: 6,
     smoothRounds: 2,
     volcanic: {
-      chance: { S: 0.35, M: 0.5, L: 0.6 },
-      maxZones: { S: 1, M: 1, L: 2 },
+      chance: { S: 0.35, SM: 0.5, M: 0.6, L: 0.75, XL: 0.85 },
+      maxZones: { S: 1, SM: 1, M: 2, L: 3, XL: 4 },
       minTier: 1,
       secondary: ["wasteland", "badlands"],
     },
     winter: {
-      chance: { S: 0.35, M: 0.5, L: 0.6 },
-      maxZones: { S: 1, M: 1, L: 2 },
+      chance: { S: 0.35, SM: 0.5, M: 0.6, L: 0.75, XL: 0.85 },
+      maxZones: { S: 1, SM: 1, M: 2, L: 3, XL: 4 },
       minTier: 1,
       secondary: ["steppe", "wasteland"],
     },
     desert: {
-      chance: { S: 0.35, M: 0.5, L: 0.6 },
-      maxZones: { S: 1, M: 1, L: 2 },
+      chance: { S: 0.35, SM: 0.5, M: 0.6, L: 0.75, XL: 0.85 },
+      maxZones: { S: 1, SM: 1, M: 2, L: 3, XL: 4 },
       minTier: 1,
+      secondTomb: { S: false, SM: false, M: true, L: true, XL: true },
       secondary: ["badlands", "steppe"],
     },
     candy: {
-      chance: { S: 0.3, M: 0.4, L: 0.5 },
-      maxZones: { S: 1, M: 1, L: 1 },
+      chance: { S: 0.3, SM: 0.4, M: 0.5, L: 0.65, XL: 0.75 },
+      maxZones: { S: 1, SM: 1, M: 1, L: 2, XL: 2 },
       minTier: 1,
       secondary: ["grass", "steppe"],
     },
     swamp: {
       // Last of the biomes, it often finds every wild zone taken or next
       // to one, so it rolls a little more often than the candy zones.
-      chance: { S: 0.45, M: 0.55, L: 0.65 },
-      maxZones: { S: 1, M: 1, L: 1 },
+      chance: { S: 0.45, SM: 0.55, M: 0.65, L: 0.8, XL: 0.9 },
+      maxZones: { S: 1, SM: 1, M: 1, L: 2, XL: 3 },
       minTier: 1,
       secondary: ["jungle", "grass"],
     },
@@ -688,7 +745,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     coastChance: 0.55,
     coastDepth: [3, 6],
     coastLength: [0.35, 0.6],
-    lakes: { S: [0, 1], M: [1, 2], L: [1, 3] },
+    lakes: { S: [0, 1], SM: [1, 2], M: [1, 3], L: [3, 5], XL: [5, 8] },
     lakeRadius: [2.4, 4.2],
     minBody: 9,
     minDeep: 3,
@@ -829,7 +886,15 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     pocketMin: 8,
     pocketsPerZone: 2,
     guardTownClearance: 4,
-    oneWayWaystones: { S: 1, M: 2, L: 3 },
+    oneWayWaystones: { S: 1, SM: 2, M: 3, L: 4, XL: 6 },
+    rules: {
+      // obelisks, caches, pylons, waystone pairs, vault, border gates
+      S: rules(4, 3, 3, 1, false, 1),
+      SM: rules(6, 4, 4, 2, true, 1),
+      M: rules(8, 6, 5, 3, true, 2),
+      L: rules(10, 9, 8, 4, true, 3),
+      XL: rules(12, 12, 11, 4, true, 4),
+    },
     oneWayMinDays: 1,
     keepWaysOpen: true,
     reserveRare: true,
@@ -840,7 +905,9 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     swampSites: true,
     outpostsWithout: [],
     lootWithout: [],
-    perMap: { "drill-yard": { S: [1, 1], M: [1, 1], L: [1, 2] } },
+    perMap: {
+      "drill-yard": { S: [1, 1], SM: [1, 1], M: [1, 2], L: [2, 3], XL: [3, 4] },
+    },
   },
 
   hoards: {

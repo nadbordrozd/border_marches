@@ -6,7 +6,8 @@
  *
  * Options:
  *   --ai v1|simple       controller for every player (default v1)
- *   --size S|M|L         map size (default S)
+ *   --size S|SM|M|L|XL   map size (default S; bead bzc.147: S 36, SM 48,
+ *                        M 72, L 108, XL 144)
  *   --players 2|3|4      players (default 2)
  *   --seeds 11,12        map and game seeds (default 11,12)
  *   --days 84            days to play (default 84, three months)

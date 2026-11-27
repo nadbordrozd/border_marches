@@ -52,8 +52,8 @@ function parseArgs(argv) {
     throw new Error("--seed wants a whole number (or pass --named or --map)");
   if (out.players !== undefined && ![2, 3, 4].includes(out.players))
     throw new Error("--players wants 2, 3 or 4");
-  if (!["S", "M", "L"].includes(out.size))
-    throw new Error("--size wants S, M or L");
+  if (!["S", "SM", "M", "L", "XL"].includes(out.size))
+    throw new Error("--size wants S, SM, M, L or XL");
   if (out.out === undefined) throw new Error("--out wants a file path");
   return out;
 }

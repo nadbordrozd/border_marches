@@ -6,7 +6,8 @@
  *
  * Per desert zone: one Sphinx, one Sun Temple, one Sunken Tomb and one Oasis
  * (the oasis is a common site elsewhere; the desert always holds one); on a
- * large map the first desert also gets a second Sunken Tomb. The Pyramid,
+ * map of 72x72 or more the first desert also gets a second Sunken Tomb
+ * (`terrain.desert.secondTomb`, by size). The Pyramid,
  * the great guarded treasure, is one to a map, in the deepest desert zone,
  * placed first (before the fill crowds the zone) with one try at half the
  * distance from the starts, like the Keepers' Vault.
@@ -56,7 +57,7 @@ export function desertSites(st: GenState): DesertSite[] {
     ] as const) {
       out.push({ type, zones: [z.id], tier, first: false });
     }
-    if (k === 0 && st.size === "L") {
+    if (k === 0 && st.cfg.terrain.desert.secondTomb?.[st.size] === true) {
       out.push({ type: "sunken-tomb", zones: [z.id], tier, first: false });
     }
   });

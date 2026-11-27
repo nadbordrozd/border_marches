@@ -290,9 +290,9 @@ start-to-start 1.18).
 ## 8. Bead bzc.129: the Cartographer's Folly, a terrain showcase
 
 The user: "add another map to showcase all the terrain types". The
-Cartographer's Folly (`cartographers-folly`, Large 72x72, two players: the
-Realm in the north-eastern jungle, the Goblin Horde in the south-western
-meadows) shows every ground: grass, steppe, jungle, badlands, wasteland,
+Cartographer's Folly (`cartographers-folly`, 72x72: Large then, Medium since
+bead bzc.147; two players: the Realm in the north-eastern jungle, the Goblin
+Horde in the south-western meadows) shows every ground: grass, steppe, jungle, badlands, wasteland,
 snow, volcanic, sand, frosting, swamp and water (a sea on the northern
 shore, the desert's twin oasis lakes and ponds), each landscape one region
 of 200 cells or more with its own decorations and sites.
@@ -306,11 +306,12 @@ of each landscape forced (`landscapes`) and only these on top:
 
 - `middleZones: 13`: five landscapes never border each other (sand beside
   snow reads as a mistake), so they need many wild zones; on the default 8-9
-  of a two-player Large map no seed of 1500 placed all five.
+  of a two-player 72x72 map no seed of 1500 placed all five.
 - `townsBesideStarts` (the generator's new `zones.townsBesideStarts`, off on
-  random maps, which draw as before): each start first gets a neutral town in
+  random maps, which draw as before; on since bead bzc.147 for the random
+  Large and Extra Large maps): each start first gets a neutral town in
   the largest middle zone connected to it. The generator puts towns in the
-  deepest zones, four or more days from either start on a two-player Large
+  deepest zones, four or more days from either start on a two-player 72x72
   map, where the named-map fairness test wants one within two days.
 - `secondaryShare: [0.14, 0.2]` (was 0.22-0.34): each landscape keeps more of
   its own ground (snow 211 to 236 cells, sand 219 to 255, lava 212 to 259).
@@ -332,6 +333,89 @@ neutral town 1.05 and 1.27 days (< 2, spread 0.21 < 0.75); mine spreads wood
 (> 0.85); start to start 6.4 days. 19 treasure clusters (each start's own
 alike), 7 clearings, 2 ponds, 9 Mystery Bags, 34 artifacts, 38 banks, 188
 guards, 74 object types.
+
+## 9. Bead bzc.147: the Heroes map sizes
+
+The user: "let's go with homm map sizes. 72x72 is medium. 108x108 is large."
+
+| Size | Side | Setup                         | Players (setup) | Middle zones (2 / 3 / 4 players) | Neutral towns | Loops | Lakes | Landscape chance (most zones) |
+| ---- | ---- | ----------------------------- | --------------- | -------------------------------- | ------------- | ----- | ----- | ----------------------------- |
+| S    | 36   | Small 36x36                   | 2-3             | 2 / 1-2 / 1                      | 1             | 1     | 0-1   | 0.3-0.45 (1)                  |
+| SM   | 48   | not offered (Small+ 48x48)    | -               | 4 / 4 / 3-4                      | 1-2           | 1-2   | 1-2   | 0.4-0.55 (1)                  |
+| M    | 72   | Medium 72x72 (the default)    | 2-4             | 8-9 / 8 / 7-8                    | 2-3           | 3-4   | 1-3   | 0.5-0.65 (1-2)                |
+| L    | 108  | Large 108x108                 | 2-4             | 20-22 / 19-21 / 18-20            | 4-6           | 7-9   | 3-5   | 0.65-0.8 (2-3)                |
+| XL   | 144  | not offered yet (Extra Large) | -               | 36-39 / 35-38 / 34-37            | 7-10          | 12-15 | 5-8   | 0.75-0.9 (2-4)                |
+
+**Sizes and names.** SM and M are the medium (48) and large (72) maps of
+before, number for number: a seed makes at M the map it made at L before,
+and The Keepers' Toll (48x48, "Small+ 48x48" in the map list) and the three
+72x72 named maps (now Medium) are byte for byte as they were. The game has
+at most four players, so no size takes more; Small takes two or three (four
+starts on 36x36 leave one middle zone between them). The setup screen opens
+on Medium; a size button clamps the players to its range.
+
+**Tuning.** L and XL keep Medium's zone size (about 400-450 cells a zone,
+a start zone a little larger) and add zones, so a bigger map is more of the
+same land, not the same land stretched: the density floors, treasure-cluster
+rates (per 100 open cells), room sizes, guard values and contents by tier
+(a zone's tier is capped at 3, so the deeper zones of L and XL hold the
+richest tier's prizes and guards, as the far zones of M do) and the start
+kit are per zone or per cell and need no change. What counts per map grows
+with it: neutral towns, loops between middle zones, lakes, the landscapes
+(volcanic, winter, desert, candy and swamp: higher chance and more zones),
+one-way waystones (M 3, L 4, XL 6), Drill Yards (L 2-3, XL 3-4) and the
+rule-placed objects (`objects.rules`: obelisks 8 / 10 / 12 on M / L / XL,
+buried caches 6 / 9 / 12, pylons 5 / 8 / 11, two-way waystone pairs 3 / 4 / 4,
+border gates 2 / 3 / 4, the Keepers' Vault on every map from SM up), and the
+desert's second Sunken Tomb (`terrain.desert.secondTomb`, M and up; the
+sizes that were hard-coded in the generator are configuration now). On L
+and XL each start first gets a neutral town in a middle zone beside it
+(`zones.townsBesideStarts`, by size): with twenty or more wild zones the
+deepest are seven days or more from a start, and the nearest neutral town
+was 4.5-7.3 days on two-player Large maps without it (1.1-3.9 with it).
+Fairness, reachability, passes and the road rules are the generator's own
+and hold unchanged: the maze tests run Large maps (two and four players)
+through every check, and a test checks L and XL for validity, zone and town
+counts, starts that reach each other and a neutral town in reach.
+
+Composition holds across the sizes (`node tests/map-metrics.ts`, default
+players, means of seeds 1-5, XL 1-3):
+
+| Size | Land passable % | Water % | Visitable /100 | Masses | Cells/mass | Largest empty r | Clusters | Clearings | Ponds |
+| ---- | --------------- | ------- | -------------- | ------ | ---------- | --------------- | -------- | --------- | ----- |
+| S    | 53.1            | 3.1     | 21.0           | 13.6   | 50.7       | 2.2             | 7.2      | 0.4       | 0.4   |
+| M    | 51.4            | 2.2     | 22.8           | 34.8   | 70.6       | 2.6             | 21.2     | 2.6       | 1.4   |
+| L    | 52.1            | 2.2     | 22.7           | 64.0   | 83.9       | 2.7             | 61.8     | 9.8       | 5.2   |
+| XL   | 51.3            | 2.4     | 23.2           | 93.0   | 105.3      | 2.8             | 123.3    | 21.3      | 9.7   |
+
+**Measured** (single-threaded Node, a busy machine: load 14-28 on 10 cores,
+so wall times are inflated; CPU medians of `npm run perf`):
+
+| Size | Generate (CPU) | Terrain plan (CPU) | Objects   | Neutral stacks | Towns | Start to start, 2 players (days) | Save at day 1 (chars) |
+| ---- | -------------- | ------------------ | --------- | -------------- | ----- | -------------------------------- | --------------------- |
+| M    | 0.75 s         | 0.9 s              | 770       | 166            | 8     | 5-7.5                            | 0.60 M                |
+| L    | 2.1 s          | 2.1 s              | 1720-1880 | 420-505        | 8-11  | 10-13.5                          | 1.38 M                |
+| XL   | 5.4 s          | 4.7 s              | 3180-3300 | 780-890        | 12-15 | 12-27                            | 2.41 M                |
+
+In the browser (muted headless Chrome, 1440x900, the same busy machine): a
+new four-player game from the setup screen to its first frame took 4.3 s on
+Medium, 4.8-6.0 s on Large and 8.1-8.5 s on Extra Large; the map renderer
+builds an 8x8-cell chunk in about 60-70 ms whatever the size (chunks are
+built as the view meets them and cached), a one-cell pan step draws in under
+1 ms over built chunks, the minimap fits any size into its frame (Extra
+Large at about 1.75 px a cell) and the JavaScript heap was about 120 MB on
+Medium, 180-220 MB on Large and 260-540 MB on Extra Large. The adventure
+AI's first turn (player 0, day 1, four players) took 1.7 s on Medium (cold),
+0.6 s on Large and 1.3 s on Extra Large, at most 0.2-0.3 s for one decision:
+its searches are bounded by days of movement, not by the map.
+
+**Extra Large is generated, not offered** (`?size=XL` in the address still
+starts one). Its save starts at about 2.4 million characters, near the
+localStorage quota of some browsers (Safari keeps about 2.5 million), and
+saving fails silently past it; a new game takes about twice Large's time;
+and its two-player starts can be 27 days apart and a start's nearest neutral
+town 7 days off (seed 3, four players). A follow-up can compact the save
+(the explored flags and cells) and tune XL's start spacing, then offer it.
 
 [rmg]: https://vcmi.eu/developers/RMG_Description/
 [tpl]: https://vcmi.eu/modders/Random_Map_Template

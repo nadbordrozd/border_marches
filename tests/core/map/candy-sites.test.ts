@@ -18,12 +18,13 @@ import { CANDY_SITES, candySites } from "../../../src/core/map/gen/candy.ts";
 import type { GenState } from "../../../src/core/map/gen/state.ts";
 import { getCreature } from "../../../src/data/creatures.ts";
 import type { MapSize, PlayerCount } from "../../../src/core/map/generate.ts";
+import { everySize } from "../../../src/core/map/gen/config.ts";
 
 const NO_CANDY = {
   terrain: {
     candy: {
       ...DEFAULT_GEN_CONFIG.terrain.candy,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
   },
 };
@@ -35,11 +36,11 @@ const NO_CANDY = {
  * allows", like the desert's sites).
  */
 const WITH: [number, MapSize, PlayerCount][] = [
-  [3, "M", 2],
-  [10, "M", 2],
+  [3, "SM", 2],
+  [10, "SM", 2],
   [6, "S", 2],
-  [4, "L", 2],
-  [12, "L", 2],
+  [4, "M", 2],
+  [12, "M", 2],
 ];
 
 const ofType = (map: GameMap, type: string): MapObject[] =>
@@ -144,7 +145,7 @@ describe("candy sites in the generator", { timeout: 120_000 }, () => {
   it("puts no candy site on a map without a candy zone", () => {
     for (let seed = 1; seed <= 4; seed += 1) {
       const { map, info } = generateMapWithInfo(seed, {
-        size: "M",
+        size: "SM",
         players: 2,
         config: NO_CANDY,
       });

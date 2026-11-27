@@ -131,6 +131,13 @@ once are offered one after another.
 
 ## 7. Adventure map rules
 
+Map sizes (bead bzc.147, the Heroes sizes): a random map is Small 36x36
+(two or three players), Medium 72x72 (the default; two to four) or Large
+108x108 (two to four). Extra Large 144x144 is generated but not offered yet.
+A named map keeps its own size: The Keepers' Toll is 48x48 ("Small+"), the
+other three are Medium. How the generator scales with the size:
+[MAP_COMPOSITION.md section 9](MAP_COMPOSITION.md#9-bead-bzc147-the-heroes-map-sizes).
+
 ### 7.1 Grid and movement
 
 - Square grid; the hero moves in **8 directions**.

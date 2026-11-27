@@ -30,6 +30,7 @@ import { FOREST_FAMILY } from "../../../src/assets/ground-family.ts";
 import { peaksOf } from "../../../src/assets/peaks.ts";
 import { TREE_SPECIES_WEIGHTS, treesOf } from "../../../src/assets/trees.ts";
 import type { MapSize, PlayerCount } from "../../../src/core/map/generate.ts";
+import { everySize } from "../../../src/core/map/gen/config.ts";
 
 describe("frosting ground data", () => {
   it("is a land terrain as slow as the sand, native to the Candy Kingdom", () => {
@@ -82,16 +83,16 @@ const NO_CANDY = {
   terrain: {
     candy: {
       ...DEFAULT_GEN_CONFIG.terrain.candy,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
   },
 };
 
 /** Seeds (2 players) with a candy zone. */
 const WITH: [number, MapSize, PlayerCount][] = [
-  [3, "M", 2],
+  [3, "SM", 2],
   [6, "S", 2],
-  [4, "L", 2],
+  [4, "M", 2],
 ];
 
 describe("candy zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
@@ -128,7 +129,7 @@ describe("candy zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   it("leaves no candy zone on many maps", () => {
     let without = 0;
     for (let seed = 1; seed <= 12; seed += 1) {
-      const size = (["S", "M", "L"] as const)[seed % 3] ?? "M";
+      const size = (["S", "SM", "M"] as const)[seed % 3] ?? "SM";
       const { info } = generateMapWithInfo(seed, { size, players: 2 });
       if (!info.zones.some((z) => z.main === "frosting")) without += 1;
     }
@@ -140,7 +141,7 @@ describe("candy zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
     let others = 0;
     for (let seed = 1; seed <= 8; seed += 1) {
       const { map, info } = generateMapWithInfo(seed, {
-        size: "L",
+        size: "M",
         players: 2,
       });
       const kind = (i: number): string =>
@@ -172,7 +173,7 @@ describe("candy zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   it("changes nothing on a map that rolls no candy zone", () => {
     let checked = 0;
     for (let seed = 1; seed <= 8 && checked < 3; seed += 1) {
-      const size = (["S", "M"] as const)[seed % 2] ?? "S";
+      const size = (["S", "SM"] as const)[seed % 2] ?? "S";
       const a = generateMapWithInfo(seed, { size, players: 2 });
       if (a.info.zones.some((z) => z.main === "frosting")) continue;
       const b = generateMapWithInfo(seed, {
@@ -211,11 +212,7 @@ describe("candy zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
       // Bead bzc.129: the Cartographer's Folly asks for one (chance 1).
       const n = def.gen?.landscapes?.candy ?? 0;
       const chance = n > 0 ? 2 ** (n - 1) : 0;
-      expect(cfg.terrain?.candy?.chance, def.id).toEqual({
-        S: chance,
-        M: chance,
-        L: chance,
-      });
+      expect(cfg.terrain?.candy?.chance, def.id).toEqual(everySize(chance));
     }
   });
 });
@@ -265,7 +262,7 @@ describe("Candy outposts on frosting", { timeout: HEAVY_TIMEOUT }, () => {
   // the candy zone (its zones list it), on the frosting while a site there
   // is free, else on the zone's grass patches (L24).
   it("lets a generated Candy outpost into the candy zone (L 24)", () => {
-    const { map, info } = generateMapWithInfo(24, { size: "L", players: 2 });
+    const { map, info } = generateMapWithInfo(24, { size: "M", players: 2 });
     const outposts = map.objects.filter(
       (o) =>
         o.data["type"] === "faction-outpost" && o.data["faction"] === "candy",

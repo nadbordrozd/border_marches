@@ -11,7 +11,7 @@ const rows: string[] = [];
 let sumV = 0;
 let sumA = 0;
 let n = 0;
-for (const size of ["S", "M", "L"] as const) {
+for (const size of ["S", "SM", "M", "L"] as const) {
   for (const seed of [1, 2, 3, 7]) {
     const t = performance.now();
     const { map } = generateMapWithInfo(seed, { size, players: 3 });

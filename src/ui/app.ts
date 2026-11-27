@@ -22,7 +22,7 @@ import { CREATURES, getCreature } from "../data/creatures.ts";
 import { MAX_PLAYERS, MIN_PLAYERS, playerColour } from "../data/players.ts";
 import { heroArt, unitArt } from "../assets/unit-art.ts";
 import type { CreatureId, FactionId } from "../data/types.ts";
-import { generateMap } from "../core/map/generate.ts";
+import { MAP_SIZES, generateMap } from "../core/map/generate.ts";
 import type { MapSize, PlayerCount } from "../core/map/generate.ts";
 import {
   NAMED_MAPS,
@@ -41,11 +41,42 @@ import { installUiSounds, soundControl } from "./sound-control.ts";
 import { installTooltips, setTip } from "./tooltip.ts";
 import "./game.css";
 
-const SIZES: ReadonlyArray<{ id: MapSize; label: string }> = [
-  { id: "S", label: "Small 36x36" },
-  { id: "M", label: "Medium 48x48" },
-  { id: "L", label: "Large 72x72" },
-];
+/**
+ * Every map size's name and the players a random map of it takes (bead
+ * bzc.147: the Heroes sizes; at most MAX_PLAYERS, which is four). SM is
+ * the 48x48 map of The Keepers' Toll, not offered for a random map.
+ */
+export const MAP_SIZE_INFO: Readonly<
+  Record<MapSize, { label: string; players: readonly [number, number] }>
+> = {
+  S: { label: "Small 36x36", players: [2, 3] },
+  SM: { label: "Small+ 48x48", players: [2, 4] },
+  M: { label: "Medium 72x72", players: [2, 4] },
+  L: { label: "Large 108x108", players: [2, 4] },
+  XL: { label: "Extra Large 144x144", players: [2, 4] },
+};
+
+/**
+ * The sizes the setup screen offers for a random map, smallest first.
+ * Extra Large (144x144) is generated (?size=XL in the address) but not
+ * offered yet (bead bzc.147, docs/design/MAP_COMPOSITION.md section 9): its
+ * save starts at about 2.4 million characters, at the edge of what some
+ * browsers keep in localStorage, and a new game takes twice Large's time.
+ */
+export const SETUP_SIZES: readonly MapSize[] = ["S", "M", "L"];
+
+/** The setup screen's size when the address names none. */
+export const DEFAULT_SETUP_SIZE: MapSize = "M";
+
+/** Players a random map of this size takes: `players` within its range. */
+export function playersFor(size: MapSize, players: number): PlayerCount {
+  const [least, most] = MAP_SIZE_INFO[size].players;
+  return Math.min(
+    MAX_PLAYERS,
+    most,
+    Math.max(MIN_PLAYERS, least, Math.round(players) || least),
+  ) as PlayerCount;
+}
 
 export function randomSeed(): number {
   return Math.floor(Math.random() * 1_000_000);
@@ -125,10 +156,7 @@ function createMapGame(setup: GameSetup): GameState {
       players: namedPlayerSetups(def, setup.faction),
     });
   }
-  const players = Math.min(
-    MAX_PLAYERS,
-    Math.max(MIN_PLAYERS, setup.players),
-  ) as PlayerCount;
+  const players = playersFor(setup.size, setup.players);
   const map = generateMap(setup.seed, {
     size: setup.size,
     players,
@@ -225,40 +253,41 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
     const autostart = params.get("autostart") === "1";
 
     // ------------------------------------------------ random map rows
+    // Any size by address (SM too, for testing); the buttons offer the
+    // Heroes sizes.
+    const sizeParam = (params.get("size") ?? "").toUpperCase();
     let size: MapSize =
-      params.get("size") === "S" || params.get("size") === "L"
-        ? (params.get("size") as MapSize)
-        : "M";
+      MAP_SIZES.find((m) => m === sizeParam) ?? DEFAULT_SETUP_SIZE;
+    let players = playersFor(size, Number(params.get("players") ?? 2) || 2);
     const sizeRow = el("div.gm-size-row");
+    const playersRow = el("div.gm-size-row");
     const renderSizes = (): void => {
       sizeRow.replaceChildren();
-      for (const s of SIZES) {
+      for (const id of SETUP_SIZES) {
         const b = button(
-          s.label,
+          MAP_SIZE_INFO[id].label,
           () => {
-            size = s.id;
+            size = id;
+            // A size takes its own range of players (Small: two or three).
+            players = playersFor(size, players);
             renderSizes();
+            renderPlayers();
           },
           "gm-btn gm-size",
         );
-        if (s.id === size) b.classList.add("gm-selected");
-        b.setAttribute("aria-pressed", String(s.id === size));
+        if (id === size) b.classList.add("gm-selected");
+        b.setAttribute("aria-pressed", String(id === size));
         sizeRow.append(b);
       }
     };
-    renderSizes();
-    let players = Math.min(
-      MAX_PLAYERS,
-      Math.max(MIN_PLAYERS, Number(params.get("players") ?? 2) || 2),
-    );
-    const playersRow = el("div.gm-size-row");
     const renderPlayers = (): void => {
       playersRow.replaceChildren();
-      for (let n = MIN_PLAYERS; n <= MAX_PLAYERS; n++) {
+      const [least, most] = MAP_SIZE_INFO[size].players;
+      for (let n = least; n <= Math.min(most, MAX_PLAYERS); n++) {
         const b = button(
           `${n} players`,
           () => {
-            players = n;
+            players = playersFor(size, n);
             renderPlayers();
           },
           "gm-btn gm-size",
@@ -272,6 +301,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         playersRow.append(b);
       }
     };
+    renderSizes();
     renderPlayers();
 
     // ------------------------------------------------ options (folded)
@@ -371,7 +401,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
       ...NAMED_MAPS.map((m) => ({
         id: m.id,
         label: m.name,
-        hint: `${m.players} players, ${SIZES.find((s) => s.id === m.size)?.label ?? m.size}`,
+        hint: `${m.players} players, ${MAP_SIZE_INFO[m.size].label}`,
         def: m,
       })),
     ];

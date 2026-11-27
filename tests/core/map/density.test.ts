@@ -27,17 +27,22 @@ import {
 // Bead bzc.110: the buildings that keep a way round move the fill again
 // (a fallen adventurer on S seeds 27, 28 and 29 of 1-30, was 7, 19, 27
 // and 28), so S 27.
-const SEEDS: Record<MapSize, readonly number[]> = {
+// The 48x48 and 72x72 maps (SM and M since bead bzc.147: M and L before).
+const SEEDS: Record<"S" | "SM" | "M", readonly number[]> = {
   S: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 21, 27],
-  M: [1, 2, 3, 4, 5, 6, 16],
-  L: [1, 2, 3, 4],
+  SM: [1, 2, 3, 4, 5, 6, 16],
+  M: [1, 2, 3, 4],
 };
 
 /**
  * Visitable objects per 100 passable cells before bead bzc.50 (seeds 1-8,
  * default players): S 11.1, M 10.9, L 9.9.
  */
-const BEFORE: Record<MapSize, number> = { S: 11.1, M: 10.9, L: 9.9 };
+const BEFORE: Record<"S" | "SM" | "M", number> = {
+  S: 11.1,
+  SM: 10.9,
+  M: 9.9,
+};
 
 const cache = new Map<string, { map: GameMap; info: GenerateInfo }>();
 function gen(
@@ -53,8 +58,12 @@ function gen(
   return out;
 }
 
-function* all(): Generator<{ label: string; size: MapSize; map: GameMap }> {
-  for (const size of ["S", "M", "L"] as const) {
+function* all(): Generator<{
+  label: string;
+  size: keyof typeof SEEDS;
+  map: GameMap;
+}> {
+  for (const size of ["S", "SM", "M"] as const) {
     for (const seed of SEEDS[size]) {
       yield { label: `${size}${seed}`, size, map: gen(seed, size).map };
     }
@@ -99,7 +108,7 @@ describe("denser maps (bzc.50)", { timeout: HEAVY_TIMEOUT }, () => {
     // tents down before the fill, but cannot make the gate sites; a
     // follow-up bead looks at gate sites on S maps.
     const rareOnS: ObjectTypeId[] = ["border-gate", "keymasters-tent"];
-    for (const size of ["S", "M", "L"] as const) {
+    for (const size of ["S", "SM", "M"] as const) {
       const seen = new Set<string>();
       for (const seed of SEEDS[size]) {
         for (const o of gen(seed, size).map.objects) seen.add(typeOf(o));

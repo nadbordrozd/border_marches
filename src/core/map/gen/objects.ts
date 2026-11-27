@@ -899,7 +899,6 @@ export function placeObjects(st: GenState): PlacementReport {
   // Objects placed by rule (CONTENT_MAP_OBJECTS 3.6, 3.9, 3.4): obelisks,
   // the buried Keystone and caches, waystone pairs, pylons, the vault.
   const rrng = stageRng(st, "rules");
-  const big = st.size === "L" ? 2 : st.size === "M" ? 1 : 0;
   const wild = st.zones.filter((z) => z.role === "middle" || z.role === "town");
   const ruleZones =
     wild.length > 0 ? wild : st.zones.filter((z) => z.role !== "hold");
@@ -938,7 +937,8 @@ export function placeObjects(st: GenState): PlacementReport {
   if (ruleZones.length > 0) {
     const order = rrng.shuffle(ruleZones.map((z) => z.id));
     const nth = (k: number): number[] => [order[k % order.length] ?? 0];
-    const obelisks = [4, 6, 8][big] ?? 4;
+    const counts = oc.rules[st.size];
+    const obelisks = counts.obelisks;
     for (let k = 0; k < obelisks; k++) ruleRequest("obelisk", nth(k));
     const keystoneZone = holdZone?.id ?? deep[0]?.id ?? 0;
     ruleRequest(
@@ -947,12 +947,12 @@ export function placeObjects(st: GenState): PlacementReport {
       {},
       3,
     );
-    const caches = [3, 4, 6][big] ?? 3;
+    const caches = counts.caches;
     for (let k = 0; k < caches; k++)
       ruleRequest("buried-cache", nth(k + 1), {}, tierOf(nth(k + 1)[0] ?? 0));
-    const pylons = [3, 4, 5][big] ?? 3;
+    const pylons = counts.pylons;
     for (let k = 0; k < pylons; k++) ruleRequest("pylon", nth(k + 3));
-    const pairs = [1, 2, 3][big] ?? 1;
+    const pairs = counts.waystonePairs;
     for (let k = 0; k < pairs && order.length >= 2; k++) {
       const colour = WAYSTONE_COLOURS[k % WAYSTONE_COLOURS.length] ?? "amber";
       const a = order[(2 * k) % order.length] ?? 0;
@@ -967,7 +967,7 @@ export function placeObjects(st: GenState): PlacementReport {
         { pair: `${colour}-${k}`, colour },
       );
     }
-    if (big >= 1) {
+    if (counts.vault) {
       ruleRequest(
         "keepers-vault",
         holdZone !== undefined
@@ -1723,7 +1723,7 @@ export function placeObjects(st: GenState): PlacementReport {
   // Bead bzc.96 (reserveRare): the keymaster's tents of the border gates
   // to come are set down before the single-cell fill takes the room; a
   // tent no gate wants is taken up again below.
-  const gateCount = [1, 1, 2][big] ?? 1;
+  const gateCount = oc.rules[st.size].borderGates;
   const keyRow = ruleRow("keymasters-tent");
   const tentRequest = (colour: string): Request | undefined =>
     keyRow === undefined

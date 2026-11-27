@@ -4,7 +4,8 @@
  *   seed=N        render generateMap(N) (src/core/map/generate.ts);
  *                 without seed, named or map, seed 1
  *   named=ID      render a named map (src/core/map/named.ts)
- *   size=S|M|L    generator map size (default M)
+ *   size=S|SM|M|L|XL  generator map size (default M: 72x72; L 108x108,
+ *                 XL 144x144, SM 48x48; bead bzc.147)
  *   players=2..4  generator player starts (default per size)
  *   map=ranges    a test map of mountain ranges of many shapes
  *   map=decorations  every decoration and prop on each ground (bead bzc.48)
@@ -19,14 +20,14 @@
  *   bench=N       render N frames after load and report the mean time
  *
  * The page builds every map from the game's own code: nothing from tests/
- * (bead xaj.18 removed the test-fixture fallback; size=L is the big map
- * for benchmarks).
+ * (bead xaj.18 removed the test-fixture fallback; size=L or XL is the big
+ * map for benchmarks).
  */
 import { CELL_PX } from "../../assets/manifest";
 import type { GameMap, MapCell } from "../../core/map/types";
 import { cellAt, isPassable, objectBlockedSet } from "../../core/map/types";
 import type { Route } from "../../router";
-import { generateMap } from "../../core/map/generate";
+import { MAP_SIZES, generateMap } from "../../core/map/generate";
 import { findPathInContext } from "../../core/game/pathfinding";
 import { buildNamedMap } from "../../core/map/named";
 import { playableFactions } from "../../data/factions";
@@ -290,7 +291,7 @@ export async function startMapDebug(
           : which === "artifacts"
             ? artifactShowcase()
             : generateMap(seed, {
-                size: size === "S" || size === "L" ? size : "M",
+                size: MAP_SIZES.find((s) => s === size) ?? "M",
                 ...(players === 2 || players === 3 || players === 4
                   ? { players }
                   : {}),

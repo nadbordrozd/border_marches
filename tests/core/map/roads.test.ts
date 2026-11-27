@@ -23,7 +23,7 @@ import {
 import type { GameMap } from "../../../src/core/map/types.ts";
 
 const MAPS: Array<{ label: string; map: () => GameMap }> = [
-  ...(["S", "M", "L"] as const).flatMap((size) =>
+  ...(["S", "SM", "M"] as const).flatMap((size) =>
     [1, 2, 3, 4, 5, 6].map((seed) => ({
       label: `${size}${seed}`,
       map: () => generateMap(seed, { size }),

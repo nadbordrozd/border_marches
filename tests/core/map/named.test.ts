@@ -44,6 +44,7 @@ import { WINTER_SITES } from "../../../src/core/map/gen/objects.ts";
 import { SWAMP_SITES } from "../../../src/core/map/gen/swamp.ts";
 import { VOLCANIC_SITES } from "../../../src/core/map/gen/volcanic.ts";
 import { moveCosts, walkable } from "./map-helpers.ts";
+import { everySize } from "../../../src/core/map/gen/config.ts";
 
 const built = new Map<string, GameMap>();
 function mapOf(id: string): GameMap {
@@ -273,10 +274,10 @@ const PUZZLES: Record<
 describe("named maps", { timeout: HEAVY_TIMEOUT }, () => {
   it("ships two two-player maps and two three-player Realm, Restless, Horde maps", () => {
     expect(NAMED_MAPS.map((m) => [m.id, m.players, m.size])).toEqual([
-      ["keepers-toll", 2, "M"],
-      ["hourglass-marches", 3, "L"],
-      ["ninefold-landfall", 3, "L"],
-      ["cartographers-folly", 2, "L"],
+      ["keepers-toll", 2, "SM"],
+      ["hourglass-marches", 3, "M"],
+      ["ninefold-landfall", 3, "M"],
+      ["cartographers-folly", 2, "M"],
     ]);
     for (const id of ["hourglass-marches", "ninefold-landfall"]) {
       expect(def(id).factions).toEqual(["humans", "undead", "goblins"]);
@@ -547,10 +548,10 @@ describe("named maps", { timeout: HEAVY_TIMEOUT }, () => {
   it("forces n zones of a landscape with a chance that never fails", () => {
     const m = def("ninefold-landfall");
     const two = namedConfig({ ...m, gen: { landscapes: { winter: 2 } } });
-    expect(two.terrain?.winter?.chance).toEqual({ S: 2, M: 2, L: 2 });
-    expect(two.terrain?.winter?.maxZones).toEqual({ S: 2, M: 2, L: 2 });
+    expect(two.terrain?.winter?.chance).toEqual(everySize(2));
+    expect(two.terrain?.winter?.maxZones).toEqual(everySize(2));
     // Landscapes not asked for stay off, as on the first two maps.
-    expect(two.terrain?.volcanic?.chance).toEqual({ S: 0, M: 0, L: 0 });
+    expect(two.terrain?.volcanic?.chance).toEqual(everySize(0));
     expect(namedConfig(def("keepers-toll"))).toBe(
       namedConfig(def("hourglass-marches")),
     );

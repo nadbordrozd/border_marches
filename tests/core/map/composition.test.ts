@@ -11,15 +11,17 @@ import type { GenerateInfo, MapSize } from "../../../src/core/map/generate.ts";
 import {
   DEFAULT_GEN_CONFIG,
   LEGACY_COMPOSITION,
+  everySize,
 } from "../../../src/core/map/gen/config.ts";
 import type { GameMap, MapObject } from "../../../src/core/map/types.ts";
 import { isPassable } from "../../../src/core/map/types.ts";
 import { isPickup } from "../../../src/core/game/site-state.ts";
 
-const SEEDS: Record<MapSize, readonly number[]> = {
+// The 48x48 and 72x72 maps (SM and M since bead bzc.147: M and L before).
+const SEEDS: Record<"S" | "SM" | "M", readonly number[]> = {
   S: [1, 2, 3, 4],
-  M: [1, 2, 3, 4],
-  L: [1, 2],
+  SM: [1, 2, 3, 4],
+  M: [1, 2],
 };
 
 /**
@@ -32,7 +34,7 @@ const NO_CANDY = {
   terrain: {
     candy: {
       ...DEFAULT_GEN_CONFIG.terrain.candy,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
   },
 };
@@ -56,7 +58,7 @@ function* all(): Generator<{
   map: GameMap;
   info: GenerateInfo;
 }> {
-  for (const size of ["S", "M", "L"] as const) {
+  for (const size of ["S", "SM", "M"] as const) {
     for (const seed of SEEDS[size]) {
       yield { label: `${size}${seed}`, ...gen(seed, size) };
     }
@@ -228,7 +230,7 @@ describe("map composition (bzc.96)", { timeout: HEAVY_TIMEOUT }, () => {
   it("puts a pond in some clearings, never cutting a way", () => {
     let ponds = 0;
     for (let seed = 1; seed <= 8; seed++) {
-      const { info } = gen(seed, "L");
+      const { info } = gen(seed, "M");
       ponds += info.fields.ponds;
       expect(info.skipped, `L${seed}`).toEqual([]);
     }
@@ -236,7 +238,7 @@ describe("map composition (bzc.96)", { timeout: HEAVY_TIMEOUT }, () => {
   });
 
   it("grows fewer, larger obstacle masses than before, open land in the HoMM band", () => {
-    for (const size of ["S", "M", "L"] as const) {
+    for (const size of ["S", "SM", "M"] as const) {
       let masses = 0;
       let small = 0;
       let oldMasses = 0;

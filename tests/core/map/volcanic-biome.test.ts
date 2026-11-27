@@ -20,6 +20,7 @@ import type { MapSize, PlayerCount } from "../../../src/core/map/generate.ts";
 import { TREE_SPECIES_WEIGHTS, treesOf } from "../../../src/assets/trees.ts";
 import { decorationById } from "../../../src/assets/decorations.ts";
 import { artFor } from "../../../src/assets/object-art.ts";
+import { everySize } from "../../../src/core/map/gen/config.ts";
 
 const SITES = ["infernal-forge", "brimstone-pit", "shrine-of-embers"] as const;
 
@@ -52,9 +53,9 @@ const typeOf = (map: GameMap, type: string) =>
 
 /** Seeds (2 players) with a volcanic zone that holds all three sites. */
 const WITH: [number, MapSize, PlayerCount][] = [
-  [4, "M", 2],
+  [4, "SM", 2],
   [9, "S", 2],
-  [5, "L", 2],
+  [5, "M", 2],
 ];
 
 describe("volcanic decorations, props and woods", () => {
@@ -136,7 +137,7 @@ describe("volcanic sites in the generator", () => {
       terrain: {
         volcanic: {
           ...DEFAULT_GEN_CONFIG.terrain.volcanic,
-          chance: { S: 0, M: 0, L: 0 },
+          chance: everySize(0),
         },
       },
     };

@@ -4,6 +4,8 @@
  * per size; every map with --each). See docs/design/MAP_COMPOSITION.md.
  *
  *   node tests/map-metrics.ts [--seeds 10] [--sizes S,M,L] [--each]
+ *
+ * Sizes: S 36, SM 48, M 72, L 108, XL 144 (bead bzc.147).
  */
 import { generateMapWithInfo } from "../src/core/map/generate.ts";
 import type { MapSize } from "../src/core/map/generate.ts";

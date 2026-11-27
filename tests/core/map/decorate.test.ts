@@ -44,9 +44,9 @@ const cheb = (a: { x: number; y: number }, b: { x: number; y: number }) =>
 
 const GENERATED = [
   [3, "S"],
-  [7, "M"],
-  [11, "M"],
-  [5, "L"],
+  [7, "SM"],
+  [11, "SM"],
+  [5, "M"],
 ] as const;
 
 describe("decorations on maps (bzc.72)", { timeout: HEAVY_TIMEOUT }, () => {
@@ -86,7 +86,7 @@ describe("decorations on maps (bzc.72)", { timeout: HEAVY_TIMEOUT }, () => {
   });
 
   it("is seeded: the same map decorates the same way", () => {
-    expect(JSON.stringify(generateMap(7, { size: "M" }))).toBe(
+    expect(JSON.stringify(generateMap(7, { size: "SM" }))).toBe(
       JSON.stringify(maps[1]!.map),
     );
     const def = NAMED_MAPS[0]!;

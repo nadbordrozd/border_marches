@@ -266,7 +266,7 @@ describe("Drills, specials and the Keystone", () => {
 
 describe("Setup and the map", () => {
   it("neutral towns on generated maps take a v0.2 faction, seeded", () => {
-    const map = generateMap(11, { size: "M", players: 2 });
+    const map = generateMap(11, { size: "SM", players: 2 });
     const neutral = map.objects.filter(
       (o) =>
         o.kind === "town" &&
@@ -278,7 +278,7 @@ describe("Setup and the map", () => {
       expect(["humans", "undead", "goblins", "candy", "dwarves"]).toContain(
         t.data["faction"],
       );
-    const again = generateMap(11, { size: "M", players: 2 });
+    const again = generateMap(11, { size: "SM", players: 2 });
     expect(
       again.objects
         .filter((o) => o.kind === "town")
@@ -389,7 +389,7 @@ describe("Setup and the map", () => {
       ["ai", "candy"],
     ]);
     expect(
-      playerSetups({ seed: 1, size: "M", players: 4, faction: "candy" }).map(
+      playerSetups({ seed: 1, size: "SM", players: 4, faction: "candy" }).map(
         (p) => p.faction,
       ),
     ).toEqual(["candy", "dwarves", "humans", "undead"]);

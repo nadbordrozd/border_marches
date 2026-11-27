@@ -41,9 +41,13 @@ const { module: terrain } = await runnerImport<typeof Terrain>(
 
 const BENCHMARKS: readonly Benchmark[] = [
   mapBenchmark("S", 120),
-  mapBenchmark("M", 180),
-  // The game's large map: the old unit-tier budget (300 ms).
-  { ...mapBenchmark("L", 300), name: "generate map L (large)" },
+  // Bead bzc.147: SM and M are the medium and large maps of before, with
+  // their budgets (M: the old unit-tier budget of the large map, 300 ms);
+  // L and XL are the Heroes sizes on top, measured when they came in.
+  mapBenchmark("SM", 180),
+  mapBenchmark("M", 300),
+  mapBenchmark("L", 900),
+  mapBenchmark("XL", 1800),
   // Bead xaj.31: a whole terrain plan (made once per map, bead bzc.106).
   ...terrain.TERRAIN_BENCHMARKS,
 ];

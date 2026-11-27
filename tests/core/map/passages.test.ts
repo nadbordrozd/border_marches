@@ -39,8 +39,8 @@ import { buildMap, heroStart, pickup } from "../game/helpers.ts";
 
 const CASES: Array<[MapSize, number[]]> = [
   ["S", [1, 2, 3, 4, 5, 6, 7, 8]],
-  ["M", [1, 2, 3, 4, 5, 6]],
-  ["L", [1, 2, 3]],
+  ["SM", [1, 2, 3, 4, 5, 6]],
+  ["M", [1, 2, 3]],
 ];
 
 /**

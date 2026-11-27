@@ -2,7 +2,9 @@
  * Map terrain benchmarks (bead border_marches-xaj.31), loaded by run.ts
  * through Vite's module runner (the render code imports without extensions).
  *
- * - "terrain full M/L": the whole terrain plan of a generated map: what
+ * - "terrain full SM/M/L/XL": the whole terrain plan of a generated map
+ *   (48, 72, 108 and 144 cells a side; SM and M were M and L before bead
+ *   bzc.147, with their budgets): what
  *   setMap costs. An object change costs the terrain nothing: the plan reads
  *   only the map (bead bzc.106).
  */
@@ -34,6 +36,8 @@ function fullBenchmark(size: MapSize, budgetMs: number): Benchmark {
 }
 
 export const TERRAIN_BENCHMARKS: readonly Benchmark[] = [
-  fullBenchmark("M", 600),
-  fullBenchmark("L", 1200),
+  fullBenchmark("SM", 600),
+  fullBenchmark("M", 1200),
+  fullBenchmark("L", 2700),
+  fullBenchmark("XL", 4800),
 ];

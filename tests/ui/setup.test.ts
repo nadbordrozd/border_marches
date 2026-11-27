@@ -6,16 +6,65 @@
  */
 import { describe, expect, it } from "vitest";
 import { HEAVY_TIMEOUT } from "../timeouts.ts";
-import { buildNamedMap } from "../../src/core/map/named.ts";
+import { DEFAULT_GEN_CONFIG, MAP_SIZES } from "../../src/core/map/generate.ts";
+import { NAMED_MAPS, buildNamedMap } from "../../src/core/map/named.ts";
 import { hasHeroArt, hasUnitArt } from "../../src/assets/unit-art.ts";
 import { getCreature } from "../../src/data/creatures.ts";
 import { playableFactions } from "../../src/data/factions.ts";
 import {
+  DEFAULT_SETUP_SIZE,
+  MAP_SIZE_INFO,
+  SETUP_SIZES,
   createGame,
   factionShowcase,
   playerSetups,
+  playersFor,
   randomMapRows,
 } from "../../src/ui/app.ts";
+
+describe("map sizes like Heroes (bead bzc.147)", () => {
+  it("offers Small 36, Medium 72 (the default) and Large 108", () => {
+    expect(SETUP_SIZES.map((s) => MAP_SIZE_INFO[s].label)).toEqual([
+      "Small 36x36",
+      "Medium 72x72",
+      "Large 108x108",
+    ]);
+    expect(DEFAULT_SETUP_SIZE).toBe("M");
+    // Every size's label names its real side; XL is generated, not offered.
+    for (const s of MAP_SIZES) {
+      const side = DEFAULT_GEN_CONFIG.sizes[s];
+      expect(MAP_SIZE_INFO[s].label).toContain(`${side}x${side}`);
+    }
+    expect(DEFAULT_GEN_CONFIG.sizes).toEqual({
+      S: 36,
+      SM: 48,
+      M: 72,
+      L: 108,
+      XL: 144,
+    });
+  });
+
+  it("labels the named maps by their real size", () => {
+    const labels = Object.fromEntries(
+      NAMED_MAPS.map((m) => [m.id, MAP_SIZE_INFO[m.size].label]),
+    );
+    expect(labels).toEqual({
+      "keepers-toll": "Small+ 48x48",
+      "hourglass-marches": "Medium 72x72",
+      "ninefold-landfall": "Medium 72x72",
+      "cartographers-folly": "Medium 72x72",
+    });
+  });
+
+  it("keeps the players within each size's range", () => {
+    expect(playersFor("S", 4)).toBe(3);
+    expect(playersFor("S", 2)).toBe(2);
+    expect(playersFor("M", 4)).toBe(4);
+    expect(playersFor("L", 1)).toBe(2);
+    expect(playersFor("L", 9)).toBe(4);
+    expect(playersFor("XL", 3)).toBe(3);
+  });
+});
 
 describe("two-column setup screen (bead bzc.66)", () => {
   it("hides the size, players and seed rows for a named map", () => {
@@ -90,7 +139,7 @@ describe("named maps in new-game setup", { timeout: HEAVY_TIMEOUT }, () => {
     });
     const b = createGame({
       seed: 999,
-      size: "M",
+      size: "SM",
       players: 2,
       faction: "undead",
       map: "hourglass-marches",
@@ -115,7 +164,7 @@ describe("named maps in new-game setup", { timeout: HEAVY_TIMEOUT }, () => {
   it("starts the two-player map with the human against one computer", () => {
     const s = createGame({
       seed: 1,
-      size: "L",
+      size: "M",
       players: 4,
       faction: "humans",
       map: "keepers-toll",
@@ -132,7 +181,7 @@ describe("named maps in new-game setup", { timeout: HEAVY_TIMEOUT }, () => {
     expect(() =>
       createGame({
         seed: 1,
-        size: "M",
+        size: "SM",
         players: 2,
         faction: "humans",
         map: "nowhere",

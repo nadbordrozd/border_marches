@@ -23,7 +23,7 @@ import { OBJECT_TYPES } from "../../data/objectTypes.ts";
 import { decorateMap } from "./decorate.ts";
 import { keepWaysRound } from "./passages.ts";
 import { relayRoads, roadMayCross } from "./gen/objects.ts";
-import { LEGACY_COMPOSITION } from "./gen/config.ts";
+import { LEGACY_COMPOSITION, everySize } from "./gen/config.ts";
 import {
   DEFAULT_GEN_CONFIG,
   corridorCells,
@@ -133,26 +133,26 @@ const NAMED_CONFIG: {
   terrain: {
     volcanic: {
       ...DEFAULT_GEN_CONFIG.terrain.volcanic,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
     // Nor the winter zones of bead bzc.87, for the same reason.
     winter: {
       ...DEFAULT_GEN_CONFIG.terrain.winter,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
     desert: {
       ...DEFAULT_GEN_CONFIG.terrain.desert,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
     // Nor the candy zones of bead bzc.115.
     candy: {
       ...DEFAULT_GEN_CONFIG.terrain.candy,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
     // Nor the swamps of bead bzc.126.
     swamp: {
       ...DEFAULT_GEN_CONFIG.terrain.swamp,
-      chance: { S: 0, M: 0, L: 0 },
+      chance: everySize(0),
     },
   },
 };
@@ -176,8 +176,8 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
     const chance = 2 ** (n - 1);
     return {
       ...DEFAULT_GEN_CONFIG.terrain[key],
-      chance: { S: chance, M: chance, L: chance },
-      maxZones: { S: n, M: n, L: n },
+      chance: everySize(chance),
+      maxZones: everySize(n),
     };
   };
   const base = DEFAULT_GEN_CONFIG.objects;
@@ -195,9 +195,7 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
     // every landscape's sites); only its landscapes and zones are its own.
     const middle = gen.middleZones;
     return {
-      ...(towns !== undefined
-        ? { neutralTowns: { S: towns, M: towns, L: towns } }
-        : {}),
+      ...(towns !== undefined ? { neutralTowns: everySize(towns) } : {}),
       ...(middle !== undefined
         ? {
             middleZones: {
@@ -231,9 +229,7 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
     };
   }
   return {
-    ...(towns !== undefined
-      ? { neutralTowns: { S: towns, M: towns, L: towns } }
-      : {}),
+    ...(towns !== undefined ? { neutralTowns: everySize(towns) } : {}),
     clusters: NAMED_CONFIG.clusters,
     // Bead bzc.102: a map authored on the map composition gets its guarded
     // treasure clusters (the starts' own too), treasure clearings and

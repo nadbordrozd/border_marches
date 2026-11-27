@@ -80,7 +80,7 @@ describe("tree assets", () => {
 });
 
 describe("canopy placement", () => {
-  const map = generateMap(2, { size: "M" });
+  const map = generateMap(2, { size: "SM" });
   const { featured, field, trees } = woodsOf(map);
 
   it("is deterministic and dense", () => {
@@ -141,7 +141,7 @@ describe("grass woods (bead xaj.27)", () => {
     let grass = 0;
     let autumn = 0;
     for (const seed of [3, 5]) {
-      const map = generateMap(seed, { size: "M" });
+      const map = generateMap(seed, { size: "SM" });
       for (const t of woodsOf(map).trees) {
         if (!t.key.startsWith("tree-grass-")) continue;
         grass += 1;
@@ -213,7 +213,7 @@ describe("canopy on a hand-built map", () => {
 });
 
 describe("crown bands", () => {
-  const map = generateMap(3, { size: "M" });
+  const map = generateMap(3, { size: "SM" });
   const { trees } = woodsOf(map);
   const bands = canopyBands(trees);
 

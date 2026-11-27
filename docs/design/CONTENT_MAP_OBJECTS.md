@@ -404,6 +404,9 @@ default players per size, seeds 1-8 (`src/core/map/density.ts`):
 | The Keepers' Toll (M, 2)     | 11.2              | 15.6        | 190             | 23.0             | 29.5       | 356            |
 | The Hourglass Marches (L, 3) | 10.3              | 14.2        | 375             | 20.7             | 27.4       | 721            |
 
+(Sizes as they were named then: M 48x48 and L 72x72 are SM and M since bead
+bzc.147.)
+
 "All" counts neutral stacks too. Catalogue types on the named maps: 48 and
 56 of 62 before, 57 and 59 after.
 

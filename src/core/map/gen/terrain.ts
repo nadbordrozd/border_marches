@@ -11,7 +11,8 @@ import type { Terrain } from "../types.ts";
 
 /**
  * Volcanic zones (bead border_marches-bzc.83): on some maps one wild zone
- * (two on a large map) away from the starts turns volcanic, its main
+ * (up to four on the larger maps: `terrain.volcanic.maxZones`, by size)
+ * away from the starts turns volcanic, its main
  * terrain cracked basalt with wasteland or badlands patches. A biome choice
  * per zone, made after the zones have their terrains and before the water
  * and ground are painted, from its own random stream: a map that rolls no

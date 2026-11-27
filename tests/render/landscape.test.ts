@@ -159,8 +159,8 @@ describe("grid roads", () => {
       for (const map of [
         buildNamedMap("keepers-toll"),
         buildNamedMap("hourglass-marches"),
-        generateMap(1, { size: "M" }),
-        generateMap(2, { size: "M" }),
+        generateMap(1, { size: "SM" }),
+        generateMap(2, { size: "SM" }),
       ]) {
         const segments = roadSegments(map);
         map.cells.forEach((cell, i) => {
@@ -249,7 +249,7 @@ describe("grid roads", () => {
 });
 
 describe("doodads", () => {
-  const map = generateMap(3, { size: "M" });
+  const map = generateMap(3, { size: "SM" });
   const layout = buildGroundLayout(map);
   const featured = featuredCells(map, map.objects);
   const placed = placeDoodads(map, layout, featured);
@@ -365,7 +365,7 @@ describe("fog, objects", () => {
     expect(mine({ type: "haunted-mine", resource: "ore" })).toBe(
       "haunted-mine",
     );
-    const map = generateMap(1, { size: "M" });
+    const map = generateMap(1, { size: "SM" });
     const keys = objectEntries(map.objects).flatMap((e) =>
       e.sprites.map((s) => s.key),
     );

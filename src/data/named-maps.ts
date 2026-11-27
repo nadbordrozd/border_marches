@@ -118,15 +118,15 @@ export interface NamedMapDef {
 }
 
 /**
- * Two players on a medium map: north-west jungle against south-east
- * meadows, the Warlord's Hold between them behind tin titans.
+ * Two players on a 48x48 map (Small+; the medium map before bead bzc.147):
+ * north-west jungle against south-east meadows, the Warlord's Hold between them behind tin titans.
  */
 const KEEPERS_TOLL: NamedMapDef = {
   id: "keepers-toll",
   name: "The Keepers' Toll",
   intro:
     "Two castaway lords wake on either side of a drowned crater, one in the north-west jungle and one in the south-east meadows. Between them squats the Warlord's Hold, ringed by tin titans still walking the Keepers' old patrols. Inside its walls a keymaster sells the red key that opens the toll gate at Tollbridge, and behind that gate waits the last Keepers' Vault. South of the Hold, in a cleft held by more tin, lies a Pinch of Sand from the Hourglass with No Bottom. Every valley between is crowded with mines, shrines and strays for hire. Victory: be the last lord standing.",
-  size: "M",
+  size: "SM",
   players: 2,
   seed: 23,
   factions: ["humans", "undead"],
@@ -410,16 +410,16 @@ const KEEPERS_TOLL: NamedMapDef = {
 };
 
 /**
- * Three players on a large map: the Realm in the southern jungle, the
- * Restless in the north-western meadows, the Horde on the eastern steppe,
- * and the three pieces of the Hourglass with No Bottom round the Hold.
+ * Three players on a medium (72x72) map: the Realm in the southern
+ * jungle, the Restless in the north-western meadows, the Horde on the
+ * eastern steppe, and the three pieces of the Hourglass with No Bottom round the Hold.
  */
 const HOURGLASS_MARCHES: NamedMapDef = {
   id: "hourglass-marches",
   name: "The Hourglass Marches",
   intro:
     "Three castaway courts land on the Marches in the same week: the Realm's knights in the southern jungle, the Restless in the north-western meadows and the Goblin Horde on the eastern steppe. The Hourglass with No Bottom landed with them and broke in three. A seer in the Hold's ring will trade the Upper Bulb for a deed done; a beanstalk giant sits on a Pinch of Sand in the cleft south of the Hold; and the Lower Bulb waits in a Keepers' Vault in the northern hills, behind blue gates whose key the keymaster sells beside the Hold. Assemble the Hourglass and time stops for your army alone. Victory: be the last court standing.",
-  size: "L",
+  size: "M",
   players: 3,
   seed: 92,
   factions: ["humans", "undead", "goblins"],
@@ -995,8 +995,8 @@ const HOURGLASS_MARCHES: NamedMapDef = {
 };
 
 /**
- * The showcase (bead bzc.89): three players on a large map that uses every
- * landscape. The Realm starts in the south-eastern jungle, the Restless in
+ * The showcase (bead bzc.89): three players on a medium (72x72) map that
+ * uses every landscape. The Realm starts in the south-eastern jungle, the Restless in
  * the western meadows, the Horde on the northern steppe; the generator is
  * asked for one volcanic, one winter and one desert zone (seed 4354 puts
  * the snow in the north-west, the lava in the south-west and the desert
@@ -1015,7 +1015,7 @@ const NINEFOLD_LANDFALL: NamedMapDef = {
   name: "The Ninefold Landfall",
   intro:
     "Nine worlds sank on the same night and landed here together, stitched into one patchwork shore: meadow, jungle and steppe, red badlands and grey waste, a frozen north, a field of lava, a desert round an oasis lake, and the sea. Three courts wake among them: the Realm in the south-eastern jungle, the Restless in the western meadows and the Goblin Horde on the northern steppe. One drowned world buried its giant with the Second Left Glove, and the landing tore it in three: the Thumb lies with a king in the Pyramid beside the oasis, the Lining in the Frost Giant's Barrow under the northern snow, and the Odd Cufflink under four tyrant lizards at the bottom of the lava fields. Between them wait the Sphinx and her riddles, the Sun Temple, the Aurora Spire, the walruses' rookery and more treasure than any one world ever held. Victory: be the last court standing.",
-  size: "L",
+  size: "M",
   players: 3,
   seed: 4354,
   gen: {
@@ -1758,15 +1758,15 @@ const NINEFOLD_LANDFALL: NamedMapDef = {
 
 /**
  * Bead bzc.129, the user: "add another map to showcase all the terrain
- * types". Two players on a large map generated on today's generator, every
- * ground in a region of its own.
+ * types". Two players on a medium (72x72) map generated on today's
+ * generator, every ground in a region of its own.
  */
 const CARTOGRAPHERS_FOLLY: NamedMapDef = {
   id: "cartographers-folly",
   name: "The Cartographer's Folly",
   intro:
     "The Royal Cartographer was told to draw every land of the world on one sheet. Short of vellum and of time, he drew them all side by side, and the world, not daring to contradict a royal map, moved to match. The Realm wakes in the north-eastern jungle and the Goblin Horde in the south-western meadows, with every land between them: steppe and red badlands, the grey waste, a frozen west, a desert round twin oasis lakes, a field of lava, the Candy Kingdom's sugar meadow on the northern shore, a swamp in the south, and the sea. Each land keeps its own wonders: the Pyramid and the Sphinx, the Frost Giant's Barrow and the Aurora Spire, the Infernal Forge and the Brimstone Pit, the Gingerbread Cottage and the Sugar Fountain, the Drowned Temple and the Witch's Hut. Three neutral towns of the Restless, the Realm and the Candy Kingdom wait to be taken, and the Warlord's Hold sits where the ink was spilled. Victory: be the last court standing.",
-  size: "L",
+  size: "M",
   players: 2,
   seed: 2853,
   gen: {
