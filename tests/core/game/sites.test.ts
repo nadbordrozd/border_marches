@@ -140,8 +140,14 @@ function toDay(s: GameState, day: number): GameState {
 }
 
 describe("the catalogue", () => {
-  it("lists 62 types, 53 core and 9 stretch, the 4 winter sites (bzc.87), the 4 desert sites (bzc.88) and the Mystery Bag (bzc.105), each with a visit text", () => {
-    expect(OBJECT_TYPE_IDS).toHaveLength(62 + 4 + 4 + 1);
+  it("lists 62 types, 53 core and 9 stretch, the 4 winter sites (bzc.87), the 4 desert sites (bzc.88), the Mystery Bag (bzc.105) and the 3 volcanic sites (bzc.125), each with a visit text", () => {
+    expect(OBJECT_TYPE_IDS).toHaveLength(62 + 4 + 4 + 1 + 3);
+    for (const t of [
+      "infernal-forge",
+      "brimstone-pit",
+      "shrine-of-embers",
+    ] as const)
+      expect(OBJECT_TYPES[t].weight).toBe(0);
     expect(OBJECT_TYPE_IDS).toContain("mystery-bag");
     for (const t of ["pyramid", "sphinx", "sun-temple", "sunken-tomb"])
       expect(OBJECT_TYPE_IDS).toContain(t);

@@ -184,9 +184,12 @@ const SNAPSHOT: Record<
   // composition (treasure clusters, clearings, ponds) and re-authored.
   "ninefold-landfall": {
     base: "be968b02",
-    // Bead bzc.110: buildings moved out of the ways.
-    built: "759306e2",
-    objects: 846,
+    // Bead bzc.110: buildings moved out of the ways. Bead bzc.125: the
+    // lava fields' own decorations and props, and an Infernal Forge, a
+    // Brimstone Pit and a Shrine of Embers added by the edits in place of
+    // two learning stones (the base is unchanged).
+    built: "0353b608",
+    objects: 847,
     towns: [
       ["town-1", 62, 59, null],
       ["town-2", 14, 40, null],
@@ -682,6 +685,16 @@ describe("The Ninefold Landfall", { timeout: 60_000 }, () => {
       const sites = ofType(map, type);
       expect(sites.length, type).toBeGreaterThanOrEqual(1);
       for (const o of sites) expect(ground(o), o.id).toBe("snow");
+    }
+    // Bead bzc.125: the lava's three hellish sites, added by the edits.
+    for (const type of [
+      "infernal-forge",
+      "brimstone-pit",
+      "shrine-of-embers",
+    ]) {
+      const sites = ofType(map, type);
+      expect(sites.length, type).toBe(1);
+      for (const o of sites) expect(ground(o), o.id).toBe("volcanic");
     }
     for (const o of ofType(map, "pyramid")) expect(ground(o)).toBe("sand");
     expect(ofType(map, "pyramid")).toHaveLength(1);

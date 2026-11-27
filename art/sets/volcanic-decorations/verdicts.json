@@ -1,0 +1,742 @@
+{
+  "small-a#0": {
+    "verdict": "REJECTED",
+    "notes": "lava cracks with no rock body: flat scribbles at 1x",
+    "at": "2026-11-27T09:17:50.210Z"
+  },
+  "small-a#1": {
+    "verdict": "REJECTED",
+    "notes": "lava cracks with no rock body: flat scribbles at 1x",
+    "at": "2026-11-27T09:17:50.312Z"
+  },
+  "small-a#2": {
+    "verdict": "REJECTED",
+    "notes": "lava cracks with no rock body: flat scribbles at 1x",
+    "at": "2026-11-27T09:17:50.418Z"
+  },
+  "small-a#3": {
+    "verdict": "REJECTED",
+    "notes": "lava cracks with no rock body: flat scribbles at 1x",
+    "at": "2026-11-27T09:17:50.520Z"
+  },
+  "small-a#4": {
+    "verdict": "REJECTED",
+    "notes": "a lava mound: close to the fumarole, kept the vent block looks",
+    "at": "2026-11-27T09:17:50.628Z"
+  },
+  "small-a#5": {
+    "verdict": "REJECTED",
+    "notes": "a lava mound: close to the fumarole, kept the vent block looks",
+    "at": "2026-11-27T09:17:50.734Z"
+  },
+  "small-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "lava vent: a basalt lump split by a bright lava crack",
+    "at": "2026-11-27T09:17:50.854Z"
+  },
+  "small-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "lava vent, second look: a jagged basalt block with lava bubbling inside",
+    "at": "2026-11-27T09:17:50.968Z"
+  },
+  "small-a#8": {
+    "verdict": "REJECTED",
+    "notes": "a single shard: too thin at 1x",
+    "at": "2026-11-27T09:17:51.073Z"
+  },
+  "small-a#9": {
+    "verdict": "REJECTED",
+    "notes": "a single shard: too thin at 1x",
+    "at": "2026-11-27T09:17:51.179Z"
+  },
+  "small-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "obsidian shards: a cluster of glossy black-violet shards",
+    "at": "2026-11-27T09:17:51.288Z"
+  },
+  "small-a#11": {
+    "verdict": "REJECTED",
+    "notes": "obsidian alternatives; kept #10 and #15",
+    "at": "2026-11-27T09:17:51.394Z"
+  },
+  "small-a#12": {
+    "verdict": "REJECTED",
+    "notes": "obsidian alternatives; kept #10 and #15",
+    "at": "2026-11-27T09:17:51.498Z"
+  },
+  "small-a#13": {
+    "verdict": "REJECTED",
+    "notes": "obsidian alternatives; kept #10 and #15",
+    "at": "2026-11-27T09:17:51.601Z"
+  },
+  "small-a#14": {
+    "verdict": "REJECTED",
+    "notes": "obsidian alternatives; kept #10 and #15",
+    "at": "2026-11-27T09:17:51.709Z"
+  },
+  "small-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "obsidian shards, second look: three tall shards",
+    "at": "2026-11-27T09:17:51.830Z"
+  },
+  "small-a#16": {
+    "verdict": "REJECTED",
+    "notes": "sulphur pool alternatives; the round bright ones read as a gold puddle",
+    "at": "2026-11-27T09:17:51.934Z"
+  },
+  "small-a#17": {
+    "verdict": "REJECTED",
+    "notes": "sulphur pool alternatives; the round bright ones read as a gold puddle",
+    "at": "2026-11-27T09:17:52.035Z"
+  },
+  "small-a#18": {
+    "verdict": "REJECTED",
+    "notes": "sulphur pool alternatives; the round bright ones read as a gold puddle",
+    "at": "2026-11-27T09:17:52.135Z"
+  },
+  "small-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "brimstone pool: a bean-shaped sulphur pool with a dark crust",
+    "at": "2026-11-27T09:17:52.245Z"
+  },
+  "small-a#20": {
+    "verdict": "REJECTED",
+    "notes": "sulphur pool alternatives; the round bright ones read as a gold puddle",
+    "at": "2026-11-27T09:17:52.350Z"
+  },
+  "small-a#21": {
+    "verdict": "REJECTED",
+    "notes": "sulphur pool alternatives; the round bright ones read as a gold puddle",
+    "at": "2026-11-27T09:17:52.452Z"
+  },
+  "small-a#22": {
+    "verdict": "REJECTED",
+    "notes": "sulphur pool alternatives; the round bright ones read as a gold puddle",
+    "at": "2026-11-27T09:17:52.553Z"
+  },
+  "small-a#23": {
+    "verdict": "ACCEPTED",
+    "notes": "brimstone pool, second look: a small sulphur pool in a dark crust ring",
+    "at": "2026-11-27T09:17:52.665Z"
+  },
+  "small-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "charred bones: a horned skull, reads at 1x",
+    "at": "2026-11-27T09:17:52.771Z"
+  },
+  "small-a#25": {
+    "verdict": "REJECTED",
+    "notes": "bones alternatives: scattered or too thin at 1x",
+    "at": "2026-11-27T09:17:52.874Z"
+  },
+  "small-a#26": {
+    "verdict": "ACCEPTED",
+    "notes": "charred bones, second look: a curled ribcage",
+    "at": "2026-11-27T09:17:52.985Z"
+  },
+  "small-a#27": {
+    "verdict": "REJECTED",
+    "notes": "bones alternatives: scattered or too thin at 1x",
+    "at": "2026-11-27T09:17:53.087Z"
+  },
+  "small-a#28": {
+    "verdict": "REJECTED",
+    "notes": "bones alternatives: scattered or too thin at 1x",
+    "at": "2026-11-27T09:17:53.190Z"
+  },
+  "small-a#29": {
+    "verdict": "REJECTED",
+    "notes": "bones alternatives: scattered or too thin at 1x",
+    "at": "2026-11-27T09:17:53.303Z"
+  },
+  "small-a#30": {
+    "verdict": "REJECTED",
+    "notes": "bones alternatives: scattered or too thin at 1x",
+    "at": "2026-11-27T09:17:53.407Z"
+  },
+  "small-a#31": {
+    "verdict": "REJECTED",
+    "notes": "bones alternatives: scattered or too thin at 1x",
+    "at": "2026-11-27T09:17:53.510Z"
+  },
+  "small-a#32": {
+    "verdict": "REJECTED",
+    "notes": "unlit chimney: reads as a stump",
+    "at": "2026-11-27T09:17:53.614Z"
+  },
+  "small-a#33": {
+    "verdict": "ACCEPTED",
+    "notes": "fumarole: a stubby basalt chimney puffing embers",
+    "at": "2026-11-27T09:17:53.720Z"
+  },
+  "small-a#34": {
+    "verdict": "REJECTED",
+    "notes": "chimney alternatives; kept #33 and #38",
+    "at": "2026-11-27T09:17:53.823Z"
+  },
+  "small-a#35": {
+    "verdict": "REJECTED",
+    "notes": "chimney alternatives; kept #33 and #38",
+    "at": "2026-11-27T09:17:53.930Z"
+  },
+  "small-a#36": {
+    "verdict": "REJECTED",
+    "notes": "chimney alternatives; kept #33 and #38",
+    "at": "2026-11-27T09:17:54.036Z"
+  },
+  "small-a#37": {
+    "verdict": "REJECTED",
+    "notes": "chimney alternatives; kept #33 and #38",
+    "at": "2026-11-27T09:17:54.149Z"
+  },
+  "small-a#38": {
+    "verdict": "ACCEPTED",
+    "notes": "fumarole, second look: a taller chimney with a bright ember tip",
+    "at": "2026-11-27T09:17:54.268Z"
+  },
+  "small-a#39": {
+    "verdict": "REJECTED",
+    "notes": "chimney alternatives; kept #33 and #38",
+    "at": "2026-11-27T09:17:54.391Z"
+  },
+  "small-a#40": {
+    "verdict": "REJECTED",
+    "notes": "salamander alternatives: blobby curls; kept #41 and #43",
+    "at": "2026-11-27T09:17:54.505Z"
+  },
+  "small-a#41": {
+    "verdict": "ACCEPTED",
+    "notes": "fire salamander, second look: curled up with orange spots",
+    "at": "2026-11-27T09:17:54.618Z"
+  },
+  "small-a#42": {
+    "verdict": "REJECTED",
+    "notes": "salamander alternatives: blobby curls; kept #41 and #43",
+    "at": "2026-11-27T09:17:54.732Z"
+  },
+  "small-a#43": {
+    "verdict": "ACCEPTED",
+    "notes": "fire salamander: a red salamander, lizard-shaped at 1x",
+    "at": "2026-11-27T09:17:54.846Z"
+  },
+  "small-a#44": {
+    "verdict": "REJECTED",
+    "notes": "salamander alternatives: blobby curls; kept #41 and #43",
+    "at": "2026-11-27T09:17:54.960Z"
+  },
+  "small-a#45": {
+    "verdict": "REJECTED",
+    "notes": "salamander alternatives: blobby curls; kept #41 and #43",
+    "at": "2026-11-27T09:17:55.077Z"
+  },
+  "small-a#46": {
+    "verdict": "REJECTED",
+    "notes": "salamander alternatives: blobby curls; kept #41 and #43",
+    "at": "2026-11-27T09:17:55.196Z"
+  },
+  "small-a#47": {
+    "verdict": "REJECTED",
+    "notes": "salamander alternatives: blobby curls; kept #41 and #43",
+    "at": "2026-11-27T09:17:55.308Z"
+  },
+  "small-a#48": {
+    "verdict": "REJECTED",
+    "notes": "lava mound and puddle alternatives: close to the vent and fumarole",
+    "at": "2026-11-27T09:17:55.419Z"
+  },
+  "small-a#49": {
+    "verdict": "REJECTED",
+    "notes": "lava mound and puddle alternatives: close to the vent and fumarole",
+    "at": "2026-11-27T09:17:55.524Z"
+  },
+  "small-a#50": {
+    "verdict": "REJECTED",
+    "notes": "lava mound and puddle alternatives: close to the vent and fumarole",
+    "at": "2026-11-27T09:17:55.628Z"
+  },
+  "small-a#51": {
+    "verdict": "REJECTED",
+    "notes": "lava mound and puddle alternatives: close to the vent and fumarole",
+    "at": "2026-11-27T09:17:55.732Z"
+  },
+  "small-a#52": {
+    "verdict": "REJECTED",
+    "notes": "lava mound and puddle alternatives: close to the vent and fumarole",
+    "at": "2026-11-27T09:17:55.834Z"
+  },
+  "small-a#53": {
+    "verdict": "REJECTED",
+    "notes": "lava mound and puddle alternatives: close to the vent and fumarole",
+    "at": "2026-11-27T09:17:55.942Z"
+  },
+  "small-a#54": {
+    "verdict": "REJECTED",
+    "notes": "lava mound and puddle alternatives: close to the vent and fumarole",
+    "at": "2026-11-27T09:17:56.047Z"
+  },
+  "small-a#55": {
+    "verdict": "REJECTED",
+    "notes": "lava mound and puddle alternatives: close to the vent and fumarole",
+    "at": "2026-11-27T09:17:56.150Z"
+  },
+  "small-a#56": {
+    "verdict": "REJECTED",
+    "notes": "a sulphur heap: reads as a gold pile",
+    "at": "2026-11-27T09:17:56.256Z"
+  },
+  "small-a#57": {
+    "verdict": "REJECTED",
+    "notes": "a single obsidian shard: too thin",
+    "at": "2026-11-27T09:17:56.363Z"
+  },
+  "small-a#58": {
+    "verdict": "REJECTED",
+    "notes": "a single obsidian shard: too thin",
+    "at": "2026-11-27T09:17:56.466Z"
+  },
+  "small-a#59": {
+    "verdict": "REJECTED",
+    "notes": "scattered bone bits: noise at 1x",
+    "at": "2026-11-27T09:17:56.567Z"
+  },
+  "small-a#60": {
+    "verdict": "REJECTED",
+    "notes": "scattered bone bits: noise at 1x",
+    "at": "2026-11-27T09:17:56.673Z"
+  },
+  "small-a#61": {
+    "verdict": "REJECTED",
+    "notes": "small volcano cones and rubble: mixed subjects, kept the vent block",
+    "at": "2026-11-27T09:17:56.778Z"
+  },
+  "small-a#62": {
+    "verdict": "REJECTED",
+    "notes": "small volcano cones and rubble: mixed subjects, kept the vent block",
+    "at": "2026-11-27T09:17:56.880Z"
+  },
+  "small-a#63": {
+    "verdict": "REJECTED",
+    "notes": "small volcano cones and rubble: mixed subjects, kept the vent block",
+    "at": "2026-11-27T09:17:56.984Z"
+  },
+  "small-b#0": {
+    "verdict": "REJECTED",
+    "notes": "ash heap alternatives; kept #3 and #7 (the ones with sparks)",
+    "at": "2026-11-27T09:17:57.093Z"
+  },
+  "small-b#1": {
+    "verdict": "REJECTED",
+    "notes": "ash heap alternatives; kept #3 and #7 (the ones with sparks)",
+    "at": "2026-11-27T09:17:57.195Z"
+  },
+  "small-b#2": {
+    "verdict": "REJECTED",
+    "notes": "ash heap alternatives; kept #3 and #7 (the ones with sparks)",
+    "at": "2026-11-27T09:17:57.295Z"
+  },
+  "small-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "cinder heap: grey ash with glowing cinders and sparks",
+    "at": "2026-11-27T09:17:57.396Z"
+  },
+  "small-b#4": {
+    "verdict": "REJECTED",
+    "notes": "ash heap alternatives; kept #3 and #7 (the ones with sparks)",
+    "at": "2026-11-27T09:17:57.502Z"
+  },
+  "small-b#5": {
+    "verdict": "REJECTED",
+    "notes": "ash heap alternatives; kept #3 and #7 (the ones with sparks)",
+    "at": "2026-11-27T09:17:57.612Z"
+  },
+  "small-b#6": {
+    "verdict": "REJECTED",
+    "notes": "ash heap alternatives; kept #3 and #7 (the ones with sparks)",
+    "at": "2026-11-27T09:17:57.725Z"
+  },
+  "small-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "cinder heap, second look: a wider ash heap with sparks",
+    "at": "2026-11-27T09:17:57.834Z"
+  },
+  "small-b#8": {
+    "verdict": "ACCEPTED",
+    "notes": "fire lily: a red-orange lily on black rock",
+    "at": "2026-11-27T09:17:57.928Z"
+  },
+  "small-b#9": {
+    "verdict": "REJECTED",
+    "notes": "lily alternatives; kept #8 and #12",
+    "at": "2026-11-27T09:17:58.030Z"
+  },
+  "small-b#10": {
+    "verdict": "REJECTED",
+    "notes": "lily alternatives; kept #8 and #12",
+    "at": "2026-11-27T09:17:58.133Z"
+  },
+  "small-b#11": {
+    "verdict": "REJECTED",
+    "notes": "lily alternatives; kept #8 and #12",
+    "at": "2026-11-27T09:17:58.235Z"
+  },
+  "small-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "fire lily, second look: a fuller bloom on a rock",
+    "at": "2026-11-27T09:17:58.336Z"
+  },
+  "small-b#13": {
+    "verdict": "REJECTED",
+    "notes": "lily alternatives; kept #8 and #12",
+    "at": "2026-11-27T09:17:58.437Z"
+  },
+  "small-b#14": {
+    "verdict": "REJECTED",
+    "notes": "lily alternatives; kept #8 and #12",
+    "at": "2026-11-27T09:17:58.539Z"
+  },
+  "small-b#15": {
+    "verdict": "REJECTED",
+    "notes": "lily alternatives; kept #8 and #12",
+    "at": "2026-11-27T09:17:58.642Z"
+  },
+  "small-b#16": {
+    "verdict": "REJECTED",
+    "notes": "sulphur crystals: bright yellow, read as gold or a gem pickup; not used",
+    "at": "2026-11-27T09:17:58.742Z"
+  },
+  "small-b#17": {
+    "verdict": "REJECTED",
+    "notes": "sulphur crystals: bright yellow, read as gold or a gem pickup; not used",
+    "at": "2026-11-27T09:17:58.850Z"
+  },
+  "small-b#18": {
+    "verdict": "REJECTED",
+    "notes": "sulphur crystals: bright yellow, read as gold or a gem pickup; not used",
+    "at": "2026-11-27T09:17:58.957Z"
+  },
+  "small-b#19": {
+    "verdict": "REJECTED",
+    "notes": "sulphur crystals: bright yellow, read as gold or a gem pickup; not used",
+    "at": "2026-11-27T09:17:59.064Z"
+  },
+  "small-b#20": {
+    "verdict": "REJECTED",
+    "notes": "sulphur crystals: bright yellow, read as gold or a gem pickup; not used",
+    "at": "2026-11-27T09:17:59.170Z"
+  },
+  "small-b#21": {
+    "verdict": "REJECTED",
+    "notes": "sulphur crystals: bright yellow, read as gold or a gem pickup; not used",
+    "at": "2026-11-27T09:17:59.280Z"
+  },
+  "small-b#22": {
+    "verdict": "REJECTED",
+    "notes": "sulphur crystals: bright yellow, read as gold or a gem pickup; not used",
+    "at": "2026-11-27T09:17:59.407Z"
+  },
+  "small-b#23": {
+    "verdict": "REJECTED",
+    "notes": "sulphur crystals: bright yellow, read as gold or a gem pickup; not used",
+    "at": "2026-11-27T09:17:59.521Z"
+  },
+  "small-b#24": {
+    "verdict": "REJECTED",
+    "notes": "beetle alternatives; kept #25 and #29",
+    "at": "2026-11-27T09:17:59.633Z"
+  },
+  "small-b#25": {
+    "verdict": "ACCEPTED",
+    "notes": "ember beetle: a black beetle with a glowing orange back",
+    "at": "2026-11-27T09:17:59.745Z"
+  },
+  "small-b#26": {
+    "verdict": "REJECTED",
+    "notes": "beetle alternatives; kept #25 and #29",
+    "at": "2026-11-27T09:17:59.852Z"
+  },
+  "small-b#27": {
+    "verdict": "REJECTED",
+    "notes": "beetle alternatives; kept #25 and #29",
+    "at": "2026-11-27T09:17:59.951Z"
+  },
+  "small-b#28": {
+    "verdict": "REJECTED",
+    "notes": "beetle alternatives; kept #25 and #29",
+    "at": "2026-11-27T09:18:00.056Z"
+  },
+  "small-b#29": {
+    "verdict": "ACCEPTED",
+    "notes": "ember beetle, second look: a rounder beetle",
+    "at": "2026-11-27T09:18:00.159Z"
+  },
+  "small-b#30": {
+    "verdict": "REJECTED",
+    "notes": "beetle alternatives; kept #25 and #29",
+    "at": "2026-11-27T09:18:00.266Z"
+  },
+  "small-b#31": {
+    "verdict": "REJECTED",
+    "notes": "beetle alternatives; kept #25 and #29",
+    "at": "2026-11-27T09:18:00.383Z"
+  },
+  "small-b#32": {
+    "verdict": "REJECTED",
+    "notes": "stump alternatives; kept #35 and #39",
+    "at": "2026-11-27T09:18:00.498Z"
+  },
+  "small-b#33": {
+    "verdict": "REJECTED",
+    "notes": "stump alternatives; kept #35 and #39",
+    "at": "2026-11-27T09:18:00.601Z"
+  },
+  "small-b#34": {
+    "verdict": "REJECTED",
+    "notes": "stump alternatives; kept #35 and #39",
+    "at": "2026-11-27T09:18:00.707Z"
+  },
+  "small-b#35": {
+    "verdict": "ACCEPTED",
+    "notes": "smouldering stump: a charred stump with ember cracks",
+    "at": "2026-11-27T09:18:00.817Z"
+  },
+  "small-b#36": {
+    "verdict": "REJECTED",
+    "notes": "stump alternatives; kept #35 and #39",
+    "at": "2026-11-27T09:18:00.931Z"
+  },
+  "small-b#37": {
+    "verdict": "REJECTED",
+    "notes": "stump alternatives; kept #35 and #39",
+    "at": "2026-11-27T09:18:01.033Z"
+  },
+  "small-b#38": {
+    "verdict": "REJECTED",
+    "notes": "stump alternatives; kept #35 and #39",
+    "at": "2026-11-27T09:18:01.136Z"
+  },
+  "small-b#39": {
+    "verdict": "ACCEPTED",
+    "notes": "smouldering stump, second look: a broad stump with lava veins",
+    "at": "2026-11-27T09:18:01.246Z"
+  },
+  "small-b#40": {
+    "verdict": "REJECTED",
+    "notes": "pumice stones: plain grey pebbles, too close to the rock doodads",
+    "at": "2026-11-27T09:18:01.350Z"
+  },
+  "small-b#41": {
+    "verdict": "REJECTED",
+    "notes": "pumice stones: plain grey pebbles, too close to the rock doodads",
+    "at": "2026-11-27T09:18:01.455Z"
+  },
+  "small-b#42": {
+    "verdict": "REJECTED",
+    "notes": "pumice stones: plain grey pebbles, too close to the rock doodads",
+    "at": "2026-11-27T09:18:01.565Z"
+  },
+  "small-b#43": {
+    "verdict": "REJECTED",
+    "notes": "pumice stones: plain grey pebbles, too close to the rock doodads",
+    "at": "2026-11-27T09:18:01.665Z"
+  },
+  "small-b#44": {
+    "verdict": "REJECTED",
+    "notes": "pumice stones: plain grey pebbles, too close to the rock doodads",
+    "at": "2026-11-27T09:18:01.770Z"
+  },
+  "small-b#45": {
+    "verdict": "REJECTED",
+    "notes": "pumice stones: plain grey pebbles, too close to the rock doodads",
+    "at": "2026-11-27T09:18:01.874Z"
+  },
+  "small-b#46": {
+    "verdict": "REJECTED",
+    "notes": "pumice stones: plain grey pebbles, too close to the rock doodads",
+    "at": "2026-11-27T09:18:01.976Z"
+  },
+  "small-b#47": {
+    "verdict": "REJECTED",
+    "notes": "pumice stones: plain grey pebbles, too close to the rock doodads",
+    "at": "2026-11-27T09:18:02.081Z"
+  },
+  "small-b#48": {
+    "verdict": "REJECTED",
+    "notes": "ash heap alternatives; kept #3 and #7 (the ones with sparks)",
+    "at": "2026-11-27T09:18:02.186Z"
+  },
+  "small-b#49": {
+    "verdict": "REJECTED",
+    "notes": "lily alternatives; kept #8 and #12",
+    "at": "2026-11-27T09:18:02.291Z"
+  },
+  "small-b#50": {
+    "verdict": "REJECTED",
+    "notes": "ash heap alternatives; kept #3 and #7 (the ones with sparks)",
+    "at": "2026-11-27T09:18:02.397Z"
+  },
+  "small-b#51": {
+    "verdict": "REJECTED",
+    "notes": "lily alternatives; kept #8 and #12",
+    "at": "2026-11-27T09:18:02.499Z"
+  },
+  "small-b#52": {
+    "verdict": "REJECTED",
+    "notes": "ash heap alternatives; kept #3 and #7 (the ones with sparks)",
+    "at": "2026-11-27T09:18:02.601Z"
+  },
+  "small-b#53": {
+    "verdict": "REJECTED",
+    "notes": "ash heap alternatives; kept #3 and #7 (the ones with sparks)",
+    "at": "2026-11-27T09:18:02.705Z"
+  },
+  "small-b#54": {
+    "verdict": "REJECTED",
+    "notes": "lily alternatives; kept #8 and #12",
+    "at": "2026-11-27T09:18:02.811Z"
+  },
+  "small-b#55": {
+    "verdict": "REJECTED",
+    "notes": "lily alternatives; kept #8 and #12",
+    "at": "2026-11-27T09:18:02.913Z"
+  },
+  "small-b#56": {
+    "verdict": "REJECTED",
+    "notes": "sulphur crystals: bright yellow, read as gold or a gem pickup; not used",
+    "at": "2026-11-27T09:18:03.016Z"
+  },
+  "small-b#57": {
+    "verdict": "REJECTED",
+    "notes": "beetle alternatives; kept #25 and #29",
+    "at": "2026-11-27T09:18:03.118Z"
+  },
+  "small-b#58": {
+    "verdict": "REJECTED",
+    "notes": "sulphur crystals: bright yellow, read as gold or a gem pickup; not used",
+    "at": "2026-11-27T09:18:03.233Z"
+  },
+  "small-b#59": {
+    "verdict": "REJECTED",
+    "notes": "beetle alternatives; kept #25 and #29",
+    "at": "2026-11-27T09:18:03.341Z"
+  },
+  "small-b#60": {
+    "verdict": "REJECTED",
+    "notes": "stump alternatives; kept #35 and #39",
+    "at": "2026-11-27T09:18:03.457Z"
+  },
+  "small-b#61": {
+    "verdict": "REJECTED",
+    "notes": "stump alternatives; kept #35 and #39",
+    "at": "2026-11-27T09:18:03.565Z"
+  },
+  "small-b#62": {
+    "verdict": "REJECTED",
+    "notes": "pumice stones: plain grey pebbles, too close to the rock doodads",
+    "at": "2026-11-27T09:18:03.668Z"
+  },
+  "small-b#63": {
+    "verdict": "REJECTED",
+    "notes": "pumice stones: plain grey pebbles, too close to the rock doodads",
+    "at": "2026-11-27T09:18:03.776Z"
+  },
+  "props-1x1-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt columns: a cluster of hexagonal columns, chunky",
+    "at": "2026-11-27T09:28:08.597Z"
+  },
+  "props-1x1-a#1": {
+    "verdict": "REJECTED",
+    "notes": "basalt alternatives: near duplicates of #0 and #2",
+    "at": "2026-11-27T09:28:08.800Z"
+  },
+  "props-1x1-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt columns, second look: a lower, wider cluster",
+    "at": "2026-11-27T09:28:08.989Z"
+  },
+  "props-1x1-a#3": {
+    "verdict": "REJECTED",
+    "notes": "basalt alternatives: near duplicates of #0 and #2",
+    "at": "2026-11-27T09:28:09.170Z"
+  },
+  "props-1x1-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "demon-horn rock: two great red-tipped horns rising from a rock",
+    "at": "2026-11-27T09:28:09.306Z"
+  },
+  "props-1x1-a#5": {
+    "verdict": "REJECTED",
+    "notes": "horn alternatives: near duplicates of #4 and #6",
+    "at": "2026-11-27T09:28:09.502Z"
+  },
+  "props-1x1-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "demon-horn rock, second look: wider horns on a rounder rock",
+    "at": "2026-11-27T09:28:09.654Z"
+  },
+  "props-1x1-a#7": {
+    "verdict": "REJECTED",
+    "notes": "horn alternatives: near duplicates of #4 and #6",
+    "at": "2026-11-27T09:28:09.795Z"
+  },
+  "props-1x1-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "obsidian spire: a tall glossy shard with violet edges",
+    "at": "2026-11-27T09:28:09.926Z"
+  },
+  "props-1x1-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "obsidian spire, second look: a cluster of shards",
+    "at": "2026-11-27T09:28:10.058Z"
+  },
+  "props-1x1-a#10": {
+    "verdict": "REJECTED",
+    "notes": "spire alternatives: near duplicates of #8",
+    "at": "2026-11-27T09:28:10.190Z"
+  },
+  "props-1x1-a#11": {
+    "verdict": "REJECTED",
+    "notes": "spire alternatives: near duplicates of #8",
+    "at": "2026-11-27T09:28:10.344Z"
+  },
+  "props-1x1-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "magma boulder: a round basalt boulder with lava cracks",
+    "at": "2026-11-27T09:28:10.494Z"
+  },
+  "props-1x1-a#13": {
+    "verdict": "REJECTED",
+    "notes": "boulder alternatives: near duplicates of #12 and #14",
+    "at": "2026-11-27T09:28:10.631Z"
+  },
+  "props-1x1-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "magma boulder, second look: a taller boulder, different cracks",
+    "at": "2026-11-27T09:28:10.774Z"
+  },
+  "props-1x1-a#15": {
+    "verdict": "REJECTED",
+    "notes": "boulder alternatives: near duplicates of #12 and #14",
+    "at": "2026-11-27T09:28:10.899Z"
+  },
+  "props-2x1-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "charred log: a burnt fallen trunk with ember cracks",
+    "at": "2026-11-27T09:28:11.041Z"
+  },
+  "props-2x1-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "scorched skeleton: a giant horned beast lying on its side",
+    "at": "2026-11-27T09:28:11.168Z"
+  },
+  "props-2x1-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "basalt wall: a row of hexagonal columns",
+    "at": "2026-11-27T09:28:11.309Z"
+  },
+  "props-2x1-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "obsidian ridge: chunky black glass in a low ridge",
+    "at": "2026-11-27T09:28:11.445Z"
+  }
+}

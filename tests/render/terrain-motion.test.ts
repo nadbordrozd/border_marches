@@ -22,6 +22,8 @@ import {
   crackOverlay,
   frameDue,
   glintLevel,
+  glowAlpha,
+  hotOverlay,
   isHot,
   livingPose,
   magmaAlpha,
@@ -274,6 +276,41 @@ describe("magma", () => {
     expect(out[(5 * w + 300) * 4]).toBe(255);
     expect(at(20, 5)).toBe(0);
     expect(out[(5 * w + 20) * 4]).toBe(30);
+  });
+});
+
+describe("glowing volcanic decorations (bead bzc.125)", () => {
+  it("pulse the hot pixels of the lava vents, sulphur pools and embers", () => {
+    for (const id of [
+      "lava-vent",
+      "brimstone-pool",
+      "fumarole",
+      "cinder-heap",
+      "smouldering-stump",
+    ])
+      expect(LIVING_MOTION[id], id).toBe("glow");
+    // The sprite stays put; only its overlay's alpha moves.
+    for (let t = 0; t < 5000; t += 97)
+      expect(livingPose("glow", 0.4, t)).toEqual({ dx: 0, dy: 0, frame: 0 });
+    const seen: number[] = [];
+    for (let t = 1; t < 2200; t += 50) seen.push(glowAlpha(0.4, t));
+    expect(Math.min(...seen)).toBeLessThan(0.2);
+    expect(Math.max(...seen)).toBeGreaterThan(0.8);
+    expect(glowAlpha(0.4, 0)).toBeCloseTo(
+      (MOTION.glow.high + MOTION.glow.low) / 2,
+    );
+  });
+
+  it("brightens only the hot pixels", () => {
+    const src = image(3, 1, (x) =>
+      x === 0 ? [240, 122, 42] : x === 1 ? [58, 48, 54] : [232, 212, 58],
+    );
+    const out = hotOverlay(src);
+    expect(alpha(out, 0, 0)).toBe(255);
+    expect(alpha(out, 1, 0)).toBe(0);
+    expect(alpha(out, 2, 0)).toBe(255);
+    expect(out.data[0]).toBeGreaterThan(240);
+    expect(out.data[1]).toBeGreaterThan(122);
   });
 });
 

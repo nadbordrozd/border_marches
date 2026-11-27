@@ -30,6 +30,7 @@
 import type { MapZoneKind } from "../../../data/mapObjects.ts";
 import {
   DESERT_ROWS,
+  VOLCANIC_ROWS,
   FREE_VALUE,
   NEUTRAL_TOWN_VALUE,
   PASS_VALUE,
@@ -43,6 +44,7 @@ import { MYSTERY_TYPE, mysteryItem } from "../mystery.ts";
 import { findArtifact, isCursed } from "../../../data/artifacts.ts";
 import { preferFrosting } from "./candy.ts";
 import { desertSites } from "./desert.ts";
+import { volcanicSites } from "./volcanic.ts";
 import { carveHoards, hoardRate } from "./hoards.ts";
 import { assignQuests } from "./quests.ts";
 import { rollContents, strangeThing } from "./contents.ts";
@@ -1043,6 +1045,41 @@ export function placeObjects(st: GenState): PlacementReport {
         at++;
       } else requests.splice(at++, 0, req);
     }
+  }
+
+  // The volcanic sites (bead bzc.125): in each volcanic zone an Infernal
+  // Forge, a Brimstone Pit and a Shrine of Embers on the lava, rolled and
+  // ordered from their own streams and placed right after the start kits,
+  // before the fill crowds the zone. A map without a volcanic zone draws
+  // and places exactly as before.
+  const lavaSites = oc.volcanicSites ? volcanicSites(st) : [];
+  if (lavaSites.length > 0) {
+    const vrng = stageRng(st, "volcanic-sites");
+    const vorder = stageRng(st, "volcanic-place");
+    const lavaReqs: Request[] = [];
+    for (const site of lavaSites) {
+      const row = VOLCANIC_ROWS.find((r) => r.type === site.type);
+      if (row === undefined) continue;
+      const data = roll(vrng, row, site.tier);
+      const value = valueOf(row, data);
+      lavaReqs.push({
+        row,
+        data,
+        value,
+        zones: [site.zone],
+        minCost: 0,
+        maxCost: Infinity,
+        minFar: farFor(row, value, data),
+        required: false,
+        pocket: -1,
+        guarded: guardedIn(row, value, site.zone, data),
+        label: `volcanic ${site.type} in zone ${site.zone}`,
+        relax: true,
+        ground: T.volcanic,
+        order: vorder,
+      });
+    }
+    requests.splice(kitRequests, 0, ...lavaReqs);
   }
 
   // Candy outposts stand on frosting while they can (bead bzc.115).

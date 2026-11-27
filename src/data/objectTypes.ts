@@ -99,6 +99,10 @@ export const OBJECT_TYPE_IDS = [
   "sphinx",
   "sun-temple",
   "sunken-tomb",
+  // 3.14 Volcanic sites (bead bzc.125): placed only in volcanic zones
+  "infernal-forge",
+  "brimstone-pit",
+  "shrine-of-embers",
 ] as const;
 
 export type ObjectTypeId = (typeof OBJECT_TYPE_IDS)[number];
@@ -179,6 +183,7 @@ const B: Terrain = "badlands";
 const W: Terrain = "wasteland";
 const SN: Terrain = "snow";
 const D: Terrain = "sand";
+const V: Terrain = "volcanic";
 
 // Flags: "s" stretch, "v" vanishes when used.
 const ROWS: readonly Row[] = [
@@ -331,6 +336,14 @@ const ROWS: readonly Row[] = [
   ["sun-temple", "Sun Temple", "site", 2, 2, "", "each-visit", 600, [D], 0, "+2 Attack until the end of the hero's next battle. Visiting again adds no more."],
   // prettier-ignore
   ["sunken-tomb", "Sunken Tomb", "bank", 2, 2, "", "one-time", 2500, [D], 0, "Restless dead guard it; win the battle to take the grave goods."],
+  // 3.14 Volcanic sites (bead bzc.125): weight 0, placed by the volcanic
+  // rule (gen/volcanic.ts) in the volcanic zones only.
+  // prettier-ignore
+  ["infernal-forge", "Infernal Forge", "site", 2, 2, "", "per-hero", 2500, [V], 0, "Feed the forge one of the hero's Trinkets (not a cursed one) and pay 1000 gold and 2 essence: it is reforged into the forge's Wonder. Each hero once."],
+  // prettier-ignore
+  ["brimstone-pit", "Brimstone Pit", "bank", 2, 2, "", "one-time", 2500, [V], 0, "Fire-Eaters and Gremlins guard a pit of burning brimstone; win the battle to take its essence, gold and an artifact."],
+  // prettier-ignore
+  ["shrine-of-embers", "Shrine of Embers", "site", 1, 1, "", "each-visit", 600, [V], 0, "Ember Brand until the end of the hero's next battle: its creatures strike 20% harder, and are struck 10% harder. Visiting again adds no more."],
 ];
 
 export const OBJECT_TYPES: Readonly<Record<ObjectTypeId, ObjectTypeDef>> =
@@ -403,6 +416,19 @@ export const SPHINX_XP = 2500;
 /** Attack of a Sun Temple's blessing, until the next battle ends. */
 export const SUN_TEMPLE_ATTACK = 2;
 
+/**
+ * The Infernal Forge (bead bzc.125): what reforging one Trinket into the
+ * forge's Wonder costs besides the Trinket.
+ */
+export const FORGE_COST = { gold: 1000, essence: 2 } as const;
+
+/**
+ * A Shrine of Embers' Ember Brand (bead bzc.125), until the next battle
+ * ends: Strikes by the hero's stacks deal this many percent more, and
+ * Strikes against them this many percent more.
+ */
+export const EMBER_BRAND = { dealt: 20, taken: 10 } as const;
+
 /** Heroes a player may hold (a prison's hero needs a free place). */
 export const MAX_HEROES = 8;
 
@@ -458,6 +484,8 @@ export function siteBuffEffect(buff: string): {
   /** Cheaper steps on one terrain (a Hunter's Lodge's snowshoes). */
   terrain?: { terrain: Terrain; reduce: number };
   attack?: number;
+  /** Strike multipliers (a Shrine of Embers' Ember Brand, bead bzc.125). */
+  strikes?: ReadonlyArray<{ direction: "dealt" | "taken"; percent: number }>;
 } {
   if (buff.startsWith("school-temple:")) {
     return {
@@ -482,6 +510,14 @@ export function siteBuffEffect(buff: string): {
       };
     case "sun-temple":
       return { label: "Sun Temple", attack: SUN_TEMPLE_ATTACK };
+    case "shrine-of-embers":
+      return {
+        label: "Ember Brand",
+        strikes: [
+          { direction: "dealt", percent: EMBER_BRAND.dealt },
+          { direction: "taken", percent: EMBER_BRAND.taken },
+        ],
+      };
     default:
       return { label: buff };
   }

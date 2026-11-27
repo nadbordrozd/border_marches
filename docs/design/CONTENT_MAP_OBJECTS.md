@@ -231,6 +231,33 @@ Placed only in the desert zones some random maps roll (src/core/map/gen/desert.t
 | **Sun Temple**  | 2x2       | +2 Attack until the end of the hero's next battle; visiting again adds no more.                                                                                                                                                                                                                             | Each visit     | +2 Attack                                                                                            | 600         | Sand    | rule: 1 per desert  |
 | **Sunken Tomb** | 2x2       | A battle against the Restless dead (small: Skeletons and Ghouls; medium: Ghouls and Banshees).                                                                                                                                                                                                              | One-time       | Small: a Trinket, 1000 gold. Medium: a Trinket, a tier 3 scroll, 2 essence, 2500 gold                | 2500 / 6500 | Sand    | rule: 1 per desert  |
 
+### 3.14 Volcanic sites (3, bead bzc.125)
+
+The hellish plains: placed only in the volcanic zones some random maps roll
+(src/core/map/gen/volcanic.ts): weight 0 in the fill, so a map without a
+volcanic zone has none of them and is generated exactly as before. Each
+volcanic zone gets a Brimstone Pit, an Infernal Forge and a Shrine of
+Embers, as room allows, rolled and ordered from their own random streams
+(`volcanic-sites`, `volcanic-place`), right after the start kits and on the
+lava while any lava site is free. They follow the generator's rules for
+every building: never on a road (bead bzc.95) and always leaving a way
+round (bead bzc.110). The Brimstone Pit's fiends are Fire-Eaters and
+Gremlins (the imps of the lava fields) as neutral stacks.
+
+| Object               | Footprint | Visit rule                                                                                                                                                                                                                                                                                                     | Reset          | Reward                                                                                                       | Value                                   | Terrain  | Weight                |
+| -------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------- | -------- | --------------------- |
+| **Infernal Forge**   | 2x2       | Reforging: the hero gives one of its Trinkets (worn or carried, never a cursed one) and pays 1000 gold and 2 essence; it gets the forge's seeded Wonder (shown on hover) in its place: worn in the same slot when the Wonder fits it, else in the backpack. A hero with no Trinket, or no room, uses no visit. | Each hero once | A Trinket made a Wonder                                                                                      | 2500 (guarded)                          | Volcanic | rule: 1 per lava zone |
+| **Brimstone Pit**    | 2x2       | A bank: a battle against Fire-Eaters and Gremlins (60% of its value in fight value, as every bank); the winner takes the brimstone.                                                                                                                                                                            | One-time       | Small: a Trinket, 1 essence. Medium: a Trinket, 5 essence, 2000 gold. Large: a Wonder, 10 essence, 5000 gold | 2500 / 6500 / 15000 (size by zone tier) | Volcanic | rule: 1 per lava zone |
+| **Shrine of Embers** | 1x1       | Ember Brand until the end of the hero's next battle: Strikes by its stacks deal 20% more, and Strikes against them 10% more; visiting again adds no more.                                                                                                                                                      | Each visit     | +20% damage dealt, +10% taken                                                                                | 600                                     | Volcanic | rule: 1 per lava zone |
+
+Balance: the forge turns a Trinket (2000) and 2000 of resources into a
+Wonder (5000), a gain of about 1000 per hero, so it is valued like the
+Aurora Spire's guarded few thousand for two heroes; the AI values it only
+when one of its heroes holds a Trinket and the player can pay. The pit is
+the essence bank of the lava, worth its bank value exactly (essence 500, a
+Trinket 2000, a Wonder 5000). The shrine is a Sun Temple with a bargain:
+more damage than +2 Attack gives a small army, paid for in damage taken.
+
 ## 4. Banks, digging and the Keystone
 
 **Bank sizes.** A bank's size is fixed by the seed and shown on hover with
@@ -315,6 +342,7 @@ as value / 60%). A Caretaker Lodge's errand is always "bring resources",
 | Second Helping needs the dwelling under the hero to fly the caster's flag                                                                                                                                                                                                                                                            | Stepping on an outpost or hut flags it anyway; a locked lodge stays locked                                                     |
 | Desert sites (bead bzc.88): the Pyramid is a large bank (15000) one to a map; the Sunken Tomb a small or medium one; the Sphinx (3000) is a once-per-hero riddle whose wrong answer costs the day's movement; the Sun Temple (600) a non-stacking +2 Attack like the Rally Camp's Morale; the Oasis also goes in every desert zone   | Rewards on the existing bank and shrine scale; a riddle needs a real cost to be a choice, but never a lost resource or skill   |
 | The Sphinx's riddles are original, four answers each, three seeded per site, one per hero by the hero's id; the AI guesses                                                                                                                                                                                                           | Answerable by reading, varied between heroes, and not a lookup table for the AI                                                |
+| Volcanic sites (bead bzc.125): the Infernal Forge reforges a Trinket into one seeded Wonder for 1000 gold and 2 essence, each hero once; the Brimstone Pit is a three-size essence bank of Fire-Eaters and Gremlins; the Shrine of Embers a non-stacking Ember Brand (+20% damage dealt, +10% taken)                                 | An upgrade for a price, an essence bank and a bargain buff: three things no other site does, each on the existing value scale  |
 
 ## 7. Density (bead bzc.50)
 

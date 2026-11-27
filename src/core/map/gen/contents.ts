@@ -41,6 +41,7 @@ import {
 } from "../../../data/strays.ts";
 import type { CreatureId, StrayCreatureId } from "../../../data/types.ts";
 import type { Rng } from "../../rng.ts";
+import { volcanicContents } from "./volcanic.ts";
 
 type Data = Record<string, unknown>;
 
@@ -549,6 +550,11 @@ export function rollContents(type: ObjectTypeId, rng: Rng, tier: number): Data {
     case "sphinx":
     case "sun-temple":
       return desertContents(type, rng, tier);
+    // Volcanic sites (bead bzc.125), placed by gen/volcanic.ts.
+    case "infernal-forge":
+    case "brimstone-pit":
+    case "shrine-of-embers":
+      return volcanicContents(type, rng, tier);
     default:
       return {};
   }

@@ -1,0 +1,547 @@
+{
+  "set": "volcanic-decorations",
+  "bead": "border_marches-bzc.125",
+  "class": "decorations",
+  "exploration": false,
+  "_doc": "Volcanic (hellish plains) decorations (bead bzc.125, docs/art/classes/decorations.md): passable small details at 32 x 32 with the doodad class layer, impassable props on 64 x 64 (one cell) or 128 x 64 (two cells side by side) with the prop class layer. generate-image-v2, no style image, like sets decorations and candy-decorations; one call returns many candidates of a mixed subject, the best distinct ones are accepted and cropped to their opaque box plus 1 px. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-doodad"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "small-a",
+      "concept": "VOLCANIC SMALL (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 125401,
+      "subject": "Subject: one tiny detail of a volcanic plain, each image a different one of these: a small crack in black basalt rock #3a3036 with bright orange lava #f07a2a and yellow #ffc03a bubbling up inside it; three glossy black obsidian shards #2a2240 with violet glints #8a6ad0 sticking up; a little round pool of bubbling yellow sulphur #e8d43a with a crusty rim of dark rock; a blackened charred ribcage and a horned skull lying on the ash; a small stubby rock chimney of dark basalt with orange embers #f07a2a puffing from its top; a little red fire salamander #d0402a with orange spots, curled. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "ground patch, shadow, person, gold, coins, gem, chest, smoke cloud, blur"
+    },
+    {
+      "id": "small-b",
+      "concept": "VOLCANIC SMALL (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 125402,
+      "subject": "Subject: one tiny detail of a volcanic plain, each image a different one of these: a small heap of grey ash #6a6266 with glowing orange cinders #f07a2a in it; a red-orange fire lily flower #e8502a with yellow tips growing from black rock; a little cluster of pointed yellow sulphur crystals #e8d43a; a small black beetle with a glowing orange back #f07a2a; a burnt black tree stump #2e2628 with orange ember cracks; a few round grey pumice stones. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "ground patch, shadow, person, gold, coins, gem, chest, smoke cloud, blur"
+    },
+    {
+      "id": "props-1x1-a",
+      "concept": "VOLCANIC PROPS 1x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 64,
+      "height": 64,
+      "seed": 125501,
+      "subject": "Subject: one big blocking volcanic prop filling one map cell, each image a different one of these: a cluster of tall hexagonal basalt columns #3a3036 with flat tops of different heights; a big black rock shaped like two huge curved demon horns #3a3036 with red-brown tips #7a2a22; a tall jagged spire of glossy black obsidian #2a2240 with violet edges #8a6ad0; a big round basalt boulder with orange lava cracks #f07a2a. About three quarters of the image wide and tall.",
+      "negative": "ground patch, person, face, flag, water, smoke cloud, flames"
+    },
+    {
+      "id": "props-2x1-a",
+      "concept": "VOLCANIC PROPS 2x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 128,
+      "height": 64,
+      "seed": 125502,
+      "subject": "Subject: one long blocking volcanic prop across the image from left to right, each image a different one of these: a huge fallen tree trunk burnt black #2e2628 with orange ember cracks #f07a2a and broken branch stubs; the blackened ribcage and horned skull of a giant beast #4a3c3a lying on its side; a row of hexagonal basalt columns #3a3036 of different heights; a low ridge of black obsidian #2a2240 in chunky pieces. Nearly the full image wide and two thirds of it tall.",
+      "negative": "ground patch, person, face, flag, water, smoke cloud, flames"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/decorations/lava-vent-1.png",
+      "from": "small-a#6",
+      "width": 28,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 28,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/lava-vent-2.png",
+      "from": "small-a#7",
+      "width": 28,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 28,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/obsidian-shards-1.png",
+      "from": "small-a#10",
+      "width": 28,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 3,
+          "width": 28,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/obsidian-shards-2.png",
+      "from": "small-a#15",
+      "width": 24,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 2,
+          "width": 24,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/brimstone-pool-1.png",
+      "from": "small-a#19",
+      "width": 28,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 4,
+          "width": 28,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/brimstone-pool-2.png",
+      "from": "small-a#23",
+      "width": 23,
+      "height": 20,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 23,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/charred-bones-1.png",
+      "from": "small-a#24",
+      "width": 25,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 2,
+          "width": 25,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/charred-bones-2.png",
+      "from": "small-a#26",
+      "width": 26,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 4,
+          "width": 26,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fumarole-1.png",
+      "from": "small-a#33",
+      "width": 20,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 4,
+          "width": 20,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fumarole-2.png",
+      "from": "small-a#38",
+      "width": 20,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 2,
+          "width": 20,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fire-salamander-1.png",
+      "from": "small-a#43",
+      "width": 26,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 5,
+          "width": 26,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fire-salamander-2.png",
+      "from": "small-a#41",
+      "width": 28,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 28,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/cinder-heap-1.png",
+      "from": "small-b#3",
+      "width": 28,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 2,
+          "width": 28,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/cinder-heap-2.png",
+      "from": "small-b#7",
+      "width": 28,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 4,
+          "width": 28,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fire-lily-1.png",
+      "from": "small-b#8",
+      "width": 18,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 2,
+          "width": 18,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fire-lily-2.png",
+      "from": "small-b#12",
+      "width": 18,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 2,
+          "width": 18,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/ember-beetle-1.png",
+      "from": "small-b#25",
+      "width": 21,
+      "height": 17,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 8,
+          "width": 21,
+          "height": 17
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/ember-beetle-2.png",
+      "from": "small-b#29",
+      "width": 21,
+      "height": 17,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 8,
+          "width": 21,
+          "height": 17
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/smouldering-stump-1.png",
+      "from": "small-b#35",
+      "width": 26,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 4,
+          "width": 26,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/smouldering-stump-2.png",
+      "from": "small-b#39",
+      "width": 26,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 4,
+          "width": 26,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/basalt-columns-1.png",
+      "from": "props-1x1-a#0",
+      "width": 52,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 0,
+          "width": 52,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/basalt-columns-2.png",
+      "from": "props-1x1-a#2",
+      "width": 52,
+      "height": 54,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 8,
+          "width": 52,
+          "height": 54
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/demon-horn-rock-1.png",
+      "from": "props-1x1-a#4",
+      "width": 64,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 2,
+          "width": 64,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/demon-horn-rock-2.png",
+      "from": "props-1x1-a#6",
+      "width": 64,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 2,
+          "width": 64,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/obsidian-spire-1.png",
+      "from": "props-1x1-a#8",
+      "width": 46,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 0,
+          "width": 46,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/obsidian-spire-2.png",
+      "from": "props-1x1-a#9",
+      "width": 50,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 0,
+          "width": 50,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/magma-boulder-1.png",
+      "from": "props-1x1-a#12",
+      "width": 58,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 4,
+          "width": 58,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/magma-boulder-2.png",
+      "from": "props-1x1-a#14",
+      "width": 58,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 4,
+          "width": 58,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/charred-log.png",
+      "from": "props-2x1-a#0",
+      "width": 126,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 5,
+          "width": 126,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/scorched-skeleton.png",
+      "from": "props-2x1-a#1",
+      "width": 124,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 124,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/basalt-wall.png",
+      "from": "props-2x1-a#2",
+      "width": 128,
+      "height": 62,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 1,
+          "width": 128,
+          "height": 62
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/obsidian-ridge.png",
+      "from": "props-2x1-a#3",
+      "width": 128,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 4,
+          "width": 128,
+          "height": 55
+        }
+      ]
+    }
+  ]
+}

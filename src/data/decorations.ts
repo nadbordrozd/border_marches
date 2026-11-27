@@ -140,12 +140,33 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["licorice-knot", "Licorice Knot", "f", "p", 1, 2, "A licorice twist tied in a knot nobody can undo."],
   ["chocolate-drops", "Chocolate Drops", "f", "p", 1, 2, "Chocolate drops, going soft in the sun."],
   ["gingerbread-rabbit", "Gingerbread Rabbit", "f", "p", 1, 2, "A gingerbread rabbit, sitting very still. Too still."],
+  // The volcanic plains (bead bzc.125, set volcanic-decorations): lava
+  // only, so other grounds draw what they drew.
+  ["lava-vent", "Lava Vent", "v", "p", 1, 2, "A crack in the basalt where the lava bubbles up to look around."],
+  ["obsidian-shards", "Obsidian Shards", "v", "p", 1, 2, "Shards of black volcanic glass, sharp enough to shave with."],
+  ["brimstone-pool", "Brimstone Pool", "v", "p", 1, 2, "A little pool of bubbling sulphur. It smells exactly as bad as you think."],
+  ["charred-bones", "Charred Bones", "v", "p", 1, 2, "The bones of something that came too close to the lava."],
+  ["fumarole", "Fumarole", "v", "p", 1, 2, "A stubby rock chimney puffing embers, like a giant's pipe."],
+  ["fire-salamander", "Fire Salamander", "v", "p", 1, 2, "A fire salamander basking where anyone else would cook."],
+  ["cinder-heap", "Cinder Heap", "v", "p", 1, 2, "A heap of warm ash with cinders still glowing in it."],
+  ["fire-lily", "Fire Lily", "v", "p", 1, 2, "A fire lily: the only flower that likes it here."],
+  ["ember-beetle", "Ember Beetle", "v", "p", 1, 2, "A beetle whose back glows like a coal. Do not pick it up."],
+  ["smouldering-stump", "Smouldering Stump", "v", "p", 1, 2, "A burnt stump, still smouldering from the inside."],
   ["giant-cupcake", "Giant Cupcake", "f", "x", 1, 2, "A cupcake the size of a cottage, cherry and all."],
   ["gumdrop-boulder", "Gumdrop Boulder", "f", "x", 1, 2, "A boulder of mint gumdrop, far too sticky to climb."],
   ["rock-candy", "Rock Candy", "f", "x", 1, 2, "Pink and teal sugar crystals taller than a rider."],
   ["fallen-cane", "Fallen Candy Cane", "f", "x", 2, 1, "A candy cane as long as a house, fallen across the way."],
   ["chocolate-bar", "Chocolate Bar", "f", "x", 2, 1, "A giant bar of chocolate, broken in two and left."],
   ["gingerbread-fence", "Gingerbread Fence", "f", "x", 2, 1, "A gingerbread fence with gumdrop posts. Keep off."],
+  // Volcanic props (bead bzc.125): lava only.
+  ["basalt-columns", "Basalt Columns", "v", "x", 1, 2, "Six-sided columns of black basalt, as if someone stacked pencils."],
+  ["demon-horn-rock", "Demon-Horn Rock", "v", "x", 1, 2, "Two great horns of rock. Something very large is buried here, or wants you to think so."],
+  ["obsidian-spire", "Obsidian Spire", "v", "x", 1, 2, "A spire of black volcanic glass, too sharp to climb."],
+  ["magma-boulder", "Magma Boulder", "v", "x", 1, 2, "A boulder still cracked with glowing lava. Warm to the touch, briefly."],
+  ["charred-log", "Charred Log", "v", "x", 2, 1, "A fallen trunk burnt black, its cracks still glowing."],
+  ["scorched-skeleton", "Scorched Skeleton", "v", "x", 2, 1, "The scorched bones of a great horned beast."],
+  ["basalt-wall", "Basalt Wall", "v", "x", 2, 1, "A row of basalt columns the lava left standing."],
+  ["obsidian-ridge", "Obsidian Ridge", "v", "x", 2, 1, "A low ridge of black glass broken into chunks."],
 ];
 
 export const DECORATION_KINDS: readonly DecorationKind[] = ROWS.map(

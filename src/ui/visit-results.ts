@@ -161,7 +161,13 @@ export function siteIcons(obj: MapObject): VisitIcon[] {
     case "frost-giants-barrow":
     case "pyramid":
     case "sunken-tomb":
+    case "brimstone-pit":
       return prizeIcons(prizeOf(obj, "prize"));
+    // The Infernal Forge (bead bzc.125): the Wonder it reforges into.
+    case "infernal-forge":
+      return str("wonder") === ""
+        ? []
+        : [{ kind: "artifact", id: str("wonder") }];
     case "aurora-spire": {
       const skill = auroraSkill(obj);
       return skill === undefined ? [] : [{ kind: "skill", id: skill.id }];

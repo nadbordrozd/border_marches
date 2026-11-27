@@ -74,6 +74,13 @@ tomb's small and medium sizes share it). `ART_ROWS` names them by
 guardians and the word tomb) was refused by the provider's policy check
 and is recorded as `FAILED`.
 
+### Volcanic sites (bead bzc.125)
+
+Studio set `art/sets/volcanic-sites`: the Infernal Forge and the Brimstone
+Pit (three sizes from one call) on 128 x 128, the Shrine of Embers on 64 x
+64, with the roadside inn (`map-objects/inn-a#0`) as style image for the
+chunky rounded shapes, as the chunky towns of bead bzc.97. 3 calls.
+
 ### Artifacts on the map and the Mystery Bag (bead bzc.105)
 
 Studio set `art/sets/artifact-pickups`, the pickups' recipe (the sawmill as

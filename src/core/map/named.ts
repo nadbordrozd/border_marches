@@ -72,7 +72,12 @@ const NAMED_CONFIG: {
   terrain: Pick<GenConfig["terrain"], NamedLandscape>;
   objects: Pick<
     GenConfig["objects"],
-    "keepWaysOpen" | "density" | "reserveRare" | "waysRound" | "mystery"
+    | "keepWaysOpen"
+    | "density"
+    | "reserveRare"
+    | "waysRound"
+    | "mystery"
+    | "volcanicSites"
   >;
   clusters: Partial<GenConfig["clusters"]>;
   hoards: Pick<GenConfig["hoards"], "rate">;
@@ -92,6 +97,9 @@ const NAMED_CONFIG: {
     waysRound: false,
     // Nor their artifacts in bags (their edits name them by id).
     mystery: { share: 0, treasureShare: 0 },
+    // Nor the volcanic sites of bead bzc.125 (a map with lava adds them by
+    // its edits).
+    volcanicSites: false,
   },
   // Bead bzc.96 (map composition): the named maps keep the obstacle
   // clusters, fill and pockets they were authored on, with no treasure

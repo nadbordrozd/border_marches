@@ -127,7 +127,12 @@ export function siteCue(
     case "frost-giants-barrow":
     case "pyramid":
     case "sunken-tomb":
+    case "brimstone-pit":
       return "site.treasure";
+    // The Infernal Forge (bead bzc.125): a reforge sounds like a find; a
+    // visit that only offers the choice stays silent.
+    case "infernal-forge":
+      return /is reforged into/.test(text) ? "site.treasure" : null;
     case "prison":
       return "site.quest";
     case "faction-outpost":

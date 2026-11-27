@@ -1,0 +1,122 @@
+{
+  "forge-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "chunky horned basalt smithy, a big glowing furnace mouth, anvil and tools at the front left; reads at 1x",
+    "at": "2026-11-27T09:14:06.488Z"
+  },
+  "forge-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good, but smaller than #1 and the anvil merges into the wall",
+    "at": "2026-11-27T09:14:06.628Z"
+  },
+  "forge-a#2": {
+    "verdict": "REJECTED",
+    "notes": "a small door instead of the furnace mouth: reads as a hut, not a forge",
+    "at": "2026-11-27T09:14:06.743Z"
+  },
+  "forge-a#3": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #1 with less at the front",
+    "at": "2026-11-27T09:14:06.860Z"
+  },
+  "pit-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "small size: a modest sulphur-crusted mound with a glowing mouth and a chest",
+    "at": "2026-11-27T09:14:06.980Z"
+  },
+  "pit-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "medium size: the glowing mouth chained between horned posts, sulphur streaks, crystals",
+    "at": "2026-11-27T09:14:07.114Z"
+  },
+  "pit-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "large size: a grand tiered sulphur mound, chained horned posts, chest and crystals",
+    "at": "2026-11-27T09:14:07.234Z"
+  },
+  "pit-a#3": {
+    "verdict": "REJECTED",
+    "notes": "second large: the tall cone reads as a volcano more than a pit; #2 is chunkier",
+    "at": "2026-11-27T09:14:07.344Z"
+  },
+  "embers-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "horned basalt altar with a coal brazier, a small flame and a red horned sigil: clear and cute",
+    "at": "2026-11-27T09:14:07.464Z"
+  },
+  "embers-a#1": {
+    "verdict": "REJECTED",
+    "notes": "spiky block base, the brazier reads as a cauldron; #0 is clearer",
+    "at": "2026-11-27T09:14:07.600Z"
+  },
+  "embers-a#2": {
+    "verdict": "REJECTED",
+    "notes": "busy chains and straps, muddy at 1x",
+    "at": "2026-11-27T09:14:07.728Z"
+  },
+  "embers-a#3": {
+    "verdict": "REJECTED",
+    "notes": "the coals are dim, reads as a planter",
+    "at": "2026-11-27T09:14:07.848Z"
+  },
+  "embers-a#4": {
+    "verdict": "REJECTED",
+    "notes": "unlit: an empty bowl is no shrine of embers",
+    "at": "2026-11-27T09:14:07.968Z"
+  },
+  "embers-a#5": {
+    "verdict": "REJECTED",
+    "notes": "lumpy rock body without a sigil",
+    "at": "2026-11-27T09:14:08.083Z"
+  },
+  "embers-a#6": {
+    "verdict": "REJECTED",
+    "notes": "tower of flames: a fire, not a shrine",
+    "at": "2026-11-27T09:14:08.200Z"
+  },
+  "embers-a#7": {
+    "verdict": "REJECTED",
+    "notes": "close to #0 without the horns",
+    "at": "2026-11-27T09:14:08.320Z"
+  },
+  "embers-a#8": {
+    "verdict": "REJECTED",
+    "notes": "a good brazier, but the rubble base is muddy at 1x",
+    "at": "2026-11-27T09:14:08.425Z"
+  },
+  "embers-a#9": {
+    "verdict": "REJECTED",
+    "notes": "spiky stepped tower, busy at 1x",
+    "at": "2026-11-27T09:14:08.536Z"
+  },
+  "embers-a#10": {
+    "verdict": "REJECTED",
+    "notes": "block and bowl read as two objects",
+    "at": "2026-11-27T09:14:08.643Z"
+  },
+  "embers-a#11": {
+    "verdict": "REJECTED",
+    "notes": "a lumpy rock without a brazier shape",
+    "at": "2026-11-27T09:14:08.744Z"
+  },
+  "embers-a#12": {
+    "verdict": "REJECTED",
+    "notes": "cracked rock body, muddy at 1x",
+    "at": "2026-11-27T09:14:08.853Z"
+  },
+  "embers-a#13": {
+    "verdict": "REJECTED",
+    "notes": "a square lava tub, reads as a forge hearth",
+    "at": "2026-11-27T09:14:08.957Z"
+  },
+  "embers-a#14": {
+    "verdict": "REJECTED",
+    "notes": "ember sparks float off the sprite and chains clutter it",
+    "at": "2026-11-27T09:14:09.060Z"
+  },
+  "embers-a#15": {
+    "verdict": "REJECTED",
+    "notes": "stepped base and bowl, good; #0 reads clearer",
+    "at": "2026-11-27T09:14:09.166Z"
+  }
+}

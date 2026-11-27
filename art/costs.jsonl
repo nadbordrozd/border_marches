@@ -582,6 +582,14 @@
 {"at":"2026-11-27T00:56:26.320Z","set":"candy-decorations","id":"small-b","endpoint":"generate-image-v2","usd":0.08331384982003107}
 {"at":"2026-11-27T00:58:24.530Z","set":"candy-decorations","id":"props-1x1-a","endpoint":"generate-image-v2","usd":0.08184624671936035}
 {"at":"2026-11-27T00:59:47.147Z","set":"candy-decorations","id":"props-2x1-a","endpoint":"generate-image-v2","usd":0.08121170433362325}
+{"at":"2026-11-27T09:10:21.889Z","set":"volcanic-sites","id":"forge-a","endpoint":"generate-image-v2","usd":0.08081953480508593}
+{"at":"2026-11-27T09:11:25.175Z","set":"volcanic-sites","id":"pit-a","endpoint":"generate-image-v2","usd":0.08073808654149374}
+{"at":"2026-11-27T09:13:02.916Z","set":"volcanic-sites","id":"embers-a","endpoint":"generate-image-v2","usd":0.0833771042558882}
+{"at":"2026-11-27T09:14:51.982Z","set":"volcanic-decorations","id":"small-a","endpoint":"generate-image-v2","usd":0.08194575617048476}
+{"at":"2026-11-27T09:17:07.678Z","set":"volcanic-decorations","id":"small-b","endpoint":"generate-image-v2","usd":0.08324002205000984}
+{"at":"2026-11-27T09:18:45.310Z","set":"volcanic-decorations","id":"props-1x1-a","endpoint":"generate-image-v2","usd":0.08178140648206075}
+{"at":"2026-11-27T09:19:52.212Z","set":"volcanic-decorations","id":"props-2x1-a","endpoint":"generate-image-v2","usd":0.08189997964435154}
+{"at":"2026-11-27T09:21:40.513Z","set":"volcanic-trees","id":"charred-a","endpoint":"generate-image-v2","usd":0.08407496648364597}
 {"at":"2026-11-27T09:06:32.969Z","set":"chunky-towns","id":"horde-fort-r1","endpoint":"generate-image-v2","usd":0.08082656492127313}
 {"at":"2026-11-27T09:07:56.500Z","set":"chunky-towns","id":"horde-fort-r2","endpoint":"generate-image-v2","usd":0.08067075430022345}
 {"at":"2026-11-27T09:09:22.764Z","set":"chunky-towns","id":"horde-fort-r3","endpoint":"generate-image-v2","usd":0.08053330334027609}

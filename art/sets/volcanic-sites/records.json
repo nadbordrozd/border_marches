@@ -1,0 +1,293 @@
+{
+  "forge-a": {
+    "id": "forge-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "50e39fd2-0ea2-4c14-bc08-d5ee659e22ee",
+    "submittedAt": "2026-11-27T09:09:15.111Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cute chunky infernal forge of a volcanic plain: a plump squat smithy of rounded black basalt blocks #3a3036 with #241c22 shadows under a dark iron roof #4a4050 with two curved red horns #b03a2a on its ridge, a fat round chimney at the back with orange embers on top, a huge round furnace mouth glowing bright orange and yellow #f07a2a #ffc03a in the middle of its front, a big black iron anvil with a hammer on it at the front left, a little trough of glowing lava at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 125601,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a cute chunky infernal forge of a volcanic plain: a plump squat smithy of rounded black basalt blocks #3a3036 with #241c22 shadows under a dark iron roof #4a4050 with two curved red horns #b03a2a on its ridge, a fat round chimney at the back with orange embers on top, a huge round furnace mouth glowing bright orange and yellow #f07a2a #ffc03a in the middle of its front, a big black iron anvil with a hammer on it at the front left, a little trough of glowing lava at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, demon figure, smoke cloud, ground, grass, sky."
+    },
+    "at": "2026-11-27T09:10:21.888Z",
+    "usageUsd": 0.08081953480508593,
+    "candidates": [
+      {
+        "file": "forge-a-0.png",
+        "sha256": "81da45363028f8ee338919844e7a20979585b6fd05e599db8ddcc547a8fc9cc6",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "forge-a-1.png",
+        "sha256": "784624de1472a694bbee3b05cfb8cee165df8b38081d2f66270e2a395d28b511",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "forge-a-2.png",
+        "sha256": "cb5cf7326fc963c6131b94ec5c9238e6d3a2881eba57a42f05af3f5a0cd9da10",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "forge-a-3.png",
+        "sha256": "ac05b677b5299f00d4a0addcd122ee56a5766688ba7fe25bf77f8a6a3bbdeca8",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "pit-a": {
+    "id": "pit-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "43b1db74-4a99-4068-ae2d-90be8ea6f1a8",
+    "submittedAt": "2026-11-27T09:10:23.058Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a brimstone pit, a guarded treasure bank: a chunky rounded mound of black volcanic rock #3a3036 crusted with yellow sulphur #e8d43a, a dark cave mouth in its front glowing orange #f07a2a from below, an iron chain across the cave mouth between two horned rock posts, a small treasure chest and sulphur crystals at the front left. Each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height, its front facing the viewer."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 125602,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a brimstone pit, a guarded treasure bank: a chunky rounded mound of black volcanic rock #3a3036 crusted with yellow sulphur #e8d43a, a dark cave mouth in its front glowing orange #f07a2a from below, an iron chain across the cave mouth between two horned rock posts, a small treasure chest and sulphur crystals at the front left. Each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height, its front facing the viewer. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, demon figure, skeleton figure, smoke cloud, ground, grass, sky."
+    },
+    "at": "2026-11-27T09:11:25.175Z",
+    "usageUsd": 0.08073808654149374,
+    "candidates": [
+      {
+        "file": "pit-a-0.png",
+        "sha256": "58cb5f5cc90364812d096b3488545cbe08401ec27008141cd45a40ddaf0b00e4",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "pit-a-1.png",
+        "sha256": "e029837a7c1b55b7fb5f7af7a2b48a62721cfbab710d73983bcfab99f0618424",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "pit-a-2.png",
+        "sha256": "63028dcab3bcd4bdb228f4dff07a631b770b4539a6bb8af21fa7b0af893dc52e",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "pit-a-3.png",
+        "sha256": "e5b6c8ec5f929c30f817419a696e056eb1e1cc54ab59a454d6a56db754667bcc",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "embers-a": {
+    "id": "embers-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "54503a4c-0d69-4e0e-946c-44eba6edb2d6",
+    "submittedAt": "2026-11-27T09:11:25.261Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a small shrine of embers on a volcanic plain: a squat rounded altar of black basalt #3a3036 with #241c22 shadows, a wide iron brazier on top full of glowing orange and yellow coals #f07a2a #ffc03a with a little tongue of flame, a carved red horned sigil #b03a2a on its front face, two short black stone horns at its corners. Each image a slightly different shrine. About three quarters of the image wide and nearly the full image tall, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 125603,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a small shrine of embers on a volcanic plain: a squat rounded altar of black basalt #3a3036 with #241c22 shadows, a wide iron brazier on top full of glowing orange and yellow coals #f07a2a #ffc03a with a little tongue of flame, a carved red horned sigil #b03a2a on its front face, two short black stone horns at its corners. Each image a slightly different shrine. About three quarters of the image wide and nearly the full image tall, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, demon figure, smoke cloud, ground, grass, sky."
+    },
+    "at": "2026-11-27T09:13:02.915Z",
+    "usageUsd": 0.0833771042558882,
+    "candidates": [
+      {
+        "file": "embers-a-0.png",
+        "sha256": "7f6cc2660adb2eb2bb49b0031305dab52f28d9c9e510169e36a284249b5442aa",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-1.png",
+        "sha256": "d0be530d573871efc05177a14bb4572aff454597f0ee9d0fc26ce3e976bb652b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-2.png",
+        "sha256": "f10de9f42894a89a52b12f6362f7880bec0168343cead8475c94f94e1356e5ab",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-3.png",
+        "sha256": "00dcd862cadcea79a32acfaca10dc6ab39f721a454dbff117afd6acaa5adebae",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-4.png",
+        "sha256": "a67fdd7cfb7140422add1514bb1ab20d598acb972cf07caeacbf145732e18a6b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-5.png",
+        "sha256": "e04f5ad106c9076821e20a3372ef604de8a8ed8329eaaac01d5112db1e86e2a0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-6.png",
+        "sha256": "0b0c5bf81eca38f5a70224204708fc43ec569ca2373e12b36dd39f738ffb8ac0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-7.png",
+        "sha256": "8b6d1fd554bd78b7b4bdb5d097d938c456a69af1fbc3dfee6240e29572784b57",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-8.png",
+        "sha256": "3151eb7ab43de5e849b3f2de8427d8d81636fa1e5e2d616ad17bb28e32017455",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-9.png",
+        "sha256": "8ebc9bdf24ea4c689b3458ba3a2e88109d60a20c9405582069a870d25de06e42",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-10.png",
+        "sha256": "6280f18941f1536ca875ae1518bfce0c62e7eb34bc2af539c13091b72ed15fb6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-11.png",
+        "sha256": "f09ea658727f5c7089cb0bb298d69cce02eeccd045efb5ea33e6aae5ea3a2842",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-12.png",
+        "sha256": "ecceafa829f2068dc6ffba2dcdbcaf5a83c4a3042780173bec4f61f2633a0078",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-13.png",
+        "sha256": "14b38ee9a9d3731e81dfef0f961ef6781f36fe65870823b879c07cf027d03de7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-14.png",
+        "sha256": "7d00d1616859a55c795d3f255b7d2b9f04c0397804e160d680a02f9a65f535df",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "embers-a-15.png",
+        "sha256": "f00bfe2d2657e434845d0093030f48c1c90f63dfff4587b82d5d8187b8f0a4ab",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  }
+}

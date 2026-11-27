@@ -55,6 +55,8 @@ import {
   cellSparkleSlots,
   frameDue,
   glintLevel,
+  glowAlpha,
+  hotOverlay,
   livingPose,
   magmaAlpha,
   sparkleLevel,
@@ -1174,7 +1176,11 @@ export function createMapView(
               y: 0,
               frames: [
                 read,
-                d.motion === "breathe" ? toSurface(squashY(pixels)) : read,
+                d.motion === "breathe"
+                  ? toSurface(squashY(pixels))
+                  : d.motion === "glow"
+                    ? toSurface(hotOverlay(pixels))
+                    : read,
               ] as const,
             },
           ];
@@ -1260,6 +1266,17 @@ export function createMapView(
       const art = artOf(d);
       if (art === null) continue;
       any = true;
+      if (d.motion === "glow") {
+        // A glowing decoration (bead bzc.125): the sprite, then its hot
+        // pixels brightened at the pulse's alpha.
+        const part = art.parts[0];
+        if (part === undefined) continue;
+        ctx.drawImage(part.frames[0], d.x + part.x, d.y + part.y);
+        ctx.globalAlpha = glowAlpha(d.phase, t);
+        ctx.drawImage(part.frames[1], d.x + part.x, d.y + part.y);
+        ctx.globalAlpha = 1;
+        continue;
+      }
       art.parts.forEach((part, k) => {
         const pose = livingPose(d.motion, d.phase, t, k);
         ctx.drawImage(

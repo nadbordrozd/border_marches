@@ -1,0 +1,136 @@
+{
+  "set": "volcanic-sites",
+  "bead": "border_marches-bzc.125",
+  "class": "map-objects",
+  "exploration": false,
+  "_doc": "The volcanic (hellish plains) special sites (bead bzc.125, docs/art/classes/map-objects.md, docs/design/CONTENT_MAP_OBJECTS.md 3.14): the Infernal Forge and the Brimstone Pit (2x2 on 128 x 128) and the Shrine of Embers (1x1 on 64 x 64). generate-image-v2 at native display size; the roadside inn (map-objects/inn-a#0) is the style image for the chunky rounded shapes, outline, pixel size and viewing angle only, as the chunky towns and the sawmill of bead bzc.97. Layers: style, light-south-west, class-map-object, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "styleInn": {
+      "file": "art/masters/map-objects/inn-a-0.png",
+      "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+    },
+    "styleOpts": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-map-object"
+    ],
+    "noBackground": true,
+    "styleImage": "@styleInn",
+    "styleOptions": "@styleOpts"
+  },
+  "recipes": [
+    {
+      "id": "forge-a",
+      "concept": "INFERNAL FORGE (2x2 reforging site)",
+      "width": 128,
+      "height": 128,
+      "seed": 125601,
+      "subject": "Subject: a cute chunky infernal forge of a volcanic plain: a plump squat smithy of rounded black basalt blocks #3a3036 with #241c22 shadows under a dark iron roof #4a4050 with two curved red horns #b03a2a on its ridge, a fat round chimney at the back with orange embers on top, a huge round furnace mouth glowing bright orange and yellow #f07a2a #ffc03a in the middle of its front, a big black iron anvil with a hammer on it at the front left, a little trough of glowing lava at the front right. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, demon figure, smoke cloud, ground, grass, sky, text"
+    },
+    {
+      "id": "pit-a",
+      "concept": "BRIMSTONE PIT (2x2 guarded bank, sizes)",
+      "width": 128,
+      "height": 128,
+      "seed": 125602,
+      "subject": "Subject: a brimstone pit, a guarded treasure bank: a chunky rounded mound of black volcanic rock #3a3036 crusted with yellow sulphur #e8d43a, a dark cave mouth in its front glowing orange #f07a2a from below, an iron chain across the cave mouth between two horned rock posts, a small treasure chest and sulphur crystals at the front left. Each image a different size of it: a small modest one, a medium one, a large grand one, and another large grand one. Nearly the full image wide and most of its height, its front facing the viewer.",
+      "negative": "person, demon figure, skeleton figure, smoke cloud, ground, grass, sky, text"
+    },
+    {
+      "id": "embers-a",
+      "concept": "SHRINE OF EMBERS (1x1 buff site)",
+      "width": 64,
+      "height": 64,
+      "seed": 125603,
+      "subject": "Subject: a small shrine of embers on a volcanic plain: a squat rounded altar of black basalt #3a3036 with #241c22 shadows, a wide iron brazier on top full of glowing orange and yellow coals #f07a2a #ffc03a with a little tongue of flame, a carved red horned sigil #b03a2a on its front face, two short black stone horns at its corners. Each image a slightly different shrine. About three quarters of the image wide and nearly the full image tall, its front facing the viewer straight on.",
+      "negative": "person, demon figure, smoke cloud, ground, grass, sky, text"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/objects/map/infernal-forge.png",
+      "from": "forge-a#1",
+      "width": 109,
+      "height": 102,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 11,
+          "width": 109,
+          "height": 102
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/brimstone-pit-small.png",
+      "from": "pit-a#0",
+      "width": 84,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 22,
+          "y": 41,
+          "width": 84,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/brimstone-pit-medium.png",
+      "from": "pit-a#1",
+      "width": 103,
+      "height": 74,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 32,
+          "width": 103,
+          "height": 74
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/brimstone-pit-large.png",
+      "from": "pit-a#2",
+      "width": 119,
+      "height": 93,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 18,
+          "width": 119,
+          "height": 93
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/shrine-of-embers.png",
+      "from": "embers-a#0",
+      "width": 58,
+      "height": 57,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 3,
+          "width": 58,
+          "height": 57
+        }
+      ]
+    }
+  ]
+}

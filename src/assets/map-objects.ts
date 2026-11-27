@@ -102,6 +102,10 @@ export const MAP_OBJECT_TYPE_IDS = [
   "sphinx",
   "sun-temple",
   "sunken-tomb",
+  // 3.14 Volcanic sites (bead bzc.125, set volcanic-sites)
+  "infernal-forge",
+  "brimstone-pit",
+  "shrine-of-embers",
 ] as const;
 
 export type MapObjectTypeId = (typeof MAP_OBJECT_TYPE_IDS)[number];
@@ -204,6 +208,9 @@ const TYPE_ROWS: readonly (readonly [
   ["sphinx", "Sphinx", 2, 2, ""],
   ["sun-temple", "Sun Temple", 2, 2, ""],
   ["sunken-tomb", "Sunken Tomb", 2, 2, ""],
+  ["infernal-forge", "Infernal Forge", 2, 2, ""],
+  ["brimstone-pit", "Brimstone Pit", 2, 2, ""],
+  ["shrine-of-embers", "Shrine of Embers", 1, 1, ""],
 ];
 
 export const MAP_OBJECT_TYPES: readonly MapObjectType[] = TYPE_ROWS.map(
@@ -394,6 +401,12 @@ const ART_ROWS: readonly (readonly [
   ["sphinx", "", 107, 98, "@desert-sites/sphinx-a#3"],
   ["sun-temple", "", 102, 113, "@desert-sites/sun-temple-a#1"],
   ["sunken-tomb", "", 120, 108, "@desert-sites/tomb-a#2"],
+  // Volcanic sites (bead bzc.125, set volcanic-sites).
+  ["infernal-forge", "", 109, 102, "@volcanic-sites/forge-a#1"],
+  ["brimstone-pit", "small", 84, 60, "@volcanic-sites/pit-a#0"],
+  ["brimstone-pit", "medium", 103, 74, "@volcanic-sites/pit-a#1"],
+  ["brimstone-pit", "large", 119, 93, "@volcanic-sites/pit-a#2"],
+  ["shrine-of-embers", "", 58, 57, "@volcanic-sites/embers-a#0"],
 ];
 
 /**

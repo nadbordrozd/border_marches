@@ -94,6 +94,14 @@ export const DECORATE = {
    * from their own random stream after everything else, like the snow's.
    */
   frostingExtraShare: 0.08,
+  /**
+   * The volcanic plains (bead bzc.125): this many more passable decorations
+   * per open lava cell (vents, sulphur pools, fire lilies: the lava's own
+   * kinds), from their own
+   * random stream after everything else, like the snow's and the
+   * frosting's: a map without lava decorates exactly as before.
+   */
+  volcanicExtraShare: 0.1,
 } as const;
 
 export interface DecorateOptions {
@@ -480,6 +488,36 @@ export function decorateMap(map: GameMap, options: DecorateOptions = {}): void {
         x: i % W,
         y: Math.floor(i / W),
         variant: frng.int(0, kind.looks - 1),
+      });
+      added++;
+    }
+  }
+
+  // A second sprinkle on the lava (bead bzc.125): its own stream, and only
+  // where there is volcanic ground.
+  const lava = range(n).filter(
+    (k) => cell(k)?.terrain === "volcanic" && taken[k] === 0 && smallOk(k),
+  );
+  if (lava.length > 0) {
+    const vrng = createRng(deriveSeed(map.seed, "decorations-volcanic"));
+    // Its own pieces (vents, sulphur pools), not the crows and spears it
+    // shares with the wasteland.
+    const kinds = decorationKindsFor("volcanic", true).filter(
+      (k) => k.terrains.length === 1,
+    );
+    const extra = Math.ceil(lava.length * DECORATE.volcanicExtraShare);
+    let added = 0;
+    for (const i of vrng.shuffle(lava)) {
+      if (added >= extra || kinds.length === 0) break;
+      if (seeds.some((s) => cheb(W, i, s) < 2)) continue;
+      seeds.push(i);
+      taken[i] = 1;
+      const kind = vrng.pick(kinds);
+      placed.push({
+        id: kind.id,
+        x: i % W,
+        y: Math.floor(i / W),
+        variant: vrng.int(0, kind.looks - 1),
       });
       added++;
     }

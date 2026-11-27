@@ -1272,6 +1272,52 @@ const NINEFOLD_LANDFALL: NamedMapDef = {
       data: { resource: "wood" },
       note: "A sawmill on the last wood at the lava's edge.",
     },
+    // Bead bzc.125: the hellish sites of the lava fields (the generator
+    // leaves them to the named maps' edits).
+    {
+      op: "remove",
+      id: "learning-stone-1",
+      at: [8, 64],
+      note: "Two learning stones make room for the Infernal Forge in the crowded lava fields...",
+    },
+    {
+      op: "remove",
+      id: "learning-stone-30",
+      at: [7, 65],
+      note: "...this is the second.",
+    },
+    {
+      op: "add",
+      id: "infernal-forge-lava",
+      type: "infernal-forge",
+      at: [6, 65],
+      data: { wonder: "tinderbox", value: 2500 },
+      note: "An Infernal Forge in the western nook of the lava fields, beside the pit: any Trinket and 1000 gold and 2 essence become a Tinderbox.",
+    },
+    {
+      op: "add",
+      id: "brimstone-pit-lava",
+      type: "brimstone-pit",
+      at: [3, 65],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [
+          { creature: "fire-eater", count: 8 },
+          { creature: "gremlin", count: 21 },
+        ],
+        prize: { artifacts: ["knuckle-dusters"], essence: 5, gold: 2000 },
+      },
+      note: "A Brimstone Pit in the western nook of the lava fields: 8 fire-eaters and 21 gremlins (4091, 63% of 6500) over 5 essence, 2000 gold and the Knuckle-Dusters.",
+    },
+    {
+      op: "add",
+      id: "shrine-of-embers-lava",
+      type: "shrine-of-embers",
+      at: [12, 61],
+      data: { value: 600 },
+      note: "A Shrine of Embers in the lava's northern cleft, above the burning wreck.",
+    },
     {
       op: "add",
       id: "chest-west",

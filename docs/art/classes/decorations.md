@@ -140,6 +140,27 @@ shapes that read as letters, a small lollipop and a giant melting cone
 (repeats of the lollipop trees and of the passable cone), purple and
 primary colourways off the Kingdom's palette (FACTION_CANDY 10.1).
 
+### The volcanic plains (bead bzc.125)
+
+Studio set `art/sets/volcanic-decorations` (same recipes and crops as
+above; 4 calls), volcanic only, so every other ground decorates as before.
+Passable, two looks each: `lava-vent`, `obsidian-shards`,
+`brimstone-pool` (a sulphur pool), `charred-bones`, `fumarole` (a rock
+chimney puffing embers), `fire-salamander`, `cinder-heap`, `fire-lily`,
+`ember-beetle` and `smouldering-stump`. Props: `basalt-columns`,
+`demon-horn-rock`, `obsidian-spire` and `magma-boulder` (1x1, two looks),
+`charred-log`, `scorched-skeleton`, `basalt-wall` and `obsidian-ridge`
+(2x1). Living ones move (`LIVING_MOTION`): the vent, the pool, the
+fumarole, the cinder heap and the stump glow (motion `glow`: their hot
+pixels, `isHot`, brightened and drawn over the sprite at a slow pulse,
+`glowAlpha`), the salamander twitches, the beetle creeps. The lava gets a
+second sprinkle of its own kinds (`DECORATE.volcanicExtraShare`, its own
+random stream).
+
+Rejected on sight in this set: bright sulphur crystals and round sulphur
+heaps (gold and gem pickups), flat lava scribbles with no rock body,
+plain pumice pebbles (the rock doodads), single thin shards.
+
 ## Placement (bead bzc.72)
 
 The art-free kinds (id, name, line, grounds, passable, footprint, number of

@@ -134,6 +134,25 @@ const LOOKS: Readonly<Record<string, readonly (readonly [number, number])[]>> = 
   "fallen-cane": [[116, 52]],
   "chocolate-bar": [[118, 47]],
   "gingerbread-fence": [[118, 49]],
+  // The volcanic plains (bead bzc.125, set volcanic-decorations).
+  "lava-vent": [[28, 23], [28, 23]],
+  "obsidian-shards": [[28, 25], [24, 27]],
+  "brimstone-pool": [[28, 23], [23, 20]],
+  "charred-bones": [[25, 27], [26, 23]],
+  "fumarole": [[20, 25], [20, 27]],
+  "fire-salamander": [[26, 24], [28, 22]],
+  "cinder-heap": [[28, 25], [28, 23]],
+  "fire-lily": [[18, 27], [18, 28]],
+  "ember-beetle": [[21, 17], [21, 17]],
+  "smouldering-stump": [[26, 25], [26, 25]],
+  "basalt-columns": [[52, 63], [52, 54]],
+  "demon-horn-rock": [[64, 60], [64, 60]],
+  "obsidian-spire": [[46, 63], [50, 63]],
+  "magma-boulder": [[58, 55], [58, 55]],
+  "charred-log": [[126, 51]],
+  "scorched-skeleton": [[124, 53]],
+  "basalt-wall": [[128, 62]],
+  "obsidian-ridge": [[128, 55]],
 };
 
 export const DECORATIONS: readonly DecorationDef[] = DECORATION_KINDS.map(

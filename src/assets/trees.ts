@@ -241,6 +241,29 @@ const TREE_ROWS: readonly (readonly [
   ["frosting", "cane", 2, 18, 33],
   ["frosting", "cane", 3, 18, 32],
   ["frosting", "cane", 4, 36, 33],
+  // The volcanic plains' woods (bead bzc.125, set volcanic-trees): charred
+  // trees, ember snags, ash-grey and ember-leaved dead trees, kept with
+  // the wasteland family (the lava borrows it) as species of their own
+  // that only the volcanic woods draw (TREE_SPECIES_WEIGHTS).
+  ["wasteland", "charred", 1, 31, 38],
+  ["wasteland", "charred", 2, 33, 34],
+  ["wasteland", "charred", 3, 30, 37],
+  ["wasteland", "charred", 4, 32, 37],
+  ["wasteland", "charred", 5, 30, 39],
+  ["wasteland", "cindersnag", 1, 25, 28],
+  ["wasteland", "cindersnag", 2, 25, 28],
+  ["wasteland", "cindersnag", 3, 21, 28],
+  ["wasteland", "cindersnag", 4, 23, 31],
+  ["wasteland", "cindersnag", 5, 23, 30],
+  ["wasteland", "ashen", 1, 29, 35],
+  ["wasteland", "ashen", 2, 28, 34],
+  ["wasteland", "ashen", 3, 28, 35],
+  ["wasteland", "ashen", 4, 29, 35],
+  ["wasteland", "ashen", 5, 29, 36],
+  ["wasteland", "emberleaf", 1, 29, 35],
+  ["wasteland", "emberleaf", 2, 34, 32],
+  ["wasteland", "emberleaf", 3, 30, 35],
+  ["wasteland", "emberleaf", 4, 31, 33],
 ];
 
 export const TREE_ASSETS: readonly TreeAsset[] = TREE_ROWS.map(
@@ -282,7 +305,10 @@ export const TREE_SPECIES_WEIGHTS: Readonly<
   Record<GroundTerrain, Readonly<Record<string, number>>>
 > = {
   ...OWN_SPECIES_WEIGHTS,
-  volcanic: OWN_SPECIES_WEIGHTS[GROUND_FAMILY.volcanic],
+  // Bead bzc.125: the lava grows its own dead woods (charred trees most,
+  // ash-grey ones between, a few ember snags and ember-leaved trees), from
+  // the wasteland family's folder; the wasteland itself never draws them.
+  volcanic: { charred: 4, ashen: 2.2, cindersnag: 1.2, emberleaf: 0.8 },
 };
 
 /**

@@ -14,7 +14,10 @@
  * - living decorations: a small pose (offset and frame) per decoration and
  *   part, with a phase from a hash of the cell, so no two move in step;
  * - sugar sparkles (bead bzc.115): a few fixed slots per frosting cell
- *   twinkle like the water's glints, a pixel and then a small cross.
+ *   twinkle like the water's glints, a pixel and then a small cross;
+ * - glowing decorations (bead bzc.125): the hot pixels of a volcanic
+ *   decoration (a lava vent, a sulphur pool) brighten and fade, a slow
+ *   pulse like the magma's, each at its own phase.
  *
  * Nothing here moves when the terrain is still (reduced motion, the
  * "Animated terrain" setting off, a screen over the map): the view then
@@ -57,6 +60,13 @@ export const MOTION = {
     /** Sparkle colours: dim and bright (CSS). */
     dim: "rgba(255, 246, 250, 0.7)",
     bright: "rgba(255, 255, 255, 0.95)",
+  },
+  glow: {
+    /** One pulse of a glowing decoration, ms. */
+    periodMs: 2100,
+    /** Alpha of its bright overlay at the top and the bottom of a pulse. */
+    high: 0.95,
+    low: 0.05,
   },
   magma: {
     /** One pulse, ms. */
@@ -309,7 +319,7 @@ export function crackOverlay(
 
 /** How a living decoration moves. */
 export type LivingMotion =
-  "flap" | "hover" | "hop" | "breathe" | "creep" | "twitch" | "roll";
+  "flap" | "hover" | "hop" | "breathe" | "creep" | "twitch" | "roll" | "glow";
 
 /**
  * The living decorations (src/data/decorations.ts) and their idle. A flap
@@ -341,6 +351,15 @@ export const LIVING_MOTION: Readonly<Record<string, LivingMotion>> = {
   "gummy-worm": "creep",
   "sugar-mouse": "twitch",
   "gingerbread-rabbit": "breathe",
+  // The volcanic plains (bead bzc.125): lava and embers pulse (glow), a
+  // salamander flicks, an ember beetle crawls.
+  "lava-vent": "glow",
+  "brimstone-pool": "glow",
+  fumarole: "glow",
+  "cinder-heap": "glow",
+  "smouldering-stump": "glow",
+  "fire-salamander": "twitch",
+  "ember-beetle": "creep",
 };
 
 /** The pose of a living decoration (or one of its parts) at a moment. */
@@ -401,6 +420,9 @@ export function livingPose(
       const k = (t / 4300 + p) % 1;
       return { dx: k < 0.07 ? 1 : 0, dy: 0, frame: 0 };
     }
+    case "glow":
+      // It stays put; its bright overlay pulses (glowAlpha).
+      return STILL;
     case "roll": {
       // Blown three pixels each way over five seconds, with a little bump
       // on the way (bead bzc.88: the tumbleweed).
@@ -532,6 +554,39 @@ export function squashX(image: PixelImage, keep = 0.5): PixelImage {
       for (let c = 0; c < 4; c += 1)
         out[(y * w + x) * 4 + c] = data[(y * w + sx) * 4 + c] ?? 0;
     }
+  return { width: w, height: h, data: out };
+}
+
+/**
+ * The alpha of a glowing decoration's bright overlay at time `t` (ms) for
+ * its phase: a slow sine pulse; a still map (t = 0) shows it half lit.
+ */
+export function glowAlpha(phase: number, t: number): number {
+  const { periodMs, high, low } = MOTION.glow;
+  if (t <= 0) return (high + low) / 2;
+  const s = Math.sin(2 * Math.PI * (t / periodMs + phase));
+  return low + (high - low) * (0.5 + 0.5 * s);
+}
+
+/**
+ * The bright overlay of a glowing decoration: its hot pixels ({@link
+ * isHot}: lava orange, ember red, sulphur yellow) lifted halfway to a pale
+ * yellow-white, every other pixel transparent. Same size as the source.
+ */
+export function hotOverlay(image: PixelImage): PixelImage {
+  const { width: w, height: h, data } = image;
+  const out = new Uint8ClampedArray(w * h * 4);
+  for (let p = 0; p < w * h; p += 1) {
+    if ((data[p * 4 + 3] ?? 0) === 0) continue;
+    const r = data[p * 4] ?? 0;
+    const g = data[p * 4 + 1] ?? 0;
+    const b = data[p * 4 + 2] ?? 0;
+    if (!isHot(r, g, b)) continue;
+    out[p * 4] = Math.round((r + 255) / 2);
+    out[p * 4 + 1] = Math.round((g + 236) / 2);
+    out[p * 4 + 2] = Math.round((b + 150) / 2);
+    out[p * 4 + 3] = 255;
+  }
   return { width: w, height: h, data: out };
 }
 

@@ -141,7 +141,7 @@ export const CANOPY_GROUND: Readonly<Record<GroundTerrain, CanopyGround>> = {
   steppe: { spacing: 0.92, tint: 1 },
   badlands: { spacing: 0.86, tint: 1.45 },
   wasteland: { spacing: 1, tint: 0.85 },
-  // Volcanic ground grows the wasteland's dead trees (GROUND_FAMILY).
+  // Volcanic ground grows its own charred woods (bead bzc.125, trees.ts).
   volcanic: { spacing: 1, tint: 0.85 },
   // Snowy conifers pack like the green woods; a lighter under-tint, so the
   // gaps read as snow in shade.

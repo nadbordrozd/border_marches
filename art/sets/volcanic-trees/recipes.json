@@ -1,0 +1,315 @@
+{
+  "set": "volcanic-trees",
+  "bead": "border_marches-bzc.125",
+  "class": "trees",
+  "exploration": false,
+  "_doc": "The volcanic ground's woods (bead bzc.125, docs/art/classes/trees.md): dead charred trees and ember snags, in the wasteland art family's folder as their own species (the wasteland woods never draw them). generate-image-v2 at 48 x 48 like set trees (one call returns many candidates of a mixed subject); the best distinct ones are accepted and cropped to their opaque box plus 1 px. Never scaled, never mirrored. Layers: style, light, class-tree, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-tree"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "charred-a",
+      "concept": "CHARRED DEAD TREES",
+      "width": 48,
+      "height": 48,
+      "seed": 125201,
+      "subject": "Subject: one small dead tree of a volcanic plain, chunky and cute, each image a different one of these: a charred dead tree with a thick trunk and a few bare twisted branches of burnt black wood #2e2628 (light #5a4a48 on the left side), a few thin glowing orange ember cracks #f07a2a in the bark; a burnt tree snag, a broken black trunk with two short stubby branches and orange ember tips; a dead tree with ash-grey bark #6a6266 (shadow #3e383c) and a crooked bare crown; a dead black tree with a few red-orange leaves #e8502a still clinging to it. A short trunk at the bottom. About half of the image wide and nearly the full image tall.",
+      "negative": "face, eyes, person, ground, grass, green leaves, flames, smoke, fire"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/trees/wasteland/charred-1.png",
+      "from": "charred-a#0",
+      "width": 31,
+      "height": 38,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 5,
+          "width": 31,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/charred-2.png",
+      "from": "charred-a#5",
+      "width": 33,
+      "height": 34,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 8,
+          "width": 33,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/charred-3.png",
+      "from": "charred-a#10",
+      "width": 30,
+      "height": 37,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 5,
+          "width": 30,
+          "height": 37
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/charred-4.png",
+      "from": "charred-a#15",
+      "width": 32,
+      "height": 37,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 5,
+          "width": 32,
+          "height": 37
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/charred-5.png",
+      "from": "charred-a#20",
+      "width": 30,
+      "height": 39,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 4,
+          "width": 30,
+          "height": 39
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/cindersnag-1.png",
+      "from": "charred-a#1",
+      "width": 25,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 13,
+          "width": 25,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/cindersnag-2.png",
+      "from": "charred-a#6",
+      "width": 25,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 13,
+          "width": 25,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/cindersnag-3.png",
+      "from": "charred-a#11",
+      "width": 21,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 13,
+          "width": 21,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/cindersnag-4.png",
+      "from": "charred-a#16",
+      "width": 23,
+      "height": 31,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 10,
+          "width": 23,
+          "height": 31
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/cindersnag-5.png",
+      "from": "charred-a#21",
+      "width": 23,
+      "height": 30,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 11,
+          "width": 23,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/ashen-1.png",
+      "from": "charred-a#2",
+      "width": 29,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 7,
+          "width": 29,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/ashen-2.png",
+      "from": "charred-a#3",
+      "width": 28,
+      "height": 34,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 7,
+          "width": 28,
+          "height": 34
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/ashen-3.png",
+      "from": "charred-a#12",
+      "width": 28,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 7,
+          "width": 28,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/ashen-4.png",
+      "from": "charred-a#13",
+      "width": 29,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 6,
+          "width": 29,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/ashen-5.png",
+      "from": "charred-a#22",
+      "width": 29,
+      "height": 36,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 6,
+          "width": 29,
+          "height": 36
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/emberleaf-1.png",
+      "from": "charred-a#4",
+      "width": 29,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 7,
+          "width": 29,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/emberleaf-2.png",
+      "from": "charred-a#9",
+      "width": 34,
+      "height": 32,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 9,
+          "width": 34,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/emberleaf-3.png",
+      "from": "charred-a#14",
+      "width": 30,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 7,
+          "width": 30,
+          "height": 35
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/emberleaf-4.png",
+      "from": "charred-a#19",
+      "width": 31,
+      "height": 33,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 8,
+          "width": 31,
+          "height": 33
+        }
+      ]
+    }
+  ]
+}

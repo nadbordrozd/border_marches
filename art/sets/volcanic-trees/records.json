@@ -1,0 +1,191 @@
+{
+  "charred-a": {
+    "id": "charred-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "155f260d-ea81-4b40-b846-508c9818e13c",
+    "submittedAt": "2026-11-27T09:19:52.514Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small dead tree of a volcanic plain, chunky and cute, each image a different one of these: a charred dead tree with a thick trunk and a few bare twisted branches of burnt black wood #2e2628 (light #5a4a48 on the left side), a few thin glowing orange ember cracks #f07a2a in the bark; a burnt tree snag, a broken black trunk with two short stubby branches and orange ember tips; a dead tree with ash-grey bark #6a6266 (shadow #3e383c) and a crooked bare crown; a dead black tree with a few red-orange leaves #e8502a still clinging to it. A short trunk at the bottom. About half of the image wide and nearly the full image tall."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 125201,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one small dead tree of a volcanic plain, chunky and cute, each image a different one of these: a charred dead tree with a thick trunk and a few bare twisted branches of burnt black wood #2e2628 (light #5a4a48 on the left side), a few thin glowing orange ember cracks #f07a2a in the bark; a burnt tree snag, a broken black trunk with two short stubby branches and orange ember tips; a dead tree with ash-grey bark #6a6266 (shadow #3e383c) and a crooked bare crown; a dead black tree with a few red-orange leaves #e8502a still clinging to it. A short trunk at the bottom. About half of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, grass, green leaves, flames, smoke, fire."
+    },
+    "at": "2026-11-27T09:21:40.512Z",
+    "usageUsd": 0.08407496648364597,
+    "candidates": [
+      {
+        "file": "charred-a-0.png",
+        "sha256": "986eb47cd67f8c50922a96d01ae93b7ab65974289205313360bfcbf30b67adc9",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-1.png",
+        "sha256": "6a1677ff0a245671d0de7d4480173771d14744e1c1c2d72def581b27d42b7474",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-2.png",
+        "sha256": "0f9e16ae0b339d57eb1c614b68404fc1fba0c25a830f9230c26839c8b10c6243",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-3.png",
+        "sha256": "8f2b92c230a700ed6f3161344085fb7cfe5f43c3b93f91d9bdbca89b74bec1de",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-4.png",
+        "sha256": "04c4c188dcd012dc9c3a2323c71a9b6af765f4ece8a7fc3d1bc15606b724252f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-5.png",
+        "sha256": "215d72052f8c0485bb4f6529883afc9a80de52e845e9447eda85feb12ee3a11a",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-6.png",
+        "sha256": "b3a1fb91438efe4980637aaf3cab5552c5ecb4b384dd0a64edeecc96f0aa9258",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-7.png",
+        "sha256": "55dd7c52612fc382753c99da2086a8fad2fd0491840aa6cfdcbc6c3aa64107e0",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-8.png",
+        "sha256": "2596e14ad8e6f6616dd8b3442f66e5c2c6462c8be7be2b66c93e3bf85e21c4ae",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-9.png",
+        "sha256": "b8ed48ef94acdcaaaeb12c745eca20e2bd1edf5e8066a59a28bf72b8ff99de37",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-10.png",
+        "sha256": "139b1b45e8f2dbfb7a6a989d39f2d70a47a512b1c94574c433f7e84bb0bc1186",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-11.png",
+        "sha256": "b745cfb5624e210d7eb46d16594f25ed661b8cef5a4e37097ff3e31f42d069fe",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-12.png",
+        "sha256": "ad6552de8ad7970ed2cd376f11cd54c0daf04d9d8105a122309c009f3468e432",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-13.png",
+        "sha256": "eb010409eb0233d5d6271bc9e3ce27477f4a34eb653718d38a2276c83be0a6e9",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-14.png",
+        "sha256": "6a2fc26106ac852cb8deb11effee6dba816c7ebc3339eb5088143e483b0da7be",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-15.png",
+        "sha256": "b78f1145b7c11a6dbbdf4f09d8dfea8b82d63fdf735e970b723f44f5435a6ec4",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-16.png",
+        "sha256": "9c1f201db1615de29a3d507b24a828952ff5a95e05564b8409fe3fb75926a6b8",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-17.png",
+        "sha256": "4ba2abea58a3d1343d87ca3ad4487504b0036ae9826a6cb907547254d841ea1d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-18.png",
+        "sha256": "ccab97059e04ec946392878269f527659d7733499329bf8d9276d621d8c4a91b",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-19.png",
+        "sha256": "5c2736cf2925dae70b40106cd750689b85f4b2b9e3ad0fb96911051f21fb9850",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-20.png",
+        "sha256": "11dca1d390ba353478d453e9602d38596375c8bfe38d41fd9d80f94b84836d64",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-21.png",
+        "sha256": "9260d5b6858ca52480456947d1b93687720f4b8126f86cae0212903b95a9b5e6",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-22.png",
+        "sha256": "37e5725cd32f5401059b51c21a75aa52eb66242ad08c1e010ba74c61d869bcaf",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-23.png",
+        "sha256": "059d99100b87a167eb0ba662588999a69fa1a2192a442c02706b7bb2acbff1a7",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "charred-a-24.png",
+        "sha256": "889b0033a9a36fca954990a1d1244b9637e19490d9c1693a4e9b0151cfeb02f0",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  }
+}

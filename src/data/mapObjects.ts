@@ -181,6 +181,8 @@ const NEVER_GUARDED: ReadonlySet<ObjectTypeId> = new Set<ObjectTypeId>([
   "pyramid",
   "sunken-tomb",
   "sphinx",
+  // Volcanic sites (bead bzc.125): the Brimstone Pit's guard is inside.
+  "brimstone-pit",
 ]);
 
 /**
@@ -312,6 +314,14 @@ export const RULE_ROWS: readonly MapObjectRow[] = (
  */
 export const DESERT_ROWS: readonly MapObjectRow[] = (
   ["pyramid", "sphinx", "sun-temple", "sunken-tomb"] as const
+).map((t) => catalogueRow(OBJECT_TYPES[t]));
+
+/**
+ * Rows of the volcanic sites (bead bzc.125), placed only in volcanic zones
+ * by the generator's volcanic pass (src/core/map/gen/volcanic.ts).
+ */
+export const VOLCANIC_ROWS: readonly MapObjectRow[] = (
+  ["infernal-forge", "brimstone-pit", "shrine-of-embers"] as const
 ).map((t) => catalogueRow(OBJECT_TYPES[t]));
 
 export const MAP_OBJECT_ROW_BY_ID: Readonly<Record<string, MapObjectRow>> =

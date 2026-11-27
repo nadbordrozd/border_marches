@@ -1,0 +1,127 @@
+{
+  "charred-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "charred: a black twisted tree with an ember crack",
+    "at": "2026-11-27T09:29:10.386Z"
+  },
+  "charred-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "cinder snag: a broken black trunk with ember tips",
+    "at": "2026-11-27T09:29:10.998Z"
+  },
+  "charred-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "ashen: a grey dead tree with a crooked crown",
+    "at": "2026-11-27T09:29:11.482Z"
+  },
+  "charred-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "ashen: a grey dead tree, bushy bare crown",
+    "at": "2026-11-27T09:29:11.852Z"
+  },
+  "charred-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "ember leaf: a black tree with a few red-orange leaves",
+    "at": "2026-11-27T09:29:12.165Z"
+  },
+  "charred-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "charred: a wider black tree with an ember crack",
+    "at": "2026-11-27T09:29:12.652Z"
+  },
+  "charred-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "cinder snag: a short broken trunk with ember tips",
+    "at": "2026-11-27T09:29:13.087Z"
+  },
+  "charred-a#7": {
+    "verdict": "REJECTED",
+    "notes": "ashen alternatives: thin trunks, weaker at 1x",
+    "at": "2026-11-27T09:29:13.678Z"
+  },
+  "charred-a#8": {
+    "verdict": "REJECTED",
+    "notes": "ashen alternatives: thin trunks, weaker at 1x",
+    "at": "2026-11-27T09:29:13.990Z"
+  },
+  "charred-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "ember leaf: a black tree, red-orange leaves on both sides",
+    "at": "2026-11-27T09:29:14.159Z"
+  },
+  "charred-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "charred: a leaning black tree with an ember crack",
+    "at": "2026-11-27T09:29:14.478Z"
+  },
+  "charred-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "cinder snag: a stubby trunk with ember tips",
+    "at": "2026-11-27T09:29:14.678Z"
+  },
+  "charred-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "ashen: a grey dead tree, wide bare crown",
+    "at": "2026-11-27T09:29:15.260Z"
+  },
+  "charred-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "ashen: a grey dead tree, leaning crown",
+    "at": "2026-11-27T09:29:15.876Z"
+  },
+  "charred-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "ember leaf: a black tree, leaves at the tips",
+    "at": "2026-11-27T09:29:16.372Z"
+  },
+  "charred-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "charred: a twisting black tree with an ember crack",
+    "at": "2026-11-27T09:29:16.938Z"
+  },
+  "charred-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "cinder snag: a tall broken trunk with ember tips",
+    "at": "2026-11-27T09:29:17.304Z"
+  },
+  "charred-a#17": {
+    "verdict": "REJECTED",
+    "notes": "ashen alternatives: thin and leaning, weaker at 1x",
+    "at": "2026-11-27T09:29:17.921Z"
+  },
+  "charred-a#18": {
+    "verdict": "REJECTED",
+    "notes": "ashen alternatives: thin and leaning, weaker at 1x",
+    "at": "2026-11-27T09:29:18.256Z"
+  },
+  "charred-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "ember leaf: a black tree, sparse leaves",
+    "at": "2026-11-27T09:29:18.586Z"
+  },
+  "charred-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "charred: a tall black tree with an ember crack",
+    "at": "2026-11-27T09:29:19.121Z"
+  },
+  "charred-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "cinder snag: a slim broken trunk with an ember tip",
+    "at": "2026-11-27T09:29:19.537Z"
+  },
+  "charred-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "ashen: a grey dead tree, upright crown",
+    "at": "2026-11-27T09:29:20.032Z"
+  },
+  "charred-a#23": {
+    "verdict": "REJECTED",
+    "notes": "ashen alternative: near duplicate of #22",
+    "at": "2026-11-27T09:29:20.304Z"
+  },
+  "charred-a#24": {
+    "verdict": "REJECTED",
+    "notes": "ember leaf alternative: near duplicate of #9",
+    "at": "2026-11-27T09:29:20.845Z"
+  }
+}

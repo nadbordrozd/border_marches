@@ -37,6 +37,8 @@ import {
 } from "../../data/map-spells.ts";
 import {
   DRILL_YARD_MARKUP,
+  EMBER_BRAND,
+  FORGE_COST,
   HUNTERS_LODGE_MP,
   MAX_HEROES,
   OASIS_MP,
@@ -70,6 +72,15 @@ import { mysteryArtifactOf } from "../map/mystery.ts";
 import { isPassable, type MapObject } from "../map/types.ts";
 import { createRng, deriveSeed } from "../rng.ts";
 import { canCarry, giveArtifact, giveScroll } from "./artifacts.ts";
+import {
+  forgeBlock,
+  forgeGain,
+  forgeOfferAt,
+  forgeOffers,
+  forgeOptionId,
+  forgeWonder,
+  reforge,
+} from "./forge.ts";
 import { maxMana, schoolRank, vowRestrictions } from "./effects.ts";
 import { gainXp, skillBarred, vowBarsCreature } from "./hero.ts";
 import { heroByDef, newHeroState, startingArmy } from "./players.ts";
@@ -855,6 +866,23 @@ export function siteOptions(
         out.push({ id: `answer:${i}`, label: a });
       });
       break;
+    // The Infernal Forge (bead bzc.125): one Trinket into its Wonder.
+    case "infernal-forge": {
+      const wonder = forgeWonder(obj);
+      if (wonder === null || used(state, obj, hero)) break;
+      const ok =
+        player !== undefined && canAfford(player.resources, FORGE_COST);
+      const into = getArtifact(wonder).name;
+      for (const o of forgeOffers(hero)) {
+        const why = !ok ? "not enough resources" : forgeBlock(hero, o, wonder);
+        out.push({
+          id: forgeOptionId(o),
+          label: `Reforge ${getArtifact(o.artifact).name} into ${into} (${FORGE_COST.gold} gold, ${FORGE_COST.essence} essence)`,
+          ...(why !== null ? { disabled: why } : {}),
+        });
+      }
+      break;
+    }
     case "hermit":
       if (used(state, obj, hero)) break;
       for (const s of hero.skills) {
@@ -1151,6 +1179,34 @@ export function visitSite(
       if (already) break;
       offer(`Sphinx: "${sphinxRiddle(obj, hero).text}"`);
       return null;
+    // --- Volcanic sites (bead bzc.125) ---------------------------------
+    case "infernal-forge": {
+      if (already) break;
+      const wonder = forgeWonder(obj);
+      if (wonder === null || forgeOffers(hero).length === 0) {
+        say(
+          events,
+          hero,
+          obj,
+          `Infernal Forge: the smiths need a Trinket to reforge${wonder === null ? "" : ` into ${getArtifact(wonder).name}`}, and ${hero.name} carries none they will take.`,
+        );
+        return null;
+      }
+      offer(
+        `Infernal Forge: feed a Trinket to the fire and pay ${FORGE_COST.gold} gold and ${FORGE_COST.essence} essence; it comes out as ${getArtifact(wonder).name}.`,
+      );
+      return null;
+    }
+    case "shrine-of-embers": {
+      const added = addBuff(hero, "shrine-of-embers");
+      say(
+        events,
+        hero,
+        obj,
+        `Shrine of Embers: ${added ? `Ember Brand: your creatures strike ${EMBER_BRAND.dealt}% harder and are struck ${EMBER_BRAND.taken}% harder` : "already branded"} until the next battle ends.`,
+      );
+      return null;
+    }
     case "sun-temple": {
       const added = addBuff(hero, "sun-temple");
       say(
@@ -1289,7 +1345,8 @@ export function visitSite(
     case "frost-giants-barrow":
     case "keepers-vault":
     case "pyramid":
-    case "sunken-tomb": {
+    case "sunken-tomb":
+    case "brimstone-pit": {
       if (s0.done === true) {
         say(events, hero, obj, `${def.name}: already plundered.`);
         return null;
@@ -1944,6 +2001,23 @@ export function useSite(
       say(events, hero, obj, `Drill Yard: ${d.text}.`);
       break;
     }
+    case "reforge": {
+      const wonder = forgeWonder(obj);
+      const o = forgeOfferAt(hero, arg);
+      if (wonder === null || o === undefined)
+        return fail("bad-item", "nothing to reforge");
+      if (!reforge(hero, o, wonder))
+        return fail("backpack-full", "the backpack is full");
+      player.resources = subtractResources(player.resources, FORGE_COST);
+      markUsed(next, obj, hero);
+      say(
+        events,
+        hero,
+        obj,
+        `Infernal Forge: ${getArtifact(o.artifact).name} goes into the fire and is reforged into ${getArtifact(wonder).name}.`,
+      );
+      break;
+    }
     case "answer": {
       const riddle = sphinxRiddle(obj, hero);
       const said = riddle.answers[Number(arg)] ?? arg;
@@ -2068,6 +2142,33 @@ export function objectGuardFv(state: GameState, obj: MapObject): number {
 }
 
 /**
+ * What an Infernal Forge is worth to a player now (bead bzc.125): the best
+ * gain (Wonder less Trinket) any of its heroes that has not used it could
+ * take, if the player can pay; 0 otherwise, so the AI walks there only with
+ * a Trinket to reforge and the price in hand.
+ */
+function forgeValue(
+  state: GameState,
+  player: number,
+  obj: MapObject,
+  heroes: readonly HeroState[],
+): number {
+  const wonder = forgeWonder(obj);
+  const p = findPlayer(state, player);
+  if (wonder === null || p === undefined) return 0;
+  if (!canAfford(p.resources, FORGE_COST)) return 0;
+  let best = 0;
+  for (const h of heroes) {
+    if (used(state, obj, h)) continue;
+    for (const o of forgeOffers(h))
+      if (forgeBlock(h, o, wonder) === null)
+        best = Math.max(best, forgeGain(o, wonder));
+  }
+  // The price (gold and essence at ECONOMY values) comes off the gain.
+  return Math.max(0, best - FORGE_COST.gold - FORGE_COST.essence * 500);
+}
+
+/**
  * What visiting the object is worth to `player` now, in gold equivalents
  * (CONTENT_MAP_OBJECTS section 2's scale; 0 when it would give nothing):
  * spent, collected, already flagged or visited objects are 0. With
@@ -2126,13 +2227,19 @@ export function objectValueFor(
     case "per-day":
     case "per-week-hero":
     case "per-player":
+      if (t === "infernal-forge") return forgeValue(state, player, obj, heroes);
       return anyUnused ? base : 0;
     case "one-time":
       if (s.done === true) return 0;
       if (t === "seer-hut") return prizeValue(prizeOf(obj, "reward"));
       return base;
     case "each-visit": {
-      if (t === "rally-camp" || t === "wishing-well" || t === "sun-temple") {
+      if (
+        t === "rally-camp" ||
+        t === "wishing-well" ||
+        t === "sun-temple" ||
+        t === "shrine-of-embers"
+      ) {
         return heroes.some((h) => !h.buffs.includes(t)) ? base : 0;
       }
       if (t === "school-temple") {
@@ -2339,6 +2446,7 @@ export function describeSite(
     case "frost-giants-barrow":
     case "pyramid":
     case "sunken-tomb":
+    case "brimstone-pit":
       what =
         t === "keepers-vault"
           ? `${def.text} Each treasure: a Marvel piece, a Wonder and 5000 gold.`
@@ -2360,6 +2468,13 @@ export function describeSite(
           ? `Answer the sphinx's riddle. Right: a rank in the hero's lowest skill that can rise (${SPHINX_XP} experience without one). Wrong: the hero loses the rest of today's movement. Each hero gets one try.`
           : `Answer the sphinx's riddle. Right: ${SPHINX_XP} experience. Wrong: the hero loses the rest of today's movement. Each hero gets one try.`;
       break;
+    case "infernal-forge": {
+      const wonder = forgeWonder(obj);
+      const w = wonder === null ? undefined : findArtifact(wonder);
+      if (w !== undefined)
+        what = `Feed the forge one of the hero's Trinkets (not a cursed one) and pay ${FORGE_COST.gold} gold and ${FORGE_COST.essence} essence: it comes out as ${w.name} (Wonder: ${w.text}). Each hero once.`;
+      break;
+    }
     case "obelisk":
       what = `${def.text} You have seen ${obelisksVisited(state, player)} of ${obeliskCount(state)}.`;
       break;

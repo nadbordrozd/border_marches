@@ -1250,6 +1250,15 @@ export class AdventureAi implements PlayerController {
         // A sphinx's riddle (bead bzc.88): the AI guesses, by the day.
         else if (verb === "answer")
           v = 300 + ((Number(arg) + state.day) % options.length);
+        // The Infernal Forge (bead bzc.125): only while reforging gains more
+        // than it costs; a worn Trinket first (the Wonder may go on).
+        else if (verb === "reforge")
+          v =
+            objectValueFor(state, turn.player, obj, hero.id) > 0
+              ? arg.startsWith("w")
+                ? 450
+                : 440
+              : 0;
         else if (verb === "drill") {
           // A Drill (bead bzc.32) for the army's creatures, when the
           // treasury keeps a week of recruiting after it.

@@ -373,6 +373,13 @@ export interface GenConfig {
      * treasure clusters and pockets. The rest lie in full view.
      */
     mystery: { share: number; treasureShare: number };
+    /**
+     * Bead bzc.125: the volcanic zones get their sites (gen/volcanic.ts:
+     * an Infernal Forge, a Brimstone Pit and a Shrine of Embers each). Off
+     * for the named maps, whose edits name generated objects by place:
+     * they add the volcanic sites by hand (src/data/named-maps.ts).
+     */
+    volcanicSites: boolean;
   };
 
   /**
@@ -765,6 +772,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     reserveRare: true,
     waysRound: true,
     mystery: { share: 0.25, treasureShare: 0.5 },
+    volcanicSites: true,
     perMap: { "drill-yard": { S: [1, 1], M: [1, 1], L: [1, 2] } },
   },
 
