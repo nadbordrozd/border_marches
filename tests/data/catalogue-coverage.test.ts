@@ -57,11 +57,11 @@ describe("catalogue coverage", () => {
   });
 
   it("artifacts: all 80 kinds and 4 Marvels, ids from names, with values", () => {
-    // The 84 catalogue kinds plus the Keystone, a relic of the map objects
-    // (not a catalogue kind) with an icon by its game id (bead 9is).
-    expect(ids("artifact")).toHaveLength(85);
-    // The 84 and the Candy Kingdom's Flypaper Ribbon (FACTION_CANDY 5.2),
-    // whose icon comes with the Candy creature art (bead bzc.112).
+    // The 84 catalogue kinds, the Candy Kingdom's Flypaper Ribbon
+    // (FACTION_CANDY 5.2, icon bead bzc.112) and the Keystone, a relic of the
+    // map objects (not a catalogue kind) with an icon by its game id (bead 9is).
+    expect(ids("artifact")).toHaveLength(86);
+    // The 84 and the Flypaper Ribbon.
     expect(ARTIFACT_LIST.filter((a) => a.kind !== "relic")).toHaveLength(85);
     for (const id of ids("artifact")) {
       const def = findArtifact(id);

@@ -221,6 +221,38 @@
         "class-symbol-16"
       ],
       "notes": "Bead border_marches-9is re-roll: the conditions-e-16 gauntlets were all-grey upright fists without the blue cuff of the 32 px Challenged icon, so the badge and the icon did not match."
+    },
+    {
+      "id": "conditions-g",
+      "concept": "stuck stuck stuck",
+      "width": 32,
+      "height": 32,
+      "seed": 17307,
+      "covers": [
+        "stuck",
+        "stuck",
+        "stuck"
+      ],
+      "subject": "Subject: each image shows exactly one of these 3 things, each thing about equally often: (1) a small brown leather boot stuck in a puddle of sticky strawberry pink taffy, long stretchy pink strings pulling up from its sole; (2) a blob of sticky glossy pink taffy with long stretchy strings, one small brown boot sunk in it up to the ankle; (3) a small brown boot glued to a round pink candy puddle by thick stretchy pink strands.",
+      "notes": "Bead border_marches-bzc.112: Stuck, the Candy Kingdom's Clock bane (FACTION_CANDY 3; cannot walk). Three wordings of one idea, a foot held in taffy; no yellow, so it stands apart from its gold Clock frame."
+    },
+    {
+      "id": "conditions-g-16",
+      "concept": "stuck stuck",
+      "width": 16,
+      "height": 16,
+      "seed": 17316,
+      "covers": [
+        "stuck",
+        "stuck"
+      ],
+      "subject": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a brown boot stuck in a puddle of pink taffy; (2) a pink taffy blob with a brown boot sunk in it.",
+      "fragments": [
+        "style",
+        "light-bottom-left",
+        "class-symbol-16"
+      ],
+      "notes": "Bead border_marches-bzc.112: the 16 px battle badge of Stuck, made at 16 px (never a downscale)."
     }
   ],
   "outputs": [
@@ -605,6 +637,18 @@
     {
       "path": "public/assets/icons/conditions-16/challenged.png",
       "from": "conditions-f-16#18",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "public/assets/icons/conditions/stuck.png",
+      "from": "conditions-g#2",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/conditions-16/stuck.png",
+      "from": "conditions-g-16#61",
       "width": 16,
       "height": 16
     }

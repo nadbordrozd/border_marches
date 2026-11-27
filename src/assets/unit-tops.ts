@@ -8,6 +8,12 @@
  */
 export const UNIT_OPAQUE_TOP: Readonly<Record<string, number>> = {
   bigfoot: 7,
+  "candy-gingerbread-man": 11,
+  "candy-gummy-bear": 9,
+  "candy-peppermint-archer": 8,
+  "candy-rock-candy-dragon": 10,
+  "candy-sugarplum": 7,
+  "candy-taffy-wrangler": 4,
   "cult-frog-unit": 12,
   "cult-imp": 19,
   "cult-tentacle": 2,

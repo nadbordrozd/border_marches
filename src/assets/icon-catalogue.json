@@ -882,6 +882,12 @@
       "grade": "marvel",
       "slot": null,
       "relic": true
+    },
+    "flypaper-ribbon": {
+      "name": "Flypaper Ribbon",
+      "frame": "wonder",
+      "grade": "wonder",
+      "slot": "Pocket"
     }
   },
   "condition": {
@@ -1053,6 +1059,12 @@
       "school": "accord",
       "polarity": "boon",
       "demo": true
+    },
+    "stuck": {
+      "name": "Stuck",
+      "frame": "clock",
+      "school": "clock",
+      "polarity": "bane"
     }
   },
   "ground": {

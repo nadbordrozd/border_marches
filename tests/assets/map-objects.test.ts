@@ -143,6 +143,14 @@ describe("artFor (bzc.16)", () => {
       expect(art.asset.h).toBeGreaterThan(CELL_PX);
     }
     expect(artFor("treasure-chest")?.seat).toBe("pickup");
+    // The Candy Kingdom's outpost (bzc.112), by faction id like the others.
+    expect(artVariants("faction-outpost")).toEqual([
+      "humans",
+      "undead",
+      "goblins",
+      "candy",
+    ]);
+    expect(artFor("faction-outpost", "candy")?.variant).toBe("candy");
   });
 
   it("places the foot on the footprint's bottom centre, seated", () => {

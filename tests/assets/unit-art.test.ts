@@ -28,12 +28,6 @@ import { CHIEFTAIN_ROSTER } from "../../src/data/players";
 
 const PUBLIC = join(import.meta.dirname, "..", "..", "public");
 
-/**
- * The Candy Kingdom's creatures and heroes draw the placeholders until its
- * art beads (bzc.112 creatures, bzc.113 heroes) register their sprites.
- */
-const ART_PENDING = "candy";
-
 /** The v0.2 rosters as the design docs name them (kebab-case ids). */
 const FACTION_CREATURES = [
   // docs/design/FACTION_HUMANS.md section 4
@@ -57,6 +51,13 @@ const FACTION_CREATURES = [
   "boomshaman",
   "ogre",
   "orc-warboss",
+  // FACTION_CANDY.md section 4 (art: bead bzc.112)
+  "gingerbread-man",
+  "peppermint-archer",
+  "taffy-wrangler",
+  "sugarplum",
+  "gummy-bear",
+  "rock-candy-dragon",
 ];
 /** The MVP neutrals that are not faction units (src/data/neutrals.ts). */
 const MVP_NEUTRALS = ["orc-brute", "troll"];
@@ -128,7 +129,6 @@ describe("unit art lookups", () => {
     // bead border_marches-9is: Orc Brute and Troll drew the placeholder on
     // screens that used unitArt alone.
     for (const def of Object.values(CREATURES)) {
-      if (def.faction === ART_PENDING) continue;
       expect({ id: def.id, own: hasUnitArt(def.id) }).toEqual({
         id: def.id,
         own: true,
@@ -160,9 +160,9 @@ describe("unit art lookups", () => {
     expect(heroArt("chieftain").key).toBe("dinosaur-chieftain");
   });
 
-  it("gives each of the 24 named heroes a portrait of their own", () => {
-    const drawn = NAMED_HEROES.filter((h) => h.faction !== ART_PENDING);
-    expect(drawn).toHaveLength(24);
+  it("gives each of the 32 named heroes a portrait of their own", () => {
+    const drawn = NAMED_HEROES;
+    expect(drawn).toHaveLength(32);
     const keys = new Set<string>();
     for (const def of drawn) {
       expect({ id: def.id, own: hasNamedHeroPortrait(def.id) }).toEqual({
@@ -180,7 +180,7 @@ describe("unit art lookups", () => {
       expect(existsSync(join(PUBLIC, portrait.path)), portrait.path).toBe(true);
       keys.add(portrait.key);
     }
-    expect(keys.size).toBe(24);
+    expect(keys.size).toBe(32);
   });
 
   it("gives the eight Candy Kingdom heroes portraits of their own", () => {

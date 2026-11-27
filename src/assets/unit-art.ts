@@ -45,6 +45,13 @@ export const CREATURE_ART: Readonly<Record<string, string>> = {
   boomshaman: "goblin-boomshaman",
   ogre: "goblin-ogre",
   "orc-warboss": "goblin-orc-warboss-giant",
+  // The Candy Kingdom (FACTION_CANDY.md section 10.2).
+  "gingerbread-man": "candy-gingerbread-man",
+  "peppermint-archer": "candy-peppermint-archer",
+  "taffy-wrangler": "candy-taffy-wrangler",
+  sugarplum: "candy-sugarplum",
+  "gummy-bear": "candy-gummy-bear",
+  "rock-candy-dragon": "candy-rock-candy-dragon",
   // The MVP neutrals that are not faction units (src/data/neutrals.ts).
   "orc-brute": "goblin-orc-brute",
   troll: "goblin-troll",

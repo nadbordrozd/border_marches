@@ -596,6 +596,43 @@ const RECIPES = [
     ],
     { notes: "Bead border_marches-bzc.82: the hero screen shows every stat as an icon with its number (HoMM2 style): Mana, Movement, Experience, Level, Sight, Morale, Luck, Command, the spellbook button and the scroll case, beside the bzc.17 Attack, Defense, Power and Lore." },
   ],
+  // ------------------- bead border_marches-bzc.112: the Candy Kingdom's Stuck and Flypaper Ribbon
+  [
+    "icons-conditions",
+    "conditions-g",
+    17307,
+    [
+      ["stuck", "a small brown leather boot stuck in a puddle of sticky strawberry pink taffy, long stretchy pink strings pulling up from its sole"],
+      ["stuck", "a blob of sticky glossy pink taffy with long stretchy strings, one small brown boot sunk in it up to the ankle"],
+      ["stuck", "a small brown boot glued to a round pink candy puddle by thick stretchy pink strands"],
+    ],
+    { notes: "Bead border_marches-bzc.112: Stuck, the Candy Kingdom's Clock bane (FACTION_CANDY 3; cannot walk). Three wordings of one idea, a foot held in taffy; no yellow, so it stands apart from its gold Clock frame." },
+  ],
+  [
+    "icons-conditions",
+    "conditions-g-16",
+    17316,
+    [
+      ["stuck", "a brown boot stuck in a puddle of pink taffy"],
+      ["stuck", "a pink taffy blob with a brown boot sunk in it"],
+    ],
+    {
+      fragments: ["style", "light-bottom-left", "class-symbol-16"],
+      width: 16,
+      height: 16,
+      notes: "Bead border_marches-bzc.112: the 16 px battle badge of Stuck, made at 16 px (never a downscale).",
+    },
+  ],
+  [
+    "icons-artifacts",
+    "wonders-candy-a",
+    17211,
+    [
+      ["flypaper-ribbon", "a long curly strip of sticky golden yellow flypaper ribbon hanging down from a small red cap, two small grey flies with white wings stuck on it"],
+      ["flypaper-ribbon", "a spiral of golden yellow flypaper tape unrolling from a short red cardboard tube, a few small grey flies stuck on it"],
+    ],
+    { notes: "Bead border_marches-bzc.112: the Flypaper Ribbon, a Wonder that makes Stuck (FACTION_CANDY 5.2). Grey flies, not black, so they show on a dark panel; a paper strip, not taffy, so it is not mistaken for the Stuck icon." },
+  ],
 ];
 
 const byId = new Map();

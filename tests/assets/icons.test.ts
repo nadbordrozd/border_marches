@@ -41,8 +41,8 @@ describe("content icons", () => {
     );
     expect(counts).toEqual({
       spell: 60,
-      artifact: 85,
-      condition: 28,
+      artifact: 86,
+      condition: 29,
       ground: 8,
       skill: 24,
       feat: 28,
@@ -142,8 +142,26 @@ describe("content icons", () => {
     expect(iconFor("artifact", "keystone").frame).toBe(ICON_FRAMES.marvel);
   });
 
+  it("draws the Candy Kingdom's Stuck and Flypaper Ribbon with their own icons", () => {
+    // bead border_marches-bzc.112 (FACTION_CANDY 3)
+    const stuck = iconFor("condition", "Stuck");
+    expect([stuck.id, stuck.fallback, stuck.frame]).toEqual([
+      "stuck",
+      false,
+      ICON_FRAMES.clock,
+    ]);
+    const badge = iconFor("condition", "stuck", 16);
+    expect([badge.asset.w, badge.fallback]).toEqual([16, false]);
+    const ribbon = iconFor("artifact", "Flypaper Ribbon");
+    expect([ribbon.id, ribbon.fallback, ribbon.frame]).toEqual([
+      "flypaper-ribbon",
+      false,
+      ICON_FRAMES.wonder,
+    ]);
+  });
+
   it("has 16 px overlays for conditions and 32 px elsewhere", () => {
-    expect(SMALL_ICON_ASSETS).toHaveLength(28);
+    expect(SMALL_ICON_ASSETS).toHaveLength(29);
     const small = iconFor("condition", "Burning", 16);
     expect([small.asset.w, small.fallback]).toEqual([16, false]);
     expect(iconFor("skill", "banner", 16).asset.w).toBe(32);

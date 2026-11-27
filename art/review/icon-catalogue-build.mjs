@@ -95,6 +95,16 @@ addId("condition", "demo-guard", "Guarded", "accord", { school: "accord", polari
 addId("ground", "sweets", "sweets", null, { school: null, class: "remains" });
 addId("artifact", "keystone", "The Keystone", "marvel", { grade: "marvel", slot: null, relic: true });
 
+// Bead bzc.112: the Candy Kingdom's Stuck condition and the Flypaper Ribbon
+// Wonder (FACTION_CANDY 3 and 5.2; data in bead bzc.111), by their game ids,
+// until CONTENT_SPELLS 2.1 and CONTENT_ARTIFACTS 3 list them; once a table
+// has the row, the table entry stands and these lines add nothing.
+const addIdIfAbsent = (kind, id, ...rest) => {
+  if (!catalogue[kind][id]) addId(kind, id, ...rest);
+};
+addIdIfAbsent("condition", "stuck", "Stuck", "clock", { school: "clock", polarity: "bane" });
+addIdIfAbsent("artifact", "flypaper-ribbon", "Flypaper Ribbon", "wonder", { grade: "wonder", slot: "Pocket" });
+
 // Bead bzc.82: the hero screen's other numbers, each an icon (HoMM2 style).
 for (const s of ["Attack", "Defense", "Power", "Lore", "Mana", "Movement", "Experience", "Level", "Sight", "Morale", "Luck", "Command", "Spellbook", "Scroll case"]) add("stat", s, null);
 for (const s of ["Bloom", "Accord", "Clock", "Hush", "Storm"]) add("school", s, school(s));

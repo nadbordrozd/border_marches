@@ -422,5 +422,658 @@
         "height": 104
       }
     ]
+  },
+  "gingerbread-man-a": {
+    "id": "gingerbread-man-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-4908467e-efda-4a21-a60f-412d2fc58d00",
+    "submittedAt": "2026-11-26T23:55:56.168Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Gingerbread Man, a small chunky cute living gingerbread cookie soldier with a huge round head about half of the figure's height and a short stubby cookie body: warm gingerbread brown #b86b34 with darker #7d4420 shading, a happy face piped in white royal icing #fff4ec with two round eyes and a wide smile, wavy white icing piping around the wrists and ankles, three round gumdrop buttons down the front in red, mint green and pink, a small red #e03a3e and white striped candy-cane spear held upright in the right hand, stubby rounded cookie arms and legs; simple shapes; clearly a cookie, not a person."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 51701,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Gingerbread Man, a small chunky cute living gingerbread cookie soldier with a huge round head about half of the figure's height and a short stubby cookie body: warm gingerbread brown #b86b34 with darker #7d4420 shading, a happy face piped in white royal icing #fff4ec with two round eyes and a wide smile, wavy white icing piping around the wrists and ankles, three round gumdrop buttons down the front in red, mint green and pink, a small red #e03a3e and white striped candy-cane spear held upright in the right hand, stubby rounded cookie arms and legs; simple shapes; clearly a cookie, not a person. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, clothes, hat, armour, shield, crumbs."
+    },
+    "at": "2026-11-26T23:55:56.171Z",
+    "usageUsd": 0.007510302437676324,
+    "candidates": [
+      {
+        "file": "gingerbread-man-a-0.png",
+        "sha256": "512ba28e94e502956df8f77c7c8446dacce91df5413bc70193f63c8dba24cca7",
+        "width": 48,
+        "height": 72
+      }
+    ]
+  },
+  "taffy-wrangler-a": {
+    "id": "taffy-wrangler-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-856286bb-7570-4d54-8c37-93f6ba7a156b",
+    "submittedAt": "2026-11-26T23:56:26.884Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Taffy Wrangler, a chunky cute stretchy cowpoke made of glossy strawberry pink pulled taffy #e2589b with darker #a8336c shading, with a huge round head about half of the figure's height: big round eyes and a cheeky grin, a wide-brimmed toffee brown #b86b34 cowboy hat, a white icing #fff4ec neckerchief, rubbery stretchy arms, the right arm raised high swinging a big looping lasso of pink and white striped pulled taffy over its head, short stubby legs with little toffee brown boots; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 51801,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Taffy Wrangler, a chunky cute stretchy cowpoke made of glossy strawberry pink pulled taffy #e2589b with darker #a8336c shading, with a huge round head about half of the figure's height: big round eyes and a cheeky grin, a wide-brimmed toffee brown #b86b34 cowboy hat, a white icing #fff4ec neckerchief, rubbery stretchy arms, the right arm raised high swinging a big looping lasso of pink and white striped pulled taffy over its head, short stubby legs with little toffee brown boots; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, horse, gun, hemp rope, brown skin."
+    },
+    "at": "2026-11-26T23:56:26.886Z",
+    "usageUsd": 0.00814621639251709,
+    "candidates": [
+      {
+        "file": "taffy-wrangler-a-0.png",
+        "sha256": "0c7830ffdb7c6e5d01f84e0aa6eefd7ed59645617f788d6571d47441bdea1f1b",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "rock-candy-dragon-a": {
+    "id": "rock-candy-dragon-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-4c008793-f842-4385-b7af-619c35e09306",
+    "submittedAt": "2026-11-26T23:57:10.736Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-creature.txt",
+          "text": "Class: one chunky cute creature map piece, a single living thing with big simple rounded rubbery shapes, big round eyes and a clear silhouette that reads at a glance, thick single-colour black outline; the whole creature is visible, and its lowest part is the lowest thing in the image. It holds no weapon and no tool."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Rock Candy Dragon, one very large chunky cute dragon of rock candy crystals, filling the whole width of the image: a big round head with big friendly eyes and a toothy smile, a chunky body of faceted sugar-glass teal #8fe3e8 crystals with #4fa9b3 shading and strawberry pink #e2589b facets, pink crystal spikes down its back, two big pale teal sugar-glass wings spread wide, a stubby tail with a crystal tip, four short sturdy legs; solid opaque colours."
+        }
+      ],
+      "image_size": {
+        "width": 88,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 51901,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute creature map piece, a single living thing with big simple rounded rubbery shapes, big round eyes and a clear silhouette that reads at a glance, thick single-colour black outline; the whole creature is visible, and its lowest part is the lowest thing in the image. It holds no weapon and no tool. Subject: Rock Candy Dragon, one very large chunky cute dragon of rock candy crystals, filling the whole width of the image: a big round head with big friendly eyes and a toothy smile, a chunky body of faceted sugar-glass teal #8fe3e8 crystals with #4fa9b3 shading and strawberry pink #e2589b facets, pink crystal spikes down its back, two big pale teal sugar-glass wings spread wide, a stubby tail with a crystal tip, four short sturdy legs; solid opaque colours. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, multiple creatures, crowd, armour, weapon, blood, gore, horror, realistic, rider, fire, rocks."
+    },
+    "at": "2026-11-26T23:57:10.738Z",
+    "usageUsd": 0.00966203988922967,
+    "candidates": [
+      {
+        "file": "rock-candy-dragon-a-0.png",
+        "sha256": "a631203943734bb38e2a2f2ef2fde201f79502ac7e979630b7d0ecf28e58d99c",
+        "width": 88,
+        "height": 104
+      }
+    ]
+  },
+  "taffy-wrangler-b": {
+    "id": "taffy-wrangler-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-b1e98fee-f5fe-4a7c-b466-826482d06472",
+    "submittedAt": "2026-11-26T23:58:40.778Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Taffy Wrangler, a chunky cute candy creature made entirely of glossy strawberry pink pulled taffy #e2589b with darker #a8336c shading, a soft stretchy candy person: a huge smooth round taffy head about half of the figure's height with a simple happy face, two dot eyes and a wide grin, no nose and no snout, a wide-brimmed toffee brown #b86b34 cowboy hat, a white icing #fff4ec neckerchief, long rubbery stretchy pink arms, the right arm raised high swinging a big lasso loop of pink and white striped taffy, short stubby pink legs; nothing worn but the hat and neckerchief; simple shapes."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 51802,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Taffy Wrangler, a chunky cute candy creature made entirely of glossy strawberry pink pulled taffy #e2589b with darker #a8336c shading, a soft stretchy candy person: a huge smooth round taffy head about half of the figure's height with a simple happy face, two dot eyes and a wide grin, no nose and no snout, a wide-brimmed toffee brown #b86b34 cowboy hat, a white icing #fff4ec neckerchief, long rubbery stretchy pink arms, the right arm raised high swinging a big lasso loop of pink and white striped taffy, short stubby pink legs; nothing worn but the hat and neckerchief; simple shapes. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, pig, cow, snout, horse, gun, shirt, trousers."
+    },
+    "at": "2026-11-26T23:58:40.779Z",
+    "usageUsd": 0.010799759202533298,
+    "candidates": [
+      {
+        "file": "taffy-wrangler-b-0.png",
+        "sha256": "4ec132e49f7f13cd0712280a398f0a9580d3f2129d37fd596ba02b9dc6d4c3cd",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "rock-candy-dragon-b": {
+    "id": "rock-candy-dragon-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-258a4b9c-eb5d-4a9a-a186-e4c920bc6df5",
+    "submittedAt": "2026-11-26T23:59:25.850Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Rock Candy Dragon, one very large chunky cute dragon built of rock candy, filling the whole width of the image, thick single-colour black outline, its head and body turned down and to the right, snout pointing to the bottom right: a big blocky head with big friendly eyes and a toothy smile, a body of big angular crystal chunks like rock candy on a stick, sharp flat facets each with one light and one shadow side, sugar-glass teal #8fe3e8 crystals shaded #4fa9b3 and strawberry pink #e2589b crystals shaded #a8336c, jagged pink crystal spikes down its back, two big pale teal faceted sugar-glass wings spread wide, four short sturdy legs, all four feet visible and lowest in the image; solid opaque colours; simple shapes."
+        }
+      ],
+      "image_size": {
+        "width": 88,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 51902,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Subject: Rock Candy Dragon, one very large chunky cute dragon built of rock candy, filling the whole width of the image, thick single-colour black outline, its head and body turned down and to the right, snout pointing to the bottom right: a big blocky head with big friendly eyes and a toothy smile, a body of big angular crystal chunks like rock candy on a stick, sharp flat facets each with one light and one shadow side, sugar-glass teal #8fe3e8 crystals shaded #4fa9b3 and strawberry pink #e2589b crystals shaded #a8336c, jagged pink crystal spikes down its back, two big pale teal faceted sugar-glass wings spread wide, four short sturdy legs, all four feet visible and lowest in the image; solid opaque colours; simple shapes. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, rider, fire, rocks, smooth scales, pedestal, ground plate, platform, scenery, background, shadow on the ground."
+    },
+    "at": "2026-11-26T23:59:25.851Z",
+    "usageUsd": 0.0099285196463267,
+    "candidates": [
+      {
+        "file": "rock-candy-dragon-b-0.png",
+        "sha256": "1631744744d89dd637fd54719b63d382d38fa5807d7fe33d3815236573d5d515",
+        "width": 88,
+        "height": 104
+      }
+    ]
+  },
+  "taffy-wrangler-b-clean": {
+    "id": "taffy-wrangler-b-clean",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "5913a953-2ce4-4653-8948-0456865f4c51",
+    "submittedAt": "2026-11-26T23:59:56.520Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Remove all ground: erase the round patch of green grass and brown soil under the figure's feet, leaving that area transparent, so the figure stands on a transparent background with nothing at all under it. Keep the pink taffy figure, its cowboy hat, neckerchief and striped lasso, its colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take faction-units/taffy-wrangler-b#0 sha256 4ec132e49f7f13cd0712280a398f0a9580d3f2129d37fd596ba02b9dc6d4c3cd",
+      "width": 56,
+      "height": 80,
+      "seed": 51803,
+      "no_background": true,
+      "description": "Remove all ground: erase the round patch of green grass and brown soil under the figure's feet, leaving that area transparent, so the figure stands on a transparent background with nothing at all under it. Keep the pink taffy figure, its cowboy hat, neckerchief and striped lasso, its colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-27T00:00:23.102Z",
+    "candidates": [
+      {
+        "file": "taffy-wrangler-b-clean-0.png",
+        "sha256": "63df1b16738bb93a47683e580b77ad21f9023aaebabdbc759f32aea8c8c70733",
+        "width": 56,
+        "height": 80
+      },
+      {
+        "file": "taffy-wrangler-b-clean-1.png",
+        "sha256": "63df1b16738bb93a47683e580b77ad21f9023aaebabdbc759f32aea8c8c70733",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "peppermint-archer-a": {
+    "id": "peppermint-archer-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-30b065ee-7572-4ea7-a6aa-439bdfffd532",
+    "submittedAt": "2026-11-27T00:00:49.539Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Peppermint Archer, a chunky cute candy kid archer with a huge round head about half of the figure's height and a small body: a rosy smiling face with big eyes, a big round hood swirled candy-cane red #e03a3e and icing white #fff4ec like a peppermint candy, a short mint green #7fd6b5 tunic with #3f9a7c shading, a big red and white striped candy-cane bow held in the left hand with an arrow nocked, a quiver of candy-stick arrows on the back, white leggings and little red boots; simple shapes and very few details."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 52001,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Peppermint Archer, a chunky cute candy kid archer with a huge round head about half of the figure's height and a small body: a rosy smiling face with big eyes, a big round hood swirled candy-cane red #e03a3e and icing white #fff4ec like a peppermint candy, a short mint green #7fd6b5 tunic with #3f9a7c shading, a big red and white striped candy-cane bow held in the left hand with an arrow nocked, a quiver of candy-stick arrows on the back, white leggings and little red boots; simple shapes and very few details. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, crossbow, green hood, sword, shield, cape."
+    },
+    "at": "2026-11-27T00:00:49.540Z",
+    "usageUsd": 0.007763384924994575,
+    "candidates": [
+      {
+        "file": "peppermint-archer-a-0.png",
+        "sha256": "a34e1f42a88b61e3f4162191a13ccc1337d7bdff11da3ac9eca18d2a5da4c48d",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "sugarplum-a": {
+    "id": "sugarplum-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-39ba6855-73c8-4b53-b003-260fc46a4fbf",
+    "submittedAt": "2026-11-27T00:01:20.637Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Sugarplum, a plump chunky cute sugarplum fairy hovering in the air, with a huge round head about half of her height: a round plum purple #8e3fa0 body like a sugared plum dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a little green plum stem and leaf on top of her head, two small lacy wings of white spun sugar, a lollipop wand with a pink and white swirl held up in the right hand with a few tiny pink sparkles, tiny stubby legs dangling; she floats with nothing under her and her feet are the lowest thing in the image; simple shapes."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 52101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Sugarplum, a plump chunky cute sugarplum fairy hovering in the air, with a huge round head about half of her height: a round plum purple #8e3fa0 body like a sugared plum dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a little green plum stem and leaf on top of her head, two small lacy wings of white spun sugar, a lollipop wand with a pink and white swirl held up in the right hand with a few tiny pink sparkles, tiny stubby legs dangling; she floats with nothing under her and her feet are the lowest thing in the image; simple shapes. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, skull, ghost, scary, witch hat, broom."
+    },
+    "at": "2026-11-27T00:01:20.637Z",
+    "usageUsd": 0.008157427708307902,
+    "candidates": [
+      {
+        "file": "sugarplum-a-0.png",
+        "sha256": "ede4786df86640ad17104369c4d26f1b778a9b5ea2bce180364c6bb56707290c",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "gummy-bear-a": {
+    "id": "gummy-bear-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-9fc258a1-4a67-46ff-b4c3-79f27f73e94e",
+    "submittedAt": "2026-11-27T00:02:05.863Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-creature.txt",
+          "text": "Class: one chunky cute creature map piece, a single living thing with big simple rounded rubbery shapes, big round eyes and a clear silhouette that reads at a glance, thick single-colour black outline; the whole creature is visible, and its lowest part is the lowest thing in the image. It holds no weapon and no tool."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Gummy Bear, a huge chunky cute gummy bear sweet come to life, filling the whole width of the image: a big round head with small round ears, big round eyes and a wide friendly grin, a plump glossy strawberry red #e03a3e jelly body with darker #9c2229 shading and a few white shine highlights, a light crust of white sugar crystals on its head and shoulders, short stubby arms and legs, standing upright like a candy gummy bear; solid opaque colours."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 52201,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute creature map piece, a single living thing with big simple rounded rubbery shapes, big round eyes and a clear silhouette that reads at a glance, thick single-colour black outline; the whole creature is visible, and its lowest part is the lowest thing in the image. It holds no weapon and no tool. Subject: Gummy Bear, a huge chunky cute gummy bear sweet come to life, filling the whole width of the image: a big round head with small round ears, big round eyes and a wide friendly grin, a plump glossy strawberry red #e03a3e jelly body with darker #9c2229 shading and a few white shine highlights, a light crust of white sugar crystals on its head and shoulders, short stubby arms and legs, standing upright like a candy gummy bear; solid opaque colours. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, multiple creatures, crowd, armour, weapon, blood, gore, horror, realistic, fur, teddy bear, clothes."
+    },
+    "at": "2026-11-27T00:02:05.864Z",
+    "usageUsd": 0.009829276747173734,
+    "candidates": [
+      {
+        "file": "gummy-bear-a-0.png",
+        "sha256": "c62cb7900d84b26274dc81a703b514964578da118eb3add4075cb4ca615da480",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "sugarplum-a-clean": {
+    "id": "sugarplum-a-clean",
+    "status": "DONE",
+    "endpoint": "edit-image-pixen",
+    "jobId": "dd78ca6e-818f-4d54-8aeb-5b29496ecede",
+    "submittedAt": "2026-11-27T00:02:21.999Z",
+    "request": {
+      "endpoint": "edit-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Remove all ground: erase the floating block of green grass and brown soil under the fairy, leaving that area transparent, so the fairy hovers on a transparent background with nothing at all under her. Keep the purple plum fairy, her leaf, wings and lollipop wand, her colours, the thick black outline and the art style exactly the same."
+        }
+      ],
+      "image": "take faction-units/sugarplum-a#0 sha256 ede4786df86640ad17104369c4d26f1b778a9b5ea2bce180364c6bb56707290c",
+      "width": 56,
+      "height": 80,
+      "seed": 52102,
+      "no_background": true,
+      "description": "Remove all ground: erase the floating block of green grass and brown soil under the fairy, leaving that area transparent, so the fairy hovers on a transparent background with nothing at all under her. Keep the purple plum fairy, her leaf, wings and lollipop wand, her colours, the thick black outline and the art style exactly the same."
+    },
+    "at": "2026-11-27T00:02:37.391Z",
+    "candidates": [
+      {
+        "file": "sugarplum-a-clean-0.png",
+        "sha256": "836627698d0672d5a7d7fa0381d3f5b09894f58dc160ac568e05c5b1a9dbacd5",
+        "width": 56,
+        "height": 80
+      },
+      {
+        "file": "sugarplum-a-clean-1.png",
+        "sha256": "836627698d0672d5a7d7fa0381d3f5b09894f58dc160ac568e05c5b1a9dbacd5",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "sugarplum-b": {
+    "id": "sugarplum-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-705c7689-5776-4f3e-8b4b-4f47b3a2c250",
+    "submittedAt": "2026-11-27T00:03:58.275Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Sugarplum, a big plump chunky cute sugarplum fairy hovering in the air, filling the whole width of the image: a huge round plum purple #8e3fa0 body like a sugared plum dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a little green plum stem and leaf on top, two lacy wings of white spun sugar, a lollipop wand with a pink and white swirl held up in the right hand, tiny stubby legs dangling; she floats with nothing at all under her and her feet are the lowest thing in the image; simple shapes."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 52103,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Sugarplum, a big plump chunky cute sugarplum fairy hovering in the air, filling the whole width of the image: a huge round plum purple #8e3fa0 body like a sugared plum dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a little green plum stem and leaf on top, two lacy wings of white spun sugar, a lollipop wand with a pink and white swirl held up in the right hand, tiny stubby legs dangling; she floats with nothing at all under her and her feet are the lowest thing in the image; simple shapes. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, grass block, ground tile, floating island, skull, ghost, witch hat, broom."
+    },
+    "at": "2026-11-27T00:03:58.277Z",
+    "usageUsd": 0.007585813045501709,
+    "candidates": [
+      {
+        "file": "sugarplum-b-0.png",
+        "sha256": "cd0d5b5ad63e0e8781418e05ca832cf656be0281fa9ebbdd2217ff31fde270a5",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "sugarplum-c": {
+    "id": "sugarplum-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-64e81e45-fdfe-4c1f-82d5-f3cee159c1f0",
+    "submittedAt": "2026-11-27T00:15:47.681Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Sugarplum, a big round plump chunky cute sugarplum fairy, as wide as the image and nearly as tall: a huge round plum purple #8e3fa0 head and a fat round plum body dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a green plum stem and leaf on top, two big lacy wings of white spun sugar spread wide to both sides, a big lollipop wand with a pink and white swirl held up in the right hand, short stubby legs; she hovers with nothing at all under her and her feet are the lowest thing in the image; simple shapes."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 52104,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Sugarplum, a big round plump chunky cute sugarplum fairy, as wide as the image and nearly as tall: a huge round plum purple #8e3fa0 head and a fat round plum body dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a green plum stem and leaf on top, two big lacy wings of white spun sugar spread wide to both sides, a big lollipop wand with a pink and white swirl held up in the right hand, short stubby legs; she hovers with nothing at all under her and her feet are the lowest thing in the image; simple shapes. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, grass block, ground tile, floating island, skull, ghost, witch hat, thin, slender."
+    },
+    "at": "2026-11-27T00:15:47.683Z",
+    "usageUsd": 0.007499094274308947,
+    "candidates": [
+      {
+        "file": "sugarplum-c-0.png",
+        "sha256": "abde5971701d2b462935a3d8b6cde7c82904e2faae0b179779e5c92026e25332",
+        "width": 56,
+        "height": 80
+      }
+    ]
+  },
+  "sugarplum-d": {
+    "id": "sugarplum-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-3ba038d7-0c50-449d-bcf5-3e7c31e3c629",
+    "submittedAt": "2026-11-27T00:16:10.288Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Sugarplum, a big round plump chunky cute sugarplum fairy, as wide as the image and nearly as tall: a huge round plum purple #8e3fa0 head and a fat round plum body dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a green plum stem and leaf on top, two big lacy wings of white spun sugar spread wide to both sides, a big lollipop wand with a pink and white swirl held up in the right hand, short stubby legs; she hovers with nothing at all under her and her feet are the lowest thing in the image; simple shapes."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 80
+      },
+      "no_background": true,
+      "seed": 52105,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Sugarplum, a big round plump chunky cute sugarplum fairy, as wide as the image and nearly as tall: a huge round plum purple #8e3fa0 head and a fat round plum body dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a green plum stem and leaf on top, two big lacy wings of white spun sugar spread wide to both sides, a big lollipop wand with a pink and white swirl held up in the right hand, short stubby legs; she hovers with nothing at all under her and her feet are the lowest thing in the image; simple shapes. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, grass block, ground tile, floating island, skull, ghost, witch hat, thin, slender."
+    },
+    "at": "2026-11-27T00:16:10.289Z",
+    "usageUsd": 0.007370298491583931,
+    "candidates": [
+      {
+        "file": "sugarplum-d-0.png",
+        "sha256": "fd509d70062fea9c6113a0e00e6f5310ccec9c824460f3c7d9bc36e44ca34221",
+        "width": 56,
+        "height": 80
+      }
+    ]
   }
 }

@@ -1463,5 +1463,25 @@
     "verdict": "REJECTED",
     "notes": "flatter, boxier mill with a hooked pole; less cute than #0",
     "at": "2026-11-26T21:08:58.934Z"
+  },
+  "outpost-candy-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a gingerbread watchtower with a pink frosted roof behind an icing-topped wall of candy canes and a crossed-cane gate: a walled fort like the other three outposts, and a tower silhouette apart from the cottage of the Candy camp town",
+    "at": "2026-11-27T00:05:36.655Z"
+  },
+  "outpost-candy-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a small cottage in a wide empty candy-cane pen: reads as a garden, not a fort, beside the dense walled outposts",
+    "at": "2026-11-27T00:05:36.707Z"
+  },
+  "outpost-candy-a#1": {
+    "verdict": "REJECTED",
+    "notes": "an oval candy fence round an empty yard with the cottage at the back: sparse, and the cottage repeats the Candy camp town",
+    "at": "2026-11-27T00:05:36.758Z"
+  },
+  "outpost-candy-a#3": {
+    "verdict": "REJECTED",
+    "notes": "good gingerbread house in a cane fence, but a cottage like the Candy camp town; #2's tower reads as a fort",
+    "at": "2026-11-27T00:05:36.813Z"
   }
 }

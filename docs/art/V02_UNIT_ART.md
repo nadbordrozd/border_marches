@@ -44,6 +44,37 @@ placeholder (`stray-shade` for creatures, `dinosaur-chieftain` for heroes).
 | `bellhop`, `whipping-boy`, `lamplighter`, `newsie`, `notary`, `crooner`, `loan-shark`, `groundskeeper`, `gumshoe`, `deep-sea-diver`, `sexton`, `fire-eater`, `prize-pumpkin`, `beanstalk-giant` | `stray-<id>` | new (set `strays`) |
 | `seedling`, `shade` | `stray-<id>` | new summons |
 
+## The Candy Kingdom (bead `border_marches-bzc.112`)
+
+Six new creatures in the set `faction-units`, from
+[FACTION_CANDY.md section 10](../design/FACTION_CANDY.md#10-art): same
+endpoint, layers and `@piece` options as the rest of the set, the section
+10.1 palette written into each subject, facing south-east, one static
+sprite each with a 1:1 head crop as its 48x48 portrait. Registered with
+the art faction `candy` (`src/assets/manifest.ts`), feet measured by
+`art/review/measure-units.mjs`, opaque tops in `src/assets/unit-tops.ts`.
+
+| Id | Sprite key | Take | Canvas |
+| --- | --- | --- | --- |
+| `gingerbread-man` | `candy-gingerbread-man` | `gingerbread-man-a#0`, generated at 48x72, padded | 56x80 |
+| `peppermint-archer` | `candy-peppermint-archer` | `peppermint-archer-a#0` | 56x80 |
+| `taffy-wrangler` | `candy-taffy-wrangler` | `taffy-wrangler-b-clean#0` (ground-plate edit) | 56x80 |
+| `sugarplum` | `candy-sugarplum` | `sugarplum-b#0` | 56x80 |
+| `gummy-bear` | `candy-gummy-bear` | `gummy-bear-a#0` (creature layer) | 72x88 |
+| `rock-candy-dragon` | `candy-rock-candy-dragon` | `rock-candy-dragon-b#0` | 88x104 |
+
+Rejected, each with its reason in `verdicts.json`: a pig cowpoke in brown
+clothes (`taffy-wrangler-a`; the re-roll names the body as taffy with no
+snout), a south-west-facing smooth-scaled dragon (`rock-candy-dragon-a`;
+the creature layer's "rounded rubbery shapes" fought the facets, so `-b`
+drops it for an explicit outline and names the facets and the facing),
+ground plates under the Wrangler and the first Sugarplum (removed by
+edits), and that round-plum Sugarplum itself, which on the battle line-up
+read smaller than the tier 1 Gingerbread Man (`sugarplum-b` fills the
+canvas). The Candy outpost is `map-objects/outpost-candy-a#2` (a
+gingerbread watchtower behind a candy-cane wall, 113x115), registered as
+the `candy` variant of `faction-outpost` in `src/assets/map-objects.ts`.
+
 ## Hero classes
 
 Every hero rides, as on a Heroes map, on a mount of its own so a hero never

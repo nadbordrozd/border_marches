@@ -204,6 +204,19 @@
       ],
       "subject": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) the keystone of a stone arch: one wedge-shaped block of pale grey carved stone, wider at the top than the bottom, with a glowing gold gem set in its face; (2) a wedge-shaped sandstone keystone block, wider at the top, banded with gold and set with a glowing blue gem.",
       "notes": "Bead border_marches-9is: the Keystone relic (CONTENT_MAP_OBJECTS 4) had the artifact fallback chest. Two wordings of the same relic."
+    },
+    {
+      "id": "wonders-candy-a",
+      "concept": "flypaper-ribbon flypaper-ribbon",
+      "width": 32,
+      "height": 32,
+      "seed": 17211,
+      "covers": [
+        "flypaper-ribbon",
+        "flypaper-ribbon"
+      ],
+      "subject": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a long curly strip of sticky golden yellow flypaper ribbon hanging down from a small red cap, two small grey flies with white wings stuck on it; (2) a spiral of golden yellow flypaper tape unrolling from a short red cardboard tube, a few small grey flies stuck on it.",
+      "notes": "Bead border_marches-bzc.112: the Flypaper Ribbon, a Wonder that makes Stuck (FACTION_CANDY 5.2). Grey flies, not black, so they show on a dark panel; a paper strip, not taffy, so it is not mistaken for the Stuck icon."
     }
   ],
   "outputs": [
@@ -708,6 +721,12 @@
     {
       "path": "public/assets/icons/artifacts/scholars-bookmark.png",
       "from": "trinkets-c#22",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "path": "public/assets/icons/artifacts/flypaper-ribbon.png",
+      "from": "wonders-candy-a#4",
       "width": 32,
       "height": 32
     },

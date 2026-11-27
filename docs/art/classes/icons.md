@@ -151,6 +151,18 @@ first 16 px gauntlets were all grey, without the 32 px icon's blue cuff) and
 (a battle sign, not an oath), gold-banded keystones (read as a bucket) and
 grey slabs with a flame gem (read as a candle or a tombstone).
 
+## The Candy Kingdom (bead `border_marches-bzc.112`)
+
+| Id | Kind | Frame | Icon (32 px / 16 px) |
+| --- | --- | --- | --- |
+| `stuck` | condition (FACTION_CANDY 3; added by game id in `icon-catalogue-build.mjs` until CONTENT_SPELLS 2.1 lists it) | Clock | a boot lifting off with pink taffy strings pulling it back (`conditions-g#2`) / an upright boot in a big pink taffy puddle (`conditions-g-16#61`) |
+| `flypaper-ribbon` | artifact (Wonder, FACTION_CANDY 5.2; data bead bzc.111; added by game id until CONTENT_ARTIFACTS 3 lists it) | Wonder | a curling yellow flypaper strip from a red cap with a grey fly (`wonders-candy-a#4`) |
+
+No yellow in Stuck, so it stands apart from its gold Clock frame; the
+Flypaper Ribbon is a paper strip with grey flies, not taffy, so the two are
+not mistaken for one another. Rejected: bare boots without taffy (read as
+Movement), pink blobs without a boot (read as a gumdrop).
+
 ## Hero sheet stats (bead `border_marches-bzc.82`)
 
 The Heroes II style hero sheet shows every number as an icon. Recipe

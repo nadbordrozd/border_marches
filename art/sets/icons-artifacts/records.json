@@ -4228,5 +4228,428 @@
         "height": 32
       }
     ]
+  },
+  "wonders-candy-a": {
+    "id": "wonders-candy-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "267b91b1-009d-43b0-875c-7386248e8e5a",
+    "submittedAt": "2026-11-27T00:10:30.808Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a long curly strip of sticky golden yellow flypaper ribbon hanging down from a small red cap, two small grey flies with white wings stuck on it; (2) a spiral of golden yellow flypaper tape unrolling from a short red cardboard tube, a few small grey flies stuck on it."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17211,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a long curly strip of sticky golden yellow flypaper ribbon hanging down from a small red cap, two small grey flies with white wings stuck on it; (2) a spiral of golden yellow flypaper tape unrolling from a short red cardboard tube, a few small grey flies stuck on it. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-27T00:12:40.006Z",
+    "usageUsd": 0.08188785693380568,
+    "candidates": [
+      {
+        "file": "wonders-candy-a-0.png",
+        "sha256": "cdbe4e8fdee7baab7b0bd62212f8d4065e3e00b66fbc267ecf1d2070107e9c9c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-1.png",
+        "sha256": "89a4a2fb4d22093dbf00d28cc4d28c780d7725aaaca2757cb1080484ae25fc8a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-2.png",
+        "sha256": "8c3039134ab22651e908f7241114605135ab5eba5575fce8929a5a0c753cfd3e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-3.png",
+        "sha256": "d2d9d7177e6e6ed14cfb6c948e0ed9fe6b54717c6e524fc3459b4caa4570d685",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-4.png",
+        "sha256": "04358f8ce7b95953318168592f74976b82f8db07ba55c1fa311ebee0da7a2851",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-5.png",
+        "sha256": "fb99c5e6b84fa59709664035e6560fa024e162af8c8b72de72a1e07cd351b23c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-6.png",
+        "sha256": "ff63acbe8342d899cbe1c67a61a0cfadedabfdc1edf2d48e4999a87263b19ca1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-7.png",
+        "sha256": "e210364a8ad882356903d7484871fb5bcd9122c23f86d4b3eb016f840c57b7cd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-8.png",
+        "sha256": "13e2a0ca62c6812315ffed2babe6d671b087218045d22b6a7efca94a91c5dee5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-9.png",
+        "sha256": "3703562e5fe5d515cd0c372de65cadaa7e625769f065bf9e390c07a37db9beb1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-10.png",
+        "sha256": "801630f30f5258bb4d4d747c6afabe27388cc46afe866f06fde1895d58083349",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-11.png",
+        "sha256": "7b1fdab95bf52930a7c156817e848b41fbe1587e8dda7f30b1f65dbb9ef24f63",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-12.png",
+        "sha256": "305228839202fc3da23956e060d06555e0b35533c12bdc86f4ec5b6685ee713f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-13.png",
+        "sha256": "f71537015a2dc3890d6448e353d0907a348fa5f25b7c383c749eb657ac258040",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-14.png",
+        "sha256": "51f3c3e61104b25e2b55020f6a5bae6377648bef8554d09c86422585484c44e1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-15.png",
+        "sha256": "9306664faab9844ddc6e430d1c1f78469b91889f2306abf900d887737228477e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-16.png",
+        "sha256": "f2f38cdfcb0a778666d4ba612aa7e102377bcb719ef248a26708a3ff036c9072",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-17.png",
+        "sha256": "7af111d0e04043ce9a93e2c8c5fd575591e72cde1c835ef4d86692bcbed264fa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-18.png",
+        "sha256": "8777f5a824f73347a11ddfc84631280b85106b5965913bc7270878699d8d0f0b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-19.png",
+        "sha256": "20008539ed4d26b5bc4bcd42fbe1c4c455f5dcedf5acdd77b4379d838cd5873d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-20.png",
+        "sha256": "81794204a9421080d29fdc00d55d961d0a298dea7c41b9d1bc025779a8f3cacd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-21.png",
+        "sha256": "e0701045627fe421d99bf785b542dc35ff0356d809c1f6e1253b2c40cb3d236e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-22.png",
+        "sha256": "95e3e70d88a42ba8858c8cc42488b9b7fa8efe0b8ec1db3d4cd7de4ffd03fbe4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-23.png",
+        "sha256": "9fea290044f553a1a42f9296d3c1f5662e1d5d9f4be1e51211281768ac621743",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-24.png",
+        "sha256": "eba0f59c9af7cb433c77330719d7141327ae91f09563cdf35eaac6d3e1696241",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-25.png",
+        "sha256": "72846bf2cb2af35a0d9fa079c5324f8019efa66ff75861588e36fce5ca4b7b65",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-26.png",
+        "sha256": "d7938e175c03283516cc942eb3c8cfd42727473669fded88c99f7e801d589337",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-27.png",
+        "sha256": "cadba8b5aa6be8f0f8ce3f94c1e80e8027c3777b942f34c575bea92dc76cdc2e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-28.png",
+        "sha256": "d7a74e0b832788724080a3fd4cf376ee7c94ad37e8db1f4e4565cfbf43dcdb44",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-29.png",
+        "sha256": "6aff7987a4180172c12348659f065f75875f3fa3a26634118b44d57955819f19",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-30.png",
+        "sha256": "2b80e8fee8b6a0ed158593380152a7eec51667a7e14fa4422a5a1e896a1446e3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-31.png",
+        "sha256": "bae1d927d5e2e808b253754d045bf911211d46c3e78525c65c9a64fa223b571f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-32.png",
+        "sha256": "1b6c8cbebf72dfbe60c99c12e0f0227b880560b0c6b119e0dbdddcf965b3dabf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-33.png",
+        "sha256": "1ced9b7500f1ad48180f575fe87cddbc22ca14d16ef32e1faa881b6522266c4d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-34.png",
+        "sha256": "2205003440c9081b83a7ec49a7df0e0f2554ac0a6ddc842c93fe20c2cd0926ef",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-35.png",
+        "sha256": "7546e385a4232ee48319beaadf35354bf0b5aae228c5162f353e049c4e85d853",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-36.png",
+        "sha256": "4ff88905c4f4f1bae418828fbbd17e7c49b8f71f0e9f366b6e2e0fe9279fb803",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-37.png",
+        "sha256": "481fa9168b11766eec29a0a263d94b30189dad84ac8b811788fa2a41d9f67a1c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-38.png",
+        "sha256": "552464a89704d0780b0061b7ef8475967e6fcc10248aabe6db46073959fa1a32",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-39.png",
+        "sha256": "2e235c7ce4ea56e14899ceed0c0d563e1eb286ea4ea0de2884d4e2df46d23990",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-40.png",
+        "sha256": "29ece64a96384005013b4c0eea36552b3698ee49d3a15cf9908fc72f16ada229",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-41.png",
+        "sha256": "40125a76989e7a8fe6cb86102f17e76c647d0d18b155a1b90ac885b373e38b6d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-42.png",
+        "sha256": "d5f48231703116c6c0ed3ed4cbfba32f3251ee770884ae46de8a67e05323c7bd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-43.png",
+        "sha256": "efe4babc14bb4e4e1f3ffdd24746601ce17dd9bd0cb926284895ec840b1dbae3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-44.png",
+        "sha256": "85ac0bd74c041134b5067538832f781390c40d6b512e11099a06af4ad310c940",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-45.png",
+        "sha256": "cc466c3952868b6c65b504a64f53147afdcd8cff528da21054a3f33c5bbaff77",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-46.png",
+        "sha256": "55cb38ec3ddc62f69fed7e3cfad85e080b7450cb2719e6ae8d613393ad0fe55d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-47.png",
+        "sha256": "a459e34764a9d0a0d5ce3fb5c4b4efde37f783efe1dfbb7ca15e2b5f245c73e4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-48.png",
+        "sha256": "545be61f3e3d8c2a638c7853a004c90105e5427bd501997fc4e3789e3d186709",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-49.png",
+        "sha256": "0b8592c94266d738e234ce11989f4ceae720c4e8863c572aa9dfc3c9a6425280",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-50.png",
+        "sha256": "7afaa7b9f1e0869c0067db9614a1141942f34d1768595b86c51b857408e95e85",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-51.png",
+        "sha256": "e4eb0140a2b549367417d2ec76d03498ece6ff3c0348b724fd6888505b573aa6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-52.png",
+        "sha256": "eee190d614f614d6d204f0ecb6a102eecd77af71f38fad2c62c159ba75c7a5e1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-53.png",
+        "sha256": "1db25ee878576c3548a173d587e15cbede7ef1635453c8c06f1137e3965be8a2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-54.png",
+        "sha256": "0dbcee15cc0dc67029e4fb068e819d334bd9ef9f57aa9056c138977ae5847e80",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-55.png",
+        "sha256": "9d372c003479a9cd3102c8eceaa413905a921e8a1c1bcee606c4a9c332f2d6e5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-56.png",
+        "sha256": "fa67892e1169a50247cec14917f8156c52f5d434a9c3bbc4b697d28a7bb34a6a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-57.png",
+        "sha256": "4ca6b834ef477804f24a53a0e7f6706863ceaa513c44a8e434b04ed648ab4203",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-58.png",
+        "sha256": "a6bc55e85a5c6db13ef13e7e2f08e29016efba9f2405564c48edf9f672bf70ee",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-59.png",
+        "sha256": "d45cacc2303c99bdff2ad06ba9352faa2c2d1c4d479df5954527a11f461d386d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-60.png",
+        "sha256": "22776bb00aa33cef82d2dd4f647f30f94e708f5c205ff1d2d1583b06d35bd03e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-61.png",
+        "sha256": "a768c1b23beb293f85fbd930dc89c6597dab0fb2658ad94b358a0796144a3fa4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-62.png",
+        "sha256": "a007559efd46a42ea819bf2e0d2426e10a44c2edd2b3ab0dc50bde200469d5aa",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "wonders-candy-a-63.png",
+        "sha256": "8d80005fa017fb08a34b144c4d318474676166a484152354b9a4170f49ed5973",
+        "width": 32,
+        "height": 32
+      }
+    ]
   }
 }

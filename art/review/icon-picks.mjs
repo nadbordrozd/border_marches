@@ -231,6 +231,12 @@ export const PICKS = {
         "scholars-bookmark": [22, "red ribbon bookmark with a gold tassel"],
       },
     },
+    // bead border_marches-bzc.112 (verdicts recorded with studio-art accept/reject)
+    "wonders-candy-a": {
+      picks: {
+        "flypaper-ribbon": [4, "a curling yellow flypaper strip from a red cap with a grey fly stuck on it; reads at 1x on light and dark and is plainly not the pink-taffy Stuck icon"],
+      },
+    },
     // bead border_marches-9is
     "relics-a": {
       picks: {
@@ -357,6 +363,19 @@ export const PICKS = {
       picks: {
         challenged: [18, "open gauntlet with a blue cuff, tilted like the 32 px icon; fingers read at 16 px"],
       },
+    },
+    // bead border_marches-bzc.112
+    "conditions-g": {
+      picks: {
+        stuck: [2, "a boot lifting off with pink taffy strings pulling it back: 'cannot leave' at a glance, clear on light and dark, no gold to clash with the Clock frame"],
+      },
+      notes: Object.fromEntries([6, 14, 22, 24, 34, 39, 50, 51, 62].map((n) => [n, "a bare boot with no taffy: reads as Movement or a boot item, not Stuck"])),
+    },
+    "conditions-g-16": {
+      picks: {
+        stuck: [61, "upright boot in a big pink taffy puddle: the pink carries the badge on a dark panel where the brown boot sinks"],
+      },
+      notes: Object.fromEntries([23, 27, 30, 37, 41, 42, 43].map((n) => [n, "a pink blob without the boot: reads as a gumdrop, not a held foot"])),
     },
   },
   "icons-heroes": {

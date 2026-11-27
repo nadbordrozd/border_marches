@@ -4651,5 +4651,851 @@
         "height": 16
       }
     ]
+  },
+  "conditions-g": {
+    "id": "conditions-g",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "ccd159ae-50c3-41cf-8fb1-20368eed71f2",
+    "submittedAt": "2026-11-27T00:06:15.436Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-32.txt",
+          "text": "Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 3 things, each thing about equally often: (1) a small brown leather boot stuck in a puddle of sticky strawberry pink taffy, long stretchy pink strings pulling up from its sole; (2) a blob of sticky glossy pink taffy with long stretchy strings, one small brown boot sunk in it up to the ankle; (3) a small brown boot glued to a round pink candy puddle by thick stretchy pink strands."
+        }
+      ],
+      "image_size": {
+        "width": 32,
+        "height": 32
+      },
+      "no_background": true,
+      "seed": 17307,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one bold chunky symbol sprite for a game menu: a single clear object with a big simple silhouette, a thick single-colour black outline, flat saturated colours with one shadow tone, very few details; it must read at a glance at 32 pixels. It floats alone, centred, filling most of the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 3 things, each thing about equally often: (1) a small brown leather boot stuck in a puddle of sticky strawberry pink taffy, long stretchy pink strings pulling up from its sole; (2) a blob of sticky glossy pink taffy with long stretchy strings, one small brown boot sunk in it up to the ankle; (3) a small brown boot glued to a round pink candy puddle by thick stretchy pink strands. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-27T00:08:35.133Z",
+    "usageUsd": 0.08205146810743544,
+    "candidates": [
+      {
+        "file": "conditions-g-0.png",
+        "sha256": "5bc443e767043fd2b9f53b000559bbbc3d0f5ecb4a478780b680deb68ac45f21",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-1.png",
+        "sha256": "6c3f9599dff524a2c4a06ec02e7ffcc3c37fd1eef2db24353aeec56dedf489f6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-2.png",
+        "sha256": "f849da65469fcd8b1d9aa9195e655f2b50f0e1f6fd3ad60ca5825f9c8f992bc0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-3.png",
+        "sha256": "6f24dbf4d9767131cb3f473ebb76c304ddcc14ed6dacf5329166a04d91169ffd",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-4.png",
+        "sha256": "89bddd9709b2915099c64cc1f4900730e3109d52c88c26e14f2d82b72e5739c6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-5.png",
+        "sha256": "9ccc8df6c964ef305a504c103f5bab42d4b5f0eeaa116b8bf8cb13d3311afcbe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-6.png",
+        "sha256": "73a0598fc9c8f8b1cc8518e155c211c022b870164ab31a722fd6ce699e876ade",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-7.png",
+        "sha256": "810878f8bbc8fe3966b157d1fd2be01f030747cf710519bacaec5ae6649a4a0c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-8.png",
+        "sha256": "9321dc2900302eb6fb847e61518622e674941a43b566c54fa39a74fe744370cf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-9.png",
+        "sha256": "37b1ee350c20ed54329d757f892fc439d52adb1313a1de8d02b31d9d20699292",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-10.png",
+        "sha256": "cc15721da6795d6caaae3995571a927e89965d40dfd8f9005cbbf66b7df30992",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-11.png",
+        "sha256": "1981fac625a72c1ae128cd8489d1c066f824a285c7a5a7fd76b3bfbce8e78419",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-12.png",
+        "sha256": "14cb2b318edc6f85279e1461391cd0c6acfb47f10ab11dc5319e0f91c31a4197",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-13.png",
+        "sha256": "4f27f9ec71bdeb9c555a466edf7771ebf4554976ff5a8f0803c4a1780c3e92bf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-14.png",
+        "sha256": "2129a28dc5d14f15e6e10713c08f312e1ca146aae823bc1928bd9cb1e8ba8be3",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-15.png",
+        "sha256": "2686a6ea47486af02670f592125cc252933bb91d5314f559c4197b0837eee752",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-16.png",
+        "sha256": "fdad035448429a3a7e0a3c58e867f3d26c9f3555a674338cafc149f0cde3af8a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-17.png",
+        "sha256": "3a1f1e6e852b50fc0a086cb20a9c52508ecdfbed8cf7dad856fc902f55721f8c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-18.png",
+        "sha256": "9246c5664e05f82ba34e761e1df76866ae035dda2c59cf33ed0c346481c0f73e",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-19.png",
+        "sha256": "16103f70fbcb512d52031da8740de8d7b23d42921f8e504b2ab2bdb7b50dfe8a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-20.png",
+        "sha256": "47050e38be1f8c6bdbd17c8311c34d431121c80d64d77538de25cf778d63e35c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-21.png",
+        "sha256": "7fe1d8973611c36116c35771b52915d83f87f9f2f636f08dd3850965ff6c0a4a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-22.png",
+        "sha256": "b6dc6093ae114f926e8127b35b3e7391ec007d558f0be252006a18459b2f31e1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-23.png",
+        "sha256": "f8471d948902df9bdbdc09a2043810e938605e4c60afdaeaf7953f224a87ecc2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-24.png",
+        "sha256": "5dfa1d03352d6be15fa39e26e5eceddc67524e12fc26cf4755a41a4e6fad6108",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-25.png",
+        "sha256": "87dbdcfe3268f9a6285d29ba909654dd713bc51361821837f5ac45be7cf7cafe",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-26.png",
+        "sha256": "03306a46566cfe5961cd11adc5508d449a5290ad4fbba1a5e099ffb3e24b5085",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-27.png",
+        "sha256": "69de14e21f9b6a33fbd6a57472fcdc36f6690dd4fc165a1c6d61c8ef243eec19",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-28.png",
+        "sha256": "03396bc6779e5e3c635a6391d0fb3fd1c980e72f16105fcdf83bc9ddf3d3c7bb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-29.png",
+        "sha256": "b09b432ae919ebc83b2f65a7208aa2191cce2c5f31313c1519ce4aa8e8760520",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-30.png",
+        "sha256": "f376eb760a1ef4d8aa3a6c8db21222976db31a34490aae67ba33216d201cb532",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-31.png",
+        "sha256": "6d8782d49b731b25d6a70775396906e44e2f55e472bff3fa978116225680e108",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-32.png",
+        "sha256": "c87f1e2ebf88bfa7fe0ee52995a7901dd2eb4d138030871360d5044ab9e5fdd9",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-33.png",
+        "sha256": "fd712d2e62dbfbbd79d1f893244e2af182aeb97d5cb1057762a6ce5463ab0959",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-34.png",
+        "sha256": "485d97dee0894dc476c9b2cf078136c2979cd23c266cdbbbda4ccd24db1d1d2c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-35.png",
+        "sha256": "dd8f0e5ff1fc1399e319af0b4365385a913b748474420e1bd2918c1edb82d5f0",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-36.png",
+        "sha256": "8796ed32a4c825663f5fa1a72f0667e0af79f20f352e7a6c5c0c9bf8aa936b54",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-37.png",
+        "sha256": "49409ee72f21536e96dbaa1685b1e2a07f024cdc66242cce958d8c71151490f4",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-38.png",
+        "sha256": "ae2957734d29c175e9141ee7a521442bb3ef0f227112049066db24f7e2edfdcb",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-39.png",
+        "sha256": "08047d96a5000bab78b6d3d09608316e67d16aa4723ed9ebb3a618d9c435968f",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-40.png",
+        "sha256": "9d3b4eafa91d18b03d025657fcf666a8a06bf79ba8801bf6ce5faa21921617ae",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-41.png",
+        "sha256": "ad31ac0ff272822e82371b14b410a64d515bbdc1ae5bdef000a92512fe0e5d2d",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-42.png",
+        "sha256": "733ceeb79716f104d52260e12713ac43a29e8c221f129044a501487fcc3bfdda",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-43.png",
+        "sha256": "452a70989f10bc05d94ba7e301b79814db9e841c7404ad329fbad091c96e934b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-44.png",
+        "sha256": "17da7eb76550389312227e84445c9780d1a573eed287e7c171d3a7ab7817b5ec",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-45.png",
+        "sha256": "393191d066cf22ee218e3220ea8e90c70c2a07c78801b681d161d36cc2b15067",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-46.png",
+        "sha256": "c5f8d42e91de5cb113f1a8dd3aaf8379fabb3d8bf024066b6181af94c7e3534b",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-47.png",
+        "sha256": "cbf1353900b0796680f0e2e6bd95690f2b99636a8634e792c5047f129b679cd6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-48.png",
+        "sha256": "926ea93f8722458380c1b3507807ac16d926f292a8e769d26d495b737b5c484a",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-49.png",
+        "sha256": "e1d7036d1b3256d5fe26fde000f7efbb39f86a792ef2d611bfac66889719f0a6",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-50.png",
+        "sha256": "d86e9a7b0d2a56f6933734de615afc0d2fa2eb0fbd252b6c57c1a256f0efc3c5",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-51.png",
+        "sha256": "6836a5e759149239863ba668a83609a921a4a8615554a27ab1cda7a6ed5298d1",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-52.png",
+        "sha256": "940f46a30253c7aef65dbc7189a6fb1b0f55bd5d9451f786c24551973947e5ef",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-53.png",
+        "sha256": "b474bde40b8bcd69e958367b49715c8efa8c05d64d8647a2e43ae3076e1388cf",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-54.png",
+        "sha256": "34b1b0912eb8285ec5d932acd0276b8473d47d0d5dad09a52790efbe2b4050ce",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-55.png",
+        "sha256": "e7343cfa1f867fc93662e53dde0cc249903c91dba52b2367c9c65afcf43af950",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-56.png",
+        "sha256": "abc061a9f8c895ab29b4d35fad3f9d7956c5952e85ceacdf80a7c223534338b2",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-57.png",
+        "sha256": "23f72703eefd0d8261a5d0f67ad21c0741803fa7c14533c40e1b7797a65a104c",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-58.png",
+        "sha256": "5603aad690372de70db676d49e3d0b89edf1606e3a4ad0e1e0dcf48d06a4a314",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-59.png",
+        "sha256": "7cdf9ea1d312312dba4a87e6e37adc11fef4c445a09c22dcb91eae474b270561",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-60.png",
+        "sha256": "c3be20b140d3716badd6f7d2b4a04d76e5fb73a7f438bd2c4ccfbf78f635c735",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-61.png",
+        "sha256": "220c43cc236fdc7935747821f3a6aa88523d6fdaa9f83d321be76e56c6536490",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-62.png",
+        "sha256": "0b16444d8e3b768ac15ad8de1b0caa4b8dd07a43260ca2ea37fdf36d44ee7fde",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "file": "conditions-g-63.png",
+        "sha256": "e89daa55312a60e7d0438167f751ea065bea0b3b1537cdf87f0bff67dfda5a49",
+        "width": 32,
+        "height": 32
+      }
+    ]
+  },
+  "conditions-g-16": {
+    "id": "conditions-g-16",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b2078786-ba63-4b60-a7ec-97cc55c8427d",
+    "submittedAt": "2026-11-27T00:08:35.249Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-bottom-left.txt",
+          "text": "Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow."
+        },
+        {
+          "source": "fragments/class-symbol-16.txt",
+          "text": "Class: one tiny bold symbol sprite for a status marker: a single object with a very big simple silhouette, a thick single-colour black outline, two or three flat saturated colours, no small details; it must read at a glance at 16 pixels. It floats alone, centred, filling the square, on the empty transparent background: nothing is drawn behind or under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a brown boot stuck in a puddle of pink taffy; (2) a pink taffy blob with a brown boot sunk in it."
+        }
+      ],
+      "image_size": {
+        "width": 16,
+        "height": 16
+      },
+      "no_background": true,
+      "seed": 17316,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: lit from the bottom left; faces turned to the left are lit, faces turned to the right are in shadow. Class: one tiny bold symbol sprite for a status marker: a single object with a very big simple silhouette, a thick single-colour black outline, two or three flat saturated colours, no small details; it must read at a glance at 16 pixels. It floats alone, centred, filling the square, on the empty transparent background: nothing is drawn behind or under it. Subject: each image shows exactly one of these 2 things, each thing about equally often: (1) a brown boot stuck in a puddle of pink taffy; (2) a pink taffy blob with a brown boot sunk in it. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, border, round badge, medallion, button, circular background, square background, ground, pedestal, shadow on the ground, numbers."
+    },
+    "at": "2026-11-27T00:10:30.237Z",
+    "usageUsd": 0.0809743955400255,
+    "candidates": [
+      {
+        "file": "conditions-g-16-0.png",
+        "sha256": "6e41a83ac56dfe6fc8098faa7b4dbb93eb81e30eda3fb028bafc06765f9895df",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-1.png",
+        "sha256": "6e0cb3fcd9c70e98282444a09386546bfd1bf4d89ad5f580695382dd48c74b61",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-2.png",
+        "sha256": "16de96ccfab6c281d57e5efe2914d093b51e4c26c13c9d807ec9cf117a9022b3",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-3.png",
+        "sha256": "9918f64e02945a1401a917944708ae2088d6836219a0f12f94243f41727673a2",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-4.png",
+        "sha256": "7abbcac7122e9739df35933ff43a19b39716a297999dd8c724fce21aef531c4d",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-5.png",
+        "sha256": "81f6c2468c2387c60fb522980a2246ce1760d1973d386c0defdf242b07131b91",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-6.png",
+        "sha256": "0f6e1ba4d5098831c8f728b52273f7c32d743c206810fa6040a8d979aa0b916a",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-7.png",
+        "sha256": "117fb1e7a4b6fd5707d80da1d5e616b133de849bd8a31a89a102299ac01bf73d",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-8.png",
+        "sha256": "02d251e3927cb50a47454321e09fbae51401dee630085074aa54aa4204324ded",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-9.png",
+        "sha256": "c60209f135fe811801a1531f27214f63541987adca15526d42e667b1d105da47",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-10.png",
+        "sha256": "2f76b74a536bd7b7fb3734c0b37b2024bad60844a4b0b17c3cd598d8ee25b843",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-11.png",
+        "sha256": "6b87b23b0eceef87e6998bef4c926349ea6544b6dfa3e28e1c3003bcdd9525af",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-12.png",
+        "sha256": "f532f4514a5f77e482796070e9e10ddd01ca3dcee6fca0b6f251f8e7d8b87ec9",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-13.png",
+        "sha256": "d02a06a8cdab3054dbb578e1f98876bc1ce971ebef8ab6cf1aeca262549857e8",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-14.png",
+        "sha256": "d6c8211a0be2f2a9127dd45397eddab86da6898e0cbc3edabb0f8ada57c348bc",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-15.png",
+        "sha256": "acb0ecc5e6c0f311bd28db35a099f846c83ce2a5e60fc6fe0cebaa8de2e2cbfd",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-16.png",
+        "sha256": "91890fdc2b1627de8327b0a97dcd8a0442e89a649a118a0fca368966ff4191ac",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-17.png",
+        "sha256": "ad09c38e1c0a81729cfaecc5ae790452c864002070eafc0fb8f3e7ebd4269bfe",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-18.png",
+        "sha256": "d8a0f88faa94ef66143e7c201163c9a7b4516649eb4b3087d08afb61b950564f",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-19.png",
+        "sha256": "68f6b8ec0f02c2140555b2af2a59a7e6413d4f8593537d44640cf07d7e97ec74",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-20.png",
+        "sha256": "b03ad9054f08d4e2af973f605fa1004f6624868025845866c04f2be319c94332",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-21.png",
+        "sha256": "4c810c169bb2dd0b7d08f7ec6167d56c6c91b9b433cf4207675de0fb71134e25",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-22.png",
+        "sha256": "fb75def2ba557ea8274b0399a65f908d9b3d0c29aeb08fa457bc39e614494143",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-23.png",
+        "sha256": "efb74725bbcff0ab94f58c339d6481f3e75bff99f0ea40a96c72c84640e092ff",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-24.png",
+        "sha256": "0b3fc3563cbc7b67435ab43c6dc606d84907a41a72b1400f239869edfc497d1b",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-25.png",
+        "sha256": "8b94a22e59abe190a157c762d14d828fcde78de18498d808583b565d3607ce6d",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-26.png",
+        "sha256": "0380575003416b30c6613971f70b9a466b43d157d239e0de7c148618e461ac4b",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-27.png",
+        "sha256": "b3d28a21de44f929db16657b55d88227199274a31567eb5fe5f7ba10ee13fcfd",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-28.png",
+        "sha256": "abbc950246d55e0ce8d3f570bd1481cad53c83f210f795d3c8067a0be5984965",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-29.png",
+        "sha256": "38adae4ee32056a90e2e84e9c31f92a4293c5c095c105b1c470873a9cb571c5c",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-30.png",
+        "sha256": "9faef2f5b2b44268528a3419554873cb869f13296f720f18a08c7aa460cffc8d",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-31.png",
+        "sha256": "0b7e1f680d1eeab46e6c2ffe95ae64f0903980aec641f8accbf7018855231de5",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-32.png",
+        "sha256": "71bb02d076df675b1b2fcfb8905efe11d4800cc422b2ac9b9dd4927ff822a55f",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-33.png",
+        "sha256": "ac93915353eba3e454d285e8037744a6c3e566c3a12ee4163ea04179a64eafc9",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-34.png",
+        "sha256": "f0647f351f76c3da6d7a27f4212087614938a61d08d4b39121bc0cf16421cf8b",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-35.png",
+        "sha256": "fdcf767f356af7c83f06ca3079167d1434af2de63fb44a4a917aeb78e02fc7d4",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-36.png",
+        "sha256": "b07215b214d16b1f7d0d4efd96306befca371695b2dcdb73015040bcbf8bc6ef",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-37.png",
+        "sha256": "f9f2add20788ae1b5d92d47f75783b6e256f91d7f6d89701197c70f08b905296",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-38.png",
+        "sha256": "8278eda7bad86b28cb0959de951ecda51cedd06f3f4480ca43e410f931724b5b",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-39.png",
+        "sha256": "c7ce2e9556324fd4b833a91f68e28f6397a7f1248b2da79ab5c145491bd7c098",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-40.png",
+        "sha256": "42df456b372dfd1bac1f5638423d0c41f3b3b8b0536eb58949b63e0fe9cbd49e",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-41.png",
+        "sha256": "9932e20abc608b292dbe308221d7986bba892dd9e563dc1c68cd491671e06f3a",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-42.png",
+        "sha256": "815183d443d890697fed521a463e568fd7783e9000a9ed9ec9ddce68cf4faf6a",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-43.png",
+        "sha256": "3856640013e02d2dd2229d387df705260e8b4aa431512f6458a177ee82514ece",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-44.png",
+        "sha256": "a9a506495057aa3776b20bb2a07421ae39dd5effa14dff8e8fb35b9d6073a34f",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-45.png",
+        "sha256": "0a30db0f2e2863ba418ddca5b9dc58fb31ea46aa75a192fa304bb4b2834741fe",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-46.png",
+        "sha256": "125bb46c2a4963fe3f946b5869259ef9836190ac8a7b45b19117d02cf9b166cf",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-47.png",
+        "sha256": "f5f45e88b9ec608862cad7d4db19a67814cf0c22c1388775b90bbb780a93eb52",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-48.png",
+        "sha256": "1b1203e8ee9e9ec4d9d7ab32a67293df59192691b312812f1420a05570bc1323",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-49.png",
+        "sha256": "1d700193148dd765da73b6453413347af25685ce1c43168984ecb39df5768c12",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-50.png",
+        "sha256": "5623454221c3e4749b458a6a6fd300f512b941880c364484a4d7e50e2fee28fe",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-51.png",
+        "sha256": "060f0ae5b3ceafed565d16abf8dfd052b10952b90f5dc92fce2f3cf9ee6516c6",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-52.png",
+        "sha256": "eca3a72a016bbda3b4f04ed25d06bd68a9dd8753b4500289f3db8008e7632e2f",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-53.png",
+        "sha256": "6e1a32828bb16453466769b5c5ea5224af8a1aa08874e5520a022ec9a43a355c",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-54.png",
+        "sha256": "51dbbd02ca894556bfe39cd72c923549506e5abeb7d9ddc4e1decfb21efe9247",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-55.png",
+        "sha256": "0a92d18a1426cfa34e6f6aa8083ea92fe5f575a0ba636fd0d03bbd812b7c6e49",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-56.png",
+        "sha256": "7c5af1d85124b818cbdf84054dc823e70bd7d6e2663b5081dc3c8a124a6bd0bb",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-57.png",
+        "sha256": "3d4069f5b5f6404187e18972165f745c2db0d48051cf7525ddfedb93982d9607",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-58.png",
+        "sha256": "6f7cc504ab33d402976158b6adcec1c2e09d3d4de501efa922cd294411614625",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-59.png",
+        "sha256": "7bf69ea22b3bddaf60b1a6315ccf8558ea18fcf0a52b91eccf846b40fe45e5d1",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-60.png",
+        "sha256": "89222b0d125e51ad23f91fffbe4bcccad5d0401a7c3d2182fca28d6e32fab6e5",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-61.png",
+        "sha256": "1395abd68734eba8cf2764ce1f81c0f33a9d41ca2facbc2680490a44b79ec36e",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-62.png",
+        "sha256": "76c73d4955e03624ea0988f283fe712795637686151b0bf90a2dd313da1009b4",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "file": "conditions-g-16-63.png",
+        "sha256": "f700aaec9608a8f6a618dd91cb22e3878b36c9fe5cf7a12019c25f6ce19bdb88",
+        "width": 16,
+        "height": 16
+      }
+    ]
   }
 }

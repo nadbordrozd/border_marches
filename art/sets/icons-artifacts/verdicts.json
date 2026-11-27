@@ -3198,5 +3198,325 @@
     "verdict": "REJECTED",
     "notes": "gold-banded block reads as a bucket or a pot, not a stone",
     "at": "2026-11-25T19:10:34.544Z"
+  },
+  "wonders-candy-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "flypaper-ribbon: a curling yellow flypaper strip from a red cap with a grey fly stuck on it; reads at 1x on light and dark and is plainly not the pink-taffy Stuck icon",
+    "at": "2026-11-27T00:13:04.813Z"
+  },
+  "wonders-candy-a#1": {
+    "verdict": "REJECTED",
+    "notes": "a rolled tape lying on its side: reads as a snail or a Swiss roll, not a hanging ribbon",
+    "at": "2026-11-27T00:13:04.876Z"
+  },
+  "wonders-candy-a#5": {
+    "verdict": "REJECTED",
+    "notes": "a rolled tape lying on its side: reads as a snail or a Swiss roll, not a hanging ribbon",
+    "at": "2026-11-27T00:13:04.937Z"
+  },
+  "wonders-candy-a#10": {
+    "verdict": "REJECTED",
+    "notes": "a rolled tape lying on its side: reads as a snail or a Swiss roll, not a hanging ribbon",
+    "at": "2026-11-27T00:13:05.004Z"
+  },
+  "wonders-candy-a#17": {
+    "verdict": "REJECTED",
+    "notes": "a rolled tape lying on its side: reads as a snail or a Swiss roll, not a hanging ribbon",
+    "at": "2026-11-27T00:13:05.074Z"
+  },
+  "wonders-candy-a#21": {
+    "verdict": "REJECTED",
+    "notes": "a rolled tape lying on its side: reads as a snail or a Swiss roll, not a hanging ribbon",
+    "at": "2026-11-27T00:13:05.208Z"
+  },
+  "wonders-candy-a#33": {
+    "verdict": "REJECTED",
+    "notes": "a rolled tape lying on its side: reads as a snail or a Swiss roll, not a hanging ribbon",
+    "at": "2026-11-27T00:13:05.288Z"
+  },
+  "wonders-candy-a#37": {
+    "verdict": "REJECTED",
+    "notes": "a rolled tape lying on its side: reads as a snail or a Swiss roll, not a hanging ribbon",
+    "at": "2026-11-27T00:13:05.385Z"
+  },
+  "wonders-candy-a#49": {
+    "verdict": "REJECTED",
+    "notes": "a rolled tape lying on its side: reads as a snail or a Swiss roll, not a hanging ribbon",
+    "at": "2026-11-27T00:13:05.473Z"
+  },
+  "wonders-candy-a#53": {
+    "verdict": "REJECTED",
+    "notes": "a rolled tape lying on its side: reads as a snail or a Swiss roll, not a hanging ribbon",
+    "at": "2026-11-27T00:13:05.566Z"
+  },
+  "wonders-candy-a#0": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:05.671Z"
+  },
+  "wonders-candy-a#2": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:05.768Z"
+  },
+  "wonders-candy-a#3": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:05.870Z"
+  },
+  "wonders-candy-a#6": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:05.993Z"
+  },
+  "wonders-candy-a#7": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:06.096Z"
+  },
+  "wonders-candy-a#8": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:06.203Z"
+  },
+  "wonders-candy-a#9": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:06.319Z"
+  },
+  "wonders-candy-a#11": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:06.429Z"
+  },
+  "wonders-candy-a#12": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:06.539Z"
+  },
+  "wonders-candy-a#13": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:06.646Z"
+  },
+  "wonders-candy-a#14": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:06.763Z"
+  },
+  "wonders-candy-a#15": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:06.911Z"
+  },
+  "wonders-candy-a#16": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:07.024Z"
+  },
+  "wonders-candy-a#18": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:07.139Z"
+  },
+  "wonders-candy-a#19": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:07.259Z"
+  },
+  "wonders-candy-a#20": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:07.374Z"
+  },
+  "wonders-candy-a#22": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:07.478Z"
+  },
+  "wonders-candy-a#23": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:07.578Z"
+  },
+  "wonders-candy-a#24": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:07.678Z"
+  },
+  "wonders-candy-a#25": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:07.780Z"
+  },
+  "wonders-candy-a#26": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:07.888Z"
+  },
+  "wonders-candy-a#27": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:07.994Z"
+  },
+  "wonders-candy-a#28": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:08.100Z"
+  },
+  "wonders-candy-a#29": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:08.202Z"
+  },
+  "wonders-candy-a#30": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:08.297Z"
+  },
+  "wonders-candy-a#31": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:08.398Z"
+  },
+  "wonders-candy-a#32": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:08.498Z"
+  },
+  "wonders-candy-a#34": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:08.601Z"
+  },
+  "wonders-candy-a#35": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:08.701Z"
+  },
+  "wonders-candy-a#36": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:08.802Z"
+  },
+  "wonders-candy-a#38": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:08.902Z"
+  },
+  "wonders-candy-a#39": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:09.005Z"
+  },
+  "wonders-candy-a#40": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:09.112Z"
+  },
+  "wonders-candy-a#41": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:09.209Z"
+  },
+  "wonders-candy-a#42": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:09.309Z"
+  },
+  "wonders-candy-a#43": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:09.405Z"
+  },
+  "wonders-candy-a#44": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:09.506Z"
+  },
+  "wonders-candy-a#45": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:09.615Z"
+  },
+  "wonders-candy-a#46": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:09.714Z"
+  },
+  "wonders-candy-a#47": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:09.809Z"
+  },
+  "wonders-candy-a#48": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:09.909Z"
+  },
+  "wonders-candy-a#50": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:10.013Z"
+  },
+  "wonders-candy-a#51": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:10.113Z"
+  },
+  "wonders-candy-a#52": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:10.213Z"
+  },
+  "wonders-candy-a#54": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:10.313Z"
+  },
+  "wonders-candy-a#55": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:10.420Z"
+  },
+  "wonders-candy-a#56": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:10.527Z"
+  },
+  "wonders-candy-a#57": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:10.631Z"
+  },
+  "wonders-candy-a#58": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:10.746Z"
+  },
+  "wonders-candy-a#59": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:10.848Z"
+  },
+  "wonders-candy-a#60": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:10.950Z"
+  },
+  "wonders-candy-a#61": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:11.052Z"
+  },
+  "wonders-candy-a#62": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:11.151Z"
+  },
+  "wonders-candy-a#63": {
+    "verdict": "REJECTED",
+    "notes": "spare take: its subject is covered by a clearer accepted take of this recipe",
+    "at": "2026-11-27T00:13:11.255Z"
   }
 }

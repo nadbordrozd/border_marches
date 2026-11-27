@@ -38,5 +38,80 @@
     "verdict": "ACCEPTED",
     "notes": "Orc Warboss (giant, bzc.29): the imported warboss's design at the tier 6 canvas: horned steel helmet, lime face with tusks shouting, pale sand fur mantle, iron belt buckle, yellow loincloth, brass war horn; matches the Dragonslayer's scale and the Bold chibi style; reads at 1:1 on light and dark; feet lowest",
     "at": "2026-11-24T23:54:48.111Z"
+  },
+  "gingerbread-man-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "cookie soldier with an icing face, gumdrop buttons and a candy-cane spear; clear silhouette, bold outline, matches the Squire's scale",
+    "at": "2026-11-26T23:57:24.256Z"
+  },
+  "taffy-wrangler-a#0": {
+    "verdict": "REJECTED",
+    "notes": "reads as a pink pig cowpoke with a snout in brown clothes, not a creature made of taffy",
+    "at": "2026-11-26T23:57:24.308Z"
+  },
+  "rock-candy-dragon-a#0": {
+    "verdict": "REJECTED",
+    "notes": "head turned south-west (to the left), against the never-mirrored south-east rule; smooth scales read as an ordinary teal dragon, not rock candy facets",
+    "at": "2026-11-26T23:57:24.361Z"
+  },
+  "rock-candy-dragon-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "faceted teal rock-candy dragon with pink crystal spikes and gems, sugar-glass wings, faces south-east; giant canvas filled, reads at 1x",
+    "at": "2026-11-26T23:59:33.479Z"
+  },
+  "taffy-wrangler-b#0": {
+    "verdict": "REJECTED",
+    "notes": "the taffy creature, hat and striped lasso are right, but it stands on a grass and soil ground plate (removed by the taffy-wrangler-b-clean edit)",
+    "at": "2026-11-26T23:59:33.532Z"
+  },
+  "taffy-wrangler-b-clean#0": {
+    "verdict": "ACCEPTED",
+    "notes": "ground plate gone, the taffy cowpoke, hat, neckerchief and striped lasso kept; reads as a candy creature at 1x",
+    "at": "2026-11-27T00:02:15.054Z"
+  },
+  "taffy-wrangler-b-clean#1": {
+    "verdict": "REJECTED",
+    "notes": "spare: same clean edit as #0, which is accepted",
+    "at": "2026-11-27T00:02:15.102Z"
+  },
+  "peppermint-archer-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "peppermint-swirl hood, candy-cane bow and mint tunic; clearly an archer, chibi proportions like the Squire",
+    "at": "2026-11-27T00:02:15.153Z"
+  },
+  "gummy-bear-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "glossy red gummy bear with a sugar crust and a wide grin; solid, reads as jelly, fills the large canvas",
+    "at": "2026-11-27T00:02:15.213Z"
+  },
+  "sugarplum-a#0": {
+    "verdict": "REJECTED",
+    "notes": "the plum fairy with wings and lollipop wand is right, but a floating grass block hangs under her (removed by the sugarplum-a-clean edit)",
+    "at": "2026-11-27T00:02:15.271Z"
+  },
+  "sugarplum-a-clean#0": {
+    "verdict": "REJECTED",
+    "notes": "clean and on-style, but on the battle line-up the round plum reads smaller than the tier 1 Gingerbread Man; replaced by sugarplum-b",
+    "at": "2026-11-27T00:04:13.983Z"
+  },
+  "sugarplum-a-clean#1": {
+    "verdict": "REJECTED",
+    "notes": "spare: same clean edit as #0, which keeps the wand sparkles",
+    "at": "2026-11-27T00:02:44.007Z"
+  },
+  "sugarplum-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a sugarplum fairy in a plump plum body with spun-sugar wings and a swirl lollipop wand; fills the canvas so the tier 4 caster reads bigger than the tier 1 Gingerbread Man; no ground",
+    "at": "2026-11-27T00:04:06.070Z"
+  },
+  "sugarplum-c#0": {
+    "verdict": "REJECTED",
+    "notes": "smaller than sugarplum-b (1414 opaque px against 1839; the Wrangler has 2036) and the pale yellow wings nearly vanish on a light panel",
+    "at": "2026-11-27T00:16:29.966Z"
+  },
+  "sugarplum-d#0": {
+    "verdict": "REJECTED",
+    "notes": "same visual mass as sugarplum-b (1870 opaque px against 1839), but the dense white sugar dots are noise at 1x; sugarplum-b keeps the cleaner silhouette",
+    "at": "2026-11-27T00:16:30.018Z"
   }
 }

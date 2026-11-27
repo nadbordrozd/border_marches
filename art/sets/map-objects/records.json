@@ -3814,5 +3814,78 @@
         "height": 128
       }
     ]
+  },
+  "outpost-candy-a": {
+    "id": "outpost-candy-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "a1192a9e-6d66-404d-95fd-c6b43b2ddbe2",
+    "submittedAt": "2026-11-27T00:04:32.304Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a Candy Kingdom fortified recruiting outpost, a small walled camp with a gatehouse at the front: a chunky gingerbread #b86b34 guardhouse with #7d4420 shadows, white royal icing #fff4ec piping on its edges and a strawberry pink #e2589b frosted roof dripping white icing, a low wall of fat red #e03a3e and white striped candy canes around it, the gate at the front an arch of two crossed candy canes, round gumdrops in mint #7fd6b5 and pink along the wall, a pink #e2589b pennant flag on a lollipop pole. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 16204,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a Candy Kingdom fortified recruiting outpost, a small walled camp with a gatehouse at the front: a chunky gingerbread #b86b34 guardhouse with #7d4420 shadows, white royal icing #fff4ec piping on its edges and a strawberry pink #e2589b frosted roof dripping white icing, a low wall of fat red #e03a3e and white striped candy canes around it, the gate at the front an arch of two crossed candy canes, round gumdrops in mint #7fd6b5 and pink along the wall, a pink #e2589b pennant flag on a lollipop pole. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, soldier, snow, ground, grass."
+    },
+    "at": "2026-11-27T00:05:23.774Z",
+    "usageUsd": 0.08052920646137661,
+    "candidates": [
+      {
+        "file": "outpost-candy-a-0.png",
+        "sha256": "d7317c22d06672714ef53456d607b4beee5b09093fefdcf1b2de8be239afc2a6",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "outpost-candy-a-1.png",
+        "sha256": "a915cd4816f2e2a2772e226f74a1c3d121a28c571e505846a6427817fcd5fb30",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "outpost-candy-a-2.png",
+        "sha256": "95ba03c135c23c389da43abec0dd55714fa78d20d44cc6c796cd2e4d69e0bc1f",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "outpost-candy-a-3.png",
+        "sha256": "1f28651c1dca753b388ab4294631ade8b9a8e094ab7393f3a2ee1036c3c9f164",
+        "width": 128,
+        "height": 128
+      }
+    ]
   }
 }

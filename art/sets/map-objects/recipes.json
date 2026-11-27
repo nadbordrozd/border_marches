@@ -409,6 +409,16 @@
       "seed": 30006,
       "subject": "Subject: a grand magical essence spring: a big craggy grotto of pale grey stone #a8a39a with #6e6a64 shadows, split open by huge tall violet crystals #a77ae8 with #5e3a9a shadows rising high above it, a wide pool of bright violet water #8a5ad0 filling the grotto's front inside a ring of stone blocks, smaller crystals along the rim, a few stone steps down to the water at the front right. The grotto and its crystals fill nearly the full image width and most of its height, its front facing the viewer straight on.",
       "negative": "person, glow halo, sparkle cloud, waterfall, ground, grass"
+    },
+    {
+      "id": "outpost-candy-a",
+      "concept": "FACTION OUTPOST candy (2x2)",
+      "width": 128,
+      "height": 128,
+      "seed": 16204,
+      "subject": "Subject: a Candy Kingdom fortified recruiting outpost, a small walled camp with a gatehouse at the front: a chunky gingerbread #b86b34 guardhouse with #7d4420 shadows, white royal icing #fff4ec piping on its edges and a strawberry pink #e2589b frosted roof dripping white icing, a low wall of fat red #e03a3e and white striped candy canes around it, the gate at the front an arch of two crossed candy canes, round gumdrops in mint #7fd6b5 and pink along the wall, a pink #e2589b pennant flag on a lollipop pole. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, soldier, character, snow, ground, grass",
+      "notes": "Bead border_marches-bzc.112: the Candy Kingdom's faction outpost, after outpost-a (the Realm, Restless and Horde outposts) and FACTION_CANDY 10.1."
     }
   ],
   "outputs": [
@@ -16789,6 +16799,21 @@
           "y": 12,
           "width": 38,
           "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/faction-outpost-candy.png",
+      "from": "outpost-candy-a#2",
+      "width": 113,
+      "height": 115,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 2,
+          "width": 113,
+          "height": 115
         }
       ]
     }

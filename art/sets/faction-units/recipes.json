@@ -3,14 +3,15 @@
   "bead": "border_marches-bzc.14",
   "class": "units",
   "exploration": false,
-  "_doc": "The new v0.2 faction creatures that Pulp Wars has no sprite for (docs/design/FACTION_*.md section 10): Squire, Friar and Dragonslayer (the Realm), the Late King (the Restless) and the Boomshaman (the Goblin Horde). Layers follow Pulp Wars (LESSONS section 5.2) and the lost-world-hero set: style, camera, light, class, subject. No faction layer (the 2000-character cap); each subject carries the colours of the Pulp Wars sprites it stands beside: Realm crimson and gold-yellow heraldry with light steel (HERALDIC), Restless ivory bone, near-black cloth and one violet accent (BONE), Horde lime skin, sand-buff hide, tin and hazard yellow (LIME). Faces south-east; never mirrored. A smaller unit is generated at a smaller request and padded bottom-centred into its class canvas. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "_doc": "The new v0.2 faction creatures that Pulp Wars has no sprite for (docs/design/FACTION_*.md section 10): Squire, Friar and Dragonslayer (the Realm), the Late King (the Restless) and the Boomshaman (the Goblin Horde). Layers follow Pulp Wars (LESSONS section 5.2) and the lost-world-hero set: style, camera, light, class, subject. No faction layer (the 2000-character cap); each subject carries the colours of the Pulp Wars sprites it stands beside: Realm crimson and gold-yellow heraldry with light steel (HERALDIC), Restless ivory bone, near-black cloth and one violet accent (BONE), Horde lime skin, sand-buff hide, tin and hazard yellow (LIME); the Candy Kingdom (bead border_marches-bzc.112, FACTION_CANDY.md 10.1) gingerbread #b86b34, royal icing #fff4ec, strawberry frosting #e2589b, candy-cane red #e03a3e, mint #7fd6b5 and sugar glass #8fe3e8, with Sugarplum purple on the Sugarplum only (CANDY); creatures that hold nothing (the Gummy Bear, the Rock Candy Dragon) take the strays' creature class layer (@creature). Faces south-east; never mirrored. A smaller unit is generated at a smaller request and padded bottom-centred into its class canvas. Recipes are never edited after generation: add a new id (new seed) instead.",
   "shared": {
     "piece": {
       "outline": "single color black outline",
       "detail": "low detail",
       "view": "low top-down",
       "direction": "south-east"
-    }
+    },
+    "creature": ["style", "camera-three-quarter", "light-south-west", "class-creature"]
   },
   "defaults": {
     "endpoint": "create-image-pixen",
@@ -100,6 +101,154 @@
       "subject": "Subject: Orc Warboss, one very large chunky cute orc war chief, the biggest of the horde, filling the whole width of the image: a huge round head with bright lime green skin #86c232 and a lighter #acdc55 face, a big open shouting grin with two cream tusks, a dented light grey steel viking helmet with two big curved cream horns, a huge shaggy pale sand-buff fur mantle over broad bare lime green shoulders, a big iron belt buckle, a hazard yellow #fdd20f loincloth, chunky dark brown boots, one big fist clenched and the other holding up a big brass war horn; simple shapes and very few details.",
       "negative": "boar, wolf, red cloth, skull, gun, axe, olive skin",
       "notes": "Bead border_marches-bzc.29: a giant (tier 6) take after the imported 56x80 Pulp Wars warboss (goblin-orc-warboss), keeping its design: horned steel helmet, fur mantle, war horn, yellow loincloth."
+    },
+    {
+      "id": "gingerbread-man-a",
+      "concept": "GINGERBREAD MAN",
+      "width": 48,
+      "height": 72,
+      "seed": 51701,
+      "options": "@piece",
+      "subject": "Subject: Gingerbread Man, a small chunky cute living gingerbread cookie soldier with a huge round head about half of the figure's height and a short stubby cookie body: warm gingerbread brown #b86b34 with darker #7d4420 shading, a happy face piped in white royal icing #fff4ec with two round eyes and a wide smile, wavy white icing piping around the wrists and ankles, three round gumdrop buttons down the front in red, mint green and pink, a small red #e03a3e and white striped candy-cane spear held upright in the right hand, stubby rounded cookie arms and legs; simple shapes; clearly a cookie, not a person.",
+      "negative": "clothes, hat, armour, shield, crumbs",
+      "notes": "Bead border_marches-bzc.112: tier 1 of the Candy Kingdom, generated small like the Squire and padded into 56x80."
+    },
+    {
+      "id": "taffy-wrangler-a",
+      "concept": "TAFFY WRANGLER",
+      "width": 56,
+      "height": 80,
+      "seed": 51801,
+      "options": "@piece",
+      "subject": "Subject: Taffy Wrangler, a chunky cute stretchy cowpoke made of glossy strawberry pink pulled taffy #e2589b with darker #a8336c shading, with a huge round head about half of the figure's height: big round eyes and a cheeky grin, a wide-brimmed toffee brown #b86b34 cowboy hat, a white icing #fff4ec neckerchief, rubbery stretchy arms, the right arm raised high swinging a big looping lasso of pink and white striped pulled taffy over its head, short stubby legs with little toffee brown boots; simple shapes and very few details.",
+      "negative": "horse, gun, hemp rope, brown skin",
+      "notes": "Bead border_marches-bzc.112: tier 3 of the Candy Kingdom (Reel In)."
+    },
+    {
+      "id": "rock-candy-dragon-a",
+      "concept": "ROCK CANDY DRAGON",
+      "width": 88,
+      "height": 104,
+      "seed": 51901,
+      "fragments": "@creature",
+      "options": "@piece",
+      "subject": "Subject: Rock Candy Dragon, one very large chunky cute dragon of rock candy crystals, filling the whole width of the image: a big round head with big friendly eyes and a toothy smile, a chunky body of faceted sugar-glass teal #8fe3e8 crystals with #4fa9b3 shading and strawberry pink #e2589b facets, pink crystal spikes down its back, two big pale teal sugar-glass wings spread wide, a stubby tail with a crystal tip, four short sturdy legs; solid opaque colours.",
+      "negative": "rider, fire, rocks",
+      "notes": "Bead border_marches-bzc.112: tier 6 (giant) of the Candy Kingdom (Afters)."
+    },
+    {
+      "id": "taffy-wrangler-b",
+      "concept": "TAFFY WRANGLER",
+      "width": 56,
+      "height": 80,
+      "seed": 51802,
+      "options": "@piece",
+      "subject": "Subject: Taffy Wrangler, a chunky cute candy creature made entirely of glossy strawberry pink pulled taffy #e2589b with darker #a8336c shading, a soft stretchy candy person: a huge smooth round taffy head about half of the figure's height with a simple happy face, two dot eyes and a wide grin, no nose and no snout, a wide-brimmed toffee brown #b86b34 cowboy hat, a white icing #fff4ec neckerchief, long rubbery stretchy pink arms, the right arm raised high swinging a big lasso loop of pink and white striped taffy, short stubby pink legs; nothing worn but the hat and neckerchief; simple shapes.",
+      "negative": "pig, cow, snout, horse, gun, shirt, trousers",
+      "notes": "taffy-wrangler-a drew a pig cowpoke in brown clothes: the body named as taffy with no snout, clothes excluded."
+    },
+    {
+      "id": "rock-candy-dragon-b",
+      "concept": "ROCK CANDY DRAGON",
+      "width": 88,
+      "height": 104,
+      "seed": 51902,
+      "fragments": ["style", "camera-three-quarter", "light-south-west"],
+      "options": "@piece",
+      "subject": "Subject: Rock Candy Dragon, one very large chunky cute dragon built of rock candy, filling the whole width of the image, thick single-colour black outline, its head and body turned down and to the right, snout pointing to the bottom right: a big blocky head with big friendly eyes and a toothy smile, a body of big angular crystal chunks like rock candy on a stick, sharp flat facets each with one light and one shadow side, sugar-glass teal #8fe3e8 crystals shaded #4fa9b3 and strawberry pink #e2589b crystals shaded #a8336c, jagged pink crystal spikes down its back, two big pale teal faceted sugar-glass wings spread wide, four short sturdy legs, all four feet visible and lowest in the image; solid opaque colours; simple shapes.",
+      "negative": "rider, fire, rocks, smooth scales, pedestal, ground plate, platform, scenery, background, shadow on the ground",
+      "notes": "rock-candy-dragon-a faced south-west and had smooth scales: the creature layer (rounded rubbery shapes) dropped for an explicit outline, the facets and the south-east facing named."
+    },
+    {
+      "id": "taffy-wrangler-b-clean",
+      "concept": "TAFFY WRANGLER",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 56,
+      "height": 80,
+      "seed": 51803,
+      "edit": { "take": "taffy-wrangler-b#0" },
+      "subject": "Remove all ground: erase the round patch of green grass and brown soil under the figure's feet, leaving that area transparent, so the figure stands on a transparent background with nothing at all under it. Keep the pink taffy figure, its cowboy hat, neckerchief and striped lasso, its colours, the thick black outline and the art style exactly the same.",
+      "notes": "Ground-removal edit of taffy-wrangler-b#0."
+    },
+    {
+      "id": "peppermint-archer-a",
+      "concept": "PEPPERMINT ARCHER",
+      "width": 56,
+      "height": 80,
+      "seed": 52001,
+      "options": "@piece",
+      "subject": "Subject: Peppermint Archer, a chunky cute candy kid archer with a huge round head about half of the figure's height and a small body: a rosy smiling face with big eyes, a big round hood swirled candy-cane red #e03a3e and icing white #fff4ec like a peppermint candy, a short mint green #7fd6b5 tunic with #3f9a7c shading, a big red and white striped candy-cane bow held in the left hand with an arrow nocked, a quiver of candy-stick arrows on the back, white leggings and little red boots; simple shapes and very few details.",
+      "negative": "crossbow, green hood, sword, shield, cape",
+      "notes": "Bead border_marches-bzc.112: tier 2 of the Candy Kingdom (Sitting Ducks)."
+    },
+    {
+      "id": "sugarplum-a",
+      "concept": "SUGARPLUM",
+      "width": 56,
+      "height": 80,
+      "seed": 52101,
+      "options": "@piece",
+      "subject": "Subject: Sugarplum, a plump chunky cute sugarplum fairy hovering in the air, with a huge round head about half of her height: a round plum purple #8e3fa0 body like a sugared plum dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a little green plum stem and leaf on top of her head, two small lacy wings of white spun sugar, a lollipop wand with a pink and white swirl held up in the right hand with a few tiny pink sparkles, tiny stubby legs dangling; she floats with nothing under her and her feet are the lowest thing in the image; simple shapes.",
+      "negative": "skull, ghost, scary, witch hat, broom",
+      "notes": "Bead border_marches-bzc.112: tier 4 of the Candy Kingdom (the caster). Purple on the Sugarplum only (FACTION_CANDY 10.1)."
+    },
+    {
+      "id": "gummy-bear-a",
+      "concept": "GUMMY BEAR",
+      "width": 72,
+      "height": 88,
+      "seed": 52201,
+      "fragments": "@creature",
+      "options": "@piece",
+      "subject": "Subject: Gummy Bear, a huge chunky cute gummy bear sweet come to life, filling the whole width of the image: a big round head with small round ears, big round eyes and a wide friendly grin, a plump glossy strawberry red #e03a3e jelly body with darker #9c2229 shading and a few white shine highlights, a light crust of white sugar crystals on its head and shoulders, short stubby arms and legs, standing upright like a candy gummy bear; solid opaque colours.",
+      "negative": "fur, teddy bear, clothes",
+      "notes": "Bead border_marches-bzc.112: tier 5 (large) of the Candy Kingdom (Chewy)."
+    },
+    {
+      "id": "sugarplum-a-clean",
+      "concept": "SUGARPLUM",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "width": 56,
+      "height": 80,
+      "seed": 52102,
+      "edit": { "take": "sugarplum-a#0" },
+      "subject": "Remove all ground: erase the floating block of green grass and brown soil under the fairy, leaving that area transparent, so the fairy hovers on a transparent background with nothing at all under her. Keep the purple plum fairy, her leaf, wings and lollipop wand, her colours, the thick black outline and the art style exactly the same.",
+      "notes": "Ground-removal edit of sugarplum-a#0."
+    },
+    {
+      "id": "sugarplum-b",
+      "concept": "SUGARPLUM",
+      "width": 56,
+      "height": 80,
+      "seed": 52103,
+      "options": "@piece",
+      "subject": "Subject: Sugarplum, a big plump chunky cute sugarplum fairy hovering in the air, filling the whole width of the image: a huge round plum purple #8e3fa0 body like a sugared plum dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a little green plum stem and leaf on top, two lacy wings of white spun sugar, a lollipop wand with a pink and white swirl held up in the right hand, tiny stubby legs dangling; she floats with nothing at all under her and her feet are the lowest thing in the image; simple shapes.",
+      "negative": "grass block, ground tile, floating island, skull, ghost, witch hat, broom",
+      "notes": "sugarplum-a-clean is right but reads smaller than the tier 1 Gingerbread Man on the battle line-up: the same design asked to fill the canvas width, ground blocks excluded."
+    },
+    {
+      "id": "sugarplum-c",
+      "concept": "SUGARPLUM",
+      "width": 56,
+      "height": 80,
+      "seed": 52104,
+      "options": "@piece",
+      "subject": "Subject: Sugarplum, a big round plump chunky cute sugarplum fairy, as wide as the image and nearly as tall: a huge round plum purple #8e3fa0 head and a fat round plum body dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a green plum stem and leaf on top, two big lacy wings of white spun sugar spread wide to both sides, a big lollipop wand with a pink and white swirl held up in the right hand, short stubby legs; she hovers with nothing at all under her and her feet are the lowest thing in the image; simple shapes.",
+      "negative": "grass block, ground tile, floating island, skull, ghost, witch hat, thin, slender",
+      "notes": "Coordinator review: the tier 4 caster should have about the Taffy Wrangler's visual mass; plumper body and wings spread wide to fill the 56x80 canvas."
+    },
+    {
+      "id": "sugarplum-d",
+      "concept": "SUGARPLUM",
+      "width": 56,
+      "height": 80,
+      "seed": 52105,
+      "options": "@piece",
+      "subject": "Subject: Sugarplum, a big round plump chunky cute sugarplum fairy, as wide as the image and nearly as tall: a huge round plum purple #8e3fa0 head and a fat round plum body dusted with white sugar sparkles, darker #5e2470 shading, a big friendly face with rosy cheeks, a green plum stem and leaf on top, two big lacy wings of white spun sugar spread wide to both sides, a big lollipop wand with a pink and white swirl held up in the right hand, short stubby legs; she hovers with nothing at all under her and her feet are the lowest thing in the image; simple shapes.",
+      "negative": "grass block, ground tile, floating island, skull, ghost, witch hat, thin, slender",
+      "notes": "Second seed of sugarplum-c."
     }
   ],
   "outputs": [
@@ -114,6 +263,18 @@
     { "path": "public/assets/units/goblin-boomshaman.png", "from": "boomshaman-b#0", "width": 56, "height": 80 },
     { "path": "public/assets/portraits/goblin-boomshaman.png", "from": "boomshaman-b#0", "steps": [{ "op": "crop", "x": 4, "y": 2, "width": 48, "height": 48 }], "width": 48, "height": 48 },
     { "path": "public/assets/units/goblin-orc-warboss-giant.png", "from": "orc-warboss-giant-a#0", "width": 88, "height": 104 },
-    { "path": "public/assets/portraits/goblin-orc-warboss-giant.png", "from": "orc-warboss-giant-a#0", "steps": [{ "op": "crop", "x": 16, "y": 10, "width": 48, "height": 48 }], "width": 48, "height": 48 }
+    { "path": "public/assets/portraits/goblin-orc-warboss-giant.png", "from": "orc-warboss-giant-a#0", "steps": [{ "op": "crop", "x": 16, "y": 10, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/candy-gingerbread-man.png", "from": "gingerbread-man-a#0", "steps": [{ "op": "pad", "width": 56, "height": 80, "anchor": "bottom" }], "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/candy-gingerbread-man.png", "from": "gingerbread-man-a#0", "steps": [{ "op": "crop", "x": 0, "y": 2, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/candy-peppermint-archer.png", "from": "peppermint-archer-a#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/candy-peppermint-archer.png", "from": "peppermint-archer-a#0", "steps": [{ "op": "crop", "x": 4, "y": 6, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/candy-taffy-wrangler.png", "from": "taffy-wrangler-b-clean#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/candy-taffy-wrangler.png", "from": "taffy-wrangler-b-clean#0", "steps": [{ "op": "crop", "x": 2, "y": 6, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/candy-sugarplum.png", "from": "sugarplum-b#0", "width": 56, "height": 80 },
+    { "path": "public/assets/portraits/candy-sugarplum.png", "from": "sugarplum-b#0", "steps": [{ "op": "crop", "x": 4, "y": 4, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/candy-gummy-bear.png", "from": "gummy-bear-a#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/candy-gummy-bear.png", "from": "gummy-bear-a#0", "steps": [{ "op": "crop", "x": 12, "y": 6, "width": 48, "height": 48 }], "width": 48, "height": 48 },
+    { "path": "public/assets/units/candy-rock-candy-dragon.png", "from": "rock-candy-dragon-b#0", "width": 88, "height": 104 },
+    { "path": "public/assets/portraits/candy-rock-candy-dragon.png", "from": "rock-candy-dragon-b#0", "steps": [{ "op": "crop", "x": 36, "y": 8, "width": 48, "height": 48 }], "width": 48, "height": 48 }
   ]
 }

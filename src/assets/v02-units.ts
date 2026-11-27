@@ -80,6 +80,14 @@ const UNIT_ROWS: readonly Row[] = [
   ["goblin-boomshaman", "goblin", 56, 80, [72, 14, 32, 7, 47]],
   // The Orc Warboss redrawn at the tier 6 canvas (bead bzc.29).
   ["goblin-orc-warboss-giant", "goblin", 88, 104, [90, 24, 37, 7, 61]],
+  // The Candy Kingdom: new (set faction-units, bead bzc.112). The Gingerbread
+  // Man is a small take padded into 56x80; the Sugarplum hovers.
+  ["candy-gingerbread-man", "candy", 56, 80, [77, 11, 36, 10, 47]],
+  ["candy-peppermint-archer", "candy", 56, 80, [72, 17, 41, 16, 43]],
+  ["candy-taffy-wrangler", "candy", 56, 80, [68, 12, 47, 1, 53]],
+  ["candy-sugarplum", "candy", 56, 80, [68, 21, 36, 18, 39]],
+  ["candy-gummy-bear", "candy", 72, 88, [80, 22, 46, 17, 50]],
+  ["candy-rock-candy-dragon", "candy", 88, 104, [95, 32, 63, 17, 69]],
   // Strays and caretakers: imports from other Pulp Wars rosters.
   ["cult-imp", "neutral", 56, 80, [76, 22, 40, 10, 46]],
   ["cult-tentacle", "neutral", 56, 80, [76, 11, 44, 2, 53]],
