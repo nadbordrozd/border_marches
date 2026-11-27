@@ -80,7 +80,7 @@ export function townCue(faction: FactionId | null | undefined): SoundId | null {
  * them (src/core/game/sites.ts).
  */
 const NOTHING_HAPPENED =
-  /already|nothing more|no room|is empty|occupied|knows of no|weathered blank|admit heroes|nothing to teach|is locked/i;
+  /already|nothing more|no room|is empty|occupied|knows of no|weathered blank|admit heroes|nothing to teach|is locked|is blocked|tide is out|ink has run|come back tomorrow/i;
 
 /**
  * The family sound of a map object visit (a `site` event) or of a choice
@@ -101,9 +101,31 @@ export function siteCue(
     case "keymasters-tent":
     case "border-gate":
       return "site.gate";
+    // Waystones, and the sea.s crossings (bead bzc.151) until the naval
+    // sounds come.
     case "two-way-waystone":
     case "one-way-waystone":
+    case "ferry-landing":
+    case "whirlpool":
       return "site.waystone";
+    // A ship bought at a Shipwright sounds like a sale; arriving flags it.
+    case "shipwright":
+      return /new ship/.test(text)
+        ? "site.market"
+        : /flagged/.test(text)
+          ? "map.flag"
+          : null;
+    case "lighthouse":
+      return /flagged/.test(text) ? "map.flag" : "site.shrine";
+    case "flotsam":
+    case "sea-chest":
+    case "message-in-a-bottle":
+    case "shipwreck":
+    case "coral-grotto":
+    case "krakens-deep":
+      return "site.treasure";
+    case "castaway":
+      return /join/.test(text) ? "recruit" : "site.treasure";
     case "trading-post":
     case "tollhouse":
     case "windmill":
@@ -142,6 +164,8 @@ export function siteCue(
     case "stray-hut":
     case "caretaker-lodge":
     case "walrus-rookery":
+    case "pirate-cove":
+    case "siren-grotto":
       // Arriving flags the dwelling; a hire made there recruits.
       return /^Hired/.test(text)
         ? "recruit"

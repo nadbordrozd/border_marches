@@ -9,7 +9,9 @@ import {
   type ObjectTypeDef,
   type ObjectTypeId,
 } from "../../data/objectTypes.ts";
-import type { MapObject } from "../map/types.ts";
+import { MINES } from "../../data/economy.ts";
+import { SEA_PRODUCERS } from "../../data/sea-objects.ts";
+import type { MapObject, ResourceId } from "../map/types.ts";
 import type { GameState, SiteState } from "./types.ts";
 
 /** The catalogue type of a placed object (from `data.type`), or null. */
@@ -21,6 +23,47 @@ export function objectTypeOf(obj: MapObject): ObjectTypeId | null {
 export function objectTypeDef(obj: MapObject): ObjectTypeDef | null {
   const t = objectTypeOf(obj);
   return t === null ? null : OBJECT_TYPES[t];
+}
+
+/**
+ * The resource a mine-kind object yields: its `data.resource`, or a sea
+ * producer's own (a Pearl Bed's essence, a Fishing Village's gold; bead
+ * bzc.151). Undefined when neither names one.
+ */
+export function mineResourceOf(obj: MapObject): ResourceId | undefined {
+  const r = obj.data["resource"];
+  if (r === "wood" || r === "ore" || r === "essence" || r === "gold") return r;
+  const t = objectTypeOf(obj);
+  return t === "pearl-bed" || t === "fishing-village"
+    ? SEA_PRODUCERS[t].resource
+    : undefined;
+}
+
+/**
+ * What a flagged mine-kind object pays its owner each day: its kind's
+ * yield (MINES) times `data.yield` (a Haunted Mine's 2), or a sea
+ * producer's own yield (bead bzc.151).
+ */
+export function mineIncome(
+  obj: MapObject | undefined,
+  resource: ResourceId,
+): number {
+  const t = obj === undefined ? null : objectTypeOf(obj);
+  if (t === "pearl-bed" || t === "fishing-village")
+    return SEA_PRODUCERS[t].income;
+  const y = typeof obj?.data["yield"] === "number" ? obj.data["yield"] : 1;
+  return MINES[resource].income * y;
+}
+
+/** A mine-kind object's name: a sea producer's own, else its kind's. */
+export function mineName(
+  obj: MapObject | undefined,
+  resource: ResourceId,
+): string {
+  const t = obj === undefined ? null : objectTypeOf(obj);
+  return t === "pearl-bed" || t === "fishing-village"
+    ? OBJECT_TYPES[t].name
+    : MINES[resource].name;
 }
 
 /** The absolute week of a day (1-based; day 1 of each week starts one). */

@@ -18,7 +18,8 @@ import {
 import { DIRECTIONS_8, inBounds } from "../core/map/types.ts";
 import type { ResourceId } from "../core/map/types.ts";
 import { getCreature, isCreatureId } from "../data/creatures.ts";
-import { MINES, RESOURCE_IDS } from "../data/economy.ts";
+import { RESOURCE_IDS } from "../data/economy.ts";
+import { mineIncome } from "../core/game/site-state.ts";
 import { townTree } from "../data/factions.ts";
 import type { Resources } from "../data/types.ts";
 
@@ -164,8 +165,7 @@ export function incomeBreakdown(
   for (const m of Object.values(state.mines)) {
     if (m.owner !== player) continue;
     const obj = state.map.objects.find((o) => o.id === m.id);
-    const y = typeof obj?.data["yield"] === "number" ? obj.data["yield"] : 1;
-    mines[m.resource] += MINES[m.resource].income * y;
+    mines[m.resource] += mineIncome(obj, m.resource);
   }
   const heroes = zero();
   for (const r of RESOURCE_IDS)

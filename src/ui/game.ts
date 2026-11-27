@@ -32,6 +32,9 @@ import {
   moveHeroAlong,
   sightRadius,
   takeChest,
+  chestTerms,
+  mineIncome,
+  mineName,
   townsOf,
   xpForLevel,
 } from "../core/game/index.ts";
@@ -50,6 +53,7 @@ import { createBattleResolver } from "../core/battle/resolver.ts";
 import type { MapObject, MapObjectKind } from "../core/map/types.ts";
 import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { getHeroClass } from "../data/hero.ts";
+import { OBJECT_TYPES } from "../data/objectTypes.ts";
 import { MAX_HEROES, playerColour } from "../data/players.ts";
 import { createMapView, ZOOM_STEPS } from "../render/map/map-view.ts";
 import { dailyMaxOf, isSeaCell } from "../core/game/naval.ts";
@@ -145,7 +149,13 @@ import {
   type HeroScreenHost,
 } from "./hero-screen.ts";
 import { openMeeting } from "./meeting.ts";
-import { heroCard, mapCard, mapCardView, townCard } from "./map-card.ts";
+import {
+  heroCard,
+  mapCard,
+  mapCardView,
+  objectPictureKey,
+  townCard,
+} from "./map-card.ts";
 import { Minimap } from "./minimap.ts";
 import { glyph, heroRow, townRow, type SideGlyph } from "./side-panel.ts";
 import { iconElement } from "./icons.ts";
@@ -1081,9 +1091,14 @@ class GameScreen {
       if (obj.kind === "town") owner = this.state.towns[obj.id]?.owner ?? null;
       else if (obj.kind === "mine")
         owner = this.state.mines[obj.id]?.owner ?? null;
-      else if (obj.kind === "dwelling")
+      else if (
+        obj.kind === "dwelling" ||
+        // Flagged sea sites: the Lighthouse and the Shipwright (bzc.151).
+        obj.data["type"] === "lighthouse" ||
+        obj.data["type"] === "shipwright"
+      )
         owner = this.state.sites[obj.id]?.owner ?? null;
-      if (owner === null) continue;
+      if (owner === null || owner === undefined) continue;
       out.push({
         x: obj.x,
         y: obj.y,
@@ -1736,18 +1751,17 @@ class GameScreen {
         case "mine-flagged": {
           const mine = this.state.mines[e.mineId];
           if (mine === undefined) break;
-          const def = MINES[mine.resource];
+          // A sea producer has its own name and yield (bead bzc.151).
+          const obj = this.state.map.objects.find((o) => o.id === e.mineId);
+          const name = mineName(obj, mine.resource);
           // The flag going up is the sound (map.flag.raise).
           this.flagRaised(e.mineId);
           if (e.owner === this.human) {
             this.noteAtHero(
-              `${def.name} claimed: +${def.income} ${mine.resource} per day`,
+              `${name} claimed: +${mineIncome(obj, mine.resource)} ${mine.resource} per day`,
             );
           } else if (this.aiRunning) {
-            this.note(
-              `${playerColour(e.owner).name} flags a ${def.name}`,
-              "quiet",
-            );
+            this.note(`${playerColour(e.owner).name} flags a ${name}`, "quiet");
           }
           break;
         }
@@ -2000,14 +2014,24 @@ class GameScreen {
 
   private async chest(heroId: string, pickupId: string): Promise<void> {
     playSound("site.treasure");
+    // A Sea Chest (bead bzc.151) asks the same at its own prices.
+    const obj = this.state.map.objects.find((o) => o.id === pickupId);
+    const sea = obj?.data["type"] === "sea-chest";
+    const terms =
+      obj === undefined ? { gold: CHEST.gold, xp: CHEST.xp } : chestTerms(obj);
+    const seaPicture = sea && obj !== undefined ? objectPictureKey(obj) : null;
     const choice = await modal<"gold" | "xp">({
-      title: CHEST.name,
-      picture: img("treasure", "gm-chest-img", 2),
-      sentence:
-        "You find a chest of the old warlords. Take the gold, or study the maps and trophies inside?",
+      title: sea ? OBJECT_TYPES["sea-chest"].name : CHEST.name,
+      picture:
+        seaPicture !== null
+          ? img(seaPicture, "gm-chest-img", 2)
+          : img("treasure", "gm-chest-img", 2),
+      sentence: sea
+        ? "You haul a barnacled sea chest aboard. Take the coins, or read the captain's log and charts inside?"
+        : "You find a chest of the old warlords. Take the gold, or study the maps and trophies inside?",
       buttons: [
-        { label: `${CHEST.gold} gold`, value: "gold", primary: true },
-        { label: `${CHEST.xp} experience`, value: "xp", key: "X" },
+        { label: `${terms.gold} gold`, value: "gold", primary: true },
+        { label: `${terms.xp} experience`, value: "xp", key: "X" },
       ],
     });
     const events = this.run(takeChest(this.state, heroId, pickupId, choice));

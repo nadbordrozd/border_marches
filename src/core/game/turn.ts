@@ -3,7 +3,7 @@
  * the last one the next day starts with the global upkeep (income, weekly
  * growth, tavern refresh, movement, build flags). ECONOMY.md section 3.
  */
-import { MINES } from "../../data/economy.ts";
+import { mineIncome } from "./site-state.ts";
 import { STABLES_MP } from "../../data/objectTypes.ts";
 import { TOWNLESS_DAYS_LIMIT } from "../../data/players.ts";
 import type { Resources } from "../../data/types.ts";
@@ -77,10 +77,10 @@ export function dailyIncome(
   }
   for (const mine of Object.values(state.mines)) {
     if (mine.owner !== player) continue;
-    // A Haunted Mine doubles its kind's yield (data.yield, bead bzc.13).
+    // A Haunted Mine doubles its kind's yield (data.yield, bead bzc.13); a
+    // sea producer pays its own (bead bzc.151).
     const obj = state.map.objects.find((o) => o.id === mine.id);
-    const y = typeof obj?.data["yield"] === "number" ? obj.data["yield"] : 1;
-    out[mine.resource] += MINES[mine.resource].income * y;
+    out[mine.resource] += mineIncome(obj, mine.resource);
   }
   return out;
 }

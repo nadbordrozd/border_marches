@@ -17,6 +17,7 @@ import {
   OBJECT_TYPE_IDS,
   type ObjectTypeId,
 } from "../../../src/data/objectTypes.ts";
+import { SEA_OBJECT_TYPE_IDS } from "../../../src/data/sea-objects.ts";
 
 /** Fixed seeds per size (default players per size). */
 // Bead bzc.102: the denser treasure clusters move the rare big sites
@@ -118,6 +119,8 @@ describe("denser maps (bzc.50)", { timeout: HEAVY_TIMEOUT }, () => {
           !authored.includes(t) &&
           !desert.includes(t) &&
           !candy.includes(t) &&
+          // The sea objects (bead bzc.151): only a naval map's sea fill.
+          !(SEA_OBJECT_TYPE_IDS as readonly string[]).includes(t) &&
           !(size === "S" && t === "keepers-vault") &&
           !(size === "S" && rareOnS.includes(t)) &&
           !seen.has(t),

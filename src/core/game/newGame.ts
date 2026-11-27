@@ -33,6 +33,7 @@ import { createRng, deriveSeed } from "../rng.ts";
 import { fixDailyMaxima, settleNavalState } from "./naval.ts";
 import { drawFromPool, newHeroState, refreshTaverns } from "./players.ts";
 import { weeklyGrowth } from "./progression.ts";
+import { mineResourceOf } from "./site-state.ts";
 import { prepareStarts } from "./starts.ts";
 import { addToArmy, emptyArmy, revealAll } from "./state.ts";
 import type {
@@ -331,8 +332,9 @@ export function newGame(
         break;
       }
       case "mine": {
-        const resource = obj.data["resource"];
-        if (!isResourceId(resource)) {
+        // A sea producer names its resource by its type (bead bzc.151).
+        const resource = mineResourceOf(obj);
+        if (resource === undefined || !isResourceId(resource)) {
           throw new Error(`mine ${obj.id}: bad resource`);
         }
         state.mines[obj.id] = { id: obj.id, resource, owner: null };

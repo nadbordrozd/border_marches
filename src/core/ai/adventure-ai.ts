@@ -1275,6 +1275,11 @@ export class AdventureAi implements PlayerController {
         }
         // A Hag's Cauldron's brew: two in three bless, worth the risk.
         else if (verb === "drink") v = 300;
+        // Sirens' Rock (bead bzc.151): listen while the experience is worth
+        // more than the creatures (objectValueFor weighs them). Buying a
+        // ship is the naval AI's call (NAVAL 12, bead 8): never here.
+        else if (verb === "listen")
+          v = objectValueFor(state, turn.player, obj, hero.id) > 0 ? 350 : 0;
         else if (verb === "drill") {
           // A Drill (bead bzc.32) for the army's creatures, when the
           // treasury keeps a week of recruiting after it.
@@ -3361,7 +3366,11 @@ export class AdventureAi implements PlayerController {
         const n = this.newCells(turn, Number(exit[0]), Number(exit[1]), 4);
         return n < MIN_NEW_CELLS * 2 ? 0 : n * EXPLORE_CELL * explore * 0.7;
       }
+      // Sea crossings (bead bzc.151) are travel, planned by the naval AI
+      // (NAVAL 12, bead 8), never a prize; a whirlpool.s loss is a cost.
       case "two-way-waystone":
+      case "ferry-landing":
+      case "whirlpool":
       case "sanctuary":
       case "sign":
       case "trading-post":

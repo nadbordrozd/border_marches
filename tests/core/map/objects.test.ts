@@ -20,6 +20,7 @@ import {
   OBJECT_TYPES,
   type ObjectTypeId,
 } from "../../../src/data/objectTypes.ts";
+import { SEA_OBJECT_TYPE_IDS } from "../../../src/data/sea-objects.ts";
 import { GUARD_CREATURE_IDS } from "../../../src/data/strays.ts";
 import { getCreature } from "../../../src/data/creatures.ts";
 import { newGame } from "../../../src/core/game/index.ts";
@@ -59,8 +60,10 @@ describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
     }
     // The Mystery Bag (bead bzc.105) is placed since bead bzc.110.
     const authored: ObjectTypeId[] = ["event-tile", "sign"];
+    // The sea objects (bead bzc.151) wait for the sea fill of a naval map.
+    const sea: readonly string[] = SEA_OBJECT_TYPE_IDS;
     for (const t of Object.keys(OBJECT_TYPES) as ObjectTypeId[]) {
-      if (authored.includes(t)) continue;
+      if (authored.includes(t) || sea.includes(t)) continue;
       expect(seen, t).toContain(t);
     }
   });

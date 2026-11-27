@@ -64,6 +64,19 @@ import {
   type SkillDef,
 } from "../../data/skills.ts";
 import { riddleAt, type Riddle } from "../../data/riddles.ts";
+import { SHIP_PRICE } from "../../data/naval.ts";
+import { SEA_HOMES } from "../../data/sea.ts";
+import {
+  CASTAWAY_XP,
+  FERRY_MP,
+  LIGHTHOUSE_SIGHT,
+  SEA_CHEST,
+  SEA_DWELLINGS,
+  SEA_OBJECT_TYPE_IDS,
+  SIRENS_ROCK_LOSS_DIVISOR,
+  SIRENS_ROCK_XP,
+  WHIRLPOOL_SAFE_RANK,
+} from "../../data/sea-objects.ts";
 import { STRAY_HOMES } from "../../data/strays.ts";
 import type {
   CreatureId,
@@ -85,7 +98,16 @@ import {
   reforge,
 } from "./forge.ts";
 import { maxMana, schoolRank, vowRestrictions } from "./effects.ts";
+import { dockOccupant } from "./harbour.ts";
 import { gainXp, skillBarred, vowBarsCreature } from "./hero.ts";
+import {
+  addShip,
+  isAfloat,
+  isSeaCell,
+  seafaringRank,
+  shipAt,
+  shipOfHero,
+} from "./naval.ts";
 import { heroByDef, newHeroState, startingArmy } from "./players.ts";
 import { xpForLevel } from "./progression.ts";
 import { canAfford, subtractResources } from "./resources.ts";
@@ -442,13 +464,22 @@ export function dwellingOffer(
   state: GameState,
   obj: MapObject,
 ): { creature: CreatureId; weekly: number; cost: ResourceAmounts } | null {
-  const c = obj.data["creature"];
+  const t = objectTypeOf(obj);
+  // A sea dwelling recruits its own creature (bead bzc.151).
+  const c =
+    obj.data["creature"] ??
+    (t === "pirate-cove" || t === "siren-grotto" ? SEA_DWELLINGS[t] : null);
   if (!isCreatureId(c)) return null;
   const def = getCreature(c);
   // A dwelling with its own terms (a Walrus Rookery, bead bzc.87).
   const hire = obj.data["hire"];
   if (typeof hire === "number") {
     return { creature: c, weekly: num(obj, "weekly", 1), cost: { gold: hire } };
+  }
+  // Corsairs and Sirens (NAVAL 4.4): their stock and price in SEA_HOMES.
+  const sea = SEA_HOMES[c as keyof typeof SEA_HOMES];
+  if (sea !== undefined && sea.hire > 0) {
+    return { creature: c, weekly: sea.weekly, cost: { gold: sea.hire } };
   }
   const home = STRAY_HOMES[c as keyof typeof STRAY_HOMES];
   if (home !== undefined) {
@@ -471,6 +502,8 @@ const DWELLING_TYPES: readonly string[] = [
   "stray-hut",
   "caretaker-lodge",
   "walrus-rookery",
+  "pirate-cove",
+  "siren-grotto",
 ];
 
 /** The map dwelling (outpost, stray hut, lodge) whose entrance the hero is on. */
@@ -797,6 +830,183 @@ function sweetShopOptions(
 }
 
 // ---------------------------------------------------------------------------
+// The sea (bead bzc.151, docs/design/NAVAL.md 5)
+
+/** Whether a catalogue type is one of the twenty sea and coastal objects. */
+export function isSeaObjectType(t: ObjectTypeId | null): boolean {
+  return t !== null && (SEA_OBJECT_TYPE_IDS as readonly string[]).includes(t);
+}
+
+/** Creatures a stack of the hero's army loses (army slot `slot`). */
+export interface StackLoss {
+  readonly slot: number;
+  readonly creature: CreatureId;
+  readonly lost: number;
+}
+
+/** "3 Goblins, 1 Wolf". */
+export function lossText(losses: readonly StackLoss[]): string {
+  return losses
+    .map((l) => {
+      const d = getCreature(l.creature);
+      return `${l.lost} ${l.lost === 1 ? d.name : d.plural}`;
+    })
+    .join(", ");
+}
+
+function applyLosses(hero: HeroState, losses: readonly StackLoss[]): void {
+  for (const l of losses) {
+    const s = hero.army[l.slot];
+    if (s === null || s === undefined) continue;
+    const left = s.count - l.lost;
+    hero.army[l.slot] = left > 0 ? { ...s, count: left } : null;
+  }
+}
+
+/**
+ * What listening at Sirens' Rock costs (NAVAL 5.4): every stack loses a
+ * tenth of its creatures, rounded down (stacks under ten lose none). The
+ * card shows these exact numbers before the hero listens.
+ */
+export function sirensRockLosses(hero: HeroState): StackLoss[] {
+  const out: StackLoss[] = [];
+  hero.army.forEach((s, slot) => {
+    if (s === null) return;
+    const lost = Math.floor(s.count / SIRENS_ROCK_LOSS_DIVISOR);
+    if (lost > 0) out.push({ slot, creature: s.creature, lost });
+  });
+  return out;
+}
+
+/**
+ * What a whirlpool takes from the hero's army (NAVAL 5.6): its weakest
+ * stack (the lowest stack fight value, the first slot of equals, RULES_V2
+ * 0.2) loses half its creatures, rounded down; nothing with Seafaring rank
+ * 2 or more, or when that half rounds to none. The AI reads it as a cost.
+ */
+export function whirlpoolLoss(hero: HeroState): StackLoss | null {
+  if (seafaringRank(hero) >= WHIRLPOOL_SAFE_RANK) return null;
+  let pick: { slot: number; fv: number; count: number } | null = null;
+  let creature: CreatureId | null = null;
+  for (let slot = 0; slot < hero.army.length; slot++) {
+    const s = hero.army[slot];
+    if (s === null || s === undefined) continue;
+    const fv = s.count * getCreature(s.creature).fightValue;
+    if (pick === null || fv < pick.fv) {
+      pick = { slot, fv, count: s.count };
+      creature = s.creature;
+    }
+  }
+  if (pick === null || creature === null) return null;
+  const lost = Math.floor(pick.count / 2);
+  return lost > 0 ? { slot: pick.slot, creature, lost } : null;
+}
+
+/** A fight value lost, for the AI's sums. */
+export function lossFv(losses: readonly StackLoss[]): number {
+  return losses.reduce(
+    (n, l) => n + l.lost * getCreature(l.creature).fightValue,
+    0,
+  );
+}
+
+/**
+ * A Shipwright's dock (NAVAL 2.2): the sea cell the generator fixed in
+ * `data.dock`, else the lowest-index sea cell next to the building.
+ * Null when none is a sea cell.
+ */
+export function shipwrightDock(
+  state: GameState,
+  obj: MapObject,
+): { x: number; y: number } | null {
+  const { map } = state;
+  const d = obj.data["dock"];
+  if (Array.isArray(d) && typeof d[0] === "number" && typeof d[1] === "number")
+    return isSeaCell(map, d[0], d[1]) ? { x: d[0], y: d[1] } : null;
+  const cells: Array<[number, number]> = [[obj.x, obj.y], ...obj.blocked];
+  let best: number | null = null;
+  for (const [cx, cy] of cells)
+    for (let dy = -1; dy <= 1; dy++)
+      for (let dx = -1; dx <= 1; dx++) {
+        const x = cx + dx;
+        const y = cy + dy;
+        if (!isSeaCell(map, x, y)) continue;
+        const i = y * map.width + x;
+        if (best === null || i < best) best = i;
+      }
+  return best === null
+    ? null
+    : { x: best % map.width, y: Math.floor(best / map.width) };
+}
+
+/** Why the hero cannot buy a ship at this Shipwright now (null: it can). */
+export function shipwrightRefusal(
+  state: GameState,
+  hero: HeroState,
+  obj: MapObject,
+): string | null {
+  if (siteOf(state, obj.id).owner !== hero.owner)
+    return "the Shipwright must fly your flag";
+  const dock = shipwrightDock(state, obj);
+  if (dock === null) return "no dock";
+  // The town Shipyard's rule (bead bzc.150): a ship, hero, sea guard,
+  // pickup or entrance keeps a new ship off the dock.
+  if (dockOccupant(state, dock) !== null) return "the dock is taken";
+  const p = findPlayer(state, hero.owner);
+  if (p === undefined || !canAfford(p.resources, SHIP_PRICE))
+    return "not enough resources";
+  return null;
+}
+
+/** A Castaway's strays (data.creature and data.count), or null. */
+export function castawayStack(
+  obj: MapObject,
+): { creature: CreatureId; count: number } | null {
+  const c = obj.data["creature"];
+  const n = num(obj, "count", 0);
+  return isCreatureId(c) && n > 0 ? { creature: c, count: n } : null;
+}
+
+/** What a Message in a Bottle points at (NAVAL 5.6). */
+export type BottleTarget =
+  | {
+      readonly kind: "cache";
+      readonly id: string;
+      readonly area: { x: number; y: number; w: number; h: number };
+    }
+  | { readonly kind: "piece"; readonly id: string; x: number; y: number };
+
+/**
+ * What a Message in a Bottle points at, seeded by the game and the bottle
+ * (the Roadside Inn's rumour, free): the 5x5 area round one buried cache
+ * still in the ground; with none left, the cell of a loose Marvel piece
+ * still on the map; null when there is neither.
+ */
+export function bottleTarget(
+  state: GameState,
+  obj: MapObject,
+): BottleTarget | null {
+  const rng = createRng(deriveSeed(state.seed, `bottle:${obj.id}`));
+  const caches = state.map.objects.filter(
+    (o) => o.data["type"] === "buried-cache" && !isGone(state, o),
+  );
+  if (caches.length > 0) {
+    const c = rng.pick(caches);
+    const x0 = c.x - 2 + rng.int(0, 2) - 1;
+    const y0 = c.y - 2 + rng.int(0, 2) - 1;
+    return { kind: "cache", id: c.id, area: { x: x0, y: y0, w: 5, h: 5 } };
+  }
+  const pieces = state.map.objects.filter((o) => {
+    if (o.data["type"] !== "loose-artifact" || isGone(state, o)) return false;
+    const a = findArtifact(str(o, "artifact"));
+    return a !== undefined && "pieceOf" in a && a.pieceOf !== undefined;
+  });
+  if (pieces.length === 0) return null;
+  const p = rng.pick(pieces);
+  return { kind: "piece", id: p.id, x: p.x, y: p.y };
+}
+
+// ---------------------------------------------------------------------------
 // Visiting
 
 function used(state: GameState, obj: MapObject, hero: HeroState): boolean {
@@ -891,7 +1101,9 @@ export function siteOptions(
     case "faction-outpost":
     case "stray-hut":
     case "caretaker-lodge":
-    case "walrus-rookery": {
+    case "walrus-rookery":
+    case "pirate-cove":
+    case "siren-grotto": {
       const offer = dwellingOffer(state, obj);
       if (offer === null || !lodgeOpen(state, obj, hero.owner)) break;
       if (siteOf(state, obj.id).owner !== hero.owner) break;
@@ -962,6 +1174,26 @@ export function siteOptions(
       if (used(state, obj, hero)) break;
       out.push({ id: "drink", label: "Drink the brew" });
       break;
+    // Sea and coastal objects (bead bzc.151).
+    case "shipwright": {
+      if (siteOf(state, obj.id).owner !== hero.owner) break;
+      const why = shipwrightRefusal(state, hero, obj);
+      out.push({
+        id: "ship",
+        label: `Buy a ship for ${prizeText(SHIP_PRICE)}`,
+        ...(why !== null ? { disabled: why } : {}),
+      });
+      break;
+    }
+    case "sirens-rock": {
+      if (used(state, obj, hero)) break;
+      const losses = sirensRockLosses(hero);
+      out.push({
+        id: "listen",
+        label: `Listen: +${SIRENS_ROCK_XP} experience${losses.length === 0 ? ", no losses" : `, lose ${lossText(losses)}`}`,
+      });
+      break;
+    }
     case "sphinx":
       if (used(state, obj, hero)) break;
       sphinxRiddle(obj, hero).answers.forEach((a, i) => {
@@ -1158,7 +1390,9 @@ export function visitSite(
     case "faction-outpost":
     case "stray-hut":
     case "caretaker-lodge":
-    case "walrus-rookery": {
+    case "walrus-rookery":
+    case "pirate-cove":
+    case "siren-grotto": {
       if (t === "caretaker-lodge" && !lodgeOpen(state, obj, hero.owner)) {
         const q = questOf(obj);
         const missing = q === null ? null : questMissing(state, hero, q);
@@ -1356,11 +1590,13 @@ export function visitSite(
           : "Sweet Shop: take one candied potion free (one a week per hero).",
       );
       return null;
-    // --- Buffs ----------------------------------------------------------
+    // --- Buffs (the Buoy and Mermaid Rock are the sea.s, bead bzc.151) ---
     case "rally-camp":
-    case "wishing-well": {
+    case "wishing-well":
+    case "buoy":
+    case "mermaid-rock": {
       const added = addBuff(hero, t);
-      const what = t === "rally-camp" ? "+1 Morale" : "+1 Luck";
+      const what = t === "rally-camp" || t === "buoy" ? "+1 Morale" : "+1 Luck";
       say(
         events,
         hero,
@@ -1487,7 +1723,10 @@ export function visitSite(
     case "sunken-tomb":
     case "gingerbread-cottage":
     case "brimstone-pit":
-    case "drowned-temple": {
+    case "drowned-temple":
+    case "shipwreck":
+    case "coral-grotto":
+    case "krakens-deep": {
       if (s0.done === true) {
         say(events, hero, obj, `${def.name}: already plundered.`);
         return null;
@@ -1708,6 +1947,181 @@ export function visitSite(
         str(obj, "text") || "The sign is weathered blank.",
       );
       return null;
+    // --- Sea and coastal objects (bead bzc.151, NAVAL.md 5) ----------------
+    case "shipwright": {
+      const s = siteFor(state, obj.id);
+      const flagged = s.owner !== hero.owner;
+      s.owner = hero.owner;
+      const dock = shipwrightDock(state, obj);
+      offer(
+        `Shipwright${flagged ? " flagged" : ""}: ${
+          dock === null
+            ? "it has no dock to build at."
+            : `a ship for ${prizeText(SHIP_PRICE)}, built at the dock (${dock.x}, ${dock.y}).`
+        }`,
+      );
+      return null;
+    }
+    case "lighthouse": {
+      const s = siteFor(state, obj.id);
+      const flagged = s.owner !== hero.owner;
+      s.owner = hero.owner;
+      if (player !== undefined)
+        revealDisc(state.map, player.explored, obj.x, obj.y, LIGHTHOUSE_SIGHT);
+      say(
+        events,
+        hero,
+        obj,
+        flagged
+          ? "Lighthouse flagged: the sea around it is revealed, and your heroes afloat sail 200 farther each day (at most three lighthouses count)."
+          : "Lighthouse: the keeper trims the lamp; the sea around it is revealed.",
+      );
+      return null;
+    }
+    case "sirens-rock": {
+      if (already) break;
+      const losses = sirensRockLosses(hero);
+      offer(
+        `Sirens' Rock: the song promises ${SIRENS_ROCK_XP} experience; ${
+          losses.length === 0
+            ? "no creature of your army would follow it"
+            : `${lossText(losses)} would follow it into the sea`
+        }. Listen, or sail on for nothing.`,
+      );
+      return null;
+    }
+    case "shrine-of-the-tides": {
+      if (already) break;
+      const spell = str(obj, "spell");
+      if (spell === "") {
+        say(events, hero, obj, "Shrine of the Tides: the tide is out.");
+        return null;
+      }
+      if (hero.pages.includes(spell)) {
+        say(
+          events,
+          hero,
+          obj,
+          `Shrine of the Tides: the hero already knows ${spellName(spell)}.`,
+        );
+        return null;
+      }
+      markUsed(state, obj, hero);
+      say(
+        events,
+        hero,
+        obj,
+        `Shrine of the Tides: the hero ${teachSpell(hero, spell)}.`,
+      );
+      return null;
+    }
+    case "ferry-landing":
+    case "whirlpool":
+      teleport(state, hero, obj, events);
+      return null;
+    case "flotsam": {
+      const p = prizeOf(obj);
+      markUsed(state, obj, hero);
+      say(
+        events,
+        hero,
+        obj,
+        `Flotsam: ${grantPrize(state, hero, Object.keys(p).length > 0 ? p : { wood: 5 }, events)}.`,
+      );
+      return null;
+    }
+    case "sea-chest": {
+      const a = str(obj, "artifact");
+      if (a === "") {
+        // Gold or experience: the player chooses (takeChest).
+        events.push({ type: "chest-offer", heroId: hero.id, pickupId: obj.id });
+        return null;
+      }
+      if (!canCarry(hero, a)) {
+        say(
+          events,
+          hero,
+          obj,
+          `Sea Chest: no room in the backpack for ${findArtifact(a)?.name ?? a}.`,
+        );
+        return null;
+      }
+      markUsed(state, obj, hero);
+      const gold = num(obj, "gold", SEA_CHEST.richGold);
+      say(
+        events,
+        hero,
+        obj,
+        `Sea Chest: ${grantPrize(state, hero, { artifacts: [a], gold }, events)}.`,
+      );
+      return null;
+    }
+    case "castaway": {
+      const stack = castawayStack(obj);
+      const barred =
+        stack === null ? null : vowBarsCreature(hero, stack.creature);
+      markUsed(state, obj, hero);
+      if (
+        stack !== null &&
+        barred === null &&
+        addToArmy(hero.army, stack.creature, stack.count)
+      ) {
+        const d = getCreature(stack.creature);
+        say(
+          events,
+          hero,
+          obj,
+          `Castaway: ${stack.count} ${stack.count === 1 ? d.name : d.plural} climb aboard and join the army.`,
+        );
+        return null;
+      }
+      gainXp(hero, CASTAWAY_XP, events);
+      say(
+        events,
+        hero,
+        obj,
+        `Castaway: ${barred !== null ? `${barred}, so ` : stack === null ? "" : "no room in the army, so "}the survivors are set ashore; their tales give +${CASTAWAY_XP} experience.`,
+      );
+      return null;
+    }
+    case "message-in-a-bottle": {
+      markUsed(state, obj, hero);
+      const target = bottleTarget(state, obj);
+      if (target === null) {
+        say(
+          events,
+          hero,
+          obj,
+          "Message in a Bottle: the ink has run; nothing can be read.",
+        );
+        return null;
+      }
+      if (target.kind === "cache") {
+        const a = target.area;
+        if (player !== undefined)
+          revealDisc(state.map, player.explored, a.x + 2, a.y + 2, 3);
+        say(
+          events,
+          hero,
+          obj,
+          `Message in a Bottle: a cache lies buried within the 5x5 area from (${a.x}, ${a.y}) to (${a.x + 4}, ${a.y + 4}).`,
+          undefined,
+          a,
+        );
+        return null;
+      }
+      if (player !== undefined)
+        revealDisc(state.map, player.explored, target.x, target.y, 2);
+      say(
+        events,
+        hero,
+        obj,
+        `Message in a Bottle: a Marvel piece waits at (${target.x}, ${target.y}).`,
+        undefined,
+        { x: target.x, y: target.y, w: 1, h: 1 },
+      );
+      return null;
+    }
     default:
       return null;
   }
@@ -1759,30 +2173,96 @@ function teleport(
   obj: MapObject,
   events: GameEvent[],
 ): void {
+  const t = objectTypeOf(obj);
   let to: { x: number; y: number } | undefined;
-  if (objectTypeOf(obj) === "one-way-waystone") {
+  if (t === "one-way-waystone") {
     const exit = obj.data["exit"] as [number, number] | undefined;
     if (exit !== undefined) to = { x: exit[0], y: exit[1] };
   } else {
-    const pair = str(obj, "pair");
-    const twin = state.map.objects.find(
-      (o) =>
-        o.id !== obj.id &&
-        o.data["type"] === "two-way-waystone" &&
-        o.data["pair"] === pair,
-    );
-    if (twin !== undefined) to = { x: twin.x, y: twin.y };
+    to = twinOf(state, obj) ?? undefined;
   }
   if (to === undefined) return;
-  if (heroAt(state, to.x, to.y) !== undefined) {
-    say(events, hero, obj, "The waystone's far side is occupied.");
+  // Sea and coastal crossings (bead bzc.151, NAVAL 5.4 and 5.6).
+  const ship = t === "whirlpool" ? shipOfHero(state, hero) : undefined;
+  if (t === "whirlpool" && ship === undefined) return;
+  if (t === "ferry-landing" && isAfloat(state, hero)) return;
+  if (
+    heroAt(state, to.x, to.y) !== undefined ||
+    (t === "whirlpool" && shipAt(state, to.x, to.y) !== undefined)
+  ) {
+    say(
+      events,
+      hero,
+      obj,
+      t === "whirlpool"
+        ? "Whirlpool: its twin is blocked, and the ship spins out where it went in."
+        : t === "ferry-landing"
+          ? "Ferry Landing: the far landing is occupied."
+          : "The waystone's far side is occupied.",
+    );
     return;
+  }
+  if (t === "ferry-landing") {
+    if (hero.mp < FERRY_MP) {
+      say(
+        events,
+        hero,
+        obj,
+        `Ferry Landing: the ferry needs ${FERRY_MP} movement points; come back tomorrow.`,
+      );
+      return;
+    }
+    hero.mp -= FERRY_MP;
   }
   hero.x = to.x;
   hero.y = to.y;
+  if (ship !== undefined) {
+    // The hero comes out aboard: its ship goes with it (NAVAL 16.4).
+    ship.x = to.x;
+    ship.y = to.y;
+  }
   const p = findPlayer(state, hero.owner);
   if (p !== undefined) revealDisc(state.map, p.explored, to.x, to.y, 4);
   events.push({ type: "teleported", heroId: hero.id, x: to.x, y: to.y });
+  if (t === "ferry-landing") {
+    say(
+      events,
+      hero,
+      obj,
+      `Ferry Landing: the ferry carries the army across the water for ${FERRY_MP} movement points.`,
+    );
+  } else if (t === "whirlpool") {
+    const loss = whirlpoolLoss(hero);
+    if (loss !== null) applyLosses(hero, [loss]);
+    say(
+      events,
+      hero,
+      obj,
+      `Whirlpool: the ship is swept to its twin${
+        loss !== null
+          ? `; ${lossText([loss])} lost overboard`
+          : seafaringRank(hero) >= WHIRLPOOL_SAFE_RANK
+            ? "; Seafaring keeps every hand aboard"
+            : ""
+      }.`,
+    );
+  }
+}
+
+/**
+ * The twin of a paired teleport (a two-way waystone, a Ferry Landing or a
+ * Whirlpool): the other object of its type with the same `data.pair`.
+ */
+export function twinOf(
+  state: GameState,
+  obj: MapObject,
+): { x: number; y: number } | null {
+  const t = objectTypeOf(obj);
+  const pair = str(obj, "pair");
+  const twin = state.map.objects.find(
+    (o) => o.id !== obj.id && o.data["type"] === t && o.data["pair"] === pair,
+  );
+  return twin === undefined ? null : { x: twin.x, y: twin.y };
 }
 
 function freePrisoner(
@@ -2243,6 +2723,33 @@ export function useSite(
       say(events, hero, obj, `The altar accepts ${itemName(a)}.`);
       break;
     }
+    // A Shipwright's ship (bead bzc.151, NAVAL 2.2): moored at its dock.
+    case "ship": {
+      const dock = must(shipwrightDock(next, obj), "dock");
+      player.resources = subtractResources(player.resources, SHIP_PRICE);
+      const ship = addShip(next, dock.x, dock.y, hero.owner);
+      say(
+        events,
+        hero,
+        obj,
+        `Shipwright: a new ship (${ship.id}) is moored at the dock (${dock.x}, ${dock.y}).`,
+      );
+      break;
+    }
+    // Sirens' Rock (NAVAL 5.4): experience for creatures.
+    case "listen": {
+      const losses = sirensRockLosses(hero);
+      markUsed(next, obj, hero);
+      applyLosses(hero, losses);
+      gainXp(hero, SIRENS_ROCK_XP, events);
+      say(
+        events,
+        hero,
+        obj,
+        `Sirens' Rock: +${SIRENS_ROCK_XP} experience${losses.length === 0 ? "" : `; ${lossText(losses)} swam after the song`}.`,
+      );
+      break;
+    }
     default:
       return fail("bad-choice", `unknown option ${optionId}`);
   }
@@ -2378,7 +2885,14 @@ export function objectValueFor(
   heroId?: string,
 ): number {
   if (state.collected.includes(obj.id)) return 0;
-  const base = num(obj, "value", 0);
+  // A sea object without a generated value counts its catalogue value
+  // (bead bzc.151); every other object reads data.value as before.
+  const seaType = objectTypeOf(obj);
+  const base =
+    num(obj, "value", 0) ||
+    (seaType !== null && isSeaObjectType(seaType)
+      ? OBJECT_TYPES[seaType].value
+      : 0);
   switch (obj.kind) {
     case "town": {
       const t = state.towns[obj.id];
@@ -2444,6 +2958,17 @@ export function objectValueFor(
           : 0;
       }
       if (t === "infernal-forge") return forgeValue(state, player, obj, heroes);
+      // Sirens' Rock (bead bzc.151): the experience (at the prize scale's
+      // rate) less the creatures it costs, for the best hero yet to listen.
+      if (t === "sirens-rock") {
+        let best = 0;
+        for (const h of heroes) {
+          if (used(state, obj, h)) continue;
+          const gain = prizeValue({ xp: SIRENS_ROCK_XP });
+          best = Math.max(best, gain - lossFv(sirensRockLosses(h)));
+        }
+        return best;
+      }
       return anyUnused ? base : 0;
     case "one-time":
       if (s.done === true) return 0;
@@ -2455,7 +2980,9 @@ export function objectValueFor(
         t === "wishing-well" ||
         t === "sun-temple" ||
         t === "sugar-fountain" ||
-        t === "shrine-of-embers"
+        t === "shrine-of-embers" ||
+        t === "buoy" ||
+        t === "mermaid-rock"
       ) {
         return heroes.some((h) => !h.buffs.includes(t)) ? base : 0;
       }
@@ -2627,7 +3154,9 @@ export function describeSite(
     case "faction-outpost":
     case "stray-hut":
     case "caretaker-lodge":
-    case "walrus-rookery": {
+    case "walrus-rookery":
+    case "pirate-cove":
+    case "siren-grotto": {
       const offer = dwellingOffer(state, obj);
       if (offer !== null) {
         what = `${def.text} ${dwellingStock(state, obj)} ${getCreature(offer.creature).plural} for ${prizeText(offer.cost)} each.`;
@@ -2666,6 +3195,9 @@ export function describeSite(
     case "gingerbread-cottage":
     case "brimstone-pit":
     case "drowned-temple":
+    case "shipwreck":
+    case "coral-grotto":
+    case "krakens-deep":
       what =
         t === "keepers-vault"
           ? `${def.text} Each treasure: a Marvel piece, a Wonder and 5000 gold.`
@@ -2727,6 +3259,74 @@ export function describeSite(
       const exit = obj.data["exit"];
       if (Array.isArray(exit))
         what = `${def.text} Its exit is at (${String(exit[0])}, ${String(exit[1])}).`;
+      break;
+    }
+    // Sea and coastal objects (bead bzc.151).
+    case "shipwright": {
+      const dock = shipwrightDock(state, obj);
+      what =
+        dock === null
+          ? `${def.text} It has no dock.`
+          : `${def.text} Its dock: (${dock.x}, ${dock.y}).`;
+      if (s.owner !== undefined && s.owner !== null)
+        what +=
+          s.owner === player ? " Your flag." : " Flagged by another player.";
+      break;
+    }
+    case "lighthouse":
+      if (s.owner !== undefined && s.owner !== null)
+        what +=
+          s.owner === player ? " Your flag." : " Flagged by another player.";
+      break;
+    case "sirens-rock":
+      if (hero !== undefined) {
+        const losses = sirensRockLosses(hero);
+        what = `Listen to the sirens: +${SIRENS_ROCK_XP} experience; ${
+          losses.length === 0
+            ? `${hero.name}'s army would lose nothing`
+            : `${hero.name} would lose ${lossText(losses)}`
+        }. Sailing on costs nothing.`;
+      }
+      break;
+    case "shrine-of-the-tides": {
+      const sp = str(obj, "spell");
+      if (sp !== "")
+        what = `Teaches ${spellName(sp)} as a page if the hero can learn it, otherwise as a scroll. Each hero once.`;
+      break;
+    }
+    case "ferry-landing":
+    case "whirlpool": {
+      const twin = twinOf(state, obj);
+      what = `${def.text}${twin === null ? "" : ` Its twin is at (${twin.x}, ${twin.y}).`}`;
+      if (t === "whirlpool" && hero !== undefined) {
+        const loss = whirlpoolLoss(hero);
+        what +=
+          loss === null
+            ? ` ${hero.name} would lose nothing.`
+            : ` ${hero.name} would lose ${lossText([loss])}.`;
+      }
+      break;
+    }
+    case "flotsam": {
+      const p = prizeOf(obj);
+      if (Object.keys(p).length > 0)
+        what = `Afloat: ${prizeText(p)}. The first hero next to it takes it.`;
+      break;
+    }
+    case "sea-chest": {
+      const a = findArtifact(str(obj, "artifact"));
+      what =
+        a !== undefined
+          ? `A rich chest: ${a.name} (${a.text}) and ${num(obj, "gold", SEA_CHEST.richGold)} gold. Walk or sail up next to it to take it.`
+          : `${num(obj, "gold", SEA_CHEST.gold)} gold or ${num(obj, "xp", SEA_CHEST.xp)} experience, your choice. Walk or sail up next to it to take it.`;
+      break;
+    }
+    case "castaway": {
+      const stack = castawayStack(obj);
+      if (stack !== null) {
+        const d = getCreature(stack.creature);
+        what = `${stack.count} ${stack.count === 1 ? d.name : d.plural} on a raft: they join the first hero next to them if the army has room; otherwise ${CASTAWAY_XP} experience.`;
+      }
       break;
     }
     case "drill-yard":

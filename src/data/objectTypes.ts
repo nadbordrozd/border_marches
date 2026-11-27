@@ -15,6 +15,7 @@
  * generator's rows are in ./mapObjects.ts.
  */
 import type { MapObjectKind, Terrain } from "../core/map/types.ts";
+import { SEA_OBJECT_TYPE_IDS } from "./sea-objects.ts";
 
 export const OBJECT_TYPE_IDS = [
   // 3.1 Mines and producers
@@ -113,6 +114,9 @@ export const OBJECT_TYPE_IDS = [
   "witchs-hut",
   "drowned-temple",
   "hags-cauldron",
+  // 3.16 Sea and coastal objects (bead bzc.151, docs/design/NAVAL.md 5):
+  // placed only by the sea fill of a naval map (SEA_OBJECT_TYPE_IDS).
+  ...SEA_OBJECT_TYPE_IDS,
 ] as const;
 
 export type ObjectTypeId = (typeof OBJECT_TYPE_IDS)[number];
@@ -195,6 +199,7 @@ const SN: Terrain = "snow";
 const D: Terrain = "sand";
 const V: Terrain = "volcanic";
 const SW: Terrain = "swamp";
+const WA: Terrain = "water";
 
 // Flags: "s" stretch, "v" vanishes when used.
 const ROWS: readonly Row[] = [
@@ -371,6 +376,49 @@ const ROWS: readonly Row[] = [
   ["drowned-temple", "Drowned Temple", "bank", 2, 2, "", "one-time", 6500, [SW], 0, "Bog creatures lurk in the sunken temple; win the battle to take its drowned offerings: essence, a scroll, gold and, in the bigger ones, an artifact."],
   // prettier-ignore
   ["hags-cauldron", "Hag's Cauldron", "site", 1, 1, "", "per-hero", 1000, [SW], 0, "Drink the hag's brew: two times in three a blessing, +1 to one of the hero's four stats for good; otherwise her curse, -1 Morale and -1 Luck until the end of the hero's next battle. Each hero once."],
+  // 3.16 Sea and coastal objects (bead bzc.151, NAVAL.md 5): weight 0,
+  // placed only by the sea fill of a naval map. Terrain "water": the
+  // entrance is a sea cell, visited by a ship; [] a coastal one, from land.
+  // prettier-ignore
+  ["pearl-bed", "Pearl Bed", "mine", 2, 2, "", "flag", 5000, [WA], 0, "Sail onto it to claim it: +1 essence each day while you hold it."],
+  // prettier-ignore
+  ["fishing-village", "Fishing Village", "mine", 2, 2, "", "flag", 4000, [], 0, "Enter it to claim it: +500 gold each day while you hold it."],
+  // prettier-ignore
+  ["pirate-cove", "Pirate Cove", "dwelling", 2, 2, "", "flag", 3000, [], 0, "Enter it to claim it; then your heroes can hire Corsairs here, 3 a week at 290 gold each. Corsairs keep watch beside it."],
+  // prettier-ignore
+  ["siren-grotto", "Siren Grotto", "dwelling", 2, 2, "", "flag", 3000, [WA], 0, "Sail onto it to claim it; then your heroes afloat can hire Sirens here, 3 a week at 250 gold each."],
+  // prettier-ignore
+  ["shipwright", "Shipwright", "site", 3, 2, "", "flag", 1500, [], 0, "Enter it to claim it; then your heroes on its door can buy a ship for 1000 gold and 10 wood, built at its dock."],
+  // prettier-ignore
+  ["buoy", "Buoy", "site", 1, 1, "", "each-visit", 300, [WA], 0, "+1 Morale until the end of the hero's next battle. Visiting again adds no more."],
+  // prettier-ignore
+  ["mermaid-rock", "Mermaid Rock", "site", 1, 1, "", "each-visit", 300, [WA], 0, "+1 Luck until the end of the hero's next battle. Visiting again adds no more."],
+  // prettier-ignore
+  ["lighthouse", "Lighthouse", "site", 1, 1, "", "flag", 1500, [WA], 0, "Sail onto it to claim it and see 10 cells around it; while you hold it your heroes afloat sail 200 farther each day (at most three lighthouses count)."],
+  // prettier-ignore
+  ["sirens-rock", "Sirens' Rock", "site", 2, 2, "", "per-hero", 1500, [WA], 0, "Listen to the sirens: the hero gains 2000 experience, and each stack of its army loses a tenth of its creatures. Sailing on costs nothing. Each hero once."],
+  // prettier-ignore
+  ["shrine-of-the-tides", "Shrine of the Tides", "site", 1, 1, "", "per-hero", 1500, [WA], 0, "Teaches its sea spell as a page if the hero can learn it; otherwise gives it as a scroll. Each hero once."],
+  // prettier-ignore
+  ["ferry-landing", "Ferry Landing", "teleport", 1, 1, "", "each-visit", 0, [], 0, "Step on it to be ferried to its twin across the water for 300 movement points (no ship needed)."],
+  // prettier-ignore
+  ["shipwreck", "Shipwreck", "bank", 2, 2, "", "one-time", 2500, [WA], 0, "Its drowned crew stands guard; win the battle to take its coin and timbers."],
+  // prettier-ignore
+  ["coral-grotto", "Coral Grotto", "bank", 2, 2, "", "one-time", 2500, [WA], 0, "The reef's keepers guard it; win the battle to take its pearls (essence), coral (ore) and gold."],
+  // prettier-ignore
+  ["krakens-deep", "Kraken's Deep", "bank", 3, 2, "", "one-time", 16000, [WA], 0, "The Kraken and its Hammerheads guard the deep; win the battle to take a Marvel piece, a Wonder and 5000 gold. One to a map."],
+  // prettier-ignore
+  ["flotsam", "Flotsam", "site", 1, 1, "v", "one-time", 500, [WA], 0, "Driftwood and a little coin afloat: the first hero next to it takes it."],
+  // prettier-ignore
+  ["sea-chest", "Sea Chest", "site", 1, 1, "v", "one-time", 1500, [WA], 0, "Walk or sail up next to it, then choose gold or experience (a rich chest holds a Trinket and gold instead)."],
+  // prettier-ignore
+  ["castaway", "Castaway", "site", 1, 1, "v", "one-time", 1500, [WA], 0, "A raft with survivors: they join the first hero next to them if the army has room; otherwise the hero takes 1000 experience for their tales."],
+  // prettier-ignore
+  ["message-in-a-bottle", "Message in a Bottle", "site", 1, 1, "v", "one-time", 500, [WA], 0, "Walk or sail up next to it: it marks on your map where a buried cache lies (or, with none left, where a Marvel piece waits)."],
+  // prettier-ignore
+  ["moored-boat", "Moored Boat", "boat", 1, 1, "", "permanent", 1000, [WA], 0, "An empty boat: step aboard from the shore beside it to make it your ship."],
+  // prettier-ignore
+  ["whirlpool", "Whirlpool", "teleport", 1, 1, "", "each-visit", 0, [WA], 0, "A ship that sails into it comes out at its twin; the army's weakest stack loses half its creatures (nothing with Seafaring rank 2)."],
 ];
 
 export const OBJECT_TYPES: Readonly<Record<ObjectTypeId, ObjectTypeDef>> =
@@ -538,6 +586,11 @@ export function siteBuffEffect(buff: string): {
       return { label: "Rally Camp", morale: 1 };
     case "wishing-well":
       return { label: "Wishing Well", luck: 1 };
+    // The sea's Rally Camp and Wishing Well (bead bzc.151, NAVAL 5.4).
+    case "buoy":
+      return { label: "Buoy", morale: 1 };
+    case "mermaid-rock":
+      return { label: "Mermaid Rock", luck: 1 };
     case "oasis":
       return { label: "Oasis", morale: 1 };
     case "fallen-adventurer":

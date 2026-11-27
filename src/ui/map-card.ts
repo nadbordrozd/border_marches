@@ -28,7 +28,7 @@ import {
 import type { GameState, HeroState, ShipState } from "../core/game/index.ts";
 import { dailyMaxOf, isAfloat, shipAt } from "../core/game/naval.ts";
 import { SEA_MOVE_BASE } from "../data/naval.ts";
-import { objectTypeOf } from "../core/game/site-state.ts";
+import { mineIncome, mineName, objectTypeOf } from "../core/game/site-state.ts";
 import { propAt } from "../core/map/types.ts";
 import type { MapObject } from "../core/map/types.ts";
 import {
@@ -38,8 +38,9 @@ import {
   SLOT_NAMES,
 } from "../data/artifacts.ts";
 import { decorationKind } from "../data/decorations.ts";
+import { OBJECT_TYPES } from "../data/objectTypes.ts";
 import { getCreature, isCreatureId } from "../data/creatures.ts";
-import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
+import { CHEST, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { findFaction } from "../data/factions.ts";
 import { getHeroClass } from "../data/hero.ts";
 import { playerColour } from "../data/players.ts";
@@ -349,9 +350,12 @@ export function shipCard(
   ship: ShipState,
   hero: HeroState | undefined,
 ): MapCard {
+  // A neutral ship is the catalogue's Moored Boat (bead bzc.151): its
+  // name and rule text are the catalogue's.
+  const boat = OBJECT_TYPES["moored-boat"];
   const title =
     ship.owner === null
-      ? "Moored Boat"
+      ? boat.name
       : ship.owner === player
         ? "Your Ship"
         : `${playerColour(ship.owner).name}'s Ship`;
@@ -359,9 +363,11 @@ export function shipCard(
     {
       kind: "text",
       text:
-        ship.owner === player
-          ? "Board it from the shore beside it."
-          : "Board it from the shore beside it to take it.",
+        ship.owner === null
+          ? boat.text
+          : ship.owner === player
+            ? "Board it from the shore beside it."
+            : "Board it from the shore beside it to take it.",
     },
     {
       kind: "text",
@@ -379,7 +385,7 @@ export function shipCard(
   return {
     title,
     subtitle: `${ownerWord(ship.owner, player)} · moored`,
-    picture: null,
+    picture: artPicture("moored-boat"),
     lines: lines.filter((l): l is CardLine => l !== null),
   };
 }
@@ -464,12 +470,17 @@ export function townCard(
 
 // ------------------------------------------------------------ map cells
 
-/** Basic mines of each resource: their catalogue text only repeats the yield. */
+/**
+ * Basic mines of each resource and the sea producers (bead bzc.151): their
+ * catalogue text only repeats the yield.
+ */
 const BASIC_MINES: ReadonlySet<string> = new Set([
   "sawmill",
   "ore-pit",
   "essence-spring",
   "gold-mine",
+  "pearl-bed",
+  "fishing-village",
 ]);
 
 function monsterCard(
@@ -510,7 +521,7 @@ function targetWord(state: GameState, obj: MapObject): string {
   if (obj.kind === "town") return state.towns[obj.id]?.name ?? "town";
   if (obj.kind === "mine") {
     const r = state.mines[obj.id]?.resource;
-    return r === undefined ? "mine" : MINES[r].name;
+    return r === undefined ? "mine" : mineName(obj, r);
   }
   return obj.kind;
 }
@@ -524,13 +535,12 @@ function mineCard(
   const mine = state.mines[obj.id];
   if (mine === undefined) return null;
   const site = describeSite(state, player, obj, hero?.id);
-  const y = typeof obj.data["yield"] === "number" ? obj.data["yield"] : 1;
   const guard = guardStacks(state, obj);
   const type = objectTypeOf(obj);
   const lines: Array<CardLine | null> = [
     {
       kind: "gives",
-      amounts: { [mine.resource]: MINES[mine.resource].income * y },
+      amounts: { [mine.resource]: mineIncome(obj, mine.resource) },
       sign: "+",
       suffix: mine.owner === player ? "a day, yours" : "a day to its owner",
     },
@@ -542,7 +552,7 @@ function mineCard(
     pathLineTo(state, hero, obj.x, obj.y),
   ];
   return {
-    title: site?.name ?? MINES[mine.resource].name,
+    title: site?.name ?? mineName(obj, mine.resource),
     subtitle: mine.owner === null ? "Unclaimed" : ownerWord(mine.owner, player),
     picture: artPicture(mineType(obj), artVariantOf(obj)),
     lines: lines.filter((l): l is CardLine => l !== null),

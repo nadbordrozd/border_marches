@@ -173,9 +173,20 @@ export function siteIcons(obj: MapObject): VisitIcon[] {
         kind: "artifact" as const,
         id,
       }));
+    // The sea.s banks too (bead bzc.151): their prizes. artifacts.
     case "brimstone-pit":
     case "drowned-temple":
+    case "shipwreck":
+    case "coral-grotto":
+    case "krakens-deep":
       return prizeIcons(prizeOf(obj, "prize"));
+    // A Shrine of the Tides' sea spell; a rich Sea Chest's Trinket.
+    case "shrine-of-the-tides":
+      return str("spell") === "" ? [] : [{ kind: "spell", id: str("spell") }];
+    case "sea-chest":
+      return str("artifact") === ""
+        ? []
+        : [{ kind: "artifact", id: str("artifact") }];
     // The Infernal Forge (bead bzc.125): the Wonder it reforges into.
     case "infernal-forge":
       return str("wonder") === ""
@@ -374,7 +385,8 @@ export function optionItem(
 /** The spell a site teaches (a shrine, a scholar's gift), if any. */
 function taughtSpell(obj: MapObject): string | null {
   const t = objectTypeOf(obj);
-  if (t === "school-shrine") return String(obj.data["spell"] ?? "") || null;
+  if (t === "school-shrine" || t === "shrine-of-the-tides")
+    return String(obj.data["spell"] ?? "") || null;
   if (t === "scholar") return prizeOf(obj, "gift").spell ?? null;
   return null;
 }
@@ -431,7 +443,10 @@ export function siteResult(
     note = aurora.ranks[Number(auroraRank) - 1]?.text ?? null;
   if (area !== null)
     note =
-      "The area is uncovered on your map. Dig there with a hero (the whole day's movement).";
+      // A Message in a Bottle may point at a Marvel piece's cell (bzc.151).
+      area.w === 1 && area.h === 1
+        ? "The cell is marked on your map: walk up next to it to take the piece."
+        : "The area is uncovered on your map. Dig there with a hero (the whole day's movement).";
   return {
     show,
     title,

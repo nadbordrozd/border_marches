@@ -302,6 +302,10 @@ Placed only in the swamp zones some random maps roll (src/core/map/gen/swamp.ts)
 
 Balance: the hut sits between the Tutor's Hut (2000, rank 1 of one skill, free) and the Aurora Spire (3000, a school rank and mana, free): a choice of two skills and a rank above 1, for a price worth about half its value (the AI values it at half, and only while the treasury can pay). The temple's prizes are worth its bank values like the six banks (a Trinket 2000, a Wonder 5000, an essence 500, scrolls at SCROLL_VALUE). The cauldron's expected worth is two thirds of a stat point (1500) less a small curse, about 1000, so it stands unguarded; it is the map's one gamble with stated odds, like a Sealed Box whose contents are a surprise.
 
+### 3.16 Sea and coastal objects (20, bead bzc.151)
+
+The twenty objects of [NAVAL.md](NAVAL.md) section 5 (its tables are the rules): two producers, two dwellings and the Shipwright, six visitable sites, three banks, four floating pickups, the Moored Boat and the Whirlpool. Weight 0 in the fill: only the sea fill of a naval map (NAVAL 8.6, the generator's bead) places them, so every other map is generated exactly as before. Rows in `src/data/objectTypes.ts` (terrain `water` for a sea entrance, `[]` for a coastal one) and `SEA_ROWS` in `src/data/mapObjects.ts`; numbers in `src/data/sea-objects.ts`; rules in `src/core/game/sites.ts`; seeded contents in `src/core/map/gen/sea-contents.ts`. Notes in NAVAL.md 19.
+
 ## 4. Banks, digging and the Keystone
 
 **Bank sizes.** A bank's size is fixed by the seed and shown on hover with

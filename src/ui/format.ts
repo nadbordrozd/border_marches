@@ -10,7 +10,7 @@ import { propAt } from "../core/map/types.ts";
 import type { MapObject, Terrain } from "../core/map/types.ts";
 import { decorationKind } from "../data/decorations.ts";
 import { describeObject, objectName } from "../core/game/sites.ts";
-import { objectTypeOf } from "../core/game/site-state.ts";
+import { mineIncome, mineName, objectTypeOf } from "../core/game/site-state.ts";
 import {
   MONSTER_SPELL_RANGE,
   heroMagic,
@@ -19,7 +19,7 @@ import {
   storeOf,
 } from "../core/magic/index.ts";
 import { getCreature } from "../data/creatures.ts";
-import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
+import { CHEST, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { getHeroClass } from "../data/hero.ts";
 import { playerColour } from "../data/players.ts";
 import type { ResourceAmounts } from "../data/types.ts";
@@ -244,14 +244,14 @@ export function describeCell(
       case "mine": {
         const mine = state.mines[obj.id];
         if (mine === undefined) break;
-        const def = MINES[mine.resource];
+        const income = mineIncome(obj, mine.resource);
         const owner =
           mine.owner === player
-            ? `yours, +${def.income} ${mine.resource}/day`
+            ? `yours, +${income} ${mine.resource}/day`
             : mine.owner === null
               ? "unclaimed"
               : `${playerColour(mine.owner).name}'s`;
-        return withLines(`${def.name} (${owner})`);
+        return withLines(`${mineName(obj, mine.resource)} (${owner})`);
       }
       case "pickup": {
         const info = pickupInfo(obj);

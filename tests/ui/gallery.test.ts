@@ -20,6 +20,7 @@ import { RESOURCE_IDS } from "../../src/data/economy.ts";
 import { playableFactions } from "../../src/data/factions.ts";
 import { FEAT_LIST, HELD_FEATS } from "../../src/data/feats.ts";
 import { OBJECT_TYPE_IDS } from "../../src/data/objectTypes.ts";
+import { SEA_OBJECT_TYPE_IDS } from "../../src/data/sea-objects.ts";
 import { SKILLS } from "../../src/data/skills.ts";
 import { DECORATIONS } from "../../src/assets/decorations.ts";
 import { assetByKey } from "../../src/assets/manifest.ts";
@@ -126,6 +127,19 @@ describe("gallery tabs match the registries", () => {
     const props = galleryTab("objects").sections.at(-1)?.entries ?? [];
     expect(props.every((e) => e.kind === "decoration")).toBe(true);
     expect(props.length).toBe(DECORATIONS.filter((d) => !d.passable).length);
+  });
+
+  it("map objects: the twenty sea and coastal objects in a Sea sites section (bzc.151)", () => {
+    const sea = galleryTab("objects").sections.find(
+      (s) => s.title === "Sea sites",
+    );
+    expect(sea?.entries.map((e) => e.id)).toEqual([...SEA_OBJECT_TYPE_IDS]);
+    // Every one has its own sprite (the banks one per size).
+    expect(
+      sea?.entries.every((e) => e.art.length > 0 && e.artNote === null),
+    ).toBe(true);
+    const wreck = sea?.entries.find((e) => e.id === "shipwreck");
+    expect(wreck?.art).toHaveLength(3);
   });
 
   it("towns: each playable faction's town and every building of its tree", () => {

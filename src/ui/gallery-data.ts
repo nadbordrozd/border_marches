@@ -591,6 +591,8 @@ const OBJECT_SECTIONS: ReadonlyArray<readonly [string, string]> = [
   ["gingerbread-cottage", "Candy sites"],
   ["infernal-forge", "Volcanic sites"],
   ["witchs-hut", "Swamp sites"],
+  // The sea and coastal objects (bead bzc.151, NAVAL.md 5).
+  ["pearl-bed", "Sea sites"],
 ];
 
 function objectEntry(id: (typeof OBJECT_TYPE_IDS)[number]): GalleryEntry {

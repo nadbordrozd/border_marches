@@ -25,6 +25,7 @@ import {
   type ObjectTypeDef,
   type ObjectTypeId,
 } from "./objectTypes.ts";
+import { SEA_OBJECT_TYPE_IDS } from "./sea-objects.ts";
 
 /** Kinds of zone the generator lays out. */
 export type MapZoneKind = "start" | "middle" | "town" | "hold";
@@ -187,6 +188,10 @@ const NEVER_GUARDED: ReadonlySet<ObjectTypeId> = new Set<ObjectTypeId>([
   "gingerbread-cottage",
   // Swamp (bead bzc.126): the temple's guard is inside.
   "drowned-temple",
+  // The sea's banks (bead bzc.151): their guards are inside.
+  "shipwreck",
+  "coral-grotto",
+  "krakens-deep",
 ]);
 
 /**
@@ -343,6 +348,16 @@ export const CANDY_ROWS: readonly MapObjectRow[] = (
 export const SWAMP_ROWS: readonly MapObjectRow[] = (
   ["witchs-hut", "drowned-temple", "hags-cauldron"] as const
 ).map((t) => catalogueRow(OBJECT_TYPES[t]));
+
+/**
+ * Rows of the twenty sea and coastal objects (bead bzc.151, NAVAL.md 5),
+ * for the sea fill of a naval map (the generator's bead): never in the
+ * land fill (weight 0), so a map that is not naval is generated exactly as
+ * before. Seeded contents: src/core/map/gen/sea-contents.ts.
+ */
+export const SEA_ROWS: readonly MapObjectRow[] = SEA_OBJECT_TYPE_IDS.map((t) =>
+  catalogueRow(OBJECT_TYPES[t]),
+);
 
 export const MAP_OBJECT_ROW_BY_ID: Readonly<Record<string, MapObjectRow>> =
   Object.fromEntries(MAP_OBJECT_ROWS.map((r) => [r.id, r]));

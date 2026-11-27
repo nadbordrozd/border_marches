@@ -647,9 +647,11 @@ export const NAMES: readonly string[] = [
   "Loose Scroll",
   "Lucky Penny",
   "Lucky Streak",
+  "Mermaid Rock",
   "Quest Gate",
   "Rock Candy Dragon",
   "Rock Candy Grotto",
+  "Sirens' Rock",
   "Steam Tank",
   "The Four O'Clock",
 ];

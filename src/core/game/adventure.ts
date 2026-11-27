@@ -3,6 +3,7 @@
  */
 import { CHEST } from "../../data/economy.ts";
 import { TOWN_SIGHT } from "../../data/hero.ts";
+import { SEA_CHEST } from "../../data/sea-objects.ts";
 import { sightRadius } from "./effects.ts";
 import { gainXp } from "./hero.ts";
 import { learnInTown, noteHeroPath } from "../magic/adventure.ts";
@@ -526,6 +527,23 @@ export function visitObject(
   return success(next, events);
 }
 
+/**
+ * A chest's two offers: its own `data.gold` and `data.xp`, else a treasure
+ * chest's (1000 gold or 750 XP) or a Sea Chest's (1500 or 1000, bead
+ * bzc.151).
+ */
+export function chestTerms(obj: MapObject): { gold: number; xp: number } {
+  const sea = obj.data["type"] === "sea-chest";
+  const num = (k: string, land: number, water: number): number => {
+    const v = obj.data[k];
+    return typeof v === "number" ? v : sea ? water : land;
+  };
+  return {
+    gold: num("gold", CHEST.gold, SEA_CHEST.gold),
+    xp: num("xp", CHEST.xp, SEA_CHEST.xp),
+  };
+}
+
 /** Takes the treasure chest next to the hero: 1000 gold or 750 XP. */
 export function takeChest(
   state: GameState,
@@ -540,10 +558,13 @@ export function takeChest(
   const blocked = checkTurn(state, original.owner);
   if (blocked !== null) return blocked;
   const obj = findObject(state.map, pickupId);
+  // A Sea Chest (bead bzc.151) offers the same choice at its own prices.
+  const sea = obj !== undefined && obj.data["type"] === "sea-chest";
   if (
     obj === undefined ||
-    obj.kind !== "pickup" ||
-    pickupInfo(obj).type !== "chest" ||
+    (sea
+      ? typeof obj.data["artifact"] === "string"
+      : obj.kind !== "pickup" || pickupInfo(obj).type !== "chest") ||
     state.collected.includes(pickupId)
   ) {
     return fail("unknown-object", `no chest ${pickupId}`);
@@ -557,9 +578,7 @@ export function takeChest(
   const next = cloneState(state);
   const hero = must(findHero(next, heroId), "hero");
   const events: GameEvent[] = [];
-  const gold =
-    typeof obj.data["gold"] === "number" ? obj.data["gold"] : CHEST.gold;
-  const xp = typeof obj.data["xp"] === "number" ? obj.data["xp"] : CHEST.xp;
+  const { gold, xp } = chestTerms(obj);
   if (choice === "gold") {
     const player = next.players.find((p) => p.id === hero.owner);
     if (player !== undefined) player.resources.gold += gold;

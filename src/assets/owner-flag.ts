@@ -81,6 +81,13 @@ export const OWNER_FLAG_ANCHORS: Readonly<Record<string, FlagAnchor>> = {
   "map-object-stray-hut": { x: 36, y: 5, pole: 4 }, // roof ridge
   "map-object-caretaker-lodge": { x: 84, y: 11, pole: 4 }, // roof ridge
   "map-object-walrus-rookery": { x: 80, y: 10, pole: 5 }, // igloo's shoulder
+  // Sea and coastal producers, dwellings and flagged sites (bead bzc.151).
+  "map-object-pearl-bed": { x: 82, y: 14, pole: 4 }, // right clam's back
+  "map-object-fishing-village": { x: 82, y: 15, pole: 4 }, // right roof ridge
+  "map-object-pirate-cove": { x: 78, y: 7, pole: 4 }, // rock's crown
+  "map-object-siren-grotto": { x: 77, y: 17, pole: 4 }, // grotto top, by the shell
+  "map-object-lighthouse": { x: 33, y: 8, pole: 3 }, // lantern cap
+  "map-object-shipwright": { x: 115, y: 31, pole: 4 }, // shed roof, right slope
 };
 
 /**

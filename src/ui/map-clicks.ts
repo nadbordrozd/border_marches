@@ -21,12 +21,12 @@ import type { GameState, HeroState, Path } from "../core/game/index.ts";
 import { standsOn, type PathOptions } from "../core/game/pathfinding.ts";
 import { pickupInfo } from "../core/game/newGame.ts";
 import { objectName } from "../core/game/sites.ts";
-import { isPickup } from "../core/game/site-state.ts";
+import { isPickup, mineName } from "../core/game/site-state.ts";
 import { propAt, type MapObject } from "../core/map/types.ts";
 import { adventureSpell } from "../core/magic/index.ts";
 import { findArtifact } from "../data/artifacts.ts";
 import { decorationKind } from "../data/decorations.ts";
-import { CHEST, MINES, RESOURCE_NAMES } from "../data/economy.ts";
+import { CHEST, RESOURCE_NAMES } from "../data/economy.ts";
 import { aimHint } from "./adventure-targets.ts";
 import type { AdventureAim } from "./adventure-targets.ts";
 import type { CursorKind } from "./cursors.ts";
@@ -187,7 +187,7 @@ export function targetName(state: GameState, obj: MapObject): string {
       return state.towns[obj.id]?.name ?? "the town";
     case "mine": {
       const r = state.mines[obj.id]?.resource;
-      return r === undefined ? "the mine" : `the ${MINES[r].name}`;
+      return r === undefined ? "the mine" : `the ${mineName(obj, r)}`;
     }
     case "pickup": {
       const info = pickupInfo(obj);

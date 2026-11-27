@@ -198,7 +198,8 @@ function joiners(
   ];
 }
 
-function bankSize(rng: Rng, tier: number): BankSize {
+/** A bank's size by its zone tier (CONTENT_MAP_OBJECTS 4). */
+export function bankSize(rng: Rng, tier: number): BankSize {
   if (tier <= 0) return "small";
   if (tier === 1) return rng.chance(0.6) ? "small" : "medium";
   if (tier === 2) return rng.chance(0.65) ? "medium" : "large";

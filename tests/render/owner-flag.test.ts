@@ -94,7 +94,10 @@ function ownableSprites(): {
     h: a.h,
   }));
   for (const def of Object.values(OBJECT_TYPES)) {
-    if (def.kind !== "mine" && def.kind !== "dwelling") continue;
+    // Flagged sites too: the Lighthouse and the Shipwright (bead bzc.151).
+    const flaggedSite = def.kind === "site" && def.reset === "flag";
+    if (def.kind !== "mine" && def.kind !== "dwelling" && !flaggedSite)
+      continue;
     const variants = artVariants(def.id);
     for (const variant of variants.length > 0 ? variants : [""]) {
       const art = artFor(def.id, variant);
