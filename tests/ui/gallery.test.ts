@@ -13,12 +13,12 @@ import {
   allSpells,
   registerSpells,
 } from "../../src/core/magic/index.ts";
-import { ARTIFACT_LIST } from "../../src/data/artifacts.ts";
+import { ARTIFACT_LIST, HELD_ARTIFACTS } from "../../src/data/artifacts.ts";
 import { HERO_CLASSES, NAMED_HEROES } from "../../src/data/classes.ts";
 import { CREATURES } from "../../src/data/creatures.ts";
 import { RESOURCE_IDS } from "../../src/data/economy.ts";
 import { playableFactions } from "../../src/data/factions.ts";
-import { FEAT_LIST } from "../../src/data/feats.ts";
+import { FEAT_LIST, HELD_FEATS } from "../../src/data/feats.ts";
 import { OBJECT_TYPE_IDS } from "../../src/data/objectTypes.ts";
 import { SKILLS } from "../../src/data/skills.ts";
 import { DECORATIONS } from "../../src/assets/decorations.ts";
@@ -96,12 +96,19 @@ describe("gallery tabs match the registries", () => {
     }
   });
 
-  it("artifacts: every artifact, consumable and relic", () => {
-    expect(count("artifacts")).toBe(ARTIFACT_LIST.length);
+  it("artifacts: every artifact, consumable and relic (none held back)", () => {
+    // Held: the Deepforge's Pocket Boiler until its integration (bzc.135).
+    expect(count("artifacts")).toBe(
+      ARTIFACT_LIST.filter((a) => !HELD_ARTIFACTS.has(a.id)).length,
+    );
   });
 
-  it("skills and feats: every skill row, feat and vow", () => {
-    expect(count("skills")).toBe(Object.keys(SKILLS).length + FEAT_LIST.length);
+  it("skills and feats: every skill row, feat and vow (none held back)", () => {
+    // Held: the Deepforge's Scalding until its integration (bzc.135).
+    expect(count("skills")).toBe(
+      Object.keys(SKILLS).length +
+        FEAT_LIST.filter((f) => !HELD_FEATS.has(f.id)).length,
+    );
   });
 
   it("map objects: every catalogued object type, then the decorations", () => {

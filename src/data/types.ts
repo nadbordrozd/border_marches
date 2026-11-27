@@ -14,11 +14,18 @@ export type ResourceAmounts = Partial<Resources>;
 /**
  * Faction ids. Neutral monsters and the Warlord's Hold use "neutral". The
  * v0.2 factions are Humans (the Realm), Undead (the Restless), Goblins
- * (the Horde) and Candy (the Candy Kingdom, FACTION_CANDY.md); the Lost
- * World stays in the code but is not playable.
+ * (the Horde) and Candy (the Candy Kingdom, FACTION_CANDY.md); Dwarves (the
+ * Deepforge, FACTION_DWARVES.md) is in the data but not playable until its
+ * integration bead; the Lost World stays in the code but is not playable.
  */
 export type FactionId =
-  "lost-world" | "humans" | "undead" | "goblins" | "candy" | "neutral";
+  | "lost-world"
+  | "humans"
+  | "undead"
+  | "goblins"
+  | "candy"
+  | "dwarves"
+  | "neutral";
 
 export type AbilityId =
   | "mob"
@@ -125,6 +132,14 @@ export type CandyCreatureId =
   | "gummy-bear"
   | "rock-candy-dragon";
 
+export type DwarvesCreatureId =
+  | "tinker"
+  | "rivet-gunner"
+  | "gyrocopter"
+  | "mortar"
+  | "steam-tank"
+  | "ironclad";
+
 export type CreatureId =
   | LostWorldCreatureId
   | NeutralCreatureId
@@ -132,6 +147,7 @@ export type CreatureId =
   | UndeadCreatureId
   | GoblinCreatureId
   | CandyCreatureId
+  | DwarvesCreatureId
   | StrayCreatureId;
 
 /**

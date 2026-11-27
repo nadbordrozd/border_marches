@@ -151,6 +151,9 @@ export const RULE_SWITCH_IDS = [
   "whetstone-pendant",
   // Retaliation reactions (core/battle/resolve.ts retaliate)
   "flypaper-ribbon", // Flypaper Ribbon (FACTION_CANDY 5.2)
+  // Steam (core/battle/factions/dwarves.ts, engine.ts defend)
+  "pocket-boiler", // Pocket Boiler (FACTION_DWARVES 5.2)
+  "scalding", // Scalding (FACTION_DWARVES 5.2)
 ] as const;
 
 export type RuleSwitchId = (typeof RULE_SWITCH_IDS)[number];

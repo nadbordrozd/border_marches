@@ -1,6 +1,8 @@
 /**
  * Feats and vows (CONTENT_HEROES.md sections 2 and 3, RULES_V2 3.5): all
- * 28 feats and 12 vows of the v0.2 catalogue.
+ * 28 feats and 12 vows of the v0.2 catalogue, and the Deepforge's
+ * Scalding (FACTION_DWARVES 5.2), held from the draft until the faction's
+ * integration bead ({@link HELD_FEATS}).
  *
  * A feat is drafted one of three at every level that is a multiple of 3;
  * its offer weight is 1 + 2 x the hero's ranks in its tagged skills. A vow
@@ -29,6 +31,13 @@ export interface FeatDef {
   /** The restriction as shown to the player (vows). */
   restrictionText?: string;
 }
+
+/**
+ * Feats in the catalogue but not yet drafted (nor shown in the gallery):
+ * Scalding joins with the Deepforge's integration bead (bzc.135), when
+ * Steam can be met in a game.
+ */
+export const HELD_FEATS: ReadonlySet<string> = new Set(["scalding"]);
 
 /** Feats are drafted at every level divisible by this (RULES_V2 3.5). */
 export const FEAT_EVERY = 3;
@@ -239,6 +248,13 @@ export const FEAT_LIST: readonly FeatDef[] = [
     "Blaze of Glory",
     ["stormcalling", "onslaught"],
     "When Fired Up runs out on your stack, every enemy stack next to it gains Burning of twice its size for 2 rounds.",
+  ),
+  // FACTION_DWARVES 5.2: a user of Steam.
+  rule(
+    "scalding",
+    "Scalding",
+    ["stormcalling", "bulwark"],
+    "When Steam on your stack is spent by a Strike, the stack struck gains Burning of 5 x that Steam's size for 2 rounds.",
   ),
   // Vows (12).
   vow(

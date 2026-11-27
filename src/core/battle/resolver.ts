@@ -137,11 +137,13 @@ function armyFromGame(
   const drills = side.drills ?? [];
   const flinger = specials.includes(SPECIALS.greatFlinger);
   // Candy Kingdom specials ride on the natives as abilities (FACTION_CANDY
-  // 9): the Larder eats sweets, The Four O'Clock starts them Hastened.
+  // 9): the Larder eats sweets, The Four O'Clock starts them Hastened; so
+  // does the Deepforge's Great Boiler (FACTION_DWARVES 9): Steam 1.
   const nativeExtras = [
     ...(flinger ? ["cannonball"] : []),
     ...(specials.includes(SPECIALS.larder) ? ["larder"] : []),
     ...(specials.includes(SPECIALS.fourOClock) ? ["the-four-oclock"] : []),
+    ...(specials.includes(SPECIALS.greatBoiler) ? ["the-great-boiler"] : []),
   ];
   const roundTable =
     side.hero !== null && specials.includes(SPECIALS.roundTable)

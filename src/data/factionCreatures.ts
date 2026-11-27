@@ -1,14 +1,15 @@
 /**
  * The v0.2 rosters: the Realm (FACTION_HUMANS.md section 4), the Restless
  * (FACTION_UNDEAD.md section 4), the Goblin Horde (FACTION_GOBLINS.md
- * section 4) and the Candy Kingdom (FACTION_CANDY.md section 4). Abilities
- * are battle-registry ids (src/core/battle/factions).
+ * section 4), the Candy Kingdom (FACTION_CANDY.md section 4) and the
+ * Deepforge (FACTION_DWARVES.md section 4). Abilities are battle-registry
+ * ids (src/core/battle/factions).
  *
  * Sprites are the keys of src/assets/unit-art.ts CREATURE_ART (bead
- * bzc.14); a data test checks `sprite === unitArt(id).key`. The Candy
- * sprites are the keys FACTION_CANDY.md section 10.2 names; their art
- * comes with the Candy art bead, and until then the unit art falls back
- * to its placeholder.
+ * bzc.14); a data test checks `sprite === unitArt(id).key`. The Deepforge
+ * sprites are the keys FACTION_DWARVES.md section 10.2 names; their art
+ * comes with the Deepforge creature art bead (bzc.131), and until then the
+ * unit art falls back to its placeholder.
  */
 import type { CreatureDef, CreatureId } from "./types.ts";
 
@@ -532,6 +533,142 @@ export const CANDY_CREATURES: readonly CreatureDef[] = [
   },
 ];
 
+/**
+ * The Deepforge (FACTION_DWARVES.md section 1): the dwarves (Tinker, Rivet
+ * Gunner) leave a `corpse`; the machines leave a `wreck`, and the Mortar,
+ * Steam Tank and Ironclad cannot bear Heartened or Shaken (the Gyrocopter
+ * has a pilot).
+ */
+const DWARF_TAGS = { remains: "corpse", cannotBear: [] } as const;
+const PILOTED_TAGS = { remains: "wreck", cannotBear: [] } as const;
+const MACHINE_TAGS = {
+  remains: "wreck",
+  cannotBear: ["heartened", "shaken"],
+} as const;
+
+export const DWARVES_CREATURES: readonly CreatureDef[] = [
+  {
+    id: "tinker",
+    name: "Tinker",
+    plural: "Tinkers",
+    faction: "dwarves",
+    tier: 1,
+    hp: 11,
+    attack: 3,
+    defense: 5,
+    damage: 2,
+    speed: 4,
+    shots: 0,
+    ability: null,
+    abilities: ["patch-up"],
+    tags: DWARF_TAGS,
+    growth: 14,
+    cost: { gold: 46 },
+    fightValue: 66,
+    sprite: "dwarves-tinker",
+  },
+  {
+    id: "rivet-gunner",
+    name: "Rivet Gunner",
+    plural: "Rivet Gunners",
+    faction: "dwarves",
+    tier: 2,
+    hp: 12,
+    attack: 5,
+    defense: 5,
+    damage: 3,
+    speed: 4,
+    shots: 8,
+    ability: null,
+    abilities: ["hot-rivets"],
+    tags: DWARF_TAGS,
+    growth: 9,
+    cost: { gold: 120 },
+    fightValue: 113,
+    sprite: "dwarves-rivet-gunner",
+  },
+  {
+    id: "gyrocopter",
+    name: "Gyrocopter",
+    plural: "Gyrocopters",
+    faction: "dwarves",
+    tier: 3,
+    hp: 20,
+    attack: 8,
+    defense: 5,
+    damage: 5,
+    speed: 7,
+    shots: 0,
+    ability: null,
+    abilities: ["rotors", "spotter"],
+    tags: PILOTED_TAGS,
+    growth: 7,
+    cost: { gold: 230 },
+    fightValue: 165,
+    sprite: "dwarves-gyrocopter",
+  },
+  {
+    id: "mortar",
+    name: "Mortar",
+    plural: "Mortars",
+    faction: "dwarves",
+    tier: 4,
+    hp: 28,
+    attack: 8,
+    defense: 8,
+    damage: 6,
+    speed: 3,
+    shots: 6,
+    ability: null,
+    abilities: ["lob"],
+    tags: MACHINE_TAGS,
+    growth: 4,
+    cost: { gold: 480, ore: 1 },
+    fightValue: 292,
+    sprite: "dwarves-mortar",
+  },
+  {
+    id: "steam-tank",
+    name: "Steam Tank",
+    plural: "Steam Tanks",
+    faction: "dwarves",
+    tier: 5,
+    hp: 90,
+    attack: 13,
+    defense: 17,
+    damage: 14,
+    speed: 3,
+    shots: 0,
+    ability: null,
+    abilities: ["ram"],
+    tags: MACHINE_TAGS,
+    growth: 2,
+    cost: { gold: 1150, ore: 2 },
+    fightValue: 887,
+    sprite: "dwarves-steam-tank",
+  },
+  {
+    id: "ironclad",
+    name: "Ironclad",
+    plural: "Ironclads",
+    faction: "dwarves",
+    tier: 6,
+    hp: 160,
+    attack: 18,
+    defense: 18,
+    damage: 28,
+    speed: 4,
+    shots: 8,
+    ability: null,
+    abilities: ["turret"],
+    tags: MACHINE_TAGS,
+    growth: 1,
+    cost: { gold: 4000, ore: 4, essence: 2 },
+    fightValue: 2343,
+    sprite: "dwarves-ironclad",
+  },
+];
+
 /** Every v0.2 faction creature, keyed by id. */
 export const FACTION_CREATURES: Readonly<
   Partial<Record<CreatureId, CreatureDef>>
@@ -541,6 +678,7 @@ export const FACTION_CREATURES: Readonly<
     ...UNDEAD_CREATURES,
     ...GOBLIN_CREATURES,
     ...CANDY_CREATURES,
+    ...DWARVES_CREATURES,
   ].map((c) => [c.id, c]),
 );
 
@@ -555,6 +693,8 @@ export function rosterOf(faction: string): readonly CreatureDef[] {
       return GOBLIN_CREATURES;
     case "candy":
       return CANDY_CREATURES;
+    case "dwarves":
+      return DWARVES_CREATURES;
     default:
       return [];
   }

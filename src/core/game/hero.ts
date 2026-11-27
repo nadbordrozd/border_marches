@@ -18,6 +18,7 @@ import {
 import {
   FEAT_EVERY,
   FEAT_LIST,
+  HELD_FEATS,
   findFeat,
   isVow,
   type FeatDef,
@@ -321,6 +322,7 @@ export function featWeight(hero: HeroState, feat: FeatDef): number {
 export function eligibleFeats(hero: HeroState): FeatDef[] {
   return FEAT_LIST.filter(
     (f) =>
+      !HELD_FEATS.has(f.id) &&
       !hero.feats.includes(f.id) &&
       (f.restriction === undefined || satisfies(hero, f.restriction)),
   );

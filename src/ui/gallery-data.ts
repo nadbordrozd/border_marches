@@ -22,6 +22,7 @@ import {
 } from "../core/magic/index.ts";
 import {
   ARTIFACT_LIST,
+  HELD_ARTIFACTS,
   SLOT_NAMES,
   WORN_SLOTS,
   type ArtifactDef,
@@ -33,7 +34,7 @@ import { RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { SCHOOLS, SCHOOL_NAMES } from "../data/effects.ts";
 import { rosterOf } from "../data/factionCreatures.ts";
 import { FACTIONS, findFaction, playableFactions } from "../data/factions.ts";
-import { FEAT_LIST } from "../data/feats.ts";
+import { FEAT_LIST, HELD_FEATS } from "../data/feats.ts";
 import { NEUTRAL_CREATURE_IDS } from "../data/neutrals.ts";
 import { OBJECT_TYPES, OBJECT_TYPE_IDS } from "../data/objectTypes.ts";
 import { SKILLS, type SkillDef } from "../data/skills.ts";
@@ -463,16 +464,16 @@ function artifactSections(): GallerySection[] {
   return ARTIFACT_GROUPS.flatMap((group) =>
     section(
       group,
-      ARTIFACT_LIST.filter((a) => artifactGroup(a) === group).map(
-        (a): GalleryEntry => ({
-          kind: "artifact",
-          id: a.id,
-          name: a.name,
-          art: [icon("artifact", a.id)],
-          artNote: iconNote("artifact", a.id),
-          facets: { slot: artifactSlot(a), rarity: artifactRarity(a) },
-        }),
-      ),
+      ARTIFACT_LIST.filter(
+        (a) => !HELD_ARTIFACTS.has(a.id) && artifactGroup(a) === group,
+      ).map((a): GalleryEntry => ({
+        kind: "artifact",
+        id: a.id,
+        name: a.name,
+        art: [icon("artifact", a.id)],
+        artNote: iconNote("artifact", a.id),
+        facets: { slot: artifactSlot(a), rarity: artifactRarity(a) },
+      })),
     ),
   );
 }
@@ -550,15 +551,16 @@ function skillSections(): GallerySection[] {
     out.push(
       ...section(
         vows ? "Vows" : "Feats",
-        FEAT_LIST.filter((f) => (f.restriction !== undefined) === vows).map(
-          (f): GalleryEntry => ({
-            kind: "feat",
-            id: f.id,
-            name: f.name,
-            art: [icon(kind, f.id)],
-            artNote: iconNote(kind, f.id),
-          }),
-        ),
+        FEAT_LIST.filter(
+          (f) =>
+            !HELD_FEATS.has(f.id) && (f.restriction !== undefined) === vows,
+        ).map((f): GalleryEntry => ({
+          kind: "feat",
+          id: f.id,
+          name: f.name,
+          art: [icon(kind, f.id)],
+          artNote: iconNote(kind, f.id),
+        })),
       ),
     );
   }

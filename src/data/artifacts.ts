@@ -617,6 +617,15 @@ const ROWS: ArtifactDef[] = [
     "The first time each of your stacks retaliates in a battle, the stack it strikes becomes Stuck for 2 rounds.",
     [sw("flypaper-ribbon")],
   ),
+  // FACTION_DWARVES 5.2: a maker of Steam outside the Deepforge.
+  wonder(
+    "pocket-boiler",
+    "Pocket Boiler",
+    "pocket",
+    4000,
+    "Your stacks that Defend also gain Steam 1, or their Steam grows by 1, to at most 3.",
+    [sw("pocket-boiler")],
+  ),
 
   // ------------------------------------------------ Cursed Wonders (6)
   wonder(
@@ -981,6 +990,14 @@ function piece(
  * (src/core/game/sites.ts digHere).
  */
 export const DEFERRED_ARTIFACTS: Readonly<Record<string, string>> = {};
+
+/**
+ * Artifacts in the catalogue but kept out of the game's loot for now: no
+ * generated map, Mystery Bag or gallery page holds them. The Deepforge's
+ * Pocket Boiler joins with the faction's integration bead (bzc.135), which
+ * updates the named-map fingerprints with it.
+ */
+export const HELD_ARTIFACTS: ReadonlySet<string> = new Set(["pocket-boiler"]);
 
 ROWS.push(KEYSTONE);
 

@@ -11,6 +11,7 @@
  */
 import {
   ARTIFACT_LIST,
+  HELD_ARTIFACTS,
   GRADE_VALUES,
   isCursed,
   type ArtifactDef,
@@ -67,7 +68,7 @@ function artifactsOf(
   grade: "trinket" | "wonder" | "piece" | "consumable" | "cursed",
 ): ArtifactDef[] {
   return ARTIFACT_LIST.filter((a) => {
-    if (a.kind === "relic") return false;
+    if (a.kind === "relic" || HELD_ARTIFACTS.has(a.id)) return false;
     if (grade === "consumable") return a.kind === "consumable";
     if (a.kind !== "worn") return false;
     if (grade === "cursed") return isCursed(a.id);
@@ -317,9 +318,12 @@ export function rollContents(type: ObjectTypeId, rng: Rng, tier: number): Data {
       return { resource, yield: 2, value: 2 * base, guardCreature: "sexton" };
     }
     case "faction-outpost": {
+      // The Deepforge joins the outpost pool with its integration bead
+      // (bzc.135), which updates the named-map fingerprints with it.
       const pool = Object.values(CREATURES).filter(
         (c) =>
           c.faction !== "neutral" &&
+          c.faction !== "dwarves" &&
           c.growth > 0 &&
           c.tier >= 1 &&
           c.tier <= Math.min(4, 2 + tier),

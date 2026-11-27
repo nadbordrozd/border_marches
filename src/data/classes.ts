@@ -1,7 +1,7 @@
 /**
  * Hero classes, Commands and specialties: the one data module for them
- * (RULES_V2 3.1, 3.3, 3.6, 3.7; FACTION_HUMANS/UNDEAD/GOBLINS/CANDY.md
- * section 7).
+ * (RULES_V2 3.1, 3.3, 3.6, 3.7; FACTION_HUMANS/UNDEAD/GOBLINS/CANDY/
+ * DWARVES.md section 7).
  *
  * Each class has starting stats (sum 6, Power and Lore at least 1), a
  * ten-entry stat pattern (level L uses entry (L - 2) mod 10), skill offer
@@ -19,9 +19,10 @@
  * and Mustering and takes the larger weight; Wayfinder, which no faction
  * table lists, takes CONTENT_HEROES' default (might 2, magic 6).
  *
- * The v0.2 starting armies and the 32 named heroes ({@link NAMED_HEROES},
+ * The v0.2 starting armies and the 40 named heroes ({@link NAMED_HEROES},
  * four per class with their specialties) are the faction documents'
- * (sections 7 and 8; beads bzc.11 and, for the Candy Kingdom, bzc.111).
+ * (sections 7 and 8; beads bzc.11 and, for the Candy Kingdom, bzc.111;
+ * for the Deepforge, bzc.130).
  */
 import type { Terrain } from "../core/map/types.ts";
 import type { PrimaryStat } from "./effects.ts";
@@ -115,6 +116,18 @@ export const COMMANDS: Readonly<Record<string, CommandDef>> = {
     id: "come-in-dear",
     name: "Come In, Dear",
     text: "Pick an enemy stack and one of your stacks within C + 4 hexes of it. The enemy is pulled toward yours until it is next to it, and becomes Stuck for 2 rounds.",
+  },
+  "ramming-speed": {
+    id: "ramming-speed",
+    name: "Ramming Speed",
+    text: "Pick one of your stacks and an enemy in a straight line at most 4 + C hexes away. Yours is pushed toward it until it stops; if it stops next to it, it Strikes it in melee, not retaliated.",
+  },
+  // FACTION_DWARVES 7's Overpressure: the id keeps the document's word;
+  // the name fits the action bar's 11-character line (bead bzc.130).
+  overpressure: {
+    id: "overpressure",
+    name: "Blow Off Steam",
+    text: "Pick a stack with Steam. Its Steam ends, and every other stack next to it, friend or foe, takes Harm of 15 x C per point of that Steam.",
   },
 };
 
@@ -629,6 +642,107 @@ export const CONFECTIONER: HeroClassDef = {
   portrait: "portrait-hero-confectioner",
 };
 
+/** Thane (FACTION_DWARVES 7). Army: 19 Tinkers, 5 Rivet Gunners. */
+export const THANE: HeroClassDef = {
+  id: "thane",
+  name: "Thane",
+  faction: "dwarves",
+  leaning: "might",
+  nativeTerrain: "volcanic",
+  stats: { attack: 1, defense: 3, power: 1, lore: 1 },
+  pattern: [D, A, D, P, D, A, L, D, A, P],
+  weights: weightsFromKinds(
+    {
+      bloom: 0,
+      accord: 0,
+      clock: 2,
+      hush: 2,
+      storm: 3,
+      offence: 5,
+      armour: 10,
+      archery: 8,
+      riposte: 7,
+      standards: 4,
+      tactics: 6,
+      leadership: 2,
+      fortune: 3,
+      captaincy: 6,
+      omens: 3,
+      logistics: 5,
+      pathfinding: 6,
+      scouting: 4,
+      wellspring: 1,
+      learning: 3,
+      estates: 7,
+      mustering: 6,
+      parley: 1,
+      scrollcraft: 3,
+    },
+    2,
+  ),
+  startingSkills: ["bulwark", "marksmanship"],
+  command: "ramming-speed",
+  startingArmy: [
+    { creature: "tinker", count: 19 },
+    { creature: "rivet-gunner", count: 5 },
+  ],
+  sprite: "hero-thane",
+  portrait: "portrait-hero-thane",
+};
+
+/**
+ * Artificer (FACTION_DWARVES 7). Army: 16 Tinkers, 4 Rivet Gunners, 1
+ * Mortar.
+ */
+export const ARTIFICER: HeroClassDef = {
+  id: "artificer",
+  name: "Artificer",
+  faction: "dwarves",
+  leaning: "magic",
+  nativeTerrain: "volcanic",
+  stats: { attack: 1, defense: 1, power: 2, lore: 2 },
+  pattern: [P, L, P, D, P, L, A, P, L, D],
+  weights: weightsFromKinds(
+    {
+      bloom: 1,
+      accord: 0,
+      clock: 6,
+      hush: 7,
+      storm: 10,
+      offence: 2,
+      armour: 4,
+      archery: 6,
+      riposte: 2,
+      standards: 3,
+      tactics: 4,
+      leadership: 1,
+      fortune: 4,
+      captaincy: 4,
+      omens: 5,
+      logistics: 3,
+      pathfinding: 5,
+      scouting: 4,
+      wellspring: 7,
+      learning: 6,
+      estates: 7,
+      mustering: 3,
+      parley: 2,
+      scrollcraft: 6,
+    },
+    6,
+  ),
+  startingSkills: ["stormcalling", "stewardship"],
+  startingPage: "jolt",
+  command: "overpressure",
+  startingArmy: [
+    { creature: "tinker", count: 16 },
+    { creature: "rivet-gunner", count: 4 },
+    { creature: "mortar", count: 1 },
+  ],
+  sprite: "hero-artificer",
+  portrait: "portrait-hero-artificer",
+};
+
 export const HERO_CLASSES: Readonly<Record<string, HeroClassDef>> = {
   chieftain: CHIEFTAIN,
   "knight-errant": KNIGHT_ERRANT,
@@ -639,6 +753,8 @@ export const HERO_CLASSES: Readonly<Record<string, HeroClassDef>> = {
   weatherwitch: WEATHERWITCH,
   nutcracker: NUTCRACKER,
   confectioner: CONFECTIONER,
+  thane: THANE,
+  artificer: ARTIFICER,
 };
 
 /** The hero class with this id; throws on an unknown id. */
@@ -689,8 +805,8 @@ function named(
 }
 
 /**
- * The 32 named heroes (FACTION_HUMANS, FACTION_UNDEAD, FACTION_GOBLINS and
- * FACTION_CANDY section 8; a faction's heroes join the hero pool once it
+ * The 40 named heroes (FACTION_HUMANS, FACTION_UNDEAD, FACTION_GOBLINS,
+ * FACTION_CANDY and FACTION_DWARVES section 8; a faction's heroes join the hero pool once it
  * is playable, src/data/players.ts `rosterFor`). Skill names map to skill ids as in the file comment
  * (Leadership -> banner, Armour -> bulwark, Accord -> covenant, Hush ->
  * quietus, Storm -> stormcalling).
@@ -824,5 +940,36 @@ export const NAMED_HEROES: readonly NamedHeroDef[] = [
   named("gingersnap", "Granny Gingersnap", "confectioner", {
     kind: "creature",
     creature: "gingerbread-man",
+  }),
+  // The Deepforge
+  named("brakka", "Thane Brakka Boltbeard", "thane", {
+    kind: "creature",
+    creature: "steam-tank",
+  }),
+  named("gristle", "Old Gristle Copperpot", "thane", {
+    kind: "creature",
+    creature: "rivet-gunner",
+  }),
+  named("hilde", "Captain Hilde Ironkettle", "thane", { kind: "command" }),
+  named("dunstan", "Foreman Dunstan Coalbright", "thane", {
+    kind: "resource",
+    resource: "wood-ore",
+  }),
+  named("mags", "Mags Sparkwrench", "artificer", {
+    kind: "spell",
+    spell: "jolt",
+  }),
+  named("silas", "Silas Ledgerby", "artificer", {
+    kind: "spell",
+    spell: "on-credit",
+  }),
+  named("valvina", "Auntie Valvina Steamwright", "artificer", {
+    kind: "skill",
+    skill: "stormcalling",
+    replaces: "stormcalling",
+  }),
+  named("nell", "Nell Fusewright", "artificer", {
+    kind: "creature",
+    creature: "mortar",
   }),
 ];

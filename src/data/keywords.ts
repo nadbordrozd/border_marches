@@ -577,6 +577,13 @@ export const KEYWORDS: readonly KeywordDef[] = [
     "Cannot walk; it may still attack a stack next to it, shoot, cast and act, and pushes and pulls still move it.",
     "bane",
   ),
+  condition(
+    "steam",
+    "Steam",
+    "Storm boon",
+    "Every Strike of its next attack, shot or retaliation deals 50% more damage per point of size; then Steam ends. At most 3; it never cools down.",
+    "boon",
+  ),
 ];
 
 const BY_ID: ReadonlyMap<string, KeywordDef> = new Map(
@@ -612,6 +619,7 @@ export interface KeywordMatch {
  */
 export const NAMES: readonly string[] = [
   "Black Gate",
+  "Blow Off Steam",
   "Border Gate",
   "Drill Sergeant",
   "Drill Yard",
@@ -623,6 +631,7 @@ export const NAMES: readonly string[] = [
   "Quest Gate",
   "Rock Candy Dragon",
   "Rock Candy Grotto",
+  "Steam Tank",
   "The Four O'Clock",
 ];
 

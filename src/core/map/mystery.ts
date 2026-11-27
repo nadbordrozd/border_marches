@@ -17,7 +17,12 @@
  * Pool: wearable Trinkets or Wonders, never cursed, never a Marvel piece or
  * a Marvel (the surprise is always a fair one).
  */
-import { ARTIFACT_LIST, GRADE_VALUES, isCursed } from "../../data/artifacts.ts";
+import {
+  ARTIFACT_LIST,
+  GRADE_VALUES,
+  HELD_ARTIFACTS,
+  isCursed,
+} from "../../data/artifacts.ts";
 import { deriveSeed } from "../rng.ts";
 import type { GameMap, MapObject } from "./types.ts";
 
@@ -41,7 +46,8 @@ export function mysteryPool(grade: MysteryGrade): readonly string[] {
       a.kind === "worn" &&
       a.grade === grade &&
       a.pieceOf === undefined &&
-      !isCursed(a.id),
+      !isCursed(a.id) &&
+      !HELD_ARTIFACTS.has(a.id),
   ).map((a) => a.id);
 }
 

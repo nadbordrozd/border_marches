@@ -1,8 +1,9 @@
 /**
  * The v0.2 town trees: the Realm's Castle (FACTION_HUMANS.md section 9),
  * the Restless's Churchyard (FACTION_UNDEAD.md 9), the Horde's Warcamp
- * (FACTION_GOBLINS.md 9) and the Candy Kingdom's Confectionery
- * (FACTION_CANDY.md 9), with the buildings every town shares
+ * (FACTION_GOBLINS.md 9), the Candy Kingdom's Confectionery
+ * (FACTION_CANDY.md 9) and the Deepforge's Steamworks (FACTION_DWARVES.md
+ * 9), with the buildings every town shares
  * (ECONOMY.md 6: halls, forts, Marketplace, Resource Silo, Magic Guild,
  * Tavern, the Keystone Hall).
  *
@@ -26,7 +27,17 @@ export const SPECIALS = {
   bakery: "bakery",
   larder: "larder",
   fourOClock: "the-four-oclock",
+  deepShaft: "deep-shaft",
+  repairYard: "repair-yard",
+  greatBoiler: "the-great-boiler",
 } as const;
+
+/**
+ * The Repair Yard (FACTION_DWARVES 9): after a battle won by a hero of its
+ * owner, each machine stack of that hero's army gets back this share of
+ * the creatures it lost (rounded down; one Repair Yard counts per player).
+ */
+export const REPAIR_YARD_SHARE = { num: 1, den: 3 } as const;
 
 /** The Bakery's extra Gingerbread Men a week (FACTION_CANDY 9). */
 export const BAKERY_GROWTH = 8;
@@ -656,6 +667,116 @@ export const CONFECTIONERY_TREE: TreeData = assemble(
       special: SPECIALS.larder,
       effect:
         "In your battles, a native stack that ends a walk on sweets eats them: it becomes Hastened for 2 rounds and heals 5 HP per creature, reviving",
+    }),
+  ],
+);
+
+export const STEAMWORKS_TREE: TreeData = assemble(
+  {
+    fort: ["Riveted Palisade", "Ironbound Wall", "Gun Keep"],
+    guildCap: 4,
+    keystone: {
+      id: "the-great-boiler",
+      name: "The Great Boiler",
+      special: SPECIALS.greatBoiler,
+      effect:
+        "every native stack in your armies starts each battle with Steam 1",
+    },
+  },
+  [
+    dwelling(
+      "tinkers-workshop",
+      "Tinkers' Workshop",
+      "tinker",
+      "Tinkers",
+      {},
+      [],
+      true,
+    ),
+    dwelling(
+      "rivet-range",
+      "Rivet Range",
+      "rivet-gunner",
+      "Rivet Gunners",
+      { gold: 800, wood: 5, ore: 3 },
+      ["tinkers-workshop"],
+    ),
+    dwelling(
+      "gyro-hangar",
+      "Gyro Hangar",
+      "gyrocopter",
+      "Gyrocopters",
+      { gold: 1200, wood: 5, ore: 5 },
+      ["fort-1"],
+    ),
+    dwelling(
+      "mortar-yard",
+      "Mortar Yard",
+      "mortar",
+      "Mortars",
+      { gold: 2000, wood: 5, ore: 8, essence: 1 },
+      ["rivet-range"],
+    ),
+    dwelling(
+      "boiler-works",
+      "Boiler Works",
+      "steam-tank",
+      "Steam Tanks",
+      { gold: 4000, wood: 5, ore: 10 },
+      ["gyro-hangar"],
+    ),
+    dwelling(
+      "great-foundry",
+      "Great Foundry",
+      "ironclad",
+      "Ironclads",
+      { gold: 8000, wood: 10, ore: 15, essence: 4 },
+      ["boiler-works", "mortar-yard"],
+    ),
+    drill(
+      "scrap-heap",
+      "Scrap Heap",
+      "tinker",
+      "salvage",
+      "Tinkers gain Salvage",
+      { gold: 800, ore: 5 },
+      ["tinkers-workshop"],
+    ),
+    drill(
+      "rivet-forge",
+      "Rivet Forge",
+      "rivet-gunner",
+      "red-hot-rivets",
+      "Rivet Gunners gain Red-Hot Rivets",
+      { gold: 1000, ore: 5 },
+      ["rivet-range"],
+    ),
+    drill(
+      "powder-magazine",
+      "Powder Magazine",
+      "mortar",
+      "incendiary-shells",
+      "Mortars gain Incendiary Shells",
+      { gold: 1500, wood: 5, ore: 5 },
+      ["mortar-yard"],
+    ),
+    b({
+      id: "deep-shaft",
+      name: "Deep Shaft",
+      cost: { gold: 1500, wood: 10 },
+      requires: ["marketplace"],
+      income: { ore: 1 },
+      special: SPECIALS.deepShaft,
+      effect: "+1 ore per day",
+    }),
+    b({
+      id: "repair-yard",
+      name: "Repair Yard",
+      cost: { gold: 3000, ore: 10, essence: 2 },
+      requires: ["boiler-works"],
+      special: SPECIALS.repairYard,
+      effect:
+        "After each battle your hero wins, each machine stack in its army gets back a third of the creatures it lost, rounded down (only one Repair Yard counts)",
     }),
   ],
 );

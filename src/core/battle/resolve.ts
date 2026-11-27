@@ -316,7 +316,40 @@ export function collectDamageMultipliers(
     const m = groundKind(g.kind).strikeMultiplier?.(ctx, g, standing);
     if (m) mods.push(m);
   }
-  return mods;
+  return dedupeMultipliers(mods);
+}
+
+/**
+ * Keeps every multiplier without a stackKey and the largest of each key
+ * (several Gyrocopters' Spotter, FACTION_DWARVES 5).
+ */
+function dedupeMultipliers(
+  mods: readonly MultiplierModifier[],
+): MultiplierModifier[] {
+  const out: MultiplierModifier[] = [];
+  const bestByKey = new Map<string, number>();
+  for (const m of mods) {
+    if (m.stackKey === undefined) {
+      out.push(m);
+      continue;
+    }
+    const i = bestByKey.get(m.stackKey);
+    if (i === undefined) {
+      bestByKey.set(m.stackKey, out.length);
+      out.push(m);
+    } else if (m.percent > (out[i] as MultiplierModifier).percent) {
+      out[i] = m;
+    }
+  }
+  return out;
+}
+
+/**
+ * The stack's Strikes are never halved for a shooter in melee, and it may
+ * shoot with an enemy next to it (Turret, FACTION_DWARVES 5).
+ */
+export function shootsPointBlank(creature: BattleCreatureStats): boolean {
+  return creature.abilities.some((a) => ability(a).pointBlank === true);
 }
 
 /**
@@ -412,7 +445,8 @@ export function computeBreakdown(
   const abilityMultipliers = [...collectDamageMultipliers(ctx), ...extra];
   const rangedInMelee =
     isRangedCreature(attacker.creature) &&
-    (kind === "melee" || kind === "retaliation");
+    (kind === "melee" || kind === "retaliation") &&
+    !shootsPointBlank(attacker.creature);
   const { damage, multiplier, percentProduct, percentCapped } = computeDamage({
     count: attacker.count,
     damagePerCreature: attacker.creature.damage,

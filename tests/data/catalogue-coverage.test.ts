@@ -61,8 +61,9 @@ describe("catalogue coverage", () => {
     // (FACTION_CANDY 5.2, icon bead bzc.112) and the Keystone, a relic of the
     // map objects (not a catalogue kind) with an icon by its game id (bead 9is).
     expect(ids("artifact")).toHaveLength(86);
-    // The 84 and the Flypaper Ribbon.
-    expect(ARTIFACT_LIST.filter((a) => a.kind !== "relic")).toHaveLength(85);
+    // The 84, the Flypaper Ribbon and the Deepforge's Pocket Boiler
+    // (FACTION_DWARVES 5.2; its icon comes with bead bzc.131).
+    expect(ARTIFACT_LIST.filter((a) => a.kind !== "relic")).toHaveLength(86);
     for (const id of ids("artifact")) {
       const def = findArtifact(id);
       expect(def, id).toBeDefined();
@@ -78,7 +79,8 @@ describe("catalogue coverage", () => {
           a.cursed !== true,
       ).length;
     expect(grade("trinket")).toBe(30);
-    expect(grade("wonder")).toBe(21);
+    // 20, the Flypaper Ribbon and the Pocket Boiler.
+    expect(grade("wonder")).toBe(22);
     expect(
       ARTIFACT_LIST.filter(
         (a) =>

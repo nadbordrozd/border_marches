@@ -6,14 +6,17 @@
  * order, start buildings, dwellings, halls and fort levels), its hero
  * classes, town names, birthright and magic leanings. The v0.2 factions
  * are the Realm (humans), the Restless (undead) and the Goblin Horde
- * (goblins), joined by the Candy Kingdom (candy, FACTION_CANDY.md); the
- * Lost World stays in the code and is not playable.
+ * (goblins), joined by the Candy Kingdom (candy, FACTION_CANDY.md). The
+ * Deepforge (dwarves, FACTION_DWARVES.md) has its data and rules here but
+ * is not playable until its integration bead (bzc.135); the Lost World
+ * stays in the code and is not playable.
  */
 import { BUILDING_IDS, BUILDINGS } from "./buildings.ts";
 import {
   CHURCHYARD_TREE,
   CONFECTIONERY_TREE,
   REALM_TREE,
+  STEAMWORKS_TREE,
   WARCAMP_TREE,
 } from "./factionTowns.ts";
 import type { School } from "../core/battle/types.ts";
@@ -133,6 +136,24 @@ export const CONFECTIONERY_TOWN: TownTreeDef = {
   art: "dinosaur",
 };
 
+export const STEAMWORKS_TOWN: TownTreeDef = {
+  ...STEAMWORKS_TREE,
+  neutralGarrison: [
+    { creature: "tinker", count: 22 },
+    { creature: "rivet-gunner", count: 8 },
+  ],
+  townNames: [
+    "Kettlehold",
+    "Cogsdeep",
+    "Brassbottom",
+    "Rivetrock",
+    "Old Smokestack",
+  ],
+  // The MVP camp family, a fallback only until the Deepforge town art
+  // (bzc.133) registers a "dwarves" family in src/assets/town-art.ts.
+  art: "dinosaur",
+};
+
 export const FACTIONS: readonly FactionDef[] = [
   {
     id: "humans",
@@ -200,6 +221,24 @@ export const FACTIONS: readonly FactionDef[] = [
       ability: "sticky",
     },
     schools: { bloom: 1, accord: 3, clock: 4, hush: 2, storm: 0 },
+    guildCap: 4,
+  },
+  {
+    id: "dwarves",
+    name: "The Deepforge",
+    blurb:
+      "Stand still and let it build: natives stoke when they Defend and strike with the steam, mortars shell the ground, tinkers patch the machines.",
+    // Playable with the integration bead (bzc.135).
+    available: false,
+    heroClasses: ["thane", "artificer"],
+    town: STEAMWORKS_TOWN,
+    colour: "#3aa38f",
+    birthright: {
+      name: "Stoke",
+      text: "When a native stack Defends, it also gains Steam 1, or its Steam grows by 1, to at most 3.",
+      ability: "stoke",
+    },
+    schools: { bloom: 1, accord: 0, clock: 2, hush: 3, storm: 4 },
     guildCap: 4,
   },
   {

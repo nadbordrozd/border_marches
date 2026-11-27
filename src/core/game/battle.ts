@@ -25,7 +25,7 @@
  */
 import { getCreature } from "../../data/creatures.ts";
 import { getHeroClass } from "../../data/hero.ts";
-import { SPECIALS } from "../../data/factionTowns.ts";
+import { REPAIR_YARD_SHARE, SPECIALS } from "../../data/factionTowns.ts";
 import type { CreatureId, FactionId } from "../../data/types.ts";
 import type { Terrain } from "../map/types.ts";
 import { deriveSeed } from "../rng.ts";
@@ -413,11 +413,19 @@ function takeArtifacts(
   events.push(spoilsEvent(winner, loser, moved));
 }
 
+/** A machine leaves a wreck (FACTION_DWARVES 1). */
+function isMachineCreature(creature: CreatureId): boolean {
+  return getCreature(creature).tags?.remains === "wreck";
+}
+
 /**
  * Field Surgeon (CONTENT_HEROES 2), in place: after a won battle each
- * stack regains tenths of the creatures it lost, rounded down.
+ * stack regains tenths of the creatures it lost, rounded down. The
+ * Repair Yard (FACTION_DWARVES 9), when the hero's owner holds one, adds
+ * a third for each machine stack: the two shares add before rounding.
  */
 function fieldSurgeon(
+  state: GameState,
   hero: HeroState,
   stacks: readonly BattleStack[],
   slots: readonly number[],
@@ -427,15 +435,20 @@ function fieldSurgeon(
     (n, e) => n + e.effect.tenths,
     0,
   );
-  if (tenths <= 0) return;
+  const yard = playerSpecials(state, hero.owner).includes(SPECIALS.repairYard);
+  if (tenths <= 0 && !yard) return;
+  const { num, den } = REPAIR_YARD_SHARE;
   slots.forEach((slot, i) => {
-    const before = stacks[i]?.count ?? 0;
-    const lost = before - (survivors[i] ?? 0);
-    const back = Math.floor((lost * tenths) / 10);
-    if (back <= 0) return;
-    const s = hero.army[slot];
     const creature = stacks[i]?.creature;
     if (creature === undefined) return;
+    const before = stacks[i]?.count ?? 0;
+    const lost = before - (survivors[i] ?? 0);
+    // tenths / 10 + (machine ? num / den : 0), over 10 x den.
+    const share =
+      tenths * den + (yard && isMachineCreature(creature) ? 10 * num : 0);
+    const back = Math.floor((lost * share) / (10 * den));
+    if (back <= 0) return;
+    const s = hero.army[slot];
     hero.army[slot] = { creature, count: (s?.count ?? 0) + back };
   });
 }
@@ -585,6 +598,7 @@ export function applyBattleResult(
     if (foe !== undefined) {
       if (retreat === undefined) {
         fieldSurgeon(
+          next,
           foe,
           setup.defender.stacks,
           defenderSlots,
@@ -599,7 +613,13 @@ export function applyBattleResult(
   }
 
   if (retreat === undefined) {
-    fieldSurgeon(hero, setup.attacker.stacks, attackerSlots, attackerSurvivors);
+    fieldSurgeon(
+      next,
+      hero,
+      setup.attacker.stacks,
+      attackerSlots,
+      attackerSurvivors,
+    );
   }
   const xp = killedHp(setup.defender.stacks, defenderSurvivors);
   gainXp(hero, xp, events);

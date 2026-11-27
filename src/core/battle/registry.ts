@@ -417,16 +417,32 @@ export interface AbilityDef {
    * Hold; in it, it cannot walk (Afters, FACTION_CANDY 5).
    */
   readonly roundEndTurn?: boolean;
+  /**
+   * The owner Defends (after its Defend is taken): Stoke (FACTION_DWARVES
+   * 3) adds Steam.
+   */
+  onDefend?(fx: Effects, owner: StackId): void;
   /** Activated: the act id (kind "ability") this ability performs. */
   readonly act?: string;
   /** Activated: usable every turn instead of once per battle (Hurl). */
   readonly everyTurn?: boolean;
+  /**
+   * Activated, once per battle, but the act's `check` decides whether a
+   * further use is allowed (Patch Up with Salvage): the engine does not
+   * refuse it as used. Each use is still recorded in `abilitiesUsed`.
+   */
+  readonly repeatByCheck?: boolean;
   /** Activated: the stack may walk first (`from` on the action). */
   readonly moveFirst?: boolean;
   /** The owner retaliates against every melee attack (Stand Fast). */
   readonly unlimitedRetaliation?: boolean;
   /** The owner's walk is a teleport within its Speed (Mist). */
   readonly teleportWalk?: boolean;
+  /**
+   * The owner may shoot with an enemy next to it, and none of its Strikes
+   * is halved for a shooter in melee (Turret, bends GAME_DESIGN 9.3).
+   */
+  readonly pointBlank?: boolean;
   /** The owner may walk again after its melee attack (Hit and Run). */
   readonly walkAfterAttack?: number;
   /**

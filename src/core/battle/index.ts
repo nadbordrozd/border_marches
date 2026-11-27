@@ -64,6 +64,7 @@ export {
   freeHexes,
   groundAt,
   makeCondition,
+  shootsPointBlank,
   sideOf,
   stackTotalHp,
   timelineClass,
@@ -72,9 +73,14 @@ export {
   CHAPEL_OF_OATHS,
   LAUNCH_RAMP,
   commandC,
+  SHELL_EFFECT,
+  isMachine,
   lineDirection,
+  pendingShells,
   reelInLimits,
 } from "./factions/index.ts";
+export type { PendingShell } from "./factions/index.ts";
+export { STEAM, STEAM_MAX, steamOf } from "./steam.ts";
 export { GET_UP_EFFECT, GET_UP_HALF } from "./resolve.ts";
 export {
   actionError,

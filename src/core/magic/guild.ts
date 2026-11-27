@@ -23,7 +23,10 @@ export const GUILD_OFFERS: readonly number[] = [4, 3, 3, 2, 1];
 
 export const MAX_GUILD_LEVEL = 5;
 
-/** Weights and guild caps from FACTION_HUMANS/UNDEAD/GOBLINS/CANDY section 2. */
+/**
+ * Weights and guild caps from FACTION_HUMANS/UNDEAD/GOBLINS/CANDY/DWARVES
+ * section 2.
+ */
 export const FACTION_SCHOOL_WEIGHTS: Readonly<
   Record<
     string,
@@ -56,6 +59,12 @@ export const FACTION_SCHOOL_WEIGHTS: Readonly<
   // the Confectioner can always learn, so no second guarantee.
   candy: {
     weights: { bloom: 1, accord: 3, clock: 4, hush: 2, storm: 0 },
+    cap: 4,
+  },
+  // FACTION_DWARVES 2: level 1 always holds a Storm page (the heaviest),
+  // which the Artificer can always learn, so no second guarantee.
+  dwarves: {
+    weights: { bloom: 1, accord: 0, clock: 2, hush: 3, storm: 4 },
     cap: 4,
   },
 };

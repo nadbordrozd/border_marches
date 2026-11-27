@@ -28,6 +28,7 @@ import {
   enemySide,
   groundAt,
   isRangedCreature,
+  shootsPointBlank,
   timelineClass,
 } from "./resolve.ts";
 import {
@@ -53,6 +54,7 @@ import {
   secondCastError,
 } from "./magic.ts";
 import { adjacentStacks, hasRule, otherSide, strongestOf } from "./rules.ts";
+import { stoke } from "./steam.ts";
 import type { Acting } from "./resolve.ts";
 import type {
   CastInfo,
@@ -256,7 +258,10 @@ function enemyAdjacent(
   );
 }
 
-/** Ranged, has shots, may shoot and no enemy stack adjacent. */
+/**
+ * Ranged, has shots, may shoot and no enemy stack adjacent (unless the
+ * stack shoots point-blank: Turret).
+ */
 export function canShoot(
   state: BattleState,
   stackId: StackId,
@@ -275,7 +280,8 @@ export function canShoot(
       hasRule(state, otherSide(s.side), "soaked-powder")
     ) &&
     !(g !== null && groundKind(g.kind).cannotShoot === true) &&
-    !enemyAdjacent(state, s, hex)
+    // Turret (FACTION_DWARVES 5): an enemy next to it does not stop it.
+    (!enemyAdjacent(state, s, hex) || shootsPointBlank(s.creature))
   );
 }
 
@@ -520,7 +526,13 @@ export function actionError(
       const abDef = ability(action.ability);
       const actId = abDef.act;
       if (!actId) return `${action.ability} is not an activated ability`;
-      if (abDef.everyTurn !== true && s.abilitiesUsed.includes(action.ability))
+      // A repeat use of a once-per-battle ability is the act's to allow
+      // (Patch Up with Salvage, `repeatByCheck`).
+      if (
+        abDef.everyTurn !== true &&
+        abDef.repeatByCheck !== true &&
+        s.abilitiesUsed.includes(action.ability)
+      )
         return "this ability is used for the battle";
       let at = state;
       if (action.from !== undefined && !sameHex(action.from, s.hex)) {
@@ -1220,10 +1232,23 @@ export function applyAction(
       advance(d, fx);
       return { state: d.toState(), events: d.events };
     }
-    case "defend":
+    case "defend": {
       d.update(id, { defending: true });
       d.emit({ type: "defend", stackId: id });
+      // Rules on Defending: Stoke (FACTION_DWARVES 3), and the Pocket
+      // Boiler (5.2) for a stack that does not Stoke already.
+      const s = d.get(id);
+      let stoked = false;
+      for (const a of s.creature.abilities) {
+        const def = ability(a);
+        if (!def.onDefend || !fx.isAlive(id)) continue;
+        stoked = true;
+        d.within(null, `ability:${a}`, () => def.onDefend?.(fx, id));
+      }
+      if (!stoked && hasRule(d, s.side, "pocket-boiler"))
+        d.within(null, "pocket-boiler", () => stoke(fx, id));
       break;
+    }
     case "move": {
       if (action.swapWith !== undefined) fx.swap(id, action.swapWith);
       else walkTo(d, fx, id, action.to);

@@ -569,6 +569,8 @@ export interface MultiplierModifier {
   readonly source: string;
   readonly label: string;
   readonly percent: number;
+  /** Modifiers with the same key do not stack: only the largest applies. */
+  readonly stackKey?: string;
 }
 
 /** An exact rational number. */

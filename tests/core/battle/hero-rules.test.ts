@@ -949,6 +949,55 @@ describe("condition-kind rules", () => {
     ).toBe(true);
   });
 
+  rule(
+    "pocket-boiler",
+    "a stack that Defends gains Steam, to at most 3",
+    () => {
+      const s0 = board();
+      const id = s0.activeStackId as StackId;
+      const side = stack(s0, id).side;
+      const s = withRules(s0, side, ["pocket-boiler"]);
+      const after = applyAction(s, { type: "defend", stackId: id }).state;
+      expect(cond(after, id, "steam")).toMatchObject({ size: 1, clock: null });
+      // It grows by 1 and stops at 3.
+      const fed = withRules(
+        withConditions(s0, id, [
+          { kind: "steam", size: 3, maxSize: 3, clock: null },
+        ]),
+        side,
+        ["pocket-boiler"],
+      );
+      const top = applyAction(fed, { type: "defend", stackId: id }).state;
+      expect(cond(top, id, "steam")?.size).toBe(3);
+      // Without the rule, a plain Defend.
+      const plain = applyAction(s0, { type: "defend", stackId: id }).state;
+      expect(cond(plain, id, "steam")).toBeUndefined();
+    },
+  );
+
+  rule("scalding", "spent Steam leaves Burning of 5 x its size", () => {
+    const s = withRules(
+      withConditions(board(), "a1", [
+        { kind: "steam", size: 2, maxSize: 3, clock: null },
+      ]),
+      "attacker",
+      ["scalding"],
+    );
+    const { d, fx: r } = fx(s);
+    r.strikeKind("a1", "d0", "melee", 0);
+    r.resolveReactions();
+    expect(cond(d.toState(), "a1", "steam")).toBeUndefined();
+    expect(cond(d.toState(), "d0", "burning")).toMatchObject({
+      size: 10,
+      clock: 2,
+    });
+    // Without the rule the Steam is spent and nothing burns.
+    const plain = fx(withRules(s, "attacker", []));
+    plain.fx.strikeKind("a1", "d0", "melee", 0);
+    plain.fx.resolveReactions();
+    expect(cond(plain.d.toState(), "d0", "burning")).toBeUndefined();
+  });
+
   rule("co-signer", "half a Reckoning goes to the nearest enemy", () => {
     const s = withRules(
       withConditions(board(), "a1", [{ kind: "reckoning", size: 20 }]),
