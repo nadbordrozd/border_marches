@@ -30,7 +30,8 @@ import { findHeroDef, playerColour, rosterFor } from "../../data/players.ts";
 import type { CreatureId, FactionId, ResourceId } from "../../data/types.ts";
 import type { GameMap, MapObject } from "../map/types.ts";
 import { createRng, deriveSeed } from "../rng.ts";
-import { fixDailyMaxima, settleNavalState } from "./naval.ts";
+import { HARBOUR_SHIPYARD } from "../../data/naval.ts";
+import { fixDailyMaxima, isNavalMap, settleNavalState } from "./naval.ts";
 import { drawFromPool, newHeroState, refreshTaverns } from "./players.ts";
 import { weeklyGrowth } from "./progression.ts";
 import { mineResourceOf } from "./site-state.ts";
@@ -118,6 +119,19 @@ export function newFactionTown(
     town.dwellings[creature] = { available: g.added, remainder: g.remainder };
   }
   return town;
+}
+
+/**
+ * An Islands map's start town begins with its Shipyard built (NAVAL 8.4,
+ * bead bzc.155): the generator marks it `data.shipyard`. Only on a naval
+ * map, and only when the faction's tree has a Shipyard.
+ */
+function withShipyard(map: GameMap, obj: MapObject, town: TownState): void {
+  if (obj.data["shipyard"] !== true || !isNavalMap(map)) return;
+  const tree = townTree(town.faction);
+  if (tree?.buildings[HARBOUR_SHIPYARD] === undefined) return;
+  if (!town.buildings.includes(HARBOUR_SHIPYARD))
+    town.buildings.push(HARBOUR_SHIPYARD);
 }
 
 /**
@@ -306,6 +320,7 @@ export function newGame(
         if (owner !== null) {
           const f = (setups.get(owner) as PlayerSetup).faction;
           const town = newFactionTown(obj.id, f, owner, townName(f, obj));
+          withShipyard(map, obj, town);
           // A player's starting town begins with a militia (RULES_V2 5.5).
           for (const s of startingMilitia(town)) {
             addToArmy(town.garrison, s.creature, s.count);
@@ -318,6 +333,7 @@ export function newGame(
         ) {
           const f = faction as FactionId;
           const town = newFactionTown(obj.id, f, null, townName(f, obj));
+          withShipyard(map, obj, town);
           const garrison = garrisonData(obj) ?? townTree(f)?.neutralGarrison;
           for (const s of garrison ?? []) {
             addToArmy(town.garrison, s.creature, s.count);

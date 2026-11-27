@@ -231,6 +231,7 @@
 }
 
 .gm-field[hidden],
+.gm-water[hidden],
 .gm-map-intro[hidden] {
   display: none;
 }

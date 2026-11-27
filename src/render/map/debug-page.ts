@@ -27,7 +27,7 @@ import { CELL_PX } from "../../assets/manifest";
 import type { GameMap, MapCell } from "../../core/map/types";
 import { cellAt, isPassable, objectBlockedSet } from "../../core/map/types";
 import type { Route } from "../../router";
-import { MAP_SIZES, generateMap } from "../../core/map/generate";
+import { MAP_SIZES, WATER_MODES, generateMap } from "../../core/map/generate";
 import { findPathInContext } from "../../core/game/pathfinding";
 import { buildNamedMap } from "../../core/map/named";
 import { playableFactions } from "../../data/factions";
@@ -278,6 +278,8 @@ export async function startMapDebug(
   const which = params.get("map");
   const size = params.get("size");
   const players = Number(params.get("players"));
+  // Water (bead bzc.155): none, coast, inland or islands.
+  const water = WATER_MODES.find((m) => m === params.get("water"));
   const named = params.get("named");
   const seed = route.seed ?? DEFAULT_DEBUG_SEED;
   const showcase = which === "decorations" ? decorationShowcase() : null;
@@ -295,6 +297,7 @@ export async function startMapDebug(
                 ...(players === 2 || players === 3 || players === 4
                   ? { players }
                   : {}),
+                ...(water !== undefined ? { water } : {}),
               });
   const source =
     named !== null

@@ -37,11 +37,24 @@
  * 9. decorations  passable decorations and impassable props, clear of
  *             every way, object and corridor (decorate.ts)
  *
+ * Water (bead bzc.155, docs/design/NAVAL.md 8 and 21): with a water mode
+ * other than None, Inland Sea and Islands carve their sea after the zones
+ * (gen/sea-water.ts) and the generator sails from then on; Coast draws its
+ * coasts in the water stage; landings are set aside before the objects,
+ * and after them the sea stage (gen/sea.ts) makes the sea zones, straits,
+ * access and the sea fill. Water None runs none of it.
+ *
  * Every tunable number lives in {@link DEFAULT_GEN_CONFIG} (gen/config.ts).
  */
 import type { GameMap, MapCell } from "./types.ts";
 import { DEFAULT_GEN_CONFIG } from "./gen/config.ts";
-import type { GenConfig, MapSize, PlayerCount } from "./gen/config.ts";
+import { waterModeFor } from "./gen/config.ts";
+import type {
+  GenConfig,
+  MapSize,
+  PlayerCount,
+  WaterMode,
+} from "./gen/config.ts";
 import { at } from "./gen/grid.ts";
 import { decorateMap } from "./decorate.ts";
 import { buildRooms } from "./gen/rooms.ts";
@@ -71,9 +84,24 @@ import { fillFields, reservePlazas } from "./gen/fields.ts";
 import type { FieldReport } from "./gen/fields.ts";
 import { markDeep, placeWater, tidyWater } from "./gen/water.ts";
 import { layoutZones } from "./gen/zones.ts";
+import { withNavalPools } from "./gen/naval-pools.ts";
+import { carveSea, refreshSeaPass } from "./gen/sea-water.ts";
+import { placeSea, prepareShores, settleSeaMap } from "./gen/sea.ts";
+import type { SeaReport } from "./gen/sea.ts";
 
-export { DEFAULT_GEN_CONFIG, MAP_SIZES } from "./gen/config.ts";
-export type { GenConfig, MapSize, PlayerCount } from "./gen/config.ts";
+export {
+  DEFAULT_GEN_CONFIG,
+  MAP_SIZES,
+  WATER_MODES,
+  waterModeFor,
+  waterModesFor,
+} from "./gen/config.ts";
+export type {
+  GenConfig,
+  MapSize,
+  PlayerCount,
+  WaterMode,
+} from "./gen/config.ts";
 
 export interface GenerateOptions {
   /**
@@ -96,6 +124,14 @@ export interface GenerateOptions {
    * Default true; a named map turns it off and decorates after its edits.
    */
   decorations?: boolean;
+  /**
+   * Water (docs/design/NAVAL.md 8.1, bead bzc.155): "none" (the default)
+   * is today's generator byte for byte, never naval; "coast", "inland"
+   * and "islands" make a naval map with seas, sea zones, straits and the
+   * sea fill. Inland Sea and Islands need M or larger (smaller sizes make
+   * Coast).
+   */
+  water?: WaterMode;
   /**
    * Overrides of the default configuration, merged one level deep (each
    * given section replaces only the keys it names).
@@ -126,6 +162,8 @@ export interface GenerateInfo {
   clearings: number[];
   /** Ponds put in clearings (bead bzc.96). */
   fields: FieldReport;
+  /** The water mode made and its seas (bead bzc.155; absent on None). */
+  sea?: SeaReport;
 }
 
 /** Row-major cells of every pass and gap corridor (kept clear of props). */
@@ -166,8 +204,15 @@ export function generateMapWithInfo(
   const cfg = resolveConfig(options.config);
   // The artifacts this map's loot leaves out (the named maps', bead
   // bzc.135), for every stage that rolls an artifact.
-  return withLootWithout(cfg.objects.lootWithout, () =>
-    generateResolved(seed, options, cfg),
+  // A naval map's loot, banks, shrines, scholars and tutors may hold the
+  // sea artifacts, the naval spells and Seafaring (NAVAL 7.5, bead
+  // bzc.154); Water None stays outside, so dry maps keep their draws.
+  const naval =
+    waterModeFor(options.size ?? "M", options.water ?? "none") !== "none";
+  return withNavalPools(naval, () =>
+    withLootWithout(cfg.objects.lootWithout, () =>
+      generateResolved(seed, options, cfg),
+    ),
   );
 }
 
@@ -184,9 +229,12 @@ function generateResolved(
   }
   const active = Math.max(1, Math.min(players, options.activePlayers ?? 1));
   const st = newState(seed | 0, size, players, active, cfg, side, side);
+  st.water = waterModeFor(size, options.water ?? "none");
   const lap = (stage: string): void => options.onStage?.(stage);
 
   layoutZones(st);
+  // Inland Sea and Islands: the sea goes in before the towns (bead bzc.155).
+  carveSea(st);
   placeTowns(st);
   placeVolcanic(st);
   placeWinter(st);
@@ -195,6 +243,7 @@ function generateResolved(
   placeSwamp(st);
   lap("zones+towns");
   placeWater(st);
+  refreshSeaPass(st);
   paintTerrain(st);
   // Room set aside for the big sites of the wild zones (bead bzc.96).
   reservePlazas(st);
@@ -231,9 +280,18 @@ function generateResolved(
   // A clearing gets a pond on some maps (bead bzc.96).
   const fields = fillFields(st);
   markDeep(st);
+  refreshSeaPass(st);
+  // A naval map's coasts keep their landing cells (bead bzc.155).
+  if (st.water !== "none") prepareShores(st);
   lap("wobble");
   const report = placeObjects(st);
   lap("objects");
+  // The seas of a naval map: sea zones, straits, landings and the sea fill.
+  const sea = st.water === "none" ? undefined : placeSea(st);
+  if (sea !== undefined) {
+    markDeep(st);
+    lap("sea");
+  }
 
   const cells: MapCell[] = [];
   for (let i = 0; i < st.g.n; i++) {
@@ -262,10 +320,13 @@ function generateResolved(
     objects: st.objects,
     zones: Array.from(st.zone),
   };
+  if (sea !== undefined && sea.bodies > 0) map.naval = true;
   if (options.decorations !== false) {
     decorateMap(map, { corridors: corridorCells(st) });
     lap("decorations");
   }
+  // Boats at the Islands starts' docks (computed on the finished map).
+  if (sea !== undefined && map.naval === true) settleSeaMap(map, sea);
   return {
     map,
     info: {
@@ -280,6 +341,7 @@ function generateResolved(
       hoards: report.hoards,
       clearings: report.clearings,
       fields,
+      ...(sea !== undefined ? { sea } : {}),
     },
   };
 }

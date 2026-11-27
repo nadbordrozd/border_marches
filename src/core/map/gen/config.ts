@@ -30,6 +30,81 @@ export function everySize<T>(value: T): Record<MapSize, T> {
 /** Number of player starts a map can have. */
 export type PlayerCount = 2 | 3 | 4;
 
+/**
+ * The setup screen's Water (docs/design/NAVAL.md 8.1, bead bzc.155):
+ * "none" is today's generator byte for byte (its lakes and short coasts are
+ * scenery); "coast" a real coast whose sea ships sail; "inland" a sea in
+ * the middle with the Hold's zone an island in it; "islands" every zone an
+ * island. Inland Sea and Islands need M or larger; on smaller maps they
+ * fall back to Coast.
+ */
+export type WaterMode = "none" | "coast" | "inland" | "islands";
+
+/** Every water mode, in the setup screen's order. */
+export const WATER_MODES: readonly WaterMode[] = [
+  "none",
+  "coast",
+  "inland",
+  "islands",
+];
+
+/** The sizes too small for Inland Sea and Islands (NAVAL 8.1). */
+const COAST_ONLY: readonly MapSize[] = ["S", "SM"];
+
+/** The water modes a map size offers (S and SM: None and Coast). */
+export function waterModesFor(size: MapSize): readonly WaterMode[] {
+  return COAST_ONLY.includes(size) ? ["none", "coast"] : WATER_MODES;
+}
+
+/** The mode a size really generates for a requested one. */
+export function waterModeFor(size: MapSize, mode: WaterMode): WaterMode {
+  return waterModesFor(size).includes(mode) ? mode : "coast";
+}
+
+/** One water mode's numbers (NAVAL 8.1 and 8.6), per map size. */
+export interface SeaModeConfig {
+  /** Share of the map under water (target range). */
+  share: readonly [number, number];
+  /** Sea zones per sea body, per size (inclusive range). */
+  seaZones: Record<MapSize, readonly [number, number]>;
+  /** Whirlpool pairs per size (inclusive range). */
+  whirlpools: Record<MapSize, readonly [number, number]>;
+  /** Ferry Landing pairs per size (inclusive range). */
+  ferries: Record<MapSize, readonly [number, number]>;
+}
+
+export interface SeaConfig {
+  coast: SeaModeConfig & {
+    /** Coasts per size (each along its own map edge). */
+    edges: Record<MapSize, number>;
+    /** Coast length as a fraction of its edge. */
+    length: readonly [number, number];
+    /** Moored boats per sea. */
+    boats: readonly [number, number];
+  };
+  inland: SeaModeConfig;
+  islands: SeaModeConfig;
+  /** Visitable sea objects per 100 sea cells (NAVAL 8.6). */
+  density: number;
+  /** Least landing cells per coast (NAVAL 8.3). */
+  landingCells: number;
+  /** Width (cells) of a strait's channel (inclusive range). */
+  straitWidth: readonly [number, number];
+  /**
+   * The generator's price of a landing in its movement costs (a landing
+   * without Seafaring ends the day: about half a day on average).
+   */
+  landingCost: number;
+  /**
+   * Fill weight of each sea object the sea fill draws (NAVAL 5's Weight
+   * column); the rule objects (Shipwright, Lighthouse, Ferry Landing,
+   * Moored Boat, Whirlpool, Kraken's Deep) are placed by rule instead.
+   */
+  weights: Readonly<Record<string, number>>;
+  /** Sea objects worth this much or more get a sea guard (NAVAL 8.6). */
+  guardFrom: number;
+}
+
 /** One line of the start kit: what every player finds near home. */
 export interface StartKitItem {
   /** Row id in src/data/mapObjects.ts. */
@@ -227,6 +302,13 @@ export interface GenConfig {
     /** Keep water at least this far from town footprints. */
     townClearance: number;
   };
+
+  /**
+   * The seas of a naval map (docs/design/NAVAL.md 8, bead bzc.155): read
+   * only when the generator's water mode is not None, so a dry map never
+   * draws from them.
+   */
+  sea: SeaConfig;
 
   borders: {
     /** Extra depth (cells) of the range on its spine side, at most. */
@@ -750,6 +832,52 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     minBody: 9,
     minDeep: 3,
     townClearance: 4,
+  },
+
+  // NAVAL.md 8 (bead bzc.155). Water None never reads these.
+  sea: {
+    coast: {
+      share: [0.08, 0.15],
+      edges: { S: 1, SM: 1, M: 1, L: 2, XL: 2 },
+      length: [0.7, 0.95],
+      boats: [1, 2],
+      seaZones: everySize([1, 1] as const),
+      whirlpools: everySize([0, 0] as const),
+      ferries: { S: [0, 0], SM: [0, 0], M: [0, 1], L: [1, 1], XL: [1, 2] },
+    },
+    inland: {
+      share: [0.25, 0.35],
+      seaZones: { S: [1, 1], SM: [1, 1], M: [1, 2], L: [2, 3], XL: [3, 3] },
+      whirlpools: { S: [0, 0], SM: [0, 0], M: [1, 1], L: [1, 2], XL: [2, 3] },
+      ferries: { S: [0, 0], SM: [0, 0], M: [0, 1], L: [1, 1], XL: [1, 2] },
+    },
+    islands: {
+      share: [0.45, 0.6],
+      seaZones: { S: [1, 1], SM: [2, 2], M: [4, 5], L: [8, 10], XL: [14, 17] },
+      whirlpools: { S: [0, 0], SM: [0, 0], M: [1, 1], L: [1, 2], XL: [2, 3] },
+      ferries: everySize([0, 0] as const),
+    },
+    density: 1.5,
+    landingCells: 3,
+    straitWidth: [1, 3],
+    landingCost: 750,
+    weights: {
+      "pearl-bed": 2,
+      "fishing-village": 3,
+      "pirate-cove": 2,
+      "siren-grotto": 2,
+      buoy: 5,
+      "mermaid-rock": 4,
+      "sirens-rock": 2,
+      "shrine-of-the-tides": 3,
+      shipwreck: 4,
+      "coral-grotto": 3,
+      flotsam: 10,
+      "sea-chest": 6,
+      castaway: 3,
+      "message-in-a-bottle": 3,
+    },
+    guardFrom: 1500,
   },
 
   borders: {

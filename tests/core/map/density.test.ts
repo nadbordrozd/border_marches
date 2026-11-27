@@ -119,7 +119,8 @@ describe("denser maps (bzc.50)", { timeout: HEAVY_TIMEOUT }, () => {
           !authored.includes(t) &&
           !desert.includes(t) &&
           !candy.includes(t) &&
-          // The sea objects (bead bzc.151): only a naval map's sea fill.
+          // The sea objects (bead bzc.151): only a naval map's sea fill
+          // (bead bzc.155; tests/core/map/objects.test.ts places them all).
           !(SEA_OBJECT_TYPE_IDS as readonly string[]).includes(t) &&
           !(size === "S" && t === "keepers-vault") &&
           !(size === "S" && rareOnS.includes(t)) &&

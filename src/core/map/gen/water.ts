@@ -5,6 +5,7 @@
  * the end ({@link markDeep}): only water with no land among its 8 neighbours.
  */
 import { at, components, fbm, N4, N8 } from "./grid.ts";
+import { coastWater } from "./sea-water.ts";
 import { T, stageRng, stageSalt, townCells } from "./state.ts";
 import type { GenState } from "./state.ts";
 
@@ -15,7 +16,10 @@ export function placeWater(st: GenState): void {
   const water = new Uint8Array(g.n);
   const w = g.w;
 
-  if (rng.chance(wc.coastChance)) {
+  // Water Coast (bead bzc.155): the naval coasts, from their own stream,
+  // instead of today's optional one. None keeps today's draws.
+  if (st.water === "coast") coastWater(st, water);
+  else if (st.water === "none" && rng.chance(wc.coastChance)) {
     const edge = rng.int(0, 3);
     const len = rng.float(...wc.coastLength) * w;
     const centre = rng.float(len / 2 - w * 0.1, w - len / 2 + w * 0.1);
@@ -137,6 +141,13 @@ export function tidyWater(st: GenState): void {
   });
   land.cells.forEach((cells, k) => {
     if (k === main || cells.length >= cfg.water.minBody * 4) return;
+    // A naval map's islet that holds a town or an object stays (bead
+    // bzc.155); Water None keeps today's rule.
+    if (
+      st.water !== "none" &&
+      cells.some((i) => (st.occupied[i] ?? 0) === 1 || st.keepOpen[i] === 1)
+    )
+      return;
     for (const i of cells) {
       st.terrain[i] = T.water;
       st.obstacle[i] = 0;

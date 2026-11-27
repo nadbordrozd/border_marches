@@ -1229,3 +1229,72 @@ Calls made in bead 6:
 | Off a naval map Seafaring's held ranks are never raised either                                                                                     | 7.3: weight 0 off naval maps; offering a useless rank would consume a draw                                                                                 |
 | School Shrines and Scholars on a naval map may also teach the four naval adventure spells                                                          | 7.5 puts the five spells into those draws; on other maps they teach battle spells as before                                                                |
 | The generator's naval pools are a switch (`withNavalPools`) the water modes (bead 7) turn on                                                       | No generated map is naval yet; every existing map's draws are unchanged (pinned named-map features hold)                                                   |
+
+## 21. Bead 7's API (bzc.155): seas, islands and the sea fill
+
+What the generator's water modes built on beads 1-6, for the naval AI
+(bead 8) and the Saltglass Isles (bead 10).
+
+| Item                                   | Where                                  | Meaning                                                                                                                                                                                                                       |
+| -------------------------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GenerateOptions.water` (`WaterMode`)  | `src/core/map/generate.ts`             | `"none"` (the default: today's generator byte for byte, never naval), `"coast"`, `"inland"`, `"islands"`; `waterModesFor(size)` / `waterModeFor(size, mode)`: Inland Sea and Islands on M, L, XL, else Coast                  |
+| `GenerateInfo.sea` (`SeaReport`)       | `src/core/map/gen/sea.ts`              | The mode made, seas, share, sea zones (cells, tier, coast, hold), `seaZoneOf`, straits (channel, guard id), landings per coast-linked zone, start docks, objects placed by type, sea guards, unplaced                         |
+| `config.sea`                           | `src/core/map/gen/config.ts`           | The per-size numbers below; Water None never reads them                                                                                                                                                                       |
+| Carving                                | `src/core/map/gen/sea-water.ts`        | Coast: one or two coasts along map edges in the water stage. Inland Sea and Islands: the sea carved into the zone layout before the towns, each zone keeping a core of land; `GenState.seaPass` then makes the generator sail |
+| The sea stage                          | `src/core/map/gen/sea.ts` (`placeSea`) | After the land objects: sea zones, reefs and straits, landings, access, rules, fill and guards; `prepareShores` sets landings aside before the land objects; `settleSeaMap` adds the Islands boats on the finished map        |
+| Map data                               | objects                                | Strait guards: `data.strait` (and `data.holdStrait` into the Hold's moat); Islands start towns: `data.shipyard` (newGame builds the Shipyard); a Shipwright's `data.dock`; Ferry Landing and Whirlpool `data.pair`            |
+| `StartFairness.openSea`, `firstStrait` | `src/core/map/fairness.ts`             | Naval maps only: days to the first deep sea cell (walking to the shore and sailing), and the fight value of the nearest strait guard that is not the Hold's; `travelCosts(..., { sail: true })`                               |
+| Setup                                  | `src/ui/app.ts`                        | `GameSetup.water`, the Water row (Inland Sea and Islands greyed below Medium), `?water=` in the address, the last choice remembered in the browser (`WATER_SETTING_KEY`)                                                      |
+| `withNavalPools`                       | `generate.ts`                          | A naval mode generates inside bead 6's naval pools; Water None outside them                                                                                                                                                   |
+| Tools                                  | `tools/map-poster.mjs`, `?view=map`    | `--water` / `&water=`; `tests/ui/water-check.mjs` takes the muted setup and new-game screenshots                                                                                                                              |
+
+**Per-size numbers** (`config.sea`):
+
+| Item                                      | S           | SM          | M      | L                   | XL                  |
+| ----------------------------------------- | ----------- | ----------- | ------ | ------------------- | ------------------- |
+| Modes offered                             | None, Coast | None, Coast | all    | all                 | all                 |
+| Coast: coasts (map edges)                 | 1           | 1           | 1      | 2                   | 2                   |
+| Coast: water share                        | 8-15%       | 8-15%       | 8-15%  | 8-15%               | 8-15%               |
+| Inland Sea: share                         | -           | -           | 25-35% | 25-35%              | 25-35%              |
+| Inland Sea: sea zones                     | -           | -           | 1-2    | 2-3                 | 3                   |
+| Islands: share                            | -           | -           | 45-60% | 45-60%              | 45-60%              |
+| Islands: sea zones (with the Hold's moat) | -           | -           | 4-5    | 8-10                | 14-17               |
+| Whirlpool pairs (Inland, Islands)         | -           | -           | 1      | 1-2                 | 2-3                 |
+| Ferry pairs (Coast, Inland)               | 0           | 0           | 0-1    | 1                   | 1-2                 |
+| Kraken's Deep                             | -           | -           | -      | 1 (Inland, Islands) | 1 (Inland, Islands) |
+| Moored boats per sea (Coast)              | 1-2         | 1-2         | 1-2    | 1-2                 | 1-2                 |
+
+Everywhere: 1.5 visitable sea objects per 100 sea cells; three landing cells
+or more per coast-linked zone (five set aside before the land objects);
+straits 1-3 cells wide; a sea guard on every sea object worth 1500 or more
+but the access objects.
+
+**Generation time** (one core, this machine, seeds 1-2): S 30-50 ms; M
+200-300 ms; L 0.7-1.1 s; XL 1.8 s (Coast), 2.5-2.9 s (Islands), 3-4 s
+(Inland Sea). Water None is today's: M about 200 ms, L about 700 ms, XL
+about 1.9 s.
+
+**Fairness** (section 8.4's two measures, `startFairness`): on M Inland Sea
+and Islands maps (seeds 1-12) the first strait's guard is the same for
+every start (one shared stack on every strait out of a start's home
+waters), and the days to open sea are within half a day on 23 of 24 maps
+(Islands M seed 4 spreads 0.57 days). Coast maps are not held to it: a
+coast lies along one or two edges, so some starts are far from it by
+design.
+
+Calls made in bead 7:
+
+| Call                                                                                                                                                                          | Why                                                                                                                                                                                                                |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Water None is today's generator byte for byte (its lakes and short coasts stay scenery, never naval), and it is the default, in the generator and in setup                    | 8.1 named Coast the default, but Coast changes every map (8-15% water against today's 2-4%); the orchestrator asked that a default random map be today's unless a sea is asked for. The setup remembers the choice |
+| Coast is a new, larger coast from its own stream, not today's coast promoted                                                                                                  | Today's coasts are 2-4% of the map, rarely a sea; 8.1 asks 8-15%                                                                                                                                                   |
+| Seas are split into sea zones grown from far-apart seeds; a strait is a reef of grey rock (mountains in 2x2 blocks, wood where no block fits) along the seam with one channel | 8.2's straits need the sea zones parted; ships cannot squeeze between two land corners, so a 4-connected reef seals                                                                                                |
+| Islands: the Hold's moat is a sea zone of its own, so its straits are the strongest (Krakens at ring 3)                                                                       | 8.5; the Hold's island reads as behind a ring of rocks                                                                                                                                                             |
+| The waters off each start belong to one sea zone; a start's first straits share one guard                                                                                     | No reef across a dock; the 25% bound on the first strait                                                                                                                                                           |
+| Open sea is the first deep cell (no land beside it), not the first cell of another zone                                                                                       | Computable from the map alone, and fair to measure; the zone-based reading spread a day between starts                                                                                                             |
+| Shipwrights, moored boats, Ferry Landings and Whirlpools are never guarded                                                                                                    | They are the access guarantees of 8.4                                                                                                                                                                              |
+| A Shipwright that finds no room takes a second, looser try (over shore wood or rock, beside a landing); a sea without one keeps its boats                                     | 3x2 buildings on a crowded coast; 14 of 16 sampled Coast maps have one per sea                                                                                                                                     |
+| A start town too far from its sea gets a 4-connected inlet up to three steps from its door                                                                                    | 8.4's dock for every Inland Sea and Islands start                                                                                                                                                                  |
+| A coast of a few cells of cliff is no coast link                                                                                                                              | 8.3; landings are counted for the zones whose coast had them                                                                                                                                                       |
+| Currents (stretch) and sea decorations are not placed                                                                                                                         | Follow-ups: the art has none yet                                                                                                                                                                                   |
+| Two starts never share an island on XL                                                                                                                                        | Simpler and fairer; XL islands are big enough                                                                                                                                                                      |

@@ -22,8 +22,14 @@ import { CREATURES, getCreature } from "../data/creatures.ts";
 import { MAX_PLAYERS, MIN_PLAYERS, playerColour } from "../data/players.ts";
 import { heroArt, unitArt } from "../assets/unit-art.ts";
 import type { CreatureId, FactionId } from "../data/types.ts";
-import { MAP_SIZES, generateMap } from "../core/map/generate.ts";
-import type { MapSize, PlayerCount } from "../core/map/generate.ts";
+import {
+  MAP_SIZES,
+  WATER_MODES,
+  generateMap,
+  waterModeFor,
+  waterModesFor,
+} from "../core/map/generate.ts";
+import type { MapSize, PlayerCount, WaterMode } from "../core/map/generate.ts";
 import {
   NAMED_MAPS,
   buildNamedMap,
@@ -37,6 +43,7 @@ import { installMagicWheel, magicWheelButton } from "./magic-wheel.ts";
 import { magicWheelModel } from "./magic-wheel-model.ts";
 import { minimapPixels } from "./minimap.ts";
 import { browserStorage, readSave, saveGame } from "./save.ts";
+import type { SaveStorage } from "./save.ts";
 import { installUiSounds, soundControl } from "./sound-control.ts";
 import { installTooltips, setTip } from "./tooltip.ts";
 import "./game.css";
@@ -68,6 +75,72 @@ export const SETUP_SIZES: readonly MapSize[] = ["S", "M", "L"];
 /** The setup screen's size when the address names none. */
 export const DEFAULT_SETUP_SIZE: MapSize = "M";
 
+/**
+ * The setup screen's Water (docs/design/NAVAL.md 8.1, bead bzc.155), after
+ * Heroes III's water content. Inland Sea and Islands need Medium or larger.
+ */
+export const WATER_INFO: Readonly<
+  Record<WaterMode, { label: string; blurb: string }>
+> = {
+  none: {
+    label: "None",
+    blurb: "Dry land: lakes and coasts are scenery, as on every map before.",
+  },
+  coast: {
+    label: "Coast",
+    blurb:
+      "A sea along one or two map edges with its own sites and guards; every zone is still reached on foot.",
+  },
+  inland: {
+    label: "Inland Sea",
+    blurb:
+      "The lands ring a sea in the middle; every start town has a dock, and the Warlord's Hold is an island in it.",
+  },
+  islands: {
+    label: "Islands",
+    blurb:
+      "Every zone an island: each start begins with its Shipyard built and a boat at the dock.",
+  },
+};
+
+/**
+ * The Water a new random map has unless the player picks another: None,
+ * so a default game is the map it always was (a call of bead bzc.155;
+ * NAVAL 8.1 names Coast, which changes every map, so the sea is asked
+ * for, not given). The last choice is remembered in the browser.
+ */
+export const DEFAULT_SETUP_WATER: WaterMode = "none";
+
+/** The browser key of the remembered Water choice. */
+export const WATER_SETTING_KEY = "border-marches.water";
+
+/** The remembered Water choice (the default when none or unreadable). */
+export function readWaterSetting(storage: SaveStorage | null): WaterMode {
+  try {
+    const v = storage?.getItem(WATER_SETTING_KEY);
+    return WATER_MODES.find((m) => m === v) ?? DEFAULT_SETUP_WATER;
+  } catch {
+    return DEFAULT_SETUP_WATER;
+  }
+}
+
+/** Remember the Water choice (nothing when storage is unavailable). */
+export function writeWaterSetting(
+  storage: SaveStorage | null,
+  water: WaterMode,
+): void {
+  try {
+    storage?.setItem(WATER_SETTING_KEY, water);
+  } catch {
+    // Private windows and full storage: the choice is not kept.
+  }
+}
+
+/** The Water a random map of this size really gets for a choice. */
+export function waterFor(size: MapSize, water: WaterMode): WaterMode {
+  return waterModeFor(size, water);
+}
+
 /** Players a random map of this size takes: `players` within its range. */
 export function playersFor(size: MapSize, players: number): PlayerCount {
   const [least, most] = MAP_SIZE_INFO[size].players;
@@ -94,6 +167,11 @@ export interface GameSetup {
    * player count come from it, and seed, size and players are ignored.
    */
   map?: string;
+  /**
+   * Water (bead bzc.155; default None): None, Coast, Inland Sea or Islands.
+   * A size too small for the choice makes Coast.
+   */
+  water?: WaterMode;
   /**
    * The computer players' difficulty (bead bzc.23; default normal): kept
    * in the state; Hard also gives them a small head start.
@@ -157,10 +235,12 @@ function createMapGame(setup: GameSetup): GameState {
     });
   }
   const players = playersFor(setup.size, setup.players);
+  const water = waterFor(setup.size, setup.water ?? DEFAULT_SETUP_WATER);
   const map = generateMap(setup.seed, {
     size: setup.size,
     players,
     activePlayers: players,
+    ...(water !== "none" ? { water } : {}),
   });
   return newGame(map, { players: playerSetups(setup) });
 }
@@ -210,9 +290,10 @@ export function randomMapRows(mapId: string | null): {
   size: boolean;
   players: boolean;
   seed: boolean;
+  water: boolean;
 } {
   const random = mapId === null || findNamedMap(mapId) === undefined;
-  return { size: random, players: random, seed: random };
+  return { size: random, players: random, seed: random, water: random };
 }
 
 /**
@@ -261,6 +342,12 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
     let players = playersFor(size, Number(params.get("players") ?? 2) || 2);
     const sizeRow = el("div.gm-size-row");
     const playersRow = el("div.gm-size-row");
+    const waterRow = el("div.gm-size-row");
+    const waterBlurb = el("p.gm-options-blurb");
+    // Water (bead bzc.155): from the address, else the remembered choice.
+    let water: WaterMode =
+      WATER_MODES.find((m) => m === params.get("water")) ??
+      readWaterSetting(browserStorage());
     const renderSizes = (): void => {
       sizeRow.replaceChildren();
       for (const id of SETUP_SIZES) {
@@ -272,6 +359,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
             players = playersFor(size, players);
             renderSizes();
             renderPlayers();
+            renderWater();
           },
           "gm-btn gm-size",
         );
@@ -301,8 +389,38 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         playersRow.append(b);
       }
     };
+    const renderWater = (): void => {
+      waterRow.replaceChildren();
+      const now = waterFor(size, water);
+      const offered = waterModesFor(size);
+      waterBlurb.textContent = WATER_INFO[now].blurb;
+      for (const m of WATER_MODES) {
+        const b = button(
+          WATER_INFO[m].label,
+          () => {
+            if (!offered.includes(m)) return;
+            water = m;
+            writeWaterSetting(browserStorage(), m);
+            renderWater();
+          },
+          "gm-btn gm-size",
+        );
+        const open = offered.includes(m);
+        b.disabled = !open;
+        setTip(
+          b,
+          open
+            ? WATER_INFO[m].blurb
+            : `${WATER_INFO[m].label} needs a Medium or larger map.`,
+        );
+        if (m === now) b.classList.add("gm-selected");
+        b.setAttribute("aria-pressed", String(m === now));
+        waterRow.append(b);
+      }
+    };
     renderSizes();
     renderPlayers();
+    renderWater();
 
     // ------------------------------------------------ options (folded)
     const seedInput = el("input.gm-seed");
@@ -389,6 +507,12 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
     );
     const sizeField = el("div.gm-field", el("label", "Map size"), sizeRow);
     const playersField = el("div.gm-field", el("label", "Players"), playersRow);
+    // The row, then what the chosen Water makes under it.
+    const waterField = el(
+      "div.gm-water",
+      el("div.gm-field", el("label", "Water"), waterRow),
+      waterBlurb,
+    );
     // One row per map: a poster thumbnail, its name and its own details,
     // all visible in the row, so no tooltip repeats them (bead bzc.42).
     const choices: Array<{
@@ -436,6 +560,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
       const rows = randomMapRows(mapId);
       sizeField.hidden = !rows.size;
       playersField.hidden = !rows.players;
+      waterField.hidden = !rows.water;
       seedField.hidden = !rows.seed;
       const def = mapId === null ? undefined : findNamedMap(mapId);
       mapIntro.hidden = def === undefined;
@@ -575,6 +700,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
             players,
             faction,
             difficulty,
+            water,
             ...(mapId !== null ? { map: mapId } : {}),
           });
           saveGame(browserStorage(), state);
@@ -663,6 +789,7 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
               mapIntro,
               sizeField,
               playersField,
+              waterField,
               randomNote,
             ),
             el(

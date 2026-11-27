@@ -142,7 +142,11 @@ export function placeTowns(st: GenState): void {
   for (const z of starts) {
     const player = z.player ?? 0;
     addTown(st, {
-      cell: siteFor(st, rng, z.id),
+      // Inland Sea and Islands (NAVAL 8.4): each start town on its shore.
+      cell:
+        st.seaPass !== undefined
+          ? (coastalSite(st, rng, z.id) ?? siteFor(st, rng, z.id))
+          : siteFor(st, rng, z.id),
       zone: z.id,
       role: player < st.activePlayers ? "player" : "open-start",
       player,
@@ -158,11 +162,18 @@ export function placeTowns(st: GenState): void {
 
 function siteFor(st: GenState, rng: Rng, zone: number): number {
   const { g, cfg } = st;
-  const { dist } = chamferDistance(g, (i) => (st.zone[i] ?? 0) !== zone);
+  // On Inland Sea and Islands maps the sea is carved first (bead bzc.155):
+  // a town stands deep in its zone's land, away from the water too.
+  const naval = st.seaPass !== undefined;
+  const { dist } = chamferDistance(
+    g,
+    (i) => (st.zone[i] ?? 0) !== zone || (naval && st.terrain[i] === T.water),
+  );
   const { w, h } = cfg.objects.town;
   const scored: Array<{ i: number; s: number }> = [];
   for (let i = 0; i < g.n; i++) {
     if ((st.zone[i] ?? 0) !== zone) continue;
+    if (naval && st.terrain[i] === T.water) continue;
     const x = g.x(i);
     const y = g.y(i);
     const edge = Math.min(x - w / 2, y - h, g.w - 1 - x - w / 2, g.h - 3 - y);
@@ -173,6 +184,77 @@ function siteFor(st: GenState, rng: Rng, zone: number): number {
   const best = Math.max(...scored.map((p) => p.s));
   const pool = scored.filter((p) => p.s >= best - 1.2);
   return rng.pick(pool).i;
+}
+
+/**
+ * A start town's site on its zone's shore (NAVAL 8.4, bead bzc.155): its
+ * footprint and the hero's cell on land in the zone, a sea cell within
+ * four steps of the entrance (the town's dock, `townDock`), and as deep in
+ * the zone as such a site can be. Undefined when the zone has none.
+ */
+function coastalSite(st: GenState, rng: Rng, zone: number): number | undefined {
+  const { g } = st;
+  const sea = st.seaPass;
+  if (sea === undefined) return undefined;
+  const wet = (i: number): boolean => sea[i] === 1 && st.terrain[i] === T.water;
+  const land = (i: number): boolean => st.terrain[i] !== T.water;
+  const { dist } = chamferDistance(g, (i) => (st.zone[i] ?? 0) !== zone);
+  const { dist: shore } = chamferDistance(g, wet);
+  // Open water: sea at least three cells from any land. A start's dock
+  // looks out on it, not up a narrow arm (the fairness of days to open
+  // sea, NAVAL 8.4).
+  const { dist: offshore } = chamferDistance(g, land);
+  const { dist: toOpen } = chamferDistance(
+    g,
+    (i) => wet(i) && (offshore[i] ?? 0) >= 3,
+  );
+  const { w, h } = st.cfg.objects.town;
+  const scored: Array<{ i: number; s: number }> = [];
+  for (let i = 0; i < g.n; i++) {
+    if ((st.zone[i] ?? 0) !== zone || !land(i)) continue;
+    if ((shore[i] ?? Infinity) > 4.5) continue;
+    if ((toOpen[i] ?? Infinity) > 9) continue;
+    const x = g.x(i);
+    const y = g.y(i);
+    const edge = Math.min(x - w / 2, y - h, g.w - 1 - x - w / 2, g.h - 3 - y);
+    if (edge < 2 || !land(g.idx(x, y + 1))) continue;
+    const foot = townBlocked(st, x, y).map(([bx, by]) => g.idx(bx, by));
+    if (foot.some((f) => (st.zone[f] ?? 0) !== zone || !land(f))) continue;
+    if (dockPath(i, foot) !== undefined) scored.push({ i, s: dist[i] ?? 0 });
+  }
+  if (scored.length === 0) return undefined;
+  const best = Math.max(...scored.map((p) => p.s));
+  const site = rng.pick(scored.filter((p) => p.s >= best - 1.2)).i;
+  // The way down to the dock stays open ground.
+  const foot = townBlocked(st, g.x(site), g.y(site)).map(([bx, by]) =>
+    g.idx(bx, by),
+  );
+  for (const k of dockPath(site, foot) ?? []) st.keepOpen[k] = 1;
+  return site;
+
+  /** Land cells from the entrance to a sea cell within four steps. */
+  function dockPath(i: number, foot: readonly number[]): number[] | undefined {
+    const closed = new Set(foot);
+    const prev = new Map<number, number>([[i, -1]]);
+    let frontier = [i];
+    for (let d = 0; d < 4; d++) {
+      const next: number[] = [];
+      for (const k of frontier) {
+        for (const j of g.around(k, N8)) {
+          if (prev.has(j) || closed.has(j)) continue;
+          prev.set(j, k);
+          if (wet(j)) {
+            const path: number[] = [];
+            for (let m = k; m >= 0; m = prev.get(m) ?? -1) path.push(m);
+            return path;
+          }
+          if (land(j)) next.push(j);
+        }
+      }
+      frontier = next;
+    }
+    return undefined;
+  }
 }
 
 /** The v0.2 factions a neutral town may belong to (seeded per town). */
@@ -271,7 +353,8 @@ function addTown(st: GenState, site: TownSite): void {
   }
 }
 
-function commit(st: GenState, obj: MapObject): void {
+/** Add an object to the state and mark its cells (the sea fill too). */
+export function commit(st: GenState, obj: MapObject): void {
   const { g } = st;
   st.objects.push(obj);
   st.occupied[g.idx(obj.x, obj.y)] = 1;
@@ -2495,6 +2578,15 @@ function buildRoads(
   const home = homeCell(st);
   if (home < 0) return;
   st.road[home] = 1;
+  // Inland Sea and Islands (bead bzc.155): a town across the water starts
+  // its island's roads, which join the nearest road on the same land.
+  const sea = st.seaPass;
+  if (sea !== undefined) {
+    st.seaPass = undefined;
+    const dry = reachable(st, home);
+    st.seaPass = sea;
+    for (const t of st.towns) if (dry[t.cell] !== 1) st.road[t.cell] = 1;
+  }
   const towns = st.towns
     .map((t) => t.cell)
     .filter((c) => c !== home)

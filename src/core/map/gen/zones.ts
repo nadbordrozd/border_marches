@@ -215,9 +215,11 @@ function layoutAttempt(
       role: "middle",
       f: 1,
     };
-    const ok = [...fixed, ...mids.slice(between.length)].every(
-      (s) => Math.hypot(s.x - p.x, s.y - p.y) >= minD,
-    );
+    const ok =
+      [...fixed, ...mids.slice(between.length)].every(
+        (s) => Math.hypot(s.x - p.x, s.y - p.y) >= minD,
+      ) &&
+      (st.water !== "inland" || ringSpot(p, starts, w));
     if (ok) mids.push(p);
     if (guard % 200 === 0) minD *= 0.92;
   }
@@ -300,6 +302,27 @@ function layoutAttempt(
   st.connections = chooseConnections(st);
   assignTiers(st);
   chooseTownZones(st);
+}
+
+/**
+ * Inland Sea (NAVAL 8.2, bead bzc.155): the middle zones form a ring round
+ * the central sea, so none is seeded near the centre, nor between a start
+ * and the centre (the sea reaches every start zone).
+ */
+function ringSpot(
+  p: { x: number; y: number },
+  starts: readonly Seed[],
+  w: number,
+): boolean {
+  const c = w / 2;
+  const r = Math.hypot(p.x - c, p.y - c);
+  if (r < 0.32 * w) return false;
+  const a = Math.atan2(p.y - c, p.x - c);
+  return starts.every((s) => {
+    const sa = Math.atan2(s.y - c, s.x - c);
+    const gap = Math.abs(Math.atan2(Math.sin(a - sa), Math.cos(a - sa)));
+    return gap > 0.42 || r > Math.hypot(s.x - c, s.y - c);
+  });
 }
 
 function nearestSeed(seeds: readonly Seed[], x: number, y: number): number {

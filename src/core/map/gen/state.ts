@@ -5,7 +5,7 @@ import type { MapZoneKind } from "../../../data/mapObjects.ts";
 import { createRng, deriveSeed } from "../../rng.ts";
 import type { Rng } from "../../rng.ts";
 import type { MapObject, Terrain } from "../types.ts";
-import type { GenConfig, MapSize, PlayerCount } from "./config.ts";
+import type { GenConfig, MapSize, PlayerCount, WaterMode } from "./config.ts";
 import { Grid, at } from "./grid.ts";
 
 /** Terrain codes in the state arrays. */
@@ -140,6 +140,22 @@ export interface GenState {
   towns: TownSite[];
   /** Movement cost from the first player's town (filled before objects). */
   cost: Float64Array;
+  /**
+   * The water mode (NAVAL 8.1, bead bzc.155); "none" is today's generator.
+   */
+  water: WaterMode;
+  /**
+   * On Inland Sea and Islands maps, 1 on the water cells of the seas: the
+   * generator's reachability and costs sail them (a ship from any shore,
+   * a landing at `sea.landingCost`), so islands count as reachable and are
+   * never joined to the land by a causeway. Absent on every other map.
+   */
+  seaPass?: Uint8Array | undefined;
+  /**
+   * On a naval map, the landing cells set aside on every coast before the
+   * land objects (NAVAL 8.3): kept open and free of objects.
+   */
+  landing?: Uint8Array | undefined;
 }
 
 export function newState(
@@ -179,6 +195,7 @@ export function newState(
     objects: [],
     towns: [],
     cost: new Float64Array(g.n),
+    water: "none",
   };
 }
 

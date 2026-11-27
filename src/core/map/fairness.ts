@@ -8,6 +8,7 @@
  * (a guard is a fight, not a wall), but "free" counts only what is reachable
  * without stepping into any guard's zone of control.
  */
+import { isNavalMap, seaMask } from "../game/naval.ts";
 import { DEFAULT_GEN_CONFIG } from "./gen/config.ts";
 import type { GameMap, MapObject, ResourceId } from "./types.ts";
 import { DIRECTIONS_8, cellAt, inBounds, isPassable } from "./types.ts";
@@ -42,6 +43,17 @@ export interface StartFairness {
   nearSites: number;
   /** Fight value of the neutral stacks within two days (the first fights). */
   nearGuards: number;
+  /**
+   * Naval maps only (NAVAL 8.4, bead bzc.155): days from the start town to
+   * open sea, its first deep sea cell (no land beside it; walking to
+   * the shore and sailing; a ship at hand assumed).
+   */
+  openSea?: number;
+  /**
+   * Naval maps only: fight value of the guard on the first strait the
+   * start reaches by sea (0 when the map has no strait).
+   */
+  firstStrait?: number;
 }
 
 export interface FairnessReport {
@@ -55,6 +67,11 @@ export interface TravelOptions {
   avoid?: ReadonlySet<number>;
   /** Treat every gate as open (default: every gate is closed). */
   gatesOpen?: boolean;
+  /**
+   * Sail the seas of a naval map too (bead bzc.155): a sea cell costs 100
+   * a step (141 diagonally), boarding and landing nothing extra.
+   */
+  sail?: boolean;
 }
 
 /**
@@ -67,8 +84,9 @@ export function travelCosts(
   sy: number,
   options: TravelOptions = {},
 ): Float64Array {
-  const { avoid, gatesOpen = false } = options;
+  const { avoid, gatesOpen = false, sail = false } = options;
   const w = map.width;
+  const sea = sail && isNavalMap(map) ? seaMask(map) : undefined;
   const closed = new Set<number>();
   for (const o of map.objects) {
     for (const [x, y] of o.blocked) closed.add(y * w + x);
@@ -82,7 +100,7 @@ export function travelCosts(
     const c = map.cells[i];
     return (
       c !== undefined &&
-      isPassable(c) &&
+      (isPassable(c) || sea?.[i] === 1) &&
       !closed.has(i) &&
       !(avoid?.has(i) ?? false)
     );
@@ -141,7 +159,12 @@ export function travelCosts(
       const a = cellAt(map, x, y);
       const b = cellAt(map, nx, ny);
       if (a === undefined || b === undefined) continue;
-      const base = a.road && b.road ? road : (cost[b.terrain] ?? 100);
+      const base =
+        sea?.[ny * w + nx] === 1
+          ? 100
+          : a.road && b.road
+            ? road
+            : (cost[b.terrain] ?? 100);
       const step = dx !== 0 && dy !== 0 ? Math.round(base * 1.414) : base;
       const j = ny * w + nx;
       if (d + step < (dist[j] ?? Infinity)) {
@@ -233,6 +256,7 @@ export function startFairness(map: GameMap): FairnessReport {
         .reduce((n, o) => n + Number(o.data["fv"] ?? 0), 0),
     });
   }
+  if (isNavalMap(map)) navalFairness(map, starts, report);
   starts.forEach((a, i) => {
     starts.forEach((b, j) => {
       if (j <= i) return;
@@ -246,4 +270,43 @@ export function startFairness(map: GameMap): FairnessReport {
     });
   });
   return report;
+}
+
+/**
+ * The two naval measures of NAVAL 8.4 (bead bzc.155), per start: days to
+ * open sea and the first strait's guard.
+ */
+function navalFairness(
+  map: GameMap,
+  starts: readonly MapObject[],
+  report: FairnessReport,
+): void {
+  const w = map.width;
+  const sea = seaMask(map);
+  // The Hold's straits (the strongest on the sea, NAVAL 8.5) are a goal,
+  // not a start's first way out.
+  const straits = map.objects.filter(
+    (o) =>
+      o.kind === "monster" &&
+      o.data["strait"] === true &&
+      o.data["holdStrait"] !== true,
+  );
+  starts.forEach((t, k) => {
+    const entry = report.starts[k];
+    if (entry === undefined) return;
+    const d = travelCosts(map, t.x, t.y, { sail: true });
+    let open = Infinity;
+    for (let i = 0; i < sea.length; i++) {
+      if (sea[i] !== 1 || map.cells[i]?.deep !== true) continue;
+      open = Math.min(open, d[i] ?? Infinity);
+    }
+    entry.openSea = open / DAY_MP;
+    let first: MapObject | undefined;
+    for (const s of straits) {
+      const c = d[s.y * w + s.x] ?? Infinity;
+      if (first === undefined || c < (d[first.y * w + first.x] ?? Infinity))
+        first = s;
+    }
+    entry.firstStrait = Number(first?.data["fv"] ?? 0);
+  });
 }

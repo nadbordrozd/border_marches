@@ -14,7 +14,7 @@
  * open ground is reachable from the player's town.
  */
 import { hashInts } from "../../rng.ts";
-import { at, MinHeap, N4, N8, noiseField } from "./grid.ts";
+import { at, components, MinHeap, N4, N8, noiseField } from "./grid.ts";
 import {
   O,
   T,
@@ -313,7 +313,10 @@ export function resolvePockets(st: GenState): void {
         break;
       }
     }
-    if (pocketStart < 0) return;
+    if (pocketStart < 0) {
+      if (st.seaPass !== undefined) islandPockets(st);
+      return;
+    }
     const pocket = reachable(st, pocketStart);
     const cells: number[] = [];
     let important = false;
@@ -327,6 +330,63 @@ export function resolvePockets(st: GenState): void {
       continue;
     }
     openPocket(st, cells, reach);
+  }
+}
+
+/**
+ * Inland Sea and Islands (bead bzc.155): on every island the open ground is
+ * one piece on foot, so a start reaches its own island's things by land
+ * (a ship is for the other islands). The smaller pieces of an island are
+ * filled or opened towards its largest piece, as pockets are.
+ */
+function islandPockets(st: GenState): void {
+  const { g, cfg } = st;
+  const sea = st.seaPass;
+  st.seaPass = undefined;
+  try {
+    for (let round = 0; round < 60; round++) {
+      const islands = components(g, (i) => st.terrain[i] !== T.water, 4);
+      const label = new Int32Array(g.n).fill(-1);
+      const pieces: number[][] = [];
+      for (let s = 0; s < g.n; s++) {
+        if (label[s] !== -1 || !isWalkable(st, s)) continue;
+        const r = reachable(st, s);
+        const cells: number[] = [];
+        for (let i = 0; i < g.n; i++) {
+          if (r[i] === 1) {
+            label[i] = pieces.length;
+            cells.push(i);
+          }
+        }
+        pieces.push(cells);
+      }
+      // The largest piece of each island is its main ground.
+      const main = new Map<number, number>();
+      pieces.forEach((cells, k) => {
+        const island = islands.label[cells[0] ?? 0] ?? -1;
+        const best = main.get(island);
+        if (best === undefined || cells.length > (pieces[best]?.length ?? 0))
+          main.set(island, k);
+      });
+      const k = pieces.findIndex(
+        (cells, p) => main.get(islands.label[cells[0] ?? 0] ?? -1) !== p,
+      );
+      if (k < 0) return;
+      const cells = pieces[k] ?? [];
+      const important = cells.some(
+        (i) => (st.keepOpen[i] ?? 0) === 1 || (st.occupied[i] ?? 0) === 1,
+      );
+      if (cells.length <= cfg.clusters.pocketFill && !important) {
+        for (const i of cells) st.obstacle[i] = surroundingType(st, i);
+        continue;
+      }
+      const island = islands.label[cells[0] ?? 0] ?? -1;
+      const goal = new Uint8Array(g.n);
+      for (const i of pieces[main.get(island) ?? -1] ?? []) goal[i] = 1;
+      openPocket(st, cells, goal);
+    }
+  } finally {
+    st.seaPass = sea;
   }
 }
 
@@ -356,7 +416,8 @@ function openPocket(st: GenState, cells: number[], reach: Uint8Array): void {
   while (heap.size > 0) {
     const { priority, value: i } = heap.pop();
     if (priority > (dist[i] ?? 0)) continue;
-    if (reach[i] ?? 0) {
+    // A pocket joins land (a naval map's reach includes the sea it sails).
+    if ((reach[i] ?? 0) && (st.terrain[i] ?? 0) !== T.water) {
       goal = i;
       break;
     }

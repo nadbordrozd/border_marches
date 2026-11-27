@@ -20,7 +20,15 @@ import {
   playerSetups,
   playersFor,
   randomMapRows,
+  DEFAULT_SETUP_WATER,
+  WATER_INFO,
+  WATER_SETTING_KEY,
+  readWaterSetting,
+  waterFor,
+  writeWaterSetting,
 } from "../../src/ui/app.ts";
+import { WATER_MODES } from "../../src/core/map/generate.ts";
+import { HARBOUR_SHIPYARD } from "../../src/data/naval.ts";
 
 describe("map sizes like Heroes (bead bzc.147)", () => {
   it("offers Small 36, Medium 72 (the default) and Large 108", () => {
@@ -72,11 +80,13 @@ describe("two-column setup screen (bead bzc.66)", () => {
       size: true,
       players: true,
       seed: true,
+      water: true,
     });
     expect(randomMapRows("keepers-toll")).toEqual({
       size: false,
       players: false,
       seed: false,
+      water: false,
     });
     // An unknown id falls back to the random map's rows.
     expect(randomMapRows("nowhere").size).toBe(true);
@@ -103,6 +113,58 @@ describe("two-column setup screen (bead bzc.66)", () => {
     ]);
   });
 });
+
+describe(
+  "Water in new-game setup (bead bzc.155)",
+  { timeout: HEAVY_TIMEOUT },
+  () => {
+    it("offers None, Coast, Inland Sea and Islands; None by default, remembered", () => {
+      expect(WATER_MODES.map((m) => WATER_INFO[m].label)).toEqual([
+        "None",
+        "Coast",
+        "Inland Sea",
+        "Islands",
+      ]);
+      expect(DEFAULT_SETUP_WATER).toBe("none");
+      expect(waterFor("S", "islands")).toBe("coast");
+      expect(waterFor("M", "inland")).toBe("inland");
+      const kept = new Map<string, string>();
+      const storage = {
+        getItem: (k: string) => kept.get(k) ?? null,
+        setItem: (k: string, v: string) => void kept.set(k, v),
+        removeItem: (k: string) => void kept.delete(k),
+      };
+      expect(readWaterSetting(storage)).toBe("none");
+      writeWaterSetting(storage, "islands");
+      expect(kept.get(WATER_SETTING_KEY)).toBe("islands");
+      expect(readWaterSetting(storage)).toBe("islands");
+      kept.set(WATER_SETTING_KEY, "lava");
+      expect(readWaterSetting(storage)).toBe("none");
+      expect(readWaterSetting(null)).toBe("none");
+    });
+
+    it("makes the same dry game by default and a naval one on request", () => {
+      const base = {
+        seed: 3,
+        size: "M" as const,
+        players: 2,
+        faction: "humans" as const,
+      };
+      const dry = createGame(base);
+      expect(dry.map.naval).toBeUndefined();
+      expect(JSON.stringify(createGame({ ...base, water: "none" }).map)).toBe(
+        JSON.stringify(dry.map),
+      );
+      const isles = createGame({ ...base, water: "islands" });
+      expect(isles.map.naval).toBe(true);
+      // Each start town has its Shipyard built and a boat at its dock.
+      const mine = Object.values(isles.towns).filter((t) => t.owner !== null);
+      expect(mine).toHaveLength(2);
+      for (const t of mine) expect(t.buildings).toContain(HARBOUR_SHIPYARD);
+      expect((isles.ships ?? []).length).toBeGreaterThanOrEqual(2);
+    });
+  },
+);
 
 describe("named maps in new-game setup", { timeout: HEAVY_TIMEOUT }, () => {
   it("seats the human's faction and the recommended rest", () => {

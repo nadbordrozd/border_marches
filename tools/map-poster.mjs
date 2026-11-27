@@ -7,6 +7,7 @@
 //                         [--players 2|3|4]
 //   npm run map:poster -- --named keepers-toll --out poster.png [--port 6291]
 //   npm run map:poster -- --map decorations --out poster.png   (a test map)
+//   ... --water none|coast|inland|islands   (bead bzc.155: a naval map)
 //   ... --mountains classic|chunky   (bead bzc.145: the ranges with or
 //                                     without the great massifs)
 //
@@ -42,7 +43,8 @@ function parseArgs(argv) {
       name === "out" ||
       name === "named" ||
       name === "map" ||
-      name === "mountains"
+      name === "mountains" ||
+      name === "water"
     )
       out[name] = value;
     else throw new Error(`unknown option --${name}`);
@@ -58,6 +60,11 @@ function parseArgs(argv) {
   if (!["S", "SM", "M", "L", "XL"].includes(out.size))
     throw new Error("--size wants S, SM, M, L or XL");
   if (out.out === undefined) throw new Error("--out wants a file path");
+  if (
+    out.water !== undefined &&
+    !["none", "coast", "inland", "islands"].includes(out.water)
+  )
+    throw new Error("--water wants none, coast, inland or islands");
   return out;
 }
 
@@ -122,9 +129,8 @@ async function evaluate(page, expression) {
 }
 
 async function main() {
-  const { seed, size, out, port, players, named, map, mountains } = parseArgs(
-    process.argv.slice(2),
-  );
+  const { seed, size, out, port, players, named, map, mountains, water } =
+    parseArgs(process.argv.slice(2));
   if (!(await portFree(port)))
     throw new Error(`port ${port} is in use: free it or pass --port`);
   const server = spawn(
@@ -183,6 +189,7 @@ async function main() {
       path: "0",
       ...(players !== undefined ? { players: String(players) } : {}),
       ...(mountains !== undefined ? { mountains } : {}),
+      ...(water !== undefined ? { water } : {}),
     });
     await page.send("Page.navigate", {
       url: `http://127.0.0.1:${port}/?${query}`,

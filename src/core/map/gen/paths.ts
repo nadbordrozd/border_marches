@@ -59,6 +59,8 @@ export function reachMask(
   const h = g.h;
   const seen = new Uint8Array(g.n);
   if (from < 0) return seen;
+  // Inland Sea and Islands (bead bzc.155): ships sail the seas.
+  if (st.seaPass !== undefined) mask = withSea(st, mask);
   seen[from] = 1;
   const stack = new Int32Array(g.n);
   let top = 0;
@@ -84,8 +86,37 @@ export function reachMask(
   return seen;
 }
 
+/**
+ * A copy of a walk mask with the sea cells of an Inland Sea or Islands map
+ * open (bead bzc.155): a ship takes a hero from any shore, so the
+ * generator's reachability counts sailing.
+ */
+export function withSea(st: GenState, mask: Uint8Array): Uint8Array {
+  const sea = st.seaPass;
+  if (sea === undefined) return mask;
+  const out = mask.slice();
+  for (let i = 0; i < st.g.n; i++) {
+    if (sea[i] === 1 && st.terrain[i] === T.water) out[i] = 1;
+  }
+  return out;
+}
+
+/** 1 on the sea cells a ship sails now (Inland Sea and Islands maps). */
+export function sailMask(st: GenState): Uint8Array | undefined {
+  const sea = st.seaPass;
+  if (sea === undefined) return undefined;
+  const out = new Uint8Array(st.g.n);
+  for (let i = 0; i < st.g.n; i++) {
+    if (sea[i] === 1 && st.terrain[i] === T.water) out[i] = 1;
+  }
+  return out;
+}
+
 const DX = Int8Array.from(N8.map(([dx]) => dx));
 const DY = Int8Array.from(N8.map(([, dy]) => dy));
+
+/** Straight cost of a step at sea (NAVAL 2.4: 1500 sea points a day). */
+export const SAIL_STEP = 100;
 
 /** Straight-step cost of entering a land cell (the native Chieftain). */
 export function enterCost(st: GenState, j: number): number {
@@ -123,13 +154,18 @@ export function movementCost(
   const h = g.h;
   const dist = new Float64Array(g.n).fill(Infinity);
   const sources = typeof from === "number" ? [from] : from;
-  const mask = walkMask(st);
+  const land = walkMask(st);
+  // Inland Sea and Islands (bead bzc.155): sailing costs 100 a step, a
+  // landing the configured share of a day.
+  const sail = sailMask(st);
+  const mask = sail === undefined ? land : withSea(st, land);
+  const landing = cfg.sea.landingCost;
   // Straight and diagonal cost of entering each cell, off road.
   const straight = new Float64Array(g.n);
   const diag = new Float64Array(g.n);
   for (let j = 0; j < g.n; j++) {
     if (mask[j] !== 1) continue;
-    const base = flat ?? enterCost(st, j);
+    const base = sail?.[j] === 1 ? SAIL_STEP : (flat ?? enterCost(st, j));
     straight[j] = base;
     diag[j] = Math.round(base * 1.414);
   }
@@ -166,7 +202,10 @@ export function movementCost(
           : diagonal
             ? (diag[j] ?? 0)
             : (straight[j] ?? 0);
-      const nd = priority + step;
+      const nd =
+        priority +
+        step +
+        (sail !== undefined && sail[i] === 1 && sail[j] !== 1 ? landing : 0);
       if (nd < (dist[j] ?? Infinity)) {
         dist[j] = nd;
         heap.push(nd, j);

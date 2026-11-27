@@ -60,12 +60,29 @@ describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
     }
     // The Mystery Bag (bead bzc.105) is placed since bead bzc.110.
     const authored: ObjectTypeId[] = ["event-tile", "sign"];
-    // The sea objects (bead bzc.151) wait for the sea fill of a naval map.
+    // The sea objects (bead bzc.151) come with the sea fill of a naval map
+    // (bead bzc.155): a few naval maps of each Water place every one.
     const sea: readonly string[] = SEA_OBJECT_TYPE_IDS;
     for (const t of Object.keys(OBJECT_TYPES) as ObjectTypeId[]) {
       if (authored.includes(t) || sea.includes(t)) continue;
       expect(seen, t).toContain(t);
     }
+    const wet = new Set<string>();
+    for (const [seed, size, water] of [
+      [1, "M", "islands"],
+      [2, "M", "islands"],
+      [3, "M", "inland"],
+      [4, "M", "inland"],
+      [1, "L", "inland"],
+      [1, "M", "coast"],
+      [2, "M", "coast"],
+    ] as const) {
+      for (const o of generateMap(seed, { size, water }).objects)
+        wet.add(typeOf(o));
+    }
+    for (const t of sea) expect(wet, t).toContain(t);
+    // A dry map has none of them.
+    for (const t of sea) expect(seen, t).not.toContain(t);
   });
 
   it("is dense: 18 or more visitable objects per 100 open cells", () => {
