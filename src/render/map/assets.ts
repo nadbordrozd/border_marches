@@ -25,7 +25,8 @@ import { ARTIFACT_CLOTH, MAP_OBJECT_ASSETS } from "../../assets/map-objects";
 import { PEAK_ASSETS } from "../../assets/peaks";
 import { TREE_ASSETS } from "../../assets/trees";
 import { GROUND_CALM, calmTexture } from "./ground";
-import type { EdgeMask, GroundSources, PixelImage } from "./ground";
+import type { EdgeMask, GroundCalm, GroundSources, PixelImage } from "./ground";
+import { groundReview, scaleContrast } from "./ground-review";
 import { crackOverlay } from "./terrain-motion";
 import type { CrackOverlay } from "./terrain-motion";
 
@@ -106,6 +107,10 @@ export function mapAssetList(): ImageAsset[] {
   ];
 }
 
+/** Review only (bead bzc.144, G0): the steppe calm of before bead bzc.138. */
+const REVIEW_LEGACY_CALM: Readonly<Partial<Record<GroundTerrain, GroundCalm>>> =
+  { steppe: { radius: 40, flatten: 0.85, contrast: 0.8, dark: 0.6 } };
+
 /** Loads everything the map draws; `base` is Vite's BASE_URL. */
 export async function loadMapAssets(base = "/"): Promise<MapAssets> {
   const list = mapAssetList();
@@ -122,13 +127,27 @@ export async function loadMapAssets(base = "/"): Promise<MapAssets> {
       throw new Error(`map renderer: missing ${asset.key}`);
     return image;
   };
+  // Review switches (bead bzc.144, ground-review.ts): off by default.
+  const review = groundReview();
   const textures = Object.fromEntries(
     GROUND_TERRAINS.map((terrain) => {
       const asset = GROUND_TEXTURES[terrain];
-      const pixels = readPixels(get(asset), asset.w, asset.h);
+      const image = get(asset);
+      // G0 reads the pre-bzc.138 texture files (served by the review pack)
+      // at their own size and calms the steppe as it was then.
+      const legacy = review.legacy && image instanceof HTMLImageElement;
+      const pixels = legacy
+        ? readPixels(image, image.naturalWidth, image.naturalHeight)
+        : readPixels(image, asset.w, asset.h);
       // Calmer textures where the source is too busy (bead xaj.27).
-      const calm = GROUND_CALM[terrain];
-      return [terrain, calm === undefined ? pixels : calmTexture(pixels, calm)];
+      const calm = review.legacy
+        ? REVIEW_LEGACY_CALM[terrain]
+        : GROUND_CALM[terrain];
+      const calmed = calm === undefined ? pixels : calmTexture(pixels, calm);
+      return [
+        terrain,
+        review.contrast === 1 ? calmed : scaleContrast(calmed, review.contrast),
+      ];
     }),
   ) as Record<GroundTerrain, PixelImage>;
   // The glowing cracks over a ground (bead bzc.83).

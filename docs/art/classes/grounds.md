@@ -313,3 +313,22 @@ Battle and town screens that tile the ground textures get the new grounds
 as they are (no drift, no brush). The lab (tools/ground-lab) still compares
 its experiments against the pre-bzc.138 painter in its own models; its
 "lab painter equals the game's paintGround" check no longer holds.
+
+## Review pack (bead bzc.144)
+
+The user asked to see the grounds "in action" and worried the trees look
+small beside the heroes. `node tools/ground-review.mjs` (`npm run
+review:grounds`) shoots real game screens (adventure map and side panel,
+1280 x 800, plus the middle of the view at 2x) of six scenes of The
+Cartographer's Folly and one of a random M map, once per variant, and
+writes sheets and an index page to `.orchestration/review/bzc.144/`
+(git-ignored). It loads hand-edited saves (the map explored, the first hero
+moved into the scene) and plays no turns. The variants are a debug switch,
+off unless the URL asks (`src/render/map/ground-review.ts`):
+`?groundReview=G0` the pre-bzc.138 grounds (the pack serves the old texture
+files from git; the Pulp Wars spill; no drift, rim or patches), `G1` current,
+`G2` half the drift and texture contrast, `G3` no trodden patches, `G4` half
+the brush reach and no dark line, `G5` current textures with the old spill
+borders, `G6` G2 and G4 together; `?treeScale=1.25` or `1.5` draws the trees
+larger (nearest neighbour, feet kept: a preview only, final trees would be
+generated at size).

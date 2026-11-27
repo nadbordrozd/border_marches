@@ -47,6 +47,7 @@ import { FxField, drawFx } from "../fx/field.ts";
 import type { FxClock } from "../fx/field.ts";
 import { openWaterAt, paintGround } from "./ground";
 import type { GroundLayout } from "./ground";
+import { groundReview } from "./ground-review";
 import {
   LIVING_MOTION,
   MOTION,
@@ -412,10 +413,24 @@ export function createMapView(
   if (screen === null) throw new Error("map renderer: no 2D context");
   const images = new Map<string, CanvasImageSource>(assets.images);
   // The canopy's trees, toned toward their ground (canopy-paint.ts).
+  // Review only (bead bzc.144, `?treeScale=`): drawn larger, nearest
+  // neighbour, as terrain-plan.ts reviewTreeScale places them.
+  const treeScale = groundReview().treeScale;
   for (const tree of TREE_ASSETS) {
     const image = images.get(tree.key);
-    if (image !== undefined)
-      images.set(tree.key, toneTree(image, tree.w, tree.h, tree.terrain));
+    if (image === undefined) continue;
+    const toned = toneTree(image, tree.w, tree.h, tree.terrain);
+    if (treeScale === 1) {
+      images.set(tree.key, toned);
+      continue;
+    }
+    const w = Math.round(tree.w * treeScale);
+    const h = Math.round(tree.h * treeScale);
+    const big = createSurface(w, h);
+    const bctx = context2d(big);
+    bctx.imageSmoothingEnabled = false;
+    bctx.drawImage(toned, 0, 0, w, h);
+    images.set(tree.key, big);
   }
   // The code-drawn doodads (doodad-art.ts).
   for (const list of Object.values(doodadSpecs()))

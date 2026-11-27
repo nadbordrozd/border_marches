@@ -45,6 +45,7 @@ import type { GameMap, MapObject } from "../../core/map/types";
 import { buildCanopyField, canopyTint } from "./canopy";
 import type { CanopyField } from "./canopy";
 import { bayer, driftAt, driftGrid } from "./ground-noise";
+import { groundReview, scaleTint } from "./ground-review";
 import { hash4 } from "./hash";
 import {
   ROAD_COLOURS,
@@ -358,6 +359,11 @@ export function groundEdgeAt(
   wy: number,
   mask?: EdgeMask,
 ): number {
+  // Review switches (bead bzc.144, ground-review.ts): off by default.
+  const review = groundReview();
+  if (review.spill)
+    return reviewSpillRankAt(atLeast, width, height, ranks, wx, wy);
+  const amp = EDGE.amp * review.edgeAmp;
   const px = wx + 0.5;
   const py = wy + 0.5;
   let depth = Infinity;
@@ -369,17 +375,24 @@ export function groundEdgeAt(
     const inside =
       (field.f - borderLevel(px, py, rank)) /
       Math.max(1e-4, Math.sqrt(field.gx * field.gx + field.gy * field.gy));
-    const d = inside + EDGE.base + EDGE.amp * edgeValue(mask, wx, wy, rank);
-    if (d > 0) return rank | (rimCode(depth, rank, wx, wy) << 4);
+    const d = inside + EDGE.base + amp * edgeValue(mask, wx, wy, rank);
+    if (d > 0)
+      return rank | (rimCode(depth, rank, wx, wy, review.edgeLine) << 4);
     if (depth === Infinity && d > -EDGE.band) depth = -d;
   }
   const low = ranks[0] ?? 0;
-  return low | (rimCode(depth, low, wx, wy) << 4);
+  return low | (rimCode(depth, low, wx, wy, review.edgeLine) << 4);
 }
 
-function rimCode(depth: number, rank: number, wx: number, wy: number): number {
+function rimCode(
+  depth: number,
+  rank: number,
+  wx: number,
+  wy: number,
+  line: boolean,
+): number {
   if (depth === Infinity) return RIM_NONE;
-  if (depth < EDGE.line) return RIM_LINE;
+  if (depth < EDGE.line) return line ? RIM_LINE : RIM_BAND;
   const rim = RIM[GROUND_RANK[rank] ?? "grass"];
   return depth + bayer(wx, wy) * 2 < rim.width ? RIM_BAND : RIM_NONE;
 }
@@ -395,6 +408,54 @@ export function groundRankAt(
   mask?: EdgeMask,
 ): number {
   return groundEdgeAt(atLeast, width, height, ranks, wx, wy, mask) & 15;
+}
+
+/**
+ * Review only (bead bzc.144, ground-review.ts G0 and G5): the Pulp Wars
+ * spill as it was drawn before bead bzc.138, a ragged strip of summed sines
+ * about 10 px past the smooth field's contour with loose specks beyond, cut
+ * in 2 px blocks, without a rim.
+ */
+const REVIEW_SPILL = {
+  width: 10,
+  waves: [4, 2.6, 1.6],
+  speckReach: 7,
+  speckShare: 7,
+  block: 2,
+} as const;
+
+function reviewSpillRankAt(
+  atLeast: readonly ArrayLike<number>[],
+  width: number,
+  height: number,
+  ranks: readonly number[],
+  wx: number,
+  wy: number,
+): number {
+  const { block } = REVIEW_SPILL;
+  const bx = Math.floor(wx / block) * block + block / 2;
+  const by = Math.floor(wy / block) * block + block / 2;
+  for (let k = ranks.length - 1; k >= 1; k -= 1) {
+    const rank = ranks[k] ?? 0;
+    const values = atLeast[rank];
+    if (values === undefined) continue;
+    const field = cellField(values, width, height, bx, by);
+    const inside =
+      (field.f - borderLevel(bx, by, rank)) /
+      Math.max(1e-4, Math.hypot(field.gx, field.gy));
+    const reach =
+      REVIEW_SPILL.width +
+      REVIEW_SPILL.waves[0] * Math.sin(TURN * (5 * bx + 4 * by) + 1.3) +
+      REVIEW_SPILL.waves[1] * Math.sin(TURN * (11 * by - 9 * bx) + 0.4) +
+      REVIEW_SPILL.waves[2] * Math.sin(TURN * (23 * bx + 19 * by) + 2.6);
+    if (inside > -reach) return rank;
+    if (
+      inside > -reach - REVIEW_SPILL.speckReach &&
+      hash4(bx, by, 5 + rank, 0x47) % 100 < REVIEW_SPILL.speckShare
+    )
+      return rank;
+  }
+  return ranks[0] ?? 0;
 }
 
 /** COAST_SAND_V7. */
@@ -888,6 +949,20 @@ export function paintGround(
     out[o + 1] = (out[o + 1] ?? 0) * (k[1] ?? 1);
     out[o + 2] = (out[o + 2] ?? 0) * (k[2] ?? 1);
   };
+  // Review switches (bead bzc.144, ground-review.ts): off by default.
+  const review = groundReview();
+  const driftTint =
+    review.drift === 1
+      ? DRIFT_TINT
+      : Object.fromEntries(
+          GROUND_RANK.map((g) => [
+            g,
+            {
+              low: scaleTint(DRIFT_TINT[g].low, review.drift),
+              high: scaleTint(DRIFT_TINT[g].high, review.drift),
+            },
+          ]),
+        );
   // The drift field, sampled on a world-aligned grid (ground-noise.ts).
   const drift = driftGrid(x0, y0, w, h);
   let patchList: readonly number[] = [];
@@ -919,7 +994,7 @@ export function paintGround(
       const wooded = layout.canopy?.near[i] === 1;
       const ranks = layout.ranks[i] ?? [];
       const links = layout.roads[i] ?? [];
-      patchList = layout.patchCells[i] ?? [];
+      patchList = review.patches ? (layout.patchCells[i] ?? []) : [];
       const water = kind === WATER;
       const deep = layout.deep[i] === 1;
       const v = (layout.variant[i] ?? 0) % 2;
@@ -1034,11 +1109,12 @@ export function paintGround(
               const r = RIM[ground];
               tint(o, rim === RIM_LINE ? r.line : r.band);
             }
-            if (lit) {
+            if (lit && review.drift > 0) {
               // The colour drift: three palettes with a dithered edge.
               const v = driftAt(drift, wx, wy) + bayer(wx, wy) * DRIFT.dither;
-              if (v < DRIFT.low) tint(o, DRIFT_TINT[ground].low);
-              else if (v > DRIFT.high) tint(o, DRIFT_TINT[ground].high);
+              const k = driftTint[ground];
+              if (k !== undefined && v < DRIFT.low) tint(o, k.low);
+              else if (k !== undefined && v > DRIFT.high) tint(o, k.high);
             }
             if (coastBits !== 0) {
               const k = coastAt(true, shore, wx + 0.5, wy + 0.5);

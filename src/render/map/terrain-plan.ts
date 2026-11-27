@@ -26,6 +26,7 @@ import type {
 import { placeDoodadSet } from "./doodads";
 import type { DoodadSet } from "./doodads";
 import { buildGroundLayout } from "./ground";
+import { groundReview } from "./ground-review";
 import type { GroundLayout } from "./ground";
 import { buildPeakField, placePeakSet } from "./peaks";
 import type { PeakField, PeakPlacement } from "./peaks";
@@ -122,6 +123,40 @@ const drawOrder = (a: SceneEntry, b: SceneEntry): number =>
 const byBase = (a: CanopyTree, b: CanopyTree): number =>
   a.baseY - b.baseY || a.baseX - b.baseX;
 
+/**
+ * Review only (bead bzc.144, ground-review.ts `?treeScale=`): every tree
+ * placed as made, then drawn `scale` times larger round its foot (the
+ * trunk base and the centre line kept). Scale 1 returns the placement.
+ */
+export function reviewTreeScale(
+  placement: CanopyPlacement,
+  scale: number,
+): CanopyPlacement {
+  if (scale === 1) return placement;
+  const grown = new Map<CanopyTree, CanopyTree>();
+  const grow = (tree: CanopyTree): CanopyTree => {
+    let out = grown.get(tree);
+    if (out === undefined) {
+      const w = Math.round(tree.w * scale);
+      const h = Math.round(tree.h * scale);
+      out = {
+        ...tree,
+        x: Math.round(tree.x + tree.w / 2 - w / 2),
+        y: tree.baseY - h,
+        w,
+        h,
+      };
+      grown.set(tree, out);
+    }
+    return out;
+  };
+  return {
+    ...placement,
+    trees: placement.trees.map(grow),
+    byCell: placement.byCell.map((list) => list?.map(grow)),
+  };
+}
+
 /** The terrain plan of `map`: the same for the whole of a game on it. */
 export function planTerrain(map: GameMap): TerrainPlan {
   const objects = terrainObjects(map);
@@ -135,7 +170,10 @@ export function planTerrain(map: GameMap): TerrainPlan {
     objects,
   );
   const layout = { ...base, canopy: canopyField };
-  const canopy = placeCanopySet(canopyField, TREE_SPECIES);
+  const canopy = reviewTreeScale(
+    placeCanopySet(canopyField, TREE_SPECIES),
+    groundReview().treeScale,
+  );
   const peaks = placePeakSet(peakField, PEAK_SPRITES);
   const doodads = placeDoodadSet(map, layout, featured);
   // Peaks share the crown bands with the trees, in one base order (trees
