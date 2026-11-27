@@ -351,6 +351,9 @@ export const LIVING_MOTION: Readonly<Record<string, LivingMotion>> = {
   "gummy-worm": "creep",
   "sugar-mouse": "twitch",
   "gingerbread-rabbit": "breathe",
+  // Bead bzc.124: the marzipan snail creeps, the sugar butterfly flaps.
+  "marzipan-snail": "creep",
+  "sugar-butterfly": "flap",
   // The volcanic plains (bead bzc.125): lava and embers pulse (glow), a
   // salamander flicks, an ember beetle crawls.
   "lava-vent": "glow",

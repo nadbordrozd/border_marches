@@ -183,6 +183,8 @@ const NEVER_GUARDED: ReadonlySet<ObjectTypeId> = new Set<ObjectTypeId>([
   "sphinx",
   // Volcanic sites (bead bzc.125): the Brimstone Pit's guard is inside.
   "brimstone-pit",
+  // Candy sites (bead bzc.124): the cottage's guard is inside.
+  "gingerbread-cottage",
 ]);
 
 /**
@@ -322,6 +324,14 @@ export const DESERT_ROWS: readonly MapObjectRow[] = (
  */
 export const VOLCANIC_ROWS: readonly MapObjectRow[] = (
   ["infernal-forge", "brimstone-pit", "shrine-of-embers"] as const
+).map((t) => catalogueRow(OBJECT_TYPES[t]));
+
+/**
+ * Rows of the candy zones' sites (bead bzc.124), placed only in candy zones
+ * by the generator's candy pass (src/core/map/gen/candy.ts candySites).
+ */
+export const CANDY_ROWS: readonly MapObjectRow[] = (
+  ["gingerbread-cottage", "sugar-fountain", "sweet-shop"] as const
 ).map((t) => catalogueRow(OBJECT_TYPES[t]));
 
 export const MAP_OBJECT_ROW_BY_ID: Readonly<Record<string, MapObjectRow>> =

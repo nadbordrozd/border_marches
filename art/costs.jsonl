@@ -582,6 +582,12 @@
 {"at":"2026-11-27T00:56:26.320Z","set":"candy-decorations","id":"small-b","endpoint":"generate-image-v2","usd":0.08331384982003107}
 {"at":"2026-11-27T00:58:24.530Z","set":"candy-decorations","id":"props-1x1-a","endpoint":"generate-image-v2","usd":0.08184624671936035}
 {"at":"2026-11-27T00:59:47.147Z","set":"candy-decorations","id":"props-2x1-a","endpoint":"generate-image-v2","usd":0.08121170433362325}
+{"at":"2026-11-27T09:09:03.472Z","set":"candy-sites","id":"cottage-a","endpoint":"generate-image-v2","usd":0.08091888825098674}
+{"at":"2026-11-27T09:10:05.068Z","set":"candy-sites","id":"fountain-a","endpoint":"generate-image-v2","usd":0.08051319519678751}
+{"at":"2026-11-27T09:11:12.025Z","set":"candy-sites","id":"shop-a","endpoint":"generate-image-v2","usd":0.0809629557132721}
+{"at":"2026-11-27T09:23:52.590Z","set":"candy-decorations-b","id":"small-c","endpoint":"generate-image-v2","usd":0.08211823235617743}
+{"at":"2026-11-27T09:25:31.515Z","set":"candy-decorations-b","id":"props-1x1-b","endpoint":"generate-image-v2","usd":0.08172245534261068}
+{"at":"2026-11-27T09:35:54.727Z","set":"candy-decorations-b","id":"small-d","endpoint":"generate-image-v2","usd":0.08216477492120532}
 {"at":"2026-11-27T09:10:08.679Z","set":"range-massifs","id":"grass-a","endpoint":"generate-image-v2","usd":0.11550412233670553}
 {"at":"2026-11-27T09:11:15.617Z","set":"range-massifs","id":"steppe-a","endpoint":"generate-image-v2","usd":0.11628827765252855}
 {"at":"2026-11-27T09:12:27.824Z","set":"range-massifs","id":"badlands-a","endpoint":"generate-image-v2","usd":0.11614653807216221}

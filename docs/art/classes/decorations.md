@@ -140,6 +140,14 @@ shapes that read as letters, a small lollipop and a giant melting cone
 (repeats of the lollipop trees and of the passable cone), purple and
 primary colourways off the Kingdom's palette (FACTION_CANDY 10.1).
 
+More frosting (bead bzc.124, set `art/sets/candy-decorations-b`, the same
+recipe, 3 calls): passable, two looks each, `gummy-cub` (Gummy Bear Cub,
+yellow and red), `marzipan-snail` (creeps), `sugar-butterfly` (flaps) and
+`sugar-grass` (Spun-Sugar Grass); props `macaron-stack` and
+`gingerbread-ruin` (1x1, one look each). The same rejections held: the
+takes of a lollipop, wrapped bonbons, a jelly-bean heap and loose cherries
+were turned down or withdrawn after review (lollipop trees, pickups, a gem
+pile).
 ### The volcanic plains (bead bzc.125)
 
 Studio set `art/sets/volcanic-decorations` (same recipes and crops as

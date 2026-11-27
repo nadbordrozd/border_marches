@@ -2,7 +2,9 @@
  * The adventure-map object catalogue (docs/design/CONTENT_MAP_OBJECTS.md,
  * bead bzc.13): 62 object types, 53 core and 9 stretch, and the four
  * winter sites of bead bzc.87 (placed by the generator's winter rule only),
- * and the Mystery Bag of bead bzc.105 (placed by a rule). Type ids are the
+ * and the Mystery Bag of bead bzc.105 (placed by a rule); the desert
+ * (bzc.88) and candy (bzc.124) sites are placed by their zones' rules
+ * only. Type ids are the
  * catalogue names in kebab case (shared with the object art of bead
  * bzc.16). A placed object carries its type in `data.type`.
  *
@@ -99,6 +101,10 @@ export const OBJECT_TYPE_IDS = [
   "sphinx",
   "sun-temple",
   "sunken-tomb",
+  // 3.13 Candy sites (bead bzc.124): placed only in candy zones
+  "gingerbread-cottage",
+  "sugar-fountain",
+  "sweet-shop",
   // 3.14 Volcanic sites (bead bzc.125): placed only in volcanic zones
   "infernal-forge",
   "brimstone-pit",
@@ -336,6 +342,14 @@ const ROWS: readonly Row[] = [
   ["sun-temple", "Sun Temple", "site", 2, 2, "", "each-visit", 600, [D], 0, "+2 Attack until the end of the hero's next battle. Visiting again adds no more."],
   // prettier-ignore
   ["sunken-tomb", "Sunken Tomb", "bank", 2, 2, "", "one-time", 2500, [D], 0, "Restless dead guard it; win the battle to take the grave goods."],
+  // 3.13 Candy sites (bead bzc.124): weight 0, placed by the candy rule
+  // (gen/candy.ts) in the candy zones only, on frosting.
+  // prettier-ignore
+  ["gingerbread-cottage", "Gingerbread Cottage", "bank", 2, 2, "", "one-time", 6500, ["frosting"], 0, "The candy witch's sweet guards hold her cottage; win the battle to take her hoard: always a Wonder, and gold."],
+  // prettier-ignore
+  ["sugar-fountain", "Sugar Fountain", "site", 2, 2, "", "each-visit", 800, ["frosting"], 0, "Sugar rush: every stack of the hero's army has +1 Speed until the end of the hero's next battle. Visiting again adds no more."],
+  // prettier-ignore
+  ["sweet-shop", "Sweet Shop", "site", 2, 2, "", "per-week-hero", 1000, ["frosting"], 0, "The confectioner's three candied potions: each hero takes one free each week; more cost their value in gold."],
   // 3.14 Volcanic sites (bead bzc.125): weight 0, placed by the volcanic
   // rule (gen/volcanic.ts) in the volcanic zones only.
   // prettier-ignore
@@ -416,6 +430,11 @@ export const SPHINX_XP = 2500;
 /** Attack of a Sun Temple's blessing, until the next battle ends. */
 export const SUN_TEMPLE_ATTACK = 2;
 
+/** Speed a Sugar Fountain's sugar rush gives every stack (bead bzc.124). */
+export const SUGAR_RUSH_SPEED = 1;
+
+/** Potions a Sweet Shop stocks (bead bzc.124), fixed at generation. */
+export const SWEET_SHOP_STOCK = 3;
 /**
  * The Infernal Forge (bead bzc.125): what reforging one Trinket into the
  * forge's Wonder costs besides the Trinket.
@@ -484,6 +503,8 @@ export function siteBuffEffect(buff: string): {
   /** Cheaper steps on one terrain (a Hunter's Lodge's snowshoes). */
   terrain?: { terrain: Terrain; reduce: number };
   attack?: number;
+  /** Speed of every stack of the army (a Sugar Fountain's sugar rush). */
+  speed?: number;
   /** Strike multipliers (a Shrine of Embers' Ember Brand, bead bzc.125). */
   strikes?: ReadonlyArray<{ direction: "dealt" | "taken"; percent: number }>;
 } {
@@ -510,6 +531,8 @@ export function siteBuffEffect(buff: string): {
       };
     case "sun-temple":
       return { label: "Sun Temple", attack: SUN_TEMPLE_ATTACK };
+    case "sugar-fountain":
+      return { label: "Sugar Rush", speed: SUGAR_RUSH_SPEED };
     case "shrine-of-embers":
       return {
         label: "Ember Brand",

@@ -217,6 +217,8 @@ export function heroEffects(hero: HeroState): SourcedEffect[] {
       effects.push({ kind: "terrain-cost", ...b.terrain });
     if (b.attack !== undefined)
       effects.push({ kind: "stat", stat: "attack", amount: b.attack });
+    if (b.speed !== undefined)
+      effects.push({ kind: "stack-stats", speed: b.speed });
     for (const s of b.strikes ?? [])
       effects.push({ kind: "strike-percent", strike: "all", ...s });
     if (b.school !== undefined && b.power !== undefined) {

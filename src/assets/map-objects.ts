@@ -102,6 +102,10 @@ export const MAP_OBJECT_TYPE_IDS = [
   "sphinx",
   "sun-temple",
   "sunken-tomb",
+  // 3.13 Candy sites (bead bzc.124, set candy-sites)
+  "gingerbread-cottage",
+  "sugar-fountain",
+  "sweet-shop",
   // 3.14 Volcanic sites (bead bzc.125, set volcanic-sites)
   "infernal-forge",
   "brimstone-pit",
@@ -208,6 +212,9 @@ const TYPE_ROWS: readonly (readonly [
   ["sphinx", "Sphinx", 2, 2, ""],
   ["sun-temple", "Sun Temple", 2, 2, ""],
   ["sunken-tomb", "Sunken Tomb", 2, 2, ""],
+  ["gingerbread-cottage", "Gingerbread Cottage", 2, 2, ""],
+  ["sugar-fountain", "Sugar Fountain", 2, 2, ""],
+  ["sweet-shop", "Sweet Shop", 2, 2, ""],
   ["infernal-forge", "Infernal Forge", 2, 2, ""],
   ["brimstone-pit", "Brimstone Pit", 2, 2, ""],
   ["shrine-of-embers", "Shrine of Embers", 1, 1, ""],
@@ -401,6 +408,11 @@ const ART_ROWS: readonly (readonly [
   ["sphinx", "", 107, 98, "@desert-sites/sphinx-a#3"],
   ["sun-temple", "", 102, 113, "@desert-sites/sun-temple-a#1"],
   ["sunken-tomb", "", 120, 108, "@desert-sites/tomb-a#2"],
+  // Candy sites (bead bzc.124, set candy-sites); the cottage's medium and
+  // large sizes share one look.
+  ["gingerbread-cottage", "", 109, 102, "@candy-sites/cottage-a#2"],
+  ["sugar-fountain", "", 101, 112, "@candy-sites/fountain-a#0"],
+  ["sweet-shop", "", 115, 102, "@candy-sites/shop-a#1"],
   // Volcanic sites (bead bzc.125, set volcanic-sites).
   ["infernal-forge", "", 109, 102, "@volcanic-sites/forge-a#1"],
   ["brimstone-pit", "small", 84, 60, "@volcanic-sites/pit-a#0"],

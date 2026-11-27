@@ -1,0 +1,722 @@
+{
+  "small-c#4": {
+    "verdict": "REJECTED",
+    "notes": "withdrawn: bzc.115 rejected small lollipops as repeats of the lollipop trees (decorations.md)",
+    "at": "2026-11-27T09:33:19.961Z"
+  },
+  "small-c#44": {
+    "verdict": "REJECTED",
+    "notes": "withdrawn: bzc.115 rejected small lollipops as repeats of the lollipop trees (decorations.md)",
+    "at": "2026-11-27T09:33:20.122Z"
+  },
+  "small-c#7": {
+    "verdict": "REJECTED",
+    "notes": "withdrawn: bzc.115 rejected wrapped sweets as reading like pickups (decorations.md)",
+    "at": "2026-11-27T09:33:20.392Z"
+  },
+  "small-c#28": {
+    "verdict": "REJECTED",
+    "notes": "withdrawn: bzc.115 rejected wrapped sweets as reading like pickups (decorations.md)",
+    "at": "2026-11-27T09:33:20.538Z"
+  },
+  "small-c#40": {
+    "verdict": "ACCEPTED",
+    "notes": "gummy cub look 1: yellow gummy bear, cute and readable",
+    "at": "2026-11-27T09:28:18.195Z"
+  },
+  "small-c#41": {
+    "verdict": "ACCEPTED",
+    "notes": "gummy cub look 2: red gummy bear",
+    "at": "2026-11-27T09:28:18.314Z"
+  },
+  "small-c#0": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans read as a shapeless blob at 1x",
+    "at": "2026-11-27T09:28:18.432Z"
+  },
+  "small-c#1": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans read as a shapeless blob at 1x",
+    "at": "2026-11-27T09:28:18.548Z"
+  },
+  "small-c#2": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans read as a shapeless blob at 1x",
+    "at": "2026-11-27T09:28:18.674Z"
+  },
+  "small-c#3": {
+    "verdict": "REJECTED",
+    "notes": "jelly beans read as a shapeless blob at 1x",
+    "at": "2026-11-27T09:28:18.789Z"
+  },
+  "small-c#5": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:18.906Z"
+  },
+  "small-c#8": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:19.027Z"
+  },
+  "small-c#9": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:19.154Z"
+  },
+  "small-c#10": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:19.272Z"
+  },
+  "small-c#11": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:19.395Z"
+  },
+  "small-c#45": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:19.532Z"
+  },
+  "small-c#46": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:19.649Z"
+  },
+  "small-c#47": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:19.768Z"
+  },
+  "small-c#49": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:19.893Z"
+  },
+  "small-c#50": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:20.013Z"
+  },
+  "small-c#38": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:20.138Z"
+  },
+  "small-c#39": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted lollipops",
+    "at": "2026-11-27T09:28:20.253Z"
+  },
+  "small-c#12": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:20.368Z"
+  },
+  "small-c#19": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:20.479Z"
+  },
+  "small-c#20": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:20.595Z"
+  },
+  "small-c#21": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:20.707Z"
+  },
+  "small-c#22": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:20.814Z"
+  },
+  "small-c#23": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:20.923Z"
+  },
+  "small-c#27": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:21.032Z"
+  },
+  "small-c#29": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:21.143Z"
+  },
+  "small-c#30": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:21.257Z"
+  },
+  "small-c#31": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:21.364Z"
+  },
+  "small-c#32": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:21.474Z"
+  },
+  "small-c#33": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:21.583Z"
+  },
+  "small-c#34": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:21.697Z"
+  },
+  "small-c#35": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted bonbons, or reads as a plain wrapped toffee",
+    "at": "2026-11-27T09:28:21.798Z"
+  },
+  "small-c#42": {
+    "verdict": "REJECTED",
+    "notes": "third and fourth gummy colours: two looks are enough",
+    "at": "2026-11-27T09:28:21.916Z"
+  },
+  "small-c#43": {
+    "verdict": "REJECTED",
+    "notes": "third and fourth gummy colours: two looks are enough",
+    "at": "2026-11-27T09:28:22.031Z"
+  },
+  "small-c#13": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:22.146Z"
+  },
+  "small-c#14": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:22.263Z"
+  },
+  "small-c#15": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:22.391Z"
+  },
+  "small-c#25": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:22.513Z"
+  },
+  "small-c#26": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:22.634Z"
+  },
+  "small-c#54": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:22.766Z"
+  },
+  "small-c#55": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:22.907Z"
+  },
+  "small-c#56": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:23.042Z"
+  },
+  "small-c#58": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:23.168Z"
+  },
+  "small-c#59": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:23.293Z"
+  },
+  "small-c#62": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:23.415Z"
+  },
+  "small-c#63": {
+    "verdict": "REJECTED",
+    "notes": "lone gumdrop: the existing Gumdrops decoration already shows it",
+    "at": "2026-11-27T09:28:23.540Z"
+  },
+  "small-c#16": {
+    "verdict": "REJECTED",
+    "notes": "candy cane: the existing Candy Cane decoration already shows it",
+    "at": "2026-11-27T09:28:23.661Z"
+  },
+  "small-c#17": {
+    "verdict": "REJECTED",
+    "notes": "candy cane: the existing Candy Cane decoration already shows it",
+    "at": "2026-11-27T09:28:23.782Z"
+  },
+  "small-c#18": {
+    "verdict": "REJECTED",
+    "notes": "candy cane: the existing Candy Cane decoration already shows it",
+    "at": "2026-11-27T09:28:23.907Z"
+  },
+  "small-c#24": {
+    "verdict": "REJECTED",
+    "notes": "candy cane: the existing Candy Cane decoration already shows it",
+    "at": "2026-11-27T09:28:24.025Z"
+  },
+  "small-c#6": {
+    "verdict": "REJECTED",
+    "notes": "candy corn: good, but six new kinds are enough; kept as the gummy cub's alternative",
+    "at": "2026-11-27T09:28:24.144Z"
+  },
+  "small-c#36": {
+    "verdict": "REJECTED",
+    "notes": "a toadstool, not a sweet",
+    "at": "2026-11-27T09:28:24.280Z"
+  },
+  "small-c#37": {
+    "verdict": "REJECTED",
+    "notes": "a toadstool, not a sweet",
+    "at": "2026-11-27T09:28:24.394Z"
+  },
+  "small-c#48": {
+    "verdict": "REJECTED",
+    "notes": "stacked rings read as a toy, not a sweet",
+    "at": "2026-11-27T09:28:24.509Z"
+  },
+  "small-c#51": {
+    "verdict": "REJECTED",
+    "notes": "stacked rings read as a toy, not a sweet",
+    "at": "2026-11-27T09:28:24.627Z"
+  },
+  "small-c#52": {
+    "verdict": "REJECTED",
+    "notes": "stacked rings read as a toy, not a sweet",
+    "at": "2026-11-27T09:28:24.745Z"
+  },
+  "small-c#53": {
+    "verdict": "REJECTED",
+    "notes": "stacked rings read as a toy, not a sweet",
+    "at": "2026-11-27T09:28:24.862Z"
+  },
+  "small-c#57": {
+    "verdict": "REJECTED",
+    "notes": "grey or brown lumps read as rocks",
+    "at": "2026-11-27T09:28:24.981Z"
+  },
+  "small-c#60": {
+    "verdict": "REJECTED",
+    "notes": "grey or brown lumps read as rocks",
+    "at": "2026-11-27T09:28:25.095Z"
+  },
+  "small-c#61": {
+    "verdict": "REJECTED",
+    "notes": "grey or brown lumps read as rocks",
+    "at": "2026-11-27T09:28:25.214Z"
+  },
+  "props-1x1-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "macaron stack: three fat pastel macarons, a clear one-cell prop",
+    "at": "2026-11-27T09:28:25.333Z"
+  },
+  "props-1x1-b#6": {
+    "verdict": "REJECTED",
+    "notes": "withdrawn: bzc.115 rejected a jelly-bean heap as reading like a gem pile (decorations.md)",
+    "at": "2026-11-27T09:33:20.692Z"
+  },
+  "props-1x1-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "gingerbread ruin: a broken iced gingerbread wall, a story prop",
+    "at": "2026-11-27T09:28:25.562Z"
+  },
+  "props-1x1-b#0": {
+    "verdict": "REJECTED",
+    "notes": "giant lollipop repeats the new small lollipop",
+    "at": "2026-11-27T09:28:25.680Z"
+  },
+  "props-1x1-b#1": {
+    "verdict": "REJECTED",
+    "notes": "melting cone repeats the existing Melting Ice Cream",
+    "at": "2026-11-27T09:28:25.792Z"
+  },
+  "props-1x1-b#3": {
+    "verdict": "REJECTED",
+    "notes": "candy cane repeats the existing canes",
+    "at": "2026-11-27T09:28:25.905Z"
+  },
+  "props-1x1-b#4": {
+    "verdict": "REJECTED",
+    "notes": "cupcake repeats the existing Giant Cupcake",
+    "at": "2026-11-27T09:28:26.016Z"
+  },
+  "props-1x1-b#5": {
+    "verdict": "REJECTED",
+    "notes": "marshmallows repeat the existing Marshmallows",
+    "at": "2026-11-27T09:28:26.126Z"
+  },
+  "props-1x1-b#7": {
+    "verdict": "REJECTED",
+    "notes": "gummy bear prop repeats the new gummy cub",
+    "at": "2026-11-27T09:28:26.232Z"
+  },
+  "props-1x1-b#8": {
+    "verdict": "REJECTED",
+    "notes": "donut seen from above, off the map's camera",
+    "at": "2026-11-27T09:28:26.346Z"
+  },
+  "props-1x1-b#9": {
+    "verdict": "REJECTED",
+    "notes": "chocolate stack repeats the existing Chocolate Bar",
+    "at": "2026-11-27T09:28:26.464Z"
+  },
+  "props-1x1-b#10": {
+    "verdict": "REJECTED",
+    "notes": "crystals repeat the existing Rock Candy",
+    "at": "2026-11-27T09:28:26.580Z"
+  },
+  "props-1x1-b#11": {
+    "verdict": "REJECTED",
+    "notes": "flat peppermint disc seen from above, off the camera",
+    "at": "2026-11-27T09:28:26.692Z"
+  },
+  "props-1x1-b#13": {
+    "verdict": "REJECTED",
+    "notes": "licorice sticks read as dark twigs at 1x",
+    "at": "2026-11-27T09:28:26.819Z"
+  },
+  "props-1x1-b#14": {
+    "verdict": "REJECTED",
+    "notes": "one giant candy corn, plain cone shape",
+    "at": "2026-11-27T09:28:26.935Z"
+  },
+  "props-1x1-b#15": {
+    "verdict": "REJECTED",
+    "notes": "flat heap of buttons, too low for a blocking prop",
+    "at": "2026-11-27T09:28:27.050Z"
+  },
+  "small-d#2": {
+    "verdict": "ACCEPTED",
+    "notes": "marzipan snail look 1: magenta swirl shell, reads at 1x on frosting",
+    "at": "2026-11-27T09:36:18.832Z"
+  },
+  "small-d#7": {
+    "verdict": "ACCEPTED",
+    "notes": "marzipan snail look 2: pale pink shell, distinct from look 1",
+    "at": "2026-11-27T09:36:18.947Z"
+  },
+  "small-d#20": {
+    "verdict": "ACCEPTED",
+    "notes": "sugar butterfly look 1: mint wings open, clear outline",
+    "at": "2026-11-27T09:36:19.051Z"
+  },
+  "small-d#22": {
+    "verdict": "ACCEPTED",
+    "notes": "sugar butterfly look 2: side-on, wings raised",
+    "at": "2026-11-27T09:36:19.165Z"
+  },
+  "small-d#49": {
+    "verdict": "ACCEPTED",
+    "notes": "spun-sugar grass look 1: pink tuft, a plant not a pickup",
+    "at": "2026-11-27T09:36:19.274Z"
+  },
+  "small-d#56": {
+    "verdict": "ACCEPTED",
+    "notes": "spun-sugar grass look 2: paler tuft",
+    "at": "2026-11-27T09:36:19.381Z"
+  },
+  "small-d#0": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:19.504Z"
+  },
+  "small-d#1": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:19.637Z"
+  },
+  "small-d#3": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:19.754Z"
+  },
+  "small-d#4": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:19.886Z"
+  },
+  "small-d#5": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:20.012Z"
+  },
+  "small-d#6": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:20.135Z"
+  },
+  "small-d#8": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:20.266Z"
+  },
+  "small-d#9": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:20.410Z"
+  },
+  "small-d#10": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:20.542Z"
+  },
+  "small-d#11": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:20.689Z"
+  },
+  "small-d#12": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:20.830Z"
+  },
+  "small-d#13": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:20.974Z"
+  },
+  "small-d#14": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:21.132Z"
+  },
+  "small-d#15": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted snails",
+    "at": "2026-11-27T09:36:21.343Z"
+  },
+  "small-d#16": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:21.496Z"
+  },
+  "small-d#17": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:21.637Z"
+  },
+  "small-d#18": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:21.802Z"
+  },
+  "small-d#19": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:21.972Z"
+  },
+  "small-d#21": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:22.140Z"
+  },
+  "small-d#23": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:22.337Z"
+  },
+  "small-d#24": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:22.499Z"
+  },
+  "small-d#25": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:22.665Z"
+  },
+  "small-d#26": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:22.806Z"
+  },
+  "small-d#27": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:22.945Z"
+  },
+  "small-d#28": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:23.082Z"
+  },
+  "small-d#29": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:23.227Z"
+  },
+  "small-d#30": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:23.378Z"
+  },
+  "small-d#31": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted butterflies",
+    "at": "2026-11-27T09:36:23.515Z"
+  },
+  "small-d#32": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:23.653Z"
+  },
+  "small-d#33": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:23.788Z"
+  },
+  "small-d#34": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:23.946Z"
+  },
+  "small-d#35": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:24.086Z"
+  },
+  "small-d#36": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:24.219Z"
+  },
+  "small-d#37": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:24.365Z"
+  },
+  "small-d#38": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:24.521Z"
+  },
+  "small-d#39": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:24.692Z"
+  },
+  "small-d#40": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:24.832Z"
+  },
+  "small-d#41": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:24.977Z"
+  },
+  "small-d#42": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:25.138Z"
+  },
+  "small-d#43": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:25.320Z"
+  },
+  "small-d#44": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:25.570Z"
+  },
+  "small-d#45": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:25.763Z"
+  },
+  "small-d#46": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:25.982Z"
+  },
+  "small-d#47": {
+    "verdict": "REJECTED",
+    "notes": "loose cherries read like a pickup (the bzc.115 rule on loose sweets)",
+    "at": "2026-11-27T09:36:26.196Z"
+  },
+  "small-d#48": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:26.412Z"
+  },
+  "small-d#50": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:26.573Z"
+  },
+  "small-d#51": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:26.761Z"
+  },
+  "small-d#52": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:26.980Z"
+  },
+  "small-d#53": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:27.177Z"
+  },
+  "small-d#54": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:27.429Z"
+  },
+  "small-d#55": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:27.629Z"
+  },
+  "small-d#57": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:27.850Z"
+  },
+  "small-d#58": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:28.124Z"
+  },
+  "small-d#59": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:28.317Z"
+  },
+  "small-d#60": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:28.491Z"
+  },
+  "small-d#61": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of the accepted tufts, or coral-like",
+    "at": "2026-11-27T09:36:28.820Z"
+  },
+  "small-d#62": {
+    "verdict": "REJECTED",
+    "notes": "a cotton-candy blob, repeats the cotton-candy trees",
+    "at": "2026-11-27T09:36:29.058Z"
+  },
+  "small-d#63": {
+    "verdict": "REJECTED",
+    "notes": "a cotton-candy blob, repeats the cotton-candy trees",
+    "at": "2026-11-27T09:36:29.279Z"
+  }
+}

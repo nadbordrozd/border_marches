@@ -80,6 +80,13 @@ describe("denser maps (bzc.50)", { timeout: HEAVY_TIMEOUT }, () => {
       "sun-temple",
       "sunken-tomb",
     ];
+    // The candy sites (bead bzc.124) stand only on maps that roll a candy
+    // zone (tests/core/map/candy-sites.test.ts).
+    const candy: ObjectTypeId[] = [
+      "gingerbread-cottage",
+      "sugar-fountain",
+      "sweet-shop",
+    ];
     // Bead bzc.95: gates need a loop between wild zones or a one-cell
     // choke with a way round, which an S map rarely has (one gate site in
     // seeds 1-14, a quest gate). Bead bzc.96 reserves room for the banks
@@ -96,6 +103,7 @@ describe("denser maps (bzc.50)", { timeout: HEAVY_TIMEOUT }, () => {
         (t) =>
           !authored.includes(t) &&
           !desert.includes(t) &&
+          !candy.includes(t) &&
           !(size === "S" && t === "keepers-vault") &&
           !(size === "S" && rareOnS.includes(t)) &&
           !seen.has(t),

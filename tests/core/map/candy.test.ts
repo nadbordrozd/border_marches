@@ -250,15 +250,23 @@ describe("Candy outposts on frosting", { timeout: HEAVY_TIMEOUT }, () => {
     }
   });
 
-  it("stands a generated Candy outpost on the frosting (L 6)", () => {
-    const { map } = generateMapWithInfo(6, { size: "L", players: 2 });
+  // Bead bzc.124: the candy zones' own sites (a cottage, a fountain and a
+  // shop, placed first) now take most of the frosting's room, so L6 lost
+  // its one Candy outpost on frosting. A Candy outpost may still go into
+  // the candy zone (its zones list it), on the frosting while a site there
+  // is free, else on the zone's grass patches (L24).
+  it("lets a generated Candy outpost into the candy zone (L 24)", () => {
+    const { map, info } = generateMapWithInfo(24, { size: "L", players: 2 });
     const outposts = map.objects.filter(
       (o) =>
         o.data["type"] === "faction-outpost" && o.data["faction"] === "candy",
     );
-    expect(outposts.length).toBeGreaterThan(0);
-    for (const o of outposts)
-      expect(map.cells[o.y * map.width + o.x]?.terrain).toBe("frosting");
+    const inCandy = outposts.filter(
+      (o) =>
+        info.zones[info.zoneOf[o.y * map.width + o.x] ?? -1]?.main ===
+        "frosting",
+    );
+    expect(inCandy.length).toBeGreaterThan(0);
   });
 
   it("changes nothing on a map without a candy zone", () => {

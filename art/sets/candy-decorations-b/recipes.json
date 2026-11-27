@@ -1,0 +1,200 @@
+{
+  "set": "candy-decorations-b",
+  "bead": "border_marches-bzc.124",
+  "class": "decorations",
+  "exploration": false,
+  "_doc": "More Candy Kingdom frosting decorations (bead bzc.124), the recipe of set candy-decorations (bead bzc.115, docs/art/classes/decorations.md): passable small details at 32 x 32 with the doodad class layer, impassable one-cell props on 64 x 64 with the prop class layer. generate-image-v2, no style image; one call returns many candidates of a mixed subject, the best distinct ones are accepted and cropped to their opaque box plus 1 px. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-doodad"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "small-c",
+      "concept": "SMALL CANDY DETAILS (passable, 1 cell)",
+      "width": 32,
+      "height": 32,
+      "seed": 124401,
+      "subject": "Subject: one tiny candy-land detail, each image a different one of these: a little heap of shiny jelly beans in pink, lemon, mint and orange; a small round peppermint-swirl lollipop #e03a3e and white stuck upright in the ground on a white stick; three candy corns with yellow, orange and white stripes; a round bonbon in shiny pink #e2589b wrapper twisted at both ends. Small and low, about half of the image wide, much smaller than a person."
+    },
+    {
+      "id": "props-1x1-b",
+      "concept": "BIG CANDY PROPS (blocking, 1 cell)",
+      "width": 64,
+      "height": 64,
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "seed": 124402,
+      "subject": "Subject: one big blocking candy-land prop that fills one map cell, each image a different one of these: a giant round swirl lollipop of red #e03a3e and white planted upright on a thick white stick, as tall as a house; a giant scoop of strawberry ice cream #f08cb8 melting on an upturned waffle cone #d9a45a; a tall stack of three big macarons in pink, mint and lemon #f08cb8 #8fdcc0 #f4d46c. About three quarters of the image wide and tall."
+    },
+    {
+      "id": "small-d",
+      "concept": "SMALL CANDY CREATURES AND PLANTS (passable, 1 cell; no loose sweets, which read as pickups)",
+      "width": 32,
+      "height": 32,
+      "seed": 124403,
+      "subject": "Subject: one tiny candy-land detail growing or living on the icing, each image a different one of these: a little marzipan snail with a pink #f08cb8 swirl shell, crawling; a small sugar-glass butterfly with pale mint #8fdcc0 wings resting on the ground; two red cherries #d8323c on one green stem lying on the ground; a little tuft of spun-sugar grass, pale pink and white. Small and low, about half of the image wide, much smaller than a person."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/decorations/gummy-cub-1.png",
+      "from": "small-c#40",
+      "width": 18,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 4,
+          "width": 18,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/gummy-cub-2.png",
+      "from": "small-c#41",
+      "width": 18,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 4,
+          "width": 18,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/macaron-stack.png",
+      "from": "props-1x1-b#2",
+      "width": 42,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 3,
+          "width": 42,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/gingerbread-ruin.png",
+      "from": "props-1x1-b#12",
+      "width": 61,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 2,
+          "width": 61,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/marzipan-snail-1.png",
+      "from": "small-d#2",
+      "width": 26,
+      "height": 21,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 6,
+          "width": 26,
+          "height": 21
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/marzipan-snail-2.png",
+      "from": "small-d#7",
+      "width": 25,
+      "height": 23,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 25,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/sugar-butterfly-1.png",
+      "from": "small-d#20",
+      "width": 30,
+      "height": 20,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 6,
+          "width": 30,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/sugar-butterfly-2.png",
+      "from": "small-d#22",
+      "width": 24,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 3,
+          "width": 24,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/sugar-grass-1.png",
+      "from": "small-d#49",
+      "width": 24,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 24,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/sugar-grass-2.png",
+      "from": "small-d#56",
+      "width": 20,
+      "height": 26,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 3,
+          "width": 20,
+          "height": 26
+        }
+      ]
+    }
+  ]
+}

@@ -47,6 +47,7 @@ import {
   SHOVEL_DIG_MP,
   SPHINX_XP,
   STABLES_MP,
+  SUGAR_RUSH_SPEED,
   SUN_TEMPLE_ATTACK,
   type ObjectTypeId,
   type Prize,
@@ -718,6 +719,52 @@ function sphinxGift(
 }
 
 // ---------------------------------------------------------------------------
+// The Sweet Shop (bead bzc.124)
+
+/** A Sweet Shop's potions (artifact ids), fixed at generation. */
+export function sweetShopStock(obj: MapObject): string[] {
+  const raw = obj.data["stock"];
+  return Array.isArray(raw)
+    ? raw.filter(
+        (a): a is string =>
+          typeof a === "string" && findArtifact(a)?.kind === "consumable",
+      )
+    : [];
+}
+
+/**
+ * A Sweet Shop's choices: one free potion while the hero's weekly treat is
+ * unused (`freeTreat`), otherwise each potion for its value in gold.
+ */
+function sweetShopOptions(
+  hero: HeroState,
+  obj: MapObject,
+  freeTreat: boolean,
+  gold: number,
+): SiteOption[] {
+  return sweetShopStock(obj).map((item, i) => {
+    const room = canCarry(hero, item);
+    if (freeTreat) {
+      return {
+        id: `treat:${i}`,
+        label: `Take ${itemName(item)} (free this week)`,
+        ...(room ? {} : { disabled: "the backpack is full" }),
+      };
+    }
+    const price = itemValue(item);
+    return {
+      id: `sweet:${i}`,
+      label: `Buy ${itemName(item)} for ${price} gold`,
+      ...(!room
+        ? { disabled: "the backpack is full" }
+        : gold < price
+          ? { disabled: "not enough gold" }
+          : {}),
+    };
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Visiting
 
 function used(state: GameState, obj: MapObject, hero: HeroState): boolean {
@@ -865,6 +912,10 @@ export function siteOptions(
       sphinxRiddle(obj, hero).answers.forEach((a, i) => {
         out.push({ id: `answer:${i}`, label: a });
       });
+      break;
+    // Candy sites (bead bzc.124).
+    case "sweet-shop":
+      out.push(...sweetShopOptions(hero, obj, !used(state, obj, hero), gold));
       break;
     // The Infernal Forge (bead bzc.125): one Trinket into its Wonder.
     case "infernal-forge": {
@@ -1217,6 +1268,24 @@ export function visitSite(
       );
       return null;
     }
+    // --- Candy sites (bead bzc.124) ------------------------------------
+    case "sugar-fountain": {
+      const added = addBuff(hero, "sugar-fountain");
+      say(
+        events,
+        hero,
+        obj,
+        `Sugar Fountain: ${added ? `sugar rush, +${SUGAR_RUSH_SPEED} Speed for every stack` : "already on a sugar rush"} until the next battle ends.`,
+      );
+      return null;
+    }
+    case "sweet-shop":
+      offer(
+        already
+          ? "Sweet Shop: this week's free treat is taken; more cost their value in gold."
+          : "Sweet Shop: take one candied potion free (one a week per hero).",
+      );
+      return null;
     // --- Buffs ----------------------------------------------------------
     case "rally-camp":
     case "wishing-well": {
@@ -1346,6 +1415,7 @@ export function visitSite(
     case "keepers-vault":
     case "pyramid":
     case "sunken-tomb":
+    case "gingerbread-cottage":
     case "brimstone-pit": {
       if (s0.done === true) {
         say(events, hero, obj, `${def.name}: already plundered.`);
@@ -2040,6 +2110,25 @@ export function useSite(
       );
       break;
     }
+    // A Sweet Shop's potion (bead bzc.124): the weekly free treat, or bought.
+    case "treat":
+    case "sweet": {
+      const item = sweetShopStock(obj)[Number(arg)];
+      if (item === undefined) return fail("bad-choice", "no such treat");
+      if (!giveArtifact(hero, item))
+        return fail("backpack-full", "the backpack is full");
+      if (verb === "treat") markUsed(next, obj, hero);
+      else player.resources.gold -= itemValue(item);
+      say(
+        events,
+        hero,
+        obj,
+        verb === "treat"
+          ? `Sweet Shop: a free treat, ${itemName(item)}.`
+          : `Sweet Shop: bought ${itemName(item)}.`,
+      );
+      break;
+    }
     case "give": {
       const a = hero.backpack[Number(arg)];
       if (a === undefined) return fail("bad-item", "no such item");
@@ -2227,6 +2316,15 @@ export function objectValueFor(
     case "per-day":
     case "per-week-hero":
     case "per-player":
+      // A Sweet Shop's free treat (bead bzc.124) needs room in the pack.
+      if (t === "sweet-shop") {
+        const stock = sweetShopStock(obj);
+        return heroes.some(
+          (h) => !used(state, obj, h) && stock.some((a) => canCarry(h, a)),
+        )
+          ? base
+          : 0;
+      }
       if (t === "infernal-forge") return forgeValue(state, player, obj, heroes);
       return anyUnused ? base : 0;
     case "one-time":
@@ -2238,6 +2336,7 @@ export function objectValueFor(
         t === "rally-camp" ||
         t === "wishing-well" ||
         t === "sun-temple" ||
+        t === "sugar-fountain" ||
         t === "shrine-of-embers"
       ) {
         return heroes.some((h) => !h.buffs.includes(t)) ? base : 0;
@@ -2446,6 +2545,7 @@ export function describeSite(
     case "frost-giants-barrow":
     case "pyramid":
     case "sunken-tomb":
+    case "gingerbread-cottage":
     case "brimstone-pit":
       what =
         t === "keepers-vault"
@@ -2468,6 +2568,12 @@ export function describeSite(
           ? `Answer the sphinx's riddle. Right: a rank in the hero's lowest skill that can rise (${SPHINX_XP} experience without one). Wrong: the hero loses the rest of today's movement. Each hero gets one try.`
           : `Answer the sphinx's riddle. Right: ${SPHINX_XP} experience. Wrong: the hero loses the rest of today's movement. Each hero gets one try.`;
       break;
+    case "sweet-shop": {
+      const stock = sweetShopStock(obj);
+      if (stock.length > 0)
+        what = `${def.text} On the shelf: ${stock.map((a) => `${itemName(a)} (${itemValue(a)} gold)`).join(", ")}.`;
+      break;
+    }
     case "infernal-forge": {
       const wonder = forgeWonder(obj);
       const w = wonder === null ? undefined : findArtifact(wonder);

@@ -1,0 +1,221 @@
+{
+  "cottage-a": {
+    "id": "cottage-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "78919e81-52d1-4b52-ba06-791c04a53eb1",
+    "submittedAt": "2026-11-27T09:07:45.078Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cute chunky gingerbread witch's cottage: a plump crooked house of gingerbread #b86b34 with #7d4420 shadows, thick white royal icing #fff4ec dripping from the eaves, a steep crooked roof of strawberry pink frosting #e2589b with #a8336c shadows dotted with chocolate buttons, a fat chimney striped red and white like a peppermint, round yellow sugar windows, a big lollipop and a candy cane post at the front corners, a small black cauldron by a wide dark arched doorway at the front left. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 124101,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a cute chunky gingerbread witch's cottage: a plump crooked house of gingerbread #b86b34 with #7d4420 shadows, thick white royal icing #fff4ec dripping from the eaves, a steep crooked roof of strawberry pink frosting #e2589b with #a8336c shadows dotted with chocolate buttons, a fat chimney striped red and white like a peppermint, round yellow sugar windows, a big lollipop and a candy cane post at the front corners, a small black cauldron by a wide dark arched doorway at the front left. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, witch, child, smoke, ground, grass, purple."
+    },
+    "at": "2026-11-27T09:09:03.472Z",
+    "usageUsd": 0.08091888825098674,
+    "candidates": [
+      {
+        "file": "cottage-a-0.png",
+        "sha256": "222b66919e1145a83a53dd12ab2dbd03386fbc41e5eb720450e344c89cd71df8",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "cottage-a-1.png",
+        "sha256": "97c7ef1e88ec8abdd941c3799843d5c3b330ec1fc36a684e84216fc7fae7f443",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "cottage-a-2.png",
+        "sha256": "36915d3655ec8273b790499b570b30b65c6af86ccd80772ffbd42b862d9121f2",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "cottage-a-3.png",
+        "sha256": "d434f6d3913d7d1d38f9d178f3b6c7e81834a9d24b94e70fe24cfa1f161f5c7a",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "fountain-a": {
+    "id": "fountain-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "8beddcc7-b677-4b54-b60f-35dc3ad5503d",
+    "submittedAt": "2026-11-27T09:09:03.569Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cute chunky candy fountain: a wide round basin of pink and white swirled candy #f3a6c8 with #c0679a shadows and a thick white icing rim #fff4ec, a fat pedestal to a smaller top bowl crowned by a big round red #e03a3e and white swirled lollipop; glossy pale pink syrup #ffc6dc with white sugar sparkles pours from the top bowl into the basin; round mint #7fd6b5 and lemon #f2c230 gumdrops along the rim, two short candy cane posts at the front corners. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 124201,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a cute chunky candy fountain: a wide round basin of pink and white swirled candy #f3a6c8 with #c0679a shadows and a thick white icing rim #fff4ec, a fat pedestal to a smaller top bowl crowned by a big round red #e03a3e and white swirled lollipop; glossy pale pink syrup #ffc6dc with white sugar sparkles pours from the top bowl into the basin; round mint #7fd6b5 and lemon #f2c230 gumdrops along the rim, two short candy cane posts at the front corners. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, ground, grass, puddle, purple, glow."
+    },
+    "at": "2026-11-27T09:10:05.067Z",
+    "usageUsd": 0.08051319519678751,
+    "candidates": [
+      {
+        "file": "fountain-a-0.png",
+        "sha256": "afd2ab0b82dce5a20807bf9fb760df4dd7cce8217a9e2bdca2e919d815a5f012",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "fountain-a-1.png",
+        "sha256": "a08f0065bcf62c5a1a3e1d0f8e1cab9d6cb8a654d8efb9e724508f7ebb791580",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "fountain-a-2.png",
+        "sha256": "bccafdde842a63511043b9a33e425366c46cacdece684a9202bc2d2cc8678494",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "fountain-a-3.png",
+        "sha256": "e6373e7cffa424e95aa024ca7ea42d5297222eee910f15aa6cb29551a4b331a0",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "shop-a": {
+    "id": "shop-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "8654dac0-a348-4682-84f8-d3f63c8730f0",
+    "submittedAt": "2026-11-27T09:10:05.160Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cute chunky little sweet shop: a plump candy store of mint green boards #7fd6b5 with #3f9c7c shadows and cream trim #fff4ec, a striped pink and white awning #e2589b over a big round window full of jars of sweets, a pointed chocolate wafer roof #6b3f22 with icing drips topped by a big wrapped bonbon, a round lollipop-shaped hanging sign with no writing, a wide dark doorway at the front left beside a little stand of round potion bottles of pink, blue and yellow syrup. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/map-objects/inn-a-0.png sha256 0c1d4386c99ea64afa2c1e2d5a623215766597d81b0bbdc0a5394e24cba464cc",
+        "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 124301,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a cute chunky little sweet shop: a plump candy store of mint green boards #7fd6b5 with #3f9c7c shadows and cream trim #fff4ec, a striped pink and white awning #e2589b over a big round window full of jars of sweets, a pointed chocolate wafer roof #6b3f22 with icing drips topped by a big wrapped bonbon, a round lollipop-shaped hanging sign with no writing, a wide dark doorway at the front left beside a little stand of round potion bottles of pink, blue and yellow syrup. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, ground, grass, writing, purple."
+    },
+    "at": "2026-11-27T09:11:12.025Z",
+    "usageUsd": 0.0809629557132721,
+    "candidates": [
+      {
+        "file": "shop-a-0.png",
+        "sha256": "b14d7bbd529ff04444a3ee30210810c6d5ec441e857189313e8cd114d366db65",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "shop-a-1.png",
+        "sha256": "5e1cb167d318161187fa8d9843e5bc78bb81c4f5f543366095b7f5a20859d635",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "shop-a-2.png",
+        "sha256": "a555e20cb228700a990e944b787ff9aef325a18af93034dce9616356e87cb2ca",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "shop-a-3.png",
+        "sha256": "f23693977abb8cb4c96469f12b304a433255695fd7e5799fe4821d23a9935bcf",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  }
+}

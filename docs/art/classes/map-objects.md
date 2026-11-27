@@ -74,6 +74,19 @@ tomb's small and medium sizes share it). `ART_ROWS` names them by
 guardians and the word tomb) was refused by the provider's policy check
 and is recorded as `FAILED`.
 
+### Candy sites (bead bzc.124)
+
+Studio set `art/sets/candy-sites`, the desert sites' recipe with the
+chunky roadside inn (`map-objects/inn-a#0`) as style image for outline,
+pixel size, chunky shapes and viewing angle (the bzc.97 chunky style), in
+the Candy Kingdom's palette (gingerbread `#b86b34`, royal icing `#fff4ec`,
+strawberry pink `#e2589b`, mint `#7fd6b5`, candy-cane red `#e03a3e`): the
+Gingerbread Cottage (`cottage-a#2`, 109 x 102; one look for its medium and
+large sizes), the Sugar Fountain (`fountain-a#0`, 101 x 112) and the Sweet
+Shop (`shop-a#1`, 115 x 102), all 2x2 on 128 x 128, doors at the front
+left. 3 calls (US$0.24), four takes each; white-roofed cottages were
+rejected as reading like snow. The fountain is the palest of the three on
+frosting; its black outline, white rim and red lollipop carry it.
 ### Volcanic sites (bead bzc.125)
 
 Studio set `art/sets/volcanic-sites`: the Infernal Forge and the Brimstone

@@ -29,6 +29,7 @@
  */
 import type { MapZoneKind } from "../../../data/mapObjects.ts";
 import {
+  CANDY_ROWS,
   DESERT_ROWS,
   VOLCANIC_ROWS,
   FREE_VALUE,
@@ -42,7 +43,7 @@ import { isPickup } from "../../game/site-state.ts";
 import { isBuilding, leavesWayRound } from "../passages.ts";
 import { MYSTERY_TYPE, mysteryItem } from "../mystery.ts";
 import { findArtifact, isCursed } from "../../../data/artifacts.ts";
-import { preferFrosting } from "./candy.ts";
+import { candySites, preferFrosting } from "./candy.ts";
 import { desertSites } from "./desert.ts";
 import { volcanicSites } from "./volcanic.ts";
 import { carveHoards, hoardRate } from "./hoards.ts";
@@ -1080,6 +1081,42 @@ export function placeObjects(st: GenState): PlacementReport {
       });
     }
     requests.splice(kitRequests, 0, ...lavaReqs);
+  }
+
+  // The candy zones' sites (bead bzc.124): a Gingerbread Cottage, a Sugar
+  // Fountain and a Sweet Shop in each candy zone, on frosting while it is
+  // free, right after the start kits (before the fill crowds the zone, so
+  // they come ahead of the Candy outposts that prefer frosting too, bead
+  // bzc.115); their own random streams, and none on a map without a candy
+  // zone, which so draws exactly as before.
+  const sweets = oc.candySites ? candySites(st) : [];
+  if (sweets.length > 0) {
+    const crng = stageRng(st, "candy-sites");
+    const corng = stageRng(st, "candy-place");
+    const candyReqs: Request[] = [];
+    for (const site of sweets) {
+      const row = CANDY_ROWS.find((r) => r.type === site.type);
+      if (row === undefined) continue;
+      const data = roll(crng, row, site.tier);
+      const value = valueOf(row, data);
+      candyReqs.push({
+        row,
+        data,
+        value,
+        zones: [site.zone],
+        minCost: 0,
+        maxCost: Infinity,
+        minFar: farFor(row, value, data),
+        required: false,
+        pocket: -1,
+        guarded: guardedIn(row, value, site.zone, data),
+        label: `candy ${site.type} in zone ${site.zone}`,
+        relax: true,
+        ground: T.frosting,
+        order: corng,
+      });
+    }
+    requests.splice(kitRequests, 0, ...candyReqs);
   }
 
   // Candy outposts stand on frosting while they can (bead bzc.115).

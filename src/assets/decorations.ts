@@ -134,6 +134,13 @@ const LOOKS: Readonly<Record<string, readonly (readonly [number, number])[]>> = 
   "fallen-cane": [[116, 52]],
   "chocolate-bar": [[118, 47]],
   "gingerbread-fence": [[118, 49]],
+  // More frosting decorations (bead bzc.124, set candy-decorations-b).
+  "gummy-cub": [[18, 23], [18, 23]],
+  "marzipan-snail": [[26, 21], [25, 23]],
+  "sugar-butterfly": [[30, 20], [24, 24]],
+  "sugar-grass": [[24, 25], [20, 26]],
+  "macaron-stack": [[42, 58]],
+  "gingerbread-ruin": [[61, 58]],
   // The volcanic plains (bead bzc.125, set volcanic-decorations).
   "lava-vent": [[28, 23], [28, 23]],
   "obsidian-shards": [[28, 25], [24, 27]],

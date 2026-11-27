@@ -1,0 +1,106 @@
+{
+  "set": "candy-sites",
+  "bead": "border_marches-bzc.124",
+  "class": "map-objects",
+  "exploration": false,
+  "_doc": "The candy zone's special sites (bead bzc.124, docs/art/classes/map-objects.md, docs/design/CONTENT_MAP_OBJECTS.md 3.13): the Gingerbread Cottage (a bank), the Sugar Fountain and the Sweet Shop, all 2x2 on 128 x 128. generate-image-v2 at native display size like set desert-sites, with the chunky roadside inn (map-objects/inn-a#0, the style image of the bzc.97 chunky sites) for outline, pixel size, chunky shapes and viewing angle only; the candy palette is the Candy Kingdom's (FACTION_CANDY: gingerbread, white royal icing, strawberry pink, mint, candy-cane red). Layers: style, light-south-west, class-map-object, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "styleInn": {
+      "file": "art/masters/map-objects/inn-a-0.png",
+      "usage": "copy only the thick black outline, the pixel size, the chunky rounded shapes, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+    },
+    "styleOpts": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-map-object"
+    ],
+    "noBackground": true,
+    "styleImage": "@styleInn",
+    "styleOptions": "@styleOpts"
+  },
+  "recipes": [
+    {
+      "id": "cottage-a",
+      "concept": "GINGERBREAD COTTAGE (2x2 bank: the candy witch's hoard)",
+      "width": 128,
+      "height": 128,
+      "seed": 124101,
+      "subject": "Subject: a cute chunky gingerbread witch's cottage: a plump crooked house of gingerbread #b86b34 with #7d4420 shadows, thick white royal icing #fff4ec dripping from the eaves, a steep crooked roof of strawberry pink frosting #e2589b with #a8336c shadows dotted with chocolate buttons, a fat chimney striped red and white like a peppermint, round yellow sugar windows, a big lollipop and a candy cane post at the front corners, a small black cauldron by a wide dark arched doorway at the front left. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, witch, child, smoke, ground, grass, text, letters, purple"
+    },
+    {
+      "id": "fountain-a",
+      "concept": "SUGAR FOUNTAIN (2x2 buff site: sugar rush)",
+      "width": 128,
+      "height": 128,
+      "seed": 124201,
+      "subject": "Subject: a cute chunky candy fountain: a wide round basin of pink and white swirled candy #f3a6c8 with #c0679a shadows and a thick white icing rim #fff4ec, a fat pedestal to a smaller top bowl crowned by a big round red #e03a3e and white swirled lollipop; glossy pale pink syrup #ffc6dc with white sugar sparkles pours from the top bowl into the basin; round mint #7fd6b5 and lemon #f2c230 gumdrops along the rim, two short candy cane posts at the front corners. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, ground, grass, puddle, text, letters, purple, glow"
+    },
+    {
+      "id": "shop-a",
+      "concept": "SWEET SHOP (2x2 service: candy potions)",
+      "width": 128,
+      "height": 128,
+      "seed": 124301,
+      "subject": "Subject: a cute chunky little sweet shop: a plump candy store of mint green boards #7fd6b5 with #3f9c7c shadows and cream trim #fff4ec, a striped pink and white awning #e2589b over a big round window full of jars of sweets, a pointed chocolate wafer roof #6b3f22 with icing drips topped by a big wrapped bonbon, a round lollipop-shaped hanging sign with no writing, a wide dark doorway at the front left beside a little stand of round potion bottles of pink, blue and yellow syrup. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, ground, grass, text, letters, writing, purple"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/objects/map/gingerbread-cottage.png",
+      "from": "cottage-a#2",
+      "width": 109,
+      "height": 102,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 10,
+          "width": 109,
+          "height": 102
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/sugar-fountain.png",
+      "from": "fountain-a#0",
+      "width": 101,
+      "height": 112,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 7,
+          "width": 101,
+          "height": 112
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/sweet-shop.png",
+      "from": "shop-a#1",
+      "width": 115,
+      "height": 102,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 13,
+          "width": 115,
+          "height": 102
+        }
+      ]
+    }
+  ]
+}

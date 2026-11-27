@@ -24,6 +24,7 @@ import {
   ROOKERY_HIRE,
   ROOKERY_WEEKLY,
   PYRAMID_VALUE,
+  SWEET_SHOP_STOCK,
   VAULT_VALUE,
   type BankSize,
   type ObjectTypeId,
@@ -554,6 +555,10 @@ export function rollContents(type: ObjectTypeId, rng: Rng, tier: number): Data {
     case "sphinx":
     case "sun-temple":
       return desertContents(type, rng, tier);
+    // Candy sites (bead bzc.124), placed by gen/candy.ts.
+    case "gingerbread-cottage":
+    case "sweet-shop":
+      return candyContents(type, rng, tier);
     // Volcanic sites (bead bzc.125), placed by gen/volcanic.ts.
     case "infernal-forge":
     case "brimstone-pit":
@@ -563,6 +568,52 @@ export function rollContents(type: ObjectTypeId, rng: Rng, tier: number): Data {
       return {};
   }
   return {};
+}
+
+/**
+ * Seeded contents of the candy sites (bead bzc.124): the Gingerbread
+ * Cottage's size, sweet guard (Candy Kingdom creatures as neutral stacks)
+ * and hoard, always a Wonder; the Sweet Shop's three potions.
+ */
+function candyContents(type: ObjectTypeId, rng: Rng, tier: number): Data {
+  if (type === "sweet-shop") {
+    const potions = ARTIFACT_LIST.filter(
+      (a) => a.kind === "consumable" && a.form === "potion",
+    ).map((a) => a.id);
+    return { stock: rng.shuffle(potions).slice(0, SWEET_SHOP_STOCK) };
+  }
+  // A medium or large bank (never small): the hoard holds a Wonder.
+  const size: BankSize =
+    tier >= 3 || (tier === 2 && rng.chance(0.5)) ? "large" : "medium";
+  const value = BANK_VALUE[size];
+  const wonder = pickArtifact(rng, "wonder");
+  const trinket = size === "large" ? pickArtifact(rng, "trinket") : undefined;
+  const artifacts = [wonder, trinket].filter(
+    (a): a is string => a !== undefined,
+  );
+  return {
+    size,
+    value,
+    guard: tombGuard(
+      rng,
+      value * BANK_GUARD_SHARE,
+      size === "medium"
+        ? [
+            ["taffy-wrangler", 0.4],
+            ["peppermint-archer", 0.35],
+            ["gingerbread-man", 0.25],
+          ]
+        : [
+            ["rock-candy-dragon", 0.35],
+            ["gummy-bear", 0.4],
+            ["sugarplum", 0.25],
+          ],
+    ),
+    prize:
+      size === "medium"
+        ? { gold: 1500, artifacts }
+        : { gold: 6000, essence: 4, artifacts },
+  };
 }
 
 /**

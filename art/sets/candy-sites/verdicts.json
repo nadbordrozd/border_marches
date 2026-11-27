@@ -1,0 +1,62 @@
+{
+  "cottage-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "chunkiest: pink frosting roof with chocolate buttons, peppermint chimney, cauldron and lollipop read at 1x; door at front left",
+    "at": "2026-11-27T09:12:17.156Z"
+  },
+  "cottage-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good but near duplicate of #2 with a thinner chimney; #2 reads better",
+    "at": "2026-11-27T09:12:17.246Z"
+  },
+  "cottage-a#1": {
+    "verdict": "REJECTED",
+    "notes": "white icing roof reads like snow at 1x, loses the candy pink",
+    "at": "2026-11-27T09:12:17.333Z"
+  },
+  "cottage-a#3": {
+    "verdict": "REJECTED",
+    "notes": "white snowy roof, reads as a winter cottage; purple lollipop off palette",
+    "at": "2026-11-27T09:12:17.421Z"
+  },
+  "fountain-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "cleanest silhouette: swirled basin, pink syrup bowl and big peppermint lollipop read at 1x",
+    "at": "2026-11-27T09:12:17.508Z"
+  },
+  "fountain-a#1": {
+    "verdict": "REJECTED",
+    "notes": "a tiered cake rather than a fountain; no visible syrup",
+    "at": "2026-11-27T09:12:17.594Z"
+  },
+  "fountain-a#2": {
+    "verdict": "REJECTED",
+    "notes": "busy rim of gumdrops and posts turns to noise at 1x",
+    "at": "2026-11-27T09:12:17.680Z"
+  },
+  "fountain-a#3": {
+    "verdict": "REJECTED",
+    "notes": "white blob base and smeared syrup, unclear shape",
+    "at": "2026-11-27T09:12:17.766Z"
+  },
+  "shop-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "striped awnings, bonbon on a chocolate roof, potion stand and lollipop sign: reads as a shop at 1x",
+    "at": "2026-11-27T09:12:17.858Z"
+  },
+  "shop-a#0": {
+    "verdict": "REJECTED",
+    "notes": "barrel and crates clutter the front; wafer roof reads as plain wood",
+    "at": "2026-11-27T09:12:17.945Z"
+  },
+  "shop-a#2": {
+    "verdict": "REJECTED",
+    "notes": "good, near duplicate of #1 with a narrower front",
+    "at": "2026-11-27T09:12:18.031Z"
+  },
+  "shop-a#3": {
+    "verdict": "REJECTED",
+    "notes": "plain tile roof and small awning: reads as a cottage, not a shop",
+    "at": "2026-11-27T09:12:18.118Z"
+  }
+}

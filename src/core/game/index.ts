@@ -43,6 +43,7 @@ export {
   siteOptions,
   sphinxRiddle,
   sphinxSkill,
+  sweetShopStock,
   useSite,
   visitSite,
 } from "./sites.ts";

@@ -82,6 +82,7 @@ import {
   sightRadius,
   siteOptions,
   skillWeight,
+  sweetShopStock,
   townsOf,
   wearError,
   type ArmySlots,
@@ -1259,7 +1260,11 @@ export class AdventureAi implements PlayerController {
                 ? 450
                 : 440
               : 0;
-        else if (verb === "drill") {
+        // A Sweet Shop's free treat (bead bzc.124): the dearest potion.
+        else if (verb === "treat") {
+          const item = sweetShopStock(obj)[Number(arg)];
+          v = 200 + (findArtifact(item ?? "")?.value ?? 0) / 10;
+        } else if (verb === "drill") {
           // A Drill (bead bzc.32) for the army's creatures, when the
           // treasury keeps a week of recruiting after it.
           const d = drills.find((x) => x.building === arg);

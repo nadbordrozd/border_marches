@@ -109,6 +109,7 @@ export function siteCue(
     case "windmill":
     case "water-wheel":
     case "orchard":
+    case "sweet-shop":
       return "site.market";
     case "campfire":
     case "loose-artifact":
@@ -127,6 +128,7 @@ export function siteCue(
     case "frost-giants-barrow":
     case "pyramid":
     case "sunken-tomb":
+    case "gingerbread-cottage":
     case "brimstone-pit":
       return "site.treasure";
     // The Infernal Forge (bead bzc.125): a reforge sounds like a find; a

@@ -78,6 +78,7 @@ const NAMED_CONFIG: {
     | "waysRound"
     | "mystery"
     | "volcanicSites"
+    | "candySites"
   >;
   clusters: Partial<GenConfig["clusters"]>;
   hoards: Pick<GenConfig["hoards"], "rate">;
@@ -100,6 +101,8 @@ const NAMED_CONFIG: {
     // Nor the volcanic sites of bead bzc.125 (a map with lava adds them by
     // its edits).
     volcanicSites: false,
+    // Nor the candy sites of bead bzc.124 (they roll no candy zone).
+    candySites: false,
   },
   // Bead bzc.96 (map composition): the named maps keep the obstacle
   // clusters, fill and pockets they were authored on, with no treasure

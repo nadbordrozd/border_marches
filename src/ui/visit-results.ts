@@ -9,7 +9,7 @@
  */
 import type { GameState, HeroState } from "../core/game/index.ts";
 import { auroraSkill, objectName, objectTypeOf } from "../core/game/index.ts";
-import { tollhouseStock } from "../core/game/sites.ts";
+import { sweetShopStock, tollhouseStock } from "../core/game/sites.ts";
 import { heroMagic, isSpell, spellInfo } from "../core/magic/index.ts";
 import { isMystery, mysteryArtifactOf } from "../core/map/mystery.ts";
 import type { MapObject } from "../core/map/types.ts";
@@ -161,6 +161,14 @@ export function siteIcons(obj: MapObject): VisitIcon[] {
     case "frost-giants-barrow":
     case "pyramid":
     case "sunken-tomb":
+    case "gingerbread-cottage":
+      return prizeIcons(prizeOf(obj, "prize"));
+    // The Sweet Shop's potions (bead bzc.124).
+    case "sweet-shop":
+      return sweetShopStock(obj).map((id) => ({
+        kind: "artifact" as const,
+        id,
+      }));
     case "brimstone-pit":
       return prizeIcons(prizeOf(obj, "prize"));
     // The Infernal Forge (bead bzc.125): the Wonder it reforges into.
@@ -325,6 +333,10 @@ export function optionItem(
         ? { kind: "spell", id: item.slice(7) }
         : artifact(item);
     }
+    // A Sweet Shop's potion (bead bzc.124), free or bought.
+    case "treat":
+    case "sweet":
+      return artifact(sweetShopStock(obj)[n]);
     case "sell":
     case "give":
       return artifact(hero.backpack[n]);

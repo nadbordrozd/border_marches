@@ -380,6 +380,12 @@ export interface GenConfig {
      * they add the volcanic sites by hand (src/data/named-maps.ts).
      */
     volcanicSites: boolean;
+    /**
+     * Bead bzc.124: the candy zones get their sites (gen/candy.ts
+     * candySites: a Gingerbread Cottage, a Sugar Fountain and a Sweet Shop
+     * each). Off for the named maps, which roll no candy zone anyway.
+     */
+    candySites: boolean;
   };
 
   /**
@@ -773,6 +779,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     waysRound: true,
     mystery: { share: 0.25, treasureShare: 0.5 },
     volcanicSites: true,
+    candySites: true,
     perMap: { "drill-yard": { S: [1, 1], M: [1, 1], L: [1, 2] } },
   },
 

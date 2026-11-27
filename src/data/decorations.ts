@@ -158,6 +158,14 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["fallen-cane", "Fallen Candy Cane", "f", "x", 2, 1, "A candy cane as long as a house, fallen across the way."],
   ["chocolate-bar", "Chocolate Bar", "f", "x", 2, 1, "A giant bar of chocolate, broken in two and left."],
   ["gingerbread-fence", "Gingerbread Fence", "f", "x", 2, 1, "A gingerbread fence with gumdrop posts. Keep off."],
+  // More frosting decorations (bead bzc.124, set candy-decorations-b):
+  // frosting only, so other grounds draw what they drew.
+  ["gummy-cub", "Gummy Bear Cub", "f", "p", 1, 2, "A little gummy bear. Its mother is much, much bigger."],
+  ["marzipan-snail", "Marzipan Snail", "f", "p", 1, 2, "A marzipan snail, leaving a trail of syrup behind it."],
+  ["sugar-butterfly", "Sugar Butterfly", "f", "p", 1, 2, "A butterfly with wings of spun sugar glass."],
+  ["sugar-grass", "Spun-Sugar Grass", "f", "p", 1, 2, "A tuft of spun-sugar grass. It melts if you breathe on it."],
+  ["macaron-stack", "Macaron Stack", "f", "x", 1, 1, "Three macarons stacked as high as a hut."],
+  ["gingerbread-ruin", "Gingerbread Ruin", "f", "x", 1, 1, "What is left of a gingerbread house. Something took bites."],
   // Volcanic props (bead bzc.125): lava only.
   ["basalt-columns", "Basalt Columns", "v", "x", 1, 2, "Six-sided columns of black basalt, as if someone stacked pencils."],
   ["demon-horn-rock", "Demon-Horn Rock", "v", "x", 1, 2, "Two great horns of rock. Something very large is buried here, or wants you to think so."],
