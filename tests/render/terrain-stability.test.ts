@@ -16,6 +16,7 @@
  * which names the sprite and its variant, and its place) stays the same.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../timeouts.ts";
 import { visitObject } from "../../src/core/game/adventure.ts";
 import { newGame } from "../../src/core/game/newGame.ts";
 import { cloneState } from "../../src/core/game/state.ts";
@@ -126,64 +127,70 @@ describe("terrain stability under object changes (bead bzc.106)", () => {
   let reproduced = 0;
 
   for (const { name, each, make } of MAPS)
-    it(`keeps every terrain sprite on ${name}`, () => {
-      const state = newGame(make());
-      const before = terrainSprites(state);
-      expect(before.some((s) => s.startsWith("peak "))).toBe(true);
-      expect(before.some((s) => s.startsWith("tree "))).toBe(true);
-      const shown = displayObjects(state);
-      const kinds = [...new Set(shown.map((o) => o.kind))];
-      expect(kinds.length).toBeGreaterThanOrEqual(6);
-      const ruggedFirst = (list: readonly MapObject[]): MapObject[] =>
-        [...list].sort((a, b) => rugged(state.map, b) - rugged(state.map, a));
+    it(
+      `keeps every terrain sprite on ${name}`,
+      () => {
+        const state = newGame(make());
+        const before = terrainSprites(state);
+        expect(before.some((s) => s.startsWith("peak "))).toBe(true);
+        expect(before.some((s) => s.startsWith("tree "))).toBe(true);
+        const shown = displayObjects(state);
+        const kinds = [...new Set(shown.map((o) => o.kind))];
+        expect(kinds.length).toBeGreaterThanOrEqual(6);
+        const ruggedFirst = (list: readonly MapObject[]): MapObject[] =>
+          [...list].sort((a, b) => rugged(state.map, b) - rugged(state.map, a));
 
-      // Each kind of object, one at a time: the one with the most rock and
-      // wood round it (where the fault showed).
-      for (const kind of kinds) {
-        const o = ruggedFirst(shown.filter((x) => x.kind === kind))[0]!;
-        const after = without(state, [o]);
-        expect(displayObjects(after).some((x) => x.id === o.id)).toBe(false);
-        expect(after.map).toBe(state.map);
-        expect(after.map.objects).toBe(state.map.objects);
-        if (each)
-          expect(terrainSprites(after), `${kind} ${o.id} taken`).toEqual(
+        // Each kind of object, one at a time: the one with the most rock and
+        // wood round it (where the fault showed).
+        for (const kind of kinds) {
+          const o = ruggedFirst(shown.filter((x) => x.kind === kind))[0]!;
+          const after = without(state, [o]);
+          expect(displayObjects(after).some((x) => x.id === o.id)).toBe(false);
+          expect(after.map).toBe(state.map);
+          expect(after.map.objects).toBe(state.map.objects);
+          if (each)
+            expect(terrainSprites(after), `${kind} ${o.id} taken`).toEqual(
+              before,
+            );
+        }
+
+        // Everything at once, with the whole map explored.
+        const bare = without(state, shown);
+        for (const p of bare.players) p.explored = p.explored.map(() => true);
+        expect(displayObjects(bare)).toEqual([]);
+        expect(terrainSprites(bare), "everything taken").toEqual(before);
+
+        // A pickup beside rock or wood taken through the game's own command.
+        const pickup = ruggedFirst(shown.filter((o) => o.kind === "pickup"))[0];
+        const hero = state.heroes.find(
+          (h) => h.alive && h.owner === state.currentPlayer,
+        );
+        expect(pickup).toBeDefined();
+        expect(hero).toBeDefined();
+        const placed = cloneState(state);
+        const h = placed.heroes.find((x) => x.id === hero!.id)!;
+        h.x = pickup!.x;
+        h.y = pickup!.y + (pickup!.y + 1 < state.map.height ? 1 : -1);
+        const result = visitObject(placed, hero!.id, pickup!.id);
+        expect(result.ok).toBe(true);
+        if (result.ok) {
+          expect(result.state.collected).toContain(pickup!.id);
+          expect(result.state.map).toBe(state.map);
+          expect(terrainSprites(result.state), "pickup visited").toEqual(
             before,
           );
-      }
+        }
 
-      // Everything at once, with the whole map explored.
-      const bare = without(state, shown);
-      for (const p of bare.players) p.explored = p.explored.map(() => true);
-      expect(displayObjects(bare)).toEqual([]);
-      expect(terrainSprites(bare), "everything taken").toEqual(before);
-
-      // A pickup beside rock or wood taken through the game's own command.
-      const pickup = ruggedFirst(shown.filter((o) => o.kind === "pickup"))[0];
-      const hero = state.heroes.find(
-        (h) => h.alive && h.owner === state.currentPlayer,
-      );
-      expect(pickup).toBeDefined();
-      expect(hero).toBeDefined();
-      const placed = cloneState(state);
-      const h = placed.heroes.find((x) => x.id === hero!.id)!;
-      h.x = pickup!.x;
-      h.y = pickup!.y + (pickup!.y + 1 < state.map.height ? 1 : -1);
-      const result = visitObject(placed, hero!.id, pickup!.id);
-      expect(result.ok).toBe(true);
-      if (result.ok) {
-        expect(result.state.collected).toContain(pickup!.id);
-        expect(result.state.map).toBe(state.map);
-        expect(terrainSprites(result.state), "pickup visited").toEqual(before);
-      }
-
-      // The view before this bead placed the trees and peaks from the
-      // objects still standing: there the same pickup moved sprites.
-      if (each) {
-        const taken = displayObjects(without(state, [pickup!]));
-        if (oldTerrain(state.map, shown) !== oldTerrain(state.map, taken))
-          reproduced += 1;
-      }
-    }, 120_000);
+        // The view before this bead placed the trees and peaks from the
+        // objects still standing: there the same pickup moved sprites.
+        if (each) {
+          const taken = displayObjects(without(state, [pickup!]));
+          if (oldTerrain(state.map, shown) !== oldTerrain(state.map, taken))
+            reproduced += 1;
+        }
+      },
+      HEAVY_TIMEOUT,
+    );
 
   it("would have caught the fault: the old placement moved sprites", () => {
     expect(reproduced).toBeGreaterThan(0);

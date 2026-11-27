@@ -21,6 +21,8 @@ export default defineConfig({
     // Several workers often run the unit tier at once on one machine, which
     // stretches the slower tests (1-3 s alone) past vitest's 5 s default.
     // Speed budgets live in `npm run perf` (tests/perf/run.ts), not here.
+    // Heavy tests (many maps, whole games, many battles) set their own,
+    // longer limit: HEAVY_TIMEOUT in tests/timeouts.ts.
     testTimeout: 30_000,
   },
 });

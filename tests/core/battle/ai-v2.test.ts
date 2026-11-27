@@ -3,6 +3,7 @@
  * small fixed-seed smoke over real faction armies with heroes.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import {
   actionError,
   applyAction,
@@ -176,79 +177,83 @@ describe("battle AI v2: positional sense", () => {
   });
 });
 
-describe("battle AI v2: determinism and a fixed-seed smoke", () => {
-  it("the same state always gives the same choice", () => {
-    const setup = gameSetup(
-      42,
-      heroSide(
-        "humans",
-        buildHero("humans", 6, 42, "magic"),
-        buildArmy("humans", 8000, 42),
-        1,
-      ),
-      heroSide(
-        "goblins",
-        buildHero("goblins", 6, 43, "magic"),
-        buildArmy("goblins", 8000, 43),
-        2,
-      ),
-    );
-    let s = createBattle(engineSetupFromGame(setup)).state;
-    for (let i = 0; i < 12 && s.winner === null; i++) {
-      const a = chooseAiAction(s);
-      const clone = JSON.parse(JSON.stringify(s)) as BattleState;
-      expect(chooseAiAction(clone)).toEqual(a);
-      expect(chooseAiAction(s)).toEqual(a);
-      s = applyAction(s, a).state;
-    }
-  });
-
-  it("plays seeded faction and guard battles to the end with legal actions only", () => {
-    const factions = ["humans", "undead", "goblins"] as const;
-    let battles = 0;
-    for (let i = 0; i < 3; i++) {
-      const a = factions[i % 3]!;
-      const d = factions[(i + 1) % 3]!;
-      const seed = 500 + i;
-      const setups = [
-        gameSetup(
-          seed,
-          heroSide(
-            a,
-            buildHero(a, 5, seed, i % 2 === 0 ? "magic" : "might"),
-            buildArmy(a, 5000, seed),
-            1,
-          ),
-          heroSide(
-            d,
-            buildHero(d, 5, seed + 1, "magic"),
-            buildArmy(d, 5000, seed + 1),
-            2,
-          ),
+describe(
+  "battle AI v2: determinism and a fixed-seed smoke",
+  { timeout: HEAVY_TIMEOUT },
+  () => {
+    it("the same state always gives the same choice", () => {
+      const setup = gameSetup(
+        42,
+        heroSide(
+          "humans",
+          buildHero("humans", 6, 42, "magic"),
+          buildArmy("humans", 8000, 42),
+          1,
         ),
-        gameSetup(
-          seed,
-          heroSide(
-            a,
-            buildHero(a, 5, seed, "might"),
-            buildArmy(a, 5000, seed),
-            1,
-          ),
-          guardSide(buildGuard(2500, seed)),
+        heroSide(
+          "goblins",
+          buildHero("goblins", 6, 43, "magic"),
+          buildArmy("goblins", 8000, 43),
+          2,
         ),
-      ];
-      for (const setup of setups) {
-        let s = createBattle(engineSetupFromGame(setup)).state;
-        let n = 0;
-        while (s.winner === null) {
-          const action = chooseAiAction(s);
-          expect(actionError(s, action)).toBeNull();
-          s = applyAction(s, action).state;
-          expect(++n).toBeLessThan(3000);
-        }
-        battles++;
+      );
+      let s = createBattle(engineSetupFromGame(setup)).state;
+      for (let i = 0; i < 12 && s.winner === null; i++) {
+        const a = chooseAiAction(s);
+        const clone = JSON.parse(JSON.stringify(s)) as BattleState;
+        expect(chooseAiAction(clone)).toEqual(a);
+        expect(chooseAiAction(s)).toEqual(a);
+        s = applyAction(s, a).state;
       }
-    }
-    expect(battles).toBe(6);
-  });
-});
+    });
+
+    it("plays seeded faction and guard battles to the end with legal actions only", () => {
+      const factions = ["humans", "undead", "goblins"] as const;
+      let battles = 0;
+      for (let i = 0; i < 3; i++) {
+        const a = factions[i % 3]!;
+        const d = factions[(i + 1) % 3]!;
+        const seed = 500 + i;
+        const setups = [
+          gameSetup(
+            seed,
+            heroSide(
+              a,
+              buildHero(a, 5, seed, i % 2 === 0 ? "magic" : "might"),
+              buildArmy(a, 5000, seed),
+              1,
+            ),
+            heroSide(
+              d,
+              buildHero(d, 5, seed + 1, "magic"),
+              buildArmy(d, 5000, seed + 1),
+              2,
+            ),
+          ),
+          gameSetup(
+            seed,
+            heroSide(
+              a,
+              buildHero(a, 5, seed, "might"),
+              buildArmy(a, 5000, seed),
+              1,
+            ),
+            guardSide(buildGuard(2500, seed)),
+          ),
+        ];
+        for (const setup of setups) {
+          let s = createBattle(engineSetupFromGame(setup)).state;
+          let n = 0;
+          while (s.winner === null) {
+            const action = chooseAiAction(s);
+            expect(actionError(s, action)).toBeNull();
+            s = applyAction(s, action).state;
+            expect(++n).toBeLessThan(3000);
+          }
+          battles++;
+        }
+      }
+      expect(battles).toBe(6);
+    });
+  },
+);

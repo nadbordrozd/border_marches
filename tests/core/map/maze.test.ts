@@ -6,6 +6,7 @@
  * the data-driven object table.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import {
   FREE_VALUE,
   GUARD_FV_PER_VALUE,
@@ -75,7 +76,7 @@ const zoneKind = (info: GenerateInfo, map: GameMap, o: MapObject): string =>
 
 describe(
   "map generator v2: maze-like dense maps (bzc.3)",
-  { timeout: 120_000 },
+  { timeout: HEAVY_TIMEOUT },
   () => {
     it("makes valid maps with every start, town and object placed", () => {
       for (const { label, map, info, players } of maps()) {

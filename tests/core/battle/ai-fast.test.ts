@@ -6,6 +6,7 @@
  * --mode timing`).
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import {
   UNWATCHED_BATTLE_AI,
   actionError,
@@ -104,91 +105,102 @@ describe("battle AI fast mode: the incremental estimate", () => {
   });
 });
 
-describe("battle AI fast mode: determinism and legality", () => {
-  it("the same state always gives the same choice", () => {
-    let s = start(factionSetup("humans", "goblins", 42, 8000, 6));
-    for (let i = 0; i < 12 && s.winner === null; i++) {
-      const a = chooseAiAction(s, { mode: "fast" });
-      const clone = JSON.parse(JSON.stringify(s)) as BattleState;
-      expect(chooseAiAction(clone, { mode: "fast" })).toEqual(a);
-      expect(chooseAiAction(s, { mode: "fast" })).toEqual(a);
-      s = applyAction(s, a).state;
-    }
-  });
-
-  it("auto-battles in fast mode replay identically", () => {
-    const setup = engineSetupFromGame(
-      factionSetup("undead", "humans", 7, 8000, 6),
-    );
-    const a = runAutoBattle(setup, { ai: "fast" });
-    const b = runAutoBattle(setup, { ai: "fast" });
-    expect(a.result).toEqual(b.result);
-    expect(a.events).toEqual(b.events);
-  });
-
-  it("plays seeded faction and guard battles to the end with legal actions only", () => {
-    const factions = ["humans", "undead", "goblins"] as const;
-    let battles = 0;
-    for (let i = 0; i < 3; i++) {
-      const a = factions[i % 3] as Faction;
-      const d = factions[(i + 1) % 3] as Faction;
-      const seed = 600 + i;
-      const setups = [
-        factionSetup(a, d, seed, 6000, 6),
-        gameSetup(
-          seed,
-          heroSide(
-            a,
-            buildHero(a, 6, seed, "magic"),
-            buildArmy(a, 6000, seed),
-            1,
-          ),
-          guardSide(buildGuard(3000, seed)),
-        ),
-      ];
-      for (const setup of setups) {
-        // As auto-play runs it: one memo for the whole battle.
-        const memo = createAiMemo();
-        let s = start(setup);
-        let n = 0;
-        while (s.winner === null) {
-          const action = chooseAiAction(s, { mode: "fast", memo });
-          expect(actionError(s, action)).toBeNull();
-          s = applyAction(s, action).state;
-          expect(++n).toBeLessThan(3000);
-        }
-        battles++;
+describe(
+  "battle AI fast mode: determinism and legality",
+  { timeout: HEAVY_TIMEOUT },
+  () => {
+    it("the same state always gives the same choice", () => {
+      let s = start(factionSetup("humans", "goblins", 42, 8000, 6));
+      for (let i = 0; i < 12 && s.winner === null; i++) {
+        const a = chooseAiAction(s, { mode: "fast" });
+        const clone = JSON.parse(JSON.stringify(s)) as BattleState;
+        expect(chooseAiAction(clone, { mode: "fast" })).toEqual(a);
+        expect(chooseAiAction(s, { mode: "fast" })).toEqual(a);
+        s = applyAction(s, a).state;
       }
-    }
-    expect(battles).toBe(6);
-  });
-});
+    });
 
-describe("battle AI fast mode: which battles use it", () => {
-  const setup = factionSetup("goblins", "undead", 21, 6000, 6);
+    it("auto-battles in fast mode replay identically", () => {
+      const setup = engineSetupFromGame(
+        factionSetup("undead", "humans", 7, 8000, 6),
+      );
+      const a = runAutoBattle(setup, { ai: "fast" });
+      const b = runAutoBattle(setup, { ai: "fast" });
+      expect(a.result).toEqual(b.result);
+      expect(a.events).toEqual(b.events);
+    });
 
-  it("battles no human watches (the game's resolver) use the fast mode", () => {
-    expect(UNWATCHED_BATTLE_AI).toBe("fast");
-    const engine = engineSetupFromGame(setup);
-    expect(createBattleResolver()(setup)).toEqual(
-      gameResultFromEngine(setup, runAutoBattle(engine, { ai: "fast" }).result),
-    );
-    // A caller can still ask the resolver for the full mode.
-    expect(createBattleResolver({ ai: "full" })(setup)).toEqual(
-      gameResultFromEngine(setup, runAutoBattle(engine).result),
-    );
-  });
+    it("plays seeded faction and guard battles to the end with legal actions only", () => {
+      const factions = ["humans", "undead", "goblins"] as const;
+      let battles = 0;
+      for (let i = 0; i < 3; i++) {
+        const a = factions[i % 3] as Faction;
+        const d = factions[(i + 1) % 3] as Faction;
+        const seed = 600 + i;
+        const setups = [
+          factionSetup(a, d, seed, 6000, 6),
+          gameSetup(
+            seed,
+            heroSide(
+              a,
+              buildHero(a, 6, seed, "magic"),
+              buildArmy(a, 6000, seed),
+              1,
+            ),
+            guardSide(buildGuard(3000, seed)),
+          ),
+        ];
+        for (const setup of setups) {
+          // As auto-play runs it: one memo for the whole battle.
+          const memo = createAiMemo();
+          let s = start(setup);
+          let n = 0;
+          while (s.winner === null) {
+            const action = chooseAiAction(s, { mode: "fast", memo });
+            expect(actionError(s, action)).toBeNull();
+            s = applyAction(s, action).state;
+            expect(++n).toBeLessThan(3000);
+          }
+          battles++;
+        }
+      }
+      expect(battles).toBe(6);
+    });
+  },
+);
 
-  it("auto-play without a mode is the full mode (the battle screen's AI)", () => {
-    const engine = engineSetupFromGame(setup);
-    const played = runAutoBattle(engine, { maxRounds: 2 });
-    let s = createBattle(engine).state;
-    while (s.winner === null && s.round <= 2) {
-      s = applyAction(s, chooseAiAction(s)).state;
-    }
-    expect(played.state).toEqual(s);
-  });
-});
+describe(
+  "battle AI fast mode: which battles use it",
+  { timeout: HEAVY_TIMEOUT },
+  () => {
+    const setup = factionSetup("goblins", "undead", 21, 6000, 6);
+
+    it("battles no human watches (the game's resolver) use the fast mode", () => {
+      expect(UNWATCHED_BATTLE_AI).toBe("fast");
+      const engine = engineSetupFromGame(setup);
+      expect(createBattleResolver()(setup)).toEqual(
+        gameResultFromEngine(
+          setup,
+          runAutoBattle(engine, { ai: "fast" }).result,
+        ),
+      );
+      // A caller can still ask the resolver for the full mode.
+      expect(createBattleResolver({ ai: "full" })(setup)).toEqual(
+        gameResultFromEngine(setup, runAutoBattle(engine).result),
+      );
+    });
+
+    it("auto-play without a mode is the full mode (the battle screen's AI)", () => {
+      const engine = engineSetupFromGame(setup);
+      const played = runAutoBattle(engine, { maxRounds: 2 });
+      let s = createBattle(engine).state;
+      while (s.winner === null && s.round <= 2) {
+        s = applyAction(s, chooseAiAction(s)).state;
+      }
+      expect(played.state).toEqual(s);
+    });
+  },
+);
 
 describe("battle AI fast mode: work", () => {
   it("rehearses far fewer candidates than the full mode on a large battle", () => {

@@ -3,6 +3,7 @@
  * generator puts it.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import { TERRAIN_MOVE_COST } from "../../../src/data/movement.ts";
 import { decorationKindsFor } from "../../../src/data/decorations.ts";
 import { STRAY_HOMES } from "../../../src/data/strays.ts";
@@ -84,7 +85,7 @@ const NONE = {
   },
 };
 
-describe("volcanic zones in the generator", () => {
+describe("volcanic zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   const runs: [number, MapSize, PlayerCount][] = [
     [4, "M", 2],
     [9, "S", 2],

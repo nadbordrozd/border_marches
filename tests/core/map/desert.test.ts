@@ -3,6 +3,7 @@
  * generator puts the desert zones and the desert's sites.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import { TERRAIN_MOVE_COST } from "../../../src/data/movement.ts";
 import { decorationKindsFor } from "../../../src/data/decorations.ts";
 import { OBJECT_TYPES } from "../../../src/data/objectTypes.ts";
@@ -110,7 +111,7 @@ const WITH: [number, MapSize, PlayerCount][] = [
  */
 const SANDY: [number, MapSize, PlayerCount] = [19, "M", 2];
 
-describe("desert zones in the generator", () => {
+describe("desert zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   it("turns a wild zone away from the starts into a desert on some maps", () => {
     for (const [seed, size, players] of WITH) {
       const { map, info } = generateMapWithInfo(seed, { size, players });
@@ -203,7 +204,7 @@ describe("desert zones in the generator", () => {
   });
 });
 
-describe("desert sites in the generator", () => {
+describe("desert sites in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   it("puts the desert's sites in the desert, at most one Pyramid a map", () => {
     let pyramids = 0;
     let tombs = 0;

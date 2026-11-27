@@ -3,6 +3,7 @@
  * value-proportional guards, rule-placed objects, quests and contents.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import {
   generateMap,
   generateMapWithInfo,
@@ -35,7 +36,7 @@ function map(seed: number, size: "S" | "M" | "L"): GameMap {
 }
 const typeOf = (o: MapObject): string => String(o.data["type"] ?? o.kind);
 
-describe("catalogue placement", () => {
+describe("catalogue placement", { timeout: HEAVY_TIMEOUT }, () => {
   it("places a wide variety of catalogued types, valid and deterministic", () => {
     const m = map(3, "L");
     expect(validateMap(m)).toEqual([]);
@@ -177,94 +178,98 @@ describe("catalogue placement", () => {
   });
 });
 
-describe("one-way waystones (stretch, bead bzc.32)", () => {
-  const ways = (m: GameMap): MapObject[] =>
-    m.objects.filter((o) => typeOf(o) === "one-way-waystone");
+describe(
+  "one-way waystones (stretch, bead bzc.32)",
+  { timeout: HEAVY_TIMEOUT },
+  () => {
+    const ways = (m: GameMap): MapObject[] =>
+      m.objects.filter((o) => typeOf(o) === "one-way-waystone");
 
-  it("places one per size step, exits in another wild zone no deeper, far from starts", () => {
-    let total = 0;
-    for (const [seed, size, most] of [
-      [4, "S", 1],
-      [2, "M", 2],
-      [1, "L", 3],
-      [3, "L", 3],
-    ] as const) {
-      const { map: m, info } = generateMapWithInfo(seed, { size });
-      expect(validateMap(m)).toEqual([]);
-      const list = ways(m);
-      expect(list.length, `${size}${seed}`).toBeGreaterThanOrEqual(1);
-      expect(list.length).toBeLessThanOrEqual(most);
-      total += list.length;
-      const zoneAt = (x: number, y: number) =>
-        info.zones[m.zones?.[y * m.width + x] ?? -1];
-      const taken = new Set<string>();
-      for (const o of m.objects)
-        for (const [x, y] of objectCells(o)) taken.add(`${x},${y}`);
-      const starts = m.objects.filter(
-        (o) => o.kind === "town" && o.data["start"] !== undefined,
-      );
-      const guards = m.objects.filter((o) => o.kind === "monster");
-      const entranceZones = new Set<number>();
-      for (const w of list) {
-        const [ex, ey] = w.data["exit"] as [number, number];
-        const a = zoneAt(w.x, w.y);
-        const b = zoneAt(ex, ey);
-        expect(a?.role).toMatch(/^(middle|town)$/);
-        expect(b?.role).toMatch(/^(middle|town)$/);
-        expect(b?.id).not.toBe(a?.id);
-        expect(b!.tier).toBeLessThanOrEqual(a!.tier);
-        expect(entranceZones.has(a!.id)).toBe(false);
-        entranceZones.add(a!.id);
-        // The exit is open ground that no object covers.
-        expect(isPassable(cellAt(m, ex, ey)!)).toBe(true);
-        expect(taken.has(`${ex},${ey}`)).toBe(false);
-        expect(cellAt(m, w.x, w.y)?.road).toBe(false);
-        for (const [x, y] of [
-          [w.x, w.y],
-          [ex, ey],
-        ] as const) {
-          // The rule is a day of movement with the roads; on the ground
-          // that is never fewer than 6 cells from a start town.
-          for (const t of starts) {
-            expect(
-              Math.max(Math.abs(t.x - x), Math.abs(t.y - y)),
-            ).toBeGreaterThanOrEqual(6);
-          }
-          for (const g of guards) {
-            expect(
-              Math.max(Math.abs(g.x - x), Math.abs(g.y - y)),
-            ).toBeGreaterThan(1);
+    it("places one per size step, exits in another wild zone no deeper, far from starts", () => {
+      let total = 0;
+      for (const [seed, size, most] of [
+        [4, "S", 1],
+        [2, "M", 2],
+        [1, "L", 3],
+        [3, "L", 3],
+      ] as const) {
+        const { map: m, info } = generateMapWithInfo(seed, { size });
+        expect(validateMap(m)).toEqual([]);
+        const list = ways(m);
+        expect(list.length, `${size}${seed}`).toBeGreaterThanOrEqual(1);
+        expect(list.length).toBeLessThanOrEqual(most);
+        total += list.length;
+        const zoneAt = (x: number, y: number) =>
+          info.zones[m.zones?.[y * m.width + x] ?? -1];
+        const taken = new Set<string>();
+        for (const o of m.objects)
+          for (const [x, y] of objectCells(o)) taken.add(`${x},${y}`);
+        const starts = m.objects.filter(
+          (o) => o.kind === "town" && o.data["start"] !== undefined,
+        );
+        const guards = m.objects.filter((o) => o.kind === "monster");
+        const entranceZones = new Set<number>();
+        for (const w of list) {
+          const [ex, ey] = w.data["exit"] as [number, number];
+          const a = zoneAt(w.x, w.y);
+          const b = zoneAt(ex, ey);
+          expect(a?.role).toMatch(/^(middle|town)$/);
+          expect(b?.role).toMatch(/^(middle|town)$/);
+          expect(b?.id).not.toBe(a?.id);
+          expect(b!.tier).toBeLessThanOrEqual(a!.tier);
+          expect(entranceZones.has(a!.id)).toBe(false);
+          entranceZones.add(a!.id);
+          // The exit is open ground that no object covers.
+          expect(isPassable(cellAt(m, ex, ey)!)).toBe(true);
+          expect(taken.has(`${ex},${ey}`)).toBe(false);
+          expect(cellAt(m, w.x, w.y)?.road).toBe(false);
+          for (const [x, y] of [
+            [w.x, w.y],
+            [ex, ey],
+          ] as const) {
+            // The rule is a day of movement with the roads; on the ground
+            // that is never fewer than 6 cells from a start town.
+            for (const t of starts) {
+              expect(
+                Math.max(Math.abs(t.x - x), Math.abs(t.y - y)),
+              ).toBeGreaterThanOrEqual(6);
+            }
+            for (const g of guards) {
+              expect(
+                Math.max(Math.abs(g.x - x), Math.abs(g.y - y)),
+              ).toBeGreaterThan(1);
+            }
           }
         }
       }
-    }
-    expect(total).toBeGreaterThanOrEqual(7);
-  });
-
-  it("is deterministic and leaves the rest of the map as it was without them", () => {
-    const on = generateMap(2, { size: "M" });
-    expect(JSON.stringify(generateMap(2, { size: "M" }))).toBe(
-      JSON.stringify(on),
-    );
-    // Decorations go round every object, waystones too (bead bzc.72), so
-    // the two are compared before them.
-    const bare = generateMap(2, { size: "M", decorations: false });
-    const off = generateMap(2, {
-      size: "M",
-      decorations: false,
-      config: { objects: { oneWayWaystones: { S: 0, M: 0, L: 0 } } },
+      expect(total).toBeGreaterThanOrEqual(7);
     });
-    expect(ways(off)).toEqual([]);
-    expect(JSON.stringify(off.cells)).toBe(JSON.stringify(bare.cells));
-    expect(JSON.stringify(off.objects)).toBe(
-      JSON.stringify(
-        bare.objects.filter((o) => typeOf(o) !== "one-way-waystone"),
-      ),
-    );
-  });
-});
 
-describe("drill yards (bead bzc.32)", () => {
+    it("is deterministic and leaves the rest of the map as it was without them", () => {
+      const on = generateMap(2, { size: "M" });
+      expect(JSON.stringify(generateMap(2, { size: "M" }))).toBe(
+        JSON.stringify(on),
+      );
+      // Decorations go round every object, waystones too (bead bzc.72), so
+      // the two are compared before them.
+      const bare = generateMap(2, { size: "M", decorations: false });
+      const off = generateMap(2, {
+        size: "M",
+        decorations: false,
+        config: { objects: { oneWayWaystones: { S: 0, M: 0, L: 0 } } },
+      });
+      expect(ways(off)).toEqual([]);
+      expect(JSON.stringify(off.cells)).toBe(JSON.stringify(bare.cells));
+      expect(JSON.stringify(off.objects)).toBe(
+        JSON.stringify(
+          bare.objects.filter((o) => typeOf(o) !== "one-way-waystone"),
+        ),
+      );
+    });
+  },
+);
+
+describe("drill yards (bead bzc.32)", { timeout: HEAVY_TIMEOUT }, () => {
   it("places one on S and M maps and one or two on L, in wild zones, unguarded at value 0", () => {
     for (const [size, least, most] of [
       ["S", 1, 1],

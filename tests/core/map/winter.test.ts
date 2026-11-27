@@ -4,6 +4,7 @@
  * the winter sites.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import { TERRAIN_MOVE_COST } from "../../../src/data/movement.ts";
 import { decorationKindsFor } from "../../../src/data/decorations.ts";
 import { STRAY_HOMES } from "../../../src/data/strays.ts";
@@ -97,7 +98,7 @@ const typeOf = (o: { data: Record<string, unknown> }): string =>
 const snowCells = (map: GameMap): number =>
   map.cells.filter((c) => c.terrain === "snow").length;
 
-describe("winter zones in the generator", () => {
+describe("winter zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   const runs: Array<{ seed: number; size: MapSize }> = [];
   const plain: Array<{ seed: number; size: MapSize }> = [];
   for (let seed = 1; seed <= 12; seed += 1) {

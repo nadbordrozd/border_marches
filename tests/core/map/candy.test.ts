@@ -4,6 +4,7 @@
  * frosting.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import { TERRAIN_MOVE_COST } from "../../../src/data/movement.ts";
 import { getHeroClass } from "../../../src/data/classes.ts";
 import { decorationKindsFor } from "../../../src/data/decorations.ts";
@@ -91,7 +92,7 @@ const WITH: [number, MapSize, PlayerCount][] = [
   [4, "L", 2],
 ];
 
-describe("candy zones in the generator", () => {
+describe("candy zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
   it("turns a wild zone away from the starts into a candy zone on some maps", () => {
     for (const [seed, size, players] of WITH) {
       const { map, info } = generateMapWithInfo(seed, { size, players });
@@ -210,7 +211,7 @@ describe("candy zones in the generator", () => {
   });
 });
 
-describe("Candy outposts on frosting", () => {
+describe("Candy outposts on frosting", { timeout: HEAVY_TIMEOUT }, () => {
   /** A state with zone 0 of grass and zone 1 a candy zone. */
   const st = {
     zones: [

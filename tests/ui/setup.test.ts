@@ -5,6 +5,7 @@
  * game every time.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../timeouts.ts";
 import { buildNamedMap } from "../../src/core/map/named.ts";
 import { hasHeroArt, hasUnitArt } from "../../src/assets/unit-art.ts";
 import { getCreature } from "../../src/data/creatures.ts";
@@ -54,7 +55,7 @@ describe("two-column setup screen (bead bzc.66)", () => {
   });
 });
 
-describe("named maps in new-game setup", { timeout: 60_000 }, () => {
+describe("named maps in new-game setup", { timeout: HEAVY_TIMEOUT }, () => {
   it("seats the human's faction and the recommended rest", () => {
     const base = { seed: 1, size: "S" as const, players: 4 };
     const seats = (map: string, faction: "humans" | "undead" | "goblins") =>

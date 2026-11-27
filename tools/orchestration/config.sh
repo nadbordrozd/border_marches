@@ -30,6 +30,10 @@ CHECK_ART="node tools/art/studio-art.mjs validate"
 # The whole unit tier takes about 20 s today, so it runs on every
 # integration; drop "unit" here if it grows past about a minute. It has no
 # wall-clock assertions; speed budgets run on demand with `npm run perf`.
+# Under load (several workers, load 20+ on 10 cores) it takes ~3 minutes:
+# the heavy tests (many generated maps, whole games, many battles) carry a
+# 300 s limit, HEAVY_TIMEOUT from tests/timeouts.ts; others keep the 30 s
+# default from vite.config.ts. A new heavy test should use HEAVY_TIMEOUT.
 INTEGRATE_STEPS="format lint typecheck focused unit art build"
 
 # Where Claude Code's Agent tool puts worktrees (isolation: "worktree").

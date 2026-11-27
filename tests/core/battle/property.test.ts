@@ -3,6 +3,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import { createRng } from "../../../src/core/rng.ts";
 import {
   applyAction,
@@ -21,7 +22,7 @@ import { damageEvents } from "./helpers.ts";
 const BATTLES = 150;
 const MAX_ACTIONS = 80;
 
-describe("preview == apply (property)", () => {
+describe("preview == apply (property)", { timeout: HEAVY_TIMEOUT }, () => {
   it(`holds for every attack in ${BATTLES} random battles`, () => {
     let checked = 0;
     let retaliations = 0;

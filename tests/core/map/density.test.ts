@@ -5,6 +5,7 @@
  * or slip past their guard.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import { mapDensity } from "../../../src/core/map/density.ts";
 import { startTownsOf, travelCosts } from "../../../src/core/map/fairness.ts";
 import { generateMapWithInfo } from "../../../src/core/map/generate.ts";
@@ -65,7 +66,7 @@ const typeOf = (o: MapObject): string => String(o.data["type"] ?? o.kind);
 /** A one-time pickup taken from beside it (the game's rule). */
 const beside = (o: MapObject): boolean => isPickup(o);
 
-describe("denser maps (bzc.50)", { timeout: 120_000 }, () => {
+describe("denser maps (bzc.50)", { timeout: HEAVY_TIMEOUT }, () => {
   it("places every placeable catalogue type on some map of each size", () => {
     // Event tiles and signs are map-authored; the Keepers' Vault is a rule
     // of medium and large maps (CONTENT_MAP_OBJECTS 3.4).

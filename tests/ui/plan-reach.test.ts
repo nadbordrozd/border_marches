@@ -10,6 +10,7 @@
  * on every generated map (seed 99 S: the Ore Pit behind 24 Gremlins).
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../timeouts.ts";
 import {
   findPath,
   moveContext,
@@ -140,17 +141,21 @@ const MAPS: Array<[MapSize, 2 | 3 | 4, number[]]> = [
   ["L", 4, [61]],
 ];
 
-describe("every target the hero can get to gets a plan (bead bzc.79)", () => {
-  for (const [size, players, seeds] of MAPS) {
-    it(`size ${size}, ${players} players, seeds ${seeds.join(" ")}`, () => {
-      const failures: string[] = [];
-      for (const seed of seeds) {
-        const { out, checked } = unplannable(seed, size, players);
-        // Guards the test itself: a start that reaches nothing proves nothing.
-        expect(checked, `${size} seed ${seed}`).toBeGreaterThan(10);
-        failures.push(...out);
-      }
-      expect(failures.slice(0, 10)).toEqual([]);
-    });
-  }
-});
+describe(
+  "every target the hero can get to gets a plan (bead bzc.79)",
+  { timeout: HEAVY_TIMEOUT },
+  () => {
+    for (const [size, players, seeds] of MAPS) {
+      it(`size ${size}, ${players} players, seeds ${seeds.join(" ")}`, () => {
+        const failures: string[] = [];
+        for (const seed of seeds) {
+          const { out, checked } = unplannable(seed, size, players);
+          // Guards the test itself: a start that reaches nothing proves nothing.
+          expect(checked, `${size} seed ${seed}`).toBeGreaterThan(10);
+          failures.push(...out);
+        }
+        expect(failures.slice(0, 10)).toEqual([]);
+      });
+    }
+  },
+);

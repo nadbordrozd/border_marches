@@ -4,6 +4,7 @@
  * simulation tier (tools/sim/match.ts), not here.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import {
   AdventureAi,
   buildQueue,
@@ -389,7 +390,7 @@ describe("AdventureAi decisions", () => {
   });
 });
 
-describe("smoke match", () => {
+describe("smoke match", { timeout: HEAVY_TIMEOUT }, () => {
   it("plays three days of a fixed-seed small map, AI against AI", () => {
     const resolver = createBattleResolver();
     const play = (): ReturnType<typeof playMatch> => {

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import {
   applyAction,
   chooseAiAction,
@@ -33,39 +34,47 @@ function randomSetup(i: number): BattleSetup {
 }
 
 describe("battle AI", () => {
-  it("makes only legal moves and every battle of 40 random armies terminates", () => {
-    const outcomes = { attacker: 0, defender: 0, roundLimit: 0 };
-    let maxRounds = 0;
-    for (let i = 0; i < 40; i++) {
-      let state: BattleState = createBattle(randomSetup(i)).state;
-      let actions = 0;
-      while (state.winner === null && state.round <= 100) {
-        const action = chooseAiAction(state);
-        expect(isLegalAction(state, action)).toBe(true);
-        state = applyAction(state, action).state;
-        actions++;
-        expect(actions).toBeLessThan(100 * 14 * 2 + 1);
+  it(
+    "makes only legal moves and every battle of 40 random armies terminates",
+    () => {
+      const outcomes = { attacker: 0, defender: 0, roundLimit: 0 };
+      let maxRounds = 0;
+      for (let i = 0; i < 40; i++) {
+        let state: BattleState = createBattle(randomSetup(i)).state;
+        let actions = 0;
+        while (state.winner === null && state.round <= 100) {
+          const action = chooseAiAction(state);
+          expect(isLegalAction(state, action)).toBe(true);
+          state = applyAction(state, action).state;
+          actions++;
+          expect(actions).toBeLessThan(100 * 14 * 2 + 1);
+        }
+        maxRounds = Math.max(maxRounds, state.round);
+        if (state.winner === null) outcomes.roundLimit++;
+        else outcomes[state.winner]++;
       }
-      maxRounds = Math.max(maxRounds, state.round);
-      if (state.winner === null) outcomes.roundLimit++;
-      else outcomes[state.winner]++;
-    }
-    expect(outcomes.attacker + outcomes.defender + outcomes.roundLimit).toBe(
-      40,
-    );
-    // Battles end by elimination, well inside the cap.
-    expect(outcomes.roundLimit).toBe(0);
-    expect(maxRounds).toBeLessThan(100);
-  });
+      expect(outcomes.attacker + outcomes.defender + outcomes.roundLimit).toBe(
+        40,
+      );
+      // Battles end by elimination, well inside the cap.
+      expect(outcomes.roundLimit).toBe(0);
+      expect(maxRounds).toBeLessThan(100);
+    },
+    HEAVY_TIMEOUT,
+  );
 
-  it("is deterministic: the same setup gives the same battle", () => {
-    for (let i = 0; i < 10; i++) {
-      const a = runAutoBattle(randomSetup(i));
-      const b = runAutoBattle(randomSetup(i));
-      expect(b.result).toEqual(a.result);
-      expect(b.events).toEqual(a.events);
-    }
-  });
+  it(
+    "is deterministic: the same setup gives the same battle",
+    () => {
+      for (let i = 0; i < 10; i++) {
+        const a = runAutoBattle(randomSetup(i));
+        const b = runAutoBattle(randomSetup(i));
+        expect(b.result).toEqual(a.result);
+        expect(b.events).toEqual(a.events);
+      }
+    },
+    HEAVY_TIMEOUT,
+  );
 
   it("auto-play stops at its maxRounds harness with no winner", () => {
     // Two stacks that can never reach each other: an obstacle wall.

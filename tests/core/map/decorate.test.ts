@@ -5,6 +5,7 @@
  * movement, are seeded and saved with the map.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import { decorationKind } from "../../../src/data/decorations.ts";
 import { DECORATE, decorateMap } from "../../../src/core/map/decorate.ts";
 import {
@@ -48,7 +49,7 @@ const GENERATED = [
   [5, "L"],
 ] as const;
 
-describe("decorations on maps (bzc.72)", { timeout: 120_000 }, () => {
+describe("decorations on maps (bzc.72)", { timeout: HEAVY_TIMEOUT }, () => {
   const maps = [
     ...GENERATED.map(([seed, size]) => ({
       label: `${size}${seed}`,

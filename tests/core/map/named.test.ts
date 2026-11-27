@@ -5,6 +5,7 @@
  * (a key-and-gate valley, a Marvel piece behind a strong guard) hold.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import { wornDef } from "../../../src/data/artifacts.ts";
 import { getCreature, isCreatureId } from "../../../src/data/creatures.ts";
 import { isPickup } from "../../../src/core/game/site-state.ts";
@@ -238,7 +239,7 @@ const PUZZLES: Record<
   },
 };
 
-describe("named maps", { timeout: 60_000 }, () => {
+describe("named maps", { timeout: HEAVY_TIMEOUT }, () => {
   it("ships a two-player map and two three-player Realm, Restless, Horde maps", () => {
     expect(NAMED_MAPS.map((m) => [m.id, m.players, m.size])).toEqual([
       ["keepers-toll", 2, "M"],
@@ -569,7 +570,7 @@ describe("named maps", { timeout: 60_000 }, () => {
  * site, the Second Left Glove spread over the three wild lands, and more
  * artifacts and banks than the other named maps.
  */
-describe("The Ninefold Landfall", { timeout: 60_000 }, () => {
+describe("The Ninefold Landfall", { timeout: HEAVY_TIMEOUT }, () => {
   const ID = "ninefold-landfall";
   const count = (map: GameMap, test: (o: MapObject) => boolean): number =>
     map.objects.filter(test).length;

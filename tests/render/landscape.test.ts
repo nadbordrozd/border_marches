@@ -5,6 +5,7 @@
  * road stays on the drawn road.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../timeouts.ts";
 import {
   roadChains,
   roadPaths,
@@ -152,21 +153,25 @@ describe("grid roads", () => {
       }
   });
 
-  it("paints every road cell of the named and generated maps", () => {
-    for (const map of [
-      buildNamedMap("keepers-toll"),
-      buildNamedMap("hourglass-marches"),
-      generateMap(1, { size: "M" }),
-      generateMap(2, { size: "M" }),
-    ]) {
-      const segments = roadSegments(map);
-      map.cells.forEach((cell, i) => {
-        if (!cell.road) return;
-        const [x, y] = centre(i % map.width, Math.floor(i / map.width));
-        expect(roadDistance(segments, x, y)).toBeLessThan(1e-6);
-      });
-    }
-  });
+  it(
+    "paints every road cell of the named and generated maps",
+    () => {
+      for (const map of [
+        buildNamedMap("keepers-toll"),
+        buildNamedMap("hourglass-marches"),
+        generateMap(1, { size: "M" }),
+        generateMap(2, { size: "M" }),
+      ]) {
+        const segments = roadSegments(map);
+        map.cells.forEach((cell, i) => {
+          if (!cell.road) return;
+          const [x, y] = centre(i % map.width, Math.floor(i / map.width));
+          expect(roadDistance(segments, x, y)).toBeLessThan(1e-6);
+        });
+      }
+    },
+    HEAVY_TIMEOUT,
+  );
 
   it("keeps a hero's road walk on the drawn road (named map)", () => {
     const map = buildNamedMap("keepers-toll");

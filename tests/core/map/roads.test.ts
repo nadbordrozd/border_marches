@@ -11,6 +11,7 @@
  * join every town they joined.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import { generateMap } from "../../../src/core/map/generate.ts";
 import { roadMayCross } from "../../../src/core/map/gen/objects.ts";
 import { NAMED_MAPS, buildNamedMap } from "../../../src/core/map/named.ts";
@@ -76,77 +77,81 @@ function roadPieces(map: GameMap): Int32Array {
   return part;
 }
 
-describe("roads keep clear of sites (bzc.95)", { timeout: 120_000 }, () => {
-  it("puts no site, building, dwelling, mine or bank on a road", () => {
-    for (const { label, map } of all()) {
-      for (const o of map.objects) {
-        if (roadMayCross(o) !== "never") continue;
-        for (const [x, y] of objectCells(o)) {
-          expect(onRoad(map, x, y), `${label} ${o.id} at (${x},${y})`).toBe(
-            false,
-          );
+describe(
+  "roads keep clear of sites (bzc.95)",
+  { timeout: HEAVY_TIMEOUT },
+  () => {
+    it("puts no site, building, dwelling, mine or bank on a road", () => {
+      for (const { label, map } of all()) {
+        for (const o of map.objects) {
+          if (roadMayCross(o) !== "never") continue;
+          for (const [x, y] of objectCells(o)) {
+            expect(onRoad(map, x, y), `${label} ${o.id} at (${x},${y})`).toBe(
+              false,
+            );
+          }
         }
       }
-    }
-  });
+    });
 
-  it("lets a road cross a guard or a resource pile only now and then", () => {
-    let guards = 0;
-    let guardsOnRoad = 0;
-    let piles = 0;
-    let pilesOnRoad = 0;
-    for (const { map } of all()) {
-      for (const o of map.objects) {
-        const rule = roadMayCross(o);
-        const on = onRoad(map, o.x, o.y);
-        if (o.kind === "monster") {
-          guards++;
-          if (on) guardsOnRoad++;
-        } else if (rule === "pickup") {
-          piles++;
-          if (on) pilesOnRoad++;
+    it("lets a road cross a guard or a resource pile only now and then", () => {
+      let guards = 0;
+      let guardsOnRoad = 0;
+      let piles = 0;
+      let pilesOnRoad = 0;
+      for (const { map } of all()) {
+        for (const o of map.objects) {
+          const rule = roadMayCross(o);
+          const on = onRoad(map, o.x, o.y);
+          if (o.kind === "monster") {
+            guards++;
+            if (on) guardsOnRoad++;
+          } else if (rule === "pickup") {
+            piles++;
+            if (on) pilesOnRoad++;
+          }
         }
       }
-    }
-    expect(guardsOnRoad / guards).toBeLessThan(0.2);
-    expect(pilesOnRoad / piles).toBeLessThan(0.1);
-  });
+      expect(guardsOnRoad / guards).toBeLessThan(0.2);
+      expect(pilesOnRoad / piles).toBeLessThan(0.1);
+    });
 
-  it("still joins every town of a random map by road", () => {
-    for (const { label, map } of all()) {
-      if (!/^[SML]\d/.test(label)) continue;
-      const part = roadPieces(map);
-      const towns = map.objects.filter((o) => o.kind === "town");
-      const first = towns[0];
-      if (first === undefined) throw new Error(`${label}: no town`);
-      for (const t of towns) {
-        expect(
-          part[t.y * map.width + t.x],
-          `${label} ${t.id} on the first town's road`,
-        ).toBe(part[first.y * map.width + first.x]);
+    it("still joins every town of a random map by road", () => {
+      for (const { label, map } of all()) {
+        if (!/^[SML]\d/.test(label)) continue;
+        const part = roadPieces(map);
+        const towns = map.objects.filter((o) => o.kind === "town");
+        const first = towns[0];
+        if (first === undefined) throw new Error(`${label}: no town`);
+        for (const t of towns) {
+          expect(
+            part[t.y * map.width + t.x],
+            `${label} ${t.id} on the first town's road`,
+          ).toBe(part[first.y * map.width + first.x]);
+        }
       }
-    }
-  });
+    });
 
-  it("keeps each named map's towns on the roads they had", () => {
-    // The Hourglass Marches closes one road on purpose (a fallen tree):
-    // its western towns keep their own road.
-    const pieces: Record<string, number> = {
-      "keepers-toll": 1,
-      "hourglass-marches": 2,
-      "ninefold-landfall": 1,
-    };
-    for (const { label, map } of all()) {
-      const want = pieces[label];
-      if (want === undefined) continue;
-      const part = roadPieces(map);
-      const held = new Set(
-        map.objects
-          .filter((o) => o.kind === "town")
-          .map((t) => part[t.y * map.width + t.x]),
-      );
-      expect(held.has(-1), `${label}: a town off the roads`).toBe(false);
-      expect(held.size, label).toBe(want);
-    }
-  });
-});
+    it("keeps each named map's towns on the roads they had", () => {
+      // The Hourglass Marches closes one road on purpose (a fallen tree):
+      // its western towns keep their own road.
+      const pieces: Record<string, number> = {
+        "keepers-toll": 1,
+        "hourglass-marches": 2,
+        "ninefold-landfall": 1,
+      };
+      for (const { label, map } of all()) {
+        const want = pieces[label];
+        if (want === undefined) continue;
+        const part = roadPieces(map);
+        const held = new Set(
+          map.objects
+            .filter((o) => o.kind === "town")
+            .map((t) => part[t.y * map.width + t.x]),
+        );
+        expect(held.has(-1), `${label}: a town off the roads`).toBe(false);
+        expect(held.size, label).toBe(want);
+      }
+    });
+  },
+);

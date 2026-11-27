@@ -4,6 +4,7 @@
  * larger obstacle masses, and open land within the Heroes III band.
  */
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import { mapComposition } from "../../../src/core/map/density.ts";
 import { generateMapWithInfo } from "../../../src/core/map/generate.ts";
 import type { GenerateInfo, MapSize } from "../../../src/core/map/generate.ts";
@@ -65,7 +66,7 @@ function* all(): Generator<{
 const cheb = (a: { x: number; y: number }, x: number, y: number): number =>
   Math.max(Math.abs(a.x - x), Math.abs(a.y - y));
 
-describe("map composition (bzc.96)", { timeout: 120_000 }, () => {
+describe("map composition (bzc.96)", { timeout: HEAVY_TIMEOUT }, () => {
   it("guards clusters of two to five pickups, resources and artifacts, in a nook", () => {
     let clusters = 0;
     let artifacts = 0;

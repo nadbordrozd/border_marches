@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { HEAVY_TIMEOUT } from "../../timeouts.ts";
 import {
   DEFAULT_GEN_CONFIG,
   generateMap,
@@ -32,7 +33,7 @@ function heroStart(map: GameMap): MapObject {
   return h;
 }
 
-describe("generateMap", { timeout: 60_000 }, () => {
+describe("generateMap", { timeout: HEAVY_TIMEOUT }, () => {
   it("is deterministic and seed-dependent", () => {
     const a = JSON.stringify(generateMap(7));
     const b = JSON.stringify(generateMap(7));
