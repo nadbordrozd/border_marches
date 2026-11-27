@@ -376,5 +376,1253 @@
         "height": 48
       }
     ]
+  },
+  "x15-fluff-a": {
+    "id": "x15-fluff-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1d7b900c-f80c-480c-89f1-333085bd6c31",
+    "submittedAt": "2026-11-27T12:30:24.877Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall candy tree, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail (more fluffy puffs, swirl lines), each image a different one of these: a cotton-candy tree with a big fluffy round crown of pink spun sugar #f08cb8 (shadow #c25a8c, light #ffc2dc on the left side) on a short striped stick, a cotton-candy tree with a fluffy mint crown #8fdcc0 (shadow #4fa58a), a tree of three stacked fluffy pink cotton-candy puffs, a giant round swirl lollipop of red and white #e03a3e #fff4ec on a thick white stick. A short candy stick trunk. A full crown about two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take candy-trees/fluff-a#0 sha256 30bf385ff9e2dd1db85694ba622dbfa6307429a0c2580e94bb48a334d746d074",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take candy-trees/fluff-a#1 sha256 3b46b88ac355cc98e95cb612ce797ed11e7c7f65297ae4d40f0a5a86259c3838",
+          "usage": "a pink cotton-candy tree: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/fluff-a#17 sha256 de98914650bdc4233f6b5060f1c42c047c25e4fb80d38c60c3e7310a44f7ba78",
+          "usage": "a mint cotton-candy tree: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/fluff-a#20 sha256 d3cda36f702b7907a56944eb7d0a944382d759bc889cde80b1d5362b972cb9bb",
+          "usage": "a tree of stacked cotton-candy puffs: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/fluff-a#2 sha256 4cff30fcc33258577e9554e54c329e4a10d1674a5035e36c6f36813faf0ac313",
+          "usage": "a swirl lollipop: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165401,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall candy tree, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail (more fluffy puffs, swirl lines), each image a different one of these: a cotton-candy tree with a big fluffy round crown of pink spun sugar #f08cb8 (shadow #c25a8c, light #ffc2dc on the left side) on a short striped stick, a cotton-candy tree with a fluffy mint crown #8fdcc0 (shadow #4fa58a), a tree of three stacked fluffy pink cotton-candy puffs, a giant round swirl lollipop of red and white #e03a3e #fff4ec on a thick white stick. A short candy stick trunk. A full crown about two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, sand patch, grass, pot, hand, wrapper."
+    },
+    "at": "2026-11-27T12:31:48.777Z",
+    "usageUsd": 0.08217364184061686,
+    "candidates": [
+      {
+        "file": "x15-fluff-a-0.png",
+        "sha256": "80bdf8501f5e5f73f3985a679d008d54ac8343b7abb95d0119c0ddb4b9ecc3e1",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-1.png",
+        "sha256": "dee7e47d8f2dc600074bc9ce57a7ac53f5328b17a0e6212194feac6d8123dea3",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-2.png",
+        "sha256": "860d781942a955f41e3a1718ecba2197851afdf9bfa6daafe3238a8e0da8dd07",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-3.png",
+        "sha256": "079c130fe651f88f6829d2b022239ebc3b1c0780ee86e8d5106c36a5570b2392",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-4.png",
+        "sha256": "413faa405e9f38bcf866063a8ffc89d84c215fd86b256823c0193f3e0bcbc49e",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-5.png",
+        "sha256": "6d56331318d2b56f7e34c60a796ac93f943f22b182de5ab738811ada0eb8e571",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-6.png",
+        "sha256": "83a401886e3c03153739224c3b5d396b6fb34aa5feca7621b26aaff3bd93ae41",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-7.png",
+        "sha256": "4990afc3e007915793149fb25b86c46330dcef1c4a6891dc81ef935ca18a4fc1",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-8.png",
+        "sha256": "44b0bfedde0399fc3ad2ee66875aba52c658712cebb7dff9515c945477101256",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-9.png",
+        "sha256": "c1143dc3ea504c7934d27830593d52cc72a071217138adc261ea385256408cfb",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-10.png",
+        "sha256": "661431cd86bbcf304ad7f2a886b93c0657f3612e4f4dfa3f9ba7c3c8fdaebef0",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-11.png",
+        "sha256": "8d33138f84de0ca1602deb0628dbc6c1a3d6b1a5da3bdd266315200a9d321137",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-12.png",
+        "sha256": "d30f329e8741b5326defe452e883cb5c82cbc4484f77111f6e82f413ea4d64a4",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-13.png",
+        "sha256": "1f485a3bf2e72cf8ae46af68d2a5c16c1427bb6d8a2ec03e6b9a9c83d53a5c4e",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-14.png",
+        "sha256": "9466229634e526829be1cc312ffe8d006c180c14c55342d5b5b7091ff5c2682b",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-fluff-a-15.png",
+        "sha256": "c6668ffee010736634fe28eb0b07d82e2a7724ddc35972d69d091e1f397cb85e",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-frosted-a": {
+    "id": "x15-frosted-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "09d29a87-c54a-41e1-9fd0-a229b6c1c485",
+    "submittedAt": "2026-11-27T12:31:48.906Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one candy plant, chunky and cute, the same designs as the small reference plants redrawn larger with a little more detail (sprinkles, drips of frosting, gumdrop shine), each image a different one of these: a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a tall tree with a crown of two stacked pink frosting puffs with sprinkles on a gingerbread trunk, a tree with a big round crown of pink frosting dripping at its rim on a gingerbread trunk, a bush of big round gumdrops in pink, mint and lemon #f08cb8 #8fdcc0 #f4d46c. Big: about two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take candy-trees/cane-a#10 sha256 2c010323f281cae9ebe44567213f91a02f5356d1a486a24d5dd4e831d28ac541",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take candy-trees/cane-a#12 sha256 6d76537acb9e9e69a17c21823c5fd9631abd136dee082b94b1e4f19abb2aecf4",
+          "usage": "a frosted tree with sprinkles: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#20 sha256 355fb15f635a7ef6da3c11ee13a22d043e3c92dcb06348846bd9209f84ef3943",
+          "usage": "a big frosted tree: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#5 sha256 15003753051d2be23624ace7e44491d1ef2e36db63179d4f0213719e3b72ee6b",
+          "usage": "a gumdrop bush: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#8 sha256 50c6859d5301571349ca93532010e518cfc706adc0a786a5fde4015948c64f52",
+          "usage": "a low gumdrop bush: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165402,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one candy plant, chunky and cute, the same designs as the small reference plants redrawn larger with a little more detail (sprinkles, drips of frosting, gumdrop shine), each image a different one of these: a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a tall tree with a crown of two stacked pink frosting puffs with sprinkles on a gingerbread trunk, a tree with a big round crown of pink frosting dripping at its rim on a gingerbread trunk, a bush of big round gumdrops in pink, mint and lemon #f08cb8 #8fdcc0 #f4d46c. Big: about two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole."
+    },
+    "at": "2026-11-27T12:33:47.800Z",
+    "usageUsd": 0.08200321854485405,
+    "candidates": [
+      {
+        "file": "x15-frosted-a-0.png",
+        "sha256": "6f2072d1c56867cb45400cffe2493418103e3f8d29b04c0ad279f9bf81ca72e1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-1.png",
+        "sha256": "13abba8d84fe7f39c09ed47fdad2c0f62a88761fd3fac416fd7d2f9e39c987f1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-2.png",
+        "sha256": "820695aa9e1272b1bce6a52c472da342845b33de559408657008036f42d13da4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-3.png",
+        "sha256": "70fcf19368b8f7e683588b62dbd77cb006a988e04302ce0e22b7d1fe69381486",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-4.png",
+        "sha256": "fd60dc5cff5a06a27baad8071aa77055d1ca2103eae16ddd570105958e41e413",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-5.png",
+        "sha256": "51c17e042d6334d4c8b5dc0956ee353dce55a9af71280ec7dd43bb3d1374df7c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-6.png",
+        "sha256": "db1c15c056a51d30f2c04e75dc4f25fb6bb695dc7546bb64c659aa271f463e9b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-7.png",
+        "sha256": "66312fbd6a61a339e86a6bea0200593874c4eba0445be4310a438363a4123f31",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-8.png",
+        "sha256": "3810ecc10dd67f38fa41c33469c4fa20617891c40693144ed5e8979bacf9ea01",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-9.png",
+        "sha256": "b32a7ee2a089d38bb2566af7cf440a4e0e5e717cef1bd11498332ce249cc8106",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-10.png",
+        "sha256": "d1f375fcaabac97315b593b4cada54cfb6b3e66c2d6f0d309a35afee9926249e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-11.png",
+        "sha256": "55b595c00aef57e74a61f88345b5bdf4d589857660b27d9291d962f056cc2140",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-12.png",
+        "sha256": "66c7b8f029173ba2084381f5af1e15f104504b7fe0525dbb565a109b12044b57",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-13.png",
+        "sha256": "bf27e7b77134e30c55a30a581c1f6efc59e094b78559d9b4e962c48b7aa14faf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-14.png",
+        "sha256": "7f381939ddc3e8a37353702826c015ac8e87f702be9e7a96e83c41e881bb6124",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-a-15.png",
+        "sha256": "994fe5e4582c7f676d5c21bcbae9983c099a52c2c1ebbeed6cdabf78f7d207ff",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-cane-a": {
+    "id": "x15-cane-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "52c3995d-4b05-457c-ac0d-43718b9c98f7",
+    "submittedAt": "2026-11-27T12:33:47.942Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall candy plant, chunky and cute, the same designs as the small reference candies redrawn larger with a little more detail, each image a different one of these: a peppermint swirl lollipop with a mint stripe on a thick stick, a giant round swirl lollipop of red and white #e03a3e #fff4ec on a thick white stick, a pink and white swirl lollipop #f08cb8 #fff4ec on a thick stick, a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top. Chunky and solid, about half of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take candy-trees/cane-a#15 sha256 27e7f0149b361419a41994df2670f5dae35939701e90c59cd034aa8b1675a09c",
+        "usage": "copy this lollipop's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new one larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take candy-trees/cane-a#16 sha256 70cbf73d9a93fa3f3b8c02e6df806bc640c88f7c03371fd13c77ef02c90a2ac6",
+          "usage": "a peppermint swirl lollipop: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/fluff-a#15 sha256 ad526697848d917a3675e0c7adb7efc3026950426ee0687624fc3923ac8cb9e1",
+          "usage": "a round swirl lollipop: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#0 sha256 e594e41223d8960eed38945563b4a966d09426da807bcfd0a750bd4795b6235c",
+          "usage": "a striped candy cane: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#24 sha256 aef4a533b6f5736d21cc7ffe49116809bfd9729bfe60ab0e8c1b7d9c1de6e5ba",
+          "usage": "a candy cane: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165403,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall candy plant, chunky and cute, the same designs as the small reference candies redrawn larger with a little more detail, each image a different one of these: a peppermint swirl lollipop with a mint stripe on a thick stick, a giant round swirl lollipop of red and white #e03a3e #fff4ec on a thick white stick, a pink and white swirl lollipop #f08cb8 #fff4ec on a thick stick, a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top. Chunky and solid, about half of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole."
+    },
+    "at": "2026-11-27T12:35:04.983Z",
+    "usageUsd": 0.08164353834258185,
+    "candidates": [
+      {
+        "file": "x15-cane-a-0.png",
+        "sha256": "171e0dbdc19e6dba37d8b848fe87ce1f6b97dca5d84affca8ba5ccb7216a48fb",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-1.png",
+        "sha256": "75d17f074331f74e75014f9e82c8b571062424ec70e96a8d22458b91a76a8d48",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-2.png",
+        "sha256": "06bf9bbd4b8b5cb8aa16032e3c64e5cedbf4da7ff26b34e6a65768e68ec6eb2f",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-3.png",
+        "sha256": "1708aa7ca5101dea3e8bd98083e6e198aa788110afe045601b7c333e38d5431b",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-4.png",
+        "sha256": "c3b507da899b6e57c61ceb80f0209601105f408e7ec0e8a4baa6377cc75fecd4",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-5.png",
+        "sha256": "9da4ec198b6b5f70b60a9c93364977a061df7e6f533ec5a33e29b7d758dc85b5",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-6.png",
+        "sha256": "7efde07def804ddb2dc546c1bf679e57f52d2da02dafc0ce71efb7703ce33eed",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-7.png",
+        "sha256": "0ab2369f1f2099869c1912594401a143d6a27ac7f5af12368b4f7adef07a9eab",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-8.png",
+        "sha256": "4ff9e05f7d31fcf704602d034910de3f20eb43de19fed8fc4fdf097f15b49023",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-9.png",
+        "sha256": "7d19599c5419ed528ae45213b308c09b2cfad92caeac94d2cfcb659344e0196e",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-10.png",
+        "sha256": "e6c7fb31f8ecc5d2f9732f7dc138eb3df30ab3a1f33a1ff06ff05b1afc0803d9",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-11.png",
+        "sha256": "ff79b5817a74bf829fa23e68e998d3638ac373e402ea379d376cd6bf9ae4d6bc",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-12.png",
+        "sha256": "17e727f8cb9eef0a6f2ba7b97dd44b24c5e71dae41dc94560d044b9945f39060",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-13.png",
+        "sha256": "f9f443c07885322682317ade76b2c87fe545892bd99d3598c67ae99bf5300ecf",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-14.png",
+        "sha256": "5bdc88211c05089a19f19fcb4da32ca5cb51f8b0d79ab502c4188bbaa62f802b",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-a-15.png",
+        "sha256": "a8454ad597818c1c8b9e02fdc97d7242489139808204c5d743e3ec2f83628fb5",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-frosted-b": {
+    "id": "x15-frosted-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "ee880e7d-da4a-4d3b-93e3-a73215a90b30",
+    "submittedAt": "2026-11-27T12:36:51.249Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one candy tree, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail (sprinkles, drips of frosting), each image a different one of these: a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a tree with a crown of two stacked pink frosting puffs with sprinkles on a gingerbread trunk, a tree with a big round crown of pink frosting dripping at its rim on a gingerbread trunk, a tree with a tall dome of pink frosting and sprinkles on a gingerbread trunk. About two thirds of the image wide and about three quarters of the image tall, empty space above the crown."
+        }
+      ],
+      "style_image": {
+        "source": "take candy-trees/cane-a#10 sha256 2c010323f281cae9ebe44567213f91a02f5356d1a486a24d5dd4e831d28ac541",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take candy-trees/cane-a#12 sha256 6d76537acb9e9e69a17c21823c5fd9631abd136dee082b94b1e4f19abb2aecf4",
+          "usage": "a frosted tree with sprinkles: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#20 sha256 355fb15f635a7ef6da3c11ee13a22d043e3c92dcb06348846bd9209f84ef3943",
+          "usage": "a big frosted tree: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#11 sha256 73d0364b7d518e5625a49b08bc8a4e2d01a500f84443e808b2269463f0b2f25c",
+          "usage": "a frosted tree: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#13 sha256 0ec8952d12876723e770e26541836810802f73d2ea0dac1069ff39efc01e577b",
+          "usage": "a tall frosted tree: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165404,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one candy tree, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail (sprinkles, drips of frosting), each image a different one of these: a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a tree with a crown of two stacked pink frosting puffs with sprinkles on a gingerbread trunk, a tree with a big round crown of pink frosting dripping at its rim on a gingerbread trunk, a tree with a tall dome of pink frosting and sprinkles on a gingerbread trunk. About two thirds of the image wide and about three quarters of the image tall, empty space above the crown. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole."
+    },
+    "at": "2026-11-27T12:38:14.160Z",
+    "usageUsd": 0.08133382034301757,
+    "candidates": [
+      {
+        "file": "x15-frosted-b-0.png",
+        "sha256": "83bb9b6e021fb344d9be2e3f7796934770d2fb09db312a2d291b84fe6bd6cb1f",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-1.png",
+        "sha256": "fda2b20ebcc8798bce6bceb18c3a5fbc0c284bdb818e378368f524c6bd1368c6",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-2.png",
+        "sha256": "141ad231c0c0fdcf2287f69fbf1d1a53ea07ada686549567ef91cd27bf5124dc",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-3.png",
+        "sha256": "0915df6afb3bb970d40f0e49fbcf4852bcbe4a7f0b67a177af3bf4eb4d6f9c7e",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-4.png",
+        "sha256": "ec9582a90dd90b6b7d933d0880ab96ad95a2fdd076a982e731d773f6cfce25e6",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-5.png",
+        "sha256": "6b5f02b27d998fe276970f7eb59e0c63fd7417c8331b5f020829f660757dc4c8",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-6.png",
+        "sha256": "e67547cc44db266cc76ec4e7ad1d5a4f36c82dac3fabbd678a57f568236e065b",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-7.png",
+        "sha256": "829eb4d2f18e8d7e7401a56a1c6ec3238cfe1ce089af471fa36996ee1bb7998e",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-8.png",
+        "sha256": "94117cb871f244d9603a7a6d3333ede09147f8643b24593c95f81a1a9a5440e8",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-9.png",
+        "sha256": "1184eff2b6b47f4b943c8736d8f39331a58fca0dad6a52f9ea0af4ee462d5166",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-10.png",
+        "sha256": "3f13490516368c2350c8fea69a2fbc385d68301fee13d6e8f270721e953297bc",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-11.png",
+        "sha256": "02176662677b7c5e7eec96c2ac7227d8c5a5da406cc0cc4a40ee87fb0b291801",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-12.png",
+        "sha256": "15224d5bb7aa026bfdc38c097c50c5ca47c0d54ba50f0ca6b4e93e03fc772c37",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-13.png",
+        "sha256": "c2d6f8d0125fb00d05e0785c34649b78ce77bce883da9df0fa835fc010b68451",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-14.png",
+        "sha256": "855aa5aabbdcedbe40e66e18e3a8433d33eb898b4557a2504e6e63bf0530bada",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-frosted-b-15.png",
+        "sha256": "fa9c0d933529fd102b365ca84cf4d12f815e4e7f7a393c449f4f763a2e4a48f8",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-cane-b": {
+    "id": "x15-cane-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c1e842c3-e829-4f14-9e73-180dc168e659",
+    "submittedAt": "2026-11-27T12:37:36.470Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one candy cane plant, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a thick candy cane with a mint stripe #8fdcc0 standing upright, two crossed striped candy canes, a thick striped candy cane with a little icing on its hook. Chunky and solid, about half of the image wide and about two thirds of the image tall, empty space above the hook."
+        }
+      ],
+      "style_image": {
+        "source": "take candy-trees/cane-a#0 sha256 e594e41223d8960eed38945563b4a966d09426da807bcfd0a750bd4795b6235c",
+        "usage": "copy this candy cane colour palette, dark outline, flat shading with one shadow tone and its chunky cute look"
+      },
+      "reference_images": [
+        {
+          "source": "take candy-trees/cane-a#0 sha256 e594e41223d8960eed38945563b4a966d09426da807bcfd0a750bd4795b6235c",
+          "usage": "a striped candy cane: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#2 sha256 ecac608ec3796c9a09ebb5397a4c51d7babf074f4f1359166aa75aa177343080",
+          "usage": "a striped candy cane: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#24 sha256 aef4a533b6f5736d21cc7ffe49116809bfd9729bfe60ab0e8c1b7d9c1de6e5ba",
+          "usage": "a pair of candy canes: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165405,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one candy cane plant, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a thick candy cane with a mint stripe #8fdcc0 standing upright, two crossed striped candy canes, a thick striped candy cane with a little icing on its hook. Chunky and solid, about half of the image wide and about two thirds of the image tall, empty space above the hook. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole."
+    },
+    "at": "2026-11-27T12:39:19.334Z",
+    "usageUsd": 0.08318353107240466,
+    "candidates": [
+      {
+        "file": "x15-cane-b-0.png",
+        "sha256": "556debb5a23dd973a67ca0f6506fc71596bfaa3c4aa093fe5d164bece5ee995b",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-1.png",
+        "sha256": "0eeb503e62c63dd7bea2e718accdcde7937480ebaf07c774fbe7c1a4fe450e41",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-2.png",
+        "sha256": "70404d8a78274d232648eca9b2773c6ec1e0e2c9566dad0818c03e13b6dd1a7d",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-3.png",
+        "sha256": "952202e1566a4cc4345e65d249ee5166ba9f2fd27d599416f4f34c7b3be4c336",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-4.png",
+        "sha256": "29f72177b66c0dec6fd7f53d3e18cbd00153606c9f8078d27efb5d349972c769",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-5.png",
+        "sha256": "86bee9df61a75f579c199371149aca3e7b0b6e1f1874f368d8c4f02f6401bc3c",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-6.png",
+        "sha256": "5cdbd3c4976b4e93ba77be03ebd1a46e0f1410c247b967d941e8c851b1d80143",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-7.png",
+        "sha256": "f24f777c0020fba2e3eb3e69631b390de6f7456dfc6fdff10a345d923917e15f",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-8.png",
+        "sha256": "f5a8ef5203dfca33914a6df004d2928859bb750b0e020775c9e35896595261de",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-9.png",
+        "sha256": "9b3df36eecaa39b996bde1bf3c10bf6829be294e9f83f67ec5e698077030ed04",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-10.png",
+        "sha256": "b6d2e1ea081060041c8db5edca42155da50d62b5c29b787d851eb87aecfabb63",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-11.png",
+        "sha256": "4884b09dd6b2eeb28e0bd1d06fd1f409def016dbd981aefc9bda7a9d7013583b",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-12.png",
+        "sha256": "48c77046fe548fe727b1153856fce26ffb7f4be8bc261f179d2ed39986d28e9e",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-13.png",
+        "sha256": "42d0e4fa880704b6937b0e42acc479776f46f10ae3f459c8d5ef6cdc01232c81",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-14.png",
+        "sha256": "4339f4e42160505db4b7ca34c220025fb0aea0eace1e21f81cf9a35d375c1463",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-cane-b-15.png",
+        "sha256": "c190c7152a936644551750d4faf706416b24b2cc86cd4f8848eb0226e3b7845d",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-frosted-c": {
+    "id": "x15-frosted-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b6f616a0-e15c-4c50-943f-58c6637ddae3",
+    "submittedAt": "2026-11-27T12:39:22.661Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall candy tree, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail (sprinkles, drips of frosting), each image a different one of these: a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a tree with a crown of two stacked pink frosting puffs with sprinkles on a gingerbread trunk, a tree with a big round crown of pink frosting dripping at its rim on a gingerbread trunk, a tree with a tall dome of pink frosting and sprinkles on a gingerbread trunk. Big: about two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take candy-trees/cane-a#10 sha256 2c010323f281cae9ebe44567213f91a02f5356d1a486a24d5dd4e831d28ac541",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take candy-trees/cane-a#12 sha256 6d76537acb9e9e69a17c21823c5fd9631abd136dee082b94b1e4f19abb2aecf4",
+          "usage": "a frosted tree with sprinkles: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#20 sha256 355fb15f635a7ef6da3c11ee13a22d043e3c92dcb06348846bd9209f84ef3943",
+          "usage": "a big frosted tree: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#11 sha256 73d0364b7d518e5625a49b08bc8a4e2d01a500f84443e808b2269463f0b2f25c",
+          "usage": "a frosted tree: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#13 sha256 0ec8952d12876723e770e26541836810802f73d2ea0dac1069ff39efc01e577b",
+          "usage": "a tall frosted tree: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 52,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165406,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall candy tree, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail (sprinkles, drips of frosting), each image a different one of these: a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a tree with a crown of two stacked pink frosting puffs with sprinkles on a gingerbread trunk, a tree with a big round crown of pink frosting dripping at its rim on a gingerbread trunk, a tree with a tall dome of pink frosting and sprinkles on a gingerbread trunk. Big: about two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole."
+    },
+    "at": "2026-11-27T12:40:46.498Z",
+    "usageUsd": 0.08168488229645623,
+    "candidates": [
+      {
+        "file": "x15-frosted-c-0.png",
+        "sha256": "c043f526b84c5e0ecd7249197ed650d03da5f739bac7cf2a7bfc9caa1855d7cb",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-1.png",
+        "sha256": "208332861c96e87f152f274935d23182fe362601269cc90cb65184121c53b3c8",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-2.png",
+        "sha256": "c834000c2a087efd4fa05e5ac2fd06415f86781b8c6c0d8ec2a5e1c340761ecd",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-3.png",
+        "sha256": "cedbd85a628870592ffdc9a78794ad2caaebd4f9577a95557b4b0edf405c7960",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-4.png",
+        "sha256": "ed4f577197ed17c5988c4547164814a00d6e0de4160a993e42cb5e2d7b6fcd63",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-5.png",
+        "sha256": "b7926606625bcd4e4ae0f9d9d3d7cceb93a482a9513953005162a4999bef0e0a",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-6.png",
+        "sha256": "bfa40a79cc622b4c7cd099cdb837889a26378036f9e17557e6a16a6cc11197d2",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-7.png",
+        "sha256": "322ec2ca8352c318c555425afd8454d3e6aaac203c6c9c612ed4846c05a0f8d2",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-8.png",
+        "sha256": "a3ceae9acdcb0a52bd305e74eef8e6dd6025186b67aac7f738a58d84fa548e20",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-9.png",
+        "sha256": "edbeba4d223a09ddc6c69d153a09aa83bd98b3a1cdb2f4e60ccdad4f9f1b299a",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-10.png",
+        "sha256": "54161582594c7190e1c4e54131fdabd17aa1c43f2e7f1f3b63e55b8ecb47f000",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-11.png",
+        "sha256": "69bc2b58d7b8e6cc534c28b2d2de9e07f4faefa5881124e23438d8b47cfd9f36",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-12.png",
+        "sha256": "85bb0f5134f853f25fffb56627a694c225f1c8047b72f50217815a7b2012dbb1",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-13.png",
+        "sha256": "2b1b8f30d9631e3ef7731b2715a6d256db7ee0a8a2a4778352d7fd1d1ea6f2b4",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-14.png",
+        "sha256": "b40ebd62e46343c7a09f44aa86687a6808047a5288e40161fb65f88b10ce4401",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-frosted-c-15.png",
+        "sha256": "60487bac36dfee00c1f89bfcee948b81ee0260f0091698983fcb4c3e6ef48ab0",
+        "width": 52,
+        "height": 64
+      }
+    ]
+  },
+  "x15-cane-c": {
+    "id": "x15-cane-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "0727662d-5421-4b70-a3ae-de51d0af0ce4",
+    "submittedAt": "2026-11-27T12:41:28.999Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall candy cane plant, chunky and cute, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a thick candy cane with a mint stripe #8fdcc0 standing upright, two crossed striped candy canes, a thick striped candy cane with a little white icing on its hook. Chunky and solid, about half of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take candy-trees/cane-a#0 sha256 e594e41223d8960eed38945563b4a966d09426da807bcfd0a750bd4795b6235c",
+        "usage": "copy this candy cane colour palette, dark outline, flat shading with one shadow tone and its chunky cute look"
+      },
+      "reference_images": [
+        {
+          "source": "take candy-trees/cane-a#0 sha256 e594e41223d8960eed38945563b4a966d09426da807bcfd0a750bd4795b6235c",
+          "usage": "a striped candy cane: the same design"
+        },
+        {
+          "source": "take candy-trees/cane-a#2 sha256 ecac608ec3796c9a09ebb5397a4c51d7babf074f4f1359166aa75aa177343080",
+          "usage": "a striped candy cane: the same design"
+        },
+        {
+          "source": "take candy-trees/x15-cane-a#14 sha256 5bdc88211c05089a19f19fcb4da32ca5cb51f8b0d79ab502c4188bbaa62f802b",
+          "usage": "two crossed candy canes at the wanted size"
+        }
+      ],
+      "image_size": {
+        "width": 40,
+        "height": 52
+      },
+      "no_background": true,
+      "seed": 165407,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall candy cane plant, chunky and cute, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a thick candy cane with a mint stripe #8fdcc0 standing upright, two crossed striped candy canes, a thick striped candy cane with a little white icing on its hook. Chunky and solid, about half of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole."
+    },
+    "at": "2026-11-27T12:43:12.078Z",
+    "usageUsd": 0.08193988773557875,
+    "candidates": [
+      {
+        "file": "x15-cane-c-0.png",
+        "sha256": "da9c2f8ff416d4058cf127da388b4d17bba5c0e43305ddf7446bba4fe27b4508",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-1.png",
+        "sha256": "db42bc7a7ca3e592d4f41419b68a9fa7924d18ac0cc61de869f2c03225ff4dda",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-2.png",
+        "sha256": "7aad60198b2fe456675f271f8aee195a2df11c73c4514700fff62cc581ef2404",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-3.png",
+        "sha256": "0766dce6c2738e1da577c20ad748eadab3820c3eeae6c9068aee74032a9cf14b",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-4.png",
+        "sha256": "c4356372ebec885ed0158c91c19b3bca8ceb59f2a55d2a20f333399551bc1951",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-5.png",
+        "sha256": "d9331de23ed9c46bed6cb1e0f9ee6fc0421cf2b5acd77be049828cacf07d6279",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-6.png",
+        "sha256": "c367e6177e8b4c7f4b55a785065575a72047836cbf064db3d3e71979db935803",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-7.png",
+        "sha256": "56e1c959e9b368b66a5412d8e096e03a7777a4c2f11f73c13d37cc8920d14a7d",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-8.png",
+        "sha256": "33c6717daa24a9b6227f91f036aa746f115f6724f598872592acc530fdaedc91",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-9.png",
+        "sha256": "b1bb45d5e433226ccd62a9ca9f57c570082f908ff4dff0ee1bceafd94e604c6a",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-10.png",
+        "sha256": "c4624ffd93616612b47949ee875220d51629b3fef6b18ffd1d34839c0f2e92b5",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-11.png",
+        "sha256": "1d8a68f9e1cbf8ee8560903ee3b64a1ef0fa76e7935316c1cb2ce7d39737ff60",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-12.png",
+        "sha256": "5f3a99f99dc09c4b3ba5d437f1198c97e95d9880e076d0c80a5e9f292eee7ff6",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-13.png",
+        "sha256": "6aa5c1ac4d80b0aaf10a86b69d08153d1c55222870691b61b30643107fdbb962",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-14.png",
+        "sha256": "508aa97d8d4c4119467d4be0b7cf55304a3ff8f607f3415b2633423af7bfc17a",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-15.png",
+        "sha256": "ddf4acd9266ebab8b07a1e61ab61a6b21f80439dc0a51e7717e273963eafe9ce",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-16.png",
+        "sha256": "edf730460162d2188328324f6da90e8cd5ff32dd041b382953907eea0c6b4435",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-17.png",
+        "sha256": "71aa0bf4b50f52a7d62f1a6da96377e021f2675a1fe28565f6ce04bf42a7d756",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-18.png",
+        "sha256": "7fbd06a2197d62a56de24be4580d96a40cecfc587710955e999accc305f2c54f",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-19.png",
+        "sha256": "bddb306f1556c67c9633084b21e06201e5f39b436b47e0a1aec732b6b1c36b59",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-20.png",
+        "sha256": "093e1c47e66b82681c3c36a6b2875bc078fa46119a0c9d5c18c009827502aee6",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-21.png",
+        "sha256": "7f7fdfba4099458138b88f512fa098e58187985a0e36ca19635e373732005fc0",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-22.png",
+        "sha256": "9d5d49dc730e72d17ce0c8bad6777f61f1ff38a4ce5f632b7593f8f2f5faf77b",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-23.png",
+        "sha256": "bf5663a67d8747491ff6a1335786b3c4ae6bf579c415c9119971345d62292a34",
+        "width": 40,
+        "height": 52
+      },
+      {
+        "file": "x15-cane-c-24.png",
+        "sha256": "715932856661f38da8bab54d8fb61f20a3f230042f83c0953ce496bb30141738",
+        "width": 40,
+        "height": 52
+      }
+    ]
+  },
+  "x15-cane-d": {
+    "id": "x15-cane-d",
+    "status": "FAILED",
+    "endpoint": "generate-image-v2",
+    "jobId": "94f93c2a-4623-4d4f-b653-9b290168d4ab",
+    "submittedAt": "2026-11-27T12:44:21.453Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one candy cane plant, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a thick candy cane with a mint stripe #8fdcc0 standing upright, two crossed striped candy canes, a thick striped candy cane with a little icing on its hook. Chunky and solid, about half of the image wide and about two thirds of the image tall, empty space above the hook."
+        }
+      ],
+      "style_image": {
+        "source": "take candy-trees/cane-a#0 sha256 e594e41223d8960eed38945563b4a966d09426da807bcfd0a750bd4795b6235c",
+        "usage": "copy this candy cane colour palette, dark outline, flat shading with one shadow tone and its chunky cute look"
+      },
+      "reference_images": [
+        {
+          "source": "take candy-trees/cane-a#0 sha256 e594e41223d8960eed38945563b4a966d09426da807bcfd0a750bd4795b6235c",
+          "usage": "a striped candy cane: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#2 sha256 ecac608ec3796c9a09ebb5397a4c51d7babf074f4f1359166aa75aa177343080",
+          "usage": "a striped candy cane: the same design, redrawn bigger"
+        },
+        {
+          "source": "take candy-trees/cane-a#24 sha256 aef4a533b6f5736d21cc7ffe49116809bfd9729bfe60ab0e8c1b7d9c1de6e5ba",
+          "usage": "a pair of candy canes: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 44,
+        "height": 56
+      },
+      "no_background": true,
+      "seed": 165408,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one candy cane plant, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a thick candy cane with a mint stripe #8fdcc0 standing upright, two crossed striped candy canes, a thick striped candy cane with a little icing on its hook. Chunky and solid, about half of the image wide and about two thirds of the image tall, empty space above the hook. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole."
+    },
+    "failedAt": "2026-11-27T12:44:49.665Z",
+    "error": "PixelLab job failed: code 5000, generation refused as against policy (no images, nothing recorded as a take)"
   }
 }

@@ -127,6 +127,8 @@ const byBase = (a: CanopyTree, b: CanopyTree): number =>
  * Review only (bead bzc.144, ground-review.ts `?treeScale=`): every tree
  * placed as made, then drawn `scale` times larger round its foot (the
  * trunk base and the centre line kept). Scale 1 returns the placement.
+ * Bead bzc.165 drew the trees themselves at 1.5x, so this stays only as a
+ * debug switch (off by default) on top of that art.
  */
 export function reviewTreeScale(
   placement: CanopyPlacement,

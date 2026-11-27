@@ -23,6 +23,10 @@ Studio set `art/sets/trees`, derived files in
 | Frosting (bzc.115) | frosted (4: pink frosting crowns on gingerbread trunks), cotton (3.4: cotton candy), lollipop (2), gumdrop (1: low bushes), cane (1.4, in drifts only: candy canes) | set `candy-trees`: `fluff-a`, `cane-a` (34 of 50 takes, 2 calls) |
 | Volcanic (bzc.125) | charred (4: black trees with ember cracks), ashen (2.2: ash-grey dead trees), cindersnag (1.2: broken trunks with ember tips), emberleaf (0.8: a few red-orange leaves); files in the wasteland folder, drawn only by the lava | set `volcanic-trees`: `charred-a` (19 of 25 takes, 1 call) |
 
+Bead bzc.165 replaced every game file above with `x15-*` takes at about
+1.5x (see Geometry and Recipe); the first takes stay as accepted masters and
+serve as the new recipes' style and reference images.
+
 The same trees stand alone on open ground through the doodad layer
 (`doodads.ts`, kind `tree`), at their native size, as common as their
 species is in the woods (a clumped species at a quarter of its weight).
@@ -48,9 +52,14 @@ conifer mass; colour comes in clumps, not confetti.
 
 ## Geometry
 
-- Generated at native display size on a 48 x 48 canvas and cropped to the
-  opaque box plus 1 px: about 14-43 px wide (0.2-0.55 cell) and 25-44 px
-  tall. Never scaled, never mirrored (the sun is at the bottom left).
+- Size (bead bzc.165, after the user liked the bzc.144 T1.5 preview but
+  not its visible pixels): every family redrawn as real art at about 1.5x,
+  generated at native display size and cropped to the opaque box plus 1 px:
+  about 18-62 px wide (0.25-0.75 cell) and 35-64 px tall, most trees 46-61.
+  The band accepted per species is about 1.25-1.8x its first takes' height,
+  with a 64 px ceiling so no tree rivals the summits (43-84 px) and massifs
+  (45-89 px). Never scaled, never mirrored (the sun is at the bottom left).
+  (The first set, 2026-11-16: 48 x 48 canvas, 14-43 x 25-44 px.)
 - Anchor: the bottom centre of the cropped image is the trunk base.
 - The outline of a wood avoids the cell grid: blocked neighbours (water,
   rock, roads, objects, the map edge) pull it inside the wood, where it
@@ -58,10 +67,14 @@ conifer mass; colour comes in clumps, not confetti.
   bites cut bays near the edge; deep inside the cells the canopy is always
   closed (no clearings), and the under-tint sits 20 px north of the region so
   it never shows south of the last trunks.
-- In a wood (`src/render/map/canopy.ts`) a crown rises at most 40 px above
-  the top edge of the wood's northernmost cell, and at most 14 px into a
-  cell holding an object, so a full-height unit behind a wood stays half
-  visible.
+- In a wood (`src/render/map/canopy.ts`) a crown rises at most 50 px above
+  the top edge of the wood's northernmost cell (40 before bzc.165), and at
+  most 18 px into a cell holding an object (14 before), so a unit behind a
+  wood stays partly visible. bzc.165 also widened the trunk spacing ellipse
+  from 12 x 8 to 13 x 8 px and the edge thinning from 36 to 42 px, so the
+  bigger crowns overlap into one canopy (as in the T1.5 preview, which kept
+  12 x 8) without piling into a blob. Passability is untouched: trees are
+  drawn on the Forest cells and the free ground beside them only.
 
 ## Readability
 
@@ -86,6 +99,30 @@ the image wide and nearly the full image tall". Did not work: wildfire
 "dead trees" gave mostly stumps and bare poles until the subject asked for a
 full bushy crown of short bare branches; free text "pear", "heart" and
 "lollipop" shapes appear in round-crown subjects and are rejected.
+
+### The 1.5x redraw (bead bzc.165)
+
+Recipes `x15-*` in each set: `generate-image-v2` with the family's first
+accepted take as `styleImage` (palette, outline, shading, chunky look) and up
+to four first takes as `references` ("the same design, redrawn bigger"), the
+first subject with "redrawn larger with a little more detail". 56 x 72, 64 x
+64, 52 x 64 and 48 x 60 canvases return 16 candidates, 48 x 48 and 40 x 52
+return 25; one call costs about US$0.082. A mixed subject of four items gives
+four groups of four, one per item, each group the same size.
+
+Size is the hard part: the output either keeps the references' pixel scale
+(about 35-45 px tall whatever the canvas) or fills about 0.9 of the canvas
+height when the items or the size line say "tall" / "Big ... nearly the full
+image tall". Explicit fractions ("about three quarters of the image tall")
+did not work: they came out at the old size or filled the canvas. What
+worked: tall wording on a canvas whose two outcomes both land in the band,
+for example 52 x 64 for the grass conifers (50-58 px). 72 px canvases with
+tall wording gave 64-70 px trees, over the ceiling. A cane recipe
+(`x15-cane-d`) was refused by PixelLab's policy filter (no charge, recorded
+as FAILED).
+
+Left over: the candy cane drift has one new sprite (two crossed canes,
+`x15-cane-a#14`); more canes need another try. Mangroves have two.
 
 ## Acceptance
 

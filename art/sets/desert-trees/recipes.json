@@ -32,456 +32,548 @@
       "seed": 88202,
       "subject": "Subject: one desert cactus, each image a different one of these: a tall saguaro with two raised arms, a chunky saguaro with one arm, a big clump of round prickly pear pads with a few pink fruits, a cluster of three ribbed column cacti of different heights, a fat round barrel cactus with a yellow flower on top. Cactus green #5f8a4a, shadow #3a5a34, light #8fb36a on the left side, pale spines. Chunky and solid, about half of the image wide and most of the image tall.",
       "negative": "pot, flower pot, sand patch, ground, face, eyes, skull"
+    },
+    {
+      "id": "x15-palm-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "OASIS PALMS AT 1.5X (style and designs of palm-a)",
+      "width": 64,
+      "height": 64,
+      "seed": 165301,
+      "styleImage": {
+        "take": "palm-a#1",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "palm-a#0",
+          "usage": "a date palm: the same design, redrawn bigger"
+        },
+        {
+          "take": "palm-a#15",
+          "usage": "a bushy fan palm: the same design, redrawn bigger"
+        },
+        {
+          "take": "palm-a#22",
+          "usage": "a young leaning palm: the same design, redrawn bigger"
+        },
+        {
+          "take": "palm-a#19",
+          "usage": "a double palm: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one desert oasis palm tree, the same designs as the small reference palms redrawn larger with a little more detail (more frond tips, trunk rings), still chunky and simple, each image a different one of these: a date palm with a round crown of arching fronds and a cluster of orange dates, a short squat fan palm with a bushy crown, a young palm with a slightly leaning ringed trunk, a double palm with two crowns from one base. Fronds deep olive green #4f7a3a, shadow #2f5028, light #7fa356 on the left side; a ringed tan trunk #a27a4a with shadow #6e4e2e. About two thirds of the image wide and nearly the full image tall.",
+      "negative": "sand, ground, dune, oasis pool, water, person, camel"
+    },
+    {
+      "id": "x15-cactus-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "DESERT CACTI AT 1.5X (style and designs of cactus-a)",
+      "width": 64,
+      "height": 64,
+      "seed": 165302,
+      "styleImage": {
+        "take": "cactus-a#0",
+        "usage": "copy this cactus's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new cactus larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "cactus-a#2",
+          "usage": "a saguaro: the same design, redrawn bigger"
+        },
+        {
+          "take": "cactus-a#10",
+          "usage": "a prickly pear clump: the same design, redrawn bigger"
+        },
+        {
+          "take": "cactus-a#15",
+          "usage": "a cluster of column cacti: the same design, redrawn bigger"
+        },
+        {
+          "take": "cactus-a#20",
+          "usage": "a barrel cactus: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one desert cactus, the same designs as the small reference cacti redrawn larger with a little more detail (ribs, spines), still chunky and simple, each image a different one of these: a tall saguaro with two raised arms, a big clump of round prickly pear pads with a few pink fruits, a cluster of three ribbed column cacti of different heights, a fat round barrel cactus with a yellow flower on top. Cactus green #5f8a4a, shadow #3a5a34, light #8fb36a on the left side, pale spines. Chunky and solid, about two thirds of the image wide and most of the image tall.",
+      "negative": "pot, flower pot, sand patch, ground, face, eyes, skull"
+    },
+    {
+      "id": "x15-barrel-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "BARREL CACTI AT 1.5X (x15-cactus-a barrels came out about 2x)",
+      "width": 48,
+      "height": 48,
+      "seed": 165303,
+      "styleImage": {
+        "take": "cactus-a#20",
+        "usage": "copy this cactus colour palette, dark outline, flat shading with one shadow tone and its chunky cute look"
+      },
+      "references": [
+        {
+          "take": "cactus-a#20",
+          "usage": "a barrel cactus: the same design, redrawn a little bigger"
+        },
+        {
+          "take": "cactus-a#22",
+          "usage": "a barrel cactus: the same design, redrawn a little bigger"
+        },
+        {
+          "take": "cactus-a#24",
+          "usage": "a barrel cactus: the same design, redrawn a little bigger"
+        }
+      ],
+      "subject": "Subject: one fat round barrel cactus, the reference designs redrawn a little bigger with a little more detail (ribs, spines), each image a different one of these: a fat round barrel cactus with a yellow flower on top, a squat barrel cactus with pink flowers, a pair of barrel cacti, one big and one small, a ribbed barrel cactus with a crown of yellow flowers. Cactus green #5f8a4a, shadow #3a5a34, light #8fb36a on the left side, pale spines. About four fifths of the image wide and about four fifths of the image tall.",
+      "negative": "pot, flower pot, sand patch, ground, face, eyes, skull"
     }
   ],
   "outputs": [
     {
       "path": "public/assets/terrain/trees/sand/palm-1.png",
-      "from": "palm-a#0",
-      "width": 32,
-      "height": 40,
+      "from": "x15-palm-a#0",
+      "width": 46,
+      "height": 58,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
-          "y": 4,
-          "width": 32,
-          "height": 40
+          "x": 9,
+          "y": 6,
+          "width": 46,
+          "height": 58
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-2.png",
-      "from": "palm-a#1",
-      "width": 33,
-      "height": 41,
+      "from": "x15-palm-a#1",
+      "width": 46,
+      "height": 61,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
+          "x": 9,
           "y": 3,
-          "width": 33,
-          "height": 41
+          "width": 46,
+          "height": 61
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-3.png",
-      "from": "palm-a#2",
-      "width": 32,
-      "height": 41,
+      "from": "x15-palm-a#2",
+      "width": 46,
+      "height": 58,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
-          "y": 3,
-          "width": 32,
-          "height": 41
+          "x": 9,
+          "y": 6,
+          "width": 46,
+          "height": 58
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-4.png",
-      "from": "palm-a#3",
-      "width": 31,
-      "height": 40,
+      "from": "x15-palm-a#3",
+      "width": 46,
+      "height": 61,
       "steps": [
         {
           "op": "crop",
           "x": 9,
-          "y": 4,
-          "width": 31,
-          "height": 40
+          "y": 3,
+          "width": 46,
+          "height": 61
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-5.png",
-      "from": "palm-a#4",
-      "width": 33,
-      "height": 41,
+      "from": "x15-palm-a#4",
+      "width": 50,
+      "height": 56,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
-          "y": 3,
-          "width": 33,
-          "height": 41
+          "x": 7,
+          "y": 7,
+          "width": 50,
+          "height": 56
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-6.png",
-      "from": "palm-a#10",
-      "width": 35,
-      "height": 38,
+      "from": "x15-palm-a#5",
+      "width": 52,
+      "height": 54,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 5,
-          "width": 35,
-          "height": 38
+          "x": 6,
+          "y": 9,
+          "width": 52,
+          "height": 54
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-7.png",
-      "from": "palm-a#11",
-      "width": 28,
-      "height": 37,
+      "from": "x15-palm-a#6",
+      "width": 52,
+      "height": 55,
       "steps": [
         {
           "op": "crop",
-          "x": 12,
-          "y": 6,
-          "width": 28,
-          "height": 37
+          "x": 6,
+          "y": 8,
+          "width": 52,
+          "height": 55
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-8.png",
-      "from": "palm-a#13",
-      "width": 24,
-      "height": 35,
+      "from": "x15-palm-a#7",
+      "width": 52,
+      "height": 57,
       "steps": [
         {
           "op": "crop",
-          "x": 12,
-          "y": 8,
-          "width": 24,
-          "height": 35
+          "x": 6,
+          "y": 6,
+          "width": 52,
+          "height": 57
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-9.png",
-      "from": "palm-a#15",
-      "width": 41,
-      "height": 41,
+      "from": "x15-palm-a#8",
+      "width": 36,
+      "height": 59,
       "steps": [
         {
           "op": "crop",
-          "x": 4,
-          "y": 3,
-          "width": 41,
-          "height": 41
+          "x": 17,
+          "y": 4,
+          "width": 36,
+          "height": 59
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-10.png",
-      "from": "palm-a#16",
-      "width": 39,
-      "height": 41,
+      "from": "x15-palm-a#9",
+      "width": 44,
+      "height": 55,
       "steps": [
         {
           "op": "crop",
-          "x": 4,
-          "y": 3,
-          "width": 39,
-          "height": 41
+          "x": 14,
+          "y": 8,
+          "width": 44,
+          "height": 55
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-11.png",
-      "from": "palm-a#18",
-      "width": 39,
-      "height": 41,
+      "from": "x15-palm-a#10",
+      "width": 42,
+      "height": 56,
       "steps": [
         {
           "op": "crop",
-          "x": 5,
-          "y": 3,
-          "width": 39,
-          "height": 41
+          "x": 7,
+          "y": 7,
+          "width": 42,
+          "height": 56
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-12.png",
-      "from": "palm-a#19",
-      "width": 43,
-      "height": 39,
+      "from": "x15-palm-a#11",
+      "width": 37,
+      "height": 53,
       "steps": [
         {
           "op": "crop",
-          "x": 2,
-          "y": 5,
-          "width": 43,
-          "height": 39
+          "x": 9,
+          "y": 10,
+          "width": 37,
+          "height": 53
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-13.png",
-      "from": "palm-a#21",
-      "width": 42,
-      "height": 35,
+      "from": "x15-palm-a#12",
+      "width": 60,
+      "height": 61,
       "steps": [
         {
           "op": "crop",
-          "x": 3,
-          "y": 6,
-          "width": 42,
-          "height": 35
+          "x": 2,
+          "y": 2,
+          "width": 60,
+          "height": 61
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/palm-14.png",
-      "from": "palm-a#22",
-      "width": 29,
-      "height": 39,
+      "from": "x15-palm-a#14",
+      "width": 60,
+      "height": 61,
       "steps": [
         {
           "op": "crop",
-          "x": 9,
-          "y": 4,
-          "width": 29,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/sand/palm-15.png",
-      "from": "palm-a#24",
-      "width": 33,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 4,
-          "width": 33,
-          "height": 39
+          "x": 2,
+          "y": 2,
+          "width": 60,
+          "height": 61
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/saguaro-1.png",
-      "from": "cactus-a#0",
-      "width": 28,
-      "height": 35,
+      "from": "x15-cactus-a#0",
+      "width": 46,
+      "height": 59,
       "steps": [
         {
           "op": "crop",
-          "x": 10,
-          "y": 7,
-          "width": 28,
-          "height": 35
+          "x": 9,
+          "y": 4,
+          "width": 46,
+          "height": 59
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/saguaro-2.png",
-      "from": "cactus-a#2",
-      "width": 29,
-      "height": 36,
+      "from": "x15-cactus-a#1",
+      "width": 44,
+      "height": 58,
       "steps": [
         {
           "op": "crop",
           "x": 10,
-          "y": 6,
-          "width": 29,
-          "height": 36
+          "y": 5,
+          "width": 44,
+          "height": 58
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/saguaro-3.png",
-      "from": "cactus-a#4",
-      "width": 27,
-      "height": 37,
+      "from": "x15-cactus-a#2",
+      "width": 46,
+      "height": 58,
       "steps": [
         {
           "op": "crop",
-          "x": 11,
+          "x": 9,
           "y": 5,
-          "width": 27,
-          "height": 37
+          "width": 46,
+          "height": 58
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/saguaro-4.png",
-      "from": "cactus-a#5",
-      "width": 31,
-      "height": 32,
+      "from": "x15-cactus-a#3",
+      "width": 48,
+      "height": 58,
       "steps": [
         {
           "op": "crop",
-          "x": 9,
-          "y": 10,
-          "width": 31,
-          "height": 32
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/sand/saguaro-5.png",
-      "from": "cactus-a#7",
-      "width": 31,
-      "height": 31,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 11,
-          "width": 31,
-          "height": 31
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/sand/saguaro-6.png",
-      "from": "cactus-a#9",
-      "width": 30,
-      "height": 32,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 10,
-          "width": 30,
-          "height": 32
+          "x": 8,
+          "y": 5,
+          "width": 48,
+          "height": 58
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/pear-1.png",
-      "from": "cactus-a#10",
-      "width": 38,
-      "height": 33,
+      "from": "x15-cactus-a#4",
+      "width": 56,
+      "height": 56,
       "steps": [
         {
           "op": "crop",
-          "x": 5,
-          "y": 9,
-          "width": 38,
-          "height": 33
+          "x": 4,
+          "y": 6,
+          "width": 56,
+          "height": 56
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/pear-2.png",
-      "from": "cactus-a#12",
-      "width": 39,
-      "height": 36,
+      "from": "x15-cactus-a#5",
+      "width": 58,
+      "height": 52,
       "steps": [
         {
           "op": "crop",
-          "x": 5,
-          "y": 6,
-          "width": 39,
-          "height": 36
+          "x": 4,
+          "y": 10,
+          "width": 58,
+          "height": 52
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/pear-3.png",
-      "from": "cactus-a#13",
+      "from": "x15-cactus-a#6",
+      "width": 56,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 56,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/sand/pear-4.png",
+      "from": "x15-cactus-a#7",
+      "width": 56,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 11,
+          "width": 56,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/sand/column-1.png",
+      "from": "x15-cactus-a#8",
+      "width": 51,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 4,
+          "width": 51,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/sand/column-2.png",
+      "from": "x15-cactus-a#9",
+      "width": 44,
+      "height": 54,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 8,
+          "width": 44,
+          "height": 54
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/sand/column-3.png",
+      "from": "x15-cactus-a#10",
+      "width": 46,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 6,
+          "width": 46,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/sand/column-4.png",
+      "from": "x15-cactus-a#11",
+      "width": 45,
+      "height": 54,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 8,
+          "width": 45,
+          "height": 54
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/sand/barrel-1.png",
+      "from": "x15-barrel-a#3",
       "width": 37,
       "height": 36,
       "steps": [
         {
           "op": "crop",
           "x": 6,
-          "y": 6,
+          "y": 8,
           "width": 37,
           "height": 36
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/sand/column-1.png",
-      "from": "cactus-a#15",
-      "width": 28,
-      "height": 33,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 8,
-          "width": 28,
-          "height": 33
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/sand/column-2.png",
-      "from": "cactus-a#17",
-      "width": 29,
-      "height": 35,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 6,
-          "width": 29,
-          "height": 35
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/sand/column-3.png",
-      "from": "cactus-a#19",
-      "width": 31,
-      "height": 33,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 8,
-          "width": 31,
-          "height": 33
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/sand/barrel-1.png",
-      "from": "cactus-a#20",
-      "width": 26,
-      "height": 25,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 12,
-          "width": 26,
-          "height": 25
-        }
-      ]
-    },
-    {
       "path": "public/assets/terrain/trees/sand/barrel-2.png",
-      "from": "cactus-a#22",
-      "width": 26,
-      "height": 26,
+      "from": "x15-barrel-a#7",
+      "width": 39,
+      "height": 38,
       "steps": [
         {
           "op": "crop",
-          "x": 11,
-          "y": 11,
-          "width": 26,
-          "height": 26
+          "x": 6,
+          "y": 6,
+          "width": 39,
+          "height": 38
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/sand/barrel-3.png",
-      "from": "cactus-a#24",
-      "width": 26,
-      "height": 26,
+      "from": "x15-barrel-a#10",
+      "width": 38,
+      "height": 38,
       "steps": [
         {
           "op": "crop",
-          "x": 11,
-          "y": 11,
-          "width": 26,
-          "height": 26
+          "x": 5,
+          "y": 6,
+          "width": 38,
+          "height": 38
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/sand/barrel-4.png",
+      "from": "x15-barrel-a#11",
+      "width": 39,
+      "height": 35,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 8,
+          "width": 39,
+          "height": 35
         }
       ]
     }

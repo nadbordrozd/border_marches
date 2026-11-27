@@ -23,291 +23,494 @@
       "seed": 125201,
       "subject": "Subject: one small dead tree of a volcanic plain, chunky and cute, each image a different one of these: a charred dead tree with a thick trunk and a few bare twisted branches of burnt black wood #2e2628 (light #5a4a48 on the left side), a few thin glowing orange ember cracks #f07a2a in the bark; a burnt tree snag, a broken black trunk with two short stubby branches and orange ember tips; a dead tree with ash-grey bark #6a6266 (shadow #3e383c) and a crooked bare crown; a dead black tree with a few red-orange leaves #e8502a still clinging to it. A short trunk at the bottom. About half of the image wide and nearly the full image tall.",
       "negative": "face, eyes, person, ground, grass, green leaves, flames, smoke, fire"
+    },
+    {
+      "id": "x15-charred-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "CHARRED AND ASHEN TREES AT 1.5X (style and designs of charred-a)",
+      "width": 56,
+      "height": 72,
+      "seed": 165601,
+      "styleImage": {
+        "take": "charred-a#0",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "charred-a#5",
+          "usage": "a charred dead tree with ember cracks: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#10",
+          "usage": "a charred dead tree: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#2",
+          "usage": "an ash-grey dead tree: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#12",
+          "usage": "an ash-grey dead tree: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one tall dead tree of a volcanic plain, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a charred dead tree with a thick trunk and a few bare twisted branches of burnt black wood #2e2628 (light #5a4a48 on the left side), a few thin glowing orange ember cracks #f07a2a in the bark; a charred dead tree with a forked trunk and thick crooked black branches with a few ember cracks; a dead tree with ash-grey bark #6a6266 (shadow #3e383c) and a crooked bare crown; a dead ash-grey tree with a thick trunk and a round tangle of stubby branches. A short trunk at the bottom. About half of the image wide and nearly the full image tall.",
+      "negative": "face, eyes, person, ground, grass, green leaves, flames, smoke, fire"
+    },
+    {
+      "id": "x15-ember-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "CINDER SNAGS AND EMBER-LEAVED TREES AT 1.5X (style and designs of charred-a)",
+      "width": 56,
+      "height": 72,
+      "seed": 165602,
+      "styleImage": {
+        "take": "charred-a#4",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "charred-a#9",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#14",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#1",
+          "usage": "a broken burnt snag with ember tips: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#16",
+          "usage": "a broken burnt snag with ember tips: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one dead tree of a volcanic plain, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail, each image a different one of these: a dead black tree with a few red-orange leaves #e8502a still clinging to its branches; a dead black tree with a crooked crown and small clumps of red-orange leaves #e8502a; a burnt tree snag, a broken black trunk #2e2628 with two short stubby branches and orange ember tips #f07a2a, about two thirds as tall as the image; a short broken black stump-snag with one stubby branch and glowing ember cracks, about two thirds as tall as the image. A short trunk at the bottom. About half of the image wide.",
+      "negative": "face, eyes, person, ground, grass, green leaves, flames, smoke, fire"
+    },
+    {
+      "id": "x15-ember-b",
+      "bead": "border_marches-bzc.165",
+      "concept": "EMBER-LEAVED TREES AT 1.5X with an explicit height (x15-ember-a came out 64-68 px)",
+      "width": 56,
+      "height": 72,
+      "seed": 165603,
+      "styleImage": {
+        "take": "charred-a#4",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "charred-a#9",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#14",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#4",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#19",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one dead tree of a volcanic plain, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a dead black tree #2e2628 with a few red-orange leaves #e8502a still clinging to its branches; a dead black tree with a crooked crown and small clumps of red-orange leaves; a dead black tree with a round crown of twisted branches and a few red-orange leaves; a dead black tree with a forked trunk and red-orange leaf clumps. Light #5a4a48 on the left side. A short trunk at the bottom. About two thirds of the image wide and about seven tenths of the image tall, empty space above the crown.",
+      "negative": "face, eyes, person, ground, grass, green leaves, flames, smoke, fire"
+    },
+    {
+      "id": "x15-ember-c",
+      "bead": "border_marches-bzc.165",
+      "concept": "EMBER-LEAVED TREES AT 1.5X: tall phrasing on a 60 px tall canvas",
+      "width": 52,
+      "height": 60,
+      "seed": 165604,
+      "styleImage": {
+        "take": "charred-a#4",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "charred-a#9",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#14",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#4",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "take": "charred-a#19",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one tall dead tree of a volcanic plain, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a dead black tree #2e2628 with a few red-orange leaves #e8502a still clinging to its branches; a dead black tree with a crooked crown and small clumps of red-orange leaves; a dead black tree with a round crown of twisted branches and a few red-orange leaves; a dead black tree with a forked trunk and red-orange leaf clumps. Light #5a4a48 on the left side. A short trunk at the bottom. About two thirds of the image wide and nearly the full image tall.",
+      "negative": "face, eyes, person, ground, grass, green leaves, flames, smoke, fire"
     }
   ],
   "outputs": [
     {
       "path": "public/assets/terrain/trees/wasteland/charred-1.png",
-      "from": "charred-a#0",
-      "width": 31,
-      "height": 38,
+      "from": "x15-charred-a#0",
+      "width": 40,
+      "height": 55,
       "steps": [
         {
           "op": "crop",
-          "x": 10,
-          "y": 5,
-          "width": 31,
-          "height": 38
+          "x": 11,
+          "y": 10,
+          "width": 40,
+          "height": 55
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/charred-2.png",
-      "from": "charred-a#5",
-      "width": 33,
-      "height": 34,
+      "from": "x15-charred-a#1",
+      "width": 46,
+      "height": 53,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
-          "y": 8,
-          "width": 33,
-          "height": 34
+          "x": 7,
+          "y": 12,
+          "width": 46,
+          "height": 53
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/charred-3.png",
-      "from": "charred-a#10",
-      "width": 30,
-      "height": 37,
+      "from": "x15-charred-a#4",
+      "width": 42,
+      "height": 50,
       "steps": [
         {
           "op": "crop",
-          "x": 10,
-          "y": 5,
-          "width": 30,
-          "height": 37
+          "x": 9,
+          "y": 10,
+          "width": 42,
+          "height": 50
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/charred-4.png",
-      "from": "charred-a#15",
-      "width": 32,
-      "height": 37,
+      "from": "x15-charred-a#5",
+      "width": 42,
+      "height": 50,
       "steps": [
         {
           "op": "crop",
-          "x": 9,
-          "y": 5,
-          "width": 32,
-          "height": 37
+          "x": 10,
+          "y": 10,
+          "width": 42,
+          "height": 50
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/charred-5.png",
-      "from": "charred-a#20",
-      "width": 30,
-      "height": 39,
+      "from": "x15-charred-a#8",
+      "width": 41,
+      "height": 55,
       "steps": [
         {
           "op": "crop",
-          "x": 11,
-          "y": 4,
-          "width": 30,
-          "height": 39
+          "x": 10,
+          "y": 1,
+          "width": 41,
+          "height": 55
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/cindersnag-1.png",
-      "from": "charred-a#1",
-      "width": 25,
-      "height": 28,
+      "path": "public/assets/terrain/trees/wasteland/charred-6.png",
+      "from": "x15-charred-a#12",
+      "width": 40,
+      "height": 51,
       "steps": [
         {
           "op": "crop",
-          "x": 13,
-          "y": 13,
-          "width": 25,
-          "height": 28
+          "x": 10,
+          "y": 5,
+          "width": 40,
+          "height": 51
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/cindersnag-2.png",
-      "from": "charred-a#6",
-      "width": 25,
-      "height": 28,
+      "path": "public/assets/terrain/trees/wasteland/charred-7.png",
+      "from": "x15-charred-a#13",
+      "width": 38,
+      "height": 46,
       "steps": [
         {
           "op": "crop",
-          "x": 13,
-          "y": 13,
-          "width": 25,
-          "height": 28
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/cindersnag-3.png",
-      "from": "charred-a#11",
-      "width": 21,
-      "height": 28,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 13,
-          "y": 13,
-          "width": 21,
-          "height": 28
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/cindersnag-4.png",
-      "from": "charred-a#16",
-      "width": 23,
-      "height": 31,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 13,
+          "x": 12,
           "y": 10,
-          "width": 23,
-          "height": 31
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/cindersnag-5.png",
-      "from": "charred-a#21",
-      "width": 23,
-      "height": 30,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 13,
-          "y": 11,
-          "width": 23,
-          "height": 30
+          "width": 38,
+          "height": 46
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/ashen-1.png",
-      "from": "charred-a#2",
-      "width": 29,
-      "height": 35,
+      "from": "x15-charred-a#2",
+      "width": 38,
+      "height": 55,
       "steps": [
         {
           "op": "crop",
           "x": 10,
-          "y": 7,
-          "width": 29,
-          "height": 35
+          "y": 10,
+          "width": 38,
+          "height": 55
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/ashen-2.png",
-      "from": "charred-a#3",
-      "width": 28,
-      "height": 34,
+      "from": "x15-charred-a#3",
+      "width": 38,
+      "height": 49,
       "steps": [
         {
           "op": "crop",
-          "x": 11,
-          "y": 7,
-          "width": 28,
-          "height": 34
+          "x": 10,
+          "y": 16,
+          "width": 38,
+          "height": 49
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/ashen-3.png",
-      "from": "charred-a#12",
-      "width": 28,
-      "height": 35,
+      "from": "x15-charred-a#11",
+      "width": 31,
+      "height": 48,
       "steps": [
         {
           "op": "crop",
-          "x": 11,
-          "y": 7,
-          "width": 28,
-          "height": 35
+          "x": 13,
+          "y": 8,
+          "width": 31,
+          "height": 48
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/ashen-4.png",
-      "from": "charred-a#13",
-      "width": 29,
-      "height": 35,
+      "from": "x15-charred-a#14",
+      "width": 45,
+      "height": 47,
       "steps": [
         {
           "op": "crop",
-          "x": 10,
-          "y": 6,
-          "width": 29,
-          "height": 35
+          "x": 7,
+          "y": 9,
+          "width": 45,
+          "height": 47
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/ashen-5.png",
-      "from": "charred-a#22",
-      "width": 29,
-      "height": 36,
+      "from": "x15-charred-a#15",
+      "width": 32,
+      "height": 54,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 2,
+          "width": 32,
+          "height": 54
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/cindersnag-1.png",
+      "from": "x15-ember-a#12",
+      "width": 37,
+      "height": 43,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 26,
+          "width": 37,
+          "height": 43
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/cindersnag-2.png",
+      "from": "x15-ember-a#13",
+      "width": 37,
+      "height": 48,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 21,
+          "width": 37,
+          "height": 48
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/cindersnag-3.png",
+      "from": "x15-ember-a#14",
+      "width": 37,
+      "height": 43,
       "steps": [
         {
           "op": "crop",
           "x": 11,
-          "y": 6,
-          "width": 29,
-          "height": 36
+          "y": 26,
+          "width": 37,
+          "height": 43
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/cindersnag-4.png",
+      "from": "x15-ember-a#15",
+      "width": 38,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 23,
+          "width": 38,
+          "height": 46
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/emberleaf-1.png",
-      "from": "charred-a#4",
-      "width": 29,
-      "height": 35,
+      "from": "x15-ember-c#8",
+      "width": 41,
+      "height": 44,
       "steps": [
         {
           "op": "crop",
-          "x": 11,
-          "y": 7,
-          "width": 29,
-          "height": 35
+          "x": 5,
+          "y": 10,
+          "width": 41,
+          "height": 44
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/emberleaf-2.png",
-      "from": "charred-a#9",
-      "width": 34,
-      "height": 32,
+      "from": "x15-ember-c#9",
+      "width": 42,
+      "height": 44,
       "steps": [
         {
           "op": "crop",
-          "x": 6,
-          "y": 9,
-          "width": 34,
-          "height": 32
+          "x": 5,
+          "y": 10,
+          "width": 42,
+          "height": 44
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/emberleaf-3.png",
-      "from": "charred-a#14",
-      "width": 30,
-      "height": 35,
+      "from": "x15-ember-c#10",
+      "width": 41,
+      "height": 44,
       "steps": [
         {
           "op": "crop",
-          "x": 9,
-          "y": 7,
-          "width": 30,
-          "height": 35
+          "x": 6,
+          "y": 10,
+          "width": 41,
+          "height": 44
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/wasteland/emberleaf-4.png",
-      "from": "charred-a#19",
-      "width": 31,
-      "height": 33,
+      "from": "x15-ember-c#11",
+      "width": 42,
+      "height": 44,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 10,
+          "width": 42,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/emberleaf-5.png",
+      "from": "x15-ember-c#12",
+      "width": 35,
+      "height": 49,
       "steps": [
         {
           "op": "crop",
           "x": 9,
-          "y": 8,
-          "width": 31,
-          "height": 33
+          "y": 7,
+          "width": 35,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/emberleaf-6.png",
+      "from": "x15-ember-c#13",
+      "width": 32,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 7,
+          "width": 32,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/emberleaf-7.png",
+      "from": "x15-ember-c#14",
+      "width": 34,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 7,
+          "width": 34,
+          "height": 49
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/emberleaf-8.png",
+      "from": "x15-ember-c#15",
+      "width": 33,
+      "height": 49,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 7,
+          "width": 33,
+          "height": 49
         }
       ]
     }

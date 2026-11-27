@@ -248,5 +248,405 @@
     "verdict": "REJECTED",
     "notes": "a near copy of the accepted mossy bushes",
     "at": "2026-11-27T09:17:45.487Z"
+  },
+  "x15-swamp-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "two-tiered bald cypress hung with thick moss strands at 1.6x (62 px)",
+    "at": "2026-11-27T12:34:25.153Z"
+  },
+  "x15-swamp-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "two-tiered bald cypress hung with thick moss strands at 1.6x (62 px)",
+    "at": "2026-11-27T12:34:25.384Z"
+  },
+  "x15-swamp-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "two-tiered bald cypress hung with thick moss strands at 1.6x (62 px)",
+    "at": "2026-11-27T12:34:25.655Z"
+  },
+  "x15-swamp-a#7": {
+    "verdict": "REJECTED",
+    "notes": "side clumps on the trunk read as mushrooms",
+    "at": "2026-11-27T12:34:25.872Z"
+  },
+  "x15-swamp-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good cypress but 39 px tall (1.0x): not bigger than the original",
+    "at": "2026-11-27T12:34:26.070Z"
+  },
+  "x15-swamp-a#1": {
+    "verdict": "REJECTED",
+    "notes": "good cypress but 39 px tall (1.0x): not bigger than the original",
+    "at": "2026-11-27T12:34:26.333Z"
+  },
+  "x15-swamp-a#2": {
+    "verdict": "REJECTED",
+    "notes": "good cypress but 39 px tall (1.0x): not bigger than the original",
+    "at": "2026-11-27T12:34:26.500Z"
+  },
+  "x15-swamp-a#3": {
+    "verdict": "REJECTED",
+    "notes": "good cypress but 39 px tall (1.0x): not bigger than the original",
+    "at": "2026-11-27T12:34:26.725Z"
+  },
+  "x15-swamp-a#8": {
+    "verdict": "REJECTED",
+    "notes": "good mossy oak but 41-42 px tall (1.15x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:26.943Z"
+  },
+  "x15-swamp-a#9": {
+    "verdict": "REJECTED",
+    "notes": "good mossy oak but 41-42 px tall (1.15x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:27.093Z"
+  },
+  "x15-swamp-a#10": {
+    "verdict": "REJECTED",
+    "notes": "good mossy oak but 41-42 px tall (1.15x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:27.319Z"
+  },
+  "x15-swamp-a#11": {
+    "verdict": "REJECTED",
+    "notes": "good mossy oak but 41-42 px tall (1.15x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:27.556Z"
+  },
+  "x15-swamp-a#12": {
+    "verdict": "REJECTED",
+    "notes": "wide mossy oak only 39-40 px tall (1.1x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:28.009Z"
+  },
+  "x15-swamp-a#13": {
+    "verdict": "REJECTED",
+    "notes": "wide mossy oak only 39-40 px tall (1.1x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:28.351Z"
+  },
+  "x15-swamp-a#14": {
+    "verdict": "REJECTED",
+    "notes": "wide mossy oak only 39-40 px tall (1.1x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:29.082Z"
+  },
+  "x15-swamp-a#15": {
+    "verdict": "REJECTED",
+    "notes": "wide mossy oak only 39-40 px tall (1.1x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:29.969Z"
+  },
+  "x15-swamp-b#5": {
+    "verdict": "ACCEPTED",
+    "notes": "mangrove with a round crown on arched stilt roots at 1.25x (53-54 px)",
+    "at": "2026-11-27T12:36:02.579Z"
+  },
+  "x15-swamp-b#6": {
+    "verdict": "ACCEPTED",
+    "notes": "mangrove with a round crown on arched stilt roots at 1.25x (53-54 px)",
+    "at": "2026-11-27T12:36:02.791Z"
+  },
+  "x15-swamp-b#4": {
+    "verdict": "REJECTED",
+    "notes": "egg-shaped crown on roots reads as a balloon",
+    "at": "2026-11-27T12:36:03.012Z"
+  },
+  "x15-swamp-b#7": {
+    "verdict": "REJECTED",
+    "notes": "egg-shaped crown on roots reads as a balloon",
+    "at": "2026-11-27T12:36:03.198Z"
+  },
+  "x15-swamp-b#0": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 42-44 px tall (1.0x): not bigger than the original",
+    "at": "2026-11-27T12:36:03.451Z"
+  },
+  "x15-swamp-b#1": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 42-44 px tall (1.0x): not bigger than the original",
+    "at": "2026-11-27T12:36:03.712Z"
+  },
+  "x15-swamp-b#2": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 42-44 px tall (1.0x): not bigger than the original",
+    "at": "2026-11-27T12:36:03.890Z"
+  },
+  "x15-swamp-b#3": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 42-44 px tall (1.0x): not bigger than the original",
+    "at": "2026-11-27T12:36:04.015Z"
+  },
+  "x15-swamp-b#11": {
+    "verdict": "ACCEPTED",
+    "notes": "mossy swamp bush in two lumpy tiers hung with moss at 1.3x",
+    "at": "2026-11-27T12:36:04.164Z"
+  },
+  "x15-swamp-b#8": {
+    "verdict": "REJECTED",
+    "notes": "good mossy bush but 38-42 px tall (1.1x): too small",
+    "at": "2026-11-27T12:36:04.295Z"
+  },
+  "x15-swamp-b#9": {
+    "verdict": "REJECTED",
+    "notes": "good mossy bush but 38-42 px tall (1.1x): too small",
+    "at": "2026-11-27T12:36:04.448Z"
+  },
+  "x15-swamp-b#10": {
+    "verdict": "REJECTED",
+    "notes": "good mossy bush but 38-42 px tall (1.1x): too small",
+    "at": "2026-11-27T12:36:04.580Z"
+  },
+  "x15-swamp-b#13": {
+    "verdict": "ACCEPTED",
+    "notes": "pale weeping willow of rounded drooping lobes at 1.3x",
+    "at": "2026-11-27T12:36:04.766Z"
+  },
+  "x15-swamp-b#15": {
+    "verdict": "ACCEPTED",
+    "notes": "pale weeping willow of rounded drooping lobes at 1.3x",
+    "at": "2026-11-27T12:36:04.899Z"
+  },
+  "x15-swamp-b#12": {
+    "verdict": "REJECTED",
+    "notes": "weeping willow 41-42 px (1.2x): too small; 14 reads as a haystack",
+    "at": "2026-11-27T12:36:05.062Z"
+  },
+  "x15-swamp-b#14": {
+    "verdict": "REJECTED",
+    "notes": "weeping willow 41-42 px (1.2x): too small; 14 reads as a haystack",
+    "at": "2026-11-27T12:36:05.186Z"
+  },
+  "x15-swamp-c#0": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.065Z"
+  },
+  "x15-swamp-c#1": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.113Z"
+  },
+  "x15-swamp-c#2": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.163Z"
+  },
+  "x15-swamp-c#3": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.214Z"
+  },
+  "x15-swamp-c#4": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.263Z"
+  },
+  "x15-swamp-c#5": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.313Z"
+  },
+  "x15-swamp-c#6": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.361Z"
+  },
+  "x15-swamp-c#7": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.410Z"
+  },
+  "x15-swamp-c#8": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.459Z"
+  },
+  "x15-swamp-c#9": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.510Z"
+  },
+  "x15-swamp-c#10": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.559Z"
+  },
+  "x15-swamp-c#11": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.608Z"
+  },
+  "x15-swamp-c#12": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.658Z"
+  },
+  "x15-swamp-c#13": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.708Z"
+  },
+  "x15-swamp-c#14": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.759Z"
+  },
+  "x15-swamp-c#15": {
+    "verdict": "REJECTED",
+    "notes": "an explicit height came out 39-44 px (1.05-1.15x): too small",
+    "at": "2026-11-27T12:40:36.808Z"
+  },
+  "x15-swamp-d#8": {
+    "verdict": "ACCEPTED",
+    "notes": "round mossy swamp bush hung with moss at 1.55x (57-59 px)",
+    "at": "2026-11-27T12:41:10.638Z"
+  },
+  "x15-swamp-d#9": {
+    "verdict": "ACCEPTED",
+    "notes": "round mossy swamp bush hung with moss at 1.55x (57-59 px)",
+    "at": "2026-11-27T12:41:10.685Z"
+  },
+  "x15-swamp-d#10": {
+    "verdict": "ACCEPTED",
+    "notes": "round mossy swamp bush hung with moss at 1.55x (57-59 px)",
+    "at": "2026-11-27T12:41:10.734Z"
+  },
+  "x15-swamp-d#12": {
+    "verdict": "ACCEPTED",
+    "notes": "round mossy swamp bush hung with moss at 1.55x (57-59 px)",
+    "at": "2026-11-27T12:41:10.782Z"
+  },
+  "x15-swamp-d#14": {
+    "verdict": "ACCEPTED",
+    "notes": "round mossy swamp bush hung with moss at 1.55x (57-59 px)",
+    "at": "2026-11-27T12:41:10.831Z"
+  },
+  "x15-swamp-d#11": {
+    "verdict": "REJECTED",
+    "notes": "bare stick branches poke out like antlers",
+    "at": "2026-11-27T12:41:10.879Z"
+  },
+  "x15-swamp-d#13": {
+    "verdict": "REJECTED",
+    "notes": "bare stick branches poke out like antlers",
+    "at": "2026-11-27T12:41:10.926Z"
+  },
+  "x15-swamp-d#15": {
+    "verdict": "REJECTED",
+    "notes": "bare stick branches poke out like antlers",
+    "at": "2026-11-27T12:41:10.973Z"
+  },
+  "x15-swamp-d#0": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 69-71 px tall: above the 64 px ceiling, would rival the peaks",
+    "at": "2026-11-27T12:41:11.022Z"
+  },
+  "x15-swamp-d#1": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 69-71 px tall: above the 64 px ceiling, would rival the peaks",
+    "at": "2026-11-27T12:41:11.072Z"
+  },
+  "x15-swamp-d#2": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 69-71 px tall: above the 64 px ceiling, would rival the peaks",
+    "at": "2026-11-27T12:41:11.120Z"
+  },
+  "x15-swamp-d#3": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 69-71 px tall: above the 64 px ceiling, would rival the peaks",
+    "at": "2026-11-27T12:41:11.168Z"
+  },
+  "x15-swamp-d#4": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 69-71 px tall: above the 64 px ceiling, would rival the peaks",
+    "at": "2026-11-27T12:41:11.218Z"
+  },
+  "x15-swamp-d#5": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 69-71 px tall: above the 64 px ceiling, would rival the peaks",
+    "at": "2026-11-27T12:41:11.268Z"
+  },
+  "x15-swamp-d#6": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 69-71 px tall: above the 64 px ceiling, would rival the peaks",
+    "at": "2026-11-27T12:41:11.318Z"
+  },
+  "x15-swamp-d#7": {
+    "verdict": "REJECTED",
+    "notes": "good mangrove but 69-71 px tall: above the 64 px ceiling, would rival the peaks",
+    "at": "2026-11-27T12:41:11.367Z"
+  },
+  "x15-swamp-e#0": {
+    "verdict": "ACCEPTED",
+    "notes": "gnarled swamp oak with a round dark olive crown draped with moss at 1.3x (47 px)",
+    "at": "2026-11-27T12:44:11.546Z"
+  },
+  "x15-swamp-e#1": {
+    "verdict": "ACCEPTED",
+    "notes": "gnarled swamp oak with a round dark olive crown draped with moss at 1.3x (47 px)",
+    "at": "2026-11-27T12:44:11.604Z"
+  },
+  "x15-swamp-e#2": {
+    "verdict": "ACCEPTED",
+    "notes": "gnarled swamp oak with a round dark olive crown draped with moss at 1.3x (47 px)",
+    "at": "2026-11-27T12:44:11.667Z"
+  },
+  "x15-swamp-e#3": {
+    "verdict": "ACCEPTED",
+    "notes": "gnarled swamp oak with a round dark olive crown draped with moss at 1.3x (47 px)",
+    "at": "2026-11-27T12:44:11.730Z"
+  },
+  "x15-swamp-e#4": {
+    "verdict": "ACCEPTED",
+    "notes": "gnarled swamp oak with a lumpy crown and thick moss clumps at 1.45x",
+    "at": "2026-11-27T12:44:11.794Z"
+  },
+  "x15-swamp-e#5": {
+    "verdict": "ACCEPTED",
+    "notes": "gnarled swamp oak with a lumpy crown and thick moss clumps at 1.45x",
+    "at": "2026-11-27T12:44:11.858Z"
+  },
+  "x15-swamp-e#6": {
+    "verdict": "ACCEPTED",
+    "notes": "gnarled swamp oak with a lumpy crown and thick moss clumps at 1.45x",
+    "at": "2026-11-27T12:44:11.919Z"
+  },
+  "x15-swamp-e#7": {
+    "verdict": "ACCEPTED",
+    "notes": "gnarled swamp oak with a lumpy crown and thick moss clumps at 1.45x",
+    "at": "2026-11-27T12:44:11.982Z"
+  },
+  "x15-swamp-e#8": {
+    "verdict": "ACCEPTED",
+    "notes": "two-tiered bald cypress hung with moss at 1.55x",
+    "at": "2026-11-27T12:44:12.046Z"
+  },
+  "x15-swamp-e#9": {
+    "verdict": "ACCEPTED",
+    "notes": "two-tiered bald cypress hung with moss at 1.55x",
+    "at": "2026-11-27T12:44:12.107Z"
+  },
+  "x15-swamp-e#11": {
+    "verdict": "ACCEPTED",
+    "notes": "two-tiered bald cypress hung with moss at 1.55x",
+    "at": "2026-11-27T12:44:12.172Z"
+  },
+  "x15-swamp-e#10": {
+    "verdict": "REJECTED",
+    "notes": "side clumps on the trunk read as mushrooms",
+    "at": "2026-11-27T12:44:12.235Z"
+  },
+  "x15-swamp-e#12": {
+    "verdict": "ACCEPTED",
+    "notes": "pale weeping willow of rounded drooping lobes at 1.25x",
+    "at": "2026-11-27T12:44:12.296Z"
+  },
+  "x15-swamp-e#13": {
+    "verdict": "ACCEPTED",
+    "notes": "pale weeping willow of rounded drooping lobes at 1.25x",
+    "at": "2026-11-27T12:44:12.360Z"
+  },
+  "x15-swamp-e#14": {
+    "verdict": "ACCEPTED",
+    "notes": "pale weeping willow of rounded drooping lobes at 1.25x",
+    "at": "2026-11-27T12:44:12.423Z"
+  },
+  "x15-swamp-e#15": {
+    "verdict": "ACCEPTED",
+    "notes": "pale weeping willow of rounded drooping lobes at 1.25x",
+    "at": "2026-11-27T12:44:12.487Z"
   }
 }

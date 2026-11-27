@@ -80,13 +80,23 @@ export type TreeSpeciesTable = Readonly<
 export const CANOPY = {
   /** Candidate spacing, px. */
   grid: 8,
-  /** Half-axes of the exclusion ellipse between trunks, px. */
-  rx: 12,
+  /**
+   * Half-axes of the exclusion ellipse between trunks, px. Bead bzc.165
+   * (trees redrawn at 1.5x): a touch wider than the 12 x 8 of the small
+   * trees, so the bigger crowns overlap into one canopy much as in the
+   * bzc.144 T1.5 preview the user liked (which kept 12 x 8); 14 x 9 left
+   * the narrow swamp cypress woods looking thin.
+   */
+  rx: 13,
   ry: 8,
-  /** Highest a crown rises above the top of the wood's northern cells, px. */
-  capPx: 40,
-  /** Deepest a crown reaches into a cell with an object, px. */
-  objectRisePx: 14,
+  /**
+   * Highest a crown rises above the top of the wood's northern cells, px
+   * (40 for the small trees; bzc.165: 50, so the 1.5x trees still stand
+   * along the north edge while a unit behind the wood stays partly visible).
+   */
+  capPx: 50,
+  /** Deepest a crown reaches into a cell with an object, px (bzc.165: 14 -> 18). */
+  objectRisePx: 18,
   /** The spill band beyond the region, in field units (1 = a cell). */
   spillDepth: 0.24,
   /** Share of spill-band candidates that may become trees. */
@@ -115,8 +125,8 @@ export const CANOPY = {
   biteSpacing: CELL * 1.25,
   /** Spacing of the drift noise of clumped species, px. */
   driftSpacing: CELL * 1.9,
-  /** Depth (px) inside the outline over which the trees thin out. */
-  edgeFade: 36,
+  /** Depth (px) inside the outline over which the trees thin out (bzc.165: 36 -> 42). */
+  edgeFade: 42,
   /** Share of trees kept right at the outline. */
   edgeKeep: 0.35,
   /** Tint under the canopy: depth (px) of the light rim, alphas. */

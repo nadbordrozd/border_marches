@@ -376,5 +376,544 @@
         "height": 48
       }
     ]
+  },
+  "x15-palm-a": {
+    "id": "x15-palm-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "84a76b2c-a3f2-476f-b327-8a69c4aa2df8",
+    "submittedAt": "2026-11-27T12:24:07.075Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one desert oasis palm tree, the same designs as the small reference palms redrawn larger with a little more detail (more frond tips, trunk rings), still chunky and simple, each image a different one of these: a date palm with a round crown of arching fronds and a cluster of orange dates, a short squat fan palm with a bushy crown, a young palm with a slightly leaning ringed trunk, a double palm with two crowns from one base. Fronds deep olive green #4f7a3a, shadow #2f5028, light #7fa356 on the left side; a ringed tan trunk #a27a4a with shadow #6e4e2e. About two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take desert-trees/palm-a#1 sha256 8d251b75cce412289492bbc57f8c2cd1d78e32f58b50116400a4cea5fe6979bd",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take desert-trees/palm-a#0 sha256 a2bb9d30a10f057a28b5f07c0dd1758152a89ccf22d055f66aefc7fbe4776bf5",
+          "usage": "a date palm: the same design, redrawn bigger"
+        },
+        {
+          "source": "take desert-trees/palm-a#15 sha256 1ad78eff44e1adabf747a134b90a02dad019718d95c732bfbb20367faed71e78",
+          "usage": "a bushy fan palm: the same design, redrawn bigger"
+        },
+        {
+          "source": "take desert-trees/palm-a#22 sha256 ee66a5484767ed6936f2ef4fadb1e812df3a384a50a15d699a7f96417079790b",
+          "usage": "a young leaning palm: the same design, redrawn bigger"
+        },
+        {
+          "source": "take desert-trees/palm-a#19 sha256 1d463b017383958f2fd2f60d5a52c0b53502579f51edcf3e5d3dbd2192689aac",
+          "usage": "a double palm: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165301,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one desert oasis palm tree, the same designs as the small reference palms redrawn larger with a little more detail (more frond tips, trunk rings), still chunky and simple, each image a different one of these: a date palm with a round crown of arching fronds and a cluster of orange dates, a short squat fan palm with a bushy crown, a young palm with a slightly leaning ringed trunk, a double palm with two crowns from one base. Fronds deep olive green #4f7a3a, shadow #2f5028, light #7fa356 on the left side; a ringed tan trunk #a27a4a with shadow #6e4e2e. About two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, sand, ground, dune, oasis pool, water, person, camel."
+    },
+    "at": "2026-11-27T12:26:32.178Z",
+    "usageUsd": 0.08176224626435175,
+    "candidates": [
+      {
+        "file": "x15-palm-a-0.png",
+        "sha256": "d006e87e568952ddd283b41d74ab82ad1ce55ed596aa9afe8621fb4dc53b1f5c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-1.png",
+        "sha256": "c2c0a8ce1535e2b89cc6a9af5b7314db620d93efb1e5aca6262c8fb10dedb95d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-2.png",
+        "sha256": "098925768ce775945bf2fa6e7e9c5163b7f0bb7b62c63a3af0f06e9bb2dc42b2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-3.png",
+        "sha256": "928db3b5cbcbc37ec22b9232d2d322f69d13e4272764088fcaa4969b55473680",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-4.png",
+        "sha256": "d35474b83f898b7cd8be2786fbb4e28064daf5d9d1ec757b54316f037a780068",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-5.png",
+        "sha256": "991681a4db3e1953421bf21087bcd2922dd3cecc941e9a974be2552e462f32a1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-6.png",
+        "sha256": "347102ac7c63faf37f2877a1eade13efac370de835a5f63ef8188d806f2bcd41",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-7.png",
+        "sha256": "60b1f2d60b64cf859001e9c04623e21485f3008aa405b72c2e26548ba5693dc6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-8.png",
+        "sha256": "3ccf751bca439771ef6cf4880c8a42515727d6024e5c9c3c0ee41150d67655a7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-9.png",
+        "sha256": "92b37ee866e98bed14ad080afaa7db6af3ff185dd8cd9297b7432a330e4948fc",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-10.png",
+        "sha256": "2400e87cc353482237cf77cac8c05e4b2a489a1e54c04d2a4817a788e2a80512",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-11.png",
+        "sha256": "11c362e2e05ba4ea43f5d635bb106e6d0bbedb4e793cc2871f5674b88bad5ae1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-12.png",
+        "sha256": "61a96805ae7945e24dea5b3377652720fba4eb8effce7b54ac4598ad5d769523",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-13.png",
+        "sha256": "0da222761329dad7948c37acb8e0d69182f156ca93f7d7a00e07c9db74e1528f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-14.png",
+        "sha256": "d90c3d07234e366161d08f0b9af361177d1b51285fd94866f259b3f35b9e7b93",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-palm-a-15.png",
+        "sha256": "196cc37abf571ad6750d66c1e5da9c3cfa258a91fc7f2ee78c236b66c15a9e53",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-cactus-a": {
+    "id": "x15-cactus-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f71c525d-b0b7-4dd9-81f3-a970cb743d28",
+    "submittedAt": "2026-11-27T12:30:24.829Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one desert cactus, the same designs as the small reference cacti redrawn larger with a little more detail (ribs, spines), still chunky and simple, each image a different one of these: a tall saguaro with two raised arms, a big clump of round prickly pear pads with a few pink fruits, a cluster of three ribbed column cacti of different heights, a fat round barrel cactus with a yellow flower on top. Cactus green #5f8a4a, shadow #3a5a34, light #8fb36a on the left side, pale spines. Chunky and solid, about two thirds of the image wide and most of the image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take desert-trees/cactus-a#0 sha256 541ca8a824900bc0c4ffe6148273cdefa95881646156532e17d7c3ea80f3ad1b",
+        "usage": "copy this cactus's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new cactus larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take desert-trees/cactus-a#2 sha256 42942a57d83643a0877edaeea7d01948b46b60e74952cd34525836eb8bf80f17",
+          "usage": "a saguaro: the same design, redrawn bigger"
+        },
+        {
+          "source": "take desert-trees/cactus-a#10 sha256 f4d00c0f76f9ef94036311a58aacb9bbcbe668c21d2434eb4961022b4a2f5a47",
+          "usage": "a prickly pear clump: the same design, redrawn bigger"
+        },
+        {
+          "source": "take desert-trees/cactus-a#15 sha256 ce75dd7156bebccaef7abc2a491d2c30f1e43f9eee6eb071b16d2e8b402ef9cb",
+          "usage": "a cluster of column cacti: the same design, redrawn bigger"
+        },
+        {
+          "source": "take desert-trees/cactus-a#20 sha256 d591825c18192877585a6cfed92ccb7199bead81730b0480cbf2ec467780386d",
+          "usage": "a barrel cactus: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165302,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one desert cactus, the same designs as the small reference cacti redrawn larger with a little more detail (ribs, spines), still chunky and simple, each image a different one of these: a tall saguaro with two raised arms, a big clump of round prickly pear pads with a few pink fruits, a cluster of three ribbed column cacti of different heights, a fat round barrel cactus with a yellow flower on top. Cactus green #5f8a4a, shadow #3a5a34, light #8fb36a on the left side, pale spines. Chunky and solid, about two thirds of the image wide and most of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, pot, flower pot, sand patch, ground, eyes, skull."
+    },
+    "at": "2026-11-27T12:32:45.376Z",
+    "usageUsd": 0.08312898005379571,
+    "candidates": [
+      {
+        "file": "x15-cactus-a-0.png",
+        "sha256": "79f326842bcea9051d5dbe462221a4bc9e36d77851d28d5c3c96479b9e52bcdf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-1.png",
+        "sha256": "f3f2aff8522937ad637a4a5d1d82ded75e5e928844b98c088f28afac0f5ed568",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-2.png",
+        "sha256": "4c948720b211810cd71bcec4c96390360ea96a90eef779ffd4242a98d153f7b0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-3.png",
+        "sha256": "8d8ba45c4ca67b4ce0bcbbdaaee79850064df8c9fee663d30570839ed606c9d4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-4.png",
+        "sha256": "6fdffc7efd2fe8414b7cf1b8b70111ec6db3f5fbf2e3e965e2c1af141f15d12d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-5.png",
+        "sha256": "5ade100fd3ca6fcd66d18c7ba10ad7bf0f17e374dc7eb1b1c062790c8b28da56",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-6.png",
+        "sha256": "7e7c50a0d92ce83afa8cac2a9d38377fdd0c6dbe324ad2903b89ef636d7a21b6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-7.png",
+        "sha256": "a131ee68a38f43fb57559cc28dea09cbddc1adfaab528a8047bca23c46ec6ca3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-8.png",
+        "sha256": "e7db99ad82911490dd9e8173b09b2b46f18409414bd7d98405443b79a6f3c3c3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-9.png",
+        "sha256": "fa64d09b9a7329f7b70fb8b6b1768696c8d546518da52a5aa13e57ee90a863dd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-10.png",
+        "sha256": "4ee5d1eabb99cdfb57d8791b6611221ed5baf97bcd5f292938ab3eddb088b49a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-11.png",
+        "sha256": "8b01df6f703df0131850d74b3f66f0f2dbcf27f71b14fa2d7168ee10c9f14466",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-12.png",
+        "sha256": "9b57cb037ecf8cfeafbc49bec729dd94d415282aeccd3de2876e72c013d99939",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-13.png",
+        "sha256": "4cb65a3f97684cec16210fdf5f29d98bcb45da5c9107ce4f6f0ffbd8db91a62d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-14.png",
+        "sha256": "dfeb184af88c26912c5218c70a9542aecf8da8dbc539168f81932111c9858759",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-cactus-a-15.png",
+        "sha256": "ff927b34de5bd7154b2fd7aba6a2708eab558107d45db3b7c4b8e1c920276161",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-barrel-a": {
+    "id": "x15-barrel-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "88738112-9ba0-450f-8851-03fef4a37097",
+    "submittedAt": "2026-11-27T12:36:51.213Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one fat round barrel cactus, the reference designs redrawn a little bigger with a little more detail (ribs, spines), each image a different one of these: a fat round barrel cactus with a yellow flower on top, a squat barrel cactus with pink flowers, a pair of barrel cacti, one big and one small, a ribbed barrel cactus with a crown of yellow flowers. Cactus green #5f8a4a, shadow #3a5a34, light #8fb36a on the left side, pale spines. About four fifths of the image wide and about four fifths of the image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take desert-trees/cactus-a#20 sha256 d591825c18192877585a6cfed92ccb7199bead81730b0480cbf2ec467780386d",
+        "usage": "copy this cactus colour palette, dark outline, flat shading with one shadow tone and its chunky cute look"
+      },
+      "reference_images": [
+        {
+          "source": "take desert-trees/cactus-a#20 sha256 d591825c18192877585a6cfed92ccb7199bead81730b0480cbf2ec467780386d",
+          "usage": "a barrel cactus: the same design, redrawn a little bigger"
+        },
+        {
+          "source": "take desert-trees/cactus-a#22 sha256 d564ec4fa2eb69be3dc8004f181c62e291626e68b770075cf7d7c2f29d48b6ca",
+          "usage": "a barrel cactus: the same design, redrawn a little bigger"
+        },
+        {
+          "source": "take desert-trees/cactus-a#24 sha256 e83c543bf61b6614ae20d85b22a7c32ff90178b1728db04ea95ea39c37e38975",
+          "usage": "a barrel cactus: the same design, redrawn a little bigger"
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 165303,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one fat round barrel cactus, the reference designs redrawn a little bigger with a little more detail (ribs, spines), each image a different one of these: a fat round barrel cactus with a yellow flower on top, a squat barrel cactus with pink flowers, a pair of barrel cacti, one big and one small, a ribbed barrel cactus with a crown of yellow flowers. Cactus green #5f8a4a, shadow #3a5a34, light #8fb36a on the left side, pale spines. About four fifths of the image wide and about four fifths of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, pot, flower pot, sand patch, ground, eyes, skull."
+    },
+    "at": "2026-11-27T12:39:20.429Z",
+    "usageUsd": 0.08202525199784173,
+    "candidates": [
+      {
+        "file": "x15-barrel-a-0.png",
+        "sha256": "7643ae56cbc2c952c1ff9f5f1a4bd1e15b6c3cc97a2fe60057c22eb1b682c5ab",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-1.png",
+        "sha256": "f7db45e65cfeef0423ab9e741c164b4fd291f32414155b39d38933351672dd98",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-2.png",
+        "sha256": "ea5bc55a54f0ed07eaa11ef19d5bd384e6a6027d4162eef5282b8b8735207f0f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-3.png",
+        "sha256": "db3917a4beb72ead00499fdca2064429b57816f0a55f9128d9a872be1b5fcbd3",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-4.png",
+        "sha256": "8582292b6749f5b236f46b4e0bc2f77c7fd6785227d055f20322995815131b05",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-5.png",
+        "sha256": "4e3dab090da89c9d27f09d8809bf5a9ece47d2f11f53642e7689593c9ebc0d82",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-6.png",
+        "sha256": "180a4994c13e1feb665ca283c4c281a04436e8ee507310df526045143e956944",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-7.png",
+        "sha256": "cb2e0925ee982c1fe33fe6830964ddb45e66bba416df430a3413f8407c4a641f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-8.png",
+        "sha256": "b22ab88a199a522718c980f5508ee7948c45db89e133a528abfa5a0fd8498b86",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-9.png",
+        "sha256": "18e9bf2acc51811514d8e5757347a409c1704f87b5a096a5b74b3c3f711b9d1f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-10.png",
+        "sha256": "6127de41a71a106268e5dc0e6e304c5bc0ad91122939e8b388e5f5955b9a3958",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-11.png",
+        "sha256": "4e60cf5b1ca60b3ed4c19cffc134b188a01168d395bc06dedb13630a737e3642",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-12.png",
+        "sha256": "cb57f9088ca008c392ef7768ae2a3b45646793169896d6f54955c27a1b4de1c3",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-13.png",
+        "sha256": "b17e0965eb31842c1514ce1c0b2fc39dd829693841fb0c61ff42808e71a063c9",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-14.png",
+        "sha256": "c22750584e879475a6c0d351367e88cf5763501b39a70b1e6a4dd67e0db086ac",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-15.png",
+        "sha256": "b208f97083a49fa4a6c4d268d4d1d524c510a995c5a3923042e24e1e3276bd44",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-16.png",
+        "sha256": "954b35bc22cc8075d99ca14b96523df9fcaca2f0bcfcaa639a759ffa86068adf",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-17.png",
+        "sha256": "5ef756546fe0e4f2b6a17fd7d0e7d67de9aa496997e9c14c472842fa655d266c",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-18.png",
+        "sha256": "7ce58b7299cf58335a9ae25126045a8c8760892375c8b81d59cbcb75e89e1997",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-19.png",
+        "sha256": "d7454298cddf7204ffd7c95e32c3ac981a1a0b21eb464d3794a3aa80fd34a64a",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-20.png",
+        "sha256": "871acbbf7af3e2aa5bcc5aff7145be26ab51a8409b41ee1dfee303a4304acacc",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-21.png",
+        "sha256": "2281cb0b9007c7e924d4c48a852967ef0be9773141a39d8f553227c451d1d6e1",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-22.png",
+        "sha256": "67368641c1329333464d2d697340161af6c99d29520c8bbb54efa6f0ded5eeaa",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-23.png",
+        "sha256": "ac3c612f71ea9966ea49cf9c475e00c92e8fcd8ecab8a0c35d2a0aa49b3adc8e",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "x15-barrel-a-24.png",
+        "sha256": "32c21c8c6c2e9435a8ed1fcdd129dadcb173e0ea7a0b9fa89e8b792f7f59b00c",
+        "width": 48,
+        "height": 48
+      }
+    ]
   }
 }

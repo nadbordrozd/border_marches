@@ -1888,5 +1888,2269 @@
         "height": 48
       }
     ]
+  },
+  "x15-autumn-a": {
+    "id": "x15-autumn-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b4e5ff25-c5e5-4da4-bb5b-b43e1bd72485",
+    "submittedAt": "2026-11-27T12:24:06.947Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one round deciduous tree in autumn, chunky and cute, a dense crown of big leaf clumps drawn with a little more detail (more clumps, a few leaf highlights) but still simple, each image a different one of these: an orange maple #e07a2a with shadow #a24a1c, a golden yellow birch #e6bf3e with shadow #a8841e and a white trunk, a red-orange oak #cc5a2a with shadow #8a3418, a deep orange beech #d8682a with shadow #9a4018. A short brown trunk #5a3a24. About two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/grass-autumn-a#2 sha256 f961b5aef00268150d45da21f94869905494401eb839aad482e4fd846934830c",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165201,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one round deciduous tree in autumn, chunky and cute, a dense crown of big leaf clumps drawn with a little more detail (more clumps, a few leaf highlights) but still simple, each image a different one of these: an orange maple #e07a2a with shadow #a24a1c, a golden yellow birch #e6bf3e with shadow #a8841e and a white trunk, a red-orange oak #cc5a2a with shadow #8a3418, a deep orange beech #d8682a with shadow #9a4018. A short brown trunk #5a3a24. About two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:25:19.012Z",
+    "usageUsd": 0.08173567594422235,
+    "candidates": [
+      {
+        "file": "x15-autumn-a-0.png",
+        "sha256": "1d8f483d408651cc532855896b620925440dfdc08d3232a8a0b716d77a4ba860",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-1.png",
+        "sha256": "f385ac3d3b37a76bd18a3025ff43463710ce88fc7b51392b5036843a872d832a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-2.png",
+        "sha256": "5b178a04b0e91b080b5edcec5ac1fc454baae748e1165c74b770eb3c44aacfc1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-3.png",
+        "sha256": "e30bd2d257d15fbe73c86354c02df962595252f6c82613bd33e5e35787f1580a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-4.png",
+        "sha256": "4fe39483b056087c5d8d6c4dcd60125a3faf4ed78433ac9831571911a33278ef",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-5.png",
+        "sha256": "78f68188ad0dd8b84251ce43b68574a14ede6fb726e8079865171fad87b00b09",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-6.png",
+        "sha256": "f8e9e7a3da128378f73a433d0ade51a9d0e280e553d4d789fda04181ed1d43b7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-7.png",
+        "sha256": "d25851a195b1c33434e76a38da8ce0df55a1defcfbc9cb95a1f735aa54432c64",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-8.png",
+        "sha256": "c5354adc3483501422df7facbdb18e0b718302e64cb0c0ebbdd53440d397e6f7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-9.png",
+        "sha256": "e73a207970e01a742ec614f5360d1bd29987d4b44e717119bc5b91fcbe7d71c9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-10.png",
+        "sha256": "b3f4caa3d73dc4eb9daecd3b36436954a4292fd38f6daea9ef4ddcacf354dd83",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-11.png",
+        "sha256": "e453bfe13a6b1612dc641682ef18a37adbad6024953e76ae0e67a09f7a2f03e3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-12.png",
+        "sha256": "4d7cdf0c4e5b39b320171be64e5e85f076fc7aa073115bef17bd904ec1ece320",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-13.png",
+        "sha256": "35f968e594fd43e3480930e6bb0e58a4eeda8ed4c708935fed3e34875d974e6c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-14.png",
+        "sha256": "e185d9370683a36ae197095734a3aa9407b7583a7f564fdadeaf8327bdb07663",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-a-15.png",
+        "sha256": "5a9a116259014636131e7f897be077854282c0aae1e6f26d9bfa609d87b92da8",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-steppe-a": {
+    "id": "x15-steppe-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "65745e63-729e-45fe-82fc-54ff43943c3f",
+    "submittedAt": "2026-11-27T12:30:24.705Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one lone steppe tree, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, still chunky and simple), each image a different one of these: a squat oak with a round olive crown, an oak with three big olive leaf clumps, a birch with a white trunk and a light airy yellow-green crown, a wind-bent elm with a lopsided crown. Dusty olive green #7a8a3a, shadow #525e28, dry yellow-green light #a8a850 on the left side, trunks grey-brown #6a5236. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/steppe-a#0 sha256 444f152f0866989746a23f993e2fbb5f0e767d9ff7d17d20d4564463402f2064",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/steppe-a#12 sha256 230ff897b2545f9c9a8295a5185bc86a8371a9666ead9fedc1ac0706cd1535d9",
+          "usage": "a squat oak: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/steppe-a#8 sha256 70ba360221015495e1a0bd752c064c34dc86fe3c51d03896bac497f6ab0c7362",
+          "usage": "an oak with leaf clumps: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/steppe-a#21 sha256 6c20b3b29081d87423c3bb12ddc67d285d71844f03b3ec5b930df4cae6832cc5",
+          "usage": "a birch with a white trunk: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/steppe-a#2 sha256 94b0ea0439a6b8e13ae8baf5a98f52270a7ca76cf3b342a3937aaaf49223505e",
+          "usage": "a wind-bent elm: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165116,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one lone steppe tree, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, still chunky and simple), each image a different one of these: a squat oak with a round olive crown, an oak with three big olive leaf clumps, a birch with a white trunk and a light airy yellow-green crown, a wind-bent elm with a lopsided crown. Dusty olive green #7a8a3a, shadow #525e28, dry yellow-green light #a8a850 on the left side, trunks grey-brown #6a5236. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:32:13.084Z",
+    "usageUsd": 0.08175758277045356,
+    "candidates": [
+      {
+        "file": "x15-steppe-a-0.png",
+        "sha256": "21b886e602f3aabdcc556c383a21d3ea9ce5381b8c17b6209c272cd74a4a9b59",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-1.png",
+        "sha256": "5efc39a3d659d1ec421dd32e96c28dfe25e44b10a777a4bc8457a1447a1156ce",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-2.png",
+        "sha256": "7401dacfcdf1514546f2baa0742698182a1572d849f392a9fb43be03ce6c4dc0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-3.png",
+        "sha256": "58c23606d3c99e3060318067aae591bca6763bbb91eae0f7ed7ae6d75ce6d2af",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-4.png",
+        "sha256": "29cc2a20537e867c21e28233af3a4e01362d85fd4c24ba7c7a8aa9ffb909cd34",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-5.png",
+        "sha256": "20295234447ca507cba5547bc5814ce38c020231714b1079b40eaccb8de5a710",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-6.png",
+        "sha256": "b14daca8fb65c39522cd1e1a0341fb5289385db2806f8694a7fa4ddc5634c34a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-7.png",
+        "sha256": "aec2a85642dee9c484aeab578d583f8f77418bbf9100a7a6628bf7bfd4cd5bd8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-8.png",
+        "sha256": "5ed07e607f6146eb351de560568342ed938f944a761c0dec731266dac1095374",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-9.png",
+        "sha256": "f807a74b0080707d75d4333137d050f49cd6e36705871563fca67593e971b8c8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-10.png",
+        "sha256": "a37cb72bb94f369f672d9f844043cdec2dfc82c0460a1fa332c58a0eb993a0f9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-11.png",
+        "sha256": "b53baae4e84a966e5516d7bd57b6933343779f090ae599e125d742e0a51b8cf3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-12.png",
+        "sha256": "4fcd8784fd6232b0261cfdfa09997f2c219dd69246e0fdd598a89fb41e49a30f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-13.png",
+        "sha256": "f60cf03018b3333a6a1832caca511635bf4ca31b34ae4f5e198cc9fcea7a4119",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-14.png",
+        "sha256": "12cad6dc16f7e548168af6fe4e14eec9036f1a0d7aea9f27c5cc49d64a52998a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-steppe-a-15.png",
+        "sha256": "ff3a005d47983126487369b2c4cbaa11ef4a60202a208c80c1093b4a4e8e1672",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-conifer-a": {
+    "id": "x15-conifer-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c3046491-8f95-4ce9-8a7f-afab4a54cc39",
+    "submittedAt": "2026-11-27T12:30:24.780Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a tall slim pointed spruce, a tall fir with four stacked layers of drooping branches, a tall narrow pine with a blunt tip, a tall bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/grass-conifer-a#4 sha256 62bed20a84adb86b2222571921a6cca40af28a362bb72b6ed44994ee5cc41cfa",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/grass-conifer-a#0 sha256 96fb102d4879f6c0a6f36ddd0795a428bc60403ce5979d2d74549b855ea0082c",
+          "usage": "a slim pointed spruce: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#6 sha256 c7c3cdd20cc8767789ac54d55334e60e1bb383694e7baddeea82a48d026b2386",
+          "usage": "a fir with stacked drooping layers: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#13 sha256 f1edbb6e086d21f7e9b48067b6f4febced540e7235ae76db3c1787cddd96bfc0",
+          "usage": "a narrow pine: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#20 sha256 d99fc5157dc2ca2a16922c98b47deb444c60ceb88bbf097a5e933de58ee1627c",
+          "usage": "a bushy spruce: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165111,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a tall slim pointed spruce, a tall fir with four stacked layers of drooping branches, a tall narrow pine with a blunt tip, a tall bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:32:08.122Z",
+    "usageUsd": 0.08198828800519307,
+    "candidates": [
+      {
+        "file": "x15-conifer-a-0.png",
+        "sha256": "0cb2620d736128d439d69b80d9f09d6b5d7d856176e9ff0196ba5c0dfd3718f7",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-1.png",
+        "sha256": "db6943f7b8626e9678cde908206fd196eca1c5adda35d082b76a4cfcad6b53cd",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-2.png",
+        "sha256": "506d1ea01198076e9f120325d012946e2876c7947d2d03e9d94d61990dd1df23",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-3.png",
+        "sha256": "f67adc39ffb5103f3b25f21416a232d7ce2dfa553aa2c2264afb071ee0264a57",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-4.png",
+        "sha256": "cd9c77d55b658dadc04272c354851b8e92f56200939ac7f509117894835c2973",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-5.png",
+        "sha256": "1024a4376996b672909683a4e36c76cf14e90f768fc464bdadf648d271e33653",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-6.png",
+        "sha256": "1d95421648f1dc4fc653a4823be2af82526a8ed960e6cee0904ae88f3fda69bc",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-7.png",
+        "sha256": "8a4ad79e906083efd1c6e6d8daf0f9ea8bb080c6342105b26b3aa9e80c9ac6c6",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-8.png",
+        "sha256": "c6dd63e650edc9b0fd8910773b2c5162a530f097d8a121d9fcd29f2ada8e8f03",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-9.png",
+        "sha256": "2536b0fd08f39047d12f4134410a2ae9767a28022480248c66f20b75c41b4219",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-10.png",
+        "sha256": "b404ff7b6105f911da02921a01a61a16885c20c0d1a1653c594286150d26ce53",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-11.png",
+        "sha256": "6b517fb8c6c86e7c622aae31c37d661f6a2f0170593864fd9fe9539cc27986ec",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-12.png",
+        "sha256": "6acf9991d3e4cb383d2007d4b9d02880357646eb7c2f1e0b80b97572f52ce15a",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-13.png",
+        "sha256": "6eb23e8e52b827b3c4bfa5ae0395f641c80828023f09b8ac1924eec8b0a40142",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-14.png",
+        "sha256": "a9062fe1d9648ca27e51e82ec2b5aaae172febab7700f0dacf95fedad8968a90",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-a-15.png",
+        "sha256": "e43a29058395955ff66c1dc9452c6976553b097fea5439f97efd8d808a26954c",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-broadleaf-a": {
+    "id": "x15-broadleaf-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "79976a8f-f9fc-45fc-aa7e-47ebe6dd646b",
+    "submittedAt": "2026-11-27T12:32:08.223Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big round deciduous tree in late summer, a dense crown of leaf clumps, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, still chunky and simple), each image a different one of these: a big round oak, a tall lime tree with an oval crown, a beech with two big leaf lobes, a hornbeam with a lumpy crown. Deep muted leaf green #3f6f34, shadow #27482a, light #5f8f48 on the left side, a short brown trunk #5a3a24. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/grass-broadleaf-b#0 sha256 6b09ccd41dba392a48e726e98c12073c3c0c3fe6d12149cb8b28872b3639968c",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/grass-broadleaf-b#2 sha256 b2ade1eedff342cac0e8213a820466e2c80ebaf3e882b61302bea2cc1f965008",
+          "usage": "a round oak: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-broadleaf-b#7 sha256 1500f7e79395fa01aed2f9ec9e25a5b3aaf6037680adf422acbb6ae74a06b548",
+          "usage": "a wide lumpy hornbeam: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-broadleaf-b#13 sha256 3fcc8617b18d9a3c1eb5bd06a808cae445df9dfd8d25bef9a8417539844e49cc",
+          "usage": "a beech with leaf lobes: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-broadleaf-b#23 sha256 6026eece597d053b20341b4a1ad15ce5bcd1453a281607c4d993e961a1298dc7",
+          "usage": "an oval lime tree: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165112,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one big round deciduous tree in late summer, a dense crown of leaf clumps, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, still chunky and simple), each image a different one of these: a big round oak, a tall lime tree with an oval crown, a beech with two big leaf lobes, a hornbeam with a lumpy crown. Deep muted leaf green #3f6f34, shadow #27482a, light #5f8f48 on the left side, a short brown trunk #5a3a24. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:35:19.394Z",
+    "usageUsd": 0.08297628331184387,
+    "candidates": [
+      {
+        "file": "x15-broadleaf-a-0.png",
+        "sha256": "224431ffdadb34d4eb357ba688776b7f56cf783d87ce2d4aea233f988679224f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-1.png",
+        "sha256": "719df640e5c097db614f0e2f3ed0de34e3e28931362c6a2e0bff9a1431ba61d5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-2.png",
+        "sha256": "87dd583704776e945528d76a98c05ed4870bad1d58821414c18f62e5c374577e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-3.png",
+        "sha256": "5064386102518be2f79fbab8fc693050ce65c3fc198d83a0e7ff1ac8efc376d2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-4.png",
+        "sha256": "a183900f3489e17b7c68520b6c8a4fb2af4bde5fdce4c4f01b4d489ec80ebabb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-5.png",
+        "sha256": "8c363d64f91d633190708c944804cd0c2e8a8c872221fc7ec0cb873ab3d21992",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-6.png",
+        "sha256": "3a078358690649aa57677592b750d2ee351090faf3acf0d28ae5f97591da0e88",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-7.png",
+        "sha256": "9b48bb293e6a74d47e46091a57886718302fce4f04ea137c8a7180cc0f44850c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-8.png",
+        "sha256": "f373b569f5e70c0833cbbd0e3c31706a2f9bd39a604b2a1c3ec9f1eec3f5410d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-9.png",
+        "sha256": "e74cd08da7799344824ab885648781b7bc49d8cf744bd43aff3565565e5ba639",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-10.png",
+        "sha256": "46f08edff1bae4d4f7461c3d0eee0299c224f16cbec649e42bf2ae6d54f5f4be",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-11.png",
+        "sha256": "d6fc697e2af4a40dd29837400b4bc8a586577bd9500d69f0753b53d20d1db26c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-12.png",
+        "sha256": "c9d7ba389cf7318514773f451f543c82c777d6c63e8519cb67f4e2cdd101fc2a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-13.png",
+        "sha256": "a461120c6d04e0b1c760441e1a96fabd4bd836eb331796299231fa3626031a70",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-14.png",
+        "sha256": "09154d94723082fb852c964812e9276fe35eb0ae75d81897ec58050a99a24338",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-broadleaf-a-15.png",
+        "sha256": "d0ab93719fa2f3f0fd467df79f90c63af2b1d9ec42a83bfb19904dc08c7c329f",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-badlands-a": {
+    "id": "x15-badlands-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "6ebcd420-1dc4-4ab1-8808-f86c974207ff",
+    "submittedAt": "2026-11-27T12:32:13.379Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one desert scrub tree, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, bark lines), still chunky and simple, each image a different one of these: a twisted juniper with a dense bushy dark blue-green crown, a twisted juniper with two big dark crown masses, a mesquite with a flat feathery olive crown, a gnarled dry tree with three clumps of grey-green leaves. Leaves dark sage #4a6a52, shadow #2e4436, light #7a9a6a on the left side, twisted trunks red-brown #7a4a2e. Big: about two thirds of the image wide and most of the image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/badlands-a#0 sha256 f4b524b5be647eda803d81192a7ff6fc70709ca91430f358c28dedb0bc04159e",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/badlands-a#4 sha256 e3bff9254615dadddd36d0f11c4de85a14dbe5b02e3d80d6e7681628be900165",
+          "usage": "a twisted juniper: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/badlands-a#1 sha256 e11e9951916f314c19cf09df51e58e5295cb8bc38383d6e34830b899d556055d",
+          "usage": "a mesquite with a flat crown: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/badlands-a#2 sha256 75be5f719eb7a2e11d4a6a5f2fadcfd25fc40226b7c0da1fe00c7c3368ced276",
+          "usage": "a gnarled dry tree: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/badlands-a#13 sha256 bc46732cb59a72a69a877cf017db60b568b763c1bd654ba5a6143c5f10a91078",
+          "usage": "a mesquite: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165117,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one desert scrub tree, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, bark lines), still chunky and simple, each image a different one of these: a twisted juniper with a dense bushy dark blue-green crown, a twisted juniper with two big dark crown masses, a mesquite with a flat feathery olive crown, a gnarled dry tree with three clumps of grey-green leaves. Leaves dark sage #4a6a52, shadow #2e4436, light #7a9a6a on the left side, twisted trunks red-brown #7a4a2e. Big: about two thirds of the image wide and most of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:34:40.130Z",
+    "usageUsd": 0.08163723527060615,
+    "candidates": [
+      {
+        "file": "x15-badlands-a-0.png",
+        "sha256": "50d45c3446470ce973f99694220b3b301a56830a4cb739f69cbf66ce26c406d4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-1.png",
+        "sha256": "b45c7e781611c3603070bb5e568c22756657efc77deee378ca6cd778c6aff5ac",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-2.png",
+        "sha256": "69171a151916228254bec59e89a10bdd2c8478c8157fb91c0903c9259f2e4140",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-3.png",
+        "sha256": "2c71da84e8a71f78c321e9da706f7520553e5bfa16518d7e92370656185d3cd0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-4.png",
+        "sha256": "81b4578f2712cdf92dcb70573845639f283149f8428d8ebe758ca301a4c17955",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-5.png",
+        "sha256": "8e669ce24e552cfa22d107fc27c4ee9e190b0d2be97043a15a4a191925218579",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-6.png",
+        "sha256": "75417945208deb5d574d6b8be492a503076b2a88619f03a8e37a39db5945bb95",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-7.png",
+        "sha256": "8618b49972f50038099f9be8f8bd62bee547552f5bcc884b09b917be5dd4bbf8",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-8.png",
+        "sha256": "62390d097159b639e5c6f1e072ccbe005b5b599b8c72b4acdcdc6b2db0f6a2c5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-9.png",
+        "sha256": "847b2a090e4174b93817007fdc73fb572d0be8f48618a0efc9c9bb36b1b5f9cd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-10.png",
+        "sha256": "b6e1de07fe1d6b7b6fab8d93a4714e1c5c1a11a76986e80f9afd38854bc11df6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-11.png",
+        "sha256": "bfc8e1141d097afc2a240aee46224eba23d72fd9968feb29fa17b736d69cce9d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-12.png",
+        "sha256": "7b54662e68685699642ed403baab56f798e52c586bc8d171b4444c10112f6bed",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-13.png",
+        "sha256": "4e37491937a26c9f74dda462f5d1b88df958af877562ef5401bec1295321673b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-14.png",
+        "sha256": "0a8a976210255df4e2f8e6f9a98bc2b7f22f2bf50e6d8ec540aff85c7294b7fc",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-badlands-a-15.png",
+        "sha256": "cf239c8bd4a7d8f43a8a3dafcebceb3778459d11cb0fcacaf03a1a23aab8ba47",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-conifer-b": {
+    "id": "x15-conifer-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "ca358d43-03b6-4be4-9c9e-3f80daa30e56",
+    "submittedAt": "2026-11-27T12:33:34.238Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a tall slim pointed spruce, a tall fir with four stacked layers of drooping branches, a tall narrow pine with a blunt tip, a tall bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/grass-conifer-a#4 sha256 62bed20a84adb86b2222571921a6cca40af28a362bb72b6ed44994ee5cc41cfa",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/grass-conifer-a#0 sha256 96fb102d4879f6c0a6f36ddd0795a428bc60403ce5979d2d74549b855ea0082c",
+          "usage": "a slim pointed spruce: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#6 sha256 c7c3cdd20cc8767789ac54d55334e60e1bb383694e7baddeea82a48d026b2386",
+          "usage": "a fir with stacked drooping layers: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#13 sha256 f1edbb6e086d21f7e9b48067b6f4febced540e7235ae76db3c1787cddd96bfc0",
+          "usage": "a narrow pine: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#20 sha256 d99fc5157dc2ca2a16922c98b47deb444c60ceb88bbf097a5e933de58ee1627c",
+          "usage": "a bushy spruce: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 60
+      },
+      "no_background": true,
+      "seed": 165121,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a tall slim pointed spruce, a tall fir with four stacked layers of drooping branches, a tall narrow pine with a blunt tip, a tall bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:34:46.053Z",
+    "usageUsd": 0.08139417870839437,
+    "candidates": [
+      {
+        "file": "x15-conifer-b-0.png",
+        "sha256": "44a62d315cde10303e15e67bf5ac2c2695b8704c66cd41d5346e15d8c2683751",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-1.png",
+        "sha256": "6b7cacf85ed5a60bcbc829023675acabfb806a4df33751c8a457087b79a719cc",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-2.png",
+        "sha256": "46c0b3ade7a4b2671d3058d8de70040e30719e89a86f089b5cbd1fe6bf53b95c",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-3.png",
+        "sha256": "376c0f0bc1df10e37eec5e91af744cbd1f9ff5ce575038cca4bcae7f521af899",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-4.png",
+        "sha256": "2922bf7afe963ee716fbe74f688f4474f09ff813498ad2cdf2f4a0841163253c",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-5.png",
+        "sha256": "c573f91fa08015035be0811b7720d3c70362cf64648d768b062e693928ea250b",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-6.png",
+        "sha256": "ffff81dae10b331b81929c6fe0a584475cb3d5b5046f5b410b95555d2f86a8bb",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-7.png",
+        "sha256": "16591dcb548ddd5c4715efc7df1f4c921a3cd54595b96c5a9b578993f904d476",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-8.png",
+        "sha256": "8e59efd5a095ff76256fc31e7b9991304e9b9022d07cd5c7191ebf96e0edefce",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-9.png",
+        "sha256": "d9b2e1bd787ff292ad252d74fbdc96df46e2def9aa3d616f0266913e8cd4b499",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-10.png",
+        "sha256": "16742939b2de6c0f3fd8f36a9c2ee76f4e9fbb1f5e41b2d23b072eb1981a51a0",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-11.png",
+        "sha256": "f6b70cf55e3688b37dfe1d0070dc4c88cc4a04a7e8f7c5cfee0d59ccba7ffa57",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-12.png",
+        "sha256": "1c49cb04f5a5cc361f19c549df269f10453cadb4916e9e2055d64245b361af12",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-13.png",
+        "sha256": "d711566ee53bbc84e8cafea5b78c9275b363e0a19e08fe54dde32a997ed91627",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-14.png",
+        "sha256": "1bf727f27214895947d6be1eca69a5169228e7cb8dbad27316e4c01523e9e9be",
+        "width": 48,
+        "height": 60
+      },
+      {
+        "file": "x15-conifer-b-15.png",
+        "sha256": "a3c6a7ab6f573335453f134c5be90dd4863237408e7dc23ba86ec6eb80640a4c",
+        "width": 48,
+        "height": 60
+      }
+    ]
+  },
+  "x15-pinyon-a": {
+    "id": "x15-pinyon-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "60a917f5-394b-4680-a4f4-c1826c0956a4",
+    "submittedAt": "2026-11-27T12:34:40.278Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one dense desert juniper or pinyon pine, a compact bushy crown of many leaf clumps with no gaps, the same designs as the small reference trees redrawn larger with a little more detail, still chunky and simple, each image a different one of these: a round bushy juniper, a pinyon pine with a lumpy rounded crown, a squat juniper with two big leaf masses, an egg-shaped juniper. Muted olive sage green #5e6e44, shadow #3a4630, light #8a9a62 on the left side, a short twisted red-brown trunk #7a4a2e. Big: about two thirds of the image wide and most of the image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/badlands-b#0 sha256 4eb0939e89c15bd4a798fd3dcb70ff99137f2265487b3d55feefdb34bf23e3ff",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/badlands-b#4 sha256 8de522c45a0832d10339379e7fb30aea8453b39b28aa9a735ed1ed133034dd38",
+          "usage": "a bushy pinyon: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/badlands-b#7 sha256 ef3000e31e1618f2a1d5018f130ec8e0984cd7ade5966c64e2947adfdd778d06",
+          "usage": "a round bushy juniper: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/badlands-b#12 sha256 0291122cc327ae72bd6ee084426b40a375c6e9d8a60e7ffb8d85860a36da4bc8",
+          "usage": "an egg-shaped juniper: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/badlands-b#20 sha256 f51837037662c12c7460e483f1bbf941b38d35236fc7a96645d81d8bc00adb8c",
+          "usage": "a squat juniper: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165118,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one dense desert juniper or pinyon pine, a compact bushy crown of many leaf clumps with no gaps, the same designs as the small reference trees redrawn larger with a little more detail, still chunky and simple, each image a different one of these: a round bushy juniper, a pinyon pine with a lumpy rounded crown, a squat juniper with two big leaf masses, an egg-shaped juniper. Muted olive sage green #5e6e44, shadow #3a4630, light #8a9a62 on the left side, a short twisted red-brown trunk #7a4a2e. Big: about two thirds of the image wide and most of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:38:43.270Z",
+    "usageUsd": 0.08165665475527446,
+    "candidates": [
+      {
+        "file": "x15-pinyon-a-0.png",
+        "sha256": "a3ce3f3b9a9f272bbc4973a06546b982da260be32354cab76191756a4d196a0b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-1.png",
+        "sha256": "cdb4af2ec070c53ee920bad8dd639bf65187b619950542e7ba1e2a64732bf232",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-2.png",
+        "sha256": "aba256ceda110831ebe79014d36ec78ab8a062ef30032ad39b142542c4e43916",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-3.png",
+        "sha256": "995013cc6af01408de9876ed12d1191f3c291a5c20cb39052f57b113195596ea",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-4.png",
+        "sha256": "09aacd371892fc44a8373c11bc20829664f51a89d86c787bda1d555ff0557a77",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-5.png",
+        "sha256": "ec4046251f642a53bc2506bac20195e4e65397f4f0e85c6bac0d9c7915e6a9fd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-6.png",
+        "sha256": "e3810708733126fa0b2be9898f6c1ed8961f1eb64f75837b9a249fbb0893da2a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-7.png",
+        "sha256": "3b9d6a4c77791d15556aa6d1ab6c7642acc6a4785ce9b208563872a7752132ea",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-8.png",
+        "sha256": "7763052cb37c575623315df5b5c16aeaccdd483614492e90801918a950e8d966",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-9.png",
+        "sha256": "5ac91e4eadfba4409f93298d30fcbff5a4bd8cdab6e3ef6d99673fd8cd8957f2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-10.png",
+        "sha256": "f0c71fe7835c662a7b8610adc1aa1da500995e442e3bd9206c6f49a98bca960f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-11.png",
+        "sha256": "4b05dec0c4d6f81659980757d8de84258a0ce5764146e76ff53e3be61f8933d5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-12.png",
+        "sha256": "e3661a898b002b900f45b5d555407e89b9f50a1ff15588f37aadd515d36f24c3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-13.png",
+        "sha256": "2e39f52816184fc96ac070c7006332be1b8d30f6d4a7d5f934fea1bab8b0ff76",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-14.png",
+        "sha256": "0f403acd833f71fa16ccc68b023b12165f3e014000292f6c2b6963715aa234ea",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-pinyon-a-15.png",
+        "sha256": "e28b790db4c0f15b195ed1ec04bbf89688676083d65247f9c98b5275f9516086",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-autumn-b": {
+    "id": "x15-autumn-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "fe7b6b04-b189-47f1-8120-59f845249a1b",
+    "submittedAt": "2026-11-27T12:35:19.513Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big round deciduous tree in autumn, chunky and cute, a dense crown of big leaf clumps, the same designs as the small reference trees redrawn larger with a little more detail, each image a different one of these: a big orange maple #e07a2a with shadow #a24a1c, a big red-orange oak #cc5a2a with shadow #8a3418, a tall orange tree with three stacked leaf clumps #e07a2a, a tall deep orange beech #d8682a with shadow #9a4018. A short brown trunk #5a3a24. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/grass-autumn-a#2 sha256 f961b5aef00268150d45da21f94869905494401eb839aad482e4fd846934830c",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/grass-autumn-a#0 sha256 20f14fcac632ce1b5a108249fe8bc93786836a13f4eec8929ab1acb3f3f14893",
+          "usage": "an orange maple: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-autumn-a#10 sha256 f019620a739e235c65bfa6a3a8fe8ff52cfe3aefab8f2ca817767dee065297d9",
+          "usage": "a red-orange oak: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-autumn-a#20 sha256 b40b932cf759cf5232de8de45bd297a6837c1a2d7b5db65a8c179c12561c46b2",
+          "usage": "an orange tree with stacked leaf clumps: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-autumn-a#13 sha256 b1250530bfcb1edff3d7f7826b7d099089bd83d17c360d7fc7ab41156e4bb79e",
+          "usage": "a round orange tree: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165113,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one big round deciduous tree in autumn, chunky and cute, a dense crown of big leaf clumps, the same designs as the small reference trees redrawn larger with a little more detail, each image a different one of these: a big orange maple #e07a2a with shadow #a24a1c, a big red-orange oak #cc5a2a with shadow #8a3418, a tall orange tree with three stacked leaf clumps #e07a2a, a tall deep orange beech #d8682a with shadow #9a4018. A short brown trunk #5a3a24. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:37:23.727Z",
+    "usageUsd": 0.08155964737468296,
+    "candidates": [
+      {
+        "file": "x15-autumn-b-0.png",
+        "sha256": "3d5b678a99485f19113a10ff34aafff0902c48299254e532c9c38d19b5e5025b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-1.png",
+        "sha256": "d7f6c9633291fcf5ddde32dc14dd5417d3bba5981c29c873d5f6128b643e4a0e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-2.png",
+        "sha256": "19181e0927a225f8f2f823cfaa049c2822b9f2808f810601c37ad5e5bc548784",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-3.png",
+        "sha256": "d0f92260b9ab33dde4899d36a16570c8f48fc7d9286f2d9252b0bf20f6eaef46",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-4.png",
+        "sha256": "f535b87ef635631a7337934ff9caa7d127228f968b608dc92131f025adaefea4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-5.png",
+        "sha256": "fe7207ee22f4353db8b83bc03b2d042601d82dc70a08d76efef4ce906d1cf09c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-6.png",
+        "sha256": "9a505272b7dcbc88ca684267a09dfc37bb36265262946278dbb91a909c6ee7ed",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-7.png",
+        "sha256": "e2a259370499f4c2d8fe37247c9d035fd8a6233a230731e26d3101282cd44a76",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-8.png",
+        "sha256": "7c663c141260a0d4b9ec90f5de6b39fe35fd442832d7a05b8f714791ce4938ab",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-9.png",
+        "sha256": "6370fcc45db049c4a2264d054221d057885df21f24d05f9b2bf02d84fba911c7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-10.png",
+        "sha256": "efafc73d743806a6aa67e1f53cf83047490b235a4671a24f98ff987d7f83accb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-11.png",
+        "sha256": "d1f6f349ab5a2b57f1c3002673a8a7dc14b39d68896648843c864b877b6e1389",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-12.png",
+        "sha256": "3f1917fabea153966c5db792b91d19ed9789fd9dfbe7341b81e5cadecf5d9a24",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-13.png",
+        "sha256": "0ef5a81328d1a4e87aae159e48291865574e20eb6cb0dc43b4cd388a4fac3aec",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-14.png",
+        "sha256": "1ff7a96a9d09df7a997eae1c1dbef9f1cebf4e5786559c2e12d66d2335d54eb7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-autumn-b-15.png",
+        "sha256": "bb6e744849bda7b79fb3b61667f8d74066cb131d2a6c717e618747523b5bfef9",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-conifer-c": {
+    "id": "x15-conifer-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "71c5dce0-9535-489d-83d6-a467d6a8f2ee",
+    "submittedAt": "2026-11-27T12:36:51.212Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a slim pointed spruce, a fir with four stacked layers of drooping branches, a narrow pine with a blunt tip, a bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and about three quarters of the image tall, empty space above the tip."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/grass-conifer-a#4 sha256 62bed20a84adb86b2222571921a6cca40af28a362bb72b6ed44994ee5cc41cfa",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/grass-conifer-a#0 sha256 96fb102d4879f6c0a6f36ddd0795a428bc60403ce5979d2d74549b855ea0082c",
+          "usage": "a slim pointed spruce: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#6 sha256 c7c3cdd20cc8767789ac54d55334e60e1bb383694e7baddeea82a48d026b2386",
+          "usage": "a fir with stacked drooping layers: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#13 sha256 f1edbb6e086d21f7e9b48067b6f4febced540e7235ae76db3c1787cddd96bfc0",
+          "usage": "a narrow pine: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#20 sha256 d99fc5157dc2ca2a16922c98b47deb444c60ceb88bbf097a5e933de58ee1627c",
+          "usage": "a bushy spruce: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165122,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a slim pointed spruce, a fir with four stacked layers of drooping branches, a narrow pine with a blunt tip, a bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and about three quarters of the image tall, empty space above the tip. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:38:08.916Z",
+    "usageUsd": 0.08244077563285827,
+    "candidates": [
+      {
+        "file": "x15-conifer-c-0.png",
+        "sha256": "ee72176ce0c2da22f7a963150f5e424b14a295d6a7b754dbc4212760a84cfcae",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-1.png",
+        "sha256": "38975943956ae54db5079142089f0095482197b290a915993753d0f337b27bfa",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-2.png",
+        "sha256": "fcf0d9e48acec5f5733247c70c9c4cdfc7a39844509394793854b68c2e2db8c1",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-3.png",
+        "sha256": "d1e6c54904aa8861d7d66ef4675d9bf2b553670a43c2b4f58812315a356381d2",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-4.png",
+        "sha256": "3f9d1dda600502651f205c60cbd9a296740f674e0b8695e2d8bf2779cfffbd4f",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-5.png",
+        "sha256": "6c8528861f733bcc442832b6e6916ed99dd2e644a9dce20d7524bd85348ab84a",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-6.png",
+        "sha256": "5490a43553c14c3ac8436ba60224b21b2c26c0df169f71274df8ddc5bbb00222",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-7.png",
+        "sha256": "5c5be72647bb18339c602a8f65bd4edb9ac7d3b5d74d42dcbcd087be95cf2530",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-8.png",
+        "sha256": "cc215e365b7a8ae222d8a950ce046e49f476542de5a5b90e9ed48565d04a1d2f",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-9.png",
+        "sha256": "60c825b08f854130d740067f485b6d15ce361467b8296dea42e2463b38c39297",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-10.png",
+        "sha256": "8a3bd1b0e19de2b8c8f2f8dc521273d5405388d1a785ce8d047341688824b9b0",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-11.png",
+        "sha256": "0c995bd98df7f1de232a8b56ba961be1f7e17e46ea419952539a5f47665ebae1",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-12.png",
+        "sha256": "70b0187b4e23f73ae9703d4cfa360b55f3079acf5c3db424dc044c14d8badc08",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-13.png",
+        "sha256": "7d029109da4d97c6f2442cb1c9b02b04441d6fdbc4b5ef7bf3289e8ef440d2df",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-14.png",
+        "sha256": "a14a01c079d1abd4672215a0db87a387169d76780c25076659c65b376530c5ef",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-conifer-c-15.png",
+        "sha256": "20052e84924ecf280655b06ca78fa1d376b565e9de778029847d58035092eec3",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-jungle-palm-a": {
+    "id": "x15-jungle-palm-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "e9018efd-0173-411c-853f-c5c51c48cd46",
+    "submittedAt": "2026-11-27T12:37:23.825Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall jungle palm, the same designs as the small reference palms redrawn larger with a little more detail (more frond tips, trunk rings), still chunky and simple, each image a different one of these: a palm with a gently curved trunk and five broad drooping fronds, a palm with a straight ringed trunk and a full round crown of fronds, a bushy palm with a dense crown of many fronds on a short trunk, a tree fern with a crown of feathery fronds. Deep bluish greens #2f7a52, shadow #1e5040, light #5aa86c on the left side, trunks brown #6a4a2a. About two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/jungle-a#1 sha256 5ee0aaa2b73d5ca54eef9bf646da149c65ae1e736cc072215c4e64440354f620",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/jungle-a#0 sha256 6379a10948294098115291d7da5bb2eb4d1df25ddf3ed9cd065cbc8917ad0802",
+          "usage": "a palm with a curved trunk: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/jungle-a#15 sha256 7167b9790ca5801d6ff73f0f52797a7c64c6e441b61ca48efb62c5a5b7ceb67a",
+          "usage": "a bushy palm: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/jungle-a#19 sha256 1b3b8bf88fa032c49e6efd1b0a1ce60453e57ae2a09067361d4d64109cab5a8c",
+          "usage": "a squat bushy palm: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/jungle-a#24 sha256 9b7a5d81683f73ef527cca7e5e805b801c02c62ec586ece207a207f15600a7f7",
+          "usage": "a palm with drooping fronds: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165114,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall jungle palm, the same designs as the small reference palms redrawn larger with a little more detail (more frond tips, trunk rings), still chunky and simple, each image a different one of these: a palm with a gently curved trunk and five broad drooping fronds, a palm with a straight ringed trunk and a full round crown of fronds, a bushy palm with a dense crown of many fronds on a short trunk, a tree fern with a crown of feathery fronds. Deep bluish greens #2f7a52, shadow #1e5040, light #5aa86c on the left side, trunks brown #6a4a2a. About two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:38:40.730Z",
+    "usageUsd": 0.08170126782523261,
+    "candidates": [
+      {
+        "file": "x15-jungle-palm-a-0.png",
+        "sha256": "457b3ede238de3aef2484b9b864bf537a410c6deec6cbab24a23e4d675cfa75b",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-1.png",
+        "sha256": "821547b0732f53e21a19783db25e376170a3fd2e7e884092fbca49aed7dae14a",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-2.png",
+        "sha256": "c00be17c6b97460b319e47d7bb92a2dfcc7f53493dbc514a10ff21f7c17ab52c",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-3.png",
+        "sha256": "96a0932feff9392625960c45ca84e1b534ae660d80b224421bb8efd5576f329e",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-4.png",
+        "sha256": "255d03d85acc042614d07741115d3dc4a6622399da8c06ef07633bbad5229fc7",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-5.png",
+        "sha256": "b78e0637a05a6ffc8f06eb24a218ee266f8ccc071cd231cdf939bb481e52c729",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-6.png",
+        "sha256": "f41c989c5a3b42229616e3a57320e7f8bec805c64c010160cdc648df73208214",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-7.png",
+        "sha256": "dcbb7badf803d3b7f18ab0028206152b4d99b0e81506fdc637602b7d13ddd38f",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-8.png",
+        "sha256": "74eff8eed151c97e12aa96674db8745317640d17fba9b644918da139b1435a4b",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-9.png",
+        "sha256": "c55b47a2734d3d5b532d56b502162b8b11e7ffef694b8be2380ad194a535bde8",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-10.png",
+        "sha256": "b37a04c30d7b3fd0d2a8b6cedbeed559584fa60db5e32aa0b08e8093773ef5cf",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-11.png",
+        "sha256": "60dbc6b341b6d627925e3b347549368a7b6d7c9ebc60f987041c3dfdd837a5cf",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-12.png",
+        "sha256": "882eb27db218638ca70ce3379aa1e30043d19bfbe71c73ea51b401b3a9e0aa37",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-13.png",
+        "sha256": "a3f826131138fe63f36ed6ceebb660bb8f7032d7793064bd59162f827771f133",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-14.png",
+        "sha256": "1d5dcb5fb444aea842205391e5cbf40e9a4a4f57ff053ecd42538a8cc1c17d29",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-jungle-palm-a-15.png",
+        "sha256": "496f58d47c223cc0d2589545902147dd6f6b925b4a8c8d5a59b9207d1550e1e2",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-jungle-broad-a": {
+    "id": "x15-jungle-broad-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "4885f4df-80cd-4a53-94ae-1124524c97cb",
+    "submittedAt": "2026-11-27T12:38:40.994Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big jungle plant, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, leaf veins), still chunky and simple, each image a different one of these: a broadleaf jungle tree with a round dense crown of leaf clumps, a tall broadleaf jungle tree with three stacked leaf clumps on a short trunk, a broadleaf jungle tree with a wide umbrella crown, a banana plant with a few huge paddle leaves. Deep bluish greens #2f7a52, shadow #1e5040, light #5aa86c on the left side, trunks brown #6a4a2a. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/jungle-a#5 sha256 a6a05e671ef09d0b813ab8347a7daf57a35b2988425f637f606ed397a0d93d3a",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/jungle-a#6 sha256 7e1a8219c1be3e62d312e7a8305ac057917d10272f8c7693084077961f14aa08",
+          "usage": "a broadleaf jungle tree: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/jungle-a#9 sha256 0ad90dfa4fee4f61cdeba93c7b525b19aeb2a790b9bb2acd22ebfd9ea79f6a05",
+          "usage": "a broadleaf jungle tree with leaf clumps: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/jungle-a#10 sha256 31cdd1bfe9b887b6c02cc50dd4ade8a59f55859dd268fd5dec33d43a8f0af7bd",
+          "usage": "a banana plant: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/jungle-a#12 sha256 a3a439b51ebe64e7719898bb773cf4dbaa4fd4c0b88ab0f8a32288d5e47037b9",
+          "usage": "a banana plant: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165115,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one big jungle plant, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, leaf veins), still chunky and simple, each image a different one of these: a broadleaf jungle tree with a round dense crown of leaf clumps, a tall broadleaf jungle tree with three stacked leaf clumps on a short trunk, a broadleaf jungle tree with a wide umbrella crown, a banana plant with a few huge paddle leaves. Deep bluish greens #2f7a52, shadow #1e5040, light #5aa86c on the left side, trunks brown #6a4a2a. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:40:34.069Z",
+    "usageUsd": 0.08168541145324708,
+    "candidates": [
+      {
+        "file": "x15-jungle-broad-a-0.png",
+        "sha256": "a224b2be9059be348890761adb2d609bf8567adc8c0402dac4e4ccbb10ffe737",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-1.png",
+        "sha256": "a7e32d3f14b8f3b3f4f8bb19b649f36111eab2be84217351322a4fea609e9822",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-2.png",
+        "sha256": "e9ff3f80021a5f1500a803e312fb0c33eaef7d56d575134faf2764600807f080",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-3.png",
+        "sha256": "4f5bf9b086e75f14b889a69e8db9c4301b4574544840799af4e5ea9482707696",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-4.png",
+        "sha256": "e17ae8d2f09b5adccbfa4c20c68bb75a61b2c5417ee69c27ef070899b97975ba",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-5.png",
+        "sha256": "f0f16dad19e43b4fea5de7dd6343761de1509e1a31f812cabd9ff5d7a16be3ee",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-6.png",
+        "sha256": "1d644fe1b7aeedb9fa16d860a279472ca4483045fcda92936f250d417d58d6c4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-7.png",
+        "sha256": "ea9791cfa73be4f23afafc852aa211b6e55200a120bf254448a0a485290c911c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-8.png",
+        "sha256": "84aba272b9c2a5db8c5e9316c2d92d01f6e1b876c1479b6b087e146ceedcafeb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-9.png",
+        "sha256": "68532c6e058db36e62fbc7d7dc02b824bb203f1dab17f6254f16d185909d817b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-10.png",
+        "sha256": "c8694d04b6482bf5f7e15351ac12f689b21c97445f6db5678dc08a930abd89c3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-11.png",
+        "sha256": "dc499ce24c6a394085a58efcc6f02b8c0d9204bdd646fc3569fdce8da93363e5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-12.png",
+        "sha256": "53463a0f255468755e220f61b02e5d8cd0db595fcb8ea41fb9f50e6add51b4f3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-13.png",
+        "sha256": "8cd09575e761938279a297b3b1ced3dee741259ebe54a0d0d5a9e08bef2e225c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-14.png",
+        "sha256": "11468ad705154600a94852ac38feae5b41531fd75386d4c28820b25d000b3ef9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-jungle-broad-a-15.png",
+        "sha256": "7ed37d8e3e25ef32e01e7a83fd8fed7634971b4a4fab96edc327e7590037103b",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-wasteland-a": {
+    "id": "x15-wasteland-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "becd0d65-2ab8-4ec3-90da-1a7939e001db",
+    "submittedAt": "2026-11-27T12:38:43.568Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall dead tree after a wildfire, chunky and simple, the same designs as the small reference trees redrawn larger with a little more detail (bark cracks, needle tufts), each image a different one of these: a burnt pine with a few ash-grey needle tufts, a charred pine with drooping black needle tufts, a charred trunk with a few thick broken branches, a grey dead snag with a split top. Charcoal #2e2a28, ash grey #77706a, light grey #a49c94 on the left side, one tiny ember orange #c8642a crack at most. About half of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/wasteland-a#2 sha256 e3c819cfbb201b4d853e35d02d95c5f568843995070bcae131c2e45fa0a07dd3",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/wasteland-a#8 sha256 3a3cd3f4b899d330e25d23e3e628298ba2e3557e5d8fb3a84545cf094892e390",
+          "usage": "a burnt pine: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/wasteland-b#6 sha256 bba97d3761a73ec3f1efa49a29f655f814047563ea4683c5c1186d3909796496",
+          "usage": "a charred pine with drooping needle tufts: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/wasteland-a#5 sha256 07ed650d1b7bae4b0c919bac60ee5ffc15b732e666277a8cf9beede3b8b6416a",
+          "usage": "a dead snag: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/wasteland-a#12 sha256 16ce672ec4f6f52f39bccf200fb91d0804711421025c3e9daf2abf4afb747efe",
+          "usage": "a dead snag with thick broken branches: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165119,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall dead tree after a wildfire, chunky and simple, the same designs as the small reference trees redrawn larger with a little more detail (bark cracks, needle tufts), each image a different one of these: a burnt pine with a few ash-grey needle tufts, a charred pine with drooping black needle tufts, a charred trunk with a few thick broken branches, a grey dead snag with a split top. Charcoal #2e2a28, ash grey #77706a, light grey #a49c94 on the left side, one tiny ember orange #c8642a crack at most. About half of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:40:01.677Z",
+    "usageUsd": 0.08135925748613146,
+    "candidates": [
+      {
+        "file": "x15-wasteland-a-0.png",
+        "sha256": "2ebcfa5c7e18c57970ac154b3e57db2691c75c76a55ba78b99c45b8c166b01c0",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-1.png",
+        "sha256": "99fef5a2b70cf1a808b2875f7d932c64ca82d9421da42ca2505d25803af17616",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-2.png",
+        "sha256": "f51b119c4b453a9cec6e0924fd6396be6a889944e0bb58e86ecc7fbd11de1222",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-3.png",
+        "sha256": "965a02749c43825257fee86f9274f4de041e0538c079ecd7caa79197be84bf13",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-4.png",
+        "sha256": "39595d5ee83d6cf448c33110ebd9a574e5326bb0dbfd41a2bf8edc0be74543f0",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-5.png",
+        "sha256": "86a176d0e7684d17d2d20e7c78c6c9ab621eb8bf0a9ba177854186c9633b712e",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-6.png",
+        "sha256": "2efaa4efc478bfec61eca00bc72ad0b4c35bb4a2be3bf5648e43f978718bc40b",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-7.png",
+        "sha256": "75081aecc1f32c97d28c059b7f8779636442d23e5a70051eb996b6e927d808f3",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-8.png",
+        "sha256": "d556d02d815bc4d15e1fc146a8579cfd501f021cfed9327ad28229e29420e956",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-9.png",
+        "sha256": "06178b84e63fe7a8d644b007531246c5f5c7bdd5b30528fa788922aed1e6154b",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-10.png",
+        "sha256": "76ad668d377c7c64fa5b4d4b0400aca570ba44999af391940b3c27ed4fb82963",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-11.png",
+        "sha256": "aa2a876f9cfbf76ec8bc02db49c330622335ac1204827565894730b182eb4da5",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-12.png",
+        "sha256": "6b5ba01803f5fb7e27b88a2a65ae0782b58b9b3954daf2c5e068888810ff5697",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-13.png",
+        "sha256": "2ef11fa8eee5f6452ab687c3d49b7f6e26bc9656b487515711a8d3d650e620d0",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-14.png",
+        "sha256": "20a469e118f5a6f5b8ea73478df5d5c850b8c3596edbd98e3ef61fd339fe4069",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-wasteland-a-15.png",
+        "sha256": "49a988c3ae3a4fe2a4367f015fda8ab8686e88571dbfd27a7800165e538b8e16",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-conifer-d": {
+    "id": "x15-conifer-d",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5cfdfd54-a927-430f-a8e6-604d26b56336",
+    "submittedAt": "2026-11-27T12:39:22.755Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a tall slim pointed spruce, a tall fir with four stacked layers of drooping branches, a tall narrow pine with a blunt tip, a tall bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/grass-conifer-a#4 sha256 62bed20a84adb86b2222571921a6cca40af28a362bb72b6ed44994ee5cc41cfa",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/grass-conifer-a#0 sha256 96fb102d4879f6c0a6f36ddd0795a428bc60403ce5979d2d74549b855ea0082c",
+          "usage": "a slim pointed spruce: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#6 sha256 c7c3cdd20cc8767789ac54d55334e60e1bb383694e7baddeea82a48d026b2386",
+          "usage": "a fir with stacked drooping layers: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#13 sha256 f1edbb6e086d21f7e9b48067b6f4febced540e7235ae76db3c1787cddd96bfc0",
+          "usage": "a narrow pine: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/grass-conifer-a#20 sha256 d99fc5157dc2ca2a16922c98b47deb444c60ceb88bbf097a5e933de58ee1627c",
+          "usage": "a bushy spruce: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 52,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165123,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a tall slim pointed spruce, a tall fir with four stacked layers of drooping branches, a tall narrow pine with a blunt tip, a tall bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:40:41.420Z",
+    "usageUsd": 0.0823698787689209,
+    "candidates": [
+      {
+        "file": "x15-conifer-d-0.png",
+        "sha256": "74320c5369aa4df52043e377025d5e3f09ee019bacd5cbaaf81e7a4372362bca",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-1.png",
+        "sha256": "2d4432ef856ced8b42929114d3efab0574d52e22b21ceaaa32704afbad99b8fa",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-2.png",
+        "sha256": "d09ed0b89cc139baa43e7a09707836423137c518dee0bd39d2f434f37cd858c8",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-3.png",
+        "sha256": "16879e22966bf26988ad858ea827a12655f0782ef9f543ea26c524ff6599f0f8",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-4.png",
+        "sha256": "56cddab5329c153e8841ead80d105928df60a471ca0669ad25f6fe46d85d43d3",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-5.png",
+        "sha256": "0c73adc7821604d82dcde91c39ef4797e5dc562945863434c3e497485c71cb6c",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-6.png",
+        "sha256": "b467c29ea246e302d995d95aa0f37333f35e74b4d54f3da56308977b82c80920",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-7.png",
+        "sha256": "0646fc4f9882c637af20c72e240d639f431c48c68db665d88ab951c99bbb4a91",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-8.png",
+        "sha256": "5479ee21f08dbf34779a7afa0a6fc9b2357cd142946f0d263d548a6f309951b0",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-9.png",
+        "sha256": "7fa50f4fe3799ff56f7946b69ab112a7e107082bd761aa3bdba1fdb34ffe365e",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-10.png",
+        "sha256": "d0135ce1af1cba912ddd71388153c057dad65f2b562b7806302231ef63a9c781",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-11.png",
+        "sha256": "2db46cba3aa155892c80f26fc1847f41e3c97576e6ef722bac1127919708f86e",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-12.png",
+        "sha256": "186c374f81d2ffd89fdb218f8181268ee7fa84faf293b96be994f6664de4cdd0",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-13.png",
+        "sha256": "b6bf1604ec3a8217b793a792f421a2272fec3bc413d97c09a84bd4b9792c498f",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-14.png",
+        "sha256": "75b19bca884f0ad7230b7141f6075101463ff58c26fce4553fe1f1d9919e4067",
+        "width": 52,
+        "height": 64
+      },
+      {
+        "file": "x15-conifer-d-15.png",
+        "sha256": "012c2c304f1635013bcdcf4082888c8cb294af946de2427c5e7dbc9c39984b2b",
+        "width": 52,
+        "height": 64
+      }
+    ]
+  },
+  "x15-wasteland-b": {
+    "id": "x15-wasteland-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f4798f8d-6658-4ef8-a834-75204fd00cf5",
+    "submittedAt": "2026-11-27T12:40:01.766Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one dead tree after a wildfire with a full bushy crown of many short bare twisted branches, chunky and simple, the crown as wide as a living tree's, the same designs as the small reference trees redrawn larger with a little more detail, each image a different one of these: a dead oak with a round tangle of grey branches, a dead oak with a thick trunk and a wide tangle of grey branches, a dead tree with a few dry brown leaves left in its crown, a dead tree with clumps of dry brown leaves in its crown. Charcoal #2e2a28, ash grey #77706a, light grey #a49c94 on the left side, dry brown leaves #7a5a3a. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge."
+        }
+      ],
+      "style_image": {
+        "source": "take trees/wasteland-b#0 sha256 fa362d0449e325ab375502573decaa945856497c8322750d43aa2f6ff88dbf81",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take trees/wasteland-b#2 sha256 9949b655c3d059d3494434bd97f3c4acb8ae5fcbfad3584c83a4b73144e83476",
+          "usage": "a dead oak with a round tangle of branches: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/wasteland-a#18 sha256 40a3241fc0f46bf07aa19fe08265fbf3a52017dc3d7c2a1a10e9912efb82ec83",
+          "usage": "a dead oak: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/wasteland-b#10 sha256 49460371fcf932c2a97094e7b7dc3ce3ee2b9e723a81b8b408bad2a85b010dea",
+          "usage": "a dead tree with a few dry brown leaves: the same design, redrawn bigger"
+        },
+        {
+          "source": "take trees/wasteland-b#12 sha256 7aecf229f9a40c6c928cbc533a37984bc4733913ec22bb9e79d618a6a22f3193",
+          "usage": "a dead tree with a few dry brown leaves: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165120,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one dead tree after a wildfire with a full bushy crown of many short bare twisted branches, chunky and simple, the crown as wide as a living tree's, the same designs as the small reference trees redrawn larger with a little more detail, each image a different one of these: a dead oak with a round tangle of grey branches, a dead oak with a thick trunk and a wide tangle of grey branches, a dead tree with a few dry brown leaves left in its crown, a dead tree with clumps of dry brown leaves in its crown. Charcoal #2e2a28, ash grey #77706a, light grey #a49c94 on the left side, dry brown leaves #7a5a3a. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit."
+    },
+    "at": "2026-11-27T12:42:10.138Z",
+    "usageUsd": 0.08177942249510023,
+    "candidates": [
+      {
+        "file": "x15-wasteland-b-0.png",
+        "sha256": "dd34949e2c7aca5ef6a0d96e106c163e34c641d63da74eb7f1d1156f906df291",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-1.png",
+        "sha256": "19a24e8a78a4214bc87e4c17e656d960000ed217849d0f693a9e939d2c067bbe",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-2.png",
+        "sha256": "deff10ed5bc45897b9ddfa7d83e49a98d24e9a9caca8fc1298d666878e9d5a20",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-3.png",
+        "sha256": "094dbe57bde41d1698108779fe3e42658260b47255c9a44e0df40e3dfeb6523b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-4.png",
+        "sha256": "93dda32c9eb82479c8ba4bbf563a215831bace66758acd8440faa055e9d2a6c1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-5.png",
+        "sha256": "5f02914fff2e5be79a06574f58688c8c2adfdb4d5498d2a0462d87299a6d05c1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-6.png",
+        "sha256": "d2848c9a6666b2806c28dd07a0975bd120ddabe9f9a5ec8bcc5865129cacbdcf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-7.png",
+        "sha256": "1abc96701a15fff0af9af3a6d8960cbcdc08535d5a7d6460f2aaddc6270b6451",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-8.png",
+        "sha256": "e49dfae83364401e5332412b193dd229e98f2368818dc190325603cb87e0beb9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-9.png",
+        "sha256": "37ee9dce162cb7b0b314d457f83a3b5c732b7552252065c7cb9861a31f9fcb95",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-10.png",
+        "sha256": "9ae4f3b872f8ebac03761a377b051b015bf127522d583d73b43e7202e91f4cfb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-11.png",
+        "sha256": "72c6d28c0aabcc0a8d1e25394ad9bb45e613ffde8ad36e909297ea9531d44425",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-12.png",
+        "sha256": "0edf47c1ce1781dbb2362e80edb373d32944570f8961c564e1ebd5faaf87870f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-13.png",
+        "sha256": "0f84c44fe8b199960d90e729fec0eafcefe27c6e6c915e8821b5f2aeecc6b0c5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-14.png",
+        "sha256": "6d548feeebf6e457b84952d995eacb2330f2fccd642e999ade71b4d96f2a4ea4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-wasteland-b-15.png",
+        "sha256": "92e7225d2a2332710c9c714003f11fe592185dc1f0ef8c0428bf48992525f45a",
+        "width": 64,
+        "height": 64
+      }
+    ]
   }
 }

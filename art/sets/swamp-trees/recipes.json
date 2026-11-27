@@ -32,501 +32,586 @@
       "seed": 126202,
       "subject": "Subject: one small swamp tree, chunky and cute, each image a different one of these: a mangrove with a round dense crown of deep green leaves #4e6a34 (shadow #32462a, light #7a9548 on the left side) standing on a short tangle of thick arched brown stilt roots #6a5236; a squat bald cypress with a cone-shaped crown of dark green #475f34 and a fat flared trunk; a round mossy swamp bush of olive leaves #6b7f3c with a few thick strands of grey-green moss #93a07a. Chunky and solid, about two thirds of the image wide and nearly the full image tall.",
       "negative": "face, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers"
+    },
+    {
+      "id": "x15-swamp-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "SWAMP CYPRESS AND MOSSY OAK AT 1.5X (style and designs of willow-a)",
+      "width": 64,
+      "height": 64,
+      "seed": 165501,
+      "styleImage": {
+        "take": "willow-a#1",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "willow-a#3",
+          "usage": "a bald cypress hung with moss: the same design, redrawn bigger"
+        },
+        {
+          "take": "willow-a#6",
+          "usage": "a bald cypress: the same design, redrawn bigger"
+        },
+        {
+          "take": "willow-a#2",
+          "usage": "a gnarled mossy swamp oak: the same design, redrawn bigger"
+        },
+        {
+          "take": "willow-a#4",
+          "usage": "a mossy swamp oak: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one swamp tree, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a bald cypress with a dense flat-topped crown of dark moss green #4a6436 on a flared buttressed brown trunk #5c4630, two or three thick strands of grey-green moss #93a07a hanging from its branches; a tall two-tiered bald cypress hung with moss; a gnarled swamp oak with a round dark olive crown draped with a few thick clumps of grey-green moss; a wide mossy swamp oak with a lumpy crown. A short thick trunk. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge.",
+      "negative": "face, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers"
+    },
+    {
+      "id": "x15-swamp-b",
+      "bead": "border_marches-bzc.165",
+      "concept": "MANGROVE, MOSSY BUSH AND WILLOW AT 1.5X (style and designs of mangrove-a and willow-a)",
+      "width": 64,
+      "height": 64,
+      "seed": 165502,
+      "styleImage": {
+        "take": "mangrove-a#0",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "mangrove-a#1",
+          "usage": "a mangrove on stilt roots: the same design, redrawn bigger"
+        },
+        {
+          "take": "mangrove-a#5",
+          "usage": "a mangrove on stilt roots: the same design, redrawn bigger"
+        },
+        {
+          "take": "mangrove-a#8",
+          "usage": "a round mossy swamp bush: the same design, redrawn bigger"
+        },
+        {
+          "take": "willow-a#0",
+          "usage": "a pale weeping swamp willow: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one swamp tree, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a mangrove with a round dense crown of deep green leaves #4e6a34 (shadow #32462a, light #7a9548 on the left side) standing on a short tangle of thick arched brown stilt roots #6a5236; a tall oval mangrove on stilt roots; a round mossy swamp bush of olive leaves #6b7f3c with a few thick strands of grey-green moss #93a07a; a squat swamp willow with a big rounded drooping crown of dull olive-green leaf clumps #6b7f3c hanging down in a few thick rounded lobes. Big: about two thirds of the image wide and nearly the full image tall.",
+      "negative": "face, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers"
+    },
+    {
+      "id": "x15-swamp-c",
+      "bead": "border_marches-bzc.165",
+      "concept": "CYPRESS AND MOSSY OAK AT 1.5X with an explicit height (x15-swamp-a came out 39-42 px)",
+      "width": 64,
+      "height": 64,
+      "seed": 165503,
+      "styleImage": {
+        "take": "willow-a#1",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "willow-a#3",
+          "usage": "a bald cypress hung with moss: the same design, redrawn bigger"
+        },
+        {
+          "take": "willow-a#6",
+          "usage": "a bald cypress: the same design, redrawn bigger"
+        },
+        {
+          "take": "willow-a#2",
+          "usage": "a gnarled mossy swamp oak: the same design, redrawn bigger"
+        },
+        {
+          "take": "willow-a#4",
+          "usage": "a mossy swamp oak: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one swamp tree, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a bald cypress with a dense flat-topped crown of dark moss green #4a6436 on a flared buttressed brown trunk #5c4630, thick strands of grey-green moss #93a07a hanging from its branches; a bald cypress with a wide flat crown and moss strands; a gnarled swamp oak with a round dark olive crown draped with thick clumps of grey-green moss; a gnarled swamp oak with a lumpy dark olive crown and moss clumps. A short thick trunk. About two thirds of the image wide and about seven eighths of the image tall.",
+      "negative": "face, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers"
+    },
+    {
+      "id": "x15-swamp-d",
+      "bead": "border_marches-bzc.165",
+      "concept": "MANGROVE AND MOSSY BUSH AT 1.5X with explicit heights",
+      "width": 56,
+      "height": 72,
+      "seed": 165504,
+      "styleImage": {
+        "take": "mangrove-a#0",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "mangrove-a#1",
+          "usage": "a mangrove on stilt roots: the same design, redrawn bigger"
+        },
+        {
+          "take": "mangrove-a#5",
+          "usage": "a mangrove on stilt roots: the same design, redrawn bigger"
+        },
+        {
+          "take": "mangrove-a#3",
+          "usage": "a round mossy swamp bush: the same design, redrawn bigger"
+        },
+        {
+          "take": "mangrove-a#8",
+          "usage": "a round mossy swamp bush: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one swamp tree, chunky and cute, the reference designs redrawn larger, each image a different one of these: a mangrove with a round lumpy crown of deep green leaves #4e6a34 (shadow #32462a, light #7a9548 on the left side) on a short tangle of thick arched brown stilt roots #6a5236, about five sixths of the image tall; a mangrove with a wide lumpy crown on thick arched stilt roots, about five sixths of the image tall; a round mossy swamp bush of olive leaves #6b7f3c with thick strands of grey-green moss #93a07a, about three quarters of the image tall; a lumpy mossy bush, about three quarters of the image tall. About two thirds of the image wide.",
+      "negative": "face, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers"
+    },
+    {
+      "id": "x15-swamp-e",
+      "bead": "border_marches-bzc.165",
+      "concept": "MOSSY OAK, CYPRESS AND WILLOW AT 1.5X: tall phrasing on a 64 px tall canvas, an accepted 1.5x take as style",
+      "width": 56,
+      "height": 64,
+      "seed": 165505,
+      "styleImage": {
+        "take": "x15-swamp-b#11",
+        "usage": "copy this tree colour palette, dark outline, flat shading with one shadow tone, its pixel size and chunky cute look"
+      },
+      "references": [
+        {
+          "take": "willow-a#2",
+          "usage": "a gnarled mossy swamp oak: the same design, redrawn bigger"
+        },
+        {
+          "take": "willow-a#4",
+          "usage": "a mossy swamp oak: the same design, redrawn bigger"
+        },
+        {
+          "take": "x15-swamp-a#4",
+          "usage": "a bald cypress at the wanted size"
+        },
+        {
+          "take": "x15-swamp-b#15",
+          "usage": "a weeping willow at the wanted size"
+        }
+      ],
+      "subject": "Subject: one tall swamp tree, chunky and cute, the reference designs at the size of the big references, each image a different one of these: a tall gnarled swamp oak with a round dark olive crown #4a5a30 draped with thick clumps of grey-green moss #93a07a; a tall gnarled swamp oak with a lumpy dark olive crown and thick moss clumps; a tall bald cypress with a dense flat-topped crown of dark moss green #4a6436 on a flared trunk #5c4630, hung with thick moss strands; a tall weeping swamp willow with a rounded drooping crown of dull olive-green leaf clumps #6b7f3c. Big: about two thirds of the image wide and nearly the full image tall.",
+      "negative": "face, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers"
     }
   ],
   "outputs": [
     {
       "path": "public/assets/terrain/trees/swamp/willow-1.png",
-      "from": "willow-a#0",
-      "width": 34,
-      "height": 35,
+      "from": "x15-swamp-e#12",
+      "width": 45,
+      "height": 43,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 7,
-          "width": 34,
-          "height": 35
+          "x": 6,
+          "y": 14,
+          "width": 45,
+          "height": 43
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/willow-2.png",
-      "from": "willow-a#5",
-      "width": 34,
-      "height": 35,
+      "from": "x15-swamp-e#13",
+      "width": 44,
+      "height": 43,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 7,
-          "width": 34,
-          "height": 35
+          "x": 6,
+          "y": 14,
+          "width": 44,
+          "height": 43
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/willow-3.png",
-      "from": "willow-a#10",
-      "width": 34,
-      "height": 35,
+      "from": "x15-swamp-e#14",
+      "width": 45,
+      "height": 43,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 7,
-          "width": 34,
-          "height": 35
+          "x": 5,
+          "y": 14,
+          "width": 45,
+          "height": 43
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/willow-4.png",
-      "from": "willow-a#15",
-      "width": 34,
-      "height": 35,
+      "from": "x15-swamp-e#15",
+      "width": 45,
+      "height": 43,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 6,
-          "width": 34,
-          "height": 35
+          "x": 5,
+          "y": 14,
+          "width": 45,
+          "height": 43
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/willow-5.png",
-      "from": "willow-a#20",
-      "width": 34,
-      "height": 35,
+      "from": "x15-swamp-b#13",
+      "width": 48,
+      "height": 45,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 6,
-          "width": 34,
-          "height": 35
+          "x": 8,
+          "y": 10,
+          "width": 48,
+          "height": 45
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/swamp/willow-6.png",
+      "from": "x15-swamp-b#15",
+      "width": 48,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 9,
+          "width": 48,
+          "height": 46
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/cypress-1.png",
-      "from": "willow-a#1",
+      "from": "x15-swamp-a#4",
       "width": 40,
-      "height": 38,
+      "height": 62,
       "steps": [
         {
           "op": "crop",
-          "x": 4,
-          "y": 5,
+          "x": 12,
+          "y": 1,
           "width": 40,
-          "height": 38
+          "height": 62
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/cypress-2.png",
-      "from": "willow-a#3",
-      "width": 39,
-      "height": 37,
+      "from": "x15-swamp-a#5",
+      "width": 40,
+      "height": 62,
       "steps": [
         {
           "op": "crop",
-          "x": 5,
-          "y": 6,
-          "width": 39,
-          "height": 37
+          "x": 12,
+          "y": 1,
+          "width": 40,
+          "height": 62
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/cypress-3.png",
-      "from": "willow-a#6",
+      "from": "x15-swamp-a#6",
       "width": 40,
-      "height": 38,
+      "height": 63,
       "steps": [
         {
           "op": "crop",
-          "x": 4,
-          "y": 5,
+          "x": 12,
+          "y": 0,
           "width": 40,
-          "height": 38
+          "height": 63
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/cypress-4.png",
-      "from": "willow-a#8",
+      "from": "x15-swamp-e#8",
       "width": 39,
-      "height": 37,
+      "height": 60,
       "steps": [
         {
           "op": "crop",
-          "x": 5,
-          "y": 6,
+          "x": 9,
+          "y": 4,
           "width": 39,
-          "height": 37
+          "height": 60
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/cypress-5.png",
-      "from": "willow-a#11",
-      "width": 40,
-      "height": 38,
+      "from": "x15-swamp-e#9",
+      "width": 38,
+      "height": 60,
       "steps": [
         {
           "op": "crop",
-          "x": 4,
-          "y": 5,
-          "width": 40,
-          "height": 38
+          "x": 9,
+          "y": 4,
+          "width": 38,
+          "height": 60
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/cypress-6.png",
-      "from": "willow-a#13",
-      "width": 39,
-      "height": 37,
+      "from": "x15-swamp-e#11",
+      "width": 38,
+      "height": 58,
       "steps": [
         {
           "op": "crop",
-          "x": 5,
+          "x": 9,
           "y": 6,
-          "width": 39,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/swamp/cypress-7.png",
-      "from": "willow-a#18",
-      "width": 39,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 5,
-          "y": 5,
-          "width": 39,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/swamp/cypress-8.png",
-      "from": "willow-a#21",
-      "width": 40,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 4,
-          "y": 4,
-          "width": 40,
-          "height": 39
+          "width": 38,
+          "height": 58
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/mossoak-1.png",
-      "from": "willow-a#2",
-      "width": 35,
-      "height": 37,
+      "from": "x15-swamp-e#0",
+      "width": 43,
+      "height": 47,
       "steps": [
         {
           "op": "crop",
           "x": 7,
-          "y": 6,
-          "width": 35,
-          "height": 37
+          "y": 9,
+          "width": 43,
+          "height": 47
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/mossoak-2.png",
-      "from": "willow-a#4",
-      "width": 35,
-      "height": 36,
+      "from": "x15-swamp-e#1",
+      "width": 41,
+      "height": 47,
       "steps": [
         {
           "op": "crop",
-          "x": 6,
-          "y": 6,
-          "width": 35,
-          "height": 36
+          "x": 7,
+          "y": 9,
+          "width": 41,
+          "height": 47
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/mossoak-3.png",
-      "from": "willow-a#7",
-      "width": 35,
-      "height": 37,
+      "from": "x15-swamp-e#2",
+      "width": 41,
+      "height": 47,
       "steps": [
         {
           "op": "crop",
           "x": 7,
-          "y": 6,
-          "width": 35,
-          "height": 37
+          "y": 9,
+          "width": 41,
+          "height": 47
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/mossoak-4.png",
-      "from": "willow-a#9",
-      "width": 35,
-      "height": 36,
+      "from": "x15-swamp-e#3",
+      "width": 41,
+      "height": 47,
       "steps": [
         {
           "op": "crop",
-          "x": 6,
-          "y": 6,
-          "width": 35,
-          "height": 36
+          "x": 7,
+          "y": 9,
+          "width": 41,
+          "height": 47
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/mossoak-5.png",
-      "from": "willow-a#12",
-      "width": 35,
-      "height": 37,
+      "from": "x15-swamp-e#4",
+      "width": 45,
+      "height": 55,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 6,
-          "width": 35,
-          "height": 37
+          "x": 6,
+          "y": 4,
+          "width": 45,
+          "height": 55
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/mossoak-6.png",
-      "from": "willow-a#14",
-      "width": 35,
-      "height": 36,
+      "from": "x15-swamp-e#5",
+      "width": 42,
+      "height": 53,
       "steps": [
         {
           "op": "crop",
-          "x": 6,
-          "y": 6,
-          "width": 35,
-          "height": 36
+          "x": 7,
+          "y": 5,
+          "width": 42,
+          "height": 53
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/mossoak-7.png",
-      "from": "willow-a#19",
-      "width": 35,
-      "height": 36,
+      "from": "x15-swamp-e#6",
+      "width": 44,
+      "height": 55,
       "steps": [
         {
           "op": "crop",
           "x": 6,
-          "y": 5,
-          "width": 35,
-          "height": 36
+          "y": 4,
+          "width": 44,
+          "height": 55
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/mossoak-8.png",
-      "from": "willow-a#22",
-      "width": 35,
-      "height": 36,
+      "from": "x15-swamp-e#7",
+      "width": 41,
+      "height": 53,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
+          "x": 8,
           "y": 6,
-          "width": 35,
-          "height": 36
+          "width": 41,
+          "height": 53
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/mangrove-1.png",
-      "from": "mangrove-a#0",
-      "width": 33,
-      "height": 42,
+      "from": "x15-swamp-b#5",
+      "width": 40,
+      "height": 53,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
-          "y": 5,
-          "width": 33,
-          "height": 42
+          "x": 12,
+          "y": 7,
+          "width": 40,
+          "height": 53
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/mangrove-2.png",
-      "from": "mangrove-a#1",
-      "width": 32,
-      "height": 44,
+      "from": "x15-swamp-b#6",
+      "width": 38,
+      "height": 54,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
-          "y": 2,
-          "width": 32,
-          "height": 44
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/swamp/mangrove-3.png",
-      "from": "mangrove-a#5",
-      "width": 35,
-      "height": 43,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 3,
-          "width": 35,
-          "height": 43
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/swamp/mangrove-4.png",
-      "from": "mangrove-a#10",
-      "width": 35,
-      "height": 43,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 3,
-          "width": 35,
-          "height": 43
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/swamp/mangrove-5.png",
-      "from": "mangrove-a#15",
-      "width": 35,
-      "height": 43,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 2,
-          "width": 35,
-          "height": 43
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/swamp/mangrove-6.png",
-      "from": "mangrove-a#20",
-      "width": 35,
-      "height": 43,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 2,
-          "width": 35,
-          "height": 43
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/swamp/mangrove-7.png",
-      "from": "mangrove-a#21",
-      "width": 31,
-      "height": 43,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 2,
-          "width": 31,
-          "height": 43
+          "x": 13,
+          "y": 6,
+          "width": 38,
+          "height": 54
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/bush-1.png",
-      "from": "mangrove-a#3",
-      "width": 36,
-      "height": 40,
+      "from": "x15-swamp-b#11",
+      "width": 38,
+      "height": 48,
       "steps": [
         {
           "op": "crop",
-          "x": 6,
-          "y": 5,
-          "width": 36,
-          "height": 40
+          "x": 13,
+          "y": 8,
+          "width": 38,
+          "height": 48
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/bush-2.png",
-      "from": "mangrove-a#8",
-      "width": 41,
-      "height": 39,
+      "from": "x15-swamp-d#8",
+      "width": 51,
+      "height": 58,
       "steps": [
         {
           "op": "crop",
-          "x": 4,
-          "y": 6,
-          "width": 41,
-          "height": 39
+          "x": 0,
+          "y": 9,
+          "width": 51,
+          "height": 58
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/bush-3.png",
-      "from": "mangrove-a#13",
-      "width": 41,
-      "height": 38,
+      "from": "x15-swamp-d#9",
+      "width": 54,
+      "height": 59,
       "steps": [
         {
           "op": "crop",
-          "x": 4,
-          "y": 7,
-          "width": 41,
-          "height": 38
+          "x": 0,
+          "y": 9,
+          "width": 54,
+          "height": 59
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/bush-4.png",
-      "from": "mangrove-a#14",
-      "width": 39,
-      "height": 34,
+      "from": "x15-swamp-d#10",
+      "width": 54,
+      "height": 57,
       "steps": [
         {
           "op": "crop",
-          "x": 5,
-          "y": 11,
-          "width": 39,
-          "height": 34
+          "x": 2,
+          "y": 10,
+          "width": 54,
+          "height": 57
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/swamp/bush-5.png",
-      "from": "mangrove-a#22",
-      "width": 36,
-      "height": 33,
+      "from": "x15-swamp-d#12",
+      "width": 52,
+      "height": 57,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
+          "x": 0,
           "y": 11,
-          "width": 36,
-          "height": 33
+          "width": 52,
+          "height": 57
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/swamp/bush-6.png",
+      "from": "x15-swamp-d#14",
+      "width": 55,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 10,
+          "width": 55,
+          "height": 58
         }
       ]
     }

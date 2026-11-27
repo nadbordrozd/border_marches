@@ -376,5 +376,820 @@
         "height": 48
       }
     ]
+  },
+  "x15-swamp-a": {
+    "id": "x15-swamp-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "e5a469c6-440d-4539-aed3-81a44de95c23",
+    "submittedAt": "2026-11-27T12:31:28.527Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one swamp tree, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a bald cypress with a dense flat-topped crown of dark moss green #4a6436 on a flared buttressed brown trunk #5c4630, two or three thick strands of grey-green moss #93a07a hanging from its branches; a tall two-tiered bald cypress hung with moss; a gnarled swamp oak with a round dark olive crown draped with a few thick clumps of grey-green moss; a wide mossy swamp oak with a lumpy crown. A short thick trunk. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge."
+        }
+      ],
+      "style_image": {
+        "source": "take swamp-trees/willow-a#1 sha256 c3b45ff34a60ec171db169f7a87936d66ce033e52ccf7272caeb8cdc650dc880",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take swamp-trees/willow-a#3 sha256 a773bb01b04f2d936861d0b264fe905459f90bd4a7821fb8f49e009539b6e2c6",
+          "usage": "a bald cypress hung with moss: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/willow-a#6 sha256 f78726bf12fd8ca4c3d7edfd0a433637ef7d8fb6ebe7a50a4ae541e7e97f0f13",
+          "usage": "a bald cypress: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/willow-a#2 sha256 b362375f5d4eef0c069b5da175ae66177fbb18da50a36b81be775cd5367cc9a3",
+          "usage": "a gnarled mossy swamp oak: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/willow-a#4 sha256 a1d107bb3fc4db814dc3a1b965ceda22e706be3435c19342418ca3136085f403",
+          "usage": "a mossy swamp oak: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165501,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one swamp tree, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a bald cypress with a dense flat-topped crown of dark moss green #4a6436 on a flared buttressed brown trunk #5c4630, two or three thick strands of grey-green moss #93a07a hanging from its branches; a tall two-tiered bald cypress hung with moss; a gnarled swamp oak with a round dark olive crown draped with a few thick clumps of grey-green moss; a wide mossy swamp oak with a lumpy crown. A short thick trunk. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers."
+    },
+    "at": "2026-11-27T12:33:16.532Z",
+    "usageUsd": 0.08144820716645983,
+    "candidates": [
+      {
+        "file": "x15-swamp-a-0.png",
+        "sha256": "266ab86ccb5ca160001bd7109538ab8d88d738f56d42514cd0c0d04a7f5622c7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-1.png",
+        "sha256": "d5e42b99f329fee9f9e6a2eba765fa1c8f25d647e337756106bca333a3b01ed0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-2.png",
+        "sha256": "6d687e2938af8fe8778a7d1f562f7bc304a142eb4e0f19861428f60a2e37133e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-3.png",
+        "sha256": "b86d7a17ba6a1bee5500fa5c121c0f8edd011fd35d30d8e41add2c327c24d105",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-4.png",
+        "sha256": "8324079d98e026b5ae17ba7606b646c7905b6fd4889c451640a07402d23af5b3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-5.png",
+        "sha256": "226da66eaa57ad0c744be596b92687f5047955cde125d214fd2b8e99e131a4ef",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-6.png",
+        "sha256": "de868009eb24665f55ddeb9d8d2d655a9c9b005db45afcfb401e258682ccecb7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-7.png",
+        "sha256": "dff22e19291629a1bf70ac43c1169a0e5939174eb56c6120bb69071aba6f2fc0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-8.png",
+        "sha256": "b5216e9d19c330c8c2530657a05ac8a6aba1ffb327c9afa2f770bd755a461ce0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-9.png",
+        "sha256": "fda987bf1f32d829fee2559aa0e8a87667498c320ee9299cba4a47cca1f76a19",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-10.png",
+        "sha256": "a1e94ed27d583aff1a487ff8d71bf6b76efe718bbf26d069300a612ccabe69f0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-11.png",
+        "sha256": "e4fa2b9029cd784a2e90ffa6a615888840aefbcf93ed4ed7d2a32f4d014ad861",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-12.png",
+        "sha256": "5b5baac13b54ea7f777710eac8a8d9b1a4fe5078812e12fd24e05c48b60f3c0b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-13.png",
+        "sha256": "057768bd91adcc50aa70670b7ede126dba86d76058407c313e04cc803205ec2e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-14.png",
+        "sha256": "c5dd6ad272838dbf0843e48e9bf32ac2910b00d5fdd34ad1cbc09fd48d1f5774",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-a-15.png",
+        "sha256": "2fbe0086aac969a6e11a16849c3dd0cabac47a3c572f950945701bf4c01d7715",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-swamp-b": {
+    "id": "x15-swamp-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "e634ac1d-9649-4111-9108-342a59878d94",
+    "submittedAt": "2026-11-27T12:33:16.627Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one swamp tree, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a mangrove with a round dense crown of deep green leaves #4e6a34 (shadow #32462a, light #7a9548 on the left side) standing on a short tangle of thick arched brown stilt roots #6a5236; a tall oval mangrove on stilt roots; a round mossy swamp bush of olive leaves #6b7f3c with a few thick strands of grey-green moss #93a07a; a squat swamp willow with a big rounded drooping crown of dull olive-green leaf clumps #6b7f3c hanging down in a few thick rounded lobes. Big: about two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take swamp-trees/mangrove-a#0 sha256 034d777655736e4219c1c3028f7ae801da3e4b49a5e209bf2d24b06d2d67875b",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take swamp-trees/mangrove-a#1 sha256 8852c4b3a3c3e980d404d3c85ee0772eb181e6b65fe71625c1854eebc71a5ca2",
+          "usage": "a mangrove on stilt roots: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/mangrove-a#5 sha256 f506e9f17df222814dad1945f7878511f7ade8408fbf9cebae684907e0f85c09",
+          "usage": "a mangrove on stilt roots: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/mangrove-a#8 sha256 1b077bd4cff6821d0d9f15e8cfae1c164ebf323e3dd4288fb2b26a5280218397",
+          "usage": "a round mossy swamp bush: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/willow-a#0 sha256 3a398c3af002f4445a6cdeef6aeb7d039f0c68c8f2ec6f84433d9b47de34347f",
+          "usage": "a pale weeping swamp willow: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165502,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one swamp tree, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a mangrove with a round dense crown of deep green leaves #4e6a34 (shadow #32462a, light #7a9548 on the left side) standing on a short tangle of thick arched brown stilt roots #6a5236; a tall oval mangrove on stilt roots; a round mossy swamp bush of olive leaves #6b7f3c with a few thick strands of grey-green moss #93a07a; a squat swamp willow with a big rounded drooping crown of dull olive-green leaf clumps #6b7f3c hanging down in a few thick rounded lobes. Big: about two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers."
+    },
+    "at": "2026-11-27T12:34:54.652Z",
+    "usageUsd": 0.08141201660368177,
+    "candidates": [
+      {
+        "file": "x15-swamp-b-0.png",
+        "sha256": "5ccd812015ef7843d9d4da870006dc3c2918faba58f0cfb897f5c0bc6be616c7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-1.png",
+        "sha256": "4a3e3f65c19bc736dce304fa029bda4ada4dd1dcab45548587fe78a546ca2322",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-2.png",
+        "sha256": "97bca87fc2e7003f745ed0f1cf780070865a779f94c9986f63459d9c1228fc1a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-3.png",
+        "sha256": "02d7f955e365c867cf3faeb9ef4f82f24f0a96c32733a47ed15f79e2a2c2e1db",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-4.png",
+        "sha256": "df84ab01a9b1ab7d3e8479cad2254729f7beb137fd8005c04e2144160b2666be",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-5.png",
+        "sha256": "0feebb04e6718c97e24aa1230f63dd2dd327842315c7a0732fec3e58511bbd91",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-6.png",
+        "sha256": "94664c76440c8f819595a5a5f4edfc5a13580c8760713e1055ed5a259790fbaf",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-7.png",
+        "sha256": "a66ca903e137f42d926a3125380e7c10c32c133f9c112e1d99f0c938b5f8acb3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-8.png",
+        "sha256": "8aeeda56c9ba40cec60a4f56fa2aa06cd7b3af1901d4b0b26ee0859647d21ae1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-9.png",
+        "sha256": "91320de3e73bb17c6ac38b7e33aae0a811f6137ef9c2821f08fc966a0557f2ed",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-10.png",
+        "sha256": "b81b4632c7cc874212e8cf3da18bbcf4115af703377ed7c55dd9820dec0fc879",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-11.png",
+        "sha256": "a72b816567bf175dbe371201460d289ce041f988255686e92d7db4563bb3565e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-12.png",
+        "sha256": "15a5c5ccf963b0a3e8d6a4fe47c1453c8d86602baa89bd50a3b4dd1f8dbf104e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-13.png",
+        "sha256": "bc9f952322648c7adb13edddc4aa4b6c68e6fd4350010dce0cfd9430f6535e21",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-14.png",
+        "sha256": "77c87ac040902407954361581b1c15b339ab013f7edcb69cd9754f195238ecbd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-b-15.png",
+        "sha256": "2203155f520787243ca2703e80c587379c1c0dff16775486d4537c426d2bbbcd",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-swamp-c": {
+    "id": "x15-swamp-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "63b160b9-697f-4873-8b29-a25a2a8c8655",
+    "submittedAt": "2026-11-27T12:36:51.214Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one swamp tree, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a bald cypress with a dense flat-topped crown of dark moss green #4a6436 on a flared buttressed brown trunk #5c4630, thick strands of grey-green moss #93a07a hanging from its branches; a bald cypress with a wide flat crown and moss strands; a gnarled swamp oak with a round dark olive crown draped with thick clumps of grey-green moss; a gnarled swamp oak with a lumpy dark olive crown and moss clumps. A short thick trunk. About two thirds of the image wide and about seven eighths of the image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take swamp-trees/willow-a#1 sha256 c3b45ff34a60ec171db169f7a87936d66ce033e52ccf7272caeb8cdc650dc880",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take swamp-trees/willow-a#3 sha256 a773bb01b04f2d936861d0b264fe905459f90bd4a7821fb8f49e009539b6e2c6",
+          "usage": "a bald cypress hung with moss: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/willow-a#6 sha256 f78726bf12fd8ca4c3d7edfd0a433637ef7d8fb6ebe7a50a4ae541e7e97f0f13",
+          "usage": "a bald cypress: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/willow-a#2 sha256 b362375f5d4eef0c069b5da175ae66177fbb18da50a36b81be775cd5367cc9a3",
+          "usage": "a gnarled mossy swamp oak: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/willow-a#4 sha256 a1d107bb3fc4db814dc3a1b965ceda22e706be3435c19342418ca3136085f403",
+          "usage": "a mossy swamp oak: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165503,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one swamp tree, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a bald cypress with a dense flat-topped crown of dark moss green #4a6436 on a flared buttressed brown trunk #5c4630, thick strands of grey-green moss #93a07a hanging from its branches; a bald cypress with a wide flat crown and moss strands; a gnarled swamp oak with a round dark olive crown draped with thick clumps of grey-green moss; a gnarled swamp oak with a lumpy dark olive crown and moss clumps. A short thick trunk. About two thirds of the image wide and about seven eighths of the image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers."
+    },
+    "at": "2026-11-27T12:38:51.257Z",
+    "usageUsd": 0.08133792018890382,
+    "candidates": [
+      {
+        "file": "x15-swamp-c-0.png",
+        "sha256": "143f2a522cee60ca7bf08a4e8627b0ea448bb6466e6b1acdf55fbfa4affb97f2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-1.png",
+        "sha256": "8afa4769e8e1383d3864d3cfafbb845496ab76352376d459fa58b20155f078c3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-2.png",
+        "sha256": "3b7c0b9b024566e765b193e837514c29afb4ca29737ddad4e72c2f9c4ffde07b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-3.png",
+        "sha256": "3164b92ddbe8bcae76ed05d1311886e014d35483a0680a751b8d75326b7d1dde",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-4.png",
+        "sha256": "a7767c5120cabe43ecb8e398a29b2f52aea212374cde05646214106efa13eeb6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-5.png",
+        "sha256": "c1fd0732c1db7bf4b67c4ea3383702627d4a06c9791a7ffe72a1060024c35820",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-6.png",
+        "sha256": "da407cc35c9d93b8d491f8a2e71fa1e19fca210414851db082d60099b729adbe",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-7.png",
+        "sha256": "30879439b00225943b9a8abada87b310e805371e66891b21cfe0963c82f56dc9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-8.png",
+        "sha256": "7e0c0397f6f3f6ddbc4d89afc1d3ecc24a23b2694b1df14db95825332703f7b6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-9.png",
+        "sha256": "eee0b0e02e89a08cd42c22264c1bf322a194a361d04e105e6ec608e3cb3feecd",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-10.png",
+        "sha256": "718e4a000039193d201ad6927ad3abb39ea9cb632094b3fc67a9e5a6049dc25b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-11.png",
+        "sha256": "3bea6fb232e381a3a952df5a3bcc26d8dd0c6671c69ba789336f33d874b45fc4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-12.png",
+        "sha256": "34397cd6587420633cdc77e2b0869d793e0be85059436f6a10334205425540ee",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-13.png",
+        "sha256": "2cd6836d3b12bec0c0c1ccf9d5b0262928562bc9daf3825fc674559c369eb3a0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-14.png",
+        "sha256": "c9b57a875be850506558c78d5a2559f83045611a260477f4fe8460c3d469478a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-c-15.png",
+        "sha256": "f9ee20de892308f2225ff6eb9e5ab24b6980a7ed7e400a01c6c533c87cd00b21",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "x15-swamp-d": {
+    "id": "x15-swamp-d",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c81873e1-3645-4dcb-beae-d3f1e4c8afd9",
+    "submittedAt": "2026-11-27T12:38:51.358Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one swamp tree, chunky and cute, the reference designs redrawn larger, each image a different one of these: a mangrove with a round lumpy crown of deep green leaves #4e6a34 (shadow #32462a, light #7a9548 on the left side) on a short tangle of thick arched brown stilt roots #6a5236, about five sixths of the image tall; a mangrove with a wide lumpy crown on thick arched stilt roots, about five sixths of the image tall; a round mossy swamp bush of olive leaves #6b7f3c with thick strands of grey-green moss #93a07a, about three quarters of the image tall; a lumpy mossy bush, about three quarters of the image tall. About two thirds of the image wide."
+        }
+      ],
+      "style_image": {
+        "source": "take swamp-trees/mangrove-a#0 sha256 034d777655736e4219c1c3028f7ae801da3e4b49a5e209bf2d24b06d2d67875b",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take swamp-trees/mangrove-a#1 sha256 8852c4b3a3c3e980d404d3c85ee0772eb181e6b65fe71625c1854eebc71a5ca2",
+          "usage": "a mangrove on stilt roots: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/mangrove-a#5 sha256 f506e9f17df222814dad1945f7878511f7ade8408fbf9cebae684907e0f85c09",
+          "usage": "a mangrove on stilt roots: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/mangrove-a#3 sha256 be8bb59315c0acffe35249f0b551bbbd8775d4f0f7c70759fc8577c6b45d8ca2",
+          "usage": "a round mossy swamp bush: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/mangrove-a#8 sha256 1b077bd4cff6821d0d9f15e8cfae1c164ebf323e3dd4288fb2b26a5280218397",
+          "usage": "a round mossy swamp bush: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165504,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one swamp tree, chunky and cute, the reference designs redrawn larger, each image a different one of these: a mangrove with a round lumpy crown of deep green leaves #4e6a34 (shadow #32462a, light #7a9548 on the left side) on a short tangle of thick arched brown stilt roots #6a5236, about five sixths of the image tall; a mangrove with a wide lumpy crown on thick arched stilt roots, about five sixths of the image tall; a round mossy swamp bush of olive leaves #6b7f3c with thick strands of grey-green moss #93a07a, about three quarters of the image tall; a lumpy mossy bush, about three quarters of the image tall. About two thirds of the image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers."
+    },
+    "at": "2026-11-27T12:40:20.888Z",
+    "usageUsd": 0.08315990739398532,
+    "candidates": [
+      {
+        "file": "x15-swamp-d-0.png",
+        "sha256": "82847d1a989321fc0acaa1f5b09e4558fb4f816da53d58c4837ffe6c03e15de3",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-1.png",
+        "sha256": "cd69258e1195992b843387d2bc720bfb51a69eb22069617bdb379cea9dcc18a5",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-2.png",
+        "sha256": "d28ca3081ee8228226c08a485b4a4ab4f5fa9e56d936058dbcc63aae01e7ef09",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-3.png",
+        "sha256": "4deb741d73b0b463fe8fc15e8f1b104533cd66b824e0cf13fba986cabb19777a",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-4.png",
+        "sha256": "ed0f0c033089a83599426d5ba095d0f636a6d3c48925b4d21e32533296a3d41d",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-5.png",
+        "sha256": "5bc66ced6687889d4efa63f033b31cd0f19afa9e13ab2f1291b2c657f093af31",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-6.png",
+        "sha256": "5c608dff7017175ce689e969343a351fd628a52ae37be358b3e98b2e6f2dfbb7",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-7.png",
+        "sha256": "19b6dd0123070a89964c7bc5c1a7102022063eeabe198b475718a5e71541ea1b",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-8.png",
+        "sha256": "909093fc7d2683016953e36a2e8a54799e1820d09e5290d29312bf73a470d75e",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-9.png",
+        "sha256": "0c47d1c0ce1a72ef2a01c8aec81006a2312e8801748179c0694b308e9b34b8ee",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-10.png",
+        "sha256": "0d526c9cca0c2271d921841fb71e21e4fcf58643f7a53d705e2379675d52c599",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-11.png",
+        "sha256": "fc7f5a6d3238db375d57a4e0a7b38cda1e33e5f3e8efd43f85e7b189c6dfe36c",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-12.png",
+        "sha256": "8681b8328dbc6cf15b0d332cc5a5ce2a24d0ba4c2caecddbc3bd1ff6aeead4b2",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-13.png",
+        "sha256": "993542973052e2586eab814e21acdd03b3641ceb85b9049b7ff3c602114df612",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-14.png",
+        "sha256": "aa613256d49081b1fba071e412247d1f6991700b9b3d9db38856c8b7db15712d",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-swamp-d-15.png",
+        "sha256": "8de950209bc87753622a9358d9b88466f86d18e1c6bcfe571743cf1dfe63d8b1",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-swamp-e": {
+    "id": "x15-swamp-e",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "cfb63583-9dcd-4b4f-8b2d-9f8ea680ef40",
+    "submittedAt": "2026-11-27T12:41:29.020Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall swamp tree, chunky and cute, the reference designs at the size of the big references, each image a different one of these: a tall gnarled swamp oak with a round dark olive crown #4a5a30 draped with thick clumps of grey-green moss #93a07a; a tall gnarled swamp oak with a lumpy dark olive crown and thick moss clumps; a tall bald cypress with a dense flat-topped crown of dark moss green #4a6436 on a flared trunk #5c4630, hung with thick moss strands; a tall weeping swamp willow with a rounded drooping crown of dull olive-green leaf clumps #6b7f3c. Big: about two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take swamp-trees/x15-swamp-b#11 sha256 a72b816567bf175dbe371201460d289ce041f988255686e92d7db4563bb3565e",
+        "usage": "copy this tree colour palette, dark outline, flat shading with one shadow tone, its pixel size and chunky cute look"
+      },
+      "reference_images": [
+        {
+          "source": "take swamp-trees/willow-a#2 sha256 b362375f5d4eef0c069b5da175ae66177fbb18da50a36b81be775cd5367cc9a3",
+          "usage": "a gnarled mossy swamp oak: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/willow-a#4 sha256 a1d107bb3fc4db814dc3a1b965ceda22e706be3435c19342418ca3136085f403",
+          "usage": "a mossy swamp oak: the same design, redrawn bigger"
+        },
+        {
+          "source": "take swamp-trees/x15-swamp-a#4 sha256 8324079d98e026b5ae17ba7606b646c7905b6fd4889c451640a07402d23af5b3",
+          "usage": "a bald cypress at the wanted size"
+        },
+        {
+          "source": "take swamp-trees/x15-swamp-b#15 sha256 2203155f520787243ca2703e80c587379c1c0dff16775486d4537c426d2bbbcd",
+          "usage": "a weeping willow at the wanted size"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 165505,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall swamp tree, chunky and cute, the reference designs at the size of the big references, each image a different one of these: a tall gnarled swamp oak with a round dark olive crown #4a5a30 draped with thick clumps of grey-green moss #93a07a; a tall gnarled swamp oak with a lumpy dark olive crown and thick moss clumps; a tall bald cypress with a dense flat-topped crown of dark moss green #4a6436 on a flared trunk #5c4630, hung with thick moss strands; a tall weeping swamp willow with a rounded drooping crown of dull olive-green leaf clumps #6b7f3c. Big: about two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers."
+    },
+    "at": "2026-11-27T12:42:46.119Z",
+    "usageUsd": 0.0818467960357666,
+    "candidates": [
+      {
+        "file": "x15-swamp-e-0.png",
+        "sha256": "cc95d888757d177acfbc889ad1a21cce397fa6fce1c130d3f65ba86f1894deae",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-1.png",
+        "sha256": "93a9a439cf5df354ad08973dae1a567b4734ce2d135096a447f24f2ddc21d80b",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-2.png",
+        "sha256": "b047b944e007b85c0de8c1d3f6efa50d1019d9dff013b8714a21341d67d6441b",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-3.png",
+        "sha256": "b0ecd5294005d43b231f9dbeb16f15095eef79a98313d78a20e9e97d0425d39b",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-4.png",
+        "sha256": "1b51a8deea7eedf55817f5a8197e2934c2e13603cda24f13b6bf5e6dc9a74177",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-5.png",
+        "sha256": "bc63f97df15fb257ccdbbd274c9d0e7fedb90d5e044e7ae79275a801d165440b",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-6.png",
+        "sha256": "65e66eedd8269b098d1f3a3080d68bc064bc6b6358257275bdb39716498ff6cf",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-7.png",
+        "sha256": "af3eca9807dd60f073ec8ffd1c251e298c5ccd74ba17d67281ad1529b0915eba",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-8.png",
+        "sha256": "bdaa1708716bddeb1d138b4c45cbbaf3b894a3d69891bbb65dd13c8442b99fff",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-9.png",
+        "sha256": "a868c96de397a1c815a7d88a26e15cecbefef5eb9cae8c024f163957e103f2ee",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-10.png",
+        "sha256": "294c714e22dbdda05ea08d5d1d7298687ac66c6cb29cfdc1bb25e5a405b53a3e",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-11.png",
+        "sha256": "be0fdbd27594a8130a40fd968926a2dcadf4fab17540b01fad879d5c1a586476",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-12.png",
+        "sha256": "745d97b7679cfd96ff4e4861cbbd956a675424a75e49dd72418a57a51d8b9d7c",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-13.png",
+        "sha256": "4d3b753f322dbc83b6347f52d21a61249c3e0a0afdab63500e34496cf79b93e1",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-14.png",
+        "sha256": "bed4285c8876ca01aa0536027bd18f57a1ccf99a2e65dfac0ad7139d32c3c4e4",
+        "width": 56,
+        "height": 64
+      },
+      {
+        "file": "x15-swamp-e-15.png",
+        "sha256": "107e9959227727b9062d00b6c4d2dbc8dc4d9217e3b9ea24952e87804ad476ec",
+        "width": 56,
+        "height": 64
+      }
+    ]
   }
 }

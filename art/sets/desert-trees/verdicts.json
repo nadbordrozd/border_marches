@@ -248,5 +248,290 @@
     "verdict": "REJECTED",
     "notes": "near-duplicate barrel cactus",
     "at": "2026-11-26T13:58:18.572Z"
+  },
+  "x15-palm-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "date palm with dates, the palm-a design at 1.5x (58-61 px)",
+    "at": "2026-11-27T12:32:34.837Z"
+  },
+  "x15-palm-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "date palm with dates, the palm-a design at 1.5x (58-61 px)",
+    "at": "2026-11-27T12:32:34.973Z"
+  },
+  "x15-palm-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "date palm with dates, the palm-a design at 1.5x (58-61 px)",
+    "at": "2026-11-27T12:32:35.136Z"
+  },
+  "x15-palm-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "date palm with dates, the palm-a design at 1.5x (58-61 px)",
+    "at": "2026-11-27T12:32:35.299Z"
+  },
+  "x15-palm-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "squat bushy fan palm, the palm-a design at 1.5x",
+    "at": "2026-11-27T12:32:35.447Z"
+  },
+  "x15-palm-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "squat bushy fan palm, the palm-a design at 1.5x",
+    "at": "2026-11-27T12:32:35.600Z"
+  },
+  "x15-palm-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "squat bushy fan palm, the palm-a design at 1.5x",
+    "at": "2026-11-27T12:32:35.764Z"
+  },
+  "x15-palm-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "squat bushy fan palm, the palm-a design at 1.5x",
+    "at": "2026-11-27T12:32:35.908Z"
+  },
+  "x15-palm-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "young leaning ringed palm at 1.5x",
+    "at": "2026-11-27T12:32:36.048Z"
+  },
+  "x15-palm-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "young leaning ringed palm at 1.5x",
+    "at": "2026-11-27T12:32:36.209Z"
+  },
+  "x15-palm-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "young leaning ringed palm at 1.5x",
+    "at": "2026-11-27T12:32:36.353Z"
+  },
+  "x15-palm-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "young leaning ringed palm at 1.5x",
+    "at": "2026-11-27T12:32:36.507Z"
+  },
+  "x15-palm-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "double palm from one base at 1.5x",
+    "at": "2026-11-27T12:32:36.689Z"
+  },
+  "x15-palm-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "double palm from one base at 1.5x",
+    "at": "2026-11-27T12:32:36.855Z"
+  },
+  "x15-palm-a#13": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #12/#14; keeps the wide double palms rare",
+    "at": "2026-11-27T12:32:37.014Z"
+  },
+  "x15-palm-a#15": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #12/#14; keeps the wide double palms rare",
+    "at": "2026-11-27T12:32:37.187Z"
+  },
+  "x15-cactus-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "two-armed saguaro, the cactus-a design at 1.6x (58-59 px)",
+    "at": "2026-11-27T12:34:20.048Z"
+  },
+  "x15-cactus-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "two-armed saguaro, the cactus-a design at 1.6x (58-59 px)",
+    "at": "2026-11-27T12:34:20.382Z"
+  },
+  "x15-cactus-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "two-armed saguaro, the cactus-a design at 1.6x (58-59 px)",
+    "at": "2026-11-27T12:34:20.756Z"
+  },
+  "x15-cactus-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "two-armed saguaro, the cactus-a design at 1.6x (58-59 px)",
+    "at": "2026-11-27T12:34:20.997Z"
+  },
+  "x15-cactus-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "prickly pear clump with pink fruits at 1.6x",
+    "at": "2026-11-27T12:34:21.234Z"
+  },
+  "x15-cactus-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "prickly pear clump with pink fruits at 1.6x",
+    "at": "2026-11-27T12:34:21.623Z"
+  },
+  "x15-cactus-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "prickly pear clump with pink fruits at 1.6x",
+    "at": "2026-11-27T12:34:21.824Z"
+  },
+  "x15-cactus-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "prickly pear clump with pink fruits at 1.6x",
+    "at": "2026-11-27T12:34:22.315Z"
+  },
+  "x15-cactus-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "cluster of ribbed column cacti at 1.6x",
+    "at": "2026-11-27T12:34:23.053Z"
+  },
+  "x15-cactus-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "cluster of ribbed column cacti at 1.6x",
+    "at": "2026-11-27T12:34:23.503Z"
+  },
+  "x15-cactus-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "cluster of ribbed column cacti at 1.6x",
+    "at": "2026-11-27T12:34:23.721Z"
+  },
+  "x15-cactus-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "cluster of ribbed column cacti at 1.6x",
+    "at": "2026-11-27T12:34:23.935Z"
+  },
+  "x15-cactus-a#12": {
+    "verdict": "REJECTED",
+    "notes": "barrel cactus 46-56 px (about 2x the 25 px original): too big for a low cactus",
+    "at": "2026-11-27T12:34:24.084Z"
+  },
+  "x15-cactus-a#13": {
+    "verdict": "REJECTED",
+    "notes": "barrel cactus 46-56 px (about 2x the 25 px original): too big for a low cactus",
+    "at": "2026-11-27T12:34:24.328Z"
+  },
+  "x15-cactus-a#14": {
+    "verdict": "REJECTED",
+    "notes": "barrel cactus 46-56 px (about 2x the 25 px original): too big for a low cactus",
+    "at": "2026-11-27T12:34:24.636Z"
+  },
+  "x15-cactus-a#15": {
+    "verdict": "REJECTED",
+    "notes": "barrel cactus 46-56 px (about 2x the 25 px original): too big for a low cactus",
+    "at": "2026-11-27T12:34:24.927Z"
+  },
+  "x15-barrel-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "barrel cactus with a crown of yellow flowers at 1.4x (36 px)",
+    "at": "2026-11-27T12:40:34.823Z"
+  },
+  "x15-barrel-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "pair of barrel cacti with yellow flowers at 1.45x",
+    "at": "2026-11-27T12:40:34.874Z"
+  },
+  "x15-barrel-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "round barrel with one big yellow flower at 1.45x",
+    "at": "2026-11-27T12:40:34.924Z"
+  },
+  "x15-barrel-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "spiny barrel with a pink flower at 1.35x",
+    "at": "2026-11-27T12:40:34.975Z"
+  },
+  "x15-barrel-a#0": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.024Z"
+  },
+  "x15-barrel-a#1": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.073Z"
+  },
+  "x15-barrel-a#2": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.122Z"
+  },
+  "x15-barrel-a#4": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.171Z"
+  },
+  "x15-barrel-a#5": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.221Z"
+  },
+  "x15-barrel-a#6": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.270Z"
+  },
+  "x15-barrel-a#8": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.321Z"
+  },
+  "x15-barrel-a#9": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.369Z"
+  },
+  "x15-barrel-a#12": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.420Z"
+  },
+  "x15-barrel-a#13": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.468Z"
+  },
+  "x15-barrel-a#14": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.517Z"
+  },
+  "x15-barrel-a#15": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.568Z"
+  },
+  "x15-barrel-a#16": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.617Z"
+  },
+  "x15-barrel-a#17": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.666Z"
+  },
+  "x15-barrel-a#18": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.716Z"
+  },
+  "x15-barrel-a#19": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.765Z"
+  },
+  "x15-barrel-a#20": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.814Z"
+  },
+  "x15-barrel-a#21": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.863Z"
+  },
+  "x15-barrel-a#22": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.912Z"
+  },
+  "x15-barrel-a#23": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:35.963Z"
+  },
+  "x15-barrel-a#24": {
+    "verdict": "REJECTED",
+    "notes": "fine barrels; four distinct ones are enough for a rare species (smaller, near duplicates or prickly-pear-like)",
+    "at": "2026-11-27T12:40:36.013Z"
   }
 }

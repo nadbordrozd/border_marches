@@ -62,7 +62,7 @@ function testMap(): { map: GameMap; mine: MapObject } {
 }
 
 describe("tree assets", () => {
-  it("gives every ground at least three trees of 20-48 px", () => {
+  it("gives every ground at least three trees of 20-64 px (bead bzc.165: 1.5x)", () => {
     for (const terrain of GROUND_TERRAINS) {
       // Volcanic ground grows the wasteland's trees (bead bzc.83).
       const trees = TREE_ASSETS.filter(
@@ -72,8 +72,8 @@ describe("tree assets", () => {
       expect(TREE_SPECIES[terrain].length, terrain).toBeGreaterThan(0);
       for (const t of trees) {
         expect(t.w).toBeGreaterThanOrEqual(14);
-        expect(t.w).toBeLessThanOrEqual(48);
-        expect(t.h).toBeLessThanOrEqual(48);
+        expect(t.w).toBeLessThanOrEqual(64);
+        expect(t.h).toBeLessThanOrEqual(64);
       }
     }
   });
@@ -89,8 +89,8 @@ describe("canopy placement", () => {
     expect(trees.length).toBeGreaterThan(woods * 6);
   });
 
-  it("caps every crown at 40 px above the top of the wood", () => {
-    expect(CANOPY.capPx).toBe(40);
+  it("caps every crown at 50 px above the top of the wood", () => {
+    expect(CANOPY.capPx).toBe(50);
     for (const t of trees) {
       const row = treeRow(t);
       for (const fx of [t.x + 3, t.baseX, t.x + t.w - 4]) {
@@ -221,7 +221,7 @@ describe("crown bands", () => {
     expect(bands.length).toBeGreaterThan(0);
     for (const band of bands) {
       expect(band.y + band.h).toBe(band.row * CELL);
-      expect(band.h).toBeLessThanOrEqual(48);
+      expect(band.h).toBeLessThanOrEqual(64);
       for (const t of band.trees) {
         expect(treeRow(t)).toBe(band.row);
         expect(t.y).toBeLessThan(band.row * CELL);

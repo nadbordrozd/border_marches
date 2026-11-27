@@ -139,7 +139,7 @@ const VARIANTS = [
   {
     id: "T1.0",
     query: "groundReview=G1&treeScale=1",
-    label: "T1.0 trees as now (G1)",
+    label: "T1.0 trees as made (G1)",
     about: "G1 with the trees as they are.",
     kind: "trees",
   },
@@ -148,7 +148,7 @@ const VARIANTS = [
     query: "groundReview=G1&treeScale=1.25",
     label: "T1.25 trees 1.25x (G1)",
     about:
-      "G1 with every tree drawn 1.25x, nearest neighbour, feet kept (preview only: final art would be generated at size).",
+      "G1 with every tree drawn 1.25x, nearest neighbour, feet kept (debug only: on top of the trees bead bzc.165 redrew at 1.5x).",
     kind: "trees",
   },
   {
@@ -156,7 +156,7 @@ const VARIANTS = [
     query: "groundReview=G1&treeScale=1.5",
     label: "T1.5 trees 1.5x (G1)",
     about:
-      "G1 with every tree drawn 1.5x, nearest neighbour, feet kept (preview only: final art would be generated at size).",
+      "G1 with every tree drawn 1.5x, nearest neighbour, feet kept (debug only: on top of the trees bead bzc.165 redrew at 1.5x).",
     kind: "trees",
   },
 ];

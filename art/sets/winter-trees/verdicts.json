@@ -248,5 +248,245 @@
     "verdict": "ACCEPTED",
     "notes": "golden-brown larch crown under snow: a warm accent for drifts",
     "at": "2026-11-26T14:00:39.010Z"
+  },
+  "x15-snow-conifer-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "slim snow-capped spruce, the snow-conifer-a design at 1.5x (51-55 px tall)",
+    "at": "2026-11-27T12:32:20.335Z"
+  },
+  "x15-snow-conifer-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "slim snow-capped spruce, the snow-conifer-a design at 1.5x (51-55 px tall)",
+    "at": "2026-11-27T12:32:20.513Z"
+  },
+  "x15-snow-conifer-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "slim snow-capped spruce, the snow-conifer-a design at 1.5x (51-55 px tall)",
+    "at": "2026-11-27T12:32:20.684Z"
+  },
+  "x15-snow-conifer-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "slim snow-capped spruce, the snow-conifer-a design at 1.5x (51-55 px tall)",
+    "at": "2026-11-27T12:32:20.842Z"
+  },
+  "x15-snow-conifer-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "snowy fir with drooping tiers, 47 px tall",
+    "at": "2026-11-27T12:32:21.007Z"
+  },
+  "x15-snow-conifer-a#4": {
+    "verdict": "REJECTED",
+    "notes": "good design but only 41-44 px tall (1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:32:21.177Z"
+  },
+  "x15-snow-conifer-a#5": {
+    "verdict": "REJECTED",
+    "notes": "good design but only 41-44 px tall (1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:32:21.550Z"
+  },
+  "x15-snow-conifer-a#6": {
+    "verdict": "REJECTED",
+    "notes": "good design but only 41-44 px tall (1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:32:21.921Z"
+  },
+  "x15-snow-conifer-a#7": {
+    "verdict": "REJECTED",
+    "notes": "good design but only 41-44 px tall (1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:32:22.117Z"
+  },
+  "x15-snow-conifer-a#8": {
+    "verdict": "REJECTED",
+    "notes": "good design but only 41-44 px tall (1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:32:22.314Z"
+  },
+  "x15-snow-conifer-a#9": {
+    "verdict": "REJECTED",
+    "notes": "good design but only 41-44 px tall (1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:32:22.461Z"
+  },
+  "x15-snow-conifer-a#10": {
+    "verdict": "REJECTED",
+    "notes": "good design but only 41-44 px tall (1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:32:22.987Z"
+  },
+  "x15-snow-conifer-a#12": {
+    "verdict": "REJECTED",
+    "notes": "only 39 px tall (1.1x): too small for the 1.5x set",
+    "at": "2026-11-27T12:32:23.158Z"
+  },
+  "x15-snow-conifer-a#13": {
+    "verdict": "REJECTED",
+    "notes": "only 39 px tall (1.1x): too small for the 1.5x set",
+    "at": "2026-11-27T12:32:23.334Z"
+  },
+  "x15-snow-conifer-a#14": {
+    "verdict": "REJECTED",
+    "notes": "only 39 px tall (1.1x): too small for the 1.5x set",
+    "at": "2026-11-27T12:32:23.487Z"
+  },
+  "x15-snow-conifer-a#15": {
+    "verdict": "REJECTED",
+    "notes": "only 39 px tall (1.1x): too small for the 1.5x set",
+    "at": "2026-11-27T12:32:23.642Z"
+  },
+  "x15-snow-conifer-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce in the snow-conifer-a design at 1.5x, more tiers and snow clumps",
+    "at": "2026-11-27T12:32:23.794Z"
+  },
+  "x15-snow-conifer-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce in the snow-conifer-a design at 1.5x, more tiers and snow clumps",
+    "at": "2026-11-27T12:32:23.941Z"
+  },
+  "x15-snow-conifer-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce in the snow-conifer-a design at 1.5x, more tiers and snow clumps",
+    "at": "2026-11-27T12:32:24.091Z"
+  },
+  "x15-snow-conifer-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce in the snow-conifer-a design at 1.5x, more tiers and snow clumps",
+    "at": "2026-11-27T12:32:24.250Z"
+  },
+  "x15-snow-conifer-b#13": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce in the snow-conifer-a design at 1.5x, more tiers and snow clumps",
+    "at": "2026-11-27T12:32:24.393Z"
+  },
+  "x15-snow-conifer-b#14": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce in the snow-conifer-a design at 1.5x, more tiers and snow clumps",
+    "at": "2026-11-27T12:32:24.533Z"
+  },
+  "x15-snow-conifer-b#15": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden spruce in the snow-conifer-a design at 1.5x, more tiers and snow clumps",
+    "at": "2026-11-27T12:32:24.670Z"
+  },
+  "x15-snow-conifer-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "bushy spruce heavy with snow, rounded clumps read well at 1x",
+    "at": "2026-11-27T12:32:24.817Z"
+  },
+  "x15-snow-conifer-b#5": {
+    "verdict": "ACCEPTED",
+    "notes": "bushy spruce heavy with snow, rounded clumps read well at 1x",
+    "at": "2026-11-27T12:32:24.956Z"
+  },
+  "x15-snow-conifer-b#6": {
+    "verdict": "ACCEPTED",
+    "notes": "bushy spruce heavy with snow, rounded clumps read well at 1x",
+    "at": "2026-11-27T12:32:25.105Z"
+  },
+  "x15-snow-conifer-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "thickly snowed spruce, a white accent among the dark ones",
+    "at": "2026-11-27T12:32:25.254Z"
+  },
+  "x15-snow-conifer-b#8": {
+    "verdict": "ACCEPTED",
+    "notes": "darker fir with little snow, breaks up the white",
+    "at": "2026-11-27T12:32:25.411Z"
+  },
+  "x15-snow-conifer-b#9": {
+    "verdict": "ACCEPTED",
+    "notes": "darker fir with little snow, breaks up the white",
+    "at": "2026-11-27T12:32:25.564Z"
+  },
+  "x15-snow-conifer-b#10": {
+    "verdict": "ACCEPTED",
+    "notes": "darker fir with little snow, breaks up the white",
+    "at": "2026-11-27T12:32:25.720Z"
+  },
+  "x15-snow-conifer-b#1": {
+    "verdict": "REJECTED",
+    "notes": "a stray snowball sticks out of the right flank",
+    "at": "2026-11-27T12:32:25.871Z"
+  },
+  "x15-snow-conifer-b#11": {
+    "verdict": "REJECTED",
+    "notes": "curled tip reads as a hat (as snow-conifer-a#10)",
+    "at": "2026-11-27T12:32:26.115Z"
+  },
+  "x15-snow-mixed-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden white birch with an oval crown at 1.4x (52 px), trunk and branches show",
+    "at": "2026-11-27T12:34:14.023Z"
+  },
+  "x15-snow-mixed-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden white birch with an oval crown at 1.4x (52 px), trunk and branches show",
+    "at": "2026-11-27T12:34:14.500Z"
+  },
+  "x15-snow-mixed-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "snow-laden white birch with an oval crown at 1.4x (52 px), trunk and branches show",
+    "at": "2026-11-27T12:34:14.931Z"
+  },
+  "x15-snow-mixed-a#4": {
+    "verdict": "REJECTED",
+    "notes": "a plain white egg: no branches, a blob in a crowd",
+    "at": "2026-11-27T12:34:15.363Z"
+  },
+  "x15-snow-mixed-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good birch but 42 px tall (1.05x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:15.780Z"
+  },
+  "x15-snow-mixed-a#1": {
+    "verdict": "REJECTED",
+    "notes": "good birch but 42 px tall (1.05x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:16.120Z"
+  },
+  "x15-snow-mixed-a#2": {
+    "verdict": "REJECTED",
+    "notes": "good birch but 42 px tall (1.05x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:16.321Z"
+  },
+  "x15-snow-mixed-a#3": {
+    "verdict": "REJECTED",
+    "notes": "good birch but 42 px tall (1.05x): too small for the 1.5x set",
+    "at": "2026-11-27T12:34:16.566Z"
+  },
+  "x15-snow-mixed-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "frosted golden larch cone at 1.35x (51 px), the snow-mixed-a design with more twig detail",
+    "at": "2026-11-27T12:34:16.867Z"
+  },
+  "x15-snow-mixed-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "frosted golden larch cone at 1.35x (51 px), the snow-mixed-a design with more twig detail",
+    "at": "2026-11-27T12:34:17.229Z"
+  },
+  "x15-snow-mixed-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "frosted golden larch cone at 1.35x (51 px), the snow-mixed-a design with more twig detail",
+    "at": "2026-11-27T12:34:17.556Z"
+  },
+  "x15-snow-mixed-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "frosted golden larch cone at 1.35x (51 px), the snow-mixed-a design with more twig detail",
+    "at": "2026-11-27T12:34:17.816Z"
+  },
+  "x15-snow-mixed-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "wide frosted larch with snow-capped branch clumps (like larch-2) at 1.3x",
+    "at": "2026-11-27T12:34:18.187Z"
+  },
+  "x15-snow-mixed-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "wide frosted larch with snow-capped branch clumps (like larch-2) at 1.3x",
+    "at": "2026-11-27T12:34:18.341Z"
+  },
+  "x15-snow-mixed-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "wide frosted larch with snow-capped branch clumps (like larch-2) at 1.3x",
+    "at": "2026-11-27T12:34:18.590Z"
+  },
+  "x15-snow-mixed-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "wide frosted larch with snow-capped branch clumps (like larch-2) at 1.3x",
+    "at": "2026-11-27T12:34:18.919Z"
   }
 }

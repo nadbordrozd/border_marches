@@ -94,1896 +94,2417 @@
       "height": 48,
       "seed": 82602,
       "subject": "Subject: one small dense desert juniper or pinyon pine, a compact bushy crown of many leaf clumps with no gaps, the crown as wide as it is tall, each image a different one of these: a round bushy juniper, a pinyon pine with a lumpy rounded crown, a squat juniper with two big leaf masses, an egg-shaped juniper. Muted olive sage green #5e6e44, shadow #3a4630, light #8a9a62 on the left side, a short twisted red-brown trunk #7a4a2e. About two thirds of the image wide and most of the image tall."
+    },
+    {
+      "id": "x15-autumn-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "AUTUMN TREES AT 1.5X (style of grass-autumn-a, no references)",
+      "width": 64,
+      "height": 64,
+      "seed": 165201,
+      "styleImage": {
+        "take": "grass-autumn-a#2",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "subject": "Subject: one round deciduous tree in autumn, chunky and cute, a dense crown of big leaf clumps drawn with a little more detail (more clumps, a few leaf highlights) but still simple, each image a different one of these: an orange maple #e07a2a with shadow #a24a1c, a golden yellow birch #e6bf3e with shadow #a8841e and a white trunk, a red-orange oak #cc5a2a with shadow #8a3418, a deep orange beech #d8682a with shadow #9a4018. A short brown trunk #5a3a24. About two thirds of the image wide and nearly the full image tall."
+    },
+    {
+      "id": "x15-conifer-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "GRASS CONIFERS AT 1.5X (style and designs of grass-conifer-a)",
+      "width": 56,
+      "height": 72,
+      "seed": 165111,
+      "styleImage": {
+        "take": "grass-conifer-a#4",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "grass-conifer-a#0",
+          "usage": "a slim pointed spruce: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#6",
+          "usage": "a fir with stacked drooping layers: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#13",
+          "usage": "a narrow pine: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#20",
+          "usage": "a bushy spruce: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one tall evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a tall slim pointed spruce, a tall fir with four stacked layers of drooping branches, a tall narrow pine with a blunt tip, a tall bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall."
+    },
+    {
+      "id": "x15-broadleaf-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "GRASS BROADLEAF AT 1.5X (style and designs of grass-broadleaf-b)",
+      "width": 64,
+      "height": 64,
+      "seed": 165112,
+      "styleImage": {
+        "take": "grass-broadleaf-b#0",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "grass-broadleaf-b#2",
+          "usage": "a round oak: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-broadleaf-b#7",
+          "usage": "a wide lumpy hornbeam: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-broadleaf-b#13",
+          "usage": "a beech with leaf lobes: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-broadleaf-b#23",
+          "usage": "an oval lime tree: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one big round deciduous tree in late summer, a dense crown of leaf clumps, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, still chunky and simple), each image a different one of these: a big round oak, a tall lime tree with an oval crown, a beech with two big leaf lobes, a hornbeam with a lumpy crown. Deep muted leaf green #3f6f34, shadow #27482a, light #5f8f48 on the left side, a short brown trunk #5a3a24. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge."
+    },
+    {
+      "id": "x15-autumn-b",
+      "bead": "border_marches-bzc.165",
+      "concept": "AUTUMN TREES AT 1.5X, BIGGER (style and designs of grass-autumn-a)",
+      "width": 64,
+      "height": 64,
+      "seed": 165113,
+      "styleImage": {
+        "take": "grass-autumn-a#2",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "grass-autumn-a#0",
+          "usage": "an orange maple: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-autumn-a#10",
+          "usage": "a red-orange oak: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-autumn-a#20",
+          "usage": "an orange tree with stacked leaf clumps: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-autumn-a#13",
+          "usage": "a round orange tree: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one big round deciduous tree in autumn, chunky and cute, a dense crown of big leaf clumps, the same designs as the small reference trees redrawn larger with a little more detail, each image a different one of these: a big orange maple #e07a2a with shadow #a24a1c, a big red-orange oak #cc5a2a with shadow #8a3418, a tall orange tree with three stacked leaf clumps #e07a2a, a tall deep orange beech #d8682a with shadow #9a4018. A short brown trunk #5a3a24. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge."
+    },
+    {
+      "id": "x15-jungle-palm-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "JUNGLE PALMS AT 1.5X (style and designs of jungle-a)",
+      "width": 56,
+      "height": 72,
+      "seed": 165114,
+      "styleImage": {
+        "take": "jungle-a#1",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "jungle-a#0",
+          "usage": "a palm with a curved trunk: the same design, redrawn bigger"
+        },
+        {
+          "take": "jungle-a#15",
+          "usage": "a bushy palm: the same design, redrawn bigger"
+        },
+        {
+          "take": "jungle-a#19",
+          "usage": "a squat bushy palm: the same design, redrawn bigger"
+        },
+        {
+          "take": "jungle-a#24",
+          "usage": "a palm with drooping fronds: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one tall jungle palm, the same designs as the small reference palms redrawn larger with a little more detail (more frond tips, trunk rings), still chunky and simple, each image a different one of these: a palm with a gently curved trunk and five broad drooping fronds, a palm with a straight ringed trunk and a full round crown of fronds, a bushy palm with a dense crown of many fronds on a short trunk, a tree fern with a crown of feathery fronds. Deep bluish greens #2f7a52, shadow #1e5040, light #5aa86c on the left side, trunks brown #6a4a2a. About two thirds of the image wide and nearly the full image tall."
+    },
+    {
+      "id": "x15-jungle-broad-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "JUNGLE BROADLEAF AND BANANA AT 1.5X (style and designs of jungle-a)",
+      "width": 64,
+      "height": 64,
+      "seed": 165115,
+      "styleImage": {
+        "take": "jungle-a#5",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "jungle-a#6",
+          "usage": "a broadleaf jungle tree: the same design, redrawn bigger"
+        },
+        {
+          "take": "jungle-a#9",
+          "usage": "a broadleaf jungle tree with leaf clumps: the same design, redrawn bigger"
+        },
+        {
+          "take": "jungle-a#10",
+          "usage": "a banana plant: the same design, redrawn bigger"
+        },
+        {
+          "take": "jungle-a#12",
+          "usage": "a banana plant: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one big jungle plant, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, leaf veins), still chunky and simple, each image a different one of these: a broadleaf jungle tree with a round dense crown of leaf clumps, a tall broadleaf jungle tree with three stacked leaf clumps on a short trunk, a broadleaf jungle tree with a wide umbrella crown, a banana plant with a few huge paddle leaves. Deep bluish greens #2f7a52, shadow #1e5040, light #5aa86c on the left side, trunks brown #6a4a2a. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge."
+    },
+    {
+      "id": "x15-steppe-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "STEPPE OAK, BIRCH, BENT ELM AT 1.5X (style and designs of steppe-a)",
+      "width": 64,
+      "height": 64,
+      "seed": 165116,
+      "styleImage": {
+        "take": "steppe-a#0",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "steppe-a#12",
+          "usage": "a squat oak: the same design, redrawn bigger"
+        },
+        {
+          "take": "steppe-a#8",
+          "usage": "an oak with leaf clumps: the same design, redrawn bigger"
+        },
+        {
+          "take": "steppe-a#21",
+          "usage": "a birch with a white trunk: the same design, redrawn bigger"
+        },
+        {
+          "take": "steppe-a#2",
+          "usage": "a wind-bent elm: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one lone steppe tree, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, still chunky and simple), each image a different one of these: a squat oak with a round olive crown, an oak with three big olive leaf clumps, a birch with a white trunk and a light airy yellow-green crown, a wind-bent elm with a lopsided crown. Dusty olive green #7a8a3a, shadow #525e28, dry yellow-green light #a8a850 on the left side, trunks grey-brown #6a5236. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge."
+    },
+    {
+      "id": "x15-badlands-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "BADLANDS JUNIPER, MESQUITE, GNARLED AT 1.5X (style and designs of badlands-a)",
+      "width": 64,
+      "height": 64,
+      "seed": 165117,
+      "styleImage": {
+        "take": "badlands-a#0",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "badlands-a#4",
+          "usage": "a twisted juniper: the same design, redrawn bigger"
+        },
+        {
+          "take": "badlands-a#1",
+          "usage": "a mesquite with a flat crown: the same design, redrawn bigger"
+        },
+        {
+          "take": "badlands-a#2",
+          "usage": "a gnarled dry tree: the same design, redrawn bigger"
+        },
+        {
+          "take": "badlands-a#13",
+          "usage": "a mesquite: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one desert scrub tree, the same designs as the small reference trees redrawn larger with a little more detail (more leaf clumps, bark lines), still chunky and simple, each image a different one of these: a twisted juniper with a dense bushy dark blue-green crown, a twisted juniper with two big dark crown masses, a mesquite with a flat feathery olive crown, a gnarled dry tree with three clumps of grey-green leaves. Leaves dark sage #4a6a52, shadow #2e4436, light #7a9a6a on the left side, twisted trunks red-brown #7a4a2e. Big: about two thirds of the image wide and most of the image tall."
+    },
+    {
+      "id": "x15-pinyon-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "BADLANDS PINYON AT 1.5X (style and designs of badlands-b)",
+      "width": 64,
+      "height": 64,
+      "seed": 165118,
+      "styleImage": {
+        "take": "badlands-b#0",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "badlands-b#4",
+          "usage": "a bushy pinyon: the same design, redrawn bigger"
+        },
+        {
+          "take": "badlands-b#7",
+          "usage": "a round bushy juniper: the same design, redrawn bigger"
+        },
+        {
+          "take": "badlands-b#12",
+          "usage": "an egg-shaped juniper: the same design, redrawn bigger"
+        },
+        {
+          "take": "badlands-b#20",
+          "usage": "a squat juniper: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one dense desert juniper or pinyon pine, a compact bushy crown of many leaf clumps with no gaps, the same designs as the small reference trees redrawn larger with a little more detail, still chunky and simple, each image a different one of these: a round bushy juniper, a pinyon pine with a lumpy rounded crown, a squat juniper with two big leaf masses, an egg-shaped juniper. Muted olive sage green #5e6e44, shadow #3a4630, light #8a9a62 on the left side, a short twisted red-brown trunk #7a4a2e. Big: about two thirds of the image wide and most of the image tall."
+    },
+    {
+      "id": "x15-wasteland-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "WASTELAND PINE AND SNAG AT 1.5X (style and designs of wasteland-a)",
+      "width": 56,
+      "height": 72,
+      "seed": 165119,
+      "styleImage": {
+        "take": "wasteland-a#2",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "wasteland-a#8",
+          "usage": "a burnt pine: the same design, redrawn bigger"
+        },
+        {
+          "take": "wasteland-b#6",
+          "usage": "a charred pine with drooping needle tufts: the same design, redrawn bigger"
+        },
+        {
+          "take": "wasteland-a#5",
+          "usage": "a dead snag: the same design, redrawn bigger"
+        },
+        {
+          "take": "wasteland-a#12",
+          "usage": "a dead snag with thick broken branches: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one tall dead tree after a wildfire, chunky and simple, the same designs as the small reference trees redrawn larger with a little more detail (bark cracks, needle tufts), each image a different one of these: a burnt pine with a few ash-grey needle tufts, a charred pine with drooping black needle tufts, a charred trunk with a few thick broken branches, a grey dead snag with a split top. Charcoal #2e2a28, ash grey #77706a, light grey #a49c94 on the left side, one tiny ember orange #c8642a crack at most. About half of the image wide and nearly the full image tall."
+    },
+    {
+      "id": "x15-wasteland-b",
+      "bead": "border_marches-bzc.165",
+      "concept": "WASTELAND DEAD OAK AND LEAFY AT 1.5X (style and designs of wasteland-b)",
+      "width": 64,
+      "height": 64,
+      "seed": 165120,
+      "styleImage": {
+        "take": "wasteland-b#0",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "wasteland-b#2",
+          "usage": "a dead oak with a round tangle of branches: the same design, redrawn bigger"
+        },
+        {
+          "take": "wasteland-a#18",
+          "usage": "a dead oak: the same design, redrawn bigger"
+        },
+        {
+          "take": "wasteland-b#10",
+          "usage": "a dead tree with a few dry brown leaves: the same design, redrawn bigger"
+        },
+        {
+          "take": "wasteland-b#12",
+          "usage": "a dead tree with a few dry brown leaves: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one dead tree after a wildfire with a full bushy crown of many short bare twisted branches, chunky and simple, the crown as wide as a living tree's, the same designs as the small reference trees redrawn larger with a little more detail, each image a different one of these: a dead oak with a round tangle of grey branches, a dead oak with a thick trunk and a wide tangle of grey branches, a dead tree with a few dry brown leaves left in its crown, a dead tree with clumps of dry brown leaves in its crown. Charcoal #2e2a28, ash grey #77706a, light grey #a49c94 on the left side, dry brown leaves #7a5a3a. Big: about two thirds of the image wide, the crown reaching near the top edge and the trunk base at the bottom edge."
+    },
+    {
+      "id": "x15-conifer-b",
+      "bead": "border_marches-bzc.165",
+      "concept": "GRASS CONIFERS AT 1.5X on a smaller canvas (x15-conifer-a came out 66-70 px)",
+      "width": 48,
+      "height": 60,
+      "seed": 165121,
+      "styleImage": {
+        "take": "grass-conifer-a#4",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "grass-conifer-a#0",
+          "usage": "a slim pointed spruce: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#6",
+          "usage": "a fir with stacked drooping layers: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#13",
+          "usage": "a narrow pine: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#20",
+          "usage": "a bushy spruce: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one tall evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a tall slim pointed spruce, a tall fir with four stacked layers of drooping branches, a tall narrow pine with a blunt tip, a tall bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall."
+    },
+    {
+      "id": "x15-conifer-c",
+      "bead": "border_marches-bzc.165",
+      "concept": "GRASS CONIFERS AT 1.5X with an explicit height (x15-conifer-a 66-70 px, -b 42-47 px)",
+      "width": 56,
+      "height": 72,
+      "seed": 165122,
+      "styleImage": {
+        "take": "grass-conifer-a#4",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "grass-conifer-a#0",
+          "usage": "a slim pointed spruce: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#6",
+          "usage": "a fir with stacked drooping layers: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#13",
+          "usage": "a narrow pine: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#20",
+          "usage": "a bushy spruce: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a slim pointed spruce, a fir with four stacked layers of drooping branches, a narrow pine with a blunt tip, a bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and about three quarters of the image tall, empty space above the tip."
+    },
+    {
+      "id": "x15-conifer-d",
+      "bead": "border_marches-bzc.165",
+      "concept": "GRASS CONIFERS AT 1.5X: the x15-conifer-a prompt on a 64 px tall canvas (it filled 72 px; plain heights came out at the old size)",
+      "width": 52,
+      "height": 64,
+      "seed": 165123,
+      "styleImage": {
+        "take": "grass-conifer-a#4",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "grass-conifer-a#0",
+          "usage": "a slim pointed spruce: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#6",
+          "usage": "a fir with stacked drooping layers: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#13",
+          "usage": "a narrow pine: the same design, redrawn bigger"
+        },
+        {
+          "take": "grass-conifer-a#20",
+          "usage": "a bushy spruce: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one tall evergreen conifer, the same designs as the small reference trees redrawn larger with a little more detail (more branch tiers and needle clumps, still chunky and simple), each image a different one of these: a tall slim pointed spruce, a tall fir with four stacked layers of drooping branches, a tall narrow pine with a blunt tip, a tall bushy spruce. Dark cool blue-green #2e6b5a, shadow #1d4a40, lit edges #4f9a7a on the left side, a short brown trunk #5a3a24. Narrow: about half of the image wide and nearly the full image tall."
     }
   ],
   "outputs": [
     {
-      "path": "public/assets/terrain/trees/grass/conifer-1.png",
-      "from": "grass-conifer-a#0",
-      "width": 24,
-      "height": 42,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 12,
-          "y": 3,
-          "width": 24,
-          "height": 42
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-2.png",
-      "from": "grass-conifer-a#2",
-      "width": 23,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 13,
-          "y": 5,
-          "width": 23,
-          "height": 40
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-3.png",
-      "from": "grass-conifer-a#3",
-      "width": 26,
-      "height": 33,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 9,
-          "width": 26,
-          "height": 33
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-4.png",
-      "from": "grass-conifer-a#4",
-      "width": 26,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 5,
-          "width": 26,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-5.png",
-      "from": "grass-conifer-a#5",
-      "width": 24,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 12,
-          "y": 6,
-          "width": 24,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-6.png",
-      "from": "grass-conifer-a#6",
-      "width": 28,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 6,
-          "width": 28,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-7.png",
-      "from": "grass-conifer-a#7",
-      "width": 27,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 5,
-          "width": 27,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-8.png",
-      "from": "grass-conifer-a#9",
-      "width": 26,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 5,
-          "width": 26,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-9.png",
-      "from": "grass-conifer-a#10",
-      "width": 26,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 5,
-          "width": 26,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-10.png",
-      "from": "grass-conifer-a#11",
-      "width": 28,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 5,
-          "width": 28,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-11.png",
-      "from": "grass-conifer-a#12",
-      "width": 27,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 6,
-          "width": 27,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-12.png",
-      "from": "grass-conifer-a#13",
-      "width": 26,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 5,
-          "width": 26,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-13.png",
-      "from": "grass-conifer-a#15",
-      "width": 23,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 12,
-          "y": 4,
-          "width": 23,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-14.png",
-      "from": "grass-conifer-a#16",
-      "width": 27,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 5,
-          "width": 27,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-15.png",
-      "from": "grass-conifer-a#19",
-      "width": 25,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 12,
-          "y": 5,
-          "width": 25,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-16.png",
-      "from": "grass-conifer-a#20",
-      "width": 26,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 5,
-          "width": 26,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/conifer-17.png",
-      "from": "grass-conifer-a#23",
-      "width": 22,
-      "height": 35,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 13,
-          "y": 6,
-          "width": 22,
-          "height": 35
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-1.png",
-      "from": "grass-broadleaf-b#0",
-      "width": 34,
-      "height": 34,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 7,
-          "width": 34,
-          "height": 34
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-2.png",
-      "from": "grass-broadleaf-b#2",
-      "width": 35,
-      "height": 35,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 6,
-          "width": 35,
-          "height": 35
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-3.png",
-      "from": "grass-broadleaf-b#4",
-      "width": 24,
-      "height": 33,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 12,
-          "y": 8,
-          "width": 24,
-          "height": 33
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-4.png",
-      "from": "grass-broadleaf-b#5",
-      "width": 33,
-      "height": 34,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 8,
-          "y": 8,
-          "width": 33,
-          "height": 34
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-5.png",
-      "from": "grass-broadleaf-b#7",
-      "width": 38,
-      "height": 35,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 6,
-          "y": 7,
-          "width": 38,
-          "height": 35
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-6.png",
-      "from": "grass-broadleaf-b#8",
-      "width": 33,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 6,
-          "width": 33,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-7.png",
-      "from": "grass-broadleaf-b#13",
-      "width": 28,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 6,
-          "width": 28,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-8.png",
-      "from": "grass-broadleaf-b#14",
-      "width": 28,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 7,
-          "width": 28,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-9.png",
-      "from": "grass-broadleaf-b#15",
-      "width": 33,
-      "height": 32,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 8,
-          "y": 8,
-          "width": 33,
-          "height": 32
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-10.png",
-      "from": "grass-broadleaf-b#16",
-      "width": 24,
-      "height": 35,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 12,
-          "y": 6,
-          "width": 24,
-          "height": 35
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-11.png",
-      "from": "grass-broadleaf-b#17",
-      "width": 28,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 12,
-          "y": 6,
-          "width": 28,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-12.png",
-      "from": "grass-broadleaf-b#23",
-      "width": 29,
-      "height": 34,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 7,
-          "width": 29,
-          "height": 34
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/broadleaf-13.png",
-      "from": "grass-broadleaf-b#24",
-      "width": 30,
-      "height": 32,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 8,
-          "width": 30,
-          "height": 32
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-1.png",
-      "from": "grass-autumn-a#0",
-      "width": 40,
-      "height": 35,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 4,
-          "y": 8,
-          "width": 40,
-          "height": 35
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-2.png",
-      "from": "grass-autumn-a#1",
-      "width": 28,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 4,
-          "width": 28,
-          "height": 40
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-3.png",
-      "from": "grass-autumn-a#2",
-      "width": 43,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 3,
-          "y": 4,
-          "width": 43,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-6.png",
-      "from": "grass-autumn-a#5",
-      "width": 24,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 12,
-          "y": 5,
-          "width": 24,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-8.png",
-      "from": "grass-autumn-a#10",
-      "width": 41,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 4,
-          "y": 6,
-          "width": 41,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-9.png",
-      "from": "grass-autumn-a#11",
-      "width": 28,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 5,
-          "width": 28,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-10.png",
-      "from": "grass-autumn-a#12",
-      "width": 41,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 4,
-          "y": 6,
-          "width": 41,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-11.png",
-      "from": "grass-autumn-a#13",
-      "width": 40,
-      "height": 35,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 5,
-          "y": 9,
-          "width": 40,
-          "height": 35
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-13.png",
-      "from": "grass-autumn-a#16",
-      "width": 26,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 5,
-          "width": 26,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-14.png",
-      "from": "grass-autumn-a#17",
-      "width": 38,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 5,
-          "y": 6,
-          "width": 38,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-16.png",
-      "from": "grass-autumn-a#20",
-      "width": 38,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 5,
-          "y": 5,
-          "width": 38,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/grass/autumn-17.png",
-      "from": "grass-autumn-a#21",
-      "width": 24,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 12,
-          "y": 4,
-          "width": 24,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-1.png",
-      "from": "jungle-a#0",
-      "width": 28,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 7,
-          "width": 28,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-2.png",
-      "from": "jungle-a#1",
-      "width": 30,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 5,
-          "width": 30,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-3.png",
-      "from": "jungle-a#2",
-      "width": 30,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 5,
-          "width": 30,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-4.png",
-      "from": "jungle-a#3",
-      "width": 27,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 13,
-          "y": 7,
-          "width": 27,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-5.png",
-      "from": "jungle-a#4",
-      "width": 30,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 6,
-          "width": 30,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/broadleaf-1.png",
-      "from": "jungle-a#5",
-      "width": 34,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 5,
-          "width": 34,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/broadleaf-2.png",
-      "from": "jungle-a#6",
-      "width": 36,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 6,
-          "y": 4,
-          "width": 36,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/broadleaf-3.png",
-      "from": "jungle-a#7",
-      "width": 35,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 5,
-          "width": 35,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/broadleaf-4.png",
-      "from": "jungle-a#8",
-      "width": 35,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 4,
-          "width": 35,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/broadleaf-5.png",
-      "from": "jungle-a#9",
-      "width": 33,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 8,
-          "y": 5,
-          "width": 33,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/banana-1.png",
-      "from": "jungle-a#10",
-      "width": 36,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 6,
-          "y": 6,
-          "width": 36,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/banana-2.png",
-      "from": "jungle-a#11",
-      "width": 34,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 6,
-          "y": 5,
-          "width": 34,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/banana-3.png",
-      "from": "jungle-a#12",
-      "width": 35,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 5,
-          "width": 35,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-6.png",
-      "from": "jungle-a#15",
-      "width": 36,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 6,
-          "y": 6,
-          "width": 36,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-7.png",
-      "from": "jungle-a#16",
-      "width": 34,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 7,
-          "width": 34,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-8.png",
-      "from": "jungle-a#17",
-      "width": 35,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 5,
-          "width": 35,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-9.png",
-      "from": "jungle-a#18",
-      "width": 34,
-      "height": 33,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 10,
-          "width": 34,
-          "height": 33
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-10.png",
-      "from": "jungle-a#19",
-      "width": 36,
-      "height": 34,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 6,
-          "y": 9,
-          "width": 36,
-          "height": 34
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-11.png",
-      "from": "jungle-a#20",
-      "width": 32,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 8,
-          "y": 7,
-          "width": 32,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/broadleaf-6.png",
-      "from": "jungle-a#23",
-      "width": 34,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 6,
-          "width": 34,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/jungle/palm-12.png",
-      "from": "jungle-a#24",
-      "width": 27,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 7,
-          "width": 27,
-          "height": 36
-        }
-      ]
-    },
-    {
       "path": "public/assets/terrain/trees/steppe/oak-1.png",
-      "from": "steppe-a#0",
-      "width": 30,
-      "height": 32,
+      "from": "x15-steppe-a#0",
+      "width": 56,
+      "height": 53,
       "steps": [
         {
           "op": "crop",
-          "x": 9,
-          "y": 8,
-          "width": 30,
-          "height": 32
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/steppe/birch-1.png",
-      "from": "steppe-a#1",
-      "width": 21,
-      "height": 34,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 13,
+          "x": 4,
           "y": 6,
-          "width": 21,
-          "height": 34
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/steppe/bent-1.png",
-      "from": "steppe-a#2",
-      "width": 30,
-      "height": 31,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 8,
-          "width": 30,
-          "height": 31
+          "width": 56,
+          "height": 53
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/steppe/oak-2.png",
-      "from": "steppe-a#4",
-      "width": 38,
-      "height": 31,
+      "from": "x15-steppe-a#1",
+      "width": 60,
+      "height": 53,
       "steps": [
         {
           "op": "crop",
-          "x": 5,
-          "y": 9,
-          "width": 38,
-          "height": 31
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/steppe/birch-2.png",
-      "from": "steppe-a#5",
-      "width": 25,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 14,
-          "y": 4,
-          "width": 25,
-          "height": 37
+          "x": 2,
+          "y": 6,
+          "width": 60,
+          "height": 53
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/steppe/oak-3.png",
-      "from": "steppe-a#6",
-      "width": 27,
-      "height": 36,
+      "from": "x15-steppe-a#2",
+      "width": 58,
+      "height": 53,
       "steps": [
         {
           "op": "crop",
-          "x": 11,
-          "y": 5,
-          "width": 27,
-          "height": 36
+          "x": 3,
+          "y": 6,
+          "width": 58,
+          "height": 53
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/steppe/oak-4.png",
-      "from": "steppe-a#8",
-      "width": 39,
-      "height": 35,
+      "from": "x15-steppe-a#3",
+      "width": 56,
+      "height": 54,
       "steps": [
         {
           "op": "crop",
-          "x": 5,
-          "y": 6,
-          "width": 39,
-          "height": 35
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/steppe/bent-2.png",
-      "from": "steppe-a#10",
-      "width": 31,
-      "height": 30,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 8,
-          "y": 10,
-          "width": 31,
-          "height": 30
+          "x": 4,
+          "y": 5,
+          "width": 56,
+          "height": 54
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/steppe/oak-5.png",
-      "from": "steppe-a#11",
-      "width": 20,
-      "height": 23,
+      "from": "x15-steppe-a#4",
+      "width": 59,
+      "height": 53,
       "steps": [
         {
           "op": "crop",
-          "x": 14,
-          "y": 16,
-          "width": 20,
-          "height": 23
+          "x": 3,
+          "y": 6,
+          "width": 59,
+          "height": 53
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/steppe/oak-6.png",
-      "from": "steppe-a#12",
-      "width": 42,
-      "height": 39,
+      "from": "x15-steppe-a#5",
+      "width": 54,
+      "height": 57,
       "steps": [
         {
           "op": "crop",
-          "x": 3,
-          "y": 4,
-          "width": 42,
-          "height": 39
+          "x": 5,
+          "y": 2,
+          "width": 54,
+          "height": 57
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/steppe/oak-7.png",
-      "from": "steppe-a#20",
-      "width": 34,
-      "height": 33,
+      "from": "x15-steppe-a#6",
+      "width": 52,
+      "height": 57,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 7,
-          "width": 34,
-          "height": 33
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/steppe/birch-3.png",
-      "from": "steppe-a#21",
-      "width": 32,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 8,
-          "y": 5,
-          "width": 32,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/steppe/bent-3.png",
-      "from": "steppe-a#22",
-      "width": 33,
-      "height": 33,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 7,
-          "width": 33,
-          "height": 33
+          "x": 6,
+          "y": 2,
+          "width": 52,
+          "height": 57
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/steppe/oak-8.png",
-      "from": "steppe-a#24",
-      "width": 18,
-      "height": 19,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 15,
-          "y": 18,
-          "width": 18,
-          "height": 19
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/badlands/juniper-1.png",
-      "from": "badlands-a#0",
-      "width": 33,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 8,
-          "y": 4,
-          "width": 33,
-          "height": 40
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/badlands/mesquite-1.png",
-      "from": "badlands-a#1",
-      "width": 44,
-      "height": 35,
+      "from": "x15-steppe-a#7",
+      "width": 59,
+      "height": 53,
       "steps": [
         {
           "op": "crop",
           "x": 2,
-          "y": 8,
-          "width": 44,
-          "height": 35
+          "y": 6,
+          "width": 59,
+          "height": 53
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/gnarled-1.png",
-      "from": "badlands-a#2",
-      "width": 39,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 5,
-          "y": 5,
-          "width": 39,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/badlands/juniper-2.png",
-      "from": "badlands-a#4",
-      "width": 35,
-      "height": 39,
+      "path": "public/assets/terrain/trees/steppe/birch-1.png",
+      "from": "x15-steppe-a#8",
+      "width": 51,
+      "height": 58,
       "steps": [
         {
           "op": "crop",
           "x": 7,
-          "y": 5,
-          "width": 35,
-          "height": 39
+          "y": 3,
+          "width": 51,
+          "height": 58
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/mesquite-2.png",
-      "from": "badlands-a#5",
-      "width": 43,
-      "height": 32,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 3,
-          "y": 10,
-          "width": 43,
-          "height": 32
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/badlands/juniper-3.png",
-      "from": "badlands-a#8",
-      "width": 35,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 6,
-          "y": 4,
-          "width": 35,
-          "height": 40
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/badlands/mesquite-3.png",
-      "from": "badlands-a#9",
-      "width": 44,
-      "height": 23,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 2,
-          "y": 15,
-          "width": 44,
-          "height": 23
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/badlands/juniper-4.png",
-      "from": "badlands-a#12",
-      "width": 38,
-      "height": 37,
+      "path": "public/assets/terrain/trees/steppe/birch-2.png",
+      "from": "x15-steppe-a#10",
+      "width": 53,
+      "height": 58,
       "steps": [
         {
           "op": "crop",
           "x": 5,
-          "y": 6,
-          "width": 38,
-          "height": 37
+          "y": 3,
+          "width": 53,
+          "height": 58
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/mesquite-4.png",
-      "from": "badlands-a#13",
-      "width": 37,
-      "height": 33,
+      "path": "public/assets/terrain/trees/steppe/birch-3.png",
+      "from": "x15-steppe-a#11",
+      "width": 44,
+      "height": 59,
       "steps": [
         {
           "op": "crop",
-          "x": 6,
-          "y": 9,
-          "width": 37,
-          "height": 33
+          "x": 10,
+          "y": 2,
+          "width": 44,
+          "height": 59
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/gnarled-2.png",
-      "from": "badlands-a#14",
-      "width": 35,
-      "height": 38,
+      "path": "public/assets/terrain/trees/steppe/bent-1.png",
+      "from": "x15-steppe-a#12",
+      "width": 53,
+      "height": 55,
       "steps": [
         {
           "op": "crop",
           "x": 8,
           "y": 6,
-          "width": 35,
-          "height": 38
+          "width": 53,
+          "height": 55
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/juniper-5.png",
-      "from": "badlands-a#16",
-      "width": 38,
-      "height": 37,
+      "path": "public/assets/terrain/trees/steppe/bent-2.png",
+      "from": "x15-steppe-a#13",
+      "width": 54,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 6,
+          "width": 54,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/steppe/bent-3.png",
+      "from": "x15-steppe-a#14",
+      "width": 54,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 6,
+          "width": 54,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/steppe/bent-4.png",
+      "from": "x15-steppe-a#15",
+      "width": 55,
+      "height": 56,
       "steps": [
         {
           "op": "crop",
           "x": 5,
-          "y": 6,
-          "width": 38,
-          "height": 37
+          "y": 5,
+          "width": 55,
+          "height": 56
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/mesquite-5.png",
-      "from": "badlands-a#17",
-      "width": 44,
-      "height": 31,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 2,
-          "y": 10,
-          "width": 44,
-          "height": 31
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/badlands/juniper-6.png",
-      "from": "badlands-a#20",
-      "width": 40,
-      "height": 35,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 4,
-          "y": 7,
-          "width": 40,
-          "height": 35
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/badlands/mesquite-6.png",
-      "from": "badlands-a#21",
-      "width": 42,
-      "height": 32,
+      "path": "public/assets/terrain/trees/grass/broadleaf-1.png",
+      "from": "x15-broadleaf-a#0",
+      "width": 58,
+      "height": 55,
       "steps": [
         {
           "op": "crop",
           "x": 3,
-          "y": 10,
-          "width": 42,
-          "height": 32
+          "y": 8,
+          "width": 58,
+          "height": 55
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/gnarled-3.png",
-      "from": "badlands-a#22",
-      "width": 42,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 3,
-          "y": 4,
-          "width": 42,
-          "height": 40
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/badlands/juniper-7.png",
-      "from": "badlands-a#24",
-      "width": 36,
-      "height": 37,
+      "path": "public/assets/terrain/trees/grass/broadleaf-2.png",
+      "from": "x15-broadleaf-a#3",
+      "width": 52,
+      "height": 55,
       "steps": [
         {
           "op": "crop",
           "x": 6,
-          "y": 6,
-          "width": 36,
-          "height": 37
+          "y": 8,
+          "width": 52,
+          "height": 55
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/pine-1.png",
-      "from": "wasteland-a#2",
-      "width": 24,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 4,
-          "width": 24,
-          "height": 40
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/deadoak-1.png",
-      "from": "wasteland-a#3",
-      "width": 28,
-      "height": 39,
+      "path": "public/assets/terrain/trees/grass/broadleaf-3.png",
+      "from": "x15-broadleaf-a#5",
+      "width": 45,
+      "height": 61,
       "steps": [
         {
           "op": "crop",
           "x": 10,
-          "y": 5,
-          "width": 28,
-          "height": 39
+          "y": 2,
+          "width": 45,
+          "height": 61
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/snag-1.png",
-      "from": "wasteland-a#5",
-      "width": 32,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 8,
-          "width": 32,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/snag-2.png",
-      "from": "wasteland-a#6",
-      "width": 24,
-      "height": 40,
+      "path": "public/assets/terrain/trees/grass/broadleaf-4.png",
+      "from": "x15-broadleaf-a#6",
+      "width": 38,
+      "height": 58,
       "steps": [
         {
           "op": "crop",
           "x": 13,
-          "y": 4,
-          "width": 24,
-          "height": 40
+          "y": 5,
+          "width": 38,
+          "height": 58
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/pine-2.png",
-      "from": "wasteland-a#8",
-      "width": 29,
-      "height": 40,
+      "path": "public/assets/terrain/trees/grass/broadleaf-5.png",
+      "from": "x15-broadleaf-a#7",
+      "width": 36,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 5,
+          "width": 36,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/broadleaf-6.png",
+      "from": "x15-broadleaf-a#9",
+      "width": 46,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 4,
+          "width": 46,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/broadleaf-7.png",
+      "from": "x15-broadleaf-a#10",
+      "width": 46,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 4,
+          "width": 46,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/broadleaf-8.png",
+      "from": "x15-broadleaf-a#11",
+      "width": 44,
+      "height": 59,
       "steps": [
         {
           "op": "crop",
           "x": 10,
           "y": 4,
-          "width": 29,
-          "height": 40
+          "width": 44,
+          "height": 59
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/snag-3.png",
-      "from": "wasteland-a#12",
-      "width": 40,
-      "height": 38,
+      "path": "public/assets/terrain/trees/grass/broadleaf-9.png",
+      "from": "x15-broadleaf-a#12",
+      "width": 52,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 4,
+          "width": 52,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/broadleaf-10.png",
+      "from": "x15-broadleaf-a#13",
+      "width": 52,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 3,
+          "width": 52,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/broadleaf-11.png",
+      "from": "x15-broadleaf-a#14",
+      "width": 58,
+      "height": 57,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 6,
+          "width": 58,
+          "height": 57
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/broadleaf-12.png",
+      "from": "x15-broadleaf-a#15",
+      "width": 57,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 7,
+          "width": 57,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-1.png",
+      "from": "x15-autumn-b#0",
+      "width": 55,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 55,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-2.png",
+      "from": "x15-autumn-b#1",
+      "width": 56,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 56,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-3.png",
+      "from": "x15-autumn-b#2",
+      "width": 56,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 56,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-4.png",
+      "from": "x15-autumn-b#3",
+      "width": 54,
+      "height": 48,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 8,
+          "width": 54,
+          "height": 48
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-5.png",
+      "from": "x15-autumn-b#4",
+      "width": 56,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 56,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-6.png",
+      "from": "x15-autumn-b#5",
+      "width": 56,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 56,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-7.png",
+      "from": "x15-autumn-b#6",
+      "width": 56,
+      "height": 53,
       "steps": [
         {
           "op": "crop",
           "x": 4,
           "y": 5,
-          "width": 40,
-          "height": 38
+          "width": 56,
+          "height": 53
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/snag-4.png",
-      "from": "wasteland-a#15",
-      "width": 34,
-      "height": 39,
+      "path": "public/assets/terrain/trees/grass/autumn-8.png",
+      "from": "x15-autumn-b#7",
+      "width": 55,
+      "height": 51,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 5,
-          "width": 34,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/pine-3.png",
-      "from": "wasteland-a#17",
-      "width": 21,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 14,
-          "y": 4,
-          "width": 21,
-          "height": 40
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/deadoak-2.png",
-      "from": "wasteland-a#18",
-      "width": 34,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 5,
-          "width": 34,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/pine-4.png",
-      "from": "wasteland-a#22",
-      "width": 21,
-      "height": 41,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 14,
-          "y": 4,
-          "width": 21,
-          "height": 41
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/deadoak-3.png",
-      "from": "wasteland-a#23",
-      "width": 37,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 6,
+          "x": 4,
           "y": 6,
-          "width": 37,
-          "height": 38
+          "width": 55,
+          "height": 51
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/deadoak-4.png",
-      "from": "wasteland-b#0",
-      "width": 35,
-      "height": 36,
+      "path": "public/assets/terrain/trees/grass/autumn-9.png",
+      "from": "x15-autumn-b#8",
+      "width": 45,
+      "height": 51,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
+          "x": 10,
           "y": 7,
-          "width": 35,
-          "height": 36
+          "width": 45,
+          "height": 51
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/deadoak-5.png",
-      "from": "wasteland-b#2",
-      "width": 34,
-      "height": 35,
+      "path": "public/assets/terrain/trees/grass/autumn-10.png",
+      "from": "x15-autumn-b#9",
+      "width": 46,
+      "height": 51,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
-          "y": 8,
-          "width": 34,
-          "height": 35
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/deadoak-6.png",
-      "from": "wasteland-b#3",
-      "width": 37,
-      "height": 35,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 6,
-          "y": 8,
-          "width": 37,
-          "height": 35
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/deadoak-7.png",
-      "from": "wasteland-b#4",
-      "width": 34,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
+          "x": 9,
           "y": 7,
-          "width": 34,
-          "height": 37
+          "width": 46,
+          "height": 51
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/pine-5.png",
-      "from": "wasteland-b#6",
-      "width": 25,
-      "height": 40,
+      "path": "public/assets/terrain/trees/grass/autumn-11.png",
+      "from": "x15-autumn-b#10",
+      "width": 46,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 5,
+          "width": 46,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-12.png",
+      "from": "x15-autumn-b#11",
+      "width": 40,
+      "height": 54,
       "steps": [
         {
           "op": "crop",
           "x": 12,
           "y": 4,
-          "width": 25,
-          "height": 40
+          "width": 40,
+          "height": 54
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/pine-6.png",
-      "from": "wasteland-b#7",
-      "width": 26,
-      "height": 40,
+      "path": "public/assets/terrain/trees/grass/autumn-13.png",
+      "from": "x15-autumn-b#12",
+      "width": 56,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 56,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-14.png",
+      "from": "x15-autumn-b#13",
+      "width": 56,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 56,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-15.png",
+      "from": "x15-autumn-b#14",
+      "width": 56,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 56,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-16.png",
+      "from": "x15-autumn-b#15",
+      "width": 56,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 56,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-17.png",
+      "from": "x15-autumn-a#4",
+      "width": 31,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 17,
+          "y": 6,
+          "width": 31,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-18.png",
+      "from": "x15-autumn-a#5",
+      "width": 35,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 15,
+          "y": 6,
+          "width": 35,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-19.png",
+      "from": "x15-autumn-a#6",
+      "width": 33,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 16,
+          "y": 6,
+          "width": 33,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/autumn-20.png",
+      "from": "x15-autumn-a#7",
+      "width": 35,
+      "height": 47,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 15,
+          "y": 9,
+          "width": 35,
+          "height": 47
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/juniper-1.png",
+      "from": "x15-badlands-a#0",
+      "width": 49,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 6,
+          "width": 49,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/juniper-2.png",
+      "from": "x15-badlands-a#1",
+      "width": 50,
+      "height": 57,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 6,
+          "width": 50,
+          "height": 57
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/juniper-3.png",
+      "from": "x15-badlands-a#2",
+      "width": 53,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 4,
+          "width": 53,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/juniper-4.png",
+      "from": "x15-badlands-a#3",
+      "width": 54,
+      "height": 54,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 7,
+          "width": 54,
+          "height": 54
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/juniper-5.png",
+      "from": "x15-badlands-a#4",
+      "width": 60,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 7,
+          "width": 60,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/juniper-6.png",
+      "from": "x15-badlands-a#5",
+      "width": 59,
+      "height": 54,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 8,
+          "width": 59,
+          "height": 54
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/juniper-7.png",
+      "from": "x15-badlands-a#6",
+      "width": 59,
+      "height": 54,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 7,
+          "width": 59,
+          "height": 54
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/juniper-8.png",
+      "from": "x15-badlands-a#7",
+      "width": 54,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 54,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/mesquite-1.png",
+      "from": "x15-badlands-a#8",
+      "width": 63,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 10,
+          "width": 63,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/mesquite-2.png",
+      "from": "x15-badlands-a#9",
+      "width": 62,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 10,
+          "width": 62,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/mesquite-3.png",
+      "from": "x15-badlands-a#10",
+      "width": 62,
+      "height": 48,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 12,
+          "width": 62,
+          "height": 48
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/mesquite-4.png",
+      "from": "x15-badlands-a#11",
+      "width": 54,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 10,
+          "width": 54,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/gnarled-1.png",
+      "from": "x15-badlands-a#12",
+      "width": 57,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 57,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/gnarled-2.png",
+      "from": "x15-badlands-a#13",
+      "width": 57,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 57,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/gnarled-3.png",
+      "from": "x15-badlands-a#14",
+      "width": 57,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 57,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/gnarled-4.png",
+      "from": "x15-badlands-a#15",
+      "width": 57,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 57,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/palm-1.png",
+      "from": "x15-jungle-palm-a#0",
+      "width": 30,
+      "height": 47,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 17,
+          "width": 30,
+          "height": 47
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/palm-2.png",
+      "from": "x15-jungle-palm-a#1",
+      "width": 33,
+      "height": 47,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 17,
+          "width": 33,
+          "height": 47
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/palm-3.png",
+      "from": "x15-jungle-palm-a#2",
+      "width": 35,
+      "height": 47,
       "steps": [
         {
           "op": "crop",
           "x": 11,
-          "y": 4,
-          "width": 26,
-          "height": 40
+          "y": 17,
+          "width": 35,
+          "height": 47
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/wasteland/leafy-1.png",
-      "from": "wasteland-b#10",
-      "width": 29,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 5,
-          "width": 29,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/leafy-2.png",
-      "from": "wasteland-b#11",
-      "width": 30,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 4,
-          "width": 30,
-          "height": 40
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/leafy-3.png",
-      "from": "wasteland-b#12",
-      "width": 30,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 5,
-          "width": 30,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/leafy-4.png",
-      "from": "wasteland-b#13",
-      "width": 30,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 4,
-          "width": 30,
-          "height": 40
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/wasteland/deadoak-8.png",
-      "from": "wasteland-b#24",
-      "width": 30,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 9,
-          "y": 6,
-          "width": 30,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/badlands/pinyon-1.png",
-      "from": "badlands-b#0",
+      "path": "public/assets/terrain/trees/jungle/palm-4.png",
+      "from": "x15-jungle-palm-a#3",
       "width": 33,
-      "height": 32,
+      "height": 47,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
-          "y": 9,
+          "x": 12,
+          "y": 17,
           "width": 33,
-          "height": 32
+          "height": 47
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/pinyon-2.png",
-      "from": "badlands-b#1",
-      "width": 32,
-      "height": 33,
+      "path": "public/assets/terrain/trees/jungle/palm-5.png",
+      "from": "x15-jungle-palm-a#4",
+      "width": 36,
+      "height": 47,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
-          "y": 8,
-          "width": 32,
-          "height": 33
+          "x": 9,
+          "y": 16,
+          "width": 36,
+          "height": 47
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/pinyon-3.png",
-      "from": "badlands-b#4",
-      "width": 34,
-      "height": 35,
+      "path": "public/assets/terrain/trees/jungle/palm-6.png",
+      "from": "x15-jungle-palm-a#5",
+      "width": 37,
+      "height": 50,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 7,
-          "width": 34,
-          "height": 35
+          "x": 9,
+          "y": 13,
+          "width": 37,
+          "height": 50
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/pinyon-4.png",
-      "from": "badlands-b#6",
-      "width": 28,
-      "height": 27,
+      "path": "public/assets/terrain/trees/jungle/palm-7.png",
+      "from": "x15-jungle-palm-a#6",
+      "width": 36,
+      "height": 48,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 15,
+          "width": 36,
+          "height": 48
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/palm-8.png",
+      "from": "x15-jungle-palm-a#7",
+      "width": 37,
+      "height": 52,
       "steps": [
         {
           "op": "crop",
           "x": 10,
           "y": 11,
-          "width": 28,
-          "height": 27
+          "width": 37,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-1.png",
+      "from": "x15-jungle-broad-a#0",
+      "width": 56,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 56,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-2.png",
+      "from": "x15-jungle-broad-a#1",
+      "width": 55,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 55,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-3.png",
+      "from": "x15-jungle-broad-a#2",
+      "width": 55,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 55,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-4.png",
+      "from": "x15-jungle-broad-a#3",
+      "width": 55,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 5,
+          "width": 55,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-5.png",
+      "from": "x15-jungle-broad-a#4",
+      "width": 46,
+      "height": 62,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 2,
+          "width": 46,
+          "height": 62
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-6.png",
+      "from": "x15-jungle-broad-a#5",
+      "width": 44,
+      "height": 62,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 2,
+          "width": 44,
+          "height": 62
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-7.png",
+      "from": "x15-jungle-broad-a#6",
+      "width": 45,
+      "height": 62,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 2,
+          "width": 45,
+          "height": 62
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-8.png",
+      "from": "x15-jungle-broad-a#7",
+      "width": 52,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 3,
+          "width": 52,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-9.png",
+      "from": "x15-jungle-broad-a#8",
+      "width": 61,
+      "height": 47,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 9,
+          "width": 61,
+          "height": 47
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-10.png",
+      "from": "x15-jungle-broad-a#9",
+      "width": 61,
+      "height": 47,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 9,
+          "width": 61,
+          "height": 47
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-11.png",
+      "from": "x15-jungle-broad-a#10",
+      "width": 61,
+      "height": 47,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 9,
+          "width": 61,
+          "height": 47
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/broadleaf-12.png",
+      "from": "x15-jungle-broad-a#11",
+      "width": 61,
+      "height": 48,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 9,
+          "width": 61,
+          "height": 48
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/banana-1.png",
+      "from": "x15-jungle-broad-a#12",
+      "width": 60,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 4,
+          "width": 60,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/banana-2.png",
+      "from": "x15-jungle-broad-a#13",
+      "width": 59,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 2,
+          "width": 59,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/banana-3.png",
+      "from": "x15-jungle-broad-a#14",
+      "width": 58,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 3,
+          "width": 58,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/jungle/banana-4.png",
+      "from": "x15-jungle-broad-a#15",
+      "width": 55,
+      "height": 57,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 55,
+          "height": 57
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/pinyon-1.png",
+      "from": "x15-pinyon-a#4",
+      "width": 58,
+      "height": 57,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 58,
+          "height": 57
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/pinyon-2.png",
+      "from": "x15-pinyon-a#5",
+      "width": 50,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 5,
+          "width": 50,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/pinyon-3.png",
+      "from": "x15-pinyon-a#7",
+      "width": 62,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 4,
+          "width": 62,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/badlands/pinyon-4.png",
+      "from": "x15-pinyon-a#9",
+      "width": 34,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 15,
+          "y": 5,
+          "width": 34,
+          "height": 58
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/badlands/pinyon-5.png",
-      "from": "badlands-b#7",
-      "width": 37,
-      "height": 37,
+      "from": "x15-pinyon-a#11",
+      "width": 41,
+      "height": 57,
       "steps": [
         {
           "op": "crop",
-          "x": 6,
-          "y": 6,
-          "width": 37,
-          "height": 37
+          "x": 12,
+          "y": 4,
+          "width": 41,
+          "height": 57
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/badlands/pinyon-6.png",
-      "from": "badlands-b#10",
-      "width": 33,
-      "height": 30,
+      "from": "x15-pinyon-a#13",
+      "width": 63,
+      "height": 40,
       "steps": [
         {
           "op": "crop",
-          "x": 8,
-          "y": 10,
-          "width": 33,
-          "height": 30
+          "x": 1,
+          "y": 12,
+          "width": 63,
+          "height": 40
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/badlands/pinyon-7.png",
-      "from": "badlands-b#12",
-      "width": 31,
-      "height": 34,
+      "from": "x15-pinyon-a#14",
+      "width": 64,
+      "height": 42,
       "steps": [
         {
           "op": "crop",
-          "x": 9,
-          "y": 7,
-          "width": 31,
-          "height": 34
+          "x": 0,
+          "y": 11,
+          "width": 64,
+          "height": 42
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/badlands/pinyon-8.png",
-      "from": "badlands-b#13",
-      "width": 35,
-      "height": 32,
+      "from": "x15-pinyon-a#15",
+      "width": 58,
+      "height": 44,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 9,
-          "width": 35,
-          "height": 32
+          "x": 3,
+          "y": 11,
+          "width": 58,
+          "height": 44
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/pinyon-9.png",
-      "from": "badlands-b#16",
+      "path": "public/assets/terrain/trees/grass/conifer-1.png",
+      "from": "x15-conifer-d#0",
       "width": 28,
-      "height": 29,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 10,
+          "width": 28,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-2.png",
+      "from": "x15-conifer-d#1",
+      "width": 30,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 5,
+          "width": 30,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-3.png",
+      "from": "x15-conifer-d#2",
+      "width": 32,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 3,
+          "width": 32,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-4.png",
+      "from": "x15-conifer-d#3",
+      "width": 31,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 5,
+          "width": 31,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-5.png",
+      "from": "x15-conifer-d#4",
+      "width": 34,
+      "height": 57,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 4,
+          "width": 34,
+          "height": 57
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-6.png",
+      "from": "x15-conifer-d#5",
+      "width": 30,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 9,
+          "width": 30,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-7.png",
+      "from": "x15-conifer-d#6",
+      "width": 38,
+      "height": 57,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 4,
+          "width": 38,
+          "height": 57
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-8.png",
+      "from": "x15-conifer-d#7",
+      "width": 33,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 8,
+          "width": 33,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-9.png",
+      "from": "x15-conifer-d#8",
+      "width": 30,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 6,
+          "width": 30,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-10.png",
+      "from": "x15-conifer-d#9",
+      "width": 27,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 10,
+          "width": 27,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-11.png",
+      "from": "x15-conifer-d#10",
+      "width": 32,
+      "height": 51,
       "steps": [
         {
           "op": "crop",
           "x": 10,
           "y": 10,
-          "width": 28,
-          "height": 29
+          "width": 32,
+          "height": 51
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/pinyon-10.png",
-      "from": "badlands-b#20",
-      "width": 37,
-      "height": 29,
+      "path": "public/assets/terrain/trees/grass/conifer-12.png",
+      "from": "x15-conifer-d#11",
+      "width": 32,
+      "height": 50,
       "steps": [
         {
           "op": "crop",
-          "x": 6,
-          "y": 10,
-          "width": 37,
-          "height": 29
+          "x": 10,
+          "y": 11,
+          "width": 32,
+          "height": 50
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/badlands/pinyon-11.png",
-      "from": "badlands-b#24",
-      "width": 26,
-      "height": 26,
+      "path": "public/assets/terrain/trees/grass/conifer-13.png",
+      "from": "x15-conifer-d#12",
+      "width": 34,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 6,
+          "width": 34,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-14.png",
+      "from": "x15-conifer-d#13",
+      "width": 32,
+      "height": 54,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 7,
+          "width": 32,
+          "height": 54
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-15.png",
+      "from": "x15-conifer-d#14",
+      "width": 34,
+      "height": 51,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 10,
+          "width": 34,
+          "height": 51
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/grass/conifer-16.png",
+      "from": "x15-conifer-d#15",
+      "width": 34,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 9,
+          "width": 34,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/pine-1.png",
+      "from": "x15-wasteland-a#1",
+      "width": 40,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 10,
+          "width": 40,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/pine-2.png",
+      "from": "x15-wasteland-a#2",
+      "width": 39,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 8,
+          "width": 39,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/pine-3.png",
+      "from": "x15-wasteland-a#4",
+      "width": 38,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 11,
+          "width": 38,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/pine-4.png",
+      "from": "x15-wasteland-a#5",
+      "width": 38,
+      "height": 62,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 9,
+          "y": 9,
+          "width": 38,
+          "height": 62
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/deadoak-1.png",
+      "from": "x15-wasteland-b#0",
+      "width": 47,
+      "height": 63,
       "steps": [
         {
           "op": "crop",
           "x": 11,
+          "y": 1,
+          "width": 47,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/deadoak-2.png",
+      "from": "x15-wasteland-b#3",
+      "width": 57,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 57,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/deadoak-3.png",
+      "from": "x15-wasteland-b#4",
+      "width": 54,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 54,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/deadoak-4.png",
+      "from": "x15-wasteland-b#5",
+      "width": 59,
+      "height": 62,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 2,
+          "width": 59,
+          "height": 62
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/snag-1.png",
+      "from": "x15-wasteland-a#8",
+      "width": 42,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
+          "y": 9,
+          "width": 42,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/snag-2.png",
+      "from": "x15-wasteland-a#9",
+      "width": 40,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 15,
+          "width": 40,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/snag-3.png",
+      "from": "x15-wasteland-a#10",
+      "width": 32,
+      "height": 52,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 10,
+          "width": 32,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/snag-4.png",
+      "from": "x15-wasteland-a#11",
+      "width": 31,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 14,
           "y": 12,
-          "width": 26,
-          "height": 26
+          "width": 31,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/snag-5.png",
+      "from": "x15-wasteland-a#12",
+      "width": 44,
+      "height": 59,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 1,
+          "width": 44,
+          "height": 59
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/snag-6.png",
+      "from": "x15-wasteland-a#13",
+      "width": 35,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 0,
+          "width": 35,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/snag-7.png",
+      "from": "x15-wasteland-a#14",
+      "width": 30,
+      "height": 54,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 5,
+          "width": 30,
+          "height": 54
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/snag-8.png",
+      "from": "x15-wasteland-a#15",
+      "width": 41,
+      "height": 53,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 6,
+          "width": 41,
+          "height": 53
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/leafy-1.png",
+      "from": "x15-wasteland-b#9",
+      "width": 54,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 4,
+          "width": 54,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/leafy-2.png",
+      "from": "x15-wasteland-b#10",
+      "width": 60,
+      "height": 60,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 4,
+          "width": 60,
+          "height": 60
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/leafy-3.png",
+      "from": "x15-wasteland-b#11",
+      "width": 42,
+      "height": 57,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 7,
+          "width": 42,
+          "height": 57
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/leafy-4.png",
+      "from": "x15-wasteland-b#12",
+      "width": 56,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 56,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/leafy-5.png",
+      "from": "x15-wasteland-b#13",
+      "width": 56,
+      "height": 57,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 56,
+          "height": 57
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/wasteland/leafy-6.png",
+      "from": "x15-wasteland-b#14",
+      "width": 54,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 1,
+          "width": 54,
+          "height": 63
         }
       ]
     }

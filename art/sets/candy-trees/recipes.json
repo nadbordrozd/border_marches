@@ -32,516 +32,670 @@
       "seed": 115202,
       "subject": "Subject: one small candy plant, chunky and cute, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a bush of big round gumdrops in pink, mint and lemon #f08cb8 #8fdcc0 #f4d46c, a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a peppermint swirl lollipop with a mint stripe on a thick stick. Chunky and solid, about half of the image wide and nearly the full image tall.",
       "negative": "face, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole"
+    },
+    {
+      "id": "x15-fluff-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "COTTON-CANDY TREES AT 1.5X (style and designs of fluff-a)",
+      "width": 56,
+      "height": 72,
+      "seed": 165401,
+      "styleImage": {
+        "take": "fluff-a#0",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "fluff-a#1",
+          "usage": "a pink cotton-candy tree: the same design, redrawn bigger"
+        },
+        {
+          "take": "fluff-a#17",
+          "usage": "a mint cotton-candy tree: the same design, redrawn bigger"
+        },
+        {
+          "take": "fluff-a#20",
+          "usage": "a tree of stacked cotton-candy puffs: the same design, redrawn bigger"
+        },
+        {
+          "take": "fluff-a#2",
+          "usage": "a swirl lollipop: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one tall candy tree, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail (more fluffy puffs, swirl lines), each image a different one of these: a cotton-candy tree with a big fluffy round crown of pink spun sugar #f08cb8 (shadow #c25a8c, light #ffc2dc on the left side) on a short striped stick, a cotton-candy tree with a fluffy mint crown #8fdcc0 (shadow #4fa58a), a tree of three stacked fluffy pink cotton-candy puffs, a giant round swirl lollipop of red and white #e03a3e #fff4ec on a thick white stick. A short candy stick trunk. A full crown about two thirds of the image wide and nearly the full image tall.",
+      "negative": "face, eyes, person, ground, sand patch, grass, pot, hand, wrapper"
+    },
+    {
+      "id": "x15-frosted-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "FROSTED TREES AND GUMDROP BUSHES AT 1.5X (style and designs of cane-a)",
+      "width": 64,
+      "height": 64,
+      "seed": 165402,
+      "styleImage": {
+        "take": "cane-a#10",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "cane-a#12",
+          "usage": "a frosted tree with sprinkles: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#20",
+          "usage": "a big frosted tree: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#5",
+          "usage": "a gumdrop bush: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#8",
+          "usage": "a low gumdrop bush: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one candy plant, chunky and cute, the same designs as the small reference plants redrawn larger with a little more detail (sprinkles, drips of frosting, gumdrop shine), each image a different one of these: a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a tall tree with a crown of two stacked pink frosting puffs with sprinkles on a gingerbread trunk, a tree with a big round crown of pink frosting dripping at its rim on a gingerbread trunk, a bush of big round gumdrops in pink, mint and lemon #f08cb8 #8fdcc0 #f4d46c. Big: about two thirds of the image wide and nearly the full image tall.",
+      "negative": "face, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole"
+    },
+    {
+      "id": "x15-cane-a",
+      "bead": "border_marches-bzc.165",
+      "concept": "LOLLIPOPS AND CANDY CANES AT 1.5X (style and designs of cane-a)",
+      "width": 56,
+      "height": 72,
+      "seed": 165403,
+      "styleImage": {
+        "take": "cane-a#15",
+        "usage": "copy this lollipop's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new one larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "cane-a#16",
+          "usage": "a peppermint swirl lollipop: the same design, redrawn bigger"
+        },
+        {
+          "take": "fluff-a#15",
+          "usage": "a round swirl lollipop: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#0",
+          "usage": "a striped candy cane: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#24",
+          "usage": "a candy cane: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one tall candy plant, chunky and cute, the same designs as the small reference candies redrawn larger with a little more detail, each image a different one of these: a peppermint swirl lollipop with a mint stripe on a thick stick, a giant round swirl lollipop of red and white #e03a3e #fff4ec on a thick white stick, a pink and white swirl lollipop #f08cb8 #fff4ec on a thick stick, a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top. Chunky and solid, about half of the image wide and nearly the full image tall.",
+      "negative": "face, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole"
+    },
+    {
+      "id": "x15-frosted-b",
+      "bead": "border_marches-bzc.165",
+      "concept": "FROSTED TREES AT 1.5X with an explicit height (x15-frosted-a came out 39-46 px)",
+      "width": 56,
+      "height": 72,
+      "seed": 165404,
+      "styleImage": {
+        "take": "cane-a#10",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "cane-a#12",
+          "usage": "a frosted tree with sprinkles: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#20",
+          "usage": "a big frosted tree: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#11",
+          "usage": "a frosted tree: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#13",
+          "usage": "a tall frosted tree: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one candy tree, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail (sprinkles, drips of frosting), each image a different one of these: a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a tree with a crown of two stacked pink frosting puffs with sprinkles on a gingerbread trunk, a tree with a big round crown of pink frosting dripping at its rim on a gingerbread trunk, a tree with a tall dome of pink frosting and sprinkles on a gingerbread trunk. About two thirds of the image wide and about three quarters of the image tall, empty space above the crown.",
+      "negative": "face, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole"
+    },
+    {
+      "id": "x15-cane-b",
+      "bead": "border_marches-bzc.165",
+      "concept": "CANDY CANES AT 1.5X with an explicit height (x15-cane-a canes came out 62-64 px)",
+      "width": 56,
+      "height": 72,
+      "seed": 165405,
+      "styleImage": {
+        "take": "cane-a#0",
+        "usage": "copy this candy cane colour palette, dark outline, flat shading with one shadow tone and its chunky cute look"
+      },
+      "references": [
+        {
+          "take": "cane-a#0",
+          "usage": "a striped candy cane: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#2",
+          "usage": "a striped candy cane: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#24",
+          "usage": "a pair of candy canes: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one candy cane plant, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a thick candy cane with a mint stripe #8fdcc0 standing upright, two crossed striped candy canes, a thick striped candy cane with a little icing on its hook. Chunky and solid, about half of the image wide and about two thirds of the image tall, empty space above the hook.",
+      "negative": "face, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole"
+    },
+    {
+      "id": "x15-frosted-c",
+      "bead": "border_marches-bzc.165",
+      "concept": "FROSTED TREES AT 1.5X: tall phrasing on a 64 px tall canvas",
+      "width": 52,
+      "height": 64,
+      "seed": 165406,
+      "styleImage": {
+        "take": "cane-a#10",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "references": [
+        {
+          "take": "cane-a#12",
+          "usage": "a frosted tree with sprinkles: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#20",
+          "usage": "a big frosted tree: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#11",
+          "usage": "a frosted tree: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#13",
+          "usage": "a tall frosted tree: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one tall candy tree, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail (sprinkles, drips of frosting), each image a different one of these: a tree with a round crown of pink frosting dotted with sprinkles on a gingerbread trunk #b86b34, a tree with a crown of two stacked pink frosting puffs with sprinkles on a gingerbread trunk, a tree with a big round crown of pink frosting dripping at its rim on a gingerbread trunk, a tree with a tall dome of pink frosting and sprinkles on a gingerbread trunk. Big: about two thirds of the image wide and nearly the full image tall.",
+      "negative": "face, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole"
+    },
+    {
+      "id": "x15-cane-c",
+      "bead": "border_marches-bzc.165",
+      "concept": "CANDY CANES AT 1.5X: tall phrasing on a 52 px tall canvas (25 candidates)",
+      "width": 40,
+      "height": 52,
+      "seed": 165407,
+      "styleImage": {
+        "take": "cane-a#0",
+        "usage": "copy this candy cane colour palette, dark outline, flat shading with one shadow tone and its chunky cute look"
+      },
+      "references": [
+        {
+          "take": "cane-a#0",
+          "usage": "a striped candy cane: the same design"
+        },
+        {
+          "take": "cane-a#2",
+          "usage": "a striped candy cane: the same design"
+        },
+        {
+          "take": "x15-cane-a#14",
+          "usage": "two crossed candy canes at the wanted size"
+        }
+      ],
+      "subject": "Subject: one tall candy cane plant, chunky and cute, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a thick candy cane with a mint stripe #8fdcc0 standing upright, two crossed striped candy canes, a thick striped candy cane with a little white icing on its hook. Chunky and solid, about half of the image wide and nearly the full image tall.",
+      "negative": "face, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole"
+    },
+    {
+      "id": "x15-cane-d",
+      "bead": "border_marches-bzc.165",
+      "concept": "CANDY CANES AT 1.5X: the x15-cane-b prompt (it filled 0.93 of a 72 px canvas) on a 56 px tall canvas",
+      "width": 44,
+      "height": 56,
+      "seed": 165408,
+      "styleImage": {
+        "take": "cane-a#0",
+        "usage": "copy this candy cane colour palette, dark outline, flat shading with one shadow tone and its chunky cute look"
+      },
+      "references": [
+        {
+          "take": "cane-a#0",
+          "usage": "a striped candy cane: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#2",
+          "usage": "a striped candy cane: the same design, redrawn bigger"
+        },
+        {
+          "take": "cane-a#24",
+          "usage": "a pair of candy canes: the same design, redrawn bigger"
+        }
+      ],
+      "subject": "Subject: one candy cane plant, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a thick red and white striped candy cane #e03a3e #fff4ec standing upright with its hook at the top, a thick candy cane with a mint stripe #8fdcc0 standing upright, two crossed striped candy canes, a thick striped candy cane with a little icing on its hook. Chunky and solid, about half of the image wide and about two thirds of the image tall, empty space above the hook.",
+      "negative": "face, eyes, person, ground, sand patch, grass, pot, hand, wrapper, thin pole"
     }
   ],
   "outputs": [
     {
-      "path": "public/assets/terrain/trees/frosting/frosted-1.png",
-      "from": "cane-a#10",
-      "width": 32,
-      "height": 34,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 8,
-          "y": 7,
-          "width": 32,
-          "height": 34
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/frosted-2.png",
-      "from": "cane-a#11",
-      "width": 34,
-      "height": 36,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 6,
-          "width": 34,
-          "height": 36
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/frosted-3.png",
-      "from": "cane-a#12",
-      "width": 34,
-      "height": 38,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 5,
-          "width": 34,
-          "height": 38
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/frosted-4.png",
-      "from": "cane-a#13",
-      "width": 32,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 8,
-          "y": 4,
-          "width": 32,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/frosted-5.png",
-      "from": "cane-a#14",
-      "width": 28,
-      "height": 30,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 10,
-          "width": 28,
-          "height": 30
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/frosted-6.png",
-      "from": "cane-a#20",
-      "width": 38,
-      "height": 41,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 5,
-          "y": 3,
-          "width": 38,
-          "height": 41
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cotton-1.png",
-      "from": "fluff-a#0",
-      "width": 28,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 5,
-          "width": 28,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cotton-2.png",
-      "from": "fluff-a#1",
-      "width": 26,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 7,
-          "width": 26,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cotton-3.png",
-      "from": "fluff-a#3",
-      "width": 28,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 4,
-          "width": 28,
-          "height": 40
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cotton-4.png",
-      "from": "fluff-a#4",
-      "width": 26,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 7,
-          "width": 26,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cotton-5.png",
-      "from": "fluff-a#5",
-      "width": 26,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 11,
-          "y": 7,
-          "width": 26,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cotton-6.png",
-      "from": "fluff-a#8",
-      "width": 28,
-      "height": 39,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 5,
-          "width": 28,
-          "height": 39
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cotton-7.png",
-      "from": "fluff-a#13",
-      "width": 28,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 4,
-          "width": 28,
-          "height": 40
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cotton-8.png",
-      "from": "fluff-a#17",
-      "width": 39,
-      "height": 37,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 5,
-          "y": 7,
-          "width": 39,
-          "height": 37
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cotton-9.png",
-      "from": "fluff-a#20",
-      "width": 35,
-      "height": 42,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 7,
-          "y": 2,
-          "width": 35,
-          "height": 42
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cotton-10.png",
-      "from": "fluff-a#23",
-      "width": 28,
-      "height": 40,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 10,
-          "y": 4,
-          "width": 28,
-          "height": 40
-        }
-      ]
-    },
-    {
       "path": "public/assets/terrain/trees/frosting/lollipop-1.png",
-      "from": "fluff-a#2",
-      "width": 26,
-      "height": 37,
+      "from": "x15-cane-a#0",
+      "width": 34,
+      "height": 59,
       "steps": [
         {
           "op": "crop",
-          "x": 12,
-          "y": 7,
-          "width": 26,
-          "height": 37
+          "x": 9,
+          "y": 9,
+          "width": 34,
+          "height": 59
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/frosting/lollipop-2.png",
-      "from": "fluff-a#7",
-      "width": 26,
-      "height": 36,
+      "from": "x15-cane-a#2",
+      "width": 33,
+      "height": 59,
       "steps": [
         {
           "op": "crop",
           "x": 12,
-          "y": 8,
-          "width": 26,
-          "height": 36
+          "y": 9,
+          "width": 33,
+          "height": 59
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/frosting/lollipop-3.png",
-      "from": "fluff-a#9",
-      "width": 26,
-      "height": 36,
+      "from": "x15-cane-a#3",
+      "width": 33,
+      "height": 59,
       "steps": [
         {
           "op": "crop",
-          "x": 11,
-          "y": 8,
-          "width": 26,
-          "height": 36
+          "x": 14,
+          "y": 9,
+          "width": 33,
+          "height": 59
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/frosting/lollipop-4.png",
-      "from": "fluff-a#15",
-      "width": 28,
-      "height": 39,
+      "from": "x15-cane-a#4",
+      "width": 34,
+      "height": 60,
       "steps": [
         {
           "op": "crop",
-          "x": 10,
-          "y": 5,
-          "width": 28,
-          "height": 39
+          "x": 9,
+          "y": 8,
+          "width": 34,
+          "height": 60
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/frosting/lollipop-5.png",
-      "from": "fluff-a#22",
-      "width": 29,
-      "height": 40,
+      "from": "x15-cane-a#5",
+      "width": 35,
+      "height": 61,
       "steps": [
         {
           "op": "crop",
           "x": 10,
-          "y": 4,
-          "width": 29,
-          "height": 40
+          "y": 7,
+          "width": 35,
+          "height": 61
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/frosting/lollipop-6.png",
-      "from": "cane-a#15",
-      "width": 22,
-      "height": 34,
+      "from": "x15-cane-a#6",
+      "width": 45,
+      "height": 60,
       "steps": [
         {
           "op": "crop",
-          "x": 13,
-          "y": 7,
-          "width": 22,
-          "height": 34
+          "x": 6,
+          "y": 8,
+          "width": 45,
+          "height": 60
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/frosting/lollipop-7.png",
-      "from": "cane-a#16",
-      "width": 22,
-      "height": 34,
+      "from": "x15-cane-a#10",
+      "width": 34,
+      "height": 61,
       "steps": [
         {
           "op": "crop",
-          "x": 13,
-          "y": 7,
-          "width": 22,
-          "height": 34
+          "x": 12,
+          "y": 8,
+          "width": 34,
+          "height": 61
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/frosting/lollipop-8.png",
-      "from": "cane-a#17",
-      "width": 22,
-      "height": 34,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 13,
-          "y": 7,
-          "width": 22,
-          "height": 34
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/lollipop-9.png",
-      "from": "cane-a#18",
-      "width": 22,
-      "height": 34,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 13,
-          "y": 7,
-          "width": 22,
-          "height": 34
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/lollipop-10.png",
-      "from": "cane-a#19",
-      "width": 22,
-      "height": 33,
+      "from": "x15-cane-a#11",
+      "width": 34,
+      "height": 61,
       "steps": [
         {
           "op": "crop",
           "x": 13,
           "y": 8,
-          "width": 22,
-          "height": 33
+          "width": 34,
+          "height": 61
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/frosting/gumdrop-1.png",
-      "from": "cane-a#5",
-      "width": 34,
-      "height": 35,
+      "from": "x15-frosted-a#12",
+      "width": 42,
+      "height": 44,
       "steps": [
         {
           "op": "crop",
-          "x": 7,
-          "y": 6,
-          "width": 34,
-          "height": 35
+          "x": 11,
+          "y": 10,
+          "width": 42,
+          "height": 44
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/frosting/gumdrop-2.png",
-      "from": "cane-a#6",
-      "width": 36,
-      "height": 35,
+      "from": "x15-frosted-a#14",
+      "width": 46,
+      "height": 38,
       "steps": [
         {
           "op": "crop",
-          "x": 6,
-          "y": 6,
-          "width": 36,
-          "height": 35
+          "x": 9,
+          "y": 16,
+          "width": 46,
+          "height": 38
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/frosting/gumdrop-3.png",
-      "from": "cane-a#8",
-      "width": 38,
-      "height": 28,
+      "from": "x15-frosted-a#15",
+      "width": 42,
+      "height": 35,
       "steps": [
         {
           "op": "crop",
-          "x": 5,
-          "y": 12,
-          "width": 38,
-          "height": 28
+          "x": 11,
+          "y": 17,
+          "width": 42,
+          "height": 35
         }
       ]
     },
     {
-      "path": "public/assets/terrain/trees/frosting/gumdrop-4.png",
-      "from": "cane-a#9",
+      "path": "public/assets/terrain/trees/frosting/frosted-1.png",
+      "from": "x15-frosted-a#5",
       "width": 34,
-      "height": 25,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 15,
+          "y": 9,
+          "width": 34,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/frosted-2.png",
+      "from": "x15-frosted-a#8",
+      "width": 40,
+      "height": 45,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 12,
+          "y": 10,
+          "width": 40,
+          "height": 45
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/frosted-3.png",
+      "from": "x15-frosted-c#5",
+      "width": 30,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 11,
+          "y": 9,
+          "width": 30,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/frosted-4.png",
+      "from": "x15-frosted-c#6",
+      "width": 32,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 9,
+          "width": 32,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/frosted-5.png",
+      "from": "x15-frosted-c#7",
+      "width": 38,
+      "height": 46,
       "steps": [
         {
           "op": "crop",
           "x": 7,
-          "y": 14,
-          "width": 34,
-          "height": 25
+          "y": 9,
+          "width": 38,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/frosted-6.png",
+      "from": "x15-frosted-c#13",
+      "width": 32,
+      "height": 48,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 8,
+          "width": 32,
+          "height": 48
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/frosted-7.png",
+      "from": "x15-frosted-c#14",
+      "width": 40,
+      "height": 50,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 7,
+          "width": 40,
+          "height": 50
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/frosted-8.png",
+      "from": "x15-frosted-c#15",
+      "width": 40,
+      "height": 46,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 9,
+          "width": 40,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/cotton-1.png",
+      "from": "x15-fluff-a#0",
+      "width": 50,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 5,
+          "width": 50,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/cotton-2.png",
+      "from": "x15-fluff-a#1",
+      "width": 51,
+      "height": 62,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 51,
+          "height": 62
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/cotton-3.png",
+      "from": "x15-fluff-a#2",
+      "width": 49,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 3,
+          "width": 49,
+          "height": 64
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/cotton-4.png",
+      "from": "x15-fluff-a#4",
+      "width": 50,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 4,
+          "width": 50,
+          "height": 64
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/cotton-5.png",
+      "from": "x15-fluff-a#5",
+      "width": 49,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 4,
+          "width": 49,
+          "height": 64
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/cotton-6.png",
+      "from": "x15-fluff-a#6",
+      "width": 48,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 4,
+          "width": 48,
+          "height": 64
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/cotton-7.png",
+      "from": "x15-fluff-a#7",
+      "width": 49,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 7,
+          "y": 4,
+          "width": 49,
+          "height": 64
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/trees/frosting/cotton-8.png",
+      "from": "x15-fluff-a#10",
+      "width": 48,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 48,
+          "height": 64
         }
       ]
     },
     {
       "path": "public/assets/terrain/trees/frosting/cane-1.png",
-      "from": "cane-a#0",
-      "width": 18,
-      "height": 32,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 15,
-          "y": 8,
-          "width": 18,
-          "height": 32
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cane-2.png",
-      "from": "cane-a#2",
-      "width": 18,
-      "height": 33,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 15,
-          "y": 7,
-          "width": 18,
-          "height": 33
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cane-3.png",
-      "from": "cane-a#3",
-      "width": 18,
-      "height": 32,
-      "steps": [
-        {
-          "op": "crop",
-          "x": 15,
-          "y": 8,
-          "width": 18,
-          "height": 32
-        }
-      ]
-    },
-    {
-      "path": "public/assets/terrain/trees/frosting/cane-4.png",
-      "from": "cane-a#24",
-      "width": 36,
-      "height": 33,
+      "from": "x15-cane-a#14",
+      "width": 46,
+      "height": 54,
       "steps": [
         {
           "op": "crop",
           "x": 6,
-          "y": 8,
-          "width": 36,
-          "height": 33
+          "y": 13,
+          "width": 46,
+          "height": 54
         }
       ]
     }

@@ -187,5 +187,657 @@
         "height": 48
       }
     ]
+  },
+  "x15-charred-a": {
+    "id": "x15-charred-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f0169496-98cb-4007-a0c3-55f654ddd83a",
+    "submittedAt": "2026-11-27T12:31:28.195Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall dead tree of a volcanic plain, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a charred dead tree with a thick trunk and a few bare twisted branches of burnt black wood #2e2628 (light #5a4a48 on the left side), a few thin glowing orange ember cracks #f07a2a in the bark; a charred dead tree with a forked trunk and thick crooked black branches with a few ember cracks; a dead tree with ash-grey bark #6a6266 (shadow #3e383c) and a crooked bare crown; a dead ash-grey tree with a thick trunk and a round tangle of stubby branches. A short trunk at the bottom. About half of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take volcanic-trees/charred-a#0 sha256 986eb47cd67f8c50922a96d01ae93b7ab65974289205313360bfcbf30b67adc9",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take volcanic-trees/charred-a#5 sha256 215d72052f8c0485bb4f6529883afc9a80de52e845e9447eda85feb12ee3a11a",
+          "usage": "a charred dead tree with ember cracks: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#10 sha256 139b1b45e8f2dbfb7a6a989d39f2d70a47a512b1c94574c433f7e84bb0bc1186",
+          "usage": "a charred dead tree: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#2 sha256 0f9e16ae0b339d57eb1c614b68404fc1fba0c25a830f9230c26839c8b10c6243",
+          "usage": "an ash-grey dead tree: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#12 sha256 ad6552de8ad7970ed2cd376f11cd54c0daf04d9d8105a122309c009f3468e432",
+          "usage": "an ash-grey dead tree: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165601,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall dead tree of a volcanic plain, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a charred dead tree with a thick trunk and a few bare twisted branches of burnt black wood #2e2628 (light #5a4a48 on the left side), a few thin glowing orange ember cracks #f07a2a in the bark; a charred dead tree with a forked trunk and thick crooked black branches with a few ember cracks; a dead tree with ash-grey bark #6a6266 (shadow #3e383c) and a crooked bare crown; a dead ash-grey tree with a thick trunk and a round tangle of stubby branches. A short trunk at the bottom. About half of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, grass, green leaves, flames, smoke, fire."
+    },
+    "at": "2026-11-27T12:32:56.261Z",
+    "usageUsd": 0.0812918775346544,
+    "candidates": [
+      {
+        "file": "x15-charred-a-0.png",
+        "sha256": "829f936a0f86fd17287ea23f7e345428c457e6fc32cc4972b219caefe4158c22",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-1.png",
+        "sha256": "2d61eba7105fc1846d3be561b310416f63ec658e9b59f4b169d34496280521cf",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-2.png",
+        "sha256": "3e9cd869b34f31b0d21727135511a7dfd8b5cad2db52130c937ac522b1167387",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-3.png",
+        "sha256": "5199342a678e7a7450ad4de8e75fe099f1b1b90234d84cffeabb603d20b291ad",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-4.png",
+        "sha256": "6d024fc1d2738e5582657d1038c0ce1d026123c5366ef14a203d405cf844a444",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-5.png",
+        "sha256": "fd3ca74ddfc0970fac6523ba2ce97a60797a939200895f33686adedc4ca36c1e",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-6.png",
+        "sha256": "1ac6775142e275552b05bfcc4d40b9c8a31975782c813659df78312b552a2efa",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-7.png",
+        "sha256": "2be03d8cddbd1ed45155df6d55934327deb0fa7ad0021021e4b2efb408f28e16",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-8.png",
+        "sha256": "f97dbeac3896986046a6be71aea3c467e82410da1b11f1f2a9369d74be8ea0d6",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-9.png",
+        "sha256": "cb05a4caf2e5336329c232634a9b29748c6802a6c0f288918ebf12e83967c514",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-10.png",
+        "sha256": "2f8ca796fa891b782b4dd66c2c5eca51088356bdc09de579aa45f07c025167e7",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-11.png",
+        "sha256": "ff97013f094219d5a87e684d388b13167a7ab7c31672b5b654c45aaa1fab73d3",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-12.png",
+        "sha256": "a6bb8da5670b57f6519d98694292febb5129889d2c5e6bed87b3080c14085806",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-13.png",
+        "sha256": "61cd1afaca91360ea44d65b6eceafccd5194b14086bbf0165bc66bed0c016bff",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-14.png",
+        "sha256": "49fe6f399fc11ca9a7a15ad0dc2184b75cb63e6a7fb72b7dbb021de50800a175",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-charred-a-15.png",
+        "sha256": "1c10f89839ee9748bf49a20dd2483029a07040de2f7952aaab5039382eabb123",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-ember-a": {
+    "id": "x15-ember-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "51b667a3-a23a-496a-b6d3-71960d0a6e93",
+    "submittedAt": "2026-11-27T12:32:56.365Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one dead tree of a volcanic plain, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail, each image a different one of these: a dead black tree with a few red-orange leaves #e8502a still clinging to its branches; a dead black tree with a crooked crown and small clumps of red-orange leaves #e8502a; a burnt tree snag, a broken black trunk #2e2628 with two short stubby branches and orange ember tips #f07a2a, about two thirds as tall as the image; a short broken black stump-snag with one stubby branch and glowing ember cracks, about two thirds as tall as the image. A short trunk at the bottom. About half of the image wide."
+        }
+      ],
+      "style_image": {
+        "source": "take volcanic-trees/charred-a#4 sha256 04c4c188dcd012dc9c3a2323c71a9b6af765f4ece8a7fc3d1bc15606b724252f",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take volcanic-trees/charred-a#9 sha256 b8ed48ef94acdcaaaeb12c745eca20e2bd1edf5e8066a59a28bf72b8ff99de37",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#14 sha256 6a2fc26106ac852cb8deb11effee6dba816c7ebc3339eb5088143e483b0da7be",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#1 sha256 6a1677ff0a245671d0de7d4480173771d14744e1c1c2d72def581b27d42b7474",
+          "usage": "a broken burnt snag with ember tips: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#16 sha256 9c1f201db1615de29a3d507b24a828952ff5a95e05564b8409fe3fb75926a6b8",
+          "usage": "a broken burnt snag with ember tips: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165602,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one dead tree of a volcanic plain, chunky and cute, the same designs as the small reference trees redrawn larger with a little more detail, each image a different one of these: a dead black tree with a few red-orange leaves #e8502a still clinging to its branches; a dead black tree with a crooked crown and small clumps of red-orange leaves #e8502a; a burnt tree snag, a broken black trunk #2e2628 with two short stubby branches and orange ember tips #f07a2a, about two thirds as tall as the image; a short broken black stump-snag with one stubby branch and glowing ember cracks, about two thirds as tall as the image. A short trunk at the bottom. About half of the image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, grass, green leaves, flames, smoke, fire."
+    },
+    "at": "2026-11-27T12:34:13.557Z",
+    "usageUsd": 0.08153556556171841,
+    "candidates": [
+      {
+        "file": "x15-ember-a-0.png",
+        "sha256": "b4d3e71ab7bea823d4a696c3c9a2416974f8e5b69c48272079c4b36367281e2d",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-1.png",
+        "sha256": "fc6bdd61500aac07b379c025cf7001978e66a9ddb481909f1e3f08210e2cdec2",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-2.png",
+        "sha256": "061d53a17e933435d5f7c5fa16d05b3f9dd925a7ab8718bd95bbd76867fb8ddc",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-3.png",
+        "sha256": "a335beb1eac753b55e7f64618490fcd474caf45ef5db74f940f87ada8afb48b3",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-4.png",
+        "sha256": "299e789337798c46d606f8c4c93e17ce38589c3b20306701291217731bd410b2",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-5.png",
+        "sha256": "bd380b567b3bca0e0b5ac1b365ad079c595ffcd68ae47b61a4d3210812b38121",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-6.png",
+        "sha256": "a5de641ae13d5b4d74d775b99ebca2d019e47199864cf8a38e0f405dbf0ab268",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-7.png",
+        "sha256": "aa390f057c659b70e7102d8a50aac7d40811321623c6af65b86659272c5437d0",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-8.png",
+        "sha256": "2ef71bb322ffdb4259f6adc2cfe9d13eb4ba7200d983568c45ad72e108d10393",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-9.png",
+        "sha256": "671fed72ceb032c8a265d19194166b525a559b061686b2709a39942096527984",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-10.png",
+        "sha256": "157728b6a0130b865d18e3cfe27f81497af085077b179d504d320fa9180fdcc8",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-11.png",
+        "sha256": "678ac3b48f5dd6017a40cf72dfd500b778b515c709a71610b3f0482f355a0bc1",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-12.png",
+        "sha256": "f20956a89b66dfd1ea64583ab9542a206075ad95ce5f5e0967c7be9113701086",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-13.png",
+        "sha256": "b0405325143bdc146c657145fe4a053b61e15ebf072cba1148fe5096759d1b20",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-14.png",
+        "sha256": "99bf11c320c21a066726dd176cc12ad5538987a3da800c712ef033254b930d61",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-a-15.png",
+        "sha256": "fdfc2527854c709e918f395484ab703eec602ccaef14ce9e5315584e9f5db9c1",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-ember-b": {
+    "id": "x15-ember-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "0cc44630-f95a-4381-bc67-a3e1ec6413da",
+    "submittedAt": "2026-11-27T12:36:51.214Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one dead tree of a volcanic plain, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a dead black tree #2e2628 with a few red-orange leaves #e8502a still clinging to its branches; a dead black tree with a crooked crown and small clumps of red-orange leaves; a dead black tree with a round crown of twisted branches and a few red-orange leaves; a dead black tree with a forked trunk and red-orange leaf clumps. Light #5a4a48 on the left side. A short trunk at the bottom. About two thirds of the image wide and about seven tenths of the image tall, empty space above the crown."
+        }
+      ],
+      "style_image": {
+        "source": "take volcanic-trees/charred-a#4 sha256 04c4c188dcd012dc9c3a2323c71a9b6af765f4ece8a7fc3d1bc15606b724252f",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take volcanic-trees/charred-a#9 sha256 b8ed48ef94acdcaaaeb12c745eca20e2bd1edf5e8066a59a28bf72b8ff99de37",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#14 sha256 6a2fc26106ac852cb8deb11effee6dba816c7ebc3339eb5088143e483b0da7be",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#4 sha256 04c4c188dcd012dc9c3a2323c71a9b6af765f4ece8a7fc3d1bc15606b724252f",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#19 sha256 5c2736cf2925dae70b40106cd750689b85f4b2b9e3ad0fb96911051f21fb9850",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 72
+      },
+      "no_background": true,
+      "seed": 165603,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one dead tree of a volcanic plain, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a dead black tree #2e2628 with a few red-orange leaves #e8502a still clinging to its branches; a dead black tree with a crooked crown and small clumps of red-orange leaves; a dead black tree with a round crown of twisted branches and a few red-orange leaves; a dead black tree with a forked trunk and red-orange leaf clumps. Light #5a4a48 on the left side. A short trunk at the bottom. About two thirds of the image wide and about seven tenths of the image tall, empty space above the crown. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, grass, green leaves, flames, smoke, fire."
+    },
+    "at": "2026-11-27T12:38:19.074Z",
+    "usageUsd": 0.08191410824987623,
+    "candidates": [
+      {
+        "file": "x15-ember-b-0.png",
+        "sha256": "5ae2fefb083f2ac8d2f8e115b7b518780793e49eae1abe70086930675f9a7fc0",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-1.png",
+        "sha256": "63fb988add5f7bb0b785fb8965787fa51aef725f2812b477f7be35db92e3988f",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-2.png",
+        "sha256": "0fc305be9ae4f121358d9ab03834817f0eca173d8e529f745051b537062d0568",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-3.png",
+        "sha256": "824d61ef0b0f555dc6f885c1f9267a02b52e1727a7464ef4fa0098bd91ffa601",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-4.png",
+        "sha256": "237a7a9d1e0bf90b9c32e6ffef6bdfb196dbcf3255d25cea3e14737a63de044d",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-5.png",
+        "sha256": "b43a61695b6ea7678e112f6e15bab751367fcd012d64039267a94c1fb0bf9ef1",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-6.png",
+        "sha256": "816d1b773ac63c5e8a7be9c69c7f8932bcede48082e541619f035d4b2ceb9806",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-7.png",
+        "sha256": "1915a0f15a0639986cfd45661deb233f19400ed964117b56c3ac95f921927d0d",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-8.png",
+        "sha256": "c146c9d047dcef59c380d225b4a3a0929e6dd11c62b82cad202eb807cf7e9930",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-9.png",
+        "sha256": "ab3467ffbbc85aece73335c15308ccfc32a0ea5d0a83ad25b21f1f9b90ca4cea",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-10.png",
+        "sha256": "3dc3a6819b748b7e08cd77537910209f60f6109ea77e2423d7f8558dfd526bde",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-11.png",
+        "sha256": "fc997b24c65f838ae372169c8e267c23e3365476c6660b658ebc2194c99edd8d",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-12.png",
+        "sha256": "d16b2e92f2dbbd403cb065360d3a90fe9edecb4d82f16143f0b55544bb763661",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-13.png",
+        "sha256": "e6949f8ae7b8b6e3a71b0ce3c1105a5f6c79d68807f2182119864558ac60830a",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-14.png",
+        "sha256": "241ec9c3bf2152c526ec5ae836b32dd3c160d34eb2b10d13a707c8738731d7fa",
+        "width": 56,
+        "height": 72
+      },
+      {
+        "file": "x15-ember-b-15.png",
+        "sha256": "812da92d02188dfb44235ac41912631514a59992b2248f8f826d565a643d6de5",
+        "width": 56,
+        "height": 72
+      }
+    ]
+  },
+  "x15-ember-c": {
+    "id": "x15-ember-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "f68f3274-adbe-4735-a245-74f736761b1f",
+    "submittedAt": "2026-11-27T12:39:22.737Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one tall dead tree of a volcanic plain, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a dead black tree #2e2628 with a few red-orange leaves #e8502a still clinging to its branches; a dead black tree with a crooked crown and small clumps of red-orange leaves; a dead black tree with a round crown of twisted branches and a few red-orange leaves; a dead black tree with a forked trunk and red-orange leaf clumps. Light #5a4a48 on the left side. A short trunk at the bottom. About two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "style_image": {
+        "source": "take volcanic-trees/charred-a#4 sha256 04c4c188dcd012dc9c3a2323c71a9b6af765f4ece8a7fc3d1bc15606b724252f",
+        "usage": "copy this tree's colour palette, dark outline, flat shading with one shadow tone and its chunky cute look; draw the new tree larger, with a little more detail"
+      },
+      "reference_images": [
+        {
+          "source": "take volcanic-trees/charred-a#9 sha256 b8ed48ef94acdcaaaeb12c745eca20e2bd1edf5e8066a59a28bf72b8ff99de37",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#14 sha256 6a2fc26106ac852cb8deb11effee6dba816c7ebc3339eb5088143e483b0da7be",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#4 sha256 04c4c188dcd012dc9c3a2323c71a9b6af765f4ece8a7fc3d1bc15606b724252f",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        },
+        {
+          "source": "take volcanic-trees/charred-a#19 sha256 5c2736cf2925dae70b40106cd750689b85f4b2b9e3ad0fb96911051f21fb9850",
+          "usage": "a dead tree with red-orange leaves: the same design, redrawn bigger"
+        }
+      ],
+      "image_size": {
+        "width": 52,
+        "height": 60
+      },
+      "no_background": true,
+      "seed": 165604,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one tall dead tree of a volcanic plain, chunky and cute, the reference designs redrawn larger with a little more detail, each image a different one of these: a dead black tree #2e2628 with a few red-orange leaves #e8502a still clinging to its branches; a dead black tree with a crooked crown and small clumps of red-orange leaves; a dead black tree with a round crown of twisted branches and a few red-orange leaves; a dead black tree with a forked trunk and red-orange leaf clumps. Light #5a4a48 on the left side. A short trunk at the bottom. About two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, grass, green leaves, flames, smoke, fire."
+    },
+    "at": "2026-11-27T12:40:46.600Z",
+    "usageUsd": 0.08155248408847385,
+    "candidates": [
+      {
+        "file": "x15-ember-c-0.png",
+        "sha256": "2700c319d31082ae7ff253f356fe93725ec2f19cb7fd243505a45f4b6259c343",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-1.png",
+        "sha256": "32b2caeb2e8692289e8a5ebf67726d4b6e83a4082d2ee0d5859e80f9082a7f10",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-2.png",
+        "sha256": "c6e54cacba08c4dae3447aa3ad079099f959b4b960fc19f84c7407b6b340661c",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-3.png",
+        "sha256": "a9a0de5c2247035dd07fe1d9b26554f050c019875603bdbaa5ee1218390ec99d",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-4.png",
+        "sha256": "931a946ffbcef1866b33530dbe8754e3015bd9d7d8580e3dfea0403eb630eb2f",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-5.png",
+        "sha256": "fbae4c725c48797d4d1d4a121f73788840a54b6c1a64f5065090b86ebd6d18a9",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-6.png",
+        "sha256": "f1d3331da6d703c9e3a6b11b6fb0ef916c558b0488fc0285c6a68fdc491c75ff",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-7.png",
+        "sha256": "ff8d9e8736ccc50407987c8e7b84870c2995e26d3e9d1bdef0852a8c960853ca",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-8.png",
+        "sha256": "88ccc7680620560bf29c0b179b7a70fd9be2b101f50854bd71c5395abb636a8d",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-9.png",
+        "sha256": "436a0ff851860f39b1072d69e8cab143705c2612c3dd291b8d0324afb975c9b9",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-10.png",
+        "sha256": "4fa24f8688d1e3b80fc6400c99e3f3e174b01e9dbcaf4e8ed4bf629fee2ce5d4",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-11.png",
+        "sha256": "53902408a3adaa4c36d2f9477b5ba277780b5e9f7208071a7c831b316e0752a5",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-12.png",
+        "sha256": "b071e23e67c4c27903c9f43a5d0d13d452915826b37168f0e71cd36e55e1f238",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-13.png",
+        "sha256": "30d99c3913ceae75ec8a1a1c016c82e5023fb1c3a0337a06cdfaecef28a85feb",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-14.png",
+        "sha256": "bcb68066726f02154a6953e1af7ca77a4e6b2004c6a0e346a7f42af0dc889494",
+        "width": 52,
+        "height": 60
+      },
+      {
+        "file": "x15-ember-c-15.png",
+        "sha256": "6e03f3e94c3301bc3ae02dc0d4d95d485f309c8ee5ff16f519e9239f88193a54",
+        "width": 52,
+        "height": 60
+      }
+    ]
   }
 }

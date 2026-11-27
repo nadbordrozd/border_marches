@@ -248,5 +248,610 @@
     "verdict": "REJECTED",
     "notes": "a pink mound under the canes reads as a ground plate",
     "at": "2026-11-27T00:42:21.686Z"
+  },
+  "x15-fluff-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "pink cotton-candy tree with swirl lines, the fluff-a design at 1.6x (61-62 px)",
+    "at": "2026-11-27T12:33:17.024Z"
+  },
+  "x15-fluff-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "pink cotton-candy tree with swirl lines, the fluff-a design at 1.6x (61-62 px)",
+    "at": "2026-11-27T12:33:17.229Z"
+  },
+  "x15-fluff-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "lumpy pink cotton-candy puffs at 1.6x",
+    "at": "2026-11-27T12:33:17.403Z"
+  },
+  "x15-fluff-a#3": {
+    "verdict": "REJECTED",
+    "notes": "65-66 px tall after crop: above the 64 px ceiling (was accepted before the ceiling was set)",
+    "at": "2026-11-27T12:43:16.407Z"
+  },
+  "x15-fluff-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "mint cotton-candy tree at 1.6x",
+    "at": "2026-11-27T12:33:17.763Z"
+  },
+  "x15-fluff-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "mint cotton-candy tree at 1.6x",
+    "at": "2026-11-27T12:33:17.938Z"
+  },
+  "x15-fluff-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "mint cotton-candy tree at 1.6x",
+    "at": "2026-11-27T12:33:18.190Z"
+  },
+  "x15-fluff-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "mint cotton-candy tree at 1.6x",
+    "at": "2026-11-27T12:33:18.389Z"
+  },
+  "x15-fluff-a#9": {
+    "verdict": "REJECTED",
+    "notes": "65-66 px tall after crop: above the 64 px ceiling (was accepted before the ceiling was set)",
+    "at": "2026-11-27T12:43:16.489Z"
+  },
+  "x15-fluff-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "stacked pink cotton-candy puffs at 1.6x",
+    "at": "2026-11-27T12:33:19.027Z"
+  },
+  "x15-fluff-a#11": {
+    "verdict": "REJECTED",
+    "notes": "65-66 px tall after crop: above the 64 px ceiling (was accepted before the ceiling was set)",
+    "at": "2026-11-27T12:43:16.574Z"
+  },
+  "x15-fluff-a#8": {
+    "verdict": "REJECTED",
+    "notes": "68 px tall (1.75x): taller than the 1.5x band",
+    "at": "2026-11-27T12:33:19.519Z"
+  },
+  "x15-fluff-a#12": {
+    "verdict": "REJECTED",
+    "notes": "swirl lollipop 64-66 px with a 48 px disc (1.85x): too big, dominates the grove",
+    "at": "2026-11-27T12:33:19.688Z"
+  },
+  "x15-fluff-a#13": {
+    "verdict": "REJECTED",
+    "notes": "swirl lollipop 64-66 px with a 48 px disc (1.85x): too big, dominates the grove",
+    "at": "2026-11-27T12:33:19.853Z"
+  },
+  "x15-fluff-a#14": {
+    "verdict": "REJECTED",
+    "notes": "swirl lollipop 64-66 px with a 48 px disc (1.85x): too big, dominates the grove",
+    "at": "2026-11-27T12:33:19.998Z"
+  },
+  "x15-fluff-a#15": {
+    "verdict": "REJECTED",
+    "notes": "swirl lollipop 64-66 px with a 48 px disc (1.85x): too big, dominates the grove",
+    "at": "2026-11-27T12:33:20.174Z"
+  },
+  "x15-frosted-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "pink frosting crown with sprinkles on a gingerbread trunk at 1.25x (45-46 px)",
+    "at": "2026-11-27T12:36:09.009Z"
+  },
+  "x15-frosted-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "pink frosting crown with sprinkles on a gingerbread trunk at 1.25x (45-46 px)",
+    "at": "2026-11-27T12:36:09.194Z"
+  },
+  "x15-frosted-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 39-44 px tall (1.1-1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:36:09.333Z"
+  },
+  "x15-frosted-a#1": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 39-44 px tall (1.1-1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:36:09.458Z"
+  },
+  "x15-frosted-a#2": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 39-44 px tall (1.1-1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:36:09.620Z"
+  },
+  "x15-frosted-a#3": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 39-44 px tall (1.1-1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:36:09.786Z"
+  },
+  "x15-frosted-a#4": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 39-44 px tall (1.1-1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:36:09.963Z"
+  },
+  "x15-frosted-a#6": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 39-44 px tall (1.1-1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:36:10.170Z"
+  },
+  "x15-frosted-a#7": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 39-44 px tall (1.1-1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:36:10.296Z"
+  },
+  "x15-frosted-a#9": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 39-44 px tall (1.1-1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:36:10.519Z"
+  },
+  "x15-frosted-a#10": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 39-44 px tall (1.1-1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:36:10.695Z"
+  },
+  "x15-frosted-a#11": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 39-44 px tall (1.1-1.2x): too small for the 1.5x set",
+    "at": "2026-11-27T12:36:10.978Z"
+  },
+  "x15-frosted-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "gumdrop bush in pink, mint and lemon at 1.2-1.4x (a low bush)",
+    "at": "2026-11-27T12:36:11.110Z"
+  },
+  "x15-frosted-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "gumdrop bush in pink, mint and lemon at 1.2-1.4x (a low bush)",
+    "at": "2026-11-27T12:36:11.232Z"
+  },
+  "x15-frosted-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "gumdrop bush in pink, mint and lemon at 1.2-1.4x (a low bush)",
+    "at": "2026-11-27T12:36:11.398Z"
+  },
+  "x15-frosted-a#13": {
+    "verdict": "REJECTED",
+    "notes": "flattest gumdrop pile (35 px): too small",
+    "at": "2026-11-27T12:36:11.548Z"
+  },
+  "x15-cane-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "mint peppermint lollipop on a thick twisted stick at 1.7x (59-61 px)",
+    "at": "2026-11-27T12:37:32.886Z"
+  },
+  "x15-cane-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "mint peppermint lollipop on a thick twisted stick at 1.7x (59-61 px)",
+    "at": "2026-11-27T12:37:32.974Z"
+  },
+  "x15-cane-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "mint peppermint lollipop on a thick twisted stick at 1.7x (59-61 px)",
+    "at": "2026-11-27T12:37:33.064Z"
+  },
+  "x15-cane-a#1": {
+    "verdict": "REJECTED",
+    "notes": "near duplicate of #0",
+    "at": "2026-11-27T12:37:33.157Z"
+  },
+  "x15-cane-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "red and white swirl lollipop on a striped stick at 1.7x",
+    "at": "2026-11-27T12:37:33.248Z"
+  },
+  "x15-cane-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "red and white swirl lollipop on a striped stick at 1.7x",
+    "at": "2026-11-27T12:37:33.341Z"
+  },
+  "x15-cane-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "lollipop tree of three swirl lollipops on a candy trunk at 1.7x",
+    "at": "2026-11-27T12:37:33.434Z"
+  },
+  "x15-cane-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "pink and blue swirl lollipop on a striped stick at 1.75x",
+    "at": "2026-11-27T12:37:33.530Z"
+  },
+  "x15-cane-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "pink and blue swirl lollipop on a striped stick at 1.75x",
+    "at": "2026-11-27T12:37:33.630Z"
+  },
+  "x15-cane-a#7": {
+    "verdict": "REJECTED",
+    "notes": "64-65 px tall (1.85x): too big",
+    "at": "2026-11-27T12:37:33.734Z"
+  },
+  "x15-cane-a#8": {
+    "verdict": "REJECTED",
+    "notes": "64-65 px tall (1.85x): too big",
+    "at": "2026-11-27T12:37:33.829Z"
+  },
+  "x15-cane-a#9": {
+    "verdict": "REJECTED",
+    "notes": "64-65 px tall (1.85x): too big",
+    "at": "2026-11-27T12:37:33.926Z"
+  },
+  "x15-cane-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "two crossed striped candy canes at 1.65x (54 px)",
+    "at": "2026-11-27T12:37:34.022Z"
+  },
+  "x15-cane-a#12": {
+    "verdict": "REJECTED",
+    "notes": "single candy cane 62-64 px (1.9x the 32 px cane): too tall",
+    "at": "2026-11-27T12:37:34.119Z"
+  },
+  "x15-cane-a#13": {
+    "verdict": "REJECTED",
+    "notes": "single candy cane 62-64 px (1.9x the 32 px cane): too tall",
+    "at": "2026-11-27T12:37:34.209Z"
+  },
+  "x15-cane-a#15": {
+    "verdict": "REJECTED",
+    "notes": "single candy cane 62-64 px (1.9x the 32 px cane): too tall",
+    "at": "2026-11-27T12:37:34.303Z"
+  },
+  "x15-frosted-b#0": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.089Z"
+  },
+  "x15-frosted-b#1": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.147Z"
+  },
+  "x15-frosted-b#2": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.204Z"
+  },
+  "x15-frosted-b#3": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.258Z"
+  },
+  "x15-frosted-b#4": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.311Z"
+  },
+  "x15-frosted-b#5": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.364Z"
+  },
+  "x15-frosted-b#6": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.418Z"
+  },
+  "x15-frosted-b#7": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.472Z"
+  },
+  "x15-frosted-b#8": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.525Z"
+  },
+  "x15-frosted-b#9": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.578Z"
+  },
+  "x15-frosted-b#10": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.632Z"
+  },
+  "x15-frosted-b#11": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.684Z"
+  },
+  "x15-frosted-b#12": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.737Z"
+  },
+  "x15-frosted-b#13": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.791Z"
+  },
+  "x15-frosted-b#14": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.843Z"
+  },
+  "x15-frosted-b#15": {
+    "verdict": "REJECTED",
+    "notes": "an explicit three-quarter height came out 35-44 px (1.0-1.2x): too small",
+    "at": "2026-11-27T12:39:08.900Z"
+  },
+  "x15-cane-b#0": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:36.861Z"
+  },
+  "x15-cane-b#1": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:36.911Z"
+  },
+  "x15-cane-b#2": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:36.964Z"
+  },
+  "x15-cane-b#3": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.016Z"
+  },
+  "x15-cane-b#4": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.067Z"
+  },
+  "x15-cane-b#5": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.116Z"
+  },
+  "x15-cane-b#6": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.166Z"
+  },
+  "x15-cane-b#7": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.216Z"
+  },
+  "x15-cane-b#8": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.264Z"
+  },
+  "x15-cane-b#9": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.314Z"
+  },
+  "x15-cane-b#10": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.363Z"
+  },
+  "x15-cane-b#11": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.414Z"
+  },
+  "x15-cane-b#12": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.462Z"
+  },
+  "x15-cane-b#13": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.512Z"
+  },
+  "x15-cane-b#14": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.561Z"
+  },
+  "x15-cane-b#15": {
+    "verdict": "REJECTED",
+    "notes": "60-69 px tall (about 2x the 32 px cane): too tall",
+    "at": "2026-11-27T12:40:37.613Z"
+  },
+  "x15-frosted-c#5": {
+    "verdict": "ACCEPTED",
+    "notes": "frosted tree of stacked pink frosting puffs with sprinkles at 1.3-1.4x",
+    "at": "2026-11-27T12:42:03.465Z"
+  },
+  "x15-frosted-c#7": {
+    "verdict": "ACCEPTED",
+    "notes": "frosted tree of stacked pink frosting puffs with sprinkles at 1.3-1.4x",
+    "at": "2026-11-27T12:42:03.515Z"
+  },
+  "x15-frosted-c#14": {
+    "verdict": "ACCEPTED",
+    "notes": "frosted tree of stacked pink frosting puffs with sprinkles at 1.3-1.4x",
+    "at": "2026-11-27T12:42:03.564Z"
+  },
+  "x15-frosted-c#6": {
+    "verdict": "ACCEPTED",
+    "notes": "tiered frosting crown dotted with candies at 1.3x",
+    "at": "2026-11-27T12:42:03.614Z"
+  },
+  "x15-frosted-c#13": {
+    "verdict": "ACCEPTED",
+    "notes": "swirled frosting cone on a gingerbread trunk at 1.35x",
+    "at": "2026-11-27T12:42:03.662Z"
+  },
+  "x15-frosted-c#15": {
+    "verdict": "ACCEPTED",
+    "notes": "dripping frosting crown at 1.3x",
+    "at": "2026-11-27T12:42:03.713Z"
+  },
+  "x15-frosted-c#12": {
+    "verdict": "REJECTED",
+    "notes": "plain bar of frosting reads as a popsicle",
+    "at": "2026-11-27T12:42:03.762Z"
+  },
+  "x15-frosted-c#0": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 35-40 px tall (1.0-1.1x): too small",
+    "at": "2026-11-27T12:42:03.811Z"
+  },
+  "x15-frosted-c#1": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 35-40 px tall (1.0-1.1x): too small",
+    "at": "2026-11-27T12:42:03.859Z"
+  },
+  "x15-frosted-c#2": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 35-40 px tall (1.0-1.1x): too small",
+    "at": "2026-11-27T12:42:03.908Z"
+  },
+  "x15-frosted-c#3": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 35-40 px tall (1.0-1.1x): too small",
+    "at": "2026-11-27T12:42:03.958Z"
+  },
+  "x15-frosted-c#4": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 35-40 px tall (1.0-1.1x): too small",
+    "at": "2026-11-27T12:42:04.006Z"
+  },
+  "x15-frosted-c#8": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 35-40 px tall (1.0-1.1x): too small",
+    "at": "2026-11-27T12:42:04.056Z"
+  },
+  "x15-frosted-c#9": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 35-40 px tall (1.0-1.1x): too small",
+    "at": "2026-11-27T12:42:04.107Z"
+  },
+  "x15-frosted-c#10": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 35-40 px tall (1.0-1.1x): too small",
+    "at": "2026-11-27T12:42:04.156Z"
+  },
+  "x15-frosted-c#11": {
+    "verdict": "REJECTED",
+    "notes": "good frosted tree but 35-40 px tall (1.0-1.1x): too small",
+    "at": "2026-11-27T12:42:04.206Z"
+  },
+  "x15-cane-c#0": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:12.557Z"
+  },
+  "x15-cane-c#1": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:12.619Z"
+  },
+  "x15-cane-c#2": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:12.687Z"
+  },
+  "x15-cane-c#3": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:12.754Z"
+  },
+  "x15-cane-c#4": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:12.819Z"
+  },
+  "x15-cane-c#5": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:12.881Z"
+  },
+  "x15-cane-c#6": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:12.948Z"
+  },
+  "x15-cane-c#7": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.014Z"
+  },
+  "x15-cane-c#8": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.077Z"
+  },
+  "x15-cane-c#9": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.144Z"
+  },
+  "x15-cane-c#10": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.209Z"
+  },
+  "x15-cane-c#11": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.275Z"
+  },
+  "x15-cane-c#12": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.340Z"
+  },
+  "x15-cane-c#13": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.402Z"
+  },
+  "x15-cane-c#14": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.466Z"
+  },
+  "x15-cane-c#15": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.530Z"
+  },
+  "x15-cane-c#16": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.592Z"
+  },
+  "x15-cane-c#17": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.654Z"
+  },
+  "x15-cane-c#18": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.719Z"
+  },
+  "x15-cane-c#19": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.782Z"
+  },
+  "x15-cane-c#20": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.843Z"
+  },
+  "x15-cane-c#21": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.907Z"
+  },
+  "x15-cane-c#22": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:13.969Z"
+  },
+  "x15-cane-c#23": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:14.033Z"
+  },
+  "x15-cane-c#24": {
+    "verdict": "REJECTED",
+    "notes": "came out at the old 32-34 px (1.0x): not bigger",
+    "at": "2026-11-27T12:44:14.095Z"
   }
 }

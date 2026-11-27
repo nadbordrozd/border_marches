@@ -123,5 +123,325 @@
     "verdict": "REJECTED",
     "notes": "ember leaf alternative: near duplicate of #9",
     "at": "2026-11-27T09:29:20.845Z"
+  },
+  "x15-charred-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "charred black dead tree (ember cracks on some), the charred-a design at 1.3-1.5x",
+    "at": "2026-11-27T12:34:30.284Z"
+  },
+  "x15-charred-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "charred black dead tree (ember cracks on some), the charred-a design at 1.3-1.5x",
+    "at": "2026-11-27T12:34:30.800Z"
+  },
+  "x15-charred-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "charred black dead tree (ember cracks on some), the charred-a design at 1.3-1.5x",
+    "at": "2026-11-27T12:34:30.988Z"
+  },
+  "x15-charred-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "charred black dead tree (ember cracks on some), the charred-a design at 1.3-1.5x",
+    "at": "2026-11-27T12:34:31.239Z"
+  },
+  "x15-charred-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "charred black dead tree (ember cracks on some), the charred-a design at 1.3-1.5x",
+    "at": "2026-11-27T12:34:31.578Z"
+  },
+  "x15-charred-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "charred black dead tree (ember cracks on some), the charred-a design at 1.3-1.5x",
+    "at": "2026-11-27T12:34:31.859Z"
+  },
+  "x15-charred-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "charred black dead tree (ember cracks on some), the charred-a design at 1.3-1.5x",
+    "at": "2026-11-27T12:34:32.291Z"
+  },
+  "x15-charred-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "ash-grey dead tree with a crooked crown at 1.3-1.5x",
+    "at": "2026-11-27T12:34:32.687Z"
+  },
+  "x15-charred-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "ash-grey dead tree with a crooked crown at 1.3-1.5x",
+    "at": "2026-11-27T12:34:33.121Z"
+  },
+  "x15-charred-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "ash-grey dead tree with a crooked crown at 1.3-1.5x",
+    "at": "2026-11-27T12:34:33.566Z"
+  },
+  "x15-charred-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "ash-grey dead tree with a crooked crown at 1.3-1.5x",
+    "at": "2026-11-27T12:34:34.018Z"
+  },
+  "x15-charred-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "ash-grey dead tree with a crooked crown at 1.3-1.5x",
+    "at": "2026-11-27T12:34:34.271Z"
+  },
+  "x15-charred-a#9": {
+    "verdict": "REJECTED",
+    "notes": "dark hollow in the crown reads as a face",
+    "at": "2026-11-27T12:34:34.616Z"
+  },
+  "x15-charred-a#7": {
+    "verdict": "REJECTED",
+    "notes": "thin forked pole: noise in a crowd",
+    "at": "2026-11-27T12:34:34.872Z"
+  },
+  "x15-charred-a#10": {
+    "verdict": "REJECTED",
+    "notes": "fuzzy grey stump: off-design",
+    "at": "2026-11-27T12:34:35.907Z"
+  },
+  "x15-charred-a#6": {
+    "verdict": "REJECTED",
+    "notes": "43 px wide bush of twigs, low (1.2x) and see-through",
+    "at": "2026-11-27T12:34:36.190Z"
+  },
+  "x15-ember-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "broken black snag with glowing ember cracks and ember tips at 1.5x (43-48 px)",
+    "at": "2026-11-27T12:36:05.330Z"
+  },
+  "x15-ember-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "broken black snag with glowing ember cracks and ember tips at 1.5x (43-48 px)",
+    "at": "2026-11-27T12:36:05.505Z"
+  },
+  "x15-ember-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "broken black snag with glowing ember cracks and ember tips at 1.5x (43-48 px)",
+    "at": "2026-11-27T12:36:06.464Z"
+  },
+  "x15-ember-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "broken black snag with glowing ember cracks and ember tips at 1.5x (43-48 px)",
+    "at": "2026-11-27T12:36:07.003Z"
+  },
+  "x15-ember-a#0": {
+    "verdict": "REJECTED",
+    "notes": "good ember-leaved dead tree but 64-68 px tall (1.9x): too big",
+    "at": "2026-11-27T12:36:07.179Z"
+  },
+  "x15-ember-a#1": {
+    "verdict": "REJECTED",
+    "notes": "good ember-leaved dead tree but 64-68 px tall (1.9x): too big",
+    "at": "2026-11-27T12:36:07.321Z"
+  },
+  "x15-ember-a#2": {
+    "verdict": "REJECTED",
+    "notes": "good ember-leaved dead tree but 64-68 px tall (1.9x): too big",
+    "at": "2026-11-27T12:36:07.476Z"
+  },
+  "x15-ember-a#3": {
+    "verdict": "REJECTED",
+    "notes": "good ember-leaved dead tree but 64-68 px tall (1.9x): too big",
+    "at": "2026-11-27T12:36:07.661Z"
+  },
+  "x15-ember-a#4": {
+    "verdict": "REJECTED",
+    "notes": "good ember-leaved dead tree but 64-68 px tall (1.9x): too big",
+    "at": "2026-11-27T12:36:07.795Z"
+  },
+  "x15-ember-a#5": {
+    "verdict": "REJECTED",
+    "notes": "good ember-leaved dead tree but 64-68 px tall (1.9x): too big",
+    "at": "2026-11-27T12:36:07.937Z"
+  },
+  "x15-ember-a#6": {
+    "verdict": "REJECTED",
+    "notes": "good ember-leaved dead tree but 64-68 px tall (1.9x): too big",
+    "at": "2026-11-27T12:36:08.069Z"
+  },
+  "x15-ember-a#7": {
+    "verdict": "REJECTED",
+    "notes": "good ember-leaved dead tree but 64-68 px tall (1.9x): too big",
+    "at": "2026-11-27T12:36:08.223Z"
+  },
+  "x15-ember-a#8": {
+    "verdict": "REJECTED",
+    "notes": "tall broken snag 60-63 px (2.1x the 28 px cindersnag): too big",
+    "at": "2026-11-27T12:36:08.398Z"
+  },
+  "x15-ember-a#9": {
+    "verdict": "REJECTED",
+    "notes": "tall broken snag 60-63 px (2.1x the 28 px cindersnag): too big",
+    "at": "2026-11-27T12:36:08.530Z"
+  },
+  "x15-ember-a#10": {
+    "verdict": "REJECTED",
+    "notes": "tall broken snag 60-63 px (2.1x the 28 px cindersnag): too big",
+    "at": "2026-11-27T12:36:08.681Z"
+  },
+  "x15-ember-a#11": {
+    "verdict": "REJECTED",
+    "notes": "tall broken snag 60-63 px (2.1x the 28 px cindersnag): too big",
+    "at": "2026-11-27T12:36:08.863Z"
+  },
+  "x15-ember-b#0": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:08.960Z"
+  },
+  "x15-ember-b#1": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.016Z"
+  },
+  "x15-ember-b#2": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.071Z"
+  },
+  "x15-ember-b#3": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.128Z"
+  },
+  "x15-ember-b#4": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.186Z"
+  },
+  "x15-ember-b#5": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.248Z"
+  },
+  "x15-ember-b#6": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.301Z"
+  },
+  "x15-ember-b#7": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.355Z"
+  },
+  "x15-ember-b#8": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.407Z"
+  },
+  "x15-ember-b#9": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.461Z"
+  },
+  "x15-ember-b#10": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.515Z"
+  },
+  "x15-ember-b#11": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.569Z"
+  },
+  "x15-ember-b#12": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.622Z"
+  },
+  "x15-ember-b#13": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.675Z"
+  },
+  "x15-ember-b#14": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.727Z"
+  },
+  "x15-ember-b#15": {
+    "verdict": "REJECTED",
+    "notes": "an explicit seven-tenths height came out 35-47 px, mostly 1.1x: too small",
+    "at": "2026-11-27T12:39:09.782Z"
+  },
+  "x15-ember-c#8": {
+    "verdict": "ACCEPTED",
+    "notes": "dead black tree with a tangled crown and red-orange leaves at 1.35x (44 px)",
+    "at": "2026-11-27T12:42:04.260Z"
+  },
+  "x15-ember-c#9": {
+    "verdict": "ACCEPTED",
+    "notes": "dead black tree with a tangled crown and red-orange leaves at 1.35x (44 px)",
+    "at": "2026-11-27T12:42:04.310Z"
+  },
+  "x15-ember-c#10": {
+    "verdict": "ACCEPTED",
+    "notes": "dead black tree with a tangled crown and red-orange leaves at 1.35x (44 px)",
+    "at": "2026-11-27T12:42:04.361Z"
+  },
+  "x15-ember-c#11": {
+    "verdict": "ACCEPTED",
+    "notes": "dead black tree with a tangled crown and red-orange leaves at 1.35x (44 px)",
+    "at": "2026-11-27T12:42:04.411Z"
+  },
+  "x15-ember-c#12": {
+    "verdict": "ACCEPTED",
+    "notes": "crooked dead black tree with red-orange leaf clumps at 1.5x (49 px)",
+    "at": "2026-11-27T12:42:04.460Z"
+  },
+  "x15-ember-c#13": {
+    "verdict": "ACCEPTED",
+    "notes": "crooked dead black tree with red-orange leaf clumps at 1.5x (49 px)",
+    "at": "2026-11-27T12:42:04.509Z"
+  },
+  "x15-ember-c#14": {
+    "verdict": "ACCEPTED",
+    "notes": "crooked dead black tree with red-orange leaf clumps at 1.5x (49 px)",
+    "at": "2026-11-27T12:42:04.559Z"
+  },
+  "x15-ember-c#15": {
+    "verdict": "ACCEPTED",
+    "notes": "crooked dead black tree with red-orange leaf clumps at 1.5x (49 px)",
+    "at": "2026-11-27T12:42:04.609Z"
+  },
+  "x15-ember-c#0": {
+    "verdict": "REJECTED",
+    "notes": "good design but 37-41 px tall (1.1-1.2x): too small",
+    "at": "2026-11-27T12:42:04.659Z"
+  },
+  "x15-ember-c#1": {
+    "verdict": "REJECTED",
+    "notes": "good design but 37-41 px tall (1.1-1.2x): too small",
+    "at": "2026-11-27T12:42:04.707Z"
+  },
+  "x15-ember-c#2": {
+    "verdict": "REJECTED",
+    "notes": "good design but 37-41 px tall (1.1-1.2x): too small",
+    "at": "2026-11-27T12:42:04.757Z"
+  },
+  "x15-ember-c#3": {
+    "verdict": "REJECTED",
+    "notes": "good design but 37-41 px tall (1.1-1.2x): too small",
+    "at": "2026-11-27T12:42:04.806Z"
+  },
+  "x15-ember-c#4": {
+    "verdict": "REJECTED",
+    "notes": "good design but 37-41 px tall (1.1-1.2x): too small",
+    "at": "2026-11-27T12:42:04.856Z"
+  },
+  "x15-ember-c#5": {
+    "verdict": "REJECTED",
+    "notes": "good design but 37-41 px tall (1.1-1.2x): too small",
+    "at": "2026-11-27T12:42:04.905Z"
+  },
+  "x15-ember-c#6": {
+    "verdict": "REJECTED",
+    "notes": "good design but 37-41 px tall (1.1-1.2x): too small",
+    "at": "2026-11-27T12:42:04.955Z"
+  },
+  "x15-ember-c#7": {
+    "verdict": "REJECTED",
+    "notes": "good design but 37-41 px tall (1.1-1.2x): too small",
+    "at": "2026-11-27T12:42:05.005Z"
   }
 }
