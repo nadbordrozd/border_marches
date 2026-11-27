@@ -23,7 +23,8 @@ import {
   roundLimitOf,
   roundLimitWinner,
   bears,
-  blockingHexes,
+  blockingHexesFor,
+  blocksCreature,
   effectiveSpeed,
   enemySide,
   groundAt,
@@ -124,7 +125,14 @@ interface Reach {
 
 function blockedCells(state: BattleState, moverId: StackId | null): Uint8Array {
   const blocked = new Uint8Array(BATTLE_HEX_COUNT);
-  for (const o of blockingHexes(state)) blocked[hexIndex(o)] = 1;
+  // "May this stack occupy this hex" (NAVAL.md 3.8): a Swimmer walks the
+  // sea; every other stack is blocked by it as by rock.
+  const mover =
+    moverId === null
+      ? null
+      : (state.stacks.find((s) => s.id === moverId) ?? null);
+  for (const o of blockingHexesFor(state, mover?.creature ?? null))
+    blocked[hexIndex(o)] = 1;
   for (const s of state.stacks) {
     if (isAlive(s) && s.id !== moverId) blocked[hexIndex(s.hex)] = 1;
   }
@@ -302,7 +310,14 @@ export function swapPartners(state: BattleState, stackId: StackId): StackId[] {
   for (const c of s.conditions) {
     if (c.link === null || conditionKind(c.kind).swapAction !== true) continue;
     const far = state.stacks.find((x) => x.id === c.link);
-    if (far && isAlive(far) && !out.includes(far.id)) out.push(far.id);
+    if (!far || !isAlive(far) || out.includes(far.id)) continue;
+    // Never a swap that puts a non-Swimmer on the sea (NAVAL.md 3.1).
+    if (
+      blocksCreature(groundAt(state, far.hex), s.creature) ||
+      blocksCreature(groundAt(state, s.hex), far.creature)
+    )
+      continue;
+    out.push(far.id);
   }
   return out;
 }

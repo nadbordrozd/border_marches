@@ -27,6 +27,8 @@
  *   armies=humans,undead   a faction battle with heroes (debug-armies.ts);
  *                  lean=magic gives both heroes the magic classes;
  *                  vanguard=1|2|3 opens with the deployment phase
+ *   naval=deck|open-water|pier-deck|pier-water|beach   a naval sample
+ *                  battle on that layout (debug-naval.ts, NAVAL.md 3.2)
  */
 
 import { GROUND_TERRAINS } from "../../assets/manifest.ts";
@@ -79,6 +81,7 @@ import {
   stageToView,
 } from "../../render/battle/geometry.ts";
 import { factionBattleSetup } from "./debug-armies.ts";
+import { navalSampleBattle } from "./debug-naval.ts";
 import { runBattleScreen } from "./screen.ts";
 import { installTooltips } from "../tooltip.ts";
 import { installMagicWheel } from "../magic-wheel.ts";
@@ -381,15 +384,18 @@ export function startBattleDebug(route: Route): void {
     : undefined;
   const scenario = p.get("scenario");
   const sc = scenario === null ? null : scenarioSetup(scenario, seed);
+  const navalName = p.get("naval");
+  const naval = navalName === null ? null : navalSampleBattle(navalName, seed);
   const setup =
     sc?.game ??
+    naval ??
     factionBattleSetup(
       p,
       seed,
       terrain ?? (GROUND_TERRAINS[seed % GROUND_TERRAINS.length] as Terrain),
     ) ??
     sampleBattle(seed, terrain);
-  if (p.has("armies")) registerSpells();
+  if (p.has("armies") || naval !== null) registerSpells();
   const magic = p.get("magic") === "1" || sc !== null;
   if (magic) {
     registerSpells();

@@ -211,6 +211,18 @@ export const KEYWORDS: readonly KeywordDef[] = [
     icon: { kind: "ground", id: "rock" },
   },
   {
+    id: "sea",
+    term: "Sea",
+    forms: ["sea(?: hex(?:es)?)?"],
+    text: "Water hexes of a naval battle. Only Swimmers walk into, through and stand on them; for every other stack they are blocking.",
+  },
+  {
+    id: "mast",
+    term: "Mast",
+    forms: ["masts?"],
+    text: "A ship's mast on a deck: blocking, like rock.",
+  },
+  {
     id: "fire",
     term: "Fire",
     forms: ["fire", "Fire(?=:)"],

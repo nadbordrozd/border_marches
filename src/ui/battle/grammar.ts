@@ -6,6 +6,7 @@
  */
 
 import {
+  DECK_GUN_EFFECT,
   ability,
   act,
   aftersDue,
@@ -137,6 +138,11 @@ export interface TimelineEntry {
     readonly round: number;
     readonly stackId: StackId;
   };
+  /**
+   * A ship's deck gun (NAVAL.md 3.3): the round at whose start it fires
+   * and its Harm, at the side's strongest enemy stack.
+   */
+  readonly deckGun?: { readonly round: number; readonly harm: number };
 }
 
 /**
@@ -191,6 +197,19 @@ export function timelineEntries(state: BattleState): TimelineEntry[] {
         side: e.side,
         note: e.source,
         shell: { hex: shell.hex, round: shell.round, stackId: shell.stackId },
+      });
+      continue;
+    }
+    if (e.effect.id === DECK_GUN_EFFECT) {
+      const args = e.effect.args as { readonly harm?: unknown } | undefined;
+      const harm = typeof args?.harm === "number" ? args.harm : 0;
+      out.push({
+        kind: "event",
+        id: `e${e.id}`,
+        label: "Deck gun",
+        side: e.side,
+        note: e.source,
+        deckGun: { round: e.round, harm },
       });
       continue;
     }

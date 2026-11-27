@@ -65,3 +65,18 @@ export const ADMIRALTY_SHIP_PRICE = { gold: 500, wood: 5 } as const;
  */
 export const ADMIRALTY_SPECIAL = "admiralty";
 export const ADMIRALTY_DECK_GUN_HARM = 20;
+
+// ---------------------------------------------------------------------------
+// Naval battles (NAVAL 3, bead bzc.153)
+
+/** The deck gun's Harm before Seafaring (NAVAL 3.3). */
+export const DECK_GUN_BASE_HARM = 20;
+/** Added per Seafaring rank of the ship's hero. */
+export const DECK_GUN_HARM_PER_RANK = 15;
+/** A pirate crew's (non-swimming sea stack's) deck gun. */
+export const PIRATE_DECK_GUN_HARM = 40;
+/** Wet Landing (NAVAL 3.4): Drenched of this size for this many rounds. */
+export const WET_LANDING_DRENCHED = 25;
+export const WET_LANDING_ROUNDS = 2;
+/** The Seafaring rank that removes Wet Landing. */
+export const WET_LANDING_SEAFARING_IMMUNE = 3;

@@ -13,8 +13,9 @@
  * battles use that placement ({@link autoDeploy}).
  */
 
+import { isSeaLayout, layoutGround } from "./naval-field.ts";
 import { groundKind } from "./registry.ts";
-import { isRangedCreature } from "./resolve.ts";
+import { isRangedCreature, swims } from "./resolve.ts";
 import {
   ATTACKER_COLUMN,
   DEFENDER_COLUMN,
@@ -59,11 +60,34 @@ export function hasDeployment(setup: BattleSetup): boolean {
   return deployingSides(setup).length > 0;
 }
 
-/** Hexes no stack may stand on at deployment: rocks and blocking ground. */
-export function deployBlocked(setup: BattleSetup): Hex[] {
-  const rocks = setup.obstacles ?? generateObstacles(setup.seed);
-  const ground = (setup.ground ?? [])
-    .filter((g) => groundKind(g.kind).class === "blocking")
+/** The seeded obstacles of a setup (none on a sea layout, NAVAL.md 3.2). */
+function setupObstacles(setup: BattleSetup): readonly Hex[] {
+  return (
+    setup.obstacles ??
+    (isSeaLayout(setup.layout) ? [] : generateObstacles(setup.seed))
+  );
+}
+
+/**
+ * Hexes no stack may stand on at deployment: rocks and blocking ground,
+ * and a sea layout's features (NAVAL.md 3.5). For a side whose stacks all
+ * swim the sea is open; for any other side it is blocked.
+ */
+export function deployBlocked(setup: BattleSetup, side?: BattleSide): Hex[] {
+  const rocks = setupObstacles(setup);
+  const swimmers =
+    side !== undefined &&
+    setup[side].stacks.length > 0 &&
+    setup[side].stacks.every((s) => swims(s.creature));
+  const ground = [
+    ...layoutGround(setup.layout, setup.seed),
+    ...(setup.ground ?? []),
+  ]
+    .filter((g) => {
+      const def = groundKind(g.kind);
+      if (def.class !== "blocking") return false;
+      return !(swimmers && def.passableFor === "swimmer");
+    })
     .map((g) => g.hex);
   return [...rocks, ...ground];
 }
@@ -77,7 +101,7 @@ export function deployZoneColumns(side: BattleSide, columns: number): number[] {
 
 /** The free hexes of a side's deployment zone, by column then row. */
 export function deployZone(setup: BattleSetup, side: BattleSide): Hex[] {
-  const blocked = new Set(deployBlocked(setup).map(hexIndex));
+  const blocked = new Set(deployBlocked(setup, side).map(hexIndex));
   const out: Hex[] = [];
   for (const col of deployZoneColumns(side, deployColumns(setup[side]))) {
     for (let row = 0; row < BATTLE_HEIGHT; row++) {
@@ -143,7 +167,7 @@ export function deploy(
   if (why !== null) throw new RangeError(`${side} deployment: ${why}`);
   return {
     ...setup,
-    obstacles: setup.obstacles ?? generateObstacles(setup.seed),
+    obstacles: [...setupObstacles(setup)],
     [side]: {
       ...setup[side],
       stacks: setup[side].stacks.map((s, i) => ({

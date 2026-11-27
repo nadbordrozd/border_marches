@@ -60,6 +60,8 @@ export {
   roundLimitOf,
   roundLimitWinner,
   blockingHexes,
+  blockingHexesFor,
+  blocksCreature,
   effectiveSpeed,
   freeHexes,
   groundAt,
@@ -230,3 +232,18 @@ export {
 } from "./registry.ts";
 export type { CastContext } from "./registry.ts";
 export type { MagicOutcome } from "./auto.ts";
+export {
+  DECK_GUN_EFFECT,
+  DECK_GUN_RULE,
+  GANGPLANK_BANDS,
+  LAYOUT_NAMES,
+  WET_LANDING_RULE,
+  deckGunHarm,
+  fieldHexKinds,
+  fieldZones,
+  gangplankRows,
+  isSeaLayout,
+  layoutGround,
+  strongestEnemy,
+} from "./naval-field.ts";
+export type { FieldHexKind, FieldZones } from "./naval-field.ts";

@@ -227,6 +227,28 @@
   image-rendering: pixelated;
 }
 
+/* A ship's deck gun (NAVAL.md 3.3) on the round boundary: a cannonball
+   drawn in CSS (placeholder until the deck art, bead 9d). */
+.bm-q.bm-q-deckgun {
+  border-style: solid;
+  border-color: #c8a060;
+  background: #1c2a34;
+}
+
+.bm-q-cannonball {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #8a8f96 0 2px,
+    #3a3d42 3px,
+    #121316 7px
+  );
+  box-shadow: 0 0 0 1px #0d0b08;
+}
+
 .bm-q-card-img.bm-q-card-shell {
   width: 32px;
   height: 32px;

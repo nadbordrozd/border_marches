@@ -36,6 +36,14 @@ import {
 import type { Badge, Banner, HexMark, Scene, UnitView } from "./scene.ts";
 import { drawFx, motifScale, pixLine } from "../fx/field.ts";
 import {
+  drawDeckGuns,
+  drawPiece,
+  drawSeaGlints,
+  onSea,
+  paintNavalField,
+} from "./naval.ts";
+import type { NavalPiece } from "./naval.ts";
+import {
   PALETTES,
   SCHOOL_PALETTES,
   shapeSize,
@@ -72,11 +80,13 @@ export function paintBackground(art: BattleArt): HTMLCanvasElement {
   const ctx = c.getContext("2d");
   if (!ctx) return c;
   ctx.imageSmoothingEnabled = false;
-  const pattern = ctx.createPattern(art.ground, "repeat");
+  const pattern = ctx.createPattern(art.land ?? art.ground, "repeat");
   if (pattern) {
     ctx.fillStyle = pattern;
     ctx.fillRect(0, 0, STAGE_W, STAGE_H);
   }
+  // A sea layout (NAVAL.md 3.8): deck, water, planks and rails.
+  if (art.naval) paintNavalField(ctx, art.naval);
   ctx.strokeStyle = "rgba(24, 32, 12, 0.26)";
   ctx.lineWidth = 1;
   for (let i = 0; i < BATTLE_HEX_COUNT; i++) {
@@ -419,7 +429,8 @@ function drawStrikeArrow(ctx: CanvasRenderingContext2D, scene: Scene): void {
 
 type Drawable =
   | { kind: "unit"; y: number; unit: UnitView }
-  | { kind: "obstacle"; y: number; index: number };
+  | { kind: "obstacle"; y: number; index: number }
+  | { kind: "piece"; y: number; index: number; piece: NavalPiece };
 
 function hasPip(u: UnitView, kind: string): boolean {
   return u.pips.some((p) => p.kind === kind);
@@ -443,21 +454,32 @@ function drawUnit(
   const { img, asset } = entry;
   const f = asset.feet;
   const footW = f.footRight - f.footLeft;
-  // Contact shadow: a flat ellipse under the feet (no blur); it shrinks
-  // while the stack is in the air.
+  // A Swimmer on a sea hex (NAVAL.md 3.8): its lower fifth below the
+  // waterline, a ripple ring instead of a shadow.
+  const swimming = u.lift === 0 && onSea(art.naval, u.x, u.y);
+  const waterline = Math.round(u.y - f.contactY * 0.2);
   const air = Math.min(1, u.lift / 40);
-  ctx.fillStyle = "rgba(16, 20, 8, 0.28)";
-  ctx.beginPath();
-  ctx.ellipse(
-    u.x,
-    u.y - 1,
-    (footW / 2 + 4) * (1 - air * 0.5),
-    5 * (1 - air * 0.4),
-    0,
-    0,
-    Math.PI * 2,
-  );
-  ctx.fill();
+  if (!swimming) {
+    // Contact shadow: a flat ellipse under the feet (no blur); it shrinks
+    // while the stack is in the air.
+    ctx.fillStyle = "rgba(16, 20, 8, 0.28)";
+    ctx.beginPath();
+    ctx.ellipse(
+      u.x,
+      u.y - 1,
+      (footW / 2 + 4) * (1 - air * 0.5),
+      5 * (1 - air * 0.4),
+      0,
+      0,
+      Math.PI * 2,
+    );
+    ctx.fill();
+  } else {
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, STAGE_W, waterline);
+    ctx.clip();
+  }
   const left = Math.round(u.x - (f.footLeft + f.footRight) / 2);
   const top = Math.round(u.y - f.contactY - u.lift);
   blitSquashed(ctx, img, left, top, u.squash);
@@ -479,8 +501,52 @@ function drawUnit(
     ctx.globalAlpha = u.alpha * Math.min(1, u.flash) * 0.7;
     blitSquashed(ctx, silhouette(img), left, top, u.squash);
   }
+  if (swimming) {
+    ctx.restore();
+    drawRipple(ctx, u.x, waterline, footW / 2 + 6, now, reduced, u.alpha);
+  }
   ctx.globalAlpha = 1;
   if (u.alpha > 0.5) drawIdleMarks(ctx, u, top, now, reduced);
+}
+
+/** The ripple ring round a Swimmer's waterline; it breathes slowly. */
+function drawRipple(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  r: number,
+  now: number,
+  reduced: boolean,
+  alpha: number,
+): void {
+  const k = reduced ? 0 : Math.floor(((now / 700) % 3) as number);
+  ctx.globalAlpha = alpha * 0.85;
+  ctx.strokeStyle = "#d8eef0";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.ellipse(
+    Math.round(x) + 0.5,
+    y + 0.5,
+    r + k,
+    4 + k / 2,
+    0,
+    0,
+    Math.PI * 2,
+  );
+  ctx.stroke();
+  ctx.globalAlpha = alpha * 0.4;
+  ctx.beginPath();
+  ctx.ellipse(
+    Math.round(x) + 0.5,
+    y + 0.5,
+    r + 5 + k,
+    6 + k / 2,
+    0,
+    0,
+    Math.PI * 2,
+  );
+  ctx.stroke();
+  ctx.globalAlpha = 1;
 }
 
 const IDLE_PALETTES: Readonly<Record<"heartened" | "lucky", Palette>> = {
@@ -1108,6 +1174,11 @@ export function renderBattle(
   const { scene, art } = input;
   ctx.imageSmoothingEnabled = false;
   ctx.drawImage(input.background, 0, 0);
+  const naval = art.naval;
+  if (naval) {
+    if (!scene.reduced) drawSeaGlints(ctx, naval, scene.now);
+    drawDeckGuns(ctx, naval);
+  }
   drawGround(ctx, scene);
   drawShellRings(ctx, scene);
   drawMarks(ctx, scene);
@@ -1120,6 +1191,14 @@ export function renderBattle(
       kind: "obstacle",
       y: hexToStage(o).y + HEX_SIZE / 2,
       index: hexIndex(o),
+    });
+  }
+  for (const [index, piece] of naval?.pieces ?? []) {
+    drawables.push({
+      kind: "piece",
+      y: hexToStage(hexFromIndex(index)).y + HEX_SIZE / 2,
+      index,
+      piece,
     });
   }
   for (const u of scene.units.values()) {
@@ -1138,7 +1217,8 @@ export function renderBattle(
       }
       drawUnit(ctx, art, d.unit, scene.now, scene.reduced);
       if (dim) ctx.restore();
-    } else drawObstacle(ctx, art, d.index);
+    } else if (d.kind === "piece") drawPiece(ctx, d.piece, d.index);
+    else drawObstacle(ctx, art, d.index);
   }
   drawLinks(ctx, scene, input.activeId, input.hoverId ?? null);
   for (const u of scene.units.values()) {

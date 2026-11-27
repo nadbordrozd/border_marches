@@ -189,6 +189,26 @@ export const STANDARD_GROUND_KINDS: readonly GroundKindDef[] = [
     defaultClock: null,
     text: () => "Blocking: nothing enters this hex.",
   },
+  {
+    // The naval battlefield's water (docs/design/NAVAL.md 3.1).
+    id: "sea",
+    name: "Sea",
+    class: "blocking",
+    school: null,
+    defaultClock: null,
+    passableFor: "swimmer",
+    text: () =>
+      "Open sea: only Swimmers enter it; it blocks every other stack. Nothing burns, grows or lies on the water.",
+  },
+  {
+    // A ship's mast on a deck (NAVAL.md 3.2), drawn tall.
+    id: "mast",
+    name: "Mast",
+    class: "blocking",
+    school: null,
+    defaultClock: null,
+    text: () => "A ship's mast: blocking, nothing enters this hex.",
+  },
   remains("corpse"),
   remains("bones"),
   remains("wreck"),

@@ -114,7 +114,7 @@ import type { AbilityDef, ActDef } from "./registry.ts";
 import {
   GET_UP_EFFECT,
   bears,
-  blockingHexes,
+  blockingHexesFor,
   computeBreakdown,
   effectiveSpeed,
   enemySide,
@@ -405,8 +405,12 @@ const NEIGHBOURS: readonly (readonly number[])[] = Array.from(
 
 const distCache = new Map<string, Uint8Array>();
 
-function distances(state: BattleState): Uint8Array {
-  const blocked = blockingHexes(state).map(hexIndex);
+function distances(state: BattleState, swimmer = false): Uint8Array {
+  // A Swimmer's table leaves the sea open (NAVAL.md 3.8); on a field with
+  // no sea both tables are the same one.
+  const blocked = blockingHexesFor(state, swimmer ? SWIMMER : null).map(
+    hexIndex,
+  );
   const key = blocked.join(",");
   const hit = distCache.get(key);
   if (hit) return hit;
@@ -466,10 +470,24 @@ function aheadPresses(
   return mine >= w.aheadLead * Math.max(1, theirs);
 }
 
+/** A stand-in creature for the Swimmers' distance table. */
+const SWIMMER: BattleCreatureStats = {
+  id: "ai:swimmer",
+  tier: 1,
+  hp: 1,
+  attack: 0,
+  defense: 0,
+  damage: 1,
+  speed: 1,
+  abilities: ["swimmer"],
+};
+
 class Context {
   readonly w: AiWeights;
   readonly me: BattleSide;
   readonly dist: Uint8Array;
+  /** Walking distances for Swimmers (the sea open); `dist` without sea. */
+  readonly swimDist: Uint8Array;
   readonly limits: Limits;
   /** This side presses (behind at the limit, a guard, or the attacker). */
   readonly presses: boolean;
@@ -504,6 +522,9 @@ class Context {
       memo.seed = state.seed;
     }
     this.dist = distances(state);
+    this.swimDist = state.ground.some((g) => g.kind === "sea")
+      ? distances(state, true)
+      : this.dist;
     this.presses =
       (w.guardsPress > 0 && isNeutralGuard(state, me)) ||
       (w.behindPresses > 0
@@ -512,9 +533,13 @@ class Context {
       aheadPresses(state, me, w);
   }
 
-  /** Walking distance between two hexes around blocking ground. */
-  distance(a: Hex, b: Hex): number {
-    return this.dist[hexIndex(a) * BATTLE_HEX_COUNT + hexIndex(b)] as number;
+  /**
+   * Walking distance between two hexes around blocking ground; through the
+   * sea for a Swimmer.
+   */
+  distance(a: Hex, b: Hex, swimmer = false): number {
+    const t = swimmer ? this.swimDist : this.dist;
+    return t[hexIndex(a) * BATTLE_HEX_COUNT + hexIndex(b)] as number;
   }
 
   /**
@@ -827,6 +852,8 @@ type SpotMap = ReadonlyMap<number, number>;
 interface Traits {
   /** Its walk is a teleport (Mist). */
   readonly teleport: boolean;
+  /** It is a Swimmer: it walks through the sea (NAVAL.md 3.1). */
+  readonly swims: boolean;
   /** It takes a round-end turn (Afters): a second Strike on what it reaches. */
   readonly afters: boolean;
   /** Its melee Strikes leave a "cannot walk" condition (Sticky). */
@@ -852,6 +879,7 @@ function traitsOf(creature: BattleCreatureStats): Traits {
   for (const d of defs) if (d.aiPull) pulls.push(d.aiPull);
   const t: Traits = {
     teleport: defs.some((d) => d.teleportWalk === true),
+    swims: defs.some((d) => d.swimmer === true),
     afters: defs.some((d) => d.roundEndTurn === true),
     sticks: defs.some(
       (d) =>
@@ -982,7 +1010,9 @@ function strikeValue(
   far: number,
 ): number {
   if (!s.shooter) {
-    const d = s.teleport ? hexDistance(s.hex, bHex) : ctx.distance(s.hex, bHex);
+    const d = s.teleport
+      ? hexDistance(s.hex, bHex)
+      : ctx.distance(s.hex, bHex, s.traits.swims);
     // A stack that cannot walk reaches only what stands next to it; a
     // farther target waits until it can walk again.
     const reach = s.stuck > 0 ? 1 : s.reach;

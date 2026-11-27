@@ -58,6 +58,11 @@ export type QueueEntry =
         readonly round: number;
         readonly stackId: StackId;
       };
+      /**
+       * A ship's deck gun (NAVAL.md 3.3): drawn as a cannonball on the
+       * round boundary, like a shell, as it fires before any stack acts.
+       */
+      readonly deckGun?: { readonly round: number; readonly harm: number };
     }
   | { readonly kind: "divider"; readonly key: string; readonly round: number };
 
@@ -106,10 +111,15 @@ export function turnQueue(
   // Shells land at the start of the next round: they wait for the divider,
   // and keep their tiles however long this round is (one slot stays for
   // the active stack).
+  // Deck guns (NAVAL.md 3.3) fire at the next round's start too.
+  const boundary = (t: (typeof timeline)[number]): boolean =>
+    t.kind === "event" &&
+    (t.shell !== undefined ||
+      (t.deckGun !== undefined && t.deckGun.round === round + 1));
   const landing: QueueEntry[] = over
     ? []
     : timeline.flatMap((t) =>
-        t.kind === "event" && t.shell !== undefined
+        boundary(t)
           ? [
               {
                 kind: "event" as const,
@@ -117,14 +127,15 @@ export function turnQueue(
                 side: t.side,
                 label: t.label,
                 note: t.note,
-                shell: t.shell,
+                ...(t.shell !== undefined ? { shell: t.shell } : {}),
+                ...(t.deckGun !== undefined ? { deckGun: t.deckGun } : {}),
               },
             ]
           : [],
       );
   const room = slots - Math.min(landing.length, Math.max(0, slots - 1));
   timeline.forEach((t, i) => {
-    if (t.kind === "event" && t.shell !== undefined) return;
+    if (boundary(t)) return;
     if (tiles >= room) return;
     if (t.kind === "event") {
       out.push({
@@ -133,6 +144,7 @@ export function turnQueue(
         side: t.side,
         label: t.label,
         note: t.note,
+        ...(t.deckGun !== undefined ? { deckGun: t.deckGun } : {}),
       });
       tiles++;
       return;

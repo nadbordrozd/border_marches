@@ -186,6 +186,11 @@ function armyFromGame(
         }
       : {}),
     ...(startRules.length > 0 ? { startRules } : {}),
+    // Naval (NAVAL.md 3.3, 3.4): a ship's deck gun, a beach's Wet Landing.
+    ...(side.deckGun !== undefined && side.deckGun > 0
+      ? { deckGun: side.deckGun }
+      : {}),
+    ...(side.wetLanding === true ? { wetLanding: true } : {}),
     ...(birthright?.ability !== undefined
       ? { birthright: birthright.ability }
       : {}),
@@ -233,6 +238,9 @@ export function engineSetupFromGame(setup: GameBattleSetup): BattleSetup {
     seed: setup.seed,
     attacker: armyFromGame(setup.attacker, abilities),
     defender: armyFromGame(setup.defender, abilities),
+    ...(setup.layout !== undefined && setup.layout !== "land"
+      ? { layout: setup.layout }
+      : {}),
   };
 }
 

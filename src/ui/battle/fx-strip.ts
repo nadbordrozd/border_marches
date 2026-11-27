@@ -21,7 +21,6 @@
 import {
   activeStack,
   applyAction,
-  blockingHexes,
   chooseAiAction,
   legalActions,
 } from "../../core/battle/index.ts";
@@ -33,6 +32,7 @@ import type {
 } from "../../core/battle/index.ts";
 import type { BattleSetup as GameBattleSetup } from "../../core/game/battle.ts";
 import { battleGround, loadBattleArt } from "../../render/battle/assets.ts";
+import { drawnObstacles } from "../../render/battle/naval.ts";
 import { STAGE_H, STAGE_W, feetPoint } from "../../render/battle/geometry.ts";
 import { paintBackground, renderBattle } from "../../render/battle/renderer.ts";
 import { createScene, pruneEffects } from "../../render/battle/scene.ts";
@@ -204,7 +204,7 @@ export async function startFxStrip(
       battleGround(setup.terrain),
       before.seed,
       before.stacks.map((s) => s.creature.id),
-      blockingHexes(before),
+      drawnObstacles(before),
     );
     const background = paintBackground(art);
     const scene = createScene(before);
@@ -273,7 +273,7 @@ export async function startFxStrip(
           scene,
           art,
           background,
-          obstacles: blockingHexes(before),
+          obstacles: drawnObstacles(before),
           activeId: null,
         });
         const col = next % cols;

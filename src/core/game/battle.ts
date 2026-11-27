@@ -23,7 +23,14 @@
  * fort bonus; if it loses, the attacker moves into the town and fights the
  * garrison (a second, chained battle) or captures it.
  */
-import { getCreature } from "../../data/creatures.ts";
+import { getCreature, isSwimmer } from "../../data/creatures.ts";
+import {
+  DECK_GUN_BASE_HARM,
+  DECK_GUN_HARM_PER_RANK,
+  PIRATE_DECK_GUN_HARM,
+  WET_LANDING_SEAFARING_IMMUNE,
+} from "../../data/naval.ts";
+import type { BattleLayout } from "../battle/types.ts";
 import { getHeroClass } from "../../data/hero.ts";
 import { REPAIR_YARD_SHARE, SPECIALS } from "../../data/factionTowns.ts";
 import type { CreatureId, FactionId } from "../../data/types.ts";
@@ -38,8 +45,15 @@ import {
 import { heroArtifacts, spoilsEvent, takeSpoils } from "./artifacts.ts";
 import { heroBattleProfile, type HeroBattleProfile } from "./battle-profile.ts";
 import { effectsOf, heroStats } from "./effects.ts";
+import { deckGunBonus } from "./harbour.ts";
 import { gainXp } from "./hero.ts";
-import { shipAfterDefeat } from "./naval.ts";
+import {
+  isAfloat,
+  isNavalMap,
+  isSeaCell,
+  seafaringRank,
+  shipAfterDefeat,
+} from "./naval.ts";
 import { applyBattleMagic } from "../magic/adventure.ts";
 import type { MagicOutcome } from "../battle/auto.ts";
 import { checkEliminations, sendToPool, sendToTavern } from "./players.ts";
@@ -134,6 +148,13 @@ export interface BattleSide {
   drills?: string[];
   /** The owning player's town specials and Keystone powers. */
   specials?: string[];
+  /**
+   * The side fights from a ship (NAVAL.md 3.3): its deck gun's Harm at
+   * every round start from round 2. Absent: no deck gun.
+   */
+  deckGun?: number;
+  /** Wet Landing (NAVAL.md 3.4): a beach landing's attacker. */
+  wetLanding?: boolean;
 }
 
 export interface BattleSetup {
@@ -141,6 +162,13 @@ export interface BattleSetup {
   seed: number;
   /** Ground terrain of the defender's cell (for the battlefield look). */
   terrain: Terrain;
+  /**
+   * The naval layout (NAVAL.md 3.2), chosen from who is afloat and the
+   * defender's cell. Absent: an ordinary land battle.
+   */
+  layout?: BattleLayout;
+  /** A pier's land half: the attacker's cell's terrain (NAVAL.md 3.2). */
+  attackerTerrain?: Terrain;
   /** The moving hero's side: always the attacker (left, column 0). */
   attacker: BattleSide;
   /** Neutral stack, town garrison or the attacked hero (right). */
@@ -311,26 +339,167 @@ function buildSetup(state: GameState): SetupWithSlots | null {
     cellY = foe.y;
   }
   const cell = state.map.cells[cellY * state.map.width + cellX];
+  const attacker: BattleSide = {
+    owner: hero.owner,
+    hero: battleHero(hero),
+    stacks: own.stacks,
+    defenseBonus: 0,
+    towerHarm: null,
+    canRetreat: ownsTown(state, hero.owner),
+    faction: heroFaction(hero),
+    ...playerFlags(state, hero.owner),
+  };
+  const naval = navalSetup(state, hero, battle, attacker, defender);
+  if (naval !== null) {
+    if (naval.attackerGun !== undefined) attacker.deckGun = naval.attackerGun;
+    if (naval.wetLanding) attacker.wetLanding = true;
+    if (naval.defenderGun !== undefined) defender.deckGun = naval.defenderGun;
+  }
   return {
     setup: {
       seed: deriveSeed(state.seed, "battle", state.battles),
-      terrain: cell?.terrain ?? "grass",
-      attacker: {
-        owner: hero.owner,
-        hero: battleHero(hero),
-        stacks: own.stacks,
-        defenseBonus: 0,
-        towerHarm: null,
-        canRetreat: ownsTown(state, hero.owner),
-        faction: heroFaction(hero),
-        ...playerFlags(state, hero.owner),
-      },
+      terrain: naval?.terrain ?? cell?.terrain ?? "grass",
+      ...(naval !== null
+        ? {
+            layout: naval.layout,
+            ...(naval.attackerTerrain !== undefined
+              ? { attackerTerrain: naval.attackerTerrain }
+              : {}),
+          }
+        : {}),
+      attacker,
       defender,
       battle: { ...battle },
     },
     attackerSlots: own.slots,
     defenderSlots,
   };
+}
+
+interface NavalSetup {
+  layout: BattleLayout;
+  attackerGun?: number;
+  defenderGun?: number;
+  wetLanding: boolean;
+  /** The field's terrain (the land half's, or the defender's land). */
+  terrain?: Terrain;
+  attackerTerrain?: Terrain;
+}
+
+/**
+ * The deck gun of a hero's ship (3.3): 20 + 15 per Seafaring rank, +20
+ * when its side's specials hold an Admiralty (5.7).
+ */
+function heroDeckGun(hero: HeroState, side: BattleSide): number {
+  return (
+    DECK_GUN_BASE_HARM +
+    DECK_GUN_HARM_PER_RANK * seafaringRank(hero) +
+    deckGunBonus(side.specials ?? [])
+  );
+}
+
+function terrainAt(
+  state: GameState,
+  x: number,
+  y: number,
+): Terrain | undefined {
+  return state.map.cells[y * state.map.width + x]?.terrain;
+}
+
+/**
+ * The naval layout of a battle (NAVAL.md 3.2), or null on a dry map and
+ * for two sides ashore. The defender's cell decides, with who is afloat:
+ *
+ * | Attacker | Defender                                 | Layout          |
+ * | -------- | ---------------------------------------- | --------------- |
+ * | afloat   | a hero afloat, or a sea stack not all swimmers | deck      |
+ * | afloat   | a sea stack of swimmers only             | open-water      |
+ * | ashore   | afloat, or any sea stack                 | pier-deck/water |
+ * | afloat   | ashore (a hero, a land stack, a garrison) | beach          |
+ *
+ * Deck guns: the attacker's ship on deck and open water; the defender's
+ * ship (a hero afloat) or pirate crew (Harm 40) on a deck. Wet Landing
+ * on the beach unless the hero has Seafaring 3.
+ */
+function navalSetup(
+  state: GameState,
+  hero: HeroState,
+  battle: PendingBattle,
+  attacker: BattleSide,
+  defender: BattleSide,
+): NavalSetup | null {
+  if (!isNavalMap(state.map)) return null;
+  const afloat = isAfloat(state, hero);
+  let defenderSea = false;
+  let defenderHero: HeroState | undefined;
+  let defX = hero.x;
+  let defY = hero.y;
+  if (battle.kind === "hero") {
+    defenderHero = findHero(state, battle.objectId);
+    if (defenderHero !== undefined) {
+      defenderSea = isAfloat(state, defenderHero);
+      defX = defenderHero.x;
+      defY = defenderHero.y;
+    }
+  } else if (battle.kind === "monster") {
+    const m = state.monsters[battle.objectId];
+    if (m !== undefined) {
+      defenderSea = isSeaCell(state.map, m.x, m.y);
+      defX = m.x;
+      defY = m.y;
+    }
+  } else if (battle.kind === "site") {
+    // A site's guard fights where the hero visits it: its entrance.
+    defenderSea = isSeaCell(state.map, hero.x, hero.y);
+  }
+  if (!afloat && !defenderSea) return null;
+  const swimmersOnly =
+    defenderHero === undefined &&
+    defender.stacks.length > 0 &&
+    defender.stacks.every((s) => isSwimmer(getCreature(s.creature)));
+  const crewGun = (): number | undefined =>
+    defenderHero !== undefined
+      ? heroDeckGun(defenderHero, defender)
+      : swimmersOnly
+        ? undefined
+        : PIRATE_DECK_GUN_HARM;
+  if (afloat && defenderSea) {
+    return swimmersOnly
+      ? {
+          layout: "open-water",
+          attackerGun: heroDeckGun(hero, attacker),
+          wetLanding: false,
+        }
+      : {
+          layout: "deck",
+          attackerGun: heroDeckGun(hero, attacker),
+          ...optional("defenderGun", crewGun()),
+          wetLanding: false,
+        };
+  }
+  if (defenderSea) {
+    const land = terrainAt(state, hero.x, hero.y);
+    return {
+      layout: swimmersOnly ? "pier-water" : "pier-deck",
+      ...(swimmersOnly ? {} : optional("defenderGun", crewGun())),
+      wetLanding: false,
+      ...(land !== undefined ? { attackerTerrain: land } : {}),
+    };
+  }
+  // Afloat against a defender ashore: a beach landing on its land.
+  const land = terrainAt(state, defX, defY);
+  return {
+    layout: "beach",
+    wetLanding: seafaringRank(hero) < WET_LANDING_SEAFARING_IMMUNE,
+    ...(land !== undefined && land !== "water" ? { terrain: land } : {}),
+  };
+}
+
+function optional<K extends string>(
+  key: K,
+  value: number | undefined,
+): Partial<Record<K, number>> {
+  return value === undefined ? {} : ({ [key]: value } as Record<K, number>);
 }
 
 /** The setup of the pending battle, or null when none is pending. */

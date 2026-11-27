@@ -17,7 +17,8 @@ import {
   applyAction,
   autoDeploy,
   battleResult,
-  blockingHexes,
+  DECK_GUN_EFFECT,
+  LAYOUT_NAMES,
   chooseAiAction,
   createBattle,
   deployingSides,
@@ -64,6 +65,11 @@ import {
   viewToStage,
 } from "../../render/battle/geometry.ts";
 import type { Point, StageView } from "../../render/battle/geometry.ts";
+import {
+  deckGunSides,
+  drawnObstacles,
+  navalArtFor,
+} from "../../render/battle/naval.ts";
 import { paintBackground, renderBattle } from "../../render/battle/renderer.ts";
 import {
   EMPTY_OVERLAY,
@@ -556,17 +562,44 @@ class BattleScreen {
 
   async run(): Promise<BattleOutcome> {
     const engineStacks = this.state.stacks;
+    // A sea layout's look (NAVAL.md 3.8): deck, water, masts, deck guns.
+    const guns = deckGunSides(this.state, DECK_GUN_EFFECT);
+    for (const side of ["attacker", "defender"] as const)
+      if ((this.setup[side].deckGun ?? 0) > 0 && !guns.includes(side))
+        guns.push(side);
+    const naval = navalArtFor(this.state, guns);
+    const land = this.setup.attackerTerrain;
     this.art = await loadBattleArt(
       battleGround(this.setup.terrain),
       this.state.seed,
       engineStacks.map((s) => s.creature.id),
-      blockingHexes(this.state),
+      drawnObstacles(this.state),
+      naval
+        ? {
+            art: naval,
+            ...(land !== undefined && naval.kinds[0] === "land"
+              ? { land: battleGround(land) }
+              : {}),
+          }
+        : undefined,
     );
     this.background = paintBackground(this.art);
     this.layout();
     this.startFrames();
     this.refreshHud();
     this.options.onReady?.();
+    // The field's name for a naval battle (NAVAL.md 3.8, Battle UI).
+    const layout = this.state.layout;
+    if (layout !== undefined && layout !== "land") {
+      this.scene.banners.push({
+        text: LAYOUT_NAMES[layout],
+        sub: "Naval battle",
+        side: "attacker",
+        color: "#9fd8e8",
+        t0: performance.now(),
+        life: 2600,
+      });
+    }
 
     let reason: EngineBattleResult["reason"] = "eliminated";
     if (this.deploying !== null) await this.runDeployment();
@@ -755,7 +788,7 @@ class BattleScreen {
       scene: this.scene,
       art: this.art,
       background: this.background,
-      obstacles: blockingHexes(this.state),
+      obstacles: drawnObstacles(this.state),
       activeId: this.animating ? null : this.state.activeStackId,
       hoverId: this.animating ? null : this.hoveredStackId(),
     });
@@ -1985,7 +2018,9 @@ class BattleScreen {
     if (e.kind === "event") {
       const t = el(
         "span",
-        `bm-q bm-q-event bm-${e.side}${e.shell ? " bm-q-shell" : ""}`,
+        `bm-q bm-q-event bm-${e.side}${e.shell ? " bm-q-shell" : ""}${
+          e.deckGun ? " bm-q-deckgun" : ""
+        }`,
       );
       t.dataset["flip"] = e.key;
       if (e.shell) {
@@ -2003,6 +2038,21 @@ class BattleScreen {
           );
           if (on) this.flashStack(on.id);
         });
+      } else if (e.deckGun) {
+        // A ship's deck gun (NAVAL.md 3.3): a cannonball tile.
+        const gun = e.deckGun;
+        t.append(el("span", "bm-q-cannonball"));
+        t.setAttribute("aria-label", e.label);
+        const whose = this.playerSides.has(e.side) ? "Your ship" : "Enemy ship";
+        setTip(t, () =>
+          tipCard(
+            "Deck gun",
+            [
+              `Fires at the start of round ${gun.round}, before any stack acts: ${gun.harm} Harm to the strongest enemy stack. It fires every round while its side holds a living stack.`,
+            ],
+            { subtitle: `${whose} \u00b7 round ${gun.round}` },
+          ),
+        );
       } else {
         t.append(hourglass());
         setTip(t, () =>

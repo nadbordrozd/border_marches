@@ -57,6 +57,7 @@ import type {
   BattleCreatureStats,
   BattleEvent,
   BattleEventBody,
+  BattleLayout,
   BattleSide,
   BattleSideState,
   BattleStack,
@@ -360,6 +361,34 @@ export function swims(creature: BattleCreatureStats): boolean {
 }
 
 /**
+ * The feature keeps this creature out of its hex (NAVAL.md 3.8, "may this
+ * stack occupy this hex"): blocking ground, except a kind whose
+ * `passableFor` flag the creature has (a sea hex for a Swimmer). With no
+ * creature (a hex asked about for nobody) every blocking feature blocks.
+ */
+export function blocksCreature(
+  g: GroundFeature | null,
+  creature: BattleCreatureStats | null,
+): boolean {
+  if (g === null || g.class !== "blocking") return false;
+  if (creature === null) return true;
+  return !(groundKind(g.kind).passableFor === "swimmer" && swims(creature));
+}
+
+/**
+ * Hexes this creature may not enter or stand on (blocking ground it does
+ * not swim through); for null, every blocking hex.
+ */
+export function blockingHexesFor(
+  state: { readonly ground: readonly GroundFeature[] },
+  creature: BattleCreatureStats | null,
+): Hex[] {
+  return state.ground
+    .filter((g) => blocksCreature(g, creature))
+    .map((g) => g.hex);
+}
+
+/**
  * Hero rules that cancel a retaliation: Peace Dividend (Strikes by the
  * side against a Mollified stack) and Gag Rule (Hushed enemy stacks).
  */
@@ -524,6 +553,8 @@ export class Draft {
   nextUid: number;
   readonly laws: readonly string[];
   readonly roundLimit: number | undefined;
+  /** The field's layout (NAVAL.md 3.2), carried unchanged. */
+  readonly layout: BattleLayout | undefined;
   readonly events: BattleEvent[] = [];
   /** The hero act or rule resolving now (see {@link Acting}). */
   acting: Acting | null = null;
@@ -554,6 +585,7 @@ export class Draft {
     this.nextUid = state.nextUid;
     this.laws = state.laws;
     this.roundLimit = state.roundLimit;
+    this.layout = state.layout;
     this.stacks.forEach((s, i) => this.index.set(s.id, i));
   }
 
@@ -607,6 +639,7 @@ export class Draft {
       nextUid: this.nextUid,
       laws: this.laws,
       ...(this.roundLimit !== undefined ? { roundLimit: this.roundLimit } : {}),
+      ...(this.layout !== undefined ? { layout: this.layout } : {}),
     };
   }
 
@@ -772,8 +805,21 @@ function isBlocked(d: Draft, h: Hex): boolean {
   return groundAt(d, h)?.class === "blocking";
 }
 
-function isFree(d: Draft, h: Hex): boolean {
-  return inBounds(h) && !isBlocked(d, h) && stackAt(d, h) === null;
+/**
+ * In bounds, no living stack, and no ground that keeps `creature` out
+ * (any blocking ground when no creature is named). A sea hex is free only
+ * to a Swimmer (NAVAL.md 3.1).
+ */
+function isFree(
+  d: Draft,
+  h: Hex,
+  creature: BattleCreatureStats | null = null,
+): boolean {
+  return (
+    inBounds(h) &&
+    !blocksCreature(groundAt(d, h), creature) &&
+    stackAt(d, h) === null
+  );
 }
 
 function redirectLinkOf(stack: BattleStack): Condition | null {
@@ -1264,8 +1310,13 @@ export class Resolver implements Effects {
     removeFromTurnLists(d, id);
     d.set({ ...dead, count: 0, topHp: 0, conditions: [], defending: false });
     d.within(idx, "engine:death", () => {
-      // Death leaves ground.
-      if (!dead.summoned && dead.tags.remains !== "nothing") {
+      // Death leaves ground; a Swimmer dying on the sea sinks (NAVAL.md
+      // 3.1: nothing lies on the water).
+      if (
+        !dead.summoned &&
+        dead.tags.remains !== "nothing" &&
+        !isBlocked(d, dead.hex)
+      ) {
         this.placeGround(
           {
             hex: dead.hex,
@@ -1415,12 +1466,12 @@ export class Resolver implements Effects {
     if (isAlive(s)) return false;
     const living = d.stacks.filter((x) => isAlive(x) && x.owner === s.owner);
     if (living.length >= MAX_LIVING_STACKS_PER_SIDE) return false;
-    let at: Hex | null = isFree(d, hex) ? hex : null;
+    let at: Hex | null = isFree(d, hex, s.creature) ? hex : null;
     if (at === null) {
       let bestDist = Infinity;
       for (let i = 0; i < BATTLE_HEX_COUNT; i++) {
         const h = hexFromIndex(i);
-        if (!isFree(d, h)) continue;
+        if (!isFree(d, h, s.creature)) continue;
         const dist = hexDistance(h, hex);
         if (dist < bestDist) {
           bestDist = dist;
@@ -1593,6 +1644,7 @@ export class Resolver implements Effects {
   ): Hex {
     const d = this.d;
     const start = d.get(stackId).hex;
+    const creature = d.get(stackId).creature;
     const path: Hex[] = [];
     let cur = start;
     let stoppedBy: StackId | null = null;
@@ -1602,7 +1654,7 @@ export class Resolver implements Effects {
       const step = reaim && stopAt ? directionToward(cur, stopAt) : dir;
       const next = stepHex(cur, step);
       if (stopAt && sameHex(next, stopAt)) break;
-      if (!isFree(d, next)) {
+      if (!isFree(d, next, creature)) {
         stoppedBy = inBounds(next) ? (stackAt(d, next)?.id ?? null) : null;
         break;
       }
@@ -1677,7 +1729,8 @@ export class Resolver implements Effects {
 
   teleport(stackId: StackId, to: Hex): boolean {
     const d = this.d;
-    if (!this.isAlive(stackId) || !isFree(d, to)) return false;
+    if (!this.isAlive(stackId) || !isFree(d, to, d.get(stackId).creature))
+      return false;
     const s = d.get(stackId);
     d.emit({
       type: "move",
@@ -1696,6 +1749,12 @@ export class Resolver implements Effects {
     if (a === b || !this.isAlive(a) || !this.isAlive(b)) return false;
     const sa = d.get(a);
     const sb = d.get(b);
+    // A swap never puts a non-Swimmer on the sea (NAVAL.md 3.1).
+    if (
+      blocksCreature(groundAt(d, sb.hex), sa.creature) ||
+      blocksCreature(groundAt(d, sa.hex), sb.creature)
+    )
+      return false;
     d.emit({
       type: "move",
       stackId: a,
@@ -2325,7 +2384,7 @@ export class Resolver implements Effects {
   ): StackId | null {
     const d = this.d;
     const side = options.side ?? "attacker";
-    if (count < 1 || !isFree(d, hex)) return null;
+    if (count < 1 || !isFree(d, hex, creature)) return null;
     const living = d.stacks.filter((s) => isAlive(s) && s.owner === side);
     if (living.length >= MAX_LIVING_STACKS_PER_SIDE) return null;
     const id = `s${d.uid()}`;

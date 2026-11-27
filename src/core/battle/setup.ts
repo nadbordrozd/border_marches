@@ -6,7 +6,17 @@
 import { createRng, deriveSeed } from "../rng.ts";
 import { creatureFightValue } from "./damage.ts";
 import { runStartRule, startBattle } from "./engine.ts";
+import {
+  DECK_GUN_RULE,
+  WET_LANDING_RULE,
+  isSeaLayout,
+  layoutGround,
+  scheduleDeckGun,
+  wetLanding,
+} from "./naval-field.ts";
 import { ability, groundKind } from "./registry.ts";
+import { blocksCreature } from "./resolve.ts";
+import "./sea-abilities.ts";
 import { sideMagicFromSetup } from "./magic.ts";
 import type { Resolver } from "./resolve.ts";
 import { BATTLE_HEIGHT, BATTLE_WIDTH, hexIndex, inBounds } from "./hex.ts";
@@ -161,6 +171,24 @@ function battleStart(fx: Resolver, setup: BattleSetup): void {
       fx.resolveReactions();
     }
   }
+  // Naval rules (NAVAL.md 3.3, 3.4): Wet Landing, after the artifacts'
+  // rules and before Morale and Luck; then the deck guns are scheduled for
+  // their first shot at the start of round 2.
+  for (const side of sides) {
+    if (setup[side].wetLanding !== true) continue;
+    fx.d.beginStep();
+    fx.d.within(null, WET_LANDING_RULE, () => wetLanding(fx, side));
+    fx.resolveReactions();
+  }
+  for (const side of sides) {
+    const harm = setup[side].deckGun;
+    if (harm === undefined || harm <= 0) continue;
+    const first = Math.max(2, (setup.startRound ?? 1) + 1);
+    fx.d.beginStep();
+    fx.d.within(null, DECK_GUN_RULE, () =>
+      scheduleDeckGun(fx, side, harm, first),
+    );
+  }
   for (const side of sides) {
     for (const num of ARMY_NUMBERS) {
       const n = clampArmy(setup[side][num.key]);
@@ -213,9 +241,14 @@ export function fieldState(setup: BattleSetup): BattleState {
     ...buildStacks("attacker", setup.attacker),
     ...buildStacks("defender", setup.defender),
   ];
+  // A sea layout (NAVAL.md 3.2) lays its own features instead of the
+  // seeded obstacles; a beach landing keeps the land field's.
+  const sea = isSeaLayout(setup.layout);
   const obstacles = setup.obstacles
     ? [...setup.obstacles]
-    : generateObstacles(setup.seed);
+    : sea
+      ? []
+      : generateObstacles(setup.seed);
   const used = new Set<number>();
   for (const h of [...obstacles, ...stacks.map((s) => s.hex)]) {
     if (!inBounds(h))
@@ -236,15 +269,36 @@ export function fieldState(setup: BattleSetup): BattleState {
     remains: null,
     source: "battlefield",
   }));
-  for (const g of setup.ground ?? []) {
+  // The layout's sea, masts, crates and reefs: never under a stack it
+  // would block (a stack placed by hand), never over an explicit obstacle.
+  const stackAt = new Map(stacks.map((st) => [hexIndex(st.hex), st]));
+  const layoutSpecs = sea
+    ? layoutGround(setup.layout, setup.seed).filter((g) => {
+        const i = hexIndex(g.hex);
+        if (obstacles.some((o) => hexIndex(o) === i)) return false;
+        const st = stackAt.get(i);
+        if (st === undefined) return true;
+        const def = groundKind(g.kind);
+        const probe: GroundFeature = {
+          hex: g.hex,
+          kind: def.id,
+          class: def.class,
+          school: def.school,
+          size: 0,
+          clock: null,
+          remains: null,
+          source: "battlefield",
+        };
+        return !blocksCreature(probe, st.creature);
+      })
+    : [];
+  for (const g of [...layoutSpecs, ...(setup.ground ?? [])]) {
     const def = groundKind(g.kind);
     if (!inBounds(g.hex))
       throw new RangeError(`hex (${g.hex.col}, ${g.hex.row}) out of bounds`);
     if (ground.some((x) => hexIndex(x.hex) === hexIndex(g.hex)))
       throw new RangeError(`hex (${g.hex.col}, ${g.hex.row}) has ground twice`);
-    if (def.class === "blocking" && used.has(hexIndex(g.hex)))
-      throw new RangeError(`hex (${g.hex.col}, ${g.hex.row}) used twice`);
-    ground.push({
+    const feature: GroundFeature = {
       hex: g.hex,
       kind: def.id,
       class: def.class,
@@ -253,7 +307,16 @@ export function fieldState(setup: BattleSetup): BattleState {
       clock: g.clock === undefined ? (def.defaultClock ?? null) : g.clock,
       remains: null,
       source: g.source ?? "battlefield",
-    });
+      ...(g.look !== undefined ? { look: g.look } : {}),
+    };
+    const on = stackAt.get(hexIndex(g.hex));
+    if (
+      def.class === "blocking" &&
+      used.has(hexIndex(g.hex)) &&
+      (on === undefined || blocksCreature(feature, on.creature))
+    )
+      throw new RangeError(`hex (${g.hex.col}, ${g.hex.row}) used twice`);
+    ground.push(feature);
   }
   ground.sort((a, b) => hexIndex(a.hex) - hexIndex(b.hex));
   const side = (army: BattleSetup["attacker"]) => ({
@@ -289,5 +352,8 @@ export function fieldState(setup: BattleSetup): BattleState {
     nextUid: 1,
     laws: [],
     ...(setup.roundLimit !== undefined ? { roundLimit: setup.roundLimit } : {}),
+    ...(setup.layout !== undefined && setup.layout !== "land"
+      ? { layout: setup.layout }
+      : {}),
   };
 }

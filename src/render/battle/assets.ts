@@ -20,6 +20,7 @@ import { conditionKindIds, hexIndex } from "../../core/battle/index.ts";
 import type { Hex } from "../../core/battle/index.ts";
 import { hashInts } from "../../core/rng.ts";
 import { MARKER_ICONS, iconFor } from "../../assets/icons.ts";
+import { waterTile, type NavalArt } from "./naval.ts";
 
 const cache = new Map<string, Promise<HTMLImageElement>>();
 
@@ -202,7 +203,15 @@ export function obstacleArt(
 }
 
 export interface BattleArt {
-  readonly ground: HTMLImageElement;
+  /**
+   * The field's ground texture: the terrain's, or the water tile on a sea
+   * layout (it also fills the view around the stage).
+   */
+  readonly ground: HTMLImageElement | HTMLCanvasElement;
+  /** A pier's land half: the attacker's terrain texture (NAVAL.md 3.2). */
+  readonly land?: HTMLImageElement;
+  /** A sea layout's look (render/battle/naval.ts); absent on land. */
+  readonly naval?: NavalArt;
   readonly units: ReadonlyMap<
     string,
     { img: HTMLImageElement; asset: UnitAsset }
@@ -220,8 +229,14 @@ export async function loadBattleArt(
   seed: number,
   creatureIds: readonly string[],
   obstacles: readonly Hex[],
+  /** A sea layout: its look, and a pier's land terrain. */
+  naval?: { readonly art: NavalArt; readonly land?: GroundTerrain },
 ): Promise<BattleArt> {
   const groundP = loadImage(GROUND_TEXTURES[terrain]);
+  const landP =
+    naval?.land !== undefined
+      ? loadImage(GROUND_TEXTURES[naval.land])
+      : undefined;
   const iconsP = Promise.all([
     preloadGroundIcons(GROUND_ICON_KINDS),
     preloadConditionIcons(conditionKindIds()),
@@ -248,8 +263,12 @@ export async function loadBattleArt(
   const units = new Map<string, { img: HTMLImageElement; asset: UnitAsset }>();
   for (const [id, entry] of unitEntries) units.set(id, entry);
   await iconsP;
+  const water = naval ? waterTile() : null;
+  const land = landP ? await landP : undefined;
   return {
-    ground: await groundP,
+    ground: water ?? (await groundP),
+    ...(land !== undefined ? { land } : {}),
+    ...(naval ? { naval: naval.art } : {}),
     units,
     obstacles: new Map(obstacleEntries),
     portraits,

@@ -221,13 +221,36 @@ export interface BattleArmySetup {
    * read by the grammar through `hasRule`. Default none.
    */
   readonly rules?: readonly string[];
+  /**
+   * The side fights from a ship (docs/design/NAVAL.md 3.3): its deck gun
+   * deals this much Harm to the strongest enemy stack at every round start
+   * from round 2. Absent: no deck gun.
+   */
+  readonly deckGun?: number;
+  /**
+   * Wet Landing (NAVAL.md 3.4): every stack of this side starts Drenched
+   * 25, clock 2 (a beach landing's attacker). Default false.
+   */
+  readonly wetLanding?: boolean;
 }
+
+/**
+ * The battlefield's layout (NAVAL.md 3.2): `land` is the ordinary field
+ * with seeded obstacles; `deck` is deck to deck, `open-water` a deck
+ * against the water, `pier-deck` and `pier-water` the same with the
+ * attacker's half on land; `beach` is a beach landing (the land field,
+ * named for the banner; Wet Landing is the attacker's `wetLanding`).
+ */
+export type BattleLayout =
+  "land" | "deck" | "open-water" | "pier-deck" | "pier-water" | "beach";
 
 export interface BattleSetup {
   /** Battle seed: chooses the obstacles. */
   readonly seed: number;
   readonly attacker: BattleArmySetup;
   readonly defender: BattleArmySetup;
+  /** The field's layout (NAVAL.md 3.2). Default `land`. */
+  readonly layout?: BattleLayout;
   /** Explicit obstacle hexes instead of seeded ones (tests, scenarios). */
   readonly obstacles?: readonly Hex[];
   /** Extra starting ground (tests, scenarios). */
@@ -359,6 +382,11 @@ export interface GroundFeature {
   readonly clock: number | null;
   readonly remains: Remains | null;
   readonly source: string;
+  /**
+   * A drawing hint for the renderer only (NAVAL.md 3.8): a `rock` drawn as
+   * a crate or a reef. Absent on every other feature.
+   */
+  readonly look?: string;
 }
 
 export interface GroundSpec {
@@ -367,6 +395,8 @@ export interface GroundSpec {
   readonly size?: number;
   readonly clock?: number | null;
   readonly source?: string;
+  /** A drawing hint ({@link GroundFeature.look}). */
+  readonly look?: string;
 }
 
 /** A visible scheduled event on the timeline (1.6). */
@@ -433,6 +463,8 @@ export interface BattleState {
   readonly laws: readonly string[];
   /** The round limit when not ROUND_LIMIT (simulations, scenarios). */
   readonly roundLimit?: number;
+  /** The field's layout when not `land` (NAVAL.md 3.2). */
+  readonly layout?: BattleLayout;
 }
 
 /** A chosen target of an act or ability (law 5: anything can be one). */

@@ -356,6 +356,12 @@ export interface GroundKindDef {
   readonly class: GroundClass;
   readonly school: School | null;
   readonly defaultClock?: number | null;
+  /**
+   * Blocking kinds only (NAVAL.md 3.1): stacks whose creature has this
+   * ability flag may walk into, stand on and be moved onto the hex (`sea`:
+   * Swimmers). Every other stack is blocked, as by rock.
+   */
+  readonly passableFor?: "swimmer";
   text(f: GroundFeature): string;
   /** Hazards: a stack enters the hex (each hex of a path, in order). */
   onEnter?(fx: Effects, stackId: StackId, f: GroundFeature): void;
