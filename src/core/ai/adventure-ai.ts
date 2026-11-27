@@ -48,6 +48,7 @@
 import { findArtifact, isCursed, wornDef } from "../../data/artifacts.ts";
 import { getHeroClass } from "../../data/classes.ts";
 import { getCreature } from "../../data/creatures.ts";
+import { KEYSTONE_ITEM } from "../../data/factionTowns.ts";
 import { findSkill } from "../../data/skills.ts";
 import type { MapObject } from "../map/types.ts";
 import { inBounds, isPassable } from "../map/types.ts";
@@ -110,6 +111,8 @@ import {
   chooseHire,
   chooseRecruit,
   dayOfWeek,
+  keystoneBuild,
+  keystoneHallReady,
   reserveFor,
   tradeFor,
 } from "./economy.ts";
@@ -202,13 +205,22 @@ const DAY_OFFSET = 0.35;
 /**
  * How many days' walk from its first town a faction's main hero ranges in
  * the first two weeks (iteration 2): goblins (fast wolves, cheap troops)
- * range further; humans and undead stay closer.
+ * range further; humans, undead and the Candy Kingdom (a Speed 5 early
+ * army, FACTION_CANDY 12) stay closer.
  */
 export const WANDER_DAYS: Readonly<Record<string, number>> = {
   humans: 2,
   undead: 2,
   goblins: 3,
+  candy: 2,
 };
+
+/**
+ * What carrying the Keystone home is worth when the town can build its
+ * hall (bead bzc.116): about a dug Keystone's own value, so the bearer
+ * goes home within a few days rather than at once from across the map.
+ */
+const KEYSTONE_HOME_VALUE = 8000;
 
 /** A rival hero as a player last saw it (fog memory). */
 interface SeenHero {
@@ -1419,6 +1431,12 @@ export class AdventureAi implements PlayerController {
       if (threat) {
         const r = chooseRecruit(state, town, {}, false, () => true);
         if (r !== null) return r;
+      }
+      // The Keystone hall as soon as the Keystone is in town (bead
+      // bzc.116), on any day.
+      const keystone = keystoneBuild(state, town);
+      if (keystone !== null) {
+        return { type: "build", townId: town.id, building: keystone };
       }
       // Easy builds every other day (iteration 4: slower growth).
       const choice =
@@ -2939,6 +2957,11 @@ export class AdventureAi implements PlayerController {
       const cost = dist.get(i);
       if (cost === undefined || cost === 0 || guarded(i)) continue;
       let value = 0;
+      // The Keystone goes home to a town that can build its hall (bead
+      // bzc.116: dug Keystones were carried about and never built).
+      if (hero.backpack.includes(KEYSTONE_ITEM) && keystoneHallReady(town)) {
+        value += KEYSTONE_HOME_VALUE;
+      }
       if (isMain) {
         // Worth the trip only when it adds a good share to the army, and
         // not back and forth (iteration 1): within a few days of the last

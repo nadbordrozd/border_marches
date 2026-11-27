@@ -1243,3 +1243,66 @@ and `difficulty-table.md`; reproduce with `node tools/sim/run-ts.mjs
 tools/sim/match.ts --size M --players 3 --seeds 11,12,13 --days 84
 [--idle 0] [--difficulty easy|hard]` and `node tools/sim/match-table.mjs
 <dir> <before-tag> <after-tag>`.
+
+## Candy Kingdom (bead bzc.116)
+
+Both AIs play the Candy Kingdom ([FACTION_CANDY.md](FACTION_CANDY.md)
+section 12) and play against it. The changes are data-driven: three
+battle AI hints on abilities (`aiPull`, `aiMeleeMakes`, `aiWalkOnto` in
+`src/core/battle/registry.ts`) and the rules' own flags (`cannotWalk`,
+`roundEndTurn`, `timelineClass`), so no other faction's choices change
+unless it meets a Candy army or a Stuck stack. Tests on hand-built
+states: `tests/core/battle/ai-candy.test.ts` and
+`tests/core/ai/candy-ai.test.ts`. No simulation was run; the balance
+bead (FACTION_CANDY 14, bead 8) measures the Kingdom with the sims.
+
+### Battle AI
+
+- **Stuck in the threat map.** A stack bearing a "cannot walk"
+  condition reaches only what stands next to it; a farther target waits
+  the condition's rounds on top of the walk.
+- **Stuck in the evaluation** (per round left, times the bearer's value
+  and the tempo weight): 0.6 on a shooter held beside an enemy (it can
+  neither shoot nor walk clear), 0.3 on a melee stack with nothing next
+  to it, 0.1 on one in contact, 0.05 on a shooter in the clear. So the
+  Sugarplums Wind a held shooter's Stuck up, and a hero Passes On or
+  Winds down a Stuck that keeps its stack from the fight (the Echo of a
+  Hush or Accord page keeps the passed Stuck a round longer).
+- **Sticky reach.** A shooter that a Sticky stack can reach counts its
+  exposure (`shooterExposure`) twice.
+- **Reel In.** A shooter within a puller's walk plus pull range and
+  under its HP limit counts its exposure in the puller's threat, so an
+  enemy shooter keeps out of the Wranglers' reach where it can. The
+  Wranglers pull enemies, and own stacks only when the pull does what
+  their walk could not (Stuck, turn over, or a rule that answers being
+  pulled, like guest Goblins' Cannonball). Out of range, they walk first
+  to the reachable hex in range with the shortest walk and to the one
+  farthest from the target (the longest pull).
+- **Afters.** A Dragon's melee reach counts two Strikes; once its turn of
+  the round is over, the round-end Strike still due counts on the best
+  stack next to it, so the Wranglers pull an own Dragon into contact and
+  an enemy keeps clear of one before its Afters.
+- **Sugar Rush and Late Bell.** Hastened and Delayed (the timeline
+  kinds) are worth a round less on a stack that has had its turn this
+  round, so Sugar Rush goes to the heavy stack still to act.
+- **The Larder.** Walks onto sweets are always rehearsed for a stack
+  with the Larder (the placed estimate cannot see the meal).
+- Sitting Ducks, Chewy, Crack! and Come In, Dear needed no change: the
+  rehearsal sees the x150% shot, the halved first blow, the Command's
+  Strikes and the pull and Stuck.
+
+### Adventure AI
+
+- Opening (`OPENINGS.candy`): Mint Range, Town Hall, Candy-Cane Fence,
+  Taffy Ranch. `WANDER_DAYS.candy`: 2.
+- Build order: the Bakery (a `growthExtra` building) ranks 22, after the
+  Town Hall and the tier-2 dwelling and before the fort; the Larder
+  ranks 45 (`SPECIAL_RANK`), after the Sugarplum Bower and before the
+  Gummy Den.
+- **Keystone halls (every faction).** The hall is built on any day a
+  hero of the owner stands in the town with the Keystone and the City
+  Hall stands; a hero carrying the Keystone counts going home to such a
+  town as worth 8000. Before, a dug Keystone was carried about and no
+  hall was ever built.
+- Recruiting, hiring, hero skills and the guild need nothing new: they
+  read the tree, the class weights and the Confectioner's magic leaning.

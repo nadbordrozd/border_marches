@@ -75,7 +75,26 @@ export const OPENINGS: Readonly<Record<string, readonly BuildingId[]>> = {
   humans: ["archery-range", "town-hall", "fort-1", "barracks"],
   undead: ["charnel-pit", "town-hall", "fort-1", "wailing-tower"],
   goblins: ["powder-shed", "fort-1", "wolf-kennels", "town-hall"],
+  // FACTION_CANDY 12: the archers first, then income and the fence the
+  // Taffy Ranch needs.
+  candy: ["mint-range", "town-hall", "fort-1", "taffy-ranch"],
 };
+
+/**
+ * Build-order ranks of town specials by their flag (FACTION_CANDY 12): the
+ * Larder once the Sugarplum Bower stands (its requirement, rank 35), ahead
+ * of the Gummy Den. Specials not listed take their rank from what else
+ * the building does.
+ */
+export const SPECIAL_RANK: Readonly<Record<string, number>> = {
+  larder: 45,
+};
+
+/**
+ * Rank of a building that adds weekly growth to one dwelling (the Bakery):
+ * after the Town Hall and the tier-2 dwelling, before the fort they need.
+ */
+const GROWTH_EXTRA_RANK = 22;
 
 /** The opening building to build today in `town`, if any. */
 export function openingBuild(
@@ -110,6 +129,10 @@ export function buildingRank(def: BuildingDef, plan: BuildPlan = {}): number {
   if (def.income !== undefined) return (def.income.gold ?? 0) > 0 ? 52 : 55;
   if (def.evenDayIncome !== undefined) return 58;
   if (def.growthBonus === true) return 60;
+  if (def.growthExtra !== undefined) return GROWTH_EXTRA_RANK;
+  const special =
+    def.special === undefined ? undefined : SPECIAL_RANK[def.special];
+  if (special !== undefined) return special;
   if (def.drill !== undefined) return 75;
   return 90;
 }
@@ -134,6 +157,39 @@ export function buildQueue(
         buildingRank(a, plan) - buildingRank(b, plan) ||
         tree.order.indexOf(a.id) - tree.order.indexOf(b.id),
     );
+}
+
+/**
+ * The town's Keystone hall when it can be built today (a hero of the owner
+ * stands in the town with the Keystone and the hall's requirements stand),
+ * else null. It is never in the build queue: it needs the Keystone.
+ */
+export function keystoneBuild(
+  state: GameState,
+  town: TownState,
+): BuildingId | null {
+  const tree = townTree(town.faction);
+  if (tree === undefined || town.isHold) return null;
+  for (const def of Object.values(tree.buildings) as BuildingDef[]) {
+    if (def.needsKeystone !== true) continue;
+    if (buildStatus(state, town.id, def.id) === "ok") return def.id;
+  }
+  return null;
+}
+
+/**
+ * The town's Keystone hall is not built and its requirements stand: a hero
+ * carrying the Keystone should bring it here.
+ */
+export function keystoneHallReady(town: TownState): boolean {
+  const tree = townTree(town.faction);
+  if (tree === undefined || town.isHold) return false;
+  return (Object.values(tree.buildings) as BuildingDef[]).some(
+    (def) =>
+      def.needsKeystone === true &&
+      !town.buildings.includes(def.id) &&
+      def.requires.every((r) => town.buildings.includes(r)),
+  );
 }
 
 export interface BuildChoice {
@@ -172,6 +228,10 @@ export function chooseBuild(
     out.push(def);
     return out;
   };
+  // The Keystone hall (The Four O'Clock, the Round Table...) whenever a
+  // hero has carried the Keystone in and the town can build it.
+  const keystone = keystoneBuild(state, town);
+  if (keystone !== null) return { build: keystone, saving: null };
   const opening = plan.opening === false ? null : openingBuild(state, town);
   if (opening !== null) return { build: opening, saving: null };
   let blocked: BuildingDef | undefined;

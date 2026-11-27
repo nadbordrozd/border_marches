@@ -14,6 +14,8 @@ import { COMMANDS } from "../../../data/classes.ts";
 import { withinReach } from "../abilities.ts";
 import { hexDistance, sameHex } from "../hex.ts";
 import {
+  ability,
+  conditionKind,
   hasConditionKind,
   registerAbility,
   registerAct,
@@ -22,7 +24,7 @@ import {
 import type { Effects } from "../registry.ts";
 import { stackTotalHp } from "../resolve.ts";
 import { clockText } from "../standard.ts";
-import type { ActTarget, BattleStack, StackId } from "../types.ts";
+import type { ActTarget, BattleStack, BattleState, StackId } from "../types.ts";
 import {
   commandC,
   enemiesOf,
@@ -47,6 +49,19 @@ export const LARDER_HEAL = 5;
 
 function bearsKind(s: BattleStack, kind: string): boolean {
   return s.conditions.some((c) => c.kind === kind);
+}
+
+function hasConditionFlag(s: BattleStack, flag: "cannotWalk"): boolean {
+  return s.conditions.some((c) => conditionKind(c.kind)[flag] === true);
+}
+
+/** The stack has had its turn this round (not active, queued or waiting). */
+function turnOver(state: BattleState, id: StackId): boolean {
+  return (
+    state.activeStackId !== id &&
+    !state.queue.includes(id) &&
+    !state.waiting.includes(id)
+  );
 }
 
 function stick(fx: Effects, id: StackId, source: string): void {
@@ -92,6 +107,7 @@ export function registerCandy(): void {
     name: "Sticky",
     description:
       "A stack this native stack strikes in melee, attacking or retaliating, becomes Stuck for 2 rounds: it cannot walk.",
+    aiMeleeMakes: "stuck",
     onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id) return null;
       if (ctx.kind !== "melee" && ctx.kind !== "retaliation") return null;
@@ -167,8 +183,24 @@ export function registerCandy(): void {
       const has = stackTotalHp(s);
       return has <= hp ? null : `limit ${hp} HP, the stack has ${has}`;
     },
-    aiTargets: (state, actorId) =>
-      oneEach(living(state).filter((s) => s.id !== actorId)),
+    // The AI pulls enemies, and friends only when the pull does what their
+    // own walk could not (FACTION_CANDY 12): one that cannot walk, one
+    // whose turn this round is over (a Dragon before its Afters), or one
+    // whose rules answer being pulled (guest Goblins' Cannonball).
+    aiTargets: (state, actorId) => {
+      const me = stackOf(state, actorId);
+      return oneEach(
+        living(state).filter(
+          (s) =>
+            s.id !== actorId &&
+            (me === null ||
+              s.side !== me.side ||
+              hasConditionFlag(s, "cannotWalk") ||
+              turnOver(state, s.id) ||
+              s.creature.abilities.some((a) => ability(a).onMoved)),
+        ),
+      );
+    },
     resolve(fx, actorId, t) {
       // A stack already next to the Wranglers is not moved; the use is
       // still spent for the turn.
@@ -183,6 +215,7 @@ export function registerCandy(): void {
     act: "reel-in",
     moveFirst: true,
     everyTurn: true,
+    aiPull: reelInLimits,
   });
 
   registerAbility({
@@ -251,6 +284,7 @@ export function registerCandy(): void {
     name: "Larder",
     description:
       "When this native stack ends a walk on sweets, it eats them: it becomes Hastened for 2 rounds and heals 5 HP per creature, reviving.",
+    aiWalkOnto: ["sweets"],
     onWalkEnd(fx, ownerId, hex) {
       const g = fx.state.ground.find((x) => sameHex(x.hex, hex));
       if (!g || g.class !== "remains" || g.kind !== "sweets") return;

@@ -33,6 +33,16 @@
  * - **Links.** A Scapegoat is worth the value per HP it moves from the
  *   bearer to the far end (negative the wrong way round); Warded and
  *   Drenched only the share of damage that comes as Harm (bead bzc.36).
+ * - **Candy Kingdom** (bead bzc.116; docs/design/AI.md "Candy Kingdom"):
+ *   a stack that cannot walk (Stuck) threatens only what stands next to
+ *   it, and its Stuck is worth most on a shooter held beside an enemy; a
+ *   Dragon's reach counts two Strikes (Afters), plus the round-end Strike
+ *   still due on what stands next to it once its turn is over; a shooter
+ *   within a puller's walk and pull range (Reel In, `aiPull`) is exposed,
+ *   and one a Sticky stack reaches doubly so; a place on the timeline
+ *   (Hastened, Delayed) is worth a round less on a stack that has acted;
+ *   pulls walk into range first, and walks onto remains a stack feeds on
+ *   (the Larder, `aiWalkOnto`) are always rehearsed.
  * - **Tuning.** The weights ({@link DEFAULT_AI_WEIGHTS}) were set with the
  *   batch runner, tests/sim/battles.ts (`npm run sim:battles`).
  * - **Pruning.** Moves are first scored on a board with the stack simply
@@ -83,7 +93,7 @@ import {
   touchedStacks,
 } from "./magic.ts";
 import { ability, act as actDef, conditionKind, hasAct } from "./registry.ts";
-import type { ActDef } from "./registry.ts";
+import type { AbilityDef, ActDef } from "./registry.ts";
 import {
   GET_UP_EFFECT,
   bears,
@@ -539,6 +549,10 @@ function conditionWorth(
   value: number,
   w: AiWeights,
   far: BattleStack | undefined,
+  /** The bearer has had its turn this round. */
+  acted = false,
+  /** An enemy of the bearer stands next to it (for "cannot walk" kinds). */
+  pinned = false,
 ): number {
   const rounds = c.clock === null ? 3 : Math.min(3, c.clock);
   const vph = aiValuePerHp(bearer.creature);
@@ -546,6 +560,16 @@ function conditionWorth(
   const kind = conditionKind(c.kind);
   const s = c.size;
   let worth: number;
+  if (kind.cannotWalk === true) {
+    // Cannot walk (Stuck, FACTION_CANDY 12): a shooter held next to an
+    // enemy can neither shoot nor walk clear; a melee stack with nothing
+    // next to it can do nothing; one in contact can still hit what holds
+    // it, and a shooter in the clear still shoots.
+    const shooter = liveShooter(bearer);
+    const f = shooter ? (pinned ? 0.6 : 0.05) : pinned ? 0.1 : 0.3;
+    worth = f * t * rounds * value;
+    return kind.polarity === "boon" ? worth : -worth;
+  }
   switch (c.kind) {
     case "frozen":
     case "asleep":
@@ -556,9 +580,17 @@ function conditionWorth(
       break;
     case "delayed":
     case "shaken":
-    case "hastened":
-      worth = 0.2 * t * rounds * value;
+    case "hastened": {
+      // A place on the timeline (Hastened, Delayed) is no use in a round
+      // whose turn the bearer has had (Sugar Rush on a stack that has not
+      // acted gains a round more).
+      const r =
+        kind.timelineClass !== undefined && acted
+          ? Math.max(0, rounds - 1)
+          : rounds;
+      worth = 0.2 * t * r * value;
       break;
+    }
     case "heartened":
       worth = 0.8 * t * value;
       break;
@@ -635,6 +667,15 @@ function conditionWorth(
   return kind.polarity === "boon" ? worth : -worth;
 }
 
+/** The stack has had its turn this round (not active, queued or waiting). */
+function hasActed(state: BattleState, s: BattleStack): boolean {
+  return (
+    s.id !== state.activeStackId &&
+    !state.queue.includes(s.id) &&
+    !state.waiting.includes(s.id)
+  );
+}
+
 /** The creatures a dead stack gets up with (a third, rounded up). */
 function getUpValue(stack: BattleStack): number {
   const n = Math.ceil(stack.initialCount / 3);
@@ -674,8 +715,33 @@ function threat(
       if (v > best) best = v;
     }
     total += best;
+    if (aftersPending(state, a)) {
+      // The round-end turn still to come strikes what stands next to it.
+      let extra = 0;
+      for (const b of alive) {
+        if (b.side === side || !isAdjacent(b.hex, a.hex)) continue;
+        extra = Math.max(extra, strikeOnly(ctx, state, s, b, 1));
+      }
+      total += extra;
+    }
   }
   return total;
+}
+
+/**
+ * `a` still takes its round-end turn this round (Afters, FACTION_CANDY 5)
+ * after its own turn is over: one more Strike, without a walk, on a stack
+ * next to it.
+ */
+function aftersPending(state: BattleState, a: BattleStack): boolean {
+  return (
+    traitsOf(a.creature).afters &&
+    a.extraTurnRound !== state.round &&
+    a.aftersRound !== state.round &&
+    !bears(a, "hold") &&
+    !bears(a, "cannotAct") &&
+    hasActed(state, a)
+  );
 }
 
 /** A stack that could strike next turn, from `hex`. */
@@ -686,6 +752,59 @@ interface Striker {
   readonly speed: number;
   readonly reach: number;
   readonly teleport: boolean;
+  /**
+   * Rounds the stack cannot walk (a condition such as Stuck; 0: it can):
+   * it reaches only what stands next to it, and farther targets wait that
+   * many turns more.
+   */
+  readonly stuck: number;
+  /** What the creature's abilities tell the threat map. */
+  readonly traits: Traits;
+}
+
+/** The threat map's reading of a creature's abilities (FACTION_CANDY 12). */
+interface Traits {
+  /** Its walk is a teleport (Mist). */
+  readonly teleport: boolean;
+  /** It takes a round-end turn (Afters): a second Strike on what it reaches. */
+  readonly afters: boolean;
+  /** Its melee Strikes leave a "cannot walk" condition (Sticky). */
+  readonly sticks: boolean;
+  /** Pull abilities (Reel In): reach and HP limit against a target. */
+  readonly pulls: readonly NonNullable<AbilityDef["aiPull"]>[];
+}
+
+/** Memoised traits by creature record (records are never mutated). */
+const traitsCache = new WeakMap<BattleCreatureStats, Traits>();
+
+function traitsOf(creature: BattleCreatureStats): Traits {
+  const hit = traitsCache.get(creature);
+  if (hit !== undefined) return hit;
+  const defs = creature.abilities.map((x) => ability(x));
+  const pulls: NonNullable<AbilityDef["aiPull"]>[] = [];
+  for (const d of defs) if (d.aiPull) pulls.push(d.aiPull);
+  const t: Traits = {
+    teleport: defs.some((d) => d.teleportWalk === true),
+    afters: defs.some((d) => d.roundEndTurn === true),
+    sticks: defs.some(
+      (d) =>
+        d.aiMeleeMakes !== undefined &&
+        conditionKind(d.aiMeleeMakes).cannotWalk === true,
+    ),
+    pulls,
+  };
+  traitsCache.set(creature, t);
+  return t;
+}
+
+/** Rounds `a` cannot walk for (the longest "cannot walk" clock), or 0. */
+function stuckRounds(a: BattleStack): number {
+  let n = 0;
+  for (const c of a.conditions) {
+    if (conditionKind(c.kind).cannotWalk !== true) continue;
+    n = Math.max(n, c.clock === null ? 3 : Math.max(1, c.clock));
+  }
+  return n;
 }
 
 function striker(a: BattleStack, hex: Hex, enemyNear: boolean): Striker {
@@ -695,16 +814,47 @@ function striker(a: BattleStack, hex: Hex, enemyNear: boolean): Striker {
     !enemyNear &&
     !bears(a, "cannotShoot");
   const speed = Math.max(1, effectiveSpeed(a));
+  const traits = traitsOf(a.creature);
   return {
     a,
     hex,
     shooter,
     speed,
     reach: speed + 1,
-    teleport: a.creature.abilities.some(
-      (x) => ability(x).teleportWalk === true,
-    ),
+    teleport: traits.teleport,
+    stuck: stuckRounds(a),
+    traits,
   };
+}
+
+/** A shooter that still has its shots (what reach and pulls take away). */
+function liveShooter(b: BattleStack): boolean {
+  return isRangedCreature(b.creature) && b.shotsLeft > 0 && !b.summoned;
+}
+
+/**
+ * What striker `s` is worth against shooter `b` on `bHex` by pulling it
+ * out of shooting (Reel In) instead of striking: the shooter's exposure,
+ * when `b` is within the striker's walk plus the pull's range and under
+ * its HP limit; else 0.
+ */
+function pullValue(
+  ctx: Context,
+  s: Striker,
+  b: BattleStack,
+  bHex: Hex,
+): number {
+  if (s.traits.pulls.length === 0 || !liveShooter(b)) return 0;
+  const d = hexDistance(s.hex, bHex);
+  if (d <= 1) return 0;
+  const walk = s.stuck > 0 ? 0 : s.speed;
+  const hp = totalHp({ count: b.count, hp: b.creature.hp, topHp: b.topHp });
+  for (const pull of s.traits.pulls) {
+    const lim = pull(s.a, b);
+    if (d <= lim.range + walk && hp <= lim.hp)
+      return ctx.w.shooterExposure * stackValue(b);
+  }
+  return 0;
 }
 
 /**
@@ -719,33 +869,47 @@ function strikeValue(
   bHex: Hex,
   far: number,
 ): number {
-  let factor = 1;
   if (!s.shooter) {
     const d = s.teleport ? hexDistance(s.hex, bHex) : ctx.distance(s.hex, bHex);
-    if (d > s.reach) {
-      if (far <= 0 || d === 255) return 0;
-      factor = far ** Math.min(6, (d - s.reach) / s.speed);
+    // A stack that cannot walk reaches only what stands next to it; a
+    // farther target waits until it can walk again.
+    const reach = s.stuck > 0 ? 1 : s.reach;
+    if (d > reach) {
+      const pv = pullValue(ctx, s, b, bHex);
+      if (far <= 0 || d === 255) return pv;
+      const turns = s.stuck + Math.max(0, d - s.reach) / s.speed;
+      const factor = far ** Math.min(6, turns);
+      return Math.max(pv, factor * strikeOnly(ctx, state, s, b));
     }
   }
+  let v = strikeOnly(ctx, state, s, b);
+  // A shooter reached in melee loses its shots too, and one that cannot
+  // walk clear of its striker (Sticky) loses them twice over.
+  if (!s.shooter && liveShooter(b))
+    v += (s.traits.sticks ? 2 : 1) * ctx.w.shooterExposure * stackValue(b);
+  return v;
+}
+
+/**
+ * The damage value of striker `s` striking `b` (no reach or exposure
+ * terms); a melee stack with a round-end turn (Afters) strikes twice.
+ */
+function strikeOnly(
+  ctx: Context,
+  state: BattleState,
+  s: Striker,
+  b: BattleStack,
+  strikes = s.traits.afters && !s.shooter ? 2 : 1,
+): number {
   let dmg = ctx.rate(state, s.a, b, s.shooter) * s.a.count;
+  if (strikes !== 1) dmg *= strikes;
   if (b.defending) dmg *= 0.8;
   const hp = totalHp({
     count: b.count,
     hp: b.creature.hp,
     topHp: b.topHp,
   });
-  let v = Math.min(dmg, hp) * aiValuePerHp(b.creature);
-  // A shooter reached in melee loses its shots too.
-  if (
-    factor === 1 &&
-    !s.shooter &&
-    isRangedCreature(b.creature) &&
-    b.shotsLeft > 0 &&
-    !b.summoned
-  )
-    v += ctx.w.shooterExposure * stackValue(b);
-  v *= factor;
-  return v;
+  return Math.min(dmg, hp) * aiValuePerHp(b.creature);
 }
 
 /** The threat weights of the board: enemy reach (fear) and own reach. */
@@ -802,7 +966,12 @@ function staticValue(
     for (const c of s.conditions) {
       const far =
         c.link === null ? undefined : alive.find((x) => x.id === c.link);
-      v += sign * conditionWorth(c, s, value, ctx.w, far);
+      const kind = conditionKind(c.kind);
+      const acted = kind.timelineClass !== undefined && hasActed(state, s);
+      const pinned =
+        kind.cannotWalk === true &&
+        alive.some((e) => e.side !== s.side && isAdjacent(e.hex, s.hex));
+      v += sign * conditionWorth(c, s, value, ctx.w, far, acted, pinned);
     }
     if (s.getsUp === true) v += sign * 0.3 * getUpValue(s);
   }
@@ -813,6 +982,21 @@ function staticValue(
     const s = id === null ? null : state.stacks.find((x) => x.id === id);
     if (!s || isAlive(s) || !hasRemainsOf(state, s.id)) continue;
     v += (s.owner === me ? 0.9 : -0.9) * getUpValue(s);
+  }
+  return v;
+}
+
+/**
+ * The worth of `s`'s "cannot walk" conditions for `ctx.me` (signed by
+ * owner), with or without an enemy next to it.
+ */
+function pinWorth(ctx: Context, s: BattleStack, held: boolean): number {
+  const sign = s.owner === ctx.me ? 1 : -1;
+  const value = stackValue(s);
+  let v = 0;
+  for (const c of s.conditions) {
+    if (conditionKind(c.kind).cannotWalk !== true) continue;
+    v += sign * conditionWorth(c, s, value, ctx.w, undefined, false, held);
   }
   return v;
 }
@@ -842,6 +1026,38 @@ function placedEstimator(
     return () => fixed;
   }
   const moverActs = !bears(m, "cannotAct");
+  // "Cannot walk" conditions are worth more on a stack held in contact:
+  // the stacks whose contact the mover makes or breaks, and the mover.
+  const pins: {
+    readonly s: BattleStack;
+    /** Held by a stack other than the mover. */
+    readonly others: boolean;
+    readonly now: number;
+  }[] = [];
+  for (const s of alive) {
+    if (s.id !== m.id && s.side === m.side) continue;
+    if (!s.conditions.some((c) => conditionKind(c.kind).cannotWalk === true))
+      continue;
+    const others = alive.some(
+      (e) => e.id !== m.id && e.side !== s.side && isAdjacent(e.hex, s.hex),
+    );
+    const held = s.id === m.id ? others : others || isAdjacent(m.hex, s.hex);
+    pins.push({ s, others, now: pinWorth(ctx, s, held) });
+  }
+  const pinDelta = (hex: Hex): number => {
+    let d = 0;
+    for (const p of pins) {
+      const held =
+        p.s.id === m.id
+          ? alive.some(
+              (e) =>
+                e.side !== m.side && e.id !== m.id && isAdjacent(e.hex, hex),
+            )
+          : p.others || isAdjacent(hex, p.s.hex);
+      d += pinWorth(ctx, p.s, held) - p.now;
+    }
+    return d;
+  };
   // Own side: every other stack's best strike (the enemies do not move).
   let ownFixed = 0;
   for (const a of alive) {
@@ -855,6 +1071,14 @@ function placedEstimator(
       if (v > best) best = v;
     }
     ownFixed += best;
+    if (aftersPending(state, a)) {
+      let extra = 0;
+      for (const b of alive) {
+        if (b.side === me || !isAdjacent(b.hex, a.hex)) continue;
+        extra = Math.max(extra, strikeOnly(ctx, state, s, b, 1));
+      }
+      ownFixed += extra;
+    }
   }
   const targets = alive.filter((b) => b.side !== me);
   // Enemy side: each stack's best strike at stacks other than the mover,
@@ -866,6 +1090,10 @@ function placedEstimator(
     readonly melee: Striker;
     readonly bestShoot: number;
     readonly bestMelee: number;
+    /** Its Afters strike is still due this round. */
+    readonly afters: boolean;
+    /** That strike's best value on stacks other than the mover. */
+    readonly aftersExcl: number;
   }[] = [];
   for (const e of alive) {
     if (e.side !== them || bears(e, "cannotAct")) continue;
@@ -886,15 +1114,38 @@ function placedEstimator(
           : strikeValue(ctx, state, melee, b, b.hex, 0);
       if (vm > bestMelee) bestMelee = vm;
     }
-    enemies.push({ hex: e.hex, nearExcl, shoot, melee, bestShoot, bestMelee });
+    const afters = aftersPending(state, e);
+    let aftersExcl = 0;
+    if (afters) {
+      for (const b of alive) {
+        if (b.side === them || b.id === m.id || !isAdjacent(b.hex, e.hex))
+          continue;
+        aftersExcl = Math.max(aftersExcl, strikeOnly(ctx, state, melee, b, 1));
+      }
+    }
+    enemies.push({
+      hex: e.hex,
+      nearExcl,
+      shoot,
+      melee,
+      bestShoot,
+      bestMelee,
+      afters,
+      aftersExcl,
+    });
   }
   return (hex) => {
     let enemyThreat = 0;
     for (const e of enemies) {
-      const near = e.nearExcl || isAdjacent(hex, e.hex);
+      const adjacent = isAdjacent(hex, e.hex);
+      const near = e.nearExcl || adjacent;
       const best = near ? e.bestMelee : e.bestShoot;
       const v = strikeValue(ctx, state, near ? e.melee : e.shoot, m, hex, 0);
       enemyThreat += v > best ? v : best;
+      if (e.afters) {
+        const on = adjacent ? strikeOnly(ctx, state, e.melee, m, 1) : 0;
+        enemyThreat += on > e.aftersExcl ? on : e.aftersExcl;
+      }
     }
     let mine = ownFixed;
     if (moverActs) {
@@ -907,7 +1158,8 @@ function placedEstimator(
       }
       mine += best;
     }
-    return base - fear * enemyThreat + own * mine;
+    const pinned = pins.length === 0 ? 0 : pinDelta(hex);
+    return base + pinned - fear * enemyThreat + own * mine;
   };
 }
 
@@ -992,6 +1244,44 @@ function castTargets(
   return all.filter((targets, i) => keep.has(i) || worth(targets) < 0);
 }
 
+/**
+ * Walk-first hexes for a pull (Reel In) at a target out of range from where
+ * the stack stands: the reachable hex in range (not next to the target)
+ * with the shortest walk, and the one farthest from the target (the
+ * longest pull, toward the stack's own lines). Empty when the target is in
+ * range already or out of the pull's HP limit.
+ */
+function pullHexes(
+  self: BattleStack,
+  target: BattleStack,
+  pull: NonNullable<AbilityDef["aiPull"]>,
+  reach: ReadonlyMap<number, number>,
+): Hex[] {
+  const lim = pull(self, target);
+  const hp = totalHp({
+    count: target.count,
+    hp: target.creature.hp,
+    topHp: target.topHp,
+  });
+  if (hp > lim.hp || hexDistance(self.hex, target.hex) <= lim.range) return [];
+  let near: { h: Hex; walk: number } | null = null;
+  let long: { h: Hex; walk: number; d: number } | null = null;
+  for (const [i, walk] of reach) {
+    if (walk === 0) continue;
+    const h = hexFromIndex(i);
+    const d = hexDistance(h, target.hex);
+    if (d <= 1 || d > lim.range) continue;
+    if (near === null || walk < near.walk) near = { h, walk };
+    if (long === null || d > long.d || (d === long.d && walk < long.walk))
+      long = { h, walk, d };
+  }
+  const out: Hex[] = [];
+  if (near !== null) out.push(near.h);
+  if (long !== null && (near === null || !sameAt({ hex: near.h }, long.h)))
+    out.push(long.h);
+  return out;
+}
+
 /** Activated abilities, creature casts and area shots of the active stack. */
 function extraActions(state: BattleState, self: BattleStack): BattleAction[] {
   const out: BattleAction[] = [];
@@ -1016,6 +1306,14 @@ function extraActions(state: BattleState, self: BattleStack): BattleAction[] {
       const target = state.stacks.find((x) => x.id === t.stack);
       if (!target) continue;
       reach ??= reachableHexes(state, self.id);
+      if (ab.aiPull) {
+        // A pull walks into range, not next to the target.
+        for (const n of pullHexes(self, target, ab.aiPull, reach)) {
+          const a: BattleAction = { ...base, from: n };
+          if (actionError(state, a) === null) out.push(a);
+        }
+        continue;
+      }
       for (const n of neighbors(target.hex)) {
         const d = reach.get(hexIndex(n));
         if (d === undefined || d === 0) continue;
@@ -1176,8 +1474,26 @@ function scoreStackOptions(ctx: Context, state: BattleState): Scored[] {
     v: m.type === "move" && est !== null ? est(m.to) : 0,
   }));
   estimates.sort((a, b) => b.v - a.v || a.i - b.i);
-  for (const e of estimates.slice(0, lim.movesRehearsed))
+  const tried = new Set<number>();
+  for (const e of estimates.slice(0, lim.movesRehearsed)) {
+    tried.add(e.i);
     out.push(rehearsed(ctx, state, moves[e.i] as BattleAction));
+  }
+  // Walks onto remains the stack feeds on (the Larder's sweets): the
+  // placed estimate cannot see the meal, so they are always rehearsed.
+  const feeds = self.creature.abilities.flatMap(
+    (x) => ability(x).aiWalkOnto ?? [],
+  );
+  if (feeds.length > 0) {
+    moves.forEach((m, i) => {
+      if (tried.has(i) || m.type !== "move") return;
+      const meal = state.ground.some(
+        (g) =>
+          g.class === "remains" && feeds.includes(g.kind) && sameAt(g, m.to),
+      );
+      if (meal) out.push(rehearsed(ctx, state, m));
+    });
+  }
   const areaShots: { a: BattleAction; i: number; v: number }[] = [];
   for (const action of extraActions(state, self)) {
     if (lim.areaShots !== Infinity && action.type === "shootHex") {
@@ -1238,7 +1554,7 @@ function around(state: BattleState, side: BattleSide, h: Hex): number {
   return v;
 }
 
-function sameAt(s: BattleStack, h: Hex): boolean {
+function sameAt(s: { readonly hex: Hex }, h: Hex): boolean {
   return s.hex.col === h.col && s.hex.row === h.row;
 }
 

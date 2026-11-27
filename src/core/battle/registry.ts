@@ -450,6 +450,30 @@ export interface AbilityDef {
   onWalkEnd?(fx: Effects, ownerId: StackId, hex: Hex): void;
   /** A reaction after the owner was pushed or pulled (Cannonball). */
   onMoved?(info: MovedInfo, owner: BattleStack): Reaction | null;
+
+  // Battle AI hints (core/battle/ai.ts; read only by the AI's evaluation
+  // and candidate lists, never by the rules)
+  /**
+   * The owner pulls a stack next to it in place of an attack (Reel In):
+   * its reach in hexes and HP limit against `target`. The AI counts an
+   * enemy shooter within the owner's walk plus this range as one it could
+   * pull out of shooting, and walks the owner into range before pulling.
+   */
+  aiPull?(
+    owner: BattleStack,
+    target: BattleStack,
+  ): { readonly range: number; readonly hp: number };
+  /**
+   * The condition kind the owner's melee Strikes leave on what they strike
+   * (Sticky: "stuck"). A shooter such a stack reaches cannot walk clear of
+   * it, so the AI counts the shooter's exposure twice.
+   */
+  readonly aiMeleeMakes?: string;
+  /**
+   * Remains kinds the owner's `onWalkEnd` feeds on (the Larder: sweets):
+   * the AI always tries the owner's walks onto them.
+   */
+  readonly aiWalkOnto?: readonly string[];
   /**
    * The owner is caught in an area effect: return true to take nothing
    * from it (the hook does what happens instead: Launched).
