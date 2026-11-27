@@ -1374,5 +1374,85 @@
     "file": "site.shrine-1.mp3",
     "sha256": "69064e7f9d53bf66b50a6704e679bfd5553640da5b5805a3303a9b6a2c2b69f6",
     "bytes": 20105
+  },
+  "recruit.candy#0": {
+    "id": "recruit.candy",
+    "n": 0,
+    "at": "2026-11-27T00:42:51.718Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "sweets enlisting, a bright candy wrapper crinkle, a sugary glockenspiel twinkle and a soft squeaky pop, short, cute, cartoon fantasy, no voice",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "recruit.candy-0.mp3",
+    "sha256": "a0b90f7e0bb0405c23a0ea20c9084dcd8b496f3187a58a7aeea3c8d247f6811f",
+    "bytes": 13835
+  },
+  "victory.candy#0": {
+    "id": "victory.candy",
+    "n": 0,
+    "at": "2026-11-27T00:42:53.608Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a short sweet cheerful victory sting, music box and celesta melody with sleigh bells, ends on a bright major chord, cute candy fairy tale fantasy game",
+      "duration_seconds": 2.5,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "victory.candy-0.mp3",
+    "sha256": "24748b5145efc13f5dde88047cc7a6f5ae0170b2b19016c1160996597e92833f",
+    "bytes": 40585
+  },
+  "town.candy#0": {
+    "id": "town.candy",
+    "n": 0,
+    "at": "2026-11-27T00:42:55.888Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a cosy candy kingdom bakery town, a cuckoo clock chiming four in the distance, a softly whistling kettle and gentle music box tinkles, short ambience",
+      "duration_seconds": 2.5,
+      "prompt_influence": 0.5,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "town.candy-0.mp3",
+    "sha256": "9c59ce013c9cfe25e12b9c73c93e68e2090af66c0bbf1317a161ada3da55bb2a",
+    "bytes": 40585
+  },
+  "recruit.candy#1": {
+    "id": "recruit.candy",
+    "n": 1,
+    "at": "2026-11-27T00:58:44.722Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "candy soldiers enlisting, a full warm rising sugary glockenspiel chime with a soft rubbery gummy bounce, steady and bright, short, cute, cartoon fantasy, no voice, no reverb",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "recruit.candy-1.mp3",
+    "sha256": "0fc48f99c42c9e36aa3b640a91e86a548f5cc1701648e202fb5b198d4344bd4c",
+    "bytes": 13835
+  },
+  "recruit.candy#2": {
+    "id": "recruit.candy",
+    "n": 2,
+    "at": "2026-11-27T00:58:45.730Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "candy soldiers enlisting, a full warm rising sugary glockenspiel chime with a soft rubbery gummy bounce, steady and bright, short, cute, cartoon fantasy, no voice, no reverb",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "recruit.candy-2.mp3",
+    "sha256": "76e168d05b442cd8b03b99ea42e98ace93c0d61b1f5f1bb3f36c205dbb0aa801",
+    "bytes": 13835
   }
 }

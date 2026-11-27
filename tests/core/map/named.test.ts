@@ -145,9 +145,15 @@ const SNAPSHOT: Record<
     towns: Array<[string, number, number, string | null]>;
   }
 > = {
+  // Bead bzc.117: the Candy Kingdom joined the outpost pool, the neutral
+  // town factions and the artifact pool (the Flypaper Ribbon), so every
+  // base moved: outposts' creatures, neutral town factions and loose
+  // artifacts re-rolled; no object moved and the counts held. The
+  // Hourglass Marches pins Bangwhistle (goblins) and Sexton's Rest
+  // (undead) in its edits to keep one neutral town per faction.
   "keepers-toll": {
-    base: "6c151624",
-    built: "005da416",
+    base: "aab2b4a1",
+    built: "a678e407",
     objects: 354,
     towns: [
       ["town-1", 7, 7, null],
@@ -158,8 +164,8 @@ const SNAPSHOT: Record<
     ],
   },
   "hourglass-marches": {
-    base: "96e6c49b",
-    built: "93f19ff8",
+    base: "58b2a7db",
+    built: "b5a7db71",
     objects: 719,
     towns: [
       ["town-1", 30, 60, null],
@@ -174,8 +180,8 @@ const SNAPSHOT: Record<
   // Bead bzc.102: the Ninefold Landfall is generated with the map
   // composition (treasure clusters, clearings, ponds) and re-authored.
   "ninefold-landfall": {
-    base: "34f01d77",
-    built: "2a026665",
+    base: "be968b02",
+    built: "80e35d68",
     objects: 846,
     towns: [
       ["town-1", 62, 59, null],

@@ -1,8 +1,11 @@
 # Faction: The Candy Kingdom
 
-Status: design for review (bead `border_marches-bzc.109`, 2026-11-26). Not
-yet in the game: the beads of [section 14](#14-implementation-beads) build
-it, and the balance bead may move any number here. Written in the terms of
+Status: in the game and playable since the integration bead
+(`border_marches-bzc.117`, 2026-11-27), from the design of bead
+`border_marches-bzc.109`; the beads of
+[section 14](#14-implementation-beads) built it. Not yet balanced: the
+balance bead (8, bzc.118, simulations on the user's go-ahead) may move any
+number here. Written in the terms of
 [RULES_V2.md](RULES_V2.md), which governs. Damage and kills follow
 [GAME_DESIGN.md section 9](GAME_DESIGN.md#9-battle-rules-deterministic).
 Prices shared by every faction are in
@@ -672,6 +675,11 @@ and "cannot walk", round-end extra turns, the per-round melee flag) and 1b
 | The AI reads three ability hints: `aiPull`, `aiMeleeMakes`, `aiWalkOnto` (bead 6) | Reel In, Sticky and the Larder tell the battle AI what they do without the AI naming Candy content; other factions' choices change only against Candy or Stuck                                          |
 | Bakery rank 22, Larder rank 45 in the build order (bead 6)                        | After the Town Hall and the Mint Range, before the fence; the Larder right after the Sugarplum Bower, before the Gummy Den. The balance bead may move both                                              |
 | Keystone halls are built for every faction, and the Keystone goes home (bead 6)   | The AI dug Keystones and never built a hall; The Four O'Clock needed it, and fixing it only for Candy would be a special case                                                                           |
+| Afters is drawn as a second tile at the end of the round's turns (bead 7)         | A dashed gold frame with a "+" in the turn queue, before the next round's divider; the Dragons' own tile carries it too while they take the Afters turn, and the status line says "Afters, no walking"  |
+| No outpost terrain fallback is needed (bead 7)                                    | The generator places Faction Outposts on any terrain (their catalogue row has no preferred terrain), so Candy outposts need no snow                                                                     |
+| The Hourglass Marches pins its two unpinned neutral towns' factions (bead 7)      | Adding Candy to the neutral towns moved Bangwhistle to Candy and Sexton's Rest to the Horde; the map's design is one neutral town per original faction, so their edits now name goblins and undead      |
+| The wheel wraps a long faction name and lowers the Lost World's box (bead 7)      | At 126 degrees the Kingdom's card meets the stage's right edge and the "Without magic" box; "The Candy Kingdom" takes two lines and the box moved 16 px down                                            |
+| The recruit sound is one glockenspiel strike (bead 7)                             | The first take (wrapper crinkles) was too peaky to play as loud as the other recruit sounds; victory is a music-box chord with bells, the town a cuckoo clock's ticking and chime                       |
 
 **Engine asks** (no new noun or verb; the first two are the only new
 mechanics): a "cannot walk" modifier for the condition hook list (RULES_V2

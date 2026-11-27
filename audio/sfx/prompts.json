@@ -77,6 +77,9 @@
     {"id": "victory.goblins", "prompt": "a short silly victory sting, goofy tuba and kazoo with a cymbal crash, cartoon goblin celebration", "duration": 2.5, "influence": 0.6, "takes": 1, "output": "public/sfx/victory-goblins.mp3"},
     {"id": "town.humans", "prompt": "a medieval town square, a distant church bell, a blacksmith hammer ringing and a soft crowd murmur, short ambience", "duration": 2.5, "influence": 0.5, "takes": 1, "output": "public/sfx/town-humans.mp3"},
     {"id": "town.undead", "prompt": "a haunted necropolis, a low eerie wind, a distant crow caw and a creaking iron gate, short ambience", "duration": 2.5, "influence": 0.5, "takes": 1, "output": "public/sfx/town-undead.mp3"},
-    {"id": "town.goblins", "prompt": "a goblin camp, a bubbling cauldron, clanging scrap metal and distant goblin cackles, short ambience", "duration": 2.5, "influence": 0.5, "takes": 1, "output": "public/sfx/town-goblins.mp3"}
+    {"id": "town.goblins", "prompt": "a goblin camp, a bubbling cauldron, clanging scrap metal and distant goblin cackles, short ambience", "duration": 2.5, "influence": 0.5, "takes": 1, "output": "public/sfx/town-goblins.mp3"},
+    {"id": "recruit.candy", "prompt": "candy soldiers enlisting, a full warm rising sugary glockenspiel chime with a soft rubbery gummy bounce, steady and bright, short, cute, cartoon fantasy, no voice, no reverb", "duration": 0.8, "influence": 0.7, "takes": 3, "output": "public/sfx/recruit-candy.mp3"},
+    {"id": "victory.candy", "prompt": "a short sweet cheerful victory sting, music box and celesta melody with sleigh bells, ends on a bright major chord, cute candy fairy tale fantasy game", "duration": 2.5, "influence": 0.6, "takes": 1, "output": "public/sfx/victory-candy.mp3"},
+    {"id": "town.candy", "prompt": "a cosy candy kingdom bakery town, a cuckoo clock chiming four in the distance, a softly whistling kettle and gentle music box tinkles, short ambience", "duration": 2.5, "influence": 0.5, "takes": 1, "output": "public/sfx/town-candy.mp3"}
   ]
 }

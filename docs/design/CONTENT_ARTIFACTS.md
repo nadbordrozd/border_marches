@@ -2,8 +2,9 @@
 
 Status: content for v0.2 (bead `border_marches-bzc.6`, 2026-11-24).
 
-80 artifact kinds for v0.2: 30 Trinkets, 20 Wonders, 6 cursed Wonders, 12
-Marvel pieces that assemble into 4 Marvels, and 12 consumables.
+81 artifact kinds for v0.2: 30 Trinkets, 21 Wonders (the Candy Kingdom's
+Flypaper Ribbon the last), 6 cursed Wonders, 12 Marvel pieces that
+assemble into 4 Marvels, and 12 consumables.
 [RULES_V2.md](RULES_V2.md) section 4 governs. Condition kinds are defined
 in [CONTENT_SPELLS.md](CONTENT_SPELLS.md).
 
@@ -60,7 +61,11 @@ Stat modifiers only.
 | **Thermos of Strong Tea**      | Pocket | 1500  | +2 daily mana return.                            |
 | **Scholar's Bookmark**         | Pocket | 1500  | +10% to every XP gain.                           |
 
-## 3. Wonders (20)
+## 3. Wonders (21)
+
+The twenty-first, the Flypaper Ribbon, came with the Candy Kingdom
+([FACTION_CANDY.md](FACTION_CANDY.md#52-new-content-outside-the-faction))
+and is found on maps like any other Wonder since bead bzc.117.
 
 | Wonder                               | Slot   | Value | Form         | Rule                                                                                                                             | Kinds                          |
 | ------------------------------------ | ------ | ----- | ------------ | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
@@ -84,6 +89,7 @@ Stat modifiers only.
 | **Bloodstone Ring**                  | Ring   | 5000  | Battle start | The strongest enemy stack starts with a Leeched link to your weakest stack, size 10, clock 3.                                    | makes Leeched                  |
 | **Leaky Bucket**                     | Head   | 4000  | Battle start | The strongest enemy stack starts Drenched 50, clock 3.                                                                           | makes Drenched                 |
 | **Whetstone Pendant**                | Neck   | 6000  | Reaction     | When a Fired Up stack of yours kills a stack, it gains Heartened, clock 1.                                                       | makes Heartened; uses Fired Up |
+| **Flypaper Ribbon**                  | Pocket | 4000  | Reaction     | The first time each of your stacks retaliates in a battle, the stack it strikes gains Stuck, clock 2.                            | makes Stuck                    |
 
 ## 4. Cursed Wonders (6)
 

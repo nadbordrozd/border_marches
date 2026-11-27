@@ -70,8 +70,13 @@ export function polar(deg: number, r: number): { x: number; y: number } {
 
 /** Where the Lost World and other factions without magic stand. */
 function apartPoint(i: number): { x: number; y: number } {
-  return { x: 600 - i * 70, y: 548 };
+  // Low in the bottom-right corner, clear of the Candy Kingdom's card at
+  // 126 degrees (bead bzc.117).
+  return { x: 600 - i * 70, y: 558 };
 }
+
+/** Faction names longer than this wrap onto two lines in their card. */
+const FNAME_ONE_LINE = 16;
 
 // ------------------------------------------------------------ svg
 
@@ -684,7 +689,12 @@ export function magicWheelView(
     if (ctx.faction === f.id) b.classList.add("mw-chosen");
     const left = x < CX && f.magical;
     const card = el(`span.mw-fcard${left ? ".mw-fcard-left" : ""}`);
-    card.append(el("span.mw-fname", f.name));
+    card.append(
+      el(
+        `span.mw-fname${f.name.length > FNAME_ONE_LINE ? ".mw-fname-wrap" : ""}`,
+        f.name,
+      ),
+    );
     if (f.magical) {
       const grid = el("span.mw-pips");
       for (const sid of f.schools) {

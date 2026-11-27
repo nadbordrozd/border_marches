@@ -164,6 +164,16 @@ describe("statusLine", () => {
       statusLine(s, { ...turn({ kind: "none" }), swaps: true } as StatusMode)
         .text,
     ).toMatch(/, or a ⇄ partner to swap$/);
+    // A stack that cannot walk (its Afters turn, bzc.117) is told so.
+    const afters: BattleState = {
+      ...s,
+      stacks: s.stacks.map((x) =>
+        x.id === s.activeStackId ? { ...x, aftersRound: s.round } : x,
+      ),
+    };
+    expect(statusLine(afters, turn({ kind: "none" })).text).toBe(
+      "Raptors ×7: Afters, no walking; click an enemy to attack",
+    );
     expect(
       statusLine(s, turn({ kind: "out-of-reach", stack: getStack(s, "d0") })),
     ).toEqual({ text: "Orc Brutes ×19: out of reach this turn", tone: "warn" });

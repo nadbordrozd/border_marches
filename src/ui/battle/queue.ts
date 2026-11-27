@@ -39,6 +39,8 @@ export type QueueEntry =
       readonly round: number;
       /** "waiting", conditions that move it in the order; "" when none. */
       readonly note: string;
+      /** Its round-end turn (Afters): a second slot after the round's turns. */
+      readonly afters: boolean;
     }
   | {
       readonly kind: "event";
@@ -104,17 +106,21 @@ export function turnQueue(
       return;
     }
     const s = getStack(state, t.id);
+    const now =
+      i === 0 && !over && t.afters !== true && state.activeStackId === t.id;
     out.push({
       kind: "stack",
-      key: t.id,
+      key: t.afters === true ? `${t.id}:afters` : t.id,
       id: t.id,
       side: s.side,
       creatureId: s.creature.id,
       count: s.count,
       name: creatureName(s.creature, s.count),
-      now: i === 0 && !over && state.activeStackId === t.id,
+      now,
       round,
       note: t.note,
+      // Its second slot, or the Afters turn it is taking now.
+      afters: t.afters === true || (now && s.aftersRound === round),
     });
     tiles++;
   });
@@ -137,6 +143,7 @@ export function turnQueue(
       now: false,
       round: round + 1,
       note: "",
+      afters: false,
     });
   }
   return out;

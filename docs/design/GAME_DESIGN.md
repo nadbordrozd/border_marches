@@ -15,6 +15,10 @@ Related documents:
 | Topic                                                   | Document                                           |
 | ------------------------------------------------------- | -------------------------------------------------- |
 | The Lost World faction: roster, abilities, combos, town | [FACTION_LOST_WORLD.md](FACTION_LOST_WORLD.md)     |
+| v0.2 faction: the Realm (humans)                        | [FACTION_HUMANS.md](FACTION_HUMANS.md)             |
+| v0.2 faction: the Restless (undead)                     | [FACTION_UNDEAD.md](FACTION_UNDEAD.md)             |
+| v0.2 faction: the Goblin Horde (goblins)                | [FACTION_GOBLINS.md](FACTION_GOBLINS.md)           |
+| v0.2 faction: the Candy Kingdom (candy)                 | [FACTION_CANDY.md](FACTION_CANDY.md)               |
 | Resources, income, costs, pickups, economy sanity pass  | [ECONOMY.md](ECONOMY.md)                           |
 | Visual direction, adventure-map look, terrain mapping   | [../art/ART_DIRECTION.md](../art/ART_DIRECTION.md) |
 | How art is made                                         | [../art/PIPELINE.md](../art/PIPELINE.md)           |

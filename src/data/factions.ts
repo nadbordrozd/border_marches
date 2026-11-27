@@ -6,9 +6,8 @@
  * order, start buildings, dwellings, halls and fort levels), its hero
  * classes, town names, birthright and magic leanings. The v0.2 factions
  * are the Realm (humans), the Restless (undead) and the Goblin Horde
- * (goblins). The Candy Kingdom (candy, FACTION_CANDY.md) has its data and
- * rules here but is not playable until its integration bead (bzc.117);
- * the Lost World stays in the code and is not playable.
+ * (goblins), joined by the Candy Kingdom (candy, FACTION_CANDY.md); the
+ * Lost World stays in the code and is not playable.
  */
 import { BUILDING_IDS, BUILDINGS } from "./buildings.ts";
 import {
@@ -130,7 +129,7 @@ export const CONFECTIONERY_TOWN: TownTreeDef = {
     "Fudgecombe",
     "Gumdrop Green",
   ],
-  // The MVP camp family, a fallback only until the Candy town art (bzc.114).
+  // The MVP camp family, a fallback only: Candy towns draw townArt (bzc.114).
   art: "dinosaur",
 };
 
@@ -191,8 +190,7 @@ export const FACTIONS: readonly FactionDef[] = [
     name: "The Candy Kingdom",
     blurb:
       "Come in and stay: every native touch leaves the enemy Stuck, taffy reels it in, and the dragons have afters.",
-    // Playable with the integration bead (bzc.117).
-    available: false,
+    available: true,
     heroClasses: ["nutcracker", "confectioner"],
     town: CONFECTIONERY_TOWN,
     colour: "#e2589b",

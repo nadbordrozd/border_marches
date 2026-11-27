@@ -13,6 +13,10 @@ import { dailyIncome } from "../../../src/core/game/turn.ts";
 import { newGame, startingMilitia } from "../../../src/core/game/newGame.ts";
 import { engineSetupFromGame } from "../../../src/core/battle/index.ts";
 import { generateMap } from "../../../src/core/map/generate.ts";
+import { rollContents } from "../../../src/core/map/gen/contents.ts";
+import { neutralTownFaction } from "../../../src/core/map/gen/objects.ts";
+import { createRng } from "../../../src/core/rng.ts";
+import { getCreature } from "../../../src/data/creatures.ts";
 import { townTree } from "../../../src/data/factions.ts";
 import { getHeroClass } from "../../../src/data/hero.ts";
 import { rosterFor } from "../../../src/data/players.ts";
@@ -254,7 +258,9 @@ describe("Setup and the map", () => {
     );
     expect(neutral.length).toBeGreaterThan(0);
     for (const t of neutral)
-      expect(["humans", "undead", "goblins"]).toContain(t.data["faction"]);
+      expect(["humans", "undead", "goblins", "candy"]).toContain(
+        t.data["faction"],
+      );
     const again = generateMap(11, { size: "M", players: 2 });
     expect(
       again.objects
@@ -267,6 +273,30 @@ describe("Setup and the map", () => {
     );
   });
 
+  it("the Candy Kingdom joins the outposts, neutral towns and wonders (bzc.117)", () => {
+    const outposts = new Set<string>();
+    const wonders = new Set<string>();
+    const towns = new Set<string>();
+    for (let seed = 1; seed <= 400; seed++) {
+      const o = rollContents("faction-outpost", createRng(seed), 2);
+      outposts.add(String(o["creature"]));
+      const w = rollContents("fallen-adventurer", createRng(seed), 2);
+      wonders.add(String(w["artifact"]));
+      towns.add(neutralTownFaction(seed, 0));
+    }
+    const candy = [...outposts].filter(
+      (c) => getCreature(c as CreatureId).faction === "candy",
+    );
+    expect(candy.sort()).toEqual([
+      "gingerbread-man",
+      "peppermint-archer",
+      "sugarplum",
+      "taffy-wrangler",
+    ]);
+    expect(wonders).toContain("flypaper-ribbon");
+    expect([...towns].sort()).toEqual(["candy", "goblins", "humans", "undead"]);
+  });
+
   it("AI players take the other factions in turn", () => {
     expect(
       playerSetups({ seed: 1, size: "S", players: 3, faction: "undead" }).map(
@@ -275,13 +305,18 @@ describe("Setup and the map", () => {
     ).toEqual([
       ["human", "undead"],
       ["ai", "goblins"],
-      ["ai", "humans"],
+      ["ai", "candy"],
     ]);
+    expect(
+      playerSetups({ seed: 1, size: "M", players: 4, faction: "candy" }).map(
+        (p) => p.faction,
+      ),
+    ).toEqual(["candy", "humans", "undead", "goblins"]);
   });
 
-  it("the pool holds the 24 named heroes, and Chieftains only for the Lost World", () => {
-    expect(rosterFor(["humans", "goblins"])).toHaveLength(24);
-    expect(rosterFor(["lost-world"])).toHaveLength(40);
+  it("the pool holds the 32 named heroes, and Chieftains only for the Lost World", () => {
+    expect(rosterFor(["humans", "goblins"])).toHaveLength(32);
+    expect(rosterFor(["lost-world"])).toHaveLength(48);
   });
 
   it("building a guild level teaches the hero in town at once", () => {

@@ -380,6 +380,12 @@
   border-bottom: 2px solid var(--mw-faction);
 }
 
+/* A long name ("The Candy Kingdom") takes two lines inside the stage. */
+.mw-fname-wrap {
+  white-space: normal;
+  line-height: 15px;
+}
+
 .mw-pips {
   display: grid;
   grid-template-columns: repeat(2, auto);
@@ -414,10 +420,10 @@
 /* The Lost World: apart, greyed, a dashed ring. */
 .mw-apart {
   position: absolute;
-  top: 504px;
+  top: 520px;
   left: 548px;
   width: 244px;
-  height: 90px;
+  height: 78px;
   box-sizing: border-box;
   border: 1px dashed rgb(201 154 60 / 55%);
   border-radius: 12px;

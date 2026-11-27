@@ -428,5 +428,30 @@
     "verdict": "ACCEPTED",
     "notes": "bubbling bursts and clangs in three phrases, 2.2 s",
     "at": "2026-11-25T01:51:10.123Z"
+  },
+  "recruit.candy#0": {
+    "verdict": "REJECTED",
+    "notes": "peaky crinkle transients: crest factor caps its gain at -2 dB, so it would play at about -30 dBFS, 10 dB under the other recruit sounds",
+    "at": "2026-11-27T00:58:42.466Z"
+  },
+  "victory.candy#0": {
+    "verdict": "ACCEPTED",
+    "notes": "sustained bright major chord with bell shimmer decaying over 1.5 s, clean tail; a sweet music-box sting distinct from the brass, organ and kazoo stings",
+    "at": "2026-11-27T00:43:33.412Z"
+  },
+  "town.candy#0": {
+    "verdict": "ACCEPTED",
+    "notes": "0.7 s of regular clockwork ticks then a ringing chime tail; a cuckoo clock at four, quiet one-shot, distinct from the other town ambiences",
+    "at": "2026-11-27T00:43:33.462Z"
+  },
+  "recruit.candy#1": {
+    "verdict": "REJECTED",
+    "notes": "a faint pure tone at -51.5 dBFS RMS: needs +37x gain, which lifts the noise floor; no character beyond a sine ding",
+    "at": "2026-11-27T00:59:06.446Z"
+  },
+  "recruit.candy#2": {
+    "verdict": "ACCEPTED",
+    "notes": "one bright glockenspiel strike with 2, 6, 8 and 10 kHz partials decaying over 0.75 s; clean, plays at -20 dBFS like the other recruit sounds (take 0 could not)",
+    "at": "2026-11-27T00:59:06.491Z"
   }
 }

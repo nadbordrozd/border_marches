@@ -12,6 +12,11 @@ Music is out of scope (the user adds it later).
 - Sound pass 2 (bead bzc.27): 57 effects for shots, spell deliveries and
   impacts, battle details, map objects and the three factions; the event
   table below; throttles, delays, pitch jitter and a lower voice cap.
+- The Candy Kingdom (bead bzc.117): its recruit, victory and town sounds,
+  five takes, three accepted (recruit.candy#0 was too peaky to reach the
+  level of the other recruit sounds; #1 too faint). The accepted #2 is a
+  quiet take: its mix trim is -5 dB so its gain stays under the cap of 8,
+  and it plays 3 dB under the other recruit sounds.
 
 ## Where sounds come from
 
@@ -172,12 +177,12 @@ jitter 5%, gap 100 ms.
 | Moment | Sound | Where |
 | --- | --- | --- |
 | Melee and shot hits, deaths | `battle.hit`, `battle.heavy-hit`, `battle.death` | `battleCue`, with 6% pitch jitter |
-| A battle won | `victory.humans`, `victory.undead`, `victory.goblins` (generic `victory` for others) | battle result, by the player's army faction |
+| A battle won | `victory.humans`, `victory.undead`, `victory.goblins`, `victory.candy` (generic `victory` for others) | battle result, by the player's army faction |
 | A battle lost | `defeat` | battle result |
 | The game won or lost | `victory`, `defeat` | end screen |
-| Creatures recruited in a town | `recruit.humans`, `recruit.undead`, `recruit.goblins` | by the creature's faction |
+| Creatures recruited in a town | `recruit.humans`, `recruit.undead`, `recruit.goblins`, `recruit.candy` | by the creature's faction |
 | A hero hired, a map dwelling hire | `recruit` | tavern, `siteCue` |
-| A town screen opens | `town.humans`, `town.undead`, `town.goblins` | one-shot, never a loop |
+| A town screen opens | `town.humans`, `town.undead`, `town.goblins`, `town.candy` | one-shot, never a loop |
 | Shrines, stones, wells, schools, temples, the observatory and other blessings | `site.shrine` | `siteCue` |
 | A hero takes on a bank's guard | `site.bank` | before the battle opens |
 | A find: chest, loose artifact or scroll, campfire, fallen adventurer, sealed box, a plundered bank | `site.treasure` | `siteCue`; chests on the offer |
@@ -277,10 +282,15 @@ gain (RMS over the audible part).
 | `town.humans` | `sfx/town-humans.mp3` | 2.48 | -6.5 / -25.7 | 0.966 | -26.0 | town.humans#0 |
 | `town.undead` | `sfx/town-undead.mp3` | 2.48 | 3.1 / -13.9 | 0.247 | -26.0 | town.undead#0 |
 | `town.goblins` | `sfx/town-goblins.mp3` | 2.48 | 3.2 / -15.5 | 0.298 | -26.0 | town.goblins#0 |
+| `recruit.candy` | `sfx/recruit-candy.mp3` | 0.8 | -24.3 / -40.9 | 7.834 | -23.0 | recruit.candy#2 |
+| `victory.candy` | `sfx/victory-candy.mp3` | 2.48 | -2.5 / -20.5 | 1.188 | -19.0 | victory.candy#0 |
+| `town.candy` | `sfx/town-candy.mp3` | 2.48 | 3.4 / -18.7 | 0.429 | -26.0 | town.candy#0 |
 
 Rejected takes (each with its reason in `verdicts.json`):
 `spell.touch.bloom#0` (quiet rustle, no chime), `ground.brambles#0` (sparse
-late snaps), `site.shrine#0` (noisy wash, no bell partials).
+late snaps), `site.shrine#0` (noisy wash, no bell partials),
+`recruit.candy#0` (peaky crinkles: the peak ceiling holds it 10 dB under
+the other recruit sounds), `recruit.candy#1` (a faint pure tone).
 
 ## Adding a sound
 

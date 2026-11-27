@@ -8,6 +8,7 @@
 import {
   ability,
   act,
+  aftersDue,
   conditionKind,
   getStack,
   groundKind,
@@ -120,12 +121,18 @@ export interface TimelineEntry {
   readonly label: string;
   readonly side: BattleSide;
   readonly note: string;
+  /**
+   * A stack's round-end turn (Afters, FACTION_CANDY 5): its second slot at
+   * the end of the round's turns, after its ordinary one.
+   */
+  readonly afters?: boolean;
 }
 
 /**
  * The visible timeline of this round (1.6): stacks in the order they will
  * act (extra turns, then the queue and waiting stacks by timeline class),
- * then the scheduled events still due this round.
+ * then the round-end turns still due (Afters, `aftersDue`), then the
+ * scheduled events still due this round.
  */
 export function timelineEntries(state: BattleState): TimelineEntry[] {
   const out: TimelineEntry[] = [];
@@ -146,6 +153,19 @@ export function timelineEntries(state: BattleState): TimelineEntry[] {
       side: s.side,
       note: notes.join(", "),
     });
+  }
+  if (state.winner === null) {
+    for (const id of aftersDue(state)) {
+      const s = getStack(state, id);
+      out.push({
+        kind: "stack",
+        id,
+        label: `${creatureName(s.creature, s.count)} ${s.count}`,
+        side: s.side,
+        note: "Afters",
+        afters: true,
+      });
+    }
   }
   for (const e of state.scheduled) {
     out.push({

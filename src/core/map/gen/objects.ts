@@ -165,7 +165,12 @@ function siteFor(st: GenState, rng: Rng, zone: number): number {
 }
 
 /** The v0.2 factions a neutral town may belong to (seeded per town). */
-export const NEUTRAL_TOWN_FACTIONS = ["humans", "undead", "goblins"] as const;
+export const NEUTRAL_TOWN_FACTIONS = [
+  "humans",
+  "undead",
+  "goblins",
+  "candy",
+] as const;
 
 /** A neutral town's faction: seeded by the map seed and the town's index. */
 export function neutralTownFaction(seed: number, index: number): string {

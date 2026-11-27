@@ -95,6 +95,48 @@ describe("turnQueue", () => {
     expect(after.slice(0, 5)).not.toContain(before[0]?.replace("*", ""));
   });
 
+  it("draws Afters as the Dragons' second slot at the end of the round (bzc.117)", () => {
+    const s = battle(
+      [unit("rock-candy-dragon", 2, at(3, 5))],
+      [unit("orc-brute", 10, at(12, 5))],
+    );
+    // The Dragons act, the Brutes act, then the Dragons' Afters; round 2.
+    expect(short(turnQueue(s))).toEqual([
+      "a0*",
+      "d0",
+      "a0:afters",
+      "|2",
+      "a0:next",
+      "d0:next",
+    ]);
+    const afters = turnQueue(s)[2];
+    expect(afters).toMatchObject({
+      kind: "stack",
+      id: "a0",
+      afters: true,
+      now: false,
+      round: 1,
+      note: "Afters",
+    });
+    // Once the Dragons' own turn is done the slot stays at the end.
+    const defend = (x: typeof s): typeof s => {
+      const a = legalActions(x).find((y) => y.type === "defend");
+      if (!a) throw new Error("no defend");
+      return applyAction(x, a).state;
+    };
+    const t = defend(s);
+    expect(short(turnQueue(t)).slice(0, 3)).toEqual(["d0*", "a0:afters", "|2"]);
+    // During the Afters turn itself it is the active tile, with no second.
+    const u = defend(t);
+    expect(u.activeStackId).toBe("a0");
+    expect(short(turnQueue(u)).slice(0, 2)).toEqual(["a0*", "|2"]);
+    expect(turnQueue(u)[0]).toMatchObject({ now: true, afters: true });
+    expect(turnQueue(s)[0]).toMatchObject({ now: true, afters: false });
+    // A finished battle shows no Afters.
+    const over = turnQueue({ ...s, winner: "attacker" as const });
+    expect(over.some((e) => e.kind === "stack" && e.afters)).toBe(false);
+  });
+
   it("a finished battle has no active tile and no next round", () => {
     const s = { ...six(), winner: "attacker" as const };
     const q = turnQueue(s);

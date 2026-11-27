@@ -92,7 +92,7 @@ export function namedPlayerSetups(
 /**
  * The players of a new game: the human first with its faction, then AI
  * players, each on the next playable faction after the human's in turn
- * (so a three-player game has all three factions).
+ * (so a four-player game has all four factions).
  */
 export function playerSetups(setup: GameSetup): PlayerSetup[] {
   const named = setup.map === undefined ? undefined : findNamedMap(setup.map);
@@ -146,6 +146,7 @@ const PLAY_STYLE: Readonly<Partial<Record<FactionId, string>>> = {
   humans: "Steady: paired stacks share heals and swap places.",
   undead: "Attrition: the fallen rise once; outlast the enemy.",
   goblins: "Explosive: bomb freely; your own goblins fly off unhurt.",
+  candy: "Clinging: what you strike stays put; reel it in, shoot it.",
 };
 
 /**

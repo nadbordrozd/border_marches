@@ -151,6 +151,30 @@
   opacity: 1;
 }
 
+/* Afters, a round-end second turn (FACTION_CANDY 5): a dashed gold frame
+   and a small "+" so it reads as the same stack acting again. */
+.bm-q.bm-q-afters {
+  border-style: dashed;
+  border-color: #ffd65c;
+}
+
+.bm-q.bm-q-afters::before {
+  content: "+";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  z-index: 1;
+  padding: 0 2px;
+  border-radius: 0 0 2px;
+  background: #8a6c3a;
+  font:
+    bold 9px/10px Verdana,
+    Geneva,
+    sans-serif;
+  color: #fff;
+  text-shadow: 0 1px 0 #000;
+}
+
 /* The count in the side's colour, Heroes style. */
 .bm-q-count {
   position: absolute;

@@ -398,8 +398,8 @@ const HOURGLASS_MARCHES: NamedMapDef = {
       op: "set",
       id: "town-4",
       at: [61, 50],
-      data: { name: "Bangwhistle" },
-      note: "Name the south-eastern goblin town.",
+      data: { faction: "goblins", name: "Bangwhistle" },
+      note: "Name the south-eastern goblin town; its faction is pinned, as the generator's seeded pick moved when the Candy Kingdom joined the neutral towns (bzc.117).",
     },
     {
       op: "set",
@@ -412,8 +412,8 @@ const HOURGLASS_MARCHES: NamedMapDef = {
       op: "set",
       id: "town-6",
       at: [26, 21],
-      data: { name: "Sexton's Rest" },
-      note: "Name the northern Restless town.",
+      data: { faction: "undead", name: "Sexton's Rest" },
+      note: "Name the northern Restless town; its faction is pinned, as the generator's seeded pick moved when the Candy Kingdom joined the neutral towns (bzc.117).",
     },
     // The key-and-gate puzzle: the northern valley has one gate on each side.
     {

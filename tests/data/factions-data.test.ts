@@ -100,11 +100,12 @@ describe("v0.2 faction data", () => {
     }
   });
 
-  it("only the three v0.2 factions are playable", () => {
+  it("only the four v0.2 factions are playable", () => {
     expect(playableFactions().map((f) => f.id)).toEqual([
       "humans",
       "undead",
       "goblins",
+      "candy",
     ]);
     expect(FACTIONS.find((f) => f.id === "lost-world")?.available).toBe(false);
   });

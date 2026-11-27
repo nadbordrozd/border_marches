@@ -33,7 +33,8 @@ in the faction documents, not here.
 ### 2.1 Conditions
 
 Eleven kinds are engine-standard (RULES_V2 1.3, marked "std"); fourteen are
-new here. Clocks shown are typical; each maker states its own. "3 x" is
+new here, and the Candy Kingdom adds Stuck
+([FACTION_CANDY.md](FACTION_CANDY.md#3-birthright-sticky)). Clocks shown are typical; each maker states its own. "3 x" is
 the default maximum of RULES_V2 1.3. A condition does not record the tier
 of its maker (the "charge" it fed went with bzc.71's Set Off, and the field
 with bzc.40). Only Turned, Asleep and Frozen are Holds; Scapegoat and
@@ -56,6 +57,7 @@ Leeched are links.
 | **Hastened**  | Clock  | boon     | 2     | -                             | -                    | std       | Timeline class first.                                                                             |
 | **Quickened** | Clock  | boon     | 2-3   | Speed gained (max 3 x)        | -                    | -         | +size Speed.                                                                                      |
 | **Slowed**    | Clock  | bane     | 2-3   | Speed lost (max 3 x)          | -                    | -         | -size Speed, never below 1.                                                                       |
+| **Stuck**     | Clock  | bane     | 2     | -                             | -                    | Candy     | The bearer cannot walk, nor use a rule that replaces its walk; pushes and pulls still move it.    |
 | **Asleep**    | Hush   | bane     | 2     | -                             | HP, set by the maker | std; Hold | Cannot act or retaliate; any damage it takes ends Asleep.                                         |
 | **Shaken**    | Hush   | bane     | 2-3   | -                             | -                    | std       | Timeline class last; the bearer cannot Wait.                                                      |
 | **Jinxed**    | Hush   | bane     | 3     | percent (max 3 x)             | -                    | std       | The bearer cannot retaliate, and Strikes against it are x (100 + size)%.                          |
@@ -69,8 +71,9 @@ Leeched are links.
 
 ### 2.2 Ground
 
-Sweets and ice from the concept are not used in v0.2: no v0.2 creature
-leaves sweets, and ice needs the sliding law of a landfall.
+Ice from the concept is not used in v0.2: it needs the sliding law of a
+landfall. Sweets are the Candy Kingdom's remains: every Candy creature
+leaves them, and the Larder, a Ghoul's Feast and a Banshee's Keen use them.
 
 | Kind         | Class    | School | Size | Clock | Rule                                                                                                    |
 | ------------ | -------- | ------ | ---- | ----- | ------------------------------------------------------------------------------------------------------- |
@@ -110,6 +113,7 @@ among a kind's makers and users. Faction creatures will add to these lists.
 | **Hastened**  | std | 3: First Bell (spell), Forced March (spell), Ambush (skill)                                                                                                                                                       | 1: Late Bell (spell)                                                                                                                              | 2       |
 | **Quickened** | new | 3: Quick March (spell), Drum Major's Baton (Wonder), Newsie (creature)                                                                                                                                            | 3: Quickstep (feat), Metronome Spurs (Wonder), Winder (creature)                                                                                  | 4       |
 | **Slowed**    | new | 5: Bramble Row (spell), Treacle (spell), Whiteout (spell), Hedge-Clipper Shears (Wonder), Metronome Spurs (Wonder)                                                                                                | 3: Pile On (feat), Rigger (creature), Longbowman (drill)                                                                                          | 6       |
+| **Stuck**     | new | 3: Sticky (Candy birthright), Come In, Dear (Confectioner Command), Flypaper Ribbon (Wonder)                                                                                                                      | 3: Sitting Ducks (Peppermint Archer), Crack! (Nutcracker Command), Pile On (feat)                                                                 | 5       |
 | **Asleep**    | std | 2: Lullaby (spell), Sleeping Cap of the Night Watch (cursed Wonder)                                                                                                                                               | 0                                                                                                                                                 | 2       |
 | **Shaken**    | std | 1: The Thirteenth Chime (cursed Wonder)                                                                                                                                                                           | 2: Take Heart (spell), Pile On (feat)                                                                                                             | 3       |
 | **Jinxed**    | std | 3: Bad Omen (spell), Double or Nothing (feat), The Albatross (cursed Wonder)                                                                                                                                      | 0                                                                                                                                                 | 3       |

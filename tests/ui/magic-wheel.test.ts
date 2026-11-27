@@ -134,6 +134,14 @@ describe("magic wheel model: factions", () => {
     expect(
       leaningAngle({ bloom: 0, accord: 0, clock: 4, hush: 0, storm: 0 }),
     ).toBeCloseTo(144);
+    // The Candy Kingdom between Accord and Clock, halfway from the Realm to
+    // the Restless (FACTION_CANDY 2; playable since bzc.117).
+    const at = (id: string): number =>
+      model.factions.find((f) => f.id === id)?.angle ?? NaN;
+    expect(at("candy")).toBeCloseTo(126, 0);
+    expect(at("humans")).toBeCloseTo(54, 0);
+    expect(at("undead")).toBeCloseTo(198, 0);
+    expect(model.factions.find((f) => f.id === "candy")?.playable).toBe(true);
   });
 
   it("shows the Lost World apart, without magic", () => {

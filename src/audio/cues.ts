@@ -47,8 +47,8 @@ export function pickupCue(resource: ResourceId): SoundId {
   return resource === "gold" ? "gold" : "pickup";
 }
 
-/** The three factions with their own recruit, victory and town sounds. */
-const VOICED = ["humans", "undead", "goblins"] as const;
+/** The four factions with their own recruit, victory and town sounds. */
+const VOICED = ["humans", "undead", "goblins", "candy"] as const;
 type VoicedFaction = (typeof VOICED)[number];
 
 function voiced(faction: FactionId | null | undefined): VoicedFaction | null {

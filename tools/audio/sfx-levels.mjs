@@ -100,12 +100,15 @@ const TRIM_DB = {
   "recruit.humans": -2,
   "recruit.undead": -2,
   "recruit.goblins": -2,
+  "recruit.candy": -5,
   "victory.humans": 0,
   "victory.undead": 0,
   "victory.goblins": 0,
+  "victory.candy": 0,
   "town.humans": -8,
   "town.undead": -8,
   "town.goblins": -8,
+  "town.candy": -8,
 };
 
 const db = (x) => (x > 0 ? 20 * Math.log10(x) : -120);

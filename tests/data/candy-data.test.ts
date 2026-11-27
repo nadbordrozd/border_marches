@@ -89,10 +89,10 @@ describe("Candy Kingdom roster (section 4)", () => {
 });
 
 describe("The faction record (sections 1, 2, 3)", () => {
-  it("is in the data but not playable until its integration bead", () => {
+  it("is playable (integration bead bzc.117)", () => {
     expect(CANDY).toMatchObject({
       name: "The Candy Kingdom",
-      available: false,
+      available: true,
       heroClasses: ["nutcracker", "confectioner"],
       colour: "#e2589b",
       birthright: { name: "Sticky", ability: "sticky" },
@@ -298,7 +298,7 @@ describe("Classes, Commands and named heroes (sections 7, 8)", () => {
     }
   });
 
-  it("eight named heroes, four per class, and the pool waits for the faction", () => {
+  it("eight named heroes, four per class, in every game's pool", () => {
     const candy = NAMED_HEROES.filter((h) => h.faction === "candy");
     expect(candy.map((h) => [h.id, h.heroClass])).toEqual([
       ["kernel", "nutcracker"],
@@ -321,8 +321,9 @@ describe("Classes, Commands and named heroes (sections 7, 8)", () => {
       { kind: "creature", creature: "gingerbread-man" },
     ]);
     const ids = candy.map((h) => h.id);
-    for (const id of ids)
-      expect(rosterFor(["humans", "goblins"])).not.toContain(id);
+    expect(rosterFor(["humans", "goblins"])).toEqual(
+      expect.arrayContaining(ids),
+    );
     expect(rosterFor(["candy"])).toEqual(expect.arrayContaining(ids));
   });
 });

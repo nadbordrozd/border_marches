@@ -23,7 +23,7 @@ here.
 
 | MVP rule                                                                  | v0.2 rule                                                                                                           | Section |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------- |
-| GAME_DESIGN 3: one faction, one hero, no spells, artifacts, skills or AI  | Three factions, several heroes per player, two to four players                                                      | all     |
+| GAME_DESIGN 3: one faction, one hero, no spells, artifacts, skills or AI  | Four factions, several heroes per player, two to four players                                                       | all     |
 | GAME_DESIGN 4: win by capturing the Warlord's Hold; lose with the hero    | Last player standing; elimination rules                                                                             | 5.9     |
 | GAME_DESIGN 6: Attack and Defense only; offers of +1 Attack or +1 Defense | Four primary stats, a class stat pattern, skills, feats                                                             | 3       |
 | GAME_DESIGN 6: 1500 movement points; same-creature stacks merge           | Movement from the slowest creature plus modifiers; one creature may fill several slots                              | 3.9     |
@@ -168,15 +168,15 @@ re-tested (law 3).
 
 **Hooks.** A condition kind may use these and only these:
 
-| Hook                        | Use                                                                                                                                                    |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Modifier                    | Flat Attack, Defense or Speed; a percentage on Strikes dealt or taken, or on Harm taken; "cannot retaliate", "cannot shoot", "cannot act" (Holds only) |
-| On the bearer's turn start  | Once per round (extra turns do not repeat it): Harm, heal, growth of its own size                                                                      |
-| On strike / on being struck | A reaction (1.10)                                                                                                                                      |
-| On round end                | Before clocks tick                                                                                                                                     |
-| On expire                   | When the clock reaches 0                                                                                                                               |
-| Redirect                    | Links only (1.4)                                                                                                                                       |
-| Timeline class              | Delayed or Hastened (1.6)                                                                                                                              |
+| Hook                        | Use                                                                                                                                                                                                                    |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Modifier                    | Flat Attack, Defense or Speed; a percentage on Strikes dealt or taken, or on Harm taken; "cannot retaliate", "cannot shoot", "cannot act" (Holds only); "cannot walk" (Stuck: no walk, nor any rule that replaces one) |
+| On the bearer's turn start  | Once per round (extra turns do not repeat it): Harm, heal, growth of its own size                                                                                                                                      |
+| On strike / on being struck | A reaction (1.10)                                                                                                                                                                                                      |
+| On round end                | Before clocks tick                                                                                                                                                                                                     |
+| On expire                   | When the clock reaches 0                                                                                                                                                                                               |
+| Redirect                    | Links only (1.4)                                                                                                                                                                                                       |
+| Timeline class              | Delayed or Hastened (1.6)                                                                                                                                                                                              |
 
 **Engine-standard kinds.** Content defines most kinds. These are fixed
 here because other rules refer to them:
@@ -189,6 +189,7 @@ here because other rules refer to them:
 | Asleep    | Hush   | bane     | Hold. Cannot act or retaliate. Any damage it takes ends Asleep                       |
 | Turned    | Accord | bane     | Hold. The stack fights for the side opposite its owner                               |
 | Delayed   | Clock  | bane     | Timeline class "last"; cannot Wait                                                   |
+| Stuck     | Clock  | bane     | Cannot walk (nor Mist or a Sworn swap); not a Hold. FACTION_CANDY 3                  |
 | Hastened  | Clock  | boon     | Timeline class "first"                                                               |
 | Heartened | Accord | boon     | Section 6                                                                            |
 | Shaken    | Hush   | bane     | Section 6                                                                            |
@@ -960,14 +961,15 @@ these forms (numbers fixed here so heroes are comparable):
   the Harm rule, or the battle-end rules.
 
 The engine therefore offers birthrights these attachment points, which
-cover the three v0.2 factions' candidates in the concept:
+cover the v0.2 factions' birthrights (the Candy Kingdom's Sticky is the
+fourth):
 
 | Attachment                  | Example it must support                                                                                                                                                                                                                                                                                                        |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | At deployment               | Natives start linked in pairs, or start with a condition (the Vowed's sworn pairs; a human faction's formation)                                                                                                                                                                                                                |
 | On a native's death         | Schedule its return at the next round start (the Restless): the stack keeps its id, reappears on its remains with a count the rule gives, and is flagged to crumble (1.12). If its remains were used or replaced, it does not return. If a stack stands on them, it appears on the nearest free hex. Once per stack per battle |
 | On Harm from its own side   | A native caught in an area effect of the side it fights for takes 0 from it and is pushed 3 hexes away from the effect's centre (the Goblins' Launched)                                                                                                                                                                        |
-| On a native's Strike        | An added Strike or modifier that reads adjacency (the Lost World's Pack). An added Strike is kind `special`, is not retaliated and fires once per action                                                                                                                                                                       |
+| On a native's Strike        | An added Strike or modifier that reads adjacency (the Lost World's Pack), or a condition put on the stack struck (the Candy Kingdom's Sticky: Stuck, clock 2, after the Strike's own rules and before the retaliation). An added Strike is kind `special`, is not retaliated and fires once per action                         |
 | On a native's action choice | A replacement action available only to natives                                                                                                                                                                                                                                                                                 |
 
 ### 3.9 Movement, sight and the army

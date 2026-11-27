@@ -55,8 +55,9 @@ describe("gallery tabs match the registries", () => {
     expect(ids).toContain("bellhop");
     expect(ids).toContain("shade");
     expect(ids).not.toContain("caveman");
-    // Not playable yet: the Candy Kingdom (bead bzc.117 shows it).
-    expect(ids).not.toContain("gingerbread-man");
+    // The Candy Kingdom is playable since bead bzc.117.
+    expect(ids).toContain("gingerbread-man");
+    expect(ids).toContain("rock-candy-dragon");
   });
 
   it("summon cards name their abilities, registered by magic or not", () => {

@@ -261,8 +261,7 @@ function byTier(a: CreatureDef, b: CreatureDef): number {
 
 /**
  * Whether the gallery shows a faction's content: not the Lost World's, nor
- * a faction's that is not playable yet (the Candy Kingdom until its
- * integration bead, bzc.117). Neutrals and strays always.
+ * that of any faction marked not playable. Neutrals and strays always.
  */
 export function galleryShowsFaction(faction: string): boolean {
   return findFaction(faction)?.available !== false;

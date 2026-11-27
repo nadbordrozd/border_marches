@@ -8,7 +8,7 @@
  * The rules of the controls live in the battle's Keys help, not here.
  */
 
-import { activeStack, getStack } from "../../core/battle/index.ts";
+import { activeStack, cannotWalk, getStack } from "../../core/battle/index.ts";
 import type { BattleState } from "../../core/battle/index.ts";
 import type { HoverIntent } from "./intent.ts";
 import type { CastPreview } from "./magic.ts";
@@ -201,6 +201,12 @@ function turnLine(
         tone: "idle",
       };
     case "none":
+      // A Stuck stack, or the Dragons' Afters turn, cannot walk.
+      if (a !== null && cannotWalk(state, a))
+        return {
+          text: `${who}: ${a.aftersRound === state.round ? "Afters, no walking" : "cannot walk this turn"}; click an enemy to attack`,
+          tone: "idle",
+        };
       return {
         text: `${who}: click a shaded hex to move or an enemy to attack${mode.swaps ? ", or a ⇄ partner to swap" : ""}`,
         tone: "idle",

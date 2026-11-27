@@ -21,7 +21,7 @@ import { NAMED_HEROES, getHeroClass } from "../../data/classes.ts";
 import { rosterOf } from "../../data/factionCreatures.ts";
 import type { CreatureId } from "../../data/types.ts";
 
-const FACTIONS = ["humans", "undead", "goblins"] as const;
+const FACTIONS = ["humans", "undead", "goblins", "candy"] as const;
 type Faction = (typeof FACTIONS)[number];
 
 /** Counts per tier 1..6 for a mid-game army. */
@@ -32,6 +32,7 @@ const PAGES: Readonly<Record<Faction, readonly string[]>> = {
   humans: ["regrow", "close-ranks", "sanctuary-oath"],
   undead: ["lullaby", "bad-omen", "treacle"],
   goblins: ["jolt", "broadside", "hothead"],
+  candy: ["late-bell", "treacle", "sanctuary-oath"],
 };
 
 function side(
@@ -63,6 +64,9 @@ function side(
     hero: {
       id: hero.id,
       name: hero.name,
+      // Its own portrait at the ends of the action bar, as in a game.
+      defId: def.id,
+      heroClass: def.heroClass,
       attack: hero.attack,
       defense: hero.defense,
       profile: heroBattleProfile(hero),

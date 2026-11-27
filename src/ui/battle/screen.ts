@@ -1993,7 +1993,7 @@ class BattleScreen {
       "span",
       `bm-q bm-${e.side}${e.now ? " bm-q-now" : ""}${
         e.round > this.state.round ? " bm-q-next" : ""
-      }`,
+      }${e.afters ? " bm-q-afters" : ""}`,
     );
     t.dataset["flip"] = e.key;
     t.setAttribute("aria-label", `${e.name} ${e.count}`);
@@ -2031,7 +2031,9 @@ class BattleScreen {
       ? "acting now"
       : e.round > this.state.round
         ? `round ${e.round}`
-        : "later this round";
+        : e.afters
+          ? "Afters, at the end of this round"
+          : "later this round";
     const stats = el("div", "gm-tip-stats");
     for (const st of info.stats) {
       const cell = el("span", "", `${st.label} `);
@@ -2049,7 +2051,11 @@ class BattleScreen {
       `${info.title} \u00d7${info.count}`,
       [
         stats,
-        e.note ? `In the order: ${e.note}.` : null,
+        e.afters
+          ? "Afters: a second turn once every other turn is done, without walking."
+          : e.note
+            ? `In the order: ${e.note}.`
+            : null,
         el(
           "div",
           "gm-tip-line bm-dim",

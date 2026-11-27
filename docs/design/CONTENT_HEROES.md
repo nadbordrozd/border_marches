@@ -66,36 +66,36 @@ Drafted one of three at every level that is a multiple of 3 (RULES_V2
 skills. "Your" means the side the hero commands at the moment the rule
 acts.
 
-| Feat                   | Tags (offer weight)               | Rule                                                                                                                       | Kinds                          |
-| ---------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| **Spillover**          | Greencraft, Quietus, Stormcalling | The first bane you place each battle also lands on one stack of your choice adjacent to its target.                        | -                              |
-| **Bonfire**            | Stormcalling, Quietus             | Your Fuel triples the spell's size instead of doubling it.                                                                 | -                              |
-| **Long Echo**          | Covenant, Horology                | Your Echo adds 2 rounds instead of 1.                                                                                      | -                              |
-| **Gleaner**            | Quietus                           | Each time one of your rules uses remains, your hero regains 2 mana.                                                        | uses remains                   |
-| **Cold Hands**         | Stormcalling, Onslaught           | The Strike by one of your stacks that ends Frozen is x 300% instead of x 200%.                                             | uses Frozen                    |
-| **Mob Rule**           | Banner, Onslaught                 | When Heartened is ended on your stack for an extra turn, that stack gains Fired Up 3, clock 2.                             | makes Fired Up; uses Heartened |
-| **Double or Nothing**  | Lucky Streak                      | Lucky on your stacks is x 200% instead of x 150%, and when it ends its bearer gains Jinxed 25, clock 2.                    | makes Jinxed; uses Lucky       |
-| **Seed Bombs**         | Greencraft, Marksmanship          | The first shot each battle by each of your shooters leaves brambles of size 6, clock 3, on the target's hex.               | makes brambles                 |
-| **Field Surgeon**      | Bulwark, Greencraft               | After a battle you win, each of your stacks regains a tenth of the creatures it lost in it, rounded down.                  | -                              |
-| **Green Thumb**        | Greencraft                        | Mending on your stacks heals half again as much.                                                                           | uses Mending                   |
-| **Briar Patch**        | Greencraft, Bulwark               | When Thorned on your stack deals Harm, the striker also gains Venomed 2, clock 2.                                          | makes Venomed; uses Thorned    |
-| **Burr**               | Greencraft, Riposte               | Thorned on your stacks also answers shots.                                                                                 | uses Thorned                   |
-| **Harvest**            | Greencraft, Onslaught             | Ripening on your stacks grows by 20 a round instead of 10.                                                                 | uses Ripening                  |
-| **Windfall**           | Greencraft, Covenant              | When Ripening ends or expires on your stack, each friendly stack adjacent to it gains Ripening of half that size, clock 2. | makes Ripening; uses Ripening  |
-| **Shield Wall**        | Covenant, Bulwark, Riposte        | Your Shielded stacks may retaliate any number of times per round.                                                          | uses Shielded                  |
-| **Mirror Ward**        | Covenant, Bulwark                 | Your Warded stacks take no Harm from ground.                                                                               | uses Warded, fire, brambles    |
-| **Peace Dividend**     | Covenant                          | Strikes by your stacks against a Mollified stack are not retaliated.                                                       | uses Mollified                 |
-| **Quickstep**          | Horology, Onslaught               | Your Quickened stacks also gain Attack equal to twice Quickened's size.                                                    | uses Quickened                 |
-| **Pile On**            | Horology, Onslaught               | Strikes by your stacks against a Delayed, Slowed or Shaken stack are x 125%.                                               | uses Delayed, Slowed, Shaken   |
-| **Co-signer**          | Covenant, Quietus                 | When a Reckoning expires on your stack, half of it, rounded down, is taken by the nearest enemy stack instead.             | uses Reckoning                 |
-| **Compound Interest**  | Quietus                           | A Reckoning on an enemy stack grows by 10 at that stack's turn start, up to its maximum.                                   | uses Reckoning                 |
-| **Gag Rule**           | Quietus, Marksmanship             | Hushed enemy stacks also cannot retaliate.                                                                                 | uses Hushed                    |
-| **Bloodletting**       | Quietus, Greencraft               | A Leeched link whose far end is your stack heals it twice the Harm.                                                        | uses Leeched                   |
-| **Thicker than Water** | Quietus, Onslaught                | When Leeched heals your stack, that stack gains Fired Up 2, clock 2.                                                       | makes Fired Up; uses Leeched   |
-| **Soaked Powder**      | Stormcalling, Marksmanship        | Drenched enemy stacks cannot shoot.                                                                                        | uses Drenched                  |
-| **Chain Lightning**    | Stormcalling                      | When your page deals Harm to a Drenched stack, each other enemy stack adjacent to it takes Harm 15.                        | uses Drenched                  |
-| **Firewalkers**        | Stormcalling, Bulwark             | Your Fired Up stacks take no Harm from Burning or from fire.                                                               | uses Fired Up, Burning, fire   |
-| **Blaze of Glory**     | Stormcalling, Onslaught           | When Fired Up expires on your stack, each enemy stack adjacent to it gains Burning of twice that size, clock 2.            | makes Burning; uses Fired Up   |
+| Feat                   | Tags (offer weight)               | Rule                                                                                                                       | Kinds                               |
+| ---------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| **Spillover**          | Greencraft, Quietus, Stormcalling | The first bane you place each battle also lands on one stack of your choice adjacent to its target.                        | -                                   |
+| **Bonfire**            | Stormcalling, Quietus             | Your Fuel triples the spell's size instead of doubling it.                                                                 | -                                   |
+| **Long Echo**          | Covenant, Horology                | Your Echo adds 2 rounds instead of 1.                                                                                      | -                                   |
+| **Gleaner**            | Quietus                           | Each time one of your rules uses remains, your hero regains 2 mana.                                                        | uses remains                        |
+| **Cold Hands**         | Stormcalling, Onslaught           | The Strike by one of your stacks that ends Frozen is x 300% instead of x 200%.                                             | uses Frozen                         |
+| **Mob Rule**           | Banner, Onslaught                 | When Heartened is ended on your stack for an extra turn, that stack gains Fired Up 3, clock 2.                             | makes Fired Up; uses Heartened      |
+| **Double or Nothing**  | Lucky Streak                      | Lucky on your stacks is x 200% instead of x 150%, and when it ends its bearer gains Jinxed 25, clock 2.                    | makes Jinxed; uses Lucky            |
+| **Seed Bombs**         | Greencraft, Marksmanship          | The first shot each battle by each of your shooters leaves brambles of size 6, clock 3, on the target's hex.               | makes brambles                      |
+| **Field Surgeon**      | Bulwark, Greencraft               | After a battle you win, each of your stacks regains a tenth of the creatures it lost in it, rounded down.                  | -                                   |
+| **Green Thumb**        | Greencraft                        | Mending on your stacks heals half again as much.                                                                           | uses Mending                        |
+| **Briar Patch**        | Greencraft, Bulwark               | When Thorned on your stack deals Harm, the striker also gains Venomed 2, clock 2.                                          | makes Venomed; uses Thorned         |
+| **Burr**               | Greencraft, Riposte               | Thorned on your stacks also answers shots.                                                                                 | uses Thorned                        |
+| **Harvest**            | Greencraft, Onslaught             | Ripening on your stacks grows by 20 a round instead of 10.                                                                 | uses Ripening                       |
+| **Windfall**           | Greencraft, Covenant              | When Ripening ends or expires on your stack, each friendly stack adjacent to it gains Ripening of half that size, clock 2. | makes Ripening; uses Ripening       |
+| **Shield Wall**        | Covenant, Bulwark, Riposte        | Your Shielded stacks may retaliate any number of times per round.                                                          | uses Shielded                       |
+| **Mirror Ward**        | Covenant, Bulwark                 | Your Warded stacks take no Harm from ground.                                                                               | uses Warded, fire, brambles         |
+| **Peace Dividend**     | Covenant                          | Strikes by your stacks against a Mollified stack are not retaliated.                                                       | uses Mollified                      |
+| **Quickstep**          | Horology, Onslaught               | Your Quickened stacks also gain Attack equal to twice Quickened's size.                                                    | uses Quickened                      |
+| **Pile On**            | Horology, Onslaught               | Strikes by your stacks against a Delayed, Slowed, Shaken or Stuck stack are x 125%.                                        | uses Delayed, Slowed, Shaken, Stuck |
+| **Co-signer**          | Covenant, Quietus                 | When a Reckoning expires on your stack, half of it, rounded down, is taken by the nearest enemy stack instead.             | uses Reckoning                      |
+| **Compound Interest**  | Quietus                           | A Reckoning on an enemy stack grows by 10 at that stack's turn start, up to its maximum.                                   | uses Reckoning                      |
+| **Gag Rule**           | Quietus, Marksmanship             | Hushed enemy stacks also cannot retaliate.                                                                                 | uses Hushed                         |
+| **Bloodletting**       | Quietus, Greencraft               | A Leeched link whose far end is your stack heals it twice the Harm.                                                        | uses Leeched                        |
+| **Thicker than Water** | Quietus, Onslaught                | When Leeched heals your stack, that stack gains Fired Up 2, clock 2.                                                       | makes Fired Up; uses Leeched        |
+| **Soaked Powder**      | Stormcalling, Marksmanship        | Drenched enemy stacks cannot shoot.                                                                                        | uses Drenched                       |
+| **Chain Lightning**    | Stormcalling                      | When your page deals Harm to a Drenched stack, each other enemy stack adjacent to it takes Harm 15.                        | uses Drenched                       |
+| **Firewalkers**        | Stormcalling, Bulwark             | Your Fired Up stacks take no Harm from Burning or from fire.                                                               | uses Fired Up, Burning, fire        |
+| **Blaze of Glory**     | Stormcalling, Onslaught           | When Fired Up expires on your stack, each enemy stack adjacent to it gains Burning of twice that size, clock 2.            | makes Burning; uses Fired Up        |
 
 ## 3. Vows
 
@@ -166,7 +166,10 @@ its own creatures and, for a Spell specialty, any tier 1 or 2 page.
 | Creature | Any native creature of the hero's faction | Named by the faction documents |
 
 34 entries: 15 spells (three per school), 10 skills, 3 resources,
-1 Command and 5 creature entries.
+1 Command and 5 creature entries. The Candy Kingdom's named heroes
+([FACTION_CANDY.md](FACTION_CANDY.md#8-named-heroes)) add two faction
+pages, Late Bell (Clock tier 1) and Treacle (Clock tier 2), and a school
+skill at rank 2 in place of rank 1 (Auntie Fondant's Horology).
 
 ## 5. Decisions made here
 
