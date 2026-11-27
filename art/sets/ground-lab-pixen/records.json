@@ -1,0 +1,434 @@
+{
+  "grass-p": {
+    "id": "grass-p",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-917502ca-f8d7-481f-bb0f-4b9305d45438",
+    "submittedAt": "2026-11-27T09:18:49.702Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at a quiet green meadow: only short grass, nothing else, filling the whole picture edge to edge. Many small grass tufts and blades in mid green #6fa04a with darker #4f8034 shade between them and lighter #9cc865 tips, soft uneven patches of slightly yellower and slightly bluer green, a few tiny white and yellow flowers. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127121,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at a quiet green meadow: only short grass, nothing else, filling the whole picture edge to edge. Many small grass tufts and blades in mid green #6fa04a with darker #4f8034 shade between them and lighter #9cc865 tips, soft uneven patches of slightly yellower and slightly bluer green, a few tiny white and yellow flowers. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:18:49.705Z",
+    "usageUsd": 0.010539028803507489,
+    "candidates": [
+      {
+        "file": "grass-p-0.png",
+        "sha256": "b12d92449aad25e898d0ff30c5d472d4ec2aa575f9f9b521e52d5c505231b784",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "dirt-p": {
+    "id": "dirt-p",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-4b2b0b24-474d-4949-8939-d65b16fdacda",
+    "submittedAt": "2026-11-27T09:19:35.733Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at dry rust-brown earth: only bare ground, nothing else, filling the whole picture edge to edge. Packed soil #b06a46 with fine darker #8a4c31 grain, hairline cracks, small tan and grey pebbles, a few dry grass wisps, soft uneven patches of more orange and more brown soil. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127221,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at dry rust-brown earth: only bare ground, nothing else, filling the whole picture edge to edge. Packed soil #b06a46 with fine darker #8a4c31 grain, hairline cracks, small tan and grey pebbles, a few dry grass wisps, soft uneven patches of more orange and more brown soil. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:19:35.735Z",
+    "usageUsd": 0.009977537314097087,
+    "candidates": [
+      {
+        "file": "dirt-p-0.png",
+        "sha256": "ebee46393158c6f5fbad04eb905403606e171a0ac905c1be5603d7277c356f78",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "sand-p": {
+    "id": "sand-p",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-41b7a5d6-4480-49b1-ac15-6980eec52dc6",
+    "submittedAt": "2026-11-27T09:20:19.753Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: looking straight down at golden desert sand: only sand, nothing else, filling the whole picture edge to edge. Warm sand #dcb46c with short soft wind ripples in lighter #e9c886 and darker #c79f5c, tiny pebbles and a few dry twigs, soft uneven patches of paler and warmer sand. Lit from the bottom left. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127321,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: looking straight down at golden desert sand: only sand, nothing else, filling the whole picture edge to edge. Warm sand #dcb46c with short soft wind ripples in lighter #e9c886 and darker #c79f5c, tiny pebbles and a few dry twigs, soft uneven patches of paler and warmer sand. Lit from the bottom left. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:20:19.755Z",
+    "usageUsd": 0.009763702551523845,
+    "candidates": [
+      {
+        "file": "sand-p-0.png",
+        "sha256": "ced459977d8ac5df2767f3764274c65701571bf4c1de0b1977ca46d7a355de34",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "ink-p": {
+    "id": "ink-p",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-58db8328-cf7e-45bc-8b99-1cbdad3c03d6",
+    "submittedAt": "2026-11-27T09:20:44.347Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: black ink blots splattered on white paper: many irregular blots of every size from tiny drops to blots a fifth of the picture wide, ragged lobed edges with small separate droplets round them, pure black on pure white, spread evenly over the whole picture."
+        }
+      ],
+      "image_size": {
+        "width": 256,
+        "height": 256
+      },
+      "no_background": false,
+      "seed": 127421,
+      "outline": "lineless",
+      "detail": "medium detail",
+      "view": "high top-down",
+      "description": "Subject: black ink blots splattered on white paper: many irregular blots of every size from tiny drops to blots a fifth of the picture wide, ragged lobed edges with small separate droplets round them, pure black on pure white, spread evenly over the whole picture. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, colour, grid, gradient, shading."
+    },
+    "at": "2026-11-27T09:20:44.348Z",
+    "usageUsd": 0.00746926924917433,
+    "candidates": [
+      {
+        "file": "ink-p-0.png",
+        "sha256": "b9bac48984c4f754b420942c4ae9c28e77409f4089a9bde1ff85f9973a854703",
+        "width": 256,
+        "height": 256
+      }
+    ]
+  },
+  "grass-q": {
+    "id": "grass-q",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-76e4d0cd-7e9c-4b95-92b2-526ec5fab7d3",
+    "submittedAt": "2026-11-27T09:21:51.506Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a calm grass meadow seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short soft grass in light meadow green #8ab85c with many small tufts and blades in darker #6a9a44 and lighter #a8d070, soft uneven patches of slightly yellower and slightly bluer green, a very few tiny white flowers. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127122,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: a calm grass meadow seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short soft grass in light meadow green #8ab85c with many small tufts and blades in darker #6a9a44 and lighter #a8d070, soft uneven patches of slightly yellower and slightly bluer green, a very few tiny white flowers. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:21:51.510Z",
+    "usageUsd": 0.009508442613813613,
+    "candidates": [
+      {
+        "file": "grass-q-0.png",
+        "sha256": "823b91aad49498356ac22743088efc0e8bd82adc1c02ecc28f3c1a1cecc94b82",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "grass-r": {
+    "id": "grass-r",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-a9a7093b-86a7-423b-9f21-d3247c49ddd2",
+    "submittedAt": "2026-11-27T09:22:33.584Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a calm grass meadow seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short soft grass in light meadow green #8ab85c with many small tufts and blades in darker #6a9a44 and lighter #a8d070, soft uneven patches of slightly yellower and slightly bluer green, a very few tiny white flowers. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127123,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: a calm grass meadow seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short soft grass in light meadow green #8ab85c with many small tufts and blades in darker #6a9a44 and lighter #a8d070, soft uneven patches of slightly yellower and slightly bluer green, a very few tiny white flowers. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:22:33.586Z",
+    "usageUsd": 0.009446849902470907,
+    "candidates": [
+      {
+        "file": "grass-r-0.png",
+        "sha256": "64c4f5a03e445e8e0e82294da522f035d5d2f978bf7426c6c8aa571ca4469cbb",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "dirt-q": {
+    "id": "dirt-q",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-4ddb52f4-0d61-46f1-b651-4bcad7cd962a",
+    "submittedAt": "2026-11-27T09:23:18.420Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Packed soil #b56c46 with fine darker #94553a grain, a few faint short cracks, small tan pebbles, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127222,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Packed soil #b56c46 with fine darker #94553a grain, a few faint short cracks, small tan pebbles, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:23:18.422Z",
+    "usageUsd": 0.00985483980178833,
+    "candidates": [
+      {
+        "file": "dirt-q-0.png",
+        "sha256": "db1c566c4b7f125ac04117bf050cde6fcfdf933c035a196cf54e53392f83012e",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "sand-q": {
+    "id": "sand-q",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-083c4ad3-80b1-4603-b53c-f210a2881c52",
+    "submittedAt": "2026-11-27T09:24:11.709Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm golden desert sand seen from straight above, the sand running off every edge of the picture with no frame, no rim and no plate. Smooth sand #dcb46c with small soft wind ripples in lighter #e8c684 and slightly darker #cfa762, a few tiny pebbles, soft uneven patches of paler and warmer sand. Evenly lit, low contrast, calm, no rocks. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127322,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm golden desert sand seen from straight above, the sand running off every edge of the picture with no frame, no rim and no plate. Smooth sand #dcb46c with small soft wind ripples in lighter #e8c684 and slightly darker #cfa762, a few tiny pebbles, soft uneven patches of paler and warmer sand. Evenly lit, low contrast, calm, no rocks. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:24:11.713Z",
+    "usageUsd": 0.010632879124747384,
+    "candidates": [
+      {
+        "file": "sand-q-0.png",
+        "sha256": "e4f0c50878359d4e2809721f9e24d4b80915c9755ed77859318b47f286b6704f",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "ink-q": {
+    "id": "ink-q",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-78a82ebb-130b-4fbc-9e06-8d8b8ac9e679",
+    "submittedAt": "2026-11-27T09:24:33.871Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: black ink blots splattered on white paper: many irregular blots of every size from tiny drops to blots a fifth of the picture wide, ragged lobed edges with small separate droplets round them, pure black on pure white, spread evenly over the whole picture."
+        }
+      ],
+      "image_size": {
+        "width": 256,
+        "height": 256
+      },
+      "no_background": false,
+      "seed": 127422,
+      "outline": "lineless",
+      "detail": "medium detail",
+      "view": "high top-down",
+      "description": "Subject: black ink blots splattered on white paper: many irregular blots of every size from tiny drops to blots a fifth of the picture wide, ragged lobed edges with small separate droplets round them, pure black on pure white, spread evenly over the whole picture. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif, colour, grid, gradient, shading."
+    },
+    "at": "2026-11-27T09:24:33.873Z",
+    "usageUsd": 0.007269834332995944,
+    "candidates": [
+      {
+        "file": "ink-q-0.png",
+        "sha256": "7292e0bd6235461c1fff41ee405d62bc6a9ffd223943c0c9cfc2bc4ab9bc86fb",
+        "width": 256,
+        "height": 256
+      }
+    ]
+  },
+  "grass-s": {
+    "id": "grass-s",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-31426757-f7b6-44d4-87ac-334dd3e4d52d",
+    "submittedAt": "2026-11-27T09:25:51.368Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a calm grass meadow seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short soft grass in light meadow green #8ab85c with many small tufts and blades in darker #6a9a44 and lighter #a8d070, soft uneven patches of slightly yellower and slightly bluer green, a very few tiny white flowers. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127124,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: a calm grass meadow seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short soft grass in light meadow green #8ab85c with many small tufts and blades in darker #6a9a44 and lighter #a8d070, soft uneven patches of slightly yellower and slightly bluer green, a very few tiny white flowers. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:25:51.371Z",
+    "usageUsd": 0.011132979234059651,
+    "candidates": [
+      {
+        "file": "grass-s-0.png",
+        "sha256": "e1345524c4fb881557bb0113dce68b33dcbb36ff01aa4218f1840a9785648c0d",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "dirt-s": {
+    "id": "dirt-s",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-36b1fa78-363f-4c8e-a3ac-c0a98392c744",
+    "submittedAt": "2026-11-27T09:26:35.813Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Packed soil #b56c46 with fine darker #94553a grain, a few faint short cracks, small tan pebbles, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127223,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Packed soil #b56c46 with fine darker #94553a grain, a few faint short cracks, small tan pebbles, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:26:35.815Z",
+    "usageUsd": 0.009816715796788535,
+    "candidates": [
+      {
+        "file": "dirt-s-0.png",
+        "sha256": "01e869d729c2acbc0ad6c30dbc35af4385a1365e4e7268b8be1464f15b821f4d",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "sand-s": {
+    "id": "sand-s",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-9ecb4308-325a-4f7d-b8c8-dbfd5fe0083a",
+    "submittedAt": "2026-11-27T09:27:23.947Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: calm golden desert sand seen from straight above, the sand running off every edge of the picture with no frame, no rim and no plate. Smooth sand #dcb46c with small soft wind ripples in lighter #e8c684 and slightly darker #cfa762, a few tiny pebbles, soft uneven patches of paler and warmer sand. Evenly lit, low contrast, calm, no rocks. Painterly 16-bit strategy-game map ground."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127323,
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down",
+      "description": "Subject: calm golden desert sand seen from straight above, the sand running off every edge of the picture with no frame, no rim and no plate. Smooth sand #dcb46c with small soft wind ripples in lighter #e8c684 and slightly darker #cfa762, a few tiny pebbles, soft uneven patches of paler and warmer sand. Evenly lit, low contrast, calm, no rocks. Painterly 16-bit strategy-game map ground. Must not include: tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:27:23.949Z",
+    "usageUsd": 0.010017964495552912,
+    "candidates": [
+      {
+        "file": "sand-s-0.png",
+        "sha256": "beffe3e17ada749f0b8c7de418344bb0cf34693dac07912036b7ad302a012dfd",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  }
+}

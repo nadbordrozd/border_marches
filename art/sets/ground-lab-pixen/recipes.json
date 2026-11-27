@@ -1,0 +1,143 @@
+{
+  "set": "ground-lab-pixen",
+  "bead": "border_marches-bzc.127",
+  "class": "grounds",
+  "exploration": true,
+  "_doc": "Ground texture experiment (bead bzc.127), pixen takes: after the pixflux takes of set ground-lab drew stamped motifs, stripes and grids. Exploration only, nothing baked. Never the words texture or tile (pixen draws paving). Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "opts": {
+      "outline": "lineless",
+      "detail": "highly detailed",
+      "view": "high top-down"
+    },
+    "grass": "Subject: looking straight down at a quiet green meadow: only short grass, nothing else, filling the whole picture edge to edge. Many small grass tufts and blades in mid green #6fa04a with darker #4f8034 shade between them and lighter #9cc865 tips, soft uneven patches of slightly yellower and slightly bluer green, a few tiny white and yellow flowers. Lit from the bottom left. Painterly 16-bit strategy-game map ground.",
+    "dirt": "Subject: looking straight down at dry rust-brown earth: only bare ground, nothing else, filling the whole picture edge to edge. Packed soil #b06a46 with fine darker #8a4c31 grain, hairline cracks, small tan and grey pebbles, a few dry grass wisps, soft uneven patches of more orange and more brown soil. Lit from the bottom left. Painterly 16-bit strategy-game map ground.",
+    "sand": "Subject: looking straight down at golden desert sand: only sand, nothing else, filling the whole picture edge to edge. Warm sand #dcb46c with short soft wind ripples in lighter #e9c886 and darker #c79f5c, tiny pebbles and a few dry twigs, soft uneven patches of paler and warmer sand. Lit from the bottom left. Painterly 16-bit strategy-game map ground.",
+    "ink": "Subject: black ink blots splattered on white paper: many irregular blots of every size from tiny drops to blots a fifth of the picture wide, ragged lobed edges with small separate droplets round them, pure black on pure white, spread evenly over the whole picture.",
+    "opts2": {
+      "outline": "lineless",
+      "detail": "highly detailed"
+    },
+    "grass2": "Subject: a calm grass meadow seen from straight above, the grass running off every edge of the picture with no frame, no rim and no plate. Short soft grass in light meadow green #8ab85c with many small tufts and blades in darker #6a9a44 and lighter #a8d070, soft uneven patches of slightly yellower and slightly bluer green, a very few tiny white flowers. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground.",
+    "dirt2": "Subject: calm bare rust-red earth seen from straight above, the ground running off every edge of the picture with no frame, no rim and no plate. Packed soil #b56c46 with fine darker #94553a grain, a few faint short cracks, small tan pebbles, soft uneven patches of more orange and more brown soil. Evenly lit, low contrast, calm. Painterly 16-bit strategy-game map ground.",
+    "sand2": "Subject: calm golden desert sand seen from straight above, the sand running off every edge of the picture with no frame, no rim and no plate. Smooth sand #dcb46c with small soft wind ripples in lighter #e8c684 and slightly darker #cfa762, a few tiny pebbles, soft uneven patches of paler and warmer sand. Evenly lit, low contrast, calm, no rocks. Painterly 16-bit strategy-game map ground."
+  },
+  "defaults": {
+    "endpoint": "create-image-pixen",
+    "fragments": [],
+    "noBackground": false,
+    "options": "@opts",
+    "negative": "tiles, tile grid, bricks, paving, cobblestones, path, road, object, character, animal, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif"
+  },
+  "recipes": [
+    {
+      "id": "grass-p",
+      "concept": "GRASS (pixen 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127121,
+      "subject": "@grass"
+    },
+    {
+      "id": "dirt-p",
+      "concept": "RED EARTH (pixen 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127221,
+      "subject": "@dirt"
+    },
+    {
+      "id": "sand-p",
+      "concept": "SAND (pixen 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127321,
+      "subject": "@sand"
+    },
+    {
+      "id": "ink-p",
+      "concept": "EDGE BRUSH MASK (pixen ink blots)",
+      "width": 256,
+      "height": 256,
+      "seed": 127421,
+      "options": {
+        "detail": "medium detail"
+      },
+      "negative": "colour, grid, gradient, shading",
+      "subject": "@ink"
+    },
+    {
+      "id": "grass-q",
+      "concept": "GRASS CALM (pixen 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127122,
+      "options": "@opts2",
+      "subject": "@grass2"
+    },
+    {
+      "id": "grass-r",
+      "concept": "GRASS CALM (pixen 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127123,
+      "options": "@opts2",
+      "subject": "@grass2"
+    },
+    {
+      "id": "dirt-q",
+      "concept": "RED EARTH CALM (pixen 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127222,
+      "options": "@opts2",
+      "subject": "@dirt2"
+    },
+    {
+      "id": "sand-q",
+      "concept": "SAND CALM (pixen 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127322,
+      "options": "@opts2",
+      "subject": "@sand2"
+    },
+    {
+      "id": "ink-q",
+      "concept": "EDGE BRUSH MASK (pixen ink blots)",
+      "width": 256,
+      "height": 256,
+      "seed": 127422,
+      "options": {
+        "detail": "medium detail"
+      },
+      "negative": "colour, grid, gradient, shading",
+      "subject": "@ink"
+    },
+    {
+      "id": "grass-s",
+      "concept": "GRASS CALM (pixen 5-cell, high top-down)",
+      "width": 400,
+      "height": 400,
+      "seed": 127124,
+      "subject": "@grass2"
+    },
+    {
+      "id": "dirt-s",
+      "concept": "RED EARTH CALM (pixen 5-cell, high top-down)",
+      "width": 400,
+      "height": 400,
+      "seed": 127223,
+      "subject": "@dirt2"
+    },
+    {
+      "id": "sand-s",
+      "concept": "SAND CALM (pixen 5-cell, high top-down)",
+      "width": 400,
+      "height": 400,
+      "seed": 127323,
+      "subject": "@sand2"
+    }
+  ],
+  "outputs": []
+}

@@ -1,0 +1,428 @@
+{
+  "grass-a": {
+    "id": "grass-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-d302f9a2-e2c9-4583-9eb3-08055ea78691",
+    "submittedAt": "2026-11-27T09:09:13.186Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a lush meadow of short dense grass seen from directly above, filling the whole image edge to edge: countless small grass tufts and blades in many greens, mid green #6fa04a, deep green #4a7a34 shade between the tufts, light #a2cc66 blade tips, tiny clover leaves and a very few minute yellow and white flower specks, soft irregular patches of slightly yellower and slightly bluer green, fine dithered painterly pixel detail, the same everywhere, no single big feature."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127101,
+      "shading": "medium shading",
+      "detail": "highly detailed",
+      "description": "Subject: a lush meadow of short dense grass seen from directly above, filling the whole image edge to edge: countless small grass tufts and blades in many greens, mid green #6fa04a, deep green #4a7a34 shade between the tufts, light #a2cc66 blade tips, tiny clover leaves and a very few minute yellow and white flower specks, soft irregular patches of slightly yellower and slightly bluer green, fine dithered painterly pixel detail, the same everywhere, no single big feature. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes."
+    },
+    "at": "2026-11-27T09:09:13.189Z",
+    "usageUsd": 0.009496880955166287,
+    "candidates": [
+      {
+        "file": "grass-a-0.png",
+        "sha256": "843fe97a4a73ac678b9854ec6a647672f1991105d1a24150d2b36a66f0c3bded",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "grass-b": {
+    "id": "grass-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-4de1cea1-62e3-4727-b696-a7f73f4f279b",
+    "submittedAt": "2026-11-27T09:09:46.053Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a lush meadow of short dense grass seen from directly above, filling the whole image edge to edge: countless small grass tufts and blades in many greens, mid green #6fa04a, deep green #4a7a34 shade between the tufts, light #a2cc66 blade tips, tiny clover leaves and a very few minute yellow and white flower specks, soft irregular patches of slightly yellower and slightly bluer green, fine dithered painterly pixel detail, the same everywhere, no single big feature."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127102,
+      "shading": "basic shading",
+      "detail": "highly detailed",
+      "description": "Subject: a lush meadow of short dense grass seen from directly above, filling the whole image edge to edge: countless small grass tufts and blades in many greens, mid green #6fa04a, deep green #4a7a34 shade between the tufts, light #a2cc66 blade tips, tiny clover leaves and a very few minute yellow and white flower specks, soft irregular patches of slightly yellower and slightly bluer green, fine dithered painterly pixel detail, the same everywhere, no single big feature. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes."
+    },
+    "at": "2026-11-27T09:09:46.055Z",
+    "usageUsd": 0.00846794515185886,
+    "candidates": [
+      {
+        "file": "grass-b-0.png",
+        "sha256": "cfa8cf1892ebeb5c0eea047f8514c666a0e28f7445daffbb837dfb481a1bc40f",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "dirt-a": {
+    "id": "dirt-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-6b2dec6c-b587-43ce-8c35-609418963da5",
+    "submittedAt": "2026-11-27T09:10:13.375Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: dry rust-red earth seen from directly above, filling the whole image edge to edge: packed red-brown soil #b06a46 with fine darker #86492f streaks and hairline cracks, many small scattered pebbles in tan and grey, each lit on its lower left side, a few dry grass wisps, soft irregular patches of more orange and more brown soil, fine dithered painterly pixel detail, the same everywhere, no single big feature."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127201,
+      "shading": "medium shading",
+      "detail": "highly detailed",
+      "description": "Subject: dry rust-red earth seen from directly above, filling the whole image edge to edge: packed red-brown soil #b06a46 with fine darker #86492f streaks and hairline cracks, many small scattered pebbles in tan and grey, each lit on its lower left side, a few dry grass wisps, soft irregular patches of more orange and more brown soil, fine dithered painterly pixel detail, the same everywhere, no single big feature. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes."
+    },
+    "at": "2026-11-27T09:10:13.377Z",
+    "usageUsd": 0.007840696228875055,
+    "candidates": [
+      {
+        "file": "dirt-a-0.png",
+        "sha256": "f90c02af032103a9d447990932876c47cb60eb563f0a08f49b27c7b11836d9dc",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "dirt-b": {
+    "id": "dirt-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-331ffcbc-52f6-4969-b191-0652d05d0607",
+    "submittedAt": "2026-11-27T09:11:06.125Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: dry rust-red earth seen from directly above, filling the whole image edge to edge: packed red-brown soil #b06a46 with fine darker #86492f streaks and hairline cracks, many small scattered pebbles in tan and grey, each lit on its lower left side, a few dry grass wisps, soft irregular patches of more orange and more brown soil, fine dithered painterly pixel detail, the same everywhere, no single big feature."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127202,
+      "shading": "basic shading",
+      "detail": "highly detailed",
+      "description": "Subject: dry rust-red earth seen from directly above, filling the whole image edge to edge: packed red-brown soil #b06a46 with fine darker #86492f streaks and hairline cracks, many small scattered pebbles in tan and grey, each lit on its lower left side, a few dry grass wisps, soft irregular patches of more orange and more brown soil, fine dithered painterly pixel detail, the same everywhere, no single big feature. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes."
+    },
+    "at": "2026-11-27T09:11:06.127Z",
+    "usageUsd": 0.010642624325222439,
+    "candidates": [
+      {
+        "file": "dirt-b-0.png",
+        "sha256": "d88e38a38904fe1a19cf35277b6f506bda42f4a7f9f7b6ea28edb3465dc761ab",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "sand-a": {
+    "id": "sand-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-73697710-9250-44b7-8da7-5f9d1599b961",
+    "submittedAt": "2026-11-27T09:11:54.642Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: golden desert sand seen from directly above, filling the whole image edge to edge: warm sand #dcb46c with fine short wind ripples in lighter #ecca8a and darker #c49a58, tiny scattered pebbles and a few dry twigs, soft irregular patches of paler and warmer sand, fine dithered grainy painterly pixel detail, the same everywhere, no single big dune, no single big feature."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127301,
+      "shading": "medium shading",
+      "detail": "highly detailed",
+      "description": "Subject: golden desert sand seen from directly above, filling the whole image edge to edge: warm sand #dcb46c with fine short wind ripples in lighter #ecca8a and darker #c49a58, tiny scattered pebbles and a few dry twigs, soft irregular patches of paler and warmer sand, fine dithered grainy painterly pixel detail, the same everywhere, no single big dune, no single big feature. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes."
+    },
+    "at": "2026-11-27T09:11:54.644Z",
+    "usageUsd": 0.010243721432156034,
+    "candidates": [
+      {
+        "file": "sand-a-0.png",
+        "sha256": "fd5643051af9276b3d29f8729e7aaf8451be7a5e7c8273345d07aa53b45ae555",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "sand-b": {
+    "id": "sand-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-262ce708-d2ec-4667-9abf-213df09d3c74",
+    "submittedAt": "2026-11-27T09:12:53.157Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: golden desert sand seen from directly above, filling the whole image edge to edge: warm sand #dcb46c with fine short wind ripples in lighter #ecca8a and darker #c49a58, tiny scattered pebbles and a few dry twigs, soft irregular patches of paler and warmer sand, fine dithered grainy painterly pixel detail, the same everywhere, no single big dune, no single big feature."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127302,
+      "shading": "basic shading",
+      "detail": "highly detailed",
+      "description": "Subject: golden desert sand seen from directly above, filling the whole image edge to edge: warm sand #dcb46c with fine short wind ripples in lighter #ecca8a and darker #c49a58, tiny scattered pebbles and a few dry twigs, soft irregular patches of paler and warmer sand, fine dithered grainy painterly pixel detail, the same everywhere, no single big dune, no single big feature. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes."
+    },
+    "at": "2026-11-27T09:12:53.159Z",
+    "usageUsd": 0.011328088045120241,
+    "candidates": [
+      {
+        "file": "sand-b-0.png",
+        "sha256": "170e7e7c33b1399cf343c22e4c356bec02cc25ab279e633fa4c03b5606e877f0",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "brush-a": {
+    "id": "brush-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-ea259cf0-ce91-49ef-bfbe-12e5a82fc3dc",
+    "submittedAt": "2026-11-27T09:13:43.837Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: seen from directly above, filling the whole image edge to edge: ragged patches of dark moss on pale stone, many patches of every size from tiny specks to blotches a fifth of the image wide, their edges frayed, lobed and fringed with small separate specks, white #f0f0f0 stone and near-black #202020 moss only, the same everywhere, no single big feature."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127401,
+      "shading": "basic shading",
+      "detail": "highly detailed",
+      "description": "Subject: seen from directly above, filling the whole image edge to edge: ragged patches of dark moss on pale stone, many patches of every size from tiny specks to blotches a fifth of the image wide, their edges frayed, lobed and fringed with small separate specks, white #f0f0f0 stone and near-black #202020 moss only, the same everywhere, no single big feature. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, grid, colour, green, gradient."
+    },
+    "at": "2026-11-27T09:13:43.839Z",
+    "usageUsd": 0.010397249301274617,
+    "candidates": [
+      {
+        "file": "brush-a-0.png",
+        "sha256": "4962c9ed042cc30d72253f04d08cb25040bbc65a346f4e80c798119f4f1a5143",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "brush-b": {
+    "id": "brush-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-6197eada-418e-4334-b062-0a093aa6103e",
+    "submittedAt": "2026-11-27T09:14:11.518Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: seen from directly above, filling the whole image edge to edge: ragged patches of dark moss on pale stone, many patches of every size from tiny specks to blotches a fifth of the image wide, their edges frayed, lobed and fringed with small separate specks, white #f0f0f0 stone and near-black #202020 moss only, the same everywhere, no single big feature."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127402,
+      "shading": "basic shading",
+      "detail": "highly detailed",
+      "description": "Subject: seen from directly above, filling the whole image edge to edge: ragged patches of dark moss on pale stone, many patches of every size from tiny specks to blotches a fifth of the image wide, their edges frayed, lobed and fringed with small separate specks, white #f0f0f0 stone and near-black #202020 moss only, the same everywhere, no single big feature. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, grid, colour, green, gradient."
+    },
+    "at": "2026-11-27T09:14:11.524Z",
+    "usageUsd": 0.00794103823767768,
+    "candidates": [
+      {
+        "file": "brush-b-0.png",
+        "sha256": "fbeff314c0ef19cb739da95209b34ee095906e45d11631acc1f6f632ed8b59bd",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "grass-c": {
+    "id": "grass-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-fa496653-f3b0-4185-b044-5f7065d36e99",
+    "submittedAt": "2026-11-27T09:15:36.632Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a quiet green meadow seen from directly above, filling the whole image edge to edge: short soft grass #7eb04e, many small darker #5e8f3c grass tufts and lighter #9cc865 blade tips scattered unevenly, soft irregular patches of slightly yellower and slightly bluer green, a very few tiny white and yellow flower specks, calm and natural, the same everywhere."
+        }
+      ],
+      "init_image": "file art/sets/ground-lab/init/grass.png sha256 1678b1214b9188c5963f53ef5c523f756cfb4847d369c74f0278dda5d27a4e53",
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127111,
+      "shading": "flat shading",
+      "detail": "highly detailed",
+      "init_image_strength": 300,
+      "description": "Subject: a quiet green meadow seen from directly above, filling the whole image edge to edge: short soft grass #7eb04e, many small darker #5e8f3c grass tufts and lighter #9cc865 blade tips scattered unevenly, soft irregular patches of slightly yellower and slightly bluer green, a very few tiny white and yellow flower specks, calm and natural, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:15:36.637Z",
+    "usageUsd": 0.0077041166888342965,
+    "candidates": [
+      {
+        "file": "grass-c-0.png",
+        "sha256": "7287e55c6e12d1ee46136082873a13cb53243943351432676854da44906b3572",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "grass-d": {
+    "id": "grass-d",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-d1cae017-ee8a-426b-98e9-eff60f5010a0",
+    "submittedAt": "2026-11-27T09:16:15.039Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a quiet green meadow seen from directly above, filling the whole image edge to edge: short soft grass #7eb04e, many small darker #5e8f3c grass tufts and lighter #9cc865 blade tips scattered unevenly, soft irregular patches of slightly yellower and slightly bluer green, a very few tiny white and yellow flower specks, calm and natural, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127112,
+      "shading": "flat shading",
+      "detail": "highly detailed",
+      "description": "Subject: a quiet green meadow seen from directly above, filling the whole image edge to edge: short soft grass #7eb04e, many small darker #5e8f3c grass tufts and lighter #9cc865 blade tips scattered unevenly, soft irregular patches of slightly yellower and slightly bluer green, a very few tiny white and yellow flower specks, calm and natural, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:16:15.040Z",
+    "usageUsd": 0.00809606522983975,
+    "candidates": [
+      {
+        "file": "grass-d-0.png",
+        "sha256": "4b523ed450537b99ae182ec7258cecf115c765a100d9db06f00406489c984ee8",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "dirt-c": {
+    "id": "dirt-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-3a805afc-33bf-490a-95ea-da44388fe8c9",
+    "submittedAt": "2026-11-27T09:16:44.201Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: dry rust-brown earth seen from directly above, filling the whole image edge to edge: packed soil #b06a46 with fine darker #8a4c31 grain and hairline cracks, small scattered tan and grey pebbles, a few dry grass wisps, soft irregular patches of more orange and more brown soil, calm and natural, the same everywhere."
+        }
+      ],
+      "init_image": "file art/sets/ground-lab/init/badlands.png sha256 66c50274058970fc797d63c0707d22341e4c74314bf5717f8597737c6e0198db",
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127211,
+      "shading": "flat shading",
+      "detail": "highly detailed",
+      "init_image_strength": 300,
+      "description": "Subject: dry rust-brown earth seen from directly above, filling the whole image edge to edge: packed soil #b06a46 with fine darker #8a4c31 grain and hairline cracks, small scattered tan and grey pebbles, a few dry grass wisps, soft irregular patches of more orange and more brown soil, calm and natural, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:16:44.203Z",
+    "usageUsd": 0.008037172343995836,
+    "candidates": [
+      {
+        "file": "dirt-c-0.png",
+        "sha256": "30ad7780d9f48179409b1a9d4d156aee84bbbe67e6d83dd2d1c455c892b63c68",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "sand-c": {
+    "id": "sand-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-5ad043ec-9c1f-4add-bc6e-f6f6d8ef975d",
+    "submittedAt": "2026-11-27T09:17:13.829Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: golden desert sand seen from directly above, filling the whole image edge to edge: warm sand #dcb46c with short soft wind ripples in lighter #e9c886 and darker #c79f5c, tiny scattered pebbles and a few dry twigs, soft irregular patches of paler and warmer sand, calm and natural, the same everywhere."
+        }
+      ],
+      "init_image": "file art/sets/ground-lab/init/sand.png sha256 4e76af8a2b3b4c239ac7ae69b62a01e0c53821137040b1d735ebb3fc184a0d27",
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 127311,
+      "shading": "flat shading",
+      "detail": "highly detailed",
+      "init_image_strength": 300,
+      "description": "Subject: golden desert sand seen from directly above, filling the whole image edge to edge: warm sand #dcb46c with short soft wind ripples in lighter #e9c886 and darker #c79f5c, tiny scattered pebbles and a few dry twigs, soft irregular patches of paler and warmer sand, calm and natural, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif."
+    },
+    "at": "2026-11-27T09:17:13.831Z",
+    "usageUsd": 0.007991094483269585,
+    "candidates": [
+      {
+        "file": "sand-c-0.png",
+        "sha256": "9674d9f7e43ba759562dd7f62bc8b6a3afc6effaf1b7be25d1d18175c5edb4fd",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  }
+}

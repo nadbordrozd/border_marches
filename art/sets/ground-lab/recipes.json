@@ -1,0 +1,161 @@
+{
+  "set": "ground-lab",
+  "bead": "border_marches-bzc.127",
+  "class": "grounds",
+  "exploration": true,
+  "_doc": "Ground texture experiment (bead bzc.127, docs/art/classes/grounds.md#texture-experiment-bead-bzc127): richer Heroes II/III-like grounds and mask transitions. Exploration only: nothing here is baked into the game; tools/ground-lab/ground-lab.mjs reads the accepted masters. Lessons of the ground sets: no chibi style layer, never the words texture or tile, pixflux 400 x 400. Recipes are never edited after generation: add a new id (new seed) instead. '@name' values come from shared. Pixen takes are in set ground-lab-pixen (pixen refuses the shading option these defaults carry).",
+  "shared": {
+    "rich": {
+      "shading": "medium shading",
+      "detail": "highly detailed"
+    },
+    "flat": {
+      "shading": "basic shading",
+      "detail": "highly detailed"
+    },
+    "grass": "Subject: a lush meadow of short dense grass seen from directly above, filling the whole image edge to edge: countless small grass tufts and blades in many greens, mid green #6fa04a, deep green #4a7a34 shade between the tufts, light #a2cc66 blade tips, tiny clover leaves and a very few minute yellow and white flower specks, soft irregular patches of slightly yellower and slightly bluer green, fine dithered painterly pixel detail, the same everywhere, no single big feature.",
+    "dirt": "Subject: dry rust-red earth seen from directly above, filling the whole image edge to edge: packed red-brown soil #b06a46 with fine darker #86492f streaks and hairline cracks, many small scattered pebbles in tan and grey, each lit on its lower left side, a few dry grass wisps, soft irregular patches of more orange and more brown soil, fine dithered painterly pixel detail, the same everywhere, no single big feature.",
+    "sand": "Subject: golden desert sand seen from directly above, filling the whole image edge to edge: warm sand #dcb46c with fine short wind ripples in lighter #ecca8a and darker #c49a58, tiny scattered pebbles and a few dry twigs, soft irregular patches of paler and warmer sand, fine dithered grainy painterly pixel detail, the same everywhere, no single big dune, no single big feature.",
+    "brush": "Subject: seen from directly above, filling the whole image edge to edge: ragged patches of dark moss on pale stone, many patches of every size from tiny specks to blotches a fifth of the image wide, their edges frayed, lobed and fringed with small separate specks, white #f0f0f0 stone and near-black #202020 moss only, the same everywhere, no single big feature.",
+    "calm": {
+      "shading": "flat shading"
+    },
+    "paint": {
+      "shading": "flat shading",
+      "init_image_strength": 300
+    },
+    "grass2": "Subject: a quiet green meadow seen from directly above, filling the whole image edge to edge: short soft grass #7eb04e, many small darker #5e8f3c grass tufts and lighter #9cc865 blade tips scattered unevenly, soft irregular patches of slightly yellower and slightly bluer green, a very few tiny white and yellow flower specks, calm and natural, the same everywhere.",
+    "dirt2": "Subject: dry rust-brown earth seen from directly above, filling the whole image edge to edge: packed soil #b06a46 with fine darker #8a4c31 grain and hairline cracks, small scattered tan and grey pebbles, a few dry grass wisps, soft irregular patches of more orange and more brown soil, calm and natural, the same everywhere.",
+    "sand2": "Subject: golden desert sand seen from directly above, filling the whole image edge to edge: warm sand #dcb46c with short soft wind ripples in lighter #e9c886 and darker #c79f5c, tiny scattered pebbles and a few dry twigs, soft irregular patches of paler and warmer sand, calm and natural, the same everywhere."
+  },
+  "defaults": {
+    "endpoint": "create-image-pixflux",
+    "fragments": [],
+    "noBackground": false,
+    "options": "@rich",
+    "negative": "tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes"
+  },
+  "recipes": [
+    {
+      "id": "grass-a",
+      "concept": "RICH GRASS (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127101,
+      "subject": "@grass"
+    },
+    {
+      "id": "grass-b",
+      "concept": "RICH GRASS (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127102,
+      "options": "@flat",
+      "subject": "@grass"
+    },
+    {
+      "id": "dirt-a",
+      "concept": "RICH RED EARTH (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127201,
+      "subject": "@dirt"
+    },
+    {
+      "id": "dirt-b",
+      "concept": "RICH RED EARTH (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127202,
+      "options": "@flat",
+      "subject": "@dirt"
+    },
+    {
+      "id": "sand-a",
+      "concept": "RICH SAND (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127301,
+      "subject": "@sand"
+    },
+    {
+      "id": "sand-b",
+      "concept": "RICH SAND (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 127302,
+      "options": "@flat",
+      "subject": "@sand"
+    },
+    {
+      "id": "brush-a",
+      "concept": "EDGE BRUSH MASK (pixflux)",
+      "width": 400,
+      "height": 400,
+      "seed": 127401,
+      "options": "@flat",
+      "negative": "grid, tiles, bricks, text, frame, border, colour, green, circles, stripes, gradient",
+      "subject": "@brush"
+    },
+    {
+      "id": "brush-b",
+      "concept": "EDGE BRUSH MASK (pixflux)",
+      "width": 400,
+      "height": 400,
+      "seed": 127402,
+      "options": "@flat",
+      "negative": "grid, tiles, bricks, text, frame, border, colour, green, circles, stripes, gradient",
+      "subject": "@brush"
+    },
+    {
+      "id": "grass-c",
+      "concept": "GRASS PAINT-OVER (pixflux over lab A)",
+      "width": 400,
+      "height": 400,
+      "seed": 127111,
+      "options": "@paint",
+      "initImage": {
+        "file": "art/sets/ground-lab/init/grass.png"
+      },
+      "subject": "@grass2",
+      "negative": "tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif"
+    },
+    {
+      "id": "grass-d",
+      "concept": "GRASS CALM RICH (pixflux)",
+      "width": 400,
+      "height": 400,
+      "seed": 127112,
+      "options": "@calm",
+      "subject": "@grass2",
+      "negative": "tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif"
+    },
+    {
+      "id": "dirt-c",
+      "concept": "RED EARTH PAINT-OVER (pixflux over lab A)",
+      "width": 400,
+      "height": 400,
+      "seed": 127211,
+      "options": "@paint",
+      "initImage": {
+        "file": "art/sets/ground-lab/init/badlands.png"
+      },
+      "subject": "@dirt2",
+      "negative": "tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif"
+    },
+    {
+      "id": "sand-c",
+      "concept": "SAND PAINT-OVER (pixflux over lab A)",
+      "width": 400,
+      "height": 400,
+      "seed": 127311,
+      "options": "@paint",
+      "initImage": {
+        "file": "art/sets/ground-lab/init/sand.png"
+      },
+      "subject": "@sand2",
+      "negative": "tiles, tile grid, bricks, plates, slabs, paving, cobblestones, path, road, object, character, building, tree, bush, big rock, water, frame, border, horizon, sky, perspective, text, circles, stripes, polka dots, repeating motif"
+    }
+  ],
+  "outputs": []
+}

@@ -1,0 +1,62 @@
+{
+  "grass-a#0": {
+    "verdict": "REJECTED",
+    "notes": "near-black saturated green with a stamped leaf motif in rows: a pattern, not a meadow (medium shading + highly detailed)",
+    "at": "2026-11-27T09:14:35.793Z"
+  },
+  "grass-b#0": {
+    "verdict": "REJECTED",
+    "notes": "pure saturated green with vertical stripes: reads as cloth, not grass",
+    "at": "2026-11-27T09:14:35.883Z"
+  },
+  "dirt-a#0": {
+    "verdict": "REJECTED",
+    "notes": "pure red with evenly scattered round blobs: a polka-dot motif",
+    "at": "2026-11-27T09:14:35.967Z"
+  },
+  "dirt-b#0": {
+    "verdict": "REJECTED",
+    "notes": "pure red with diagonal streak bands: repeating motif, wrong hue",
+    "at": "2026-11-27T09:14:36.059Z"
+  },
+  "sand-a#0": {
+    "verdict": "REJECTED",
+    "notes": "flat orange-yellow with a faint brick lattice: breaks the no-grid rule",
+    "at": "2026-11-27T09:14:36.178Z"
+  },
+  "sand-b#0": {
+    "verdict": "REJECTED",
+    "notes": "flat pale yellow with crackle lines: dull and off-hue, adds nothing",
+    "at": "2026-11-27T09:14:36.270Z"
+  },
+  "brush-a#0": {
+    "verdict": "REJECTED",
+    "notes": "drew a tiled floor plan with a moss border, not a mask",
+    "at": "2026-11-27T09:14:36.357Z"
+  },
+  "brush-b#0": {
+    "verdict": "REJECTED",
+    "notes": "drew a round framed medallion, not a mask",
+    "at": "2026-11-27T09:14:36.444Z"
+  },
+  "grass-c#0": {
+    "verdict": "REJECTED",
+    "notes": "init image barely held: the soft patches came back as stamped round leaf medallions",
+    "at": "2026-11-27T09:17:35.083Z"
+  },
+  "grass-d#0": {
+    "verdict": "REJECTED",
+    "notes": "flat neon green with three stray objects: no texture",
+    "at": "2026-11-27T09:17:35.184Z"
+  },
+  "dirt-c#0": {
+    "verdict": "REJECTED",
+    "notes": "kept the underpainting's blobs as hard flat shapes with a stamped motif inside",
+    "at": "2026-11-27T09:17:35.286Z"
+  },
+  "sand-c#0": {
+    "verdict": "REJECTED",
+    "notes": "rainbow noise pixels in the ripples and a smeared streak at top left",
+    "at": "2026-11-27T09:17:35.387Z"
+  }
+}

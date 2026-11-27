@@ -1,0 +1,62 @@
+{
+  "grass-r#0": {
+    "verdict": "REJECTED",
+    "notes": "without the high top-down view pixen drew a clearing framed by trees and a hedge: a scene, not ground",
+    "at": "2026-11-27T09:24:53.677Z"
+  },
+  "dirt-q#0": {
+    "verdict": "REJECTED",
+    "notes": "cracks laid out like brick courses plus two glowing orange spots: reads as paving",
+    "at": "2026-11-27T09:24:53.802Z"
+  },
+  "sand-q#0": {
+    "verdict": "REJECTED",
+    "notes": "a stone-rimmed pit with a faint paving grid under the ripples",
+    "at": "2026-11-27T09:24:53.921Z"
+  },
+  "ink-q#0": {
+    "verdict": "REJECTED",
+    "notes": "radial spiky sea-urchin blots on a regular spacing: the mask would print starbursts along borders",
+    "at": "2026-11-27T09:24:54.046Z"
+  },
+  "sand-s#0": {
+    "verdict": "REJECTED",
+    "notes": "a paved courtyard with stone walls and a cast shadow: a scene, and a grid",
+    "at": "2026-11-27T09:27:46.211Z"
+  },
+  "grass-p#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rich painterly meadow (tufts, flowers, light patches) inside a drawn rim: exploration source, the lab keeps the interior crop",
+    "at": "2026-11-27T09:27:46.354Z"
+  },
+  "grass-q#0": {
+    "verdict": "ACCEPTED",
+    "notes": "calm organic meadow with soft light and dark patches; stump, rock and rim at the edges cropped away in the lab",
+    "at": "2026-11-27T09:27:46.584Z"
+  },
+  "grass-s#0": {
+    "verdict": "ACCEPTED",
+    "notes": "calm meadow with light blade streaks between two tree rims; the lab crops the open middle",
+    "at": "2026-11-27T09:27:46.763Z"
+  },
+  "dirt-p#0": {
+    "verdict": "ACCEPTED",
+    "notes": "rich cracked earth with tufts and pebbles; busy, dark, framed: the lab crops the upper interior away from the lit corner",
+    "at": "2026-11-27T09:27:46.901Z"
+  },
+  "dirt-s#0": {
+    "verdict": "ACCEPTED",
+    "notes": "dark cracked earth with orange pebbles between lit rims; the lab crops the middle",
+    "at": "2026-11-27T09:27:47.101Z"
+  },
+  "sand-p#0": {
+    "verdict": "ACCEPTED",
+    "notes": "strong painterly ripples, too contrasty alone; corner rocks and twigs cropped away in the lab",
+    "at": "2026-11-27T09:27:47.243Z"
+  },
+  "ink-p#0": {
+    "verdict": "ACCEPTED",
+    "notes": "irregular ink blots of many sizes with droplets: a usable edge brush mask",
+    "at": "2026-11-27T09:27:47.413Z"
+  }
+}
