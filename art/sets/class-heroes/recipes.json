@@ -3,7 +3,7 @@
   "bead": "border_marches-bzc.14",
   "class": "units",
   "exploration": false,
-  "_doc": "Adventure-map sprites (large unit, 72x88, like the Lost World Chieftain of lost-world-hero) and 48x48 portraits of the six v0.2 hero classes. The faction docs do not say mounted or on foot; decision (bzc.14): every hero rides, as on a Heroes map, and each class has its own mount so a hero never reads as a creature stack: Knight Errant on a chestnut charger, Enchanter on a white unicorn, Revenant on a skeleton horse, Mortician on a grey donkey with funeral plumes, Warlord on a war boar, Weatherwitch on a shaggy goat. Same layers and colours as faction-units (no faction layer, the 2000-character cap). Faces south-east, never mirrored. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "_doc": "Adventure-map sprites (large unit, 72x88, like the Lost World Chieftain of lost-world-hero) and 48x48 portraits of the six v0.2 hero classes. The faction docs do not say mounted or on foot; decision (bzc.14): every hero rides, as on a Heroes map, and each class has its own mount so a hero never reads as a creature stack: Knight Errant on a chestnut charger, Enchanter on a white unicorn, Revenant on a skeleton horse, Mortician on a grey donkey with funeral plumes, Warlord on a war boar, Weatherwitch on a shaggy goat. Same layers and colours as faction-units (no faction layer, the 2000-character cap). Faces south-east, never mirrored. Recipes are never edited after generation: add a new id (new seed) instead. Candy Kingdom (bead border_marches-bzc.113, docs/design/FACTION_CANDY.md sections 7 and 10): the Nutcracker rides a candy-striped rocking horse and the Confectioner a marzipan pig, in the Candy palette of section 10.1 (candy-cane red #e03a3e, royal icing #fff4ec, strawberry frosting #e2589b, mint #7fd6b5, gingerbread #b86b34).",
   "shared": {
     "piece": {
       "outline": "single color black outline",
@@ -161,6 +161,70 @@
       "edit": { "take": "knight-errant-portrait-a#0" },
       "subject": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the open-faced light steel helmet with the big crimson plume, the brave grin and moustache, the crimson surcoat with the gold-yellow cross at the bottom edge. Keep the colours, the thick black outline and the art style exactly the same.",
       "notes": "knight-errant-portrait-a#0 came back as a small whole figure (LESSONS 4.1 portrait fix)."
+    },
+    {
+      "id": "nutcracker-a",
+      "concept": "NUTCRACKER",
+      "width": 72,
+      "height": 88,
+      "seed": 113101,
+      "options": "@piece",
+      "subject": "Subject: Nutcracker, a chunky cute toy-soldier nutcracker captain with a huge round painted wooden head riding a candy-striped rocking horse seen from the front-right, rider and horse filling the whole width of the image: rosy cheeks, a big square jaw with white teeth, a white curly beard, a very tall black shako hat with a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging, a red-and-white striped candy-cane sabre raised; the rocking horse is icing white #fff4ec with red stripes and a pink mane, on curved red-and-white rockers; the rockers are the lowest thing.",
+      "negative": "real horse, gun, brown horse, purple"
+    },
+    {
+      "id": "confectioner-a",
+      "concept": "CONFECTIONER",
+      "width": 72,
+      "height": 88,
+      "seed": 113201,
+      "options": "@piece",
+      "subject": "Subject: Confectioner, a chunky cute sweet old granny baker with a huge round head riding a plump marzipan pig seen from the front-right, rider and pig filling the whole width of the image: a rosy smiling wrinkled face, round spectacles, white hair in a bun under a white frilly mob cap with a pink #e2589b ribbon, a strawberry pink #e2589b dress, a white frilly icing apron with a red #e03a3e hem, a giant wooden spoon dripping pink frosting raised high; the pig is soft pale pink marzipan with a curly tail, a candy-cane striped saddle cloth and a mint #7fd6b5 bow; simple shapes; the hooves are the lowest thing.",
+      "negative": "horse, knife, purple, brown pig, mud"
+    },
+    {
+      "id": "nutcracker-portrait-a",
+      "concept": "NUTCRACKER PORTRAIT",
+      "width": 48,
+      "height": 48,
+      "seed": 113111,
+      "fragments": ["style", "camera-portrait", "class-portrait"],
+      "options": "@portrait",
+      "subject": "Subject: Nutcracker portrait, head and shoulders of a chunky cute toy-soldier nutcracker captain with a painted wooden face: rosy cheeks, big friendly eyes, a big square jaw with white teeth, a white curly beard, a very tall black shako hat with a gold-yellow star and a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging and gold epaulettes.",
+      "negative": "rocking horse, horse, purple, visor"
+    },
+    {
+      "id": "confectioner-portrait-a",
+      "concept": "CONFECTIONER PORTRAIT",
+      "width": 48,
+      "height": 48,
+      "seed": 113211,
+      "fragments": ["style", "camera-portrait", "class-portrait"],
+      "options": "@portrait",
+      "subject": "Subject: Confectioner portrait, head and shoulders of a chunky cute sweet old granny baker: a rosy smiling wrinkled face, round spectacles, white hair in a bun under a white frilly mob cap with a pink #e2589b ribbon, a strawberry pink #e2589b dress with a white frilly icing apron bib, the bowl of a giant wooden spoon dripping pink frosting held beside her face.",
+      "negative": "pig, horse, purple, knife"
+    },
+    {
+      "id": "nutcracker-b",
+      "concept": "NUTCRACKER",
+      "width": 72,
+      "height": 88,
+      "seed": 113102,
+      "options": "@piece",
+      "subject": "Subject: Nutcracker, a chunky cute toy-soldier nutcracker with a huge round painted wooden head riding a candy-striped rocking horse seen from the front-right, filling the whole width: big friendly eyes, rosy cheeks, a wide grin of big square white teeth, a white moustache, a tall black shako hat with a gold-yellow star and a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging, a red-and-white striped candy-cane sabre raised; the rocking horse is icing white #fff4ec with red stripes and a pink mane, on curved red-and-white rockers; the rockers are the lowest thing.",
+      "negative": "real horse, gun, purple, long beard, top hat",
+      "notes": "nutcracker-a#0: small face hidden by a long white beard (reads a little as Santa) and a top hat rather than a shako; this take asks for a bigger face, a moustache and a shako."
+    },
+    {
+      "id": "nutcracker-c",
+      "concept": "NUTCRACKER",
+      "width": 72,
+      "height": 88,
+      "seed": 113103,
+      "options": "@piece",
+      "subject": "Subject: Nutcracker, a chunky cute toy-soldier nutcracker captain with a huge round painted wooden head riding a candy-striped rocking horse seen from the front-right, filling the whole width: a big pale face with big friendly eyes, rosy cheeks, a big square jaw with white teeth, white whiskers, a very tall black shako hat with a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging, a red-and-white striped candy-cane sabre raised; the rocking horse is icing white #fff4ec with red stripes and a pink mane, on curved red-and-white rockers; the rockers are the lowest thing.",
+      "negative": "real horse, gun, purple, orange face",
+      "notes": "Same design as nutcracker-a with a bigger face; nutcracker-b came back with an orange pumpkin-like scowling head."
     }
   ],
   "outputs": [
@@ -175,6 +239,10 @@
     { "path": "public/assets/units/hero-warlord.png", "from": "warlord-a#0", "width": 72, "height": 88 },
     { "path": "public/assets/portraits/hero-warlord.png", "from": "warlord-portrait-a#0", "width": 48, "height": 48 },
     { "path": "public/assets/units/hero-weatherwitch.png", "from": "weatherwitch-a#0", "width": 72, "height": 88 },
-    { "path": "public/assets/portraits/hero-weatherwitch.png", "from": "weatherwitch-portrait-a#0", "width": 48, "height": 48 }
+    { "path": "public/assets/portraits/hero-weatherwitch.png", "from": "weatherwitch-portrait-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/units/hero-nutcracker.png", "from": "nutcracker-a#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/hero-nutcracker.png", "from": "nutcracker-portrait-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/units/hero-confectioner.png", "from": "confectioner-a#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/hero-confectioner.png", "from": "confectioner-portrait-a#0", "width": 48, "height": 48 }
   ]
 }

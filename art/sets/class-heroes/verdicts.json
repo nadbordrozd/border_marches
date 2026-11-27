@@ -68,5 +68,35 @@
     "verdict": "ACCEPTED",
     "notes": "Weatherwitch portrait: lime goblin crone with white hair under a tin pot hat with a sparking lightning rod and a shawl (orange-yellow rather than hazard yellow, and violet irises; accepted, both small); matches the map sprite; reads at 48 px",
     "at": "2026-11-24T23:08:40.923Z"
+  },
+  "nutcracker-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Nutcracker: toy-soldier nutcracker with white whiskers and rosy painted wooden face under a tall black shako with a gold cord and pink plume, candy-cane red coat with gold epaulettes, candy-cane raised, on an icing-white rocking horse with red stripes, pink mane and candy-cane rockers; faces south-east; the rockers are the lowest thing; face smaller than the Knight Errant's but the shako, whiskers and rocking horse read at 1:1 on light and dark",
+    "at": "2026-11-26T23:59:35.693Z"
+  },
+  "nutcracker-b#0": {
+    "verdict": "REJECTED",
+    "notes": "orange pumpkin-like scowling head, not a painted nutcracker face and not cute; muddled stripes on the horse",
+    "at": "2026-11-26T23:59:35.741Z"
+  },
+  "nutcracker-c#0": {
+    "verdict": "REJECTED",
+    "notes": "faces south-west (horse head to the left), against the south-east facing rule; would need a mirror, which is forbidden",
+    "at": "2026-11-26T23:59:35.789Z"
+  },
+  "confectioner-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Confectioner: rosy granny baker with round spectacles and a white bun under a frilly mob cap with a pink ribbon, strawberry pink dress and white frilly apron with a candy-cane hem, giant wooden spoon dripping pink frosting raised, on a plump pink marzipan pig with a curly tail and a mint bow; faces south-east; hooves lowest; as cute as the Enchanter",
+    "at": "2026-11-26T23:59:35.838Z"
+  },
+  "nutcracker-portrait-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Nutcracker portrait: painted wooden face with rosy cheeks, square jaw and white whiskers under a tall black shako with a gold star and pink plume, red coat with gold epaulettes; matches the map sprite; head fills the square; reads at 48 px on light and dark",
+    "at": "2026-11-26T23:59:35.889Z"
+  },
+  "confectioner-portrait-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Confectioner portrait: rosy granny with round spectacles under a frilly white mob cap with a pink ribbon, pink dress and white apron, wooden spoon with a bowl of batter; matches the map sprite; reads at 48 px on light and dark",
+    "at": "2026-11-26T23:59:35.939Z"
   }
 }

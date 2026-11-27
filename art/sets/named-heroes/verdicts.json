@@ -153,5 +153,70 @@
     "verdict": "ACCEPTED",
     "notes": "Grukk Manyteeth: lime goblin with a huge grin of many crooked teeth under the spiked hazard yellow tin helmet, fur cape and a necklace of teeth; the mouth makes him distinct from the Warlord; reads at 48 px on light and dark",
     "at": "2026-11-24T23:54:01.821Z"
+  },
+  "kernel-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Captain Kernel Crackwell: young nutcracker captain with a curled black moustache and rosy wooden face under a tall black shako with a peppermint-check band and pink plume, candy-cane red coat with white frogging and gold epaulettes; Nutcracker costume kept; the candy-cane bow did not come (accepted, the moustache and hat band carry him); reads at 48 px",
+    "at": "2026-11-27T00:04:38.323Z"
+  },
+  "brittle-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Dame Brittle Hazelby: lady nutcracker with two brown braids and a proud open grin under a tall black shako with a pink plume and an amber badge, red coat with white frogging; Nutcracker costume kept; the gummy bear on her shoulder did not come (accepted, the braids carry her); reads at 48 px",
+    "at": "2026-11-27T00:04:38.372Z"
+  },
+  "walnut-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Major Walnut Thumps: stout old nutcracker major with a big brown walnut in his jaw, white whiskers and a gold monocle under a tall shako with a gold star, red coat with big gold epaulettes; busy but every part reads at 48 px",
+    "at": "2026-11-27T00:04:38.421Z"
+  },
+  "humbug-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Corporal Humbug: squat scowling nutcracker corporal with a black brush moustache and a gold coin clamped in his jaw under a short cream-and-brown striped humbug cap, red coat with white frogging; distinct from the other three by the short cap",
+    "at": "2026-11-27T00:04:38.471Z"
+  },
+  "treacle-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Old Mother Treacle: wrinkled granny with grey hair under a big frilly mob cap with a pink ribbon, pink shawl and white apron, a ladle dripping golden treacle; Confectioner costume kept; no spectacles, so distinct from the class portrait; reads at 48 px",
+    "at": "2026-11-27T00:04:38.521Z"
+  },
+  "praline-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a small whole figure down to the skirt; face small at 48 px (fixed by the bust edit)",
+    "at": "2026-11-27T00:04:38.570Z"
+  },
+  "fondant-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a small whole figure with legs and stray lines at the left edge (fixed by the bust edit)",
+    "at": "2026-11-27T00:04:38.621Z"
+  },
+  "gingersnap-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a young ginger-haired girl, not a granny, and a small whole figure",
+    "at": "2026-11-27T00:04:38.674Z"
+  },
+  "praline-a-bust#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Madame Praline: bust after the zoom edit: tall glossy praline-brown beehive with a white cap and pink bow, beauty mark, pink dress, small gold bell beside her face; Confectioner costume colours; reads at 48 px",
+    "at": "2026-11-27T00:04:38.728Z"
+  },
+  "praline-a-bust#1": {
+    "verdict": "REJECTED",
+    "notes": "near-identical to #0; #0 kept",
+    "at": "2026-11-27T00:04:38.780Z"
+  },
+  "fondant-a-bust#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Auntie Fondant: bust after the zoom edit: beaming plump aunt with mint curls in curlers under a frilly mob cap with a pink ribbon, pink dress and white apron, a brass egg-timer hourglass (her Clock specialty); clean edges; reads at 48 px",
+    "at": "2026-11-27T00:04:38.833Z"
+  },
+  "fondant-a-bust#1": {
+    "verdict": "REJECTED",
+    "notes": "near-identical to #0; #0 kept",
+    "at": "2026-11-27T00:04:38.885Z"
+  },
+  "gingersnap-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Granny Gingersnap: very old granny with a big nose, big round spectacles and faded sandy hair under a frilly mob cap with a pink ribbon, gingerbread-brown shawl over a pink dress, holding a gingerbread man (her specialty); distinct from the Confectioner and Treacle by the shawl, hair and cookie; reads at 48 px",
+    "at": "2026-11-27T00:04:38.938Z"
   }
 }

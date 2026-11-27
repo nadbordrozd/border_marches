@@ -3,7 +3,7 @@
   "bead": "border_marches-bzc.29",
   "class": "units",
   "exploration": false,
-  "_doc": "48x48 portraits of the 24 named heroes (FACTION_HUMANS, FACTION_UNDEAD and FACTION_GOBLINS section 8; NAMED_HEROES in src/data/classes.ts). Same endpoint, layers and options as the class portraits of class-heroes (bzc.14): each hero keeps the class costume and colours of its class portrait and differs as a person (face, hair, age, one accessory from the name or specialty). No faction layer (the 2000-character cap); colours in each subject. Faces south-east, never mirrored. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "_doc": "48x48 portraits of the 24 named heroes (FACTION_HUMANS, FACTION_UNDEAD and FACTION_GOBLINS section 8; NAMED_HEROES in src/data/classes.ts). Same endpoint, layers and options as the class portraits of class-heroes (bzc.14): each hero keeps the class costume and colours of its class portrait and differs as a person (face, hair, age, one accessory from the name or specialty). No faction layer (the 2000-character cap); colours in each subject. Faces south-east, never mirrored. Recipes are never edited after generation: add a new id (new seed) instead. Candy Kingdom (bead border_marches-bzc.113, docs/design/FACTION_CANDY.md section 8): the eight Candy heroes keep the Nutcracker or Confectioner costume of their class portrait (tall black shako, candy-cane red coat with white frogging and a painted wooden face; or white frilly mob cap, strawberry pink dress and white apron) and differ as persons. Ids are the distinctive first word of each name, as for the other factions: kernel, brittle, walnut, humbug, praline, treacle, fondant, gingersnap.",
   "shared": {
     "portrait": {
       "outline": "single color black outline",
@@ -260,6 +260,99 @@
       "subject": "Subject: Grukk Manyteeth portrait, head and shoulders of a chunky cute scrappy goblin warlord: bright lime green skin #86c232 with a lighter #acdc55 face, huge pointed ears, tiny beady eyes, an enormous wide open grin showing two rows of dozens of small crooked cream teeth, a shiny dented tin helmet painted bright hazard yellow #fdd20f with a tall spike, a pale sand-buff fur cape, a necklace of big cream teeth.",
       "negative": "boar, red cloth, skull, olive skin, brown helmet, leather helmet",
       "notes": "grukk-a#0: the helmet came back brown leather rather than hazard yellow and the many teeth did not read."
+    },
+    {
+      "id": "kernel-a",
+      "concept": "CAPTAIN KERNEL CRACKWELL",
+      "seed": 113301,
+      "options": "@portrait",
+      "subject": "Subject: Captain Kernel Crackwell portrait, head and shoulders of a chunky cute dashing young toy-soldier nutcracker captain with a painted wooden face: big confident eyes, rosy cheeks, a big square jaw with a bright grin of white teeth, a curled black waxed moustache, a very tall black shako hat with a red-and-white peppermint swirl rosette and a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging and gold epaulettes, a red-and-white candy-cane bow over one shoulder.",
+      "negative": "horse, purple, visor, white beard"
+    },
+    {
+      "id": "brittle-a",
+      "concept": "DAME BRITTLE HAZELBY",
+      "seed": 113302,
+      "options": "@portrait",
+      "subject": "Subject: Dame Brittle Hazelby portrait, head and shoulders of a chunky cute brave lady toy-soldier nutcracker with a painted wooden face: big determined eyes with long lashes, rosy cheeks, a big square jaw with a proud smile, two hazelnut-brown braids, a tall black shako hat with a pink #e2589b plume and an amber toffee brittle badge, a candy-cane red #e03a3e coat with white icing frogging, a small round red gummy bear sitting on her shoulder.",
+      "negative": "horse, purple, visor, beard, moustache"
+    },
+    {
+      "id": "walnut-a",
+      "concept": "MAJOR WALNUT THUMPS",
+      "seed": 113303,
+      "options": "@portrait",
+      "subject": "Subject: Major Walnut Thumps portrait, head and shoulders of a chunky cute stout old toy-soldier nutcracker major with a painted wooden face: a huge square underbite jaw cracking a big brown walnut between its white teeth, bushy white eyebrows, big white mutton-chop sideburns, a gold monocle, a very tall black shako hat with a gold-yellow star and a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging and big gold epaulettes.",
+      "negative": "horse, purple, visor"
+    },
+    {
+      "id": "humbug-a",
+      "concept": "CORPORAL HUMBUG",
+      "seed": 113304,
+      "options": "@portrait",
+      "subject": "Subject: Corporal Humbug portrait, head and shoulders of a chunky cute grumpy little toy-soldier nutcracker corporal with a painted wooden face: a sour frown, narrowed eyes, a big square jaw clamping a shiny gold coin between white teeth, a short black brush moustache, a short squat cap striped in cream and dark brown like a humbug sweet, a candy-cane red #e03a3e coat with white icing frogging and two gold corporal stripes on the sleeve.",
+      "negative": "horse, purple, visor, tall hat, plume"
+    },
+    {
+      "id": "praline-a",
+      "concept": "MADAME PRALINE",
+      "seed": 113305,
+      "options": "@portrait",
+      "subject": "Subject: Madame Praline portrait, head and shoulders of a chunky cute elegant middle-aged pastry chef lady: a sly charming smile, half-closed eyes, a beauty mark, a tall glossy praline-brown beehive hairdo with a small white frilly cap and a pink #e2589b bow, pearl earrings, a strawberry pink #e2589b dress with a white frilly icing apron bib, a small gold dinner bell held up beside her face.",
+      "negative": "pig, horse, purple, knife, spectacles"
+    },
+    {
+      "id": "treacle-a",
+      "concept": "OLD MOTHER TREACLE",
+      "seed": 113306,
+      "options": "@portrait",
+      "subject": "Subject: Old Mother Treacle portrait, head and shoulders of a chunky cute very old round granny cook: a kindly wrinkled face with a toothless smile, tiny squinting eyes, a hairy chin mole, grey hair in a bun under a big white frilly mob cap with a pink #e2589b ribbon, a strawberry pink #e2589b shawl over a white frilly apron, a big ladle dripping thick golden-brown treacle held beside her face.",
+      "negative": "pig, horse, purple, knife, spectacles"
+    },
+    {
+      "id": "fondant-a",
+      "concept": "AUNTIE FONDANT",
+      "seed": 113307,
+      "options": "@portrait",
+      "subject": "Subject: Auntie Fondant portrait, head and shoulders of a chunky cute plump cheerful middle-aged aunt baker: a big beaming smile, pink round cheeks, curly pastel mint #7fd6b5 hair in curlers under a white frilly mob cap with a pink #e2589b ribbon, a strawberry pink #e2589b dress with a white frilly icing apron bib, a brass kitchen egg-timer hourglass held up beside her face.",
+      "negative": "pig, horse, purple, knife, spectacles"
+    },
+    {
+      "id": "gingersnap-a",
+      "concept": "GRANNY GINGERSNAP",
+      "seed": 113308,
+      "options": "@portrait",
+      "subject": "Subject: Granny Gingersnap portrait, head and shoulders of a chunky cute tiny wrinkly old grandmother baker: a sweet crinkly smile, big round spectacles, ginger-red curly hair streaked with white under a white frilly mob cap with a pink #e2589b ribbon, a strawberry pink #e2589b dress with a white frilly icing apron bib, a gingerbread man cookie #b86b34 with white icing held up beside her face.",
+      "negative": "pig, horse, purple, knife"
+    },
+    {
+      "id": "praline-a-bust",
+      "concept": "MADAME PRALINE",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "seed": 113315,
+      "edit": { "take": "praline-a#0" },
+      "subject": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the tall glossy praline-brown beehive hair with the small white cap and pink bow, her charming face with a beauty mark, the small gold bell beside her face, the pink dress and white apron bib at the bottom edge. Keep the colours, the thick black outline and the art style exactly the same.",
+      "notes": "praline-a#0 came back as a small whole figure down to the skirt (LESSONS 4.1 portrait fix, as knight-errant-portrait-a-bust)."
+    },
+    {
+      "id": "fondant-a-bust",
+      "concept": "AUNTIE FONDANT",
+      "endpoint": "edit-image-pixen",
+      "fragments": [],
+      "seed": 113317,
+      "edit": { "take": "fondant-a#0" },
+      "subject": "Zoom in to a close-up portrait: redraw it as only the head and the top of the shoulders, twice as big, filling the square: the curly mint hair in curlers under the white frilly mob cap with the pink ribbon, her big beaming face with pink cheeks, the brass egg-timer hourglass beside her face, the pink dress and white apron bib at the bottom edge. Nothing else. Keep the colours, the thick black outline and the art style exactly the same.",
+      "notes": "fondant-a#0 came back as a small whole figure with legs and stray lines at the left edge."
+    },
+    {
+      "id": "gingersnap-b",
+      "concept": "GRANNY GINGERSNAP",
+      "seed": 113318,
+      "options": "@portrait",
+      "subject": "Subject: Granny Gingersnap portrait, close-up of the head and shoulders only of a chunky cute tiny very old grandmother baker: a deeply wrinkled sweet smiling face, a big round nose, big round spectacles, faded ginger hair mostly turned white in a small bun under a white frilly mob cap with a pink #e2589b ribbon, a gingerbread-brown #b86b34 knitted shawl over a strawberry pink #e2589b dress, a gingerbread man cookie with white icing held up beside her face.",
+      "negative": "pig, horse, purple, knife, young girl, legs, skirt",
+      "notes": "gingersnap-a#0 came back as a young ginger-haired girl, a small whole figure; this take asks for an old face and a close-up."
     }
   ],
   "outputs": [
@@ -406,6 +499,14 @@
       "from": "pim-a#0",
       "width": 48,
       "height": 48
-    }
+    },
+    { "path": "public/assets/portraits/named-kernel.png", "from": "kernel-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-brittle.png", "from": "brittle-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-walnut.png", "from": "walnut-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-humbug.png", "from": "humbug-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-praline.png", "from": "praline-a-bust#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-treacle.png", "from": "treacle-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-fondant.png", "from": "fondant-a-bust#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-gingersnap.png", "from": "gingersnap-b#0", "width": 48, "height": 48 }
   ]
 }

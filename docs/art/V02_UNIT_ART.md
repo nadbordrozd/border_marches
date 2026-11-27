@@ -57,6 +57,8 @@ reads as a creature stack (72x88, like the Chieftain):
 | `mortician` | `hero-mortician` | grey donkey with a funeral plume |
 | `warlord` | `hero-warlord` | war boar |
 | `weatherwitch` | `hero-weatherwitch` | shaggy goat |
+| `nutcracker` | `hero-nutcracker` | candy-striped rocking horse (Candy Kingdom, bead `border_marches-bzc.113`) |
+| `confectioner` | `hero-confectioner` | marzipan pig (Candy Kingdom, bead `border_marches-bzc.113`) |
 
 Each class has a generated 48x48 bust (`portrait-hero-<class>`).
 
@@ -83,6 +85,37 @@ of its bottom bar (`BattleHero` carries `defId` and `heroClass` for this).
 Accepted with small notes in `verdicts.json`: Agatha has a pale vampire
 face rather than the class skull (her Vampire specialty), Olga's skin is a
 darker lime, Pim's shawl is brown.
+
+## Candy Kingdom heroes (bead `border_marches-bzc.113`)
+
+The two Candy classes of [FACTION_CANDY.md](../design/FACTION_CANDY.md)
+sections 7 and 10 were added to `class-heroes` with the same endpoint,
+layers, options and sizes as the six v0.2 classes, in the Candy palette of
+section 10.1: the Nutcracker, a toy-soldier nutcracker with white whiskers
+under a tall black shako with a pink plume, in a candy-cane red coat,
+holding a candy cane, on an icing-white rocking horse with red stripes and
+candy-cane rockers; the Confectioner, a granny baker in a frilly mob cap,
+round spectacles, pink dress and white apron, with a giant wooden spoon
+dripping pink frosting, on a pink marzipan pig. Each has its 48x48 bust.
+
+The eight Candy named heroes (section 8) have their own busts in
+`named-heroes`, keeping the class costume. Their ids are the distinctive
+first word of each name, as for the other factions: `kernel` (Captain Kernel
+Crackwell: curled black moustache, peppermint hat band), `brittle` (Dame
+Brittle Hazelby: two braids), `walnut` (Major Walnut Thumps: a walnut in his
+jaw, monocle), `humbug` (Corporal Humbug: striped humbug cap, a gold coin in
+his jaw), `praline` (Madame Praline: praline-brown beehive, gold bell),
+`treacle` (Old Mother Treacle: a ladle dripping treacle), `fondant` (Auntie
+Fondant: mint curls, egg-timer hourglass) and `gingersnap` (Granny
+Gingersnap: big spectacles, gingerbread man). Praline and Fondant got the
+LESSONS 4.1 zoom edit; Gingersnap was re-rolled (the first take was a young
+girl); the Nutcracker sprite's second take was rejected for a pumpkin-like
+head and the third for facing south-west. Registered in
+`src/assets/v02-units.ts` (`HERO_ROWS`, `NAMED_HERO_ROWS`, faction `candy`),
+`src/assets/unit-art.ts` (`HERO_CLASS_ART`) and `src/assets/unit-tops.ts`.
+Review sheets: `.orchestration/screens/bzc113/` in the bead's worktree
+(`lineup-snow.png` and `lineup-grass.png` beside the other mounted heroes,
+`candy-portraits.png` beside existing busts, `takes-*.png` every take).
 
 ## Portraits
 

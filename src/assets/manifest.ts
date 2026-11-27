@@ -108,7 +108,8 @@ export function assetUrl(asset: Pick<ImageAsset, "path">, base = "/"): string {
 
 // ------------------------------------------------------------------ units
 
-export type ArtFaction = "dinosaur" | "human" | "goblin" | "undead" | "martian";
+export type ArtFaction =
+  "dinosaur" | "human" | "goblin" | "undead" | "martian" | "candy";
 export type UnitArtFaction = ArtFaction | "neutral";
 /** Pulp Wars canvas classes: 56x80, 72x88, 88x(72..104). */
 export type UnitSizeClass = "standard" | "large" | "giant";
@@ -412,7 +413,7 @@ export const HERO_ASSETS: readonly UnitAsset[] = [
     { x: 36, y: 48 },
     { contactY: 86, footLeft: 36, footRight: 47, baseLeft: 18, baseRight: 62 },
   ),
-  // The six v0.2 hero classes, mounted (bead bzc.14).
+  // The v0.2 hero classes, mounted (beads bzc.14 and, Candy, bzc.113).
   ...V02_HERO_ASSETS,
 ];
 
@@ -420,7 +421,7 @@ export const PORTRAIT_ASSETS: readonly PortraitAsset[] = [
   ...[...UNIT_ASSETS, ...HERO_ASSETS].map((asset) =>
     portrait(asset.key, 48, 48),
   ),
-  // The 24 named heroes' own portraits (bead bzc.29).
+  // The named heroes' own portraits (beads bzc.29 and, Candy, bzc.113).
   ...NAMED_HERO_PORTRAITS,
 ];
 

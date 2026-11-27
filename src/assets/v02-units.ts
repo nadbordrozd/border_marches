@@ -116,14 +116,18 @@ const HERO_ROWS: readonly Row[] = [
   ["hero-mortician", "undead", 72, 88, [86, 33, 44, 18, 62]],
   ["hero-warlord", "goblin", 72, 88, [86, 15, 55, 14, 65]],
   ["hero-weatherwitch", "goblin", 72, 88, [84, 39, 52, 20, 58]],
+  // The Candy Kingdom (bead bzc.113): on a rocking horse and a marzipan pig.
+  ["hero-nutcracker", "candy", 72, 88, [86, 28, 45, 17, 59]],
+  ["hero-confectioner", "candy", 72, 88, [86, 33, 53, 8, 61]],
 ];
 
 export const V02_UNIT_ASSETS: readonly UnitAsset[] = UNIT_ROWS.map(toAsset);
 export const V02_HERO_ASSETS: readonly UnitAsset[] = HERO_ROWS.map(toAsset);
 
 /**
- * The 24 named heroes' own 48x48 portraits (set named-heroes, bead
- * border_marches-bzc.29): [named hero id, its class's map sprite key]. Each
+ * The named heroes' own 48x48 portraits (set named-heroes, beads
+ * border_marches-bzc.29 and, Candy, bzc.113): [named hero id, its class's
+ * map sprite key]. Each
  * keeps its class costume and is drawn as its own person; look them up with
  * `namedHeroPortrait` in unit-art.ts.
  */
@@ -155,6 +159,15 @@ const NAMED_HERO_ROWS: readonly (readonly [heroId: string, unit: string])[] = [
   ["zizzik", "hero-weatherwitch"],
   ["snagga", "hero-weatherwitch"],
   ["pim", "hero-weatherwitch"],
+  // The Candy Kingdom (bead bzc.113; ids from FACTION_CANDY.md section 8).
+  ["kernel", "hero-nutcracker"],
+  ["brittle", "hero-nutcracker"],
+  ["walnut", "hero-nutcracker"],
+  ["humbug", "hero-nutcracker"],
+  ["praline", "hero-confectioner"],
+  ["treacle", "hero-confectioner"],
+  ["fondant", "hero-confectioner"],
+  ["gingersnap", "hero-confectioner"],
 ];
 
 /** Portrait key of a named hero's own portrait. */

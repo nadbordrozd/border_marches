@@ -84,6 +84,9 @@ export const HERO_CLASS_ART: Readonly<Record<string, string>> = {
   mortician: "hero-mortician",
   warlord: "hero-warlord",
   weatherwitch: "hero-weatherwitch",
+  // The Candy Kingdom (FACTION_CANDY.md section 10.2, bead bzc.113).
+  nutcracker: "hero-nutcracker",
+  confectioner: "hero-confectioner",
 };
 
 /** Drawn for a creature id with no art: a featureless shadow spirit. */

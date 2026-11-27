@@ -647,5 +647,315 @@
         "height": 48
       }
     ]
+  },
+  "nutcracker-a": {
+    "id": "nutcracker-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-0d28ae92-af37-4893-afe5-fc57b1a4c1bd",
+    "submittedAt": "2026-11-26T23:55:27.956Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Nutcracker, a chunky cute toy-soldier nutcracker captain with a huge round painted wooden head riding a candy-striped rocking horse seen from the front-right, rider and horse filling the whole width of the image: rosy cheeks, a big square jaw with white teeth, a white curly beard, a very tall black shako hat with a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging, a red-and-white striped candy-cane sabre raised; the rocking horse is icing white #fff4ec with red stripes and a pink mane, on curved red-and-white rockers; the rockers are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 113101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Nutcracker, a chunky cute toy-soldier nutcracker captain with a huge round painted wooden head riding a candy-striped rocking horse seen from the front-right, rider and horse filling the whole width of the image: rosy cheeks, a big square jaw with white teeth, a white curly beard, a very tall black shako hat with a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging, a red-and-white striped candy-cane sabre raised; the rocking horse is icing white #fff4ec with red stripes and a pink mane, on curved red-and-white rockers; the rockers are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, real horse, gun, brown horse, purple."
+    },
+    "at": "2026-11-26T23:55:27.960Z",
+    "usageUsd": 0.00811183958583408,
+    "candidates": [
+      {
+        "file": "nutcracker-a-0.png",
+        "sha256": "be0f272020e69cb18fc3edadc82ab41bd441baad5247e809ade951a16c437e96",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "confectioner-a": {
+    "id": "confectioner-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-c77e5c59-44ed-4bfe-9b66-bea48fefda41",
+    "submittedAt": "2026-11-26T23:56:12.333Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Confectioner, a chunky cute sweet old granny baker with a huge round head riding a plump marzipan pig seen from the front-right, rider and pig filling the whole width of the image: a rosy smiling wrinkled face, round spectacles, white hair in a bun under a white frilly mob cap with a pink #e2589b ribbon, a strawberry pink #e2589b dress, a white frilly icing apron with a red #e03a3e hem, a giant wooden spoon dripping pink frosting raised high; the pig is soft pale pink marzipan with a curly tail, a candy-cane striped saddle cloth and a mint #7fd6b5 bow; simple shapes; the hooves are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 113201,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Confectioner, a chunky cute sweet old granny baker with a huge round head riding a plump marzipan pig seen from the front-right, rider and pig filling the whole width of the image: a rosy smiling wrinkled face, round spectacles, white hair in a bun under a white frilly mob cap with a pink #e2589b ribbon, a strawberry pink #e2589b dress, a white frilly icing apron with a red #e03a3e hem, a giant wooden spoon dripping pink frosting raised high; the pig is soft pale pink marzipan with a curly tail, a candy-cane striped saddle cloth and a mint #7fd6b5 bow; simple shapes; the hooves are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, horse, knife, purple, brown pig, mud."
+    },
+    "at": "2026-11-26T23:56:12.335Z",
+    "usageUsd": 0.009688903994030423,
+    "candidates": [
+      {
+        "file": "confectioner-a-0.png",
+        "sha256": "467904ce08680926fd37a5c6e5a6b4d23b791f48b4a0984d79947ecd8970d8f8",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "nutcracker-portrait-a": {
+    "id": "nutcracker-portrait-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-7b8d11f2-09b1-471a-8e68-d24fb64d221a",
+    "submittedAt": "2026-11-26T23:56:31.202Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Nutcracker portrait, head and shoulders of a chunky cute toy-soldier nutcracker captain with a painted wooden face: rosy cheeks, big friendly eyes, a big square jaw with white teeth, a white curly beard, a very tall black shako hat with a gold-yellow star and a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging and gold epaulettes."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 113111,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Nutcracker portrait, head and shoulders of a chunky cute toy-soldier nutcracker captain with a painted wooden face: rosy cheeks, big friendly eyes, a big square jaw with white teeth, a white curly beard, a very tall black shako hat with a gold-yellow star and a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging and gold epaulettes. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, rocking horse, horse, purple, visor."
+    },
+    "at": "2026-11-26T23:56:31.204Z",
+    "usageUsd": 0.006904548486073812,
+    "candidates": [
+      {
+        "file": "nutcracker-portrait-a-0.png",
+        "sha256": "7714f10aef10b810225a412577fc7035310ca653890b205cf53d3e5fc1ef8468",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "nutcracker-b": {
+    "id": "nutcracker-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-cc913829-bb70-4620-afcb-dc74adada59f",
+    "submittedAt": "2026-11-26T23:57:38.154Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Nutcracker, a chunky cute toy-soldier nutcracker with a huge round painted wooden head riding a candy-striped rocking horse seen from the front-right, filling the whole width: big friendly eyes, rosy cheeks, a wide grin of big square white teeth, a white moustache, a tall black shako hat with a gold-yellow star and a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging, a red-and-white striped candy-cane sabre raised; the rocking horse is icing white #fff4ec with red stripes and a pink mane, on curved red-and-white rockers; the rockers are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 113102,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Nutcracker, a chunky cute toy-soldier nutcracker with a huge round painted wooden head riding a candy-striped rocking horse seen from the front-right, filling the whole width: big friendly eyes, rosy cheeks, a wide grin of big square white teeth, a white moustache, a tall black shako hat with a gold-yellow star and a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging, a red-and-white striped candy-cane sabre raised; the rocking horse is icing white #fff4ec with red stripes and a pink mane, on curved red-and-white rockers; the rockers are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, real horse, gun, purple, long beard, top hat."
+    },
+    "at": "2026-11-26T23:57:38.156Z",
+    "usageUsd": 0.008386850065655179,
+    "candidates": [
+      {
+        "file": "nutcracker-b-0.png",
+        "sha256": "b5cf856aeba4a4ceb1e0a0579128b51f1bfb222724e87374fd876cdcd816977a",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "confectioner-portrait-a": {
+    "id": "confectioner-portrait-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-ee8dec65-371d-4698-9e2c-a42d2be97a38",
+    "submittedAt": "2026-11-26T23:57:55.617Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Confectioner portrait, head and shoulders of a chunky cute sweet old granny baker: a rosy smiling wrinkled face, round spectacles, white hair in a bun under a white frilly mob cap with a pink #e2589b ribbon, a strawberry pink #e2589b dress with a white frilly icing apron bib, the bowl of a giant wooden spoon dripping pink frosting held beside her face."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 113211,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Confectioner portrait, head and shoulders of a chunky cute sweet old granny baker: a rosy smiling wrinkled face, round spectacles, white hair in a bun under a white frilly mob cap with a pink #e2589b ribbon, a strawberry pink #e2589b dress with a white frilly icing apron bib, the bowl of a giant wooden spoon dripping pink frosting held beside her face. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, pig, horse, purple, knife."
+    },
+    "at": "2026-11-26T23:57:55.618Z",
+    "usageUsd": 0.00675495711962382,
+    "candidates": [
+      {
+        "file": "confectioner-portrait-a-0.png",
+        "sha256": "5939ca78ec2a97bb3747cdd25c2308dd04b43ff03832cfee51631e8af0f71adb",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "nutcracker-c": {
+    "id": "nutcracker-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-56f154d6-a690-441a-a715-14831a53fdc8",
+    "submittedAt": "2026-11-26T23:58:57.171Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Nutcracker, a chunky cute toy-soldier nutcracker captain with a huge round painted wooden head riding a candy-striped rocking horse seen from the front-right, filling the whole width: a big pale face with big friendly eyes, rosy cheeks, a big square jaw with white teeth, white whiskers, a very tall black shako hat with a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging, a red-and-white striped candy-cane sabre raised; the rocking horse is icing white #fff4ec with red stripes and a pink mane, on curved red-and-white rockers; the rockers are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 113103,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Nutcracker, a chunky cute toy-soldier nutcracker captain with a huge round painted wooden head riding a candy-striped rocking horse seen from the front-right, filling the whole width: a big pale face with big friendly eyes, rosy cheeks, a big square jaw with white teeth, white whiskers, a very tall black shako hat with a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging, a red-and-white striped candy-cane sabre raised; the rocking horse is icing white #fff4ec with red stripes and a pink mane, on curved red-and-white rockers; the rockers are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, real horse, gun, purple, orange face."
+    },
+    "at": "2026-11-26T23:58:57.173Z",
+    "usageUsd": 0.009403136518266467,
+    "candidates": [
+      {
+        "file": "nutcracker-c-0.png",
+        "sha256": "e1b6b076ff405c9a7a8265134d8b43e2e080c1b7c3c673edecfa91aba0eb68dc",
+        "width": 72,
+        "height": 88
+      }
+    ]
   }
 }
