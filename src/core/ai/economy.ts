@@ -63,6 +63,59 @@ export interface BuildPlan {
   magic?: boolean;
   /** Play the faction's first-week opening (default true). */
   opening?: boolean;
+  /**
+   * Naval maps (NAVAL 12, bead bzc.156): where and how early the harbour
+   * is built. Absent (every dry map): the harbour stays out of the order.
+   */
+  harbour?: HarbourPlan;
+}
+
+/** The naval part of a player's build plan (NAVAL 12, bead bzc.156). */
+export interface HarbourPlan {
+  /** The player's towns with a dock: only these build a harbour. */
+  readonly docks: ReadonlySet<string>;
+  /**
+   * An Inland Sea or Islands map (water a fifth of the map or more): ships
+   * are the way to the middle, so the Shipyard ranks with the Marketplace.
+   * On a Coast map every zone is reachable on foot and it comes late.
+   */
+  readonly seaward: boolean;
+  /** Ships the player owns: the Lighthouse comes after the first. */
+  readonly ships: number;
+}
+
+/**
+ * Build-order ranks of the harbour (NAVAL 12): the Shipyard with the
+ * Marketplace on a seaward map, else late; the Lighthouse soon after the
+ * first ship (it adds 300 sea movement to every hero afloat), last without
+ * one; the Admiralty (cheaper ships, +20 deck gun) late.
+ */
+export const HARBOUR_RANK = {
+  shipyard: { seaward: 40, coast: 88 },
+  lighthouse: { ships: 64, none: 104 },
+  admiralty: 98,
+} as const;
+
+/** Water share of the map from which the Shipyard comes early. */
+export const SEAWARD_SHARE = 0.2;
+
+function harbourRank(
+  role: NonNullable<BuildingDef["harbour"]>,
+  plan: BuildPlan,
+): number {
+  const h = plan.harbour;
+  switch (role) {
+    case "shipyard":
+      return h?.seaward === true
+        ? HARBOUR_RANK.shipyard.seaward
+        : HARBOUR_RANK.shipyard.coast;
+    case "lighthouse":
+      return (h?.ships ?? 0) > 0
+        ? HARBOUR_RANK.lighthouse.ships
+        : HARBOUR_RANK.lighthouse.none;
+    case "admiralty":
+      return HARBOUR_RANK.admiralty;
+  }
 }
 
 /**
@@ -125,6 +178,7 @@ const FORT_RANK: Readonly<Record<number, number>> = { 1: 25, 2: 80, 3: 95 };
 
 /** Build-order rank of a building (lower is earlier). */
 export function buildingRank(def: BuildingDef, plan: BuildPlan = {}): number {
+  if (def.harbour !== undefined) return harbourRank(def.harbour, plan);
   if (def.hallIncome !== undefined) return def.hallIncome <= 1000 ? 10 : 33;
   if (def.dwelling !== undefined) {
     return DWELLING_RANK[getCreature(def.dwelling).tier] ?? 90;
@@ -159,8 +213,10 @@ export function buildQueue(
       (d) =>
         !d.startBuilt &&
         d.needsKeystone !== true &&
-        // The harbour (NAVAL 5.7) waits for the naval AI (bead 8).
-        d.harbour === undefined &&
+        // The harbour (NAVAL 5.7) only in a town with a dock on a naval
+        // map (bead bzc.156); never on a dry map.
+        (d.harbour === undefined ||
+          plan.harbour?.docks.has(town.id) === true) &&
         !town.buildings.includes(d.id),
     )
     .sort(

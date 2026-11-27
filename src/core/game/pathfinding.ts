@@ -460,7 +460,7 @@ export function lilyStepCost(
 }
 
 /** Whether (x, y) is a water cell (a hero on foot there is on lily pads). */
-function isWaterCell(map: GameMap, x: number, y: number): boolean {
+export function isWaterCell(map: GameMap, x: number, y: number): boolean {
   return map.cells[y * map.width + x]?.terrain === "water";
 }
 
@@ -1195,7 +1195,7 @@ export function reachableCells(
 // ------------------------------------------------------------ the sea
 
 /** Land points per sea point today (landMax / seaMax; 1 when unknown). */
-function seaToLand(nav: NavalMove): number {
+export function seaToLand(nav: NavalMove): number {
   return nav.seaMax > 0 && nav.landMax > 0 ? nav.landMax / nav.seaMax : 1;
 }
 
@@ -1204,7 +1204,7 @@ function seaToLand(nav: NavalMove): number {
  * start budget `mp0`, then landMax a day): what a day-ending landing uses
  * up. A day spent to the last point waits for the next whole day.
  */
-function restOfDay(real: number, mp0: number, landMax: number): number {
+export function restOfDay(real: number, mp0: number, landMax: number): number {
   const day = landMax > 0 ? landMax : 1;
   const left = real < mp0 ? mp0 - real : day - ((real - mp0) % day);
   return left > 0 ? left : day;

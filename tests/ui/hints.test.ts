@@ -27,6 +27,7 @@ import {
 } from "../../src/ui/hints.ts";
 import { placeTip } from "../../src/ui/tooltip.ts";
 import { getCreature } from "../../src/data/creatures.ts";
+import { STRAIT, boat, navalGame } from "../core/game/naval-helpers.ts";
 
 function fresh(): GameState {
   return structuredClone(
@@ -266,6 +267,27 @@ describe("endTurnWarnings", () => {
     const next = endTurn(s);
     if (next.ok && next.state.currentPlayer !== 0)
       expect(nextActionHint(next.state, 0, h, null)).toMatch(/other players/);
+  });
+
+  it("measures a hero afloat against its sea maximum (bead bzc.156)", () => {
+    // The STRAIT (naval-helpers): the hero aboard a boat at (7, 5).
+    const s = navalGame(STRAIT, [], [boat("b", 7, 5, 0)]);
+    const h = s.heroes[0]!;
+    h.x = 7;
+    h.y = 5;
+    h.maxMp = 1500;
+    h.seaMaxMp = 3000;
+    // 600 sea points: a quarter of the land maximum, a fifth of the sea's.
+    h.mp = 600;
+    expect(canAffordStep(s, h)).toBe(true);
+    expect(worthMovingOn(s, h)).toBe(false);
+    h.mp = 750;
+    expect(worthMovingOn(s, h)).toBe(true);
+    // A full day at sea is "not moved" at the sea maximum, not the land's.
+    h.mp = 1500;
+    expect(endTurnWarnings(s, 0)[0]?.kind).toBe("moves-left");
+    h.mp = 3000;
+    expect(endTurnWarnings(s, 0)[0]?.kind).toBe("unmoved");
   });
 });
 

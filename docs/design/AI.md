@@ -1379,3 +1379,84 @@ bead (FACTION_DWARVES 14, bead 8) measures the Deepforge with the sims.
 - Recruiting with ore, hiring, hero skills and the guild need nothing new:
   recruits pay ore from what is not kept back for a building being saved
   for, and the Artificer leans to magic.
+
+## The naval AI (bead bzc.156)
+
+Both AIs play the naval layer ([NAVAL.md](NAVAL.md) section 12). Nothing
+changes on a dry map: every naval rule is reached only through state that
+a dry game never has (`state.ships`, a field with the `sea` ground kind, a
+scheduled deck gun, the naval spells). Tests on hand-built states:
+`tests/core/ai/naval-ai.test.ts`, `tests/core/battle/naval-ai.test.ts` and
+one in `tests/ui/hints.test.ts`; 27 mutations of the new rules (each rule
+undone or turned the wrong way) were each caught by a failing test. No
+simulation was run; the naval balance bead (NAVAL 14, bead 11) measures it.
+
+### Adventure AI
+
+- **Reach over land and sea** (`reach.ts`). On a naval map the AI's reach
+  is the player's planner (`navalStepKind`, `navalStepCost`): it boards any
+  moored ship it can step onto (its own, a neutral boat, a rival's), sails,
+  lands, and crosses shallow water on Lily Road's pads when the spell is
+  on. Costs are land-equivalent points (sea points x landMax / seaMax; a
+  landing without Seafaring costs the rest of that day), so a day is
+  `maxMp` on land and at sea and every "days of travel" in the planner
+  keeps its meaning; `pathIn` replays the exact conversions for the days.
+  Wherever the planner compared a reach cost with the hero's points now it
+  uses `landPointsNow` (a hero afloat holds sea points). Sea objects and
+  banks are targets like any other (their values were already in
+  `objectValueFor`); whirlpools and ferries are still not planned as
+  travel.
+- **Buying a ship** (`buyShips`, before the town actions, and the
+  Shipwright's "ship" option). For a hero with no ship to take (no sea
+  cell in its reach) that can stand beside a Shipyard's dock within two
+  days: the planner is run again with a ship imagined on the dock
+  (`ReachOptions.moored`); the ship is bought when the best target it
+  opens, the price (1000 gold and 10 wood, 2000 in gold-equivalents)
+  spread over the days to it, scores above 1.2 times the hero's best
+  target now (`SHIP_EDGE`). Once a day per hero and dock.
+- **Harbour building** (`economy.ts HarbourPlan`). Only in a town with a
+  dock on a naval map: the Shipyard ranks 40 (with the Marketplace) when
+  the sea is a fifth of the map or more (Inland Sea, Islands), else 88;
+  the Lighthouse 64 once the player owns a ship, else last (104); the
+  Admiralty 98.
+- **Call the Boat** for a hero on a shore with no ship to take, on the
+  same test as buying (free when it calls an own ship, the price when it
+  builds one); a hero with nothing to do and the spell walks to the
+  nearest shore with free water beside it (`toShore`), so a hero left on
+  an island is never stranded. **Scuttle** sinks a rival player's moored
+  ship within a day's sail (15 cells) of one of our towns or with its
+  owner's hero beside it (`naval-ai.ts shipsToScuttle`); never our own,
+  never a neutral boat. **Fair Wind** afloat when the trip goes on at sea
+  past today. **Lily Road** as Green Road (`daySpell`): at the day's
+  start when a target reached today only over the pads scores 1.3 times
+  the best without.
+- **Islands**: the start's boat at the dock is in the hero's reach from
+  day 1, so it sails off the start island as soon as a target or unseen
+  ground across the water scores above what the island has left.
+- **Safety**: rival heroes' reach (the danger map) sails and boards too,
+  and every cell next to a reached cell is in danger, so a ship moored
+  beside a rival's shore counts as stormable.
+- `worthMovingOn` and the "has not moved" warning measure a hero afloat
+  against its sea maximum (`dailyMaxOf`), not the land one.
+
+### Battle AI
+
+- **Sea guards advance** (`seaGuardsAdvance`, weight 1). A neutral guard
+  with Swimmers on a field with sea fears no reach. Before, a Hammerhead
+  against knights on a deck kept out of their reach in the water to the
+  round limit (round 15, the battle decided by fight value); now it comes
+  aboard (that battle ends in round 3).
+- **Deck guns** in the evaluation: each scheduled gun's Harm on the
+  strongest stack fighting against its side (as the event picks it), in
+  value per HP, for and against; nothing once its side holds no living
+  stack.
+- **Tidal Wave** needs no new term: every row holding a stack is
+  rehearsed, so the hero sweeps the row with the most enemy value and
+  spares a row with its own stack in it (tested).
+- Swimmers and walkers already used their own distance tables (bead
+  bzc.153): a walker never plans into the sea, a Swimmer crosses it.
+
+**Timing** (one core, Islands M, 2 players, seeds 1-2, days 1-3, every
+decide call measured): 14-95 ms of decide calls per player turn, the
+slowest single call 40 ms; Water None M on the same seeds 18-115 ms and
+38 ms.

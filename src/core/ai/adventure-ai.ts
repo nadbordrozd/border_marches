@@ -56,9 +56,16 @@ import {
   adventureCastError,
   adventurePower,
   inMonsterSpellRange,
+  isFreeAdventureCast,
   MONSTER_SPELL_RANGE,
   towLineStops,
 } from "../magic/adventure.ts";
+import {
+  callBerths,
+  callTheBoat,
+  scuttleTargets,
+} from "../magic/naval-spells.ts";
+import { SHIP_PRICE } from "../../data/naval.ts";
 import { registerSpells } from "../magic/index.ts";
 import { adventureSpell, isAdventureSpell } from "../magic/catalog.ts";
 import { RANK_MAX_TIER } from "../battle/index.ts";
@@ -70,6 +77,8 @@ import {
   heroInTownOf,
   heroStats,
   inSight,
+  isAfloat,
+  isShoreCell,
   keysOf,
   maxMana,
   obeliskCount,
@@ -79,10 +88,13 @@ import {
   objectValueFor,
   prizeValue,
   questMissing,
+  shipBuyStatus,
+  shipPrice,
   sightRadius,
   siteOptions,
   skillWeight,
   sweetShopStock,
+  townDock,
   townsOf,
   wearError,
   type ArmySlots,
@@ -101,10 +113,15 @@ import { canCarry } from "../game/artifacts.ts";
 import { scrollCaseSize } from "../game/effects.ts";
 import { featInfo, featWeight } from "../game/hero.ts";
 import { cutsCorner, standsOn } from "../game/pathfinding.ts";
-import { pathIn, reachFor, type Reach } from "./reach.ts";
+import { landPointsNow, pathIn, reachFor, type Reach } from "./reach.ts";
+import { harbourPlan, shipsToScuttle } from "./naval-ai.ts";
 import { gateOpen, inSanctuary, playerListed } from "../game/site-state.ts";
 import { slotFor } from "../game/state.ts";
-import { drillYardOffers, drillYardPrice } from "../game/sites.ts";
+import {
+  drillYardOffers,
+  drillYardPrice,
+  shipwrightDock,
+} from "../game/sites.ts";
 import { createBattleResolver } from "../battle/resolver.ts";
 import {
   type BuildPlan,
@@ -202,6 +219,16 @@ const FINISH_TOWNS = 3;
 const DEFEND_EDGE = 1.15;
 /** Extra days added to every target (prefers fewer, bigger trips). */
 const DAY_OFFSET = 0.35;
+/**
+ * A ship is bought or called (bead bzc.156) when the best target it opens
+ * scores this much above the hero's best target without it, its price
+ * spread over the days to that target.
+ */
+const SHIP_EDGE = 1.2;
+/** The id of a ship the planner imagines at a dock or berth (shipPays). */
+const PLANNED_SHIP = "ship:planned";
+/** Gold value of one wood (CONTENT_MAP_OBJECTS 2): a ship's price. */
+const RESOURCE_VALUE_WOOD = 100;
 
 /**
  * How many days' walk from its first town a faction's main hero ranges in
@@ -553,6 +580,11 @@ export class AdventureAi implements PlayerController {
   private readonly focusOf = new Map<number, number>();
   /** Hero id -> cells it was seen on, by day (last few days). */
   private readonly trail = new Map<string, Array<[number, number, number]>>();
+  /**
+   * "<day>:<hero>:<x>,<y>:<price>" -> whether a ship moored there would
+   * pay (bead bzc.156, see shipPays); today's only.
+   */
+  private readonly shipVerdicts = new Map<string, boolean>();
 
   constructor(options: AdventureAiOptions = {}) {
     registerSpells();
@@ -591,6 +623,7 @@ export class AdventureAi implements PlayerController {
       for (const k of this.answered) {
         if (!k.startsWith(`${state.day}:`)) this.answered.delete(k);
       }
+      this.shipVerdicts.clear();
     }
     // At most a few simulated battles per decision and per turn keep a
     // turn fast (the rest get the fast estimate).
@@ -625,10 +658,12 @@ export class AdventureAi implements PlayerController {
     this.noteFutile(turn);
     return (
       this.upkeep(turn) ??
+      this.buyShips(turn) ??
       this.townActions(turn) ??
       this.ferry(turn) ??
       this.digging(turn) ??
       this.scouting(turn) ??
+      this.naval(turn) ??
       this.movement(turn) ?? { type: "end-turn" }
     );
   }
@@ -791,14 +826,23 @@ export class AdventureAi implements PlayerController {
     // A pickup taken opens its cell (bead bzc.49): the key changes too.
     const dangerKey = `${state.day}:${player}:${state.collected.length}:${enemies
       .map((h) => `${h.id}@${h.x},${h.y}:${Math.round(heroPower(h))}`)
-      .join(";")}`;
+      .join(";")}${
+      // Naval maps: a ship moved, bought or sunk changes their reach.
+      state.ships === undefined
+        ? ""
+        : `|${state.ships.map((x) => `${x.id}@${x.x},${x.y}`).join(";")}`
+    }`;
     const cached = this.dangerCache;
     const fresh = cached === null || cached.key !== dangerKey;
     const danger = fresh ? new Map<number, number>() : cached.danger;
     this.dangerCache = { key: dangerKey, danger };
     for (const foe of fresh ? enemies : []) {
       const p = heroPower(foe);
-      const r = reachFor(state, foe, Math.max(foe.maxMp, foe.mp));
+      const r = reachFor(
+        state,
+        foe,
+        Math.max(foe.maxMp, landPointsNow(state, foe)),
+      );
       for (const i of r.cost.keys()) {
         const x = i % w;
         const y = (i - x) / w;
@@ -858,6 +902,7 @@ export class AdventureAi implements PlayerController {
       plan: {
         magic: all.some((h) => leansToMagic(h)),
         opening: this.openings,
+        ...harbourPlan(state, player, towns),
       },
       ...strategy,
       gather: false,
@@ -1276,11 +1321,25 @@ export class AdventureAi implements PlayerController {
         // A Hag's Cauldron's brew: two in three bless, worth the risk.
         else if (verb === "drink") v = 300;
         // Sirens' Rock (bead bzc.151): listen while the experience is worth
-        // more than the creatures (objectValueFor weighs them). Buying a
-        // ship is the naval AI's call (NAVAL 12, bead 8): never here.
+        // more than the creatures (objectValueFor weighs them).
         else if (verb === "listen")
           v = objectValueFor(state, turn.player, obj, hero.id) > 0 ? 350 : 0;
-        else if (verb === "drill") {
+        // A Shipwright's ship (NAVAL 12, bead bzc.156): for a hero with no
+        // ship to take when one on the Shipwright's dock pays.
+        else if (verb === "ship") {
+          const dock = shipwrightDock(state, obj);
+          v =
+            dock !== null &&
+            this.landBound(turn, hero) &&
+            this.shipPays(
+              turn,
+              hero,
+              dock,
+              SHIP_PRICE.gold + SHIP_PRICE.wood * RESOURCE_VALUE_WOOD,
+            )
+              ? 700
+              : 0;
+        } else if (verb === "drill") {
           // A Drill (bead bzc.32) for the army's creatures, when the
           // treasury keeps a week of recruiting after it.
           const d = drills.find((x) => x.building === arg);
@@ -1913,11 +1972,12 @@ export class AdventureAi implements PlayerController {
     const { state } = turn;
     const w = state.map.width;
     const { cost } = this.reachOf(turn, main);
+    const mp = landPointsNow(state, main);
     const within = (x: number, y: number): boolean => {
       for (let dy = -1; dy <= 1; dy++) {
         for (let dx = -1; dx <= 1; dx++) {
           const c = cost.get((y + dy) * w + x + dx);
-          if (c !== undefined && c <= main.mp + 2 * main.maxMp) return true;
+          if (c !== undefined && c <= mp + 2 * main.maxMp) return true;
         }
       }
       return false;
@@ -1970,8 +2030,9 @@ export class AdventureAi implements PlayerController {
       const threatened = town !== undefined && turn.threatened.has(town.id);
       const held = town !== undefined && turn.held.has(town.id);
       let targets = this.targets(turn, hero, claimed);
+      const mpNow = landPointsNow(turn.state, hero);
       const roundTrip = (t: Target): boolean =>
-        t.cost * 2.2 <= hero.mp &&
+        t.cost * 2.2 <= mpNow &&
         !t.key.startsWith("home:") &&
         !t.key.startsWith("meet:") &&
         (t.battle === undefined || t.battle.kind !== "town");
@@ -1985,7 +2046,9 @@ export class AdventureAi implements PlayerController {
       const anchored = threatened || held;
       const tow = this.towLine(turn, hero, targets[0]);
       if (tow !== null) return tow;
-      const road = this.greenRoad(turn, hero, claimed, targets[0]);
+      const road =
+        this.greenRoad(turn, hero, claimed, targets[0]) ??
+        this.lilyRoad(turn, hero, claimed, targets[0]);
       if (road !== null) return road;
       let resting = false;
       let partial: GameAction | null = null;
@@ -2028,6 +2091,9 @@ export class AdventureAi implements PlayerController {
           continue;
         }
         claimed.add(t.key);
+        // Afloat, the trip going on at sea past today: Fair Wind first.
+        const wind = this.fairWind(turn, hero, steps);
+        if (wind !== null) return wind;
         if (first.day > 0 || first.cost > hero.mp) {
           // Out of movement for this target today: try a spell, else rest.
           const spell = this.borrowedDay(turn, hero, steps);
@@ -2097,6 +2163,11 @@ export class AdventureAi implements PlayerController {
         if (flee !== null) return flee;
       }
       if (!resting && partial !== null) return partial;
+      // Nothing at all to do on an island without a ship (bead bzc.156).
+      if (!resting && targets.length === 0) {
+        const shore = this.toShore(turn, hero);
+        if (shore !== null) return shore;
+      }
       // Iteration 4: nothing to do, not holding a town: a safe errand.
       if (!resting && (town === undefined || !turn.held.has(town.id))) {
         const job = this.errand(turn, hero, town);
@@ -2223,7 +2294,11 @@ export class AdventureAi implements PlayerController {
     for (const h of turn.heroes) {
       if (h === hero || heroPower(h) < need) continue;
       const c = this.reachOf(turn, h).cost.get(cell);
-      if (c !== undefined && c * 2.5 < t.cost && c <= h.mp + h.maxMp) {
+      if (
+        c !== undefined &&
+        c * 2.5 < t.cost &&
+        c <= landPointsNow(turn.state, h) + h.maxMp
+      ) {
         return true;
       }
     }
@@ -2307,8 +2382,9 @@ export class AdventureAi implements PlayerController {
     );
     let best: number | null = null;
     let bestKey = Infinity;
+    const mp = landPointsNow(turn.state, hero);
     for (const [cell, cost] of reach.cost) {
-      if (cost === 0 || cost > hero.mp) continue;
+      if (cost === 0 || cost > mp) continue;
       if (reach.ctx.guards.has(cell) || !this.safe(turn, hero, cell)) continue;
       const key = (towns.has(cell) ? 0 : 100000) + cost;
       if (key < bestKey) {
@@ -2516,7 +2592,7 @@ export class AdventureAi implements PlayerController {
       r = reachFor(
         turn.state,
         hero,
-        hero.mp + this.horizon * hero.maxMp,
+        landPointsNow(turn.state, hero) + this.horizon * hero.maxMp,
         this.pointlessStops(turn, hero),
       );
       turn.reach.set(hero.id, r);
@@ -2932,7 +3008,7 @@ export class AdventureAi implements PlayerController {
         near2town === 0 &&
         battle.townId === undefined &&
         armyFv(foe.army) < armyFv(hero.army) * 0.1 &&
-        near.cost > hero.mp
+        near.cost > landPointsNow(state, hero)
       ) {
         continue;
       }
@@ -3079,7 +3155,7 @@ export class AdventureAi implements PlayerController {
         );
         if (
           threat > 0 &&
-          cost <= hero.mp + hero.maxMp &&
+          cost <= landPointsNow(state, hero) + hero.maxMp &&
           heroPower(hero) + troops * 1.1 >= threat * 0.9
         ) {
           value += turn.threatened.has(town.id) ? 20000 : 4000;
@@ -3617,7 +3693,56 @@ export class AdventureAi implements PlayerController {
     claimed: Set<string>,
     best: Target | undefined,
   ): GameAction | null {
-    const spell = "green-road";
+    return this.daySpell(
+      turn,
+      hero,
+      claimed,
+      best,
+      "green-road",
+      { greenRoadDay: turn.state.day },
+      (cell) => cell?.obstacle === "forest",
+    );
+  }
+
+  /**
+   * Lily Road (NAVAL 7.1 and 12, bead bzc.156) at the start of a hero's
+   * day, as Green Road: when crossing shallow water on foot reaches a
+   * clearly better target today (a short crossing that needs no ship).
+   */
+  private lilyRoad(
+    turn: Turn,
+    hero: HeroState,
+    claimed: Set<string>,
+    best: Target | undefined,
+  ): GameAction | null {
+    if (turn.state.ships === undefined) return null;
+    return this.daySpell(
+      turn,
+      hero,
+      claimed,
+      best,
+      "lily-road",
+      { lilyRoadDay: turn.state.day },
+      (cell) => cell?.terrain === "water",
+    );
+  }
+
+  /**
+   * A day-long road spell (Green Road, Lily Road) at the start of a hero's
+   * day: cast when a target reached today only thanks to it, on a cell the
+   * spell does not open (`onRoad`), scores clearly above the best one
+   * without it. The planner runs on a trial state with the spell on
+   * (`flag`, the spell's day flag in the hero's magic store).
+   */
+  private daySpell(
+    turn: Turn,
+    hero: HeroState,
+    claimed: Set<string>,
+    best: Target | undefined,
+    spell: string,
+    flag: { greenRoadDay: number } | { lilyRoadDay: number },
+    onRoad: (cell: GameState["map"]["cells"][number] | undefined) => boolean,
+  ): GameAction | null {
     const { state } = turn;
     if (!hero.pages.includes(spell) || hero.mp < hero.maxMp) return null;
     const key = `${state.day}:${hero.id}:${spell}`;
@@ -3632,7 +3757,7 @@ export class AdventureAi implements PlayerController {
         ...magic,
         heroes: {
           ...magic.heroes,
-          [hero.id]: { ...store, greenRoadDay: state.day },
+          [hero.id]: { ...store, ...flag },
         },
       },
     };
@@ -3642,8 +3767,8 @@ export class AdventureAi implements PlayerController {
     const plain = this.reachOf(turn, hero).cost;
     const options = this.targets(trialTurn, hero, claimed).filter((t) => {
       const i = t.y * w + t.x;
-      // Only targets reached today, off the forest, and new thanks to it.
-      if (t.cost > hero.mp || state.map.cells[i]?.obstacle === "forest") {
+      // Only targets reached today, off the road, and new thanks to it.
+      if (t.cost > hero.mp || onRoad(state.map.cells[i])) {
         return false;
       }
       const c = plain.get(i);
@@ -3686,6 +3811,243 @@ export class AdventureAi implements PlayerController {
       }
     }
     return null;
+  }
+
+  // -------------------------------------------------------------- the sea
+
+  /**
+   * The naval spells before movement (NAVAL 12, bead bzc.156), on a naval
+   * map only: Scuttle a rival's moored ship near our towns, then Call the
+   * Boat for a hero on a shore whose best targets lie across the water.
+   */
+  private naval(turn: Turn): GameAction | null {
+    if (turn.state.ships === undefined) return null;
+    return this.scuttle(turn) ?? this.callBoat(turn);
+  }
+
+  /**
+   * Whether the hero is ashore with no ship to take (no sea cell in its
+   * reach): only then is a ship bought or called for it.
+   */
+  private landBound(turn: Turn, hero: HeroState): boolean {
+    if (isAfloat(turn.state, hero)) return false;
+    const { cost, ctx } = this.reachOf(turn, hero);
+    const sea = ctx.naval?.sea;
+    if (sea === undefined) return false;
+    for (const i of cost.keys()) if (sea[i] === 1) return false;
+    return true;
+  }
+
+  /**
+   * Whether a ship moored at `at` pays for the hero (NAVAL 12, "Buying a
+   * ship"): the planner's best target with that ship, one it cannot reach
+   * without it, scores clearly above its best target now once `price`
+   * (gold-equivalents) is spread over the days to that target. The
+   * planner's own scores (value per day of travel, fights estimated), so
+   * the walk to the dock and the sail are in the days. Once a day per
+   * hero, cell and price.
+   */
+  private shipPays(
+    turn: Turn,
+    hero: HeroState,
+    at: { x: number; y: number },
+    price: number,
+  ): boolean {
+    const key = `${turn.state.day}:${hero.id}:${at.x},${at.y}:${price}`;
+    const hit = this.shipVerdicts.get(key);
+    if (hit !== undefined) return hit;
+    const { state } = turn;
+    const w = state.map.width;
+    const plain = this.reachOf(turn, hero);
+    const trial = reachFor(
+      state,
+      hero,
+      landPointsNow(state, hero) + this.horizon * hero.maxMp,
+      this.pointlessStops(turn, hero),
+      { moored: new Map([[at.y * w + at.x, PLANNED_SHIP]]) },
+    );
+    const trialTurn: Turn = { ...turn, reach: new Map([[hero.id, trial]]) };
+    const now = this.targets(turn, hero, new Set())[0];
+    const top = this.targets(trialTurn, hero, new Set()).find((t) => {
+      const c = t.via ?? t;
+      return !plain.cost.has(c.y * w + c.x);
+    });
+    let verdict = false;
+    if (top !== undefined) {
+      const days = top.cost / Math.max(1, hero.maxMp) + DAY_OFFSET;
+      const net = top.score - price / days;
+      verdict = net > 0 && net > (now?.score ?? 0) * SHIP_EDGE;
+    }
+    this.shipVerdicts.set(key, verdict);
+    return verdict;
+  }
+
+  /**
+   * A ship bought at one of the player's Shipyards (NAVAL 12) for a hero
+   * with no ship to take that can reach the dock's shore within about two
+   * days, when the ship pays (shipPays).
+   */
+  private buyShips(turn: Turn): GameAction | null {
+    const { state } = turn;
+    if (state.ships === undefined) return null;
+    for (const town of turn.towns) {
+      if (shipBuyStatus(state, town.id) !== "ok") continue;
+      const dock = townDock(state.map, town.id);
+      if (dock === null) continue;
+      const price = shipPrice(state, town.id);
+      const worth = (price.gold ?? 0) + (price.wood ?? 0) * RESOURCE_VALUE_WOOD;
+      for (const hero of turn.heroes) {
+        if (!this.landBound(turn, hero) || !this.nearDock(turn, hero, dock)) {
+          continue;
+        }
+        if (this.shipPays(turn, hero, dock, worth)) {
+          return { type: "buy-ship", townId: town.id };
+        }
+      }
+    }
+    return null;
+  }
+
+  /** The hero can stand beside the dock within about two days. */
+  private nearDock(
+    turn: Turn,
+    hero: HeroState,
+    dock: { x: number; y: number },
+  ): boolean {
+    const { state } = turn;
+    const w = state.map.width;
+    const { cost } = this.reachOf(turn, hero);
+    const limit = landPointsNow(state, hero) + 2 * hero.maxMp;
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) {
+        if (dx === 0 && dy === 0) continue;
+        if (!inBounds(state.map, dock.x + dx, dock.y + dy)) continue;
+        const c = cost.get((dock.y + dy) * w + dock.x + dx);
+        if (c !== undefined && c <= limit) return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Call the Boat (NAVAL 7.1 and 12) for a hero on a shore with no ship to
+   * take: to the first free water beside it, when a ship there pays (a
+   * called ship of the player's costs nothing but the mana; a new one the
+   * shipyard price).
+   */
+  private callBoat(turn: Turn): GameAction | null {
+    const spell = "call-the-boat";
+    const { state } = turn;
+    for (const hero of turn.heroes) {
+      if (hero.mp <= 0) continue;
+      if (adventureCastError(state, hero, spell) !== null) continue;
+      if (!this.landBound(turn, hero)) continue;
+      const p = adventurePower(hero, spell, false);
+      const plan = callTheBoat(state, hero, p);
+      if (typeof plan === "string") continue;
+      const price =
+        plan.kind === "build"
+          ? SHIP_PRICE.gold + SHIP_PRICE.wood * RESOURCE_VALUE_WOOD
+          : 0;
+      if (!this.shipPays(turn, hero, plan, price)) continue;
+      return {
+        type: "cast",
+        heroId: hero.id,
+        spell,
+        target: { x: plan.x, y: plan.y },
+      };
+    }
+    return null;
+  }
+
+  /**
+   * Scuttle (NAVAL 12, "Denial"): a rival's moored ship within the spell's
+   * reach that lies within a day's sail of one of our towns or has its
+   * owner's hero beside it (naval-ai.ts shipsToScuttle). Never our own,
+   * never a neutral boat.
+   */
+  private scuttle(turn: Turn): GameAction | null {
+    const spell = "scuttle";
+    const { state } = turn;
+    for (const hero of turn.heroes) {
+      if (adventureCastError(state, hero, spell) !== null) continue;
+      const p = adventurePower(hero, spell, false);
+      const ship = shipsToScuttle(
+        state,
+        turn.player,
+        scuttleTargets(state, hero, p),
+      )[0];
+      if (ship === undefined) continue;
+      return {
+        type: "cast",
+        heroId: hero.id,
+        spell,
+        target: { shipId: ship.id },
+      };
+    }
+    return null;
+  }
+
+  /**
+   * Fair Wind (NAVAL 7.1 and 12) when the hero is afloat and its trip goes
+   * on at sea past today: more sea points now. Once a day (the spell's
+   * rule).
+   */
+  private fairWind(
+    turn: Turn,
+    hero: HeroState,
+    steps: readonly PathStep[],
+  ): GameAction | null {
+    const spell = "fair-wind";
+    if (turn.state.ships === undefined) return null;
+    const later = steps.find((s) => s.day > 0);
+    if (later === undefined) return null;
+    if (later.afloat !== true && later.land !== true) return null;
+    if (adventureCastError(turn.state, hero, spell) !== null) return null;
+    return { type: "cast", heroId: hero.id, spell };
+  }
+
+  /**
+   * A hero with nothing to do, no ship to take and Call the Boat in its
+   * book walks to the nearest shore with free water beside it (NAVAL 12,
+   * "avoid being stranded"): from there it can call a ship.
+   */
+  private toShore(turn: Turn, hero: HeroState): GameAction | null {
+    const spell = "call-the-boat";
+    const { state } = turn;
+    if (state.ships === undefined) return null;
+    if (!hero.pages.includes(spell) && !isFreeAdventureCast(hero, spell)) {
+      return null;
+    }
+    if (!this.landBound(turn, hero)) return null;
+    if (isShoreCell(state.map, hero.x, hero.y)) return null;
+    const reach = this.reachOf(turn, hero);
+    const w = state.map.width;
+    let best: number | null = null;
+    let bestCost = Infinity;
+    for (const [cell, cost] of reach.cost) {
+      if (cost === 0 || cost >= bestCost) continue;
+      const x = cell % w;
+      const y = (cell - x) / w;
+      if (reach.ctx.guards.has(cell) || reach.ctx.stops.has(cell)) continue;
+      if (!isShoreCell(state.map, x, y)) continue;
+      if (callBerths(state, { ...hero, x, y }).length === 0) continue;
+      best = cell;
+      bestCost = cost;
+    }
+    if (best === null) return null;
+    const steps = pathIn(reach, hero, best);
+    const today = (steps ?? []).filter((s) => s.day === 0 && standsOn(s));
+    if (today.length === 0) return null;
+    const end = today[today.length - 1];
+    if (end === undefined || !this.safe(turn, hero, end.y * w + end.x)) {
+      return null;
+    }
+    return {
+      type: "move",
+      heroId: hero.id,
+      path: today.map((s) => ({ x: s.x, y: s.y })),
+    };
   }
 
   // -------------------------------------------------------------- digging

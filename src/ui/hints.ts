@@ -4,7 +4,7 @@
  * estimate, the income breakdown, end-of-turn warnings and the next-action
  * hint. Pure functions over the game state (no DOM; unit-tested).
  */
-import { buildStatus, townIncome } from "../core/game/index.ts";
+import { buildStatus, dailyMaxOf, townIncome } from "../core/game/index.ts";
 import type { GameState, HeroState, Path } from "../core/game/index.ts";
 import { heroStats } from "../core/game/effects.ts";
 import {
@@ -274,7 +274,10 @@ export function worthMovingOn(
   hero: HeroState,
   plan: Path | null = null,
 ): boolean {
-  if (hero.mp <= 0 || hero.mp < hero.maxMp * END_TURN_MP_SHARE) return false;
+  // Afloat the points are sea points: the share is of the sea maximum
+  // (bead bzc.156).
+  const max = dailyMaxOf(state, hero);
+  if (hero.mp <= 0 || hero.mp < max * END_TURN_MP_SHARE) return false;
   return canAdvanceOnPlan(hero, plan) || canAffordStep(state, hero);
 }
 
@@ -292,7 +295,8 @@ export function endTurnWarnings(
   for (const h of state.heroes) {
     if (!h.alive || h.owner !== player) continue;
     if (!worthMovingOn(state, h, plans[h.id] ?? null)) continue;
-    if (h.maxMp > 0 && h.mp >= h.maxMp)
+    const max = dailyMaxOf(state, h);
+    if (max > 0 && h.mp >= max)
       out.push({ kind: "unmoved", id: h.id, text: `${h.name} has not moved` });
     else
       out.push({

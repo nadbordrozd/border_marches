@@ -103,6 +103,7 @@ import {
   touchedStacks,
 } from "./magic.ts";
 import { pendingShells } from "./factions/dwarves.ts";
+import { DECK_GUN_EFFECT } from "./naval-field.ts";
 import {
   ability,
   act as actDef,
@@ -185,6 +186,11 @@ export interface AiWeights {
   /** 1: a neutral guard (no hero, no native stack) always presses. */
   readonly guardsPress: number;
   /**
+   * 1: a neutral guard with Swimmers on a field with sea fears no reach
+   * (NAVAL.md 12, "sea guards advance"); 0: it fears as any guard.
+   */
+  readonly seaGuardsAdvance: number;
+  /**
    * The side ahead on the round-limit verdict presses too in the last
    * this many rounds when its fight value left is at least `aheadLead`
    * times the other's (0: never).
@@ -232,6 +238,7 @@ export const DEFAULT_AI_WEIGHTS: AiWeights = {
   fearRounds: 6,
   behindPresses: 1,
   guardsPress: 1,
+  seaGuardsAdvance: 1,
   aheadRounds: 3,
   aheadLead: 1.5,
   shooterExposure: 0.15,
@@ -491,6 +498,11 @@ class Context {
   readonly limits: Limits;
   /** This side presses (behind at the limit, a guard, or the attacker). */
   readonly presses: boolean;
+  /**
+   * A neutral guard with Swimmers on a field with sea (NAVAL.md 12): it
+   * advances on the enemy's deck, fearing no reach (threatWeights).
+   */
+  readonly seaGuard: boolean;
   /** Attacker id -> target id + "s"/"m" -> damage per creature. */
   private readonly rates = new Map<string, Map<string, number>>();
   private readonly memo: AiMemo | null;
@@ -525,6 +537,13 @@ class Context {
     this.swimDist = state.ground.some((g) => g.kind === "sea")
       ? distances(state, true)
       : this.dist;
+    this.seaGuard =
+      w.seaGuardsAdvance > 0 &&
+      this.swimDist !== this.dist &&
+      isNeutralGuard(state, me) &&
+      state.stacks.some(
+        (s) => s.side === me && isAlive(s) && traitsOf(s.creature).swims,
+      );
     this.presses =
       (w.guardsPress > 0 && isNeutralGuard(state, me)) ||
       (w.behindPresses > 0
@@ -1075,11 +1094,17 @@ function threatWeights(
   // more each round. Neutral guards always press, and so does a side well
   // ahead in the last rounds (aheadRounds).
   const att = ctx.presses;
+  // Sea guards advance (NAVAL.md 3.6 and 12, bead bzc.156): neutral
+  // Swimmers on a field with sea fear no reach at all. A ship's walkers
+  // cannot come out to them, so a guard that kept out of their reach
+  // would wait in the water for the round limit.
   const fade =
     att && ctx.w.fearRounds > 0
       ? Math.max(0, 1 - (state.round - 1) / ctx.w.fearRounds)
       : 1;
-  const fear = ctx.w.enemyThreat * (att ? 1 - ctx.w.aggression : 1) * fade;
+  const fear = ctx.seaGuard
+    ? 0
+    : ctx.w.enemyThreat * (att ? 1 - ctx.w.aggression : 1) * fade;
   const own =
     ctx.w.ownThreat * (att ? 1 + ctx.w.aggression : 1) +
     (att ? ctx.w.urgency * Math.max(0, state.round - 1) : 0);
@@ -1223,9 +1248,64 @@ function shellsOn(
   return s.owner === ctx.me ? -v : v;
 }
 
+// ---------------------------------------------------------------------------
+// Deck guns (NAVAL.md 3.3 and 12)
+
+/** A scheduled deck gun's Harm (its event's `harm` argument), or 0. */
+function deckGunHarmOf(args: unknown): number {
+  if (args === null || typeof args !== "object" || Array.isArray(args))
+    return 0;
+  const h = (args as { readonly harm?: unknown }).harm;
+  return typeof h === "number" && Number.isFinite(h) ? Math.max(0, h) : 0;
+}
+
 /**
- * The board's value without the threat terms: material, conditions and
- * pending get-ups (nothing here depends on where a stack stands).
+ * What the deck guns still to fire are worth to `ctx.me` (bead bzc.156):
+ * each scheduled gun's Harm on the strongest stack fighting against its
+ * side (fight value, field order on a tie), as the event will pick it, in
+ * value per HP; negative when that stack is ours. Like the tower's shot it
+ * hits whatever stands where, so it is a term of the board: an action that
+ * leaves another stack the strongest moves the shot, and every candidate
+ * counts the next shot alike (a rehearsal that ends the round no longer
+ * looks better or worse for the shot fired inside it).
+ */
+function deckGunsOn(
+  ctx: Context,
+  state: BattleState,
+  alive: readonly BattleStack[],
+): number {
+  let v = 0;
+  for (const e of state.scheduled) {
+    if (e.effect.id !== DECK_GUN_EFFECT) continue;
+    const harm = deckGunHarmOf(e.effect.args);
+    // It stops when its side holds no living stack.
+    if (harm <= 0 || !alive.some((s) => s.side === e.side)) continue;
+    let target: BattleStack | null = null;
+    let best = -1;
+    for (const s of alive) {
+      if (s.side === e.side) continue;
+      const fv = s.count * creatureFightValue(s.creature);
+      if (fv > best) {
+        best = fv;
+        target = s;
+      }
+    }
+    if (target === null) continue;
+    const hp = totalHp({
+      count: target.count,
+      hp: target.creature.hp,
+      topHp: target.topHp,
+    });
+    const worth = Math.min(harm, hp) * aiValuePerHp(target.creature);
+    v += target.owner === ctx.me ? -worth : worth;
+  }
+  return v;
+}
+
+/**
+ * The board's value without the threat terms: material, conditions,
+ * pending get-ups and the deck guns still to fire (nothing here depends on
+ * where a stack stands).
  */
 function staticValue(
   ctx: Context,
@@ -1253,6 +1333,7 @@ function staticValue(
     }
     if (s.getsUp === true) v += sign * 0.3 * getUpValue(s);
   }
+  if (state.scheduled.length > 0) v += deckGunsOn(ctx, state, alive);
   for (const e of state.scheduled) {
     if (e.effect.id !== GET_UP_EFFECT) continue;
     const args = e.effect.args as { readonly stackId?: unknown } | undefined;
