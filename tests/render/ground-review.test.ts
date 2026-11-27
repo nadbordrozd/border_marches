@@ -9,6 +9,11 @@ import type {
   CanopyTree,
 } from "../../src/render/map/canopy.ts";
 import {
+  GROUND_INTENSITY,
+  GROUND_INTENSITY_RANGE,
+  groundShares,
+} from "../../src/render/map/ground-intensity.ts";
+import {
   NO_REVIEW,
   groundReview,
   parseGroundReview,
@@ -48,10 +53,76 @@ describe("ground review switch", () => {
       treeScale: 1.5,
     });
     expect(parseGroundReview("?treeScale=1.25")).toMatchObject({
-      name: "G1",
+      name: "default",
+      intensity: GROUND_INTENSITY,
       treeScale: 1.25,
     });
     expect(parseGroundReview("?treeScale=9").treeScale).toBe(1);
+  });
+});
+
+describe("ground intensity knob (bead bzc.164)", () => {
+  it("runs from G2 (0) to G1 (1) on one line", () => {
+    expect(groundShares(0)).toEqual({ drift: 0.5, contrast: 0.5 });
+    expect(groundShares(1)).toEqual({ drift: 1, contrast: 1 });
+    expect(groundShares(0.5)).toEqual({ drift: 0.75, contrast: 0.75 });
+    expect(groundShares(2)).toEqual({ drift: 1.5, contrast: 1.5 });
+    expect(groundShares(-1)).toEqual({ drift: 0, contrast: 0 });
+  });
+
+  it("is the game's default, and G1 and G2 are its ends", () => {
+    expect(GROUND_INTENSITY).toBeGreaterThanOrEqual(GROUND_INTENSITY_RANGE.min);
+    expect(GROUND_INTENSITY).toBeLessThanOrEqual(GROUND_INTENSITY_RANGE.max);
+    expect(NO_REVIEW).toMatchObject({
+      intensity: GROUND_INTENSITY,
+      ...groundShares(GROUND_INTENSITY),
+      legacy: false,
+      spill: false,
+      patches: true,
+      edgeAmp: 1,
+      edgeLine: true,
+    });
+    expect(parseGroundReview("?groundReview=G1")).toMatchObject({
+      intensity: 1,
+      drift: 1,
+      contrast: 1,
+      patches: true,
+      edgeAmp: 1,
+      edgeLine: true,
+    });
+    expect(parseGroundReview("?groundReview=G2")).toMatchObject({
+      intensity: 0,
+      drift: 0.5,
+      contrast: 0.5,
+      patches: true,
+      edgeAmp: 1,
+      edgeLine: true,
+    });
+    expect(parseGroundReview("?groundReview=G6")).toMatchObject({
+      intensity: 0,
+      edgeAmp: 0.5,
+    });
+  });
+
+  it("is turned for one page load by ?groundIntensity=", () => {
+    expect(parseGroundReview("?groundIntensity=0.25")).toMatchObject({
+      intensity: 0.25,
+      drift: 0.625,
+      contrast: 0.625,
+      patches: true,
+      edgeLine: true,
+    });
+    // It overrides a variant's intensity, but not G0's (no drift there).
+    expect(
+      parseGroundReview("?groundReview=G4&groundIntensity=0.5"),
+    ).toMatchObject({ intensity: 0.5, drift: 0.75, edgeAmp: 0.5 });
+    expect(
+      parseGroundReview("?groundReview=G0&groundIntensity=0.5"),
+    ).toMatchObject({ drift: 0, contrast: 1 });
+    // Junk or out of range: ignored.
+    expect(parseGroundReview("?groundIntensity=abc")).toBe(NO_REVIEW);
+    expect(parseGroundReview("?groundIntensity=")).toBe(NO_REVIEW);
+    expect(parseGroundReview("?groundIntensity=5")).toBe(NO_REVIEW);
   });
 
   it("scales contrast round the mean and tints toward 1", () => {

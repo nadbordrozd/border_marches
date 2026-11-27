@@ -650,6 +650,30 @@ const DRIFT_TINT: Readonly<
   swamp: { low: [0.95, 0.96, 0.95], high: [1.04, 1.04, 1.0] },
 };
 
+let driftTintMemo: { share: number; tint: typeof DRIFT_TINT } | undefined;
+
+/**
+ * DRIFT_TINT with every multiplier moved toward 1 by `share` (the ground
+ * intensity's drift, ground-intensity.ts), built once per share and kept,
+ * so a chunk costs the same at any intensity.
+ */
+function driftTintAt(share: number): typeof DRIFT_TINT {
+  if (share === 1) return DRIFT_TINT;
+  if (driftTintMemo?.share !== share) {
+    const tint = Object.fromEntries(
+      GROUND_RANK.map((g) => [
+        g,
+        {
+          low: scaleTint(DRIFT_TINT[g].low, share),
+          high: scaleTint(DRIFT_TINT[g].high, share),
+        },
+      ]),
+    ) as unknown as typeof DRIFT_TINT;
+    driftTintMemo = { share, tint };
+  }
+  return driftTintMemo.tint;
+}
+
 /**
  * Trodden earth under a site (bead bzc.138, the lab's patches, Heroes III):
  * an ellipse round the site's foot, its edge frayed by the brush, in which
@@ -949,20 +973,10 @@ export function paintGround(
     out[o + 1] = (out[o + 1] ?? 0) * (k[1] ?? 1);
     out[o + 2] = (out[o + 2] ?? 0) * (k[2] ?? 1);
   };
-  // Review switches (bead bzc.144, ground-review.ts): off by default.
+  // The drift at the ground intensity (ground-intensity.ts, bead bzc.164)
+  // and the review switches (bead bzc.144, ground-review.ts).
   const review = groundReview();
-  const driftTint =
-    review.drift === 1
-      ? DRIFT_TINT
-      : Object.fromEntries(
-          GROUND_RANK.map((g) => [
-            g,
-            {
-              low: scaleTint(DRIFT_TINT[g].low, review.drift),
-              high: scaleTint(DRIFT_TINT[g].high, review.drift),
-            },
-          ]),
-        );
+  const driftTint = driftTintAt(review.drift);
   // The drift field, sampled on a world-aligned grid (ground-noise.ts).
   const drift = driftGrid(x0, y0, w, h);
   let patchList: readonly number[] = [];

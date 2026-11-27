@@ -8,6 +8,17 @@ in trodden patches; see [the rollout](#rollout-bead-bzc138). The sections
 below it on the older single takes are history: those takes are now inputs
 of the bake.
 
+> **To make the ground calmer or richer, change `GROUND_INTENSITY` in
+> [`src/render/map/ground-intensity.ts`](../../../src/render/map/ground-intensity.ts).**
+> `0` is the calmer G2 of the review pack (half the colour drift, half the
+> texture contrast), `1` is the full bzc.138 ground (G1), and it is now
+> **`0.5`**, half way (bead `border_marches-bzc.164`, the user's pick). It
+> scales the drift and the texture contrast at run time from the baked
+> textures, so turning it needs no re-bake and no art work; borders and
+> trodden patches do not change. To try a value without editing code, open
+> the game with `?groundIntensity=0.25` (any value from -1 to 2). See
+> [the knob](#ground-intensity-knob-bead-bzc164).
+
 ## Inventory
 
 Since bead bzc.138 every land ground's `<ground>.png` and
@@ -332,3 +343,39 @@ the brush reach and no dark line, `G5` current textures with the old spill
 borders, `G6` G2 and G4 together; `?treeScale=1.25` or `1.5` draws the trees
 larger (nearest neighbour, feet kept: a preview only, final trees would be
 generated at size).
+
+Since bead bzc.164, G1 is the ground at intensity 1 and G2 at intensity 0
+(see [the knob](#ground-intensity-knob-bead-bzc164)); G3, G4 and G5 are G1
+with their one change, G6 is G2 with G4's borders, and the variant `GK`
+(no switch) is the game's default at `GROUND_INTENSITY`. A
+`?groundIntensity=` in the URL overrides a variant's intensity
+(`?groundReview=G4&groundIntensity=0.5`).
+
+## Ground intensity knob (bead bzc.164)
+
+The user, after the review pack: "I like the current look of terrain but
+it's maybe slightly too much ... something in the middle between the calmer
+and the current. I might change my mind later." So the ground's strength is
+one named constant:
+
+- **Where:** `GROUND_INTENSITY` in
+  [`src/render/map/ground-intensity.ts`](../../../src/render/map/ground-intensity.ts),
+  now `0.5`.
+- **What it does:** at intensity `i` the drift (`DRIFT_TINT`'s multipliers,
+  moved toward 1) and each texture's contrast round its own mean colour
+  (`scaleContrast`, once at load in `assets.ts`) are kept at
+  `0.5 + 0.5 i`: `0` is G2 (half), `0.5` three quarters, `1` G1 (as
+  baked). Values outside 0..1 extrapolate (`-1` no drift and flat
+  textures, `2` one and a half times G1) and are for experiments only.
+- **What it leaves:** the bake and the texture files, the border brush, the
+  dark line and rim, the trodden patches, the volcanic cracks.
+- **To try a value:** `?groundIntensity=0.25` in the game's URL (-1 to 2;
+  junk or out of range is ignored), for that page load only.
+- **To review:** `npm run review:grounds -- --variants=G1,GK,G2
+  --scenes=folly-grass,folly-sand-volcanic,folly-snow --out=<dir>` shoots
+  G1, the default and G2 side by side.
+- **Cost:** none per chunk (the scaled drift table is built once and kept;
+  the 640 px chunk cache is unchanged); the contrast pass over the ten
+  textures at load is about 65 ms (a lookup table per channel).
+- **Not covered:** battle and town screens tile the ground texture files
+  as they are, so they show the grounds at full contrast whatever the knob.

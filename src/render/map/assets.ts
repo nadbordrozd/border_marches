@@ -130,7 +130,8 @@ export async function loadMapAssets(base = "/"): Promise<MapAssets> {
       throw new Error(`map renderer: missing ${asset.key}`);
     return image;
   };
-  // Review switches (bead bzc.144, ground-review.ts): off by default.
+  // The ground intensity and the review switches (beads bzc.164 and bzc.144,
+  // ground-intensity.ts and ground-review.ts).
   const review = groundReview();
   const textures = Object.fromEntries(
     GROUND_TERRAINS.map((terrain) => {
@@ -147,6 +148,8 @@ export async function loadMapAssets(base = "/"): Promise<MapAssets> {
         ? REVIEW_LEGACY_CALM[terrain]
         : GROUND_CALM[terrain];
       const calmed = calm === undefined ? pixels : calmTexture(pixels, calm);
+      // The texture contrast at the ground intensity (ground-intensity.ts,
+      // bead bzc.164): scaled round the mean once here, never re-baked.
       return [
         terrain,
         review.contrast === 1 ? calmed : scaleContrast(calmed, review.contrast),

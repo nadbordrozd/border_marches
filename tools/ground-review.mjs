@@ -8,9 +8,11 @@
 //
 //   G0 pre-bzc.138 grounds (the old texture files from git, served to the
 //      page in place of the new ones; the Pulp Wars spill; no drift, rim or
-//      patches), G1 current, G2 calmer (half drift and texture contrast),
+//      patches), G1 the bzc.138 ground at full strength (ground intensity
+//      1), GK the game's default (no switch: GROUND_INTENSITY, bead
+//      bzc.164), G2 calmer (half drift and texture contrast, intensity 0),
 //      G3 no trodden patches, G4 softer borders (half the brush, no dark
-//      line), G5 current textures with the old spill borders, G6 G2 + G4;
+//      line), G5 G1's textures with the old spill borders, G6 G2 + G4;
 //   T1.0, T1.25, T1.5: G1 with the trees drawn larger (nearest neighbour,
 //      feet kept).
 //
@@ -66,6 +68,12 @@ const GROUNDS = [
   "swamp",
 ];
 
+/** The ground intensity knob's value in the source (bead bzc.164), for labels. */
+const KNOB =
+  /export const GROUND_INTENSITY = (-?[\d.]+);/.exec(
+    readFileSync(join(ROOT, "src/render/map/ground-intensity.ts"), "utf8"),
+  )?.[1] ?? "?";
+
 const VARIANTS = [
   {
     id: "G0",
@@ -78,15 +86,22 @@ const VARIANTS = [
   {
     id: "G1",
     query: "groundReview=G1",
-    label: "G1 current (bzc.138)",
+    label: "G1 full strength (bzc.138, intensity 1)",
     about:
-      "The game as it is now: baked PixelLab textures, two-scale drift, ink-blot brush borders with a dark line and rim, trodden patches under buildings.",
+      "The bzc.138 ground at full strength (ground intensity 1): baked PixelLab textures, two-scale drift, ink-blot brush borders with a dark line and rim, trodden patches under buildings.",
+    kind: "ground",
+  },
+  {
+    id: "GK",
+    query: "",
+    label: `GK the game's default (GROUND_INTENSITY = ${KNOB})`,
+    about: `No switch: the ground as the game draws it, at the ground intensity knob GROUND_INTENSITY = ${KNOB} (src/render/map/ground-intensity.ts; 0 is G2, 1 is G1).`,
     kind: "ground",
   },
   {
     id: "G2",
     query: "groundReview=G2",
-    label: "G2 calmer: half drift and contrast",
+    label: "G2 calmer: half drift and contrast (intensity 0)",
     about:
       "G1 with half the colour drift and half the texture contrast round each texture's mean colour.",
     kind: "ground",
@@ -770,7 +785,8 @@ async function main() {
     for (const kind of ["ground", "trees"]) {
       const list = shots.filter((s) => s.variant.kind === kind);
       if (list.length === 0) continue;
-      const cols = kind === "trees" ? list.length : 2;
+      // Three or fewer side by side (G1, GK, G2 for bead bzc.164), else two.
+      const cols = kind === "trees" || list.length <= 3 ? list.length : 2;
       for (const [which, key] of [
         ["full", "raster"],
         ["2x", "z"],

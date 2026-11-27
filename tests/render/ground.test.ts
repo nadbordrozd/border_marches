@@ -19,6 +19,12 @@ import {
   groundPatches,
 } from "../../src/render/map/ground.ts";
 import type { GroundSources, PixelImage } from "../../src/render/map/ground.ts";
+import {
+  NO_REVIEW,
+  parseGroundReview,
+  setGroundReview,
+} from "../../src/render/map/ground-review.ts";
+import type { GroundReview } from "../../src/render/map/ground-review.ts";
 import { paintFog } from "../../src/render/map/fog.ts";
 import { createMap } from "../../src/core/map/types.ts";
 import type { MapObject } from "../../src/core/map/types.ts";
@@ -302,6 +308,33 @@ describe("the ground rollout (bead bzc.138)", () => {
     for (let p = 0; p < 960 * 960; p += 1) greens.add(out[p * 4 + 1] ?? 0);
     // The texture's green, darker and lighter: three palettes.
     expect(greens.size).toBe(3);
+  });
+
+  it("drifts at the ground intensity: G2 under the default under G1", () => {
+    const map = createMap(12, 12, 1, "grass");
+    const spread = (review: GroundReview): number => {
+      setGroundReview(review);
+      const out = new Uint8ClampedArray(480 * 480 * 4);
+      paintGround(buildGroundLayout(map), SOURCES, 0, 0, 480, 480, out);
+      let lo = 255;
+      let hi = 0;
+      for (let p = 0; p < 480 * 480; p += 1) {
+        const g = out[p * 4 + 1] ?? 0;
+        lo = Math.min(lo, g);
+        hi = Math.max(hi, g);
+      }
+      return hi - lo;
+    };
+    try {
+      const g1 = spread(parseGroundReview("?groundReview=G1"));
+      const mid = spread(parseGroundReview("?groundIntensity=0.5"));
+      const g2 = spread(parseGroundReview("?groundReview=G2"));
+      expect(g1).toBeGreaterThan(mid);
+      expect(mid).toBeGreaterThan(g2);
+      expect(g2).toBeGreaterThan(0);
+    } finally {
+      setGroundReview(NO_REVIEW);
+    }
   });
 
   const site = (kind: MapObject["kind"], x: number, y: number): MapObject => ({
