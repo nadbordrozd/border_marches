@@ -18,6 +18,7 @@ import {
 } from "../hex.ts";
 import type { Hex } from "../hex.ts";
 import { registerAct } from "../registry.ts";
+import type { Effects } from "../registry.ts";
 import type {
   ActTarget,
   BattleSide,
@@ -135,25 +136,38 @@ export function registerStampede(): void {
     },
     aiTargets: (state, actorId) => oneEach(enemiesOf(state, actorId)),
     resolve(fx, actorId, t) {
-      const enemy = targetStack(t[0]) as StackId;
-      const side = fx.sideOf(actorId);
-      const n = commandC(fx.state, side) + 1;
-      const order = turnOrder(fx.state);
-      const friends = living(fx.state)
-        .filter(
-          (s) =>
-            fx.sideOf(s.id) === side && isAdjacent(s.hex, fx.stack(enemy).hex),
-        )
-        .sort((a, b) => {
-          const ia = order.indexOf(a.id);
-          const ib = order.indexOf(b.id);
-          return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
-        })
-        .slice(0, n);
-      for (const f of friends) {
-        if (!fx.isAlive(enemy)) return;
-        fx.strike(f.id, enemy, { kind: "melee", label: "Stampede" });
-      }
+      stampede(fx, actorId, targetStack(t[0]) as StackId, "Stampede");
     },
   });
+}
+
+/**
+ * Up to C + 1 stacks of the actor's side next to `enemy` each make a melee
+ * Strike on it, in turn order; it retaliates once, against the first (the
+ * step's reaction rules fire a stack's retaliation once). Stampede and the
+ * Nutcracker's Crack! (FACTION_CANDY 7).
+ */
+export function stampede(
+  fx: Effects,
+  actorId: StackId,
+  enemy: StackId,
+  label: string,
+): void {
+  const side = fx.sideOf(actorId);
+  const n = commandC(fx.state, side) + 1;
+  const order = turnOrder(fx.state);
+  const friends = living(fx.state)
+    .filter(
+      (s) => fx.sideOf(s.id) === side && isAdjacent(s.hex, fx.stack(enemy).hex),
+    )
+    .sort((a, b) => {
+      const ia = order.indexOf(a.id);
+      const ib = order.indexOf(b.id);
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+    })
+    .slice(0, n);
+  for (const f of friends) {
+    if (!fx.isAlive(enemy)) return;
+    fx.strike(f.id, enemy, { kind: "melee", label });
+  }
 }

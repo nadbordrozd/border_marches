@@ -3,7 +3,6 @@
  * the last one the next day starts with the global upkeep (income, weekly
  * growth, tavern refresh, movement, build flags). ECONOMY.md section 3.
  */
-import { getCreature } from "../../data/creatures.ts";
 import { MINES } from "../../data/economy.ts";
 import { STABLES_MP } from "../../data/objectTypes.ts";
 import { TOWNLESS_DAYS_LIMIT } from "../../data/players.ts";
@@ -19,6 +18,7 @@ import { magicDayEnd, magicDayStart } from "../magic/adventure.ts";
 import { addResources, emptyResources } from "./resources.ts";
 import {
   builtDefs,
+  dwellingGrowth,
   checkPlaying,
   cloneState,
   heroesOf,
@@ -99,7 +99,11 @@ export function growTown(town: TownState): void {
     const creature = def.dwelling;
     if (creature === undefined) continue;
     const d = town.dwellings[creature] ?? { available: 0, remainder: 0 };
-    const g = weeklyGrowth(getCreature(creature).growth, stockade, d.remainder);
+    const g = weeklyGrowth(
+      dwellingGrowth(town, creature),
+      stockade,
+      d.remainder,
+    );
     town.dwellings[creature] = {
       available: d.available + g.added,
       remainder: g.remainder,

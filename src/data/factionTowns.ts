@@ -1,7 +1,8 @@
 /**
  * The v0.2 town trees: the Realm's Castle (FACTION_HUMANS.md section 9),
- * the Restless's Churchyard (FACTION_UNDEAD.md 9) and the Horde's Warcamp
- * (FACTION_GOBLINS.md 9), with the buildings every town shares
+ * the Restless's Churchyard (FACTION_UNDEAD.md 9), the Horde's Warcamp
+ * (FACTION_GOBLINS.md 9) and the Candy Kingdom's Confectionery
+ * (FACTION_CANDY.md 9), with the buildings every town shares
  * (ECONOMY.md 6: halls, forts, Marketplace, Resource Silo, Magic Guild,
  * Tavern, the Keystone Hall).
  *
@@ -22,7 +23,13 @@ export const SPECIALS = {
   lootPile: "loot-pile",
   launchRamp: "launch-ramp",
   greatFlinger: "great-flinger",
+  bakery: "bakery",
+  larder: "larder",
+  fourOClock: "the-four-oclock",
 } as const;
+
+/** The Bakery's extra Gingerbread Men a week (FACTION_CANDY 9). */
+export const BAKERY_GROWTH = 8;
 
 /** Keystone Hall: +2000 gold a day and +50% growth (ECONOMY 6.2). */
 export const KEYSTONE_INCOME = 2000;
@@ -539,6 +546,116 @@ export const WARCAMP_TREE: TreeData = assemble(
       requires: ["ogre-pit"],
       special: SPECIALS.launchRamp,
       effect: "In your battles, a native that is Launched also becomes Lucky",
+    }),
+  ],
+);
+
+export const CONFECTIONERY_TREE: TreeData = assemble(
+  {
+    fort: ["Candy-Cane Fence", "Gingerbread Wall", "Sugar-Glass Keep"],
+    guildCap: 4,
+    keystone: {
+      id: "the-four-oclock",
+      name: "The Four O'Clock",
+      special: SPECIALS.fourOClock,
+      effect:
+        "every native stack in your armies starts each battle Hastened for 1 round",
+    },
+  },
+  [
+    dwelling(
+      "gingerbread-house",
+      "Gingerbread House",
+      "gingerbread-man",
+      "Gingerbread Men",
+      {},
+      [],
+      true,
+    ),
+    dwelling(
+      "mint-range",
+      "Mint Range",
+      "peppermint-archer",
+      "Peppermint Archers",
+      { gold: 750, wood: 5, essence: 1 },
+      ["gingerbread-house"],
+    ),
+    dwelling(
+      "taffy-ranch",
+      "Taffy Ranch",
+      "taffy-wrangler",
+      "Taffy Wranglers",
+      { gold: 1200, wood: 10 },
+      ["fort-1"],
+    ),
+    dwelling(
+      "sugarplum-bower",
+      "Sugarplum Bower",
+      "sugarplum",
+      "Sugarplums",
+      { gold: 2000, wood: 5, essence: 4 },
+      ["mint-range"],
+    ),
+    dwelling(
+      "gummy-den",
+      "Gummy Den",
+      "gummy-bear",
+      "Gummy Bears",
+      { gold: 3800, wood: 10, ore: 3, essence: 3 },
+      ["taffy-ranch"],
+    ),
+    dwelling(
+      "rock-candy-grotto",
+      "Rock Candy Grotto",
+      "rock-candy-dragon",
+      "Rock Candy Dragons",
+      { gold: 8000, wood: 10, ore: 5, essence: 8 },
+      ["gummy-den", "sugarplum-bower"],
+    ),
+    drill(
+      "bread-oven",
+      "Bread Oven",
+      "gingerbread-man",
+      "hot-from-the-oven",
+      "Gingerbread Men gain Hot from the Oven",
+      { gold: 800, wood: 5 },
+      ["gingerbread-house"],
+    ),
+    drill(
+      "mint-press",
+      "Mint Press",
+      "peppermint-archer",
+      "cool-mint",
+      "Peppermint Archers gain Cool Mint",
+      { gold: 1000, wood: 5, essence: 1 },
+      ["mint-range"],
+    ),
+    drill(
+      "pulling-hooks",
+      "Pulling Hooks",
+      "taffy-wrangler",
+      "long-pull",
+      "Taffy Wranglers gain Long Pull",
+      { gold: 1500, wood: 10 },
+      ["taffy-ranch"],
+    ),
+    b({
+      id: "bakery",
+      name: "Bakery",
+      cost: { gold: 1000, wood: 5 },
+      requires: ["gingerbread-house"],
+      growthExtra: { creature: "gingerbread-man", amount: BAKERY_GROWTH },
+      special: SPECIALS.bakery,
+      effect: `+${BAKERY_GROWTH} Gingerbread Men a week in this town`,
+    }),
+    b({
+      id: "larder",
+      name: "Larder",
+      cost: { gold: 3000, wood: 5, essence: 3 },
+      requires: ["sugarplum-bower"],
+      special: SPECIALS.larder,
+      effect:
+        "In your battles, a native stack that ends a walk on sweets eats them: it becomes Hastened for 2 rounds and heals 5 HP per creature, reviving",
     }),
   ],
 );

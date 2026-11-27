@@ -318,6 +318,16 @@ export interface BattleStack {
   readonly turnStartedRound: number;
   /** Round in which this stack was granted its extra turn (0: never). */
   readonly extraTurnRound: number;
+  /**
+   * Round in which this stack was granted its round-end turn (Afters); in
+   * that turn it cannot walk. Absent: never.
+   */
+  readonly aftersRound?: number;
+  /**
+   * Round in which a melee Strike (an attack or a retaliation) last hit
+   * this stack (Chewy reads it). Absent: never.
+   */
+  readonly meleeStruckRound?: number;
   /** Once-per-battle abilities this stack has used. */
   readonly abilitiesUsed: readonly string[];
   /**

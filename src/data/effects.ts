@@ -149,6 +149,8 @@ export const RULE_SWITCH_IDS = [
   "metronome-spurs",
   "bailiffs-greatcoat",
   "whetstone-pendant",
+  // Retaliation reactions (core/battle/resolve.ts retaliate)
+  "flypaper-ribbon", // Flypaper Ribbon (FACTION_CANDY 5.2)
 ] as const;
 
 export type RuleSwitchId = (typeof RULE_SWITCH_IDS)[number];

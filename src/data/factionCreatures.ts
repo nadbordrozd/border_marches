@@ -1,10 +1,14 @@
 /**
  * The v0.2 rosters: the Realm (FACTION_HUMANS.md section 4), the Restless
- * (FACTION_UNDEAD.md section 4) and the Goblin Horde (FACTION_GOBLINS.md
- * section 4). Abilities are battle-registry ids (src/core/battle/factions).
+ * (FACTION_UNDEAD.md section 4), the Goblin Horde (FACTION_GOBLINS.md
+ * section 4) and the Candy Kingdom (FACTION_CANDY.md section 4). Abilities
+ * are battle-registry ids (src/core/battle/factions).
  *
  * Sprites are the keys of src/assets/unit-art.ts CREATURE_ART (bead
- * bzc.14); a data test checks `sprite === unitArt(id).key`.
+ * bzc.14); a data test checks `sprite === unitArt(id).key`. The Candy
+ * sprites are the keys FACTION_CANDY.md section 10.2 names; their art
+ * comes with the Candy art bead, and until then the unit art falls back
+ * to its placeholder.
  */
 import type { CreatureDef, CreatureId } from "./types.ts";
 
@@ -398,14 +402,146 @@ export const GOBLIN_CREATURES: readonly CreatureDef[] = [
   },
 ];
 
+/**
+ * Every Candy creature leaves `sweets` (the first creatures that do) and
+ * bears every condition (FACTION_CANDY.md section 1).
+ */
+const SWEET_TAGS = { remains: "sweets", cannotBear: [] } as const;
+
+export const CANDY_CREATURES: readonly CreatureDef[] = [
+  {
+    id: "gingerbread-man",
+    name: "Gingerbread Man",
+    plural: "Gingerbread Men",
+    faction: "candy",
+    tier: 1,
+    hp: 9,
+    attack: 4,
+    defense: 3,
+    damage: 2,
+    speed: 6,
+    shots: 0,
+    ability: null,
+    abilities: ["sugar-rush"],
+    tags: SWEET_TAGS,
+    growth: 15,
+    cost: { gold: 40 },
+    fightValue: 57,
+    sprite: "candy-gingerbread-man",
+  },
+  {
+    id: "peppermint-archer",
+    name: "Peppermint Archer",
+    plural: "Peppermint Archers",
+    faction: "candy",
+    tier: 2,
+    hp: 11,
+    attack: 7,
+    defense: 3,
+    damage: 3,
+    speed: 5,
+    shots: 10,
+    ability: null,
+    abilities: ["sitting-ducks"],
+    tags: SWEET_TAGS,
+    growth: 9,
+    cost: { gold: 120 },
+    fightValue: 108,
+    sprite: "candy-peppermint-archer",
+  },
+  {
+    id: "taffy-wrangler",
+    name: "Taffy Wrangler",
+    plural: "Taffy Wranglers",
+    faction: "candy",
+    tier: 3,
+    hp: 24,
+    attack: 8,
+    defense: 6,
+    damage: 5,
+    speed: 6,
+    shots: 0,
+    ability: null,
+    abilities: ["reel-in"],
+    tags: SWEET_TAGS,
+    growth: 7,
+    cost: { gold: 240 },
+    fightValue: 186,
+    sprite: "candy-taffy-wrangler",
+  },
+  {
+    id: "sugarplum",
+    name: "Sugarplum",
+    plural: "Sugarplums",
+    faction: "candy",
+    tier: 4,
+    hp: 30,
+    attack: 7,
+    defense: 7,
+    damage: 6,
+    speed: 6,
+    shots: 0,
+    ability: null,
+    abilities: [],
+    tags: SWEET_TAGS,
+    caster: caster("late-bell", "wind"),
+    growth: 4,
+    cost: { gold: 430, essence: 1 },
+    fightValue: 228,
+    sprite: "candy-sugarplum",
+  },
+  {
+    id: "gummy-bear",
+    name: "Gummy Bear",
+    plural: "Gummy Bears",
+    faction: "candy",
+    tier: 5,
+    hp: 95,
+    attack: 12,
+    defense: 15,
+    damage: 14,
+    speed: 4,
+    shots: 0,
+    ability: null,
+    abilities: ["chewy"],
+    tags: SWEET_TAGS,
+    growth: 2,
+    cost: { gold: 1100, essence: 1 },
+    fightValue: 857,
+    sprite: "candy-gummy-bear",
+  },
+  {
+    id: "rock-candy-dragon",
+    name: "Rock Candy Dragon",
+    plural: "Rock Candy Dragons",
+    faction: "candy",
+    tier: 6,
+    hp: 150,
+    attack: 18,
+    defense: 16,
+    damage: 28,
+    speed: 7,
+    shots: 0,
+    ability: null,
+    abilities: ["afters"],
+    tags: SWEET_TAGS,
+    growth: 1,
+    cost: { gold: 3600, ore: 1, essence: 3 },
+    fightValue: 1750,
+    sprite: "candy-rock-candy-dragon",
+  },
+];
+
 /** Every v0.2 faction creature, keyed by id. */
 export const FACTION_CREATURES: Readonly<
   Partial<Record<CreatureId, CreatureDef>>
 > = Object.fromEntries(
-  [...HUMAN_CREATURES, ...UNDEAD_CREATURES, ...GOBLIN_CREATURES].map((c) => [
-    c.id,
-    c,
-  ]),
+  [
+    ...HUMAN_CREATURES,
+    ...UNDEAD_CREATURES,
+    ...GOBLIN_CREATURES,
+    ...CANDY_CREATURES,
+  ].map((c) => [c.id, c]),
 );
 
 /** A faction's roster in tier order. */
@@ -417,6 +553,8 @@ export function rosterOf(faction: string): readonly CreatureDef[] {
       return UNDEAD_CREATURES;
     case "goblins":
       return GOBLIN_CREATURES;
+    case "candy":
+      return CANDY_CREATURES;
     default:
       return [];
   }

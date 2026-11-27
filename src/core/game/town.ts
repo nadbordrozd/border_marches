@@ -34,6 +34,7 @@ import {
   addToArmy,
   armySize,
   builtDefs,
+  dwellingGrowth,
   checkPlaying,
   checkTurn,
   cloneState,
@@ -150,7 +151,7 @@ export function build(
   town.builtToday = true;
   if (def.dwelling !== undefined) {
     const g = weeklyGrowth(
-      getCreature(def.dwelling).growth,
+      dwellingGrowth(town, def.dwelling),
       builtDefs(town).some((d) => d.growthBonus === true),
       0,
     );

@@ -26,6 +26,7 @@ import { assetByKey } from "../../src/assets/manifest.ts";
 import { ICON_KINDS } from "../../src/assets/icons.ts";
 import {
   GALLERY_TAB_IDS,
+  galleryShowsFaction,
   galleryTab,
   isGalleryTab,
   matchesFilters,
@@ -46,7 +47,7 @@ describe("gallery tabs match the registries", () => {
       (id) => !Object.hasOwn(CREATURES, id),
     ).length;
     const expected =
-      Object.values(CREATURES).filter((c) => c.faction !== "lost-world")
+      Object.values(CREATURES).filter((c) => galleryShowsFaction(c.faction))
         .length + summons;
     expect(count("creatures")).toBe(expected);
     const ids = tabEntries(galleryTab("creatures")).map((e) => e.id);
@@ -54,6 +55,8 @@ describe("gallery tabs match the registries", () => {
     expect(ids).toContain("bellhop");
     expect(ids).toContain("shade");
     expect(ids).not.toContain("caveman");
+    // Not playable yet: the Candy Kingdom (bead bzc.117 shows it).
+    expect(ids).not.toContain("gingerbread-man");
   });
 
   it("summon cards name their abilities, registered by magic or not", () => {
@@ -73,11 +76,11 @@ describe("gallery tabs match the registries", () => {
   });
 
   it("heroes: the v0.2 classes and named heroes", () => {
-    const classes = Object.values(HERO_CLASSES).filter(
-      (c) => c.faction !== "lost-world",
+    const classes = Object.values(HERO_CLASSES).filter((c) =>
+      galleryShowsFaction(c.faction),
     ).length;
-    const heroes = NAMED_HEROES.filter(
-      (h) => h.faction !== "lost-world",
+    const heroes = NAMED_HEROES.filter((h) =>
+      galleryShowsFaction(h.faction),
     ).length;
     expect(count("heroes")).toBe(classes + heroes);
   });

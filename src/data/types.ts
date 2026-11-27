@@ -14,10 +14,12 @@ export type ResourceAmounts = Partial<Resources>;
 /**
  * Faction ids. Neutral monsters and the Warlord's Hold use "neutral". The
  * v0.2 factions are Humans (the Realm), Undead (the Restless) and Goblins
- * (the Horde); the Lost World stays in the code but is not playable.
+ * (the Horde); Candy (the Candy Kingdom, FACTION_CANDY.md) is in the data
+ * but not playable until its integration bead; the Lost World stays in the
+ * code but is not playable.
  */
 export type FactionId =
-  "lost-world" | "humans" | "undead" | "goblins" | "neutral";
+  "lost-world" | "humans" | "undead" | "goblins" | "candy" | "neutral";
 
 export type AbilityId =
   | "mob"
@@ -116,12 +118,21 @@ export type GoblinCreatureId =
   | "ogre"
   | "orc-warboss";
 
+export type CandyCreatureId =
+  | "gingerbread-man"
+  | "peppermint-archer"
+  | "taffy-wrangler"
+  | "sugarplum"
+  | "gummy-bear"
+  | "rock-candy-dragon";
+
 export type CreatureId =
   | LostWorldCreatureId
   | NeutralCreatureId
   | HumanCreatureId
   | UndeadCreatureId
   | GoblinCreatureId
+  | CandyCreatureId
   | StrayCreatureId;
 
 /**
@@ -224,6 +235,11 @@ export interface BuildingDef<Id extends BuildingId = BuildingId> {
   income?: ResourceAmounts;
   /** +50% creature growth (Stockade). */
   growthBonus?: boolean;
+  /**
+   * Extra weekly growth of one dwelling of this town (the Candy Bakery: +8
+   * Gingerbread Men), added before any +50% bonus.
+   */
+  growthExtra?: { creature: CreatureId; amount: number };
   /**
    * Fort level this building gives the town (RULES_V2 5.5): 1 is +2
    * Defense for every defending stack, 2 is +4, 3 is +6 and a tower. The

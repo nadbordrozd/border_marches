@@ -73,12 +73,15 @@ export {
   LAUNCH_RAMP,
   commandC,
   lineDirection,
+  reelInLimits,
 } from "./factions/index.ts";
 export { GET_UP_EFFECT, GET_UP_HALF } from "./resolve.ts";
 export {
   actionError,
   activeStack,
+  aftersDue,
   applyAction,
+  cannotWalk,
   canShoot,
   shootsAnyHex,
   swapPartners,

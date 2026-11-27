@@ -913,6 +913,42 @@ describe("condition-kind rules", () => {
     );
   });
 
+  rule("flypaper-ribbon", "a stack's first retaliation sticks", () => {
+    const s = withRules(
+      patch(patch(board(), "d0", { count: 200, initialCount: 200 }), "a1", {
+        count: 100,
+        initialCount: 100,
+      }),
+      "defender",
+      ["flypaper-ribbon"],
+    );
+    const { d, fx: r } = fx(s);
+    r.strikeKind("a1", "d0", "melee", 0);
+    r.resolveReactions();
+    expect(cond(d.toState(), "a1", "stuck")?.clock).toBe(2);
+    // Only the first retaliation of each stack in a battle.
+    const later = patch(
+      {
+        ...d.toState(),
+        round: 2,
+        stacks: d
+          .toState()
+          .stacks.map((x) => (x.id === "a1" ? { ...x, conditions: [] } : x)),
+      },
+      "d0",
+      { retaliatedThisRound: false, retaliationsThisRound: 0 },
+    );
+    const again = fx(later);
+    again.fx.strikeKind("a1", "d0", "melee", 0);
+    again.fx.resolveReactions();
+    expect(cond(again.d.toState(), "a1", "stuck")).toBeUndefined();
+    expect(
+      again.d.events.some(
+        (e) => e.type === "retaliation" && e.stackId === "d0",
+      ),
+    ).toBe(true);
+  });
+
   rule("co-signer", "half a Reckoning goes to the nearest enemy", () => {
     const s = withRules(
       withConditions(board(), "a1", [{ kind: "reckoning", size: 20 }]),

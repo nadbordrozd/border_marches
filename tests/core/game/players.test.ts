@@ -21,7 +21,7 @@ import {
   type PlayerSetup,
 } from "../../../src/core/game/index.ts";
 import { getCreature } from "../../../src/data/creatures.ts";
-import { HERO_ROSTER, HIRE_COST } from "../../../src/data/players.ts";
+import { HIRE_COST, rosterFor } from "../../../src/data/players.ts";
 import type { MapObject } from "../../../src/core/map/types.ts";
 import {
   buildMap,
@@ -114,7 +114,7 @@ describe("new multi-player game", () => {
     const all = [...offered, ...onMap];
     expect(new Set(all).size).toBe(6);
     for (const id of all) expect(s.pool).not.toContain(id);
-    expect(s.pool).toHaveLength(HERO_ROSTER.length - 6);
+    expect(s.pool).toHaveLength(rosterFor(["lost-world"]).length - 6);
     expect(s.scenario).toBeNull();
   });
 

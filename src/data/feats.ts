@@ -174,14 +174,15 @@ export const FEAT_LIST: readonly FeatDef[] = [
     id: "pile-on",
     name: "Pile On",
     tags: ["horology", "onslaught"],
-    text: "Your stacks' Strikes deal 25% more damage to Delayed, Slowed or Shaken stacks.",
+    text: "Your stacks' Strikes deal 25% more damage to Delayed, Slowed, Shaken or Stuck stacks.",
     effects: [
       {
         kind: "strike-percent",
         strike: "all",
         direction: "dealt",
         percent: 25,
-        targetBears: ["delayed", "slowed", "shaken"],
+        // Stuck since the Candy Kingdom (FACTION_CANDY 5.2).
+        targetBears: ["delayed", "slowed", "shaken", "stuck"],
       },
     ],
   },

@@ -32,7 +32,7 @@ import { CREATURES } from "../data/creatures.ts";
 import { RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { SCHOOLS, SCHOOL_NAMES } from "../data/effects.ts";
 import { rosterOf } from "../data/factionCreatures.ts";
-import { FACTIONS, playableFactions } from "../data/factions.ts";
+import { FACTIONS, findFaction, playableFactions } from "../data/factions.ts";
 import { FEAT_LIST } from "../data/feats.ts";
 import { NEUTRAL_CREATURE_IDS } from "../data/neutrals.ts";
 import { OBJECT_TYPES, OBJECT_TYPE_IDS } from "../data/objectTypes.ts";
@@ -260,18 +260,28 @@ function byTier(a: CreatureDef, b: CreatureDef): number {
 }
 
 /**
- * Creatures shown: every registry creature but the Lost World's (the
- * summons, which only magic makes, come from SUMMONED_CREATURES).
+ * Whether the gallery shows a faction's content: not the Lost World's, nor
+ * a faction's that is not playable yet (the Candy Kingdom until its
+ * integration bead, bzc.117). Neutrals and strays always.
+ */
+export function galleryShowsFaction(faction: string): boolean {
+  return findFaction(faction)?.available !== false;
+}
+
+/**
+ * Creatures shown: every registry creature but the Lost World's and those
+ * of factions not playable yet (the summons, which only magic makes, come
+ * from SUMMONED_CREATURES).
  */
 export function galleryCreatures(): CreatureDef[] {
-  return Object.values(CREATURES).filter((c) => c.faction !== "lost-world");
+  return Object.values(CREATURES).filter((c) => galleryShowsFaction(c.faction));
 }
 
 function creatureSections(): GallerySection[] {
   const shown = new Set<string>();
   const take = (defs: readonly CreatureDef[]): GalleryEntry[] =>
     defs
-      .filter((d) => !shown.has(d.id) && d.faction !== "lost-world")
+      .filter((d) => !shown.has(d.id) && galleryShowsFaction(d.faction))
       .map((d) => {
         shown.add(d.id);
         return creatureEntry(d);
@@ -336,7 +346,7 @@ function creatureFilters(sections: readonly GallerySection[]): GalleryFilter[] {
 /** Hero classes shown (every class but the Lost World's Chieftain). */
 export function galleryHeroClasses(): string[] {
   return Object.values(HERO_CLASSES)
-    .filter((c) => c.faction !== "lost-world")
+    .filter((c) => galleryShowsFaction(c.faction))
     .map((c) => c.id);
 }
 
@@ -353,7 +363,7 @@ function heroSections(): GallerySection[] {
     };
   });
   const out = section("Hero classes", classes);
-  const heroes = NAMED_HEROES.filter((h) => h.faction !== "lost-world");
+  const heroes = NAMED_HEROES.filter((h) => galleryShowsFaction(h.faction));
   const factions = [
     ...FACTIONS.map((f) => f.id),
     ...heroes.map((h) => h.faction),

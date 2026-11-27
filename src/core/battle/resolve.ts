@@ -169,7 +169,12 @@ export function bears(
   stack: BattleStack,
   flag: keyof Pick<
     ConditionKindDef,
-    "cannotAct" | "cannotRetaliate" | "cannotShoot" | "cannotWait" | "hold"
+    | "cannotAct"
+    | "cannotRetaliate"
+    | "cannotShoot"
+    | "cannotWait"
+    | "cannotWalk"
+    | "hold"
   >,
 ): boolean {
   return stack.conditions.some((c) => conditionKind(c.kind)[flag] === true);
@@ -846,6 +851,13 @@ export class Resolver implements Effects {
         : [];
     const breakdown = computeBreakdown(ctx, extra);
     const target = ctx.defender;
+    // The per-round "struck in melee" flag (Chewy reads it), set once this
+    // Strike's damage is known.
+    if (
+      (kind === "melee" || kind === "retaliation") &&
+      target.meleeStruckRound !== d.round
+    )
+      d.update(targetId, { meleeStruckRound: d.round });
     const link = redirectLinkOf(target);
     let result: StrikeResult;
     let idx: number;
@@ -1031,6 +1043,16 @@ export class Resolver implements Effects {
     d.within(idx, null, () =>
       this.strikeKind(retaliatorId, targetId, "retaliation", 0),
     );
+    // Flypaper Ribbon (FACTION_CANDY 5.2): the first time each stack of
+    // the side retaliates in a battle, the stack it strikes becomes Stuck.
+    const side = d.get(retaliatorId).side;
+    if (
+      hasRule(d, side, "flypaper-ribbon") &&
+      this.useRule(side, `flypaper-ribbon:${retaliatorId}`)
+    )
+      d.within(idx, "flypaper-ribbon", () =>
+        this.addCondition(targetId, { kind: "stuck", clock: 2 }),
+      );
   }
 
   spendShot(id: StackId): boolean {
@@ -1526,6 +1548,7 @@ export class Resolver implements Effects {
     n: number,
     mode: "push" | "pull",
     stopAt: Hex | null,
+    reaim = false,
   ): Hex {
     const d = this.d;
     const start = d.get(stackId).hex;
@@ -1533,7 +1556,10 @@ export class Resolver implements Effects {
     let cur = start;
     let stoppedBy: StackId | null = null;
     for (let i = 0; i < n; i++) {
-      const next = stepHex(cur, dir);
+      // Re-aimed: toward the named hex again from each hex (a pull that
+      // ends next to it from off the six straight lines).
+      const step = reaim && stopAt ? directionToward(cur, stopAt) : dir;
+      const next = stepHex(cur, step);
       if (stopAt && sameHex(next, stopAt)) break;
       if (!isFree(d, next)) {
         stoppedBy = inBounds(next) ? (stackAt(d, next)?.id ?? null) : null;
@@ -1569,7 +1595,13 @@ export class Resolver implements Effects {
     return this.shove(stackId, ((dir % 6) + 6) % 6, n, "push", null);
   }
 
-  private line(stackId: StackId, ref: Hex, n: number, away: boolean): Hex {
+  private line(
+    stackId: StackId,
+    ref: Hex,
+    n: number,
+    away: boolean,
+    reaim = false,
+  ): Hex {
     const d = this.d;
     if (!this.isAlive(stackId) || n <= 0) return d.get(stackId).hex;
     const start = d.get(stackId).hex;
@@ -1585,6 +1617,7 @@ export class Resolver implements Effects {
       n,
       away ? "push" : "pull",
       away ? null : ref,
+      reaim && !away,
     );
   }
 
@@ -1592,8 +1625,13 @@ export class Resolver implements Effects {
     return this.line(stackId, awayFrom, n, true);
   }
 
-  pull(stackId: StackId, toward: Hex, n: number): Hex {
-    return this.line(stackId, toward, n, false);
+  pull(
+    stackId: StackId,
+    toward: Hex,
+    n: number,
+    options: { readonly reaim?: boolean } = {},
+  ): Hex {
+    return this.line(stackId, toward, n, false, options.reaim === true);
   }
 
   teleport(stackId: StackId, to: Hex): boolean {

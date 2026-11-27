@@ -570,6 +570,13 @@ export const KEYWORDS: readonly KeywordDef[] = [
     "bane",
   ),
   condition("fired-up", "Fired Up", "Storm boon", "+size Attack.", "boon"),
+  condition(
+    "stuck",
+    "Stuck",
+    "Clock bane",
+    "Cannot walk; it may still attack a stack next to it, shoot, cast and act, and pushes and pulls still move it.",
+    "bane",
+  ),
 ];
 
 const BY_ID: ReadonlyMap<string, KeywordDef> = new Map(
@@ -614,6 +621,9 @@ export const NAMES: readonly string[] = [
   "Lucky Penny",
   "Lucky Streak",
   "Quest Gate",
+  "Rock Candy Dragon",
+  "Rock Candy Grotto",
+  "The Four O'Clock",
 ];
 
 const EDGE = "A-Za-z0-9_";

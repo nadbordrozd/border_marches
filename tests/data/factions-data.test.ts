@@ -65,8 +65,8 @@ describe("v0.2 faction data", () => {
     expect(getCreature("skeleton").tags?.remains).toBe("bones");
   });
 
-  it("24 named heroes, four per class, with valid specialties", () => {
-    expect(NAMED_HEROES).toHaveLength(24);
+  it("32 named heroes, four per class, with valid specialties", () => {
+    expect(NAMED_HEROES).toHaveLength(32);
     const perClass = new Map<string, number>();
     for (const h of NAMED_HEROES) {
       perClass.set(h.heroClass, (perClass.get(h.heroClass) ?? 0) + 1);
@@ -78,7 +78,7 @@ describe("v0.2 faction data", () => {
       if (sp.kind === "creature")
         expect(getCreature(sp.creature).faction).toBe(h.faction);
     }
-    expect([...perClass.values()]).toEqual([4, 4, 4, 4, 4, 4]);
+    expect([...perClass.values()]).toEqual([4, 4, 4, 4, 4, 4, 4, 4]);
   });
 
   it("the classes' starting armies are the documents' (fight value about 1800)", () => {

@@ -6,7 +6,7 @@
 import { createRng, deriveSeed } from "../rng.ts";
 import { creatureFightValue } from "./damage.ts";
 import { runStartRule, startBattle } from "./engine.ts";
-import { groundKind } from "./registry.ts";
+import { ability, groundKind } from "./registry.ts";
 import { sideMagicFromSetup } from "./magic.ts";
 import type { Resolver } from "./resolve.ts";
 import { BATTLE_HEIGHT, BATTLE_WIDTH, hexIndex, inBounds } from "./hex.ts";
@@ -139,7 +139,8 @@ function clampArmy(n: number | undefined): number {
 }
 
 /**
- * Battle-start rules (4.6 form 2), attacker's then defender's, then army
+ * Battle-start rules (4.6 form 2), attacker's then defender's, then the
+ * abilities' battle-start hooks, then army
  * Morale and Luck (6): the n strongest eligible stacks start Heartened,
  * Shaken, Lucky or Jinxed. A refused stack is skipped and the next
  * strongest is tried.
@@ -149,6 +150,16 @@ function battleStart(fx: Resolver, setup: BattleSetup): void {
   for (const side of sides) {
     for (const rule of setup[side].startRules ?? [])
       runStartRule(fx, side, rule);
+  }
+  // Abilities' battle-start hooks, in field order (Hot from the Oven).
+  for (const s of fx.d.stacks.slice()) {
+    for (const id of s.creature.abilities) {
+      const def = ability(id);
+      if (!def.onBattleStart || !fx.isAlive(s.id)) continue;
+      fx.d.beginStep();
+      fx.d.within(null, `ability:${id}`, () => def.onBattleStart?.(fx, s.id));
+      fx.resolveReactions();
+    }
   }
   for (const side of sides) {
     for (const num of ARMY_NUMBERS) {

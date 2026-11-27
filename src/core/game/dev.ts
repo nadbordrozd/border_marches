@@ -6,7 +6,6 @@
  * The UI offers them only in dev mode (src/ui/dev-mode.ts); no rule or AI
  * calls them.
  */
-import { getCreature } from "../../data/creatures.ts";
 import { RESOURCE_IDS } from "../../data/economy.ts";
 import { townTree } from "../../data/factions.ts";
 import type { BuildingDef, Resources } from "../../data/types.ts";
@@ -17,6 +16,7 @@ import { addResources } from "./resources.ts";
 import { heroInTownOf } from "./town.ts";
 import {
   builtDefs,
+  dwellingGrowth,
   checkPlaying,
   cloneState,
   fail,
@@ -109,7 +109,7 @@ function buildAllInPlace(
       def.dwelling !== undefined &&
       town.dwellings[def.dwelling] === undefined
     ) {
-      const g = weeklyGrowth(getCreature(def.dwelling).growth, stockade, 0);
+      const g = weeklyGrowth(dwellingGrowth(town, def.dwelling), stockade, 0);
       town.dwellings[def.dwelling] = {
         available: g.added,
         remainder: g.remainder,

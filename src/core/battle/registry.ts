@@ -167,7 +167,17 @@ export interface Effects {
 
   // Movement (1.7)
   push(stackId: StackId, awayFrom: Hex, n: number): Hex;
-  pull(stackId: StackId, toward: Hex, n: number): Hex;
+  /**
+   * Pull n hexes toward a hex, stopping next to it. With `reaim` the
+   * direction is chosen again at each hex (Reel In, Come In, Dear), so a
+   * stack off the six straight lines still ends next to it.
+   */
+  pull(
+    stackId: StackId,
+    toward: Hex,
+    n: number,
+    options?: { readonly reaim?: boolean },
+  ): Hex;
   /** Push n hexes in hex direction `dir` (0..5: E, SE, SW, W, NW, NE). */
   pushDir(stackId: StackId, dir: number, n: number): Hex;
   teleport(stackId: StackId, to: Hex): boolean;
@@ -261,6 +271,12 @@ export interface ConditionKindDef {
   readonly cannotAct?: boolean;
   readonly cannotRetaliate?: boolean;
   readonly cannotShoot?: boolean;
+  /**
+   * The bearer cannot walk (Stuck): no walk of a move, an attack or an
+   * ability, and no rule that replaces its walk (Mist, a Sworn swap).
+   * Pushes, pulls, swaps and teleports by other rules still move it.
+   */
+  readonly cannotWalk?: boolean;
   /** Turned: the bearer fights for the side opposite its owner. */
   readonly turnsSide?: boolean;
   /** Clock when the rule does not give one (default 3). */
@@ -390,6 +406,17 @@ export interface AbilityDef {
   ): Reaction | null;
   /** At the owner's turn start, after ground and conditions. */
   onTurnStart?(fx: Effects, owner: StackId): void;
+  /**
+   * At battle start, after the armies' battle-start rules and before
+   * Morale and Luck, in field order (Hot from the Oven, The Four O'Clock).
+   */
+  onBattleStart?(fx: Effects, owner: StackId): void;
+  /**
+   * The owner takes an extra turn at the end of each round, before the
+   * round-end events, if it has had no extra turn this round and bears no
+   * Hold; in it, it cannot walk (Afters, FACTION_CANDY 5).
+   */
+  readonly roundEndTurn?: boolean;
   /** Activated: the act id (kind "ability") this ability performs. */
   readonly act?: string;
   /** Activated: usable every turn instead of once per battle (Hurl). */

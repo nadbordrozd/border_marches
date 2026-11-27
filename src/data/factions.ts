@@ -6,10 +6,17 @@
  * order, start buildings, dwellings, halls and fort levels), its hero
  * classes, town names, birthright and magic leanings. The v0.2 factions
  * are the Realm (humans), the Restless (undead) and the Goblin Horde
- * (goblins); the Lost World stays in the code and is not playable.
+ * (goblins). The Candy Kingdom (candy, FACTION_CANDY.md) has its data and
+ * rules here but is not playable until its integration bead (bzc.117);
+ * the Lost World stays in the code and is not playable.
  */
 import { BUILDING_IDS, BUILDINGS } from "./buildings.ts";
-import { CHURCHYARD_TREE, REALM_TREE, WARCAMP_TREE } from "./factionTowns.ts";
+import {
+  CHURCHYARD_TREE,
+  CONFECTIONERY_TREE,
+  REALM_TREE,
+  WARCAMP_TREE,
+} from "./factionTowns.ts";
 import type { School } from "../core/battle/types.ts";
 import type {
   BuildingDef,
@@ -110,6 +117,23 @@ export const WARCAMP_TOWN: TownTreeDef = {
   art: "goblin",
 };
 
+export const CONFECTIONERY_TOWN: TownTreeDef = {
+  ...CONFECTIONERY_TREE,
+  neutralGarrison: [
+    { creature: "gingerbread-man", count: 26 },
+    { creature: "peppermint-archer", count: 8 },
+  ],
+  townNames: [
+    "Sugarloaf",
+    "Toffee Hollow",
+    "Marzipan Mews",
+    "Fudgecombe",
+    "Gumdrop Green",
+  ],
+  // The MVP camp family, a fallback only until the Candy town art (bzc.114).
+  art: "dinosaur",
+};
+
 export const FACTIONS: readonly FactionDef[] = [
   {
     id: "humans",
@@ -161,6 +185,24 @@ export const FACTIONS: readonly FactionDef[] = [
     },
     schools: { bloom: 4, accord: 0, clock: 2, hush: 2, storm: 2 },
     guildCap: 3,
+  },
+  {
+    id: "candy",
+    name: "The Candy Kingdom",
+    blurb:
+      "Come in and stay: every native touch leaves the enemy Stuck, taffy reels it in, and the dragons have afters.",
+    // Playable with the integration bead (bzc.117).
+    available: false,
+    heroClasses: ["nutcracker", "confectioner"],
+    town: CONFECTIONERY_TOWN,
+    colour: "#e2589b",
+    birthright: {
+      name: "Sticky",
+      text: "A stack a native stack strikes in melee, attacking or retaliating, becomes Stuck for 2 rounds: it cannot walk.",
+      ability: "sticky",
+    },
+    schools: { bloom: 1, accord: 3, clock: 4, hush: 2, storm: 0 },
+    guildCap: 4,
   },
   {
     id: "lost-world",

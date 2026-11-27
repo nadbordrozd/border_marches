@@ -136,6 +136,13 @@ function armyFromGame(
   const specials = side.specials ?? [];
   const drills = side.drills ?? [];
   const flinger = specials.includes(SPECIALS.greatFlinger);
+  // Candy Kingdom specials ride on the natives as abilities (FACTION_CANDY
+  // 9): the Larder eats sweets, The Four O'Clock starts them Hastened.
+  const nativeExtras = [
+    ...(flinger ? ["cannonball"] : []),
+    ...(specials.includes(SPECIALS.larder) ? ["larder"] : []),
+    ...(specials.includes(SPECIALS.fourOClock) ? ["the-four-oclock"] : []),
+  ];
   const roundTable =
     side.hero !== null && specials.includes(SPECIALS.roundTable)
       ? ROUND_TABLE_MORALE
@@ -191,7 +198,7 @@ function armyFromGame(
         ...drills
           .filter((d) => d.startsWith(`${cdef.id}:`))
           .map((d) => d.slice(cdef.id.length + 1)),
-        ...(flinger && native ? ["cannonball"] : []),
+        ...(native ? nativeExtras : []),
       ].filter(
         (a, i, all) => !base.abilities.includes(a) && all.indexOf(a) === i,
       );

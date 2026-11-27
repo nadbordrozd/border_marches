@@ -218,6 +218,7 @@ export {
 export {
   armySize,
   cloneState,
+  dwellingGrowth,
   emptyArmy,
   findHero,
   findPlayer,

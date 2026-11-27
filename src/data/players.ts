@@ -1,11 +1,14 @@
 /**
  * Players, the tavern and the named-hero roster (RULES_V2 5.1, 5.4, 5.9).
  *
- * The roster is the 24 named heroes of the v0.2 factions (four per class,
- * src/data/classes.ts) followed by sixteen Lost World Chieftains,
- * which only join a game's pool when a player plays the Lost World.
+ * The roster is the named heroes of the v0.2 factions (four per class,
+ * src/data/classes.ts) followed by sixteen Lost World Chieftains. Heroes
+ * of a faction that is not playable (the Lost World; the Candy Kingdom
+ * until its integration bead) only join a game's pool when a player plays
+ * that faction.
  */
 import { NAMED_HEROES } from "./classes.ts";
+import { findFaction } from "./factions.ts";
 import type { Specialty } from "./classes.ts";
 import type { FactionId } from "./types.ts";
 
@@ -121,14 +124,16 @@ export const HERO_ROSTER: readonly HeroDef[] = [
 ];
 
 /**
- * The pool of a new game: every v0.2 hero, and the Chieftains only when a
- * player plays the Lost World.
+ * The pool of a new game: every hero of a playable faction, and those of
+ * a faction that is not (the Lost World's Chieftains) only when a player
+ * plays it.
  */
 export function rosterFor(factions: readonly FactionId[]): string[] {
-  const lostWorld = factions.includes("lost-world");
-  return HERO_ROSTER.filter((h) => h.faction !== "lost-world" || lostWorld).map(
-    (h) => h.id,
-  );
+  return HERO_ROSTER.filter(
+    (h) =>
+      findFaction(h.faction)?.available === true ||
+      factions.includes(h.faction),
+  ).map((h) => h.id);
 }
 
 export function findHeroDef(id: string): HeroDef | undefined {

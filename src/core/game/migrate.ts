@@ -19,7 +19,12 @@
  */
 import { findArtifact } from "../../data/artifacts.ts";
 import { getHeroClass } from "../../data/classes.ts";
-import { findHeroDef, HERO_ROSTER, playerColour } from "../../data/players.ts";
+import {
+  findHeroDef,
+  HERO_ROSTER,
+  playerColour,
+  rosterFor,
+} from "../../data/players.ts";
 import { emptyWorn } from "./artifacts.ts";
 import { maxMana, movementPoints } from "./effects.ts";
 import {
@@ -139,7 +144,8 @@ function upgradeV1ToV2(v1: V1State): V2State {
       tavern: { offer: [], retreated: [] },
     })),
     heroes: [],
-    pool: HERO_ROSTER.map((h) => h.id),
+    // A v1 player plays the Lost World: the pool of a Lost World game.
+    pool: rosterFor(["lost-world"]),
     scenario: null,
     towns: Object.fromEntries(
       Object.entries(v1.towns).map(([id, t]) => [id, { ...t }]),

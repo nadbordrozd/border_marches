@@ -7,6 +7,7 @@ import {
   TOWER_BASE_HARM,
   TOWER_HARM_PER_DWELLING,
 } from "../../data/factions.ts";
+import { getCreature } from "../../data/creatures.ts";
 import { ARMY_SLOTS, TOWN_SIGHT } from "../../data/hero.ts";
 import { sightRadius } from "./effects.ts";
 import { HOLD_DEFENSE_BONUS } from "../../data/neutrals.ts";
@@ -194,6 +195,20 @@ export function builtDefs(town: TownState): BuildingDef[] {
     if (def !== undefined) out.push(def);
   }
   return out;
+}
+
+/**
+ * A dwelling's weekly growth in this town before any +50% bonus: the
+ * creature's growth plus the town's extra growth for it (the Candy
+ * Kingdom's Bakery: +8 Gingerbread Men).
+ */
+export function dwellingGrowth(town: TownState, creature: CreatureId): number {
+  let growth = getCreature(creature).growth;
+  for (const def of builtDefs(town)) {
+    if (def.growthExtra?.creature === creature)
+      growth += def.growthExtra.amount;
+  }
+  return growth;
 }
 
 /**

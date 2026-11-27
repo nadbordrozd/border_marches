@@ -13,6 +13,7 @@
  *   "Recruit all" button's toast and disabled tooltip (bead bzc.104).
  */
 import {
+  dwellingGrowth,
   maxAffordable,
   scaleResources,
   weeklyGrowth,
@@ -70,7 +71,7 @@ export function dwellingStrip(town: TownState): DwellingView[] {
         available: built
           ? (town.dwellings[column.creature]?.available ?? 0)
           : 0,
-        growth: weeklyGrowth(getCreature(column.creature).growth, bonus, 0)
+        growth: weeklyGrowth(dwellingGrowth(town, column.creature), bonus, 0)
           .added,
       },
     ];

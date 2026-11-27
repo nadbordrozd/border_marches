@@ -608,6 +608,15 @@ const ROWS: ArtifactDef[] = [
     "When a Fired Up stack of yours kills a whole stack, it becomes Heartened for 1 round.",
     [sw("whetstone-pendant")],
   ),
+  // FACTION_CANDY 5.2: a maker of Stuck outside the Candy Kingdom.
+  wonder(
+    "flypaper-ribbon",
+    "Flypaper Ribbon",
+    "pocket",
+    4000,
+    "The first time each of your stacks retaliates in a battle, the stack it strikes becomes Stuck for 2 rounds.",
+    [sw("flypaper-ribbon")],
+  ),
 
   // ------------------------------------------------ Cursed Wonders (6)
   wonder(

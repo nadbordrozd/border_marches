@@ -134,6 +134,38 @@ export function teleportsToWalk(stack: BattleStack): boolean {
   return stack.creature.abilities.some((a) => ability(a).teleportWalk === true);
 }
 
+/**
+ * The stack cannot walk now: it bears a condition that stops walking
+ * (Stuck), or this is its round-end turn (Afters, FACTION_CANDY 5). Every
+ * walk reads it, and every rule that replaces a walk (Mist, a Sworn swap).
+ */
+export function cannotWalk(state: BattleState, stack: BattleStack): boolean {
+  return bears(stack, "cannotWalk") || stack.aftersRound === state.round;
+}
+
+/** The stack takes a round-end turn (an ability with `roundEndTurn`). */
+function hasRoundEndTurn(stack: BattleStack): boolean {
+  return stack.creature.abilities.some((a) => ability(a).roundEndTurn === true);
+}
+
+/**
+ * Stacks that will take a round-end turn (Afters) once every other turn of
+ * this round is done, as the board stands, in turn order: living, with the
+ * ability, no extra turn yet this round and no Hold.
+ */
+export function aftersDue(state: BattleState): StackId[] {
+  return state.stacks
+    .filter(
+      (s) =>
+        isAlive(s) &&
+        hasRoundEndTurn(s) &&
+        s.extraTurnRound !== state.round &&
+        !bears(s, "hold"),
+    )
+    .sort(compareTurnOrder)
+    .map((s) => s.id);
+}
+
 function bfs(
   state: BattleState,
   stack: BattleStack,
@@ -143,7 +175,8 @@ function bfs(
   const prev = new Int16Array(BATTLE_HEX_COUNT).fill(-1);
   const blocked = blockedCells(state, stack.id);
   const start = hexIndex(stack.hex);
-  const speed = limit;
+  // A stack that cannot walk reaches only its own hex.
+  const speed = cannotWalk(state, stack) ? 0 : limit;
   if (teleportsToWalk(stack)) {
     // Stacks, features and hazards between do not matter: any free hex
     // within Speed.
@@ -258,6 +291,8 @@ export function shootsAnyHex(stack: BattleStack): boolean {
 export function swapPartners(state: BattleState, stackId: StackId): StackId[] {
   const s = getStack(state, stackId);
   const out: StackId[] = [];
+  // The swap replaces the walk: a stack that cannot walk cannot swap.
+  if (cannotWalk(state, s)) return out;
   for (const c of s.conditions) {
     if (c.link === null || conditionKind(c.kind).swapAction !== true) continue;
     const far = state.stacks.find((x) => x.id === c.link);
@@ -846,10 +881,30 @@ function advance(d: Draft, fx: Resolver): void {
       if (beginTurn(d, fx, next, false)) return;
       continue;
     }
+    // Round-end turns (Afters) come before the round-end events.
+    if (grantAfters(d, fx)) continue;
     endRound(d, fx);
     if (d.winner !== null) return;
     startRound(d, fx, d.round + 1);
   }
+}
+
+/**
+ * Grants the round-end turns (Afters, FACTION_CANDY 5) once every other
+ * turn of the round is taken: each is the stack's one extra turn of the
+ * round (RULES_V2 1.11), taken in turn order. True when any was granted.
+ */
+function grantAfters(d: Draft, fx: Resolver): boolean {
+  const due = aftersDue(d.toState());
+  if (due.length === 0) return false;
+  d.beginStep();
+  for (const id of due) {
+    d.within(null, "ability:afters", () => {
+      if (fx.extraTurn(id)) d.update(id, { aftersRound: d.round });
+    });
+  }
+  fx.resolveReactions();
+  return true;
 }
 
 /** Starts a battle from a prepared (not yet started) state. Internal to setup. */

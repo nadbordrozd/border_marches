@@ -1,5 +1,6 @@
 /**
- * The three v0.2 factions in the game: each can be started, built and
+ * The v0.2 factions in the game (the Candy Kingdom too, which is in the
+ * data though not yet in setup): each can be started, built and
  * recruited from; Drills are per-player flags read by the battle setup;
  * natives and birthrights reach the engine; town specials pay and power;
  * the town trees match the faction documents' totals.
@@ -20,7 +21,7 @@ import type { GameState } from "../../../src/core/game/types.ts";
 import type { CreatureId, FactionId } from "../../../src/data/types.ts";
 import { buildMap, field, heroStart, monster, ok, town } from "./helpers.ts";
 
-const FACTIONS: FactionId[] = ["humans", "undead", "goblins"];
+const FACTIONS: FactionId[] = ["humans", "undead", "goblins", "candy"];
 
 function startAs(
   faction: FactionId,
@@ -62,12 +63,14 @@ const TOTALS: Record<string, [number, number, number, number, number]> = {
   humans: [25, 52500, 155, 104, 22],
   undead: [26, 56000, 117, 132, 34],
   goblins: [24, 45800, 179, 72, 13],
+  candy: [25, 50050, 150, 70, 32],
 };
 
 const FIRST_DWELLING: Record<string, [string, string, number]> = {
   humans: ["archery-range", "longbowman", 9],
   undead: ["charnel-pit", "ghoul", 9],
   goblins: ["powder-shed", "bomb-chucker", 10],
+  candy: ["mint-range", "peppermint-archer", 9],
 };
 
 describe.each(FACTIONS)("%s", (faction) => {
@@ -141,7 +144,13 @@ describe.each(FACTIONS)("%s", (faction) => {
     const bright =
       faction === "humans"
         ? { startRules: [{ id: "birthright:sworn" }] }
-        : { birthright: faction === "undead" ? "not-done-yet" : "launched" };
+        : {
+            birthright: {
+              undead: "not-done-yet",
+              goblins: "launched",
+              candy: "sticky",
+            }[faction as "undead" | "goblins" | "candy"],
+          };
     expect(setup.attacker).toMatchObject(bright);
     expect(setup.attacker.hero?.command).toBe(
       getHeroClass(hero.heroClass).command,
@@ -301,6 +310,7 @@ describe("Starting militia (RULES_V2 5.5)", () => {
     humans: { t1: "squire", n1: 14, t2: "longbowman", n2: 4 },
     undead: { t1: "skeleton", n1: 15, t2: "ghoul", n2: 4 },
     goblins: { t1: "goblin", n1: 20, t2: "bomb-chucker", n2: 5 },
+    candy: { t1: "gingerbread-man", n1: 15, t2: "peppermint-archer", n2: 4 },
   };
 
   for (const faction of FACTIONS) {

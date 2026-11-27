@@ -1,6 +1,7 @@
 /**
  * Hero classes, Commands and specialties: the one data module for them
- * (RULES_V2 3.1, 3.3, 3.6, 3.7; FACTION_HUMANS/UNDEAD/GOBLINS.md section 7).
+ * (RULES_V2 3.1, 3.3, 3.6, 3.7; FACTION_HUMANS/UNDEAD/GOBLINS/CANDY.md
+ * section 7).
  *
  * Each class has starting stats (sum 6, Power and Lore at least 1), a
  * ten-entry stat pattern (level L uses entry (L - 2) mod 10), skill offer
@@ -18,9 +19,9 @@
  * and Mustering and takes the larger weight; Wayfinder, which no faction
  * table lists, takes CONTENT_HEROES' default (might 2, magic 6).
  *
- * The v0.2 starting armies and the 24 named heroes ({@link NAMED_HEROES},
+ * The v0.2 starting armies and the 32 named heroes ({@link NAMED_HEROES},
  * four per class with their specialties) are the faction documents'
- * (sections 7 and 8; bead bzc.11).
+ * (sections 7 and 8; beads bzc.11 and, for the Candy Kingdom, bzc.111).
  */
 import type { Terrain } from "../core/map/types.ts";
 import type { PrimaryStat } from "./effects.ts";
@@ -104,6 +105,16 @@ export const COMMANDS: Readonly<Record<string, CommandDef>> = {
     id: "kaboom",
     name: "Kaboom",
     text: "Pick a hex. Every stack on it or next to it, friend or foe, takes 30 x C Harm.",
+  },
+  crack: {
+    id: "crack",
+    name: "Crack!",
+    text: "Pick an enemy stack that is Stuck. Up to C + 1 of your stacks next to it each Strike it in melee, in turn order; it retaliates only once.",
+  },
+  "come-in-dear": {
+    id: "come-in-dear",
+    name: "Come In, Dear",
+    text: "Pick an enemy stack and one of your stacks within C + 4 hexes of it. The enemy is pulled toward yours until it is next to it, and becomes Stuck for 2 rounds.",
   },
 };
 
@@ -516,6 +527,107 @@ export const WEATHERWITCH: HeroClassDef = {
   portrait: "portrait-hero-weatherwitch",
 };
 
+/** Nutcracker (FACTION_CANDY 7). Army: 20 Gingerbread Men, 6 Peppermint Archers. */
+export const NUTCRACKER: HeroClassDef = {
+  id: "nutcracker",
+  name: "Nutcracker",
+  faction: "candy",
+  leaning: "might",
+  nativeTerrain: "snow",
+  stats: { attack: 2, defense: 2, power: 1, lore: 1 },
+  pattern: [D, A, D, P, A, D, L, A, D, P],
+  weights: weightsFromKinds(
+    {
+      bloom: 1,
+      accord: 3,
+      clock: 3,
+      hush: 1,
+      storm: 0,
+      offence: 6,
+      armour: 9,
+      archery: 6,
+      riposte: 7,
+      standards: 5,
+      tactics: 8,
+      leadership: 6,
+      fortune: 4,
+      captaincy: 6,
+      omens: 5,
+      logistics: 6,
+      pathfinding: 4,
+      scouting: 3,
+      wellspring: 1,
+      learning: 3,
+      estates: 5,
+      mustering: 5,
+      parley: 4,
+      scrollcraft: 2,
+    },
+    2,
+  ),
+  startingSkills: ["bulwark", "vanguard"],
+  command: "crack",
+  startingArmy: [
+    { creature: "gingerbread-man", count: 20 },
+    { creature: "peppermint-archer", count: 6 },
+  ],
+  sprite: "hero-nutcracker",
+  portrait: "portrait-hero-nutcracker",
+};
+
+/**
+ * Confectioner (FACTION_CANDY 7). Army: 14 Gingerbread Men, 5 Peppermint
+ * Archers, 2 Sugarplums.
+ */
+export const CONFECTIONER: HeroClassDef = {
+  id: "confectioner",
+  name: "Confectioner",
+  faction: "candy",
+  leaning: "magic",
+  nativeTerrain: "snow",
+  stats: { attack: 1, defense: 1, power: 2, lore: 2 },
+  pattern: [L, P, L, D, P, L, A, P, L, D],
+  weights: weightsFromKinds(
+    {
+      bloom: 2,
+      accord: 7,
+      clock: 10,
+      hush: 5,
+      storm: 0,
+      offence: 2,
+      armour: 3,
+      archery: 4,
+      riposte: 2,
+      standards: 4,
+      tactics: 4,
+      leadership: 3,
+      fortune: 4,
+      captaincy: 4,
+      omens: 6,
+      logistics: 4,
+      pathfinding: 4,
+      scouting: 4,
+      wellspring: 7,
+      learning: 5,
+      estates: 5,
+      mustering: 3,
+      parley: 8,
+      scrollcraft: 5,
+    },
+    6,
+  ),
+  startingSkills: ["horology", "silver-tongue"],
+  startingPage: "appointment",
+  command: "come-in-dear",
+  startingArmy: [
+    { creature: "gingerbread-man", count: 14 },
+    { creature: "peppermint-archer", count: 5 },
+    { creature: "sugarplum", count: 2 },
+  ],
+  sprite: "hero-confectioner",
+  portrait: "portrait-hero-confectioner",
+};
+
 export const HERO_CLASSES: Readonly<Record<string, HeroClassDef>> = {
   chieftain: CHIEFTAIN,
   "knight-errant": KNIGHT_ERRANT,
@@ -524,6 +636,8 @@ export const HERO_CLASSES: Readonly<Record<string, HeroClassDef>> = {
   mortician: MORTICIAN,
   warlord: WARLORD,
   weatherwitch: WEATHERWITCH,
+  nutcracker: NUTCRACKER,
+  confectioner: CONFECTIONER,
 };
 
 /** The hero class with this id; throws on an unknown id. */
@@ -574,8 +688,9 @@ function named(
 }
 
 /**
- * The 24 named heroes (FACTION_HUMANS, FACTION_UNDEAD and FACTION_GOBLINS
- * section 8). Skill names map to skill ids as in the file comment
+ * The 32 named heroes (FACTION_HUMANS, FACTION_UNDEAD, FACTION_GOBLINS and
+ * FACTION_CANDY section 8; a faction's heroes join the hero pool once it
+ * is playable, src/data/players.ts `rosterFor`). Skill names map to skill ids as in the file comment
  * (Leadership -> banner, Armour -> bulwark, Accord -> covenant, Hush ->
  * quietus, Storm -> stormcalling).
  */
@@ -677,5 +792,36 @@ export const NAMED_HEROES: readonly NamedHeroDef[] = [
   named("pim", "Pim Powderkeg", "weatherwitch", {
     kind: "creature",
     creature: "bomb-chucker",
+  }),
+  // The Candy Kingdom
+  named("kernel", "Captain Kernel Crackwell", "nutcracker", {
+    kind: "creature",
+    creature: "peppermint-archer",
+  }),
+  named("brittle", "Dame Brittle Hazelby", "nutcracker", {
+    kind: "creature",
+    creature: "gummy-bear",
+  }),
+  named("walnut", "Major Walnut Thumps", "nutcracker", { kind: "command" }),
+  named("humbug", "Corporal Humbug", "nutcracker", {
+    kind: "resource",
+    resource: "gold",
+  }),
+  named("praline", "Madame Praline", "confectioner", {
+    kind: "spell",
+    spell: "late-bell",
+  }),
+  named("treacle", "Old Mother Treacle", "confectioner", {
+    kind: "spell",
+    spell: "treacle",
+  }),
+  named("fondant", "Auntie Fondant", "confectioner", {
+    kind: "skill",
+    skill: "horology",
+    replaces: "horology",
+  }),
+  named("gingersnap", "Granny Gingersnap", "confectioner", {
+    kind: "creature",
+    creature: "gingerbread-man",
   }),
 ];
