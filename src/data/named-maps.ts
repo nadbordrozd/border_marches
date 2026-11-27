@@ -67,6 +67,13 @@ export interface NamedMapGen {
   pocketPrizes?: readonly [number, number];
   /** Most guarded pockets in one zone. */
   pocketsPerZone?: number;
+  /**
+   * The map composition (bead bzc.102, docs/design/MAP_COMPOSITION.md):
+   * guarded treasure clusters in nooks (each start its own), treasure
+   * clearings and ponds, on the obstacle masses and passes of the first
+   * named maps.
+   */
+  composition?: boolean;
 }
 
 export interface NamedMapDef {
@@ -964,6 +971,12 @@ const HOURGLASS_MARCHES: NamedMapDef = {
  * round an oasis lake south of the Hold) and three neutral towns, with a
  * denser fill. Three players, not four: one start per faction, and the
  * generator's fourth start would sit on slow wasteland.
+ *
+ * Bead bzc.102: generated with the map composition (guarded treasure
+ * clusters in nooks, two days and more from every start but each start's
+ * own, treasure clearings and ponds) on the obstacle masses and passes it
+ * was drawn on, and its edits re-authored on that base: the Glove's
+ * pieces, the banks, Wonders and fair starts.
  */
 const NINEFOLD_LANDFALL: NamedMapDef = {
   id: "ninefold-landfall",
@@ -977,6 +990,7 @@ const NINEFOLD_LANDFALL: NamedMapDef = {
     landscapes: { volcanic: 1, winter: 1, desert: 1 },
     neutralTowns: [3, 3],
     density: { start: 30, middle: 27, town: 28, hold: 30 },
+    composition: true,
   },
   factions: ["humans", "undead", "goblins"],
   setup:
@@ -1060,252 +1074,6 @@ const NINEFOLD_LANDFALL: NamedMapDef = {
       guards: ["loose-artifact-cufflink"],
       note: "Four tyrant lizards bask on the warm rock over it (fight value 10016): the lava's dragon.",
     },
-    // Fair starts: gold for the west.
-    {
-      op: "set",
-      id: "haunted-mine-2",
-      at: [9, 57],
-      data: { resource: "gold", value: 12000 },
-      note: "The west's nearest gold lay 2.44 days out against 1.09 and 1.08: the haunted sawmill south of its start becomes a haunted gold mine, 0.99 days out.",
-    },
-    {
-      op: "set",
-      id: "monster-26",
-      at: [9, 56],
-      data: { count: 22, value: 12000 },
-      note: "Its sextons grow with it, 4 to 22 (fight value 1608 to 8844).",
-    },
-    // Fair starts: the north reached far more fights within two days.
-    {
-      op: "remove",
-      id: "tree-of-knowledge-3",
-      at: [26, 15],
-      note: "Four guarded sites crowd the valley south-west of the northern start: the tree of knowledge goes.",
-    },
-    {
-      op: "remove",
-      id: "monster-102",
-      at: [27, 16],
-      note: "With its guard.",
-    },
-    {
-      op: "remove",
-      id: "stray-hut-12",
-      at: [28, 15],
-      note: "So does the stray hut.",
-    },
-    {
-      op: "remove",
-      id: "monster-105",
-      at: [27, 15],
-      note: "With its guard.",
-    },
-    {
-      op: "remove",
-      id: "tutors-hut-14",
-      at: [29, 13],
-      note: "And a tutor's hut.",
-    },
-    {
-      op: "remove",
-      id: "monster-106",
-      at: [28, 14],
-      note: "With its guard.",
-    },
-    {
-      op: "remove",
-      id: "faction-outpost-6",
-      at: [28, 22],
-      note: "Two faction outposts stood side by side south of the valley: one goes.",
-    },
-    {
-      op: "remove",
-      id: "monster-24",
-      at: [27, 21],
-      note: "With its guard.",
-    },
-    {
-      op: "remove",
-      id: "faction-outpost-7",
-      at: [26, 25],
-      note: "And the other outpost's neighbours thin too: the second outpost goes.",
-    },
-    {
-      op: "remove",
-      id: "monster-25",
-      at: [25, 24],
-      note: "With its guard.",
-    },
-    {
-      op: "remove",
-      id: "tutors-hut-15",
-      at: [27, 22],
-      note: "And the tutor's hut beside it.",
-    },
-    {
-      op: "remove",
-      id: "monster-107",
-      at: [27, 23],
-      note: "With its guard.",
-    },
-    // Fair starts: the northern start had one free mine within two days
-    // against two for the others; each start's second sawmill gets a guard.
-    {
-      op: "guard",
-      id: "monster-sawmill-se",
-      at: [60, 52],
-      creature: "crooner",
-      count: 10,
-      value: 1400,
-      guards: ["mine-wood-4"],
-      note: "10 crooners (1090) at the south-eastern start's second sawmill, 0.86 days out.",
-    },
-    {
-      op: "guard",
-      id: "monster-sawmill-w",
-      at: [23, 38],
-      creature: "crooner",
-      count: 10,
-      value: 1400,
-      guards: ["mine-wood-5"],
-      note: "The same at the western start's second sawmill, 0.5 days out.",
-    },
-    // ...and Wonders behind guards in nooks on the other starts' sides.
-    {
-      op: "add",
-      id: "loose-artifact-can",
-      type: "loose-artifact",
-      at: [66, 49],
-      data: { artifact: "watering-can", value: 6000 },
-      note: "A Watering Can in a jungle nook north of the south-eastern start, 1.3 days out.",
-    },
-    {
-      op: "guard",
-      id: "monster-can",
-      at: [67, 49],
-      creature: "groundskeeper",
-      count: 20,
-      value: 6000,
-      guards: ["loose-artifact-can"],
-      note: "Its guard: 20 groundskeepers (4560).",
-    },
-    {
-      op: "add",
-      id: "loose-artifact-umbrella",
-      type: "loose-artifact",
-      at: [45, 60],
-      data: { artifact: "umbrella-of-state", value: 6000 },
-      note: "An Umbrella of State in a sandy nook west of the oasis, 1.4 days from the south-eastern start.",
-    },
-    {
-      op: "guard",
-      id: "monster-umbrella",
-      at: [46, 60],
-      creature: "sexton",
-      count: 11,
-      value: 6000,
-      guards: ["loose-artifact-umbrella"],
-      note: "Its guard: 11 sextons (4422).",
-    },
-    {
-      op: "add",
-      id: "loose-artifact-slippers",
-      type: "loose-artifact",
-      at: [7, 27],
-      data: { artifact: "felt-slippers-of-the-night-shift", value: 6000 },
-      note: "Felt Slippers of the Night Shift in a badlands nook north of the western start, 1.5 days out.",
-    },
-    {
-      op: "guard",
-      id: "monster-slippers",
-      at: [8, 27],
-      creature: "gumshoe",
-      count: 17,
-      value: 6000,
-      guards: ["loose-artifact-slippers"],
-      note: "Its guard: 17 gumshoes (4471).",
-    },
-    {
-      op: "add",
-      id: "loose-artifact-rod",
-      type: "loose-artifact",
-      at: [15, 28],
-      data: { artifact: "lightning-rod", value: 6000 },
-      note: "A Lightning Rod in a badlands nook north-east of the western start, 1.2 days out.",
-    },
-    {
-      op: "guard",
-      id: "monster-rod",
-      at: [15, 27],
-      creature: "notary",
-      count: 42,
-      value: 6000,
-      guards: ["loose-artifact-rod"],
-      note: "Its guard: 42 notaries (4494).",
-    },
-    {
-      op: "add",
-      id: "loose-artifact-greatcoat",
-      type: "loose-artifact",
-      at: [2, 35],
-      data: { artifact: "bailiffs-greatcoat", value: 6000 },
-      note: "A Bailiff's Greatcoat in a meadow nook north-west of the western start, 1.1 days out.",
-    },
-    {
-      op: "guard",
-      id: "monster-greatcoat",
-      at: [3, 35],
-      creature: "sexton",
-      count: 11,
-      value: 6000,
-      guards: ["loose-artifact-greatcoat"],
-      note: "Its guard: 11 sextons (4422).",
-    },
-    {
-      op: "add",
-      id: "loose-artifact-apron",
-      type: "loose-artifact",
-      at: [68, 67],
-      data: { artifact: "gardeners-apron", value: 6000 },
-      note: "A Gardener's Apron in a jungle nook south-east of the south-eastern start, 0.7 days out.",
-    },
-    {
-      op: "guard",
-      id: "monster-apron",
-      at: [68, 66],
-      creature: "groundskeeper",
-      count: 20,
-      value: 6000,
-      guards: ["loose-artifact-apron"],
-      note: "Its guard: 20 groundskeepers (4560).",
-    },
-    // Room to breathe: six wells and camps crowd the fields south of the
-    // northern start, and two camps stand side by side north of the Hold;
-    // four go, so the ground has room for its flowers and stones.
-    {
-      op: "remove",
-      id: "wishing-well-26",
-      at: [39, 21],
-      note: "A wishing well beside another wishing well goes.",
-    },
-    {
-      op: "remove",
-      id: "rally-camp-12",
-      at: [42, 21],
-      note: "A rally camp in the crowded field goes.",
-    },
-    {
-      op: "remove",
-      id: "rally-camp-11",
-      at: [45, 22],
-      note: "So does a second.",
-    },
-    {
-      op: "remove",
-      id: "rally-camp-26",
-      at: [41, 35],
-      note: "A rally camp beside another north of the Hold goes.",
-    },
     // More banks: one more in each wild land, a second in the snow, and
     // two in the east.
     {
@@ -1358,27 +1126,14 @@ const NINEFOLD_LANDFALL: NamedMapDef = {
       op: "add",
       id: "quiet-yard-east",
       type: "quiet-yard",
-      at: [70, 28],
+      at: [38, 59],
       data: {
         size: "medium",
         value: 6500,
         guard: [{ creature: "sexton", count: 10 }],
         prize: { essence: 8, gold: 2500 },
       },
-      note: "A quiet yard on the east edge between the south-eastern and northern starts (2.6 and 2.9 days): 10 sextons (4020, 62% of 6500).",
-    },
-    {
-      op: "add",
-      id: "stopped-belfry-frost",
-      type: "stopped-belfry",
-      at: [7, 11],
-      data: {
-        size: "medium",
-        value: 6500,
-        guard: [{ creature: "winder", count: 20 }],
-        prize: { xp: 3000, gold: 2500 },
-      },
-      note: "A belfry frozen silent in the far north-west, more than three days from every start: 20 winders (4100, 63% of 6500).",
+      note: "A quiet yard on a badlands rise west of the oasis, between the south-eastern and western starts (2.5 and 2.7 days): 10 sextons (4020, 62% of 6500).",
     },
     {
       op: "add",
@@ -1393,15 +1148,121 @@ const NINEFOLD_LANDFALL: NamedMapDef = {
       },
       note: "An overgrown greenhouse in the meadow by Greyfold: 17 groundskeepers (3876, 60% of 6500).",
     },
-    // Free loot: the new guards closed some off (south-east 3900, west
-    // 4000, north 5100 within two days).
+    // Bead bzc.102: the clearings take the pockets that held banks, so five
+    // more banks out in the wilds (the first Sealed Registry and
+    // Thunderstruck Pylon Yard on this map among them), and four mines.
     {
       op: "add",
-      id: "chest-southeast",
-      type: "treasure-chest",
-      at: [71, 61],
-      data: { resource: "gold", amount: 1000, chest: true, xp: 750 },
-      note: "A chest in a jungle nook against the east edge, 0.6 days from the south-eastern start.",
+      id: "sealed-registry-hold",
+      type: "sealed-registry",
+      at: [36, 34],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [{ creature: "notary", count: 38 }],
+        prize: { gold: 2500, essence: 4, xp: 1500 },
+      },
+      note: "A registry sealed in the badlands west of the Warlord's Hold (1.9 days from the northern start, 3.1 from the south-eastern): 38 notaries (4066, 63% of 6500).",
+    },
+    {
+      op: "add",
+      id: "thunderstruck-pylon-yard-north",
+      type: "thunderstruck-pylon-yard",
+      at: [63, 3],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [{ creature: "rigger", count: 18 }],
+        prize: { ore: 10, gold: 2500 },
+      },
+      note: "A pylon yard struck in the red badlands north of Redcairn (2.2 days from the northern start): 18 riggers (4014, 62% of 6500).",
+    },
+    {
+      op: "add",
+      id: "landfall-wreck-ash",
+      type: "landfall-wreck",
+      at: [12, 63],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [{ creature: "fire-eater", count: 10 }],
+        prize: {
+          joiners: [{ creature: "fire-eater", count: 4 }],
+          gold: 2500,
+        },
+      },
+      note: "A second ship on the lava, its crew still aboard: 10 fire-eaters (3880, 60% of 6500); four of them join the victor.",
+    },
+    {
+      op: "add",
+      id: "stopped-belfry-ridge",
+      type: "stopped-belfry",
+      at: [29, 28],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [{ creature: "winder", count: 20 }],
+        prize: { xp: 3000, gold: 2500 },
+      },
+      note: "A belfry at the end of a badlands bay south of the pond (2.2 days from the northern start, 3.1 from the western): 20 winders (4100, 63% of 6500).",
+    },
+    {
+      op: "add",
+      id: "quiet-yard-hold",
+      type: "quiet-yard",
+      at: [41, 44],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [{ creature: "sexton", count: 10 }],
+        prize: { essence: 8, gold: 2500 },
+      },
+      note: "A quiet yard below the Warlord's Hold: 10 sextons (4020, 62% of 6500).",
+    },
+    {
+      op: "add",
+      id: "overgrown-greenhouse-redcairn",
+      type: "overgrown-greenhouse",
+      at: [65, 14],
+      data: {
+        size: "medium",
+        value: 6500,
+        guard: [{ creature: "groundskeeper", count: 17 }],
+        prize: { wood: 20, essence: 5, gold: 2000 },
+      },
+      note: "A greenhouse gone wild in the meadow south of Redcairn (1.6 days from the northern start): 17 groundskeepers (3876, 60% of 6500).",
+    },
+    {
+      op: "add",
+      id: "mine-ore-redcairn",
+      type: "ore-pit",
+      at: [69, 7],
+      data: { resource: "ore" },
+      note: "An ore pit in the red badlands east of Redcairn.",
+    },
+    {
+      op: "add",
+      id: "mine-essence-hold",
+      type: "essence-spring",
+      at: [40, 41],
+      data: { resource: "essence" },
+      note: "An essence spring in the grey waste below the Hold.",
+    },
+    {
+      op: "add",
+      id: "mine-ore-lava",
+      type: "ore-pit",
+      at: [12, 66],
+      data: { resource: "ore" },
+      note: "An ore pit in the lava fields beside the wreck.",
+    },
+    {
+      op: "add",
+      id: "mine-wood-lava",
+      type: "sawmill",
+      at: [10, 67],
+      data: { resource: "wood" },
+      note: "A sawmill on the last wood at the lava's edge.",
     },
     {
       op: "add",
@@ -1478,17 +1339,6 @@ const NINEFOLD_LANDFALL: NamedMapDef = {
       },
       note: "A signpost on the northern road.",
     },
-    // Signs at the showpieces.
-    {
-      op: "add",
-      id: "sign-pyramid",
-      type: "sign",
-      at: [37, 51],
-      data: {
-        text: "THE PYRAMID. Within: a king, his court, and the Thumb of the Second Left Glove. Visitors are expected to stay.",
-      },
-      note: "Announce the Pyramid's Marvel piece.",
-    },
     {
       op: "add",
       id: "sign-sphinx",
@@ -1532,6 +1382,289 @@ const NINEFOLD_LANDFALL: NamedMapDef = {
         value: 3950,
       },
       note: "A guarded event below the Hold: 14 winders (2870) for 2000 gold and 1500 experience.",
+    },
+    // Fair starts (bead bzc.102): gold for the west.
+    {
+      op: "set",
+      id: "mine-wood-5",
+      at: [3, 35],
+      data: { resource: "gold", type: "gold-mine", value: 6000 },
+      note: "The west's nearest gold lay 2.2 days out against 0.8 and 1.6: its second sawmill, north-west of the start, becomes a gold mine (its first sawmill is 0.5 days out).",
+    },
+    {
+      op: "guard",
+      id: "monster-gold-west",
+      at: [4, 34],
+      creature: "sexton",
+      count: 11,
+      value: 6000,
+      guards: ["mine-wood-5"],
+      note: "11 sextons (4422) hold the new gold mine; with the ore pit's crooners they shut every way to it.",
+    },
+    {
+      op: "set",
+      id: "mine-wood-8",
+      at: [49, 10],
+      data: { resource: "gold", type: "gold-mine", value: 6000 },
+      note: "And the north's nearest gold lay 1.6 days out: its second sawmill, east of the start, becomes a gold mine, 1.1 days out (its first sawmill is 0.5 days out).",
+    },
+    {
+      op: "set",
+      id: "monster-49",
+      at: [49, 11],
+      data: { creature: "sexton", count: 11, value: 6000 },
+      note: "Its guard grows with it to 11 sextons (1044 to 4422).",
+    },
+    // Fair starts (bead bzc.102): the northern start, between the snow
+    // and the Hold, reached about twice the fights of the others within
+    // two days (98900 fight value against 46300 and 60000); eight guarded
+    // sites round it go, and the other starts get Wonders behind guards.
+    {
+      op: "remove",
+      id: "fallen-adventurer-3",
+      at: [30, 11],
+      note: "A fallen adventurer north-west of the northern start goes.",
+    },
+    {
+      op: "remove",
+      id: "monster-103",
+      at: [29, 12],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "caretaker-lodge-2",
+      at: [27, 13],
+      note: "A caretaker's lodge beside it goes.",
+    },
+    {
+      op: "remove",
+      id: "monster-47",
+      at: [27, 14],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "arena-1",
+      at: [26, 9],
+      note: "An arena west of them goes.",
+    },
+    {
+      op: "remove",
+      id: "monster-41",
+      at: [25, 9],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "sealed-box-2",
+      at: [28, 8],
+      note: "A sealed box beside the arena goes.",
+    },
+    {
+      op: "remove",
+      id: "monster-84",
+      at: [28, 7],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "loose-artifact-21",
+      at: [29, 2],
+      note: "An artifact on the northern edge goes.",
+    },
+    {
+      op: "remove",
+      id: "monster-58",
+      at: [28, 3],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "stray-hut-10",
+      at: [25, 20],
+      note: "A stray hut by the pond goes.",
+    },
+    {
+      op: "remove",
+      id: "monster-109",
+      at: [26, 19],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "fallen-adventurer-5",
+      at: [52, 24],
+      note: "A fallen adventurer south-east of the northern start goes.",
+    },
+    {
+      op: "remove",
+      id: "monster-122",
+      at: [52, 23],
+      note: "With its guard.",
+    },
+    {
+      op: "remove",
+      id: "tree-of-knowledge-4",
+      at: [61, 21],
+      note: "A tree of knowledge east of it goes.",
+    },
+    {
+      op: "remove",
+      id: "monster-124",
+      at: [60, 20],
+      note: "With its guard.",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-can",
+      type: "loose-artifact",
+      at: [65, 41],
+      data: { artifact: "watering-can", value: 6000 },
+      note: "A Watering Can in the meadow on the way north to Greyfold, 1.5 days from the south-eastern start.",
+    },
+    {
+      op: "guard",
+      id: "monster-can",
+      at: [65, 40],
+      creature: "groundskeeper",
+      count: 20,
+      value: 6000,
+      guards: ["loose-artifact-can"],
+      note: "Its guard: 20 groundskeepers (4560).",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-umbrella",
+      type: "loose-artifact",
+      at: [48, 62],
+      data: { artifact: "umbrella-of-state", value: 6000 },
+      note: "An Umbrella of State in a sandy nook west of the south-eastern start, 1.3 days out.",
+    },
+    {
+      op: "guard",
+      id: "monster-umbrella",
+      at: [47, 62],
+      creature: "sexton",
+      count: 11,
+      value: 6000,
+      guards: ["loose-artifact-umbrella"],
+      note: "Its guard: 11 sextons (4422).",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-apron",
+      type: "loose-artifact",
+      at: [69, 68],
+      data: { artifact: "gardeners-apron", value: 6000 },
+      note: "A Gardener's Apron in a jungle nook south-east of the south-eastern start, 0.9 days out.",
+    },
+    {
+      op: "guard",
+      id: "monster-apron",
+      at: [69, 69],
+      creature: "groundskeeper",
+      count: 20,
+      value: 6000,
+      guards: ["loose-artifact-apron"],
+      note: "Its guard: 20 groundskeepers (4560).",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-shears",
+      type: "loose-artifact",
+      at: [68, 55],
+      data: { artifact: "hedge-clipper-shears", value: 6000 },
+      note: "Hedge-Clipper Shears in the jungle strip along the east edge, 1.0 days from the south-eastern start.",
+    },
+    {
+      op: "guard",
+      id: "monster-shears",
+      at: [69, 55],
+      creature: "gumshoe",
+      count: 17,
+      value: 6000,
+      guards: ["loose-artifact-shears"],
+      note: "Its guard: 17 gumshoes (4471).",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-branch",
+      type: "loose-artifact",
+      at: [60, 40],
+      data: { artifact: "pressed-olive-branch", value: 6000 },
+      note: "A Pressed Olive Branch in a nook on the way north from the south-eastern start to Greyfold, 1.5 days out.",
+    },
+    {
+      op: "guard",
+      id: "monster-branch",
+      at: [61, 39],
+      creature: "notary",
+      count: 42,
+      value: 6000,
+      guards: ["loose-artifact-branch"],
+      note: "Its guard: 42 notarys (4494).",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-slippers",
+      type: "loose-artifact",
+      at: [0, 38],
+      data: { artifact: "felt-slippers-of-the-night-shift", value: 6000 },
+      note: "Felt Slippers of the Night Shift in a nook on the west edge by the western start, 1.1 days out.",
+    },
+    {
+      op: "guard",
+      id: "monster-slippers",
+      at: [0, 39],
+      creature: "gumshoe",
+      count: 17,
+      value: 6000,
+      guards: ["loose-artifact-slippers"],
+      note: "Its guard: 17 gumshoes (4471).",
+    },
+    {
+      op: "add",
+      id: "loose-artifact-greatcoat",
+      type: "loose-artifact",
+      at: [15, 58],
+      data: { artifact: "bailiffs-greatcoat", value: 6000 },
+      note: "A Bailiff's Greatcoat in a nook at the lava's edge south of the western start, 1.2 days out.",
+    },
+    {
+      op: "guard",
+      id: "monster-greatcoat",
+      at: [15, 57],
+      creature: "sexton",
+      count: 11,
+      value: 6000,
+      guards: ["loose-artifact-greatcoat"],
+      note: "Its guard: 11 sextons (4422).",
+    },
+    {
+      op: "add",
+      id: "chest-southeast",
+      type: "treasure-chest",
+      at: [68, 57],
+      data: { resource: "gold", amount: 1000, chest: true, xp: 750 },
+      note: "Free loot: a chest north-east of the south-eastern start, 0.9 days out (its Wonders' guards closed some off: it had 5000 to pick up within two days against 7100 and 7700).",
+    },
+    {
+      op: "add",
+      id: "pickup-essence-southeast",
+      type: "resource-pile",
+      at: [65, 66],
+      data: { resource: "essence", amount: 3 },
+      note: "And three essence south of the start, 0.6 days out.",
+    },
+    // Bead bzc.102: a pond fills the clearing west of the snow where the
+    // way from the western start ran north; a gap in the wood beside it
+    // keeps that way.
+    {
+      op: "ground",
+      cells: [[22, 21]],
+      obstacle: "none",
+      note: "A gap in the wood north of the pond, so the western start's way north still runs past it (6 days round the map without it, 4 with).",
     },
     // Bead bzc.95: no road runs over a site. The builder steps one-cell
     // sites off the roads and bends the roads round the rest; this wood

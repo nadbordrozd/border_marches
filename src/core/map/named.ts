@@ -142,9 +142,24 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
       ? { neutralTowns: { S: towns, M: towns, L: towns } }
       : {}),
     clusters: NAMED_CONFIG.clusters,
-    hoards: NAMED_CONFIG.hoards,
-    clearings: NAMED_CONFIG.clearings,
-    fields: NAMED_CONFIG.fields,
+    // Bead bzc.102: a map authored on the map composition gets its guarded
+    // treasure clusters (the starts' own too), treasure clearings and
+    // ponds; it keeps the obstacle masses it was drawn on and has no
+    // plazas, so its passes and the ways between its starts stay as drawn.
+    ...(gen.composition === true
+      ? {
+          hoards: {
+            rate: DEFAULT_GEN_CONFIG.hoards.rate,
+            awayFromStarts: NAMED_AWAY_FROM_STARTS,
+          },
+          clearings: { enabled: true },
+          fields: { enabled: true, plazaRadius: 0 },
+        }
+      : {
+          hoards: NAMED_CONFIG.hoards,
+          clearings: NAMED_CONFIG.clearings,
+          fields: NAMED_CONFIG.fields,
+        }),
     terrain: {
       volcanic: biome("volcanic"),
       winter: biome("winter"),
@@ -158,6 +173,13 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
     },
   };
 }
+
+/**
+ * Days (before roads) a named map's treasure clusters keep from every start
+ * but the starts' own (bead bzc.102): what a start reaches in its first
+ * days stays as the map was balanced.
+ */
+const NAMED_AWAY_FROM_STARTS = 2;
 
 /** The base and its corridors; decorations come after the edits. */
 function generateNamedBaseWithInfo(def: NamedMapDef): {

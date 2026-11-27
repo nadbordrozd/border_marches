@@ -23,7 +23,7 @@
  */
 import { inMountainBlock } from "./clusters.ts";
 import { N8 } from "./grid.ts";
-import { reachable } from "./paths.ts";
+import { movementCost, reachable } from "./paths.ts";
 import {
   O,
   T,
@@ -48,6 +48,12 @@ export interface HoardSite {
   rock: number[];
   /** Loot cells cut out of a wood (its trees cleared). */
   carved: number[];
+  /**
+   * A start's own cluster (bead bzc.102): the index of its start among
+   * the starts. Every start gets one of the same size, and placeObjects
+   * fills them alike.
+   */
+  start?: number;
 }
 
 /** Loot slots by count, as (dx, dy) with the back to the north. */
@@ -124,7 +130,8 @@ export function carveHoards(st: GenState, opt: HoardOptions): HoardSite[] {
   const { g, cfg } = st;
   const hc = cfg.hoards;
   const out: HoardSite[] = [];
-  if (Object.values(hc.rate).every((r) => r <= 0)) return out;
+  if (Object.values(hc.rate).every((r) => r <= 0) && hc.start.things < 2)
+    return out;
   const rng = stageRng(st, "hoard-sites");
   const home = homeCell(st);
   if (home < 0) return out;
@@ -149,16 +156,23 @@ export function carveHoards(st: GenState, opt: HoardOptions): HoardSite[] {
   const yard = cfg.objects.townClearance + 1;
   const nearGap = (i: number): boolean =>
     opt.pocketGaps.some((c) => g.cheb(c, i) <= 2);
-  /** Ground a cluster may touch at all. */
+  // Ground a cluster may touch at all (fixed while the clusters are cut,
+  // so worked out once).
+  const allowed = new Uint8Array(g.n);
+  for (let i = 0; i < g.n; i++) {
+    allowed[i] =
+      st.plaza[i] === 0 &&
+      st.occupied[i] === 0 &&
+      st.objBlocked[i] === 0 &&
+      nearPass[i] === 0 &&
+      (opt.pocketOf[i] ?? -1) < 0 &&
+      !nearTown(i, yard) &&
+      !nearGap(i)
+        ? 1
+        : 0;
+  }
   const mine = (i: number, zone: number): boolean =>
-    st.zone[i] === zone &&
-    st.plaza[i] === 0 &&
-    st.occupied[i] === 0 &&
-    st.objBlocked[i] === 0 &&
-    nearPass[i] === 0 &&
-    (opt.pocketOf[i] ?? -1) < 0 &&
-    !nearTown(i, yard) &&
-    !nearGap(i);
+    st.zone[i] === zone && allowed[i] === 1;
   /**
    * Open floor the guard and its zone of control may stand on: a room gap
    * may lie in it (the reach check makes sure nothing is cut off).
@@ -168,11 +182,19 @@ export function carveHoards(st: GenState, opt: HoardOptions): HoardSite[] {
   /** Open floor that may take loot or a new wall: no pass or gap. */
   const floor = (i: number, zone: number): boolean =>
     zocFloor(i, zone) && corridor[i] === 0;
+  // A cut never opens a new way into a pocket or beside a corridor (a cut
+  // cell may become open floor round a guard, bead bzc.102).
+  const sealed = new Uint8Array(g.n);
+  for (let i = 0; i < g.n; i++) {
+    if ((opt.pocketOf[i] ?? -1) < 0 && corridor[i] === 0) continue;
+    for (const j of g.around(i, N8)) sealed[j] = 1;
+  }
   /** Wood or rock a loot cell may be cut out of (never a border's seal). */
   const carvable = (i: number, zone: number): boolean =>
     st.terrain[i] !== T.water &&
     st.obstacle[i] !== O.none &&
     st.spine[i] === 0 &&
+    sealed[i] === 0 &&
     mine(i, zone);
   /**
    * A wall cell: already blocked, or open floor that may turn to forest
@@ -271,6 +293,37 @@ export function carveHoards(st: GenState, opt: HoardOptions): HoardSite[] {
     return ok ? rockWalls : undefined;
   };
 
+  /**
+   * Every loot cell can be taken from the guard's cell or an open cell of
+   * its zone of control, by a step the movement rules allow (a diagonal
+   * one needs a side open): with walls round the guard (bead bzc.102) a
+   * corner loot cell may otherwise sit behind them.
+   */
+  const lootReached = (
+    c: number,
+    loot: ReadonlySet<number>,
+    cut: ReadonlySet<number>,
+  ): boolean => {
+    const open = (i: number): boolean =>
+      i === c ||
+      (!loot.has(i) && g.cheb(i, c) <= 1 && (cut.has(i) || isOpen(st, i)));
+    for (const l of loot) {
+      const lx = g.x(l);
+      const ly = g.y(l);
+      const ok = g.around(l, N8).some((j) => {
+        if (!open(j)) return false;
+        const dx = lx - g.x(j);
+        const dy = ly - g.y(j);
+        if (dx === 0 || dy === 0) return true;
+        return (
+          open(g.idx(g.x(j) + dx, g.y(j))) || open(g.idx(g.x(j), g.y(j) + dy))
+        );
+      });
+      if (!ok) return false;
+    }
+    return true;
+  };
+
   /** The best site of a cluster of `k` things in `zone`, if any. */
   const siteFor = (
     zone: number,
@@ -278,18 +331,40 @@ export function carveHoards(st: GenState, opt: HoardOptions): HoardSite[] {
     k: number,
     cells: readonly number[],
     before: Uint8Array,
+    /**
+     * A start's own cluster: the guard this far (movement cost) from its
+     * town, near the middle, and six new walls at most (few ways
+     * lengthen, so the start kit keeps its distances).
+     */
+    near?: { cost: Float64Array; lo: number; hi: number },
   ): HoardSite | undefined => {
     const slots = SLOTS[k] ?? [];
     // Cheap checks and a score for every guard cell and facing.
     const cand: Array<{ c: number; dir: number; s: number }> = [];
     for (const c of cells) {
-      if (!zocFloor(c, zone) || taken[c] === 1) continue;
+      // The guard stands on open floor, or in a notch cut into the edge of
+      // a wood or range (bead bzc.102), its front open.
+      const dug = !zocFloor(c, zone);
+      if ((dug && !carvable(c, zone)) || taken[c] === 1) continue;
       if (nearTown(c, cfg.objects.guardTownClearance)) continue;
-      if (out.some((h) => g.cheb(h.guard, c) < 5)) continue;
+      if (out.some((h) => g.cheb(h.guard, c) < 4)) continue;
       if (g.around(c, N8).length < 8) continue;
+      // (A guard dug into a wood has no cost of its own: its open side's.)
+      if (
+        near === undefined &&
+        fromStarts !== undefined &&
+        [c, ...g.around(c, N8)].some((i) => (fromStarts[i] ?? Infinity) < away)
+      )
+        continue;
+      let pull = 0;
+      if (near !== undefined) {
+        const d = near.cost[c] ?? Infinity;
+        if (d < near.lo || d > near.hi) continue;
+        pull = (4 * Math.abs(d - (near.lo + near.hi) / 2)) / cfg.movement.day;
+      }
       for (let dir = 0; dir < 4; dir++) {
         let ok = true;
-        let cut = 0;
+        let cut = dug ? 1 : 0;
         const loot = new Set<number>();
         for (const [sx, sy] of slots) {
           const [dx, dy] = turn(sx, sy, dir);
@@ -304,11 +379,16 @@ export function carveHoards(st: GenState, opt: HoardOptions): HoardSite[] {
           }
         }
         if (!ok) continue;
-        // The rest of the zone of control: open floor in front.
+        // The rest of the zone of control: open floor in front, or wall
+        // (bead bzc.102: a guard may stand in a notch of the wood or range
+        // with only its front open; the walls are left as they are).
+        let fronts = 0;
         for (const i of g.around(c, N8)) {
-          if (!loot.has(i) && !zocFloor(i, zone)) ok = false;
+          if (loot.has(i)) continue;
+          if (zocFloor(i, zone)) fronts++;
+          else if (isOpen(st, i)) ok = false;
         }
-        if (!ok) continue;
+        if (!ok || fronts === 0) continue;
         // Nooks first: the walls that stand already, and the cells cut
         // into a range (no open ground lost to them).
         let have = 0;
@@ -321,43 +401,73 @@ export function carveHoards(st: GenState, opt: HoardOptions): HoardSite[] {
           if (s === "blocked") have++;
         }
         if (!ok) continue;
-        cand.push({ c, dir, s: have + cut + rng.float(0, 3) });
+        cand.push({ c, dir, s: have + cut + rng.float(0, 3) - pull });
       }
     }
     cand.sort((p, q) => q.s - p.s || p.c - q.c || p.dir - q.dir);
+    // The tidiness check is cheap, the reach floods are not: many of the
+    // first, a few of the second (bead bzc.102).
     let tries = 0;
+    let floods = 0;
     for (const { c, dir } of cand) {
-      if (++tries > 16) break;
+      if (++tries > 64) break;
       const loot = slots.map(([sx, sy]) => {
         const [dx, dy] = turn(sx, sy, dir);
         return g.idx(g.x(c) + dx, g.y(c) + dy);
       });
       const lootSet = new Set(loot);
       const cut = new Set(loot.filter((i) => !isOpen(st, i)));
+      if (!isOpen(st, c)) cut.add(c);
       const grown = new Set(
         wallsOf(st, c, lootSet).filter((w) => wallState(w, zone) === "grow"),
       );
-      const rock = tidy(grown, cut);
+      if (near !== undefined && grown.size > 6) continue;
+      // With the walls round the guard left standing; else with those
+      // beside the loot cut away (so a corner loot cell is reached); else
+      // with its whole zone of control dug out of the wood or range (bead
+      // bzc.102), where every such wall may go.
+      const ring = g
+        .around(c, N8)
+        .filter((i) => !lootSet.has(i) && !isOpen(st, i));
+      const side = ring.filter((i) => g.x(i) === g.x(c) || g.y(i) === g.y(c));
+      let rock: Set<number> | undefined;
+      for (const extra of [[], side, ring]) {
+        if (extra.length > 0 && !extra.every((i) => carvable(i, zone)))
+          continue;
+        const tryCut = new Set([...cut, ...extra]);
+        if (!lootReached(c, lootSet, tryCut)) continue;
+        rock = tidy(grown, tryCut);
+        if (rock === undefined) continue;
+        for (const i of extra) cut.add(i);
+        break;
+      }
       if (rock === undefined) continue;
       // Nothing else cut off: with the walls up, the loot in place and the
       // guard's zone of control shut, every cell reached before (but
-      // those) is reached still.
+      // those) is reached still. The open cells round the change joined
+      // nearby settle it (bead bzc.102); else a flood of the whole map.
       const zoc = new Set<number>([c, ...g.around(c, N8)]);
       const shut = (i: number): boolean =>
         isWalkable(st, i) && !grown.has(i) && !zoc.has(i);
-      const reach = reachable(st, home, shut);
-      let ok = true;
-      for (let i = 0; i < g.n && ok; i++) {
-        if (before[i] === 1 && shut(i) && reach[i] !== 1) ok = false;
+      const changed = [...zoc, ...grown];
+      if (!joinedNearby(st, changed, shut, before)) {
+        if (++floods > 12) break;
+        const reach = reachable(st, home, shut);
+        let ok = true;
+        for (let i = 0; i < g.n && ok; i++) {
+          if (before[i] === 1 && shut(i) && reach[i] !== 1) ok = false;
+        }
+        if (!ok) continue;
       }
-      if (!ok) continue;
-      // And the guard is reached through its open front.
-      const toGuard = reachable(
-        st,
-        home,
-        (i) => isWalkable(st, i) && !grown.has(i) && !lootSet.has(i),
-      );
-      if (toGuard[c] !== 1) continue;
+      // And the guard is reached through its open front: from it, a cell
+      // outside the change that was reached before (and so is still).
+      const front = (i: number): boolean =>
+        (isWalkable(st, i) || i === c) && !grown.has(i) && !lootSet.has(i);
+      const exits = new Set<number>();
+      for (const k of changed)
+        for (const j of g.around(k, N8))
+          if (before[j] === 1 && shut(j)) exits.add(j);
+      if (!joinedNearby(st, [c], front, undefined, exits)) continue;
       return {
         zone,
         slot,
@@ -371,28 +481,176 @@ export function carveHoards(st: GenState, opt: HoardOptions): HoardSite[] {
     return undefined;
   };
 
+  const before = reachable(st, home);
+  // Clusters but the starts' own keep their distance from every start.
+  const startCells = st.towns
+    .filter((t) => t.role === "player" || t.role === "open-start")
+    .map((t) => t.cell);
+  const fromStarts =
+    hc.awayFromStarts > 0 ? movementCost(st, startCells) : undefined;
+  const away = hc.awayFromStarts * cfg.movement.day;
+  const zoneCells = (zone: number): number[] => {
+    const cells: number[] = [];
+    for (let i = 0; i < g.n; i++) if (st.zone[i] === zone) cells.push(i);
+    return cells;
+  };
+  /** Changes the ground for a site; returns how to change it back. */
+  const apply = (site: HoardSite): (() => void) => {
+    const cells = [...site.walls, ...site.rock, ...site.carved];
+    const was = cells.map((i) => [st.obstacle[i] ?? O.none, before[i] ?? 0]);
+    const ring = [site.guard, ...g.around(site.guard, N8)];
+    const wasTaken = ring.map((i) => taken[i] ?? 0);
+    for (const w of site.walls) st.obstacle[w] = O.forest;
+    for (const w of site.rock) st.obstacle[w] = O.mountain;
+    for (const i of site.carved) st.obstacle[i] = O.none;
+    for (const i of ring) taken[i] = 1;
+    // Nothing was cut off: the reach changes only where the ground did.
+    for (const w of [...site.walls, ...site.rock]) before[w] = 0;
+    for (const i of site.carved) before[i] = 1;
+    out.push(site);
+    return () => {
+      cells.forEach((i, n) => {
+        st.obstacle[i] = was[n]?.[0] ?? O.none;
+        before[i] = was[n]?.[1] ?? 0;
+      });
+      ring.forEach((i, n) => {
+        taken[i] = wasTaken[n] ?? 0;
+      });
+      out.splice(out.indexOf(site), 1);
+    };
+  };
+
+  // A modest cluster for every start (bead bzc.102), the same size for
+  // each and as far from its own town, or none at all: starts stay alike.
+  const sc = hc.start;
+  if (sc.things >= 2) {
+    const starts = st.towns.filter(
+      (t) => t.role === "player" || t.role === "open-start",
+    );
+    const day = cfg.movement.day;
+    const costs = starts.map((t) => movementCost(st, t.cell));
+    // As asked; else a wider ring round the towns; else fewer things.
+    const tries: Array<[number, number, number]> = [];
+    for (let k = Math.min(5, sc.things); k >= 2; k--) {
+      tries.push([k, sc.days[0], sc.days[1]]);
+      tries.push([k, sc.days[0] * 0.75, sc.days[1] * 1.4]);
+    }
+    for (const [k, lo, hi] of tries) {
+      const undo: Array<() => void> = [];
+      for (const [n, t] of starts.entries()) {
+        const cost = costs[n];
+        if (cost === undefined) break;
+        const site = siteFor(t.zone, n, k, zoneCells(t.zone), before, {
+          cost,
+          lo: lo * day,
+          hi: hi * day,
+        });
+        if (site === undefined) break;
+        site.start = n;
+        undo.push(apply(site));
+      }
+      if (undo.length === starts.length) break;
+      for (const u of undo.reverse()) u();
+    }
+  }
+
   for (const z of st.zones) {
     const rate = hoardRate(st, z.id);
     const want = Math.round(((opt.open[z.id] ?? 0) * rate) / 100);
     if (rate <= 0 || want <= 0) continue;
-    const cells: number[] = [];
-    for (let i = 0; i < g.n; i++) if (st.zone[i] === z.id) cells.push(i);
+    const cells = zoneCells(z.id);
     for (const [slot, most] of opt.sizes(z.id).slice(0, want).entries()) {
-      const before = reachable(st, home);
       // The cluster as drawn, or a smaller one where it finds no nook.
       let site: HoardSite | undefined;
       for (let k = Math.min(5, most); k >= 2 && !site; k--) {
         site = siteFor(z.id, slot, k, cells, before);
       }
-      if (site === undefined) continue;
-      for (const w of site.walls) st.obstacle[w] = O.forest;
-      for (const w of site.rock) st.obstacle[w] = O.mountain;
-      for (const i of site.carved) st.obstacle[i] = O.none;
-      for (const i of [site.guard, ...g.around(site.guard, N8)]) taken[i] = 1;
-      out.push(site);
+      // No nook for even two things: the zone is full.
+      if (site === undefined) break;
+      apply(site);
     }
   }
   return out;
+}
+
+/** How far round a change the quick reach test looks. */
+const NEARBY = 6;
+
+/**
+ * A quick, sufficient reach test (bead bzc.102), within a box of
+ * {@link NEARBY} cells round the `changed` cells, under the movement rules
+ * (a diagonal step needs one of its two sides open) over `walk`. Without
+ * `targets`: every cell next to the change that was reached before
+ * (`before`) and is walkable joins every other, so whatever a way through
+ * the change joined is joined still. With `targets`: a walk from the
+ * first changed cell meets one of them.
+ */
+function joinedNearby(
+  st: GenState,
+  changed: readonly number[],
+  walk: (i: number) => boolean,
+  before?: Uint8Array,
+  targets?: ReadonlySet<number>,
+): boolean {
+  const { g } = st;
+  let x0 = g.w;
+  let y0 = g.h;
+  let x1 = -1;
+  let y1 = -1;
+  for (const i of changed) {
+    x0 = Math.min(x0, g.x(i));
+    y0 = Math.min(y0, g.y(i));
+    x1 = Math.max(x1, g.x(i));
+    y1 = Math.max(y1, g.y(i));
+  }
+  x0 = Math.max(0, x0 - NEARBY);
+  y0 = Math.max(0, y0 - NEARBY);
+  x1 = Math.min(g.w - 1, x1 + NEARBY);
+  y1 = Math.min(g.h - 1, y1 + NEARBY);
+  const inBox = (x: number, y: number): boolean =>
+    x >= x0 && x <= x1 && y >= y0 && y <= y1;
+  const ok = (x: number, y: number): boolean =>
+    inBox(x, y) && walk(g.idx(x, y));
+  let need: Set<number>;
+  let start: number;
+  if (targets !== undefined) {
+    need = new Set(targets);
+    start = changed[0] ?? -1;
+    if (start < 0 || need.size === 0) return false;
+  } else {
+    need = new Set<number>();
+    for (const k of changed)
+      for (const j of g.around(k, N8))
+        if (before?.[j] === 1 && walk(j)) need.add(j);
+    const first = need.values().next();
+    if (first.done === true) return true;
+    start = first.value;
+  }
+  const seen = new Set<number>([start]);
+  const stack = [start];
+  let left = targets !== undefined ? 1 : need.size - 1;
+  if (targets === undefined) need.delete(start);
+  while (stack.length > 0 && left > 0) {
+    const i = stack.pop() ?? 0;
+    const x = g.x(i);
+    const y = g.y(i);
+    for (const [dx, dy] of N8) {
+      const nx = x + dx;
+      const ny = y + dy;
+      if (!ok(nx, ny)) continue;
+      const j = g.idx(nx, ny);
+      if (seen.has(j)) continue;
+      if (dx !== 0 && dy !== 0 && !ok(x + dx, y) && !ok(x, y + dy)) continue;
+      seen.add(j);
+      if (need.has(j)) {
+        if (targets !== undefined) return true;
+        need.delete(j);
+        left--;
+      }
+      stack.push(j);
+    }
+  }
+  return left <= 0;
 }
 
 /**

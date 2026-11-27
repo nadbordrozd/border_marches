@@ -94,9 +94,83 @@ describe("map composition (bzc.96)", { timeout: 120_000 }, () => {
         }
       }
     }
-    // Several on every size; some hold an artifact.
-    expect(clusters).toBeGreaterThanOrEqual(20);
-    expect(artifacts).toBeGreaterThan(3);
+    // Several on every size; some hold an artifact. Bead bzc.102 (more
+    // nooks: guards in notches, rooms dug into the edges) about trebled
+    // them: 1.7, 2.9 and 9.5 a map before, 6.5, 9.8 and 23.8 after.
+    expect(clusters).toBeGreaterThanOrEqual(60);
+    expect(artifacts).toBeGreaterThan(10);
+  });
+
+  it("puts several clusters in a wild zone, richer in the treasure zones", () => {
+    // Bead bzc.102: two to four in a typical wild zone; the middle zones
+    // and the Hold (the treasure zones) hold more artifacts than the
+    // neutral towns' zones.
+    const per: Record<string, { clusters: number; zones: number }> = {};
+    const arts: Record<string, { things: number; artifacts: number }> = {};
+    for (const { map, info } of all()) {
+      const W = map.width;
+      const at = new Map(map.objects.map((o) => [o.y * W + o.x, o]));
+      for (const z of info.zones) {
+        const e = (per[z.role] ??= { clusters: 0, zones: 0 });
+        e.zones++;
+      }
+      for (const h of info.hoards) {
+        const role = info.zones[info.zoneOf[h.guard] ?? 0]?.role ?? "";
+        const e = per[role];
+        if (e !== undefined) e.clusters++;
+        const a = (arts[role] ??= { things: 0, artifacts: 0 });
+        for (const c of h.loot) {
+          a.things++;
+          if (at.get(c)?.kind === "artifact") a.artifacts++;
+        }
+      }
+    }
+    for (const role of ["middle", "town", "hold"]) {
+      const e = per[role];
+      expect(e, role).toBeDefined();
+      if (e === undefined) continue;
+      expect(e.clusters / e.zones, role).toBeGreaterThanOrEqual(1.5);
+    }
+    const share = (role: string): number =>
+      (arts[role]?.artifacts ?? 0) / Math.max(1, arts[role]?.things ?? 0);
+    expect(share("middle")).toBeGreaterThan(share("town"));
+  });
+
+  it("gives every start its own cluster, the same for each", () => {
+    // Bead bzc.102: a modest cluster per start (resource piles round one
+    // guard), alike in loot and guard, or none at all.
+    let maps = 0;
+    for (const { label, map, info } of all()) {
+      const W = map.width;
+      const at = new Map(map.objects.map((o) => [o.y * W + o.x, o]));
+      const own = info.hoards.filter(
+        (h) => info.zones[info.zoneOf[h.guard] ?? 0]?.role === "start",
+      );
+      const starts = info.zones.filter((z) => z.role === "start").length;
+      if (own.length === 0) continue;
+      maps++;
+      expect(own, label).toHaveLength(starts);
+      const loot = (h: { loot: number[] }): string =>
+        h.loot
+          .map((c) => {
+            const o = at.get(c);
+            return `${String(o?.data["resource"])}${String(o?.data["amount"])}`;
+          })
+          .join(",");
+      const guard = (h: { guard: number }): string => {
+        const g = at.get(h.guard);
+        return `${String(g?.data["creature"])}x${String(g?.data["count"])}`;
+      };
+      for (const h of own) {
+        expect(loot(h), label).toBe(loot(own[0] ?? h));
+        expect(guard(h), label).toBe(guard(own[0] ?? h));
+        for (const c of h.loot) {
+          expect(at.get(c)?.data["type"], label).toBe("resource-pile");
+        }
+      }
+    }
+    // Most maps find a nook for every start.
+    expect(maps).toBeGreaterThanOrEqual(7);
   });
 
   it("turns big guarded pockets into treasure clearings", () => {

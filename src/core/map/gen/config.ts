@@ -360,6 +360,35 @@ export interface GenConfig {
     piles: readonly [number, number];
     /** Chance of an artifact in a cluster, and then of a second one. */
     artifacts: readonly [number, number];
+    /**
+     * Richer clusters in the treasure zones (bead bzc.102): piles and
+     * artifact chances of these zone kinds instead (the middle zones and
+     * the Hold; the town zones keep the plain ones).
+     */
+    rich: Readonly<
+      Partial<
+        Record<
+          MapZoneKind,
+          {
+            piles: readonly [number, number];
+            artifacts: readonly [number, number];
+          }
+        >
+      >
+    >;
+    /**
+     * Every start's own cluster (bead bzc.102): `things` resource piles
+     * (fewer where one start has no nook for them all, the same for every
+     * start; under 2: none) round a guard between `days` of travel from
+     * its town, filled alike for every start.
+     */
+    start: { things: number; days: readonly [number, number] };
+    /**
+     * Days (movement before roads) every other cluster keeps from every
+     * start (bead bzc.102; 0: none). A named map authored on the map
+     * composition keeps its starts' first days as they were balanced.
+     */
+    awayFromStarts: number;
     /** Most things in one cluster (five fit round a guard). */
     most: number;
     /** Free cells (Chebyshev) kept from a pass or gap corridor. */
@@ -472,13 +501,16 @@ export const LEGACY_CLUSTERS: Pick<
  */
 export const LEGACY_COMPOSITION: {
   clusters: Partial<GenConfig["clusters"]>;
-  hoards: Pick<GenConfig["hoards"], "rate">;
+  hoards: Pick<GenConfig["hoards"], "rate" | "start">;
   clearings: Pick<GenConfig["clearings"], "enabled">;
   fields: Pick<GenConfig["fields"], "enabled" | "plazaRadius">;
   objects: Pick<GenConfig["objects"], "reserveRare">;
 } = {
   clusters: LEGACY_CLUSTERS,
-  hoards: { rate: { start: 0, middle: 0, town: 0, hold: 0 } },
+  hoards: {
+    rate: { start: 0, middle: 0, town: 0, hold: 0 },
+    start: { things: 0, days: [0, 0] },
+  },
   clearings: { enabled: false },
   fields: { enabled: false, plazaRadius: 0 },
   objects: { reserveRare: false },
@@ -690,9 +722,18 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
   },
 
   hoards: {
-    rate: { start: 0, middle: 2.2, town: 2, hold: 2.4 },
+    // Bead bzc.102 raised them from middle 2.2, town 2, hold 2.4: more
+    // nooks (guards in notches, rooms dug into the edges) let a zone hold
+    // two to four.
+    rate: { start: 0, middle: 3.4, town: 2.6, hold: 3.8 },
     piles: [2, 4],
     artifacts: [0.45, 0.25],
+    rich: {
+      middle: { piles: [3, 4], artifacts: [0.6, 0.3] },
+      hold: { piles: [3, 4], artifacts: [0.75, 0.4] },
+    },
+    start: { things: 3, days: [0.8, 1.4] },
+    awayFromStarts: 0,
     most: 5,
     corridorGap: 2,
   },

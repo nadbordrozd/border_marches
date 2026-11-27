@@ -18,9 +18,12 @@ import {
 } from "../../../src/data/objectTypes.ts";
 
 /** Fixed seeds per size (default players per size). */
+// Bead bzc.102: the denser treasure clusters move the rare big sites
+// between seeds (a library on S seeds 21 and 25 of 1-30, was 6 and 21; an
+// academy on M seeds 12, 16 and 17, was six of 1-30), so S 21 and M 12.
 const SEEDS: Record<MapSize, readonly number[]> = {
-  S: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-  M: [1, 2, 3, 4, 5, 6],
+  S: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 21],
+  M: [1, 2, 3, 4, 5, 6, 12],
   L: [1, 2, 3, 4],
 };
 

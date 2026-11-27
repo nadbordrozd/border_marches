@@ -56,6 +56,7 @@ import {
   guardTarget,
   ringOf,
   sizeGuard,
+  type GuardStack,
 } from "./guards.ts";
 import {
   canStep,
@@ -336,6 +337,11 @@ interface GuardRequest {
   ringAt: number;
   guards: string[];
   pass?: boolean;
+  /**
+   * Requests of one group get the first one's stack and ring (bead
+   * bzc.102: the starts' own clusters, guarded alike).
+   */
+  group?: string;
 }
 
 export interface PlacementReport {
@@ -407,7 +413,7 @@ export function placeObjects(st: GenState): PlacementReport {
   const hoardSizes: number[][] = st.zones.map(() => []);
   const hoardOpen: number[] = st.zones.map(() => 0);
   const hoardArts: number[][] = st.zones.map(() => []);
-  if (Object.values(hc.rate).some((r) => r > 0)) {
+  if (Object.values(hc.rate).some((r) => r > 0) || hc.start.things >= 2) {
     const seen = reachable(st, homeCell(st));
     for (let i = 0; i < g.n; i++) {
       if (seen[i] === 1 && isWalkable(st, i) && (pocketOf[i] ?? -1) < 0) {
@@ -419,11 +425,17 @@ export function placeObjects(st: GenState): PlacementReport {
       const want = Math.round(
         ((hoardOpen[z.id] ?? 0) * hoardRate(st, z.id)) / 100,
       );
+      // The treasure zones' clusters are richer (bead bzc.102).
+      const rich = hc.rich[z.role];
+      const chance = rich?.artifacts ?? hc.artifacts;
       for (let k = 0; k < want; k++) {
-        const arts = hrng.chance(hc.artifacts[0])
-          ? 1 + (hrng.chance(hc.artifacts[1]) ? 1 : 0)
+        const arts = hrng.chance(chance[0])
+          ? 1 + (hrng.chance(chance[1]) ? 1 : 0)
           : 0;
-        const piles = Math.min(hrng.int(...hc.piles), hc.most - arts);
+        const piles = Math.min(
+          hrng.int(...(rich?.piles ?? hc.piles)),
+          hc.most - arts,
+        );
         hoardSizes[z.id]?.push(piles + arts);
         hoardArts[z.id]?.push(arts);
       }
@@ -792,7 +804,14 @@ export function placeObjects(st: GenState): PlacementReport {
       .filter((h) => h.zone === z.id)
       .reduce((n, h) => n + h.loot.length, 0);
     const drawnFill = fillFor(z.role, open, 0, tierOf(z.id)).filter((f) => {
-      if (hoarded <= 0 || f.row.kind !== "pickup") return true;
+      // Only the loose things of a cluster's kind (bead bzc.102: resource
+      // piles and artifacts; chests, campfires and the rest stay).
+      if (
+        hoarded <= 0 ||
+        (f.row.type !== "resource-pile" && f.row.type !== "loose-artifact") ||
+        f.row.footprint.w * f.row.footprint.h !== 1
+      )
+        return true;
       hoarded--;
       return false;
     });
@@ -1122,21 +1141,40 @@ export function placeObjects(st: GenState): PlacementReport {
   // of control stays clear of other objects.
   const lrng = stageRng(st, "hoard-loot");
   const artifactRow = oc.table.find((r) => r.id === "loose-artifact");
+  // The starts' own clusters (bead bzc.102) hold the same piles, drawn
+  // once from their own stream.
+  const srng = stageRng(st, "start-hoard");
+  const startLoot: Array<{ row: MapObjectRow; data: Record<string, unknown> }> =
+    [];
   for (const site of hoardSites) {
     const kind = kindOf(site.zone);
     const tier = tierOf(site.zone);
-    const arts = hoardArts[site.zone]?.[site.slot] ?? 0;
+    const arts =
+      site.start === undefined ? (hoardArts[site.zone]?.[site.slot] ?? 0) : 0;
+    if (site.start !== undefined) {
+      while (startLoot.length < site.loot.length) {
+        const row = srng.weighted(
+          resourceRows,
+          resourceRows.map((r) => r.weights.start ?? 0),
+        );
+        startLoot.push({ row, data: roll(srng, row, 0) });
+      }
+    }
     const ids: string[] = [];
     let total = 0;
     site.loot.forEach((cell, n) => {
+      const same = site.start !== undefined ? startLoot[n] : undefined;
       const row =
-        n < arts && artifactRow !== undefined
-          ? artifactRow
-          : lrng.weighted(
-              resourceRows,
-              resourceRows.map((r) => r.weights[kind] ?? 0),
-            );
-      const data = roll(lrng, row, tier);
+        same !== undefined
+          ? same.row
+          : n < arts && artifactRow !== undefined
+            ? artifactRow
+            : lrng.weighted(
+                resourceRows,
+                resourceRows.map((r) => r.weights[kind] ?? 0),
+              );
+      const data =
+        same !== undefined ? { ...same.data } : roll(lrng, row, tier);
       const value = valueOf(row, data);
       const id = nextId(row.id);
       commit(st, {
@@ -1162,6 +1200,7 @@ export function placeObjects(st: GenState): PlacementReport {
       value: total,
       ringAt: site.guard,
       guards: ids,
+      ...(site.start !== undefined ? { group: "start-hoard" } : {}),
     });
   }
 
@@ -1650,20 +1689,26 @@ export function placeObjects(st: GenState): PlacementReport {
     starts.map((t) => t.cell),
   );
   const ringCost = (i: number): number => after[i] ?? Infinity;
+  const grouped = new Map<string, { s: GuardStack; ring: number }>();
   for (const r of guardReqs) {
     const c = ringCost(r.ringAt);
-    const ring = Number.isFinite(c) ? ringOf(c) : 3;
-    const s = sizeGuard(
-      grng,
-      r.value,
-      ring,
-      cfg.guards.jitter,
-      cfg.guards.minFightValue,
-      {
-        terrain: TERRAIN_OF[st.terrain[r.cell] ?? 0] ?? "grass",
-        ...(r.force !== undefined ? { force: r.force } : {}),
-      },
-    );
+    const first = r.group !== undefined ? grouped.get(r.group) : undefined;
+    const ring = first?.ring ?? (Number.isFinite(c) ? ringOf(c) : 3);
+    const s =
+      first?.s ??
+      sizeGuard(
+        grng,
+        r.value,
+        ring,
+        cfg.guards.jitter,
+        cfg.guards.minFightValue,
+        {
+          terrain: TERRAIN_OF[st.terrain[r.cell] ?? 0] ?? "grass",
+          ...(r.force !== undefined ? { force: r.force } : {}),
+        },
+      );
+    if (r.group !== undefined && first === undefined)
+      grouped.set(r.group, { s, ring });
     st.objects.push({
       id: nextId("monster"),
       kind: "monster",
@@ -1708,6 +1753,7 @@ export function placeObjects(st: GenState): PlacementReport {
     markCrowd,
     ...(oc.keepWaysOpen ? { shut: entrances } : {}),
   });
+
   return report;
 }
 

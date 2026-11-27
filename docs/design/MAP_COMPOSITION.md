@@ -100,10 +100,10 @@ generator in the original game; its hand-made maps are more open still.
   (S8, M12) hold every desert site again, and the Thunderstruck Pylon Yard is
   back on S maps. Border gates on S maps still need a gate site, which an S
   map rarely has (a follow-up).
-- **Named maps are unchanged.** Their configuration turns every part of this
-  bead off (legacy clusters, no clusters of treasure, no clearings, ponds or
-  plazas, no reordering), so their pinned base and built fingerprints stay
-  as they were.
+- **Named maps were unchanged** by this bead: their configuration turned every
+  part of it off (legacy clusters, no clusters of treasure, no clearings,
+  ponds or plazas, no reordering). Bead bzc.102 gave the Ninefold Landfall
+  the composition (section 6).
 
 ## 3. What the generator does
 
@@ -146,8 +146,78 @@ about 30 % longer (the cluster search floods the map per candidate).
 - Gate sites on S maps, so border gates and keymaster's tents appear there.
 - The decorations' sand bias is weak on a crowded desert (M12's sand gets
   fewer decorations per cell than other ground); the test uses M19.
-- Treasure clusters in start zones, placed alike for every start.
-- More nooks for clusters (S maps get one or two).
+- Done in bead bzc.102: treasure clusters in start zones, placed alike for
+  every start; more nooks for clusters.
+
+## 6. Bead bzc.102: more clusters, the starts' own, the Ninefold Landfall
+
+The user, again on the latest map (the Ninefold Landfall, which bzc.96 had
+left on the old composition): "The latest map is still far too empty. In
+homm you get clusters of resources guarded by a guardian. and artifacts.
+sometimes more than one."
+
+**More nooks** (`gen/hoards.ts`). Clusters were few (1.7, 2.9 and 9.5 a
+map) because nooks ran out: about one wild zone in two found one. A guard
+may now stand in a notch with walls at its sides as well as open floor (only
+its front needs a way in), or be dug into the edge of a wood or range
+itself; where the walls left standing would be untidy (a lone rock, a
+corner-only join) the sides of its zone of control, then all of it, are
+cut out of the edge, a small room with the guard at its mouth. Every loot
+cell must be taken by a legal step from the guard or an open cell of its
+zone of control, and a cut never opens a new way beside a pocket or a
+corridor. The quick reach test looks at the open cells round a change (a
+box of six cells; the whole map only when they do not join), so the search
+can try many more sites in about the same time. Guards keep four cells
+apart (was five), and the rates rose to 3.4, 2.6 and 3.8 clusters per 100
+open cells (middle, neutral-town and Hold zones; were 2.2, 2 and 2.4).
+
+**Richer treasure zones.** The middle zones and the Hold draw 3-4 resource
+piles a cluster (2-4 elsewhere) and an artifact on 60 % (Hold 75 %) of them,
+a second on 30 % (40 %), against 45 % and 25 % in the neutral towns' zones.
+
+**The starts' own.** Every start gets one cluster of three resource piles
+(two where one start has no nook for three; none where one has no nook at
+all) between 0.8 and 1.4 days from its town (a wider ring if needed), with
+no more than a few new walls, the same piles and the same guard for every
+start. A cluster's things now stand in only for the zone's loose piles and
+artifacts (the fill's chests, campfires and the rest stay).
+
+**Named maps.** The Ninefold Landfall is generated with the composition
+(`gen.composition`): its treasure clusters, clearings and ponds, on the
+obstacle masses and passes of its authored base (the larger masses and the
+plazas moved its passes and closed four of the ways between its starts),
+with clusters but the starts' own two days or more (before roads) from
+every start, so what a start reaches first stays as it was balanced. Its
+edits were re-authored on that base: the Glove's pieces where they were,
+the Pyramid and the Barrow, a gap beside a new pond and one quest gate gone
+to keep the way from the west to the north, gold for the west and the
+north, eight guarded sites gone round the northern start and seven Wonders
+behind guards for the other two, eleven banks and four mines added. The
+Keepers' Toll and the Hourglass Marches stay on the composition they were
+drawn on: their key-and-gate valleys and Marvel clefts are drawn on exact
+ground (a follow-up can re-author them the same way).
+
+| Size |        | Land passable % | Visitable /100 | Clusters | Clearings | Ponds | ms (best of 3, seeds 1-10) |
+| ---- | ------ | --------------- | -------------- | -------- | --------- | ----- | -------------------------- |
+| S    | before | 52.6            | 21.1           | 1.7      | 0.3       | 0.2   | 26                         |
+| S    | after  | 53.7            | 21.5           | 6.5      | 0.3       | 0.2   | 30                         |
+| M    | before | 52.2            | 21.5           | 2.9      | 0.9       | 0.7   | 58                         |
+| M    | after  | 52.9            | 22.0           | 9.8      | 0.9       | 0.7   | 57                         |
+| L    | before | 52.0            | 23.4           | 9.5      | 1.9       | 1.8   | 168                        |
+| L    | after  | 52.8            | 23.9           | 23.8     | 1.9       | 1.8   | 189                        |
+
+Per zone (seeds 1-10, after): S 1.3 a neutral town's zone, 1.1 a middle
+zone, 2.3 the Hold; M 1.9, 1.1 and 1.7; L 2.3, 2.1 and 3.2; and a start's
+own on 9 S, 8 M and 10 L maps of 10.
+
+The Ninefold Landfall: 25 clusters (3 the starts' own), 3 clearings and 2
+ponds (none before); its fairness (`startFairness`, the named-map test's
+bounds in brackets): nearest neutral town spread 0.44 days (< 0.75), mine
+spreads wood 0.37, ore 0.28, gold 0.33, essence 0.56 (< 0.75), free loot
+ratio 0.87 (> 0.85), free mines 1/1/1, sites ratio 0.76 (> 0.75), fights
+ratio 0.87 (> 0.85), start-to-start 1.18 (< 1.2); before: 0.50, 0.22,
+0.22, 0.14, 0.27, 0.96, 1/1/1, 0.79, 0.89, 1.17. Building it takes about
+120 ms (was about 105).
 
 [rmg]: https://vcmi.eu/developers/RMG_Description/
 [tpl]: https://vcmi.eu/modders/Random_Map_Template

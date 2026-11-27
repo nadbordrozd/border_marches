@@ -35,6 +35,7 @@ import {
   inBounds,
   validateMap,
 } from "../../../src/core/map/types.ts";
+import { generateMapWithInfo } from "../../../src/core/map/generate.ts";
 import { moveCosts, walkable } from "./map-helpers.ts";
 
 const built = new Map<string, GameMap>();
@@ -170,10 +171,12 @@ const SNAPSHOT: Record<
       ["town-7", 36, 41, "Warlord's Hold"],
     ],
   },
+  // Bead bzc.102: the Ninefold Landfall is generated with the map
+  // composition (treasure clusters, clearings, ponds) and re-authored.
   "ninefold-landfall": {
-    base: "72e779c3",
-    built: "e1a8b60c",
-    objects: 791,
+    base: "34f01d77",
+    built: "2a026665",
+    objects: 846,
     towns: [
       ["town-1", 62, 59, null],
       ["town-2", 14, 40, null],
@@ -508,10 +511,14 @@ describe("named maps", { timeout: 60_000 }, () => {
   });
 
   it("keeps the first two maps free of forced landscapes and extra fill", () => {
-    // Their bases are pinned above; this says why they stay put.
+    // Their bases are pinned above; this says why they stay put. Bead
+    // bzc.102: they keep the composition they were authored on too (their
+    // key-and-gate valleys and Marvel clefts are drawn on it); the
+    // Ninefold Landfall has the map composition.
     for (const id of ["keepers-toll", "hourglass-marches"]) {
       expect(def(id).gen, id).toBeUndefined();
     }
+    expect(def("ninefold-landfall").gen?.composition).toBe(true);
   });
 
   it("keeps a Marvel piece in a pocket behind a strong guard", () => {
@@ -573,6 +580,44 @@ describe("The Ninefold Landfall", { timeout: 60_000 }, () => {
       "Greyfold",
       "Redcairn",
     ]);
+  });
+
+  it("is composed: many guarded treasure clusters, clearings and ponds; each start's own alike", () => {
+    // Bead bzc.102 (docs/design/MAP_COMPOSITION.md).
+    const m = def(ID);
+    const { map, info } = generateMapWithInfo(m.seed, {
+      size: m.size,
+      players: m.players,
+      activePlayers: m.players,
+      decorations: false,
+      config: namedConfig(m),
+    });
+    expect(info.hoards.length).toBeGreaterThanOrEqual(20);
+    expect(info.clearings.length).toBeGreaterThanOrEqual(2);
+    expect(info.fields.ponds).toBeGreaterThanOrEqual(1);
+    const W = map.width;
+    const at = new Map(map.objects.map((o) => [o.y * W + o.x, o]));
+    const starts = startTownsOf(map);
+    const own = info.hoards.filter((h) =>
+      starts.some((t) => info.zoneOf[h.guard] === info.zoneOf[t.y * W + t.x]),
+    );
+    expect(own).toHaveLength(starts.length);
+    // The same loot behind the same guard for every start.
+    const loot = (h: { loot: number[] }): string =>
+      h.loot
+        .map((c) => {
+          const o = at.get(c);
+          return `${String(o?.data["resource"])}${String(o?.data["amount"])}`;
+        })
+        .join(",");
+    const guard = (h: { guard: number }): string => {
+      const g = at.get(h.guard);
+      return `${String(g?.data["creature"])}x${String(g?.data["count"])}`;
+    };
+    for (const h of own) {
+      expect(loot(h)).toBe(loot(own[0] ?? h));
+      expect(guard(h)).toBe(guard(own[0] ?? h));
+    }
   });
 
   it("has every landscape: the five grounds, lava, snow, sand and water", () => {
