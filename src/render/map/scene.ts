@@ -262,18 +262,53 @@ export function mapCanopy(
 
 // ---------------------------------------------------------------- peaks
 
+/**
+ * Chunkier mountains (bead bzc.145): ranges laid from great massifs about
+ * three cells wide first, with fewer foothills inside. On by default; the
+ * URL switch `?mountains=classic` shows the ranges of bead xaj.32 (no great
+ * massifs, the older tier shares) for comparison, `?mountains=chunky` forces
+ * them on.
+ */
+export const CHUNKY_MOUNTAINS_DEFAULT = true;
+
+/** Whether a location search string asks for the chunkier mountains. */
+export function chunkyMountains(search: string): boolean {
+  try {
+    const v = new URLSearchParams(search).get("mountains");
+    if (v === "classic") return false;
+    if (v === "chunky") return true;
+  } catch {
+    // An unreadable query keeps the default.
+  }
+  return CHUNKY_MOUNTAINS_DEFAULT;
+}
+
+/** The peak table, with or without the great massifs. */
+export function peakTable(chunky: boolean): PeakTable {
+  return Object.fromEntries(
+    GROUND_TERRAINS.map((terrain) => [
+      terrain,
+      peaksOf(terrain)
+        .filter((p) => chunky || p.tier !== "great")
+        .map((p) => ({
+          key: p.key,
+          w: p.w,
+          h: p.h,
+          tier: p.tier,
+        })),
+    ]),
+  ) as Record<GroundTerrain, PeakSprite[]>;
+}
+
+/** The ranges of bead xaj.32, without the great massifs. */
+export const CLASSIC_PEAK_SPRITES: PeakTable = peakTable(false);
+
 /** The peak sprites of every ground's mountains (assets/peaks.ts). */
-export const PEAK_SPRITES: PeakTable = Object.fromEntries(
-  GROUND_TERRAINS.map((terrain) => [
-    terrain,
-    peaksOf(terrain).map((p) => ({
-      key: p.key,
-      w: p.w,
-      h: p.h,
-      tier: p.tier,
-    })),
-  ]),
-) as Record<GroundTerrain, PeakSprite[]>;
+export const PEAK_SPRITES: PeakTable = chunkyMountains(
+  typeof location === "undefined" ? "" : location.search,
+)
+  ? peakTable(true)
+  : CLASSIC_PEAK_SPRITES;
 
 /** A map's mountain ranges: the field and every placed peak (peaks.ts). */
 export interface MapPeaks {

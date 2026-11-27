@@ -15,6 +15,12 @@
  *   three summits whose lower slopes are their ground's colours, kept only
  *   where their whole foot stands on the range, so a range reads as a few
  *   big shapes rising out of its plain rather than a pile of rocks.
+ * - GREAT MASSIFS (bead bzc.145, "chunkier mountains") come before those:
+ *   forms of three or four summits about three cells wide, laid first and
+ *   greedily; a family that has them lays its interior with fewer
+ *   foothills and closes holes with the biggest form that fits. A table
+ *   without the `great` tier (`?mountains=classic`, scene.ts) places the
+ *   ranges exactly as bead xaj.32 did.
  * - THE FAMILY of a peak is the ground under its foot; a hard change between
  *   two terrains is allowed.
  * - FEET RULE: never on a road, an object, an entrance or water.
@@ -46,7 +52,19 @@ const TURN = (2 * Math.PI) / (CELL * 3);
  * the colour of its own ground: a range is built from as few of them as fit,
  * with the smaller tiers only round them and along the edges.
  */
-export type PeakTier = "foothill" | "peak" | "summit" | "massif";
+export type PeakTier = "foothill" | "peak" | "summit" | "massif" | "great";
+
+/**
+ * The big forms whose lower slopes are their ground's own colours: the
+ * massifs (bead xaj.32) and the great massifs of three or four summits,
+ * about three cells wide (bead bzc.145).
+ */
+export const isBigTier = (tier: PeakTier): boolean =>
+  tier === "massif" || tier === "great";
+
+/** Whether a sprite key names a big form ({@link isBigTier}). */
+const isBigKey = (key: string): boolean =>
+  key.includes("-massif-") || key.includes("-great-");
 
 /** One peak image of a family. */
 export interface PeakSprite {
@@ -105,6 +123,15 @@ export const PEAKS = {
   massifYGap: 0.5,
   /** Share of the way from the ground to the underlay's tone. */
   underMix: 0.6,
+  /** A great massif's foot stands at least this deep, field units. */
+  greatDepth: 0.15,
+  /**
+   * Extra spacing of a foothill inside a range of a family with great
+   * massifs (bead bzc.145): fewer small pieces between the big forms.
+   */
+  chunkyFillerSpacing: 1.8,
+  /** The same for a foothill on a range's edge (bead bzc.145). */
+  chunkyFootSpacing: 1.3,
 } as const;
 
 /** Spacing per family: the spiky, high-contrast basalt needs more air. */
@@ -379,7 +406,7 @@ function fit(
   // A massif stands wholly inside its range: its whole foot on rock cells,
   // inside the outline, so its broad lower slopes never spread over a
   // passable cell beside the range.
-  if (sprite.tier === "massif") {
+  if (isBigTier(sprite.tier)) {
     const step = PEAKS.massifFootStep;
     for (let fx = x + inset; fx <= right - inset + step - 1; fx += step) {
       const px = Math.min(fx, right - inset);
@@ -411,6 +438,7 @@ function fit(
 }
 
 const TIER_RANK: Readonly<Record<PeakTier, number>> = {
+  great: 4,
   massif: 3,
   summit: 2,
   peak: 1,
@@ -419,10 +447,27 @@ const TIER_RANK: Readonly<Record<PeakTier, number>> = {
 
 /**
  * The tier a foot wants, from how deep it stands in the range. Besides, a
- * foot inside the range is a massif candidate ({@link massifCandidate}).
+ * foot inside the range is a massif and a great massif candidate
+ * ({@link bigCandidate}).
  */
-function tierAt(inland: number, depth: number, roll: number): PeakTier {
+function tierAt(
+  inland: number,
+  depth: number,
+  roll: number,
+  chunky: boolean,
+): PeakTier {
   if (depth < PEAKS.edgeDepth) return "foothill";
+  // Chunkier ranges (bead bzc.145): the outline still tapers to foothills,
+  // but behind it even a thin range wants peaks and summits, and the
+  // interior hardly ever a foothill. (Most Mountain cells are edge cells:
+  // three in four on the named maps.)
+  if (chunky) {
+    if (inland <= 1)
+      return roll < 0.3 ? "foothill" : roll < 0.78 ? "peak" : "summit";
+    if (inland === 2)
+      return roll < 0.06 ? "foothill" : roll < 0.5 ? "peak" : "summit";
+    return roll < 0.03 ? "foothill" : roll < 0.3 ? "peak" : "summit";
+  }
   if (inland <= 1) return roll < 0.62 ? "foothill" : "peak";
   if (inland === 2)
     return roll < 0.22 ? "foothill" : roll < 0.8 ? "peak" : "summit";
@@ -437,7 +482,7 @@ export interface PeakCandidate {
   readonly gj: number;
   /**
    * Grid index gj * cols + gi; a massif candidate's is that plus the number
-   * of grid points.
+   * of grid points, a great massif's that plus twice the number.
    */
   readonly idx: number;
   /** Row-major index of the cell the foot lies in. */
@@ -451,6 +496,7 @@ type Candidate = PeakCandidate;
 
 /** The sprites a candidate may try, best first; a hash rotates each tier. */
 const TIERS_FROM: Readonly<Record<PeakTier, readonly PeakTier[]>> = {
+  great: ["great"],
   massif: ["massif"],
   summit: ["summit", "peak", "foothill"],
   peak: ["peak", "foothill"],
@@ -479,7 +525,11 @@ function tierList(
   return list;
 }
 
-/** Each table's massif keys. */
+/** Whether a family of the table has great massifs (bead bzc.145). */
+const chunkyIn = (table: PeakTable, family: GroundTerrain): boolean =>
+  tierList(table, family, "great").length > 0;
+
+/** Each table's big-form keys (massifs and great massifs). */
 const massifSets = new WeakMap<PeakTable, ReadonlySet<string>>();
 
 function massifKeysOf(table: PeakTable): ReadonlySet<string> {
@@ -488,7 +538,7 @@ function massifKeysOf(table: PeakTable): ReadonlySet<string> {
     keys = new Set(
       (Object.values(table) as (readonly PeakSprite[])[])
         .flat()
-        .filter((s) => s.tier === "massif")
+        .filter((s) => isBigTier(s.tier))
         .map((s) => s.key),
     );
     massifSets.set(table, keys);
@@ -511,6 +561,7 @@ function options(table: PeakTable, c: Candidate): readonly PeakSprite[] {
 
 /** The candidate foot at grid point (gi, gj), or null. */
 function candidateAt(
+  table: PeakTable,
   field: PeakField,
   gi: number,
   gj: number,
@@ -533,7 +584,12 @@ function candidateAt(
   if (family === undefined) return null;
   const tier = spill
     ? "foothill"
-    : tierAt(field.inland[i] ?? 0, depth, unit(gi, gj, 4));
+    : tierAt(
+        field.inland[i] ?? 0,
+        depth,
+        unit(gi, gj, 4),
+        chunkyIn(table, family),
+      );
   return {
     bx,
     by,
@@ -549,29 +605,32 @@ function candidateAt(
 }
 
 /**
- * The massif candidate of a foot standing inside the range, or null: the
- * same foot, tried for a massif alone before every other tier (bead xaj.32),
- * so the big forms are laid first and the smaller tiers fill round them.
- * Its grid index follows every ordinary one (`slots` of them), so the two
+ * The massif (or great massif) candidate of a foot standing inside the
+ * range, or null: the same foot, tried for that big form alone before every
+ * other tier (beads xaj.32, bzc.145), so the big forms are laid first and
+ * the smaller tiers fill round them. Its grid index follows every ordinary
+ * one (`slots` of them; a great massif's follows the massifs'), so the
  * candidates of one foot keep their own slots in the placement.
  */
-function massifCandidate(
+function bigCandidate(
   table: PeakTable,
   field: PeakField,
   c: Candidate,
   slots: number,
+  tier: "massif" | "great",
 ): Candidate | null {
-  if (c.spill || tierList(table, c.family, "massif").length === 0) return null;
-  if (peakDepth(field, c.bx, c.by - 1) < PEAKS.massifDepth) return null;
+  if (c.spill || tierList(table, c.family, tier).length === 0) return null;
+  const depth = tier === "great" ? PEAKS.greatDepth : PEAKS.massifDepth;
+  if (peakDepth(field, c.bx, c.by - 1) < depth) return null;
   return {
     ...c,
-    idx: slots + c.idx,
-    tier: "massif",
-    priority: TIER_RANK.massif + unit(c.gi, c.gj, 6),
+    idx: (tier === "great" ? 2 : 1) * slots + c.idx,
+    tier,
+    priority: TIER_RANK[tier] + unit(c.gi, c.gj, tier === "great" ? 7 : 6),
   };
 }
 
-/** The foot at grid point (gi, gj): its candidates, massif first. */
+/** The foot at grid point (gi, gj): its candidates, the biggest first. */
 function candidatesAt(
   table: PeakTable,
   field: PeakField,
@@ -580,10 +639,15 @@ function candidatesAt(
   cols: number,
   slots: number,
 ): Candidate[] {
-  const c = candidateAt(field, gi, gj, cols);
+  const c = candidateAt(table, field, gi, gj, cols);
   if (c === null) return [];
-  const m = massifCandidate(table, field, c, slots);
-  return m === null ? [c] : [m, c];
+  const out: Candidate[] = [];
+  for (const tier of ["great", "massif"] as const) {
+    const big = bigCandidate(table, field, c, slots, tier);
+    if (big !== null) out.push(big);
+  }
+  out.push(c);
+  return out;
 }
 
 /** The order candidates are tried in: priority, then grid row and column. */
@@ -622,7 +686,7 @@ function choosePeak(
       Math.round(c.by),
       minW,
       minH,
-      c.tier === "massif",
+      isBigTier(c.tier),
       PEAK_SPACING[c.family],
     )
   )
@@ -647,13 +711,21 @@ function choosePeak(
     }
     if (nearest >= PEAKS.repeatPx) break;
   }
-  if (chosen === null || farthest < PEAKS.repeatMinPx) return null;
+  // A great massif is wider than repeatPx: a copy closer than that reads as
+  // stamped (bead bzc.145).
+  const minGap = c.tier === "great" ? PEAKS.repeatPx : PEAKS.repeatMinPx;
+  if (chosen === null || farthest < minGap) return null;
   const peak = chosen;
   // Inside a range a foothill only fills a real hole: small sprites
   // between the big ones read as rubble.
   const cell = Math.floor(c.by / CELL) * field.width + Math.floor(c.bx / CELL);
   const filler = chosenTier === "foothill" && (field.inland[cell] ?? 0) >= 2;
-  const k = PEAK_SPACING[c.family] * (filler ? PEAKS.fillerSpacing : 1);
+  const chunky = chunkyIn(table, c.family);
+  const fillerK = chunky ? PEAKS.chunkyFillerSpacing : PEAKS.fillerSpacing;
+  // Chunkier ranges space every foothill a little wider, the edge too.
+  const footK =
+    chunky && chosenTier === "foothill" ? PEAKS.chunkyFootSpacing : 1;
+  const k = PEAK_SPACING[c.family] * (filler ? fillerK : footK);
   const crowded = crowds(
     nearby,
     big,
@@ -693,6 +765,20 @@ function crowds(
   });
 }
 
+/** The tiers that close a hole, biggest first, with their hash salts. */
+const HOLE_TIERS: readonly (readonly [PeakTier, number])[] = [
+  ["massif", 23],
+  ["peak", 22],
+  ["foothill", 21],
+];
+const CHUNKY_HOLE_TIERS: readonly (readonly [PeakTier, number])[] = [
+  ["great", 24],
+  ["massif", 23],
+  ["summit", 25],
+  ["peak", 22],
+  ["foothill", 21],
+];
+
 /**
  * The foothill closing a hole at rock point (wx, wy) of cell `i`, given the
  * peaks kept so far round it, or null when no hole is there.
@@ -711,12 +797,11 @@ function holePeak(
   if (family === undefined) return null;
   // The biggest form that fits first (bead xaj.32): a hole between the
   // massifs closed by a crowd of small foothills reads as rubble.
+  // Chunkier ranges (bead bzc.145) try the great massifs and the summits
+  // too, so a hole is closed by one big form rather than a few small ones.
+  const order = chunkyIn(table, family) ? CHUNKY_HOLE_TIERS : HOLE_TIERS;
   const list: PeakSprite[] = [];
-  for (const [tier, salt] of [
-    ["massif", 23],
-    ["peak", 22],
-    ["foothill", 21],
-  ] as const) {
+  for (const [tier, salt] of order) {
     const tiers = tierList(table, family, tier);
     const s0 = Math.floor(unit(wx, wy, salt) * tiers.length);
     list.push(...tiers.slice(s0), ...tiers.slice(0, s0));
@@ -726,7 +811,7 @@ function holePeak(
     const peak = fit(field, sprite, wx, foot, false);
     if (peak === null || !bodyCovers(peak, wx, wy)) continue;
     // Two copies of a massif a sprite's width apart read as stamped.
-    const gap = sprite.tier === "massif" ? PEAKS.repeatPx : PEAKS.repeatMinPx;
+    const gap = isBigTier(sprite.tier) ? PEAKS.repeatPx : PEAKS.repeatMinPx;
     const repeated = nearby.some(
       (o) =>
         o.key === peak.key &&
@@ -895,7 +980,10 @@ function placeFrom(
   const G = PEAKS.grid;
   const cols = Math.ceil((width * CELL) / G);
   const rows = Math.ceil((height * CELL) / G);
-  /** Grid points; a massif candidate's slot is this plus its foot's. */
+  /**
+   * Grid points; a massif candidate's slot is this plus its foot's, a great
+   * massif's twice this plus its foot's.
+   */
   const slots = cols * rows;
   const again = prev !== null && dirty !== null;
   // Kept peaks by coarse bins, for the spacing and repeat tests: a dense
@@ -958,7 +1046,7 @@ function placeFrom(
       for (let gi = 0; gi < cols; gi += 1)
         order.push(...candidatesAt(table, field, gi, gj, cols, slots));
     order.sort(byPriority);
-    kept = new Array<PlacedPeak | undefined>(2 * slots).fill(undefined);
+    kept = new Array<PlacedPeak | undefined>(3 * slots).fill(undefined);
   } else {
     kept = prev.kept.slice();
     const staying: Candidate[] = [];
@@ -1121,7 +1209,7 @@ function bodyCovers(peak: PlacedPeak, wx: number, wy: number): boolean {
   if (wy < peak.y || wy >= peak.baseY) return false;
   const t = (wy - peak.y) / peak.h;
   // A massif's two or three summits make its top broad: a trapezoid.
-  const half = peak.key.includes("-massif-")
+  const half = isBigKey(peak.key)
     ? (peak.w / 2) * (0.3 + 0.6 * t)
     : (peak.w / 2) * (0.25 + 0.65 * t);
   return Math.abs(wx - (peak.x + peak.w / 2)) <= half;

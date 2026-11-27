@@ -8,7 +8,7 @@
 import type { GroundTerrain } from "../../assets/manifest";
 import { context2d, createSurface } from "./assets";
 import type { Surface } from "./assets";
-import { PEAK_UNDER } from "./peaks";
+import { PEAK_UNDER, isBigTier } from "./peaks";
 import type { PeakTier } from "./peaks";
 
 export const PEAK_TONE = {
@@ -137,7 +137,8 @@ export function toneRgba(
   terrain: GroundTerrain,
   tier: PeakTier,
 ): void {
-  const massif = tier === "massif";
+  // The great massifs (bead bzc.145) are painted as the massifs are.
+  const massif = isBigTier(tier);
   if (massif) openFoot(px, w, h);
   const dark = PEAK_LINE[terrain];
   const under = PEAK_UNDER[terrain];

@@ -392,6 +392,35 @@ const PEAK_ROWS: readonly (readonly [
   ["volcanic", "massif", 2, 148, 72],
   ["volcanic", "massif", 3, 148, 83],
   ["volcanic", "massif", 4, 148, 79],
+  // Great massifs (bead bzc.145, set great-massifs): three or four summits
+  // on one body about three cells wide, laid before every other tier so a
+  // range reads as a few big mountains (scene.ts CHUNKY_MOUNTAINS_DEFAULT).
+  ["grass", "great", 1, 256, 145],
+  ["grass", "great", 2, 256, 145],
+  ["grass", "great", 3, 256, 157],
+  ["grass", "great", 4, 256, 139],
+  ["steppe", "great", 1, 256, 153],
+  ["steppe", "great", 2, 256, 160],
+  ["badlands", "great", 1, 256, 128],
+  ["badlands", "great", 2, 256, 145],
+  ["badlands", "great", 3, 256, 160],
+  ["snow", "great", 1, 256, 149],
+  ["snow", "great", 2, 256, 156],
+  ["snow", "great", 3, 256, 163],
+  ["sand", "great", 1, 256, 159],
+  ["sand", "great", 2, 256, 151],
+  ["sand", "great", 3, 256, 148],
+  ["wasteland", "great", 1, 256, 163],
+  ["wasteland", "great", 2, 256, 163],
+  ["jungle", "great", 1, 256, 165],
+  ["jungle", "great", 2, 256, 158],
+  ["frosting", "great", 1, 256, 166],
+  ["frosting", "great", 2, 256, 149],
+  ["swamp", "great", 1, 256, 160],
+  ["swamp", "great", 2, 256, 165],
+  ["swamp", "great", 3, 256, 142],
+  ["volcanic", "great", 1, 256, 164],
+  ["volcanic", "great", 2, 256, 155],
   // Swamp (bead bzc.126, set swamp-peaks): mossy peat hummocks and crags
   // under thick olive moss, some with roots down their faces.
   ["swamp", "foothill", 1, 40, 25],
@@ -449,7 +478,10 @@ export const PEAK_ASSETS: readonly PeakAsset[] = PEAK_ROWS.map(
   }),
 );
 
-/** The peaks of one ground: its family's, then the borrowed tiers. */
+/**
+ * The peaks of one ground: its family's, then the borrowed tiers. The big
+ * forms are never borrowed: their lower slopes are the lender's own ground.
+ */
 export function peaksOf(terrain: GroundTerrain): readonly PeakAsset[] {
   const family = PEAK_FAMILY[terrain];
   const own = PEAK_ASSETS.filter((peak) => peak.terrain === family);
@@ -459,7 +491,11 @@ export function peaksOf(terrain: GroundTerrain): readonly PeakAsset[] {
   return [
     ...own,
     ...PEAK_ASSETS.filter(
-      (peak) => peak.terrain === lender && !tiers.has(peak.tier),
+      (peak) =>
+        peak.terrain === lender &&
+        !tiers.has(peak.tier) &&
+        peak.tier !== "massif" &&
+        peak.tier !== "great",
     ),
   ];
 }

@@ -1,0 +1,172 @@
+{
+  "grass-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three green summits under a grey crown on one broad body, meadow-green slopes tapering to points: one great form",
+    "at": "2026-11-27T11:36:01.555Z"
+  },
+  "snow-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three snow-capped summits on one body over a snowfield foot, clean silhouette, lit from the left",
+    "at": "2026-11-27T11:36:01.687Z"
+  },
+  "badlands-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three flat-topped buttes on one strata ridge over a red scree skirt; reads as one big mesa range",
+    "at": "2026-11-27T11:36:01.837Z"
+  },
+  "sand-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "tall sandstone mesa, a spire and two knobs on one body rising from drifted sand; top complete (outline on row 0)",
+    "at": "2026-11-27T11:36:01.992Z"
+  },
+  "grass-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "four green summits on one body with grey tips; slopes a deeper green than the meadow but one great form",
+    "at": "2026-11-27T11:46:43.958Z"
+  },
+  "grass-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "one broad high green mountain with a grey crest and two shoulders, meadow-green slopes tapering out",
+    "at": "2026-11-27T11:46:44.099Z"
+  },
+  "snow-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "four snow-capped peaks on one long body over a snowfield foot",
+    "at": "2026-11-27T11:46:44.243Z"
+  },
+  "snow-c#0": {
+    "verdict": "REJECTED",
+    "notes": "the round snow dome behind the peaks reads as a snowball or a moon",
+    "at": "2026-11-27T11:46:44.372Z"
+  },
+  "badlands-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a broad strata mesa with a lower butte over a flared red scree skirt; one big table form",
+    "at": "2026-11-27T11:46:44.562Z"
+  },
+  "badlands-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a long fluted red cliff ridge with two hoodoo spires and a butte, one body",
+    "at": "2026-11-27T11:46:44.730Z"
+  },
+  "sand-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three rounded wind-carved sandstone summits on one body rising from drifted sand",
+    "at": "2026-11-27T11:46:44.876Z"
+  },
+  "sand-c#0": {
+    "verdict": "REJECTED",
+    "notes": "two stacked round table rocks read as a layered cake",
+    "at": "2026-11-27T11:46:45.024Z"
+  },
+  "steppe-a#0": {
+    "verdict": "REJECTED",
+    "notes": "the straw foot spreads as flat horizontal strips with a stepped, straight-cut bottom",
+    "at": "2026-11-27T11:46:45.179Z"
+  },
+  "steppe-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "one high sharp tan summit with two lower crags and long spurs over a straw foot",
+    "at": "2026-11-27T11:46:45.299Z"
+  },
+  "wasteland-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three jagged basalt summits on one body with thin ember cracks over a grey ash foot",
+    "at": "2026-11-27T11:50:31.465Z"
+  },
+  "wasteland-b#0": {
+    "verdict": "REJECTED",
+    "notes": "the main summit runs off the top of the image: its tip is cut flat (13 px, no outline)",
+    "at": "2026-11-27T11:56:28.182Z"
+  },
+  "volcanic-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a broad broken cone seen from the front (rim, not a crater from above) with two basalt summits and ember cracks over dark cinder",
+    "at": "2026-11-27T11:50:32.070Z"
+  },
+  "volcanic-b#0": {
+    "verdict": "REJECTED",
+    "notes": "drawn in doubled 2 px steps unlike the rest, and the thick glowing veins read as lava flows",
+    "at": "2026-11-27T11:54:53.979Z"
+  },
+  "jungle-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three moss-capped limestone towers joined on one body over a jungle-green foot",
+    "at": "2026-11-27T11:54:54.239Z"
+  },
+  "jungle-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "one broad moss-topped limestone massif with two lower towers, green foot tapering out",
+    "at": "2026-11-27T11:54:54.628Z"
+  },
+  "frosting-a#0": {
+    "verdict": "REJECTED",
+    "notes": "four separate gumdrops on a flat frosting plate with a line under it: a heap on a plate",
+    "at": "2026-11-27T11:54:54.963Z"
+  },
+  "frosting-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "one big iced gumdrop mountain with two shoulders, pale pink frosting foot",
+    "at": "2026-11-27T11:54:55.301Z"
+  },
+  "swamp-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three mossy peat summits on one body over long mud slopes; the moss belt reads as one ridge, not terraces",
+    "at": "2026-11-27T11:57:35.368Z"
+  },
+  "swamp-b#0": {
+    "verdict": "REJECTED",
+    "notes": "the main summit is cut off by the top edge and the roots stop in a straight cut along the bottom",
+    "at": "2026-11-27T11:57:35.508Z"
+  },
+  "snow-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three snow-capped peaks on one body over a snowfield foot; summit tip runs 2 rows off the top (closed by a recorded cap)",
+    "at": "2026-11-27T12:03:34.140Z"
+  },
+  "sand-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three pointed sandstone summits with cream strata rising out of drifted sand",
+    "at": "2026-11-27T12:03:34.284Z"
+  },
+  "steppe-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a high craggy tan summit among three lower ones on one body over straw slopes; tip closed by a recorded cap",
+    "at": "2026-11-27T12:03:34.427Z"
+  },
+  "grass-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "two high green summits with grey tops and a lower third on one ridge, meadow-green slopes",
+    "at": "2026-11-27T12:03:34.583Z"
+  },
+  "badlands-d#0": {
+    "verdict": "REJECTED",
+    "notes": "three rounded banded domes read as a layered cake, not a butte range",
+    "at": "2026-11-27T12:03:34.756Z"
+  },
+  "frosting-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "four iced strawberry summits on one long body, icing poured over the tops, pale pink frosting foot",
+    "at": "2026-11-27T12:04:57.853Z"
+  },
+  "volcanic-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three sharp basalt summits on one body with thin ember cracks over dark cinder slopes",
+    "at": "2026-11-27T12:06:00.288Z"
+  },
+  "wasteland-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a high craggy basalt summit with two lower ones over grey ash slopes; tip closed by a recorded cap",
+    "at": "2026-11-27T12:06:00.404Z"
+  },
+  "swamp-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "three moss-capped peat summits on one body over mud slopes; the back summit's top runs off the image (closed by a recorded cap)",
+    "at": "2026-11-27T12:07:50.194Z"
+  },
+  "swamp-d#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a high mossy peat summit with two lower knobs on one craggy body, mud foot tapering out",
+    "at": "2026-11-27T12:07:50.331Z"
+  }
+}

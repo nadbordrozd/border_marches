@@ -28,7 +28,14 @@ import {
   rangeTop,
 } from "../../src/render/map/peaks.ts";
 import type { PeakField, PlacedPeak } from "../../src/render/map/peaks.ts";
-import { PEAK_SPRITES, featuredCells } from "../../src/render/map/scene.ts";
+import {
+  CHUNKY_MOUNTAINS_DEFAULT,
+  CLASSIC_PEAK_SPRITES,
+  PEAK_SPRITES,
+  chunkyMountains,
+  featuredCells,
+  peakTable,
+} from "../../src/render/map/scene.ts";
 import { toneRgba } from "../../src/render/map/peak-paint.ts";
 
 const CELL = CELL_PX;
@@ -256,8 +263,107 @@ describe("massifs (bead xaj.32)", () => {
         .filter((p) => p.key.includes(key))
         .reduce((sum, p) => sum + p.w * p.h, 0);
     // The big forms carry most of the range's paint.
-    expect(area("-massif-")).toBeGreaterThan(area("-foothill-"));
-    expect(area("-massif-")).toBeGreaterThan(area("-peak-"));
+    const big = area("-massif-") + area("-great-");
+    expect(big).toBeGreaterThan(area("-foothill-"));
+    expect(big).toBeGreaterThan(area("-peak-"));
+  });
+});
+
+describe("chunkier mountains (bead bzc.145)", () => {
+  /** A broad range: room for forms three cells wide. */
+  const BROAD = [
+    "..................",
+    "..MMMMMMMMMMMMMM..",
+    "..MMMMMMMMMMMMMM..",
+    "..MMMMMMMMMMMMMM..",
+    "..MMMMMMMMMMMMMM..",
+    "..................",
+  ];
+  const GREAT = ["grass", "snow", "badlands", "sand"] as const;
+  const tierOf = (key: string): string =>
+    /-(foothill|peak|summit|massif|great)-/.exec(key)?.[1] ?? "?";
+
+  it("switches with ?mountains=classic|chunky, chunky by default", () => {
+    expect(CHUNKY_MOUNTAINS_DEFAULT).toBe(true);
+    expect(chunkyMountains("")).toBe(true);
+    expect(chunkyMountains("?view=map&mountains=classic")).toBe(false);
+    expect(chunkyMountains("?mountains=chunky")).toBe(true);
+    expect(PEAK_SPRITES).toEqual(peakTable(true));
+    for (const terrain of GROUND_TERRAINS)
+      expect(
+        CLASSIC_PEAK_SPRITES[terrain].some((s) => s.tier === "great"),
+        terrain,
+      ).toBe(false);
+  });
+
+  it("gives every family great massifs about three cells wide", () => {
+    for (const terrain of GROUND_TERRAINS) {
+      const great = peaksOf(terrain).filter((p) => p.tier === "great");
+      // The four main families have the most.
+      const least = (GREAT as readonly string[]).includes(terrain) ? 3 : 1;
+      expect(great.length, terrain).toBeGreaterThanOrEqual(least);
+      for (const p of great) {
+        expect(p.w, p.key).toBeGreaterThanOrEqual(2.75 * CELL);
+        expect(p.terrain, p.key).toBe(PEAK_FAMILY[terrain]);
+      }
+    }
+    // Never borrowed: their slopes are their own ground's colour.
+    for (const p of peaksOf("volcanic"))
+      if (p.tier === "great") expect(p.terrain).toBe("volcanic");
+  });
+
+  it("lays great massifs first, wholly on the range", () => {
+    for (const terrain of GREAT) {
+      const map = rangeMap(BROAD, terrain);
+      const field = buildPeakField(map);
+      const great = placePeaks(field, PEAK_SPRITES).filter((p) =>
+        p.key.includes("-great-"),
+      );
+      expect(great.length, terrain).toBeGreaterThan(0);
+      for (const peak of great) {
+        const inset = Math.max(4, Math.round(peak.w * 0.14));
+        for (let x = peak.x + inset; x <= peak.x + peak.w - 1 - inset; x += 4) {
+          const i =
+            Math.floor((peak.baseY - 3) / CELL) * map.width +
+            Math.floor(x / CELL);
+          expect(field.rock[i], peak.key).toBe(1);
+        }
+      }
+    }
+  });
+
+  it("builds a range from fewer, bigger pieces than the classic ranges", () => {
+    for (const terrain of GREAT) {
+      const field = buildPeakField(rangeMap(BROAD, terrain));
+      const chunky = placePeaks(field, PEAK_SPRITES);
+      const classic = placePeaks(field, CLASSIC_PEAK_SPRITES);
+      const small = (peaks: readonly PlacedPeak[]): number =>
+        peaks.filter((p) => tierOf(p.key) === "foothill").length;
+      expect(chunky.length, terrain).toBeLessThan(classic.length);
+      expect(small(chunky), terrain).toBeLessThan(small(classic));
+      expect(
+        classic.some((p) => p.key.includes("-great-")),
+        terrain,
+      ).toBe(false);
+      // Still closed: the sprites alone cover the inside.
+      expect(coverage(field, chunky), terrain).toBeGreaterThan(0.97);
+    }
+  });
+
+  it("paints a great massif's foot without the outline", () => {
+    const px = new Uint8ClampedArray(4 * 4 * 4);
+    for (let y = 0; y < 4; y += 1)
+      for (let x = 0; x < 4; x += 1) {
+        const edge = x === 0 || y === 0 || x === 3 || y === 3;
+        px.set(edge ? [0, 0, 0, 255] : [120, 180, 90, 255], (y * 4 + x) * 4);
+      }
+    toneRgba(px, 4, 4, "grass", "great");
+    for (const x of [1, 2]) {
+      const o = (3 * 4 + x) * 4;
+      expect(
+        0.3 * px[o]! + 0.59 * px[o + 1]! + 0.11 * px[o + 2]!,
+      ).toBeGreaterThan(100);
+    }
   });
 });
 

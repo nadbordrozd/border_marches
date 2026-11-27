@@ -38,6 +38,22 @@ dark cinder (the wasteland massifs they borrowed stood on a pale ash rim).
 The jungle's and the desert's older tiers are toned toward their ground as
 the grass family's are.
 
+**Chunkier: great massifs (bead `border_marches-bzc.145`, 2026-11-27).** The
+user found the decluttered ranges "much better" and asked for "one more step
+of that": fewer, bigger forms. A range is now laid from **great massifs**
+first: one mountain of three or four summits on one body, about three cells
+wide (256 px), slopes in the ground's own colours and an open foot like the
+massifs. Then the massifs, then the smaller tiers. Behind the tapered
+foothill edge even a thin range (three Mountain cells in four are edge
+cells) prefers peaks and summits to foothills, the interior hardly ever
+takes a foothill, every foothill stands a little further apart, and a hole is
+closed by the biggest form that fits (great massif, massif, summit, peak,
+foothill). The switch: `CHUNKY_MOUNTAINS_DEFAULT` in
+`src/render/map/scene.ts` (on), overridden per page by `?mountains=classic`
+(the ranges of bead xaj.32, placed exactly as before) or `?mountains=chunky`;
+`npm run map:poster -- ... --mountains classic` renders the comparison. A
+family with no great massifs keeps the xaj.32 rules.
+
 ## Inventory
 
 Studio set `art/sets/peaks`, derived files in
@@ -80,6 +96,37 @@ cropped to about 131-161 x 45-89.
 | Swamp (bzc.140) | 6 | rounded and craggy peat summits under olive moss over long mud-coloured slopes |
 | Volcanic (bzc.140) | 4 | sharp basalt ridges, one broken cone, ember cracks, over dark cinder slopes |
 
+The fifth tier, `great` (bead bzc.145), is the studio set
+`art/sets/great-massifs` (layer `class-great-massif`), files
+`public/assets/terrain/peaks/<family>/great-<n>.png`: 26 accepted of 34
+takes in 34 calls (US$2.74). `generate-image-v2` returns one candidate a call
+at 256 x 160, so each recipe names a single form. Every take fills its
+canvas, so the outputs are cropped to the full 256 px width, and two kinds of
+recorded hand edits (`edits` steps) follow: the skirt that runs off each side
+is tapered to a point with transparent pixels (otherwise a 15-37 px vertical
+cut shows against the plain), and a summit cut flat by the top edge
+(seven takes: snow-d, wasteland-a and -c, jungle-a, frosting-b, swamp-c,
+volcanic-a) is closed
+by a few rows of `pad` plus the summit's own colours and outline.
+
+| Family | Great massifs | Shape |
+| --- | ---: | --- |
+| Grass | 4 | three or four green summits, some with grey crowns, meadow-green slopes |
+| Steppe | 2 | one high craggy tan summit among lower ones, straw foot |
+| Badlands | 3 | buttes on a strata ridge, a broad mesa, a fluted cliff with hoodoos |
+| Snow | 3 | three or four snow-capped peaks over a snowfield foot |
+| Sand | 3 | a tall mesa with a spire, rounded and pointed sandstone summits |
+| Wasteland | 2 | jagged basalt summits with ember cracks over ash |
+| Jungle | 2 | moss-capped limestone towers on a jungle-green foot |
+| Frosting | 2 | iced gumdrop summits on a pale pink skirt |
+| Swamp | 3 | mossy peat summits over mud slopes |
+| Volcanic | 2 | a broken cone and a basalt ridge over dark cinder |
+
+Rejected on sight for great massifs, besides the lists here: a round snow
+dome (reads as a moon), stacked round table rocks or banded domes (a cake),
+loose gumdrops on a plate, a foot of flat horizontal strips, and art drawn in
+doubled pixels.
+
 Rejected on sight for massifs, besides the list below: a flat cut bottom or a
 rectangular snow or sand plate under the form (with a white line under it),
 a heap of separate lumps or blocks (also stacked square boulders and loose
@@ -109,6 +156,15 @@ sit on the ground as a block.
   half-axis down the map 0.5 of the mean height instead of 0.32), and a hole
   is closed by the biggest form that fits (massif, peak, then foothill), with
   no copy of a massif within 150 px.
+- Great massifs (bead bzc.145) are tried before the massifs at each foot at
+  least 0.15 field units inside the range, under the same whole-foot rule;
+  no copy of one stands within 150 px of another. In a family that has
+  them: an edge cell behind the outline band wants a foothill 30% of the
+  time (62% classic), a peak 48% and a summit 22%; a cell two deep 6%
+  foothill, 44% peak, 50% summit; deeper 3% / 27% / 70%; a foothill keeps
+  1.3 times the spacing (1.8 inside the range); holes take the great
+  massif, massif, summit, peak, then foothill. Placement time is unchanged
+  (about 0.3 s for a size M map, 0.8-1.4 s for the 72 x 72 named maps).
 - The underlay, inset from the outline, closes pinholes between the sprites:
   the ground's own texture pulled 60% toward the family's slope shadow.
 
@@ -120,7 +176,7 @@ sit on the ground as a block.
   8% for the desert sandstone).
 - The black outline becomes a dark tone of the family's rock, so the lines
   between overlapping peaks sit back and a range reads as one mass.
-- Massifs keep more of their colour (8% toward grey, no darkening), their
+- Massifs and great massifs keep more of their colour (8% toward grey, no darkening), their
   line is 40% of the way from the family's line colour to its slope shadow,
   and the outline along the lower 45% of their silhouette takes the colour of
   the slope beside it, so the foot melts into the ground. That includes the
@@ -200,6 +256,16 @@ glowing ember cracks #d0682c; its lower slopes are dark cinder like the
 volcanic plain around it, #42373f, shadow #30282e, lit #5a4c56". All three
 worked at the first call; the description limit leaves about 600
 characters for the subject.
+
+Great massifs (`class-great-massif`, bead bzc.145): "one great mountain ...,
+a long massive range of three or four joined summits of different heights
+on one broad body", the massif's outline and foot clauses, at 256 x 160;
+the subject names one form (only one candidate comes back) and the same
+ground colours as the massifs. The fragment had to be shortened to fit the
+2000-character limit with a subject. Takes run off the canvas: "all well
+below the top edge" in the subject did not reliably stop a cut summit
+(wasteland-c and swamp-c still had one), so tops are capped and sides
+tapered in the outputs.
 
 ## Acceptance
 

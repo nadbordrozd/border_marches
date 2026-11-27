@@ -7,6 +7,8 @@
 //                         [--players 2|3|4]
 //   npm run map:poster -- --named keepers-toll --out poster.png [--port 6291]
 //   npm run map:poster -- --map decorations --out poster.png   (a test map)
+//   ... --mountains classic|chunky   (bead bzc.145: the ranges with or
+//                                     without the great massifs)
 //
 // Starts its own Vite dev server on --port and refuses a port already in use,
 // so the picture always comes from this checkout.
@@ -39,7 +41,8 @@ function parseArgs(argv) {
       name === "size" ||
       name === "out" ||
       name === "named" ||
-      name === "map"
+      name === "map" ||
+      name === "mountains"
     )
       out[name] = value;
     else throw new Error(`unknown option --${name}`);
@@ -119,7 +122,7 @@ async function evaluate(page, expression) {
 }
 
 async function main() {
-  const { seed, size, out, port, players, named, map } = parseArgs(
+  const { seed, size, out, port, players, named, map, mountains } = parseArgs(
     process.argv.slice(2),
   );
   if (!(await portFree(port)))
@@ -179,6 +182,7 @@ async function main() {
       hud: "0",
       path: "0",
       ...(players !== undefined ? { players: String(players) } : {}),
+      ...(mountains !== undefined ? { mountains } : {}),
     });
     await page.send("Page.navigate", {
       url: `http://127.0.0.1:${port}/?${query}`,
