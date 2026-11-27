@@ -582,6 +582,16 @@
 {"at":"2026-11-27T00:56:26.320Z","set":"candy-decorations","id":"small-b","endpoint":"generate-image-v2","usd":0.08331384982003107}
 {"at":"2026-11-27T00:58:24.530Z","set":"candy-decorations","id":"props-1x1-a","endpoint":"generate-image-v2","usd":0.08184624671936035}
 {"at":"2026-11-27T00:59:47.147Z","set":"candy-decorations","id":"props-2x1-a","endpoint":"generate-image-v2","usd":0.08121170433362325}
+{"at":"2026-11-27T09:33:20.346Z","set":"chunky-towns","id":"dwarves-fort-s1","endpoint":"generate-image-v2","usd":0.08033864527278477}
+{"at":"2026-11-27T09:34:37.693Z","set":"chunky-towns","id":"dwarves-camp-a","endpoint":"generate-image-v2","usd":0.08038324901792739}
+{"at":"2026-11-27T09:37:15.003Z","set":"chunky-towns","id":"dwarves-fort-s2","endpoint":"generate-image-v2","usd":0.0803630248705546}
+{"at":"2026-11-27T09:39:10.352Z","set":"town-backdrops","id":"dwarves-backdrop-a","endpoint":"generate-image-v2","usd":0.08}
+{"at":"2026-11-27T09:40:38.568Z","set":"chunky-buildings","id":"dwarves-s1","endpoint":"generate-image-v2","usd":0.0831384047402276}
+{"at":"2026-11-27T09:44:18.919Z","set":"chunky-buildings","id":"dwarves-halls-a","endpoint":"generate-image-v2","usd":0.08304070398542616}
+{"at":"2026-11-27T09:46:13.196Z","set":"chunky-buildings","id":"dwarves-forts-a","endpoint":"generate-image-v2","usd":0.08332072128189935}
+{"at":"2026-11-27T09:47:51.160Z","set":"chunky-buildings","id":"dwarves-dwell-a","endpoint":"generate-image-v2","usd":0.08171742730670506}
+{"at":"2026-11-27T09:49:13.439Z","set":"chunky-buildings","id":"dwarves-dwell-b","endpoint":"generate-image-v2","usd":0.08176558139589098}
+{"at":"2026-11-27T09:50:41.185Z","set":"chunky-buildings","id":"dwarves-civic-a","endpoint":"generate-image-v2","usd":0.0821538762251536}
 {"at":"2026-11-27T09:33:20.914Z","set":"faction-units","id":"tinker-a","endpoint":"create-image-pixen","usd":0.007369537485970391}
 {"at":"2026-11-27T09:33:49.130Z","set":"faction-units","id":"mortar-a","endpoint":"create-image-pixen","usd":0.007882241169611613}
 {"at":"2026-11-27T09:34:22.670Z","set":"faction-units","id":"steam-tank-a","endpoint":"create-image-pixen","usd":0.008514335420396594}

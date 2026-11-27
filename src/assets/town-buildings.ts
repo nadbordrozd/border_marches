@@ -1,6 +1,6 @@
 /**
- * Town-screen art of the v0.2 factions and the Candy Kingdom (beads
- * border_marches-bzc.15 and bzc.114,
+ * Town-screen art of the v0.2 factions, the Candy Kingdom and the Deepforge
+ * (beads border_marches-bzc.15, bzc.114 and bzc.133,
  * docs/art/classes/towns.md): one 64 x 64 building sprite per building of
  * each faction's tree and one 256 x 224 backdrop per faction. Studio sets
  * `chunky-buildings` (redrawn in the chunky map-town style, bead bzc.98)
@@ -16,13 +16,15 @@
 import type { ImageAsset } from "./manifest";
 
 /** The factions with town-screen art, by their FactionId. */
-export type TownArtFaction = "humans" | "undead" | "goblins" | "candy";
+export type TownArtFaction =
+  "humans" | "undead" | "goblins" | "candy" | "dwarves";
 
 export const TOWN_ART_FACTIONS: readonly TownArtFaction[] = [
   "humans",
   "undead",
   "goblins",
   "candy",
+  "dwarves",
 ];
 
 /** Side of a building sprite; the building stands bottom-centred, 2 px up. */
@@ -144,6 +146,30 @@ export const TOWN_BUILDING_IDS: Readonly<
     "larder",
     "the-four-oclock",
   ],
+  dwarves: [
+    "village-hall",
+    "town-hall",
+    "city-hall",
+    "riveted-palisade",
+    "ironbound-wall",
+    "gun-keep",
+    "marketplace",
+    "resource-silo",
+    "magic-guild",
+    "tavern",
+    "tinkers-workshop",
+    "rivet-range",
+    "gyro-hangar",
+    "mortar-yard",
+    "boiler-works",
+    "great-foundry",
+    "scrap-heap",
+    "rivet-forge",
+    "powder-magazine",
+    "deep-shaft",
+    "repair-yard",
+    "the-great-boiler",
+  ],
 };
 
 /** The fort buildings of each faction, fort level 1 to 3. */
@@ -154,6 +180,7 @@ export const FORT_BUILDINGS: Readonly<
   undead: ["iron-railings", "lych-wall", "black-gate"],
   goblins: ["stakes", "scrap-wall", "skull-tower"],
   candy: ["candy-cane-fence", "gingerbread-wall", "sugar-glass-keep"],
+  dwarves: ["riveted-palisade", "ironbound-wall", "gun-keep"],
 };
 
 /** The Keystone Hall of each faction. */
@@ -162,6 +189,7 @@ export const KEYSTONE_BUILDINGS: Readonly<Record<TownArtFaction, string>> = {
   undead: "hall-of-ancestors",
   goblins: "great-flinger",
   candy: "the-four-oclock",
+  dwarves: "the-great-boiler",
 };
 
 /**

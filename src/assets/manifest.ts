@@ -1076,8 +1076,12 @@ export const RESOURCE_ITEMS: Readonly<Record<ResourceId, ResourceItemAsset>> =
  */
 export interface Town3x2Asset extends ImageAsset {
   readonly category: "town-3x2";
-  /** Art family: dinosaur (Lost World), goblin (Horde), humans, undead, candy. */
-  readonly faction: "dinosaur" | "goblin" | "humans" | "undead" | "candy";
+  /**
+   * Art family: dinosaur (Lost World), goblin (Horde), humans, undead, candy,
+   * dwarves (the Deepforge).
+   */
+  readonly faction:
+    "dinosaur" | "goblin" | "humans" | "undead" | "candy" | "dwarves";
   /** "camp" for fort levels 0-1 (a light wall), "fort" for 2-3. */
   readonly stage: "camp" | "fort";
   readonly cols: 3;
@@ -1118,8 +1122,9 @@ function town3x2(
  * The Lost World town, the goblin Warlord's Hold (also the Horde town's fort
  * stage) and the v0.2 faction towns at 3x2, redrawn as cute, chunky clusters
  * round a central landmark by bead bzc.97 (set chunky-towns); the Candy
- * Kingdom's hamlet and palace in the same style (bead bzc.114). The Horde's
- * two stages repainted in rusty iron, moss green and dull red, without the
+ * Kingdom's hamlet and palace (bead bzc.114) and the Deepforge's boiler
+ * hamlet and forge hall (bead bzc.133) in the same style. The Horde's two
+ * stages repainted in rusty iron, moss green and dull red, without the
  * hazard yellow (bead bzc.123).
  */
 export const TOWN_3X2_ASSETS: readonly Town3x2Asset[] = [
@@ -1185,6 +1190,20 @@ export const TOWN_3X2_ASSETS: readonly Town3x2Asset[] = [
     "fort",
     [30, 20, 182, 160],
     "chunky-towns/candy-fort-s1#0",
+  ),
+  town3x2(
+    "dwarves-hamlet-3x2",
+    "dwarves",
+    "camp",
+    [37, 27, 166, 153],
+    "chunky-towns/dwarves-camp-a#0",
+  ),
+  town3x2(
+    "dwarves-forgehall-3x2",
+    "dwarves",
+    "fort",
+    [44, 37, 152, 143],
+    "chunky-towns/dwarves-fort-s1#0",
   ),
 ];
 

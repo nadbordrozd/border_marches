@@ -308,5 +308,20 @@
     "verdict": "REJECTED",
     "notes": "skull over crossed bones at the gate reads pirate or undead",
     "at": "2026-11-27T09:19:14.154Z"
+  },
+  "dwarves-fort-s1#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Deepforge fort stage: a stepped stone boiler-hall in a rock face with a brass gear-and-clock front and twin copper smokestacks, verdigris roofs, copper domes and a water tower packed round it, riveted iron wall with the brass cog vault-door gate centred between two squat cannon towers; no yellow roofs",
+    "at": "2026-11-27T09:34:53.514Z"
+  },
+  "dwarves-camp-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Deepforge camp stage: a fat riveted copper boiler-house with one brass smokestack and a little steam among verdigris-roofed stone cottages, a water tower and a coal heap, low riveted iron palisade with the brass cog vault-door gate centred; no clock, no stepped hall, so it reads apart from the fort",
+    "at": "2026-11-27T09:34:53.853Z"
+  },
+  "dwarves-fort-s2#0": {
+    "verdict": "REJECTED",
+    "notes": "wider as asked, but the front wall is a flat straight slab, the cannon towers read as cooking pots and the many tiny houses are busier and less chunky than dwarves-fort-s1, which stays",
+    "at": "2026-11-27T09:37:28.658Z"
   }
 }

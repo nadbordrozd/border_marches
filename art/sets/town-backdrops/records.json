@@ -218,5 +218,60 @@
         "height": 232
       }
     ]
+  },
+  "dwarves-backdrop-a": {
+    "id": "dwarves-backdrop-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "030d0ef7-d3bd-4b76-b595-32a40bda9352",
+    "submittedAt": "2026-11-27T09:38:03.208Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-town-backdrop.txt",
+          "text": "Class: a full-frame opaque landscape backdrop for a strategy game's town screen, seen at the map's three-quarter angle looking down: the sky and the far horizon fill only the top quarter of the image, and the lower three quarters are open flat ground, empty in the middle where a town will be placed later. Chunky flat colours with one shadow tone, calm and quiet like a game map ground, scenery only at the left and right edges."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a cosy dwarf foundry valley in the mountains at evening, homely and not hellish. Sky warm amber #f0b060 fading to soft peach #f6d6b0 at the horizon with two chunky white steam clouds #f4f1ea; on the horizon a range of blue-grey mountains #6f6f86 with a carved stone dwarf gate in the rock and three tall copper smokestacks #c7683a puffing small white steam; the open ground is calm warm charcoal basalt #5a4f4c with #463d3b shadows laid as big flat flagstones, a few small coal lumps; at the far left and right edges brass pipes #d9a634, big gears, wooden crates, a coal heap and a copper kettle frame the scene."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/dwarves-fort-s1-0.png sha256 1d57334f749ce9cf89b2a1560099d2aeb9701ee355b11a27f9fa47d93bdd0513",
+        "usage": "copy the palette, outline thickness, shading and pixel size only"
+      },
+      "image_size": {
+        "width": 256,
+        "height": 232
+      },
+      "no_background": false,
+      "seed": 133201,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: a full-frame opaque landscape backdrop for a strategy game's town screen, seen at the map's three-quarter angle looking down: the sky and the far horizon fill only the top quarter of the image, and the lower three quarters are open flat ground, empty in the middle where a town will be placed later. Chunky flat colours with one shadow tone, calm and quiet like a game map ground, scenery only at the left and right edges. Subject: a cosy dwarf foundry valley in the mountains at evening, homely and not hellish. Sky warm amber #f0b060 fading to soft peach #f6d6b0 at the horizon with two chunky white steam clouds #f4f1ea; on the horizon a range of blue-grey mountains #6f6f86 with a carved stone dwarf gate in the rock and three tall copper smokestacks #c7683a puffing small white steam; the open ground is calm warm charcoal basalt #5a4f4c with #463d3b shadows laid as big flat flagstones, a few small coal lumps; at the far left and right edges brass pipes #d9a634, big gears, wooden crates, a coal heap and a copper kettle frame the scene. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, town, castle, house, building in the middle, people, character, creature, flag, border, transparent background, lava, fire, black smoke, red sky, yellow roofs."
+    },
+    "at": "2026-11-27T09:39:10.349Z",
+    "usageUsd": 0.08,
+    "candidates": [
+      {
+        "file": "dwarves-backdrop-a-0.png",
+        "sha256": "5945722846c0e447555315caf38e6b3e4dac7a33d09468dfaa8103cea41edd1c",
+        "width": 256,
+        "height": 232
+      }
+    ]
   }
 }

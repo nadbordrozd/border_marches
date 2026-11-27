@@ -300,6 +300,30 @@
       "styleOptions": "@palOpts",
       "subject": "Subject: a big goblin scrap fortress filling the whole image: at the back centre a tall fat boss hall of rusty corrugated iron #8c7d6e with orange rust streaks #b0582c under a moss green #6e8b3d roof, a crooked scrap-wood lookout tower, crowded round it rusty shacks with moss green and rust roofs, dull red #8e3b2e cloth and a spotted hide tent, and across the front a thick wall of sharpened log stakes #b8733a with a gate crowned by a cream horned ox skull at the bottom centre.",
       "negative": "goblin, yellow roof, bright yellow, gold"
+    },
+    {
+      "id": "dwarves-fort-s1",
+      "concept": "DEEPFORGE STEAMWORKS (fort 2-3) sample",
+      "bead": "border_marches-bzc.133",
+      "seed": 133101,
+      "subject": "Subject: a cute steampunk dwarf town, full width: at the back centre a tall stepped dwarf boiler-hall of warm grey stone #9a8f80 with #6b6258 shadows cut into a rock face, a giant brass gear-and-clock face #d9a634 on its front, two fat copper smokestacks #c7683a puffing small white steam, verdigris teal roofs #3aa38f with #226b5d shadows; crowded round it stone workshops with verdigris roofs and copper domes, a riveted water tower; across the front a short thick riveted dark iron wall #4a4f57, in the exact middle a round brass vault-door gate in a cog frame between two squat cannon towers.",
+      "negative": "yellow roofs, gold roofs, black smoke, lava"
+    },
+    {
+      "id": "dwarves-camp-a",
+      "concept": "DEEPFORGE BOILER CAMP (fort 0-1)",
+      "bead": "border_marches-bzc.133",
+      "seed": 133111,
+      "subject": "Subject: a cosy little steampunk dwarf hamlet, two thirds of the image wide, low: at the back centre a fat round copper boiler-house #c7683a with #8a4325 shadows and rivets, one tall brass smokestack #d9a634 puffing a small white steam cloud, crowded round it little cottages of warm grey stone #9a8f80 with verdigris teal roofs #3aa38f with #226b5d shadows, a small riveted water tower on legs and a coal heap; across the front a low palisade of riveted dark iron plates #4a4f57 with, in the exact middle, a big round brass vault door in a cog-wheel frame.",
+      "negative": "yellow roofs, gold roofs, black smoke, lava, clock, rock face, stone wall, cannon"
+    },
+    {
+      "id": "dwarves-fort-s2",
+      "concept": "DEEPFORGE STEAMWORKS (fort 2-3) wider re-roll",
+      "bead": "border_marches-bzc.133",
+      "seed": 133102,
+      "subject": "Subject: a big wide steampunk dwarf town, full width: at the back centre a tall stepped dwarf boiler-hall of warm grey stone #9a8f80 with #6b6258 shadows, a giant brass gear-and-clock face #d9a634 on its front, two fat copper smokestacks #c7683a, verdigris teal roofs #3aa38f with #226b5d shadows; packed round it on both sides many stone workshops with verdigris roofs, round copper domes, a riveted water tower; across the front a thick riveted dark iron wall #4a4f57, in the exact middle a round brass vault-door gate in a cog frame between two squat cannon towers.",
+      "negative": "yellow roofs, gold roofs, black smoke, lava"
     }
   ],
   "outputs": [
@@ -578,6 +602,60 @@
           "op": "pad",
           "width": 240,
           "height": 164,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/dwarves-hamlet-3x2.png",
+      "from": "dwarves-camp-a#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 11,
+          "width": 232,
+          "height": 153
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 157,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 184,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/dwarves-forgehall-3x2.png",
+      "from": "dwarves-fort-s1#0",
+      "width": 240,
+      "height": 184,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 15,
+          "width": 232,
+          "height": 143
+        },
+        {
+          "op": "pad",
+          "width": 240,
+          "height": 147,
           "anchor": "top"
         },
         {

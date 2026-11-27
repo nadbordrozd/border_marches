@@ -76,6 +76,8 @@ describe("3x2 towns (xaj.14)", () => {
       "candy/camp",
       "candy/fort",
       "dinosaur/fort",
+      "dwarves/camp",
+      "dwarves/fort",
       "goblin/camp",
       "goblin/fort",
       "humans/camp",

@@ -34,6 +34,10 @@
     "hordeR": {
       "file": "art/masters/chunky-towns/horde-fort-r1-0.png",
       "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its shacks; not the layout: draw only one building"
+    },
+    "dwarves": {
+      "file": "art/masters/chunky-towns/dwarves-fort-s1-0.png",
+      "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its stone workshops, copper domes and boiler-hall; not the layout: draw only one building"
     }
   },
   "defaults": {
@@ -305,6 +309,66 @@
       "styleImage": "@hordeR",
       "subject": "Subject: each image a different one of these three ramshackle goblin buildings, five takes of each in this order: Marketplace (a scrap plank stall with a striped dull red and cream cloth awning piled with crates and sacks); Resource Silo (a fat rusty iron silo with a moss green cone roof beside a woodpile and an ore wheelbarrow); Great Flinger (a giant wheeled catapult of logs and rusty iron with a long scrap-wood arm and a big spoon). Colours: rusty corrugated iron #8c7d6e with orange rust streaks #b0582c, moss green #6e8b3d roofs, scrap planks #8a5a32, dull red #8e3b2e cloth, sharpened logs #b8733a.",
       "negative": "yellow roof, bright yellow, gold"
+    },
+    {
+      "id": "dwarves-s1",
+      "concept": "DEEPFORGE sample: village hall, tavern, magic guild, boiler works",
+      "bead": "border_marches-bzc.133",
+      "seed": 133301,
+      "styleImage": "@dwarves",
+      "subject": "Subject: each image a different one of these 4 cute steampunk dwarf buildings, four takes of each in this order: Village Hall (a squat chunky stone dwarf hall with a verdigris roof and one small brass chimney); Tavern (a stone alehouse with a giant foaming tankard sign over the door and a copper kettle chimney puffing steam); Magic Guild (a tall thin spire wound with copper coils, a lightning rod with a crackling blue spark on its tip); Boiler Works (a big riveted copper boiler house with pipes and a round pressure gauge). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass trim #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57, steam white #f4f1ea.",
+      "negative": "yellow roofs, gold roofs, black smoke, lava, slab"
+    },
+    {
+      "id": "dwarves-halls-a",
+      "concept": "DEEPFORGE: Town Hall, City Hall",
+      "bead": "border_marches-bzc.133",
+      "seed": 133311,
+      "styleImage": "@dwarves",
+      "subject": "Subject: each image a different one of these two cute steampunk dwarf buildings, eight takes of each in this order: Town Hall (the same stone hall grown: taller and wider under its barrel-vaulted verdigris roof, a big round brass gear-and-clock gable on its front); City Hall (the same hall grown grand: wide stone wings under a big riveted copper dome with a brass steam whistle on top, and the gear-and-clock front). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass trim #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57, steam white #f4f1ea.",
+      "negative": "yellow roofs, gold roofs, black smoke, lava, slab",
+      "references": [
+        {
+          "take": "dwarves-s1#2",
+          "usage": "the same stone village hall: keep its barrel-vaulted verdigris roof, stone, colours and outline, and draw it grown as described"
+        }
+      ]
+    },
+    {
+      "id": "dwarves-forts-a",
+      "concept": "DEEPFORGE: Riveted Palisade, Ironbound Wall, Gun Keep",
+      "bead": "border_marches-bzc.133",
+      "seed": 133312,
+      "styleImage": "@dwarves",
+      "subject": "Subject: each image a different one of these three cute steampunk dwarf buildings, five takes of each in this order: Riveted Palisade (a chunky round ring of riveted dark iron plates round a little stone gate hut with a verdigris roof and a round brass vault door in a cog frame); Ironbound Wall (a thick curved stone wall bound with dark iron bands and big rivets, the round brass vault-door gate in its middle); Gun Keep (a fat round dark iron keep with a verdigris cap and a brass cannon on its roof, inside a short ironbound stone wall). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a, dark iron #4a4f57 with #2e3238 shadows.",
+      "negative": "yellow roofs, gold roofs, black smoke, lava, slab"
+    },
+    {
+      "id": "dwarves-dwell-a",
+      "concept": "DEEPFORGE: Tinkers' Workshop, Rivet Range, Gyro Hangar, Mortar Yard",
+      "bead": "border_marches-bzc.133",
+      "seed": 133313,
+      "styleImage": "@dwarves",
+      "subject": "Subject: each image a different one of these 4 cute steampunk dwarf buildings, four takes of each in this order: Tinkers' Workshop (a cosy stone workshop with a verdigris roof, a giant brass wrench over the door and a tool rack beside it); Rivet Range (a shooting butt of riveted dark iron plates peppered with rivets and a round target,); Gyro Hangar (a round stone hangar with a verdigris roof, a big brass rotor on its roof and a red and white windsock); Mortar Yard (a round sandbagged pit with a fat copper mortar barrel pointing up). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57.",
+      "negative": "yellow roofs, gold roofs, black smoke, lava, slab"
+    },
+    {
+      "id": "dwarves-dwell-b",
+      "concept": "DEEPFORGE: Great Foundry, Scrap Heap, Rivet Forge, Powder Magazine",
+      "bead": "border_marches-bzc.133",
+      "seed": 133314,
+      "styleImage": "@dwarves",
+      "subject": "Subject: each image a different one of these 4 cute steampunk dwarf buildings, four takes of each in this order: Great Foundry (a tall stone foundry with a verdigris roof, a glowing orange crucible door and two fat copper smokestacks); Scrap Heap (a cheerful pile of brass cogs, springs and copper pipes with a little iron crane); Rivet Forge (a small red brick forge with a verdigris hood and a tray of glowing red-hot rivets); Powder Magazine (a squat stone bunker with a verdigris roof, a round dark iron door and stacked wooden kegs). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57, glow #ff8a2a.",
+      "negative": "yellow roofs, gold roofs, black smoke, lava, slab"
+    },
+    {
+      "id": "dwarves-civic-a",
+      "concept": "DEEPFORGE: Marketplace, Resource Silo, Deep Shaft, Repair Yard, The Great Boiler",
+      "bead": "border_marches-bzc.133",
+      "seed": 133315,
+      "styleImage": "@dwarves",
+      "subject": "Subject: each image a different one of these 5 cute steampunk dwarf buildings, three takes of each in this order: Marketplace (a stone market stall with a teal and white striped awning, crates and a brass scale); Resource Silo (a riveted copper hopper on iron legs with a chute over an ore cart); Deep Shaft (a mine head: a big iron winding wheel on a timber frame, an ore cart on rails); Repair Yard (a stone shed with a verdigris roof and an iron crane holding a little brass machine by a hook); The Great Boiler (a giant free-standing brass boiler, a huge pressure gauge on its front and a steam whistle on top). Colours: warm grey stone #9a8f80, verdigris teal #3aa38f, brass #d9a634, copper #c7683a, dark iron #4a4f57.",
+      "negative": "yellow roofs, gold roofs, black smoke, lava, slab"
     }
   ],
   "outputs": [
@@ -2754,6 +2818,600 @@
           "op": "pad",
           "width": 48,
           "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/village-hall.png",
+      "from": "dwarves-s1#2",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 54,
+          "height": 54
+        },
+        {
+          "op": "pad",
+          "width": 54,
+          "height": 56,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/town-hall.png",
+      "from": "dwarves-halls-a#4",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 2,
+          "width": 59,
+          "height": 61
+        },
+        {
+          "op": "pad",
+          "width": 59,
+          "height": 63,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/city-hall.png",
+      "from": "dwarves-halls-a#8",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 1,
+          "width": 61,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/riveted-palisade.png",
+      "from": "dwarves-forts-a#1",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 4,
+          "width": 60,
+          "height": 58
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 60,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/ironbound-wall.png",
+      "from": "dwarves-forts-a#7",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 60,
+          "height": 51
+        },
+        {
+          "op": "pad",
+          "width": 60,
+          "height": 53,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/gun-keep.png",
+      "from": "dwarves-forts-a#10",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 1,
+          "width": 56,
+          "height": 61
+        },
+        {
+          "op": "pad",
+          "width": 56,
+          "height": 63,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/marketplace.png",
+      "from": "dwarves-civic-a#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 6,
+          "width": 54,
+          "height": 52
+        },
+        {
+          "op": "pad",
+          "width": 54,
+          "height": 54,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/resource-silo.png",
+      "from": "dwarves-civic-a#4",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 10,
+          "y": 2,
+          "width": 49,
+          "height": 59
+        },
+        {
+          "op": "pad",
+          "width": 49,
+          "height": 61,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/magic-guild.png",
+      "from": "dwarves-s1#8",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 19,
+          "y": 1,
+          "width": 26,
+          "height": 63
+        },
+        {
+          "op": "pad",
+          "width": 26,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/tavern.png",
+      "from": "dwarves-s1#5",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 7,
+          "width": 61,
+          "height": 53
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 55,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/tinkers-workshop.png",
+      "from": "dwarves-dwell-a#2",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 3,
+          "width": 59,
+          "height": 60
+        },
+        {
+          "op": "pad",
+          "width": 59,
+          "height": 62,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/rivet-range.png",
+      "from": "dwarves-dwell-a#5",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 7,
+          "width": 61,
+          "height": 53
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 55,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/gyro-hangar.png",
+      "from": "dwarves-dwell-a#8",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 1,
+          "width": 61,
+          "height": 63
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/mortar-yard.png",
+      "from": "dwarves-dwell-a#15",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 12,
+          "width": 58,
+          "height": 48
+        },
+        {
+          "op": "pad",
+          "width": 58,
+          "height": 50,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/boiler-works.png",
+      "from": "dwarves-s1#14",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 1,
+          "width": 54,
+          "height": 62
+        },
+        {
+          "op": "pad",
+          "width": 54,
+          "height": 64,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/great-foundry.png",
+      "from": "dwarves-dwell-b#0",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 8,
+          "y": 2,
+          "width": 49,
+          "height": 61
+        },
+        {
+          "op": "pad",
+          "width": 49,
+          "height": 63,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/scrap-heap.png",
+      "from": "dwarves-dwell-b#5",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 5,
+          "width": 53,
+          "height": 52
+        },
+        {
+          "op": "pad",
+          "width": 53,
+          "height": 54,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/rivet-forge.png",
+      "from": "dwarves-dwell-b#9",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 4,
+          "width": 53,
+          "height": 57
+        },
+        {
+          "op": "pad",
+          "width": 53,
+          "height": 59,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/powder-magazine.png",
+      "from": "dwarves-dwell-b#12",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 7,
+          "width": 61,
+          "height": 52
+        },
+        {
+          "op": "pad",
+          "width": 61,
+          "height": 54,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/deep-shaft.png",
+      "from": "dwarves-civic-a#6",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 2,
+          "width": 58,
+          "height": 59
+        },
+        {
+          "op": "pad",
+          "width": 58,
+          "height": 61,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/repair-yard.png",
+      "from": "dwarves-civic-a#9",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 2,
+          "width": 59,
+          "height": 56
+        },
+        {
+          "op": "pad",
+          "width": 59,
+          "height": 58,
+          "anchor": "top"
+        },
+        {
+          "op": "pad",
+          "width": 64,
+          "height": 64,
+          "anchor": "bottom"
+        }
+      ]
+    },
+    {
+      "path": "public/assets/towns/buildings/dwarves/the-great-boiler.png",
+      "from": "dwarves-civic-a#13",
+      "width": 64,
+      "height": 64,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 1,
+          "width": 51,
+          "height": 61
+        },
+        {
+          "op": "pad",
+          "width": 51,
+          "height": 63,
           "anchor": "top"
         },
         {

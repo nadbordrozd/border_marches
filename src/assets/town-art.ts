@@ -3,8 +3,8 @@
  * the 3x2 map sprite of a faction's town at a fort level, the town-screen
  * sprite of a building and the town-screen backdrop. Each lookup accepts
  * the game's faction ids ("humans", "undead", "goblins", "candy",
- * "lost-world") and the faction names ("realm", "restless", "horde",
- * "candy-kingdom"), and falls back instead of
+ * "dwarves", "lost-world") and the faction names ("realm", "restless",
+ * "horde", "candy-kingdom", "deepforge"), and falls back instead of
  * throwing, so a faction or building without art never breaks a screen.
  */
 import { TOWN_3X2_ASSETS, type Town3x2Asset } from "./manifest";
@@ -30,6 +30,8 @@ const TOWN_ART_FAMILY: Readonly<Record<string, Town3x2Asset["faction"]>> = {
   horde: "goblin",
   candy: "candy",
   "candy-kingdom": "candy",
+  dwarves: "dwarves",
+  deepforge: "dwarves",
 };
 
 const SCREEN_FACTION: Readonly<Record<string, TownArtFaction>> = {
@@ -42,6 +44,8 @@ const SCREEN_FACTION: Readonly<Record<string, TownArtFaction>> = {
   horde: "goblins",
   candy: "candy",
   "candy-kingdom": "candy",
+  dwarves: "dwarves",
+  deepforge: "dwarves",
 };
 
 /** The faction with town-screen art, or undefined (Lost World, neutral). */

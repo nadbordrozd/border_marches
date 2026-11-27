@@ -9,7 +9,9 @@ town art added in the same style on 2026-11-27 (bead `border_marches-bzc.114`,
 see [Candy Kingdom town art](#candy-kingdom-town-art-bzc114)); the Horde's
 towns and buildings repainted without the yellow on 2026-11-27 (bead
 `border_marches-bzc.123`, see
-[Horde palette](#horde-palette-without-the-yellow-bzc123)). Specialises
+[Horde palette](#horde-palette-without-the-yellow-bzc123)); the Deepforge's
+town art added in the same style on 2026-11-27 (bead
+`border_marches-bzc.133`, see [Deepforge town art](#deepforge-town-art-bzc133)). Specialises
 [`../ART_DIRECTION.md`](../ART_DIRECTION.md) for the faction towns: their
 map sprites and their town-screen art (building sprites and backdrops).
 
@@ -171,15 +173,67 @@ The palette reads darker and earthier than the Candy and Restless towns by
 design (a junkyard, not a sweet shop), and the moss roofs and cream skull
 carry it on grass, badlands and snow.
 
+## Deepforge town art (bzc.133)
+
+The fifth faction ([FACTION_DWARVES.md](../../design/FACTION_DWARVES.md#10-art))
+follows the Candy section as its template, with the palette call of section
+10.1: **no yellow roofs** (the user found the Horde's yellow off-putting, see
+[Horde palette](#horde-palette-without-the-yellow-bzc123)), so brass `#d9a634` stays on gates, gears, chimneys and trim, and
+every roof and cap is verdigris `#3aa38f` / `#226b5d` over warm grey stone
+`#9a8f80` / `#6b6258` (a colour this bead chose: the doc names no stone),
+copper `#c7683a` domes and boilers and dark iron `#4a4f57` walls. Every
+recipe carries the negatives `yellow roofs, gold roofs, black smoke, lava`.
+
+- **Map towns.** Fort stage (`dwarves-forgehall-3x2`, `dwarves-fort-s1`): a
+  stepped stone boiler-hall cut into a rock face with a giant brass
+  gear-and-clock front and twin copper smokestacks puffing a little steam,
+  verdigris-roofed workshops, copper domes and a water tower packed round it,
+  a thick riveted iron wall with the round brass vault-door gate in a cog
+  frame between two squat cannon towers. Camp stage (`dwarves-hamlet-3x2`,
+  `dwarves-camp-a`): a fat riveted copper boiler-house with one brass
+  smokestack among verdigris-roofed stone cottages, a water tower and a coal
+  heap behind a low riveted iron palisade with the same cog gate; no clock,
+  no stepped hall, no cannon (written out as negatives). Both first takes,
+  style image the roadside inn. A wider fort re-roll (`dwarves-fort-s2`) was
+  rejected: its wall became a flat straight slab, the cannon towers cooking
+  pots and the houses smaller and busier. The camp (166 x 153) is wider and,
+  with its steam, taller than the compact fort (152 x 143), as the Realm's and
+  the Restless' camps are; the stages read apart by the hall, clock and
+  cannon towers.
+- **Backdrop** (`dwarves-backdrop-a`): the native volcanic ground drawn
+  homely: an amber evening sky with white steam clouds, blue-grey mountains
+  with a carved dwarf gate and copper smokestacks, calm charcoal basalt
+  flagstones, and brass pipes, gears, crates, coal heaps and a copper kettle
+  at the edges; no lava. Style image the accepted Deepforge fort town; first
+  take.
+- **Buildings.** Style image the Deepforge fort town (`@dwarves`). The halls
+  are one barrel-vaulted stone hall growing (the village hall with steps and
+  a brass chimney; taller on broad steps with a brass gear-and-clock gable
+  and two copper chimneys; vaulted wings round a riveted copper dome with a
+  brass steam whistle), the grown stages with the village hall as reference
+  image. The fort family grows from a ring of riveted iron plates round a
+  gate hut, to a stone wall bound with iron bands, to a round iron keep with
+  a brass cannon on its verdigris cap inside a stone ring. Takes with brass
+  framing every edge were rejected as yellow buildings. Two buildings must
+  not share a silhouette: vaulted halls, a copper boiler house (Boiler
+  Works), a free-standing brass boiler (the Great Boiler), a coil spire
+  (Magic Guild), a round iron keep (Gun Keep); a round-tower tavern was
+  rejected so it never reads as the keep.
+- **Lookups.** The faction id `dwarves` (and the name `deepforge`) is
+  registered in `townArt`, `buildingArt` and `townBackdrop`; its building
+  ids are FACTION_DWARVES.md section 9 in kebab case, `the-great-boiler` the
+  Keystone Hall, `riveted-palisade`, `ironbound-wall` and `gun-keep` fort
+  1-3.
+
 ## Inventory
 
 | Asset | Size (px) | Studio set | Game file | Lookup |
 | --- | --- | --- | --- | --- |
-| Map town, camp stage (fort 0-1) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-village,restless-graveyard,horde-warcamp,candy-hamlet}-3x2.png` | `townArt(faction, fortLevel)` |
-| Map town, fort stage (fort 2-3) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-castle,restless-churchyard,candy-palace}-3x2.png`, `goblin-hold-3x2.png` | `townArt(faction, fortLevel)` |
+| Map town, camp stage (fort 0-1) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-village,restless-graveyard,horde-warcamp,candy-hamlet,dwarves-hamlet}-3x2.png` | `townArt(faction, fortLevel)` |
+| Map town, fort stage (fort 2-3) | 240 x 184 | `chunky-towns` | `public/assets/towns/{realm-castle,restless-churchyard,candy-palace,dwarves-forgehall}-3x2.png`, `goblin-hold-3x2.png` | `townArt(faction, fortLevel)` |
 | Lost World town, 3x2 | 240 x 184 | `chunky-towns` | `public/assets/towns/dinosaur-town-3x2.png` | `town3x2Asset(obj)` |
 | Level towns (Lost World, goblin; levels 1-3), neutral village | 88 x 96, 96 x 100, 96 x 104; 72 x 72 | `chunky-towns` | `public/assets/towns/{dinosaur,goblin}-city-{1,2,3}.png`, `village.png` | `townAsset(obj)`, the Lost World town screen |
-| Building sprite, one per building of each tree (22 x 4) | 64 x 64 | `chunky-buildings` | `public/assets/towns/buildings/<faction>/<building>.png` | `buildingArt(faction, building)` |
+| Building sprite, one per building of each tree (22 x 5) | 64 x 64 | `chunky-buildings` | `public/assets/towns/buildings/<faction>/<building>.png` | `buildingArt(faction, building)` |
 | Town-screen backdrop, one per faction | 256 x 224 (shown x2) | `town-backdrops` | `public/assets/towns/backdrops/<faction>.png` | `townBackdrop(faction)` |
 
 The lookups are in `src/assets/town-art.ts`; the data lists (building ids per
@@ -202,6 +256,7 @@ role aliases.
 | Restless (`undead`) | slate `#5b5866` / `#3a3842`, shroud violet `#7a4fb5` / `#4e2f7a` roofs, bone white `#d8d0bc`, black iron; spooky-cute, never gory | a little violet-roofed chapel among crypts, a gravedigger's cottage and tombstones behind iron railings / a tall crooked slate cathedral with a manor and a bone-white domed mausoleum behind a slate wall with a black iron gate |
 | Horde (`goblins`) | rusty corrugated iron `#8c7d6e` with rust `#b0582c`, moss green `#6e8b3d` roofs, scrap planks `#8a5a32`, dull red `#8e3b2e` cloth, sharpened logs `#b8733a`, tawny spotted hide; no yellow (bzc.123) | a big spotted hide dome among moss-roofed rusty lean-tos behind a low stake fence with a horned-skull gate / the Warlord's Hold: a tall rusty boss hall under a moss roof and a scrap-wood lookout tower behind a thick stake wall |
 | Candy Kingdom (`candy`) | gingerbread `#b86b34` / `#7d4420`, royal icing `#fff4ec`, strawberry pink `#e2589b` / `#a8336c` roofs, candy-cane red `#e03a3e` and white stripes, mint `#7fd6b5`, sugar glass `#8fe3e8`; no purple | a fat gingerbread cottage with an icing-dripped pink roof among sweet-shop cottages behind a candy-cane fence with a crossed-cane gate / a tiered-cake palace with a cuckoo-clock tower and sugar-glass turrets behind a gingerbread wall with the crossed-cane gate between lollipops |
+| Deepforge (`dwarves`) | warm grey stone `#9a8f80` / `#6b6258`, verdigris `#3aa38f` / `#226b5d` roofs and caps, copper `#c7683a` / `#8a4325` domes and boilers, polished brass `#d9a634` on gates, gears and trim only, dark iron `#4a4f57` walls, a little white steam; no yellow roofs, no black smoke, no lava | a fat copper boiler-house with a brass smokestack among verdigris-roofed stone cottages, a water tower and a coal heap behind a riveted iron palisade with a round brass cog vault-door gate / a stepped stone boiler-hall in a rock face with a brass gear-and-clock front and twin copper smokestacks, copper domes and workshops behind a riveted iron wall with the cog gate between two squat cannon towers |
 | Lost World (`lost-world`) | tawny thatch, tawny hide with dark brown spots, cream bone, red-orange paint, basalt | one 3x2 stage: a huge thatched longhouse among plump huts behind a log fence with a dinosaur-skull gate; levels 1-3 grow from three huts round a totem |
 
 ## Geometry
@@ -227,7 +282,7 @@ role aliases.
   provider framed two of them with white rows) to 256 x 224, drawn at x2
   (512 x 448) behind the town
   picture; the sky and horizon fill the top quarter, the native ground
-  (grass, wasteland, badlands, icing snow) the rest, with scenery only at
+  (grass, wasteland, badlands, icing snow, basalt flagstones) the rest, with scenery only at
   the edges.
 
 ## Readability

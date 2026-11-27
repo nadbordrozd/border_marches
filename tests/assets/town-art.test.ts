@@ -43,7 +43,7 @@ describe("town building art coverage", () => {
         ]),
       );
     }
-    expect(BUILDING_ART_ASSETS).toHaveLength(88);
+    expect(BUILDING_ART_ASSETS).toHaveLength(110);
     for (const asset of [...BUILDING_ART_ASSETS, ...TOWN_BACKDROP_ASSETS]) {
       expect(existsSync(join(ROOT, "public", asset.path))).toBe(true);
       expect(assetByKey(asset.key)).toBe(asset);
@@ -80,12 +80,19 @@ describe("townArt", () => {
       "candy-palace-3x2",
       "candy-palace-3x2",
     ]);
+    expect([0, 1, 2, 3].map((f) => key("dwarves", f))).toEqual([
+      "dwarves-hamlet-3x2",
+      "dwarves-hamlet-3x2",
+      "dwarves-forgehall-3x2",
+      "dwarves-forgehall-3x2",
+    ]);
   });
 
   it("accepts faction names and falls back for one-stage and unknown factions", () => {
     expect(key("Realm", 3)).toBe("realm-castle-3x2");
     expect(key("restless", 0)).toBe("restless-graveyard-3x2");
     expect(key("horde", 2)).toBe("goblin-hold-3x2");
+    expect(key("Deepforge", 3)).toBe("dwarves-forgehall-3x2");
     expect(key("lost-world", 0)).toBe("dinosaur-town-3x2");
     expect(key("lost-world", 3)).toBe("dinosaur-town-3x2");
     expect(key("neutral", 1)).toBe("dinosaur-town-3x2");
@@ -130,6 +137,14 @@ describe("buildingArt", () => {
     expect(buildingArt("candy", "keystone-hall")?.building).toBe(
       "the-four-oclock",
     );
+    expect(buildingArt("dwarves", "fort-1")?.building).toBe("riveted-palisade");
+    expect(buildingArt("deepforge", "fort-3")?.building).toBe("gun-keep");
+    expect(buildingArt("dwarves", "Tinkers' Workshop")?.building).toBe(
+      "tinkers-workshop",
+    );
+    expect(buildingArt("dwarves", "keystone-hall")?.building).toBe(
+      "the-great-boiler",
+    );
   });
 
   it("returns null without art instead of throwing", () => {
@@ -147,6 +162,7 @@ describe("townBackdrop", () => {
     expect(townBackdrop("Restless")?.key).toBe("town-backdrop-undead");
     expect(townBackdrop("goblins")?.key).toBe("town-backdrop-goblins");
     expect(townBackdrop("candy")?.key).toBe("town-backdrop-candy");
+    expect(townBackdrop("Deepforge")?.key).toBe("town-backdrop-dwarves");
     expect(townBackdrop("lost-world")).toBeNull();
     expect(townArtFaction("lost-world")).toBeUndefined();
   });

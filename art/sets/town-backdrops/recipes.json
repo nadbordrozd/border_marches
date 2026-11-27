@@ -53,6 +53,18 @@
         "usage": "copy the palette, outline thickness, shading and pixel size only"
       },
       "subject": "Subject: a sweet fairy-tale candy land after a snowfall of icing sugar. Sky pale strawberry pink #f6c6dc fading to pale mint #cdeee0 at the horizon with two chunky white clouds; on the horizon soft round gumdrop hills in pink #e2589b and mint #7fd6b5 and a tiny far-off sugar-glass castle #8fe3e8; the open ground is calm smooth white royal icing #fff4ec with faint pink #f1d9e2 shadows and a few tiny coloured sprinkles; a pale pink frosting path #f0b8cf comes in from the bottom centre and stops in the middle; at the far left and right edges round swirl lollipop trees and giant red and white candy canes #e03a3e frame the scene."
+    },
+    {
+      "id": "dwarves-backdrop-a",
+      "concept": "DEEPFORGE BACKDROP (homely volcanic foundry valley)",
+      "bead": "border_marches-bzc.133",
+      "seed": 133201,
+      "styleImage": {
+        "file": "art/masters/chunky-towns/dwarves-fort-s1-0.png",
+        "usage": "copy the palette, outline thickness, shading and pixel size only"
+      },
+      "subject": "Subject: a cosy dwarf foundry valley in the mountains at evening, homely and not hellish. Sky warm amber #f0b060 fading to soft peach #f6d6b0 at the horizon with two chunky white steam clouds #f4f1ea; on the horizon a range of blue-grey mountains #6f6f86 with a carved stone dwarf gate in the rock and three tall copper smokestacks #c7683a puffing small white steam; the open ground is calm warm charcoal basalt #5a4f4c with #463d3b shadows laid as big flat flagstones, a few small coal lumps; at the far left and right edges brass pipes #d9a634, big gears, wooden crates, a coal heap and a copper kettle frame the scene.",
+      "negative": "lava, fire, black smoke, red sky, yellow roofs"
     }
   ],
   "outputs": [
@@ -80,6 +92,13 @@
     {
       "path": "public/assets/towns/backdrops/candy.png",
       "from": "candy-backdrop-a#0",
+      "width": 256,
+      "height": 224,
+      "steps": [{ "op": "crop", "x": 0, "y": 4, "width": 256, "height": 224 }]
+    },
+    {
+      "path": "public/assets/towns/backdrops/dwarves.png",
+      "from": "dwarves-backdrop-a#0",
       "width": 256,
       "height": 224,
       "steps": [{ "op": "crop", "x": 0, "y": 4, "width": 256, "height": 224 }]

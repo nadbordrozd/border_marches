@@ -18,5 +18,10 @@
     "verdict": "ACCEPTED",
     "notes": "Candy backdrop: pale pink sky fading to mint with chunky clouds, pink and mint gumdrop hills and a tiny sugar-glass castle on the horizon, calm icing-white ground with faint pink shadows and a few sprinkles, a pink frosting path from the bottom, lollipop trees, candy canes and iced gingerbread mounds only at the edges; no provider frame (cropped to rows 4-227 like the others)",
     "at": "2026-11-27T00:01:01.353Z"
+  },
+  "dwarves-backdrop-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Deepforge backdrop: amber evening sky with steam clouds, blue-grey mountains with a carved dwarf gate and copper smokestacks, calm charcoal basalt flagstones, brass pipes, gears, crates, coal heaps and a copper kettle at the edges; homely, no lava; both Deepforge towns stand out on it at x2",
+    "at": "2026-11-27T09:48:17.286Z"
   }
 }

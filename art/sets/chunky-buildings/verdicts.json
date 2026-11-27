@@ -2073,5 +2073,485 @@
     "verdict": "REJECTED",
     "notes": "thin spindly frame with a hanging chain",
     "at": "2026-11-27T09:20:06.294Z"
+  },
+  "dwarves-s1#2": {
+    "verdict": "ACCEPTED",
+    "notes": "village-hall: a squat stone dwarf hall under a barrel-vaulted verdigris roof with front steps and a brass chimney; the distinctive vault the grown halls keep",
+    "at": "2026-11-27T09:41:46.049Z"
+  },
+  "dwarves-s1#5": {
+    "verdict": "ACCEPTED",
+    "notes": "tavern: a stone alehouse with a verdigris roof, a giant foaming tankard sign and a copper kettle still; reads at 64 px",
+    "at": "2026-11-27T09:41:46.338Z"
+  },
+  "dwarves-s1#8": {
+    "verdict": "ACCEPTED",
+    "notes": "magic-guild: a stone cone spire wound with copper coils and a crackling blue spark on its tip; wider and clearer at native size than the thin Tesla stack",
+    "at": "2026-11-27T09:41:46.852Z"
+  },
+  "dwarves-s1#14": {
+    "verdict": "ACCEPTED",
+    "notes": "boiler-works: a riveted copper boiler house with chimneys, pipes, valves and a big pressure gauge; a house, so it never reads as the free-standing Great Boiler",
+    "at": "2026-11-27T09:41:47.239Z"
+  },
+  "dwarves-s1#0": {
+    "verdict": "REJECTED",
+    "notes": "village hall: a plain cottage that would read as a workshop; #2's vaulted hall chosen",
+    "at": "2026-11-27T09:41:47.654Z"
+  },
+  "dwarves-s1#1": {
+    "verdict": "REJECTED",
+    "notes": "village hall: a two-tier pagoda roof reads Eastern, not dwarf",
+    "at": "2026-11-27T09:41:48.014Z"
+  },
+  "dwarves-s1#3": {
+    "verdict": "REJECTED",
+    "notes": "village hall: already has the clock the Town Hall must add",
+    "at": "2026-11-27T09:41:48.407Z"
+  },
+  "dwarves-s1#4": {
+    "verdict": "REJECTED",
+    "notes": "tavern: mostly wood planks, off the stone palette",
+    "at": "2026-11-27T09:41:48.996Z"
+  },
+  "dwarves-s1#6": {
+    "verdict": "REJECTED",
+    "notes": "tavern: a round tower would clash with the round Gun Keep",
+    "at": "2026-11-27T09:41:49.405Z"
+  },
+  "dwarves-s1#7": {
+    "verdict": "REJECTED",
+    "notes": "tavern: wooden and cluttered, tankard and kettle compete",
+    "at": "2026-11-27T09:41:49.941Z"
+  },
+  "dwarves-s1#9": {
+    "verdict": "REJECTED",
+    "notes": "magic guild: thin Tesla stack, weaker at native size than #8",
+    "at": "2026-11-27T09:41:50.280Z"
+  },
+  "dwarves-s1#10": {
+    "verdict": "REJECTED",
+    "notes": "magic guild: the twisted cone leans and the spark is small",
+    "at": "2026-11-27T09:41:50.632Z"
+  },
+  "dwarves-s1#11": {
+    "verdict": "REJECTED",
+    "notes": "magic guild: a bowl tower, not a coil spire",
+    "at": "2026-11-27T09:41:51.128Z"
+  },
+  "dwarves-s1#12": {
+    "verdict": "REJECTED",
+    "notes": "boiler works: a free-standing domed boiler, too close to the Great Boiler",
+    "at": "2026-11-27T09:41:51.574Z"
+  },
+  "dwarves-s1#13": {
+    "verdict": "REJECTED",
+    "notes": "boiler works: a lying tank machine, not a building",
+    "at": "2026-11-27T09:41:52.166Z"
+  },
+  "dwarves-s1#15": {
+    "verdict": "REJECTED",
+    "notes": "boiler works: a free-standing domed boiler, too close to the Great Boiler",
+    "at": "2026-11-27T09:41:52.531Z"
+  },
+  "dwarves-halls-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "town-hall: the vaulted stone village hall grown taller on broad steps, a big brass gear-and-clock gable and two copper chimneys with a puff of steam",
+    "at": "2026-11-27T09:47:38.964Z"
+  },
+  "dwarves-halls-a#0": {
+    "verdict": "REJECTED",
+    "notes": "town hall: right features but hardly bigger than the village hall; #4 grows more",
+    "at": "2026-11-27T09:47:39.261Z"
+  },
+  "dwarves-halls-a#1": {
+    "verdict": "REJECTED",
+    "notes": "town hall: clock small, buttresses read as a barn",
+    "at": "2026-11-27T09:47:39.484Z"
+  },
+  "dwarves-halls-a#2": {
+    "verdict": "REJECTED",
+    "notes": "town hall: lopsided, the gear swallows the front and a black chimney",
+    "at": "2026-11-27T09:47:39.747Z"
+  },
+  "dwarves-halls-a#3": {
+    "verdict": "REJECTED",
+    "notes": "town hall: thick brass frame round the gable makes it a yellow building",
+    "at": "2026-11-27T09:47:40.028Z"
+  },
+  "dwarves-halls-a#5": {
+    "verdict": "REJECTED",
+    "notes": "town hall: no gear or clock",
+    "at": "2026-11-27T09:47:40.249Z"
+  },
+  "dwarves-halls-a#6": {
+    "verdict": "REJECTED",
+    "notes": "town hall: clock small and the roof breaks into a jumble",
+    "at": "2026-11-27T09:47:40.456Z"
+  },
+  "dwarves-halls-a#7": {
+    "verdict": "REJECTED",
+    "notes": "town hall: a stone cube, loses the vaulted roof",
+    "at": "2026-11-27T09:47:40.773Z"
+  },
+  "dwarves-halls-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "city-hall: the hall grown grand: vaulted verdigris wings round a riveted copper dome with a brass steam whistle and steam, the gear front kept",
+    "at": "2026-11-27T09:47:41.019Z"
+  },
+  "dwarves-halls-a#9": {
+    "verdict": "REJECTED",
+    "notes": "city hall: gear faint and the steps sprawl",
+    "at": "2026-11-27T09:47:41.281Z"
+  },
+  "dwarves-halls-a#10": {
+    "verdict": "REJECTED",
+    "notes": "city hall: brass trim on every edge, too yellow",
+    "at": "2026-11-27T09:47:41.592Z"
+  },
+  "dwarves-halls-a#11": {
+    "verdict": "REJECTED",
+    "notes": "city hall: flat front-on facade with railings, off the three-quarter view",
+    "at": "2026-11-27T09:47:41.828Z"
+  },
+  "dwarves-halls-a#12": {
+    "verdict": "REJECTED",
+    "notes": "city hall: pipes on the dome read as legs",
+    "at": "2026-11-27T09:47:42.038Z"
+  },
+  "dwarves-halls-a#13": {
+    "verdict": "REJECTED",
+    "notes": "city hall: a stepped pyramid with a dome, no verdigris",
+    "at": "2026-11-27T09:47:42.271Z"
+  },
+  "dwarves-halls-a#14": {
+    "verdict": "REJECTED",
+    "notes": "city hall: good but busier than #8 and no whistle",
+    "at": "2026-11-27T09:47:42.545Z"
+  },
+  "dwarves-halls-a#15": {
+    "verdict": "REJECTED",
+    "notes": "city hall: ring of spiky turrets reads as a cathedral",
+    "at": "2026-11-27T09:47:42.757Z"
+  },
+  "dwarves-forts-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "riveted-palisade: a round ring of riveted dark iron plates round a little verdigris-roofed stone gate hut, the brass cog vault door in front",
+    "at": "2026-11-27T09:47:42.960Z"
+  },
+  "dwarves-forts-a#0": {
+    "verdict": "REJECTED",
+    "notes": "riveted palisade: a second verdigris roof over the door crowds the hut",
+    "at": "2026-11-27T09:47:43.132Z"
+  },
+  "dwarves-forts-a#2": {
+    "verdict": "REJECTED",
+    "notes": "riveted palisade: plainer plates than #1, rivets barely show",
+    "at": "2026-11-27T09:47:43.362Z"
+  },
+  "dwarves-forts-a#3": {
+    "verdict": "REJECTED",
+    "notes": "riveted palisade: the hut became a round keep, too close to the Gun Keep",
+    "at": "2026-11-27T09:47:43.575Z"
+  },
+  "dwarves-forts-a#4": {
+    "verdict": "REJECTED",
+    "notes": "riveted palisade: a copper ring on pipe legs, busy",
+    "at": "2026-11-27T09:47:43.732Z"
+  },
+  "dwarves-forts-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "ironbound-wall: a thick curved stone wall in two courses bound with dark iron bands, the round brass vault-door gate in its middle",
+    "at": "2026-11-27T09:47:43.954Z"
+  },
+  "dwarves-forts-a#5": {
+    "verdict": "REJECTED",
+    "notes": "ironbound wall: thinner and flatter than #7",
+    "at": "2026-11-27T09:47:44.095Z"
+  },
+  "dwarves-forts-a#6": {
+    "verdict": "REJECTED",
+    "notes": "ironbound wall: fine, #7 thicker",
+    "at": "2026-11-27T09:47:44.232Z"
+  },
+  "dwarves-forts-a#8": {
+    "verdict": "REJECTED",
+    "notes": "ironbound wall: a straight block, little curve",
+    "at": "2026-11-27T09:47:44.416Z"
+  },
+  "dwarves-forts-a#9": {
+    "verdict": "REJECTED",
+    "notes": "ironbound wall: extra brass cogs on the wall, busier",
+    "at": "2026-11-27T09:47:44.745Z"
+  },
+  "dwarves-forts-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "gun-keep: a fat round dark iron keep with a verdigris cap and a brass cannon on its roof inside a short stone ring wall",
+    "at": "2026-11-27T09:47:45.097Z"
+  },
+  "dwarves-forts-a#11": {
+    "verdict": "REJECTED",
+    "notes": "gun keep: same as #10 with a smaller cannon",
+    "at": "2026-11-27T09:47:45.285Z"
+  },
+  "dwarves-forts-a#12": {
+    "verdict": "REJECTED",
+    "notes": "gun keep: the cannon sticks out of the wall, none on the roof",
+    "at": "2026-11-27T09:47:45.590Z"
+  },
+  "dwarves-forts-a#13": {
+    "verdict": "REJECTED",
+    "notes": "gun keep: cannon in the wall, none on the roof",
+    "at": "2026-11-27T09:47:45.842Z"
+  },
+  "dwarves-forts-a#14": {
+    "verdict": "REJECTED",
+    "notes": "gun keep: cannon in the wall, a flat cap",
+    "at": "2026-11-27T09:47:46.107Z"
+  },
+  "dwarves-forts-a#15": {
+    "verdict": "REJECTED",
+    "notes": "gun keep: two cannons, busier than #10",
+    "at": "2026-11-27T09:47:46.278Z"
+  },
+  "dwarves-dwell-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "tinkers-workshop: a cosy verdigris-roofed stone workshop with a giant brass wrench on the roof, an open door, a copper chimney and a tool rack",
+    "at": "2026-11-27T09:51:30.676Z"
+  },
+  "dwarves-dwell-a#0": {
+    "verdict": "REJECTED",
+    "notes": "tinkers workshop: no wrench, a plain cottage",
+    "at": "2026-11-27T09:51:30.846Z"
+  },
+  "dwarves-dwell-a#1": {
+    "verdict": "REJECTED",
+    "notes": "tinkers workshop: wrench over the door is cut by the roof line; #2 clearer",
+    "at": "2026-11-27T09:51:30.998Z"
+  },
+  "dwarves-dwell-a#3": {
+    "verdict": "REJECTED",
+    "notes": "tinkers workshop: as #2 but closed and plainer",
+    "at": "2026-11-27T09:51:31.172Z"
+  },
+  "dwarves-dwell-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "rivet-range: a riveted dark iron shooting butt with a painted target and a second target on a stand",
+    "at": "2026-11-27T09:51:31.339Z"
+  },
+  "dwarves-dwell-a#4": {
+    "verdict": "REJECTED",
+    "notes": "rivet range: sandbag and crate clutter at the foot reads as a plate",
+    "at": "2026-11-27T09:51:31.505Z"
+  },
+  "dwarves-dwell-a#6": {
+    "verdict": "REJECTED",
+    "notes": "rivet range: a barrier rail and crates crowd the butt",
+    "at": "2026-11-27T09:51:31.643Z"
+  },
+  "dwarves-dwell-a#7": {
+    "verdict": "REJECTED",
+    "notes": "rivet range: a closed iron box, the target is off to the side",
+    "at": "2026-11-27T09:51:31.887Z"
+  },
+  "dwarves-dwell-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "gyro-hangar: a round stone hangar under a verdigris cone with a big brass rotor on top and a red and white windsock",
+    "at": "2026-11-27T09:51:32.078Z"
+  },
+  "dwarves-dwell-a#9": {
+    "verdict": "REJECTED",
+    "notes": "gyro hangar: no windsock",
+    "at": "2026-11-27T09:51:32.289Z"
+  },
+  "dwarves-dwell-a#10": {
+    "verdict": "REJECTED",
+    "notes": "gyro hangar: same as #8, the rotor clipped by the frame top",
+    "at": "2026-11-27T09:51:32.423Z"
+  },
+  "dwarves-dwell-a#11": {
+    "verdict": "REJECTED",
+    "notes": "gyro hangar: no windsock, closed front",
+    "at": "2026-11-27T09:51:32.600Z"
+  },
+  "dwarves-dwell-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "mortar-yard: a round sandbag pit with a fat copper mortar barrel pointing up on its carriage",
+    "at": "2026-11-27T09:51:32.785Z"
+  },
+  "dwarves-dwell-a#12": {
+    "verdict": "REJECTED",
+    "notes": "mortar yard: small upright barrel, reads as a well",
+    "at": "2026-11-27T09:51:33.096Z"
+  },
+  "dwarves-dwell-a#13": {
+    "verdict": "REJECTED",
+    "notes": "mortar yard: barrel thinner than #15",
+    "at": "2026-11-27T09:51:33.265Z"
+  },
+  "dwarves-dwell-a#14": {
+    "verdict": "REJECTED",
+    "notes": "mortar yard: a stray green crate at the edge",
+    "at": "2026-11-27T09:51:33.403Z"
+  },
+  "dwarves-dwell-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "great-foundry: a stone foundry under a verdigris roof with a glowing crucible door and two fat copper smokestacks",
+    "at": "2026-11-27T09:51:33.552Z"
+  },
+  "dwarves-dwell-b#1": {
+    "verdict": "REJECTED",
+    "notes": "great foundry: one bent pipe, not two smokestacks",
+    "at": "2026-11-27T09:51:33.889Z"
+  },
+  "dwarves-dwell-b#2": {
+    "verdict": "REJECTED",
+    "notes": "great foundry: one pipe, reads as a kiln",
+    "at": "2026-11-27T09:51:34.165Z"
+  },
+  "dwarves-dwell-b#3": {
+    "verdict": "REJECTED",
+    "notes": "great foundry: pipes sprawl, one stack",
+    "at": "2026-11-27T09:51:34.345Z"
+  },
+  "dwarves-dwell-b#5": {
+    "verdict": "ACCEPTED",
+    "notes": "scrap-heap: a cheerful pile of brass cogs, copper springs and pipes with a little iron crane",
+    "at": "2026-11-27T09:51:34.502Z"
+  },
+  "dwarves-dwell-b#4": {
+    "verdict": "REJECTED",
+    "notes": "scrap heap: fine, #5 shows the springs and crane more clearly",
+    "at": "2026-11-27T09:51:34.645Z"
+  },
+  "dwarves-dwell-b#6": {
+    "verdict": "REJECTED",
+    "notes": "scrap heap: gears crowd into a brown lump",
+    "at": "2026-11-27T09:51:34.823Z"
+  },
+  "dwarves-dwell-b#7": {
+    "verdict": "REJECTED",
+    "notes": "scrap heap: no crane",
+    "at": "2026-11-27T09:51:34.995Z"
+  },
+  "dwarves-dwell-b#9": {
+    "verdict": "ACCEPTED",
+    "notes": "rivet-forge: a red brick forge under a verdigris hood with an anvil and a tray of glowing red-hot rivets",
+    "at": "2026-11-27T09:51:35.159Z"
+  },
+  "dwarves-dwell-b#8": {
+    "verdict": "REJECTED",
+    "notes": "rivet forge: no tray of rivets",
+    "at": "2026-11-27T09:51:35.305Z"
+  },
+  "dwarves-dwell-b#10": {
+    "verdict": "REJECTED",
+    "notes": "rivet forge: a stray broom and a darker tray",
+    "at": "2026-11-27T09:51:35.470Z"
+  },
+  "dwarves-dwell-b#11": {
+    "verdict": "REJECTED",
+    "notes": "rivet forge: as #9, smaller fire",
+    "at": "2026-11-27T09:51:35.696Z"
+  },
+  "dwarves-dwell-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "powder-magazine: a squat stone bunker with a verdigris roof, a round iron door and stacked kegs",
+    "at": "2026-11-27T09:51:35.846Z"
+  },
+  "dwarves-dwell-b#13": {
+    "verdict": "REJECTED",
+    "notes": "powder magazine: kegs only on one side, smaller",
+    "at": "2026-11-27T09:51:35.994Z"
+  },
+  "dwarves-dwell-b#14": {
+    "verdict": "REJECTED",
+    "notes": "powder magazine: lumpier walls than #12",
+    "at": "2026-11-27T09:51:36.234Z"
+  },
+  "dwarves-dwell-b#15": {
+    "verdict": "REJECTED",
+    "notes": "powder magazine: as #14",
+    "at": "2026-11-27T09:51:36.470Z"
+  },
+  "dwarves-civic-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "marketplace: a stone stall under a teal and white striped awning with a brass scale and crates",
+    "at": "2026-11-27T09:51:36.757Z"
+  },
+  "dwarves-civic-a#1": {
+    "verdict": "REJECTED",
+    "notes": "marketplace: cluttered with hanging goods",
+    "at": "2026-11-27T09:51:36.981Z"
+  },
+  "dwarves-civic-a#2": {
+    "verdict": "REJECTED",
+    "notes": "marketplace: two tents, busier",
+    "at": "2026-11-27T09:51:37.489Z"
+  },
+  "dwarves-civic-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "resource-silo: a riveted copper hopper on iron legs with a chute over an ore cart",
+    "at": "2026-11-27T09:51:37.820Z"
+  },
+  "dwarves-civic-a#3": {
+    "verdict": "REJECTED",
+    "notes": "resource silo: a square tub, less silo-like than #4",
+    "at": "2026-11-27T09:51:38.142Z"
+  },
+  "dwarves-civic-a#5": {
+    "verdict": "REJECTED",
+    "notes": "resource silo: brass scaffolding and a second cart crowd it",
+    "at": "2026-11-27T09:51:38.401Z"
+  },
+  "dwarves-civic-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "deep-shaft: a timber headframe with a big iron winding wheel and an ore cart on rails; open frame but clear at native size",
+    "at": "2026-11-27T09:51:38.855Z"
+  },
+  "dwarves-civic-a#7": {
+    "verdict": "REJECTED",
+    "notes": "deep shaft: the wheel hides inside the frame and rubble clutters the foot",
+    "at": "2026-11-27T09:51:39.239Z"
+  },
+  "dwarves-civic-a#8": {
+    "verdict": "REJECTED",
+    "notes": "deep shaft: a timber box, the wheel hardly shows",
+    "at": "2026-11-27T09:51:39.574Z"
+  },
+  "dwarves-civic-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "repair-yard: a verdigris-roofed stone shed with an iron crane holding a little brass machine by a hook",
+    "at": "2026-11-27T09:51:39.821Z"
+  },
+  "dwarves-civic-a#10": {
+    "verdict": "REJECTED",
+    "notes": "repair yard: the shed sags and debris spills",
+    "at": "2026-11-27T09:51:40.162Z"
+  },
+  "dwarves-civic-a#11": {
+    "verdict": "REJECTED",
+    "notes": "repair yard: busier roof with chimneys than #9",
+    "at": "2026-11-27T09:51:40.509Z"
+  },
+  "dwarves-civic-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "the-great-boiler: a giant round riveted brass boiler on stubby legs with a huge pressure gauge, a copper stack and a little whistle; free-standing so it never reads as the Boiler Works",
+    "at": "2026-11-27T09:51:40.767Z"
+  },
+  "dwarves-civic-a#12": {
+    "verdict": "REJECTED",
+    "notes": "great boiler: a flat bright yellow cylinder, the yellowest take",
+    "at": "2026-11-27T09:51:40.997Z"
+  },
+  "dwarves-civic-a#14": {
+    "verdict": "REJECTED",
+    "notes": "great boiler: scaffolding round it reads as a construction site",
+    "at": "2026-11-27T09:51:41.274Z"
+  },
+  "dwarves-civic-a#15": {
+    "verdict": "REJECTED",
+    "notes": "great boiler: three boilers in a cluster, not one",
+    "at": "2026-11-27T09:51:41.511Z"
   }
 }

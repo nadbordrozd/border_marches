@@ -553,13 +553,14 @@ const STAGED_TOWN_FACTIONS: ReadonlySet<unknown> = new Set([
   "undead",
   "goblins",
   "candy",
+  "dwarves",
 ]);
 
 /**
  * The 3x2 town sprite (bead xaj.14) of a town with a 3 x 2 footprint, else
- * null. A v0.2 or Candy town (humans, undead, goblins, candy) always has
- * one, its camp or fort stage by the `fort` level the view sets (townArt,
- * beads bzc.15 and bzc.114). Other towns use it at full growth (level 3, or no level given):
+ * null. A v0.2, Candy or Deepforge town (humans, undead, goblins, candy,
+ * dwarves) always has one, its camp or fort stage by the `fort` level the
+ * view sets (townArt, beads bzc.15, bzc.114 and bzc.133). Other towns use it at full growth (level 3, or no level given):
  * a smaller one (level 1 or 2, as the game sets it from the halls built)
  * keeps the imported camp art of its level, so the map still shows the town
  * grow.

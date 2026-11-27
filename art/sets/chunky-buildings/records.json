@@ -4372,5 +4372,881 @@
         "height": 64
       }
     ]
+  },
+  "dwarves-s1": {
+    "id": "dwarves-s1",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "2430d7c2-0eed-48cb-8717-15a74920a77d",
+    "submittedAt": "2026-11-27T09:39:10.806Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 cute steampunk dwarf buildings, four takes of each in this order: Village Hall (a squat chunky stone dwarf hall with a verdigris roof and one small brass chimney); Tavern (a stone alehouse with a giant foaming tankard sign over the door and a copper kettle chimney puffing steam); Magic Guild (a tall thin spire wound with copper coils, a lightning rod with a crackling blue spark on its tip); Boiler Works (a big riveted copper boiler house with pipes and a round pressure gauge). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass trim #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57, steam white #f4f1ea."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/dwarves-fort-s1-0.png sha256 1d57334f749ce9cf89b2a1560099d2aeb9701ee355b11a27f9fa47d93bdd0513",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its stone workshops, copper domes and boiler-hall; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 133301,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 cute steampunk dwarf buildings, four takes of each in this order: Village Hall (a squat chunky stone dwarf hall with a verdigris roof and one small brass chimney); Tavern (a stone alehouse with a giant foaming tankard sign over the door and a copper kettle chimney puffing steam); Magic Guild (a tall thin spire wound with copper coils, a lightning rod with a crackling blue spark on its tip); Boiler Works (a big riveted copper boiler house with pipes and a round pressure gauge). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass trim #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57, steam white #f4f1ea. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roofs, gold roofs, black smoke, lava, slab."
+    },
+    "at": "2026-11-27T09:40:38.566Z",
+    "usageUsd": 0.0831384047402276,
+    "candidates": [
+      {
+        "file": "dwarves-s1-0.png",
+        "sha256": "6b72ad57ed3c8f80bfad6700ecaff78c341f6d97b8da8af55c64e1d48396f253",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-1.png",
+        "sha256": "2ec223487e1d8372c4c8b1769f2afdf70d76d4331d8aed2a6fa3446ec89b635c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-2.png",
+        "sha256": "e8c4c4448556bc1bdf708c20e68fd2a90b4449d71c3a6221d442752e113592db",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-3.png",
+        "sha256": "14d9534c7e4b60392d0e88d22597cc9c2f0bddffd6eacdf3ee059a30e6cd9381",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-4.png",
+        "sha256": "3a62425d1c9d203cd7cddd5352b894f0dc8769d36c0eaaee39c6c29658aaf722",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-5.png",
+        "sha256": "18711c5eacebdb5dce32500567f23f9f4145c2102a488fcebf2e15d7547283e0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-6.png",
+        "sha256": "40b37c421608724709dc3c77abfbb8ad7cec61a3146acb301777abe7d0ca1344",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-7.png",
+        "sha256": "c15a5d78efe87750d02fa54034847bd92a229ab0d42b675db1427ccffd16701f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-8.png",
+        "sha256": "1cd94bef21912f22e49c50da35c5f88f049c8a371e02121c84cea6466faa764e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-9.png",
+        "sha256": "df2e90bcb41328d7a2445079f9fe2b6843ffdc2e043b2150deccec7fa72b6828",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-10.png",
+        "sha256": "9d79fa3136d67344126c16ee355e78593c8c9e6ab44343aec36faad0d7697a00",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-11.png",
+        "sha256": "84272c75c044b0378804110436b2cfb9457b6c8f8937c37a82db6a9c842be6c5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-12.png",
+        "sha256": "9d7636a6d86d4fde35edd0f89ae9e01e348890f5d1d3d6200791bed5ba6922c7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-13.png",
+        "sha256": "df10fbff0060d584ee9912f122686bd0896930a8fed268fdbf7307ea3eb2c5d3",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-14.png",
+        "sha256": "eccf1ed505b4784d8061653e32f0b500e3d13ed6af71145f8eddc3c37559d01c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-s1-15.png",
+        "sha256": "1bbcc9adf6df6ef51a5b4c5d64354fecf67fc976de1fe1dd582e6442909f02c7",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "dwarves-halls-a": {
+    "id": "dwarves-halls-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "7bdad76a-0d82-45c6-a9ed-0394ea643528",
+    "submittedAt": "2026-11-27T09:42:41.049Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these two cute steampunk dwarf buildings, eight takes of each in this order: Town Hall (the same stone hall grown: taller and wider under its barrel-vaulted verdigris roof, a big round brass gear-and-clock gable on its front); City Hall (the same hall grown grand: wide stone wings under a big riveted copper dome with a brass steam whistle on top, and the gear-and-clock front). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass trim #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57, steam white #f4f1ea."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/dwarves-fort-s1-0.png sha256 1d57334f749ce9cf89b2a1560099d2aeb9701ee355b11a27f9fa47d93bdd0513",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its stone workshops, copper domes and boiler-hall; not the layout: draw only one building"
+      },
+      "reference_images": [
+        {
+          "source": "take chunky-buildings/dwarves-s1#2 sha256 e8c4c4448556bc1bdf708c20e68fd2a90b4449d71c3a6221d442752e113592db",
+          "usage": "the same stone village hall: keep its barrel-vaulted verdigris roof, stone, colours and outline, and draw it grown as described"
+        }
+      ],
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 133311,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these two cute steampunk dwarf buildings, eight takes of each in this order: Town Hall (the same stone hall grown: taller and wider under its barrel-vaulted verdigris roof, a big round brass gear-and-clock gable on its front); City Hall (the same hall grown grand: wide stone wings under a big riveted copper dome with a brass steam whistle on top, and the gear-and-clock front). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass trim #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57, steam white #f4f1ea. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roofs, gold roofs, black smoke, lava, slab."
+    },
+    "at": "2026-11-27T09:44:18.917Z",
+    "usageUsd": 0.08304070398542616,
+    "candidates": [
+      {
+        "file": "dwarves-halls-a-0.png",
+        "sha256": "07f7c7b8fe7c1983b0a0070293b553d2120b17f6b62a91b5af3e83a79d0317f6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-1.png",
+        "sha256": "8fe29688b200d7cfaffc778331da83dc804cc446b67f4e673e55726ab9f5d094",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-2.png",
+        "sha256": "3523cb907f7ca43fc5c7bf0bd502595e930ca0127b52d79e57561556b546c273",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-3.png",
+        "sha256": "62f436b88833cdcdf6e1b6871907672e6efab2afff85807db613ac0104bb4d4d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-4.png",
+        "sha256": "9627158e8b8ffc891091ec53dfaf7277c5d942cbc0f029b09380ee09049bd5f1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-5.png",
+        "sha256": "006ea75eae01e7b3ac8bc4fea202915c6b6add1c6b0dd12faa3d9baddcb9850c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-6.png",
+        "sha256": "3fa201a3ce9027f42e1e632f0257efbe534ecd432af5077823c5cf8d2bf77a7b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-7.png",
+        "sha256": "d030cda9cef705ba69eda955d3f0bb9c41bf4b7226c52958a70ea7fe15360ea5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-8.png",
+        "sha256": "794b59dd7537b4674b0aed9ba8cc7834c4dfb9f5f18aed89eff6091dec1b4480",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-9.png",
+        "sha256": "a43271a39c9eb722b990eb6680ffd02bf33da88cb931467584c4133c11430fb5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-10.png",
+        "sha256": "695923dc92060030f49301b92feea8ad64d061a94c3a32368055a894544a7399",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-11.png",
+        "sha256": "a2c9ebf5100b2db6f1e261f81b61eec66472c36c44162248e035a9378f6f462a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-12.png",
+        "sha256": "f5d0d3cb097ee8968e1980c530f1c2cd3d239503b4afdbce89f6306b54361489",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-13.png",
+        "sha256": "ffa52b106649ee283928ea2a1d87e474465d0ecc02ca75325fbb62bf4b108f56",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-14.png",
+        "sha256": "4630d21c38440383c90de8bfe63a10fbb91fbaa69fa5b5fa184f22309d6811bb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-halls-a-15.png",
+        "sha256": "04f3f1577746b33eb2dc1b1353c94f4f4e76d4df5a9e0f4f065f7eb8ac1ead6c",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "dwarves-forts-a": {
+    "id": "dwarves-forts-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c87d22a6-ee55-4f4d-b62b-2bc9dd2591e8",
+    "submittedAt": "2026-11-27T09:44:19.026Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these three cute steampunk dwarf buildings, five takes of each in this order: Riveted Palisade (a chunky round ring of riveted dark iron plates round a little stone gate hut with a verdigris roof and a round brass vault door in a cog frame); Ironbound Wall (a thick curved stone wall bound with dark iron bands and big rivets, the round brass vault-door gate in its middle); Gun Keep (a fat round dark iron keep with a verdigris cap and a brass cannon on its roof, inside a short ironbound stone wall). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a, dark iron #4a4f57 with #2e3238 shadows."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/dwarves-fort-s1-0.png sha256 1d57334f749ce9cf89b2a1560099d2aeb9701ee355b11a27f9fa47d93bdd0513",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its stone workshops, copper domes and boiler-hall; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 133312,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these three cute steampunk dwarf buildings, five takes of each in this order: Riveted Palisade (a chunky round ring of riveted dark iron plates round a little stone gate hut with a verdigris roof and a round brass vault door in a cog frame); Ironbound Wall (a thick curved stone wall bound with dark iron bands and big rivets, the round brass vault-door gate in its middle); Gun Keep (a fat round dark iron keep with a verdigris cap and a brass cannon on its roof, inside a short ironbound stone wall). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a, dark iron #4a4f57 with #2e3238 shadows. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roofs, gold roofs, black smoke, lava, slab."
+    },
+    "at": "2026-11-27T09:46:13.194Z",
+    "usageUsd": 0.08332072128189935,
+    "candidates": [
+      {
+        "file": "dwarves-forts-a-0.png",
+        "sha256": "6635fe22df3644d36c29cf382bcf067c702f727539008717f07ac3180d0902c1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-1.png",
+        "sha256": "bbf1d2f967f7def7399f836950b7fff6b0fc3e6a506abeb7e665da79d547773a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-2.png",
+        "sha256": "8800a224799cf1e87767c69f7099d41a19f935c5922ea23afb4e7c0df211cff2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-3.png",
+        "sha256": "babc144e5259562c5e44ebe83cae7873855c0dde37af7a896c80a4c02c44bace",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-4.png",
+        "sha256": "b81362f9179299cf8e25da3265377e05a544255b5c1e47f41722f06febfd6f39",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-5.png",
+        "sha256": "11c3fac2b736061d06e02198b0e8d0a29454551d7a3df48e2b74873b59689f80",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-6.png",
+        "sha256": "18bf35d6397c09a9eb78e657bb5ed6506028e67d1e15ec091b7b841b5ca1a545",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-7.png",
+        "sha256": "a9355544ae6977863bb014b4062e01a5e5f00aa72f19048b89ed56219c96ffbc",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-8.png",
+        "sha256": "8d58d7cf62e6f6535d937cca621c560443a6b646bf69b354ce60d0d43c6fd626",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-9.png",
+        "sha256": "5ea6f6c56e0fb6ae989afcf8dcc2816b2586ca46d639a1ddc5ab3bfc7ff4366b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-10.png",
+        "sha256": "4ba8bcab56ed176e9f868ce86391f268561578fcbcfa3a3f9a47f25aa7a20f53",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-11.png",
+        "sha256": "c590bd1b4aadda554e6117f2d9dd090291c7e32f602338c77d978b0461b87838",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-12.png",
+        "sha256": "7603f1e75965f45946c1e9543c463d1e17fa4850a0c3d9ff487e49bbbe1c2d19",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-13.png",
+        "sha256": "bf48233f9e2d8486275c70aa7109e8d73c3f3adfe8bdca8e976e07f8229b3d3b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-14.png",
+        "sha256": "0bfbd50b95172612a7630cd5f67faa487f9acd07cd8ff4a4ebc15a9894056f4e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-forts-a-15.png",
+        "sha256": "7ba32b32a7058d4d8f8a87727a4f3dc75402686da91550ebb175553e320ae178",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "dwarves-dwell-a": {
+    "id": "dwarves-dwell-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "d5cd6658-1ca6-4e19-abd2-df9beda85831",
+    "submittedAt": "2026-11-27T09:46:13.310Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 cute steampunk dwarf buildings, four takes of each in this order: Tinkers' Workshop (a cosy stone workshop with a verdigris roof, a giant brass wrench over the door and a tool rack beside it); Rivet Range (a shooting butt of riveted dark iron plates peppered with rivets and a round target,); Gyro Hangar (a round stone hangar with a verdigris roof, a big brass rotor on its roof and a red and white windsock); Mortar Yard (a round sandbagged pit with a fat copper mortar barrel pointing up). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/dwarves-fort-s1-0.png sha256 1d57334f749ce9cf89b2a1560099d2aeb9701ee355b11a27f9fa47d93bdd0513",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its stone workshops, copper domes and boiler-hall; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 133313,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 cute steampunk dwarf buildings, four takes of each in this order: Tinkers' Workshop (a cosy stone workshop with a verdigris roof, a giant brass wrench over the door and a tool rack beside it); Rivet Range (a shooting butt of riveted dark iron plates peppered with rivets and a round target,); Gyro Hangar (a round stone hangar with a verdigris roof, a big brass rotor on its roof and a red and white windsock); Mortar Yard (a round sandbagged pit with a fat copper mortar barrel pointing up). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roofs, gold roofs, black smoke, lava, slab."
+    },
+    "at": "2026-11-27T09:47:51.158Z",
+    "usageUsd": 0.08171742730670506,
+    "candidates": [
+      {
+        "file": "dwarves-dwell-a-0.png",
+        "sha256": "25fd1eeb8630433a83e153e2ed913d45ab574ea43e9d5c45d500379637cf5434",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-1.png",
+        "sha256": "7d6a82f72ce9862a11736ab995c326436b86941380043d9c8a7ebc6a5ed3b7e4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-2.png",
+        "sha256": "4f9de9cf2b617587cf531a11bd6adc8a15b7f9b761d169818e14980222919329",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-3.png",
+        "sha256": "2f2a6695aafcdcbec22815c04ca79410506e93b5c7f5d3f6637c58275bfa34a9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-4.png",
+        "sha256": "e8ce37939b5f62282d580a19cc998a0feea6800d5a9c2756ce841dc5b69288e6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-5.png",
+        "sha256": "73f8cb7c5c50a2bf6de3f3fbae877b140bd58bae4a15b29d529de6dc7ec946c9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-6.png",
+        "sha256": "b8bb1b407514c213474354a01d1a9ed9670e8ab7aba989a532a524a6e98597ed",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-7.png",
+        "sha256": "78df3469737e8d20e6c77a72e66fad846d905c38156bed7515c4d73c0bffd00a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-8.png",
+        "sha256": "5ce76078b539a15f7d0e73c1740d8241849519b4e1fc97952186e897b7dabd58",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-9.png",
+        "sha256": "6ab88e9e6d4a915289a8ac7ea7d4666bda9b53ee16f825b39252bb6ad3e77ebc",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-10.png",
+        "sha256": "1dfef6f773f090d7e5610a10a088e3c1dd902e8831a4a725577fcc4b9d22466f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-11.png",
+        "sha256": "873da45bba8d7dc9eec0ae0972953c81236d3510b4c903a912c2874569ac88ea",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-12.png",
+        "sha256": "b8a0d090da697a1eb9c9ba402ee8ca0451651baddcad81e0a361333cf49b5a5d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-13.png",
+        "sha256": "d0924a6b1e70fbd3b4a0d35f831da155db291f3918cd8a51a29f4835861dfcf2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-14.png",
+        "sha256": "2aa6725f44846b5bd4787589c284cbe57c2ad3a44d411b1b758378aff958150b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-a-15.png",
+        "sha256": "10b5fe6346a41703b6d615b65df7c0d7467912b7c5d7a3bee8d796b22c153bf6",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "dwarves-dwell-b": {
+    "id": "dwarves-dwell-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "a0581aec-05db-4561-bede-46466b2c4761",
+    "submittedAt": "2026-11-27T09:47:51.353Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 4 cute steampunk dwarf buildings, four takes of each in this order: Great Foundry (a tall stone foundry with a verdigris roof, a glowing orange crucible door and two fat copper smokestacks); Scrap Heap (a cheerful pile of brass cogs, springs and copper pipes with a little iron crane); Rivet Forge (a small red brick forge with a verdigris hood and a tray of glowing red-hot rivets); Powder Magazine (a squat stone bunker with a verdigris roof, a round dark iron door and stacked wooden kegs). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57, glow #ff8a2a."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/dwarves-fort-s1-0.png sha256 1d57334f749ce9cf89b2a1560099d2aeb9701ee355b11a27f9fa47d93bdd0513",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its stone workshops, copper domes and boiler-hall; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 133314,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 4 cute steampunk dwarf buildings, four takes of each in this order: Great Foundry (a tall stone foundry with a verdigris roof, a glowing orange crucible door and two fat copper smokestacks); Scrap Heap (a cheerful pile of brass cogs, springs and copper pipes with a little iron crane); Rivet Forge (a small red brick forge with a verdigris hood and a tray of glowing red-hot rivets); Powder Magazine (a squat stone bunker with a verdigris roof, a round dark iron door and stacked wooden kegs). Colours: warm grey stone #9a8f80 with #6b6258 shadows, verdigris teal roofs #3aa38f with #226b5d shadows, brass #d9a634, copper #c7683a with #8a4325 shadows, dark iron #4a4f57, glow #ff8a2a. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roofs, gold roofs, black smoke, lava, slab."
+    },
+    "at": "2026-11-27T09:49:13.438Z",
+    "usageUsd": 0.08176558139589098,
+    "candidates": [
+      {
+        "file": "dwarves-dwell-b-0.png",
+        "sha256": "a69b71a1f7a8ec757d2dd3cabbd073e4f61e975200976af1e1664a9560392e4c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-1.png",
+        "sha256": "0b7f9f56519fbc90d68286a204a3f700c6a9df544b517637a0941fa915c5eee5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-2.png",
+        "sha256": "339a51698d6de30a7a6197b125aa0e1a0fe1a943c18aaaf624071f590d8c3c52",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-3.png",
+        "sha256": "825a3291104eba63a01895293b375129746e11c3515a2ce497687f399fff9da0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-4.png",
+        "sha256": "30c4589b5ab3c9d008c4913082a5494e373340315ba7adeb6089726b542d984b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-5.png",
+        "sha256": "327ea23a6e487e1a453f403f9a5ef33e0eac9bbf1b574acfbb93477873186251",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-6.png",
+        "sha256": "536061af996074a9ea202f4b0ef92f509239ac474635d70af72f502042799c1f",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-7.png",
+        "sha256": "9b27c4313db250ff2912c981b6940aa9c5677619c6082e9ca55986a827139643",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-8.png",
+        "sha256": "2f8b6870d66378364f7bc1d673a766b88e5ccf98ceaa3cc314fdb939d255b2ca",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-9.png",
+        "sha256": "61d2a060197a26576d8b7260ec7730cdd727e7058754015ab8a01c7ad4e1f15d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-10.png",
+        "sha256": "c229f59a580bbdf5024b9b02a17bec9d2464a701846b0f4fa0105057d8c32604",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-11.png",
+        "sha256": "2ecae02a5c8d2c7c9f5b1d231fa6c48ebc0ac4a719bfb7248345aaa9cc768d8c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-12.png",
+        "sha256": "35b1432ac0e4d00b917a42f728db2476a1198e30fdd965c8af376f102df2d0f4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-13.png",
+        "sha256": "50d6d57ff6cbab93e255fb18ce044b3d734afefb3eab01fccfdecfbc3ac85cbe",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-14.png",
+        "sha256": "22c7b2b0f827cf6d84f47f343659f084261523f3d880a3e7c4ebef72893ba146",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-dwell-b-15.png",
+        "sha256": "741d214b329f8505c7da080acf1570a5a71e82fa1ef57b5e9f794b0743b57938",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  },
+  "dwarves-civic-a": {
+    "id": "dwarves-civic-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "82797eb7-1dec-4241-b933-f25cb8084d19",
+    "submittedAt": "2026-11-27T09:49:13.591Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-screen-building.txt",
+          "text": "Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: each image a different one of these 5 cute steampunk dwarf buildings, three takes of each in this order: Marketplace (a stone market stall with a teal and white striped awning, crates and a brass scale); Resource Silo (a riveted copper hopper on iron legs with a chute over an ore cart); Deep Shaft (a mine head: a big iron winding wheel on a timber frame, an ore cart on rails); Repair Yard (a stone shed with a verdigris roof and an iron crane holding a little brass machine by a hook); The Great Boiler (a giant free-standing brass boiler, a huge pressure gauge on its front and a steam whistle on top). Colours: warm grey stone #9a8f80, verdigris teal #3aa38f, brass #d9a634, copper #c7683a, dark iron #4a4f57."
+        }
+      ],
+      "style_image": {
+        "source": "file art/masters/chunky-towns/dwarves-fort-s1-0.png sha256 1d57334f749ce9cf89b2a1560099d2aeb9701ee355b11a27f9fa47d93bdd0513",
+        "usage": "copy the palette, the thick black outline, the pixel size and the chunky rounded toy-like shapes of its stone workshops, copper domes and boiler-hall; not the layout: draw only one building"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 133315,
+      "style_options": {
+        "color_palette": true,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single cute building for a strategy game's town screen, a toy model seen in three-quarter view from slightly above: its front, one side and its roof. Big, chunky, rounded toy-like shapes with a thick black outline, saturated flat colours with one shadow tone, low detail, a characterful silhouette with one oversized signature feature. Whole and centred, filling the image; alone on a transparent background, nothing under it. Subject: each image a different one of these 5 cute steampunk dwarf buildings, three takes of each in this order: Marketplace (a stone market stall with a teal and white striped awning, crates and a brass scale); Resource Silo (a riveted copper hopper on iron legs with a chute over an ore cart); Deep Shaft (a mine head: a big iron winding wheel on a timber frame, an ore cart on rails); Repair Yard (a stone shed with a verdigris roof and an iron crane holding a little brass machine by a hook); The Great Boiler (a giant free-standing brass boiler, a huge pressure gauge on its front and a steam whistle on top). Colours: warm grey stone #9a8f80, verdigris teal #3aa38f, brass #d9a634, copper #c7683a, dark iron #4a4f57. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, platform, grass, soil disc, cast shadow, path, second building, town, people, character, flag, banner, pennant, yellow roofs, gold roofs, black smoke, lava, slab."
+    },
+    "at": "2026-11-27T09:50:41.184Z",
+    "usageUsd": 0.0821538762251536,
+    "candidates": [
+      {
+        "file": "dwarves-civic-a-0.png",
+        "sha256": "b451f330b39c6a67c8fd7854bf04363a8087925fb50c1ee7709ea4405aaf879a",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-1.png",
+        "sha256": "952a25eef88752f9ca43f1c212521c7e0d7171f3f4535a2eadb07620da934564",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-2.png",
+        "sha256": "54252a87ec52ec5547fe2d0600409ea1b9e7749bd2204bda550f0f31e0bb278d",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-3.png",
+        "sha256": "34fb701e166cd9b695a5b198e5bab9dc0440ffd83f60fcf79c3936733f7859f4",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-4.png",
+        "sha256": "d21f5a86dba6be4dffd0b97f0d2826eb352d526902afb1d5419831404c0aa0a0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-5.png",
+        "sha256": "0183eb1b77e01e2e8755985a3de7ad77927740ec823b7e477730966b00ca21f1",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-6.png",
+        "sha256": "8b105a2f82691d62732698581450f9adddd1cfe0bf160638088ffeb046625c55",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-7.png",
+        "sha256": "3cbd930f1bddee426e334cd0407bb712ec87831b1d4b55a593e2f0073a9261f0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-8.png",
+        "sha256": "1f302eaf103a9107b11b81b91bf497688430828ff002309577c5096f4152f4a2",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-9.png",
+        "sha256": "52a2deb74d7ebc7076c59366d0d1e5076e13899e2b571e97b28621c30e72c9a5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-10.png",
+        "sha256": "78ebed480d7177a951e2b154978d3d1622574bc75573484a83cd9ca9a158de2c",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-11.png",
+        "sha256": "1a381e010ade12918864e3b787f30276789d7630949a54a3c7a2f3efa77e45fb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-12.png",
+        "sha256": "dc31cb4ec436e7f669427fafe85e6a2001dad49f0e96899def5b6b495c3a260b",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-13.png",
+        "sha256": "9b91932ef9936b3e0448cdcecd02935f1a49af212881c68192cad9e03616e1a7",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-14.png",
+        "sha256": "a8603d64acbc04cca1444356dd85a59a9db145a7b84ed7d7197e112f2bd56391",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "dwarves-civic-a-15.png",
+        "sha256": "e4b403cfd13e9aabd498795b59299c36eabf251cfea06fd0b0b8bd1daa3d733e",
+        "width": 64,
+        "height": 64
+      }
+    ]
   }
 }
