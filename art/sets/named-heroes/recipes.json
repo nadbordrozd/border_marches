@@ -3,7 +3,7 @@
   "bead": "border_marches-bzc.29",
   "class": "units",
   "exploration": false,
-  "_doc": "48x48 portraits of the 24 named heroes (FACTION_HUMANS, FACTION_UNDEAD and FACTION_GOBLINS section 8; NAMED_HEROES in src/data/classes.ts). Same endpoint, layers and options as the class portraits of class-heroes (bzc.14): each hero keeps the class costume and colours of its class portrait and differs as a person (face, hair, age, one accessory from the name or specialty). No faction layer (the 2000-character cap); colours in each subject. Faces south-east, never mirrored. Recipes are never edited after generation: add a new id (new seed) instead. Candy Kingdom (bead border_marches-bzc.113, docs/design/FACTION_CANDY.md section 8): the eight Candy heroes keep the Nutcracker or Confectioner costume of their class portrait (tall black shako, candy-cane red coat with white frogging and a painted wooden face; or white frilly mob cap, strawberry pink dress and white apron) and differ as persons. Ids are the distinctive first word of each name, as for the other factions: kernel, brittle, walnut, humbug, praline, treacle, fondant, gingersnap.",
+  "_doc": "48x48 portraits of the 24 named heroes (FACTION_HUMANS, FACTION_UNDEAD and FACTION_GOBLINS section 8; NAMED_HEROES in src/data/classes.ts). Same endpoint, layers and options as the class portraits of class-heroes (bzc.14): each hero keeps the class costume and colours of its class portrait and differs as a person (face, hair, age, one accessory from the name or specialty). No faction layer (the 2000-character cap); colours in each subject. Faces south-east, never mirrored. Recipes are never edited after generation: add a new id (new seed) instead. Candy Kingdom (bead border_marches-bzc.113, docs/design/FACTION_CANDY.md section 8): the eight Candy heroes keep the Nutcracker or Confectioner costume of their class portrait (tall black shako, candy-cane red coat with white frogging and a painted wooden face; or white frilly mob cap, strawberry pink dress and white apron) and differ as persons. Ids are the distinctive first word of each name, as for the other factions: kernel, brittle, walnut, humbug, praline, treacle, fondant, gingersnap. The Deepforge (bead border_marches-bzc.132, docs/design/FACTION_DWARVES.md section 8): the eight Deepforge heroes keep the Thane or Artificer costume of their class portrait (a polished brass helmet with a verdigris crest, brass goggles and verdigris pauldrons with brass rivets; or a tall iron-grey top hat with a verdigris band and brass goggles on the brim and a copper coat) and differ as persons; dwarf women have no beards. Ids: brakka, gristle, hilde, dunstan, mags, silas, valvina, nell.",
   "shared": {
     "portrait": {
       "outline": "single color black outline",
@@ -353,6 +353,79 @@
       "subject": "Subject: Granny Gingersnap portrait, close-up of the head and shoulders only of a chunky cute tiny very old grandmother baker: a deeply wrinkled sweet smiling face, a big round nose, big round spectacles, faded ginger hair mostly turned white in a small bun under a white frilly mob cap with a pink #e2589b ribbon, a gingerbread-brown #b86b34 knitted shawl over a strawberry pink #e2589b dress, a gingerbread man cookie with white icing held up beside her face.",
       "negative": "pig, horse, purple, knife, young girl, legs, skirt",
       "notes": "gingersnap-a#0 came back as a young ginger-haired girl, a small whole figure; this take asks for an old face and a close-up."
+    },
+    {
+      "id": "brakka-a",
+      "concept": "THANE BRAKKA BOLTBEARD",
+      "seed": 132301,
+      "options": "@portrait",
+      "subject": "Subject: Thane Brakka Boltbeard portrait, head and shoulders of a chunky cute burly middle-aged dwarf lord: a fierce proud grin, thick black eyebrows, a huge jet-black beard braided into two forks with big iron bolts and nuts threaded on the braids, brass goggles pushed up on a polished brass #d9a634 helmet with a verdigris #3aa38f crest, verdigris #3aa38f pauldrons with brass rivets.",
+      "negative": "ram, horse, purple, visor, black smoke, white beard"
+    },
+    {
+      "id": "mags-a",
+      "concept": "MAGS SPARKWRENCH",
+      "seed": 132305,
+      "options": "@portrait",
+      "subject": "Subject: Mags Sparkwrench portrait, head and shoulders of a chunky cute spunky young dwarf woman inventor: a big cheeky grin, freckles, short messy auburn #c0562a hair, no beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons, a big brass wrench crackling with small blue lightning sparks held up beside her face.",
+      "negative": "beard, moustache, kettle, horse, purple, black smoke"
+    },
+    {
+      "id": "valvina-a",
+      "concept": "AUNTIE VALVINA STEAMWRIGHT",
+      "seed": 132307,
+      "options": "@portrait",
+      "subject": "Subject: Auntie Valvina Steamwright portrait, head and shoulders of a chunky cute plump cheerful old dwarf aunt: rosy round cheeks, a warm knowing smile, grey #b8b2a6 hair in a big bun with brass pins, no beard, a small iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles perched on the bun, a copper #c7683a coat with brass buttons, a round brass valve wheel crackling with small blue lightning sparks held up beside her face.",
+      "negative": "beard, moustache, kettle, horse, purple, black smoke, spectacles"
+    },
+    {
+      "id": "gristle-a",
+      "concept": "OLD GRISTLE COPPERPOT",
+      "seed": 132302,
+      "options": "@portrait",
+      "subject": "Subject: Old Gristle Copperpot portrait, head and shoulders of a chunky cute very old grizzled dwarf veteran: a scarred squinting face with one eye shut, a big red nose, a long tangled grey #b8b2a6 beard, a dented copper #c7683a cooking pot worn as a helmet with a verdigris #3aa38f crest and brass #d9a634 goggles, verdigris #3aa38f pauldrons with brass rivets, the brass barrel of a rivet gun resting on one shoulder.",
+      "negative": "ram, horse, purple, visor, black smoke, white beard"
+    },
+    {
+      "id": "hilde-a",
+      "concept": "CAPTAIN HILDE IRONKETTLE",
+      "seed": 132303,
+      "options": "@portrait",
+      "subject": "Subject: Captain Hilde Ironkettle portrait, head and shoulders of a chunky cute brave young dwarf woman captain: a determined smile, freckles, two thick ginger #c0562a braids with brass rings, no beard, brass #d9a634 goggles pushed up on a polished brass #d9a634 helmet with a verdigris #3aa38f crest and two curly iron ram horns on its sides, verdigris #3aa38f pauldrons with brass rivets and a gold captain's star.",
+      "negative": "beard, moustache, ram, horse, purple, visor, black smoke"
+    },
+    {
+      "id": "dunstan-a",
+      "concept": "FOREMAN DUNSTAN COALBRIGHT",
+      "seed": 132304,
+      "options": "@portrait",
+      "subject": "Subject: Foreman Dunstan Coalbright portrait, head and shoulders of a chunky cute jolly round dwarf foreman: a broad laughing smile, coal-smudged rosy cheeks, a short bushy dark brown beard, a polished brass #d9a634 helmet with a verdigris #3aa38f crest and a glowing miner's lamp on its front, brass goggles, verdigris #3aa38f pauldrons with brass rivets, an iron pickaxe over one shoulder.",
+      "negative": "ram, horse, purple, visor, black smoke, white beard"
+    },
+    {
+      "id": "silas-a",
+      "concept": "SILAS LEDGERBY",
+      "seed": 132306,
+      "options": "@portrait",
+      "subject": "Subject: Silas Ledgerby portrait, head and shoulders of a chunky cute prim thin-faced dwarf moneylender: a polite sly smile, a gold monocle, a neat pointed grey #b8b2a6 beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons over a white collar, a small verdigris-green ledger book with a quill held up beside his face.",
+      "negative": "kettle, horse, purple, black smoke, sparks"
+    },
+    {
+      "id": "nell-a",
+      "concept": "NELL FUSEWRIGHT",
+      "seed": 132308,
+      "options": "@portrait",
+      "subject": "Subject: Nell Fusewright portrait, head and shoulders of a chunky cute cheeky young dwarf girl: a mischievous grin, a soot-smudged nose, two short ginger #c0562a pigtails, no beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons, a round black iron shell with a lit fizzing orange fuse held up beside her face.",
+      "negative": "beard, moustache, kettle, horse, purple, black smoke, explosion"
+    },
+    {
+      "id": "gristle-b",
+      "concept": "OLD GRISTLE COPPERPOT",
+      "seed": 132312,
+      "options": "@portrait",
+      "subject": "Subject: Old Gristle Copperpot portrait, head and shoulders of a chunky cute very old grumpy dwarf veteran with simple flat shading: a wrinkled face with one eye squinting, bushy grey eyebrows, a long grey #b8b2a6 beard, a shiny dented copper #c7683a cooking pot with a handle worn as a helmet, brass #d9a634 goggles on the pot, teal verdigris #3aa38f pauldrons with brass rivets, the brass barrel of a rivet gun resting on one shoulder.",
+      "negative": "ram, horse, purple, visor, black smoke, white beard, red nose, green, noise",
+      "notes": "gristle-a#0 had noisy mottled shading, emerald-green pauldrons, a purple patch and a clown-red nose; this take asks for flat shading, a plain copper pot and teal pauldrons."
     }
   ],
   "outputs": [
@@ -507,6 +580,14 @@
     { "path": "public/assets/portraits/named-praline.png", "from": "praline-a-bust#0", "width": 48, "height": 48 },
     { "path": "public/assets/portraits/named-treacle.png", "from": "treacle-a#0", "width": 48, "height": 48 },
     { "path": "public/assets/portraits/named-fondant.png", "from": "fondant-a-bust#0", "width": 48, "height": 48 },
-    { "path": "public/assets/portraits/named-gingersnap.png", "from": "gingersnap-b#0", "width": 48, "height": 48 }
+    { "path": "public/assets/portraits/named-gingersnap.png", "from": "gingersnap-b#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-brakka.png", "from": "brakka-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-gristle.png", "from": "gristle-b#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-hilde.png", "from": "hilde-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-dunstan.png", "from": "dunstan-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-mags.png", "from": "mags-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-silas.png", "from": "silas-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-valvina.png", "from": "valvina-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/portraits/named-nell.png", "from": "nell-a#0", "width": 48, "height": 48 }
   ]
 }

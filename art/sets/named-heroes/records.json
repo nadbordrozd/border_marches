@@ -1851,5 +1851,446 @@
         "height": 48
       }
     ]
+  },
+  "brakka-a": {
+    "id": "brakka-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-6fe99898-faa6-44ea-b1d0-f08cc18c187d",
+    "submittedAt": "2026-11-27T09:34:57.836Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Thane Brakka Boltbeard portrait, head and shoulders of a chunky cute burly middle-aged dwarf lord: a fierce proud grin, thick black eyebrows, a huge jet-black beard braided into two forks with big iron bolts and nuts threaded on the braids, brass goggles pushed up on a polished brass #d9a634 helmet with a verdigris #3aa38f crest, verdigris #3aa38f pauldrons with brass rivets."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 132301,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Thane Brakka Boltbeard portrait, head and shoulders of a chunky cute burly middle-aged dwarf lord: a fierce proud grin, thick black eyebrows, a huge jet-black beard braided into two forks with big iron bolts and nuts threaded on the braids, brass goggles pushed up on a polished brass #d9a634 helmet with a verdigris #3aa38f crest, verdigris #3aa38f pauldrons with brass rivets. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, ram, horse, purple, visor, black smoke, white beard."
+    },
+    "at": "2026-11-27T09:34:57.843Z",
+    "usageUsd": 0.006540208948983087,
+    "candidates": [
+      {
+        "file": "brakka-a-0.png",
+        "sha256": "4350bda5868b87d64a81390a055801ad17852c38cb1d7cb767df932205dfac3d",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "mags-a": {
+    "id": "mags-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-b9070d49-c1a6-4a9a-a9ac-6f421b86ee11",
+    "submittedAt": "2026-11-27T09:35:14.858Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Mags Sparkwrench portrait, head and shoulders of a chunky cute spunky young dwarf woman inventor: a big cheeky grin, freckles, short messy auburn #c0562a hair, no beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons, a big brass wrench crackling with small blue lightning sparks held up beside her face."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 132305,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Mags Sparkwrench portrait, head and shoulders of a chunky cute spunky young dwarf woman inventor: a big cheeky grin, freckles, short messy auburn #c0562a hair, no beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons, a big brass wrench crackling with small blue lightning sparks held up beside her face. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, beard, moustache, kettle, horse, purple, black smoke."
+    },
+    "at": "2026-11-27T09:35:14.861Z",
+    "usageUsd": 0.006711967044406467,
+    "candidates": [
+      {
+        "file": "mags-a-0.png",
+        "sha256": "42f9f83382dcf94f7fb1767b4aed4a45aed86033b4492e3dbf3d28e434d8f85a",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "valvina-a": {
+    "id": "valvina-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-4a16a05e-15f3-466a-a381-3d713fb1d336",
+    "submittedAt": "2026-11-27T09:35:32.350Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Auntie Valvina Steamwright portrait, head and shoulders of a chunky cute plump cheerful old dwarf aunt: rosy round cheeks, a warm knowing smile, grey #b8b2a6 hair in a big bun with brass pins, no beard, a small iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles perched on the bun, a copper #c7683a coat with brass buttons, a round brass valve wheel crackling with small blue lightning sparks held up beside her face."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 132307,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Auntie Valvina Steamwright portrait, head and shoulders of a chunky cute plump cheerful old dwarf aunt: rosy round cheeks, a warm knowing smile, grey #b8b2a6 hair in a big bun with brass pins, no beard, a small iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles perched on the bun, a copper #c7683a coat with brass buttons, a round brass valve wheel crackling with small blue lightning sparks held up beside her face. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, beard, moustache, kettle, horse, purple, black smoke, spectacles."
+    },
+    "at": "2026-11-27T09:35:32.353Z",
+    "usageUsd": 0.006763571421305339,
+    "candidates": [
+      {
+        "file": "valvina-a-0.png",
+        "sha256": "971b31bdcd415419b16f2bc5cc8a9595b70cdb19446a091a22b996211b2265a7",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "gristle-a": {
+    "id": "gristle-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-f9bb5a2c-27be-4b91-8d40-cd89bfa4a6ee",
+    "submittedAt": "2026-11-27T09:37:08.975Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Old Gristle Copperpot portrait, head and shoulders of a chunky cute very old grizzled dwarf veteran: a scarred squinting face with one eye shut, a big red nose, a long tangled grey #b8b2a6 beard, a dented copper #c7683a cooking pot worn as a helmet with a verdigris #3aa38f crest and brass #d9a634 goggles, verdigris #3aa38f pauldrons with brass rivets, the brass barrel of a rivet gun resting on one shoulder."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 132302,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Old Gristle Copperpot portrait, head and shoulders of a chunky cute very old grizzled dwarf veteran: a scarred squinting face with one eye shut, a big red nose, a long tangled grey #b8b2a6 beard, a dented copper #c7683a cooking pot worn as a helmet with a verdigris #3aa38f crest and brass #d9a634 goggles, verdigris #3aa38f pauldrons with brass rivets, the brass barrel of a rivet gun resting on one shoulder. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, ram, horse, purple, visor, black smoke, white beard."
+    },
+    "at": "2026-11-27T09:37:08.982Z",
+    "usageUsd": 0.006869623793496026,
+    "candidates": [
+      {
+        "file": "gristle-a-0.png",
+        "sha256": "cd2b196ecbd734cb48bff9c29c04312dbc20dc64cbd4b46af596acb1d5ae4284",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "hilde-a": {
+    "id": "hilde-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-55ea018c-4e89-43ce-8abb-aee14b74002f",
+    "submittedAt": "2026-11-27T09:37:27.067Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Captain Hilde Ironkettle portrait, head and shoulders of a chunky cute brave young dwarf woman captain: a determined smile, freckles, two thick ginger #c0562a braids with brass rings, no beard, brass #d9a634 goggles pushed up on a polished brass #d9a634 helmet with a verdigris #3aa38f crest and two curly iron ram horns on its sides, verdigris #3aa38f pauldrons with brass rivets and a gold captain's star."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 132303,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Captain Hilde Ironkettle portrait, head and shoulders of a chunky cute brave young dwarf woman captain: a determined smile, freckles, two thick ginger #c0562a braids with brass rings, no beard, brass #d9a634 goggles pushed up on a polished brass #d9a634 helmet with a verdigris #3aa38f crest and two curly iron ram horns on its sides, verdigris #3aa38f pauldrons with brass rivets and a gold captain's star. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, beard, moustache, ram, horse, purple, visor, black smoke."
+    },
+    "at": "2026-11-27T09:37:27.072Z",
+    "usageUsd": 0.006808678574032254,
+    "candidates": [
+      {
+        "file": "hilde-a-0.png",
+        "sha256": "50eeee1be0c4b52e7b0e952a5ccf7ca6f0930fc7302d8974f14ea4e486b2c8fb",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "dunstan-a": {
+    "id": "dunstan-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-34382a5a-d57f-49ce-bd5c-7ea22bfa3dcd",
+    "submittedAt": "2026-11-27T09:37:43.101Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Foreman Dunstan Coalbright portrait, head and shoulders of a chunky cute jolly round dwarf foreman: a broad laughing smile, coal-smudged rosy cheeks, a short bushy dark brown beard, a polished brass #d9a634 helmet with a verdigris #3aa38f crest and a glowing miner's lamp on its front, brass goggles, verdigris #3aa38f pauldrons with brass rivets, an iron pickaxe over one shoulder."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 132304,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Foreman Dunstan Coalbright portrait, head and shoulders of a chunky cute jolly round dwarf foreman: a broad laughing smile, coal-smudged rosy cheeks, a short bushy dark brown beard, a polished brass #d9a634 helmet with a verdigris #3aa38f crest and a glowing miner's lamp on its front, brass goggles, verdigris #3aa38f pauldrons with brass rivets, an iron pickaxe over one shoulder. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, ram, horse, purple, visor, black smoke, white beard."
+    },
+    "at": "2026-11-27T09:37:43.109Z",
+    "usageUsd": 0.006573787397808499,
+    "candidates": [
+      {
+        "file": "dunstan-a-0.png",
+        "sha256": "0d42999d9281e4a29855cc82d3ee9c471c18772574f35ec9f5f4b0444cc27404",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "silas-a": {
+    "id": "silas-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-dfbfb0cf-c72f-4f9e-a07c-f5475becc85b",
+    "submittedAt": "2026-11-27T09:38:20.903Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Silas Ledgerby portrait, head and shoulders of a chunky cute prim thin-faced dwarf moneylender: a polite sly smile, a gold monocle, a neat pointed grey #b8b2a6 beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons over a white collar, a small verdigris-green ledger book with a quill held up beside his face."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 132306,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Silas Ledgerby portrait, head and shoulders of a chunky cute prim thin-faced dwarf moneylender: a polite sly smile, a gold monocle, a neat pointed grey #b8b2a6 beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons over a white collar, a small verdigris-green ledger book with a quill held up beside his face. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, kettle, horse, purple, black smoke, sparks."
+    },
+    "at": "2026-11-27T09:38:20.909Z",
+    "usageUsd": 0.008994970268673366,
+    "candidates": [
+      {
+        "file": "silas-a-0.png",
+        "sha256": "d5134422c05d760c8b7cd9893092b711a2691081b1b9904420cb7d0bd47e145f",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "nell-a": {
+    "id": "nell-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-e0fecd20-6fdd-47af-8a9f-e8392310efac",
+    "submittedAt": "2026-11-27T09:38:40.712Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Nell Fusewright portrait, head and shoulders of a chunky cute cheeky young dwarf girl: a mischievous grin, a soot-smudged nose, two short ginger #c0562a pigtails, no beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons, a round black iron shell with a lit fizzing orange fuse held up beside her face."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 132308,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Nell Fusewright portrait, head and shoulders of a chunky cute cheeky young dwarf girl: a mischievous grin, a soot-smudged nose, two short ginger #c0562a pigtails, no beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons, a round black iron shell with a lit fizzing orange fuse held up beside her face. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, beard, moustache, kettle, horse, purple, black smoke, explosion."
+    },
+    "at": "2026-11-27T09:38:40.715Z",
+    "usageUsd": 0.0069696038299136695,
+    "candidates": [
+      {
+        "file": "nell-a-0.png",
+        "sha256": "4c945aa233effc6ca10a50f125954bb428353204a6060aa5a90cc2bf8994e95c",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "gristle-b": {
+    "id": "gristle-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-ffe3d1e0-daba-4787-904f-49110d217bec",
+    "submittedAt": "2026-11-27T09:39:34.718Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Old Gristle Copperpot portrait, head and shoulders of a chunky cute very old grumpy dwarf veteran with simple flat shading: a wrinkled face with one eye squinting, bushy grey eyebrows, a long grey #b8b2a6 beard, a shiny dented copper #c7683a cooking pot with a handle worn as a helmet, brass #d9a634 goggles on the pot, teal verdigris #3aa38f pauldrons with brass rivets, the brass barrel of a rivet gun resting on one shoulder."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 132312,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Old Gristle Copperpot portrait, head and shoulders of a chunky cute very old grumpy dwarf veteran with simple flat shading: a wrinkled face with one eye squinting, bushy grey eyebrows, a long grey #b8b2a6 beard, a shiny dented copper #c7683a cooking pot with a handle worn as a helmet, brass #d9a634 goggles on the pot, teal verdigris #3aa38f pauldrons with brass rivets, the brass barrel of a rivet gun resting on one shoulder. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, ram, horse, purple, visor, black smoke, white beard, red nose, green, noise."
+    },
+    "at": "2026-11-27T09:39:34.724Z",
+    "usageUsd": 0.006808436923556858,
+    "candidates": [
+      {
+        "file": "gristle-b-0.png",
+        "sha256": "43c98c2c0685048f0b65e474c794f54bf8b338788caf468d0733d3d81eba74a7",
+        "width": 48,
+        "height": 48
+      }
+    ]
   }
 }

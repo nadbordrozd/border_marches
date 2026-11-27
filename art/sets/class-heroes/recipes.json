@@ -3,7 +3,7 @@
   "bead": "border_marches-bzc.14",
   "class": "units",
   "exploration": false,
-  "_doc": "Adventure-map sprites (large unit, 72x88, like the Lost World Chieftain of lost-world-hero) and 48x48 portraits of the six v0.2 hero classes. The faction docs do not say mounted or on foot; decision (bzc.14): every hero rides, as on a Heroes map, and each class has its own mount so a hero never reads as a creature stack: Knight Errant on a chestnut charger, Enchanter on a white unicorn, Revenant on a skeleton horse, Mortician on a grey donkey with funeral plumes, Warlord on a war boar, Weatherwitch on a shaggy goat. Same layers and colours as faction-units (no faction layer, the 2000-character cap). Faces south-east, never mirrored. Recipes are never edited after generation: add a new id (new seed) instead. Candy Kingdom (bead border_marches-bzc.113, docs/design/FACTION_CANDY.md sections 7 and 10): the Nutcracker rides a candy-striped rocking horse and the Confectioner a marzipan pig, in the Candy palette of section 10.1 (candy-cane red #e03a3e, royal icing #fff4ec, strawberry frosting #e2589b, mint #7fd6b5, gingerbread #b86b34).",
+  "_doc": "Adventure-map sprites (large unit, 72x88, like the Lost World Chieftain of lost-world-hero) and 48x48 portraits of the six v0.2 hero classes. The faction docs do not say mounted or on foot; decision (bzc.14): every hero rides, as on a Heroes map, and each class has its own mount so a hero never reads as a creature stack: Knight Errant on a chestnut charger, Enchanter on a white unicorn, Revenant on a skeleton horse, Mortician on a grey donkey with funeral plumes, Warlord on a war boar, Weatherwitch on a shaggy goat. Same layers and colours as faction-units (no faction layer, the 2000-character cap). Faces south-east, never mirrored. Recipes are never edited after generation: add a new id (new seed) instead. Candy Kingdom (bead border_marches-bzc.113, docs/design/FACTION_CANDY.md sections 7 and 10): the Nutcracker rides a candy-striped rocking horse and the Confectioner a marzipan pig, in the Candy palette of section 10.1 (candy-cane red #e03a3e, royal icing #fff4ec, strawberry frosting #e2589b, mint #7fd6b5, gingerbread #b86b34). The Deepforge (bead border_marches-bzc.132, docs/design/FACTION_DWARVES.md sections 7 and 10): the Thane rides a clockwork mountain ram with a wind-up key and the Artificer a walking copper kettle on two brass legs, in the palette of section 10.1 (brass #d9a634, copper #c7683a, verdigris #3aa38f, iron #4a4f57, steam white #f4f1ea, beards #c0562a and #b8b2a6); no black smoke, no yellow roofs or caps.",
   "shared": {
     "piece": {
       "outline": "single color black outline",
@@ -225,6 +225,67 @@
       "subject": "Subject: Nutcracker, a chunky cute toy-soldier nutcracker captain with a huge round painted wooden head riding a candy-striped rocking horse seen from the front-right, filling the whole width: a big pale face with big friendly eyes, rosy cheeks, a big square jaw with white teeth, white whiskers, a very tall black shako hat with a pink #e2589b plume, a candy-cane red #e03a3e coat with white icing frogging, a red-and-white striped candy-cane sabre raised; the rocking horse is icing white #fff4ec with red stripes and a pink mane, on curved red-and-white rockers; the rockers are the lowest thing.",
       "negative": "real horse, gun, purple, orange face",
       "notes": "Same design as nutcracker-a with a bigger face; nutcracker-b came back with an orange pumpkin-like scowling head."
+    },
+    {
+      "id": "thane-a",
+      "concept": "THANE",
+      "width": 72,
+      "height": 88,
+      "seed": 132101,
+      "options": "@piece",
+      "subject": "Subject: Thane, a chunky cute stout dwarf lord with a huge round head riding a clockwork ram seen from the front-right, filling the whole width: a rosy stern face, a big white braided beard, brass goggles on a brass #d9a634 helmet with a verdigris #3aa38f crest, verdigris #3aa38f armour, a big iron steam hammer raised high puffing a small white steam cloud; the ram is a cute clockwork machine of riveted brass #d9a634 and iron #4a4f57 plates with curly iron horns, round porthole eyes, a big brass wind-up key on its back and stubby iron legs; the hooves are the lowest thing.",
+      "negative": "real sheep, wool, horse, black smoke, purple, lava"
+    },
+    {
+      "id": "artificer-a",
+      "concept": "ARTIFICER",
+      "width": 72,
+      "height": 88,
+      "seed": 132201,
+      "options": "@piece",
+      "subject": "Subject: Artificer, a chunky cute dwarf inventor with a huge round head riding a walking copper kettle seen from the front-right, filling the whole width: a cheerful face, a bushy auburn #c0562a beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass goggles, a copper #c7683a coat, a brass tuning-fork staff crackling with small blue sparks raised high; he sits on the lid of a big round copper #c7683a kettle with two porthole eyes and a spout puffing a small white steam cloud, walking on two stubby brass #d9a634 legs with big iron boots; the boots are the lowest thing.",
+      "negative": "horse, wheels, black smoke, purple, lava"
+    },
+    {
+      "id": "thane-portrait-a",
+      "concept": "THANE PORTRAIT",
+      "width": 48,
+      "height": 48,
+      "seed": 132111,
+      "fragments": [
+        "style",
+        "camera-portrait",
+        "class-portrait"
+      ],
+      "options": "@portrait",
+      "subject": "Subject: Thane portrait, head and shoulders of a chunky cute stout dwarf lord: a rosy stern face with big friendly eyes, a bushy white braided beard with brass rings, brass goggles pushed up on a polished brass #d9a634 helmet with a verdigris #3aa38f crest, verdigris #3aa38f pauldrons with brass rivets, the iron head of a steam hammer over one shoulder.",
+      "negative": "ram, horse, purple, visor, black smoke"
+    },
+    {
+      "id": "artificer-portrait-a",
+      "concept": "ARTIFICER PORTRAIT",
+      "width": 48,
+      "height": 48,
+      "seed": 132211,
+      "fragments": [
+        "style",
+        "camera-portrait",
+        "class-portrait"
+      ],
+      "options": "@portrait",
+      "subject": "Subject: Artificer portrait, head and shoulders of a chunky cute dwarf inventor: a cheerful face with big friendly eyes, a bushy auburn #c0562a beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons and a white shirt collar, the brass tuning-fork tip of a staff crackling with small blue sparks beside his head.",
+      "negative": "kettle, horse, purple, black smoke"
+    },
+    {
+      "id": "artificer-b",
+      "concept": "ARTIFICER",
+      "width": 72,
+      "height": 88,
+      "seed": 132202,
+      "options": "@piece",
+      "subject": "Subject: Artificer, a chunky cute dwarf inventor with a huge round head riding a walking copper teakettle seen from the front-right, filling the whole width: a bushy auburn #c0562a beard, a tall iron-grey top hat with brass goggles, a copper-brown coat, a brass tuning-fork staff with blue sparks raised; he sits on the lid of a big round copper #c7683a teakettle with a long curved spout pointing forward-right puffing a small white steam cloud, two round porthole eyes on its belly, walking on two long jointed brass #d9a634 bird legs with iron feet; the feet are the lowest thing.",
+      "negative": "cauldron, pot of gold, leprechaun, green coat, black smoke, purple",
+      "notes": "artificer-a#0 read as a leprechaun on a pot of gold (a spoutless cauldron on short feet, a green waistcoat); this take asks for a teakettle with a long spout on two long brass legs and a copper-brown coat."
     }
   ],
   "outputs": [
@@ -243,6 +304,10 @@
     { "path": "public/assets/units/hero-nutcracker.png", "from": "nutcracker-a#0", "width": 72, "height": 88 },
     { "path": "public/assets/portraits/hero-nutcracker.png", "from": "nutcracker-portrait-a#0", "width": 48, "height": 48 },
     { "path": "public/assets/units/hero-confectioner.png", "from": "confectioner-a#0", "width": 72, "height": 88 },
-    { "path": "public/assets/portraits/hero-confectioner.png", "from": "confectioner-portrait-a#0", "width": 48, "height": 48 }
+    { "path": "public/assets/portraits/hero-confectioner.png", "from": "confectioner-portrait-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/units/hero-thane.png", "from": "thane-a#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/hero-thane.png", "from": "thane-portrait-a#0", "width": 48, "height": 48 },
+    { "path": "public/assets/units/hero-artificer.png", "from": "artificer-b#0", "width": 72, "height": 88 },
+    { "path": "public/assets/portraits/hero-artificer.png", "from": "artificer-portrait-a#0", "width": 48, "height": 48 }
   ]
 }

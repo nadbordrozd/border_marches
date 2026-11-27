@@ -218,5 +218,50 @@
     "verdict": "ACCEPTED",
     "notes": "Granny Gingersnap: very old granny with a big nose, big round spectacles and faded sandy hair under a frilly mob cap with a pink ribbon, gingerbread-brown shawl over a pink dress, holding a gingerbread man (her specialty); distinct from the Confectioner and Treacle by the shawl, hair and cookie; reads at 48 px",
     "at": "2026-11-27T00:04:38.938Z"
+  },
+  "brakka-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Brakka Boltbeard: a jet-black forked beard with iron bolts in it, heavy brows and a stern face under the brass goggled helmet with verdigris pauldrons; the helmet is a darker bronze than the class bust, accepted; distinct from the white-bearded Thane bust",
+    "at": "2026-11-27T09:39:06.699Z"
+  },
+  "mags-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Mags Sparkwrench: young beardless dwarf woman with messy auburn hair and freckles, the Artificer top hat with verdigris band and goggles, a brass wrench and blue lightning sparks round her",
+    "at": "2026-11-27T09:39:06.876Z"
+  },
+  "valvina-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Valvina Steamwright: old dwarf aunt with a grey double bun and a little top hat with goggles, a brass valve wheel crackling with blue sparks held up; the wheel covers part of one eye and the coat is maroon, accepted since the face still reads at 48",
+    "at": "2026-11-27T09:39:07.039Z"
+  },
+  "hilde-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Hilde Ironkettle: young dwarf woman with ginger braids and freckles under a brass helmet with a verdigris star crest, goggles and two curly iron ram horns (Ramming Speed), verdigris pauldrons",
+    "at": "2026-11-27T09:39:07.205Z"
+  },
+  "dunstan-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Dunstan Coalbright: jolly dark-bearded foreman with coal-smudged cheeks, goggles over his eyes, a miner's lamp on the brass helmet and an iron pickaxe; pauldrons came back a paler blue than verdigris, accepted",
+    "at": "2026-11-27T09:39:07.367Z"
+  },
+  "silas-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Silas Ledgerby: grey-bearded moneylender in the Artificer top hat with goggles and a copper-maroon coat over a white collar, holding a green ledger and quill",
+    "at": "2026-11-27T09:39:07.597Z"
+  },
+  "nell-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Nell Fusewright: cheeky young dwarf girl with ginger pigtails in the Artificer top hat with goggles, holding a black iron shell with a lit fuse (Mortars)",
+    "at": "2026-11-27T09:39:07.962Z"
+  },
+  "gristle-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Noisy mottled shading on the face and beard, emerald-green pauldrons instead of verdigris, a purple patch on the pot helmet and a clown-red nose; unclear at 48",
+    "at": "2026-11-27T09:39:08.121Z"
+  },
+  "gristle-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Old Gristle Copperpot: grumpy old dwarf with a long grey beard and heavy brows under a dented copper pot helmet with a handle and brass goggles, teal verdigris pauldrons, a rivet-gun barrel over the shoulder; flat shading, reads at 48",
+    "at": "2026-11-27T09:39:40.830Z"
   }
 }

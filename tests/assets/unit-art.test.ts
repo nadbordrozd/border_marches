@@ -96,6 +96,8 @@ const HERO_CLASSES = [
   "weatherwitch",
   "nutcracker",
   "confectioner",
+  "thane",
+  "artificer",
 ];
 /** FACTION_CANDY.md section 8 (bead bzc.113): their portraits come first. */
 const CANDY_NAMED_HEROES: readonly (readonly [string, string])[] = [
@@ -107,6 +109,17 @@ const CANDY_NAMED_HEROES: readonly (readonly [string, string])[] = [
   ["treacle", "confectioner"],
   ["fondant", "confectioner"],
   ["gingersnap", "confectioner"],
+];
+/** FACTION_DWARVES.md section 8 (bead bzc.132): their portraits come first. */
+const DWARVES_NAMED_HEROES: readonly (readonly [string, string])[] = [
+  ["brakka", "thane"],
+  ["gristle", "thane"],
+  ["hilde", "thane"],
+  ["dunstan", "thane"],
+  ["mags", "artificer"],
+  ["silas", "artificer"],
+  ["valvina", "artificer"],
+  ["nell", "artificer"],
 ];
 
 describe("unit art lookups", () => {
@@ -183,23 +196,34 @@ describe("unit art lookups", () => {
     expect(keys.size).toBe(32);
   });
 
-  it("gives the eight Candy Kingdom heroes portraits of their own", () => {
-    const keys = new Set<string>();
-    for (const [id, heroClass] of CANDY_NAMED_HEROES) {
-      expect({ id, own: hasNamedHeroPortrait(id) }).toEqual({ id, own: true });
-      const portrait = namedHeroPortrait(id, heroClass);
-      expect(portrait).toBe(assetByKey(portrait.key));
-      expect([portrait.w, portrait.h, portrait.unit]).toEqual([
-        48,
-        48,
-        heroArt(heroClass).key,
-      ]);
-      expect(portrait.key).not.toBe(heroPortrait(heroClass).key);
-      expect(existsSync(join(PUBLIC, portrait.path)), portrait.path).toBe(true);
-      keys.add(portrait.key);
-    }
-    expect(keys.size).toBe(8);
-  });
+  it.each([
+    ["Candy Kingdom", CANDY_NAMED_HEROES],
+    ["Deepforge", DWARVES_NAMED_HEROES],
+  ] as const)(
+    "gives the eight %s heroes portraits of their own",
+    (_, heroes) => {
+      const keys = new Set<string>();
+      for (const [id, heroClass] of heroes) {
+        expect({ id, own: hasNamedHeroPortrait(id) }).toEqual({
+          id,
+          own: true,
+        });
+        const portrait = namedHeroPortrait(id, heroClass);
+        expect(portrait).toBe(assetByKey(portrait.key));
+        expect([portrait.w, portrait.h, portrait.unit]).toEqual([
+          48,
+          48,
+          heroArt(heroClass).key,
+        ]);
+        expect(portrait.key).not.toBe(heroPortrait(heroClass).key);
+        expect(existsSync(join(PUBLIC, portrait.path)), portrait.path).toBe(
+          true,
+        );
+        keys.add(portrait.key);
+      }
+      expect(keys.size).toBe(8);
+    },
+  );
 
   it("falls back to the class portrait for heroes without their own", () => {
     const chieftain = CHIEFTAIN_ROSTER[0];

@@ -127,6 +127,9 @@ const HERO_ROWS: readonly Row[] = [
   // The Candy Kingdom (bead bzc.113): on a rocking horse and a marzipan pig.
   ["hero-nutcracker", "candy", 72, 88, [86, 28, 45, 17, 59]],
   ["hero-confectioner", "candy", 72, 88, [86, 33, 53, 8, 61]],
+  // The Deepforge (bead bzc.132): on a clockwork ram and a walking kettle.
+  ["hero-thane", "dwarves", 72, 88, [84, 35, 43, 13, 63]],
+  ["hero-artificer", "dwarves", 72, 88, [85, 24, 52, 16, 53]],
 ];
 
 export const V02_UNIT_ASSETS: readonly UnitAsset[] = UNIT_ROWS.map(toAsset);
@@ -176,6 +179,15 @@ const NAMED_HERO_ROWS: readonly (readonly [heroId: string, unit: string])[] = [
   ["treacle", "hero-confectioner"],
   ["fondant", "hero-confectioner"],
   ["gingersnap", "hero-confectioner"],
+  // The Deepforge (bead bzc.132; ids from FACTION_DWARVES.md section 8).
+  ["brakka", "hero-thane"],
+  ["gristle", "hero-thane"],
+  ["hilde", "hero-thane"],
+  ["dunstan", "hero-thane"],
+  ["mags", "hero-artificer"],
+  ["silas", "hero-artificer"],
+  ["valvina", "hero-artificer"],
+  ["nell", "hero-artificer"],
 ];
 
 /** Portrait key of a named hero's own portrait. */

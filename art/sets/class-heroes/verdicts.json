@@ -98,5 +98,30 @@
     "verdict": "ACCEPTED",
     "notes": "Confectioner portrait: rosy granny with round spectacles under a frilly white mob cap with a pink ribbon, pink dress and white apron, wooden spoon with a bowl of batter; matches the map sprite; reads at 48 px on light and dark",
     "at": "2026-11-26T23:59:35.939Z"
+  },
+  "artificer-a#0": {
+    "verdict": "REJECTED",
+    "notes": "Reads as a leprechaun on a pot of gold: the kettle came back as a spoutless cauldron on short feet (not two brass legs), a green waistcoat, and detached steam and debris pixels at the bottom left",
+    "at": "2026-11-27T09:34:18.194Z"
+  },
+  "thane-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Thane: white-bearded dwarf in a brass helmet with a verdigris crest and goggles, verdigris pauldrons, iron steam hammer raised with a steam puff, on a brass-and-iron clockwork ram with curly horns and gear plates; faces south-east; hooves lowest; reads as a mounted hero",
+    "at": "2026-11-27T09:34:18.320Z"
+  },
+  "thane-portrait-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Thane bust: brass helmet with verdigris crest and goggles, big white beard, verdigris pauldrons with rivets, hammer head at the shoulder; reads at 48 on light and dark",
+    "at": "2026-11-27T09:34:18.447Z"
+  },
+  "artificer-portrait-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Artificer bust: iron-grey top hat with a verdigris band and brass goggles, bushy auburn beard, copper coat, tuning-fork staff tip; distinct from the Thane bust at 48",
+    "at": "2026-11-27T09:34:18.569Z"
+  },
+  "artificer-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "Artificer: auburn-bearded dwarf in an iron-grey top hat with brass goggles and a copper-brown coat, a brass tuning-fork staff with blue sparks, sitting on a walking copper teakettle with a porthole eye, a long spout puffing white steam to the front-right and two brass legs with iron feet; the mount leads south-east; feet lowest; no longer reads as a leprechaun",
+    "at": "2026-11-27T09:39:06.532Z"
   }
 }

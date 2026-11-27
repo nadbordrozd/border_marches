@@ -957,5 +957,262 @@
         "height": 88
       }
     ]
+  },
+  "thane-a": {
+    "id": "thane-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-31ba6311-5652-4f03-8b60-c5c12ae90039",
+    "submittedAt": "2026-11-27T09:32:41.887Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Thane, a chunky cute stout dwarf lord with a huge round head riding a clockwork ram seen from the front-right, filling the whole width: a rosy stern face, a big white braided beard, brass goggles on a brass #d9a634 helmet with a verdigris #3aa38f crest, verdigris #3aa38f armour, a big iron steam hammer raised high puffing a small white steam cloud; the ram is a cute clockwork machine of riveted brass #d9a634 and iron #4a4f57 plates with curly iron horns, round porthole eyes, a big brass wind-up key on its back and stubby iron legs; the hooves are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 132101,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Thane, a chunky cute stout dwarf lord with a huge round head riding a clockwork ram seen from the front-right, filling the whole width: a rosy stern face, a big white braided beard, brass goggles on a brass #d9a634 helmet with a verdigris #3aa38f crest, verdigris #3aa38f armour, a big iron steam hammer raised high puffing a small white steam cloud; the ram is a cute clockwork machine of riveted brass #d9a634 and iron #4a4f57 plates with curly iron horns, round porthole eyes, a big brass wind-up key on its back and stubby iron legs; the hooves are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, real sheep, wool, horse, black smoke, purple, lava."
+    },
+    "at": "2026-11-27T09:32:41.895Z",
+    "usageUsd": 0.008644311189651489,
+    "candidates": [
+      {
+        "file": "thane-a-0.png",
+        "sha256": "610ea006d029c58790836828db11e92c4f0f91edad074b48bb435b288c431ecf",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "artificer-a": {
+    "id": "artificer-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-b24810c9-8678-4d6c-a6f4-9725ab559796",
+    "submittedAt": "2026-11-27T09:33:16.357Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Artificer, a chunky cute dwarf inventor with a huge round head riding a walking copper kettle seen from the front-right, filling the whole width: a cheerful face, a bushy auburn #c0562a beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass goggles, a copper #c7683a coat, a brass tuning-fork staff crackling with small blue sparks raised high; he sits on the lid of a big round copper #c7683a kettle with two porthole eyes and a spout puffing a small white steam cloud, walking on two stubby brass #d9a634 legs with big iron boots; the boots are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 132201,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Artificer, a chunky cute dwarf inventor with a huge round head riding a walking copper kettle seen from the front-right, filling the whole width: a cheerful face, a bushy auburn #c0562a beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass goggles, a copper #c7683a coat, a brass tuning-fork staff crackling with small blue sparks raised high; he sits on the lid of a big round copper #c7683a kettle with two porthole eyes and a spout puffing a small white steam cloud, walking on two stubby brass #d9a634 legs with big iron boots; the boots are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, horse, wheels, black smoke, purple, lava."
+    },
+    "at": "2026-11-27T09:33:16.360Z",
+    "usageUsd": 0.008625304884380765,
+    "candidates": [
+      {
+        "file": "artificer-a-0.png",
+        "sha256": "8910fec008f6ba4058890dd4ab5a6866ea4e61554ae85dcbce969d002680c556",
+        "width": 72,
+        "height": 88
+      }
+    ]
+  },
+  "thane-portrait-a": {
+    "id": "thane-portrait-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-902eb01b-d786-4888-a4c8-376d7c81ca9d",
+    "submittedAt": "2026-11-27T09:33:36.065Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Thane portrait, head and shoulders of a chunky cute stout dwarf lord: a rosy stern face with big friendly eyes, a bushy white braided beard with brass rings, brass goggles pushed up on a polished brass #d9a634 helmet with a verdigris #3aa38f crest, verdigris #3aa38f pauldrons with brass rivets, the iron head of a steam hammer over one shoulder."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 132111,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Thane portrait, head and shoulders of a chunky cute stout dwarf lord: a rosy stern face with big friendly eyes, a bushy white braided beard with brass rings, brass goggles pushed up on a polished brass #d9a634 helmet with a verdigris #3aa38f crest, verdigris #3aa38f pauldrons with brass rivets, the iron head of a steam hammer over one shoulder. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, ram, horse, purple, visor, black smoke."
+    },
+    "at": "2026-11-27T09:33:36.071Z",
+    "usageUsd": 0.006938821660147773,
+    "candidates": [
+      {
+        "file": "thane-portrait-a-0.png",
+        "sha256": "02e6bc383b4aa49ecbe5c9a18a06be13ae9a1834b2464adcbd46cfdc369057a7",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "artificer-portrait-a": {
+    "id": "artificer-portrait-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-6bbe1122-d7c5-4a6f-86af-bc94669de65e",
+    "submittedAt": "2026-11-27T09:33:55.698Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-portrait.txt",
+          "text": "Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image."
+        },
+        {
+          "source": "fragments/class-portrait.txt",
+          "text": "Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Artificer portrait, head and shoulders of a chunky cute dwarf inventor: a cheerful face with big friendly eyes, a bushy auburn #c0562a beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons and a white shirt collar, the brass tuning-fork tip of a staff crackling with small blue sparks beside his head."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 132211,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "side",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: head-and-shoulders bust portrait for a game interface, level three-quarter view, the character turned slightly to the right (south-east) and looking at the viewer, head and upper chest filling most of the square, centred on a transparent background. The bust ends cleanly at the chest; nothing else is in the image. Class: one chunky cute character portrait with a huge round head and big friendly eyes, the same chunky body language as the map piece, thick single-colour black outline, big simple shapes and flat colours with one shadow tone; it must read at a glance at 48 pixels. Subject: Artificer portrait, head and shoulders of a chunky cute dwarf inventor: a cheerful face with big friendly eyes, a bushy auburn #c0562a beard, a tall iron-grey top hat with a verdigris #3aa38f band and brass #d9a634 goggles on the brim, a copper #c7683a coat with brass buttons and a white shirt collar, the brass tuning-fork tip of a staff crackling with small blue sparks beside his head. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, full body, legs, feet, standing figure, pedestal, base, plinth, border, circle background, badge, medallion, vignette, background scenery, second character, crowd, kettle, horse, purple, black smoke."
+    },
+    "at": "2026-11-27T09:33:55.701Z",
+    "usageUsd": 0.0069366489781273735,
+    "candidates": [
+      {
+        "file": "artificer-portrait-a-0.png",
+        "sha256": "423aa6430a12f96bf3cb9bb2eca5c39db6a1a25100f4330a8dad63d9d4c4f5cc",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "artificer-b": {
+    "id": "artificer-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixen",
+    "jobId": "sync-70af7f28-0ee2-4cec-904a-9a2115ba6a4c",
+    "submittedAt": "2026-11-27T09:36:20.444Z",
+    "request": {
+      "endpoint": "create-image-pixen",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/camera-three-quarter.txt",
+          "text": "Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-unit.txt",
+          "text": "Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: Artificer, a chunky cute dwarf inventor with a huge round head riding a walking copper teakettle seen from the front-right, filling the whole width: a bushy auburn #c0562a beard, a tall iron-grey top hat with brass goggles, a copper-brown coat, a brass tuning-fork staff with blue sparks raised; he sits on the lid of a big round copper #c7683a teakettle with a long curved spout pointing forward-right puffing a small white steam cloud, two round porthole eyes on its belly, walking on two long jointed brass #d9a634 bird legs with iron feet; the feet are the lowest thing."
+        }
+      ],
+      "image_size": {
+        "width": 72,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 132202,
+      "outline": "single color black outline",
+      "detail": "low detail",
+      "view": "low top-down",
+      "direction": "south-east",
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Camera: consistent strategy-game camera, three-quarter view looking slightly down, the subject faces down and to the right (south-east), whole subject visible and centred on a transparent background, nothing cropped. The subject stands directly on the empty transparent background: nothing at all is drawn under it. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one chunky cute unit figure with a big head, short sturdy body and one oversized signature weapon or tool, thick single-colour black outline, standing ready pose, both feet visible; the feet are the lowest thing in the image. Subject: Artificer, a chunky cute dwarf inventor with a huge round head riding a walking copper teakettle seen from the front-right, filling the whole width: a bushy auburn #c0562a beard, a tall iron-grey top hat with brass goggles, a copper-brown coat, a brass tuning-fork staff with blue sparks raised; he sits on the lid of a big round copper #c7683a teakettle with a long curved spout pointing forward-right puffing a small white steam cloud, two round porthole eyes on its belly, walking on two long jointed brass #d9a634 bird legs with iron feet; the feet are the lowest thing. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, base, disc, ground plate, platform, terrain slab, isometric block, grass, soil, scenery, background, cast shadow on the ground, crowd, cauldron, pot of gold, leprechaun, green coat, black smoke, purple."
+    },
+    "at": "2026-11-27T09:36:20.448Z",
+    "usageUsd": 0.009506556802325778,
+    "candidates": [
+      {
+        "file": "artificer-b-0.png",
+        "sha256": "40fdc41195f101c4196e55d803240f7dad273e1dbdb824cb5cbfe9557edcb1cd",
+        "width": 72,
+        "height": 88
+      }
+    ]
   }
 }

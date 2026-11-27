@@ -94,6 +94,9 @@ export const HERO_CLASS_ART: Readonly<Record<string, string>> = {
   // The Candy Kingdom (FACTION_CANDY.md section 10.2, bead bzc.113).
   nutcracker: "hero-nutcracker",
   confectioner: "hero-confectioner",
+  // The Deepforge (FACTION_DWARVES.md section 10.2, bead bzc.132).
+  thane: "hero-thane",
+  artificer: "hero-artificer",
 };
 
 /** Drawn for a creature id with no art: a featureless shadow spirit. */

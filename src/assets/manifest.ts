@@ -109,7 +109,7 @@ export function assetUrl(asset: Pick<ImageAsset, "path">, base = "/"): string {
 // ------------------------------------------------------------------ units
 
 export type ArtFaction =
-  "dinosaur" | "human" | "goblin" | "undead" | "martian" | "candy";
+  "dinosaur" | "human" | "goblin" | "undead" | "martian" | "candy" | "dwarves";
 export type UnitArtFaction = ArtFaction | "neutral";
 /** Pulp Wars canvas classes: 56x80, 72x88, 88x(72..104). */
 export type UnitSizeClass = "standard" | "large" | "giant";

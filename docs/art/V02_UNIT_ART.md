@@ -90,6 +90,8 @@ reads as a creature stack (72x88, like the Chieftain):
 | `weatherwitch` | `hero-weatherwitch` | shaggy goat |
 | `nutcracker` | `hero-nutcracker` | candy-striped rocking horse (Candy Kingdom, bead `border_marches-bzc.113`) |
 | `confectioner` | `hero-confectioner` | marzipan pig (Candy Kingdom, bead `border_marches-bzc.113`) |
+| `thane` | `hero-thane` | clockwork mountain ram (Deepforge, bead `border_marches-bzc.132`) |
+| `artificer` | `hero-artificer` | walking copper teakettle on two brass legs (Deepforge, bead `border_marches-bzc.132`) |
 
 Each class has a generated 48x48 bust (`portrait-hero-<class>`).
 
@@ -147,6 +149,43 @@ head and the third for facing south-west. Registered in
 Review sheets: `.orchestration/screens/bzc113/` in the bead's worktree
 (`lineup-snow.png` and `lineup-grass.png` beside the other mounted heroes,
 `candy-portraits.png` beside existing busts, `takes-*.png` every take).
+
+## Deepforge heroes (bead `border_marches-bzc.132`)
+
+The two Deepforge classes of [FACTION_DWARVES.md](../design/FACTION_DWARVES.md)
+sections 7 and 10 were added to `class-heroes` the same way as the Candy
+classes, in the palette of section 10.1 (brass, copper, verdigris, iron,
+steam white; no black smoke): the Thane, a white-bearded dwarf lord in a
+brass helmet with a verdigris crest and goggles, verdigris pauldrons and a
+raised steam hammer puffing steam, on a clockwork mountain ram of brass and
+iron plates with curly iron horns; the Artificer, an auburn-bearded dwarf
+inventor in an iron-grey top hat with brass goggles, a copper coat and a
+crackling brass tuning-fork staff, sitting on a walking copper teakettle
+with a porthole eye and a steaming spout, on two brass legs. Each has its
+48x48 bust.
+
+The eight Deepforge named heroes (section 8) have their own busts in
+`named-heroes`, keeping the class costume (brass helmet and verdigris
+pauldrons, or the top hat with goggles and the copper coat); the dwarf
+women are beardless (the orchestrator's call for cute and readable at 48):
+`brakka` (Thane Brakka Boltbeard: black forked beard with bolts), `gristle`
+(Old Gristle Copperpot: a dented copper pot for a helmet, a rivet-gun
+barrel), `hilde` (Captain Hilde Ironkettle: ginger braids, ram horns on the
+helmet), `dunstan` (Foreman Dunstan Coalbright: coal-smudged cheeks, a
+miner's lamp, a pickaxe), `mags` (Mags Sparkwrench: a sparking wrench),
+`silas` (Silas Ledgerby: grey beard, a ledger and quill), `valvina` (Auntie
+Valvina Steamwright: a grey bun, a sparking valve wheel) and `nell` (Nell
+Fusewright: ginger pigtails, a shell with a lit fuse). The first Artificer
+take was rejected for reading as a leprechaun on a pot of gold (a spoutless
+cauldron on short feet); `artificer-b` asks for a teakettle with a long
+spout on brass legs. Gristle was re-rolled for noisy shading, emerald
+pauldrons and a purple patch. Registered with the art faction `dwarves` in
+`src/assets/v02-units.ts` (`HERO_ROWS`, `NAMED_HERO_ROWS`),
+`src/assets/unit-art.ts` (`HERO_CLASS_ART`) and `src/assets/unit-tops.ts`.
+Review sheets: `.orchestration/screens/bzc132/` in the bead's worktree
+(`lineup-volcanic.png` and `lineup-grass.png` beside the other mounted
+heroes, `dwarves-portraits.png` beside existing busts, `takes-*.png` every
+take).
 
 ## Portraits
 
