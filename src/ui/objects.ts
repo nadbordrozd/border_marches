@@ -20,7 +20,8 @@ export function displayObjects(state: GameState): MapObject[] {
   const collected = new Set(state.collected);
   const out: MapObject[] = [];
   for (const o of state.map.objects) {
-    if (o.kind === "hero-start") continue;
+    // Moored boats are ships in the state, drawn as ships (bzc.149).
+    if (o.kind === "hero-start" || o.kind === "boat") continue;
     // Collected pickups and spent one-time objects are gone; buried
     // things are never drawn (bead bzc.13).
     if (collected.has(o.id) || o.kind === "buried") continue;

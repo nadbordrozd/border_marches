@@ -11,6 +11,8 @@ import {
   canEnter,
   cutsCorner,
   moveContext,
+  navalStepCost,
+  navalStepKind,
   stepCost,
 } from "../core/game/pathfinding.ts";
 import { DIRECTIONS_8, inBounds } from "../core/map/types.ts";
@@ -43,7 +45,9 @@ export function pathSummary(path: Path, hero: HeroState): PathSummary {
     return { cost: 0, days: 0, left: hero.mp, attack: false };
   const days = last.day;
   let left: number;
-  if (days === 0) left = hero.mp - last.total;
+  // Naval paths carry the exact points left (bead bzc.149: conversions).
+  if (last.left !== undefined) left = last.left;
+  else if (days === 0) left = hero.mp - last.total;
   else {
     // Movement spent on the arrival day: from the end of the day before.
     const before = steps.filter((s) => s.day < days);
@@ -228,6 +232,14 @@ export function canAffordStep(state: GameState, hero: HeroState): boolean {
     const i = y * w + x;
     if (ctx.monsterAt.has(i) || ctx.enemyHeroAt.has(i)) return true;
     if (ctx.pickupAt.has(i)) return true;
+    if (ctx.naval !== undefined && ctx.naval !== null) {
+      // Naval maps (bead bzc.149): sail, board or land too.
+      const kind = navalStepKind(ctx, hero.x, hero.y, x, y);
+      if (kind === null) continue;
+      const c = navalStepCost(ctx, kind, hero.x, hero.y, x, y);
+      if (c <= hero.mp) return true;
+      continue;
+    }
     if (!canEnter(ctx, x, y)) continue;
     const cost = stepCost(
       state.map,

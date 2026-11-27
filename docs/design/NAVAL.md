@@ -1,7 +1,8 @@
 # Naval layer: ships, sea battles, sea guardians and sea sites
 
 Status: design for v0.2 (bead `border_marches-bzc.148`, 2026-11-27).
-Implementation beads follow from section 14.
+Implementation beads follow from section 14; bead 1's API (ships and sea
+movement, bzc.149) is section 16.
 
 The user: "Design naval stuff. getting on / off ships, naval combat, a bunch
 of sea specific guardians and buildings and resources, some spells and
@@ -1031,3 +1032,100 @@ the art class docs).
   proposed here.
 - Whether landing should cost the rest of the day (chosen) or half the
   remaining points; bead 11 measures it.
+
+## 16. Bead 1's API (bzc.149): ships and sea movement core
+
+What the later beads build on. Everything is inert unless `map.naval` is
+true: on a dry map no cell is sea, no hero is afloat, `state.ships` is
+absent, `moveContext` has no `naval` part and every search, step and
+save is exactly as before.
+
+### 16.1 State and map
+
+| Item                             | Where                    | Meaning                                                                                                                                                                                                                     |
+| -------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GameMap.naval?: boolean`        | `src/core/map/types.ts`  | The naval flag (2.1). `validateMap` accepts object entrances on water on a naval map (sea sites, moored boats) and refuses a boat on land                                                                                   |
+| `MapObjectKind "boat"`           | `src/core/map/types.ts`  | A moored boat object (5.6, `BOAT_KIND`); `data.owner` optional (default neutral). Becomes a ship at the game start; never drawn, visited or blocking as an object. Bead 3 adds its catalogue row                            |
+| `ShipState { id, x, y, owner }`  | `src/core/game/types.ts` | A ship. **Aboard is derived**: a hero is aboard when it is alive and stands on the ship's cell (only heroes afloat stand on sea cells). A ship with a hero aboard moves with it; a teleported or dead hero leaves it moored |
+| `GameState.ships?`, `shipsMade?` | `src/core/game/types.ts` | Present on naval states; ids are `ship-<n>` from `shipsMade`                                                                                                                                                                |
+| `HeroState.seaMaxMp?`            | `src/core/game/types.ts` | Today's sea maximum, fixed at the day start and on hiring. `hero.mp` is in sea points afloat, land points ashore; `hero.maxMp` stays the land maximum                                                                       |
+| Events                           | `GameEvent`              | `ship-boarded` (from: the last owner), `ship-landed` (endsDay), `ship-captured` (owner, from), `ship-sunk` (why: defeat, retreat, scuttled)                                                                                 |
+
+Save version stays 4: the fields are optional, a v4 save without them is a
+dry game, and `readSave` runs `settleNavalState` (a naval state without a
+ships list gets the map's boats).
+
+### 16.2 `src/core/game/naval.ts`
+
+| Function                                                                            | Use                                                                                                                                                                     |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `isNavalMap`, `seaMask`, `isSeaCell`, `isShoreCell`, `seaMinFor`                    | The sea: 4-connected water bodies of `seaMinFor(map)` cells or more (60 when the map's side is 36 or less, else 80), cached per map                                     |
+| `shipsOf`, `findShip`, `shipAt`, `heroAboard`, `isMoored`, `shipOfHero`, `isAfloat` | Where ships are and who is aboard                                                                                                                                       |
+| `addShip(state, x, y, owner)`                                                       | A new moored ship, in place (bead 2's purchase onto a dock, bead 6's Call the Boat). Callers check the cell is a free sea cell                                          |
+| `setShipOwner`, `sinkShip`, `scuttleShip`                                           | Ownership changes and sinking, in place, with events. `scuttleShip` refuses a ship with a hero aboard (bead 6 adds the spell's reach and mana)                          |
+| `shipAfterDefeat(state, loser, winnerOwner, retreated, events)`                     | 2.5 and 3.7: a beaten hero's ship goes to the winning hero's player, or sinks after a retreat or a defeat by neutrals. Called by `heroLost` in `game/battle.ts`         |
+| `neutraliseShips`                                                                   | An eliminated player's ships turn neutral (`eliminate` calls it)                                                                                                        |
+| `shipsFromMap`, `settleNavalState`                                                  | Boats to ships at `newGame`; the load-time settle                                                                                                                       |
+| `seaMovementBreakdown`, `seaMovementPoints`, `seaMaxOf`, `dailyMaxOf`               | 2.4: `1500 x (100 + sea-movement-percent) / 100 + sea-movement-flat + lighthouses`, at most 3000, minus the Borrowed Day debt                                           |
+| `lighthouseBonus(state, player)`                                                    | +300 once for a town building `HARBOUR_LIGHTHOUSE` ("lighthouse"); +200 per flagged map site of type `MAP_LIGHTHOUSE_TYPE` ("lighthouse", `sites[id].owner`), at most 3 |
+| `seafaringRank(hero)`                                                               | The rank of skill `SEAFARING_SKILL` ("seafaring"); from 1 a landing is an ordinary step                                                                                 |
+| `toSeaPoints`, `toLandPoints`                                                       | The 2.3 conversions, floored                                                                                                                                            |
+| `navalDayStart`, `fixDailyMaxima`                                                   | The day start (afloat: `mp = seaMax`; Stables add only to the land maximum afloat) and hiring                                                                           |
+| `townDock(map, townId)`                                                             | 2.2's dock, computed from the map alone and cached (the same in every game: "computed when the game starts"); null when landlocked                                      |
+
+Numbers live in `src/data/naval.ts`.
+
+### 16.3 Movement and planning (`pathfinding.ts`, `adventure.ts`)
+
+- `MoveContext.naval` (`NavalMove`: sea mask, moored ships by cell, both
+  maxima, the points now, afloat, Seafaring rank) is set by `moveContext`
+  on naval maps. Zones of control there cover only the stack's own
+  element.
+- `navalStepKind(ctx, from, to)` names an ordinary step: `walk`, `sail`
+  (onto a free sea cell, no moored ship), `board` (a shore cell onto a
+  moored ship) or `land` (onto a free land cell; a pickup is taken from
+  the ship instead). `navalStepCost` prices it in the points it is paid
+  in: sail 100 / 141, board 100 / 141 land points, land the ordinary land
+  cost with Seafaring or -1 ("the rest of the day") without.
+- `cutsCorner` is element-aware: at sea a corner is closed when it is not
+  sea or object-blocked; across the shore only corners closed to both a
+  walker and a ship cut.
+- `findPath` plans over both graphs in **land-equivalent points** (sea
+  points x landMax / seaMax; a day-ending landing costs the rest of that
+  day), with the bzc.107 building detour, the bzc.77 / 79 through-guards
+  planning and the pickup and attack rules unchanged; then
+  `replayNavalSteps` sets each step's `day`, its exact `cost` and `left`.
+  Naval steps carry `afloat`, `board` (the ship id), `land` and
+  `endsDay`. `reachableCells` returns land-equivalent costs on naval maps.
+- `moveHeroAlong` pays each step (`navalStep`): the ship sails along; a
+  boarding converts and takes the ship; a landing converts or ends the
+  day and leaves the ship moored. Attacks and pickups across the shore
+  are ordinary attack and pickup steps.
+- `heroBattle`: a hero afloat attacking a hero in its town gets a plain
+  hero battle (no fort, no entry: a beach landing, 3.2, 3.7).
+
+### 16.4 For the later beads
+
+| Bead                      | Hook                                                                                                                                                                                                                                                                                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2 Harbour                 | Use building id `"lighthouse"` (or change `HARBOUR_LIGHTHOUSE`); buy with `addShip(state, dock.x, dock.y, player)` when `shipAt(dock)` is undefined and no hero stands there; `townDock` for docks and "landlocked"                                                                                                                                                             |
+| 3 Sea objects             | Sea entrances already work (a ship sails onto them; stops, buildings and visits as on land). A whirlpool or other move of a hero afloat must move its ship too (`shipOfHero` before, then set `ship.x/y`). Currents: a cheaper `sail` in `navalStepCost` and a lower `hScale` in `findNavalPath`. Map Lighthouse: type `"lighthouse"`, flagged in `sites[id].owner`             |
+| 4 Sea guardians           | Sea stacks are monsters on sea cells; their zone already covers only sea cells                                                                                                                                                                                                                                                                                                  |
+| 5 Naval battlefield       | Choose the layout from `isAfloat(state, attacker)` and `isSeaCell(map, defender cell)`; the field still uses the defender cell's terrain (water draws as grass) until then. Ship results are already applied by `heroLost`                                                                                                                                                      |
+| 6 Spells, skill           | Seafaring: skill id `"seafaring"` with `sea-movement-percent` effects; Tricorne and Locket: `sea-movement-percent`; Fair Wind: add to `hero.mp` when `isAfloat`; Call the Boat: `addShip` or move a moored ship; Scuttle: `scuttleShip`; sight bonuses afloat in `sightRadius`                                                                                                  |
+| 8 Naval AI                | `src/core/ai/reach.ts` still plans on land only (its own search over `canEnter`); use `navalStepKind` / `navalStepCost` or `findPath`. `SimpleAi` already plans with `findPath` and may board                                                                                                                                                                                   |
+| 9b Ship art (bzc.158, in) | `src/render/map/ship-art.ts` draws `SHIP_ART.sailing` (a hero aboard) and `SHIP_ART.moored`, their `ownerKey` colours at x >= `minX` recoloured onto the owner's colour ramp (`NEUTRAL_SAIL` grey for a neutral boat; the pirate keeps its colours), and hides the hero aboard (the art's captain stands in). The code placeholder is only a fallback when the image is missing |
+
+### 16.5 Calls made in bead 1
+
+| Call                                                                                                  | Why                                                                                            |
+| ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Aboard is derived from position, no `hero` field on a ship                                            | Teleports, dismissals and defeats leave a ship moored without touching it; one source of truth |
+| No save version bump                                                                                  | Every naval field is optional; dry v4 saves load unchanged                                     |
+| A landing without Seafaring needs at least 1 point left and uses them all                             | "Lands with 0 points" read as Heroes II's landing; 0 points means the walk waits for tomorrow  |
+| A hero ashore may take a pickup floating beside the shore                                             | RULES_V2 5.6 unchanged ("from a next cell"); 2.6 only lists what a ship can do                 |
+| A hero afloat attacking a hero in its town gets no fort and does not enter                            | 3.2 makes it a beach landing; 3.7: the winner stays aboard                                     |
+| Mixed paths are ordered in land-equivalent points with the day-ending landing as the rest of that day | A time order across both elements; the replay then gives exact points and days                 |
+| The ship art hides the hero aboard; only the code placeholder (a fallback) draws it on deck           | NAVAL 10.1: the art's captain stands in for the hero                                           |
+| Docks computed from the map on demand (cached), not stored                                            | Same result as at the game start, nothing in the save                                          |
+| Battles at sea keep the defender cell's terrain until bead 5                                          | The layouts are bead 5's; nothing breaks meanwhile                                             |

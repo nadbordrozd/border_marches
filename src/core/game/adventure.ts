@@ -7,7 +7,17 @@ import { sightRadius } from "./effects.ts";
 import { gainXp } from "./hero.ts";
 import { learnInTown, noteHeroPath } from "../magic/adventure.ts";
 import { pickupInfo } from "./newGame.ts";
-import { canEnter, cutsCorner, moveContext, stepCost } from "./pathfinding.ts";
+import { isAfloat, shipAt, toLandPoints, toSeaPoints } from "./naval.ts";
+import {
+  canEnter,
+  cutsCorner,
+  moveContext,
+  navalStepCost,
+  navalStepKind,
+  stepCost,
+  type NavalMove,
+  type NavalStepKind,
+} from "./pathfinding.ts";
 import { checkEliminations } from "./players.ts";
 import { visitSite } from "./sites.ts";
 import { besidePickup, isPickup } from "./site-state.ts";
@@ -195,7 +205,11 @@ export function heroBattle(
 ): PendingBattle {
   const defender = must(findHero(state, defenderId), "defender");
   const town = townAtHero(state, defender);
-  return town !== undefined && town.owner === defender.owner
+  // From a ship it is a beach landing (NAVAL 3.2): no fort, and the winner
+  // stays aboard (it must land to enter the town).
+  const attacker = findHero(state, attackerId);
+  const afloat = attacker !== undefined && isAfloat(state, attacker);
+  return town !== undefined && town.owner === defender.owner && !afloat
     ? {
         kind: "hero",
         objectId: defenderId,
@@ -262,6 +276,8 @@ export function moveHeroAlong(
   let stop: MoveStopReason = "arrived";
   let battle: PendingBattle | null = null;
   let pickup: MapObject | undefined;
+  /** Boardings and landings on the way (naval maps). */
+  const navalEvents: GameEvent[] = [];
 
   for (let i = 0; i < steps.length; i++) {
     const { x, y } = must(steps[i], "step");
@@ -312,24 +328,40 @@ export function moveHeroAlong(
       stop = "attack";
       break;
     }
-    if (!canEnter(ctx, x, y) || cutsCorner(ctx, hero.x, hero.y, x, y)) {
-      return fail("bad-path", `step ${i} to (${x},${y}) is blocked`);
+    const nav = ctx.naval;
+    if (nav !== undefined && nav !== null) {
+      // Naval maps (bead bzc.149): walk, sail, board or land.
+      const kind = navalStepKind(ctx, hero.x, hero.y, x, y);
+      if (kind === null) {
+        return fail("bad-path", `step ${i} to (${x},${y}) is blocked`);
+      }
+      const cost = navalStepCost(ctx, kind, hero.x, hero.y, x, y);
+      const paid = navalStep(next, hero, kind, cost, x, y, nav, navalEvents);
+      if (paid === null) {
+        stop = "no-mp";
+        break;
+      }
+      spent += paid;
+    } else {
+      if (!canEnter(ctx, x, y) || cutsCorner(ctx, hero.x, hero.y, x, y)) {
+        return fail("bad-path", `step ${i} to (${x},${y}) is blocked`);
+      }
+      const cost = stepCost(
+        map,
+        ctx.nativeTerrain,
+        hero.x,
+        hero.y,
+        x,
+        y,
+        ctx.forestCost,
+      );
+      if (cost > hero.mp) {
+        stop = "no-mp";
+        break;
+      }
+      hero.mp -= cost;
+      spent += cost;
     }
-    const cost = stepCost(
-      map,
-      ctx.nativeTerrain,
-      hero.x,
-      hero.y,
-      x,
-      y,
-      ctx.forestCost,
-    );
-    if (cost > hero.mp) {
-      stop = "no-mp";
-      break;
-    }
-    hero.mp -= cost;
-    spent += cost;
     hero.x = x;
     hero.y = y;
     cells.push([x, y]);
@@ -355,6 +387,7 @@ export function moveHeroAlong(
   noteHeroPath(next, hero, [original.x, original.y], cells);
   const events: GameEvent[] = [
     { type: "moved", heroId, cells, mpSpent: spent, stop },
+    ...navalEvents,
   ];
   if (battle === null && (stop === "object" || stop === "arrived")) {
     battle = visitAtHero(next, hero, events);
@@ -367,6 +400,86 @@ export function moveHeroAlong(
     events.push({ type: "battle", battle });
   }
   return success(next, events);
+}
+
+/**
+ * Pays for one naval step (bead bzc.149, NAVAL 2.3-2.4), in place, before
+ * the hero's cell changes: a walk or a sail costs its points (the ship
+ * sails along); a boarding costs land points, converts the rest to sea
+ * points and takes the ship for the hero's player; a landing converts back
+ * with Seafaring (then the land cost) or uses up the day without it, and
+ * leaves the ship moored where it was. Returns the points paid, or null
+ * (nothing changed) when the hero has too few for the step today.
+ */
+function navalStep(
+  state: GameState,
+  hero: HeroState,
+  kind: NavalStepKind,
+  cost: number,
+  x: number,
+  y: number,
+  nav: NavalMove,
+  events: GameEvent[],
+): number | null {
+  const w = state.map.width;
+  switch (kind) {
+    case "walk":
+      if (cost > hero.mp) return null;
+      hero.mp -= cost;
+      return cost;
+    case "sail": {
+      if (cost > hero.mp) return null;
+      const ship = shipAt(state, hero.x, hero.y);
+      hero.mp -= cost;
+      if (ship !== undefined) {
+        ship.x = x;
+        ship.y = y;
+      }
+      return cost;
+    }
+    case "board": {
+      const ship = shipAt(state, x, y);
+      if (ship === undefined || cost > hero.mp) return null;
+      hero.mp = toSeaPoints(hero.mp - cost, nav.landMax, nav.seaMax);
+      const from = ship.owner;
+      ship.owner = hero.owner;
+      nav.moored.delete(y * w + x);
+      nav.afloat = true;
+      events.push({
+        type: "ship-boarded",
+        heroId: hero.id,
+        shipId: ship.id,
+        from,
+      });
+      return cost;
+    }
+    case "land": {
+      let paid: number;
+      const endsDay = nav.seafaring < 1;
+      if (!endsDay) {
+        const land = toLandPoints(hero.mp, nav.landMax, nav.seaMax);
+        if (cost > land) return null;
+        hero.mp = land - cost;
+        paid = cost;
+      } else {
+        if (hero.mp <= 0) return null;
+        paid = hero.mp;
+        hero.mp = 0;
+      }
+      const ship = shipAt(state, hero.x, hero.y);
+      nav.afloat = false;
+      if (ship !== undefined) {
+        nav.moored.set(ship.y * w + ship.x, ship.id);
+        events.push({
+          type: "ship-landed",
+          heroId: hero.id,
+          shipId: ship.id,
+          endsDay,
+        });
+      }
+      return paid;
+    }
+  }
 }
 
 /**

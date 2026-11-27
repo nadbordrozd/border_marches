@@ -8,7 +8,9 @@
  * it, pointing along that segment. A marker takes the colour of the step
  * it leads to: reachable today or later. A step standing on a building
  * that is not the target (bead bzc.107: the only way on) gets a ring at
- * its centre instead. Pure (no canvas), so the layout is unit-tested.
+ * its centre instead. On a naval map (bead bzc.149) a boarding step gets
+ * an anchor and a landing that ends the day a ring labelled "lands: day
+ * ends". Pure (no canvas), so the layout is unit-tested.
  */
 
 /** Markers per step of the path, the cell-centre one included. */
@@ -21,18 +23,27 @@ export interface PathMarkerStep {
   readonly reachable: boolean;
   /** Stands on a building that is not the target (bead bzc.107). */
   readonly visit?: boolean;
+  /** Boards a ship (bead bzc.149): an anchor. */
+  readonly board?: boolean;
+  /** Lands from a ship and that ends the day: a ring and its label. */
+  readonly landEndsDay?: boolean;
 }
+
+/** The label of a day-ending landing (NAVAL 2.3). */
+export const LANDING_LABEL = "lands: day ends";
 
 export interface PathMarker {
   /** Marker centre in cell units (a cell centre is x + 0.5). */
   readonly cx: number;
   readonly cy: number;
-  readonly kind: "arrow" | "cross" | "visit";
+  readonly kind: "arrow" | "cross" | "visit" | "anchor" | "landing";
   /** Arrow direction in eighths of a turn, 0 = east, 2 = south. */
   readonly dir: number;
   readonly reachable: boolean;
   /** The path step this marker belongs to (fog check). */
   readonly cell: { readonly x: number; readonly y: number };
+  /** Words drawn beside the marker (a day-ending landing). */
+  readonly label?: string;
 }
 
 /** The 8-way direction from one cell toward another (0 = east, 2 = south). */
@@ -77,11 +88,20 @@ export function pathMarkers(
       cx: step.x + 0.5,
       cy: step.y + 0.5,
       kind:
-        step.visit === true ? "visit" : next === undefined ? "cross" : "arrow",
+        step.visit === true
+          ? "visit"
+          : step.board === true
+            ? "anchor"
+            : step.landEndsDay === true
+              ? "landing"
+              : next === undefined
+                ? "cross"
+                : "arrow",
       dir:
         next === undefined ? 0 : stepDirection(step.x, step.y, next.x, next.y),
       reachable: step.reachable,
       cell,
+      ...(step.landEndsDay === true ? { label: LANDING_LABEL } : {}),
     });
     prev = cell;
   });

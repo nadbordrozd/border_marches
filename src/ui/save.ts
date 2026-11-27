@@ -10,6 +10,10 @@
  * memory), a version 2 save (multi-player, MVP heroes) through v3, and a
  * version 1 save (the one-player MVP) into a one-player game; an
  * unreadable or unknown save is reported with a message and not loaded.
+ *
+ * The naval layer (bead bzc.149) adds only optional fields inside v4
+ * (`map.naval`, `ships`, `shipsMade`, a hero's `seaMaxMp`): a v4 save
+ * without them is a dry game and loads unchanged, so the version stays 4.
  */
 import {
   upgradeV1State,
@@ -18,6 +22,7 @@ import {
   type V2State,
   type V3State,
 } from "../core/game/migrate.ts";
+import { settleNavalState } from "../core/game/naval.ts";
 import type { GameState } from "../core/game/types.ts";
 
 export const SAVE_KEY = "border-marches.save";
@@ -183,6 +188,9 @@ export function readSave(storage: SaveStorage | null): LoadResult {
     };
   }
   if (file.state.status !== "playing") return { kind: "none" };
+  // Naval fields are optional within v4 (bead bzc.149): a naval state
+  // always gets its ships list; a dry one is left exactly as saved.
+  settleNavalState(file.state);
   return { kind: "ok", state: file.state, upgraded: false };
 }
 

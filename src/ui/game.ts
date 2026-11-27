@@ -52,7 +52,18 @@ import { CHEST, MINES, RESOURCE_IDS, RESOURCE_NAMES } from "../data/economy.ts";
 import { getHeroClass } from "../data/hero.ts";
 import { MAX_HEROES, playerColour } from "../data/players.ts";
 import { createMapView, ZOOM_STEPS } from "../render/map/map-view.ts";
-import type { MapFlag, MapView } from "../render/map/map-view.ts";
+import { dailyMaxOf, isSeaCell } from "../core/game/naval.ts";
+import {
+  carriedAtStart,
+  carryStep,
+  mapShips,
+  type CarriedShip,
+} from "./ships.ts";
+import type {
+  MapFlag,
+  MapView,
+  PathStep as PreviewStep,
+} from "../render/map/map-view.ts";
 import { pickupCue, siteCue } from "../audio/cues.ts";
 import { playSound } from "../audio/sound.ts";
 import { fxEvent } from "../audio/fx.ts";
@@ -268,6 +279,23 @@ export const ADVENTURE_KEYS: ReadonlyArray<readonly [string, string]> = [
   ["?", "This list"],
 ];
 
+/**
+ * A planned step as the path preview draws it: today or later, a
+ * building on the way (bzc.107), a boarding's anchor and a day-ending
+ * landing's ring (bzc.149).
+ */
+function previewStep(s: Path["steps"][number]): PreviewStep {
+  return {
+    x: s.x,
+    y: s.y,
+    reachable: s.day === 0,
+    // Through a building only when no way round exists (bzc.107).
+    ...(s.building === undefined ? {} : { visit: true }),
+    ...(s.board === undefined ? {} : { board: true }),
+    ...(s.endsDay === true ? { landEndsDay: true } : {}),
+  };
+}
+
 function keysTable(): HTMLElement {
   const table = el("table.gm-table.gm-keys-table");
   for (const [key, what] of ADVENTURE_KEYS)
@@ -305,6 +333,8 @@ class GameScreen {
   private objectsSig = "";
   /** The planned destination and its path. */
   private plan: { x: number; y: number; path: Path } | null = null;
+  /** Ships moved by a walk being shown, until the state catches up. */
+  private readonly walkShips = new Map<string, { x: number; y: number }>();
   /** The last click on a town, for double-clicks (map-clicks.ts). */
   private lastTownClick:
     (LastClick & { plan: { x: number; y: number; path: Path } | null }) | null =
@@ -953,19 +983,26 @@ class GameScreen {
     const bar = this.mpMeter;
     const hero = this.hero();
     if (bar === null || hero === undefined) return;
-    const today =
-      this.plan?.path.steps.filter((s) => s.day === 0).at(-1)?.total ?? 0;
-    const spend = Math.max(0, Math.min(hero.mp, today));
+    const last = this.plan?.path.steps.filter((s) => s.day === 0).at(-1);
+    const today = last?.total ?? 0;
+    // Naval paths carry the exact points left (boardings and landings
+    // convert them, bead bzc.149); afloat, the day's maximum is at sea.
+    const spend =
+      last?.left !== undefined
+        ? Math.max(0, hero.mp - last.left)
+        : Math.max(0, Math.min(hero.mp, today));
+    const after = last?.left ?? hero.mp - spend;
+    const max = dailyMaxOf(this.state, hero);
     const pct = (n: number): string =>
-      `${Math.max(0, Math.min(100, (n / Math.max(1, hero.maxMp)) * 100))}%`;
+      `${Math.max(0, Math.min(100, (n / Math.max(1, max)) * 100))}%`;
     bar.style.setProperty("--fill", pct(hero.mp));
-    bar.style.setProperty("--keep", pct(hero.mp - spend));
-    if (spend > 0) bar.classList.add("gm-planned");
+    bar.style.setProperty("--keep", pct(Math.min(hero.mp, after)));
+    const planned = last !== undefined && (spend > 0 || after !== hero.mp);
+    if (planned) bar.classList.add("gm-planned");
     else bar.classList.remove("gm-planned");
-    bar.textContent =
-      spend > 0
-        ? `Moves ${hero.mp} → ${hero.mp - spend}`
-        : `Moves ${hero.mp} / ${hero.maxMp}`;
+    bar.textContent = planned
+      ? `Moves ${hero.mp} → ${after}`
+      : `Moves ${hero.mp} / ${max}`;
   }
 
   /** A town's card (UI2-08): picture, income, garrison, today's work. */
@@ -1059,6 +1096,7 @@ class GameScreen {
 
   /** Re-syncs every part of the screen with the state. */
   private refresh(): void {
+    this.walkShips.clear();
     const objects = displayObjects(this.state);
     const sig = objectsSignature(objects);
     if (sig !== this.objectsSig) {
@@ -1081,17 +1119,38 @@ class GameScreen {
     moving?: { id: string; x: number; y: number },
     state: GameState = this.state,
   ): void {
-    this.view.setHeroes(
-      state.heroes
-        .filter((h) => h.alive)
-        .map((h) => ({
+    const shown = state.heroes
+      .filter((h) => h.alive)
+      .map((h) => {
+        const x = h.id === moving?.id ? moving.x : h.x;
+        const y = h.id === moving?.id ? moving.y : h.y;
+        return {
           id: h.id,
-          x: h.id === moving?.id ? moving.x : h.x,
-          y: h.id === moving?.id ? moving.y : h.y,
+          x,
+          y,
           unit: heroArt(h.heroClass).key,
           colour: playerColour(h.owner).hex,
-        })),
-    );
+          // Aboard a ship (bead bzc.149): only heroes afloat stand at sea.
+          ...(isSeaCell(state.map, x, y) ? { afloat: true } : {}),
+        };
+      });
+    this.view.setHeroes(shown);
+    this.view.setShips(mapShips(state, shown, this.walkShips));
+  }
+
+  /**
+   * A walk being shown moves the ship it carries (bead bzc.149): call
+   * before showing the hero on (x, y); `carried` is the ship it had.
+   */
+  private carryShip(
+    state: GameState,
+    carried: CarriedShip | null,
+    x: number,
+    y: number,
+  ): CarriedShip | null {
+    const next = carryStep(state, carried, x, y);
+    if (next !== null) this.walkShips.set(next.shipId, { x, y });
+    return next;
   }
 
   private updateViewport(): void {
@@ -1314,13 +1373,7 @@ class GameScreen {
     }
     const hero = this.hero();
     this.view.setPathPreview(
-      this.plan.path.steps.map((s) => ({
-        x: s.x,
-        y: s.y,
-        reachable: s.day === 0,
-        // Through a building only when no way round exists (bzc.107).
-        ...(s.building === undefined ? {} : { visit: true }),
-      })),
+      this.plan.path.steps.map(previewStep),
       hero === undefined ? undefined : { x: hero.x, y: hero.y },
     );
   }
@@ -1554,6 +1607,7 @@ class GameScreen {
     const remaining = this.plan?.path.steps.slice() ?? [];
     const sight = sightRadius(hero);
     let prev = { x: hero.x, y: hero.y };
+    let carried = carriedAtStart(this.state, hero);
     for (const [x, y] of cells) {
       for (
         let yy = Math.max(0, y - sight);
@@ -1575,11 +1629,9 @@ class GameScreen {
       )
         remaining.shift();
       remaining.shift();
-      this.view.setPathPreview(
-        remaining.map((s) => ({ x: s.x, y: s.y, reachable: s.day === 0 })),
-        { x, y },
-      );
+      this.view.setPathPreview(remaining.map(previewStep), { x, y });
       this.view.setExplored(explored);
+      carried = this.carryShip(this.state, carried, x, y);
       this.syncHeroes({ id: hero.id, x, y });
       const still = reducedMotion();
       if (still) this.view.centerOn(x, y);
@@ -2332,8 +2384,14 @@ class GameScreen {
     }
     await this.view.glideTo(first[0], first[1]);
     let prev = { x: hero.x, y: hero.y };
+    let carried = carriedAtStart(before, hero);
     for (const [x, y] of walk.cells) {
+      if (!(seen(x, y) || seen(prev.x, prev.y))) {
+        carried = carryStep(before, carried, x, y);
+        if (carried !== null) this.walkShips.set(carried.shipId, { x, y });
+      }
       if (seen(x, y) || seen(prev.x, prev.y)) {
+        carried = this.carryShip(before, carried, x, y);
         this.syncHeroes({ id: hero.id, x, y }, before);
         await this.view.walkHero(hero.id, prev, { x, y }, AI_WALK_MS);
       }

@@ -13,7 +13,7 @@ export const ASCII_LEGEND = [
   "h hero start  X monster",
   "mines: W sawmill  O ore pit  E essence spring  G gold mine",
   "pickups: l wood (logs)  r ore (rocks)  c essence (crystals)  $ gold  * chest",
-  "D dwelling  % site  B bank  A artifact  _ buried  | gate  t waystone",
+  "D dwelling  % site  B bank  A artifact  _ buried  | gate  t waystone  v boat",
   "P prop (impassable decoration)",
 ].join("\n");
 
@@ -69,6 +69,8 @@ function objectChar(o: MapObject): string {
       return "|";
     case "teleport":
       return "t";
+    case "boat":
+      return "v";
   }
 }
 

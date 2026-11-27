@@ -26,6 +26,12 @@ import {
   townsOf,
 } from "./state.ts";
 import { heroIncome, movementPoints, regeneratedMana } from "./effects.ts";
+import {
+  isAfloat,
+  isNavalMap,
+  navalDayStart,
+  seaMovementPoints,
+} from "./naval.ts";
 import type {
   CommandResult,
   GameEvent,
@@ -139,18 +145,24 @@ export function startDay(state: GameState, events: GameEvent[]): void {
     events.push({ type: "new-week", day: state.day });
     events.push({ type: "tavern-refresh", day: state.day });
   }
+  const naval = isNavalMap(state.map);
   for (const player of state.players) {
     if (player.eliminated) continue;
     const income = dailyIncome(state, player.id);
     player.resources = addResources(player.resources, income);
     events.push({ type: "income", player: player.id, amounts: income });
     for (const hero of heroesOf(state, player.id)) {
+      // Naval maps: the sea maximum, before the Borrowed Day debt clears.
+      const seaMax = naval ? seaMovementPoints(state, hero) : 0;
       startHeroDay(hero);
+      // A hero afloat starts the day with sea points (NAVAL 2.4).
+      if (naval) navalDayStart(state, hero, seaMax);
       magicDayStart(state, events, hero);
-      // Stables: +300 movement each day to the end of the week.
+      // Stables: +300 movement each day to the end of the week (land
+      // movement: afloat, only the land maximum grows).
       if (hero.stablesUntil >= state.day) {
         hero.maxMp += STABLES_MP;
-        hero.mp += STABLES_MP;
+        if (!naval || !isAfloat(state, hero)) hero.mp += STABLES_MP;
       } else hero.stablesUntil = 0;
     }
     for (const town of townsOf(state, player.id)) town.builtToday = false;

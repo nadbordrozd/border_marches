@@ -11,6 +11,7 @@ import { townTree } from "../../data/factions.ts";
 import type { BuildingDef, Resources } from "../../data/types.ts";
 import { learnInTown } from "../magic/adventure.ts";
 import { maxMana } from "./effects.ts";
+import { dailyMaxOf } from "./naval.ts";
 import { weeklyGrowth } from "./progression.ts";
 import { addResources } from "./resources.ts";
 import { heroInTownOf } from "./town.ts";
@@ -171,8 +172,9 @@ export function devBuildAllTowns(
 }
 
 /**
- * Refills a living hero: movement to at least today's maximum (maxMp) and
- * mana to at least maxMana (never lowers either).
+ * Refills a living hero: movement to at least today's maximum (maxMp, or
+ * the sea maximum afloat) and mana to at least maxMana (never lowers
+ * either).
  */
 export function devRefillHero(state: GameState, heroId: string): CommandResult {
   const playing = checkPlaying(state);
@@ -183,7 +185,7 @@ export function devRefillHero(state: GameState, heroId: string): CommandResult {
   }
   const next = cloneState(state);
   const hero = must(findHero(next, heroId), "hero");
-  hero.mp = Math.max(hero.mp, hero.maxMp);
+  hero.mp = Math.max(hero.mp, dailyMaxOf(next, hero));
   hero.mana = Math.max(hero.mana, maxMana(hero));
   return success(next);
 }

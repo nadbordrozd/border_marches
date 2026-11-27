@@ -25,7 +25,9 @@ import {
   siteGuard,
   townIncome,
 } from "../core/game/index.ts";
-import type { GameState, HeroState } from "../core/game/index.ts";
+import type { GameState, HeroState, ShipState } from "../core/game/index.ts";
+import { dailyMaxOf, isAfloat, shipAt } from "../core/game/naval.ts";
+import { SEA_MOVE_BASE } from "../data/naval.ts";
 import { objectTypeOf } from "../core/game/site-state.ts";
 import { propAt } from "../core/map/types.ts";
 import type { MapObject } from "../core/map/types.ts";
@@ -285,6 +287,7 @@ export function heroCard(
 ): MapCard {
   const cls = getHeroClass(hero.heroClass).name;
   const own = hero.owner === player;
+  const afloat = isAfloat(state, hero);
   const lines: Array<CardLine | null> = [];
   const army = hero.army.filter((s) => s !== null);
   if (own) {
@@ -298,7 +301,8 @@ export function heroCard(
       },
       {
         kind: "text",
-        text: `Moves ${hero.mp} / ${hero.maxMp} · Mana ${hero.mana} / ${maxMana(hero)}`,
+        // Afloat, the day's sea maximum (bead bzc.149).
+        text: `Moves ${hero.mp} / ${dailyMaxOf(state, hero)}${afloat ? " at sea" : ""} · Mana ${hero.mana} / ${maxMana(hero)}`,
       },
       stacksLine("Army", army) ?? {
         kind: "text",
@@ -322,10 +326,60 @@ export function heroCard(
   }
   return {
     title: hero.name,
-    subtitle: own
-      ? `Level ${hero.level} ${cls}`
-      : `Level ${hero.level} ${cls} · ${playerColour(hero.owner).name}`,
+    subtitle:
+      (own
+        ? `Level ${hero.level} ${cls}`
+        : `Level ${hero.level} ${cls} · ${playerColour(hero.owner).name}`) +
+      (afloat ? " · aboard a ship" : ""),
     picture: picture(namedHeroPortrait(hero.defId, hero.heroClass).key),
+    lines: lines.filter((l): l is CardLine => l !== null),
+  };
+}
+
+// ------------------------------------------------------------ ships
+
+/**
+ * A moored ship's card (bead bzc.149): whose it is, how boarding and
+ * landing work, and the selected hero's way to it. A ship with a hero
+ * aboard shows that hero's card instead.
+ */
+export function shipCard(
+  state: GameState,
+  player: number,
+  ship: ShipState,
+  hero: HeroState | undefined,
+): MapCard {
+  const title =
+    ship.owner === null
+      ? "Moored Boat"
+      : ship.owner === player
+        ? "Your Ship"
+        : `${playerColour(ship.owner).name}'s Ship`;
+  const lines: Array<CardLine | null> = [
+    {
+      kind: "text",
+      text:
+        ship.owner === player
+          ? "Board it from the shore beside it."
+          : "Board it from the shore beside it to take it.",
+    },
+    {
+      kind: "text",
+      text: `Boarding is a step of 100; the rest of the day's moves turn into sea moves (${SEA_MOVE_BASE} a day).`,
+      tone: "dim",
+      plain: true,
+    },
+    {
+      kind: "text",
+      text: "Landing ends the day (not with Seafaring).",
+      tone: "dim",
+    },
+    pathLineTo(state, hero, ship.x, ship.y),
+  ];
+  return {
+    title,
+    subtitle: `${ownerWord(ship.owner, player)} · moored`,
+    picture: null,
     lines: lines.filter((l): l is CardLine => l !== null),
   };
 }
@@ -679,12 +733,15 @@ export function mapCard(
     (m) => m.x === x && m.y === y,
   );
   if (monster !== undefined) return monsterCard(state, player, monster, hero);
+  const ship = shipAt(state, x, y);
+  if (ship !== undefined) return shipCard(state, player, ship, hero);
   const obj = objectAt(
     map.objects.filter(
       (o) =>
         o.kind !== "monster" &&
         o.kind !== "hero-start" &&
         o.kind !== "buried" &&
+        o.kind !== "boat" &&
         !state.collected.includes(o.id),
     ),
     x,

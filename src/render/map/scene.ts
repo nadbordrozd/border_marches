@@ -961,3 +961,6 @@ export function ownerFlagEntry(
     building.cells === undefined ? {} : { cells: building.cells },
   );
 }
+
+/** A scene entry from its sprites (for code-drawn pieces: ships, bead bzc.149). */
+export { entry as sceneEntry };

@@ -30,6 +30,7 @@ import { findHeroDef, playerColour, rosterFor } from "../../data/players.ts";
 import type { CreatureId, FactionId, ResourceId } from "../../data/types.ts";
 import type { GameMap, MapObject } from "../map/types.ts";
 import { createRng, deriveSeed } from "../rng.ts";
+import { fixDailyMaxima, settleNavalState } from "./naval.ts";
 import { drawFromPool, newHeroState, refreshTaverns } from "./players.ts";
 import { weeklyGrowth } from "./progression.ts";
 import { prepareStarts } from "./starts.ts";
@@ -375,6 +376,9 @@ export function newGame(
   if (players.length === 1 && holds.length > 0) {
     state.scenario = { kind: "capture-towns", townIds: holds.map((t) => t.id) };
   }
+  // Naval maps (bead bzc.149): moored boats become ships; sea maxima.
+  settleNavalState(state);
+  for (const hero of state.heroes) fixDailyMaxima(state, hero);
   refreshTaverns(state);
   revealAll(state);
   return state;

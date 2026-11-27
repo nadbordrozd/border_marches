@@ -2,6 +2,7 @@
  * Pure text helpers for the game screens: dates, costs, stack descriptions
  * and hover descriptions of map cells. No DOM here (unit-tested).
  */
+import { isSeaCell } from "../core/game/naval.ts";
 import { calendar } from "../core/game/progression.ts";
 import { pickupInfo } from "../core/game/newGame.ts";
 import type { GameState } from "../core/game/types.ts";
@@ -214,6 +215,7 @@ export function describeCell(
         o.kind !== "monster" &&
         o.kind !== "hero-start" &&
         o.kind !== "buried" &&
+        o.kind !== "boat" &&
         !state.collected.includes(o.id),
     ),
     x,
@@ -279,6 +281,9 @@ export function describeCell(
   if (cell.obstacle === "mountain") return "Mountains";
   if (cell.obstacle === "forest")
     return `${TERRAIN_NAMES[cell.terrain]} forest`;
+  // A naval map's sea (bead bzc.149): ships sail it.
+  if (cell.terrain === "water" && isSeaCell(map, x, y))
+    return `${cell.deep === true ? "Deep sea" : "Sea"}\nShips sail here.`;
   if (cell.terrain === "water")
     return cell.deep === true ? "Deep water" : "Water";
   return cell.road

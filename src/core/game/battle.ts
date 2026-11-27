@@ -39,6 +39,7 @@ import { heroArtifacts, spoilsEvent, takeSpoils } from "./artifacts.ts";
 import { heroBattleProfile, type HeroBattleProfile } from "./battle-profile.ts";
 import { effectsOf, heroStats } from "./effects.ts";
 import { gainXp } from "./hero.ts";
+import { shipAfterDefeat } from "./naval.ts";
 import { applyBattleMagic } from "../magic/adventure.ts";
 import type { MagicOutcome } from "../battle/auto.ts";
 import { checkEliminations, sendToPool, sendToTavern } from "./players.ts";
@@ -464,6 +465,9 @@ function heroLost(
   retreated: boolean,
   events: GameEvent[],
 ): void {
+  // Its ship (NAVAL 2.5, 3.7): the winning hero's player takes it; it
+  // sinks after a retreat or a defeat by neutrals.
+  shipAfterDefeat(state, loser, winner?.owner ?? null, retreated, events);
   if (retreated) {
     sendToTavern(state, loser);
     events.push({ type: "hero-retreated", heroId: loser.id });

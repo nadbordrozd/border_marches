@@ -100,6 +100,18 @@ import {
 import { MapInput, WheelZoom, glideAt, glideMs } from "./input";
 import type { Glide } from "./input";
 import { pathMarkers } from "./path-markers";
+import { SHIP_ART } from "../../assets/map-objects";
+import {
+  artSprite,
+  onDeck,
+  placeholderShip,
+  placeholderSprite,
+  shipEntries,
+  shipLook,
+  tintedShip,
+  tintedShipKey,
+  type ShipSprite,
+} from "./ship-art";
 import type { PathMarker } from "./path-markers";
 import { planTerrain } from "./terrain-plan";
 import type { WorldRect } from "./terrain-plan";
@@ -125,6 +137,8 @@ export interface MapHero {
   readonly unit?: string;
   /** Owner's flag colour (CSS colour); drawn as a pennant over the hero. */
   readonly colour?: string;
+  /** Aboard a ship (bead bzc.149): drawn standing on its deck. */
+  readonly afloat?: boolean;
 }
 
 /**
@@ -151,6 +165,28 @@ export interface PathStep {
    * the only way on; marked with a ring. Absent: false.
    */
   readonly visit?: boolean;
+  /** Boards a ship (bead bzc.149): an anchor. */
+  readonly board?: boolean;
+  /** A landing that ends the day: a ring and "lands: day ends". */
+  readonly landEndsDay?: boolean;
+}
+
+/**
+ * A ship on the map (bead bzc.149): its sprite by key (shipSpriteKey, the
+ * art of bead 9b when it is loaded, else a code-drawn placeholder) with
+ * the owner's sail colour.
+ */
+export interface MapShip {
+  readonly id: string;
+  readonly x: number;
+  readonly y: number;
+  /** Owner's colour (CSS); absent for a neutral boat (grey sail). */
+  readonly colour?: string;
+  /**
+   * The hero aboard (its id): the ship moves with that hero's walk and
+   * the hero stands on its deck. Absent: moored, sail furled.
+   */
+  readonly heroId?: string;
 }
 
 export interface Cell {
@@ -190,6 +226,8 @@ export interface MapView {
    */
   setDecorations(decorations: readonly PlacedDecoration[]): void;
   setHeroes(heroes: readonly MapHero[]): void;
+  /** Ships on the map (bead bzc.149), drawn on explored cells. */
+  setShips(ships: readonly MapShip[]): void;
   /** Owner flags (player colours) on towns, mines and dwellings. */
   setFlags(flags: readonly MapFlag[]): void;
   /**
@@ -371,6 +409,49 @@ function pathMarker(
     ctx.fill();
     return surface;
   }
+  if (kind === "anchor") {
+    // A boarding (bead bzc.149): an anchor in the day colour.
+    const anchor = (): void => {
+      ctx.beginPath();
+      ctx.arc(0, -9, 3, 0, Math.PI * 2);
+      ctx.moveTo(0, -6);
+      ctx.lineTo(0, 9);
+      ctx.moveTo(-6, -2);
+      ctx.lineTo(6, -2);
+      ctx.moveTo(-9, 3);
+      ctx.quadraticCurveTo(-7, 10, 0, 10);
+      ctx.quadraticCurveTo(7, 10, 9, 3);
+      ctx.stroke();
+    };
+    ctx.lineWidth = 7;
+    ctx.strokeStyle = dark;
+    anchor();
+    ctx.lineWidth = 3.5;
+    ctx.strokeStyle = fill;
+    anchor();
+    return surface;
+  }
+  if (kind === "landing") {
+    // A landing that ends the day (bead bzc.149): a ring round a dot.
+    for (const [width, colour] of [
+      [8, dark],
+      [4, "#7fd4ff"],
+    ] as const) {
+      ctx.strokeStyle = colour;
+      ctx.lineWidth = width;
+      ctx.beginPath();
+      ctx.arc(0, 0, 10, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.arc(0, 0, 4, 0, Math.PI * 2);
+    ctx.fillStyle = fill;
+    ctx.strokeStyle = dark;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fill();
+    return surface;
+  }
   if (kind === "cross") {
     for (const [width, colour] of [
       [8, dark],
@@ -493,6 +574,7 @@ export function createMapView(
   let map: GameMap | null = null;
   let objects: readonly MapObject[] = [];
   let heroes: readonly MapHero[] = [];
+  let ships: readonly MapShip[] = [];
   let path: readonly PathMarker[] | null = null;
   let flags: readonly MapFlag[] = [];
   let flagsSig = "";
@@ -625,6 +707,23 @@ export function createMapView(
     installCanopyBands(images, plan.bands);
   };
 
+  /** A ship's sprite: its art tinted to the owner, else the placeholder. */
+  const shipSprite = (ship: MapShip): ShipSprite => {
+    const look = shipLook(ship.heroId !== undefined);
+    const art = SHIP_ART[look];
+    const image = images.get(art.asset.key);
+    if (image !== undefined) {
+      const key = tintedShipKey(look, ship.colour ?? null);
+      if (!images.has(key))
+        images.set(key, tintedShip(image, art, ship.colour ?? null));
+      return artSprite(art, key);
+    }
+    const drawn = placeholderShip(look === "sailing", ship.colour ?? null);
+    if (!images.has(drawn.key)) images.set(drawn.key, drawn.surface);
+    if (!images.has(drawn.frontKey)) images.set(drawn.frontKey, drawn.front);
+    return placeholderSprite(drawn);
+  };
+
   const rebuildForeground = (): void => {
     const built = objectEntries(objects);
     const entries: SceneEntry[] = [...terrainForeground, ...built];
@@ -641,13 +740,25 @@ export function createMapView(
       const flag = ownerFlagEntry(building, f.colour, `${f.x},${f.y}`);
       if (flag !== null) entries.push(flag);
     }
+    // Ships (beads bzc.149, bzc.158): the art tinted to the owner, else
+    // the placeholder with the hero on its deck.
+    const hidden = new Set<string>();
+    for (const ship of ships) {
+      const art = shipSprite(ship);
+      if (ship.heroId !== undefined && !art.heroOnDeck) hidden.add(ship.heroId);
+      entries.push(...shipEntries(art, ship.x, ship.y, ship.heroId));
+    }
     for (const hero of heroes) {
       const key = hero.unit ?? DEFAULT_HERO;
       const unit =
         HERO_ASSETS.find((u) => u.key === key) ??
         UNIT_ASSETS.find((u) => u.key === key) ??
         (HERO_ASSETS[0] as UnitAsset);
-      entries.push(unitEntry(unit, hero.x, hero.y, { objectId: hero.id }));
+      const e = unitEntry(unit, hero.x, hero.y, { objectId: hero.id });
+      // Afloat: the ship art's own captain stands in for the hero (NAVAL
+      // 10.1); the placeholder shows it on its deck.
+      if (hidden.has(hero.id)) continue;
+      entries.push(hero.afloat === true ? onDeck(e) : e);
     }
     foreground = entries.sort(compareEntries);
   };
@@ -1131,6 +1242,23 @@ export function createMapView(
         m.cx * CELL - 16,
         m.cy * CELL - 16,
       );
+    }
+    // Labels last, over every marker (a day-ending landing, bzc.149).
+    for (const m of path) {
+      if (m.label === undefined || !isExplored(m.cell.x, m.cell.y)) continue;
+      ctx.save();
+      ctx.font = "bold 13px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      ctx.lineJoin = "round";
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = "#10160c";
+      ctx.fillStyle = "#e8f7ff";
+      const lx = m.cx * CELL;
+      const ly = m.cy * CELL + 14;
+      ctx.strokeText(m.label, lx, ly);
+      ctx.fillText(m.label, lx, ly);
+      ctx.restore();
     }
   };
 
@@ -1823,6 +1951,11 @@ export function createMapView(
     },
     setHeroes(next) {
       heroes = next;
+      rebuildForeground();
+      requestRender();
+    },
+    setShips(next) {
+      ships = next;
       rebuildForeground();
       requestRender();
     },

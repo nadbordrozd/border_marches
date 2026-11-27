@@ -33,6 +33,7 @@ import {
 import { isCursed } from "../../data/artifacts.ts";
 import { emptyWorn, giveArtifact } from "./artifacts.ts";
 import { maxMana, movementPoints, sightRadius } from "./effects.ts";
+import { fixDailyMaxima, neutraliseShips } from "./naval.ts";
 import type {
   CommandResult,
   GameEvent,
@@ -294,6 +295,8 @@ export function hireHero(
     hero.mp = hero.maxMp;
     hero.mana = Math.max(hero.mana, maxMana(hero));
   }
+  // Naval maps: today's sea maximum too (bead bzc.149).
+  fixDailyMaxima(next, hero);
   revealDisc(next.map, p.explored, obj.x, obj.y, sightRadius(hero));
   return success(next, [
     { type: "hero-hired", heroId: hero.id, player: p.id, townId },
@@ -401,6 +404,8 @@ export function eliminate(
   for (const town of Object.values(state.towns)) {
     if (town.owner === player.id) town.owner = null;
   }
+  // Its moored ships become neutral (NAVAL 2.5).
+  neutraliseShips(state, player.id, events);
   events.push({ type: "player-eliminated", player: player.id });
 }
 

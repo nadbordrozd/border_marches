@@ -68,7 +68,10 @@ export interface MapCell {
  * - "artifact": a loose artifact;
  * - "buried": hidden, found by digging (never drawn, never a stop);
  * - "gate": a one-cell passage block, open to some players;
- * - "teleport": moves the hero.
+ * - "teleport": moves the hero;
+ * - "boat": a moored neutral boat on a sea cell of a naval map (NAVAL 5.6):
+ *   it becomes a ship in the game state when the game starts and is
+ *   neither drawn nor visited as an object afterwards.
  */
 export type MapObjectKind =
   | "town"
@@ -82,7 +85,8 @@ export type MapObjectKind =
   | "artifact"
   | "buried"
   | "gate"
-  | "teleport";
+  | "teleport"
+  | "boat";
 
 export const MAP_OBJECT_KINDS: readonly MapObjectKind[] = [
   "town",
@@ -97,6 +101,7 @@ export const MAP_OBJECT_KINDS: readonly MapObjectKind[] = [
   "buried",
   "gate",
   "teleport",
+  "boat",
 ];
 
 /** The four resources. */
@@ -196,6 +201,12 @@ export interface GameMap {
    * (decorate.ts); absent on maps made before them.
    */
   decorations?: MapDecoration[];
+  /**
+   * A naval map (NAVAL 2.1, bead bzc.149): ships sail its seas. Absent or
+   * false: no ships, no sea movement, nothing of the naval layer applies
+   * and every rule is exactly as before.
+   */
+  naval?: boolean;
 }
 
 /** A cell with default values: `{ terrain, obstacle: "none", road: false }`. */
@@ -390,8 +401,15 @@ export function validateMap(map: GameMap): string[] {
     const entrance = cellAt(map, obj.x, obj.y);
     if (entrance === undefined) {
       problems.push(`${at}: entrance out of bounds`);
-    } else if (!isPassable(entrance)) {
+    } else if (
+      !isPassable(entrance) &&
+      // A naval map's objects may stand in the water (a moored boat, a
+      // sea site: NAVAL 5.1); a ship visits them.
+      !(map.naval === true && entrance.terrain === "water")
+    ) {
       problems.push(`${at}: entrance on impassable ground`);
+    } else if (obj.kind === "boat" && entrance.terrain !== "water") {
+      problems.push(`${at}: a boat on land`);
     }
     for (const [x, y] of obj.blocked) {
       if (!inBounds(map, x, y))

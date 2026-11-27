@@ -1415,4 +1415,5 @@ These map the rules onto the existing code; they add no rules.
   recorded here.
 - **Not in v0.2:** local laws and seam spells, the five engines and their
   capstones, replaying a hand-made opening in quick battle, surrender,
-  boats, siege walls, mine garrisons, neutral growth.
+  siege walls, mine garrisons, neutral growth. Boats are superseded by
+  [NAVAL.md](NAVAL.md) (ships and sea movement from bead bzc.149).

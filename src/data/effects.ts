@@ -193,6 +193,12 @@ export type HeroEffect =
   | { kind: "movement-percent"; percent: number }
   | { kind: "movement-flat"; amount: number }
   /**
+   * Sea movement (NAVAL 2.4, bead bzc.149): Seafaring, the Captain's
+   * Tricorne and the Locket; read by seaMovementBreakdown, never on land.
+   */
+  | { kind: "sea-movement-percent"; percent: number }
+  | { kind: "sea-movement-flat"; amount: number }
+  /**
    * Terrain that costs more than 100 costs `reduce` less, never below 100
    * (Trailcraft); `terrain` limits it to one terrain; reduce >= 1000 makes
    * all passable terrain cost 100.

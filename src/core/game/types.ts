@@ -160,6 +160,27 @@ export interface HeroState {
   buffs: string[];
   /** Stables: +300 movement at each day start up to this day (0: none). */
   stablesUntil: number;
+  /**
+   * Sea movement points at the start of the day (NAVAL 2.4, bead
+   * bzc.149): set on naval maps at the day start and on hiring, fixed for
+   * the day; `mp` counts sea points while the hero is afloat and land
+   * points ashore. Absent: not computed (seaMaxOf works it out).
+   */
+  seaMaxMp?: number;
+}
+
+/**
+ * A ship on a sea cell of a naval map (NAVAL 2.1). A hero is aboard when
+ * it is alive and stands on the ship's cell (only heroes afloat stand on
+ * sea cells); otherwise the ship is moored. A ship carrying a hero moves
+ * with it.
+ */
+export interface ShipState {
+  id: string;
+  x: number;
+  y: number;
+  /** Player index, or null for a neutral boat. */
+  owner: Owner;
 }
 
 /**
@@ -322,6 +343,14 @@ export interface GameState {
    * bzc.23), chosen in the new-game setup. Absent: normal (older saves).
    */
   difficulty?: "easy" | "normal" | "hard";
+  /**
+   * Ships (NAVAL 2, bead bzc.149), in creation order. Present on naval
+   * maps (moored boats of the map become ships at the game start); absent
+   * on other maps and in older saves (no ships).
+   */
+  ships?: ShipState[];
+  /** Ships made so far: the next ship's id is `ship-<shipsMade + 1>`. */
+  shipsMade?: number;
 }
 
 export type MoveStopReason =
@@ -375,6 +404,25 @@ export type GameEvent =
     }
   /** A dig: what was found (null: nothing). */
   | { type: "dug"; heroId: string; found: string | null }
+  /** A hero stepped aboard a ship (NAVAL 2.3); `from` its last owner. */
+  | {
+      type: "ship-boarded";
+      heroId: string;
+      shipId: string;
+      from: Owner;
+    }
+  /** A hero stepped ashore from its ship; `endsDay` without Seafaring. */
+  | { type: "ship-landed"; heroId: string; shipId: string; endsDay: boolean }
+  /** A ship changed hands outside boarding (a won battle, NAVAL 2.5). */
+  | { type: "ship-captured"; shipId: string; owner: Owner; from: Owner }
+  /** A ship left the map: sunk with a beaten hero, or scuttled. */
+  | {
+      type: "ship-sunk";
+      shipId: string;
+      x: number;
+      y: number;
+      why: "defeat" | "retreat" | "scuttled";
+    }
   | { type: "hero-freed"; heroId: string; player: number }
   | { type: "xp"; heroId: string; amount: number }
   | { type: "level-up"; heroId: string; level: number }

@@ -33,6 +33,21 @@
  *   stack in a gap, a visit or a pickup gets the walk to that (bead
  *   bzc.79, Path.blockedBy or Path.stopsAt).
  *
+ * - Naval maps (NAVAL 2.3-2.7, bead bzc.149; `map.naval`): the sea is a
+ *   second graph. A hero ashore boards a moored ship by stepping onto it
+ *   from a shore cell (100, 141 diagonally, in land points; the rest is
+ *   converted to sea points); afloat it sails sea cells (100 / 141 in sea
+ *   points; a diagonal never squeezes between two closed corners) and
+ *   lands by stepping onto a free land cell (the rest of the day without
+ *   Seafaring; with it, the points are converted back and the step costs
+ *   the ordinary land cost). Zones of control cover only cells of the
+ *   stack's own element. Attacks and pickups reach across the shore both
+ *   ways. The search counts sea steps in land-equivalent points (x landMax
+ *   / seaMax) and a day-ending landing as the rest of that day, so a mixed
+ *   path is ordered by time; findPath then replays it step by step with
+ *   the exact conversions for the days and the points left. Dry maps take
+ *   none of these branches and plan exactly as before.
+ *
  * A* with an admissible octile heuristic; ties break by insertion order, so
  * results are deterministic.
  */
@@ -59,6 +74,18 @@ import {
   inBounds,
   isPassable,
 } from "../map/types.ts";
+import { BOARD_STEP_COST, SEA_STEP_COST } from "../../data/naval.ts";
+import {
+  isAfloat,
+  isMoored,
+  isNavalMap,
+  seaMask,
+  seaMaxOf,
+  seafaringRank,
+  shipsOf,
+  toLandPoints,
+  toSeaPoints,
+} from "./naval.ts";
 import { gateOpen, inSanctuary, isPickup } from "./site-state.ts";
 import { findHero } from "./state.ts";
 import type { GameState, HeroState } from "./types.ts";
@@ -89,6 +116,23 @@ export interface PathStep {
    * the preview marks the step. Absent: no building.
    */
   building?: string;
+  /**
+   * Naval paths only (bead bzc.149): the hero is afloat after this step,
+   * and the step's cost is in sea points (a boarding's cost is in land
+   * points, a landing's in the points it used up). Absent: ashore.
+   */
+  afloat?: boolean;
+  /** Naval: this step boards the moored ship of this id (an anchor mark). */
+  board?: string;
+  /** Naval: this step lands from the ship. */
+  land?: boolean;
+  /** Naval: the landing ends the day (no Seafaring; "lands: day ends"). */
+  endsDay?: boolean;
+  /**
+   * Naval paths only: points left after this step on its day, in the
+   * element the hero is then in (exact conversions applied).
+   */
+  left?: number;
 }
 
 /** Whether the hero ends up standing on this step's cell. */
@@ -163,6 +207,25 @@ export interface MoveContext {
    * (RULES_V2 2.8), or null: forests are impassable.
    */
   forestCost: number | null;
+  /** The sea graph on a naval map (bead bzc.149); absent or null: dry. */
+  naval?: NavalMove | null;
+}
+
+/** What planning at sea needs (MoveContext.naval). */
+export interface NavalMove {
+  /** Per cell 1 when it is sea (naval.ts seaMask). */
+  sea: Uint8Array;
+  /** Cell -> moored ship there (boardable from a shore, closed to ships). */
+  moored: Map<number, string>;
+  /** Today's maxima: land (hero.maxMp) and sea (seaMaxOf). */
+  landMax: number;
+  seaMax: number;
+  /** Points now, in the element of the hero's cell. */
+  mp: number;
+  /** The hero is aboard a ship now. */
+  afloat: boolean;
+  /** Seafaring rank: from 1 a landing is an ordinary step. */
+  seafaring: number;
 }
 
 /** Green Road: forest cells cost this much today (RULES_V2 2.8). */
@@ -224,6 +287,8 @@ export function moveContext(
   // have no zone of control against the hero (fight values, never chance).
   const parleyPct = parleyPercent(hero);
   const armyFv = parleyPct > 0 ? armyFightValue(hero) : 0;
+  // Naval maps: zones of control cover only their own element (2.7).
+  const sea = isNavalMap(map) ? seaMask(map) : null;
   for (const obj of map.objects) {
     for (const [x, y] of obj.blocked) objectBlocked.add(y * map.width + x);
     const entrance = obj.y * map.width + obj.x;
@@ -258,6 +323,8 @@ export function moveContext(
           const gy = monster.y + dy;
           if (!inBounds(map, gx, gy)) continue;
           const i = gy * map.width + gx;
+          if (sea !== null && sea[i] !== sea[monster.y * map.width + monster.x])
+            continue;
           const list = guards.get(i);
           if (list === undefined) guards.set(i, [monster.id]);
           else list.push(monster.id);
@@ -285,6 +352,7 @@ export function moveContext(
         break;
       case "hero-start":
       case "buried":
+      case "boat":
         break;
     }
   }
@@ -298,6 +366,23 @@ export function moveContext(
     else enemyHeroAt.set(i, other.id);
   }
   const player = state.players.find((p) => p.id === hero.owner);
+  let naval: NavalMove | null = null;
+  if (sea !== null) {
+    const moored = new Map<number, string>();
+    for (const ship of shipsOf(state)) {
+      if (isMoored(state, ship))
+        moored.set(ship.y * map.width + ship.x, ship.id);
+    }
+    naval = {
+      sea,
+      moored,
+      landMax: hero.maxMp,
+      seaMax: seaMaxOf(state, hero),
+      mp: hero.mp,
+      afloat: isAfloat(state, hero),
+      seafaring: seafaringRank(hero),
+    };
+  }
   return {
     map,
     nativeTerrain: terrainProfile(hero),
@@ -311,6 +396,7 @@ export function moveContext(
     pickupAt,
     explored: options.ignoreFog === true ? null : (player?.explored ?? null),
     forestCost,
+    ...(naval === null ? {} : { naval }),
   };
 }
 
@@ -368,7 +454,13 @@ function canCrossPlanning(ctx: MoveContext, x: number, y: number): boolean {
   return ctx.pickupAt.has(i) && isPassable(cell);
 }
 
-/** True when a diagonal step from (fx, fy) to (tx, ty) cuts a blocked corner. */
+/**
+ * True when a diagonal step from (fx, fy) to (tx, ty) cuts a blocked corner.
+ * Naval maps (bead bzc.149): at sea a corner is closed when it is not sea
+ * or an object blocks it (a ship never squeezes between two coasts); a
+ * step across the shore (boarding, landing, an attack or a pickup across
+ * it) is cut only by corners closed to both a walker and a ship.
+ */
 export function cutsCorner(
   ctx: MoveContext,
   fx: number,
@@ -377,7 +469,95 @@ export function cutsCorner(
   ty: number,
 ): boolean {
   if (fx === tx || fy === ty) return false;
-  return isImpassableCell(ctx, tx, fy) && isImpassableCell(ctx, fx, ty);
+  const nav = ctx.naval;
+  if (nav === undefined || nav === null) {
+    return isImpassableCell(ctx, tx, fy) && isImpassableCell(ctx, fx, ty);
+  }
+  const w = ctx.map.width;
+  const fromSea = nav.sea[fy * w + fx] === 1;
+  const toSea = nav.sea[ty * w + tx] === 1;
+  const closed = (x: number, y: number): boolean => {
+    if (fromSea && toSea) return closedToShip(ctx, nav, x, y);
+    if (!fromSea && !toSea) return isImpassableCell(ctx, x, y);
+    return isImpassableCell(ctx, x, y) && closedToShip(ctx, nav, x, y);
+  };
+  return closed(tx, fy) && closed(fx, ty);
+}
+
+/** Not sea, or blocked by an object: closed to a ship (corners). */
+function closedToShip(
+  ctx: MoveContext,
+  nav: NavalMove,
+  x: number,
+  y: number,
+): boolean {
+  if (!inBounds(ctx.map, x, y)) return true;
+  const i = y * ctx.map.width + x;
+  return nav.sea[i] !== 1 || ctx.objectBlocked.has(i);
+}
+
+/** What an ordinary step does on a naval map (bead bzc.149). */
+export type NavalStepKind = "walk" | "sail" | "board" | "land";
+
+/**
+ * The kind of an ordinary step (not an attack or a pickup step) on a
+ * naval map, or null when it may not be taken: walk (land to land), sail
+ * (sea to sea, onto a free sea cell), board (a shore cell onto a moored
+ * ship) or land (the ship onto a free land cell). `planning` lets stacks
+ * and pickups count as open ground, as canCrossPlanning does.
+ */
+export function navalStepKind(
+  ctx: MoveContext,
+  fx: number,
+  fy: number,
+  tx: number,
+  ty: number,
+  planning = false,
+): NavalStepKind | null {
+  const nav = ctx.naval;
+  if (nav === undefined || nav === null) return null;
+  if (!inBounds(ctx.map, tx, ty)) return null;
+  const w = ctx.map.width;
+  const ti = ty * w + tx;
+  const fromSea = nav.sea[fy * w + fx] === 1;
+  if (nav.sea[ti] !== 1) {
+    const ok = planning ? canCrossPlanning(ctx, tx, ty) : canEnter(ctx, tx, ty);
+    if (!ok || cutsCorner(ctx, fx, fy, tx, ty)) return null;
+    return fromSea ? "land" : "walk";
+  }
+  if (ctx.explored !== null && ctx.explored[ti] !== true) return null;
+  if (ctx.enemyHeroAt.has(ti) || ctx.friendAt.has(ti)) return null;
+  const crossable = planning && (ctx.monsterAt.has(ti) || ctx.pickupAt.has(ti));
+  if (!crossable && (ctx.objectBlocked.has(ti) || ctx.monsterAt.has(ti))) {
+    return null;
+  }
+  if (cutsCorner(ctx, fx, fy, tx, ty)) return null;
+  if (fromSea) return nav.moored.has(ti) ? null : "sail";
+  return nav.moored.has(ti) && !crossable ? "board" : null;
+}
+
+/**
+ * The cost of a step of a kind, in the points it is paid in: land points
+ * for a walk or a boarding, sea points for sailing; a landing costs the
+ * ordinary land cost with Seafaring and -1 ("all that is left") without.
+ */
+export function navalStepCost(
+  ctx: MoveContext,
+  kind: NavalStepKind,
+  fx: number,
+  fy: number,
+  tx: number,
+  ty: number,
+): number {
+  const diagonal = fx !== tx && fy !== ty;
+  if (kind === "sail") {
+    return diagonal ? diagonalCost(SEA_STEP_COST) : SEA_STEP_COST;
+  }
+  if (kind === "board") {
+    return diagonal ? diagonalCost(BOARD_STEP_COST) : BOARD_STEP_COST;
+  }
+  if (kind === "land" && (ctx.naval?.seafaring ?? 0) < 1) return -1;
+  return stepCost(ctx.map, ctx.nativeTerrain, fx, fy, tx, ty, ctx.forestCost);
 }
 
 /** Rounds base x 1.414 to the nearest integer, exactly. */
@@ -581,11 +761,17 @@ export function findPath(
     if (planned !== null) ({ steps, guard: blockedBy, stopsAt } = planned);
   }
   if (steps === null) return null;
-  const days = assignDays(
-    steps.map((s) => s.cost),
-    hero.mp,
-    hero.maxMp,
-  );
+  const nav = ctx.naval;
+  // Naval maps: days and points left by replaying the exact conversions.
+  if (nav !== undefined && nav !== null) steps = replayNavalSteps(steps, nav);
+  const days =
+    nav !== undefined && nav !== null
+      ? steps.map((s) => s.day)
+      : assignDays(
+          steps.map((s) => s.cost),
+          hero.mp,
+          hero.maxMp,
+        );
   const goal = ty * state.map.width + tx;
   const withDays = steps.map((s, i) => {
     const at = s.y * state.map.width + s.x;
@@ -730,6 +916,9 @@ export function findPathInContext(
   ty: number,
   throughGuards = false,
 ): PathStep[] | null {
+  if (ctx.naval !== undefined && ctx.naval !== null) {
+    return findNavalPath(ctx, ctx.naval, sx, sy, tx, ty, throughGuards);
+  }
   const { map } = ctx;
   if (!inBounds(map, tx, ty) || (sx === tx && sy === ty)) return null;
   const w = map.width;
@@ -857,6 +1046,9 @@ export function reachableCells(
   if (hero === undefined || !hero.alive) return out;
   const limit = budget ?? hero.mp;
   const ctx = moveContext(state, hero, options);
+  if (ctx.naval !== undefined && ctx.naval !== null) {
+    return reachableNaval(ctx, ctx.naval, hero.x, hero.y, limit);
+  }
   const { map } = ctx;
   const w = map.width;
   const start = hero.y * w + hero.x;
@@ -882,6 +1074,309 @@ export function reachableCells(
       const ng =
         gc + stepCost(map, ctx.nativeTerrain, cx, cy, nx, ny, ctx.forestCost);
       if (ng > limit) continue;
+      const old = out.get(ni);
+      if (old !== undefined && old <= ng) continue;
+      out.set(ni, ng);
+      open.push(ng, ni);
+    }
+  }
+  return out;
+}
+
+// ------------------------------------------------------------ the sea
+
+/** Land points per sea point today (landMax / seaMax; 1 when unknown). */
+function seaToLand(nav: NavalMove): number {
+  return nav.seaMax > 0 && nav.landMax > 0 ? nav.landMax / nav.seaMax : 1;
+}
+
+/**
+ * The rest of the day at `real` land-equivalent points spent (the day's
+ * start budget `mp0`, then landMax a day): what a day-ending landing uses
+ * up. A day spent to the last point waits for the next whole day.
+ */
+function restOfDay(real: number, mp0: number, landMax: number): number {
+  const day = landMax > 0 ? landMax : 1;
+  const left = real < mp0 ? mp0 - real : day - ((real - mp0) % day);
+  return left > 0 ? left : day;
+}
+
+/** Whether a plain (not attack or pickup) goal can ever be stood on. */
+function navalGoalOpen(
+  ctx: MoveContext,
+  nav: NavalMove,
+  goal: number,
+): boolean {
+  const w = ctx.map.width;
+  const x = goal % w;
+  const y = (goal - x) / w;
+  if (nav.sea[goal] !== 1) return canEnter(ctx, x, y);
+  return (
+    !ctx.objectBlocked.has(goal) &&
+    !ctx.friendAt.has(goal) &&
+    !ctx.enemyHeroAt.has(goal) &&
+    !ctx.monsterAt.has(goal)
+  );
+}
+
+/**
+ * findPathInContext on a naval map (bead bzc.149): A* over land and sea
+ * with boardings and landings (navalStepKind), the same stop, attack,
+ * pickup, building-detour and through-guards rules as on land. Search
+ * costs are land-equivalent points (see the module comment); the steps'
+ * `cost` is in the points each is paid in and `day` is left 0 (findPath
+ * replays the path with replayNavalSteps).
+ */
+function findNavalPath(
+  ctx: MoveContext,
+  nav: NavalMove,
+  sx: number,
+  sy: number,
+  tx: number,
+  ty: number,
+  throughGuards: boolean,
+): PathStep[] | null {
+  const { map } = ctx;
+  if (!inBounds(map, tx, ty) || (sx === tx && sy === ty)) return null;
+  const w = map.width;
+  const start = sy * w + sx;
+  const goal = ty * w + tx;
+  const attackGoal = ctx.monsterAt.has(goal) || ctx.enemyHeroAt.has(goal);
+  const pickupGoal = !attackGoal && ctx.pickupAt.has(goal);
+  if (ctx.explored !== null && ctx.explored[goal] !== true) return null;
+  if (!attackGoal && !pickupGoal && !navalGoalOpen(ctx, nav, goal)) {
+    return null;
+  }
+  const ratio = seaToLand(nav);
+  const mp0 = nav.afloat ? nav.mp * ratio : nav.mp;
+  // The heuristic at the cheapest step anywhere (a road, or the sea).
+  const hScale = Math.min(1, (SEA_STEP_COST * ratio) / ROAD_MOVE_COST);
+
+  const g = new Map<number, number>([[start, 0]]);
+  const real = new Map<number, number>([[start, 0]]);
+  const parent = new Map<number, number>();
+  const closed = new Set<number>();
+  const open = new MinHeap();
+  const shrink = attackGoal || pickupGoal ? 1 : 0;
+  open.push(heuristic(sx, sy, tx, ty, shrink) * hScale, start);
+
+  while (open.size > 0) {
+    const cur = open.pop();
+    if (closed.has(cur)) continue;
+    if (cur === goal) break;
+    closed.add(cur);
+    const cx = cur % w;
+    const cy = (cur - cx) / w;
+    const stop = cur !== start && isStopCell(ctx, cx, cy);
+    const halt = !throughGuards && stop;
+    const gc = g.get(cur) ?? 0;
+    const rc = real.get(cur) ?? 0;
+    for (const [dx, dy] of DIRECTIONS_8) {
+      const nx = cx + dx;
+      const ny = cy + dy;
+      if (!inBounds(map, nx, ny)) continue;
+      const ni = ny * w + nx;
+      if (closed.has(ni)) continue;
+      let cost: number;
+      let spent: number;
+      if (attackGoal && ni === goal) {
+        if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
+        cost = 0;
+        spent = 0;
+      } else if (pickupGoal && ni === goal) {
+        if (cutsCorner(ctx, cx, cy, nx, ny)) continue;
+        cost = stop ? STOP_BEFORE_PICKUP : 0;
+        spent = 0;
+      } else {
+        if (halt) continue;
+        const kind = navalStepKind(ctx, cx, cy, nx, ny, throughGuards);
+        if (kind === null) continue;
+        const c = navalStepCost(ctx, kind, cx, cy, nx, ny);
+        spent =
+          kind === "sail"
+            ? c * ratio
+            : c < 0
+              ? restOfDay(rc, mp0, nav.landMax)
+              : c;
+        cost = spent;
+        if (ni !== goal && ctx.buildings.has(ni)) cost += BUILDING_DETOUR;
+        if (
+          throughGuards &&
+          (ctx.guards.has(ni) ||
+            ctx.monsterAt.has(ni) ||
+            ctx.stops.has(ni) ||
+            ctx.pickupAt.has(ni))
+        ) {
+          cost += ZONE_CROSSING;
+        }
+      }
+      const ng = gc + cost;
+      const old = g.get(ni);
+      if (old !== undefined && old <= ng) continue;
+      g.set(ni, ng);
+      real.set(ni, rc + spent);
+      parent.set(ni, cur);
+      open.push(ng + heuristic(nx, ny, tx, ty, shrink) * hScale, ni);
+    }
+  }
+
+  if (!g.has(goal)) return null;
+  const cells: number[] = [];
+  for (let c = goal; c !== start; c = parent.get(c) ?? start) cells.push(c);
+  cells.reverse();
+  const steps: PathStep[] = [];
+  let total = 0;
+  let prev = start;
+  let afloat = nav.afloat;
+  for (const c of cells) {
+    const px = prev % w;
+    const py = Math.floor(prev / w);
+    const x = c % w;
+    const y = Math.floor(c / w);
+    const attack = attackGoal && c === goal;
+    const pickup = pickupGoal && c === goal;
+    let cost = 0;
+    const flags: { board?: string; land?: boolean; endsDay?: boolean } = {};
+    if (!attack && !pickup) {
+      const kind = navalStepKind(ctx, px, py, x, y, throughGuards) ?? "walk";
+      const raw = navalStepCost(ctx, kind, px, py, x, y);
+      cost = Math.max(0, raw);
+      if (kind === "board") {
+        const ship = nav.moored.get(c);
+        if (ship !== undefined) flags.board = ship;
+      }
+      if (kind === "land") {
+        flags.land = true;
+        if (raw < 0) flags.endsDay = true;
+      }
+      afloat = kind === "sail" || kind === "board";
+    }
+    total += cost;
+    steps.push({
+      x,
+      y,
+      cost,
+      total,
+      day: 0,
+      attack,
+      ...(pickup ? { pickup: true } : {}),
+      ...(afloat ? { afloat: true } : {}),
+      ...flags,
+    });
+    prev = c;
+  }
+  return steps;
+}
+
+/**
+ * Replays planned naval steps from the hero's points now (bead bzc.149):
+ * each step's day, its cost in the points it is paid in (a day-ending
+ * landing uses up what is left), the running total and the points `left`
+ * after it. A boarding converts what is left to sea points, a Seafaring
+ * landing converts back; a new day gives the maximum of the element the
+ * hero is in.
+ */
+export function replayNavalSteps(
+  steps: readonly PathStep[],
+  nav: NavalMove,
+): PathStep[] {
+  const { landMax, seaMax } = nav;
+  let afloat = nav.afloat;
+  let left = nav.mp;
+  let day = 0;
+  let total = 0;
+  return steps.map((s) => {
+    let cost = s.cost;
+    if (s.attack || s.pickup === true) {
+      cost = 0;
+    } else if (!afloat && s.afloat === true) {
+      // A boarding: land points, the rest converted to sea points.
+      if (cost > left) {
+        day++;
+        left = landMax;
+      }
+      left = toSeaPoints(left - cost, landMax, seaMax);
+      afloat = true;
+    } else if (afloat && s.afloat !== true) {
+      // A landing.
+      if (nav.seafaring >= 1) {
+        let land = toLandPoints(left, landMax, seaMax);
+        if (cost > land) {
+          day++;
+          land = toLandPoints(seaMax, landMax, seaMax);
+        }
+        left = land - cost;
+      } else {
+        if (left <= 0) {
+          day++;
+          left = seaMax;
+        }
+        cost = left;
+        left = 0;
+      }
+      afloat = false;
+    } else {
+      const max = afloat ? seaMax : landMax;
+      if (cost > left) {
+        day++;
+        left = max;
+      }
+      left -= cost;
+    }
+    total += cost;
+    return { ...s, cost, total, day, left };
+  });
+}
+
+/**
+ * reachableCells on a naval map: the same rules as findNavalPath, costs in
+ * land-equivalent points (sea points x landMax / seaMax; a day-ending
+ * landing costs the rest of the day, so nothing beyond it is reachable
+ * today). `limit` is in the points of the hero's element now.
+ */
+function reachableNaval(
+  ctx: MoveContext,
+  nav: NavalMove,
+  sx: number,
+  sy: number,
+  limit: number,
+): Map<number, number> {
+  const out = new Map<number, number>();
+  const { map } = ctx;
+  const w = map.width;
+  const ratio = seaToLand(nav);
+  const budget = nav.afloat ? limit * ratio : limit;
+  const mp0 = nav.afloat ? nav.mp * ratio : nav.mp;
+  const start = sy * w + sx;
+  out.set(start, 0);
+  const open = new MinHeap();
+  open.push(0, start);
+  const closed = new Set<number>();
+  while (open.size > 0) {
+    const cur = open.pop();
+    if (closed.has(cur)) continue;
+    closed.add(cur);
+    const cx = cur % w;
+    const cy = (cur - cx) / w;
+    if (cur !== start && isStopCell(ctx, cx, cy)) continue;
+    const gc = out.get(cur) ?? 0;
+    for (const [dx, dy] of DIRECTIONS_8) {
+      const nx = cx + dx;
+      const ny = cy + dy;
+      if (!inBounds(map, nx, ny)) continue;
+      const ni = ny * w + nx;
+      if (closed.has(ni)) continue;
+      const kind = navalStepKind(ctx, cx, cy, nx, ny);
+      if (kind === null) continue;
+      const c = navalStepCost(ctx, kind, cx, cy, nx, ny);
+      const ng =
+        gc +
+        (kind === "sail"
+          ? c * ratio
+          : c < 0
+            ? restOfDay(gc, mp0, nav.landMax)
+            : c);
+      if (ng > budget) continue;
       const old = out.get(ni);
       if (old !== undefined && old <= ng) continue;
       out.set(ni, ng);
