@@ -78,16 +78,25 @@ export const OPENINGS: Readonly<Record<string, readonly BuildingId[]>> = {
   // FACTION_CANDY 12: the archers first, then income and the fence the
   // Taffy Ranch needs.
   candy: ["mint-range", "town-hall", "fort-1", "taffy-ranch"],
+  // FACTION_DWARVES 12: the Rivet Gunners first, then income and the
+  // Riveted Palisade the Gyro Hangar needs.
+  dwarves: ["rivet-range", "town-hall", "fort-1", "gyro-hangar"],
 };
 
 /**
- * Build-order ranks of town specials by their flag (FACTION_CANDY 12): the
- * Larder once the Sugarplum Bower stands (its requirement, rank 35), ahead
- * of the Gummy Den. Specials not listed take their rank from what else
+ * Build-order ranks of town specials by their flag, ahead of what else the
+ * building does (FACTION_CANDY 12, FACTION_DWARVES 12): the Larder once
+ * the Sugarplum Bower stands (its requirement, rank 35), ahead of the
+ * Gummy Den; the Deep Shaft (+1 ore a day, the Deepforge's lean) with the
+ * Tithe Barn's gold income, ahead of other resource income; the Repair
+ * Yard once the Boiler Works stands (rank 48), after the silo and before
+ * the Great Foundry. Specials not listed take their rank from what else
  * the building does.
  */
 export const SPECIAL_RANK: Readonly<Record<string, number>> = {
   larder: 45,
+  "deep-shaft": 52,
+  "repair-yard": 62,
 };
 
 /**
@@ -126,13 +135,13 @@ export function buildingRank(def: BuildingDef, plan: BuildPlan = {}): number {
     const ranks = plan.magic === true ? MAGIC_GUILD_RANK : GUILD_RANK;
     return ranks[def.guildLevel - 1] ?? 110;
   }
+  const special =
+    def.special === undefined ? undefined : SPECIAL_RANK[def.special];
+  if (special !== undefined) return special;
   if (def.income !== undefined) return (def.income.gold ?? 0) > 0 ? 52 : 55;
   if (def.evenDayIncome !== undefined) return 58;
   if (def.growthBonus === true) return 60;
   if (def.growthExtra !== undefined) return GROWTH_EXTRA_RANK;
-  const special =
-    def.special === undefined ? undefined : SPECIAL_RANK[def.special];
-  if (special !== undefined) return special;
   if (def.drill !== undefined) return 75;
   return 90;
 }

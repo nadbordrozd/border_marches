@@ -1306,3 +1306,76 @@ bead (FACTION_CANDY 14, bead 8) measures the Kingdom with the sims.
   hall was ever built.
 - Recruiting, hiring, hero skills and the guild need nothing new: they
   read the tree, the class weights and the Confectioner's magic leaning.
+
+## Deepforge (bead bzc.134)
+
+Both AIs play the Deepforge ([FACTION_DWARVES.md](FACTION_DWARVES.md)
+section 12) and play against it. The changes are data-driven: three
+battle AI hints on abilities (`aiShell` on Lob, `aiSpotPercent` on
+Spotter, `aiSteamPush` on Ram, in `src/core/battle/registry.ts`), the
+rules' own `pointBlank` flag (Turret), the Steam condition and the
+shells in the air (`pendingShells`). No other faction's choices change
+unless it meets a stack bearing Steam, a shell in the air, a spotter or a
+Turret. Tests on hand-built states: `tests/core/battle/ai-dwarves.test.ts`
+and `tests/core/ai/dwarves-ai.test.ts`; each new term was checked by
+undoing it and seeing its tests fail. No simulation was run; the balance
+bead (FACTION_DWARVES 14, bead 8) measures the Deepforge with the sims.
+
+### Battle AI
+
+- **Steam's worth.** Steam of size n is worth the share `steam` (weight,
+  0.6) of what it adds to the bearer's best Strike on any enemy (x (100 +
+  50 n)%, capped by the target's HP; a shot for a shooter), whoever bears
+  it. For a stack whose steamed melee blow pushes its target away (Ram),
+  add the retaliation that target would have made. Before, every Steam was
+  worth a flat 9% of its bearer's value whatever its size, so a stoked
+  stack never stoked a second time. Strike rates for Steam's worth leave
+  the bearer's Steam out (`rate(..., bare)`).
+- **Stoke or strike.** No special rule: Defend is rehearsed, and a native's
+  Defend adds Steam. So a slow stack with nothing in reach Stokes up to
+  Steam 3 and then walks; Gunners with a target shoot; Steam Tanks beside
+  20 Brutes Stoke rather than trade blows, and with Steam 2 ram them (x
+  200%, no retaliation, doc 6.1).
+- **Shells in the air** (Lob). Every board counts each pending shell whose
+  Mortars live: their shot Strike on the stack on the hex and the splash
+  percent on the stacks next to it, friend or foe, at the Mortars' rate,
+  Spotter by position. A stack whose turn this round is over, or that
+  cannot walk, counts in full; one still to act (the active stack
+  included) counts half (`SHELL_STAY`), since it may step off. So the
+  Mortars lob at stacks that have acted and keep their own stacks out of
+  the splash; a stack still to act walks off a marked hex, or attacks from
+  a hex outside its splash, when that costs less than the shell; a dud
+  counts nothing. Fast mode ranks the Mortars' shots and hexes by that
+  shell value instead of the stacks' raw value round the hex.
+- **Spotter.** Strike rates leave a spotter's multiplier out (it is read
+  from the breakdown and divided away), and the threat map applies it by
+  where the stacks stand on the board being judged: a shot at a stack
+  next to a friendly spotter is x its percent. Before, the multiplier was
+  baked into the rate of the first board a decision asked about, so a
+  Gyrocopter's flight never changed the Gunners' worth. The fast estimate
+  recomputes the own shooters and the shells per hex for a spotting mover.
+  Rotors needed nothing new (Mist's teleport walk).
+- **Turret.** A stack that shoots point-blank stays a shooter in the threat
+  map with an enemy next to it, and reaching it in melee no longer counts
+  as silencing it (`silenceable`): enemies stop parking next to Ironclads
+  to stop their shots, and a Stuck Ironclad beside an enemy is not
+  "held".
+- Patch Up, both Commands (Ramming Speed, Blow Off Steam) and the counters
+  to Steam (Set Off, an Accord or Clock page fuelled by it, melee attacks
+  that meet a stoked retaliation) needed no change beyond Steam's worth:
+  the rehearsal sees the repair, the push, the Strikes, the Harm to friend
+  and foe and the Steam spent.
+
+### Adventure AI
+
+- Opening (`OPENINGS.dwarves`): Rivet Range, Town Hall, Riveted Palisade,
+  Gyro Hangar. `WANDER_DAYS.dwarves`: 2.
+- Build order: `SPECIAL_RANK` is now read before a building's income, so a
+  listed special keeps its rank whatever else it does. The Deep Shaft
+  ranks 52, with the Tithe Barn's gold income (other resource income is
+  55); the Repair Yard ranks 62, once the Boiler Works stands (48), after
+  the silo and before the Great Foundry (70). No
+  other faction's rank changes (only the Larder was listed).
+- Recruiting with ore, hiring, hero skills and the guild need nothing new:
+  recruits pay ore from what is not kept back for a building being saved
+  for, and the Artificer leans to magic.

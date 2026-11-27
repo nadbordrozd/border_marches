@@ -286,6 +286,7 @@ export function registerDwarves(): void {
         stackKey: "spotter",
       };
     },
+    aiSpotPercent: SPOTTER_PERCENT,
   });
 
   registerAbility({
@@ -294,6 +295,7 @@ export function registerDwarves(): void {
     description:
       "The shot is lobbed at any hex. At the next round's start the shell lands: a shot at the stack there and a half-damage shot at every stack next to it, friend or foe (an area effect). Dead Mortars' shells are duds.",
     shootAnyHex: true,
+    aiShell: { splashPercent: SHELL_SPLASH_PERCENT },
     shotArea: (_state, centre) => blastHexes(centre),
     shot(fx, ownerId, centre) {
       const args: ShellArgs = {
@@ -349,6 +351,7 @@ export function registerDwarves(): void {
     name: "Ram",
     description:
       "When a melee Strike by the Steam Tanks spends Steam, the stack struck is pushed 1 hex directly away from them per point of that Steam, before it retaliates. No longer next to them, it does not retaliate.",
+    aiSteamPush: true,
     onStrike(ctx, owner) {
       if (owner.id !== ctx.attacker.id || ctx.kind === "shot") return null;
       const size = steamOf(ctx.attacker);

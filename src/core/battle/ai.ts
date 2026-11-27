@@ -43,6 +43,16 @@
  *   (Hastened, Delayed) is worth a round less on a stack that has acted;
  *   pulls walk into range first, and walks onto remains a stack feeds on
  *   (the Larder, `aiWalkOnto`) are always rehearsed.
+ * - **Deepforge** (bead bzc.134; docs/design/AI.md "Deepforge"): Steam is
+ *   worth the share `steam` of what it adds to its bearer's best Strike,
+ *   plus, for a stack whose steamed blow pushes (Ram, `aiSteamPush`), the
+ *   retaliation it spares, so natives Stoke while nothing is in reach and
+ *   strike when it pays; shells in the air (Lob, `aiShell`) count on the
+ *   stacks on and around their hexes, in full for one whose turn is over
+ *   and by half for one still to act (it may step off), friend or foe;
+ *   spotters (`aiSpotPercent`) multiply their side's shots by position
+ *   (the rates leave them out); a stack that shoots point-blank (Turret)
+ *   shoots with an enemy next to it and is not silenced by one.
  * - **Tuning.** The weights ({@link DEFAULT_AI_WEIGHTS}) were set with the
  *   batch runner, tests/sim/battles.ts (`npm run sim:battles`).
  * - **Pruning.** Moves are first scored on a board with the stack simply
@@ -92,7 +102,14 @@ import {
   manaCost,
   touchedStacks,
 } from "./magic.ts";
-import { ability, act as actDef, conditionKind, hasAct } from "./registry.ts";
+import { pendingShells } from "./factions/dwarves.ts";
+import {
+  ability,
+  act as actDef,
+  conditionKind,
+  hasAbility,
+  hasAct,
+} from "./registry.ts";
 import type { AbilityDef, ActDef } from "./registry.ts";
 import {
   GET_UP_EFFECT,
@@ -104,7 +121,9 @@ import {
   fightValueLeft,
   roundLimitOf,
   roundLimitWinner,
+  shootsPointBlank,
 } from "./resolve.ts";
+import { STEAM, STEAM_PERCENT_PER_SIZE } from "./steam.ts";
 import type {
   ActTarget,
   BattleAction,
@@ -196,6 +215,12 @@ export interface AiWeights {
   readonly fuelValue: number;
   /** A scroll's cost as a fraction of its gold value. */
   readonly scrollFraction: number;
+  /**
+   * Share of what Steam adds to its bearer's best Strike (and, with Ram,
+   * of the retaliation it spares) counted as the condition's worth: below
+   * 1 because a banked blow is spent later, or by a retaliation, or never.
+   */
+  readonly steam: number;
 }
 
 export const DEFAULT_AI_WEIGHTS: AiWeights = {
@@ -219,6 +244,7 @@ export const DEFAULT_AI_WEIGHTS: AiWeights = {
   manaValue: 8,
   fuelValue: 60,
   scrollFraction: 0.3,
+  steam: 0.6,
 };
 
 /**
@@ -494,26 +520,28 @@ class Context {
   /**
    * Damage per creature of `a` striking `b` (melee or shot), with every
    * modifier of the board it is first asked on (memoised per decision,
-   * and per round with a memo).
+   * and per round with a memo) except a spotter's (Spotter), which the
+   * threat map applies by position. `bare` leaves `a`'s Steam out too
+   * (what Steam adds is its condition's worth).
    */
   rate(
     state: BattleState,
     a: BattleStack,
     b: BattleStack,
     shot: boolean,
+    bare = false,
   ): number {
     let row = this.rates.get(a.id);
     if (row === undefined) {
       row = new Map();
       this.rates.set(a.id, row);
     }
-    const key = shot ? `${b.id}s` : `${b.id}m`;
+    const tag = `${shot ? "s" : "m"}${bare ? "0" : ""}`;
+    const key = `${b.id}${tag}`;
     const hit = row.get(key);
     if (hit !== undefined) return hit;
     const memoKeyAB =
-      this.memo === null
-        ? null
-        : `${memoKey(a)}>${memoKey(b)}${shot ? "s" : "m"}`;
+      this.memo === null ? null : `${memoKey(a)}>${memoKey(b)}${tag}`;
     if (memoKeyAB !== null) {
       const kept = this.memo?.rates.get(memoKeyAB);
       if (kept !== undefined) {
@@ -521,14 +549,24 @@ class Context {
         return kept;
       }
     }
+    const attacker: BattleStack = bare
+      ? {
+          ...a,
+          defending: false,
+          conditions: a.conditions.filter((c) => c.kind !== STEAM),
+        }
+      : { ...a, defending: false };
     const bd = computeBreakdown({
       state,
-      attacker: { ...a, defending: false },
+      attacker,
       defender: { ...b, defending: false },
       kind: shot ? "shot" : "melee",
       hexesMoved: 0,
     });
-    const r = bd.damage / Math.max(1, a.count);
+    let damage = bd.damage;
+    for (const m of bd.abilityMultipliers)
+      if (spotPercentOf(m.source) > 0) damage /= m.percent / 100;
+    const r = damage / Math.max(1, a.count);
     row.set(key, r);
     if (memoKeyAB !== null) this.memo?.rates.set(memoKeyAB, r);
     return r;
@@ -537,6 +575,18 @@ class Context {
 
 // ---------------------------------------------------------------------------
 // Evaluation
+
+/** Spotter percents by ability id (0: not a spotter, or not an ability). */
+const spotPercents = new Map<string, number>();
+
+/** The `aiSpotPercent` of the ability `id`, 0 for other sources. */
+function spotPercentOf(id: string): number {
+  const hit = spotPercents.get(id);
+  if (hit !== undefined) return hit;
+  const p = hasAbility(id) ? (ability(id).aiSpotPercent ?? 0) : 0;
+  spotPercents.set(id, p);
+  return p;
+}
 
 /**
  * What a condition is worth to the bearer's side (negative for its
@@ -565,8 +615,10 @@ function conditionWorth(
     // enemy can neither shoot nor walk clear; a melee stack with nothing
     // next to it can do nothing; one in contact can still hit what holds
     // it, and a shooter in the clear still shoots.
+    // A shooter that shoots point-blank (Turret) is never held from it.
     const shooter = liveShooter(bearer);
-    const f = shooter ? (pinned ? 0.6 : 0.05) : pinned ? 0.1 : 0.3;
+    const held = pinned && silenceable(bearer);
+    const f = shooter ? (held ? 0.6 : 0.05) : pinned ? 0.1 : 0.3;
     worth = f * t * rounds * value;
     return kind.polarity === "boon" ? worth : -worth;
   }
@@ -701,13 +753,14 @@ function threat(
   far: number,
 ): number {
   let total = 0;
+  const spots = spotMap(alive, side);
   for (const a of alive) {
     if (a.side !== side) continue;
     if (bears(a, "cannotAct")) continue;
     const enemyNear = alive.some(
       (e) => e.side !== side && isAdjacent(e.hex, a.hex),
     );
-    const s = striker(a, a.hex, enemyNear);
+    const s = striker(a, a.hex, enemyNear, spots);
     let best = 0;
     for (const b of alive) {
       if (b.side === side) continue;
@@ -760,7 +813,15 @@ interface Striker {
   readonly stuck: number;
   /** What the creature's abilities tell the threat map. */
   readonly traits: Traits;
+  /**
+   * Hexes its side's spotters stand next to, with their percent (its
+   * shots there are multiplied; Spotter), or null.
+   */
+  readonly spots: SpotMap | null;
 }
+
+/** Hex index -> the best spotter percent on that hex (Spotter). */
+type SpotMap = ReadonlyMap<number, number>;
 
 /** The threat map's reading of a creature's abilities (FACTION_CANDY 12). */
 interface Traits {
@@ -772,6 +833,12 @@ interface Traits {
   readonly sticks: boolean;
   /** Pull abilities (Reel In): reach and HP limit against a target. */
   readonly pulls: readonly NonNullable<AbilityDef["aiPull"]>[];
+  /** Friendly shots at a stack next to it are x this percent (0: none). */
+  readonly spot: number;
+  /** Its melee Strike that spends Steam denies the retaliation (Ram). */
+  readonly steamPush: boolean;
+  /** Its shot is a shell landing next round (Lob): the splash percent. */
+  readonly shellSplash: number | null;
 }
 
 /** Memoised traits by creature record (records are never mutated). */
@@ -792,6 +859,10 @@ function traitsOf(creature: BattleCreatureStats): Traits {
         conditionKind(d.aiMeleeMakes).cannotWalk === true,
     ),
     pulls,
+    spot: Math.max(0, ...defs.map((d) => d.aiSpotPercent ?? 0)),
+    steamPush: defs.some((d) => d.aiSteamPush === true),
+    shellSplash:
+      defs.find((d) => d.aiShell !== undefined)?.aiShell?.splashPercent ?? null,
   };
   traitsCache.set(creature, t);
   return t;
@@ -807,11 +878,43 @@ function stuckRounds(a: BattleStack): number {
   return n;
 }
 
-function striker(a: BattleStack, hex: Hex, enemyNear: boolean): Striker {
+/**
+ * The hexes `side`'s spotters (Spotter) stand next to, with the best
+ * percent on each; null when the side has none. `moved` places one stack
+ * on another hex (the fast estimate).
+ */
+function spotMap(
+  alive: readonly BattleStack[],
+  side: BattleSide,
+  moved: { readonly id: string; readonly hex: Hex } | null = null,
+): SpotMap | null {
+  let out: Map<number, number> | null = null;
+  for (const s of alive) {
+    if (s.side !== side) continue;
+    const p = traitsOf(s.creature).spot;
+    if (p <= 0) continue;
+    const hex = moved !== null && moved.id === s.id ? moved.hex : s.hex;
+    out ??= new Map();
+    for (const n of neighbors(hex)) {
+      const i = hexIndex(n);
+      if ((out.get(i) ?? 0) < p) out.set(i, p);
+    }
+  }
+  return out;
+}
+
+function striker(
+  a: BattleStack,
+  hex: Hex,
+  enemyNear: boolean,
+  spots: SpotMap | null = null,
+): Striker {
+  // A stack that shoots point-blank (Turret) shoots with an enemy next to
+  // it too.
   const shooter =
     isRangedCreature(a.creature) &&
     a.shotsLeft > 0 &&
-    !enemyNear &&
+    (!enemyNear || shootsPointBlank(a.creature)) &&
     !bears(a, "cannotShoot");
   const speed = Math.max(1, effectiveSpeed(a));
   const traits = traitsOf(a.creature);
@@ -824,12 +927,21 @@ function striker(a: BattleStack, hex: Hex, enemyNear: boolean): Striker {
     teleport: traits.teleport,
     stuck: stuckRounds(a),
     traits,
+    spots,
   };
 }
 
 /** A shooter that still has its shots (what reach and pulls take away). */
 function liveShooter(b: BattleStack): boolean {
   return isRangedCreature(b.creature) && b.shotsLeft > 0 && !b.summoned;
+}
+
+/**
+ * A live shooter that an enemy next to it stops shooting: not one that
+ * shoots point-blank (Turret, FACTION_DWARVES 5).
+ */
+function silenceable(b: BattleStack): boolean {
+  return liveShooter(b) && !shootsPointBlank(b.creature);
 }
 
 /**
@@ -844,7 +956,7 @@ function pullValue(
   b: BattleStack,
   bHex: Hex,
 ): number {
-  if (s.traits.pulls.length === 0 || !liveShooter(b)) return 0;
+  if (s.traits.pulls.length === 0 || !silenceable(b)) return 0;
   const d = hexDistance(s.hex, bHex);
   if (d <= 1) return 0;
   const walk = s.stuck > 0 ? 0 : s.speed;
@@ -879,20 +991,26 @@ function strikeValue(
       if (far <= 0 || d === 255) return pv;
       const turns = s.stuck + Math.max(0, d - s.reach) / s.speed;
       const factor = far ** Math.min(6, turns);
-      return Math.max(pv, factor * strikeOnly(ctx, state, s, b));
+      return Math.max(
+        pv,
+        factor * strikeOnly(ctx, state, s, b, undefined, bHex),
+      );
     }
   }
-  let v = strikeOnly(ctx, state, s, b);
+  let v = strikeOnly(ctx, state, s, b, undefined, bHex);
   // A shooter reached in melee loses its shots too, and one that cannot
-  // walk clear of its striker (Sticky) loses them twice over.
-  if (!s.shooter && liveShooter(b))
+  // walk clear of its striker (Sticky) loses them twice over; not one that
+  // shoots point-blank (Turret).
+  if (!s.shooter && silenceable(b))
     v += (s.traits.sticks ? 2 : 1) * ctx.w.shooterExposure * stackValue(b);
   return v;
 }
 
 /**
- * The damage value of striker `s` striking `b` (no reach or exposure
- * terms); a melee stack with a round-end turn (Afters) strikes twice.
+ * The damage value of striker `s` striking `b` standing on `bHex` (no
+ * reach or exposure terms); a melee stack with a round-end turn (Afters)
+ * strikes twice, and a shot at a stack its side's spotter stands next to
+ * is multiplied (Spotter).
  */
 function strikeOnly(
   ctx: Context,
@@ -900,9 +1018,14 @@ function strikeOnly(
   s: Striker,
   b: BattleStack,
   strikes = s.traits.afters && !s.shooter ? 2 : 1,
+  bHex: Hex = b.hex,
 ): number {
   let dmg = ctx.rate(state, s.a, b, s.shooter) * s.a.count;
   if (strikes !== 1) dmg *= strikes;
+  if (s.shooter && s.spots !== null) {
+    const p = s.spots.get(hexIndex(bHex));
+    if (p !== undefined) dmg *= p / 100;
+  }
   if (b.defending) dmg *= 0.8;
   const hp = totalHp({
     count: b.count,
@@ -942,11 +1065,132 @@ function evaluate(ctx: Context, state: BattleState): number {
   }
   const alive = state.stacks.filter(isAlive);
   let v = staticValue(ctx, state, alive);
+  const shells = liveShells(state, alive);
+  for (const s of alive)
+    v += shellsOn(ctx, state, shells, s, s.hex, shellPresence(state, s));
   const them = enemySide(me);
   const { fear, own } = threatWeights(ctx, state);
   v -= fear * threat(ctx, state, them, alive, 0);
   v += own * threat(ctx, state, me, alive, ctx.w.far);
   return v;
+}
+
+/**
+ * What Steam of `size` on `s` is worth to its side (FACTION_DWARVES 12):
+ * the share `w.steam` of what it adds to the stack's best Strike on any
+ * enemy (a shot for a shooter), and for a stack whose steamed melee
+ * Strike pushes its target away (Ram) of the retaliation that Strike's
+ * target would have made. Where the stacks stand does not matter.
+ */
+function steamWorth(
+  ctx: Context,
+  state: BattleState,
+  s: BattleStack,
+  alive: readonly BattleStack[],
+  size: number,
+): number {
+  if (size <= 0 || bears(s, "cannotAct")) return 0;
+  const shooter =
+    isRangedCreature(s.creature) && s.shotsLeft > 0 && !bears(s, "cannotShoot");
+  const pct = 1 + (STEAM_PERCENT_PER_SIZE * size) / 100;
+  const push = !shooter && traitsOf(s.creature).steamPush;
+  const ownHp = totalHp({ count: s.count, hp: s.creature.hp, topHp: s.topHp });
+  let best = 0;
+  for (const b of alive) {
+    if (b.side === s.side) continue;
+    const dmg = ctx.rate(state, s, b, shooter, true) * s.count;
+    const hp = totalHp({ count: b.count, hp: b.creature.hp, topHp: b.topHp });
+    let gain =
+      (Math.min(dmg * pct, hp) - Math.min(dmg, hp)) * aiValuePerHp(b.creature);
+    if (push && !bears(b, "cannotRetaliate") && !bears(b, "cannotAct")) {
+      const back = ctx.rate(state, b, s, false) * b.count;
+      gain += Math.min(back, ownHp) * aiValuePerHp(s.creature);
+    }
+    if (gain > best) best = gain;
+  }
+  return ctx.w.steam * best;
+}
+
+// ---------------------------------------------------------------------------
+// Shells in the air (Lob, FACTION_DWARVES 5 and 12)
+
+/**
+ * The share of a stack still to act this round counted as standing where
+ * it stands when a shell lands at the next round's start: it may step
+ * off the marked hex.
+ */
+const SHELL_STAY = 0.5;
+
+/** A shell in the air whose shooter lives (a dead shooter's is a dud). */
+interface LiveShell {
+  readonly m: BattleStack;
+  readonly hex: Hex;
+  /** Percent of the shell's Strike on the stacks next to its hex. */
+  readonly splash: number;
+  /** The shooter's side's spotters (Spotter, read when it lands). */
+  readonly spots: SpotMap | null;
+}
+
+function liveShells(
+  state: BattleState,
+  alive: readonly BattleStack[],
+  moved: { readonly id: string; readonly hex: Hex } | null = null,
+): LiveShell[] {
+  if (state.scheduled.length === 0) return [];
+  const out: LiveShell[] = [];
+  for (const sh of pendingShells(state)) {
+    const m = alive.find((x) => x.id === sh.stackId);
+    if (m === undefined) continue;
+    out.push({
+      m,
+      hex: sh.hex,
+      splash: traitsOf(m.creature).shellSplash ?? 0,
+      spots: spotMap(alive, m.side, moved),
+    });
+  }
+  return out;
+}
+
+/**
+ * The share of `s` counted where it stands when the shells land: in full
+ * for a stack whose turn this round is over and one that cannot walk;
+ * `SHELL_STAY` for one still to act, the active stack included (a
+ * rehearsed walk ends its turn, so the stack then counts in full where it
+ * went).
+ */
+function shellPresence(state: BattleState, s: BattleStack): number {
+  if (hasActed(state, s)) return 1;
+  if (bears(s, "cannotWalk") || bears(s, "hold") || bears(s, "cannotAct"))
+    return 1;
+  return SHELL_STAY;
+}
+
+/**
+ * What the shells in the air do to `s` standing on `hex`, for `ctx.me`
+ * (positive when an enemy is hit): the shooter's shot Strike on the hex,
+ * the splash next to it, friend or foe, times `presence`.
+ */
+function shellsOn(
+  ctx: Context,
+  state: BattleState,
+  shells: readonly LiveShell[],
+  s: BattleStack,
+  hex: Hex,
+  presence: number,
+): number {
+  let v = 0;
+  for (const sh of shells) {
+    const d = hexDistance(hex, sh.hex);
+    if (d > 1) continue;
+    let dmg = ctx.rate(state, sh.m, s, true) * sh.m.count;
+    if (d === 1) dmg *= sh.splash / 100;
+    const p = sh.spots?.get(hexIndex(hex));
+    if (p !== undefined) dmg *= p / 100;
+    if (s.defending) dmg *= 0.8;
+    const hp = totalHp({ count: s.count, hp: s.creature.hp, topHp: s.topHp });
+    v += Math.min(dmg, hp) * aiValuePerHp(s.creature) * presence;
+  }
+  return s.owner === ctx.me ? -v : v;
 }
 
 /**
@@ -966,6 +1210,10 @@ function staticValue(
     for (const c of s.conditions) {
       const far =
         c.link === null ? undefined : alive.find((x) => x.id === c.link);
+      if (c.kind === STEAM) {
+        v += sign * steamWorth(ctx, state, s, alive, c.size);
+        continue;
+      }
       const kind = conditionKind(c.kind);
       const acted = kind.timelineClass !== undefined && hasActed(state, s);
       const pinned =
@@ -1058,19 +1306,32 @@ function placedEstimator(
     }
     return d;
   };
-  // Own side: every other stack's best strike (the enemies do not move).
-  let ownFixed = 0;
-  for (const a of alive) {
-    if (a.side !== me || a.id === m.id || bears(a, "cannotAct")) continue;
-    const near = alive.some((e) => e.side !== me && isAdjacent(e.hex, a.hex));
-    const s = striker(a, a.hex, near);
+  // A spotter's hex changes what its side's shots are worth (Spotter):
+  // with a spotting mover, the own shooters' strikes and the shells are
+  // recomputed per hex.
+  const moverSpots = traitsOf(m.creature).spot > 0;
+  const mySpots = spotMap(alive, me);
+  const theirSpots = spotMap(alive, them);
+  const spotsAt = (hex: Hex): SpotMap | null =>
+    moverSpots ? spotMap(alive, me, { id: m.id, hex }) : mySpots;
+  const ownShooters: BattleStack[] = [];
+  const bestStrike = (s: Striker): number => {
     let best = 0;
     for (const b of alive) {
       if (b.side === me) continue;
       const v = strikeValue(ctx, state, s, b, b.hex, ctx.w.far);
       if (v > best) best = v;
     }
-    ownFixed += best;
+    return best;
+  };
+  // Own side: every other stack's best strike (the enemies do not move).
+  let ownFixed = 0;
+  for (const a of alive) {
+    if (a.side !== me || a.id === m.id || bears(a, "cannotAct")) continue;
+    const near = alive.some((e) => e.side !== me && isAdjacent(e.hex, a.hex));
+    const s = striker(a, a.hex, near, mySpots);
+    if (moverSpots && s.shooter) ownShooters.push(a);
+    else ownFixed += bestStrike(s);
     if (aftersPending(state, a)) {
       let extra = 0;
       for (const b of alive) {
@@ -1100,8 +1361,8 @@ function placedEstimator(
     const nearExcl = alive.some(
       (x) => x.side !== them && x.id !== m.id && isAdjacent(x.hex, e.hex),
     );
-    const shoot = striker(e, e.hex, nearExcl);
-    const melee = striker(e, e.hex, true);
+    const shoot = striker(e, e.hex, nearExcl, theirSpots);
+    const melee = striker(e, e.hex, true, theirSpots);
     let bestShoot = 0;
     let bestMelee = 0;
     for (const b of alive) {
@@ -1134,6 +1395,35 @@ function placedEstimator(
       aftersExcl,
     });
   }
+  // Shells in the air: the other stacks' share is fixed unless the mover
+  // spots for them.
+  const shells = liveShells(state, alive);
+  let shellsFixed = 0;
+  if (shells.length > 0 && !moverSpots)
+    for (const s of alive)
+      if (s.id !== m.id)
+        shellsFixed += shellsOn(
+          ctx,
+          state,
+          shells,
+          s,
+          s.hex,
+          shellPresence(state, s),
+        );
+  const shellsAt = (hex: Hex): number => {
+    if (shells.length === 0) return 0;
+    const presence = shellPresence(state, m);
+    if (!moverSpots)
+      return shellsFixed + shellsOn(ctx, state, shells, m, hex, presence);
+    const moved = liveShells(state, alive, { id: m.id, hex });
+    let v = 0;
+    for (const s of alive)
+      v +=
+        s.id === m.id
+          ? shellsOn(ctx, state, moved, m, hex, presence)
+          : shellsOn(ctx, state, moved, s, s.hex, shellPresence(state, s));
+    return v;
+  };
   return (hex) => {
     let enemyThreat = 0;
     for (const e of enemies) {
@@ -1148,9 +1438,14 @@ function placedEstimator(
       }
     }
     let mine = ownFixed;
+    const spots = spotsAt(hex);
+    for (const a of ownShooters) {
+      const near = alive.some((e) => e.side !== me && isAdjacent(e.hex, a.hex));
+      mine += bestStrike(striker(a, a.hex, near, spots));
+    }
     if (moverActs) {
       const near = targets.some((e) => isAdjacent(e.hex, hex));
-      const s = striker(m, hex, near);
+      const s = striker(m, hex, near, spots);
       let best = 0;
       for (const b of targets) {
         const v = strikeValue(ctx, state, s, b, b.hex, ctx.w.far);
@@ -1159,7 +1454,7 @@ function placedEstimator(
       mine += best;
     }
     const pinned = pins.length === 0 ? 0 : pinDelta(hex);
-    return base + pinned - fear * enemyThreat + own * mine;
+    return base + pinned + shellsAt(hex) - fear * enemyThreat + own * mine;
   };
 }
 
@@ -1436,9 +1731,12 @@ function scoreStackOptions(ctx: Context, state: BattleState): Scored[] {
     // estimate; the targets (and shots) by that plus the strike's own
     // damage value; the best few rehearsed.
     const est = (estimate ??= placedValue(state));
+    const shells = traitsOf(self.creature).shellSplash !== null;
     const gain = (target: string, from: Hex, shot: boolean): number => {
       const b = state.stacks.find((x) => x.id === target);
       if (b === undefined) return 0;
+      // A shell lands on the target's hex next round (Lob).
+      if (shot && shells) return shellAim(ctx, state, self, b.hex);
       const s = striker(self, from, !shot);
       return strikeValue(ctx, state, s, b, b.hex, 0);
     };
@@ -1500,7 +1798,10 @@ function scoreStackOptions(ctx: Context, state: BattleState): Scored[] {
       areaShots.push({
         a: action,
         i: areaShots.length,
-        v: around(state, self.side, action.at),
+        v:
+          traitsOf(self.creature).shellSplash === null
+            ? around(state, self.side, action.at)
+            : shellAim(ctx, state, self, action.at),
       });
       continue;
     }
@@ -1538,6 +1839,29 @@ function scoreStackOptions(ctx: Context, state: BattleState): Scored[] {
     }
   }
   return out;
+}
+
+/**
+ * A shell lobbed by `self` on `at` (Lob), as the evaluation will count it
+ * once in the air: fast mode ranks the shooter's hexes by it.
+ */
+function shellAim(
+  ctx: Context,
+  state: BattleState,
+  self: BattleStack,
+  at: Hex,
+): number {
+  const alive = state.stacks.filter(isAlive);
+  const shell: LiveShell = {
+    m: self,
+    hex: at,
+    splash: traitsOf(self.creature).shellSplash ?? 0,
+    spots: spotMap(alive, self.side),
+  };
+  let v = 0;
+  for (const s of alive)
+    v += shellsOn(ctx, state, [shell], s, s.hex, shellPresence(state, s));
+  return v;
 }
 
 /**

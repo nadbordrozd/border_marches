@@ -491,6 +491,26 @@ export interface AbilityDef {
    */
   readonly aiWalkOnto?: readonly string[];
   /**
+   * The owner's shot is a shell that lands at the next round's start
+   * (Lob): a shot Strike on the hex and one at `splashPercent` on every
+   * stack next to it, friend or foe. The AI values the shells in the air
+   * by the stacks expected on and around their hexes, and ranks the
+   * owner's shots at hexes so.
+   */
+  readonly aiShell?: { readonly splashPercent: number };
+  /**
+   * Shots by the owner's side at a stack next to the owner are x this
+   * percent (Spotter). The AI's strike rates leave it out and its threat
+   * map applies it by where the stacks stand, so a spotter's walk counts.
+   */
+  readonly aiSpotPercent?: number;
+  /**
+   * The owner's melee Strike that spends Steam pushes the stack struck
+   * out of reach before it retaliates (Ram): the AI counts the owner's
+   * Steam as also sparing it that retaliation.
+   */
+  readonly aiSteamPush?: boolean;
+  /**
    * The owner is caught in an area effect: return true to take nothing
    * from it (the hook does what happens instead: Launched).
    */

@@ -206,14 +206,16 @@ const DAY_OFFSET = 0.35;
 /**
  * How many days' walk from its first town a faction's main hero ranges in
  * the first two weeks (iteration 2): goblins (fast wolves, cheap troops)
- * range further; humans, undead and the Candy Kingdom (a Speed 5 early
- * army, FACTION_CANDY 12) stay closer.
+ * range further; humans, undead, the Candy Kingdom (a Speed 5 early
+ * army, FACTION_CANDY 12) and the Deepforge (Tinkers and Rivet Gunners,
+ * Speed 4, FACTION_DWARVES 12) stay closer.
  */
 export const WANDER_DAYS: Readonly<Record<string, number>> = {
   humans: 2,
   undead: 2,
   goblins: 3,
   candy: 2,
+  dwarves: 2,
 };
 
 /**
