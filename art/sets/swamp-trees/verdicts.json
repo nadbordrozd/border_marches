@@ -1,0 +1,252 @@
+{
+  "willow-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a pale olive weeping willow: one round crown of drooping lobes, reads at 1x",
+    "at": "2026-11-27T09:17:40.600Z"
+  },
+  "willow-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "a pale olive weeping willow: one round crown of drooping lobes, reads at 1x",
+    "at": "2026-11-27T09:17:40.692Z"
+  },
+  "willow-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "a pale olive weeping willow: one round crown of drooping lobes, reads at 1x",
+    "at": "2026-11-27T09:17:40.780Z"
+  },
+  "willow-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "a pale olive weeping willow: one round crown of drooping lobes, reads at 1x",
+    "at": "2026-11-27T09:17:40.871Z"
+  },
+  "willow-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "a pale olive weeping willow: one round crown of drooping lobes, reads at 1x",
+    "at": "2026-11-27T09:17:40.960Z"
+  },
+  "willow-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "a flat-topped bald cypress hung with a few thick moss strands",
+    "at": "2026-11-27T09:17:41.052Z"
+  },
+  "willow-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "a flat-topped bald cypress hung with a few thick moss strands",
+    "at": "2026-11-27T09:17:41.143Z"
+  },
+  "willow-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "a flat-topped bald cypress hung with a few thick moss strands",
+    "at": "2026-11-27T09:17:41.238Z"
+  },
+  "willow-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "a flat-topped bald cypress hung with a few thick moss strands",
+    "at": "2026-11-27T09:17:41.340Z"
+  },
+  "willow-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "a flat-topped bald cypress hung with a few thick moss strands",
+    "at": "2026-11-27T09:17:41.444Z"
+  },
+  "willow-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "a flat-topped bald cypress hung with a few thick moss strands",
+    "at": "2026-11-27T09:17:41.555Z"
+  },
+  "willow-a#18": {
+    "verdict": "ACCEPTED",
+    "notes": "a flat-topped bald cypress hung with a few thick moss strands",
+    "at": "2026-11-27T09:17:41.660Z"
+  },
+  "willow-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "a flat-topped bald cypress hung with a few thick moss strands",
+    "at": "2026-11-27T09:17:41.765Z"
+  },
+  "willow-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a gnarled dark olive swamp oak draped with thick moss clumps",
+    "at": "2026-11-27T09:17:41.868Z"
+  },
+  "willow-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "a gnarled dark olive swamp oak draped with thick moss clumps",
+    "at": "2026-11-27T09:17:41.971Z"
+  },
+  "willow-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "a gnarled dark olive swamp oak draped with thick moss clumps",
+    "at": "2026-11-27T09:17:42.073Z"
+  },
+  "willow-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "a gnarled dark olive swamp oak draped with thick moss clumps",
+    "at": "2026-11-27T09:17:42.171Z"
+  },
+  "willow-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "a gnarled dark olive swamp oak draped with thick moss clumps",
+    "at": "2026-11-27T09:17:42.276Z"
+  },
+  "willow-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "a gnarled dark olive swamp oak draped with thick moss clumps",
+    "at": "2026-11-27T09:17:42.382Z"
+  },
+  "willow-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "a gnarled dark olive swamp oak draped with thick moss clumps",
+    "at": "2026-11-27T09:17:42.479Z"
+  },
+  "willow-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "a gnarled dark olive swamp oak draped with thick moss clumps",
+    "at": "2026-11-27T09:17:42.571Z"
+  },
+  "mangrove-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a dense round mangrove crown on arched stilt roots",
+    "at": "2026-11-27T09:17:42.666Z"
+  },
+  "mangrove-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "a dense round mangrove crown on arched stilt roots",
+    "at": "2026-11-27T09:17:42.762Z"
+  },
+  "mangrove-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "a dense round mangrove crown on arched stilt roots",
+    "at": "2026-11-27T09:17:42.862Z"
+  },
+  "mangrove-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "a dense round mangrove crown on arched stilt roots",
+    "at": "2026-11-27T09:17:42.953Z"
+  },
+  "mangrove-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "a dense round mangrove crown on arched stilt roots",
+    "at": "2026-11-27T09:17:43.067Z"
+  },
+  "mangrove-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "a dense round mangrove crown on arched stilt roots",
+    "at": "2026-11-27T09:17:43.173Z"
+  },
+  "mangrove-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "a dense round mangrove crown on arched stilt roots",
+    "at": "2026-11-27T09:17:43.275Z"
+  },
+  "mangrove-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "a low, wide mossy swamp tree of olive clumps",
+    "at": "2026-11-27T09:17:43.373Z"
+  },
+  "mangrove-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "a low, wide mossy swamp tree of olive clumps",
+    "at": "2026-11-27T09:17:43.470Z"
+  },
+  "mangrove-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "a low, wide mossy swamp tree of olive clumps",
+    "at": "2026-11-27T09:17:43.560Z"
+  },
+  "mangrove-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "a low, wide mossy swamp tree of olive clumps",
+    "at": "2026-11-27T09:17:43.654Z"
+  },
+  "mangrove-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "a low, wide mossy swamp tree of olive clumps",
+    "at": "2026-11-27T09:17:43.748Z"
+  },
+  "willow-a#16": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted cypresses",
+    "at": "2026-11-27T09:17:43.852Z"
+  },
+  "willow-a#17": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted moss oaks",
+    "at": "2026-11-27T09:17:43.950Z"
+  },
+  "willow-a#23": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted cypresses",
+    "at": "2026-11-27T09:17:44.051Z"
+  },
+  "willow-a#24": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted moss oaks",
+    "at": "2026-11-27T09:17:44.150Z"
+  },
+  "mangrove-a#2": {
+    "verdict": "REJECTED",
+    "notes": "a plain conifer cone: repeats the grass family's conifers, not a swamp tree",
+    "at": "2026-11-27T09:17:44.261Z"
+  },
+  "mangrove-a#4": {
+    "verdict": "REJECTED",
+    "notes": "thin bare branches with small leaf puffs: noise in a crowd",
+    "at": "2026-11-27T09:17:44.365Z"
+  },
+  "mangrove-a#6": {
+    "verdict": "REJECTED",
+    "notes": "a plain conifer cone: repeats the grass family's conifers, not a swamp tree",
+    "at": "2026-11-27T09:17:44.468Z"
+  },
+  "mangrove-a#7": {
+    "verdict": "REJECTED",
+    "notes": "a plain conifer cone: repeats the grass family's conifers, not a swamp tree",
+    "at": "2026-11-27T09:17:44.569Z"
+  },
+  "mangrove-a#9": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted mossy bushes",
+    "at": "2026-11-27T09:17:44.670Z"
+  },
+  "mangrove-a#11": {
+    "verdict": "REJECTED",
+    "notes": "a plain conifer cone: repeats the grass family's conifers, not a swamp tree",
+    "at": "2026-11-27T09:17:44.772Z"
+  },
+  "mangrove-a#12": {
+    "verdict": "REJECTED",
+    "notes": "a plain conifer cone: repeats the grass family's conifers, not a swamp tree",
+    "at": "2026-11-27T09:17:44.873Z"
+  },
+  "mangrove-a#16": {
+    "verdict": "REJECTED",
+    "notes": "a plain conifer cone: repeats the grass family's conifers, not a swamp tree",
+    "at": "2026-11-27T09:17:44.974Z"
+  },
+  "mangrove-a#17": {
+    "verdict": "REJECTED",
+    "notes": "a plain conifer cone: repeats the grass family's conifers, not a swamp tree",
+    "at": "2026-11-27T09:17:45.078Z"
+  },
+  "mangrove-a#18": {
+    "verdict": "REJECTED",
+    "notes": "saturated jungle green, off the swamp's olive palette",
+    "at": "2026-11-27T09:17:45.181Z"
+  },
+  "mangrove-a#19": {
+    "verdict": "REJECTED",
+    "notes": "thin bare branches with small leaf puffs: noise in a crowd",
+    "at": "2026-11-27T09:17:45.281Z"
+  },
+  "mangrove-a#23": {
+    "verdict": "REJECTED",
+    "notes": "a see-through crown with thin branches: noise in a crowd",
+    "at": "2026-11-27T09:17:45.384Z"
+  },
+  "mangrove-a#24": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted mossy bushes",
+    "at": "2026-11-27T09:17:45.487Z"
+  }
+}

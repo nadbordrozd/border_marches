@@ -1,0 +1,240 @@
+{
+  "mud-a": {
+    "id": "mud-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-f655dd35-4d39-4757-b7d5-a727157029f5",
+    "submittedAt": "2026-11-27T09:08:33.500Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of soft wet swamp mud seen from straight above, filling the whole image edge to edge: murky olive-brown mud #5e5a36 with large soft, slightly greener drifts #67693a and slightly darker brown drifts #4e4a2c that blend gently into each other, a few small irregular shallow puddles of dark green water #3a4630 scattered far apart, and a few tiny tufts of short olive reeds #7a7e40, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 126101,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of soft wet swamp mud seen from straight above, filling the whole image edge to edge: murky olive-brown mud #5e5a36 with large soft, slightly greener drifts #67693a and slightly darker brown drifts #4e4a2c that blend gently into each other, a few small irregular shallow puddles of dark green water #3a4630 scattered far apart, and a few tiny tufts of short olive reeds #7a7e40, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, lake, river, big pond, circles, rings, dots pattern, stripes pattern, lily pads, flowers, object, character, building, tree, rock, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T09:08:33.503Z",
+    "usageUsd": 0.009771397961510553,
+    "candidates": [
+      {
+        "file": "mud-a-0.png",
+        "sha256": "cf50daa3bc7a0f97cfd23edc68847a45b3b095dc71d5a42af5912fd8a5110d6b",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "mud-b": {
+    "id": "mud-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-aee8dd14-0cc2-490b-827a-285cd988791a",
+    "submittedAt": "2026-11-27T09:09:21.644Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of soft wet swamp mud seen from straight above, filling the whole image edge to edge: murky olive-brown mud #5e5a36 with large soft, slightly greener drifts #67693a and slightly darker brown drifts #4e4a2c that blend gently into each other, a few small irregular shallow puddles of dark green water #3a4630 scattered far apart, and a few tiny tufts of short olive reeds #7a7e40, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 126102,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of soft wet swamp mud seen from straight above, filling the whole image edge to edge: murky olive-brown mud #5e5a36 with large soft, slightly greener drifts #67693a and slightly darker brown drifts #4e4a2c that blend gently into each other, a few small irregular shallow puddles of dark green water #3a4630 scattered far apart, and a few tiny tufts of short olive reeds #7a7e40, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, lake, river, big pond, circles, rings, dots pattern, stripes pattern, lily pads, flowers, object, character, building, tree, rock, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T09:09:21.645Z",
+    "usageUsd": 0.010213437186347114,
+    "candidates": [
+      {
+        "file": "mud-b-0.png",
+        "sha256": "55a116152eba49e9c4698a46f055fea3ce437a7dcee2f7b5a2d5f23153c82cef",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "bog-a": {
+    "id": "bog-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-e8a90421-d60f-4db3-b596-eee4635122f6",
+    "submittedAt": "2026-11-27T09:09:50.342Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: boggy marsh ground seen from directly above, filling the whole image edge to edge: dull olive-green moss #5f6436 and wet brown mud #514a2e in soft irregular patches that blend into each other, many tiny short reed and sedge tufts #7c8044 scattered evenly, a few very small dark still pools #38432e, very calm, quiet and low in contrast, no single big pool, no spot of light, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 126103,
+      "shading": "flat shading",
+      "description": "Subject: boggy marsh ground seen from directly above, filling the whole image edge to edge: dull olive-green moss #5f6436 and wet brown mud #514a2e in soft irregular patches that blend into each other, many tiny short reed and sedge tufts #7c8044 scattered evenly, a few very small dark still pools #38432e, very calm, quiet and low in contrast, no single big pool, no spot of light, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, lake, river, big pond, circles, rings, dots pattern, stripes pattern, lily pads, flowers, object, character, building, tree, rock, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T09:09:50.343Z",
+    "usageUsd": 0.00801702814631992,
+    "candidates": [
+      {
+        "file": "bog-a-0.png",
+        "sha256": "726b54f643db1797ffbf8108d955bf152582f0320bfeae505fad25f32011e5e5",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "marsh-a": {
+    "id": "marsh-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-17040607-1bb8-4ccb-927d-00ed4ee33981",
+    "submittedAt": "2026-11-27T09:10:21.327Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat marsh of wet mud seen from straight above, filling the whole image edge to edge: even murky green-brown mud #5a5834 with faint thin wavy darker lines #4a4830 like wet ripples running in many slightly different directions, a few small dark puddles #39432f and a few tiny reed tufts #78793e, very calm and low in contrast, no single big swirl, no light spot, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 126104,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat marsh of wet mud seen from straight above, filling the whole image edge to edge: even murky green-brown mud #5a5834 with faint thin wavy darker lines #4a4830 like wet ripples running in many slightly different directions, a few small dark puddles #39432f and a few tiny reed tufts #78793e, very calm and low in contrast, no single big swirl, no light spot, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, lake, river, big pond, circles, rings, dots pattern, stripes pattern, lily pads, flowers, object, character, building, tree, rock, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T09:10:21.328Z",
+    "usageUsd": 0.008086668093999227,
+    "candidates": [
+      {
+        "file": "marsh-a-0.png",
+        "sha256": "0d6bf9dd1a9a0d3247bd6430d3cc07cf5dba42674f873aa96d4d636fffd82dd7",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "mire-a": {
+    "id": "mire-a",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-d26b1204-fbdd-498f-86de-cf6df803c8ae",
+    "submittedAt": "2026-11-27T09:12:01.962Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of wet swamp mud seen from straight above, filling the whole image edge to edge: even murky olive-brown mud #5e5a36 with large soft, slightly greener mossy drifts #676a3a and slightly darker wet brown drifts #514c2e that blend gently into each other, many tiny short dark green flecks and a few small faint wet sheens of dark green water #4a5232 only a little darker than the mud, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 126105,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of wet swamp mud seen from straight above, filling the whole image edge to edge: even murky olive-brown mud #5e5a36 with large soft, slightly greener mossy drifts #676a3a and slightly darker wet brown drifts #514c2e that blend gently into each other, many tiny short dark green flecks and a few small faint wet sheens of dark green water #4a5232 only a little darker than the mud, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, lake, river, big pond, circles, rings, dots pattern, stripes pattern, lily pads, flowers, object, character, building, tree, rock, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T09:12:01.965Z",
+    "usageUsd": 0.010630808300442166,
+    "candidates": [
+      {
+        "file": "mire-a-0.png",
+        "sha256": "761c49eafde74bfaac7fb0ae1a857a59b589bade613de168bee9bf7de0348c9d",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "mire-b": {
+    "id": "mire-b",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-91d1df6c-330d-4f8c-a113-ae862f5435b3",
+    "submittedAt": "2026-11-27T09:12:26.647Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of wet swamp mud seen from straight above, filling the whole image edge to edge: even murky olive-brown mud #5e5a36 with large soft, slightly greener mossy drifts #676a3a and slightly darker wet brown drifts #514c2e that blend gently into each other, many tiny short dark green flecks and a few small faint wet sheens of dark green water #4a5232 only a little darker than the mud, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 126106,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of wet swamp mud seen from straight above, filling the whole image edge to edge: even murky olive-brown mud #5e5a36 with large soft, slightly greener mossy drifts #676a3a and slightly darker wet brown drifts #514c2e that blend gently into each other, many tiny short dark green flecks and a few small faint wet sheens of dark green water #4a5232 only a little darker than the mud, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, lake, river, big pond, circles, rings, dots pattern, stripes pattern, lily pads, flowers, object, character, building, tree, rock, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T09:12:26.648Z",
+    "usageUsd": 0.007630329026116265,
+    "candidates": [
+      {
+        "file": "mire-b-0.png",
+        "sha256": "5ed22a1129805f612a46f7f5032b1db722eb2a6391fce91f77faa485a488e293",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  },
+  "mire-c": {
+    "id": "mire-c",
+    "status": "DONE",
+    "endpoint": "create-image-pixflux",
+    "jobId": "sync-51db5507-89c1-4c14-a7cc-7eae44570720",
+    "submittedAt": "2026-11-27T09:13:15.353Z",
+    "request": {
+      "endpoint": "create-image-pixflux",
+      "layers": [
+        {
+          "source": "recipe subject",
+          "text": "Subject: a wide flat field of wet swamp mud seen from straight above, filling the whole image edge to edge: even murky olive-brown mud #5e5a36 with large soft, slightly greener mossy drifts #676a3a and slightly darker wet brown drifts #514c2e that blend gently into each other, many tiny short dark green flecks and a few small faint wet sheens of dark green water #4a5232 only a little darker than the mud, very calm, quiet and low in contrast, the same everywhere."
+        }
+      ],
+      "image_size": {
+        "width": 400,
+        "height": 400
+      },
+      "no_background": false,
+      "seed": 126107,
+      "shading": "flat shading",
+      "description": "Subject: a wide flat field of wet swamp mud seen from straight above, filling the whole image edge to edge: even murky olive-brown mud #5e5a36 with large soft, slightly greener mossy drifts #676a3a and slightly darker wet brown drifts #514c2e that blend gently into each other, many tiny short dark green flecks and a few small faint wet sheens of dark green water #4a5232 only a little darker than the mud, very calm, quiet and low in contrast, the same everywhere. Must not include: tiles, tile grid, bricks, plates, slabs, paving, cobblestones, lake, river, big pond, circles, rings, dots pattern, stripes pattern, lily pads, flowers, object, character, building, tree, rock, frame, border, horizon, sky, perspective, text."
+    },
+    "at": "2026-11-27T09:13:15.355Z",
+    "usageUsd": 0.010190524816513061,
+    "candidates": [
+      {
+        "file": "mire-c-0.png",
+        "sha256": "b7c51d4502792b5d86a6ad367dd9aa46acbe312487da0950e367166f3e24e84e",
+        "width": 400,
+        "height": 400
+      }
+    ]
+  }
+}

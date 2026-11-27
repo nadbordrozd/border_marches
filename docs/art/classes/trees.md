@@ -19,6 +19,7 @@ Studio set `art/sets/trees`, derived files in
 | Badlands | pinyon (3.2), juniper (2), gnarled (0.8), mesquite (0.45) | `badlands-a`, `badlands-b` |
 | Wasteland | deadoak (3), pine (2), leafy (1.6), snag (0.6) | `wasteland-a`, `wasteland-b` |
 | Snow (bzc.87) | spruce (5), fir (2.4), larch (2, in drifts only), birch (0.9) | set `winter-trees`: `snow-conifer-a`, `snow-mixed-a` |
+| Swamp (bzc.126) | cypress (4: flat-topped bald cypresses hung with moss), mossoak (3: gnarled oaks draped with moss), mangrove (2.2: round crowns on stilt roots), bush (1: low mossy trees), willow (1.6, in drifts only: pale weeping willows) | set `swamp-trees`: `willow-a`, `mangrove-a` (33 of 50 takes, 2 calls; plain conifer cones and thin-branched crowns rejected) |
 | Frosting (bzc.115) | frosted (4: pink frosting crowns on gingerbread trunks), cotton (3.4: cotton candy), lollipop (2), gumdrop (1: low bushes), cane (1.4, in drifts only: candy canes) | set `candy-trees`: `fluff-a`, `cane-a` (34 of 50 takes, 2 calls) |
 | Volcanic (bzc.125) | charred (4: black trees with ember cracks), ashen (2.2: ash-grey dead trees), cindersnag (1.2: broken trunks with ember tips), emberleaf (0.8: a few red-orange leaves); files in the wasteland folder, drawn only by the lava | set `volcanic-trees`: `charred-a` (19 of 25 takes, 1 call) |
 

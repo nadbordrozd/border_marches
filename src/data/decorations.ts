@@ -42,10 +42,11 @@ const T: Readonly<Record<string, DecorationGround>> = {
   n: "snow",
   d: "sand",
   f: "frosting",
+  m: "swamp",
 };
 
 /**
- * [id, name, terrains (letters g j s b w v n d f), "p" passable or "x" prop, cols,
+ * [id, name, terrains (letters g j s b w v n d f m), "p" passable or "x" prop, cols,
  * looks, text].
  */
 // prettier-ignore
@@ -59,9 +60,9 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["hedgehog", "Hedgehog", "g", "p", 1, 1, "A hedgehog, minding its own business."],
   ["autumn-leaves", "Autumn Leaves", "gs", "p", 1, 1, "A heap of fallen leaves."],
   ["clover", "Clover", "gj", "p", 1, 1, "Clover with a ladybird on it."],
-  ["dragonfly", "Dragonfly", "jg", "p", 1, 1, "A dragonfly darting over the undergrowth."],
+  ["dragonfly", "Dragonfly", "jgm", "p", 1, 1, "A dragonfly darting over the undergrowth."],
   ["tree-frog", "Tree Frog", "j", "p", 1, 1, "A tree frog, quite pleased with itself."],
-  ["swamp-reeds", "Swamp Reeds", "jg", "p", 1, 1, "Reeds and cattails from a wet hollow."],
+  ["swamp-reeds", "Swamp Reeds", "jgm", "p", 1, 1, "Reeds and cattails from a wet hollow."],
   ["jungle-flower", "Jungle Flower", "j", "p", 1, 1, "A big red flower lying on the jungle floor."],
   ["thistles", "Thistles", "sg", "p", 1, 1, "Purple thistles: pretty, prickly."],
   ["crow", "Crow", "sgwv", "p", 1, 1, "A crow watching the road."],
@@ -73,7 +74,7 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["scorpion", "Scorpion", "bwvd", "p", 1, 1, "A small scorpion with its tail up."],
   ["grave-marker", "Grave Marker", "w", "p", 1, 1, "A crooked plank over a forgotten grave."],
   ["dead-weeds", "Dead Weeds", "wv", "p", 1, 1, "Burnt, thorny weeds."],
-  ["toadstools", "Toadstools", "wj", "p", 1, 1, "Pale toadstools nobody should eat."],
+  ["toadstools", "Toadstools", "wjm", "p", 1, 1, "Pale toadstools nobody should eat."],
   ["broken-spear", "Broken Spear", "wv", "p", 1, 1, "A spear shaft from a battle long ago."],
   // Winter (bead bzc.87): snow only, so other grounds draw what they drew.
   ["arctic-hare", "Arctic Hare", "n", "p", 1, 2, "A white hare, nearly invisible until it moves."],
@@ -115,8 +116,8 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["buried-head", "Buried Head", "d", "x", 1, 2, "The head of a great statue, sunk to its chin in sand."],
   ["fallen-pillar", "Fallen Pillar", "d", "x", 2, 1, "A great pillar that fell and broke where it lay."],
   ["temple-ruin", "Temple Ruin", "d", "x", 2, 1, "A sandstone wall and a doorway to nowhere."],
-  ["hollow-stump", "Hollow Stump", "jw", "x", 1, 1, "The hollow stump of a giant tree."],
-  ["fallen-log", "Fallen Log", "gjw", "x", 2, 2, "A huge fallen trunk across the way."],
+  ["hollow-stump", "Hollow Stump", "jwm", "x", 1, 1, "The hollow stump of a giant tree."],
+  ["fallen-log", "Fallen Log", "gjwm", "x", 2, 2, "A huge fallen trunk across the way."],
   ["toppled-statue", "Toppled Statue", "gj", "x", 2, 2, "A stone king, fallen and broken."],
   ["beast-skeleton", "Beast Skeleton", "bswvd", "x", 2, 1, "The bones of a giant beast."],
   ["ruined-wall", "Ruined Wall", "jg", "x", 2, 1, "A stretch of ancient wall under creepers."],
@@ -175,6 +176,24 @@ const ROWS: readonly (readonly [string, string, string, "p" | "x", number, numbe
   ["scorched-skeleton", "Scorched Skeleton", "v", "x", 2, 1, "The scorched bones of a great horned beast."],
   ["basalt-wall", "Basalt Wall", "v", "x", 2, 1, "A row of basalt columns the lava left standing."],
   ["obsidian-ridge", "Obsidian Ridge", "v", "x", 2, 1, "A low ridge of black glass broken into chunks."],
+  // The swamp (bead bzc.126, set swamp-decorations): swamp only, so every
+  // other ground draws what it drew; the dragonfly, swamp reeds,
+  // toadstools, hollow stump and fallen log stand on it too.
+  ["lily-pads", "Water Lilies", "m", "p", 1, 2, "A lily pad in a wet hollow, one pink flower open."],
+  ["cattails", "Cattails", "m", "p", 1, 2, "Brown cattails nodding over the mud."],
+  ["glow-mushrooms", "Glowing Mushrooms", "m", "p", 1, 2, "Pale teal mushrooms that glow faintly after dark."],
+  ["will-o-wisp", "Will-o'-the-Wisp", "m", "p", 1, 2, "A ghostly light that drifts away when you follow it."],
+  ["frog-stone", "Frog on a Stone", "m", "p", 1, 2, "A fat frog on a mossy stone. It has seen things."],
+  ["bog-bubbles", "Bubbling Bog", "m", "p", 1, 2, "The mud heaves and a bubble bursts with a plop."],
+  ["heron", "Heron", "m", "p", 1, 2, "A grey heron on one leg, patient as a stone."],
+  ["bog-cotton", "Bog Cotton", "m", "p", 1, 2, "White tufts of bog cotton nodding in the damp air."],
+  ["swamp-turtle", "Swamp Turtle", "m", "p", 1, 2, "An olive turtle in no hurry at all."],
+  ["reed-skull", "Skull in the Reeds", "m", "p", 1, 2, "An old skull in the reeds. Best not to ask."],
+  ["fungus-stump", "Rotten Stump", "m", "x", 1, 2, "A rotten stump crusted with orange shelf fungi."],
+  ["mangrove-roots", "Mangrove Roots", "m", "x", 1, 2, "A tangle of arched mangrove roots, too thick to climb through."],
+  ["mossy-crag", "Mossy Crag", "m", "x", 1, 2, "A grey crag furred with moss and fungus."],
+  ["sunken-rowboat", "Sunken Rowboat", "m", "x", 2, 2, "An old rowboat, sunk in the mud with reeds through its hull."],
+  ["rotten-boardwalk", "Rotten Boardwalk", "m", "x", 2, 2, "A boardwalk of rotten planks that goes nowhere any more."],
 ];
 
 export const DECORATION_KINDS: readonly DecorationKind[] = ROWS.map(

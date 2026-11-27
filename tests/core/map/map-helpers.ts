@@ -24,6 +24,7 @@ const COST: Record<string, number> = {
   snow: 150,
   sand: 125,
   frosting: 125,
+  swamp: 175,
 };
 
 /** Walkable ground not covered by an object footprint. */

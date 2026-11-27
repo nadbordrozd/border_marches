@@ -169,6 +169,28 @@ Rejected on sight in this set: bright sulphur crystals and round sulphur
 heaps (gold and gem pickups), flat lava scribbles with no rock body,
 plain pumice pebbles (the rock doodads), single thin shards.
 
+### The swamp (bead bzc.126)
+
+Studio set `art/sets/swamp-decorations` (same recipes and crops as above;
+6 calls), swamp only, so every other ground decorates as before; the
+older dragonfly, swamp reeds, toadstools, hollow stump and fallen log also
+stand on the swamp. Passable, two looks each: `lily-pads` (Water Lilies),
+`cattails`, `glow-mushrooms`, `will-o-wisp` (Will-o'-the-Wisp: a ghost
+light with a trailing tail), `frog-stone` (Frog on a Stone),
+`bog-bubbles` (Bubbling Bog), `heron`, `bog-cotton`, `swamp-turtle` and
+`reed-skull` (Skull in the Reeds). Props, two looks each:
+`fungus-stump` (Rotten Stump), `mangrove-roots` and `mossy-crag` (1x1),
+`sunken-rowboat` and `rotten-boardwalk` (2x1). Living ones move
+(`LIVING_MOTION`): the wisp hovers, the frog and the heron breathe, the
+turtle creeps. The swamp gets a second sprinkle of its own passable
+decorations (`DECORATE.swampExtraShare`, its own random stream).
+
+Rejected on sight in this set: plain round glowing orbs (a magic pickup),
+round brown mud balls (pebbles or cannonballs), a plain mud mound (a
+molehill), a narrow carved bog idol (36 px: a one-cell prop must fill over
+half its cell), a plain hollow stump and round boulders (repeats), thin
+root lines and spiky planks (noise at 1x).
+
 ## Placement (bead bzc.72)
 
 The art-free kinds (id, name, line, grounds, passable, footprint, number of

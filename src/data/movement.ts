@@ -23,6 +23,11 @@ export const TERRAIN_MOVE_COST: Readonly<Record<Terrain, number | null>> = {
   // boots, as slow as the sand; 100 for Candy heroes, whose native
   // terrain it is.
   frosting: 125,
+  // The swamp (bead bzc.126): knee-deep mud and reeds, the slowest ground
+  // (175: a day of 1500 crosses about eight cells, against ten on the
+  // wasteland). Swamp zones never touch a start zone's home (tier 1 or
+  // deeper), and roads cross them at road cost.
+  swamp: 175,
   water: null,
 };
 

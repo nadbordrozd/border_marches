@@ -1264,7 +1264,16 @@ export class AdventureAi implements PlayerController {
         else if (verb === "treat") {
           const item = sweetShopStock(obj)[Number(arg)];
           v = 200 + (findArtifact(item ?? "")?.value ?? 0) / 10;
-        } else if (verb === "drill") {
+        }
+        // A Witch's Hut (bead bzc.126): a rank while a week's recruiting
+        // stays in the treasury; raising a skill it has before a new one.
+        else if (verb === "learn") {
+          if (gold >= 1500 + 4000)
+            v = hero.skills.some((s) => s.id === arg) ? 520 : 480;
+        }
+        // A Hag's Cauldron's brew: two in three bless, worth the risk.
+        else if (verb === "drink") v = 300;
+        else if (verb === "drill") {
           // A Drill (bead bzc.32) for the army's creatures, when the
           // treasury keeps a week of recruiting after it.
           const d = drills.find((x) => x.building === arg);

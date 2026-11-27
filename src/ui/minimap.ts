@@ -52,6 +52,9 @@ export const TERRAIN_COLOURS: Readonly<Record<Terrain, Rgb>> = {
   sand: [0xe0, 0xb8, 0x62],
   // Pale strawberry icing, apart from every other ground (bead bzc.115).
   frosting: [0xf0, 0xb8, 0xcc],
+  // Murky olive-brown mud, apart from the green jungle and grey wasteland
+  // (bead bzc.126).
+  swamp: [0x5e, 0x5c, 0x36],
   water: [0x2d, 0x5f, 0x9a],
 };
 const DEEP_WATER: Rgb = [0x1d, 0x3f, 0x72];

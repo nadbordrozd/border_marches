@@ -1,0 +1,102 @@
+{
+  "set": "grounds-swamp",
+  "bead": "border_marches-bzc.126",
+  "class": "grounds",
+  "exploration": false,
+  "_doc": "The swamp ground (bead bzc.126, docs/art/classes/grounds.md): murky green-brown mud with small dark puddles and reed tufts. Lessons of grounds-volcanic, -snow, -sand and -frosting: no chibi style layer, never the words texture or tile, a long-period base from pixflux at 400 x 400 (5 cells), no fragments at all. One accepted take, swappable by a later ground restyle (bead bzc.127). Recipes are never edited after generation: add a new id (new seed) instead. '@name' values come from shared.",
+  "shared": {
+    "flux": {
+      "shading": "flat shading"
+    },
+    "mud": "Subject: a wide flat field of soft wet swamp mud seen from straight above, filling the whole image edge to edge: murky olive-brown mud #5e5a36 with large soft, slightly greener drifts #67693a and slightly darker brown drifts #4e4a2c that blend gently into each other, a few small irregular shallow puddles of dark green water #3a4630 scattered far apart, and a few tiny tufts of short olive reeds #7a7e40, very calm, quiet and low in contrast, the same everywhere.",
+    "bog": "Subject: boggy marsh ground seen from directly above, filling the whole image edge to edge: dull olive-green moss #5f6436 and wet brown mud #514a2e in soft irregular patches that blend into each other, many tiny short reed and sedge tufts #7c8044 scattered evenly, a few very small dark still pools #38432e, very calm, quiet and low in contrast, no single big pool, no spot of light, the same everywhere.",
+    "mire": "Subject: a wide flat field of wet swamp mud seen from straight above, filling the whole image edge to edge: even murky olive-brown mud #5e5a36 with large soft, slightly greener mossy drifts #676a3a and slightly darker wet brown drifts #514c2e that blend gently into each other, many tiny short dark green flecks and a few small faint wet sheens of dark green water #4a5232 only a little darker than the mud, very calm, quiet and low in contrast, the same everywhere.",
+    "marsh": "Subject: a wide flat marsh of wet mud seen from straight above, filling the whole image edge to edge: even murky green-brown mud #5a5834 with faint thin wavy darker lines #4a4830 like wet ripples running in many slightly different directions, a few small dark puddles #39432f and a few tiny reed tufts #78793e, very calm and low in contrast, no single big swirl, no light spot, the same everywhere."
+  },
+  "defaults": {
+    "endpoint": "create-image-pixflux",
+    "fragments": [],
+    "noBackground": false,
+    "options": "@flux",
+    "negative": "tiles, tile grid, bricks, plates, slabs, paving, cobblestones, lake, river, big pond, circles, rings, dots pattern, stripes pattern, lily pads, flowers, object, character, building, tree, rock, frame, border, horizon, sky, perspective, text"
+  },
+  "recipes": [
+    {
+      "id": "mud-a",
+      "concept": "SWAMP MUD (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 126101,
+      "subject": "@mud"
+    },
+    {
+      "id": "mud-b",
+      "concept": "SWAMP MUD (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 126102,
+      "subject": "@mud"
+    },
+    {
+      "id": "bog-a",
+      "concept": "SWAMP BOG MOSS (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 126103,
+      "subject": "@bog"
+    },
+    {
+      "id": "marsh-a",
+      "concept": "SWAMP MARSH RIPPLES (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 126104,
+      "subject": "@marsh"
+    },
+    {
+      "id": "mire-a",
+      "concept": "SWAMP MIRE, NO TUFTS (pixflux 5-cell; mud-a drew stamped reed clumps and one dark blob)",
+      "width": 400,
+      "height": 400,
+      "seed": 126105,
+      "subject": "@mire"
+    },
+    {
+      "id": "mire-b",
+      "concept": "SWAMP MIRE, NO TUFTS (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 126106,
+      "subject": "@mire"
+    },
+    {
+      "id": "mire-c",
+      "concept": "SWAMP MIRE, NO TUFTS (pixflux 5-cell)",
+      "width": 400,
+      "height": 400,
+      "seed": 126107,
+      "subject": "@mire"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/grounds/swamp.png",
+      "from": "mire-a#0"
+    },
+    {
+      "path": "public/assets/terrain/grounds/swamp-swatch.png",
+      "from": "mire-a#0",
+      "width": 80,
+      "height": 80,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 160,
+          "y": 160,
+          "width": 80,
+          "height": 80
+        }
+      ]
+    }
+  ]
+}

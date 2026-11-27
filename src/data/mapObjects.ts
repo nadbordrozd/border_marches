@@ -185,6 +185,8 @@ const NEVER_GUARDED: ReadonlySet<ObjectTypeId> = new Set<ObjectTypeId>([
   "brimstone-pit",
   // Candy sites (bead bzc.124): the cottage's guard is inside.
   "gingerbread-cottage",
+  // Swamp (bead bzc.126): the temple's guard is inside.
+  "drowned-temple",
 ]);
 
 /**
@@ -332,6 +334,14 @@ export const VOLCANIC_ROWS: readonly MapObjectRow[] = (
  */
 export const CANDY_ROWS: readonly MapObjectRow[] = (
   ["gingerbread-cottage", "sugar-fountain", "sweet-shop"] as const
+).map((t) => catalogueRow(OBJECT_TYPES[t]));
+
+/**
+ * Rows of the swamp's sites (bead bzc.126), placed only in swamp zones by
+ * the generator's swamp pass (src/core/map/gen/swamp.ts).
+ */
+export const SWAMP_ROWS: readonly MapObjectRow[] = (
+  ["witchs-hut", "drowned-temple", "hags-cauldron"] as const
 ).map((t) => catalogueRow(OBJECT_TYPES[t]));
 
 export const MAP_OBJECT_ROW_BY_ID: Readonly<Record<string, MapObjectRow>> =

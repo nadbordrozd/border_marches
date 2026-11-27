@@ -1,0 +1,762 @@
+{
+  "small-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a lily pad with a pink water lily, reads at 1x",
+    "at": "2026-11-27T09:22:24.219Z"
+  },
+  "small-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "a lily pad with a pink water lily, reads at 1x",
+    "at": "2026-11-27T09:22:24.313Z"
+  },
+  "small-a#8": {
+    "verdict": "ACCEPTED",
+    "notes": "a clump of brown cattails on green stalks",
+    "at": "2026-11-27T09:22:24.411Z"
+  },
+  "small-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "a clump of brown cattails on green stalks",
+    "at": "2026-11-27T09:22:24.506Z"
+  },
+  "small-a#16": {
+    "verdict": "ACCEPTED",
+    "notes": "a cluster of pale teal swamp mushrooms",
+    "at": "2026-11-27T09:22:24.607Z"
+  },
+  "small-a#20": {
+    "verdict": "ACCEPTED",
+    "notes": "a cluster of pale teal swamp mushrooms",
+    "at": "2026-11-27T09:22:24.699Z"
+  },
+  "small-a#59": {
+    "verdict": "ACCEPTED",
+    "notes": "a pale green-blue wisp with a trailing tail: a ghost light, not an orb pickup",
+    "at": "2026-11-27T09:22:24.797Z"
+  },
+  "small-a#60": {
+    "verdict": "ACCEPTED",
+    "notes": "a pale green-blue wisp with a trailing tail: a ghost light, not an orb pickup",
+    "at": "2026-11-27T09:22:24.901Z"
+  },
+  "small-a#32": {
+    "verdict": "ACCEPTED",
+    "notes": "a fat green frog on a mossy stone",
+    "at": "2026-11-27T09:22:25.000Z"
+  },
+  "small-a#37": {
+    "verdict": "ACCEPTED",
+    "notes": "a fat green frog on a mossy stone",
+    "at": "2026-11-27T09:22:25.100Z"
+  },
+  "small-b#25": {
+    "verdict": "ACCEPTED",
+    "notes": "a mud mound bursting with a bubble, droplets flying",
+    "at": "2026-11-27T09:22:25.206Z"
+  },
+  "small-b#49": {
+    "verdict": "ACCEPTED",
+    "notes": "a mud mound bursting with a bubble, droplets flying",
+    "at": "2026-11-27T09:22:25.315Z"
+  },
+  "small-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "a grey heron standing on one leg",
+    "at": "2026-11-27T09:22:25.429Z"
+  },
+  "small-b#37": {
+    "verdict": "ACCEPTED",
+    "notes": "a grey heron standing on one leg",
+    "at": "2026-11-27T09:22:25.547Z"
+  },
+  "small-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "white bog-cotton tufts on short stems",
+    "at": "2026-11-27T09:22:25.663Z"
+  },
+  "small-b#29": {
+    "verdict": "ACCEPTED",
+    "notes": "white bog-cotton tufts on short stems",
+    "at": "2026-11-27T09:22:25.787Z"
+  },
+  "small-b#12": {
+    "verdict": "ACCEPTED",
+    "notes": "an olive swamp turtle",
+    "at": "2026-11-27T09:22:25.903Z"
+  },
+  "small-b#30": {
+    "verdict": "ACCEPTED",
+    "notes": "an olive swamp turtle",
+    "at": "2026-11-27T09:22:26.028Z"
+  },
+  "small-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "an old skull half hidden in reeds",
+    "at": "2026-11-27T09:22:26.144Z"
+  },
+  "small-b#23": {
+    "verdict": "ACCEPTED",
+    "notes": "an old skull half hidden in reeds",
+    "at": "2026-11-27T09:22:26.279Z"
+  },
+  "props-1x1-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a rotten mossy stump with orange shelf fungi",
+    "at": "2026-11-27T09:22:26.402Z"
+  },
+  "props-1x1-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "a rotten mossy stump with orange shelf fungi",
+    "at": "2026-11-27T09:22:26.514Z"
+  },
+  "props-1x1-a#4": {
+    "verdict": "REJECTED",
+    "notes": "a narrow idol, 36 px: a one-cell prop must fill over half its cell",
+    "at": "2026-11-27T09:24:23.226Z"
+  },
+  "props-1x1-a#7": {
+    "verdict": "REJECTED",
+    "notes": "a narrow idol, 37 px: a one-cell prop must fill over half its cell",
+    "at": "2026-11-27T09:24:23.373Z"
+  },
+  "props-1x1-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "a tangle of thick arched mangrove roots",
+    "at": "2026-11-27T09:22:26.838Z"
+  },
+  "props-1x1-a#11": {
+    "verdict": "ACCEPTED",
+    "notes": "a tangle of thick arched mangrove roots",
+    "at": "2026-11-27T09:22:26.948Z"
+  },
+  "props-1x1-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy grey rock crag",
+    "at": "2026-11-27T09:22:27.053Z"
+  },
+  "props-1x1-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy grey rock crag",
+    "at": "2026-11-27T09:22:27.175Z"
+  },
+  "props-2x1-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a wrecked rowboat on its side, reeds through the hull",
+    "at": "2026-11-27T09:22:27.303Z"
+  },
+  "props-2x1-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "a wrecked rowboat on its side, reeds through the hull",
+    "at": "2026-11-27T09:22:27.440Z"
+  },
+  "small-a#1": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:27.563Z"
+  },
+  "small-a#2": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:27.689Z"
+  },
+  "small-a#3": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:27.822Z"
+  },
+  "small-a#4": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:27.946Z"
+  },
+  "small-a#5": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:28.071Z"
+  },
+  "small-a#6": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:28.194Z"
+  },
+  "small-a#9": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:28.312Z"
+  },
+  "small-a#10": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:28.448Z"
+  },
+  "small-a#11": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:28.566Z"
+  },
+  "small-a#12": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:28.755Z"
+  },
+  "small-a#14": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:28.941Z"
+  },
+  "small-a#15": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:29.145Z"
+  },
+  "small-a#17": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:29.305Z"
+  },
+  "small-a#18": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:29.438Z"
+  },
+  "small-a#19": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:29.551Z"
+  },
+  "small-a#21": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:29.667Z"
+  },
+  "small-a#22": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:29.792Z"
+  },
+  "small-a#23": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:29.907Z"
+  },
+  "small-a#24": {
+    "verdict": "REJECTED",
+    "notes": "a plain round glowing orb: reads as a magic pickup",
+    "at": "2026-11-27T09:22:30.014Z"
+  },
+  "small-a#25": {
+    "verdict": "REJECTED",
+    "notes": "a plain round glowing orb: reads as a magic pickup",
+    "at": "2026-11-27T09:22:30.125Z"
+  },
+  "small-a#26": {
+    "verdict": "REJECTED",
+    "notes": "a plain round glowing orb: reads as a magic pickup",
+    "at": "2026-11-27T09:22:30.243Z"
+  },
+  "small-a#27": {
+    "verdict": "REJECTED",
+    "notes": "a plain round glowing orb: reads as a magic pickup",
+    "at": "2026-11-27T09:22:30.349Z"
+  },
+  "small-a#28": {
+    "verdict": "REJECTED",
+    "notes": "a plain round glowing orb: reads as a magic pickup",
+    "at": "2026-11-27T09:22:30.457Z"
+  },
+  "small-a#29": {
+    "verdict": "REJECTED",
+    "notes": "a plain round glowing orb: reads as a magic pickup",
+    "at": "2026-11-27T09:22:30.565Z"
+  },
+  "small-a#30": {
+    "verdict": "REJECTED",
+    "notes": "a plain round glowing orb: reads as a magic pickup",
+    "at": "2026-11-27T09:22:30.671Z"
+  },
+  "small-a#31": {
+    "verdict": "REJECTED",
+    "notes": "a plain round glowing orb: reads as a magic pickup",
+    "at": "2026-11-27T09:22:30.777Z"
+  },
+  "small-a#33": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:30.889Z"
+  },
+  "small-a#34": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:31.003Z"
+  },
+  "small-a#35": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:31.130Z"
+  },
+  "small-a#36": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:31.247Z"
+  },
+  "small-a#38": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:31.366Z"
+  },
+  "small-a#39": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:31.485Z"
+  },
+  "small-a#40": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:31.596Z"
+  },
+  "small-a#41": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:31.701Z"
+  },
+  "small-a#42": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:31.800Z"
+  },
+  "small-a#43": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:31.898Z"
+  },
+  "small-a#44": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:31.994Z"
+  },
+  "small-a#45": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:32.090Z"
+  },
+  "small-a#46": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:32.185Z"
+  },
+  "small-a#47": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:32.279Z"
+  },
+  "small-a#48": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:32.368Z"
+  },
+  "small-a#49": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:32.457Z"
+  },
+  "small-a#50": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:32.556Z"
+  },
+  "small-a#51": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:32.655Z"
+  },
+  "small-a#52": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:32.745Z"
+  },
+  "small-a#53": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:32.833Z"
+  },
+  "small-a#54": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:32.923Z"
+  },
+  "small-a#55": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:33.022Z"
+  },
+  "small-a#56": {
+    "verdict": "REJECTED",
+    "notes": "a plain round glowing orb: reads as a magic pickup",
+    "at": "2026-11-27T09:22:33.117Z"
+  },
+  "small-a#57": {
+    "verdict": "REJECTED",
+    "notes": "a lumpy wisp that reads as a blob",
+    "at": "2026-11-27T09:22:33.208Z"
+  },
+  "small-a#58": {
+    "verdict": "REJECTED",
+    "notes": "a lumpy wisp that reads as a blob",
+    "at": "2026-11-27T09:22:33.296Z"
+  },
+  "small-a#61": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:33.387Z"
+  },
+  "small-a#62": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:33.502Z"
+  },
+  "small-a#63": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:33.608Z"
+  },
+  "small-b#0": {
+    "verdict": "REJECTED",
+    "notes": "round brown balls: read as pebbles or cannonballs, not bubbles",
+    "at": "2026-11-27T09:22:33.714Z"
+  },
+  "small-b#1": {
+    "verdict": "REJECTED",
+    "notes": "round brown balls: read as pebbles or cannonballs, not bubbles",
+    "at": "2026-11-27T09:22:33.820Z"
+  },
+  "small-b#2": {
+    "verdict": "REJECTED",
+    "notes": "a plain mud mound with no bubble: reads as a molehill",
+    "at": "2026-11-27T09:22:33.920Z"
+  },
+  "small-b#5": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:34.015Z"
+  },
+  "small-b#6": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:34.111Z"
+  },
+  "small-b#8": {
+    "verdict": "REJECTED",
+    "notes": "round brown balls: read as pebbles or cannonballs, not bubbles",
+    "at": "2026-11-27T09:22:34.205Z"
+  },
+  "small-b#9": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:34.295Z"
+  },
+  "small-b#10": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:34.390Z"
+  },
+  "small-b#11": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:34.482Z"
+  },
+  "small-b#13": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:34.573Z"
+  },
+  "small-b#14": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:34.664Z"
+  },
+  "small-b#15": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted reed skulls",
+    "at": "2026-11-27T09:22:34.755Z"
+  },
+  "small-b#16": {
+    "verdict": "REJECTED",
+    "notes": "round brown balls: read as pebbles or cannonballs, not bubbles",
+    "at": "2026-11-27T09:22:34.845Z"
+  },
+  "small-b#17": {
+    "verdict": "REJECTED",
+    "notes": "a plain mud mound with no bubble: reads as a molehill",
+    "at": "2026-11-27T09:22:34.935Z"
+  },
+  "small-b#18": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:35.027Z"
+  },
+  "small-b#19": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:35.121Z"
+  },
+  "small-b#20": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:35.211Z"
+  },
+  "small-b#21": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:35.307Z"
+  },
+  "small-b#22": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:35.398Z"
+  },
+  "small-b#24": {
+    "verdict": "REJECTED",
+    "notes": "round brown balls: read as pebbles or cannonballs, not bubbles",
+    "at": "2026-11-27T09:22:35.487Z"
+  },
+  "small-b#26": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:35.575Z"
+  },
+  "small-b#27": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:35.671Z"
+  },
+  "small-b#28": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:35.762Z"
+  },
+  "small-b#31": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted reed skulls",
+    "at": "2026-11-27T09:22:35.854Z"
+  },
+  "small-b#32": {
+    "verdict": "REJECTED",
+    "notes": "round brown balls: read as pebbles or cannonballs, not bubbles",
+    "at": "2026-11-27T09:22:35.946Z"
+  },
+  "small-b#33": {
+    "verdict": "REJECTED",
+    "notes": "a plain mud mound with no bubble: reads as a molehill",
+    "at": "2026-11-27T09:22:36.046Z"
+  },
+  "small-b#34": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:36.147Z"
+  },
+  "small-b#35": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:36.252Z"
+  },
+  "small-b#36": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:36.352Z"
+  },
+  "small-b#38": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:36.447Z"
+  },
+  "small-b#39": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted reed skulls",
+    "at": "2026-11-27T09:22:36.547Z"
+  },
+  "small-b#40": {
+    "verdict": "REJECTED",
+    "notes": "round brown balls: read as pebbles or cannonballs, not bubbles",
+    "at": "2026-11-27T09:22:36.640Z"
+  },
+  "small-b#41": {
+    "verdict": "REJECTED",
+    "notes": "a plain mud mound with no bubble: reads as a molehill",
+    "at": "2026-11-27T09:22:36.732Z"
+  },
+  "small-b#42": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:36.825Z"
+  },
+  "small-b#43": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:36.919Z"
+  },
+  "small-b#44": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:37.010Z"
+  },
+  "small-b#45": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:37.105Z"
+  },
+  "small-b#46": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:37.197Z"
+  },
+  "small-b#47": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted reed skulls",
+    "at": "2026-11-27T09:22:37.295Z"
+  },
+  "small-b#48": {
+    "verdict": "REJECTED",
+    "notes": "round brown balls: read as pebbles or cannonballs, not bubbles",
+    "at": "2026-11-27T09:22:37.404Z"
+  },
+  "small-b#50": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:37.500Z"
+  },
+  "small-b#51": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:37.588Z"
+  },
+  "small-b#52": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:37.678Z"
+  },
+  "small-b#53": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:37.766Z"
+  },
+  "small-b#54": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:37.854Z"
+  },
+  "small-b#55": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted reed skulls",
+    "at": "2026-11-27T09:22:37.946Z"
+  },
+  "small-b#56": {
+    "verdict": "REJECTED",
+    "notes": "round brown balls: read as pebbles or cannonballs, not bubbles",
+    "at": "2026-11-27T09:22:38.040Z"
+  },
+  "small-b#57": {
+    "verdict": "REJECTED",
+    "notes": "a plain mud mound with no bubble: reads as a molehill",
+    "at": "2026-11-27T09:22:38.135Z"
+  },
+  "small-b#58": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:38.225Z"
+  },
+  "small-b#59": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:38.314Z"
+  },
+  "small-b#60": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:38.406Z"
+  },
+  "small-b#61": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:38.511Z"
+  },
+  "small-b#62": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of an accepted look of the same subject",
+    "at": "2026-11-27T09:22:38.611Z"
+  },
+  "small-b#63": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted reed skulls",
+    "at": "2026-11-27T09:22:38.710Z"
+  },
+  "props-1x1-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a plain hollow stump: repeats the jungle hollow stump",
+    "at": "2026-11-27T09:22:38.807Z"
+  },
+  "props-1x1-a#1": {
+    "verdict": "REJECTED",
+    "notes": "a tall thin snag: reads as a dead tree",
+    "at": "2026-11-27T09:22:38.909Z"
+  },
+  "props-1x1-a#5": {
+    "verdict": "REJECTED",
+    "notes": "a hollow screaming log face: too spooky and thin",
+    "at": "2026-11-27T09:22:39.007Z"
+  },
+  "props-1x1-a#6": {
+    "verdict": "REJECTED",
+    "notes": "a near copy of the accepted idols",
+    "at": "2026-11-27T09:22:39.105Z"
+  },
+  "props-1x1-a#8": {
+    "verdict": "REJECTED",
+    "notes": "thin root lines turn to noise at 1x",
+    "at": "2026-11-27T09:22:39.199Z"
+  },
+  "props-1x1-a#10": {
+    "verdict": "REJECTED",
+    "notes": "a root arch reads as a gate",
+    "at": "2026-11-27T09:22:39.294Z"
+  },
+  "props-1x1-a#12": {
+    "verdict": "REJECTED",
+    "notes": "a plain round boulder: repeats the big boulder",
+    "at": "2026-11-27T09:22:39.385Z"
+  },
+  "props-1x1-a#13": {
+    "verdict": "REJECTED",
+    "notes": "a pile of round stones: repeats the big boulder",
+    "at": "2026-11-27T09:22:39.478Z"
+  },
+  "props-2x1-a#2": {
+    "verdict": "REJECTED",
+    "notes": "the boat broken in two reads as two props",
+    "at": "2026-11-27T09:22:39.576Z"
+  },
+  "props-2x1-a#3": {
+    "verdict": "REJECTED",
+    "notes": "narrow and diagonal: does not fill two cells",
+    "at": "2026-11-27T09:22:39.670Z"
+  },
+  "props-2x1-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a broken grey boardwalk on crooked posts with a lantern: reads as one long prop",
+    "at": "2026-11-27T09:23:29.474Z"
+  },
+  "props-2x1-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a broken boardwalk with a gap and a lantern post",
+    "at": "2026-11-27T09:23:29.639Z"
+  },
+  "props-2x1-b#1": {
+    "verdict": "REJECTED",
+    "notes": "a loose broken piece beside it reads as two props",
+    "at": "2026-11-27T09:23:29.776Z"
+  },
+  "props-2x1-b#3": {
+    "verdict": "REJECTED",
+    "notes": "spiky plank ends and thin posts turn to noise at 1x",
+    "at": "2026-11-27T09:23:29.899Z"
+  }
+}

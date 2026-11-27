@@ -90,6 +90,10 @@ const KIND_WEIGHTS: Readonly<
   // sprinkle-coloured flowers; its decorations (gumdrops, sprinkles,
   // cupcakes) are the detail. No bones, cracks or puddles on the icing.
   frosting: { tree: 1.2, rock: 1, bush: 0.8, flowers: 1 },
+  // Swamp (bead bzc.126): olive bushes, lone mossy trees, a few stones and
+  // dark puddles; its decorations (cattails, lily pads, frogs) are the
+  // detail. No bones or cracks in the mud.
+  swamp: { bush: 2.2, tree: 1.4, rock: 1, puddle: 1, flowers: 0.6 },
 };
 
 const FLAT: ReadonlySet<string> = new Set(["flowers", "puddle", "crack"]);
@@ -109,6 +113,8 @@ export const DOODAD_DENSITY: Readonly<Record<GroundTerrain, number>> = {
   sand: 0.6,
   // Smooth icing: sparse, so the frosting stays calm.
   frosting: 0.6,
+  // Thick with reeds and bushes, but calm enough for the mud to read.
+  swamp: 1,
 };
 
 /** Share of each ground's doodads drawn from the code-drawn placeholders. */

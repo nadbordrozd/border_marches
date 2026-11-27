@@ -160,6 +160,22 @@ const LOOKS: Readonly<Record<string, readonly (readonly [number, number])[]>> = 
   "scorched-skeleton": [[124, 53]],
   "basalt-wall": [[128, 62]],
   "obsidian-ridge": [[128, 55]],
+  // The swamp (bead bzc.126, set swamp-decorations).
+  "lily-pads": [[28, 21], [28, 25]],
+  "cattails": [[20, 28], [22, 28]],
+  "glow-mushrooms": [[24, 24], [24, 25]],
+  "will-o-wisp": [[21, 21], [25, 18]],
+  "frog-stone": [[24, 24], [24, 25]],
+  "bog-bubbles": [[25, 24], [24, 22]],
+  "heron": [[21, 27], [21, 27]],
+  "bog-cotton": [[22, 24], [22, 22]],
+  "swamp-turtle": [[24, 15], [24, 16]],
+  "reed-skull": [[25, 24], [25, 24]],
+  "fungus-stump": [[63, 56], [62, 58]],
+  "mangrove-roots": [[62, 55], [61, 63]],
+  "mossy-crag": [[60, 61], [62, 61]],
+  "sunken-rowboat": [[82, 58], [83, 56]],
+  "rotten-boardwalk": [[128, 63], [127, 62]],
 };
 
 export const DECORATIONS: readonly DecorationDef[] = DECORATION_KINDS.map(

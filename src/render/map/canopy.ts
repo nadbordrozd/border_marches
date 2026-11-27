@@ -152,6 +152,9 @@ export const CANOPY_GROUND: Readonly<Record<GroundTerrain, CanopyGround>> = {
   // Candy groves (bead bzc.115): cotton candy and frosted crowns pack like
   // the green woods; a light shade, so the gaps read as icing in shade.
   frosting: { spacing: 0.9, tint: 0.75 },
+  // Swamp groves (bead bzc.126): mossy willows, cypresses and mangroves
+  // crowd like the jungle's, with a deep shade like a wet wood.
+  swamp: { spacing: 0.88, tint: 1.2 },
 };
 
 /** Per-cell facts of the canopy, computed once per map. */
@@ -179,6 +182,7 @@ const GROUNDS: readonly GroundTerrain[] = [
   "snow",
   "sand",
   "frosting",
+  "swamp",
 ];
 
 /** The canopy facts of a map; `featured` are the cells under objects. */

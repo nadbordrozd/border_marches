@@ -39,6 +39,7 @@ import {
   DRILL_YARD_MARKUP,
   EMBER_BRAND,
   FORGE_COST,
+  HAG_BLESSING_SIXTHS,
   HUNTERS_LODGE_MP,
   MAX_HEROES,
   OASIS_MP,
@@ -49,6 +50,7 @@ import {
   STABLES_MP,
   SUGAR_RUSH_SPEED,
   SUN_TEMPLE_ATTACK,
+  WITCH_HUT_PRICE,
   type ObjectTypeId,
   type Prize,
   type Quest,
@@ -719,6 +721,36 @@ function sphinxGift(
 }
 
 // ---------------------------------------------------------------------------
+// The swamp (bead bzc.126)
+
+/** The two skills a Witch's Hut teaches (its seeded `data.skills`). */
+export function witchSkills(obj: MapObject): string[] {
+  const raw = obj.data["skills"];
+  return Array.isArray(raw)
+    ? raw.filter((s): s is string => typeof s === "string" && !!findSkill(s))
+    : [];
+}
+
+/** What a Hag's Cauldron brews for one hero: a stat for good, or her curse. */
+export type HagBrew = { kind: "blessing"; stat: Stat } | { kind: "curse" };
+
+/**
+ * The brew a hero gets from a Hag's Cauldron: fixed by the game seed, the
+ * cauldron and the hero, so it cannot be rerolled by reloading; four times
+ * in six (HAG_BLESSING_SIXTHS) +1 to a stat, otherwise the curse.
+ */
+export function hagBrew(
+  state: GameState,
+  obj: MapObject,
+  hero: HeroState,
+): HagBrew {
+  const rng = createRng(deriveSeed(state.seed, `hag:${obj.id}`, hero.id));
+  if (rng.int(0, 5) < HAG_BLESSING_SIXTHS)
+    return { kind: "blessing", stat: rng.pick(STATS) };
+  return { kind: "curse" };
+}
+
+// ---------------------------------------------------------------------------
 // The Sweet Shop (bead bzc.124)
 
 /** A Sweet Shop's potions (artifact ids), fixed at generation. */
@@ -907,6 +939,29 @@ export function siteOptions(
       });
       break;
     }
+    case "witchs-hut": {
+      if (used(state, obj, hero)) break;
+      const ok =
+        player !== undefined && canAfford(player.resources, WITCH_HUT_PRICE);
+      for (const skill of witchSkills(obj)) {
+        const have = hero.skills.find((x) => x.id === skill)?.rank ?? 0;
+        const why = skillRefusal(hero, skill);
+        out.push({
+          id: `learn:${skill}`,
+          label: `Learn ${findSkill(skill)?.name ?? skill} rank ${have + 1} for ${prizeText(WITCH_HUT_PRICE)}`,
+          ...(why !== null
+            ? { disabled: why }
+            : ok
+              ? {}
+              : { disabled: "not enough resources" }),
+        });
+      }
+      break;
+    }
+    case "hags-cauldron":
+      if (used(state, obj, hero)) break;
+      out.push({ id: "drink", label: "Drink the brew" });
+      break;
     case "sphinx":
       if (used(state, obj, hero)) break;
       sphinxRiddle(obj, hero).answers.forEach((a, i) => {
@@ -1258,6 +1313,21 @@ export function visitSite(
       );
       return null;
     }
+    // --- Swamp sites (bead bzc.126) ------------------------------------
+    case "witchs-hut": {
+      if (already) break;
+      const names = witchSkills(obj).map((s) => findSkill(s)?.name ?? s);
+      offer(
+        `Witch's Hut: "${names.join(" or ")}? One rank, dearie, for ${prizeText(WITCH_HUT_PRICE)}."`,
+      );
+      return null;
+    }
+    case "hags-cauldron":
+      if (already) break;
+      offer(
+        "Hag's Cauldron: the hag ladles out a steaming green brew. Two times in three it blesses; otherwise it curses.",
+      );
+      return null;
     case "sun-temple": {
       const added = addBuff(hero, "sun-temple");
       say(
@@ -1416,7 +1486,8 @@ export function visitSite(
     case "pyramid":
     case "sunken-tomb":
     case "gingerbread-cottage":
-    case "brimstone-pit": {
+    case "brimstone-pit":
+    case "drowned-temple": {
       if (s0.done === true) {
         say(events, hero, obj, `${def.name}: already plundered.`);
         return null;
@@ -2129,6 +2200,41 @@ export function useSite(
       );
       break;
     }
+    case "learn": {
+      player.resources = subtractResources(player.resources, WITCH_HUT_PRICE);
+      markUsed(next, obj, hero);
+      addSkill(hero, arg, events);
+      const rank = hero.skills.find((x) => x.id === arg)?.rank ?? 1;
+      say(
+        events,
+        hero,
+        obj,
+        `Witch's Hut: learns ${findSkill(arg)?.name ?? arg} rank ${rank}.`,
+      );
+      break;
+    }
+    case "drink": {
+      const brew = hagBrew(next, obj, hero);
+      markUsed(next, obj, hero);
+      if (brew.kind === "blessing") {
+        raiseStat(hero, brew.stat, 1, events);
+        say(
+          events,
+          hero,
+          obj,
+          `Hag's Cauldron: a blessing! +1 ${STAT_NAME[brew.stat]}.`,
+        );
+      } else {
+        addBuff(hero, "hags-curse");
+        say(
+          events,
+          hero,
+          obj,
+          "Hag's Cauldron: a curse! -1 Morale and -1 Luck until the next battle ends.",
+        );
+      }
+      break;
+    }
     case "give": {
       const a = hero.backpack[Number(arg)];
       if (a === undefined) return fail("bad-item", "no such item");
@@ -2299,6 +2405,18 @@ export function objectValueFor(
   );
   if (heroes.length === 0) return 0;
   const anyUnused = heroes.some((h) => !used(state, obj, h));
+  if (t === "witchs-hut") {
+    // A paid rank (bead bzc.126): half its value is what is left after the
+    // price, and only while the treasury can pay and a hero can learn.
+    const p = findPlayer(state, player);
+    if (p === undefined || !canAfford(p.resources, WITCH_HUT_PRICE)) return 0;
+    const can = heroes.some(
+      (h) =>
+        !used(state, obj, h) &&
+        witchSkills(obj).some((s) => skillRefusal(h, s) === null),
+    );
+    return can ? Math.round(base / 2) : 0;
+  }
   switch (def.reset) {
     case "flag": {
       if (s.owner !== player) {
@@ -2547,6 +2665,7 @@ export function describeSite(
     case "sunken-tomb":
     case "gingerbread-cottage":
     case "brimstone-pit":
+    case "drowned-temple":
       what =
         t === "keepers-vault"
           ? `${def.text} Each treasure: a Marvel piece, a Wonder and 5000 gold.`
@@ -2562,6 +2681,12 @@ export function describeSite(
     case "prison":
       what = `${def.text} The prisoner is level ${num(obj, "level", 3)}.`;
       break;
+    case "witchs-hut": {
+      const names = witchSkills(obj).map((s) => findSkill(s)?.name ?? s);
+      if (names.length > 0)
+        what = `For ${prizeText(WITCH_HUT_PRICE)} the witch teaches ${names.join(" or ")} (the hero's choice): one more rank if the hero has the skill, rank 1 if it has a free skill slot.`;
+      break;
+    }
     case "sphinx":
       what =
         str(obj, "gift") === "skill"

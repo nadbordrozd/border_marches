@@ -1,0 +1,122 @@
+{
+  "witch-hut-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "a chunky crooked shack on stilts with glowing windows, a ladder and hanging herbs: reads as a witch's hut at 1x",
+    "at": "2026-11-27T09:26:49.124Z"
+  },
+  "ruins-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "tilted, sinking mossy temple ruins with a stone face over a dark door: a drowned bank",
+    "at": "2026-11-27T09:26:49.605Z"
+  },
+  "cauldron-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a black cauldron over a fire, bubbling green brew, a skull and herbs: chunky, reads at 1x",
+    "at": "2026-11-27T09:26:50.053Z"
+  },
+  "witch-hut-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a good hut, but its two chimneys stick out past the roof",
+    "at": "2026-11-27T09:26:50.338Z"
+  },
+  "witch-hut-a#1": {
+    "verdict": "REJECTED",
+    "notes": "a tall cross-braced tower: reads as a watchtower",
+    "at": "2026-11-27T09:26:50.539Z"
+  },
+  "witch-hut-a#2": {
+    "verdict": "REJECTED",
+    "notes": "a good hut; take 3 is chunkier with lit windows",
+    "at": "2026-11-27T09:26:50.774Z"
+  },
+  "ruins-a#0": {
+    "verdict": "REJECTED",
+    "notes": "upright and dry: reads as a desert tomb, not drowned",
+    "at": "2026-11-27T09:26:51.081Z"
+  },
+  "ruins-a#2": {
+    "verdict": "REJECTED",
+    "notes": "a domed ruin reads as an observatory",
+    "at": "2026-11-27T09:26:51.481Z"
+  },
+  "ruins-a#3": {
+    "verdict": "REJECTED",
+    "notes": "a square stepped tomb repeats the Sunken Tomb",
+    "at": "2026-11-27T09:26:51.912Z"
+  },
+  "cauldron-a#1": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:52.268Z"
+  },
+  "cauldron-a#2": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:52.580Z"
+  },
+  "cauldron-a#3": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:52.745Z"
+  },
+  "cauldron-a#4": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:53.067Z"
+  },
+  "cauldron-a#5": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:53.414Z"
+  },
+  "cauldron-a#6": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:53.838Z"
+  },
+  "cauldron-a#7": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:54.075Z"
+  },
+  "cauldron-a#8": {
+    "verdict": "REJECTED",
+    "notes": "pale foam over the brew reads as a stew, not a potion",
+    "at": "2026-11-27T09:26:54.250Z"
+  },
+  "cauldron-a#9": {
+    "verdict": "REJECTED",
+    "notes": "a brown rusty pot without a fire",
+    "at": "2026-11-27T09:26:54.475Z"
+  },
+  "cauldron-a#10": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:54.834Z"
+  },
+  "cauldron-a#11": {
+    "verdict": "REJECTED",
+    "notes": "green blotches on the pot read as damage",
+    "at": "2026-11-27T09:26:55.110Z"
+  },
+  "cauldron-a#12": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:55.368Z"
+  },
+  "cauldron-a#13": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:55.529Z"
+  },
+  "cauldron-a#14": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:55.814Z"
+  },
+  "cauldron-a#15": {
+    "verdict": "REJECTED",
+    "notes": "a good cauldron; take 0 has the fire, the bubbles and the skull together",
+    "at": "2026-11-27T09:26:56.085Z"
+  }
+}

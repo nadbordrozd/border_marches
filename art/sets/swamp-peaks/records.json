@@ -1,0 +1,503 @@
+{
+  "low-a": {
+    "id": "low-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "9861a02a-b882-4749-96a3-f6ca98502f9c",
+    "submittedAt": "2026-11-27T09:26:20.663Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one low swamp hill, each image a different one of these: a fat round mossy hummock, a lumpy mound of dark peat rock overgrown with moss, a pair of mossy hummocks side by side. Dark peat rock #5a5040, shadow #3a3428, lit #7a6e56 on the left faces; thick olive moss #6b7f3c (shadow #43552a) in soft lumps on top, a few thick roots. Fills the image width and about two thirds of its height."
+        }
+      ],
+      "image_size": {
+        "width": 56,
+        "height": 44
+      },
+      "no_background": true,
+      "seed": 126301,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one low swamp hill, each image a different one of these: a fat round mossy hummock, a lumpy mound of dark peat rock overgrown with moss, a pair of mossy hummocks side by side. Dark peat rock #5a5040, shadow #3a3428, lit #7a6e56 on the left faces; thick olive moss #6b7f3c (shadow #43552a) in soft lumps on top, a few thick roots. Fills the image width and about two thirds of its height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, trees, buildings, plate, terraces, crater, water, lake, waterfall."
+    },
+    "at": "2026-11-27T09:27:38.077Z",
+    "usageUsd": 0.08198565567864312,
+    "candidates": [
+      {
+        "file": "low-a-0.png",
+        "sha256": "dc46d2fd3b58c297f94e64e29c2394bf21c8aa16142fdb5f248005e0df66a7c2",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-1.png",
+        "sha256": "f161806162421907e7313bb337d27542a7522b6ec56ab87b67e32eb6d8699f3e",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-2.png",
+        "sha256": "aac29f1773f9e4429c57b704c8903dc6cd6cdb614f12b79dc17a20def77e42a1",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-3.png",
+        "sha256": "7440af849cc719fba0a9d0fb7d1686382f1366a35f9f1ebcc5c62730671f2df5",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-4.png",
+        "sha256": "ba6347c9e33da869f924ef97b6fe2cc26b035906b912f321d30ceadaec22d1cb",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-5.png",
+        "sha256": "734100a1f019d62ffb9cee6da90cdd252b2ffce12bc8b6c926f5ca202f93a4a0",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-6.png",
+        "sha256": "cd7f69c47a29313bf8c7c37728e806e5b3924fe79b7c2ae10a3a4bdb9508c861",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-7.png",
+        "sha256": "f4f6e66fa22d2e5d829dfa2272100b364f38eaf774ba91533926bebdbe450126",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-8.png",
+        "sha256": "cece56ad698c4def58abf8ade822b0adcf9946539d61ee32ac2004a024472e30",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-9.png",
+        "sha256": "6aacf0a22e39d33f422154012fc9cc07d2f2896b0bff336ec0720f5b957e6d87",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-10.png",
+        "sha256": "8eb82ac4e96446736396b78e86b5be059a4e41cd0a354c84cc1c217e4d91a98e",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-11.png",
+        "sha256": "ff50b68a57fa1e5f5cf226782ad3c327e024bc20b5eb2522bc4e2a4c894fae21",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-12.png",
+        "sha256": "3b4ecd922a2f29599c6875c2ad52f2117f0b542761a89f5a2c37618c70ba840b",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-13.png",
+        "sha256": "7cf08ddd195e51e53de00eea71b78a3ce4fa2eba455044ffafc4796d6a6b8cb3",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-14.png",
+        "sha256": "5bc36183e978d23e71b71e6a4c70369b563ba70a4b4fee40658279db8bf05d60",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-15.png",
+        "sha256": "7d6ad70ea08715de68ff783597780e060b531166c0ee00aa293c963ff4fa6fce",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-16.png",
+        "sha256": "e44ed919058b7468ce18d59c4eb06c20b229da1b77cb43b301966606f98e91fd",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-17.png",
+        "sha256": "12fb6823113994d0fb363b66c36ddfdece783187cefa99bccd7e9b4e4c18a15c",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-18.png",
+        "sha256": "6cdb822467a9b42630c31a1fb1855b7b2e903e154af7e237723a60a94257729a",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-19.png",
+        "sha256": "6df249ee122c19f156651925f70d6474d3fbee899b93bafb4d9980f2b2b08787",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-20.png",
+        "sha256": "862a29b8ec606cd213be817435435357bb1cc92d62bd0c3d3c9540b4def57b80",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-21.png",
+        "sha256": "11eeb8c59092c3ed600feb09bdefb45096768bb59421cd717272dc620290aa31",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-22.png",
+        "sha256": "d89fb812f5d52c92dc195607bc9e54f0a3328c4cdcd1bd837884de41e53c80ae",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-23.png",
+        "sha256": "e437836c8b59430666fe1ee6f902f812c9f041dfa23bcec6677d527b43a88061",
+        "width": 56,
+        "height": 44
+      },
+      {
+        "file": "low-a-24.png",
+        "sha256": "bb0ee67e4a246908b462c59e4dced9b5bf2564937acb26eb5d37928c360db142",
+        "width": 56,
+        "height": 44
+      }
+    ]
+  },
+  "mid-a": {
+    "id": "mid-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "7b7fbb3b-2c50-443c-b7ee-d8a5a6e6d6c4",
+    "submittedAt": "2026-11-27T09:27:38.184Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one swamp mountain, each image a different one of these: a tall rounded crag of dark peat rock under a thick cap of moss, a jagged rock crag with mossy ledges and roots, a lumpy peak of two mossy rock shoulders. Dark peat rock #5a5040, shadow #3a3428, lit #7a6e56 on the left faces; thick olive moss #6b7f3c (shadow #43552a) in soft lumps on top. Wide at the base, nearly the full image wide."
+        }
+      ],
+      "image_size": {
+        "width": 80,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 126302,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one swamp mountain, each image a different one of these: a tall rounded crag of dark peat rock under a thick cap of moss, a jagged rock crag with mossy ledges and roots, a lumpy peak of two mossy rock shoulders. Dark peat rock #5a5040, shadow #3a3428, lit #7a6e56 on the left faces; thick olive moss #6b7f3c (shadow #43552a) in soft lumps on top. Wide at the base, nearly the full image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, trees, buildings, plate, terraces, crater, water, lake, waterfall."
+    },
+    "at": "2026-11-27T09:28:55.644Z",
+    "usageUsd": 0.11692657245530023,
+    "candidates": [
+      {
+        "file": "mid-a-0.png",
+        "sha256": "39f7b77d530f71c926dffae96a730f0fd92e3258d621364822d29f88a4df6a3e",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-1.png",
+        "sha256": "8da8d9b6b44ce5ffd8f40351a1d3e5cfd26813040df5c9079abc376bef705d6d",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-2.png",
+        "sha256": "ffb6abd37771f23750f6d1179477f597e7a1b54f27f838e4d13f30a9be2e6b30",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-3.png",
+        "sha256": "4d98c202f33dcf1d94ffb695c0b0cc909fd67665d4c662e93e54e6d314b4ba79",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-4.png",
+        "sha256": "e859b670166eaaaef9a3fe132a8cbec32d175d8f2d51425ff7afa8160de0f4e1",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-5.png",
+        "sha256": "ffb4bfbb15967eb6ee2352c9406d6f058d2ae1db6e517124f382e7c1801ff777",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-6.png",
+        "sha256": "86b7a7d021453ba6440b419c4f7edf21efe85551179fd891078cd0f62d4bacdc",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-7.png",
+        "sha256": "2fc5d6d4fab99cd94c6398701ae13c1fa32053191b999d9b942889f89eac09ee",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-a-8.png",
+        "sha256": "7ebe3295f285f2efa08a4c594e2d6cfd130f137c374168b3db8fb1b058d0aca4",
+        "width": 80,
+        "height": 64
+      }
+    ]
+  },
+  "big-a": {
+    "id": "big-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "33c146f1-b211-4c84-9c30-957c946bb3ee",
+    "submittedAt": "2026-11-27T09:28:55.744Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big swamp mountain, each image a different one of these: a huge rounded crag of dark peat rock under a thick moss cap, a big jagged rock massif with mossy ledges and hanging roots, two joined mossy rock peaks. Dark peat rock #5a5040, shadow #3a3428, lit #7a6e56 on the left faces; thick olive moss #6b7f3c (shadow #43552a) in soft lumps on top. Fills nearly the full image."
+        }
+      ],
+      "image_size": {
+        "width": 120,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 126303,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one big swamp mountain, each image a different one of these: a huge rounded crag of dark peat rock under a thick moss cap, a big jagged rock massif with mossy ledges and hanging roots, two joined mossy rock peaks. Dark peat rock #5a5040, shadow #3a3428, lit #7a6e56 on the left faces; thick olive moss #6b7f3c (shadow #43552a) in soft lumps on top. Fills nearly the full image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, trees, buildings, plate, terraces, crater, water, lake, waterfall."
+    },
+    "at": "2026-11-27T09:30:28.366Z",
+    "usageUsd": 0.08157321890195211,
+    "candidates": [
+      {
+        "file": "big-a-0.png",
+        "sha256": "76a79b3c3d320c74068e09c738d126e23e21fa7149c73c5c94b1e1de0a2c47dd",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-a-1.png",
+        "sha256": "7fef8f0717ce77e7cb44df39f2a691d6968b81a5bdfd626ac0941d554e900ffa",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-a-2.png",
+        "sha256": "77978791e2772f69e59b55ebfd60bf2872eea954b21b9c1691561cddc0149aec",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-a-3.png",
+        "sha256": "b9d8d0ab76463622ffb9e6c0a2b212770b9c1e46334236ddfc086734b374d4c6",
+        "width": 120,
+        "height": 88
+      }
+    ]
+  },
+  "mid-b": {
+    "id": "mid-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "08833ffa-42c4-4b4d-aa63-433c5cb41a1d",
+    "submittedAt": "2026-11-27T09:30:28.504Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one swamp mountain, each image a different one of these: a broad lumpy crag of dark peat rock under a moss cap, a pointed mossy rock peak with a smaller mossy shoulder, a wide crag with two mossy tips. Dark peat rock #5a5040, shadow #3a3428, lit #7a6e56 on the left faces; thick olive moss #6b7f3c (shadow #43552a) in soft lumps on top. Wide at the base, nearly the full image wide."
+        }
+      ],
+      "image_size": {
+        "width": 80,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 126304,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one swamp mountain, each image a different one of these: a broad lumpy crag of dark peat rock under a moss cap, a pointed mossy rock peak with a smaller mossy shoulder, a wide crag with two mossy tips. Dark peat rock #5a5040, shadow #3a3428, lit #7a6e56 on the left faces; thick olive moss #6b7f3c (shadow #43552a) in soft lumps on top. Wide at the base, nearly the full image wide. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, trees, buildings, plate, terraces, crater, water, lake, waterfall."
+    },
+    "at": "2026-11-27T09:31:24.936Z",
+    "usageUsd": 0.11603291153907776,
+    "candidates": [
+      {
+        "file": "mid-b-0.png",
+        "sha256": "0b17517043357ecb2aa4b5dddc8537872c0e4e90c117afb58a40266da6df5afd",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-1.png",
+        "sha256": "7af71d591ab5ebaf733ecd390f97dc9915b571810916b3ca3e6e92c6fdebfa13",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-2.png",
+        "sha256": "5584b09aee63c86196d3d0d35d3cb583a3e4c52fe35092d855c5cb8d881e90cd",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-3.png",
+        "sha256": "bc4c32aa9dd63b7be396a38d254d90114ec7da5f425c2e1e461d375f0727eaf8",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-4.png",
+        "sha256": "6752240f1c6f9ea65fa6014b3d51db3cc3e7c9fc7e152254c4895b45efcec4aa",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-5.png",
+        "sha256": "c16c4f71c26eb278be65364be0def62e942b7d63d1fe766bb71755666a010074",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-6.png",
+        "sha256": "7ea0d7f62813f02a56e6254bdde1e7413e9c09813e0b5b3a396edcb6b609d42e",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-7.png",
+        "sha256": "615e560f4cbbd5b607682b5a2ba0d97431c958b5096fc9b681d2819e715ba794",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "file": "mid-b-8.png",
+        "sha256": "68988b4fd3ed686c138f0aecb76e768a0f61650cb8c7357fbecc2e3b475a8edd",
+        "width": 80,
+        "height": 64
+      }
+    ]
+  },
+  "big-b": {
+    "id": "big-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "1f406775-c77b-4c75-81a0-3ac567900fca",
+    "submittedAt": "2026-11-27T09:31:25.148Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-peak.txt",
+          "text": "Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one big swamp mountain, each image a different one of these: a wide mountain of three rounded mossy rock peaks under one moss cap, a tall peat-rock crag with a broad base and thick hanging roots, a huge pointed mossy crag. Dark peat rock #5a5040, shadow #3a3428, lit #7a6e56 on the left faces; thick olive moss #6b7f3c (shadow #43552a) in soft lumps on top. Fills nearly the full image."
+        }
+      ],
+      "image_size": {
+        "width": 120,
+        "height": 88
+      },
+      "no_background": true,
+      "seed": 126305,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single mountain for a dense mountain range on a strategy map, drawn as a standing object seen from the front with the camera only slightly above it, exactly like a tree or a building on the same map: we see its front face rising up and its summit against the empty background, never its top from above. Calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, a few big simple flat facets with one shadow tone: left faces lit, right faces in shadow. Its base is an uneven bottom edge at the bottom of the image. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no soil disc and no shadow. Subject: one big swamp mountain, each image a different one of these: a wide mountain of three rounded mossy rock peaks under one moss cap, a tall peat-rock crag with a broad base and thick hanging roots, a huge pointed mossy crag. Dark peat rock #5a5040, shadow #3a3428, lit #7a6e56 on the left faces; thick olive moss #6b7f3c (shadow #43552a) in soft lumps on top. Fills nearly the full image. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, top-down view, aerial view, map view, contour lines, ground plate, pedestal, slab, soil disc, cast shadow, second mountain, mountain range, sky, clouds, background, face, eyes, building, trees, buildings, plate, terraces, crater, water, lake, waterfall."
+    },
+    "at": "2026-11-27T09:32:52.670Z",
+    "usageUsd": 0.08163514693578085,
+    "candidates": [
+      {
+        "file": "big-b-0.png",
+        "sha256": "a81121175b4bd9781d2064a37c3004f0664d0dc4813e428b481c8792b9909423",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-b-1.png",
+        "sha256": "c57d604e49c575c62d430ac31830ac1a0d3d5436279c911433e0906c3aa4ebbb",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-b-2.png",
+        "sha256": "a4b766bac8bf674fdb1d5881e743b9f7c9a8dc27f6a2f840c386989429b42aa3",
+        "width": 120,
+        "height": 88
+      },
+      {
+        "file": "big-b-3.png",
+        "sha256": "bccbd3a1d0c4c78d80bb584dff77bdd331072102fd6239776f8b07352a16710d",
+        "width": 120,
+        "height": 88
+      }
+    ]
+  }
+}

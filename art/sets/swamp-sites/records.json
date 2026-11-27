@@ -1,0 +1,293 @@
+{
+  "witch-hut-a": {
+    "id": "witch-hut-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "847d920d-229d-4691-ab0f-a3935a3f2ac0",
+    "submittedAt": "2026-11-27T09:22:01.188Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a swamp witch's hut on stilts: a small crooked wooden shack of dark brown planks #6a4a30 with #3e2c1e shadows standing high on four tall thin wooden stilts, a steep sagging thatched roof of olive reeds #8a8a48 with a bent chimney, a round window glowing warm yellow #f0c860, a rickety ladder from the ground up to its little porch door, bundles of dried herbs and a string of small bones hanging under the porch, a few tufts of moss #6b7f3c on the roof. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 126601,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a swamp witch's hut on stilts: a small crooked wooden shack of dark brown planks #6a4a30 with #3e2c1e shadows standing high on four tall thin wooden stilts, a steep sagging thatched roof of olive reeds #8a8a48 with a bent chimney, a round window glowing warm yellow #f0c860, a rickety ladder from the ground up to its little porch door, bundles of dried herbs and a string of small bones hanging under the porch, a few tufts of moss #6b7f3c on the roof. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, witch, cat, ground, water, puddle, grass, sky, smoke, flag."
+    },
+    "at": "2026-11-27T09:23:08.005Z",
+    "usageUsd": 0.08046609995100233,
+    "candidates": [
+      {
+        "file": "witch-hut-a-0.png",
+        "sha256": "4826b56270eddb5502bdb60665375204aa8ef00f82bf7646801d93f4d7992118",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "witch-hut-a-1.png",
+        "sha256": "b41dc5718b87165e29a95924140b80e9de2ea61fec5b98c4974fead4c46df120",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "witch-hut-a-2.png",
+        "sha256": "af672ef3685eff156ef0b487381f6f4543d1615e461ef8f2f4c17c7d63ed9643",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "witch-hut-a-3.png",
+        "sha256": "019e95c03e04cb645a71813e88e5de10c050be30e0274df1016c24547354e5a7",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "ruins-a": {
+    "id": "ruins-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "6136a3a2-74aa-4e7e-9e2c-d4681336fee6",
+    "submittedAt": "2026-11-27T09:23:08.106Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: sunken temple ruins of the swamp, a creature bank: the top of an old drowned stone temple of grey-green mossy stone blocks #7a8270 with #4a5248 shadows tilted and sinking, a dark arched doorway framed by two broken pillars, a cracked stone face carved over the arch, thick green moss #6b7f3c and hanging vines over the stones, a few tall reeds and a broken stone urn at the front. Nearly the full image wide and most of its height, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 128,
+        "height": 128
+      },
+      "no_background": true,
+      "seed": 126602,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: sunken temple ruins of the swamp, a creature bank: the top of an old drowned stone temple of grey-green mossy stone blocks #7a8270 with #4a5248 shadows tilted and sinking, a dark arched doorway framed by two broken pillars, a cracked stone face carved over the arch, thick green moss #6b7f3c and hanging vines over the stones, a few tall reeds and a broken stone urn at the front. Nearly the full image wide and most of its height, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, skeleton figure, ground, water, lake, puddle, grass, sky, tree, flag."
+    },
+    "at": "2026-11-27T09:24:47.123Z",
+    "usageUsd": 0.0805551602045695,
+    "candidates": [
+      {
+        "file": "ruins-a-0.png",
+        "sha256": "336ccc41c1ea1b1b69eadf2dc5133eff8ad4f893b1ee0255bda92a77578e9e82",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "ruins-a-1.png",
+        "sha256": "b562a87f46f495ac49ba466758f9d2972c072d47a3eaeb399ece8aa5697e92d4",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "ruins-a-2.png",
+        "sha256": "b65e96f691047c58af2de230b4589f2392c43c4024fcc2eb964f0287179ad539",
+        "width": 128,
+        "height": 128
+      },
+      {
+        "file": "ruins-a-3.png",
+        "sha256": "cd93639b81b455a2d5dc2b66d6ad9ff3913abafd3996e0b545f56a54038cde9d",
+        "width": 128,
+        "height": 128
+      }
+    ]
+  },
+  "cauldron-a": {
+    "id": "cauldron-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "5133c93f-6ea6-42ae-963b-461f1ad2d337",
+    "submittedAt": "2026-11-27T09:24:47.238Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-map-object.txt",
+          "text": "Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: a hag's cauldron of the swamp: a big round black iron cauldron #2e2e34 on three short legs over a small fire of crossed sticks with orange flames #f08a2a, bubbling over with bright green brew #7ee05a that drips down its sides, a few round bubbles above it, a crooked wooden ladle sticking out, a small skull and a bunch of herbs beside it. About three quarters of the image wide and tall, its front facing the viewer straight on."
+        }
+      ],
+      "style_image": {
+        "source": "file public/assets/objects/sawmill.png sha256 892baf84f8b04c51ed244cd71fe77831750aa9abbb7eb7cc58649a0a1947c4b9",
+        "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+      },
+      "image_size": {
+        "width": 64,
+        "height": 64
+      },
+      "no_background": true,
+      "seed": 126603,
+      "style_options": {
+        "color_palette": false,
+        "outline": true,
+        "detail": true,
+        "shading": true
+      },
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one adventure-map site, a chunky building or landmark seen from the front with the camera slightly above it, like the trees, mountains and towns of the same map: we see its front face and a little of its roof, never a plan from straight above. Thick single-colour black outline, big simple shapes, flat colours with one shadow tone, low detail. It stands alone on the empty transparent background with nothing under it: no ground patch, grass, soil disc, platform or shadow; its bottom is the lowest thing in the image. Subject: a hag's cauldron of the swamp: a big round black iron cauldron #2e2e34 on three short legs over a small fire of crossed sticks with orange flames #f08a2a, bubbling over with bright green brew #7ee05a that drips down its sides, a few round bubbles above it, a crooked wooden ladle sticking out, a small skull and a bunch of herbs beside it. About three quarters of the image wide and tall, its front facing the viewer straight on. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, pedestal, ground plate, platform, terrain slab, isometric block, ground tile, grass square, soil disc, cast shadow, background, people, character, second building, person, witch, hag, ground, puddle, grass, sky, smoke cloud, flag, house."
+    },
+    "at": "2026-11-27T09:26:19.891Z",
+    "usageUsd": 0.08181238073772855,
+    "candidates": [
+      {
+        "file": "cauldron-a-0.png",
+        "sha256": "1e06c2427dba001cad95532b0f34e7cb3c204d76a68803dc85c6be68e9bbcb57",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-1.png",
+        "sha256": "8fa4a7601d98dd29b1c00438fc1f21476f8757a8d0e620c0fb445064bc7d41fb",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-2.png",
+        "sha256": "ab2015a3a0d5f87582a3fbe60511f59d04e2cd838ca5f05c2d7997491d2040d5",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-3.png",
+        "sha256": "9a1b00e4c6e1feab766fa742829073be388bb7135c2049748d08d80690b67169",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-4.png",
+        "sha256": "091e4bdc6fceb994c19f2e5d438fc316db2a430dc0eaca8234009d49a6982886",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-5.png",
+        "sha256": "06f08d535678926415d71982bf77cc785413dea45cd03f64b8c477969df712ea",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-6.png",
+        "sha256": "f58aec1330a7f36fe226abecb721eae2cd0d650b352fa52bafa75f1606b493c9",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-7.png",
+        "sha256": "277f8711262260478b32abd80610601e9b6db4f75c2a25bfac74d82c9883653e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-8.png",
+        "sha256": "e4b645fda53e2bfc5eea9500eea6f3e67bac2d881b6c295a197c006dab5556f6",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-9.png",
+        "sha256": "bebd119f616eaed9297483ab2a271adbc2c8f1e54572c2f4454d8a29daeceef0",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-10.png",
+        "sha256": "214fa86e19e7c55e63b1dccf5e3d4eedd6e09317115aaee5611ec42be6ca2b98",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-11.png",
+        "sha256": "4b2517fea66c0a66b2a176f1d551e5ec5b6492222d99ca165ec6535a94565026",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-12.png",
+        "sha256": "60cb5871dc2e15a7c0584f386553e49a75e90297bf8867ad6af95315688fe42e",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-13.png",
+        "sha256": "ffe9dbab3e297c5745c352bed37df8965103d992de4c7b691b4bee26a766be64",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-14.png",
+        "sha256": "2317ec4ed6d6bee7972fe016a7064a82f9335f95d0696e0974b8bb859e71e883",
+        "width": 64,
+        "height": 64
+      },
+      {
+        "file": "cauldron-a-15.png",
+        "sha256": "f3dfffd36a0f327cd8b4b81de91ab420305413387fc307266b73f45379f71ee6",
+        "width": 64,
+        "height": 64
+      }
+    ]
+  }
+}

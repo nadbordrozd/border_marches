@@ -105,8 +105,9 @@ describe("doodads (xaj.14)", () => {
       const set = doodadsOf(terrain);
       // The desert sand (bead bzc.88) has none by design: its own
       // decorations (skull, tumbleweed) would repeat the doodad subjects.
-      // Nor the frosting (bead bzc.115): nothing imported is candy.
-      if (terrain === "sand" || terrain === "frosting") {
+      // Nor the frosting (bead bzc.115): nothing imported is candy. Nor
+      // the swamp (bead bzc.126): its decorations are its detail.
+      if (terrain === "sand" || terrain === "frosting" || terrain === "swamp") {
         expect(set).toEqual([]);
         continue;
       }

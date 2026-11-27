@@ -130,6 +130,7 @@ export function siteCue(
     case "sunken-tomb":
     case "gingerbread-cottage":
     case "brimstone-pit":
+    case "drowned-temple":
       return "site.treasure";
     // The Infernal Forge (bead bzc.125): a reforge sounds like a find; a
     // visit that only offers the choice stays silent.

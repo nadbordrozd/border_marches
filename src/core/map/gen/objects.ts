@@ -35,6 +35,7 @@ import {
   FREE_VALUE,
   NEUTRAL_TOWN_VALUE,
   PASS_VALUE,
+  SWAMP_ROWS,
   minDaysForValue,
 } from "../../../data/mapObjects.ts";
 import { GATE_COLOURS, WAYSTONE_COLOURS } from "../../../data/objectTypes.ts";
@@ -46,6 +47,7 @@ import { findArtifact, isCursed } from "../../../data/artifacts.ts";
 import { candySites, preferFrosting } from "./candy.ts";
 import { desertSites } from "./desert.ts";
 import { volcanicSites } from "./volcanic.ts";
+import { swampContents, swampSites } from "./swamp.ts";
 import { carveHoards, hoardRate } from "./hoards.ts";
 import { assignQuests } from "./quests.ts";
 import { rollContents, strangeThing } from "./contents.ts";
@@ -1117,6 +1119,43 @@ export function placeObjects(st: GenState): PlacementReport {
       });
     }
     requests.splice(kitRequests, 0, ...candyReqs);
+  }
+
+  // The swamp's sites (bead bzc.126): a Drowned Temple, a Witch's Hut and
+  // a Hag's Cauldron in each swamp zone, on swamp ground while a swamp
+  // site is free; rolled and tried from their own streams, right after the
+  // start kits, so a map without a swamp draws and places exactly as before.
+  const marsh = oc.swampSites ? swampSites(st) : [];
+  if (marsh.length > 0) {
+    const srng = stageRng(st, "swamp-sites");
+    const orng = stageRng(st, "swamp-place");
+    const swampReqs: Request[] = [];
+    for (const site of marsh) {
+      const row = SWAMP_ROWS.find((r) => r.type === site.type);
+      if (row === undefined) continue;
+      const data = {
+        ...roll(srng, row, site.tier),
+        ...swampContents(site.type, srng, site.tier),
+      };
+      const value = valueOf(row, data);
+      swampReqs.push({
+        row,
+        data,
+        value,
+        zones: [site.zone],
+        minCost: 0,
+        maxCost: Infinity,
+        minFar: farFor(row, value, data),
+        required: false,
+        pocket: -1,
+        guarded: guardedIn(row, value, site.zone, data),
+        label: `swamp ${site.type} in zone ${site.zone}`,
+        relax: true,
+        order: orng,
+        ground: T.swamp,
+      });
+    }
+    requests.splice(kitRequests, 0, ...swampReqs);
   }
 
   // Candy outposts stand on frosting while they can (bead bzc.115).

@@ -264,6 +264,42 @@ const TREE_ROWS: readonly (readonly [
   ["wasteland", "emberleaf", 2, 34, 32],
   ["wasteland", "emberleaf", 3, 30, 35],
   ["wasteland", "emberleaf", 4, 31, 33],
+  // Swamp groves (bead bzc.126, set swamp-trees): bald cypresses and
+  // gnarled oaks hung with moss, mangroves on stilt roots, low mossy
+  // bushes, pale weeping willows in drifts.
+  ["swamp", "willow", 1, 34, 35],
+  ["swamp", "willow", 2, 34, 35],
+  ["swamp", "willow", 3, 34, 35],
+  ["swamp", "willow", 4, 34, 35],
+  ["swamp", "willow", 5, 34, 35],
+  ["swamp", "cypress", 1, 40, 38],
+  ["swamp", "cypress", 2, 39, 37],
+  ["swamp", "cypress", 3, 40, 38],
+  ["swamp", "cypress", 4, 39, 37],
+  ["swamp", "cypress", 5, 40, 38],
+  ["swamp", "cypress", 6, 39, 37],
+  ["swamp", "cypress", 7, 39, 37],
+  ["swamp", "cypress", 8, 40, 39],
+  ["swamp", "mossoak", 1, 35, 37],
+  ["swamp", "mossoak", 2, 35, 36],
+  ["swamp", "mossoak", 3, 35, 37],
+  ["swamp", "mossoak", 4, 35, 36],
+  ["swamp", "mossoak", 5, 35, 37],
+  ["swamp", "mossoak", 6, 35, 36],
+  ["swamp", "mossoak", 7, 35, 36],
+  ["swamp", "mossoak", 8, 35, 36],
+  ["swamp", "mangrove", 1, 33, 42],
+  ["swamp", "mangrove", 2, 32, 44],
+  ["swamp", "mangrove", 3, 35, 43],
+  ["swamp", "mangrove", 4, 35, 43],
+  ["swamp", "mangrove", 5, 35, 43],
+  ["swamp", "mangrove", 6, 35, 43],
+  ["swamp", "mangrove", 7, 31, 43],
+  ["swamp", "bush", 1, 36, 40],
+  ["swamp", "bush", 2, 41, 39],
+  ["swamp", "bush", 3, 41, 38],
+  ["swamp", "bush", 4, 39, 34],
+  ["swamp", "bush", 5, 36, 33],
 ];
 
 export const TREE_ASSETS: readonly TreeAsset[] = TREE_ROWS.map(
@@ -298,6 +334,9 @@ const OWN_SPECIES_WEIGHTS: Readonly<
   // Frosting (bead bzc.115): frosted and cotton-candy crowns are the calm
   // base, lollipops and gumdrop bushes among them, candy canes in drifts.
   frosting: { frosted: 4, cotton: 3.4, lollipop: 2, gumdrop: 1, cane: 1.4 },
+  // Swamp (bead bzc.126): dark mossy cypresses and oaks are the calm base,
+  // mangroves and mossy bushes among them, pale willows in drifts.
+  swamp: { cypress: 4, mossoak: 3, mangrove: 2.2, bush: 1, willow: 1.6 },
 };
 
 /** The species mix of each ground's woods: its art family's. */
@@ -323,6 +362,7 @@ export const TREE_SPECIES_DRIFT: Readonly<
   grass: { autumn: 0.57 },
   snow: { larch: 0.6 },
   frosting: { cane: 0.6 },
+  swamp: { willow: 0.6 },
 };
 
 /** The trees of one ground and species. */

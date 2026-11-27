@@ -32,6 +32,7 @@ export const PEAK_DARKEN: Readonly<Record<GroundTerrain, number>> = {
   snow: 0.06,
   sand: 0.14,
   frosting: 0.12,
+  swamp: 0.08,
 };
 
 /** The outline colour of each family. */
@@ -47,6 +48,7 @@ export const PEAK_LINE: Readonly<
   snow: [44, 52, 66],
   sand: [92, 62, 32],
   frosting: [96, 34, 66],
+  swamp: [36, 40, 26],
 };
 
 /**

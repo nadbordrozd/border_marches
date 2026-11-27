@@ -126,6 +126,18 @@ const PALETTE: Readonly<
     ],
     water: [200, 150, 180],
   },
+  // Swamp (bead bzc.126): mossy peat stones, olive bushes, pale marsh
+  // flowers, dark bog water.
+  swamp: {
+    rock: [110, 104, 84],
+    bush: [96, 118, 56],
+    petals: [
+      [240, 236, 214],
+      [236, 196, 90],
+      [210, 160, 196],
+    ],
+    water: [58, 72, 50],
+  },
 };
 
 const OUTLINE: Rgb = [28, 24, 22];

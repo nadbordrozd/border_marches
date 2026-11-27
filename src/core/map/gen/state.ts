@@ -19,7 +19,8 @@ export const T = {
   snow: 6,
   sand: 7,
   frosting: 8,
-  water: 9,
+  swamp: 9,
+  water: 10,
 } as const satisfies Record<Terrain, number>;
 
 export const TERRAIN_OF: readonly Terrain[] = [
@@ -32,6 +33,7 @@ export const TERRAIN_OF: readonly Terrain[] = [
   "snow",
   "sand",
   "frosting",
+  "swamp",
   "water",
 ];
 

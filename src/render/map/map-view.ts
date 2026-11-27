@@ -50,6 +50,9 @@ import type { GroundLayout } from "./ground";
 import {
   LIVING_MOTION,
   MOTION,
+  bubbleLevel,
+  bubblePixels,
+  cellBubbleSlots,
   cellGlintSlots,
   cellPhase,
   cellSparkleSlots,
@@ -265,9 +268,16 @@ interface ChunkAnim {
   readonly magma: readonly (Surface | null)[];
   /** Sugar sparkle slots on bare frosting (bead bzc.115). */
   readonly sparkles: readonly SparkleSlot[];
+  /** Bog bubble slots on bare swamp (bead bzc.126). */
+  readonly bubbles: readonly SparkleSlot[];
 }
 
-const NO_ANIM: ChunkAnim = { glints: [], magma: [], sparkles: [] };
+const NO_ANIM: ChunkAnim = {
+  glints: [],
+  magma: [],
+  sparkles: [],
+  bubbles: [],
+};
 
 interface GroundChunk extends Chunk {
   /** Its overlays; null when they must be worked out again (a patch). */
@@ -742,6 +752,20 @@ export function createMapView(
           )
             sparkles.push(slot);
       }
+    // Bog bubbles on the swamp (bead bzc.126), only on bare ground.
+    const bubbles: SparkleSlot[] = [];
+    for (let cy = Math.floor(y0 / CELL); cy <= cy1; cy += 1)
+      for (let cx = Math.floor(x0 / CELL); cx <= cx1; cx += 1) {
+        if (map.cells[cy * map.width + cx]?.terrain !== "swamp") continue;
+        for (const slot of cellBubbleSlots(cx, cy))
+          if (
+            [[slot.x, slot.y] as [number, number], ...bubblePixels(slot)].every(
+              ([x, y]) =>
+                x >= x0 && y >= y0 && x < x0 + w && y < y0 + h && bare(x, y),
+            )
+          )
+            bubbles.push(slot);
+      }
     const groups = MOTION.magma.groups;
     const hw = Math.ceil(w / 2);
     const hh = Math.ceil(h / 2);
@@ -788,7 +812,7 @@ export function createMapView(
       ctx.putImageData(image, 0, 0);
       return surface;
     });
-    return { glints, magma, sparkles };
+    return { glints, magma, sparkles, bubbles };
   };
 
   const buildChunk = (cx: number, cy: number): GroundChunk => {
@@ -1246,6 +1270,24 @@ export function createMapView(
     ctx.fill(sugarDim);
     ctx.fillStyle = MOTION.sparkle.bright;
     ctx.fill(sugarBright);
+    // Bog bubbles on the swamp: a pale pixel swells into a ring and pops.
+    // Still (time 0) nothing shows: the mud is quiet.
+    const bogDim = new Path2D();
+    const bogRing = new Path2D();
+    if (t > 0)
+      for (const { anim } of anims)
+        for (const s of anim.bubbles) {
+          if (s.x > vx1 || s.x < vx0 || s.y > vy1 || s.y < vy0) continue;
+          any = true;
+          const level = bubbleLevel(s, t);
+          if (level === 1) bogDim.rect(s.x, s.y, 1, 1);
+          else if (level === 2)
+            for (const [x, y] of bubblePixels(s)) bogRing.rect(x, y, 1, 1);
+        }
+    ctx.fillStyle = MOTION.bubble.dim;
+    ctx.fill(bogDim);
+    ctx.fillStyle = MOTION.bubble.bright;
+    ctx.fill(bogRing);
     // The magma glow, added over the cracks, its groups out of step.
     const glowing = anims.filter(({ anim }) => anim.magma.some((m) => m));
     if (glowing.length > 0) {

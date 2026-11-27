@@ -166,6 +166,22 @@ export interface GenConfig {
       /** Secondary patches of a candy zone: one of these. */
       secondary: readonly Terrain[];
     };
+    /**
+     * The swamp (bead bzc.126): on some maps a wild zone turns into a
+     * swamp of mud and reeds (gen/swamp.ts placeSwamp), the same way as the
+     * desert, from its own random stream and after every other biome; the
+     * swamp's sites go into it (gen/swamp.ts swampSites).
+     */
+    swamp: {
+      /** Chance per map size that the map has a swamp at all. */
+      chance: Readonly<Record<MapSize, number>>;
+      /** Most swamp zones per map size (each further one at half the chance). */
+      maxZones: Readonly<Record<MapSize, number>>;
+      /** Lowest tier (steps from the nearest start zone) of a swamp zone. */
+      minTier: number;
+      /** Secondary patches of a swamp zone: one of these. */
+      secondary: readonly Terrain[];
+    };
   };
 
   water: {
@@ -386,6 +402,13 @@ export interface GenConfig {
      * each). Off for the named maps, which roll no candy zone anyway.
      */
     candySites: boolean;
+    /**
+     * Bead bzc.126: the swamp zones get their sites (gen/swamp.ts: a
+     * Drowned Temple, a Witch's Hut and a Hag's Cauldron each). Off for the
+     * named maps, which roll no swamp and whose edits name generated
+     * objects by place.
+     */
+    swampSites: boolean;
   };
 
   /**
@@ -629,6 +652,14 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       minTier: 1,
       secondary: ["grass", "steppe"],
     },
+    swamp: {
+      // Last of the biomes, it often finds every wild zone taken or next
+      // to one, so it rolls a little more often than the candy zones.
+      chance: { S: 0.45, M: 0.55, L: 0.65 },
+      maxZones: { S: 1, M: 1, L: 1 },
+      minTier: 1,
+      secondary: ["jungle", "grass"],
+    },
   },
 
   water: {
@@ -659,6 +690,8 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       sand: 0.7,
       // Candy groves as often as gumdrop hills (bead bzc.115).
       frosting: 0.4,
+      // Mossy hummocks rarely; the swamp's borders are mostly woods.
+      swamp: 0.3,
       water: 0.5,
     },
     edgeDepth: 2.8,
@@ -700,6 +733,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       snow: 0.6,
       sand: 0.6,
       frosting: 0.35,
+      swamp: 0.25,
       water: 0.5,
     },
     ridgeBias: 2.2,
@@ -722,6 +756,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
         snow: 0.45,
         sand: 0.4,
         frosting: 0.4,
+        swamp: 0,
         water: 0,
       },
       size: [22, 36],
@@ -780,6 +815,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     mystery: { share: 0.25, treasureShare: 0.5 },
     volcanicSites: true,
     candySites: true,
+    swampSites: true,
     perMap: { "drill-yard": { S: [1, 1], M: [1, 1], L: [1, 2] } },
   },
 
@@ -844,6 +880,7 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
       snow: 150,
       sand: 125,
       frosting: 125,
+      swamp: 175,
     },
     road: 75,
     day: 1500,

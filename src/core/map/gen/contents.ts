@@ -81,7 +81,7 @@ function artifactsOf(
   });
 }
 
-function pickArtifact(
+export function pickArtifact(
   rng: Rng,
   grade: "trinket" | "wonder" | "piece" | "consumable" | "cursed",
 ): string | undefined {
@@ -98,7 +98,7 @@ function artifactValue(id: string | undefined, fallback: number): number {
 }
 
 /** A spell of the tier (battle spells), or undefined. */
-function pickSpell(rng: Rng, tier: number): string | undefined {
+export function pickSpell(rng: Rng, tier: number): string | undefined {
   const list = battleSpellsOfTier(Math.max(1, Math.min(5, tier)));
   return list.length > 0 ? rng.pick(list).id : undefined;
 }

@@ -1,0 +1,37 @@
+{
+  "mire-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "calm olive swamp mud with a soft diagonal mossy drift, olive reed flecks and dark wet speckles; no motif or grid, wrap seam no worse than the inner noise",
+    "at": "2026-11-27T09:13:46.974Z"
+  },
+  "mud-a#0": {
+    "verdict": "REJECTED",
+    "notes": "reed tufts drawn as stamped clumps that read as objects, one dark blob puddle",
+    "at": "2026-11-27T09:13:47.060Z"
+  },
+  "mud-b#0": {
+    "verdict": "REJECTED",
+    "notes": "a small standing figure in the field; tufts stamped in rows",
+    "at": "2026-11-27T09:13:47.152Z"
+  },
+  "bog-a#0": {
+    "verdict": "REJECTED",
+    "notes": "big purple pools with rims: lakes, not ground",
+    "at": "2026-11-27T09:13:47.244Z"
+  },
+  "marsh-a#0": {
+    "verdict": "REJECTED",
+    "notes": "a drawn frame round the edge: a 5-cell grid in repeat",
+    "at": "2026-11-27T09:13:47.339Z"
+  },
+  "mire-b#0": {
+    "verdict": "REJECTED",
+    "notes": "hard vertical wrap seam with a pale speckle band",
+    "at": "2026-11-27T09:13:47.441Z"
+  },
+  "mire-c#0": {
+    "verdict": "REJECTED",
+    "notes": "a regular lattice of leaf motifs reads as wallpaper",
+    "at": "2026-11-27T09:13:47.546Z"
+  }
+}

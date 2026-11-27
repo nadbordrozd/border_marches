@@ -110,6 +110,10 @@ export const MAP_OBJECT_TYPE_IDS = [
   "infernal-forge",
   "brimstone-pit",
   "shrine-of-embers",
+  // 3.15 Swamp sites (bead bzc.126, set swamp-sites)
+  "witchs-hut",
+  "drowned-temple",
+  "hags-cauldron",
 ] as const;
 
 export type MapObjectTypeId = (typeof MAP_OBJECT_TYPE_IDS)[number];
@@ -218,6 +222,9 @@ const TYPE_ROWS: readonly (readonly [
   ["infernal-forge", "Infernal Forge", 2, 2, ""],
   ["brimstone-pit", "Brimstone Pit", 2, 2, ""],
   ["shrine-of-embers", "Shrine of Embers", 1, 1, ""],
+  ["witchs-hut", "Witch's Hut", 2, 2, ""],
+  ["drowned-temple", "Drowned Temple", 2, 2, ""],
+  ["hags-cauldron", "Hag's Cauldron", 1, 1, ""],
 ];
 
 export const MAP_OBJECT_TYPES: readonly MapObjectType[] = TYPE_ROWS.map(
@@ -420,6 +427,10 @@ const ART_ROWS: readonly (readonly [
   ["brimstone-pit", "medium", 103, 74, "@volcanic-sites/pit-a#1"],
   ["brimstone-pit", "large", 119, 93, "@volcanic-sites/pit-a#2"],
   ["shrine-of-embers", "", 58, 57, "@volcanic-sites/embers-a#0"],
+  // Swamp sites (bead bzc.126, set swamp-sites).
+  ["witchs-hut", "", 90, 118, "@swamp-sites/witch-hut-a#3"],
+  ["drowned-temple", "", 104, 97, "@swamp-sites/ruins-a#1"],
+  ["hags-cauldron", "", 62, 56, "@swamp-sites/cauldron-a#0"],
 ];
 
 /**

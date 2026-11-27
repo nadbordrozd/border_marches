@@ -140,8 +140,8 @@ function toDay(s: GameState, day: number): GameState {
 }
 
 describe("the catalogue", () => {
-  it("lists 62 types, 53 core and 9 stretch, the 4 winter sites (bzc.87), the 4 desert sites (bzc.88), the Mystery Bag (bzc.105), the 3 volcanic sites (bzc.125) and the 3 candy sites (bzc.124), each with a visit text", () => {
-    expect(OBJECT_TYPE_IDS).toHaveLength(62 + 4 + 4 + 1 + 3 + 3);
+  it("lists 62 types, 53 core and 9 stretch, the 4 winter sites (bzc.87), the 4 desert sites (bzc.88), the Mystery Bag (bzc.105), the 3 volcanic sites (bzc.125), the 3 candy sites (bzc.124) and the 3 swamp sites (bzc.126), each with a visit text", () => {
+    expect(OBJECT_TYPE_IDS).toHaveLength(62 + 4 + 4 + 1 + 3 + 3 + 3);
     for (const t of [
       "infernal-forge",
       "brimstone-pit",
@@ -149,6 +149,9 @@ describe("the catalogue", () => {
       "gingerbread-cottage",
       "sugar-fountain",
       "sweet-shop",
+      "witchs-hut",
+      "drowned-temple",
+      "hags-cauldron",
     ] as const)
       expect(OBJECT_TYPES[t].weight).toBe(0);
     expect(OBJECT_TYPE_IDS).toContain("mystery-bag");

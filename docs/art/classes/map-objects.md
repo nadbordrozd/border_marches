@@ -94,6 +94,15 @@ Pit (three sizes from one call) on 128 x 128, the Shrine of Embers on 64 x
 64, with the roadside inn (`map-objects/inn-a#0`) as style image for the
 chunky rounded shapes, as the chunky towns of bead bzc.97. 3 calls.
 
+### Swamp sites (bead bzc.126)
+
+Studio set `art/sets/swamp-sites`, same recipe as above (the sawmill as
+style image, native size): the Witch's Hut (a shack on stilts with a
+ladder and glowing windows) and the Drowned Temple (mossy, tilted temple
+ruins with a stone face over the door) on 128 x 128 (2x2), the Hag's
+Cauldron on 64 x 64 (1x1), one look each (the temple's three sizes share
+it). `ART_ROWS` names them by `@swamp-sites/<take>`.
+
 ### Artifacts on the map and the Mystery Bag (bead bzc.105)
 
 Studio set `art/sets/artifact-pickups`, the pickups' recipe (the sawmill as

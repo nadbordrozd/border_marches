@@ -55,9 +55,11 @@ describe("map object types (bzc.16)", () => {
     ]);
     // 62 catalogue types, 4 winter sites (bzc.87), 4 desert sites (bzc.88),
     // the Mystery Bag (bzc.105), 3 volcanic sites (bzc.125), 3 candy sites
-    // (bzc.124).
-    expect(new Set(MAP_OBJECT_TYPE_IDS).size).toBe(62 + 4 + 4 + 1 + 3 + 3);
+    // (bzc.124), 3 swamp sites (bzc.126).
+    expect(new Set(MAP_OBJECT_TYPE_IDS).size).toBe(62 + 4 + 4 + 1 + 3 + 3 + 3);
     for (const t of ["infernal-forge", "brimstone-pit", "shrine-of-embers"])
+      expect(MAP_OBJECT_TYPE_IDS).toContain(t);
+    for (const t of ["witchs-hut", "drowned-temple", "hags-cauldron"])
       expect(MAP_OBJECT_TYPE_IDS).toContain(t);
     for (const t of ["gingerbread-cottage", "sugar-fountain", "sweet-shop"])
       expect(MAP_OBJECT_TYPE_IDS).toContain(t);

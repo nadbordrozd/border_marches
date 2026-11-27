@@ -79,6 +79,7 @@ const NAMED_CONFIG: {
     | "mystery"
     | "volcanicSites"
     | "candySites"
+    | "swampSites"
   >;
   clusters: Partial<GenConfig["clusters"]>;
   hoards: Pick<GenConfig["hoards"], "rate">;
@@ -103,6 +104,8 @@ const NAMED_CONFIG: {
     volcanicSites: false,
     // Nor the candy sites of bead bzc.124 (they roll no candy zone).
     candySites: false,
+    // Nor the swamp sites of bead bzc.126.
+    swampSites: false,
   },
   // Bead bzc.96 (map composition): the named maps keep the obstacle
   // clusters, fill and pockets they were authored on, with no treasure
@@ -129,6 +132,11 @@ const NAMED_CONFIG: {
     // Nor the candy zones of bead bzc.115.
     candy: {
       ...DEFAULT_GEN_CONFIG.terrain.candy,
+      chance: { S: 0, M: 0, L: 0 },
+    },
+    // Nor the swamps of bead bzc.126.
+    swamp: {
+      ...DEFAULT_GEN_CONFIG.terrain.swamp,
       chance: { S: 0, M: 0, L: 0 },
     },
   },
@@ -187,6 +195,7 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
       winter: biome("winter"),
       desert: biome("desert"),
       candy: biome("candy"),
+      swamp: biome("swamp"),
     },
     objects: {
       ...NAMED_CONFIG.objects,

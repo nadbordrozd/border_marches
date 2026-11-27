@@ -51,6 +51,23 @@ a few sugar sparkles per frosting cell twinkle like the water's glints
 `src/render/map/terrain-motion.ts`), a pixel then a small white cross,
 only where the ground shows.
 
+| swamp | `swamp.png` (400 x 400), `swamp-swatch.png` (80 x 80) | 5 cells | studio set `grounds-swamp` (bead bzc.126) |
+
+The swamp (bead bzc.126) is calm murky olive mud with a soft diagonal
+mossy drift, olive reed flecks and dark wet speckles (take `mire-a`; one
+recorded take, swappable by a later ground restyle). It ranks last
+(`GROUND_RANK`, after the frosting), so every older ground keeps its rank
+and spill shape and its mud creeps out over its neighbours. Its own art
+family: bald cypresses, mossy oaks, mangroves, mossy bushes and pale
+willows in drifts ([trees.md](trees.md)), mossy peat hummocks and crags
+([mountains.md](mountains.md)), swamp decorations
+([decorations.md](decorations.md)); no imported doodads, and the jungle
+family's forest set for battles (`FOREST_FAMILY`). Its motion is code: two
+bubble slots per swamp cell (`MOTION.bubble`, `cellBubbleSlots` in
+`src/render/map/terrain-motion.ts`) where a pale murky pixel swells into a
+little ring and pops, out of step, only where the ground shows; nothing
+shows when the terrain is still.
+
 The volcanic texture is two layers: the calm basalt base (take `base-b`) and
 an overlay of lava cracks (take `pixen-a`) drawn at its own period, so the
 two repeat together only every 30 cells. The overlay file is the whole take;
@@ -69,6 +86,15 @@ rim) and gives each crack one of three glow groups, which pulse out of step.
   snow's phrasing drew lace bands, a ring motif or a wavy 60 px lattice
   that reads as a grid. The negative lists cake, plate, candy, puddles,
   blobs, circles and pattern words.
+
+- Swamp (bzc.126): pixflux 400 x 400, flat shading, no fragments, 7
+  takes. "Wet swamp mud ... large soft, slightly greener mossy drifts ...
+  many tiny short dark green flecks and a few small faint wet sheens"
+  gave `mire-a`. Asking for puddles and reed tufts drew stamped reed clumps
+  and a dark blob (`mud-a`), a standing figure (`mud-b`) or purple lakes
+  with rims (`bog-a`); "wavy ripples" drew a frame (`marsh-a`); others a
+  hard seam or a leaf lattice. The negative lists lakes, ponds, circles,
+  lily pads, flowers and pattern words.
 
 ## Geometry
 

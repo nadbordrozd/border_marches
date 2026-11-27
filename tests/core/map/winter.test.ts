@@ -206,6 +206,9 @@ describe("winter zones in the generator", { timeout: HEAVY_TIMEOUT }, () => {
     expect(off.zones.some((z) => z.main === "snow")).toBe(false);
     on.zones.forEach((z, k) => {
       if (z.main === "snow") return;
+      // The swamp (bead bzc.126) picks after the snow, among the zones the
+      // winter leaves: it may move with it.
+      if (z.main === "swamp" || off.zones[k]?.main === "swamp") return;
       expect(z.main).toBe(off.zones[k]?.main);
       expect(z.secondary).toBe(off.zones[k]?.secondary);
     });

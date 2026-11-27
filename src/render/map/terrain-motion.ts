@@ -18,6 +18,8 @@
  * - glowing decorations (bead bzc.125): the hot pixels of a volcanic
  *   decoration (a lava vent, a sulphur pool) brighten and fade, a slow
  *   pulse like the magma's, each at its own phase.
+ * - bog bubbles (bead bzc.126): a few fixed slots per swamp cell where a
+ *   murky bubble swells, a pale pixel and then a little ring, and pops.
  *
  * Nothing here moves when the terrain is still (reduced motion, the
  * "Animated terrain" setting off, a screen over the map): the view then
@@ -67,6 +69,19 @@ export const MOTION = {
     /** Alpha of its bright overlay at the top and the bottom of a pulse. */
     high: 0.95,
     low: 0.05,
+  },
+  bubble: {
+    /** One cycle of a bubble slot, ms (slower than the sugar). */
+    periodMs: 3100,
+    /** Slots per swamp cell. */
+    slots: 2,
+    /** Share of slots that bubble in a cycle. */
+    lit: 0.35,
+    /** Kept this far (px) from the cell edge, clear of the ground's spill. */
+    inset: 12,
+    /** Bubble colours: a pale murky sheen, then a lighter ring (CSS). */
+    dim: "rgba(190, 206, 150, 0.45)",
+    bright: "rgba(222, 234, 186, 0.7)",
   },
   magma: {
     /** One pulse, ms. */
@@ -193,6 +208,57 @@ export function sparklePixels(slot: SparkleSlot): [number, number][] {
   const { x, y } = slot;
   return [
     [x, y],
+    [x - 1, y],
+    [x + 1, y],
+    [x, y - 1],
+    [x, y + 1],
+  ];
+}
+
+// ------------------------------------------------------------------ swamp
+
+/**
+ * The bubble slots of one swamp cell (bead bzc.126), before the body
+ * checks: like the sugar's, from salts of their own.
+ */
+export function cellBubbleSlots(cx: number, cy: number): SparkleSlot[] {
+  const { slots, inset } = MOTION.bubble;
+  const out: SparkleSlot[] = [];
+  for (let k = 0; k < slots; k += 1) {
+    const h = hash4(cx, cy, k, 0xb0b1);
+    const x =
+      cx * CELL +
+      inset +
+      Math.floor(hashUnit(cx * 7 + k, cy, 0xb2) * (CELL - 2 * inset));
+    const y =
+      cy * CELL +
+      inset +
+      Math.floor(hashUnit(cx, cy * 7 + k, 0xb3) * (CELL - 2 * inset));
+    out.push({ x, y, phase: ((h >>> 8) & 0xffff) / 65536, seed: h });
+  }
+  return out;
+}
+
+/**
+ * How far a bog bubble has swollen at time `t` (ms): 0 none, 1 a pale
+ * pixel, 2 a little ring; each cycle a slot bubbles or not by a hash, so
+ * the mud stirs here and there, never in step.
+ */
+export function bubbleLevel(slot: SparkleSlot, t: number): 0 | 1 | 2 {
+  const { periodMs, lit } = MOTION.bubble;
+  const u = t / periodMs + slot.phase;
+  const cycle = Math.floor(u);
+  if (hashUnit(slot.seed | 0, cycle, 0xb4) >= lit) return 0;
+  const k = u - cycle;
+  if (k < 0.15) return 1;
+  if (k < 0.3) return 2;
+  return 0;
+}
+
+/** The pixels of a swollen bubble: a ring of four round its centre. */
+export function bubblePixels(slot: SparkleSlot): [number, number][] {
+  const { x, y } = slot;
+  return [
     [x - 1, y],
     [x + 1, y],
     [x, y - 1],
@@ -363,6 +429,12 @@ export const LIVING_MOTION: Readonly<Record<string, LivingMotion>> = {
   "smouldering-stump": "glow",
   "fire-salamander": "twitch",
   "ember-beetle": "creep",
+  // The swamp (bead bzc.126): a wisp drifts, the frog and the heron
+  // breathe, the turtle creeps along.
+  "will-o-wisp": "hover",
+  "frog-stone": "breathe",
+  heron: "breathe",
+  "swamp-turtle": "creep",
 };
 
 /** The pose of a living decoration (or one of its parts) at a moment. */

@@ -44,6 +44,8 @@ export {
   sphinxRiddle,
   sphinxSkill,
   sweetShopStock,
+  hagBrew,
+  witchSkills,
   useSite,
   visitSite,
 } from "./sites.ts";

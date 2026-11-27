@@ -1,0 +1,106 @@
+{
+  "set": "swamp-sites",
+  "bead": "border_marches-bzc.126",
+  "class": "map-objects",
+  "exploration": false,
+  "_doc": "The swamp's special sites (bead bzc.126, docs/art/classes/map-objects.md, docs/design/CONTENT_MAP_OBJECTS.md 3.15): the Witch's Hut and the Sunken Ruins (2x2 on 128 x 128) and the Hag's Cauldron (1x1 on 64 x 64). generate-image-v2 at native display size like set map-objects; the imported sawmill is the style image for outline, pixel size and viewing angle only. Layers: style, light-south-west, class-map-object, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {
+    "styleSawmill": {
+      "file": "public/assets/objects/sawmill.png",
+      "usage": "copy only the thick black outline, the pixel size, the flat shading with one shadow tone and the slightly-from-above front viewing angle; not the subject, not the colours and not the layout"
+    },
+    "styleOpts": {
+      "color_palette": false,
+      "outline": true,
+      "detail": true,
+      "shading": true
+    }
+  },
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-map-object"
+    ],
+    "noBackground": true,
+    "styleImage": "@styleSawmill",
+    "styleOptions": "@styleOpts"
+  },
+  "recipes": [
+    {
+      "id": "witch-hut-a",
+      "concept": "WITCH'S HUT (2x2 paid skill teacher)",
+      "width": 128,
+      "height": 128,
+      "seed": 126601,
+      "subject": "Subject: a swamp witch's hut on stilts: a small crooked wooden shack of dark brown planks #6a4a30 with #3e2c1e shadows standing high on four tall thin wooden stilts, a steep sagging thatched roof of olive reeds #8a8a48 with a bent chimney, a round window glowing warm yellow #f0c860, a rickety ladder from the ground up to its little porch door, bundles of dried herbs and a string of small bones hanging under the porch, a few tufts of moss #6b7f3c on the roof. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, witch, cat, ground, water, puddle, grass, sky, smoke, flag"
+    },
+    {
+      "id": "ruins-a",
+      "concept": "SUNKEN RUINS (2x2 guarded bank)",
+      "width": 128,
+      "height": 128,
+      "seed": 126602,
+      "subject": "Subject: sunken temple ruins of the swamp, a creature bank: the top of an old drowned stone temple of grey-green mossy stone blocks #7a8270 with #4a5248 shadows tilted and sinking, a dark arched doorway framed by two broken pillars, a cracked stone face carved over the arch, thick green moss #6b7f3c and hanging vines over the stones, a few tall reeds and a broken stone urn at the front. Nearly the full image wide and most of its height, its front facing the viewer straight on.",
+      "negative": "person, skeleton figure, ground, water, lake, puddle, grass, sky, tree, flag"
+    },
+    {
+      "id": "cauldron-a",
+      "concept": "HAG'S CAULDRON (1x1 brew site)",
+      "width": 64,
+      "height": 64,
+      "seed": 126603,
+      "subject": "Subject: a hag's cauldron of the swamp: a big round black iron cauldron #2e2e34 on three short legs over a small fire of crossed sticks with orange flames #f08a2a, bubbling over with bright green brew #7ee05a that drips down its sides, a few round bubbles above it, a crooked wooden ladle sticking out, a small skull and a bunch of herbs beside it. About three quarters of the image wide and tall, its front facing the viewer straight on.",
+      "negative": "person, witch, hag, ground, puddle, grass, sky, smoke cloud, flag, house"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/objects/map/witchs-hut.png",
+      "from": "witch-hut-a#3",
+      "width": 90,
+      "height": 118,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 19,
+          "y": 7,
+          "width": 90,
+          "height": 118
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/drowned-temple.png",
+      "from": "ruins-a#1",
+      "width": 104,
+      "height": 97,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 13,
+          "y": 21,
+          "width": 104,
+          "height": 97
+        }
+      ]
+    },
+    {
+      "path": "public/assets/objects/map/hags-cauldron.png",
+      "from": "cauldron-a#0",
+      "width": 62,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 7,
+          "width": 62,
+          "height": 56
+        }
+      ]
+    }
+  ]
+}

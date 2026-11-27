@@ -9,7 +9,11 @@
  */
 import type { GameState, HeroState } from "../core/game/index.ts";
 import { auroraSkill, objectName, objectTypeOf } from "../core/game/index.ts";
-import { sweetShopStock, tollhouseStock } from "../core/game/sites.ts";
+import {
+  sweetShopStock,
+  tollhouseStock,
+  witchSkills,
+} from "../core/game/sites.ts";
 import { heroMagic, isSpell, spellInfo } from "../core/magic/index.ts";
 import { isMystery, mysteryArtifactOf } from "../core/map/mystery.ts";
 import type { MapObject } from "../core/map/types.ts";
@@ -170,6 +174,7 @@ export function siteIcons(obj: MapObject): VisitIcon[] {
         id,
       }));
     case "brimstone-pit":
+    case "drowned-temple":
       return prizeIcons(prizeOf(obj, "prize"));
     // The Infernal Forge (bead bzc.125): the Wonder it reforges into.
     case "infernal-forge":
@@ -180,6 +185,9 @@ export function siteIcons(obj: MapObject): VisitIcon[] {
       const skill = auroraSkill(obj);
       return skill === undefined ? [] : [{ kind: "skill", id: skill.id }];
     }
+    // A Witch's Hut (bead bzc.126): the two skills she teaches.
+    case "witchs-hut":
+      return witchSkills(obj).map((id) => ({ kind: "skill", id }));
     default:
       return [];
   }

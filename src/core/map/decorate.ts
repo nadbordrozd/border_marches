@@ -102,6 +102,12 @@ export const DECORATE = {
    * frosting's: a map without lava decorates exactly as before.
    */
   volcanicExtraShare: 0.1,
+  /**
+   * The swamp (bead bzc.126): this many more passable decorations per open
+   * swamp cell (cattails, lily pads, frogs, will-o'-wisps), from their own
+   * random stream after everything else, like the frosting's.
+   */
+  swampExtraShare: 0.08,
 } as const;
 
 export interface DecorateOptions {
@@ -518,6 +524,32 @@ export function decorateMap(map: GameMap, options: DecorateOptions = {}): void {
         x: i % W,
         y: Math.floor(i / W),
         variant: vrng.int(0, kind.looks - 1),
+      });
+      added++;
+    }
+  }
+
+  // A second sprinkle on the swamp (bead bzc.126): its own stream, and only
+  // where there is swamp, so a map without one draws as before.
+  const boggy = range(n).filter(
+    (k) => cell(k)?.terrain === "swamp" && taken[k] === 0 && smallOk(k),
+  );
+  if (boggy.length > 0) {
+    const brng = createRng(deriveSeed(map.seed, "decorations-swamp"));
+    const kinds = decorationKindsFor("swamp", true);
+    const extra = Math.ceil(boggy.length * DECORATE.swampExtraShare);
+    let added = 0;
+    for (const i of brng.shuffle(boggy)) {
+      if (added >= extra || kinds.length === 0) break;
+      if (seeds.some((s) => cheb(W, i, s) < 2)) continue;
+      seeds.push(i);
+      taken[i] = 1;
+      const kind = brng.pick(kinds);
+      placed.push({
+        id: kind.id,
+        x: i % W,
+        y: Math.floor(i / W),
+        variant: brng.int(0, kind.looks - 1),
       });
       added++;
     }

@@ -566,6 +566,7 @@ export const GROUND_TERRAINS: readonly GroundTerrain[] = [
   "snow",
   "sand",
   "frosting",
+  "swamp",
 ];
 
 export { ART_GROUNDS, GROUND_FAMILY } from "./ground-family";
@@ -601,6 +602,7 @@ export const GROUND_SOURCES: Readonly<Record<GroundTerrain, string>> = {
   snow: "none: PixelLab set grounds-snow (bead bzc.87)",
   sand: "none: PixelLab set grounds-sand (bead bzc.88)",
   frosting: "none: PixelLab set grounds-frosting (bead bzc.115)",
+  swamp: "none: PixelLab set grounds-swamp (bead bzc.126)",
 };
 
 /** Texture period in cells (FACTION_GRASS_WORLDS_V7). */
@@ -614,6 +616,7 @@ const GROUND_PERIODS: Readonly<Record<GroundTerrain, number>> = {
   snow: 5,
   sand: 5,
   frosting: 5,
+  swamp: 5,
 };
 
 export const GROUND_TEXTURES: Readonly<

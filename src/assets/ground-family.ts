@@ -12,6 +12,9 @@
  * The Candy Kingdom's frosting of bead bzc.115 is a family of its own too:
  * cotton-candy, frosted and lollipop groves, gumdrop and rock-candy hills
  * under poured icing, no doodads of its own, and the grass forest set.
+ * The swamp of bead bzc.126 likewise: mossy willow, cypress and mangrove
+ * groves, mossy peat hummocks and crags, no doodads of its own (its
+ * decorations are the detail), and the jungle's forest set.
  *
  * Its own module (no imports of values), so the asset tables of trees,
  * peaks and the manifest can all use it without an import cycle.
@@ -33,6 +36,7 @@ export const ART_GROUNDS: readonly ArtGround[] = [
   "snow",
   "sand",
   "frosting",
+  "swamp",
 ];
 
 /** The art family each land ground draws its pieces from. */
@@ -46,10 +50,14 @@ export const GROUND_FAMILY: Readonly<Record<Land, ArtGround>> = {
   snow: "snow",
   sand: "sand",
   frosting: "frosting",
+  swamp: "swamp",
 };
 
 /** The art families with an imported (Pulp Wars) composed-forest set. */
-export type ForestGround = Exclude<ArtGround, "snow" | "sand" | "frosting">;
+export type ForestGround = Exclude<
+  ArtGround,
+  "snow" | "sand" | "frosting" | "swamp"
+>;
 
 export const FOREST_GROUNDS: readonly ForestGround[] = [
   "grass",
@@ -62,7 +70,8 @@ export const FOREST_GROUNDS: readonly ForestGround[] = [
 /**
  * The forest set (battle tree clumps) each art family uses: its own, or a
  * borrowed one (bead bzc.87: snow borrows the grass family's conifers; bead
- * bzc.88: sand the steppe's; bead bzc.115: frosting the grass family's).
+ * bzc.88: sand the steppe's; bead bzc.115: frosting the grass family's;
+ * bead bzc.126: the swamp the jungle's dense dark clumps).
  */
 export const FOREST_FAMILY: Readonly<Record<ArtGround, ForestGround>> = {
   grass: "grass",
@@ -73,4 +82,5 @@ export const FOREST_FAMILY: Readonly<Record<ArtGround, ForestGround>> = {
   snow: "grass",
   sand: "steppe",
   frosting: "grass",
+  swamp: "jungle",
 };

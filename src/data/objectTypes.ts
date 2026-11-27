@@ -109,6 +109,10 @@ export const OBJECT_TYPE_IDS = [
   "infernal-forge",
   "brimstone-pit",
   "shrine-of-embers",
+  // 3.15 Swamp sites (bead bzc.126): placed only in swamp zones
+  "witchs-hut",
+  "drowned-temple",
+  "hags-cauldron",
 ] as const;
 
 export type ObjectTypeId = (typeof OBJECT_TYPE_IDS)[number];
@@ -190,6 +194,7 @@ const W: Terrain = "wasteland";
 const SN: Terrain = "snow";
 const D: Terrain = "sand";
 const V: Terrain = "volcanic";
+const SW: Terrain = "swamp";
 
 // Flags: "s" stretch, "v" vanishes when used.
 const ROWS: readonly Row[] = [
@@ -358,6 +363,14 @@ const ROWS: readonly Row[] = [
   ["brimstone-pit", "Brimstone Pit", "bank", 2, 2, "", "one-time", 2500, [V], 0, "Fire-Eaters and Gremlins guard a pit of burning brimstone; win the battle to take its essence, gold and an artifact."],
   // prettier-ignore
   ["shrine-of-embers", "Shrine of Embers", "site", 1, 1, "", "each-visit", 600, [V], 0, "Ember Brand until the end of the hero's next battle: its creatures strike 20% harder, and are struck 10% harder. Visiting again adds no more."],
+  // 3.15 Swamp sites (bead bzc.126): weight 0, placed by the swamp rule
+  // (gen/swamp.ts) in the swamp zones only.
+  // prettier-ignore
+  ["witchs-hut", "Witch's Hut", "site", 2, 2, "", "per-hero", 2500, [SW], 0, "For 1500 gold and 2 essence the witch teaches one of her two skills: one more rank if the hero has it, rank 1 if it has a free skill slot. Each hero once."],
+  // prettier-ignore
+  ["drowned-temple", "Drowned Temple", "bank", 2, 2, "", "one-time", 6500, [SW], 0, "Bog creatures lurk in the sunken temple; win the battle to take its drowned offerings: essence, a scroll, gold and, in the bigger ones, an artifact."],
+  // prettier-ignore
+  ["hags-cauldron", "Hag's Cauldron", "site", 1, 1, "", "per-hero", 1000, [SW], 0, "Drink the hag's brew: two times in three a blessing, +1 to one of the hero's four stats for good; otherwise her curse, -1 Morale and -1 Luck until the end of the hero's next battle. Each hero once."],
 ];
 
 export const OBJECT_TYPES: Readonly<Record<ObjectTypeId, ObjectTypeDef>> =
@@ -447,6 +460,11 @@ export const FORGE_COST = { gold: 1000, essence: 2 } as const;
  * Strikes against them this many percent more.
  */
 export const EMBER_BRAND = { dealt: 20, taken: 10 } as const;
+/** A Witch's Hut's price for one skill rank (bead bzc.126). */
+export const WITCH_HUT_PRICE = { gold: 1500, essence: 2 } as const;
+
+/** A Hag's Cauldron's brew (bead bzc.126): the blessing's odds in sixths. */
+export const HAG_BLESSING_SIXTHS = 4;
 
 /** Heroes a player may hold (a prison's hero needs a free place). */
 export const MAX_HEROES = 8;
@@ -541,6 +559,8 @@ export function siteBuffEffect(buff: string): {
           { direction: "taken", percent: EMBER_BRAND.taken },
         ],
       };
+    case "hags-curse":
+      return { label: "Hag's Curse", morale: -1, luck: -1 };
     default:
       return { label: buff };
   }

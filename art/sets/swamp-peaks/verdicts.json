@@ -1,0 +1,257 @@
+{
+  "low-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:53.673Z"
+  },
+  "low-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:54.013Z"
+  },
+  "low-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:54.341Z"
+  },
+  "low-a#4": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:54.580Z"
+  },
+  "low-a#5": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:54.814Z"
+  },
+  "low-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:55.079Z"
+  },
+  "low-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:55.454Z"
+  },
+  "low-a#9": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:55.849Z"
+  },
+  "low-a#10": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:56.322Z"
+  },
+  "low-a#12": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:56.681Z"
+  },
+  "low-a#13": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:56.835Z"
+  },
+  "low-a#14": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:56.991Z"
+  },
+  "low-a#15": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:57.207Z"
+  },
+  "low-a#17": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:57.456Z"
+  },
+  "low-a#18": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:57.743Z"
+  },
+  "low-a#19": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:58.001Z"
+  },
+  "low-a#21": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:58.179Z"
+  },
+  "low-a#22": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:58.422Z"
+  },
+  "low-a#23": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:58.740Z"
+  },
+  "low-a#24": {
+    "verdict": "ACCEPTED",
+    "notes": "a low mossy peat hummock, chunky, reads as a hill",
+    "at": "2026-11-27T09:34:58.904Z"
+  },
+  "mid-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:34:59.348Z"
+  },
+  "mid-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:34:59.631Z"
+  },
+  "mid-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:34:59.926Z"
+  },
+  "mid-a#6": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:35:00.352Z"
+  },
+  "mid-a#7": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:35:00.662Z"
+  },
+  "mid-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:35:00.826Z"
+  },
+  "mid-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:35:01.100Z"
+  },
+  "mid-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:35:01.390Z"
+  },
+  "mid-b#4": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:35:01.851Z"
+  },
+  "mid-b#5": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:35:02.099Z"
+  },
+  "mid-b#6": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:35:02.377Z"
+  },
+  "mid-b#7": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:35:02.637Z"
+  },
+  "mid-b#8": {
+    "verdict": "ACCEPTED",
+    "notes": "a mossy peat crag under a thick moss cap",
+    "at": "2026-11-27T09:35:02.924Z"
+  },
+  "big-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a big mossy peat mountain",
+    "at": "2026-11-27T09:35:03.138Z"
+  },
+  "big-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a big mossy peat mountain",
+    "at": "2026-11-27T09:35:03.383Z"
+  },
+  "big-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "a big mossy peat mountain",
+    "at": "2026-11-27T09:35:03.745Z"
+  },
+  "big-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a big mossy peat mountain",
+    "at": "2026-11-27T09:35:03.990Z"
+  },
+  "big-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "a big mossy peat mountain",
+    "at": "2026-11-27T09:35:04.235Z"
+  },
+  "big-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "a big mossy peat mountain",
+    "at": "2026-11-27T09:35:04.391Z"
+  },
+  "big-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "a big mossy peat mountain",
+    "at": "2026-11-27T09:35:04.790Z"
+  },
+  "low-a#1": {
+    "verdict": "REJECTED",
+    "notes": "spiky sprouts and twigs on top read as a bush",
+    "at": "2026-11-27T09:35:05.095Z"
+  },
+  "low-a#8": {
+    "verdict": "REJECTED",
+    "notes": "spiky sprouts and twigs on top read as a bush",
+    "at": "2026-11-27T09:35:05.345Z"
+  },
+  "low-a#11": {
+    "verdict": "REJECTED",
+    "notes": "spiky sprouts and twigs on top read as a bush",
+    "at": "2026-11-27T09:35:05.660Z"
+  },
+  "low-a#16": {
+    "verdict": "REJECTED",
+    "notes": "spiky sprouts and twigs on top read as a bush",
+    "at": "2026-11-27T09:35:05.977Z"
+  },
+  "low-a#20": {
+    "verdict": "REJECTED",
+    "notes": "a plain smooth dome, a near copy of take 5",
+    "at": "2026-11-27T09:35:06.322Z"
+  },
+  "mid-a#1": {
+    "verdict": "REJECTED",
+    "notes": "terraced steps (a rejected shape)",
+    "at": "2026-11-27T09:35:06.879Z"
+  },
+  "mid-a#4": {
+    "verdict": "REJECTED",
+    "notes": "an overhanging arch with dripping moss",
+    "at": "2026-11-27T09:35:07.302Z"
+  },
+  "mid-a#5": {
+    "verdict": "REJECTED",
+    "notes": "terraced steps (a rejected shape)",
+    "at": "2026-11-27T09:35:07.607Z"
+  },
+  "mid-a#8": {
+    "verdict": "REJECTED",
+    "notes": "a canopy of moss clumps reads as a tree",
+    "at": "2026-11-27T09:35:07.880Z"
+  },
+  "mid-b#3": {
+    "verdict": "REJECTED",
+    "notes": "stacked terraces (a rejected shape)",
+    "at": "2026-11-27T09:35:08.227Z"
+  },
+  "big-a#1": {
+    "verdict": "REJECTED",
+    "notes": "terraced steps with column stripes (rejected shapes)",
+    "at": "2026-11-27T09:35:08.428Z"
+  }
+}

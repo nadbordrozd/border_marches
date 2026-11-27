@@ -46,6 +46,8 @@ Studio set `art/sets/peaks`, derived files in
 | Snow (bzc.87) | alpine | blue-grey rock under snow caps and snowfields; set `winter-peaks` (10 foothills, 12 peaks, 7 summits; 6 calls) |
 | Frosting (bzc.115) | candy | strawberry gumdrop hills and rock-candy crags under poured royal icing (the snow caps' candy answer); set `candy-peaks` (24 foothills, 16 peaks, 7 summits; 5 calls) |
 
+| Swamp (bzc.126) | mossy peat | dark peat rock under thick olive moss, mossy hummocks and crags with roots; set `swamp-peaks` (see its verdicts) |
+
 Each family has three tiers: `foothill` (from 56 x 44 requests), `peak` (from
 80 x 64) and `summit` (from 120 x 88): 170 accepted sprites of 284 takes, 31
 PixelLab calls. Every take has a verdict in `art/sets/peaks/verdicts.json`.
@@ -66,6 +68,7 @@ candidates a call) and cropped to about 136-161 x 45-89.
 | Wasteland (and volcanic) | 4 | jagged basalt ridges with ember cracks over an ash foot |
 | Jungle | 3 | limestone towers under moss on a jungle-green foot |
 | Frosting | 0 | none yet: candy ranges keep the three older tiers (follow-up) |
+| Swamp | 0 | none yet: swamp ranges keep their three tiers of mossy peat hummocks and crags (bead bzc.126; follow-up) |
 
 Rejected on sight for massifs, besides the list below: a flat cut bottom or a
 rectangular snow or sand plate under the form (with a white line under it),

@@ -1,0 +1,380 @@
+{
+  "willow-a": {
+    "id": "willow-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c370d9e3-23db-4967-8710-1d420de849c2",
+    "submittedAt": "2026-11-27T09:10:22.713Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small swamp tree, chunky and cute, each image a different one of these: a squat swamp willow with a big rounded drooping crown of dull olive-green leaf clumps #6b7f3c (shadow #43552a, light #91a556 on the left side) hanging down in a few thick rounded lobes; a bald cypress with a dense flat-topped crown of dark moss green #4a6436 on a flared buttressed brown trunk #5c4630, two or three thick strands of grey-green moss #93a07a hanging from its branches; a gnarled swamp oak with a round dark olive crown draped with a few thick clumps of grey-green moss. A short thick trunk. A full crown about two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 126201,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one small swamp tree, chunky and cute, each image a different one of these: a squat swamp willow with a big rounded drooping crown of dull olive-green leaf clumps #6b7f3c (shadow #43552a, light #91a556 on the left side) hanging down in a few thick rounded lobes; a bald cypress with a dense flat-topped crown of dark moss green #4a6436 on a flared buttressed brown trunk #5c4630, two or three thick strands of grey-green moss #93a07a hanging from its branches; a gnarled swamp oak with a round dark olive crown draped with a few thick clumps of grey-green moss. A short thick trunk. A full crown about two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers."
+    },
+    "at": "2026-11-27T09:12:47.917Z",
+    "usageUsd": 0.08310490748617384,
+    "candidates": [
+      {
+        "file": "willow-a-0.png",
+        "sha256": "3a398c3af002f4445a6cdeef6aeb7d039f0c68c8f2ec6f84433d9b47de34347f",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-1.png",
+        "sha256": "c3b45ff34a60ec171db169f7a87936d66ce033e52ccf7272caeb8cdc650dc880",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-2.png",
+        "sha256": "b362375f5d4eef0c069b5da175ae66177fbb18da50a36b81be775cd5367cc9a3",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-3.png",
+        "sha256": "a773bb01b04f2d936861d0b264fe905459f90bd4a7821fb8f49e009539b6e2c6",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-4.png",
+        "sha256": "a1d107bb3fc4db814dc3a1b965ceda22e706be3435c19342418ca3136085f403",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-5.png",
+        "sha256": "f57165c7da9b174c7f33dc4686727018dbe4e415c6b13f51e5eb1865d44d9475",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-6.png",
+        "sha256": "f78726bf12fd8ca4c3d7edfd0a433637ef7d8fb6ebe7a50a4ae541e7e97f0f13",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-7.png",
+        "sha256": "a166bafcbe7bd6f9218a7541d54da4c7beb2e6605da248a5a08ca68def3d8c80",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-8.png",
+        "sha256": "4243a3314d77c30f8af465b7bd50efddc154b2730579fd644fbd62fb3a1b113d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-9.png",
+        "sha256": "ca22a57a1402a6a8f749871b5915d8dea9dcf2629b01395e545e21d9fe443e1a",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-10.png",
+        "sha256": "14f8dd118a2dd3707efe84d5b34043130fe5fba03b22a2edf843eb38297e24ef",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-11.png",
+        "sha256": "f71061e04ee837091393068d3cc639b2e669ee5bf8c5d7250d9f00d8d36eb763",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-12.png",
+        "sha256": "0d8b4a718420622eb08af5da07bacb67e3934cbc051e6e34c91ae54b44b5247d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-13.png",
+        "sha256": "853e3cb4f91507bc3455d7ee21960cedd60d95f2a771c41a84b082874eb48612",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-14.png",
+        "sha256": "3ac1502c3a4f5f77389097fdd78bca96d649553326f5165785b6b63ff51a0704",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-15.png",
+        "sha256": "b8cc301741aa2b52ee29aa40d554af9fa7eccf9c9416ca7e116b1a3854e7cfe5",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-16.png",
+        "sha256": "c2c8bfd0ee377ea934a235efae5efc1d558887c8d2069ba78d612d47ea0a06f9",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-17.png",
+        "sha256": "239fcb4acc710cd3cb259fba386a22ef5b5116a694e75abbde331017115e71c2",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-18.png",
+        "sha256": "abb7a6746463ca871d2c21e0ff83f87f691cba6e3c0a79bf1e1d67cdd0088746",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-19.png",
+        "sha256": "37d2e0b5d318809bce5f880cf35b16e33370d671eec861fd33480f094a70cd98",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-20.png",
+        "sha256": "3922ef33f00ef5be412ed9482e0528cc44f5b2cd97c6dede0c643eb5e7927215",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-21.png",
+        "sha256": "a05f0893e6a1fb3691fca8fff44b427f9293b4ff64d55682d52b1856d1945934",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-22.png",
+        "sha256": "8053e7675cc2f07f6da40064d1caf68f3fd5bd61950843959341a4d36d3044de",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-23.png",
+        "sha256": "f59fd6214d4d5d0916ff2e2bfb03449cb9a876802cd2413152276e47335cab9d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "willow-a-24.png",
+        "sha256": "f863bd34a2858eb7c6b68bb2a3e216199dd2af40f5d52b9159b791f5d99d5d67",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  },
+  "mangrove-a": {
+    "id": "mangrove-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "82a6b2d7-7b6a-4a47-8907-665b4d9fa2da",
+    "submittedAt": "2026-11-27T09:12:48.005Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-tree.txt",
+          "text": "Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one small swamp tree, chunky and cute, each image a different one of these: a mangrove with a round dense crown of deep green leaves #4e6a34 (shadow #32462a, light #7a9548 on the left side) standing on a short tangle of thick arched brown stilt roots #6a5236; a squat bald cypress with a cone-shaped crown of dark green #475f34 and a fat flared trunk; a round mossy swamp bush of olive leaves #6b7f3c with a few thick strands of grey-green moss #93a07a. Chunky and solid, about two thirds of the image wide and nearly the full image tall."
+        }
+      ],
+      "image_size": {
+        "width": 48,
+        "height": 48
+      },
+      "no_background": true,
+      "seed": 126202,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one single small tree for a dense forest canopy on a strategy map, seen in three-quarter view looking slightly down, calmer and less saturated than units, a thin dark outline on the outer silhouette, soft inner lines, big simple flat shapes with one shadow tone, a short trunk at the bottom. It stands alone on the empty transparent background: nothing is drawn under it, no ground patch, no grass, no soil disc and no shadow. Subject: one small swamp tree, chunky and cute, each image a different one of these: a mangrove with a round dense crown of deep green leaves #4e6a34 (shadow #32462a, light #7a9548 on the left side) standing on a short tangle of thick arched brown stilt roots #6a5236; a squat bald cypress with a cone-shaped crown of dark green #475f34 and a fat flared trunk; a round mossy swamp bush of olive leaves #6b7f3c with a few thick strands of grey-green moss #93a07a. Chunky and solid, about two thirds of the image wide and nearly the full image tall. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, ground plate, pedestal, soil disc, grass tuft, cast shadow, second tree, group of trees, forest, background, face, fruit, eyes, person, ground, water, puddle, grass, reeds, pot, thin hanging threads, bare branches, flowers."
+    },
+    "at": "2026-11-27T09:14:11.191Z",
+    "usageUsd": 0.08163033890724182,
+    "candidates": [
+      {
+        "file": "mangrove-a-0.png",
+        "sha256": "034d777655736e4219c1c3028f7ae801da3e4b49a5e209bf2d24b06d2d67875b",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-1.png",
+        "sha256": "8852c4b3a3c3e980d404d3c85ee0772eb181e6b65fe71625c1854eebc71a5ca2",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-2.png",
+        "sha256": "b700841031757c77bfea7a714aeeb91fffc0e4c2ace5b29a955b0fb0c50d666a",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-3.png",
+        "sha256": "be8bb59315c0acffe35249f0b551bbbd8775d4f0f7c70759fc8577c6b45d8ca2",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-4.png",
+        "sha256": "8766bf8bde2d135644c691d180cdd7e24afe45bc20ab958157d438f762874904",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-5.png",
+        "sha256": "f506e9f17df222814dad1945f7878511f7ade8408fbf9cebae684907e0f85c09",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-6.png",
+        "sha256": "2ef8e339a601bb493faf804503cbefce325dc7600948303e03a56690fbab6b54",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-7.png",
+        "sha256": "6f334559dd6d0d4531846d67a49b39fb1abea9946772d22243d9bfa05ef036b6",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-8.png",
+        "sha256": "1b077bd4cff6821d0d9f15e8cfae1c164ebf323e3dd4288fb2b26a5280218397",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-9.png",
+        "sha256": "8b174af98349fae1d03a2e3d4f410b0d85d8d543c1c1ea39016db2456840d9f4",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-10.png",
+        "sha256": "3ad21947870e994ecaa175f81f60d50294e01d8b27276ae443506a2612cff7ed",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-11.png",
+        "sha256": "7d2fed0a257f6d9636b058e292fefe008623e4cb8219e8208c9d03550ceae616",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-12.png",
+        "sha256": "2ff5f50a119e3a786e46f601ec57a120129e52fb8b0fa2758977b58c1305fc15",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-13.png",
+        "sha256": "69472a0430ac330030bde197a511e78fefeb65fdec6b1fb09842a6eae86c62fa",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-14.png",
+        "sha256": "8b315bcf315bdbbeecf0f986f4f3a484b59e6822829b2e361e4b6c0a6772ac03",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-15.png",
+        "sha256": "3d94d991adb7ca9d21c5230459e296a159ae4bb3cc83606a40547e9402affdda",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-16.png",
+        "sha256": "7156a958019d711e29823ae40faa50709ed23785c3beab22fe4fc0aa36211af5",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-17.png",
+        "sha256": "57c504239162a09f022d9f9b61122ba2689b285c01702060360bae4441062750",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-18.png",
+        "sha256": "2fdab608a6f28280c26e0367fff74c331e3ca3d1d79b1f1e1f83fefa15535f47",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-19.png",
+        "sha256": "761b99da0806d92726027197c951ded981c350b454279af578e00c439610da97",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-20.png",
+        "sha256": "3ba829c4b276e3c2310940a4eebef4346b169e04c815b8c1dd0834c16ea8651d",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-21.png",
+        "sha256": "bdf79f8bc2a133968b6076469e3f94df727444f2804aafaccd534ce490c6a478",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-22.png",
+        "sha256": "86f4f44f2b9a7af7ff33023fdf30cadd7615a66fc56ad2bed1faf35dcec292e3",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-23.png",
+        "sha256": "de3065d85f3d0c780e96f79afb8724b18f41de6ba97310110a9a6a4e2735d963",
+        "width": 48,
+        "height": 48
+      },
+      {
+        "file": "mangrove-a-24.png",
+        "sha256": "9af3b6bda7197f49bbe8ac614175d7a9d0146ad683d181452f048635f744f529",
+        "width": 48,
+        "height": 48
+      }
+    ]
+  }
+}

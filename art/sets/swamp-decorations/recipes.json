@@ -1,0 +1,531 @@
+{
+  "set": "swamp-decorations",
+  "bead": "border_marches-bzc.126",
+  "class": "decorations",
+  "exploration": false,
+  "_doc": "Swamp decorations (bead bzc.126, docs/art/classes/decorations.md): passable small details at 32 x 32 with the doodad class layer, impassable props on 64 x 64 (one cell) or 128 x 64 (two cells side by side) with the prop class layer. generate-image-v2, no style image, like set decorations; one call returns many candidates of a mixed subject, the best distinct ones are accepted and cropped to their opaque box plus 1 px. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": [
+      "style",
+      "light-south-west",
+      "class-doodad"
+    ],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "small-a",
+      "concept": "SWAMP SMALL (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 126401,
+      "subject": "Subject: one tiny swamp detail, each image a different one of these: two round green lily pads #5f9a3e with one pink water-lily flower #f0a0c0; a clump of three tall brown cattails #7a4a26 on green stalks #6b8a3a; a little cluster of pale glowing swamp mushrooms with teal caps #6fd6c4; a small round floating will-o'-wisp, a soft pale green-blue light #b8f0d8 with a brighter white core; a fat little green frog #6aa040 sitting on a round mossy stone #6e6a58. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "ground patch, water patch, puddle, shadow, person, gold, coins, gem, chest, jar, pot, plate"
+    },
+    {
+      "id": "small-b",
+      "concept": "SWAMP SMALL (passable)",
+      "width": 32,
+      "height": 32,
+      "seed": 126402,
+      "subject": "Subject: one tiny swamp detail, each image a different one of these: three round mud bubbles of different sizes #6a6440 rising, one bursting; a grey heron #a8b0b8 standing on one thin leg; a few white fluffy tufts of bog cotton on short green stems; a small olive swamp turtle #6e7a3a with a dark shell; an old mossy animal skull #d8ceb0 half hidden in a tuft of reeds. Small and low, about half of the image wide, much smaller than a person.",
+      "negative": "ground patch, water patch, puddle, shadow, person, gold, coins, gem, chest, jar, pot, plate"
+    },
+    {
+      "id": "props-1x1-a",
+      "concept": "SWAMP PROPS 1x1 (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 64,
+      "height": 64,
+      "seed": 126501,
+      "subject": "Subject: one big blocking swamp prop that fills one map cell, each image a different one of these: a rotten mossy tree stump #5c4630 with big orange shelf fungi #d08a3a and moss #6b7f3c; an old carved wooden bog idol, a tall post with a grim round face and moss on its head; a big tangle of thick arched mangrove roots #6a5236 with nothing above them; a big round mossy boulder #6e6a58 with olive moss on top. About three quarters of the image wide and tall.",
+      "negative": "ground patch, platform, plate, water, puddle, person, flag, glow, tree crown, leaves"
+    },
+    {
+      "id": "props-2x1-a",
+      "concept": "SWAMP PROP 2x1: SUNKEN ROWBOAT (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 128,
+      "height": 64,
+      "seed": 126502,
+      "subject": "Subject: one long blocking swamp prop across the image from left to right: an old wrecked wooden rowboat #7a5a38 with #4e3a26 shadows lying tilted on its side, cracked grey planks, a broken oar, green moss #6b7f3c and tall reeds growing up through a hole in its hull. Nearly the full image wide and about two thirds of the image tall.",
+      "negative": "ground patch, platform, plate, water, lake, puddle, person, face, flag, glow, sail, mast"
+    },
+    {
+      "id": "props-2x1-b",
+      "concept": "SWAMP PROP 2x1: ROTTEN BOARDWALK (impassable)",
+      "fragments": [
+        "style",
+        "light-south-west",
+        "class-prop"
+      ],
+      "width": 128,
+      "height": 64,
+      "seed": 126503,
+      "subject": "Subject: one long blocking swamp prop across the image from left to right: a broken old wooden boardwalk of grey rotten planks #7a7060 on short crooked posts, a gap where two planks fell through, a coil of rope and a hanging lantern on one post, green moss #6b7f3c on the planks. Nearly the full image wide and about two thirds of the image tall.",
+      "negative": "ground patch, platform, plate, water, lake, puddle, person, face, flag, glow, house, roof"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "public/assets/terrain/decorations/lily-pads-1.png",
+      "from": "small-a#0",
+      "width": 28,
+      "height": 21,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 5,
+          "width": 28,
+          "height": 21
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/lily-pads-2.png",
+      "from": "small-a#7",
+      "width": 28,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 2,
+          "width": 28,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/cattails-1.png",
+      "from": "small-a#8",
+      "width": 20,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 6,
+          "y": 2,
+          "width": 20,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/cattails-2.png",
+      "from": "small-a#13",
+      "width": 22,
+      "height": 28,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 2,
+          "width": 22,
+          "height": 28
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/glow-mushrooms-1.png",
+      "from": "small-a#16",
+      "width": 24,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 24,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/glow-mushrooms-2.png",
+      "from": "small-a#20",
+      "width": 24,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 24,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/will-o-wisp-1.png",
+      "from": "small-a#59",
+      "width": 21,
+      "height": 21,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 21,
+          "height": 21
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/will-o-wisp-2.png",
+      "from": "small-a#60",
+      "width": 25,
+      "height": 18,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 6,
+          "width": 25,
+          "height": 18
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/frog-stone-1.png",
+      "from": "small-a#32",
+      "width": 24,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 24,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/frog-stone-2.png",
+      "from": "small-a#37",
+      "width": 24,
+      "height": 25,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 24,
+          "height": 25
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/bog-bubbles-1.png",
+      "from": "small-b#25",
+      "width": 25,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 3,
+          "y": 4,
+          "width": 25,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/bog-bubbles-2.png",
+      "from": "small-b#49",
+      "width": 24,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 5,
+          "width": 24,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/heron-1.png",
+      "from": "small-b#3",
+      "width": 21,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 2,
+          "width": 21,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/heron-2.png",
+      "from": "small-b#37",
+      "width": 21,
+      "height": 27,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 2,
+          "width": 21,
+          "height": 27
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/bog-cotton-1.png",
+      "from": "small-b#4",
+      "width": 22,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 4,
+          "width": 22,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/bog-cotton-2.png",
+      "from": "small-b#29",
+      "width": 22,
+      "height": 22,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 5,
+          "y": 5,
+          "width": 22,
+          "height": 22
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/swamp-turtle-1.png",
+      "from": "small-b#12",
+      "width": 24,
+      "height": 15,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 13,
+          "width": 24,
+          "height": 15
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/swamp-turtle-2.png",
+      "from": "small-b#30",
+      "width": 24,
+      "height": 16,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 12,
+          "width": 24,
+          "height": 16
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/reed-skull-1.png",
+      "from": "small-b#7",
+      "width": 25,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 25,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/reed-skull-2.png",
+      "from": "small-b#23",
+      "width": 25,
+      "height": 24,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 4,
+          "y": 4,
+          "width": 25,
+          "height": 24
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fungus-stump-1.png",
+      "from": "props-1x1-a#2",
+      "width": 63,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 6,
+          "width": 63,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/fungus-stump-2.png",
+      "from": "props-1x1-a#3",
+      "width": 62,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 5,
+          "width": 62,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/mangrove-roots-1.png",
+      "from": "props-1x1-a#9",
+      "width": 62,
+      "height": 55,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 5,
+          "width": 62,
+          "height": 55
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/mangrove-roots-2.png",
+      "from": "props-1x1-a#11",
+      "width": 61,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 0,
+          "width": 61,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/mossy-crag-1.png",
+      "from": "props-1x1-a#14",
+      "width": 60,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 2,
+          "y": 1,
+          "width": 60,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/mossy-crag-2.png",
+      "from": "props-1x1-a#15",
+      "width": 62,
+      "height": 61,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 1,
+          "y": 1,
+          "width": 62,
+          "height": 61
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/sunken-rowboat-1.png",
+      "from": "props-2x1-a#0",
+      "width": 82,
+      "height": 58,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 23,
+          "y": 4,
+          "width": 82,
+          "height": 58
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/sunken-rowboat-2.png",
+      "from": "props-2x1-a#1",
+      "width": 83,
+      "height": 56,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 22,
+          "y": 1,
+          "width": 83,
+          "height": 56
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/rotten-boardwalk-1.png",
+      "from": "props-2x1-b#0",
+      "width": 128,
+      "height": 63,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 128,
+          "height": 63
+        }
+      ]
+    },
+    {
+      "path": "public/assets/terrain/decorations/rotten-boardwalk-2.png",
+      "from": "props-2x1-b#2",
+      "width": 127,
+      "height": 62,
+      "steps": [
+        {
+          "op": "crop",
+          "x": 0,
+          "y": 0,
+          "width": 127,
+          "height": 62
+        }
+      ]
+    }
+  ]
+}

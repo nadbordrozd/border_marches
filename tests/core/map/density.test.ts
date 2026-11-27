@@ -79,6 +79,11 @@ describe("denser maps (bzc.50)", { timeout: HEAVY_TIMEOUT }, () => {
       "sphinx",
       "sun-temple",
       "sunken-tomb",
+      // And the swamp sites (bead bzc.126) only on maps that roll a swamp
+      // (tests/core/map/swamp.test.ts).
+      "witchs-hut",
+      "drowned-temple",
+      "hags-cauldron",
     ];
     // The candy sites (bead bzc.124) stand only on maps that roll a candy
     // zone (tests/core/map/candy-sites.test.ts).

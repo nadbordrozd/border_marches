@@ -249,11 +249,12 @@ describe("frosting in the terrain plan (bead bzc.115)", () => {
     .map((c, i) => (c.terrain === "frosting" ? i : -1))
     .filter((i) => i >= 0);
 
-  it("ranks the frosting last, so every older ground keeps its rank", () => {
+  it("ranks the frosting after the older grounds, so they keep their ranks", () => {
     expect(icing.length).toBeGreaterThan(0);
     const layout = planTerrain(map).layout;
     const rank = GROUND_RANK.indexOf("frosting");
-    expect(rank).toBe(GROUND_RANK.length - 1);
+    // Only the swamp (bead bzc.126) ranks after it.
+    expect(rank).toBe(GROUND_RANK.indexOf("swamp") - 1);
     for (const i of icing) expect(layout.kind[i]).toBe(rank);
     const border = icing.find((i) => (layout.ranks[i]?.length ?? 0) > 1);
     expect(border).toBeDefined();
@@ -279,5 +280,41 @@ describe("frosting in the terrain plan (bead bzc.115)", () => {
     }
     expect(woods).toBeGreaterThan(0);
     expect(rock).toBeGreaterThan(0);
+  });
+});
+
+describe("swamp in the terrain plan (bead bzc.126)", () => {
+  // The first medium map that rolls a swamp (M 1).
+  const map = generateMap(1, { size: "M", players: 2 });
+  const mud = map.cells
+    .map((c, i) => (c.terrain === "swamp" ? i : -1))
+    .filter((i) => i >= 0);
+
+  it("ranks the swamp last, so every older ground keeps its rank", () => {
+    expect(mud.length).toBeGreaterThan(0);
+    const layout = planTerrain(map).layout;
+    const rank = GROUND_RANK.indexOf("swamp");
+    expect(rank).toBe(GROUND_RANK.length - 1);
+    for (const i of mud) expect(layout.kind[i]).toBe(rank);
+    const border = mud.find((i) => (layout.ranks[i]?.length ?? 0) > 1);
+    expect(border).toBeDefined();
+    expect(layout.ranks[border!]?.at(-1)).toBe(rank);
+  });
+
+  it("grows the swamp groves and mossy peaks on the swamp", () => {
+    const plan = planTerrain(map);
+    // GROUNDS index of the swamp family in canopy.ts and peaks.ts.
+    const swamp = 8;
+    let woods = 0;
+    for (const i of mud) {
+      const cell = map.cells[i]!;
+      if (cell.obstacle === "forest") {
+        woods += 1;
+        expect(plan.canopyField.set[i]).toBe(swamp);
+      }
+      if (cell.obstacle === "mountain" && plan.peakField.rock[i] === 1)
+        expect(plan.peakField.family[i]).toBe(swamp);
+    }
+    expect(woods).toBeGreaterThan(0);
   });
 });

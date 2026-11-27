@@ -178,6 +178,8 @@ export interface GroundSources {
  * of every older ground stay as they were: its drifting sand runs out over
  * the grounds round it. The Candy Kingdom's frosting (bead bzc.115) comes
  * after it for the same reason: its icing runs out over its neighbours.
+ * The swamp (bead bzc.126) comes last for the same reason: its mud and
+ * reeds creep out over the grounds round it.
  */
 export const GROUND_RANK: readonly GroundTerrain[] = [
   "grass",
@@ -189,6 +191,7 @@ export const GROUND_RANK: readonly GroundTerrain[] = [
   "volcanic",
   "sand",
   "frosting",
+  "swamp",
 ];
 
 const WATER = GROUND_RANK.length;
@@ -463,6 +466,7 @@ const FOREST_SHADE: Readonly<
   snow: [60, 78, 96],
   sand: [120, 88, 44],
   frosting: [150, 70, 110],
+  swamp: [24, 36, 20],
 };
 
 /**
