@@ -92,7 +92,7 @@ export function namedPlayerSetups(
 /**
  * The players of a new game: the human first with its faction, then AI
  * players, each on the next playable faction after the human's in turn
- * (so a four-player game has all four factions).
+ * (so a four-player game has four of the five factions).
  */
 export function playerSetups(setup: GameSetup): PlayerSetup[] {
   const named = setup.map === undefined ? undefined : findNamedMap(setup.map);
@@ -147,6 +147,7 @@ const PLAY_STYLE: Readonly<Partial<Record<FactionId, string>>> = {
   undead: "Attrition: the fallen rise once; outlast the enemy.",
   goblins: "Explosive: bomb freely; your own goblins fly off unhurt.",
   candy: "Clinging: what you strike stays put; reel it in, shoot it.",
+  dwarves: "Siege: Defend to stoke steam; shell where they will stand.",
 };
 
 /**
@@ -471,7 +472,9 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
         card.setAttribute("aria-pressed", String(id === faction));
       }
       const chosen = findFaction(faction);
-      factionDetail.replaceChildren(el("p", chosen?.blurb ?? ""));
+      factionDetail.replaceChildren(
+        el("p", el("b", `${chosen?.name ?? ""}. `), chosen?.blurb ?? ""),
+      );
       if (chosen?.birthright !== undefined) {
         factionDetail.append(
           el(
@@ -636,8 +639,11 @@ function mainMenu(params: URLSearchParams): Promise<GameState> {
               "div.gm-new-col.gm-new-faction",
               el("h2", you, "Choose your faction"),
               factionCards,
-              factionDetail,
             ),
+            // Under the map column on a wide screen, so five faction cards
+            // and the New game bar fit 800 px (bead bzc.135); after the
+            // cards when the columns stack.
+            factionDetail,
           ),
           el("div.gm-new-bar", options, status, newButton),
         ),

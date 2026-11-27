@@ -33,41 +33,43 @@ in the faction documents, not here.
 ### 2.1 Conditions
 
 Eleven kinds are engine-standard (RULES_V2 1.3, marked "std"); fourteen are
-new here, and the Candy Kingdom adds Stuck
-([FACTION_CANDY.md](FACTION_CANDY.md#3-birthright-sticky)). Clocks shown are typical; each maker states its own. "3 x" is
+new here, the Candy Kingdom adds Stuck
+([FACTION_CANDY.md](FACTION_CANDY.md#3-birthright-sticky)) and the
+Deepforge Steam ([FACTION_DWARVES.md](FACTION_DWARVES.md#3-birthright-stoke)). Clocks shown are typical; each maker states its own. "3 x" is
 the default maximum of RULES_V2 1.3. A condition does not record the tier
 of its maker (the "charge" it fed went with bzc.71's Set Off, and the field
 with bzc.40). Only Turned, Asleep and Frozen are Holds; Scapegoat and
 Leeched are links.
 
-| Kind          | School | Polarity | Clock | Size                          | Gate                 | Notes     | Rule                                                                                              |
-| ------------- | ------ | -------- | ----- | ----------------------------- | -------------------- | --------- | ------------------------------------------------------------------------------------------------- |
-| **Venomed**   | Bloom  | bane     | 2-3   | Defense lost (max 3 x)        | -                    | std       | -size Defense, never below 0.                                                                     |
-| **Lucky**     | Bloom  | boon     | none  | -                             | -                    | std       | The bearer's next melee attack or shot (not a retaliation) is x 150%, then Lucky ends.            |
-| **Mending**   | Bloom  | boon     | 3     | HP healed per round (max 3 x) | -                    | -         | At the bearer's turn start it heals size HP, reviving.                                            |
-| **Thorned**   | Bloom  | boon     | 3     | Harm returned (max 3 x)       | -                    | -         | When the bearer is struck in melee, the striker takes Harm equal to size.                         |
-| **Ripening**  | Bloom  | boon     | 3     | percent (max 3 x)             | -                    | -         | Strikes by the bearer are x (100 + size)%, and at its turn start size grows by 10.                |
-| **Turned**    | Accord | bane     | 1-2   | -                             | HP, set by the maker | std; Hold | The stack fights for the side opposite its owner.                                                 |
-| **Heartened** | Accord | boon     | none  | -                             | -                    | std       | After the bearer finishes a turn its side may end Heartened to give it an extra turn.             |
-| **Scapegoat** | Accord | boon     | 3     | -                             | -                    | link      | Redirect link (RULES_V2 1.4): damage to the bearer goes to the far end as Harm.                   |
-| **Shielded**  | Accord | boon     | 3     | Defense gained (max 3 x)      | -                    | -         | +size Defense.                                                                                    |
-| **Warded**    | Accord | boon     | 3     | percent (max 75)              | -                    | -         | Harm the bearer takes is x (100 - size)%.                                                         |
-| **Mollified** | Accord | bane     | 2-3   | percent (max 75)              | -                    | -         | Strikes by the bearer are x (100 - size)%.                                                        |
-| **Delayed**   | Clock  | bane     | 2     | -                             | -                    | std       | Timeline class last; the bearer cannot Wait.                                                      |
-| **Hastened**  | Clock  | boon     | 2     | -                             | -                    | std       | Timeline class first.                                                                             |
-| **Quickened** | Clock  | boon     | 2-3   | Speed gained (max 3 x)        | -                    | -         | +size Speed.                                                                                      |
-| **Slowed**    | Clock  | bane     | 2-3   | Speed lost (max 3 x)          | -                    | -         | -size Speed, never below 1.                                                                       |
-| **Stuck**     | Clock  | bane     | 2     | -                             | -                    | Candy     | The bearer cannot walk, nor use a rule that replaces its walk; pushes and pulls still move it.    |
-| **Asleep**    | Hush   | bane     | 2     | -                             | HP, set by the maker | std; Hold | Cannot act or retaliate; any damage it takes ends Asleep.                                         |
-| **Shaken**    | Hush   | bane     | 2-3   | -                             | -                    | std       | Timeline class last; the bearer cannot Wait.                                                      |
-| **Jinxed**    | Hush   | bane     | 3     | percent (max 3 x)             | -                    | std       | The bearer cannot retaliate, and Strikes against it are x (100 + size)%.                          |
-| **Reckoning** | Hush   | bane     | 2-3   | debt owed (max 3 x)           | -                    | -         | A debt: when its clock expires the bearer takes Harm equal to size.                               |
-| **Hushed**    | Hush   | bane     | 2     | -                             | -                    | -         | The bearer cannot shoot.                                                                          |
-| **Leeched**   | Hush   | bane     | 2-3   | Harm per round (max 3 x)      | -                    | link      | At the bearer's turn start it takes Harm equal to size and the far end heals that much, reviving. |
-| **Burning**   | Storm  | bane     | 2-3   | Harm per round (max 3 x)      | -                    | std       | At the bearer's turn start it takes Harm equal to size.                                           |
-| **Frozen**    | Storm  | bane     | 1-2   | -                             | HP, set by the maker | std; Hold | Cannot act or retaliate; the first Strike against it is x 200% and ends Frozen.                   |
-| **Drenched**  | Storm  | bane     | 2-3   | percent (max 100)             | -                    | -         | Harm the bearer takes is x (100 + size)%.                                                         |
-| **Fired Up**  | Storm  | boon     | 2-3   | Attack gained (max 3 x)       | -                    | -         | +size Attack.                                                                                     |
+| Kind          | School | Polarity | Clock | Size                          | Gate                 | Notes     | Rule                                                                                                 |
+| ------------- | ------ | -------- | ----- | ----------------------------- | -------------------- | --------- | ---------------------------------------------------------------------------------------------------- |
+| **Venomed**   | Bloom  | bane     | 2-3   | Defense lost (max 3 x)        | -                    | std       | -size Defense, never below 0.                                                                        |
+| **Lucky**     | Bloom  | boon     | none  | -                             | -                    | std       | The bearer's next melee attack or shot (not a retaliation) is x 150%, then Lucky ends.               |
+| **Mending**   | Bloom  | boon     | 3     | HP healed per round (max 3 x) | -                    | -         | At the bearer's turn start it heals size HP, reviving.                                               |
+| **Thorned**   | Bloom  | boon     | 3     | Harm returned (max 3 x)       | -                    | -         | When the bearer is struck in melee, the striker takes Harm equal to size.                            |
+| **Ripening**  | Bloom  | boon     | 3     | percent (max 3 x)             | -                    | -         | Strikes by the bearer are x (100 + size)%, and at its turn start size grows by 10.                   |
+| **Turned**    | Accord | bane     | 1-2   | -                             | HP, set by the maker | std; Hold | The stack fights for the side opposite its owner.                                                    |
+| **Heartened** | Accord | boon     | none  | -                             | -                    | std       | After the bearer finishes a turn its side may end Heartened to give it an extra turn.                |
+| **Scapegoat** | Accord | boon     | 3     | -                             | -                    | link      | Redirect link (RULES_V2 1.4): damage to the bearer goes to the far end as Harm.                      |
+| **Shielded**  | Accord | boon     | 3     | Defense gained (max 3 x)      | -                    | -         | +size Defense.                                                                                       |
+| **Warded**    | Accord | boon     | 3     | percent (max 75)              | -                    | -         | Harm the bearer takes is x (100 - size)%.                                                            |
+| **Mollified** | Accord | bane     | 2-3   | percent (max 75)              | -                    | -         | Strikes by the bearer are x (100 - size)%.                                                           |
+| **Delayed**   | Clock  | bane     | 2     | -                             | -                    | std       | Timeline class last; the bearer cannot Wait.                                                         |
+| **Hastened**  | Clock  | boon     | 2     | -                             | -                    | std       | Timeline class first.                                                                                |
+| **Quickened** | Clock  | boon     | 2-3   | Speed gained (max 3 x)        | -                    | -         | +size Speed.                                                                                         |
+| **Slowed**    | Clock  | bane     | 2-3   | Speed lost (max 3 x)          | -                    | -         | -size Speed, never below 1.                                                                          |
+| **Stuck**     | Clock  | bane     | 2     | -                             | -                    | Candy     | The bearer cannot walk, nor use a rule that replaces its walk; pushes and pulls still move it.       |
+| **Asleep**    | Hush   | bane     | 2     | -                             | HP, set by the maker | std; Hold | Cannot act or retaliate; any damage it takes ends Asleep.                                            |
+| **Shaken**    | Hush   | bane     | 2-3   | -                             | -                    | std       | Timeline class last; the bearer cannot Wait.                                                         |
+| **Jinxed**    | Hush   | bane     | 3     | percent (max 3 x)             | -                    | std       | The bearer cannot retaliate, and Strikes against it are x (100 + size)%.                             |
+| **Reckoning** | Hush   | bane     | 2-3   | debt owed (max 3 x)           | -                    | -         | A debt: when its clock expires the bearer takes Harm equal to size.                                  |
+| **Hushed**    | Hush   | bane     | 2     | -                             | -                    | -         | The bearer cannot shoot.                                                                             |
+| **Leeched**   | Hush   | bane     | 2-3   | Harm per round (max 3 x)      | -                    | link      | At the bearer's turn start it takes Harm equal to size and the far end heals that much, reviving.    |
+| **Burning**   | Storm  | bane     | 2-3   | Harm per round (max 3 x)      | -                    | std       | At the bearer's turn start it takes Harm equal to size.                                              |
+| **Frozen**    | Storm  | bane     | 1-2   | -                             | HP, set by the maker | std; Hold | Cannot act or retaliate; the first Strike against it is x 200% and ends Frozen.                      |
+| **Drenched**  | Storm  | bane     | 2-3   | percent (max 100)             | -                    | -         | Harm the bearer takes is x (100 + size)%.                                                            |
+| **Fired Up**  | Storm  | boon     | 2-3   | Attack gained (max 3 x)       | -                    | -         | +size Attack.                                                                                        |
+| **Steam**     | Storm  | boon     | none  | 1 to 3 (max 3)                | -                    | Deepforge | Every Strike of the bearer's next attack, shot or retaliation is x (100 + 50 x size)%; then it ends. |
 
 ### 2.2 Ground
 
@@ -124,6 +126,7 @@ among a kind's makers and users. Faction creatures will add to these lists.
 | **Frozen**    | std | 3: Cold Snap (spell), Winter's Pocket Watch (Wonder), Rime Walrus (creature)                                                                                                                                      | 1: Cold Hands (feat)                                                                                                                              | 4       |
 | **Drenched**  | new | 3: Downpour (spell), Leaky Bucket (Wonder), Lagoon Lurker (creature)                                                                                                                                              | 3: Soaked Powder (feat), Chain Lightning (feat), Rime Walrus (creature)                                                                           | 4       |
 | **Fired Up**  | new | 8: Hothead (spell), Drill Sergeant (skill), Mob Rule (feat), Thicker than Water (feat), Coat of Embers (cursed Wonder), The Odd Cufflink (Marvel piece), Fire-Eater's Draught (consumable), Loan Shark (creature) | 3: Firewalkers (feat), Blaze of Glory (feat), Whetstone Pendant (Wonder)                                                                          | 7       |
+| **Steam**     | new | 3: Stoke (Deepforge birthright), The Great Boiler (Keystone Hall), Pocket Boiler (Wonder)                                                                                                                         | 3: Ram (Steam Tank), Overpressure (Artificer Command), Scalding (feat)                                                                            | 6       |
 
 All 14 new kinds have at least three makers from at least two sources,
 and at least three users. Bead `border_marches-bzc.71` took the spell

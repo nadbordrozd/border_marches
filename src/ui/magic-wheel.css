@@ -370,6 +370,15 @@
   text-align: right;
 }
 
+/* No room on the left (the Deepforge near the stage's edge): under it. */
+.mw-fcard-below {
+  top: calc(100% + 6px);
+  left: 50%;
+  align-items: center;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
 .mw-fname {
   font:
     bold 13px Georgia,

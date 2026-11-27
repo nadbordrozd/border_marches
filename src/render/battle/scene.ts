@@ -15,8 +15,18 @@ import type {
 import { FxField } from "../fx/field.ts";
 import { feetPoint } from "./geometry.ts";
 import type { Point } from "./geometry.ts";
-import { conditionPips, groundMarks, linkLines } from "./grammar-view.ts";
-import type { ConditionPip, GroundMark, LinkLine } from "./grammar-view.ts";
+import {
+  conditionPips,
+  groundMarks,
+  linkLines,
+  shellMarks,
+} from "./grammar-view.ts";
+import type {
+  ConditionPip,
+  GroundMark,
+  LinkLine,
+  ShellMark,
+} from "./grammar-view.ts";
 
 export interface UnitView {
   readonly id: StackId;
@@ -161,6 +171,8 @@ export interface Scene {
   links: LinkLine[];
   /** Non-blocking ground features, tinted on their hexes. */
   ground: GroundMark[];
+  /** Mortar shells in the air, marked on their target hexes. */
+  shells: ShellMark[];
   /** Enemy intents; empty while animating. */
   intents: IntentBadge[];
   overlay: Overlay;
@@ -192,6 +204,7 @@ export function createScene(state: BattleState): Scene {
     units: new Map(),
     links: [],
     ground: [],
+    shells: [],
     intents: [],
     overlay: EMPTY_OVERLAY,
     texts: [],
@@ -244,6 +257,7 @@ export function syncScene(scene: Scene, state: BattleState): void {
   }
   scene.links = linkLines(state);
   scene.ground = groundMarks(state);
+  scene.shells = shellMarks(state);
   scene.round = state.round;
 }
 

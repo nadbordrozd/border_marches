@@ -993,11 +993,10 @@ export const DEFERRED_ARTIFACTS: Readonly<Record<string, string>> = {};
 
 /**
  * Artifacts in the catalogue but kept out of the game's loot for now: no
- * generated map, Mystery Bag or gallery page holds them. The Deepforge's
- * Pocket Boiler joins with the faction's integration bead (bzc.135), which
- * updates the named-map fingerprints with it.
+ * generated map, Mystery Bag or gallery page holds them. Empty since the
+ * Deepforge's integration bead (bzc.135) let the Pocket Boiler in.
  */
-export const HELD_ARTIFACTS: ReadonlySet<string> = new Set(["pocket-boiler"]);
+export const HELD_ARTIFACTS: ReadonlySet<string> = new Set<string>();
 
 ROWS.push(KEYSTONE);
 

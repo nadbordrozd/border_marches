@@ -6,8 +6,10 @@
  * Pocket Boiler (engine.ts, a Defend) and Stoke grow Steam the same way.
  */
 
+import { ability } from "./registry.ts";
 import type { Effects } from "./registry.ts";
-import type { BattleStack, StackId } from "./types.ts";
+import { hasRule } from "./rules.ts";
+import type { BattleStack, BattleState, StackId } from "./types.ts";
 
 /** The Steam condition kind's id. */
 export const STEAM = "steam";
@@ -19,6 +21,20 @@ export const STEAM_PERCENT_PER_SIZE = 50;
 /** The Steam a stack bears now, 0 when none. */
 export function steamOf(stack: BattleStack): number {
   return stack.conditions.find((c) => c.kind === STEAM)?.size ?? 0;
+}
+
+/**
+ * Whether the stack's Defend also stokes it: a native's Stoke (an ability
+ * with an `onDefend` hook) or its side's Pocket Boiler (engine.ts Defend).
+ */
+export function stokesOnDefend(
+  state: BattleState,
+  stack: BattleStack,
+): boolean {
+  return (
+    stack.creature.abilities.some((a) => ability(a).onDefend !== undefined) ||
+    hasRule(state, stack.side, "pocket-boiler")
+  );
 }
 
 /** Gives a stack Steam `size` (to at most 3); an existing Steam merges. */

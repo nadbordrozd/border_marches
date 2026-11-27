@@ -64,12 +64,41 @@ const BANK_SCHOOL: Partial<Record<ObjectTypeId, CaretakerSchool>> = {
   "thunderstruck-pylon-yard": "storm",
 };
 
+/**
+ * Artifacts the map being generated leaves out of its loot (config
+ * `objects.lootWithout`): set by {@link withLootWithout} for one
+ * generation, empty otherwise.
+ */
+let lootWithout: ReadonlySet<string> = new Set<string>();
+
+/**
+ * Runs `fn` (one map's generation) with `ids` left out of every artifact
+ * the generator rolls. The named maps leave the Deepforge's Pocket Boiler
+ * out (bead bzc.135): a new Wonder in the pool re-rolls their loot and, on
+ * a map on today's generator, the guards and fill placed after it.
+ */
+export function withLootWithout<T>(ids: readonly string[], fn: () => T): T {
+  const before = lootWithout;
+  lootWithout = new Set(ids);
+  try {
+    return fn();
+  } finally {
+    lootWithout = before;
+  }
+}
+
+/** Whether the map being generated leaves this artifact out of its loot. */
+export function leftOutOfLoot(id: string): boolean {
+  return lootWithout.has(id);
+}
+
 /** Artifacts of a grade ("piece": Marvel pieces; "consumable"). */
 function artifactsOf(
   grade: "trinket" | "wonder" | "piece" | "consumable" | "cursed",
 ): ArtifactDef[] {
   return ARTIFACT_LIST.filter((a) => {
     if (a.kind === "relic" || HELD_ARTIFACTS.has(a.id)) return false;
+    if (lootWithout.has(a.id)) return false;
     if (grade === "consumable") return a.kind === "consumable";
     if (a.kind !== "worn") return false;
     if (grade === "cursed") return isCursed(a.id);
@@ -307,9 +336,16 @@ export function questReward(rng: Rng, value: number, tier: number): Prize {
 
 /**
  * The seeded contents of one object of `type` in a zone of `tier`: fields
- * for `data` (with `value` when the contents decide it).
+ * for `data` (with `value` when the contents decide it). Faction outposts
+ * offer no creature of a faction in `outpostsWithout` (the named maps keep
+ * the outposts they were authored with, gen/config.ts).
  */
-export function rollContents(type: ObjectTypeId, rng: Rng, tier: number): Data {
+export function rollContents(
+  type: ObjectTypeId,
+  rng: Rng,
+  tier: number,
+  outpostsWithout: readonly string[] = [],
+): Data {
   switch (type) {
     case "haunted-mine": {
       const resource = rng.pick(["wood", "ore", "essence", "gold"] as const);
@@ -319,12 +355,10 @@ export function rollContents(type: ObjectTypeId, rng: Rng, tier: number): Data {
       return { resource, yield: 2, value: 2 * base, guardCreature: "sexton" };
     }
     case "faction-outpost": {
-      // The Deepforge joins the outpost pool with its integration bead
-      // (bzc.135), which updates the named-map fingerprints with it.
       const pool = Object.values(CREATURES).filter(
         (c) =>
           c.faction !== "neutral" &&
-          c.faction !== "dwarves" &&
+          !outpostsWithout.includes(c.faction) &&
           c.growth > 0 &&
           c.tier >= 1 &&
           c.tier <= Math.min(4, 2 + tier),

@@ -13,8 +13,16 @@ import { dailyIncome } from "../../../src/core/game/turn.ts";
 import { newGame, startingMilitia } from "../../../src/core/game/newGame.ts";
 import { engineSetupFromGame } from "../../../src/core/battle/index.ts";
 import { generateMap } from "../../../src/core/map/generate.ts";
-import { rollContents } from "../../../src/core/map/gen/contents.ts";
-import { neutralTownFaction } from "../../../src/core/map/gen/objects.ts";
+import { NAMED_MAPS, namedConfig } from "../../../src/core/map/named.ts";
+import {
+  rollContents,
+  withLootWithout,
+} from "../../../src/core/map/gen/contents.ts";
+import { mysteryPool } from "../../../src/core/map/mystery.ts";
+import {
+  NEUTRAL_TOWN_FACTIONS,
+  neutralTownFaction,
+} from "../../../src/core/map/gen/objects.ts";
 import { createRng } from "../../../src/core/rng.ts";
 import { getCreature } from "../../../src/data/creatures.ts";
 import { townTree } from "../../../src/data/factions.ts";
@@ -25,7 +33,13 @@ import type { GameState } from "../../../src/core/game/types.ts";
 import type { CreatureId, FactionId } from "../../../src/data/types.ts";
 import { buildMap, field, heroStart, monster, ok, town } from "./helpers.ts";
 
-const FACTIONS: FactionId[] = ["humans", "undead", "goblins", "candy"];
+const FACTIONS: FactionId[] = [
+  "humans",
+  "undead",
+  "goblins",
+  "candy",
+  "dwarves",
+];
 
 function startAs(
   faction: FactionId,
@@ -68,6 +82,7 @@ const TOTALS: Record<string, [number, number, number, number, number]> = {
   undead: [26, 56000, 117, 132, 34],
   goblins: [24, 45800, 179, 72, 13],
   candy: [25, 50050, 150, 70, 32],
+  dwarves: [25, 50800, 125, 128, 19],
 };
 
 const FIRST_DWELLING: Record<string, [string, string, number]> = {
@@ -75,6 +90,7 @@ const FIRST_DWELLING: Record<string, [string, string, number]> = {
   undead: ["charnel-pit", "ghoul", 9],
   goblins: ["powder-shed", "bomb-chucker", 10],
   candy: ["mint-range", "peppermint-archer", 9],
+  dwarves: ["rivet-range", "rivet-gunner", 9],
 };
 
 describe.each(FACTIONS)("%s", (faction) => {
@@ -153,7 +169,8 @@ describe.each(FACTIONS)("%s", (faction) => {
               undead: "not-done-yet",
               goblins: "launched",
               candy: "sticky",
-            }[faction as "undead" | "goblins" | "candy"],
+              dwarves: "stoke",
+            }[faction as "undead" | "goblins" | "candy" | "dwarves"],
           };
     expect(setup.attacker).toMatchObject(bright);
     expect(setup.attacker.hero?.command).toBe(
@@ -258,7 +275,7 @@ describe("Setup and the map", () => {
     );
     expect(neutral.length).toBeGreaterThan(0);
     for (const t of neutral)
-      expect(["humans", "undead", "goblins", "candy"]).toContain(
+      expect(["humans", "undead", "goblins", "candy", "dwarves"]).toContain(
         t.data["faction"],
       );
     const again = generateMap(11, { size: "M", players: 2 });
@@ -294,7 +311,71 @@ describe("Setup and the map", () => {
       "taffy-wrangler",
     ]);
     expect(wonders).toContain("flypaper-ribbon");
-    expect([...towns].sort()).toEqual(["candy", "goblins", "humans", "undead"]);
+    expect([...towns].sort()).toEqual([
+      "candy",
+      "dwarves",
+      "goblins",
+      "humans",
+      "undead",
+    ]);
+  });
+
+  it("the Deepforge joins the outposts, neutral towns and wonders (bzc.135)", () => {
+    const outposts = new Set<string>();
+    const wonders = new Set<string>();
+    for (let seed = 1; seed <= 400; seed++) {
+      const o = rollContents("faction-outpost", createRng(seed), 2);
+      outposts.add(String(o["creature"]));
+      const w = rollContents("fallen-adventurer", createRng(seed), 2);
+      wonders.add(String(w["artifact"]));
+    }
+    const dwarves = [...outposts].filter(
+      (c) => getCreature(c as CreatureId).faction === "dwarves",
+    );
+    expect(dwarves.sort()).toEqual([
+      "gyrocopter",
+      "mortar",
+      "rivet-gunner",
+      "tinker",
+    ]);
+    expect(wonders).toContain("pocket-boiler");
+    expect(NEUTRAL_TOWN_FACTIONS).toContain("dwarves");
+  });
+
+  it("the named maps keep the outposts and loot they were authored with (bzc.135)", () => {
+    for (const def of NAMED_MAPS) {
+      expect(namedConfig(def).objects?.outpostsWithout, def.id).toEqual([
+        "dwarves",
+      ]);
+      expect(namedConfig(def).objects?.lootWithout, def.id).toEqual([
+        "pocket-boiler",
+      ]);
+    }
+    // Loot left out holds only for the generation it is given to.
+    const wonders = (): Set<string> => {
+      const out = new Set<string>();
+      for (let seed = 1; seed <= 400; seed++)
+        out.add(
+          String(
+            rollContents("fallen-adventurer", createRng(seed), 2)["artifact"],
+          ),
+        );
+      return out;
+    };
+    expect(withLootWithout(["pocket-boiler"], wonders)).not.toContain(
+      "pocket-boiler",
+    );
+    expect(
+      withLootWithout(["pocket-boiler"], () => mysteryPool("wonder")),
+    ).not.toContain("pocket-boiler");
+    expect(wonders()).toContain("pocket-boiler");
+    expect(mysteryPool("wonder")).toContain("pocket-boiler");
+    for (let seed = 1; seed <= 200; seed++) {
+      const o = rollContents("faction-outpost", createRng(seed), 2, [
+        "dwarves",
+      ]);
+      expect(o["faction"]).not.toBe("dwarves");
+    }
   });
 
   it("AI players take the other factions in turn", () => {
@@ -311,12 +392,17 @@ describe("Setup and the map", () => {
       playerSetups({ seed: 1, size: "M", players: 4, faction: "candy" }).map(
         (p) => p.faction,
       ),
-    ).toEqual(["candy", "humans", "undead", "goblins"]);
+    ).toEqual(["candy", "dwarves", "humans", "undead"]);
+    expect(
+      playerSetups({ seed: 1, size: "M", players: 4, faction: "dwarves" }).map(
+        (p) => p.faction,
+      ),
+    ).toEqual(["dwarves", "humans", "undead", "goblins"]);
   });
 
-  it("the pool holds the 32 named heroes, and Chieftains only for the Lost World", () => {
-    expect(rosterFor(["humans", "goblins"])).toHaveLength(32);
-    expect(rosterFor(["lost-world"])).toHaveLength(48);
+  it("the pool holds the 40 named heroes, and Chieftains only for the Lost World", () => {
+    expect(rosterFor(["humans", "goblins"])).toHaveLength(40);
+    expect(rosterFor(["lost-world"])).toHaveLength(56);
   });
 
   it("building a guild level teaches the hero in town at once", () => {
@@ -346,6 +432,7 @@ describe("Starting militia (RULES_V2 5.5)", () => {
     undead: { t1: "skeleton", n1: 15, t2: "ghoul", n2: 4 },
     goblins: { t1: "goblin", n1: 20, t2: "bomb-chucker", n2: 5 },
     candy: { t1: "gingerbread-man", n1: 15, t2: "peppermint-archer", n2: 4 },
+    dwarves: { t1: "tinker", n1: 14, t2: "rivet-gunner", n2: 4 },
   };
 
   for (const faction of FACTIONS) {

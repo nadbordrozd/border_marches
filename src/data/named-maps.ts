@@ -137,15 +137,15 @@ const KEEPERS_TOLL: NamedMapDef = {
       op: "set",
       id: "town-3",
       at: [38, 7],
-      data: { name: "Tollbridge" },
-      note: "Name the north-east neutral town after the toll gate beside it.",
+      data: { faction: "undead", name: "Tollbridge" },
+      note: "Name the north-east neutral town after the toll gate beside it; a Restless town, pinned as the generator's seeded pick moved when the Deepforge joined the neutral towns (bzc.135).",
     },
     {
       op: "set",
       id: "town-4",
       at: [12, 36],
-      data: { name: "Low Barrow" },
-      note: "Name the south-west neutral town (the generator's Thornbury repeats on other maps).",
+      data: { faction: "humans", name: "Low Barrow" },
+      note: "Name the south-west neutral town (the generator's Thornbury repeats on other maps); a Realm town, pinned as the generator's seeded pick moved when the Deepforge joined the neutral towns (bzc.135).",
     },
     // The key-and-gate puzzle: the vault's valley has one way in.
     {

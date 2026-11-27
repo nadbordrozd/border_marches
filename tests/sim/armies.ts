@@ -53,7 +53,13 @@ import {
 } from "../../src/data/artifacts.ts";
 import { AdventureAi } from "../../src/core/ai/adventure-ai.ts";
 
-export const FACTIONS = ["humans", "undead", "goblins", "candy"] as const;
+export const FACTIONS = [
+  "humans",
+  "undead",
+  "goblins",
+  "candy",
+  "dwarves",
+] as const;
 export type Faction = (typeof FACTIONS)[number];
 
 /**

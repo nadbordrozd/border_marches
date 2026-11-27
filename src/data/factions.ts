@@ -6,10 +6,9 @@
  * order, start buildings, dwellings, halls and fort levels), its hero
  * classes, town names, birthright and magic leanings. The v0.2 factions
  * are the Realm (humans), the Restless (undead) and the Goblin Horde
- * (goblins), joined by the Candy Kingdom (candy, FACTION_CANDY.md). The
- * Deepforge (dwarves, FACTION_DWARVES.md) has its data and rules here but
- * is not playable until its integration bead (bzc.135); the Lost World
- * stays in the code and is not playable.
+ * (goblins), joined by the Candy Kingdom (candy, FACTION_CANDY.md) and the
+ * Deepforge (dwarves, FACTION_DWARVES.md); the Lost World stays in the
+ * code and is not playable.
  */
 import { BUILDING_IDS, BUILDINGS } from "./buildings.ts";
 import {
@@ -149,8 +148,8 @@ export const STEAMWORKS_TOWN: TownTreeDef = {
     "Rivetrock",
     "Old Smokestack",
   ],
-  // The MVP camp family, a fallback only until the Deepforge town art
-  // (bzc.133) registers a "dwarves" family in src/assets/town-art.ts.
+  // The MVP camp family, a fallback only: Deepforge towns draw townArt
+  // (bzc.133).
   art: "dinosaur",
 };
 
@@ -228,8 +227,7 @@ export const FACTIONS: readonly FactionDef[] = [
     name: "The Deepforge",
     blurb:
       "Stand still and let it build: natives stoke when they Defend and strike with the steam, mortars shell the ground, tinkers patch the machines.",
-    // Playable with the integration bead (bzc.135).
-    available: false,
+    available: true,
     heroClasses: ["thane", "artificer"],
     town: STEAMWORKS_TOWN,
     colour: "#3aa38f",

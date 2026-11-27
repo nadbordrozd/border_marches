@@ -437,16 +437,17 @@ function tallyFactions(
     rounds: 0,
     roundLimit: 0,
     limitAttackerWins: 0,
-    wins: { humans: 0, undead: 0, goblins: 0, candy: 0 },
-    played: { humans: 0, undead: 0, goblins: 0, candy: 0 },
+    wins: { humans: 0, undead: 0, goblins: 0, candy: 0, dwarves: 0 },
+    played: { humans: 0, undead: 0, goblins: 0, candy: 0, dwarves: 0 },
     pairs: new Map(),
     acts: {
       humans: new Map(),
       undead: new Map(),
       goblins: new Map(),
       candy: new Map(),
+      dwarves: new Map(),
     },
-    sides: { humans: 0, undead: 0, goblins: 0, candy: 0 },
+    sides: { humans: 0, undead: 0, goblins: 0, candy: 0, dwarves: 0 },
   };
   for (const m of factionMatchups(budget, level, mode)) {
     const [att, , def] = m.name.split(" ") as [Faction, string, Faction];
@@ -496,7 +497,7 @@ function reportMode(
   acts = false,
 ): void {
   console.log(
-    "stage     heroes   humans  undead  goblins   candy   att win  mirror att  rounds  at limit  att at limit",
+    "stage     heroes   humans  undead  goblins   candy   dwarves   att win  mirror att  rounds  at limit  att at limit",
   );
   for (const stage of stages) {
     const { budget, level } = STAGES[stage];
@@ -513,7 +514,7 @@ function reportMode(
       }
       const f = (x: Faction) => pct(t.wins[x], t.played[x]).padStart(6);
       console.log(
-        `${stage.padEnd(9)} ${mode.padEnd(7)} ${f("humans")}  ${f("undead")}   ${f("goblins")}  ${f("candy")}     ${pct(t.attackerWins, t.games)}        ${pct(mirror, mirrorN)}  ${(t.rounds / t.games).toFixed(1).padStart(6)}      ${pct(t.roundLimit, t.games)}          ${pct(t.limitAttackerWins, t.roundLimit)}`,
+        `${stage.padEnd(9)} ${mode.padEnd(7)} ${f("humans")}  ${f("undead")}   ${f("goblins")}  ${f("candy")}  ${f("dwarves")}     ${pct(t.attackerWins, t.games)}        ${pct(mirror, mirrorN)}  ${(t.rounds / t.games).toFixed(1).padStart(6)}      ${pct(t.roundLimit, t.games)}          ${pct(t.limitAttackerWins, t.roundLimit)}`,
       );
       if (matrix)
         for (const [name, p] of t.pairs)
@@ -710,12 +711,14 @@ function duelsMode(policy: Policy, seeds: number, budget: number): void {
       undead: 0,
       goblins: 0,
       candy: 0,
+      dwarves: 0,
     };
     const games: Record<Faction, number> = {
       humans: 0,
       undead: 0,
       goblins: 0,
       candy: 0,
+      dwarves: 0,
     };
     for (const a of FACTIONS)
       for (const d of FACTIONS) {

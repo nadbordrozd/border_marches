@@ -211,6 +211,28 @@
   cursor: help;
 }
 
+/* A Mortar shell (FACTION_DWARVES 5, Lob) on the round boundary: its own
+   16 px marker in a red frame, as it is drawn on its hex. */
+.bm-q.bm-q-shell {
+  border-style: solid;
+  border-color: #ff4a3a;
+  background: #2a1410;
+  cursor: pointer;
+}
+
+.bm-q-shell-img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.bm-q-card-img.bm-q-card-shell {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
 .bm-q-div {
   flex: 0 0 auto;
   margin: 0 3px;

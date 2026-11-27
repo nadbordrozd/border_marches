@@ -380,8 +380,8 @@ shown on hover.
 creature; the flag-holder recruits its one stock with a hero on its cell,
 RULES_V2 5.6), the **stray hut** (one
 stray, the concept's guests near home) and the **caretaker lodge** (a
-school's caretakers, recruitable after an errand). Target: **20 variants**:
-16 faction outposts (tiers 1-4 of four factions) and 8 stray and caretaker
+school's caretakers, recruitable after an errand). Target: **28 variants**:
+20 faction outposts (tiers 1-4 of five factions) and 8 stray and caretaker
 huts, plus a random-dwelling marker resolved at generation. Tier 5-6 outposts
 do not exist; those creatures stay town-only. Caravans are deferred.
 

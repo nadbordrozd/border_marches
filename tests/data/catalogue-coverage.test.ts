@@ -58,11 +58,12 @@ describe("catalogue coverage", () => {
 
   it("artifacts: all 80 kinds and 4 Marvels, ids from names, with values", () => {
     // The 84 catalogue kinds, the Candy Kingdom's Flypaper Ribbon
-    // (FACTION_CANDY 5.2, icon bead bzc.112) and the Keystone, a relic of the
-    // map objects (not a catalogue kind) with an icon by its game id (bead 9is).
-    expect(ids("artifact")).toHaveLength(86);
-    // The 84, the Flypaper Ribbon and the Deepforge's Pocket Boiler
-    // (FACTION_DWARVES 5.2; its icon comes with bead bzc.131).
+    // (FACTION_CANDY 5.2, icon bead bzc.112), the Deepforge's Pocket Boiler
+    // (FACTION_DWARVES 5.2, icon wired in bead bzc.135) and the Keystone, a
+    // relic of the map objects (not a catalogue kind) with an icon by its
+    // game id (bead 9is).
+    expect(ids("artifact")).toHaveLength(87);
+    // The 84, the Flypaper Ribbon and the Pocket Boiler.
     expect(ARTIFACT_LIST.filter((a) => a.kind !== "relic")).toHaveLength(86);
     for (const id of ids("artifact")) {
       const def = findArtifact(id);

@@ -258,9 +258,15 @@ describe("feats and vows (RULES_V2 3.5)", () => {
       }
     }
     expect(pile.tags).toContain("onslaught");
-    // Weight 5 against 1 for untagged feats: drafted the most.
+    // Weight 5 against 1 for untagged feats: an Onslaught feat is drafted
+    // the most (which one moves with the seeds and the catalogue: Pile On
+    // or the Vow of the Unlettered before Scalding joined the draft in bead
+    // bzc.135, Blaze of Glory since).
     const most = [...offers.entries()].sort((a, b) => b[1] - a[1])[0]![0];
-    expect(["pile-on", "vow-of-the-unlettered"]).toContain(most);
+    expect(FEATS[most]?.tags).toContain("onslaught");
+    expect(offers.get("pile-on") ?? 0).toBeGreaterThan(
+      offers.get("gag-rule") ?? 0,
+    );
   });
 
   it("offers a vow only when the hero already keeps its restriction", () => {

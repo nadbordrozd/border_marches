@@ -237,6 +237,12 @@ export const PICKS = {
         "flypaper-ribbon": [4, "a curling yellow flypaper strip from a red cap with a grey fly stuck on it; reads at 1x on light and dark and is plainly not the pink-taffy Stuck icon"],
       },
     },
+    // bead border_marches-bzc.131 (verdicts recorded with studio-art accept/reject); wired in bzc.135
+    "wonders-dwarves-a": {
+      picks: {
+        "pocket-boiler": [9, "a round copper boiler with brass bands, a glowing firebox door, a brass chimney with a white puff and a leather strap: a carried boiler at 1x on light and dark, plainly not the Steam cloud icon"],
+      },
+    },
     // bead border_marches-9is
     "relics-a": {
       picks: {

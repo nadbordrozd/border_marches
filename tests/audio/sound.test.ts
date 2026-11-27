@@ -349,13 +349,16 @@ describe("sound set and cues", () => {
     expect(pickupCue("wood")).toBe("pickup");
   });
 
-  it("gives the four factions their own recruit, victory and town sounds", () => {
+  it("gives the five factions their own recruit, victory and town sounds", () => {
     expect(recruitCue("humans")).toBe("recruit.humans");
     expect(recruitCue("undead")).toBe("recruit.undead");
     expect(recruitCue("goblins")).toBe("recruit.goblins");
     expect(recruitCue("candy")).toBe("recruit.candy");
     expect(victoryCue("candy")).toBe("victory.candy");
     expect(townCue("candy")).toBe("town.candy");
+    expect(recruitCue("dwarves")).toBe("recruit.dwarves");
+    expect(victoryCue("dwarves")).toBe("victory.dwarves");
+    expect(townCue("dwarves")).toBe("town.dwarves");
     expect(recruitCue("lost-world")).toBe("recruit");
     expect(victoryCue("goblins")).toBe("victory.goblins");
     expect(victoryCue(null)).toBe("victory");

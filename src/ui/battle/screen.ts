@@ -43,6 +43,8 @@ import type {
   BattleState,
   StackId,
 } from "../../core/battle/index.ts";
+import { MARKER_ICONS } from "../../assets/icons.ts";
+import { assetUrl } from "../../assets/manifest.ts";
 import type {
   BattleResult as GameBattleResult,
   BattleSetup as GameBattleSetup,
@@ -1332,7 +1334,7 @@ class BattleScreen {
       badge !== null
         ? null
         : (this.state.ground.find((x) => sameHex(x.hex, h)) ?? null);
-    const card = conditionCard(this.state, stack, g);
+    const card = conditionCard(this.state, stack, g, h);
     if (card === null) return;
     this.tip.replaceChildren(card);
     this.tip.classList.add("bm-tip-kw");
@@ -1981,12 +1983,32 @@ class BattleScreen {
       return d;
     }
     if (e.kind === "event") {
-      const t = el("span", `bm-q bm-q-event bm-${e.side}`);
-      t.dataset["flip"] = e.key;
-      t.append(hourglass());
-      setTip(t, () =>
-        tipCard("Scheduled", [e.label, e.note ? `Set by ${e.note}.` : null]),
+      const t = el(
+        "span",
+        `bm-q bm-q-event bm-${e.side}${e.shell ? " bm-q-shell" : ""}`,
       );
+      t.dataset["flip"] = e.key;
+      if (e.shell) {
+        const shell = e.shell;
+        const img = el("img", "bm-q-shell-img");
+        img.src = assetUrl(MARKER_ICONS.shell[16], import.meta.env.BASE_URL);
+        img.alt = "";
+        img.draggable = false;
+        t.append(img);
+        t.setAttribute("aria-label", e.label);
+        setTip(t, () => this.shellCard(e.label, e.side, shell));
+        t.addEventListener("click", () => {
+          const on = this.state.stacks.find(
+            (x) => isAlive(x) && sameHex(x.hex, shell.hex),
+          );
+          if (on) this.flashStack(on.id);
+        });
+      } else {
+        t.append(hourglass());
+        setTip(t, () =>
+          tipCard("Scheduled", [e.label, e.note ? `Set by ${e.note}.` : null]),
+        );
+      }
       return t;
     }
     const t = el(
@@ -2019,6 +2041,31 @@ class BattleScreen {
       this.flashStack(e.id);
     });
     return t;
+  }
+
+  /** The hover card of a shell's timeline tile (FACTION_DWARVES 5, Lob). */
+  private shellCard(
+    label: string,
+    side: BattleSide,
+    shell: { readonly hex: Hex; readonly round: number },
+  ): HTMLElement {
+    const whose = this.playerSides.has(side) ? "Your Mortars" : "Enemy Mortars";
+    const on = this.state.stacks.find(
+      (x) => isAlive(x) && sameHex(x.hex, shell.hex),
+    );
+    const icon = el("img", "bm-q-card-img bm-q-card-shell");
+    icon.src = assetUrl(MARKER_ICONS.shell[32], import.meta.env.BASE_URL);
+    icon.alt = "";
+    return tipCard(
+      label,
+      [
+        `Lands at the start of round ${shell.round}, before any stack acts: a shot on whatever stands on the marked hex, friend or foe, and half a shot on every stack next to it.`,
+        on
+          ? `On the hex now: ${creatureName(on.creature, on.count)} \u00d7${on.count}. A stack that has not acted this round can still step off.`
+          : "The hex is empty now: only the splash lands, unless a stack walks in.",
+      ],
+      { subtitle: `${whose} \u00b7 round ${shell.round}`, icon },
+    );
   }
 
   /** The hover card of a queue portrait: who, whose and when, the stats. */

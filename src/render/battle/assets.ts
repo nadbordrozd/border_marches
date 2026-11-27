@@ -19,7 +19,7 @@ import type { Terrain } from "../../core/map/types.ts";
 import { conditionKindIds, hexIndex } from "../../core/battle/index.ts";
 import type { Hex } from "../../core/battle/index.ts";
 import { hashInts } from "../../core/rng.ts";
-import { iconFor } from "../../assets/icons.ts";
+import { MARKER_ICONS, iconFor } from "../../assets/icons.ts";
 
 const cache = new Map<string, Promise<HTMLImageElement>>();
 
@@ -54,6 +54,25 @@ export async function preloadGroundIcons(
       ),
     ),
   );
+}
+
+/** The shell marker (FACTION_DWARVES 5, Lob) at 32 px, once loaded. */
+let shellMarker: HTMLImageElement | null = null;
+let shellMarkerAsked = false;
+
+/**
+ * The 32 px shell marker drawn on a shell's target hex, or null while it
+ * loads; the first call starts the load.
+ */
+export function shellMarkerIcon(): HTMLImageElement | null {
+  if (shellMarker !== null) return shellMarker;
+  if (typeof Image === "undefined" || shellMarkerAsked) return null;
+  shellMarkerAsked = true;
+  void loadImage(MARKER_ICONS.shell[32]).then(
+    (img) => void (shellMarker = img),
+    () => {},
+  );
+  return null;
 }
 
 /** 16 px condition icons by kind, once loaded (badges under count chips). */

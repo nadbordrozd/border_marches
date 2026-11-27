@@ -29,6 +29,9 @@ import {
   isAlive,
   isRangedCreature,
   shootsAnyHex,
+  STEAM_MAX,
+  steamOf,
+  stokesOnDefend,
 } from "../../core/battle/index.ts";
 import type {
   BattleSide,
@@ -416,8 +419,35 @@ function heroActions(
   return out;
 }
 
-function turnActions(s: BattleStack | null, ctx: BarContext): BarAction[] {
+/**
+ * The Defend button: a stack that Stokes (FACTION_DWARVES 3: a Deepforge
+ * native, or any stack with the Pocket Boiler) shows it as Stoke, with the
+ * Steam it would reach.
+ */
+function defendLook(
+  state: BattleState,
+  s: BattleStack | null,
+): { label: string; rule: string } {
+  const plain = "End the turn: +30% Defense until the stack's next turn.";
+  if (s === null || !stokesOnDefend(state, s))
+    return { label: "Defend", rule: plain };
+  const n = steamOf(s);
+  return {
+    label: "Stoke",
+    rule:
+      n >= STEAM_MAX
+        ? `Defend: +30% Defense until the stack's next turn. Its Steam is already ${STEAM_MAX}, the most it holds.`
+        : `Defend and stoke: +30% Defense until the stack's next turn, and Steam ${n === 0 ? "1" : `${n} grows to ${n + 1}`} (at most ${STEAM_MAX}). Its next Strike, a retaliation too, is x${100 + 50 * (n + 1)}%.`,
+  };
+}
+
+function turnActions(
+  state: BattleState,
+  s: BattleStack | null,
+  ctx: BarContext,
+): BarAction[] {
   const not = ctx.notTurnReason ?? "Not your turn";
+  const defend = defendLook(state, s);
   let waitReason: string | null = null;
   if (!ctx.playerTurn) waitReason = not;
   else if (s?.waitedThisRound) waitReason = "Already waited this round";
@@ -441,10 +471,10 @@ function turnActions(s: BattleStack | null, ctx: BarContext): BarAction[] {
     {
       key: "defend",
       group: "turn",
-      label: "Defend",
+      label: defend.label,
       hotkey: "D",
       icon: { icon: "stat", id: "defense" },
-      rule: "End the turn: +30% Defense until the stack's next turn.",
+      rule: defend.rule,
       usage: "Ends the turn",
       state: ctx.playerTurn ? "ready" : "blocked",
       reason: ctx.playerTurn ? null : not,
@@ -487,7 +517,7 @@ export function actionBar(state: BattleState, ctx: BarContext): BarAction[] {
     if (h) out.push(h);
     out.push(...heroActions(state, s.side, ctx));
   }
-  out.push(...turnActions(s, ctx));
+  out.push(...turnActions(state, s, ctx));
   let digit = 1;
   return out.map((a) => ({
     ...a,

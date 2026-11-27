@@ -416,6 +416,20 @@ export interface GenConfig {
      * objects by place.
      */
     swampSites: boolean;
+    /**
+     * Bead bzc.135: factions whose creatures the generated Faction Outposts
+     * never offer. Empty by default; the named maps leave out the Deepforge,
+     * whose creatures in the pool re-roll the outposts' values and so move
+     * the Ninefold Landfall's objects that its edits name by place.
+     */
+    outpostsWithout: readonly string[];
+    /**
+     * Bead bzc.135: artifacts the generated loot never holds (chests,
+     * banks, loose artifacts, quest rewards; gen/contents.ts). Empty by
+     * default; the named maps leave out the Pocket Boiler, which re-rolled
+     * the Cartographer's Folly's loot and moved 64 of its objects.
+     */
+    lootWithout: readonly string[];
   };
 
   /**
@@ -824,6 +838,8 @@ export const DEFAULT_GEN_CONFIG: GenConfig = {
     volcanicSites: true,
     candySites: true,
     swampSites: true,
+    outpostsWithout: [],
+    lootWithout: [],
     perMap: { "drill-yard": { S: [1, 1], M: [1, 1], L: [1, 2] } },
   },
 

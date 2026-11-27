@@ -24,6 +24,7 @@ import {
   isCursed,
 } from "../../data/artifacts.ts";
 import { deriveSeed } from "../rng.ts";
+import { leftOutOfLoot } from "./gen/contents.ts";
 import type { GameMap, MapObject } from "./types.ts";
 
 /** The catalogue type id (src/data/objectTypes.ts). */
@@ -47,7 +48,8 @@ export function mysteryPool(grade: MysteryGrade): readonly string[] {
       a.grade === grade &&
       a.pieceOf === undefined &&
       !isCursed(a.id) &&
-      !HELD_ARTIFACTS.has(a.id),
+      !HELD_ARTIFACTS.has(a.id) &&
+      !leftOutOfLoot(a.id),
   ).map((a) => a.id);
 }
 

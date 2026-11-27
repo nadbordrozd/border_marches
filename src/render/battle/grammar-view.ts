@@ -15,6 +15,8 @@ import {
   getStack,
   groundKind,
   isAlive,
+  neighbors,
+  pendingShells,
 } from "../../core/battle/index.ts";
 import type {
   BattleState,
@@ -44,7 +46,15 @@ export interface ConditionPip {
   readonly hold: boolean;
   /** One end of a link (Sworn, Challenged, ...): shown next. */
   readonly linked: boolean;
+  /**
+   * The size its badge shows in a corner, for a gauge whose size is the
+   * point (Steam, FACTION_DWARVES 3); absent for the others.
+   */
+  readonly size?: number;
 }
+
+/** Condition kinds whose badge shows their size (Steam's 1 to 3). */
+export const SIZED_BADGES: ReadonlySet<string> = new Set(["steam"]);
 
 export function pipOf(c: {
   readonly uid: number;
@@ -53,6 +63,7 @@ export function pipOf(c: {
   readonly polarity: "boon" | "bane";
   readonly hold?: boolean;
   readonly link?: StackId | null;
+  readonly size?: number;
 }): ConditionPip {
   return {
     uid: c.uid,
@@ -61,6 +72,9 @@ export function pipOf(c: {
     bane: c.polarity === "bane",
     hold: c.hold === true,
     linked: c.link !== undefined && c.link !== null,
+    ...(SIZED_BADGES.has(c.kind) && c.size !== undefined
+      ? { size: c.size }
+      : {}),
   };
 }
 
@@ -226,4 +240,26 @@ export function groundMarks(state: BattleState): GroundMark[] {
       color: g.school ? SCHOOL_COLORS[g.school] : REMAINS_COLOR,
       glyph: groundKind(g.kind).name.charAt(0).toUpperCase(),
     }));
+}
+
+/**
+ * A shell in the air (FACTION_DWARVES 5, Lob): its target hex, the hexes
+ * its splash reaches, the round at whose start it lands and the side that
+ * lobbed it. Drawn on the field from the moment it is lobbed.
+ */
+export interface ShellMark {
+  readonly hex: Hex;
+  readonly splash: readonly Hex[];
+  readonly round: number;
+  readonly stackId: StackId;
+}
+
+/** The shells in the air, in order of landing (`pendingShells`). */
+export function shellMarks(state: BattleState): ShellMark[] {
+  return pendingShells(state).map((p) => ({
+    hex: p.hex,
+    splash: neighbors(p.hex),
+    round: p.round,
+    stackId: p.stackId,
+  }));
 }

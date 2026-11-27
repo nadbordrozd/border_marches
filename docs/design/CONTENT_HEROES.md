@@ -97,6 +97,13 @@ acts.
 | **Firewalkers**        | Stormcalling, Bulwark             | Your Fired Up stacks take no Harm from Burning or from fire.                                                               | uses Fired Up, Burning, fire        |
 | **Blaze of Glory**     | Stormcalling, Onslaught           | When Fired Up expires on your stack, each enemy stack adjacent to it gains Burning of twice that size, clock 2.            | makes Burning; uses Fired Up        |
 
+The Deepforge adds a twenty-ninth feat, **Scalding** (Stormcalling,
+Bulwark; uses Steam, makes Burning): when Steam on your stack is spent by a
+Strike, the stack struck gains Burning of 5 x that Steam's size, clock 2
+([FACTION_DWARVES.md](FACTION_DWARVES.md#52-new-content-outside-the-faction)).
+It is drafted like any feat since bead bzc.135; its icon is still the
+feat fallback.
+
 ## 3. Vows
 
 A vow is a feat with a restriction from the fixed list of RULES_V2 3.5.
@@ -169,7 +176,11 @@ its own creatures and, for a Spell specialty, any tier 1 or 2 page.
 1 Command and 5 creature entries. The Candy Kingdom's named heroes
 ([FACTION_CANDY.md](FACTION_CANDY.md#8-named-heroes)) add two faction
 pages, Late Bell (Clock tier 1) and Treacle (Clock tier 2), and a school
-skill at rank 2 in place of rank 1 (Auntie Fondant's Horology).
+skill at rank 2 in place of rank 1 (Auntie Fondant's Horology). The
+Deepforge's ([FACTION_DWARVES.md](FACTION_DWARVES.md#8-named-heroes)) draw
+from the list as it is (Jolt, On Credit, the Command, wood and ore, their
+own Steam Tanks, Rivet Gunners and Mortars) and add a school skill at rank
+2 in place of rank 1 (Auntie Valvina's Stormcalling).
 
 ## 5. Decisions made here
 

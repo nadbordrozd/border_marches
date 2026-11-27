@@ -3,9 +3,8 @@
  *
  * The roster is the named heroes of the v0.2 factions (four per class,
  * src/data/classes.ts) followed by sixteen Lost World Chieftains. Heroes
- * of a faction that is not playable (the Lost World; the Deepforge until
- * its integration bead) only join a game's pool when a player plays that
- * faction.
+ * of a faction that is not playable (the Lost World) only join a game's
+ * pool when a player plays that faction.
  */
 import { NAMED_HEROES } from "./classes.ts";
 import { findFaction } from "./factions.ts";

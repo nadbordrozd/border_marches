@@ -1,8 +1,7 @@
 /**
  * Feats and vows (CONTENT_HEROES.md sections 2 and 3, RULES_V2 3.5): all
  * 28 feats and 12 vows of the v0.2 catalogue, and the Deepforge's
- * Scalding (FACTION_DWARVES 5.2), held from the draft until the faction's
- * integration bead ({@link HELD_FEATS}).
+ * Scalding (FACTION_DWARVES 5.2).
  *
  * A feat is drafted one of three at every level that is a multiple of 3;
  * its offer weight is 1 + 2 x the hero's ranks in its tagged skills. A vow
@@ -33,11 +32,10 @@ export interface FeatDef {
 }
 
 /**
- * Feats in the catalogue but not yet drafted (nor shown in the gallery):
- * Scalding joins with the Deepforge's integration bead (bzc.135), when
- * Steam can be met in a game.
+ * Feats in the catalogue but not yet drafted (nor shown in the gallery).
+ * Empty since the Deepforge's integration bead (bzc.135) let Scalding in.
  */
-export const HELD_FEATS: ReadonlySet<string> = new Set(["scalding"]);
+export const HELD_FEATS: ReadonlySet<string> = new Set<string>();
 
 /** Feats are drafted at every level divisible by this (RULES_V2 3.5). */
 export const FEAT_EVERY = 3;

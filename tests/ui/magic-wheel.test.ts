@@ -22,6 +22,7 @@ import {
   magicWheelModel,
   rankWords,
 } from "../../src/ui/magic-wheel-model.ts";
+import { fcardSide, polar } from "../../src/ui/magic-wheel.ts";
 
 const model = magicWheelModel();
 
@@ -142,6 +143,19 @@ describe("magic wheel model: factions", () => {
     expect(at("humans")).toBeCloseTo(54, 0);
     expect(at("undead")).toBeCloseTo(198, 0);
     expect(model.factions.find((f) => f.id === "candy")?.playable).toBe(true);
+    // The Deepforge between Hush and Storm, 49.6 degrees from the Restless
+    // and 58.4 from the Horde (FACTION_DWARVES 2; playable since bzc.135).
+    expect(at("dwarves")).toBeCloseTo(247.6, 0);
+    expect(at("goblins")).toBeCloseTo(306, 0);
+    expect(model.factions.find((f) => f.id === "dwarves")?.playable).toBe(true);
+    // Its card goes under its portrait: left of it the stage's edge would
+    // cut it; the others keep their sides.
+    const side = (id: string): string => fcardSide(polar(at(id), 280).x);
+    expect(side("dwarves")).toBe("below");
+    expect(side("goblins")).toBe("left");
+    expect(side("undead")).toBe("left");
+    expect(side("humans")).toBe("right");
+    expect(side("candy")).toBe("right");
   });
 
   it("shows the Lost World apart, without magic", () => {

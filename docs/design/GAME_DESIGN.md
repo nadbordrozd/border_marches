@@ -19,6 +19,7 @@ Related documents:
 | v0.2 faction: the Restless (undead)                     | [FACTION_UNDEAD.md](FACTION_UNDEAD.md)             |
 | v0.2 faction: the Goblin Horde (goblins)                | [FACTION_GOBLINS.md](FACTION_GOBLINS.md)           |
 | v0.2 faction: the Candy Kingdom (candy)                 | [FACTION_CANDY.md](FACTION_CANDY.md)               |
+| v0.2 faction: the Deepforge (dwarves)                   | [FACTION_DWARVES.md](FACTION_DWARVES.md)           |
 | Resources, income, costs, pickups, economy sanity pass  | [ECONOMY.md](ECONOMY.md)                           |
 | Visual direction, adventure-map look, terrain mapping   | [../art/ART_DIRECTION.md](../art/ART_DIRECTION.md) |
 | How art is made                                         | [../art/PIPELINE.md](../art/PIPELINE.md)           |
@@ -148,6 +149,7 @@ once are offered one after another.
 | Wasteland             |           150 |           212 |                                                  |
 | Sand (desert)         |           125 |           177 | bead bzc.88: as slow as the badlands             |
 | Frosting (candy)      |           125 |           177 | bead bzc.115: 100 / 141 for Candy natives        |
+| Volcanic              |           150 |           212 | bead bzc.83: 100 / 141 for Deepforge natives     |
 | Swamp                 |           175 |           247 | bead bzc.126: the slowest ground                 |
 | Water (shallow, deep) |    impassable |               | no boats in the MVP                              |
 | Mountains             |    impassable |               |                                                  |

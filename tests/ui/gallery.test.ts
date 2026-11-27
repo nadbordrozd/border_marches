@@ -58,6 +58,9 @@ describe("gallery tabs match the registries", () => {
     // The Candy Kingdom is playable since bead bzc.117.
     expect(ids).toContain("gingerbread-man");
     expect(ids).toContain("rock-candy-dragon");
+    // The Deepforge is playable since bead bzc.135.
+    expect(ids).toContain("tinker");
+    expect(ids).toContain("ironclad");
   });
 
   it("summon cards name their abilities, registered by magic or not", () => {
@@ -97,18 +100,15 @@ describe("gallery tabs match the registries", () => {
   });
 
   it("artifacts: every artifact, consumable and relic (none held back)", () => {
-    // Held: the Deepforge's Pocket Boiler until its integration (bzc.135).
-    expect(count("artifacts")).toBe(
-      ARTIFACT_LIST.filter((a) => !HELD_ARTIFACTS.has(a.id)).length,
-    );
+    // The Deepforge's Pocket Boiler is shown since its integration (bzc.135).
+    expect(HELD_ARTIFACTS.size).toBe(0);
+    expect(count("artifacts")).toBe(ARTIFACT_LIST.length);
   });
 
   it("skills and feats: every skill row, feat and vow (none held back)", () => {
-    // Held: the Deepforge's Scalding until its integration (bzc.135).
-    expect(count("skills")).toBe(
-      Object.keys(SKILLS).length +
-        FEAT_LIST.filter((f) => !HELD_FEATS.has(f.id)).length,
-    );
+    // The Deepforge's Scalding is shown since its integration (bzc.135).
+    expect(HELD_FEATS.size).toBe(0);
+    expect(count("skills")).toBe(Object.keys(SKILLS).length + FEAT_LIST.length);
   });
 
   it("map objects: every catalogued object type, then the decorations", () => {

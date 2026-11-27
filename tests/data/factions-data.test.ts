@@ -100,18 +100,19 @@ describe("v0.2 faction data", () => {
     }
   });
 
-  it("only the four v0.2 factions are playable", () => {
+  it("only the five v0.2 factions are playable", () => {
     expect(playableFactions().map((f) => f.id)).toEqual([
       "humans",
       "undead",
       "goblins",
       "candy",
+      "dwarves",
     ]);
     expect(FACTIONS.find((f) => f.id === "lost-world")?.available).toBe(false);
   });
 
-  it("every building of the four trees has town-screen art", () => {
-    for (const faction of ["humans", "undead", "goblins", "candy"]) {
+  it("every building of the five trees has town-screen art", () => {
+    for (const faction of ["humans", "undead", "goblins", "candy", "dwarves"]) {
       for (const id of townTree(faction)!.order)
         expect(buildingArt(faction, id), `${faction} ${id}`).not.toBeNull();
     }

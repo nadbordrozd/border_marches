@@ -80,7 +80,7 @@ export {
   reelInLimits,
 } from "./factions/index.ts";
 export type { PendingShell } from "./factions/index.ts";
-export { STEAM, STEAM_MAX, steamOf } from "./steam.ts";
+export { STEAM, STEAM_MAX, steamOf, stokesOnDefend } from "./steam.ts";
 export { GET_UP_EFFECT, GET_UP_HALF } from "./resolve.ts";
 export {
   actionError,

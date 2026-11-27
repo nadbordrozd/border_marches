@@ -121,10 +121,10 @@
   width: min(1180px, calc(100vw - 32px));
   box-sizing: border-box;
   /*
-   * Centred for a box about 760 px tall, but pinned by its top: choosing a
+   * Centred for a box about 784 px tall, but pinned by its top: choosing a
    * map with a longer story grows the box downwards and nothing else moves.
    */
-  margin: max(8px, calc(50vh - 380px)) 0 8px;
+  margin: max(8px, calc(50vh - 392px)) 0 8px;
   padding: 14px 28px 10px;
   display: flex;
   flex-direction: column;
@@ -182,11 +182,31 @@
   border-top: 1px solid var(--gm-trim-dark);
 }
 
+/*
+ * The map column, with the chosen faction's detail under it, beside the
+ * faction cards (five cards and the bar fit a 1280 x 800 screen).
+ */
 .gm-new-cols {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 24px;
+  grid-template-rows: auto 1fr;
+  gap: 10px 24px;
   align-items: start;
+}
+
+.gm-new-map {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.gm-new-faction {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.gm-new-cols > .gm-faction-detail {
+  grid-column: 1;
+  grid-row: 2;
 }
 
 .gm-new-col {
@@ -360,7 +380,7 @@
 .gm-faction-cards {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .gm-btn.gm-faction-card {
@@ -368,7 +388,7 @@
   grid-template-columns: 72px minmax(0, 1fr) auto;
   align-items: end;
   gap: 14px;
-  padding: 4px 12px 4px 10px;
+  padding: 2px 12px 2px 10px;
   border-left: 5px solid var(--gm-faction-colour, #6b5a3e);
   text-align: left;
 }
@@ -548,6 +568,17 @@
   .gm-new-cols,
   .gm-menu-foot {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gm-new-cols {
+    grid-template-rows: none;
+  }
+
+  .gm-new-map,
+  .gm-new-faction,
+  .gm-new-cols > .gm-faction-detail {
+    grid-column: auto;
+    grid-row: auto;
   }
 
   .gm-keys {

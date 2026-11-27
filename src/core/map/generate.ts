@@ -56,6 +56,7 @@ import {
 import { placeCandy } from "./gen/candy.ts";
 import { placeSwamp } from "./gen/swamp.ts";
 import { placeObjects, placeTowns } from "./gen/objects.ts";
+import { withLootWithout } from "./gen/contents.ts";
 import { O, TERRAIN_OF, newState } from "./gen/state.ts";
 import type { Connection, GapInfo, PassInfo, ZoneInfo } from "./gen/state.ts";
 import {
@@ -159,8 +160,20 @@ export function generateMapWithInfo(
   seed: number,
   options: GenerateOptions = {},
 ): { map: GameMap; info: GenerateInfo } {
-  const size = options.size ?? "M";
   const cfg = resolveConfig(options.config);
+  // The artifacts this map's loot leaves out (the named maps', bead
+  // bzc.135), for every stage that rolls an artifact.
+  return withLootWithout(cfg.objects.lootWithout, () =>
+    generateResolved(seed, options, cfg),
+  );
+}
+
+function generateResolved(
+  seed: number,
+  options: GenerateOptions,
+  cfg: GenConfig,
+): { map: GameMap; info: GenerateInfo } {
+  const size = options.size ?? "M";
   const side = cfg.sizes[size];
   const players = options.players ?? cfg.players[size];
   if (![2, 3, 4].includes(players)) {

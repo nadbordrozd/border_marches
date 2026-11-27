@@ -42,7 +42,7 @@ describe("content icons", () => {
     );
     expect(counts).toEqual({
       spell: 60,
-      artifact: 86,
+      artifact: 87,
       condition: 30,
       ground: 8,
       skill: 24,

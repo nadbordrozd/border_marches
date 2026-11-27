@@ -158,8 +158,17 @@ const SNAPSHOT: Record<
   // artifacts re-rolled; no object moved and the counts held. The
   // Hourglass Marches pins Bangwhistle (goblins) and Sexton's Rest
   // (undead) in its edits to keep one neutral town per faction.
+  // Bead bzc.135: the named maps leave the Deepforge out of their
+  // generated outposts and the Pocket Boiler out of their generated loot
+  // (named.ts `outpostsWithout`, `lootWithout`): in the pools they re-rolled
+  // the outposts' tiers and the loot, which moved 530 of the Ninefold
+  // Landfall's objects and 64 of the Cartographer's Folly's. Only the
+  // Deepforge among the neutral town factions moves a base now: the seeded
+  // pick of the neutral towns the edits name. Every edit pins those
+  // factions as authored (the Keepers' Toll pins Tollbridge to undead and
+  // Low Barrow to humans in this bead), so every built map is unchanged.
   "keepers-toll": {
-    base: "aab2b4a1",
+    base: "939be4a1",
     // Bead bzc.110: buildings moved out of the ways (the oasis that had
     // no room removed by an edit).
     built: "a277b33b",
@@ -173,7 +182,7 @@ const SNAPSHOT: Record<
     ],
   },
   "hourglass-marches": {
-    base: "58b2a7db",
+    base: "25f9fd47",
     // Bead bzc.110: buildings moved out of the ways.
     built: "0c878e82",
     objects: 719,
@@ -207,9 +216,11 @@ const SNAPSHOT: Record<
       ["town-7", 44, 39, "Warlord's Hold"],
     ],
   },
-  // Bead bzc.129: the terrain showcase, drawn on today's generator.
+  // Bead bzc.129: the terrain showcase, drawn on today's generator. Bead
+  // bzc.135: its base moved only by the seeded faction of Compass Rose
+  // (town-5, undead to humans), which its edits pin to humans.
   "cartographers-folly": {
-    base: "966d8802",
+    base: "4e33af42",
     built: "1c7cee6c",
     objects: 766,
     towns: [

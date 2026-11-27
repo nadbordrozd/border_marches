@@ -15,7 +15,7 @@ import {
 } from "../../core/battle/index.ts";
 import type { Hex, StackId } from "../../core/battle/index.ts";
 import type { BattleArt } from "./assets.ts";
-import { conditionIcon, groundIcon } from "./assets.ts";
+import { conditionIcon, groundIcon, shellMarkerIcon } from "./assets.ts";
 import {
   BADGE_SIZE,
   CHIP_DX,
@@ -53,6 +53,7 @@ export const SIDE_COLORS = {
 
 const NUMBER_FONT = "bold 12px Verdana, Geneva, sans-serif";
 const MORE_FONT = "bold 10px Verdana, Geneva, sans-serif";
+const SIZE_FONT = "bold 9px Verdana, Geneva, sans-serif";
 
 function hexPath(ctx: CanvasRenderingContext2D, h: Hex, inset = 0): void {
   const pts = hexCorners(h, inset);
@@ -625,8 +626,10 @@ function drawChip(
   // Conditions: icon badges in a row under the chip, then "+N".
   for (const r of badgeRects(u, u.pips)) {
     if (r.pip === null) drawMorePlate(ctx, r.x, r.y, r.w, r.more);
-    else
+    else {
       drawConditionPlate(ctx, r.x, r.y, r.pip.kind, r.pip.bane ? BANE : BOON);
+      if (r.pip.size !== undefined) drawBadgeSize(ctx, r.x, r.y, r.pip.size);
+    }
   }
   ctx.globalAlpha = 1;
 }
@@ -656,6 +659,32 @@ function drawConditionPlate(
   if (icon) ctx.drawImage(icon, x + 1, y + 1, 16, 16);
 }
 
+/**
+ * A gauge's size in the badge's lower right corner (Steam 1 to 3): white
+ * on a dark tab, so it reads over the icon.
+ */
+function drawBadgeSize(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  size: number,
+): void {
+  const s = BADGE_SIZE;
+  const w = 8;
+  const h = 10;
+  const bx = x + s - w + 1;
+  const by = y + s - h + 1;
+  ctx.fillStyle = INK;
+  ctx.fillRect(bx - 1, by - 1, w + 1, h + 1);
+  ctx.fillStyle = "#5c3a1a";
+  ctx.fillRect(bx, by, w, h);
+  ctx.fillStyle = "#ffffff";
+  ctx.font = SIZE_FONT;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(String(size), bx + w / 2, by + h / 2 + 0.5);
+}
+
 /** The "+N" plate after three badges. */
 function drawMorePlate(
   ctx: CanvasRenderingContext2D,
@@ -676,6 +705,62 @@ function drawMorePlate(
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillText(`+${more}`, x + w / 2, y + s / 2 + 0.5);
+}
+
+/** Shell rings: red on the target hex, dashed on the splash round it. */
+const SHELL_RED = "#ff4a3a";
+
+/**
+ * Mortar shells in the air (FACTION_DWARVES 5, Lob), under the units: the
+ * splash hexes in a dashed red outline and the target hex washed red with
+ * a solid ring, so a stack still to act sees where not to stand.
+ */
+function drawShellRings(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  for (const sh of scene.shells) {
+    for (const h of sh.splash) {
+      hexPath(ctx, h, 3);
+      ctx.globalAlpha = 0.1;
+      ctx.fillStyle = SHELL_RED;
+      ctx.fill();
+      ctx.globalAlpha = 0.85;
+      ctx.strokeStyle = SHELL_RED;
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([3, 3]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    hexPath(ctx, sh.hex, 2);
+    ctx.globalAlpha = 0.28;
+    ctx.fillStyle = SHELL_RED;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+    ctx.strokeStyle = "#1a0806";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+    ctx.strokeStyle = SHELL_RED;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+}
+
+/**
+ * The shell marker (32 px, 1x) on each target hex, over the units: it is
+ * the one thing on that hex that must read, and a stack standing there is
+ * the one it will hit. It sits low in the hex's left half, at the stack's
+ * feet and clear of its count chip (which starts right of the feet).
+ */
+function drawShellMarkers(ctx: CanvasRenderingContext2D, scene: Scene): void {
+  const icon = shellMarkerIcon();
+  if (icon === null) return;
+  for (const sh of scene.shells) {
+    const c = hexToStage(sh.hex);
+    ctx.drawImage(
+      icon,
+      Math.round(c.x + CHIP_DX - icon.width),
+      Math.round(c.y - 10),
+    );
+  }
 }
 
 /** Tinted hexes for non-blocking ground (hazards, surfaces, remains). */
@@ -1024,6 +1109,7 @@ export function renderBattle(
   ctx.imageSmoothingEnabled = false;
   ctx.drawImage(input.background, 0, 0);
   drawGround(ctx, scene);
+  drawShellRings(ctx, scene);
   drawMarks(ctx, scene);
   drawArea(ctx, scene);
   drawLabels(ctx, scene);
@@ -1058,6 +1144,7 @@ export function renderBattle(
   for (const u of scene.units.values()) {
     if (u.visible) drawChip(ctx, u, u.id === input.activeId);
   }
+  drawShellMarkers(ctx, scene);
   drawIntents(ctx, scene);
   drawSwapBadges(ctx, scene);
   drawStrikeArrow(ctx, scene);

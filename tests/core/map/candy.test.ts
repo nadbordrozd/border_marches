@@ -14,10 +14,10 @@ import {
 } from "../../../src/core/map/generate.ts";
 import { TERRAINS, validateMap } from "../../../src/core/map/types.ts";
 import {
-  FROSTING_FACTION,
-  preferFrosting,
-} from "../../../src/core/map/gen/candy.ts";
-import type { GroundRequest } from "../../../src/core/map/gen/candy.ts";
+  NATIVE_GROUND,
+  preferNativeGround,
+} from "../../../src/core/map/gen/native-ground.ts";
+import type { GroundRequest } from "../../../src/core/map/gen/native-ground.ts";
 import { T } from "../../../src/core/map/gen/state.ts";
 import type { GenState } from "../../../src/core/map/gen/state.ts";
 import { NAMED_MAPS, namedConfig } from "../../../src/core/map/named.ts";
@@ -38,7 +38,9 @@ describe("frosting ground data", () => {
     expect(DEFAULT_GEN_CONFIG.movement.cost.frosting).toBe(125);
     expect(getHeroClass("nutcracker").nativeTerrain).toBe("frosting");
     expect(getHeroClass("confectioner").nativeTerrain).toBe("frosting");
-    expect(FROSTING_FACTION).toBe(getHeroClass("nutcracker").faction);
+    expect(NATIVE_GROUND[getHeroClass("nutcracker").faction]?.zone).toBe(
+      "frosting",
+    );
   });
 
   it("has its own texture, swatch, trees and peaks", () => {
@@ -248,7 +250,7 @@ describe("Candy outposts on frosting", { timeout: HEAVY_TIMEOUT }, () => {
       zones: [0],
       pocket: -1,
     };
-    expect(preferFrosting(st, [candy, realm, kit, pocket, shrine])).toBe(1);
+    expect(preferNativeGround(st, [candy, realm, kit, pocket, shrine])).toBe(1);
     expect(candy.ground).toBe(T.frosting);
     expect(candy.zones).toEqual([0, 1]);
     for (const r of [realm, kit, pocket, shrine]) {
@@ -279,7 +281,7 @@ describe("Candy outposts on frosting", { timeout: HEAVY_TIMEOUT }, () => {
   it("changes nothing on a map without a candy zone", () => {
     const plain = { zones: [{ id: 0, main: "grass" }] } as unknown as GenState;
     const candy = request("candy");
-    expect(preferFrosting(plain, [candy])).toBe(0);
+    expect(preferNativeGround(plain, [candy])).toBe(0);
     expect(candy.zones).toEqual([0]);
     expect(candy.ground).toBeUndefined();
   });

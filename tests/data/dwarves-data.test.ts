@@ -1,8 +1,8 @@
 /**
  * The Deepforge's data against FACTION_DWARVES.md (sections 1 to 9): the
  * roster, the faction record, the Steamworks tree, the classes, the named
- * heroes, the guild, the Pocket Boiler and Scalding; and the holds that
- * keep the faction out of games until its integration bead (bzc.135).
+ * heroes, the guild, the Pocket Boiler and Scalding; and the faction in
+ * games since its integration bead (bzc.135).
  */
 import { describe, expect, it } from "vitest";
 import { ability, act, hasAct } from "../../src/core/battle/index.ts";
@@ -123,17 +123,17 @@ describe("Deepforge roster (section 4)", () => {
 });
 
 describe("The faction record (sections 1, 2, 3)", () => {
-  it("is in the data but not playable (integration bead bzc.135)", () => {
+  it("is playable (integration bead bzc.135)", () => {
     expect(DWARVES).toMatchObject({
       name: "The Deepforge",
-      available: false,
+      available: true,
       heroClasses: ["thane", "artificer"],
       colour: "#3aa38f",
       birthright: { name: "Stoke", ability: "stoke" },
       guildCap: 4,
     });
     expect(ability("stoke").name).toBe("Stoke");
-    expect(playableFactions().map((f) => f.id)).not.toContain("dwarves");
+    expect(playableFactions().map((f) => f.id)).toContain("dwarves");
   });
 
   it("school weights and guild cap match the guild's", () => {
@@ -355,8 +355,9 @@ describe("Classes, Commands and named heroes (sections 7, 8)", () => {
     ]);
     expect(spellInfo("on-credit")).toMatchObject({ school: "hush", tier: 1 });
     const ids = deep.map((h) => h.id);
-    const pool = rosterFor(["humans", "goblins", "candy"]);
-    for (const id of ids) expect(pool).not.toContain(id);
+    expect(rosterFor(["humans", "goblins", "candy"])).toEqual(
+      expect.arrayContaining(ids),
+    );
     expect(rosterFor(["dwarves"])).toEqual(expect.arrayContaining(ids));
   });
 });
@@ -382,27 +383,33 @@ describe("Outside the faction (section 5.2)", () => {
   });
 });
 
-describe("Held out of games until the integration bead (bzc.135)", () => {
-  it("no generated outpost offers a Deepforge creature", () => {
+describe("In games since the integration bead (bzc.135)", () => {
+  it("generated outposts offer the four lower Deepforge creatures", () => {
+    const seen = new Set<string>();
     for (let seed = 1; seed <= 300; seed++) {
       const data = rollContents("faction-outpost", createRng(seed), 3);
-      expect(data["faction"], `seed ${seed}`).not.toBe("dwarves");
+      if (data["faction"] === "dwarves") seen.add(String(data["creature"]));
     }
+    expect([...seen].sort()).toEqual([
+      "gyrocopter",
+      "mortar",
+      "rivet-gunner",
+      "tinker",
+    ]);
   });
 
-  it("the Pocket Boiler is in no Mystery Bag, map pool or gallery page", () => {
-    expect([...HELD_ARTIFACTS]).toEqual(["pocket-boiler"]);
-    expect(mysteryPool("wonder")).not.toContain("pocket-boiler");
-    expect(mysteryPool("wonder").length).toBeGreaterThan(10);
+  it("the Pocket Boiler is in the Mystery Bags, the map pool and the gallery", () => {
+    expect([...HELD_ARTIFACTS]).toEqual([]);
+    expect(mysteryPool("wonder")).toContain("pocket-boiler");
     const shown = galleryTab("artifacts").sections.flatMap((s) =>
       s.entries.map((e) => e.id),
     );
-    expect(shown).not.toContain("pocket-boiler");
-    expect(shown).toHaveLength(ARTIFACT_LIST.length - 1);
+    expect(shown).toContain("pocket-boiler");
+    expect(shown).toHaveLength(ARTIFACT_LIST.length);
   });
 
-  it("Scalding is never drafted and not in the gallery", () => {
-    expect([...HELD_FEATS]).toEqual(["scalding"]);
+  it("Scalding is drafted and in the gallery", () => {
+    expect([...HELD_FEATS]).toEqual([]);
     const hero = {
       skills: [
         { id: "stormcalling", rank: 3 },
@@ -414,17 +421,28 @@ describe("Held out of games until the integration bead (bzc.135)", () => {
     } as unknown as HeroState;
     const offered = eligibleFeats(hero).map((f) => f.id);
     expect(offered).toContain("firewalkers");
-    expect(eligibleFeats(hero).map((f) => f.id)).not.toContain("scalding");
+    expect(offered).toContain("scalding");
     const shown = galleryTab("skills").sections.flatMap((s) =>
       s.entries.map((e) => e.id),
     );
-    expect(shown).not.toContain("scalding");
+    expect(shown).toContain("scalding");
   });
 
-  it("the gallery shows no Deepforge creature or class", () => {
-    expect(galleryCreatures().some((c) => c.faction === "dwarves")).toBe(false);
-    expect(galleryHeroClasses()).not.toContain("thane");
-    expect(galleryHeroClasses()).not.toContain("artificer");
+  it("the gallery shows the Deepforge's creatures and classes", () => {
+    expect(
+      galleryCreatures()
+        .filter((c) => c.faction === "dwarves")
+        .map((c) => c.id),
+    ).toEqual([
+      "tinker",
+      "rivet-gunner",
+      "gyrocopter",
+      "mortar",
+      "steam-tank",
+      "ironclad",
+    ]);
+    expect(galleryHeroClasses()).toContain("thane");
+    expect(galleryHeroClasses()).toContain("artificer");
   });
 
   it("every Deepforge act and ability the data names is registered", () => {

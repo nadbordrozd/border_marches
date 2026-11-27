@@ -44,7 +44,8 @@ import { isPickup } from "../../game/site-state.ts";
 import { isBuilding, leavesWayRound } from "../passages.ts";
 import { MYSTERY_TYPE, mysteryItem } from "../mystery.ts";
 import { findArtifact, isCursed } from "../../../data/artifacts.ts";
-import { candySites, preferFrosting } from "./candy.ts";
+import { candySites } from "./candy.ts";
+import { preferNativeGround } from "./native-ground.ts";
 import { desertSites } from "./desert.ts";
 import { volcanicSites } from "./volcanic.ts";
 import { swampContents, swampSites } from "./swamp.ts";
@@ -180,6 +181,7 @@ export const NEUTRAL_TOWN_FACTIONS = [
   "undead",
   "goblins",
   "candy",
+  "dwarves",
 ] as const;
 
 /** A neutral town's faction: seeded by the map seed and the town's index. */
@@ -513,7 +515,10 @@ export function placeObjects(st: GenState): PlacementReport {
       data[k] = r.int(Math.round(lo / step), Math.round(hi / step)) * step;
     }
     // Seeded contents (bead bzc.13): variant, spell, prize, guard, value.
-    return { ...data, ...rollContents(row.type, r, tier) };
+    return {
+      ...data,
+      ...rollContents(row.type, r, tier, oc.outpostsWithout),
+    };
   };
   const tierOf = (z: number): number => {
     const zone = st.zones[z];
@@ -1158,8 +1163,9 @@ export function placeObjects(st: GenState): PlacementReport {
     requests.splice(kitRequests, 0, ...swampReqs);
   }
 
-  // Candy outposts stand on frosting while they can (bead bzc.115).
-  preferFrosting(st, requests);
+  // Faction outposts stand on their native ground while they can: Candy on
+  // frosting (bead bzc.115), the Deepforge on volcanic ground (bzc.135).
+  preferNativeGround(st, requests);
 
   // 3. Placement: blocking footprints, roads, then single cells.
   const counters = new Map<string, number>();

@@ -23,7 +23,7 @@ here.
 
 | MVP rule                                                                  | v0.2 rule                                                                                                           | Section |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------- |
-| GAME_DESIGN 3: one faction, one hero, no spells, artifacts, skills or AI  | Four factions, several heroes per player, two to four players                                                       | all     |
+| GAME_DESIGN 3: one faction, one hero, no spells, artifacts, skills or AI  | Five factions, several heroes per player, two to four players                                                       | all     |
 | GAME_DESIGN 4: win by capturing the Warlord's Hold; lose with the hero    | Last player standing; elimination rules                                                                             | 5.9     |
 | GAME_DESIGN 6: Attack and Defense only; offers of +1 Attack or +1 Defense | Four primary stats, a class stat pattern, skills, feats                                                             | 3       |
 | GAME_DESIGN 6: 1500 movement points; same-creature stacks merge           | Movement from the slowest creature plus modifiers; one creature may fill several slots                              | 3.9     |
@@ -962,7 +962,7 @@ these forms (numbers fixed here so heroes are comparable):
 
 The engine therefore offers birthrights these attachment points, which
 cover the v0.2 factions' birthrights (the Candy Kingdom's Sticky is the
-fourth):
+fourth, the Deepforge's Stoke the fifth):
 
 | Attachment                  | Example it must support                                                                                                                                                                                                                                                                                                        |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -970,7 +970,7 @@ fourth):
 | On a native's death         | Schedule its return at the next round start (the Restless): the stack keeps its id, reappears on its remains with a count the rule gives, and is flagged to crumble (1.12). If its remains were used or replaced, it does not return. If a stack stands on them, it appears on the nearest free hex. Once per stack per battle |
 | On Harm from its own side   | A native caught in an area effect of the side it fights for takes 0 from it and is pushed 3 hexes away from the effect's centre (the Goblins' Launched)                                                                                                                                                                        |
 | On a native's Strike        | An added Strike or modifier that reads adjacency (the Lost World's Pack), or a condition put on the stack struck (the Candy Kingdom's Sticky: Stuck, clock 2, after the Strike's own rules and before the retaliation). An added Strike is kind `special`, is not retaliated and fires once per action                         |
-| On a native's action choice | A replacement action available only to natives                                                                                                                                                                                                                                                                                 |
+| On a native's action choice | A replacement action available only to natives (the Deepforge's Stoke: a native's Defend also gains Steam 1, or grows its Steam by 1, to at most 3)                                                                                                                                                                            |
 
 ### 3.9 Movement, sight and the army
 
@@ -1177,7 +1177,8 @@ the MVP.
   of its tier-1 dwelling plus half a week's growth (rounded down) of its
   tier-2 dwelling, counting only dwellings the town has built (no v0.2
   faction starts with its tier-2 dwelling, so in practice the militia is
-  the tier-1 part: 14 Squires, 15 Skeletons or 20 Goblins). The militia
+  the tier-1 part: 14 Squires, 15 Skeletons, 20 Goblins, 15 Gingerbread
+  Men or 14 Tinkers). The militia
   comes on top of the dwelling stock, which is unchanged. Neutral towns
   keep their own garrisons and get no militia. A hero can take the
   militia into its army like any garrison.

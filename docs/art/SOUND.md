@@ -17,6 +17,10 @@ Music is out of scope (the user adds it later).
   level of the other recruit sounds; #1 too faint). The accepted #2 is a
   quiet take: its mix trim is -5 dB so its gain stays under the cap of 8,
   and it plays 3 dB under the other recruit sounds.
+- The Deepforge (bead bzc.135): its recruit (one steam-whistle toot over a
+  hiss), victory (a small brass band's chord with a whistle edge) and town
+  (clanking gears, a piston and a bell ding) sounds, one take each, all
+  three accepted at the usual trims.
 
 ## Where sounds come from
 
@@ -177,12 +181,12 @@ jitter 5%, gap 100 ms.
 | Moment | Sound | Where |
 | --- | --- | --- |
 | Melee and shot hits, deaths | `battle.hit`, `battle.heavy-hit`, `battle.death` | `battleCue`, with 6% pitch jitter |
-| A battle won | `victory.humans`, `victory.undead`, `victory.goblins`, `victory.candy` (generic `victory` for others) | battle result, by the player's army faction |
+| A battle won | `victory.humans`, `victory.undead`, `victory.goblins`, `victory.candy`, `victory.dwarves` (generic `victory` for others) | battle result, by the player's army faction |
 | A battle lost | `defeat` | battle result |
 | The game won or lost | `victory`, `defeat` | end screen |
-| Creatures recruited in a town | `recruit.humans`, `recruit.undead`, `recruit.goblins`, `recruit.candy` | by the creature's faction |
+| Creatures recruited in a town | `recruit.humans`, `recruit.undead`, `recruit.goblins`, `recruit.candy`, `recruit.dwarves` | by the creature's faction |
 | A hero hired, a map dwelling hire | `recruit` | tavern, `siteCue` |
-| A town screen opens | `town.humans`, `town.undead`, `town.goblins`, `town.candy` | one-shot, never a loop |
+| A town screen opens | `town.humans`, `town.undead`, `town.goblins`, `town.candy`, `town.dwarves` | one-shot, never a loop |
 | Shrines, stones, wells, schools, temples, the observatory and other blessings | `site.shrine` | `siteCue` |
 | A hero takes on a bank's guard | `site.bank` | before the battle opens |
 | A find: chest, loose artifact or scroll, campfire, fallen adventurer, sealed box, a plundered bank | `site.treasure` | `siteCue`; chests on the offer |
@@ -285,6 +289,9 @@ gain (RMS over the audible part).
 | `recruit.candy` | `sfx/recruit-candy.mp3` | 0.8 | -24.3 / -40.9 | 7.834 | -23.0 | recruit.candy#2 |
 | `victory.candy` | `sfx/victory-candy.mp3` | 2.48 | -2.5 / -20.5 | 1.188 | -19.0 | victory.candy#0 |
 | `town.candy` | `sfx/town-candy.mp3` | 2.48 | 3.4 / -18.7 | 0.429 | -26.0 | town.candy#0 |
+| `recruit.dwarves` | `sfx/recruit-dwarves.mp3` | 0.8 | 2.4 / -5.7 | 0.192 | -20.0 | recruit.dwarves#0 |
+| `victory.dwarves` | `sfx/victory-dwarves.mp3` | 2.48 | 3.2 / -5.4 | 0.235 | -18.0 | victory.dwarves#0 |
+| `town.dwarves` | `sfx/town-dwarves.mp3` | 2.48 | -2.1 / -19.5 | 0.471 | -26.0 | town.dwarves#0 |
 
 Rejected takes (each with its reason in `verdicts.json`):
 `spell.touch.bloom#0` (quiet rustle, no chime), `ground.brambles#0` (sparse

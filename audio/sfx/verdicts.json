@@ -453,5 +453,20 @@
     "verdict": "ACCEPTED",
     "notes": "one bright glockenspiel strike with 2, 6, 8 and 10 kHz partials decaying over 0.75 s; clean, plays at -20 dBFS like the other recruit sounds (take 0 could not)",
     "at": "2026-11-27T00:59:06.491Z"
+  },
+  "recruit.dwarves#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a harmonic whistle tone (fundamental near 600 Hz with a ladder of partials) over a broadband steam hiss for 0.7 s, then a clean stop: one steam-whistle toot, distinct from the bell, horn and glockenspiel recruit sounds",
+    "at": "2026-11-27T10:45:09.278Z"
+  },
+  "victory.dwarves#0": {
+    "verdict": "ACCEPTED",
+    "notes": "a sustained full harmonic brass chord with breathy noise for 1.6 s, then a clean decaying tail: a band sting with a whistle edge, distinct from the music-box, organ and kazoo stings",
+    "at": "2026-11-27T10:45:09.338Z"
+  },
+  "town.dwarves#0": {
+    "verdict": "ACCEPTED",
+    "notes": "irregular metallic clanks over steady ringing partials for 0.8 s, a bright struck ding at 0.9 s, then a ringing decay: a foundry with gears and a bell, quiet one-shot, distinct from the other town sounds",
+    "at": "2026-11-27T10:45:09.399Z"
   }
 }

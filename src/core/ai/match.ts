@@ -2,7 +2,7 @@
  * AI-against-AI matches and their per-day metrics (bead bzc.19).
  *
  * {@link playMatch} generates a map, gives every start to an AI player
- * (factions in turn: humans, undead, goblins), plays whole days with the
+ * (the playable factions in turn), plays whole days with the
  * given controllers and the battle resolver, and records
  * {@link PlayerMetrics} for every player at the end of every day. The
  * headless runner (tools/sim/match.ts) prints and saves them; the unit

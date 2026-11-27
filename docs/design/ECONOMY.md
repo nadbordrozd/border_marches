@@ -25,12 +25,13 @@ the sanity pass and the experience curve. Calendar rules are in
 
 Each faction leans on one resource, so a start region binds differently:
 
-| Faction  | Leans on        | All buildings (gold / wood / ore / essence) | One week of creatures                |
-| -------- | --------------- | ------------------------------------------- | ------------------------------------ |
-| Realm    | Gold and wood   | 52,500 / 155 / 104 / 22                     | 11,059 gold, 7 ore, 6 essence        |
-| Restless | Ore and essence | 56,000 / 117 / 132 / 34                     | 10,625 gold, 2 ore, 9 essence        |
-| Horde    | Wood            | 45,800 / 179 / 72 / 13                      | 9340 gold, 11 wood, 3 ore, 4 essence |
-| Candy    | Essence, gold   | 50,050 / 150 / 70 / 32                      | 10,880 gold, 1 ore, 9 essence        |
+| Faction   | Leans on        | All buildings (gold / wood / ore / essence) | One week of creatures                |
+| --------- | --------------- | ------------------------------------------- | ------------------------------------ |
+| Realm     | Gold and wood   | 52,500 / 155 / 104 / 22                     | 11,059 gold, 7 ore, 6 essence        |
+| Restless  | Ore and essence | 56,000 / 117 / 132 / 34                     | 10,625 gold, 2 ore, 9 essence        |
+| Horde     | Wood            | 45,800 / 179 / 72 / 13                      | 9340 gold, 11 wood, 3 ore, 4 essence |
+| Candy     | Essence, gold   | 50,050 / 150 / 70 / 32                      | 10,880 gold, 1 ore, 9 essence        |
+| Deepforge | Ore, gold       | 50,800 / 125 / 128 / 19                     | 11,554 gold, 12 ore, 2 essence       |
 
 ## 2. Starting resources
 
@@ -60,6 +61,7 @@ tomorrow, to whoever holds the flag (RULES_V2 5.6).
 | Essence Still (Restless special) | +1 essence on every even day                             |
 | Loot Pile (Horde special)        | No daily income: gold equal to the XP of each battle won |
 | Bakery (Candy special)           | No income: +8 Gingerbread Men a week in its town         |
+| Deep Shaft (Deepforge special)   | +1 ore                                                   |
 | A hero with a Resource specialty | RULES_V2 3.7                                             |
 
 ## 4. Mines
@@ -132,12 +134,13 @@ its town**, by the remainder rule of
 [FACTION_LOST_WORLD.md section 6](FACTION_LOST_WORLD.md#6-town), plus one
 faction power:
 
-| Faction  | Keystone Hall     | Power                                                                         |
-| -------- | ----------------- | ----------------------------------------------------------------------------- |
-| Realm    | Round Table       | Every army of its owner has Morale +2                                         |
-| Restless | Hall of Ancestors | Its owner's stacks that got up do not crumble after a battle won              |
-| Horde    | The Great Flinger | Every native stack in its owner's armies has Cannonball                       |
-| Candy    | The Four O'Clock  | Every native stack in its owner's armies starts each battle Hastened, clock 1 |
+| Faction   | Keystone Hall     | Power                                                                         |
+| --------- | ----------------- | ----------------------------------------------------------------------------- |
+| Realm     | Round Table       | Every army of its owner has Morale +2                                         |
+| Restless  | Hall of Ancestors | Its owner's stacks that got up do not crumble after a battle won              |
+| Horde     | The Great Flinger | Every native stack in its owner's armies has Cannonball                       |
+| Candy     | The Four O'Clock  | Every native stack in its owner's armies starts each battle Hastened, clock 1 |
+| Deepforge | The Great Boiler  | Every native stack in its owner's armies starts each battle bearing Steam 1   |
 
 ### 6.3 Drills
 
@@ -182,27 +185,32 @@ pile (7), an ore pile (4) and essence crystals (3).
 
 Fight value (FV) is GAME_DESIGN 8.2. Gold per FV is the gold price alone.
 
-| Tier | Realm                                | Restless                          | Horde                               | Candy                                     | Lost World (reference)        |
-| ---: | ------------------------------------ | --------------------------------- | ----------------------------------- | ----------------------------------------- | ----------------------------- |
-|    1 | Squire 46 (0.71)                     | Skeleton 42 (0.68)                | Goblin 40 (0.69)                    | Gingerbread Man 40 (0.70)                 | Caveman 50 (0.83)             |
-|    2 | Longbowman 115 (1.06)                | Ghoul 115 (1.07)                  | Bomb Chucker 110 (1.01)             | Peppermint Archer 120 (1.11)              | Spitter 110 (0.90)            |
-|    3 | Man-at-Arms 240 (1.14)               | Banshee 260 (1.30)                | Wolf Rider 190 (1.40)               | Taffy Wrangler 240 (1.29)                 | Raptor 220 (1.27)             |
-|    4 | Friar 400 + 1 e (1.70)               | Gravecaller 500 + 1 e (2.07)      | Boomshaman 380 + 1 e (1.78)         | Sugarplum 430 + 1 e (1.89)                | Shaman 450 + 1 e (1.16)       |
-|    5 | Knight 1050 + 2 o (1.20)             | Vampire 1200 + 1 e (1.63)         | Ogre 950 + 3 w (1.09)               | Gummy Bear 1100 + 1 e (1.28)              | Triceratops 1100 + 2 o (1.30) |
-|    6 | Dragonslayer 4000 + 3 o + 2 e (1.76) | Late King 3000 + 2 o + 3 e (1.38) | Orc Warboss 2500 + 5 w + 3 o (1.32) | Rock Candy Dragon 3600 + 1 o + 3 e (2.06) | T-Rex 3000 + 4 o + 2 e (1.20) |
+| Tier | Realm                                | Restless                          | Horde                               | Candy                                     | Deepforge                        | Lost World (reference)        |
+| ---: | ------------------------------------ | --------------------------------- | ----------------------------------- | ----------------------------------------- | -------------------------------- | ----------------------------- |
+|    1 | Squire 46 (0.71)                     | Skeleton 42 (0.68)                | Goblin 40 (0.69)                    | Gingerbread Man 40 (0.70)                 | Tinker 46 (0.70)                 | Caveman 50 (0.83)             |
+|    2 | Longbowman 115 (1.06)                | Ghoul 115 (1.07)                  | Bomb Chucker 110 (1.01)             | Peppermint Archer 120 (1.11)              | Rivet Gunner 120 (1.06)          | Spitter 110 (0.90)            |
+|    3 | Man-at-Arms 240 (1.14)               | Banshee 260 (1.30)                | Wolf Rider 190 (1.40)               | Taffy Wrangler 240 (1.29)                 | Gyrocopter 230 (1.39)            | Raptor 220 (1.27)             |
+|    4 | Friar 400 + 1 e (1.70)               | Gravecaller 500 + 1 e (2.07)      | Boomshaman 380 + 1 e (1.78)         | Sugarplum 430 + 1 e (1.89)                | Mortar 480 + 1 o (1.64)          | Shaman 450 + 1 e (1.16)       |
+|    5 | Knight 1050 + 2 o (1.20)             | Vampire 1200 + 1 e (1.63)         | Ogre 950 + 3 w (1.09)               | Gummy Bear 1100 + 1 e (1.28)              | Steam Tank 1150 + 2 o (1.30)     | Triceratops 1100 + 2 o (1.30) |
+|    6 | Dragonslayer 4000 + 3 o + 2 e (1.76) | Late King 3000 + 2 o + 3 e (1.38) | Orc Warboss 2500 + 5 w + 3 o (1.32) | Rock Candy Dragon 3600 + 1 o + 3 e (2.06) | Ironclad 4000 + 4 o + 2 e (1.71) | T-Rex 3000 + 4 o + 2 e (1.20) |
 
-| Per week, all six dwellings |  Realm | Restless |  Horde |  Candy | Lost World |
-| --------------------------- | -----: | -------: | -----: | -----: | ---------: |
-| Fight value                 |   8335 |     7700 |   7836 |   7505 |       8899 |
-| Gold                        | 11,059 |   10,625 |   9340 | 10,880 |     10,230 |
-| Gold-equivalent of the rest |   5350 |     5900 |   5900 |   5650 |       5600 |
-| Tier 6 chain, gold          | 18,000 |   18,000 | 16,000 | 17,750 |     18,000 |
+| Per week, all six dwellings |  Realm | Restless |  Horde |  Candy | Deepforge | Lost World |
+| --------------------------- | -----: | -------: | -----: | -----: | --------: | ---------: |
+| Fight value                 |   8335 |     7700 |   7836 |   7505 |      8381 |       8899 |
+| Gold                        | 11,059 |   10,625 |   9340 | 10,880 |    11,554 |     10,230 |
+| Gold-equivalent of the rest |   5350 |     5900 |   5900 |   5650 |      4200 |       5600 |
+| Tier 6 chain, gold          | 18,000 |   18,000 | 16,000 | 17,750 |    18,000 |     18,000 |
 
 - **The Candy Kingdom (bzc.111, playable since bzc.117)** is priced by hand
   to these scales ([FACTION_CANDY.md](FACTION_CANDY.md#4-roster)) and not
   yet through the balance runs; the Rock Candy Dragon (2.06 gold per FV)
   pays for Afters, a second attack each round that the FV formula does not
   count. Its balance bead (bzc.118) measures it first.
+- **The Deepforge (bzc.130, playable since bzc.135)** is priced by hand to
+  these scales ([FACTION_DWARVES.md](FACTION_DWARVES.md#4-roster)) and not
+  yet through the balance runs; the FV formula counts the Mortar and the
+  Ironclad as shooters but sees neither Steam, the shells' delay and
+  splash, Ram nor Turret. Its balance bead (bzc.136) measures Steam first.
 
 - **Prices tuned by the balance bead (bzc.24).** Simulated equal-cost
   battles ([BALANCE.md](BALANCE.md)) moved eight prices: Squire 55 to 45,
@@ -224,7 +232,8 @@ Fight value (FV) is GAME_DESIGN 8.2. Gold per FV is the gold price alone.
   the Restless's middle game).
 - Weekly gold differs by up to 18% (the Realm pays most, for the
   strongest late game) and total weekly cost in gold at marketplace buying
-  prices by up to 8% (16,409; 16,525; 15,240; the Candy Kingdom 16,530).
+  prices by up to 8% (16,409; 16,525; 15,240; the Candy Kingdom 16,530;
+  the Deepforge 15,754).
 - Weekly FV differs on purpose. The Restless get a third of each dead
   stack back inside the fight; the Horde's area Strikes and unretaliated
   Cannonballs are not in the formula; the Realm's edge (extra turns,

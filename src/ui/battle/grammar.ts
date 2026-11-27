@@ -10,6 +10,7 @@ import {
   act,
   aftersDue,
   conditionKind,
+  pendingShells,
   getStack,
   groundKind,
   hasAbility,
@@ -25,6 +26,7 @@ import type {
   BattleState,
   Condition,
   GroundFeature,
+  Hex,
   Intent,
   School,
   StackId,
@@ -126,6 +128,15 @@ export interface TimelineEntry {
    * the end of the round's turns, after its ordinary one.
    */
   readonly afters?: boolean;
+  /**
+   * A Mortar shell in the air (FACTION_DWARVES 5, Lob): where it lands, the
+   * round at whose start it does and the Mortars that lobbed it.
+   */
+  readonly shell?: {
+    readonly hex: Hex;
+    readonly round: number;
+    readonly stackId: StackId;
+  };
 }
 
 /**
@@ -167,7 +178,22 @@ export function timelineEntries(state: BattleState): TimelineEntry[] {
       });
     }
   }
+  const shells = new Map(pendingShells(state).map((p) => [p.id, p]));
   for (const e of state.scheduled) {
+    const shell = shells.get(e.id);
+    if (shell !== undefined) {
+      const by = state.stacks.find((x) => x.id === shell.stackId);
+      const who = by ? creatureName(by.creature, by.count) : "Mortars";
+      out.push({
+        kind: "event",
+        id: `e${e.id}`,
+        label: `${who}' shell`,
+        side: e.side,
+        note: e.source,
+        shell: { hex: shell.hex, round: shell.round, stackId: shell.stackId },
+      });
+      continue;
+    }
     out.push({
       kind: "event",
       id: `e${e.id}`,

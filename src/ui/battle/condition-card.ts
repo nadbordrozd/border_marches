@@ -5,26 +5,57 @@
  * boons), with the keyword boxes (bead bzc.46) of the conditions and the
  * terms their texts use beside it.
  */
-import { conditionKind } from "../../core/battle/index.ts";
+import {
+  conditionKind,
+  isAdjacent,
+  pendingShells,
+  sameHex,
+} from "../../core/battle/index.ts";
 import type {
   BattleStack,
   BattleState,
   GroundFeature,
+  Hex,
 } from "../../core/battle/index.ts";
+import { MARKER_ICONS } from "../../assets/icons.ts";
+import { assetUrl } from "../../assets/manifest.ts";
 import { badgeOrder, pipOf } from "../../render/battle/grammar-view.ts";
 import { el } from "../dom.ts";
 import { iconElement } from "../icons.ts";
 import { highlightKeywords, keywordColumn } from "../keywords.ts";
 import { conditionParts, groundTooltip } from "./grammar.ts";
+import { creatureName } from "./preview.ts";
 
 /** Keyword boxes beside the card at most (the field stays visible). */
 export const CONDITION_CARD_BOXES = 3;
+
+/**
+ * The shells in the air that will hit `hex` (FACTION_DWARVES 5, Lob): one
+ * line each, for the target hex or a hex of its splash.
+ */
+export function shellLines(state: BattleState, hex: Hex): string[] {
+  const out: string[] = [];
+  for (const p of pendingShells(state)) {
+    const by = state.stacks.find((x) => x.id === p.stackId);
+    const who = by ? `the ${creatureName(by.creature, by.count)}'` : "a";
+    if (sameHex(p.hex, hex))
+      out.push(
+        `Shell: ${who} shell lands here at the start of round ${p.round}, a shot on whatever stands here, friend or foe.`,
+      );
+    else if (isAdjacent(p.hex, hex))
+      out.push(
+        `Splash: ${who} shell lands next door at the start of round ${p.round}; half a shot on whatever stands here.`,
+      );
+  }
+  return out;
+}
 
 /** The conditions of `stack` (and the ground under it) as a hover card. */
 export function conditionCard(
   state: BattleState,
   stack: BattleStack | null,
   ground: GroundFeature | null,
+  hex: Hex | null = null,
 ): HTMLElement | null {
   const rows: HTMLElement[] = [];
   if (stack) {
@@ -67,6 +98,20 @@ export function conditionCard(
         el("div.bm-cond-text", groundTooltip(ground)),
       ),
     );
+  for (const line of hex === null ? [] : shellLines(state, hex)) {
+    const img = el("img");
+    img.src = assetUrl(MARKER_ICONS.shell[16], import.meta.env.BASE_URL);
+    img.alt = "";
+    img.width = 16;
+    img.height = 16;
+    rows.push(
+      el(
+        "div.bm-cond-row.bm-cond-shell",
+        el("span.gm-icon", img),
+        el("div.bm-cond-text", line),
+      ),
+    );
+  }
   if (rows.length === 0) return null;
   const card = el("div.bm-cond-card", ...rows);
   // The names are the conditions' own keywords; the meta line is skipped so

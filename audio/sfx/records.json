@@ -1454,5 +1454,53 @@
     "file": "recruit.candy-2.mp3",
     "sha256": "76e168d05b442cd8b03b99ea42e98ace93c0d61b1f5f1bb3f36c205dbb0aa801",
     "bytes": 13835
+  },
+  "recruit.dwarves#0": {
+    "id": "recruit.dwarves",
+    "n": 0,
+    "at": "2026-11-27T10:44:40.725Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "dwarf engineers enlisting, one cheerful bright brass steam whistle toot with a short puff of steam hiss, full and steady, short, cartoon steampunk fantasy, no voice, no reverb",
+      "duration_seconds": 0.8,
+      "prompt_influence": 0.7,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "recruit.dwarves-0.mp3",
+    "sha256": "517f5a1aae5062bf5a477172bf42474fdfbb570953f47e7d5ef5aff9ce7cbafb",
+    "bytes": 13835
+  },
+  "victory.dwarves#0": {
+    "id": "victory.dwarves",
+    "n": 0,
+    "at": "2026-11-27T10:44:43.476Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a short proud cheerful victory sting, a small brass band oompah with tuba and trumpets and a steam whistle toot at the end, ends on a bright major chord, steampunk dwarf fantasy game",
+      "duration_seconds": 2.5,
+      "prompt_influence": 0.6,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "victory.dwarves-0.mp3",
+    "sha256": "37a4de8fb7ae763fcb006d84bf17b39695357b4a1b2bac2b215f4d443e1c4ec9",
+    "bytes": 40585
+  },
+  "town.dwarves#0": {
+    "id": "town.dwarves",
+    "n": 0,
+    "at": "2026-11-27T10:44:45.267Z",
+    "format": "mp3_44100_128",
+    "request": {
+      "text": "a steampunk dwarf foundry town, clanking gears and a rhythmic piston, a hiss of steam and a small bright bell ding, short ambience",
+      "duration_seconds": 2.5,
+      "prompt_influence": 0.5,
+      "loop": false,
+      "model_id": "eleven_text_to_sound_v2"
+    },
+    "file": "town.dwarves-0.mp3",
+    "sha256": "58eb7bb65e6029c7f7f3af19eec5f373c74a5510280375f7a3c4db53bed7782f",
+    "bytes": 40585
   }
 }

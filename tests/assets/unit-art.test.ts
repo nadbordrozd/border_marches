@@ -28,13 +28,6 @@ import { CHIEFTAIN_ROSTER } from "../../src/data/players";
 
 const PUBLIC = join(import.meta.dirname, "..", "..", "public");
 
-/**
- * The Deepforge's creatures and heroes draw the placeholders until its art
- * beads (bzc.131 creatures, bzc.132 heroes) register their sprites; those
- * beads drop this skip.
- */
-const ART_PENDING = "dwarves";
-
 /** The v0.2 rosters as the design docs name them (kebab-case ids). */
 const FACTION_CREATURES = [
   // docs/design/FACTION_HUMANS.md section 4
@@ -156,7 +149,6 @@ describe("unit art lookups", () => {
     // bead border_marches-9is: Orc Brute and Troll drew the placeholder on
     // screens that used unitArt alone.
     for (const def of Object.values(CREATURES)) {
-      if (def.faction === ART_PENDING) continue;
       expect({ id: def.id, own: hasUnitArt(def.id) }).toEqual({
         id: def.id,
         own: true,
@@ -188,11 +180,10 @@ describe("unit art lookups", () => {
     expect(heroArt("chieftain").key).toBe("dinosaur-chieftain");
   });
 
-  it("gives each of the 32 named heroes a portrait of their own", () => {
-    const drawn = NAMED_HEROES.filter((h) => h.faction !== ART_PENDING);
-    expect(drawn).toHaveLength(32);
+  it("gives each of the 40 named heroes a portrait of their own", () => {
+    expect(NAMED_HEROES).toHaveLength(40);
     const keys = new Set<string>();
-    for (const def of drawn) {
+    for (const def of NAMED_HEROES) {
       expect({ id: def.id, own: hasNamedHeroPortrait(def.id) }).toEqual({
         id: def.id,
         own: true,
@@ -208,7 +199,7 @@ describe("unit art lookups", () => {
       expect(existsSync(join(PUBLIC, portrait.path)), portrait.path).toBe(true);
       keys.add(portrait.key);
     }
-    expect(keys.size).toBe(32);
+    expect(keys.size).toBe(40);
   });
 
   it.each([

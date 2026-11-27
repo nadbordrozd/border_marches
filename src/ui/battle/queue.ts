@@ -14,6 +14,7 @@ import {
 import type {
   BattleSide,
   BattleState,
+  Hex,
   StackId,
 } from "../../core/battle/index.ts";
 import { timelineEntries } from "./grammar.ts";
@@ -48,6 +49,15 @@ export type QueueEntry =
       readonly side: BattleSide;
       readonly label: string;
       readonly note: string;
+      /**
+       * A Mortar shell (FACTION_DWARVES 5, Lob): it sits on the round
+       * boundary, after the divider, as it lands before any stack acts.
+       */
+      readonly shell?: {
+        readonly hex: Hex;
+        readonly round: number;
+        readonly stackId: StackId;
+      };
     }
   | { readonly kind: "divider"; readonly key: string; readonly round: number };
 
@@ -92,8 +102,30 @@ export function turnQueue(
   let tiles = 0;
   const over = state.winner !== null;
   const round = state.round;
-  timelineEntries(state).forEach((t, i) => {
-    if (tiles >= slots) return;
+  const timeline = timelineEntries(state);
+  // Shells land at the start of the next round: they wait for the divider,
+  // and keep their tiles however long this round is (one slot stays for
+  // the active stack).
+  const landing: QueueEntry[] = over
+    ? []
+    : timeline.flatMap((t) =>
+        t.kind === "event" && t.shell !== undefined
+          ? [
+              {
+                kind: "event" as const,
+                key: t.id,
+                side: t.side,
+                label: t.label,
+                note: t.note,
+                shell: t.shell,
+              },
+            ]
+          : [],
+      );
+  const room = slots - Math.min(landing.length, Math.max(0, slots - 1));
+  timeline.forEach((t, i) => {
+    if (t.kind === "event" && t.shell !== undefined) return;
+    if (tiles >= room) return;
     if (t.kind === "event") {
       out.push({
         kind: "event",
@@ -125,12 +157,15 @@ export function turnQueue(
     tiles++;
   });
   if (over || tiles >= slots) return out;
+  const shells = landing.slice(0, Math.max(0, slots - tiles));
+  tiles += shells.length;
   const next = state.stacks
     .filter(isAlive)
     .sort(compareTurnOrder)
-    .slice(0, slots - tiles);
-  if (next.length === 0) return out;
+    .slice(0, Math.max(0, slots - tiles));
+  if (next.length === 0 && shells.length === 0) return out;
   out.push({ kind: "divider", key: "divider", round: round + 1 });
+  out.push(...shells);
   for (const s of next) {
     out.push({
       kind: "stack",

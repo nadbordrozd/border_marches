@@ -80,6 +80,8 @@ const NAMED_CONFIG: {
     | "volcanicSites"
     | "candySites"
     | "swampSites"
+    | "outpostsWithout"
+    | "lootWithout"
   >;
   clusters: Partial<GenConfig["clusters"]>;
   hoards: Pick<GenConfig["hoards"], "rate">;
@@ -106,6 +108,19 @@ const NAMED_CONFIG: {
     candySites: false,
     // Nor the swamp sites of bead bzc.126.
     swampSites: false,
+    // Nor Deepforge creatures in their generated outposts (bead bzc.135):
+    // a new creature in the outpost pool re-rolls the outposts' tiers and
+    // values, and the guards and fill placed after them, so the Ninefold
+    // Landfall would move 530 objects its edits name by place. The maps
+    // were authored on the four factions' outposts; the Deepforge comes to
+    // them as neutral towns, heroes and the Pocket Boiler in the loot, and
+    // an edit may add a Deepforge outpost by hand. (Nor, so, do Deepforge
+    // outposts seek the Ninefold Landfall's lava, gen/native-ground.ts.)
+    outpostsWithout: ["dwarves"],
+    // Nor the Pocket Boiler in their generated loot (bead bzc.135): on the
+    // Cartographer's Folly, authored on today's generator, the new Wonder
+    // re-rolled the loot and moved 64 objects (guards and fill after it).
+    lootWithout: ["pocket-boiler"],
   },
   // Bead bzc.96 (map composition): the named maps keep the obstacle
   // clusters, fill and pockets they were authored on, with no treasure
@@ -204,9 +219,15 @@ export function namedConfig(def: NamedMapDef): ConfigOverrides {
           ? { secondaryShare: gen.secondaryShare }
           : {}),
       },
-      ...(gen.density !== undefined
-        ? { objects: { density: { ...base.density, ...gen.density } } }
-        : {}),
+      objects: {
+        ...(gen.density !== undefined
+          ? { density: { ...base.density, ...gen.density } }
+          : {}),
+        // Authored on the four factions' outposts too (bead bzc.135): see
+        // NAMED_CONFIG's `outpostsWithout`.
+        outpostsWithout: NAMED_CONFIG.objects.outpostsWithout,
+        lootWithout: NAMED_CONFIG.objects.lootWithout,
+      },
     };
   }
   return {

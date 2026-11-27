@@ -78,6 +78,22 @@ function apartPoint(i: number): { x: number; y: number } {
 /** Faction names longer than this wrap onto two lines in their card. */
 const FNAME_ONE_LINE = 16;
 
+/** A faction card's width and its gap from the portrait (magic-wheel.css). */
+const FCARD_W = 124;
+const FCARD_GAP = 8;
+const PORTRAIT_R = 32;
+
+/**
+ * Where a magical faction's card sits beside its portrait at `x`: right of
+ * it on the right half, left of it on the left half, and below it when the
+ * stage's left edge leaves no room (the Deepforge at 247.6 degrees, bead
+ * bzc.135; the stage clips what overflows).
+ */
+export function fcardSide(x: number): "right" | "left" | "below" {
+  if (x >= CX) return "right";
+  return x - PORTRAIT_R - FCARD_GAP - FCARD_W >= 0 ? "left" : "below";
+}
+
 // ------------------------------------------------------------ svg
 
 const NS = "http://www.w3.org/2000/svg";
@@ -687,8 +703,10 @@ export function magicWheelView(
     b.style.setProperty("--mw-faction", f.colour);
     if (!f.magical) b.classList.add("mw-nomagic");
     if (ctx.faction === f.id) b.classList.add("mw-chosen");
-    const left = x < CX && f.magical;
-    const card = el(`span.mw-fcard${left ? ".mw-fcard-left" : ""}`);
+    const side = f.magical ? fcardSide(x) : "right";
+    const card = el(
+      `span.mw-fcard${side === "left" ? ".mw-fcard-left" : side === "below" ? ".mw-fcard-below" : ""}`,
+    );
     card.append(
       el(
         `span.mw-fname${f.name.length > FNAME_ONE_LINE ? ".mw-fname-wrap" : ""}`,

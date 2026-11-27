@@ -8,8 +8,15 @@
  * The rules of the controls live in the battle's Keys help, not here.
  */
 
-import { activeStack, cannotWalk, getStack } from "../../core/battle/index.ts";
-import type { BattleState } from "../../core/battle/index.ts";
+import {
+  STEAM_MAX,
+  activeStack,
+  cannotWalk,
+  getStack,
+  steamOf,
+  stokesOnDefend,
+} from "../../core/battle/index.ts";
+import type { BattleStack, BattleState } from "../../core/battle/index.ts";
 import type { HoverIntent } from "./intent.ts";
 import type { CastPreview } from "./magic.ts";
 import {
@@ -36,7 +43,10 @@ export const BATTLE_KEYS: ReadonlyArray<readonly [string, string]> = [
   ],
   ["B", "Spellbook"],
   ["W", "Wait: act again later this round"],
-  ["D", "Defend: +30% Defense until the stack's next turn"],
+  [
+    "D",
+    "Defend: +30% Defense until the stack's next turn; a Deepforge native (or a stack with the Pocket Boiler) also Stokes: Steam +1, at most 3",
+  ],
   ["U", "Take back the last action this round"],
   ["Enter", "Use or cast what is chosen"],
   ["Backspace", "Back one target"],
@@ -146,6 +156,17 @@ function stackLabel(state: BattleState, id: string): string {
   return `${creatureName(s.creature, s.count)} ×${s.count}`;
 }
 
+/**
+ * What D does besides Defend for a stack that Stokes (FACTION_DWARVES 3):
+ * "; D stokes: Steam 1 to 2", or that its Steam is full; "" for others.
+ */
+function stokeHint(state: BattleState, a: BattleStack): string {
+  if (!stokesOnDefend(state, a)) return "";
+  const n = steamOf(a);
+  if (n >= STEAM_MAX) return `; Steam ${n} is full, D only Defends`;
+  return n === 0 ? "; D stokes: Steam 1" : `; D stokes: Steam ${n} to ${n + 1}`;
+}
+
 /** The sentence for the player's turn with nothing chosen. */
 function turnLine(
   state: BattleState,
@@ -204,11 +225,11 @@ function turnLine(
       // A Stuck stack, or the Dragons' Afters turn, cannot walk.
       if (a !== null && cannotWalk(state, a))
         return {
-          text: `${who}: ${a.aftersRound === state.round ? "Afters, no walking" : "cannot walk this turn"}; click an enemy to attack`,
+          text: `${who}: ${a.aftersRound === state.round ? "Afters, no walking" : "cannot walk this turn"}; click an enemy to attack${stokeHint(state, a)}`,
           tone: "idle",
         };
       return {
-        text: `${who}: click a shaded hex to move or an enemy to attack${mode.swaps ? ", or a ⇄ partner to swap" : ""}`,
+        text: `${who}: click a shaded hex to move or an enemy to attack${mode.swaps ? ", or a ⇄ partner to swap" : ""}${a !== null ? stokeHint(state, a) : ""}`,
         tone: "idle",
       };
   }
