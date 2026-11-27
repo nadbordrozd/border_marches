@@ -125,6 +125,12 @@ Fort levels do not change creature growth
 ([CONTENT_TAXONOMY.md](CONTENT_TAXONOMY.md) section 7.4). The MVP's
 Stockade is a Lost World building only.
 
+On a naval map every tree also has the harbour: the Shipyard, Lighthouse
+and Admiralty of [NAVAL.md section 5.7](NAVAL.md#57-harbour-buildings-in-towns),
+named per faction, buildable only in a town with a dock. Other maps never
+show them, and the faction documents' building counts and totals leave
+them out.
+
 ### 6.2 The Keystone Hall
 
 Built with the map's buried Keystone, which a hero must carry into the

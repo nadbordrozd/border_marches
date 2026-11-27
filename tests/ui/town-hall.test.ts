@@ -103,6 +103,8 @@ describe("tileStateOf", () => {
     ["start-only", "requirements"],
     ["not-owner", "requirements"],
     ["wrong-faction", "requirements"],
+    ["not-naval", "requirements"],
+    ["landlocked", "landlocked"],
   ];
   type TileExpect = ReturnType<typeof tileStateOf>;
   it.each(cases)("maps %s to %s", (status, want) => {

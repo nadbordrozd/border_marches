@@ -3228,6 +3228,21 @@
   filter: grayscale(1) brightness(0.7);
 }
 
+/* The moored boat on "Buy a ship" (NAVAL 2.2): drawn whole, not squashed. */
+.gm-buy-ship-art {
+  object-fit: contain;
+}
+
+.gm-hall-actions .gm-buy-ship {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gm-hall-actions .gm-buy-ship:disabled .gm-buy-ship-art {
+  filter: grayscale(1) brightness(0.7);
+}
+
 /* The four tile states: one colour each, shared by tile bars and badges. */
 .gm-town {
   --gm-hall-green: #3d8f27;
@@ -3348,6 +3363,19 @@
   filter: saturate(0.5) brightness(0.75);
 }
 
+/*
+ * A harbour building's stand-in picture (map sea art until its own sprite,
+ * NAVAL 10.2): drawn whole inside the square, never stretched.
+ */
+.gm-hall-stand-in {
+  object-fit: contain;
+}
+
+/* A harbour building of a town with no dock (NAVAL 5.7): greyed. */
+.gm-hall-landlocked .gm-hall-art-img {
+  filter: grayscale(1) brightness(0.6);
+}
+
 .gm-hall-portrait {
   position: absolute;
   right: 3px;
@@ -3388,6 +3416,12 @@
   background: var(--gm-hall-red);
 }
 
+.gm-hall-landlocked .gm-hall-name,
+.gm-hall-badge-landlocked {
+  background: #5d5a55;
+  color: #d8d4cc;
+}
+
 .gm-hall-built .gm-hall-name,
 .gm-hall-badge-built {
   background: var(--gm-hall-gold);
@@ -3414,6 +3448,10 @@
 
 .gm-hall-tip-built {
   color: var(--gm-gold);
+}
+
+.gm-hall-tip-landlocked {
+  color: #b8b3aa;
 }
 
 .gm-hall-none {

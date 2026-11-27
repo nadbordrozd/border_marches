@@ -159,6 +159,8 @@ export function buildQueue(
       (d) =>
         !d.startBuilt &&
         d.needsKeystone !== true &&
+        // The harbour (NAVAL 5.7) waits for the naval AI (bead 8).
+        d.harbour === undefined &&
         !town.buildings.includes(d.id),
     )
     .sort(

@@ -413,6 +413,15 @@ export type GameEvent =
     }
   /** A hero stepped ashore from its ship; `endsDay` without Seafaring. */
   | { type: "ship-landed"; heroId: string; shipId: string; endsDay: boolean }
+  /** A ship bought at a town's Shipyard, moored on its dock (NAVAL 2.2). */
+  | {
+      type: "ship-bought";
+      townId: string;
+      shipId: string;
+      player: number;
+      x: number;
+      y: number;
+    }
   /** A ship changed hands outside boarding (a won battle, NAVAL 2.5). */
   | { type: "ship-captured"; shipId: string; owner: Owner; from: Owner }
   /** A ship left the map: sunk with a beaten hero, or scuttled. */
@@ -539,7 +548,8 @@ export type CommandError =
   | "no-assembly"
   | "site-used"
   | "locked"
-  | "no-dig";
+  | "no-dig"
+  | "landlocked";
 
 /** A choice a site offers (useSite). */
 export interface SiteOption {

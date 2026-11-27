@@ -5,12 +5,23 @@
  * (FACTION_CANDY.md 9) and the Deepforge's Steamworks (FACTION_DWARVES.md
  * 9), with the buildings every town shares
  * (ECONOMY.md 6: halls, forts, Marketplace, Resource Silo, Magic Guild,
- * Tavern, the Keystone Hall).
+ * Tavern, the Keystone Hall) and the harbour (NAVAL.md 5.7: Shipyard,
+ * Lighthouse, Admiralty, for naval maps only).
  *
  * Shared buildings use the same ids in every tree ("fort-1",
- * "magic-guild-2", ...) with the faction's names; dwellings, Drills and
- * specials have their own ids.
+ * "magic-guild-2", "shipyard", ...) with the faction's names; dwellings,
+ * Drills and specials have their own ids.
  */
+import {
+  ADMIRALTY_DECK_GUN_HARM,
+  ADMIRALTY_SHIP_PRICE,
+  ADMIRALTY_SPECIAL,
+  HARBOUR_ADMIRALTY,
+  HARBOUR_LIGHTHOUSE,
+  HARBOUR_SHIPYARD,
+  SHIP_PRICE,
+  TOWN_LIGHTHOUSE_SEA_MP,
+} from "./naval.ts";
 import type { BuildingDef, CreatureId, ResourceAmounts } from "./types.ts";
 
 /** Flags of the town specials and Keystone powers (BuildingDef.special). */
@@ -30,6 +41,8 @@ export const SPECIALS = {
   deepShaft: "deep-shaft",
   repairYard: "repair-yard",
   greatBoiler: "the-great-boiler",
+  /** The harbour's Admiralty (NAVAL 5.7): +20 deck gun Harm. */
+  admiralty: ADMIRALTY_SPECIAL,
 } as const;
 
 /**
@@ -51,6 +64,8 @@ export const KEYSTONE_ITEM = "keystone";
 
 interface FactionNames {
   fort: readonly [string, string, string];
+  /** Shipyard, Lighthouse and Admiralty (NAVAL 5.7). */
+  harbour: readonly [string, string, string];
   guildCap: 3 | 4 | 5;
   keystone: { id: string; name: string; special: string; effect: string };
 }
@@ -182,6 +197,41 @@ function commonBuildings(names: FactionNames): BuildingDef[] {
   return out;
 }
 
+/**
+ * The three harbour buildings every town shares, named per faction
+ * (NAVAL 5.7, bead bzc.150). Only a naval map's towns with a dock build
+ * them (src/core/game/town.ts buildStatus); other maps never show them.
+ */
+function harbourBuildings(names: FactionNames): BuildingDef[] {
+  const [shipyard, lighthouse, admiralty] = names.harbour;
+  return [
+    b({
+      id: HARBOUR_SHIPYARD,
+      name: shipyard,
+      cost: { gold: 2000, wood: 10 },
+      harbour: "shipyard",
+      effect: `Buy ships for ${SHIP_PRICE.gold} gold and ${SHIP_PRICE.wood} wood each; a new ship waits at the town's dock. Coastal towns only`,
+    }),
+    b({
+      id: HARBOUR_LIGHTHOUSE,
+      name: lighthouse,
+      cost: { gold: 1500, ore: 5 },
+      requires: [HARBOUR_SHIPYARD],
+      harbour: "lighthouse",
+      effect: `+${TOWN_LIGHTHOUSE_SEA_MP} sea movement a day for every hero of yours afloat (one Lighthouse counts, however many you own)`,
+    }),
+    b({
+      id: HARBOUR_ADMIRALTY,
+      name: admiralty,
+      cost: { gold: 3000, wood: 5, ore: 5, essence: 2 },
+      requires: [HARBOUR_LIGHTHOUSE, "town-hall"],
+      harbour: "admiralty",
+      special: ADMIRALTY_SPECIAL,
+      effect: `Ships bought here cost ${ADMIRALTY_SHIP_PRICE.gold} gold and ${ADMIRALTY_SHIP_PRICE.wood} wood; your heroes' deck guns deal +${ADMIRALTY_DECK_GUN_HARM} Harm (one Admiralty counts)`,
+    }),
+  ];
+}
+
 function dwelling(
   id: string,
   name: string,
@@ -235,16 +285,20 @@ function tree(defs: readonly BuildingDef[]): TreeData {
   return { buildings, order: defs.map((d) => d.id) };
 }
 
-/** Puts the shared buildings first, then the faction's own. */
+/**
+ * Puts the shared buildings first, then the faction's own, then the
+ * harbour (NAVAL 5.7), with the Keystone building last.
+ */
 function assemble(names: FactionNames, own: readonly BuildingDef[]): TreeData {
   const common = commonBuildings(names);
   const keystone = common.pop() as BuildingDef;
-  return tree([...common, ...own, keystone]);
+  return tree([...common, ...own, ...harbourBuildings(names), keystone]);
 }
 
 export const REALM_TREE: TreeData = assemble(
   {
     fort: ["Palisade", "Keep", "Royal Castle"],
+    harbour: ["Royal Docks", "Harbour Light", "Admiralty"],
     guildCap: 4,
     keystone: {
       id: "round-table",
@@ -354,6 +408,7 @@ export const REALM_TREE: TreeData = assemble(
 export const CHURCHYARD_TREE: TreeData = assemble(
   {
     fort: ["Iron Railings", "Lych Wall", "Black Gate"],
+    harbour: ["Bone Wharf", "Corpse-Candle Tower", "Ghost Fleet Office"],
     guildCap: 5,
     keystone: {
       id: "hall-of-ancestors",
@@ -464,6 +519,7 @@ export const CHURCHYARD_TREE: TreeData = assemble(
 export const WARCAMP_TREE: TreeData = assemble(
   {
     fort: ["Stakes", "Scrap Wall", "Skull Tower"],
+    harbour: ["Raft Yard", "Bonfire Beacon", "Pirate King's Tent"],
     guildCap: 3,
     keystone: {
       id: "great-flinger",
@@ -564,6 +620,7 @@ export const WARCAMP_TREE: TreeData = assemble(
 export const CONFECTIONERY_TREE: TreeData = assemble(
   {
     fort: ["Candy-Cane Fence", "Gingerbread Wall", "Sugar-Glass Keep"],
+    harbour: ["Gumdrop Marina", "Peppermint Light", "Licorice Admiralty"],
     guildCap: 4,
     keystone: {
       id: "the-four-oclock",
@@ -674,6 +731,7 @@ export const CONFECTIONERY_TREE: TreeData = assemble(
 export const STEAMWORKS_TREE: TreeData = assemble(
   {
     fort: ["Riveted Palisade", "Ironbound Wall", "Gun Keep"],
+    harbour: ["Dry Dock", "Lamp Engine", "Ironclad Board"],
     guildCap: 4,
     keystone: {
       id: "the-great-boiler",

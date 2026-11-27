@@ -12,14 +12,15 @@
  *   the four tile colours: green "can build today", amber "missing
  *   resources", red "missing requirements", gold "built".
  */
-import { buildStatus, canAfford } from "../core/game/index.ts";
+import { buildStatus, buildingShown, canAfford } from "../core/game/index.ts";
 import type { BuildStatus, GameState } from "../core/game/index.ts";
 import { getCreature } from "../data/creatures.ts";
 import { buildingDef } from "../data/factions.ts";
 import type { TownTreeDef } from "../data/factions.ts";
 import type { BuildingDef, BuildingId, CreatureId } from "../data/types.ts";
 
-export type HallGroupId = "hall" | "fort" | "economy" | "magic" | "specials";
+export type HallGroupId =
+  "hall" | "fort" | "economy" | "magic" | "specials" | "harbour";
 
 export const HALL_GROUP_LABEL: Readonly<Record<HallGroupId, string>> = {
   hall: "Hall",
@@ -27,6 +28,7 @@ export const HALL_GROUP_LABEL: Readonly<Record<HallGroupId, string>> = {
   economy: "Economy",
   magic: "Magic",
   specials: "Specials",
+  harbour: "Harbour",
 };
 
 export const HALL_GROUP_ORDER: readonly HallGroupId[] = [
@@ -35,6 +37,7 @@ export const HALL_GROUP_ORDER: readonly HallGroupId[] = [
   "economy",
   "magic",
   "specials",
+  "harbour",
 ];
 
 export interface HallGroup {
@@ -64,6 +67,7 @@ export interface HallLayout {
  * Special too. Anything unrecognised falls into Specials.
  */
 export function hallGroupOf(def: BuildingDef): HallGroupId {
+  if (def.harbour !== undefined) return "harbour";
   if (def.needsKeystone === true || def.special !== undefined)
     return "specials";
   if (def.hallIncome !== undefined) return "hall";
@@ -78,6 +82,24 @@ export function hallGroupOf(def: BuildingDef): HallGroupId {
   )
     return "economy";
   return "specials";
+}
+
+/**
+ * The town tree as this game's town screen shows it: the harbour
+ * buildings (NAVAL 5.7) only on a naval map, so a dry map's hall looks
+ * exactly as it always did.
+ */
+export function shownTree(
+  state: GameState,
+  faction: string,
+  tree: Pick<TownTreeDef, "buildings" | "order">,
+): Pick<TownTreeDef, "buildings" | "order"> {
+  const order = tree.order.filter((id) =>
+    buildingShown(state.map, faction, id),
+  );
+  return order.length === tree.order.length
+    ? tree
+    : { buildings: tree.buildings, order };
 }
 
 /** Sorts a town tree into the hall's rows and tier columns. */
@@ -133,14 +155,19 @@ export function hallBuildings(layout: HallLayout): BuildingId[] {
   ];
 }
 
-/** The four tile colours. */
-export type TileState = "can" | "resources" | "requirements" | "built";
+/**
+ * The four tile colours, and grey for a harbour building of a town with
+ * no dock (NAVAL 5.7: "landlocked").
+ */
+export type TileState =
+  "can" | "resources" | "requirements" | "built" | "landlocked";
 
 export const TILE_STATE_LABEL: Readonly<Record<TileState, string>> = {
   can: "Can build",
   resources: "Missing resources",
   requirements: "Missing requirements",
   built: "Built",
+  landlocked: "Landlocked",
 };
 
 /**
@@ -163,6 +190,8 @@ export function tileStateOf(
       return "can";
     case "resources":
       return "resources";
+    case "landlocked":
+      return "landlocked";
     case "built-today":
       if (!lasting.requirementsMet) return "requirements";
       if (!lasting.affordable) return "resources";
@@ -172,6 +201,7 @@ export function tileStateOf(
     case "start-only":
     case "not-owner":
     case "wrong-faction":
+    case "not-naval":
       return "requirements";
   }
 }
@@ -219,5 +249,9 @@ export function blockedReason(status: BuildStatus): string | null {
       return "A hero must carry the Keystone into the town";
     case "resources":
       return "Missing resources";
+    case "not-naval":
+      return "There is no sea on this map";
+    case "landlocked":
+      return "Landlocked: no sea within reach of the town for a dock";
   }
 }

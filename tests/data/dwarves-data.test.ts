@@ -265,9 +265,11 @@ describe("The Steamworks (section 9)", () => {
         "great-foundry",
       ]),
     ).toEqual([18000, 45, 41, 5]);
-    // 25 buildings with the three the town starts with and the Keystone.
-    expect(TREE.order).toHaveLength(25);
-    expect(sum(TREE.order)).toEqual([50800, 125, 128, 19]);
+    // 25 buildings with the three the town starts with and the Keystone,
+    // besides the shared harbour of naval maps (NAVAL 5.7).
+    const own = TREE.order.filter((id) => b(id).harbour === undefined);
+    expect(own).toHaveLength(25);
+    expect(sum(own)).toEqual([50800, 125, 128, 19]);
   });
 
   it("the neutral garrison and town names", () => {

@@ -311,6 +311,12 @@ export interface BuildingDef<Id extends BuildingId = BuildingId> {
   evenDayIncome?: ResourceAmounts;
   /** Built with the map's Keystone, carried into the town by a hero. */
   needsKeystone?: boolean;
+  /**
+   * A shared harbour building (NAVAL 5.7): the Shipyard, Lighthouse or
+   * Admiralty. Buildable only on a naval map in a town with a dock
+   * (src/core/game/naval.ts townDock); hidden on every other map.
+   */
+  harbour?: "shipyard" | "lighthouse" | "admiralty";
   /** Short effect text for the town screen. */
   effect: string;
 }

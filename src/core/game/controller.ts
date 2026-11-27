@@ -38,6 +38,7 @@ import {
 } from "./battle.ts";
 import { chooseLevelUp, levelUpOffer, type LevelUpOffer } from "./hero.ts";
 import { findPath, reachableCells } from "./pathfinding.ts";
+import { buyShip } from "./harbour.ts";
 import { dismissHero, hireHero } from "./players.ts";
 import { maxAffordable } from "./resources.ts";
 import { digHere, useSite } from "./sites.ts";
@@ -57,6 +58,8 @@ import type { CommandResult, GameEvent, GameState } from "./types.ts";
 export type GameAction =
   | { type: "move"; heroId: string; path: Array<{ x: number; y: number }> }
   | { type: "build"; townId: string; building: BuildingId }
+  /** Buy a ship at a town's Shipyard onto its dock (NAVAL 2.2). */
+  | { type: "buy-ship"; townId: string }
   | {
       type: "recruit";
       townId: string;
@@ -100,6 +103,8 @@ export function applyAction(
       return moveHeroAlong(state, action.heroId, action.path);
     case "build":
       return build(state, action.townId, action.building);
+    case "buy-ship":
+      return buyShip(state, action.townId);
     case "recruit":
       return recruit(
         state,

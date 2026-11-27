@@ -44,3 +44,24 @@ export const MAP_LIGHTHOUSE_MAX = 3;
 
 /** Map object kind of a moored boat placed on the map (NAVAL 5.6). */
 export const BOAT_KIND = "boat";
+
+/**
+ * The three harbour buildings every town tree shares (NAVAL 5.7, bead
+ * bzc.150), by building id: buildable only on a naval map in a town with a
+ * dock, and hidden from the town screen on every other map.
+ */
+export const HARBOUR_SHIPYARD = "shipyard";
+export const HARBOUR_ADMIRALTY = "admiralty";
+
+/** A ship bought at a town's Shipyard (NAVAL 2.2). */
+export const SHIP_PRICE = { gold: 1000, wood: 10 } as const;
+/** A ship bought at a town that also has its Admiralty (NAVAL 5.7). */
+export const ADMIRALTY_SHIP_PRICE = { gold: 500, wood: 5 } as const;
+
+/**
+ * The Admiralty's town special flag (BuildingDef.special): every hero of
+ * its owner fires deck guns with this much more Harm (NAVAL 3.3, 5.7; one
+ * Admiralty counts). Battle side specials carry it to the deck gun.
+ */
+export const ADMIRALTY_SPECIAL = "admiralty";
+export const ADMIRALTY_DECK_GUN_HARM = 20;

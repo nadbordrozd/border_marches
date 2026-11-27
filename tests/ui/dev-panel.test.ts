@@ -132,8 +132,10 @@ describe("the Dev panel", () => {
     expect(state().players[0]!.explored.every((e) => e)).toBe(true);
     (box.one("gm-dev-town") as FakeElement & { value: string }).value = "t0";
     click("gm-dev-build");
+    const tree = townTree("humans")!;
+    // A dry map: every building but the harbour (NAVAL 5.7).
     expect(state().towns["t0"]!.buildings).toHaveLength(
-      townTree("humans")!.order.length,
+      tree.order.filter((b) => !tree.buildings[b]!.harbour).length,
     );
     const id = state().heroes.find((h) => h.owner === 0)!.id;
     // Spend the hero's movement (the host's state is this test's own).

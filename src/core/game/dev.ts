@@ -11,7 +11,7 @@ import { townTree } from "../../data/factions.ts";
 import type { BuildingDef, Resources } from "../../data/types.ts";
 import { learnInTown } from "../magic/adventure.ts";
 import { maxMana } from "./effects.ts";
-import { dailyMaxOf } from "./naval.ts";
+import { dailyMaxOf, townDock } from "./naval.ts";
 import { weeklyGrowth } from "./progression.ts";
 import { addResources } from "./resources.ts";
 import { heroInTownOf } from "./town.ts";
@@ -97,6 +97,9 @@ function buildAllInPlace(
   for (const id of tree.order) {
     const def = tree.buildings[id];
     if (def === undefined || town.buildings.includes(id)) continue;
+    // A harbour (NAVAL 5.7) only where the town has a dock on a naval map.
+    if (def.harbour !== undefined && townDock(state.map, town.id) === null)
+      continue;
     added.push(def);
   }
   if (added.length === 0) return [];

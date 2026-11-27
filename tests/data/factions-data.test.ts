@@ -113,8 +113,13 @@ describe("v0.2 faction data", () => {
 
   it("every building of the five trees has town-screen art", () => {
     for (const faction of ["humans", "undead", "goblins", "candy", "dwarves"]) {
-      for (const id of townTree(faction)!.order)
+      const tree = townTree(faction)!;
+      for (const id of tree.order) {
+        // The harbour's sprites are art bead 9c (NAVAL 14); until then the
+        // town screen draws sea stand-ins (src/ui/town-harbour.ts).
+        if (tree.buildings[id]!.harbour !== undefined) continue;
         expect(buildingArt(faction, id), `${faction} ${id}`).not.toBeNull();
+      }
     }
   });
 

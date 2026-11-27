@@ -21,6 +21,7 @@ import type {
   Resources,
 } from "../../data/types.ts";
 import { learnInTown } from "../magic/adventure.ts";
+import { isNavalMap, townDock } from "./naval.ts";
 import { vowBarsCreature } from "./hero.ts";
 import { weeklyGrowth } from "./progression.ts";
 import {
@@ -64,7 +65,11 @@ export type BuildStatus =
   | "built-today"
   | "requirements"
   | "keystone"
-  | "resources";
+  | "resources"
+  /** A harbour building on a map that is not naval (NAVAL 5.7). */
+  | "not-naval"
+  /** A harbour building in a town without a dock (NAVAL 2.2). */
+  | "landlocked";
 
 /** The owner's hero in the town carrying the Keystone, if any. */
 function keystoneBearer(
@@ -88,6 +93,10 @@ export function buildStatus(
   const def = buildingDef(town.faction, building);
   if (def === undefined) return "wrong-faction";
   if (town.buildings.includes(building)) return "built";
+  if (def.harbour !== undefined) {
+    if (!isNavalMap(state.map)) return "not-naval";
+    if (townDock(state.map, townId) === null) return "landlocked";
+  }
   if (def.startBuilt) return "start-only";
   if (town.builtToday) return "built-today";
   if (!def.requires.every((r) => town.buildings.includes(r))) {
@@ -112,6 +121,8 @@ const BUILD_ERRORS = {
   requirements: "requirements",
   keystone: "requirements",
   resources: "resources",
+  "not-naval": "cannot-build",
+  landlocked: "landlocked",
 } as const;
 
 /**

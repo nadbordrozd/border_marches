@@ -121,6 +121,18 @@ export {
   type SeaMovementBreakdown,
 } from "./naval.ts";
 export {
+  buildingShown,
+  buyShip,
+  deckGunBonus,
+  dockOccupant,
+  playerDeckGunBonus,
+  shipBuyReason,
+  shipBuyStatus,
+  shipPrice,
+  type DockOccupant,
+  type ShipBuyStatus,
+} from "./harbour.ts";
+export {
   adjacent,
   build,
   buildStatus,

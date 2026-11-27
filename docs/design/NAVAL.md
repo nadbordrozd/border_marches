@@ -2,7 +2,8 @@
 
 Status: design for v0.2 (bead `border_marches-bzc.148`, 2026-11-27).
 Implementation beads follow from section 14; bead 1's API (ships and sea
-movement, bzc.149) is section 16.
+movement, bzc.149) is section 16, bead 2's (the town harbour, bzc.150)
+section 17.
 
 The user: "Design naval stuff. getting on / off ships, naval combat, a bunch
 of sea specific guardians and buildings and resources, some spells and
@@ -1129,3 +1130,27 @@ Numbers live in `src/data/naval.ts`.
 | The ship art hides the hero aboard; only the code placeholder (a fallback) draws it on deck           | NAVAL 10.1: the art's captain stands in for the hero                                           |
 | Docks computed from the map on demand (cached), not stored                                            | Same result as at the game start, nothing in the save                                          |
 | Battles at sea keep the defender cell's terrain until bead 5                                          | The layouts are bead 5's; nothing breaks meanwhile                                             |
+
+## 17. Bead 2's API (bzc.150): the town harbour
+
+| Item                                                     | Where                               | Meaning                                                                                                                                                                                                                                                                                             |
+| -------------------------------------------------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Building ids `shipyard`, `lighthouse`, `admiralty`       | `src/data/factionTowns.ts`          | In every v0.2 tree after the faction's own buildings, before the Keystone building; `BuildingDef.harbour` names the role; the Admiralty has `special: "admiralty"`                                                                                                                                  |
+| `HARBOUR_*`, `SHIP_PRICE`, `ADMIRALTY_*`                 | `src/data/naval.ts`                 | The ids, the ship prices (1000 gold + 10 wood; 500 + 5 with the town's Admiralty) and the Admiralty's flag and +20 deck gun Harm                                                                                                                                                                    |
+| `BuildStatus` `not-naval`, `landlocked`                  | `src/core/game/town.ts`             | A harbour building on a dry map, or in a town without a dock; command errors `cannot-build` and `landlocked`                                                                                                                                                                                        |
+| `buyShip`, `shipBuyStatus`, `shipBuyReason`, `shipPrice` | `src/core/game/harbour.ts`          | Buying at a town's Shipyard onto its dock; refusals `not-naval`, `not-owner`, `landlocked`, `no-shipyard`, `dock-occupied`, `resources`, each with a sentence                                                                                                                                       |
+| `dockOccupant`                                           | `src/core/game/harbour.ts`          | What keeps a new ship off a dock: a ship, a living hero, a sea guard, an uncollected pickup or an entrance                                                                                                                                                                                          |
+| `deckGunBonus(specials)`, `playerDeckGunBonus`           | `src/core/game/harbour.ts`          | Bead 5: add to the deck gun's Harm from the side's `specials` (battle setups already carry `playerSpecials`)                                                                                                                                                                                        |
+| `buildingShown(map, faction, id)`                        | `src/core/game/harbour.ts`          | False for a harbour building on a dry map: the town screen (`shownTree`) and its "Opens" lists hide them, so a dry town looks as before                                                                                                                                                             |
+| Game action `{ type: "buy-ship", townId }`               | `src/core/game/controller.ts`       | For the naval AI (bead 8); event `ship-bought` (townId, shipId, player, x, y)                                                                                                                                                                                                                       |
+| Town screen                                              | `src/ui/town.ts`, `town-harbour.ts` | A Harbour row closing the hall (beside a three-guild Magic row where it fits), "Buy a ship" in the header and on the built Shipyard's card, greyed "Landlocked" tiles; stand-in pictures from the sea art until bead 9c registers `shipyard`, `lighthouse` and `admiralty` in `BUILDING_ART_ASSETS` |
+
+Calls made in bead 2:
+
+| Call                                                                               | Why                                                                                                    |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| The Admiralty's half price counts in its own town only                             | 5.7 says "ships here"; the deck gun bonus is the player-wide part                                      |
+| The AI's build queue skips the harbour until bead 8                                | Dry and naval AI games keep their build order; bead 8 ranks the harbour                                |
+| The Harbour row closes the hall, after the dwellings                               | Everything a dry town shows stays in place; the hall scrolls to it at 1280 x 800 (four or five guilds) |
+| A dock is taken by a ship, a hero, a sea guard, a pickup or an entrance            | A new ship needs an empty sea cell, as `addShip`'s callers must check                                  |
+| The Shipwright map object and its purchase dialog are left to the sea-objects bead | This bead's prompt covered the town harbour; `buyShip`'s rules can be reused there                     |

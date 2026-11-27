@@ -136,8 +136,11 @@ describe.each(FACTIONS)("%s", (faction) => {
 
   it("has the documented tree: building count and every cost", () => {
     const tree = townTree(faction)!;
-    const total = [tree.order.length, 0, 0, 0, 0];
-    for (const id of tree.order) {
+    // The faction document's tree; the shared harbour (NAVAL 5.7) apart.
+    const own = tree.order.filter((id) => !tree.buildings[id]!.harbour);
+    expect(tree.order.length - own.length).toBe(3);
+    const total = [own.length, 0, 0, 0, 0];
+    for (const id of own) {
       const c = tree.buildings[id]!.cost;
       total[1]! += c.gold ?? 0;
       total[2]! += c.wood ?? 0;

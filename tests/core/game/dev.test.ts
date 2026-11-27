@@ -89,7 +89,10 @@ describe("devBuildAll", () => {
     const gold = s.players[0]!.resources.gold;
     const { state, events } = ok(devBuildAll(s, "t0"));
     const t = state.towns["t0"]!;
-    expect(t.buildings).toEqual([...tree.order]);
+    // A dry map: everything but the harbour (NAVAL 5.7).
+    expect(t.buildings).toEqual(
+      tree.order.filter((id) => !tree.buildings[id]!.harbour),
+    );
     expect(state.players[0]!.resources.gold).toBe(gold);
     expect(t.builtToday).toBe(s.towns["t0"]!.builtToday);
     // Every dwelling of the tree has stock; the new ones hold a week's growth.
@@ -125,7 +128,8 @@ describe("devBuildAll", () => {
   it("devBuildAllTowns builds every own town and none of the rival's", () => {
     const s = start();
     const state = ok(devBuildAllTowns(s, 0)).state;
-    const n = townTree("undead")!.order.length;
+    const tree = townTree("undead")!;
+    const n = tree.order.filter((id) => !tree.buildings[id]!.harbour).length;
     expect(state.towns["t0"]!.buildings).toHaveLength(n);
     expect(state.towns["t2"]!.buildings).toHaveLength(n);
     expect(state.towns["t1"]!.buildings).toEqual(s.towns["t1"]!.buildings);

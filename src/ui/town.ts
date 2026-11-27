@@ -20,8 +20,11 @@ import {
 import { buildingArt, townArt, townBackdrop } from "../assets/town-art.ts";
 import {
   build,
+  buildingShown,
   buildStatus,
+  buyShip,
   fortLevel,
+  isNavalMap,
   hasMarketplace,
   heroInTownOf,
   hireHero,
@@ -88,9 +91,11 @@ import { townLevel } from "./objects.ts";
 import {
   blockedReason,
   hallLayout,
+  shownTree,
   TILE_STATE_LABEL,
   tileState,
 } from "./town-hall.ts";
+import { buyShipButton, townBuildingArt } from "./town-harbour.ts";
 import type { HallGroupId, HallLayout, TileState } from "./town-hall.ts";
 import {
   button,
@@ -126,6 +131,14 @@ const SCREEN_ROWS: readonly HallGroupId[] = [
 ];
 
 /**
+ * Groups placed after the dwellings: the Harbour of a naval map (NAVAL
+ * 5.7). The grid's dense flow lifts it beside a three-guild Magic row
+ * (the Warcamp); otherwise it closes the hall, so everything a dry map's
+ * town shows stays where it was and the hall scrolls to the harbour.
+ */
+const LATE_ROWS: readonly HallGroupId[] = ["harbour"];
+
+/**
  * The hall's grid column (1-based, inside a group) of a group's `i`-th
  * tile: column 1 is the group's name, then three tiles; column 5 is the
  * right half's name column, which a wide group (Magic, Dwellings) skips.
@@ -145,6 +158,9 @@ function firstChoice(
       (g) => layout.groups.find((x) => x.id === g)?.buildings ?? [],
     ),
     ...layout.dwellings.flatMap((c) => c.buildings),
+    ...LATE_ROWS.flatMap(
+      (g) => layout.groups.find((x) => x.id === g)?.buildings ?? [],
+    ),
   ];
   const look = (id: BuildingId): TileState =>
     tileState(state, town.id, id).state;
@@ -250,6 +266,13 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       const ok = host.run(result);
       render();
       return ok;
+    };
+
+    /** Buys a ship at the Shipyard onto the dock (NAVAL 2.2). */
+    const doBuyShip = (): void => {
+      if (!run(buyShip(host.state(), townId))) return;
+      playSound("build");
+      toast("A new ship waits, moored, at the town's dock.", "gain");
     };
 
     const doBuild = (id: BuildingId): void => {
@@ -428,7 +451,8 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           ),
         );
       } else {
-        const layout = hallLayout(tree);
+        // Harbour buildings only on a naval map (NAVAL 5.7).
+        const layout = hallLayout(shownTree(state, town.faction, tree));
         if (chosen === null || buildingDef(town.faction, chosen) === undefined)
           chosen = firstChoice(state, town, layout);
         body.append(
@@ -769,6 +793,12 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         );
       }
 
+      // A naval map's towns sell ships at their Shipyard (NAVAL 2.2).
+      const shipButton =
+        buildable && isNavalMap(state.map)
+          ? buyShipButton(state, town.id, doBuyShip)
+          : null;
+
       return el(
         "div.gm-town-header",
         el(
@@ -784,6 +814,7 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         ),
         host.resourceBar(),
         guild,
+        shipButton,
         tavernButton,
         market,
         keyButton("Leave", "Esc", close, "gm-btn gm-primary"),
@@ -809,9 +840,9 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         node.style.gridRow = `1 / span ${rows}`;
         return node;
       };
-      for (const gid of SCREEN_ROWS) {
+      const groupRow = (gid: HallGroupId): void => {
         const group = layout.groups.find((g) => g.id === gid);
-        if (group === undefined || group.buildings.length === 0) continue;
+        if (group === undefined || group.buildings.length === 0) return;
         const box = el("div.gm-hall-group", label(group.label, 1));
         box.dataset["group"] = group.id;
         box.style.gridColumn = `span ${group.buildings.length <= 3 ? 4 : 8}`;
@@ -822,7 +853,8 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           box.append(t);
         });
         grid.append(box);
-      }
+      };
+      SCREEN_ROWS.forEach(groupRow);
       if (layout.dwellings.length > 0) {
         const rows = Math.max(
           ...layout.dwellings.map((c) => c.buildings.length),
@@ -842,6 +874,7 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
         });
         grid.append(box);
       }
+      LATE_ROWS.forEach(groupRow);
       return grid;
     };
 
@@ -866,8 +899,16 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       b.setAttribute("aria-pressed", String(on));
       b.setAttribute("aria-label", `${def.name}: ${TILE_STATE_LABEL[look]}`);
       const pic = el("span.gm-hall-art");
-      const art = buildingArt(town.faction, id);
-      if (art !== null) pic.append(img(art.key, "gm-hall-art-img"));
+      const art = townBuildingArt(town.faction, id);
+      if (art !== null)
+        pic.append(
+          img(
+            art.key,
+            art.standIn
+              ? "gm-hall-art-img gm-hall-stand-in"
+              : "gm-hall-art-img",
+          ),
+        );
       const creature = def.dwelling ?? def.drill?.creature;
       if (creature !== undefined)
         pic.append(
@@ -919,8 +960,9 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
       };
 
       const pic = el("div.gm-hall-detail-art");
-      const art = buildingArt(town.faction, id);
-      if (art !== null) pic.append(img(art.key, "", 2));
+      const art = townBuildingArt(town.faction, id);
+      if (art !== null)
+        pic.append(img(art.key, art.standIn ? "gm-hall-stand-in" : "", 2));
       const creature = def.dwelling;
       if (creature !== undefined)
         pic.append(
@@ -1000,7 +1042,9 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
           );
         }
       }
-      const unlocks = unlockedBy(town.faction, id);
+      const unlocks = unlockedBy(town.faction, id).filter((u) =>
+        buildingShown(state.map, town.faction, u),
+      );
       if (unlocks.length > 0) {
         pane.append(
           el(
@@ -1027,6 +1071,18 @@ export function openTownScreen(host: TownHost, townId: string): Promise<void> {
             b.title =
               "None left this week: dwellings grow on day 1 of each week.";
           actions.append(b);
+        }
+        // The Shipyard sells ships (NAVAL 2.2); the reason shows when not.
+        if (def.harbour === "shipyard") {
+          const b = buyShipButton(
+            state,
+            town.id,
+            doBuyShip,
+            "gm-btn gm-primary gm-buy-ship",
+          );
+          actions.append(b);
+          if (b.disabled && b.title !== "")
+            actions.prepend(el("div.gm-hall-why", b.title));
         }
       } else {
         // The reason, when the badge does not already say it.
