@@ -1,0 +1,821 @@
+{
+  "grass-a": {
+    "id": "grass-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "4d4e529a-b7fe-403d-991f-e1af695c4410",
+    "submittedAt": "2026-11-27T09:09:06.455Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad green grassy mountain massif, each image a different one of these: two rounded summits joined by a long ridge, a wide massif with three soft summits and grassy spurs, a high green mountain with a grey rocky crown and long ridges running down. Its slopes are the meadow grass of the plain around it: grass #8bb95e, lit #a6cf6e on the left faces, shadow #5e8f45 and deep gullies #44703c on the right faces; a little bare rock #9a978a, shadow #66645c near the summits. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 160,
+        "height": 112
+      },
+      "no_background": true,
+      "seed": 32001,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad green grassy mountain massif, each image a different one of these: two rounded summits joined by a long ridge, a wide massif with three soft summits and grassy spurs, a high green mountain with a grey rocky crown and long ridges running down. Its slopes are the meadow grass of the plain around it: grass #8bb95e, lit #a6cf6e on the left faces, shadow #5e8f45 and deep gullies #44703c on the right faces; a little bare rock #9a978a, shadow #66645c near the summits. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, terraces, steps, crater, flat top, trees, forest."
+    },
+    "at": "2026-11-27T09:10:08.678Z",
+    "usageUsd": 0.11550412233670553,
+    "candidates": [
+      {
+        "file": "grass-a-0.png",
+        "sha256": "09d6a64c6356bab89571f14f1d3b776b9c86ed75efb72652fc17e4d173e777aa",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "grass-a-1.png",
+        "sha256": "5eab4a70c064ad53289f1a5288a092351a63e6cc32bee33fccc35596a791fb53",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "grass-a-2.png",
+        "sha256": "a0122bb154405cbc7643c98fb0ba365db3652a3958017b4c09bfcfbdcd4bf2ca",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "grass-a-3.png",
+        "sha256": "896829e0f8b61b0e75e07b4df0747a4697802dc85b334a4d158be3792cc904d6",
+        "width": 160,
+        "height": 112
+      }
+    ]
+  },
+  "steppe-a": {
+    "id": "steppe-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "599e50ae-0c24-4b85-845d-4f0da9537e6a",
+    "submittedAt": "2026-11-27T09:10:08.814Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad dry rocky mountain massif, each image a different one of these: two jagged summits joined by a long broken ridge, a wide massif with three sharp points and deep gullies, a big angular mountain with long rock spurs running down. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces; its lower slopes are the dry straw grass of the plain around it, #ccb86f, shadow #9c8a50. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 160,
+        "height": 112
+      },
+      "no_background": true,
+      "seed": 32011,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad dry rocky mountain massif, each image a different one of these: two jagged summits joined by a long broken ridge, a wide massif with three sharp points and deep gullies, a big angular mountain with long rock spurs running down. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces; its lower slopes are the dry straw grass of the plain around it, #ccb86f, shadow #9c8a50. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, terraces, steps, crater, trees, forest."
+    },
+    "at": "2026-11-27T09:11:15.616Z",
+    "usageUsd": 0.11628827765252855,
+    "candidates": [
+      {
+        "file": "steppe-a-0.png",
+        "sha256": "fd2d660e94f900d7cfae4961da7c0c55a1a8765893d8b6afbac6949f626ee819",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "steppe-a-1.png",
+        "sha256": "d7c83d3a46d813cf8ec5a39a595f05c7e50b8b91424df832abb496037e1b4209",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "steppe-a-2.png",
+        "sha256": "975ac1bd80bb2fde01b8a33439ade1b34d8773addb73059516bfed9300d0df08",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "steppe-a-3.png",
+        "sha256": "40b842a20cfac4ceccf51a6602fa926888773499b89f74b20c8280e13f01edb2",
+        "width": 160,
+        "height": 112
+      }
+    ]
+  },
+  "badlands-a": {
+    "id": "badlands-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "d94ecb7b-7da5-4dc9-a295-f2f70d8117fd",
+    "submittedAt": "2026-11-27T09:11:15.753Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad red desert rock massif with level strata, each image a different one of these: a long eroded ridge with two flat-topped buttes on its crest, a wide mesa massif cut by fluted gullies, a big table rock with a taller butte joined at its back. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a; its lower slopes are scree of the red plain around it, #b36a45, shadow #84462c. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 160,
+        "height": 112
+      },
+      "no_background": true,
+      "seed": 32021,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad red desert rock massif with level strata, each image a different one of these: a long eroded ridge with two flat-topped buttes on its crest, a wide mesa massif cut by fluted gullies, a big table rock with a taller butte joined at its back. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a; its lower slopes are scree of the red plain around it, #b36a45, shadow #84462c. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, crater, trees, forest, many separate rocks."
+    },
+    "at": "2026-11-27T09:12:27.823Z",
+    "usageUsd": 0.11614653807216221,
+    "candidates": [
+      {
+        "file": "badlands-a-0.png",
+        "sha256": "5671088fcb7a6328c67095b06c980c31942aa6f64f3a430febf251c9a0cba5bf",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "badlands-a-1.png",
+        "sha256": "0d65d3c8f2c9e3e77f68927f34a8c06ec0ce3bde917d32fd0624451d93333fd2",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "badlands-a-2.png",
+        "sha256": "8a56789dd7c86190c13f12049604ffeb2154658c868605b70b9ef2a8d75d631b",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "badlands-a-3.png",
+        "sha256": "d1ac5083ebc742261f593be888c53877c5b99771864ba5ca444b39b41ce2d50a",
+        "width": 160,
+        "height": 112
+      }
+    ]
+  },
+  "snow-a": {
+    "id": "snow-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "9692529e-5fd3-4bc0-9768-5bd779002e6f",
+    "submittedAt": "2026-11-27T09:12:27.955Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad snowy alpine massif, each image a different one of these: two jagged snow-capped summits joined by a long snowy ridge, a wide massif with three peaks and rock ribs between snowfields, a big pointed mountain with long snowy spurs running down. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces; its lower slopes are buried in the snowfield of the plain around it, #d5e2f5. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 160,
+        "height": 112
+      },
+      "no_background": true,
+      "seed": 32031,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad snowy alpine massif, each image a different one of these: two jagged snow-capped summits joined by a long snowy ridge, a wide massif with three peaks and rock ribs between snowfields, a big pointed mountain with long snowy spurs running down. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces; its lower slopes are buried in the snowfield of the plain around it, #d5e2f5. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, terraces, steps, crater, flat top, trees, forest."
+    },
+    "at": "2026-11-27T09:13:19.525Z",
+    "usageUsd": 0.11564316368103028,
+    "candidates": [
+      {
+        "file": "snow-a-0.png",
+        "sha256": "3ca689731931b342eda80126442838ac63973352ce6f54c58142d5e91ab97f26",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "snow-a-1.png",
+        "sha256": "347d4b227fb2301ab10af4f0ca740dd00c040dfb6f2886d3594abb4a5c1b9836",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "snow-a-2.png",
+        "sha256": "ba5f3e1994964ce8adcf4236c9ac6f1fb0d05904c64860f0334df2d6a03df642",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "snow-a-3.png",
+        "sha256": "b1631c01f3d69b68bbf80825ec65796c451ca558eb300dfd4a48d38c696f4b19",
+        "width": 160,
+        "height": 112
+      }
+    ]
+  },
+  "sand-a": {
+    "id": "sand-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "b61a2eba-bcd8-4c3a-8fb5-3fd9f1dc0e4e",
+    "submittedAt": "2026-11-27T09:13:19.706Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad golden sandstone massif, each image a different one of these: a long ridge of fluted cliffs with two flat-topped mesas on its crest, a wide rock massif with tall spires on its back, a big wind-carved butte joined to a lower table rock. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa; its lower slopes are drifted sand of the desert around it, #e4b962, shadow #b88a48. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 160,
+        "height": 112
+      },
+      "no_background": true,
+      "seed": 32041,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad golden sandstone massif, each image a different one of these: a long ridge of fluted cliffs with two flat-topped mesas on its crest, a wide rock massif with tall spires on its back, a big wind-carved butte joined to a lower table rock. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa; its lower slopes are drifted sand of the desert around it, #e4b962, shadow #b88a48. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, crater, trees, forest, many separate rocks."
+    },
+    "at": "2026-11-27T09:15:59.255Z",
+    "usageUsd": 0.11597088069385952,
+    "candidates": [
+      {
+        "file": "sand-a-0.png",
+        "sha256": "d75394c33f8dd9f8783ec9dca6daa262edf0ca278e755ce40454fcaeb4fc64d3",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "sand-a-1.png",
+        "sha256": "4e9650c864534a943bac282d79fbf6a8ccb1dde7c086c4417b31af6e8cb18392",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "sand-a-2.png",
+        "sha256": "812bc08b7d07069b97c3bf0148dc5e94407c4c734d5cae4ac2b815e3760ce9c2",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "sand-a-3.png",
+        "sha256": "99c856f6d2e0359c9e0e41361a00dc6a29f78de15aab61f5a9912d5b62c59a86",
+        "width": 160,
+        "height": 112
+      }
+    ]
+  },
+  "grass-b": {
+    "id": "grass-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c79a45ee-2987-491c-87eb-806be270fa66",
+    "submittedAt": "2026-11-27T09:17:43.358Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one long green grassy mountain ridge, each image a different one of these: a long ridge with three rounded summits and grassy spurs running down, a broad massif with one high summit and a lower shoulder, a wide green mountain with a short grey rocky crest. Its slopes are the meadow grass of the plain around it: grass #8bb95e, lit #a6cf6e on the left faces, shadow #5e8f45 and deep gullies #44703c on the right faces; a little bare rock #9a978a near the top. Its slopes taper out at both sides. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 168,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 32002,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one long green grassy mountain ridge, each image a different one of these: a long ridge with three rounded summits and grassy spurs running down, a broad massif with one high summit and a lower shoulder, a wide green mountain with a short grey rocky crest. Its slopes are the meadow grass of the plain around it: grass #8bb95e, lit #a6cf6e on the left faces, shadow #5e8f45 and deep gullies #44703c on the right faces; a little bare rock #9a978a near the top. Its slopes taper out at both sides. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, terraces, steps, crater, flat top, trees, forest, flat cut bottom."
+    },
+    "at": "2026-11-27T09:18:40.466Z",
+    "usageUsd": 0.11553511362605626,
+    "candidates": [
+      {
+        "file": "grass-b-0.png",
+        "sha256": "e6098f70027747f62f01f84bbc63b7c7922d97aa4f99b158cf23801766fb46e1",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "grass-b-1.png",
+        "sha256": "0369517fac1943d1e970b464d5cb7bb7be6f4dce45255c46b732847dddf8f9b5",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "grass-b-2.png",
+        "sha256": "8001a17b11139f41ab04d4635b4cc26ddce1ebb0a70ae0b8a119ee54dda57d52",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "grass-b-3.png",
+        "sha256": "167785c703d9c9cc61eafa50e09c0540bebdd089c7c5545a3f0da4d8c5ce6e11",
+        "width": 168,
+        "height": 104
+      }
+    ]
+  },
+  "steppe-b": {
+    "id": "steppe-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c62c6ecd-8e20-4ea0-b167-047bb01d73fe",
+    "submittedAt": "2026-11-27T09:18:40.549Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad dry rocky mountain massif, each image a different one of these: a long jagged ridge with two sharp summits, a big craggy mountain with one high point and long spurs, a wide mountain with three points and deep gullies. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces; its lower slopes are the dry straw grass of the plain around it, #ccb86f, shadow #9c8a50, and taper out to points at both sides. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 168,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 32012,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad dry rocky mountain massif, each image a different one of these: a long jagged ridge with two sharp summits, a big craggy mountain with one high point and long spurs, a wide mountain with three points and deep gullies. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces; its lower slopes are the dry straw grass of the plain around it, #ccb86f, shadow #9c8a50, and taper out to points at both sides. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, terraces, steps, crater, trees, forest, flat cut bottom, straight bottom edge, line under it, separate rocks."
+    },
+    "at": "2026-11-27T09:19:42.253Z",
+    "usageUsd": 0.11594200759463841,
+    "candidates": [
+      {
+        "file": "steppe-b-0.png",
+        "sha256": "df3af4554a3f66af87950071738e46ed93891e0ad3f0734c64016c7a9bb53dfe",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "steppe-b-1.png",
+        "sha256": "e75fcebb939602f70bd25a4b100737abf8aa372fddde34d6e02e9e4ee6804d46",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "steppe-b-2.png",
+        "sha256": "96ae43a8b9dfad1045df7951072f99e20201c1086abaa13a790f75c2e6442118",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "steppe-b-3.png",
+        "sha256": "742c77741ae5fac2bd99c83a0e726b4ece95faf6df78e95ba9f6e9d6ef7a9acb",
+        "width": 168,
+        "height": 104
+      }
+    ]
+  },
+  "badlands-b": {
+    "id": "badlands-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "48d0b351-901b-4c50-aa73-9c0c3235131a",
+    "submittedAt": "2026-11-27T09:19:42.330Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad red desert rock massif with level strata, each image a different one of these: a long eroded ridge of fluted red cliffs with a flat top, a wide mesa with a notch and a lower shoulder, a big butte joined to a long sloping ridge. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a; its lower slopes are scree of the red plain around it, #b36a45, shadow #84462c, tapering out at both sides. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 168,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 32022,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad red desert rock massif with level strata, each image a different one of these: a long eroded ridge of fluted red cliffs with a flat top, a wide mesa with a notch and a lower shoulder, a big butte joined to a long sloping ridge. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a; its lower slopes are scree of the red plain around it, #b36a45, shadow #84462c, tapering out at both sides. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, crater, trees, forest, many separate rocks, boxy blocks."
+    },
+    "at": "2026-11-27T09:20:43.951Z",
+    "usageUsd": 0.11559147561921014,
+    "candidates": [
+      {
+        "file": "badlands-b-0.png",
+        "sha256": "581f1dd4258eb867ee1c06186582edf71d844cc97604c94e3cda693c8e8854e6",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "badlands-b-1.png",
+        "sha256": "5bde5092fdd7a96addb56d74aff71ece0ea83111002e0c219e18750f57e19105",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "badlands-b-2.png",
+        "sha256": "0ba8dc1e932286023b15dffdaf3dc9a410deb293c54d6a0ff7c0ea646890cf17",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "badlands-b-3.png",
+        "sha256": "861c87454f51cf3e0124d1a90ddd324cc5725c707578bb4bc149ef857a1d12a6",
+        "width": 168,
+        "height": 104
+      }
+    ]
+  },
+  "snow-b": {
+    "id": "snow-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "018ef4d8-e662-4312-82bc-dc1e7c2d30c3",
+    "submittedAt": "2026-11-27T09:20:44.087Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad snowy alpine massif, each image a different one of these: a long ridge with two snow-capped summits, a wide massif with a high jagged summit and a lower snowy shoulder, a big mountain with three peaks and snowfields between them. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces; its lower slopes are snow like the snowfield around it, #d5e2f5, tapering out to points at both sides. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 168,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 32032,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad snowy alpine massif, each image a different one of these: a long ridge with two snow-capped summits, a wide massif with a high jagged summit and a lower snowy shoulder, a big mountain with three peaks and snowfields between them. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces; its lower slopes are snow like the snowfield around it, #d5e2f5, tapering out to points at both sides. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, terraces, steps, crater, flat top, trees, forest, rectangular base, snow plate, flat cut bottom."
+    },
+    "at": "2026-11-27T09:21:40.399Z",
+    "usageUsd": 0.1156331500477261,
+    "candidates": [
+      {
+        "file": "snow-b-0.png",
+        "sha256": "424634e655e42ca78d57704e8a6b1d0c8039230bbb2ffa77e3749186ab719a8b",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "snow-b-1.png",
+        "sha256": "4f56b3acbaf9c6b0f20721535bc381b5868344fbb9744131cbfa2e2e6fffe9f6",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "snow-b-2.png",
+        "sha256": "ed9356992ad08cb8ce0e2c4763024ed74e78bbec9e78195ba06213ed0e0b65ab",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "snow-b-3.png",
+        "sha256": "df32e57f9566f038faad287943503aac9e84c71caaad0363707e9f83ef0f802d",
+        "width": 168,
+        "height": 104
+      }
+    ]
+  },
+  "sand-b": {
+    "id": "sand-b",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "c988a486-25b7-4e2e-b073-bac596ee5a1c",
+    "submittedAt": "2026-11-27T09:21:40.491Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad golden sandstone massif, each image a different one of these: a long ridge of fluted cliffs with a flat top and a lower shoulder, a wide rock massif with two rounded wind-carved knobs, a big mesa with a canyon notch. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa; its lower slopes are drifted sand of the desert around it, #e4b962, shadow #b88a48, tapering out at both sides. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 168,
+        "height": 104
+      },
+      "no_background": true,
+      "seed": 32042,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad golden sandstone massif, each image a different one of these: a long ridge of fluted cliffs with a flat top and a lower shoulder, a wide rock massif with two rounded wind-carved knobs, a big mesa with a canyon notch. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa; its lower slopes are drifted sand of the desert around it, #e4b962, shadow #b88a48, tapering out at both sides. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, crater, trees, forest, many separate rocks, pyramids."
+    },
+    "at": "2026-11-27T09:22:52.528Z",
+    "usageUsd": 0.11592178286446465,
+    "candidates": [
+      {
+        "file": "sand-b-0.png",
+        "sha256": "cc5fff1ce9235d2769b78e530a45e9c83026cfbdac20771b6193c3b048e2686e",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "sand-b-1.png",
+        "sha256": "402455b6b1a1f4420b8ac4a65e921e385b13aea63fc8a8f0c1ca802e85df160b",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "sand-b-2.png",
+        "sha256": "bff77a1980913f9e910060829e0691762f41c977c35c88b4a1dcda23923c423d",
+        "width": 168,
+        "height": 104
+      },
+      {
+        "file": "sand-b-3.png",
+        "sha256": "e450610bf7889743db2062e654bcece6533f5313f1586cc43dc8de5339affb2a",
+        "width": 168,
+        "height": 104
+      }
+    ]
+  },
+  "sand-c": {
+    "id": "sand-c",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "37071263-1a8a-4e19-aa64-4149d22c891a",
+    "submittedAt": "2026-11-27T09:29:15.750Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad golden sandstone massif rising out of sand dunes, each image a different one of these: a long ridge with two rounded wind-carved summits, a wide rock massif with a tall spire and a lower shoulder, a big mesa with a sloping side and fluted gullies. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa; its lower slopes are drifted sand #e4b962, shadow #b88a48, tapering to points at both sides. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 160,
+        "height": 112
+      },
+      "no_background": true,
+      "seed": 32043,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad golden sandstone massif rising out of sand dunes, each image a different one of these: a long ridge with two rounded wind-carved summits, a wide rock massif with a tall spire and a lower shoulder, a big mesa with a sloping side and fluted gullies. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa; its lower slopes are drifted sand #e4b962, shadow #b88a48, tapering to points at both sides. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, crater, trees, many separate rocks, pyramids, flat cut bottom, line under it, arch."
+    },
+    "at": "2026-11-27T09:30:22.804Z",
+    "usageUsd": 0.1157279956870609,
+    "candidates": [
+      {
+        "file": "sand-c-0.png",
+        "sha256": "1f0469586fbff668b70cb7f236ba5d0e6a456849dc6a4afcad11ecef4ac23886",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "sand-c-1.png",
+        "sha256": "00e8088db38ec93f55561cb0e6cf080c2eca7d1cb497c07aabe5d99c0ccf31ab",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "sand-c-2.png",
+        "sha256": "7263826d4966aada68cdbde5e17e7eb511a1f24449795cf3d5555c75cf8f60e4",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "sand-c-3.png",
+        "sha256": "c560130fb1488b7e5f5624d28e7249a7c41aeea8d309d2487b9cc093ae4013aa",
+        "width": 160,
+        "height": 112
+      }
+    ]
+  },
+  "wasteland-a": {
+    "id": "wasteland-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "6c5e20e4-c418-4bbf-8a62-e57e1fecdf3d",
+    "submittedAt": "2026-11-27T09:30:22.900Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad dark basalt mountain massif, each image a different one of these: a long jagged ridge with two sharp summits, a wide massif with three broken points and deep gullies, a big craggy mountain with long spurs running down. Rock charcoal #4e4a50, shadow #2e2b32, lit #77717a on the left faces, a few thin ember cracks #a05a30; its lower slopes are grey ash like the burnt plain around it, #79726b, shadow #5a544e, tapering out to points at both sides. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 160,
+        "height": 112
+      },
+      "no_background": true,
+      "seed": 32051,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad dark basalt mountain massif, each image a different one of these: a long jagged ridge with two sharp summits, a wide massif with three broken points and deep gullies, a big craggy mountain with long spurs running down. Rock charcoal #4e4a50, shadow #2e2b32, lit #77717a on the left faces, a few thin ember cracks #a05a30; its lower slopes are grey ash like the burnt plain around it, #79726b, shadow #5a544e, tapering out to points at both sides. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, terraces, steps, crater, trees, forest, flat cut bottom, lava flows, fire."
+    },
+    "at": "2026-11-27T09:31:44.892Z",
+    "usageUsd": 0.11558557385868497,
+    "candidates": [
+      {
+        "file": "wasteland-a-0.png",
+        "sha256": "53383dee84b0626b47e908f2b006284d228cb313552b13747a4296004c4f2f18",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "wasteland-a-1.png",
+        "sha256": "21398a15750fb4501a2014cbac692bcbc038fd0c31690b5c8fc3cde1738bd178",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "wasteland-a-2.png",
+        "sha256": "bead9896bc527aeb5b32000465e8736bb81d3923b4a39a6c4323549bfc29661f",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "wasteland-a-3.png",
+        "sha256": "508730745d62b6945e1198875ded4e0c1d3221ef6a8f2ba7e7d4f80040e83f17",
+        "width": 160,
+        "height": 112
+      }
+    ]
+  },
+  "jungle-a": {
+    "id": "jungle-a",
+    "status": "DONE",
+    "endpoint": "generate-image-v2",
+    "jobId": "33009a83-e430-4e37-9d9c-6effbfa74717",
+    "submittedAt": "2026-11-27T09:31:45.358Z",
+    "request": {
+      "endpoint": "generate-image-v2",
+      "layers": [
+        {
+          "source": "fragments/style.txt",
+          "text": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful."
+        },
+        {
+          "source": "fragments/light-south-west.txt",
+          "text": "Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right."
+        },
+        {
+          "source": "fragments/class-massif.txt",
+          "text": "Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow."
+        },
+        {
+          "source": "recipe subject",
+          "text": "Subject: one broad jungle karst massif, each image a different one of these: two steep limestone summits joined by a mossy ridge, a wide massif of three rounded limestone towers under moss and vines, a big steep green mountain with grey limestone cliffs. Limestone #a8a48c, shadow #6e6e5c; moss and vines #3f8a4e, shadow #24603f; its lower slopes are the mossy jungle ground around it, #65a25a, shadow #3f7a45, tapering out at both sides. Fills the full image width and nearly its full height."
+        }
+      ],
+      "image_size": {
+        "width": 160,
+        "height": 112
+      },
+      "no_background": true,
+      "seed": 32061,
+      "description": "Style: bold chibi pixel art for a playful turn-based strategy board game, a board game come to life: chunky simple shapes, flat colours with one shadow tone, low detail, clean readable silhouette that reads at a glance at small size, slightly silly and cheerful. Light: the sun is low in the south-west, at the bottom left of the image: faces turned to the left or to the viewer are lit, faces turned to the right are in shadow, snow is brightest on its left side, and nothing is lit from the right. Class: one big mountain massif for a strategy map, a broad range of two or three joined summits, drawn as a standing object seen from the front with the camera only slightly above it, like a tree or a building on the same map: we see its front face, ridgelines and gullies rising up and its summits against the empty background, never its top from above. Calm and less saturated than units, a thin dark outline along the summits and upper ridges only, soft inner lines, big simple flat facets with one shadow tone. Its lower slopes spread wide and low and flatten out at the bottom edge of the image. It stands alone on the empty transparent background: nothing under it, no ground patch, no shadow. Subject: one broad jungle karst massif, each image a different one of these: two steep limestone summits joined by a mossy ridge, a wide massif of three rounded limestone towers under moss and vines, a big steep green mountain with grey limestone cliffs. Limestone #a8a48c, shadow #6e6e5c; moss and vines #3f8a4e, shadow #24603f; its lower slopes are the mossy jungle ground around it, #65a25a, shadow #3f7a45, tapering out at both sides. Fills the full image width and nearly its full height. Must not include: photorealism, painterly brushwork, gradients, dithering, blur, thin outline, low-poly 3D, text, letters, frame, UI, cropped subject, terraces, steps, crater, trees, palm trees, flat cut bottom, separate pillars."
+    },
+    "at": "2026-11-27T09:32:52.232Z",
+    "usageUsd": 0.11594613430235122,
+    "candidates": [
+      {
+        "file": "jungle-a-0.png",
+        "sha256": "ac8e704a2dec88be4b82ab5860aa0da3891a8e4d36175eea71a0308d46af2922",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "jungle-a-1.png",
+        "sha256": "89cad45c0d3af4c1ba4e29ed1b189efd5cf54de3dbe9c4608efa5c6c4bf450fb",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "jungle-a-2.png",
+        "sha256": "234f469f79aac89c47e456740faf056a905702b8b686fceab17faa0445ea51e6",
+        "width": 160,
+        "height": 112
+      },
+      {
+        "file": "jungle-a-3.png",
+        "sha256": "05b31c3804b833e81601068e312ebe69882e585263a70ac061d9947a745999c9",
+        "width": 160,
+        "height": 112
+      }
+    ]
+  }
+}

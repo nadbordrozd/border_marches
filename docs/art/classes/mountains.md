@@ -18,6 +18,18 @@ with their dark outline and chunky flat shading, lit from the bottom left.
 Mountains do not blend between terrains. The ground under a peak's foot picks
 its family, and a hard change between two families is allowed.
 
+**Fewer, larger forms (bead `border_marches-xaj.32`, 2026-11-27).** The user
+asked for ranges "less like a pile of individual rocks" that "blend with their
+native terrain the way they do in Homam2". A range is now laid from
+**massifs** first: big forms of two or three joined summits, about two cells
+wide, whose lower slopes are painted in the colours of their own ground
+(meadow grass, straw, red scree, snowfield, drifted sand, ash, jungle moss)
+and whose foot has no outline, so the range rises out of its plain the way
+the Heroes II green mountains do. The smaller tiers fill only what the
+massifs leave, mostly along the edges and in narrow runs. The grass family's
+older tiers are toned toward the meadow's green so they sit with the massifs,
+and the underlay between sprites is the ground itself in shade.
+
 ## Inventory
 
 Studio set `art/sets/peaks`, derived files in
@@ -38,6 +50,28 @@ Each family has three tiers: `foothill` (from 56 x 44 requests), `peak` (from
 80 x 64) and `summit` (from 120 x 88): 170 accepted sprites of 284 takes, 31
 PixelLab calls. Every take has a verdict in `art/sets/peaks/verdicts.json`.
 
+The fourth tier, `massif` (bead xaj.32), is the studio set
+`art/sets/range-massifs` (layer `class-massif`), files
+`public/assets/terrain/peaks/<terrain>/massif-<n>.png`: 35 accepted of 52
+takes in 13 calls (US$1.51), generated at 160 x 112 or 168 x 104 (four
+candidates a call) and cropped to about 136-161 x 45-89.
+
+| Family | Massifs | Shape |
+| --- | ---: | --- |
+| Grass | 7 | rounded and twin green summits on long ridges, some with grey rocky crowns, slopes in the meadow's own green |
+| Steppe | 5 | jagged tan rock summits over a straw-grass foot |
+| Badlands | 6 | flat-topped buttes and mesas on one strata ridge over a red scree skirt |
+| Snow | 5 | snow-capped twin and triple summits over a snowfield foot |
+| Sand | 7 | sandstone mesas, spires and wind-carved knobs over drifted sand |
+| Wasteland (and volcanic) | 4 | jagged basalt ridges with ember cracks over an ash foot |
+| Jungle | 3 | limestone towers under moss on a jungle-green foot |
+| Frosting | 0 | none yet: candy ranges keep the three older tiers (follow-up) |
+
+Rejected on sight for massifs, besides the list below: a flat cut bottom or a
+rectangular snow or sand plate under the form (with a white line under it),
+a heap of separate lumps or blocks, pyramids, and bare rock lower slopes that
+sit on the ground as a block.
+
 ## Geometry
 
 - Generated at native display size and cropped to the opaque box plus 1 px on
@@ -52,8 +86,16 @@ PixelLab calls. Every take has a verdict in `art/sets/peaks/verdicts.json`.
   rises over an open cell is drawn in the foreground crown bands, so it covers
   only the feet of a unit standing behind.
 - Feet never stand on a road, an object, an entrance or water.
-- A rock-toned underlay, inset from the outline, closes pinholes between the
-  sprites and stays hidden behind them.
+- Massifs (bead xaj.32) are tried before every other tier at each foot at
+  least 0.1 field units inside the range, and kept only where their whole
+  foot (every 12 px between the 14% insets) stands on Mountain cells inside
+  the outline: their broad slopes never spread over a passable cell beside
+  the range. Smaller tiers keep further off a massif's face (exclusion
+  half-axis down the map 0.5 of the mean height instead of 0.32), and a hole
+  is closed by the biggest form that fits (massif, peak, then foothill), with
+  no copy of a massif within 150 px.
+- The underlay, inset from the outline, closes pinholes between the sprites:
+  the ground's own texture pulled 60% toward the family's slope shadow.
 
 ## Readability
 
@@ -62,6 +104,13 @@ PixelLab calls. Every take has a verdict in `art/sets/peaks/verdicts.json`.
   for the pale jungle limestone, which otherwise reads as speckled rubble).
 - The black outline becomes a dark tone of the family's rock, so the lines
   between overlapping peaks sit back and a range reads as one mass.
+- Massifs keep more of their colour (8% toward grey, no darkening), their
+  line is 40% of the way from the family's line colour to its slope shadow,
+  and the outline along the lower 45% of their silhouette takes the colour of
+  the slope beside it, so the foot melts into the ground.
+- The grass family's foothills, peaks and summits (drawn in a deep forest
+  green) have their green pixels brightened 32% and pulled 45% toward the
+  meadow's hue (`GREEN_LIFT`), so they sit with the meadow-green massifs.
 - Spacing is per family (`PEAK_SPACING`): the spiky basalt gets the most air.
   Inside a range a foothill only fills a real hole.
 - No two copies of a sprite stand within 64 px, and a sprite prefers no copy
@@ -101,6 +150,20 @@ Prompt fragments that worked:
   rounded drips"; a pile of many small gumdrops (speckle), thin crystal
   needles and a terraced take were rejected. The description limit (2000
   characters with the layers) leaves room for three subjects a call.
+
+Massifs (`class-massif`, bead xaj.32): "one big mountain massif ..., a broad
+range of two or three joined summits", "a thin dark outline along the
+summits and upper ridges only", "its lower slopes spread wide and low and
+flatten out at the bottom edge of the image". The subject names the ground's
+own colour for the lower slopes, for example "Its slopes are the meadow grass
+of the plain around it: grass #8bb95e, lit #a6cf6e on the left faces, shadow
+#5e8f45 and deep gullies #44703c on the right faces" (ground means measured
+from the textures: grass #8bb95e, steppe #ccb86f, badlands #b36a45, snow
+#d5e2f5, sand #e4b962, wasteland #79726b, jungle #65a25a). Adding "tapering
+out (to points) at both sides" and negatives "flat cut bottom, straight
+bottom edge, line under it" fixed the boxy plates of the first steppe and
+snow takes; the sandstone ones kept coming back with a cut base until the
+subject said "rising out of sand dunes".
 
 ## Acceptance
 

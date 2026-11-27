@@ -28,6 +28,7 @@ import {
 } from "../../src/render/map/peaks.ts";
 import type { PeakField, PlacedPeak } from "../../src/render/map/peaks.ts";
 import { PEAK_SPRITES, featuredCells } from "../../src/render/map/scene.ts";
+import { toneRgba } from "../../src/render/map/peak-paint.ts";
 
 const CELL = CELL_PX;
 const PUBLIC = join(import.meta.dirname, "..", "..", "public");
@@ -137,6 +138,85 @@ describe("peak assets", () => {
         asset.key,
       ).toBe(true);
     }
+  });
+});
+
+describe("massifs (bead xaj.32)", () => {
+  const FAMILIES = [
+    "grass",
+    "jungle",
+    "steppe",
+    "badlands",
+    "wasteland",
+    "snow",
+    "sand",
+  ] as const;
+
+  it("gives the main families their big forms", () => {
+    for (const terrain of FAMILIES)
+      expect(
+        peaksOf(terrain).filter((p) => p.tier === "massif").length,
+        terrain,
+      ).toBeGreaterThanOrEqual(3);
+  });
+
+  it("stands every massif wholly on the range", () => {
+    for (const terrain of FAMILIES) {
+      const map = rangeMap(RANGE, terrain);
+      const field = buildPeakField(map);
+      const massifs = placePeaks(field, PEAK_SPRITES).filter((p) =>
+        p.key.includes("-massif-"),
+      );
+      expect(massifs.length, terrain).toBeGreaterThan(0);
+      for (const peak of massifs) {
+        const inset = Math.max(4, Math.round(peak.w * 0.14));
+        for (let x = peak.x + inset; x <= peak.x + peak.w - 1 - inset; x += 4) {
+          const i =
+            Math.floor((peak.baseY - 3) / CELL) * map.width +
+            Math.floor(x / CELL);
+          expect(field.rock[i], peak.key).toBe(1);
+        }
+      }
+    }
+  });
+
+  it("paints a massif's foot without the outline, a peak's with it", () => {
+    // A 4 x 4 green block outlined in black on all sides.
+    const image = (): Uint8ClampedArray => {
+      const px = new Uint8ClampedArray(4 * 4 * 4);
+      for (let y = 0; y < 4; y += 1)
+        for (let x = 0; x < 4; x += 1) {
+          const edge = x === 0 || y === 0 || x === 3 || y === 3;
+          px.set(edge ? [0, 0, 0, 255] : [120, 180, 90, 255], (y * 4 + x) * 4);
+        }
+      return px;
+    };
+    const grey = (px: Uint8ClampedArray, x: number, y: number): number => {
+      const o = (y * 4 + x) * 4;
+      return 0.3 * px[o]! + 0.59 * px[o + 1]! + 0.11 * px[o + 2]!;
+    };
+    const massif = image();
+    toneRgba(massif, 4, 4, "grass", "massif");
+    const peak = image();
+    toneRgba(peak, 4, 4, "grass", "peak");
+    // The foot row: open on the massif, a dark line on the peak.
+    for (const x of [1, 2]) {
+      expect(grey(massif, x, 3)).toBeGreaterThan(100);
+      expect(grey(peak, x, 3)).toBeLessThan(60);
+    }
+    // The top keeps its line on both.
+    expect(grey(massif, 1, 0)).toBeLessThan(100);
+  });
+
+  it("builds a range from fewer sprites, the massifs first", () => {
+    const peaks = place(rangeMap(RANGE, "grass"));
+    const area = (key: string): number =>
+      peaks
+        .filter((p) => p.key.includes(key))
+        .reduce((sum, p) => sum + p.w * p.h, 0);
+    // The big forms carry most of the range's paint.
+    expect(area("-massif-")).toBeGreaterThan(area("-foothill-"));
+    expect(area("-massif-")).toBeGreaterThan(area("-peak-"));
   });
 });
 

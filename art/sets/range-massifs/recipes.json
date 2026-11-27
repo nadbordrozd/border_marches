@@ -1,0 +1,171 @@
+{
+  "set": "range-massifs",
+  "bead": "border_marches-xaj.32",
+  "class": "mountains",
+  "exploration": false,
+  "_doc": "Big multi-summit massifs that stand deep inside a mountain range (bead xaj.32, docs/art/classes/mountains.md): fewer, larger forms whose lower slopes are the colour of the family's own ground, so a range rises out of its plain as in Heroes II. generate-image-v2 at native display size (4 candidates at 160 x 112), never downscaled or mirrored. Layers: style, light, class-massif, subject. Recipes are never edited after generation: add a new id (new seed) instead.",
+  "shared": {},
+  "defaults": {
+    "endpoint": "generate-image-v2",
+    "fragments": ["style", "light-south-west", "class-massif"],
+    "noBackground": true
+  },
+  "recipes": [
+    {
+      "id": "grass-a",
+      "concept": "GRASS MASSIF",
+      "width": 160,
+      "height": 112,
+      "seed": 32001,
+      "subject": "Subject: one broad green grassy mountain massif, each image a different one of these: two rounded summits joined by a long ridge, a wide massif with three soft summits and grassy spurs, a high green mountain with a grey rocky crown and long ridges running down. Its slopes are the meadow grass of the plain around it: grass #8bb95e, lit #a6cf6e on the left faces, shadow #5e8f45 and deep gullies #44703c on the right faces; a little bare rock #9a978a, shadow #66645c near the summits. Fills the full image width and nearly its full height.",
+      "negative": "terraces, steps, crater, flat top, trees, forest"
+    },
+    {
+      "id": "steppe-a",
+      "concept": "STEPPE MASSIF",
+      "width": 160,
+      "height": 112,
+      "seed": 32011,
+      "subject": "Subject: one broad dry rocky mountain massif, each image a different one of these: two jagged summits joined by a long broken ridge, a wide massif with three sharp points and deep gullies, a big angular mountain with long rock spurs running down. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces; its lower slopes are the dry straw grass of the plain around it, #ccb86f, shadow #9c8a50. Fills the full image width and nearly its full height.",
+      "negative": "terraces, steps, crater, trees, forest"
+    },
+    {
+      "id": "badlands-a",
+      "concept": "BADLANDS MASSIF",
+      "width": 160,
+      "height": 112,
+      "seed": 32021,
+      "subject": "Subject: one broad red desert rock massif with level strata, each image a different one of these: a long eroded ridge with two flat-topped buttes on its crest, a wide mesa massif cut by fluted gullies, a big table rock with a taller butte joined at its back. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a; its lower slopes are scree of the red plain around it, #b36a45, shadow #84462c. Fills the full image width and nearly its full height.",
+      "negative": "crater, trees, forest, many separate rocks"
+    },
+    {
+      "id": "snow-a",
+      "concept": "SNOW MASSIF",
+      "width": 160,
+      "height": 112,
+      "seed": 32031,
+      "subject": "Subject: one broad snowy alpine massif, each image a different one of these: two jagged snow-capped summits joined by a long snowy ridge, a wide massif with three peaks and rock ribs between snowfields, a big pointed mountain with long snowy spurs running down. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces; its lower slopes are buried in the snowfield of the plain around it, #d5e2f5. Fills the full image width and nearly its full height.",
+      "negative": "terraces, steps, crater, flat top, trees, forest"
+    },
+    {
+      "id": "sand-a",
+      "concept": "SAND MASSIF",
+      "width": 160,
+      "height": 112,
+      "seed": 32041,
+      "subject": "Subject: one broad golden sandstone massif, each image a different one of these: a long ridge of fluted cliffs with two flat-topped mesas on its crest, a wide rock massif with tall spires on its back, a big wind-carved butte joined to a lower table rock. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa; its lower slopes are drifted sand of the desert around it, #e4b962, shadow #b88a48. Fills the full image width and nearly its full height.",
+      "negative": "crater, trees, forest, many separate rocks"
+    },
+    {
+      "id": "grass-b",
+      "concept": "GRASS MASSIF",
+      "width": 168,
+      "height": 104,
+      "seed": 32002,
+      "subject": "Subject: one long green grassy mountain ridge, each image a different one of these: a long ridge with three rounded summits and grassy spurs running down, a broad massif with one high summit and a lower shoulder, a wide green mountain with a short grey rocky crest. Its slopes are the meadow grass of the plain around it: grass #8bb95e, lit #a6cf6e on the left faces, shadow #5e8f45 and deep gullies #44703c on the right faces; a little bare rock #9a978a near the top. Its slopes taper out at both sides. Fills the full image width and nearly its full height.",
+      "negative": "terraces, steps, crater, flat top, trees, forest, flat cut bottom"
+    },
+    {
+      "id": "steppe-b",
+      "concept": "STEPPE MASSIF",
+      "width": 168,
+      "height": 104,
+      "seed": 32012,
+      "subject": "Subject: one broad dry rocky mountain massif, each image a different one of these: a long jagged ridge with two sharp summits, a big craggy mountain with one high point and long spurs, a wide mountain with three points and deep gullies. Rock tan #b8965e, shadow #7c5f3a, lit #d9bd82 on the left faces; its lower slopes are the dry straw grass of the plain around it, #ccb86f, shadow #9c8a50, and taper out to points at both sides. Fills the full image width and nearly its full height.",
+      "negative": "terraces, steps, crater, trees, forest, flat cut bottom, straight bottom edge, line under it, separate rocks"
+    },
+    {
+      "id": "badlands-b",
+      "concept": "BADLANDS MASSIF",
+      "width": 168,
+      "height": 104,
+      "seed": 32022,
+      "subject": "Subject: one broad red desert rock massif with level strata, each image a different one of these: a long eroded ridge of fluted red cliffs with a flat top, a wide mesa with a notch and a lower shoulder, a big butte joined to a long sloping ridge. Rock red-orange #c46a3c, shadow #823f28, lit #e39a5c, pale strata stripes #e8c07a; its lower slopes are scree of the red plain around it, #b36a45, shadow #84462c, tapering out at both sides. Fills the full image width and nearly its full height.",
+      "negative": "crater, trees, forest, many separate rocks, boxy blocks"
+    },
+    {
+      "id": "snow-b",
+      "concept": "SNOW MASSIF",
+      "width": 168,
+      "height": 104,
+      "seed": 32032,
+      "subject": "Subject: one broad snowy alpine massif, each image a different one of these: a long ridge with two snow-capped summits, a wide massif with a high jagged summit and a lower snowy shoulder, a big mountain with three peaks and snowfields between them. Rock blue-grey #6e7684, shadow #474e5c, lit #949cab on left faces; snow #eef4fa, shadow #b4c4d8 on right faces; its lower slopes are snow like the snowfield around it, #d5e2f5, tapering out to points at both sides. Fills the full image width and nearly its full height.",
+      "negative": "terraces, steps, crater, flat top, trees, forest, rectangular base, snow plate, flat cut bottom"
+    },
+    {
+      "id": "sand-b",
+      "concept": "SAND MASSIF",
+      "width": 168,
+      "height": 104,
+      "seed": 32042,
+      "subject": "Subject: one broad golden sandstone massif, each image a different one of these: a long ridge of fluted cliffs with a flat top and a lower shoulder, a wide rock massif with two rounded wind-carved knobs, a big mesa with a canyon notch. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa; its lower slopes are drifted sand of the desert around it, #e4b962, shadow #b88a48, tapering out at both sides. Fills the full image width and nearly its full height.",
+      "negative": "crater, trees, forest, many separate rocks, pyramids"
+    },
+    {
+      "id": "sand-c",
+      "concept": "SAND MASSIF",
+      "width": 160,
+      "height": 112,
+      "seed": 32043,
+      "subject": "Subject: one broad golden sandstone massif rising out of sand dunes, each image a different one of these: a long ridge with two rounded wind-carved summits, a wide rock massif with a tall spire and a lower shoulder, a big mesa with a sloping side and fluted gullies. Rock pale golden sandstone #d6a862, shadow #9a6a3a, lit #efcb8a on the left faces, cream strata stripes #f2dcaa; its lower slopes are drifted sand #e4b962, shadow #b88a48, tapering to points at both sides. Fills the full image width and nearly its full height.",
+      "negative": "crater, trees, many separate rocks, pyramids, flat cut bottom, line under it, arch"
+    },
+    {
+      "id": "wasteland-a",
+      "concept": "WASTELAND MASSIF",
+      "width": 160,
+      "height": 112,
+      "seed": 32051,
+      "subject": "Subject: one broad dark basalt mountain massif, each image a different one of these: a long jagged ridge with two sharp summits, a wide massif with three broken points and deep gullies, a big craggy mountain with long spurs running down. Rock charcoal #4e4a50, shadow #2e2b32, lit #77717a on the left faces, a few thin ember cracks #a05a30; its lower slopes are grey ash like the burnt plain around it, #79726b, shadow #5a544e, tapering out to points at both sides. Fills the full image width and nearly its full height.",
+      "negative": "terraces, steps, crater, trees, forest, flat cut bottom, lava flows, fire"
+    },
+    {
+      "id": "jungle-a",
+      "concept": "JUNGLE MASSIF",
+      "width": 160,
+      "height": 112,
+      "seed": 32061,
+      "subject": "Subject: one broad jungle karst massif, each image a different one of these: two steep limestone summits joined by a mossy ridge, a wide massif of three rounded limestone towers under moss and vines, a big steep green mountain with grey limestone cliffs. Limestone #a8a48c, shadow #6e6e5c; moss and vines #3f8a4e, shadow #24603f; its lower slopes are the mossy jungle ground around it, #65a25a, shadow #3f7a45, tapering out at both sides. Fills the full image width and nearly its full height.",
+      "negative": "terraces, steps, crater, trees, palm trees, flat cut bottom, separate pillars"
+    }
+  ],
+  "outputs": [
+    {"path": "public/assets/terrain/peaks/grass/massif-1.png", "from": "grass-a#0", "width": 138, "height": 62, "steps": [{"op": "crop", "x": 11, "y": 26, "width": 138, "height": 62}]},
+    {"path": "public/assets/terrain/peaks/grass/massif-2.png", "from": "grass-a#2", "width": 139, "height": 76, "steps": [{"op": "crop", "x": 10, "y": 15, "width": 139, "height": 76}]},
+    {"path": "public/assets/terrain/peaks/grass/massif-3.png", "from": "grass-a#3", "width": 138, "height": 74, "steps": [{"op": "crop", "x": 11, "y": 18, "width": 138, "height": 74}]},
+    {"path": "public/assets/terrain/peaks/steppe/massif-1.png", "from": "steppe-a#2", "width": 142, "height": 89, "steps": [{"op": "crop", "x": 9, "y": 13, "width": 142, "height": 89}]},
+    {"path": "public/assets/terrain/peaks/badlands/massif-1.png", "from": "badlands-a#0", "width": 138, "height": 57, "steps": [{"op": "crop", "x": 11, "y": 32, "width": 138, "height": 57}]},
+    {"path": "public/assets/terrain/peaks/badlands/massif-2.png", "from": "badlands-a#1", "width": 137, "height": 68, "steps": [{"op": "crop", "x": 12, "y": 26, "width": 137, "height": 68}]},
+    {"path": "public/assets/terrain/peaks/badlands/massif-3.png", "from": "badlands-a#2", "width": 136, "height": 81, "steps": [{"op": "crop", "x": 12, "y": 15, "width": 136, "height": 81}]},
+    {"path": "public/assets/terrain/peaks/snow/massif-1.png", "from": "snow-a#1", "width": 142, "height": 71, "steps": [{"op": "crop", "x": 9, "y": 24, "width": 142, "height": 71}]},
+    {"path": "public/assets/terrain/peaks/snow/massif-2.png", "from": "snow-a#2", "width": 142, "height": 80, "steps": [{"op": "crop", "x": 9, "y": 18, "width": 142, "height": 80}]},
+    {"path": "public/assets/terrain/peaks/sand/massif-1.png", "from": "sand-a#0", "width": 139, "height": 62, "steps": [{"op": "crop", "x": 11, "y": 29, "width": 139, "height": 62}]},
+    {"path": "public/assets/terrain/peaks/sand/massif-2.png", "from": "sand-a#1", "width": 140, "height": 79, "steps": [{"op": "crop", "x": 11, "y": 17, "width": 140, "height": 79}]},
+    {"path": "public/assets/terrain/peaks/sand/massif-3.png", "from": "sand-a#2", "width": 137, "height": 75, "steps": [{"op": "crop", "x": 12, "y": 21, "width": 137, "height": 75}]},
+    {"path": "public/assets/terrain/peaks/grass/massif-4.png", "from": "grass-b#0", "width": 148, "height": 52, "steps": [{"op": "crop", "x": 10, "y": 28, "width": 148, "height": 52}]},
+    {"path": "public/assets/terrain/peaks/grass/massif-5.png", "from": "grass-b#1", "width": 147, "height": 60, "steps": [{"op": "crop", "x": 11, "y": 24, "width": 147, "height": 60}]},
+    {"path": "public/assets/terrain/peaks/grass/massif-6.png", "from": "grass-b#2", "width": 147, "height": 57, "steps": [{"op": "crop", "x": 10, "y": 25, "width": 147, "height": 57}]},
+    {"path": "public/assets/terrain/peaks/grass/massif-7.png", "from": "grass-b#3", "width": 147, "height": 64, "steps": [{"op": "crop", "x": 11, "y": 24, "width": 147, "height": 64}]},
+    {"path": "public/assets/terrain/peaks/steppe/massif-2.png", "from": "steppe-b#0", "width": 156, "height": 67, "steps": [{"op": "crop", "x": 6, "y": 21, "width": 156, "height": 67}]},
+    {"path": "public/assets/terrain/peaks/steppe/massif-3.png", "from": "steppe-b#1", "width": 154, "height": 82, "steps": [{"op": "crop", "x": 7, "y": 10, "width": 154, "height": 82}]},
+    {"path": "public/assets/terrain/peaks/steppe/massif-4.png", "from": "steppe-b#2", "width": 161, "height": 81, "steps": [{"op": "crop", "x": 4, "y": 12, "width": 161, "height": 81}]},
+    {"path": "public/assets/terrain/peaks/steppe/massif-5.png", "from": "steppe-b#3", "width": 160, "height": 81, "steps": [{"op": "crop", "x": 3, "y": 11, "width": 160, "height": 81}]},
+    {"path": "public/assets/terrain/peaks/badlands/massif-4.png", "from": "badlands-b#0", "width": 145, "height": 58, "steps": [{"op": "crop", "x": 11, "y": 26, "width": 145, "height": 58}]},
+    {"path": "public/assets/terrain/peaks/badlands/massif-5.png", "from": "badlands-b#1", "width": 145, "height": 63, "steps": [{"op": "crop", "x": 11, "y": 22, "width": 145, "height": 63}]},
+    {"path": "public/assets/terrain/peaks/badlands/massif-6.png", "from": "badlands-b#2", "width": 145, "height": 66, "steps": [{"op": "crop", "x": 11, "y": 19, "width": 145, "height": 66}]},
+    {"path": "public/assets/terrain/peaks/snow/massif-3.png", "from": "snow-b#0", "width": 146, "height": 56, "steps": [{"op": "crop", "x": 11, "y": 30, "width": 146, "height": 56}]},
+    {"path": "public/assets/terrain/peaks/snow/massif-4.png", "from": "snow-b#2", "width": 145, "height": 72, "steps": [{"op": "crop", "x": 11, "y": 16, "width": 145, "height": 72}]},
+    {"path": "public/assets/terrain/peaks/snow/massif-5.png", "from": "snow-b#3", "width": 144, "height": 63, "steps": [{"op": "crop", "x": 12, "y": 25, "width": 144, "height": 63}]},
+    {"path": "public/assets/terrain/peaks/sand/massif-4.png", "from": "sand-c#0", "width": 139, "height": 45, "steps": [{"op": "crop", "x": 10, "y": 34, "width": 139, "height": 45}]},
+    {"path": "public/assets/terrain/peaks/sand/massif-5.png", "from": "sand-c#1", "width": 140, "height": 76, "steps": [{"op": "crop", "x": 10, "y": 15, "width": 140, "height": 76}]},
+    {"path": "public/assets/terrain/peaks/sand/massif-6.png", "from": "sand-c#2", "width": 156, "height": 68, "steps": [{"op": "crop", "x": 2, "y": 22, "width": 156, "height": 68}]},
+    {"path": "public/assets/terrain/peaks/sand/massif-7.png", "from": "sand-c#3", "width": 157, "height": 74, "steps": [{"op": "crop", "x": 2, "y": 19, "width": 157, "height": 74}]},
+    {"path": "public/assets/terrain/peaks/wasteland/massif-1.png", "from": "wasteland-a#0", "width": 148, "height": 55, "steps": [{"op": "crop", "x": 6, "y": 28, "width": 148, "height": 55}]},
+    {"path": "public/assets/terrain/peaks/wasteland/massif-2.png", "from": "wasteland-a#1", "width": 150, "height": 70, "steps": [{"op": "crop", "x": 5, "y": 24, "width": 150, "height": 70}]},
+    {"path": "public/assets/terrain/peaks/wasteland/massif-3.png", "from": "wasteland-a#2", "width": 158, "height": 78, "steps": [{"op": "crop", "x": 1, "y": 19, "width": 158, "height": 78}]},
+    {"path": "public/assets/terrain/peaks/wasteland/massif-4.png", "from": "wasteland-a#3", "width": 159, "height": 86, "steps": [{"op": "crop", "x": 0, "y": 13, "width": 159, "height": 86}]},
+    {"path": "public/assets/terrain/peaks/jungle/massif-1.png", "from": "jungle-a#0", "width": 139, "height": 84, "steps": [{"op": "crop", "x": 10, "y": 16, "width": 139, "height": 84}]},
+    {"path": "public/assets/terrain/peaks/jungle/massif-2.png", "from": "jungle-a#1", "width": 140, "height": 80, "steps": [{"op": "crop", "x": 10, "y": 20, "width": 140, "height": 80}]},
+    {"path": "public/assets/terrain/peaks/jungle/massif-3.png", "from": "jungle-a#2", "width": 156, "height": 89, "steps": [{"op": "crop", "x": 2, "y": 13, "width": 156, "height": 89}]}
+  ]
+}

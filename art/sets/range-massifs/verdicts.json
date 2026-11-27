@@ -1,0 +1,262 @@
+{
+  "grass-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "two summits on a long ridge, slopes in the meadow's own green: melts into the grass ground",
+    "at": "2026-11-27T09:17:09.134Z"
+  },
+  "grass-a#1": {
+    "verdict": "REJECTED",
+    "notes": "a heap of soft lumps, reads as a pile of hillocks rather than one massif",
+    "at": "2026-11-27T09:17:09.234Z"
+  },
+  "grass-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "high green mountain with a grey rocky crown and long spurs; lower slopes match the meadow",
+    "at": "2026-11-27T09:17:09.333Z"
+  },
+  "grass-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "twin summits with deep shaded gullies, a clear ridge silhouette",
+    "at": "2026-11-27T09:17:09.435Z"
+  },
+  "steppe-a#0": {
+    "verdict": "REJECTED",
+    "notes": "straight cut bottom edge and a stray white line under it: a boxy plate",
+    "at": "2026-11-27T09:17:09.530Z"
+  },
+  "steppe-a#1": {
+    "verdict": "REJECTED",
+    "notes": "flat cut bottom with a white line, the sides end in vertical walls",
+    "at": "2026-11-27T09:17:09.631Z"
+  },
+  "steppe-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "jagged triple summit with long spurs tapering into the plain",
+    "at": "2026-11-27T09:17:09.731Z"
+  },
+  "steppe-a#3": {
+    "verdict": "REJECTED",
+    "notes": "terraced cake mesa with separate rocks beside it",
+    "at": "2026-11-27T09:17:09.831Z"
+  },
+  "badlands-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "two flat-topped buttes on one long strata ridge over a red scree skirt",
+    "at": "2026-11-27T09:17:09.938Z"
+  },
+  "badlands-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "one broad table butte with fluted strata and a wide scree foot",
+    "at": "2026-11-27T09:17:10.048Z"
+  },
+  "badlands-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "tall butte joined to a lower table, scree skirt in the plain's red",
+    "at": "2026-11-27T09:17:10.162Z"
+  },
+  "badlands-a#3": {
+    "verdict": "REJECTED",
+    "notes": "two boxy stacks side by side with rubble: reads as separate blocks",
+    "at": "2026-11-27T09:17:10.263Z"
+  },
+  "snow-a#0": {
+    "verdict": "REJECTED",
+    "notes": "the lower snow is a rectangular plate with straight sides",
+    "at": "2026-11-27T09:17:10.369Z"
+  },
+  "snow-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "three snowy summits with rock ribs, slopes taper at both sides",
+    "at": "2026-11-27T09:17:10.471Z"
+  },
+  "snow-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "one big pointed alpine mountain with long snowy spurs",
+    "at": "2026-11-27T09:17:10.582Z"
+  },
+  "snow-a#3": {
+    "verdict": "REJECTED",
+    "notes": "rectangular snow plate under the peaks, boxy base",
+    "at": "2026-11-27T09:17:10.686Z"
+  },
+  "sand-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "long fluted sandstone ridge with two mesas on its crest",
+    "at": "2026-11-27T09:17:10.793Z"
+  },
+  "sand-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "tall spires on a broad base, the foot spreads into sand",
+    "at": "2026-11-27T09:17:10.902Z"
+  },
+  "sand-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "wind-carved butte joined to a lower table rock",
+    "at": "2026-11-27T09:17:11.013Z"
+  },
+  "sand-a#3": {
+    "verdict": "REJECTED",
+    "notes": "three striped pyramids side by side: reads as built, not a massif",
+    "at": "2026-11-27T09:17:11.119Z"
+  },
+  "grass-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "long low ridge of three summits, slopes taper into the meadow at both sides",
+    "at": "2026-11-27T09:23:12.232Z"
+  },
+  "grass-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "broad massif with a rocky top and a lower shoulder, meadow-green foot",
+    "at": "2026-11-27T09:23:12.348Z"
+  },
+  "grass-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "wide mountain with a short grey rocky crest, long tapering slopes",
+    "at": "2026-11-27T09:23:12.464Z"
+  },
+  "grass-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "twin sharp summits with deep gullies; a darker green that still sits on the meadow",
+    "at": "2026-11-27T09:23:12.577Z"
+  },
+  "steppe-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "two rock summits whose straw-grass foot spreads into the plain",
+    "at": "2026-11-27T09:23:12.689Z"
+  },
+  "steppe-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "high jagged summit with long spurs, no line under the foot",
+    "at": "2026-11-27T09:23:12.804Z"
+  },
+  "steppe-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "big craggy mountain over a wide straw-coloured foot",
+    "at": "2026-11-27T09:23:12.913Z"
+  },
+  "steppe-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "three points with deep gullies, the foot melts into the plain",
+    "at": "2026-11-27T09:23:13.020Z"
+  },
+  "badlands-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "long flat-topped mesa of fluted cliffs over a red scree skirt",
+    "at": "2026-11-27T09:23:13.133Z"
+  },
+  "badlands-b#1": {
+    "verdict": "ACCEPTED",
+    "notes": "notched mesa with level strata, a wide scree foot",
+    "at": "2026-11-27T09:23:13.244Z"
+  },
+  "badlands-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "butte joined to a long sloping ridge: one big form",
+    "at": "2026-11-27T09:23:13.360Z"
+  },
+  "badlands-b#3": {
+    "verdict": "REJECTED",
+    "notes": "stepped boxy blocks: reads as a terraced cake",
+    "at": "2026-11-27T09:23:13.476Z"
+  },
+  "snow-b#0": {
+    "verdict": "ACCEPTED",
+    "notes": "twin snowy summits whose snow foot spreads into the snowfield",
+    "at": "2026-11-27T09:23:13.591Z"
+  },
+  "snow-b#1": {
+    "verdict": "REJECTED",
+    "notes": "lower slopes bare dark rock: a grey block sitting on the snow",
+    "at": "2026-11-27T09:23:13.703Z"
+  },
+  "snow-b#2": {
+    "verdict": "ACCEPTED",
+    "notes": "three peaks with snowfields between them, tapering at both sides",
+    "at": "2026-11-27T09:23:13.829Z"
+  },
+  "snow-b#3": {
+    "verdict": "ACCEPTED",
+    "notes": "row of snowy points over a broad snow foot that melts into the ground",
+    "at": "2026-11-27T09:23:13.956Z"
+  },
+  "sand-b#0": {
+    "verdict": "REJECTED",
+    "notes": "flat cut bottom with a white line under it",
+    "at": "2026-11-27T09:23:14.086Z"
+  },
+  "sand-b#1": {
+    "verdict": "REJECTED",
+    "notes": "flat cut bottom with a white line; the knobs read as a pair of buns",
+    "at": "2026-11-27T09:23:14.212Z"
+  },
+  "sand-b#2": {
+    "verdict": "REJECTED",
+    "notes": "two boxy towers on a flat cut base with a white line",
+    "at": "2026-11-27T09:23:14.336Z"
+  },
+  "sand-b#3": {
+    "verdict": "REJECTED",
+    "notes": "rock arch (rejected subject) on a flat cut base with a white line",
+    "at": "2026-11-27T09:23:14.461Z"
+  },
+  "sand-c#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low ridge of two rounded wind-carved knobs over a sand foot",
+    "at": "2026-11-27T09:33:54.382Z"
+  },
+  "sand-c#1": {
+    "verdict": "ACCEPTED",
+    "notes": "tall spire on a shoulder, the sand foot tapers into the dunes",
+    "at": "2026-11-27T09:33:54.517Z"
+  },
+  "sand-c#2": {
+    "verdict": "ACCEPTED",
+    "notes": "one broad mesa with fluted cliffs on a wide drifted-sand skirt",
+    "at": "2026-11-27T09:33:54.655Z"
+  },
+  "sand-c#3": {
+    "verdict": "ACCEPTED",
+    "notes": "craggy twin summit with strata, the foot spreads into sand",
+    "at": "2026-11-27T09:33:54.798Z"
+  },
+  "wasteland-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "low jagged basalt ridge with ember cracks over an ash foot",
+    "at": "2026-11-27T09:33:54.940Z"
+  },
+  "wasteland-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "three broken points with deep gullies, ash-grey foot melts into the plain",
+    "at": "2026-11-27T09:33:55.082Z"
+  },
+  "wasteland-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "big craggy basalt mountain with long spurs, faint ember cracks",
+    "at": "2026-11-27T09:33:55.217Z"
+  },
+  "wasteland-a#3": {
+    "verdict": "ACCEPTED",
+    "notes": "high sharp summit with shoulders, tapering ash slopes",
+    "at": "2026-11-27T09:33:55.448Z"
+  },
+  "jungle-a#0": {
+    "verdict": "ACCEPTED",
+    "notes": "two limestone towers joined by a mossy ridge over a jungle-green foot",
+    "at": "2026-11-27T09:33:55.680Z"
+  },
+  "jungle-a#1": {
+    "verdict": "ACCEPTED",
+    "notes": "three rounded limestone towers under moss, one broad form",
+    "at": "2026-11-27T09:33:55.863Z"
+  },
+  "jungle-a#2": {
+    "verdict": "ACCEPTED",
+    "notes": "steep green mountain with grey limestone cliffs and a mossy foot",
+    "at": "2026-11-27T09:33:56.043Z"
+  },
+  "jungle-a#3": {
+    "verdict": "REJECTED",
+    "notes": "busy hanging vines and loose rocks at the foot: reads as rubble",
+    "at": "2026-11-27T09:33:56.200Z"
+  }
+}

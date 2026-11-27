@@ -439,7 +439,10 @@ export function createMapView(
   for (const peak of PEAK_ASSETS) {
     const image = images.get(peak.key);
     if (image !== undefined)
-      images.set(peak.key, tonePeak(image, peak.w, peak.h, peak.terrain));
+      images.set(
+        peak.key,
+        tonePeak(image, peak.w, peak.h, peak.terrain, peak.tier),
+      );
   }
   let peakField: PeakField | null = null;
 
